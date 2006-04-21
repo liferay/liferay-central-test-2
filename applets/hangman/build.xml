@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<project name="hangman" basedir="." default="deploy">
+	<property name="project.dir" value="../.." />
+
+	<import file="${project.dir}/build-common-java.xml" />
+
+	<property name="deploy.dir" value="${applets.dir}" />
+	<property name="jar.file" value="${ant.project.name}.jar" />
+
+	<target name="run" depends="compile">
+		<java
+			classname="com.liferay.applets.calculator.Calculator"
+			classpathref="project.classpath"
+			fork="true"
+		/>
+	</target>
+
+    <target name="jar" depends="compile">
+		<jar
+			basedir="${classes.dir}"
+			jarfile="${jar.file}"
+		/>
+	</target>
+</project>

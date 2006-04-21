@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<project name="chat" basedir="." default="compile">
+	<property name="project.dir" value="../.." />
+
+	<import file="${project.dir}/build-common-java.xml" />
+
+	<property name="deploy.dir" value="${applets.dir}/chat" />
+	<property name="jar.file" value="${ant.project.name}.jar" />
+
+	<target name="deploy" depends="build-common-java.deploy">
+		<copy file="${project.dir}/lib/nfc-client.jar" todir="${deploy.dir}" />
+	</target>
+
+	<target name="run" depends="compile">
+		<java
+			classname="com.liferay.applets.chat.LiferayChat"
+			classpathref="project.classpath"
+			fork="true"
+		/>
+	</target>
+</project>

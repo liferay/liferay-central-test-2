@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<project name="lawt" basedir="." default="compile">
+	<property name="project.dir" value="../.." />
+
+	<import file="${project.dir}/build-common-java.xml" />
+
+	<property name="deploy.dir" value="${applets.dir}" />
+	<property name="jar.file" value="${ant.project.name}.jar" />
+</project>
