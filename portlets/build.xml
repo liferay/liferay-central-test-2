@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+
+<project name="portlets" basedir="." default="deploy">
+	<import file="../build-common.xml" />
+
+	<property name="deploy.dir" value="${app.server.ear}" />
+
+	<target name="clean">
+		<antcall target="clean-module">
+			<param name="module.name" value="sample_jsf_myfaces_portlet" />
+		</antcall>
+
+		<antcall target="clean-module">
+			<param name="module.name" value="sample_jsf_sun_portlet" />
+		</antcall>
+
+		<antcall target="clean-module">
+			<param name="module.name" value="sample_jsp_portlet" />
+		</antcall>
+
+		<antcall target="clean-module">
+			<param name="module.name" value="sample_struts_portlet" />
+		</antcall>
+	</target>
+
+	<target name="clean-module">
+		<delete file="../${module.name}.war" failonerror="false" />
+		<delete dir="${module.name}.war/WEB-INF/classes/com" failonerror="false" />
+
+		<delete failonerror="false">
+			<fileset dir="${module.name}.war/WEB-INF/lib" includes="util-java.jar,util-jsf.jar,util-taglib.jar" />
+			<fileset dir="${module.name}.war/WEB-INF/tld" includes="liferay-portlet.tld" />
+		</delete>
+	</target>
+
+	<target name="compile">
+		<antcall target="compile-module">
+			<param name="module.name" value="sample_jsf_myfaces_portlet" />
+		</antcall>
+
+		<antcall target="compile-module">
+			<param name="module.name" value="sample_jsf_sun_portlet" />
+		</antcall>
+
+		<antcall target="compile-module">
+			<param name="module.name" value="sample_jsp_portlet" />
+		</antcall>
+
+		<antcall target="compile-module">
+			<param name="module.name" value="sample_struts_portlet" />
+		</antcall>
+	</target>
+
+	<target name="compile-module">
+		<javac
+			classpathref="project.classpath"
+			compiler="${javac.compiler}"
+			debug="${javac.debug}"
+			deprecation="${javac.deprecation}"
+			destdir="${module.name}.war/WEB-INF/classes"
+			fork="${javac.fork}"
+			memoryMaximumSize="${javac.memoryMaximumSize}"
+			nowarn="${javac.nowarn}"
+			srcdir="${module.name}.war/WEB-INF/src"
+		/>
+	</target>
+
+	<target name="war" depends="compile">
+		<antcall target="war-module">
+			<param name="module.name" value="sample_jsf_myfaces_portlet" />
+		</antcall>
+
+		<antcall target="war-module">
+			<param name="module.name" value="sample_jsf_sun_portlet" />
+		</antcall>
+
+		<antcall target="war-module">
+			<param name="module.name" value="sample_jsp_portlet" />
+		</antcall>
+
+		<antcall target="war-module">
+			<param name="module.name" value="sample_struts_portlet" />
+		</antcall>
+	</target>
+
+	<target name="war-module" depends="compile">
+		<war
+			basedir="${module.name}.war"
+			destfile="../${module.name}.war"
+			excludes="WEB-INF/web.xml*"
+			webxml="${module.name}.war/WEB-INF/web.xml"
+		/>
+	</target>
+
+	<target name="deploy">
+		<java
+			classname="com.liferay.portal.tools.PortletDeployer"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true">
+
+				<!-- Required Arguments -->
+
+				<jvmarg value="-Ddeployer.base.dir=./" />
+				<jvmarg value="-Ddeployer.dest.dir=${deploy.dir}" />
+				<jvmarg value="-Ddeployer.app.server.type=orion" />
+				<jvmarg value="-Ddeployer.portlet.taglib.dtd=${project.dir}/util-taglib/classes/META-INF/liferay-portlet.tld" />
+
+				<!-- Dependent Libraries -->
+
+				<arg value="${project.dir}/util-taglib/util-taglib.jar" />
+				<arg value="${project.dir}/util-java/util-java.jar" />
+				<arg value="${project.dir}/util-jsf/util-jsf.jar" />
+		</java>
+	</target>
+</project>

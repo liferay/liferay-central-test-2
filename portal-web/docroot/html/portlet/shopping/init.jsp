@@ -1,0 +1,114 @@
+<%
+/**
+ * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%><%--
+
+--%><%@ include file="/html/common/init.jsp" %><%--
+
+--%><%@ page import="com.liferay.portlet.shopping.BillingCityException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.BillingCountryException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.BillingEmailAddressException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.BillingFirstNameException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.BillingLastNameException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.BillingPhoneException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.BillingStateException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.BillingStreetException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.BillingZipException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CartMinQuantityException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CategoryNameException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CouponActiveException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CouponDateException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CouponDescriptionException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CouponEndDateException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CouponIdException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CouponLimitCategoriesException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CouponLimitSKUsException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CouponNameException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CouponStartDateException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CCExpirationException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CCNameException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CCNumberException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CCTypeException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.DuplicateCouponIdException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.DuplicateItemSKUException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.ItemLargeImageNameException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.ItemLargeImageSizeException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.ItemMediumImageNameException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.ItemMediumImageSizeException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.ItemNameException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.ItemSKUException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.ItemSmallImageNameException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.ItemSmallImageSizeException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.NoSuchCategoryException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.NoSuchCouponException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.NoSuchItemException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.NoSuchOrderException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.ShippingCityException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.ShippingCountryException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.ShippingEmailAddressException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.ShippingFirstNameException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.ShippingLastNameException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.ShippingPhoneException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.ShippingStateException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.ShippingStreetException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.ShippingZipException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.action.UpdateShoppingConfigAction" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.model.ShoppingCart" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.model.ShoppingCartItem" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.model.ShoppingCategory" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.model.ShoppingCoupon" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.model.ShoppingItem" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.model.ShoppingItemField" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.model.ShoppingItemPrice" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.model.ShoppingOrder" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.model.ShoppingOrderItem" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingCartServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingCategoryServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingCouponServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingItemServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingOrderServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.util.ShoppingUtil" %><%--
+
+--%><portlet:defineObjects /><%--
+
+--%><%
+PortletPreferences prefs = renderRequest.getPreferences();
+
+String orderByCol = prefs.getValue("order-by-col", StringPool.BLANK);
+
+boolean shoppingAdmin = ShoppingCategoryServiceUtil.hasAdmin();
+
+ShoppingConfig shoppingConfig = AdminConfigServiceUtil.getShoppingConfig(company.getCompanyId());
+
+boolean usePayPal = shoppingConfig.usePayPal();
+
+Currency currency = Currency.getInstance(shoppingConfig.getCurrencyId());
+
+NumberFormat doubleFormat = NumberFormat.getNumberInstance(locale);
+doubleFormat.setMaximumFractionDigits(2);
+doubleFormat.setMinimumFractionDigits(2);
+
+NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
+%>

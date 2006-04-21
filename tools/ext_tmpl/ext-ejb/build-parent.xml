@@ -1,0 +1,229 @@
+<?xml version="1.0"?>
+
+<project name="ext-ejb-parent">
+	<import file="../build-common.xml" />
+
+	<property name="service.file" value="service.xml" />
+
+	<target name="clean">
+		<delete includeEmptyDirs="true" failonerror="false">
+			<fileset dir="${classes.dir}" excludes="${classes.dir.excludes}" />
+		</delete>
+	</target>
+
+	<target name="compile">
+		<mkdir dir="${classes.dir}" />
+
+		<javac
+			classpathref="project.classpath"
+			compiler="${javac.compiler}"
+			debug="${javac.debug}"
+			deprecation="${javac.deprecation}"
+			destdir="${classes.dir}"
+			fork="${javac.fork}"
+			memoryMaximumSize="${javac.memoryMaximumSize}"
+			nowarn="${javac.nowarn}"
+			srcdir="${source.dir}"
+		/>
+
+		<copy todir="${classes.dir}">
+			<fileset dir="${source.dir}">
+				<include name="**/dependencies/**" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="java2html">
+		<java
+			classname="com.liferay.util.Java2Html"
+			classpathref="project.classpath"
+			fork="true">
+				<arg value="${java2html.bat}" />
+				<arg value="${source.dir}" />
+				<arg value="${java2html.dir}" />
+		</java>
+		<move file="${java2html.dir}/stylesheet.css" tofile="${java2html.dir}/java2html.css" />
+		<antcall target="javadoc" />
+		<replace dir="${java2html.dir}">
+			<include name="**/package-summary.html" />
+			<replacefilter
+				token="/\"
+				value="/"
+			/>
+		</replace>
+	</target>
+
+	<target name="javadoc">
+		<mkdir dir="${javadoc.dir}" />
+		<javadoc
+			classpathref="project.classpath"
+			destdir="${api.dir}/ext-ejb"
+			packagenames="*.*"
+			sourcepath="${source.dir}"
+		/>
+	</target>
+
+	<target name="deploy" depends="compile">
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jetty" />
+				<equals arg1="${app.server.type}" arg2="resin" />
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+				<equals arg1="${app.server.type}" arg2="websphere" />
+			</or>
+			<then>
+				<jar
+					basedir="${classes.dir}"
+					excludes="portal-ext.properties,system-ext.properties,content/Language*.properties"
+					jarfile="ext-ejb.jar"
+				/>
+
+				<copy file="ext-ejb.jar" todir="${app.server.lib.dir}" />
+
+				<if>
+					<or>
+						<equals arg1="${app.server.type}" arg2="resin" />
+						<equals arg1="${app.server.type}" arg2="tomcat" />
+					</or>
+					<then>
+						<property name="properties.dir" value="${app.server.dir}/common/classes" />
+					</then>
+					<else>
+						<property name="properties.dir" value="${app.server.lib.dir}" />
+					</else>
+				</if>
+
+				<copy todir="${properties.dir}">
+					<fileset dir="${classes.dir}" includes="*.properties,content/Language*.properties" />
+				</copy>
+
+				<replace file="${properties.dir}/portal-ext.properties">
+					<replacetoken>portal.release=enterprise</replacetoken>
+					<replacevalue>portal.release=professional</replacevalue>
+				</replace>
+			</then>
+			<else>
+				<if>
+					<and>
+						<or>
+							<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+							<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+						</or>
+						<equals arg1="${jboss.ejb.expand}" arg2="off" />
+					</and>
+					<then>
+						<jar
+							basedir="${classes.dir}"
+							excludes="portal-ext.properties,system-ext.properties,content/Language*.properties"
+							jarfile="ext-ejb.jar"
+						/>
+			
+						<copy file="ext-ejb.jar" todir="${app.server.lib.dir}" />
+					</then>
+					<else>
+						<copy todir="${app.server.deploy.dir}/${ext.ear.file}/ext-ejb.jar">
+							<fileset dir="${classes.dir}" />
+							<fileset dir="${source.dir}" includes="${classes.dir.excludes}" />
+						</copy>
+		
+						<manifest file="${app.server.deploy.dir}/${ext.ear.file}/ext-ejb.jar/META-INF/MANIFEST.MF">
+							<attribute name="Class-Path" value="${classpath.manifest}" />
+						</manifest>					
+
+						<if>
+							<or>
+								<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+								<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+							</or>
+							<then>
+								<manifest file="${app.server.deploy.dir}/${ext.ear.file}/ext-ejb.jar/META-INF/MANIFEST.MF">
+									<attribute name="Class-Path" value="${classpath.manifest.jonas}" />
+								</manifest>
+		
+								<tstamp>
+									<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+								</tstamp>
+		
+								<mkdir dir="${tstamp.dir}" />
+		
+								<java
+									classname="org.objectweb.jonas.server.Bootstrap"
+									classpath="${classpath.jonas.genic}"
+									fork="true"
+									maxmemory="512m"
+								>
+									<jvmarg value="-Dinstall.root=${env.JONAS_ROOT}" />
+									<jvmarg value="-Djonas.base=${env.JONAS_ROOT}" />
+									<jvmarg value="-Djava.security.policy=${env.JONAS_ROOT}/conf/java.policy" />
+									<jvmarg value="-Djava.endorsed.dirs=${env.JONAS_ROOT}/lib/endorsed" />
+									<jvmarg value="-Djava.io.tmpdir=${tstamp.dir}" />
+									<arg value="org.objectweb.jonas_ejb.genic.GenIC" />
+									<arg value="-d" />
+									<arg value="${app.server.deploy.dir}/${ext.ear.file}/ext-ejb.jar" />
+									<arg value="-noaddinjar" />
+									<arg value="-protocols" />
+									<arg value="jrmp" />
+									<arg value="-keepgenerated" />
+									<arg value="-invokecmd" />
+									<arg value="classes/META-INF/ejb-jar.xml" />
+								</java>
+		
+								<delete dir="${tstamp.dir}" />
+							</then>
+						</if>
+					</else>
+				</if>
+			</else>
+		</if>
+	</target>
+
+	<target name="build-ejbxml">
+		<java
+			classname="com.liferay.portal.tools.EJBXMLBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<arg value="ext-ejb.jar" />
+		</java>
+	</target>
+
+	<target name="build-service">
+		<java
+			classname="com.liferay.portal.tools.ServiceBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			maxmemory="256m"
+			newenvironment="true"
+		>
+			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog" />
+			<arg value="${service.file}" />
+			<arg value="classes/META-INF/ext-hbm.xml" />
+			<arg value="classes/META-INF/ext-model-hints.xml" />
+			<arg value="classes/META-INF/ext-spring-enterprise.xml" />
+			<arg value="classes/META-INF/ext-spring-professional.xml" />
+			<arg value="com.liferay.portal.spring.util.SpringUtil" />
+		</java>
+		<delete file="ServiceBuilder.temp" />
+		<antcall target="build-ejbxml" />
+	</target>
+
+	<target name="build-webxml">
+		<ant dir="../ext-web" target="build-webxml" />
+	</target>
+
+	<target name="build-wsdd" depends="compile">
+		<java
+			classname="com.liferay.portal.tools.WSDDBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			maxmemory="256m"
+			newenvironment="true"
+		>
+			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog" />
+			<arg value="${service.file}" />
+			<arg value="../ext-web/docroot/WEB-INF/server-config.wsdd" />
+		</java>
+		<antcall target="build-webxml" />
+	</target>
+</project>

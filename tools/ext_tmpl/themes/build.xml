@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+
+<project name="themes" basedir="." default="deploy">
+	<import file="build-parent.xml" />
+</project>

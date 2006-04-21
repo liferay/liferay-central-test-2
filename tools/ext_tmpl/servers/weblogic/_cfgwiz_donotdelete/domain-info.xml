@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<domain-info javahome="C:\Program Files\BEA\jrockit81sp2_141_05" appdir="">
+
+<domain-template-info>
+
+  <identification
+    version="8.1.2.0"
+    type="Domain Template"
+    name="Basic WebLogic Server Domain"
+    author="BEA Systems, Inc."
+    description="Create a basic WebLogic Server domain without installing sample applications."
+    iconName="wls.gif"/>
+
+  <category>BEA</category>
+
+</domain-template-info>
+
+
+</domain-info>
+

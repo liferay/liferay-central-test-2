@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!DOCTYPE jms-server PUBLIC "Orion JMS server" "http://www.orionserver.com/dtds/jms-server.dtd">
+
+<jms-server port="9127">
+	<log>
+		<file path="../log/jms.log" />
+	</log>
+</jms-server>

@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+
+<project name="sql" basedir="." default="rebuild-mysql">
+	<import file="../build-common.xml" />
+
+	<property file="sql.${user.name}.properties" />
+	<property file="sql.${env.COMPUTERNAME}.properties" />
+	<property file="sql.properties" />
+	<mkdir dir="log" />
+
+	<target name="build-db">
+		<java
+			classname="com.liferay.portal.tools.DBBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			maxmemory="256m"
+			newenvironment="true"
+		/>
+	</target>
+
+	<target name="load-db">
+		<delete file="test.properties" failonerror="false" />
+		<delete file="test.script" failonerror="false" />
+		<java
+			classname="com.liferay.portal.tools.DBLoader"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<jvmarg value="-Xmx128m" />
+			<jvmarg value="-Dfile.encoding=UTF-8" />
+		</java>
+	</target>
+
+	<target name="rebuild-all">
+		<antcall target="rebuild-db2" />
+		<antcall target="rebuild-firebird" />
+		<antcall target="rebuild-mysql" />
+		<antcall target="rebuild-oracle" />
+		<antcall target="rebuild-postgresql" />
+		<antcall target="rebuild-sql-server" />
+	</target>
+
+	<target name="rebuild-database">
+		<exec executable="${executable}" output="log/${log}">
+			<arg line="${arg.line}" />
+		</exec>
+	</target>
+
+	<target name="rebuild-db2">
+		<antcall target="rebuild-database">
+			<param name="executable" value="${db2.executable}" />
+			<param name="arg.line" value="${db2.arg.line}" />
+			<param name="log" value="${db2.log}" />
+		</antcall>
+	</target>
+
+	<target name="rebuild-firebird">
+		<delete file="lportal.gdb" failonerror="false" />
+		<antcall target="rebuild-database">
+			<param name="executable" value="${firebird.executable}" />
+			<param name="arg.line" value="${firebird.arg.line}" />
+			<param name="log" value="${firebird.log}" />
+		</antcall>
+	</target>
+
+	<target name="rebuild-mysql">
+		<antcall target="rebuild-database">
+			<param name="executable" value="${mysql.executable}" />
+			<param name="arg.line" value="${mysql.arg.line}" />
+			<param name="log" value="${mysql.log}" />
+		</antcall>
+	</target>
+
+	<target name="rebuild-oracle">
+		<antcall target="rebuild-database">
+			<param name="executable" value="${oracle.sqlplus.executable}" />
+			<param name="arg.line" value="${oracle.arg.line}" />
+			<param name="log" value="${oracle.log}" />
+		</antcall>
+
+		<antcall target="rebuild-oracle-sqlldr">
+			<param name="csv.name" value="image" />
+		</antcall>
+
+		<antcall target="rebuild-oracle-sqlldr">
+			<param name="csv.name" value="journalarticle" />
+		</antcall>
+
+		<antcall target="rebuild-oracle-sqlldr">
+			<param name="csv.name" value="journaltemplate" />
+		</antcall>
+
+		<antcall target="rebuild-oracle-sqlldr">
+			<param name="csv.name" value="journalstructure" />
+		</antcall>
+
+		<antcall target="rebuild-oracle-sqlldr">
+			<param name="csv.name" value="shoppingitem" />
+		</antcall>
+
+		<delete>
+			<fileset dir="portal" includes="*.log" />
+		</delete>
+	</target>
+
+	<target name="rebuild-oracle-sqlldr">
+		<exec executable="${oracle.sqlldr.executable}" dir="portal" output="log/${oracle.log}" append="true">
+			<arg line="${oracle.lportal.user}/${oracle.lportal.password} control=portal-oracle-${csv.name}.ctl" />
+		</exec>
+	</target>
+
+	<target name="rebuild-postgresql">
+		<antcall target="rebuild-database">
+			<param name="executable" value="${postgresql.executable}" />
+			<param name="arg.line" value="${postgresql.arg.line}" />
+			<param name="log" value="${postgresql.log}" />
+		</antcall>
+	</target>
+
+	<target name="rebuild-sql-server">
+		<antcall target="rebuild-database">
+			<param name="executable" value="${sql-server.executable}" />
+			<param name="arg.line" value="${sql-server.arg.line}" />
+			<param name="log" value="${sql-server.log}" />
+		</antcall>
+	</target>
+</project>

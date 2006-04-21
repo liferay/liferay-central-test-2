@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="com.ext.portlet.reports.service.spring.ReportsEntryService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
+		<property name="businessInterface">
+			<value>com.ext.portlet.reports.service.spring.ReportsEntryService</value>
+		</property>
+		<property name="jndiName">
+			<value>com_ext_portlet_reports_service_ejb_ReportsEntryServiceEJB</value>
+		</property>
+	</bean>
+	<bean id="com.ext.portlet.reports.service.spring.ReportsEntryService.professional" class="com.ext.portlet.reports.service.impl.ReportsEntryServiceImpl" lazy-init="true" />
+	<bean id="com.ext.portlet.reports.service.spring.ReportsEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.ext.portlet.reports.service.spring.ReportsEntryService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.ext.portlet.reports.service.spring.ReportsEntryServiceFactory" class="com.ext.portlet.reports.service.spring.ReportsEntryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.ext.portlet.reports.service.spring.ReportsEntryService.enterprise" />
+		</property>
+	</bean>
+	<bean id="com.ext.portlet.reports.service.persistence.ReportsEntryPersistence" class="com.ext.portlet.reports.service.persistence.ReportsEntryPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.ext.portlet.reports.service.persistence.ReportsEntryUtil" class="com.ext.portlet.reports.service.persistence.ReportsEntryUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.ext.portlet.reports.service.persistence.ReportsEntryPersistence" />
+		</property>
+	</bean>
+</beans>

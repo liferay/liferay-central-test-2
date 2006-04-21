@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE database-schema PUBLIC "-//Evermind//- Database schema" "http://www.orionserver.com/dtds/database-schema.dtd">
+
+<database-schema name="Microsoft SQL Server" not-null="not null" null="" primary-key="primary key">
+	<type-mapping type="java.lang.String" name="nvarchar(50)" />
+	<type-mapping type="float" name="float" />
+	<type-mapping type="double" name="float" />
+	<type-mapping type="byte" name="smallint" />
+	<type-mapping type="char" name="char" />
+	<type-mapping type="short" name="int" />
+	<type-mapping type="boolean" name="bit" />
+	<type-mapping type="long" name="int" />
+	<type-mapping type="java.io.Serializable" name="varbinary" />
+	
+	<disallowed-field name="password" />
+	<disallowed-field name="username" />
+	<disallowed-field name="date" />
+	<disallowed-field name="text" />
+	<disallowed-field name="option" />
+</database-schema>

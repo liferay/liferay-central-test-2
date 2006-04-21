@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE database-schema PUBLIC "-//Evermind//- Database schema" "http://www.orionserver.com/dtds/database-schema.dtd">
+
+<database-scheme name="PostGreSQL" not-null="not null" null="" primary-key="primary key">
+	<type-mapping type="java.lang.String" name="varchar(255)" />
+	<type-mapping type="int" name="integer" />
+	<type-mapping type="long" name="integer" />
+	<type-mapping type="float" name="float" />
+	<type-mapping type="double" name="double precision" />
+	<type-mapping type="byte" name="smallint" />
+	<type-mapping type="char" name="char" />
+	<type-mapping type="short" name="integer" />
+	<type-mapping type="boolean" name="bool" />
+	<type-mapping type="java.util.Date" name="timestamp" />
+	<type-mapping type="java.io.Serializable" name="oid" />
+
+	<disallowed-field name="position" />
+	<disallowed-field name="parent" />
+	<disallowed-field name="password" />
+	<disallowed-field name="username" />
+	<disallowed-field name="date" />
+	<disallowed-field name="order" />
+	<disallowed-field named="abort" />
+</database-scheme>

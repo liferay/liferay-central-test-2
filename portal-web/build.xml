@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<project name="portal-web" basedir="." default="war">
+	<import file="../build-common-web.xml" />
+
+	<property name="deploy.dir" value="${app.server.ear}" />
+	<property name="war.file" value="${ant.project.name}.war" />
+
+	<target name="clean" depends="build-common-web.clean">
+		<delete dir="${web.dir}/html/skin/color" />
+		<delete dir="${web.dir}/html/themes/classic/color_schemes" />
+		<delete>
+			<fileset dir="${web.dir}" includes="**/Thumbs.db" />
+		</delete>
+	</target>
+
+	<target name="war">
+		<copy file="${web.dir}/WEB-INF/orion-web.xml.tmpl" tofile="${web.dir}/WEB-INF/orion-web.xml" overwrite="yes">
+			<filterset>
+				<filter token="app.server.orion.web.xml.development" value="${app.server.orion.web.xml.development}" />
+			</filterset>
+			<filterset>
+				<filter token="app.server.orion.web.xml.jsp.check" value="${app.server.orion.web.xml.jsp.check}" />
+			</filterset>
+		</copy>
+
+		<antcall target="build-common-web.war" />
+	</target>
+
+	<target name="build-color-scheme">
+		<java
+			classname="com.liferay.portal.tools.ColorSchemeBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="false"
+		>
+			<jvmarg value="-Dcolor.scheme.builder.overwrite=true" />
+			<jvmarg value="-Djava.awt.headless=true" />
+		</java>
+	</target>
+
+	<target name="build-javascript">
+		<java
+			classname="com.liferay.portal.tools.JavaScriptBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="false"
+		>
+			<arg value="${javascript.files}" />
+			<arg value="${web.dir}/html/js/everything.js" />
+		</java>
+	</target>
+
+	<target name="build-website">
+		<java
+			classname="com.liferay.portal.tools.WebSiteBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<jvmarg value="-Dapp.server.orion.web.xml.development=${app.server.orion.web.xml.development}" />
+			<jvmarg value="-Dapp.server.orion.web.xml.jsp.check=${app.server.orion.web.xml.jsp.check}" />
+			<arg line="${asp.portal-ext.properties} ${asp.available.web-apps} ${asp.orion.config}" />
+		</java>
+		<antcall target="build-webxml" />
+	</target>
+
+	<target name="build-webxml">
+		<java
+			classname="com.liferay.portal.tools.WebXMLBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		/>
+	</target>
+</project>

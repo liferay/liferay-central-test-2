@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE data-sources PUBLIC "Orion data-sources" "http://www.orionserver.com/dtds/data-sources.dtd">
+
+<data-sources>
+	<data-source
+		class="com.evermind.sql.DriverManagerDataSource"
+		name="Liferay"
+		location="jdbc/LiferayCore"
+		pooled-location="jdbc/LiferayPool"
+		xa-location="jdbc/xa/LiferayXA"
+		ejb-location="jdbc/LiferayEJB"
+		connection-driver="org.hsqldb.jdbcDriver"
+		url="jdbc:hsqldb:test"
+		username="sa"
+		password=""
+		inactivity-timeout="30"
+		schema="database-schemas/hypersonic.xml"
+	/>
+</data-sources>

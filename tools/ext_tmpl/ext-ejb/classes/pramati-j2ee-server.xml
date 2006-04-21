@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE pramati-j2ee-server PUBLIC "-//Pramati Technologies //DTD Pramati J2ee Server 3.5 SP5//EN" "http://www.pramati.com/dtd/pramati-j2ee-server_3_5.dtd">
+
+<pramati-j2ee-server>
+	<vhost-name>default</vhost-name>
+	<auto-start>TRUE</auto-start>
+	<realm-name />
+	<ejb-module>
+		<name>ext-ejb.jar</name>
+		<ejb>
+			<name>com_ext_portlet_reports_service_ejb_ReportsEntryServiceEJB</name>
+			<max-pool-size>40</max-pool-size>
+			<min-pool-size>20</min-pool-size>
+			<enable-freepool>false</enable-freepool>
+			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
+			<low-activity-interval>20</low-activity-interval>
+			<is-secure>false</is-secure>
+			<is-clustered>true</is-clustered>
+			<jndi-name>com_ext_portlet_reports_service_ejb_ReportsEntryServiceEJB</jndi-name>
+			<local-jndi-name>com_ext_portlet_reports_service_ejb_ReportsEntryServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/UserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+		</ejb>
+	</ejb-module>
+</pramati-j2ee-server>

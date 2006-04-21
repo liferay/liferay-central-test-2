@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<project name="themes-parent">
+	<import file="../build-common.xml" />
+
+	<target name="deploy">
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jetty" />
+				<equals arg1="${app.server.type}" arg2="resin" />
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+			</or>
+			<then>
+				<property name="theme.deploy.dir" value="${app.server.dir}/webapps" />
+			</then>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="weblogic" />
+				<then>
+					<property name="theme.deploy.dir" value="${app.server.deploy.dir}/${ext.ear.file}" />
+				</then>
+			</elseif>
+			<else>
+				<property name="theme.deploy.dir" value="${app.server.deploy.dir}" />
+			</else>
+		</if>
+
+		<java
+			classname="com.liferay.portal.tools.ThemeDeployer"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true">
+
+				<!-- Required Arguments -->
+
+				<jvmarg value="-Ddeployer.base.dir=./" />
+				<jvmarg value="-Ddeployer.dest.dir=${theme.deploy.dir}" />
+				<jvmarg value="-Ddeployer.app.server.type=${app.server.type}" />
+				<jvmarg value="-Ddeployer.theme.taglib.dtd=${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/tld/liferay-theme.tld" />
+				<jvmarg value="-Ddeployer.util.taglib.dtd=${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/tld/liferay-util.tld" />
+
+				<!-- Optional Arguments -->
+
+				<jvmarg value="-Ddeployer.jboss.prefix=1" />
+				<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.lib.dir}" />
+
+				<!-- Dependent Libraries -->
+
+				<arg value="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/lib/util-taglib.jar" />
+				<arg value="${project.dir}/lib/util-java.jar" />
+		</java>
+	</target>
+</project>

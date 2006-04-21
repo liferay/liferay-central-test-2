@@ -1,0 +1,449 @@
+<?xml version="1.0"?>
+
+<project name="ext-parent">
+	<import file="build-common.xml" />
+
+	<target name="clean">
+		<delete includeEmptyDirs="true">
+			<fileset dir="${app.server.bin.dir}" includes="*.log,ActiveMQ/**" />
+		</delete>
+
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jetty" />
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+				<equals arg1="${app.server.type}" arg2="websphere" />
+			</or>
+			<then>
+				<delete dir="${app.server.deploy.dir}" />
+			</then>
+			<else>
+				<delete dir="${app.server.deploy.dir}/${ext.ear.file}" />
+			</else>
+		</if>
+
+		<delete dir="${app.server.lib.dir}" />
+		<mkdir dir="${app.server.lib.dir}" />
+
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+			</or>
+			<then>
+				<delete includeEmptyDirs="true" failonerror="false">
+					<fileset dir="${app.server.deploy.dir}" includes="1sample_*.war/**" />
+				</delete>
+
+				<if>
+					<equals arg1="${logs.truncate}" arg2="on" />
+					<then>
+						<delete dir="${app.server.server.dir}/log" />
+						<mkdir dir="${app.server.server.dir}/log" />
+					</then>
+				</if>
+
+				<delete dir="${app.server.server.dir}/tmp" />
+				<mkdir dir="${app.server.server.dir}/tmp" />
+
+				<delete dir="${app.server.server.dir}/work" />
+				<mkdir dir="${app.server.server.dir}/work" />
+			</then>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="jetty" />
+				<then>
+					<if>
+						<equals arg1="${logs.truncate}" arg2="on" />
+						<then>
+							<delete dir="${app.server.dir}/logs" />
+							<mkdir dir="${app.server.dir}/logs" />
+						</then>
+					</if>
+
+					<delete dir="${app.server.dir}/webapps" />
+					<mkdir dir="${app.server.dir}/webapps" />
+
+					<delete dir="${app.server.dir}/work" />
+					<mkdir dir="${app.server.dir}/work" />
+				</then>
+			</elseif>
+			<elseif>
+				<or>
+					<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+					<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+				</or>
+				<then>
+					<delete dir="${app.server.dir}/conf/jonas" />
+
+					<if>
+						<equals arg1="${logs.truncate}" arg2="on" />
+						<then>
+							<delete>
+								<fileset dir="${app.server.dir}/logs" includes="jonas*.*,*.txt" />
+							</delete>
+						</then>
+					</if>
+
+					<delete dir="${app.server.dir}/work" />
+					<mkdir dir="${app.server.dir}/work" />
+				</then>
+			</elseif>
+			<elseif>
+				<or>
+					<equals arg1="${app.server.type}" arg2="oc4j" />
+					<equals arg1="${app.server.type}" arg2="orion" />
+				</or>
+				<then>
+					<delete dir="${app.server.dir}/application-deployments" />
+					<mkdir dir="${app.server.dir}/application-deployments" />
+
+					<if>
+						<equals arg1="${logs.truncate}" arg2="on" />
+						<then>
+							<delete dir="${app.server.dir}/log" />
+							<mkdir dir="${app.server.dir}/log" />
+						</then>
+					</if>
+
+					<delete dir="${app.server.dir}/persistence" />
+					<mkdir dir="${app.server.dir}/persistence/ejb" />
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="resin" />
+				<then>
+					<delete dir="${app.server.bin.dir}/logs" />
+					<mkdir dir="${app.server.bin.dir}/logs" />
+
+					<delete dir="${app.server.dir}/webapps" />
+					<mkdir dir="${app.server.dir}/webapps" />
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="rexip" />
+				<then>
+					<delete dir="${app.server.bin.dir}/work" />
+					<mkdir dir="${app.server.bin.dir}/work" />
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+				<then>
+					<delete dir="${app.server.dir}/common/classes" />
+					<mkdir dir="${app.server.dir}/common/classes" />
+
+					<if>
+						<equals arg1="${logs.truncate}" arg2="on" />
+						<then>
+							<delete dir="${app.server.dir}/logs" />
+							<mkdir dir="${app.server.dir}/logs" />
+						</then>
+					</if>
+
+					<delete dir="${app.server.dir}/temp" />
+					<mkdir dir="${app.server.dir}/temp" />
+
+					<delete dir="${app.server.dir}/webapps" />
+					<mkdir dir="${app.server.dir}/webapps" />
+
+					<delete dir="${app.server.dir}/work" />
+					<mkdir dir="${app.server.dir}/work" />
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="weblogic" />
+				<then>
+					<delete>
+						<fileset dir="${app.server.bin.dir}" includes="config.xml.*,mydomain.log*" />
+					</delete>
+					<delete dir="${app.server.bin.dir}/applications/.wlnotdelete" />
+					<delete>
+						<fileset dir="${app.server.bin.dir}/myserver" excludes=".app_poller_lastrun" />
+					</delete>
+					<delete dir="${app.server.bin.dir}/myserver/.internal" />
+					<delete dir="${app.server.bin.dir}/myserver/.wlnotdelete" />
+					<delete dir="${app.server.bin.dir}/myserver/ldap" />
+				</then>
+			</elseif>
+		</if>
+
+		<ant dir="ext-ear" target="clean" inheritAll="false" />
+		<ant dir="ext-ejb" target="clean" inheritAll="false" />
+		<ant dir="ext-web" target="clean" inheritAll="false" />
+
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+			</or>
+			<then>
+				<delete>
+					<fileset dir="${app.server.bin.dir}/nt" includes="test.*" />
+				</delete>
+				<delete>
+					<fileset dir="${app.server.bin.dir}/unix" includes="test.*" />
+				</delete>
+			</then>
+			<else>
+				<delete>
+					<fileset dir="${app.server.bin.dir}" includes="test.*" />
+				</delete>
+			</else>
+		</if>
+	</target>
+
+	<target name="java2html">
+		<ant dir="ext-ejb" target="javadoc" inheritAll="false" />
+	</target>
+
+	<target name="javadoc">
+		<ant dir="ext-ejb" target="javadoc" inheritAll="false" />
+	</target>
+
+	<target name="deploy">
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jetty" />
+				<equals arg1="${app.server.type}" arg2="resin" />
+				<equals arg1="${app.server.type}" arg2="rexip" />
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+				<equals arg1="${app.server.type}" arg2="websphere" />
+			</or>
+			<then>
+				<property name="ear.lib.dir" value="${app.server.lib.dir}" />
+			</then>
+			<else>
+				<property name="ear.lib.dir" value="${app.server.deploy.dir}/${ext.ear.file}/lib" />
+			</else>
+		</if>
+
+		<copy todir="${ear.lib.dir}">
+			<fileset
+				dir="lib"
+				includes="compression-filter.jar,portal-shared.jar,secure-filter.jar,strip-filter.jar,util-java.jar,util-wsrp.jar,${libraries.current}"
+			/>
+		</copy>
+
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+			</or>
+			<then>
+
+				<!--
+				JBoss 4.0.3 SP1 defaults to different versions of dom4j and
+				Commons Collections.
+				-->
+
+				<copy todir="${app.server.dir}/lib">
+					<fileset
+						dir="lib"
+						includes="dom4j.jar,jaxen.jar"
+					/>
+				</copy>
+
+				<copy todir="${app.server.dir}/server/default/lib">
+					<fileset
+						dir="lib"
+						includes="commons-collections.jar"
+					/>
+				</copy>
+			</then>
+			<elseif>
+				<or>
+					<equals arg1="${app.server.type}" arg2="jetty" />
+					<equals arg1="${app.server.type}" arg2="tomcat" />
+				</or>
+				<then>
+					<copy todir="${ear.lib.dir}">
+						<fileset
+							dir="lib"
+							includes="jms.jar,jta.jar,mail.jar"
+						/>
+					</copy>
+
+					<!--
+					Jetty 5.1.10 defaults to a different version of Commons
+					Logging.
+					-->
+
+					<if>
+						<equals arg1="${app.server.type}" arg2="jetty" />
+						<then>
+							<delete file="${app.server.dir}/ext/commons-logging.jar" />
+						</then>
+					</if>
+
+					<!--
+					Tomcat 5.5.12 requires JDK 5.0 and the latest Xerces.
+					-->
+
+					<if>
+						<equals arg1="${app.server.type}" arg2="tomcat" />
+						<then>
+							<copy todir="${ear.lib.dir}">
+								<fileset
+									dir="lib"
+									includes="xercesImpl.jar"
+								/>
+							</copy>
+						</then>
+					</if>
+				</then>
+			</elseif>
+			<elseif>
+				<or>
+					<equals arg1="${app.server.type}" arg2="oc4j" />
+					<equals arg1="${app.server.type}" arg2="orion" />
+				</or>
+				<then>
+					<copy file="${app.server.dir}/orion/xerces.jar" todir="${app.server.lib.dir}" failonerror="false" />
+					<copy file="${env.ORION_HOME}/xerces.jar" todir="${app.server.lib.dir}" failonerror="false" />
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="resin" />
+				<then>
+					<copy todir="${ear.lib.dir}">
+						<fileset
+							dir="lib"
+							includes="mail.jar"
+						/>
+					</copy>
+
+					<copy todir="${app.server.dir}/lib">
+						<fileset
+							dir="lib"
+							includes="saxpath.jar,xalan.jar,xercesImpl.jar,xml-apis.jar"
+						/>
+					</copy>
+				</then>
+			</elseif>
+		</if>
+
+		<if>
+			<equals arg1="${app.server.type}" arg2="tomcat" />
+			<then>
+				<unjar src="lib/log4j.jar" dest="${app.server.dir}/common/classes">
+					<patternset>
+						<include name="org/apache/log4j/xml/log4j.dtd" />
+					</patternset>
+				</unjar>
+				<move file="${app.server.dir}/common/classes/org/apache/log4j/xml/log4j.dtd" tofile="${app.server.dir}/common/classes/META-INF/log4j.dtd" />
+				<delete dir="${app.server.dir}/common/classes/org" />
+
+				<copy file="servers/tomcat.log4j.properties" tofile="${app.server.dir}/common/classes/log4j.properties" />
+			</then>
+		</if>
+
+		<delete>
+			<fileset
+				dir="${ear.lib.dir}"
+				includes="${libraries.old}"
+			/>
+		</delete>
+
+		<copy todir="${app.server.lib.dir}" includeEmptyDirs="false">
+			<fileset
+				dir="ext-lib"
+				excludes="**/readme.txt"				
+			/>
+		</copy>
+
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="oc4j" />
+				<equals arg1="${app.server.type}" arg2="orion" />
+				<equals arg1="${app.server.type}" arg2="resin" />
+				<equals arg1="${app.server.type}" arg2="rexip" />
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+				<equals arg1="${app.server.type}" arg2="weblogic" />
+			</or>
+			<then>
+				<copy file="lib/hsql.jar" todir="${app.server.lib.dir}" />
+			</then>
+		</if>
+
+		<ant dir="ext-ear" target="deploy" inheritAll="false" />
+		<ant dir="ext-ejb" target="deploy" inheritAll="false" />
+		<ant dir="ext-web" target="deploy" inheritAll="false" />
+
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+			</or>
+			<then>
+				<copy todir="${app.server.bin.dir}/nt">
+					<fileset dir="sql">
+						<include name="test.*" />
+					</fileset>
+				</copy>
+				<copy todir="${app.server.bin.dir}/unix">
+					<fileset dir="sql">
+						<include name="test.*" />
+					</fileset>
+				</copy>
+			</then>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="websphere" />
+				<then>
+				</then>
+			</elseif>
+			<else>
+				<copy todir="${app.server.bin.dir}">
+					<fileset dir="sql">
+						<include name="test.*" />
+					</fileset>
+				</copy>
+			</else>
+		</if>
+
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+				<equals arg1="${app.server.type}" arg2="jetty" />
+				<equals arg1="${app.server.type}" arg2="oc4j" />
+				<equals arg1="${app.server.type}" arg2="orion" />
+				<equals arg1="${app.server.type}" arg2="resin" />
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+				<equals arg1="${app.server.type}" arg2="weblogic" />
+				<equals arg1="${app.server.type}" arg2="websphere" />
+			</or>
+			<then>
+				<ant dir="layouttpl" target="deploy" inheritAll="false" />
+				<ant dir="portlets" target="deploy" inheritAll="false" />
+				<ant dir="themes" target="deploy" inheritAll="false" />
+			</then>
+		</if>
+	</target>
+
+	<target name="deploy-test">
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+			</or>
+			<then>
+				<move todir="${app.server.deploy.dir}/WEB-INF/lib">
+					<fileset
+						dir="${app.server.lib.dir}"
+						excludes="commons-logging.jar,hsql.jar,log4j.jar,portal-shared.jar,portlet.jar"
+					/>
+				</move>
+
+				<move todir="${app.server.deploy.dir}/WEB-INF/classes">
+					<fileset
+						dir="${app.server.dir}/common/classes"
+						excludes="log4j.properties,META-INF/log4j.dtd"
+					/>
+				</move>
+
+				<delete dir="${app.server.dir}/webapps/cms" />
+				<delete dir="${app.server.dir}/webapps/laszlo" />
+				<delete dir="${app.server.dir}/webapps/tunnel" />
+			</then>
+		</if>
+	</target>
+</project>

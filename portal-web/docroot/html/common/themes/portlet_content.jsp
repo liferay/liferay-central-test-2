@@ -1,0 +1,59 @@
+<%
+/**
+ * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<c:if test="<%= portletDisplay.isActive() %>">
+	<c:if test="<%= portletDisplay.isAccess() %>">
+		<c:if test="<%= Validator.isNotNull(tilesPortletSubNav) %>">
+			<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesPortletSubNav %>" />
+		</c:if>
+
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+			<td <%= portletDecorate ? "style=\"padding: 4px 8px 10px 8px;\"" : "" %>>
+				<%@ include file="/html/common/themes/portlet_messages.jsp" %>
+
+				<c:if test="<%= Validator.isNotNull(tilesPortletContent) %>">
+					<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesPortletContent %>" />
+				</c:if>
+
+				<c:if test="<%= Validator.isNull(tilesPortletContent) %>">
+
+					<%
+					pageContext.getOut().print(renderRequest.getAttribute(WebKeys.PORTLET_CONTENT));
+					%>
+
+				</c:if>
+			</td>
+		</tr>
+		</table>
+	</c:if>
+
+	<c:if test="<%= !portletDisplay.isAccess() %>">
+		<liferay-util:include page="/html/portal/portlet_access_denied.jsp" />
+	</c:if>
+</c:if>
+
+<c:if test="<%= !portletDisplay.isActive() %>">
+	<liferay-util:include page="/html/portal/portlet_inactive.jsp" />
+</c:if>

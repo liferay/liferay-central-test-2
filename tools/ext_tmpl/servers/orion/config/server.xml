@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE application-server PUBLIC "Orion Application Server Config" "http://www.orionserver.com/dtds/application-server.dtd">
+
+<application-server
+	application-directory="../applications"
+	deployment-directory="../application-deployments"
+>
+	<rmi-config path="./rmi.xml" />
+	<jms-config path="./jms.xml" />
+	<log>
+		<file path="../log/server.log" />
+	</log>
+
+	<global-application name="default" path="application.xml" />
+
+	<global-web-app-config path="global-web-application.xml" />
+
+	<application name="liferay" path="../applications/ext.ear" />
+
+	<web-site path="./web-sites/liferay.com-web.xml" />
+
+	<compiler executable="jikes" classpath="@rt.jar.path@" nowarn="true" />
+</application-server>

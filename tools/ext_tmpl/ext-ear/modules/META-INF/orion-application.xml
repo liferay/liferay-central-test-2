@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE orion-application PUBLIC "-//Evermind//DTD J2EE Application runtime 1.2//EN" "http://www.orionserver.com/dtds/orion-application.dtd">
+
+<orion-application>
+	<library path="counter-ejb.jar" />
+	<library path="documentlibrary-ejb.jar" />
+	<library path="lock-ejb.jar" />
+	<library path="mail-ejb.jar" />
+	<library path="portal-ejb.jar" />
+	<library path="ext-ejb.jar" />
+
+	<mail-session location="mail/MailSession" smtp-host="localhost">
+		<property name="mail.transport.protocol" value="smtp" />
+		<property name="mail.imap.host" value="localhost" />
+		<property name="mail.pop3.host" value="localhost" />
+	</mail-session>
+
+	<user-manager class="com.evermind.sql.DataSourceUserManager">
+		<property name="dataSource" value="jdbc/LiferayPool" />
+		<property name="table" value="User_" />
+		<property name="usernameField" value="userId" />
+		<property name="passwordField" value="password_" />
+		<property name="defaultGroups" value="users" />
+		<property name="staleness" value="0" />
+	</user-manager>
+</orion-application>

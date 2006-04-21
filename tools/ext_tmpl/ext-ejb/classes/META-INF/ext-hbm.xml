@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false">
+	<class name="com.ext.portlet.reports.service.persistence.ReportsEntryHBM" table="ReportsEntry">
+		<cache usage="read-write" />
+		<id name="entryId" type="java.lang.String">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" />
+		<property name="userId" />
+		<property name="userName" />
+		<property name="createDate" />
+		<property name="modifiedDate" />
+		<property name="name" />
+	</class>
+</hibernate-mapping>

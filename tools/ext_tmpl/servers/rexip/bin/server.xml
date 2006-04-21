@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding="UTF-8"?>
+
+<domain name="liferay">
+    <server listen-port="8080" address="" connection-filter="" name="liferayServer" id="1" secured-port="8081">
+        <server-log></server-log>
+        <access-log></access-log>
+    </server>
+	<app name="liferayApp" path="../applications/ext.ear">
+		<server name="liferayServer"></server>
+	</app>
+	<security default-basic-realm="PortalRealm">
+		<basic-realm check-login-query="SELECT * FROM User_ WHERE userId = ? AND password_ = ?" get-user-query="" name="PortalRealm" realm-type="jdbc" get-group-query="" user-role-query="" datasource-name="LiferayPool"></basic-realm>
+	</security>
+    <transaction></transaction>
+    <mail jndi-name="mail/MailSession" name="MailSession">
+        <properties value="localhost" name="smtp"></properties>
+    </mail>
+    <datasource password="" jndi-name="jdbc/LiferayPool" username="sa" url="jdbc:hsqldb:test" transactional="true" driver="org.hsqldb.jdbcDriver" name="LiferayPool"></datasource>
+</domain>

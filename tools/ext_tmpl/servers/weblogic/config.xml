@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Domain ConfigurationVersion="8.1.2.0" Name="mydomain">
+    <Server ListenAddress="" ListenPort="80" Name="myserver"
+        NativeIOEnabled="true" ReliableDeliveryPolicy="RMDefaultPolicy" ServerVersion="8.1.2.0">
+        <SSL Enabled="false" HostnameVerificationIgnored="false"
+            IdentityAndTrustLocations="KeyStores" Name="myserver"/>
+    </Server>
+    <JMSFileStore Directory="rmfilestore" Name="FileStore"/>
+    <WSReliableDeliveryPolicy DefaultRetryCount="10"
+        DefaultTimeToLive="60000" Name="RMDefaultPolicy" Store="FileStore"/>
+    <Security Name="mydomain"
+        PasswordPolicy="wl_default_password_policy"
+        Realm="wl_default_realm" RealmSetup="true"/>
+    <EmbeddedLDAP
+        Credential="{3DES}oiOzjVw1J5mL/0A+Lgp35Q6N2znUVkER3vFR/c2vbjY=" Name="mydomain"/>
+    <SecurityConfiguration
+        Credential="{3DES}O1A9MrOfTDWDNciFMMeJ7YeyVaJkPqBqMekDgzFE9iRlydq74A7HQNgmb/cecdOqnsR4/ftrOtaj4Ew7rLgxdlR++EG4YQu7"
+        Name="mydomain" RealmBootStrapVersion="1"/>
+    <Realm FileRealm="wl_default_file_realm" Name="wl_default_realm"/>
+    <FileRealm Name="wl_default_file_realm"/>
+    <PasswordPolicy Name="wl_default_password_policy"/>
+    <JMSServer Name="WSStoreForwardInternalJMSServermyserver"
+        Store="FileStore" Targets="myserver">
+        <JMSQueue CreationTime="1076008104438"
+            JNDIName="jms.internal.queue.WSStoreForwardQueue"
+            JNDINameReplicated="false" Name="WSInternaljms.internal.queue.WSStoreForwardQueuemyserver"/>
+        <JMSQueue CreationTime="1076008105540"
+            JNDIName="jms.internal.queue.WSDupsEliminationHistoryQueue"
+            JNDINameReplicated="false" Name="WSInternaljms.internal.queue.WSDupsEliminationHistoryQueuemyserver"/>
+    </JMSServer>
+    <JDBCConnectionPool DriverName="org.hsqldb.jdbcDriver"
+        Name="LiferayPool" Properties="user=sa"
+        Targets="myserver" URL="jdbc:hsqldb:test"/>
+	<!--
+	<JDBCConnectionPool DriverName="com.liferay.jdbc.LiferayDriver"
+        Name="LiferayPool" Password="{3DES}6NZbXwTVVYM="
+        Properties="user=lportal" Targets="myserver" URL="jdbc:oracle:thin:@localhost:1521:orcl"/>
+	-->
+	<JDBCTxDataSource JNDIName="jdbc/LiferayPool"
+        Name="jdbc/LiferayPool" PoolName="LiferayPool" Targets="myserver"/>
+    <MailSession JNDIName="mail/MailSession" Name="mail/MailSession"
+        Properties="mail.store.protocol=imap;mail.transport.protocol=smtp;mail.imap.host=localhost;mail.pop3.host=localhost;mail.smtp.host=localhost" Targets="myserver"/>
+    <Application Name="ext" Path="applications\ext.ear"
+        StagingMode="nostage" TwoPhase="true">
+        <EJBComponent Name="counter-ejb.jar" Targets="myserver" URI="counter-ejb.jar"/>
+        <EJBComponent Name="documentlibrary-ejb.jar" Targets="myserver" URI="documentlibrary-ejb.jar"/>
+        <EJBComponent Name="lock-ejb.jar" Targets="myserver" URI="lock-ejb.jar"/>
+        <EJBComponent Name="mail-ejb.jar" Targets="myserver" URI="mail-ejb.jar"/>
+        <EJBComponent Name="portal-ejb.jar" Targets="myserver" URI="portal-ejb.jar"/>
+        <EJBComponent Name="ext-ejb.jar" Targets="myserver" URI="ext-ejb.jar"/>
+        <WebAppComponent Name="/laszlo" Targets="myserver" URI="laszlo-web.war"/>
+        <WebAppComponent Name="/" Targets="myserver" URI="portal-web-complete.war"/>
+        <WebAppComponent Name="/tunnel" Targets="myserver" URI="tunnel-web.war"/>
+    </Application>
+</Domain>

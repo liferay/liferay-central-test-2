@@ -1,0 +1,258 @@
+<%
+/**
+ * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<%@ include file="/html/portlet/message_boards/init.jsp" %>
+
+<%
+TreeWalker treeWalker = (TreeWalker)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER);
+MBMessage selMessage = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE);
+MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE);
+boolean lastNode = ((Boolean)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE)).booleanValue();
+int depth = ((Integer)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH)).intValue();
+
+String className = "portlet-section-body";
+String classHoverName = "portlet-section-body-hover";
+
+if (treeWalker.isOdd()) {
+	className = "portlet-section-alternate";
+	classHoverName = "portlet-section-alternate-hover";
+}
+%>
+
+<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+	<c:if test="<%= !message.isDiscussion() %>">
+		<td>
+			<c:if test="<%= selMessage.getMessageId().equals(message.getMessageId()) %>">
+				<span class="portlet-msg-error" style="font-size: xx-small; font-weight: bold;">=&gt;</span>
+			</c:if>
+		</td>
+	</c:if>
+
+	<td width="90%">
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td style="padding-left: <%= depth * 10 %>px;"></td>
+			<td>
+				<c:if test="<%= !message.isRoot() %>">
+					<c:choose>
+						<c:when test="<%= !lastNode %>">
+							<img border="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/t.gif">
+						</c:when>
+						<c:otherwise>
+							<img border="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/l.gif">
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</td>
+			<td style="padding-left: 5px;"></td>
+			<td>
+
+				<%
+				String rowHREF = "javascript: " + renderResponse.getNamespace() + "scrollIntoView(" + message.getMessageId() + ");";
+
+				if (!message.isDiscussion()) {
+					PortletURL rowURL = renderResponse.createRenderURL();
+
+					rowURL.setWindowState(WindowState.MAXIMIZED);
+
+					rowURL.setParameter("struts_action", "/message_boards/view_message");
+					rowURL.setParameter("topicId", message.getTopicId());
+					rowURL.setParameter("messageId", message.getMessageId());
+					rowURL.setParameter("threadView", "true");
+
+					rowHREF = rowURL.toString();
+				}
+				%>
+
+				<c:if test="<%= !selMessage.getMessageId().equals(message.getMessageId()) %>">
+					<a href="<%= rowHREF %>">
+				</c:if>
+
+				<%
+				boolean readFlag = false;
+
+				if (themeDisplay.isSignedIn()) {
+					readFlag = MBMessageFlagLocalServiceUtil.hasReadFlag(message.getTopicId(), message.getMessageId(), request.getRemoteUser());
+				}
+				%>
+
+				<c:if test="<%= !readFlag %>">
+					<b>
+				</c:if>
+
+				<%= message.getSubject() %>
+
+				<c:if test="<%= !readFlag %>">
+					</b>
+				</c:if>
+
+				<c:if test="<%= !selMessage.getMessageId().equals(message.getMessageId()) %>">
+					</a>
+				</c:if>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td></td>
+	<td nowrap>
+		<c:if test="<%= !selMessage.getMessageId().equals(message.getMessageId()) %>">
+			<a href="<%= rowHREF %>">
+		</c:if>
+
+		<c:choose>
+			<c:when test="<%= message.isAnonymous() %>">
+				<%= LanguageUtil.get(pageContext, "anonymous") %>
+			</c:when>
+			<c:otherwise>
+				<%= PortalUtil.getUserName(message.getUserId(), message.getUserName()) %>
+			</c:otherwise>
+		</c:choose>
+
+		<c:if test="<%= !selMessage.getMessageId().equals(message.getMessageId()) %>">
+			</a>
+		</c:if>
+	</td>
+	<td></td>
+	<td nowrap>
+		<c:if test="<%= !selMessage.getMessageId().equals(message.getMessageId()) %>">
+			<a href="<%= rowHREF %>">
+		</c:if>
+
+		<%= dateFormatDateTime.format(message.getModifiedDate()) %>
+
+		<c:if test="<%= !selMessage.getMessageId().equals(message.getMessageId()) %>">
+			</a>
+		</c:if>
+	</td>
+
+	<c:if test="<%= !message.isDiscussion() %>">
+		<td></td>
+		<td>
+			<c:if test="<%= message.isAttachments() %>">
+				<img src="<%= themeDisplay.getPathThemeImage() %>/common/clip.gif">
+			</c:if>
+		</td>
+		<td></td>
+		<td nowrap>
+			<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) %>">
+				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+					<portlet:param name="struts_action" value="/message_boards/edit_message" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="topicId" value="<%= message.getTopicId() %>" />
+					<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
+				</portlet:renderURL>
+
+				<liferay-ui:icon image="edit" url="<%= portletURL %>" />
+			</c:if>
+
+			<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.PERMISSIONS) %>">
+				<liferay-security:permissionsURL
+					modelResource="<%= MBMessage.class.getName() %>"
+					modelResourceDescription="<%= message.getSubject() %>"
+					resourcePrimKey="<%= message.getPrimaryKey().toString() %>"
+					var="portletURL"
+				/>
+
+				<liferay-ui:icon image="permissions" url="<%= portletURL %>" />
+			</c:if>
+
+			<c:if test="<%= message.isRoot() && MBMessagePermission.contains(permissionChecker, message, ActionKeys.SUBSCRIBE) %>">
+				<c:choose>
+					<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), MBThread.class.getName(), message.getThreadId()) %>">
+						<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+							<portlet:param name="struts_action" value="/message_boards/edit_message" />
+							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
+							<portlet:param name="redirect" value="<%= currentURL %>" />
+							<portlet:param name="topicId" value="<%= message.getTopicId() %>" />
+							<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
+						</portlet:actionURL>
+
+						<liferay-ui:icon image="unsubscribe" url="<%= portletURL %>" />
+					</c:when>
+					<c:otherwise>
+						<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+							<portlet:param name="struts_action" value="/message_boards/edit_message" />
+							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
+							<portlet:param name="redirect" value="<%= currentURL %>" />
+							<portlet:param name="topicId" value="<%= message.getTopicId() %>" />
+							<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
+						</portlet:actionURL>
+
+						<liferay-ui:icon image="subscribe" url="<%= portletURL %>" />
+					</c:otherwise>
+				</c:choose>
+			</c:if>
+
+			<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.DELETE) %>">
+
+				<%
+				PortletURL topicURL = renderResponse.createRenderURL();
+
+				topicURL.setWindowState(WindowState.MAXIMIZED);
+
+				topicURL.setParameter("struts_action", "/message_boards/view_topic");
+				topicURL.setParameter("topicId", message.getTopicId());
+				%>
+
+				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+					<portlet:param name="struts_action" value="/message_boards/edit_message" />
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+					<portlet:param name="redirect" value="<%= topicURL.toString() %>" />
+					<portlet:param name="topicId" value="<%= message.getTopicId() %>" />
+					<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
+				</portlet:actionURL>
+
+				<liferay-ui:icon-delete url="<%= portletURL %>" />
+			</c:if>
+		</td>
+	</c:if>
+</tr>
+
+<%
+List messages = treeWalker.getMessages();
+int[] range = treeWalker.getChildrenRange(message);
+
+depth++;
+
+for (int i = range[0]; i < range[1]; i++) {
+	MBMessage curMessage = (MBMessage)messages.get(i);
+
+	boolean lastChildNode = false;
+
+	if ((i + 1) == range[1]) {
+		lastChildNode = true;
+	}
+
+	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
+	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, selMessage);
+	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, curMessage);
+	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, new Boolean(lastChildNode));
+	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(depth));
+%>
+
+	<liferay-util:include page="/html/portlet/message_boards/view_message_thread.jsp" />
+
+<%
+}
+%>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<script name="startWebLogic" version="3">
+	<comment>
+		<value>*************************************************************************</value>
+		<value>This script is used to start WebLogic Server for the domain in the</value>
+		<value>current working directory.  This script simply sets the SERVER_NAME</value>
+		<value>variable and starts server.</value>
+		<value></value>
+		<value>To create your own start script for your domain, all you need to set is</value>
+		<value>SERVER_NAME, then starts the server.</value>
+		<value></value>
+		<value>Other variables that startWLS takes are:</value>
+		<value></value>
+		<value>WLS_USER     - cleartext user for server startup</value>
+		<value>WLS_PW       - cleartext password for server startup</value>
+		<value>PRODUCTION_MODE    - true for production mode servers, false for</value>
+		<value>               development mode</value>
+		<value>JAVA_OPTIONS - Java command-line options for running the server. (These</value>
+		<value>               will be tagged on to the end of the JAVA_VM and MEM_ARGS)</value>
+		<value>JAVA_VM      - The java arg specifying the VM to run.  (i.e. -server,</value>
+		<value>               -hotspot, etc.)</value>
+		<value>MEM_ARGS     - The variable to override the standard memory arguments</value>
+		<value>               passed to java</value>
+		<value></value>
+		<value>For additional information, refer to the WebLogic Server Administration</value>
+		<value>Console Online Help(http://e-docs.bea.com/wls/docs81/ConsoleHelp/startstop.html)</value>
+		<value>*************************************************************************</value>
+	</comment>
+	<comment message="Initialize the common environment."/>
+	<setenv name="WL_HOME" shorten="true">
+		<value>C:\Program Files\BEA\weblogic81</value>
+	</setenv>
+	<setenv name="PRODUCTION_MODE">
+		<value></value>
+	</setenv>
+	<setenv name="JAVA_VENDOR">
+		<value>BEA</value>
+	</setenv>
+	<setenv name="JAVA_HOME" shorten="true">
+		<value>C:\Program Files\BEA\jrockit81sp2_141_05</value>
+	</setenv>
+	<comment message="Call commEnv here AFTER setting the java_vendor to get common environmental settings."/>
+	<exec name="commEnv" type="script">
+		<cmd start="%WL_HOME%\common\bin\commEnv" min="false" source="true"/>
+	</exec>
+	<comment message="Set SERVER_NAME to the name of the server you wish to start up."/>
+	<setenv name="SERVER_NAME">
+		<value>myserver</value>
+	</setenv>
+	<marker name="PATH" type="setenv" action="merge"/>
+	<marker name="CLASSPATH" type="setenv" action="merge"/>
+	<setenv name="CLASSPATH" scope="global">
+		<value>%WEBLOGIC_CLASSPATH%</value>
+		<value>%POINTBASE_CLASSPATH%</value>
+		<value>%JAVA_HOME%\jre\lib\rt.jar</value>
+		<value>%WL_HOME%\server\lib\webservices.jar</value>
+		<value>%CLASSPATH%</value>
+	</setenv>
+	<marker name="WebLogic Workshop Debugger..." type="exec" action="replace"/>
+	<marker name="Pointbase" type="exec" action="replace"/>
+	<marker name="SearchEngine" type="exec" action="replace"/>
+	<comment message="Call WebLogic Server"/>
+	<echo>
+		<value>.</value>
+		<value>CLASSPATH=%CLASSPATH%</value>
+		<value>.</value>
+		<value>PATH=%PATH%</value>
+		<value>.</value>
+		<value>***************************************************</value>
+		<value>*  To start WebLogic Server, use a username and   *</value>
+		<value>*  password assigned to an admin-level user.  For *</value>
+		<value>*  server administration, use the WebLogic Server *</value>
+		<value>*  console at http://[hostname]:[port]/console    *</value>
+		<value>***************************************************</value>
+	</echo>
+	<marker name="startserver" type="exec" action="merge"/>
+	<exec name="startserver" type="program">
+		<cmd start="%JAVA_HOME%\bin\java" end="weblogic.Server" min="false"/>
+		<params>
+			<value>%JAVA_VM%</value>
+			<value>%MEM_ARGS%</value>
+			<value>%JAVA_OPTIONS%</value>
+			<value>-Dweblogic.Name=%SERVER_NAME%</value>
+			<value>-Dweblogic.ProductionModeEnabled=%PRODUCTION_MODE%</value>
+			<value>-Djava.security.policy="%WL_HOME%\server\lib\weblogic.policy"</value>
+		</params>
+	</exec>
+	<marker name="Stop SearchEngine" type="exec" action="replace"/>
+	<marker name="Shutdown WebLogic Workshop Debugger..." type="exec" action="replace"/>
+	<marker name="Stop Pointbase" type="exec" action="replace"/>
+</script>

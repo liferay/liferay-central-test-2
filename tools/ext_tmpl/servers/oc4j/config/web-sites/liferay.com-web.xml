@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!DOCTYPE web-site PUBLIC "Orion Web-site" "http://www.orionserver.com/dtds/web-site.dtd">
+
+<web-site port="8080">
+	<default-web-app application="liferay" name="portal-web-complete" load-on-startup="true" />
+	<web-app application="liferay" name="laszlo-web" root="/laszlo" load-on-startup="true" />
+	<web-app application="liferay" name="tunnel-web" root="/tunnel" load-on-startup="true" />
+	<access-log path="../../log/liferay.com-web-access.log" />
+</web-site>

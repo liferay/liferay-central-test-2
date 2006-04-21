@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE database-schema PUBLIC "-//Evermind//- Database schema" "http://www.orionserver.com/dtds/database-schema.dtd">
+
+<database-schema name="Hypersonic SQL" not-null="not null" null="" primary-key="primary key">
+	<type-mapping type="java.lang.String" name="char (255)" />
+	<type-mapping type="int" name="int" />
+	<type-mapping type="long" name="bigint" />
+	<type-mapping type="float" name="float" />
+	<type-mapping type="double" name="double" />
+	<type-mapping type="byte" name="tinyint" />
+	<type-mapping type="char" name="char" />
+	<type-mapping type="short" name="tinyint" />
+	<type-mapping type="boolean" name="bit" />
+	<type-mapping type="java.util.Date" name="timestamp" />
+	
+	<disallowed-field name="password" />
+	<disallowed-field name="username" />
+	<disallowed-field name="date" />
+	<disallowed-field name="order" />
+</database-schema>

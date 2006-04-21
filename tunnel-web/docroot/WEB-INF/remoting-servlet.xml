@@ -1,0 +1,689 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean name="/com_liferay_portal_service_spring_AccountService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.AccountService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.AccountService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_AccountService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.AccountService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.AccountService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_AccountService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.AccountService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.AccountService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_AddressService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.AddressService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.AddressService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_AddressService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.AddressService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.AddressService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_AddressService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.AddressService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.AddressService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_CompanyService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.CompanyService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.CompanyService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_CompanyService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.CompanyService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.CompanyService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_CompanyService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.CompanyService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.CompanyService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ContactService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.ContactService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.ContactService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ContactService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.ContactService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.ContactService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ContactService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.ContactService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.ContactService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_CountryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.CountryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.CountryService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_CountryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.CountryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.CountryService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_CountryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.CountryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.CountryService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_DataTrackerService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.DataTrackerService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.DataTrackerService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_DataTrackerService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.DataTrackerService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.DataTrackerService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_DataTrackerService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.DataTrackerService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.DataTrackerService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_EmailAddressService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.EmailAddressService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.EmailAddressService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_EmailAddressService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.EmailAddressService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.EmailAddressService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_EmailAddressService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.EmailAddressService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.EmailAddressService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_GroupService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.GroupService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.GroupService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_GroupService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.GroupService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.GroupService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_GroupService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.GroupService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.GroupService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ImageService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.ImageService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.ImageService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ImageService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.ImageService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.ImageService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ImageService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.ImageService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.ImageService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_LayoutService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.LayoutService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.LayoutService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_LayoutService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.LayoutService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.LayoutService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_LayoutService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.LayoutService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.LayoutService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_LayoutSetService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.LayoutSetService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.LayoutSetService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_LayoutSetService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.LayoutSetService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.LayoutSetService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_LayoutSetService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.LayoutSetService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.LayoutSetService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ListTypeService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.ListTypeService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.ListTypeService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ListTypeService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.ListTypeService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.ListTypeService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ListTypeService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.ListTypeService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.ListTypeService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_OrganizationService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.OrganizationService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.OrganizationService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_OrganizationService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.OrganizationService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.OrganizationService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_OrganizationService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.OrganizationService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.OrganizationService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_OrgLaborService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.OrgLaborService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.OrgLaborService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_OrgLaborService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.OrgLaborService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.OrgLaborService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_OrgLaborService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.OrgLaborService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.OrgLaborService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PermissionService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.PermissionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.PermissionService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PermissionService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.PermissionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.PermissionService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PermissionService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.PermissionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.PermissionService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PhoneService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.PhoneService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.PhoneService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PhoneService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.PhoneService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.PhoneService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PhoneService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.PhoneService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.PhoneService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PortalService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.PortalService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.PortalService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PortalService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.PortalService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.PortalService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PortalService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.PortalService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.PortalService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PortletService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.PortletService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.PortletService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PortletService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.PortletService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.PortletService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PortletService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.PortletService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.PortletService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PortletPreferencesService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.PortletPreferencesService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.PortletPreferencesService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PortletPreferencesService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.PortletPreferencesService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.PortletPreferencesService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PortletPreferencesService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.PortletPreferencesService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.PortletPreferencesService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_RegionService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.RegionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.RegionService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_RegionService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.RegionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.RegionService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_RegionService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.RegionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.RegionService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ResourceService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.ResourceService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.ResourceService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ResourceService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.ResourceService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.ResourceService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ResourceService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.ResourceService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.ResourceService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_RoleService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.RoleService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.RoleService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_RoleService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.RoleService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.RoleService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_RoleService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.RoleService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.RoleService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_UserService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.UserService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.UserService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_UserService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.UserService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.UserService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_UserService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.UserService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.UserService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_UserTrackerService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.UserTrackerService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.UserTrackerService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_UserTrackerService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.UserTrackerService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.UserTrackerService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_UserTrackerService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.UserTrackerService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.UserTrackerService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_UserTrackerPathService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.UserTrackerPathService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.UserTrackerPathService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_UserTrackerPathService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.UserTrackerPathService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.UserTrackerPathService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_UserTrackerPathService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.UserTrackerPathService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.UserTrackerPathService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_WebsiteService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.WebsiteService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.WebsiteService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_WebsiteService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.WebsiteService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.WebsiteService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_WebsiteService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.spring.WebsiteService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.spring.WebsiteService" />
+	</bean>
+	<bean name="/com_liferay_portlet_addressbook_service_spring_ABContactService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.addressbook.service.spring.ABContactService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.addressbook.service.spring.ABContactService" />
+	</bean>
+	<bean name="/com_liferay_portlet_addressbook_service_spring_ABContactService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.addressbook.service.spring.ABContactService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.addressbook.service.spring.ABContactService" />
+	</bean>
+	<bean name="/com_liferay_portlet_addressbook_service_spring_ABContactService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.addressbook.service.spring.ABContactService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.addressbook.service.spring.ABContactService" />
+	</bean>
+	<bean name="/com_liferay_portlet_addressbook_service_spring_ABListService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.addressbook.service.spring.ABListService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.addressbook.service.spring.ABListService" />
+	</bean>
+	<bean name="/com_liferay_portlet_addressbook_service_spring_ABListService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.addressbook.service.spring.ABListService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.addressbook.service.spring.ABListService" />
+	</bean>
+	<bean name="/com_liferay_portlet_addressbook_service_spring_ABListService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.addressbook.service.spring.ABListService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.addressbook.service.spring.ABListService" />
+	</bean>
+	<bean name="/com_liferay_portlet_admin_service_spring_AdminConfigService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.admin.service.spring.AdminConfigService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.admin.service.spring.AdminConfigService" />
+	</bean>
+	<bean name="/com_liferay_portlet_admin_service_spring_AdminConfigService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.admin.service.spring.AdminConfigService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.admin.service.spring.AdminConfigService" />
+	</bean>
+	<bean name="/com_liferay_portlet_admin_service_spring_AdminConfigService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.admin.service.spring.AdminConfigService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.admin.service.spring.AdminConfigService" />
+	</bean>
+	<bean name="/com_liferay_portlet_blogs_service_spring_BlogsCategoryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.blogs.service.spring.BlogsCategoryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.blogs.service.spring.BlogsCategoryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_blogs_service_spring_BlogsCategoryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.blogs.service.spring.BlogsCategoryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.blogs.service.spring.BlogsCategoryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_blogs_service_spring_BlogsCategoryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.blogs.service.spring.BlogsCategoryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.blogs.service.spring.BlogsCategoryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_blogs_service_spring_BlogsEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.blogs.service.spring.BlogsEntryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.blogs.service.spring.BlogsEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_blogs_service_spring_BlogsEntryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.blogs.service.spring.BlogsEntryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.blogs.service.spring.BlogsEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_blogs_service_spring_BlogsEntryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.blogs.service.spring.BlogsEntryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.blogs.service.spring.BlogsEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_bookmarks_service_spring_BookmarksEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_bookmarks_service_spring_BookmarksEntryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_bookmarks_service_spring_BookmarksEntryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_bookmarks_service_spring_BookmarksFolderService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderService" />
+	</bean>
+	<bean name="/com_liferay_portlet_bookmarks_service_spring_BookmarksFolderService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderService" />
+	</bean>
+	<bean name="/com_liferay_portlet_bookmarks_service_spring_BookmarksFolderService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderService" />
+	</bean>
+	<bean name="/com_liferay_portlet_calendar_service_spring_CalEventService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.calendar.service.spring.CalEventService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.calendar.service.spring.CalEventService" />
+	</bean>
+	<bean name="/com_liferay_portlet_calendar_service_spring_CalEventService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.calendar.service.spring.CalEventService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.calendar.service.spring.CalEventService" />
+	</bean>
+	<bean name="/com_liferay_portlet_calendar_service_spring_CalEventService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.calendar.service.spring.CalEventService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.calendar.service.spring.CalEventService" />
+	</bean>
+	<bean name="/com_liferay_portlet_documentlibrary_service_spring_DLFileEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_documentlibrary_service_spring_DLFileEntryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_documentlibrary_service_spring_DLFileEntryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_documentlibrary_service_spring_DLFolderService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.documentlibrary.service.spring.DLFolderService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.documentlibrary.service.spring.DLFolderService" />
+	</bean>
+	<bean name="/com_liferay_portlet_documentlibrary_service_spring_DLFolderService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.documentlibrary.service.spring.DLFolderService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.documentlibrary.service.spring.DLFolderService" />
+	</bean>
+	<bean name="/com_liferay_portlet_documentlibrary_service_spring_DLFolderService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.documentlibrary.service.spring.DLFolderService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.documentlibrary.service.spring.DLFolderService" />
+	</bean>
+	<bean name="/com_liferay_portlet_imagegallery_service_spring_IGFolderService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.imagegallery.service.spring.IGFolderService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.imagegallery.service.spring.IGFolderService" />
+	</bean>
+	<bean name="/com_liferay_portlet_imagegallery_service_spring_IGFolderService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.imagegallery.service.spring.IGFolderService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.imagegallery.service.spring.IGFolderService" />
+	</bean>
+	<bean name="/com_liferay_portlet_imagegallery_service_spring_IGFolderService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.imagegallery.service.spring.IGFolderService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.imagegallery.service.spring.IGFolderService" />
+	</bean>
+	<bean name="/com_liferay_portlet_imagegallery_service_spring_IGImageService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.imagegallery.service.spring.IGImageService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.imagegallery.service.spring.IGImageService" />
+	</bean>
+	<bean name="/com_liferay_portlet_imagegallery_service_spring_IGImageService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.imagegallery.service.spring.IGImageService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.imagegallery.service.spring.IGImageService" />
+	</bean>
+	<bean name="/com_liferay_portlet_imagegallery_service_spring_IGImageService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.imagegallery.service.spring.IGImageService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.imagegallery.service.spring.IGImageService" />
+	</bean>
+	<bean name="/com_liferay_portlet_journal_service_spring_JournalArticleService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.journal.service.spring.JournalArticleService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.journal.service.spring.JournalArticleService" />
+	</bean>
+	<bean name="/com_liferay_portlet_journal_service_spring_JournalArticleService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.journal.service.spring.JournalArticleService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.journal.service.spring.JournalArticleService" />
+	</bean>
+	<bean name="/com_liferay_portlet_journal_service_spring_JournalArticleService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.journal.service.spring.JournalArticleService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.journal.service.spring.JournalArticleService" />
+	</bean>
+	<bean name="/com_liferay_portlet_journal_service_spring_JournalStructureService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.journal.service.spring.JournalStructureService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.journal.service.spring.JournalStructureService" />
+	</bean>
+	<bean name="/com_liferay_portlet_journal_service_spring_JournalStructureService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.journal.service.spring.JournalStructureService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.journal.service.spring.JournalStructureService" />
+	</bean>
+	<bean name="/com_liferay_portlet_journal_service_spring_JournalStructureService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.journal.service.spring.JournalStructureService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.journal.service.spring.JournalStructureService" />
+	</bean>
+	<bean name="/com_liferay_portlet_journal_service_spring_JournalTemplateService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.journal.service.spring.JournalTemplateService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.journal.service.spring.JournalTemplateService" />
+	</bean>
+	<bean name="/com_liferay_portlet_journal_service_spring_JournalTemplateService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.journal.service.spring.JournalTemplateService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.journal.service.spring.JournalTemplateService" />
+	</bean>
+	<bean name="/com_liferay_portlet_journal_service_spring_JournalTemplateService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.journal.service.spring.JournalTemplateService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.journal.service.spring.JournalTemplateService" />
+	</bean>
+	<bean name="/com_liferay_portlet_mail_service_spring_MailReceiptService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.mail.service.spring.MailReceiptService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.mail.service.spring.MailReceiptService" />
+	</bean>
+	<bean name="/com_liferay_portlet_mail_service_spring_MailReceiptService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.mail.service.spring.MailReceiptService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.mail.service.spring.MailReceiptService" />
+	</bean>
+	<bean name="/com_liferay_portlet_mail_service_spring_MailReceiptService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.mail.service.spring.MailReceiptService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.mail.service.spring.MailReceiptService" />
+	</bean>
+	<bean name="/com_liferay_portlet_messageboards_service_spring_MBCategoryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.messageboards.service.spring.MBCategoryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.spring.MBCategoryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_messageboards_service_spring_MBCategoryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.messageboards.service.spring.MBCategoryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.spring.MBCategoryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_messageboards_service_spring_MBCategoryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.messageboards.service.spring.MBCategoryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.spring.MBCategoryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_messageboards_service_spring_MBMessageService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.messageboards.service.spring.MBMessageService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.spring.MBMessageService" />
+	</bean>
+	<bean name="/com_liferay_portlet_messageboards_service_spring_MBMessageService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.messageboards.service.spring.MBMessageService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.spring.MBMessageService" />
+	</bean>
+	<bean name="/com_liferay_portlet_messageboards_service_spring_MBMessageService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.messageboards.service.spring.MBMessageService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.spring.MBMessageService" />
+	</bean>
+	<bean name="/com_liferay_portlet_messageboards_service_spring_MBTopicService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.messageboards.service.spring.MBTopicService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.spring.MBTopicService" />
+	</bean>
+	<bean name="/com_liferay_portlet_messageboards_service_spring_MBTopicService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.messageboards.service.spring.MBTopicService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.spring.MBTopicService" />
+	</bean>
+	<bean name="/com_liferay_portlet_messageboards_service_spring_MBTopicService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.messageboards.service.spring.MBTopicService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.spring.MBTopicService" />
+	</bean>
+	<bean name="/com_liferay_portlet_polls_service_spring_PollsQuestionService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.polls.service.spring.PollsQuestionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.polls.service.spring.PollsQuestionService" />
+	</bean>
+	<bean name="/com_liferay_portlet_polls_service_spring_PollsQuestionService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.polls.service.spring.PollsQuestionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.polls.service.spring.PollsQuestionService" />
+	</bean>
+	<bean name="/com_liferay_portlet_polls_service_spring_PollsQuestionService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.polls.service.spring.PollsQuestionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.polls.service.spring.PollsQuestionService" />
+	</bean>
+	<bean name="/com_liferay_portlet_polls_service_spring_PollsVoteService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.polls.service.spring.PollsVoteService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.polls.service.spring.PollsVoteService" />
+	</bean>
+	<bean name="/com_liferay_portlet_polls_service_spring_PollsVoteService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.polls.service.spring.PollsVoteService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.polls.service.spring.PollsVoteService" />
+	</bean>
+	<bean name="/com_liferay_portlet_polls_service_spring_PollsVoteService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.polls.service.spring.PollsVoteService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.polls.service.spring.PollsVoteService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingCartService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingCartService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingCartService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingCartService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingCartService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingCartService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingCartService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingCartService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingCartService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingCategoryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingCategoryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingCategoryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingCategoryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingCategoryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingCategoryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingCategoryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingCategoryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingCategoryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingCouponService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingCouponService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingCouponService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingCouponService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingCouponService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingCouponService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingCouponService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingCouponService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingCouponService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingItemService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingItemService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingItemService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingItemService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingItemService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingItemService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingItemService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingItemService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingItemService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingItemFieldService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingItemFieldService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingItemFieldService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingItemPriceService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingItemPriceService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingItemPriceService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingOrderService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingOrderService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingOrderService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingOrderService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingOrderService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingOrderService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingOrderService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingOrderService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingOrderService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingOrderItemService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingOrderItemService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService" />
+	</bean>
+	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingOrderItemService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService" />
+	</bean>
+	<bean name="/com_liferay_portlet_wiki_service_spring_WikiNodeService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.wiki.service.spring.WikiNodeService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.spring.WikiNodeService" />
+	</bean>
+	<bean name="/com_liferay_portlet_wiki_service_spring_WikiNodeService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.wiki.service.spring.WikiNodeService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.spring.WikiNodeService" />
+	</bean>
+	<bean name="/com_liferay_portlet_wiki_service_spring_WikiNodeService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.wiki.service.spring.WikiNodeService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.spring.WikiNodeService" />
+	</bean>
+	<bean name="/com_liferay_portlet_wiki_service_spring_WikiPageService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.wiki.service.spring.WikiPageService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.spring.WikiPageService" />
+	</bean>
+	<bean name="/com_liferay_portlet_wiki_service_spring_WikiPageService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.wiki.service.spring.WikiPageService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.spring.WikiPageService" />
+	</bean>
+	<bean name="/com_liferay_portlet_wiki_service_spring_WikiPageService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.wiki.service.spring.WikiPageService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.spring.WikiPageService" />
+	</bean>
+</beans>

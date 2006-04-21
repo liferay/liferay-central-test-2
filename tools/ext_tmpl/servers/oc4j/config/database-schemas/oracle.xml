@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE database-schema PUBLIC "-//Evermind//- Database schema" "http://www.orionserver.com/dtds/database-schema.dtd">
+
+<database-schema name="Oracle" not-null="not null" null="null" primary-key="primary key" max-table-name-length="30">
+	<type-mapping type="java.lang.String" name="varchar2(255)" />
+	<type-mapping type="int" name="number(20,0)" />
+	<type-mapping type="long" name="number(20,0)" />
+	<type-mapping type="float" name="number(20,5)" />
+	<type-mapping type="double" name="number(30,0)" />
+	<type-mapping type="byte" name="number(10,0)" />
+	<type-mapping type="char" name="char(1)" />
+	<type-mapping type="short" name="number(10,0)" />
+	<type-mapping type="boolean" name="number(1,0)" />
+	<type-mapping type="java.util.Date" name="date" />
+	<type-mapping type="java.lang.String" name="long varchar" />
+
+	<disallowed-field name="password" />
+	<disallowed-field name="date" />
+</database-schema>

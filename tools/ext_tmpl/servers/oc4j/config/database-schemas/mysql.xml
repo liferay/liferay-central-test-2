@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE database-schema PUBLIC "-//Evermind//- Database schema" "http://www.orionserver.com/dtds/database-schema.dtd">
+
+<database-schema name="MySQL" not-null="not null" null="" primary-key="primary key">
+	<type-mapping type="java.lang.String" name="varchar(100)" />
+	<type-mapping type="int" name="integer" />
+	<type-mapping type="float" name="float" />
+	<type-mapping type="double" name="double" />
+	<type-mapping type="byte" name="smallint" />
+	<type-mapping type="char" name="char(1)" />
+	<type-mapping type="short" name="integer" />
+	<type-mapping type="boolean" name="tinyint" />
+	<type-mapping type="java.util.Date" name="datetime" />
+</database-schema>

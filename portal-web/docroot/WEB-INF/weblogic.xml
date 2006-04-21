@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE weblogic-web-app PUBLIC "-//BEA Systems, Inc.//DTD Web Application 7.0//EN" "http://www.bea.com/servers/wls700/dtd/weblogic700-web-jar.dtd">
+
+<weblogic-web-app>
+	<reference-descriptor>
+		<resource-description>
+			<res-ref-name>jdbc/LiferayPool</res-ref-name>
+			<jndi-name>jdbc/LiferayPool</jndi-name>
+		</resource-description>
+		<resource-description>
+			<res-ref-name>mail/MailSession</res-ref-name>
+			<jndi-name>mail/MailSession</jndi-name>
+		</resource-description>
+	</reference-descriptor>
+	<jsp-descriptor>
+		<jsp-param>
+			<param-name>keepgenerated</param-name>
+			<param-value>true</param-value>
+		</jsp-param>
+		<jsp-param>
+			<param-name>debug</param-name>
+			<param-value>true</param-value>
+		</jsp-param>
+	</jsp-descriptor>
+</weblogic-web-app>

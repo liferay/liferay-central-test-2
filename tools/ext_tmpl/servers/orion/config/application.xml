@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE orion-application PUBLIC "-//Evermind//DTD J2EE Application runtime 1.2//EN" "http://www.orionserver.com/dtds/orion-application.dtd">
+
+<orion-application>
+	<persistence path="../persistence" />
+
+	<library path="../lib" />
+	<library path="../applications/ext.ear" />
+
+	<principals path="./principals.xml" />
+
+	<log>
+		<file path="../log/global-application.log" />
+	</log>
+
+	<data-sources path="data-sources.xml" />
+
+	<namespace-access>
+		<read-access>
+			<namespace-resource root="">
+				<security-role-mapping>
+					<group name="administrators" />
+				</security-role-mapping>
+			</namespace-resource>
+		</read-access>
+		<write-access>
+			<namespace-resource root="">
+				<security-role-mapping>
+					<group name="administrators" />
+				</security-role-mapping>
+			</namespace-resource>
+		</write-access>
+	</namespace-access>
+</orion-application>
