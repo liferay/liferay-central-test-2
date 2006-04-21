@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE pramati-j2ee-server PUBLIC "-//Pramati Technologies //DTD Pramati J2ee Server 3.5 SP5//EN" "http://www.pramati.com/dtd/pramati-j2ee-server_3_5.dtd">
+
+<pramati-j2ee-server>
+	<vhost-name>default</vhost-name>
+	<auto-start>TRUE</auto-start>
+	<realm-name />
+	<ejb-module>
+		<name>lock-ejb.jar</name>
+		<ejb>
+			<name>com_liferay_lock_service_ejb_LockServiceEJB</name>
+			<max-pool-size>40</max-pool-size>
+			<min-pool-size>20</min-pool-size>
+			<enable-freepool>false</enable-freepool>
+			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
+			<low-activity-interval>20</low-activity-interval>
+			<is-secure>false</is-secure>
+			<is-clustered>true</is-clustered>
+			<jndi-name>com_liferay_lock_service_ejb_LockServiceEJB</jndi-name>
+			<local-jndi-name>com_liferay_lock_service_ejb_LockServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+		</ejb>
+	</ejb-module>
+</pramati-j2ee-server>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<project name="layouttpl" basedir="." default="deploy">
+	<import file="../build-common.xml" />
+
+	<property name="deploy.dir" value="${app.server.ear}" />
+
+	<target name="war">
+		<delete>
+			<fileset dir="." includes="**/Thumbs.db" />
+		</delete>
+
+		<war
+			basedir="sample_pack_01_layouttpl.war"
+			destfile="../sample_pack_01_layouttpl.war"
+			excludes="WEB-INF/web.xml"
+			webxml="sample_pack_01_layouttpl.war/WEB-INF/web.xml"
+		/>
+	</target>
+
+	<target name="deploy">
+		<java
+			classname="com.liferay.portal.tools.LayoutTemplateDeployer"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true">
+
+				<!-- Required Arguments -->
+
+				<jvmarg value="-Ddeployer.base.dir=./" />
+				<jvmarg value="-Ddeployer.dest.dir=${deploy.dir}" />
+				<jvmarg value="-Ddeployer.app.server.type=orion" />
+
+				<!-- Dependent Libraries -->
+
+				<arg value="${project.dir}/util-java/util-java.jar" />
+		</java>
+	</target>
+</project>

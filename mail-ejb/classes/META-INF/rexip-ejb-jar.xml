@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<rexip-ejb-jar>
+	<enterprise-beans>
+		<session>
+			<ejb-name>com_liferay_mail_service_ejb_MailServiceEJB</ejb-name>
+			<jndi-name>com_liferay_mail_service_ejb_MailServiceEJB</jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<mail-size>20</mail-size>
+		</session>
+	</enterprise-beans>
+</rexip-ejb-jar>

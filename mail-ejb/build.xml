@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<project name="mail-ejb" basedir="." default="compile">
+	<import file="../build-common-ejb.xml" />
+
+	<property name="deploy.dir" value="${app.server.ear}" />
+	<property name="jar.file" value="${ant.project.name}.jar" />
+</project>

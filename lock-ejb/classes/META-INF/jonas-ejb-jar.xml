@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!DOCTYPE jonas-ejb-jar PUBLIC "-//ObjectWeb//DTD JOnAS 3.2//EN" "http://www.objectweb.org/jonas/dtds/jonas-ejb-jar_3_2.dtd">
+
+<jonas-ejb-jar>
+	<jonas-session>
+		<ejb-name>com_liferay_lock_service_ejb_LockServiceEJB</ejb-name>
+		<jndi-name>com_liferay_lock_service_ejb_LockServiceEJB</jndi-name>
+	</jonas-session>
+</jonas-ejb-jar>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="com.liferay.mail.service.jms.MailQCF" class="org.activemq.pool.PooledConnectionFactory">
+		<property name="connectionFactory">
+			<bean class="org.activemq.ActiveMQConnectionFactory">
+				<property name="brokerURL">
+					<value>vm://localhost</value>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean name="com.liferay.mail.service.jms.MailQueue" class="org.activemq.message.ActiveMQQueue" autowire="constructor">
+		<constructor-arg>
+			<value>com.liferay.mail.service.jms.MailQueue</value>
+		</constructor-arg>
+	</bean>
+</beans>

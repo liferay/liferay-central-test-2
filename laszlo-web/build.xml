@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<project name="laszlo-web" basedir="." default="war">
+	<import file="../build-common-web.xml" />
+
+	<property name="deploy.dir" value="${app.server.ear}" />
+	<property name="lps.file" value="lps-3.1.war" />
+	<property name="war.file" value="${ant.project.name}.war" />
+
+	<target name="clean" depends="build-common-web.clean">
+		<delete dir="${tmp.dir}" />
+	</target>
+
+	<target name="merge">
+		<if>
+			<not>
+				<uptodate srcfile="${lps.file}" targetfile="${tmp.dir}" />
+			</not>
+			<then>
+				<delete dir="${tmp.dir}" />
+				<mkdir dir="${tmp.dir}" />
+
+				<unjar
+					dest="${tmp.dir}"
+					src="${lps.file}"
+				/>
+
+				<copy todir="${tmp.dir}" overwrite="true">
+					<fileset dir="${web.dir}" />
+				</copy>
+			</then>
+		</if>
+
+		<copy todir="${tmp.dir}" overwrite="false">
+			<fileset dir="${web.dir}" />
+		</copy>
+	</target>
+
+	<target name="war" depends="merge">
+		<war
+			basedir="${tmp.dir}"
+			destfile="${war.file}"
+			excludes="WEB-INF/web.xml"
+			webxml="${web.dir}/WEB-INF/web.xml"
+		/>
+	</target>
+</project>
