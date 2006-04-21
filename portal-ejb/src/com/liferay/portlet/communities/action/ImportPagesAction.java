@@ -27,6 +27,7 @@ import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
+import com.liferay.util.servlet.SessionMessages;
 import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
@@ -62,6 +63,8 @@ public class ImportPagesAction extends EditPagesAction {
 
 			LayoutLocalServiceUtil.importLayouts(
 				req.getRemoteUser(), ownerId, file);
+
+			SessionMessages.add(req, "request_processed");
 		}
 		catch (Exception e) {
 			_log.error(e);
