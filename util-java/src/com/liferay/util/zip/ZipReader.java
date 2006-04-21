@@ -22,64 +22,77 @@
 
 package com.liferay.util.zip;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
 
+import java.util.HashMap;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
+import java.util.zip.ZipInputStream;
 
 /**
- * <a href="ZipCollection.java.html"><b><i>View Source</i></b></a>
+ * <a href="ZipReader.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
+ * @author  Alexander Chow
  *
  */
-public class ZipCollection implements Serializable {
+public class ZipReader implements Serializable {
 
-	public ZipCollection() {
-		_baos = new ByteArrayOutputStream();
-		_zos = new ZipOutputStream(new BufferedOutputStream(_baos));
+	public ZipReader(File file) throws Exception {
+		_zis = new ZipInputStream(new FileInputStream(file));
 	}
 
-	public void addEntry(String name, StringBuffer sb) throws IOException {
-		addEntry(name, sb.toString());
+	public ZipReader(InputStream stream) {
+		_zis = new ZipInputStream(stream);
 	}
 
-	public void addEntry(String name, String s) throws IOException {
-		addEntry(name, s.getBytes());
-	}
+	public String getEntryAsString(String name) throws Exception {
+		byte[] byteArray = getEntryAsByteArray(name);
 
-	public void addEntry(String name, byte[] byteArray) throws IOException {
-		ZipEntry entry = new ZipEntry(name);
-
-		_zos.putNextEntry(entry);
-
-		BufferedInputStream bis = new BufferedInputStream(
-			new ByteArrayInputStream(byteArray), _BUFFER);
-
-		int count;
-
-		while ((count = bis.read(_data, 0, _BUFFER)) != -1) {
-			_zos.write(_data, 0, count);
+		if (byteArray != null) {
+			return new String(byteArray);
 		}
 
-		bis.close();
+		return null;
 	}
 
-	public byte[] finish() throws IOException {
-		_zos.close();
+	public byte[] getEntryAsByteArray(String name) throws Exception {
+		if (_entries.containsKey(name)) {
+			return (byte[])_entries.get(name);
+		}
+		else {
+			ZipEntry entry = null;
 
-		return _baos.toByteArray();
+			while ((entry = _zis.getNextEntry()) != null) {
+				String currentName = entry.getName();
+
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+				int count;
+
+				while ((count = _zis.read(_data, 0, _BUFFER)) != -1) {
+					baos.write(_data, 0, count);
+				}
+
+				byte[] byteArray = baos.toByteArray();
+
+				_entries.put(currentName, byteArray);
+
+				if (currentName.equals(name)) {
+					return byteArray;
+				}
+			}
+		}
+
+		return null;
 	}
 
 	private static final int _BUFFER = 2048;
 
-	private ByteArrayOutputStream _baos;
-	private ZipOutputStream _zos;
+	private ZipInputStream _zis;
+	private HashMap _entries = new HashMap();
 	private byte[] _data = new byte[_BUFFER];
 
 }

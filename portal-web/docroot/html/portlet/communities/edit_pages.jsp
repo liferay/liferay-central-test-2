@@ -94,6 +94,11 @@ portletURL.setParameter("groupId", groupId);
 		submitForm(document.<portlet:namespace />fm);
 	}
 
+	function <portlet:namespace />importPages() {
+		document.<portlet:namespace />fm.encoding = "multipart/form-data";
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/import_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>");
+	}
+
 	function <portlet:namespace />updateDisplayOrder() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "display_order";
 		document.<portlet:namespace />fm.<portlet:namespace />layoutIds.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);
@@ -193,7 +198,7 @@ portletURL.setParameter("groupId", groupId);
 		<br><br>
 
 		<%
-		String tabs3Names = "page,children,look-and-feel";
+		String tabs3Names = "page,children,look-and-feel,import-export";
 
 		if ((selLayout != null) && !PortalUtil.isLayoutParentable(selLayout)) {
 			tabs3Names = StringUtil.replace(tabs3Names, "children,", StringPool.BLANK);
@@ -669,7 +674,7 @@ portletURL.setParameter("groupId", groupId);
 					<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-display-order") %>' onClick="<portlet:namespace />updateDisplayOrder();">
 				</c:if>
 			</c:when>
-			<c:otherwise>
+			<c:when test='<%= tabs3.equals("look-and-feel") %>'>
 
 				<%
 				Theme selTheme = theme;
@@ -795,6 +800,29 @@ portletURL.setParameter("groupId", groupId);
 					</td>
 				</tr>
 				</table>
+			</c:when>
+			<c:otherwise>
+				<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
+
+				<c:if test="<%= !layout.getOwnerId().equals(ownerId) %>">
+					<%= LanguageUtil.get(pageContext, "import-a-lar-file-to-overwrite-the-current-pages-and-preferences") %>
+
+					<br><br>
+
+					<input class="form-text" name="<portlet:namespace />importFileName" size="50" type="file">
+
+					<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "import") %>' onClick="<portlet:namespace />importPages();">
+
+					<br><br>
+				</c:if>
+
+				<%= LanguageUtil.get(pageContext, "export-the-current-pages-and-preferences-to-the-given-lar-file-name") %>
+
+				<br><br>
+
+				<input class="form-text" name="<portlet:namespace />exportFileName" size="50" type="text" value="lar-<%= Time.getShortTimestamp() %>.zip">
+
+				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "export") %>' onClick="self.location = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>&<portlet:namespace />exportFileName=' + document.<portlet:namespace />fm.<portlet:namespace />exportFileName.value;">
 			</c:otherwise>
 		</c:choose>
 	</td>

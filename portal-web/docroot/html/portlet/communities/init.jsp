@@ -28,6 +28,7 @@
 --%><%@ page import="com.liferay.portal.GroupNameException" %><%--
 --%><%@ page import="com.liferay.portal.LayoutFriendlyURLException" %><%--
 --%><%@ page import="com.liferay.portal.LayoutHiddenException" %><%--
+--%><%@ page import="com.liferay.portal.LayoutImportException" %><%--
 --%><%@ page import="com.liferay.portal.LayoutNameException" %><%--
 --%><%@ page import="com.liferay.portal.LayoutParentLayoutIdException" %><%--
 --%><%@ page import="com.liferay.portal.LayoutTypeException" %><%--

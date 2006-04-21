@@ -109,6 +109,25 @@ public class LayoutLocalServiceUtil {
 		}
 	}
 
+	public static byte[] exportLayouts(java.lang.String ownerId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+			return layoutLocalService.exportLayouts(ownerId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static com.liferay.portal.model.Layout getFriendlyURLLayout(
 		java.lang.String ownerId, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
@@ -171,6 +190,25 @@ public class LayoutLocalServiceUtil {
 			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
 			return layoutLocalService.getLayouts(ownerId, parentLayoutId);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static void importLayouts(java.lang.String userId,
+		java.lang.String ownerId, java.io.File file)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+			layoutLocalService.importLayouts(userId, ownerId, file);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;

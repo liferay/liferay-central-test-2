@@ -36,6 +36,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -82,6 +83,10 @@ public class PortletPreferencesLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return PortletPreferencesUtil.findByPrimaryKey(pk);
+	}
+
+	public List getPortletPreferences(String ownerId) throws SystemException {
+		return PortletPreferencesUtil.findByOwnerId(ownerId);
 	}
 
 	public javax.portlet.PortletPreferences getPreferences(

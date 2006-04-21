@@ -51,6 +51,8 @@ public class Time {
 
 	public static final String TIMESTAMP_FORMAT = "yyyyMMddkkmmssSSS";
 
+	public static final String SHORT_TIMESTAMP_FORMAT = "yyyyMMddkkmm";
+
 	public static Date getDate(Calendar cal) {
 		Calendar adjustedCal = new GregorianCalendar();
 		adjustedCal.set(Calendar.YEAR, cal.get(Calendar.YEAR));
@@ -129,6 +131,16 @@ public class Time {
 		}
 
 		return s;
+	}
+
+	public static String getShortTimestamp() {
+		return getShortTimestamp(new Date());
+	}
+
+	public static String getShortTimestamp(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat(SHORT_TIMESTAMP_FORMAT);
+
+		return sdf.format(date);
 	}
 
 	public static String getTimestamp() {

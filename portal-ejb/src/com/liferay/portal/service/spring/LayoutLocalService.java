@@ -49,6 +49,10 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public byte[] exportLayouts(java.lang.String ownerId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Layout getFriendlyURLLayout(
 		java.lang.String ownerId, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
@@ -65,6 +69,11 @@ public interface LayoutLocalService {
 	public java.util.List getLayouts(java.lang.String ownerId,
 		java.lang.String parentLayoutId)
 		throws com.liferay.portal.SystemException;
+
+	public void importLayouts(java.lang.String userId,
+		java.lang.String ownerId, java.io.File file)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
 
 	public void setLayouts(java.lang.String ownerId,
 		java.lang.String parentLayoutId, java.lang.String[] layoutIds)

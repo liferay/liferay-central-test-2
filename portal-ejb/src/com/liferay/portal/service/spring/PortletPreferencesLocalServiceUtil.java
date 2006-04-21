@@ -99,6 +99,21 @@ public class PortletPreferencesLocalServiceUtil {
 		}
 	}
 
+	public static java.util.List getPortletPreferences(java.lang.String ownerId)
+		throws com.liferay.portal.SystemException {
+		try {
+			PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
+			return portletPreferencesLocalService.getPortletPreferences(ownerId);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static javax.portlet.PortletPreferences getPreferences(
 		java.lang.String companyId,
 		com.liferay.portal.service.persistence.PortletPreferencesPK pk)

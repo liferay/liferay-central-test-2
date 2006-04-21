@@ -57,7 +57,7 @@ import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.ServletResponseUtil;
-import com.liferay.util.zip.ZipCollection;
+import com.liferay.util.zip.ZipWriter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -103,20 +103,20 @@ public class ExportAction extends Action {
 				String cmsGroupId = ParamUtil.getString(
 					req, "cmsGroupId", DEFAULT_CMS_GROUP_ID);
 
-				ZipCollection zipCol = new ZipCollection();
+				ZipWriter zipWriter = new ZipWriter();
 
 				List journalContentSearches = new ArrayList();
 
 				insertDataCMSLayout(
-					siteGroupId, zipCol, journalContentSearches);
+					siteGroupId, zipWriter, journalContentSearches);
 				insertDataCMSContent(
-					cmsGroupId, zipCol, journalContentSearches);
-				insertDataImage(zipCol);
-				//insertDataShopping(zipCol);
+					cmsGroupId, zipWriter, journalContentSearches);
+				insertDataImage(zipWriter);
+				//insertDataShopping(zipWriter);
 
 				String fileName = "journal.zip";
 
-				ServletResponseUtil.sendFile(res, fileName, zipCol.finish());
+				ServletResponseUtil.sendFile(res, fileName, zipWriter.finish());
 			}
 
 			return null;
@@ -171,8 +171,7 @@ public class ExportAction extends Action {
 	}
 
 	protected void insertDataCMSContent(
-			String cmsGroupId, ZipCollection zipCol,
-			List journalContentSearches)
+			String cmsGroupId, ZipWriter zipWriter, List journalContentSearches)
 		throws Exception {
 
 		StringBuffer sb = new StringBuffer();
@@ -351,12 +350,11 @@ public class ExportAction extends Action {
 
 		removeTrailingNewLine(sb);
 
-		zipCol.addEntry("portal-data-cms-content.sql", sb);
+		zipWriter.addEntry("portal-data-cms-content.sql", sb);
 	}
 
 	protected void insertDataCMSLayout(
-			String siteGroupId, ZipCollection zipCol,
-			List journalContentSearches)
+			String siteGroupId, ZipWriter zipWriter, List journalContentSearches)
 		throws Exception {
 
 		StringBuffer sb = new StringBuffer();
@@ -471,10 +469,10 @@ public class ExportAction extends Action {
 		removeTrailingNewLine(sb);
 		removeTrailingNewLine(sb);
 
-		zipCol.addEntry("portal-data-cms-layout.sql", sb);
+		zipWriter.addEntry("portal-data-cms-layout.sql", sb);
 	}
 
-	protected void insertDataImage(ZipCollection zipCol) throws Exception {
+	protected void insertDataImage(ZipWriter zipWriter) throws Exception {
 		StringBuffer sb = new StringBuffer();
 
 		Iterator itr = ImageServiceUtil.getImageById(
@@ -507,10 +505,10 @@ public class ExportAction extends Action {
 
 		removeTrailingNewLine(sb);
 
-		zipCol.addEntry("portal-data-image.sql", sb);
+		zipWriter.addEntry("portal-data-image.sql", sb);
 	}
 
-	protected void insertDataShopping(ZipCollection zipCol) throws Exception {
+	protected void insertDataShopping(ZipWriter zipWriter) throws Exception {
 		StringBuffer sb = new StringBuffer();
 
 		Iterator itr = ShoppingCategoryServiceUtil.getCategories(
@@ -586,7 +584,7 @@ public class ExportAction extends Action {
 
 		removeTrailingNewLine(sb);
 
-		zipCol.addEntry("portal-data-shopping.sql", sb);
+		zipWriter.addEntry("portal-data-shopping.sql", sb);
 	}
 
 	protected void removeTrailingComma(StringBuffer sb) {

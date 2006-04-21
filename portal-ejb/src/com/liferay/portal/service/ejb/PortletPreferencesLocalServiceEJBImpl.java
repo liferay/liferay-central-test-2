@@ -73,6 +73,11 @@ public class PortletPreferencesLocalServiceEJBImpl
 		return getService().getPortletPreferences(pk);
 	}
 
+	public java.util.List getPortletPreferences(java.lang.String ownerId)
+		throws com.liferay.portal.SystemException {
+		return getService().getPortletPreferences(ownerId);
+	}
+
 	public javax.portlet.PortletPreferences getPreferences(
 		java.lang.String companyId,
 		com.liferay.portal.service.persistence.PortletPreferencesPK pk)

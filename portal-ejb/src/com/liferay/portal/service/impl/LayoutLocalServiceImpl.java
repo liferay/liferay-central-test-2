@@ -24,6 +24,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.LayoutHiddenException;
+import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.LayoutNameException;
 import com.liferay.portal.LayoutParentLayoutIdException;
 import com.liferay.portal.LayoutTypeException;
@@ -32,24 +33,43 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.LayoutPK;
 import com.liferay.portal.service.persistence.LayoutUtil;
+import com.liferay.portal.service.persistence.PortletPreferencesPK;
+import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.LayoutLocalService;
 import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceUtil;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.StringPool;
+import com.liferay.util.Time;
 import com.liferay.util.Validator;
+import com.liferay.util.xml.XMLFormatter;
+import com.liferay.util.zip.ZipReader;
+import com.liferay.util.zip.ZipWriter;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
 /**
  * <a href="LayoutLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -166,6 +186,73 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		LayoutSetLocalServiceUtil.updatePageCount(ownerId);
 	}
 
+	public byte[] exportLayouts(String ownerId)
+		throws PortalException, SystemException {
+
+		ZipWriter zipWriter = new ZipWriter();
+
+		int buildNumber = ReleaseInfo.getBuildNumber();
+
+		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
+
+		Document doc = DocumentHelper.createDocument();
+
+		Element root = doc.addElement("root");
+
+		Element header = root.addElement("header");
+
+		header.addAttribute("buildNumber", Integer.toString(buildNumber));
+		header.addAttribute("ownerId", ownerId);
+		header.addAttribute("exportDate", Time.getRFC822());
+		header.addAttribute("themeId", layoutSet.getThemeId());
+		header.addAttribute("colorSchemeId", layoutSet.getColorSchemeId());
+
+		Iterator itr = getLayouts(ownerId).iterator();
+
+		while (itr.hasNext()) {
+			Layout layout = (Layout)itr.next();
+
+			Element el = root.addElement("layout");
+
+			el.addAttribute("layoutId", layout.getLayoutId());
+			el.addElement("parentLayoutId").addText(layout.getParentLayoutId());
+			el.addElement("name").addCDATA(layout.getName());
+			el.addElement("type").addText(layout.getType());
+			el.addElement("typeSettings").addCDATA(layout.getTypeSettings());
+			el.addElement("hidden").addText(
+				Boolean.toString(layout.getHidden()));
+			el.addElement("friendlyURL").addText(layout.getFriendlyURL());
+			el.addElement("themeId").addText(layout.getThemeId());
+			el.addElement("colorSchemeId").addText(layout.getColorSchemeId());
+			el.addElement("priority").addText(
+				Integer.toString(layout.getPriority()));
+		}
+
+		itr = PortletPreferencesLocalServiceUtil.getPortletPreferences(
+			ownerId).iterator();
+
+		while (itr.hasNext()) {
+			PortletPreferences prefs = (PortletPreferences)itr.next();
+
+			Element el = root.addElement("portletPreferences");
+
+			el.addAttribute("portletId", prefs.getPortletId());
+			el.addAttribute("layoutId", prefs.getLayoutId());
+			el.addElement("preferences").addCDATA(prefs.getPreferences());
+		}
+
+		String fileName = "layouts.xml";
+
+		try {
+			zipWriter.addEntry(fileName, XMLFormatter.toString(doc));
+
+			return zipWriter.finish();
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+	}
+
 	public Layout getFriendlyURLLayout(String ownerId, String friendlyURL)
 		throws PortalException, SystemException {
 
@@ -190,6 +277,121 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		throws SystemException {
 
 		return LayoutUtil.findByO_P(ownerId, parentLayoutId);
+	}
+
+	public void importLayouts(String userId, String ownerId, File file)
+		throws PortalException, SystemException {
+
+		try {
+
+			// Grab XML file
+
+			ZipReader zipReader = new ZipReader(file);
+
+			String xml = zipReader.getEntryAsString("layouts.xml");
+
+			SAXReader reader = new SAXReader();
+
+			Document doc = reader.read(new StringReader(xml));
+
+			Element root = doc.getRootElement();
+
+			// Check build compatibility
+
+			Element header = (Element)root.element("header");
+
+			int buildNumber = ReleaseInfo.getBuildNumber();
+
+			int importBuildNumber = GetterUtil.getInteger(
+				header.attributeValue("buildNumber"));
+
+			if (buildNumber != importBuildNumber) {
+				throw new LayoutImportException();
+			}
+
+			// Update look and feel
+
+			String themeId = header.attributeValue("themeId");
+			String colorSchemeId = header.attributeValue("colorSchemeId");
+
+			LayoutSetLocalServiceUtil.updateLookAndFeel(
+				ownerId, themeId, colorSchemeId);
+
+			// Update layouts
+
+			User user = UserUtil.findByPrimaryKey(userId);
+
+			deleteLayouts(ownerId);
+
+			Iterator itr = root.elements("layout").iterator();
+
+			while (itr.hasNext()) {
+				Element el = (Element)itr.next();
+
+				String layoutId = el.attributeValue("layoutId");
+				String parentLayoutId = el.elementText("parentLayoutId");
+				String name = el.elementText("name");
+				String type = el.elementText("type");
+				String typeSettings = el.elementText("typeSettings");
+				boolean hidden = Boolean.getBoolean(el.elementText("hidden"));
+				String friendlyURL = el.elementText("friendlyURL");
+				themeId = el.elementText("themeId");
+				colorSchemeId = el.elementText("colorSchemeId");
+				int priority = Integer.parseInt(el.elementText("priority"));
+
+				Layout layout = LayoutUtil.create(
+					new LayoutPK(layoutId, ownerId));
+
+				layout.setCompanyId(user.getActualCompanyId());
+				layout.setParentLayoutId(parentLayoutId);
+				layout.setName(name);
+				layout.setType(type);
+				layout.setTypeSettings(typeSettings);
+				layout.setHidden(hidden);
+				layout.setFriendlyURL(friendlyURL);
+				layout.setThemeId(themeId);
+				layout.setColorSchemeId(colorSchemeId);
+				layout.setPriority(priority);
+
+				LayoutUtil.update(layout);
+			}
+
+			// Update portlet preferences
+
+			PortletPreferencesUtil.removeByOwnerId(ownerId);
+
+			itr = root.elements("portletPreferences").iterator();
+
+			while (itr.hasNext()) {
+				Element el = (Element)itr.next();
+
+				String portletId = el.attributeValue("portletId");
+				String layoutId = el.attributeValue("layoutId");
+				String preferences = el.elementText("preferences");
+
+				PortletPreferences prefs = PortletPreferencesUtil.create(
+					new PortletPreferencesPK(portletId, layoutId, ownerId));
+
+				prefs.setPreferences(preferences);
+
+				PortletPreferencesUtil.update(prefs);
+			}
+
+			// Update page count
+
+			LayoutSetLocalServiceUtil.updatePageCount(ownerId);
+		}
+		catch (Exception e) {
+			if (e instanceof LayoutImportException) {
+				throw (LayoutImportException)e;
+			}
+			else if (e instanceof SystemException) {
+				throw (SystemException)e;
+			}
+			else {
+				throw new SystemException(e);
+			}
+		}
 	}
 
 	public void setLayouts(

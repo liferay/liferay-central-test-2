@@ -77,6 +77,12 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 		getService().deleteLayouts(ownerId);
 	}
 
+	public byte[] exportLayouts(java.lang.String ownerId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().exportLayouts(ownerId);
+	}
+
 	public com.liferay.portal.model.Layout getFriendlyURLLayout(
 		java.lang.String ownerId, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
@@ -100,6 +106,13 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 		java.lang.String parentLayoutId)
 		throws com.liferay.portal.SystemException {
 		return getService().getLayouts(ownerId, parentLayoutId);
+	}
+
+	public void importLayouts(java.lang.String userId,
+		java.lang.String ownerId, java.io.File file)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().importLayouts(userId, ownerId, file);
 	}
 
 	public void setLayouts(java.lang.String ownerId,

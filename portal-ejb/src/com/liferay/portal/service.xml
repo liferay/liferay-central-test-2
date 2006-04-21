@@ -1104,6 +1104,7 @@
 		<exception>EmailAddress</exception>
 		<exception>LayoutFriendlyURL</exception>
 		<exception>LayoutHidden</exception>
+		<exception>LayoutImport</exception>
 		<exception>LayoutName</exception>
 		<exception>LayoutParentLayoutId</exception>
 		<exception>LayoutType</exception>
