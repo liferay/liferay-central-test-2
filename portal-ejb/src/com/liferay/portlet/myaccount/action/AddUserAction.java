@@ -1,0 +1,231 @@
+/**
+ * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portlet.myaccount.action;
+
+import com.liferay.portal.CaptchaException;
+import com.liferay.portal.ContactFirstNameException;
+import com.liferay.portal.ContactLastNameException;
+import com.liferay.portal.DuplicateUserEmailAddressException;
+import com.liferay.portal.NoSuchOrganizationException;
+import com.liferay.portal.OrganizationParentException;
+import com.liferay.portal.RequiredUserException;
+import com.liferay.portal.ReservedUserEmailAddressException;
+import com.liferay.portal.UserEmailAddressException;
+import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.UserSmsException;
+import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.spring.UserServiceUtil;
+import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.ParamUtil;
+import com.liferay.util.StringPool;
+import com.liferay.util.servlet.SessionErrors;
+import com.liferay.util.servlet.SessionMessages;
+
+import com.octo.captcha.Captcha;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletSession;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+/**
+ * <a href="AddUserAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class AddUserAction extends PortletAction {
+
+	public void processAction(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionRequest req, ActionResponse res)
+		throws Exception {
+
+		try {
+			addUser(req, res);
+		}
+		catch (Exception e) {
+			if (e != null &&
+				e instanceof CaptchaException ||
+				e instanceof ContactFirstNameException ||
+				e instanceof ContactLastNameException ||
+				e instanceof DuplicateUserEmailAddressException ||
+				e instanceof NoSuchOrganizationException ||
+				e instanceof OrganizationParentException ||
+				e instanceof RequiredUserException ||
+				e instanceof ReservedUserEmailAddressException ||
+				e instanceof UserEmailAddressException ||
+				e instanceof UserPasswordException ||
+				e instanceof UserSmsException) {
+
+				SessionErrors.add(req, e.getClass().getName(), e);
+			}
+			else {
+				throw e;
+			}
+		}
+	}
+
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			RenderRequest req, RenderResponse res)
+		throws Exception {
+
+		Company company = PortalUtil.getCompany(req);
+
+		if (!company.isStrangers()) {
+			throw new PrincipalException();
+		}
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		User user = themeDisplay.getUser();
+
+		res.setTitle(LanguageUtil.get(user, "create-account"));
+
+		return mapping.findForward("portlet.my_account.create_account");
+	}
+
+	protected void addUser(ActionRequest req, ActionResponse res)
+		throws Exception {
+
+		PortletSession ses = req.getPortletSession();
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		Company company = themeDisplay.getCompany();
+
+		boolean autoUserId = true;
+		String userId = StringPool.BLANK;
+
+		if (company.getAuthType().equals(Company.AUTH_TYPE_ID)) {
+			autoUserId = false;
+			userId = ParamUtil.getString(req, "userId");
+		}
+
+		boolean autoPassword = true;
+		String password1 = null;
+		String password2 = null;
+		boolean passwordReset = true;
+		String emailAddress = ParamUtil.getString(req, "emailAddress");
+		String firstName = ParamUtil.getString(req, "firstName");
+		String middleName = ParamUtil.getString(req, "middleName");
+		String lastName = ParamUtil.getString(req, "lastName");
+		String nickName = ParamUtil.getString(req, "nickName");
+		String prefixId = ParamUtil.getString(req, "prefixId");
+		String suffixId = ParamUtil.getString(req, "suffixId");
+		boolean male = ParamUtil.get(req, "male", true);
+		int birthdayMonth = ParamUtil.getInteger(req, "birthdayMonth");
+		int birthdayDay = ParamUtil.getInteger(req, "birthdayDay");
+		int birthdayYear = ParamUtil.getInteger(req, "birthdayYear");
+		String jobTitle = ParamUtil.getString(req, "jobTitle");
+		String organizationId = ParamUtil.getString(req, "organizationId");
+		String locationId = ParamUtil.getString(req, "locationId");
+
+		Captcha captcha = null;
+
+		if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.CAPTCHA_CHALLENGE))) {
+			captcha = (Captcha)ses.getAttribute(
+				WebKeys.CAPTCHA, PortletSession.APPLICATION_SCOPE);
+
+			// Captcha should never be null, but on the rare occasion it is,
+			// just let people register.
+
+			if (captcha != null) {
+				Boolean validResponse = captcha.validateResponse(
+					ParamUtil.getString(req, "captcha"));
+
+				if ((validResponse == null) ||
+					(validResponse.equals(Boolean.FALSE))) {
+
+					ses.removeAttribute(
+						WebKeys.CAPTCHA, PortletSession.APPLICATION_SCOPE);
+
+					throw new CaptchaException();
+				}
+			}
+			else {
+				_log.error("Captcha is null");
+			}
+		}
+
+		User user = UserServiceUtil.addUser(
+			company.getCompanyId(), autoUserId, userId, autoPassword,
+			password1, password2, passwordReset, emailAddress,
+			themeDisplay.getLocale(), firstName, middleName, lastName,
+			nickName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
+			birthdayYear, jobTitle, organizationId, locationId);
+
+		if (captcha != null) {
+			captcha.disposeChallenge();
+
+			ses.removeAttribute(
+				WebKeys.CAPTCHA, PortletSession.APPLICATION_SCOPE);
+		}
+
+		// Session messages
+
+		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
+
+		HttpServletRequest httpReq = reqImpl.getHttpServletRequest();
+
+		SessionMessages.add(httpReq, "user_added", user.getEmailAddress());
+
+		// Send redirect
+
+		String redirect = themeDisplay.getPathMain() + "/portal/login?login=";
+
+		if (company.getAuthType().equals(Company.AUTH_TYPE_ID)) {
+			redirect += user.getUserId();
+		}
+		else {
+			redirect += user.getEmailAddress();
+		}
+
+		res.sendRedirect(redirect);
+	}
+
+	private static Log _log = LogFactory.getLog(AddUserAction.class);
+
+}

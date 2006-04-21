@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">  
+	<service name="Portlet_Message_Boards_MBTopicService" provider="java:RPC" style="rpc" use="encoded"> 
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.messageboards.portlet.liferay.com"/>  
+		<parameter name="wsdlServiceElement" value="MBTopicServiceSoapService"/>  
+		<parameter name="schemaUnqualified" value="http://model.messageboards.portlet.liferay.com,http://model.portal.liferay.com"/>  
+		<parameter name="wsdlServicePort" value="Portlet_Message_Boards_MBTopicService"/>  
+		<parameter name="className" value="com.liferay.portlet.messageboards.service.http.MBTopicServiceSoap"/>  
+		<parameter name="wsdlPortType" value="MBTopicServiceSoap"/>  
+		<parameter name="typeMappingVersion" value="1.2"/>  
+		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="addTopic" qname="operNS:addTopic" returnQName="addTopicReturn" returnType="rtns:MBTopicModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="categoryId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" name="deleteTopic" qname="operNS:deleteTopic" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="topicId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="getTopic" qname="operNS:getTopic" returnQName="getTopicReturn" returnType="rtns:MBTopicModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="topicId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="updateTopic" qname="operNS:updateTopic" returnQName="updateTopicReturn" returnType="rtns:MBTopicModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="topicId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="categoryId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter> 
+		</operation>  
+		<parameter name="allowedMethods" value="deleteTopic addTopic getTopic updateTopic"/>  
+		<typeMapping xmlns:ns="http://model.messageboards.portlet.liferay.com" qname="ns:MBTopicModel" type="java:com.liferay.portlet.messageboards.model.MBTopicModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>  
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:BaseModel" type="java:com.liferay.portal.model.BaseModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping> 
+	</service> 
+</deployment>

@@ -1,0 +1,363 @@
+/**
+ * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portlet.enterpriseadmin.action;
+
+import com.liferay.portal.ContactFirstNameException;
+import com.liferay.portal.ContactLastNameException;
+import com.liferay.portal.DuplicateUserEmailAddressException;
+import com.liferay.portal.NoSuchOrganizationException;
+import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.OrganizationParentException;
+import com.liferay.portal.RequiredUserException;
+import com.liferay.portal.ReservedUserEmailAddressException;
+import com.liferay.portal.UserEmailAddressException;
+import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.UserSmsException;
+import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.spring.UserServiceUtil;
+import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.CachePortlet;
+import com.liferay.portlet.admin.util.AdminUtil;
+import com.liferay.util.ParamUtil;
+import com.liferay.util.StringPool;
+import com.liferay.util.StringUtil;
+import com.liferay.util.servlet.SessionErrors;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletSession;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts.Globals;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+/**
+ * <a href="EditUserAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class EditUserAction extends PortletAction {
+
+	public void processAction(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionRequest req, ActionResponse res)
+		throws Exception {
+
+		String cmd = ParamUtil.getString(req, Constants.CMD);
+
+		try {
+			User user = null;
+
+			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
+				user = updateUser(req);
+			}
+			else if (cmd.equals("comments")) {
+				user = updateComments(req);
+			}
+			else if (cmd.equals(Constants.DEACTIVATE) ||
+					 cmd.equals(Constants.DELETE) ||
+					 cmd.equals(Constants.RESTORE)) {
+
+				deleteUsers(req);
+			}
+			else if (cmd.equals("deleteRole")) {
+				deleteRole(req);
+			}
+			else if (cmd.equals("display")) {
+				user = updateDisplay(req);
+			}
+			else if (cmd.equals("im")) {
+				user = updateIm(req);
+			}
+			else if (cmd.equals("password")) {
+				user = updatePassword(req);
+			}
+			else if (cmd.equals("sms")) {
+				user = updateSms(req);
+			}
+
+			String redirect = null;
+
+			if (user != null) {
+				redirect =
+					ParamUtil.getString(req, "redirect") +
+						user.getEmailAddress();
+			}
+
+			sendRedirect(req, res, redirect);
+		}
+		catch (Exception e) {
+			if (e != null &&
+				e instanceof NoSuchUserException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(req, e.getClass().getName());
+
+				setForward(req, "portlet.enterprise_admin.error");
+			}
+			else if (e != null &&
+					 e instanceof ContactFirstNameException ||
+					 e instanceof ContactLastNameException ||
+					 e instanceof DuplicateUserEmailAddressException ||
+					 e instanceof NoSuchOrganizationException ||
+					 e instanceof OrganizationParentException ||
+					 e instanceof RequiredUserException ||
+					 e instanceof ReservedUserEmailAddressException ||
+					 e instanceof UserEmailAddressException ||
+					 e instanceof UserPasswordException ||
+					 e instanceof UserSmsException) {
+
+				SessionErrors.add(req, e.getClass().getName(), e);
+
+				if (e instanceof RequiredUserException) {
+					res.sendRedirect(ParamUtil.getString(req, "redirect"));
+				}
+			}
+			else {
+				throw e;
+			}
+		}
+	}
+
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			RenderRequest req, RenderResponse res)
+		throws Exception {
+
+		return mapping.findForward(
+			getForward(req, "portlet.enterprise_admin.edit_user"));
+	}
+
+	protected void deleteRole(ActionRequest req) throws Exception {
+		User user = PortalUtil.getSelectedUser(req);
+
+		String roleId = ParamUtil.getString(req, "roleId");
+
+		UserServiceUtil.deleteRoleUser(roleId, user.getUserId());
+	}
+
+	protected void deleteUsers(ActionRequest req) throws Exception {
+		String cmd = ParamUtil.getString(req, Constants.CMD);
+
+		String[] deleteUserIds = StringUtil.split(
+			ParamUtil.getString(req, "deleteUserIds"));
+
+		for (int i = 0; i < deleteUserIds.length; i++) {
+			if (cmd.equals(Constants.DEACTIVATE) ||
+				cmd.equals(Constants.RESTORE)) {
+
+				boolean active = !cmd.equals(Constants.DEACTIVATE);
+
+				UserServiceUtil.updateActive(deleteUserIds[i], active);
+			}
+			else {
+				UserServiceUtil.deleteUser(deleteUserIds[i]);
+			}
+		}
+	}
+
+	protected User updateComments(ActionRequest req) throws Exception {
+		String comments = ParamUtil.getString(req, "comments");
+
+		User user = PortalUtil.getSelectedUser(req);
+
+		Contact contact = user.getContact();
+
+		AdminUtil.updateUser(
+			req, user.getUserId(), user.getEmailAddress(), user.getLanguageId(),
+			user.getTimeZoneId(), user.getGreeting(), user.getResolution(),
+			comments, contact.getSmsSn(), contact.getAimSn(),
+			contact.getIcqSn(), contact.getMsnSn(), contact.getYmSn());
+
+		return user;
+	}
+
+	protected User updateDisplay(ActionRequest req) throws Exception {
+		PortletSession ses = req.getPortletSession();
+
+		String languageId = ParamUtil.getString(req, "languageId");
+		String timeZoneId = ParamUtil.getString(req, "timeZoneId");
+		String greeting = ParamUtil.getString(req, "greeting");
+		String resolution = ParamUtil.getString(req, "resolution");
+
+		User user = PortalUtil.getSelectedUser(req);
+
+		Contact contact = user.getContact();
+
+		AdminUtil.updateUser(
+			req, user.getUserId(), user.getEmailAddress(), languageId,
+			timeZoneId, greeting, resolution, user.getComments(),
+			contact.getSmsSn(), contact.getAimSn(), contact.getIcqSn(),
+			contact.getMsnSn(), contact.getYmSn());
+
+		// Reset the locale
+
+		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
+
+		HttpServletRequest httpReq = reqImpl.getHttpServletRequest();
+		HttpSession httpSes = httpReq.getSession();
+
+		httpSes.removeAttribute(Globals.LOCALE_KEY);
+
+		// Clear cached portlet responses
+
+		CachePortlet.clearResponses(ses);
+
+		return user;
+	}
+
+	protected User updateIm(ActionRequest req) throws Exception {
+		String aimSn = ParamUtil.getString(req, "aimSn");
+		String icqSn = ParamUtil.getString(req, "icqSn");
+		String msnSn = ParamUtil.getString(req, "msnSn");
+		String ymSn = ParamUtil.getString(req, "ymSn");
+
+		User user = PortalUtil.getSelectedUser(req);
+
+		Contact contact = user.getContact();
+
+		AdminUtil.updateUser(
+			req, user.getUserId(), user.getEmailAddress(), user.getLanguageId(),
+			user.getTimeZoneId(), user.getGreeting(), user.getResolution(),
+			user.getComments(), contact.getSmsSn(), aimSn, icqSn, msnSn, ymSn);
+
+		return user;
+	}
+
+	protected User updatePassword(ActionRequest req) throws Exception {
+		PortletSession ses = req.getPortletSession();
+
+		String password1 = ParamUtil.getString(req, "password1");
+		String password2 = ParamUtil.getString(req, "password2");
+		boolean passwordReset = ParamUtil.getBoolean(req, "passwordReset");
+
+		User user = PortalUtil.getSelectedUser(req);
+
+		UserServiceUtil.updatePassword(
+			user.getUserId(), password1, password2, passwordReset);
+
+		if (user.getUserId().equals(req.getRemoteUser())) {
+			ses.setAttribute(
+				WebKeys.USER_PASSWORD, password1,
+				PortletSession.APPLICATION_SCOPE);
+		}
+
+		return user;
+	}
+
+	protected User updateSms(ActionRequest req) throws Exception {
+		String smsSn = ParamUtil.getString(req, "smsSn");
+
+		User user = PortalUtil.getSelectedUser(req);
+
+		Contact contact = user.getContact();
+
+		AdminUtil.updateUser(
+			req, user.getUserId(), user.getEmailAddress(), user.getLanguageId(),
+			user.getTimeZoneId(), user.getGreeting(), user.getResolution(),
+			user.getComments(), smsSn, contact.getAimSn(), contact.getIcqSn(),
+			contact.getMsnSn(), contact.getYmSn());
+
+		return user;
+	}
+
+	protected User updateUser(ActionRequest req) throws Exception {
+		String cmd = ParamUtil.getString(req, Constants.CMD);
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		boolean autoUserId = true;
+		String userId = StringPool.BLANK;
+		boolean autoPassword = true;
+		String password1 = null;
+		String password2 = null;
+		boolean passwordReset = true;
+		String emailAddress = ParamUtil.getString(req, "emailAddress");
+		String firstName = ParamUtil.getString(req, "firstName");
+		String middleName = ParamUtil.getString(req, "middleName");
+		String lastName = ParamUtil.getString(req, "lastName");
+		String nickName = ParamUtil.getString(req, "nickName");
+		String prefixId = ParamUtil.getString(req, "prefixId");
+		String suffixId = ParamUtil.getString(req, "suffixId");
+		boolean male = ParamUtil.get(req, "male", true);
+		int birthdayMonth = ParamUtil.getInteger(req, "birthdayMonth");
+		int birthdayDay = ParamUtil.getInteger(req, "birthdayDay");
+		int birthdayYear = ParamUtil.getInteger(req, "birthdayYear");
+		String jobTitle = ParamUtil.getString(req, "jobTitle");
+		String organizationId = ParamUtil.getString(req, "organizationId");
+		String locationId = ParamUtil.getString(req, "locationId");
+
+		User user = null;
+
+		if (cmd.equals(Constants.ADD)) {
+
+			// Add user
+
+			user = UserServiceUtil.addUser(
+				themeDisplay.getCompanyId(), autoUserId, userId, autoPassword,
+				password1, password2, passwordReset, emailAddress,
+				themeDisplay.getLocale(), firstName, middleName, lastName,
+				nickName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
+				birthdayYear, jobTitle, organizationId, locationId);
+		}
+		else {
+
+			// Update user
+
+			user = PortalUtil.getSelectedUser(req);
+
+			String password = AdminUtil.getUpdateUserPassword(
+				req, user.getUserId());
+
+			Contact contact = user.getContact();
+
+			user = UserServiceUtil.updateUser(
+				user.getUserId(), password, emailAddress, user.getLanguageId(),
+				user.getTimeZoneId(), user.getGreeting(), user.getResolution(),
+				user.getComments(), firstName, middleName, lastName, nickName,
+				prefixId, suffixId, male, birthdayMonth, birthdayDay,
+				birthdayYear, contact.getSmsSn(), contact.getAimSn(),
+				contact.getIcqSn(), contact.getMsnSn(), contact.getYmSn(),
+				jobTitle, organizationId, locationId);
+		}
+
+		return user;
+	}
+
+}

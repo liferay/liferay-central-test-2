@@ -1,0 +1,2824 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="com.liferay.portal.service.spring.AccountLocalService.professional" class="com.liferay.portal.service.impl.AccountLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.AccountLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.AccountLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.AccountLocalServiceFactory" class="com.liferay.portal.service.spring.AccountLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.AccountLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.AccountService.professional" class="com.liferay.portal.service.impl.AccountServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.AccountService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.AccountService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.AccountServiceFactory" class="com.liferay.portal.service.spring.AccountServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.AccountService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.AccountPersistence" class="com.liferay.portal.service.persistence.AccountPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.AccountUtil" class="com.liferay.portal.service.persistence.AccountUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.AccountPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.AddressLocalService.professional" class="com.liferay.portal.service.impl.AddressLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.AddressLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.AddressLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.AddressLocalServiceFactory" class="com.liferay.portal.service.spring.AddressLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.AddressLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.AddressService.professional" class="com.liferay.portal.service.impl.AddressServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.AddressService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.AddressService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.AddressServiceFactory" class="com.liferay.portal.service.spring.AddressServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.AddressService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.AddressPersistence" class="com.liferay.portal.service.persistence.AddressPersistence2" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.AddressUtil" class="com.liferay.portal.service.persistence.AddressUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.AddressPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.CompanyLocalService.professional" class="com.liferay.portal.service.impl.CompanyLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.CompanyLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.CompanyLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.CompanyLocalServiceFactory" class="com.liferay.portal.service.spring.CompanyLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.CompanyLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.CompanyService.professional" class="com.liferay.portal.service.impl.CompanyServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.CompanyService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.CompanyService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.CompanyServiceFactory" class="com.liferay.portal.service.spring.CompanyServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.CompanyService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.CompanyPersistence" class="com.liferay.portal.service.persistence.CompanyPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.CompanyUtil" class="com.liferay.portal.service.persistence.CompanyUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.CompanyPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.ContactLocalService.professional" class="com.liferay.portal.service.impl.ContactLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.ContactLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.ContactLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.ContactLocalServiceFactory" class="com.liferay.portal.service.spring.ContactLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.ContactLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.ContactService.professional" class="com.liferay.portal.service.impl.ContactServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.ContactService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.ContactService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.ContactServiceFactory" class="com.liferay.portal.service.spring.ContactServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.ContactService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ContactPersistence" class="com.liferay.portal.service.persistence.ContactPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ContactUtil" class="com.liferay.portal.service.persistence.ContactUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.ContactPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.CountryService.professional" class="com.liferay.portal.service.impl.CountryServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.CountryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.CountryService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.CountryServiceFactory" class="com.liferay.portal.service.spring.CountryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.CountryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.CountryPersistence" class="com.liferay.portal.service.persistence.CountryPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.CountryUtil" class="com.liferay.portal.service.persistence.CountryUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.CountryPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.DataTrackerService.professional" class="com.liferay.portal.service.impl.DataTrackerServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.DataTrackerService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.DataTrackerService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.DataTrackerServiceFactory" class="com.liferay.portal.service.spring.DataTrackerServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.DataTrackerService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.DataTrackerPersistence" class="com.liferay.portal.service.persistence.DataTrackerPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.DataTrackerUtil" class="com.liferay.portal.service.persistence.DataTrackerUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.DataTrackerPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.EmailAddressLocalService.professional" class="com.liferay.portal.service.impl.EmailAddressLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.EmailAddressLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.EmailAddressLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.EmailAddressLocalServiceFactory" class="com.liferay.portal.service.spring.EmailAddressLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.EmailAddressLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.EmailAddressService.professional" class="com.liferay.portal.service.impl.EmailAddressServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.EmailAddressService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.EmailAddressService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.EmailAddressServiceFactory" class="com.liferay.portal.service.spring.EmailAddressServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.EmailAddressService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.EmailAddressPersistence" class="com.liferay.portal.service.persistence.EmailAddressPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.EmailAddressUtil" class="com.liferay.portal.service.persistence.EmailAddressUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.EmailAddressPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.GroupLocalService.professional" class="com.liferay.portal.service.impl.GroupLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.GroupLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.GroupLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.GroupLocalServiceFactory" class="com.liferay.portal.service.spring.GroupLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.GroupLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.GroupService.professional" class="com.liferay.portal.service.impl.GroupServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.GroupService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.GroupService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.GroupServiceFactory" class="com.liferay.portal.service.spring.GroupServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.GroupService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.GroupPersistence" class="com.liferay.portal.service.persistence.GroupPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.GroupUtil" class="com.liferay.portal.service.persistence.GroupUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.GroupPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.ImageLocalService.professional" class="com.liferay.portal.service.impl.ImageLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.ImageLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.ImageLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.ImageLocalServiceFactory" class="com.liferay.portal.service.spring.ImageLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.ImageLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.ImageService.professional" class="com.liferay.portal.service.impl.ImageServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.ImageService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.ImageService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.ImageServiceFactory" class="com.liferay.portal.service.spring.ImageServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.ImageService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ImagePersistence" class="com.liferay.portal.service.persistence.ImagePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ImageUtil" class="com.liferay.portal.service.persistence.ImageUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.ImagePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.LayoutLocalService.professional" class="com.liferay.portal.service.impl.LayoutLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.LayoutLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.LayoutLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.LayoutLocalServiceFactory" class="com.liferay.portal.service.spring.LayoutLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.LayoutLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.LayoutService.professional" class="com.liferay.portal.service.impl.LayoutServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.LayoutService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.LayoutService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.LayoutServiceFactory" class="com.liferay.portal.service.spring.LayoutServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.LayoutService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.LayoutPersistence" class="com.liferay.portal.service.persistence.LayoutPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.LayoutUtil" class="com.liferay.portal.service.persistence.LayoutUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.LayoutPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.LayoutSetLocalService.professional" class="com.liferay.portal.service.impl.LayoutSetLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.LayoutSetLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.LayoutSetLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.LayoutSetLocalServiceFactory" class="com.liferay.portal.service.spring.LayoutSetLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.LayoutSetLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.LayoutSetService.professional" class="com.liferay.portal.service.impl.LayoutSetServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.LayoutSetService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.LayoutSetService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.LayoutSetServiceFactory" class="com.liferay.portal.service.spring.LayoutSetServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.LayoutSetService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.LayoutSetPersistence" class="com.liferay.portal.service.persistence.LayoutSetPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.LayoutSetUtil" class="com.liferay.portal.service.persistence.LayoutSetUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.LayoutSetPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.ListTypeService.professional" class="com.liferay.portal.service.impl.ListTypeServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.ListTypeService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.ListTypeService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.ListTypeServiceFactory" class="com.liferay.portal.service.spring.ListTypeServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.ListTypeService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ListTypePersistence" class="com.liferay.portal.service.persistence.ListTypePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ListTypeUtil" class="com.liferay.portal.service.persistence.ListTypeUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.ListTypePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.NoteLocalService.professional" class="com.liferay.portal.service.impl.NoteLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.NoteLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.NoteLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.NoteLocalServiceFactory" class="com.liferay.portal.service.spring.NoteLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.NoteLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.NotePersistence" class="com.liferay.portal.service.persistence.NotePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.NoteUtil" class="com.liferay.portal.service.persistence.NoteUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.NotePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.OrganizationLocalService.professional" class="com.liferay.portal.service.impl.OrganizationLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.OrganizationLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.OrganizationLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.OrganizationLocalServiceFactory" class="com.liferay.portal.service.spring.OrganizationLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.OrganizationLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.OrganizationService.professional" class="com.liferay.portal.service.impl.OrganizationServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.OrganizationService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.OrganizationService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.OrganizationServiceFactory" class="com.liferay.portal.service.spring.OrganizationServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.OrganizationService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.OrganizationPersistence" class="com.liferay.portal.service.persistence.OrganizationPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.OrganizationUtil" class="com.liferay.portal.service.persistence.OrganizationUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.OrganizationPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionPersistence" class="com.liferay.portal.service.persistence.OrgGroupPermissionPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionUtil" class="com.liferay.portal.service.persistence.OrgGroupPermissionUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.OrgGroupPermissionPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.OrgGroupRolePersistence" class="com.liferay.portal.service.persistence.OrgGroupRolePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.OrgGroupRoleUtil" class="com.liferay.portal.service.persistence.OrgGroupRoleUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.OrgGroupRolePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.OrgLaborService.professional" class="com.liferay.portal.service.impl.OrgLaborServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.OrgLaborService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.OrgLaborService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.OrgLaborServiceFactory" class="com.liferay.portal.service.spring.OrgLaborServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.OrgLaborService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.OrgLaborPersistence" class="com.liferay.portal.service.persistence.OrgLaborPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.OrgLaborUtil" class="com.liferay.portal.service.persistence.OrgLaborUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.OrgLaborPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PasswordTrackerLocalService.professional" class="com.liferay.portal.service.impl.PasswordTrackerLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.PasswordTrackerLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.PasswordTrackerLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PasswordTrackerLocalServiceFactory" class="com.liferay.portal.service.spring.PasswordTrackerLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.PasswordTrackerLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PasswordTrackerPersistence" class="com.liferay.portal.service.persistence.PasswordTrackerPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PasswordTrackerUtil" class="com.liferay.portal.service.persistence.PasswordTrackerUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.PasswordTrackerPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PermissionLocalService.professional" class="com.liferay.portal.service.impl.PermissionLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.PermissionLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.PermissionLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PermissionLocalServiceFactory" class="com.liferay.portal.service.spring.PermissionLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.PermissionLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PermissionService.professional" class="com.liferay.portal.service.impl.PermissionServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.PermissionService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.PermissionService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PermissionServiceFactory" class="com.liferay.portal.service.spring.PermissionServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.PermissionService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PermissionPersistence" class="com.liferay.portal.service.persistence.PermissionPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PermissionUtil" class="com.liferay.portal.service.persistence.PermissionUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.PermissionPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PhoneService.professional" class="com.liferay.portal.service.impl.PhoneServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.PhoneService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.PhoneService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PhoneServiceFactory" class="com.liferay.portal.service.spring.PhoneServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.PhoneService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PhonePersistence" class="com.liferay.portal.service.persistence.PhonePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PhoneUtil" class="com.liferay.portal.service.persistence.PhoneUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.PhonePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PortalService.professional" class="com.liferay.portal.service.impl.PortalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.PortalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.PortalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PortalServiceFactory" class="com.liferay.portal.service.spring.PortalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.PortalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PortletService.professional" class="com.liferay.portal.service.impl.PortletServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.PortletService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.PortletService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PortletServiceFactory" class="com.liferay.portal.service.spring.PortletServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.PortletService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PortletPersistence" class="com.liferay.portal.service.persistence.PortletPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PortletUtil" class="com.liferay.portal.service.persistence.PortletUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.PortletPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PortletPreferencesLocalService.professional" class="com.liferay.portal.service.impl.PortletPreferencesLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.PortletPreferencesLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.PortletPreferencesLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PortletPreferencesLocalServiceFactory" class="com.liferay.portal.service.spring.PortletPreferencesLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.PortletPreferencesLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PortletPreferencesService.professional" class="com.liferay.portal.service.impl.PortletPreferencesServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.PortletPreferencesService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.PortletPreferencesService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PortletPreferencesServiceFactory" class="com.liferay.portal.service.spring.PortletPreferencesServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.PortletPreferencesService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PortletPreferencesPersistence" class="com.liferay.portal.service.persistence.PortletPreferencesPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PortletPreferencesUtil" class="com.liferay.portal.service.persistence.PortletPreferencesUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.PortletPreferencesPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PropertiesLocalService.professional" class="com.liferay.portal.service.impl.PropertiesLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.PropertiesLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.PropertiesLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.PropertiesLocalServiceFactory" class="com.liferay.portal.service.spring.PropertiesLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.PropertiesLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PropertiesPersistence" class="com.liferay.portal.service.persistence.PropertiesPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PropertiesUtil" class="com.liferay.portal.service.persistence.PropertiesUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.PropertiesPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.RegionService.professional" class="com.liferay.portal.service.impl.RegionServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.RegionService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.RegionService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.RegionServiceFactory" class="com.liferay.portal.service.spring.RegionServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.RegionService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.RegionPersistence" class="com.liferay.portal.service.persistence.RegionPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.RegionUtil" class="com.liferay.portal.service.persistence.RegionUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.RegionPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.ReleaseLocalService.professional" class="com.liferay.portal.service.impl.ReleaseLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.ReleaseLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.ReleaseLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.ReleaseLocalServiceFactory" class="com.liferay.portal.service.spring.ReleaseLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.ReleaseLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ReleasePersistence" class="com.liferay.portal.service.persistence.ReleasePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ReleaseUtil" class="com.liferay.portal.service.persistence.ReleaseUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.ReleasePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.ResourceLocalService.professional" class="com.liferay.portal.service.impl.ResourceLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.ResourceLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.ResourceLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.ResourceLocalServiceFactory" class="com.liferay.portal.service.spring.ResourceLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.ResourceLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.ResourceService.professional" class="com.liferay.portal.service.impl.ResourceServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.ResourceService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.ResourceService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.ResourceServiceFactory" class="com.liferay.portal.service.spring.ResourceServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.ResourceService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ResourcePersistence" class="com.liferay.portal.service.persistence.ResourcePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ResourceUtil" class="com.liferay.portal.service.persistence.ResourceUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.ResourcePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.RoleLocalService.professional" class="com.liferay.portal.service.impl.RoleLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.RoleLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.RoleLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.RoleLocalServiceFactory" class="com.liferay.portal.service.spring.RoleLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.RoleLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.RoleService.professional" class="com.liferay.portal.service.impl.RoleServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.RoleService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.RoleService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.RoleServiceFactory" class="com.liferay.portal.service.spring.RoleServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.RoleService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.RolePersistence" class="com.liferay.portal.service.persistence.RolePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.RoleUtil" class="com.liferay.portal.service.persistence.RoleUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.RolePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.SubscriptionLocalService.professional" class="com.liferay.portal.service.impl.SubscriptionLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.SubscriptionLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.SubscriptionLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.SubscriptionLocalServiceFactory" class="com.liferay.portal.service.spring.SubscriptionLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.SubscriptionLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.SubscriptionPersistence" class="com.liferay.portal.service.persistence.SubscriptionPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.SubscriptionUtil" class="com.liferay.portal.service.persistence.SubscriptionUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.SubscriptionPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.UserLocalService.professional" class="com.liferay.portal.service.impl.UserLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.UserLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.UserLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.UserLocalServiceFactory" class="com.liferay.portal.service.spring.UserLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.UserLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.UserService.professional" class="com.liferay.portal.service.impl.UserServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.UserService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.UserService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.UserServiceFactory" class="com.liferay.portal.service.spring.UserServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.UserService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserPersistence" class="com.liferay.portal.service.persistence.UserPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserUtil" class="com.liferay.portal.service.persistence.UserUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.UserPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.UserIdMapperLocalService.professional" class="com.liferay.portal.service.impl.UserIdMapperLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.UserIdMapperLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.UserIdMapperLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.UserIdMapperLocalServiceFactory" class="com.liferay.portal.service.spring.UserIdMapperLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.UserIdMapperLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserIdMapperPersistence" class="com.liferay.portal.service.persistence.UserIdMapperPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserIdMapperUtil" class="com.liferay.portal.service.persistence.UserIdMapperUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.UserIdMapperPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.UserTrackerLocalService.professional" class="com.liferay.portal.service.impl.UserTrackerLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.UserTrackerLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.UserTrackerLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.UserTrackerLocalServiceFactory" class="com.liferay.portal.service.spring.UserTrackerLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.UserTrackerLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.UserTrackerService.professional" class="com.liferay.portal.service.impl.UserTrackerServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.UserTrackerService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.UserTrackerService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.UserTrackerServiceFactory" class="com.liferay.portal.service.spring.UserTrackerServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.UserTrackerService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserTrackerPersistence" class="com.liferay.portal.service.persistence.UserTrackerPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserTrackerUtil" class="com.liferay.portal.service.persistence.UserTrackerUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.UserTrackerPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.UserTrackerPathLocalService.professional" class="com.liferay.portal.service.impl.UserTrackerPathLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.UserTrackerPathLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.UserTrackerPathLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.UserTrackerPathLocalServiceFactory" class="com.liferay.portal.service.spring.UserTrackerPathLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.UserTrackerPathLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.UserTrackerPathService.professional" class="com.liferay.portal.service.impl.UserTrackerPathServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.UserTrackerPathService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.UserTrackerPathService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.UserTrackerPathServiceFactory" class="com.liferay.portal.service.spring.UserTrackerPathServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.UserTrackerPathService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserTrackerPathPersistence" class="com.liferay.portal.service.persistence.UserTrackerPathPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserTrackerPathUtil" class="com.liferay.portal.service.persistence.UserTrackerPathUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.UserTrackerPathPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.WebsiteService.professional" class="com.liferay.portal.service.impl.WebsiteServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.WebsiteService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.WebsiteService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.WebsiteServiceFactory" class="com.liferay.portal.service.spring.WebsiteServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.WebsiteService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.WebsitePersistence" class="com.liferay.portal.service.persistence.WebsitePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.WebsiteUtil" class="com.liferay.portal.service.persistence.WebsiteUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.WebsitePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.addressbook.service.spring.ABContactLocalService.professional" class="com.liferay.portlet.addressbook.service.impl.ABContactLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.addressbook.service.spring.ABContactLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.addressbook.service.spring.ABContactLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.addressbook.service.spring.ABContactLocalServiceFactory" class="com.liferay.portlet.addressbook.service.spring.ABContactLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.addressbook.service.spring.ABContactLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.addressbook.service.spring.ABContactService.professional" class="com.liferay.portlet.addressbook.service.impl.ABContactServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.addressbook.service.spring.ABContactService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.addressbook.service.spring.ABContactService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.addressbook.service.spring.ABContactServiceFactory" class="com.liferay.portlet.addressbook.service.spring.ABContactServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.addressbook.service.spring.ABContactService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.addressbook.service.persistence.ABContactPersistence" class="com.liferay.portlet.addressbook.service.persistence.ABContactPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.addressbook.service.persistence.ABContactUtil" class="com.liferay.portlet.addressbook.service.persistence.ABContactUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.addressbook.service.persistence.ABContactPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.addressbook.service.spring.ABListLocalService.professional" class="com.liferay.portlet.addressbook.service.impl.ABListLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.addressbook.service.spring.ABListLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.addressbook.service.spring.ABListLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.addressbook.service.spring.ABListLocalServiceFactory" class="com.liferay.portlet.addressbook.service.spring.ABListLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.addressbook.service.spring.ABListLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.addressbook.service.spring.ABListService.professional" class="com.liferay.portlet.addressbook.service.impl.ABListServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.addressbook.service.spring.ABListService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.addressbook.service.spring.ABListService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.addressbook.service.spring.ABListServiceFactory" class="com.liferay.portlet.addressbook.service.spring.ABListServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.addressbook.service.spring.ABListService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.addressbook.service.persistence.ABListPersistence" class="com.liferay.portlet.addressbook.service.persistence.ABListPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.addressbook.service.persistence.ABListUtil" class="com.liferay.portlet.addressbook.service.persistence.ABListUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.addressbook.service.persistence.ABListPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.admin.service.spring.AdminConfigService.professional" class="com.liferay.portlet.admin.service.impl.AdminConfigServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.admin.service.spring.AdminConfigService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.admin.service.spring.AdminConfigService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.admin.service.spring.AdminConfigServiceFactory" class="com.liferay.portlet.admin.service.spring.AdminConfigServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.admin.service.spring.AdminConfigService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.admin.service.persistence.AdminConfigPersistence" class="com.liferay.portlet.admin.service.persistence.AdminConfigPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.admin.service.persistence.AdminConfigUtil" class="com.liferay.portlet.admin.service.persistence.AdminConfigUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.admin.service.persistence.AdminConfigPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalService.professional" class="com.liferay.portlet.blogs.service.impl.BlogsCategoryLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalServiceFactory" class="com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.blogs.service.spring.BlogsCategoryService.professional" class="com.liferay.portlet.blogs.service.impl.BlogsCategoryServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.blogs.service.spring.BlogsCategoryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.blogs.service.spring.BlogsCategoryService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.blogs.service.spring.BlogsCategoryServiceFactory" class="com.liferay.portlet.blogs.service.spring.BlogsCategoryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.blogs.service.spring.BlogsCategoryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence" class="com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil" class="com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.blogs.service.spring.BlogsEntryLocalService.professional" class="com.liferay.portlet.blogs.service.impl.BlogsEntryLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.blogs.service.spring.BlogsEntryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.blogs.service.spring.BlogsEntryLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.blogs.service.spring.BlogsEntryLocalServiceFactory" class="com.liferay.portlet.blogs.service.spring.BlogsEntryLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.blogs.service.spring.BlogsEntryLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.blogs.service.spring.BlogsEntryService.professional" class="com.liferay.portlet.blogs.service.impl.BlogsEntryServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.blogs.service.spring.BlogsEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.blogs.service.spring.BlogsEntryService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.blogs.service.spring.BlogsEntryServiceFactory" class="com.liferay.portlet.blogs.service.spring.BlogsEntryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.blogs.service.spring.BlogsEntryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence" class="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil" class="com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryLocalService.professional" class="com.liferay.portlet.bookmarks.service.impl.BookmarksEntryLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryLocalServiceFactory" class="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryService.professional" class="com.liferay.portlet.bookmarks.service.impl.BookmarksEntryServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryServiceFactory" class="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.bookmarks.service.spring.BookmarksEntryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderLocalService.professional" class="com.liferay.portlet.bookmarks.service.impl.BookmarksFolderLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderLocalServiceFactory" class="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderService.professional" class="com.liferay.portlet.bookmarks.service.impl.BookmarksFolderServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderServiceFactory" class="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.bookmarks.service.spring.BookmarksFolderService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.calendar.service.spring.CalEventLocalService.professional" class="com.liferay.portlet.calendar.service.impl.CalEventLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.calendar.service.spring.CalEventLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.calendar.service.spring.CalEventLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.calendar.service.spring.CalEventLocalServiceFactory" class="com.liferay.portlet.calendar.service.spring.CalEventLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.calendar.service.spring.CalEventLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.calendar.service.spring.CalEventService.professional" class="com.liferay.portlet.calendar.service.impl.CalEventServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.calendar.service.spring.CalEventService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.calendar.service.spring.CalEventService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.calendar.service.spring.CalEventServiceFactory" class="com.liferay.portlet.calendar.service.spring.CalEventServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.calendar.service.spring.CalEventService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventPersistence" class="com.liferay.portlet.calendar.service.persistence.CalEventPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventUtil" class="com.liferay.portlet.calendar.service.persistence.CalEventUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.calendar.service.persistence.CalEventPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalService.professional" class="com.liferay.portlet.documentlibrary.service.impl.DLFileEntryLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceFactory" class="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryService.professional" class="com.liferay.portlet.documentlibrary.service.impl.DLFileEntryServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryServiceFactory" class="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalService.professional" class="com.liferay.portlet.documentlibrary.service.impl.DLFileRankLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalServiceFactory" class="com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFileVersionLocalService.professional" class="com.liferay.portlet.documentlibrary.service.impl.DLFileVersionLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFileVersionLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.spring.DLFileVersionLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFileVersionLocalServiceFactory" class="com.liferay.portlet.documentlibrary.service.spring.DLFileVersionLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.documentlibrary.service.spring.DLFileVersionLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalService.professional" class="com.liferay.portlet.documentlibrary.service.impl.DLFolderLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalServiceFactory" class="com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFolderService.professional" class="com.liferay.portlet.documentlibrary.service.impl.DLFolderServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFolderService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.spring.DLFolderService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.spring.DLFolderServiceFactory" class="com.liferay.portlet.documentlibrary.service.spring.DLFolderServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.documentlibrary.service.spring.DLFolderService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.spring.IGFolderLocalService.professional" class="com.liferay.portlet.imagegallery.service.impl.IGFolderLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.imagegallery.service.spring.IGFolderLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.imagegallery.service.spring.IGFolderLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.spring.IGFolderLocalServiceFactory" class="com.liferay.portlet.imagegallery.service.spring.IGFolderLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.imagegallery.service.spring.IGFolderLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.spring.IGFolderService.professional" class="com.liferay.portlet.imagegallery.service.impl.IGFolderServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.imagegallery.service.spring.IGFolderService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.imagegallery.service.spring.IGFolderService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.spring.IGFolderServiceFactory" class="com.liferay.portlet.imagegallery.service.spring.IGFolderServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.imagegallery.service.spring.IGFolderService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence" class="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil" class="com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.spring.IGImageLocalService.professional" class="com.liferay.portlet.imagegallery.service.impl.IGImageLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.imagegallery.service.spring.IGImageLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.imagegallery.service.spring.IGImageLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.spring.IGImageLocalServiceFactory" class="com.liferay.portlet.imagegallery.service.spring.IGImageLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.imagegallery.service.spring.IGImageLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.spring.IGImageService.professional" class="com.liferay.portlet.imagegallery.service.impl.IGImageServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.imagegallery.service.spring.IGImageService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.imagegallery.service.spring.IGImageService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.spring.IGImageServiceFactory" class="com.liferay.portlet.imagegallery.service.spring.IGImageServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.imagegallery.service.spring.IGImageService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence" class="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImageUtil" class="com.liferay.portlet.imagegallery.service.persistence.IGImageUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.spring.JournalArticleLocalService.professional" class="com.liferay.portlet.journal.service.impl.JournalArticleLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.spring.JournalArticleLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.spring.JournalArticleLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceFactory" class="com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.spring.JournalArticleLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.spring.JournalArticleService.professional" class="com.liferay.portlet.journal.service.impl.JournalArticleServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.spring.JournalArticleService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.spring.JournalArticleService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.spring.JournalArticleServiceFactory" class="com.liferay.portlet.journal.service.spring.JournalArticleServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.spring.JournalArticleService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticlePersistence" class="com.liferay.portlet.journal.service.persistence.JournalArticlePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleUtil" class="com.liferay.portlet.journal.service.persistence.JournalArticleUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalArticlePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.spring.JournalContentSearchLocalService.professional" class="com.liferay.portlet.journal.service.impl.JournalContentSearchLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.spring.JournalContentSearchLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.spring.JournalContentSearchLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceFactory" class="com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.spring.JournalContentSearchLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence" class="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil" class="com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.spring.JournalStructureLocalService.professional" class="com.liferay.portlet.journal.service.impl.JournalStructureLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.spring.JournalStructureLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.spring.JournalStructureLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.spring.JournalStructureLocalServiceFactory" class="com.liferay.portlet.journal.service.spring.JournalStructureLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.spring.JournalStructureLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.spring.JournalStructureService.professional" class="com.liferay.portlet.journal.service.impl.JournalStructureServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.spring.JournalStructureService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.spring.JournalStructureService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.spring.JournalStructureServiceFactory" class="com.liferay.portlet.journal.service.spring.JournalStructureServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.spring.JournalStructureService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructurePersistence" class="com.liferay.portlet.journal.service.persistence.JournalStructurePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructureUtil" class="com.liferay.portlet.journal.service.persistence.JournalStructureUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalStructurePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.spring.JournalTemplateLocalService.professional" class="com.liferay.portlet.journal.service.impl.JournalTemplateLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.spring.JournalTemplateLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.spring.JournalTemplateLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.spring.JournalTemplateLocalServiceFactory" class="com.liferay.portlet.journal.service.spring.JournalTemplateLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.spring.JournalTemplateLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.spring.JournalTemplateService.professional" class="com.liferay.portlet.journal.service.impl.JournalTemplateServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.spring.JournalTemplateService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.spring.JournalTemplateService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.spring.JournalTemplateServiceFactory" class="com.liferay.portlet.journal.service.spring.JournalTemplateServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.spring.JournalTemplateService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence" class="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplateUtil" class="com.liferay.portlet.journal.service.persistence.JournalTemplateUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.mail.service.spring.MailReceiptLocalService.professional" class="com.liferay.portlet.mail.service.impl.MailReceiptLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.mail.service.spring.MailReceiptLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.mail.service.spring.MailReceiptLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.mail.service.spring.MailReceiptLocalServiceFactory" class="com.liferay.portlet.mail.service.spring.MailReceiptLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.mail.service.spring.MailReceiptLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.mail.service.spring.MailReceiptService.professional" class="com.liferay.portlet.mail.service.impl.MailReceiptServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.mail.service.spring.MailReceiptService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.mail.service.spring.MailReceiptService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.mail.service.spring.MailReceiptServiceFactory" class="com.liferay.portlet.mail.service.spring.MailReceiptServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.mail.service.spring.MailReceiptService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.mail.service.persistence.MailReceiptPersistence" class="com.liferay.portlet.mail.service.persistence.MailReceiptPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.mail.service.persistence.MailReceiptUtil" class="com.liferay.portlet.mail.service.persistence.MailReceiptUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.mail.service.persistence.MailReceiptPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBCategoryLocalService.professional" class="com.liferay.portlet.messageboards.service.impl.MBCategoryLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBCategoryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBCategoryLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceFactory" class="com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBCategoryLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBCategoryService.professional" class="com.liferay.portlet.messageboards.service.impl.MBCategoryServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBCategoryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBCategoryService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBCategoryServiceFactory" class="com.liferay.portlet.messageboards.service.spring.MBCategoryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBCategoryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil" class="com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil" class="com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBMessageLocalService.professional" class="com.liferay.portlet.messageboards.service.impl.MBMessageLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBMessageLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBMessageLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceFactory" class="com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBMessageLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBMessageService.professional" class="com.liferay.portlet.messageboards.service.impl.MBMessageServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBMessageService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBMessageService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBMessageServiceFactory" class="com.liferay.portlet.messageboards.service.spring.MBMessageServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBMessageService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence" class="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageUtil" class="com.liferay.portlet.messageboards.service.persistence.MBMessageUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalService.professional" class="com.liferay.portlet.messageboards.service.impl.MBMessageFlagLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalServiceFactory" class="com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBThreadLocalService.professional" class="com.liferay.portlet.messageboards.service.impl.MBThreadLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBThreadLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBThreadLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBThreadLocalServiceFactory" class="com.liferay.portlet.messageboards.service.spring.MBThreadLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBThreadLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadUtil" class="com.liferay.portlet.messageboards.service.persistence.MBThreadUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBTopicLocalService.professional" class="com.liferay.portlet.messageboards.service.impl.MBTopicLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBTopicLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBTopicLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBTopicLocalServiceFactory" class="com.liferay.portlet.messageboards.service.spring.MBTopicLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBTopicLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBTopicService.professional" class="com.liferay.portlet.messageboards.service.impl.MBTopicServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBTopicService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBTopicService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBTopicServiceFactory" class="com.liferay.portlet.messageboards.service.spring.MBTopicServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBTopicService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBTopicPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBTopicPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBTopicUtil" class="com.liferay.portlet.messageboards.service.persistence.MBTopicUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBTopicPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.spring.PollsChoiceLocalService.professional" class="com.liferay.portlet.polls.service.impl.PollsChoiceLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.polls.service.spring.PollsChoiceLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.polls.service.spring.PollsChoiceLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.spring.PollsChoiceLocalServiceFactory" class="com.liferay.portlet.polls.service.spring.PollsChoiceLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.polls.service.spring.PollsChoiceLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoicePersistence" class="com.liferay.portlet.polls.service.persistence.PollsChoicePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoiceUtil" class="com.liferay.portlet.polls.service.persistence.PollsChoiceUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.polls.service.persistence.PollsChoicePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.spring.PollsQuestionLocalService.professional" class="com.liferay.portlet.polls.service.impl.PollsQuestionLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.polls.service.spring.PollsQuestionLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.polls.service.spring.PollsQuestionLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.spring.PollsQuestionLocalServiceFactory" class="com.liferay.portlet.polls.service.spring.PollsQuestionLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.polls.service.spring.PollsQuestionLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.spring.PollsQuestionService.professional" class="com.liferay.portlet.polls.service.impl.PollsQuestionServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.polls.service.spring.PollsQuestionService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.polls.service.spring.PollsQuestionService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.spring.PollsQuestionServiceFactory" class="com.liferay.portlet.polls.service.spring.PollsQuestionServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.polls.service.spring.PollsQuestionService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence" class="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsQuestionUtil" class="com.liferay.portlet.polls.service.persistence.PollsQuestionUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.spring.PollsVoteLocalService.professional" class="com.liferay.portlet.polls.service.impl.PollsVoteLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.polls.service.spring.PollsVoteLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.polls.service.spring.PollsVoteLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.spring.PollsVoteLocalServiceFactory" class="com.liferay.portlet.polls.service.spring.PollsVoteLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.polls.service.spring.PollsVoteLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.spring.PollsVoteService.professional" class="com.liferay.portlet.polls.service.impl.PollsVoteServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.polls.service.spring.PollsVoteService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.polls.service.spring.PollsVoteService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.spring.PollsVoteServiceFactory" class="com.liferay.portlet.polls.service.spring.PollsVoteServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.polls.service.spring.PollsVoteService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsVotePersistence" class="com.liferay.portlet.polls.service.persistence.PollsVotePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsVoteUtil" class="com.liferay.portlet.polls.service.persistence.PollsVoteUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.polls.service.persistence.PollsVotePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCartLocalService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingCartLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCartLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingCartLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCartLocalServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingCartLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingCartLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCartService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingCartServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCartService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingCartService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCartServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingCartServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingCartService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCategoryService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingCategoryServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCategoryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingCategoryService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCategoryServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingCategoryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingCategoryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCouponService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingCouponServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCouponService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingCouponService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCouponServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingCouponServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingCouponService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemLocalService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingItemLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingItemLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemLocalServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingItemLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingItemLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingItemServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingItemService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingItemServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingItemService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingItemFieldServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingItemPriceServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingOrderLocalService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingOrderLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingOrderLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingOrderLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingOrderLocalServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingOrderLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingOrderLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingOrderService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingOrderServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingOrderService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingOrderService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingOrderServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingOrderServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingOrderService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingOrderItemServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.spring.WikiNodeLocalService.professional" class="com.liferay.portlet.wiki.service.impl.WikiNodeLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.wiki.service.spring.WikiNodeLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.wiki.service.spring.WikiNodeLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.spring.WikiNodeLocalServiceFactory" class="com.liferay.portlet.wiki.service.spring.WikiNodeLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.wiki.service.spring.WikiNodeLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.spring.WikiNodeService.professional" class="com.liferay.portlet.wiki.service.impl.WikiNodeServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.wiki.service.spring.WikiNodeService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.wiki.service.spring.WikiNodeService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.spring.WikiNodeServiceFactory" class="com.liferay.portlet.wiki.service.spring.WikiNodeServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.wiki.service.spring.WikiNodeService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence" class="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiNodeUtil" class="com.liferay.portlet.wiki.service.persistence.WikiNodeUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.spring.WikiPageLocalService.professional" class="com.liferay.portlet.wiki.service.impl.WikiPageLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.wiki.service.spring.WikiPageLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.wiki.service.spring.WikiPageLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.spring.WikiPageLocalServiceFactory" class="com.liferay.portlet.wiki.service.spring.WikiPageLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.wiki.service.spring.WikiPageLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.spring.WikiPageService.professional" class="com.liferay.portlet.wiki.service.impl.WikiPageServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.wiki.service.spring.WikiPageService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.wiki.service.spring.WikiPageService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.spring.WikiPageServiceFactory" class="com.liferay.portlet.wiki.service.spring.WikiPageServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.wiki.service.spring.WikiPageService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence" class="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageUtil" class="com.liferay.portlet.wiki.service.persistence.WikiPageUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence" />
+		</property>
+	</bean>
+</beans>

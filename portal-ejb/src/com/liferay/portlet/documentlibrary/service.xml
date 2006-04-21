@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 4.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_4_0_0.dtd">
+
+<service-builder root-dir=".." package-path="com.liferay.portlet">
+	<portlet name="Document Library" short-name="DL" />
+	<entity name="DLFileEntry" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="folderId" type="String" primary="true" />
+		<column name="name" type="String" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="String" />
+		<column name="userId" type="String" />
+		<column name="userName" type="String" />
+		<column name="versionUserId" type="String" />
+		<column name="versionUserName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="title" type="String" />
+		<column name="description" type="String" />
+		<column name="version" type="double" />
+		<column name="size" type="int" />
+		<column name="readCount" type="int" />
+
+		<!-- Finder methods -->
+
+		<finder name="FolderId" return-type="Collection">
+			<finder-column name="folderId" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="Contact" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference>
+			<![CDATA[
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.documentlibrary.service.ejb.DLLocalServiceHome</local-home>
+				<local>com.liferay.documentlibrary.service.ejb.DLLocalServiceEJB</local>
+				<ejb-link>com_liferay_documentlibrary_service_ejb_DLLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			]]>
+		</reference>
+	</entity>
+	<entity name="DLFileRank" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="companyId" type="String" primary="true" />
+		<column name="userId" type="String" primary="true" />
+		<column name="folderId" type="String" primary="true" />
+		<column name="name" type="String" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="createDate" type="Date" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finders -->
+
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="F_N" return-type="Collection">
+			<finder-column name="folderId" />
+			<finder-column name="name" />
+		</finder>
+	</entity>
+	<entity name="DLFileVersion" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="folderId" type="String" primary="true" />
+		<column name="name" type="String" primary="true" />
+		<column name="version" type="double" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="String" />
+		<column name="userId" type="String" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="size" type="int" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="folderId" />
+			<order-column name="name" />
+			<order-column name="version" />
+		</order>
+
+		<!-- Finders -->
+
+		<finder name="F_N" return-type="Collection">
+			<finder-column name="folderId" />
+			<finder-column name="name" />
+		</finder>
+	</entity>
+	<entity name="DLFolder" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="folderId" type="String" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="String" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="String" />
+		<column name="userId" type="String" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="parentFolderId" type="String" />
+		<column name="name" type="String" />
+		<column name="description" type="String" />
+		<column name="lastPostDate" type="Date" />
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="G_P" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="parentFolderId" />
+		</finder>
+		<finder name="P_N" return-type="DLFolder">
+			<finder-column name="parentFolderId" />
+			<finder-column name="name" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="Resource" />
+	</entity>
+	<exceptions>
+		<exception>FolderName</exception>
+	</exceptions>
+</service-builder>

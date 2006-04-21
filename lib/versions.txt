@@ -1,0 +1,80 @@
+ActiveMQ 3.2
+AjaxTags 1.1b1
+Ant 1.6.5
+Ant Contrib 0.6
+ANTLR 2.7.6 RC1
+Axis 1.3 (removed log4j.properties)
+Burlap 2.1.12
+Castor 0.9.9.1 (removed META-INF/MANIFEST.MF)
+Commons Beanutils 1.7.0
+Commons Codec 1.3
+Commons Collections 3.1
+Commons Configuration 1.1
+Commons DBCP 1.2.1
+Commons Discovery 0.2
+Commons Digester 1.6
+Commons Email 1.0
+Commons FileUpload 1.1dev (July 15, 2005, 1.1 makes all file names lower case)
+Commons HttpClient 3.0
+Commons IO 1.0
+Commons Lang 2.0
+Commons Logging 1.0.4 (fixed to work with Log4j class loading)
+Commons Pool 1.2
+Commons Validator 1.1.4
+Concurrent 1.3.4
+Display Tag Library 1.0
+dom4j 1.6.1
+EasyConf 0.9
+Ehcache 1.1
+Friki 2.1.1
+Hessian 2.1.12
+Hibernate 3.1.3
+HttpBridge 0.9.6 (patched)
+Hypersonic 1.7.3.1
+Informa 0.6.5
+Jackrabbit 1.0
+JAIMBot 1.4
+Jalopy 1.0b11
+Jaxen 1.1b4
+JavaMail 1.3.3
+Jazzy 0.5
+JCaptcha 2.0.1
+JCommon 1.0.0
+JCR 1.0
+jCVS Servlet 1.0.1
+JDOM 1.0
+JFreeChart 1.0.1 (removed META-INF/MANIFEST.MF)
+JGroups 2.2.8
+JMS 1.1
+JSF 1.1.01
+JSTL 1.0.6 (removed META-INF/*.tld)
+JTA 1.0.1b
+jTDS 1.2
+jYMSG 0.6
+Laszlo 3.1 (patched to work with JDOM 1.0 and Commons HttpClient 3.0 RC4)
+Log4j 1.2.12
+Lucene 1.9.1
+MSNM 1.2.2
+MyFaces 1.1.1
+MySQL Connector/J 3.1.10
+NFC Chat 1.1.0 (patched)
+ORO 2.0.8
+OSCache 2.3
+PDFBox 0.7.1
+POI 2.5.1
+Portals Bridges 1.0
+Portlet 1.0
+Quartz 1.5.0
+Secure FTP 1.6.3
+SLF4J 1.0
+Spring 1.2.7
+SSHTerm 0.2.2
+SSHVnc 0.1.3
+Struts 1.2.9 (removed META-INF/MANIFEST.MF)
+TextMining 4.0
+Trove 1.1b4
+Velocity 1.4
+WSDL4J 1.5.1
+WSRP4J 0.3
+Xalan 2.6.0
+Xerces 2.7.1

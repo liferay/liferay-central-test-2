@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 4.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_4_0_0.dtd">
+
+<service-builder root-dir=".." package-path="com.liferay.portlet">
+	<portlet name="Image Gallery" short-name="IG" />
+	<entity name="IGFolder" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="folderId" type="String" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="String" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="String" />
+		<column name="userId" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="parentFolderId" type="String" />
+		<column name="name" type="String" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" case-sensitive="false" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="G_P" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="parentFolderId" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="Resource" />
+	</entity>
+	<entity name="IGImage" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="companyId" type="String" primary="true" />
+		<column name="imageId" type="String" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="userId" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="folderId" type="String" />
+		<column name="description" type="String" />
+		<column name="height" type="int" />
+		<column name="width" type="int" />
+		<column name="size" type="int" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="imageId" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="FolderId" return-type="Collection">
+			<finder-column name="folderId" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="Resource" />
+	</entity>
+	<exceptions>
+		<exception>FolderName</exception>
+		<exception>ImageName</exception>
+		<exception>ImageSize</exception>
+	</exceptions>
+</service-builder>

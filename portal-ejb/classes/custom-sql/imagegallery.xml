@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<custom-sql>
+	<sql id="com.liferay.portlet.imagegallery.service.persistence.IGImageFinder.countByFolderIds">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				IGImage
+			WHERE [$FOLDER_ID$]
+		]]>
+	</sql>
+</custom-sql>

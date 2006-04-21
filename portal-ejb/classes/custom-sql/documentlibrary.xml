@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<custom-sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByFolderIds">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				DLFileEntry
+			WHERE [$FOLDER_ID$]
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder.countByG_U">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				DLFileRank
+			INNER JOIN
+				DLFolder ON
+					(DLFolder.groupId = ?) AND
+					(DLFolder.folderId = DLFileRank.folderId)
+			WHERE
+				DLFileRank.userId = ?
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder.findByG_U">
+		<![CDATA[
+			SELECT
+				{DLFileRank.*}
+			FROM
+				DLFileRank
+			INNER JOIN
+				DLFolder ON
+					(DLFolder.groupId = ?) AND
+					(DLFolder.folderId = DLFileRank.folderId)
+			WHERE
+				DLFileRank.userId = ?
+			ORDER BY
+				DLFileRank.createDate DESC
+		]]>
+	</sql>
+</custom-sql>

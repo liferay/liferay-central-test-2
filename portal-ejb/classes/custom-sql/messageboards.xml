@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<custom-sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.countByCategoryIds">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				MBMessage
+			INNER JOIN
+				MBTopic ON
+					([$CATEGORY_ID$]) AND
+					(MBTopic.topicId = MBMessage.topicId)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.countByT_U">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				MBMessageFlag
+			INNER JOIN
+				MBMessage ON
+					(MBMessage.topicId = MBMessageFlag.topicId) AND
+					(MBMessage.messageId = MBMessageFlag.messageId) AND
+					(MBMessage.threadId = ?) AND
+					(MBMessageFlag.userId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBTopicFinder.countByCategoryIds">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				MBTopic
+			WHERE [$CATEGORY_ID$]
+		]]>
+	</sql>
+</custom-sql>

@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">  
+	<service name="Portal_UserService" provider="java:RPC" style="rpc" use="encoded"> 
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.portal.liferay.com"/>  
+		<parameter name="wsdlServiceElement" value="UserServiceSoapService"/>  
+		<parameter name="schemaUnqualified" value="http://util.liferay.com,urn:http.service.portal.liferay.com,http://model.portal.liferay.com"/>  
+		<parameter name="wsdlServicePort" value="Portal_UserService"/>  
+		<parameter name="className" value="com.liferay.portal.service.http.UserServiceSoap"/>  
+		<parameter name="wsdlPortType" value="UserServiceSoap"/>  
+		<parameter name="typeMappingVersion" value="1.2"/>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getRoles" qname="operNS:getRoles" returnQName="getRolesReturn" returnType="rtns:ArrayOf_tns2_UserModel" returnItemType="tns2:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getRoles" qname="operNS:getRoles" returnQName="getRolesReturn" returnType="rtns:ArrayOf_tns2_UserModel" returnItemType="tns2:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="setRoles" qname="operNS:setRoles" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="roleIds" type="tns:ArrayOf_xsd_string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getCompanyId" qname="operNS:getCompanyId" returnQName="getCompanyIdReturn" returnType="rtns:string" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getUserId" qname="operNS:getUserId" returnQName="getUserIdReturn" returnType="rtns:string" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="emailAddress" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getDefaultUser" qname="operNS:getDefaultUser" returnQName="getDefaultUserReturn" returnType="rtns:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getGroups" qname="operNS:getGroups" returnQName="getGroupsReturn" returnType="rtns:ArrayOf_tns2_UserModel" returnItemType="tns2:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getGroups" qname="operNS:getGroups" returnQName="getGroupsReturn" returnType="rtns:ArrayOf_tns2_UserModel" returnItemType="tns2:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getGroupsSize" qname="operNS:getGroupsSize" returnQName="getGroupsSizeReturn" returnType="rtns:int" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="setGroups" qname="operNS:setGroups" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="groupIds" type="tns:ArrayOf_xsd_string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="hasAdmin" qname="operNS:hasAdmin" returnQName="hasAdminReturn" returnType="rtns:boolean" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="addGroupUsers" qname="operNS:addGroupUsers" returnQName="addGroupUsersReturn" returnType="rtns:boolean" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="addRoleUsers" qname="operNS:addRoleUsers" returnQName="addRoleUsersReturn" returnType="rtns:boolean" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="hasGroupUser" qname="operNS:hasGroupUser" returnQName="hasGroupUserReturn" returnType="rtns:boolean" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="hasRoleUser" qname="operNS:hasRoleUser" returnQName="hasRoleUserReturn" returnType="rtns:boolean" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="setGroupUsers" qname="operNS:setGroupUsers" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="setRoleUsers" qname="operNS:setRoleUsers" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="unsetGroupUsers" qname="operNS:unsetGroupUsers" returnQName="unsetGroupUsersReturn" returnType="rtns:boolean" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="unsetRoleUsers" qname="operNS:unsetRoleUsers" returnQName="unsetRoleUsersReturn" returnType="rtns:boolean" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="addComics" qname="operNS:addComics" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="addUser" qname="operNS:addUser" returnQName="addUserReturn" returnType="rtns:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="firstName" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="middleName" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="lastName" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nickName" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="prefixId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="suffixId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="emailAddress" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="male" type="tns:boolean"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="birthday" type="tns:dateTime"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="locationId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="jobTitle" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="authenticateByEmailAddress" qname="operNS:authenticateByEmailAddress" returnQName="authenticateByEmailAddressReturn" returnType="rtns:int" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="emailAddress" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="password" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="authenticateByUserId" qname="operNS:authenticateByUserId" returnQName="authenticateByUserIdReturn" returnType="rtns:int" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="password" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://util.liferay.com" name="decryptUserId" qname="operNS:decryptUserId" returnQName="decryptUserIdReturn" returnType="rtns:KeyValuePair" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="password" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteComics" qname="operNS:deleteComics" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteUser" qname="operNS:deleteUser" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="encryptUserId" qname="operNS:encryptUserId" returnQName="encryptUserIdReturn" returnType="rtns:string" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getComics" qname="operNS:getComics" returnQName="getComicsReturn" returnType="rtns:ArrayOf_tns2_UserModel" returnItemType="tns2:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="active" type="tns:boolean"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getComics" qname="operNS:getComics" returnQName="getComicsReturn" returnType="rtns:ArrayOf_tns2_UserModel" returnItemType="tns2:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getRolesSize" qname="operNS:getRolesSize" returnQName="getRolesSizeReturn" returnType="rtns:int" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getUserByEmailAddress" qname="operNS:getUserByEmailAddress" returnQName="getUserByEmailAddressReturn" returnType="rtns:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="emailAddress" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getUserById" qname="operNS:getUserById" returnQName="getUserByIdReturn" returnType="rtns:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getUserById" qname="operNS:getUserById" returnQName="getUserByIdReturn" returnType="rtns:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="sendPassword" qname="operNS:sendPassword" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="emailAddress" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="remoteAddr" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="remoteHost" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userAgent" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateActive" qname="operNS:updateActive" returnQName="updateActiveReturn" returnType="rtns:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="active" type="tns:boolean"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateAgreedToTermsOfUse" qname="operNS:updateAgreedToTermsOfUse" returnQName="updateAgreedToTermsOfUseReturn" returnType="rtns:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="agreedToTermsOfUse" type="tns:boolean"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateLastLogin" qname="operNS:updateLastLogin" returnQName="updateLastLoginReturn" returnType="rtns:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="loginIP" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="updatePortrait" qname="operNS:updatePortrait" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="bytes" type="tns:base64Binary"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateUser" qname="operNS:updateUser" returnQName="updateUserReturn" returnType="rtns:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="password" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="emailAddress" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="languageId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="timeZoneId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="greeting" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="resolution" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="comments" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="firstName" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="middleName" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="lastName" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nickName" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="male" type="tns:boolean"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="birthday" type="tns:dateTime"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="smsSn" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="aimSn" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="icqSn" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="msnSn" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="ymSn" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateUser" qname="operNS:updateUser" returnQName="updateUserReturn" returnType="rtns:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="firstName" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="middleName" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="lastName" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nickName" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="prefixId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="suffixId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="emailAddress" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="male" type="tns:boolean"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="birthday" type="tns:dateTime"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="locationId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="jobTitle" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateUser" qname="operNS:updateUser" returnQName="updateUserReturn" returnType="rtns:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="password1" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="password2" type="tns:string"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="passwordReset" type="tns:boolean"></parameter> 
+		</operation>  
+		<parameter name="allowedMethods" value="updatePortrait addComics hasRoleUser setRoleUsers unsetGroupUsers getRoles addUser unsetRoleUsers addRoleUsers deleteUser getRolesSize setRoles getUserByEmailAddress setGroups encryptUserId addGroupUsers getGroupsSize getComics getUserId authenticateByEmailAddress sendPassword getDefaultUser decryptUserId hasGroupUser getCompanyId updateLastLogin updateAgreedToTermsOfUse getGroups setGroupUsers authenticateByUserId getUserById updateActive hasAdmin deleteComics updateUser"/>  
+		<typeMapping xmlns:ns="http://util.liferay.com" qname="ns:KeyValuePair" type="java:com.liferay.util.KeyValuePair" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>  
+		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>  
+		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_UserModel" type="java:com.liferay.portal.model.UserModel[]" innerType="cmp-ns:UserModel" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>  
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:BaseModel" type="java:com.liferay.portal.model.BaseModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>  
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:UserModel" type="java:com.liferay.portal.model.UserModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping> 
+	</service> 
+</deployment>

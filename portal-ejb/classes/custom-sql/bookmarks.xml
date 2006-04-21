@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<custom-sql>
+	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder.countByFolderIds">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				BookmarksEntry
+			WHERE [$FOLDER_ID$]
+		]]>
+	</sql>
+</custom-sql>

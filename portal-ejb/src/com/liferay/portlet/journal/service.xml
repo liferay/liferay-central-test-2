@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 4.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_4_0_0.dtd">
+
+<service-builder root-dir=".." package-path="com.liferay.portlet">
+	<portlet name="Journal" short-name="Journal" />
+	<entity name="JournalArticle" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="companyId" type="String" primary="true" />
+		<column name="articleId" type="String" primary="true" />
+		<column name="version" type="double" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="String" />
+
+		<!-- Audit fields -->
+
+		<column name="userId" type="String" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="title" type="String" />
+		<column name="content" type="String" />
+		<column name="type" type="String" />
+		<column name="structureId" type="String" />
+		<column name="templateId" type="String" />
+		<column name="displayDate" type="Date" />
+		<column name="approved" type="boolean" />
+		<column name="approvedByUserId" type="String" />
+		<column name="approvedByUserName" type="String" />
+		<column name="approvedDate" type="Date" />
+		<column name="expired" type="boolean" />
+		<column name="expirationDate" type="Date" />
+		<column name="reviewDate" type="Date" />
+
+		<!-- Order -->
+
+		<order>
+			<order-column name="articleId" order-by="asc" />
+			<order-column name="version" order-by="desc" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="C_A" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="articleId" />
+		</finder>
+		<finder name="C_S" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="structureId" />
+		</finder>
+		<finder name="C_T" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="templateId" />
+		</finder>
+		<finder name="C_A_A" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="articleId" />
+			<finder-column name="approved" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="Image" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
+	</entity>
+	<entity name="JournalContentSearch" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="portletId" type="String" primary="true" />
+		<column name="layoutId" type="String" primary="true" />
+		<column name="ownerId" type="String" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="String" />
+
+		<!-- Other fields -->
+
+		<column name="articleId" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="OwnerId" return-type="Collection">
+			<finder-column name="ownerId" />
+		</finder>
+		<finder name="L_O" return-type="Collection">
+			<finder-column name="layoutId" />
+			<finder-column name="ownerId" />
+		</finder>
+		<finder name="O_A" return-type="Collection">
+			<finder-column name="ownerId" />
+			<finder-column name="articleId" />
+		</finder>
+		<finder name="C_A" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="articleId" />
+		</finder>
+	</entity>
+	<entity name="JournalStructure" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="companyId" type="String" primary="true" />
+		<column name="structureId" type="String" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="String" />
+
+		<!-- Audit fields -->
+
+		<column name="userId" type="String" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="description" type="String" />
+		<column name="xsd" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="structureId" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="Resource" />
+	</entity>
+	<entity name="JournalTemplate" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="companyId" type="String" primary="true" />
+		<column name="templateId" type="String" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="String" />
+
+		<!-- Audit fields -->
+
+		<column name="userId" type="String" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="structureId" type="String" />
+		<column name="name" type="String" />
+		<column name="description" type="String" />
+		<column name="xsl" type="String" />
+		<column name="langType" type="String" />
+		<column name="smallImage" type="boolean" />
+		<column name="smallImageURL" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="templateId" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="C_S" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="structureId" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="Resource" />
+	</entity>
+	<exceptions>
+		<exception>ArticleContent</exception>
+		<exception>ArticleDisplayDate</exception>
+		<exception>ArticleExpirationDate</exception>
+		<exception>ArticleId</exception>
+		<exception>ArticleReviewDate</exception>
+		<exception>ArticleTitle</exception>
+		<exception>DuplicateArticleId</exception>
+		<exception>DuplicateStructureId</exception>
+		<exception>DuplicateTemplateId</exception>
+		<exception>RequiredStructure</exception>
+		<exception>RequiredTemplate</exception>
+		<exception>StructureDescription</exception>
+		<exception>StructureId</exception>
+		<exception>StructureName</exception>
+		<exception>StructureXsd</exception>
+		<exception>TemplateDescription</exception>
+		<exception>TemplateId</exception>
+		<exception>TemplateName</exception>
+		<exception>TemplateSmallImageName</exception>
+		<exception>TemplateSmallImageSize</exception>
+		<exception>TemplateXsl</exception>
+	</exceptions>
+</service-builder>

@@ -1,0 +1,645 @@
+/**
+ * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portal.security.permission;
+
+import com.liferay.portal.SystemException;
+import com.liferay.portal.language.LanguageException;
+import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.model.Permission;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.shared.util.StackTraceUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.CollectionFactory;
+import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
+
+import java.io.StringReader;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+
+import javax.servlet.jsp.PageContext;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+
+/**
+ * <a href="ResourceActionsUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class ResourceActionsUtil {
+
+	public static final String ACTION_NAME_PREFIX = "action.";
+
+	public static final String MODEL_RESOURCE_NAME_PREFIX = "model.resource.";
+
+	public static String getAction(
+		String companyId, Locale locale, String action) {
+
+		try {
+			return LanguageUtil.get(
+				companyId, locale, ACTION_NAME_PREFIX + action);
+		}
+		catch (LanguageException le) {
+			return action;
+		}
+	}
+
+	public static String getAction(PageContext pageContext, String action) {
+		try {
+			return LanguageUtil.get(pageContext, ACTION_NAME_PREFIX + action);
+		}
+		catch (LanguageException le) {
+			return action;
+		}
+	}
+
+	public static List getActions(List permissions) {
+		List actions = new ArrayList();
+
+		Iterator itr = permissions.iterator();
+
+		while (itr.hasNext()) {
+			Permission permission = (Permission)itr.next();
+
+			actions.add(permission.getActionId());
+		}
+
+		return actions;
+	}
+
+	public static List getActionsNames(PageContext pageContext, List actions) {
+		List list = new ArrayList();
+
+		Iterator itr = actions.iterator();
+
+		while (itr.hasNext()) {
+			String action = (String)itr.next();
+
+			list.add(getAction(pageContext, action));
+		}
+
+		Collections.sort(list);
+
+		return list;
+	}
+
+	public static String getModelResource(
+		String companyId, Locale locale, String name) {
+
+		try {
+			return LanguageUtil.get(
+				companyId, locale, MODEL_RESOURCE_NAME_PREFIX + name);
+		}
+		catch (LanguageException le) {
+			return name;
+		}
+	}
+
+	public static String getModelResource(
+		PageContext pageContext, String name) {
+
+		try {
+			return LanguageUtil.get(
+				pageContext, MODEL_RESOURCE_NAME_PREFIX + name);
+		}
+		catch (LanguageException le) {
+			return name;
+		}
+	}
+
+	public static List getModelResourceActions(String name) {
+		return _instance._getModelResourceActions(name);
+	}
+
+	public static List getModelResourceCommunityDefaultActions(String name) {
+		return _instance._getModelResourceCommunityDefaultActions(name);
+	}
+
+	public static List getModelResourceGuestDefaultActions(String name) {
+		return _instance._getModelResourceGuestDefaultActions(name);
+	}
+
+	public static List getModelResourceGuestUnsupportedActions(String name) {
+		return _instance._getModelResourceGuestUnsupportedActions(name);
+	}
+
+	public static List getPortletModelResources(String portletName) {
+		return _instance._getPortletModelResources(portletName);
+	}
+
+	public static List getPortletResourceActions(
+			String companyId, String name)
+		throws SystemException {
+
+		return _instance._getPortletResourceActions(companyId, name);
+	}
+
+	public static List getPortletResourceCommunityDefaultActions(String name)
+		throws SystemException {
+
+		return _instance._getPortletResourceCommunityDefaultActions(name);
+	}
+
+	public static List getPortletResourceGuestDefaultActions(String name)
+		throws SystemException {
+
+		return _instance._getPortletResourceGuestDefaultActions(name);
+	}
+
+	public static List getPortletResourceGuestUnsupportedActions(String name)
+		throws SystemException {
+
+		return _instance._getPortletResourceGuestUnsupportedActions(name);
+	}
+
+	public static List getResourceActions(
+			String companyId, String portletResource, String modelResource)
+		throws SystemException {
+
+		List actions = null;
+
+		if (Validator.isNull(modelResource)) {
+			actions = getPortletResourceActions(companyId, portletResource);
+		}
+		else {
+			actions = getModelResourceActions(modelResource);
+		}
+
+		return actions;
+	}
+
+	public static List getResourceGuestUnsupportedActions(
+			String portletResource, String modelResource)
+		throws SystemException {
+
+		List actions = null;
+
+		if (Validator.isNull(modelResource)) {
+			actions =
+				getPortletResourceGuestUnsupportedActions(portletResource);
+		}
+		else {
+			actions = getModelResourceGuestUnsupportedActions(modelResource);
+		}
+
+		return actions;
+	}
+
+	private ResourceActionsUtil() {
+		_portletModelResources = CollectionFactory.getHashMap();
+		_portletResourceActions = CollectionFactory.getHashMap();
+		_portletResourceCommunityDefaultActions =
+			CollectionFactory.getHashMap();
+		_portletResourceGuestDefaultActions = CollectionFactory.getHashMap();
+		_portletResourceGuestUnsupportedActions =
+			CollectionFactory.getHashMap();
+		_modelResourceActions = CollectionFactory.getHashMap();
+		_modelResourceCommunityDefaultActions = CollectionFactory.getHashMap();
+		_modelResourceGuestDefaultActions = CollectionFactory.getHashMap();
+		_modelResourceGuestUnsupportedActions = CollectionFactory.getHashMap();
+
+		try {
+			ClassLoader classLoader = getClass().getClassLoader();
+
+			String[] configs = StringUtil.split(
+				PropsUtil.get(PropsUtil.RESOURCE_ACTIONS_CONFIGS));
+
+			for (int i = 0; i < configs.length; i++) {
+				_read(classLoader, configs[i]);
+			}
+		}
+		catch (Exception e) {
+			_log.error(StackTraceUtil.getStackTrace(e));
+		}
+	}
+
+	private void _checkGuestUnsupportedActions(
+		List guestUnsupportedActions, List guestDefaultActions) {
+
+		// Guest default actions cannot reference guest unsupported actions
+
+		Iterator itr = guestDefaultActions.iterator();
+
+		while (itr.hasNext()) {
+			String actionId = (String)itr.next();
+
+			if (guestUnsupportedActions.contains(actionId)) {
+				itr.remove();
+			}
+		}
+	}
+
+	private void _checkPortletActions(List actions) {
+		if (!actions.contains("CONFIGURATION")) {
+			actions.add("CONFIGURATION");
+		}
+
+		if (!actions.contains("VIEW")) {
+			actions.add("VIEW");
+		}
+	}
+
+	private void _checkPortletCommunityDefaultActions(List actions) {
+		if (actions.size() == 0) {
+			actions.add("VIEW");
+		}
+	}
+
+	private List _getActions(Map map, String name) {
+		List actions = (List)map.get(name);
+
+		if (actions == null) {
+			actions = new ArrayList();
+
+			map.put(name, actions);
+		}
+
+		return actions;
+	}
+
+	private List _getModelResourceActions(String name) {
+		return _getActions(_modelResourceActions, name);
+	}
+
+	private List _getModelResourceCommunityDefaultActions(String name) {
+		return _getActions(_modelResourceCommunityDefaultActions, name);
+	}
+
+	private List _getModelResourceGuestDefaultActions(String name) {
+		return _getActions(_modelResourceGuestDefaultActions, name);
+	}
+
+	private List _getModelResourceGuestUnsupportedActions(String name) {
+		return _getActions(_modelResourceGuestUnsupportedActions, name);
+	}
+
+	private List _getPortletModelResources(String portletName) {
+		Set resources = (Set)_portletModelResources.get(portletName);
+
+		if (resources == null) {
+			return new ArrayList();
+		}
+		else {
+			return Collections.list(Collections.enumeration(resources));
+		}
+	}
+
+	private List _getPortletResourceActions(String companyId, String name)
+		throws SystemException {
+
+		List actions = _getActions(_portletResourceActions, name);
+
+		if (actions.size() == 0) {
+			synchronized (this) {
+				actions.clear();
+
+				Portlet portlet =
+					PortletServiceUtil.getPortletById(companyId, name);
+
+				Map portletModes = portlet.getPortletModes();
+
+				Set mimeTypeModes = (Set)portletModes.get("text/html");
+
+				if (mimeTypeModes != null) {
+					Iterator itr = mimeTypeModes.iterator();
+
+					while (itr.hasNext()) {
+						String actionId = (String)itr.next();
+
+						if (actionId.equalsIgnoreCase("edit")) {
+							actions.add(ActionKeys.PREFERENCES);
+						}
+						else {
+							actions.add(actionId.toUpperCase());
+						}
+					}
+				}
+
+				_checkPortletActions(actions);
+
+				List communityDefaultActions =
+					_getActions(_portletResourceCommunityDefaultActions, name);
+
+				communityDefaultActions.clear();
+
+				_checkPortletCommunityDefaultActions(communityDefaultActions);
+			}
+		}
+
+		return actions;
+	}
+
+	private List _getPortletResourceCommunityDefaultActions(String name)
+		throws SystemException {
+
+		// This method should always be called only after
+		// _getPortletResourceActions has been called at least once to
+		// populate the default community actions. Check to make sure this is
+		// the case. However, if it is not, that means the methods
+		// _getPortletResourceGuestDefaultActions and
+		// _getPortletResourceGuestDefaultActions may not work either.
+
+		List communityDefaultActions = _getActions(
+			_portletResourceCommunityDefaultActions, name);
+
+		if (communityDefaultActions.size() == 0) {
+			throw new SystemException("Community defaults should never empty");
+		}
+
+		return communityDefaultActions;
+	}
+
+	private List _getPortletResourceGuestDefaultActions(String name)
+		throws SystemException {
+
+		return _getActions(_portletResourceGuestDefaultActions, name);
+	}
+
+	private List _getPortletResourceGuestUnsupportedActions(String name)
+		throws SystemException {
+
+		return _getActions(_portletResourceGuestUnsupportedActions, name);
+	}
+
+	private void _read(ClassLoader classLoader, String source)
+		throws Exception {
+
+		String xml = null;
+
+		try {
+			xml = StringUtil.read(classLoader, source);
+		}
+		catch (Exception e) {
+			_log.warn("Cannot load " + source);
+		}
+
+		if (xml == null) {
+			return;
+		}
+
+		_log.debug("Loading " + source);
+
+		SAXReader reader = new SAXReader();
+
+		Document doc = reader.read(new StringReader(xml));
+
+		Element root = doc.getRootElement();
+
+		Iterator itr1 = root.elements("resource").iterator();
+
+		while (itr1.hasNext()) {
+			Element resource = (Element)itr1.next();
+
+			String file = resource.attributeValue("file");
+
+			_read(classLoader, file);
+		}
+
+		itr1 = root.elements("portlet-resource").iterator();
+
+		while (itr1.hasNext()) {
+			Element resource = (Element)itr1.next();
+
+			String name = resource.elementText("portlet-name");
+
+			// Actions
+
+			List actions = _getActions(_portletResourceActions, name);
+
+			Element supports = resource.element("supports");
+
+			Iterator itr2 = supports.elements("action-key").iterator();
+
+			while (itr2.hasNext()) {
+				Element actionKey = (Element)itr2.next();
+
+				String actionKeyText = actionKey.getText();
+
+				if (Validator.isNotNull(actionKeyText)) {
+					actions.add(actionKeyText);
+				}
+			}
+
+			_checkPortletActions(actions);
+
+			// Community default actions
+
+			List communityDefaultActions =
+				_getActions(_portletResourceCommunityDefaultActions, name);
+
+			Element communityDefaults = resource.element("community-defaults");
+
+			itr2 = communityDefaults.elements("action-key").iterator();
+
+			while (itr2.hasNext()) {
+				Element actionKey = (Element)itr2.next();
+
+				String actionKeyText = actionKey.getText();
+
+				if (Validator.isNotNull(actionKeyText)) {
+					communityDefaultActions.add(actionKeyText);
+				}
+			}
+
+			_checkPortletCommunityDefaultActions(communityDefaultActions);
+
+			// Guest default actions
+
+			List guestDefaultActions =
+				_getActions(_portletResourceGuestDefaultActions, name);
+
+			Element guestDefaults = resource.element("guest-defaults");
+
+			itr2 = guestDefaults.elements("action-key").iterator();
+
+			while (itr2.hasNext()) {
+				Element actionKey = (Element)itr2.next();
+
+				String actionKeyText = actionKey.getText();
+
+				if (Validator.isNotNull(actionKeyText)) {
+					guestDefaultActions.add(actionKeyText);
+				}
+			}
+
+			// Guest unsupported actions
+
+			List guestUnsupportedActions =
+				_getActions(_portletResourceGuestUnsupportedActions, name);
+
+			Element guestUnsupported = resource.element("guest-unsupported");
+
+			itr2 = guestUnsupported.elements("action-key").iterator();
+
+			while (itr2.hasNext()) {
+				Element actionKey = (Element)itr2.next();
+
+				String actionKeyText = actionKey.getText();
+
+				if (Validator.isNotNull(actionKeyText)) {
+					guestUnsupportedActions.add(actionKeyText);
+				}
+			}
+
+			_checkGuestUnsupportedActions(
+				guestUnsupportedActions, guestDefaultActions);
+		}
+
+		itr1 = root.elements("model-resource").iterator();
+
+		while (itr1.hasNext()) {
+			Element resource = (Element)itr1.next();
+
+			String name = resource.elementText("model-name");
+
+			Element portletRef = resource.element("portlet-ref");
+
+			Iterator itr2 = portletRef.elements("portlet-name").iterator();
+
+			while (itr2.hasNext()) {
+				Element portletName = (Element)itr2.next();
+
+				String portletNameString = portletName.getText();
+
+				Set modelResources = (Set)_portletModelResources.get(
+					portletNameString);
+
+				if (modelResources == null) {
+					modelResources = new HashSet();
+
+					_portletModelResources.put(
+						portletNameString, modelResources);
+				}
+
+				modelResources.add(name);
+			}
+
+			// Actions
+
+			List actions = _getActions(_modelResourceActions, name);
+
+			Element supports = resource.element("supports");
+
+			itr2 = supports.elements("action-key").iterator();
+
+			while (itr2.hasNext()) {
+				Element actionKey = (Element)itr2.next();
+
+				String actionKeyText = actionKey.getText();
+
+				if (Validator.isNotNull(actionKeyText)) {
+					actions.add(actionKeyText);
+				}
+			}
+
+			// Community default actions
+
+			List communityDefaultActions =
+				_getActions(_modelResourceCommunityDefaultActions, name);
+
+			Element communityDefaults = resource.element("community-defaults");
+
+			itr2 = communityDefaults.elements("action-key").iterator();
+
+			while (itr2.hasNext()) {
+				Element actionKey = (Element)itr2.next();
+
+				String actionKeyText = actionKey.getText();
+
+				if (Validator.isNotNull(actionKeyText)) {
+					communityDefaultActions.add(actionKeyText);
+				}
+			}
+
+			// Guest default actions
+
+			List guestDefaultActions =
+				_getActions(_modelResourceGuestDefaultActions, name);
+
+			Element guestDefaults = resource.element("guest-defaults");
+
+			itr2 = guestDefaults.elements("action-key").iterator();
+
+			while (itr2.hasNext()) {
+				Element actionKey = (Element)itr2.next();
+
+				String actionKeyText = actionKey.getText();
+
+				if (Validator.isNotNull(actionKeyText)) {
+					guestDefaultActions.add(actionKeyText);
+				}
+			}
+
+			// Guest unsupported actions
+
+			List guestUnsupportedActions =
+				_getActions(_modelResourceGuestUnsupportedActions, name);
+
+			Element guestUnsupported = resource.element("guest-unsupported");
+
+			itr2 = guestUnsupported.elements("action-key").iterator();
+
+			while (itr2.hasNext()) {
+				Element actionKey = (Element)itr2.next();
+
+				String actionKeyText = actionKey.getText();
+
+				if (Validator.isNotNull(actionKeyText)) {
+					guestUnsupportedActions.add(actionKeyText);
+				}
+			}
+
+			_checkGuestUnsupportedActions(
+				guestUnsupportedActions, guestDefaultActions);
+		}
+	}
+
+	private static Log _log = LogFactory.getLog(ResourceActionsUtil.class);
+
+	private static ResourceActionsUtil _instance = new ResourceActionsUtil();
+
+	private Map _portletModelResources;
+	private Map _portletResourceActions;
+	private Map _portletResourceCommunityDefaultActions;
+	private Map _portletResourceGuestDefaultActions;
+	private Map _portletResourceGuestUnsupportedActions;
+	private Map _modelResourceActions;
+	private Map _modelResourceCommunityDefaultActions;
+	private Map _modelResourceGuestDefaultActions;
+	private Map _modelResourceGuestUnsupportedActions;
+
+}

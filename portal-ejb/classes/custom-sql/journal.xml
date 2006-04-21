@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+
+<custom-sql>
+	<sql id="com.liferay.portlet.journal.service.persistence.JournalArticleFinder.countByC_A_V_G_T_C_T_S_T_D_A_E_R">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				JournalArticle
+			WHERE
+				(companyId = ?) AND
+				(
+					(articleId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(version = ?) [$AND_OR_CONNECTOR$]
+					(groupId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(title) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(content LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(type_ = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(structureId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(templateId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(displayDate >= ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(displayDate <= ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(
+						(approved = ? [$AND_OR_NULL_CHECK$]) AND
+						(expired = ? [$AND_OR_NULL_CHECK$]) AND
+						(reviewDate <= ? [$AND_OR_NULL_CHECK$])
+					)
+				)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.journal.service.persistence.JournalArticleFinder.findByC_A_V_G_T_C_T_S_T_D_A_E_R">
+		<![CDATA[
+			SELECT
+				{JournalArticle.*}
+			FROM
+				JournalArticle
+			WHERE
+				(companyId = ?) AND
+				(
+					(articleId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(version = ?) [$AND_OR_CONNECTOR$]
+					(groupId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(title) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(content LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(type_ = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(structureId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(templateId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(displayDate >= ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(displayDate <= ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(
+						(approved = ? [$AND_OR_NULL_CHECK$]) AND
+						(expired = ? [$AND_OR_NULL_CHECK$]) AND
+						(reviewDate <= ? [$AND_OR_NULL_CHECK$])
+					)
+				)
+			ORDER BY
+				articleId ASC,
+				version DESC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.journal.service.persistence.JournalStructureFinder.countByC_S_G_N_D">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				JournalStructure
+			WHERE
+				(companyId = ?) AND
+				(groupId = ?) AND
+				(
+					(structureId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(description) LIKE ? [$AND_OR_NULL_CHECK$])
+				)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.journal.service.persistence.JournalStructureFinder.findByC_S_G_N_D">
+		<![CDATA[
+			SELECT
+				{JournalStructure.*}
+			FROM
+				JournalStructure
+			WHERE
+				(companyId = ?) AND
+				(groupId = ?) AND
+				(
+					(structureId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(description) LIKE ? [$AND_OR_NULL_CHECK$])
+				)
+			ORDER BY
+				structureId ASC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.journal.service.persistence.JournalTemplateFinder.countByC_T_G_S_N_D">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				JournalTemplate
+			WHERE
+				(companyId = ?) AND
+				(groupId = ?) AND
+				(
+					(templateId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(structureId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(description) LIKE ? [$AND_OR_NULL_CHECK$])
+				)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.journal.service.persistence.JournalTemplateFinder.findByC_T_G_S_N_D">
+		<![CDATA[
+			SELECT
+				{JournalTemplate.*}
+			FROM
+				JournalTemplate
+			WHERE
+				(companyId = ?) AND
+				(groupId = ?) AND
+				(
+					(templateId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(structureId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(description) LIKE ? [$AND_OR_NULL_CHECK$])
+				)
+			ORDER BY
+				templateId ASC
+		]]>
+	</sql>
+</custom-sql>

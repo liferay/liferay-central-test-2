@@ -1,0 +1,429 @@
+/**
+ * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portal.service.persistence;
+
+import com.liferay.portal.NoSuchUserIdMapperException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.service.persistence.BasePersistence;
+
+import com.liferay.util.StringPool;
+import com.liferay.util.dao.hibernate.OrderByComparator;
+import com.liferay.util.dao.hibernate.QueryUtil;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ * <a href="UserIdMapperPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class UserIdMapperPersistence extends BasePersistence {
+	public com.liferay.portal.model.UserIdMapper create(
+		UserIdMapperPK userIdMapperPK) {
+		UserIdMapperHBM userIdMapperHBM = new UserIdMapperHBM();
+		userIdMapperHBM.setNew(true);
+		userIdMapperHBM.setPrimaryKey(userIdMapperPK);
+
+		return UserIdMapperHBMUtil.model(userIdMapperHBM);
+	}
+
+	public com.liferay.portal.model.UserIdMapper remove(
+		UserIdMapperPK userIdMapperPK)
+		throws NoSuchUserIdMapperException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			UserIdMapperHBM userIdMapperHBM = (UserIdMapperHBM)session.get(UserIdMapperHBM.class,
+					userIdMapperPK);
+
+			if (userIdMapperHBM == null) {
+				_log.warn("No UserIdMapper exists with the primary key " +
+					userIdMapperPK.toString());
+				throw new NoSuchUserIdMapperException(
+					"No UserIdMapper exists with the primary key " +
+					userIdMapperPK.toString());
+			}
+
+			session.delete(userIdMapperHBM);
+			session.flush();
+
+			return UserIdMapperHBMUtil.model(userIdMapperHBM);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public com.liferay.portal.model.UserIdMapper update(
+		com.liferay.portal.model.UserIdMapper userIdMapper)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			if (userIdMapper.isNew() || userIdMapper.isModified()) {
+				session = openSession();
+
+				if (userIdMapper.isNew()) {
+					UserIdMapperHBM userIdMapperHBM = new UserIdMapperHBM();
+					userIdMapperHBM.setUserId(userIdMapper.getUserId());
+					userIdMapperHBM.setType(userIdMapper.getType());
+					userIdMapperHBM.setDescription(userIdMapper.getDescription());
+					userIdMapperHBM.setExternalUserId(userIdMapper.getExternalUserId());
+					session.save(userIdMapperHBM);
+					session.flush();
+				}
+				else {
+					UserIdMapperHBM userIdMapperHBM = (UserIdMapperHBM)session.get(UserIdMapperHBM.class,
+							userIdMapper.getPrimaryKey());
+
+					if (userIdMapperHBM != null) {
+						userIdMapperHBM.setDescription(userIdMapper.getDescription());
+						userIdMapperHBM.setExternalUserId(userIdMapper.getExternalUserId());
+						session.flush();
+					}
+					else {
+						userIdMapperHBM = new UserIdMapperHBM();
+						userIdMapperHBM.setUserId(userIdMapper.getUserId());
+						userIdMapperHBM.setType(userIdMapper.getType());
+						userIdMapperHBM.setDescription(userIdMapper.getDescription());
+						userIdMapperHBM.setExternalUserId(userIdMapper.getExternalUserId());
+						session.save(userIdMapperHBM);
+						session.flush();
+					}
+				}
+
+				userIdMapper.setNew(false);
+				userIdMapper.setModified(false);
+			}
+
+			return userIdMapper;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public com.liferay.portal.model.UserIdMapper findByPrimaryKey(
+		UserIdMapperPK userIdMapperPK)
+		throws NoSuchUserIdMapperException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			UserIdMapperHBM userIdMapperHBM = (UserIdMapperHBM)session.get(UserIdMapperHBM.class,
+					userIdMapperPK);
+
+			if (userIdMapperHBM == null) {
+				_log.warn("No UserIdMapper exists with the primary key " +
+					userIdMapperPK.toString());
+				throw new NoSuchUserIdMapperException(
+					"No UserIdMapper exists with the primary key " +
+					userIdMapperPK.toString());
+			}
+
+			return UserIdMapperHBMUtil.model(userIdMapperHBM);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByUserId(String userId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM UserIdMapper IN CLASS com.liferay.portal.service.persistence.UserIdMapperHBM WHERE ");
+			query.append("userId = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setString(queryPos++, userId);
+
+			Iterator itr = q.list().iterator();
+			List list = new ArrayList();
+
+			while (itr.hasNext()) {
+				UserIdMapperHBM userIdMapperHBM = (UserIdMapperHBM)itr.next();
+				list.add(UserIdMapperHBMUtil.model(userIdMapperHBM));
+			}
+
+			return list;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByUserId(String userId, int begin, int end)
+		throws SystemException {
+		return findByUserId(userId, begin, end, null);
+	}
+
+	public List findByUserId(String userId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM UserIdMapper IN CLASS com.liferay.portal.service.persistence.UserIdMapperHBM WHERE ");
+			query.append("userId = ?");
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setString(queryPos++, userId);
+
+			List list = new ArrayList();
+			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
+
+			while (itr.hasNext()) {
+				UserIdMapperHBM userIdMapperHBM = (UserIdMapperHBM)itr.next();
+				list.add(UserIdMapperHBMUtil.model(userIdMapperHBM));
+			}
+
+			return list;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public com.liferay.portal.model.UserIdMapper findByUserId_First(
+		String userId, OrderByComparator obc)
+		throws NoSuchUserIdMapperException, SystemException {
+		List list = findByUserId(userId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			String msg = "No UserIdMapper exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "userId=";
+			msg += userId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchUserIdMapperException(msg);
+		}
+		else {
+			return (com.liferay.portal.model.UserIdMapper)list.get(0);
+		}
+	}
+
+	public com.liferay.portal.model.UserIdMapper findByUserId_Last(
+		String userId, OrderByComparator obc)
+		throws NoSuchUserIdMapperException, SystemException {
+		int count = countByUserId(userId);
+		List list = findByUserId(userId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			String msg = "No UserIdMapper exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "userId=";
+			msg += userId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchUserIdMapperException(msg);
+		}
+		else {
+			return (com.liferay.portal.model.UserIdMapper)list.get(0);
+		}
+	}
+
+	public com.liferay.portal.model.UserIdMapper[] findByUserId_PrevAndNext(
+		UserIdMapperPK userIdMapperPK, String userId, OrderByComparator obc)
+		throws NoSuchUserIdMapperException, SystemException {
+		com.liferay.portal.model.UserIdMapper userIdMapper = findByPrimaryKey(userIdMapperPK);
+		int count = countByUserId(userId);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM UserIdMapper IN CLASS com.liferay.portal.service.persistence.UserIdMapperHBM WHERE ");
+			query.append("userId = ?");
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setString(queryPos++, userId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					userIdMapper, UserIdMapperHBMUtil.getInstance());
+			com.liferay.portal.model.UserIdMapper[] array = new com.liferay.portal.model.UserIdMapper[3];
+			array[0] = (com.liferay.portal.model.UserIdMapper)objArray[0];
+			array[1] = (com.liferay.portal.model.UserIdMapper)objArray[1];
+			array[2] = (com.liferay.portal.model.UserIdMapper)objArray[2];
+
+			return array;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findAll() throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM UserIdMapper IN CLASS com.liferay.portal.service.persistence.UserIdMapperHBM ");
+
+			Query q = session.createQuery(query.toString());
+			Iterator itr = q.iterate();
+			List list = new ArrayList();
+
+			while (itr.hasNext()) {
+				UserIdMapperHBM userIdMapperHBM = (UserIdMapperHBM)itr.next();
+				list.add(UserIdMapperHBMUtil.model(userIdMapperHBM));
+			}
+
+			return list;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public void removeByUserId(String userId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM UserIdMapper IN CLASS com.liferay.portal.service.persistence.UserIdMapperHBM WHERE ");
+			query.append("userId = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setString(queryPos++, userId);
+
+			Iterator itr = q.list().iterator();
+
+			while (itr.hasNext()) {
+				UserIdMapperHBM userIdMapperHBM = (UserIdMapperHBM)itr.next();
+				session.delete(userIdMapperHBM);
+			}
+
+			session.flush();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByUserId(String userId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM UserIdMapper IN CLASS com.liferay.portal.service.persistence.UserIdMapperHBM WHERE ");
+			query.append("userId = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setString(queryPos++, userId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Integer count = (Integer)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	private static Log _log = LogFactory.getLog(UserIdMapperPersistence.class);
+}
