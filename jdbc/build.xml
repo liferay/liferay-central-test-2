@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<project name="jdbc" basedir="." default="compile">
+	<import file="../build-common-java.xml" />
+
+	<property name="deploy.dir" value="${app.server.lib}" />
+	<property name="jar.file" value="liferay-jdbc.jar" />
+</project>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE ejb-jar PUBLIC "-//Sun Microsystems, Inc.//DTD Enterprise JavaBeans 2.0//EN" "http://java.sun.com/dtd/ejb-jar_2_0.dtd">
+
+<ejb-jar>
+	<enterprise-beans>
+		<session>
+			<display-name>CounterServiceEJB</display-name>
+			<ejb-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-name>
+			<home>com.liferay.counter.service.ejb.CounterServiceHome</home>
+			<remote>com.liferay.counter.service.ejb.CounterServiceEJB</remote>
+			<ejb-class>com.liferay.counter.service.ejb.CounterServiceEJBImpl</ejb-class>
+			<session-type>Stateless</session-type>
+			<transaction-type>Bean</transaction-type>
+		</session>
+	</enterprise-beans>
+	<assembly-descriptor>
+		<method-permission>
+			<unchecked />
+			<method>
+				<ejb-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-name>
+				<method-name>*</method-name>
+			</method>
+		</method-permission>
+	</assembly-descriptor>
+</ejb-jar>
