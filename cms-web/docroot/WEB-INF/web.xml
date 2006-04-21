@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+	<context-param>
+		<param-name>company_id</param-name>
+		<param-value>liferay.com</param-value>
+	</context-param>
+	<filter>
+		<filter-name>Compression Filter</filter-name>
+		<filter-class>com.liferay.filters.compression.CompressionFilter</filter-class>
+	</filter>
+	<!--<filter-mapping>
+		<filter-name>Compression Filter</filter-name>
+		<url-pattern>/servlet/*</url-pattern>
+	</filter-mapping>-->
+	<servlet>
+		<servlet-name>CMSServlet</servlet-name>
+		<display-name>CMSServlet</display-name>
+		<servlet-class>com.liferay.portal.cms.servlet.CMSServlet</servlet-class>
+		<init-param>
+			<param-name>redirects_conf</param-name>
+			<param-value>cms-redirects</param-value>
+		</init-param>
+		<init-param>
+			<param-name>redirects_enabled</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CMSServlet</servlet-name>
+		<url-pattern>/servlet/*</url-pattern>
+	</servlet-mapping>
+</web-app>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<project name="cms-web" basedir="." default="war">
+	<import file="../build-common-web.xml" />
+
+	<property name="deploy.dir" value="${app.server.ear}" />
+	<property name="war.file" value="${ant.project.name}.war" />
+</project>
