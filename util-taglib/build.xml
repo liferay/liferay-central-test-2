@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<project name="util-taglib" basedir="." default="compile">
+	<import file="../build-common-java.xml" />
+
+	<property name="jar.file" value="${ant.project.name}.jar" />
+
+	<target name="jar">
+		<antcall target="build-common-java.jar" />
+
+		<copy file="${jar.file}" todir="${project.dir}/portal-ejb/classes/com/liferay/portal/deploy/dependencies" />
+
+		<copy todir="${project.dir}/portal-ejb/classes/com/liferay/portal/deploy/dependencies">
+			<fileset dir="${classes.dir}/META-INF" />
+		</copy>
+	</target>
+
+	<target name="deploy" depends="jar">
+		<copy file="${jar.file}" todir="${project.dir}/portal-web/docroot/WEB-INF/lib" />
+
+		<copy todir="${project.dir}/portal-web/docroot/WEB-INF/tld">
+			<fileset dir="${classes.dir}/META-INF" />
+		</copy>
+	</target>
+</project>
