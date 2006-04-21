@@ -258,6 +258,14 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		return organizationGroups;
 	}
 
+	public List getPublicGroups(String companyId) throws SystemException {
+		Map params = new HashMap();
+
+		params.put("layoutSet", Boolean.FALSE);
+
+		return GroupFinder.findByC_N_1(companyId, null, params);
+	}
+
 	public List getRoleGroups(String roleId)
 		throws PortalException, SystemException {
 
@@ -279,7 +287,7 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 
 	public List getUserGroups(
 			String companyId, String userId, boolean privateLayout)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Map params = new HashMap();
 

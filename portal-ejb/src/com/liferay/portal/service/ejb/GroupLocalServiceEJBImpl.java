@@ -129,6 +129,11 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 		return getService().getOrganizationGroups(organizations);
 	}
 
+	public java.util.List getPublicGroups(java.lang.String companyId)
+		throws com.liferay.portal.SystemException {
+		return getService().getPublicGroups(companyId);
+	}
+
 	public java.util.List getRoleGroups(java.lang.String roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -150,8 +155,7 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 
 	public java.util.List getUserGroups(java.lang.String companyId,
 		java.lang.String userId, boolean privateLayout)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		return getService().getUserGroups(companyId, userId, privateLayout);
 	}
 
