@@ -401,11 +401,11 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 			button.value = "<%= LanguageUtil.get(pageContext, "delete") %>";
 		}
 	}
-	
+
 	function toggleArticleImage(obj, imageId) {
 		var hidden = toggleById(imageId, true);
 		var spanText = obj.getElementsByTagName("span");
-		
+
 		if (hidden) {
 			spanText[0].style.display = "none";
 			spanText[1].style.display = "";

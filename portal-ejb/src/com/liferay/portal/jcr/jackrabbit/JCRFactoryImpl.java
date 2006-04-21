@@ -95,24 +95,30 @@ public class JCRFactoryImpl implements JCRFactory {
 				session.logout();
 			}
 		}
+
+		_initialized = true;
 	}
 
 	public void shutdown() throws RepositoryException {
-		Session session = null;
+		if (_initialized) {
+			Session session = null;
 
-		try {
-			session = createSession(null);
+			try {
+				session = createSession(null);
 
-			JackrabbitRepository repository =
-				(JackrabbitRepository)session.getRepository();
+				JackrabbitRepository repository =
+					(JackrabbitRepository)session.getRepository();
 
-			repository.shutdown();
+				repository.shutdown();
+			}
+			catch (RepositoryException e) {
+				_log.error("Could not shutdown Jackrabbit");
+
+				throw e;
+			}
 		}
-		catch (RepositoryException e) {
-			_log.error("Could not shutdown Jackrabbit");
 
-			throw e;
-		}
+		_initialized = false;
 	}
 
 	protected JCRFactoryImpl() throws Exception {
@@ -134,5 +140,6 @@ public class JCRFactoryImpl implements JCRFactory {
 	private static Log _log = LogFactory.getLog(JCRFactoryImpl.class);
 
 	private Repository _repository;
+	private boolean _initialized;
 
 }

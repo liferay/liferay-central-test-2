@@ -28,6 +28,9 @@ import com.liferay.portal.im.MSNConnector;
 import com.liferay.portal.im.YMConnector;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="ShutdownHook.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,6 +44,8 @@ public class ShutdownHook implements Runnable {
 		// Disconnect AIM
 
 		try {
+			_log.debug("Shutting down AIM");
+
 			AIMConnector.disconnect();
 		}
 		catch (Exception e) {
@@ -49,6 +54,8 @@ public class ShutdownHook implements Runnable {
 		// Disconnect ICQ
 
 		try {
+			_log.debug("Shutting down ICQ");
+
 			ICQConnector.disconnect();
 		}
 		catch (Exception e) {
@@ -57,6 +64,8 @@ public class ShutdownHook implements Runnable {
 		// Disconnect MSN
 
 		try {
+			_log.debug("Shutting down MSN");
+
 			MSNConnector.disconnect();
 		}
 		catch (Exception e) {
@@ -65,6 +74,8 @@ public class ShutdownHook implements Runnable {
 		// Disconnect YM
 
 		try {
+			_log.debug("Shutting down YM");
+
 			YMConnector.disconnect();
 		}
 		catch (Exception e) {
@@ -73,10 +84,14 @@ public class ShutdownHook implements Runnable {
 		// Shutdown JCR
 
 		try {
+			_log.debug("Shutting down JCR");
+
 			JCRFactoryUtil.shutdown();
 		}
 		catch (Exception e) {
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(ShutdownHook.class);
 
 }
