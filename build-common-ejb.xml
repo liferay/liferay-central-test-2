@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<project name="build-common-ejb">
+	<import file="build-common-java.xml" />
+
+	<target name="jar" depends="compile">
+		<manifest file="${classes.dir}/META-INF/MANIFEST.MF.JOnAS">
+			<attribute name="Class-Path" value="${classpath.manifest.jonas}" />
+		</manifest>
+		<jar
+			basedir="${classes.dir}"
+			jarfile="${jar.file}"
+		>
+			<manifest>
+				<attribute name="Class-Path" value="portal-ejb.jar ${classpath.manifest}" />
+			</manifest>
+		</jar>
+		<copy file="${jar.file}" todir="${project.dir}/portal-ear/modules" />
+	</target>
+</project>

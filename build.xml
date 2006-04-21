@@ -1,0 +1,613 @@
+<?xml version="1.0"?>
+
+<project name="portal" basedir="." default="compile">
+	<target name="init-app-server">
+		<property environment="env" />
+		<property name="env.COMPUTERNAME" value="${env.HOSTNAME}"/>
+		<property file="app.server.${user.name}.properties" />
+		<property file="app.server.${env.COMPUTERNAME}.properties" />
+  		<property file="app.server.properties" />
+	</target>
+
+	<target name="init-build">
+		<property environment="env" />
+		<property name="env.COMPUTERNAME" value="${env.HOSTNAME}"/>
+		<property file="build.${user.name}.properties" />
+		<property file="build.${env.COMPUTERNAME}.properties" />
+  		<property file="build.properties" />
+	</target>
+
+	<target name="init-release">
+		<property environment="env" />
+		<property name="env.COMPUTERNAME" value="${env.HOSTNAME}"/>
+  		<property file="release.${user.name}.properties" />
+		<property file="release.${env.COMPUTERNAME}.properties" />
+  		<property file="release.properties" />
+	</target>
+
+	<target name="all" depends="clean,start,deploy" />
+
+	<target name="start">
+		<antcall target="compile" />
+  		<ant dir="sql" target="build-db" />
+		<ant dir="portal-ejb" target="build-newscategories" />
+		<ant dir="portal-ejb" target="build-reverendfun" />
+  		<ant dir="portal-ejb" target="build-color-scheme" />
+  		<ant dir="portal-ejb" target="build-website" />
+		<antcall target="jar" />
+	</target>
+
+	<target name="clean">
+		<ant dir="portal-shared" target="clean" />
+
+		<ant dir="util-java" target="clean" />
+		<ant dir="util-jsf" target="clean" />
+		<ant dir="util-wsrp" target="clean" />
+
+		<ant dir="applets" target="clean" />
+		<ant dir="counter-ejb" target="clean" />
+
+		<ant dir="documentlibrary-ejb" target="clean" />
+		<ant dir="lock-ejb" target="clean" />
+		<ant dir="mail-ejb" target="clean" />
+		<ant dir="portal-ejb" target="clean" />
+		<ant dir="filters" target="clean" />
+		<ant dir="util-taglib" target="clean" />
+
+		<ant dir="cms-web" target="clean" />
+		<ant dir="laszlo-web" target="clean" />
+		<ant dir="portal-web" target="clean" />
+		<ant dir="tunnel-web" target="clean" />
+		<ant dir="web-sites" target="clean" />
+
+		<ant dir="portal-ear" target="clean" />
+
+		<delete>
+			<fileset dir="." includes="*.ear,*.war,*.zip" />
+		</delete>
+	</target>
+
+	<target name="compile">
+		<ant dir="portal-shared" target="compile" />
+
+		<ant dir="util-java" target="compile" />
+		<ant dir="util-jsf" target="compile" />
+		<ant dir="util-wsrp" target="compile" />
+		<ant dir="portal-ejb" target="compile-common" />
+
+		<ant dir="applets" target="compile" />
+		<ant dir="counter-ejb" target="compile" />
+
+		<ant dir="documentlibrary-ejb" target="compile" />
+		<ant dir="lock-ejb" target="compile" />
+		<ant dir="mail-ejb" target="compile" />
+		<ant dir="portal-ejb" target="compile" />
+		<ant dir="filters" target="compile" />
+		<ant dir="util-taglib" target="deploy" />
+	</target>
+
+	<target name="jar">
+		<ant dir="portal-shared" target="jar" />
+
+		<ant dir="util-java" target="jar" />
+		<ant dir="util-jsf" target="jar" />
+		<ant dir="util-wsrp" target="jar" />
+
+		<ant dir="applets" target="deploy" />
+		<ant dir="counter-ejb" target="jar" />
+
+		<ant dir="portal-ejb" target="compile" />
+		<ant dir="documentlibrary-ejb" target="jar" />
+		<ant dir="lock-ejb" target="jar" />
+		<ant dir="mail-ejb" target="jar" />
+		<ant dir="filters" target="jar" />
+		<ant dir="util-taglib" target="deploy" />
+		<ant dir="portal-ejb" target="jar" />
+
+		<ant dir="cms-web" target="war" />
+		<ant dir="laszlo-web" target="war" />
+		<ant dir="portal-web" target="war" />
+		<ant dir="tunnel-web" target="war" />
+		<ant dir="web-sites" target="war" />
+
+		<ant dir="portal-ear" target="ear" />
+	</target>
+
+	<target name="java2html">
+		<delete dir="api" />
+
+		<ant dir="portal-shared" target="java2html" />
+
+		<ant dir="util-java" target="java2html" />
+		<ant dir="util-jsf" target="java2html" />
+		<ant dir="util-wsrp" target="java2html" />
+
+		<ant dir="applets" target="java2html" />
+		<ant dir="counter-ejb" target="java2html" />
+
+		<ant dir="documentlibrary-ejb" target="java2html" />
+		<ant dir="lock-ejb" target="java2html" />
+		<ant dir="mail-ejb" target="java2html" />
+		<ant dir="portal-ejb" target="java2html" />
+		<ant dir="filters" target="java2html" />
+		<ant dir="util-taglib" target="java2html" />
+	</target>
+
+	<target name="javadoc">
+		<ant dir="portal-shared" target="javadoc" />
+
+		<ant dir="util-java" target="javadoc" />
+		<ant dir="util-jsf" target="javadoc" />
+		<ant dir="util-wsrp" target="javadoc" />
+
+		<ant dir="applets" target="javadoc" />
+		<ant dir="counter-ejb" target="javadoc" />
+
+		<ant dir="documentlibrary-ejb" target="javadoc" />
+		<ant dir="lock-ejb" target="javadoc" />
+		<ant dir="mail-ejb" target="javadoc" />
+		<ant dir="portal-ejb" target="javadoc" />
+		<ant dir="filters" target="javadoc" />
+		<ant dir="util-taglib" target="javadoc" />
+	</target>
+
+	<target name="deploy" depends="init-app-server,init-build">
+		<delete dir="${app.server.temp}" />
+		<mkdir dir="${app.server.temp}" />
+
+		<delete dir="${app.server.ear}" />
+		<mkdir dir="${app.server.ear}" />
+
+		<copy todir="${app.server.lib}">
+			<fileset
+				dir="lib"
+				includes="${libraries.current}"
+			/>
+		</copy>
+		<delete>
+			<fileset
+				dir="${app.server.lib}"
+				includes="${libraries.old}"
+			/>
+		</delete>
+
+		<copy file="${app.server}/xerces.jar" todir="${app.server.lib}" failonerror="false" />
+		<copy file="${env.ORION_HOME}/xerces.jar" todir="${app.server.lib}" failonerror="false" />
+
+		<ant dir="portal-shared" target="deploy" inheritAll="false" />
+
+		<ant dir="util-java" target="deploy" inheritAll="false" />
+		<ant dir="util-wsrp" target="deploy" inheritAll="false" />
+
+		<ant dir="applets" target="deploy" inheritAll="false" />
+		<ant dir="counter-ejb" target="deploy" inheritAll="false" />
+
+		<ant dir="documentlibrary-ejb" target="deploy" inheritAll="false" />
+		<ant dir="lock-ejb" target="deploy" inheritAll="false" />
+		<ant dir="mail-ejb" target="deploy" inheritAll="false" />
+		<ant dir="portal-ejb" target="deploy" inheritAll="false" />
+		<ant dir="filters" target="deploy" inheritAll="false" />
+		<ant dir="util-taglib" target="deploy" inheritAll="false" />
+
+		<ant dir="cms-web" target="deploy" inheritAll="false" />
+		<ant dir="laszlo-web" target="deploy" inheritAll="false" />
+		<ant dir="portal-web" target="deploy" inheritAll="false" />
+		<ant dir="tunnel-web" target="deploy" inheritAll="false" />
+		<ant dir="web-sites" target="deploy" inheritAll="false" />
+
+		<ant dir="layouttpl" target="deploy" inheritAll="false" />
+		<ant dir="portlets" target="deploy" inheritAll="false" />
+		<ant dir="themes" target="deploy" inheritAll="false" />
+	</target>
+
+	<target name="deploy-mail" depends="init-app-server">
+		<antcall target="deploy" />
+
+		<move file="${app.server.ear}/portal-ejb.jar" todir="${app.server.lib}" />
+	</target>
+
+	<target name="deploy-web" depends="init-app-server">
+		<antcall target="deploy" />
+
+		<move file="${app.server.ear}/mail-ejb.jar" todir="${app.server.lib}" />
+	</target>
+
+	<target name="reset-orion" depends="init-app-server">
+		<delete>
+			<fileset dir="${app.server}" includes="**/state.ser,**/transaction.state" />
+		</delete>
+	</target>
+
+	<target name="build-eclipse" depends="init-release">
+		<copy todir="${lp.eclipse.dir}" overwrite="yes">
+			<fileset dir="tools/eclipse_workspace_tmpl" />
+			<filterset>
+				<filter token="JAVA_HOME" value="${env.JAVA_HOME}" />
+			</filterset>
+		</copy>
+
+  		<property file="${lp.ext.dir}/app.server.${user.name}.properties" prefix="ext" />
+  		<property file="${lp.ext.dir}/app.server.properties" prefix="ext" />
+
+		<replace file="${lp.eclipse.dir}/.metadata/.plugins/org.eclipse.debug.core/.launches/jboss-jetty.launch">
+			<replacefilter
+				token="@JBOSS_HOME@"
+				value="${ext.app.server.jboss-jetty.dir}"
+			/>
+		</replace>
+
+		<replace file="${lp.eclipse.dir}/.metadata/.plugins/org.eclipse.debug.core/.launches/jboss-tomcat.launch">
+			<replacefilter
+				token="@JBOSS_HOME@"
+				value="${ext.app.server.jboss-tomcat.dir}"
+			/>
+		</replace>
+
+		<replace file="${lp.eclipse.dir}/.metadata/.plugins/org.eclipse.debug.core/.launches/orion.launch">
+			<replacefilter
+				token="@ORION_HOME@"
+				value="${ext.app.server.orion.dir}"
+			/>
+		</replace>
+	</target>
+
+	<target name="build-ext" depends="init-release">
+		<available file="${lp.ext.dir}" type="dir" property="lp.ext.dir.available" />
+
+		<antcall target="build-ext-dir-new" />
+		<antcall target="build-ext-dir-update" />
+
+		<copy file="tools/ext_tmpl/.classpath" tofile="${lp.ext.dir}/.classpath" overwrite="yes" />
+
+		<copy file="tools/ext_tmpl/.project" tofile="${lp.ext.dir}/.project" overwrite="yes">
+			<filterset>
+				<filter token="lp.eclipse.project.name" value="${lp.eclipse.project.name}" />
+			</filterset>
+		</copy>
+
+		<mkdir dir="${lp.ext.dir}/downloads" />
+
+		<mkdir dir="${lp.ext.dir}/ext-lib" />
+		<copy file="tools/ext_tmpl/ext-lib/readme.txt" tofile="${lp.ext.dir}/ext-lib/readme.txt" overwrite="yes" />
+
+		<mkdir dir="${lp.ext.dir}/ext-lib/development" />
+		<copy file="tools/ext_tmpl/ext-lib/development/readme.txt" tofile="${lp.ext.dir}/ext-lib/development/readme.txt" overwrite="yes" />
+
+		<mkdir dir="${lp.ext.dir}/servers/jboss-jetty" />
+		<mkdir dir="${lp.ext.dir}/servers/jboss-tomcat" />
+		<mkdir dir="${lp.ext.dir}/servers/jetty" />
+		<mkdir dir="${lp.ext.dir}/servers/jonas-jetty" />
+		<mkdir dir="${lp.ext.dir}/servers/jonas-tomcat" />
+		<mkdir dir="${lp.ext.dir}/servers/resin" />
+		<mkdir dir="${lp.ext.dir}/servers/tomcat" />
+
+		<copy file="tools/java2html.bat" tofile="${lp.ext.dir}/tools/java2html.bat" overwrite="yes" />
+		<copy file="tools/javadoc.css" tofile="${lp.ext.dir}/tools/javadoc.css" overwrite="yes" />
+
+		<copy file="tools/ext_tmpl/app.server.properties" tofile="${lp.ext.dir}/app.server.properties" overwrite="yes">
+			<filterset>
+				<filter token="lp.version.file.name" value="${lp.version.file.name}" />
+			</filterset>
+		</copy>
+
+		<copy file="tools/ext_tmpl/readme.txt" tofile="${lp.ext.dir}/readme.txt" overwrite="yes">
+			<filterset>
+				<filter token="lp.version" value="${lp.version}" />
+			</filterset>
+		</copy>
+
+		<copy file="tools/ext_tmpl/servers/tomcat.log4j.properties" tofile="${lp.ext.dir}/servers/tomcat.log4j.properties" overwrite="yes" />
+
+		<copy todir="${lp.ext.dir}/lib" overwrite="yes">
+			<fileset
+				dir="lib"
+				includes="**/*.jar"
+			/>
+		</copy>
+
+		<copy file="portal-shared/portal-shared.jar" todir="${lp.ext.dir}/lib" />
+
+		<copy file="filters/compression/compression-filter.jar" todir="${lp.ext.dir}/lib" />
+		<copy file="filters/secure/secure-filter.jar" todir="${lp.ext.dir}/lib" />
+		<copy file="filters/strip/strip-filter.jar" todir="${lp.ext.dir}/lib" />
+		<copy file="util-java/util-java.jar" todir="${lp.ext.dir}/lib" />
+		<copy file="util-jsf/util-jsf.jar" todir="${lp.ext.dir}/lib" />
+		<copy file="util-wsrp/util-wsrp.jar" todir="${lp.ext.dir}/lib" />
+
+		<copy file="counter-ejb/counter-ejb.jar" todir="${lp.ext.dir}/ext-ear/modules" />
+		<copy file="documentlibrary-ejb/documentlibrary-ejb.jar" todir="${lp.ext.dir}/ext-ear/modules" />
+		<copy file="lock-ejb/lock-ejb.jar" todir="${lp.ext.dir}/ext-ear/modules" />
+		<copy file="mail-ejb/mail-ejb.jar" todir="${lp.ext.dir}/ext-ear/modules" />
+		<copy file="portal-ejb/portal-ejb.jar" todir="${lp.ext.dir}/ext-ear/modules" />
+
+		<copy file="cms-web/cms-web.war" todir="${lp.ext.dir}/ext-ear/modules" />
+		<copy file="laszlo-web/laszlo-web.war" todir="${lp.ext.dir}/ext-ear/modules" />
+		<copy file="portal-web/portal-web.war" todir="${lp.ext.dir}/ext-ear/modules" />
+		<copy file="tunnel-web/tunnel-web.war" todir="${lp.ext.dir}/ext-ear/modules" />
+
+		<copy file="web-sites/liferay.com-web/docroot/WEB-INF/web.xml" todir="${lp.ext.dir}/web-sites/liferay.com-web/docroot/WEB-INF" overwrite="yes" />
+		<replace file="${lp.ext.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml">
+			<replacefilter
+				token="/WEB-INF/struts-config.xml"
+				value="/WEB-INF/struts-config.xml,/WEB-INF/struts-config-ext.xml"
+			/>
+		</replace>
+
+		<copy todir="${lp.ext.dir}/web-sites/liferay.com-web/docroot">
+			<fileset
+				dir="web-sites/liferay.com-web/docroot"
+				includes="index.html,WEB-INF/lib/*.jar,WEB-INF/tld/*.tld"
+			/>
+		</copy>
+
+		<ant dir="sql" target="build-db" />
+		<copy todir="${lp.ext.dir}/sql">
+			<fileset dir="sql">
+				<exclude name="**/log/**" />
+			</fileset>
+		</copy>
+
+		<ant dir="sql" target="load-db" />
+		<copy todir="${lp.ext.dir}/sql">
+			<fileset dir="sql">
+				<include name="test.*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="build-ext-dir-new" depends="init-release" unless="lp.ext.dir.available">
+		<filter token="lp.eclipse.project.name" value="${lp.eclipse.project.name}" />
+
+		<copy todir="${lp.ext.dir}" filtering="true">
+			<fileset dir="tools/ext_tmpl" />
+		</copy>
+	</target>
+
+	<target name="build-ext-dir-update" depends="init-release" if="lp.ext.dir.available">
+		<copy todir="${lp.ext.dir}" overwrite="true">
+			<fileset
+				dir="tools/ext_tmpl"
+				includes="app.server.properties,build.properties,**/build-common.xml,**/build-parent.xml"
+			/>
+		</copy>
+
+		<copy todir="${lp.ext.dir}" overwrite="false">
+			<fileset
+				dir="tools/ext_tmpl"
+				includes="**/build.xml,**/META-INF/application.xml,**/WEB-INF/remoting-servlet-ext.xml,**/WEB-INF/server-config.wsdd"
+			/>
+		</copy>
+	</target>
+
+	<target name="build-ext-jboss-jetty" depends="init-release">
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jboss-jetty</echo>
+		<ant dir="${lp.ext.dir}" target="clean" />
+		<ant dir="${lp.ext.dir}" target="deploy" />
+	</target>
+
+	<target name="build-ext-jboss-tomcat" depends="init-release">
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jboss-tomcat</echo>
+		<ant dir="${lp.ext.dir}" target="clean" />
+		<ant dir="${lp.ext.dir}" target="deploy" />
+	</target>
+
+	<target name="build-ext-jetty" depends="init-release">
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jetty</echo>
+		<ant dir="${lp.ext.dir}" target="clean" />
+		<ant dir="${lp.ext.dir}" target="deploy" />
+	</target>
+
+	<target name="build-ext-jonas-jetty" depends="init-release">
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-jetty</echo>
+		<ant dir="${lp.ext.dir}" target="clean" />
+		<ant dir="${lp.ext.dir}" target="deploy" />
+	</target>
+
+	<target name="build-ext-jonas-tomcat" depends="init-release">
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-tomcat</echo>
+		<ant dir="${lp.ext.dir}" target="clean" />
+		<ant dir="${lp.ext.dir}" target="deploy" />
+	</target>
+
+	<target name="build-ext-resin" depends="init-release">
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=resin</echo>
+		<ant dir="${lp.ext.dir}" target="clean" />
+		<ant dir="${lp.ext.dir}" target="deploy" />
+	</target>
+
+	<target name="build-ext-tomcat" depends="init-release">
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=tomcat</echo>
+		<ant dir="${lp.ext.dir}" target="clean" />
+		<ant dir="${lp.ext.dir}" target="deploy" />
+	</target>
+
+	<target name="clean-ext" depends="init-release">
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jboss-jetty</echo>
+		<ant dir="${lp.ext.dir}" target="clean" />
+
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jboss-tomcat</echo>
+		<ant dir="${lp.ext.dir}" target="clean" />
+
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jetty</echo>
+		<ant dir="${lp.ext.dir}" target="clean" />
+
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-jetty</echo>
+		<ant dir="${lp.ext.dir}" target="clean" />
+
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-tomcat</echo>
+		<ant dir="${lp.ext.dir}" target="clean" />
+
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=resin</echo>
+		<ant dir="${lp.ext.dir}" target="clean" />
+
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=tomcat</echo>
+		<ant dir="${lp.ext.dir}" target="clean" />
+	</target>
+
+	<target name="sync-ext" depends="init-release">
+		<copy todir="tools/ext_tmpl/ext-ejb" overwrite="yes">
+			<fileset
+				dir="${lp.ext.dir}/ext-ejb"
+				includes="**/*.java,**/*.wsdd,**/*.xml"
+			/>
+		</copy>
+
+		<copy file="${lp.ext.dir}/ext-web/docroot/WEB-INF/remoting-servlet-ext.xml" todir="tools/ext_tmpl/ext-web/docroot/WEB-INF" overwrite="yes" />
+		<copy file="${lp.ext.dir}/ext-web/docroot/WEB-INF/server-config.wsdd" todir="tools/ext_tmpl/ext-web/docroot/WEB-INF" overwrite="yes" />
+	</target>
+
+	<target name="zip">
+		<antcall target="zip-api" />
+		<antcall target="zip-jboss" />
+		<antcall target="zip-jetty" />
+		<antcall target="zip-jonas" />
+		<antcall target="zip-resin" />
+		<antcall target="zip-sql" />
+		<antcall target="zip-src" />
+		<antcall target="zip-tomcat" />
+	</target>
+
+	<target name="zip-api" depends="init-release">
+		<delete file="liferay-portal-ent-${lp.version}-doc.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-ent-${lp.version}-doc.zip"
+			basedir="."
+			includes="api/**/*.css,api/**/*.gif,api/**/*.html"
+		/>
+	</target>
+
+	<target name="zip-jboss" depends="init-release">
+		<delete file="liferay-portal-ent-${lp.version}-jboss-jetty.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-ent-${lp.version}-jboss-jetty.zip"
+			basedir="${lp.ext.dir}/servers/jboss-jetty"
+		/>
+
+		<delete file="liferay-portal-ent-${lp.version}-jboss-tomcat.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-ent-${lp.version}-jboss-tomcat.zip"
+			basedir="${lp.ext.dir}/servers/jboss-tomcat"
+		/>
+	</target>
+
+	<target name="zip-jetty" depends="init-release">
+		<delete file="liferay-portal-pro-${lp.version}-jetty.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-pro-${lp.version}-jetty.zip"
+			basedir="${lp.ext.dir}/servers/jetty"
+		/>
+	</target>
+
+	<target name="zip-jonas" depends="init-release">
+		<delete file="liferay-portal-ent-${lp.version}-jonas-jetty.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-ent-${lp.version}-jonas-jetty.zip"
+			basedir="${lp.ext.dir}/servers/jonas-jetty"
+		/>
+
+		<delete file="liferay-portal-ent-${lp.version}-jonas-tomcat.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-ent-${lp.version}-jonas-tomcat.zip"
+			basedir="${lp.ext.dir}/servers/jonas-tomcat"
+		/>
+	</target>
+
+	<target name="zip-resin" depends="init-release">
+		<delete file="liferay-portal-pro-${lp.version}-resin.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-pro-${lp.version}-resin.zip"
+			basedir="${lp.ext.dir}/servers/resin"
+		/>
+	</target>
+
+	<target name="zip-sql" depends="init-release">
+		<delete file="liferay-portal-ent-${lp.version}-sql.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-ent-${lp.version}-sql.zip"
+			basedir="sql"
+			includes="**/*.sql"
+		/>
+	</target>
+
+	<target name="zip-src" depends="init-release">
+		<delete file="liferay-portal-${lp.version}-src.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-${lp.version}-src.zip"
+			basedir="${lp.source.dir}"
+			excludes="**/CVS/**"
+		/>
+	</target>
+
+	<target name="zip-tomcat" depends="init-release">
+		<delete file="liferay-portal-pro-${lp.version}-tomcat.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-pro-${lp.version}-tomcat.zip"
+			basedir="${lp.ext.dir}/servers/tomcat"
+		/>
+	</target>
+
+	<target name="release" depends="init-release">
+		<!--<cvs
+			cvsRoot=":ext:bwchan@cvs.sourceforge.net:/cvsroot/lportal"
+			cvsRsh="ssh"
+			command="update -CdP"
+			package="portal"
+			dest="${lp.source.dir}"
+		/>
+
+		<cvs
+			cvsRoot=":ext:bwchan@cvs.sourceforge.net:/cvsroot/lportal"
+			cvsRsh="ssh"
+			command="tag -c ${lp.cvs.tag}"
+			package="portal"
+			dest="${lp.source.dir}"
+		/>-->
+
+		<delete>
+			<fileset dir="${lp.source.dir}" defaultexcludes="no">
+				<include name="**/.#*" />
+			</fileset>
+		</delete>
+
+		<antcall target="clean" />
+		<antcall target="start" />
+		<antcall target="java2html" />
+		<antcall target="build-ext" />
+		<antcall target="build-ext-jboss-jetty" />
+		<antcall target="build-ext-jboss-tomcat" />
+		<antcall target="build-ext-jetty" />
+		<antcall target="build-ext-jonas-jetty" />
+		<antcall target="build-ext-jonas-tomcat" />
+		<antcall target="build-ext-resin" />
+		<antcall target="build-ext-tomcat" />
+		<antcall target="zip" />
+
+		<copy file="portal-ear/liferay-portal.ear" tofile="liferay-portal-ent-${lp.version}.ear" />
+		<copy file="portal-ear/liferay-portal-jaas.jar" tofile="liferay-portal-ent-${lp.version}-jaas.jar" />
+		<copy file="portal-ear/liferay-portal.war" tofile="liferay-portal-pro-${lp.version}.war" />
+
+		<ant dir="layouttpl" target="deploy" />
+		<ant dir="portlets" target="deploy" />
+		<ant dir="themes" target="deploy" />
+
+		<ant dir="layouttpl" target="war" />
+		<ant dir="portlets" target="war" />
+		<ant dir="themes" target="war" />
+
+		<copy file="layouttpl-deployer.xml" tofile="layouttpl-deployer-${lp.version}.xml" />
+		<copy file="portlet-deployer.xml" tofile="portlet-deployer-${lp.version}.xml" />
+		<copy file="theme-deployer.xml" tofile="theme-deployer-${lp.version}.xml" />
+
+		<ftp server="upload.sourceforge.net"
+			userid="anonymous"
+			password="anonymous@anonymous.com"
+			remotedir="/incoming"
+			verbose="yes"
+		>
+			<fileset dir="." includes="*${lp.version}*.*,sample*.war" />
+		</ftp>
+	</target>
+
+	<target name="test-release" depends="init-release">
+		<antcall target="clean" />
+		<antcall target="start" />
+		<antcall target="build-ext" />
+		<antcall target="build-ext-jboss-jetty" />
+		<antcall target="build-ext-jboss-tomcat" />
+		<antcall target="build-ext-jetty" />
+		<antcall target="build-ext-jonas-jetty" />
+		<antcall target="build-ext-jonas-tomcat" />
+		<antcall target="build-ext-resin" />
+		<antcall target="build-ext-tomcat" />
+	</target>
+</project>

@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+
+<project name="build-common-java">
+	<import file="build-common.xml" />
+
+	<target name="clean">
+		<delete file="${jar.file}" failonerror="false" />
+		<delete dir="${java2html.dir}" />
+		<delete dir="${javadoc.dir}" />
+		<delete includeEmptyDirs="true" failonerror="false">
+			<fileset dir="${classes.dir}" excludes="${classes.dir.excludes}" />
+		</delete>
+	</target>
+
+	<target name="compile">
+		<mkdir dir="${classes.dir}" />
+		<javac
+			classpathref="project.classpath"
+			compiler="${javac.compiler}"
+			debug="${javac.debug}"
+			deprecation="${javac.deprecation}"
+			destdir="${classes.dir}"
+			fork="${javac.fork}"
+			memoryMaximumSize="${javac.memoryMaximumSize}"
+			nowarn="on"
+			srcdir="${source.dir}"
+		/>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar
+			basedir="${classes.dir}"
+			jarfile="${jar.file}"
+		/>
+	</target>
+
+	<target name="java2html">
+		<java
+			classname="com.liferay.util.Java2Html"
+			classpathref="project.classpath"
+			fork="true">
+				<arg value="${java2html.bat}" />
+				<arg value="${source.dir}" />
+				<arg value="${java2html.dir}" />
+		</java>
+		<move file="${java2html.dir}/stylesheet.css" tofile="${java2html.dir}/java2html.css" />
+		<antcall target="javadoc" />
+		<replace dir="${java2html.dir}">
+			<include name="**/package-summary.html" />
+			<replacefilter
+				token="/\"
+				value="/"
+			/>
+		</replace>
+	</target>
+
+	<target name="javadoc">
+		<mkdir dir="${javadoc.dir}" />
+		<javadoc
+			additionalparam="-J-Xmx128m"
+			classpathref="project.classpath"
+			destdir="${javadoc.dir}"
+			packagenames="*.*"
+			sourcepath="${source.dir}"
+			stylesheetfile="${project.dir}/tools/javadoc.css"
+		/>
+	</target>
+
+	<target name="deploy" depends="jar">
+		<copy file="${jar.file}" todir="${deploy.dir}" />
+	</target>
+</project>

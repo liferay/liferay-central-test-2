@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<project name="build-common-web">
+	<import file="build-common.xml" />
+
+	<target name="clean">
+		<delete file="${war.file}" failonerror="false" />
+	</target>
+
+	<target name="war">
+		<war
+			basedir="${web.dir}"
+			destfile="${war.file}"
+			excludes="WEB-INF/web.xml"
+			webxml="${web.dir}/WEB-INF/web.xml"
+		>
+			<manifest>
+				<attribute name="Class-Path" value="${classpath.manifest}" />
+			</manifest>
+		</war>
+	</target>
+
+	<target name="deploy" depends="war">
+		<copy file="${war.file}" todir="${deploy.dir}" />
+	</target>
+</project>
