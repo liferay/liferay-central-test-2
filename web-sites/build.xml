@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<project name="web-sites" basedir="." default="war">
+	<import file="../build-common.xml" />
+
+	<property name="deploy.dir" value="${app.server.ear}" />
+
+	<target name="clean">
+		<delete>
+			<fileset dir="." includes="*.war" />
+		</delete>
+	</target>
+
+	<target name="war">
+		<java
+			classname="com.liferay.portal.tools.WebSiteWar"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		/>
+	</target>
+
+	<target name="deploy" depends="war">
+		<copy todir="${deploy.dir}">
+			<fileset dir="." includes="*.war" />
+		</copy>
+	</target>
+</project>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<project name="themes" basedir="." default="deploy">
+	<import file="../build-common.xml" />
+
+	<property name="deploy.dir" value="${app.server.ear}" />
+
+	<target name="war">
+		<delete>
+			<fileset dir="." includes="**/Thumbs.db" />
+		</delete>
+
+		<war
+			basedir="sample_pack_01_themes.war"
+			destfile="../sample_pack_01_themes.war"
+			excludes="WEB-INF/web.xml"
+			webxml="sample_pack_01_themes.war/WEB-INF/web.xml"
+		/>
+	</target>
+
+	<target name="deploy">
+		<java
+			classname="com.liferay.portal.tools.ThemeDeployer"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true">
+
+				<!-- Required Arguments -->
+
+				<jvmarg value="-Ddeployer.base.dir=./" />
+				<jvmarg value="-Ddeployer.dest.dir=${deploy.dir}" />
+				<jvmarg value="-Ddeployer.app.server.type=orion" />
+				<jvmarg value="-Ddeployer.theme.taglib.dtd=${project.dir}/util-taglib/classes/META-INF/liferay-theme.tld" />
+				<jvmarg value="-Ddeployer.util.taglib.dtd=${project.dir}/util-taglib/classes/META-INF/liferay-util.tld" />
+
+				<!-- Dependent Libraries -->
+
+				<arg value="${project.dir}/util-taglib/util-taglib.jar" />
+				<arg value="${project.dir}/util-java/util-java.jar" />
+		</java>
+	</target>
+</project>
