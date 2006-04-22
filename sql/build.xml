@@ -88,16 +88,16 @@
 		</antcall>
 
 		<antcall target="rebuild-oracle-sqlldr">
-			<param name="csv.name" value="journaltemplate" />
-		</antcall>
-
-		<antcall target="rebuild-oracle-sqlldr">
 			<param name="csv.name" value="journalstructure" />
 		</antcall>
 
 		<antcall target="rebuild-oracle-sqlldr">
-			<param name="csv.name" value="shoppingitem" />
+			<param name="csv.name" value="journaltemplate" />
 		</antcall>
+
+		<!--<antcall target="rebuild-oracle-sqlldr">
+			<param name="csv.name" value="shoppingitem" />
+		</antcall>-->
 
 		<delete>
 			<fileset dir="portal" includes="*.log" />
