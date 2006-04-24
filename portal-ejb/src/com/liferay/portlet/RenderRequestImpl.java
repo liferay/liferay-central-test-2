@@ -501,7 +501,10 @@ public class RenderRequestImpl implements RenderRequest {
 		if (portletFocus) {
 			renderParameters = new HashMap();
 
-			if (!LiferayWindowState.isPopUp(req)) {
+			if (!isAction() &&
+				!LiferayWindowState.isExclusive(req) &&
+				!LiferayWindowState.isPopUp(req)) {
+
 				RenderParametersPool.put(
 					req, plid, _portletName, renderParameters);
 			}

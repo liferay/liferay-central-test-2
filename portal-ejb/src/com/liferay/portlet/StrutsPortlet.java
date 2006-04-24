@@ -65,7 +65,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		printAction = getInitParameter("print-action");
 		viewAction = getInitParameter("view-action");
 
-		copyRequestParameters = GetterUtil.get(
+		copyRequestParameters = GetterUtil.getBoolean(
 			getInitParameter("copy-request-parameters"), true);
 
 		_portletConfig = (PortletConfigImpl)config;

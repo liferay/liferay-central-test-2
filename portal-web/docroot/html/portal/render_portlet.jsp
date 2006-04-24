@@ -137,14 +137,7 @@ else if (modePrint) {
 	portletMode = LiferayPortletMode.PRINT;
 }
 
-HttpServletRequest originalReq = request;
-
-while (originalReq.getClass().getName().startsWith("com.liferay.")) {
-
-	// Get original request so that portlets inside portlets render properly
-
-	originalReq = (HttpServletRequest)((HttpServletRequestWrapper)originalReq).getRequest();
-}
+HttpServletRequest originalReq = PortalUtil.getOriginalServletRequest(request);
 
 RenderRequestImpl renderRequestImpl = RenderRequestFactory.create(originalReq, portlet, cachePortlet, portletCtx, windowState, portletMode, portletPrefs, plid);
 

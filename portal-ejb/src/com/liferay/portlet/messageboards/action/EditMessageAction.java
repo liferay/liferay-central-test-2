@@ -86,7 +86,9 @@ public class EditMessageAction extends PortletAction {
 				unsubscribeMessage(req);
 			}
 
-			sendRedirect(req, res);
+			if (Validator.isNotNull(cmd)) {
+				sendRedirect(req, res);
+			}
 		}
 		catch (Exception e) {
 			if (e != null &&

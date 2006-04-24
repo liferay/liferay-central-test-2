@@ -140,6 +140,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		HttpServletResponse httpRes = resImpl.getHttpServletResponse();
 
 		ActionMapping mapping = processMapping(httpReq, httpRes, path);
+
 		if (mapping == null) {
 			return;
 		}
@@ -149,13 +150,16 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		}
 
 		ActionForm form = processActionForm(httpReq, httpRes, mapping);
+
 		processPopulate(httpReq, httpRes, form, mapping);
+
 		if (!processValidateAction(httpReq, httpRes, form, mapping)) {
 			return;
 		}
 
 		PortletAction action =
 			(PortletAction)processActionCreate(httpReq, httpRes, mapping);
+
 		if (action == null) {
 			return;
 		}
@@ -181,6 +185,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			String queryString = StringPool.BLANK;
 
 			int pos = forward.indexOf("?");
+
 			if (pos != -1) {
 				queryString = forward.substring(pos + 1, forward.length());
 				forward = forward.substring(0, pos);
@@ -464,6 +469,9 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			_log.error(
 				portletConfig.getPortletName() +
 					" does not have any paths specified");
+		}
+		else {
+			_log.debug("Processing path " + path);
 		}
 
 		return path;

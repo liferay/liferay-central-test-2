@@ -136,9 +136,20 @@ public class PortalUtil {
 	public static void copyRequestParameters(
 		ActionRequest req, ActionResponse res) {
 
-		// Set the request parameters as the render parameters
+		// Set the request parameters as the render parameters. Skip this step
+		// if the window state is exclusive, because the exclusive window state
+		// is used for streaming binary files and does not have a render phase.
 
 		try {
+			ActionRequestImpl reqImpl = (ActionRequestImpl)req;
+
+			HttpServletRequest originalReq = getOriginalServletRequest(
+				reqImpl.getHttpServletRequest());
+
+			if (LiferayWindowState.isExclusive(originalReq)) {
+				return;
+			}
+
 			ActionResponseImpl resImpl = (ActionResponseImpl)res;
 
 			Map renderParameters = resImpl.getRenderParameters();
@@ -472,6 +483,23 @@ public class PortalUtil {
 		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
 
 		return getLocale(reqImpl.getHttpServletRequest());
+	}
+
+	public static HttpServletRequest getOriginalServletRequest(
+		HttpServletRequest req) {
+
+		HttpServletRequest originalReq = req;
+
+		while (originalReq.getClass().getName().startsWith("com.liferay.")) {
+
+			// Get original request so that portlets inside portlets render
+			// properly
+
+			originalReq = (HttpServletRequest)
+				((HttpServletRequestWrapper)originalReq).getRequest();
+		}
+
+		return originalReq;
 	}
 
 	public static String getPortalURL(HttpServletRequest req, boolean secure) {
