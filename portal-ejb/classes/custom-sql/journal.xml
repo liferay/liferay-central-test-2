@@ -21,8 +21,8 @@
 					(displayDate >= ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(displayDate <= ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(
-						(approved = ? [$AND_OR_NULL_CHECK$]) AND
-						(expired = ? [$AND_OR_NULL_CHECK$]) AND
+						(approved = ?) AND
+						(expired = ?) AND
 						(reviewDate <= ? [$AND_OR_NULL_CHECK$])
 					)
 				)
@@ -48,8 +48,8 @@
 					(displayDate >= ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(displayDate <= ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(
-						(approved = ? [$AND_OR_NULL_CHECK$]) AND
-						(expired = ? [$AND_OR_NULL_CHECK$]) AND
+						(approved = ?) AND
+						(expired = ?) AND
 						(reviewDate <= ? [$AND_OR_NULL_CHECK$])
 					)
 				)

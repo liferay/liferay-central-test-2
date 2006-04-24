@@ -86,6 +86,14 @@ public class JournalArticleFinder {
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
 			}
 
+			if (approved == null) {
+				sql = StringUtil.replace(sql, "(approved = ?) AND", "");
+			}
+
+			if (expired == null) {
+				sql = StringUtil.replace(sql, "(expired = ?) AND", "");
+			}
+
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -118,10 +126,15 @@ public class JournalArticleFinder {
 			qPos.add(displayDateGT_TS);
 			qPos.add(displayDateLT_TS);
 			qPos.add(displayDateLT_TS);
-			qPos.add(approved);
-			qPos.add(approved);
-			qPos.add(expired);
-			qPos.add(expired);
+
+			if (approved != null) {
+				qPos.add(approved);
+			}
+
+			if (expired != null) {
+				qPos.add(expired);
+			}
+
 			qPos.add(reviewDate_TS);
 			qPos.add(reviewDate_TS);
 
@@ -174,6 +187,14 @@ public class JournalArticleFinder {
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
 			}
 
+			if (approved == null) {
+				sql = StringUtil.replace(sql, "(approved = ?) AND", "");
+			}
+
+			if (expired == null) {
+				sql = StringUtil.replace(sql, "(expired = ?) AND", "");
+			}
+
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
@@ -207,10 +228,15 @@ public class JournalArticleFinder {
 			qPos.add(displayDateGT_TS);
 			qPos.add(displayDateLT_TS);
 			qPos.add(displayDateLT_TS);
-			qPos.add(approved);
-			qPos.add(approved);
-			qPos.add(expired);
-			qPos.add(expired);
+
+			if (approved != null) {
+				qPos.add(approved);
+			}
+
+			if (expired != null) {
+				qPos.add(expired);
+			}
+
 			qPos.add(reviewDate_TS);
 			qPos.add(reviewDate_TS);
 
