@@ -123,6 +123,16 @@ public class WebKeys {
 
 	public static final String JAVAX_PORTLET_TITLE = "javax.portlet.title";
 
+	public static final String JAVAX_SERVLET_INCLUDE_REQUEST_URI = "javax.servlet.include.request_uri";
+
+	public static final String JAVAX_SERVLET_INCLUDE_CONTEXT_PATH =  "javax.servlet.include.context_path";
+
+	public static final String JAVAX_SERVLET_INCLUDE_SERVLET_PATH = "javax.servlet.include.servlet_path";
+
+	public static final String JAVAX_SERVLET_INCLUDE_PATH_INFO = "javax.servlet.include.path_info";
+	
+	public static final String JAVAX_SERVLET_INCLUDE_QUERY_STRING = "javax.servlet.include.query_string";
+	
 	public static final String JOURNAL_ARTICLE = "JOURNAL_ARTICLE";
 
 	public static final String JOURNAL_ARTICLE_CONTENT = "JOURNAL_ARTICLE_CONTENT";
