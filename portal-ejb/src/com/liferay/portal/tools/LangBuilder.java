@@ -70,6 +70,7 @@ public class LangBuilder {
 			_createProps(content, "ja"); // Japanese
 			_createProps(content, "ko"); // Korean
 			_createProps(content, "pt"); // Portuguese
+			_createProps(content, "ru"); // Russian
 			_createProps(content, "es"); // Spanish
 			_createProps(content, "tr"); // Turkish
 			_createProps(content, "vi"); // Vietnamese
@@ -219,11 +220,12 @@ public class LangBuilder {
 	private String _translate(String translationId, String fromText) {
 		if (translationId.equals("en_cs") ||
 			translationId.equals("en_hu") ||
+			translationId.equals("en_ru") ||
 			translationId.equals("en_tr") ||
 			translationId.equals("en_vi")) {
 
-			// Automatic translator does not support Czech, Hungarian, Turkish
-			// or Vietnamese
+			// Automatic translator does not support Czech, Hungarian, Russian,
+			// Turkish, or Vietnamese
 
 			return null;
 		}
