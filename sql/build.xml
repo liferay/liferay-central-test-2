@@ -18,6 +18,12 @@
 		/>
 	</target>
 
+	<target name="export-oracle">
+		<exec executable="${oracle.export.executable}">
+			<arg line="${oracle.export.arg.line}" />
+		</exec>
+	</target>
+
 	<target name="load-db">
 		<delete file="test.properties" failonerror="false" />
 		<delete file="test.script" failonerror="false" />
