@@ -237,6 +237,8 @@ public class LuceneUtil {
 	}
 
 	public Directory _getLuceneDir(String companyId) {
+		Directory directory = null;
+
 		if (PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE).equals(
 				_LUCENE_STORE_TYPE_JDBC)) {
 
@@ -244,14 +246,14 @@ public class LuceneUtil {
 				DataSource ds = (DataSource)JNDIUtil.lookup(
 					new InitialContext(), Constants.DATA_SOURCE);
 
-				JdbcDirectory directory = new JdbcDirectory(
+				directory = new JdbcDirectory(
 					ds, _dialect, _getTableName(companyId));
-
-				if (!directory.tableExists()) {
-					directory.create();
+				
+				JdbcDirectory jdbcDir = (JdbcDirectory) directory;
+				
+				if (!jdbcDir.tableExists()) {
+					jdbcDir.create();
 				}
-
-				return directory;
 			}
 			catch (IOException ioe) {
 				throw new RuntimeException(ioe);
@@ -264,16 +266,23 @@ public class LuceneUtil {
 			}
 		}
 		else {
+			String path = PropsUtil.get(PropsUtil.LUCENE_DIR) + companyId +
+				StringPool.SLASH;
+			
 			try {
-				return FSDirectory.getDirectory(
-					PropsUtil.get(PropsUtil.LUCENE_DIR) + companyId +
-						StringPool.SLASH,
-					true);
+				directory = FSDirectory.getDirectory(path, false);
 			}
 			catch (IOException ioe) {
-				throw new RuntimeException(ioe);
+				try {
+					directory = FSDirectory.getDirectory(path, true);
+				}
+				catch (IOException ioe2) {
+					throw new RuntimeException(ioe2);
+				}
 			}
 		}
+		
+		return directory;
 	}
 
 	private String _getTableName(String companyId) {

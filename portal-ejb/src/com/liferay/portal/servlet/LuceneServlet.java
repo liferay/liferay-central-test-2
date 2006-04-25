@@ -87,11 +87,23 @@ public class LuceneServlet extends HttpServlet {
 				}
 				catch (IOException ioe1) {
 					try {
+						luceneDir.close();
+						
+						luceneDir = LuceneUtil.getLuceneDir(_companyId);
+						
 						writer = new IndexWriter(
 							luceneDir, LuceneUtil.getAnalyzer(), true);
 					}
 					catch (IOException ioe2) {
 						ioe2.printStackTrace();
+					}
+				}
+				finally {
+					try {
+						writer.close();
+					}
+					catch (IOException e) {
+						e.printStackTrace();
 					}
 				}
 			}
