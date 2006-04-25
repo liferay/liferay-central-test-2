@@ -47,8 +47,6 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		reservedParams.add(WebKeys.JAVAX_PORTLET_PORTLET);
 		reservedParams.add(WebKeys.JAVAX_PORTLET_REQUEST);
 		reservedParams.add(WebKeys.JAVAX_PORTLET_RESPONSE);
-
-		// provide servlet transparency to dispatcher includes
 		reservedParams.add(WebKeys.JAVAX_SERVLET_INCLUDE_CONTEXT_PATH);
 		reservedParams.add(WebKeys.JAVAX_SERVLET_INCLUDE_PATH_INFO);
 		reservedParams.add(WebKeys.JAVAX_SERVLET_INCLUDE_QUERY_STRING);
@@ -71,9 +69,10 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 
 	public Object getAttribute(String name) {
 		Object value  = null;
-		
-		if (reservedParams.contains(name) || 
-				PortalClassLoaderUtil.isPortalClassLoader()) {
+
+		if (reservedParams.contains(name) ||
+			PortalClassLoaderUtil.isPortalClassLoader()) {
+
 			value = super.getAttribute(name);
 		}
 
@@ -99,8 +98,9 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 	}
 
 	public void setAttribute(String name, Object value) {
-		if (reservedParams.contains(name) || 
-				PortalClassLoaderUtil.isPortalClassLoader()) {
+		if (reservedParams.contains(name) ||
+			PortalClassLoaderUtil.isPortalClassLoader()) {
+
 			super.setAttribute(name, value);
 		}
 		else {

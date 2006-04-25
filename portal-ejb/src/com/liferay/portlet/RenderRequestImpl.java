@@ -324,7 +324,7 @@ public class RenderRequestImpl implements RenderRequest {
 		while (enu.hasMoreElements()) {
 			String name = (String)enu.nextElement();
 
-			if (!name.equals("javax.servlet.include.path_info")) {
+			if (!name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_PATH_INFO)) {
 				names.add(name);
 			}
 		}

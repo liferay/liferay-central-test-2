@@ -24,6 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.service.spring.RoleLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.SharedSessionWrapper;
 
 import java.io.BufferedReader;
@@ -74,23 +75,23 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 			return super.getAttribute(name);
 		}
 
-		/*if (name.equals("javax.servlet.include.context_path")) {
+		/*if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_CONTEXT_PATH)) {
 			return getContextPath();
 		}
-		else if (name.equals("javax.servlet.include.path_info")) {
+		else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_PATH_INFO)) {
 			return getPathInfo();
 		}
-		else if (name.equals("javax.servlet.include.query_string")) {
+		else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_QUERY_STRING)) {
 			return getQueryString();
 		}
-		else if (name.equals("javax.servlet.include.request_uri")) {
+		else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_REQUEST_URI)) {
 			return getRequestURI();
 		}
-		else if (name.equals("javax.servlet.include.servlet_path")) {
+		else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_SERVLET_PATH)) {
 			return getServletPath();
 		}*/
 
-		if (name.equals("javax.servlet.include.query_string")) {
+		if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_QUERY_STRING)) {
 			return getQueryString();
 		}
 		else {
