@@ -8,6 +8,7 @@ Changed - Upgraded to Commons Email 1.0
 Changed - Upgraded to Commons HttpClient 3.0
 Changed - Upgraded to Commons Logging 1.0.4 (fixed to work with Log4j class
           loading)
+Changed - Upgraded to Compass 0.9.0
 Changed - Upgraded to Discovery 0.2
 Changed - Upgraded to dom4j 1.6.1
 Changed - Upgraded to Hibernate 3.1.3

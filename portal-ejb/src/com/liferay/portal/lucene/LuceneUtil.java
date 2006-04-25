@@ -22,13 +22,27 @@
 
 package com.liferay.portal.lucene;
 
+import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.FileUtil;
+import com.liferay.util.JNDIUtil;
 import com.liferay.util.StringPool;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.dao.DataAccess;
 import com.liferay.util.lucene.KeywordsUtil;
 
 import java.io.IOException;
 
+import java.sql.Connection;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import javax.sql.DataSource;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.WhitespaceAnalyzer;
 import org.apache.lucene.index.IndexReader;
@@ -41,6 +55,10 @@ import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TermQuery;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.store.jdbc.JdbcDirectory;
+import org.apache.lucene.store.jdbc.dialect.Dialect;
 
 /**
  * <a href="LuceneUtil.java.html"><b><i>View Source</i></b></a>
@@ -50,21 +68,6 @@ import org.apache.lucene.search.TermQuery;
  *
  */
 public class LuceneUtil {
-
-	static Class analyzerClass = WhitespaceAnalyzer.class;
-
-	static {
-		String analyzerName = PropsUtil.get(PropsUtil.LUCENE_ANALYZER);
-
-		if (Validator.isNotNull(analyzerName)) {
-			try {
-				analyzerClass = Class.forName(analyzerName);
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
 
 	public static void addTerm(
 			BooleanQuery booleanQuery, String field, String text)
@@ -95,17 +98,11 @@ public class LuceneUtil {
 	}
 
 	public static Analyzer getAnalyzer() {
-		try {
-			return (Analyzer)analyzerClass.newInstance();
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+		return _instance._getAnalyzer();
 	}
 
-	public static String getLuceneDir(String companyId) {
-		return PropsUtil.get(PropsUtil.LUCENE_DIR) + companyId +
-			StringPool.SLASH;
+	public static Directory getLuceneDir(String companyId) {
+		return _instance._getLuceneDir(companyId);
 	}
 
 	public static IndexReader getReader(String companyId) throws IOException {
@@ -133,5 +130,168 @@ public class LuceneUtil {
 		writer.optimize();
 		writer.close();
 	}
+
+	public static void delete(String companyId) {
+		_instance._delete(companyId);
+	}
+
+	private LuceneUtil() {
+
+		// Analyzer
+
+		String analyzerName = PropsUtil.get(PropsUtil.LUCENE_ANALYZER);
+
+		if (Validator.isNotNull(analyzerName)) {
+			try {
+				_analyzerClass = Class.forName(analyzerName);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		// Dialect
+
+		if (PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE).equals(
+				_LUCENE_STORE_TYPE_JDBC)) {
+
+			Connection con = null;
+
+			try {
+				con = DataAccess.getConnection(Constants.DATA_SOURCE);
+
+				String url = con.getMetaData().getURL();
+
+				int x = url.indexOf(":");
+				int y = url.indexOf(":", x + 1);
+
+				String urlPrefix = url.substring(x + 1, y);
+
+				String dialectClass = PropsUtil.get(
+					PropsUtil.LUCENE_STORE_JDBC_DIALECT + urlPrefix);
+
+				if (dialectClass != null) {
+					_log.debug("JDBC class implementation " + dialectClass);
+				}
+				else {
+					_log.debug("JDBC class implementation is null");
+				}
+
+				if (dialectClass != null) {
+					_dialect =
+						(Dialect)Class.forName(dialectClass).newInstance();
+				}
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+			finally{
+				DataAccess.cleanUp(con);
+			}
+
+			if (_dialect == null) {
+				_log.error("No JDBC dialect found");
+			}
+		}
+	}
+
+	public void _delete(String companyId) {
+		if (PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE).equals(
+				_LUCENE_STORE_TYPE_JDBC)) {
+
+			try {
+				DataSource ds = (DataSource)JNDIUtil.lookup(
+					new InitialContext(), Constants.DATA_SOURCE);
+
+				JdbcDirectory directory = new JdbcDirectory(
+					ds, _dialect, _getTableName(companyId));
+
+				if (directory.tableExists()) {
+					directory.delete();
+				}
+			}
+			catch (IOException ioe) {
+				throw new RuntimeException(ioe);
+			}
+			catch (NamingException ne) {
+				throw new RuntimeException(ne);
+			}
+			catch (UnsupportedOperationException uoe) {
+				throw new RuntimeException(uoe);
+			}
+		}
+		else {
+			FileUtil.deltree(
+				PropsUtil.get(PropsUtil.LUCENE_DIR) + companyId +
+					StringPool.SLASH);
+		}
+	}
+
+	private Analyzer _getAnalyzer() {
+		try {
+			return (Analyzer)_analyzerClass.newInstance();
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public Directory _getLuceneDir(String companyId) {
+		if (PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE).equals(
+				_LUCENE_STORE_TYPE_JDBC)) {
+
+			try {
+				DataSource ds = (DataSource)JNDIUtil.lookup(
+					new InitialContext(), Constants.DATA_SOURCE);
+
+				JdbcDirectory directory = new JdbcDirectory(
+					ds, _dialect, _getTableName(companyId));
+
+				if (!directory.tableExists()) {
+					directory.create();
+				}
+
+				return directory;
+			}
+			catch (IOException ioe) {
+				throw new RuntimeException(ioe);
+			}
+			catch (NamingException ne) {
+				throw new RuntimeException(ne);
+			}
+			catch (UnsupportedOperationException uoe) {
+				throw new RuntimeException(uoe);
+			}
+		}
+		else {
+			try {
+				return FSDirectory.getDirectory(
+					PropsUtil.get(PropsUtil.LUCENE_DIR) + companyId +
+						StringPool.SLASH,
+					true);
+			}
+			catch (IOException ioe) {
+				throw new RuntimeException(ioe);
+			}
+		}
+	}
+
+	private String _getTableName(String companyId) {
+		return _LUCENE_TABLE_PREFIX + StringUtil.replace(
+			companyId, StringPool.PERIOD, StringPool.UNDERLINE);
+	}
+
+	private static final String _LUCENE_STORE_TYPE_FILE = "file";
+
+	private static final String _LUCENE_STORE_TYPE_JDBC = "jdbc";
+
+	private static final String _LUCENE_TABLE_PREFIX = "LUCENE_";
+
+	private static Log _log = LogFactory.getLog(LuceneUtil.class);
+
+	private static LuceneUtil _instance = new LuceneUtil();
+
+	private Class _analyzerClass = WhitespaceAnalyzer.class;
+	private Dialect _dialect;
 
 }

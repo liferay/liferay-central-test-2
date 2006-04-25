@@ -25,7 +25,6 @@ package com.liferay.portal.lucene;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.spring.PortletServiceUtil;
 import com.liferay.portal.util.comparator.PortletLuceneComparator;
-import com.liferay.util.FileUtil;
 import com.liferay.util.InstancePool;
 import com.liferay.util.ServerDetector;
 import com.liferay.util.Time;
@@ -83,9 +82,7 @@ public class LuceneIndexer implements Runnable {
 
 		long start = System.currentTimeMillis();
 
-		String luceneDir = LuceneUtil.getLuceneDir(_companyId);
-
-		FileUtil.deltree(luceneDir);
+		LuceneUtil.delete(_companyId);
 
 		try {
 			IndexWriter writer = LuceneUtil.getWriter(_companyId, true);

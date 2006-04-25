@@ -25,7 +25,6 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.lucene.LuceneIndexer;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ServerDetector;
 
@@ -39,6 +38,7 @@ import javax.servlet.http.HttpServlet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.store.Directory;
 
 /**
  * <a href="LuceneServlet.java.html"><b><i>View Source</i></b></a>
@@ -77,9 +77,7 @@ public class LuceneServlet extends HttpServlet {
 				}
 			}
 			else {
-				String luceneDir = LuceneUtil.getLuceneDir(_companyId);
-
-				FileUtil.mkdirs(luceneDir);
+				Directory luceneDir = LuceneUtil.getLuceneDir(_companyId);
 
 				IndexWriter writer = null;
 

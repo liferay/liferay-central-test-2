@@ -408,6 +408,10 @@ public class PropsUtil {
 
 	public static final String INDEX_WITH_THREAD = "index.with.thread";
 
+	public static final String LUCENE_STORE_TYPE= "lucene.store.type";
+	
+	public static final String LUCENE_STORE_JDBC_DIALECT = "lucene.store.jdbc.dialect.";
+
 	public static final String LUCENE_DIR = "lucene.dir";
 
 	public static final String LUCENE_FILE_EXTRACTOR = "lucene.file.extractor";
