@@ -85,16 +85,10 @@ for (int i = 0; i < results.size(); i++) {
 }
 %>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tr>
-	<td>
-		<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.ADD_EVENT) %>">
-			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-event") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= Integer.toString(selMonth) %>" /><portlet:param name="day" value="<%= Integer.toString(selDay) %>" /><portlet:param name="year" value="<%= Integer.toString(selYear) %>" /></portlet:renderURL>';">
-		</c:if>
-	</td>
-</tr>
-</table>
+<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.ADD_EVENT) %>">
+	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-event") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= Integer.toString(selMonth) %>" /><portlet:param name="day" value="<%= Integer.toString(selDay) %>" /><portlet:param name="year" value="<%= Integer.toString(selYear) %>" /></portlet:renderURL>';">
 
-<br>
+	<br><br>
+</c:if>
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
