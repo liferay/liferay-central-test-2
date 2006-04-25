@@ -22,7 +22,6 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.shared.util.PortalClassLoaderUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
@@ -47,11 +46,6 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		reservedParams.add(WebKeys.JAVAX_PORTLET_PORTLET);
 		reservedParams.add(WebKeys.JAVAX_PORTLET_REQUEST);
 		reservedParams.add(WebKeys.JAVAX_PORTLET_RESPONSE);
-		reservedParams.add(WebKeys.JAVAX_SERVLET_INCLUDE_CONTEXT_PATH);
-		reservedParams.add(WebKeys.JAVAX_SERVLET_INCLUDE_PATH_INFO);
-		reservedParams.add(WebKeys.JAVAX_SERVLET_INCLUDE_QUERY_STRING);
-		reservedParams.add(WebKeys.JAVAX_SERVLET_INCLUDE_REQUEST_URI);
-		reservedParams.add(WebKeys.JAVAX_SERVLET_INCLUDE_SERVLET_PATH);
 	}
 
 	public NamespaceServletRequest(HttpServletRequest req, String portletName) {
@@ -68,16 +62,10 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 	}
 
 	public Object getAttribute(String name) {
-		Object value  = null;
-
-		if (reservedParams.contains(name) ||
-			PortalClassLoaderUtil.isPortalClassLoader()) {
-
-			value = super.getAttribute(name);
-		}
+		Object value = super.getAttribute(_namespace + name);
 
 		if (value == null) {
-			value = super.getAttribute(_namespace + name);
+			value = super.getAttribute(name);
 		}
 
 		return value;
@@ -98,9 +86,7 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 	}
 
 	public void setAttribute(String name, Object value) {
-		if (reservedParams.contains(name) ||
-			PortalClassLoaderUtil.isPortalClassLoader()) {
-
+		if (reservedParams.contains(name)) {
 			super.setAttribute(name, value);
 		}
 		else {

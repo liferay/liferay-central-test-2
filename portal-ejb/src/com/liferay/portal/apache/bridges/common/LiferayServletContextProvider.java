@@ -22,6 +22,7 @@
 
 package com.liferay.portal.apache.bridges.common;
 
+import com.liferay.portal.apache.bridges.struts.LiferayStrutsRequestImpl;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletContextImpl;
@@ -73,14 +74,7 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 			httpReq = ((ActionRequestImpl)req).getHttpServletRequest();
 		}
 
-		Collection filteredParams = getFilteredParams(portlet);
-
-		if (filteredParams.size() == 0) {
-			return httpReq;
-		}
-		else {
-			return new ParamFilteringServletRequest(httpReq, filteredParams);
-		}
+		return new LiferayStrutsRequestImpl(httpReq);
 	}
 
 	public HttpServletResponse getHttpServletResponse(
@@ -93,28 +87,4 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 			return ((ActionResponseImpl)res).getHttpServletResponse();
 		}
 	}
-
-	protected Collection getFilteredParams(GenericPortlet portlet) {
-		Collection filteredParams =
-			(Collection)_filteredParamsPool.get(portlet.getPortletName());
-
-		if (filteredParams == null) {
-			String params = portlet.getInitParameter("filtered_params");
-
-			filteredParams = new ArrayList();
-
-			String[] paramsArray = StringUtil.split(params);
-
-			for (int i = 0; i < paramsArray.length; i++) {
-				filteredParams.add(paramsArray[i]);
-			}
-
-			_filteredParamsPool.put(portlet.getPortletName(), filteredParams);
-		}
-
-		return filteredParams;
-	}
-
-	private Map _filteredParamsPool = CollectionFactory.getSyncHashMap();
-
 }

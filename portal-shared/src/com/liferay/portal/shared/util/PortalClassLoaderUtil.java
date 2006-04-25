@@ -36,19 +36,6 @@ public class PortalClassLoaderUtil {
 		return _classLoader;
 	}
 
-	public static boolean isPortalClassLoader() {
-		if (_classLoader == Thread.currentThread().getContextClassLoader()) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static ClassLoader getClassLoader(ClassLoader contextClassLoader) {
-		return contextClassLoader;
-	}
-
 	public static void setClassLoader(ClassLoader contextClassLoader)
 		throws IOException {
 
