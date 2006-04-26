@@ -81,29 +81,30 @@ public class LuceneServlet extends HttpServlet {
 
 				IndexWriter writer = null;
 
+				// Lucene does not properly release its lock on the index when
+				// IndexWriter() throws an exception
+				
 				try {
-					writer = new IndexWriter(
-						luceneDir, LuceneUtil.getAnalyzer(), false);
-				}
-				catch (IOException ioe1) {
-					try {
-						luceneDir.close();
-						
-						luceneDir = LuceneUtil.getLuceneDir(_companyId);
-						
+					if (luceneDir.fileExists("segments")) {
 						writer = new IndexWriter(
-							luceneDir, LuceneUtil.getAnalyzer(), true);
+							luceneDir, LuceneUtil.getAnalyzer(), false);
 					}
-					catch (IOException ioe2) {
-						ioe2.printStackTrace();
-					}
+					else {
+						writer = new IndexWriter(
+							luceneDir, LuceneUtil.getAnalyzer(), true);					
+					}					
+				}
+				catch (IOException ioe) {
+					ioe.printStackTrace();
 				}
 				finally {
-					try {
-						writer.close();
-					}
-					catch (IOException e) {
-						e.printStackTrace();
+					if (writer != null) {
+						try {
+							writer.close();
+						}
+						catch (IOException ioe) {
+							ioe.printStackTrace();
+						}
 					}
 				}
 			}
