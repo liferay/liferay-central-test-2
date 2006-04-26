@@ -138,6 +138,14 @@ public class ClassUtil {
 			if (x.getClass().getName().equals(s)) {
 				return true;
 			}
+
+			Class[] interfaces = x.getInterfaces();
+
+			for (int i = 0; i < interfaces.length; i++) {
+				if (isSubclass(interfaces[i], s)) {
+					return true;
+				}
+			}
 		}
 
 		return false;

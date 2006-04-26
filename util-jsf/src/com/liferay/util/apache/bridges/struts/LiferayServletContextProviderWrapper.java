@@ -21,8 +21,6 @@
  */
 package com.liferay.util.apache.bridges.struts;
 
-import java.lang.reflect.Method;
-
 import javax.portlet.GenericPortlet;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
@@ -48,70 +46,53 @@ public class LiferayServletContextProviderWrapper implements
 		"STRUTS_BRIDGES_CONTEXT_PROVIDER";
 
 	public ServletContext getServletContext(GenericPortlet portlet) {
-		Class[] argTypes = {GenericPortlet.class};
-		Object[] args = {portlet};
-
-		Object provider = _getProvider(portlet); 
+		com.liferay.portal.shared.servlet.ServletContextProvider provider = 
+			_getProvider(portlet); 
 		
-		ServletContext ctx = (ServletContext)_invoke(provider, 
-			"getServletContext", argTypes, args);
+		ServletContext ctx = provider.getServletContext(portlet);
 
 		return ctx;
 	}
 
 	public HttpServletRequest getHttpServletRequest(GenericPortlet portlet,
 			PortletRequest req) {
-		Class[] argTypes = {GenericPortlet.class, PortletRequest.class};
-		Object[] args = {portlet, req};
 
-		Object provider = _getProvider(portlet); 
+		com.liferay.portal.shared.servlet.ServletContextProvider provider = 
+			_getProvider(portlet); 
 		
-		HttpServletRequest httpReq = (HttpServletRequest)_invoke(provider, 
-			"getHttpServletRequest", argTypes, args);
+		HttpServletRequest httpReq = provider.getHttpServletRequest(portlet,
+				req);
 
 		return httpReq;
 	}
 
 	public HttpServletResponse getHttpServletResponse(GenericPortlet portlet,
 			PortletResponse res) {
-		Class[] argTypes = {GenericPortlet.class, PortletResponse.class};
-		Object[] args = {portlet, res};
 
-		Object provider = _getProvider(portlet); 
+		com.liferay.portal.shared.servlet.ServletContextProvider provider = 
+			_getProvider(portlet); 
 		
-		HttpServletResponse httpRes = (HttpServletResponse)_invoke(provider, 
-			"getHttpServletResponse", argTypes, args);
+		HttpServletResponse httpRes = provider.getHttpServletResponse(portlet,
+			res);
 
 		return httpRes;
 	}
 
-	private Object _getProvider(GenericPortlet portlet) {
+	private com.liferay.portal.shared.servlet.ServletContextProvider 
+		_getProvider(GenericPortlet portlet) {
+		
 		PortletContext portletCtx = portlet.getPortletContext();
 		
 		if (_provider == null) {
-			_provider = portletCtx.getAttribute(
-				STRUTS_BRIDGES_CONTEXT_PROVIDER);
+			_provider = (com.liferay.portal.shared.servlet.ServletContextProvider)
+				portletCtx.getAttribute(STRUTS_BRIDGES_CONTEXT_PROVIDER);
 		}
 		
 		return _provider; 
 	}
 	
-	private Object _invoke(Object provider, String methodName, Class[] argTypes, Object[] args) {
-		Object val = null;
-
-		try {
-			Method method = provider.getClass().getMethod(methodName, argTypes);
-		
-			val = method.invoke(provider, args);
-		}
-		catch (Exception e) {
-			_log.error("Could not invoke " + methodName, e);
-		}
-
-		return val; 
-	}
+	private static Log _log = LogFactory.getLog(
+		LiferayServletContextProviderWrapper.class);
 	
-	private static Log _log = LogFactory.getLog(LiferayServletContextProviderWrapper.class);
-	
-	private Object _provider;
+	private com.liferay.portal.shared.servlet.ServletContextProvider _provider;
 }

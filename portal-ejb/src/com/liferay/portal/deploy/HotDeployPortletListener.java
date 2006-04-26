@@ -33,6 +33,7 @@ import com.liferay.portal.shared.deploy.HotDeployEvent;
 import com.liferay.portal.shared.deploy.HotDeployException;
 import com.liferay.portal.shared.deploy.HotDeployListener;
 import com.liferay.portal.shared.servlet.PortletServlet;
+import com.liferay.portal.shared.util.ClassUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
@@ -63,6 +64,7 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.portals.bridges.struts.StrutsPortlet;
 
 /**
  * <a href="HotDeployPortletListener.java.html"><b><i>View Source</i></b></a>
@@ -121,9 +123,6 @@ public class HotDeployPortletListener implements HotDeployListener {
 			// Portlet context wrapper
 
 			boolean strutsBridges = false;
-
-			Class strutsPortletClass = portletClassLoader.loadClass(
-				"org.apache.portals.bridges.struts.StrutsPortlet");
 			
 			Iterator itr1 = portlets.iterator();
 
@@ -136,7 +135,9 @@ public class HotDeployPortletListener implements HotDeployListener {
 				javax.portlet.Portlet portletInstance =
 					(javax.portlet.Portlet)portletClass.newInstance();
 
-				if (strutsPortletClass.isAssignableFrom(portletClass)) {
+				if (ClassUtil.isSubclass(portletClass, 
+					StrutsPortlet.class.getName())) {
+					
 					strutsBridges = true;
 				}
 				

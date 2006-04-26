@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -20,52 +19,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/sample_struts_portlet/init.jsp" %>
+package com.liferay.portal.shared.servlet;
 
-<tiles:useAttribute id="tilesPortletContent" name="portlet_content" classname="java.lang.String" ignore="true" />
+import javax.portlet.GenericPortlet;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-<table border="0" cellpadding="8" cellspacing="0" width="100%">
-<tr>
-	<td>
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<tr>
-			<td>
-				<jsp:include page="<%= \"/html\" + tilesPortletContent %>" flush="true" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<br>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<hr>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<br>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<jsp:include page="/html/portlet/sample_struts_portlet/nav.jsp" flush="true" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<br>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<img hspace="0" src="<%= request.getContextPath() %>/html/image/struts-power.gif" vspace="0">
-			</td>
-		</tr>
-		</table>
-	</td>
-</tr>
-</table>
+/**
+ * <a href="LiferayServletContextProvider.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author  Michael Young
+ *
+ */
+public interface ServletContextProvider {
+
+	public ServletContext getServletContext(GenericPortlet portlet);
+
+	public HttpServletRequest getHttpServletRequest(
+		GenericPortlet portlet, PortletRequest req);
+
+
+	public HttpServletResponse getHttpServletResponse(
+		GenericPortlet portlet, PortletResponse res);
+}
