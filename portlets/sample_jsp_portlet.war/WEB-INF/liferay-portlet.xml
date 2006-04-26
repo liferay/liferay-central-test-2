@@ -4,7 +4,6 @@
 <liferay-portlet-app>
 	<portlet>
 		<portlet-name>sample_jsp_portlet</portlet-name>
-		<use-default-template>true</use-default-template>
 		<instanceable>true</instanceable>
 	</portlet>
 	<role-mapper>

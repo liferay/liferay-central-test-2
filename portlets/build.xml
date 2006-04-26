@@ -52,6 +52,7 @@
 	</target>
 
 	<target name="compile-module">
+		<mkdir dir="${module.name}.war/WEB-INF/classes" />
 		<javac
 			classpathref="project.classpath"
 			compiler="${javac.compiler}"

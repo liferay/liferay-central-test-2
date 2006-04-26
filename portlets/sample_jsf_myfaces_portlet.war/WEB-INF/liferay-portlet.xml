@@ -4,7 +4,7 @@
 <liferay-portlet-app>
 	<portlet>
 		<portlet-name>sample_jsf_myfaces_portlet</portlet-name>
-		<private-request-attributes>true</private-request-attributes>
+		<instanceable>true</instanceable>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

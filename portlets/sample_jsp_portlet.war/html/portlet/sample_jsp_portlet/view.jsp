@@ -26,12 +26,4 @@
 
 <portlet:defineObjects />
 
-<table cellpadding="8" cellspacing="0" width="100%">
-<tr>
-	<td>
-		<font class="portlet-font" style="font-size: x-small;">
-		This is the <b>Sample JSP Portlet</b>. Use this as a quick way to include JSPs.
-		</font>
-	</td>
-</tr>
-</table>
+This is the <b>Sample JSP Portlet</b>. Use this as a quick way to include JSPs.
