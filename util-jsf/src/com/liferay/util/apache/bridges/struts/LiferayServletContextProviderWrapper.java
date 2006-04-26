@@ -21,8 +21,6 @@
  */
 package com.liferay.util.apache.bridges.struts;
 
-import com.liferay.portal.deploy.HotDeployPortletListener;
-
 import java.lang.reflect.Method;
 
 import javax.portlet.GenericPortlet;
