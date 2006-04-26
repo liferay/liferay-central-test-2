@@ -101,6 +101,7 @@ import javax.portlet.WindowState;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
@@ -733,9 +734,16 @@ public class PortalUtil {
 				uploadReq = (UploadServletRequest)reqWrapper;
 			}
 			else {
+				ServletRequest req = reqWrapper.getRequest();
+				
+				if (!(req instanceof HttpServletRequestWrapper)) {
+					break;
+				}
+
 				reqWrapper = (HttpServletRequestWrapper)reqWrapper.getRequest();
 			}
 		}
+		
 		return uploadReq;
 	}
 	

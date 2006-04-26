@@ -429,7 +429,7 @@
 				<move todir="${app.server.deploy.dir}/WEB-INF/lib">
 					<fileset
 						dir="${app.server.lib.dir}"
-						excludes="commons-logging.jar,hsql.jar,log4j.jar,portal-shared.jar,portlet.jar"
+						excludes="commons-logging.jar,hsql.jar,log4j.jar,portal-shared.jar,portals-bridges.jar,portlet.jar"
 					/>
 				</move>
 

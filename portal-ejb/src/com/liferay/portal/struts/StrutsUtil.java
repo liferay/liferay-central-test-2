@@ -139,6 +139,53 @@ public class StrutsUtil {
 		}
 	}
 
+	public static Map removeStrutsAttributes(
+		PortletContext portletContext, PortletRequest req) {
+
+		Map strutsAttributes = new HashMap();
+
+		Enumeration enu = req.getAttributeNames();
+
+		while (enu.hasMoreElements()) {
+			String attributeName = (String)enu.nextElement();
+
+			if (attributeName.startsWith(_STRUTS_PACKAGE)) {
+				strutsAttributes.put(
+					attributeName, req.getAttribute(attributeName));
+			}
+		}
+
+		Iterator itr = strutsAttributes.keySet().iterator();
+
+		while (itr.hasNext()) {
+			String attributeName = (String)itr.next();
+
+			req.removeAttribute(attributeName);
+        }
+
+		ModuleConfig moduleConfig =
+			(ModuleConfig)portletContext.getAttribute(Globals.MODULE_KEY);
+
+		req.setAttribute(Globals.MODULE_KEY, moduleConfig);
+
+		return strutsAttributes;
+	}
+
+	public static void setStrutsAttributes(
+		PortletRequest req, Map strutsAttributes) {
+
+		Iterator itr = strutsAttributes.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String key = (String)entry.getKey();
+			Object value = entry.getValue();
+
+			req.setAttribute(key, value);
+		}
+	}
+
 	private static ServletContext _getPortalCtx(
 			ServletContext ctx, HttpServletRequest req) {
         String companyId = PortalUtil.getCompanyId(req);
@@ -152,6 +199,8 @@ public class StrutsUtil {
 
 		return portalCtx;
 	}
+
+	private static String _STRUTS_PACKAGE = "org.apache.struts.";
 
 	private static Log _log = LogFactory.getLog(StrutsUtil.class);
 

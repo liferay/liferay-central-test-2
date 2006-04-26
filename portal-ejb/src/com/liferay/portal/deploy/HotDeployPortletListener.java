@@ -22,12 +22,14 @@
 
 package com.liferay.portal.deploy;
 
+import com.liferay.portal.apache.bridges.struts.LiferayServletContextProvider;
 import com.liferay.portal.job.Scheduler;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.service.spring.PortletServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
+import com.liferay.portal.shared.apache.bridges.struts.LiferayServletContextProviderWrapper;
 import com.liferay.portal.shared.deploy.HotDeployEvent;
 import com.liferay.portal.shared.deploy.HotDeployException;
 import com.liferay.portal.shared.deploy.HotDeployListener;
@@ -61,6 +63,7 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.portals.bridges.struts.StrutsPortlet;
 
 /**
  * <a href="HotDeployPortletListener.java.html"><b><i>View Source</i></b></a>
@@ -115,9 +118,11 @@ public class HotDeployPortletListener implements HotDeployListener {
 
 			ctx.setAttribute(
 				PortletServlet.PORTLET_CLASS_LOADER, portletClassLoader);
-
+			
 			// Portlet context wrapper
 
+			boolean strutsBridges = false;
+			
 			Iterator itr1 = portlets.iterator();
 
 			while (itr1.hasNext()) {
@@ -127,6 +132,10 @@ public class HotDeployPortletListener implements HotDeployListener {
 					(javax.portlet.Portlet)portletClassLoader.loadClass(
 						portlet.getPortletClass()).newInstance();
 
+				if (portletInstance instanceof StrutsPortlet) {
+					strutsBridges = true;
+				}
+				
 				Indexer indexerInstance = null;
 
 				if (Validator.isNotNull(portlet.getIndexerClass())) {
@@ -215,6 +224,13 @@ public class HotDeployPortletListener implements HotDeployListener {
 				PortletContextPool.put(portlet.getPortletId(), pcw);
 			}
 
+			// Struts Bridges Servlet Context Provider
+			
+			if (strutsBridges) {
+				ctx.setAttribute(LiferayServletContextProviderWrapper.STRUTS_BRIDGES_CONTEXT_PROVIDER, 
+					new LiferayServletContextProvider());
+			}
+			
 			// Portlet display
 
 			String xml = Http.URLtoString(ctx.getResource(

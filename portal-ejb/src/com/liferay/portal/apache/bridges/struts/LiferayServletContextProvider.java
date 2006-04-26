@@ -20,9 +20,8 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.apache.bridges.common;
+package com.liferay.portal.apache.bridges.struts;
 
-import com.liferay.portal.apache.bridges.struts.LiferayStrutsRequestImpl;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletContextImpl;
