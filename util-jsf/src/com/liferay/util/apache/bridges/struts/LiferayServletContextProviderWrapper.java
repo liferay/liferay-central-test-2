@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.liferay.portal.shared.apache.bridges.struts;
+package com.liferay.util.apache.bridges.struts;
 
 import javax.portlet.GenericPortlet;
 import javax.portlet.PortletContext;
