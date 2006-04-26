@@ -274,6 +274,10 @@ public class LuceneUtil {
 			}
 			catch (IOException ioe) {
 				try {
+					if (directory != null) {
+						directory.close();						
+					}
+					
 					directory = FSDirectory.getDirectory(path, true);
 				}
 				catch (IOException ioe2) {
