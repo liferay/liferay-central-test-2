@@ -5,12 +5,9 @@
 		<portlet-name>sample_struts_portlet</portlet-name>
 		<display-name>Sample Struts Portlet</display-name>
 		<portlet-class>org.apache.portals.bridges.struts.StrutsPortlet</portlet-class>
-<!--
-		<portlet-class>com.liferay.portal.apache.bridges.struts.LiferayStrutsPortlet</portlet-class>
--->
 		<init-param>
 			<name>ServletContextProvider</name>
-			<value>com.liferay.portal.apache.bridges.common.LiferayServletContextProvider</value>
+			<value>com.liferay.util.apache.bridges.struts.LiferayServletContextProviderWrapper</value>
 		</init-param>
 		<init-param>
 			<name>ViewPage</name>
