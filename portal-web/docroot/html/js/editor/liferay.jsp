@@ -30,7 +30,7 @@
 
 <%
 String panel = ParamUtil.get(request, "panel", (BrowserSniffer.is_ie_5_5_up(request) ? DEFAULT_PANEL_IE : DEFAULT_PANEL_MOZILLA));
-String initMethod = ParamUtil.get(request, "init_method", DEFAULT_INIT_METHOD);
+String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
 boolean disableControl = ParamUtil.get(request, "disable_control", false);
 boolean disableRightClick = ParamUtil.get(request, "disable_right_click", false);
 boolean pasteText = ParamUtil.get(request, "paste_text", false);

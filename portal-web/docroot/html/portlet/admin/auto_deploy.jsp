@@ -80,7 +80,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<liferay-ui:input-select param="unpackWar" defaultValue="<%= OmniadminUtil.getAutoDeployUnpackWar() %>" />
+		<liferay-ui:input-checkbox param="unpackWar" defaultValue="<%= OmniadminUtil.getAutoDeployUnpackWar() %>" />
 	</td>
 </tr>
 

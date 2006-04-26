@@ -311,7 +311,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_ATTACHMENTS);
 					<c:if test="<%= msgModel.isHTMLFormat() %>">
 						<input name="<portlet:namespace />msg_body" type="hidden" value="">
 
-						<iframe frameborder="0" height="400" id="<portlet:namespace />editor" name="<portlet:namespace />editor" tabindex="5" scrolling="no" src="<%= themeDisplay.getPathJavaScript() %>/editor/editor.jsp?editor_impl=<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>" width="700"></iframe>
+						<iframe frameborder="0" height="400" id="<portlet:namespace />editor" name="<portlet:namespace />editor" tabindex="5" scrolling="no" src="<%= themeDisplay.getPathJavaScript() %>/editor/editor.jsp?p_l_id=<%= plid %>&editorImpl=<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>" width="700"></iframe>
 					</c:if>
 				</td>
 			</tr>

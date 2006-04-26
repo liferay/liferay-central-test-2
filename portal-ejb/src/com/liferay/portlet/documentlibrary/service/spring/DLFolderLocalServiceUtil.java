@@ -205,6 +205,22 @@ public class DLFolderLocalServiceUtil {
 	}
 
 	public static java.util.List getFolders(java.lang.String groupId,
+		java.lang.String parentFolderId)
+		throws com.liferay.portal.SystemException {
+		try {
+			DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+			return dlFolderLocalService.getFolders(groupId, parentFolderId);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static java.util.List getFolders(java.lang.String groupId,
 		java.lang.String parentFolderId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		try {

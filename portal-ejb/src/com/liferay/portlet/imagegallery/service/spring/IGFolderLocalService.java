@@ -70,6 +70,10 @@ public interface IGFolderLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getFolders(java.lang.String groupId,
+		java.lang.String parentFolderId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List getFolders(java.lang.String groupId,
 		java.lang.String parentFolderId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 

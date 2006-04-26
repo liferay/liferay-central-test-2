@@ -116,6 +116,12 @@ public class DLFolderLocalServiceEJBImpl implements DLFolderLocalService,
 	}
 
 	public java.util.List getFolders(java.lang.String groupId,
+		java.lang.String parentFolderId)
+		throws com.liferay.portal.SystemException {
+		return getService().getFolders(groupId, parentFolderId);
+	}
+
+	public java.util.List getFolders(java.lang.String groupId,
 		java.lang.String parentFolderId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getService().getFolders(groupId, parentFolderId, begin, end);

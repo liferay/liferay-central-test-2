@@ -61,7 +61,7 @@ String htmlAttributes =
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<liferay-ui:input-select param="auth" defaultValue="<%= auth %>" />
+		<liferay-ui:input-checkbox param="auth" defaultValue="<%= auth %>" />
 	</td>
 </tr>
 <tr>

@@ -236,6 +236,21 @@ public class DLFileEntryLocalServiceUtil {
 		}
 	}
 
+	public static java.util.List getFileEntries(java.lang.String folderId)
+		throws com.liferay.portal.SystemException {
+		try {
+			DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+			return dlFileEntryLocalService.getFileEntries(folderId);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static java.util.List getFileEntries(java.lang.String folderId,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		try {

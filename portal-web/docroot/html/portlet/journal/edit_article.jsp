@@ -821,7 +821,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	<c:when test="<%= structure == null %>">
 		<c:choose>
 			<c:when test="<%= BrowserSniffer.is_rtf(request) %>">
-				<iframe frameborder="0" height="400" id="<portlet:namespace />editor" name="<portlet:namespace />editor" scrolling="no" src="<%= themeDisplay.getPathJavaScript() %>/editor/editor.jsp?editor_impl=<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>" width="100%"></iframe>
+				<iframe frameborder="0" height="400" id="<portlet:namespace />editor" name="<portlet:namespace />editor" scrolling="no" src="<%= themeDisplay.getPathJavaScript() %>/editor/editor.jsp?p_l_id=<%= plid %>&editorImpl=<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>" width="100%"></iframe>
 			</c:when>
 			<c:otherwise>
 				<textarea class="form-text" cols="80" id="<portlet:namespace />editor" name="<portlet:namespace />editor" rows="20" wrap="soft" onKeyDown="checkTab(this); disableEsc();"><%= Html.toInputSafe(GetterUtil.getString(content)) %></textarea>

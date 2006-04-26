@@ -112,7 +112,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<liferay-ui:input-select param="emailEventReminderEnabled" defaultValue="<%= CalUtil.getEmailEventReminderEnabled(prefs) %>" />
+				<liferay-ui:input-checkbox param="emailEventReminderEnabled" defaultValue="<%= CalUtil.getEmailEventReminderEnabled(prefs) %>" />
 			</td>
 		</tr>
 		<tr>
@@ -140,7 +140,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<iframe frameborder="0" height="400" id="<portlet:namespace />editor" name="<portlet:namespace />editor" scrolling="no" src="<%= themeDisplay.getPathJavaScript() %>/editor/editor.jsp?editor_impl=<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>" width="640"></iframe>
+				<iframe frameborder="0" height="400" id="<portlet:namespace />editor" name="<portlet:namespace />editor" scrolling="no" src="<%= themeDisplay.getPathJavaScript() %>/editor/editor.jsp?p_l_id=<%= plid %>&editorImpl=<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>" width="640"></iframe>
 
 				<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="">
 			</td>

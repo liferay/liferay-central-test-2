@@ -390,7 +390,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<liferay-ui:input-select param="allDay" />
+		<liferay-ui:input-checkbox param="allDay" />
 	</td>
 </tr>
 <tr>
@@ -399,7 +399,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<liferay-ui:input-select param="timeZoneSensitive" />
+		<liferay-ui:input-checkbox param="timeZoneSensitive" />
 	</td>
 </tr>
 <tr>

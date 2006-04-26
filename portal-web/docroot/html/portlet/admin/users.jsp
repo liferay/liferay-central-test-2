@@ -143,10 +143,10 @@
 					<td>
 						<c:choose>
 							<c:when test='<%= tabs3.equals("user-added-email") %>'>
-								<liferay-ui:input-select param="emailUserAddedEnabled" defaultValue="<%= AdminUtil.getEmailUserAddedEnabled(company.getCompanyId()) %>" />
+								<liferay-ui:input-checkbox param="emailUserAddedEnabled" defaultValue="<%= AdminUtil.getEmailUserAddedEnabled(company.getCompanyId()) %>" />
 							</c:when>
 							<c:when test='<%= tabs3.equals("password-sent-email") %>'>
-								<liferay-ui:input-select param="emailPasswordSentEnabled" defaultValue="<%= AdminUtil.getEmailPasswordSentEnabled(company.getCompanyId()) %>" />
+								<liferay-ui:input-checkbox param="emailPasswordSentEnabled" defaultValue="<%= AdminUtil.getEmailPasswordSentEnabled(company.getCompanyId()) %>" />
 							</c:when>
 						</c:choose>
 					</td>
@@ -183,7 +183,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<iframe frameborder="0" height="400" id="<portlet:namespace />editor" name="<portlet:namespace />editor" scrolling="no" src="<%= themeDisplay.getPathJavaScript() %>/editor/editor.jsp?editor_impl=<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>" width="640"></iframe>
+						<iframe frameborder="0" height="400" id="<portlet:namespace />editor" name="<portlet:namespace />editor" scrolling="no" src="<%= themeDisplay.getPathJavaScript() %>/editor/editor.jsp?p_l_id=<%= plid %>&editorImpl=<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>" width="640"></iframe>
 
 						<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="">
 					</td>

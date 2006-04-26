@@ -84,7 +84,7 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<liferay-ui:input-select param="showBorders" defaultValue="<%= showBorders %>" />
+			<liferay-ui:input-checkbox param="showBorders" defaultValue="<%= showBorders %>" />
 		</td>
 	</tr>
 	</table>

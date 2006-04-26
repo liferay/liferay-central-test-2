@@ -234,7 +234,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<liferay-ui:input-select param="formatXsl" />
+		<liferay-ui:input-checkbox param="formatXsl" />
 	</td>
 </tr>
 <tr>

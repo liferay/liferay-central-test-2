@@ -34,7 +34,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<liferay-ui:input-select param="safeSearch" defaultValue="<%= safeSearch %>" />
+		<liferay-ui:input-checkbox param="safeSearch" defaultValue="<%= safeSearch %>" />
 	</td>
 </tr>
 </table>

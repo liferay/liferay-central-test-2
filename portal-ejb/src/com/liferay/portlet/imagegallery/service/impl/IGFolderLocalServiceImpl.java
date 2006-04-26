@@ -171,6 +171,12 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 		return IGFolderUtil.findByGroupId(groupId);
 	}
 
+	public List getFolders(String groupId, String parentFolderId)
+		throws SystemException {
+
+		return IGFolderUtil.findByG_P(groupId, parentFolderId);
+	}
+
 	public List getFolders(
 			String groupId, String parentFolderId, int begin, int end)
 		throws SystemException {

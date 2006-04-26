@@ -73,6 +73,10 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 	<td style="padding-left: 5px;"></td>
 	<td>
 		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+			<%--
+			<liferay-ui:input-checkbox param="<%= UserDisplayTerms.ACTIVE %>" defaultValue="<%= displayTerms.isActive() %>" />
+			--%>
+
 			<select name="<portlet:namespace /><%= UserDisplayTerms.ACTIVE %>">
 				<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
 				<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>

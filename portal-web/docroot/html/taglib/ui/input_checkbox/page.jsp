@@ -34,6 +34,6 @@ boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-u
 boolean value = ParamUtil.getBoolean(request, param, defaultValue.booleanValue());
 %>
 
-<input name="<%= namespace %><%= param %>" type="hidden" value="<%= value %>">
+<input id="<%= namespace %><%= param %>" name="<%= namespace %><%= param %>" type="hidden" value="<%= value %>">
 
-<input <%= value ? "checked" : "" %> <%= disabled ? "disabled" : "" %> type="checkbox" onClick="document.<%= formName %>.<%= namespace %><%= param %>.value = this.checked; <%= onClick %>">
+<input <%= value ? "checked" : "" %> <%= disabled ? "disabled" : "" %> type="checkbox" onClick="document.getElementById('<%= namespace %><%= param %>').value = this.checked; <%= onClick %>">

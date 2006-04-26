@@ -129,6 +129,11 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 		return getService().getFileEntry(folderId, name);
 	}
 
+	public java.util.List getFileEntries(java.lang.String folderId)
+		throws com.liferay.portal.SystemException {
+		return getService().getFileEntries(folderId);
+	}
+
 	public java.util.List getFileEntries(java.lang.String folderId, int begin,
 		int end) throws com.liferay.portal.SystemException {
 		return getService().getFileEntries(folderId, begin, end);

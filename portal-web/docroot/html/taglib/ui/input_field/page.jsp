@@ -50,7 +50,7 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			boolean value = BeanParamUtil.getBoolean(bean, request, field, defaultBoolean);
 			%>
 
-			<liferay-ui:input-select param="<%= field %>" defaultValue="<%= value %>" disabled="<%= disabled %>" />
+			<liferay-ui:input-checkbox param="<%= field %>" defaultValue="<%= value %>" disabled="<%= disabled %>" />
 		</c:when>
 		<c:when test='<%= type.equals("Date") %>'>
 

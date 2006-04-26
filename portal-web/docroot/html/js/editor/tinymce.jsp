@@ -25,7 +25,7 @@
 <%@ page import="com.liferay.util.ParamUtil" %>
 
 <%
-String initMethod = ParamUtil.get(request, "init_method", DEFAULT_INIT_METHOD);
+String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
 %>
 
 <html>

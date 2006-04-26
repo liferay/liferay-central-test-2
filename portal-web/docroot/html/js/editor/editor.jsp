@@ -27,7 +27,7 @@
 <%@ page import="com.liferay.util.ParamUtil" %>
 
 <%
-String editorImpl = ParamUtil.get(request, "editor_impl", PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY));
+String editorImpl = ParamUtil.get(request, "editorImpl", PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY));
 
 //editorImpl = "fckeditor";
 //editorImpl = "liferay";

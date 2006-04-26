@@ -180,6 +180,12 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 		return DLFolderUtil.findByCompanyId(companyId);
 	}
 
+	public List getFolders(String groupId, String parentFolderId)
+		throws SystemException {
+
+		return DLFolderUtil.findByG_P(groupId, parentFolderId);
+	}
+
 	public List getFolders(
 			String groupId, String parentFolderId, int begin, int end)
 		throws SystemException {

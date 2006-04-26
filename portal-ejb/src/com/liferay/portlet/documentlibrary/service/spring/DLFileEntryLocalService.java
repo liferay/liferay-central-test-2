@@ -85,6 +85,9 @@ public interface DLFileEntryLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public java.util.List getFileEntries(java.lang.String folderId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List getFileEntries(java.lang.String folderId, int begin,
 		int end) throws com.liferay.portal.SystemException;
 

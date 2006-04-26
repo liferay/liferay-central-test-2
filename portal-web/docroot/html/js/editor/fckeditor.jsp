@@ -25,7 +25,15 @@
 <%@ page import="com.liferay.util.ParamUtil" %>
 
 <%
-String initMethod = ParamUtil.get(request, "init_method", DEFAULT_INIT_METHOD);
+String plid = ParamUtil.getString(request, "p_l_id");
+String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METHOD);
+
+// To upgrade FCKEditor, download the latest version and unzip it to fckeditor.
+// Add custom configuration to fckeditor/fckconfig.jsp. Copy
+// fckeditor/editor/filemanager/browser/default to
+// fckeditor/editor/filemanager/browser/liferay. Modify browser.html,
+// frmresourceslist.html, and frmresourcetype.html.
+
 %>
 
 <html>
@@ -47,15 +55,17 @@ String initMethod = ParamUtil.get(request, "init_method", DEFAULT_INIT_METHOD);
 <body leftmargin="0" marginheight="0" marginwidth="0" rightmargin="0" topmargin="0">
 
 <script type="text/javascript">
-	var oFCKeditor = new FCKeditor("FCKeditor1");
+	var fckEditor = new FCKeditor("FCKeditor1");
 
-	oFCKeditor.BasePath = "fckeditor/";
-	oFCKeditor.Value = decodeURIComponent(parent.<%= initMethod %>());
-	oFCKeditor.Width = "100%";
-	oFCKeditor.Height = "100%";
-	oFCKeditor.ToolbarSet = "Liferay";
+	fckEditor.Config["CustomConfigurationsPath"] = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>";
 
-	oFCKeditor.Create() ;
+	fckEditor.BasePath = "fckeditor/";
+	fckEditor.Value = decodeURIComponent(parent.<%= initMethod %>());
+	fckEditor.Width = "100%";
+	fckEditor.Height = "100%";
+	fckEditor.ToolbarSet = "Liferay";
+
+	fckEditor.Create();
 </script>
 
 </body>

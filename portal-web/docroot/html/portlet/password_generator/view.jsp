@@ -74,7 +74,7 @@ catch (Exception e) {
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<liferay-ui:input-select param="lowerCaseLetters" defaultValue="<%= lowerCaseLetters %>" />
+		<liferay-ui:input-checkbox param="lowerCaseLetters" defaultValue="<%= lowerCaseLetters %>" />
 	</td>
 </tr>
 <tr>
@@ -83,7 +83,7 @@ catch (Exception e) {
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<liferay-ui:input-select param="upperCaseLetters" defaultValue="<%= upperCaseLetters %>" />
+		<liferay-ui:input-checkbox param="upperCaseLetters" defaultValue="<%= upperCaseLetters %>" />
 	</td>
 </tr>
 <tr>

@@ -75,7 +75,7 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
 		Date now = new Date();
 
-		if (title.equals(StringPool.BLANK)) {
+		if (Validator.isNull(title)) {
 			title = name;
 		}
 
@@ -256,6 +256,10 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		return fileEntry;
 	}
 
+	public List getFileEntries(String folderId) throws SystemException {
+		return DLFileEntryUtil.findByFolderId(folderId);
+	}
+
 	public List getFileEntries(String folderId, int begin, int end)
 		throws SystemException {
 
@@ -276,7 +280,7 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 			String folderId, String name, String title, String description)
 		throws PortalException, SystemException {
 
-		if (title.equals(StringPool.BLANK)) {
+		if (Validator.isNull(title)) {
 			title = name;
 		}
 

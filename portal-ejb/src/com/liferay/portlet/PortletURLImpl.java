@@ -323,19 +323,7 @@ public class PortletURLImpl implements PortletURL {
 		}
 
 		if (Validator.isNull(layoutFriendlyURL)) {
-			String mainPath = null;
-
-			if (_portletReq != null) {
-				PortletContext portletCtx =
-					_portletReq.getPortletSession().getPortletContext();
-
-				mainPath = (String)portletCtx.getAttribute(WebKeys.MAIN_PATH);
-			}
-			else {
-				mainPath = (String)_req.getAttribute(WebKeys.MAIN_PATH);
-			}
-
-			sb.append(mainPath);
+			sb.append(themeDisplay.getPathMain());
 			sb.append("/portal/layout?");
 
 			sb.append("p_l_id");
