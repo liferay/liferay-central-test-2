@@ -4,55 +4,36 @@
 	<portlet>
 		<portlet-name>sample_struts_portlet</portlet-name>
 		<display-name>Sample Struts Portlet</display-name>
-		<portlet-class>com.liferay.portlet.samplestrutsportlet.SampleStrutsPortlet</portlet-class>
+		<portlet-class>org.apache.portals.bridges.struts.StrutsPortlet</portlet-class>
+<!--
+		<portlet-class>com.liferay.portal.apache.bridges.struts.LiferayStrutsPortlet</portlet-class>
+-->
 		<init-param>
-			<name>edit-action</name>
-			<value>/sample_struts_portlet/edit</value>
+			<name>ServletContextProvider</name>
+			<value>com.liferay.portal.apache.bridges.common.LiferayServletContextProvider</value>
 		</init-param>
 		<init-param>
-			<name>help-action</name>
-			<value>/sample_struts_portlet/help</value>
+			<name>ViewPage</name>
+			<value>/portlet_action/sample_struts_portlet/view</value>
 		</init-param>
 		<init-param>
-			<name>print-action</name>
-			<value>/sample_struts_portlet/print</value>
+			<name>HelpPage</name>
+			<value>/portlet_action/sample_struts_portlet/help</value>
 		</init-param>
 		<init-param>
-			<name>view-action</name>
-			<value>/sample_struts_portlet/view</value>
+			<name>EditPage</name>
+			<value>/portlet_action/sample_struts_portlet/edit</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>edit</portlet-mode>
 			<portlet-mode>help</portlet-mode>
-			<portlet-mode>print</portlet-mode>
 		</supports>
 		<portlet-info>
 			<title>Sample Struts Portlet</title>
 			<short-title>Sample Struts Portlet</short-title>
 			<keywords>Sample Struts Portlet</keywords>
 		</portlet-info>
-		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
 	</portlet>
-	<custom-window-state>
-		<window-state>exclusive</window-state>
-	</custom-window-state>
-	<custom-window-state>
-		<window-state>pop_up</window-state>
-	</custom-window-state>
-	<user-attribute>
-		<name>user.bdate</name>
-	</user-attribute>
-	<user-attribute>
-		<name>user.gender</name>
-	</user-attribute>
 </portlet-app>

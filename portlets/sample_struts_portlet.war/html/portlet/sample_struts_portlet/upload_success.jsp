@@ -23,5 +23,5 @@
 %>
 
 <font class="portlet-font" style="font-size: x-small;"><b>
-Upload Success
+Upload Success: <%= request.getAttribute("file_name") %>
 </b></font>

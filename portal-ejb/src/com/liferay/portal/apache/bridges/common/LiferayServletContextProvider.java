@@ -28,13 +28,6 @@ import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletContextImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseImpl;
-import com.liferay.util.CollectionFactory;
-import com.liferay.util.StringUtil;
-import com.liferay.util.servlet.ParamFilteringServletRequest;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
 
 import javax.portlet.GenericPortlet;
 import javax.portlet.PortletRequest;
@@ -51,6 +44,7 @@ import org.apache.portals.bridges.common.ServletContextProvider;
  * </a>
  *
  * @author  James Schopp
+ * @author  Michael Young
  *
  */
 public class LiferayServletContextProvider implements ServletContextProvider {
@@ -66,15 +60,15 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 		GenericPortlet portlet, PortletRequest req) {
 
 		HttpServletRequest httpReq = null;
-
-		if (req instanceof RenderRequestImpl) {
-			httpReq = ((RenderRequestImpl)req).getHttpServletRequest();
+		
+		if (req instanceof ActionRequestImpl) {
+			httpReq = new LiferayStrutsRequestImpl((ActionRequestImpl)req);
 		}
 		else {
-			httpReq = ((ActionRequestImpl)req).getHttpServletRequest();
+			httpReq = new LiferayStrutsRequestImpl((RenderRequestImpl)req);
 		}
-
-		return new LiferayStrutsRequestImpl(httpReq);
+		
+		return httpReq;
 	}
 
 	public HttpServletResponse getHttpServletResponse(

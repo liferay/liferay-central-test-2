@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -20,44 +19,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/sample_struts_portlet/init.jsp" %>
+package com.liferay.portlet.samplestrutsportlet.render;
 
-<font class="portlet-font" style="font-size: x-small;">
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-<%
-Map userInfo = (Map)renderRequest.getAttribute(PortletRequest.USER_INFO);
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
-if (userInfo == null) {
-%>
+/**
+ * <a href="UploadAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class UploadAction extends Action {
 
-	The user information map is null.
-
-<%
-}
-else if (userInfo.size() == 0) {
-%>
-
-	The user information map is not null but has 0 entries.
-
-<%
-}
-else {
-	Iterator itr = userInfo.entrySet().iterator();
-
-	while (itr.hasNext()) {
-		Map.Entry entry = (Map.Entry)itr.next();
-
-		String key = (String)entry.getKey();
-		String value = (String)entry.getValue();
-%>
-
-		<%= key %>=<%= value %><br>
-
-<%
+	public ActionForward execute(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
+		throws Exception {
+		
+		return mapping.findForward("portlet.sample_struts_portlet.upload");
 	}
-}
-%>
 
-</font>
+	private static Log _log = LogFactory.getLog(UploadAction.class);
+
+}

@@ -30,4 +30,10 @@
 
 <bean:message key="hello-there" />
 
+<br>
+<br>
+
+<%= request.getAttribute("x_param") %>
+
+
 </font>

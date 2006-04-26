@@ -713,6 +713,17 @@ public class PortalUtil {
 		HttpServletRequestWrapper reqWrapper =
 			(HttpServletRequestWrapper)dynamicReq.getRequest();
 
+		uploadReq = getUploadServletRequest(reqWrapper);
+
+		return new UploadPortletRequest(
+			uploadReq, getPortletNamespace(actionReq.getPortletName()));
+	}
+
+	public static UploadServletRequest getUploadServletRequest(
+			HttpServletRequestWrapper reqWrapper) {
+
+		UploadServletRequest uploadReq = null;
+
 		while (uploadReq == null) {
 
 			// Find the underlying UploadServletRequest wrapper. For example,
@@ -725,11 +736,9 @@ public class PortalUtil {
 				reqWrapper = (HttpServletRequestWrapper)reqWrapper.getRequest();
 			}
 		}
-
-		return new UploadPortletRequest(
-			uploadReq, getPortletNamespace(actionReq.getPortletName()));
+		return uploadReq;
 	}
-
+	
 	public static User getUser(HttpServletRequest req)
 		throws PortalException, SystemException {
 

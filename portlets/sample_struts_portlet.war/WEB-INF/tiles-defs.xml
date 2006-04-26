@@ -5,7 +5,7 @@
 
 	<!-- Test Struts -->
 
-	<definition name="portlet.sample_struts_portlet" path="/portlet/sample_struts_portlet/template.jsp" />
+	<definition name="portlet.sample_struts_portlet" path="/html/portlet/sample_struts_portlet/template.jsp" />
 
 	<definition name="portlet.sample_struts_portlet.edit" extends="portlet.sample_struts_portlet">
 		<put name="portlet_content" value="/portlet/sample_struts_portlet/edit.jsp" />
@@ -13,18 +13,6 @@
 
 	<definition name="portlet.sample_struts_portlet.help" extends="portlet.sample_struts_portlet">
 		<put name="portlet_content" value="/portlet/sample_struts_portlet/help.jsp" />
-	</definition>
-
-	<definition name="portlet.sample_struts_portlet.portlet_display_attributes" extends="portlet.sample_struts_portlet">
-		<put name="portlet_content" value="/portlet/sample_struts_portlet/portlet_display_attributes.jsp" />
-	</definition>
-
-	<definition name="portlet.sample_struts_portlet.portlet_session_attributes" extends="portlet.sample_struts_portlet">
-		<put name="portlet_content" value="/portlet/sample_struts_portlet/portlet_session_attributes.jsp" />
-	</definition>
-
-	<definition name="portlet.sample_struts_portlet.print" extends="portlet.sample_struts_portlet">
-		<put name="portlet_content" value="/portlet/sample_struts_portlet/print.jsp" />
 	</definition>
 
 	<definition name="portlet.sample_struts_portlet.sample_exception" extends="portlet.sample_struts_portlet">
@@ -53,10 +41,6 @@
 
 	<definition name="portlet.sample_struts_portlet.upload_success" extends="portlet.sample_struts_portlet">
 		<put name="portlet_content" value="/portlet/sample_struts_portlet/upload_success.jsp" />
-	</definition>
-
-	<definition name="portlet.sample_struts_portlet.user_attributes" extends="portlet.sample_struts_portlet">
-		<put name="portlet_content" value="/portlet/sample_struts_portlet/user_attributes.jsp" />
 	</definition>
 
 	<definition name="portlet.sample_struts_portlet.view" extends="portlet.sample_struts_portlet">

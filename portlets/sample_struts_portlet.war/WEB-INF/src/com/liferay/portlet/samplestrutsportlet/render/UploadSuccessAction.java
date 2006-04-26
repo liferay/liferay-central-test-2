@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -20,58 +19,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/sample_struts_portlet/init.jsp" %>
+package com.liferay.portlet.samplestrutsportlet.render;
 
-<font class="portlet-font" style="font-size: x-small;">
+import com.liferay.portal.struts.PortletAction;
 
-<b>Remote User:</b><br><br>
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-<%= request.getRemoteUser() %><br><br>
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
-<b>Session ID:</b><br><br>
+/**
+ * <a href="UploadSuccessAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class UploadSuccessAction extends PortletAction {
 
-<%= request.getRequestedSessionId() %><br><br>
+	public ActionForward execute(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
+		throws Exception {
+		
+		_log.info("render " + req.getParameter("file_name"));
 
-<b>Portlet Session Attributes:</b><br><br>
+		return mapping.findForward(
+			"portlet.sample_struts_portlet.upload_success");
+	}
 
-<i>Portlet Scope</i><br><br>
+	private static Log _log = LogFactory.getLog(UploadAction.class);
 
-<%
-PortletSession portletSession = renderRequest.getPortletSession();
-
-Enumeration enu = portletSession.getAttributeNames();
-
-while (enu.hasMoreElements()) {
-	String attrName = (String)enu.nextElement();
-
-	Object attrValue = portletSession.getAttribute(attrName);
-%>
-
-	<%= attrName %>=<%= attrValue %><br>
-
-<%
 }
-%>
-
-<br>
-
-<i>Application Scope</i><br><br>
-
-<%
-enu = portletSession.getAttributeNames(PortletSession.APPLICATION_SCOPE);
-
-while (enu.hasMoreElements()) {
-	String attrName = (String)enu.nextElement();
-
-	Object attrValue = portletSession.getAttribute(attrName, PortletSession.APPLICATION_SCOPE);
-%>
-
-	<%= attrName %>=<%= attrValue %><br>
-
-<%
-}
-%>
-
-</font>

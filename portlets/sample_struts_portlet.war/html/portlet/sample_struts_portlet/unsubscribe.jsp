@@ -40,7 +40,7 @@
 
 <table border="0" cellpadding="0" cellspacing="0">
 
-<html:form action="/sample_struts_portlet/unsubscribe?actionURL=true" method="post" focus="firstName" onsubmit="submitForm(this); return false;">
+<html:form action="/sample_struts_portlet/action/unsubscribe" method="post" focus="firstName">
 
 <tr>
 	<td>

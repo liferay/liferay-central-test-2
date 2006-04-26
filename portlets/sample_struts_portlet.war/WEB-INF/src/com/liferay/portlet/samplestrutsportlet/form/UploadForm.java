@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -20,8 +19,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<font class="portlet-font" style="font-size: x-small;"><b>
-Print
-</b></font>
+package com.liferay.portlet.samplestrutsportlet.form;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.upload.FormFile;
+
+/**
+ * <a href="UploadForm.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class UploadForm extends ActionForm {
+
+	public FormFile getFile() {
+		return _file;
+	}
+
+	public void setFile(FormFile file) {
+		_file = file;
+	}
+
+	private FormFile _file;
+
+}

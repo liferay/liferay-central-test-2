@@ -8,6 +8,7 @@
 	<form-beans>
 		<form-bean name="subscribeForm" type="com.liferay.portlet.samplestrutsportlet.form.SubscribeForm" />
 		<form-bean name="unsubscribeForm" type="com.liferay.portlet.samplestrutsportlet.form.UnsubscribeForm" />
+		<form-bean name="uploadForm" type="com.liferay.portlet.samplestrutsportlet.form.UploadForm" />
 	</form-beans>
 
 	<!-- Action Mappings -->
@@ -20,36 +21,37 @@
 
 		<action path="/sample_struts_portlet/help" forward="portlet.sample_struts_portlet.help" />
 
-		<action path="/sample_struts_portlet/portlet_display_attributes" forward="portlet.sample_struts_portlet.portlet_display_attributes" />
+		<action path="/sample_struts_portlet/action/subscribe" type="com.liferay.portlet.samplestrutsportlet.action.SubscribeAction" name="subscribeForm" scope="session" validate="true" input="portlet.sample_struts_portlet.subscribe">
+			<forward name="/sample_struts_portlet/subscribe_success" path="/portlet_action/sample_struts_portlet/subscribe_success" redirect="true" />
+		</action>
 
-		<action path="/sample_struts_portlet/portlet_session_attributes" forward="portlet.sample_struts_portlet.portlet_session_attributes" />
-
-		<action path="/sample_struts_portlet/print" forward="portlet.sample_struts_portlet.print" />
-
-		<action path="/sample_struts_portlet/subscribe" type="com.liferay.portlet.samplestrutsportlet.action.SubscribeAction" name="subscribeForm" scope="session" validate="true" input="portlet.sample_struts_portlet.subscribe">
+		<action path="/sample_struts_portlet/render/subscribe" type="com.liferay.portlet.samplestrutsportlet.render.SubscribeAction" name="subscribeForm" scope="session" validate="true" input="portlet.sample_struts_portlet.subscribe">
 			<forward name="portlet.sample_struts_portlet.subscribe" path="portlet.sample_struts_portlet.subscribe" />
-			<forward name="/sample_struts_portlet/subscribe_success" path="/sample_struts_portlet/subscribe_success" redirect="true" />
 		</action>
 
 		<action path="/sample_struts_portlet/subscribe_success" forward="portlet.sample_struts_portlet.subscribe_success" />
 
-		<action path="/sample_struts_portlet/unsubscribe" type="com.liferay.portlet.samplestrutsportlet.action.UnsubscribeAction" name="unsubscribeForm" scope="session" validate="true" input="portlet.sample_struts_portlet.unsubscribe">
+		<action path="/sample_struts_portlet/action/unsubscribe" type="com.liferay.portlet.samplestrutsportlet.action.UnsubscribeAction" name="unsubscribeForm" scope="session" validate="true" input="portlet.sample_struts_portlet.unsubscribe">
+			<forward name="/sample_struts_portlet/unsubscribe_success" path="/portlet_action/sample_struts_portlet/unsubscribe_success" redirect="true" />
+		</action>
+
+		<action path="/sample_struts_portlet/render/unsubscribe" type="com.liferay.portlet.samplestrutsportlet.render.UnsubscribeAction" name="unsubscribeForm" scope="session" validate="true" input="portlet.sample_struts_portlet.unsubscribe">
 			<forward name="portlet.sample_struts_portlet.unsubscribe" path="portlet.sample_struts_portlet.unsubscribe" />
-			<forward name="/sample_struts_portlet/unsubscribe_success" path="/sample_struts_portlet/unsubscribe_success" redirect="true" />
 		</action>
 
 		<action path="/sample_struts_portlet/unsubscribe_success" forward="portlet.sample_struts_portlet.unsubscribe_success" />
 
-		<action path="/sample_struts_portlet/upload" type="com.liferay.portlet.samplestrutsportlet.action.UploadAction">
+		<action path="/sample_struts_portlet/action/upload" type="com.liferay.portlet.samplestrutsportlet.action.UploadAction" name="uploadForm" scope="session" validate="false">
+			<forward name="/sample_struts_portlet/upload_success" path="/portlet_action/sample_struts_portlet/upload_success" redirect="true" />
+		</action>
+
+		<action path="/sample_struts_portlet/render/upload" type="com.liferay.portlet.samplestrutsportlet.render.UploadAction">
 			<forward name="portlet.sample_struts_portlet.upload" path="portlet.sample_struts_portlet.upload" />
-			<forward name="/sample_struts_portlet/upload_success" path="/sample_struts_portlet/upload_success" redirect="true" />
 		</action>
 
 		<action path="/sample_struts_portlet/upload_success" type="com.liferay.portlet.samplestrutsportlet.action.UploadSuccessAction">
 			<forward name="portlet.sample_struts_portlet.upload_success" path="portlet.sample_struts_portlet.upload_success" />
 		</action>
-
-		<action path="/sample_struts_portlet/user_attributes" forward="portlet.sample_struts_portlet.user_attributes" />
 
 		<action path="/sample_struts_portlet/view" forward="portlet.sample_struts_portlet.view" />
 
@@ -58,12 +60,17 @@
 			<forward name="/common/null.jsp" path="/common/null.jsp" />
 		</action>
 
-		<action path="/sample_struts_portlet/x" type="com.liferay.portlet.samplestrutsportlet.action.XAction">
+		<action path="/sample_struts_portlet/action/x" type="com.liferay.portlet.samplestrutsportlet.action.XAction">
 			<exception key="error.sample.exception" type="com.liferay.portlet.samplestrutsportlet.SampleException" path="portlet.sample_struts_portlet.sample_exception" />
 			<forward name="portlet.sample_struts_portlet.x" path="portlet.sample_struts_portlet.x" />
 		</action>
 
-		<action path="/sample_struts_portlet/y" type="com.liferay.portlet.samplestrutsportlet.action.YAction">
+		<action path="/sample_struts_portlet/render/x" type="com.liferay.portlet.samplestrutsportlet.render.XAction">
+			<exception key="error.sample.exception" type="com.liferay.portlet.samplestrutsportlet.SampleException" path="portlet.sample_struts_portlet.sample_exception" />
+			<forward name="portlet.sample_struts_portlet.x" path="portlet.sample_struts_portlet.x" />
+		</action>
+
+		<action path="/sample_struts_portlet/render/y" type="com.liferay.portlet.samplestrutsportlet.render.YAction">
 			<forward name="portlet.sample_struts_portlet.y" path="portlet.sample_struts_portlet.y" />
 		</action>
 
@@ -74,7 +81,7 @@
 
 	<!-- Custom Request Processor -->
 
-	<controller processorClass="com.liferay.portlet.samplestrutsportlet.SampleRequestProcessor" />
+	<controller processorClass="org.apache.portals.bridges.struts.PortletTilesRequestProcessor" />
 
 	<!-- Message Resources -->
 

@@ -20,38 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.samplestrutsportlet.action;
+package com.liferay.portlet.samplestrutsportlet.render;
 
-import com.liferay.portal.struts.PortletAction;
+import com.liferay.portlet.samplestrutsportlet.form.SubscribeForm;
 
-import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+
 /**
- * <a href="YAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="SubscribeAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class YAction extends PortletAction {
+public class SubscribeAction extends Action {
 
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+	public ActionForward execute(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
 		throws Exception {
 
-		_log.info("render");
+		SubscribeForm subscribeForm = (SubscribeForm)form;
 
-		return mapping.findForward("portlet.sample_struts_portlet.y");
+		_log.info(subscribeForm.toString());
+
+		return mapping.findForward("portlet.sample_struts_portlet.subscribe");
 	}
 
-	private static Log _log = LogFactory.getLog(YAction.class);
+	private static Log _log = LogFactory.getLog(SubscribeAction.class);
 
 }

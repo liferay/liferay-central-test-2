@@ -15,13 +15,13 @@
 		<servlet-class>com.liferay.portal.shared.servlet.PortletServlet</servlet-class>
 		<init-param>
 			<param-name>portlet-class</param-name>
-			<param-value>com.liferay.portlet.samplestrutsportlet.SampleStrutsPortlet</param-value>
+			<param-value>org.apache.portals.bridges.struts.StrutsPortlet</param-value>
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>PortletActionServlet</servlet-name>
-		<servlet-class>com.liferay.portal.struts.PortletActionServlet</servlet-class>
+		<servlet-class>org.apache.portals.bridges.struts.PortletServlet</servlet-class>
 		<init-param>
 			<param-name>config</param-name>
 			<param-value>/WEB-INF/struts-config.xml</param-value>
@@ -54,8 +54,8 @@
 		<taglib-location>/WEB-INF/tld/struts-bean.tld</taglib-location>
 	</taglib>
 	<taglib>
-		<taglib-uri>http://struts.apache.org/tags-html</taglib-uri>
-		<taglib-location>/WEB-INF/tld/struts-html.tld</taglib-location>
+		<taglib-uri>http://portals.apache.org/bridges/struts/tags-portlet-html</taglib-uri>
+		<taglib-location>/WEB-INF/tld/struts-portlet-html.tld</taglib-location>
 	</taglib>
 	<taglib>
 		<taglib-uri>http://struts.apache.org/tags-logic</taglib-uri>

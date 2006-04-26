@@ -26,6 +26,7 @@
 
 <tiles:useAttribute id="tilesPortletContent" name="portlet_content" classname="java.lang.String" ignore="true" />
 
+<%= tilesPortletContent %>
 <table border="0" cellpadding="8" cellspacing="0" width="100%">
 <tr>
 	<td>

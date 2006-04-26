@@ -26,29 +26,13 @@
 
 <font class="portlet-font" style="font-size: x-small;">
 
-Window State:&nbsp;
-
-<html:link page="/sample_struts_portlet/view?windowState=maximized">Maximize</html:link> &nbsp;|&nbsp;
-
-<html:link page="/sample_struts_portlet/view?windowState=normal">Normal</html:link><br><br>
-
-Portlet Mode:&nbsp;
-
-<html:link page="/sample_struts_portlet/edit?portletMode=edit">Edit</html:link> &nbsp;|&nbsp;
-
-<html:link page="/sample_struts_portlet/help?portletMode=help">Help</html:link> &nbsp;|&nbsp;
-
-<html:link page="/sample_struts_portlet/print?portletMode=print">Print</html:link> &nbsp;|&nbsp;
-
-<html:link page="/sample_struts_portlet/view?portletMode=view">View</html:link><br><br>
-
 View Page:&nbsp;
 
-<html:link page="/sample_struts_portlet/view">Default</html:link> &nbsp;|&nbsp;
+<html:link page="/portlet_action/sample_struts_portlet/view">Default</html:link> &nbsp;|&nbsp;
 
-<html:link page="/sample_struts_portlet/x">X</html:link> &nbsp;|&nbsp;
+<html:link page="/portlet_action/sample_struts_portlet/render/x">X</html:link> &nbsp;|&nbsp;
 
-<html:link page="/sample_struts_portlet/y?hello=Hello+World%21">Y</html:link> &nbsp;|&nbsp;
+<html:link page="/portlet_action/sample_struts_portlet/render/y?hello=Hello+World%21">Y</html:link> &nbsp;|&nbsp;
 
 <%
 Map zParams = new HashMap();
@@ -59,27 +43,12 @@ zParams.put("hi", "Hi Mom!");
 pageContext.setAttribute("zParams", zParams);
 %>
 
-<html:link name="zParams" page="/sample_struts_portlet/z">Z</html:link><br><br>
+<html:link name="zParams" page="/portlet_action/sample_struts_portlet/z">Z</html:link><br><br>
 
 Portlet URL:&nbsp;
 
-<a href="<portlet:actionURL><portlet:param name="struts_action" value="/sample_struts_portlet/x" /><portlet:param name="x_param" value="bad_x_value" /></portlet:actionURL>">Action</a> &nbsp;|&nbsp;
-
-<a href="<portlet:renderURL><portlet:param name="struts_action" value="/sample_struts_portlet/x" /></portlet:renderURL>">Render</a><br><br>
-
-User Information:&nbsp;
-
-<html:link page="/sample_struts_portlet/user_attributes">Portlet and Custom User Attributes</html:link><br><br>
-
-Shared Sessions:&nbsp;
-
-<html:link page="/sample_struts_portlet/portlet_session_attributes">Portlet Session Attributes</html:link> &nbsp;|&nbsp;
-
-<a href="<%= request.getContextPath() %>/test_session/servlet_session_attributes">Servlet Session Attributes</a><br><br>
-
-Portlet Display:&nbsp;
-
-<html:link page="/sample_struts_portlet/portlet_display_attributes">Portlet Display Attributes</html:link><br><br>
+<html:link actionURL="true" page="/portlet_action/sample_struts_portlet/action/x?x_param=bad_x_value">Action</html:link> &nbsp;|&nbsp;
+<html:link page="/portlet_action/sample_struts_portlet/render/x">Render</html:link> <br><br>
 
 Chart:&nbsp;
 
@@ -95,16 +64,15 @@ Chart:&nbsp;
 
 Struts Form:&nbsp;
 
-<html:link page="/sample_struts_portlet/subscribe?firstName=John&lastName=Wayne&emailAddress=test@liferay.com">Subscribe</html:link> &nbsp;|&nbsp;
+<html:link page="/portlet_action/sample_struts_portlet/render/subscribe?firstName=John&lastName=Wayne&emailAddress=test@liferay.com">Subscribe</html:link> &nbsp;|&nbsp;
 
-<html:link page="/sample_struts_portlet/unsubscribe?firstName=John&lastName=Wayne&emailAddress=test@liferay.com">Unsubscribe</html:link> &nbsp;|&nbsp;
+<html:link page="/portlet_action/sample_struts_portlet/render/unsubscribe?firstName=John&lastName=Wayne&emailAddress=test@liferay.com">Unsubscribe</html:link> &nbsp;|&nbsp;
 
-<html:link page="/sample_struts_portlet/upload">Upload</html:link><br><br>
+<html:link page="/portlet_action/sample_struts_portlet/render/upload">Upload</html:link><br><br>
 
 Struts Exception:&nbsp;
+<html:link actionURL="true" page="/portlet_action/sample_struts_portlet/action/x?action_exception=true">Action</html:link> &nbsp;|&nbsp;
 
-<a href="<portlet:actionURL><portlet:param name="struts_action" value="/sample_struts_portlet/x" /><portlet:param name="action_exception" value="true" /></portlet:actionURL>">Action</a> &nbsp;|&nbsp;
-
-<a href="<portlet:renderURL><portlet:param name="struts_action" value="/sample_struts_portlet/x" /><portlet:param name="render_exception" value="true" /></portlet:renderURL>">Render</a>
+<html:link page="/portlet_action/sample_struts_portlet/render/x?render_exception=true">Render</html:link> <br><br>
 
 </font>

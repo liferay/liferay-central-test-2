@@ -20,34 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.samplestrutsportlet;
+package com.liferay.portlet.samplestrutsportlet.render;
 
-import com.liferay.portlet.StrutsPortlet;
+import com.liferay.portal.struts.PortletAction;
 
-import java.io.IOException;
-
-import javax.portlet.PortletException;
-import javax.portlet.PortletSession;
+import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="SampleStrutsPortlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="YAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class SampleStrutsPortlet extends StrutsPortlet {
+public class YAction extends Action {
 
-	public void doView(RenderRequest req, RenderResponse res)
-		throws IOException, PortletException {
+	public ActionForward execute(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
+		throws Exception {
 
-		PortletSession ses = req.getPortletSession();
+		_log.info("render");
 
-		ses.setAttribute(
-			"chart_name", "Soda Survey", PortletSession.APPLICATION_SCOPE);
-
-		super.doView(req, res);
+		return mapping.findForward("portlet.sample_struts_portlet.y");
 	}
+
+	private static Log _log = LogFactory.getLog(YAction.class);
 
 }

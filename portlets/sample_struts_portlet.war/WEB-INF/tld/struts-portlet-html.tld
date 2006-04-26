@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
-
-
-
-
-
 <!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<!--
+Copyright 2004 The Apache Software Foundation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+  $Id$
+-->
 <taglib>
 <tlibversion>1.2</tlibversion>
 <jspversion>1.1</jspversion>
 <shortname>html</shortname>
-<uri>http://struts.apache.org/tags-html</uri>
+<uri>http://portals.apache.org/bridges/struts/tags-portlet-html</uri>
 <tag>
 <name>base</name>
 <tagclass>org.apache.struts.taglib.html.BaseTag</tagclass>
@@ -690,7 +700,7 @@
 </tag>
 <tag>
 <name>form</name>
-<tagclass>org.apache.struts.taglib.html.FormTag</tagclass>
+<tagclass>org.apache.portals.bridges.struts.taglib.FormTag</tagclass>
 <bodycontent>JSP</bodycontent>
 <attribute>
 <name>action</name>
@@ -1074,7 +1084,7 @@
 </tag>
 <tag>
 <name>image</name>
-<tagclass>org.apache.struts.taglib.html.ImageTag</tagclass>
+<tagclass>org.apache.portals.bridges.struts.taglib.ImageTag</tagclass>
 <attribute>
 <name>accesskey</name>
 <required>false</required>
@@ -1248,7 +1258,7 @@
 </tag>
 <tag>
 <name>img</name>
-<tagclass>org.apache.struts.taglib.html.ImgTag</tagclass>
+<tagclass>org.apache.portals.bridges.struts.taglib.ImgTag</tagclass>
 <bodycontent>empty</bodycontent>
 <attribute>
 <name>align</name>
@@ -1528,7 +1538,22 @@
 </tag>
 <tag>
 <name>link</name>
-<tagclass>org.apache.struts.taglib.html.LinkTag</tagclass>
+<tagclass>org.apache.portals.bridges.struts.taglib.LinkTag</tagclass>
+<attribute>
+<name>actionURL</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>renderURL</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>resourceURL</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
 <attribute>
 <name>accesskey</name>
 <required>false</required>
@@ -2548,8 +2573,23 @@
 </tag>
 <tag>
 <name>rewrite</name>
-<tagclass>org.apache.struts.taglib.html.RewriteTag</tagclass>
+<tagclass>org.apache.portals.bridges.struts.taglib.RewriteTag</tagclass>
 <bodycontent>empty</bodycontent>
+<attribute>
+<name>actionURL</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>renderURL</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+<name>resourceURL</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
 <attribute>
 <name>action</name>
 <required>false</required>

@@ -22,21 +22,25 @@
 
 package com.liferay.portlet.samplestrutsportlet.action;
 
-import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Http;
 import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
+import java.util.Iterator;
+import java.util.List;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUpload;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -47,32 +51,41 @@ import org.apache.struts.action.ActionMapping;
  * @author  Brian Wing Shun Chan
  *
  */
-public class UploadAction extends PortletAction {
+public class UploadAction extends Action {
 
-	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+	public ActionForward execute(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
 		throws Exception {
 
-		UploadPortletRequest uploadReq =
-			PortalUtil.getUploadPortletRequest(req);
+		FileItemFactory factory = new DiskFileItemFactory();
 
-		File file = uploadReq.getFile("file_location");
+		ServletFileUpload upload = new ServletFileUpload(factory);
 
-		_log.info(file);
+		List items = upload.parseRequest(req);
 
-		setForward(
-			req,
-			"/sample_struts_portlet/upload_success?actionURL=true&file_name=" +
-				Http.encodeURL(file.getName()));
-	}
+		Iterator iter = items.iterator();
 
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
-		throws Exception {
+		String itemName = "";
 
-		return mapping.findForward("portlet.sample_struts_portlet.upload");
+		while (iter.hasNext()) {
+		    FileItem item = (FileItem) iter.next();
+
+		    if (!item.isFormField()) {
+		    	_log.info("Field Name: " + item.getFieldName());
+		    	
+		    	itemName = item.getName();
+		    	_log.info("Name: " + itemName);
+		    	_log.info("Content Type: " + item.getContentType());
+		    	_log.info("In Memory: " + item.isInMemory());
+		    	_log.info("Size: " + item.getSize());		    
+		    }		
+		}
+		
+		req.setAttribute("file_name", itemName);
+		
+		return mapping.findForward(
+			"/sample_struts_portlet/upload_success");
 	}
 
 	private static Log _log = LogFactory.getLog(UploadAction.class);

@@ -20,8 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.samplestrutsportlet.action;
+package com.liferay.portlet.samplestrutsportlet.render;
 
+import com.liferay.portal.struts.PortletAction;
+import com.liferay.portlet.samplestrutsportlet.SampleException;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,21 +41,28 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="UnsubscribeAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="XAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class UnsubscribeAction extends Action {
-
+public class XAction extends Action {
+	
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
 		throws Exception {
-		
-		return mapping.findForward("/sample_struts_portlet/unsubscribe_success");
+		_log.info("render " + req.getParameter("x_param"));
+
+		String exception = req.getParameter("render_exception");
+
+		if ((exception != null) && (exception.equals("true"))) {
+			throw new SampleException();
+		}
+
+		return mapping.findForward("portlet.sample_struts_portlet.x");
 	}
 
-	private static Log _log = LogFactory.getLog(UnsubscribeAction.class);
+	private static Log _log = LogFactory.getLog(XAction.class);
 
 }

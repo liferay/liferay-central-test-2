@@ -26,7 +26,7 @@
 
 <table border="0" cellpadding="0" cellspacing="0">
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/sample_struts_portlet/upload" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
+<html:form action="/sample_struts_portlet/action/upload" enctype="multipart/form-data" method="post" focus="file">
 
 <tr>
 	<td>
@@ -36,7 +36,7 @@
 		&nbsp;
 	</td>
 	<td>
-		<input name="<portlet:namespace />file_location" size="30" type="file">
+		<html:file property="file" /> 
 	</td>
 </tr>
 <tr>
@@ -47,10 +47,10 @@
 <tr>
 	<td colspan="2"></td>
 	<td>
-		<input type="submit" value="Upload File">
+		<html:submit>Upload File</html:submit>
 	</td>
 </tr>
 
-</form>
+</html:form>
 
 </table>

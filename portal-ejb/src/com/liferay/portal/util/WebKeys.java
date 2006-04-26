@@ -267,6 +267,8 @@ public class WebKeys {
 
 	public static final String STALE_SESSION = "STALE_SESSION";
 
+	public static final String STRUTS_BRIDGES_ATTRIBUTES = "STRUTS_BRIDGES_ATTRIBUTES";
+
 	public static final String SUBJECT = "SUBJECT";
 
 	public static final String TAB_INDEX = "TAB_INDEX";
