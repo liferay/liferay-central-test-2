@@ -45,7 +45,6 @@ import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServic
 import com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalServiceUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.MathUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.io.InputStream;

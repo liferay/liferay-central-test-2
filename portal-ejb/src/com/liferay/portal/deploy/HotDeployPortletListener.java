@@ -119,11 +119,11 @@ public class HotDeployPortletListener implements HotDeployListener {
 
 			ctx.setAttribute(
 				PortletServlet.PORTLET_CLASS_LOADER, portletClassLoader);
-			
+
 			// Portlet context wrapper
 
 			boolean strutsBridges = false;
-			
+
 			Iterator itr1 = portlets.iterator();
 
 			while (itr1.hasNext()) {
@@ -131,16 +131,16 @@ public class HotDeployPortletListener implements HotDeployListener {
 
 				Class portletClass = portletClassLoader.loadClass(
 						portlet.getPortletClass());
-					
+
 				javax.portlet.Portlet portletInstance =
 					(javax.portlet.Portlet)portletClass.newInstance();
 
-				if (ClassUtil.isSubclass(portletClass, 
+				if (ClassUtil.isSubclass(portletClass,
 					StrutsPortlet.class.getName())) {
-					
+
 					strutsBridges = true;
 				}
-				
+
 				Indexer indexerInstance = null;
 
 				if (Validator.isNotNull(portlet.getIndexerClass())) {
@@ -229,13 +229,15 @@ public class HotDeployPortletListener implements HotDeployListener {
 				PortletContextPool.put(portlet.getPortletId(), pcw);
 			}
 
-			// Struts Bridges Servlet Context Provider
-			
+			// Struts bridges
+
 			if (strutsBridges) {
-				ctx.setAttribute(LiferayServletContextProviderWrapper.STRUTS_BRIDGES_CONTEXT_PROVIDER, 
+				ctx.setAttribute(
+					LiferayServletContextProviderWrapper.
+						STRUTS_BRIDGES_CONTEXT_PROVIDER,
 					new LiferayServletContextProvider());
 			}
-			
+
 			// Portlet display
 
 			String xml = Http.URLtoString(ctx.getResource(

@@ -59,6 +59,8 @@ import org.apache.struts.config.ModuleConfig;
  */
 public class StrutsUtil {
 
+	public static final String STRUTS_PACKAGE = "org.apache.struts.";
+
 	public static void forward(
 			String uri, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res)
@@ -149,7 +151,7 @@ public class StrutsUtil {
 		while (enu.hasMoreElements()) {
 			String attributeName = (String)enu.nextElement();
 
-			if (attributeName.startsWith(_STRUTS_PACKAGE)) {
+			if (attributeName.startsWith(STRUTS_PACKAGE)) {
 				strutsAttributes.put(
 					attributeName, req.getAttribute(attributeName));
 			}
@@ -199,8 +201,6 @@ public class StrutsUtil {
 
 		return portalCtx;
 	}
-
-	private static String _STRUTS_PACKAGE = "org.apache.struts.";
 
 	private static Log _log = LogFactory.getLog(StrutsUtil.class);
 

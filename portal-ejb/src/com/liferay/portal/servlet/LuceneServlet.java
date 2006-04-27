@@ -82,8 +82,8 @@ public class LuceneServlet extends HttpServlet {
 				IndexWriter writer = null;
 
 				// Lucene does not properly release its lock on the index when
-				// IndexWriter() throws an exception
-				
+				// IndexWriter throws an exception
+
 				try {
 					if (luceneDir.fileExists("segments")) {
 						writer = new IndexWriter(
@@ -91,8 +91,8 @@ public class LuceneServlet extends HttpServlet {
 					}
 					else {
 						writer = new IndexWriter(
-							luceneDir, LuceneUtil.getAnalyzer(), true);					
-					}					
+							luceneDir, LuceneUtil.getAnalyzer(), true);
+					}
 				}
 				catch (IOException ioe) {
 					ioe.printStackTrace();

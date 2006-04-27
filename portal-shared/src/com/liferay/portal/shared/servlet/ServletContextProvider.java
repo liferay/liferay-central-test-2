@@ -25,6 +25,7 @@ package com.liferay.portal.shared.servlet;
 import javax.portlet.GenericPortlet;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,7 +44,7 @@ public interface ServletContextProvider {
 	public HttpServletRequest getHttpServletRequest(
 		GenericPortlet portlet, PortletRequest req);
 
-
 	public HttpServletResponse getHttpServletResponse(
 		GenericPortlet portlet, PortletResponse res);
+
 }

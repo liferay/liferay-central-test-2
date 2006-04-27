@@ -39,12 +39,12 @@ import org.apache.struts.action.ActionMapping;
  *
  */
 public class SubscribeAction extends Action {
-	
+
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
 		throws Exception {
-		
+
 		return mapping.findForward("/sample_struts_portlet/subscribe_success");
 	}
 

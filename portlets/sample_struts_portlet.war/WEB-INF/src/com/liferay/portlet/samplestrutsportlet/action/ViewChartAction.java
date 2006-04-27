@@ -25,9 +25,11 @@ package com.liferay.portlet.samplestrutsportlet.action;
 import com.liferay.portlet.LiferaySessionUtil;
 
 import java.io.OutputStream;
+
 import java.util.Enumeration;
 
 import javax.portlet.PortletSessionUtil;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -39,6 +41,7 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;

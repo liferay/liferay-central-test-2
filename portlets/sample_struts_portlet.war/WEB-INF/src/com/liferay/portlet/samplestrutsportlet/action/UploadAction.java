@@ -22,11 +22,6 @@
 
 package com.liferay.portlet.samplestrutsportlet.action;
 
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.Http;
-import com.liferay.util.servlet.UploadPortletRequest;
-
-import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,7 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.logging.Log;
@@ -73,17 +67,17 @@ public class UploadAction extends Action {
 
 		    if (!item.isFormField()) {
 		    	_log.info("Field Name: " + item.getFieldName());
-		    	
+
 		    	itemName = item.getName();
 		    	_log.info("Name: " + itemName);
 		    	_log.info("Content Type: " + item.getContentType());
 		    	_log.info("In Memory: " + item.isInMemory());
-		    	_log.info("Size: " + item.getSize());		    
-		    }		
+		    	_log.info("Size: " + item.getSize());
+		    }
 		}
-		
+
 		req.setAttribute("file_name", itemName);
-		
+
 		return mapping.findForward(
 			"/sample_struts_portlet/upload_success");
 	}

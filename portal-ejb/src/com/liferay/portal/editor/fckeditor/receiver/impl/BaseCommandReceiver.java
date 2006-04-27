@@ -31,7 +31,6 @@ import com.liferay.util.servlet.UploadServletRequest;
 import com.liferay.util.servlet.fileupload.LiferayFileItemFactory;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 
 import java.util.HashMap;

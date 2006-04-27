@@ -22,6 +22,7 @@
 
 package com.liferay.portal.apache.bridges.struts;
 
+import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
@@ -29,8 +30,10 @@ import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.servlet.UploadServletRequest;
 
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
@@ -44,137 +47,138 @@ import javax.servlet.http.HttpServletRequestWrapper;
  *
  */
 public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
+
 	public LiferayStrutsRequestImpl(ActionRequestImpl req) {
 		this(req.getHttpServletRequest());
 
-		HttpServletRequestWrapper httpReq = 
+		HttpServletRequestWrapper httpReq =
 			(HttpServletRequestWrapper)req.getHttpServletRequest();
-		
-		UploadServletRequest uploadReq = 
+
+		UploadServletRequest uploadReq =
 			PortalUtil.getUploadServletRequest(httpReq);
-		
+
 		if (uploadReq == null) {
 			return;
 		}
-		
-		_multipartParams = uploadReq.getMultipartParameters();
+
+		_multipartParams = uploadReq.getMultipartParameterMap();
 	}
-	
+
 	public LiferayStrutsRequestImpl(RenderRequestImpl req) {
-		this(req.getHttpServletRequest());		
+		this(req.getHttpServletRequest());
 	}
-	
+
 	public Object getAttribute(String name) {
 		Object value = null;
-		
-		if (name.startsWith(_STRUTS_PACKAGE)) {
+
+		if (name.startsWith(StrutsUtil.STRUTS_PACKAGE)) {
 			value = _strutsAttributes.get(name);
-		} 
+		}
 		else {
 			value = super.getAttribute(name);
 		}
-		
+
 		return value;
 	}
 
 	public void setAttribute(String name, Object value) {
-		if (name.startsWith(_STRUTS_PACKAGE)) {
+		if (name.startsWith(StrutsUtil.STRUTS_PACKAGE)) {
 			_strutsAttributes.put(name, value);
-		} 
+		}
 		else {
 			super.setAttribute(name, value);
 		}
 	}
-	
+
 	public Enumeration getAttributeNames() {
-		Enumeration parentAttributeNames = super.getAttributeNames();
-		
-		Vector attributeNames = new Vector();
-		
-		for (String name = null; parentAttributeNames.hasMoreElements();) {
-			name = (String) parentAttributeNames.nextElement();
-			
-			if (!name.startsWith(_STRUTS_PACKAGE)) {
+		List attributeNames = new Vector();
+
+		Enumeration enu = super.getAttributeNames();
+
+		while (enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+
+			if (!name.startsWith(StrutsUtil.STRUTS_PACKAGE)) {
 				attributeNames.add(name);
 			}
 		}
-		
-		Iterator it = _strutsAttributes.keySet().iterator();
-		
-		for (Object name = null; it.hasNext();) {
-			name = it.next();
-			
+
+		Iterator itr = _strutsAttributes.keySet().iterator();
+
+		while (itr.hasNext()) {
+			String name = (String)itr.next();
+
 			attributeNames.add(name);
 		}
-		
-		return attributeNames.elements();
+
+		return Collections.enumeration(attributeNames);
 	}
 
 	public String getParameter(String name) {
 		if (_multipartParams.get(name) != null) {
 			return null;
 		}
-		
-		return super.getParameter(name);
+		else {
+			return super.getParameter(name);
+		}
 	}
 
 	public Map getParameterMap() {
-		Map parentParams = super.getParameterMap();
-		
-		Enumeration paramNames = getParameterNames();
-
 		Map params = CollectionFactory.getHashMap();
-	
-		for (String name = null; paramNames.hasMoreElements();) {
-			name = (String) paramNames.nextElement();
-			
-			Object value = parentParams.get(name);
-			
-			params.put(name, value);
+
+		Enumeration enu = getParameterNames();
+
+		while (enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+
+			String[] values = super.getParameterValues(name);
+
+			params.put(name, values);
 		}
-		
+
 		return params;
 	}
 
 	public Enumeration getParameterNames() {
-		Enumeration parentParamNames = super.getParameterNames();
+		List parameterNames = new Vector();
 
-		Vector paramNames = new Vector();
+		Enumeration enu = super.getParameterNames();
 
-		for (String name = null; parentParamNames.hasMoreElements();) {
-			name = (String) parentParamNames.nextElement();
+		while (enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
 
 			if (!_multipartParams.containsKey(name)) {
-				paramNames.add(name);
+				parameterNames.add(name);
 			}
 		}
-		
-		return paramNames.elements();
+
+		return Collections.enumeration(parameterNames);
 	}
 
 	public String[] getParameterValues(String name) {
 		if (_multipartParams.get(name) != null) {
 			return null;
 		}
-		
-		return super.getParameterValues(name);
+		else {
+			return super.getParameterValues(name);
+		}
 	}
 
 	protected LiferayStrutsRequestImpl(HttpServletRequest req) {
 		super(req);
-		
-		_strutsAttributes = 
+
+		_strutsAttributes =
 			(Map)req.getAttribute(WebKeys.STRUTS_BRIDGES_ATTRIBUTES);
-		
+
 		if (_strutsAttributes == null) {
 			_strutsAttributes = CollectionFactory.getHashMap();
-			
-			req.setAttribute(WebKeys.STRUTS_BRIDGES_ATTRIBUTES, _strutsAttributes);
+
+			req.setAttribute(
+				WebKeys.STRUTS_BRIDGES_ATTRIBUTES, _strutsAttributes);
 		}
 	}
 
-	private static String _STRUTS_PACKAGE = "org.apache.struts.";
-
 	private Map _strutsAttributes;
 	private Map _multipartParams = CollectionFactory.getHashMap();
+
 }

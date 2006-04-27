@@ -250,10 +250,10 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
-	public Map getMultipartParameters() {
+	public Map getMultipartParameterMap() {
 		return _params;
 	}
-	
+
 	private LiferayServletRequest _lsr;
 	private Map _params;
 

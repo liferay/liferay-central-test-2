@@ -58,14 +58,14 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 		GenericPortlet portlet, PortletRequest req) {
 
 		HttpServletRequest httpReq = null;
-		
+
 		if (req instanceof ActionRequestImpl) {
 			httpReq = new LiferayStrutsRequestImpl((ActionRequestImpl)req);
 		}
 		else {
 			httpReq = new LiferayStrutsRequestImpl((RenderRequestImpl)req);
 		}
-		
+
 		return httpReq;
 	}
 
@@ -79,4 +79,5 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 			return ((ActionResponseImpl)res).getHttpServletResponse();
 		}
 	}
+
 }

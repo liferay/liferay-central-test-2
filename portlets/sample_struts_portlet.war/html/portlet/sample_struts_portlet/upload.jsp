@@ -36,7 +36,7 @@
 		&nbsp;
 	</td>
 	<td>
-		<html:file property="file" /> 
+		<html:file property="file" />
 	</td>
 </tr>
 <tr>

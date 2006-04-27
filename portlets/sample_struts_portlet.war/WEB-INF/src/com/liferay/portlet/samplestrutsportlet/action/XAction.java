@@ -46,7 +46,7 @@ public class XAction extends Action {
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
 		throws Exception {
-		
+
 		_log.info("processAction");
 
 		req.setAttribute("x_param", "x_value");

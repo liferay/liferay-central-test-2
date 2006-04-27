@@ -44,7 +44,7 @@ public class UploadAction extends Action {
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
 		throws Exception {
-		
+
 		return mapping.findForward("portlet.sample_struts_portlet.upload");
 	}
 

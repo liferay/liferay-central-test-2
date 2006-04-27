@@ -44,8 +44,9 @@ public class UnsubscribeAction extends Action {
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
 		throws Exception {
-		
-		return mapping.findForward("/sample_struts_portlet/unsubscribe_success");
+
+		return mapping.findForward(
+			"/sample_struts_portlet/unsubscribe_success");
 	}
 
 	private static Log _log = LogFactory.getLog(UnsubscribeAction.class);

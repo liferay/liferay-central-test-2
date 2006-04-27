@@ -22,11 +22,10 @@
 
 package com.liferay.portal.editor.fckeditor.receiver.impl;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -34,25 +33,10 @@ import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServic
 import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.spring.DLFolderServiceUtil;
-import com.liferay.portlet.LiferayWindowState;
 import com.liferay.util.FileUtil;
 import com.liferay.util.StringPool;
-import com.liferay.util.ParamUtil;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import java.io.File;
-import java.io.IOException;
-
-import javax.portlet.PortletURL;
 
 import java.util.List;
 import java.util.StringTokenizer;

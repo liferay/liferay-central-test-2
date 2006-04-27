@@ -22,8 +22,6 @@
 
 package com.liferay.portal.editor.fckeditor.receiver.impl;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
 import com.liferay.portal.model.Group;

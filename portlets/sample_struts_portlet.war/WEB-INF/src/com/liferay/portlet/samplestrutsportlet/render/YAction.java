@@ -22,11 +22,6 @@
 
 package com.liferay.portlet.samplestrutsportlet.render;
 
-import com.liferay.portal.struts.PortletAction;
-
-import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

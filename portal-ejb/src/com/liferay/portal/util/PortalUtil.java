@@ -703,25 +703,24 @@ public class PortalUtil {
 	}
 
 	public static UploadPortletRequest getUploadPortletRequest(
-		ActionRequest req) throws IOException {
+		ActionRequest req) {
 
 		ActionRequestImpl actionReq = (ActionRequestImpl)req;
+
 		DynamicServletRequest dynamicReq =
 			(DynamicServletRequest)actionReq.getHttpServletRequest();
-
-		UploadServletRequest uploadReq = null;
 
 		HttpServletRequestWrapper reqWrapper =
 			(HttpServletRequestWrapper)dynamicReq.getRequest();
 
-		uploadReq = getUploadServletRequest(reqWrapper);
+		UploadServletRequest uploadReq = getUploadServletRequest(reqWrapper);
 
 		return new UploadPortletRequest(
 			uploadReq, getPortletNamespace(actionReq.getPortletName()));
 	}
 
 	public static UploadServletRequest getUploadServletRequest(
-			HttpServletRequestWrapper reqWrapper) {
+		HttpServletRequestWrapper reqWrapper) {
 
 		UploadServletRequest uploadReq = null;
 
@@ -735,7 +734,7 @@ public class PortalUtil {
 			}
 			else {
 				ServletRequest req = reqWrapper.getRequest();
-				
+
 				if (!(req instanceof HttpServletRequestWrapper)) {
 					break;
 				}
@@ -743,10 +742,10 @@ public class PortalUtil {
 				reqWrapper = (HttpServletRequestWrapper)reqWrapper.getRequest();
 			}
 		}
-		
+
 		return uploadReq;
 	}
-	
+
 	public static User getUser(HttpServletRequest req)
 		throws PortalException, SystemException {
 

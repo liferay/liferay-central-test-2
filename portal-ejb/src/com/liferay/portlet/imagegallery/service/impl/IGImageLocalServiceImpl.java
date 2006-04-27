@@ -43,7 +43,6 @@ import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
 import com.liferay.portlet.imagegallery.service.spring.IGImageLocalService;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.ImageUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;

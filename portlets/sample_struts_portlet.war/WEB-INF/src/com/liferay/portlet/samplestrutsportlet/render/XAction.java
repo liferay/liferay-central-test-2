@@ -22,14 +22,8 @@
 
 package com.liferay.portlet.samplestrutsportlet.render;
 
-import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.samplestrutsportlet.SampleException;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -47,7 +41,7 @@ import org.apache.struts.action.ActionMapping;
  *
  */
 public class XAction extends Action {
-	
+
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)

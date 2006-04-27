@@ -19,80 +19,72 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.util.apache.bridges.struts;
+
+import com.liferay.portal.shared.servlet.ServletContextProvider;
 
 import javax.portlet.GenericPortlet;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.portals.bridges.common.ServletContextProvider;
 
 /**
- * <a href="LiferayServletContextProviderWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="LiferayServletContextProviderWrapper.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Michael Young
  *
  */
-public class LiferayServletContextProviderWrapper implements
-		ServletContextProvider {
+public class LiferayServletContextProviderWrapper
+	implements org.apache.portals.bridges.common.ServletContextProvider {
 
-	public static final String STRUTS_BRIDGES_CONTEXT_PROVIDER = 
+	public static final String STRUTS_BRIDGES_CONTEXT_PROVIDER =
 		"STRUTS_BRIDGES_CONTEXT_PROVIDER";
 
 	public ServletContext getServletContext(GenericPortlet portlet) {
-		com.liferay.portal.shared.servlet.ServletContextProvider provider = 
-			_getProvider(portlet); 
-		
-		ServletContext ctx = provider.getServletContext(portlet);
+		ServletContextProvider provider = _getProvider(portlet);
 
-		return ctx;
+		return provider.getServletContext(portlet);
 	}
 
-	public HttpServletRequest getHttpServletRequest(GenericPortlet portlet,
-			PortletRequest req) {
+	public HttpServletRequest getHttpServletRequest(
+		GenericPortlet portlet, PortletRequest req) {
 
-		com.liferay.portal.shared.servlet.ServletContextProvider provider = 
-			_getProvider(portlet); 
-		
-		HttpServletRequest httpReq = provider.getHttpServletRequest(portlet,
-				req);
+		ServletContextProvider provider = _getProvider(portlet);
 
-		return httpReq;
+		return provider.getHttpServletRequest(portlet, req);
 	}
 
-	public HttpServletResponse getHttpServletResponse(GenericPortlet portlet,
-			PortletResponse res) {
+	public HttpServletResponse getHttpServletResponse(
+		GenericPortlet portlet, PortletResponse res) {
 
-		com.liferay.portal.shared.servlet.ServletContextProvider provider = 
-			_getProvider(portlet); 
-		
-		HttpServletResponse httpRes = provider.getHttpServletResponse(portlet,
-			res);
+		ServletContextProvider provider = _getProvider(portlet);
 
-		return httpRes;
+		return provider.getHttpServletResponse(portlet, res);
 	}
 
-	private com.liferay.portal.shared.servlet.ServletContextProvider 
-		_getProvider(GenericPortlet portlet) {
-		
+	private ServletContextProvider _getProvider(GenericPortlet portlet) {
 		PortletContext portletCtx = portlet.getPortletContext();
-		
+
 		if (_provider == null) {
-			_provider = (com.liferay.portal.shared.servlet.ServletContextProvider)
-				portletCtx.getAttribute(STRUTS_BRIDGES_CONTEXT_PROVIDER);
+			_provider = (ServletContextProvider)portletCtx.getAttribute(
+				STRUTS_BRIDGES_CONTEXT_PROVIDER);
 		}
-		
-		return _provider; 
+
+		return _provider;
 	}
-	
-	private static Log _log = LogFactory.getLog(
-		LiferayServletContextProviderWrapper.class);
-	
-	private com.liferay.portal.shared.servlet.ServletContextProvider _provider;
+
+	private static Log _log =
+		LogFactory.getLog(LiferayServletContextProviderWrapper.class);
+
+	private ServletContextProvider _provider;
+
 }
