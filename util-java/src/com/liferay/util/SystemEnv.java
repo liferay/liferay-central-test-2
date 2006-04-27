@@ -67,10 +67,12 @@ public class SystemEnv {
 			while ((line = br.readLine()) != null) {
 				int pos = line.indexOf(StringPool.EQUAL);
 
-				String key = line.substring(0, pos);
-				String value = line.substring(pos + 1);
+				if (pos != -1) {
+					String key = line.substring(0, pos);
+					String value = line.substring(pos + 1);
 
-				props.setProperty(key, value);
+					props.setProperty(key, value);
+				}
 			}
 		}
 		catch (IOException ioe) {
