@@ -366,6 +366,7 @@ article-approval-denied-email=記事は電子メールを否定した
 article-approval-granted-email=記事は電子メールを与えた
 article-approval-requested-email=記事は電子メールを要求した
 article-id=記事ID
+article-review-email=記事の検討の電子メール
 article-title=記事のタイトル
 article-type=記事のタイプ
 article=記事

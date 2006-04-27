@@ -41,6 +41,9 @@ String emailArticleApprovalGrantedBody = ParamUtil.getString(request, "emailArti
 String emailArticleApprovalRequestedSubject = ParamUtil.getString(request, "emailArticleApprovalRequestedSubject", JournalUtil.getEmailArticleApprovalRequestedSubject(portletSetup));
 String emailArticleApprovalRequestedBody = ParamUtil.getString(request, "emailArticleApprovalRequestedBody", JournalUtil.getEmailArticleApprovalRequestedBody(portletSetup));
 
+String emailArticleReviewSubject = ParamUtil.getString(request, "emailArticleReviewSubject", JournalUtil.getEmailArticleReviewSubject(portletSetup));
+String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReviewBody", JournalUtil.getEmailArticleReviewBody(portletSetup));
+
 String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
 
 String redirect = ParamUtil.getString(request, "redirect");
@@ -69,6 +72,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 		editorParam = "emailArticleApprovalRequestedBody";
 		editorContent = emailArticleApprovalRequestedBody;
 	}
+	else if (tabs2.equals("article-review-email")) {
+		editorParam = "emailArticleReviewBody";
+		editorContent = emailArticleReviewBody;
+	}
 	%>
 
 	function initEditor() {
@@ -76,7 +83,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	}
 
 	function <portlet:namespace />saveConfiguration() {
-		<c:if test='<%= tabs2.startsWith("article-approval-") %>'>
+		<c:if test='<%= tabs2.startsWith("article-approval-") || tabs2.startsWith("article-review-") %>'>
 			document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = parent.<portlet:namespace />editor.getHTML();
 		</c:if>
 
@@ -90,7 +97,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
 
 <liferay-ui:tabs
-	names="email-from,article-approval-denied-email,article-approval-granted-email,article-approval-requested-email"
+	names="email-from,article-approval-denied-email,article-approval-granted-email,article-approval-requested-email,article-review-email"
 	param="tabs2"
 	url="<%= portletURL %>"
 />
@@ -103,6 +110,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 <liferay-ui:error key="emailArticleApprovalGrantedSubject" message="please-enter-a-valid-subject" />
 <liferay-ui:error key="emailArticleApprovalRequestedBody" message="please-enter-a-valid-body" />
 <liferay-ui:error key="emailArticleApprovalRequestedSubject" message="please-enter-a-valid-subject" />
+<liferay-ui:error key="emailArticleReviewBody" message="please-enter-a-valid-body" />
+<liferay-ui:error key="emailArticleReviewSubject" message="please-enter-a-valid-subject" />
 
 <c:choose>
 	<c:when test='<%= tabs2.equals("email-from") %>'>
@@ -127,7 +136,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		</table>
 	</c:when>
-	<c:when test='<%= tabs2.startsWith("article-approval-") %>'>
+	<c:when test='<%= tabs2.startsWith("article-approval-") || tabs2.startsWith("article-review-") %>'>
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>
@@ -144,6 +153,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 					</c:when>
 					<c:when test='<%= tabs2.equals("article-approval-requested-email") %>'>
 						<liferay-ui:input-checkbox param="emailArticleApprovalRequestedEnabled" defaultValue="<%= JournalUtil.getEmailArticleApprovalRequestedEnabled(portletSetup) %>" />
+					</c:when>
+					<c:when test='<%= tabs2.equals("article-review-email") %>'>
+						<liferay-ui:input-checkbox param="emailArticleReviewEnabled" defaultValue="<%= JournalUtil.getEmailArticleReviewEnabled(portletSetup) %>" />
 					</c:when>
 				</c:choose>
 			</td>
@@ -168,6 +180,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 					</c:when>
 					<c:when test='<%= tabs2.equals("article-approval-requested-email") %>'>
 						<input class="form-text" name="<portlet:namespace />emailArticleApprovalRequestedSubject" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= emailArticleApprovalRequestedSubject %>">
+					</c:when>
+					<c:when test='<%= tabs2.equals("article-review-email") %>'>
+						<input class="form-text" name="<portlet:namespace />emailArticleReviewSubject" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= emailArticleReviewSubject %>">
 					</c:when>
 				</c:choose>
 			</td>
@@ -215,15 +230,19 @@ String redirect = ParamUtil.getString(request, "redirect");
 				The article title
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<b>[$ARTICLE_URL$]</b>
-			</td>
-			<td style="padding-left: 10px;"></td>
-			<td>
-				The article URL
-			</td>
-		</tr>
+
+		<c:if test='<%= tabs2.startsWith("article-approval-") %>'>
+			<tr>
+				<td>
+					<b>[$ARTICLE_URL$]</b>
+				</td>
+				<td style="padding-left: 10px;"></td>
+				<td>
+					The article URL
+				</td>
+			</tr>
+		</c:if>
+
 		<tr>
 			<td>
 				<b>[$ARTICLE_VERSION$]</b>

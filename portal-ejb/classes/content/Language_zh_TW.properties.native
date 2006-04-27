@@ -366,6 +366,7 @@ article-approval-denied-email=文章Denied 電子郵件
 article-approval-granted-email=文章授予了電子郵件
 article-approval-requested-email=文章被請求的電子郵件
 article-id=文章編號
+article-review-email=文章回顧電子郵件
 article-title=文章標題
 article-type=文章類型
 article=文章

@@ -366,6 +366,7 @@ article-approval-denied-email=文章被否认的电子邮件
 article-approval-granted-email=文章授予了电子邮件
 article-approval-requested-email=文章被请求的电子邮件
 article-id=文章编号
+article-review-email=文章回顾电子邮件
 article-title=文章标题
 article-type=文章类型
 article=文章

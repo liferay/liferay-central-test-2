@@ -34,8 +34,10 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
+import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.ImageLocalServiceUtil;
+import com.liferay.portal.service.spring.PortletPreferencesServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -68,6 +70,7 @@ import com.liferay.util.LocaleUtil;
 import com.liferay.util.MathUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
+import com.liferay.util.Time;
 import com.liferay.util.Validator;
 import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.lucene.Hits;
@@ -279,13 +282,37 @@ public class JournalArticleLocalServiceImpl
 		for (int i = 0; i < articles.size(); i++) {
 			JournalArticle article = (JournalArticle)articles.get(i);
 
-			if (!article.isExpired() && (article.getExpirationDate() != null) &&
-				article.getExpirationDate().before(now)) {
+			Date expirationDate = article.getExpirationDate();
+			Date reviewDate = article.getReviewDate();
+
+			if (!article.isExpired() && (expirationDate != null) &&
+				expirationDate.before(now)) {
 
 				article.setApproved(false);
 				article.setExpired(true);
 
 				JournalArticleUtil.update(article);
+			}
+			else if (reviewDate != null) {
+
+				// Check in 15 minute intervals because of CheckArticleJob
+
+				long diff = reviewDate.getTime() - now.getTime();
+
+				if ((diff > 0) && (diff < (Time.MINUTE * 15))) {
+					String articleURL = StringPool.BLANK;
+
+					PortletPreferencesPK prefsPK = new PortletPreferencesPK(
+						PortletKeys.JOURNAL, PortletKeys.PREFS_LAYOUT_ID_SHARED,
+						PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD +
+							article.getGroupId());
+
+					PortletPreferences prefs =
+						PortletPreferencesServiceUtil.getPreferences(
+							article.getCompanyId(), prefsPK);
+
+					sendEmail(article, articleURL, prefs, "review");
+				}
 			}
 		}
 	}
@@ -1134,6 +1161,9 @@ public class JournalArticleLocalServiceImpl
 					 JournalUtil.getEmailArticleApprovalRequestedEnabled(
 						prefs)) {
 			}
+			else if (emailType.equals("review") &&
+					 JournalUtil.getEmailArticleReviewEnabled(prefs)) {
+			}
 			else {
 				return;
 			}
@@ -1173,6 +1203,10 @@ public class JournalArticleLocalServiceImpl
 				subject =
 					JournalUtil.getEmailArticleApprovalRequestedSubject(prefs);
 				body = JournalUtil.getEmailArticleApprovalRequestedBody(prefs);
+			}
+			else if (emailType.equals("review")) {
+				subject = JournalUtil.getEmailArticleReviewSubject(prefs);
+				body = JournalUtil.getEmailArticleReviewBody(prefs);
 			}
 
 			subject = StringUtil.replace(

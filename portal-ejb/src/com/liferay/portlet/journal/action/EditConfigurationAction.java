@@ -81,6 +81,9 @@ public class EditConfigurationAction extends PortletAction {
 		else if (tabs2.equals("article-approval-requested-email")) {
 			updateEmailArticleApprovalRequested(req, prefs);
 		}
+		else if (tabs2.equals("article-review-email")) {
+			updateEmailArticleReview(req, prefs);
+		}
 
 		if (SessionErrors.isEmpty(req)) {
 			prefs.store();
@@ -202,6 +205,32 @@ public class EditConfigurationAction extends PortletAction {
 			prefs.setValue(
 				"email-article-approval-requested-body",
 				emailArticleApprovalRequestedBody);
+		}
+	}
+
+	protected void updateEmailArticleReview(
+			ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		String emailArticleReviewEnabled = ParamUtil.getString(
+			req, "emailArticleReviewEnabled");
+		String emailArticleReviewSubject = ParamUtil.getString(
+			req, "emailArticleReviewSubject");
+		String emailArticleReviewBody = ParamUtil.getString(
+			req, "emailArticleReviewBody");
+
+		if (Validator.isNull(emailArticleReviewSubject)) {
+			SessionErrors.add(req, "emailArticleReviewSubject");
+		}
+		else if (Validator.isNull(emailArticleReviewBody)) {
+			SessionErrors.add(req, "emailArticleReviewBody");
+		}
+		else {
+			prefs.setValue(
+				"email-article-review-enabled", emailArticleReviewEnabled);
+			prefs.setValue(
+				"email-article-review-subject", emailArticleReviewSubject);
+			prefs.setValue("email-article-review-body", emailArticleReviewBody);
 		}
 	}
 

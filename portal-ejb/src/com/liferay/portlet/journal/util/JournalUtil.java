@@ -361,6 +361,51 @@ public class JournalUtil {
 		}
 	}
 
+	public static boolean getEmailArticleReviewEnabled(
+		PortletPreferences prefs) {
+
+		String emailArticleReviewEnabled = prefs.getValue(
+			"email-article-review-enabled", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailArticleReviewEnabled)) {
+			return GetterUtil.getBoolean(emailArticleReviewEnabled);
+		}
+		else {
+			return GetterUtil.getBoolean(PropsUtil.get(
+				PropsUtil.JOURNAL_EMAIL_ARTICLE_REVIEW_ENABLED));
+		}
+	}
+
+	public static String getEmailArticleReviewBody(PortletPreferences prefs)
+		throws IOException {
+
+		String emailArticleReviewBody = prefs.getValue(
+			"email-article-review-body", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailArticleReviewBody)) {
+			return emailArticleReviewBody;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsUtil.JOURNAL_EMAIL_ARTICLE_REVIEW_BODY));
+		}
+	}
+
+	public static String getEmailArticleReviewSubject(PortletPreferences prefs)
+		throws IOException {
+
+		String emailArticleReviewSubject = prefs.getValue(
+			"email-article-review-subject", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailArticleReviewSubject)) {
+			return emailArticleReviewSubject;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsUtil.JOURNAL_EMAIL_ARTICLE_REVIEW_SUBJECT));
+		}
+	}
+
 	public static Stack getRecentArticles(PortletRequest req) {
 		PortletSession ses = req.getPortletSession();
 

@@ -630,6 +630,12 @@ public class PropsUtil {
 	
 	public static final String JOURNAL_EMAIL_ARTICLE_APPROVAL_REQUESTED_BODY = "journal.email.article.approval.requested.body";
 
+	public static final String JOURNAL_EMAIL_ARTICLE_REVIEW_ENABLED = "journal.email.article.review.enabled";
+
+	public static final String JOURNAL_EMAIL_ARTICLE_REVIEW_SUBJECT = "journal.email.article.review.subject";
+	
+	public static final String JOURNAL_EMAIL_ARTICLE_REVIEW_BODY = "journal.email.article.review.body";
+
 	// Message Boards Portlet
 
 	public static final String MESSAGE_BOARDS_EMAIL_FROM_NAME = "message.boards.email.from.name";

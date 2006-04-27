@@ -367,6 +367,7 @@ article-approval-denied-email=기사는 전자 우편을 부정했다
 article-approval-granted-email=기사는 전자 우편을 수여했다
 article-approval-requested-email=기사는 전자 우편을 요구했다
 article-id=기사 식별
+article-review-email=기사 검토 전자 우편
 article-title=기사 제목
 article-type=기사 유형
 article=기사
