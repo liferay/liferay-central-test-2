@@ -31,6 +31,7 @@ import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.theme.ThemeDisplayFactory;
 import com.liferay.portal.util.PortalUtil;
@@ -74,6 +75,11 @@ public class ConnectorServlet extends HttpServlet {
 			String currentFolder = req.getParameter("CurrentFolder");
 			String newFolder = ParamUtil.getString(req, "NewFolderName");
 
+			_log.debug("command " + command);
+			_log.debug("type " + type);
+			_log.debug("currentFolder " + currentFolder);
+			_log.debug("newFolder " + newFolder);
+
 			// Populate a barebones ThemeDisplay that is used by
 			// PageCommandReceiver
 
@@ -90,6 +96,14 @@ public class ConnectorServlet extends HttpServlet {
 				WebKeys.FRIENDLY_URL_PRIVATE_PATH);
 			String friendlyURLPublicPath = (String)ses.getAttribute(
 				WebKeys.FRIENDLY_URL_PUBLIC_PATH);
+
+			_log.debug("company " + company);
+			_log.debug("user " + user);
+			_log.debug("plid " + plid);
+			_log.debug("groupId " + groupId);
+			_log.debug("mainPath " + mainPath);
+			_log.debug("friendlyURLPrivatePath " + friendlyURLPrivatePath);
+			_log.debug("friendlyURLPublicPath " + friendlyURLPublicPath);
 
 			themeDisplay.setCompany(company);
 			themeDisplay.setUser(user);
@@ -119,7 +133,7 @@ public class ConnectorServlet extends HttpServlet {
 			commandObj.execute(arg, req, res);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 		finally {
 			try {

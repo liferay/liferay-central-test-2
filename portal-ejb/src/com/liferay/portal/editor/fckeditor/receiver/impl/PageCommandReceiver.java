@@ -208,6 +208,7 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 						filesEl.appendChild(fileEl);
 
 						fileEl.setAttribute("name", _getLayoutName(layout));
+						fileEl.setAttribute("desc", _getLayoutName(layout));
 						fileEl.setAttribute("size", getSize());
 						fileEl.setAttribute(
 							"url",

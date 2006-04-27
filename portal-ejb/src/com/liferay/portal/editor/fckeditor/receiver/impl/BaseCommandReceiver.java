@@ -282,7 +282,17 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		String returnValue, HttpServletResponse res) {
 
 		try {
+			StringBuffer sb = new StringBuffer();
+
 			String newName = StringPool.BLANK;
+
+			sb.append("<script type=\"text/javascript\">");
+			sb.append("window.parent.frames['frmUpload'].OnUploadCompleted(");
+			sb.append(returnValue);
+			sb.append(",'");
+			sb.append(newName);
+			sb.append("');");
+			sb.append("</script>");
 
 			res.setContentType("text/html; charset=UTF-8");
 			res.setHeader("Cache-Control", "no-cache");
@@ -291,13 +301,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 			out = res.getWriter();
 
-			out.println("<script type=\"text/javascript\">");
-			out.println("window.parent.frames['frmUpload'].OnUploadCompleted(");
-			out.println(returnValue);
-			out.println(",'");
-			out.println(newName);
-			out.println("');");
-			out.println("</script>");
+			out.print(sb.toString());
 
 			out.flush();
 			out.close();
