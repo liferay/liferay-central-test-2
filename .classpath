@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="applets/calculator/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="applets/chat/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="applets/editor/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="applets/hangman/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="applets/lawt/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="counter-ejb/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="documentlibrary-ejb/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="filters/compression/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="filters/secure/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="filters/strip/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="jdbc/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="lock-ejb/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="mail-ejb/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="portal-ejb/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="portal-shared/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="util-java/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="util-jsf/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="util-taglib/src"/>
-	<classpathentry excluding="**/CVS/**|CVS/" kind="src" path="util-wsrp/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="applets/calculator/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="applets/chat/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="applets/editor/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="applets/hangman/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="applets/lawt/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="counter-ejb/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="documentlibrary-ejb/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/compression/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/secure/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/strip/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="jdbc/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="lock-ejb/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="mail-ejb/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-ejb/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-shared/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="util-java/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="util-jsf/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="util-taglib/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="util-wsrp/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/activation.jar"/>
 	<classpathentry kind="lib" path="lib/activemq.jar"/>
