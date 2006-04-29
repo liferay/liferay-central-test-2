@@ -65,7 +65,7 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 		GetterUtil.get(
 			SystemProperties.get(
 				UploadServletRequest.class.getName() + ".temp.dir"),
-			(String)SystemProperties.get("java.io.tmpdir")));
+			SystemProperties.get("java.io.tmpdir")));
 
 	public UploadServletRequest(HttpServletRequest req)
 		throws IOException {
