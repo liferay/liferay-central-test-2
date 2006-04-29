@@ -468,70 +468,70 @@
 	</target>
 
 	<target name="zip-api" depends="init-release">
-		<delete file="liferay-portal-ent-${lp.version}-doc.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-ent-${lp.version}-doc.zip"
+		<delete file="liferay-portal-doc-${lp.version}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-doc-${lp.version}.zip"
 			basedir="."
 			includes="api/**/*.css,api/**/*.gif,api/**/*.html"
 		/>
 	</target>
 
 	<target name="zip-jboss" depends="init-release">
-		<delete file="liferay-portal-ent-${lp.version}-jboss-jetty.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-ent-${lp.version}-jboss-jetty.zip"
+		<delete file="liferay-portal-jboss-jetty-${lp.version}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-jboss-jetty-${lp.version}.zip"
 			basedir="${lp.ext.dir}/servers/jboss-jetty"
 		/>
 
-		<delete file="liferay-portal-ent-${lp.version}-jboss-tomcat.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-ent-${lp.version}-jboss-tomcat.zip"
+		<delete file="liferay-portal-jboss-tomcat-${lp.version}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-jboss-tomcat-${lp.version}.zip"
 			basedir="${lp.ext.dir}/servers/jboss-tomcat"
 		/>
 	</target>
 
 	<target name="zip-jetty" depends="init-release">
-		<delete file="liferay-portal-pro-${lp.version}-jetty.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-pro-${lp.version}-jetty.zip"
+		<delete file="liferay-portal-jetty-${lp.version}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-jetty-${lp.version}.zip"
 			basedir="${lp.ext.dir}/servers/jetty"
 		/>
 	</target>
 
 	<target name="zip-jonas" depends="init-release">
-		<delete file="liferay-portal-ent-${lp.version}-jonas-jetty.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-ent-${lp.version}-jonas-jetty.zip"
+		<delete file="liferay-portal-jonas-jetty-${lp.version}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-jonas-jetty-${lp.version}.zip"
 			basedir="${lp.ext.dir}/servers/jonas-jetty"
 		/>
 
-		<delete file="liferay-portal-ent-${lp.version}-jonas-tomcat.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-ent-${lp.version}-jonas-tomcat.zip"
+		<delete file="liferay-portal-jonas-tomcat-${lp.version}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-jonas-tomcat-${lp.version}.zip"
 			basedir="${lp.ext.dir}/servers/jonas-tomcat"
 		/>
 	</target>
 
 	<target name="zip-resin" depends="init-release">
-		<delete file="liferay-portal-pro-${lp.version}-resin.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-pro-${lp.version}-resin.zip"
+		<delete file="liferay-portal-resin-${lp.version}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-resin-${lp.version}.zip"
 			basedir="${lp.ext.dir}/servers/resin"
 		/>
 	</target>
 
 	<target name="zip-sql" depends="init-release">
-		<delete file="liferay-portal-ent-${lp.version}-sql.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-ent-${lp.version}-sql.zip"
+		<delete file="liferay-portal-sql-${lp.version}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-sql-${lp.version}.zip"
 			basedir="sql"
 			includes="**/*.sql"
 		/>
 	</target>
 
 	<target name="zip-src" depends="init-release">
-		<delete file="liferay-portal-${lp.version}-src.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-${lp.version}-src.zip"
+		<delete file="liferay-portal-src-${lp.version}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-src-${lp.version}.zip"
 			basedir="${lp.source.dir}"
 			excludes="**/CVS/**"
 		/>
 	</target>
 
 	<target name="zip-tomcat" depends="init-release">
-		<delete file="liferay-portal-pro-${lp.version}-tomcat.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-pro-${lp.version}-tomcat.zip"
+		<delete file="liferay-portal-tomcat-${lp.version}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-tomcat-${lp.version}.zip"
 			basedir="${lp.ext.dir}/servers/tomcat"
 		/>
 	</target>
@@ -572,9 +572,9 @@
 		<antcall target="build-ext-tomcat" />
 		<antcall target="zip" />
 
-		<copy file="portal-ear/liferay-portal.ear" tofile="liferay-portal-ent-${lp.version}.ear" />
-		<copy file="portal-ear/liferay-portal-jaas.jar" tofile="liferay-portal-ent-${lp.version}-jaas.jar" />
-		<copy file="portal-ear/liferay-portal.war" tofile="liferay-portal-pro-${lp.version}.war" />
+		<copy file="portal-ear/liferay-portal.ear" tofile="liferay-portal-${lp.version}.ear" />
+		<copy file="portal-ear/liferay-portal-jaas.jar" tofile="liferay-portal-jaas-${lp.version}.jar" />
+		<copy file="portal-ear/liferay-portal.war" tofile="liferay-portal-${lp.version}.war" />
 
 		<ant dir="layouttpl" target="deploy" />
 		<ant dir="portlets" target="deploy" />

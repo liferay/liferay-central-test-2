@@ -8,14 +8,9 @@ Jetty, JOnAS+Jetty, JOnAS+Tomcat, OracleAS, Orion, Resin, RexIP, Tomcat,
 WebLogic, and WebSphere. LP also supports JRun, Pramati, and Sun JSAS. We will
 upgrade this script to support these other servers as soon as possible.
 
-See http://www.liferay.com/web/guest/documentation/development/environment for
-information on installing JDK 1.4.2, Jikes 1.21, and Ant 1.6.2.
-
-See http://www.liferay.com/web/guest/documentation/development/portlet to learn
-how to write portlets.
-
-See http://www.liferay.com/web/guest/documentation/development/customizing for
-more information on how to use this script to customize LP.
+See http://www.liferay.com/web/guest/devzone/documentation for
+information on installing the prerequesites, writing custom portlets, and
+customizing LP.
 
 Ant scripts are customizable if it is a script named build.xml and imports
 another script named build-parent.xml from the same directory. Customizable
@@ -24,7 +19,7 @@ from /portal whereas scripts named build-parent.xml will be updated.
 
 JBoss+Jetty:
 
-    Download liferay-portal-ent-@lp.version@-jboss-jetty.zip from
+    Download liferay-portal-jboss-jetty-@lp.version@.zip from
     http://www.liferay.com to /ext/downloads
 
     Type "ant install-jboss-jetty" from /ext/servers
@@ -37,7 +32,7 @@ JBoss+Jetty:
 
 JBoss+Tomcat:
 
-    Download liferay-portal-ent-@lp.version@-jboss-tomcat.zip from
+    Download liferay-portal-jboss-tomcat-@lp.version@.zip from
     http://www.liferay.com to /ext/downloads
 
     Type "ant install-jboss-tomcat" from /ext/servers
@@ -50,7 +45,7 @@ JBoss+Tomcat:
 
 Jetty:
 
-    Download liferay-portal-pro-@lp.version@-jetty.zip from
+    Download liferay-portal-jetty-@lp.version@.zip from
     http://www.liferay.com to /ext/downloads
 
     Type "ant install-jetty" from /ext/servers
@@ -63,7 +58,7 @@ Jetty:
 
 JOnAS+Jetty:
 
-    Download liferay-portal-ent-@lp.version@-jonas-jetty.zip from
+    Download liferay-portal-jonas-jetty-@lp.version@.zip from
     http://www.liferay.com to /ext/downloads
 
     Type "ant install-jonas-jetty" from /ext/servers
@@ -76,7 +71,7 @@ JOnAS+Jetty:
 
 JOnAS+Tomcat:
 
-    Download liferay-portal-ent-@lp.version@-jonas-tomcat.zip from
+    Download liferay-portal-jonas-tomcat-@lp.version@.zip from
     http://www.liferay.com to /ext/downloads
 
     Type "ant install-jonas-tomcat" from /ext/servers
@@ -106,7 +101,7 @@ OracleAS:
 
 Orion:
 
-    Download orion2.0.2.zip from http://www.orionserver.com to /ext/downloads
+    Download orion2.0.7.zip from http://www.orionserver.com to /ext/downloads
 
     Type "ant install-orion" from /ext/servers
 
@@ -132,7 +127,7 @@ RexIP:
 
 Tomcat:
 
-    Download liferay-portal-pro-@lp.version@-tomcat.zip from
+    Download liferay-portal-tomcat-@lp.version@.zip from
     http://www.liferay.com to /ext/downloads
 
     Type "ant install-tomcat" from /ext/servers

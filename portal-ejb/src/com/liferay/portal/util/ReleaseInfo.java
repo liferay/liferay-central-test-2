@@ -47,13 +47,13 @@ public class ReleaseInfo {
 		}
 	}
 
-	static String version = "4.0.0 RC1";
+	static String version = "4.0.0 RC2";
 
 	static String codeName = "Lloyd-Jones";
 
-	static String build = "2866";
+	static String build = "2867";
 
-	static String date = "April 27, 2006";
+	static String date = "April 29, 2006";
 
 	static String releaseInfo =
 		name + " " + version + " (" + codeName + " / Build " + build + " / " +

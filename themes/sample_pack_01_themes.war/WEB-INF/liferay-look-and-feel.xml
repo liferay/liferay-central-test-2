@@ -3,7 +3,7 @@
 
 <look-and-feel>
 	<compatibility>
-		<version>4.0.0</version>
+		<version>4.0.0 RC2</version>
 	</compatibility>
 	<theme id="breeze" name="Breeze">
 		<root-path>/html/themes/breeze</root-path>
