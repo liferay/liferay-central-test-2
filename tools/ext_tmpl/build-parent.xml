@@ -429,11 +429,9 @@
 				<move todir="${app.server.deploy.dir}/WEB-INF/lib">
 					<fileset
 						dir="${app.server.lib.dir}"
-						excludes="commons-logging.jar,hsql.jar,log4j.jar,portal-shared.jar,portlet.jar"
+						excludes="ant.jar,commons-logging.jar,hsql.jar,log4j.jar,portal-shared.jar,portlet.jar"
 					/>
 				</move>
-
-				<copy file="lib/ant.jar" todir="${app.server.lib.dir}" />
 
 				<move todir="${app.server.deploy.dir}/WEB-INF/classes">
 					<fileset

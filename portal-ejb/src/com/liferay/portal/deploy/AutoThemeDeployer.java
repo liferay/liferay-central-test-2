@@ -84,8 +84,9 @@ public class AutoThemeDeployer
 	}
 
 	protected String getResourcePath(String resource) {
-		return getClass().getResource(
-			"dependencies/" + resource).getPath().substring(1);
+		resource = "com/liferay/portal/deploy/dependencies/" + resource;
+
+		return getClass().getResource(resource).getPath().substring(1);
 	}
 
 	private static Log _log = LogFactory.getLog(AutoThemeDeployer.class);

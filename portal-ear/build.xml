@@ -45,7 +45,7 @@
 		<copy file="${project.dir}/tunnel-web/tunnel-web.war" tofile="modules/tunnel-web.war" />
 
 		<copy todir="modules/lib">
-			<fileset dir="${project.dir}/filters/portal-shared" includes="portal-shared.jar" />
+			<fileset dir="${project.dir}/portal-shared" includes="portal-shared.jar" />
 			<fileset dir="${project.dir}/filters/compression" includes="compression-filter.jar" />
 			<fileset dir="${project.dir}/filters/secure" includes="secure-filter.jar" />
 			<fileset dir="${project.dir}/filters/strip" includes="strip-filter.jar" />
@@ -68,7 +68,7 @@
 
 		<copy todir="pro-war/WEB-INF/lib">
 			<fileset dir="modules" includes="*-ejb.jar" />
-			<fileset dir="${project.dir}/filters/portal-shared" includes="portal-shared.jar" />
+			<fileset dir="${project.dir}/portal-shared" includes="portal-shared.jar" />
 			<fileset dir="${project.dir}/filters/compression" includes="compression-filter.jar" />
 			<fileset dir="${project.dir}/filters/secure" includes="secure-filter.jar" />
 			<fileset dir="${project.dir}/filters/strip" includes="strip-filter.jar" />
