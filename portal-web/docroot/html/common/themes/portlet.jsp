@@ -45,9 +45,9 @@ boolean tilesPortletDecorateBoolean = GetterUtil.getBoolean(tilesPortletDecorate
 
 boolean portletDecorate = GetterUtil.getBoolean(portletSetup.getValue("portlet-setup-show-borders", String.valueOf(tilesPortletDecorateBoolean)));
 
-if (!renderRequest.getWindowState().equals(WindowState.NORMAL)) {
-	portletDecorate = true;
-}
+//if (!renderRequest.getWindowState().equals(WindowState.NORMAL)) {
+//	portletDecorate = true;
+//}
 
 Properties cssProps = PropertiesUtil.load(portletSetup.getValue("portlet-setup-css", StringPool.BLANK));
 %>
