@@ -132,6 +132,19 @@
 
 						<if>
 							<or>
+								<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+								<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+							</or>
+							<then>
+								<replace file="${app.server.deploy.dir}/${ext.ear.file}/ext-ejb.jar/portal-ext.properties">
+									<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+									<replacevalue>auto.deploy.dest.dir=../server/default/deploy</replacevalue>
+								</replace>
+							</then>
+						</if>
+
+						<if>
+							<or>
 								<equals arg1="${app.server.type}" arg2="jonas-jetty" />
 								<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 							</or>
