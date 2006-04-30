@@ -48,16 +48,16 @@ public class AutoThemeDeployer
 			baseDir = OmniadminUtil.getAutoDeployDeployDir();
 			destDir = OmniadminUtil.getAutoDeployDestDir();
 			appServerType = ServerDetector.getServerId();
-			themeTaglibDTD = getResourcePath("liferay-theme.tld");
-			utilTaglibDTD = getResourcePath("liferay-util.tld");
+			themeTaglibDTD = DeployUtil.getResourcePath("liferay-theme.tld");
+			utilTaglibDTD = DeployUtil.getResourcePath("liferay-util.tld");
 			unpackWar = OmniadminUtil.getAutoDeployUnpackWar();
 			jbossPrefix = OmniadminUtil.getAutoDeployJbossPrefix();
 			tomcatLibDir = OmniadminUtil.getAutoDeployTomcatLibDir();
 
 			List jars = new ArrayList();
 
-			jars.add(getResourcePath("util-java.jar"));
-			jars.add(getResourcePath("util-taglib.jar"));
+			jars.add(DeployUtil.getResourcePath("util-java.jar"));
+			jars.add(DeployUtil.getResourcePath("util-taglib.jar"));
 
 			this.jars = jars;
 
@@ -81,12 +81,6 @@ public class AutoThemeDeployer
 		catch (Exception e) {
 			throw new AutoDeployException(e);
 		}
-	}
-
-	protected String getResourcePath(String resource) {
-		resource = "com/liferay/portal/deploy/dependencies/" + resource;
-
-		return getClass().getResource(resource).getPath().substring(1);
 	}
 
 	private static Log _log = LogFactory.getLog(AutoThemeDeployer.class);

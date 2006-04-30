@@ -27,8 +27,10 @@ import com.liferay.portal.tools.PortletDeployer;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ServerDetector;
+import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
 
+import java.io.IOException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -40,56 +42,45 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="AutoPortletDeployer.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeployUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Ivica Cardic
  * @author  Brian Wing Shun Chan
  *
  */
-public class AutoPortletDeployer
-	extends PortletDeployer implements AutoDeployer {
+public class DeployUtil {
 
-	public AutoPortletDeployer() {
-		try {
-			baseDir = OmniadminUtil.getAutoDeployDeployDir();
-			destDir = OmniadminUtil.getAutoDeployDestDir();
-			appServerType = ServerDetector.getServerId();
-			portletTaglibDTD = DeployUtil.getResourcePath(
-				"liferay-portlet.tld");
-			unpackWar = OmniadminUtil.getAutoDeployUnpackWar();
-			jbossPrefix = OmniadminUtil.getAutoDeployJbossPrefix();
-			tomcatLibDir = OmniadminUtil.getAutoDeployTomcatLibDir();
+	public static String getResourcePath(String resource)
+		throws Exception {
 
-			List jars = new ArrayList();
-
-			jars.add(DeployUtil.getResourcePath("util-java.jar"));
-			jars.add(DeployUtil.getResourcePath("util-jsf.jar"));
-			jars.add(DeployUtil.getResourcePath("util-taglib.jar"));
-
-			this.jars = jars;
-
-			checkArguments();
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
+		return _instance._getResourcePath(resource);
 	}
 
-	public void deploy(String file) throws AutoDeployException {
-		List wars = new ArrayList();
-
-		wars.add(file);
-
-		this.wars = wars;
-
-		try {
-			deploy();
-		}
-		catch (Exception e) {
-			throw new AutoDeployException(e);
-		}
+	private DeployUtil() {
 	}
 
-	private static Log _log = LogFactory.getLog(AutoPortletDeployer.class);
+	private String _getResourcePath(String resource) throws IOException {
+		String tmpDir = SystemProperties.get("java.io.tmpdir");
+
+		File file = new File(
+			tmpDir + "/liferay/com/liferay/portal/deploy/dependencies/" +
+				resource);
+
+		File parentFile = file.getParentFile();
+
+		if (parentFile != null) {
+			parentFile.mkdirs();
+		}
+
+		byte[] byteArray = FileUtil.getBytes(
+			getClass().getResourceAsStream("dependencies/" + resource));
+
+		OutputStream os = new FileOutputStream(file);
+
+		os.write(byteArray);
+
+		return StringUtil.replace(file.getAbsolutePath(), "\\", "/");
+	}
+
+	private static DeployUtil _instance = new DeployUtil();
 
 }
