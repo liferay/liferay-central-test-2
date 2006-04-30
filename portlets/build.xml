@@ -7,19 +7,19 @@
 
 	<target name="clean">
 		<antcall target="clean-module">
-			<param name="module.name" value="sample_jsf_myfaces_portlet" />
+			<param name="module.name" value="sample-jsf-myfaces-portlet" />
 		</antcall>
 
 		<antcall target="clean-module">
-			<param name="module.name" value="sample_jsf_sun_portlet" />
+			<param name="module.name" value="sample-jsf-sun-portlet" />
 		</antcall>
 
 		<antcall target="clean-module">
-			<param name="module.name" value="sample_jsp_portlet" />
+			<param name="module.name" value="sample-jsp-portlet" />
 		</antcall>
 
 		<antcall target="clean-module">
-			<param name="module.name" value="sample_struts_portlet" />
+			<param name="module.name" value="sample-struts-portlet" />
 		</antcall>
 	</target>
 
@@ -35,19 +35,19 @@
 
 	<target name="compile">
 		<antcall target="compile-module">
-			<param name="module.name" value="sample_jsf_myfaces_portlet" />
+			<param name="module.name" value="sample-jsf-myfaces-portlet" />
 		</antcall>
 
 		<antcall target="compile-module">
-			<param name="module.name" value="sample_jsf_sun_portlet" />
+			<param name="module.name" value="sample-jsf-sun-portlet" />
 		</antcall>
 
 		<antcall target="compile-module">
-			<param name="module.name" value="sample_jsp_portlet" />
+			<param name="module.name" value="sample-jsp-portlet" />
 		</antcall>
 
 		<antcall target="compile-module">
-			<param name="module.name" value="sample_struts_portlet" />
+			<param name="module.name" value="sample-struts-portlet" />
 		</antcall>
 	</target>
 
@@ -68,19 +68,19 @@
 
 	<target name="war" depends="compile">
 		<antcall target="war-module">
-			<param name="module.name" value="sample_jsf_myfaces_portlet" />
+			<param name="module.name" value="sample-jsf-myfaces-portlet" />
 		</antcall>
 
 		<antcall target="war-module">
-			<param name="module.name" value="sample_jsf_sun_portlet" />
+			<param name="module.name" value="sample-jsf-sun-portlet" />
 		</antcall>
 
 		<antcall target="war-module">
-			<param name="module.name" value="sample_jsp_portlet" />
+			<param name="module.name" value="sample-jsp-portlet" />
 		</antcall>
 
 		<antcall target="war-module">
-			<param name="module.name" value="sample_struts_portlet" />
+			<param name="module.name" value="sample-struts-portlet" />
 		</antcall>
 	</target>
 
