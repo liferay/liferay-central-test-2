@@ -11,10 +11,10 @@
 		</delete>
 
 		<war
-			basedir="sample_pack_01_layouttpl.war"
-			destfile="../sample_pack_01_layouttpl.war"
+			basedir="sample-pack-01-layouttpl.war"
+			destfile="../sample-pack-01-layouttpl.war"
 			excludes="WEB-INF/web.xml"
-			webxml="sample_pack_01_layouttpl.war/WEB-INF/web.xml"
+			webxml="sample-pack-01-layouttpl.war/WEB-INF/web.xml"
 		/>
 	</target>
 
