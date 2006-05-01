@@ -127,24 +127,24 @@ for (int i = 0; i < results.size(); i++) {
 	<liferay-ui:tabs names="entries" />
 
 	<%
-	List headerNames = new ArrayList();
+	headerNames.clear();
 
 	headerNames.add("entry");
 	headerNames.add("url");
 	headerNames.add("visits");
 	headerNames.add(StringPool.BLANK);
 
-	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+	searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	int total = BookmarksEntryLocalServiceUtil.getEntriesCount(folder.getFolderId());
+	total = BookmarksEntryLocalServiceUtil.getEntriesCount(folder.getFolderId());
 
 	searchContainer.setTotal(total);
 
-	List results = BookmarksEntryLocalServiceUtil.getEntries(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
+	results = BookmarksEntryLocalServiceUtil.getEntries(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 
-	List resultRows = searchContainer.getResultRows();
+	resultRows = searchContainer.getResultRows();
 
 	for (int i = 0; i < results.size(); i++) {
 		BookmarksEntry entry = (BookmarksEntry)results.get(i);

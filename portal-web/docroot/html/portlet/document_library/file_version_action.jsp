@@ -43,7 +43,7 @@ Boolean hasLock = (Boolean)objArray[4];
 		<portlet:param name="redirect" value="<%= redirectURL.toString() %>" />
 		<portlet:param name="folderId" value="<%= fileVersion.getFolderId() %>" />
 		<portlet:param name="name" value="<%= fileVersion.getName() %>" />
-		<portlet:param name="version" value="<%= fileVersion.getVersion() %>" />
+		<portlet:param name="version" value="<%= String.valueOf(fileVersion.getVersion()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= portletURL %>" />

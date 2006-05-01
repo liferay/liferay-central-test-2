@@ -66,7 +66,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 	portletURL.setParameter("title", wikiPage.getTitle());
 	%>
 
-	<liferay-ui:icon image="edit" url="<%= portletURL %>" />
+	<liferay-ui:icon image="edit" url="<%= portletURL.toString() %>" />
 </c:if>
 
 <c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.PERMISSIONS) %>">

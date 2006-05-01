@@ -30,66 +30,73 @@ ChatServer chatServer = (ChatServer)request.getAttribute(ChatServlet.CHAT_SERVER
 String roomName = ParamUtil.getString(request, "roomName");
 %>
 
-<form action="<portlet:renderURL><portlet:param name="struts_action" value="/chat/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="document.<portlet:namespace />fm.<portlet:namespace />roomName.value = document.<portlet:namespace />fm.<portlet:namespace />createRoomName.value; submitForm(this); return false;">
-<input name="<portlet:namespace />roomName" type="hidden" value="">
+<c:choose>
+	<c:when test="<%= chatServer != null %>">
+		<form action="<portlet:renderURL><portlet:param name="struts_action" value="/chat/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="document.<portlet:namespace />fm.<portlet:namespace />roomName.value = document.<portlet:namespace />fm.<portlet:namespace />createRoomName.value; submitForm(this); return false;">
+		<input name="<portlet:namespace />roomName" type="hidden" value="">
 
-<c:if test="<%= Validator.isNotNull(roomName) %>">
-	<applet archive="nfc-client.jar,chat.jar" code="com.lyrisoft.chat.client.ChatClientApplet" codebase="<%= themeDisplay.getPathApplet() %>/chat" height="300" width="100%">
-		<param name="guiFactory" value="com.liferay.applets.chat.LiferayGUIFactory" />
-		<param name="tunnelOnly" value="true" />
-		<param name="tunnelRead" value="/chat/tunnel" />
-		<param name="tunnelWrite" value="/chat/tunnel" />
-		<param name="autologin" value="<%= user.getFirstName() + user.getLastName() %>" />
-		<param name="autojoin" value="<%= roomName %>" />
-	</applet>
+		<c:if test="<%= Validator.isNotNull(roomName) %>">
+			<applet archive="nfc-client.jar,chat.jar" code="com.lyrisoft.chat.client.ChatClientApplet" codebase="<%= themeDisplay.getPathApplet() %>/chat" height="300" width="100%">
+				<param name="guiFactory" value="com.liferay.applets.chat.LiferayGUIFactory" />
+				<param name="tunnelOnly" value="true" />
+				<param name="tunnelRead" value="/chat/tunnel" />
+				<param name="tunnelWrite" value="/chat/tunnel" />
+				<param name="autologin" value="<%= user.getFirstName() + user.getLastName() %>" />
+				<param name="autojoin" value="<%= roomName %>" />
+			</applet>
 
-	<br>
-</c:if>
+			<br>
+		</c:if>
 
-<%
-int userCount = chatServer.getUserCount();
-int roomCount = chatServer.getRoomCount();
+		<%
+		int userCount = chatServer.getUserCount();
+		int roomCount = chatServer.getRoomCount();
 
-/*if (Validator.isNotNull(roomName)) {
-	userCount++;
-	roomCount++;
-}*/
-%>
+		/*if (Validator.isNotNull(roomName)) {
+			userCount++;
+			roomCount++;
+		}*/
+		%>
 
-<%= LanguageUtil.format(pageContext, "there-are-currently-x-users-in-x-rooms", new Object[] {Integer.toString(userCount), Integer.toString(roomCount)}, false) %>
+		<%= LanguageUtil.format(pageContext, "there-are-currently-x-users-in-x-rooms", new Object[] {Integer.toString(userCount), Integer.toString(roomCount)}, false) %>
 
-<br><br>
+		<br><br>
 
-<table border="0" cellpadding="0" cellspacing="0">
-<tr>
-	<td>
-		<select name="<portlet:namespace />joinRoomName">
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+				<select name="<portlet:namespace />joinRoomName">
 
-			<%
-			String[] roomNames = chatServer.getRoomNames();
+					<%
+					String[] roomNames = chatServer.getRoomNames();
 
-			Arrays.sort(roomNames, new StringComparator());
+					Arrays.sort(roomNames, new StringComparator());
 
-			for (int i = 0; i < roomNames.length; i++) {
-			%>
+					for (int i = 0; i < roomNames.length; i++) {
+					%>
 
-				<option value="<%= roomNames[i] %>"><%= roomNames[i] %></option>
+						<option value="<%= roomNames[i] %>"><%= roomNames[i] %></option>
 
-			<%
-			}
-			%>
+					<%
+					}
+					%>
 
-		</select>
+				</select>
 
-		<input <%= (roomNames.length == 0) ? "disabled" : "" %> type="button" value='<%= LanguageUtil.get(pageContext, "join-room") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />roomName.value = document.<portlet:namespace />fm.<portlet:namespace />joinRoomName.value; submitForm(document.<portlet:namespace />fm);">
-	</td>
-	<td style="padding-left: 30px;"></td>
-	<td>
-		<input class="form-text" name="<portlet:namespace />createRoomName" type="text">
+				<input <%= (roomNames.length == 0) ? "disabled" : "" %> type="button" value='<%= LanguageUtil.get(pageContext, "join-room") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />roomName.value = document.<portlet:namespace />fm.<portlet:namespace />joinRoomName.value; submitForm(document.<portlet:namespace />fm);">
+			</td>
+			<td style="padding-left: 30px;"></td>
+			<td>
+				<input class="form-text" name="<portlet:namespace />createRoomName" type="text">
 
-		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "create-room") %>">
-	</td>
-</tr>
-</table>
+				<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "create-room") %>">
+			</td>
+		</tr>
+		</table>
 
-</form>
+		</form>
+	</c:when>
+	<c:otherwise>
+		<liferay-util:include page="/html/portal/portlet_inactive.jsp" />
+	</c:otherwise>
+</c:choose>
