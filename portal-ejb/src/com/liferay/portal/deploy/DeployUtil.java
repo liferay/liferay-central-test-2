@@ -22,24 +22,14 @@
 
 package com.liferay.portal.deploy;
 
-import com.liferay.portal.shared.deploy.AutoDeployException;
-import com.liferay.portal.tools.PortletDeployer;
-import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.ServerDetector;
 import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
 
-import java.io.IOException;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DeployUtil.java.html"><b><i>View Source</i></b></a>

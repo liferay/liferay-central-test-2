@@ -25,13 +25,7 @@ package com.liferay.portal.deploy;
 import com.liferay.portal.shared.deploy.AutoDeployException;
 import com.liferay.portal.tools.PortletDeployer;
 import com.liferay.portlet.admin.util.OmniadminUtil;
-import com.liferay.util.FileUtil;
 import com.liferay.util.ServerDetector;
-import com.liferay.util.SystemProperties;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 
 import java.util.ArrayList;
 import java.util.List;
