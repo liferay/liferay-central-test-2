@@ -443,6 +443,7 @@ public class ExportAction extends Action {
 						journalContentSearch.setPortletId(portletId);
 						journalContentSearch.setLayoutId(layout.getLayoutId());
 						journalContentSearch.setOwnerId(layout.getOwnerId());
+						journalContentSearch.setCompanyId(layout.getCompanyId());
 						journalContentSearch.setArticleId(articleId);
 
 						journalContentSearches.add(journalContentSearch);
