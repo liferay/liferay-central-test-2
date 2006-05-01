@@ -19,7 +19,7 @@ from /portal whereas scripts named build-parent.xml will be updated.
 
 JBoss+Jetty:
 
-    Download liferay-portal-jboss-jetty-@lp.version@.zip from
+    Download liferay-portal-jboss-jetty-@lp.version.file.name@.zip from
     http://www.liferay.com to /ext/downloads
 
     Type "ant install-jboss-jetty" from /ext/servers
@@ -32,7 +32,7 @@ JBoss+Jetty:
 
 JBoss+Tomcat:
 
-    Download liferay-portal-jboss-tomcat-@lp.version@.zip from
+    Download liferay-portal-jboss-tomcat-@lp.version.file.name@.zip from
     http://www.liferay.com to /ext/downloads
 
     Type "ant install-jboss-tomcat" from /ext/servers
@@ -45,7 +45,7 @@ JBoss+Tomcat:
 
 Jetty:
 
-    Download liferay-portal-jetty-@lp.version@.zip from
+    Download liferay-portal-jetty-@lp.version.file.name@.zip from
     http://www.liferay.com to /ext/downloads
 
     Type "ant install-jetty" from /ext/servers
@@ -58,7 +58,7 @@ Jetty:
 
 JOnAS+Jetty:
 
-    Download liferay-portal-jonas-jetty-@lp.version@.zip from
+    Download liferay-portal-jonas-jetty-@lp.version.file.name@.zip from
     http://www.liferay.com to /ext/downloads
 
     Type "ant install-jonas-jetty" from /ext/servers
@@ -71,7 +71,7 @@ JOnAS+Jetty:
 
 JOnAS+Tomcat:
 
-    Download liferay-portal-jonas-tomcat-@lp.version@.zip from
+    Download liferay-portal-jonas-tomcat-@lp.version.file.name@.zip from
     http://www.liferay.com to /ext/downloads
 
     Type "ant install-jonas-tomcat" from /ext/servers
@@ -127,7 +127,7 @@ RexIP:
 
 Tomcat:
 
-    Download liferay-portal-tomcat-@lp.version@.zip from
+    Download liferay-portal-tomcat-@lp.version.file.name@.zip from
     http://www.liferay.com to /ext/downloads
 
     Type "ant install-tomcat" from /ext/servers

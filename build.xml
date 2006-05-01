@@ -293,6 +293,7 @@
 		<copy file="tools/ext_tmpl/readme.txt" tofile="${lp.ext.dir}/readme.txt" overwrite="yes">
 			<filterset>
 				<filter token="lp.version" value="${lp.version}" />
+				<filter token="lp.version.file.name" value="${lp.version.file.name}" />
 			</filterset>
 		</copy>
 
@@ -468,70 +469,70 @@
 	</target>
 
 	<target name="zip-api" depends="init-release">
-		<delete file="liferay-portal-doc-${lp.version}.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-doc-${lp.version}.zip"
+		<delete file="liferay-portal-doc-${lp.version.file.name}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-doc-${lp.version.file.name}.zip"
 			basedir="."
 			includes="api/**/*.css,api/**/*.gif,api/**/*.html"
 		/>
 	</target>
 
 	<target name="zip-jboss" depends="init-release">
-		<delete file="liferay-portal-jboss-jetty-${lp.version}.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-jboss-jetty-${lp.version}.zip"
+		<delete file="liferay-portal-jboss-jetty-${lp.version.file.name}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-jboss-jetty-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/jboss-jetty"
 		/>
 
-		<delete file="liferay-portal-jboss-tomcat-${lp.version}.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-jboss-tomcat-${lp.version}.zip"
+		<delete file="liferay-portal-jboss-tomcat-${lp.version.file.name}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-jboss-tomcat-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/jboss-tomcat"
 		/>
 	</target>
 
 	<target name="zip-jetty" depends="init-release">
-		<delete file="liferay-portal-jetty-${lp.version}.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-jetty-${lp.version}.zip"
+		<delete file="liferay-portal-jetty-${lp.version.file.name}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-jetty-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/jetty"
 		/>
 	</target>
 
 	<target name="zip-jonas" depends="init-release">
-		<delete file="liferay-portal-jonas-jetty-${lp.version}.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-jonas-jetty-${lp.version}.zip"
+		<delete file="liferay-portal-jonas-jetty-${lp.version.file.name}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-jonas-jetty-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/jonas-jetty"
 		/>
 
-		<delete file="liferay-portal-jonas-tomcat-${lp.version}.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-jonas-tomcat-${lp.version}.zip"
+		<delete file="liferay-portal-jonas-tomcat-${lp.version.file.name}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-jonas-tomcat-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/jonas-tomcat"
 		/>
 	</target>
 
 	<target name="zip-resin" depends="init-release">
-		<delete file="liferay-portal-resin-${lp.version}.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-resin-${lp.version}.zip"
+		<delete file="liferay-portal-resin-${lp.version.file.name}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-resin-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/resin"
 		/>
 	</target>
 
 	<target name="zip-sql" depends="init-release">
-		<delete file="liferay-portal-sql-${lp.version}.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-sql-${lp.version}.zip"
+		<delete file="liferay-portal-sql-${lp.version.file.name}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-sql-${lp.version.file.name}.zip"
 			basedir="sql"
 			includes="**/*.sql"
 		/>
 	</target>
 
 	<target name="zip-src" depends="init-release">
-		<delete file="liferay-portal-src-${lp.version}.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-src-${lp.version}.zip"
+		<delete file="liferay-portal-src-${lp.version.file.name}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-src-${lp.version.file.name}.zip"
 			basedir="${lp.source.dir}"
 			excludes="**/CVS/**"
 		/>
 	</target>
 
 	<target name="zip-tomcat" depends="init-release">
-		<delete file="liferay-portal-tomcat-${lp.version}.zip" failonerror="false" />
-		<zip zipfile="liferay-portal-tomcat-${lp.version}.zip"
+		<delete file="liferay-portal-tomcat-${lp.version.file.name}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-tomcat-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/tomcat"
 		/>
 	</target>
@@ -572,9 +573,9 @@
 		<antcall target="build-ext-tomcat" />
 		<antcall target="zip" />
 
-		<copy file="portal-ear/liferay-portal.ear" tofile="liferay-portal-${lp.version}.ear" />
-		<copy file="portal-ear/liferay-portal-jaas.jar" tofile="liferay-portal-jaas-${lp.version}.jar" />
-		<copy file="portal-ear/liferay-portal.war" tofile="liferay-portal-${lp.version}.war" />
+		<copy file="portal-ear/liferay-portal.ear" tofile="liferay-portal-${lp.version.file.name}.ear" />
+		<copy file="portal-ear/liferay-portal-jaas.jar" tofile="liferay-portal-jaas-${lp.version.file.name}.jar" />
+		<copy file="portal-ear/liferay-portal.war" tofile="liferay-portal-${lp.version.file.name}.war" />
 
 		<ant dir="layouttpl" target="deploy" />
 		<ant dir="portlets" target="deploy" />
@@ -584,18 +585,18 @@
 		<ant dir="portlets" target="war" />
 		<ant dir="themes" target="war" />
 
-		<copy file="layouttpl-deployer.xml" tofile="layouttpl-deployer-${lp.version}.xml" />
-		<copy file="portlet-deployer.xml" tofile="portlet-deployer-${lp.version}.xml" />
-		<copy file="theme-deployer.xml" tofile="theme-deployer-${lp.version}.xml" />
+		<copy file="layouttpl-deployer.xml" tofile="layouttpl-deployer-${lp.version.file.name}.xml" />
+		<copy file="portlet-deployer.xml" tofile="portlet-deployer-${lp.version.file.name}.xml" />
+		<copy file="theme-deployer.xml" tofile="theme-deployer-${lp.version.file.name}.xml" />
 
-		<ftp server="upload.sourceforge.net"
+		<!--<ftp server="upload.sourceforge.net"
 			userid="anonymous"
 			password="anonymous@anonymous.com"
 			remotedir="/incoming"
 			verbose="yes"
 		>
-			<fileset dir="." includes="*${lp.version}*.*,sample*.war" />
-		</ftp>
+			<fileset dir="." includes="*${lp.version.file.name}*.*,sample*.war" />
+		</ftp>-->
 	</target>
 
 	<target name="test-release" depends="init-release">
