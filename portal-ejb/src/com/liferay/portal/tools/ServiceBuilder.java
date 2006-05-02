@@ -1170,6 +1170,7 @@ public class ServiceBuilder {
 
 		sb.append("import " + _packagePath + ".model." + entity.getName() + ";");
 		sb.append("import java.util.Date;");
+		sb.append("import java.util.HashSet;");
 		sb.append("import java.util.Set;");
 
 		// Class declaration
@@ -1188,6 +1189,9 @@ public class ServiceBuilder {
 
 			if (col.isCollection()) {
 				sb.append("protected Set get" + col.getMethodName() + "() {");
+				sb.append("if (_" + col.getName() + " == null) {");
+				sb.append("_" + col.getName() + " = new HashSet();");
+				sb.append("}");
 				sb.append("return _" + col.getName() + ";");
 				sb.append("}");
 
