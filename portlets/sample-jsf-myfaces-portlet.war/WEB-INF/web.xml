@@ -39,6 +39,10 @@
 		<servlet-name>sample_jsf_myfaces_portlet</servlet-name>
 		<url-pattern>/sample_jsf_myfaces_portlet/*</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FacesServlet</servlet-name>
+		<url-pattern>/faces/*</url-pattern>
+	</servlet-mapping>
 	<taglib>
 		<taglib-uri>http://java.sun.com/portlet</taglib-uri>
 		<taglib-location>/WEB-INF/tld/liferay-portlet.tld</taglib-location>
