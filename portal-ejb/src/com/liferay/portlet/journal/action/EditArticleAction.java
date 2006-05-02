@@ -100,7 +100,9 @@ public class EditArticleAction extends PortletAction {
 				expireArticles(req);
 			}
 
-			sendRedirect(req, res);
+			if (Validator.isNotNull(cmd)) {
+				sendRedirect(req, res);
+			}
 		}
 		catch (Exception e) {
 			if (e != null &&
