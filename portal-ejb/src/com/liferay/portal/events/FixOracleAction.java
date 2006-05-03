@@ -61,15 +61,16 @@ public class FixOracleAction extends SimpleAction {
 		// This is a workaround for a limitation in Oracle sqlldr's inability
 		// insert new line characters for long varchar columns. See
 		// http://forums.liferay.com/index.php?showtopic=2761&hl=oracle for more
-		// information.
+		// information. Check several articles because some articles may not
+		// have new lines.
 
 		boolean checkNewLine = false;
 
 		List articles = JournalArticleLocalServiceUtil.getArticles(
-			ExportAction.DEFAULT_CMS_GROUP_ID, 0, 1);
+			ExportAction.DEFAULT_CMS_GROUP_ID, 0, 5);
 
-		if (articles.size() == 1) {
-			JournalArticle article = (JournalArticle)articles.get(0);
+		for (int i = 0; i < articles.size(); i++) {
+			JournalArticle article = (JournalArticle)articles.get(i);
 
 			String content = article.getContent();
 
@@ -77,8 +78,8 @@ public class FixOracleAction extends SimpleAction {
 				articles = JournalArticleLocalServiceUtil.getArticles(
 					ExportAction.DEFAULT_CMS_GROUP_ID);
 
-				for (int i = 0; i < articles.size(); i++) {
-					article = (JournalArticle)articles.get(i);
+				for (int j = 0; j < articles.size(); j++) {
+					article = (JournalArticle)articles.get(j);
 
 					JournalArticleLocalServiceUtil.checkNewLine(
 						article.getCompanyId(), article.getArticleId(),
@@ -86,6 +87,8 @@ public class FixOracleAction extends SimpleAction {
 				}
 
 				checkNewLine = true;
+
+				break;
 			}
 		}
 
