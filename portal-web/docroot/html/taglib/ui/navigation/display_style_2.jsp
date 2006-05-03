@@ -27,6 +27,7 @@
 <script type="text/javascript">
 	function <portlet:namespace />updateTitle(title) {
 		var titleBar = document.getElementById('portlet-title-bar_<%= portletDisplay.getId() %>');
+
 		if (titleBar) {
 			titleBar.innerHTML = title;
 		}

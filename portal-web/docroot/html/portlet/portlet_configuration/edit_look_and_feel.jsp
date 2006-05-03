@@ -268,6 +268,7 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 			if (list[i].className.match("portlet-borderless-container")) {
 				this.container = list[i].style;
 				this.content = list[i].style;
+
 				break;
 			}
 			
