@@ -64,6 +64,7 @@ public class EditConfigurationAction extends PortletAction {
 
 			String groupId = ParamUtil.getString(req, "groupId");
 			String type = ParamUtil.getString(req, "type");
+			String pageURL = ParamUtil.getString(req, "pageURL");
 			int pageDelta = ParamUtil.getInteger(req, "pageDelta");
 			String orderByCol = ParamUtil.getString(req, "orderByCol");
 			String orderByType = ParamUtil.getString(req, "orderByType");
@@ -79,6 +80,7 @@ public class EditConfigurationAction extends PortletAction {
 
 			prefs.setValue("group-id", groupId);
 			prefs.setValue("type", type);
+			prefs.setValue("page-url", pageURL);
 			prefs.setValue("page-delta", String.valueOf(pageDelta));
 			prefs.setValue("order-by-col", orderByCol);
 			prefs.setValue("order-by-type", orderByType);
