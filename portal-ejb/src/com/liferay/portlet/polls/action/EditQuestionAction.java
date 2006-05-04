@@ -82,7 +82,9 @@ public class EditQuestionAction extends PortletAction {
 				deleteQuestion(req);
 			}
 
-			sendRedirect(req, res);
+			if (Validator.isNotNull(cmd)) {
+				sendRedirect(req, res);
+			}
 		}
 		catch (Exception e) {
 			if (e != null &&
