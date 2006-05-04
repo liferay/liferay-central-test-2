@@ -128,6 +128,7 @@ public class EditRolePermissionsAction extends PortletAction {
 		String modelResource = ParamUtil.getString(req, "modelResource");
 
 		String selResource = modelResource;
+
 		if (Validator.isNull(modelResource)) {
 			selResource = portletResource;
 		}
