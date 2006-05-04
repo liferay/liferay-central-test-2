@@ -28,6 +28,8 @@ import com.liferay.util.Validator;
 
 import java.io.ByteArrayInputStream;
 
+import java.util.Date;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.SendFailedException;
@@ -198,6 +200,8 @@ public class MailEngine {
 			else {
 				msg.setContent(body, _TEXT_PLAIN);
 			}
+
+			msg.setSentDate(new Date());
 
 			_send(session, msg);
 		}
