@@ -31,6 +31,11 @@
 --%><%@ page import="com.liferay.portlet.journal.search.ArticleSearchTerms" %><%--
 --%><%@ page import="com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.journal.util.JournalUtil" %><%--
+--%><%@ page import="com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil" %><%--
+--%><%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.ActionURLLogic" %><%--
+--%><%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.PortletLogic" %><%--
+--%><%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.RenderURLLogic" %><%--
+--%><%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic" %><%--
 
 --%><%
 PortletPreferences prefs = renderRequest.getPreferences();
@@ -43,6 +48,7 @@ if (Validator.isNotNull(portletResource)) {
 
 String groupId = prefs.getValue("group-id", StringPool.BLANK);
 String type = prefs.getValue("type", StringPool.BLANK);
+String pageURL = prefs.getValue("page-url", "maximized");
 int pageDelta = GetterUtil.getInteger(prefs.getValue("page-delta", StringPool.BLANK));
 
 String orderByCol = prefs.getValue("order-by-col", StringPool.BLANK);

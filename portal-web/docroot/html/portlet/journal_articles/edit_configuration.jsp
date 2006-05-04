@@ -83,6 +83,18 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 </tr>
 <tr>
 	<td>
+		<%= LanguageUtil.get(pageContext, "display-url") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<select name="<portlet:namespace />pageURL">
+			<option <%= pageURL.equals("maximized") ? "selected" : "" %> value="maximized"><%= LanguageUtil.get(pageContext, "maximized") %></option>
+			<option <%= pageURL.equals("popUp") ? "selected" : "" %> value="popUp"><%= LanguageUtil.get(pageContext, "pop-up") %></option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>
 		<%= LanguageUtil.get(pageContext, "display-per-page") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
