@@ -30,6 +30,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -65,7 +66,9 @@ public class EditRoleAssignmentsAction extends PortletAction {
 				updateRoleUsers(req);
 			}
 
-			sendRedirect(req, res);
+			if (Validator.isNotNull(cmd)) {
+				sendRedirect(req, res);
+			}
 		}
 		catch (Exception e) {
 			if (e != null &&
