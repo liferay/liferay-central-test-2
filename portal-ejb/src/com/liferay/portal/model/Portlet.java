@@ -149,14 +149,15 @@ public class Portlet extends PortletModel {
 				   boolean useDefaultTemplate, boolean showPortletAccessDenied,
 				   boolean showPortletInactive, boolean restoreCurrentView,
 				   boolean maximizeEdit, boolean maximizeHelp,
-				   boolean maximizePrint, boolean instanceable,
-				   boolean privateRequestAttributes, boolean narrow,
-				   String roles, Set unlinkedRoles, Map roleMappers,
-				   boolean system, boolean active, boolean include,
-				   Map initParams, Integer expCache, Map portletModes,
-				   Set supportedLocales, String resourceBundle,
-				   PortletInfo portletInfo, Set userAttributes,
-				   Map customUserAttributes, boolean warFile) {
+				   boolean maximizePrint, boolean layoutCacheable,
+				   boolean instanceable, boolean privateRequestAttributes,
+				   boolean narrow, String roles, Set unlinkedRoles,
+				   Map roleMappers, boolean system, boolean active,
+				   boolean include, Map initParams, Integer expCache,
+				   Map portletModes, Set supportedLocales,
+				   String resourceBundle, PortletInfo portletInfo,
+				   Set userAttributes, Map customUserAttributes,
+				   boolean warFile) {
 
 		setPortletId(portletId);
 		setCompanyId(companyId);
@@ -178,6 +179,7 @@ public class Portlet extends PortletModel {
 		_maximizeEdit = maximizeEdit;
 		_maximizeHelp = maximizeHelp;
 		_maximizePrint = maximizePrint;
+		_layoutCacheable = layoutCacheable;
 		_instanceable = instanceable;
 		_privateRequestAttributes = privateRequestAttributes;
 		setRoles(roles);
@@ -694,6 +696,33 @@ public class Portlet extends PortletModel {
 	 */
 	public void setMaximizePrint(boolean maximizePrint) {
 		_maximizePrint = maximizePrint;
+	}
+
+	/**
+	 * Returns true to allow the portlet to be cached within the layout.
+	 * 
+	 * @return		layout-cacheable parameter of the portlet
+	 */
+	public boolean getLayoutCacheable() {
+		return _layoutCacheable;
+	}
+	
+	/**
+	 * Returns true to allow the portlet to be cached within the layout.
+	 * 
+	 * @return		layout-cacheable parameter of the portlet
+	 */
+	public boolean isLayoutCacheable() {
+		return _layoutCacheable;
+	}
+
+	/**
+	 * Sets to true to allow the portlet to be cached within the layout.
+	 * 
+	 * @layoutCacheable	layout-cacheable parameter of the portlet
+	 */
+	public void setLayoutCacheable(boolean layoutCacheable) {
+		_layoutCacheable = layoutCacheable;
 	}
 
 	/**
@@ -1345,12 +1374,13 @@ public class Portlet extends PortletModel {
 			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
 			isUseDefaultTemplate(), isShowPortletAccessDenied(),
 			isShowPortletInactive(), isRestoreCurrentView(), isMaximizeEdit(),
-			isMaximizeHelp(), isMaximizePrint(), isInstanceable(),
-			isPrivateRequestAttributes(), isNarrow(), getRoles(),
-			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
-			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
-			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
-			getUserAttributes(), getCustomUserAttributes(), isWARFile());
+			isMaximizeHelp(), isMaximizePrint(), isLayoutCacheable(),
+			isInstanceable(), isPrivateRequestAttributes(), isNarrow(),
+			getRoles(), getUnlinkedRoles(), getRoleMappers(), isSystem(),
+			isActive(), isInclude(), getInitParams(), getExpCache(),
+			getPortletModes(), getSupportedLocales(), getResourceBundle(),
+			getPortletInfo(), getUserAttributes(), getCustomUserAttributes(),
+			isWARFile());
 	}
 
 	/**
@@ -1469,6 +1499,11 @@ public class Portlet extends PortletModel {
 	 * the print mode.
      */
 	private boolean _maximizePrint;
+
+	/**
+	 * False since most portlets should not be layout cacheable.
+	 */
+	private boolean _layoutCacheable = false;
 
 	/**
 	 * True if the portlet can be added multiple times to a layout.

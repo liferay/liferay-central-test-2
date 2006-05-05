@@ -26,6 +26,7 @@ import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.cms.servlet.CMSServletUtil;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 
 /**
@@ -47,16 +48,31 @@ public class JournalArticleListener implements ModelListener {
 	}
 
 	public void onAfterRemove(BaseModel model) throws ModelListenerException {
-		CMSServletUtil.clearCache();
-		JournalContentUtil.clearCache();
+		clearCache(model);
 	}
 
 	public void onBeforeUpdate(BaseModel model) throws ModelListenerException {
 	}
 
 	public void onAfterUpdate(BaseModel model) throws ModelListenerException {
+		clearCache(model);
+	}
+
+	protected void clearCache(BaseModel model) {
+
+		// CMS
+		
 		CMSServletUtil.clearCache();
+		
+		// Journal content
+
 		JournalContentUtil.clearCache();
+
+		// Layout cache
+		
+		JournalArticleModel article = (JournalArticleModel)model;
+
+		LayoutCacheUtil.clearCache(article.getCompanyId());
 	}
 
 }

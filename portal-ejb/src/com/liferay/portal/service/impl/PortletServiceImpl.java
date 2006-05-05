@@ -882,6 +882,9 @@ public class PortletServiceImpl
 				portletModel.setMaximizePrint(GetterUtil.get(
 					portlet.elementText("maximize-print"),
 					portletModel.isMaximizePrint()));
+				portletModel.setLayoutCacheable(GetterUtil.get(
+					portlet.elementText("layout-cacheable"),
+					portletModel.isLayoutCacheable()));
 				portletModel.setInstanceable(GetterUtil.get(
 					portlet.elementText("instanceable"),
 					portletModel.isInstanceable()));

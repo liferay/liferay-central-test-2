@@ -21,7 +21,8 @@ indexer-class?, scheduler-class?, portlet-url-class?, preferences-company-wide?,
 preferences-unique-per-layout?, preferences-owned-by-group?,
 use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
 restore-current-view?, maximize-edit?, maximize-help?, maximize-print?,
-instanceable?, private-request-attributes?, system?, active?, include?)>
+layout-cacheable?, instanceable?, private-request-attributes?, system?, active?,
+include?)>
 
 <!--
 The portlet-name element contains the unique name of the portlet. This name must
@@ -212,6 +213,12 @@ icons and not what may be programmatically set by the portlet developer.
 The default value is false.
 -->
 <!ELEMENT maximize-print (#PCDATA)>
+
+<!--
+Set the layout-cacheable flag to true if the data contained in this portlet can
+will never change unless the layout or Journal portlet entry is changed.
+-->
+<!ELEMENT layout-cacheable (#PCDATA)>
 
 <!--
 Set the instanceable value to true if the portlet can appear multiple times on a

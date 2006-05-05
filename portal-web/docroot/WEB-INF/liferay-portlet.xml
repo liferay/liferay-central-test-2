@@ -410,6 +410,7 @@
 		<configuration-path>/journal_content/edit_configuration</configuration-path>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
+		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 	</portlet>
@@ -496,6 +497,7 @@
 		<configuration-path>/navigation/edit_configuration</configuration-path>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
+		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 	</portlet>
@@ -505,6 +507,7 @@
 		<configuration-path>/breadcrumb/edit_configuration</configuration-path>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
+		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 	</portlet>
@@ -513,6 +516,7 @@
 		<struts-path>journal_content_search</struts-path>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
+		<layout-cacheable>true</layout-cacheable>
 		<private-request-attributes>false</private-request-attributes>
 	</portlet>
 	<portlet>
@@ -543,6 +547,7 @@
 		<configuration-path>/language/edit_configuration</configuration-path>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
+		<layout-cacheable>true</layout-cacheable>
 		<private-request-attributes>false</private-request-attributes>
 	</portlet>
 	<portlet>
@@ -560,6 +565,7 @@
 		<struts-path>site_map</struts-path>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
+		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 	</portlet>
