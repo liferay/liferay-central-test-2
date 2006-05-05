@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.shared.util;
+package com.liferay.util;
 
 import java.lang.reflect.Field;
 
