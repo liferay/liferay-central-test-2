@@ -38,7 +38,6 @@ public class PortletPreferencesListener implements ModelListener {
 	}
 
 	public void onAfterCreate(BaseModel model) throws ModelListenerException {
-		clearCache(model);
 	}
 
 	public void onBeforeRemove(BaseModel model) throws ModelListenerException {
