@@ -32,6 +32,7 @@ import javax.faces.lifecycle.Lifecycle;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -50,7 +51,7 @@ public class MyFacesContextFactoryImpl extends FacesContextFactory {
 			Object context, Object request, Object response,
 			Lifecycle lifecycle)
 		throws FacesException {
-		
+
         if (context == null) {
             throw new NullPointerException("context");
         }
@@ -73,14 +74,14 @@ public class MyFacesContextFactoryImpl extends FacesContextFactory {
                 (ServletRequest)request,
                 (ServletResponse)response);
         }
-        
+
 		if (context instanceof PortletContext) {
 			return new MyFacesContextImpl(
 				(PortletContext)context, (PortletRequest)request,
 				(PortletResponse)response);
 		}
-        
-        throw new FacesException("Unsupported context type " + 
+
+        throw new FacesException("Unsupported context type " +
         	context.getClass().getName());
 	}
 

@@ -22,15 +22,16 @@
 
 package com.liferay.portal.servlet.filters.layoutcache;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
+
 import com.opensymphony.oscache.base.NeedsRefreshException;
 import com.opensymphony.oscache.general.GeneralCacheAdministrator;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LayoutCacheUtil.java.html"><b><i>View Source</i></b></a>
@@ -41,7 +42,7 @@ import com.opensymphony.oscache.general.GeneralCacheAdministrator;
 public class LayoutCacheUtil {
 
 	public static String[] GROUP_NAME_ARRAY;
-	
+
 	public static String GROUP = "_GROUP_";
 
 	public static String LANGUAGE = "_LANGUAGE_";
@@ -52,7 +53,7 @@ public class LayoutCacheUtil {
 		GROUP_NAME_ARRAY = new String[companyIds.length];
 
 		for (int i = 0; i < companyIds.length; i++) {
-			GROUP_NAME_ARRAY[i] = _encodeGroupName(companyIds[i]); 
+			GROUP_NAME_ARRAY[i] = _encodeGroupName(companyIds[i]);
 		}
 	}
 

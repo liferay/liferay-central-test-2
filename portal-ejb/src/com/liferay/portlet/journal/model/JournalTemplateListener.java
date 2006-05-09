@@ -61,9 +61,9 @@ public class JournalTemplateListener implements ModelListener {
 	protected void clearCache(BaseModel model) {
 
 		// CMS
-		
+
 		CMSServletUtil.clearCache();
-		
+
 		// Journal content
 
 		JournalContentUtil.clearCache();

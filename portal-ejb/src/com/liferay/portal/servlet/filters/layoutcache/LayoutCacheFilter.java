@@ -22,7 +22,22 @@
 
 package com.liferay.portal.servlet.filters.layoutcache;
 
+import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
+import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.ParamUtil;
+import com.liferay.util.StringPool;
+import com.liferay.util.StringUtil;
+import com.liferay.util.SystemProperties;
+import com.liferay.util.Validator;
+
 import java.io.IOException;
+
 import java.util.Properties;
 
 import javax.servlet.Filter;
@@ -37,20 +52,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.liferay.portal.language.LanguageUtil;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletServiceUtil;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
-import com.liferay.util.StringUtil;
-import com.liferay.util.SystemProperties;
-import com.liferay.util.Validator;
 
 /**
  * <a href="LayoutCacheFilter.java.html"><b><i>View Source</i></b></a>
@@ -91,8 +92,8 @@ public class LayoutCacheFilter implements Filter {
 		String languageId = LanguageUtil.getLanguageId(request);
 
 		if (Validator.isNull(portletId) && Validator.isNotNull(plid)) {
-			if (USE_LAYOUT_CACHE_FILTER && !_isAlreadyFiltered(request) && 
-				!_isSignedIn(request) && !_isInclude(request) && 
+			if (USE_LAYOUT_CACHE_FILTER && !_isAlreadyFiltered(request) &&
+				!_isSignedIn(request) && !_isInclude(request) &&
 				_isCacheable(companyId, plid)) {
 
 				request.setAttribute(_ALREADY_FILTERED, Boolean.TRUE);
@@ -132,7 +133,7 @@ public class LayoutCacheFilter implements Filter {
 				_log.debug("Not checking cached layout " + plid);
 
 				chain.doFilter(req, res);
-			} 
+			}
 		}
 		else {
 			_log.debug("Did not request a layout");

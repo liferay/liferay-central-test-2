@@ -61,15 +61,15 @@ public class JournalArticleListener implements ModelListener {
 	protected void clearCache(BaseModel model) {
 
 		// CMS
-		
+
 		CMSServletUtil.clearCache();
-		
+
 		// Journal content
 
 		JournalContentUtil.clearCache();
 
 		// Layout cache
-		
+
 		JournalArticleModel article = (JournalArticleModel)model;
 
 		LayoutCacheUtil.clearCache(article.getCompanyId());

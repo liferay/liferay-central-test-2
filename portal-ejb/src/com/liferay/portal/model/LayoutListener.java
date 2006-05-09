@@ -56,7 +56,7 @@ public class LayoutListener implements ModelListener {
 
 	protected void clearCache(BaseModel model) {
 		LayoutModel layout = (LayoutModel)model;
-		
+
 		if (!Layout.isPrivateLayout(layout.getOwnerId())) {
 			LayoutCacheUtil.clearCache(layout.getCompanyId());
 		}

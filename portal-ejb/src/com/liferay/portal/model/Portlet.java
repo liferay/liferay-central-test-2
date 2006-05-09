@@ -700,16 +700,16 @@ public class Portlet extends PortletModel {
 
 	/**
 	 * Returns true to allow the portlet to be cached within the layout.
-	 * 
+	 *
 	 * @return		layout-cacheable parameter of the portlet
 	 */
 	public boolean getLayoutCacheable() {
 		return _layoutCacheable;
 	}
-	
+
 	/**
 	 * Returns true to allow the portlet to be cached within the layout.
-	 * 
+	 *
 	 * @return		layout-cacheable parameter of the portlet
 	 */
 	public boolean isLayoutCacheable() {
@@ -718,7 +718,7 @@ public class Portlet extends PortletModel {
 
 	/**
 	 * Sets to true to allow the portlet to be cached within the layout.
-	 * 
+	 *
 	 * @layoutCacheable	layout-cacheable parameter of the portlet
 	 */
 	public void setLayoutCacheable(boolean layoutCacheable) {

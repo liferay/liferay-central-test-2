@@ -61,7 +61,7 @@ public class PortletPreferencesListener implements ModelListener {
 			try {
 				Layout layout = LayoutLocalServiceUtil.getLayout(
 					prefs.getLayoutId(), prefs.getOwnerId());
-				
+
 				LayoutCacheUtil.clearCache(layout.getCompanyId());
 			}
 			catch (Exception e) {
