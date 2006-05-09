@@ -167,48 +167,6 @@ public class ShoppingOrderItemUtil {
 			orderId, obc);
 	}
 
-	public static java.util.List findByItemId(java.lang.String itemId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByItemId(itemId);
-	}
-
-	public static java.util.List findByItemId(java.lang.String itemId,
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findByItemId(itemId, begin, end);
-	}
-
-	public static java.util.List findByItemId(java.lang.String itemId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByItemId(itemId, begin, end, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrderItem findByItemId_First(
-		java.lang.String itemId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchOrderItemException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByItemId_First(itemId, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrderItem findByItemId_Last(
-		java.lang.String itemId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchOrderItemException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByItemId_Last(itemId, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrderItem[] findByItemId_PrevAndNext(
-		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK shoppingOrderItemPK,
-		java.lang.String itemId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchOrderItemException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByItemId_PrevAndNext(shoppingOrderItemPK,
-			itemId, obc);
-	}
-
 	public static java.util.List findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
@@ -219,19 +177,9 @@ public class ShoppingOrderItemUtil {
 		getPersistence().removeByOrderId(orderId);
 	}
 
-	public static void removeByItemId(java.lang.String itemId)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByItemId(itemId);
-	}
-
 	public static int countByOrderId(java.lang.String orderId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByOrderId(orderId);
-	}
-
-	public static int countByItemId(java.lang.String itemId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByItemId(itemId);
 	}
 
 	public static ShoppingOrderItemPersistence getPersistence() {

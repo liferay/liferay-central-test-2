@@ -39,9 +39,6 @@ import java.util.Date;
  *
  */
 public class ShoppingOrderItemModel extends BaseModel {
-	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
-				"value.object.cacheable.com.liferay.portlet.shopping.model.ShoppingOrderItem"),
-			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrderItem"),
 			XSS_ALLOW);
@@ -63,38 +60,19 @@ public class ShoppingOrderItemModel extends BaseModel {
 	public static boolean XSS_ALLOW_PROPERTIES = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrderItem.properties"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SUPPLIERUSERID = GetterUtil.get(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrderItem.supplierUserId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingOrderItemModel"));
 
 	public ShoppingOrderItemModel() {
 	}
 
-	public ShoppingOrderItemModel(ShoppingOrderItemPK pk) {
-		_orderId = pk.orderId;
-		_itemId = pk.itemId;
-		setNew(true);
-	}
-
-	public ShoppingOrderItemModel(String orderId, String itemId, String sku,
-		String name, String description, String properties,
-		String supplierUserId, double price, int quantity, Date shippedDate) {
-		_orderId = orderId;
-		_itemId = itemId;
-		_sku = sku;
-		_name = name;
-		_description = description;
-		_properties = properties;
-		_supplierUserId = supplierUserId;
-		_price = price;
-		_quantity = quantity;
-		_shippedDate = shippedDate;
-	}
-
 	public ShoppingOrderItemPK getPrimaryKey() {
 		return new ShoppingOrderItemPK(_orderId, _itemId);
+	}
+
+	public void setPrimaryKey(ShoppingOrderItemPK pk) {
+		setOrderId(pk.orderId);
+		setItemId(pk.itemId);
 	}
 
 	public String getOrderId() {
@@ -203,24 +181,6 @@ public class ShoppingOrderItemModel extends BaseModel {
 		}
 	}
 
-	public String getSupplierUserId() {
-		return GetterUtil.getString(_supplierUserId);
-	}
-
-	public void setSupplierUserId(String supplierUserId) {
-		if (((supplierUserId == null) && (_supplierUserId != null)) ||
-				((supplierUserId != null) && (_supplierUserId == null)) ||
-				((supplierUserId != null) && (_supplierUserId != null) &&
-				!supplierUserId.equals(_supplierUserId))) {
-			if (!XSS_ALLOW_SUPPLIERUSERID) {
-				supplierUserId = XSSUtil.strip(supplierUserId);
-			}
-
-			_supplierUserId = supplierUserId;
-			setModified(true);
-		}
-	}
-
 	public double getPrice() {
 		return _price;
 	}
@@ -257,17 +217,19 @@ public class ShoppingOrderItemModel extends BaseModel {
 		}
 	}
 
-	public BaseModel getProtected() {
-		return null;
-	}
-
-	public void protect() {
-	}
-
 	public Object clone() {
-		return new ShoppingOrderItem(getOrderId(), getItemId(), getSku(),
-			getName(), getDescription(), getProperties(), getSupplierUserId(),
-			getPrice(), getQuantity(), getShippedDate());
+		ShoppingOrderItem clone = new ShoppingOrderItem();
+		clone.setOrderId(getOrderId());
+		clone.setItemId(getItemId());
+		clone.setSku(getSku());
+		clone.setName(getName());
+		clone.setDescription(getDescription());
+		clone.setProperties(getProperties());
+		clone.setPrice(getPrice());
+		clone.setQuantity(getQuantity());
+		clone.setShippedDate(getShippedDate());
+
+		return clone;
 	}
 
 	public int compareTo(Object obj) {
@@ -277,12 +239,6 @@ public class ShoppingOrderItemModel extends BaseModel {
 
 		ShoppingOrderItem shoppingOrderItem = (ShoppingOrderItem)obj;
 		int value = 0;
-		value = getSupplierUserId().compareTo(shoppingOrderItem.getSupplierUserId());
-
-		if (value != 0) {
-			return value;
-		}
-
 		value = getName().compareTo(shoppingOrderItem.getName());
 
 		if (value != 0) {
@@ -332,7 +288,6 @@ public class ShoppingOrderItemModel extends BaseModel {
 	private String _name;
 	private String _description;
 	private String _properties;
-	private String _supplierUserId;
 	private double _price;
 	private int _quantity;
 	private Date _shippedDate;

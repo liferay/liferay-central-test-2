@@ -97,7 +97,7 @@ double version = ParamUtil.getDouble(request, "version");
 			}
 
 			String target = null;
-			
+
 			if (pageURL.equals("popUp")) {
 				target = "_blank";;
 			}

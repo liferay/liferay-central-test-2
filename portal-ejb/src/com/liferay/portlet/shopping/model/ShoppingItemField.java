@@ -33,19 +33,6 @@ import com.liferay.util.StringUtil;
 public class ShoppingItemField extends ShoppingItemFieldModel {
 
 	public ShoppingItemField() {
-		super();
-	}
-
-	public ShoppingItemField(String itemFieldId) {
-		super(itemFieldId);
-	}
-
-	public ShoppingItemField(String itemFieldId, String itemId, String name,
-							 String values, String description) {
-
-		super(itemFieldId, itemId, name, values, description);
-
-		setValues(values);
 	}
 
 	public void setValues(String values) {

@@ -47,23 +47,6 @@ public class ShoppingCoupon extends ShoppingCouponModel {
 	public static final String DISCOUNT_TYPE_TAX_FREE = "tax-free";
 
 	public ShoppingCoupon() {
-		super();
-	}
-
-	public ShoppingCoupon(String couponId) {
-		super(couponId);
-	}
-
-	public ShoppingCoupon(String couponId, String companyId, Date createDate,
-						  Date modifiedDate, String name, String description,
-						  Date startDate, Date endDate, boolean active,
-						  String limitCategories, String limitSkus,
-						  double minOrder, double discount,
-						  String discountType) {
-
-		super(couponId, companyId, createDate, modifiedDate, name, description,
-			  startDate, endDate, active, limitCategories, limitSkus, minOrder,
-			  discount, discountType);
 	}
 
 	public boolean hasValidStartDate() {

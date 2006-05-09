@@ -104,6 +104,9 @@ public class RolePersistence extends BasePersistence {
 					roleHBM.setRoleId(role.getRoleId());
 					roleHBM.setCompanyId(role.getCompanyId());
 					roleHBM.setName(role.getName());
+					roleHBM.setGroups(new HashSet());
+					roleHBM.setPermissions(new HashSet());
+					roleHBM.setUsers(new HashSet());
 					session.save(roleHBM);
 					session.flush();
 				}

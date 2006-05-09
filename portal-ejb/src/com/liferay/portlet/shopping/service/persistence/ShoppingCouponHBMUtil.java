@@ -33,37 +33,7 @@ import com.liferay.util.dao.hibernate.Transformer;
 public class ShoppingCouponHBMUtil implements Transformer {
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon model(
 		ShoppingCouponHBM shoppingCouponHBM) {
-		return model(shoppingCouponHBM, true);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCoupon model(
-		ShoppingCouponHBM shoppingCouponHBM, boolean checkPool) {
-		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon = null;
-
-		if (checkPool) {
-			shoppingCoupon = ShoppingCouponPool.get(shoppingCouponHBM.getPrimaryKey());
-		}
-
-		if (shoppingCoupon == null) {
-			shoppingCoupon = new com.liferay.portlet.shopping.model.ShoppingCoupon(shoppingCouponHBM.getCouponId(),
-					shoppingCouponHBM.getCompanyId(),
-					shoppingCouponHBM.getCreateDate(),
-					shoppingCouponHBM.getModifiedDate(),
-					shoppingCouponHBM.getName(),
-					shoppingCouponHBM.getDescription(),
-					shoppingCouponHBM.getStartDate(),
-					shoppingCouponHBM.getEndDate(),
-					shoppingCouponHBM.getActive(),
-					shoppingCouponHBM.getLimitCategories(),
-					shoppingCouponHBM.getLimitSkus(),
-					shoppingCouponHBM.getMinOrder(),
-					shoppingCouponHBM.getDiscount(),
-					shoppingCouponHBM.getDiscountType());
-			ShoppingCouponPool.put(shoppingCoupon.getPrimaryKey(),
-				shoppingCoupon);
-		}
-
-		return shoppingCoupon;
+		return (com.liferay.portlet.shopping.model.ShoppingCoupon)shoppingCouponHBM;
 	}
 
 	public static ShoppingCouponHBMUtil getInstance() {

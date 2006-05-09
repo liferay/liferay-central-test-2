@@ -124,6 +124,10 @@ public class UserPersistence extends BasePersistence {
 					userHBM.setFailedLoginAttempts(user.getFailedLoginAttempts());
 					userHBM.setAgreedToTermsOfUse(user.getAgreedToTermsOfUse());
 					userHBM.setActive(user.getActive());
+					userHBM.setGroups(new HashSet());
+					userHBM.setOrgs(new HashSet());
+					userHBM.setPermissions(new HashSet());
+					userHBM.setRoles(new HashSet());
 					session.save(userHBM);
 					session.flush();
 				}

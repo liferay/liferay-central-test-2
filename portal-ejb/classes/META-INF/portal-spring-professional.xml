@@ -2455,25 +2455,6 @@
 			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingCartLocalService.transaction" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCartService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingCartServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCartService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingCartService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCartServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingCartServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingCartService.transaction" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence" lazy-init="true">
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
@@ -2482,6 +2463,25 @@
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCategoryLocalService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingCategoryLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCategoryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingCategoryLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCategoryLocalServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingCategoryLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingCategoryLocalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCategoryService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingCategoryServiceImpl" lazy-init="true" />
@@ -2511,6 +2511,25 @@
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCouponLocalService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingCouponLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCouponLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingCouponLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCouponLocalServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingCouponLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingCouponLocalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingCouponService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingCouponServiceImpl" lazy-init="true" />
@@ -2590,13 +2609,13 @@
 			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingItemFieldServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldLocalService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingItemFieldLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService.professional" />
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldLocalService.professional" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -2604,9 +2623,9 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldServiceFactory" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldLocalServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldLocalServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService.transaction" />
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldLocalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence" lazy-init="true">
@@ -2619,13 +2638,13 @@
 			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingItemPriceServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceLocalService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingItemPriceLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService.professional" />
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceLocalService.professional" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -2633,9 +2652,9 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceServiceFactory" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceLocalServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceLocalServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService.transaction" />
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceLocalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence" lazy-init="true">
@@ -2696,13 +2715,13 @@
 			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingOrderItemServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemLocalService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingOrderItemLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService.professional" />
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemLocalService.professional" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -2710,9 +2729,9 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemServiceFactory" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemLocalServiceFactory" class="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemLocalServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService.transaction" />
+			<ref bean="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemLocalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence" lazy-init="true">

@@ -119,7 +119,6 @@ public class ArticleSearch extends SearchContainer {
 			setOrderByType(orderByType);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
 			_log.error(e);
 		}
 	}

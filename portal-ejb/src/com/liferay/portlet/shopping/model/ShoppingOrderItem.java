@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.shopping.model;
 
-import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK;
-
-import java.util.Date;
-
 /**
  * <a href="ShoppingOrderItem.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,20 +31,6 @@ import java.util.Date;
 public class ShoppingOrderItem extends ShoppingOrderItemModel {
 
 	public ShoppingOrderItem() {
-		super();
-	}
-
-	public ShoppingOrderItem(ShoppingOrderItemPK pk) {
-		super(pk);
-	}
-
-	public ShoppingOrderItem(String orderId, String itemId, String sku,
-							 String name, String description, String properties,
-							 String supplierUserId, double price, int quantity,
-							 Date shippedDate) {
-
-		super(orderId, itemId, sku, name, description, properties,
-			  supplierUserId, price, quantity, shippedDate);
 	}
 
 }

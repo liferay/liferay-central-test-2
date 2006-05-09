@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.action;
 
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
@@ -36,22 +37,22 @@ import com.liferay.portlet.shopping.CouponNameException;
 import com.liferay.portlet.shopping.CouponStartDateException;
 import com.liferay.portlet.shopping.DuplicateCouponIdException;
 import com.liferay.portlet.shopping.NoSuchCouponException;
-import com.liferay.portlet.shopping.RequiredCouponException;
-import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.service.spring.ShoppingCouponServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
+import java.util.Calendar;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-
-import javax.servlet.jsp.PageContext;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
@@ -67,8 +68,17 @@ public class EditCouponAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
+		String cmd = ParamUtil.getString(req, Constants.CMD);
+
 		try {
-			_editCoupon(req);
+			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
+				updateCoupon(req);
+			}
+			else if (cmd.equals(Constants.DELETE)) {
+				deleteCoupon(req);
+			}
+
+			sendRedirect(req, res);
 		}
 		catch (Exception e) {
 			if (e != null &&
@@ -79,163 +89,135 @@ public class EditCouponAction extends PortletAction {
 
 				setForward(req, "portlet.shopping.error");
 			}
+			else if (e != null &&
+					 e instanceof CouponDateException ||
+					 e instanceof CouponDescriptionException ||
+					 e instanceof CouponEndDateException ||
+					 e instanceof CouponIdException ||
+					 e instanceof CouponLimitCategoriesException ||
+					 e instanceof CouponLimitSKUsException ||
+					 e instanceof CouponNameException ||
+					 e instanceof CouponStartDateException ||
+					 e instanceof DuplicateCouponIdException) {
+
+				if (e instanceof CouponLimitCategoriesException) {
+					CouponLimitCategoriesException clce =
+						(CouponLimitCategoriesException)e;
+
+					SessionErrors.add(
+						req, e.getClass().getName(), clce.getCategoryIds());
+				}
+				else if (e instanceof CouponLimitSKUsException) {
+					CouponLimitSKUsException clskue =
+						(CouponLimitSKUsException)e;
+
+					SessionErrors.add(
+						req, e.getClass().getName(), clskue.getSkus());
+				}
+				else {
+					SessionErrors.add(req, e.getClass().getName());
+				}
+			}
 			else {
-				req.setAttribute(PageContext.EXCEPTION, e);
-
-				setForward(req, Constants.COMMON_ERROR);
+				throw e;
 			}
-		}
-
-		String cmd = req.getParameter(Constants.CMD);
-
-		if ((cmd != null) &&
-			(cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE))) {
-
-			if (cmd.equals(Constants.ADD)) {
-				req.removeAttribute(WebKeys.SHOPPING_COUPON);
-			}
-
-			try {
-				_updateCoupon(config, req, res);
-			}
-			catch (Exception e) {
-				if (e != null &&
-					e instanceof NoSuchCouponException ||
-					e instanceof PrincipalException) {
-
-					SessionErrors.add(req, e.getClass().getName());
-
-					setForward(req, "portlet.shopping.error");
-				}
-				else if (e != null &&
-						 e instanceof DuplicateCouponIdException ||
-						 e instanceof CouponDateException ||
-						 e instanceof CouponDescriptionException ||
-						 e instanceof CouponEndDateException ||
-						 e instanceof CouponIdException ||
-						 e instanceof CouponLimitCategoriesException ||
-						 e instanceof CouponLimitSKUsException ||
-						 e instanceof CouponNameException ||
-						 e instanceof CouponStartDateException) {
-
-					if (e instanceof CouponLimitCategoriesException) {
-						CouponLimitCategoriesException clce =
-							(CouponLimitCategoriesException)e;
-
-						SessionErrors.add(
-							req, e.getClass().getName(), clce.getCategoryIds());
-					}
-					else if (e instanceof CouponLimitSKUsException) {
-						CouponLimitSKUsException clskue =
-							(CouponLimitSKUsException)e;
-
-						SessionErrors.add(
-							req, e.getClass().getName(), clskue.getSkus());
-					}
-					else {
-						SessionErrors.add(req, e.getClass().getName());
-					}
-
-					setForward(req, "portlet.shopping.edit_coupon");
-				}
-				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
-
-					setForward(req, Constants.COMMON_ERROR);
-				}
-			}
-		}
-		else if (cmd != null && cmd.equals(Constants.DELETE)) {
-			try {
-				_deleteCoupon(req, res);
-			}
-			catch (Exception e) {
-				if (e != null &&
-					e instanceof NoSuchCouponException ||
-					e instanceof PrincipalException ||
-					e instanceof RequiredCouponException) {
-
-					SessionErrors.add(req, e.getClass().getName());
-
-					setForward(req, "portlet.shopping.error");
-				}
-				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
-
-					setForward(req, Constants.COMMON_ERROR);
-				}
-			}
-		}
-		else {
-			setForward(req, "portlet.shopping.edit_coupon");
 		}
 	}
 
-	private void _deleteCoupon(ActionRequest req, ActionResponse res)
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		String couponId = ParamUtil.getString(req, "coupon_id");
+		try {
+			ActionUtil.getCoupon(req);
+		}
+		catch (Exception e) {
+			if (e != null &&
+				e instanceof NoSuchCouponException ||
+				e instanceof PrincipalException) {
 
-		ShoppingCouponServiceUtil.deleteCoupon(couponId);
+				SessionErrors.add(req, e.getClass().getName());
 
-		// Send redirect
+				return mapping.findForward("portlet.shopping.error");
+			}
+			else {
+				throw e;
+			}
+		}
 
-		res.sendRedirect(ParamUtil.getString(req, "redirect"));
+		return mapping.findForward(
+			getForward(req, "portlet.shopping.edit_coupon"));
 	}
 
-	private void _editCoupon(ActionRequest req) throws Exception {
-		String couponId = ParamUtil.getString(req, "coupon_id");
-
-		// Find coupon
-
-		ShoppingCoupon coupon = null;
+	protected void deleteCoupon(ActionRequest req) throws Exception {
+		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+		String couponId = ParamUtil.getString(req, "couponId");
 
 		if (Validator.isNotNull(couponId)) {
-			coupon = ShoppingCouponServiceUtil.getCoupon(couponId);
+			ShoppingCouponServiceUtil.deleteCoupon(layout.getPlid(), couponId);
 		}
+		else {
+			String[] deleteCouponIds = StringUtil.split(
+				ParamUtil.getString(req, "deleteCouponIds"));
 
-		req.setAttribute(WebKeys.SHOPPING_COUPON, coupon);
+			for (int i = 0; i < deleteCouponIds.length; i++) {
+				ShoppingCouponServiceUtil.deleteCoupon(
+					layout.getPlid(), deleteCouponIds[i]);
+			}
+		}
 	}
 
-	private void _updateCoupon(
-			PortletConfig config, ActionRequest req, ActionResponse res)
-		throws Exception {
-
+	protected void updateCoupon(ActionRequest req) throws Exception {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-		String couponId = ParamUtil.getString(req, "coupon_id");
-		boolean autoCouponId = ParamUtil.get(req, "auto_coupon_id", false);
+		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String name = ParamUtil.getString(req, "coupon_name");
-		String description = ParamUtil.getString(req, "coupon_desc");
+		String couponId = ParamUtil.getString(req, "couponId");
+		boolean autoCouponId = ParamUtil.getBoolean(req, "autoCouponId");
 
-		int startMonth = ParamUtil.getInteger(req, "coupon_sd_month");
-		int startDay = ParamUtil.getInteger(req, "coupon_sd_day");
-		int startYear = ParamUtil.getInteger(req, "coupon_sd_year");
-		int endMonth = ParamUtil.getInteger(req, "coupon_ed_month");
-		int endDay = ParamUtil.getInteger(req, "coupon_ed_day");
-		int endYear = ParamUtil.getInteger(req, "coupon_ed_year");
-		boolean neverExpires = ParamUtil.get(
-			req, "coupon_never_expires", false);
-		boolean active = ParamUtil.get(req, "coupon_active", false);
+		String name = ParamUtil.getString(req, "name");
+		String description = ParamUtil.getString(req, "description");
 
-		String limitCategories = StringUtil.replace(
-			ParamUtil.getString(req, "coupon_limit_categories"),
-			StringPool.SPACE, StringPool.BLANK);
-		String limitSkus = StringUtil.replace(
-			ParamUtil.getString(req, "coupon_limit_skus"),
-			StringPool.SPACE, StringPool.BLANK);
-		double minOrder = ParamUtil.getDouble(req, "coupon_min_order");
-		double discount = ParamUtil.getDouble(req, "coupon_discount");
-		String discountType = ParamUtil.getString(req, "coupon_discount_type");
+		int startDateMonth = ParamUtil.getInteger(req, "startDateMonth");
+		int startDateDay = ParamUtil.getInteger(req, "startDateDay");
+		int startDateYear = ParamUtil.getInteger(req, "startDateYear");
+		int startDateHour = ParamUtil.getInteger(req, "startDateHour");
+		int startDateMinute = ParamUtil.getInteger(req, "startDateMinute");
+		int startDateAmPm = ParamUtil.getInteger(req, "startDateAmPm");
+
+		if (startDateAmPm == Calendar.PM) {
+			startDateHour += 12;
+		}
+
+		int endDateMonth = ParamUtil.getInteger(req, "endDateMonth");
+		int endDateDay = ParamUtil.getInteger(req, "endDateDay");
+		int endDateYear = ParamUtil.getInteger(req, "endDateYear");
+		int endDateHour = ParamUtil.getInteger(req, "endDateHour");
+		int endDateMinute = ParamUtil.getInteger(req, "endDateMinute");
+		int endDateAmPm = ParamUtil.getInteger(req, "endDateAmPm");
+		boolean neverExpire = ParamUtil.getBoolean(req, "neverExpire");
+
+		if (endDateAmPm == Calendar.PM) {
+			endDateHour += 12;
+		}
+
+		boolean active = ParamUtil.getBoolean(req, "active");
+		String limitCategories = ParamUtil.getString(req, "limitCategories");
+		String limitSkus = ParamUtil.getString(req, "limitSkus");
+		double minOrder = ParamUtil.getDouble(req, "minOrder");
+		double discount = ParamUtil.getDouble(req, "discount");
+		String discountType = ParamUtil.getString(req, "discountType");
 
 		if (cmd.equals(Constants.ADD)) {
 
 			// Add coupon
 
 			ShoppingCouponServiceUtil.addCoupon(
-				couponId, autoCouponId, name, description, startMonth, startDay,
-				startYear, endMonth, endDay, endYear, neverExpires, active,
+				layout.getPlid(), couponId, autoCouponId, name, description,
+				startDateMonth, startDateDay, startDateYear, startDateHour,
+				startDateMinute, endDateMonth, endDateDay, endDateYear,
+				endDateHour, endDateMinute, neverExpire, active,
 				limitCategories, limitSkus, minOrder, discount, discountType);
 		}
 		else {
@@ -243,14 +225,12 @@ public class EditCouponAction extends PortletAction {
 			// Update coupon
 
 			ShoppingCouponServiceUtil.updateCoupon(
-				couponId, name, description, startMonth, startDay, startYear,
-				endMonth, endDay, endYear, neverExpires, active,
-				limitCategories, limitSkus, minOrder, discount, discountType);
+				layout.getPlid(), couponId, name, description, startDateMonth,
+				startDateDay, startDateYear, startDateHour, startDateMinute,
+				endDateMonth, endDateDay, endDateYear, endDateHour,
+				endDateMinute, neverExpire, active, limitCategories, limitSkus,
+				minOrder, discount, discountType);
 		}
-
-		// Send redirect
-
-		res.sendRedirect(ParamUtil.getString(req, "redirect"));
 	}
 
 }

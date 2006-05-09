@@ -24,12 +24,15 @@ package com.liferay.portlet.shopping.model;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portlet.shopping.service.spring.ShoppingItemPriceServiceUtil;
+import com.liferay.portlet.shopping.service.spring.ShoppingCategoryLocalServiceUtil;
+import com.liferay.portlet.shopping.service.spring.ShoppingItemPriceLocalServiceUtil;
 import com.liferay.portlet.shopping.util.comparator.ItemNameComparator;
 import com.liferay.util.StringUtil;
 
-import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ShoppingItem.java.html"><b><i>View Source</i></b></a>
@@ -40,34 +43,22 @@ import java.util.List;
 public class ShoppingItem extends ShoppingItemModel {
 
 	public ShoppingItem() {
-		super();
 	}
 
-	public ShoppingItem(String itemId) {
-		super(itemId);
-	}
+	public ShoppingCategory getCategory() {
+		ShoppingCategory category = null;
 
-	public ShoppingItem(String itemId, String companyId, Date createDate,
-						Date modifiedDate, String categoryId, String sku,
-						String name, String description, String properties,
-						String supplierUserId, boolean fields,
-						String fieldsQuantities, int minQuantity,
-						int maxQuantity, double price, double discount,
-						boolean taxable, double shipping,
-						boolean useShippingFormula, boolean requiresShipping,
-						int stockQuantity, boolean featured, boolean sale,
-						boolean smallImage, String smallImageURL,
-						boolean mediumImage, String mediumImageURL,
-						boolean largeImage, String largeImageURL) {
+		try {
+			category = ShoppingCategoryLocalServiceUtil.getCategory(
+				getCategoryId());
+		}
+		catch (Exception e) {
+			category = new ShoppingCategory();
 
-		super(itemId, companyId, createDate, modifiedDate, categoryId, sku,
-			  name, description, properties, supplierUserId, fields,
-			  fieldsQuantities, minQuantity, maxQuantity, price, discount,
-			  taxable, shipping, useShippingFormula, requiresShipping,
-			  stockQuantity, featured, sale, smallImage, smallImageURL,
-			  mediumImage, mediumImageURL, largeImage, largeImageURL);
+			_log.error(e);
+		}
 
-		setFieldsQuantities(fieldsQuantities);
+		return category;
 	}
 
 	public void setFieldsQuantities(String fieldsQuantities) {
@@ -105,8 +96,10 @@ public class ShoppingItem extends ShoppingItemModel {
 	public List getItemPrices()
 		throws PortalException, SystemException {
 
-		return ShoppingItemPriceServiceUtil.getItemPrices(getItemId());
+		return ShoppingItemPriceLocalServiceUtil.getItemPrices(getItemId());
 	}
+
+	private static Log _log = LogFactory.getLog(ShoppingItem.class);
 
 	private String[] _fieldsQuantitiesArray;
 

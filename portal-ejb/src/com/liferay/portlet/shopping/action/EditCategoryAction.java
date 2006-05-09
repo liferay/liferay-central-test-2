@@ -22,26 +22,26 @@
 
 package com.liferay.portlet.shopping.action;
 
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.shopping.CategoryNameException;
 import com.liferay.portlet.shopping.NoSuchCategoryException;
-import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.service.spring.ShoppingCategoryServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
-import com.liferay.util.servlet.SessionMessages;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-
-import javax.servlet.jsp.PageContext;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
@@ -57,145 +57,99 @@ public class EditCategoryAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		String cmd = req.getParameter(Constants.CMD);
+		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-		if ((cmd != null) &&
-			(cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE))) {
-
-			try {
-				_editCategory(req);
-
-				_updateCategory(req, res);
+		try {
+			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
+				updateCategory(req);
 			}
-			catch (Exception e) {
-				if (e != null &&
-					e instanceof CategoryNameException) {
-
-					SessionErrors.add(req, e.getClass().getName());
-
-					if (cmd.equals(Constants.ADD)) {
-						setForward(req, "portlet.shopping.add_category");
-					}
-					else {
-						setForward(req, "portlet.shopping.edit_category");
-					}
-				}
-				else if (e != null &&
-						 e instanceof NoSuchCategoryException ||
-						 e instanceof PrincipalException) {
-
-					SessionErrors.add(req, e.getClass().getName());
-
-					setForward(req, "portlet.shopping.error");
-				}
-				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
-
-					setForward(req, Constants.COMMON_ERROR);
-				}
+			else if (cmd.equals(Constants.DELETE)) {
+				deleteCategory(req);
 			}
+
+			sendRedirect(req, res);
 		}
-		else if (cmd != null && cmd.equals(Constants.DELETE)) {
-			try {
-				_deleteCategory(req, res);
+		catch (Exception e) {
+			if (e != null &&
+				e instanceof NoSuchCategoryException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(req, e.getClass().getName());
+
+				setForward(req, "portlet.shopping.error");
 			}
-			catch (Exception e) {
-				if (e != null &&
-					e instanceof NoSuchCategoryException ||
-					e instanceof PrincipalException) {
+			else if (e != null &&
+					 e instanceof CategoryNameException) {
 
-					SessionErrors.add(req, e.getClass().getName());
-
-					setForward(req, "portlet.shopping.error");
-				}
-				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
-
-					setForward(req, Constants.COMMON_ERROR);
-				}
+				SessionErrors.add(req, e.getClass().getName());
 			}
-		}
-		else if (cmd != null && cmd.equals(Constants.EDIT)) {
-			try {
-				_editCategory(req);
-
-				setForward(req, "portlet.shopping.edit_category");
+			else {
+				throw e;
 			}
-			catch (Exception e) {
-				if (e != null &&
-					e instanceof NoSuchCategoryException ||
-					e instanceof PrincipalException) {
-
-					SessionErrors.add(req, e.getClass().getName());
-
-					setForward(req, "portlet.shopping.error");
-				}
-				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
-
-					setForward(req, Constants.COMMON_ERROR);
-				}
-			}
-		}
-		else {
-			setForward(req, "portlet.shopping.add_category");
 		}
 	}
 
-	private void _deleteCategory(ActionRequest req, ActionResponse res)
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		String categoryId = ParamUtil.getString(req, "category_id");
+		try {
+			ActionUtil.getCategory(req);
+		}
+		catch (Exception e) {
+			if (e != null &&
+				e instanceof NoSuchCategoryException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(req, e.getClass().getName());
+
+				return mapping.findForward("portlet.shopping.error");
+			}
+			else {
+				throw e;
+			}
+		}
+
+		return mapping.findForward(
+			getForward(req, "portlet.shopping.edit_category"));
+	}
+
+	protected void deleteCategory(ActionRequest req) throws Exception {
+		String categoryId = ParamUtil.getString(req, "categoryId");
 
 		ShoppingCategoryServiceUtil.deleteCategory(categoryId);
-
-		// Send redirect
-
-		res.sendRedirect(ParamUtil.getString(req, "redirect"));
 	}
 
-	private void _editCategory(ActionRequest req) throws Exception {
-		String categoryId = ParamUtil.getString(req, "category_id");
+	protected void updateCategory(ActionRequest req) throws Exception {
+		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		ShoppingCategory category = null;
+		String categoryId = ParamUtil.getString(req, "categoryId");
 
-		if (Validator.isNotNull(categoryId)) {
-			category = ShoppingCategoryServiceUtil.getCategory(categoryId);
-		}
+		String parentCategoryId = ParamUtil.getString(req, "parentCategoryId");
+		String name = ParamUtil.getString(req, "name");
+		String description = ParamUtil.getString(req, "description");
 
-		req.setAttribute(WebKeys.SHOPPING_CATEGORY, category);
-	}
-
-	private void _updateCategory(ActionRequest req, ActionResponse res)
-		throws Exception {
-
-		String categoryId = ParamUtil.getString(req, "category_id");
-
-		String parentCategoryId = ParamUtil.getString(
-			req, "parent_category_id");
-		String name = ParamUtil.getString(req, "category_name");
+		boolean addCommunityPermissions = ParamUtil.getBoolean(
+			req, "addCommunityPermissions");
+		boolean addGuestPermissions = ParamUtil.getBoolean(
+			req, "addGuestPermissions");
 
 		if (Validator.isNull(categoryId)) {
 
 			// Add category
 
-			ShoppingCategoryServiceUtil.addCategory(parentCategoryId, name);
+			ShoppingCategoryServiceUtil.addCategory(
+				layout.getPlid(), parentCategoryId, name, description,
+				addCommunityPermissions, addGuestPermissions);
 		}
 		else {
 
 			// Update category
 
 			ShoppingCategoryServiceUtil.updateCategory(
-				categoryId, parentCategoryId, name);
-
-			// Session messages
-
-			SessionMessages.add(req, "category_updated");
+				categoryId, parentCategoryId, name, description);
 		}
-
-		// Send redirect
-
-		res.sendRedirect(ParamUtil.getString(req, "redirect"));
 	}
 
 }

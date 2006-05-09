@@ -37,9 +37,6 @@ import java.util.Date;
  *
  */
 public class ShoppingItemModel extends BaseModel {
-	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
-				"value.object.cacheable.com.liferay.portlet.shopping.model.ShoppingItem"),
-			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem"),
 			XSS_ALLOW);
@@ -48,6 +45,12 @@ public class ShoppingItemModel extends BaseModel {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.companyId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.userId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.get(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.userName"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_CATEGORYID = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.categoryId"),
@@ -63,9 +66,6 @@ public class ShoppingItemModel extends BaseModel {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_PROPERTIES = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.properties"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SUPPLIERUSERID = GetterUtil.get(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.supplierUserId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_FIELDSQUANTITIES = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.fieldsQuantities"),
@@ -85,53 +85,12 @@ public class ShoppingItemModel extends BaseModel {
 	public ShoppingItemModel() {
 	}
 
-	public ShoppingItemModel(String itemId) {
-		_itemId = itemId;
-		setNew(true);
-	}
-
-	public ShoppingItemModel(String itemId, String companyId, Date createDate,
-		Date modifiedDate, String categoryId, String sku, String name,
-		String description, String properties, String supplierUserId,
-		boolean fields, String fieldsQuantities, int minQuantity,
-		int maxQuantity, double price, double discount, boolean taxable,
-		double shipping, boolean useShippingFormula, boolean requiresShipping,
-		int stockQuantity, boolean featured, boolean sale, boolean smallImage,
-		String smallImageURL, boolean mediumImage, String mediumImageURL,
-		boolean largeImage, String largeImageURL) {
-		_itemId = itemId;
-		_companyId = companyId;
-		_createDate = createDate;
-		_modifiedDate = modifiedDate;
-		_categoryId = categoryId;
-		_sku = sku;
-		_name = name;
-		_description = description;
-		_properties = properties;
-		_supplierUserId = supplierUserId;
-		_fields = fields;
-		_fieldsQuantities = fieldsQuantities;
-		_minQuantity = minQuantity;
-		_maxQuantity = maxQuantity;
-		_price = price;
-		_discount = discount;
-		_taxable = taxable;
-		_shipping = shipping;
-		_useShippingFormula = useShippingFormula;
-		_requiresShipping = requiresShipping;
-		_stockQuantity = stockQuantity;
-		_featured = featured;
-		_sale = sale;
-		_smallImage = smallImage;
-		_smallImageURL = smallImageURL;
-		_mediumImage = mediumImage;
-		_mediumImageURL = mediumImageURL;
-		_largeImage = largeImage;
-		_largeImageURL = largeImageURL;
-	}
-
 	public String getPrimaryKey() {
 		return _itemId;
+	}
+
+	public void setPrimaryKey(String pk) {
+		setItemId(pk);
 	}
 
 	public String getItemId() {
@@ -166,6 +125,42 @@ public class ShoppingItemModel extends BaseModel {
 			}
 
 			_companyId = companyId;
+			setModified(true);
+		}
+	}
+
+	public String getUserId() {
+		return GetterUtil.getString(_userId);
+	}
+
+	public void setUserId(String userId) {
+		if (((userId == null) && (_userId != null)) ||
+				((userId != null) && (_userId == null)) ||
+				((userId != null) && (_userId != null) &&
+				!userId.equals(_userId))) {
+			if (!XSS_ALLOW_USERID) {
+				userId = XSSUtil.strip(userId);
+			}
+
+			_userId = userId;
+			setModified(true);
+		}
+	}
+
+	public String getUserName() {
+		return GetterUtil.getString(_userName);
+	}
+
+	public void setUserName(String userName) {
+		if (((userName == null) && (_userName != null)) ||
+				((userName != null) && (_userName == null)) ||
+				((userName != null) && (_userName != null) &&
+				!userName.equals(_userName))) {
+			if (!XSS_ALLOW_USERNAME) {
+				userName = XSSUtil.strip(userName);
+			}
+
+			_userName = userName;
 			setModified(true);
 		}
 	}
@@ -282,24 +277,6 @@ public class ShoppingItemModel extends BaseModel {
 			}
 
 			_properties = properties;
-			setModified(true);
-		}
-	}
-
-	public String getSupplierUserId() {
-		return GetterUtil.getString(_supplierUserId);
-	}
-
-	public void setSupplierUserId(String supplierUserId) {
-		if (((supplierUserId == null) && (_supplierUserId != null)) ||
-				((supplierUserId != null) && (_supplierUserId == null)) ||
-				((supplierUserId != null) && (_supplierUserId != null) &&
-				!supplierUserId.equals(_supplierUserId))) {
-			if (!XSS_ALLOW_SUPPLIERUSERID) {
-				supplierUserId = XSSUtil.strip(supplierUserId);
-			}
-
-			_supplierUserId = supplierUserId;
 			setModified(true);
 		}
 	}
@@ -577,23 +554,40 @@ public class ShoppingItemModel extends BaseModel {
 		}
 	}
 
-	public BaseModel getProtected() {
-		return null;
-	}
-
-	public void protect() {
-	}
-
 	public Object clone() {
-		return new ShoppingItem(getItemId(), getCompanyId(), getCreateDate(),
-			getModifiedDate(), getCategoryId(), getSku(), getName(),
-			getDescription(), getProperties(), getSupplierUserId(),
-			getFields(), getFieldsQuantities(), getMinQuantity(),
-			getMaxQuantity(), getPrice(), getDiscount(), getTaxable(),
-			getShipping(), getUseShippingFormula(), getRequiresShipping(),
-			getStockQuantity(), getFeatured(), getSale(), getSmallImage(),
-			getSmallImageURL(), getMediumImage(), getMediumImageURL(),
-			getLargeImage(), getLargeImageURL());
+		ShoppingItem clone = new ShoppingItem();
+		clone.setItemId(getItemId());
+		clone.setCompanyId(getCompanyId());
+		clone.setUserId(getUserId());
+		clone.setUserName(getUserName());
+		clone.setCreateDate(getCreateDate());
+		clone.setModifiedDate(getModifiedDate());
+		clone.setCategoryId(getCategoryId());
+		clone.setSku(getSku());
+		clone.setName(getName());
+		clone.setDescription(getDescription());
+		clone.setProperties(getProperties());
+		clone.setFields(getFields());
+		clone.setFieldsQuantities(getFieldsQuantities());
+		clone.setMinQuantity(getMinQuantity());
+		clone.setMaxQuantity(getMaxQuantity());
+		clone.setPrice(getPrice());
+		clone.setDiscount(getDiscount());
+		clone.setTaxable(getTaxable());
+		clone.setShipping(getShipping());
+		clone.setUseShippingFormula(getUseShippingFormula());
+		clone.setRequiresShipping(getRequiresShipping());
+		clone.setStockQuantity(getStockQuantity());
+		clone.setFeatured(getFeatured());
+		clone.setSale(getSale());
+		clone.setSmallImage(getSmallImage());
+		clone.setSmallImageURL(getSmallImageURL());
+		clone.setMediumImage(getMediumImage());
+		clone.setMediumImageURL(getMediumImageURL());
+		clone.setLargeImage(getLargeImage());
+		clone.setLargeImageURL(getLargeImageURL());
+
+		return clone;
 	}
 
 	public int compareTo(Object obj) {
@@ -642,6 +636,8 @@ public class ShoppingItemModel extends BaseModel {
 
 	private String _itemId;
 	private String _companyId;
+	private String _userId;
+	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _categoryId;
@@ -649,7 +645,6 @@ public class ShoppingItemModel extends BaseModel {
 	private String _name;
 	private String _description;
 	private String _properties;
-	private String _supplierUserId;
 	private boolean _fields;
 	private String _fieldsQuantities;
 	private int _minQuantity;

@@ -1279,6 +1279,10 @@
 				<ejb-link>ejb/liferay/PollsQuestionLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCartLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/WikiNodeLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/WikiNodeLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -1413,6 +1417,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PollsQuestionLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PollsQuestionLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCartLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/WikiNodeLocalServiceHome</ejb-ref-name>
@@ -4307,10 +4315,6 @@
 				<ejb-link>ejb/liferay/ShoppingCartLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ShoppingItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/AccountLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/AccountLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4429,10 +4433,6 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingCartLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ShoppingItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/AccountLocalServiceHome</ejb-ref-name>
@@ -6387,20 +6387,36 @@
 			<jndi-name>ejb/liferay/ShoppingCartLocalServiceHome</jndi-name>
 			<local-jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCategoryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCouponLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemFieldLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemPriceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingOrderLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingOrderItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
 		</ejb>
 		<ejb>
-			<name>com_liferay_portlet_shopping_service_ejb_ShoppingCartServiceEJB</name>
+			<name>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</name>
 			<max-pool-size>40</max-pool-size>
 			<min-pool-size>20</min-pool-size>
 			<enable-freepool>false</enable-freepool>
@@ -6408,23 +6424,39 @@
 			<low-activity-interval>20</low-activity-interval>
 			<is-secure>false</is-secure>
 			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingCartServiceEJB</jndi-name>
-			<local-jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingCartServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<jndi-name>ejb/liferay/ShoppingCategoryLocalServiceHome</jndi-name>
+			<local-jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ResourceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingCartLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCouponLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemFieldLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemPriceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingOrderLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingOrderItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 		</ejb>
 		<ejb>
@@ -6439,20 +6471,80 @@
 			<jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryServiceEJB</jndi-name>
 			<local-jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ResourceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingCartLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCategoryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCouponLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemFieldLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemPriceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingOrderLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingOrderItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+		</ejb>
+		<ejb>
+			<name>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</name>
+			<max-pool-size>40</max-pool-size>
+			<min-pool-size>20</min-pool-size>
+			<enable-freepool>false</enable-freepool>
+			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
+			<low-activity-interval>20</low-activity-interval>
+			<is-secure>false</is-secure>
+			<is-clustered>true</is-clustered>
+			<jndi-name>ejb/liferay/ShoppingCouponLocalServiceHome</jndi-name>
+			<local-jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCartLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCategoryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemFieldLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemPriceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingOrderLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingOrderItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 		</ejb>
 		<ejb>
@@ -6471,12 +6563,32 @@
 				<ejb-link>ejb/liferay/ShoppingCartLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCategoryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCouponLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemFieldLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemPriceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingOrderLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingOrderItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 		</ejb>
 		<ejb>
@@ -6491,16 +6603,36 @@
 			<jndi-name>ejb/liferay/ShoppingItemLocalServiceHome</jndi-name>
 			<local-jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ResourceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingCartLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCategoryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCouponLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemFieldLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemPriceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingOrderLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingOrderItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 		</ejb>
 		<ejb>
@@ -6515,24 +6647,44 @@
 			<jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemServiceEJB</jndi-name>
 			<local-jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ResourceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingCartLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCategoryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCouponLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemFieldLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemPriceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingOrderLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingOrderItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
 		</ejb>
 		<ejb>
-			<name>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldServiceEJB</name>
+			<name>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</name>
 			<max-pool-size>40</max-pool-size>
 			<min-pool-size>20</min-pool-size>
 			<enable-freepool>false</enable-freepool>
@@ -6540,23 +6692,39 @@
 			<low-activity-interval>20</low-activity-interval>
 			<is-secure>false</is-secure>
 			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldServiceEJB</jndi-name>
-			<local-jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<jndi-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</jndi-name>
+			<local-jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingCartLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCategoryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCouponLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemPriceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingOrderLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingOrderItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
 		</ejb>
 		<ejb>
-			<name>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceServiceEJB</name>
+			<name>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</name>
 			<max-pool-size>40</max-pool-size>
 			<min-pool-size>20</min-pool-size>
 			<enable-freepool>false</enable-freepool>
@@ -6564,19 +6732,35 @@
 			<low-activity-interval>20</low-activity-interval>
 			<is-secure>false</is-secure>
 			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceServiceEJB</jndi-name>
-			<local-jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<jndi-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</jndi-name>
+			<local-jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingCartLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCategoryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCouponLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemFieldLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingOrderLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingOrderItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 		</ejb>
 		<ejb>
@@ -6591,28 +6775,32 @@
 			<jndi-name>ejb/liferay/ShoppingOrderLocalServiceHome</jndi-name>
 			<local-jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/CompanyLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/CompanyLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/RoleLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/RoleLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingCartLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCategoryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCouponLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemFieldLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemPriceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingOrderItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 		</ejb>
 		<ejb>
@@ -6627,36 +6815,40 @@
 			<jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderServiceEJB</jndi-name>
 			<local-jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/CompanyLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/CompanyLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/RoleLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/RoleLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingCartLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCategoryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCouponLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemFieldLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemPriceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingOrderLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingOrderItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
 		</ejb>
 		<ejb>
-			<name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemServiceEJB</name>
+			<name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</name>
 			<max-pool-size>40</max-pool-size>
 			<min-pool-size>20</min-pool-size>
 			<enable-freepool>false</enable-freepool>
@@ -6664,15 +6856,31 @@
 			<low-activity-interval>20</low-activity-interval>
 			<is-secure>false</is-secure>
 			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemServiceEJB</jndi-name>
-			<local-jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<jndi-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</jndi-name>
+			<local-jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingCartLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCategoryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingCouponLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingItemLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemFieldLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ShoppingItemPriceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>

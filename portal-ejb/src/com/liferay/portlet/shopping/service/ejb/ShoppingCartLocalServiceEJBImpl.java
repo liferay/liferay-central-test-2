@@ -49,16 +49,36 @@ public class ShoppingCartLocalServiceEJBImpl implements ShoppingCartLocalService
 		return (ShoppingCartLocalService)ctx.getBean(CLASS_NAME);
 	}
 
-	public void deleteAll(java.lang.String userId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		getService().deleteAll(userId);
+	public void deleteGroupCarts(java.lang.String groupId)
+		throws com.liferay.portal.SystemException {
+		getService().deleteGroupCarts(groupId);
 	}
 
-	public void deleteCart(java.lang.String cartId)
+	public void deleteUserCarts(java.lang.String userId)
+		throws com.liferay.portal.SystemException {
+		getService().deleteUserCarts(userId);
+	}
+
+	public com.liferay.portlet.shopping.model.ShoppingCart getCart(
+		java.lang.String cartId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteCart(cartId);
+		return getService().getCart(cartId);
+	}
+
+	public java.util.Map getItems(java.lang.String groupId,
+		java.lang.String itemIds) throws com.liferay.portal.SystemException {
+		return getService().getItems(groupId, itemIds);
+	}
+
+	public com.liferay.portlet.shopping.model.ShoppingCart updateCart(
+		java.lang.String userId, java.lang.String groupId,
+		java.lang.String cartId, java.lang.String itemIds,
+		java.lang.String couponIds, int altShipping, boolean insure)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().updateCart(userId, groupId, cartId, itemIds,
+			couponIds, altShipping, insure);
 	}
 
 	public void ejbCreate() throws CreateException {

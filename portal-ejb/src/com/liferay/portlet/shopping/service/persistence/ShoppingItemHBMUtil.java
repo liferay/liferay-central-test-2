@@ -33,48 +33,7 @@ import com.liferay.util.dao.hibernate.Transformer;
 public class ShoppingItemHBMUtil implements Transformer {
 	public static com.liferay.portlet.shopping.model.ShoppingItem model(
 		ShoppingItemHBM shoppingItemHBM) {
-		return model(shoppingItemHBM, true);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingItem model(
-		ShoppingItemHBM shoppingItemHBM, boolean checkPool) {
-		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem = null;
-
-		if (checkPool) {
-			shoppingItem = ShoppingItemPool.get(shoppingItemHBM.getPrimaryKey());
-		}
-
-		if (shoppingItem == null) {
-			shoppingItem = new com.liferay.portlet.shopping.model.ShoppingItem(shoppingItemHBM.getItemId(),
-					shoppingItemHBM.getCompanyId(),
-					shoppingItemHBM.getCreateDate(),
-					shoppingItemHBM.getModifiedDate(),
-					shoppingItemHBM.getCategoryId(), shoppingItemHBM.getSku(),
-					shoppingItemHBM.getName(),
-					shoppingItemHBM.getDescription(),
-					shoppingItemHBM.getProperties(),
-					shoppingItemHBM.getSupplierUserId(),
-					shoppingItemHBM.getFields(),
-					shoppingItemHBM.getFieldsQuantities(),
-					shoppingItemHBM.getMinQuantity(),
-					shoppingItemHBM.getMaxQuantity(),
-					shoppingItemHBM.getPrice(), shoppingItemHBM.getDiscount(),
-					shoppingItemHBM.getTaxable(),
-					shoppingItemHBM.getShipping(),
-					shoppingItemHBM.getUseShippingFormula(),
-					shoppingItemHBM.getRequiresShipping(),
-					shoppingItemHBM.getStockQuantity(),
-					shoppingItemHBM.getFeatured(), shoppingItemHBM.getSale(),
-					shoppingItemHBM.getSmallImage(),
-					shoppingItemHBM.getSmallImageURL(),
-					shoppingItemHBM.getMediumImage(),
-					shoppingItemHBM.getMediumImageURL(),
-					shoppingItemHBM.getLargeImage(),
-					shoppingItemHBM.getLargeImageURL());
-			ShoppingItemPool.put(shoppingItem.getPrimaryKey(), shoppingItem);
-		}
-
-		return shoppingItem;
+		return (com.liferay.portlet.shopping.model.ShoppingItem)shoppingItemHBM;
 	}
 
 	public static ShoppingItemHBMUtil getInstance() {

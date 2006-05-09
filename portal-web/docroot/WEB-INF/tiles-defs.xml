@@ -895,20 +895,18 @@
 
 	<!-- Shopping -->
 
-	<definition name="portlet.shopping" extends="portlet">
-		<put name="portlet_sub_nav" value="/portlet/shopping/sub_nav.jsp" />
-	</definition>
+	<definition name="portlet.shopping" extends="portlet" />
 
-	<definition name="portlet.shopping.add_category" extends="portlet.shopping">
-		<put name="portlet_content" value="/portlet/shopping/add_category.jsp" />
-	</definition>
-
-	<definition name="portlet.shopping.browse_categories" extends="portlet.shopping">
-		<put name="portlet_content" value="/portlet/shopping/browse_categories.jsp" />
+	<definition name="portlet.shopping.add_book_items" extends="portlet.shopping">
+		<put name="portlet_content" value="/portlet/shopping/add_book_items.jsp" />
 	</definition>
 
 	<definition name="portlet.shopping.cart" extends="portlet.shopping">
 		<put name="portlet_content" value="/portlet/shopping/cart.jsp" />
+	</definition>
+
+	<definition name="portlet.shopping.edit_category" extends="portlet.shopping">
+		<put name="portlet_content" value="/portlet/shopping/edit_category.jsp" />
 	</definition>
 
 	<definition name="portlet.shopping.checkout_first" extends="portlet.shopping">
@@ -921,10 +919,6 @@
 
 	<definition name="portlet.shopping.checkout_third" extends="portlet.shopping">
 		<put name="portlet_content" value="/portlet/shopping/checkout_third.jsp" />
-	</definition>
-
-	<definition name="portlet.shopping.edit_category" extends="portlet.shopping">
-		<put name="portlet_content" value="/portlet/shopping/edit_category.jsp" />
 	</definition>
 
 	<definition name="portlet.shopping.edit_coupon" extends="portlet.shopping">
@@ -947,14 +941,19 @@
 		<put name="portlet_content" value="/portlet/shopping/error.jsp" />
 	</definition>
 
-	<definition name="portlet.shopping.help" extends="portlet">
-		<put name="portlet_content" value="/portlet/shopping/help.jsp" />
+	<definition name="portlet.shopping.view" extends="portlet.shopping">
+		<put name="portlet_content" value="/portlet/shopping/view.jsp" />
 	</definition>
 
-	<definition name="portlet.shopping.quick_add_items" extends="portlet.shopping">
-		<put name="portlet_content" value="/portlet/shopping/quick_add_items.jsp" />
+	<definition name="portlet.shopping.view_coupon" extends="portlet.shopping">
+		<put name="portlet_content" value="/portlet/shopping/view_coupon.jsp" />
 	</definition>
 
+	<definition name="portlet.shopping.view_item" extends="portlet.shopping">
+		<put name="portlet_content" value="/portlet/shopping/view_item.jsp" />
+	</definition>
+
+	<!--
 	<definition name="portlet.shopping.search" extends="portlet.shopping">
 		<put name="portlet_content" value="/portlet/shopping/search.jsp" />
 	</definition>
@@ -986,26 +985,7 @@
 	<definition name="portlet.shopping.setup_shipping_email" extends="portlet.shopping">
 		<put name="portlet_content" value="/portlet/shopping/setup_shipping_email.jsp" />
 	</definition>
-
-	<definition name="portlet.shopping.view" extends="portlet.shopping">
-		<put name="portlet_content" value="/portlet/shopping/view.jsp" />
-	</definition>
-
-	<definition name="portlet.shopping.view_coupon" extends="portlet.shopping">
-		<put name="portlet_content" value="/portlet/shopping/view_coupon.jsp" />
-	</definition>
-
-	<definition name="portlet.shopping.view_coupons" extends="portlet.shopping">
-		<put name="portlet_content" value="/portlet/shopping/view_coupons.jsp" />
-	</definition>
-
-	<definition name="portlet.shopping.view_item" extends="portlet.shopping">
-		<put name="portlet_content" value="/portlet/shopping/view_item.jsp" />
-	</definition>
-
-	<definition name="portlet.shopping.view_orders" extends="portlet.shopping">
-		<put name="portlet_content" value="/portlet/shopping/view_orders.jsp" />
-	</definition>
+	-->
 
 	<!-- Stocks -->
 

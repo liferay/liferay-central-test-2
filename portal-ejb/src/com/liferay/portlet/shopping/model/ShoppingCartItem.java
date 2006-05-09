@@ -39,10 +39,6 @@ public class ShoppingCartItem implements Comparable, Serializable {
 		return StringUtil.split(fields, "&");
 	}
 
-	public ShoppingCartItem() {
-		super();
-	}
-
 	public ShoppingCartItem(ShoppingItem item, String fields) {
 		_item = item;
 		_fields = fields;

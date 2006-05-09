@@ -109,6 +109,9 @@ public class PermissionPersistence extends BasePersistence {
 					permissionHBM.setCompanyId(permission.getCompanyId());
 					permissionHBM.setActionId(permission.getActionId());
 					permissionHBM.setResourceId(permission.getResourceId());
+					permissionHBM.setGroups(new HashSet());
+					permissionHBM.setRoles(new HashSet());
+					permissionHBM.setUsers(new HashSet());
 					session.save(permissionHBM);
 					session.flush();
 				}

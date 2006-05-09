@@ -682,8 +682,8 @@
 			<cache-size>20</cache-size>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCartServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingCartServiceEJB</jndi-name>
+			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/ShoppingCategoryLocalServiceHome</local-jndi-name>
 			<clustered>true</clustered>
 			<pool-size>20</pool-size>
 			<cache-size>20</cache-size>
@@ -691,6 +691,13 @@
 		<session>
 			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryServiceEJB</ejb-name>
 			<jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryServiceEJB</jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<cache-size>20</cache-size>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/ShoppingCouponLocalServiceHome</local-jndi-name>
 			<clustered>true</clustered>
 			<pool-size>20</pool-size>
 			<cache-size>20</cache-size>
@@ -717,15 +724,15 @@
 			<cache-size>20</cache-size>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldServiceEJB</jndi-name>
+			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</local-jndi-name>
 			<clustered>true</clustered>
 			<pool-size>20</pool-size>
 			<cache-size>20</cache-size>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceServiceEJB</jndi-name>
+			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</local-jndi-name>
 			<clustered>true</clustered>
 			<pool-size>20</pool-size>
 			<cache-size>20</cache-size>
@@ -745,8 +752,8 @@
 			<cache-size>20</cache-size>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemServiceEJB</jndi-name>
+			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</local-jndi-name>
 			<clustered>true</clustered>
 			<pool-size>20</pool-size>
 			<cache-size>20</cache-size>

@@ -30,16 +30,13 @@ package com.liferay.portlet.shopping.service.spring;
  */
 public interface ShoppingCategoryService {
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		java.lang.String parentCategoryId, java.lang.String name)
+		java.lang.String plid, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public void deleteCategory(java.lang.String categoryId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public void deleteCategory(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
@@ -48,53 +45,9 @@ public interface ShoppingCategoryService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public java.util.List getCategories(java.lang.String companyId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public java.util.List getCategories(java.lang.String companyId,
-		java.lang.String parentCategoryId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public java.util.List getCategories(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public int getCategoriesSize(java.lang.String companyId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public int getCategoriesSize(java.lang.String companyId,
-		java.lang.String parentCategoryId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public int getCategoriesSize(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public com.liferay.portlet.shopping.model.ShoppingCategory getParentCategory(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public java.util.List getParentCategories(java.lang.String categoryId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public java.util.List getParentCategories(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
-
 	public com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
 		java.lang.String categoryId, java.lang.String parentCategoryId,
-		java.lang.String name)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public boolean hasAdmin()
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public boolean hasAdmin(java.lang.String categoryId)
+		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 }

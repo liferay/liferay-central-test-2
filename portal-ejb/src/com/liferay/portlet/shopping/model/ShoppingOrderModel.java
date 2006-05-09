@@ -37,20 +37,23 @@ import java.util.Date;
  *
  */
 public class ShoppingOrderModel extends BaseModel {
-	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
-				"value.object.cacheable.com.liferay.portlet.shopping.model.ShoppingOrder"),
-			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder"),
 			XSS_ALLOW);
 	public static boolean XSS_ALLOW_ORDERID = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.orderId"),
 			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_GROUPID = GetterUtil.get(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.groupId"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.companyId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.userId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.get(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.userName"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_ALTSHIPPING = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.altShipping"),
@@ -151,80 +154,12 @@ public class ShoppingOrderModel extends BaseModel {
 	public ShoppingOrderModel() {
 	}
 
-	public ShoppingOrderModel(String orderId) {
-		_orderId = orderId;
-		setNew(true);
-	}
-
-	public ShoppingOrderModel(String orderId, String companyId, String userId,
-		Date createDate, Date modifiedDate, double tax, double shipping,
-		String altShipping, boolean requiresShipping, boolean insure,
-		double insurance, String couponIds, double couponDiscount,
-		String billingFirstName, String billingLastName,
-		String billingEmailAddress, String billingCompany,
-		String billingStreet, String billingCity, String billingState,
-		String billingZip, String billingCountry, String billingPhone,
-		boolean shipToBilling, String shippingFirstName,
-		String shippingLastName, String shippingEmailAddress,
-		String shippingCompany, String shippingStreet, String shippingCity,
-		String shippingState, String shippingZip, String shippingCountry,
-		String shippingPhone, String ccName, String ccType, String ccNumber,
-		int ccExpMonth, int ccExpYear, String ccVerNumber, String comments,
-		String ppTxnId, String ppPaymentStatus, double ppPaymentGross,
-		String ppReceiverEmail, String ppPayerEmail, boolean sendOrderEmail,
-		boolean sendShippingEmail) {
-		_orderId = orderId;
-		_companyId = companyId;
-		_userId = userId;
-		_createDate = createDate;
-		_modifiedDate = modifiedDate;
-		_tax = tax;
-		_shipping = shipping;
-		_altShipping = altShipping;
-		_requiresShipping = requiresShipping;
-		_insure = insure;
-		_insurance = insurance;
-		_couponIds = couponIds;
-		_couponDiscount = couponDiscount;
-		_billingFirstName = billingFirstName;
-		_billingLastName = billingLastName;
-		_billingEmailAddress = billingEmailAddress;
-		_billingCompany = billingCompany;
-		_billingStreet = billingStreet;
-		_billingCity = billingCity;
-		_billingState = billingState;
-		_billingZip = billingZip;
-		_billingCountry = billingCountry;
-		_billingPhone = billingPhone;
-		_shipToBilling = shipToBilling;
-		_shippingFirstName = shippingFirstName;
-		_shippingLastName = shippingLastName;
-		_shippingEmailAddress = shippingEmailAddress;
-		_shippingCompany = shippingCompany;
-		_shippingStreet = shippingStreet;
-		_shippingCity = shippingCity;
-		_shippingState = shippingState;
-		_shippingZip = shippingZip;
-		_shippingCountry = shippingCountry;
-		_shippingPhone = shippingPhone;
-		_ccName = ccName;
-		_ccType = ccType;
-		_ccNumber = ccNumber;
-		_ccExpMonth = ccExpMonth;
-		_ccExpYear = ccExpYear;
-		_ccVerNumber = ccVerNumber;
-		_comments = comments;
-		_ppTxnId = ppTxnId;
-		_ppPaymentStatus = ppPaymentStatus;
-		_ppPaymentGross = ppPaymentGross;
-		_ppReceiverEmail = ppReceiverEmail;
-		_ppPayerEmail = ppPayerEmail;
-		_sendOrderEmail = sendOrderEmail;
-		_sendShippingEmail = sendShippingEmail;
-	}
-
 	public String getPrimaryKey() {
 		return _orderId;
+	}
+
+	public void setPrimaryKey(String pk) {
+		setOrderId(pk);
 	}
 
 	public String getOrderId() {
@@ -241,6 +176,24 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_orderId = orderId;
+			setModified(true);
+		}
+	}
+
+	public String getGroupId() {
+		return GetterUtil.getString(_groupId);
+	}
+
+	public void setGroupId(String groupId) {
+		if (((groupId == null) && (_groupId != null)) ||
+				((groupId != null) && (_groupId == null)) ||
+				((groupId != null) && (_groupId != null) &&
+				!groupId.equals(_groupId))) {
+			if (!XSS_ALLOW_GROUPID) {
+				groupId = XSSUtil.strip(groupId);
+			}
+
+			_groupId = groupId;
 			setModified(true);
 		}
 	}
@@ -277,6 +230,24 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_userId = userId;
+			setModified(true);
+		}
+	}
+
+	public String getUserName() {
+		return GetterUtil.getString(_userName);
+	}
+
+	public void setUserName(String userName) {
+		if (((userName == null) && (_userName != null)) ||
+				((userName != null) && (_userName == null)) ||
+				((userName != null) && (_userName != null) &&
+				!userName.equals(_userName))) {
+			if (!XSS_ALLOW_USERNAME) {
+				userName = XSSUtil.strip(userName);
+			}
+
+			_userName = userName;
 			setModified(true);
 		}
 	}
@@ -1023,30 +994,60 @@ public class ShoppingOrderModel extends BaseModel {
 		}
 	}
 
-	public BaseModel getProtected() {
-		return null;
-	}
-
-	public void protect() {
-	}
-
 	public Object clone() {
-		return new ShoppingOrder(getOrderId(), getCompanyId(), getUserId(),
-			getCreateDate(), getModifiedDate(), getTax(), getShipping(),
-			getAltShipping(), getRequiresShipping(), getInsure(),
-			getInsurance(), getCouponIds(), getCouponDiscount(),
-			getBillingFirstName(), getBillingLastName(),
-			getBillingEmailAddress(), getBillingCompany(), getBillingStreet(),
-			getBillingCity(), getBillingState(), getBillingZip(),
-			getBillingCountry(), getBillingPhone(), getShipToBilling(),
-			getShippingFirstName(), getShippingLastName(),
-			getShippingEmailAddress(), getShippingCompany(),
-			getShippingStreet(), getShippingCity(), getShippingState(),
-			getShippingZip(), getShippingCountry(), getShippingPhone(),
-			getCcName(), getCcType(), getCcNumber(), getCcExpMonth(),
-			getCcExpYear(), getCcVerNumber(), getComments(), getPpTxnId(),
-			getPpPaymentStatus(), getPpPaymentGross(), getPpReceiverEmail(),
-			getPpPayerEmail(), getSendOrderEmail(), getSendShippingEmail());
+		ShoppingOrder clone = new ShoppingOrder();
+		clone.setOrderId(getOrderId());
+		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
+		clone.setUserId(getUserId());
+		clone.setUserName(getUserName());
+		clone.setCreateDate(getCreateDate());
+		clone.setModifiedDate(getModifiedDate());
+		clone.setTax(getTax());
+		clone.setShipping(getShipping());
+		clone.setAltShipping(getAltShipping());
+		clone.setRequiresShipping(getRequiresShipping());
+		clone.setInsure(getInsure());
+		clone.setInsurance(getInsurance());
+		clone.setCouponIds(getCouponIds());
+		clone.setCouponDiscount(getCouponDiscount());
+		clone.setBillingFirstName(getBillingFirstName());
+		clone.setBillingLastName(getBillingLastName());
+		clone.setBillingEmailAddress(getBillingEmailAddress());
+		clone.setBillingCompany(getBillingCompany());
+		clone.setBillingStreet(getBillingStreet());
+		clone.setBillingCity(getBillingCity());
+		clone.setBillingState(getBillingState());
+		clone.setBillingZip(getBillingZip());
+		clone.setBillingCountry(getBillingCountry());
+		clone.setBillingPhone(getBillingPhone());
+		clone.setShipToBilling(getShipToBilling());
+		clone.setShippingFirstName(getShippingFirstName());
+		clone.setShippingLastName(getShippingLastName());
+		clone.setShippingEmailAddress(getShippingEmailAddress());
+		clone.setShippingCompany(getShippingCompany());
+		clone.setShippingStreet(getShippingStreet());
+		clone.setShippingCity(getShippingCity());
+		clone.setShippingState(getShippingState());
+		clone.setShippingZip(getShippingZip());
+		clone.setShippingCountry(getShippingCountry());
+		clone.setShippingPhone(getShippingPhone());
+		clone.setCcName(getCcName());
+		clone.setCcType(getCcType());
+		clone.setCcNumber(getCcNumber());
+		clone.setCcExpMonth(getCcExpMonth());
+		clone.setCcExpYear(getCcExpYear());
+		clone.setCcVerNumber(getCcVerNumber());
+		clone.setComments(getComments());
+		clone.setPpTxnId(getPpTxnId());
+		clone.setPpPaymentStatus(getPpPaymentStatus());
+		clone.setPpPaymentGross(getPpPaymentGross());
+		clone.setPpReceiverEmail(getPpReceiverEmail());
+		clone.setPpPayerEmail(getPpPayerEmail());
+		clone.setSendOrderEmail(getSendOrderEmail());
+		clone.setSendShippingEmail(getSendShippingEmail());
+
+		return clone;
 	}
 
 	public int compareTo(Object obj) {
@@ -1095,8 +1096,10 @@ public class ShoppingOrderModel extends BaseModel {
 	}
 
 	private String _orderId;
+	private String _groupId;
 	private String _companyId;
 	private String _userId;
+	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private double _tax;

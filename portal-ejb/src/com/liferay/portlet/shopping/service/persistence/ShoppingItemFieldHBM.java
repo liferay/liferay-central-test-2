@@ -22,80 +22,15 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+import com.liferay.portlet.shopping.model.ShoppingItemField;
+
 /**
  * <a href="ShoppingItemFieldHBM.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class ShoppingItemFieldHBM {
+public class ShoppingItemFieldHBM extends ShoppingItemField {
 	protected ShoppingItemFieldHBM() {
 	}
-
-	protected ShoppingItemFieldHBM(String itemFieldId) {
-		_itemFieldId = itemFieldId;
-	}
-
-	protected ShoppingItemFieldHBM(String itemFieldId, String itemId,
-		String name, String values, String description) {
-		_itemFieldId = itemFieldId;
-		_itemId = itemId;
-		_name = name;
-		_values = values;
-		_description = description;
-	}
-
-	public String getPrimaryKey() {
-		return _itemFieldId;
-	}
-
-	protected void setPrimaryKey(String pk) {
-		_itemFieldId = pk;
-	}
-
-	protected String getItemFieldId() {
-		return _itemFieldId;
-	}
-
-	protected void setItemFieldId(String itemFieldId) {
-		_itemFieldId = itemFieldId;
-	}
-
-	protected String getItemId() {
-		return _itemId;
-	}
-
-	protected void setItemId(String itemId) {
-		_itemId = itemId;
-	}
-
-	protected String getName() {
-		return _name;
-	}
-
-	protected void setName(String name) {
-		_name = name;
-	}
-
-	protected String getValues() {
-		return _values;
-	}
-
-	protected void setValues(String values) {
-		_values = values;
-	}
-
-	protected String getDescription() {
-		return _description;
-	}
-
-	protected void setDescription(String description) {
-		_description = description;
-	}
-
-	private String _itemFieldId;
-	private String _itemId;
-	private String _name;
-	private String _values;
-	private String _description;
 }

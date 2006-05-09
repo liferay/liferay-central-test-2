@@ -37,17 +37,23 @@ import java.util.Date;
  *
  */
 public class ShoppingCouponModel extends BaseModel {
-	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
-				"value.object.cacheable.com.liferay.portlet.shopping.model.ShoppingCoupon"),
-			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon"),
 			XSS_ALLOW);
 	public static boolean XSS_ALLOW_COUPONID = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.couponId"),
 			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_GROUPID = GetterUtil.get(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.groupId"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.companyId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.userId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.get(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.userName"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.name"),
@@ -70,33 +76,12 @@ public class ShoppingCouponModel extends BaseModel {
 	public ShoppingCouponModel() {
 	}
 
-	public ShoppingCouponModel(String couponId) {
-		_couponId = couponId;
-		setNew(true);
-	}
-
-	public ShoppingCouponModel(String couponId, String companyId,
-		Date createDate, Date modifiedDate, String name, String description,
-		Date startDate, Date endDate, boolean active, String limitCategories,
-		String limitSkus, double minOrder, double discount, String discountType) {
-		_couponId = couponId;
-		_companyId = companyId;
-		_createDate = createDate;
-		_modifiedDate = modifiedDate;
-		_name = name;
-		_description = description;
-		_startDate = startDate;
-		_endDate = endDate;
-		_active = active;
-		_limitCategories = limitCategories;
-		_limitSkus = limitSkus;
-		_minOrder = minOrder;
-		_discount = discount;
-		_discountType = discountType;
-	}
-
 	public String getPrimaryKey() {
 		return _couponId;
+	}
+
+	public void setPrimaryKey(String pk) {
+		setCouponId(pk);
 	}
 
 	public String getCouponId() {
@@ -117,6 +102,24 @@ public class ShoppingCouponModel extends BaseModel {
 		}
 	}
 
+	public String getGroupId() {
+		return GetterUtil.getString(_groupId);
+	}
+
+	public void setGroupId(String groupId) {
+		if (((groupId == null) && (_groupId != null)) ||
+				((groupId != null) && (_groupId == null)) ||
+				((groupId != null) && (_groupId != null) &&
+				!groupId.equals(_groupId))) {
+			if (!XSS_ALLOW_GROUPID) {
+				groupId = XSSUtil.strip(groupId);
+			}
+
+			_groupId = groupId;
+			setModified(true);
+		}
+	}
+
 	public String getCompanyId() {
 		return GetterUtil.getString(_companyId);
 	}
@@ -131,6 +134,42 @@ public class ShoppingCouponModel extends BaseModel {
 			}
 
 			_companyId = companyId;
+			setModified(true);
+		}
+	}
+
+	public String getUserId() {
+		return GetterUtil.getString(_userId);
+	}
+
+	public void setUserId(String userId) {
+		if (((userId == null) && (_userId != null)) ||
+				((userId != null) && (_userId == null)) ||
+				((userId != null) && (_userId != null) &&
+				!userId.equals(_userId))) {
+			if (!XSS_ALLOW_USERID) {
+				userId = XSSUtil.strip(userId);
+			}
+
+			_userId = userId;
+			setModified(true);
+		}
+	}
+
+	public String getUserName() {
+		return GetterUtil.getString(_userName);
+	}
+
+	public void setUserName(String userName) {
+		if (((userName == null) && (_userName != null)) ||
+				((userName != null) && (_userName == null)) ||
+				((userName != null) && (_userName != null) &&
+				!userName.equals(_userName))) {
+			if (!XSS_ALLOW_USERNAME) {
+				userName = XSSUtil.strip(userName);
+			}
+
+			_userName = userName;
 			setModified(true);
 		}
 	}
@@ -317,18 +356,27 @@ public class ShoppingCouponModel extends BaseModel {
 		}
 	}
 
-	public BaseModel getProtected() {
-		return null;
-	}
-
-	public void protect() {
-	}
-
 	public Object clone() {
-		return new ShoppingCoupon(getCouponId(), getCompanyId(),
-			getCreateDate(), getModifiedDate(), getName(), getDescription(),
-			getStartDate(), getEndDate(), getActive(), getLimitCategories(),
-			getLimitSkus(), getMinOrder(), getDiscount(), getDiscountType());
+		ShoppingCoupon clone = new ShoppingCoupon();
+		clone.setCouponId(getCouponId());
+		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
+		clone.setUserId(getUserId());
+		clone.setUserName(getUserName());
+		clone.setCreateDate(getCreateDate());
+		clone.setModifiedDate(getModifiedDate());
+		clone.setName(getName());
+		clone.setDescription(getDescription());
+		clone.setStartDate(getStartDate());
+		clone.setEndDate(getEndDate());
+		clone.setActive(getActive());
+		clone.setLimitCategories(getLimitCategories());
+		clone.setLimitSkus(getLimitSkus());
+		clone.setMinOrder(getMinOrder());
+		clone.setDiscount(getDiscount());
+		clone.setDiscountType(getDiscountType());
+
+		return clone;
 	}
 
 	public int compareTo(Object obj) {
@@ -376,7 +424,10 @@ public class ShoppingCouponModel extends BaseModel {
 	}
 
 	private String _couponId;
+	private String _groupId;
 	private String _companyId;
+	private String _userId;
+	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _name;

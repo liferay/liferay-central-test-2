@@ -25,13 +25,12 @@ package com.liferay.portlet.shopping.model;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.shopping.NoSuchCouponException;
-import com.liferay.portlet.shopping.service.spring.ShoppingCartServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingCouponServiceUtil;
+import com.liferay.portlet.shopping.service.spring.ShoppingCartLocalServiceUtil;
+import com.liferay.portlet.shopping.service.spring.ShoppingCouponLocalServiceUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -43,19 +42,6 @@ import java.util.Map;
 public class ShoppingCart extends ShoppingCartModel {
 
 	public ShoppingCart() {
-		super();
-	}
-
-	public ShoppingCart(String cartId) {
-		super(cartId);
-	}
-
-	public ShoppingCart(String cartId, String companyId, String userId,
-						Date createDate, Date modifiedDate, String itemIds,
-						String couponIds, int altShipping, boolean insure) {
-
-		super(cartId, companyId, userId, createDate, modifiedDate, itemIds,
-			  couponIds, altShipping, insure);
 	}
 
 	public void addItemId(String itemId, String fields) {
@@ -64,7 +50,8 @@ public class ShoppingCart extends ShoppingCartModel {
 	}
 
 	public Map getItems() throws SystemException {
-		return ShoppingCartServiceUtil.getItems(getCompanyId(), getItemIds());
+		return ShoppingCartLocalServiceUtil.getItems(
+			getGroupId(), getItemIds());
 	}
 
 	public int getItemsSize() {
@@ -78,7 +65,7 @@ public class ShoppingCart extends ShoppingCartModel {
 			String couponId = StringUtil.split(getCouponIds())[0];
 
 			try {
-				coupon = ShoppingCouponServiceUtil.getCoupon(couponId);
+				coupon = ShoppingCouponLocalServiceUtil.getCoupon(couponId);
 			}
 			catch (NoSuchCouponException nsce) {
 			}

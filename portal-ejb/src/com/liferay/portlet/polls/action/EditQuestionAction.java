@@ -169,11 +169,6 @@ public class EditQuestionAction extends PortletAction {
 			expirationDateHour += 12;
 		}
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			req, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			req, "addGuestPermissions");
-
 		List choices = new ArrayList();
 
 		Enumeration enu = req.getParameterNames();
@@ -202,6 +197,11 @@ public class EditQuestionAction extends PortletAction {
 				}
 			}
 		}
+
+		boolean addCommunityPermissions = ParamUtil.getBoolean(
+			req, "addCommunityPermissions");
+		boolean addGuestPermissions = ParamUtil.getBoolean(
+			req, "addGuestPermissions");
 
 		if (Validator.isNull(questionId)) {
 

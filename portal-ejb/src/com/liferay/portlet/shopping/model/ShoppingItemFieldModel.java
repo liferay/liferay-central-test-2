@@ -35,9 +35,6 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class ShoppingItemFieldModel extends BaseModel {
-	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
-				"value.object.cacheable.com.liferay.portlet.shopping.model.ShoppingItemField"),
-			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItemField"),
 			XSS_ALLOW);
@@ -62,22 +59,12 @@ public class ShoppingItemFieldModel extends BaseModel {
 	public ShoppingItemFieldModel() {
 	}
 
-	public ShoppingItemFieldModel(String itemFieldId) {
-		_itemFieldId = itemFieldId;
-		setNew(true);
-	}
-
-	public ShoppingItemFieldModel(String itemFieldId, String itemId,
-		String name, String values, String description) {
-		_itemFieldId = itemFieldId;
-		_itemId = itemId;
-		_name = name;
-		_values = values;
-		_description = description;
-	}
-
 	public String getPrimaryKey() {
 		return _itemFieldId;
+	}
+
+	public void setPrimaryKey(String pk) {
+		setItemFieldId(pk);
 	}
 
 	public String getItemFieldId() {
@@ -169,16 +156,15 @@ public class ShoppingItemFieldModel extends BaseModel {
 		}
 	}
 
-	public BaseModel getProtected() {
-		return null;
-	}
-
-	public void protect() {
-	}
-
 	public Object clone() {
-		return new ShoppingItemField(getItemFieldId(), getItemId(), getName(),
-			getValues(), getDescription());
+		ShoppingItemField clone = new ShoppingItemField();
+		clone.setItemFieldId(getItemFieldId());
+		clone.setItemId(getItemId());
+		clone.setName(getName());
+		clone.setValues(getValues());
+		clone.setDescription(getDescription());
+
+		return clone;
 	}
 
 	public int compareTo(Object obj) {

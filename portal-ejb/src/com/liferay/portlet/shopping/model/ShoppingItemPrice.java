@@ -37,20 +37,6 @@ public class ShoppingItemPrice extends ShoppingItemPriceModel {
 	public static final int STATUS_INACTIVE = 0;
 
 	public ShoppingItemPrice() {
-		super();
-	}
-
-	public ShoppingItemPrice(String itemPriceId) {
-		super(itemPriceId);
-	}
-
-	public ShoppingItemPrice(String itemPriceId, String itemId, int minQuantity,
-							 int maxQuantity, double price, double discount,
-							 boolean taxable, double shipping,
-							 boolean useShippingFormula, int status) {
-
-		super(itemPriceId, itemId, minQuantity, maxQuantity, price, discount,
-			  taxable, shipping, useShippingFormula, status);
 	}
 
 }

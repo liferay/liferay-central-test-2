@@ -940,8 +940,10 @@
 		<id name="cartId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" />
 		<property name="companyId" />
 		<property name="userId" />
+		<property name="userName" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
 		<property name="itemIds" />
@@ -954,18 +956,25 @@
 		<id name="categoryId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" />
 		<property name="companyId" />
+		<property name="userId" />
+		<property name="userName" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
 		<property name="parentCategoryId" />
 		<property name="name" />
+		<property name="description" />
 	</class>
 	<class name="com.liferay.portlet.shopping.service.persistence.ShoppingCouponHBM" table="ShoppingCoupon">
 		<cache usage="read-write" />
 		<id name="couponId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" />
 		<property name="companyId" />
+		<property name="userId" />
+		<property name="userName" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
 		<property name="name" />
@@ -985,6 +994,8 @@
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" />
+		<property name="userId" />
+		<property name="userName" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
 		<property name="categoryId" />
@@ -992,7 +1003,6 @@
 		<property name="name" />
 		<property name="description" />
 		<property name="properties" />
-		<property name="supplierUserId" />
 		<property name="fields" column="fields_" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="fieldsQuantities" />
 		<property name="minQuantity" type="com.liferay.util.dao.hibernate.IntegerType" />
@@ -1047,8 +1057,10 @@
 		<id name="orderId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" />
 		<property name="companyId" />
 		<property name="userId" />
+		<property name="userName" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
 		<property name="tax" type="com.liferay.util.dao.hibernate.DoubleType" />
@@ -1105,7 +1117,6 @@
 		<property name="name" />
 		<property name="description" />
 		<property name="properties" />
-		<property name="supplierUserId" />
 		<property name="price" type="com.liferay.util.dao.hibernate.DoubleType" />
 		<property name="quantity" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="shippedDate" />

@@ -49,8 +49,8 @@ import com.liferay.portlet.journal.service.spring.JournalStructureLocalServiceUt
 import com.liferay.portlet.journal.service.spring.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
-import com.liferay.portlet.shopping.service.spring.ShoppingCategoryServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingItemServiceUtil;
+import com.liferay.portlet.shopping.service.spring.ShoppingCategoryLocalServiceUtil;
+import com.liferay.portlet.shopping.service.spring.ShoppingItemLocalServiceUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
@@ -512,7 +512,7 @@ public class ExportAction extends Action {
 	protected void insertDataShopping(ZipWriter zipWriter) throws Exception {
 		StringBuffer sb = new StringBuffer();
 
-		Iterator itr = ShoppingCategoryServiceUtil.getCategories(
+		Iterator itr = ShoppingCategoryLocalServiceUtil.getCategories(
 			COMPANY_ID).iterator();
 
 		while (itr.hasNext()) {
@@ -534,7 +534,7 @@ public class ExportAction extends Action {
 
 		sb.append("\n");
 
-		itr = ShoppingItemServiceUtil.getItems(COMPANY_ID).iterator();
+		itr = ShoppingItemLocalServiceUtil.getItems(COMPANY_ID).iterator();
 
 		while (itr.hasNext()) {
 			ShoppingItem item = (ShoppingItem)itr.next();
@@ -542,12 +542,11 @@ public class ExportAction extends Action {
 			sb.append("insert into ShoppingItem (");
 			sb.append("itemId, companyId, createDate, modifiedDate, ");
 			sb.append("categoryId, sku, name, description, properties, ");
-			sb.append("supplierUserId, fields_, fieldsQuantities, ");
-			sb.append("minQuantity, maxQuantity, price, discount, taxable, ");
-			sb.append("shipping, useShippingFormula, requiresShipping, ");
-			sb.append("stockQuantity, featured_, sale_, smallImage, ");
-			sb.append("smallImageURL, mediumImage, mediumImageURL, ");
-			sb.append("largeImage, largeImageURL");
+			sb.append("fields_, fieldsQuantities, minQuantity, maxQuantity, ");
+			sb.append("price, discount, taxable, shipping, ");
+			sb.append("useShippingFormula, requiresShipping, stockQuantity, ");
+			sb.append("featured_, sale_, smallImage, smallImageURL, ");
+			sb.append("mediumImage, mediumImageURL, largeImage, largeImageURL");
 			sb.append(") values (");
 			addColumn(sb, item.getItemId());
 			addColumn(sb, item.getCompanyId());
@@ -558,7 +557,6 @@ public class ExportAction extends Action {
 			addColumn(sb, item.getName());
 			addColumn(sb, item.getDescription());
 			addColumn(sb, item.getProperties());
-			addColumn(sb, item.getSupplierUserId());
 			addColumn(sb, item.getFields());
 			addColumn(sb, item.getFieldsQuantities());
 			addColumn(sb, item.getMinQuantity());

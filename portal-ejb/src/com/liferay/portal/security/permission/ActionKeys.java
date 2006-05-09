@@ -35,6 +35,8 @@ public class ActionKeys {
 
 	public static final String ADD_CATEGORY = "ADD_CATEGORY";
 
+	public static final String ADD_COUPON = "ADD_COUPON";
+
 	public static final String ADD_DISCUSSION = "ADD_DISCUSSION";
 
 	public static final String ADD_DOCUMENT = "ADD_DOCUMENT";
@@ -46,6 +48,8 @@ public class ActionKeys {
 	public static final String ADD_FOLDER = "ADD_FOLDER";
 
 	public static final String ADD_IMAGE = "ADD_IMAGE";
+
+	public static final String ADD_ITEM = "ADD_ITEM";
 
 	public static final String ADD_MESSAGE = "ADD_MESSAGE";
 
@@ -77,7 +81,11 @@ public class ActionKeys {
 
 	public static final String EXPIRE = "EXPIRE";
 
+	public static final String MANAGE_COUPONS = "MANAGE_COUPONS";
+
 	public static final String MANAGE_LAYOUTS = "MANAGE_LAYOUTS";
+
+	public static final String MANAGE_ORDERS = "MANAGE_ORDERS";
 
 	public static final String PERMISSIONS = "PERMISSIONS";
 

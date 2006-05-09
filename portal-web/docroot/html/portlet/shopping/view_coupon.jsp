@@ -25,54 +25,15 @@
 <%@ include file="/html/portlet/shopping/init.jsp" %>
 
 <%
-String couponId = ParamUtil.getString(request, "coupon_id");
-
-ShoppingCoupon coupon = null;
-
-try {
-	coupon = ShoppingCouponServiceUtil.getCoupon(couponId);
-}
-catch (NoSuchCouponException nsce) {
-}
+ShoppingCoupon coupon = (ShoppingCoupon)request.getAttribute(WebKeys.SHOPPING_COUPON);
 %>
 
-<table>
-<tr>
-	<td>
-		<font class="portlet-font" style="font-size: x-small;">
-		<b><%= couponId %></b>
-		</font>
-	</td>
-</tr>
-<tr>
-	<td></td>
-</tr>
+<b><%= coupon.getCouponId() %></b>
 
-<c:if test="<%= coupon == null %>">
-	<tr>
-		<td>
-			<font class="portlet-msg-error" style="font-size: x-small;">
-			<%= LanguageUtil.get(pageContext, "the-coupon-could-not-be-found") %>
-			</font>
-		</td>
-	</tr>
-</c:if>
+<br><br>
 
-<c:if test="<%= coupon != null %>">
-	<tr>
-		<td>
-			<font class="portlet-font" style="font-size: x-small;">
-			<b><%= coupon.getName() %></b>
-			</font>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<font class="portlet-font" style="font-size: x-small;">
-			<%= coupon.getDescription() %>
-			</font>
-		</td>
-	</tr>
-</c:if>
+<%= coupon.getName() %>
 
-</table>
+<br><br>
+
+<%= coupon.getDescription() %>

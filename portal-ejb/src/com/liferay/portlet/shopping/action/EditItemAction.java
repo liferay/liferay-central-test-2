@@ -26,7 +26,6 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.shopping.DuplicateItemSKUException;
 import com.liferay.portlet.shopping.ItemLargeImageNameException;
 import com.liferay.portlet.shopping.ItemLargeImageSizeException;
@@ -38,7 +37,6 @@ import com.liferay.portlet.shopping.ItemSmallImageNameException;
 import com.liferay.portlet.shopping.ItemSmallImageSizeException;
 import com.liferay.portlet.shopping.NoSuchCategoryException;
 import com.liferay.portlet.shopping.NoSuchItemException;
-import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.service.spring.ShoppingItemServiceUtil;
@@ -55,11 +53,11 @@ import java.util.List;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletURL;
-
-import javax.servlet.jsp.PageContext;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
@@ -75,227 +73,194 @@ public class EditItemAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		String cmd = req.getParameter(Constants.CMD);
+		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-		if ((cmd != null) &&
-			(cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE))) {
-
-			try {
-				ActionUtil.getItem(req);
-
-				_updateItem(req, res);
+		try {
+			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
+				updateItem(req);
 			}
-			catch (Exception e) {
-				if (e != null &&
-					e instanceof DuplicateItemSKUException ||
-					e instanceof ItemLargeImageNameException ||
-					e instanceof ItemLargeImageSizeException ||
-					e instanceof ItemMediumImageNameException ||
-					e instanceof ItemMediumImageSizeException ||
-					e instanceof ItemNameException ||
-					e instanceof ItemSKUException ||
-					e instanceof ItemSmallImageNameException ||
-					e instanceof ItemSmallImageSizeException) {
+			else if (cmd.equals(Constants.DELETE)) {
+				deleteItem(req);
+			}
 
-					SessionErrors.add(req, e.getClass().getName());
-
-					setForward(req, "portlet.shopping.edit_item");
-				}
-				else if (e != null &&
-						 e instanceof NoSuchCategoryException ||
-						 e instanceof NoSuchItemException ||
-						 e instanceof PrincipalException) {
-
-					SessionErrors.add(req, e.getClass().getName());
-
-					setForward(req, "portlet.shopping.error");
-				}
-				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
-
-					setForward(req, Constants.COMMON_ERROR);
-				}
+			if (Validator.isNotNull(cmd)) {
+				sendRedirect(req, res);
 			}
 		}
-		else if (cmd != null && cmd.equals(Constants.DELETE)) {
-			try {
-				_deleteItem(req, res);
+		catch (Exception e) {
+			if (e != null &&
+				e instanceof NoSuchCategoryException ||
+				e instanceof NoSuchItemException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(req, e.getClass().getName());
+
+				setForward(req, "portlet.shopping.error");
 			}
-			catch (Exception e) {
-				if (e != null &&
-					e instanceof NoSuchItemException ||
-					e instanceof PrincipalException) {
+			else if (e != null &&
+					 e instanceof DuplicateItemSKUException ||
+					 e instanceof ItemLargeImageNameException ||
+					 e instanceof ItemLargeImageSizeException ||
+					 e instanceof ItemMediumImageNameException ||
+					 e instanceof ItemMediumImageSizeException ||
+					 e instanceof ItemNameException ||
+					 e instanceof ItemSKUException ||
+					 e instanceof ItemSmallImageNameException ||
+					 e instanceof ItemSmallImageSizeException) {
 
-					SessionErrors.add(req, e.getClass().getName());
-
-					setForward(req, "portlet.shopping.error");
-				}
-				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
-
-					setForward(req, Constants.COMMON_ERROR);
-				}
+				SessionErrors.add(req, e.getClass().getName());
 			}
-		}
-		else if (cmd != null && cmd.equals(Constants.EDIT)) {
-			try {
-				ActionUtil.getItem(req);
-
-				setForward(req, "portlet.shopping.edit_item");
+			else {
+				throw e;
 			}
-			catch (Exception e) {
-				if (e != null &&
-					e instanceof NoSuchItemException ||
-					e instanceof PrincipalException) {
-
-					SessionErrors.add(req, e.getClass().getName());
-
-					setForward(req, "portlet.shopping.error");
-				}
-				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
-
-					setForward(req, Constants.COMMON_ERROR);
-				}
-			}
-		}
-		else {
-			setForward(req, "portlet.shopping.edit_item");
 		}
 	}
 
-	private void _deleteItem(ActionRequest req, ActionResponse res)
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		String itemId = ParamUtil.getString(req, "item_id");
+		try {
+			ActionUtil.getItem(req);
+		}
+		catch (Exception e) {
+			if (e != null &&
+				e instanceof NoSuchItemException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(req, e.getClass().getName());
+
+				return mapping.findForward("portlet.shopping.error");
+			}
+			else {
+				throw e;
+			}
+		}
+
+		return mapping.findForward(
+			getForward(req, "portlet.shopping.edit_item"));
+	}
+
+	protected void deleteItem(ActionRequest req) throws Exception {
+		String itemId = ParamUtil.getString(req, "itemId");
 
 		ShoppingItemServiceUtil.deleteItem(itemId);
-
-		// Send redirect
-
-		res.sendRedirect(ParamUtil.getString(req, "redirect"));
 	}
 
-	private void _updateItem(ActionRequest req, ActionResponse res)
-		throws Exception {
-
+	protected void updateItem(ActionRequest req) throws Exception {
 		UploadPortletRequest uploadReq =
 			PortalUtil.getUploadPortletRequest(req);
 
-		String itemId = ParamUtil.getString(uploadReq, "item_id");
+		String itemId = ParamUtil.getString(uploadReq, "itemId");
 
-		String categoryId = ParamUtil.getString(uploadReq, "category_id");
-		String sku = ParamUtil.getString(uploadReq, "item_sku");
-		String name = ParamUtil.getString(uploadReq, "item_name");
-		String description = ParamUtil.getString(uploadReq, "item_desc");
-		String properties = ParamUtil.getString(uploadReq, "item_props");
-		String supplierUserId = ParamUtil.getString(
-			uploadReq, "item_supplier_user_id");
+		String categoryId = ParamUtil.getString(uploadReq, "categoryId");
+		String sku = ParamUtil.getString(uploadReq, "sku");
+		String name = ParamUtil.getString(uploadReq, "name");
+		String description = ParamUtil.getString(uploadReq, "description");
+		String properties = ParamUtil.getString(uploadReq, "properties");
 
-		int numberOfFields = ParamUtil.get(uploadReq, "n_of_fields", 1);
+		int fieldsCount = ParamUtil.getInteger(uploadReq, "fieldsCount", 1);
 
 		List itemFields = new ArrayList();
 
-		for (int i = 0; i < numberOfFields; i ++) {
-			String fieldName = ParamUtil.getString(
-				uploadReq, "item_" + i + "_field_name");
+		for (int i = 0; i < fieldsCount; i ++) {
+			String fieldName = ParamUtil.getString(uploadReq, "fieldName" + i);
 			String fieldValues = ParamUtil.getString(
-				uploadReq, "item_" + i + "_field_values");
+				uploadReq, "fieldValues" + i);
 			String fieldDescription = ParamUtil.getString(
-				uploadReq, "item_" + i + "_field_desc");
+				uploadReq, "fieldDescription" + i);
 
-			ShoppingItemField itemField = new ShoppingItemField(
-				null, null, fieldName, fieldValues, fieldDescription);
+			ShoppingItemField itemField = new ShoppingItemField();
+
+			itemField.setName(fieldName);
+			itemField.setValues(fieldValues);
+			itemField.setDescription(fieldDescription);
 
 			itemFields.add(itemField);
 		}
 
 		String fieldsQuantities = ParamUtil.getString(
-			uploadReq, "item_fields_quantities");
+			uploadReq, "fieldsQuantities");
 
-		int numberOfPrices = ParamUtil.get(uploadReq, "n_of_prices", 1);
+		int pricesCount = ParamUtil.getInteger(uploadReq, "pricesCount", 1);
 
 		List itemPrices = new ArrayList();
 
-		for (int i = 0; i < numberOfPrices; i ++) {
-			int minQuantity = ParamUtil.get(
-				uploadReq, "item_" + i + "_min_quantity", 0);
-			int maxQuantity = ParamUtil.get(
-				uploadReq, "item_" + i + "_max_quantity", 0);
-			double price = ParamUtil.get(
-				uploadReq, "item_" + i + "_price", 0.0);
-			double discount = ParamUtil.get(
-				uploadReq, "item_" + i + "_discount", 0.0) / 100;
-			boolean taxable = ParamUtil.get(
-				uploadReq, "item_" + i + "_taxable", false);
-			double shipping = ParamUtil.get(
-				uploadReq, "item_" + i + "_shipping", 0.0);
-			boolean useShippingFormula = ParamUtil.get(
-				uploadReq, "item_" + i + "_u_s_f", false);
-			boolean active = ParamUtil.get(
-				uploadReq, "item_" + i + "_active", false);
-			int defaultPrice = ParamUtil.get(
-				uploadReq, "item_default_price", 0);
+		for (int i = 0; i < pricesCount; i ++) {
+			int minQuantity = ParamUtil.getInteger(
+				uploadReq, "minQuantity" + i);
+			int maxQuantity = ParamUtil.getInteger(
+				uploadReq, "maxQuantity" + i);
+			double price = ParamUtil.getDouble(uploadReq, "price" + i);
+			double discount = ParamUtil.getDouble(
+				uploadReq, "discount" + i) / 100;
+			boolean taxable = ParamUtil.getBoolean(uploadReq, "taxable" + i);
+			double shipping = ParamUtil.getDouble(uploadReq, "shipping" + i);
+			boolean useShippingFormula = ParamUtil.getBoolean(
+				uploadReq, "useShippingFormula" + i);
+			boolean active = ParamUtil.getBoolean(uploadReq, "active" + i);
+			int defaultPrice = ParamUtil.getInteger(uploadReq, "defaultPrice");
 
 			int status = ShoppingItemPrice.STATUS_ACTIVE_DEFAULT;
-			if (defaultPrice != i && active) {
+
+			if ((defaultPrice != i) && active) {
 				status = ShoppingItemPrice.STATUS_ACTIVE;
 			}
-			else if (defaultPrice != i && !active) {
+			else if ((defaultPrice != i) && !active) {
 				status = ShoppingItemPrice.STATUS_INACTIVE;
 			}
 
-			ShoppingItemPrice itemPrice = new ShoppingItemPrice(
-				null, null, minQuantity, maxQuantity, price, discount,
-				taxable, shipping, useShippingFormula, status);
+			ShoppingItemPrice itemPrice = new ShoppingItemPrice();
+
+			itemPrice.setMinQuantity(minQuantity);
+			itemPrice.setMaxQuantity(maxQuantity);
+			itemPrice.setPrice(price);
+			itemPrice.setDiscount(discount);
+			itemPrice.setTaxable(taxable);
+			itemPrice.setShipping(shipping);
+			itemPrice.setUseShippingFormula(useShippingFormula);
+			itemPrice.setStatus(status);
 
 			itemPrices.add(itemPrice);
 		}
 
-		boolean requiresShipping = ParamUtil.get(uploadReq, "item_r_s", true);
-		int stockQuantity = ParamUtil.get(uploadReq, "item_stock_quantity", 0);
+		boolean requiresShipping = ParamUtil.getBoolean(
+			uploadReq, "requiresShipping");
+		int stockQuantity = ParamUtil.getInteger(uploadReq, "stockQuantity");
 
-		boolean featured = ParamUtil.get(uploadReq, "item_featured", true);
+		boolean featured = ParamUtil.getBoolean(uploadReq, "featured");
 		Boolean sale = null;
 
-		boolean smallImage = ParamUtil.get(
-			uploadReq, "item_small_image", false);
-		String smallImageURL = ParamUtil.getString(
-			uploadReq, "item_small_image_url");
-		File smallFile = uploadReq.getFile("item_small_i");
+		boolean smallImage = ParamUtil.getBoolean(uploadReq, "smallImage");
+		String smallImageURL = ParamUtil.getString(uploadReq, "smallImageURL");
+		File smallFile = uploadReq.getFile("smallFile");
 
-		boolean mediumImage = ParamUtil.get(
-			uploadReq, "item_medium_image", false);
+		boolean mediumImage = ParamUtil.getBoolean(uploadReq, "mediumImage");
 		String mediumImageURL = ParamUtil.getString(
-			uploadReq, "item_medium_image_url");
-		File mediumFile = uploadReq.getFile("item_medium_i");
+			uploadReq, "mediumImageURL");
+		File mediumFile = uploadReq.getFile("mediumFile");
 
-		boolean largeImage = ParamUtil.get(
-			uploadReq, "item_large_image", false);
-		String largeImageURL = ParamUtil.getString(
-			uploadReq, "item_large_image_url");
-		File largeFile = uploadReq.getFile("item_large_i");
+		boolean largeImage = ParamUtil.getBoolean(uploadReq, "largeImage");
+		String largeImageURL = ParamUtil.getString(uploadReq, "largeImageURL");
+		File largeFile = uploadReq.getFile("largeFile");
+
+		boolean addCommunityPermissions = ParamUtil.getBoolean(
+			req, "addCommunityPermissions");
+		boolean addGuestPermissions = ParamUtil.getBoolean(
+			req, "addGuestPermissions");
 
 		if (Validator.isNull(itemId)) {
 
 			// Add item
 
-			ShoppingItem item = ShoppingItemServiceUtil.addItem(
-				categoryId, sku, name, description, properties, supplierUserId,
+			ShoppingItemServiceUtil.addItem(
+				categoryId, sku, name, description, properties,
 				fieldsQuantities, requiresShipping, stockQuantity, featured,
 				sale, smallImage, smallImageURL, smallFile, mediumImage,
 				mediumImageURL, mediumFile, largeImage, largeImageURL,
-				largeFile, itemFields, itemPrices);
-
-			// Send redirect
-
-			PortletURL portletURL = ((ActionResponseImpl)res).createRenderURL();
-
-			portletURL.setParameter(
-				"struts_action", "/shopping/view_item");
-			portletURL.setParameter("item_id", item.getItemId());
-
-			res.sendRedirect(portletURL.toString());
+				largeFile, itemFields, itemPrices, addCommunityPermissions,
+				addGuestPermissions);
 		}
 		else {
 
@@ -303,14 +268,10 @@ public class EditItemAction extends PortletAction {
 
 			ShoppingItemServiceUtil.updateItem(
 				itemId, categoryId, sku, name, description, properties,
-				supplierUserId, fieldsQuantities, requiresShipping,
-				stockQuantity, featured, sale, smallImage, smallImageURL,
-				smallFile, mediumImage, mediumImageURL, mediumFile, largeImage,
-				largeImageURL, largeFile, itemFields, itemPrices);
-
-			// Send redirect
-
-			res.sendRedirect(ParamUtil.getString(req, "redirect"));
+				fieldsQuantities, requiresShipping, stockQuantity, featured,
+				sale, smallImage, smallImageURL, smallFile, mediumImage,
+				mediumImageURL, mediumFile, largeImage, largeImageURL,
+				largeFile, itemFields, itemPrices);
 		}
 	}
 

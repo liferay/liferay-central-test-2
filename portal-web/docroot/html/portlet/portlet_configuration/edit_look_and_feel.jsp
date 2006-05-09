@@ -271,7 +271,7 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 
 				break;
 			}
-			
+
 			if (list[i].className.match("portlet-container")) {
 				this.container = list[i].style;
 			}

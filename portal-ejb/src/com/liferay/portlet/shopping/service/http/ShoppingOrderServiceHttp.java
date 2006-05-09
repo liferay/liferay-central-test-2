@@ -43,329 +43,25 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class ShoppingOrderServiceHttp {
-	public static void addNote(HttpPrincipal httpPrincipal,
-		java.lang.String orderId, java.lang.String noteContent)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = orderId;
-
-			if (orderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = noteContent;
-
-			if (noteContent == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"addNote", new Object[] { paramObj0, paramObj1 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static void completeOrder(HttpPrincipal httpPrincipal,
-		java.lang.String orderId, java.lang.String ppTxnId,
-		java.lang.String ppPaymentStatus, double ppPaymentGross,
-		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = orderId;
-
-			if (orderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = ppTxnId;
-
-			if (ppTxnId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = ppPaymentStatus;
-
-			if (ppPaymentStatus == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new DoubleWrapper(ppPaymentGross);
-			Object paramObj4 = ppReceiverEmail;
-
-			if (ppReceiverEmail == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = ppPayerEmail;
-
-			if (ppPayerEmail == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"completeOrder",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
-					});
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static void deleteNote(HttpPrincipal httpPrincipal,
-		java.lang.String orderId, java.lang.String noteId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = orderId;
-
-			if (orderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = noteId;
-
-			if (noteId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"deleteNote", new Object[] { paramObj0, paramObj1 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
 	public static void deleteOrder(HttpPrincipal httpPrincipal,
-		java.lang.String orderId)
+		java.lang.String plid, java.lang.String orderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = orderId;
+			Object paramObj0 = plid;
 
-			if (orderId == null) {
+			if (plid == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"deleteOrder", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static void deleteOrder(HttpPrincipal httpPrincipal,
-		com.liferay.portlet.shopping.model.ShoppingOrder order)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = order;
-
-			if (order == null) {
-				paramObj0 = new NullWrapper(
-						"com.liferay.portlet.shopping.model.ShoppingOrder");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"deleteOrder", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder getLatestOrder(
-		HttpPrincipal httpPrincipal)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"getLatestOrder", new Object[0]);
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return (com.liferay.portlet.shopping.model.ShoppingOrder)returnObj;
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static java.util.List getNotes(HttpPrincipal httpPrincipal,
-		java.lang.String orderId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = orderId;
+			Object paramObj1 = orderId;
 
 			if (orderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"getNotes", new Object[] { paramObj0 });
+					"deleteOrder", new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;
 
 			try {
@@ -382,8 +78,6 @@ public class ShoppingOrderServiceHttp {
 
 				throw e;
 			}
-
-			return (java.util.List)returnObj;
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));
@@ -401,18 +95,25 @@ public class ShoppingOrderServiceHttp {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
-		HttpPrincipal httpPrincipal, java.lang.String orderId)
+		HttpPrincipal httpPrincipal, java.lang.String plid,
+		java.lang.String orderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = orderId;
+			Object paramObj0 = plid;
 
-			if (orderId == null) {
+			if (plid == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj1 = orderId;
+
+			if (orderId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"getOrder", new Object[] { paramObj0 });
+					"getOrder", new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;
 
 			try {
@@ -447,445 +148,9 @@ public class ShoppingOrderServiceHttp {
 		}
 	}
 
-	public static java.util.List getOrders(HttpPrincipal httpPrincipal,
-		java.lang.String ppPaymentStatus)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = ppPaymentStatus;
-
-			if (ppPaymentStatus == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"getOrders", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return (java.util.List)returnObj;
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static java.util.List getOrders(HttpPrincipal httpPrincipal,
-		java.lang.String ppPaymentStatus, int begin, int end)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = ppPaymentStatus;
-
-			if (ppPaymentStatus == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = new IntegerWrapper(begin);
-			Object paramObj2 = new IntegerWrapper(end);
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"getOrders",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return (java.util.List)returnObj;
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static java.util.List getOrders(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String ppPaymentStatus)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = ppPaymentStatus;
-
-			if (ppPaymentStatus == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"getOrders", new Object[] { paramObj0, paramObj1 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return (java.util.List)returnObj;
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static java.util.List getOrders(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String ppPaymentStatus,
-		int begin, int end)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = ppPaymentStatus;
-
-			if (ppPaymentStatus == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new IntegerWrapper(begin);
-			Object paramObj3 = new IntegerWrapper(end);
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"getOrders",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return (java.util.List)returnObj;
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static int getOrdersSize(HttpPrincipal httpPrincipal,
-		java.lang.String ppPaymentStatus)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = ppPaymentStatus;
-
-			if (ppPaymentStatus == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"getOrdersSize", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return ((Integer)returnObj).intValue();
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static int getOrdersSize(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String ppPaymentStatus)
-		throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = ppPaymentStatus;
-
-			if (ppPaymentStatus == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"getOrdersSize", new Object[] { paramObj0, paramObj1 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return ((Integer)returnObj).intValue();
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder saveLatestOrder(
-		HttpPrincipal httpPrincipal,
-		com.liferay.portlet.shopping.model.ShoppingCart cart)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = cart;
-
-			if (cart == null) {
-				paramObj0 = new NullWrapper(
-						"com.liferay.portlet.shopping.model.ShoppingCart");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"saveLatestOrder", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return (com.liferay.portlet.shopping.model.ShoppingOrder)returnObj;
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static void sendOrderEmail(HttpPrincipal httpPrincipal,
-		java.lang.String orderId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = orderId;
-
-			if (orderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"sendOrderEmail", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static void sendShippingEmail(HttpPrincipal httpPrincipal,
-		java.lang.String orderId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = orderId;
-
-			if (orderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"sendShippingEmail", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder updateLatestOrder(
-		HttpPrincipal httpPrincipal, java.lang.String billingFirstName,
+	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
+		HttpPrincipal httpPrincipal, java.lang.String orderId,
+		java.lang.String plid, java.lang.String billingFirstName,
 		java.lang.String billingLastName, java.lang.String billingEmailAddress,
 		java.lang.String billingCompany, java.lang.String billingStreet,
 		java.lang.String billingCity, java.lang.String billingState,
@@ -902,380 +167,169 @@ public class ShoppingOrderServiceHttp {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = billingFirstName;
-
-			if (billingFirstName == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = billingLastName;
-
-			if (billingLastName == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = billingEmailAddress;
-
-			if (billingEmailAddress == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = billingCompany;
-
-			if (billingCompany == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = billingStreet;
-
-			if (billingStreet == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = billingCity;
-
-			if (billingCity == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = billingState;
-
-			if (billingState == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = billingZip;
-
-			if (billingZip == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = billingCountry;
-
-			if (billingCountry == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = billingPhone;
-
-			if (billingPhone == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj10 = new BooleanWrapper(shipToBilling);
-			Object paramObj11 = shippingFirstName;
-
-			if (shippingFirstName == null) {
-				paramObj11 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj12 = shippingLastName;
-
-			if (shippingLastName == null) {
-				paramObj12 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj13 = shippingEmailAddress;
-
-			if (shippingEmailAddress == null) {
-				paramObj13 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj14 = shippingCompany;
-
-			if (shippingCompany == null) {
-				paramObj14 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj15 = shippingStreet;
-
-			if (shippingStreet == null) {
-				paramObj15 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj16 = shippingCity;
-
-			if (shippingCity == null) {
-				paramObj16 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj17 = shippingState;
-
-			if (shippingState == null) {
-				paramObj17 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj18 = shippingZip;
-
-			if (shippingZip == null) {
-				paramObj18 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj19 = shippingCountry;
-
-			if (shippingCountry == null) {
-				paramObj19 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj20 = shippingPhone;
-
-			if (shippingPhone == null) {
-				paramObj20 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj21 = ccName;
-
-			if (ccName == null) {
-				paramObj21 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj22 = ccType;
-
-			if (ccType == null) {
-				paramObj22 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj23 = ccNumber;
-
-			if (ccNumber == null) {
-				paramObj23 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj24 = new IntegerWrapper(ccExpMonth);
-			Object paramObj25 = new IntegerWrapper(ccExpYear);
-			Object paramObj26 = ccVerNumber;
-
-			if (ccVerNumber == null) {
-				paramObj26 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj27 = comments;
-
-			if (comments == null) {
-				paramObj27 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"updateLatestOrder",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19, paramObj20, paramObj21,
-						paramObj22, paramObj23, paramObj24, paramObj25,
-						paramObj26, paramObj27
-					});
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return (com.liferay.portlet.shopping.model.ShoppingOrder)returnObj;
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		HttpPrincipal httpPrincipal, java.lang.String orderId,
-		java.lang.String billingFirstName, java.lang.String billingLastName,
-		java.lang.String billingEmailAddress, java.lang.String billingCompany,
-		java.lang.String billingStreet, java.lang.String billingCity,
-		java.lang.String billingState, java.lang.String billingZip,
-		java.lang.String billingCountry, java.lang.String billingPhone,
-		boolean shipToBilling, java.lang.String shippingFirstName,
-		java.lang.String shippingLastName,
-		java.lang.String shippingEmailAddress,
-		java.lang.String shippingCompany, java.lang.String shippingStreet,
-		java.lang.String shippingCity, java.lang.String shippingState,
-		java.lang.String shippingZip, java.lang.String shippingCountry,
-		java.lang.String shippingPhone, java.lang.String ccName,
-		java.lang.String ccType, java.lang.String ccNumber, int ccExpMonth,
-		int ccExpYear, java.lang.String ccVerNumber, java.lang.String comments)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
 			Object paramObj0 = orderId;
 
 			if (orderId == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = billingFirstName;
+			Object paramObj1 = plid;
 
-			if (billingFirstName == null) {
+			if (plid == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = billingLastName;
+			Object paramObj2 = billingFirstName;
 
-			if (billingLastName == null) {
+			if (billingFirstName == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = billingEmailAddress;
+			Object paramObj3 = billingLastName;
 
-			if (billingEmailAddress == null) {
+			if (billingLastName == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = billingCompany;
+			Object paramObj4 = billingEmailAddress;
 
-			if (billingCompany == null) {
+			if (billingEmailAddress == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = billingStreet;
+			Object paramObj5 = billingCompany;
 
-			if (billingStreet == null) {
+			if (billingCompany == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = billingCity;
+			Object paramObj6 = billingStreet;
 
-			if (billingCity == null) {
+			if (billingStreet == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = billingState;
+			Object paramObj7 = billingCity;
 
-			if (billingState == null) {
+			if (billingCity == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = billingZip;
+			Object paramObj8 = billingState;
 
-			if (billingZip == null) {
+			if (billingState == null) {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = billingCountry;
+			Object paramObj9 = billingZip;
 
-			if (billingCountry == null) {
+			if (billingZip == null) {
 				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj10 = billingPhone;
+			Object paramObj10 = billingCountry;
 
-			if (billingPhone == null) {
+			if (billingCountry == null) {
 				paramObj10 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj11 = new BooleanWrapper(shipToBilling);
-			Object paramObj12 = shippingFirstName;
+			Object paramObj11 = billingPhone;
 
-			if (shippingFirstName == null) {
-				paramObj12 = new NullWrapper("java.lang.String");
+			if (billingPhone == null) {
+				paramObj11 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj13 = shippingLastName;
+			Object paramObj12 = new BooleanWrapper(shipToBilling);
+			Object paramObj13 = shippingFirstName;
 
-			if (shippingLastName == null) {
+			if (shippingFirstName == null) {
 				paramObj13 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj14 = shippingEmailAddress;
+			Object paramObj14 = shippingLastName;
 
-			if (shippingEmailAddress == null) {
+			if (shippingLastName == null) {
 				paramObj14 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj15 = shippingCompany;
+			Object paramObj15 = shippingEmailAddress;
 
-			if (shippingCompany == null) {
+			if (shippingEmailAddress == null) {
 				paramObj15 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj16 = shippingStreet;
+			Object paramObj16 = shippingCompany;
 
-			if (shippingStreet == null) {
+			if (shippingCompany == null) {
 				paramObj16 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj17 = shippingCity;
+			Object paramObj17 = shippingStreet;
 
-			if (shippingCity == null) {
+			if (shippingStreet == null) {
 				paramObj17 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj18 = shippingState;
+			Object paramObj18 = shippingCity;
 
-			if (shippingState == null) {
+			if (shippingCity == null) {
 				paramObj18 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj19 = shippingZip;
+			Object paramObj19 = shippingState;
 
-			if (shippingZip == null) {
+			if (shippingState == null) {
 				paramObj19 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj20 = shippingCountry;
+			Object paramObj20 = shippingZip;
 
-			if (shippingCountry == null) {
+			if (shippingZip == null) {
 				paramObj20 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj21 = shippingPhone;
+			Object paramObj21 = shippingCountry;
 
-			if (shippingPhone == null) {
+			if (shippingCountry == null) {
 				paramObj21 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj22 = ccName;
+			Object paramObj22 = shippingPhone;
 
-			if (ccName == null) {
+			if (shippingPhone == null) {
 				paramObj22 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj23 = ccType;
+			Object paramObj23 = ccName;
 
-			if (ccType == null) {
+			if (ccName == null) {
 				paramObj23 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj24 = ccNumber;
+			Object paramObj24 = ccType;
 
-			if (ccNumber == null) {
+			if (ccType == null) {
 				paramObj24 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj25 = new IntegerWrapper(ccExpMonth);
-			Object paramObj26 = new IntegerWrapper(ccExpYear);
-			Object paramObj27 = ccVerNumber;
+			Object paramObj25 = ccNumber;
 
-			if (ccVerNumber == null) {
-				paramObj27 = new NullWrapper("java.lang.String");
+			if (ccNumber == null) {
+				paramObj25 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj28 = comments;
+			Object paramObj26 = new IntegerWrapper(ccExpMonth);
+			Object paramObj27 = new IntegerWrapper(ccExpYear);
+			Object paramObj28 = ccVerNumber;
+
+			if (ccVerNumber == null) {
+				paramObj28 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj29 = comments;
 
 			if (comments == null) {
-				paramObj28 = new NullWrapper("java.lang.String");
+				paramObj29 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
@@ -1287,7 +341,7 @@ public class ShoppingOrderServiceHttp {
 						paramObj14, paramObj15, paramObj16, paramObj17,
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
-						paramObj26, paramObj27, paramObj28
+						paramObj26, paramObj27, paramObj28, paramObj29
 					});
 			Object returnObj = null;
 
@@ -1325,9 +379,9 @@ public class ShoppingOrderServiceHttp {
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
 		HttpPrincipal httpPrincipal, java.lang.String orderId,
-		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
-		double ppPaymentGross, java.lang.String ppReceiverEmail,
-		java.lang.String ppPayerEmail)
+		java.lang.String plid, java.lang.String ppTxnId,
+		java.lang.String ppPaymentStatus, double ppPaymentGross,
+		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -1337,36 +391,42 @@ public class ShoppingOrderServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = ppTxnId;
+			Object paramObj1 = plid;
 
-			if (ppTxnId == null) {
+			if (plid == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = ppPaymentStatus;
+			Object paramObj2 = ppTxnId;
 
-			if (ppPaymentStatus == null) {
+			if (ppTxnId == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new DoubleWrapper(ppPaymentGross);
-			Object paramObj4 = ppReceiverEmail;
+			Object paramObj3 = ppPaymentStatus;
 
-			if (ppReceiverEmail == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
+			if (ppPaymentStatus == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = ppPayerEmail;
+			Object paramObj4 = new DoubleWrapper(ppPaymentGross);
+			Object paramObj5 = ppReceiverEmail;
+
+			if (ppReceiverEmail == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = ppPayerEmail;
 
 			if (ppPayerEmail == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
+				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
 					"updateOrder",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj5, paramObj6
 					});
 			Object returnObj = null;
 
@@ -1386,53 +446,6 @@ public class ShoppingOrderServiceHttp {
 			}
 
 			return (com.liferay.portlet.shopping.model.ShoppingOrder)returnObj;
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static boolean hasAdmin(HttpPrincipal httpPrincipal,
-		java.lang.String orderId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = orderId;
-
-			if (orderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
-					"hasAdmin", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));

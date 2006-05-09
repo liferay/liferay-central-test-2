@@ -125,139 +125,44 @@ public class ShoppingCouponUtil {
 		return getPersistence().findByPrimaryKey(couponId);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId)
+	public static java.util.List findByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId);
+		return getPersistence().findByGroupId(groupId);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
+	public static java.util.List findByGroupId(java.lang.String groupId,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end);
+		return getPersistence().findByGroupId(groupId, begin, end);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
+	public static java.util.List findByGroupId(java.lang.String groupId,
 		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end, obc);
+		return getPersistence().findByGroupId(groupId, begin, end, obc);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCoupon findByCompanyId_First(
-		java.lang.String companyId,
+	public static com.liferay.portlet.shopping.model.ShoppingCoupon findByGroupId_First(
+		java.lang.String groupId,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portlet.shopping.NoSuchCouponException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId_First(companyId, obc);
+		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCoupon findByCompanyId_Last(
-		java.lang.String companyId,
+	public static com.liferay.portlet.shopping.model.ShoppingCoupon findByGroupId_Last(
+		java.lang.String groupId,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portlet.shopping.NoSuchCouponException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId_Last(companyId, obc);
+		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCoupon[] findByCompanyId_PrevAndNext(
-		java.lang.String couponId, java.lang.String companyId,
+	public static com.liferay.portlet.shopping.model.ShoppingCoupon[] findByGroupId_PrevAndNext(
+		java.lang.String couponId, java.lang.String groupId,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portlet.shopping.NoSuchCouponException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId_PrevAndNext(couponId,
-			companyId, obc);
-	}
-
-	public static java.util.List findByC_A(java.lang.String companyId,
-		boolean active) throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_A(companyId, active);
-	}
-
-	public static java.util.List findByC_A(java.lang.String companyId,
-		boolean active, int begin, int end)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_A(companyId, active, begin, end);
-	}
-
-	public static java.util.List findByC_A(java.lang.String companyId,
-		boolean active, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_A(companyId, active, begin, end, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCoupon findByC_A_First(
-		java.lang.String companyId, boolean active,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchCouponException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByC_A_First(companyId, active, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCoupon findByC_A_Last(
-		java.lang.String companyId, boolean active,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchCouponException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByC_A_Last(companyId, active, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCoupon[] findByC_A_PrevAndNext(
-		java.lang.String couponId, java.lang.String companyId, boolean active,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchCouponException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByC_A_PrevAndNext(couponId, companyId,
-			active, obc);
-	}
-
-	public static java.util.List findByC_A_D(java.lang.String companyId,
-		boolean active, java.lang.String discountType)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_A_D(companyId, active, discountType);
-	}
-
-	public static java.util.List findByC_A_D(java.lang.String companyId,
-		boolean active, java.lang.String discountType, int begin, int end)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_A_D(companyId, active, discountType,
-			begin, end);
-	}
-
-	public static java.util.List findByC_A_D(java.lang.String companyId,
-		boolean active, java.lang.String discountType, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_A_D(companyId, active, discountType,
-			begin, end, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCoupon findByC_A_D_First(
-		java.lang.String companyId, boolean active,
-		java.lang.String discountType,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchCouponException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByC_A_D_First(companyId, active,
-			discountType, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCoupon findByC_A_D_Last(
-		java.lang.String companyId, boolean active,
-		java.lang.String discountType,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchCouponException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByC_A_D_Last(companyId, active,
-			discountType, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCoupon[] findByC_A_D_PrevAndNext(
-		java.lang.String couponId, java.lang.String companyId, boolean active,
-		java.lang.String discountType,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchCouponException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByC_A_D_PrevAndNext(couponId, companyId,
-			active, discountType, obc);
+		return getPersistence().findByGroupId_PrevAndNext(couponId, groupId, obc);
 	}
 
 	public static java.util.List findAll()
@@ -265,36 +170,14 @@ public class ShoppingCouponUtil {
 		return getPersistence().findAll();
 	}
 
-	public static void removeByCompanyId(java.lang.String companyId)
+	public static void removeByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeByCompanyId(companyId);
+		getPersistence().removeByGroupId(groupId);
 	}
 
-	public static void removeByC_A(java.lang.String companyId, boolean active)
+	public static int countByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeByC_A(companyId, active);
-	}
-
-	public static void removeByC_A_D(java.lang.String companyId,
-		boolean active, java.lang.String discountType)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByC_A_D(companyId, active, discountType);
-	}
-
-	public static int countByCompanyId(java.lang.String companyId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByCompanyId(companyId);
-	}
-
-	public static int countByC_A(java.lang.String companyId, boolean active)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_A(companyId, active);
-	}
-
-	public static int countByC_A_D(java.lang.String companyId, boolean active,
-		java.lang.String discountType)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_A_D(companyId, active, discountType);
+		return getPersistence().countByGroupId(groupId);
 	}
 
 	public static ShoppingCouponPersistence getPersistence() {

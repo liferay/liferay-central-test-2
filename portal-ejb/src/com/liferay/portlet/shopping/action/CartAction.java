@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.action;
 
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.shopping.CartMinQuantityException;
@@ -30,16 +31,24 @@ import com.liferay.portlet.shopping.CouponEndDateException;
 import com.liferay.portlet.shopping.CouponStartDateException;
 import com.liferay.portlet.shopping.NoSuchCouponException;
 import com.liferay.portlet.shopping.NoSuchItemException;
+import com.liferay.portlet.shopping.model.ShoppingCart;
+import com.liferay.portlet.shopping.model.ShoppingItem;
+import com.liferay.portlet.shopping.service.spring.ShoppingCartLocalServiceUtil;
+import com.liferay.portlet.shopping.service.spring.ShoppingItemLocalServiceUtil;
+import com.liferay.portlet.shopping.util.ShoppingUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
+import com.liferay.util.servlet.SessionMessages;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-
-import javax.servlet.jsp.PageContext;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
@@ -50,54 +59,96 @@ import org.apache.struts.action.ActionMapping;
  */
 public class CartAction extends PortletAction {
 
-	public void processAction(
+public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		String cmd = req.getParameter("shopping_" + Constants.CMD);
+		try {
+			updateCart(req);
 
-		if ((cmd != null) &&
-			(cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE))) {
+			String redirect = ParamUtil.getString(req, "redirect");
 
-			try {
-				ActionUtil.updateCart(req, res);
-
-				// Send redirect
-
-				res.sendRedirect(ParamUtil.getString(req, "redirect"));
+			if (Validator.isNull(redirect)) {
+				SessionMessages.add(req, "request_processed");
 			}
-			catch (Exception e) {
-				if (e != null &&
-					e instanceof CartMinQuantityException ||
-					e instanceof CouponActiveException ||
-					e instanceof CouponEndDateException ||
-					e instanceof CouponStartDateException ||
-					e instanceof NoSuchCouponException) {
+			else {
+				res.sendRedirect(redirect);
+			}
+		}
+		catch (Exception e) {
+			if (e != null &&
+				e instanceof NoSuchItemException ||
+				e instanceof PrincipalException) {
 
-					SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(req, e.getClass().getName());
 
-					req.setAttribute(e.getClass().getName(), e);
+				setForward(req, "portlet.shopping.error");
+			}
+			else if (e != null &&
+					 e instanceof CartMinQuantityException ||
+					 e instanceof CouponActiveException ||
+					 e instanceof CouponEndDateException ||
+					 e instanceof CouponStartDateException ||
+					 e instanceof NoSuchCouponException) {
 
-					setForward(req, "portlet.shopping.cart");
+				SessionErrors.add(req, e.getClass().getName(), e);
+			}
+			else {
+				throw e;
+			}
+		}
+	}
+
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			RenderRequest req, RenderResponse res)
+		throws Exception {
+
+		return mapping.findForward(getForward(req, "portlet.shopping.cart"));
+	}
+
+	protected void updateCart(ActionRequest req) throws Exception {
+		String cmd = ParamUtil.getString(req, Constants.CMD);
+
+		ShoppingCart cart = ShoppingUtil.getCart(req);
+
+		if (cmd.equals(Constants.ADD)) {
+			String itemId = ParamUtil.getString(req, "itemId");
+
+			String fields = ParamUtil.getString(req, "fields");
+
+			if (Validator.isNotNull(fields)) {
+				fields = "|" + fields;
+			}
+
+			ShoppingItem item = ShoppingItemLocalServiceUtil.getItem(itemId);
+
+			if (item.getMinQuantity() > 0) {
+				for (int i = 0; i < item.getMinQuantity(); i++) {
+					cart.addItemId(itemId, fields);
 				}
-				else if (e != null &&
-					e instanceof NoSuchItemException) {
-
-					SessionErrors.add(req, e.getClass().getName());
-
-					setForward(req, "portlet.shopping.error");
-				}
-				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
-
-					setForward(req, Constants.COMMON_ERROR);
-				}
+			}
+			else {
+				cart.addItemId(itemId, fields);
 			}
 		}
 		else {
-			setForward(req, "portlet.shopping.cart");
+			String itemIds = ParamUtil.getString(req, "itemIds");
+			String couponIds = ParamUtil.getString(req, "couponIds");
+			int altShipping = ParamUtil.getInteger(req, "altShipping");
+			boolean insure = ParamUtil.getBoolean(req, "insure");
+
+			cart.setItemIds(itemIds);
+			cart.setCouponIds(couponIds);
+			cart.setAltShipping(altShipping);
+			cart.setInsure(insure);
 		}
+
+		ShoppingCartLocalServiceUtil.updateCart(
+			cart.getUserId(), cart.getGroupId(), cart.getCartId(),
+			cart.getItemIds(), cart.getCouponIds(), cart.getAltShipping(),
+			cart.isInsure());
 	}
 
 }

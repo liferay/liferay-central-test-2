@@ -33,33 +33,7 @@ import com.liferay.util.dao.hibernate.Transformer;
 public class ShoppingItemPriceHBMUtil implements Transformer {
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice model(
 		ShoppingItemPriceHBM shoppingItemPriceHBM) {
-		return model(shoppingItemPriceHBM, true);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingItemPrice model(
-		ShoppingItemPriceHBM shoppingItemPriceHBM, boolean checkPool) {
-		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice = null;
-
-		if (checkPool) {
-			shoppingItemPrice = ShoppingItemPricePool.get(shoppingItemPriceHBM.getPrimaryKey());
-		}
-
-		if (shoppingItemPrice == null) {
-			shoppingItemPrice = new com.liferay.portlet.shopping.model.ShoppingItemPrice(shoppingItemPriceHBM.getItemPriceId(),
-					shoppingItemPriceHBM.getItemId(),
-					shoppingItemPriceHBM.getMinQuantity(),
-					shoppingItemPriceHBM.getMaxQuantity(),
-					shoppingItemPriceHBM.getPrice(),
-					shoppingItemPriceHBM.getDiscount(),
-					shoppingItemPriceHBM.getTaxable(),
-					shoppingItemPriceHBM.getShipping(),
-					shoppingItemPriceHBM.getUseShippingFormula(),
-					shoppingItemPriceHBM.getStatus());
-			ShoppingItemPricePool.put(shoppingItemPrice.getPrimaryKey(),
-				shoppingItemPrice);
-		}
-
-		return shoppingItemPrice;
+		return (com.liferay.portlet.shopping.model.ShoppingItemPrice)shoppingItemPriceHBM;
 	}
 
 	public static ShoppingItemPriceHBMUtil getInstance() {

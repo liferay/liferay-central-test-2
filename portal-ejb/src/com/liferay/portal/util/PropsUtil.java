@@ -660,15 +660,7 @@ public class PropsUtil {
 
 	public static final String SHOPPING_CATEGORY_FORWARD_TO_CART = "shopping.category.forward.to.cart";
 
-	public static final String SHOPPING_CATEGORY_SHOW_ITEM_DESCRIPTION = "shopping.category.show.item.description";
-
-	public static final String SHOPPING_CATEGORY_SHOW_ITEM_PROPERTIES = "shopping.category.show.item.properties";
-
-	public static final String SHOPPING_CATEGORY_SHOW_ITEM_PRICES = "shopping.category.show.item.prices";
-
 	public static final String SHOPPING_CATEGORY_SHOW_SPECIAL_ITEMS = "shopping.category.show.special.items";
-
-	public static final String SHOPPING_CATEGORY_SHOW_SPECIAL_ITEM_DESCRIPTION = "shopping.category.show.special.item.description";
 
 	public static final String SHOPPING_ITEM_SHOW_AVAILABILITY = "shopping.item.show.availability";
 
@@ -679,6 +671,22 @@ public class PropsUtil {
 	public static final String SHOPPING_IMAGE_LARGE_MAX_SIZE = "shopping.image.large.max.size";
 
 	public static final String SHOPPING_IMAGE_EXTENSIONS = "shopping.image.extensions";
+
+	public static final String SHOPPING_EMAIL_FROM_NAME = "shopping.email.from.name";
+
+	public static final String SHOPPING_EMAIL_FROM_ADDRESS = "shopping.email.from.address";
+
+	public static final String SHOPPING_EMAIL_ORDER_CONFIRMATION_ENABLED = "shopping.email.order.confirmation.enabled";
+
+	public static final String SHOPPING_EMAIL_ORDER_CONFIRMATION_SUBJECT = "shopping.email.order.confirmation.subject";
+	
+	public static final String SHOPPING_EMAIL_ORDER_CONFIRMATION_BODY = "shopping.email.order.confirmation.body";
+
+	public static final String SHOPPING_EMAIL_ORDER_SHIPPING_ENABLED = "shopping.email.order.shipping.enabled";
+
+	public static final String SHOPPING_EMAIL_ORDER_SHIPPING_SUBJECT = "shopping.email.order.shipping.subject";
+	
+	public static final String SHOPPING_EMAIL_ORDER_SHIPPING_BODY = "shopping.email.order.shipping.body";
 
 	// Translator Portlet
 

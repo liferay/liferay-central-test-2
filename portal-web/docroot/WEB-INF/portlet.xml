@@ -809,29 +809,14 @@
 		<display-name>Shopping</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
-			<name>help-action</name>
-			<value>/shopping/help</value>
-		</init-param>
-		<init-param>
 			<name>view-action</name>
-			<value>/shopping/browse_categories</value>
+			<value>/shopping/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
-			<portlet-mode>help</portlet-mode>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<portlet-preferences>
-			<preference>
-				<name>order-by-col</name>
-				<value>n</value>
-			</preference>
-			<preference>
-				<name>order-by-type</name>
-				<value>asc</value>
-			</preference>
-		</portlet-preferences>
 		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>

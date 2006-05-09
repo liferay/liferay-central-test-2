@@ -329,6 +329,87 @@ create table Roles_Permissions (
 	permissionId VARCHAR(75) not null
 );
 
+drop table ShoppingCart;
+create table ShoppingCart (
+	cartId VARCHAR(75) not null primary key,
+	groupId VARCHAR(75) not null,
+	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	itemIds STRING null,
+	couponIds STRING null,
+	altShipping INTEGER,
+	insure BOOLEAN
+);
+
+alter table ShoppingCategory add groupId VARCHAR(75) not null;
+alter table ShoppingCategory add userId VARCHAR(75) not null;
+alter table ShoppingCategory add userName VARCHAR(75) null;
+alter table ShoppingCategory add description STRING null;
+
+alter table ShoppingCoupon add groupId VARCHAR(75) not null;
+alter table ShoppingCoupon add userId VARCHAR(75) not null;
+alter table ShoppingCoupon add userName VARCHAR(75) null;
+
+alter table ShoppingItem add userId VARCHAR(75) not null;
+alter table ShoppingItem add userName VARCHAR(75) null;
+
+drop table ShoppingOrder;
+create table ShoppingOrder (
+	orderId VARCHAR(75) not null primary key,
+	groupId VARCHAR(75) not null,
+	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	tax DOUBLE,
+	shipping DOUBLE,
+	altShipping VARCHAR(75) null,
+	requiresShipping BOOLEAN,
+	insure BOOLEAN,
+	insurance DOUBLE,
+	couponIds VARCHAR(75) null,
+	couponDiscount DOUBLE,
+	billingFirstName VARCHAR(75) null,
+	billingLastName VARCHAR(75) null,
+	billingEmailAddress VARCHAR(75) null,
+	billingCompany VARCHAR(75) null,
+	billingStreet VARCHAR(75) null,
+	billingCity VARCHAR(75) null,
+	billingState VARCHAR(75) null,
+	billingZip VARCHAR(75) null,
+	billingCountry VARCHAR(75) null,
+	billingPhone VARCHAR(75) null,
+	shipToBilling BOOLEAN,
+	shippingFirstName VARCHAR(75) null,
+	shippingLastName VARCHAR(75) null,
+	shippingEmailAddress VARCHAR(75) null,
+	shippingCompany VARCHAR(75) null,
+	shippingStreet VARCHAR(75) null,
+	shippingCity VARCHAR(75) null,
+	shippingState VARCHAR(75) null,
+	shippingZip VARCHAR(75) null,
+	shippingCountry VARCHAR(75) null,
+	shippingPhone VARCHAR(75) null,
+	ccName VARCHAR(75) null,
+	ccType VARCHAR(75) null,
+	ccNumber VARCHAR(75) null,
+	ccExpMonth INTEGER,
+	ccExpYear INTEGER,
+	ccVerNumber VARCHAR(75) null,
+	comments STRING null,
+	ppTxnId VARCHAR(75) null,
+	ppPaymentStatus VARCHAR(75) null,
+	ppPaymentGross DOUBLE,
+	ppReceiverEmail VARCHAR(75) null,
+	ppPayerEmail VARCHAR(75) null,
+	sendOrderEmail BOOLEAN,
+	sendShippingEmail BOOLEAN
+);
+
 create table Subscription (
 	subscriptionId VARCHAR(75) not null primary key,
 	companyId VARCHAR(75) not null,

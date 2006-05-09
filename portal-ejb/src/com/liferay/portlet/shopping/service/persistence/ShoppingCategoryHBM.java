@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
-import java.util.Date;
+import com.liferay.portlet.shopping.model.ShoppingCategory;
 
 /**
  * <a href="ShoppingCategoryHBM.java.html"><b><i>View Source</i></b></a>
@@ -30,84 +30,7 @@ import java.util.Date;
  * @author  Brian Wing Shun Chan
  *
  */
-public class ShoppingCategoryHBM {
+public class ShoppingCategoryHBM extends ShoppingCategory {
 	protected ShoppingCategoryHBM() {
 	}
-
-	protected ShoppingCategoryHBM(String categoryId) {
-		_categoryId = categoryId;
-	}
-
-	protected ShoppingCategoryHBM(String categoryId, String companyId,
-		Date createDate, Date modifiedDate, String parentCategoryId, String name) {
-		_categoryId = categoryId;
-		_companyId = companyId;
-		_createDate = createDate;
-		_modifiedDate = modifiedDate;
-		_parentCategoryId = parentCategoryId;
-		_name = name;
-	}
-
-	public String getPrimaryKey() {
-		return _categoryId;
-	}
-
-	protected void setPrimaryKey(String pk) {
-		_categoryId = pk;
-	}
-
-	protected String getCategoryId() {
-		return _categoryId;
-	}
-
-	protected void setCategoryId(String categoryId) {
-		_categoryId = categoryId;
-	}
-
-	protected String getCompanyId() {
-		return _companyId;
-	}
-
-	protected void setCompanyId(String companyId) {
-		_companyId = companyId;
-	}
-
-	protected Date getCreateDate() {
-		return _createDate;
-	}
-
-	protected void setCreateDate(Date createDate) {
-		_createDate = createDate;
-	}
-
-	protected Date getModifiedDate() {
-		return _modifiedDate;
-	}
-
-	protected void setModifiedDate(Date modifiedDate) {
-		_modifiedDate = modifiedDate;
-	}
-
-	protected String getParentCategoryId() {
-		return _parentCategoryId;
-	}
-
-	protected void setParentCategoryId(String parentCategoryId) {
-		_parentCategoryId = parentCategoryId;
-	}
-
-	protected String getName() {
-		return _name;
-	}
-
-	protected void setName(String name) {
-		_name = name;
-	}
-
-	private String _categoryId;
-	private String _companyId;
-	private Date _createDate;
-	private Date _modifiedDate;
-	private String _parentCategoryId;
-	private String _name;
 }

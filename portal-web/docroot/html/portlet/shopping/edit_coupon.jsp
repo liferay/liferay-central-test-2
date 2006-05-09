@@ -25,36 +25,12 @@
 <%@ include file="/html/portlet/shopping/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 ShoppingCoupon coupon = (ShoppingCoupon)request.getAttribute(WebKeys.SHOPPING_COUPON);
 
-String couponId = request.getParameter("coupon_id");
-if ((couponId == null) || (couponId.equals(StringPool.NULL))) {
-	couponId = "";
-
-	if (coupon != null) {
-		couponId = coupon.getCouponId();
-	}
-}
-
-boolean autoCouponId = ParamUtil.get(request, "auto_coupon_id", false);
-
-String name = request.getParameter("coupon_name");
-if ((name == null) || (name.equals(StringPool.NULL))) {
-	name = "";
-
-	if (coupon != null) {
-		name = coupon.getName();
-	}
-}
-
-String description = request.getParameter("coupon_desc");
-if ((description == null) || (description.equals(StringPool.NULL))) {
-	description = "";
-
-	if (coupon != null) {
-		description = coupon.getDescription();
-	}
-}
+String couponId = BeanParamUtil.getString(coupon, request, "couponId");
+String newCouponId = ParamUtil.getString(request, "newCouponId");
 
 Calendar startDate = new GregorianCalendar(timeZone, locale);
 
@@ -64,613 +40,274 @@ if (coupon != null) {
 	}
 }
 
-String sdMonth = request.getParameter("coupon_sd_month");
-if ((sdMonth == null) || (sdMonth.equals(StringPool.NULL))) {
-	sdMonth = "";
-
-	if (startDate != null) {
-		sdMonth = Integer.toString(startDate.get(Calendar.MONTH));
-	}
-}
-
-String sdDay = request.getParameter("coupon_sd_day");
-if ((sdDay == null) || (sdDay.equals(StringPool.NULL))) {
-	sdDay = "";
-
-	if (startDate != null) {
-		sdDay = Integer.toString(startDate.get(Calendar.DATE));
-	}
-}
-
-String sdYear = request.getParameter("coupon_sd_year");
-if ((sdYear == null) || (sdYear.equals(StringPool.NULL))) {
-	sdYear = "";
-
-	if (startDate != null) {
-		sdYear = Integer.toString(startDate.get(Calendar.YEAR));
-	}
-}
+boolean neverExpire = ParamUtil.getBoolean(request, "neverExpire", true);
 
 Calendar endDate = new GregorianCalendar(timeZone, locale);
-endDate.add(Calendar.YEAR, 1);
+
+endDate.add(Calendar.MONTH, 1);
 
 if (coupon != null) {
 	if (coupon.getEndDate() != null) {
+		neverExpire = false;
+
 		endDate.setTime(coupon.getEndDate());
 	}
 }
 
-String edMonth = request.getParameter("coupon_ed_month");
-if ((edMonth == null) || (edMonth.equals(StringPool.NULL))) {
-	edMonth = "";
-
-	if (endDate != null) {
-		edMonth = Integer.toString(endDate.get(Calendar.MONTH));
-	}
-}
-
-String edDay = request.getParameter("coupon_ed_day");
-if ((edDay == null) || (edDay.equals(StringPool.NULL))) {
-	edDay = "";
-
-	if (endDate != null) {
-		edDay = Integer.toString(endDate.get(Calendar.DATE));
-	}
-}
-
-String edYear = request.getParameter("coupon_ed_year");
-if ((edYear == null) || (edYear.equals(StringPool.NULL))) {
-	edYear = "";
-
-	if (endDate != null) {
-		edYear = Integer.toString(endDate.get(Calendar.YEAR));
-	}
-}
-
-boolean neverExpires = ParamUtil.get(request, "coupon_never_expires", false);
-String neverExpiresParam = request.getParameter("coupon_never_expires");
-if ((neverExpiresParam == null) || (neverExpiresParam.equals(StringPool.NULL))) {
-	if (coupon != null) {
-		if (coupon.getEndDate() == null) {
-			neverExpires = true;
-		}
-	}
-}
-
-boolean active = ParamUtil.get(request, "coupon_active", true);
-String activeParam = request.getParameter("coupon_active");
-if ((activeParam == null) || (activeParam.equals(StringPool.NULL))) {
-	if (coupon != null) {
-		active = coupon.isActive();
-	}
-}
-
-String limitCategories = request.getParameter("coupon_limit_categories");
-if ((limitCategories == null) || (limitCategories.equals(StringPool.NULL))) {
-	limitCategories = "";
-
-	if (coupon != null) {
-		limitCategories = coupon.getLimitCategories();
-	}
-}
-
-String limitSkus = request.getParameter("coupon_limit_skus");
-if ((limitSkus == null) || (limitSkus.equals(StringPool.NULL))) {
-	limitSkus = "";
-
-	if (coupon != null) {
-		limitSkus = coupon.getLimitSkus();
-	}
-}
-
-double minOrder = ParamUtil.get(request, "coupon_min_order", 0.0);
-String minOrderParam = request.getParameter("coupon_min_order");
-if ((minOrderParam == null) || (minOrderParam.equals(StringPool.NULL))) {
-	if (coupon != null) {
-		minOrder = coupon.getMinOrder();
-	}
-}
-
-double discount = ParamUtil.get(request, "coupon_discount", 0.0);
-String discountParam = request.getParameter("coupon_discount");
-if ((discountParam == null) || (discountParam.equals(StringPool.NULL))) {
-	if (coupon != null) {
-		discount = coupon.getDiscount();
-	}
-}
-
-String discountType = request.getParameter("coupon_discount_type");
-if ((discountType == null) || (discountType.equals(StringPool.NULL))) {
-	discountType = "";
-
-	if (coupon != null) {
-		discountType = coupon.getDiscountType();
-	}
-}
+String limitCategories = BeanParamUtil.getString(coupon, request, "limitCategories");
+String limitSkus = BeanParamUtil.getString(coupon, request, "limitSkus");
+double minOrder = BeanParamUtil.getDouble(coupon, request, "minOrder");
+double discount = BeanParamUtil.getDouble(coupon, request, "discount");
+String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />disableInputDate(date, checked) {
+		eval("document.<portlet:namespace />fm.<portlet:namespace />" + date + "Month.disabled = " + checked + ";");
+		eval("document.<portlet:namespace />fm.<portlet:namespace />" + date + "Day.disabled = " + checked + ";");
+		eval("document.<portlet:namespace />fm.<portlet:namespace />" + date + "Year.disabled = " + checked + ";");
+		eval("document.<portlet:namespace />fm.<portlet:namespace />" + date + "Hour.disabled = " + checked + ";");
+		eval("document.<portlet:namespace />fm.<portlet:namespace />" + date + "Minute.disabled = " + checked + ";");
+		eval("document.<portlet:namespace />fm.<portlet:namespace />" + date + "AmPm.disabled = " + checked + ";");
+	}
+
 	function <portlet:namespace />saveCoupon() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= coupon == null ? Constants.ADD : Constants.UPDATE %>";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL><portlet:param name="struts_action" value="/shopping/view_coupons" /></portlet:renderURL>";
+
+		<c:if test="<%= coupon == null %>">
+			document.<portlet:namespace />fm.<portlet:namespace />couponId.value = document.<portlet:namespace />fm.<portlet:namespace />newCouponId.value;
+		</c:if>
+
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/shopping/edit_coupon" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCoupon(); return false;">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_coupon" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCoupon(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL><portlet:param name="struts_action" value="/shopping/view_coupons" /></portlet:renderURL>">
-<input name="<portlet:namespace />auto_coupon_id" type="hidden" value="<%= autoCouponId %>">
-<input name="<portlet:namespace />coupon_never_expires" type="hidden" value="<%= neverExpires %>">
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
+<input name="<portlet:namespace />couponId" type="hidden" value="<%= couponId %>">
 
-<liferay-ui:box top="/html/common/themes/inner_top.jsp" bottom="/html/common/themes/inner_bottom.jsp">
-	<liferay-util:param name="box_br_wrap_content" value="false" />
+<liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
+	<liferay-util:param name="tabs1" value="coupons" />
+</liferay-util:include>
 
-	<table border="0" cellpadding="0" cellspacing="0">
-	<tr>
-		<td>
-			<c:if test="<%= coupon == null %>">
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveCoupon();">
+<liferay-ui:error exception="<%= CouponDateException.class %>" message="please-enter-a-start-date-that-comes-before-the-expiration-date" />
+<liferay-ui:error exception="<%= CouponDescriptionException.class %>" message="please-enter-a-valid-description" />
+<liferay-ui:error exception="<%= CouponEndDateException.class %>" message="please-enter-a-valid-expiration-date" />
+<liferay-ui:error exception="<%= CouponIdException.class %>" message="please-enter-a-valid-id" />
+<liferay-ui:error exception="<%= CouponNameException.class %>" message="please-enter-a-valid-name" />
+<liferay-ui:error exception="<%= CouponStartDateException.class %>" message="please-enter-a-valid-start-date" />
+<liferay-ui:error exception="<%= DuplicateCouponIdException.class %>" message="please-enter-a-unique-id" />
 
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save-and-add-another") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.ADD %>'; document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<portlet:actionURL><portlet:param name="struts_action" value="/shopping/edit_coupon" /></portlet:actionURL>'; submitForm(document.<portlet:namespace />fm);">
-			</c:if>
-
-			<c:if test="<%= coupon != null %>">
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update") %>' onClick="<portlet:namespace />saveCoupon();">
-
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this-coupon") %>')) { document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.DELETE %>'; document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<portlet:renderURL><portlet:param name="struts_action" value="/shopping/view_coupons" /></portlet:renderURL>'; submitForm(document.<portlet:namespace />fm); }">
-			</c:if>
-
-			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/shopping/view_coupons" /></portlet:renderURL>';">
-		</td>
-	</tr>
-	</table>
-</liferay-ui:box>
-
-<br>
-
-<c:if test="<%= !SessionErrors.isEmpty(renderRequest) %>">
-	<table border="0" cellpadding="0" cellspacing="0" width="95%">
-	<tr>
-		<td>
-			<font class="portlet-msg-error" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "you-have-entered-invalid-data") %></font>
-		</td>
-	</tr>
-	</table>
-
-	<br>
-</c:if>
-
-<liferay-ui:box top="/html/common/themes/inner_top.jsp" bottom="/html/common/themes/inner_bottom.jsp">
-	<liferay-util:param name="box_title" value='<%= LanguageUtil.get(pageContext, "coupon-information") %>' />
-
-	<table border="0" cellpadding="0" cellspacing="0" width="90%">
-	<tr>
-		<td>
-			<table border="0" cellpadding="0" cellspacing="2">
-
-			<c:if test="<%= SessionErrors.contains(renderRequest, DuplicateCouponIdException.class.getName()) %>">
-				<tr>
-					<td>
-						<font class="portlet-msg-error" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "please-enter-a-unique-id") %></font>
-					</td>
-				</tr>
-			</c:if>
-
-			<c:if test="<%= SessionErrors.contains(renderRequest, CouponIdException.class.getName()) %>">
-				<tr>
-					<td>
-						<font class="portlet-msg-error" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "please-enter-a-valid-id") %></font>
-					</td>
-				</tr>
-			</c:if>
-
-			<tr>
-				<td>
-					<font class="portlet-font" style="font-size: x-small;"><b><%= LanguageUtil.get(pageContext, "id") %></b></font>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<c:if test="<%= coupon == null %>">
-						<table border="0" cellpadding="0" cellspacing="0">
-						<tr>
-							<td>
-								<input class="form-text" <%= autoCouponId ? "disabled" : "" %> name="<portlet:namespace />coupon_id" type="text" size="25" value="<%= couponId %>">
-							</td>
-							<td width="30">
-								&nbsp;
-							</td>
-							<td>
-								<font class="portlet-font" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "autogenerate-id") %></font> <input <%= autoCouponId ? "checked" : "" %> type="checkbox" onClick="if (this.checked) { document.<portlet:namespace />fm.<portlet:namespace />auto_coupon_id.value = '1'; } else { document.<portlet:namespace />fm.<portlet:namespace />auto_coupon_id.value = '0'; } document.<portlet:namespace />fm.<portlet:namespace />coupon_id.disabled = this.checked;">
-							</td>
-						</tr>
-						</table>
-					</c:if>
-
-					<c:if test="<%= coupon != null %>">
-						<input name="<portlet:namespace />coupon_id" type="hidden" value="<%= couponId %>">
-						<input name="<portlet:namespace />auto_coupon_id" type="hidden" value="0">
-
-						<font class="portlet-font" style="font-size: x-small;">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "id") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+				<c:choose>
+					<c:when test="<%= coupon == null %>">
+						<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="couponId" fieldParam="newCouponId" defaultValue="<%= newCouponId %>" />
+					</c:when>
+					<c:otherwise>
 						<%= couponId %>
-						</font>
-					</c:if>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<br>
-				</td>
-			</tr>
+					</c:otherwise>
+				</c:choose>
+			</td>
+			<td style="padding-left: 30px;"></td>
+			<td>
+				<c:if test="<%= coupon == null %>">
+					<liferay-ui:input-checkbox param="autoCouponId" />
 
-			<c:if test="<%= SessionErrors.contains(renderRequest, CouponNameException.class.getName()) %>">
-				<tr>
-					<td>
-						<font class="portlet-msg-error" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "please-enter-a-valid-name") %></font>
-					</td>
-				</tr>
-			</c:if>
+					<%= LanguageUtil.get(pageContext, "autogenerate-id") %>
+				</c:if>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<br>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "name") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="name" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "description") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="description" />
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<br>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "start-date") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="startDate" defaultValue="<%= startDate %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "expiration-date") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+				<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="endDate" defaultValue="<%= endDate %>" disabled="<%= neverExpire %>" />
+			</td>
+			<td style="padding-left: 30px;"></td>
+			<td>
+				<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick='<%= renderResponse.getNamespace() + "disableInputDate(\'endDate\', this.checked);" %>' />
 
-			<tr>
-				<td>
-					<font class="portlet-font" style="font-size: x-small;"><%= LanguageUtil.get(pageContext, "name") %></font>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input class="form-text" name="<portlet:namespace />coupon_name" type="text" size="50" value="<%= name %>">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<br>
-				</td>
-			</tr>
-
-			<c:if test="<%= SessionErrors.contains(renderRequest, CouponDescriptionException.class.getName()) %>">
-				<tr>
-					<td>
-						<font class="portlet-msg-error" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "please-enter-a-valid-description") %></font>
-					</td>
-				</tr>
-			</c:if>
-
-			<tr>
-				<td>
-					<font class="portlet-font" style="font-size: x-small;"><%= LanguageUtil.get(pageContext, "description") %></font>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<textarea class="form-text" cols="70" name="<portlet:namespace />coupon_desc" rows="5" wrap="soft"><%= GetterUtil.getString(description) %></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<br>
-				</td>
-			</tr>
-
-			<c:if test="<%= SessionErrors.contains(renderRequest, CouponDateException.class.getName()) %>">
-				<tr>
-					<td>
-						<font class="portlet-msg-error" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "please-enter-a-start-date-that-comes-before-the-end-date") %></font>
-					</td>
-				</tr>
-			</c:if>
-
-			<c:if test="<%= SessionErrors.contains(renderRequest, CouponStartDateException.class.getName()) %>">
-				<tr>
-					<td>
-						<font class="portlet-msg-error" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "please-enter-a-valid-start-date") %></font>
-					</td>
-				</tr>
-			</c:if>
-
-			<tr>
-				<td>
-					<font class="portlet-font" style="font-size: x-small;"><b><%= LanguageUtil.get(pageContext, "start-date") %></b></font>
-				</td>
-			</tr>
-			<tr>
-				<td>
-
-					<%
-					int sdYearInt = Integer.parseInt(sdYear);
-					%>
-
-					<%--<liferay-ui:input-date
-						formName='<%= renderResponse.getNamespace() + "fm" %>'
-						monthParam='<%= renderResponse.getNamespace() + "coupon_sd_month" %>'
-						monthValue='<%= Integer.parseInt(sdMonth) %>'
-						dayParam='<%= renderResponse.getNamespace() + "coupon_sd_day" %>'
-						dayValue='<%= Integer.parseInt(sdDay) %>'
-						yearParam='<%= renderResponse.getNamespace() + "coupon_sd_year" %>'
-						yearValue='<%= sdYearInt %>'
-						yearRangeStart='<%= sdYearInt - 10 %>'
-						yearRangeEnd='<%= sdYearInt + 10 %>'
-						firstDayOfWeek='<%= startDate.getFirstDayOfWeek() - 1 %>'
-						locale='<%= locale.toString() %>'
-						calendarImage='<%= themeDisplay.getPathThemeImage() + "/calendar/calendar.gif" %>'
-					/>--%>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<br>
-				</td>
-			</tr>
-
-			<c:if test="<%= SessionErrors.contains(renderRequest, CouponEndDateException.class.getName()) %>">
-				<tr>
-					<td>
-						<font class="portlet-msg-error" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "please-enter-a-valid-end-date") %></font>
-					</td>
-				</tr>
-			</c:if>
-
-			<tr>
-				<td>
-					<font class="portlet-font" style="font-size: x-small;"><b><%= LanguageUtil.get(pageContext, "end-date") %></b></font>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<table border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td nowrap>
-
-							<%
-							int edYearInt = Integer.parseInt(edYear);
-							%>
-
-							<%--<liferay-ui:input-date
-								formName='<%= renderResponse.getNamespace() + "fm" %>'
-								monthParam='<%= renderResponse.getNamespace() + "coupon_ed_month" %>'
-								monthValue='<%= Integer.parseInt(edMonth) %>'
-								dayParam='<%= renderResponse.getNamespace() + "coupon_ed_day" %>'
-								dayValue='<%= Integer.parseInt(edDay) %>'
-								yearParam='<%= renderResponse.getNamespace() + "coupon_ed_year" %>'
-								yearValue='<%= edYearInt %>'
-								yearRangeStart='<%= edYearInt - 10 %>'
-								yearRangeEnd='<%= edYearInt + 10 %>'
-								firstDayOfWeek='<%= endDate.getFirstDayOfWeek() - 1 %>'
-								locale='<%= locale.toString() %>'
-								calendarImage='<%= themeDisplay.getPathThemeImage() + "/calendar/calendar.gif" %>'
-							/>--%>
-						</td>
-						<td width="10">
-							&nbsp;
-						</td>
-						<td valign="bottom">
-							<font class="portlet-font" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "never-expires") %></font> <input <%= (neverExpires) ? "checked" : "" %> type="checkbox" onClick="if (this.checked) { document.<portlet:namespace />fm.<portlet:namespace />coupon_never_expires.value = '1'; } else { document.<portlet:namespace />fm.<portlet:namespace />coupon_never_expires.value = '0'; }">
-						</td>
-					</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<br>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<table border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td>
-							<font class="portlet-font" style="font-size: x-small;"><b><%= LanguageUtil.get(pageContext, "active") %></b></font>
-						</td>
-						<td width="10">
-							&nbsp;
-						</td>
-						<td>
-							<select name="<portlet:namespace />coupon_active">
-								<option <%= (active) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
-								<option <%= (!active) ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
-							</select>
-						</td>
-					</tr>
-					</table>
-				</td>
-			</tr>
-			</table>
-		</td>
-	</tr>
-	</table>
-</liferay-ui:box>
+				<%= LanguageUtil.get(pageContext, "never-expire") %>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<br>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "active") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="active" />
+	</td>
+</tr>
+</table>
 
 <br>
 
-<liferay-ui:box top="/html/common/themes/inner_top.jsp" bottom="/html/common/themes/inner_bottom.jsp">
-	<liferay-util:param name="box_title" value='<%= LanguageUtil.get(pageContext, "discount") %>' />
+<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
-	<table border="0" cellpadding="0" cellspacing="0" width="90%">
-	<tr>
-		<td>
-			<font class="portlet-font" style="font-size: x-small;">
+<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
-			<%= LanguageUtil.format(pageContext, "coupons-can-be-set-to-only-apply-to-orders-above-a-minimum-amount", currency.getSymbol() + doubleFormat.format(0), false) %><br><br>
+<br><br>
 
-			<%= LanguageUtil.get(pageContext, "set-the-discount-amount-and-the-discount-type") %><br><br>
+<liferay-ui:tabs names="discount" />
 
-			<%= LanguageUtil.get(pageContext, "if-the-discount-type-is-free-shipping,-then-shipping-charges-are-subtracted-from-the-order") %>
+<%= LanguageUtil.format(pageContext, "coupons-can-be-set-to-only-apply-to-orders-above-a-minimum-amount", currency.getSymbol() + doubleFormat.format(0), false) %>
 
-			</font>
-		</td>
-	</tr>
-	</table>
+<br><br>
 
-	<br>
+<%= LanguageUtil.get(pageContext, "set-the-discount-amount-and-the-discount-type") %>
 
-	<table border="0" cellpadding="0" cellspacing="0" width="90%">
-	<tr>
-		<td>
-			<table border="0" cellpadding="0" cellspacing="0">
-			<tr>
-				<td>
-					<font class="portlet-font" style="font-size: x-small;"><b><%= LanguageUtil.get(pageContext, "minimum-order") %></b></font>
-				</td>
-				<td width="10">
-					&nbsp;
-				</td>
-				<td>
-					<input class="form-text" name="<portlet:namespace />coupon_min_order" size="4" type="text" value="<%= currency.getSymbol() %><%= doubleFormat.format(minOrder) %>">
-				</td>
-				<td width="30">
-					&nbsp;
-				</td>
-				<td>
-					<font class="portlet-font" style="font-size: x-small;"><b><%= LanguageUtil.get(pageContext, "discount") %></b></font>
-				</td>
-				<td width="10">
-					&nbsp;
-				</td>
-				<td>
-					<input class="form-text" name="<portlet:namespace />coupon_discount" size="4" type="text" value="<%= doubleFormat.format(discount) %>">
-				</td>
-				<td width="30">
-					&nbsp;
-				</td>
-				<td>
-					<font class="portlet-font" style="font-size: x-small;"><b><%= LanguageUtil.get(pageContext, "discount-type") %></b></font>
-				</td>
-				<td width="10">
-					&nbsp;
-				</td>
-				<td>
-					<select name="<portlet:namespace />coupon_discount_type">
+<br><br>
 
-						<%
-						for (int i = 0; i < ShoppingCoupon.DISCOUNT_TYPES.length; i++) {
-						%>
+<%= LanguageUtil.get(pageContext, "if-the-discount-type-is-free-shipping,-then-shipping-charges-are-subtracted-from-the-order") %>
 
-							<option <%= discountType.equals(ShoppingCoupon.DISCOUNT_TYPES[i]) ? "selected" : "" %> value="<%= ShoppingCoupon.DISCOUNT_TYPES[i] %>"><%= LanguageUtil.get(pageContext, ShoppingCoupon.DISCOUNT_TYPES[i]) %></option>
+<br><br>
 
-						<%
-						}
-						%>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "minimum-order") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<input class="form-text" name="<portlet:namespace />minOrder" size="4" type="text" value="<%= currency.getSymbol() %><%= doubleFormat.format(minOrder) %>">
+	</td>
+	<td style="padding-left: 30px;"></td>
+	<td>
+		<%= LanguageUtil.get(pageContext, "discount") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<input class="form-text" name="<portlet:namespace />discount" size="4" type="text" value="<%= doubleFormat.format(discount) %>">
+	</td>
+	<td style="padding-left: 30px;"></td>
+	<td>
+		<%= LanguageUtil.get(pageContext, "discount-type") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<select name="<portlet:namespace />discountType">
 
-					</select>
-				</td>
-			</tr>
-			</table>
-		</td>
-	</tr>
-	</table>
-</liferay-ui:box>
+			<%
+			for (int i = 0; i < ShoppingCoupon.DISCOUNT_TYPES.length; i++) {
+			%>
+
+				<option <%= discountType.equals(ShoppingCoupon.DISCOUNT_TYPES[i]) ? "selected" : "" %> value="<%= ShoppingCoupon.DISCOUNT_TYPES[i] %>"><%= LanguageUtil.get(pageContext, ShoppingCoupon.DISCOUNT_TYPES[i]) %></option>
+
+			<%
+			}
+			%>
+
+		</select>
+	</td>
+</tr>
+</table>
 
 <br>
 
-<liferay-ui:box top="/html/common/themes/inner_top.jsp" bottom="/html/common/themes/inner_bottom.jsp">
-	<liferay-util:param name="box_title" value='<%= LanguageUtil.get(pageContext, "limits") %>' />
+<liferay-ui:tabs names="limits" />
 
-	<table border="0" cellpadding="0" cellspacing="0" width="90%">
-	<tr>
-		<td>
-			<table border="0" cellpadding="0" cellspacing="2">
+<liferay-ui:error exception="<%= CouponLimitCategoriesException.class %>">
 
-			<c:if test="<%= SessionErrors.contains(renderRequest, CouponLimitCategoriesException.class.getName()) %>">
+	<%
+	List categoryIds = (List)errorException;
+	%>
 
-				<%
-				List categoryIds = (List)SessionErrors.get(renderRequest, CouponLimitCategoriesException.class.getName());
-				%>
+	<%= LanguageUtil.get(pageContext, "the-following-are-invalid-category-ids") %> <%= StringUtil.merge((String[])categoryIds.toArray(new String[0])) %>
+</liferay-ui:error>
 
-				<tr>
-					<td>
-						<font class="portlet-msg-error" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "the-following-are-invalid-category-ids") %> <%= StringUtil.merge((String[])categoryIds.toArray(new String[0])) %></font>
-					</td>
-				</tr>
-			</c:if>
+<liferay-ui:error exception="<%= CouponLimitSKUsException.class %>">
 
-			<tr>
-				<td>
-					<font class="portlet-font" style="font-size: x-small;"><b>
-					<%= LanguageUtil.get(pageContext, "categories") %>
-					</b></font><br>
+	<%
+	List skus = (List)errorException;
+	%>
 
-					<font class="portlet-font" style="font-size: xx-small;">
-					<%= LanguageUtil.get(pageContext, "this-coupon-only-applies-to-items-that-are-children-of-this-comma-delimited-list-of-categories") %><br>
-					<%= LanguageUtil.get(pageContext, "leave-this-blank-if-the-coupon-does-not-check-for-the-parent-categories-of-an-item") %>
-					</font>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<textarea class="form-text" cols="80" name="<portlet:namespace />coupon_limit_categories" rows="8" wrap="soft"><%= limitCategories %></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<br>
-				</td>
-			</tr>
+	<%= LanguageUtil.get(pageContext, "the-following-are-invalid-item-skus") %> <%= StringUtil.merge((String[])skus.toArray(new String[0])) %>
+</liferay-ui:error>
 
-			<c:if test="<%= SessionErrors.contains(renderRequest, CouponLimitSKUsException.class.getName()) %>">
+<%= LanguageUtil.get(pageContext, "this-coupon-only-applies-to-items-that-are-children-of-this-comma-delimited-list-of-categories") %>
 
-				<%
-				List skus = (List)SessionErrors.get(renderRequest, CouponLimitSKUsException.class.getName());
-				%>
+<%= LanguageUtil.get(pageContext, "leave-this-blank-if-the-coupon-does-not-check-for-the-parent-categories-of-an-item") %>
 
-				<tr>
-					<td>
-						<font class="portlet-msg-error" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "the-following-are-invalid-item-skus") %> <%= StringUtil.merge((String[])skus.toArray(new String[0])) %></font>
-					</td>
-				</tr>
-			</c:if>
+<br><br>
 
-			<tr>
-				<td>
-					<font class="portlet-font" style="font-size: x-small;"><b>
-					<%= LanguageUtil.get(pageContext, "skus") %>
-					</b></font><br>
+<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="limitCategories" />
 
-					<font class="portlet-font" style="font-size: xx-small;">
-					<%= LanguageUtil.get(pageContext, "this-coupon-only-applies-to-items-with-a-sku-that-corresponds-to-this-comma-delimited-list-of-item-skus") %><br>
-					<%= LanguageUtil.get(pageContext, "leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku") %>
-					</font>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<textarea class="form-text" cols="80" name="<portlet:namespace />coupon_limit_skus" rows="8" wrap="soft"><%= limitSkus %></textarea>
-				</td>
-			</tr>
-			</table>
-		</td>
-	</tr>
-	</table>
-</liferay-ui:box>
+<br><br>
 
-<br>
+<%= LanguageUtil.get(pageContext, "this-coupon-only-applies-to-items-with-a-sku-that-corresponds-to-this-comma-delimited-list-of-item-skus") %>
 
-<liferay-ui:box top="/html/common/themes/inner_top.jsp" bottom="/html/common/themes/inner_bottom.jsp">
-	<liferay-util:param name="box_br_wrap_content" value="false" />
+<%= LanguageUtil.get(pageContext, "leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku") %>
 
-	<table border="0" cellpadding="0" cellspacing="0">
-	<tr>
-		<td>
-			<c:if test="<%= coupon == null %>">
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveCoupon();">
+<br><br>
 
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save-and-add-another") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.ADD %>'; document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<portlet:actionURL><portlet:param name="struts_action" value="/shopping/edit_coupon" /></portlet:actionURL>'; submitForm(document.<portlet:namespace />fm);">
-			</c:if>
-
-			<c:if test="<%= coupon != null %>">
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update") %>' onClick="<portlet:namespace />saveCoupon();">
-
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this-coupon") %>')) { document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.DELETE %>'; document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<portlet:renderURL><portlet:param name="struts_action" value="/shopping/view_coupons" /></portlet:renderURL>'; submitForm(document.<portlet:namespace />fm); }">
-			</c:if>
-
-			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/shopping/view_coupons" /></portlet:renderURL>';">
-		</td>
-	</tr>
-	</table>
-</liferay-ui:box>
+<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="limitSkus" />
 
 </form>
 
 <script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />coupon_<%= ((coupon == null) && !autoCouponId) ? "id" : "name" %>.focus();
+	document.<portlet:namespace />fm.<portlet:namespace /><%= (coupon == null) ? "newCouponId" : "name" %>.focus();
 </script>

@@ -11,5 +11,6 @@
 	<resource file="resource-actions/journal.xml" />
 	<resource file="resource-actions/messageboards.xml" />
 	<resource file="resource-actions/polls.xml" />
+	<resource file="resource-actions/shopping.xml" />
 	<resource file="resource-actions/wiki.xml" />
 </resource-action-mapping>

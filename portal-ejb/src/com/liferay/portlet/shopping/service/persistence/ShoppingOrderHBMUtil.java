@@ -33,68 +33,7 @@ import com.liferay.util.dao.hibernate.Transformer;
 public class ShoppingOrderHBMUtil implements Transformer {
 	public static com.liferay.portlet.shopping.model.ShoppingOrder model(
 		ShoppingOrderHBM shoppingOrderHBM) {
-		return model(shoppingOrderHBM, true);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder model(
-		ShoppingOrderHBM shoppingOrderHBM, boolean checkPool) {
-		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder = null;
-
-		if (checkPool) {
-			shoppingOrder = ShoppingOrderPool.get(shoppingOrderHBM.getPrimaryKey());
-		}
-
-		if (shoppingOrder == null) {
-			shoppingOrder = new com.liferay.portlet.shopping.model.ShoppingOrder(shoppingOrderHBM.getOrderId(),
-					shoppingOrderHBM.getCompanyId(),
-					shoppingOrderHBM.getUserId(),
-					shoppingOrderHBM.getCreateDate(),
-					shoppingOrderHBM.getModifiedDate(),
-					shoppingOrderHBM.getTax(), shoppingOrderHBM.getShipping(),
-					shoppingOrderHBM.getAltShipping(),
-					shoppingOrderHBM.getRequiresShipping(),
-					shoppingOrderHBM.getInsure(),
-					shoppingOrderHBM.getInsurance(),
-					shoppingOrderHBM.getCouponIds(),
-					shoppingOrderHBM.getCouponDiscount(),
-					shoppingOrderHBM.getBillingFirstName(),
-					shoppingOrderHBM.getBillingLastName(),
-					shoppingOrderHBM.getBillingEmailAddress(),
-					shoppingOrderHBM.getBillingCompany(),
-					shoppingOrderHBM.getBillingStreet(),
-					shoppingOrderHBM.getBillingCity(),
-					shoppingOrderHBM.getBillingState(),
-					shoppingOrderHBM.getBillingZip(),
-					shoppingOrderHBM.getBillingCountry(),
-					shoppingOrderHBM.getBillingPhone(),
-					shoppingOrderHBM.getShipToBilling(),
-					shoppingOrderHBM.getShippingFirstName(),
-					shoppingOrderHBM.getShippingLastName(),
-					shoppingOrderHBM.getShippingEmailAddress(),
-					shoppingOrderHBM.getShippingCompany(),
-					shoppingOrderHBM.getShippingStreet(),
-					shoppingOrderHBM.getShippingCity(),
-					shoppingOrderHBM.getShippingState(),
-					shoppingOrderHBM.getShippingZip(),
-					shoppingOrderHBM.getShippingCountry(),
-					shoppingOrderHBM.getShippingPhone(),
-					shoppingOrderHBM.getCcName(), shoppingOrderHBM.getCcType(),
-					shoppingOrderHBM.getCcNumber(),
-					shoppingOrderHBM.getCcExpMonth(),
-					shoppingOrderHBM.getCcExpYear(),
-					shoppingOrderHBM.getCcVerNumber(),
-					shoppingOrderHBM.getComments(),
-					shoppingOrderHBM.getPpTxnId(),
-					shoppingOrderHBM.getPpPaymentStatus(),
-					shoppingOrderHBM.getPpPaymentGross(),
-					shoppingOrderHBM.getPpReceiverEmail(),
-					shoppingOrderHBM.getPpPayerEmail(),
-					shoppingOrderHBM.getSendOrderEmail(),
-					shoppingOrderHBM.getSendShippingEmail());
-			ShoppingOrderPool.put(shoppingOrder.getPrimaryKey(), shoppingOrder);
-		}
-
-		return shoppingOrder;
+		return (com.liferay.portlet.shopping.model.ShoppingOrder)shoppingOrderHBM;
 	}
 
 	public static ShoppingOrderHBMUtil getInstance() {

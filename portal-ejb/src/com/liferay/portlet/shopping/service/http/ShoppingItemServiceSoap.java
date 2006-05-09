@@ -39,9 +39,9 @@ import java.rmi.RemoteException;
  */
 public class ShoppingItemServiceSoap {
 	public static void addBookItems(java.lang.String categoryId,
-		java.lang.String[] isbnArray) throws RemoteException {
+		java.lang.String[] isbns) throws RemoteException {
 		try {
-			ShoppingItemServiceUtil.addBookItems(categoryId, isbnArray);
+			ShoppingItemServiceUtil.addBookItems(categoryId, isbns);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -62,177 +62,10 @@ public class ShoppingItemServiceSoap {
 		}
 	}
 
-	public static void deleteItem(
-		com.liferay.portlet.shopping.model.ShoppingItem item)
-		throws RemoteException {
-		try {
-			ShoppingItemServiceUtil.deleteItem(item);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingItemModel[] getFeaturedItems(
-		java.lang.String companyId, java.lang.String categoryId, int numOfItems)
-		throws RemoteException {
-		try {
-			java.util.List returnValue = ShoppingItemServiceUtil.getFeaturedItems(companyId,
-					categoryId, numOfItems);
-
-			return (com.liferay.portlet.shopping.model.ShoppingItem[])returnValue.toArray(new com.liferay.portlet.shopping.model.ShoppingItem[0]);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingItemModel getItemById(
+	public static com.liferay.portlet.shopping.model.ShoppingItemModel getItem(
 		java.lang.String itemId) throws RemoteException {
 		try {
-			com.liferay.portlet.shopping.model.ShoppingItem returnValue = ShoppingItemServiceUtil.getItemById(itemId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingItemModel getItemBySKU(
-		java.lang.String companyId, java.lang.String sku)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.shopping.model.ShoppingItem returnValue = ShoppingItemServiceUtil.getItemBySKU(companyId,
-					sku);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingItemModel[] getItems(
-		java.lang.String companyId) throws RemoteException {
-		try {
-			java.util.List returnValue = ShoppingItemServiceUtil.getItems(companyId);
-
-			return (com.liferay.portlet.shopping.model.ShoppingItem[])returnValue.toArray(new com.liferay.portlet.shopping.model.ShoppingItem[0]);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingItemModel[] getItems(
-		java.lang.String companyId, java.lang.String categoryId)
-		throws RemoteException {
-		try {
-			java.util.List returnValue = ShoppingItemServiceUtil.getItems(companyId,
-					categoryId);
-
-			return (com.liferay.portlet.shopping.model.ShoppingItem[])returnValue.toArray(new com.liferay.portlet.shopping.model.ShoppingItem[0]);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static int getItemsSize(java.lang.String companyId)
-		throws RemoteException {
-		try {
-			int returnValue = ShoppingItemServiceUtil.getItemsSize(companyId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static int getItemsSize(java.lang.String companyId,
-		java.lang.String categoryId) throws RemoteException {
-		try {
-			int returnValue = ShoppingItemServiceUtil.getItemsSize(companyId,
-					categoryId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingItemModel[] getSaleItems(
-		java.lang.String companyId, java.lang.String categoryId, int numOfItems)
-		throws RemoteException {
-		try {
-			java.util.List returnValue = ShoppingItemServiceUtil.getSaleItems(companyId,
-					categoryId, numOfItems);
-
-			return (com.liferay.portlet.shopping.model.ShoppingItem[])returnValue.toArray(new com.liferay.portlet.shopping.model.ShoppingItem[0]);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingItemModel[] search(
-		java.lang.String companyId, java.lang.String[] categoryIds,
-		java.lang.String keywords, int begin, int end)
-		throws RemoteException {
-		try {
-			java.util.List returnValue = ShoppingItemServiceUtil.search(companyId,
-					categoryIds, keywords, begin, end);
-
-			return (com.liferay.portlet.shopping.model.ShoppingItem[])returnValue.toArray(new com.liferay.portlet.shopping.model.ShoppingItem[0]);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static int searchSize(java.lang.String companyId,
-		java.lang.String[] categoryIds, java.lang.String keywords)
-		throws RemoteException {
-		try {
-			int returnValue = ShoppingItemServiceUtil.searchSize(companyId,
-					categoryIds, keywords);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static boolean hasAdmin(java.lang.String itemId)
-		throws RemoteException {
-		try {
-			boolean returnValue = ShoppingItemServiceUtil.hasAdmin(itemId);
+			com.liferay.portlet.shopping.model.ShoppingItem returnValue = ShoppingItemServiceUtil.getItem(itemId);
 
 			return returnValue;
 		}

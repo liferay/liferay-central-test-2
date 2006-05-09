@@ -128,7 +128,7 @@ Map hints = ModelHintsUtil.getHints(model, field);
 				/>
 			</c:if>
 		</c:when>
-		<c:when test='<%= type.equals("String") %>'>
+		<c:when test='<%= type.equals("double") || type.equals("int") || type.equals("String") %>'>
 
 			<%
 			String defaultString = GetterUtil.DEFAULT_STRING;

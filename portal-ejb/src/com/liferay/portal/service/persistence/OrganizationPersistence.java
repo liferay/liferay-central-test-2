@@ -114,6 +114,7 @@ public class OrganizationPersistence extends BasePersistence {
 					organizationHBM.setCountryId(organization.getCountryId());
 					organizationHBM.setStatusId(organization.getStatusId());
 					organizationHBM.setComments(organization.getComments());
+					organizationHBM.setUsers(new HashSet());
 					session.save(organizationHBM);
 					session.flush();
 				}

@@ -125,91 +125,90 @@ public class ShoppingCategoryUtil {
 		return getPersistence().findByPrimaryKey(categoryId);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId)
+	public static java.util.List findByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId);
+		return getPersistence().findByGroupId(groupId);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
+	public static java.util.List findByGroupId(java.lang.String groupId,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end);
+		return getPersistence().findByGroupId(groupId, begin, end);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
+	public static java.util.List findByGroupId(java.lang.String groupId,
 		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end, obc);
+		return getPersistence().findByGroupId(groupId, begin, end, obc);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCategory findByCompanyId_First(
-		java.lang.String companyId,
+	public static com.liferay.portlet.shopping.model.ShoppingCategory findByGroupId_First(
+		java.lang.String groupId,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portlet.shopping.NoSuchCategoryException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId_First(companyId, obc);
+		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCategory findByCompanyId_Last(
-		java.lang.String companyId,
+	public static com.liferay.portlet.shopping.model.ShoppingCategory findByGroupId_Last(
+		java.lang.String groupId,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portlet.shopping.NoSuchCategoryException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId_Last(companyId, obc);
+		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCategory[] findByCompanyId_PrevAndNext(
-		java.lang.String categoryId, java.lang.String companyId,
+	public static com.liferay.portlet.shopping.model.ShoppingCategory[] findByGroupId_PrevAndNext(
+		java.lang.String categoryId, java.lang.String groupId,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portlet.shopping.NoSuchCategoryException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId_PrevAndNext(categoryId,
-			companyId, obc);
+		return getPersistence().findByGroupId_PrevAndNext(categoryId, groupId,
+			obc);
 	}
 
-	public static java.util.List findByC_P(java.lang.String companyId,
+	public static java.util.List findByG_P(java.lang.String groupId,
 		java.lang.String parentCategoryId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_P(companyId, parentCategoryId);
+		return getPersistence().findByG_P(groupId, parentCategoryId);
 	}
 
-	public static java.util.List findByC_P(java.lang.String companyId,
+	public static java.util.List findByG_P(java.lang.String groupId,
 		java.lang.String parentCategoryId, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_P(companyId, parentCategoryId, begin,
-			end);
+		return getPersistence().findByG_P(groupId, parentCategoryId, begin, end);
 	}
 
-	public static java.util.List findByC_P(java.lang.String companyId,
+	public static java.util.List findByG_P(java.lang.String groupId,
 		java.lang.String parentCategoryId, int begin, int end,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_P(companyId, parentCategoryId, begin,
+		return getPersistence().findByG_P(groupId, parentCategoryId, begin,
 			end, obc);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCategory findByC_P_First(
-		java.lang.String companyId, java.lang.String parentCategoryId,
+	public static com.liferay.portlet.shopping.model.ShoppingCategory findByG_P_First(
+		java.lang.String groupId, java.lang.String parentCategoryId,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portlet.shopping.NoSuchCategoryException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByC_P_First(companyId, parentCategoryId, obc);
+		return getPersistence().findByG_P_First(groupId, parentCategoryId, obc);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCategory findByC_P_Last(
-		java.lang.String companyId, java.lang.String parentCategoryId,
+	public static com.liferay.portlet.shopping.model.ShoppingCategory findByG_P_Last(
+		java.lang.String groupId, java.lang.String parentCategoryId,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portlet.shopping.NoSuchCategoryException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByC_P_Last(companyId, parentCategoryId, obc);
+		return getPersistence().findByG_P_Last(groupId, parentCategoryId, obc);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCategory[] findByC_P_PrevAndNext(
-		java.lang.String categoryId, java.lang.String companyId,
+	public static com.liferay.portlet.shopping.model.ShoppingCategory[] findByG_P_PrevAndNext(
+		java.lang.String categoryId, java.lang.String groupId,
 		java.lang.String parentCategoryId,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portlet.shopping.NoSuchCategoryException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByC_P_PrevAndNext(categoryId, companyId,
+		return getPersistence().findByG_P_PrevAndNext(categoryId, groupId,
 			parentCategoryId, obc);
 	}
 
@@ -218,26 +217,26 @@ public class ShoppingCategoryUtil {
 		return getPersistence().findAll();
 	}
 
-	public static void removeByCompanyId(java.lang.String companyId)
+	public static void removeByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeByCompanyId(companyId);
+		getPersistence().removeByGroupId(groupId);
 	}
 
-	public static void removeByC_P(java.lang.String companyId,
+	public static void removeByG_P(java.lang.String groupId,
 		java.lang.String parentCategoryId)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeByC_P(companyId, parentCategoryId);
+		getPersistence().removeByG_P(groupId, parentCategoryId);
 	}
 
-	public static int countByCompanyId(java.lang.String companyId)
+	public static int countByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByCompanyId(companyId);
+		return getPersistence().countByGroupId(groupId);
 	}
 
-	public static int countByC_P(java.lang.String companyId,
+	public static int countByG_P(java.lang.String groupId,
 		java.lang.String parentCategoryId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_P(companyId, parentCategoryId);
+		return getPersistence().countByG_P(groupId, parentCategoryId);
 	}
 
 	public static ShoppingCategoryPersistence getPersistence() {

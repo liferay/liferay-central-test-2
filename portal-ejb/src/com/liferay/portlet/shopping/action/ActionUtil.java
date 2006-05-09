@@ -22,24 +22,22 @@
 
 package com.liferay.portlet.shopping.action;
 
-import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.RenderRequestImpl;
-import com.liferay.portlet.shopping.model.ShoppingCart;
+import com.liferay.portlet.shopping.model.ShoppingCategory;
+import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
-import com.liferay.portlet.shopping.service.spring.ShoppingCartServiceUtil;
+import com.liferay.portlet.shopping.service.spring.ShoppingCategoryServiceUtil;
+import com.liferay.portlet.shopping.service.spring.ShoppingCouponServiceUtil;
 import com.liferay.portlet.shopping.service.spring.ShoppingItemServiceUtil;
 import com.liferay.portlet.shopping.service.spring.ShoppingOrderServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.servlet.SessionMessages;
 
 import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,6 +49,64 @@ import javax.servlet.http.HttpServletRequest;
  *
  */
 public class ActionUtil {
+
+	public static void getCategory(ActionRequest req) throws Exception {
+		HttpServletRequest httpReq =
+			((ActionRequestImpl)req).getHttpServletRequest();
+
+		getCategory(httpReq);
+	}
+
+	public static void getCategory(RenderRequest req) throws Exception {
+		HttpServletRequest httpReq =
+			((RenderRequestImpl)req).getHttpServletRequest();
+
+		getCategory(httpReq);
+	}
+
+	public static void getCategory(HttpServletRequest req) throws Exception {
+		String categoryId = ParamUtil.getString(req, "categoryId");
+
+		ShoppingCategory category = null;
+
+		if (Validator.isNotNull(categoryId) &&
+			!categoryId.equals(ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+
+			category = ShoppingCategoryServiceUtil.getCategory(categoryId);
+		}
+
+		req.setAttribute(WebKeys.SHOPPING_CATEGORY, category);
+	}
+
+	public static void getCoupon(ActionRequest req) throws Exception {
+		HttpServletRequest httpReq =
+			((ActionRequestImpl)req).getHttpServletRequest();
+
+		getCoupon(httpReq);
+	}
+
+	public static void getCoupon(RenderRequest req) throws Exception {
+		HttpServletRequest httpReq =
+			((RenderRequestImpl)req).getHttpServletRequest();
+
+		getCoupon(httpReq);
+	}
+
+	public static void getCoupon(HttpServletRequest req) throws Exception {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		String couponId = ParamUtil.getString(req, "couponId");
+
+		ShoppingCoupon coupon = null;
+
+		if (Validator.isNotNull(couponId)) {
+			coupon = ShoppingCouponServiceUtil.getCoupon(
+				themeDisplay.getPlid(), couponId);
+		}
+
+		req.setAttribute(WebKeys.SHOPPING_COUPON, coupon);
+	}
 
 	public static void getItem(ActionRequest req) throws Exception {
 		HttpServletRequest httpReq =
@@ -67,12 +123,12 @@ public class ActionUtil {
 	}
 
 	public static void getItem(HttpServletRequest req) throws Exception {
-		String itemId = ParamUtil.getString(req, "item_id");
+		String itemId = ParamUtil.getString(req, "itemId");
 
 		ShoppingItem item = null;
 
 		if (Validator.isNotNull(itemId)) {
-			item = ShoppingItemServiceUtil.getItemById(itemId);
+			item = ShoppingItemServiceUtil.getItem(itemId);
 		}
 
 		req.setAttribute(WebKeys.SHOPPING_ITEM, item);
@@ -93,63 +149,19 @@ public class ActionUtil {
 	}
 
 	public static void getOrder(HttpServletRequest req) throws Exception {
-		String orderId = ParamUtil.getString(req, "order_id");
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		ShoppingOrder order = ShoppingOrderServiceUtil.getOrder(orderId);
+		String orderId = ParamUtil.getString(req, "orderId");
+
+		ShoppingOrder order = null;
+
+		if (Validator.isNotNull(orderId)) {
+			order = ShoppingOrderServiceUtil.getOrder(
+				themeDisplay.getPlid(), orderId);
+		}
 
 		req.setAttribute(WebKeys.SHOPPING_ORDER, order);
-	}
-
-	public static void updateCart(ActionRequest req, ActionResponse res)
-		throws Exception {
-
-		PortletSession ses = req.getPortletSession();
-
-		String companyId = PortalUtil.getCompanyId(req);
-
-		String cmd = ParamUtil.getString(req, "shopping_" + Constants.CMD);
-
-		ShoppingCart cart =
-			ShoppingCartServiceUtil.getCart(ses.getId(), companyId);
-
-		if (cmd.equals(Constants.ADD)) {
-			String itemId = ParamUtil.getString(req, "item_id");
-
-			String fields = ParamUtil.getString(req, "item_fields");
-			if (Validator.isNotNull(fields)) {
-				fields = "|" + fields;
-			}
-
-			ShoppingItem item = ShoppingItemServiceUtil.getItemById(itemId);
-
-			if (item.getMinQuantity() > 0) {
-				for (int i = 0; i < item.getMinQuantity(); i++) {
-					cart.addItemId(itemId, fields);
-				}
-			}
-			else {
-				cart.addItemId(itemId, fields);
-			}
-		}
-		else if (cmd.equals(Constants.SAVE) || cmd.equals(Constants.UPDATE)) {
-			String itemIds = ParamUtil.getString(req, "item_ids");
-			String couponIds = ParamUtil.getString(req, "coupon_ids");
-			int altShipping = ParamUtil.getInteger(req, "alt_shipping");
-			boolean insure = ParamUtil.getBoolean(req, "insure");
-
-			cart.setItemIds(itemIds);
-			cart.setCouponIds(couponIds);
-			cart.setAltShipping(altShipping);
-			cart.setInsure(insure);
-		}
-
-		ShoppingCartServiceUtil.updateCart(
-			ses.getId(), companyId, cart.getItemIds(), cart.getCouponIds(),
-			cart.getAltShipping(), cart.isInsure());
-
-		// Session messages
-
-		SessionMessages.add(req, "cart_updated");
 	}
 
 }

@@ -197,6 +197,14 @@ public class SearchContainer {
 		_rowChecker = rowChecker;
 	}
 
+	public boolean isHover() {
+		return _hover;
+	}
+
+	public void setHover(boolean hover) {
+		_hover = hover;
+	}
+
 	private void _calculateStartAndEnd() {
 		_start = (_curValue - 1) * _delta;
 		_end = _start + _delta;
@@ -226,5 +234,6 @@ public class SearchContainer {
 	private String _orderByType;
 	private String _emptyResultsMessage;
 	private RowChecker _rowChecker;
+	private boolean _hover = true;
 
 }

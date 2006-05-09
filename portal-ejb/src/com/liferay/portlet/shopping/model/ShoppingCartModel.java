@@ -37,20 +37,23 @@ import java.util.Date;
  *
  */
 public class ShoppingCartModel extends BaseModel {
-	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
-				"value.object.cacheable.com.liferay.portlet.shopping.model.ShoppingCart"),
-			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart"),
 			XSS_ALLOW);
 	public static boolean XSS_ALLOW_CARTID = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart.cartId"),
 			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_GROUPID = GetterUtil.get(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart.groupId"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart.companyId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart.userId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.get(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart.userName"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_ITEMIDS = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart.itemIds"),
@@ -64,27 +67,12 @@ public class ShoppingCartModel extends BaseModel {
 	public ShoppingCartModel() {
 	}
 
-	public ShoppingCartModel(String cartId) {
-		_cartId = cartId;
-		setNew(true);
-	}
-
-	public ShoppingCartModel(String cartId, String companyId, String userId,
-		Date createDate, Date modifiedDate, String itemIds, String couponIds,
-		int altShipping, boolean insure) {
-		_cartId = cartId;
-		_companyId = companyId;
-		_userId = userId;
-		_createDate = createDate;
-		_modifiedDate = modifiedDate;
-		_itemIds = itemIds;
-		_couponIds = couponIds;
-		_altShipping = altShipping;
-		_insure = insure;
-	}
-
 	public String getPrimaryKey() {
 		return _cartId;
+	}
+
+	public void setPrimaryKey(String pk) {
+		setCartId(pk);
 	}
 
 	public String getCartId() {
@@ -101,6 +89,24 @@ public class ShoppingCartModel extends BaseModel {
 			}
 
 			_cartId = cartId;
+			setModified(true);
+		}
+	}
+
+	public String getGroupId() {
+		return GetterUtil.getString(_groupId);
+	}
+
+	public void setGroupId(String groupId) {
+		if (((groupId == null) && (_groupId != null)) ||
+				((groupId != null) && (_groupId == null)) ||
+				((groupId != null) && (_groupId != null) &&
+				!groupId.equals(_groupId))) {
+			if (!XSS_ALLOW_GROUPID) {
+				groupId = XSSUtil.strip(groupId);
+			}
+
+			_groupId = groupId;
 			setModified(true);
 		}
 	}
@@ -137,6 +143,24 @@ public class ShoppingCartModel extends BaseModel {
 			}
 
 			_userId = userId;
+			setModified(true);
+		}
+	}
+
+	public String getUserName() {
+		return GetterUtil.getString(_userName);
+	}
+
+	public void setUserName(String userName) {
+		if (((userName == null) && (_userName != null)) ||
+				((userName != null) && (_userName == null)) ||
+				((userName != null) && (_userName != null) &&
+				!userName.equals(_userName))) {
+			if (!XSS_ALLOW_USERNAME) {
+				userName = XSSUtil.strip(userName);
+			}
+
+			_userName = userName;
 			setModified(true);
 		}
 	}
@@ -231,17 +255,21 @@ public class ShoppingCartModel extends BaseModel {
 		}
 	}
 
-	public BaseModel getProtected() {
-		return null;
-	}
-
-	public void protect() {
-	}
-
 	public Object clone() {
-		return new ShoppingCart(getCartId(), getCompanyId(), getUserId(),
-			getCreateDate(), getModifiedDate(), getItemIds(), getCouponIds(),
-			getAltShipping(), getInsure());
+		ShoppingCart clone = new ShoppingCart();
+		clone.setCartId(getCartId());
+		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
+		clone.setUserId(getUserId());
+		clone.setUserName(getUserName());
+		clone.setCreateDate(getCreateDate());
+		clone.setModifiedDate(getModifiedDate());
+		clone.setItemIds(getItemIds());
+		clone.setCouponIds(getCouponIds());
+		clone.setAltShipping(getAltShipping());
+		clone.setInsure(getInsure());
+
+		return clone;
 	}
 
 	public int compareTo(Object obj) {
@@ -284,8 +312,10 @@ public class ShoppingCartModel extends BaseModel {
 	}
 
 	private String _cartId;
+	private String _groupId;
 	private String _companyId;
 	private String _userId;
+	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _itemIds;

@@ -1088,17 +1088,15 @@
 
 		<!-- Shopping -->
 
-		<action path="/shopping/browse_categories" type="com.liferay.portlet.shopping.action.BrowseCategoriesAction">
-			<forward name="portlet.shopping.browse_categories" path="portlet.shopping.browse_categories" />
-			<forward name="portlet.shopping.view" path="portlet.shopping.view" />
+		<action path="/shopping/add_book_items" type="com.liferay.portlet.shopping.action.AddBookItemsAction">
+			<forward name="portlet.shopping.add_book_items" path="portlet.shopping.add_book_items" />
+			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
 		</action>
 
 		<action path="/shopping/cart" type="com.liferay.portlet.shopping.action.CartAction">
 			<forward name="portlet.shopping.cart" path="portlet.shopping.cart" />
 			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
 		</action>
-
-		<action path="/shopping/change_order" type="com.liferay.portlet.shopping.action.ChangeOrderAction" />
 
 		<action path="/shopping/checkout" type="com.liferay.portlet.shopping.action.CheckoutAction">
 			<forward name="portlet.shopping.checkout_first" path="portlet.shopping.checkout_first" />
@@ -1108,7 +1106,6 @@
 		</action>
 
 		<action path="/shopping/edit_category" type="com.liferay.portlet.shopping.action.EditCategoryAction">
-			<forward name="portlet.shopping.add_category" path="portlet.shopping.add_category" />
 			<forward name="portlet.shopping.edit_category" path="portlet.shopping.edit_category" />
 			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
 		</action>
@@ -1130,19 +1127,28 @@
 			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
 		</action>
 
+		<action path="/shopping/view" type="com.liferay.portlet.shopping.action.ViewAction">
+			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
+			<forward name="portlet.shopping.view" path="portlet.shopping.view" />
+		</action>
+
+		<action path="/shopping/view_coupon" type="com.liferay.portlet.shopping.action.ViewCouponAction">
+			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
+			<forward name="portlet.shopping.view_coupon" path="portlet.shopping.view_coupon" />
+		</action>
+
+		<action path="/shopping/view_item" type="com.liferay.portlet.shopping.action.EditItemAction">
+			<forward name="portlet.shopping.edit_item" path="portlet.shopping.view_item" />
+			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
+		</action>
+
+		<!--
 		<action path="/shopping/edit_order_invoice" type="com.liferay.portlet.shopping.action.EditOrderInvoiceAction">
 			<forward name="/portlet/shopping/edit_order_invoice.jsp" path="/portlet/shopping/edit_order_invoice.jsp" />
 			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
 		</action>
 
-		<action path="/shopping/help" forward="portlet.shopping.help" />
-
 		<action path="/shopping/notify" type="com.liferay.portlet.shopping.action.PayPalNotificationAction" />
-
-		<action path="/shopping/quick_add_items" type="com.liferay.portlet.shopping.action.QuickAddItemsAction">
-			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
-			<forward name="portlet.shopping.quick_add_items" path="portlet.shopping.quick_add_items" />
-		</action>
 
 		<action path="/shopping/search" forward="portlet.shopping.search" />
 
@@ -1163,17 +1169,7 @@
 		<action path="/shopping/update_setup" type="com.liferay.portlet.shopping.action.UpdateShoppingConfigAction">
 			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
 		</action>
-
-		<action path="/shopping/view_coupon" forward="portlet.shopping.view_coupon" />
-
-		<action path="/shopping/view_coupons" forward="portlet.shopping.view_coupons" />
-
-		<action path="/shopping/view_item" type="com.liferay.portlet.shopping.action.ViewItemAction">
-			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
-			<forward name="portlet.shopping.view_item" path="portlet.shopping.view_item" />
-		</action>
-
-		<action path="/shopping/view_orders" forward="portlet.shopping.view_orders" />
+		-->
 
 		<!-- Site Map -->
 

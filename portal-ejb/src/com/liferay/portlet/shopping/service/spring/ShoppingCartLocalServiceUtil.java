@@ -29,12 +29,42 @@ package com.liferay.portlet.shopping.service.spring;
  *
  */
 public class ShoppingCartLocalServiceUtil {
-	public static void deleteAll(java.lang.String userId)
+	public static void deleteGroupCarts(java.lang.String groupId)
+		throws com.liferay.portal.SystemException {
+		try {
+			ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
+			shoppingCartLocalService.deleteGroupCarts(groupId);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static void deleteUserCarts(java.lang.String userId)
+		throws com.liferay.portal.SystemException {
+		try {
+			ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
+			shoppingCartLocalService.deleteUserCarts(userId);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingCart getCart(
+		java.lang.String cartId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
-			shoppingCartLocalService.deleteAll(userId);
+
+			return shoppingCartLocalService.getCart(cartId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -47,12 +77,32 @@ public class ShoppingCartLocalServiceUtil {
 		}
 	}
 
-	public static void deleteCart(java.lang.String cartId)
+	public static java.util.Map getItems(java.lang.String groupId,
+		java.lang.String itemIds) throws com.liferay.portal.SystemException {
+		try {
+			ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
+
+			return shoppingCartLocalService.getItems(groupId, itemIds);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingCart updateCart(
+		java.lang.String userId, java.lang.String groupId,
+		java.lang.String cartId, java.lang.String itemIds,
+		java.lang.String couponIds, int altShipping, boolean insure)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
-			shoppingCartLocalService.deleteCart(cartId);
+
+			return shoppingCartLocalService.updateCart(userId, groupId, cartId,
+				itemIds, couponIds, altShipping, insure);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

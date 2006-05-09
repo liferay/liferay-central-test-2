@@ -224,15 +224,15 @@ portletURL.setParameter("tabs1", tabs1);
 			</c:if>
 
 			</form>
-		</c:if>
 
-		<script type="text/javascript">
-			if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
-				document.<portlet:namespace />fm1.<portlet:namespace />keywords.focus();
-			}
-			else if (document.<portlet:namespace />fm2.<portlet:namespace />keywords) {
-				document.<portlet:namespace />fm2.<portlet:namespace />keywords.focus();
-			}
-		</script>
+			<script type="text/javascript">
+				if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
+					document.<portlet:namespace />fm1.<portlet:namespace />keywords.focus();
+				}
+				else if (document.<portlet:namespace />fm2.<portlet:namespace />keywords) {
+					document.<portlet:namespace />fm2.<portlet:namespace />keywords.focus();
+				}
+			</script>
+		</c:if>
 	</c:when>
 </c:choose>

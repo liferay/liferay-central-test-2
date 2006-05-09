@@ -25,14 +25,14 @@
 <%@ include file="/html/portlet/shopping/init.jsp" %>
 
 <%
-String[] fieldsQuantities = StringUtil.split(ParamUtil.getString(request, "item_fields_quantities"));
+String[] fieldsQuantities = StringUtil.split(ParamUtil.getString(request, "fieldsQuantities"));
 
 List names = new ArrayList();
 List values = new ArrayList();
 
 for (int i = 0; i < 9; i++) {
-	String n = request.getParameter("n_" + i);
-	String v = request.getParameter("v_" + i);
+	String n = request.getParameter("n" + i);
+	String v = request.getParameter("v" + i);
 
 	if (n == null || v == null) {
 		break;
@@ -42,11 +42,12 @@ for (int i = 0; i < 9; i++) {
 	values.add(StringUtil.split(v));
 }
 
-int numOfRows = 1;
+int rowsCount = 1;
+
 for (int i = 0; i < values.size(); i++) {
 	String[] vArray = (String[])values.get(i);
 
-	numOfRows = numOfRows * vArray.length;
+	rowsCount = rowsCount * vArray.length;
 }
 %>
 
@@ -55,16 +56,16 @@ for (int i = 0; i < values.size(); i++) {
 		var itemQuantities = "";
 
 		<%
-		for (int i = 0; i < numOfRows; i++) {
+		for (int i = 0; i < rowsCount; i++) {
 		%>
 
-			itemQuantities = itemQuantities + document.<portlet:namespace />fm.<portlet:namespace />item_<%= i %>_fields_quantity.value + ",";
+			itemQuantities = itemQuantities + document.<portlet:namespace />fm.<portlet:namespace />fieldsQuantity<%= i %>.value + ",";
 
 		<%
 		}
 		%>
 
-		opener.document.<portlet:namespace />fm.<portlet:namespace />item_fields_quantities.value = itemQuantities;
+		opener.document.<portlet:namespace />fm.<portlet:namespace />fieldsQuantities.value = itemQuantities;
 
 		self.close();
 	}
@@ -72,97 +73,79 @@ for (int i = 0; i < values.size(); i++) {
 
 <form method="post" name="<portlet:namespace />fm">
 
-<table border="0" cellpadding="4" cellspacing="0" width="100%">
+<table border="1" bordercolor="<%= colorScheme.getPortletMenuBg() %>" cellpadding="4" cellspacing="0">
 <tr>
+
+	<%
+	for (int i = 0; i < names.size(); i++) {
+	%>
+
+		<td>
+			<b><%= names.get(i) %></b>
+		</td>
+
+	<%
+	}
+	%>
+
 	<td>
-		<table border="1" bordercolor="<%= colorScheme.getPortletMenuBg() %>" cellpadding="4" cellspacing="0">
-		<tr>
+		<b><%= LanguageUtil.get(pageContext, "quantity") %></b>
+	</td>
+</tr>
 
-			<%
-			for (int i = 0; i < names.size(); i++) {
-			%>
+<%
+for (int i = 0; i < rowsCount; i++) {
+%>
 
-				<td>
-					<font class="portlet-font" style="font-size: x-small;"><b>
-					<%= names.get(i) %>
-					</b></font>
-				</td>
-
-			<%
-			}
-			%>
-
-			<td>
-				<font class="portlet-font" style="font-size: x-small;"><b>
-				<%= LanguageUtil.get(pageContext, "quantity") %>
-				</b></font>
-			</td>
-		</tr>
+	<tr>
 
 		<%
-		for (int i = 0; i < numOfRows; i++) {
+		for (int j = 0; j < names.size(); j++) {
+			int numOfRepeats = 1;
+
+			for (int k = j + 1; k < values.size(); k++) {
+				String[] vArray = (String[])values.get(k);
+
+				numOfRepeats = numOfRepeats * vArray.length;
+			}
+
+			String[] vArray = (String[])values.get(j);
+
+			int arrayPos;
+
+			for (arrayPos = i / numOfRepeats; arrayPos >= vArray.length; arrayPos = arrayPos - vArray.length) {
+			}
 		%>
 
-			<tr>
-
-				<%
-				for (int j = 0; j < names.size(); j++) {
-					int numOfRepeats = 1;
-
-					for (int k = j + 1; k < values.size(); k++) {
-						String[] vArray = (String[])values.get(k);
-
-						numOfRepeats = numOfRepeats * vArray.length;
-					}
-
-					String[] vArray = (String[])values.get(j);
-
-					int arrayPos;
-					for (arrayPos = i / numOfRepeats; arrayPos >= vArray.length; arrayPos = arrayPos - vArray.length) {
-					}
-				%>
-
-					<td>
-						<font class="portlet-font" style="font-size: x-small;">
-						<%= vArray[arrayPos] %>
-						</font>
-					</td>
-
-				<%
-				}
-
-				int fieldsQuantity = 0;
-				if (i < fieldsQuantities.length) {
-					fieldsQuantity = GetterUtil.getInteger(fieldsQuantities[i]);
-				}
-				%>
-
-				<td>
-					<input class="form-text" name="<portlet:namespace />item_<%= i %>_fields_quantity" type="text" size="4" value="<%= fieldsQuantity %>">
-				</td>
-			</tr>
+			<td>
+				<%= vArray[arrayPos] %>
+			</td>
 
 		<%
 		}
+
+		int fieldsQuantity = 0;
+
+		if (i < fieldsQuantities.length) {
+			fieldsQuantity = GetterUtil.getInteger(fieldsQuantities[i]);
+		}
 		%>
 
-		</table>
+		<td>
+			<input class="form-text" name="<portlet:namespace />fieldsQuantity<%= i %>" type="text" size="4" value="<%= fieldsQuantity %>">
+		</td>
+	</tr>
 
-		<br>
+<%
+}
+%>
 
-		<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td>
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update") %>' onClick="<portlet:namespace />updateItemQuantities();">
-
-				<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onClick="self.close();">
-			</td>
-		</tr>
-		</table>
-
-		<br>
-	</td>
-</tr>
 </table>
+
+<br>
+
+<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update") %>' onClick="<portlet:namespace />updateItemQuantities();">
+
+<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onClick="self.close();">
 
 </form>

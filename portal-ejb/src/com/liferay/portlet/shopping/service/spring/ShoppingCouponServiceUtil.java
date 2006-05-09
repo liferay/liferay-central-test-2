@@ -30,10 +30,12 @@ package com.liferay.portlet.shopping.service.spring;
  */
 public class ShoppingCouponServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
-		java.lang.String couponId, boolean autoCouponId, java.lang.String name,
-		java.lang.String description, int startMonth, int startDay,
-		int startYear, int endMonth, int endDay, int endYear,
-		boolean neverExpires, boolean active, java.lang.String limitCategories,
+		java.lang.String plid, java.lang.String couponId, boolean autoCouponId,
+		java.lang.String name, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
+		boolean neverExpire, boolean active, java.lang.String limitCategories,
 		java.lang.String limitSkus, double minOrder, double discount,
 		java.lang.String discountType)
 		throws com.liferay.portal.PortalException, 
@@ -41,10 +43,12 @@ public class ShoppingCouponServiceUtil {
 		try {
 			ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
 
-			return shoppingCouponService.addCoupon(couponId, autoCouponId,
-				name, description, startMonth, startDay, startYear, endMonth,
-				endDay, endYear, neverExpires, active, limitCategories,
-				limitSkus, minOrder, discount, discountType);
+			return shoppingCouponService.addCoupon(plid, couponId,
+				autoCouponId, name, description, startDateMonth, startDateDay,
+				startDateYear, startDateHour, startDateMinute, endDateMonth,
+				endDateDay, endDateYear, endDateHour, endDateMinute,
+				neverExpire, active, limitCategories, limitSkus, minOrder,
+				discount, discountType);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -57,12 +61,13 @@ public class ShoppingCouponServiceUtil {
 		}
 	}
 
-	public static void deleteCoupon(java.lang.String couponId)
+	public static void deleteCoupon(java.lang.String plid,
+		java.lang.String couponId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
-			shoppingCouponService.deleteCoupon(couponId);
+			shoppingCouponService.deleteCoupon(plid, couponId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -76,13 +81,13 @@ public class ShoppingCouponServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
-		java.lang.String couponId)
+		java.lang.String plid, java.lang.String couponId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
 
-			return shoppingCouponService.getCoupon(couponId);
+			return shoppingCouponService.getCoupon(plid, couponId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -95,54 +100,19 @@ public class ShoppingCouponServiceUtil {
 		}
 	}
 
-	public static java.util.List getCoupons(java.lang.String companyId)
+	public static java.util.List search(java.lang.String couponId,
+		java.lang.String plid, java.lang.String companyId, boolean active,
+		java.lang.String discountType, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
 
-			return shoppingCouponService.getCoupons(companyId);
+			return shoppingCouponService.search(couponId, plid, companyId,
+				active, discountType, andOperator, begin, end);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
-	public static java.util.List getCoupons(java.lang.String companyId,
-		boolean active, java.lang.String discountType, int begin, int end)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
-
-			return shoppingCouponService.getCoupons(companyId, active,
-				discountType, begin, end);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
-	public static int getCouponsSize(java.lang.String companyId,
-		boolean active, java.lang.String discountType)
-		throws com.liferay.portal.SystemException {
-		try {
-			ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
-
-			return shoppingCouponService.getCouponsSize(companyId, active,
-				discountType);
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;
@@ -153,10 +123,12 @@ public class ShoppingCouponServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon updateCoupon(
-		java.lang.String couponId, java.lang.String name,
-		java.lang.String description, int startMonth, int startDay,
-		int startYear, int endMonth, int endDay, int endYear,
-		boolean neverExpires, boolean active, java.lang.String limitCategories,
+		java.lang.String plid, java.lang.String couponId,
+		java.lang.String name, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
+		boolean neverExpire, boolean active, java.lang.String limitCategories,
 		java.lang.String limitSkus, double minOrder, double discount,
 		java.lang.String discountType)
 		throws com.liferay.portal.PortalException, 
@@ -164,10 +136,11 @@ public class ShoppingCouponServiceUtil {
 		try {
 			ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
 
-			return shoppingCouponService.updateCoupon(couponId, name,
-				description, startMonth, startDay, startYear, endMonth, endDay,
-				endYear, neverExpires, active, limitCategories, limitSkus,
-				minOrder, discount, discountType);
+			return shoppingCouponService.updateCoupon(plid, couponId, name,
+				description, startDateMonth, startDateDay, startDateYear,
+				startDateHour, startDateMinute, endDateMonth, endDateDay,
+				endDateYear, endDateHour, endDateMinute, neverExpire, active,
+				limitCategories, limitSkus, minOrder, discount, discountType);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

@@ -125,52 +125,84 @@ public class ShoppingCartUtil {
 		return getPersistence().findByPrimaryKey(cartId);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId)
+	public static java.util.List findByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId);
+		return getPersistence().findByGroupId(groupId);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
+	public static java.util.List findByGroupId(java.lang.String groupId,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end);
+		return getPersistence().findByGroupId(groupId, begin, end);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
+	public static java.util.List findByGroupId(java.lang.String groupId,
 		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end, obc);
+		return getPersistence().findByGroupId(groupId, begin, end, obc);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCart findByCompanyId_First(
-		java.lang.String companyId,
+	public static com.liferay.portlet.shopping.model.ShoppingCart findByGroupId_First(
+		java.lang.String groupId,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portlet.shopping.NoSuchCartException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId_First(companyId, obc);
+		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCart findByCompanyId_Last(
-		java.lang.String companyId,
+	public static com.liferay.portlet.shopping.model.ShoppingCart findByGroupId_Last(
+		java.lang.String groupId,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portlet.shopping.NoSuchCartException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId_Last(companyId, obc);
+		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCart[] findByCompanyId_PrevAndNext(
-		java.lang.String cartId, java.lang.String companyId,
+	public static com.liferay.portlet.shopping.model.ShoppingCart[] findByGroupId_PrevAndNext(
+		java.lang.String cartId, java.lang.String groupId,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portlet.shopping.NoSuchCartException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId_PrevAndNext(cartId, companyId,
-			obc);
+		return getPersistence().findByGroupId_PrevAndNext(cartId, groupId, obc);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCart findByUserId(
-		java.lang.String userId)
-		throws com.liferay.portlet.shopping.NoSuchCartException, 
-			com.liferay.portal.SystemException {
+	public static java.util.List findByUserId(java.lang.String userId)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId);
+	}
+
+	public static java.util.List findByUserId(java.lang.String userId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByUserId(userId, begin, end);
+	}
+
+	public static java.util.List findByUserId(java.lang.String userId,
+		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUserId(userId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingCart findByUserId_First(
+		java.lang.String userId,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portlet.shopping.NoSuchCartException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByUserId_First(userId, obc);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingCart findByUserId_Last(
+		java.lang.String userId,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portlet.shopping.NoSuchCartException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByUserId_Last(userId, obc);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingCart[] findByUserId_PrevAndNext(
+		java.lang.String cartId, java.lang.String userId,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portlet.shopping.NoSuchCartException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByUserId_PrevAndNext(cartId, userId, obc);
 	}
 
 	public static java.util.List findAll()
@@ -178,20 +210,19 @@ public class ShoppingCartUtil {
 		return getPersistence().findAll();
 	}
 
-	public static void removeByCompanyId(java.lang.String companyId)
+	public static void removeByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeByCompanyId(companyId);
+		getPersistence().removeByGroupId(groupId);
 	}
 
 	public static void removeByUserId(java.lang.String userId)
-		throws com.liferay.portlet.shopping.NoSuchCartException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().removeByUserId(userId);
 	}
 
-	public static int countByCompanyId(java.lang.String companyId)
+	public static int countByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByCompanyId(companyId);
+		return getPersistence().countByGroupId(groupId);
 	}
 
 	public static int countByUserId(java.lang.String userId)

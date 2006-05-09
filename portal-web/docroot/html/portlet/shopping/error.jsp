@@ -24,36 +24,10 @@
 
 <%@ include file="/html/portlet/shopping/init.jsp" %>
 
-<liferay-ui:box top="/html/common/themes/inner_top.jsp" bottom="/html/common/themes/inner_bottom.jsp">
-	<liferay-util:param name="box_title" value='<%= LanguageUtil.get(pageContext, "error") %>' />
+<liferay-ui:tabs names="error" backURL="javascript: history.go(-1);" />
 
-	<table border="0" cellpadding="0" cellspacing="0">
-	<tr>
-		<td>
-			<font class="portlet-msg-error" style="font-size: x-small;">
-
-			<c:if test="<%= SessionErrors.contains(renderRequest, NoSuchCategoryException.class.getName()) %>">
-				<%= LanguageUtil.get(pageContext, "the-category-could-not-be-found") %>
-			</c:if>
-
-			<c:if test="<%= SessionErrors.contains(renderRequest, NoSuchCouponException.class.getName()) %>">
-				<%= LanguageUtil.get(pageContext, "the-coupon-could-not-be-found") %>
-			</c:if>
-
-			<c:if test="<%= SessionErrors.contains(renderRequest, NoSuchItemException.class.getName()) %>">
-				<%= LanguageUtil.get(pageContext, "the-item-could-not-be-found") %>
-			</c:if>
-
-			<c:if test="<%= SessionErrors.contains(renderRequest, NoSuchOrderException.class.getName()) %>">
-				<%= LanguageUtil.get(pageContext, "the-order-could-not-be-found") %>
-			</c:if>
-
-			<c:if test="<%= SessionErrors.contains(renderRequest, PrincipalException.class.getName()) %>">
-				<%= LanguageUtil.get(pageContext, "you-do-not-have-the-required-permissions") %>
-			</c:if>
-
-			</font>
-		</td>
-	</tr>
-	</table>
-</liferay-ui:box>
+<liferay-ui:error exception="<%= NoSuchCategoryException.class %>" message="the-category-could-not-be-found" />
+<liferay-ui:error exception="<%= NoSuchCouponException.class %>" message="the-coupon-could-not-be-found" />
+<liferay-ui:error exception="<%= NoSuchItemException.class %>" message="the-item-could-not-be-found" />
+<liferay-ui:error exception="<%= NoSuchOrderException.class %>" message="the-order-could-not-be-found" />
+<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />

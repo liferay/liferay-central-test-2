@@ -86,7 +86,6 @@ import com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalService
 import com.liferay.portlet.enterpriseadmin.search.UserSearchTerms;
 import com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalServiceUtil;
 import com.liferay.portlet.shopping.service.spring.ShoppingCartLocalServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingItemLocalServiceUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.GetterUtil;
@@ -477,8 +476,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		// Shopping cart
 
-		ShoppingCartLocalServiceUtil.deleteAll(userId);
-		ShoppingItemLocalServiceUtil.deleteAll(userId);
+		ShoppingCartLocalServiceUtil.deleteUserCarts(userId);
 
 		// Mail
 

@@ -302,6 +302,7 @@
 		<reference package-path="com.liferay.portlet.journal" entity="JournalArticle" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBCategory" />
 		<reference package-path="com.liferay.portlet.polls" entity="PollsQuestion" />
+		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingCart" />
 		<reference package-path="com.liferay.portlet.wiki" entity="WikiNode" />
 	</entity>
 	<entity name="Image" local-service="true" remote-service="true">
@@ -966,7 +967,6 @@
 		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFileRank" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessageFlag" />
 		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingCart" />
-		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingItem" />
 	</entity>
 	<entity name="UserIdMapper" local-service="true" remote-service="false">
 

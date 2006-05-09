@@ -35,9 +35,6 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class ShoppingItemPriceModel extends BaseModel {
-	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
-				"value.object.cacheable.com.liferay.portlet.shopping.model.ShoppingItemPrice"),
-			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItemPrice"),
 			XSS_ALLOW);
@@ -53,28 +50,12 @@ public class ShoppingItemPriceModel extends BaseModel {
 	public ShoppingItemPriceModel() {
 	}
 
-	public ShoppingItemPriceModel(String itemPriceId) {
-		_itemPriceId = itemPriceId;
-		setNew(true);
-	}
-
-	public ShoppingItemPriceModel(String itemPriceId, String itemId,
-		int minQuantity, int maxQuantity, double price, double discount,
-		boolean taxable, double shipping, boolean useShippingFormula, int status) {
-		_itemPriceId = itemPriceId;
-		_itemId = itemId;
-		_minQuantity = minQuantity;
-		_maxQuantity = maxQuantity;
-		_price = price;
-		_discount = discount;
-		_taxable = taxable;
-		_shipping = shipping;
-		_useShippingFormula = useShippingFormula;
-		_status = status;
-	}
-
 	public String getPrimaryKey() {
 		return _itemPriceId;
+	}
+
+	public void setPrimaryKey(String pk) {
+		setItemPriceId(pk);
 	}
 
 	public String getItemPriceId() {
@@ -209,17 +190,20 @@ public class ShoppingItemPriceModel extends BaseModel {
 		}
 	}
 
-	public BaseModel getProtected() {
-		return null;
-	}
-
-	public void protect() {
-	}
-
 	public Object clone() {
-		return new ShoppingItemPrice(getItemPriceId(), getItemId(),
-			getMinQuantity(), getMaxQuantity(), getPrice(), getDiscount(),
-			getTaxable(), getShipping(), getUseShippingFormula(), getStatus());
+		ShoppingItemPrice clone = new ShoppingItemPrice();
+		clone.setItemPriceId(getItemPriceId());
+		clone.setItemId(getItemId());
+		clone.setMinQuantity(getMinQuantity());
+		clone.setMaxQuantity(getMaxQuantity());
+		clone.setPrice(getPrice());
+		clone.setDiscount(getDiscount());
+		clone.setTaxable(getTaxable());
+		clone.setShipping(getShipping());
+		clone.setUseShippingFormula(getUseShippingFormula());
+		clone.setStatus(getStatus());
+
+		return clone;
 	}
 
 	public int compareTo(Object obj) {

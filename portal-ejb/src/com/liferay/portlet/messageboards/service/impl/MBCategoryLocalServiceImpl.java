@@ -33,6 +33,7 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.CategoryNameException;
+import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBTopic;
@@ -79,6 +80,8 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 		User user = UserUtil.findByPrimaryKey(userId);
 		String groupId = PortalUtil.getPortletGroupId(plid);
+		parentCategoryId = getParentCategoryId(
+			user.getCompanyId(), parentCategoryId);
 		Date now = new Date();
 
 		validate(name);
@@ -329,9 +332,11 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 	}
 
 	public MBCategory updateCategory(
-			String categoryId, String parentCategoryId, String name,
-			String description)
+			String companyId, String categoryId, String parentCategoryId,
+			String name, String description)
 		throws PortalException, SystemException {
+
+		parentCategoryId = getParentCategoryId(companyId, parentCategoryId);
 
 		validate(name);
 
@@ -345,6 +350,30 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 		MBCategoryUtil.update(category);
 
 		return category;
+	}
+
+	protected String getParentCategoryId(
+			String companyId, String parentCategoryId)
+		throws PortalException, SystemException {
+
+		if (!parentCategoryId.equals(MBCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+
+			// Ensure parent category exists and belongs to the proper company
+
+			try {
+				MBCategory parentCategory =
+					MBCategoryUtil.findByPrimaryKey(parentCategoryId);
+
+				if (!companyId.equals(parentCategory.getCompanyId())) {
+					parentCategoryId = MBCategory.DEFAULT_PARENT_CATEGORY_ID;
+				}
+			}
+			catch (NoSuchCategoryException nsce) {
+				parentCategoryId = MBCategory.DEFAULT_PARENT_CATEGORY_ID;
+			}
+		}
+
+		return parentCategoryId;
 	}
 
 	protected void validate(String name) throws PortalException {

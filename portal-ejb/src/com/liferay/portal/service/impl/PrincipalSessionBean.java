@@ -142,7 +142,8 @@ public class PrincipalSessionBean {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e.getMessage());
+			_log.warn(StackTraceUtil.getStackTrace(e));
 		}
 	}
 

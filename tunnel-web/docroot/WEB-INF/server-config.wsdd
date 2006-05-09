@@ -2115,44 +2115,6 @@
 		<typeMapping xmlns:ns="http://model.polls.portlet.liferay.com" qname="ns:PollsVoteModel" type="java:com.liferay.portlet.polls.model.PollsVoteModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>  
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:BaseModel" type="java:com.liferay.portal.model.BaseModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping> 
 	</service>
-	<service name="Portlet_Shopping_ShoppingCartService" provider="java:RPC" style="rpc" use="encoded"> 
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.portlet.liferay.com"/>  
-		<parameter name="wsdlServiceElement" value="ShoppingCartServiceSoapService"/>  
-		<parameter name="schemaUnqualified" value="http://model.shopping.portlet.liferay.com,http://model.portal.liferay.com,http://xml.apache.org/xml-soap"/>  
-		<parameter name="wsdlServicePort" value="Portlet_Shopping_ShoppingCartService"/>  
-		<parameter name="className" value="com.liferay.portlet.shopping.service.http.ShoppingCartServiceSoap"/>  
-		<parameter name="wsdlPortType" value="ShoppingCartServiceSoap"/>  
-		<parameter name="typeMappingVersion" value="1.2"/>  
-		<operation xmlns:operNS="urn:http.service.shopping.portlet.liferay.com" name="deleteCart" qname="operNS:deleteCart" soapAction="">  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="cartId" type="tns:string"></parameter> 
-		</operation>  
-		<operation xmlns:operNS="urn:http.service.shopping.portlet.liferay.com" xmlns:rtns="http://model.shopping.portlet.liferay.com" name="emptyCart" qname="operNS:emptyCart" returnQName="emptyCartReturn" returnType="rtns:ShoppingCartModel" soapAction="">  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sessionId" type="tns:string"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter> 
-		</operation>  
-		<operation xmlns:operNS="urn:http.service.shopping.portlet.liferay.com" xmlns:rtns="http://model.shopping.portlet.liferay.com" name="getCart" qname="operNS:getCart" returnQName="getCartReturn" returnType="rtns:ShoppingCartModel" soapAction="">  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sessionId" type="tns:string"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter> 
-		</operation>  
-		<operation xmlns:operNS="urn:http.service.shopping.portlet.liferay.com" xmlns:rtns="http://xml.apache.org/xml-soap" name="getItems" qname="operNS:getItems" returnQName="getItemsReturn" returnType="rtns:Map" soapAction="">  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="itemIds" type="tns:string"></parameter> 
-		</operation>  
-		<operation xmlns:operNS="urn:http.service.shopping.portlet.liferay.com" xmlns:rtns="http://model.shopping.portlet.liferay.com" name="updateCart" qname="operNS:updateCart" returnQName="updateCartReturn" returnType="rtns:ShoppingCartModel" soapAction="">  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sessionId" type="tns:string"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="itemIds" type="tns:string"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="couponIds" type="tns:string"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="altShipping" type="tns:int"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="insure" type="tns:boolean"></parameter> 
-		</operation>  
-		<operation xmlns:operNS="urn:http.service.shopping.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="hasAdmin" qname="operNS:hasAdmin" returnQName="hasAdminReturn" returnType="rtns:boolean" soapAction="">  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="cartId" type="tns:string"></parameter> 
-		</operation>  
-		<parameter name="allowedMethods" value="getCart getItems deleteCart hasAdmin updateCart emptyCart"/>  
-		<typeMapping xmlns:ns="http://model.shopping.portlet.liferay.com" qname="ns:ShoppingCartModel" type="java:com.liferay.portlet.shopping.model.ShoppingCartModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>  
-		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:BaseModel" type="java:com.liferay.portal.model.BaseModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping> 
-	</service>
 	<service name="Portlet_Shopping_ShoppingCategoryService" provider="java:RPC" style="rpc" use="encoded"> 
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.portlet.liferay.com"/>  
 		<parameter name="wsdlServiceElement" value="ShoppingCategoryServiceSoapService"/>  
@@ -2289,38 +2251,6 @@
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:BaseModel" type="java:com.liferay.portal.model.BaseModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>  
 		<arrayMapping xmlns:ns="urn:http.service.shopping.portlet.liferay.com" xmlns:cmp-ns="http://model.shopping.portlet.liferay.com" qname="ns:ArrayOf_tns2_ShoppingCouponModel" type="java:com.liferay.portlet.shopping.model.ShoppingCouponModel[]" innerType="cmp-ns:ShoppingCouponModel" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping> 
 	</service>
-	<service name="Portlet_Shopping_ShoppingItemFieldService" provider="java:RPC" style="rpc" use="encoded"> 
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.portlet.liferay.com"/>  
-		<parameter name="wsdlServiceElement" value="ShoppingItemFieldServiceSoapService"/>  
-		<parameter name="schemaUnqualified" value="http://model.shopping.portlet.liferay.com,http://model.portal.liferay.com,urn:http.service.shopping.portlet.liferay.com"/>  
-		<parameter name="wsdlServicePort" value="Portlet_Shopping_ShoppingItemFieldService"/>  
-		<parameter name="className" value="com.liferay.portlet.shopping.service.http.ShoppingItemFieldServiceSoap"/>  
-		<parameter name="wsdlPortType" value="ShoppingItemFieldServiceSoap"/>  
-		<parameter name="typeMappingVersion" value="1.2"/>  
-		<operation xmlns:operNS="urn:http.service.shopping.portlet.liferay.com" xmlns:rtns="urn:http.service.shopping.portlet.liferay.com" xmlns:tns2="http://model.shopping.portlet.liferay.com" name="getItemFields" qname="operNS:getItemFields" returnQName="getItemFieldsReturn" returnType="rtns:ArrayOf_tns2_ShoppingItemFieldModel" returnItemType="tns2:ShoppingItemFieldModel" soapAction="">  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="itemId" type="tns:string"></parameter> 
-		</operation>  
-		<parameter name="allowedMethods" value="getItemFields"/>  
-		<arrayMapping xmlns:ns="urn:http.service.shopping.portlet.liferay.com" xmlns:cmp-ns="http://model.shopping.portlet.liferay.com" qname="ns:ArrayOf_tns2_ShoppingItemFieldModel" type="java:com.liferay.portlet.shopping.model.ShoppingItemFieldModel[]" innerType="cmp-ns:ShoppingItemFieldModel" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>  
-		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:BaseModel" type="java:com.liferay.portal.model.BaseModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>  
-		<typeMapping xmlns:ns="http://model.shopping.portlet.liferay.com" qname="ns:ShoppingItemFieldModel" type="java:com.liferay.portlet.shopping.model.ShoppingItemFieldModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping> 
-	</service>
-	<service name="Portlet_Shopping_ShoppingItemPriceService" provider="java:RPC" style="rpc" use="encoded"> 
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.portlet.liferay.com"/>  
-		<parameter name="wsdlServiceElement" value="ShoppingItemPriceServiceSoapService"/>  
-		<parameter name="schemaUnqualified" value="http://model.shopping.portlet.liferay.com,http://model.portal.liferay.com,urn:http.service.shopping.portlet.liferay.com"/>  
-		<parameter name="wsdlServicePort" value="Portlet_Shopping_ShoppingItemPriceService"/>  
-		<parameter name="className" value="com.liferay.portlet.shopping.service.http.ShoppingItemPriceServiceSoap"/>  
-		<parameter name="wsdlPortType" value="ShoppingItemPriceServiceSoap"/>  
-		<parameter name="typeMappingVersion" value="1.2"/>  
-		<operation xmlns:operNS="urn:http.service.shopping.portlet.liferay.com" xmlns:rtns="urn:http.service.shopping.portlet.liferay.com" xmlns:tns2="http://model.shopping.portlet.liferay.com" name="getItemPrices" qname="operNS:getItemPrices" returnQName="getItemPricesReturn" returnType="rtns:ArrayOf_tns2_ShoppingItemPriceModel" returnItemType="tns2:ShoppingItemPriceModel" soapAction="">  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="itemId" type="tns:string"></parameter> 
-		</operation>  
-		<parameter name="allowedMethods" value="getItemPrices"/>  
-		<arrayMapping xmlns:ns="urn:http.service.shopping.portlet.liferay.com" xmlns:cmp-ns="http://model.shopping.portlet.liferay.com" qname="ns:ArrayOf_tns2_ShoppingItemPriceModel" type="java:com.liferay.portlet.shopping.model.ShoppingItemPriceModel[]" innerType="cmp-ns:ShoppingItemPriceModel" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>  
-		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:BaseModel" type="java:com.liferay.portal.model.BaseModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>  
-		<typeMapping xmlns:ns="http://model.shopping.portlet.liferay.com" qname="ns:ShoppingItemPriceModel" type="java:com.liferay.portlet.shopping.model.ShoppingItemPriceModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping> 
-	</service>
 	<service name="Portlet_Shopping_ShoppingItemService" provider="java:RPC" style="rpc" use="encoded"> 
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.portlet.liferay.com"/>  
 		<parameter name="wsdlServiceElement" value="ShoppingItemServiceSoapService"/>  
@@ -2392,23 +2322,6 @@
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:BaseModel" type="java:com.liferay.portal.model.BaseModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>  
 		<typeMapping xmlns:ns="http://model.shopping.portlet.liferay.com" qname="ns:ShoppingItemModel" type="java:com.liferay.portlet.shopping.model.ShoppingItemModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>  
 		<typeMapping xmlns:ns="http://model.shopping.portlet.liferay.com" qname="ns:ShoppingItem" type="java:com.liferay.portlet.shopping.model.ShoppingItem" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping> 
-	</service>
-	<service name="Portlet_Shopping_ShoppingOrderItemService" provider="java:RPC" style="rpc" use="encoded"> 
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.portlet.liferay.com"/>  
-		<parameter name="wsdlServiceElement" value="ShoppingOrderItemServiceSoapService"/>  
-		<parameter name="schemaUnqualified" value="http://persistence.service.shopping.portlet.liferay.com,http://model.shopping.portlet.liferay.com,http://model.portal.liferay.com,urn:http.service.shopping.portlet.liferay.com"/>  
-		<parameter name="wsdlServicePort" value="Portlet_Shopping_ShoppingOrderItemService"/>  
-		<parameter name="className" value="com.liferay.portlet.shopping.service.http.ShoppingOrderItemServiceSoap"/>  
-		<parameter name="wsdlPortType" value="ShoppingOrderItemServiceSoap"/>  
-		<parameter name="typeMappingVersion" value="1.2"/>  
-		<operation xmlns:operNS="urn:http.service.shopping.portlet.liferay.com" xmlns:rtns="urn:http.service.shopping.portlet.liferay.com" xmlns:tns2="http://model.shopping.portlet.liferay.com" name="getOrderItems" qname="operNS:getOrderItems" returnQName="getOrderItemsReturn" returnType="rtns:ArrayOf_tns2_ShoppingOrderItemModel" returnItemType="tns2:ShoppingOrderItemModel" soapAction="">  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="orderId" type="tns:string"></parameter> 
-		</operation>  
-		<parameter name="allowedMethods" value="getOrderItems"/>  
-		<typeMapping xmlns:ns="http://persistence.service.shopping.portlet.liferay.com" qname="ns:ShoppingOrderItemPK" type="java:com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>  
-		<typeMapping xmlns:ns="http://model.shopping.portlet.liferay.com" qname="ns:ShoppingOrderItemModel" type="java:com.liferay.portlet.shopping.model.ShoppingOrderItemModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>  
-		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:BaseModel" type="java:com.liferay.portal.model.BaseModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>  
-		<arrayMapping xmlns:ns="urn:http.service.shopping.portlet.liferay.com" xmlns:cmp-ns="http://model.shopping.portlet.liferay.com" qname="ns:ArrayOf_tns2_ShoppingOrderItemModel" type="java:com.liferay.portlet.shopping.model.ShoppingOrderItemModel[]" innerType="cmp-ns:ShoppingOrderItemModel" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping> 
 	</service>
 	<service name="Portlet_Shopping_ShoppingOrderService" provider="java:RPC" style="rpc" use="encoded"> 
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.portlet.liferay.com"/>  

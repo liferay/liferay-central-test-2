@@ -23,14 +23,19 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.Randomizer;
+import com.liferay.util.StringUtil;
+import com.liferay.util.dao.hibernate.QueryPos;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
 
@@ -42,7 +47,55 @@ import org.hibernate.Session;
  */
 public class ShoppingItemFinder {
 
-	public static int countByFeatured(String companyId, String[] categoryIds)
+	public static String COUNT_BY_CATEGORY_IDS =
+		ShoppingItemFinder.class.getName() + ".countByCategoryIds";
+
+	public static int countByCategoryIds(List categoryIds)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_CATEGORY_IDS);
+
+			sql = StringUtil.replace(
+				sql, "[$CATEGORY_ID$]", _getCategoryIds(categoryIds));
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			for (int i = 0; i < categoryIds.size(); i++) {
+				String categoryId = (String)categoryIds.get(i);
+
+				qPos.add(categoryId);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Integer count = (Integer)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static int countByFeatured(String groupId, String[] categoryIds)
 		throws SystemException {
 
 		Session session = null;
@@ -67,7 +120,7 @@ public class ShoppingItemFinder {
 			}
 
 			query.append(") AND ");
-			query.append("shoppingItem.companyId = ? AND ");
+			query.append("shoppingItem.groupId = ? AND ");
 			query.append("shoppingItem.featured = ? AND ");
 			query.append("shoppingItem.smallImage = ?");
 
@@ -77,7 +130,7 @@ public class ShoppingItemFinder {
 				q.setString(i, categoryIds[i]);
 			}
 
-			q.setString(categoryIds.length, companyId);
+			q.setString(categoryIds.length, groupId);
 			q.setBoolean(categoryIds.length + 1, true);
 			q.setBoolean(categoryIds.length + 2, true);
 
@@ -102,7 +155,7 @@ public class ShoppingItemFinder {
 	}
 
 	public static int countByKeywords(
-			String companyId, String[] categoryIds, String keywords)
+			String groupId, String[] categoryIds, String keywords)
 		throws SystemException {
 
 		Session session = null;
@@ -131,7 +184,7 @@ public class ShoppingItemFinder {
 				query.append(") AND ");
 			}
 
-			query.append("shoppingItem.companyId = ? AND (");
+			query.append("shoppingItem.groupId = ? AND (");
 			query.append("shoppingItem.name LIKE ? OR ");
 			query.append("shoppingItem.description LIKE ? OR ");
 			query.append("shoppingItem.properties LIKE ?)");
@@ -144,7 +197,7 @@ public class ShoppingItemFinder {
 				q.setString(i, categoryIds[i]);
 			}
 
-			q.setString(categoryIds.length, companyId);
+			q.setString(categoryIds.length, groupId);
 			q.setString(categoryIds.length + 1, keywords);
 			q.setString(categoryIds.length + 2, keywords);
 			q.setString(categoryIds.length + 3, keywords);
@@ -169,7 +222,7 @@ public class ShoppingItemFinder {
 		}
 	}
 
-	public static int countBySale(String companyId, String[] categoryIds)
+	public static int countBySale(String groupId, String[] categoryIds)
 		throws SystemException {
 
 		Session session = null;
@@ -194,7 +247,7 @@ public class ShoppingItemFinder {
 			}
 
 			query.append(") AND ");
-			query.append("shoppingItem.companyId = ? AND ");
+			query.append("shoppingItem.groupId = ? AND ");
 			query.append("shoppingItem.sale = ? AND ");
 			query.append("shoppingItem.smallImage = ?");
 
@@ -204,7 +257,7 @@ public class ShoppingItemFinder {
 				q.setString(i, categoryIds[i]);
 			}
 
-			q.setString(categoryIds.length, companyId);
+			q.setString(categoryIds.length, groupId);
 			q.setBoolean(categoryIds.length + 1, true);
 			q.setBoolean(categoryIds.length + 2, true);
 
@@ -229,12 +282,12 @@ public class ShoppingItemFinder {
 	}
 
 	public static List findByFeatured(
-			String companyId, String[] categoryIds, int numOfItems)
+			String groupId, String[] categoryIds, int numOfItems)
 		throws SystemException {
 
 		List list = new ArrayList(numOfItems);
 
-		int countByFeatured = countByFeatured(companyId, categoryIds);
+		int countByFeatured = countByFeatured(groupId, categoryIds);
 
 		if (countByFeatured == 0) {
 			return list;
@@ -262,7 +315,7 @@ public class ShoppingItemFinder {
 			}
 
 			query.append(") AND ");
-			query.append("shoppingItem.companyId = ? AND ");
+			query.append("shoppingItem.groupId = ? AND ");
 			query.append("shoppingItem.featured = ? AND ");
 			query.append("shoppingItem.smallImage = ?");
 
@@ -272,7 +325,7 @@ public class ShoppingItemFinder {
 				q.setString(i, categoryIds[i]);
 			}
 
-			q.setString(categoryIds.length, companyId);
+			q.setString(categoryIds.length, groupId);
 			q.setBoolean(categoryIds.length + 1, true);
 			q.setBoolean(categoryIds.length + 2, true);
 
@@ -307,7 +360,7 @@ public class ShoppingItemFinder {
 	}
 
 	public static List findByKeywords(
-			String companyId, String[] categoryIds, String keywords, int begin,
+			String groupId, String[] categoryIds, String keywords, int begin,
 			int end)
 		throws SystemException {
 
@@ -337,7 +390,7 @@ public class ShoppingItemFinder {
 				query.append(") AND ");
 			}
 
-			query.append("shoppingItem.companyId = ? AND (");
+			query.append("shoppingItem.groupId = ? AND (");
 			query.append("shoppingItem.name LIKE ? OR ");
 			query.append("shoppingItem.description LIKE ? OR ");
 			query.append("shoppingItem.properties LIKE ?)");
@@ -350,7 +403,7 @@ public class ShoppingItemFinder {
 				q.setString(i, categoryIds[i]);
 			}
 
-			q.setString(categoryIds.length, companyId);
+			q.setString(categoryIds.length, groupId);
 			q.setString(categoryIds.length + 1, keywords);
 			q.setString(categoryIds.length + 2, keywords);
 			q.setString(categoryIds.length + 3, keywords);
@@ -383,12 +436,12 @@ public class ShoppingItemFinder {
 	}
 
 	public static List findBySale(
-			String companyId, String[] categoryIds, int numOfItems)
+			String groupId, String[] categoryIds, int numOfItems)
 		throws SystemException {
 
 		List list = new ArrayList(numOfItems);
 
-		int countBySale = countBySale(companyId, categoryIds);
+		int countBySale = countBySale(groupId, categoryIds);
 
 		if (countBySale == 0) {
 			return list;
@@ -416,7 +469,7 @@ public class ShoppingItemFinder {
 			}
 
 			query.append(") AND ");
-			query.append("shoppingItem.companyId = ? AND ");
+			query.append("shoppingItem.groupId = ? AND ");
 			query.append("shoppingItem.sale = ? AND ");
 			query.append("shoppingItem.smallImage = ?");
 
@@ -426,7 +479,7 @@ public class ShoppingItemFinder {
 				q.setString(i, categoryIds[i]);
 			}
 
-			q.setString(categoryIds.length, companyId);
+			q.setString(categoryIds.length, groupId);
 			q.setBoolean(categoryIds.length + 1, true);
 			q.setBoolean(categoryIds.length + 2, true);
 
@@ -457,6 +510,20 @@ public class ShoppingItemFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
+	}
+
+	private static String _getCategoryIds(List categoryIds) {
+		StringBuffer sb = new StringBuffer();
+
+		for (int i = 0; i < categoryIds.size(); i++) {
+			sb.append("categoryId = ? ");
+
+			if ((i + 1) != categoryIds.size()) {
+				sb.append("OR ");
+			}
+		}
+
+		return sb.toString();
 	}
 
 }

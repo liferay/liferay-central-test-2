@@ -22,23 +22,26 @@
 
 package com.liferay.portlet.shopping.action;
 
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.shopping.NoSuchOrderException;
 import com.liferay.portlet.shopping.service.spring.ShoppingOrderServiceUtil;
-import com.liferay.portlet.shopping.util.ShoppingUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
-import com.liferay.util.servlet.SessionMessages;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-
-import javax.servlet.jsp.PageContext;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
@@ -54,261 +57,90 @@ public class EditOrderAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		String cmd = req.getParameter(Constants.CMD);
+		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-		if (cmd != null && cmd.equals(Constants.UPDATE)) {
-			try {
-				ActionUtil.getOrder(req);
-
-				_updateOrder(req, res);
+		try {
+			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
+				updateOrder(req);
 			}
-			catch (Exception e) {
-				if (e != null &&
-					e instanceof NoSuchOrderException ||
-					e instanceof PrincipalException) {
+			else if (cmd.equals(Constants.DELETE)) {
+				deleteOrder(req);
+			}
 
-					SessionErrors.add(req, e.getClass().getName());
+			sendRedirect(req, res);
+		}
+		catch (Exception e) {
+			if (e != null &&
+				e instanceof NoSuchOrderException ||
+				e instanceof PrincipalException) {
 
-					setForward(req, "portlet.shopping.error");
-				}
-				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
+				SessionErrors.add(req, e.getClass().getName());
 
-					setForward(req, Constants.COMMON_ERROR);
-				}
+				setForward(req, "portlet.shopping.error");
+			}
+			else {
+				throw e;
 			}
 		}
-		else if (cmd != null && cmd.equals(Constants.DELETE)) {
-			try {
-				_deleteOrder(req, res);
+	}
+
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			RenderRequest req, RenderResponse res)
+		throws Exception {
+
+		try {
+			ActionUtil.getOrder(req);
+		}
+		catch (Exception e) {
+			if (e != null &&
+				e instanceof NoSuchOrderException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(req, e.getClass().getName());
+
+				return mapping.findForward("portlet.shopping.error");
 			}
-			catch (Exception e) {
-				if (e != null &&
-					e instanceof NoSuchOrderException ||
-					e instanceof PrincipalException) {
-
-					SessionErrors.add(req, e.getClass().getName());
-
-					setForward(req, "portlet.shopping.error");
-				}
-				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
-
-					setForward(req, Constants.COMMON_ERROR);
-				}
+			else {
+				throw e;
 			}
 		}
-		else if (cmd != null && cmd.equals("send_order_email")) {
-			try {
-				_sendOrderEmail(req, res);
-			}
-			catch (Exception e) {
-				if (e != null &&
-					e instanceof NoSuchOrderException ||
-					e instanceof PrincipalException) {
 
-					SessionErrors.add(req, e.getClass().getName());
+		return mapping.findForward(
+			getForward(req, "portlet.shopping.edit_order"));
+	}
 
-					setForward(req, "portlet.shopping.error");
-				}
-				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
+	protected void deleteOrder(ActionRequest req) throws Exception {
+		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+		String orderId = ParamUtil.getString(req, "orderId");
 
-					setForward(req, Constants.COMMON_ERROR);
-				}
-			}
-		}
-		else if (cmd != null && cmd.equals("send_shipping_email")) {
-			try {
-				_sendShippingEmail(req, res);
-			}
-			catch (Exception e) {
-				if (e != null &&
-					e instanceof NoSuchOrderException ||
-					e instanceof PrincipalException) {
-
-					SessionErrors.add(req, e.getClass().getName());
-
-					setForward(req, "portlet.shopping.error");
-				}
-				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
-
-					setForward(req, Constants.COMMON_ERROR);
-				}
-			}
-		}
-		else if (cmd != null && cmd.equals("add_note")) {
-			try {
-				_addOrderNote(req, res);
-			}
-			catch (Exception e) {
-				if (e != null &&
-					e instanceof NoSuchOrderException ||
-					e instanceof PrincipalException) {
-
-					SessionErrors.add(req, e.getClass().getName());
-
-					setForward(req, "portlet.shopping.error");
-				}
-				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
-
-					setForward(req, Constants.COMMON_ERROR);
-				}
-			}
-		}
-		else if (cmd != null && cmd.equals("delete_note")) {
-			try {
-				_deleteOrderNote(req, res);
-			}
-			catch (Exception e) {
-				if (e != null &&
-					e instanceof NoSuchOrderException ||
-					e instanceof PrincipalException) {
-
-					SessionErrors.add(req, e.getClass().getName());
-
-					setForward(req, "portlet.shopping.error");
-				}
-				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
-
-					setForward(req, Constants.COMMON_ERROR);
-				}
-			}
+		if (Validator.isNotNull(orderId)) {
+			ShoppingOrderServiceUtil.deleteOrder(layout.getPlid(), orderId);
 		}
 		else {
-			try {
-				ActionUtil.getOrder(req);
+			String[] deleteOrderIds = StringUtil.split(
+				ParamUtil.getString(req, "deleteOrderIds"));
 
-				setForward(req, "portlet.shopping.edit_order");
-			}
-			catch (Exception e) {
-				if (e != null &&
-					e instanceof NoSuchOrderException ||
-					e instanceof PrincipalException) {
-
-					SessionErrors.add(req, e.getClass().getName());
-
-					setForward(req, "portlet.shopping.error");
-				}
-				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
-
-					setForward(req, Constants.COMMON_ERROR);
-				}
+			for (int i = 0; i < deleteOrderIds.length; i++) {
+				ShoppingOrderServiceUtil.deleteOrder(
+					layout.getPlid(), deleteOrderIds[i]);
 			}
 		}
 	}
 
-	private void _addOrderNote(ActionRequest req, ActionResponse res)
-		throws Exception {
+	protected void updateOrder(ActionRequest req) throws Exception {
+		//Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String orderId = ParamUtil.getString(req, "order_id");
+		String orderId = ParamUtil.getString(req, "orderId");
 
-		String noteContent = ParamUtil.getString(req, "note_content");
+		String name = ParamUtil.getString(req, "name");
 
-		// Add note
-
-		ShoppingOrderServiceUtil.addNote(orderId, noteContent);
-
-		// Send redirect
-
-		res.sendRedirect(ParamUtil.getString(req, "redirect"));
-	}
-
-	private void _deleteOrder(ActionRequest req, ActionResponse res)
-		throws Exception {
-
-		String orderId = ParamUtil.getString(req, "order_id");
-
-		ShoppingOrderServiceUtil.deleteOrder(orderId);
-
-		// Send redirect
-
-		res.sendRedirect(ParamUtil.getString(req, "redirect"));
-	}
-
-	private void _deleteOrderNote(ActionRequest req, ActionResponse res)
-		throws Exception {
-
-		String orderId = ParamUtil.getString(req, "order_id");
-
-		String noteId = ParamUtil.getString(req, "note_id");
-
-		// Delete note
-
-		ShoppingOrderServiceUtil.deleteNote(orderId, noteId);
-
-		// Send redirect
-
-		res.sendRedirect(ParamUtil.getString(req, "redirect"));
-	}
-
-	private void _sendOrderEmail(ActionRequest req, ActionResponse res)
-		throws Exception {
-
-		String orderId = ParamUtil.getString(req, "order_id");
-
-		// Send order email
-
-		ShoppingOrderServiceUtil.sendOrderEmail(orderId);
-
-		// Session messages
-
-		SessionMessages.add(req, "order_email_sent");
-
-		// Send redirect
-
-		res.sendRedirect(ParamUtil.getString(req, "redirect"));
-	}
-
-	private void _sendShippingEmail(ActionRequest req, ActionResponse res)
-		throws Exception {
-
-		String orderId = ParamUtil.getString(req, "order_id");
-
-		// Send shipping email
-
-		ShoppingOrderServiceUtil.sendShippingEmail(orderId);
-
-		// Session messages
-
-		SessionMessages.add(req, "shipping_email_sent");
-
-		// Send redirect
-
-		res.sendRedirect(ParamUtil.getString(req, "redirect"));
-	}
-
-	private void _updateOrder(ActionRequest req, ActionResponse res)
-		throws Exception {
-
-		String orderId = ParamUtil.getString(req, "order_id");
-
-		String ppTxnId = ParamUtil.getString(req, "order_pp_txn_id");
-		String ppPaymentStatus = ShoppingUtil.getPpPaymentStatus(
-			ParamUtil.getString(req, "order_pp_payment_status"));
-		double ppPaymentGross = ParamUtil.getDouble(
-			req, "order_pp_payment_gross");
-		String ppReceiverEmail = ParamUtil.getString(
-			req, "order_pp_receiver_email");
-		String ppPayerEmail = ParamUtil.getString(req, "order_pp_payer_email");
-
-		// Update order
-
-		ShoppingOrderServiceUtil.completeOrder(
-			orderId, ppTxnId, ppPaymentStatus, ppPaymentGross, ppReceiverEmail,
-			ppPayerEmail);
-
-		// Session messages
-
-		SessionMessages.add(req, "order_updated");
-
-		// Send redirect
-
-		res.sendRedirect(ParamUtil.getString(req, "redirect"));
+		/*ShoppingOrderServiceUtil.updateOrder(
+			layout.getPlid(), orderId, name, description, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			endDateMonth, endDateDay, endDateYear, endDateHour,
+			endDateMinute, neverExpire, active, limitCategories, limitSkus,
+			minOrder, discount, discountType);*/
 	}
 
 }

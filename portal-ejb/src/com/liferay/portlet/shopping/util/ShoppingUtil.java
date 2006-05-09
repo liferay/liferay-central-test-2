@@ -26,10 +26,11 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.admin.model.ShoppingConfig;
-import com.liferay.portlet.admin.service.spring.AdminConfigServiceUtil;
+import com.liferay.portlet.shopping.NoSuchCartException;
+import com.liferay.portlet.shopping.model.ShoppingCart;
 import com.liferay.portlet.shopping.model.ShoppingCartItem;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
@@ -38,14 +39,20 @@ import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.model.ShoppingOrderItem;
-import com.liferay.portlet.shopping.service.spring.ShoppingCategoryServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingOrderItemServiceUtil;
+import com.liferay.portlet.shopping.service.spring.ShoppingCartLocalServiceUtil;
+import com.liferay.portlet.shopping.service.spring.ShoppingCategoryLocalServiceUtil;
+import com.liferay.portlet.shopping.service.spring.ShoppingOrderItemLocalServiceUtil;
+import com.liferay.portlet.shopping.util.comparator.ItemMinQuantityComparator;
+import com.liferay.portlet.shopping.util.comparator.ItemNameComparator;
+import com.liferay.portlet.shopping.util.comparator.ItemPriceComparator;
+import com.liferay.portlet.shopping.util.comparator.ItemSKUComparator;
+import com.liferay.portlet.shopping.util.comparator.OrderDateComparator;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.MathUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
+import com.liferay.util.dao.hibernate.OrderByComparator;
 
 import java.text.NumberFormat;
 
@@ -53,14 +60,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletSession;
 import javax.portlet.PortletURL;
+import javax.portlet.RenderResponse;
+import javax.portlet.WindowState;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -113,7 +122,7 @@ public class ShoppingUtil {
 		double shipping = calculateShipping(items);
 		double alternativeShipping = shipping;
 
-		ShoppingConfig shoppingConfig = null;
+		ShoppingPreferences shoppingPrefs = null;
 
 		Iterator itr = items.entrySet().iterator();
 
@@ -124,9 +133,11 @@ public class ShoppingUtil {
 
 			ShoppingItem item = cartItem.getItem();
 
-			if (shoppingConfig == null) {
-				shoppingConfig = AdminConfigServiceUtil.getShoppingConfig(
-					item.getCompanyId());
+			if (shoppingPrefs == null) {
+				ShoppingCategory category = item.getCategory();
+
+				shoppingPrefs = ShoppingPreferences.getInstance(
+					category.getCompanyId(), category.getGroupId());
 
 				break;
 			}
@@ -135,14 +146,14 @@ public class ShoppingUtil {
 		// Calculate alternative shipping if shopping is configured to use
 		// alternative shipping and shipping price is greater than 0
 
-		if ((shoppingConfig != null) &&
-			(shoppingConfig.useAlternativeShipping()) && (shipping > 0)) {
+		if ((shoppingPrefs != null) &&
+			(shoppingPrefs.useAlternativeShipping()) && (shipping > 0)) {
 
 			double altShippingDelta = 0.0;
 
 			try {
 				altShippingDelta = GetterUtil.getDouble(
-					shoppingConfig.getAlternativeShipping()[1][altShipping]);
+					shoppingPrefs.getAlternativeShipping()[1][altShipping]);
 			}
 			catch (Exception e) {
 				return alternativeShipping;
@@ -299,7 +310,7 @@ public class ShoppingUtil {
 		double insurance = 0.0;
 		double subtotal = 0.0;
 
-		ShoppingConfig shoppingConfig = null;
+		ShoppingPreferences shoppingPrefs = null;
 
 		Iterator itr = items.entrySet().iterator();
 
@@ -311,9 +322,11 @@ public class ShoppingUtil {
 
 			ShoppingItem item = cartItem.getItem();
 
-			if (shoppingConfig == null) {
-				shoppingConfig = AdminConfigServiceUtil.getShoppingConfig(
-					item.getCompanyId());
+			if (shoppingPrefs == null) {
+				ShoppingCategory category = item.getCategory();
+
+				shoppingPrefs = ShoppingPreferences.getInstance(
+					category.getCompanyId(), category.getGroupId());
 			}
 
 			ShoppingItemPrice itemPrice =
@@ -322,10 +335,10 @@ public class ShoppingUtil {
 			subtotal += calculateActualPrice(itemPrice) * count.intValue();
 		}
 
-		if (shoppingConfig != null && subtotal > 0) {
+		if ((shoppingPrefs != null) && (subtotal > 0)) {
 			double insuranceRate = 0.0;
 
-			double[] range = ShoppingConfig.INSURANCE_RANGE;
+			double[] range = ShoppingPreferences.INSURANCE_RANGE;
 
 			for (int i = 0; i < range.length - 1; i++) {
 				if (subtotal > range[i] && subtotal <= range[i + 1]) {
@@ -334,17 +347,17 @@ public class ShoppingUtil {
 						rangeId = (i + 1) / 2;
 					}
 
-					insuranceRate = GetterUtil.get(
-						shoppingConfig.getInsurance()[rangeId], 0.0);
+					insuranceRate = GetterUtil.getDouble(
+						shoppingPrefs.getInsurance()[rangeId], 0.0);
 				}
 			}
 
-			String formula = shoppingConfig.getInsuranceFormula();
+			String formula = shoppingPrefs.getInsuranceFormula();
 
-			if (formula.equals(ShoppingConfig.INSURANCE_FLAT_AMOUNT)) {
+			if (formula.equals("flat")) {
 				insurance += insuranceRate;
 			}
-			else if (formula.equals(ShoppingConfig.INSURANCE_PERCENTAGE)) {
+			else if (formula.equals("percentage")) {
 				insurance += subtotal * insuranceRate;
 			}
 		}
@@ -366,7 +379,7 @@ public class ShoppingUtil {
 		double shipping = 0.0;
 		double subtotal = 0.0;
 
-		ShoppingConfig shoppingConfig = null;
+		ShoppingPreferences shoppingPrefs = null;
 
 		Iterator itr = items.entrySet().iterator();
 
@@ -378,9 +391,13 @@ public class ShoppingUtil {
 
 			ShoppingItem item = cartItem.getItem();
 
-			if (shoppingConfig == null) {
-				shoppingConfig = AdminConfigServiceUtil.getShoppingConfig(
-					item.getCompanyId());
+			if (shoppingPrefs == null) {
+				ShoppingCategory category = item.getCategory();
+
+				shoppingPrefs = ShoppingPreferences.getInstance(
+					category.getCompanyId(), category.getGroupId());
+
+				break;
 			}
 
 			if (item.isRequiresShipping()) {
@@ -397,10 +414,10 @@ public class ShoppingUtil {
 			}
 		}
 
-		if (shoppingConfig != null && subtotal > 0) {
+		if ((shoppingPrefs != null) && (subtotal > 0)) {
 			double shippingRate = 0.0;
 
-			double[] range = ShoppingConfig.SHIPPING_RANGE;
+			double[] range = ShoppingPreferences.SHIPPING_RANGE;
 
 			for (int i = 0; i < range.length - 1; i++) {
 				if (subtotal > range[i] && subtotal <= range[i + 1]) {
@@ -409,17 +426,17 @@ public class ShoppingUtil {
 						rangeId = (i + 1) / 2;
 					}
 
-					shippingRate = GetterUtil.get(
-						shoppingConfig.getShipping()[rangeId], 0.0);
+					shippingRate = GetterUtil.getDouble(
+						shoppingPrefs.getShipping()[rangeId], 0.0);
 				}
 			}
 
-			String formula = shoppingConfig.getShippingFormula();
+			String formula = shoppingPrefs.getShippingFormula();
 
-			if (formula.equals(ShoppingConfig.SHIPPING_FLAT_AMOUNT)) {
+			if (formula.equals("flat")) {
 				shipping += shippingRate;
 			}
-			else if (formula.equals(ShoppingConfig.SHIPPING_PERCENTAGE)) {
+			else if (formula.equals("percentage")) {
 				shipping += subtotal * shippingRate;
 			}
 		}
@@ -453,7 +470,7 @@ public class ShoppingUtil {
 
 		double tax = 0.0;
 
-		ShoppingConfig shoppingConfig = null;
+		ShoppingPreferences shoppingPrefs = null;
 
 		Iterator itr = items.entrySet().iterator();
 
@@ -464,36 +481,37 @@ public class ShoppingUtil {
 
 			ShoppingItem item = cartItem.getItem();
 
-			if (shoppingConfig == null) {
-				shoppingConfig = AdminConfigServiceUtil.getShoppingConfig(
-					item.getCompanyId());
+			if (shoppingPrefs == null) {
+				ShoppingCategory category = item.getCategory();
+
+				shoppingPrefs = ShoppingPreferences.getInstance(
+					category.getCompanyId(), category.getGroupId());
 
 				break;
 			}
 		}
 
-		if (shoppingConfig != null) {
-			if (shoppingConfig.getTaxState().equals(stateId)) {
-				double subtotal = 0.0;
+		if ((shoppingPrefs != null) &&
+			(shoppingPrefs.getTaxState().equals(stateId))) {
 
-				itr = items.entrySet().iterator();
+			double subtotal = 0.0;
 
-				while (itr.hasNext()) {
-					Map.Entry entry = (Map.Entry)itr.next();
+			itr = items.entrySet().iterator();
 
-					ShoppingCartItem cartItem =
-						(ShoppingCartItem)entry.getKey();
-					Integer count = (Integer)entry.getValue();
+			while (itr.hasNext()) {
+				Map.Entry entry = (Map.Entry)itr.next();
 
-					ShoppingItem item = cartItem.getItem();
+				ShoppingCartItem cartItem = (ShoppingCartItem)entry.getKey();
+				Integer count = (Integer)entry.getValue();
 
-					if (item.isTaxable()) {
-						subtotal += calculatePrice(item, count.intValue());
-					}
+				ShoppingItem item = cartItem.getItem();
+
+				if (item.isTaxable()) {
+					subtotal += calculatePrice(item, count.intValue());
 				}
-
-				tax = shoppingConfig.getTaxRate() * subtotal;
 			}
+
+			tax = shoppingPrefs.getTaxRate() * subtotal;
 		}
 
 		return tax;
@@ -528,8 +546,8 @@ public class ShoppingUtil {
 	public static double calculateTotal(ShoppingOrder order)
 		throws PortalException, SystemException {
 
-		List orderItems =
-			ShoppingOrderItemServiceUtil.getOrderItems(order.getOrderId());
+		List orderItems = ShoppingOrderItemLocalServiceUtil.getOrderItems(
+			order.getOrderId());
 
 		double total =
 			calculateActualSubtotal(orderItems) + order.getTax() +
@@ -541,6 +559,153 @@ public class ShoppingUtil {
 		}
 
 		return total;
+	}
+
+	public static String getBreadcrumbs(
+			String categoryId, PageContext pageContext, RenderResponse res)
+		throws Exception {
+
+		ShoppingCategory category = null;
+
+		try {
+			category = ShoppingCategoryLocalServiceUtil.getCategory(categoryId);
+		}
+		catch (Exception e) {
+		}
+
+		return getBreadcrumbs(category, pageContext, res);
+	}
+
+	public static String getBreadcrumbs(
+			ShoppingCategory category, PageContext pageContext,
+			RenderResponse res)
+		throws Exception {
+
+		PortletURL categoriesURL = res.createRenderURL();
+
+		categoriesURL.setWindowState(WindowState.MAXIMIZED);
+
+		categoriesURL.setParameter("struts_action", "/shopping/view");
+		categoriesURL.setParameter("tabs1", "categories");
+
+		String categoriesLink =
+			"<a href=\"" + categoriesURL.toString() + "\">" +
+				LanguageUtil.get(pageContext, "categories") + "</a>";
+
+		if (category == null) {
+			return categoriesLink;
+		}
+
+		String breadcrumbs = StringPool.BLANK;
+
+		if (category != null) {
+			for (int i = 0;; i++) {
+				PortletURL portletURL = res.createRenderURL();
+
+				portletURL.setWindowState(WindowState.MAXIMIZED);
+
+				portletURL.setParameter("struts_action", "/shopping/view");
+				portletURL.setParameter("tabs1", "categories");
+				portletURL.setParameter("categoryId", category.getCategoryId());
+
+				String categoryLink =
+					"<a href=\"" + portletURL.toString() + "\">" +
+						category.getName() + "</a>";
+
+				if (i == 0) {
+					breadcrumbs = categoryLink;
+				}
+				else {
+					breadcrumbs = categoryLink + " &raquo; " + breadcrumbs;
+				}
+
+				if (category.isRoot()) {
+					break;
+				}
+
+				category = ShoppingCategoryLocalServiceUtil.getCategory(
+					category.getParentCategoryId());
+			}
+		}
+
+		breadcrumbs = categoriesLink + " &raquo; " + breadcrumbs;
+
+		return breadcrumbs;
+	}
+
+	public static ShoppingCart getCart(
+		String cartId, ThemeDisplay themeDisplay) {
+
+		ShoppingCart cart = new ShoppingCart();
+
+		cart.setCartId(cartId);
+		cart.setGroupId(themeDisplay.getPortletGroupId());
+		cart.setCompanyId(themeDisplay.getCompanyId());
+		cart.setItemIds(StringPool.BLANK);
+		cart.setCouponIds(StringPool.BLANK);
+		cart.setAltShipping(0);
+		cart.setInsure(false);
+
+		return cart;
+	}
+
+	public static ShoppingCart getCart(PortletRequest req)
+		throws PortalException, SystemException {
+
+		PortletSession ses = req.getPortletSession();
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		String sesCartId =
+			ShoppingCart.class.getName() + "_SESSION_" + ses.getId() + "_" +
+				themeDisplay.getPortletGroupId();
+
+		String userCartId =
+			ShoppingCart.class.getName() + "_USER_" + themeDisplay.getUserId() +
+				"_" + themeDisplay.getPortletGroupId();
+
+		if (themeDisplay.isSignedIn()) {
+			ShoppingCart cart = (ShoppingCart)ses.getAttribute(sesCartId);
+
+			if (cart != null) {
+				ses.removeAttribute(sesCartId);
+			}
+
+			if ((cart != null) && (cart.getItemsSize() > 0)) {
+				cart = ShoppingCartLocalServiceUtil.updateCart(
+					themeDisplay.getUserId(), themeDisplay.getPortletGroupId(),
+					cart.getCartId(), cart.getItemIds(), cart.getCouponIds(),
+					cart.getAltShipping(), cart.isInsure());
+			}
+			else {
+				try {
+					cart = ShoppingCartLocalServiceUtil.getCart(userCartId);
+				}
+				catch (NoSuchCartException nsce) {
+					cart = getCart(userCartId, themeDisplay);
+
+					cart = ShoppingCartLocalServiceUtil.updateCart(
+						themeDisplay.getUserId(),
+						themeDisplay.getPortletGroupId(), cart.getCartId(),
+						cart.getItemIds(), cart.getCouponIds(),
+						cart.getAltShipping(), cart.isInsure());
+				}
+			}
+
+			return cart;
+		}
+		else {
+			ShoppingCart cart = (ShoppingCart)ses.getAttribute(sesCartId);
+
+			if (cart == null) {
+				cart = getCart(sesCartId, themeDisplay);
+
+				ses.setAttribute(sesCartId, cart);
+			}
+
+			return cart;
+		}
 	}
 
 	public static int getFieldsQuantitiesPos(
@@ -633,6 +798,36 @@ public class ShoppingUtil {
 		}
 	}
 
+	public static OrderByComparator getItemOrderByComparator(
+		String orderByCol, String orderByType) {
+
+		boolean orderByAsc = false;
+
+		if (orderByType.equals("asc")) {
+			orderByAsc = true;
+		}
+
+		OrderByComparator orderByComparator = null;
+
+		if (orderByCol.equals("min-qty")) {
+			orderByComparator = new ItemMinQuantityComparator(orderByAsc);
+		}
+		else if (orderByCol.equals("name")) {
+			orderByComparator = new ItemNameComparator(orderByAsc);
+		}
+		else if (orderByCol.equals("price")) {
+			orderByComparator = new ItemPriceComparator(orderByAsc);
+		}
+		else if (orderByCol.equals("sku")) {
+			orderByComparator = new ItemSKUComparator(orderByAsc);
+		}
+		else if (orderByCol.equals("order-date")) {
+			orderByComparator = new OrderDateComparator(orderByAsc);
+		}
+
+		return orderByComparator;
+	}
+
 	public static int getMinQuantity(ShoppingItem item)
 		throws PortalException, SystemException {
 
@@ -652,74 +847,21 @@ public class ShoppingUtil {
 		return minQuantity;
 	}
 
-	public static String getNavCategories(
-			HttpServletRequest req, PageContext pageContext,
-			String className, PortletURL categoriesURL, PortletURL categoryURL)
-		throws PortalException, SystemException {
-
-		ShoppingCategory category =
-			(ShoppingCategory)req.getAttribute(WebKeys.SHOPPING_CATEGORY);
-
-		StringBuffer boxTitleSB = new StringBuffer();
-
-		boxTitleSB.append("<a class=\"");
-		boxTitleSB.append(className);
-		boxTitleSB.append("\" href=\"");
-		boxTitleSB.append(categoriesURL.toString());
-		boxTitleSB.append("\">");
-		boxTitleSB.append(LanguageUtil.get(pageContext, "browse-categories"));
-		boxTitleSB.append("</a>");
-
-		List parentCategories =
-			ShoppingCategoryServiceUtil.getParentCategories(category);
-
-		for (int i = 0; i < parentCategories.size(); i++) {
-			ShoppingCategory parentCategory =
-				(ShoppingCategory)parentCategories.get(i);
-
-			boxTitleSB.append("&nbsp;&nbsp;");
-			boxTitleSB.append("<span class=\"");
-			boxTitleSB.append(className);
-			boxTitleSB.append("-neg-alert\">");
-			boxTitleSB.append("&raquo;</span>");
-			boxTitleSB.append("&nbsp;&nbsp;");
-
-			if (i + 1 < parentCategories.size()) {
-				categoryURL.setParameter(
-					"category_id", parentCategory.getCategoryId());
-
-				boxTitleSB.append("<a class=\"");
-				boxTitleSB.append(className);
-				boxTitleSB.append("\" href=\"");
-				boxTitleSB.append(categoryURL.toString());
-				boxTitleSB.append("\">");
-				boxTitleSB.append(parentCategory.getName());
-				boxTitleSB.append("</a>");
-			}
-			else if (i + 1 == parentCategories.size()) {
-				boxTitleSB.append("<b>");
-				boxTitleSB.append(parentCategory.getName());
-				boxTitleSB.append("</b>");
-			}
-		}
-
-		return boxTitleSB.toString();
-	}
-
 	public static String getPayPalNotifyURL(Company company, String mainPath) {
 		return "http://" + company.getPortalURL() + mainPath +
 			"/shopping/notify";
 	}
 
 	public static String getPayPalRedirectURL(
-			ShoppingConfig shoppingConfig, ShoppingOrder order, double total,
-			String returnURL, String notifyURL)
+			ShoppingPreferences shoppingPrefs, ShoppingOrder order,
+			double total, String returnURL, String notifyURL)
 		throws PortalException, SystemException {
 
 		String payPalEmailAddress = Http.encodeURL(
-			shoppingConfig.getPayPalEmailAddress());
+			shoppingPrefs.getPayPalEmailAddress());
 
 		NumberFormat doubleFormat = NumberFormat.getNumberInstance();
+
 		doubleFormat.setMaximumFractionDigits(2);
 		doubleFormat.setMinimumFractionDigits(2);
 
@@ -735,7 +877,7 @@ public class ShoppingUtil {
 		String state = Http.encodeURL(order.getBillingState());
 		String zip = Http.encodeURL(order.getBillingZip());
 
-		String currencyCode = shoppingConfig.getCurrencyId();
+		String currencyCode = shoppingPrefs.getCurrencyId();
 
 		StringBuffer sb = new StringBuffer();
 
@@ -799,26 +941,6 @@ public class ShoppingUtil {
 		return LanguageUtil.get(pageContext, ppPaymentStatus);
 	}
 
-	public static Set getSupplierUserIds(List orderItems) {
-		Set supplierUserIds = new LinkedHashSet();
-
-		Iterator itr = orderItems.iterator();
-
-		while (itr.hasNext()) {
-			ShoppingOrderItem orderItem = (ShoppingOrderItem)itr.next();
-
-			String supplierUserId = orderItem.getSupplierUserId();
-
-			if ((Validator.isNotNull(supplierUserId)) &&
-				(!supplierUserIds.contains(supplierUserId))) {
-
-				supplierUserIds.add(supplierUserId);
-			}
-		}
-
-		return supplierUserIds;
-	}
-
 	public static boolean isInStock(ShoppingItem item) {
 		if (!item.isFields()) {
 			if (item.getStockQuantity() > 0) {
@@ -871,11 +993,11 @@ public class ShoppingUtil {
 	}
 
 	public static boolean meetsMinOrder(
-			ShoppingConfig shoppingConfig, Map items)
+			ShoppingPreferences shoppingPrefs, Map items)
 		throws PortalException, SystemException {
 
-		if ((shoppingConfig.getMinOrder() > 0) &&
-			(calculateSubtotal(items) < shoppingConfig.getMinOrder())) {
+		if ((shoppingPrefs.getMinOrder() > 0) &&
+			(calculateSubtotal(items) < shoppingPrefs.getMinOrder())) {
 
 			return false;
 		}
@@ -907,7 +1029,7 @@ public class ShoppingUtil {
 		}
 
 		if (itemPrice == null) {
-			return new ShoppingItemPrice(null);
+			return new ShoppingItemPrice();
 		}
 
 		return itemPrice;

@@ -25,137 +25,19 @@
 <%@ include file="/html/portlet/shopping/init.jsp" %>
 
 <%
-List categories = (List)request.getAttribute(WebKeys.SHOPPING_CATEGORIES);
+String tabs1 = ParamUtil.getString(request, "tabs1", "categories");
 %>
 
-<table border="0" cellpadding="4" cellspacing="0" width="100%">
-<tr>
-	<td align="center">
-		<c:if test="<%= (categories == null) || (categories.size() == 0) %>">
-			<table border="0" cellpadding="0" cellspacing="0">
-			<tr>
-				<td><img border="0" height="8" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.gif" vspace="0" width="1"></td>
-			</tr>
-			<tr>
-				<td align="center">
-					<font class="portlet-font" style="font-size: x-small;">
-					<%= LanguageUtil.get(pageContext, "there-are-no-categories") %>
-					</font>
-				</td>
-			</tr>
-			<tr>
-				<td><img border="0" height="8" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.gif" vspace="0" width="1"></td>
-			</tr>
-			</table>
-		</c:if>
+<liferay-util:include page="/html/portlet/shopping/tabs1.jsp" />
 
-		<c:if test="<%= (categories != null) && (categories.size() > 0) %>">
-			<table border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tr>
-				<td><img border="0" height="8" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/spacer.gif" vspace="0" width="1"></td>
-			</tr>
-			<tr>
-				<td>
-					<font class="portlet-font" style="font-size: x-small;"><b>
-					<%= LanguageUtil.get(pageContext, "browse-categories") %>
-					</b></font>
-				</td>
-			</tr>
-			<tr>
-				<td align="right">
-					<c:if test="<%= categories.size() < 5 %>">
-						<table border="0" cellpadding="0" cellspacing="0" width="100%">
-						<tr>
-							<td>
-
-								<%
-								for (int i = 0; i < categories.size(); i++) {
-									ShoppingCategory category = (ShoppingCategory)categories.get(i);
-								%>
-
-									<li>
-										<font class="portlet-font" style="font-size: x-small;"><a href="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_category" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EDIT %>" /><portlet:param name="category_id" value="<%= category.getCategoryId() %>" /></portlet:actionURL>">
-										<%= category.getName() %>
-										</a></font>
-									</li>
-
-								<%
-								}
-								%>
-
-							</td>
-							<td width="1%">
-							</td>
-						</tr>
-						</table>
-					</c:if>
-
-					<c:if test="<%= categories.size() >= 5 %>">
-						<table border="0" cellpadding="0" cellspacing="0" width="100%">
-						<tr>
-							<td valign="top" width="33%">
-
-								<%
-								boolean division = false;
-								int div = categories.size() / 3;
-								int mod = categories.size() % 3;
-								int pos = 0;
-
-								int div1;
-								int div2;
-
-								if (mod == 1) {
-									div1 = div + 1;
-									div2 = div + div + 1;
-								}
-								else if (mod == 2) {
-									div1 = div + 1;
-									div2 = div + div + 1 + 1;
-								}
-								else {
-									div1 = div;
-									div2 = div + div;
-								}
-
-								for (int i = 0; i < categories.size(); i++) {
-									ShoppingCategory category = (ShoppingCategory)categories.get(i);
-
-									if (division) {
-								%>
-
-										</td>
-										<td valign="top" width="33%">
-
-								<%
-										division = false;
-									}
-								%>
-
-									<li>
-										<font class="portlet-font" style="font-size: x-small;"><a href="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_category" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EDIT %>" /><portlet:param name="category_id" value="<%= category.getCategoryId() %>" /></portlet:actionURL>">
-										<%= category.getName() %>
-										</a></font>
-									</li>
-
-								<%
-									pos++;
-
-									if ((pos == div1) || (pos == div2)) {
-										division = true;
-									}
-								}
-								%>
-
-							</td>
-							<td width="1%">
-							</td>
-						</tr>
-						</table>
-					</c:if>
-				</td>
-			</tr>
-			</table>
-		</c:if>
-	</td>
-</tr>
-</table>
+<c:choose>
+	<c:when test='<%= tabs1.equals("categories") %>'>
+		<%@ include file="/html/portlet/shopping/categories.jsp" %>
+	</c:when>
+	<c:when test='<%= tabs1.equals("orders") %>'>
+		<%@ include file="/html/portlet/shopping/orders.jsp" %>
+	</c:when>
+	<c:when test='<%= tabs1.equals("coupons") %>'>
+		<%@ include file="/html/portlet/shopping/coupons.jsp" %>
+	</c:when>
+</c:choose>

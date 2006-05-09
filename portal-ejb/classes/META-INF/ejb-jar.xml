@@ -2073,6 +2073,13 @@
 				<ejb-link>com_liferay_portlet_polls_service_ejb_PollsQuestionLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCartLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCartLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/WikiNodeLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.wiki.service.ejb.WikiNodeLocalServiceHome</local-home>
@@ -2297,6 +2304,13 @@
 				<local-home>com.liferay.portlet.polls.service.ejb.PollsQuestionLocalServiceHome</local-home>
 				<local>com.liferay.portlet.polls.service.ejb.PollsQuestionLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_polls_service_ejb_PollsQuestionLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCartLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCartLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/WikiNodeLocalServiceHome</ejb-ref-name>
@@ -7024,13 +7038,6 @@
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceHome</local-home>
-				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/AccountLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.AccountLocalServiceHome</local-home>
@@ -7227,13 +7234,6 @@
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCartLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCartLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceHome</local-home>
-				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/AccountLocalServiceHome</ejb-ref-name>
@@ -10004,11 +10004,18 @@
 			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portal.service.ejb.UserLocalServiceHome</local-home>
-				<local>com.liferay.portal.service.ejb.UserLocalServiceEJB</local>
-				<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
@@ -10018,27 +10025,48 @@
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 		</session>
 		<session>
-			<display-name>ShoppingCartServiceEJB</display-name>
-			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCartServiceEJB</ejb-name>
-			<home>com.liferay.portlet.shopping.service.ejb.ShoppingCartServiceHome</home>
-			<remote>com.liferay.portlet.shopping.service.ejb.ShoppingCartServiceEJB</remote>
-			<ejb-class>com.liferay.portlet.shopping.service.ejb.ShoppingCartServiceEJBImpl</ejb-class>
+			<display-name>ShoppingCategoryLocalServiceEJB</display-name>
+			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</ejb-name>
+			<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceHome</local-home>
+			<local>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceEJB</local>
+			<ejb-class>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceEJBImpl</ejb-class>
 			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portal.service.ejb.UserLocalServiceHome</local-home>
-				<local>com.liferay.portal.service.ejb.UserLocalServiceEJB</local>
-				<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
+				<local-home>com.liferay.portal.service.ejb.ResourceLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.ResourceLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
@@ -10048,6 +10076,13 @@
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceHome</local-home>
@@ -10055,11 +10090,32 @@
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 		</session>
 		<session>
@@ -10071,11 +10127,11 @@
 			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portal.service.ejb.UserLocalServiceHome</local-home>
-				<local>com.liferay.portal.service.ejb.UserLocalServiceEJB</local>
-				<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
+				<local-home>com.liferay.portal.service.ejb.ResourceLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.ResourceLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
@@ -10085,6 +10141,20 @@
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceHome</local-home>
@@ -10092,11 +10162,90 @@
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+		</session>
+		<session>
+			<display-name>ShoppingCouponLocalServiceEJB</display-name>
+			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</ejb-name>
+			<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceHome</local-home>
+			<local>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceEJB</local>
+			<ejb-class>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceEJBImpl</ejb-class>
+			<session-type>Stateless</session-type>
+			<transaction-type>Bean</transaction-type>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCartLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCartLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 		</session>
 		<session>
@@ -10115,6 +10264,20 @@
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceHome</local-home>
@@ -10122,11 +10285,32 @@
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 		</session>
 		<session>
@@ -10138,11 +10322,11 @@
 			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portal.service.ejb.UserLocalServiceHome</local-home>
-				<local>com.liferay.portal.service.ejb.UserLocalServiceEJB</local>
-				<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
+				<local-home>com.liferay.portal.service.ejb.ResourceLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.ResourceLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
@@ -10152,11 +10336,46 @@
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 		</session>
 		<session>
@@ -10168,11 +10387,11 @@
 			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portal.service.ejb.UserLocalServiceHome</local-home>
-				<local>com.liferay.portal.service.ejb.UserLocalServiceEJB</local>
-				<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
+				<local-home>com.liferay.portal.service.ejb.ResourceLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.ResourceLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
@@ -10182,11 +10401,39 @@
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
@@ -10195,13 +10442,20 @@
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 		</session>
 		<session>
-			<display-name>ShoppingItemFieldServiceEJB</display-name>
-			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldServiceEJB</ejb-name>
-			<home>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldServiceHome</home>
-			<remote>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldServiceEJB</remote>
-			<ejb-class>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldServiceEJBImpl</ejb-class>
+			<display-name>ShoppingItemFieldLocalServiceEJB</display-name>
+			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</ejb-name>
+			<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceHome</local-home>
+			<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceEJB</local>
+			<ejb-class>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceEJBImpl</ejb-class>
 			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
 			<ejb-local-ref>
@@ -10212,11 +10466,32 @@
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
@@ -10225,13 +10500,20 @@
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 		</session>
 		<session>
-			<display-name>ShoppingItemPriceServiceEJB</display-name>
-			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceServiceEJB</ejb-name>
-			<home>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceServiceHome</home>
-			<remote>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceServiceEJB</remote>
-			<ejb-class>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceServiceEJBImpl</ejb-class>
+			<display-name>ShoppingItemPriceLocalServiceEJB</display-name>
+			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</ejb-name>
+			<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceHome</local-home>
+			<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceEJB</local>
+			<ejb-class>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceEJBImpl</ejb-class>
 			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
 			<ejb-local-ref>
@@ -10242,6 +10524,20 @@
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceHome</local-home>
@@ -10249,11 +10545,25 @@
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 		</session>
 		<session>
@@ -10265,34 +10575,6 @@
 			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/CompanyLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portal.service.ejb.CompanyLocalServiceHome</local-home>
-				<local>com.liferay.portal.service.ejb.CompanyLocalServiceEJB</local>
-				<ejb-link>com_liferay_portal_service_ejb_CompanyLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portal.service.ejb.NoteLocalServiceHome</local-home>
-				<local>com.liferay.portal.service.ejb.NoteLocalServiceEJB</local>
-				<ejb-link>com_liferay_portal_service_ejb_NoteLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/RoleLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
-				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
-				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portal.service.ejb.UserLocalServiceHome</local-home>
-				<local>com.liferay.portal.service.ejb.UserLocalServiceEJB</local>
-				<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCartLocalServiceHome</local-home>
@@ -10300,11 +10582,46 @@
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 		</session>
 		<session>
@@ -10316,39 +10633,25 @@
 			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/CompanyLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portal.service.ejb.CompanyLocalServiceHome</local-home>
-				<local>com.liferay.portal.service.ejb.CompanyLocalServiceEJB</local>
-				<ejb-link>com_liferay_portal_service_ejb_CompanyLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portal.service.ejb.NoteLocalServiceHome</local-home>
-				<local>com.liferay.portal.service.ejb.NoteLocalServiceEJB</local>
-				<ejb-link>com_liferay_portal_service_ejb_NoteLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/RoleLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
-				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
-				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portal.service.ejb.UserLocalServiceHome</local-home>
-				<local>com.liferay.portal.service.ejb.UserLocalServiceEJB</local>
-				<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCartLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCartLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
@@ -10358,19 +10661,40 @@
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 		</session>
 		<session>
-			<display-name>ShoppingOrderItemServiceEJB</display-name>
-			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemServiceEJB</ejb-name>
-			<home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemServiceHome</home>
-			<remote>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemServiceEJB</remote>
-			<ejb-class>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemServiceEJBImpl</ejb-class>
+			<display-name>ShoppingOrderItemLocalServiceEJB</display-name>
+			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-name>
+			<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
+			<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
+			<ejb-class>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJBImpl</ejb-class>
 			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
 			<ejb-local-ref>
@@ -10381,11 +10705,39 @@
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCategoryLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingCouponLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemFieldLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceHome</local-home>
+				<local>com.liferay.portlet.shopping.service.ejb.ShoppingItemPriceLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
@@ -10880,11 +11232,15 @@
 				<method-name>*</method-name>
 			</method>
 			<method>
-				<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCartServiceEJB</ejb-name>
+				<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</ejb-name>
 				<method-name>*</method-name>
 			</method>
 			<method>
 				<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryServiceEJB</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<method>
+				<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</ejb-name>
 				<method-name>*</method-name>
 			</method>
 			<method>
@@ -10900,11 +11256,11 @@
 				<method-name>*</method-name>
 			</method>
 			<method>
-				<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldServiceEJB</ejb-name>
+				<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</ejb-name>
 				<method-name>*</method-name>
 			</method>
 			<method>
-				<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceServiceEJB</ejb-name>
+				<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</ejb-name>
 				<method-name>*</method-name>
 			</method>
 			<method>
@@ -10916,7 +11272,7 @@
 				<method-name>*</method-name>
 			</method>
 			<method>
-				<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemServiceEJB</ejb-name>
+				<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-name>
 				<method-name>*</method-name>
 			</method>
 			<method>

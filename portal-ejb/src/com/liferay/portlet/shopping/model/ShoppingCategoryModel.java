@@ -37,17 +37,23 @@ import java.util.Date;
  *
  */
 public class ShoppingCategoryModel extends BaseModel {
-	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
-				"value.object.cacheable.com.liferay.portlet.shopping.model.ShoppingCategory"),
-			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCategory"),
 			XSS_ALLOW);
 	public static boolean XSS_ALLOW_CATEGORYID = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCategory.categoryId"),
 			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_GROUPID = GetterUtil.get(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCategory.groupId"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCategory.companyId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCategory.userId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.get(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCategory.userName"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_PARENTCATEGORYID = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCategory.parentCategoryId"),
@@ -55,29 +61,21 @@ public class ShoppingCategoryModel extends BaseModel {
 	public static boolean XSS_ALLOW_NAME = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCategory.name"),
 			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.get(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCategory.description"),
+			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingCategoryModel"));
 
 	public ShoppingCategoryModel() {
 	}
 
-	public ShoppingCategoryModel(String categoryId) {
-		_categoryId = categoryId;
-		setNew(true);
-	}
-
-	public ShoppingCategoryModel(String categoryId, String companyId,
-		Date createDate, Date modifiedDate, String parentCategoryId, String name) {
-		_categoryId = categoryId;
-		_companyId = companyId;
-		_createDate = createDate;
-		_modifiedDate = modifiedDate;
-		_parentCategoryId = parentCategoryId;
-		_name = name;
-	}
-
 	public String getPrimaryKey() {
 		return _categoryId;
+	}
+
+	public void setPrimaryKey(String pk) {
+		setCategoryId(pk);
 	}
 
 	public String getCategoryId() {
@@ -98,6 +96,24 @@ public class ShoppingCategoryModel extends BaseModel {
 		}
 	}
 
+	public String getGroupId() {
+		return GetterUtil.getString(_groupId);
+	}
+
+	public void setGroupId(String groupId) {
+		if (((groupId == null) && (_groupId != null)) ||
+				((groupId != null) && (_groupId == null)) ||
+				((groupId != null) && (_groupId != null) &&
+				!groupId.equals(_groupId))) {
+			if (!XSS_ALLOW_GROUPID) {
+				groupId = XSSUtil.strip(groupId);
+			}
+
+			_groupId = groupId;
+			setModified(true);
+		}
+	}
+
 	public String getCompanyId() {
 		return GetterUtil.getString(_companyId);
 	}
@@ -112,6 +128,42 @@ public class ShoppingCategoryModel extends BaseModel {
 			}
 
 			_companyId = companyId;
+			setModified(true);
+		}
+	}
+
+	public String getUserId() {
+		return GetterUtil.getString(_userId);
+	}
+
+	public void setUserId(String userId) {
+		if (((userId == null) && (_userId != null)) ||
+				((userId != null) && (_userId == null)) ||
+				((userId != null) && (_userId != null) &&
+				!userId.equals(_userId))) {
+			if (!XSS_ALLOW_USERID) {
+				userId = XSSUtil.strip(userId);
+			}
+
+			_userId = userId;
+			setModified(true);
+		}
+	}
+
+	public String getUserName() {
+		return GetterUtil.getString(_userName);
+	}
+
+	public void setUserName(String userName) {
+		if (((userName == null) && (_userName != null)) ||
+				((userName != null) && (_userName == null)) ||
+				((userName != null) && (_userName != null) &&
+				!userName.equals(_userName))) {
+			if (!XSS_ALLOW_USERNAME) {
+				userName = XSSUtil.strip(userName);
+			}
+
+			_userName = userName;
 			setModified(true);
 		}
 	}
@@ -179,16 +231,38 @@ public class ShoppingCategoryModel extends BaseModel {
 		}
 	}
 
-	public BaseModel getProtected() {
-		return null;
+	public String getDescription() {
+		return GetterUtil.getString(_description);
 	}
 
-	public void protect() {
+	public void setDescription(String description) {
+		if (((description == null) && (_description != null)) ||
+				((description != null) && (_description == null)) ||
+				((description != null) && (_description != null) &&
+				!description.equals(_description))) {
+			if (!XSS_ALLOW_DESCRIPTION) {
+				description = XSSUtil.strip(description);
+			}
+
+			_description = description;
+			setModified(true);
+		}
 	}
 
 	public Object clone() {
-		return new ShoppingCategory(getCategoryId(), getCompanyId(),
-			getCreateDate(), getModifiedDate(), getParentCategoryId(), getName());
+		ShoppingCategory clone = new ShoppingCategory();
+		clone.setCategoryId(getCategoryId());
+		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
+		clone.setUserId(getUserId());
+		clone.setUserName(getUserName());
+		clone.setCreateDate(getCreateDate());
+		clone.setModifiedDate(getModifiedDate());
+		clone.setParentCategoryId(getParentCategoryId());
+		clone.setName(getName());
+		clone.setDescription(getDescription());
+
+		return clone;
 	}
 
 	public int compareTo(Object obj) {
@@ -243,9 +317,13 @@ public class ShoppingCategoryModel extends BaseModel {
 	}
 
 	private String _categoryId;
+	private String _groupId;
 	private String _companyId;
+	private String _userId;
+	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _parentCategoryId;
 	private String _name;
+	private String _description;
 }

@@ -289,7 +289,6 @@ portletURL.setParameter("tabs1", tabs1);
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("templates") %>'>
-
 		<input name="<portlet:namespace />deleteTemplateIds" type="hidden" value="">
 
 		<liferay-ui:error exception="<%= RequiredTemplateException.class %>" message="required-templates-could-not-be-deleted" />

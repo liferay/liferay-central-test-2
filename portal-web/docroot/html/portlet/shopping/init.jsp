@@ -22,7 +22,7 @@
  */
 %><%--
 
---%><%@ include file="/html/common/init.jsp" %><%--
+--%><%@ include file="/html/portlet/init.jsp" %><%--
 
 --%><%@ page import="com.liferay.portlet.shopping.BillingCityException" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.BillingCountryException" %><%--
@@ -35,6 +35,10 @@
 --%><%@ page import="com.liferay.portlet.shopping.BillingZipException" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.CartMinQuantityException" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.CategoryNameException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CCExpirationException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CCNameException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CCNumberException" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.CCTypeException" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.CouponActiveException" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.CouponDateException" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.CouponDescriptionException" %><%--
@@ -44,10 +48,6 @@
 --%><%@ page import="com.liferay.portlet.shopping.CouponLimitSKUsException" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.CouponNameException" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.CouponStartDateException" %><%--
---%><%@ page import="com.liferay.portlet.shopping.CCExpirationException" %><%--
---%><%@ page import="com.liferay.portlet.shopping.CCNameException" %><%--
---%><%@ page import="com.liferay.portlet.shopping.CCNumberException" %><%--
---%><%@ page import="com.liferay.portlet.shopping.CCTypeException" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.DuplicateCouponIdException" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.DuplicateItemSKUException" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.ItemLargeImageNameException" %><%--
@@ -71,7 +71,6 @@
 --%><%@ page import="com.liferay.portlet.shopping.ShippingStateException" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.ShippingStreetException" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.ShippingZipException" %><%--
---%><%@ page import="com.liferay.portlet.shopping.action.UpdateShoppingConfigAction" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.model.ShoppingCart" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.model.ShoppingCartItem" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.model.ShoppingCategory" %><%--
@@ -81,32 +80,35 @@
 --%><%@ page import="com.liferay.portlet.shopping.model.ShoppingItemPrice" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.model.ShoppingOrder" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.model.ShoppingOrderItem" %><%--
---%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingCartServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingCategoryServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.search.CouponDisplayTerms" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.search.CouponSearch" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.search.CouponSearchTerms" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.search.OrderDisplayTerms" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.search.OrderSearch" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.search.OrderSearchTerms" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.service.permission.ShoppingCategoryPermission" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.service.permission.ShoppingItemPermission" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingCategoryLocalServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingCouponLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingCouponServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingItemServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingOrderServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldLocalServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingItemLocalServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceLocalServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.service.spring.ShoppingOrderLocalServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.shopping.util.ShoppingPreferences" %><%--
 --%><%@ page import="com.liferay.portlet.shopping.util.ShoppingUtil" %><%--
 
---%><portlet:defineObjects /><%--
-
 --%><%
-PortletPreferences prefs = renderRequest.getPreferences();
+PortalPreferences prefs = PortletPreferencesFactory.getPortalPreferences(request);
 
-String orderByCol = prefs.getValue("order-by-col", StringPool.BLANK);
+ShoppingPreferences shoppingPrefs = ShoppingPreferences.getInstance(company.getCompanyId(), portletGroupId);
 
-boolean shoppingAdmin = ShoppingCategoryServiceUtil.hasAdmin();
+Currency currency = Currency.getInstance(shoppingPrefs.getCurrencyId());
 
-ShoppingConfig shoppingConfig = AdminConfigServiceUtil.getShoppingConfig(company.getCompanyId());
-
-boolean usePayPal = shoppingConfig.usePayPal();
-
-Currency currency = Currency.getInstance(shoppingConfig.getCurrencyId());
+DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 
 NumberFormat doubleFormat = NumberFormat.getNumberInstance(locale);
+
 doubleFormat.setMaximumFractionDigits(2);
 doubleFormat.setMinimumFractionDigits(2);
 

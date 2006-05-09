@@ -59,7 +59,7 @@ public class CreditCard {
 	public static boolean isValid(String number, String type) {
 		number = StringUtil.extractDigits(number);
 
-		if (type.equals("cc_visa")) {
+		if (type.equals("visa")) {
 			if (!number.startsWith("4")) {
 				return false;
 			}
@@ -70,7 +70,7 @@ public class CreditCard {
 				return false;
 			}
 		}
-		else if (type.equals("cc_mastercard")) {
+		else if (type.equals("mastercard")) {
 			if (!number.startsWith("51") &&
 				!number.startsWith("52") &&
 				!number.startsWith("53") &&
@@ -84,7 +84,7 @@ public class CreditCard {
 				return false;
 			}
 		}
-		else if (type.equals("cc_discover")) {
+		else if (type.equals("discover")) {
 			if (!number.startsWith("6011")) {
 
 				return false;
@@ -94,7 +94,7 @@ public class CreditCard {
 				return false;
 			}
 		}
-		else if (type.equals("cc_amex")) {
+		else if (type.equals("amex")) {
 			if (!number.startsWith("34") &&
 				!number.startsWith("35") &&
 				!number.startsWith("36") &&

@@ -255,8 +255,6 @@ public class WebKeys {
 
 	public static final String SESSION_LISTENER = "SESSION_LISTENER";
 
-	public static final String SHOPPING_CATEGORIES = "SHOPPING_CATEGORIES";
-
 	public static final String SHOPPING_CATEGORY = "SHOPPING_CATEGORY";
 
 	public static final String SHOPPING_COUPON = "SHOPPING_COUPON";

@@ -3,16 +3,21 @@
 
 <service-builder root-dir=".." package-path="com.liferay.portlet">
 	<portlet name="Shopping" short-name="Shopping" />
-	<entity name="ShoppingCart" local-service="true" remote-service="true">
+	<entity name="ShoppingCart" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
 		<column name="cartId" type="String" primary="true" />
 
+		<!-- Group instance -->
+
+		<column name="groupId" type="String" />
+
 		<!-- Audit fields -->
 
 		<column name="companyId" type="String" />
 		<column name="userId" type="String" />
+		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
 
@@ -25,26 +30,28 @@
 
 		<!-- Finder methods -->
 
-		<finder name="CompanyId" return-type="Collection">
-			<finder-column name="companyId" />
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
 		</finder>
-		<finder name="UserId" return-type="ShoppingCart">
+		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
-	<entity name="ShoppingCategory" local-service="false" remote-service="true">
+	<entity name="ShoppingCategory" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
 		<column name="categoryId" type="String" primary="true" />
 
+		<!-- Group instance -->
+
+		<column name="groupId" type="String" />
+
 		<!-- Audit fields -->
 
 		<column name="companyId" type="String" />
+		<column name="userId" type="String" />
+		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
 
@@ -52,6 +59,7 @@
 
 		<column name="parentCategoryId" type="String" />
 		<column name="name" type="String" />
+		<column name="description" type="String" />
 
 		<!-- Order -->
 
@@ -62,27 +70,33 @@
 
 		<!-- Finder methods -->
 
-		<finder name="CompanyId" return-type="Collection">
-			<finder-column name="companyId" />
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
 		</finder>
-		<finder name="C_P" return-type="Collection">
-			<finder-column name="companyId" />
+		<finder name="G_P" return-type="Collection">
+			<finder-column name="groupId" />
 			<finder-column name="parentCategoryId" />
 		</finder>
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
-	<entity name="ShoppingCoupon" local-service="false" remote-service="true">
+	<entity name="ShoppingCoupon" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
 		<column name="couponId" type="String" primary="true" />
 
+		<!-- Group instance -->
+
+		<column name="groupId" type="String" />
+
 		<!-- Audit fields -->
 
 		<column name="companyId" type="String" />
+		<column name="userId" type="String" />
+		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
 
@@ -90,11 +104,9 @@
 
 		<column name="name" type="String" />
 		<column name="description" type="String" />
-
 		<column name="startDate" type="Date" />
 		<column name="endDate" type="Date" />
 		<column name="active" type="boolean" />
-
 		<column name="limitCategories" type="String" />
 		<column name="limitSkus" type="String" />
 		<column name="minOrder" type="double" />
@@ -109,17 +121,8 @@
 
 		<!-- Finder methods -->
 
-		<finder name="CompanyId" return-type="Collection">
-			<finder-column name="companyId" />
-		</finder>
-		<finder name="C_A" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="active" />
-		</finder>
-		<finder name="C_A_D" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="active" />
-			<finder-column name="discountType" />
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
 		</finder>
 	</entity>
 	<entity name="ShoppingItem" local-service="true" remote-service="true">
@@ -131,6 +134,8 @@
 		<!-- Audit fields -->
 
 		<column name="companyId" type="String" />
+		<column name="userId" type="String" />
+		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
 
@@ -141,28 +146,19 @@
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="properties" type="String" />
-
-		<column name="supplierUserId" type="String" />
-
 		<column name="fields" type="boolean" />
 		<column name="fieldsQuantities" type="String" />
-
 		<column name="minQuantity" type="int" />
 		<column name="maxQuantity" type="int" />
-
 		<column name="price" type="double" />
 		<column name="discount" type="double" />
 		<column name="taxable" type="boolean" />
-
 		<column name="shipping" type="double" />
 		<column name="useShippingFormula" type="boolean" />
-
 		<column name="requiresShipping" type="boolean" />
 		<column name="stockQuantity" type="int" />
-
 		<column name="featured" type="boolean" />
 		<column name="sale" type="boolean" />
-
 		<column name="smallImage" type="boolean" />
 		<column name="smallImageURL" type="String" />
 		<column name="mediumImage" type="boolean" />
@@ -182,14 +178,7 @@
 
 		<!-- Finder methods -->
 
-		<finder name="CompanyId" return-type="Collection">
-			<finder-column name="companyId" />
-		</finder>
-		<finder name="SupplierUserId" return-type="Collection">
-			<finder-column name="supplierUserId" />
-		</finder>
-		<finder name="C_C" return-type="Collection">
-			<finder-column name="companyId" />
+		<finder name="CategoryId" return-type="Collection">
 			<finder-column name="categoryId" />
 		</finder>
 		<finder name="C_S" return-type="ShoppingItem">
@@ -199,9 +188,9 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
-	<entity name="ShoppingItemField" local-service="false" remote-service="true">
+	<entity name="ShoppingItemField" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
@@ -227,7 +216,7 @@
 			<finder-column name="itemId" />
 		</finder>
 	</entity>
-	<entity name="ShoppingItemPrice" local-service="false" remote-service="true">
+	<entity name="ShoppingItemPrice" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
@@ -236,17 +225,13 @@
 		<!-- Other fields -->
 
 		<column name="itemId" type="String" />
-
 		<column name="minQuantity" type="int" />
 		<column name="maxQuantity" type="int" />
-
 		<column name="price" type="double" />
 		<column name="discount" type="double" />
 		<column name="taxable" type="boolean" />
-
 		<column name="shipping" type="double" />
 		<column name="useShippingFormula" type="boolean" />
-
 		<column name="status" type="int" />
 
 		<!-- Order -->
@@ -261,10 +246,6 @@
 		<finder name="ItemId" return-type="Collection">
 			<finder-column name="itemId" />
 		</finder>
-		<finder name="I_S" return-type="Collection">
-			<finder-column name="itemId" />
-			<finder-column name="status" />
-		</finder>
 	</entity>
 	<entity name="ShoppingOrder" local-service="true" remote-service="true">
 
@@ -272,10 +253,15 @@
 
 		<column name="orderId" type="String" primary="true" />
 
+		<!-- Group instance -->
+
+		<column name="groupId" type="String" />
+
 		<!-- Audit fields -->
 
 		<column name="companyId" type="String" />
 		<column name="userId" type="String" />
+		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
 
@@ -289,7 +275,6 @@
 		<column name="insurance" type="double" />
 		<column name="couponIds" type="String" />
 		<column name="couponDiscount" type="double" />
-
 		<column name="billingFirstName" type="String" />
 		<column name="billingLastName" type="String" />
 		<column name="billingEmailAddress" type="String" />
@@ -300,7 +285,6 @@
 		<column name="billingZip" type="String" />
 		<column name="billingCountry" type="String" />
 		<column name="billingPhone" type="String" />
-
 		<column name="shipToBilling" type="boolean" />
 		<column name="shippingFirstName" type="String" />
 		<column name="shippingLastName" type="String" />
@@ -312,22 +296,18 @@
 		<column name="shippingZip" type="String" />
 		<column name="shippingCountry" type="String" />
 		<column name="shippingPhone" type="String" />
-
 		<column name="ccName" type="String" />
 		<column name="ccType" type="String" />
 		<column name="ccNumber" type="String" />
 		<column name="ccExpMonth" type="int" />
 		<column name="ccExpYear" type="int" />
 		<column name="ccVerNumber" type="String" />
-
 		<column name="comments" type="String" />
-
 		<column name="ppTxnId" type="String" />
 		<column name="ppPaymentStatus" type="String" />
 		<column name="ppPaymentGross" type="double" />
 		<column name="ppReceiverEmail" type="String" />
 		<column name="ppPayerEmail" type="String" />
-
 		<column name="sendOrderEmail" type="boolean" />
 		<column name="sendShippingEmail" type="boolean" />
 
@@ -339,29 +319,13 @@
 
 		<!-- Finder methods -->
 
-		<finder name="CompanyId" return-type="Collection" where="ppPaymentStatus != 'LIFERAY_STATUS_LATEST'">
-			<finder-column name="companyId" />
-		</finder>
-		<finder name="UserId" return-type="Collection" where="ppPaymentStatus != 'LIFERAY_STATUS_LATEST'">
-			<finder-column name="userId" />
-		</finder>
-		<finder name="C_PPPS" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="ppPaymentStatus" />
-		</finder>
-		<finder name="U_PPPS" return-type="Collection">
+		<finder name="G_U_PPPS" return-type="Collection">
+			<finder-column name="groupId" />
 			<finder-column name="userId" />
 			<finder-column name="ppPaymentStatus" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Company" />
-		<reference package-path="com.liferay.portal" entity="Note" />
-		<reference package-path="com.liferay.portal" entity="Role" />
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
-	<entity name="ShoppingOrderItem" local-service="false" remote-service="true">
+	<entity name="ShoppingOrderItem" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
@@ -374,9 +338,6 @@
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="properties" type="String" />
-
-		<column name="supplierUserId" type="String" />
-
 		<column name="price" type="double" />
 		<column name="quantity" type="int" />
 		<column name="shippedDate" type="Date" />
@@ -384,7 +345,6 @@
 		<!-- Order -->
 
 		<order by="asc">
-			<order-column name="supplierUserId" />
 			<order-column name="name" />
 			<order-column name="description" />
 		</order>
@@ -393,9 +353,6 @@
 
 		<finder name="OrderId" return-type="Collection">
 			<finder-column name="orderId" />
-		</finder>
-		<finder name="ItemId" return-type="Collection">
-			<finder-column name="itemId" />
 		</finder>
 	</entity>
 	<exceptions>

@@ -51,12 +51,15 @@ public class ShoppingCategoryServiceEJBImpl implements ShoppingCategoryService,
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		java.lang.String parentCategoryId, java.lang.String name)
+		java.lang.String plid, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addCategory(parentCategoryId, name);
+		return getService().addCategory(plid, parentCategoryId, name,
+			description, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void deleteCategory(java.lang.String categoryId)
@@ -64,14 +67,6 @@ public class ShoppingCategoryServiceEJBImpl implements ShoppingCategoryService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		getService().deleteCategory(categoryId);
-	}
-
-	public void deleteCategory(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteCategory(category);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory getCategory(
@@ -83,102 +78,15 @@ public class ShoppingCategoryServiceEJBImpl implements ShoppingCategoryService,
 		return getService().getCategory(categoryId);
 	}
 
-	public java.util.List getCategories(java.lang.String companyId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().getCategories(companyId);
-	}
-
-	public java.util.List getCategories(java.lang.String companyId,
-		java.lang.String parentCategoryId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().getCategories(companyId, parentCategoryId);
-	}
-
-	public java.util.List getCategories(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().getCategories(category);
-	}
-
-	public int getCategoriesSize(java.lang.String companyId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().getCategoriesSize(companyId);
-	}
-
-	public int getCategoriesSize(java.lang.String companyId,
-		java.lang.String parentCategoryId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().getCategoriesSize(companyId, parentCategoryId);
-	}
-
-	public int getCategoriesSize(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().getCategoriesSize(category);
-	}
-
-	public com.liferay.portlet.shopping.model.ShoppingCategory getParentCategory(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().getParentCategory(category);
-	}
-
-	public java.util.List getParentCategories(java.lang.String categoryId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().getParentCategories(categoryId);
-	}
-
-	public java.util.List getParentCategories(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().getParentCategories(category);
-	}
-
 	public com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
 		java.lang.String categoryId, java.lang.String parentCategoryId,
-		java.lang.String name)
+		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateCategory(categoryId, parentCategoryId, name);
-	}
-
-	public boolean hasAdmin()
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().hasAdmin();
-	}
-
-	public boolean hasAdmin(java.lang.String categoryId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().hasAdmin(categoryId);
+		return getService().updateCategory(categoryId, parentCategoryId, name,
+			description);
 	}
 
 	public void ejbCreate() throws CreateException {

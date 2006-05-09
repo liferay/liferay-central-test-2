@@ -29,11 +29,24 @@ package com.liferay.portlet.shopping.service.spring;
  *
  */
 public interface ShoppingCartLocalService {
-	public void deleteAll(java.lang.String userId)
+	public void deleteGroupCarts(java.lang.String groupId)
+		throws com.liferay.portal.SystemException;
+
+	public void deleteUserCarts(java.lang.String userId)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.shopping.model.ShoppingCart getCart(
+		java.lang.String cartId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
-	public void deleteCart(java.lang.String cartId)
+	public java.util.Map getItems(java.lang.String groupId,
+		java.lang.String itemIds) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.shopping.model.ShoppingCart updateCart(
+		java.lang.String userId, java.lang.String groupId,
+		java.lang.String cartId, java.lang.String itemIds,
+		java.lang.String couponIds, int altShipping, boolean insure)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 }

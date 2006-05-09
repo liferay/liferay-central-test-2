@@ -125,180 +125,55 @@ public class ShoppingOrderUtil {
 		return getPersistence().findByPrimaryKey(orderId);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId)
+	public static java.util.List findByG_U_PPPS(java.lang.String groupId,
+		java.lang.String userId, java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId);
+		return getPersistence().findByG_U_PPPS(groupId, userId, ppPaymentStatus);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end);
+	public static java.util.List findByG_U_PPPS(java.lang.String groupId,
+		java.lang.String userId, java.lang.String ppPaymentStatus, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_U_PPPS(groupId, userId,
+			ppPaymentStatus, begin, end);
 	}
 
-	public static java.util.List findByCompanyId(java.lang.String companyId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+	public static java.util.List findByG_U_PPPS(java.lang.String groupId,
+		java.lang.String userId, java.lang.String ppPaymentStatus, int begin,
+		int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end, obc);
+		return getPersistence().findByG_U_PPPS(groupId, userId,
+			ppPaymentStatus, begin, end, obc);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingOrder findByCompanyId_First(
-		java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchOrderException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId_First(companyId, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder findByCompanyId_Last(
-		java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchOrderException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId_Last(companyId, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder[] findByCompanyId_PrevAndNext(
-		java.lang.String orderId, java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchOrderException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId_PrevAndNext(orderId, companyId,
-			obc);
-	}
-
-	public static java.util.List findByUserId(java.lang.String userId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUserId(userId);
-	}
-
-	public static java.util.List findByUserId(java.lang.String userId,
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findByUserId(userId, begin, end);
-	}
-
-	public static java.util.List findByUserId(java.lang.String userId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUserId(userId, begin, end, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder findByUserId_First(
-		java.lang.String userId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchOrderException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByUserId_First(userId, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder findByUserId_Last(
-		java.lang.String userId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchOrderException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByUserId_Last(userId, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder[] findByUserId_PrevAndNext(
-		java.lang.String orderId, java.lang.String userId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchOrderException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByUserId_PrevAndNext(orderId, userId, obc);
-	}
-
-	public static java.util.List findByC_PPPS(java.lang.String companyId,
-		java.lang.String ppPaymentStatus)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_PPPS(companyId, ppPaymentStatus);
-	}
-
-	public static java.util.List findByC_PPPS(java.lang.String companyId,
-		java.lang.String ppPaymentStatus, int begin, int end)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_PPPS(companyId, ppPaymentStatus, begin,
-			end);
-	}
-
-	public static java.util.List findByC_PPPS(java.lang.String companyId,
-		java.lang.String ppPaymentStatus, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_PPPS(companyId, ppPaymentStatus, begin,
-			end, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder findByC_PPPS_First(
-		java.lang.String companyId, java.lang.String ppPaymentStatus,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchOrderException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByC_PPPS_First(companyId, ppPaymentStatus,
-			obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder findByC_PPPS_Last(
-		java.lang.String companyId, java.lang.String ppPaymentStatus,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchOrderException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByC_PPPS_Last(companyId, ppPaymentStatus,
-			obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder[] findByC_PPPS_PrevAndNext(
-		java.lang.String orderId, java.lang.String companyId,
+	public static com.liferay.portlet.shopping.model.ShoppingOrder findByG_U_PPPS_First(
+		java.lang.String groupId, java.lang.String userId,
 		java.lang.String ppPaymentStatus,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portlet.shopping.NoSuchOrderException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByC_PPPS_PrevAndNext(orderId, companyId,
+		return getPersistence().findByG_U_PPPS_First(groupId, userId,
 			ppPaymentStatus, obc);
 	}
 
-	public static java.util.List findByU_PPPS(java.lang.String userId,
-		java.lang.String ppPaymentStatus)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByU_PPPS(userId, ppPaymentStatus);
-	}
-
-	public static java.util.List findByU_PPPS(java.lang.String userId,
-		java.lang.String ppPaymentStatus, int begin, int end)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByU_PPPS(userId, ppPaymentStatus, begin, end);
-	}
-
-	public static java.util.List findByU_PPPS(java.lang.String userId,
-		java.lang.String ppPaymentStatus, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByU_PPPS(userId, ppPaymentStatus, begin,
-			end, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder findByU_PPPS_First(
-		java.lang.String userId, java.lang.String ppPaymentStatus,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchOrderException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByU_PPPS_First(userId, ppPaymentStatus, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder findByU_PPPS_Last(
-		java.lang.String userId, java.lang.String ppPaymentStatus,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchOrderException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByU_PPPS_Last(userId, ppPaymentStatus, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder[] findByU_PPPS_PrevAndNext(
-		java.lang.String orderId, java.lang.String userId,
+	public static com.liferay.portlet.shopping.model.ShoppingOrder findByG_U_PPPS_Last(
+		java.lang.String groupId, java.lang.String userId,
 		java.lang.String ppPaymentStatus,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portlet.shopping.NoSuchOrderException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByU_PPPS_PrevAndNext(orderId, userId,
+		return getPersistence().findByG_U_PPPS_Last(groupId, userId,
 			ppPaymentStatus, obc);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingOrder[] findByG_U_PPPS_PrevAndNext(
+		java.lang.String orderId, java.lang.String groupId,
+		java.lang.String userId, java.lang.String ppPaymentStatus,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portlet.shopping.NoSuchOrderException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByG_U_PPPS_PrevAndNext(orderId, groupId,
+			userId, ppPaymentStatus, obc);
 	}
 
 	public static java.util.List findAll()
@@ -306,48 +181,16 @@ public class ShoppingOrderUtil {
 		return getPersistence().findAll();
 	}
 
-	public static void removeByCompanyId(java.lang.String companyId)
+	public static void removeByG_U_PPPS(java.lang.String groupId,
+		java.lang.String userId, java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeByCompanyId(companyId);
+		getPersistence().removeByG_U_PPPS(groupId, userId, ppPaymentStatus);
 	}
 
-	public static void removeByUserId(java.lang.String userId)
+	public static int countByG_U_PPPS(java.lang.String groupId,
+		java.lang.String userId, java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeByUserId(userId);
-	}
-
-	public static void removeByC_PPPS(java.lang.String companyId,
-		java.lang.String ppPaymentStatus)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByC_PPPS(companyId, ppPaymentStatus);
-	}
-
-	public static void removeByU_PPPS(java.lang.String userId,
-		java.lang.String ppPaymentStatus)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByU_PPPS(userId, ppPaymentStatus);
-	}
-
-	public static int countByCompanyId(java.lang.String companyId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByCompanyId(companyId);
-	}
-
-	public static int countByUserId(java.lang.String userId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByUserId(userId);
-	}
-
-	public static int countByC_PPPS(java.lang.String companyId,
-		java.lang.String ppPaymentStatus)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_PPPS(companyId, ppPaymentStatus);
-	}
-
-	public static int countByU_PPPS(java.lang.String userId,
-		java.lang.String ppPaymentStatus)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByU_PPPS(userId, ppPaymentStatus);
+		return getPersistence().countByG_U_PPPS(groupId, userId, ppPaymentStatus);
 	}
 
 	public static ShoppingOrderPersistence getPersistence() {

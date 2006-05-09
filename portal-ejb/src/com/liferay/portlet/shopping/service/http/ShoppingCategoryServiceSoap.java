@@ -39,11 +39,14 @@ import java.rmi.RemoteException;
  */
 public class ShoppingCategoryServiceSoap {
 	public static com.liferay.portlet.shopping.model.ShoppingCategoryModel addCategory(
-		java.lang.String parentCategoryId, java.lang.String name)
+		java.lang.String plid, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.addCategory(parentCategoryId,
-					name);
+			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.addCategory(plid,
+					parentCategoryId, name, description,
+					addCommunityPermissions, addGuestPermissions);
 
 			return returnValue;
 		}
@@ -66,19 +69,6 @@ public class ShoppingCategoryServiceSoap {
 		}
 	}
 
-	public static void deleteCategory(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws RemoteException {
-		try {
-			ShoppingCategoryServiceUtil.deleteCategory(category);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
 	public static com.liferay.portlet.shopping.model.ShoppingCategoryModel getCategory(
 		java.lang.String categoryId) throws RemoteException {
 		try {
@@ -93,172 +83,13 @@ public class ShoppingCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCategoryModel[] getCategories(
-		java.lang.String companyId) throws RemoteException {
-		try {
-			java.util.List returnValue = ShoppingCategoryServiceUtil.getCategories(companyId);
-
-			return (com.liferay.portlet.shopping.model.ShoppingCategory[])returnValue.toArray(new com.liferay.portlet.shopping.model.ShoppingCategory[0]);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCategoryModel[] getCategories(
-		java.lang.String companyId, java.lang.String parentCategoryId)
-		throws RemoteException {
-		try {
-			java.util.List returnValue = ShoppingCategoryServiceUtil.getCategories(companyId,
-					parentCategoryId);
-
-			return (com.liferay.portlet.shopping.model.ShoppingCategory[])returnValue.toArray(new com.liferay.portlet.shopping.model.ShoppingCategory[0]);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCategoryModel[] getCategories(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws RemoteException {
-		try {
-			java.util.List returnValue = ShoppingCategoryServiceUtil.getCategories(category);
-
-			return (com.liferay.portlet.shopping.model.ShoppingCategory[])returnValue.toArray(new com.liferay.portlet.shopping.model.ShoppingCategory[0]);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static int getCategoriesSize(java.lang.String companyId)
-		throws RemoteException {
-		try {
-			int returnValue = ShoppingCategoryServiceUtil.getCategoriesSize(companyId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static int getCategoriesSize(java.lang.String companyId,
-		java.lang.String parentCategoryId) throws RemoteException {
-		try {
-			int returnValue = ShoppingCategoryServiceUtil.getCategoriesSize(companyId,
-					parentCategoryId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static int getCategoriesSize(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws RemoteException {
-		try {
-			int returnValue = ShoppingCategoryServiceUtil.getCategoriesSize(category);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCategoryModel getParentCategory(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.getParentCategory(category);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCategoryModel[] getParentCategories(
-		java.lang.String categoryId) throws RemoteException {
-		try {
-			java.util.List returnValue = ShoppingCategoryServiceUtil.getParentCategories(categoryId);
-
-			return (com.liferay.portlet.shopping.model.ShoppingCategory[])returnValue.toArray(new com.liferay.portlet.shopping.model.ShoppingCategory[0]);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCategoryModel[] getParentCategories(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws RemoteException {
-		try {
-			java.util.List returnValue = ShoppingCategoryServiceUtil.getParentCategories(category);
-
-			return (com.liferay.portlet.shopping.model.ShoppingCategory[])returnValue.toArray(new com.liferay.portlet.shopping.model.ShoppingCategory[0]);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
 	public static com.liferay.portlet.shopping.model.ShoppingCategoryModel updateCategory(
 		java.lang.String categoryId, java.lang.String parentCategoryId,
-		java.lang.String name) throws RemoteException {
-		try {
-			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.updateCategory(categoryId,
-					parentCategoryId, name);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static boolean hasAdmin() throws RemoteException {
-		try {
-			boolean returnValue = ShoppingCategoryServiceUtil.hasAdmin();
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static boolean hasAdmin(java.lang.String categoryId)
+		java.lang.String name, java.lang.String description)
 		throws RemoteException {
 		try {
-			boolean returnValue = ShoppingCategoryServiceUtil.hasAdmin(categoryId);
+			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.updateCategory(categoryId,
+					parentCategoryId, name, description);
 
 			return returnValue;
 		}

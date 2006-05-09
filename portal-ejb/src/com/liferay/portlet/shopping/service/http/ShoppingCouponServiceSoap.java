@@ -39,16 +39,20 @@ import java.rmi.RemoteException;
  */
 public class ShoppingCouponServiceSoap {
 	public static com.liferay.portlet.shopping.model.ShoppingCouponModel addCoupon(
-		java.lang.String couponId, boolean autoCouponId, java.lang.String name,
-		java.lang.String description, int startMonth, int startDay,
-		int startYear, int endMonth, int endDay, int endYear,
-		boolean neverExpires, boolean active, java.lang.String limitCategories,
+		java.lang.String plid, java.lang.String couponId, boolean autoCouponId,
+		java.lang.String name, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
+		boolean neverExpire, boolean active, java.lang.String limitCategories,
 		java.lang.String limitSkus, double minOrder, double discount,
 		java.lang.String discountType) throws RemoteException {
 		try {
-			com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.addCoupon(couponId,
-					autoCouponId, name, description, startMonth, startDay,
-					startYear, endMonth, endDay, endYear, neverExpires, active,
+			com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.addCoupon(plid,
+					couponId, autoCouponId, name, description, startDateMonth,
+					startDateDay, startDateYear, startDateHour,
+					startDateMinute, endDateMonth, endDateDay, endDateYear,
+					endDateHour, endDateMinute, neverExpire, active,
 					limitCategories, limitSkus, minOrder, discount, discountType);
 
 			return returnValue;
@@ -60,10 +64,10 @@ public class ShoppingCouponServiceSoap {
 		}
 	}
 
-	public static void deleteCoupon(java.lang.String couponId)
-		throws RemoteException {
+	public static void deleteCoupon(java.lang.String plid,
+		java.lang.String couponId) throws RemoteException {
 		try {
-			ShoppingCouponServiceUtil.deleteCoupon(couponId);
+			ShoppingCouponServiceUtil.deleteCoupon(plid, couponId);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -73,9 +77,11 @@ public class ShoppingCouponServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCouponModel getCoupon(
-		java.lang.String couponId) throws RemoteException {
+		java.lang.String plid, java.lang.String couponId)
+		throws RemoteException {
 		try {
-			com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.getCoupon(couponId);
+			com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.getCoupon(plid,
+					couponId);
 
 			return returnValue;
 		}
@@ -86,45 +92,17 @@ public class ShoppingCouponServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCouponModel[] getCoupons(
-		java.lang.String companyId) throws RemoteException {
-		try {
-			java.util.List returnValue = ShoppingCouponServiceUtil.getCoupons(companyId);
-
-			return (com.liferay.portlet.shopping.model.ShoppingCoupon[])returnValue.toArray(new com.liferay.portlet.shopping.model.ShoppingCoupon[0]);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCouponModel[] getCoupons(
+	public static com.liferay.portlet.shopping.model.ShoppingCouponModel[] search(
+		java.lang.String couponId, java.lang.String plid,
 		java.lang.String companyId, boolean active,
-		java.lang.String discountType, int begin, int end)
+		java.lang.String discountType, boolean andOperator, int begin, int end)
 		throws RemoteException {
 		try {
-			java.util.List returnValue = ShoppingCouponServiceUtil.getCoupons(companyId,
-					active, discountType, begin, end);
+			java.util.List returnValue = ShoppingCouponServiceUtil.search(couponId,
+					plid, companyId, active, discountType, andOperator, begin,
+					end);
 
 			return (com.liferay.portlet.shopping.model.ShoppingCoupon[])returnValue.toArray(new com.liferay.portlet.shopping.model.ShoppingCoupon[0]);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static int getCouponsSize(java.lang.String companyId,
-		boolean active, java.lang.String discountType)
-		throws RemoteException {
-		try {
-			int returnValue = ShoppingCouponServiceUtil.getCouponsSize(companyId,
-					active, discountType);
-
-			return returnValue;
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -134,17 +112,21 @@ public class ShoppingCouponServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCouponModel updateCoupon(
-		java.lang.String couponId, java.lang.String name,
-		java.lang.String description, int startMonth, int startDay,
-		int startYear, int endMonth, int endDay, int endYear,
-		boolean neverExpires, boolean active, java.lang.String limitCategories,
+		java.lang.String plid, java.lang.String couponId,
+		java.lang.String name, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
+		boolean neverExpire, boolean active, java.lang.String limitCategories,
 		java.lang.String limitSkus, double minOrder, double discount,
 		java.lang.String discountType) throws RemoteException {
 		try {
-			com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.updateCoupon(couponId,
-					name, description, startMonth, startDay, startYear,
-					endMonth, endDay, endYear, neverExpires, active,
-					limitCategories, limitSkus, minOrder, discount, discountType);
+			com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.updateCoupon(plid,
+					couponId, name, description, startDateMonth, startDateDay,
+					startDateYear, startDateHour, startDateMinute,
+					endDateMonth, endDateDay, endDateYear, endDateHour,
+					endDateMinute, neverExpire, active, limitCategories,
+					limitSkus, minOrder, discount, discountType);
 
 			return returnValue;
 		}

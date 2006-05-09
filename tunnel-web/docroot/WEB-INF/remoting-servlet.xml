@@ -566,18 +566,6 @@
 		<property name="service" ref="com.liferay.portlet.polls.service.spring.PollsVoteService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.polls.service.spring.PollsVoteService" />
 	</bean>
-	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingCartService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingCartService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingCartService" />
-	</bean>
-	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingCartService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingCartService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingCartService" />
-	</bean>
-	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingCartService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingCartService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingCartService" />
-	</bean>
 	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingCategoryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingCategoryService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingCategoryService" />
@@ -614,30 +602,6 @@
 		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingItemService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingItemService" />
 	</bean>
-	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingItemFieldService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService" />
-	</bean>
-	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingItemFieldService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService" />
-	</bean>
-	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingItemFieldService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingItemFieldService" />
-	</bean>
-	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingItemPriceService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService" />
-	</bean>
-	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingItemPriceService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService" />
-	</bean>
-	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingItemPriceService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingItemPriceService" />
-	</bean>
 	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingOrderService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingOrderService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingOrderService" />
@@ -649,18 +613,6 @@
 	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingOrderService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
 		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingOrderService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingOrderService" />
-	</bean>
-	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingOrderItemService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService" />
-	</bean>
-	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingOrderItemService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService" />
-	</bean>
-	<bean name="/com_liferay_portlet_shopping_service_spring_ShoppingOrderItemService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.spring.ShoppingOrderItemService" />
 	</bean>
 	<bean name="/com_liferay_portlet_wiki_service_spring_WikiNodeService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.wiki.service.spring.WikiNodeService.professional" />

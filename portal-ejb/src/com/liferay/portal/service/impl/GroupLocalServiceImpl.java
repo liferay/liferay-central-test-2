@@ -53,6 +53,7 @@ import com.liferay.portlet.imagegallery.service.spring.IGFolderLocalServiceUtil;
 import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.polls.service.spring.PollsQuestionLocalServiceUtil;
+import com.liferay.portlet.shopping.service.spring.ShoppingCartLocalServiceUtil;
 import com.liferay.portlet.wiki.service.spring.WikiNodeLocalServiceUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
@@ -191,6 +192,10 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		// Polls
 
 		PollsQuestionLocalServiceUtil.deleteQuestions(groupId);
+
+		// Shopping
+
+		ShoppingCartLocalServiceUtil.deleteGroupCarts(groupId);
 
 		// Wiki
 

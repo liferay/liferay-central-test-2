@@ -729,8 +729,10 @@ create table Roles_Permissions (
 
 create table ShoppingCart (
 	cartId VARCHAR(75) not null primary key,
+	groupId VARCHAR(75) not null,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
 	itemIds STRING null,
@@ -741,16 +743,23 @@ create table ShoppingCart (
 
 create table ShoppingCategory (
 	categoryId VARCHAR(75) not null primary key,
+	groupId VARCHAR(75) not null,
 	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
 	parentCategoryId VARCHAR(75) null,
-	name VARCHAR(75) null
+	name VARCHAR(75) null,
+	description STRING null
 );
 
 create table ShoppingCoupon (
 	couponId VARCHAR(75) not null primary key,
+	groupId VARCHAR(75) not null,
 	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
 	name VARCHAR(75) null,
@@ -768,14 +777,15 @@ create table ShoppingCoupon (
 create table ShoppingItem (
 	itemId VARCHAR(75) not null primary key,
 	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
 	categoryId VARCHAR(75) null,
 	sku VARCHAR(75) null,
-	name VARCHAR(75) null,
+	name VARCHAR(200) null,
 	description STRING null,
 	properties STRING null,
-	supplierUserId VARCHAR(75) null,
 	fields_ BOOLEAN,
 	fieldsQuantities STRING null,
 	minQuantity INTEGER,
@@ -802,7 +812,7 @@ create table ShoppingItemField (
 	itemId VARCHAR(75) null,
 	name VARCHAR(75) null,
 	values_ STRING null,
-	description VARCHAR(75) null
+	description STRING null
 );
 
 create table ShoppingItemPrice (
@@ -820,8 +830,10 @@ create table ShoppingItemPrice (
 
 create table ShoppingOrder (
 	orderId VARCHAR(75) not null primary key,
+	groupId VARCHAR(75) not null,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
 	tax DOUBLE,
@@ -873,10 +885,9 @@ create table ShoppingOrderItem (
 	orderId VARCHAR(75) not null,
 	itemId VARCHAR(75) not null,
 	sku VARCHAR(75) null,
-	name VARCHAR(75) null,
+	name VARCHAR(200) null,
 	description STRING null,
 	properties STRING null,
-	supplierUserId VARCHAR(75) null,
 	price DOUBLE,
 	quantity INTEGER,
 	shippedDate DATE null,

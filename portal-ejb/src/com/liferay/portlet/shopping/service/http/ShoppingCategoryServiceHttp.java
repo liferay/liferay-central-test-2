@@ -24,6 +24,7 @@ package com.liferay.portlet.shopping.service.http;
 
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.servlet.TunnelUtil;
+import com.liferay.portal.shared.util.BooleanWrapper;
 import com.liferay.portal.shared.util.MethodWrapper;
 import com.liferay.portal.shared.util.NullWrapper;
 import com.liferay.portal.shared.util.StackTraceUtil;
@@ -41,25 +42,45 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ShoppingCategoryServiceHttp {
 	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		HttpPrincipal httpPrincipal, java.lang.String parentCategoryId,
-		java.lang.String name)
+		HttpPrincipal httpPrincipal, java.lang.String plid,
+		java.lang.String parentCategoryId, java.lang.String name,
+		java.lang.String description, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = parentCategoryId;
+			Object paramObj0 = plid;
 
-			if (parentCategoryId == null) {
+			if (plid == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = name;
+			Object paramObj1 = parentCategoryId;
 
-			if (name == null) {
+			if (parentCategoryId == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = description;
+
+			if (description == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj5 = new BooleanWrapper(addGuestPermissions);
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
-					"addCategory", new Object[] { paramObj0, paramObj1 });
+					"addCategory",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
 			Object returnObj = null;
 
 			try {
@@ -103,52 +124,6 @@ public class ShoppingCategoryServiceHttp {
 
 			if (categoryId == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
-					"deleteCategory", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static void deleteCategory(HttpPrincipal httpPrincipal,
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = category;
-
-			if (category == null) {
-				paramObj0 = new NullWrapper(
-						"com.liferay.portlet.shopping.model.ShoppingCategory");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
@@ -232,394 +207,10 @@ public class ShoppingCategoryServiceHttp {
 		}
 	}
 
-	public static java.util.List getCategories(HttpPrincipal httpPrincipal,
-		java.lang.String companyId) throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
-					"getCategories", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return (java.util.List)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static java.util.List getCategories(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String parentCategoryId)
-		throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = parentCategoryId;
-
-			if (parentCategoryId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
-					"getCategories", new Object[] { paramObj0, paramObj1 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return (java.util.List)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static java.util.List getCategories(HttpPrincipal httpPrincipal,
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = category;
-
-			if (category == null) {
-				paramObj0 = new NullWrapper(
-						"com.liferay.portlet.shopping.model.ShoppingCategory");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
-					"getCategories", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return (java.util.List)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static int getCategoriesSize(HttpPrincipal httpPrincipal,
-		java.lang.String companyId) throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
-					"getCategoriesSize", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return ((Integer)returnObj).intValue();
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static int getCategoriesSize(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String parentCategoryId)
-		throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = companyId;
-
-			if (companyId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = parentCategoryId;
-
-			if (parentCategoryId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
-					"getCategoriesSize", new Object[] { paramObj0, paramObj1 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return ((Integer)returnObj).intValue();
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static int getCategoriesSize(HttpPrincipal httpPrincipal,
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = category;
-
-			if (category == null) {
-				paramObj0 = new NullWrapper(
-						"com.liferay.portlet.shopping.model.ShoppingCategory");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
-					"getCategoriesSize", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return ((Integer)returnObj).intValue();
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCategory getParentCategory(
-		HttpPrincipal httpPrincipal,
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = category;
-
-			if (category == null) {
-				paramObj0 = new NullWrapper(
-						"com.liferay.portlet.shopping.model.ShoppingCategory");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
-					"getParentCategory", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return (com.liferay.portlet.shopping.model.ShoppingCategory)returnObj;
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static java.util.List getParentCategories(
-		HttpPrincipal httpPrincipal, java.lang.String categoryId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = categoryId;
-
-			if (categoryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
-					"getParentCategories", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return (java.util.List)returnObj;
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static java.util.List getParentCategories(
-		HttpPrincipal httpPrincipal,
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = category;
-
-			if (category == null) {
-				paramObj0 = new NullWrapper(
-						"com.liferay.portlet.shopping.model.ShoppingCategory");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
-					"getParentCategories", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return (java.util.List)returnObj;
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
 	public static com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
 		HttpPrincipal httpPrincipal, java.lang.String categoryId,
-		java.lang.String parentCategoryId, java.lang.String name)
+		java.lang.String parentCategoryId, java.lang.String name,
+		java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -641,9 +232,15 @@ public class ShoppingCategoryServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj3 = description;
+
+			if (description == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
 					"updateCategory",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 			Object returnObj = null;
 
 			try {
@@ -662,93 +259,6 @@ public class ShoppingCategoryServiceHttp {
 			}
 
 			return (com.liferay.portlet.shopping.model.ShoppingCategory)returnObj;
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static boolean hasAdmin(HttpPrincipal httpPrincipal)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
-					"hasAdmin", new Object[0]);
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return ((Boolean)returnObj).booleanValue();
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static boolean hasAdmin(HttpPrincipal httpPrincipal,
-		java.lang.String categoryId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = categoryId;
-
-			if (categoryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
-					"hasAdmin", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));

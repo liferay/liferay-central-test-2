@@ -30,13 +30,16 @@ package com.liferay.portlet.shopping.service.spring;
  */
 public class ShoppingCategoryServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		java.lang.String parentCategoryId, java.lang.String name)
+		java.lang.String plid, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
 
-			return shoppingCategoryService.addCategory(parentCategoryId, name);
+			return shoppingCategoryService.addCategory(plid, parentCategoryId,
+				name, description, addCommunityPermissions, addGuestPermissions);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -55,25 +58,6 @@ public class ShoppingCategoryServiceUtil {
 		try {
 			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
 			shoppingCategoryService.deleteCategory(categoryId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
-	public static void deleteCategory(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-			shoppingCategoryService.deleteCategory(category);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -106,210 +90,16 @@ public class ShoppingCategoryServiceUtil {
 		}
 	}
 
-	public static java.util.List getCategories(java.lang.String companyId)
-		throws com.liferay.portal.SystemException {
-		try {
-			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-
-			return shoppingCategoryService.getCategories(companyId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
-	public static java.util.List getCategories(java.lang.String companyId,
-		java.lang.String parentCategoryId)
-		throws com.liferay.portal.SystemException {
-		try {
-			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-
-			return shoppingCategoryService.getCategories(companyId,
-				parentCategoryId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
-	public static java.util.List getCategories(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.SystemException {
-		try {
-			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-
-			return shoppingCategoryService.getCategories(category);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
-	public static int getCategoriesSize(java.lang.String companyId)
-		throws com.liferay.portal.SystemException {
-		try {
-			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-
-			return shoppingCategoryService.getCategoriesSize(companyId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
-	public static int getCategoriesSize(java.lang.String companyId,
-		java.lang.String parentCategoryId)
-		throws com.liferay.portal.SystemException {
-		try {
-			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-
-			return shoppingCategoryService.getCategoriesSize(companyId,
-				parentCategoryId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
-	public static int getCategoriesSize(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.SystemException {
-		try {
-			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-
-			return shoppingCategoryService.getCategoriesSize(category);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCategory getParentCategory(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-
-			return shoppingCategoryService.getParentCategory(category);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
-	public static java.util.List getParentCategories(
-		java.lang.String categoryId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-
-			return shoppingCategoryService.getParentCategories(categoryId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
-	public static java.util.List getParentCategories(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-
-			return shoppingCategoryService.getParentCategories(category);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
 	public static com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
 		java.lang.String categoryId, java.lang.String parentCategoryId,
-		java.lang.String name)
+		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
 
 			return shoppingCategoryService.updateCategory(categoryId,
-				parentCategoryId, name);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
-	public static boolean hasAdmin()
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-
-			return shoppingCategoryService.hasAdmin();
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
-	public static boolean hasAdmin(java.lang.String categoryId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-
-			return shoppingCategoryService.hasAdmin(categoryId);
+				parentCategoryId, name, description);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.shopping.model;
 
-import java.util.Date;
+import com.liferay.util.Validator;
 
 /**
  * <a href="ShoppingCategory.java.html"><b><i>View Source</i></b></a>
@@ -35,19 +35,11 @@ public class ShoppingCategory extends ShoppingCategoryModel {
 	public static final String DEFAULT_PARENT_CATEGORY_ID = "-1";
 
 	public ShoppingCategory() {
-		super();
 	}
 
-	public ShoppingCategory(String categoryId) {
-		super(categoryId);
-	}
-
-	public ShoppingCategory(String categoryId, String companyId,
-							Date createDate, Date modifiedDate,
-							String parentCategoryId, String name) {
-
-		super(categoryId, companyId, createDate, modifiedDate,
-			  parentCategoryId, name);
+	public boolean isRoot() {
+		return Validator.equals(
+			getParentCategoryId(), DEFAULT_PARENT_CATEGORY_ID);
 	}
 
 }

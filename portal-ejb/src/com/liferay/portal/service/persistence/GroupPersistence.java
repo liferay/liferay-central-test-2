@@ -111,6 +111,9 @@ public class GroupPersistence extends BasePersistence {
 					groupHBM.setName(group.getName());
 					groupHBM.setDescription(group.getDescription());
 					groupHBM.setFriendlyURL(group.getFriendlyURL());
+					groupHBM.setPermissions(new HashSet());
+					groupHBM.setRoles(new HashSet());
+					groupHBM.setUsers(new HashSet());
 					session.save(groupHBM);
 					session.flush();
 				}

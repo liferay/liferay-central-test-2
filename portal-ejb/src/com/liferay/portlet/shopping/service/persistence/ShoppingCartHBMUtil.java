@@ -33,31 +33,7 @@ import com.liferay.util.dao.hibernate.Transformer;
 public class ShoppingCartHBMUtil implements Transformer {
 	public static com.liferay.portlet.shopping.model.ShoppingCart model(
 		ShoppingCartHBM shoppingCartHBM) {
-		return model(shoppingCartHBM, true);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCart model(
-		ShoppingCartHBM shoppingCartHBM, boolean checkPool) {
-		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart = null;
-
-		if (checkPool) {
-			shoppingCart = ShoppingCartPool.get(shoppingCartHBM.getPrimaryKey());
-		}
-
-		if (shoppingCart == null) {
-			shoppingCart = new com.liferay.portlet.shopping.model.ShoppingCart(shoppingCartHBM.getCartId(),
-					shoppingCartHBM.getCompanyId(),
-					shoppingCartHBM.getUserId(),
-					shoppingCartHBM.getCreateDate(),
-					shoppingCartHBM.getModifiedDate(),
-					shoppingCartHBM.getItemIds(),
-					shoppingCartHBM.getCouponIds(),
-					shoppingCartHBM.getAltShipping(),
-					shoppingCartHBM.getInsure());
-			ShoppingCartPool.put(shoppingCart.getPrimaryKey(), shoppingCart);
-		}
-
-		return shoppingCart;
+		return (com.liferay.portlet.shopping.model.ShoppingCart)shoppingCartHBM;
 	}
 
 	public static ShoppingCartHBMUtil getInstance() {

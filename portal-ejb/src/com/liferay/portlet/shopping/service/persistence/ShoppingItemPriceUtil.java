@@ -166,47 +166,6 @@ public class ShoppingItemPriceUtil {
 			obc);
 	}
 
-	public static java.util.List findByI_S(java.lang.String itemId, int status)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByI_S(itemId, status);
-	}
-
-	public static java.util.List findByI_S(java.lang.String itemId, int status,
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findByI_S(itemId, status, begin, end);
-	}
-
-	public static java.util.List findByI_S(java.lang.String itemId, int status,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByI_S(itemId, status, begin, end, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingItemPrice findByI_S_First(
-		java.lang.String itemId, int status,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchItemPriceException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByI_S_First(itemId, status, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingItemPrice findByI_S_Last(
-		java.lang.String itemId, int status,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchItemPriceException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByI_S_Last(itemId, status, obc);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingItemPrice[] findByI_S_PrevAndNext(
-		java.lang.String itemPriceId, java.lang.String itemId, int status,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchItemPriceException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByI_S_PrevAndNext(itemPriceId, itemId,
-			status, obc);
-	}
-
 	public static java.util.List findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
@@ -217,19 +176,9 @@ public class ShoppingItemPriceUtil {
 		getPersistence().removeByItemId(itemId);
 	}
 
-	public static void removeByI_S(java.lang.String itemId, int status)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByI_S(itemId, status);
-	}
-
 	public static int countByItemId(java.lang.String itemId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByItemId(itemId);
-	}
-
-	public static int countByI_S(java.lang.String itemId, int status)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByI_S(itemId, status);
 	}
 
 	public static ShoppingItemPricePersistence getPersistence() {

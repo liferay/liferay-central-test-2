@@ -82,7 +82,8 @@ public class MBCategoryServiceImpl
 			getPermissionChecker(), categoryId, ActionKeys.UPDATE);
 
 		return MBCategoryLocalServiceUtil.updateCategory(
-			categoryId, parentCategoryId, name, description);
+			getUser().getCompanyId(), categoryId, parentCategoryId, name,
+			description);
 	}
 
 }
