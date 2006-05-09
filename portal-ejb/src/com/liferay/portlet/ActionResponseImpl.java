@@ -25,6 +25,7 @@ package com.liferay.portlet;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.util.CollectionFactory;
 
 import java.io.IOException;
 
@@ -56,6 +57,11 @@ public class ActionResponseImpl implements ActionResponse {
 	}
 
 	public void setProperty(String key, String value) {
+		if (_properties == null) {
+			_properties = CollectionFactory.getHashMap();
+		}
+
+		_properties.put(key, new String[] {value});
 	}
 
 	public PortletURL createActionURL() {
@@ -320,6 +326,10 @@ public class ActionResponseImpl implements ActionResponse {
 		return _user;
 	}
 
+	protected Map getProperties() {
+		return _properties;
+	}
+
 	protected WindowState getWindowState() {
 		return _windowState;
 	}
@@ -335,6 +345,7 @@ public class ActionResponseImpl implements ActionResponse {
 	private String _portletName;
 	private User _user;
 	private Layout _layout;
+	private Map _properties;
 	private WindowState _windowState;
 	private PortletMode _portletMode;
 	private Map _params;

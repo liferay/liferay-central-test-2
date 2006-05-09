@@ -29,6 +29,7 @@ import com.liferay.portal.shared.util.ClassUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Time;
 import com.liferay.util.servlet.StringServletResponse;
@@ -249,6 +250,8 @@ public class CachePortlet implements Portlet {
 			PortletRequest req, PortletResponse res, boolean action)
 		throws IOException, PortletException {
 
+		Map properties = null;
+
 		if (_portletConfig.isWARFile()) {
 			String path =
 				StringPool.SLASH + _portletConfig.getPortletName() + "/invoke";
@@ -259,19 +262,25 @@ public class CachePortlet implements Portlet {
 			HttpServletRequest httpReq = null;
 			HttpServletResponse httpRes = null;
 
-			if (action) {
-				ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-				ActionResponseImpl resImpl = (ActionResponseImpl)res;
+			ActionRequestImpl actionReqImpl = null;
+			ActionResponseImpl actionResImpl = null;
 
-				httpReq = reqImpl.getHttpServletRequest();
-				httpRes = resImpl.getHttpServletResponse();
+			RenderRequestImpl renderReqImpl = null;
+			RenderResponseImpl renderResImpl = null;
+
+			if (action) {
+				actionReqImpl = (ActionRequestImpl)req;
+				actionResImpl = (ActionResponseImpl)res;
+
+				httpReq = actionReqImpl.getHttpServletRequest();
+				httpRes = actionResImpl.getHttpServletResponse();
 			}
 			else {
-				RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-				RenderResponseImpl resImpl = (RenderResponseImpl)res;
+				renderReqImpl = (RenderRequestImpl)req;
+				renderResImpl = (RenderResponseImpl)res;
 
-				httpReq = reqImpl.getHttpServletRequest();
-				httpRes = resImpl.getHttpServletResponse();
+				httpReq = renderReqImpl.getHttpServletRequest();
+				httpRes = renderResImpl.getHttpServletResponse();
 			}
 
 			httpReq.setAttribute(WebKeys.JAVAX_PORTLET_PORTLET, _portlet);
@@ -288,19 +297,39 @@ public class CachePortlet implements Portlet {
 
 				throw new PortletException(cause);
 			}
+
+			if (action) {
+				properties = actionResImpl.getProperties();
+			}
+			else {
+				properties = renderResImpl.getProperties();
+			}
 		}
 		else {
 			if (action) {
-				ActionRequest actionReq = (ActionRequest)req;
-				ActionResponse actionRes = (ActionResponse)res;
+				ActionRequestImpl actionReqImpl = (ActionRequestImpl)req;
+				ActionResponseImpl actionResImpl = (ActionResponseImpl)res;
 
-				_portlet.processAction(actionReq, actionRes);
+				_portlet.processAction(actionReqImpl, actionResImpl);
+
+				properties = actionResImpl.getProperties();
 			}
 			else {
-				RenderRequest renderReq = (RenderRequest)req;
-				RenderResponse renderRes = (RenderResponse)res;
+				RenderRequestImpl renderReqImpl = (RenderRequestImpl)req;
+				RenderResponseImpl renderResImpl = (RenderResponseImpl)res;
 
-				_portlet.render(renderReq, renderRes);
+				_portlet.render(renderReqImpl, renderResImpl);
+
+				properties = renderResImpl.getProperties();
+			}
+		}
+
+		if ((properties != null) && (properties.size() > 0)) {
+			String expCache = (String)properties.get(
+				RenderResponse.EXPIRATION_CACHE);
+
+			if ((expCache != null) && (_expCache != null)) {
+				_expCache = new Integer(GetterUtil.getInteger(expCache));
 			}
 		}
 	}

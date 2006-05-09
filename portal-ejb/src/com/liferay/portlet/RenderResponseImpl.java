@@ -27,6 +27,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.spring.PortletServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.CollectionFactory;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.URLEncoder;
 
@@ -38,6 +39,7 @@ import java.lang.reflect.Constructor;
 
 import java.util.Enumeration;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletURL;
@@ -61,6 +63,11 @@ public class RenderResponseImpl implements RenderResponse {
 	}
 
 	public void setProperty(String key, String value) {
+		if (_properties == null) {
+			_properties = CollectionFactory.getHashMap();
+		}
+
+		_properties.put(key, new String[] {value});
 	}
 
 	public PortletURL createPortletURL(boolean action) {
@@ -340,6 +347,10 @@ public class RenderResponseImpl implements RenderResponse {
 		}
 	}
 
+	protected Map getProperties() {
+		return _properties;
+	}
+
 	protected URLEncoder getUrlEncoder() {
 		return _urlEncoder;
 	}
@@ -360,6 +371,7 @@ public class RenderResponseImpl implements RenderResponse {
 	private Portlet _portlet;
 	private String _companyId;
 	private String _plid;
+	private Map _properties;
 	private URLEncoder _urlEncoder;
 	private String _title;
  	private Boolean _useDefaultTemplate;
