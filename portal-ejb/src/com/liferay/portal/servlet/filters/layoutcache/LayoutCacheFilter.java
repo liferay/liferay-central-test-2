@@ -22,12 +22,17 @@
 
 package com.liferay.portal.servlet.filters.layoutcache;
 
+import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.servlet.FriendlyURLServlet;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
@@ -38,11 +43,13 @@ import com.liferay.util.Validator;
 
 import java.io.IOException;
 
+import java.util.List;
 import java.util.Properties;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.ServletRequest;
@@ -65,6 +72,13 @@ public class LayoutCacheFilter implements Filter {
 		SystemProperties.get(LayoutCacheFilter.class.getName()), true);
 
 	public void init(FilterConfig filterConfig) {
+		synchronized (FriendlyURLServlet.class) {
+			ServletContext ctx = filterConfig.getServletContext();
+			_companyId = ctx.getInitParameter("company_id");
+			
+			_friendly = GetterUtil.getBoolean(filterConfig.getInitParameter(
+				"friendly"));			
+		}
 	}
 
 	public void destroy() {
@@ -86,7 +100,9 @@ public class LayoutCacheFilter implements Filter {
 
 		String companyId = PortalUtil.getCompanyId(request);
 
-		String plid = ParamUtil.getString(request, "p_l_id");
+		String plid = _getPlid(request.getPathInfo(),
+			ParamUtil.getString(request, "p_l_id"));
+		
 		String portletId = ParamUtil.getString(request, "p_p_id");
 
 		String languageId = LanguageUtil.getLanguageId(request);
@@ -214,11 +230,88 @@ public class LayoutCacheFilter implements Filter {
 		return false;
 	}
 
+	private String _getPlid(String path, String defaultPlid) {
+		if (!_friendly) {
+			return defaultPlid;
+		}
+		
+		if (Validator.isNull(path) || !path.startsWith(StringPool.SLASH)) {
+			return null;
+		}
+
+		// Group friendly URL
+
+		String friendlyURL = null;
+
+		int pos = path.indexOf(StringPool.SLASH, 1);
+
+		if (pos != -1) {
+			friendlyURL = path.substring(0, pos);
+		}
+		else {
+			if (path.length() > 1) {
+				friendlyURL = path.substring(0, path.length());
+			}
+		}
+
+		if (Validator.isNull(friendlyURL)) {
+			return null;
+		}
+
+		String ownerId = null;
+
+		try {
+			Group group = GroupLocalServiceUtil.getFriendlyURLGroup(_companyId,
+				friendlyURL);
+
+			if (path.startsWith("/group")) {
+				ownerId = Layout.PRIVATE + group.getGroupId();
+			}
+			else if (path.startsWith("/guest")) {
+				ownerId = Layout.PUBLIC + group.getGroupId();
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+			return null;
+		}
+
+		// Layout friendly URL
+
+		friendlyURL = null;
+
+		if ((pos != -1) && ((pos + 1) != path.length())) {
+			friendlyURL = path.substring(pos, path.length());
+		}
+
+		if (Validator.isNull(friendlyURL)) {
+			return null;
+		}
+
+		// If there is no layout path take the first from the group or user
+
+		Layout layout = null;
+
+		try {
+			layout = LayoutLocalServiceUtil.getFriendlyURLLayout(ownerId,
+				friendlyURL);
+		}
+		catch (Exception e) {
+			_log.error(e);
+			return null;
+		}
+
+		return layout.getPlid();
+	}
+	
 	private static final String _INCLUDE = "javax.servlet.include.request_uri";
 
 	private static final String _ALREADY_FILTERED =
 		LayoutCacheFilter.class + "_ALREADY_FILTERED";
 
 	private static Log _log = LogFactory.getLog(LayoutCacheFilter.class);
+	
+	private String _companyId;
+	private boolean _friendly;
 
 }
