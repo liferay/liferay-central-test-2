@@ -261,12 +261,10 @@ public class LayoutCacheFilter implements Filter {
 			Group group = GroupLocalServiceUtil.getFriendlyURLGroup(_companyId,
 				friendlyURL);
 
-			if (path.startsWith(_LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING)) {
+			if (path.startsWith("/group")) {
 				ownerId = Layout.PRIVATE + group.getGroupId();
 			}
-			else if (path.startsWith(
-				_LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING)) {
-
+			else if (path.startsWith("/guest")) {
 				ownerId = Layout.PUBLIC + group.getGroupId();
 			}
 		}
@@ -308,14 +306,9 @@ public class LayoutCacheFilter implements Filter {
 	private static final String _ALREADY_FILTERED =
 		LayoutCacheFilter.class + "_ALREADY_FILTERED";
 
-	private static final String _LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING = 
-		PropsUtil.get(PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING);
-
-	private static final String _LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING = 
-		PropsUtil.get(PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
-
 	private static Log _log = LogFactory.getLog(LayoutCacheFilter.class);
 	
+
 	private String _companyId;
 	private boolean _friendly;
 
