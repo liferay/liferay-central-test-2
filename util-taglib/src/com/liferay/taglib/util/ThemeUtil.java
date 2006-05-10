@@ -148,12 +148,12 @@ public class ThemeUtil {
 
 		// Get template
 
-		// The servlet context name will be null when the portal is deployed to
+		// The servlet context name will be null when the theme is deployed to
 		// the root directory in Tomcat. See
 		// com.liferay.portlet.PortletContextImpl where a null servlet context
 		// name is also converted to an empty string.
 
-		String ctxName = GetterUtil.getString(ctx.getServletContextName());
+		String ctxName = GetterUtil.getString(theme.getServletContextName());
 
 		if (VelocityContextPool.get(ctxName) == null) {
 
