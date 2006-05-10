@@ -22,8 +22,6 @@
 
 package com.liferay.portal.servlet.filters.layoutcache;
 
-import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -42,8 +40,6 @@ import com.liferay.util.SystemProperties;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
-
-import java.util.List;
 import java.util.Properties;
 
 import javax.servlet.Filter;
