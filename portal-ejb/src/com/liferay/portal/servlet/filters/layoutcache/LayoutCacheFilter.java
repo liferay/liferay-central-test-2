@@ -32,7 +32,6 @@ import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletServiceUtil;
 import com.liferay.portal.servlet.FriendlyURLServlet;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
@@ -41,6 +40,7 @@ import com.liferay.util.SystemProperties;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
+
 import java.util.Properties;
 
 import javax.servlet.Filter;
@@ -72,9 +72,9 @@ public class LayoutCacheFilter implements Filter {
 		synchronized (FriendlyURLServlet.class) {
 			ServletContext ctx = filterConfig.getServletContext();
 			_companyId = ctx.getInitParameter("company_id");
-			
+
 			_friendly = GetterUtil.getBoolean(filterConfig.getInitParameter(
-				"friendly"));			
+				"friendly"));
 		}
 	}
 
@@ -99,7 +99,7 @@ public class LayoutCacheFilter implements Filter {
 
 		String plid = _getPlid(request.getPathInfo(), request.getServletPath(),
 			ParamUtil.getString(request, "p_l_id"));
-		
+
 		String portletId = ParamUtil.getString(request, "p_p_id");
 
 		String languageId = LanguageUtil.getLanguageId(request);
@@ -232,7 +232,7 @@ public class LayoutCacheFilter implements Filter {
 		if (!_friendly) {
 			return defaultPlid;
 		}
-		
+
 		if (Validator.isNull(pathInfo) || !pathInfo.startsWith(StringPool.SLASH)) {
 			return null;
 		}
@@ -303,7 +303,7 @@ public class LayoutCacheFilter implements Filter {
 
 		return layout.getPlid();
 	}
-	
+
 	private static final String _INCLUDE = "javax.servlet.include.request_uri";
 
 	private static final String _ALREADY_FILTERED =
@@ -316,7 +316,6 @@ public class LayoutCacheFilter implements Filter {
 		PropsUtil.get(PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
 
 	private static Log _log = LogFactory.getLog(LayoutCacheFilter.class);
-	
 	private String _companyId;
 	private boolean _friendly;
 

@@ -23,26 +23,13 @@
 package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.NoSuchUserException;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.ResourceActionsUtil;
-import com.liferay.portal.security.permission.comparator.ActionComparator;
 import com.liferay.portal.service.spring.PermissionServiceUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
-import com.liferay.util.servlet.SessionMessages;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -70,16 +57,16 @@ public class EditUserPermissionsAction extends PortletAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		try {
-			if (cmd.equals("actions")) {
-				updateActions(req, res);
+			if (cmd.equals("user_permissions")) {
+				updateUserPermissions(req);
 			}
-			else if (cmd.equals("user_permissions")) {
-				updateUserPermissions(req, res);
-			}
+
+			String redirect = ParamUtil.getString(req, "permissionsRedirect");
+
+			sendRedirect(req, res, redirect);
 		}
 		catch (Exception e) {
 			if (e != null &&
-				e instanceof NoSuchUserException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
@@ -118,119 +105,13 @@ public class EditUserPermissionsAction extends PortletAction {
 			getForward(req, "portlet.communities.edit_user_permissions"));
 	}
 
-	protected void updateActions(ActionRequest req, ActionResponse res)
-		throws Exception {
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		String groupId = ParamUtil.getString(req, "groupId");
-
-		String portletResource = ParamUtil.getString(req, "portletResource");
-		String modelResource = ParamUtil.getString(req, "modelResource");
-
-		// Create community resource if it doesn't exist
-
-		Resource resource = null;
-
-		String selResource = modelResource;
-
-		if (Validator.isNull(modelResource)) {
-			selResource = portletResource;
-		}
-
-		resource = ResourceLocalServiceUtil.addResource(
-			themeDisplay.getCompanyId(), selResource, Resource.TYPE_CLASS,
-			Resource.SCOPE_GROUP, groupId);
-
-		List actionIds = new ArrayList();
-
-		List actions = ResourceActionsUtil.getResourceActions(
-			themeDisplay.getCompanyId(), portletResource, modelResource);
-
-		Collections.sort(
-			actions,
-			new ActionComparator(
-				themeDisplay.getCompanyId(), themeDisplay.getLocale()));
-
-		for (int i = 0; i < actions.size(); i++) {
-			String actionId = (String)actions.get(i);
-
-			String action = ParamUtil.getString(req, "action" + actionId);
-
-			if (!action.equals("")) {
-				actionIds.add(actionId);
-			}
-		}
-
-		// Send redirect
-
-		String redirect = ParamUtil.getString(req, "redirect");
-		String assignmentType = ParamUtil.getString(req, "assignmentType");
-
-		if (actionIds.size() == 0) {
-			redirect += "&actionPos=-1";
-		}
-		else {
-			redirect +=
-				"&actionPos=0&actionIds=" +
-					StringUtil.merge(actionIds);
-		}
-
-		redirect += "&assignmentType=" +
-						assignmentType +
-					"&resourceId=" +
-						resource.getResourceId();
-
-		res.sendRedirect(redirect);
-	}
-
-	protected void updateUserPermissions(ActionRequest req, ActionResponse res)
-		throws Exception {
-
+	protected void updateUserPermissions(ActionRequest req) throws Exception {
 		String resourceId = ParamUtil.getString(req, "resourceId");
-
-		String assignmentType = ParamUtil.getString(req, "assignmentType");
-
+		String userId = ParamUtil.getString(req, "userIdsPosValue");
 		String[] actionIds = StringUtil.split(
-			ParamUtil.getString(req, "actionIds"));
-		int actionPos = ParamUtil.getInteger(req, "actionPos");
+			ParamUtil.getString(req, "userIdActionIds"));
 
-		String[] addUserIds = StringUtil.split(
-			ParamUtil.getString(req, "addUserIds"));
-		String[] removeUserIds = StringUtil.split(
-			ParamUtil.getString(req, "removeUserIds"));
-
-		if (assignmentType.equals("individual")) {
-			String actionId = actionIds[actionPos];
-			actionIds = new String[] {actionId};
-		}
-
-		for (int i = 0; i < addUserIds.length; i++) {
-			PermissionServiceUtil.setUserPermissions(
-				addUserIds[i], actionIds, resourceId);
-		}
-
-		for (int i = 0; i < removeUserIds.length; i++) {
-			PermissionServiceUtil.unsetUserPermissions(
-				removeUserIds[i], actionIds, resourceId);
-		}
-
-		String redirect = ParamUtil.getString(req, "redirect");
-
-		redirect += "&assignmentType=" +
-						assignmentType +
-					"&resourceId=" +
-						resourceId;
-
-		if (assignmentType.equals("individual") && redirect.indexOf("actionPos=" + actionPos + "&") != -1) {
-
-			// Show message only if the user stayed on the same page
-
-			SessionMessages.add(req, "request_processed");
-		}
-
-		res.sendRedirect(redirect);
+		PermissionServiceUtil.setUserPermissions(userId, actionIds, resourceId);
 	}
 
 }

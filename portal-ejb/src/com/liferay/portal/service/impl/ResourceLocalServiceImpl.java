@@ -85,6 +85,15 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 	}
 
 	public void addResources(
+			String companyId, String groupId, String name,
+			boolean portletActions)
+		throws PortalException, SystemException {
+
+		addResources(
+			companyId, groupId, null, name, null, portletActions, false, false);
+	}
+
+	public void addResources(
 			String companyId, String groupId, String userId, String name,
 			String primKey, boolean portletActions,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -115,36 +124,39 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 				groupId);
 		}
 
-		// Individual
+		if (primKey != null) {
 
-		Resource resource = addResource(
-			companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
-			primKey);
+			// Individual
 
-		// Permissions
+			Resource resource = addResource(
+				companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+				primKey);
 
-		List permissions = PermissionLocalServiceUtil.addPermissions(
-			companyId, name, resource.getResourceId(), portletActions);
+			// Permissions
 
-		// User permissions
+			List permissions = PermissionLocalServiceUtil.addPermissions(
+				companyId, name, resource.getResourceId(), portletActions);
 
-		if (userId != null) {
-			UserUtil.addPermissions(userId, permissions);
-		}
+			// User permissions
 
-		// Community permissions
+			if (userId != null) {
+				UserUtil.addPermissions(userId, permissions);
+			}
 
-		if ((groupId != null) && addCommunityPermissions) {
-			addCommunityPermissions(
-				groupId, name, resource.getResourceId(), portletActions);
-		}
+			// Community permissions
 
-		// Guest permissions
+			if ((groupId != null) && addCommunityPermissions) {
+				addCommunityPermissions(
+					groupId, name, resource.getResourceId(), portletActions);
+			}
 
-		if (addGuestPermissions) {
-			addGuestPermissions(
-				guestGroup.getGroupId(), name, resource.getResourceId(),
-				portletActions);
+			// Guest permissions
+
+			if (addGuestPermissions) {
+				addGuestPermissions(
+					guestGroup.getGroupId(), name, resource.getResourceId(),
+					portletActions);
+			}
 		}
 	}
 

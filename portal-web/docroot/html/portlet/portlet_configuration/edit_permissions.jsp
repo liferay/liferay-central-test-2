@@ -59,7 +59,7 @@ if (Validator.isNull(modelResource)) {
 	selResourceName = LanguageUtil.get(pageContext, "portlet");
 }
 
-Resource resource = null;//ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL, resourcePrimKey); FIX ME
+Resource resource = null;
 
 try {
 	resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL, resourcePrimKey);

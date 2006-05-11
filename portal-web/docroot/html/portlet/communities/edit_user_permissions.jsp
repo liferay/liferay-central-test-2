@@ -25,13 +25,11 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "current");
 String tabs2 = ParamUtil.getString(request, "tabs2", "current");
 
-String assignmentType = ParamUtil.getString(request, "assignmentType");
-String resourceId = ParamUtil.getString(request, "resourceId");
-
 String cur = ParamUtil.getString(request, "cur");
+
+String redirect = ParamUtil.getString(request, "redirect");
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
@@ -47,6 +45,12 @@ if (Validator.isNotNull(portletResource)) {
 
 String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, modelResource);
 
+List modelResources = null;
+
+if (Validator.isNotNull(portletResource) && Validator.isNull(modelResource)) {
+	modelResources = ResourceActionsUtil.getPortletModelResources(portletResource);
+}
+
 String selResource = modelResource;
 String selResourceName = modelResourceName;
 
@@ -55,20 +59,40 @@ if (Validator.isNull(modelResource)) {
 	selResourceName = portletResourceName;
 }
 
-int actionPos = ParamUtil.getInteger(request, "actionPos");
-String actionIds = ParamUtil.getString(request, "actionIds");
-String[] actionIdsArray = StringUtil.split(actionIds);
+Resource resource = null;
+
+if (Validator.isNotNull(portletResource) || Validator.isNotNull(modelResource)) {
+	try {
+		resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, Resource.TYPE_CLASS, Resource.SCOPE_GROUP, group.getGroupId());
+	}
+	catch (com.liferay.portal.NoSuchResourceException nsre) {
+		boolean portletActions = Validator.isNull(modelResource);
+
+		ResourceLocalServiceUtil.addResources(company.getCompanyId(), group.getGroupId(), selResource, portletActions);
+
+		resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, Resource.TYPE_CLASS, Resource.SCOPE_GROUP, group.getGroupId());
+	}
+}
+
+boolean editUserPermissions = ParamUtil.getBoolean(request, "editUserPermissions");
+
+if ((Validator.isNotNull(portletResource) && Validator.isNotNull(modelResource)) ||
+	(Validator.isNotNull(portletResource) && Validator.isNull(modelResource) && (modelResources.size() == 0))) {
+
+	editUserPermissions = true;
+}
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/communities/edit_user_permissions");
-portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
+portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("groupId", group.getGroupId());
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("modelResource", modelResource);
+portletURL.setParameter("editUserPermissions", String.valueOf(editUserPermissions));
 
 // Breadcrumbs
 
@@ -76,15 +100,12 @@ PortletURL breadcrumbsURL = renderResponse.createRenderURL();
 
 breadcrumbsURL.setWindowState(WindowState.MAXIMIZED);
 
-breadcrumbsURL.setParameter("struts_action", "/communities/view");
-breadcrumbsURL.setParameter("tabs1", tabs1);
+breadcrumbsURL.setParameter("struts_action", "/communities/edit_user_permissions");
+breadcrumbsURL.setParameter("redirect", redirect);
+breadcrumbsURL.setParameter("tabs2", tabs2);
 breadcrumbsURL.setParameter("groupId", group.getGroupId());
 
-String breadcrumbs = "<a href=\"" + breadcrumbsURL.toString() + "\">" + LanguageUtil.get(pageContext, "communities") + "</a> &raquo; ";
-
-breadcrumbsURL.setParameter("struts_action", "/communities/edit_user_permissions");
-
-breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + group.getName() + "</a>";
+String breadcrumbs = "<a href=\"" + breadcrumbsURL.toString() + "\">" + group.getName() + "</a>";
 
 if (Validator.isNotNull(portletResource)) {
 	breadcrumbsURL.setParameter("portletResource", portletResource);
@@ -100,381 +121,140 @@ if (Validator.isNotNull(modelResource)) {
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />updateActions() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "actions";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= portletURL.toString() %>";
-		submitForm(document.<portlet:namespace />fm);
+	function <portlet:namespace />saveUserPermissions(userIdsPos, userIdsPosValue) {
+
+		<%
+		PortletURL saveUserPermissionsRedirectURL = PortletURLUtil.clone(portletURL, false, renderResponse);
+
+		new UserSearch(renderRequest, saveUserPermissionsRedirectURL);
+		%>
+
+		var userIds = document.<portlet:namespace />fm.<portlet:namespace />userIds.value;
+
+		if (userIdsPos == -1) {
+			userIds = "";
+			userIdsPos = 0;
+		}
+
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "user_permissions";
+		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveUserPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= cur %>&<portlet:namespace />userIds=" + userIds + "&<portlet:namespace />userIdsPos=" + userIdsPos;
+		document.<portlet:namespace />fm.<portlet:namespace />userIds.value = userIds;
+		document.<portlet:namespace />fm.<portlet:namespace />userIdsPosValue.value = userIdsPosValue;
+		document.<portlet:namespace />fm.<portlet:namespace />userIdActionIds.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_user_permissions" /></portlet:actionURL>");
 	}
 
-	function <portlet:namespace />updateUserPermissions(actionPos) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "user_permissions";
-
-		var redirect = "";
-
-		if (actionPos == -1) {
-			redirect = "<%= portletURL.toString() %>";
-		}
-		else if (actionPos == <%= actionIdsArray.length %>) {
-			redirect = "<%= portletURL.toString() %>&<portlet:namespace />actionPos=-1";
-		}
-		else {
-			redirect = "<%= portletURL.toString() %>&<portlet:namespace />actionPos=" +
-				actionPos + "&<portlet:namespace />actionIds=<%= actionIds %>";
-
-			if (actionPos == <%= actionPos %>) {
-				redirect += "&<portlet:namespace />cur=<%= cur %>";
-			}
-		}
-
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
-		document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+	function <portlet:namespace />updateUserPermissions() {
+		document.<portlet:namespace />fm.<portlet:namespace />userIds.value = listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_user_permissions" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="">
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= group.getGroupId() %>">
-<input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>">
-<input name="<portlet:namespace />modelResource" type="hidden" value="<%= modelResource %>">
-<input name="<portlet:namespace />actionPos" type="hidden" value="<%= actionPos %>">
-<input name="<portlet:namespace />actionIds" type="hidden" value="<%= actionIds %>">
-<input name="<portlet:namespace />assignmentType" type="hidden" value="<%= assignmentType %>">
-<input name="<portlet:namespace />resourceId" type="hidden" value="<%= resourceId %>">
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
+<input name="<portlet:namespace />permissionsRedirect" type="hidden" value="">
+<input name="<portlet:namespace />cur" type="hidden" value="<%= cur %>">
+<input name="<portlet:namespace />resourceId" type="hidden" value='<%= (resource != null) ? resource.getResourceId() : "" %>'>
 
-<%
-PortletURL communitiesURL = renderResponse.createRenderURL();
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "delegate-permissions-for-community") %>: <%= breadcrumbs %>
+	</td>
+	<td align="right">
+		&laquo; <a href="<%= redirect %>"><%= LanguageUtil.get(pageContext, "back") %></a>
+	</td>
+</tr>
+</table>
 
-communitiesURL.setWindowState(WindowState.MAXIMIZED);
-
-communitiesURL.setParameter("struts_action", "/communities/view");
-%>
-
-<liferay-ui:tabs
-	names="current,available"
-	url="<%= communitiesURL.toString() %>"
-/>
+<br>
 
 <c:choose>
-	<c:when test="<%= actionPos == -1 %>">
-		<%= breadcrumbs %>
-
-		<br><br>
-
-		<%= LanguageUtil.get(pageContext, "you-have-successfully-updated-the-following-users-with-the-following-permissions") %>
-
-		<br><br>
+	<c:when test="<%= editUserPermissions %>">
 
 		<%
-		SearchContainer searchContainer = new SearchContainer();
-
-		Map userParams = new TreeMap();
-		userParams.put("usersGroups", group.getGroupId());
-		userParams.put("permission", resourceId);
-
-		// CAN'T GET THIS TO WORK!!!
-		// userParams.put("permissionActions", actionIdsArray);
-
-		int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), null, null, null, null, true, userParams, true);
-
-		searchContainer.setTotal(total);
-
-		List results = UserLocalServiceUtil.search(company.getCompanyId(), null, null, null, null, true, userParams, true, searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
-
-		searchContainer.setResults(results);
-
-		List headerNames = new ArrayList();
-
-		headerNames.add("users");
-		headerNames.add("email-address");
-		headerNames.add("actions");
-
-		searchContainer.setHeaderNames(headerNames);
-
-		List resultRows = searchContainer.getResultRows();
-
-		for (int i = 0; i < results.size(); i++) {
-			User user2 = (User)results.get(i);
-
-			ResultRow row = new ResultRow(user2, user2.getPrimaryKey().toString(), i);
-
-			// Name
-			row.addText(user2.getFullName());
-
-			// Email Address
-			row.addText(user2.getEmailAddress());
-
-			// Permissions
-			List permissions = PermissionLocalServiceUtil.getUserPermissions(user2.getUserId(), resourceId);
-
-			List actions = ResourceActionsUtil.getActions(permissions);
-			List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
-
-			row.addText(StringUtil.merge(actionsNames, ", "));
-
-
-			// Add result row
-
-			resultRows.add(row);
-		}
+		String userIds = ParamUtil.getString(request, "userIds");
+		String[] userIdsArray = StringUtil.split(userIds);
+		int userIdsPos = ParamUtil.getInteger(request, "userIdsPos");
 		%>
 
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+		<input name="<portlet:namespace />userIds" type="hidden" value="<%= userIds %>">
+		<input name="<portlet:namespace />userIdsPos" type="hidden" value="<%= userIdsPos %>">
+		<input name="<portlet:namespace />userIdsPosValue" type="hidden" value="">
+		<input name="<portlet:namespace />userIdActionIds" type="hidden" value="">
 
-		<br>
-
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "finished") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /></portlet:renderURL>';">
-	</c:when>
-	<c:when test="<%= actionIdsArray.length > 0 %>">
-		<input name="<portlet:namespace />addUserIds" type="hidden" value="">
-		<input name="<portlet:namespace />removeUserIds" type="hidden" value="">
-
-		<%= breadcrumbs %>
-
-		<br><br>
-
-		<%
-		String actionId = "";
-
-		portletURL.setParameter("actionIds", actionIds);
-		portletURL.setParameter("resourceId", resourceId);
-		portletURL.setParameter("assignmentType", assignmentType);
-
-		if (assignmentType.equals("all")) {
-			String actionNames = "";
-			for (int i=0; i < actionIdsArray.length; i++) {
-				actionNames += ResourceActionsUtil.getAction(pageContext, actionIdsArray[i]);
-				if (i < actionIdsArray.length - 1) {
-					actionNames += ", ";
-				}
-			}
-			%>
-			<%= LanguageUtil.format(pageContext, "select-users-to-associate-with-the-following-actions-x", "<b>" + actionNames + "</b>") %>
-			<%
-		}
-		else {
-			actionId = actionIdsArray[actionPos];
-
-			portletURL.setParameter("actionPos", String.valueOf(actionPos));
-			%>
-			<%= LanguageUtil.format(pageContext, "select-users-to-associate-with-the-action-x", "<b>" + ResourceActionsUtil.getAction(pageContext, actionId) + "</b>") %>
-			<%
-		}
-		%>
-
-		<br><br>
-
-		<liferay-ui:tabs
-			names="current,available"
-			param="tabs2"
-			url="<%= portletURL.toString() %>"
-		/>
-
-		<%
-		UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
-
-		if (assignmentType.equals("all")) {
-			searchContainer.setRowChecker(new UserPermissionChecker(renderResponse, actionIdsArray, resourceId));
-		}
-		else {
-			searchContainer.setRowChecker(new UserPermissionChecker(renderResponse, actionId, resourceId));
-		}
-		%>
-
-		<liferay-ui:search-form
-			page="/html/portlet/enterprise_admin/user_search.jsp"
-			searchContainer="<%= searchContainer %>"
-		/>
-
-		<%
-		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
-
-		Map userParams = new TreeMap();
-		userParams.put("usersGroups", group.getGroupId());
-
-		if (tabs2.equals("current")) {
-			userParams.put("permission", resourceId);
-
-			// CAN'T GET THIS TO WORK!!!
-			// userParams.put("permissionActions", actionIdsArray);
-		}
-
-		int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
-
-		searchContainer.setTotal(total);
-
-		List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
-
-		searchContainer.setResults(results);
-		%>
-
-		<br><div class="beta-separator"></div><br>
-
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateUserPermissions(<%= actionPos %>);">
-
-		<br><br>
-
-		<%
-		List headerNames = new ArrayList();
-
-		headerNames.add("name");
-		headerNames.add("email-address");
-		headerNames.add("permissions");
-
-		searchContainer.setHeaderNames(headerNames);
-
-		List resultRows = searchContainer.getResultRows();
-
-		for (int i = 0; i < results.size(); i++) {
-			User user2 = (User)results.get(i);
-
-			ResultRow row = new ResultRow(user2, user2.getPrimaryKey().toString(), i);
-
-			// Name
-			row.addText(user2.getFullName());
-
-			// Email Address
-			row.addText(user2.getEmailAddress());
-
-			// Permissions
-			List permissions = PermissionLocalServiceUtil.getUserPermissions(user2.getUserId(), resourceId);
-
-			List actions = ResourceActionsUtil.getActions(permissions);
-			List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
-
-			row.addText(StringUtil.merge(actionsNames, ", "));
-
-
-			// Add result row
-
-			resultRows.add(row);
-		}
-		%>
-
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
-		<br>
-
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<tr>
-			<td>
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "previous") %>' onClick="<portlet:namespace />updateUserPermissions(<%= actionPos - 1 %>);">
-
-			<%
-			if (assignmentType.equals("all")) {
-			%>
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="<portlet:namespace />updateUserPermissions(<%= actionIdsArray.length %>);">
-			<%
-			} else {
-			%>
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="<portlet:namespace />updateUserPermissions(<%= actionPos + 1 %>);">
-			<%
-			}
-			%>
-			</td>
-		</tr>
-		</table>
-	</c:when>
-	<c:when test="<%= Validator.isNotNull(portletResource) || Validator.isNotNull(modelResource) %>">
-		<%= breadcrumbs %>
-
-		<br><br>
-
-		<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "action") %>
-			</td>
-			<td style="padding-left: 10px;"></td>
-			<td>
-				<%= LanguageUtil.get(pageContext, "selected") %>
-			</td>
-		</tr>
-
-		<%
-		List actions = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
-
-		Collections.sort(actions, new ActionComparator(company.getCompanyId(), locale));
-
-		for (int i = 0; i < actions.size(); i++) {
-			String actionId = (String)actions.get(i);
-		%>
-
-			<tr>
-				<td>
-					<%= ResourceActionsUtil.getAction(pageContext, actionId) %>
-				</td>
-				<td style="padding-left: 10px;"></td>
-				<td>
-					<input type="checkbox" name="<portlet:namespace />action<%= actionId %>">
-				</td>
-			</tr>
-
-		<%
-		}
-		%>
-
-		</table>
-
-		<br>
-
-		<input type="radio" name="assignmentType" value="all" checked><%= LanguageUtil.get(pageContext, "assign-all-checked-actions-to-users") %>
-
-		<br>
-
-		<input type="radio" name="assignmentType" value="individual"><%= LanguageUtil.get(pageContext, "assign-checked-actions-individually-to-users") %>
-
-		<br><br>
-
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="<portlet:namespace />updateActions();">
-
-		<c:if test="<%= Validator.isNull(modelResource) %>">
-
-			<%
-			List modelResources = ResourceActionsUtil.getPortletModelResources(portletResource);
-			%>
-
-			<c:if test="<%= modelResources.size() > 0 %>">
-				<br><br>
-
-				<liferay-ui:tabs names="resources" />
+		<c:choose>
+			<c:when test="<%= userIdsArray.length == 0 %>">
+				<liferay-ui:tabs
+					names="current,available"
+					param="tabs2"
+					url="<%= portletURL.toString() %>"
+				/>
 
 				<%
-				SearchContainer searchContainer = new SearchContainer();
+				UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
 
+				searchContainer.setRowChecker(new RowChecker(renderResponse));
+				%>
+
+				<liferay-ui:search-form
+					page="/html/portlet/enterprise_admin/user_search.jsp"
+					searchContainer="<%= searchContainer %>"
+				/>
+
+				<%
+				UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+
+				Map userParams = new HashMap();
+
+				if (tabs2.equals("current")) {
+					userParams.put("permission", resource.getResourceId());
+				}
+
+				int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
+
+				searchContainer.setTotal(total);
+
+				List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
+
+				searchContainer.setResults(results);
+				%>
+
+				<br><div class="beta-separator"></div><br>
+
+				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-permissions") %>' onClick="<portlet:namespace />updateUserPermissions();">
+
+				<br><br>
+
+				<%
 				List headerNames = new ArrayList();
 
 				headerNames.add("name");
+				headerNames.add("email-address");
+				headerNames.add("permissions");
 
 				searchContainer.setHeaderNames(headerNames);
 
-				Collections.sort(modelResources, new ModelResourceComparator(company.getCompanyId(), locale));
-
 				List resultRows = searchContainer.getResultRows();
 
-				for (int i = 0; i < modelResources.size(); i++) {
-					String curModelResource = (String)modelResources.get(i);
+				for (int i = 0; i < results.size(); i++) {
+					User user2 = (User)results.get(i);
 
-					ResultRow row = new ResultRow(curModelResource, curModelResource, i);
+					ResultRow row = new ResultRow(user2, user2.getPrimaryKey().toString(), i);
 
-					PortletURL rowURL = renderResponse.createRenderURL();
+					// Name and email address
 
-					rowURL.setWindowState(WindowState.MAXIMIZED);
+					row.addText(user2.getFullName());
+					row.addText(user2.getEmailAddress());
 
-					rowURL.setParameter("struts_action", "/communities/edit_user_permissions");
-					rowURL.setParameter("groupId", group.getGroupId());
-					rowURL.setParameter("portletResource", portletResource);
-					rowURL.setParameter("modelResource", curModelResource);
-					rowURL.setParameter("tabs1", tabs1);
+					// Permissions
 
-					// Name
+					List permissions = PermissionLocalServiceUtil.getUserPermissions(user2.getUserId(), resource.getResourceId());
 
-					row.addText(ResourceActionsUtil.getModelResource(pageContext, curModelResource), rowURL);
+					List actions = ResourceActionsUtil.getActions(permissions);
+					List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
+
+					row.addText(StringUtil.merge(actionsNames, ", "));
 
 					// Add result row
 
@@ -483,7 +263,142 @@ communitiesURL.setParameter("struts_action", "/communities/view");
 				%>
 
 				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-			</c:if>
+
+				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+			</c:when>
+			<c:otherwise>
+
+				<%
+				User user2 = UserLocalServiceUtil.getUserById(userIdsArray[userIdsPos]);
+				%>
+
+				<liferay-ui:tabs names="<%= user2.getFullName() %>" />
+
+				<%
+				List permissions = PermissionLocalServiceUtil.getUserPermissions(user2.getUserId(), resource.getResourceId());
+
+				List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+				List actions2 = ResourceActionsUtil.getActions(permissions);
+
+				// Left list
+
+				List leftList = new ArrayList();
+
+				for (int i = 0; i < actions2.size(); i++) {
+					String actionId = (String)actions2.get(i);
+
+					leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+				}
+
+				Collections.sort(leftList, new KeyValuePairComparator(false, true));
+
+				// Right list
+
+				List rightList = new ArrayList();
+
+				for (int i = 0; i < actions1.size(); i++) {
+					String actionId = (String)actions1.get(i);
+
+					if (!actions2.contains(actionId)) {
+						rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+					}
+				}
+
+				Collections.sort(rightList, new KeyValuePairComparator(false, true));
+				%>
+
+				<liferay-ui:input-move-boxes
+					leftTitle='<%= LanguageUtil.get(pageContext, "current") %>'
+					rightTitle='<%= LanguageUtil.get(pageContext, "available") %>'
+					leftBoxName="current_actions"
+					rightBoxName="available_actions"
+					leftList="<%= leftList %>"
+					rightList="<%= rightList %>"
+				/>
+
+				<br>
+
+				<table border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tr>
+					<td>
+						<input class="portlet-form-button" <%= userIdsPos > 0 ? "" : "disabled" %> type="button" value='<%= LanguageUtil.get(pageContext, "previous") %>' onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos - 1 %>, '<%= userIdsArray[userIdsPos] %>');">
+
+						<input class="portlet-form-button" <%= userIdsPos + 1 < userIdsArray.length ? "" : "disabled" %> type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos + 1 %>, '<%= userIdsArray[userIdsPos] %>');">
+					</td>
+					<td align="right">
+						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "finished") %>' onClick="<portlet:namespace />saveUserPermissions(-1, '<%= userIdsArray[userIdsPos] %>');">
+					</td>
+				</tr>
+				</table>
+			</c:otherwise>
+		</c:choose>
+	</c:when>
+	<c:when test="<%= Validator.isNotNull(portletResource) || Validator.isNotNull(modelResource) %>">
+		<c:if test="<%= Validator.isNull(modelResource) %>">
+			<%= LanguageUtil.format(pageContext, "proceed-to-the-next-step-to-delegate-permissions-to-the-x-portlet-itself", portletResourceName) %>
+
+			<br><br>
+
+			<%
+			portletURL.setParameter("editUserPermissions", "1");
+			%>
+
+			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="self.location = '<%= portletURL.toString() %>';">
+
+			<%
+			portletURL.setParameter("editUserPermissions", String.valueOf(editUserPermissions));
+			%>
+
+		</c:if>
+
+		<c:if test="<%= (modelResources != null) && (modelResources.size() > 0) %>">
+			<br><br>
+
+			<liferay-ui:tabs names="resources" />
+
+			<%= LanguageUtil.format(pageContext, "delegate-permissions-to-a-resource-that-belongs-to-the-x-portlet", portletResourceName) %>
+
+			<br><br>
+
+			<%
+			SearchContainer searchContainer = new SearchContainer();
+
+			List headerNames = new ArrayList();
+
+			headerNames.add("name");
+
+			searchContainer.setHeaderNames(headerNames);
+
+			Collections.sort(modelResources, new ModelResourceComparator(company.getCompanyId(), locale));
+
+			List resultRows = searchContainer.getResultRows();
+
+			for (int i = 0; i < modelResources.size(); i++) {
+				String curModelResource = (String)modelResources.get(i);
+
+				ResultRow row = new ResultRow(curModelResource, curModelResource, i);
+
+				PortletURL rowURL = renderResponse.createRenderURL();
+
+				rowURL.setWindowState(WindowState.MAXIMIZED);
+
+				rowURL.setParameter("struts_action", "/communities/edit_user_permissions");
+				rowURL.setParameter("redirect", redirect);
+				rowURL.setParameter("groupId", group.getGroupId());
+				rowURL.setParameter("portletResource", portletResource);
+				rowURL.setParameter("modelResource", curModelResource);
+
+				// Name
+
+				row.addText(ResourceActionsUtil.getModelResource(pageContext, curModelResource), rowURL);
+
+				// Add result row
+
+				resultRows.add(row);
+			}
+			%>
+
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 		</c:if>
 	</c:when>
 	<c:otherwise>
@@ -519,8 +434,8 @@ communitiesURL.setParameter("struts_action", "/communities/view");
 			rowURL.setWindowState(WindowState.MAXIMIZED);
 
 			rowURL.setParameter("struts_action", "/communities/edit_user_permissions");
+			rowURL.setParameter("redirect", redirect);
 			rowURL.setParameter("groupId", group.getGroupId());
-			rowURL.setParameter("tabs1", tabs1);
 			rowURL.setParameter("portletResource", portlet.getPortletId());
 
 			// Name
@@ -532,10 +447,6 @@ communitiesURL.setParameter("struts_action", "/communities/view");
 			resultRows.add(row);
 		}
 		%>
-
-		<%= breadcrumbs %>
-
-		<br><br>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 

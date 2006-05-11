@@ -137,8 +137,8 @@ public class EditPermissionsAction extends PortletAction {
 			}
 		}
 		else if (!permissionChecker.hasPermission(
-				groupId, selResource, resourcePrimKey,
-				ActionKeys.PERMISSIONS)) {
+					groupId, selResource, resourcePrimKey,
+					ActionKeys.PERMISSIONS)) {
 
 			SessionErrors.add(req, PrincipalException.class.getName());
 

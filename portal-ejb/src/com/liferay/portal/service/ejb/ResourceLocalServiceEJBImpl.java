@@ -58,6 +58,13 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 	}
 
 	public void addResources(java.lang.String companyId,
+		java.lang.String groupId, java.lang.String name, boolean portletActions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().addResources(companyId, groupId, name, portletActions);
+	}
+
+	public void addResources(java.lang.String companyId,
 		java.lang.String groupId, java.lang.String userId,
 		java.lang.String name, java.lang.String primKey,
 		boolean portletActions, boolean addCommunityPermissions,

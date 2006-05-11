@@ -157,6 +157,12 @@ portletURL.setParameter("groupId", groupId);
 <input name="<portlet:namespace />privateLayout" type="hidden" value="<%= privateLayout %>">
 
 <c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) %>">
+		<%= LanguageUtil.get(pageContext, "edit-pages-for-community") %>: <%= group.getName() %>
+
+		<br><br>
+	</c:if>
+
 	<liferay-util:include page="/html/portlet/my_account/tabs1.jsp">
 		<liferay-util:param name="tabs1" value="pages" />
 	</liferay-util:include>

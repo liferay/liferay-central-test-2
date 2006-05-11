@@ -53,6 +53,26 @@ public class ResourceLocalServiceUtil {
 	}
 
 	public static void addResources(java.lang.String companyId,
+		java.lang.String groupId, java.lang.String name, boolean portletActions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+			resourceLocalService.addResources(companyId, groupId, name,
+				portletActions);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static void addResources(java.lang.String companyId,
 		java.lang.String groupId, java.lang.String userId,
 		java.lang.String name, java.lang.String primKey,
 		boolean portletActions, boolean addCommunityPermissions,
