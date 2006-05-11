@@ -32,20 +32,21 @@ import java.io.Serializable;
  *
  */
 public class LayoutCacheResponseData implements Serializable {
-	
+
 	public LayoutCacheResponseData(byte[] data, String contentType) {
 		_data = data;
 		_contentType = contentType;
-	}
-
-	public String getContentType() {
-		return _contentType;
 	}
 
 	public byte[] getData() {
 		return _data;
 	}
 
+	public String getContentType() {
+		return _contentType;
+	}
+
 	private byte[] _data;
 	private String _contentType;
+
 }
