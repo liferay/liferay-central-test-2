@@ -97,7 +97,7 @@ public class LayoutCacheFilter implements Filter {
 
 		String companyId = PortalUtil.getCompanyId(request);
 
-		String plid = _getPlid(request.getPathInfo(),
+		String plid = _getPlid(request.getPathInfo(), request.getServletPath(),
 			ParamUtil.getString(request, "p_l_id"));
 		
 		String portletId = ParamUtil.getString(request, "p_p_id");
@@ -111,9 +111,11 @@ public class LayoutCacheFilter implements Filter {
 
 				request.setAttribute(_ALREADY_FILTERED, Boolean.TRUE);
 
-				byte[] byteArray = null;
+				LayoutCacheResponseData layoutCacheResponseData = 
+					LayoutCacheUtil.getLayoutCacheResponseData(
+						companyId, plid, languageId);;
 
-				if (!LayoutCacheUtil.isCached(companyId, plid, languageId)) {
+				if (layoutCacheResponseData == null) {
 					_log.info("Caching layout " + plid);
 
 					LayoutCacheResponse layoutCacheResponse =
@@ -121,20 +123,19 @@ public class LayoutCacheFilter implements Filter {
 
 					chain.doFilter(req, layoutCacheResponse);
 
-					byteArray = layoutCacheResponse.getData();
-
-					LayoutCacheUtil.putLayout(
-						companyId, plid, languageId, byteArray);
+					layoutCacheResponseData = new LayoutCacheResponseData(
+						layoutCacheResponse.getData(), 
+						layoutCacheResponse.getContentType());
+					
+					LayoutCacheUtil.putLayoutCacheResponseData(
+						companyId, plid, languageId, layoutCacheResponseData);
 				}
-				else {
-					_log.info("Getting cached layout " + plid);
 
-					byteArray = LayoutCacheUtil.getLayout(
-						companyId, plid, languageId);
-				}
+				byte[] byteArray = layoutCacheResponseData.getData();
 
 				res.setContentLength(byteArray.length);
-
+				res.setContentType(layoutCacheResponseData.getContentType());
+				
 				ServletOutputStream out = response.getOutputStream();
 
 				out.write(byteArray, 0, byteArray.length);
@@ -227,12 +228,12 @@ public class LayoutCacheFilter implements Filter {
 		return false;
 	}
 
-	private String _getPlid(String path, String defaultPlid) {
+	private String _getPlid(String pathInfo, String servletPath, String defaultPlid) {
 		if (!_friendly) {
 			return defaultPlid;
 		}
 		
-		if (Validator.isNull(path) || !path.startsWith(StringPool.SLASH)) {
+		if (Validator.isNull(pathInfo) || !pathInfo.startsWith(StringPool.SLASH)) {
 			return null;
 		}
 
@@ -240,14 +241,14 @@ public class LayoutCacheFilter implements Filter {
 
 		String friendlyURL = null;
 
-		int pos = path.indexOf(StringPool.SLASH, 1);
+		int pos = pathInfo.indexOf(StringPool.SLASH, 1);
 
 		if (pos != -1) {
-			friendlyURL = path.substring(0, pos);
+			friendlyURL = pathInfo.substring(0, pos);
 		}
 		else {
-			if (path.length() > 1) {
-				friendlyURL = path.substring(0, path.length());
+			if (pathInfo.length() > 1) {
+				friendlyURL = pathInfo.substring(0, pathInfo.length());
 			}
 		}
 
@@ -261,10 +262,12 @@ public class LayoutCacheFilter implements Filter {
 			Group group = GroupLocalServiceUtil.getFriendlyURLGroup(_companyId,
 				friendlyURL);
 
-			if (path.startsWith("/group")) {
+			if (servletPath.startsWith(_LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING)) {
 				ownerId = Layout.PRIVATE + group.getGroupId();
 			}
-			else if (path.startsWith("/guest")) {
+			else if (servletPath.startsWith(
+				_LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING)) {
+
 				ownerId = Layout.PUBLIC + group.getGroupId();
 			}
 		}
@@ -277,8 +280,8 @@ public class LayoutCacheFilter implements Filter {
 
 		friendlyURL = null;
 
-		if ((pos != -1) && ((pos + 1) != path.length())) {
-			friendlyURL = path.substring(pos, path.length());
+		if ((pos != -1) && ((pos + 1) != pathInfo.length())) {
+			friendlyURL = pathInfo.substring(pos, pathInfo.length());
 		}
 
 		if (Validator.isNull(friendlyURL)) {
@@ -306,9 +309,14 @@ public class LayoutCacheFilter implements Filter {
 	private static final String _ALREADY_FILTERED =
 		LayoutCacheFilter.class + "_ALREADY_FILTERED";
 
+	private static final String _LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING = 
+		PropsUtil.get(PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING);
+
+	private static final String _LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING = 
+		PropsUtil.get(PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
+
 	private static Log _log = LogFactory.getLog(LayoutCacheFilter.class);
 	
-
 	private String _companyId;
 	private boolean _friendly;
 

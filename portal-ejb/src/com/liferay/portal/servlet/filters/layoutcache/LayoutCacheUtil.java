@@ -73,10 +73,10 @@ public class LayoutCacheUtil {
 		_log.info("Cleared layout cache for " + companyId);
 	}
 
-	public static byte[] getLayout(
+	public static LayoutCacheResponseData getLayoutCacheResponseData(
 		String companyId, String plid, String languageId) {
 
-		byte[] layout = null;
+		LayoutCacheResponseData layout = null;
 
 		if (Validator.isNull(plid)) {
 			return null;
@@ -87,7 +87,7 @@ public class LayoutCacheUtil {
 		String key = _encodeKey(companyId, plid + LANGUAGE + languageId);
 
 		try {
-			layout = (byte[])_cache.getFromCache(key);
+			layout = (LayoutCacheResponseData)_cache.getFromCache(key);
 		}
 		catch (NeedsRefreshException nre) {
 			_log.warn("Layout " + plid + " is not cached");
@@ -131,15 +131,16 @@ public class LayoutCacheUtil {
 		return true;
 	}
 
-	public static void putLayout(
-		String companyId, String plid, String languageId, byte[] layout) {
+	public static void putLayoutCacheResponseData(
+		String companyId, String plid, String languageId, 
+		LayoutCacheResponseData layoutCacheResponseData) {
 
-		if (layout != null) {
+		if (layoutCacheResponseData != null) {
 			plid = plid.trim().toUpperCase();
 
 			String key = _encodeKey(companyId, plid + LANGUAGE + languageId);
 
-			_cache.putInCache(key, layout, GROUP_NAME_ARRAY);
+			_cache.putInCache(key, layoutCacheResponseData, GROUP_NAME_ARRAY);
 		}
 	}
 
