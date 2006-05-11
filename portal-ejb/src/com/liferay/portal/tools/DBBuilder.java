@@ -855,7 +855,7 @@ public class DBBuilder {
 	private static String[] _DB2 = {
 		"--", "1", "0",
 		"'1970-01-01-00.00.00.000000'", "current timestamp",
-		" char(1)", " timestamp", " double", " integer", " long varchar",
+		" smallint", " timestamp", " double", " integer", " long varchar",
 		" long varchar", " varchar", " generated always as identity"
 	};
 
