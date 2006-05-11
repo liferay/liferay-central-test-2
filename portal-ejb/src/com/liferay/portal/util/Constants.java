@@ -40,6 +40,8 @@ public interface Constants {
 
 	public static final String CANCEL = "cancel";
 
+	public static final String CHECKOUT = "checkout";
+
 	public static final String DEACTIVATE = "deactivate";
 
 	public static final String DELETE = "delete";

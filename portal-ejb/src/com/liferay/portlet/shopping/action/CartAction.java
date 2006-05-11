@@ -69,10 +69,7 @@ public void processAction(
 
 			String redirect = ParamUtil.getString(req, "redirect");
 
-			if (Validator.isNull(redirect)) {
-				SessionMessages.add(req, "request_processed");
-			}
-			else {
+			if (Validator.isNotNull(redirect)) {
 				res.sendRedirect(redirect);
 			}
 		}
@@ -149,6 +146,10 @@ public void processAction(
 			cart.getUserId(), cart.getGroupId(), cart.getCartId(),
 			cart.getItemIds(), cart.getCouponIds(), cart.getAltShipping(),
 			cart.isInsure());
+
+		if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
+			SessionMessages.add(req, "request_processed");
+		}
 	}
 
 }

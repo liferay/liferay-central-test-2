@@ -93,7 +93,7 @@ Map hints = ModelHintsUtil.getHints(model, field);
 				amPm = cal.get(Calendar.AM_PM);
 			}
 
-			boolean showTime = false;
+			boolean showTime = true;
 
 			if (hints != null) {
 				showTime = GetterUtil.getBoolean((String)hints.get("show-time"), showTime);

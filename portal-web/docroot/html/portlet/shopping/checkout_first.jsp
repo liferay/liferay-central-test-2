@@ -27,7 +27,7 @@
 <%
 ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER);
 
-String billingState = BeanParamUtil.getString(order, request, "billingState");
+String billingState = ParamUtil.getString(request, "billingState");
 String billingStateSel = ParamUtil.getString(request, "billingStateSel");
 
 if (StateUtil.isStateId(billingState)) {
@@ -78,9 +78,9 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		%>
 
 			if ("<%= address.getAddressId() %>" == addressId) {
-				document.getElementById("<portlet:namespace />" + type + "FirstName").value = "<%= user.getFirstName() %>";
-				document.getElementById("<portlet:namespace />" + type + "LastName").value = "<%= user.getLastName() %>";
-				document.getElementById("<portlet:namespace />" + type + "EmailAddress").value = "<%= user.getEmailAddress() %>";
+				//document.getElementById("<portlet:namespace />" + type + "FirstName").value = "<%= user.getFirstName() %>";
+				//document.getElementById("<portlet:namespace />" + type + "LastName").value = "<%= user.getLastName() %>";
+				//document.getElementById("<portlet:namespace />" + type + "EmailAddress").value = "<%= user.getEmailAddress() %>";
 				document.getElementById("<portlet:namespace />" + type + "Street").value = "<%= address.getStreet1() %>";
 				document.getElementById("<portlet:namespace />" + type + "City").value = "<%= address.getCity() %>";
 
@@ -285,9 +285,9 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 <liferay-ui:error exception="<%= ShippingStreetException.class %>" message="please-enter-a-valid-street" />
 <liferay-ui:error exception="<%= ShippingZipException.class %>" message="please-enter-a-valid-zip" />
 
-<c:if test="<%= addresses.size() > 0 %>">
-	<table border="0" cellpadding="0" cellspacing="0">
-	<tr>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<c:if test="<%= addresses.size() > 0 %>">
 		<td>
 			<select onChange="<portlet:namespace />updateAddress(this[this.selectedIndex].value, 'shipping');">
 				<option value="">-- <%= LanguageUtil.get(pageContext, "my-addresses") %> --</option>
@@ -306,18 +306,19 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 			</select>
 		</td>
 		<td style="padding-left: 30px;"></td>
-		<td>
-			<%= LanguageUtil.get(pageContext, "same-as-billing") %>
-		</td>
-		<td style="padding-left: 10px;"></td>
-		<td>
-			<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shipToBilling" />
-		</td>
-	</tr>
-	</table>
+	</c:if>
 
-	<br>
-</c:if>
+	<td>
+		<%= LanguageUtil.get(pageContext, "same-as-billing") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shipToBilling" />
+	</td>
+</tr>
+</table>
+
+<br>
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>

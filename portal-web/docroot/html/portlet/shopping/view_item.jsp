@@ -68,7 +68,7 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/cart" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:actionURL><portlet:param name="struts_action" value="/shopping/cart" /></portlet:actionURL>">
+<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/cart" /></portlet:renderURL>">
 <input name="<portlet:namespace />itemId" type="hidden" value="<%= item.getItemId() %>">
 <input name="<portlet:namespace />fields" type="hidden" value="">
 

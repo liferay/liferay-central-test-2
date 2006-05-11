@@ -41,11 +41,13 @@ boolean minQuantityMultiple = GetterUtil.getBoolean(CompanyPropsUtil.get(company
 		if (<%= (ShoppingUtil.meetsMinOrder(shoppingPrefs, items)) ? "true" : "false" %>) {
 			if (!itemsInStock) {
 				if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "your-cart-has-items-that-are-out-of-stock") %>")) {
+					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.CHECKOUT %>";
 					document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/checkout" /></portlet:actionURL>";
 					<portlet:namespace />updateCart();
 				}
 			}
 			else {
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.CHECKOUT %>";
 				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/checkout" /></portlet:actionURL>";
 				<portlet:namespace />updateCart();
 			}
@@ -510,7 +512,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />couponIds" size="30" type="text" value="<%= cart.getCouponIds() %>">
+		<input class="form-text" name="<portlet:namespace />couponIds" size="30" style="text-transform: uppercase;" type="text" value="<%= cart.getCouponIds() %>">
 
 		<c:if test="<%= coupon != null %>">
 			<a href="javascript: var viewCouponWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= coupon.getCouponId() %>" /></portlet:renderURL>', 'viewCoupon', 'directories=no,height=200,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=280'); void(''); viewCouponWindow.focus();" style="font-size: xx-small;">(<%= LanguageUtil.get(pageContext, "description") %>)</a>

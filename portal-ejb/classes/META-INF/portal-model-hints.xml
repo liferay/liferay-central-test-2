@@ -436,9 +436,7 @@
 		<field name="content" type="String">
 			<hint-collection name="BLOB" />
 		</field>
-		<field name="displayDate" type="Date">
-			<hint name="show-time">true</hint>
-		</field>
+		<field name="displayDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.bookmarks.model.BookmarksEntry">
 		<field name="entryId" type="String" />
@@ -481,9 +479,7 @@
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
-		<field name="startDate" type="Date">
-			<hint name="show-time">true</hint>
-		</field>
+		<field name="startDate" type="Date" />
 		<field name="endDate" type="Date" />
 		<field name="durationHour" type="int" />
 		<field name="durationMinute" type="int" />
@@ -603,20 +599,14 @@
 		<field name="type" type="String" />
 		<field name="structureId" type="String" />
 		<field name="templateId" type="String" />
-		<field name="displayDate" type="Date">
-			<hint name="show-time">true</hint>
-		</field>
+		<field name="displayDate" type="Date" />
 		<field name="approved" type="boolean" />
 		<field name="approvedByUserId" type="String" />
 		<field name="approvedByUserName" type="String" />
 		<field name="approvedDate" type="Date" />
 		<field name="expired" type="boolean" />
-		<field name="expirationDate" type="Date">
-			<hint name="show-time">true</hint>
-		</field>
-		<field name="reviewDate" type="Date">
-			<hint name="show-time">true</hint>
-		</field>
+		<field name="expirationDate" type="Date" />
+		<field name="reviewDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalContentSearch">
 		<field name="portletId" type="String" />
@@ -746,9 +736,7 @@
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
-		<field name="expirationDate" type="Date">
-			<hint name="show-time">true</hint>
-		</field>
+		<field name="expirationDate" type="Date" />
 		<field name="lastVoteDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.polls.model.PollsVote">
@@ -789,7 +777,9 @@
 		</field>
 	</model>
 	<model name="com.liferay.portlet.shopping.model.ShoppingCoupon">
-		<field name="couponId" type="String" />
+		<field name="couponId" type="String">
+			<hint name="upper-case">true</hint>
+		</field>
 		<field name="groupId" type="String" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
