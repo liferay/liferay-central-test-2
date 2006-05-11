@@ -94,11 +94,15 @@ public class OrgLaborServiceUtil {
 	}
 
 	public static java.util.List getOrgLabors(java.lang.String organizationId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
 		try {
 			OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
 
 			return orgLaborService.getOrgLabors(organizationId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;

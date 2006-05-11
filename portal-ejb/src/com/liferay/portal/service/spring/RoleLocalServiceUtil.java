@@ -49,6 +49,27 @@ public class RoleLocalServiceUtil {
 		}
 	}
 
+	public static com.liferay.portal.model.Role addRole(
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String className, java.lang.String classPK)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+			return roleLocalService.addRole(companyId, name, className, classPK);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static void checkSystemRoles(java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -73,6 +94,26 @@ public class RoleLocalServiceUtil {
 		try {
 			RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 			roleLocalService.deleteRole(roleId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static com.liferay.portal.model.Role getGroupRole(
+		java.lang.String companyId, java.lang.String groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+			return roleLocalService.getGroupRole(companyId, groupId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

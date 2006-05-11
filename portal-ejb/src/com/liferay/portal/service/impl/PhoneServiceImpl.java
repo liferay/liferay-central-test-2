@@ -22,21 +22,15 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
-import com.liferay.portal.PhoneNumberException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.Phone;
-import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.permission.CommonPermission;
 import com.liferay.portal.service.persistence.PhoneUtil;
-import com.liferay.portal.service.spring.ListTypeServiceUtil;
+import com.liferay.portal.service.spring.PhoneLocalServiceUtil;
 import com.liferay.portal.service.spring.PhoneService;
-import com.liferay.util.Validator;
-import com.liferay.util.format.PhoneNumberUtil;
 
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -47,62 +41,50 @@ import java.util.List;
  */
 public class PhoneServiceImpl extends PrincipalBean implements PhoneService {
 
-	// Business methods
-
 	public Phone addPhone(
 			String className, String classPK, String number, String extension,
 			String typeId, boolean primary)
 		throws PortalException, SystemException {
 
-		User user = getUser();
+		CommonPermission.checkPermission(
+			getPermissionChecker(), className, classPK, ActionKeys.UPDATE);
 
-		number = PhoneNumberUtil.strip(number);
-		extension = PhoneNumberUtil.strip(extension);
-
-		_validate(
-			null, user.getCompanyId(), className, classPK, number, typeId,
+		return PhoneLocalServiceUtil.addPhone(
+			getUserId(), className, classPK, number, extension, typeId,
 			primary);
-
-		String phoneId = Long.toString(CounterServiceUtil.increment(
-			Phone.class.getName()));
-
-		Phone phone = PhoneUtil.create(phoneId);
-
-		Date now = new Date();
-
-		phone.setCompanyId(user.getCompanyId());
-		phone.setUserId(user.getUserId());
-		phone.setUserName(user.getFullName());
-		phone.setCreateDate(now);
-		phone.setModifiedDate(now);
-		phone.setClassName(className);
-		phone.setClassPK(classPK);
-		phone.setNumber(number);
-		phone.setExtension(extension);
-		phone.setTypeId(typeId);
-		phone.setPrimary(primary);
-
-		PhoneUtil.update(phone);
-
-		return phone;
 	}
 
 	public void deletePhone(String phoneId)
 		throws PortalException, SystemException {
 
-		PhoneUtil.remove(phoneId);
+		Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
+
+		CommonPermission.checkPermission(
+			getPermissionChecker(), phone.getClassName(), phone.getClassPK(),
+			ActionKeys.UPDATE);
+
+		PhoneLocalServiceUtil.deletePhone(phoneId);
 	}
 
 	public Phone getPhone(String phoneId)
 		throws PortalException, SystemException {
 
-		return PhoneUtil.findByPrimaryKey(phoneId);
+		Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
+
+		CommonPermission.checkPermission(
+			getPermissionChecker(), phone.getClassName(), phone.getClassPK(),
+			ActionKeys.VIEW);
+
+		return phone;
 	}
 
 	public List getPhones(String className, String classPK)
 		throws PortalException, SystemException {
 
-		return PhoneUtil.findByC_C_C(
+		CommonPermission.checkPermission(
+			getPermissionChecker(), className, classPK, ActionKeys.VIEW);
+
+		return PhoneLocalServiceUtil.getPhones(
 			getUser().getCompanyId(), className, classPK);
 	}
 
@@ -111,72 +93,14 @@ public class PhoneServiceImpl extends PrincipalBean implements PhoneService {
 			boolean primary)
 		throws PortalException, SystemException {
 
-		number = PhoneNumberUtil.strip(number);
-		extension = PhoneNumberUtil.strip(extension);
-
-		_validate(phoneId, null, null, null, number, typeId, primary);
-
 		Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
 
-		phone.setModifiedDate(new Date());
-		phone.setNumber(number);
-		phone.setExtension(extension);
-		phone.setTypeId(typeId);
-		phone.setPrimary(primary);
+		CommonPermission.checkPermission(
+			getPermissionChecker(), phone.getClassName(), phone.getClassPK(),
+			ActionKeys.UPDATE);
 
-		PhoneUtil.update(phone);
-
-		return phone;
-	}
-
-	// Private methods
-
-	private void _validate(
-			String phoneId, String companyId, String className, String classPK,
-			String number, String typeId, boolean primary)
-		throws PortalException, SystemException {
-
-		if (Validator.isNull(number)) {
-			throw new PhoneNumberException();
-		}
-
-		if (phoneId != null) {
-			Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
-
-			companyId = phone.getCompanyId();
-			className = phone.getClassName();
-			classPK = phone.getClassPK();
-		}
-
-		ListTypeServiceUtil.validate(typeId, className + ListType.PHONE);
-
-		_validate(phoneId, companyId, className, classPK, primary);
-	}
-
-	private void _validate(
-			String phoneId, String companyId, String className,
-			String classPK, boolean primary)
-		throws PortalException, SystemException {
-
-		// Check to make sure there isn't another phone with the same company
-		// id, class name, and class pk that also has primary set to true
-
-		if (primary) {
-			Iterator itr = PhoneUtil.findByC_C_C_P(
-				companyId, className, classPK, primary).iterator();
-
-			while (itr.hasNext()) {
-				Phone phone = (Phone)itr.next();
-
-				if ((phoneId == null) ||
-					(!phone.getPhoneId().equals(phoneId))) {
-
-					phone.setPrimary(false);
-
-					PhoneUtil.update(phone);
-				}
-			}
-		}
+		return PhoneLocalServiceUtil.updatePhone(
+			phoneId, number, extension, typeId, primary);
 	}
 
 }

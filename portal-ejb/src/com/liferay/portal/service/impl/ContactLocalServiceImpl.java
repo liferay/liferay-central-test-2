@@ -26,8 +26,11 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.service.persistence.ContactUtil;
+import com.liferay.portal.service.spring.AddressLocalServiceUtil;
 import com.liferay.portal.service.spring.ContactLocalService;
 import com.liferay.portal.service.spring.EmailAddressLocalServiceUtil;
+import com.liferay.portal.service.spring.PhoneLocalServiceUtil;
+import com.liferay.portal.service.spring.WebsiteLocalServiceUtil;
 
 /**
  * <a href="ContactLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -50,14 +53,39 @@ public class ContactLocalServiceImpl implements ContactLocalService {
 
 		Contact contact = ContactUtil.findByPrimaryKey(contactId);
 
-		// Delete contact's email addresses
+		deleteContact(contact);
+	}
 
-		EmailAddressLocalServiceUtil.deleteAll(
-			contact.getCompanyId(), Contact.class.getName(), contactId);
+	public void deleteContact(Contact contact)
+		throws PortalException, SystemException {
 
-		// Delete contact
+		// Addresses
 
-		ContactUtil.remove(contactId);
+		AddressLocalServiceUtil.deleteAddresses(
+			contact.getCompanyId(), Contact.class.getName(),
+			contact.getContactId());
+
+		// Email addresses
+
+		EmailAddressLocalServiceUtil.deleteEmailAddresses(
+			contact.getCompanyId(), Contact.class.getName(),
+			contact.getContactId());
+
+		// Phone
+
+		PhoneLocalServiceUtil.deletePhones(
+			contact.getCompanyId(), Contact.class.getName(),
+			contact.getContactId());
+
+		// Website
+
+		WebsiteLocalServiceUtil.deleteWebsites(
+			contact.getCompanyId(), Contact.class.getName(),
+			contact.getContactId());
+
+		// Contact
+
+		ContactUtil.remove(contact.getContactId());
 	}
 
 }

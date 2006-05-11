@@ -70,8 +70,8 @@ public class UserLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.User addUser(
-		java.lang.String companyId, boolean autoUserId,
-		java.lang.String userId, boolean autoPassword,
+		java.lang.String creatorUserId, java.lang.String companyId,
+		boolean autoUserId, java.lang.String userId, boolean autoPassword,
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset, java.lang.String emailAddress,
 		java.util.Locale locale, java.lang.String firstName,
@@ -85,11 +85,11 @@ public class UserLocalServiceUtil {
 		try {
 			UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
-			return userLocalService.addUser(companyId, autoUserId, userId,
-				autoPassword, password1, password2, passwordReset,
-				emailAddress, locale, firstName, middleName, lastName,
-				nickName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
-				birthdayYear, jobTitle, organizationId, locationId);
+			return userLocalService.addUser(creatorUserId, companyId,
+				autoUserId, userId, autoPassword, password1, password2,
+				passwordReset, emailAddress, locale, firstName, middleName,
+				lastName, nickName, prefixId, suffixId, male, birthdayMonth,
+				birthdayDay, birthdayYear, jobTitle, organizationId, locationId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -103,8 +103,8 @@ public class UserLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.User addUser(
-		java.lang.String companyId, boolean autoUserId,
-		java.lang.String userId, boolean autoPassword,
+		java.lang.String creatorUserId, java.lang.String companyId,
+		boolean autoUserId, java.lang.String userId, boolean autoPassword,
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset, java.lang.String emailAddress,
 		java.util.Locale locale, java.lang.String firstName,
@@ -119,11 +119,12 @@ public class UserLocalServiceUtil {
 		try {
 			UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
-			return userLocalService.addUser(companyId, autoUserId, userId,
-				autoPassword, password1, password2, passwordReset,
-				emailAddress, locale, firstName, middleName, lastName,
-				nickName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
-				birthdayYear, jobTitle, organizationId, locationId, sendEmail);
+			return userLocalService.addUser(creatorUserId, companyId,
+				autoUserId, userId, autoPassword, password1, password2,
+				passwordReset, emailAddress, locale, firstName, middleName,
+				lastName, nickName, prefixId, suffixId, male, birthdayMonth,
+				birthdayDay, birthdayYear, jobTitle, organizationId,
+				locationId, sendEmail);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

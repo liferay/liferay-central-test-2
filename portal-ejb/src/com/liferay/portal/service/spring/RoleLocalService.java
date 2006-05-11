@@ -34,11 +34,22 @@ public interface RoleLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Role addRole(java.lang.String companyId,
+		java.lang.String name, java.lang.String className,
+		java.lang.String classPK)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public void checkSystemRoles(java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
 	public void deleteRole(java.lang.String roleId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Role getGroupRole(
+		java.lang.String companyId, java.lang.String groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 

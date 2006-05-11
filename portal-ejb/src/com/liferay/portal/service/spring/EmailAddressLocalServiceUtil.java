@@ -70,12 +70,33 @@ public class EmailAddressLocalServiceUtil {
 		}
 	}
 
-	public static void deleteAll(java.lang.String companyId,
+	public static void deleteEmailAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
 		try {
 			EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-			emailAddressLocalService.deleteAll(companyId, className, classPK);
+			emailAddressLocalService.deleteEmailAddresses(companyId, className,
+				classPK);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static com.liferay.portal.model.EmailAddress getEmailAddress(
+		java.lang.String emailAddressId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
+			return emailAddressLocalService.getEmailAddress(emailAddressId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;

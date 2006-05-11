@@ -26,11 +26,11 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.portal.service.persistence.CompanyUtil;
-import com.liferay.portal.service.spring.RoleLocalServiceUtil;
+import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.service.spring.UserService;
 
@@ -70,32 +70,22 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		Company company = CompanyUtil.findByPrimaryKey(companyId);
 
 		if (!company.isStrangers()) {
-			String userId2 = null;
-
-			try {
-				userId2 = getUserId();
-			}
-			catch (PrincipalException pe) {
-			}
-
-			if ((userId2 != null) &&
-				(RoleLocalServiceUtil.hasUserRole(
-					userId2, company.getCompanyId(), Role.ADMINISTRATOR))) {
-			}
-			else {
-				throw new PrincipalException();
-			}
+			checkPermission(
+				userId, organizationId, locationId, ActionKeys.ADD_USER);
 		}
 
 		return UserLocalServiceUtil.addUser(
-			companyId, autoUserId, userId, autoPassword, password1, password2,
-			passwordReset, emailAddress, locale, firstName, middleName,
-			lastName, nickName, prefixId, suffixId, male, birthdayMonth,
-			birthdayDay, birthdayYear, jobTitle, organizationId, locationId);
+			getUserId(), companyId, autoUserId, userId, autoPassword, password1,
+			password2, passwordReset, emailAddress, locale, firstName,
+			middleName, lastName, nickName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
+			locationId);
 	}
 
 	public boolean deleteRoleUser(String roleId, String userId)
 		throws PortalException, SystemException {
+
+		checkPermission(userId, ActionKeys.UPDATE);
 
 		return UserLocalServiceUtil.deleteRoleUser(roleId, userId);
 	}
@@ -107,7 +97,20 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			throw new RequiredUserException();
 		}
 
+		checkPermission(userId, ActionKeys.DELETE);
+
 		UserLocalServiceUtil.deleteUser(userId);
+	}
+
+	public User getUserByEmailAddress(String companyId, String emailAddress)
+		throws PortalException, SystemException {
+
+		User user = UserLocalServiceUtil.getUserByEmailAddress(
+			companyId, emailAddress);
+
+		checkPermission(user.getUserId(), ActionKeys.VIEW);
+
+		return user;
 	}
 
 	public boolean hasGroupUser(String groupId, String userId)
@@ -153,12 +156,16 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			throw new RequiredUserException();
 		}
 
+		checkPermission(userId, ActionKeys.DELETE);
+
 		return UserLocalServiceUtil.updateActive(userId, active);
 	}
 
 	public User updateAgreedToTermsOfUse(
 			String userId, boolean agreedToTermsOfUse)
 		throws PortalException, SystemException {
+
+		checkPermission(userId, ActionKeys.UPDATE);
 
 		return UserLocalServiceUtil.updateAgreedToTermsOfUse(
 			userId, agreedToTermsOfUse);
@@ -169,12 +176,16 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			boolean passwordReset)
 		throws PortalException, SystemException {
 
+		checkPermission(userId, ActionKeys.UPDATE);
+
 		return UserLocalServiceUtil.updatePassword(
 			userId, password1, password2, passwordReset);
 	}
 
 	public void updatePortrait(String userId, byte[] bytes)
 		throws PortalException, SystemException {
+
+		checkPermission(userId, ActionKeys.UPDATE);
 
 		UserLocalServiceUtil.updatePortrait(userId, bytes);
 	}
@@ -190,12 +201,34 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			String organizationId, String locationId)
 		throws PortalException, SystemException {
 
+		checkPermission(userId, organizationId, locationId, ActionKeys.UPDATE);
+
 		return UserLocalServiceUtil.updateUser(
 			userId, password, emailAddress, languageId, timeZoneId, greeting,
 			resolution, comments, firstName, middleName, lastName, nickName,
 			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 			smsSn, aimSn, icqSn, msnSn, ymSn, jobTitle, organizationId,
 			locationId);
+	}
+
+	protected void checkPermission(String userId, String actionId)
+		throws PortalException, SystemException {
+
+		User user = UserUtil.findByPrimaryKey(userId);
+
+		checkPermission(
+			userId, user.getOrganization().getOrganizationId(),
+			user.getLocation().getOrganizationId(), actionId);
+	}
+
+	protected void checkPermission(
+			String userId, String organizationId, String locationId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		UserPermission.check(
+			getPermissionChecker(), userId, organizationId, locationId,
+			actionId);
 	}
 
 }

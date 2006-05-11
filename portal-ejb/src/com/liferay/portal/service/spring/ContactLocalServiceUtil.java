@@ -66,4 +66,22 @@ public class ContactLocalServiceUtil {
 			throw new com.liferay.portal.SystemException(e);
 		}
 	}
+
+	public static void deleteContact(com.liferay.portal.model.Contact contact)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+			contactLocalService.deleteContact(contact);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
 }

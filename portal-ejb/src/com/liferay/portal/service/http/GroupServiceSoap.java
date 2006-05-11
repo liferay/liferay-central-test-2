@@ -38,12 +38,11 @@ import java.rmi.RemoteException;
  */
 public class GroupServiceSoap {
 	public static com.liferay.portal.model.GroupModel addGroup(
-		java.lang.String className, java.lang.String classPK,
 		java.lang.String name, java.lang.String friendlyURL)
 		throws RemoteException {
 		try {
-			com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(className,
-					classPK, name, friendlyURL);
+			com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(name,
+					friendlyURL);
 
 			return returnValue;
 		}

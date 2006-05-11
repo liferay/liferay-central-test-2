@@ -172,6 +172,13 @@
 			<timeout>3000</timeout>
 		</session>
 		<session>
+			<ejb-name>com_liferay_portal_service_ejb_OrgLaborLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/OrgLaborLocalServiceHome</local-jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
 			<ejb-name>com_liferay_portal_service_ejb_OrgLaborServiceEJB</ejb-name>
 			<jndi-name>com_liferay_portal_service_ejb_OrgLaborServiceEJB</jndi-name>
 			<cluster-home>false</cluster-home>
@@ -195,6 +202,13 @@
 		<session>
 			<ejb-name>com_liferay_portal_service_ejb_PermissionServiceEJB</ejb-name>
 			<jndi-name>com_liferay_portal_service_ejb_PermissionServiceEJB</jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portal_service_ejb_PhoneLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/PhoneLocalServiceHome</local-jndi-name>
 			<cluster-home>false</cluster-home>
 			<cluster-object>false</cluster-object>
 			<timeout>3000</timeout>
@@ -335,6 +349,13 @@
 		<session>
 			<ejb-name>com_liferay_portal_service_ejb_UserTrackerPathServiceEJB</ejb-name>
 			<jndi-name>com_liferay_portal_service_ejb_UserTrackerPathServiceEJB</jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/WebsiteLocalServiceHome</local-jndi-name>
 			<cluster-home>false</cluster-home>
 			<cluster-object>false</cluster-object>
 			<timeout>3000</timeout>

@@ -718,6 +718,8 @@ create table Resource_ (
 create table Role_ (
 	roleId VARCHAR(75) not null primary key,
 	companyId VARCHAR(75) not null,
+	className VARCHAR(75) null,
+	classPK VARCHAR(75) null,
 	name VARCHAR(75) null
 );
 

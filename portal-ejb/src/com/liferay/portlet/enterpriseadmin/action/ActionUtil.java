@@ -32,7 +32,7 @@ import com.liferay.portal.model.Website;
 import com.liferay.portal.service.spring.AddressServiceUtil;
 import com.liferay.portal.service.spring.EmailAddressServiceUtil;
 import com.liferay.portal.service.spring.OrgLaborServiceUtil;
-import com.liferay.portal.service.spring.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.spring.OrganizationServiceUtil;
 import com.liferay.portal.service.spring.PhoneServiceUtil;
 import com.liferay.portal.service.spring.RoleServiceUtil;
 import com.liferay.portal.service.spring.WebsiteServiceUtil;
@@ -159,7 +159,7 @@ public class ActionUtil {
 
 		if (Validator.isNotNull(organizationId)) {
 			organization =
-				OrganizationLocalServiceUtil.getOrganization(organizationId);
+				OrganizationServiceUtil.getOrganization(organizationId);
 		}
 
 		req.setAttribute(WebKeys.ORGANIZATION, organization);

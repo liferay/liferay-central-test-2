@@ -43,6 +43,12 @@ public class RoleModel extends BaseModel {
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Role.companyId"),
 			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.get(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Role.className"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.get(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Role.classPK"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Role.name"),
 			XSS_ALLOW_BY_MODEL);
@@ -96,6 +102,42 @@ public class RoleModel extends BaseModel {
 		}
 	}
 
+	public String getClassName() {
+		return GetterUtil.getString(_className);
+	}
+
+	public void setClassName(String className) {
+		if (((className == null) && (_className != null)) ||
+				((className != null) && (_className == null)) ||
+				((className != null) && (_className != null) &&
+				!className.equals(_className))) {
+			if (!XSS_ALLOW_CLASSNAME) {
+				className = XSSUtil.strip(className);
+			}
+
+			_className = className;
+			setModified(true);
+		}
+	}
+
+	public String getClassPK() {
+		return GetterUtil.getString(_classPK);
+	}
+
+	public void setClassPK(String classPK) {
+		if (((classPK == null) && (_classPK != null)) ||
+				((classPK != null) && (_classPK == null)) ||
+				((classPK != null) && (_classPK != null) &&
+				!classPK.equals(_classPK))) {
+			if (!XSS_ALLOW_CLASSPK) {
+				classPK = XSSUtil.strip(classPK);
+			}
+
+			_classPK = classPK;
+			setModified(true);
+		}
+	}
+
 	public String getName() {
 		return GetterUtil.getString(_name);
 	}
@@ -117,6 +159,8 @@ public class RoleModel extends BaseModel {
 		Role clone = new Role();
 		clone.setRoleId(getRoleId());
 		clone.setCompanyId(getCompanyId());
+		clone.setClassName(getClassName());
+		clone.setClassPK(getClassPK());
 		clone.setName(getName());
 
 		return clone;
@@ -168,5 +212,7 @@ public class RoleModel extends BaseModel {
 
 	private String _roleId;
 	private String _companyId;
+	private String _className;
+	private String _classPK;
 	private String _name;
 }

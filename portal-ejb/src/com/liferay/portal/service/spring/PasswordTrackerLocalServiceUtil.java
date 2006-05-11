@@ -29,11 +29,11 @@ package com.liferay.portal.service.spring;
  *
  */
 public class PasswordTrackerLocalServiceUtil {
-	public static void deleteAll(java.lang.String userId)
+	public static void deletePasswordTrackers(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
 		try {
 			PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
-			passwordTrackerLocalService.deleteAll(userId);
+			passwordTrackerLocalService.deletePasswordTrackers(userId);
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;

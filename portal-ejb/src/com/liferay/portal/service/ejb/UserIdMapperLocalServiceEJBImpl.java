@@ -48,9 +48,9 @@ public class UserIdMapperLocalServiceEJBImpl implements UserIdMapperLocalService
 		return (UserIdMapperLocalService)ctx.getBean(CLASS_NAME);
 	}
 
-	public void deleteAll(java.lang.String userId)
+	public void deleteUserIdMappers(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
-		getService().deleteAll(userId);
+		getService().deleteUserIdMappers(userId);
 	}
 
 	public com.liferay.portal.model.UserIdMapper getUserIdMapper(

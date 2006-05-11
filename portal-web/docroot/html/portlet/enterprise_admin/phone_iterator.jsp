@@ -76,11 +76,13 @@ for (int i = 0; i < results.size(); i++) {
 	row.addText(phone.getType().getName());
 	row.addText(LanguageUtil.get(pageContext, phone.isPrimary() ? "yes" : "no"));
 
-	if (editable && className.equals(phone.getClassName())) {
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/phone_action.jsp");
-	}
-	else {
-		row.addText(StringPool.BLANK);
+	if (editable) {
+		if (className.equals(phone.getClassName())) {
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/phone_action.jsp");
+		}
+		else {
+			row.addText(StringPool.BLANK);
+		}
 	}
 
 	resultRows.add(row);

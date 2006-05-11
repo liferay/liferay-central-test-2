@@ -31,7 +31,6 @@ import com.liferay.portlet.shopping.NoSuchOrderException;
 import com.liferay.portlet.shopping.service.spring.ShoppingOrderServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -64,7 +63,7 @@ public class EditOrderAction extends PortletAction {
 				updateOrder(req);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteOrder(req);
+				deleteOrders(req);
 			}
 
 			sendRedirect(req, res);
@@ -110,21 +109,15 @@ public class EditOrderAction extends PortletAction {
 			getForward(req, "portlet.shopping.edit_order"));
 	}
 
-	protected void deleteOrder(ActionRequest req) throws Exception {
+	protected void deleteOrders(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
-		String orderId = ParamUtil.getString(req, "orderId");
 
-		if (Validator.isNotNull(orderId)) {
-			ShoppingOrderServiceUtil.deleteOrder(layout.getPlid(), orderId);
-		}
-		else {
-			String[] deleteOrderIds = StringUtil.split(
-				ParamUtil.getString(req, "deleteOrderIds"));
+		String[] deleteOrderIds = StringUtil.split(
+			ParamUtil.getString(req, "deleteOrderIds"));
 
-			for (int i = 0; i < deleteOrderIds.length; i++) {
-				ShoppingOrderServiceUtil.deleteOrder(
-					layout.getPlid(), deleteOrderIds[i]);
-			}
+		for (int i = 0; i < deleteOrderIds.length; i++) {
+			ShoppingOrderServiceUtil.deleteOrder(
+				layout.getPlid(), deleteOrderIds[i]);
 		}
 	}
 

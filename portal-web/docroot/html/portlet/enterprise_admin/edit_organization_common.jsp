@@ -23,24 +23,49 @@
 %>
 
 <%
+Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
+
+if (rootOrganization && portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+	organization = user.getOrganization();
+}
+
+String organizationId = BeanParamUtil.getString(organization, request, "organizationId");
+
+String parentOrganizationId = request.getParameter("parentOrganizationId");
+
 boolean editable = false;
 
 if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || (!rootOrganization && portletName.equals(PortletKeys.LOCATION_ADMIN)) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
 	editable = true;
+
+	if (rootOrganization) {
+		if (!OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.UPDATE)) {
+			editable = false;
+		}
+
+		if (Validator.isNull(organizationId) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION)) {
+			editable = true;
+		}
+	}
+	else {
+		if (!LocationPermission.contains(permissionChecker, organizationId, ActionKeys.UPDATE)) {
+			editable = false;
+		}
+
+		if (Validator.isNull(organizationId)) {
+			editable = true;
+
+			if ((parentOrganizationId != null) && !OrganizationPermission.contains(permissionChecker, parentOrganizationId, ActionKeys.ADD_LOCATION)) {
+				editable = false;
+			}
+		}
+	}
 }
 
 String strutsAction = "/enterprise_admin/edit_organization";
 
 if (!rootOrganization) {
 	strutsAction = "/enterprise_admin/edit_location";
-}
-
-Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
-
-String organizationId = BeanParamUtil.getString(organization, request, "organizationId");
-
-if (rootOrganization && portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-	organization = user.getOrganization();
 }
 %>
 

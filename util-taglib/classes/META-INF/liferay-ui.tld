@@ -203,6 +203,21 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>icon-deactivate</name>
+		<tagclass>com.liferay.taglib.ui.IconDeactivateTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>url</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>icon-delete</name>
 		<tagclass>com.liferay.taglib.ui.IconDeleteTag</tagclass>
 		<bodycontent>JSP</bodycontent>

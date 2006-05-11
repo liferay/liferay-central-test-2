@@ -70,6 +70,26 @@ public class OrganizationServiceUtil {
 		}
 	}
 
+	public static com.liferay.portal.model.Organization getOrganization(
+		java.lang.String organizationId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			OrganizationService organizationService = OrganizationServiceFactory.getService();
+
+			return organizationService.getOrganization(organizationId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static com.liferay.portal.model.Organization updateOrganization(
 		java.lang.String organizationId, java.lang.String parentOrganizationId,
 		java.lang.String name, java.lang.String regionId,

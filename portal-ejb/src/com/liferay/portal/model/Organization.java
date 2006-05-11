@@ -24,7 +24,7 @@ package com.liferay.portal.model;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.service.spring.AddressServiceUtil;
+import com.liferay.portal.service.spring.AddressLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.util.Validator;
 
@@ -89,8 +89,8 @@ public class Organization extends OrganizationModel {
 	}
 
 	public List getAddresses() throws PortalException, SystemException {
-		return AddressServiceUtil.getAddresses(
-			Organization.class.getName(), getOrganizationId());
+		return AddressLocalServiceUtil.getAddresses(
+			getCompanyId(), Organization.class.getName(), getOrganizationId());
 	}
 
 	private static Log _log = LogFactory.getLog(Organization.class);

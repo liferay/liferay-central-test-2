@@ -39,7 +39,8 @@ public interface UserLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.User addUser(java.lang.String companyId,
+	public com.liferay.portal.model.User addUser(
+		java.lang.String creatorUserId, java.lang.String companyId,
 		boolean autoUserId, java.lang.String userId, boolean autoPassword,
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset, java.lang.String emailAddress,
@@ -52,7 +53,8 @@ public interface UserLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.User addUser(java.lang.String companyId,
+	public com.liferay.portal.model.User addUser(
+		java.lang.String creatorUserId, java.lang.String companyId,
 		boolean autoUserId, java.lang.String userId, boolean autoPassword,
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset, java.lang.String emailAddress,

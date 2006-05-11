@@ -63,6 +63,15 @@ public class RoleServiceEJBImpl implements RoleService, SessionBean {
 		getService().deleteRole(roleId);
 	}
 
+	public com.liferay.portal.model.Role getGroupRole(
+		java.lang.String companyId, java.lang.String groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().getGroupRole(companyId, groupId);
+	}
+
 	public com.liferay.portal.model.Role getRole(java.lang.String roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

@@ -25,6 +25,11 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.permission.LocationPermission;
+import com.liferay.portal.service.permission.OrganizationPermission;
+import com.liferay.portal.service.permission.PortalPermission;
+import com.liferay.portal.service.persistence.OrganizationUtil;
 import com.liferay.portal.service.spring.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.spring.OrganizationService;
 
@@ -42,15 +47,35 @@ public class OrganizationServiceImpl extends PrincipalBean
 			String countryId, String statusId, boolean location)
 		throws PortalException, SystemException {
 
+		if (location) {
+			OrganizationPermission.check(
+				getPermissionChecker(), parentOrganizationId,
+				ActionKeys.ADD_LOCATION);
+		}
+		else {
+			PortalPermission.check(
+				getPermissionChecker(), ActionKeys.ADD_ORGANIZATION);
+		}
+
 		return OrganizationLocalServiceUtil.addOrganization(
-			getUser().getCompanyId(), parentOrganizationId, name, regionId,
-			countryId, statusId, location);
+			getUserId(), parentOrganizationId, name, regionId, countryId,
+			statusId, location);
 	}
 
 	public void deleteOrganization(String organizationId)
 		throws PortalException, SystemException {
 
+		checkPermission(organizationId, ActionKeys.DELETE);
+
 		OrganizationLocalServiceUtil.deleteOrganization(organizationId);
+	}
+
+	public Organization getOrganization(String organizationId)
+		throws PortalException, SystemException {
+
+		checkPermission(organizationId, ActionKeys.VIEW);
+
+		return OrganizationLocalServiceUtil.getOrganization(organizationId);
 	}
 
 	public Organization updateOrganization(
@@ -58,6 +83,8 @@ public class OrganizationServiceImpl extends PrincipalBean
 			String regionId, String countryId, String statusId,
 			boolean location)
 		throws PortalException, SystemException {
+
+		checkPermission(organizationId, ActionKeys.UPDATE);
 
 		return OrganizationLocalServiceUtil.updateOrganization(
 			getUser().getCompanyId(), organizationId, parentOrganizationId,
@@ -68,8 +95,26 @@ public class OrganizationServiceImpl extends PrincipalBean
 			String organizationId, String comments)
 		throws PortalException, SystemException {
 
+		checkPermission(organizationId, ActionKeys.UPDATE);
+
 		return OrganizationLocalServiceUtil.updateOrganization(
 			organizationId, comments);
+	}
+
+	protected void checkPermission(String organizationId, String actionId)
+		throws PortalException, SystemException {
+
+		Organization organization =
+			OrganizationUtil.findByPrimaryKey(organizationId);
+
+		if (organization.isRoot()) {
+			OrganizationPermission.check(
+				getPermissionChecker(), organizationId, actionId);
+		}
+		else {
+			LocationPermission.check(
+				getPermissionChecker(), organizationId, actionId);
+		}
 	}
 
 }

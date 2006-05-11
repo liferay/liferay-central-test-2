@@ -74,7 +74,7 @@ public class EditOrganizationAction extends PortletAction {
 				organization = updateComments(req);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteOrganization(req);
+				deleteOrganizations(req);
 			}
 
 			String redirect = null;
@@ -146,7 +146,7 @@ public class EditOrganizationAction extends PortletAction {
 		return _LOCATION;
 	}
 
-	protected void deleteOrganization(ActionRequest req) throws Exception {
+	protected void deleteOrganizations(ActionRequest req) throws Exception {
 		String[] deleteOrganizationIds = StringUtil.split(
 			ParamUtil.getString(req, "deleteOrganizationIds"));
 

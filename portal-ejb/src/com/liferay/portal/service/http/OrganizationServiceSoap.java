@@ -66,6 +66,20 @@ public class OrganizationServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.OrganizationModel getOrganization(
+		java.lang.String organizationId) throws RemoteException {
+		try {
+			com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.getOrganization(organizationId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static com.liferay.portal.model.OrganizationModel updateOrganization(
 		java.lang.String organizationId, java.lang.String parentOrganizationId,
 		java.lang.String name, java.lang.String regionId,

@@ -36,6 +36,10 @@ boolean editable = false;
 if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
 	if ((user2 == null) || user2.isActive()) {
 		editable = true;
+
+		if ((user2 != null) && !UserPermission.contains(permissionChecker, user2.getUserId(), user2.getOrganization().getOrganizationId(), user2.getLocation().getOrganizationId(), ActionKeys.UPDATE)) {
+			editable = false;
+		}
 	}
 }
 

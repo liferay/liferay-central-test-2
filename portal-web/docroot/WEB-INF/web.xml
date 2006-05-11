@@ -328,6 +328,13 @@
 		<ejb-link>com_liferay_portal_service_ejb_OrganizationLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/OrgLaborLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portal.service.ejb.OrgLaborLocalServiceHome</local-home>
+		<local>com.liferay.portal.service.ejb.OrgLaborLocalServiceEJB</local>
+		<ejb-link>com_liferay_portal_service_ejb_OrgLaborLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/PasswordTrackerLocalServiceHome</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
 		<local-home>com.liferay.portal.service.ejb.PasswordTrackerLocalServiceHome</local-home>
@@ -340,6 +347,13 @@
 		<local-home>com.liferay.portal.service.ejb.PermissionLocalServiceHome</local-home>
 		<local>com.liferay.portal.service.ejb.PermissionLocalServiceEJB</local>
 		<ejb-link>com_liferay_portal_service_ejb_PermissionLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portal.service.ejb.PhoneLocalServiceHome</local-home>
+		<local>com.liferay.portal.service.ejb.PhoneLocalServiceEJB</local>
+		<ejb-link>com_liferay_portal_service_ejb_PhoneLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -410,6 +424,13 @@
 		<local-home>com.liferay.portal.service.ejb.UserTrackerPathLocalServiceHome</local-home>
 		<local>com.liferay.portal.service.ejb.UserTrackerPathLocalServiceEJB</local>
 		<ejb-link>com_liferay_portal_service_ejb_UserTrackerPathLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/WebsiteLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
+		<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
+		<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/ABContactLocalServiceHome</ejb-ref-name>

@@ -287,7 +287,9 @@ public class AdminUtil {
 			contact.getMiddleName(), contact.getLastName(),
 			contact.getNickName(), contact.getPrefixId(), contact.getSuffixId(),
 			contact.isMale(), birthdayMonth, birthdayDay, birthdayYear, smsSn,
-			aimSn, icqSn, msnSn, ymSn, contact.getJobTitle(), null, null);
+			aimSn, icqSn, msnSn, ymSn, contact.getJobTitle(),
+			user.getOrganization().getOrganizationId(),
+			user.getLocation().getOrganizationId());
 	}
 
 	public static User updateUser(

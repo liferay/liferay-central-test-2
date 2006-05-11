@@ -140,6 +140,26 @@ public class UserServiceUtil {
 		}
 	}
 
+	public static com.liferay.portal.model.User getUserByEmailAddress(
+		java.lang.String companyId, java.lang.String emailAddress)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			UserService userService = UserServiceFactory.getService();
+
+			return userService.getUserByEmailAddress(companyId, emailAddress);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static boolean hasGroupUser(java.lang.String groupId,
 		java.lang.String userId)
 		throws com.liferay.portal.PortalException, 

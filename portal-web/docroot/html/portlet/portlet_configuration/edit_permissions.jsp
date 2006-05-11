@@ -185,6 +185,10 @@ String tabs2Names = "users,organizations,locations,community,guest,associated";
 if (layout.getGroup().isUser()) {
 	tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
 }
+else if (modelResource.equals(Organization.class.getName()) || modelResource.equals("com.liferay.portal.model.Location")) {
+	tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
+	tabs2Names = StringUtil.replace(tabs2Names, "guest,", StringPool.BLANK);
+}
 %>
 
 <liferay-ui:tabs

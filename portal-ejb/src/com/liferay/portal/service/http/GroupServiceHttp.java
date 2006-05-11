@@ -40,39 +40,25 @@ import org.apache.commons.logging.LogFactory;
  */
 public class GroupServiceHttp {
 	public static com.liferay.portal.model.Group addGroup(
-		HttpPrincipal httpPrincipal, java.lang.String className,
-		java.lang.String classPK, java.lang.String name,
+		HttpPrincipal httpPrincipal, java.lang.String name,
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = className;
+			Object paramObj0 = name;
 
-			if (className == null) {
+			if (name == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = classPK;
+			Object paramObj1 = friendlyURL;
 
-			if (classPK == null) {
+			if (friendlyURL == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = name;
-
-			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = friendlyURL;
-
-			if (friendlyURL == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
-					"addGroup",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					"addGroup", new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;
 
 			try {

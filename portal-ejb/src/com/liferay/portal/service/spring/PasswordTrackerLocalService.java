@@ -29,7 +29,7 @@ package com.liferay.portal.service.spring;
  *
  */
 public interface PasswordTrackerLocalService {
-	public void deleteAll(java.lang.String userId)
+	public void deletePasswordTrackers(java.lang.String userId)
 		throws com.liferay.portal.SystemException;
 
 	public boolean isValidPassword(java.lang.String userId,

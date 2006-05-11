@@ -47,12 +47,12 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 		return (GroupLocalService)ctx.getBean(CLASS_NAME);
 	}
 
-	public com.liferay.portal.model.Group addGroup(java.lang.String companyId,
+	public com.liferay.portal.model.Group addGroup(java.lang.String userId,
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String name, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addGroup(companyId, className, classPK, name,
+		return getService().addGroup(userId, className, classPK, name,
 			friendlyURL);
 	}
 

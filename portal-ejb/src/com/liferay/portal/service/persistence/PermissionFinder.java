@@ -70,6 +70,9 @@ public class PermissionFinder {
 	public static String FIND_BY_O_G_R =
 		PermissionFinder.class.getName() + ".findByO_G_R";
 
+	public static String FIND_BY_U_A_R =
+		PermissionFinder.class.getName() + ".findByU_A_R";
+
 	public static int countByGroupsPermissions(List permissions, List groups)
 		throws SystemException {
 
@@ -414,6 +417,65 @@ public class PermissionFinder {
 		}
 
 		return list;
+	}
+
+	public static List findByU_A_R(
+			String userId, String[] actionIds, String resourceId)
+		throws SystemException {
+
+		List list = new ArrayList();
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_U_R);
+
+			sql = StringUtil.replace(
+				sql, "[$ACTION_IDS$]", _getActionIds(actionIds));
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Permission_", PermissionHBM.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(userId);
+			qPos.add(resourceId);
+
+			Iterator itr = q.list().iterator();
+
+			while (itr.hasNext()) {
+				PermissionHBM permissionHBM = (PermissionHBM)itr.next();
+
+				Permission permission = PermissionHBMUtil.model(permissionHBM);
+
+				list.add(permission);
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+
+		return list;
+	}
+
+	private static String _getActionIds(String[] actionIds) {
+		StringBuffer sb = new StringBuffer();
+
+		for (int i = 0; i < actionIds.length; i++) {
+			sb.append("Permission_.actionId = ?");
+
+			if ((i + 1) < actionIds.length) {
+				sb.append(" OR ");
+			}
+		}
+
+		return sb.toString();
 	}
 
 	private static String _getGroupIds(List groups, String table) {

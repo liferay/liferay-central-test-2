@@ -61,7 +61,8 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		return getService().addRoleUsers(roleId, userIds);
 	}
 
-	public com.liferay.portal.model.User addUser(java.lang.String companyId,
+	public com.liferay.portal.model.User addUser(
+		java.lang.String creatorUserId, java.lang.String companyId,
 		boolean autoUserId, java.lang.String userId, boolean autoPassword,
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset, java.lang.String emailAddress,
@@ -73,14 +74,15 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		java.lang.String organizationId, java.lang.String locationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addUser(companyId, autoUserId, userId,
-			autoPassword, password1, password2, passwordReset, emailAddress,
-			locale, firstName, middleName, lastName, nickName, prefixId,
-			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-			organizationId, locationId);
+		return getService().addUser(creatorUserId, companyId, autoUserId,
+			userId, autoPassword, password1, password2, passwordReset,
+			emailAddress, locale, firstName, middleName, lastName, nickName,
+			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+			jobTitle, organizationId, locationId);
 	}
 
-	public com.liferay.portal.model.User addUser(java.lang.String companyId,
+	public com.liferay.portal.model.User addUser(
+		java.lang.String creatorUserId, java.lang.String companyId,
 		boolean autoUserId, java.lang.String userId, boolean autoPassword,
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset, java.lang.String emailAddress,
@@ -93,11 +95,11 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		boolean sendEmail)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addUser(companyId, autoUserId, userId,
-			autoPassword, password1, password2, passwordReset, emailAddress,
-			locale, firstName, middleName, lastName, nickName, prefixId,
-			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-			organizationId, locationId, sendEmail);
+		return getService().addUser(creatorUserId, companyId, autoUserId,
+			userId, autoPassword, password1, password2, passwordReset,
+			emailAddress, locale, firstName, middleName, lastName, nickName,
+			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+			jobTitle, organizationId, locationId, sendEmail);
 	}
 
 	public int authenticateByEmailAddress(java.lang.String companyId,

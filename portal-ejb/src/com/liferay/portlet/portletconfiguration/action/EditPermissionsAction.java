@@ -24,11 +24,14 @@ package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.portal.service.spring.PermissionServiceUtil;
 import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
@@ -119,7 +122,21 @@ public class EditPermissionsAction extends PortletAction {
 			selResource = modelResource;
 		}
 
-		if (!permissionChecker.hasPermission(
+		if (selResource.equals(User.class.getName())) {
+			User user = UserLocalServiceUtil.getUserById(resourcePrimKey);
+
+			if (!UserPermission.contains(
+					permissionChecker, resourcePrimKey,
+					user.getOrganization().getOrganizationId(),
+					user.getLocation().getOrganizationId(),
+					ActionKeys.PERMISSIONS)) {
+
+				SessionErrors.add(req, PrincipalException.class.getName());
+
+				setForward(req, "portlet.portlet_configuration.error");
+			}
+		}
+		else if (!permissionChecker.hasPermission(
 				groupId, selResource, resourcePrimKey,
 				ActionKeys.PERMISSIONS)) {
 

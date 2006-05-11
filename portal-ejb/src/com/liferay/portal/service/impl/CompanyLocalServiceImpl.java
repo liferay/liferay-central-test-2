@@ -227,6 +227,7 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 		// Default admin
 
 		if (UserUtil.countByCompanyId(companyId) == 0) {
+			String creatorUserId = null;
 			boolean autoUserId = true;
 			String userId = StringPool.BLANK;
 			boolean autoPassword = false;
@@ -255,10 +256,10 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 			}
 
 			User user = UserLocalServiceUtil.addUser(
-				companyId, autoUserId, userId, autoPassword, password1,
-				password2, passwordReset, emailAddress, locale, firstName,
-				middleName, lastName, nickName, prefixId, suffixId, male,
-				birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+				creatorUserId, companyId, autoUserId, userId, autoPassword,
+				password1, password2, passwordReset, emailAddress, locale,
+				firstName, middleName, lastName, nickName, prefixId, suffixId,
+				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
 				organizationId, locationId, false);
 
 			Role adminRole = RoleLocalServiceUtil.getRole(

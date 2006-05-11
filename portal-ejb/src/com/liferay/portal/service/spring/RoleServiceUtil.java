@@ -66,6 +66,26 @@ public class RoleServiceUtil {
 		}
 	}
 
+	public static com.liferay.portal.model.Role getGroupRole(
+		java.lang.String companyId, java.lang.String groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			RoleService roleService = RoleServiceFactory.getService();
+
+			return roleService.getGroupRole(companyId, groupId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static com.liferay.portal.model.Role getRole(java.lang.String roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

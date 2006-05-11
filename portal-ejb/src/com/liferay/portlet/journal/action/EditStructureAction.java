@@ -147,23 +147,15 @@ public class EditStructureAction extends PortletAction {
 
 	protected void deleteStructures(ActionRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
-		String structureId = ParamUtil.getString(req, "structureId");
 
-		if (Validator.isNotNull(structureId)) {
-			JournalStructureServiceUtil.deleteStructure(companyId, structureId);
+		String[] deleteStructureIds = StringUtil.split(
+			ParamUtil.getString(req, "deleteStructureIds"));
 
-			JournalUtil.removeRecentStructure(req, structureId);
-		}
-		else {
-			String[] deleteStructureIds = StringUtil.split(
-				ParamUtil.getString(req, "deleteStructureIds"));
+		for (int i = 0; i < deleteStructureIds.length; i++) {
+			JournalStructureServiceUtil.deleteStructure(
+				companyId, deleteStructureIds[i]);
 
-			for (int i = 0; i < deleteStructureIds.length; i++) {
-				JournalStructureServiceUtil.deleteStructure(
-					companyId, deleteStructureIds[i]);
-
-				JournalUtil.removeRecentStructure(req, deleteStructureIds[i]);
-			}
+			JournalUtil.removeRecentStructure(req, deleteStructureIds[i]);
 		}
 	}
 

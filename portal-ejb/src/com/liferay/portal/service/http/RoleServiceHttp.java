@@ -131,6 +131,60 @@ public class RoleServiceHttp {
 		}
 	}
 
+	public static com.liferay.portal.model.Role getGroupRole(
+		HttpPrincipal httpPrincipal, java.lang.String companyId,
+		java.lang.String groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = companyId;
+
+			if (companyId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = groupId;
+
+			if (groupId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
+					"getGroupRole", new Object[] { paramObj0, paramObj1 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw e;
+			}
+
+			return (com.liferay.portal.model.Role)returnObj;
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			_log.error(StackTraceUtil.getStackTrace(pe));
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(StackTraceUtil.getStackTrace(se));
+			throw se;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new com.liferay.portal.SystemException(stackTrace);
+		}
+	}
+
 	public static com.liferay.portal.model.Role getRole(
 		HttpPrincipal httpPrincipal, java.lang.String roleId)
 		throws com.liferay.portal.PortalException, 

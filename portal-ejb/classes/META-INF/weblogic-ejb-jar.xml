@@ -99,6 +99,10 @@
 		<jndi-name>com_liferay_portal_service_ejb_OrganizationServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
+		<ejb-name>com_liferay_portal_service_ejb_OrgLaborLocalServiceEJB</ejb-name>
+		<local-jndi-name>ejb/liferay/OrgLaborLocalServiceHome</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_OrgLaborServiceEJB</ejb-name>
 		<jndi-name>com_liferay_portal_service_ejb_OrgLaborServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
@@ -113,6 +117,10 @@
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_PermissionServiceEJB</ejb-name>
 		<jndi-name>com_liferay_portal_service_ejb_PermissionServiceEJB</jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>com_liferay_portal_service_ejb_PhoneLocalServiceEJB</ejb-name>
+		<local-jndi-name>ejb/liferay/PhoneLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_PhoneServiceEJB</ejb-name>
@@ -193,6 +201,10 @@
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_UserTrackerPathServiceEJB</ejb-name>
 		<jndi-name>com_liferay_portal_service_ejb_UserTrackerPathServiceEJB</jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-name>
+		<local-jndi-name>ejb/liferay/WebsiteLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_WebsiteServiceEJB</ejb-name>

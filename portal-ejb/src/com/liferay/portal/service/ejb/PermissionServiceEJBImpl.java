@@ -69,28 +69,6 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 			resourceIds, permissionCheckerBag);
 	}
 
-	public boolean unsetRolePermission(java.lang.String roleId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
-		java.lang.String primKey, java.lang.String actionId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().unsetRolePermission(roleId, name, typeId, scope,
-			primKey, actionId);
-	}
-
-	public boolean unsetRolePermissions(java.lang.String roleId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
-		java.lang.String actionId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().unsetRolePermissions(roleId, name, typeId, scope,
-			actionId);
-	}
-
 	public void setGroupPermissions(java.lang.String groupId,
 		java.lang.String[] actionIds, java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 
@@ -135,6 +113,37 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		getService().setUserPermissions(userId, actionIds, resourceId);
+	}
+
+	public boolean unsetRolePermission(java.lang.String roleId,
+		java.lang.String name, java.lang.String typeId, java.lang.String scope,
+		java.lang.String primKey, java.lang.String actionId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().unsetRolePermission(roleId, name, typeId, scope,
+			primKey, actionId);
+	}
+
+	public boolean unsetRolePermissions(java.lang.String roleId,
+		java.lang.String name, java.lang.String typeId, java.lang.String scope,
+		java.lang.String actionId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().unsetRolePermissions(roleId, name, typeId, scope,
+			actionId);
+	}
+
+	public boolean unsetUserPermissions(java.lang.String userId,
+		java.lang.String[] actionIds, java.lang.String resourceId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().unsetUserPermissions(userId, actionIds, resourceId);
 	}
 
 	public void ejbCreate() throws CreateException {

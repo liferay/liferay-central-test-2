@@ -140,11 +140,7 @@ public class EditGroupAction extends PortletAction {
 
 			// Add group
 
-			Group group = GroupServiceUtil.addGroup(
-				null, null, name, friendlyURL);
-
-			GroupServiceUtil.addUserGroups(
-				req.getRemoteUser(), new String[] {group.getGroupId()});
+			Group group = GroupServiceUtil.addGroup(name, friendlyURL);
 		}
 		else {
 

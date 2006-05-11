@@ -37,6 +37,7 @@ import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -103,6 +104,8 @@ public class RolePersistence extends BasePersistence {
 					RoleHBM roleHBM = new RoleHBM();
 					roleHBM.setRoleId(role.getRoleId());
 					roleHBM.setCompanyId(role.getCompanyId());
+					roleHBM.setClassName(role.getClassName());
+					roleHBM.setClassPK(role.getClassPK());
 					roleHBM.setName(role.getName());
 					roleHBM.setGroups(new HashSet());
 					roleHBM.setPermissions(new HashSet());
@@ -116,6 +119,8 @@ public class RolePersistence extends BasePersistence {
 
 					if (roleHBM != null) {
 						roleHBM.setCompanyId(role.getCompanyId());
+						roleHBM.setClassName(role.getClassName());
+						roleHBM.setClassPK(role.getClassPK());
 						roleHBM.setName(role.getName());
 						session.flush();
 					}
@@ -123,6 +128,8 @@ public class RolePersistence extends BasePersistence {
 						roleHBM = new RoleHBM();
 						roleHBM.setRoleId(role.getRoleId());
 						roleHBM.setCompanyId(role.getCompanyId());
+						roleHBM.setClassName(role.getClassName());
+						roleHBM.setClassPK(role.getClassPK());
 						roleHBM.setName(role.getName());
 						session.save(roleHBM);
 						session.flush();
@@ -2412,6 +2419,61 @@ public class RolePersistence extends BasePersistence {
 		}
 	}
 
+	public com.liferay.portal.model.Role findByC_C_C(String companyId,
+		String className, String classPK)
+		throws NoSuchRoleException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM Role_ IN CLASS com.liferay.portal.service.persistence.RoleHBM WHERE ");
+			query.append("companyId = ?");
+			query.append(" AND ");
+			query.append("className = ?");
+			query.append(" AND ");
+			query.append("classPK = ?");
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("name ASC");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setString(queryPos++, companyId);
+			q.setString(queryPos++, className);
+			q.setString(queryPos++, classPK);
+
+			Iterator itr = q.list().iterator();
+
+			if (!itr.hasNext()) {
+				String msg = "No Role exists with the key ";
+				msg += StringPool.OPEN_CURLY_BRACE;
+				msg += "companyId=";
+				msg += companyId;
+				msg += ", ";
+				msg += "className=";
+				msg += className;
+				msg += ", ";
+				msg += "classPK=";
+				msg += classPK;
+				msg += StringPool.CLOSE_CURLY_BRACE;
+				throw new NoSuchRoleException(msg);
+			}
+
+			RoleHBM roleHBM = (RoleHBM)itr.next();
+
+			return RoleHBMUtil.model(roleHBM);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List findAll() throws SystemException {
 		Session session = null;
 
@@ -2478,6 +2540,64 @@ public class RolePersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByC_C_C(String companyId, String className, String classPK)
+		throws NoSuchRoleException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM Role_ IN CLASS com.liferay.portal.service.persistence.RoleHBM WHERE ");
+			query.append("companyId = ?");
+			query.append(" AND ");
+			query.append("className = ?");
+			query.append(" AND ");
+			query.append("classPK = ?");
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("name ASC");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setString(queryPos++, companyId);
+			q.setString(queryPos++, className);
+			q.setString(queryPos++, classPK);
+
+			Iterator itr = q.list().iterator();
+
+			while (itr.hasNext()) {
+				RoleHBM roleHBM = (RoleHBM)itr.next();
+				session.delete(roleHBM);
+			}
+
+			session.flush();
+		}
+		catch (HibernateException he) {
+			if (he instanceof ObjectNotFoundException) {
+				String msg = "No Role exists with the key ";
+				msg += StringPool.OPEN_CURLY_BRACE;
+				msg += "companyId=";
+				msg += companyId;
+				msg += ", ";
+				msg += "className=";
+				msg += className;
+				msg += ", ";
+				msg += "classPK=";
+				msg += classPK;
+				msg += StringPool.CLOSE_CURLY_BRACE;
+				throw new NoSuchRoleException(msg);
+			}
+			else {
+				throw new SystemException(he);
+			}
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByCompanyId(String companyId) throws SystemException {
 		Session session = null;
 
@@ -2494,6 +2614,50 @@ public class RolePersistence extends BasePersistence {
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
 			q.setString(queryPos++, companyId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Integer count = (Integer)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByC_C_C(String companyId, String className, String classPK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM Role_ IN CLASS com.liferay.portal.service.persistence.RoleHBM WHERE ");
+			query.append("companyId = ?");
+			query.append(" AND ");
+			query.append("className = ?");
+			query.append(" AND ");
+			query.append("classPK = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setString(queryPos++, companyId);
+			q.setString(queryPos++, className);
+			q.setString(queryPos++, classPK);
 
 			Iterator itr = q.list().iterator();
 

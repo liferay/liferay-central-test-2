@@ -159,6 +159,22 @@ public class EditUserAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
+		try {
+			PortalUtil.getSelectedUser(req);
+		}
+		catch (Exception e) {
+			if (e != null &&
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(req, e.getClass().getName());
+
+				return mapping.findForward("portlet.enterprise_admin.error");
+			}
+			else {
+				throw e;
+			}
+		}
+
 		return mapping.findForward(
 			getForward(req, "portlet.enterprise_admin.edit_user"));
 	}

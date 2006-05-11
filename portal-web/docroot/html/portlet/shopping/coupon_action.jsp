@@ -42,7 +42,7 @@ ShoppingCoupon coupon = (ShoppingCoupon)row.getObject();
 	<portlet:param name="struts_action" value="/shopping/edit_coupon" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="couponId" value="<%= coupon.getCouponId() %>" />
+	<portlet:param name="deleteCouponIds" value="<%= coupon.getCouponId() %>" />
 </portlet:actionURL>
 
 <liferay-ui:icon-delete url="<%= portletURL %>" />

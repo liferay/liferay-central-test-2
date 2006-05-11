@@ -321,6 +321,21 @@
 				Permission_.resourceId = ?
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.PermissionFinder.findByU_A_R">
+		<![CDATA[
+			SELECT
+				{Permission_.*}
+			FROM 
+			    Permission_
+			INNER JOIN
+			    Users_Permissions ON
+			        (Users_Permissions.userId = ?) AND
+					(Users_Permissions.permissionId = Permission_.permissionId)
+			WHERE
+				([$ACTION_IDS$]) AND
+				(Permission_.resourceId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByC_N_1">
 		<![CDATA[
 			SELECT
@@ -340,7 +355,9 @@
 				Role_
 			WHERE
 				(Role_.companyId = ?) AND
-				(lower(Role_.name) LIKE ? OR ? IS NULL)
+				(lower(Role_.name) LIKE ? OR ? IS NULL) AND
+				(Role_.className IS NULL OR Role_.className = '') AND
+				(Role_.classPK IS NULL OR Role_.classPK = '')
 			ORDER BY
 				Role_.name ASC
 		]]>
@@ -353,7 +370,9 @@
                 Role_
             WHERE
                 (Role_.companyId = ?) AND
-                (lower(Role_.name) = ?)
+                (lower(Role_.name) = ?) AND
+				(Role_.className IS NULL OR Role_.className = '') AND
+				(Role_.classPK IS NULL OR Role_.classPK = '')
         ]]>
     </sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.countByC_FN_MN_LN_EA_A">

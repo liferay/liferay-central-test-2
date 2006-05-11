@@ -48,16 +48,15 @@ import java.util.List;
  */
 public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 
-	// Business methods
-
 	public EmailAddress addEmailAddress(
 			String userId, String className, String classPK,
 			String address, String typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
+		Date now = new Date();
 
-		_validate(
+		validate(
 			null, user.getCompanyId(), className, classPK, address, typeId,
 			primary);
 
@@ -65,8 +64,6 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 			EmailAddress.class.getName()));
 
 		EmailAddress emailAddress = EmailAddressUtil.create(emailAddressId);
-
-		Date now = new Date();
 
 		emailAddress.setCompanyId(user.getCompanyId());
 		emailAddress.setUserId(user.getUserId());
@@ -90,10 +87,17 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 		EmailAddressUtil.remove(emailAddressId);
 	}
 
-	public void deleteAll(String companyId, String className, String classPK)
+	public void deleteEmailAddresses(
+			String companyId, String className, String classPK)
 		throws SystemException {
 
 		EmailAddressUtil.removeByC_C_C(companyId, className, classPK);
+	}
+
+	public EmailAddress getEmailAddress(String emailAddressId)
+		throws PortalException, SystemException {
+
+		return EmailAddressUtil.findByPrimaryKey(emailAddressId);
 	}
 
 	public List getEmailAddresses(
@@ -108,7 +112,7 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 			boolean primary)
 		throws PortalException, SystemException {
 
-		_validate(emailAddressId, null, null, null, address, typeId, primary);
+		validate(emailAddressId, null, null, null, address, typeId, primary);
 
 		EmailAddress emailAddress =
 			EmailAddressUtil.findByPrimaryKey(emailAddressId);
@@ -123,9 +127,7 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 		return emailAddress;
 	}
 
-	// Private methods
-
-	private void _validate(
+	protected void validate(
 			String emailAddressId, String companyId, String className,
 			String classPK, String address, String typeId, boolean primary)
 		throws PortalException, SystemException {
@@ -146,10 +148,10 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 		ListTypeServiceUtil.validate(
 			typeId, className + ListType.EMAIL_ADDRESS);
 
-		_validate(emailAddressId, companyId, className, classPK, primary);
+		validate(emailAddressId, companyId, className, classPK, primary);
 	}
 
-	private void _validate(
+	protected void validate(
 			String emailAddressId, String companyId, String className,
 			String classPK, boolean primary)
 		throws PortalException, SystemException {

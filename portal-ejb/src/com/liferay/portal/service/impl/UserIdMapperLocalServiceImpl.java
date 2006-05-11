@@ -41,9 +41,7 @@ import java.util.List;
  */
 public class UserIdMapperLocalServiceImpl implements UserIdMapperLocalService {
 
-	// Business methods
-
-	public void deleteAll(String userId) throws SystemException {
+	public void deleteUserIdMappers(String userId) throws SystemException {
 		UserIdMapperUtil.removeByUserId(userId);
 	}
 

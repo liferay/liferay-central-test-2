@@ -34,13 +34,20 @@ import com.liferay.portal.model.Country;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.OrganizationFinder;
 import com.liferay.portal.service.persistence.OrganizationUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.service.spring.AddressLocalServiceUtil;
 import com.liferay.portal.service.spring.CountryServiceUtil;
+import com.liferay.portal.service.spring.EmailAddressLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.ListTypeServiceUtil;
 import com.liferay.portal.service.spring.OrganizationLocalService;
+import com.liferay.portal.service.spring.PhoneLocalServiceUtil;
+import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
+import com.liferay.portal.service.spring.WebsiteLocalServiceUtil;
 import com.liferay.util.Validator;
 
 import java.util.List;
@@ -56,26 +63,27 @@ import java.util.Map;
 public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 
 	public Organization addOrganization(
-			String companyId, String parentOrganizationId, String name,
+			String userId, String parentOrganizationId, String name,
 			String regionId, String countryId, String statusId,
 			boolean location)
 		throws PortalException, SystemException {
 
 		// Organization
 
+		User user = UserUtil.findByPrimaryKey(userId);
 		parentOrganizationId = getParentOrganizationId(
-			companyId, parentOrganizationId);
+			user.getCompanyId(), parentOrganizationId);
 
 		validate(
-			companyId, parentOrganizationId, name, countryId, statusId,
-			location);
+			user.getCompanyId(), parentOrganizationId, name, countryId,
+			statusId, location);
 
 		String organizationId = Long.toString(CounterServiceUtil.increment(
 			Organization.class.getName()));
 
 		Organization organization = OrganizationUtil.create(organizationId);
 
-		organization.setCompanyId(companyId);
+		organization.setCompanyId(user.getCompanyId());
 		organization.setParentOrganizationId(parentOrganizationId);
 		organization.setName(name);
 		organization.setRegionId(regionId);
@@ -87,10 +95,29 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 		// Group
 
 		GroupLocalServiceUtil.addGroup(
-			organization.getCompanyId(), Organization.class.getName(),
+			userId, Organization.class.getName(),
 			organization.getPrimaryKey().toString(), null, null);
 
+		// Resources
+
+		addOrganizationResources(userId, organization);
+
 		return organization;
+	}
+
+	public void addOrganizationResources(
+			String userId, Organization organization)
+		throws PortalException, SystemException {
+
+		String name = Organization.class.getName();
+
+		if (!organization.isRoot()) {
+			name = "com.liferay.portal.model.Location";
+		}
+
+		ResourceLocalServiceUtil.addResources(
+			organization.getCompanyId(), null, userId, name,
+			organization.getPrimaryKey().toString(), false, false, false);
 	}
 
 	public void deleteOrganization(String organizationId)
@@ -114,6 +141,30 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 			throw new RequiredOrganizationException();
 		}
 
+		// Addresses
+
+		AddressLocalServiceUtil.deleteAddresses(
+			organization.getCompanyId(), Organization.class.getName(),
+			organization.getOrganizationId());
+
+		// Email addresses
+
+		EmailAddressLocalServiceUtil.deleteEmailAddresses(
+			organization.getCompanyId(), Organization.class.getName(),
+			organization.getOrganizationId());
+
+		// Phone
+
+		PhoneLocalServiceUtil.deletePhones(
+			organization.getCompanyId(), Organization.class.getName(),
+			organization.getOrganizationId());
+
+		// Website
+
+		WebsiteLocalServiceUtil.deleteWebsites(
+			organization.getCompanyId(), Organization.class.getName(),
+			organization.getOrganizationId());
+
 		// Group
 
 		Group group = organization.getGroup();
@@ -121,6 +172,18 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 		if (group != null) {
 			GroupLocalServiceUtil.deleteGroup(group.getGroupId());
 		}
+
+		// Resources
+
+		String name = Organization.class.getName();
+
+		if (!organization.isRoot()) {
+			name = "com.liferay.portal.model.Location";
+		}
+
+		ResourceLocalServiceUtil.deleteResource(
+			organization.getCompanyId(), name, Resource.TYPE_CLASS,
+			Resource.SCOPE_INDIVIDUAL, organization.getPrimaryKey().toString());
 
 		// Organization
 

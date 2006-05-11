@@ -78,6 +78,8 @@ public class PortletKeys {
 
 	public static final String PORTAL = "LIFERAY_PORTAL";
 
+	public static final String PORTAL_CONFIGURATION = "90";
+
 	public static final String PORTLET_CONFIGURATION = "86";
 
 	public static final String PREFS_LAYOUT_ID_SHARED = "SHARED";

@@ -81,6 +81,10 @@ portletURL.setParameter("tabs1", tabs1);
 		<%
 		UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
 
+		List headerNames = searchContainer.getHeaderNames();
+
+		headerNames.add(StringPool.BLANK);
+
 		if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 			RowChecker rowChecker = new RowChecker(renderResponse);
 			//RowChecker rowChecker = new RowChecker(renderResponse, RowChecker.FORM_NAME, null, RowChecker.ROW_IDS);
@@ -221,6 +225,10 @@ portletURL.setParameter("tabs1", tabs1);
 
 				row.addText(countryName, rowURL);
 
+				// Action
+
+				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/user_action.jsp");
+
 				// Add result row
 
 				resultRows.add(row);
@@ -352,7 +360,9 @@ portletURL.setParameter("tabs1", tabs1);
 			</c:if>
 
 			<c:if test="<%= showButtons %>">
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value='<%= "/enterprise_admin/edit_" + (rootOrganization ? "organization" : "location") %>' /></portlet:renderURL>';">
+				<c:if test="<%= (rootOrganization && PortalPermission.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION)) || !rootOrganization %>">
+					<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value='<%= "/enterprise_admin/edit_" + (rootOrganization ? "organization" : "location") %>' /></portlet:renderURL>';">
+				</c:if>
 
 				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteOrganizations();">
 

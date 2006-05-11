@@ -72,7 +72,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 
 	<br><div class="beta-separator"></div><br>
 
-	<c:if test="<%= true %>">
+	<c:if test="<%= PortalPermission.contains(permissionChecker, ActionKeys.ADD_COMMUNITY) %>">
 		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
 
 		<br><br>

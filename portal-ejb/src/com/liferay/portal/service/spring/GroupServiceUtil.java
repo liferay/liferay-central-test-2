@@ -30,14 +30,13 @@ package com.liferay.portal.service.spring;
  */
 public class GroupServiceUtil {
 	public static com.liferay.portal.model.Group addGroup(
-		java.lang.String className, java.lang.String classPK,
 		java.lang.String name, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			GroupService groupService = GroupServiceFactory.getService();
 
-			return groupService.addGroup(className, classPK, name, friendlyURL);
+			return groupService.addGroup(name, friendlyURL);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

@@ -29,8 +29,7 @@ package com.liferay.portal.service.spring;
  *
  */
 public interface GroupService {
-	public com.liferay.portal.model.Group addGroup(java.lang.String className,
-		java.lang.String classPK, java.lang.String name,
+	public com.liferay.portal.model.Group addGroup(java.lang.String name,
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;

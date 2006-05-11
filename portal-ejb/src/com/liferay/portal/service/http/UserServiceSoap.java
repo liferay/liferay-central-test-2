@@ -91,6 +91,22 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.UserModel getUserByEmailAddress(
+		java.lang.String companyId, java.lang.String emailAddress)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.User returnValue = UserServiceUtil.getUserByEmailAddress(companyId,
+					emailAddress);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static boolean hasGroupUser(java.lang.String groupId,
 		java.lang.String userId) throws RemoteException {
 		try {

@@ -42,7 +42,7 @@ ShoppingOrder order = (ShoppingOrder)row.getObject();
 	<portlet:param name="struts_action" value="/shopping/edit_order" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="orderId" value="<%= order.getOrderId() %>" />
+	<portlet:param name="deleteOrderIds" value="<%= order.getOrderId() %>" />
 </portlet:actionURL>
 
 <liferay-ui:icon-delete url="<%= portletURL %>" />

@@ -31,7 +31,9 @@
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
 			<td <%= portletDecorate ? "style=\"padding: 4px 8px 10px 8px;\"" : "" %>>
-				<%@ include file="/html/common/themes/portlet_messages.jsp" %>
+				<c:if test='<%= !tilesPortletContent.endsWith("/error.jsp") %>'>
+					<%@ include file="/html/common/themes/portlet_messages.jsp" %>
+				</c:if>
 
 				<c:if test="<%= Validator.isNotNull(tilesPortletContent) %>">
 					<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesPortletContent %>" />

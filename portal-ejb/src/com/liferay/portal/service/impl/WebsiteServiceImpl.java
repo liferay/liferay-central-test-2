@@ -22,23 +22,15 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.WebsiteURLException;
-import com.liferay.portal.model.ListType;
-import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.permission.CommonPermission;
 import com.liferay.portal.service.persistence.WebsiteUtil;
-import com.liferay.portal.service.spring.ListTypeServiceUtil;
+import com.liferay.portal.service.spring.WebsiteLocalServiceUtil;
 import com.liferay.portal.service.spring.WebsiteService;
-import com.liferay.util.Validator;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -50,58 +42,49 @@ import java.util.List;
 public class WebsiteServiceImpl
 	extends PrincipalBean implements WebsiteService {
 
-	// Business methods
-
 	public Website addWebsite(
 			String className, String classPK, String url, String typeId,
 			boolean primary)
 		throws PortalException, SystemException {
 
-		User user = getUser();
+		CommonPermission.checkPermission(
+			getPermissionChecker(), className, classPK, ActionKeys.UPDATE);
 
-		_validate(
-			null, user.getCompanyId(), className, classPK, url, typeId,
-			primary);
-
-		String websiteId = Long.toString(CounterServiceUtil.increment(
-			Website.class.getName()));
-
-		Website website = WebsiteUtil.create(websiteId);
-
-		Date now = new Date();
-
-		website.setCompanyId(user.getCompanyId());
-		website.setUserId(user.getUserId());
-		website.setUserName(user.getFullName());
-		website.setCreateDate(now);
-		website.setModifiedDate(now);
-		website.setClassName(className);
-		website.setClassPK(classPK);
-		website.setUrl(url);
-		website.setTypeId(typeId);
-		website.setPrimary(primary);
-
-		WebsiteUtil.update(website);
-
-		return website;
+		return WebsiteLocalServiceUtil.addWebsite(
+			getUserId(), className, classPK, url, typeId, primary);
 	}
 
 	public void deleteWebsite(String websiteId)
 		throws PortalException, SystemException {
 
-		WebsiteUtil.remove(websiteId);
+		Website website = WebsiteUtil.findByPrimaryKey(websiteId);
+
+		CommonPermission.checkPermission(
+			getPermissionChecker(), website.getClassName(),
+			website.getClassPK(), ActionKeys.UPDATE);
+
+		WebsiteLocalServiceUtil.deleteWebsite(websiteId);
 	}
 
 	public Website getWebsite(String websiteId)
 		throws PortalException, SystemException {
 
-		return WebsiteUtil.findByPrimaryKey(websiteId);
+		Website website = WebsiteUtil.findByPrimaryKey(websiteId);
+
+		CommonPermission.checkPermission(
+			getPermissionChecker(), website.getClassName(),
+			website.getClassPK(), ActionKeys.VIEW);
+
+		return website;
 	}
 
 	public List getWebsites(String className, String classPK)
 		throws PortalException, SystemException {
 
-		return WebsiteUtil.findByC_C_C(
+		CommonPermission.checkPermission(
+			getPermissionChecker(), className, classPK, ActionKeys.VIEW);
+
+		return WebsiteLocalServiceUtil.getWebsites(
 			getUser().getCompanyId(), className, classPK);
 	}
 
@@ -109,76 +92,14 @@ public class WebsiteServiceImpl
 			String websiteId, String url, String typeId, boolean primary)
 		throws PortalException, SystemException {
 
-		_validate(websiteId, null, null, null, url, typeId, primary);
-
 		Website website = WebsiteUtil.findByPrimaryKey(websiteId);
 
-		website.setModifiedDate(new Date());
-		website.setUrl(url);
-		website.setTypeId(typeId);
-		website.setPrimary(primary);
+		CommonPermission.checkPermission(
+			getPermissionChecker(), website.getClassName(),
+			website.getClassPK(), ActionKeys.UPDATE);
 
-		WebsiteUtil.update(website);
-
-		return website;
-	}
-
-	// Private methods
-
-	private void _validate(
-			String websiteId, String companyId, String className,
-			String classPK, String url, String typeId, boolean primary)
-		throws PortalException, SystemException {
-
-		if (Validator.isNull(url)) {
-			throw new WebsiteURLException();
-		}
-		else {
-			try {
-				new URL(url);
-			}
-			catch (MalformedURLException murle) {
-				throw new WebsiteURLException();
-			}
-		}
-
-		if (websiteId != null) {
-			Website website = WebsiteUtil.findByPrimaryKey(websiteId);
-
-			companyId = website.getCompanyId();
-			className = website.getClassName();
-			classPK = website.getClassPK();
-		}
-
-		ListTypeServiceUtil.validate(typeId, className + ListType.WEBSITE);
-
-		_validate(websiteId, companyId, className, classPK, primary);
-	}
-
-	private void _validate(
-			String websiteId, String companyId, String className,
-			String classPK, boolean primary)
-		throws PortalException, SystemException {
-
-		// Check to make sure there isn't another website with the same company
-		// id, class name, and class pk that also has primary set to true
-
-		if (primary) {
-			Iterator itr = WebsiteUtil.findByC_C_C_P(
-				companyId, className, classPK, primary).iterator();
-
-			while (itr.hasNext()) {
-				Website website = (Website)itr.next();
-
-				if ((websiteId == null) ||
-					(!website.getWebsiteId().equals(websiteId))) {
-
-					website.setPrimary(false);
-
-					WebsiteUtil.update(website);
-				}
-			}
-		}
+		return WebsiteLocalServiceUtil.updateWebsite(
+			websiteId, url, typeId, primary);
 	}
 
 }

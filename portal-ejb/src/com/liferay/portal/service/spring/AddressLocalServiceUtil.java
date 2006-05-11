@@ -74,12 +74,32 @@ public class AddressLocalServiceUtil {
 		}
 	}
 
-	public static void deleteAll(java.lang.String companyId,
+	public static void deleteAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
 		try {
 			AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-			addressLocalService.deleteAll(companyId, className, classPK);
+			addressLocalService.deleteAddresses(companyId, className, classPK);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static com.liferay.portal.model.Address getAddress(
+		java.lang.String addressId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+			return addressLocalService.getAddress(addressId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;

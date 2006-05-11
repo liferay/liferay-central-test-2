@@ -49,13 +49,20 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 	}
 
 	public com.liferay.portal.model.Organization addOrganization(
-		java.lang.String companyId, java.lang.String parentOrganizationId,
+		java.lang.String userId, java.lang.String parentOrganizationId,
 		java.lang.String name, java.lang.String regionId,
 		java.lang.String countryId, java.lang.String statusId, boolean location)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addOrganization(companyId, parentOrganizationId,
-			name, regionId, countryId, statusId, location);
+		return getService().addOrganization(userId, parentOrganizationId, name,
+			regionId, countryId, statusId, location);
+	}
+
+	public void addOrganizationResources(java.lang.String userId,
+		com.liferay.portal.model.Organization organization)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().addOrganizationResources(userId, organization);
 	}
 
 	public void deleteOrganization(java.lang.String organizationId)

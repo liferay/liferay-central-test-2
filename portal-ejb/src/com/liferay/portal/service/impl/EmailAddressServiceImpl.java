@@ -25,6 +25,8 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.permission.CommonPermission;
 import com.liferay.portal.service.persistence.EmailAddressUtil;
 import com.liferay.portal.service.spring.EmailAddressLocalServiceUtil;
 import com.liferay.portal.service.spring.EmailAddressService;
@@ -40,12 +42,13 @@ import java.util.List;
 public class EmailAddressServiceImpl
 	extends PrincipalBean implements EmailAddressService {
 
-	// Business methods
-
 	public EmailAddress addEmailAddress(
 			String className, String classPK, String address, String typeId,
 			boolean primary)
 		throws PortalException, SystemException {
+
+		CommonPermission.checkPermission(
+			getPermissionChecker(), className, classPK, ActionKeys.UPDATE);
 
 		return EmailAddressLocalServiceUtil.addEmailAddress(
 			getUserId(), className, classPK, address, typeId, primary);
@@ -54,17 +57,34 @@ public class EmailAddressServiceImpl
 	public void deleteEmailAddress(String emailAddressId)
 		throws PortalException, SystemException {
 
+		EmailAddress emailAddress =
+			EmailAddressUtil.findByPrimaryKey(emailAddressId);
+
+		CommonPermission.checkPermission(
+			getPermissionChecker(), emailAddress.getClassName(),
+			emailAddress.getClassPK(), ActionKeys.UPDATE);
+
 		EmailAddressLocalServiceUtil.deleteEmailAddress(emailAddressId);
 	}
 
 	public EmailAddress getEmailAddress(String emailAddressId)
 		throws PortalException, SystemException {
 
-		return EmailAddressUtil.findByPrimaryKey(emailAddressId);
+		EmailAddress emailAddress =
+			EmailAddressUtil.findByPrimaryKey(emailAddressId);
+
+		CommonPermission.checkPermission(
+			getPermissionChecker(), emailAddress.getClassName(),
+			emailAddress.getClassPK(), ActionKeys.VIEW);
+
+		return emailAddress;
 	}
 
 	public List getEmailAddresses(String className, String classPK)
 		throws PortalException, SystemException {
+
+		CommonPermission.checkPermission(
+			getPermissionChecker(), className, classPK, ActionKeys.VIEW);
 
 		return EmailAddressLocalServiceUtil.getEmailAddresses(
 			getUser().getCompanyId(), className, classPK);
@@ -74,6 +94,13 @@ public class EmailAddressServiceImpl
 			String emailAddressId, String address, String typeId,
 			boolean primary)
 		throws PortalException, SystemException {
+
+		EmailAddress emailAddress =
+			EmailAddressUtil.findByPrimaryKey(emailAddressId);
+
+		CommonPermission.checkPermission(
+			getPermissionChecker(), emailAddress.getClassName(),
+			emailAddress.getClassPK(), ActionKeys.UPDATE);
 
 		return EmailAddressLocalServiceUtil.updateEmailAddress(
 			emailAddressId, address, typeId, primary);

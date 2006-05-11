@@ -23,8 +23,6 @@
 %>
 
 <%
-String parentOrganizationId = request.getParameter("parentOrganizationId");
-
 if ((parentOrganizationId == null) || (parentOrganizationId.equals(StringPool.NULL))) {
 	parentOrganizationId = Organization.DEFAULT_PARENT_ORGANIZATION_ID;
 
@@ -96,7 +94,7 @@ String statusId = BeanParamUtil.getString(organization, request, "statusId");
 				<td>
 					<a class="portlet-font" href="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="organizationId" value="<%= organizationId %>" /></portlet:actionURL>" id="<portlet:namespace />parentOrganizationName" style="font-size: x-small;"><%= parentOrganizationName %></a>
 
-					<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+					<c:if test="<%= editable && portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
 						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();">
 					</c:if>
 				</td>

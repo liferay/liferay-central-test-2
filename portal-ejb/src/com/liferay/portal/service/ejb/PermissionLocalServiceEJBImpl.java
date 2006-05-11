@@ -82,11 +82,11 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 			resourceId);
 	}
 
-	public java.util.List getPermissions(java.lang.String[] actionIds,
-		java.lang.String resourceId)
+	public java.util.List getPermissions(java.lang.String companyId,
+		java.lang.String[] actionIds, java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getPermissions(actionIds, resourceId);
+		return getService().getPermissions(companyId, actionIds, resourceId);
 	}
 
 	public java.util.List getUserPermissions(java.lang.String userId,
@@ -119,6 +119,13 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 			com.liferay.portal.SystemException {
 		return getService().hasRolePermission(roleId, companyId, name, typeId,
 			scope, primKey, actionId);
+	}
+
+	public boolean hasUserPermission(java.lang.String userId,
+		java.lang.String actionId, java.lang.String resourceId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().hasUserPermission(userId, actionId, resourceId);
 	}
 
 	public boolean hasUserPermissions(java.lang.String userId,
@@ -191,6 +198,13 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 			com.liferay.portal.SystemException {
 		return getService().unsetRolePermissions(roleId, companyId, name,
 			typeId, scope, actionId);
+	}
+
+	public boolean unsetUserPermissions(java.lang.String userId,
+		java.lang.String[] actionIds, java.lang.String resourceId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().unsetUserPermissions(userId, actionIds, resourceId);
 	}
 
 	public void ejbCreate() throws CreateException {

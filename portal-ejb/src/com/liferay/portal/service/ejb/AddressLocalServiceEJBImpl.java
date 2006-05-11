@@ -68,10 +68,17 @@ public class AddressLocalServiceEJBImpl implements AddressLocalService,
 		getService().deleteAddress(addressId);
 	}
 
-	public void deleteAll(java.lang.String companyId,
+	public void deleteAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		getService().deleteAll(companyId, className, classPK);
+		getService().deleteAddresses(companyId, className, classPK);
+	}
+
+	public com.liferay.portal.model.Address getAddress(
+		java.lang.String addressId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().getAddress(addressId);
 	}
 
 	public java.util.List getAddresses(java.lang.String companyId,

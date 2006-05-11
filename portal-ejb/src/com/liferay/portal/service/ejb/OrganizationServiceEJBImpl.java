@@ -68,6 +68,15 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 		getService().deleteOrganization(organizationId);
 	}
 
+	public com.liferay.portal.model.Organization getOrganization(
+		java.lang.String organizationId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().getOrganization(organizationId);
+	}
+
 	public com.liferay.portal.model.Organization updateOrganization(
 		java.lang.String organizationId, java.lang.String parentOrganizationId,
 		java.lang.String name, java.lang.String regionId,

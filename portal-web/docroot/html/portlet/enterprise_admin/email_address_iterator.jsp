@@ -61,7 +61,12 @@ for (int i = 0; i < results.size(); i++) {
 	row.addText(LanguageUtil.get(pageContext, emailAddress.isPrimary() ? "yes" : "no"));
 
 	if (editable) {
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/email_address_action.jsp");
+		if (className.equals(emailAddress.getClassName())) {
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/email_address_action.jsp");
+		}
+		else {
+			row.addText(StringPool.BLANK);
+		}
 	}
 
 	resultRows.add(row);

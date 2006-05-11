@@ -27,10 +27,12 @@ import com.liferay.portal.NoSuchPermissionException;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.OrgGroupPermission;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionCheckerBag;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.persistence.GroupUtil;
@@ -138,14 +140,21 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			organizationId, groupId, resourceId);
 	}
 
-	public List getPermissions(String[] actionIds, String resourceId)
+	public List getPermissions(
+			String companyId, String[] actionIds, String resourceId)
 		throws PortalException, SystemException {
 
 		List permissions = new ArrayList();
 
 		for (int i = 0; i < actionIds.length; i++) {
-			Permission permission =
-				PermissionUtil.findByA_R(actionIds[i], resourceId);
+			Permission permission = null;
+
+			try {
+				permission = PermissionUtil.findByA_R(actionIds[i], resourceId);
+			}
+			catch (NoSuchPermissionException nspe) {
+				permission = addPermission(companyId, actionIds[i], resourceId);
+			}
 
 			permissions.add(permission);
 		}
@@ -229,6 +238,27 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		}
 
 		return false;
+	}
+
+	public boolean hasUserPermission(
+			String userId, String actionId, String resourceId)
+		throws PortalException, SystemException {
+
+		Permission permission = null;
+
+		try {
+			permission = PermissionUtil.findByA_R(actionId, resourceId);
+		}
+		catch (NoSuchPermissionException nspe) {
+
+			// Return false if there is no permission based on the given action
+			// id and resource id
+
+			return false;
+		}
+
+		return UserUtil.containsPermission(
+			userId, permission.getPermissionId());
 	}
 
 	public boolean hasUserPermissions(
@@ -359,6 +389,8 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			String groupId, String[] actionIds, String resourceId)
 		throws PortalException, SystemException {
 
+		Group group = GroupUtil.findByPrimaryKey(groupId);
+
 		Iterator itr = PermissionFinder.findByG_R(
 			groupId, resourceId).iterator();
 
@@ -368,7 +400,8 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			GroupUtil.removePermission(groupId, permission);
 		}
 
-		List permissions = getPermissions(actionIds, resourceId);
+		List permissions = getPermissions(
+			group.getCompanyId(), actionIds, resourceId);
 
 		GroupUtil.addPermissions(groupId, permissions);
 	}
@@ -407,7 +440,8 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			GroupUtil.removePermission(orgGroupId, permission);
 		}
 
-		itr = getPermissions(actionIds, resourceId).iterator();
+		itr = getPermissions(
+			organization.getCompanyId(), actionIds, resourceId).iterator();
 
 		OrgGroupPermissionFinder.removeByO_G_R(
 			organizationId, groupId, resourceId);
@@ -479,16 +513,14 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			String userId, String[] actionIds, String resourceId)
 		throws PortalException, SystemException {
 
-		Iterator itr = PermissionFinder.findByU_R(
-			userId, resourceId).iterator();
+		User user = UserUtil.findByPrimaryKey(userId);
 
-		while (itr.hasNext()) {
-			Permission permission = (Permission)itr.next();
+		List permissions = PermissionFinder.findByU_R(userId, resourceId);
 
-			UserUtil.removePermission(userId, permission);
-		}
+		UserUtil.removePermissions(userId, permissions);
 
-		List permissions = getPermissions(actionIds, resourceId);
+		permissions = getPermissions(
+			user.getCompanyId(), actionIds, resourceId);
 
 		UserUtil.addPermissions(userId, permissions);
 	}
@@ -541,6 +573,16 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		}
 
 		return value;
+	}
+
+	public boolean unsetUserPermissions(
+			String userId, String[] actionIds, String resourceId)
+		throws PortalException, SystemException {
+
+		List permissions = PermissionFinder.findByU_A_R(
+			userId, actionIds, resourceId);
+
+		return UserUtil.removePermissions(userId, permissions);
 	}
 
 	protected boolean checkOrgGroupPermission(

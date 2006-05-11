@@ -204,6 +204,8 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 			boolean portletActions)
 		throws PortalException, SystemException {
 
+		Group group = GroupUtil.findByPrimaryKey(groupId);
+
 		List actions = null;
 
 		if (portletActions) {
@@ -220,7 +222,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 		String[] actionIds = (String[])actions.toArray(new String[0]);
 
 		List permissions = PermissionLocalServiceUtil.getPermissions(
-			actionIds, resourceId);
+			group.getCompanyId(), actionIds, resourceId);
 
 		GroupUtil.addPermissions(groupId, permissions);
 	}
@@ -229,6 +231,8 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 			String groupId, String name, String resourceId,
 			boolean portletActions)
 		throws PortalException, SystemException {
+
+		Group group = GroupUtil.findByPrimaryKey(groupId);
 
 		List actions = null;
 
@@ -244,7 +248,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 		String[] actionIds = (String[])actions.toArray(new String[0]);
 
 		List permissions = PermissionLocalServiceUtil.getPermissions(
-			actionIds, resourceId);
+			group.getCompanyId(), actionIds, resourceId);
 
 		GroupUtil.addPermissions(groupId, permissions);
 	}

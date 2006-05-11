@@ -182,65 +182,41 @@ public class EditArticleAction extends PortletAction {
 
 	protected void deleteArticles(ActionRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
-		String articleId = ParamUtil.getString(req, "articleId");
-		double version = ParamUtil.getDouble(req, "version");
 
-		if (Validator.isNotNull(articleId)) {
-			String articleURL = ParamUtil.getString(req, "articleURL");
+		String[] deleteArticleIds = StringUtil.split(
+			ParamUtil.getString(req, "deleteArticleIds"));
+
+		for (int i = 0; i < deleteArticleIds.length; i++) {
+			int pos = deleteArticleIds[i].lastIndexOf(VERSION_SEPARATOR);
+
+			String articleId = deleteArticleIds[i].substring(0, pos);
+			double version = GetterUtil.getDouble(
+				deleteArticleIds[i].substring(
+					pos + VERSION_SEPARATOR.length()));
 
 			JournalArticleServiceUtil.deleteArticle(
-				companyId, articleId, version, articleURL,
-				req.getPreferences());
+				companyId, articleId, version, null, null);
 
-			JournalUtil.removeRecentArticle(req, articleId);
-		}
-		else {
-			String[] deleteArticleIds = StringUtil.split(
-				ParamUtil.getString(req, "deleteArticleIds"));
-
-			for (int i = 0; i < deleteArticleIds.length; i++) {
-				int pos = deleteArticleIds[i].lastIndexOf(VERSION_SEPARATOR);
-
-				articleId = deleteArticleIds[i].substring(0, pos);
-				version = GetterUtil.getDouble(
-					deleteArticleIds[i].substring(
-						pos + VERSION_SEPARATOR.length()));
-
-				JournalArticleServiceUtil.deleteArticle(
-					companyId, articleId, version, null, null);
-
-				JournalUtil.removeRecentArticle(req, deleteArticleIds[i]);
-			}
+			JournalUtil.removeRecentArticle(req, deleteArticleIds[i]);
 		}
 	}
 
 	protected void expireArticles(ActionRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
-		String articleId = ParamUtil.getString(req, "articleId");
-		double version = ParamUtil.getDouble(req, "version");
 
-		if (Validator.isNotNull(articleId)) {
-			String articleURL = ParamUtil.getString(req, "articleURL");
+		String[] expireArticleIds = StringUtil.split(
+			ParamUtil.getString(req, "expireArticleIds"));
+
+		for (int i = 0; i < expireArticleIds.length; i++) {
+			int pos = expireArticleIds[i].lastIndexOf(VERSION_SEPARATOR);
+
+			String articleId = expireArticleIds[i].substring(0, pos);
+			double version = GetterUtil.getDouble(
+				expireArticleIds[i].substring(
+					pos + VERSION_SEPARATOR.length()));
 
 			JournalArticleServiceUtil.expireArticle(
-				companyId, articleId, version, articleURL,
-				req.getPreferences());
-		}
-		else {
-			String[] expireArticleIds = StringUtil.split(
-				ParamUtil.getString(req, "expireArticleIds"));
-
-			for (int i = 0; i < expireArticleIds.length; i++) {
-				int pos = expireArticleIds[i].lastIndexOf(VERSION_SEPARATOR);
-
-				articleId = expireArticleIds[i].substring(0, pos);
-				version = GetterUtil.getDouble(
-					expireArticleIds[i].substring(
-						pos + VERSION_SEPARATOR.length()));
-
-				JournalArticleServiceUtil.expireArticle(
-					companyId, articleId, version, null, null);
-			}
+				companyId, articleId, version, null, null);
 		}
 	}
 

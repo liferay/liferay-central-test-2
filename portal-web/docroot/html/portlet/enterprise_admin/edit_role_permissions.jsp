@@ -370,7 +370,10 @@ if (Validator.isNotNull(modelResource)) {
 					<select name="<portlet:namespace />scope<%= actionId %>">
 						<option value=""></option>
 						<option <%= hasCompanyScope ? "selected" : "" %> value="<%= Resource.SCOPE_COMPANY %>"><%= LanguageUtil.get(pageContext, "enterprise") %></option>
-						<option <%= hasGroupScope ? "selected" : "" %> value="<%= Resource.SCOPE_GROUP %>"><%= LanguageUtil.get(pageContext, "community") %></option>
+
+						<c:if test="<%= !portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) && !portletResource.equals(PortletKeys.PORTAL_CONFIGURATION) %>">
+							<option <%= hasGroupScope ? "selected" : "" %> value="<%= Resource.SCOPE_GROUP %>"><%= LanguageUtil.get(pageContext, "community") %></option>
+						</c:if>
 					</select>
 				</td>
 			</tr>

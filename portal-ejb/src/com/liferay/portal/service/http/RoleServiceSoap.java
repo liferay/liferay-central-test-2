@@ -63,6 +63,22 @@ public class RoleServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.RoleModel getGroupRole(
+		java.lang.String companyId, java.lang.String groupId)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.Role returnValue = RoleServiceUtil.getGroupRole(companyId,
+					groupId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static com.liferay.portal.model.RoleModel getRole(
 		java.lang.String roleId) throws RemoteException {
 		try {

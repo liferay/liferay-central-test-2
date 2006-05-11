@@ -37,4 +37,8 @@ public interface ContactLocalService {
 	public void deleteContact(java.lang.String contactId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
+
+	public void deleteContact(com.liferay.portal.model.Contact contact)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
 }

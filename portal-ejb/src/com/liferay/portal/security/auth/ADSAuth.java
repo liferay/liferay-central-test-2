@@ -170,6 +170,7 @@ public class ADSAuth implements Authenticator {
 				user = UserLocalServiceUtil.getUserById(companyId, userId);
 			}
 			catch (NoSuchUserException nsue) {
+				String creatorUserId = null;
 				boolean autoUserId = false;
 				boolean autoPassword = false;
 				String password1 = password;
@@ -188,11 +189,11 @@ public class ADSAuth implements Authenticator {
 				String locationId = null;
 
 				user = UserLocalServiceUtil.addUser(
-					companyId, autoUserId, userId, autoPassword, password1,
-					password2, passwordReset, emailAddress, locale, firstName,
-					middleName, lastName, nickName, prefixId, suffixId, male,
-					birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-					organizationId, locationId);
+					creatorUserId, companyId, autoUserId, userId, autoPassword,
+					password1, password2, passwordReset, emailAddress, locale,
+					firstName, middleName, lastName, nickName, prefixId,
+					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+					jobTitle, organizationId, locationId);
 			}
 
 			return SUCCESS;

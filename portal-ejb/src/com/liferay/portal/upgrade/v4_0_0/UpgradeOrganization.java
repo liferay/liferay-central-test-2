@@ -24,7 +24,9 @@ package com.liferay.portal.upgrade.v4_0_0;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
+import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.Constants;
@@ -77,9 +79,16 @@ public class UpgradeOrganization extends UpgradeProcess {
 						companyId, organizationId);
 				}
 				catch (NoSuchGroupException nsge) {
-					GroupLocalServiceUtil.addGroup(
-						companyId, Organization.class.getName(), organizationId,
-						null, null);
+					try {
+						User user = UserLocalServiceUtil.getDefaultUser(
+							companyId);
+
+						GroupLocalServiceUtil.addGroup(
+							user.getUserId(), Organization.class.getName(),
+							organizationId, null, null);
+					}
+					catch (Exception e) {
+					}
 				}
 			}
 		}

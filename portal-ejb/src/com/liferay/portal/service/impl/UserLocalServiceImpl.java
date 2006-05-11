@@ -69,11 +69,11 @@ import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.AddressLocalServiceUtil;
 import com.liferay.portal.service.spring.ContactLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.PasswordTrackerLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.service.spring.UserIdMapperLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalService;
 import com.liferay.portal.util.PortalInstances;
@@ -132,28 +132,28 @@ public class UserLocalServiceImpl implements UserLocalService {
 	}
 
 	public User addUser(
-			String companyId, boolean autoUserId, String userId,
-			boolean autoPassword, String password1, String password2,
-			boolean passwordReset, String emailAddress, Locale locale,
-			String firstName, String middleName, String lastName,
+			String creatorUserId, String companyId, boolean autoUserId,
+			String userId, boolean autoPassword, String password1,
+			String password2, boolean passwordReset, String emailAddress,
+			Locale locale, String firstName, String middleName, String lastName,
 			String nickName, String prefixId, String suffixId, boolean male,
 			int birthdayMonth, int birthdayDay, int birthdayYear,
 			String jobTitle, String organizationId, String locationId)
 		throws PortalException, SystemException {
 
 		return addUser(
-			companyId, autoUserId, userId, autoPassword, password1, password2,
-			passwordReset, emailAddress, locale, firstName, middleName,
-			lastName, nickName, prefixId, suffixId, male, birthdayMonth,
-			birthdayDay, birthdayYear, jobTitle, organizationId, locationId,
-			true);
+			creatorUserId, companyId, autoUserId, userId, autoPassword,
+			password1, password2, passwordReset, emailAddress, locale,
+			firstName, middleName, lastName, nickName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
+			locationId, true);
 	}
 
 	public User addUser(
-			String companyId, boolean autoUserId, String userId,
-			boolean autoPassword, String password1, String password2,
-			boolean passwordReset, String emailAddress, Locale locale,
-			String firstName, String middleName, String lastName,
+			String creatorUserId, String companyId, boolean autoUserId,
+			String userId, boolean autoPassword, String password1,
+			String password2, boolean passwordReset, String emailAddress,
+			Locale locale, String firstName, String middleName, String lastName,
 			String nickName, String prefixId, String suffixId, boolean male,
 			int birthdayMonth, int birthdayDay, int birthdayYear,
 			String jobTitle, String organizationId, String locationId,
@@ -234,6 +234,16 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		UserUtil.update(user);
 
+		// Resources
+
+		if (creatorUserId == null) {
+			creatorUserId = user.getUserId();
+		}
+
+		ResourceLocalServiceUtil.addResources(
+			companyId, null, creatorUserId, User.class.getName(),
+			user.getPrimaryKey().toString(), false, false, false);
+
 		// Mail
 
 		if (user.hasCompanyMx()) {
@@ -283,7 +293,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 		// Group
 
 		GroupLocalServiceUtil.addGroup(
-			user.getCompanyId(), User.class.getName(),
+			user.getUserId(), User.class.getName(),
 			user.getPrimaryKey().toString(), null, null);
 
 		// Default groups
@@ -450,16 +460,11 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		// Old passwords
 
-		PasswordTrackerLocalServiceUtil.deleteAll(userId);
+		PasswordTrackerLocalServiceUtil.deletePasswordTrackers(userId);
 
 		// External user ids
 
-		UserIdMapperLocalServiceUtil.deleteAll(userId);
-
-		// Addresses
-
-		AddressLocalServiceUtil.deleteAll(
-			user.getCompanyId(), User.class.getName(), userId);
+		UserIdMapperLocalServiceUtil.deleteUserIdMappers(userId);
 
 		// Address book
 

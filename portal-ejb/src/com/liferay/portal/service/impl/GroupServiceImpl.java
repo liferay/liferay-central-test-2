@@ -25,6 +25,8 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.permission.PortalPermission;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupService;
 
@@ -38,12 +40,14 @@ import java.util.List;
  */
 public class GroupServiceImpl extends PrincipalBean implements GroupService {
 
-	public Group addGroup(
-			String className, String classPK, String name, String friendlyURL)
+	public Group addGroup(String name, String friendlyURL)
 		throws PortalException, SystemException {
 
+		PortalPermission.check(
+			getPermissionChecker(), ActionKeys.ADD_COMMUNITY);
+
 		return GroupLocalServiceUtil.addGroup(
-			getUser().getCompanyId(), className, classPK, name, friendlyURL);
+			getUserId(), null, null, name, friendlyURL);
 	}
 
 	public boolean addRoleGroups(String roleId, String[] groupIds)

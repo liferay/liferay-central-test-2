@@ -48,9 +48,7 @@ import java.util.Iterator;
 public class PasswordTrackerLocalServiceImpl
 	implements PasswordTrackerLocalService {
 
-	// Business methods
-
-	public void deleteAll(String userId) throws SystemException {
+	public void deletePasswordTrackers(String userId) throws SystemException {
 		PasswordTrackerUtil.removeByUserId(userId);
 	}
 

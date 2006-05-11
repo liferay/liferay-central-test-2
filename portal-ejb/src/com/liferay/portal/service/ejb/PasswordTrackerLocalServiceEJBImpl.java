@@ -48,9 +48,9 @@ public class PasswordTrackerLocalServiceEJBImpl
 		return (PasswordTrackerLocalService)ctx.getBean(CLASS_NAME);
 	}
 
-	public void deleteAll(java.lang.String userId)
+	public void deletePasswordTrackers(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
-		getService().deleteAll(userId);
+		getService().deletePasswordTrackers(userId);
 	}
 
 	public boolean isValidPassword(java.lang.String userId,

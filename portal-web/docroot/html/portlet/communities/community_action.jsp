@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
+String tabs1 = ParamUtil.getString(request, "tabs1", "current");
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 Group group = (Group)row.getObject();
@@ -49,6 +51,17 @@ Group group = (Group)row.getObject();
 	/>
 
 	<liferay-ui:icon image="permissions" url="<%= portletURL %>" />
+</c:if>
+
+<c:if test="<%= GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.DELEGATE) %>">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+		<portlet:param name="struts_action" value="/communities/edit_user_permissions" />
+		<portlet:param name="tabs1" value="<%= tabs1 %>" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="groupId" value="<%= group.getGroupId() %>" />
+	</portlet:renderURL>
+
+	<liferay-ui:icon image="delegate" url="<%= portletURL %>" />
 </c:if>
 
 <c:if test="<%= GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">

@@ -324,6 +324,9 @@ create table Resource_ (
 	primKey VARCHAR(200) null
 );
 
+alter table Role_ add className VARCHAR(75) null;
+alter table Role_ add classPK VARCHAR(75) null;
+
 create table Roles_Permissions (
 	roleId VARCHAR(75) not null,
 	permissionId VARCHAR(75) not null

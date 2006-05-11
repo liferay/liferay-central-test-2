@@ -48,14 +48,13 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 		return (GroupService)ctx.getBean(CLASS_NAME);
 	}
 
-	public com.liferay.portal.model.Group addGroup(java.lang.String className,
-		java.lang.String classPK, java.lang.String name,
+	public com.liferay.portal.model.Group addGroup(java.lang.String name,
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addGroup(className, classPK, name, friendlyURL);
+		return getService().addGroup(name, friendlyURL);
 	}
 
 	public boolean addRoleGroups(java.lang.String roleId,

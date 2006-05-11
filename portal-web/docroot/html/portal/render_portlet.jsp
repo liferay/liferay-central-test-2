@@ -64,6 +64,9 @@ catch (NoSuchResourceException nsre) {
 		else if (portletId.equals(PortletKeys.MY_PLACES)) {
 			addDefaultResource = true;
 		}
+		else if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
+			addDefaultResource = true;
+		}
 	}
 
 	if (addDefaultResource) {

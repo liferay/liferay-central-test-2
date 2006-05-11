@@ -61,7 +61,12 @@ for (int i = 0; i < results.size(); i++) {
 	row.addText(LanguageUtil.get(pageContext, website.isPrimary() ? "yes" : "no"));
 
 	if (editable) {
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/website_action.jsp");
+		if (className.equals(website.getClassName())) {
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/website_action.jsp");
+		}
+		else {
+			row.addText(StringPool.BLANK);
+		}
 	}
 
 	resultRows.add(row);

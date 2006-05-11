@@ -79,7 +79,8 @@ public class OrgLaborServiceEJBImpl implements OrgLaborService, SessionBean {
 	}
 
 	public java.util.List getOrgLabors(java.lang.String organizationId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return getService().getOrgLabors(organizationId);

@@ -153,23 +153,15 @@ public class EditTemplateAction extends PortletAction {
 
 	protected void deleteTemplates(ActionRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
-		String templateId = ParamUtil.getString(req, "templateId");
 
-		if (Validator.isNotNull(templateId)) {
-			JournalTemplateServiceUtil.deleteTemplate(companyId, templateId);
+		String[] deleteTemplateIds = StringUtil.split(
+			ParamUtil.getString(req, "deleteTemplateIds"));
 
-			JournalUtil.removeRecentTemplate(req, templateId);
-		}
-		else {
-			String[] deleteTemplateIds = StringUtil.split(
-				ParamUtil.getString(req, "deleteTemplateIds"));
+		for (int i = 0; i < deleteTemplateIds.length; i++) {
+			JournalTemplateServiceUtil.deleteTemplate(
+				companyId, deleteTemplateIds[i]);
 
-			for (int i = 0; i < deleteTemplateIds.length; i++) {
-				JournalTemplateServiceUtil.deleteTemplate(
-					companyId, deleteTemplateIds[i]);
-
-				JournalUtil.removeRecentTemplate(req, deleteTemplateIds[i]);
-			}
+			JournalUtil.removeRecentTemplate(req, deleteTemplateIds[i]);
 		}
 	}
 

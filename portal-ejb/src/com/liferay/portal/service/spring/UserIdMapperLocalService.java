@@ -29,7 +29,7 @@ package com.liferay.portal.service.spring;
  *
  */
 public interface UserIdMapperLocalService {
-	public void deleteAll(java.lang.String userId)
+	public void deleteUserIdMappers(java.lang.String userId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserIdMapper getUserIdMapper(

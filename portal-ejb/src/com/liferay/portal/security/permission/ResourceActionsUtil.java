@@ -29,6 +29,7 @@ import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.spring.PortletServiceUtil;
 import com.liferay.portal.shared.util.StackTraceUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.StringUtil;
@@ -327,36 +328,44 @@ public class ResourceActionsUtil {
 			synchronized (this) {
 				actions.clear();
 
-				Portlet portlet =
-					PortletServiceUtil.getPortletById(companyId, name);
+				if (name.equals(PortletKeys.PORTAL_CONFIGURATION)) {
+					actions.add(ActionKeys.ADD_COMMUNITY);
+					actions.add(ActionKeys.ADD_ORGANIZATION);
+					actions.add(ActionKeys.ADD_ROLE);
+				}
+				else {
+					Portlet portlet =
+						PortletServiceUtil.getPortletById(companyId, name);
 
-				Map portletModes = portlet.getPortletModes();
+					Map portletModes = portlet.getPortletModes();
 
-				Set mimeTypeModes = (Set)portletModes.get("text/html");
+					Set mimeTypeModes = (Set)portletModes.get("text/html");
 
-				if (mimeTypeModes != null) {
-					Iterator itr = mimeTypeModes.iterator();
+					if (mimeTypeModes != null) {
+						Iterator itr = mimeTypeModes.iterator();
 
-					while (itr.hasNext()) {
-						String actionId = (String)itr.next();
+						while (itr.hasNext()) {
+							String actionId = (String)itr.next();
 
-						if (actionId.equalsIgnoreCase("edit")) {
-							actions.add(ActionKeys.PREFERENCES);
-						}
-						else {
-							actions.add(actionId.toUpperCase());
+							if (actionId.equalsIgnoreCase("edit")) {
+								actions.add(ActionKeys.PREFERENCES);
+							}
+							else {
+								actions.add(actionId.toUpperCase());
+							}
 						}
 					}
+
+					_checkPortletActions(actions);
+
+					List communityDefaultActions = _getActions(
+						_portletResourceCommunityDefaultActions, name);
+
+					communityDefaultActions.clear();
+
+					_checkPortletCommunityDefaultActions(
+						communityDefaultActions);
 				}
-
-				_checkPortletActions(actions);
-
-				List communityDefaultActions =
-					_getActions(_portletResourceCommunityDefaultActions, name);
-
-				communityDefaultActions.clear();
-
-				_checkPortletCommunityDefaultActions(communityDefaultActions);
 			}
 		}
 

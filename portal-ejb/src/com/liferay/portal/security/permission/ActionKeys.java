@@ -35,6 +35,8 @@ public class ActionKeys {
 
 	public static final String ADD_CATEGORY = "ADD_CATEGORY";
 
+	public static final String ADD_COMMUNITY = "ADD_COMMUNITY";
+
 	public static final String ADD_COUPON = "ADD_COUPON";
 
 	public static final String ADD_DISCUSSION = "ADD_DISCUSSION";
@@ -51,9 +53,13 @@ public class ActionKeys {
 
 	public static final String ADD_ITEM = "ADD_ITEM";
 
+	public static final String ADD_LOCATION = "ADD_LOCATION";
+
 	public static final String ADD_MESSAGE = "ADD_MESSAGE";
 
 	public static final String ADD_NODE = "ADD_NODE";
+
+	public static final String ADD_ORGANIZATION = "ADD_ORGANIZATION";
 
 	public static final String ADD_PAGE = "ADD_PAGE";
 
@@ -61,11 +67,15 @@ public class ActionKeys {
 
 	public static final String ADD_REPOSITORY = "ADD_REPOSITORY";
 
+	public static final String ADD_ROLE = "ADD_ROLE";
+
 	public static final String ADD_STRUCTURE = "ADD_STRUCTURE";
 
 	public static final String ADD_TEMPLATE = "ADD_TEMPLATE";
 
 	public static final String ADD_TOPIC = "ADD_TOPIC";
+
+	public static final String ADD_USER = "ADD_USER";
 
 	public static final String ADD_VOTE = "ADD_VOTE";
 
@@ -75,9 +85,13 @@ public class ActionKeys {
 
 	public static final String CONFIGURATION = "CONFIGURATION";
 
+	public static final String DELEGATE = "DELEGATE";
+
 	public static final String DELETE = "DELETE";
 
 	public static final String DELETE_DISCUSSION = "DELETE_DISCUSSION";
+
+	public static final String DELETE_USER = "DELETE_USER";
 
 	public static final String EXPIRE = "EXPIRE";
 
@@ -89,6 +103,8 @@ public class ActionKeys {
 
 	public static final String PERMISSIONS = "PERMISSIONS";
 
+	public static final String PERMISSIONS_USER = "PERMISSIONS_USER";
+
 	public static final String PREFERENCES = "PREFERENCES";
 
 	public static final String SUBSCRIBE = "SUBSCRIBE";
@@ -97,6 +113,10 @@ public class ActionKeys {
 
 	public static final String UPDATE_DISCUSSION = "UPDATE_DISCUSSION";
 
+	public static final String UPDATE_USER = "UPDATE_USER";
+
 	public static final String VIEW = "VIEW";
+
+	public static final String VIEW_USER = "VIEW_USER";
 
 }

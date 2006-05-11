@@ -380,6 +380,8 @@
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" />
+		<property name="className" />
+		<property name="classPK" />
 		<property name="name" />
 		<set name="groups" table="Groups_Roles" lazy="true">
 			<key column="roleId" />

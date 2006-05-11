@@ -43,9 +43,14 @@ public interface AddressLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
-	public void deleteAll(java.lang.String companyId,
+	public void deleteAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Address getAddress(
+		java.lang.String addressId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
 
 	public java.util.List getAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)

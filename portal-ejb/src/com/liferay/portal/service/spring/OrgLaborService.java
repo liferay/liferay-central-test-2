@@ -47,7 +47,8 @@ public interface OrgLaborService {
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public java.util.List getOrgLabors(java.lang.String organizationId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public com.liferay.portal.model.OrgLabor updateOrgLabor(
 		java.lang.String orgLaborId, int sunOpen, int sunClose, int monOpen,

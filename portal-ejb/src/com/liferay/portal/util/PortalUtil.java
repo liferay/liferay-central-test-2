@@ -24,6 +24,7 @@ package com.liferay.portal.util;
 
 import com.germinus.easyconf.Filter;
 
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.language.LanguageException;
@@ -39,6 +40,7 @@ import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.service.spring.UserServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -667,28 +669,34 @@ public class PortalUtil {
 		return recipients;
 	}
 
-	public static User getSelectedUser(HttpServletRequest req) {
+	public static User getSelectedUser(HttpServletRequest req)
+		throws PortalException, SystemException {
+
 		String emailAddress = ParamUtil.getString(req, "p_u_e_a");
 
 		User user = null;
 
 		try {
-			user = UserLocalServiceUtil.getUserByEmailAddress(
+			user = UserServiceUtil.getUserByEmailAddress(
 				getCompanyId(req), emailAddress);
 		}
-		catch (Exception e) {
+		catch (NoSuchUserException nsue) {
 		}
 
 		return user;
 	}
 
-	public static User getSelectedUser(ActionRequest req) {
+	public static User getSelectedUser(ActionRequest req)
+		throws PortalException, SystemException {
+
 		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
 
 		return getSelectedUser(reqImpl.getHttpServletRequest());
 	}
 
-	public static User getSelectedUser(RenderRequest req) {
+	public static User getSelectedUser(RenderRequest req)
+		throws PortalException, SystemException {
+
 		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
 
 		return getSelectedUser(reqImpl.getHttpServletRequest());

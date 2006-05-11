@@ -24,6 +24,59 @@
 		</guest-unsupported>
 	</model-resource>
 	<model-resource>
+		<model-name>com.liferay.portal.model.Location</model-name>
+		<portlet-ref>
+			<portlet-name>79</portlet-name>
+		</portlet-ref>
+		<supports>
+			<action-key>ADD_USER</action-key>
+			<action-key>DELETE</action-key>
+			<action-key>DELETE_USER</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>PERMISSIONS_USER</action-key>			
+			<action-key>UPDATE</action-key>
+			<action-key>UPDATE_USER</action-key>
+			<action-key>VIEW</action-key>
+			<action-key>VIEW_USER</action-key>
+		</supports>
+		<community-defaults>
+			<action-key>VIEW</action-key>
+			<action-key>VIEW_USER</action-key>
+		</community-defaults>
+		<guest-defaults>
+			<action-key>VIEW</action-key>
+		</guest-defaults>
+		<guest-unsupported>
+		</guest-unsupported>
+	</model-resource>
+	<model-resource>
+		<model-name>com.liferay.portal.model.Organization</model-name>
+		<portlet-ref>
+			<portlet-name>79</portlet-name>
+		</portlet-ref>
+		<supports>
+			<action-key>ADD_LOCATION</action-key>
+			<action-key>ADD_USER</action-key>
+			<action-key>DELETE</action-key>
+			<action-key>DELETE_USER</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>PERMISSIONS_USER</action-key>			
+			<action-key>UPDATE</action-key>
+			<action-key>UPDATE_USER</action-key>
+			<action-key>VIEW</action-key>
+			<action-key>VIEW_USER</action-key>
+		</supports>
+		<community-defaults>
+			<action-key>VIEW</action-key>
+			<action-key>VIEW_USER</action-key>
+		</community-defaults>
+		<guest-defaults>
+			<action-key>VIEW</action-key>
+		</guest-defaults>
+		<guest-unsupported>
+		</guest-unsupported>
+	</model-resource>
+	<model-resource>
 		<model-name>com.liferay.portal.model.User</model-name>
 		<portlet-ref>
 			<portlet-name>79</portlet-name>

@@ -29,7 +29,7 @@ package com.liferay.portal.service.spring;
  *
  */
 public interface GroupLocalService {
-	public com.liferay.portal.model.Group addGroup(java.lang.String companyId,
+	public com.liferay.portal.model.Group addGroup(java.lang.String userId,
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String name, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 

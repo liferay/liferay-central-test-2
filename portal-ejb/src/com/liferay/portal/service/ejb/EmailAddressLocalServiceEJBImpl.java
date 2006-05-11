@@ -64,10 +64,17 @@ public class EmailAddressLocalServiceEJBImpl implements EmailAddressLocalService
 		getService().deleteEmailAddress(emailAddressId);
 	}
 
-	public void deleteAll(java.lang.String companyId,
+	public void deleteEmailAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		getService().deleteAll(companyId, className, classPK);
+		getService().deleteEmailAddresses(companyId, className, classPK);
+	}
+
+	public com.liferay.portal.model.EmailAddress getEmailAddress(
+		java.lang.String emailAddressId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().getEmailAddress(emailAddressId);
 	}
 
 	public java.util.List getEmailAddresses(java.lang.String companyId,

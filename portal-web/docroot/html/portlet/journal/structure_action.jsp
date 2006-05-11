@@ -92,7 +92,7 @@ JournalStructure structure = (JournalStructure)row.getObject();
 		<portlet:param name="struts_action" value="/journal/edit_structure" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="structureId" value="<%= structure.getStructureId() %>" />
+		<portlet:param name="deleteStructureIds" value="<%= structure.getStructureId() %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= portletURL %>" />

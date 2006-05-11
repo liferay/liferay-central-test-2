@@ -72,8 +72,7 @@ JournalArticle article = (JournalArticle)row.getObject();
 		<portlet:param name="struts_action" value="/journal/edit_article" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="articleId" value="<%= article.getArticleId() %>" />
-		<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
+		<portlet:param name="deleteArticleIds" value="<%= article.getArticleId() + EditArticleAction.VERSION_SEPARATOR + article.getVersion() %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= portletURL %>" />

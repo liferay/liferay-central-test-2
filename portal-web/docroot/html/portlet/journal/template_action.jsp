@@ -85,7 +85,7 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 		<portlet:param name="struts_action" value="/journal/edit_template" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="templateId" value="<%= template.getTemplateId() %>" />
+		<portlet:param name="deleteTemplateIds" value="<%= template.getTemplateId() %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= portletURL %>" />

@@ -25,6 +25,8 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.permission.PortalPermission;
 import com.liferay.portal.service.spring.RoleLocalServiceUtil;
 import com.liferay.portal.service.spring.RoleService;
 
@@ -38,18 +40,22 @@ import java.util.List;
  */
 public class RoleServiceImpl extends PrincipalBean implements RoleService {
 
-	public Role addRole(String name)
-		throws PortalException, SystemException {
+	public Role addRole(String name) throws PortalException, SystemException {
+		PortalPermission.check(getPermissionChecker(), ActionKeys.ADD_ROLE);
 
-		String companyId = getUser().getCompanyId();
-
-		return RoleLocalServiceUtil.addRole(companyId, name);
+		return RoleLocalServiceUtil.addRole(getUser().getCompanyId(), name);
 	}
 
 	public void deleteRole(String roleId)
 		throws PortalException, SystemException {
 
 		RoleLocalServiceUtil.deleteRole(roleId);
+	}
+
+	public Role getGroupRole(String companyId, String groupId)
+		throws PortalException, SystemException {
+
+		return RoleLocalServiceUtil.getGroupRole(companyId, groupId);
 	}
 
 	public Role getRole(String roleId)

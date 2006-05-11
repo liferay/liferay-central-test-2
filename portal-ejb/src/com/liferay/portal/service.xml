@@ -537,7 +537,7 @@
 			<finder-column name="roleId" />
 		</finder>
 	</entity>
-	<entity name="OrgLabor" local-service="false" remote-service="true">
+	<entity name="OrgLabor" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -634,7 +634,7 @@
 			<finder-column name="resourceId" />
 		</finder>
 	</entity>
-	<entity name="Phone" local-service="false" remote-service="true">
+	<entity name="Phone" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -845,6 +845,8 @@
 
 		<!-- Other fields -->
 
+		<column name="className" type="String" />
+		<column name="classPK" type="String" />
 		<column name="name" type="String" />
 
 		<!-- Relationships -->
@@ -863,6 +865,11 @@
 
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
+		</finder>
+		<finder name="C_C_C" return-type="Role">
+			<finder-column name="companyId" />
+			<finder-column name="className" />
+			<finder-column name="classPK" />
 		</finder>
 	</entity>
 	<entity name="Subscription" local-service="true" remote-service="false">
@@ -1031,7 +1038,7 @@
 			<finder-column name="userTrackerId" />
 		</finder>
 	</entity>
-	<entity name="Website" local-service="false" remote-service="true">
+	<entity name="Website" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 

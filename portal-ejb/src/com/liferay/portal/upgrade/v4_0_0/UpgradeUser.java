@@ -134,7 +134,7 @@ public class UpgradeUser extends UpgradeProcess {
 				List addresses = AddressLocalServiceUtil.getAddresses(
 					companyId, User.class.getName(), userId);
 
-				AddressLocalServiceUtil.deleteAll(
+				AddressLocalServiceUtil.deleteAddresses(
 					companyId, User.class.getName(), userId);
 
 				for (int i = 0; i < addresses.size(); i++) {

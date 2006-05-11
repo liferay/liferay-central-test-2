@@ -22,13 +22,16 @@
 
 package com.liferay.portal.security.permission;
 
+import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchResourceException;
+import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupServiceUtil;
 import com.liferay.portal.service.spring.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.spring.PermissionServiceUtil;
@@ -283,11 +286,11 @@ public class PermissionChecker {
 	protected boolean isAdmin(String companyId, String groupId, String name)
 		throws PortalException, SystemException {
 
-		Role adminRole = RoleServiceUtil.getRole(companyId, Role.ADMINISTRATOR);
+		if (isCompanyAdmin(companyId, groupId, name)) {
+			return true;
+		}
 
-		if (UserServiceUtil.hasRoleUser(
-				adminRole.getRoleId(), user.getUserId())) {
-
+		if (isCommunityAdmin(companyId, groupId, name)) {
 			return true;
 		}
 
@@ -296,6 +299,52 @@ public class PermissionChecker {
 		// would then allow you to set up Admins scoped for a specific portlet.
 
 		return false;
+	}
+
+	protected boolean isCommunityAdmin(
+			String companyId, String groupId, String name)
+		throws PortalException, SystemException {
+
+		if (groupId == null) {
+			return false;
+		}
+
+		try {
+			Role communityAdminRole = RoleServiceUtil.getGroupRole(
+				companyId, groupId);
+
+			if (UserServiceUtil.hasRoleUser(
+					communityAdminRole.getRoleId(), user.getUserId())) {
+
+				return true;
+			}
+		}
+		catch (NoSuchRoleException nsre) {
+		}
+
+		try {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			if (group.getClassName().equals(User.class.getName()) &&
+				group.getClassPK().equals(user.getUserId())) {
+
+				return true;
+			}
+		}
+		catch (NoSuchGroupException nsge) {
+		}
+
+		return false;
+	}
+
+	protected boolean isCompanyAdmin(
+			String companyId, String groupId, String name)
+		throws PortalException, SystemException {
+
+		Role adminRole = RoleServiceUtil.getRole(companyId, Role.ADMINISTRATOR);
+
+		return UserServiceUtil.hasRoleUser(
+			adminRole.getRoleId(), user.getUserId());
 	}
 
 	protected static final String RESULTS_SEPARATOR = "_RESULTS_SEPARATOR_";

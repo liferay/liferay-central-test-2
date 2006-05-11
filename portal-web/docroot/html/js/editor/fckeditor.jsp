@@ -60,7 +60,8 @@ String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METH
 	fckEditor.Config["CustomConfigurationsPath"] = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>";
 
 	fckEditor.BasePath = "fckeditor/";
-	fckEditor.Value = decodeURIComponent(parent.<%= initMethod %>());
+	//fckEditor.Value = decodeURIComponent(parent.<%= initMethod %>());
+	fckEditor.Value = parent.<%= initMethod %>();
 	fckEditor.Width = "100%";
 	fckEditor.Height = "100%";
 	fckEditor.ToolbarSet = "Liferay";

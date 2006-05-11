@@ -61,6 +61,12 @@ public class ContactLocalServiceEJBImpl implements ContactLocalService,
 		getService().deleteContact(contactId);
 	}
 
+	public void deleteContact(com.liferay.portal.model.Contact contact)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().deleteContact(contact);
+	}
+
 	public void ejbCreate() throws CreateException {
 	}
 

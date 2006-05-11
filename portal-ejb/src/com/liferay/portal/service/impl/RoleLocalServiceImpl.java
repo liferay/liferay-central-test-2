@@ -29,6 +29,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.RoleNameException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RoleUtil;
@@ -51,6 +52,13 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 	public Role addRole(String companyId, String name)
 		throws PortalException, SystemException {
 
+		return addRole(companyId, name, null, null);
+	}
+
+	public Role addRole(
+			String companyId, String name, String className, String classPK)
+		throws PortalException, SystemException {
+
 		validate(null, companyId, name);
 
 		String roleId = Long.toString(CounterServiceUtil.increment(
@@ -60,6 +68,8 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 
 		role.setCompanyId(companyId);
 		role.setName(name);
+		role.setClassName(className);
+		role.setClassPK(classPK);
 
 		RoleUtil.update(role);
 
@@ -91,6 +101,12 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 		}
 
 		RoleUtil.remove(roleId);
+	}
+
+	public Role getGroupRole(String companyId, String groupId)
+		throws PortalException, SystemException {
+
+		return RoleUtil.findByC_C_C(companyId, Group.class.getName(), groupId);
 	}
 
 	public Role getRole(String roleId) throws PortalException, SystemException {

@@ -30,9 +30,14 @@ package com.liferay.portal.service.spring;
  */
 public interface OrganizationLocalService {
 	public com.liferay.portal.model.Organization addOrganization(
-		java.lang.String companyId, java.lang.String parentOrganizationId,
+		java.lang.String userId, java.lang.String parentOrganizationId,
 		java.lang.String name, java.lang.String regionId,
 		java.lang.String countryId, java.lang.String statusId, boolean location)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public void addOrganizationResources(java.lang.String userId,
+		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 

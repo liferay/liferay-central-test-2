@@ -101,11 +101,13 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Action
 
-	if (editable && className.equals(address.getClassName())) {
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/address_action.jsp");
-	}
-	else {
-		row.addText(StringPool.BLANK);
+	if (editable) {
+		if (className.equals(address.getClassName())) {
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/address_action.jsp");
+		}
+		else {
+			row.addText(StringPool.BLANK);
+		}
 	}
 
 	// Add result row

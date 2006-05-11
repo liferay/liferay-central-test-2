@@ -22,17 +22,18 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.OrgLabor;
-import com.liferay.portal.model.User;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.permission.LocationPermission;
+import com.liferay.portal.service.permission.OrganizationPermission;
 import com.liferay.portal.service.persistence.OrgLaborUtil;
-import com.liferay.portal.service.spring.ListTypeServiceUtil;
+import com.liferay.portal.service.persistence.OrganizationUtil;
+import com.liferay.portal.service.spring.OrgLaborLocalServiceUtil;
 import com.liferay.portal.service.spring.OrgLaborService;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,8 +45,6 @@ import java.util.List;
 public class OrgLaborServiceImpl
 	extends PrincipalBean implements OrgLaborService {
 
-	// Business methods
-
 	public OrgLabor addOrgLabor(
 			String organizationId, String typeId, int sunOpen, int sunClose,
 			int monOpen, int monClose, int tueOpen, int tueClose, int wedOpen,
@@ -53,53 +52,40 @@ public class OrgLaborServiceImpl
 			int satOpen, int satClose)
 		throws PortalException, SystemException {
 
-		User user = getUser();
+		checkPermission(organizationId, ActionKeys.UPDATE);
 
-		_validate(typeId);
-
-		String orgLaborId = Long.toString(CounterServiceUtil.increment(
-			OrgLabor.class.getName()));
-
-		OrgLabor orgLabor = OrgLaborUtil.create(orgLaborId);
-
-		Date now = new Date();
-
-		orgLabor.setOrganizationId(organizationId);
-		orgLabor.setTypeId(typeId);
-		orgLabor.setSunOpen(sunOpen);
-		orgLabor.setSunClose(sunClose);
-		orgLabor.setMonOpen(monOpen);
-		orgLabor.setMonClose(monClose);
-		orgLabor.setTueOpen(tueOpen);
-		orgLabor.setTueClose(tueClose);
-		orgLabor.setWedOpen(wedOpen);
-		orgLabor.setWedClose(wedClose);
-		orgLabor.setThuOpen(thuOpen);
-		orgLabor.setThuClose(thuClose);
-		orgLabor.setFriOpen(friOpen);
-		orgLabor.setFriClose(friClose);
-		orgLabor.setSatOpen(satOpen);
-		orgLabor.setSatClose(satClose);
-
-		OrgLaborUtil.update(orgLabor);
-
-		return orgLabor;
+		return OrgLaborLocalServiceUtil.addOrgLabor(
+			organizationId, typeId, sunOpen, sunClose, monOpen, monClose,
+			tueOpen, tueClose, wedOpen, wedClose, thuOpen, thuClose, friOpen,
+			friClose, satOpen, satClose);
 	}
 
 	public void deleteOrgLabor(String orgLaborId)
 		throws PortalException, SystemException {
 
-		OrgLaborUtil.remove(orgLaborId);
+		OrgLabor orgLabor = OrgLaborUtil.findByPrimaryKey(orgLaborId);
+
+		checkPermission(orgLabor.getOrganizationId(), ActionKeys.UPDATE);
+
+		OrgLaborLocalServiceUtil.deleteOrgLabor(orgLaborId);
 	}
 
 	public OrgLabor getOrgLabor(String orgLaborId)
 		throws PortalException, SystemException {
 
-		return OrgLaborUtil.findByPrimaryKey(orgLaborId);
+		OrgLabor orgLabor = OrgLaborUtil.findByPrimaryKey(orgLaborId);
+
+		checkPermission(orgLabor.getOrganizationId(), ActionKeys.VIEW);
+
+		return orgLabor;
 	}
 
-	public List getOrgLabors(String organizationId) throws SystemException {
-		return OrgLaborUtil.findByOrganizationId(organizationId);
+	public List getOrgLabors(String organizationId)
+		throws PortalException, SystemException {
+
+		checkPermission(organizationId, ActionKeys.VIEW);
+
+		return OrgLaborLocalServiceUtil.getOrgLabors(organizationId);
 	}
 
 	public OrgLabor updateOrgLabor(
@@ -111,30 +97,28 @@ public class OrgLaborServiceImpl
 
 		OrgLabor orgLabor = OrgLaborUtil.findByPrimaryKey(orgLaborId);
 
-		orgLabor.setSunOpen(sunOpen);
-		orgLabor.setSunClose(sunClose);
-		orgLabor.setMonOpen(monOpen);
-		orgLabor.setMonClose(monClose);
-		orgLabor.setTueOpen(tueOpen);
-		orgLabor.setTueClose(tueClose);
-		orgLabor.setWedOpen(wedOpen);
-		orgLabor.setWedClose(wedClose);
-		orgLabor.setThuOpen(thuOpen);
-		orgLabor.setThuClose(thuClose);
-		orgLabor.setFriOpen(friOpen);
-		orgLabor.setFriClose(friClose);
-		orgLabor.setSatOpen(satOpen);
-		orgLabor.setSatClose(satClose);
+		checkPermission(orgLabor.getOrganizationId(), ActionKeys.UPDATE);
 
-		OrgLaborUtil.update(orgLabor);
-
-		return orgLabor;
+		return OrgLaborLocalServiceUtil.updateOrgLabor(
+			orgLaborId, sunOpen, sunClose, monOpen, monClose, tueOpen, tueClose,
+			wedOpen, wedClose, thuOpen, thuClose, friOpen, friClose, satOpen,
+			satClose);
 	}
 
-	private void _validate(String typeId)
+	protected void checkPermission(String organizationId, String actionId)
 		throws PortalException, SystemException {
 
-		ListTypeServiceUtil.validate(typeId, ListType.ORGANIZATION_SERVICE);
+		Organization organization =
+			OrganizationUtil.findByPrimaryKey(organizationId);
+
+		if (organization.isRoot()) {
+			OrganizationPermission.check(
+				getPermissionChecker(), organizationId, actionId);
+		}
+		else {
+			LocationPermission.check(
+				getPermissionChecker(), organizationId, actionId);
+		}
 	}
 
 }

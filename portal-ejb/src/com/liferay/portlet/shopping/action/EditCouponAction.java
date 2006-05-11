@@ -40,7 +40,6 @@ import com.liferay.portlet.shopping.NoSuchCouponException;
 import com.liferay.portlet.shopping.service.spring.ShoppingCouponServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.util.Calendar;
@@ -75,7 +74,7 @@ public class EditCouponAction extends PortletAction {
 				updateCoupon(req);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteCoupon(req);
+				deleteCoupons(req);
 			}
 
 			sendRedirect(req, res);
@@ -150,21 +149,15 @@ public class EditCouponAction extends PortletAction {
 			getForward(req, "portlet.shopping.edit_coupon"));
 	}
 
-	protected void deleteCoupon(ActionRequest req) throws Exception {
+	protected void deleteCoupons(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
-		String couponId = ParamUtil.getString(req, "couponId");
 
-		if (Validator.isNotNull(couponId)) {
-			ShoppingCouponServiceUtil.deleteCoupon(layout.getPlid(), couponId);
-		}
-		else {
-			String[] deleteCouponIds = StringUtil.split(
-				ParamUtil.getString(req, "deleteCouponIds"));
+		String[] deleteCouponIds = StringUtil.split(
+			ParamUtil.getString(req, "deleteCouponIds"));
 
-			for (int i = 0; i < deleteCouponIds.length; i++) {
-				ShoppingCouponServiceUtil.deleteCoupon(
-					layout.getPlid(), deleteCouponIds[i]);
-			}
+		for (int i = 0; i < deleteCouponIds.length; i++) {
+			ShoppingCouponServiceUtil.deleteCoupon(
+				layout.getPlid(), deleteCouponIds[i]);
 		}
 	}
 

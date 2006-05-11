@@ -100,6 +100,10 @@
 			<bean-home-name>com_liferay_portal_service_ejb_OrganizationServiceEJB</bean-home-name>
 		</session>
 		<session>
+			<ejb-name>com_liferay_portal_service_ejb_OrgLaborLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/OrgLaborLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
 			<ejb-name>com_liferay_portal_service_ejb_OrgLaborServiceEJB</ejb-name>
 			<bean-home-name>com_liferay_portal_service_ejb_OrgLaborServiceEJB</bean-home-name>
 		</session>
@@ -114,6 +118,10 @@
 		<session>
 			<ejb-name>com_liferay_portal_service_ejb_PermissionServiceEJB</ejb-name>
 			<bean-home-name>com_liferay_portal_service_ejb_PermissionServiceEJB</bean-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portal_service_ejb_PhoneLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/PhoneLocalServiceHome</bean-local-home-name>
 		</session>
 		<session>
 			<ejb-name>com_liferay_portal_service_ejb_PhoneServiceEJB</ejb-name>
@@ -194,6 +202,10 @@
 		<session>
 			<ejb-name>com_liferay_portal_service_ejb_UserTrackerPathServiceEJB</ejb-name>
 			<bean-home-name>com_liferay_portal_service_ejb_UserTrackerPathServiceEJB</bean-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/WebsiteLocalServiceHome</bean-local-home-name>
 		</session>
 		<session>
 			<ejb-name>com_liferay_portal_service_ejb_WebsiteServiceEJB</ejb-name>

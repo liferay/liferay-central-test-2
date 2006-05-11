@@ -27,6 +27,7 @@ import com.liferay.portal.DuplicateGroupException;
 import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.SystemException;
@@ -35,6 +36,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupUtil;
@@ -43,6 +45,8 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.GroupLocalService;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.spring.RoleLocalServiceUtil;
+import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.service.spring.BlogsEntryLocalServiceUtil;
@@ -72,15 +76,19 @@ import java.util.Map;
 public class GroupLocalServiceImpl implements GroupLocalService {
 
 	public Group addGroup(
-			String companyId, String className, String classPK, String name,
+			String userId, String className, String classPK, String name,
 			String friendlyURL)
 		throws PortalException, SystemException {
 
+		// Group
+
+		User user = UserUtil.findByPrimaryKey(userId);
+
 		if (Validator.isNull(className) || Validator.isNull(classPK)) {
-			validateName(null, companyId, name);
+			validateName(null, user.getCompanyId(), name);
 		}
 
-		validateFriendlyURL(null, companyId, friendlyURL);
+		validateFriendlyURL(null, user.getCompanyId(), friendlyURL);
 
 		String groupId = Long.toString(CounterServiceUtil.increment(
 			Group.class.getName()));
@@ -91,7 +99,7 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 
 		Group group = GroupUtil.create(groupId);
 
-		group.setCompanyId(companyId);
+		group.setCompanyId(user.getCompanyId());
 		group.setClassName(className);
 		group.setClassPK(classPK);
 		group.setParentGroupId(Group.DEFAULT_PARENT_GROUP_ID);
@@ -100,11 +108,30 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 
 		GroupUtil.update(group);
 
-		LayoutSetLocalServiceUtil.addLayoutSet(
-			Layout.PRIVATE + groupId, companyId);
+		// Layout sets
 
 		LayoutSetLocalServiceUtil.addLayoutSet(
-			Layout.PUBLIC + groupId, companyId);
+			Layout.PRIVATE + groupId, user.getCompanyId());
+
+		LayoutSetLocalServiceUtil.addLayoutSet(
+			Layout.PUBLIC + groupId, user.getCompanyId());
+
+		if (Validator.isNull(className) && Validator.isNull(classPK)) {
+
+			// Role
+
+			Role role = RoleLocalServiceUtil.addRole(
+				user.getCompanyId(), "GROUP_" + groupId + "_ADMINISTRATOR",
+					Group.class.getName(), groupId);
+
+			UserLocalServiceUtil.addRoleUsers(
+				role.getRoleId(), new String[] {userId});
+
+			// User
+
+			UserLocalServiceUtil.addGroupUsers(
+				group.getGroupId(), new String[] {userId});
+		}
 
 		return group;
 	}
@@ -160,6 +187,17 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 
 		LayoutSetLocalServiceUtil.deleteLayoutSet(Layout.PRIVATE + groupId);
 		LayoutSetLocalServiceUtil.deleteLayoutSet(Layout.PUBLIC + groupId);
+
+		// Role
+
+		try {
+			Role role = RoleLocalServiceUtil.getGroupRole(
+				group.getCompanyId(), groupId);
+
+			RoleLocalServiceUtil.deleteRole(role.getRoleId());
+		}
+		catch (NoSuchRoleException nsre) {
+		}
 
 		// Blogs
 

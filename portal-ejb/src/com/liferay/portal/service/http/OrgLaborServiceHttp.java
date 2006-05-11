@@ -211,7 +211,8 @@ public class OrgLaborServiceHttp {
 
 	public static java.util.List getOrgLabors(HttpPrincipal httpPrincipal,
 		java.lang.String organizationId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = organizationId;
 
@@ -227,6 +228,10 @@ public class OrgLaborServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
 				}
@@ -235,6 +240,10 @@ public class OrgLaborServiceHttp {
 			}
 
 			return (java.util.List)returnObj;
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			_log.error(StackTraceUtil.getStackTrace(pe));
+			throw pe;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(StackTraceUtil.getStackTrace(se));

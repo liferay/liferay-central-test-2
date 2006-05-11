@@ -171,6 +171,13 @@
 			<cache-size>20</cache-size>
 		</session>
 		<session>
+			<ejb-name>com_liferay_portal_service_ejb_OrgLaborLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/OrgLaborLocalServiceHome</local-jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<cache-size>20</cache-size>
+		</session>
+		<session>
 			<ejb-name>com_liferay_portal_service_ejb_OrgLaborServiceEJB</ejb-name>
 			<jndi-name>com_liferay_portal_service_ejb_OrgLaborServiceEJB</jndi-name>
 			<clustered>true</clustered>
@@ -194,6 +201,13 @@
 		<session>
 			<ejb-name>com_liferay_portal_service_ejb_PermissionServiceEJB</ejb-name>
 			<jndi-name>com_liferay_portal_service_ejb_PermissionServiceEJB</jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<cache-size>20</cache-size>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portal_service_ejb_PhoneLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/PhoneLocalServiceHome</local-jndi-name>
 			<clustered>true</clustered>
 			<pool-size>20</pool-size>
 			<cache-size>20</cache-size>
@@ -334,6 +348,13 @@
 		<session>
 			<ejb-name>com_liferay_portal_service_ejb_UserTrackerPathServiceEJB</ejb-name>
 			<jndi-name>com_liferay_portal_service_ejb_UserTrackerPathServiceEJB</jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<cache-size>20</cache-size>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/WebsiteLocalServiceHome</local-jndi-name>
 			<clustered>true</clustered>
 			<pool-size>20</pool-size>
 			<cache-size>20</cache-size>

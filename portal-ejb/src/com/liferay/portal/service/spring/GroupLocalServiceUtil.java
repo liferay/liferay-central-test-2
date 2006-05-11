@@ -30,7 +30,7 @@ package com.liferay.portal.service.spring;
  */
 public class GroupLocalServiceUtil {
 	public static com.liferay.portal.model.Group addGroup(
-		java.lang.String companyId, java.lang.String className,
+		java.lang.String userId, java.lang.String className,
 		java.lang.String classPK, java.lang.String name,
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
@@ -38,8 +38,8 @@ public class GroupLocalServiceUtil {
 		try {
 			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.addGroup(companyId, className, classPK,
-				name, friendlyURL);
+			return groupLocalService.addGroup(userId, className, classPK, name,
+				friendlyURL);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

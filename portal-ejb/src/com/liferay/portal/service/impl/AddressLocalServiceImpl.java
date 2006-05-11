@@ -53,8 +53,6 @@ import java.util.List;
  */
 public class AddressLocalServiceImpl implements AddressLocalService {
 
-	// Business methods
-
 	public Address addAddress(
 			String userId, String className, String classPK, String street1,
 			String street2, String street3, String city, String zip,
@@ -63,8 +61,9 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
+		Date now = new Date();
 
-		_validate(
+		validate(
 			null, user.getCompanyId(), className, classPK, street1, city, zip,
 			regionId, countryId, typeId, mailing, primary);
 
@@ -72,8 +71,6 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 			Address.class.getName()));
 
 		Address address = AddressUtil.create(addressId);
-
-		Date now = new Date();
 
 		address.setCompanyId(user.getCompanyId());
 		address.setUserId(user.getUserId());
@@ -104,10 +101,17 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 		AddressUtil.remove(addressId);
 	}
 
-	public void deleteAll(String companyId, String className, String classPK)
+	public void deleteAddresses(
+			String companyId, String className, String classPK)
 		throws SystemException {
 
 		AddressUtil.removeByC_C_C(companyId, className, classPK);
+	}
+
+	public Address getAddress(String addressId)
+		throws PortalException, SystemException {
+
+		return AddressUtil.findByPrimaryKey(addressId);
 	}
 
 	public List getAddresses(String companyId, String className, String classPK)
@@ -122,7 +126,7 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 			String typeId, boolean mailing, boolean primary)
 		throws PortalException, SystemException {
 
-		_validate(
+		validate(
 			addressId, null, null, null, street1, city, zip, regionId,
 			countryId, typeId, mailing, primary);
 
@@ -145,9 +149,7 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 		return address;
 	}
 
-	// Private methods
-
-	private void _validate(
+	protected void validate(
 			String addressId, String companyId, String className,
 			String classPK, String street1, String city, String zip,
 			String regionId, String countryId, String typeId, boolean mailing,
@@ -178,10 +180,10 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 
 		ListTypeServiceUtil.validate(typeId, className + ListType.ADDRESS);
 
-		_validate(addressId, companyId, className, classPK, mailing, primary);
+		validate(addressId, companyId, className, classPK, mailing, primary);
 	}
 
-	private void _validate(
+	protected void validate(
 			String addressId, String companyId, String className,
 			String classPK, boolean mailing, boolean primary)
 		throws PortalException, SystemException {
