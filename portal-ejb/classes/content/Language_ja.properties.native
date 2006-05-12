@@ -108,6 +108,8 @@ category.wsrp=WSRP
 ##
 
 model.resource.com.liferay.portal.model.Group=コミュニティ
+model.resource.com.liferay.portal.model.Location=位置
+model.resource.com.liferay.portal.model.Organization=構成
 model.resource.com.liferay.portal.model.User=ユーザー
 model.resource.com.liferay.portlet.blogs.model.BlogsCategory=部門
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=記入項目
@@ -143,8 +145,10 @@ action.ADD_DOCUMENT=文書を加えなさい
 action.ADD_ENTRY=記入項目を加えなさい
 action.ADD_EVENT=でき事を加えなさい
 action.ADD_FOLDER=ホールダーを加えなさい
+action.ADD_GROUP=グループを加えなさい
 action.ADD_IMAGE=イメージを加えなさい
 action.ADD_ITEM=項目を加えなさい
+action.ADD_LOCATION=位置を加えなさい
 action.ADD_MESSAGE=メッセージを加えなさい
 action.ADD_NODE=ノードを加えなさい
 action.ADD_ORGANIZATION=構成を加えなさい
@@ -174,6 +178,7 @@ action.UPDATE=更新
 action.UPDATE_DISCUSSION=更新の議論
 action.UPDATE_USER=更新のユーザー
 action.VIEW=眺め
+action.VIEW_USER=眺めのユーザー
 
 ##
 ## Layout types

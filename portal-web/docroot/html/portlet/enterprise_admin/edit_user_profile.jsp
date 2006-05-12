@@ -283,7 +283,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 				<%= organizationName %>
 				</a>
 
-				<c:if test="<%= editable && portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+				<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && editable %>">
 					<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();">
 				</c:if>
 			</td>
@@ -300,7 +300,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 				<%= locationName %>
 				</a>
 
-				<c:if test="<%= editable && portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+				<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && editable %>">
 					<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var locationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_location" /></portlet:renderURL>&<portlet:namespace />parentOrganizationId=' + document.<portlet:namespace />fm.<portlet:namespace />organizationId.value, 'location', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); locationWindow.focus();">
 				</c:if>
 			</td>

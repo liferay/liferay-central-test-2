@@ -210,6 +210,9 @@ if (Validator.isNotNull(modelResource)) {
 				if (tabs2.equals("current")) {
 					userParams.put("permission", resource.getResourceId());
 				}
+				else if (tabs2.equals("available")) {
+					userParams.put("usersGroups", group.getGroupId());
+				}
 
 				int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
 

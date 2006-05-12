@@ -479,7 +479,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<br><div class="beta-separator"></div><br>
 
-			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_ROLE) %>">
 				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
 
 				<br><br>

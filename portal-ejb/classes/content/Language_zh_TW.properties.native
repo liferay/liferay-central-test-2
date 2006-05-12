@@ -108,6 +108,8 @@ category.wsrp=WSRP
 ##
 
 model.resource.com.liferay.portal.model.Group=公共
+model.resource.com.liferay.portal.model.Location=地點
+model.resource.com.liferay.portal.model.Organization=組織
 model.resource.com.liferay.portal.model.User=用戶
 model.resource.com.liferay.portlet.blogs.model.BlogsCategory=類別
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=詞條
@@ -143,8 +145,10 @@ action.ADD_DOCUMENT=增加文件
 action.ADD_ENTRY=增加詞條
 action.ADD_EVENT=增加事件
 action.ADD_FOLDER=增加文件夾
+action.ADD_GROUP=增加小組
 action.ADD_IMAGE=增加圖像
 action.ADD_ITEM=增加項目
+action.ADD_LOCATION=增加地點
 action.ADD_MESSAGE=增加消息
 action.ADD_NODE=增加結
 action.ADD_ORGANIZATION=增加組織
@@ -174,6 +178,7 @@ action.UPDATE=更新
 action.UPDATE_DISCUSSION=更新討論
 action.UPDATE_USER=更新用戶
 action.VIEW=看法
+action.VIEW_USER=看法用戶
 
 ##
 ## Layout types

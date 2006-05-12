@@ -70,10 +70,17 @@ public class EditRoleAction extends PortletAction {
 		}
 		catch (Exception e) {
 			if (e != null &&
-				e instanceof DuplicateRoleException ||
-				e instanceof NoSuchRoleException ||
-				e instanceof RequiredRoleException ||
-				e instanceof RoleNameException) {
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(req, e.getClass().getName());
+
+				setForward(req, "portlet.enterprise_admin.error");
+			}
+			else if (e != null &&
+					 e instanceof DuplicateRoleException ||
+					 e instanceof NoSuchRoleException ||
+					 e instanceof RequiredRoleException ||
+					 e instanceof RoleNameException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 

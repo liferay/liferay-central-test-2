@@ -108,6 +108,8 @@ category.wsrp=WSRP
 ##
 
 model.resource.com.liferay.portal.model.Group=Κοινότητα
+model.resource.com.liferay.portal.model.Location=Θέση
+model.resource.com.liferay.portal.model.Organization=Οργάνωση
 model.resource.com.liferay.portal.model.User=Χρήστης
 model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Κατηγορία
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Είσοδος
@@ -143,8 +145,10 @@ action.ADD_DOCUMENT=Προσθέστε το έγγραφο
 action.ADD_ENTRY=Προσθέστε το λήμμα
 action.ADD_EVENT=Προσθέστε το γεγονός
 action.ADD_FOLDER=Προσθέστε το φάκελλο
+action.ADD_GROUP=Προσθέστε την ομάδα
 action.ADD_IMAGE=Προσθέστε την εικόνα
 action.ADD_ITEM=Προσθέστε το στοιχείο
+action.ADD_LOCATION=Προσθέστε τη θέση
 action.ADD_MESSAGE=Προσθέστε το μήνυμα
 action.ADD_NODE=Προσθέστε τον κόμβο
 action.ADD_ORGANIZATION=Προσθέστε την οργάνωση
@@ -174,6 +178,7 @@ action.UPDATE=Αναπροσαρμογή
 action.UPDATE_DISCUSSION=Συζήτηση αναπροσαρμογών
 action.UPDATE_USER=Χρήστης αναπροσαρμογών
 action.VIEW=Αποψη
+action.VIEW_USER=Χρήστης άποψης
 
 ##
 ## Layout types

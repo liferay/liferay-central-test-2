@@ -108,6 +108,8 @@ category.wsrp=WSRP
 ##
 
 model.resource.com.liferay.portal.model.Group=Gemeenschap
+model.resource.com.liferay.portal.model.Location=Plaats
+model.resource.com.liferay.portal.model.Organization=Organisatie
 model.resource.com.liferay.portal.model.User=Gebruiker
 model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Categorie
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Ingang
@@ -143,8 +145,10 @@ action.ADD_DOCUMENT=Voeg Document toe
 action.ADD_ENTRY=Voeg Ingang toe
 action.ADD_EVENT=Voeg Gebeurtenis toe
 action.ADD_FOLDER=Voeg Omslag toe
+action.ADD_GROUP=Voeg Groep toe
 action.ADD_IMAGE=Voeg Beeld toe
 action.ADD_ITEM=Voeg Punt toe
+action.ADD_LOCATION=Voeg Plaats toe
 action.ADD_MESSAGE=Voeg Bericht toe
 action.ADD_NODE=Voeg Knoop toe
 action.ADD_ORGANIZATION=Voeg Organisatie toe
@@ -174,6 +178,7 @@ action.UPDATE=Update
 action.UPDATE_DISCUSSION=De Bespreking van de update
 action.UPDATE_USER=De Gebruiker van de update
 action.VIEW=Mening
+action.VIEW_USER=De Gebruiker van de mening
 
 ##
 ## Layout types

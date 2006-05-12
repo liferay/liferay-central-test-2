@@ -108,6 +108,8 @@ category.wsrp=WSRP
 ##
 
 model.resource.com.liferay.portal.model.Group=Comunidade
+model.resource.com.liferay.portal.model.Location=Posição
+model.resource.com.liferay.portal.model.Organization=Organização
 model.resource.com.liferay.portal.model.User=Usuário
 model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Categoria
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Entrada
@@ -143,8 +145,10 @@ action.ADD_DOCUMENT=Adicione O Original
 action.ADD_ENTRY=Adicione A Entrada
 action.ADD_EVENT=Adicione O Evento
 action.ADD_FOLDER=Adicione O Dobrador
+action.ADD_GROUP=Adicione O Grupo
 action.ADD_IMAGE=Adicione A Imagem
 action.ADD_ITEM=Adicione O Artigo
+action.ADD_LOCATION=Adicione A Posição
 action.ADD_MESSAGE=Adicione A Mensagem
 action.ADD_NODE=Adicione O Nó
 action.ADD_ORGANIZATION=Adicione A Organização
@@ -174,6 +178,7 @@ action.UPDATE=Update
 action.UPDATE_DISCUSSION=Discussão Do Update
 action.UPDATE_USER=Usuário De Update
 action.VIEW=Vista
+action.VIEW_USER=Usuário Da Vista
 
 ##
 ## Layout types

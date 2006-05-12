@@ -108,6 +108,8 @@ category.wsrp=WSRP
 ##
 
 model.resource.com.liferay.portal.model.Group=지역 사회
+model.resource.com.liferay.portal.model.Location=위치
+model.resource.com.liferay.portal.model.Organization=조직
 model.resource.com.liferay.portal.model.User=사용자
 model.resource.com.liferay.portlet.blogs.model.BlogsCategory=종류
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=입장
@@ -143,8 +145,10 @@ action.ADD_DOCUMENT=문서를 추가하십시요
 action.ADD_ENTRY=입장을 추가하십시요
 action.ADD_EVENT=사건을 추가하십시요
 action.ADD_FOLDER=폴더를 추가하십시요
+action.ADD_GROUP=그룹을 추가하십시요
 action.ADD_IMAGE=심상을 추가하십시요
 action.ADD_ITEM=품목을 추가하십시요
+action.ADD_LOCATION=위치를 추가하십시요
 action.ADD_MESSAGE=메시지를 추가하십시요
 action.ADD_NODE=마디를 추가하십시요
 action.ADD_ORGANIZATION=조직을 추가하십시요
@@ -174,6 +178,7 @@ action.UPDATE=갱신
 action.UPDATE_DISCUSSION=갱신 면담
 action.UPDATE_USER=갱신 사용자
 action.VIEW=전망
+action.VIEW_USER=전망 사용자
 
 ##
 ## Layout types
