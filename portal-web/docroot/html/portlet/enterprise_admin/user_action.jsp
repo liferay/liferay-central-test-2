@@ -64,6 +64,17 @@ if (searchTerms.isActive() || (!searchTerms.isActive() && GetterUtil.getBoolean(
 %>
 
 	<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.DELETE) %>">
+		<c:if test="<%= !searchTerms.isActive() %>">
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+				<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="deleteUserIds" value="<%= userId %>" />
+			</portlet:actionURL>
+
+			<liferay-ui:icon image="activate" url="<%= portletURL %>" />
+		</c:if>
+
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>" />
