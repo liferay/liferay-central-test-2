@@ -138,29 +138,31 @@ public class LayoutCacheFilter implements Filter {
 					LayoutCacheUtil.putLayoutCacheResponseData(
 						companyId, key, data);
 				}
-				
+
 				Map headers = data.getHeaders();
-				Iterator iter = headers.keySet().iterator();
-				
-				while (iter.hasNext()) {
-					String headerKey = (String)iter.next();
+
+				Iterator itr = headers.keySet().itrator();
+
+				while (itr.hasNext()) {
+					String headerKey = (String)itr.next();
+
 					List headerValues = (List)headers.get(headerKey);
-					
+
 					for (int i = 0; i < headerValues.size(); i++) {
 						Header header = (Header)headerValues.get(i);
-						
+
 						int type = header.getType();
-						
+
 						if (type == Header.DATE_TYPE) {
-							response.addDateHeader(headerKey, 
+							response.addDateHeader(headerKey,
 								header.getDateValue());
 						}
 						else if (type == Header.INTEGER_TYPE) {
-							response.addIntHeader(headerKey, 
+							response.addIntHeader(headerKey,
 								header.getIntValue());
 						}
 						else if (type == Header.STRING_TYPE) {
-							response.addHeader(headerKey, 
+							response.addHeader(headerKey,
 								header.getStringValue());
 						}
 					}

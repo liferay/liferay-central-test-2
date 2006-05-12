@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet.filters.layoutcache;
 
 import java.io.Serializable;
+
 import java.util.Map;
 
 /**
@@ -34,8 +35,11 @@ import java.util.Map;
  */
 public class LayoutCacheResponseData implements Serializable {
 
-	public LayoutCacheResponseData(byte[] data, String contentType, Map headers) {
+	public LayoutCacheResponseData(byte[] data, String contentType,
+								   Map headers) {
+
 		super();
+
 		_data = data;
 		_contentType = contentType;
 		_headers = headers;
@@ -52,8 +56,9 @@ public class LayoutCacheResponseData implements Serializable {
 	public Map getHeaders() {
 		return _headers;
 	}
-	
+
 	private byte[] _data;
 	private String _contentType;
 	private Map _headers;
+
 }

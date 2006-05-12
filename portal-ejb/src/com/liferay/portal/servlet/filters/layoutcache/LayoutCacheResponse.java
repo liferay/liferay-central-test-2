@@ -29,6 +29,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -119,92 +120,92 @@ public class LayoutCacheResponse extends HttpServletResponseWrapper {
 
 	public void addDateHeader(String name, long value) {
 		List values = (List)_headers.get(name);
-		
+
 		if (values == null) {
 			values = new ArrayList();
 
-			_headers.put(name, values);			
+			_headers.put(name, values);
 		}
-		
+
 		Header header = new Header();
 
 		header.setType(Header.DATE_TYPE);
 		header.setDateValue(value);
-		
-		values.add(header);		
+
+		values.add(header);
 	}
 
 	public void addHeader(String name, String value) {
 		List values = (List)_headers.get(name);
-		
+
 		if (values == null) {
 			values = new ArrayList();
 
-			_headers.put(name, values);			
+			_headers.put(name, values);
 		}
-		
+
 		Header header = new Header();
 
 		header.setType(Header.STRING_TYPE);
 		header.setStringValue(value);
-		
-		values.add(header);	
+
+		values.add(header);
 	}
 
 	public void addIntHeader(String name, int value) {
 		List values = (List)_headers.get(name);
-		
+
 		if (values == null) {
 			values = new ArrayList();
 
-			_headers.put(name, values);			
+			_headers.put(name, values);
 		}
-		
+
 		Header header = new Header();
 
 		header.setType(Header.INTEGER_TYPE);
 		header.setIntValue(value);
-		
-		values.add(header);	
+
+		values.add(header);
 	}
 
 	public void setDateHeader(String name, long value) {
 		List values = new ArrayList();
 
-		_headers.put(name, values);			
-		
+		_headers.put(name, values);
+
 		Header header = new Header();
 
 		header.setType(Header.DATE_TYPE);
 		header.setDateValue(value);
-		
-		values.add(header);	
+
+		values.add(header);
 	}
 
 	public void setHeader(String name, String value) {
 		List values = new ArrayList();
 
-		_headers.put(name, values);			
-		
+		_headers.put(name, values);
+
 		Header header = new Header();
 
 		header.setType(Header.STRING_TYPE);
 		header.setStringValue(value);
-		
-		values.add(header);	
+
+		values.add(header);
 	}
 
 	public void setIntHeader(String name, int value) {
 		List values = new ArrayList();
 
-		_headers.put(name, values);			
-		
+		_headers.put(name, values);
+
 		Header header = new Header();
 
 		header.setType(Header.INTEGER_TYPE);
 		header.setIntValue(value);
-		
-		values.add(header);	
+
+		values.add(header);
 	}
 
 	public Map getHeaders() {
@@ -217,4 +218,5 @@ public class LayoutCacheResponse extends HttpServletResponseWrapper {
 	private PrintWriter _writer = null;
 	private String _contentType;
 	private Map _headers = CollectionFactory.getHashMap();
+
 }

@@ -30,12 +30,13 @@ package com.liferay.util.servlet;
  *
  */
 public class Header {
+
 	public static final int INTEGER_TYPE = 1;
 
 	public static final int DATE_TYPE = 2;
 
 	public static final int STRING_TYPE = 3;
-	
+
 	public long getDateValue() {
 		return _dateValue;
 	}
@@ -67,9 +68,10 @@ public class Header {
 	public void setType(int type) {
 		_type = type;
 	}
-		
+
 	private int _intValue;
 	private long _dateValue;
 	private String _stringValue;
 	private int _type;
+
 }
