@@ -42,6 +42,7 @@
 --%><%@ page import="com.liferay.portal.action.LoginAction" %><%--
 --%><%@ page import="com.liferay.portal.security.auth.AuthException" %><%--
 --%><%@ page import="com.liferay.portal.service.impl.ThemeLocalUtil" %><%--
+--%><%@ page import="com.liferay.portal.service.permission.GroupPermission" %><%--
 --%><%@ page import="com.liferay.portal.struts.PortletRequestProcessor" %><%--
 --%><%@ page import="com.liferay.portal.util.LayoutLister" %><%--
 --%><%@ page import="com.liferay.portal.util.LayoutView" %><%--

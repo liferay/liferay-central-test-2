@@ -74,7 +74,7 @@ catch (NoSuchResourceException nsre) {
 	}
 }
 
-boolean access = PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.VIEW);
+boolean access = PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.VIEW) || GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS);
 
 boolean stateMax = layoutTypePortlet.hasStateMaxPortletId(portletId);
 boolean stateMin = layoutTypePortlet.hasStateMinPortletId(portletId);
@@ -171,9 +171,9 @@ if (portlet.hasPortletMode(renderResponseImpl.getContentType(), PortletMode.EDIT
 	}
 }
 
-// Unauthenticated users cannot modify the layout
+// Unauthenticated users or users without MANAGE_LAYOUTS permission cannot modify the layout
 
-if (!themeDisplay.isSignedIn()) {
+if (!themeDisplay.isSignedIn() || !GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS)) {
 	showCloseIcon = false;
 	showEditIcon = false;
 	showMaxIcon = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.LAYOUT_GUEST_SHOW_MAX_ICON));

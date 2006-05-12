@@ -34,10 +34,12 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.shared.util.StackTraceUtil;
@@ -380,14 +382,39 @@ public class ServicePreAction extends Action {
 			themeDisplay.setURLHome(protocol + company.getHomeURL());
 
 			if (layout != null) {
-				themeDisplay.setShowAddContentIcon(true);
-				themeDisplay.setShowPageSettingsIcon(true);
+				if (GroupPermission.contains(
+						permissionChecker, portletGroupId,
+						ActionKeys.MANAGE_LAYOUTS)) {
 
-				themeDisplay.setURLAddContent(
-					"LayoutConfiguration.toggle('" +
-						PortletKeys.LAYOUT_CONFIGURATION + "', '" + plid +
-							"', '" + mainPath + "','" +
-								themeDisplay.getPathThemeImage() + "');");
+					themeDisplay.setShowAddContentIcon(true);
+					themeDisplay.setShowPageSettingsIcon(true);
+
+					themeDisplay.setURLAddContent(
+						"LayoutConfiguration.toggle('" +
+							PortletKeys.LAYOUT_CONFIGURATION + "', '" + plid +
+								"', '" + mainPath + "','" +
+									themeDisplay.getPathThemeImage() + "');");
+
+					PortletURL pageSettingsURL = new PortletURLImpl(
+						req, PortletKeys.LAYOUT_MANAGEMENT, plid, false);
+
+					pageSettingsURL.setWindowState(WindowState.MAXIMIZED);
+					pageSettingsURL.setPortletMode(PortletMode.VIEW);
+
+					pageSettingsURL.setParameter(
+						"struts_action", "/layout_management/edit_pages");
+
+					if (layout.isPrivateLayout()) {
+						pageSettingsURL.setParameter("tabs2", "private");
+					}
+					else {
+						pageSettingsURL.setParameter("tabs2", "public");
+					}
+
+					pageSettingsURL.setParameter("selPlid", plid);
+
+					themeDisplay.setURLPageSettings(pageSettingsURL);
+				}
 
 				PortletURL myAccountURL = new PortletURLImpl(
 					req, PortletKeys.MY_ACCOUNT, plid, false);
@@ -399,26 +426,6 @@ public class ServicePreAction extends Action {
 					"struts_action", "/my_account/edit_user");
 
 				themeDisplay.setURLMyAccount(myAccountURL);
-
-				PortletURL pageSettingsURL = new PortletURLImpl(
-					req, PortletKeys.LAYOUT_MANAGEMENT, plid, false);
-
-				pageSettingsURL.setWindowState(WindowState.MAXIMIZED);
-				pageSettingsURL.setPortletMode(PortletMode.VIEW);
-
-				pageSettingsURL.setParameter(
-					"struts_action", "/layout_management/edit_pages");
-
-				if (layout.isPrivateLayout()) {
-					pageSettingsURL.setParameter("tabs2", "private");
-				}
-				else {
-					pageSettingsURL.setParameter("tabs2", "public");
-				}
-
-				pageSettingsURL.setParameter("selPlid", plid);
-
-				themeDisplay.setURLPageSettings(pageSettingsURL);
 			}
 
 			themeDisplay.setURLPortal(protocol + company.getPortalURL());
