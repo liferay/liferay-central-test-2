@@ -33,6 +33,7 @@ import com.liferay.portal.service.spring.PortletServiceUtil;
 import com.liferay.portal.servlet.FriendlyURLServlet;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.BrowserSniffer;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
@@ -113,9 +114,11 @@ public class LayoutCacheFilter implements Filter {
 
 				request.setAttribute(_ALREADY_FILTERED, Boolean.TRUE);
 
+				boolean isIe = BrowserSniffer.is_ie(request);
+				
 				LayoutCacheResponseData layoutCacheResponseData =
 					LayoutCacheUtil.getLayoutCacheResponseData(
-						companyId, plid, languageId);;
+						companyId, plid, languageId, isIe);
 
 				if (layoutCacheResponseData == null) {
 					_log.info("Caching layout " + plid);
@@ -129,8 +132,8 @@ public class LayoutCacheFilter implements Filter {
 						layoutCacheResponse.getData(),
 						layoutCacheResponse.getContentType());
 
-					LayoutCacheUtil.putLayoutCacheResponseData(
-						companyId, plid, languageId, layoutCacheResponseData);
+					LayoutCacheUtil.putLayoutCacheResponseData(companyId, plid,
+						languageId, isIe, layoutCacheResponseData);
 				}
 
 				byte[] byteArray = layoutCacheResponseData.getData();

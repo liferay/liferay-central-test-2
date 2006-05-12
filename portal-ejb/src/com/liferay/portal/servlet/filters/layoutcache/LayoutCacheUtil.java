@@ -47,6 +47,8 @@ public class LayoutCacheUtil {
 
 	public static String LANGUAGE = "_LANGUAGE_";
 
+	public static String IS_IE = "_IS_IE_";
+	
 	static {
 		String[] companyIds = PortalInstances.getCompanyIds();
 
@@ -74,7 +76,7 @@ public class LayoutCacheUtil {
 	}
 
 	public static LayoutCacheResponseData getLayoutCacheResponseData(
-		String companyId, String plid, String languageId) {
+		String companyId, String plid, String languageId, boolean isIe) {
 
 		LayoutCacheResponseData data = null;
 
@@ -84,7 +86,8 @@ public class LayoutCacheUtil {
 
 		plid = plid.trim().toUpperCase();
 
-		String key = _encodeKey(companyId, plid + LANGUAGE + languageId);
+		String key = _encodeKey(companyId, plid + LANGUAGE + languageId
+			+ IS_IE + Boolean.toString(isIe));
 
 		try {
 			data = (LayoutCacheResponseData)_cache.getFromCache(key);
@@ -101,44 +104,15 @@ public class LayoutCacheUtil {
 		return data;
 	}
 
-	public static boolean isCached(
-		String companyId, String plid, String languageId) {
-
-		byte[] byteArray = null;
-
-		if (Validator.isNull(plid)) {
-			return false;
-		}
-
-		plid = plid.trim().toUpperCase();
-
-		String key = _encodeKey(companyId, plid + LANGUAGE + languageId);
-
-		try {
-			byteArray = (byte[])_cache.getFromCache(key);
-		}
-		catch (NeedsRefreshException nre) {
-			return false;
-		}
-		finally {
-			if (byteArray == null) {
-				_cache.cancelUpdate(key);
-
-				return false;
-			}
-		}
-
-		return true;
-	}
-
 	public static void putLayoutCacheResponseData(
-		String companyId, String plid, String languageId,
+		String companyId, String plid, String languageId, boolean isIe,
 		LayoutCacheResponseData data) {
 
 		if (data != null) {
 			plid = plid.trim().toUpperCase();
 
-			String key = _encodeKey(companyId, plid + LANGUAGE + languageId);
+			String key = _encodeKey(companyId, plid + LANGUAGE + languageId
+				+ IS_IE + Boolean.toString(isIe));
 
 			_cache.putInCache(key, data, GROUP_NAME_ARRAY);
 		}
