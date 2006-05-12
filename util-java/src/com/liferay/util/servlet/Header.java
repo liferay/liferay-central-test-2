@@ -20,40 +20,56 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.servlet.filters.layoutcache;
-
-import java.io.Serializable;
-import java.util.Map;
+package com.liferay.util.servlet;
 
 /**
- * <a href="LayoutCacheResponseData.java.html"><b><i>View Source</i></b></a>
+ * <a href="Header.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Michael Young
  * @version $Revision: $
  *
  */
-public class LayoutCacheResponseData implements Serializable {
+public class Header {
+	public static final int INTEGER_TYPE = 1;
 
-	public LayoutCacheResponseData(byte[] data, String contentType, Map headers) {
-		super();
-		_data = data;
-		_contentType = contentType;
-		_headers = headers;
-	}
+	public static final int DATE_TYPE = 2;
 
-	public byte[] getData() {
-		return _data;
-	}
-
-	public String getContentType() {
-		return _contentType;
-	}
-
-	public Map getHeaders() {
-		return _headers;
-	}
+	public static final int STRING_TYPE = 3;
 	
-	private byte[] _data;
-	private String _contentType;
-	private Map _headers;
+	public long getDateValue() {
+		return _dateValue;
+	}
+
+	public void setDateValue(long dateValue) {
+		_dateValue = dateValue;
+	}
+
+	public int getIntValue() {
+		return _intValue;
+	}
+
+	public void setIntValue(int intValue) {
+		_intValue = intValue;
+	}
+
+	public String getStringValue() {
+		return _stringValue;
+	}
+
+	public void setStringValue(String stringValue) {
+		_stringValue = stringValue;
+	}
+
+	public int getType() {
+		return _type;
+	}
+
+	public void setType(int type) {
+		_type = type;
+	}
+		
+	private int _intValue;
+	private long _dateValue;
+	private String _stringValue;
+	private int _type;
 }

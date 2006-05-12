@@ -40,9 +40,13 @@ import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Validator;
+import com.liferay.util.servlet.Header;
 
 import java.io.IOException;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.Filter;
@@ -106,8 +110,6 @@ public class LayoutCacheFilter implements Filter {
 
 		String portletId = ParamUtil.getString(request, "p_p_id");
 
-		String languageId = LanguageUtil.getLanguageId(request);
-
 		if (Validator.isNull(portletId) && Validator.isNotNull(plid)) {
 			if (USE_LAYOUT_CACHE_FILTER && !_isAlreadyFiltered(request) &&
 				!_isSignedIn(request) && !_isInclude(request) &&
@@ -130,16 +132,44 @@ public class LayoutCacheFilter implements Filter {
 
 					data = new LayoutCacheResponseData(
 						layoutCacheResponse.getData(),
-						layoutCacheResponse.getContentType());
+						layoutCacheResponse.getContentType(),
+						layoutCacheResponse.getHeaders());
 
 					LayoutCacheUtil.putLayoutCacheResponseData(
 						companyId, key, data);
 				}
+				
+				Map headers = data.getHeaders();
+				Iterator iter = headers.keySet().iterator();
+				
+				while (iter.hasNext()) {
+					String headerKey = (String)iter.next();
+					List headerValues = (List)headers.get(headerKey);
+					
+					for (int i = 0; i < headerValues.size(); i++) {
+						Header header = (Header)headerValues.get(i);
+						
+						int type = header.getType();
+						
+						if (type == Header.DATE_TYPE) {
+							response.addDateHeader(headerKey, 
+								header.getDateValue());
+						}
+						else if (type == Header.INTEGER_TYPE) {
+							response.addIntHeader(headerKey, 
+								header.getIntValue());
+						}
+						else if (type == Header.STRING_TYPE) {
+							response.addHeader(headerKey, 
+								header.getStringValue());
+						}
+					}
+				}
 
 				byte[] byteArray = data.getData();
 
-				res.setContentLength(byteArray.length);
-				res.setContentType(data.getContentType());
+				response.setContentLength(byteArray.length);
+				response.setContentType(data.getContentType());
 
 				ServletOutputStream out = response.getOutputStream();
 
