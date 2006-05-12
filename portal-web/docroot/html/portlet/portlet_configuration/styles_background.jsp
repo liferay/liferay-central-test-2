@@ -51,7 +51,7 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<html:text property='<%= propertyPrefix + "BgImageUrl" %>' styleClass="form-text" onchange='<%= "preview." + previewObject + ".backgroundImage = 'url(' + this.value + ')';" %>' />
+					<html:text property='<%= propertyPrefix + "BgImageUrl" %>' styleClass="form-text" onchange='<%= "preview." + previewObject + ".backgroundImage = \'url(\' + this.value + \')\';" %>' />
 				</td>
 			</tr>
 			<tr>
