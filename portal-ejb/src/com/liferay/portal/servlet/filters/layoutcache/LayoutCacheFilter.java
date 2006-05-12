@@ -141,7 +141,7 @@ public class LayoutCacheFilter implements Filter {
 
 				Map headers = data.getHeaders();
 
-				Iterator itr = headers.keySet().itrator();
+				Iterator itr = headers.keySet().iterator();
 
 				while (itr.hasNext()) {
 					String headerKey = (String)itr.next();
