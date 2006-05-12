@@ -40,17 +40,17 @@
 						</c:if>
 
 						<c:if test="<%= themeDisplay.isSignedIn() %>">
-							<c:if test="<%= themeDisplay.getURLMyAccount() != null %>">
+							<c:if test="<%= themeDisplay.isShowMyAccountIcon() %>">
 								<a href="<%= themeDisplay.getURLMyAccount() %>"><bean:message key="my-account" /></a> -
 							</c:if>
 
 							<a href="<%= themeDisplay.getURLSignOut() %>"><bean:message key="sign-out" /></a><br />
 
-							<c:if test="<%= layout != null %>">
+							<c:if test="<%= themeDisplay.isShowAddContentIcon() %>">
 								<a href="javascript: void(0);" onClick="<%= themeDisplay.getURLAddContent() %>"><bean:message key="add-content" /></a>&nbsp;-&nbsp;
 							</c:if>
 
-							<c:if test="<%= themeDisplay.getURLPageSettings() != null %>">
+							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
 								<a href="<%= themeDisplay.getURLPageSettings().toString() %>"><bean:message key="page-settings" /></a>
 							</c:if>
 
