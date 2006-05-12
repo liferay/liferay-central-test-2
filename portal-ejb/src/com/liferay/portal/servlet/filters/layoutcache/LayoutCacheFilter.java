@@ -100,7 +100,8 @@ public class LayoutCacheFilter implements Filter {
 
 		String companyId = PortalUtil.getCompanyId(request);
 
-		String plid = _getPlid(request.getPathInfo(), request.getServletPath(),
+		String plid = _getPlid(
+			request.getPathInfo(), request.getServletPath(),
 			ParamUtil.getString(request, "p_l_id"));
 
 		String portletId = ParamUtil.getString(request, "p_p_id");
@@ -114,13 +115,12 @@ public class LayoutCacheFilter implements Filter {
 
 				request.setAttribute(_ALREADY_FILTERED, Boolean.TRUE);
 
-				boolean isIe = BrowserSniffer.is_ie(request);
-				
-				LayoutCacheResponseData layoutCacheResponseData =
-					LayoutCacheUtil.getLayoutCacheResponseData(
-						companyId, plid, languageId, isIe);
+				String key = getCacheKey(plid, request);
 
-				if (layoutCacheResponseData == null) {
+				LayoutCacheResponseData data =
+					LayoutCacheUtil.getLayoutCacheResponseData(companyId, key);
+
+				if (data == null) {
 					_log.info("Caching layout " + plid);
 
 					LayoutCacheResponse layoutCacheResponse =
@@ -128,18 +128,18 @@ public class LayoutCacheFilter implements Filter {
 
 					chain.doFilter(req, layoutCacheResponse);
 
-					layoutCacheResponseData = new LayoutCacheResponseData(
+					data = new LayoutCacheResponseData(
 						layoutCacheResponse.getData(),
 						layoutCacheResponse.getContentType());
 
-					LayoutCacheUtil.putLayoutCacheResponseData(companyId, plid,
-						languageId, isIe, layoutCacheResponseData);
+					LayoutCacheUtil.putLayoutCacheResponseData(
+						companyId, key, data);
 				}
 
-				byte[] byteArray = layoutCacheResponseData.getData();
+				byte[] byteArray = data.getData();
 
 				res.setContentLength(byteArray.length);
-				res.setContentType(layoutCacheResponseData.getContentType());
+				res.setContentType(data.getContentType());
 
 				ServletOutputStream out = response.getOutputStream();
 
@@ -159,6 +159,15 @@ public class LayoutCacheFilter implements Filter {
 
 			chain.doFilter(req, res);
 		}
+	}
+
+	protected String getCacheKey(String plid, HttpServletRequest req) {
+		String languageId = LanguageUtil.getLanguageId(req);
+		boolean isIe = BrowserSniffer.is_ie(req);
+
+		String key = plid + StringPool.POUND + languageId + isIe;
+
+		return key.trim().toUpperCase();
 	}
 
 	private boolean _isAlreadyFiltered(HttpServletRequest req) {
