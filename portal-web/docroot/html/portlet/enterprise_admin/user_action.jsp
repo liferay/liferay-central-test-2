@@ -24,74 +24,81 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<%
-UserSearch searchContainer = (UserSearch)request.getAttribute("liferay-ui:search:searchContainer");
+<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 
-UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+	<%
+	UserSearch searchContainer = (UserSearch)request.getAttribute("liferay-ui:search:searchContainer");
 
-ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-User user2 = (User)row.getObject();
+	ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-String userId = user2.getUserId();
+	User user2 = (User)row.getObject();
 
-String organizationId = user2.getOrganization().getOrganizationId();
-String locationId = user2.getLocation().getOrganizationId();
-%>
+	String userId = user2.getUserId();
 
-<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.UPDATE) %>">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
-		<portlet:param name="p_u_e_a" value="<%= user2.getEmailAddress() %>" />
-	</portlet:renderURL>
+	String organizationId = user2.getOrganization().getOrganizationId();
+	String locationId = user2.getLocation().getOrganizationId();
+	%>
 
-	<liferay-ui:icon image="edit" url="<%= portletURL %>" />
-</c:if>
-
-<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.PERMISSIONS) %>">
-	<liferay-security:permissionsURL
-		modelResource="<%= User.class.getName() %>"
-		modelResourceDescription="<%= user2.getFullName() %>"
-		resourcePrimKey="<%= user2.getPrimaryKey().toString() %>"
-		var="portletURL"
-	/>
-
-	<liferay-ui:icon image="permissions" url="<%= portletURL %>" />
-</c:if>
-
-<%
-if (searchTerms.isActive() || (!searchTerms.isActive() && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.USERS_DELETE)))) {
-%>
-
-	<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.DELETE) %>">
-		<c:if test="<%= !searchTerms.isActive() %>">
-			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
-				<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
-				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
-				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="deleteUserIds" value="<%= userId %>" />
-			</portlet:actionURL>
-
-			<liferay-ui:icon image="activate" url="<%= portletURL %>" />
-		</c:if>
-
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+	<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.UPDATE) %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="deleteUserIds" value="<%= userId %>" />
-		</portlet:actionURL>
+			<portlet:param name="p_u_e_a" value="<%= user2.getEmailAddress() %>" />
+		</portlet:renderURL>
 
-		<c:choose>
-			<c:when test="<%= searchTerms.isActive() %>">
-				<liferay-ui:icon-deactivate url="<%= portletURL %>" />
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:icon-delete url="<%= portletURL %>" />
-			</c:otherwise>
-		</c:choose>
+		<liferay-ui:icon image="edit" url="<%= portletURL %>" />
 	</c:if>
 
-<%
-}
-%>
+	<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.PERMISSIONS) %>">
+		<liferay-security:permissionsURL
+			modelResource="<%= User.class.getName() %>"
+			modelResourceDescription="<%= user2.getFullName() %>"
+			resourcePrimKey="<%= user2.getPrimaryKey().toString() %>"
+			var="portletURL"
+		/>
+
+		<liferay-ui:icon image="permissions" url="<%= portletURL %>" />
+	</c:if>
+
+	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+
+		<%
+		if (searchTerms.isActive() || (!searchTerms.isActive() && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.USERS_DELETE)))) {
+		%>
+
+			<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.DELETE) %>">
+				<c:if test="<%= !searchTerms.isActive() %>">
+					<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+						<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="deleteUserIds" value="<%= userId %>" />
+					</portlet:actionURL>
+
+					<liferay-ui:icon image="activate" url="<%= portletURL %>" />
+				</c:if>
+
+				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+					<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+					<portlet:param name="<%= Constants.CMD %>" value="<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="deleteUserIds" value="<%= userId %>" />
+				</portlet:actionURL>
+
+				<c:choose>
+					<c:when test="<%= searchTerms.isActive() %>">
+						<liferay-ui:icon-deactivate url="<%= portletURL %>" />
+					</c:when>
+					<c:otherwise>
+						<liferay-ui:icon-delete url="<%= portletURL %>" />
+					</c:otherwise>
+				</c:choose>
+			</c:if>
+
+		<%
+		}
+		%>
+
+	</c:if>
+</c:if>

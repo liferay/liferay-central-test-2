@@ -113,6 +113,7 @@ public class UpgradeUser extends UpgradeProcess {
 				String aimSn = aimId;
 				String icqSn = icqId;
 				String msnSn = msnId;
+				String skypeSn = null;
 				String ymSn = ymId;
 				String jobTitle = StringPool.BLANK;
 				String organizationId = null;
@@ -126,8 +127,8 @@ public class UpgradeUser extends UpgradeProcess {
 					userId, password, emailAddress, languageId, timeZoneId,
 					greeting, resolution, comments, firstName, middleName,
 					lastName, nickName, prefixId, suffixId, male, birthdayMonth,
-					birthdayDay, birthdayYear, smsSn, aimSn, icqSn, msnSn, ymSn,
-					jobTitle, organizationId, locationId);
+					birthdayDay, birthdayYear, smsSn, aimSn, icqSn, msnSn,
+					skypeSn, ymSn, jobTitle, organizationId, locationId);
 
 				Contact contact = user.getContact();
 

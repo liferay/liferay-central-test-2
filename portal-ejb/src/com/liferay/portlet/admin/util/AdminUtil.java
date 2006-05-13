@@ -264,7 +264,7 @@ public class AdminUtil {
 			HttpServletRequest req, String userId, String emailAddress,
 			String languageId, String timeZoneId, String greeting,
 			String resolution, String comments, String smsSn, String aimSn,
-			String icqSn, String msnSn, String ymSn)
+			String icqSn, String msnSn, String skypeSn, String ymSn)
 		throws PortalException, SystemException {
 
 		String password = getUpdateUserPassword(req, userId);
@@ -287,7 +287,7 @@ public class AdminUtil {
 			contact.getMiddleName(), contact.getLastName(),
 			contact.getNickName(), contact.getPrefixId(), contact.getSuffixId(),
 			contact.isMale(), birthdayMonth, birthdayDay, birthdayYear, smsSn,
-			aimSn, icqSn, msnSn, ymSn, contact.getJobTitle(),
+			aimSn, icqSn, msnSn, skypeSn, ymSn, contact.getJobTitle(),
 			user.getOrganization().getOrganizationId(),
 			user.getLocation().getOrganizationId());
 	}
@@ -296,7 +296,7 @@ public class AdminUtil {
 			ActionRequest req, String userId, String emailAddress,
 			String languageId, String timeZoneId, String greeting,
 			String resolution, String comments, String smsSn, String aimSn,
-			String icqSn, String msnSn, String ymSn)
+			String icqSn, String msnSn, String skypeSn, String ymSn)
 		throws PortalException, SystemException {
 
 		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
@@ -304,7 +304,7 @@ public class AdminUtil {
 		return updateUser(
 			reqImpl.getHttpServletRequest(), userId, emailAddress, languageId,
 			timeZoneId, greeting, resolution, comments, smsSn, aimSn, icqSn,
-			msnSn, ymSn);
+			msnSn, skypeSn, ymSn);
 	}
 
 	private static Log _log = LogFactory.getLog(AdminUtil.class);

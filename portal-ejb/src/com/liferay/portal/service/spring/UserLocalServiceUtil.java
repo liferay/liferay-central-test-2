@@ -754,9 +754,9 @@ public class UserLocalServiceUtil {
 		java.lang.String prefixId, java.lang.String suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
 		java.lang.String smsSn, java.lang.String aimSn, java.lang.String icqSn,
-		java.lang.String msnSn, java.lang.String ymSn,
-		java.lang.String jobTitle, java.lang.String organizationId,
-		java.lang.String locationId)
+		java.lang.String msnSn, java.lang.String skypeSn,
+		java.lang.String ymSn, java.lang.String jobTitle,
+		java.lang.String organizationId, java.lang.String locationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -766,7 +766,8 @@ public class UserLocalServiceUtil {
 				languageId, timeZoneId, greeting, resolution, comments,
 				firstName, middleName, lastName, nickName, prefixId, suffixId,
 				male, birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
-				icqSn, msnSn, ymSn, jobTitle, organizationId, locationId);
+				icqSn, msnSn, skypeSn, ymSn, jobTitle, organizationId,
+				locationId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

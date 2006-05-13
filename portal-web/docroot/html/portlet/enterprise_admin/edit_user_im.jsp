@@ -60,6 +60,16 @@
 </tr>
 <tr>
 	<td>
+		<%= LanguageUtil.get(pageContext, "skype") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="skypeSn" />
+	</td>
+	<td colspan="2"></td>
+</tr>
+<tr>
+	<td>
 		<%= LanguageUtil.get(pageContext, "ym") %>
 	</td>
 	<td style="padding-left: 10px;"></td>

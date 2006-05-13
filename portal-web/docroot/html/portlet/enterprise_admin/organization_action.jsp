@@ -132,7 +132,7 @@ String addUserURLString = null;
 
 		<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
 
-		<c:if test="<%= LocationPermission.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
+		<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && LocationPermission.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
 			<liferay-ui:icon-delete url="<%= deleteOrganizationURL %>" />
 		</c:if>
 	</c:when>
@@ -206,7 +206,7 @@ String addUserURLString = null;
 
 		<c:choose>
 			<c:when test="<%= rootOrganization %>">
-				<c:if test="<%= OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
+				<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
 					<liferay-ui:icon-delete url="<%= deleteOrganizationURL %>" />
 				</c:if>
 			</c:when>

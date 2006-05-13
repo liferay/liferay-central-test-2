@@ -897,8 +897,8 @@ public class UserLocalServiceImpl implements UserLocalService {
 			String middleName, String lastName, String nickName,
 			String prefixId, String suffixId, boolean male, int birthdayMonth,
 			int birthdayDay, int birthdayYear, String smsSn, String aimSn,
-			String icqSn, String msnSn, String ymSn, String jobTitle,
-			String organizationId, String locationId)
+			String icqSn, String msnSn, String skypeSn, String ymSn,
+			String jobTitle, String organizationId, String locationId)
 		throws PortalException, SystemException {
 
 		// User
@@ -985,6 +985,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 		contact.setAimSn(aimSn);
 		contact.setIcqSn(icqSn);
 		contact.setMsnSn(msnSn);
+		contact.setSkypeSn(skypeSn);
 		contact.setYmSn(ymSn);
 		contact.setJobTitle(jobTitle);
 

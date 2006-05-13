@@ -197,8 +197,8 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			String middleName, String lastName, String nickName,
 			String prefixId, String suffixId, boolean male, int birthdayMonth,
 			int birthdayDay, int birthdayYear, String smsSn, String aimSn,
-			String icqSn, String msnSn, String ymSn, String jobTitle,
-			String organizationId, String locationId)
+			String icqSn, String msnSn, String skypeSn, String ymSn,
+			String jobTitle, String organizationId, String locationId)
 		throws PortalException, SystemException {
 
 		checkPermission(userId, organizationId, locationId, ActionKeys.UPDATE);
@@ -207,7 +207,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			userId, password, emailAddress, languageId, timeZoneId, greeting,
 			resolution, comments, firstName, middleName, lastName, nickName,
 			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-			smsSn, aimSn, icqSn, msnSn, ymSn, jobTitle, organizationId,
+			smsSn, aimSn, icqSn, msnSn, skypeSn, ymSn, jobTitle, organizationId,
 			locationId);
 	}
 

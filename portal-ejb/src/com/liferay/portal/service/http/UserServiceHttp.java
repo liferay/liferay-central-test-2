@@ -991,8 +991,9 @@ public class UserServiceHttp {
 		java.lang.String suffixId, boolean male, int birthdayMonth,
 		int birthdayDay, int birthdayYear, java.lang.String smsSn,
 		java.lang.String aimSn, java.lang.String icqSn, java.lang.String msnSn,
-		java.lang.String ymSn, java.lang.String jobTitle,
-		java.lang.String organizationId, java.lang.String locationId)
+		java.lang.String skypeSn, java.lang.String ymSn,
+		java.lang.String jobTitle, java.lang.String organizationId,
+		java.lang.String locationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -1108,28 +1109,34 @@ public class UserServiceHttp {
 				paramObj21 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj22 = ymSn;
+			Object paramObj22 = skypeSn;
 
-			if (ymSn == null) {
+			if (skypeSn == null) {
 				paramObj22 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj23 = jobTitle;
+			Object paramObj23 = ymSn;
 
-			if (jobTitle == null) {
+			if (ymSn == null) {
 				paramObj23 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj24 = organizationId;
+			Object paramObj24 = jobTitle;
 
-			if (organizationId == null) {
+			if (jobTitle == null) {
 				paramObj24 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj25 = locationId;
+			Object paramObj25 = organizationId;
+
+			if (organizationId == null) {
+				paramObj25 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj26 = locationId;
 
 			if (locationId == null) {
-				paramObj25 = new NullWrapper("java.lang.String");
+				paramObj26 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -1140,7 +1147,8 @@ public class UserServiceHttp {
 						paramObj10, paramObj11, paramObj12, paramObj13,
 						paramObj14, paramObj15, paramObj16, paramObj17,
 						paramObj18, paramObj19, paramObj20, paramObj21,
-						paramObj22, paramObj23, paramObj24, paramObj25
+						paramObj22, paramObj23, paramObj24, paramObj25,
+						paramObj26
 					});
 			Object returnObj = null;
 
