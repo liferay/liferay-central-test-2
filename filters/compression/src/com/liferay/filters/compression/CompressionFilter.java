@@ -22,7 +22,6 @@
 
 package com.liferay.filters.compression;
 
-import com.liferay.util.BrowserSniffer;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
@@ -103,7 +102,6 @@ public class CompressionFilter implements Filter {
 
     	if (useCompressionFilter && _isCompress(request) &&
 			!_isInclude(request) && _isGZip(request) &&
-			!BrowserSniffer.is_ns_4(request) &&
 			!_isAlreadyFiltered(request)) {
 
 			_log.debug("Compressing " + completeURL);

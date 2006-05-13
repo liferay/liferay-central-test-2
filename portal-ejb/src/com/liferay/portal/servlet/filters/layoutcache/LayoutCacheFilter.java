@@ -26,7 +26,6 @@ import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletServiceUtil;
@@ -74,14 +73,21 @@ public class LayoutCacheFilter implements Filter {
 	public static final boolean USE_LAYOUT_CACHE_FILTER = GetterUtil.get(
 		SystemProperties.get(LayoutCacheFilter.class.getName()), true);
 
-	public void init(FilterConfig filterConfig) {
+	public void init(FilterConfig filterConfig) throws ServletException {
 		synchronized (FriendlyURLServlet.class) {
-
 			ServletContext ctx = filterConfig.getServletContext();
 
 			_companyId = ctx.getInitParameter("company_id");
-			_friendly = GetterUtil.getBoolean(
-				filterConfig.getInitParameter("friendly"));
+
+			_pattern = GetterUtil.getInteger(
+				filterConfig.getInitParameter("pattern"));
+
+			if ((_pattern != _PATTERN_FRIENDLY) &&
+				(_pattern != _PATTERN_LAYOUT) &&
+				(_pattern != _PATTERN_RESOURCE)) {
+
+				throw new ServletException("Layout cache pattern is invalid");
+			}
 		}
 	}
 
@@ -93,20 +99,18 @@ public class LayoutCacheFilter implements Filter {
 		throws IOException, ServletException {
 
 		if (USE_LAYOUT_CACHE_FILTER) {
-			_log.debug("Layout Cache is enabled");
+			_log.debug("Layout cache is enabled");
 		}
 		else {
-			_log.debug("Layout Cache is disabled");
+			_log.debug("Layout cache is disabled");
 		}
 
 		HttpServletRequest request = (HttpServletRequest)req;
 		HttpServletResponse response = (HttpServletResponse)res;
 
-		String portletId = ParamUtil.getString(request, "p_p_id");
-
-		if (Validator.isNull(portletId) && _isLayout(request) &&
-			USE_LAYOUT_CACHE_FILTER && !_isAlreadyFiltered(request) &&
-			!_isSignedIn(request) && !_isInclude(request)) {
+		if (USE_LAYOUT_CACHE_FILTER && !_isPortletRequest(request) &&
+			_isLayout(request) && !_isSignedIn(request) &&
+			!_isInclude(request) && !_isAlreadyFiltered(request)) {
 
 			request.setAttribute(_ALREADY_FILTERED, Boolean.TRUE);
 
@@ -116,19 +120,15 @@ public class LayoutCacheFilter implements Filter {
 				LayoutCacheUtil.getLayoutCacheResponseData(_companyId, key);
 
 			if (data == null) {
-				String plid = _getPlid(
-					request.getPathInfo(), request.getServletPath(),
-					ParamUtil.getString(request, "p_l_id"));
-
-				if (!_isCacheable(plid)) {
-					_log.debug("Layout is not cacheable " + plid);
+				if (!_isCacheable(request)) {
+					_log.debug("Layout is not cacheable " + key);
 
 					chain.doFilter(req, res);
 
 					return;
 				}
 
-				_log.info("Caching layout " + plid);
+				_log.info("Caching layout " + key);
 
 				LayoutCacheResponse layoutCacheResponse =
 					new LayoutCacheResponse(response);
@@ -195,11 +195,16 @@ public class LayoutCacheFilter implements Filter {
 	protected String getCacheKey(HttpServletRequest req) {
 		String uid = null;
 
-		if (_friendly) {
+		if (_pattern == _PATTERN_FRIENDLY) {
 			uid = req.getServletPath() + req.getPathInfo();
 		}
-		else {
+		else if (_pattern == _PATTERN_LAYOUT) {
 			uid = ParamUtil.getString(req, "p_l_id");
+		}
+		else if (_pattern == _PATTERN_RESOURCE) {
+			uid =
+				req.getServletPath() + req.getPathInfo() + StringPool.QUESTION +
+					req.getQueryString();
 		}
 
 		String languageId = LanguageUtil.getLanguageId(req);
@@ -213,7 +218,7 @@ public class LayoutCacheFilter implements Filter {
 	private String _getPlid(
 		String pathInfo, String servletPath, String defaultPlid) {
 
-		if (!_friendly) {
+		if (_pattern == _PATTERN_LAYOUT) {
 			return defaultPlid;
 		}
 
@@ -303,14 +308,20 @@ public class LayoutCacheFilter implements Filter {
 		}
 	}
 
-	private boolean _isCacheable(String plid) {
-		Layout layout = null;
+	private boolean _isCacheable(HttpServletRequest req) {
+		if (_pattern == _PATTERN_RESOURCE) {
+			return true;
+		}
 
 		try {
+			String plid = _getPlid(
+				req.getPathInfo(), req.getServletPath(),
+				ParamUtil.getString(req, "p_l_id"));
+
 			String layoutId = Layout.getLayoutId(plid);
 			String ownerId = Layout.getOwnerId(plid);
 
-			layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+			Layout layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
 
 			Properties props = layout.getTypeSettingsProperties();
 
@@ -353,7 +364,9 @@ public class LayoutCacheFilter implements Filter {
 	}
 
 	private boolean _isLayout(HttpServletRequest req) {
-		if (_friendly) {
+		if ((_pattern == _PATTERN_FRIENDLY) ||
+			(_pattern == _PATTERN_RESOURCE)) {
+
 			return true;
 		}
 		else {
@@ -365,6 +378,17 @@ public class LayoutCacheFilter implements Filter {
 			else {
 				return false;
 			}
+		}
+	}
+
+	private boolean _isPortletRequest(HttpServletRequest req) {
+		String portletId = ParamUtil.getString(req, "p_p_id");
+
+		if (Validator.isNull(portletId)) {
+			return false;
+		}
+		else {
+			return true;
 		}
 	}
 
@@ -390,8 +414,14 @@ public class LayoutCacheFilter implements Filter {
 	private static final String _LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING =
 		PropsUtil.get(PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
 
+	private static final int _PATTERN_FRIENDLY = 0;
+
+	private static final int _PATTERN_LAYOUT = 1;
+
+	private static final int _PATTERN_RESOURCE = 2;
+
 	private static Log _log = LogFactory.getLog(LayoutCacheFilter.class);
 	private String _companyId;
-	private boolean _friendly;
+	private int _pattern;
 
 }
