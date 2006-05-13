@@ -346,8 +346,8 @@ public class LayoutCacheFilter implements Filter {
 		Layout layout = null;
 
 		try {
-			layout = LayoutLocalServiceUtil.getFriendlyURLLayout(ownerId,
-				friendlyURL);
+			layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
+				ownerId, friendlyURL);
 		}
 		catch (Exception e) {
 			_log.error(e);
