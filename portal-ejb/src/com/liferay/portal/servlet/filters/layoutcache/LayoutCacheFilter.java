@@ -161,16 +161,16 @@ public class LayoutCacheFilter implements Filter {
 					int type = header.getType();
 
 					if (type == Header.DATE_TYPE) {
-						response.addDateHeader(headerKey,
-							header.getDateValue());
+						response.addDateHeader(
+							headerKey, header.getDateValue());
 					}
 					else if (type == Header.INTEGER_TYPE) {
-						response.addIntHeader(headerKey,
-							header.getIntValue());
+						response.addIntHeader(
+							headerKey, header.getIntValue());
 					}
 					else if (type == Header.STRING_TYPE) {
-						response.addHeader(headerKey,
-							header.getStringValue());
+						response.addHeader(
+							headerKey, header.getStringValue());
 					}
 				}
 			}
@@ -196,7 +196,7 @@ public class LayoutCacheFilter implements Filter {
 
 	protected String getCacheKey(HttpServletRequest req) {
 		String uid = null;
-		
+
 		if (_friendly) {
 			uid = req.getServletPath() + req.getPathInfo();
 		}
@@ -210,84 +210,6 @@ public class LayoutCacheFilter implements Filter {
 		String key = uid + StringPool.POUND + languageId + isIe;
 
 		return key.trim().toUpperCase();
-	}
-
-	private boolean _isAlreadyFiltered(HttpServletRequest req) {
-		if (req.getAttribute(_ALREADY_FILTERED) != null) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	private boolean _isCacheable(String companyId, String plid) {
-		Layout layout = null;
-
-		try {
-			String layoutId = Layout.getLayoutId(plid);
-			String ownerId = Layout.getOwnerId(plid);
-
-			layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
-
-			Properties props = layout.getTypeSettingsProperties();
-
-			for (int i = 0; i < 10; i++) {
-				String columnId = "column-" + i;
-
-				String settings = props.getProperty(columnId, StringPool.BLANK);
-
-				String[] portlets = StringUtil.split(settings);
-
-				for (int j = 0; j < portlets.length; j++) {
-					String portletId = StringUtil.extractFirst(
-						portlets[j], Portlet.INSTANCE_SEPARATOR);
-
-					Portlet portlet = PortletServiceUtil.getPortletById(
-						companyId, portletId);
-
-					if (!portlet.isLayoutCacheable()) {
-						return false;
-					}
-				}
-			}
-		}
-		catch(Exception e) {
-			return false;
-		}
-
-		return true;
-	}
-
-	private boolean _isInclude(HttpServletRequest req) {
-		String uri = (String)req.getAttribute(_INCLUDE);
-
-		if (uri == null) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
-	private boolean _isLayout(HttpServletRequest req) {
-		String plid = ParamUtil.getString(req, "p_l_id");
-
-		return _friendly || Validator.isNotNull(plid);		
-	}
-
-	private boolean _isSignedIn(HttpServletRequest req) {
-		try {
-			User user = PortalUtil.getUser(req);
-
-			if (user != null) {
-				return true;
-			}
-		}
-		catch (Exception ex) {
-		}
-
-		return false;
 	}
 
 	private String _getPlid(
@@ -372,6 +294,94 @@ public class LayoutCacheFilter implements Filter {
 		}
 
 		return layout.getPlid();
+	}
+
+	private boolean _isAlreadyFiltered(HttpServletRequest req) {
+		if (req.getAttribute(_ALREADY_FILTERED) != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	private boolean _isCacheable(String companyId, String plid) {
+		Layout layout = null;
+
+		try {
+			String layoutId = Layout.getLayoutId(plid);
+			String ownerId = Layout.getOwnerId(plid);
+
+			layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+
+			Properties props = layout.getTypeSettingsProperties();
+
+			for (int i = 0; i < 10; i++) {
+				String columnId = "column-" + i;
+
+				String settings = props.getProperty(columnId, StringPool.BLANK);
+
+				String[] portlets = StringUtil.split(settings);
+
+				for (int j = 0; j < portlets.length; j++) {
+					String portletId = StringUtil.extractFirst(
+						portlets[j], Portlet.INSTANCE_SEPARATOR);
+
+					Portlet portlet = PortletServiceUtil.getPortletById(
+						companyId, portletId);
+
+					if (!portlet.isLayoutCacheable()) {
+						return false;
+					}
+				}
+			}
+		}
+		catch(Exception e) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean _isInclude(HttpServletRequest req) {
+		String uri = (String)req.getAttribute(_INCLUDE);
+
+		if (uri == null) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	private boolean _isLayout(HttpServletRequest req) {
+		if (_friendly) {
+			return true;
+		}
+		else {
+			String plid = ParamUtil.getString(req, "p_l_id");
+
+			if (Validator.isNotNull(plid)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	}
+
+	private boolean _isSignedIn(HttpServletRequest req) {
+		try {
+			User user = PortalUtil.getUser(req);
+
+			if (user != null) {
+				return true;
+			}
+		}
+		catch (Exception ex) {
+		}
+
+		return false;
 	}
 
 	private static final String _INCLUDE = "javax.servlet.include.request_uri";
