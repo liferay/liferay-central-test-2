@@ -102,8 +102,6 @@ public class LayoutCacheFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest)req;
 		HttpServletResponse response = (HttpServletResponse)res;
 
-		String companyId = PortalUtil.getCompanyId(request);
-
 		String portletId = ParamUtil.getString(request, "p_p_id");
 
 		if (Validator.isNull(portletId) && _isLayout(request) &&
@@ -115,14 +113,14 @@ public class LayoutCacheFilter implements Filter {
 			String key = getCacheKey(request);
 
 			LayoutCacheResponseData data =
-				LayoutCacheUtil.getLayoutCacheResponseData(companyId, key);
+				LayoutCacheUtil.getLayoutCacheResponseData(_companyId, key);
 
 			if (data == null) {
 				String plid = _getPlid(
 					request.getPathInfo(), request.getServletPath(),
 					ParamUtil.getString(request, "p_l_id"));
 
-				if (!_isCacheable(companyId, plid)) {
+				if (!_isCacheable(plid)) {
 					_log.debug("Layout is not cacheable " + plid);
 
 					chain.doFilter(req, res);
@@ -143,7 +141,7 @@ public class LayoutCacheFilter implements Filter {
 					layoutCacheResponse.getHeaders());
 
 				LayoutCacheUtil.putLayoutCacheResponseData(
-					companyId, key, data);
+					_companyId, key, data);
 			}
 
 			Map headers = data.getHeaders();
@@ -305,7 +303,7 @@ public class LayoutCacheFilter implements Filter {
 		}
 	}
 
-	private boolean _isCacheable(String companyId, String plid) {
+	private boolean _isCacheable(String plid) {
 		Layout layout = null;
 
 		try {
@@ -328,7 +326,7 @@ public class LayoutCacheFilter implements Filter {
 						portlets[j], Portlet.INSTANCE_SEPARATOR);
 
 					Portlet portlet = PortletServiceUtil.getPortletById(
-						companyId, portletId);
+						_companyId, portletId);
 
 					if (!portlet.isLayoutCacheable()) {
 						return false;
@@ -371,17 +369,14 @@ public class LayoutCacheFilter implements Filter {
 	}
 
 	private boolean _isSignedIn(HttpServletRequest req) {
-		try {
-			User user = PortalUtil.getUser(req);
+		String userId = PortalUtil.getUserId(req);
 
-			if (user != null) {
-				return true;
-			}
+		if (userId == null) {
+			return false;
 		}
-		catch (Exception ex) {
+		else {
+			return true;
 		}
-
-		return false;
 	}
 
 	private static final String _INCLUDE = "javax.servlet.include.request_uri";
