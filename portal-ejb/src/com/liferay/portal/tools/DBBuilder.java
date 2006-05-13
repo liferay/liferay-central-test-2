@@ -277,7 +277,7 @@ public class DBBuilder {
 
 		// MySQL
 
-		String mysql = _buildTemplate(fileName, _MYSQL);
+		String mysql = _buildTemplate(fileName, _MYSQL, true);
 
 		mysql = _rewordMysql(mysql);
 		mysql = StringUtil.replace(
@@ -409,6 +409,13 @@ public class DBBuilder {
 
 	private String _buildTemplate(String fileName, String[] replace)
 		throws IOException {
+		
+		return _buildTemplate(fileName, replace, false);
+	}
+
+	private String _buildTemplate(
+			String fileName, String[] replace, boolean mysql)
+		throws IOException {
 
 		File file = new File("../sql/" + fileName + ".sql");
 
@@ -442,6 +449,7 @@ public class DBBuilder {
 					}
 
 					//if (line.indexOf("portal-tables.sql") != -1) {
+						include = _convertTimestamp(include, mysql);
 						include = StringUtil.replace(
 							include, _TEMPLATE, replace);
 					//}
@@ -461,10 +469,23 @@ public class DBBuilder {
 		}
 
 		if (fileName.startsWith("update-")) {
+			template = _convertTimestamp(template, mysql);
 			template = StringUtil.replace(template, _TEMPLATE, replace);
 		}
 
 		return template;
+	}
+
+	private String _convertTimestamp(String data, boolean mysql) {
+		String s = null;
+		if (mysql) {
+			s = StringUtil.replace(data, _SPECIFIC_TIMESTAMP, "");
+		}
+		else {
+			s = data.replaceAll(
+				_SPECIFIC_TIMESTAMP + "\\d+", "CURRENT_TIMESTAMP");
+		}
+		return s;
 	}
 
 	private void _convertToOracleCSV(String line, StringBuffer sb) {
@@ -844,6 +865,8 @@ public class DBBuilder {
 	private static String[] _REWORD_TEMPLATE = {
 		"@table@", "@old-column@", "@new-column@", "@type@", "@nullable@"
 	};
+
+	private static String _SPECIFIC_TIMESTAMP = "SPECIFIC_TIMESTAMP_";
 
 	private static String[] _TEMPLATE = {
 		"##", "TRUE", "FALSE",

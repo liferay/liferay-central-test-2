@@ -55,6 +55,7 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
+import com.liferay.util.Time;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.zip.ZipWriter;
@@ -148,7 +149,18 @@ public class ExportAction extends Action {
 	}
 
 	protected void addColumn(StringBuffer sb, Date value) {
-		sb.append("CURRENT_TIMESTAMP, ");
+		addColumn(sb, value, true);
+	}
+
+	protected void addColumn(StringBuffer sb, Date value, boolean current) {
+		if (current) {
+			sb.append("CURRENT_TIMESTAMP, ");
+		}
+		else {
+			sb.append("SPECIFIC_TIMESTAMP_");
+			sb.append(Time.getFormattedString(value, "yyyyMMddkkmmss"));
+			sb.append(", ");
+		}
 	}
 
 	protected void addColumn(StringBuffer sb, String value) {
@@ -259,7 +271,7 @@ public class ExportAction extends Action {
 				addColumn(sb, article.getType());
 				addColumn(sb, article.getStructureId());
 				addColumn(sb, article.getTemplateId());
-				addColumn(sb, article.getDisplayDate());
+				addColumn(sb, article.getDisplayDate(), false);
 				addColumn(sb, article.getApproved());
 				addColumn(sb, article.getApprovedByUserId());
 				addColumn(sb, article.getApprovedByUserName());
