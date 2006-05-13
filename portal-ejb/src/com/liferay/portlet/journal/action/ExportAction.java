@@ -158,7 +158,7 @@ public class ExportAction extends Action {
 		}
 		else {
 			sb.append("SPECIFIC_TIMESTAMP_");
-			sb.append(Time.getFormattedString(value, "yyyyMMddkkmmss"));
+			sb.append(Time.getSimpleDate(value, "yyyyMMddkkmmss"));
 			sb.append(", ");
 		}
 	}

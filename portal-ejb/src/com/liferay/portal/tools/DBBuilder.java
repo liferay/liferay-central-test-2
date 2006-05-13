@@ -409,7 +409,7 @@ public class DBBuilder {
 
 	private String _buildTemplate(String fileName, String[] replace)
 		throws IOException {
-		
+
 		return _buildTemplate(fileName, replace, false);
 	}
 
@@ -478,13 +478,15 @@ public class DBBuilder {
 
 	private String _convertTimestamp(String data, boolean mysql) {
 		String s = null;
+
 		if (mysql) {
-			s = StringUtil.replace(data, _SPECIFIC_TIMESTAMP, "");
+			s = StringUtil.replace(data, "SPECIFIC_TIMESTAMP_", "");
 		}
 		else {
 			s = data.replaceAll(
-				_SPECIFIC_TIMESTAMP + "\\d+", "CURRENT_TIMESTAMP");
+				"SPECIFIC_TIMESTAMP_" + "\\d+", "CURRENT_TIMESTAMP");
 		}
+
 		return s;
 	}
 
@@ -865,8 +867,6 @@ public class DBBuilder {
 	private static String[] _REWORD_TEMPLATE = {
 		"@table@", "@old-column@", "@new-column@", "@type@", "@nullable@"
 	};
-
-	private static String _SPECIFIC_TIMESTAMP = "SPECIFIC_TIMESTAMP_";
 
 	private static String[] _TEMPLATE = {
 		"##", "TRUE", "FALSE",

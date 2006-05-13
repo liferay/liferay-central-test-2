@@ -117,7 +117,23 @@ public class Time {
 		return s;
 	}
 
-	public static String getFormattedString(Date date, String format) {
+	public static String getRFC822() {
+		return getRFC822(new Date());
+	}
+
+	public static String getRFC822(Date date) {
+		return getSimpleDate(date, RFC822_FORMAT);
+	}
+
+	public static String getShortTimestamp() {
+		return getShortTimestamp(new Date());
+	}
+
+	public static String getShortTimestamp(Date date) {
+		return getSimpleDate(date, SHORT_TIMESTAMP_FORMAT);
+	}
+
+	public static String getSimpleDate(Date date, String format) {
 		String s = StringPool.BLANK;
 
 		if (date != null) {
@@ -129,28 +145,12 @@ public class Time {
 		return s;
 	}
 
-	public static String getRFC822() {
-		return getRFC822(new Date());
-	}
-
-	public static String getRFC822(Date date) {
-		return getFormattedString(date, RFC822_FORMAT);
-	}
-
-	public static String getShortTimestamp() {
-		return getShortTimestamp(new Date());
-	}
-
-	public static String getShortTimestamp(Date date) {
-		return getFormattedString(date, SHORT_TIMESTAMP_FORMAT);
-	}
-
 	public static String getTimestamp() {
 		return getTimestamp(new Date());
 	}
 
 	public static String getTimestamp(Date date) {
-		return getFormattedString(date, TIMESTAMP_FORMAT);
+		return getSimpleDate(date, TIMESTAMP_FORMAT);
 	}
 
 }
