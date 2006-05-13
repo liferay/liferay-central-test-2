@@ -114,6 +114,7 @@
 --%><%@ page import="com.liferay.portlet.admin.model.ShoppingConfig" %><%--
 --%><%@ page import="com.liferay.portlet.admin.model.UserConfig" %><%--
 --%><%@ page import="com.liferay.portlet.admin.service.spring.AdminConfigServiceUtil" %><%--
+--%><%@ page import="com.liferay.util.ArrayUtil" %><%--
 --%><%@ page import="com.liferay.util.BeanParamUtil" %><%--
 --%><%@ page import="com.liferay.util.BrowserSniffer" %><%--
 --%><%@ page import="com.liferay.util.CollectionFactory" %><%--

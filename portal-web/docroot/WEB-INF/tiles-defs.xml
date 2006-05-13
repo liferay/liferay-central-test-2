@@ -925,6 +925,10 @@
 		<put name="portlet_content" value="/portlet/shopping/checkout_third.jsp" />
 	</definition>
 
+	<definition name="portlet.shopping.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
+		<put name="portlet_configuration_content" value="/portlet/shopping/edit_configuration.jsp" />
+	</definition>
+
 	<definition name="portlet.shopping.edit_coupon" extends="portlet.shopping">
 		<put name="portlet_content" value="/portlet/shopping/edit_coupon.jsp" />
 	</definition>

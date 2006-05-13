@@ -48,6 +48,12 @@ import javax.portlet.ValidatorException;
  */
 public class ShoppingPreferences {
 
+	public static final String[] CC_TYPES =
+		new String[] {"visa", "mastercard", "discover", "amex"};
+
+	public static final String[] CURRENCY_IDS =
+		new String[] {"USD", "CAD", "EUR", "GBP", "JPY"};
+
 	public static final double[] SHIPPING_RANGE = {
 		0.01, 9.99, 10.00, 49.99, 50.00, 99.99, 100.00, 199.99, 200.00,
 		Double.POSITIVE_INFINITY
@@ -89,7 +95,7 @@ public class ShoppingPreferences {
 
 	public String[] getCcTypes() {
 		return StringUtil.split(_prefs.getValue(
-			"cc-types", "visa,mastercard,discover,amex"));
+			"cc-types", StringUtil.merge(CC_TYPES)));
 	}
 
 	public void setCcTypes(String[] ccTypes) throws ReadOnlyException {
@@ -245,11 +251,23 @@ public class ShoppingPreferences {
 		return _prefs.getValue("email-from-address", emailFromAddress);
 	}
 
+	public void setEmailFromAddress(String emailFromAddress)
+		throws ReadOnlyException {
+
+		_prefs.setValue("email-from-address", emailFromAddress);
+	}
+
 	public String getEmailFromName() {
 		String emailFromName = PropsUtil.get(
 			PropsUtil.SHOPPING_EMAIL_FROM_NAME);
 
 		return _prefs.getValue("email-from-name", emailFromName);
+	}
+
+	public void setEmailFromName(String emailFromName)
+		throws ReadOnlyException {
+
+		_prefs.setValue("email-from-name", emailFromName);
 	}
 
 	public boolean getEmailOrderConfirmationEnabled() {
@@ -265,6 +283,15 @@ public class ShoppingPreferences {
 		}
 	}
 
+	public void setEmailOrderConfirmationEnabled(
+			boolean emailOrderConfirmationEnabled)
+		throws ReadOnlyException {
+
+		_prefs.setValue(
+			"email-order-confirmation-enabled",
+			String.valueOf(emailOrderConfirmationEnabled));
+	}
+
 	public String getEmailOrderConfirmationBody() throws IOException {
 		String emailOrderConfirmationBody = _prefs.getValue(
 			"email-order-confirmation-body", StringPool.BLANK);
@@ -276,6 +303,13 @@ public class ShoppingPreferences {
 			return ContentUtil.get(PropsUtil.get(
 				PropsUtil.SHOPPING_EMAIL_ORDER_CONFIRMATION_BODY));
 		}
+	}
+
+	public void setEmailOrderConfirmationBody(String emailOrderConfirmationBody)
+		throws ReadOnlyException {
+
+		_prefs.setValue(
+			"email-order-confirmation-body", emailOrderConfirmationBody);
 	}
 
 	public String getEmailOrderConfirmationSubject() throws IOException {
@@ -291,6 +325,14 @@ public class ShoppingPreferences {
 		}
 	}
 
+	public void setEmailOrderConfirmationSubject(
+			String emailOrderConfirmationSubject)
+		throws ReadOnlyException {
+
+		_prefs.setValue(
+			"email-order-confirmation-subject", emailOrderConfirmationSubject);
+	}
+
 	public boolean getEmailOrderShippingEnabled() {
 		String emailOrderShippingEnabled = _prefs.getValue(
 			"email-order-shipping-enabled", StringPool.BLANK);
@@ -302,6 +344,14 @@ public class ShoppingPreferences {
 			return GetterUtil.getBoolean(PropsUtil.get(
 				PropsUtil.SHOPPING_EMAIL_ORDER_SHIPPING_ENABLED));
 		}
+	}
+
+	public void setEmailOrderShippingEnabled(boolean emailOrderShippingEnabled)
+		throws ReadOnlyException {
+
+		_prefs.setValue(
+			"email-order-shipping-enabled",
+			String.valueOf(emailOrderShippingEnabled));
 	}
 
 	public String getEmailOrderShippingBody() throws IOException {
@@ -317,6 +367,12 @@ public class ShoppingPreferences {
 		}
 	}
 
+	public void setEmailOrderShippingBody(String emailOrderShippingBody)
+		throws ReadOnlyException {
+
+		_prefs.setValue("email-order-shipping-body", emailOrderShippingBody);
+	}
+
 	public String getEmailOrderShippingSubject() throws IOException {
 		String emailOrderShippingSubject = _prefs.getValue(
 			"email-order-shipping-subject", StringPool.BLANK);
@@ -328,6 +384,13 @@ public class ShoppingPreferences {
 			return ContentUtil.get(PropsUtil.get(
 				PropsUtil.SHOPPING_EMAIL_ORDER_SHIPPING_SUBJECT));
 		}
+	}
+
+	public void setEmailOrderShippingSubject(String emailOrderShippingSubject)
+		throws ReadOnlyException {
+
+		_prefs.setValue(
+			"email-order-shipping-subject", emailOrderShippingSubject);
 	}
 
 	public void store() throws IOException, ValidatorException {

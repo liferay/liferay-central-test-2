@@ -30,6 +30,21 @@ package com.liferay.util;
  */
 public class ArrayUtil {
 
+	public static boolean contains(Object[] array, Object obj) {
+		if (array == null) {
+			return false;
+		}
+		else {
+			for (int i = 0; i < array.length; i++) {
+				if (obj.equals(array[i])) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+	}
+
 	public static int getLength(Object[] array) {
 		if (array == null) {
 			return 0;

@@ -113,4 +113,8 @@ doubleFormat.setMaximumFractionDigits(2);
 doubleFormat.setMinimumFractionDigits(2);
 
 NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
+
+NumberFormat taxFormat = NumberFormat.getPercentInstance(locale);
+
+taxFormat.setMinimumFractionDigits(3);
 %>

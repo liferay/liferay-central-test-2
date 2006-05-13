@@ -1115,6 +1115,10 @@
 			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
 		</action>
 
+		<action path="/shopping/edit_configuration" type="com.liferay.portlet.shopping.action.EditConfigurationAction">
+			<forward name="portlet.shopping.edit_configuration" path="portlet.shopping.edit_configuration" />
+		</action>
+
 		<action path="/shopping/edit_coupon" type="com.liferay.portlet.shopping.action.EditCouponAction">
 			<forward name="portlet.shopping.edit_coupon" path="portlet.shopping.edit_coupon" />
 			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
