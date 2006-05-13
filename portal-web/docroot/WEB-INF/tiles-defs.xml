@@ -965,34 +965,6 @@
 	<definition name="portlet.shopping.search" extends="portlet.shopping">
 		<put name="portlet_content" value="/portlet/shopping/search.jsp" />
 	</definition>
-
-	<definition name="portlet.shopping.setup" extends="portlet.shopping">
-		<put name="portlet_content" value="/portlet/shopping/setup.jsp" />
-	</definition>
-
-	<definition name="portlet.shopping.setup_display" extends="portlet.shopping">
-		<put name="portlet_content" value="/portlet/shopping/setup_display.jsp" />
-	</definition>
-
-	<definition name="portlet.shopping.setup_insurance_calculation" extends="portlet.shopping">
-		<put name="portlet_content" value="/portlet/shopping/setup_insurance_calculation.jsp" />
-	</definition>
-
-	<definition name="portlet.shopping.setup_order_email" extends="portlet.shopping">
-		<put name="portlet_content" value="/portlet/shopping/setup_order_email.jsp" />
-	</definition>
-
-	<definition name="portlet.shopping.setup_payment" extends="portlet.shopping">
-		<put name="portlet_content" value="/portlet/shopping/setup_payment.jsp" />
-	</definition>
-
-	<definition name="portlet.shopping.setup_shipping_calculation" extends="portlet.shopping">
-		<put name="portlet_content" value="/portlet/shopping/setup_shipping_calculation.jsp" />
-	</definition>
-
-	<definition name="portlet.shopping.setup_shipping_email" extends="portlet.shopping">
-		<put name="portlet_content" value="/portlet/shopping/setup_shipping_email.jsp" />
-	</definition>
 	-->
 
 	<!-- Stocks -->

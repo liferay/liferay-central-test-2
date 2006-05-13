@@ -1397,35 +1397,6 @@
 			<ref bean="com.liferay.portlet.addressbook.service.persistence.ABListPersistence" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.admin.service.spring.AdminConfigService.professional" class="com.liferay.portlet.admin.service.impl.AdminConfigServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.admin.service.spring.AdminConfigService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.admin.service.spring.AdminConfigService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.admin.service.spring.AdminConfigServiceFactory" class="com.liferay.portlet.admin.service.spring.AdminConfigServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.admin.service.spring.AdminConfigService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.admin.service.persistence.AdminConfigPersistence" class="com.liferay.portlet.admin.service.persistence.AdminConfigPersistence" lazy-init="true">
-		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.admin.service.persistence.AdminConfigUtil" class="com.liferay.portlet.admin.service.persistence.AdminConfigUtil" lazy-init="true">
-		<property name="persistence">
-			<ref bean="com.liferay.portlet.admin.service.persistence.AdminConfigPersistence" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalService.professional" class="com.liferay.portlet.blogs.service.impl.BlogsCategoryLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">

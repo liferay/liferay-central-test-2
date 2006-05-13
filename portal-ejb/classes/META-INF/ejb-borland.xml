@@ -224,10 +224,6 @@
 			<bean-home-name>com_liferay_portlet_addressbook_service_ejb_ABListServiceEJB</bean-home-name>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_admin_service_ejb_AdminConfigServiceEJB</ejb-name>
-			<bean-home-name>com_liferay_portlet_admin_service_ejb_AdminConfigServiceEJB</bean-home-name>
-		</session>
-		<session>
 			<ejb-name>com_liferay_portlet_blogs_service_ejb_BlogsCategoryLocalServiceEJB</ejb-name>
 			<bean-local-home-name>ejb/liferay/BlogsCategoryLocalServiceHome</bean-local-home-name>
 		</session>

@@ -22,15 +22,11 @@
 
 package com.liferay.portlet.shopping.action;
 
-import com.liferay.portal.model.Company;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
-import com.liferay.portlet.admin.model.ShoppingConfig;
-import com.liferay.portlet.admin.service.spring.AdminConfigServiceUtil;
 import com.liferay.portlet.shopping.BillingCityException;
 import com.liferay.portlet.shopping.BillingCountryException;
 import com.liferay.portlet.shopping.BillingEmailAddressException;
@@ -56,6 +52,7 @@ import com.liferay.portlet.shopping.ShippingZipException;
 import com.liferay.portlet.shopping.model.ShoppingCart;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.service.spring.ShoppingOrderLocalServiceUtil;
+import com.liferay.portlet.shopping.util.ShoppingPreferences;
 import com.liferay.portlet.shopping.util.ShoppingUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
@@ -64,8 +61,6 @@ import com.liferay.util.servlet.SessionErrors;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletContext;
-import javax.portlet.PortletSession;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
@@ -163,44 +158,36 @@ public class CheckoutAction extends CartAction {
 	protected void forwardCheckout(ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		PortletSession ses = req.getPortletSession();
-
-		PortletContext portletCtx = ses.getPortletContext();
-
-		Company company = PortalUtil.getCompany(req);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 		ShoppingCart cart = ShoppingUtil.getCart(req);
 
 		ShoppingOrder order =
 			(ShoppingOrder)req.getAttribute(WebKeys.SHOPPING_ORDER);
 
-		ShoppingConfig shoppingConfig =
-			AdminConfigServiceUtil.getShoppingConfig(company.getCompanyId());
-
-		String mainPath = (String)portletCtx.getAttribute(WebKeys.MAIN_PATH);
+		ShoppingPreferences prefs = ShoppingPreferences.getInstance(
+			themeDisplay.getCompanyId(), themeDisplay.getPortletGroupId());
 
 		String returnURL = ShoppingUtil.getPayPalReturnURL(
 			((ActionResponseImpl)res).createActionURL(), order);
-		String notifyURL = ShoppingUtil.getPayPalNotifyURL(company, mainPath);
+		String notifyURL = ShoppingUtil.getPayPalNotifyURL(
+			themeDisplay.getCompany(), themeDisplay.getPathMain());
 
-		if (shoppingConfig.usePayPal()) {
+		if (prefs.usePayPal()) {
 			double total = ShoppingUtil.calculateTotal(
 				cart.getItems(), order.getBillingState(), cart.getCoupon(),
 				cart.getAltShipping(), cart.isInsure());
 
-			/*String redirectURL = ShoppingUtil.getPayPalRedirectURL(
-				shoppingConfig, order, total, returnURL, notifyURL);
+			String redirectURL = ShoppingUtil.getPayPalRedirectURL(
+				prefs, order, total, returnURL, notifyURL);
 
-			// Send redirect
-
-			res.sendRedirect(redirectURL);*/ // FIX ME
+			res.sendRedirect(redirectURL);
 		}
 		else {
-			//ShoppingOrderLocalServiceUtil.sendOrderEmail(order);
+			ShoppingOrderLocalServiceUtil.sendEmail(order, "confirmation");
 
-			// Send redirect
-
-			//res.sendRedirect(returnURL);
+			res.sendRedirect(returnURL);
 		}
 	}
 

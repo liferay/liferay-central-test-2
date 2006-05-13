@@ -465,6 +465,51 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
+						<b>[$ORDER_BILLING_ADDRESS$]</b>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						The order billing address
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>[$ORDER_CURRENCY$]</b>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						The order currency
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>[$ORDER_NUMBER$]</b>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						The order ID
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>[$ORDER_SHIPPING_ADDRESS$]</b>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						The order shipping address
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>[$ORDER_TOTAL$]</b>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						The order total
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<b>[$PORTAL_URL$]</b>
 					</td>
 					<td style="padding-left: 10px;"></td>
@@ -472,28 +517,15 @@ String redirect = ParamUtil.getString(request, "redirect");
 						<%= company.getPortalURL() %>
 					</td>
 				</tr>
-
-				<c:if test='<%= tabs3.equals("shipping-email") %>'>
-					<tr>
-						<td>
-							<b>[$REMOTE_ADDRESS$]</b>
-						</td>
-						<td style="padding-left: 10px;"></td>
-						<td>
-							The browser's remote address
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<b>[$REMOTE_HOST$]</b>
-						</td>
-						<td style="padding-left: 10px;"></td>
-						<td>
-							The browser's remote host
-						</td>
-					</tr>
-				</c:if>
-
+				<tr>
+					<td>
+						<b>[$PORTLET_NAME$]</b>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+					</td>
+				</tr>
 				<tr>
 					<td>
 						<b>[$TO_ADDRESS$]</b>
@@ -510,37 +542,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td style="padding-left: 10px;"></td>
 					<td>
 						The name of the email recipient
-					</td>
-				</tr>
-
-				<c:if test='<%= tabs3.equals("shipping-email") %>'>
-					<tr>
-						<td>
-							<b>[$USER_AGENT$]</b>
-						</td>
-						<td style="padding-left: 10px;"></td>
-						<td>
-							The browser's user agent
-						</td>
-					</tr>
-				</c:if>
-
-				<tr>
-					<td>
-						<b>[$USER_ID$]</b>
-					</td>
-					<td style="padding-left: 10px;"></td>
-					<td>
-						The user ID
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<b>[$USER_PASSWORD$]</b>
-					</td>
-					<td style="padding-left: 10px;"></td>
-					<td>
-						The user password
 					</td>
 				</tr>
 				</table>

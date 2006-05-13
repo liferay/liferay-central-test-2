@@ -326,18 +326,6 @@
 		<property name="service" ref="com.liferay.portlet.addressbook.service.spring.ABListService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.addressbook.service.spring.ABListService" />
 	</bean>
-	<bean name="/com_liferay_portlet_admin_service_spring_AdminConfigService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.admin.service.spring.AdminConfigService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.admin.service.spring.AdminConfigService" />
-	</bean>
-	<bean name="/com_liferay_portlet_admin_service_spring_AdminConfigService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.admin.service.spring.AdminConfigService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.admin.service.spring.AdminConfigService" />
-	</bean>
-	<bean name="/com_liferay_portlet_admin_service_spring_AdminConfigService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.admin.service.spring.AdminConfigService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.admin.service.spring.AdminConfigService" />
-	</bean>
 	<bean name="/com_liferay_portlet_blogs_service_spring_BlogsCategoryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.blogs.service.spring.BlogsCategoryService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.blogs.service.spring.BlogsCategoryService" />

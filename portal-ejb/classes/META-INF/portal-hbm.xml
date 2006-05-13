@@ -559,16 +559,6 @@
 			<many-to-many class="com.liferay.portlet.addressbook.service.persistence.ABContactHBM" column="contactId" />
 		</set>
 	</class>
-	<class name="com.liferay.portlet.admin.service.persistence.AdminConfigHBM" table="AdminConfig">
-		<cache usage="read-write" />
-		<id name="configId" type="java.lang.String">
-			<generator class="assigned" />
-		</id>
-		<property name="companyId" />
-		<property name="type" column="type_" />
-		<property name="name" />
-		<property name="config" />
-	</class>
 	<class name="com.liferay.portlet.blogs.service.persistence.BlogsCategoryHBM" table="BlogsCategory">
 		<cache usage="read-write" />
 		<id name="categoryId" type="java.lang.String">

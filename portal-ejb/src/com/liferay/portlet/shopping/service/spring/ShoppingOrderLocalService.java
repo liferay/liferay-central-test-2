@@ -81,6 +81,12 @@ public interface ShoppingOrderLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public void sendEmail(
+		com.liferay.portlet.shopping.model.ShoppingOrder order,
+		java.lang.String emailType)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateLatestOrder(
 		java.lang.String userId, java.lang.String groupId,
 		java.lang.String billingFirstName, java.lang.String billingLastName,

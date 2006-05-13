@@ -206,6 +206,26 @@ public class ShoppingOrderLocalServiceUtil {
 		}
 	}
 
+	public static void sendEmail(
+		com.liferay.portlet.shopping.model.ShoppingOrder order,
+		java.lang.String emailType)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
+			shoppingOrderLocalService.sendEmail(order, emailType);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateLatestOrder(
 		java.lang.String userId, java.lang.String groupId,
 		java.lang.String billingFirstName, java.lang.String billingLastName,

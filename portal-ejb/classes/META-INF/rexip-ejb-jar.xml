@@ -388,13 +388,6 @@
 			<cache-size>20</cache-size>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_admin_service_ejb_AdminConfigServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_admin_service_ejb_AdminConfigServiceEJB</jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
 			<ejb-name>com_liferay_portlet_blogs_service_ejb_BlogsCategoryLocalServiceEJB</ejb-name>
 			<local-jndi-name>ejb/liferay/BlogsCategoryLocalServiceHome</local-jndi-name>
 			<clustered>true</clustered>

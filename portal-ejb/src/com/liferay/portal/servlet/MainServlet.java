@@ -358,17 +358,6 @@ public class MainServlet extends ActionServlet {
 			TaskController.bridgeThenTag = "(then)";
 			TaskController.bridgePostTag = "(post)";
 
-			// Call a service that utilizes Castor to ensure it is compatible
-			// and configured to work with the current application server
-
-			/*try {
-				AdminConfigServiceUtil.getJournalConfig(
-					_companyId, PortletKeys.JOURNAL);
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}*/
-
 			// Last modified paths
 
 			_log.debug("Last modified paths");

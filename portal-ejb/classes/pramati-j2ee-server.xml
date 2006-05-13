@@ -6020,22 +6020,6 @@
 			</ejb-local-ref>
 		</ejb>
 		<ejb>
-			<name>com_liferay_portlet_admin_service_ejb_AdminConfigServiceEJB</name>
-			<max-pool-size>40</max-pool-size>
-			<min-pool-size>20</min-pool-size>
-			<enable-freepool>false</enable-freepool>
-			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
-			<low-activity-interval>20</low-activity-interval>
-			<is-secure>false</is-secure>
-			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portlet_admin_service_ejb_AdminConfigServiceEJB</jndi-name>
-			<local-jndi-name>com_liferay_portlet_admin_service_ejb_AdminConfigServiceEJB__PRAMATI_LOCAL</local-jndi-name>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-		</ejb>
-		<ejb>
 			<name>com_liferay_portlet_blogs_service_ejb_BlogsCategoryLocalServiceEJB</name>
 			<max-pool-size>40</max-pool-size>
 			<min-pool-size>20</min-pool-size>

@@ -29,7 +29,6 @@
 		<unjar src="${project.dir}/lib/activation.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/ajaxtags.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/ant.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/castor.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/commons-fileupload.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/commons-lang.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/commons-logging.jar" dest="${classpath.jsp}" />

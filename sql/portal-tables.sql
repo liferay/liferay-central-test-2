@@ -92,14 +92,6 @@ create table Address (
 	primary_ BOOLEAN
 );
 
-create table AdminConfig (
-	configId VARCHAR(75) not null primary key,
-	companyId VARCHAR(75) not null,
-	type_ VARCHAR(75) null,
-	name VARCHAR(75) null,
-	config TEXT null
-);
-
 create table BlogsCategory (
 	categoryId VARCHAR(75) not null primary key,
 	companyId VARCHAR(75) not null,

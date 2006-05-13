@@ -33,7 +33,6 @@
 	<classpathentry kind="lib" path="lib/axis-ant.jar"/>
 	<classpathentry kind="lib" path="lib/axis-schema.jar"/>
 	<classpathentry kind="lib" path="lib/burlap.jar"/>
-	<classpathentry kind="lib" path="lib/castor.jar"/>
 	<classpathentry kind="lib" path="lib/cglib.jar"/>
 	<classpathentry kind="lib" path="lib/commons-beanutils.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec.jar"/>

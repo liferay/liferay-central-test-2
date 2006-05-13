@@ -27,7 +27,7 @@
 <%
 ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER);
 
-String billingState = ParamUtil.getString(request, "billingState");
+String billingState = BeanParamUtil.getString(order, request, "billingState");
 String billingStateSel = ParamUtil.getString(request, "billingStateSel");
 
 if (StateUtil.isStateId(billingState)) {
@@ -479,7 +479,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= null %>" field="ccName" />
+			<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= null %>" field="ccName" defaultValue="<%= user.getFullName() %>" />
 		</td>
 	</tr>
 	<tr>

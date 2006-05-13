@@ -1160,24 +1160,6 @@
 		<action path="/shopping/notify" type="com.liferay.portlet.shopping.action.PayPalNotificationAction" />
 
 		<action path="/shopping/search" forward="portlet.shopping.search" />
-
-		<action path="/shopping/setup" forward="portlet.shopping.setup" />
-
-		<action path="/shopping/setup_display" forward="portlet.shopping.setup_display" />
-
-		<action path="/shopping/setup_insurance_calculation" forward="portlet.shopping.setup_insurance_calculation" />
-
-		<action path="/shopping/setup_order_email" forward="portlet.shopping.setup_order_email" />
-
-		<action path="/shopping/setup_payment" forward="portlet.shopping.setup_payment" />
-
-		<action path="/shopping/setup_shipping_calculation" forward="portlet.shopping.setup_shipping_calculation" />
-
-		<action path="/shopping/setup_shipping_email" forward="portlet.shopping.setup_shipping_email" />
-
-		<action path="/shopping/update_setup" type="com.liferay.portlet.shopping.action.UpdateShoppingConfigAction">
-			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
-		</action>
 		-->
 
 		<!-- Site Map -->
