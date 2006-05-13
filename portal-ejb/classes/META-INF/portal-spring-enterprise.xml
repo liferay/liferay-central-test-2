@@ -487,33 +487,6 @@
 			<ref bean="com.liferay.portal.service.spring.ImageLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.spring.ImageService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
-		<property name="businessInterface">
-			<value>com.liferay.portal.service.spring.ImageService</value>
-		</property>
-		<property name="jndiName">
-			<value>com_liferay_portal_service_ejb_ImageServiceEJB</value>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.spring.ImageService.professional" class="com.liferay.portal.service.impl.ImageServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.spring.ImageService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.spring.ImageService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.spring.ImageServiceFactory" class="com.liferay.portal.service.spring.ImageServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portal.service.spring.ImageService.enterprise" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.service.persistence.ImagePersistence" class="com.liferay.portal.service.persistence.ImagePersistence" lazy-init="true">
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />

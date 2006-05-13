@@ -126,7 +126,7 @@ public class StartupAction extends SimpleAction {
 
 		// Journal
 
-		ImageLocalServiceUtil.deleteByImageId("%.journal.article.PREVIEW_%");
+		ImageLocalServiceUtil.deleteImages("%.journal.article.PREVIEW_%");
 	}
 
 	private static Log _log = LogFactory.getLog(StartupAction.class);

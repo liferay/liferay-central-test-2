@@ -28,7 +28,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
-import com.liferay.portal.service.spring.ImageServiceUtil;
+import com.liferay.portal.service.spring.ImageLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.util.Constants;
@@ -488,7 +488,7 @@ public class ExportAction extends Action {
 	protected void insertDataImage(ZipWriter zipWriter) throws Exception {
 		StringBuffer sb = new StringBuffer();
 
-		Iterator itr = ImageServiceUtil.getImageById(
+		Iterator itr = ImageLocalServiceUtil.search(
 			COMPANY_ID + "%").iterator();
 
 		while (itr.hasNext()) {

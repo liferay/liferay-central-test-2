@@ -29,7 +29,22 @@ package com.liferay.portal.service.spring;
  *
  */
 public interface ImageLocalService {
-	public void deleteByImageId(java.lang.String imageId)
+	public void deleteImage(java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
+
+	public void deleteImages(java.lang.String imageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Image getImage(java.lang.String imageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public java.util.List search(java.lang.String imageId)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Image updateImage(
+		java.lang.String imageId, byte[] bytes)
+		throws com.liferay.portal.SystemException;
 }

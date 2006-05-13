@@ -109,13 +109,6 @@
 			<timeout>3000</timeout>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portal_service_ejb_ImageServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portal_service_ejb_ImageServiceEJB</jndi-name>
-			<cluster-home>false</cluster-home>
-			<cluster-object>false</cluster-object>
-			<timeout>3000</timeout>
-		</session>
-		<session>
 			<ejb-name>com_liferay_portal_service_ejb_LayoutLocalServiceEJB</ejb-name>
 			<local-jndi-name>ejb/liferay/LayoutLocalServiceHome</local-jndi-name>
 			<cluster-home>false</cluster-home>

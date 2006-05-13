@@ -23,7 +23,7 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.model.Image;
-import com.liferay.portal.service.spring.ImageServiceUtil;
+import com.liferay.portal.service.spring.ImageLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ImageUtil;
 
@@ -45,7 +45,7 @@ public class ImageLocalUtil {
 		Image image = null;
 
 		try {
-			image = ImageServiceUtil.getImage(id);
+			image = ImageLocalServiceUtil.getImage(id);
 		}
 		catch (Exception e) {
 			_log.warn(e);
@@ -75,7 +75,7 @@ public class ImageLocalUtil {
 
 	public static void put(String id, byte[] bytes) {
 		try {
-			ImageServiceUtil.updateImage(id, bytes);
+			ImageLocalServiceUtil.updateImage(id, bytes);
 		}
 		catch (Exception e) {
 			_log.warn(e);
@@ -84,7 +84,7 @@ public class ImageLocalUtil {
 
 	public static void remove(String id) {
 		try {
-			ImageServiceUtil.deleteImage(id);
+			ImageLocalServiceUtil.deleteImage(id);
 		}
 		catch (Exception e) {
 			_log.warn(e);

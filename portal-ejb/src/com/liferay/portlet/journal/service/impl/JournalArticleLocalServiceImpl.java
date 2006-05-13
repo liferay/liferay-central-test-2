@@ -383,7 +383,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Images
 
-		ImageLocalServiceUtil.deleteByImageId(
+		ImageLocalServiceUtil.deleteImages(
 			"%.journal.article." + article.getArticleId() + ".%." +
 				article.getVersion());
 

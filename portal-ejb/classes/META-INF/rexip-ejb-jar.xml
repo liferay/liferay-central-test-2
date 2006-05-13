@@ -108,13 +108,6 @@
 			<cache-size>20</cache-size>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portal_service_ejb_ImageServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portal_service_ejb_ImageServiceEJB</jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
 			<ejb-name>com_liferay_portal_service_ejb_LayoutLocalServiceEJB</ejb-name>
 			<local-jndi-name>ejb/liferay/LayoutLocalServiceHome</local-jndi-name>
 			<clustered>true</clustered>

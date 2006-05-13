@@ -63,10 +63,6 @@
 		<jndi-name>ejb/liferay/ImageLocalServiceHome</jndi-name>
 	</jonas-session>
 	<jonas-session>
-		<ejb-name>com_liferay_portal_service_ejb_ImageServiceEJB</ejb-name>
-		<jndi-name>com_liferay_portal_service_ejb_ImageServiceEJB</jndi-name>
-	</jonas-session>
-	<jonas-session>
 		<ejb-name>com_liferay_portal_service_ejb_LayoutLocalServiceEJB</ejb-name>
 		<jndi-name>ejb/liferay/LayoutLocalServiceHome</jndi-name>
 	</jonas-session>

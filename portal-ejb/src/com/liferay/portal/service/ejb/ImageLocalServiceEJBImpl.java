@@ -47,10 +47,33 @@ public class ImageLocalServiceEJBImpl implements ImageLocalService, SessionBean 
 		return (ImageLocalService)ctx.getBean(CLASS_NAME);
 	}
 
-	public void deleteByImageId(java.lang.String imageId)
+	public void deleteImage(java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteByImageId(imageId);
+		getService().deleteImage(imageId);
+	}
+
+	public void deleteImages(java.lang.String imageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().deleteImages(imageId);
+	}
+
+	public com.liferay.portal.model.Image getImage(java.lang.String imageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().getImage(imageId);
+	}
+
+	public java.util.List search(java.lang.String imageId)
+		throws com.liferay.portal.SystemException {
+		return getService().search(imageId);
+	}
+
+	public com.liferay.portal.model.Image updateImage(
+		java.lang.String imageId, byte[] bytes)
+		throws com.liferay.portal.SystemException {
+		return getService().updateImage(imageId, bytes);
 	}
 
 	public void ejbCreate() throws CreateException {

@@ -29,7 +29,6 @@ import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.InstancePool;
 import com.liferay.util.Validator;
@@ -142,8 +141,7 @@ public class PrincipalSessionBean {
 			}
 		}
 		catch (Exception e) {
-			_log.warn(e.getMessage());
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e.getMessage());
 		}
 	}
 

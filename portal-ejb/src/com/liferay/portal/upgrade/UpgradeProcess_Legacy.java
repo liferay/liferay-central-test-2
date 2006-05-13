@@ -31,7 +31,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.ImageServiceUtil;
+import com.liferay.portal.service.spring.ImageLocalServiceUtil;
 import com.liferay.util.StringUtil;
 
 import java.util.Iterator;
@@ -117,7 +117,7 @@ public class UpgradeProcess_Legacy extends UpgradeProcess {
 
 		// Image gallery
 
-		Iterator itr = ImageServiceUtil.getImageById("%.ig.%").iterator();
+		Iterator itr = ImageLocalServiceUtil.search("%.ig.%").iterator();
 
 		while (itr.hasNext()) {
 			Image image = (Image)itr.next();
@@ -135,13 +135,13 @@ public class UpgradeProcess_Legacy extends UpgradeProcess {
 				newImageId = newImageId + ".large";
 			}
 
-			ImageServiceUtil.updateImage(newImageId, image.getTextObj());
-			ImageServiceUtil.deleteImage(oldImageId);
+			ImageLocalServiceUtil.updateImage(newImageId, image.getTextObj());
+			ImageLocalServiceUtil.deleteImage(oldImageId);
 		}
 
 		// Shopping item
 
-		itr = ImageServiceUtil.getImageById("%.s.%").iterator();
+		itr = ImageLocalServiceUtil.search("%.s.%").iterator();
 
 		while (itr.hasNext()) {
 			Image image = (Image)itr.next();
@@ -151,8 +151,8 @@ public class UpgradeProcess_Legacy extends UpgradeProcess {
 			String newImageId = StringUtil.replace(
 				oldImageId, ".s.", ".shopping.item.");
 
-			ImageServiceUtil.updateImage(newImageId, image.getTextObj());
-			ImageServiceUtil.deleteImage(oldImageId);
+			ImageLocalServiceUtil.updateImage(newImageId, image.getTextObj());
+			ImageLocalServiceUtil.deleteImage(oldImageId);
 		}
 	}
 

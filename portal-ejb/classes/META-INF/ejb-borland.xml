@@ -64,10 +64,6 @@
 			<bean-local-home-name>ejb/liferay/ImageLocalServiceHome</bean-local-home-name>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portal_service_ejb_ImageServiceEJB</ejb-name>
-			<bean-home-name>com_liferay_portal_service_ejb_ImageServiceEJB</bean-home-name>
-		</session>
-		<session>
 			<ejb-name>com_liferay_portal_service_ejb_LayoutLocalServiceEJB</ejb-name>
 			<bean-local-home-name>ejb/liferay/LayoutLocalServiceHome</bean-local-home-name>
 		</session>

@@ -305,7 +305,7 @@
 		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingCart" />
 		<reference package-path="com.liferay.portlet.wiki" entity="WikiNode" />
 	</entity>
-	<entity name="Image" local-service="true" remote-service="true">
+	<entity name="Image" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 

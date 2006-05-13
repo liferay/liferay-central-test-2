@@ -71,7 +71,7 @@ public class UpgradeUser extends UpgradeProcess {
 
 				_log.debug("Upgrading user " + userId);
 
-				ImageLocalServiceUtil.deleteByImageId(userId + ".");
+				ImageLocalServiceUtil.deleteImages(userId + ".");
 			}
 		}
 		finally {
