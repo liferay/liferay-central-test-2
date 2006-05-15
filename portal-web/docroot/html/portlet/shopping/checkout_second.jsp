@@ -342,6 +342,16 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 
 <br>
 
+<c:if test="<%= Validator.isNotNull(order.getComments()) %>">
+	<b><%= LanguageUtil.get(pageContext, "comments") %></b>
+
+	<br><br>
+
+	<%= order.getComments() %>
+
+	<br><br>
+</c:if>
+
 <%
 boolean showAvailability = GetterUtil.getBoolean(CompanyPropsUtil.get(company.getCompanyId(), PropsUtil.SHOPPING_ITEM_SHOW_AVAILABILITY));
 
@@ -351,6 +361,7 @@ SearchContainer searchContainer = new SearchContainer();
 
 List headerNames = new ArrayList();
 
+headerNames.add("sku");
 headerNames.add("description");
 
 if (showAvailability) {
@@ -397,6 +408,10 @@ for (int i = 0; itr.hasNext(); i++) {
 
 	rowURL.setParameter("struts_action", "/shopping/view_item");
 	rowURL.setParameter("itemId", item.getItemId());
+
+	// SKU
+
+	row.addText(item.getSku(), rowURL);
 
 	// Description
 

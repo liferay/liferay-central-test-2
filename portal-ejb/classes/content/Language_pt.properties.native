@@ -1544,7 +1544,7 @@ required-structures-could-not-be-deleted=As estruturas requeridas não podiam se
 required-templates-could-not-be-deleted=Os moldes requeridos não podiam ser suprimidos.
 required=Requerido
 requires-shipping=Requer O Transporte
-resend-order-email=Resend O Email Da Ordem
+resend-confirmation-email=Resend O Email Da Confirmação
 resend-shipping-email=Resend O Email Do Transporte
 resend=Resend
 reserved-users=Usuários Reserved
@@ -1644,6 +1644,7 @@ selecting-a-template-will-change-the-structure,-available-input-fields,-and-avai
 send-approval-denied-email-to-users=Emita o email negado aprovaçã0 aos usuários?
 send-approval-granted-email-to-users=Emita o email concedido aprovaçã0 aos usuários?
 send-approval-requested-email-to-users=Emita o email pedido aprovaçã0 aos usuários?
+send-confirmation-email=Emita O Email Da Confirmação
 send-email-notification-to-new-users=Emita a notificação do email aos usuários novos?
 send-new-password=Emita A Senha Nova
 send-order-email-to-users=Emita o email da ordem aos usuários?

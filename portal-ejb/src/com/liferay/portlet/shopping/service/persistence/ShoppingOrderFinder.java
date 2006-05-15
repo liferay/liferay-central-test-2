@@ -27,6 +27,7 @@ import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -69,6 +70,13 @@ public class ShoppingOrderFinder {
 			session = HibernateUtil.openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_O_G_C_U_PPPS);
+
+			if (Validator.isNull(ppPaymentStatus)) {
+				sql = StringUtil.replace(
+					sql, "ppPaymentStatus = ?", "ppPaymentStatus != ?");
+
+				ppPaymentStatus = ShoppingOrder.STATUS_LATEST;
+			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
@@ -137,6 +145,13 @@ public class ShoppingOrderFinder {
 			session = HibernateUtil.openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_O_G_C_U_PPPS);
+
+			if (Validator.isNull(ppPaymentStatus)) {
+				sql = StringUtil.replace(
+					sql, "ppPaymentStatus = ?", "ppPaymentStatus != ?");
+
+				ppPaymentStatus = ShoppingOrder.STATUS_LATEST;
+			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);

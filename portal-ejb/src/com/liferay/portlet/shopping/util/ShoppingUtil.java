@@ -908,7 +908,7 @@ public class ShoppingUtil {
 		portletURL.setParameter(
 			"struts_action", "/shopping/checkout");
 		portletURL.setParameter(Constants.CMD, Constants.VIEW);
-		portletURL.setParameter("order_id", order.getOrderId());
+		portletURL.setParameter("orderId", order.getOrderId());
 
 		return portletURL.toString();
 	}

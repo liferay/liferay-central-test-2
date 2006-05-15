@@ -245,6 +245,7 @@ public class ShoppingOrderLocalServiceImpl
 			order.setShippingFirstName(user.getFirstName());
 			order.setShippingLastName(user.getLastName());
 			order.setShippingEmailAddress(user.getEmailAddress());
+			order.setCcName(user.getFullName());
 			order.setPpPaymentStatus(ShoppingOrder.STATUS_LATEST);
 			order.setSendOrderEmail(true);
 			order.setSendShippingEmail(true);

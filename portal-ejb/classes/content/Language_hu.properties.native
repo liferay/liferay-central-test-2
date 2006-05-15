@@ -1140,7 +1140,6 @@ request-timeout=Kérés lejárat
 required-roles=Szükséges szerepkörök
 required=Szükséges
 requires-shipping=Szállítás szükséges
-resend-order-email=Megrendelõ e-mail újraküldése
 resend-shipping-email=Szállítási e-mail újraküldése
 reserved-users=Lefoglalt felhasználó nevek
 reset=Újbeállítás

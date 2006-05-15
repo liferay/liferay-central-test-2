@@ -1094,7 +1094,6 @@ request-timeout=Request Timeout
 required-roles=Đòi hỏi quyền
 required=Bắt buộc 
 requires-shipping=yêu cầu vận chuyển
-resend-order-email=Gửi lại thư đặt hàng
 resend-shipping-email=Gửi lại thư vận chuyển
 reserved-users=Người dùng đặt chỗ
 reset=Reset

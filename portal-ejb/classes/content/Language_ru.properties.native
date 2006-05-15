@@ -1494,7 +1494,6 @@ required-structures-could-not-be-deleted=Необходимые структур
 required-templates-could-not-be-deleted=Необходимые шаблоны не могут быть удалены.
 required=Требуется
 requires-shipping=Необходимость доставки
-resend-order-email=Переотправить Email заказа
 resend-shipping-email=Переотправить Email доставки
 resend=Переотправить
 reserved-users=Зарезервированные пользователи

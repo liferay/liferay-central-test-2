@@ -1543,7 +1543,7 @@ required-structures-could-not-be-deleted=必需的結構不能被刪除。
 required-templates-could-not-be-deleted=必需的模板不能被刪除。
 required=必需
 requires-shipping=需要出貨
-resend-order-email=重寄訂單電子郵件
+resend-confirmation-email=再寄確認電子郵件
 resend-shipping-email=重寄出貨電子郵件
 resend=重寄
 reserved-users=保戶之使用者
@@ -1643,6 +1643,7 @@ selecting-a-template-will-change-the-structure,-available-input-fields,-and-avai
 send-approval-denied-email-to-users=傳送核可被拒絕電子郵件到使用者?
 send-approval-granted-email-to-users=傳送核可被授予的電子郵件到使用者?
 send-approval-requested-email-to-users=傳送核可被請求的電子郵件到使用者?
+send-confirmation-email=送確認電子郵件
 send-email-notification-to-new-users=傳送電子郵件通知到新使用者?
 send-new-password=送新新口令
 send-order-email-to-users=傳送訂安電子郵件到使用者?

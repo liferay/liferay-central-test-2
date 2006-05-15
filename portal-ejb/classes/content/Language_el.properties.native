@@ -1542,7 +1542,7 @@ required-structures-could-not-be-deleted=Οι απαραίτητες δομές 
 required-templates-could-not-be-deleted=Τα απαραίτητα πρότυπα δεν θα μπορούσαν να διαγραφούν.
 required=Απαιτούμενος
 requires-shipping=Απαιτεί Αποστολή
-resend-order-email=Στείλετε εκ νέου το ηλεκτρονικό μύνημα παραγγελίας
+resend-confirmation-email=Στείλετε εκ νέου το ηλεκτρονικό ταχυδρομείο επιβεβαίωσης
 resend-shipping-email=Στείλετε εκ νέου το ηλεκτρονικό μύνημα αποστολής
 resend=Στείλετε εκ νέου
 reserved-users=Κρατημένοι Χρήστες
@@ -1642,6 +1642,7 @@ selecting-a-template-will-change-the-structure,-available-input-fields,-and-avai
 send-approval-denied-email-to-users=Θελετε να στείλετε email για "απόρριψη έγκρισης" στους χρήστες;
 send-approval-granted-email-to-users=Θελετε να στείλετε email "αποδοχή έγκρισης" στους χρήστες;
 send-approval-requested-email-to-users=Θελετε να στείλετε email "αίτηση έγκρισης" στους χρήστες;
+send-confirmation-email=Στείλετε το ηλεκτρονικό ταχυδρομείο επιβεβαίωσης
 send-email-notification-to-new-users=Θελετε να στείλετε email "ανακοίνωση" στους νέους χρήστες;
 send-new-password=Στείλετε το νέο κωδικό πρόσβασης
 send-order-email-to-users=Θελετε να στείλετε email διαταγής στους χρήστες;

@@ -479,7 +479,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= null %>" field="ccName" defaultValue="<%= user.getFullName() %>" />
+			<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="ccName" />
 		</td>
 	</tr>
 	<tr>

@@ -25,25 +25,27 @@
 <%@ include file="/html/portlet/shopping/init.jsp" %>
 
 <%
-String orderId = ParamUtil.getString(request, "order_id");
+String orderId = ParamUtil.getString(request, "orderId");
 
 try {
-	ShoppingCartServiceUtil.emptyCart(session.getId(), company.getCompanyId());
+	ShoppingCart cart = ShoppingUtil.getCart(renderRequest);
+
+	ShoppingCartLocalServiceUtil.updateCart(
+		cart.getUserId(), cart.getGroupId(), cart.getCartId(),
+		StringPool.BLANK, StringPool.BLANK, 0, false);
 }
 catch (Exception e) {
 }
 %>
 
-<liferay-ui:box top="/html/common/themes/inner_top.jsp" bottom="/html/common/themes/inner_bottom.jsp">
-	<liferay-util:param name="box_title" value='<%= LanguageUtil.get(pageContext, "checkout") %>' />
+<liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
+	<liferay-util:param name="tabs1" value="cart" />
+</liferay-util:include>
 
-	<table border="0" cellpadding="4" cellspacing="0" width="100%">
-	<tr>
-		<td>
-			<font class="portlet-font" style="font-size: x-small;">
-			<font class="portlet-msg-success" style="font-size: x-small;"><%= LanguageUtil.get(pageContext, "thank-you-for-your-purchase") %></span> <%= LanguageUtil.get(pageContext, "your-order-number-is") %> <b><%= orderId %></b>. <%= LanguageUtil.get(pageContext, "you-will-receive-an-email-shortly-with-your-order-summary-and-further-details") %>
-			</font>
-		</td>
-	</tr>
-	</table>
-</liferay-ui:box>
+<span class="portlet-msg-success">
+<%= LanguageUtil.get(pageContext, "thank-you-for-your-purchase") %>
+</span>
+
+<br><br>
+
+<%= LanguageUtil.get(pageContext, "your-order-number-is") %> <b><%= orderId %></b>. <%= LanguageUtil.get(pageContext, "you-will-receive-an-email-shortly-with-your-order-summary-and-further-details") %>

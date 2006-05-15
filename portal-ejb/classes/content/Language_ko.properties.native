@@ -1543,7 +1543,7 @@ required-structures-could-not-be-deleted=필수 구조는 삭제될 수 없었�
 required-templates-could-not-be-deleted=필수 템플렛은 삭제될 수 없었다.
 required=요구하는
 requires-shipping=선박을 요구한다
-resend-order-email=명령 Email 다시 보내십시요
+resend-confirmation-email=견진 전자 우편을 다시 보내십시요
 resend-shipping-email=선박 Email 다시 보내십시요
 resend=다시 보내십시요
 reserved-users=보류하는 사용자
@@ -1643,6 +1643,7 @@ selecting-a-template-will-change-the-structure,-available-input-fields,-and-avai
 send-approval-denied-email-to-users=사용자에게 승인에 의하여 부정되는 전자 우편을 보내십시요?
 send-approval-granted-email-to-users=사용자에게 승인에 의하여 수여되는 전자 우편을 보내십시요?
 send-approval-requested-email-to-users=사용자에게 승인에 의하여 요구되는 전자 우편을 보내십시요?
+send-confirmation-email=견진 전자 우편을 보내십시요
 send-email-notification-to-new-users=새로운 사용자에게 email 통보를 보내십시요?
 send-new-password=새 암호를 보내십시요
 send-order-email-to-users=사용자에게 명령 email 보내십시요?

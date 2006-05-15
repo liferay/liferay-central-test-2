@@ -1541,7 +1541,7 @@ required-structures-could-not-be-deleted=必須の構造は削除できなかっ
 required-templates-could-not-be-deleted=必須の型板は削除できなかった。
 required=要求される
 requires-shipping=船積みを要求する
-resend-order-email=順序の電子メールを送り直しなさい
+resend-confirmation-email=確認の電子メールを送り直しなさい
 resend-shipping-email=船積みの電子メールを送り直しなさい
 resend=送り直しなさい
 reserved-users=予約ユーザー
@@ -1641,6 +1641,7 @@ selecting-a-template-will-change-the-structure,-available-input-fields,-and-avai
 send-approval-denied-email-to-users=ユーザーに承認によって否定される電子メールを送りなさいか。
 send-approval-granted-email-to-users=ユーザーに承認によって許可される電子メールを送りなさいか。
 send-approval-requested-email-to-users=ユーザーに承認によって要求される電子メールを送りなさいか。
+send-confirmation-email=確認の電子メールを送りなさい
 send-email-notification-to-new-users=新しいユーザーへ電子メールの通告を送りなさいか.
 send-new-password=新しいパスワードを送りなさい
 send-order-email-to-users=ユーザーへ順序の電子メールを送りなさいか.

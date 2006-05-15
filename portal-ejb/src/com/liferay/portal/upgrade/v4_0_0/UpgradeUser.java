@@ -26,6 +26,7 @@ import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.spring.AddressLocalServiceUtil;
+import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -148,6 +149,12 @@ public class UpgradeUser extends UpgradeProcess {
 						address.getZip(), address.getRegionId(),
 						address.getCountryId(), address.getTypeId(),
 						address.isMailing(), address.isPrimary());
+				}
+
+				if (!User.isDefaultUser(userId)) {
+					GroupLocalServiceUtil.addGroup(
+						user.getUserId(), User.class.getName(),
+						user.getPrimaryKey().toString(), null, null);
 				}
 			}
 		}
