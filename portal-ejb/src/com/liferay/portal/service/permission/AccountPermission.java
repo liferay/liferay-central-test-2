@@ -25,61 +25,59 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Account;
-import com.liferay.portal.model.Contact;
-import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.spring.AccountLocalServiceUtil;
-import com.liferay.portal.service.spring.OrganizationLocalServiceUtil;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
 
 /**
- * <a href="CommonPermission.java.html"><b><i>View Source</i></b></a>
+ * <a href="AccountPermission.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Charles May
+ * @author  Brian Wing Shun Chan
  *
  */
-public class CommonPermission {
+public class AccountPermission {
 
-	public static void checkPermission(
-			PermissionChecker permissionChecker, String className,
-			String classPK, String actionId)
+	public static void check(
+			PermissionChecker permissionChecker, String accountId,
+			String actionId)
 		throws PortalException, SystemException {
 
-		if (className.equals(Account.class.getName())) {
-			Account account = AccountLocalServiceUtil.getAccount(classPK);
-
-			if (account.isDefaultAccount()) {
-				AccountPermission.check(permissionChecker, classPK, actionId);
-			}
-			else {
-				throw new PrincipalException();
-			}
-		}
-		else if (className.equals(Contact.class.getName())) {
-			User user = UserLocalServiceUtil.getUserById(classPK);
-
-			UserPermission.check(
-				permissionChecker, classPK,
-				user.getOrganization().getOrganizationId(),
-				user.getLocation().getOrganizationId(), actionId);
-		}
-		else if (className.equals(Organization.class.getName())) {
-			Organization organization =
-				OrganizationLocalServiceUtil.getOrganization(classPK);
-
-			if (organization.isRoot()) {
-				OrganizationPermission.check(
-					permissionChecker, classPK, actionId);
-			}
-			else {
-				LocationPermission.check(permissionChecker, classPK, actionId);
-			}
-		}
-		else {
+		if (!contains(permissionChecker, accountId, actionId)) {
 			throw new PrincipalException();
 		}
+	}
+
+	public static void check(
+			PermissionChecker permissionChecker, Account account,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, account, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, String accountId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		Account account = AccountLocalServiceUtil.getAccount(accountId);
+
+		return contains(permissionChecker, account, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, Account account,
+			String actionId)
+		throws PortalException, SystemException {
+
+		//String groupId = account.getGroupId();
+		String groupId = null;
+
+		return permissionChecker.hasPermission(
+			groupId, Account.class.getName(),
+			account.getPrimaryKey().toString(), actionId);
 	}
 
 }

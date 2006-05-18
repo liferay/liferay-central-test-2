@@ -84,7 +84,9 @@
 		<field name="prefixId" type="String" />
 		<field name="suffixId" type="String" />
 		<field name="male" type="boolean" />
-		<field name="birthday" type="Date" />
+		<field name="birthday" type="Date">
+			<hint name="show-time">false</hint>
+		</field>
 		<field name="smsSn" type="String" />
 		<field name="aimSn" type="String" />
 		<field name="icqSn" type="String" />

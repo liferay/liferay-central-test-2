@@ -35,4 +35,13 @@ public class Account extends AccountModel {
 	public Account() {
 	}
 
+	public boolean isDefaultAccount() {
+		if (getCompanyId().equals(User.DEFAULT)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 }

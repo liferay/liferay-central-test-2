@@ -64,7 +64,8 @@ public class EditConfigurationAction extends PortletAction {
 
 		if (!src.startsWith("/") &&
 			!StringUtil.startsWith(src, "http://") &&
-			!StringUtil.startsWith(src, "https://")) {
+			!StringUtil.startsWith(src, "https://") &&
+			!StringUtil.startsWith(src, "mhtml://")) {
 
 			src = Http.getProtocol(req) + "://" + src;
 		}

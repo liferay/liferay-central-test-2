@@ -23,8 +23,11 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.spring.PortletServiceUtil;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -41,6 +44,7 @@ import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.spring.JournalArticleServiceUtil;
+import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journal.service.spring.JournalStructureServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.FileUtil;
@@ -385,7 +389,26 @@ public class EditArticleAction extends PortletAction {
 			prefs.setValue("article-id", article.getArticleId());
 
 			prefs.store();
+
+			updateContentSearch(req, portletResource, article.getArticleId());
 		}
+	}
+
+	protected void updateContentSearch(
+			ActionRequest req, String portletResource, String articleId)
+		throws Exception {
+
+		ThemeDisplay themeDisplay =
+				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
+
+		Portlet portlet = PortletServiceUtil.getPortletById(
+			themeDisplay.getCompanyId(), portletResource);
+
+		JournalContentSearchLocalServiceUtil.updateContentSearch(
+			portletResource, layout.getLayoutId(), layout.getOwnerId(),
+			layout.getCompanyId(), articleId);
 	}
 
 }
