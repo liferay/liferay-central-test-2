@@ -263,8 +263,8 @@ public class UserLocalServiceImpl implements UserLocalService {
 		Contact contact = ContactUtil.create(contactId);
 
 		contact.setCompanyId(user.getCompanyId());
-		contact.setUserId(StringPool.BLANK);
-		contact.setUserName(StringPool.BLANK);
+		contact.setUserId(user.getUserId());
+		contact.setUserName(User.getFullName(firstName, middleName, lastName));
 		contact.setCreateDate(now);
 		contact.setModifiedDate(now);
 		contact.setAccountId(user.getCompanyId());
