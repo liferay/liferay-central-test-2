@@ -48,6 +48,8 @@ import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.SimpleHttpConnectionManager;
 import org.apache.commons.httpclient.URI;
+import org.apache.commons.httpclient.UsernamePasswordCredentials;
+import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
@@ -79,6 +81,12 @@ public class Http {
 
 	public static final int PROXY_PORT = GetterUtil.getInteger(
 		SystemProperties.get(Http.class.getName() + ".proxy.port"));
+
+	public static final String PROXY_USERNAME = GetterUtil.getString(
+		SystemProperties.get(Http.class.getName() + ".proxy.username"));
+
+	public static final String PROXY_PASSWORD = GetterUtil.getString(
+		SystemProperties.get(Http.class.getName() + ".proxy.password"));
 
 	public static final int TIMEOUT = GetterUtil.getInteger(
 		SystemProperties.get(Http.class.getName() + ".timeout"), 5000);
@@ -286,6 +294,13 @@ public class Http {
 
 			if (Validator.isNotNull(PROXY_HOST) && PROXY_PORT > 0) {
 				hostConfig.setProxy(PROXY_HOST, PROXY_PORT);
+
+				if (Validator.isNotNull(PROXY_USERNAME)) {
+					client.getState().setProxyCredentials(
+						new AuthScope(PROXY_HOST, PROXY_PORT, null),
+						new UsernamePasswordCredentials(
+							PROXY_USERNAME, PROXY_PASSWORD));
+				}
 			}
 
 			client.setHostConfiguration(hostConfig);
