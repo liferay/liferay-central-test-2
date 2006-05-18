@@ -46,7 +46,6 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.CachePortlet;
 import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -321,8 +320,8 @@ public class EditUserAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		boolean autoUserId = true;
-		String userId = StringPool.BLANK;
+		boolean autoUserId = ParamUtil.getBoolean(req, "autoUserId");
+		String userId = ParamUtil.getString(req, "userId");
 		boolean autoPassword = true;
 		String password1 = null;
 		String password2 = null;

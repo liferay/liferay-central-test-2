@@ -222,6 +222,31 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="nickName" />
 			</td>
 		</tr>
+
+		<c:choose>
+			<c:when test="<%= company.getAuthType().equals(Company.AUTH_TYPE_ID) %>">
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "user-id") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<c:choose>
+							<c:when test="<%= user2 == null %>">
+								<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="userId" />
+							</c:when>
+							<c:otherwise>
+								<%= user2.getUserId() %>
+							</c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<input name="<portlet:namespace />autoUserId" type="hidden" value="1">
+			</c:otherwise>
+		</c:choose>
+
 		</table>
 	</td>
 	<td style="padding-left: 30px;"></td>

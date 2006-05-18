@@ -47,11 +47,8 @@ public class GroupPermission {
 	public static boolean contains(
 		PermissionChecker permissionChecker, String groupId, String actionId) {
 
-		String name = Group.class.getName();
-		String primKey = groupId;
-
 		return permissionChecker.hasPermission(
-			groupId, name, primKey, actionId);
+			groupId, Group.class.getName(), groupId, actionId);
 	}
 
 }

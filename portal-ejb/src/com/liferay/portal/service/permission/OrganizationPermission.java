@@ -23,7 +23,9 @@
 package com.liferay.portal.service.permission;
 
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
@@ -48,10 +50,26 @@ public class OrganizationPermission {
 		PermissionChecker permissionChecker, String organizationId,
 		String actionId) {
 
-		String name = Organization.class.getName();
+		if (permissionChecker.hasPermission(
+				null, Organization.class.getName(), organizationId, actionId)) {
 
-		return permissionChecker.hasPermission(
-			null, name, organizationId, actionId);
+			return true;
+		}
+		else if (actionId.equals(ActionKeys.VIEW)) {
+			User user = permissionChecker.getUser();
+
+			Organization organization = user.getOrganization();
+
+			if (organizationId.equals(organization.getOrganizationId())) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
 	}
 
 }

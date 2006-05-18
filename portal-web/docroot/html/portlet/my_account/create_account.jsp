@@ -92,17 +92,22 @@ String captcha = ParamUtil.getString(request, "captcha");
 			</td>
 		</tr>
 
-		<c:if test="<%= company.getAuthType().equals(Company.AUTH_TYPE_ID) %>">
-			<tr>
-				<td>
-					<%= LanguageUtil.get(pageContext, "user-id") %>
-				</td>
-				<td style="padding-left: 10px;"></td>
-				<td>
-					<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="userId" />
-				</td>
-			</tr>
-		</c:if>
+		<c:choose>
+			<c:when test="<%= company.getAuthType().equals(Company.AUTH_TYPE_ID) %>">
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "user-id") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="userId" />
+					</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<input name="<portlet:namespace />autoUserId" type="hidden" value="1">
+			</c:otherwise>
+		</c:choose>
 
 		<tr>
 			<td>

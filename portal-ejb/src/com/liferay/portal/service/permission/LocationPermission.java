@@ -25,10 +25,11 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.spring.OrganizationLocalServiceUtil;
-import com.liferay.util.Validator;
 
 /**
  * <a href="LocationPermission.java.html"><b><i>View Source</i></b></a>
@@ -39,39 +40,47 @@ import com.liferay.util.Validator;
 public class LocationPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String organizationId,
+			PermissionChecker permissionChecker, String locationId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, organizationId, actionId)) {
+		if (!contains(permissionChecker, locationId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String organizationId,
+			PermissionChecker permissionChecker, String locationId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		String name = "com.liferay.portal.model.Location";
-
 		if (permissionChecker.hasPermission(
-				null, name, organizationId, actionId)) {
+				null, "com.liferay.portal.model.Location", locationId,
+				actionId)) {
+
 			return true;
 		}
-		else if (Validator.isNotNull(organizationId) &&
-				 actionId.endsWith("_USER")){
+		else if (actionId.equals(ActionKeys.VIEW)) {
+			User user = permissionChecker.getUser();
 
+			Organization location = user.getLocation();
+
+			if (locationId.equals(location.getOrganizationId())) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else if (actionId.endsWith("_USER")){
 			Organization location =
-				OrganizationLocalServiceUtil.getOrganization(organizationId);
+				OrganizationLocalServiceUtil.getOrganization(locationId);
 
-			String parentOrganizationId =
-				location.getParentOrganizationId();
-
-			name = Organization.class.getName();
+			String parentOrganizationId = location.getParentOrganizationId();
 
 			if (permissionChecker.hasPermission(
-					null, name, parentOrganizationId, actionId)) {
+					null, Organization.class.getName(), parentOrganizationId,
+					actionId)) {
 
 				return true;
 			}
@@ -79,8 +88,9 @@ public class LocationPermission {
 				return false;
 			}
 		}
-
-		return false;
+		else {
+			return false;
+		}
 	}
 
 }

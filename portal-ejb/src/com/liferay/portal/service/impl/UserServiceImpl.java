@@ -27,6 +27,7 @@ import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.portal.service.persistence.CompanyUtil;
@@ -74,10 +75,18 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 				userId, organizationId, locationId, ActionKeys.ADD_USER);
 		}
 
+		String creatorUserId = null;
+
+		try {
+			creatorUserId = getUserId();
+		}
+		catch (PrincipalException pe) {
+		}
+
 		return UserLocalServiceUtil.addUser(
-			getUserId(), companyId, autoUserId, userId, autoPassword, password1,
-			password2, passwordReset, emailAddress, locale, firstName,
-			middleName, lastName, nickName, prefixId, suffixId, male,
+			creatorUserId, companyId, autoUserId, userId, autoPassword,
+			password1, password2, passwordReset, emailAddress, locale,
+			firstName, middleName, lastName, nickName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
 			locationId);
 	}

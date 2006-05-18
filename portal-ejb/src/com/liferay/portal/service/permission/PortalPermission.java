@@ -46,9 +46,8 @@ public class PortalPermission {
 	public static boolean contains(
 		PermissionChecker permissionChecker, String actionId) {
 
-		String name = PortletKeys.PORTAL_CONFIGURATION;
-
-		return permissionChecker.hasPermission(null, name, null, actionId);
+		return permissionChecker.hasPermission(
+			null, PortletKeys.PORTAL_CONFIGURATION, null, actionId);
 	}
 
 }
