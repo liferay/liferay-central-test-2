@@ -107,8 +107,8 @@ public class FriendlyURLServlet extends HttpServlet {
 
 			req.setAttribute(WebKeys.LAST_PATH, lastPath);
 		}
-		catch (NoSuchLayoutException ns) {
-			_log.warn(ns);
+		catch (NoSuchLayoutException nsle) {
+			_log.warn(nsle);
 
 			redirect = PropsUtil.get(
 				PropsUtil.LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND);
@@ -118,7 +118,7 @@ public class FriendlyURLServlet extends HttpServlet {
 		}
 
 		if (Validator.isNull(redirect)) {
-			return;
+			redirect = mainPath;
 		}
 
 		if (redirect.startsWith(StringPool.SLASH)) {

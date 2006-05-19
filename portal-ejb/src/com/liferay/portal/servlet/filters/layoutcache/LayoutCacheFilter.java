@@ -22,6 +22,7 @@
 
 package com.liferay.portal.servlet.filters.layoutcache;
 
+import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -264,6 +265,9 @@ public class LayoutCacheFilter implements Filter {
 				ownerId = Layout.PUBLIC + group.getGroupId();
 			}
 		}
+		catch (NoSuchLayoutException nsle) {
+			_log.warn(nsle);
+		}
 		catch (Exception e) {
 			_log.error(e);
 
@@ -289,6 +293,9 @@ public class LayoutCacheFilter implements Filter {
 		try {
 			layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
 				ownerId, friendlyURL);
+		}
+		catch (NoSuchLayoutException nsle) {
+			_log.warn(nsle);
 		}
 		catch (Exception e) {
 			_log.error(e);
@@ -318,10 +325,18 @@ public class LayoutCacheFilter implements Filter {
 				req.getPathInfo(), req.getServletPath(),
 				ParamUtil.getString(req, "p_l_id"));
 
+			if (plid == null) {
+				return false;
+			}
+
 			String layoutId = Layout.getLayoutId(plid);
 			String ownerId = Layout.getOwnerId(plid);
 
 			Layout layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+
+			if (!layout.getType().equals(Layout.TYPE_PORTLET)) {
+				return false;
+			}
 
 			Properties props = layout.getTypeSettingsProperties();
 
