@@ -25,14 +25,14 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
-import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.persistence.LayoutSetUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutSetLocalService;
+import com.liferay.portal.util.CompanyPropsUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import java.util.Iterator;
 
@@ -57,8 +57,10 @@ public class LayoutSetLocalServiceImpl implements LayoutSetLocalService {
 		layoutSet.setGroupId(groupId);
 		layoutSet.setUserId(userId);
 		layoutSet.setPrivateLayout(privateLayout);
-		layoutSet.setThemeId(Theme.DEFAULT_THEME_ID);
-		layoutSet.setColorSchemeId(ColorScheme.DEFAULT_COLOR_SCHEME_ID);
+		layoutSet.setThemeId(
+			CompanyPropsUtil.get(companyId, PropsUtil.DEFAULT_THEME_ID));
+		layoutSet.setColorSchemeId(
+			CompanyPropsUtil.get(companyId, PropsUtil.DEFAULT_COLOR_SCHEME_ID));
 
 		LayoutSetUtil.update(layoutSet);
 

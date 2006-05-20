@@ -261,6 +261,12 @@
 	<target name="deploy" depends="merge">
 		<antcall target="build-color-scheme" />
 
+		<copy
+			file="${tmp.dir}/index.html"
+			tofile="${project.dir}/web-sites/liferay.com-web/docroot/index.html"
+			failonerror="false"
+		/>
+
 		<if>
 			<or>
 				<equals arg1="${app.server.type}" arg2="jetty" />
