@@ -22,6 +22,14 @@
 
 package com.liferay.portal.struts;
 
+import com.liferay.portlet.PortletURLImpl;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.Http;
+import com.liferay.util.StringPool;
+import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
+import com.liferay.util.servlet.URLEncoder;
+
 import java.util.HashMap;
 
 import javax.portlet.PortletMode;
@@ -31,14 +39,6 @@ import javax.portlet.WindowStateException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.liferay.portlet.PortletURLImpl;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Http;
-import com.liferay.util.StringPool;
-import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
-import com.liferay.util.servlet.URLEncoder;
 
 /**
  * <a href="StrutsURLEncoder.java.html"><b><i>View Source</i></b></a>
@@ -99,72 +99,74 @@ public class StrutsURLEncoder implements URLEncoder {
 
 	public String encodeURL(String path) {
 		_log.debug("Encode " + path);
-		
+
 		String encodedURL = path;
+
 		if (path.startsWith(_contextPath + _servletMapping)) {
-		 
-			// Struts uses &amp; instead of & to delimit parameter key value 
+
+			// Struts uses &amp; instead of & to delimit parameter key value
 			// pairs when you set the "name" attribute for html:link.
-	
+
 			path = StringUtil.replace(path, "&amp;", "&");
-	
+
 			// Reset portlet URL settings so it can be reused
-	
+
 			try {
 				_portletURL.setWindowState(_windowState);
 			}
 			catch (WindowStateException wse) {
 			}
-	
+
 			try {
 				_portletURL.setPortletMode(_portletMode);
 			}
 			catch (PortletModeException pme) {
 			}
-	
+
 			_portletURL.setParameters(new HashMap());
 			_portletURL.setAction(false);
-	
+
 			// Separate the Struts action from the query string
-	
+
 			String strutsAction = path;
 			String queryString = StringPool.BLANK;
-	
+
 			int pos = strutsAction.indexOf("?");
 			if (pos != -1) {
 				strutsAction = path.substring(0, pos);
 				queryString = path.substring(pos + 1, path.length());
 			}
-	
+
 			// Set the Struts action
-	
+
 			if (Validator.isNotNull(_contextPath)) {
 				strutsAction = strutsAction.substring(
 					_contextPath.length(), strutsAction.length());
 			}
-	
+
 			// Workaround for bug in Struts where it adds the servlet mapping
 			// path to the action path
-	
+
 			if ((_servletMapping != null) && (_servletMapping.length() > 0) &&
 				(strutsAction.startsWith(_servletMapping))) {
-	
+
 				strutsAction = strutsAction.substring(
 					_servletMapping.length() - 1, strutsAction.length());
 			}
-	
+
 			_portletURL.setParameter("struts_action", strutsAction);
-	
+
 			// Set the query string
-	
+
 			setParameters(_portletURL, queryString);
-	
+
 			// Return the portlet URL
-	
+
 			encodedURL = _portletURL.toString();
-	
+
 			_log.debug("Encoded portlet URL " + encodedURL);
 		}
+
 		return encodedURL;
 	}
 
