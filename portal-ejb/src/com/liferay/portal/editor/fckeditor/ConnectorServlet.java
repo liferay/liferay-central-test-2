@@ -65,6 +65,8 @@ public class ConnectorServlet extends HttpServlet {
 		try {
 			HttpSession ses = req.getSession();
 
+			_log.debug("URL " + req.getRequestURL());
+
 			// The servlet accepts commands sent in the format:
 			// connector?Command=&Type=&CurrentFolder=. The servlet then
 			// executes the command and returns the results to the client in XML
@@ -96,6 +98,10 @@ public class ConnectorServlet extends HttpServlet {
 				WebKeys.FRIENDLY_URL_PRIVATE_PATH);
 			String friendlyURLPublicPath = (String)ses.getAttribute(
 				WebKeys.FRIENDLY_URL_PUBLIC_PATH);
+
+			// If you're testing this in Orion, make sure there is only one IE
+			// browser open or else these values will be null. This happens
+			// because of a bug in Orion 2.0.7.
 
 			_log.debug("company " + company);
 			_log.debug("user " + user);

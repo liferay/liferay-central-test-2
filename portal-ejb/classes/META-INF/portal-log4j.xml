@@ -36,6 +36,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.editor">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.events.GarbageCollectorAction">
 		<priority value="ERROR" />
 	</category>

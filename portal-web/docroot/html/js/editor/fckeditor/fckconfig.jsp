@@ -29,7 +29,7 @@ String plid = ParamUtil.getString(request, "p_l_id");
 %>
 
 FCKConfig.ToolbarSets["Liferay"] = [
-	['Source','DocProps','-','Save','NewPage','Preview','-','Templates'],
+	['Source','DocProps','-','NewPage','Preview','-','Templates'],
 	['Cut','Copy','Paste','PasteText','PasteWord','-','Print','SpellCheck'],
 	['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
 	['Bold','Italic','Underline','StrikeThrough','-','Subscript','Superscript'],
@@ -45,3 +45,7 @@ FCKConfig.ToolbarSets["Liferay"] = [
 
 FCKConfig.LinkBrowserURL = FCKConfig.BasePath + "filemanager/browser/liferay/browser.html?Connector=/html/js/editor/fckeditor/editor/filemanager/browser/liferay/connectors/jsp/connector?p_l_id=<%= plid %>";
 FCKConfig.ImageBrowserURL = FCKConfig.BasePath + "filemanager/browser/liferay/browser.html?Type=Image&Connector=/html/js/editor/fckeditor/editor/filemanager/browser/liferay/connectors/jsp/connector?p_l_id=<%= plid %>";
+FCKConfig.FlashBrowser = false ;
+FCKConfig.LinkUpload = false ;
+FCKConfig.ImageUpload = false ;
+FCKConfig.FlashUpload = false ;

@@ -50,7 +50,11 @@ function OnSubmit()
 function OnUploadCompleted( errorNumber, data )
 {
 	// Reset the Upload Worker Frame.
-	window.parent.frames['frmUploadWorker'].location = '../../../fckblank.html' ;
+
+	// Liferay
+
+	//window.parent.frames['frmUploadWorker'].location = '../../../fckblank.html' ;
+	window.parent.frames['frmUploadWorker'].location = '../../../../../fckblank.html' ;
 	
 	// Reset the upload form (On IE we must do a little trick to avout problems).
 	if ( document.all )
@@ -77,6 +81,13 @@ function OnUploadCompleted( errorNumber, data )
 		case 202 :
 			alert( 'Invalid file' ) ;
 			break ;
+
+		// Liferay
+
+        case 203 :
+            alert( 'You cannot upload into the root folder' ) ;
+            break ;
+
 		default :
 			alert( 'Error on file upload. Error number: ' + errorNumber ) ;
 			break ;
