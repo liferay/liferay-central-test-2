@@ -108,6 +108,13 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 		return getService().getLayouts(ownerId, parentLayoutId);
 	}
 
+	public java.util.List getLayouts(java.lang.String companyId,
+		java.lang.String portletId, java.lang.String prefsKey,
+		java.lang.String prefsValue) throws com.liferay.portal.SystemException {
+		return getService().getLayouts(companyId, portletId, prefsKey,
+			prefsValue);
+	}
+
 	public void importLayouts(java.lang.String userId,
 		java.lang.String ownerId, java.io.File file)
 		throws com.liferay.portal.PortalException, 

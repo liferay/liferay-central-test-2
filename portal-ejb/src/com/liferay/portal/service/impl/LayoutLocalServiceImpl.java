@@ -36,6 +36,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPK;
 import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
@@ -277,6 +278,15 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		throws SystemException {
 
 		return LayoutUtil.findByO_P(ownerId, parentLayoutId);
+	}
+
+	public List getLayouts(
+			String companyId, String portletId, String prefsKey,
+			String prefsValue)
+		throws SystemException {
+
+		return LayoutFinder.findByC_P_P(
+			companyId, portletId, prefsKey, prefsValue);
 	}
 
 	public void importLayouts(String userId, String ownerId, File file)

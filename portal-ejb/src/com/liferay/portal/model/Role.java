@@ -34,37 +34,11 @@ public class Role extends RoleModel {
 
 	public static final String ADMINISTRATOR = RoleNames.ADMINISTRATOR;
 
-	public static final String BOOKMARKS_ADMIN = RoleNames.BOOKMARKS_ADMIN;
-
-	public static final String CALENDAR_ADMIN = RoleNames.CALENDAR_ADMIN;
-
-	public static final String DOCUMENT_LIBRARY_ADMIN =
-		RoleNames.DOCUMENT_LIBRARY_ADMIN;
-
 	public static final String GUEST = RoleNames.GUEST;
-
-	public static final String JOURNAL_ADMIN = RoleNames.JOURNAL_ADMIN;
-
-	public static final String JOURNAL_DESIGNER = RoleNames.JOURNAL_DESIGNER;
-
-	public static final String JOURNAL_EDITOR = RoleNames.JOURNAL_EDITOR;
-
-	public static final String JOURNAL_WRITER = RoleNames.JOURNAL_WRITER;
-
-	public static final String MESSAGE_BOARDS_ADMIN =
-		RoleNames.MESSAGE_BOARDS_ADMIN;
-
-	public static final String POLLS_ADMIN = RoleNames.POLLS_ADMIN;
 
 	public static final String POWER_USER = RoleNames.POWER_USER;
 
-	public static final String PROJECT_ADMIN = RoleNames.PROJECT_ADMIN;
-
-	public static final String SHOPPING_ADMIN = RoleNames.SHOPPING_ADMIN;
-
 	public static final String USER = RoleNames.USER;
-
-	public static final String WIKI_ADMIN = RoleNames.WIKI_ADMIN;
 
 	public static final String[] SYSTEM_ROLES = RoleNames.SYSTEM_ROLES;
 

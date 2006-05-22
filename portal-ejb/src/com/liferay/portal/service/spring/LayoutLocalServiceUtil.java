@@ -199,6 +199,23 @@ public class LayoutLocalServiceUtil {
 		}
 	}
 
+	public static java.util.List getLayouts(java.lang.String companyId,
+		java.lang.String portletId, java.lang.String prefsKey,
+		java.lang.String prefsValue) throws com.liferay.portal.SystemException {
+		try {
+			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+			return layoutLocalService.getLayouts(companyId, portletId,
+				prefsKey, prefsValue);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static void importLayouts(java.lang.String userId,
 		java.lang.String ownerId, java.io.File file)
 		throws com.liferay.portal.PortalException, 

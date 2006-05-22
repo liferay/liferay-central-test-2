@@ -70,6 +70,10 @@ public interface LayoutLocalService {
 		java.lang.String parentLayoutId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getLayouts(java.lang.String companyId,
+		java.lang.String portletId, java.lang.String prefsKey,
+		java.lang.String prefsValue) throws com.liferay.portal.SystemException;
+
 	public void importLayouts(java.lang.String userId,
 		java.lang.String ownerId, java.io.File file)
 		throws com.liferay.portal.PortalException, 

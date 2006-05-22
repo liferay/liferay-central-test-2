@@ -49,7 +49,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.theme.ThemeDisplayFactory;
 import com.liferay.portal.util.CompanyPropsUtil;
 import com.liferay.portal.util.CookieKeys;
-import com.liferay.portal.util.LayoutClonePool;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -289,7 +288,7 @@ public class ServicePreAction extends Action {
 				// time the user logs in because group layouts are cached in the
 				// session
 
-				layout = LayoutClonePool.clone(req, layout);
+				layout = (Layout)layout.clone();
 			}
 
 			LayoutTypePortlet layoutTypePortlet = null;

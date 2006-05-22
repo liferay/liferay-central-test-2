@@ -95,6 +95,24 @@
 				imageId LIKE ?
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.LayoutFinder.findByC_P_P">
+		<![CDATA[
+			SELECT
+				DISTINCT Layout.layoutId AS layoutLayoutId, Layout.ownerId AS layoutOwnerId
+			FROM
+				Layout
+			INNER JOIN
+				PortletPreferences ON
+					(PortletPreferences.layoutId = Layout.layoutId) AND
+					(PortletPreferences.ownerId = Layout.ownerId) AND
+					(Layout.companyId = ?) AND
+					(
+						(PortletPreferences.portletId = ?) OR
+						(PortletPreferences.portletId LIKE ?)
+					) AND
+					(PortletPreferences.preferences LIKE ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.countByC_PO_N_S_C_Z_R_C">
 		<![CDATA[
 			SELECT
@@ -132,7 +150,7 @@
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.findByC_PO_N_S_C_Z_R_C">
 		<![CDATA[
 			SELECT
-				DISTINCT (Organization_.organizationId) AS orgId, Organization_.name AS orgName
+				DISTINCT Organization_.organizationId AS orgId, Organization_.name AS orgName
 			FROM
 				Organization_
 			LEFT JOIN

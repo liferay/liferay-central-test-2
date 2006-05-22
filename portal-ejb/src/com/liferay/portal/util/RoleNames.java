@@ -32,37 +32,11 @@ public class RoleNames {
 
 	public static final String ADMINISTRATOR = "Administrator";
 
-	public static final String BOOKMARKS_ADMIN = "Bookmarks Admin";
-
-	public static final String CALENDAR_ADMIN = "Calendar Admin";
-
-	public static final String DOCUMENT_LIBRARY_ADMIN =
-		"Document Library Admin";
-
 	public static final String GUEST = "Guest";
-
-	public static final String JOURNAL_ADMIN = "Journal Admin";
-
-	public static final String JOURNAL_DESIGNER = "Journal Designer";
-
-	public static final String JOURNAL_EDITOR = "Journal Editor";
-
-	public static final String JOURNAL_WRITER = "Journal Writer";
-
-	public static final String MESSAGE_BOARDS_ADMIN =
-		"Message Boards Admin";
-
-	public static final String POLLS_ADMIN = "Polls Admin";
 
 	public static final String POWER_USER = "Power User";
 
-	public static final String PROJECT_ADMIN = "Project Admin";
-
-	public static final String SHOPPING_ADMIN = "Shopping Admin";
-
 	public static final String USER = "User";
-
-	public static final String WIKI_ADMIN = "Wiki Admin"; // FIX ME
 
 	public static final String[] SYSTEM_ROLES = {
 		ADMINISTRATOR, GUEST, POWER_USER, USER
