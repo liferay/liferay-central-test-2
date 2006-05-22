@@ -195,19 +195,13 @@ public class ABContactUtil {
 	}
 
 	public static boolean containsABList(java.lang.String pk,
-		java.lang.String abListPK)
-		throws com.liferay.portlet.addressbook.NoSuchContactException, 
-			com.liferay.portlet.addressbook.NoSuchListException, 
-			com.liferay.portal.SystemException {
+		java.lang.String abListPK) throws com.liferay.portal.SystemException {
 		return getPersistence().containsABList(pk, abListPK);
 	}
 
-	public static boolean containsABList(java.lang.String pk,
-		com.liferay.portlet.addressbook.model.ABList abList)
-		throws com.liferay.portlet.addressbook.NoSuchContactException, 
-			com.liferay.portlet.addressbook.NoSuchListException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().containsABList(pk, abList);
+	public static boolean containsABLists(java.lang.String pk)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().containsABLists(pk);
 	}
 
 	public static boolean removeABList(java.lang.String pk,

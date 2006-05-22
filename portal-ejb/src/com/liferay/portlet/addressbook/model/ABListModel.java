@@ -35,9 +35,6 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class ABListModel extends BaseModel {
-	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
-				"value.object.cacheable.com.liferay.portlet.addressbook.model.ABList"),
-			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.addressbook.model.ABList"),
 			XSS_ALLOW);
@@ -56,19 +53,12 @@ public class ABListModel extends BaseModel {
 	public ABListModel() {
 	}
 
-	public ABListModel(String listId) {
-		_listId = listId;
-		setNew(true);
-	}
-
-	public ABListModel(String listId, String userId, String name) {
-		_listId = listId;
-		_userId = userId;
-		_name = name;
-	}
-
 	public String getPrimaryKey() {
 		return _listId;
+	}
+
+	public void setPrimaryKey(String pk) {
+		setListId(pk);
 	}
 
 	public String getListId() {
@@ -124,15 +114,13 @@ public class ABListModel extends BaseModel {
 		}
 	}
 
-	public BaseModel getProtected() {
-		return null;
-	}
-
-	public void protect() {
-	}
-
 	public Object clone() {
-		return new ABList(getListId(), getUserId(), getName());
+		ABList clone = new ABList();
+		clone.setListId(getListId());
+		clone.setUserId(getUserId());
+		clone.setName(getName());
+
+		return clone;
 	}
 
 	public int compareTo(Object obj) {

@@ -337,13 +337,13 @@ public class ABContactServiceImpl
 				!curContact.getLastName().equals(lastName) ||
 				!curContact.getEmailAddress().equals(emailAddress)))) {
 			List contacts = getContacts();
-			ABContact contact =
+			/*ABContact contact =
 				new ABContact(firstName, lastName, emailAddress);
 
 			int pos = Collections.binarySearch(contacts, contact);
 			if (pos >= 0) {
 				throw new DuplicateContactException();
-			}
+			}*/ // FIX ME
 		}
 	}
 

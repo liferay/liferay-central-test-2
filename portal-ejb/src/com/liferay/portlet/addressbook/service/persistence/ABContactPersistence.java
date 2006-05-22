@@ -24,22 +24,25 @@ package com.liferay.portlet.addressbook.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.addressbook.NoSuchContactException;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -54,7 +57,11 @@ import java.util.Set;
 public class ABContactPersistence extends BasePersistence {
 	public com.liferay.portlet.addressbook.model.ABContact create(
 		String contactId) {
-		return new com.liferay.portlet.addressbook.model.ABContact(contactId);
+		ABContactHBM abContactHBM = new ABContactHBM();
+		abContactHBM.setNew(true);
+		abContactHBM.setPrimaryKey(contactId);
+
+		return ABContactHBMUtil.model(abContactHBM);
 	}
 
 	public com.liferay.portlet.addressbook.model.ABContact remove(
@@ -75,12 +82,10 @@ public class ABContactPersistence extends BasePersistence {
 					contactId.toString());
 			}
 
-			com.liferay.portlet.addressbook.model.ABContact abContact = ABContactHBMUtil.model(abContactHBM);
 			session.delete(abContactHBM);
 			session.flush();
-			ABContactPool.remove(contactId);
 
-			return abContact;
+			return ABContactHBMUtil.model(abContactHBM);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -100,36 +105,47 @@ public class ABContactPersistence extends BasePersistence {
 				session = openSession();
 
 				if (abContact.isNew()) {
-					ABContactHBM abContactHBM = new ABContactHBM(abContact.getContactId(),
-							abContact.getUserId(), abContact.getFirstName(),
-							abContact.getMiddleName(), abContact.getLastName(),
-							abContact.getNickName(),
-							abContact.getEmailAddress(),
-							abContact.getHomeStreet(), abContact.getHomeCity(),
-							abContact.getHomeState(), abContact.getHomeZip(),
-							abContact.getHomeCountry(),
-							abContact.getHomePhone(), abContact.getHomeFax(),
-							abContact.getHomeCell(), abContact.getHomePager(),
-							abContact.getHomeTollFree(),
-							abContact.getHomeEmailAddress(),
-							abContact.getBusinessCompany(),
-							abContact.getBusinessStreet(),
-							abContact.getBusinessCity(),
-							abContact.getBusinessState(),
-							abContact.getBusinessZip(),
-							abContact.getBusinessCountry(),
-							abContact.getBusinessPhone(),
-							abContact.getBusinessFax(),
-							abContact.getBusinessCell(),
-							abContact.getBusinessPager(),
-							abContact.getBusinessTollFree(),
-							abContact.getBusinessEmailAddress(),
-							abContact.getEmployeeNumber(),
-							abContact.getJobTitle(), abContact.getJobClass(),
-							abContact.getHoursOfOperation(),
-							abContact.getBirthday(), abContact.getTimeZoneId(),
-							abContact.getInstantMessenger(),
-							abContact.getWebsite(), abContact.getComments());
+					ABContactHBM abContactHBM = new ABContactHBM();
+					abContactHBM.setContactId(abContact.getContactId());
+					abContactHBM.setUserId(abContact.getUserId());
+					abContactHBM.setFirstName(abContact.getFirstName());
+					abContactHBM.setMiddleName(abContact.getMiddleName());
+					abContactHBM.setLastName(abContact.getLastName());
+					abContactHBM.setNickName(abContact.getNickName());
+					abContactHBM.setEmailAddress(abContact.getEmailAddress());
+					abContactHBM.setHomeStreet(abContact.getHomeStreet());
+					abContactHBM.setHomeCity(abContact.getHomeCity());
+					abContactHBM.setHomeState(abContact.getHomeState());
+					abContactHBM.setHomeZip(abContact.getHomeZip());
+					abContactHBM.setHomeCountry(abContact.getHomeCountry());
+					abContactHBM.setHomePhone(abContact.getHomePhone());
+					abContactHBM.setHomeFax(abContact.getHomeFax());
+					abContactHBM.setHomeCell(abContact.getHomeCell());
+					abContactHBM.setHomePager(abContact.getHomePager());
+					abContactHBM.setHomeTollFree(abContact.getHomeTollFree());
+					abContactHBM.setHomeEmailAddress(abContact.getHomeEmailAddress());
+					abContactHBM.setBusinessCompany(abContact.getBusinessCompany());
+					abContactHBM.setBusinessStreet(abContact.getBusinessStreet());
+					abContactHBM.setBusinessCity(abContact.getBusinessCity());
+					abContactHBM.setBusinessState(abContact.getBusinessState());
+					abContactHBM.setBusinessZip(abContact.getBusinessZip());
+					abContactHBM.setBusinessCountry(abContact.getBusinessCountry());
+					abContactHBM.setBusinessPhone(abContact.getBusinessPhone());
+					abContactHBM.setBusinessFax(abContact.getBusinessFax());
+					abContactHBM.setBusinessCell(abContact.getBusinessCell());
+					abContactHBM.setBusinessPager(abContact.getBusinessPager());
+					abContactHBM.setBusinessTollFree(abContact.getBusinessTollFree());
+					abContactHBM.setBusinessEmailAddress(abContact.getBusinessEmailAddress());
+					abContactHBM.setEmployeeNumber(abContact.getEmployeeNumber());
+					abContactHBM.setJobTitle(abContact.getJobTitle());
+					abContactHBM.setJobClass(abContact.getJobClass());
+					abContactHBM.setHoursOfOperation(abContact.getHoursOfOperation());
+					abContactHBM.setBirthday(abContact.getBirthday());
+					abContactHBM.setTimeZoneId(abContact.getTimeZoneId());
+					abContactHBM.setInstantMessenger(abContact.getInstantMessenger());
+					abContactHBM.setWebsite(abContact.getWebsite());
+					abContactHBM.setComments(abContact.getComments());
+					abContactHBM.setLists(new HashSet());
 					session.save(abContactHBM);
 					session.flush();
 				}
@@ -179,44 +195,46 @@ public class ABContactPersistence extends BasePersistence {
 						session.flush();
 					}
 					else {
-						abContactHBM = new ABContactHBM(abContact.getContactId(),
-								abContact.getUserId(),
-								abContact.getFirstName(),
-								abContact.getMiddleName(),
-								abContact.getLastName(),
-								abContact.getNickName(),
-								abContact.getEmailAddress(),
-								abContact.getHomeStreet(),
-								abContact.getHomeCity(),
-								abContact.getHomeState(),
-								abContact.getHomeZip(),
-								abContact.getHomeCountry(),
-								abContact.getHomePhone(),
-								abContact.getHomeFax(),
-								abContact.getHomeCell(),
-								abContact.getHomePager(),
-								abContact.getHomeTollFree(),
-								abContact.getHomeEmailAddress(),
-								abContact.getBusinessCompany(),
-								abContact.getBusinessStreet(),
-								abContact.getBusinessCity(),
-								abContact.getBusinessState(),
-								abContact.getBusinessZip(),
-								abContact.getBusinessCountry(),
-								abContact.getBusinessPhone(),
-								abContact.getBusinessFax(),
-								abContact.getBusinessCell(),
-								abContact.getBusinessPager(),
-								abContact.getBusinessTollFree(),
-								abContact.getBusinessEmailAddress(),
-								abContact.getEmployeeNumber(),
-								abContact.getJobTitle(),
-								abContact.getJobClass(),
-								abContact.getHoursOfOperation(),
-								abContact.getBirthday(),
-								abContact.getTimeZoneId(),
-								abContact.getInstantMessenger(),
-								abContact.getWebsite(), abContact.getComments());
+						abContactHBM = new ABContactHBM();
+						abContactHBM.setContactId(abContact.getContactId());
+						abContactHBM.setUserId(abContact.getUserId());
+						abContactHBM.setFirstName(abContact.getFirstName());
+						abContactHBM.setMiddleName(abContact.getMiddleName());
+						abContactHBM.setLastName(abContact.getLastName());
+						abContactHBM.setNickName(abContact.getNickName());
+						abContactHBM.setEmailAddress(abContact.getEmailAddress());
+						abContactHBM.setHomeStreet(abContact.getHomeStreet());
+						abContactHBM.setHomeCity(abContact.getHomeCity());
+						abContactHBM.setHomeState(abContact.getHomeState());
+						abContactHBM.setHomeZip(abContact.getHomeZip());
+						abContactHBM.setHomeCountry(abContact.getHomeCountry());
+						abContactHBM.setHomePhone(abContact.getHomePhone());
+						abContactHBM.setHomeFax(abContact.getHomeFax());
+						abContactHBM.setHomeCell(abContact.getHomeCell());
+						abContactHBM.setHomePager(abContact.getHomePager());
+						abContactHBM.setHomeTollFree(abContact.getHomeTollFree());
+						abContactHBM.setHomeEmailAddress(abContact.getHomeEmailAddress());
+						abContactHBM.setBusinessCompany(abContact.getBusinessCompany());
+						abContactHBM.setBusinessStreet(abContact.getBusinessStreet());
+						abContactHBM.setBusinessCity(abContact.getBusinessCity());
+						abContactHBM.setBusinessState(abContact.getBusinessState());
+						abContactHBM.setBusinessZip(abContact.getBusinessZip());
+						abContactHBM.setBusinessCountry(abContact.getBusinessCountry());
+						abContactHBM.setBusinessPhone(abContact.getBusinessPhone());
+						abContactHBM.setBusinessFax(abContact.getBusinessFax());
+						abContactHBM.setBusinessCell(abContact.getBusinessCell());
+						abContactHBM.setBusinessPager(abContact.getBusinessPager());
+						abContactHBM.setBusinessTollFree(abContact.getBusinessTollFree());
+						abContactHBM.setBusinessEmailAddress(abContact.getBusinessEmailAddress());
+						abContactHBM.setEmployeeNumber(abContact.getEmployeeNumber());
+						abContactHBM.setJobTitle(abContact.getJobTitle());
+						abContactHBM.setJobClass(abContact.getJobClass());
+						abContactHBM.setHoursOfOperation(abContact.getHoursOfOperation());
+						abContactHBM.setBirthday(abContact.getBirthday());
+						abContactHBM.setTimeZoneId(abContact.getTimeZoneId());
+						abContactHBM.setInstantMessenger(abContact.getInstantMessenger());
+						abContactHBM.setWebsite(abContact.getWebsite());
+						abContactHBM.setComments(abContact.getComments());
 						session.save(abContactHBM);
 						session.flush();
 					}
@@ -224,8 +242,6 @@ public class ABContactPersistence extends BasePersistence {
 
 				abContact.setNew(false);
 				abContact.setModified(false);
-				abContact.protect();
-				ABContactPool.update(abContact.getPrimaryKey(), abContact);
 			}
 
 			return abContact;
@@ -713,42 +729,33 @@ public class ABContactPersistence extends BasePersistence {
 		}
 	}
 
+	public static final String SQL_CONTAINSABLIST = "SELECT COUNT(*) AS COUNT_VALUE FROM ABContacts_ABLists WHERE contactId = ? AND listId = ?";
+
 	public boolean containsABList(String pk, String abListPK)
-		throws NoSuchContactException, 
-			com.liferay.portlet.addressbook.NoSuchListException, 
-			SystemException {
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ABContactHBM abContactHBM = (ABContactHBM)session.get(ABContactHBM.class,
-					pk);
+			SQLQuery q = session.createSQLQuery(SQL_CONTAINSABLIST);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
 
-			if (abContactHBM == null) {
-				_log.warn("No ABContact exists with the primary key " +
-					pk.toString());
-				throw new NoSuchContactException(
-					"No ABContact exists with the primary key " +
-					pk.toString());
+			QueryPos qPos = QueryPos.getInstance(q);
+			qPos.add(pk);
+			qPos.add(abListPK);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Integer count = (Integer)itr.next();
+
+				if ((count != null) && (count.intValue() > 0)) {
+					return true;
+				}
 			}
 
-			com.liferay.portlet.addressbook.service.persistence.ABListHBM abListHBM =
-				null;
-			abListHBM = (com.liferay.portlet.addressbook.service.persistence.ABListHBM)session.get(com.liferay.portlet.addressbook.service.persistence.ABListHBM.class,
-					abListPK);
-
-			if (abListHBM == null) {
-				_log.warn("No ABList exists with the primary key " +
-					abListPK.toString());
-				throw new com.liferay.portlet.addressbook.NoSuchListException(
-					"No ABList exists with the primary key " +
-					abListPK.toString());
-			}
-
-			Collection c = abContactHBM.getLists();
-
-			return c.contains(abListHBM);
+			return false;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -758,43 +765,31 @@ public class ABContactPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsABList(String pk,
-		com.liferay.portlet.addressbook.model.ABList abList)
-		throws NoSuchContactException, 
-			com.liferay.portlet.addressbook.NoSuchListException, 
-			SystemException {
+	public static final String SQL_CONTAINSABLISTS = "SELECT COUNT(*) AS COUNT_VALUE FROM ABContacts_ABLists WHERE contactId = ?";
+
+	public boolean containsABLists(String pk) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ABContactHBM abContactHBM = (ABContactHBM)session.get(ABContactHBM.class,
-					pk);
+			SQLQuery q = session.createSQLQuery(SQL_CONTAINSABLISTS);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
 
-			if (abContactHBM == null) {
-				_log.warn("No ABContact exists with the primary key " +
-					pk.toString());
-				throw new NoSuchContactException(
-					"No ABContact exists with the primary key " +
-					pk.toString());
+			QueryPos qPos = QueryPos.getInstance(q);
+			qPos.add(pk);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Integer count = (Integer)itr.next();
+
+				if ((count != null) && (count.intValue() > 0)) {
+					return true;
+				}
 			}
 
-			com.liferay.portlet.addressbook.service.persistence.ABListHBM abListHBM =
-				null;
-			abListHBM = (com.liferay.portlet.addressbook.service.persistence.ABListHBM)session.get(com.liferay.portlet.addressbook.service.persistence.ABListHBM.class,
-					abList.getPrimaryKey());
-
-			if (abListHBM == null) {
-				_log.warn("No ABList exists with the primary key " +
-					abList.getPrimaryKey().toString());
-				throw new com.liferay.portlet.addressbook.NoSuchListException(
-					"No ABList exists with the primary key " +
-					abList.getPrimaryKey().toString());
-			}
-
-			Collection c = abContactHBM.getLists();
-
-			return c.contains(abListHBM);
+			return false;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1005,28 +1000,23 @@ public class ABContactPersistence extends BasePersistence {
 
 	public com.liferay.portlet.addressbook.model.ABContact findByPrimaryKey(
 		String contactId) throws NoSuchContactException, SystemException {
-		com.liferay.portlet.addressbook.model.ABContact abContact = ABContactPool.get(contactId);
 		Session session = null;
 
 		try {
-			if (abContact == null) {
-				session = openSession();
+			session = openSession();
 
-				ABContactHBM abContactHBM = (ABContactHBM)session.get(ABContactHBM.class,
-						contactId);
+			ABContactHBM abContactHBM = (ABContactHBM)session.get(ABContactHBM.class,
+					contactId);
 
-				if (abContactHBM == null) {
-					_log.warn("No ABContact exists with the primary key " +
-						contactId.toString());
-					throw new NoSuchContactException(
-						"No ABContact exists with the primary key " +
-						contactId.toString());
-				}
-
-				abContact = ABContactHBMUtil.model(abContactHBM, false);
+			if (abContactHBM == null) {
+				_log.warn("No ABContact exists with the primary key " +
+					contactId.toString());
+				throw new NoSuchContactException(
+					"No ABContact exists with the primary key " +
+					contactId.toString());
 			}
 
-			return abContact;
+			return ABContactHBMUtil.model(abContactHBM);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1265,7 +1255,6 @@ public class ABContactPersistence extends BasePersistence {
 
 			while (itr.hasNext()) {
 				ABContactHBM abContactHBM = (ABContactHBM)itr.next();
-				ABContactPool.remove((String)abContactHBM.getPrimaryKey());
 				session.delete(abContactHBM);
 			}
 

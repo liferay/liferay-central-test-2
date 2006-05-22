@@ -35,21 +35,6 @@ import java.util.Date;
 public class MailReceipt extends MailReceiptModel {
 
 	public MailReceipt() {
-		super();
-	}
-
-	public MailReceipt(String receiptId) {
-		super(receiptId);
-	}
-
-	public MailReceipt(String receiptId, String companyId, String userId,
-					   Date createDate, Date modifiedDate, String recipientName,
-					   String recipientAddress, String subject, Date sentDate,
-					   int readCount, Date firstReadDate, Date lastReadDate) {
-
-		super(receiptId, companyId, userId, createDate, modifiedDate,
-			  recipientName, recipientAddress, subject, sentDate, readCount,
-			  firstReadDate, lastReadDate);
 	}
 
 	public String getRecipient() {

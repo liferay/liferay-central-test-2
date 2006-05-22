@@ -268,12 +268,6 @@
 		</antcall>
 	</target>
 
-	<target name="build-service-portlet-admin">
-		<antcall target="build-service">
-			<param name="service.file" value="src/com/liferay/portlet/admin/service.xml" />
-		</antcall>
-	</target>
-
 	<target name="build-service-portlet-blogs">
 		<antcall target="build-service">
 			<param name="service.file" value="src/com/liferay/portlet/blogs/service.xml" />
@@ -289,12 +283,6 @@
 	<target name="build-service-portlet-calendar">
 		<antcall target="build-service">
 			<param name="service.file" value="src/com/liferay/portlet/calendar/service.xml" />
-		</antcall>
-	</target>
-
-	<target name="build-service-portlet-comic">
-		<antcall target="build-service">
-			<param name="service.file" value="src/com/liferay/portlet/comic/service.xml" />
 		</antcall>
 	</target>
 
@@ -328,12 +316,6 @@
 		</antcall>
 	</target>
 
-	<target name="build-service-portlet-network">
-		<antcall target="build-service">
-			<param name="service.file" value="src/com/liferay/portlet/network/service.xml" />
-		</antcall>
-	</target>
-
 	<target name="build-service-portlet-polls">
 		<antcall target="build-service">
 			<param name="service.file" value="src/com/liferay/portlet/polls/service.xml" />
@@ -355,17 +337,14 @@
 	<target name="build-services">
 		<antcall target="build-service-portal" />
 		<antcall target="build-service-portlet-addressbook" />
-		<antcall target="build-service-portlet-admin" />
 		<antcall target="build-service-portlet-blogs" />
 		<antcall target="build-service-portlet-bookmarks" />
 		<antcall target="build-service-portlet-calendar" />
-		<antcall target="build-service-portlet-comic" />
 		<antcall target="build-service-portlet-documentlibrary" />
 		<antcall target="build-service-portlet-imagegallery" />
 		<antcall target="build-service-portlet-journal" />
 		<antcall target="build-service-portlet-mail" />
 		<antcall target="build-service-portlet-messageboards" />
-		<antcall target="build-service-portlet-network" />
 		<antcall target="build-service-portlet-polls" />
 		<antcall target="build-service-portlet-shopping" />
 		<antcall target="build-service-portlet-wiki" />
@@ -406,12 +385,6 @@
 		</antcall>
 	</target>
 
-	<target name="build-wsdd-portlet-admin">
-		<antcall target="build-wsdd">
-			<param name="service.file" value="src/com/liferay/portlet/admin/service.xml" />
-		</antcall>
-	</target>
-
 	<target name="build-wsdd-portlet-blogs">
 		<antcall target="build-wsdd">
 			<param name="service.file" value="src/com/liferay/portlet/blogs/service.xml" />
@@ -427,12 +400,6 @@
 	<target name="build-wsdd-portlet-calendar">
 		<antcall target="build-wsdd">
 			<param name="service.file" value="src/com/liferay/portlet/calendar/service.xml" />
-		</antcall>
-	</target>
-
-	<target name="build-wsdd-portlet-comic">
-		<antcall target="build-wsdd">
-			<param name="service.file" value="src/com/liferay/portlet/comic/service.xml" />
 		</antcall>
 	</target>
 
@@ -466,12 +433,6 @@
 		</antcall>
 	</target>
 
-	<target name="build-wsdd-portlet-network">
-		<antcall target="build-wsdd">
-			<param name="service.file" value="src/com/liferay/portlet/network/service.xml" />
-		</antcall>
-	</target>
-
 	<target name="build-wsdd-portlet-polls">
 		<antcall target="build-wsdd">
 			<param name="service.file" value="src/com/liferay/portlet/polls/service.xml" />
@@ -493,17 +454,14 @@
 	<target name="build-wsdds">
 		<antcall target="build-wsdd-portal" />
 		<antcall target="build-wsdd-portlet-addressbook" />
-		<antcall target="build-wsdd-portlet-admin" />
 		<antcall target="build-wsdd-portlet-blogs" />
 		<antcall target="build-wsdd-portlet-bookmarks" />
 		<antcall target="build-wsdd-portlet-calendar" />
-		<antcall target="build-wsdd-portlet-comic" />
 		<antcall target="build-wsdd-portlet-documentlibrary" />
 		<antcall target="build-wsdd-portlet-imagegallery" />
 		<antcall target="build-wsdd-portlet-journal" />
 		<antcall target="build-wsdd-portlet-mail" />
 		<antcall target="build-wsdd-portlet-messageboards" />
-		<antcall target="build-wsdd-portlet-network" />
 		<antcall target="build-wsdd-portlet-polls" />
 		<antcall target="build-wsdd-portlet-shopping" />
 		<antcall target="build-wsdd-portlet-wiki" />

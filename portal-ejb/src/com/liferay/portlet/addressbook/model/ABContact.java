@@ -41,46 +41,6 @@ public class ABContact extends ABContactModel implements Recipient {
 		PropsUtil.getArray(PropsUtil.ADDRESS_BOOK_CONTACT_JOB_CLASSES);
 
 	public ABContact() {
-		super();
-	}
-
-	public ABContact(String contactId) {
-		super(contactId);
-	}
-
-	public ABContact(String firstName, String lastName, String emailAddress) {
-		super(null, null, firstName, null, lastName, null, emailAddress, null,
-			  null, null, null, null, null, null, null, null, null, null, null,
-			  null, null, null, null, null, null, null, null, null, null, null,
-			  null, null, null, null, null, null, null, null, null);
-	}
-
-	public ABContact(String contactId, String userId, String firstName,
-					 String middleName, String lastName, String nickName,
-					 String emailAddress, String homeStreet, String homeCity,
-					 String homeState, String homeZip, String homeCountry,
-					 String homePhone, String homeFax, String homeCell,
-					 String homePager, String homeTollFree,
-					 String homeEmailAddress, String businessCompany,
-					 String businessStreet, String businessCity,
-					 String businessState, String businessZip,
-					 String businessCountry, String businessPhone,
-					 String businessFax, String businessCell,
-					 String businessPager, String businessTollFree,
-					 String businessEmailAddress, String employeeNumber,
-					 String jobTitle, String jobClass, String hoursOfOperation,
-					 Date birthday, String timeZoneId, String instantMessenger,
-					 String website, String comments) {
-
-		super(contactId, userId, firstName, middleName, lastName, nickName,
-			  emailAddress, homeStreet, homeCity, homeState, homeZip,
-			  homeCountry, homePhone, homeFax, homeCell, homePager,
-			  homeTollFree, homeEmailAddress, businessCompany, businessStreet,
-			  businessCity, businessState, businessZip, businessCountry,
-			  businessPhone, businessFax, businessCell, businessPager,
-			  businessTollFree, businessEmailAddress, employeeNumber, jobTitle,
-			  jobClass, hoursOfOperation,  birthday, timeZoneId,
-			  instantMessenger, website, comments);
 	}
 
 	public String getFullName() {

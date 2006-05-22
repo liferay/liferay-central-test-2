@@ -108,7 +108,7 @@ public class OutlookImporter extends Importer {
 	}
 
 	private ABContact _createContact(String[] values, Map defs, DateFormat df) {
-		ABContact c = new ABContact(null);
+		ABContact c = new ABContact();
 
 		c.setFirstName(getValue(values, defs, "First Name"));
 		c.setLastName(getValue(values, defs, "Last Name"));

@@ -50,7 +50,11 @@ import java.util.List;
  */
 public class MailReceiptPersistence extends BasePersistence {
 	public com.liferay.portlet.mail.model.MailReceipt create(String receiptId) {
-		return new com.liferay.portlet.mail.model.MailReceipt(receiptId);
+		MailReceiptHBM mailReceiptHBM = new MailReceiptHBM();
+		mailReceiptHBM.setNew(true);
+		mailReceiptHBM.setPrimaryKey(receiptId);
+
+		return MailReceiptHBMUtil.model(mailReceiptHBM);
 	}
 
 	public com.liferay.portlet.mail.model.MailReceipt remove(String receiptId)
@@ -71,12 +75,10 @@ public class MailReceiptPersistence extends BasePersistence {
 					receiptId.toString());
 			}
 
-			com.liferay.portlet.mail.model.MailReceipt mailReceipt = MailReceiptHBMUtil.model(mailReceiptHBM);
 			session.delete(mailReceiptHBM);
 			session.flush();
-			MailReceiptPool.remove(receiptId);
 
-			return mailReceipt;
+			return MailReceiptHBMUtil.model(mailReceiptHBM);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -96,18 +98,19 @@ public class MailReceiptPersistence extends BasePersistence {
 				session = openSession();
 
 				if (mailReceipt.isNew()) {
-					MailReceiptHBM mailReceiptHBM = new MailReceiptHBM(mailReceipt.getReceiptId(),
-							mailReceipt.getCompanyId(),
-							mailReceipt.getUserId(),
-							mailReceipt.getCreateDate(),
-							mailReceipt.getModifiedDate(),
-							mailReceipt.getRecipientName(),
-							mailReceipt.getRecipientAddress(),
-							mailReceipt.getSubject(),
-							mailReceipt.getSentDate(),
-							mailReceipt.getReadCount(),
-							mailReceipt.getFirstReadDate(),
-							mailReceipt.getLastReadDate());
+					MailReceiptHBM mailReceiptHBM = new MailReceiptHBM();
+					mailReceiptHBM.setReceiptId(mailReceipt.getReceiptId());
+					mailReceiptHBM.setCompanyId(mailReceipt.getCompanyId());
+					mailReceiptHBM.setUserId(mailReceipt.getUserId());
+					mailReceiptHBM.setCreateDate(mailReceipt.getCreateDate());
+					mailReceiptHBM.setModifiedDate(mailReceipt.getModifiedDate());
+					mailReceiptHBM.setRecipientName(mailReceipt.getRecipientName());
+					mailReceiptHBM.setRecipientAddress(mailReceipt.getRecipientAddress());
+					mailReceiptHBM.setSubject(mailReceipt.getSubject());
+					mailReceiptHBM.setSentDate(mailReceipt.getSentDate());
+					mailReceiptHBM.setReadCount(mailReceipt.getReadCount());
+					mailReceiptHBM.setFirstReadDate(mailReceipt.getFirstReadDate());
+					mailReceiptHBM.setLastReadDate(mailReceipt.getLastReadDate());
 					session.save(mailReceiptHBM);
 					session.flush();
 				}
@@ -130,18 +133,19 @@ public class MailReceiptPersistence extends BasePersistence {
 						session.flush();
 					}
 					else {
-						mailReceiptHBM = new MailReceiptHBM(mailReceipt.getReceiptId(),
-								mailReceipt.getCompanyId(),
-								mailReceipt.getUserId(),
-								mailReceipt.getCreateDate(),
-								mailReceipt.getModifiedDate(),
-								mailReceipt.getRecipientName(),
-								mailReceipt.getRecipientAddress(),
-								mailReceipt.getSubject(),
-								mailReceipt.getSentDate(),
-								mailReceipt.getReadCount(),
-								mailReceipt.getFirstReadDate(),
-								mailReceipt.getLastReadDate());
+						mailReceiptHBM = new MailReceiptHBM();
+						mailReceiptHBM.setReceiptId(mailReceipt.getReceiptId());
+						mailReceiptHBM.setCompanyId(mailReceipt.getCompanyId());
+						mailReceiptHBM.setUserId(mailReceipt.getUserId());
+						mailReceiptHBM.setCreateDate(mailReceipt.getCreateDate());
+						mailReceiptHBM.setModifiedDate(mailReceipt.getModifiedDate());
+						mailReceiptHBM.setRecipientName(mailReceipt.getRecipientName());
+						mailReceiptHBM.setRecipientAddress(mailReceipt.getRecipientAddress());
+						mailReceiptHBM.setSubject(mailReceipt.getSubject());
+						mailReceiptHBM.setSentDate(mailReceipt.getSentDate());
+						mailReceiptHBM.setReadCount(mailReceipt.getReadCount());
+						mailReceiptHBM.setFirstReadDate(mailReceipt.getFirstReadDate());
+						mailReceiptHBM.setLastReadDate(mailReceipt.getLastReadDate());
 						session.save(mailReceiptHBM);
 						session.flush();
 					}
@@ -149,8 +153,6 @@ public class MailReceiptPersistence extends BasePersistence {
 
 				mailReceipt.setNew(false);
 				mailReceipt.setModified(false);
-				mailReceipt.protect();
-				MailReceiptPool.update(mailReceipt.getPrimaryKey(), mailReceipt);
 			}
 
 			return mailReceipt;
@@ -165,28 +167,23 @@ public class MailReceiptPersistence extends BasePersistence {
 
 	public com.liferay.portlet.mail.model.MailReceipt findByPrimaryKey(
 		String receiptId) throws NoSuchReceiptException, SystemException {
-		com.liferay.portlet.mail.model.MailReceipt mailReceipt = MailReceiptPool.get(receiptId);
 		Session session = null;
 
 		try {
-			if (mailReceipt == null) {
-				session = openSession();
+			session = openSession();
 
-				MailReceiptHBM mailReceiptHBM = (MailReceiptHBM)session.get(MailReceiptHBM.class,
-						receiptId);
+			MailReceiptHBM mailReceiptHBM = (MailReceiptHBM)session.get(MailReceiptHBM.class,
+					receiptId);
 
-				if (mailReceiptHBM == null) {
-					_log.warn("No MailReceipt exists with the primary key " +
-						receiptId.toString());
-					throw new NoSuchReceiptException(
-						"No MailReceipt exists with the primary key " +
-						receiptId.toString());
-				}
-
-				mailReceipt = MailReceiptHBMUtil.model(mailReceiptHBM, false);
+			if (mailReceiptHBM == null) {
+				_log.warn("No MailReceipt exists with the primary key " +
+					receiptId.toString());
+				throw new NoSuchReceiptException(
+					"No MailReceipt exists with the primary key " +
+					receiptId.toString());
 			}
 
-			return mailReceipt;
+			return MailReceiptHBMUtil.model(mailReceiptHBM);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -581,7 +578,6 @@ public class MailReceiptPersistence extends BasePersistence {
 
 			while (itr.hasNext()) {
 				MailReceiptHBM mailReceiptHBM = (MailReceiptHBM)itr.next();
-				MailReceiptPool.remove((String)mailReceiptHBM.getPrimaryKey());
 				session.delete(mailReceiptHBM);
 			}
 
@@ -617,7 +613,6 @@ public class MailReceiptPersistence extends BasePersistence {
 
 			while (itr.hasNext()) {
 				MailReceiptHBM mailReceiptHBM = (MailReceiptHBM)itr.next();
-				MailReceiptPool.remove((String)mailReceiptHBM.getPrimaryKey());
 				session.delete(mailReceiptHBM);
 			}
 

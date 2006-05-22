@@ -1,0 +1,2 @@
+SET PORTAL_LIB=../../lib
+SET CLASSPATH=.;../portal-client.jar;%PORTAL_LIB%/activation.jar;%PORTAL_LIB%/axis.jar;%PORTAL_LIB%/commons-discovery.jar;%PORTAL_LIB%/commons-logging.jar;%PORTAL_LIB%/jaxrpc.jar;%PORTAL_LIB%/mail.jar;%PORTAL_LIB%/saaj.jar;%PORTAL_LIB%/wsdl4j.jar

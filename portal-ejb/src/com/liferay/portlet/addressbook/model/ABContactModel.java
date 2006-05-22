@@ -37,9 +37,6 @@ import java.util.Date;
  *
  */
 public class ABContactModel extends BaseModel {
-	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
-				"value.object.cacheable.com.liferay.portlet.addressbook.model.ABContact"),
-			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.addressbook.model.ABContact"),
 			XSS_ALLOW);
@@ -163,67 +160,12 @@ public class ABContactModel extends BaseModel {
 	public ABContactModel() {
 	}
 
-	public ABContactModel(String contactId) {
-		_contactId = contactId;
-		setNew(true);
-	}
-
-	public ABContactModel(String contactId, String userId, String firstName,
-		String middleName, String lastName, String nickName,
-		String emailAddress, String homeStreet, String homeCity,
-		String homeState, String homeZip, String homeCountry, String homePhone,
-		String homeFax, String homeCell, String homePager, String homeTollFree,
-		String homeEmailAddress, String businessCompany, String businessStreet,
-		String businessCity, String businessState, String businessZip,
-		String businessCountry, String businessPhone, String businessFax,
-		String businessCell, String businessPager, String businessTollFree,
-		String businessEmailAddress, String employeeNumber, String jobTitle,
-		String jobClass, String hoursOfOperation, Date birthday,
-		String timeZoneId, String instantMessenger, String website,
-		String comments) {
-		_contactId = contactId;
-		_userId = userId;
-		_firstName = firstName;
-		_middleName = middleName;
-		_lastName = lastName;
-		_nickName = nickName;
-		_emailAddress = emailAddress;
-		_homeStreet = homeStreet;
-		_homeCity = homeCity;
-		_homeState = homeState;
-		_homeZip = homeZip;
-		_homeCountry = homeCountry;
-		_homePhone = homePhone;
-		_homeFax = homeFax;
-		_homeCell = homeCell;
-		_homePager = homePager;
-		_homeTollFree = homeTollFree;
-		_homeEmailAddress = homeEmailAddress;
-		_businessCompany = businessCompany;
-		_businessStreet = businessStreet;
-		_businessCity = businessCity;
-		_businessState = businessState;
-		_businessZip = businessZip;
-		_businessCountry = businessCountry;
-		_businessPhone = businessPhone;
-		_businessFax = businessFax;
-		_businessCell = businessCell;
-		_businessPager = businessPager;
-		_businessTollFree = businessTollFree;
-		_businessEmailAddress = businessEmailAddress;
-		_employeeNumber = employeeNumber;
-		_jobTitle = jobTitle;
-		_jobClass = jobClass;
-		_hoursOfOperation = hoursOfOperation;
-		_birthday = birthday;
-		_timeZoneId = timeZoneId;
-		_instantMessenger = instantMessenger;
-		_website = website;
-		_comments = comments;
-	}
-
 	public String getPrimaryKey() {
 		return _contactId;
+	}
+
+	public void setPrimaryKey(String pk) {
+		setContactId(pk);
 	}
 
 	public String getContactId() {
@@ -926,26 +868,49 @@ public class ABContactModel extends BaseModel {
 		}
 	}
 
-	public BaseModel getProtected() {
-		return null;
-	}
-
-	public void protect() {
-	}
-
 	public Object clone() {
-		return new ABContact(getContactId(), getUserId(), getFirstName(),
-			getMiddleName(), getLastName(), getNickName(), getEmailAddress(),
-			getHomeStreet(), getHomeCity(), getHomeState(), getHomeZip(),
-			getHomeCountry(), getHomePhone(), getHomeFax(), getHomeCell(),
-			getHomePager(), getHomeTollFree(), getHomeEmailAddress(),
-			getBusinessCompany(), getBusinessStreet(), getBusinessCity(),
-			getBusinessState(), getBusinessZip(), getBusinessCountry(),
-			getBusinessPhone(), getBusinessFax(), getBusinessCell(),
-			getBusinessPager(), getBusinessTollFree(),
-			getBusinessEmailAddress(), getEmployeeNumber(), getJobTitle(),
-			getJobClass(), getHoursOfOperation(), getBirthday(),
-			getTimeZoneId(), getInstantMessenger(), getWebsite(), getComments());
+		ABContact clone = new ABContact();
+		clone.setContactId(getContactId());
+		clone.setUserId(getUserId());
+		clone.setFirstName(getFirstName());
+		clone.setMiddleName(getMiddleName());
+		clone.setLastName(getLastName());
+		clone.setNickName(getNickName());
+		clone.setEmailAddress(getEmailAddress());
+		clone.setHomeStreet(getHomeStreet());
+		clone.setHomeCity(getHomeCity());
+		clone.setHomeState(getHomeState());
+		clone.setHomeZip(getHomeZip());
+		clone.setHomeCountry(getHomeCountry());
+		clone.setHomePhone(getHomePhone());
+		clone.setHomeFax(getHomeFax());
+		clone.setHomeCell(getHomeCell());
+		clone.setHomePager(getHomePager());
+		clone.setHomeTollFree(getHomeTollFree());
+		clone.setHomeEmailAddress(getHomeEmailAddress());
+		clone.setBusinessCompany(getBusinessCompany());
+		clone.setBusinessStreet(getBusinessStreet());
+		clone.setBusinessCity(getBusinessCity());
+		clone.setBusinessState(getBusinessState());
+		clone.setBusinessZip(getBusinessZip());
+		clone.setBusinessCountry(getBusinessCountry());
+		clone.setBusinessPhone(getBusinessPhone());
+		clone.setBusinessFax(getBusinessFax());
+		clone.setBusinessCell(getBusinessCell());
+		clone.setBusinessPager(getBusinessPager());
+		clone.setBusinessTollFree(getBusinessTollFree());
+		clone.setBusinessEmailAddress(getBusinessEmailAddress());
+		clone.setEmployeeNumber(getEmployeeNumber());
+		clone.setJobTitle(getJobTitle());
+		clone.setJobClass(getJobClass());
+		clone.setHoursOfOperation(getHoursOfOperation());
+		clone.setBirthday(getBirthday());
+		clone.setTimeZoneId(getTimeZoneId());
+		clone.setInstantMessenger(getInstantMessenger());
+		clone.setWebsite(getWebsite());
+		clone.setComments(getComments());
+
+		return clone;
 	}
 
 	public int compareTo(Object obj) {

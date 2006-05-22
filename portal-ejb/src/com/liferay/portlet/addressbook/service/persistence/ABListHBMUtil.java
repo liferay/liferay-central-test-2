@@ -33,24 +33,7 @@ import com.liferay.util.dao.hibernate.Transformer;
 public class ABListHBMUtil implements Transformer {
 	public static com.liferay.portlet.addressbook.model.ABList model(
 		ABListHBM abListHBM) {
-		return model(abListHBM, true);
-	}
-
-	public static com.liferay.portlet.addressbook.model.ABList model(
-		ABListHBM abListHBM, boolean checkPool) {
-		com.liferay.portlet.addressbook.model.ABList abList = null;
-
-		if (checkPool) {
-			abList = ABListPool.get(abListHBM.getPrimaryKey());
-		}
-
-		if (abList == null) {
-			abList = new com.liferay.portlet.addressbook.model.ABList(abListHBM.getListId(),
-					abListHBM.getUserId(), abListHBM.getName());
-			ABListPool.put(abList.getPrimaryKey(), abList);
-		}
-
-		return abList;
+		return (com.liferay.portlet.addressbook.model.ABList)abListHBM;
 	}
 
 	public static ABListHBMUtil getInstance() {

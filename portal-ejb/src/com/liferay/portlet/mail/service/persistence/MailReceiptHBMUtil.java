@@ -33,32 +33,7 @@ import com.liferay.util.dao.hibernate.Transformer;
 public class MailReceiptHBMUtil implements Transformer {
 	public static com.liferay.portlet.mail.model.MailReceipt model(
 		MailReceiptHBM mailReceiptHBM) {
-		return model(mailReceiptHBM, true);
-	}
-
-	public static com.liferay.portlet.mail.model.MailReceipt model(
-		MailReceiptHBM mailReceiptHBM, boolean checkPool) {
-		com.liferay.portlet.mail.model.MailReceipt mailReceipt = null;
-
-		if (checkPool) {
-			mailReceipt = MailReceiptPool.get(mailReceiptHBM.getPrimaryKey());
-		}
-
-		if (mailReceipt == null) {
-			mailReceipt = new com.liferay.portlet.mail.model.MailReceipt(mailReceiptHBM.getReceiptId(),
-					mailReceiptHBM.getCompanyId(), mailReceiptHBM.getUserId(),
-					mailReceiptHBM.getCreateDate(),
-					mailReceiptHBM.getModifiedDate(),
-					mailReceiptHBM.getRecipientName(),
-					mailReceiptHBM.getRecipientAddress(),
-					mailReceiptHBM.getSubject(), mailReceiptHBM.getSentDate(),
-					mailReceiptHBM.getReadCount(),
-					mailReceiptHBM.getFirstReadDate(),
-					mailReceiptHBM.getLastReadDate());
-			MailReceiptPool.put(mailReceipt.getPrimaryKey(), mailReceipt);
-		}
-
-		return mailReceipt;
+		return (com.liferay.portlet.mail.model.MailReceipt)mailReceiptHBM;
 	}
 
 	public static MailReceiptHBMUtil getInstance() {

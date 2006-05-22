@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<project name="portal-client" basedir="." default="compile">
+	<import file="../build-common-java.xml" />
+
+	<property name="deploy.dir" value="${app.server.lib}" />
+	<property name="jar.file" value="${ant.project.name}.jar" />
+	<property name="axis.url" value="http://localhost:8080/tunnel/axis" />
+
+	<target name="build-client">
+		<mkdir dir="${source.dir}" />
+
+		<axis-wsdl2java
+			output="${source.dir}"
+			url="${axis.url}/Portal_LayoutService?wsdl"
+		/>
+	</target>
+</project>

@@ -37,15 +37,6 @@ import java.util.List;
 public class ABList extends ABListModel implements Recipient {
 
 	public ABList() {
-		super();
-	}
-
-	public ABList(String listId) {
-		super(listId);
-	}
-
-	public ABList(String listId, String userId, String name) {
-		super(listId, userId, name);
 	}
 
 	public String getRecipientId() {

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.addressbook.service.persistence;
 
+import com.liferay.portlet.addressbook.model.ABList;
+
 import java.util.Set;
 
 /**
@@ -30,50 +32,8 @@ import java.util.Set;
  * @author  Brian Wing Shun Chan
  *
  */
-public class ABListHBM {
+public class ABListHBM extends ABList {
 	protected ABListHBM() {
-	}
-
-	protected ABListHBM(String listId) {
-		_listId = listId;
-	}
-
-	protected ABListHBM(String listId, String userId, String name) {
-		_listId = listId;
-		_userId = userId;
-		_name = name;
-	}
-
-	public String getPrimaryKey() {
-		return _listId;
-	}
-
-	protected void setPrimaryKey(String pk) {
-		_listId = pk;
-	}
-
-	protected String getListId() {
-		return _listId;
-	}
-
-	protected void setListId(String listId) {
-		_listId = listId;
-	}
-
-	protected String getUserId() {
-		return _userId;
-	}
-
-	protected void setUserId(String userId) {
-		_userId = userId;
-	}
-
-	protected String getName() {
-		return _name;
-	}
-
-	protected void setName(String name) {
-		_name = name;
 	}
 
 	protected Set getContacts() {
@@ -84,8 +44,5 @@ public class ABListHBM {
 		_contacts = contacts;
 	}
 
-	private String _listId;
-	private String _userId;
-	private String _name;
 	private Set _contacts;
 }

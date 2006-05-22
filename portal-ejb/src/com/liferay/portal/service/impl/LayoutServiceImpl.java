@@ -31,6 +31,8 @@ import com.liferay.portal.service.permission.LayoutPermission;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutService;
 
+import java.util.List;
+
 /**
  * <a href="LayoutServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -61,6 +63,15 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		LayoutLocalServiceUtil.deleteLayout(layoutId, ownerId);
+	}
+
+	public List getLayouts(
+			String companyId, String portletId, String prefsKey,
+			String prefsValue)
+		throws SystemException {
+
+		return LayoutLocalServiceUtil.getLayouts(
+			companyId, portletId, prefsKey, prefsValue);
 	}
 
 	public void setLayouts(

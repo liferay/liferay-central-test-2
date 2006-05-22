@@ -13,10 +13,12 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:string"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expMonth" type="tns:int"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expDay" type="tns:int"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expYear" type="tns:int"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="neverExpires" type="tns:boolean"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expirationDateMonth" type="tns:int"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expirationDateDay" type="tns:int"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expirationDateYear" type="tns:int"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expirationDateHour" type="tns:int"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expirationDateMinute" type="tns:int"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="neverExpire" type="tns:boolean"></parameter>  
 			<parameter xmlns:tns="urn:http.service.polls.portlet.liferay.com" qname="choices" type="tns:ArrayOf_xsd_anyType"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter> 
@@ -31,10 +33,12 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="questionId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expMonth" type="tns:int"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expDay" type="tns:int"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expYear" type="tns:int"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="neverExpires" type="tns:boolean"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expirationDateMonth" type="tns:int"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expirationDateDay" type="tns:int"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expirationDateYear" type="tns:int"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expirationDateHour" type="tns:int"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expirationDateMinute" type="tns:int"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="neverExpire" type="tns:boolean"></parameter>  
 			<parameter xmlns:tns="urn:http.service.polls.portlet.liferay.com" qname="choices" type="tns:ArrayOf_xsd_anyType"></parameter> 
 		</operation>  
 		<parameter name="allowedMethods" value="getQuestion deleteQuestion updateQuestion addQuestion"/>  

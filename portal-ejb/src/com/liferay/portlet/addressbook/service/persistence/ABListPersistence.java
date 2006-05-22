@@ -24,22 +24,25 @@ package com.liferay.portlet.addressbook.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.addressbook.NoSuchListException;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -53,7 +56,11 @@ import java.util.Set;
  */
 public class ABListPersistence extends BasePersistence {
 	public com.liferay.portlet.addressbook.model.ABList create(String listId) {
-		return new com.liferay.portlet.addressbook.model.ABList(listId);
+		ABListHBM abListHBM = new ABListHBM();
+		abListHBM.setNew(true);
+		abListHBM.setPrimaryKey(listId);
+
+		return ABListHBMUtil.model(abListHBM);
 	}
 
 	public com.liferay.portlet.addressbook.model.ABList remove(String listId)
@@ -73,12 +80,10 @@ public class ABListPersistence extends BasePersistence {
 					listId.toString());
 			}
 
-			com.liferay.portlet.addressbook.model.ABList abList = ABListHBMUtil.model(abListHBM);
 			session.delete(abListHBM);
 			session.flush();
-			ABListPool.remove(listId);
 
-			return abList;
+			return ABListHBMUtil.model(abListHBM);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -98,8 +103,11 @@ public class ABListPersistence extends BasePersistence {
 				session = openSession();
 
 				if (abList.isNew()) {
-					ABListHBM abListHBM = new ABListHBM(abList.getListId(),
-							abList.getUserId(), abList.getName());
+					ABListHBM abListHBM = new ABListHBM();
+					abListHBM.setListId(abList.getListId());
+					abListHBM.setUserId(abList.getUserId());
+					abListHBM.setName(abList.getName());
+					abListHBM.setContacts(new HashSet());
 					session.save(abListHBM);
 					session.flush();
 				}
@@ -113,8 +121,10 @@ public class ABListPersistence extends BasePersistence {
 						session.flush();
 					}
 					else {
-						abListHBM = new ABListHBM(abList.getListId(),
-								abList.getUserId(), abList.getName());
+						abListHBM = new ABListHBM();
+						abListHBM.setListId(abList.getListId());
+						abListHBM.setUserId(abList.getUserId());
+						abListHBM.setName(abList.getName());
 						session.save(abListHBM);
 						session.flush();
 					}
@@ -122,8 +132,6 @@ public class ABListPersistence extends BasePersistence {
 
 				abList.setNew(false);
 				abList.setModified(false);
-				abList.protect();
-				ABListPool.update(abList.getPrimaryKey(), abList);
 			}
 
 			return abList;
@@ -597,40 +605,33 @@ public class ABListPersistence extends BasePersistence {
 		}
 	}
 
+	public static final String SQL_CONTAINSABCONTACT = "SELECT COUNT(*) AS COUNT_VALUE FROM ABContacts_ABLists WHERE listId = ? AND contactId = ?";
+
 	public boolean containsABContact(String pk, String abContactPK)
-		throws NoSuchListException, 
-			com.liferay.portlet.addressbook.NoSuchContactException, 
-			SystemException {
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ABListHBM abListHBM = (ABListHBM)session.get(ABListHBM.class, pk);
+			SQLQuery q = session.createSQLQuery(SQL_CONTAINSABCONTACT);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
 
-			if (abListHBM == null) {
-				_log.warn("No ABList exists with the primary key " +
-					pk.toString());
-				throw new NoSuchListException(
-					"No ABList exists with the primary key " + pk.toString());
+			QueryPos qPos = QueryPos.getInstance(q);
+			qPos.add(pk);
+			qPos.add(abContactPK);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Integer count = (Integer)itr.next();
+
+				if ((count != null) && (count.intValue() > 0)) {
+					return true;
+				}
 			}
 
-			com.liferay.portlet.addressbook.service.persistence.ABContactHBM abContactHBM =
-				null;
-			abContactHBM = (com.liferay.portlet.addressbook.service.persistence.ABContactHBM)session.get(com.liferay.portlet.addressbook.service.persistence.ABContactHBM.class,
-					abContactPK);
-
-			if (abContactHBM == null) {
-				_log.warn("No ABContact exists with the primary key " +
-					abContactPK.toString());
-				throw new com.liferay.portlet.addressbook.NoSuchContactException(
-					"No ABContact exists with the primary key " +
-					abContactPK.toString());
-			}
-
-			Collection c = abListHBM.getContacts();
-
-			return c.contains(abContactHBM);
+			return false;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -640,41 +641,31 @@ public class ABListPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsABContact(String pk,
-		com.liferay.portlet.addressbook.model.ABContact abContact)
-		throws NoSuchListException, 
-			com.liferay.portlet.addressbook.NoSuchContactException, 
-			SystemException {
+	public static final String SQL_CONTAINSABCONTACTS = "SELECT COUNT(*) AS COUNT_VALUE FROM ABContacts_ABLists WHERE listId = ?";
+
+	public boolean containsABContacts(String pk) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ABListHBM abListHBM = (ABListHBM)session.get(ABListHBM.class, pk);
+			SQLQuery q = session.createSQLQuery(SQL_CONTAINSABCONTACTS);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
 
-			if (abListHBM == null) {
-				_log.warn("No ABList exists with the primary key " +
-					pk.toString());
-				throw new NoSuchListException(
-					"No ABList exists with the primary key " + pk.toString());
+			QueryPos qPos = QueryPos.getInstance(q);
+			qPos.add(pk);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Integer count = (Integer)itr.next();
+
+				if ((count != null) && (count.intValue() > 0)) {
+					return true;
+				}
 			}
 
-			com.liferay.portlet.addressbook.service.persistence.ABContactHBM abContactHBM =
-				null;
-			abContactHBM = (com.liferay.portlet.addressbook.service.persistence.ABContactHBM)session.get(com.liferay.portlet.addressbook.service.persistence.ABContactHBM.class,
-					abContact.getPrimaryKey());
-
-			if (abContactHBM == null) {
-				_log.warn("No ABContact exists with the primary key " +
-					abContact.getPrimaryKey().toString());
-				throw new com.liferay.portlet.addressbook.NoSuchContactException(
-					"No ABContact exists with the primary key " +
-					abContact.getPrimaryKey().toString());
-			}
-
-			Collection c = abListHBM.getContacts();
-
-			return c.contains(abContactHBM);
+			return false;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -877,28 +868,22 @@ public class ABListPersistence extends BasePersistence {
 
 	public com.liferay.portlet.addressbook.model.ABList findByPrimaryKey(
 		String listId) throws NoSuchListException, SystemException {
-		com.liferay.portlet.addressbook.model.ABList abList = ABListPool.get(listId);
 		Session session = null;
 
 		try {
-			if (abList == null) {
-				session = openSession();
+			session = openSession();
 
-				ABListHBM abListHBM = (ABListHBM)session.get(ABListHBM.class,
-						listId);
+			ABListHBM abListHBM = (ABListHBM)session.get(ABListHBM.class, listId);
 
-				if (abListHBM == null) {
-					_log.warn("No ABList exists with the primary key " +
-						listId.toString());
-					throw new NoSuchListException(
-						"No ABList exists with the primary key " +
-						listId.toString());
-				}
-
-				abList = ABListHBMUtil.model(abListHBM, false);
+			if (abListHBM == null) {
+				_log.warn("No ABList exists with the primary key " +
+					listId.toString());
+				throw new NoSuchListException(
+					"No ABList exists with the primary key " +
+					listId.toString());
 			}
 
-			return abList;
+			return ABListHBMUtil.model(abListHBM);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1127,7 +1112,6 @@ public class ABListPersistence extends BasePersistence {
 
 			while (itr.hasNext()) {
 				ABListHBM abListHBM = (ABListHBM)itr.next();
-				ABListPool.remove((String)abListHBM.getPrimaryKey());
 				session.delete(abListHBM);
 			}
 

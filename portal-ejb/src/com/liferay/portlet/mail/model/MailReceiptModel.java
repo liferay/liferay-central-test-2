@@ -37,9 +37,6 @@ import java.util.Date;
  *
  */
 public class MailReceiptModel extends BaseModel {
-	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
-				"value.object.cacheable.com.liferay.portlet.mail.model.MailReceipt"),
-			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.mail.model.MailReceipt"),
 			XSS_ALLOW);
@@ -67,31 +64,12 @@ public class MailReceiptModel extends BaseModel {
 	public MailReceiptModel() {
 	}
 
-	public MailReceiptModel(String receiptId) {
-		_receiptId = receiptId;
-		setNew(true);
-	}
-
-	public MailReceiptModel(String receiptId, String companyId, String userId,
-		Date createDate, Date modifiedDate, String recipientName,
-		String recipientAddress, String subject, Date sentDate, int readCount,
-		Date firstReadDate, Date lastReadDate) {
-		_receiptId = receiptId;
-		_companyId = companyId;
-		_userId = userId;
-		_createDate = createDate;
-		_modifiedDate = modifiedDate;
-		_recipientName = recipientName;
-		_recipientAddress = recipientAddress;
-		_subject = subject;
-		_sentDate = sentDate;
-		_readCount = readCount;
-		_firstReadDate = firstReadDate;
-		_lastReadDate = lastReadDate;
-	}
-
 	public String getPrimaryKey() {
 		return _receiptId;
+	}
+
+	public void setPrimaryKey(String pk) {
+		setReceiptId(pk);
 	}
 
 	public String getReceiptId() {
@@ -283,18 +261,22 @@ public class MailReceiptModel extends BaseModel {
 		}
 	}
 
-	public BaseModel getProtected() {
-		return null;
-	}
-
-	public void protect() {
-	}
-
 	public Object clone() {
-		return new MailReceipt(getReceiptId(), getCompanyId(), getUserId(),
-			getCreateDate(), getModifiedDate(), getRecipientName(),
-			getRecipientAddress(), getSubject(), getSentDate(), getReadCount(),
-			getFirstReadDate(), getLastReadDate());
+		MailReceipt clone = new MailReceipt();
+		clone.setReceiptId(getReceiptId());
+		clone.setCompanyId(getCompanyId());
+		clone.setUserId(getUserId());
+		clone.setCreateDate(getCreateDate());
+		clone.setModifiedDate(getModifiedDate());
+		clone.setRecipientName(getRecipientName());
+		clone.setRecipientAddress(getRecipientAddress());
+		clone.setSubject(getSubject());
+		clone.setSentDate(getSentDate());
+		clone.setReadCount(getReadCount());
+		clone.setFirstReadDate(getFirstReadDate());
+		clone.setLastReadDate(getLastReadDate());
+
+		return clone;
 	}
 
 	public int compareTo(Object obj) {

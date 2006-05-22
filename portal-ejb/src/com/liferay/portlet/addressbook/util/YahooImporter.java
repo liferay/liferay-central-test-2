@@ -108,7 +108,7 @@ public class YahooImporter extends Importer {
 	}
 
 	private ABContact _createContact(String[] values, Map defs, DateFormat df) {
-		ABContact c = new ABContact(null);
+		ABContact c = new ABContact();
 
 		c.setFirstName(getValue(values, defs, "First"));
 		c.setLastName(getValue(values, defs, "Last"));

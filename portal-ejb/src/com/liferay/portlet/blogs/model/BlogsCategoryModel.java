@@ -250,7 +250,8 @@ public class BlogsCategoryModel extends BaseModel {
 
 		BlogsCategory blogsCategory = (BlogsCategory)obj;
 		int value = 0;
-		value = getName().compareTo(blogsCategory.getName());
+		value = getName().toLowerCase().compareTo(blogsCategory.getName()
+															   .toLowerCase());
 
 		if (value != 0) {
 			return value;
