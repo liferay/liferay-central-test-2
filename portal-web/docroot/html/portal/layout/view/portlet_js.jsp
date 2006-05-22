@@ -26,6 +26,16 @@
 var loadingAnimation = new Image();
 loadingAnimation.src =  "<%= themeDisplay.getPathThemeImage() %>/progress_bar/loading_animation.gif";
 
+var themeDisplay = {
+	getPathThemeRoot : function() {
+		return("<%= themeDisplay.getPathThemeRoot() %>");
+	},
+	
+	getPathThemeImage : function() {
+		return("<%= themeDisplay.getPathThemeImage() %>");
+	}
+};
+
 function addPortlet(plid, portletId) {
 	// List portlets that require a page refresh
 	var refreshPortletList = "";
@@ -93,7 +103,18 @@ function addPortletReturn(xmlHttpReq) {
 	var scripts = portletBound.getElementsByTagName("script");
 
 	for (var i = 0; i < scripts.length; i++) {
-		eval(scripts[i].innerHTML);
+		try {
+			<% if (BrowserSniffer.is_safari(request)) { %>
+				eval(scripts[i].innerHTML);
+			<% } else if (BrowserSniffer.is_mozilla(request)) { %>
+				eval(scripts[i].textContent);
+			<% } else { %>
+				eval(scripts[i].text);
+			<% } %>
+		}
+		catch(e) {
+			alert(e);
+		}
 	}
 }
 

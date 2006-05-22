@@ -28,5 +28,5 @@
 			</div>
 		</div>
 	</div><!-- end portlet-box -->
+	<div class="portlet-bottom-decoration-2"><div><div></div></div></div>
 </div><!-- End portlet-container -->
-<div class="portlet-bottom-decoration-2"><div><div></div></div></div>

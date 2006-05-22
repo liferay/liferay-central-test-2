@@ -12,7 +12,7 @@ var DragDrop = {
 	parent_id : null,
 	parent_group : null,
 	plid : "",
-	portletSpacerName : "portlet-boundary",
+	portletBoundName : "portlet-boundary",
 	start_next : null,
 
 	makeListContainer : function(list, groupId, enableDragDrop) {
@@ -43,7 +43,7 @@ var DragDrop = {
 		for (var i = 0; i < items.length; i++) {
 			curItem = items[i];
 
-			if (curItem.className == DragDrop.portletSpacerName) {
+			if (curItem.className == DragDrop.portletBoundName) {
 				if (!curItem.isStatic && enableDragDrop) {
 					// if it's not static, make it moveable
 					items2 = curItem.getElementsByTagName("div");
@@ -131,121 +131,81 @@ var DragDrop = {
 		// Keep track of original neighbor, so it can "snap" back later
 		DragDrop.start_next = DragUtils.nextItem(portletBound);
 		
-		portletCont.id = "portlet-dragging";
+		portletBound.style.zIndex = Drag.BIG_Z_INDEX;
 	},
 
 	onDrag : function(nwPosition, sePosition, nwOffset, seOffset) {
 	
 		// This is point of interest when checking for "inside" and "outside"
+		var placeHolder = document.getElementById("portlet-place-holder");
 		var portletCont = this;
 		var portletBound = portletCont.parentNode;
 		var curContainer = portletBound.parentNode;
 		var hotPoint = nwOffset.plus(portletCont.mouseNwOffset);
+		var inserted = false;
 		
 		if (portletBound.className.search("portlet-dragging-placeholder") < 0) {
 			portletBound.className += " portlet-dragging-placeholder";
 		}
 		
-		// check if we were nowhere
-		
-		if (portletCont.isOutside) {
-			// check each container to see if in its bounds
-			var container = DragDrop.firstContainer;
-			while (container != null) {
-
-				if (hotPoint.inside( container.northwest, container.southeast )) {
-					// we're inside this one
-					portletCont.isOutside = false;
-
-					// since isOutside was true, the current parent is this
-					// original starting container.  Remove it and add it to
-					// it's new parent (if different).
-					if (container != curContainer) {
-						portletBound.parentNode.removeChild(portletBound);
-						container.insertBefore(portletBound, container.endPlaceholder);
-						// Update boundaries
-						container.southeast = Coordinates.southeastOffset( container, true );
-					}
-					break;
-				}
-				container = container.nextContainer;
-			}
-			// we're still not inside the bounds of any container
-		}
-		else if (!hotPoint.inside( curContainer.northwest, curContainer.southeast )) {
-			// We're outside our parent's bounds
-			portletCont.isOutside = true;
-			
-			// check if we're inside a new container's bounds
-			var container = DragDrop.firstContainer;
-			while (container != null) {
-				if (hotPoint.inside( container.northwest, container.southeast )) {
-					// we're inside this one
-					portletCont.isOutside = false;
-					curContainer.removeChild( portletBound );
-					container.insertBefore(portletBound, container.endPlaceholder);
-					// Update boundaries
-					container.southeast = Coordinates.southeastOffset( container, true );
-					break;
-				}
-				container = container.nextContainer;
-			}
-			// if we're not in any container now,
-			// add it back to it's original position.
-			if (portletCont.isOutside) {
-				portletBound.parentNode.removeChild(portletBound);
-				container = document.getElementById(DragDrop.parent_id);
-				container.insertBefore( portletBound, DragDrop.start_next );
-			}
+		if (placeHolder == null) {
+			placeHolder = DragDrop.createPlaceHolder();
 		}
 		
-		if (!portletCont.isOutside) {
+		var container = null;
+		var containerItr = DragDrop.firstContainer;
+		while (containerItr != null) {
+			if (hotPoint.inside( containerItr.northwest, containerItr.southeast )) {
+				container = containerItr;
+				portletCont.isOutside = false;
+				placeHolder.curContainer = container;
+				break;
+			}
+			containerItr = containerItr.nextContainer;
+		}
+		
+		if (container != null) {
 			// We're inside some container bounds,
-			// so swap contianer into the correct position
-			
-			var count = 0;
-			
-			var curOffsetTop = portletCont.offsetTop + portletCont.mouseNwOffset.y;
-			var swapped = false;
-			var downSearch;
-			var neighbor = null;
-			
-			if (Coordinates.northwestPosition(portletCont).y > 0) {
-				neighbor = DragUtils.nextItem(portletBound);
-				downSearch = true;
-			}
-			else {
-				neighbor = DragUtils.previousItem(portletBound);
-				downSearch = false;
-			}
+			//var curOffsetTop = portletCont.offsetTop + portletCont.mouseNwOffset.y;
+			var curOffsetTop = mousePos.y;
+			var neighbor = container.getElementsByTagName("div")[0];
+			var prevNeighbor = null;
 			
 			while (neighbor != null) {
-				swapped = false;
-				var divList = neighbor.getElementsByTagName("div");
-				if (divList.length > 0 &&
-					neighbor.className &&
-					neighbor.className.match(DragDrop.portletSpacerName)) {
+				//var divList = neighbor.getElementsByTagName("div");
+				if ( neighbor.isStatic
+					 || ( neighbor.className
+					 	  && neighbor.className.match(DragDrop.portletBoundName) ) ) {
 
-					if (neighbor.isStatic) {
+					var neighborOffsetMid;
+					
+					if (!neighbor.isStatic) {
+						neighborOffsetMid = Coordinates.northwestOffset(neighbor, true).y + neighbor.offsetHeight/2;
+					}
+
+					if (  neighbor.isStatic || (curOffsetTop < neighborOffsetMid) ) { 
+						if (placeHolder.curColumn != container && placeHolder.curNeighbor != neighbor) {
+							if (placeHolder.parentNode) {
+								placeHolder.parentNode.removeChild(placeHolder);
+							}
+							if (neighbor != portletBound && prevNeighbor != portletBound) {
+								container.insertBefore(placeHolder, neighbor);
+								placeHolder.curNeighbor = neighbor;
+							}
+						}
+						inserted = true;
 						break;
 					}
-
-					var neighborOffsetMid = divList[0].offsetTop + neighbor.offsetHeight/2;
-
-					if (downSearch && curOffsetTop > neighborOffsetMid) {
-						DragUtils.swap(neighbor, portletBound);
-						swapped = true;
-					}
-					else if (!downSearch && curOffsetTop < neighborOffsetMid) {
-						DragUtils.swap(portletBound, neighbor);
-						swapped = true;
-					}
 				}
-				if (downSearch)
-					neighbor = DragUtils.nextItem(swapped ? portletBound : neighbor);
-				else
-					neighbor = DragUtils.previousItem(swapped ? portletBound : neighbor);
+				
+				prevNeighbor = neighbor;
+				neighbor = DragUtils.nextItem(neighbor);
 			}
+		}
+		
+		// Remove placeholder
+		if (!inserted && placeHolder.parentNode) {
+			placeHolder.parentNode.removeChild(placeHolder);
 		}
 	},
 
@@ -254,63 +214,162 @@ var DragDrop = {
 		var portletCont = this;
 		var portletBound = portletCont.parentNode;
 		var curContainer = portletBound.parentNode;
-		var offsetBefore = Coordinates.northwestOffset(portletCont, true);
+		var placeHolder = document.getElementById("portlet-place-holder");
 		
 		// Remove dragging style
 		portletCont.id = "dragging_" + portletBound.portletId;
-		portletBound.className = DragDrop.portletSpacerName;
+		portletBound.className = DragDrop.portletBoundName;
 			
-		// if the drag ends and we're still outside all containers
-		// it's time to remove ourselves from the document or add 
-		// to the trash bin
-		if (this.isOutside) {
-			reelHome(portletCont.id, parseInt(portletCont.style.left), parseInt(portletCont.style.top), 15);
-			return;
-		}
-
-		var position = 0;
-		var positionFound = false;
-		var container = DragDrop.firstContainer;
-		var curContainer = null;
-		var items = null;
-
-		// Find the new position of the portlet
-		while (container != null) {
-			if (!positionFound) {
-				position = 0;
-				items = container.childNodes;
-				for (var i=0; i<items.length; i++) {
-					if (items[i].className == DragDrop.portletSpacerName) {
-						if (items[i].portletId == portletBound.portletId) {
-							positionFound = true;
-							curContainer = container;
-							break;
-						}
-						if (!items[i].isStatic)
-							position++;
+		if (placeHolder) {
+			var container = placeHolder.parentNode;
+			var columnId = container.columnId;
+			var items = container.childNodes;
+			var offsetBefore = Coordinates.northwestOffset(portletCont, true);
+			var targetHeight = portletBound.offsetHeight;
+			var targetPlaceholder = document.createElement("div");
+			var targetWidth = portletBound.offsetWidth;
+			var position = 0;
+			
+			targetPlaceholder.id = "portlet-target-place-holder";
+			targetPlaceholder.style.height = targetHeight + "px";
+			targetPlaceholder.style.fontSize = 0;
+			curContainer.insertBefore(targetPlaceholder, portletBound);
+			
+			// reelHome IE bug
+			if (is_ie) {
+				portletCont.style.width = "";
+				portletBound.style.height = "";
+			}
+			
+			curContainer.removeChild(portletBound);
+			container.insertBefore(portletBound, placeHolder);
+			placeHolder.parentNode.removeChild(placeHolder);
+			
+			var destHeight = portletBound.offsetHeight;
+			var destWidth = portletBound.offsetWidth;
+			var offsetAfter = Coordinates.northwestOffset(portletCont, true);
+			var offsetDelta = offsetAfter.minus(offsetBefore);
+			var positionAfter = Coordinates.northwestPosition(portletCont);
+			var positionCorrected = positionAfter.minus(offsetDelta);
+			positionCorrected.reposition(portletCont);
+			
+			portletBound.style.position = "relative";
+			portletCont.style.position = "absolute";
+			portletCont.style.overflow = "hidden";
+			portletCont.style.width = targetWidth + "px";
+			
+			for (var i=0; i<items.length; i++) {
+				if (items[i].className == DragDrop.portletBoundName) {
+					if (items[i].portletId == portletBound.portletId) {
+						break;
 					}
+					if (!items[i].isStatic)
+						position++;
 				}
 			}
+			
+			movePortlet(DragDrop.plid, portletBound.portletId, columnId, position);
+			DragDrop.reelHome(portletCont.id, parseInt(portletCont.style.left), parseInt(portletCont.style.top), 15, targetHeight, targetWidth, destHeight, destWidth);
+		}
+		else {
+			portletBound.style.zIndex = 0;
+			DragDrop.reelHome(portletCont.id, parseInt(portletCont.style.left), parseInt(portletCont.style.top), 15);
+		}
+		
+		var container = DragDrop.firstContainer;
+		while (container != null) {
 			container.className = "";
 			container = container.nextContainer;
 		}
-		
-		reelHome(portletCont.id, parseInt(portletCont.style.left), parseInt(portletCont.style.top), 15);
-
-		movePortlet(DragDrop.plid, portletBound.portletId, curContainer.columnId, position);
 	},
 	
-	snapBack : function(obj, offsetBefore, offsetAfter) {
-		if (!offsetBefore.equals(offsetAfter)) {
-			var errorDelta = offsetBefore.minus(offsetAfter);
-			var nwPosition = Coordinates.northwestPosition(obj).plus(errorDelta);
-			nwPosition.reposition(obj);
-		}
-
-		// snapping animation
-		reelHome(obj.id, parseInt(obj.style.left), parseInt(obj.style.top), 25);
-	}
+	createPlaceHolder : function() {
+		var placeHolder = document.createElement("div");
+		placeHolder.id = "portlet-place-holder";
+		placeHolder.style.position = "relative";
+		placeHolder.style.zIndex = 20;
+		
+		var arrowImg1 = document.createElement("div");
+		arrowImg1.style.width = "100%";
+		arrowImg1.style.backgroundColor = "red";
+		arrowImg1.style.fontSize = "0";
+		arrowImg1.style.position = "absolute";
+		arrowImg1.style.top = "-9px";
+		arrowImg1.style.background = "url(" + themeDisplay.getPathThemeImage() + "/common/forward.gif) scroll no-repeat top left";
+		placeHolder.appendChild(arrowImg1);
+		
+		var arrowImg2 = document.createElement("div");
+		arrowImg2.style.background = "url(" + themeDisplay.getPathThemeImage() + "/common/back.gif) scroll no-repeat top right";
+		arrowImg2.style.height = "18px";
+		arrowImg1.appendChild(arrowImg2);
+		
+		return (placeHolder);
+	},
 	
+	reelHome : function (id, startPosX, startPosY, duration, targetHeight, targetWidth, destHeight, destWidth, count, c) {
+
+	    if (isNaN(startPosX) || isNaN(startPosY))
+	        return;
+	        
+		var portletCont = document.getElementById(id);
+		var portletBound = portletCont.parentNode;
+		if (portletCont == null) return;
+		
+		var top = parseInt(portletCont.style.top);
+		var left = parseInt(portletCont.style.left);
+		
+		// defaults
+		if (count == null) { count = 1; }
+		if (duration == null) { duration = 20; }
+		if (targetHeight == null) { targetHeight = -1; }
+		if (destHeight == null) { destHeight = -1; }
+		if (destWidth == null) { destWidth = -1; }
+		
+		if (c == null) {
+		    // calculate this constant once to speed up next iteration
+		    c = Math.PI / (2 * duration);
+			portletBound.style.zIndex = Drag.BIG_Z_INDEX;
+	    }
+		
+		if (count < duration) {
+		    var ratio = Math.sin(count * c);
+		    var iRatio = 1 - ratio;
+		    
+		    // shift cos by -PI/2 and up 1.
+			portletCont.style.left = (startPosX * iRatio) + "px";
+			portletCont.style.top = (startPosY * iRatio) + "px";
+			
+			// shrink target place holder
+			if (targetHeight >= 0 && targetWidth >= 0 && destHeight >= 0 && destWidth >= 0) {
+				var targetPlaceholder = document.getElementById("portlet-target-place-holder");
+				targetPlaceholder.style.height = (targetHeight * iRatio) + "px";
+				portletBound.style.height = (destHeight * ratio) + "px";
+				portletCont.style.width = (targetWidth + ((destWidth - targetWidth) * ratio)) + "px";
+			}
+			
+			setTimeout("DragDrop.reelHome(\""+id+"\","+startPosX+","+startPosY+","+duration+","+targetHeight+","+targetWidth+","+destHeight+","+destWidth+","+(++count)+","+c+")", 16)
+		}
+		else {
+			portletCont.style.top = 0;
+			portletCont.style.left = 0;
+			portletCont.style.zIndex = 0;
+			portletBound.style.zIndex = 0;
+			
+			if (targetHeight >= 0 && targetWidth >= 0 && destHeight >= 0 && destWidth >= 0) {
+				var targetPlaceholder = document.getElementById("portlet-target-place-holder");
+				targetPlaceholder.style.height = 0;
+				targetPlaceholder.parentNode.removeChild(targetPlaceholder);
+				portletCont.style.position = "";
+				portletCont.style.overflow = "";
+				portletBound.style.position = "relative";
+				if (!is_ie) {
+					// prevent disappearing div
+					portletCont.style.width = "";
+					portletBound.style.height = "";
+				}
+			}
+		}
+	}
 };
 
 var DragUtils = {

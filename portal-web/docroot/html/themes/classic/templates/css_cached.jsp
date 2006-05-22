@@ -593,18 +593,21 @@ FONT.bg {
 }
 
 .portlet-bottom-decoration-2 {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/middle.gif) repeat-x;
+	background: transparent url(<%= themeDisplay.getPathThemeImage() %>/shadow/middle.gif) scroll repeat-x top;
 	margin-bottom: 5px;
+	width: 100%;
 }
 
 .portlet-bottom-decoration-2 DIV {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/left.gif) no-repeat;
+	background: transparent url(<%= themeDisplay.getPathThemeImage() %>/shadow/left.gif) scroll no-repeat top left;
+	width: 100%;
 }
 
 .portlet-bottom-decoration-2 DIV DIV {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/right.gif) no-repeat top right;
+	background: transparent url(<%= themeDisplay.getPathThemeImage() %>/shadow/right.gif) scroll no-repeat top right;
 	font-size: 0;
 	height: 6px;
+	width: 100%;
 }
 
 /* Fonts */
