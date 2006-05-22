@@ -61,9 +61,11 @@
 					$taglibLiferay.search()
 										
 					#if ($themeDisplay.isSignedIn())
-						#set($layoutConfigPortlet = $staticFieldGetter.getFieldValue("com.liferay.portal.util.PortletKeys", "LAYOUT_CONFIGURATION"))
 						<div id="layout_nav_menu_list">
-							<img src="$themeDisplay.getPathThemeImage()/tabs/bullet.gif"> <a href="javascript:void(0)" onclick="PortalAddContent.toggle('$layoutConfigPortlet', '$plid', '$themeDisplay.getPathMain()', '$themeDisplay.getPathThemeImage()')"><span style="font-size:10px">$languageUtil.get($pageContext, "add-content")</span></a>
+							<img src="$themeDisplay.getPathThemeImage()/tabs/bullet.gif">
+							#if ($layout)
+								<a href="javascript: void(0);" onClick="$themeDisplay.getURLAddContent()">$languageUtil.get($pageContext, "add-content")</a>
+							#end
 							&nbsp;<img src="$themeDisplay.getPathThemeImage()/tabs/bullet.gif"> <a href="$themeDisplay.getURLPageSettings().toString()"><span style="font-size:10px">$languageUtil.get($pageContext, "page-settings")</span></a>
 						</div>
 					#end		

@@ -25,5 +25,5 @@
 #set($tilesTitle = $languageUtil.get($pageContext, $tilesTitle))
 
 #if ($layout)
-	#set($tilesTitle = $languageUtil.get($pageContext, $tilesTitle, $layout.getName(locale)))
+	#set($tilesTitle = $languageUtil.get($pageContext, $tilesTitle, $layout.getName($locale)))
 #end

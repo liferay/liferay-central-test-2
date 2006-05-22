@@ -62,7 +62,7 @@
 
 					<td>
 						<div class="layout-nav-tab$tempVariable1">
-							<img src="$themeDisplay.getPathThemeImage()/tabs/bullet.gif"> <span class="layout-tab$tempVariable1"><a href="$tabHREF" style="font-size: smaller" $tabTarget>$curLayout.getName(locale)</a></span>
+							<img src="$themeDisplay.getPathThemeImage()/tabs/bullet.gif"> <span class="layout-tab$tempVariable1"><a href="$tabHREF" style="font-size: smaller" $tabTarget>$curLayout.getName($locale)</a></span>
 						</div>
 					</td>
 				#end

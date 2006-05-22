@@ -212,7 +212,7 @@ FONT.beta {
 	padding: 1px;
 }
 
-#gamma-tab {
+.gamma-tab {
 	border-bottom: 1px solid $colorScheme.getPortletMenuBg();
 	margin-left: 0px;
 	margin-top: 0px;
@@ -222,7 +222,7 @@ FONT.beta {
 	padding-left: 0px;
 }
 
-#gamma-tab ul, #gamma-tab li {
+.gamma-tab ul, .gamma-tab li {
 	background: $colorScheme.getPortletBg();
 	border: 1px solid $colorScheme.getPortletMenuBg();
 	color: $colorScheme.getPortletFont();
@@ -238,13 +238,13 @@ FONT.beta {
 	text-decoration: none;
 }
 
-#gamma-tab ul#current, #gamma-tab li#current {
-	background: $colorScheme.getPortletBg();
-	border-bottom: 1px solid $colorScheme.getPortletBg();
+.gamma-tab ul.current, .gamma-tab li.current {
+	background: transparent;
+	border-bottom: 1px solid #FFFFFF;
 	color: $colorScheme.getPortletFont();
 }
 
-#gamma-tab li#toggle {
+.gamma-tab li.toggle {
 	background: none;
 	border: 0px;
 	float: right;
@@ -724,13 +724,13 @@ FONT.bg {
 .portlet-font {
 	color: $colorScheme.getPortletFont();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 }
 
 .portlet-font-dim {
 	color: $colorScheme.getPortletFontDim();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 }
 
 /* Messages */
@@ -738,33 +738,33 @@ FONT.bg {
 .portlet-msg-status {
 	color: $colorScheme.getPortletMsgStatus();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 	font-style: italic;
 }
 
 .portlet-msg-info {
 	color: $colorScheme.getPortletMsgInfo();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 }
 
 .portlet-msg-error {
 	color: $colorScheme.getPortletMsgError();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 }
 
 .portlet-msg-alert {
 	color: $colorScheme.getPortletMsgAlert();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 	font-style: italic;
 }
 
 .portlet-msg-success {
 	color: $colorScheme.getPortletMsgSuccess();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 }
 
 /* Sections */
@@ -773,21 +773,21 @@ FONT.bg {
 	color: $colorScheme.getPortletSectionHeader();
 	background: $colorScheme.getPortletSectionHeaderBg();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 }
 
 .portlet-section-body {
 	color: $colorScheme.getPortletSectionBody();
 	background: $colorScheme.getPortletSectionBodyBg();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 }
 
 TR.portlet-section-body:hover {
 	color: $colorScheme.getPortletSectionBodyHover();
 	background: $colorScheme.getPortletSectionBodyHoverBg();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 }
 
 .portlet-section-body A {
@@ -802,14 +802,14 @@ TR.portlet-section-body:hover A {
 	color: $colorScheme.getPortletSectionAlternate();
 	background: $colorScheme.getPortletSectionAlternateBg();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 }
 
 TR.portlet-section-alternate:hover {
 	color: $colorScheme.getPortletSectionAlternateHover();
 	background: $colorScheme.getPortletSectionAlternateHoverBg();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 }
 
 .portlet-section-alternate A {
@@ -824,14 +824,14 @@ TR.portlet-section-alternate:hover A {
 	color: $colorScheme.getPortletSectionSelected();
 	background: $colorScheme.getPortletSectionSelectedBg();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 }
 
 .portlet-section-selected:hover, TR.portlet-section-selected:hover {
 	color: $colorScheme.getPortletSectionSelectedHover();
 	background: $colorScheme.getPortletSectionSelectedHoverBg();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 }
 
 .portlet-section-selected A, portlet-section-selected A:hover {
@@ -842,19 +842,19 @@ TR.portlet-section-alternate:hover A {
 	color: $colorScheme.getPortletSectionSubheader();
 	background: $colorScheme.getPortletSectionSubheaderBg();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 }
 
 .portlet-section-footer {
 	color: $colorScheme.getLayoutText();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 }
 
 .portlet-section-text {
 	color: $colorScheme.getLayoutText();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 }
 
 /* Forms */
@@ -862,7 +862,7 @@ TR.portlet-section-alternate:hover A {
 .portlet-form-label {
 	color: $colorScheme.getPortletFont();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 }
 
 .portlet-form-input-field {
@@ -897,13 +897,12 @@ TR.portlet-section-alternate:hover A {
 .portlet-form-field-label {
 	color: $colorScheme.getPortletFont();
 	font-family: Verdana, Arial;
-	font-size: medium;
 }
 
 .portlet-form-field {
 	color: $colorScheme.getPortletFont();
 	font-family: Verdana, Arial;
-	font-size: medium;
+	
 }
 
 /******************************************************************************/
