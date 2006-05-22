@@ -31,7 +31,7 @@ Friki 2.1.1
 Hessian 2.1.12
 Hibernate 3.1.3
 HttpBridge 0.9.6 (patched)
-Hypersonic 1.7.3.1
+Hypersonic 1.8.0.4
 Informa 0.6.5
 Jackrabbit 1.0
 JAIMBot 1.4
