@@ -78,6 +78,7 @@ javax.portlet.title.87=Layout Konfiguration
 javax.portlet.title.88=Seiten Einstellungen
 javax.portlet.title.8=Kalender
 javax.portlet.title.90=Portalkonfiguration
+javax.portlet.title.91=Im Freien Inhalt
 javax.portlet.title.9=Admin
 
 ##
@@ -85,12 +86,14 @@ javax.portlet.title.9=Admin
 ##
 
 category.admin=Admin
+category.alfresco=Im Freien
 category.christianity=Christliches
 category.cms=CMS
 category.community=Community
 category.development=Entwicklung
 category.entertainment=Unterhaltung
 category.finance=Finanzen
+category.journal=Journal
 category.library=Bibliothek
 category.news=Nachrichten
 category.polls=Umfragen
@@ -431,6 +434,7 @@ back-to-top=Zur�ck zum Anfang
 back-to-vote=Zur�ck zur Abstimmung
 back=Zur�ck
 bad-request=Fehlerhafte Anfrage
+base-url=Unterseite URL
 basic-information=Grundlegende Informationen
 basic=Grundlegend
 bcc=BCC
@@ -969,6 +973,7 @@ inch=Zoll
 include-original-text=Urspr�nglichen Text Einbinden
 incoming-pop-server=Eingehender POP Server
 increment-version=Versionsnummer Inkrementieren
+index-url=Index URL
 indexed=Indexiert
 industry=Industrie
 inherit-look-and-feel-from-the-private-root-node=Look-and-Feel von privatem Wurzel-Knoten erben?
@@ -1092,6 +1097,7 @@ maps-and-directions=Karten und Wegbeschreibungen
 mass=Masse
 match-whole-words=Ganze W�rter abgleichen
 max-qty=Max Anzl.
+maximize-links=Maximieren Sie Verbindungen
 maximize=Maximieren
 maximized=Maximiert
 maximum-memory=Maximaler Speicherplatz

@@ -78,6 +78,7 @@ javax.portlet.title.87=Διαμόρφωση σχεδιαγράμματος
 javax.portlet.title.88=Τοποθετήσεις σελίδων
 javax.portlet.title.8=Ημερολόγιο
 javax.portlet.title.90=Πυίδα διαμόρφωση
+javax.portlet.title.91=Υπαίθριος περιεχόμενο
 javax.portlet.title.9=Διαχείρηση
 
 ##
@@ -85,12 +86,14 @@ javax.portlet.title.9=Διαχείρηση
 ##
 
 category.admin=Admin
+category.alfresco=Υπαίθριος
 category.christianity=Χριστιανισμός
 category.cms=CMS
 category.community=Κοινότητα
 category.development=Ανάπτυξη
 category.entertainment=Ψυχαγωγία
 category.finance=Χρηματοδότηση
+category.journal=Περιοδικό
 category.library=Βιβλιοθήκη
 category.news=Ειδήσεις
 category.polls=Ψηφοφορίες
@@ -431,6 +434,7 @@ back-to-top=Επιστροφή στην Αρχή
 back-to-vote=Πίσω στην ψηφοφορία
 back=Πίσω
 bad-request=Εσφαλμένο Αίτημα
+base-url=Βάση URL
 basic-information=Βασικές Πληροφορίες
 basic=Βασικός
 bcc=BCC
@@ -968,6 +972,7 @@ inch=Ίντσα
 include-original-text=Συμπερίληψη Αρχικού Κειμένου
 incoming-pop-server=Εισερχόμενος pop-server
 increment-version=Αύξηση Έκδοσης
+index-url=Δείκτης URL
 indexed=Με ευρετήριο
 industry=Βιομηχανία
 inherit-look-and-feel-from-the-private-root-node=Κληρονομήστε το βλέμμα και αισθανθείτε από τον ιδιωτικό κόμβο ρίζας;
@@ -1091,6 +1096,7 @@ maps-and-directions=Χάρτες και κατευθύνσεις
 mass=Θεία Λειτουργία
 match-whole-words=Ταίριασμα Ολόκληρων Λέξεων
 max-qty=Ανώτατο Qty
+maximize-links=Μεγιστοποιήστε τις συνδέσεις
 maximize=Μεγιστοποίηση
 maximized=Μεγιστοποιημένος
 maximum-memory=Μέγιστη μνήμη

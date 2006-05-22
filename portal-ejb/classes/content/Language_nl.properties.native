@@ -78,6 +78,7 @@ javax.portlet.title.87=De Configuratie van de lay-out
 javax.portlet.title.88=De Montages van de pagina
 javax.portlet.title.8=Tijdschema
 javax.portlet.title.90=_ poort configuratie
+javax.portlet.title.91=Inhoud in de open lucht
 javax.portlet.title.9=Admin
 
 ##
@@ -85,12 +86,14 @@ javax.portlet.title.9=Admin
 ##
 
 category.admin=Admin
+category.alfresco=In de open lucht
 category.christianity=Christendom
 category.cms=CMS
 category.community=Gemeenschap
 category.development=Ontwikkeling
 category.entertainment=Vermaak
 category.finance=Financiën
+category.journal=Dagboek
 category.library=Bibliotheek
 category.news=Nieuws
 category.polls=Opiniepeilingen
@@ -431,6 +434,7 @@ back-to-top=Terug naar Bovenkant
 back-to-vote=Terug naar Stem
 back=Rug
 bad-request=Slecht Verzoek
+base-url=Basis URL
 basic-information=Basis Informatie
 basic=Basis
 bcc=BCC
@@ -969,6 +973,7 @@ inch=Duim
 include-original-text=Omvat Oorspronkelijke Teksten
 incoming-pop-server=Inkomende POP Server
 increment-version=De Versie van de toename
+index-url=Index URL
 indexed=Geïndexeerd
 industry=Industrie
 inherit-look-and-feel-from-the-private-root-node=Voel erf blik en van de privé wortelknoop?
@@ -1092,6 +1097,7 @@ maps-and-directions=Kaarten en Richtingen
 mass=Massa
 match-whole-words=De Gehele Woorden van de gelijke
 max-qty=Maximum Qty
+maximize-links=Maximaliseer Verbindingen
 maximize=Maximaliseer
 maximized=Gemaximaliseerd
 maximum-memory=Maximum Geheugen

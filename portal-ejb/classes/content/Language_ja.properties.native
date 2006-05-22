@@ -78,6 +78,7 @@ javax.portlet.title.87=レイアウト構成
 javax.portlet.title.88=ページの設定
 javax.portlet.title.8=カレンダー
 javax.portlet.title.90=門脈構成
+javax.portlet.title.91=野外の内容
 javax.portlet.title.9=Admin
 
 ##
@@ -85,12 +86,14 @@ javax.portlet.title.9=Admin
 ##
 
 category.admin=Admin
+category.alfresco=野外で
 category.christianity=キリスト教
 category.cms=CMS
 category.community=コミュニティ
 category.development=開発
 category.entertainment=催し物
 category.finance=財政
+category.journal=ジャーナル
 category.library=図書館
 category.news=ニュース
 category.polls=投票
@@ -430,6 +433,7 @@ back-to-top=上へ
 back-to-vote=投票に
 back=背部
 bad-request=悪い要求
+base-url=基盤のURL
 basic-information=基本的な情報
 basic=基本
 bcc=BCC
@@ -967,6 +971,7 @@ inch=インチ
 include-original-text=原本を含みなさい
 incoming-pop-server=入って来るPOP サーバー
 increment-version=増分版
+index-url=索引のURL
 indexed=指示される
 industry=企業
 inherit-look-and-feel-from-the-private-root-node=私用根ノードからの外観や質を受継ぎなさいか。
@@ -1090,6 +1095,7 @@ maps-and-directions=地図及び方向
 mass=固まり
 match-whole-words=マッチの全単語
 max-qty=最高Qty
+maximize-links=リンクを最大にしなさい
 maximize=最大にしなさい
 maximized=最大にされる
 maximum-memory=最高の記憶

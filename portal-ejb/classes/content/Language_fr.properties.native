@@ -78,6 +78,7 @@ javax.portlet.title.87=Configuration De Disposition
 javax.portlet.title.88=Arrangements De Page
 javax.portlet.title.8=Calendrier
 javax.portlet.title.90=Configuration Portique
+javax.portlet.title.91=Contenu En plein air
 javax.portlet.title.9=Administrateur
 
 ##
@@ -85,12 +86,14 @@ javax.portlet.title.9=Administrateur
 ##
 
 category.admin=Admin
+category.alfresco=En plein air
 category.christianity=Christianisme
 category.cms=CMS
 category.community=Communautés
 category.development=Développement
 category.entertainment=Divertissement
 category.finance=Finances
+category.journal=Journal
 category.library=Bibliothèque
 category.news=Nouvelles
 category.polls=Scrutins
@@ -431,6 +434,7 @@ back-to-top=Retour en haut de page
 back-to-vote=Retour au vote
 back=Dos
 bad-request=Mauvaise requête
+base-url=URL De Base
 basic-information=Information de base
 basic=Basique
 bcc=Copie cachée
@@ -969,6 +973,7 @@ inch=Pouce
 include-original-text=Inclure le texte original
 incoming-pop-server=Serveur POP entrant
 increment-version=Incrémenter la version
+index-url=URL D'Index
 indexed=Classé
 industry=Industrie
 inherit-look-and-feel-from-the-private-root-node=Héritez du regard et sentez du noeud privé de racine ?
@@ -1092,6 +1097,7 @@ maps-and-directions=Cartes et directions
 mass=La masse
 match-whole-words=Recherche le(s) mot(s) à l'identique
 max-qty=Quantité maximum
+maximize-links=Maximisez Les Liens
 maximize=Maximisez
 maximized=Maximisé
 maximum-memory=Mémoire Maximum

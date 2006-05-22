@@ -78,6 +78,7 @@ javax.portlet.title.87=佈局配置
 javax.portlet.title.88=頁設置
 javax.portlet.title.8=日曆
 javax.portlet.title.90=門配置
+javax.portlet.title.91=Alfresco 內容
 javax.portlet.title.9=管理者
 
 ##
@@ -85,12 +86,14 @@ javax.portlet.title.9=管理者
 ##
 
 category.admin=Admin
+category.alfresco=在戶外
 category.christianity=基督教
 category.cms=內容管理
 category.community=社群
 category.development=發展
 category.entertainment=娛樂
 category.finance=財務
+category.journal=學報
 category.library=圖書館
 category.news=新聞
 category.polls=公投
@@ -430,6 +433,7 @@ back-to-top=回到頁首
 back-to-vote=回到公投
 back=後面
 bad-request=錯誤請求
+base-url=基地URL
 basic-information=基本的資訊
 basic=基本
 bcc=BCC
@@ -968,6 +972,7 @@ inch=英寸
 include-original-text=包含原始內文
 incoming-pop-server=內送 POP 伺服器
 increment-version=累增版本
+index-url=索引URL
 indexed=標註
 industry=產業
 inherit-look-and-feel-from-the-private-root-node=繼承品質從私有根結?
@@ -1091,6 +1096,7 @@ maps-and-directions=地圖和方向
 mass=大量
 match-whole-words=符合整句
 max-qty=最大Qty
+maximize-links=最大化鏈接
 maximize=最大化
 maximized=_ 最大化
 maximum-memory=最大記憶

@@ -9,16 +9,21 @@
 		<portlet id="80" />
 	</category>
 	<category name="category.cms">
-		<portlet id="15" />
-		<portlet id="20" />
-		<portlet id="31" />
-		<portlet id="56" />
-		<portlet id="62" />
-		<portlet id="64" />
+		<category name="category.alfresco">
+			<portlet id="91" />
+		</category>
+		<category name="category.journal">
+			<portlet id="15" />
+			<portlet id="20" />
+			<portlet id="31" />
+			<portlet id="56" />
+			<portlet id="62" />
+			<portlet id="64" />
+			<portlet id="74" />
+			<portlet id="77" />
+		</category>
 		<portlet id="71" />
 		<portlet id="73" />
-		<portlet id="74" />
-		<portlet id="77" />
 		<portlet id="85" />
 	</category>
 	<category name="category.community">

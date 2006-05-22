@@ -123,6 +123,18 @@
 		<put name="portlet_content" value="/portlet/admin/view.jsp" />
 	</definition>
 
+	<!-- Alfresco Content -->
+
+	<definition name="portlet.alfresco_content" extends="portlet" />
+
+	<definition name="portlet.alfresco_content.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
+		<put name="portlet_configuration_content" value="/portlet/alfresco_content/edit_configuration.jsp" />
+	</definition>
+
+	<definition name="portlet.alfresco_content.view" extends="portlet.alfresco_content">
+		<put name="portlet_content" value="/portlet/alfresco_content/view.jsp" />
+	</definition>
+
 	<!-- Amazon Rankings -->
 
 	<definition name="portlet.amazon_rankings" extends="portlet" />

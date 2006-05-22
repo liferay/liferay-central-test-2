@@ -66,7 +66,7 @@
 	<portlet>
 		<portlet-name>9</portlet-name>
 		<struts-path>admin</struts-path>
-		<include>false</include>
+		<include>true</include>
 	</portlet>
 	<portlet>
 		<portlet-name>10</portlet-name>
@@ -259,7 +259,7 @@
 	<portlet>
 		<portlet-name>49</portlet-name>
 		<struts-path>my_places</struts-path>
-		<include>false</include>
+		<include>true</include>
 	</portlet>
 	<portlet>
 		<portlet-name>50</portlet-name>
@@ -394,11 +394,26 @@
 	<portlet>
 		<portlet-name>86</portlet-name>
 		<struts-path>portlet_configuration</struts-path>
-		<include>false</include>
+		<include>true</include>
 	</portlet>
 	<portlet>
 		<portlet-name>87</portlet-name>
 		<struts-path>layout_configuration</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>88</portlet-name>
+		<struts-path>layout_management</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>90</portlet-name>
+		<struts-path>portal_configuration</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>91</portlet-name>
+		<struts-path>alfresco_content</struts-path>
 		<include>false</include>
 	</portlet>
 	-->

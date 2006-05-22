@@ -246,6 +246,16 @@
 
 		<action path="/admin/view" forward="portlet.admin.view" />
 
+		<!-- Alfresco Content -->
+
+		<action path="/alfresco_content/edit_configuration" type="com.liferay.portlet.alfrescocontent.action.EditConfigurationAction">
+			<forward name="portlet.alfresco_content.edit_configuration" path="portlet.alfresco_content.edit_configuration" />
+		</action>
+
+		<action path="/alfresco_content/view" type="com.liferay.portlet.alfrescocontent.action.ViewAction">
+			<forward name="portlet.alfresco_content.view" path="portlet.alfresco_content.view" />
+		</action>
+
 		<!-- Amazon Rankings -->
 
 		<action path="/amazon_rankings/edit_configuration" type="com.liferay.portlet.amazonrankings.action.EditConfigurationAction">

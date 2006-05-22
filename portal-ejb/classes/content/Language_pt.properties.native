@@ -78,6 +78,7 @@ javax.portlet.title.87=Configuração Da Disposição
 javax.portlet.title.88=Ajustes Da Página
 javax.portlet.title.8=Calendário
 javax.portlet.title.90=Configuração Portal
+javax.portlet.title.91=Índice Alfresco
 javax.portlet.title.9=Admin
 
 ##
@@ -85,12 +86,14 @@ javax.portlet.title.9=Admin
 ##
 
 category.admin=Admin
+category.alfresco=Alfresco
 category.christianity=Christianity
 category.cms=Cms
 category.community=Comunidade
 category.development=Desenvolvimento
 category.entertainment=Entertainment
 category.finance=Finanças
+category.journal=Jornal
 category.library=Biblioteca
 category.news=Notícia
 category.polls=Votações
@@ -431,6 +434,7 @@ back-to-top=Para trás ao alto
 back-to-vote=Para trás ao voto
 back=Parte traseira
 bad-request=Pedido Mau
+base-url=URL Da Base
 basic-information=Informação Básica
 basic=Básico
 bcc=BCC
@@ -969,6 +973,7 @@ inch=Polegada
 include-original-text=Inclua O Texto Original
 incoming-pop-server=Usuário Entrante do PNF
 increment-version=Versão Do Incremento
+index-url=URL Do Índice
 indexed=Posicionado
 industry=Indústria
 inherit-look-and-feel-from-the-private-root-node=Herde o olhar e sinta-o do nó confidencial da raiz?
@@ -1092,6 +1097,7 @@ maps-and-directions=Mapas e sentidos
 mass=Massa
 match-whole-words=Palavras Inteiras Do Fósforo
 max-qty=Qty Do Máximo
+maximize-links=Maximize As Ligações
 maximize=Maximize
 maximized=Maximized
 maximum-memory=Memória Máxima
