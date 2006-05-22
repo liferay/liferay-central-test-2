@@ -77,6 +77,28 @@
 		</guest-unsupported>
 	</model-resource>
 	<model-resource>
+		<model-name>com.liferay.portal.model.Role</model-name>
+		<portlet-ref>
+			<portlet-name>79</portlet-name>
+		</portlet-ref>
+		<supports>
+			<action-key>ADD_PERMISSIONS</action-key>
+			<action-key>ASSIGN_USERS</action-key>
+			<action-key>DELETE</action-key>
+			<action-key>PERMISSIONS</action-key>
+			<action-key>UPDATE</action-key>
+			<action-key>VIEW</action-key>
+		</supports>
+		<community-defaults>
+			<action-key>VIEW</action-key>
+		</community-defaults>
+		<guest-defaults>
+			<action-key>VIEW</action-key>
+		</guest-defaults>
+		<guest-unsupported>
+		</guest-unsupported>
+	</model-resource>
+	<model-resource>
 		<model-name>com.liferay.portal.model.User</model-name>
 		<portlet-ref>
 			<portlet-name>79</portlet-name>

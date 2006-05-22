@@ -40,8 +40,6 @@ import java.util.Date;
  */
 public class ReleaseLocalServiceImpl implements ReleaseLocalService {
 
-	// Business methods
-
 	public Release getRelease() throws PortalException, SystemException {
 		Release release = null;
 

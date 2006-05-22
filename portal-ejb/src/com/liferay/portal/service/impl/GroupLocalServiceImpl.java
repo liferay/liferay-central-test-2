@@ -36,6 +36,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.GroupFinder;
@@ -45,6 +46,7 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.GroupLocalService;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.service.spring.RoleLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -111,20 +113,26 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		// Layout sets
 
 		LayoutSetLocalServiceUtil.addLayoutSet(
-			Layout.PRIVATE + groupId, user.getActualCompanyId());
+			Layout.PRIVATE + groupId, group.getCompanyId());
 
 		LayoutSetLocalServiceUtil.addLayoutSet(
-			Layout.PUBLIC + groupId, user.getActualCompanyId());
+			Layout.PUBLIC + groupId, group.getCompanyId());
 
 		if (Validator.isNull(className) && Validator.isNull(classPK) &&
 			!User.isDefaultUser(userId)) {
 
+			// Resources
+
+			ResourceLocalServiceUtil.addResources(
+				group.getCompanyId(), null, userId, Group.class.getName(),
+				group.getPrimaryKey().toString(), false, false, false);
+
 			// Role
 
 			Role role = RoleLocalServiceUtil.addRole(
-				user.getActualCompanyId(), "GROUP_" + groupId +
-					"_ADMINISTRATOR",
-				Group.class.getName(), groupId);
+				null, group.getCompanyId(),
+				"GROUP_" + groupId + "_ADMINISTRATOR", Group.class.getName(),
+				groupId);
 
 			UserLocalServiceUtil.addRoleUsers(
 				role.getRoleId(), new String[] {userId});
@@ -242,6 +250,12 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		// Wiki
 
 		WikiNodeLocalServiceUtil.deleteNodes(groupId);
+
+		// Resources
+
+		ResourceLocalServiceUtil.deleteResource(
+			group.getCompanyId(), Group.class.getName(), Resource.TYPE_CLASS,
+			Resource.SCOPE_INDIVIDUAL, group.getPrimaryKey().toString());
 
 		// Group
 

@@ -108,8 +108,10 @@ category.wsrp=WSRP
 ##
 
 model.resource.com.liferay.portal.model.Group=Κοινότητα
+model.resource.com.liferay.portal.model.Layout=Σελίδα
 model.resource.com.liferay.portal.model.Location=Θέση
 model.resource.com.liferay.portal.model.Organization=Οργάνωση
+model.resource.com.liferay.portal.model.Role=Ρόλος
 model.resource.com.liferay.portal.model.User=Χρήστης
 model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Κατηγορία
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Είσοδος
@@ -153,6 +155,7 @@ action.ADD_MESSAGE=Προσθέστε το μήνυμα
 action.ADD_NODE=Προσθέστε τον κόμβο
 action.ADD_ORGANIZATION=Προσθέστε την οργάνωση
 action.ADD_PAGE=Προσθέστε τη σελίδα
+action.ADD_PERMISSIONS=Προσθέστε τις άδειες
 action.ADD_QUESTION=Προσθέστε την ερώτηση
 action.ADD_ROLE=Προσθέστε το ρόλο
 action.ADD_STRUCTURE=Προσθέστε τη δομή

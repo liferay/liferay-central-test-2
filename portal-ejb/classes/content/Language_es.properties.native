@@ -108,8 +108,10 @@ category.wsrp=WSRP
 ##
 
 model.resource.com.liferay.portal.model.Group=Comunidad
+model.resource.com.liferay.portal.model.Layout=Página
 model.resource.com.liferay.portal.model.Location=Localización
 model.resource.com.liferay.portal.model.Organization=Organización
+model.resource.com.liferay.portal.model.Role=Papel
 model.resource.com.liferay.portal.model.User=Usuario
 model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Categoría
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Entrada
@@ -153,6 +155,7 @@ action.ADD_MESSAGE=Añadir un mensaje
 action.ADD_NODE=Añadir un nodo
 action.ADD_ORGANIZATION=Agregue La Organización
 action.ADD_PAGE=Añadir una página
+action.ADD_PERMISSIONS=Agregue Los Permisos
 action.ADD_QUESTION=Añadir una pregunta
 action.ADD_ROLE=Agregue El Papel
 action.ADD_STRUCTURE=Añadir una estructura

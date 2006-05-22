@@ -30,13 +30,14 @@ package com.liferay.portal.service.spring;
  */
 public class RoleLocalServiceUtil {
 	public static com.liferay.portal.model.Role addRole(
-		java.lang.String companyId, java.lang.String name)
+		java.lang.String userId, java.lang.String companyId,
+		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
-			return roleLocalService.addRole(companyId, name);
+			return roleLocalService.addRole(userId, companyId, name);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -50,14 +51,16 @@ public class RoleLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Role addRole(
-		java.lang.String companyId, java.lang.String name,
-		java.lang.String className, java.lang.String classPK)
+		java.lang.String userId, java.lang.String companyId,
+		java.lang.String name, java.lang.String className,
+		java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
-			return roleLocalService.addRole(companyId, name, className, classPK);
+			return roleLocalService.addRole(userId, companyId, name, className,
+				classPK);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

@@ -54,8 +54,6 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ResourceLocalServiceImpl implements ResourceLocalService {
 
-	// Business methods
-
 	public Resource addResource(
 			String companyId, String name, String typeId, String scope,
 			String primKey)

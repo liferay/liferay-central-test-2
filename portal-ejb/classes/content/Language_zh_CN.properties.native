@@ -108,8 +108,10 @@ category.wsrp=WSRP
 ##
 
 model.resource.com.liferay.portal.model.Group=公共
+model.resource.com.liferay.portal.model.Layout=页
 model.resource.com.liferay.portal.model.Location=地点
 model.resource.com.liferay.portal.model.Organization=组织
+model.resource.com.liferay.portal.model.Role=角色
 model.resource.com.liferay.portal.model.User=用户
 model.resource.com.liferay.portlet.blogs.model.BlogsCategory=类别
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=词条
@@ -153,6 +155,7 @@ action.ADD_MESSAGE=增加消息
 action.ADD_NODE=增加结
 action.ADD_ORGANIZATION=增加组织
 action.ADD_PAGE=增加页
+action.ADD_PERMISSIONS=增加允许
 action.ADD_QUESTION=增加问题
 action.ADD_ROLE=增加角色
 action.ADD_STRUCTURE=增加结构

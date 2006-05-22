@@ -38,8 +38,6 @@ import com.liferay.portal.util.PropsFiles;
  */
 public class PropertiesLocalServiceImpl implements PropertiesLocalService {
 
-	// Business methods
-
 	public java.util.Properties getPortalProperties(String companyId)
 		throws SystemException {
 

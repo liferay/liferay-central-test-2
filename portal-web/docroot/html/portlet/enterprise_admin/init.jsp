@@ -61,6 +61,7 @@
 --%><%@ page import="com.liferay.portal.service.permission.LocationPermission" %><%--
 --%><%@ page import="com.liferay.portal.service.permission.OrganizationPermission" %><%--
 --%><%@ page import="com.liferay.portal.service.permission.PortalPermission" %><%--
+--%><%@ page import="com.liferay.portal.service.permission.RolePermission" %><%--
 --%><%@ page import="com.liferay.portal.service.permission.UserPermission" %><%--
 --%><%@ page import="com.liferay.portal.util.comparator.ContactLastNameComparator" %><%--
 --%><%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupDisplayTerms" %><%--

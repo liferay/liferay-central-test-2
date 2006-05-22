@@ -238,6 +238,13 @@ else if (modelResource.equals(Organization.class.getName()) || modelResource.equ
 				if (tabs3.equals("current")) {
 					userParams.put("permission", resource.getResourceId());
 				}
+				else if (tabs3.equals("available") && modelResource.equals(Layout.class.getName())) {
+					String layoutGroupId = StringUtil.split(resourcePrimKey, ".")[1];
+
+					layoutGroupId = StringUtil.replace(layoutGroupId, "}", "");
+
+					userParams.put("usersGroups", layoutGroupId);
+				}
 
 				int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
 

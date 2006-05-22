@@ -29,14 +29,14 @@ package com.liferay.portal.service.spring;
  *
  */
 public interface RoleLocalService {
-	public com.liferay.portal.model.Role addRole(java.lang.String companyId,
-		java.lang.String name)
+	public com.liferay.portal.model.Role addRole(java.lang.String userId,
+		java.lang.String companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Role addRole(java.lang.String companyId,
-		java.lang.String name, java.lang.String className,
-		java.lang.String classPK)
+	public com.liferay.portal.model.Role addRole(java.lang.String userId,
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 

@@ -30,10 +30,12 @@ import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.RoleNameException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.service.spring.RoleLocalService;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.StringPool;
@@ -49,15 +51,18 @@ import java.util.List;
  */
 public class RoleLocalServiceImpl implements RoleLocalService {
 
-	public Role addRole(String companyId, String name)
+	public Role addRole(String userId, String companyId, String name)
 		throws PortalException, SystemException {
 
-		return addRole(companyId, name, null, null);
+		return addRole(userId, companyId, name, null, null);
 	}
 
 	public Role addRole(
-			String companyId, String name, String className, String classPK)
+			String userId, String companyId, String name, String className,
+			String classPK)
 		throws PortalException, SystemException {
+
+		// Role
 
 		validate(null, companyId, name);
 
@@ -73,6 +78,14 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 
 		RoleUtil.update(role);
 
+		// Resources
+
+		if (userId != null) {
+			ResourceLocalServiceUtil.addResources(
+				companyId, null, userId, Role.class.getName(),
+				role.getPrimaryKey().toString(), false, false, false);
+		}
+
 		return role;
 	}
 
@@ -86,7 +99,7 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 				RoleFinder.findByC_N_2(companyId, systemRoles[i]);
 			}
 			catch (NoSuchRoleException nsre) {
-				addRole(companyId, systemRoles[i]);
+				addRole(null, companyId, systemRoles[i]);
 			}
 		}
 	}
@@ -99,6 +112,14 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 		if (PortalUtil.isSystemRole(role.getName())) {
 			throw new RequiredRoleException();
 		}
+
+		// Resources
+
+		ResourceLocalServiceUtil.deleteResource(
+			role.getCompanyId(), Role.class.getName(), Resource.TYPE_CLASS,
+			Resource.SCOPE_INDIVIDUAL, role.getPrimaryKey().toString());
+
+		// Role
 
 		RoleUtil.remove(roleId);
 	}

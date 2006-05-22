@@ -47,19 +47,19 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 		return (RoleLocalService)ctx.getBean(CLASS_NAME);
 	}
 
-	public com.liferay.portal.model.Role addRole(java.lang.String companyId,
-		java.lang.String name)
+	public com.liferay.portal.model.Role addRole(java.lang.String userId,
+		java.lang.String companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addRole(companyId, name);
+		return getService().addRole(userId, companyId, name);
 	}
 
-	public com.liferay.portal.model.Role addRole(java.lang.String companyId,
-		java.lang.String name, java.lang.String className,
-		java.lang.String classPK)
+	public com.liferay.portal.model.Role addRole(java.lang.String userId,
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addRole(companyId, name, className, classPK);
+		return getService().addRole(userId, companyId, name, className, classPK);
 	}
 
 	public void checkSystemRoles(java.lang.String companyId)

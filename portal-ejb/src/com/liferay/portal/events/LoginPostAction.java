@@ -28,7 +28,6 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutServiceUtil;
 import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.util.PortalUtil;
@@ -139,7 +138,7 @@ public class LoginPostAction extends Action {
 
 						layoutType.resetModes();
 
-						LayoutServiceUtil.updateLayout(
+						LayoutLocalServiceUtil.updateLayout(
 							layout.getLayoutId(), layout.getOwnerId(),
 							layout.getTypeSettings());
 					}

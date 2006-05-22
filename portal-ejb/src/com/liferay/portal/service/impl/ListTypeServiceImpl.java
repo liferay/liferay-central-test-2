@@ -40,8 +40,6 @@ import java.util.List;
 public class ListTypeServiceImpl
 	extends PrincipalBean implements ListTypeService {
 
-	// Business methods
-
 	public ListType getListType(String listTypeId)
 		throws PortalException, SystemException {
 

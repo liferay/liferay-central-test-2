@@ -20,37 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.impl;
+package com.liferay.portal.service.permission;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Country;
-import com.liferay.portal.service.persistence.CountryUtil;
-import com.liferay.portal.service.spring.CountryService;
-
-import java.util.List;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
- * <a href="CountryServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="RolePermission.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
+ * @author  Charles May
  *
  */
-public class CountryServiceImpl
-	extends PrincipalBean implements CountryService {
+public class RolePermission {
 
-	public List getCountries() throws SystemException {
-		return CountryUtil.findAll();
+	public static void check(
+			PermissionChecker permissionChecker, String roleId, String actionId)
+		throws PrincipalException {
+
+		if (!contains(permissionChecker, roleId, actionId)) {
+			throw new PrincipalException();
+		}
 	}
 
-	public List getCountries(boolean active) throws SystemException {
-		return CountryUtil.findByActive(active);
-	}
+	public static boolean contains(
+		PermissionChecker permissionChecker, String roleId, String actionId) {
 
-	public Country getCountry(String countryId)
-		throws PortalException, SystemException {
-
-		return CountryUtil.findByPrimaryKey(countryId);
+		return permissionChecker.hasPermission(
+			null, Role.class.getName(), roleId, actionId);
 	}
 
 }

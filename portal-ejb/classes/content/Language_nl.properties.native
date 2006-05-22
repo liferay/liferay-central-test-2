@@ -108,8 +108,10 @@ category.wsrp=WSRP
 ##
 
 model.resource.com.liferay.portal.model.Group=Gemeenschap
+model.resource.com.liferay.portal.model.Layout=Pagina
 model.resource.com.liferay.portal.model.Location=Plaats
 model.resource.com.liferay.portal.model.Organization=Organisatie
+model.resource.com.liferay.portal.model.Role=Rol
 model.resource.com.liferay.portal.model.User=Gebruiker
 model.resource.com.liferay.portlet.blogs.model.BlogsCategory=Categorie
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=Ingang
@@ -153,6 +155,7 @@ action.ADD_MESSAGE=Voeg Bericht toe
 action.ADD_NODE=Voeg Knoop toe
 action.ADD_ORGANIZATION=Voeg Organisatie toe
 action.ADD_PAGE=Voeg Pagina toe
+action.ADD_PERMISSIONS=Voeg Toestemmingen toe
 action.ADD_QUESTION=Voeg Vraag toe
 action.ADD_ROLE=Voeg Rol toe
 action.ADD_STRUCTURE=Voeg Structuur toe

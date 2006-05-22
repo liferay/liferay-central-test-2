@@ -108,8 +108,10 @@ category.wsrp=WSRP
 ##
 
 model.resource.com.liferay.portal.model.Group=コミュニティ
+model.resource.com.liferay.portal.model.Layout=ページ
 model.resource.com.liferay.portal.model.Location=位置
 model.resource.com.liferay.portal.model.Organization=構成
+model.resource.com.liferay.portal.model.Role=役割
 model.resource.com.liferay.portal.model.User=ユーザー
 model.resource.com.liferay.portlet.blogs.model.BlogsCategory=部門
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=記入項目
@@ -153,6 +155,7 @@ action.ADD_MESSAGE=メッセージを加えなさい
 action.ADD_NODE=ノードを加えなさい
 action.ADD_ORGANIZATION=構成を加えなさい
 action.ADD_PAGE=ページを加えなさい
+action.ADD_PERMISSIONS=許可を加えなさい
 action.ADD_QUESTION=質問を加えなさい
 action.ADD_ROLE=役割を加えなさい
 action.ADD_STRUCTURE=構造を加えなさい

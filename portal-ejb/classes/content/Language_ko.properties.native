@@ -108,8 +108,10 @@ category.wsrp=WSRP
 ##
 
 model.resource.com.liferay.portal.model.Group=지역 사회
+model.resource.com.liferay.portal.model.Layout=페이지
 model.resource.com.liferay.portal.model.Location=위치
 model.resource.com.liferay.portal.model.Organization=조직
+model.resource.com.liferay.portal.model.Role=역할
 model.resource.com.liferay.portal.model.User=사용자
 model.resource.com.liferay.portlet.blogs.model.BlogsCategory=종류
 model.resource.com.liferay.portlet.blogs.model.BlogsEntry=입장
@@ -153,6 +155,7 @@ action.ADD_MESSAGE=메시지를 추가하십시요
 action.ADD_NODE=마디를 추가하십시요
 action.ADD_ORGANIZATION=조직을 추가하십시요
 action.ADD_PAGE=페이지를 추가하십시요
+action.ADD_PERMISSIONS=허가를 추가하십시요
 action.ADD_QUESTION=질문을 추가하십시요
 action.ADD_ROLE=역할을 추가하십시요
 action.ADD_STRUCTURE=구조를 추가하십시요

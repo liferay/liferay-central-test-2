@@ -51,6 +51,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.AuthPipeline;
@@ -490,6 +491,12 @@ public class UserLocalServiceImpl implements UserLocalService {
 		// Contact
 
 		ContactLocalServiceUtil.deleteContact(userId);
+
+		// Resources
+
+		ResourceLocalServiceUtil.deleteResource(
+			user.getCompanyId(), User.class.getName(), Resource.TYPE_CLASS,
+			Resource.SCOPE_INDIVIDUAL, user.getPrimaryKey().toString());
 
 		// User
 

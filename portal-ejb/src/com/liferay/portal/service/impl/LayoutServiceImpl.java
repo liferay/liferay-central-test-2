@@ -25,6 +25,9 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.permission.GroupPermission;
+import com.liferay.portal.service.permission.LayoutPermission;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutService;
 
@@ -41,6 +44,9 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			String name, String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
+		GroupPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+
 		return LayoutLocalServiceUtil.addLayout(
 			groupId, getUserId(), privateLayout, parentLayoutId, name, type,
 			hidden, friendlyURL);
@@ -49,12 +55,22 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 	public void deleteLayout(String layoutId, String ownerId)
 		throws PortalException, SystemException {
 
+		String groupId = Layout.getGroupId(ownerId);
+
+		GroupPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+
 		LayoutLocalServiceUtil.deleteLayout(layoutId, ownerId);
 	}
 
 	public void setLayouts(
 			String ownerId, String parentLayoutId, String[] layoutIds)
 		throws PortalException, SystemException {
+
+		String groupId = Layout.getGroupId(ownerId);
+
+		GroupPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		LayoutLocalServiceUtil.setLayouts(ownerId, parentLayoutId, layoutIds);
 	}
@@ -63,6 +79,9 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			String layoutId, String ownerId, String parentLayoutId, String name,
 			String languageId, String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
+
+		LayoutPermission.check(
+			getPermissionChecker(), layoutId, ownerId, ActionKeys.UPDATE);
 
 		return LayoutLocalServiceUtil.updateLayout(
 			layoutId, ownerId, parentLayoutId, name, languageId, type, hidden,
@@ -73,6 +92,9 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			String layoutId, String ownerId, String typeSettings)
 		throws PortalException, SystemException {
 
+		LayoutPermission.check(
+			getPermissionChecker(), layoutId, ownerId, ActionKeys.UPDATE);
+
 		return LayoutLocalServiceUtil.updateLayout(
 			layoutId, ownerId, typeSettings);
 	}
@@ -81,6 +103,9 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			String layoutId, String ownerId, String themeId,
 			String colorSchemeId)
 		throws PortalException, SystemException {
+
+		LayoutPermission.check(
+			getPermissionChecker(), layoutId, ownerId, ActionKeys.UPDATE);
 
 		return LayoutLocalServiceUtil.updateLookAndFeel(
 			layoutId, ownerId, themeId, colorSchemeId);

@@ -20,37 +20,47 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.impl;
+package com.liferay.portal.service.permission;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Country;
-import com.liferay.portal.service.persistence.CountryUtil;
-import com.liferay.portal.service.spring.CountryService;
-
-import java.util.List;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.persistence.LayoutPK;
 
 /**
- * <a href="CountryServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="LayoutPermission.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
+ * @author  Charles May
  *
  */
-public class CountryServiceImpl
-	extends PrincipalBean implements CountryService {
+public class LayoutPermission {
 
-	public List getCountries() throws SystemException {
-		return CountryUtil.findAll();
+	public static void check(
+			PermissionChecker permissionChecker, String layoutId,
+			String ownerId, String actionId)
+		throws PrincipalException {
+
+		if (!contains(permissionChecker, layoutId, ownerId, actionId)) {
+			throw new PrincipalException();
+		}
 	}
 
-	public List getCountries(boolean active) throws SystemException {
-		return CountryUtil.findByActive(active);
-	}
+	public static boolean contains(
+		PermissionChecker permissionChecker, String layoutId, String ownerId,
+		String actionId) {
 
-	public Country getCountry(String countryId)
-		throws PortalException, SystemException {
+		String groupId = Layout.getGroupId(ownerId);
 
-		return CountryUtil.findByPrimaryKey(countryId);
+		if (GroupPermission.contains(
+				permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
+
+			return true;
+		}
+
+		return permissionChecker.hasPermission(
+			groupId, Layout.class.getName(),
+			new LayoutPK(layoutId, ownerId).toString(), actionId);
 	}
 
 }

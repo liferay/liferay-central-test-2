@@ -134,6 +134,20 @@ public class EditPermissionsAction extends PortletAction {
 				setForward(req, "portlet.portlet_configuration.error");
 			}
 		}
+		else if (selResource.equals(Layout.class.getName())) {
+			String layoutGroupId = StringUtil.split(resourcePrimKey, ".")[1];
+
+			layoutGroupId = StringUtil.replace(layoutGroupId, "}", "");
+
+			if (!GroupPermission.contains(
+					permissionChecker, layoutGroupId,
+					ActionKeys.MANAGE_LAYOUTS)) {
+
+				SessionErrors.add(req, PrincipalException.class.getName());
+
+				setForward(req, "portlet.portlet_configuration.error");
+			}
+		}
 		else if (selResource.equals(User.class.getName())) {
 			User user = UserLocalServiceUtil.getUserById(resourcePrimKey);
 

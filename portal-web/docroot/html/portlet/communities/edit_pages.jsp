@@ -498,6 +498,15 @@ portletURL.setParameter("groupId", groupId);
 
 				<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
+				<liferay-security:permissionsURL
+					modelResource="<%= Layout.class.getName() %>"
+					modelResourceDescription="<%= selLayout.getName() %>"
+					resourcePrimKey="<%= selLayout.getPrimaryKey().toString() %>"
+					var="permissionURL"
+				/>
+
+				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "permissions") %>' onClick="self.location = '<%= permissionURL %>';">
+
 				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deletePage();">
 
 				<script type="text/javascript">

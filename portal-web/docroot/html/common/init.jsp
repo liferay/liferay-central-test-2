@@ -67,6 +67,7 @@
 --%><%@ page import="com.liferay.portal.security.auth.PrincipalException" %><%--
 --%><%@ page import="com.liferay.portal.security.permission.ActionKeys" %><%--
 --%><%@ page import="com.liferay.portal.service.impl.LayoutTemplateLocalUtil" %><%--
+--%><%@ page import="com.liferay.portal.service.permission.LayoutPermission" %><%--
 --%><%@ page import="com.liferay.portal.service.permission.PortletPermission" %><%--
 --%><%@ page import="com.liferay.portal.service.persistence.LayoutPK" %><%--
 --%><%@ page import="com.liferay.portal.service.spring.*" %><%--
