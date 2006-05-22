@@ -27,8 +27,6 @@ import com.liferay.portal.util.Recipient;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
-import java.util.Date;
-
 /**
  * <a href="ABContact.java.html"><b><i>View Source</i></b></a>
  *

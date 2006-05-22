@@ -24,8 +24,6 @@ package com.liferay.portlet.mail.model;
 
 import com.liferay.util.Validator;
 
-import java.util.Date;
-
 /**
  * <a href="MailReceipt.java.html"><b><i>View Source</i></b></a>
  *

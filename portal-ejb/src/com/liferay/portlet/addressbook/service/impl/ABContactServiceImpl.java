@@ -31,7 +31,6 @@ import com.liferay.portal.util.comparator.RecipientComparator;
 import com.liferay.portlet.addressbook.ContactEmailAddressException;
 import com.liferay.portlet.addressbook.ContactFirstNameException;
 import com.liferay.portlet.addressbook.ContactLastNameException;
-import com.liferay.portlet.addressbook.DuplicateContactException;
 import com.liferay.portlet.addressbook.model.ABContact;
 import com.liferay.portlet.addressbook.service.persistence.ABContactUtil;
 import com.liferay.portlet.addressbook.service.spring.ABContactLocalServiceUtil;

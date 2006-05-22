@@ -30,7 +30,7 @@ var themeDisplay = {
 	getPathThemeRoot : function() {
 		return("<%= themeDisplay.getPathThemeRoot() %>");
 	},
-	
+
 	getPathThemeImage : function() {
 		return("<%= themeDisplay.getPathThemeImage() %>");
 	}
