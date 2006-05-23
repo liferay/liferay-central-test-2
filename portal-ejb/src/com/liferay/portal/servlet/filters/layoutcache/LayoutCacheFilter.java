@@ -141,8 +141,10 @@ public class LayoutCacheFilter implements Filter {
 					layoutCacheResponse.getContentType(),
 					layoutCacheResponse.getHeaders());
 
-				LayoutCacheUtil.putLayoutCacheResponseData(
-					_companyId, key, data);
+				if (data.getData().length > 0) {
+					LayoutCacheUtil.putLayoutCacheResponseData(
+						_companyId, key, data);
+				}
 			}
 
 			Map headers = data.getHeaders();
