@@ -12,19 +12,83 @@
 		<delete>
 			<fileset dir="${web.dir}" includes="**/Thumbs.db" />
 		</delete>
+
+		<property name="theme.name" value="brochure" />
+		<antcall target="delete-images" />
+		<property name="theme.name" value="genesis" />
+		<antcall target="delete-images" />
+		<property name="theme.name" value="velocity" />
+		<antcall target="delete-images" />
 	</target>
 
-	<target name="war">
-		<copy file="${web.dir}/WEB-INF/orion-web.xml.tmpl" tofile="${web.dir}/WEB-INF/orion-web.xml" overwrite="yes">
-			<filterset>
-				<filter token="app.server.orion.web.xml.development" value="${app.server.orion.web.xml.development}" />
-			</filterset>
-			<filterset>
-				<filter token="app.server.orion.web.xml.jsp.check" value="${app.server.orion.web.xml.jsp.check}" />
-			</filterset>
-		</copy>
+	<target name="copy-images">
+		<copy file="${web.dir}/html/themes/classic/images/spacer.gif" todir="${web.dir}/html/themes/${theme.name}/images" />
 
-		<antcall target="build-common-web.war" />
+		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/arrows" />
+		<copy todir="${web.dir}/html/themes/${theme.name}/images/arrows">
+			<fileset dir="${web.dir}/html/themes/classic/images/arrows" />
+		</copy>
+		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/blogs" />
+		<copy todir="${web.dir}/html/themes/${theme.name}/images/blogs">
+			<fileset dir="${web.dir}/html/themes/classic/images/blogs" />
+		</copy>
+		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/common" />
+		<copy todir="${web.dir}/html/themes/${theme.name}/images/common">
+			<fileset dir="${web.dir}/html/themes/classic/images/common" />
+		</copy>
+		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/document_library" />
+		<copy todir="${web.dir}/html/themes/${theme.name}/images/document_library">
+			<fileset dir="${web.dir}/html/themes/classic/images/document_library" />
+		</copy>
+		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/language" />
+		<copy todir="${web.dir}/html/themes/${theme.name}/images/language">
+			<fileset dir="${web.dir}/html/themes/classic/images/language" />
+		</copy>
+		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/mail" />
+		<copy todir="${web.dir}/html/themes/${theme.name}/images/mail">
+			<fileset dir="${web.dir}/html/themes/classic/images/mail" />
+		</copy>
+		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/message_boards" />
+		<copy todir="${web.dir}/html/themes/${theme.name}/images/message_boards">
+			<fileset dir="${web.dir}/html/themes/classic/images/message_boards" />
+		</copy>
+		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/portlet" />
+		<copy todir="${web.dir}/html/themes/${theme.name}/images/portlet">
+			<fileset dir="${web.dir}/html/themes/classic/images/portlet" />
+		</copy>
+		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/progress_bar" />
+		<copy todir="${web.dir}/html/themes/${theme.name}/images/progress_bar">
+			<fileset dir="${web.dir}/html/themes/classic/images/progress_bar" />
+		</copy>
+		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/shadow" />
+		<copy todir="${web.dir}/html/themes/${theme.name}/images/shadow">
+			<fileset dir="${web.dir}/html/themes/classic/images/shadow" />
+		</copy>
+		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/shopping" />
+		<copy todir="${web.dir}/html/themes/${theme.name}/images/shopping">
+			<fileset dir="${web.dir}/html/themes/classic/images/shopping" />
+		</copy>
+		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/trees" />
+		<copy todir="${web.dir}/html/themes/${theme.name}/images/trees">
+			<fileset dir="${web.dir}/html/themes/classic/images/trees" />
+		</copy>
+	</target>
+
+	<target name="delete-images">
+		<delete includeemptydirs="true" quiet="true" failonerror="false">
+			<fileset dir="${web.dir}/html/themes/${theme.name}/images/arrows" />
+			<fileset dir="${web.dir}/html/themes/${theme.name}/images/blogs" />
+			<fileset dir="${web.dir}/html/themes/${theme.name}/images/common" />
+			<fileset dir="${web.dir}/html/themes/${theme.name}/images/document_library" />
+			<fileset dir="${web.dir}/html/themes/${theme.name}/images/language" />
+			<fileset dir="${web.dir}/html/themes/${theme.name}/images/mail" />
+			<fileset dir="${web.dir}/html/themes/${theme.name}/images/message_boards" />
+			<fileset dir="${web.dir}/html/themes/${theme.name}/images/portlet" />
+			<fileset dir="${web.dir}/html/themes/${theme.name}/images/progress_bar" />
+			<fileset dir="${web.dir}/html/themes/${theme.name}/images/shadow" />
+			<fileset dir="${web.dir}/html/themes/${theme.name}/images/shopping" />
+			<fileset dir="${web.dir}/html/themes/${theme.name}/images/trees" />
+		</delete>
 	</target>
 
 	<target name="build-color-scheme">
@@ -37,6 +101,15 @@
 			<jvmarg value="-Dcolor.scheme.builder.overwrite=true" />
 			<jvmarg value="-Djava.awt.headless=true" />
 		</java>
+	</target>
+
+	<target name="build-common-images">
+		<property name="theme.name" value="brochure" />
+		<antcall target="copy-images" />
+		<property name="theme.name" value="genesis" />
+		<antcall target="copy-images" />
+		<property name="theme.name" value="velocity" />
+		<antcall target="copy-images" />
 	</target>
 
 	<target name="build-javascript">
@@ -72,5 +145,18 @@
 			fork="true"
 			newenvironment="true"
 		/>
+	</target>
+
+	<target name="war">
+		<copy file="${web.dir}/WEB-INF/orion-web.xml.tmpl" tofile="${web.dir}/WEB-INF/orion-web.xml" overwrite="yes">
+			<filterset>
+				<filter token="app.server.orion.web.xml.development" value="${app.server.orion.web.xml.development}" />
+			</filterset>
+			<filterset>
+				<filter token="app.server.orion.web.xml.jsp.check" value="${app.server.orion.web.xml.jsp.check}" />
+			</filterset>
+		</copy>
+
+		<antcall target="build-common-web.war" />
 	</target>
 </project>

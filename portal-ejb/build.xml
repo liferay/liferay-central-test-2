@@ -83,6 +83,10 @@
 		<ant dir="../portal-web" target="build-color-scheme" />
 	</target>
 
+	<target name="build-common-images">
+		<ant dir="../portal-web" target="build-common-images" />
+	</target>
+
 	<target name="build-db">
 		<ant dir="../sql" target="build-db" />
 	</target>

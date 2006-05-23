@@ -33,6 +33,7 @@
 		<ant dir="portal-ejb" target="build-newscategories" />
 		<ant dir="portal-ejb" target="build-reverendfun" />
   		<ant dir="portal-ejb" target="build-color-scheme" />
+  		<ant dir="portal-ejb" target="build-common-images" />
   		<ant dir="portal-ejb" target="build-website" />
 		<antcall target="jar" />
 	</target>
