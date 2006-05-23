@@ -13,12 +13,15 @@
 			<fileset dir="${web.dir}" includes="**/Thumbs.db" />
 		</delete>
 
-		<property name="theme.name" value="brochure" />
-		<antcall target="delete-images" />
-		<property name="theme.name" value="genesis" />
-		<antcall target="delete-images" />
-		<property name="theme.name" value="velocity" />
-		<antcall target="delete-images" />
+		<antcall target="delete-images">
+			<param name="theme.name" value="brochure" />
+		</antcall>
+		<antcall target="delete-images">
+			<param name="theme.name" value="genesis" />
+		</antcall>
+		<antcall target="delete-images">
+			<param name="theme.name" value="velocity" />
+		</antcall>
 	</target>
 
 	<target name="copy-images">
@@ -104,12 +107,15 @@
 	</target>
 
 	<target name="build-common-images">
-		<property name="theme.name" value="brochure" />
-		<antcall target="copy-images" />
-		<property name="theme.name" value="genesis" />
-		<antcall target="copy-images" />
-		<property name="theme.name" value="velocity" />
-		<antcall target="copy-images" />
+		<antcall target="copy-images">
+			<param name="theme.name" value="brochure" />
+		</antcall>
+		<antcall target="copy-images">
+			<param name="theme.name" value="genesis" />
+		</antcall>
+		<antcall target="copy-images">
+			<param name="theme.name" value="velocity" />
+		</antcall>
 	</target>
 
 	<target name="build-javascript">
