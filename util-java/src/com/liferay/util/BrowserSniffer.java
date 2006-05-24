@@ -34,16 +34,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class BrowserSniffer {
 
-	public static final String ACCEPT = "ACCEPT";
-
-	public static final String USER_AGENT = "USER-AGENT";
-
 	public static boolean is_ie(HttpServletRequest req) {
 		if (req == null) {
 			return false;
 		}
 
-		String agent = req.getHeader(USER_AGENT);
+		String agent = req.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -64,7 +60,7 @@ public class BrowserSniffer {
 			return false;
 		}
 
-		String agent = req.getHeader(USER_AGENT);
+		String agent = req.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -85,7 +81,7 @@ public class BrowserSniffer {
 			return false;
 		}
 
-		String agent = req.getHeader(USER_AGENT);
+		String agent = req.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -106,7 +102,7 @@ public class BrowserSniffer {
 			return false;
 		}
 
-		String agent = req.getHeader(USER_AGENT);
+		String agent = req.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -132,7 +128,7 @@ public class BrowserSniffer {
 	}
 
 	public static boolean is_linux(HttpServletRequest req) {
-		String agent = req.getHeader(USER_AGENT);
+		String agent = req.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -153,7 +149,7 @@ public class BrowserSniffer {
 			return false;
 		}
 
-		String agent = req.getHeader(USER_AGENT);
+		String agent = req.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -180,7 +176,7 @@ public class BrowserSniffer {
 			return false;
 		}
 
-		String agent = req.getHeader(USER_AGENT);
+		String agent = req.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -211,7 +207,7 @@ public class BrowserSniffer {
 			return false;
 		}
 
-		String agent = req.getHeader(USER_AGENT);
+		String agent = req.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -241,7 +237,7 @@ public class BrowserSniffer {
 			return false;
 		}
 
-		String agent = req.getHeader(USER_AGENT);
+		String agent = req.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -262,7 +258,7 @@ public class BrowserSniffer {
 			return false;
 		}
 
-		String accept = req.getHeader(ACCEPT);
+		String accept = req.getHeader(HttpHeaders.ACCEPT);
 
 		if (accept == null) {
 			return false;

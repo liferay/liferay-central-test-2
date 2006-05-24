@@ -33,8 +33,8 @@ import com.liferay.portal.service.spring.PortletServiceUtil;
 import com.liferay.portal.servlet.FriendlyURLServlet;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.BrowserSniffer;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
@@ -196,24 +196,26 @@ public class LayoutCacheFilter implements Filter {
 	}
 
 	protected String getCacheKey(HttpServletRequest req) {
-		String uid = null;
 
-		if (_pattern == _PATTERN_FRIENDLY) {
-			uid = req.getServletPath() + req.getPathInfo();
-		}
-		else if (_pattern == _PATTERN_LAYOUT) {
-			uid = ParamUtil.getString(req, "p_l_id");
-		}
-		else if (_pattern == _PATTERN_RESOURCE) {
-			uid =
-				req.getServletPath() + req.getPathInfo() + StringPool.QUESTION +
-					req.getQueryString();
-		}
+		// URL
+
+		String url =
+			req.getServletPath() + req.getPathInfo() + StringPool.QUESTION +
+				req.getQueryString();
+
+		// Language
 
 		String languageId = LanguageUtil.getLanguageId(req);
-		boolean isIe = BrowserSniffer.is_ie(req);
 
-		String key = uid + StringPool.POUND + languageId + isIe;
+		// The cache must be unique per browser because some browsers do not
+		// support gzip compression, etc.
+
+		String userAgent = req.getHeader(HttpHeaders.USER_AGENT);
+
+		// Cache key
+
+		String key =
+			url + StringPool.POUND + languageId + StringPool.POUND + userAgent;
 
 		return key.trim().toUpperCase();
 	}

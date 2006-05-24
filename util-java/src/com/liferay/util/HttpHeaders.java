@@ -30,6 +30,8 @@ package com.liferay.util;
  */
 public class HttpHeaders {
 
+	public static final String ACCEPT = "ACCEPT";
+
 	public static final String CACHE_CONTROL = "Cache-Control";
 
 	public static final String CONTENT_DISPOSITION = "Content-Disposition";
