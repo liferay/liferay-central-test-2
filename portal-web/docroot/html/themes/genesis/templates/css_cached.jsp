@@ -229,7 +229,7 @@ FONT.beta {
 	padding: 1px;
 }
 
-#gamma-tab {
+.gamma-tab {
 	border-bottom: 1px solid <%= colorScheme.getPortletMenuBg() %>;
 	margin-left: 0px;
 	margin-top: 0px;
@@ -239,7 +239,7 @@ FONT.beta {
 	padding-left: 0px;
 }
 
-#gamma-tab ul, #gamma-tab li {
+.gamma-tab ul, .gamma-tab li {
 	background: <%= colorScheme.getPortletBg() %>;
 	border: 1px solid <%= colorScheme.getPortletMenuBg() %>;
 	color: <%= colorScheme.getPortletFont() %>;
@@ -255,13 +255,13 @@ FONT.beta {
 	text-decoration: none;
 }
 
-#gamma-tab ul#current, #gamma-tab li#current {
+.gamma-tab ul.current, .gamma-tab li.current {
 	background: <%= colorScheme.getPortletBg() %>;
 	border-bottom: 1px solid <%= colorScheme.getPortletBg() %>;
 	color: <%= colorScheme.getPortletFont() %>;
 }
 
-#gamma-tab li#toggle {
+.gamma-tab li.toggle {
 	background: none;
 	border: 0px;
 	float: right;
@@ -401,7 +401,7 @@ FONT.bg {
 }
 
 .layout-nav-tab-left {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-medium-left.gif) no-repeat;
+	background: url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-medium-left.gif) no-repeat;
 	height: <%= TAB_IMAGE_HEIGHT %>;
 	left: -<%= TAB_IMAGE_SIDE_WIDTH %>;
 	overflow: hidden;
@@ -411,7 +411,7 @@ FONT.bg {
 }
 
 .layout-nav-tab-right {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-medium-right.gif) no-repeat;
+	background: url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-medium-right.gif) no-repeat;
 	height: <%= TAB_IMAGE_HEIGHT %>;
 	overflow: hidden;
 	position: absolute;
@@ -421,7 +421,7 @@ FONT.bg {
 }
 
 .layout-nav-tab-left-end {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-medium-left-end.gif) no-repeat;
+	background: url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-medium-left-end.gif) no-repeat;
 	height: <%= TAB_IMAGE_HEIGHT %>;
 	left: -<%= TAB_IMAGE_SIDE_WIDTH %>;
 	overflow: hidden;
@@ -431,7 +431,7 @@ FONT.bg {
 }
 
 .layout-nav-tab-right-end {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-medium-right-end.gif) no-repeat;
+	background: url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-medium-right-end.gif) no-repeat;
 	height: <%= TAB_IMAGE_HEIGHT %>;
 	overflow: hidden;
 	position: absolute;
@@ -441,7 +441,7 @@ FONT.bg {
 }
 
 .layout-nav-tab-selected-left {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-dark-left.gif) no-repeat;
+	background: url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-dark-left.gif) no-repeat;
 	height: <%= TAB_IMAGE_HEIGHT %>;
 	left: -<%= TAB_IMAGE_SIDE_WIDTH %>;
 	overflow: hidden;
@@ -451,7 +451,7 @@ FONT.bg {
 }
 
 .layout-nav-tab-selected-right {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-dark-right.gif) no-repeat;
+	background: url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-dark-right.gif) no-repeat;
 	height: <%= TAB_IMAGE_HEIGHT %>;
 	overflow: hidden;
 	position: absolute;
@@ -460,7 +460,7 @@ FONT.bg {
 	width: <%= TAB_IMAGE_SIDE_WIDTH %>;
 }
 .layout-nav-tab-selected-left-end {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-dark-left-end.gif) no-repeat;
+	background: url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-dark-left-end.gif) no-repeat;
 	height: <%= TAB_IMAGE_HEIGHT %>;
 	left: -<%= TAB_IMAGE_SIDE_WIDTH %>;
 	overflow: hidden;
@@ -470,7 +470,7 @@ FONT.bg {
 }
 
 .layout-nav-tab-selected-right-end {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-dark-right-end.gif) no-repeat;
+	background: url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-dark-right-end.gif) no-repeat;
 	height: <%= TAB_IMAGE_HEIGHT %>;
 	overflow: hidden;
 	position: absolute;
@@ -480,13 +480,13 @@ FONT.bg {
 }
 
 .layout-nav-tab {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-medium-middle.gif) repeat-x;
+	background: url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-medium-middle.gif) repeat-x;
 	height: <%= TAB_IMAGE_HEIGHT %>;
 	position: absolute;
 }
 
 .layout-nav-tab-selected {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-dark-middle.gif) repeat-x;
+	background: url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-dark-middle.gif) repeat-x;
 	height: <%= TAB_IMAGE_HEIGHT %>;
 	position: absolute;
 	z-index: 100;
@@ -508,7 +508,7 @@ FONT.bg {
 }
 
 #layout-nav-menu-bar-left {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-dark-bar-left.gif) no-repeat;
+	background: url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-dark-bar-left.gif) no-repeat;
 	height: 26px;
 	left: 0;
 	overflow: hidden;
@@ -518,7 +518,7 @@ FONT.bg {
 }
 
 #layout-nav-menu-bar-right {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-dark-bar-right.gif) no-repeat;
+	background: url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-dark-bar-right.gif) no-repeat;
 	height: 26px;
 	overflow: hidden;
 	position: absolute;
@@ -528,7 +528,7 @@ FONT.bg {
 }
 
 #layout-nav-menu-bar {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-dark-bar-middle.gif) repeat-x;
+	background: url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-dark-bar-middle.gif) repeat-x;
 	height: 26px;
 	left: 0;
 	position: absolute;

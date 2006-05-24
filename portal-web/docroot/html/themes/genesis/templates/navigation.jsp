@@ -203,19 +203,19 @@
 							%>
 							<style type="text/css">
 							#tab_<%= i %>_<%= j %>:hover .layout-nav-tab-left<%= tabLeft %>, .layout-nav-tab-left<%= tabLeft %>-hover {
-								background-image:  url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-light-left<%= tabLeft %>.gif);
+								background-image:  url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-light-left<%= tabLeft %>.gif);
 							}
 
 							#tab_<%= i %>_<%= j %>:hover .layout-nav-tab-right<%= tabRight %>, .layout-nav-tab-right<%= tabRight %>-hover {
-								background-image:  url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-light-right<%= tabRight %>.gif);
+								background-image:  url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-light-right<%= tabRight %>.gif);
 							}
 
 							#tab_<%= i %>_<%= j %>:hover {
-								background-image:  url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-light-middle.gif);
+								background-image:  url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-light-middle.gif);
 							}
 							</style>
 
-							<div id="tab_<%= i %>_<%= j %>" class="layout-nav-tab" style="width: <%= tabBodyWidth %>; z-index: <%= zIndex %>; left: <%= tabShift %>px;" onMouseEnter="document.all.tab_<%= i %>_<%= j %>.style.background = 'url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-light-middle.gif)'; document.all.tab_left_<%= i %>_<%= j %>.style.background = 'url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-light-left<%= tabLeft %>.gif)'; document.all.tab_right_<%= i %>_<%= j %>.style.background = 'url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-light-right<%= tabRight %>.gif)'" onMouseLeave="document.all.tab_<%= i %>_<%= j %>.style.background = 'url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-medium-middle.gif)'; document.all.tab_left_<%= i %>_<%= j %>.style.background = 'url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-medium-left<%= tabLeft %>.gif)'; document.all.tab_right_<%= i %>_<%= j %>.style.background = 'url(<%= themeDisplay.getPathThemeImage() %>/tabs/tab-medium-right<%= tabRight %>.gif)'">
+							<div id="tab_<%= i %>_<%= j %>" class="layout-nav-tab" style="width: <%= tabBodyWidth %>; z-index: <%= zIndex %>; left: <%= tabShift %>px;" onMouseEnter="document.all.tab_<%= i %>_<%= j %>.style.background = 'url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-light-middle.gif)'; document.all.tab_left_<%= i %>_<%= j %>.style.background = 'url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-light-left<%= tabLeft %>.gif)'; document.all.tab_right_<%= i %>_<%= j %>.style.background = 'url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-light-right<%= tabRight %>.gif)'" onMouseLeave="document.all.tab_<%= i %>_<%= j %>.style.background = 'url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-medium-middle.gif)'; document.all.tab_left_<%= i %>_<%= j %>.style.background = 'url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-medium-left<%= tabLeft %>.gif)'; document.all.tab_right_<%= i %>_<%= j %>.style.background = 'url(<%= themeDisplay.getPathThemeImage() %>/custom/tabs/tab-medium-right<%= tabRight %>.gif)'">
 								<div id="tab_left_<%= i %>_<%= j %>" class="layout-nav-tab-left<%= tabLeft %>"></div>
 								<div id="tab_right_<%= i %>_<%= j %>" class="layout-nav-tab-right<%= tabRight %>"></div>
 								<span class="layout-tab"><%= rows[i][j] %></span>
