@@ -122,12 +122,13 @@ public class SourceFormatter {
 			ds.setExcludes(
 				new String[] {
 					"**\\classes\\*", "**\\jsp\\*", "**\\EARXMLBuilder.java",
-					"**\\EJBXMLBuilder.java", "**\\ServiceBuilder.java",
-					"**\\SourceFormatter.java", "**\\PropsUtil.java",
-					"**\\UserAttributes.java", "**\\WebKeys.java",
-					"**\\portal\\service\\**", "**\\portlet\\**\\service\\**",
-					"**\\model\\*Model.java", "**\\tools\\ext_tmpl\\**",
-					"**\\util-wsrp\\**", "**\\WEB-INF\\jcvs\\work\\**"
+					"**\\EJBXMLBuilder.java", "**\\JSMin.java",
+					"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
+					"**\\PropsUtil.java", "**\\UserAttributes.java",
+					"**\\WebKeys.java", "**\\portal\\service\\**",
+					"**\\portlet\\**\\service\\**", "**\\model\\*Model.java",
+					"**\\tools\\ext_tmpl\\**", "**\\util-wsrp\\**",
+					"**\\WEB-INF\\jcvs\\work\\**"
 				});
 			ds.setBasedir(basedir);
 			ds.scan();

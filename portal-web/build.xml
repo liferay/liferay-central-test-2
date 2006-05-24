@@ -80,7 +80,10 @@
 		>
 			<arg value="${javascript.files}" />
 			<arg value="${web.dir}/html/js/everything.js" />
+			<arg value="true" />
 		</java>
+
+		<delete file="JavaScriptBuilder.temp" />
 	</target>
 
 	<target name="build-website">

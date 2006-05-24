@@ -23,9 +23,13 @@
 package com.liferay.portal.tools;
 
 import com.liferay.util.FileUtil;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.JSMin;
 import com.liferay.util.StringUtil;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 /**
  * <a href="JavaScriptBuilder.java.html"><b><i>View Source</i></b></a>
@@ -36,15 +40,18 @@ import java.io.File;
 public class JavaScriptBuilder {
 
 	public static void main(String[] args) {
-		if (args.length == 2) {
-			new JavaScriptBuilder(args[0], args[1]);
+		if (args.length == 3) {
+			new JavaScriptBuilder(
+				args[0], args[1], GetterUtil.getBoolean(args[2]));
 		}
 		else {
 			throw new IllegalArgumentException();
 		}
 	}
 
-	public JavaScriptBuilder(String source, String destination) {
+	public JavaScriptBuilder(String source, String destination,
+							 boolean obfuscate) {
+
 		try {
 			StringBuffer sb = new StringBuffer();
 
@@ -59,11 +66,12 @@ public class JavaScriptBuilder {
 
 			FileUtil.write(tempFile, sb.toString());
 
-			if (false) {
-				/*com.twovi.tools.js.Obfuscator.main(
-					new String[] {
-						tempFile.getName(), destination
-					});*/
+			if (obfuscate) {
+				JSMin jsMin = new JSMin(
+					new FileInputStream(tempFile),
+					new FileOutputStream(new File(destination)));
+
+				jsMin.jsmin();
 			}
 			else {
 				FileUtil.write(destination, sb.toString());
