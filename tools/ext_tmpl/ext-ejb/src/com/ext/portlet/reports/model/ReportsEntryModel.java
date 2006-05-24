@@ -10,9 +10,6 @@ import java.util.Date;
 
 
 public class ReportsEntryModel extends BaseModel {
-    public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
-                "value.object.cacheable.com.ext.portlet.reports.model.ReportsEntry"),
-            VALUE_OBJECT_CACHEABLE);
     public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
                 "xss.allow.com.ext.portlet.reports.model.ReportsEntry"),
             XSS_ALLOW);
@@ -44,24 +41,12 @@ public class ReportsEntryModel extends BaseModel {
     public ReportsEntryModel() {
     }
 
-    public ReportsEntryModel(String entryId) {
-        _entryId = entryId;
-        setNew(true);
-    }
-
-    public ReportsEntryModel(String entryId, String companyId, String userId,
-        String userName, Date createDate, Date modifiedDate, String name) {
-        _entryId = entryId;
-        _companyId = companyId;
-        _userId = userId;
-        _userName = userName;
-        _createDate = createDate;
-        _modifiedDate = modifiedDate;
-        _name = name;
-    }
-
     public String getPrimaryKey() {
         return _entryId;
+    }
+
+    public void setPrimaryKey(String pk) {
+        setEntryId(pk);
     }
 
     public String getEntryId() {
@@ -181,16 +166,17 @@ public class ReportsEntryModel extends BaseModel {
         }
     }
 
-    public BaseModel getProtected() {
-        return null;
-    }
-
-    public void protect() {
-    }
-
     public Object clone() {
-        return new ReportsEntry(getEntryId(), getCompanyId(), getUserId(),
-            getUserName(), getCreateDate(), getModifiedDate(), getName());
+        ReportsEntry clone = new ReportsEntry();
+        clone.setEntryId(getEntryId());
+        clone.setCompanyId(getCompanyId());
+        clone.setUserId(getUserId());
+        clone.setUserName(getUserName());
+        clone.setCreateDate(getCreateDate());
+        clone.setModifiedDate(getModifiedDate());
+        clone.setName(getName());
+
+        return clone;
     }
 
     public int compareTo(Object obj) {

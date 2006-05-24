@@ -8,27 +8,7 @@ public class ReportsEntryHBMUtil implements Transformer {
 
     public static com.ext.portlet.reports.model.ReportsEntry model(
         ReportsEntryHBM reportsEntryHBM) {
-        return model(reportsEntryHBM, true);
-    }
-
-    public static com.ext.portlet.reports.model.ReportsEntry model(
-        ReportsEntryHBM reportsEntryHBM, boolean checkPool) {
-        com.ext.portlet.reports.model.ReportsEntry reportsEntry = null;
-
-        if (checkPool) {
-            reportsEntry = ReportsEntryPool.get(reportsEntryHBM.getPrimaryKey());
-        }
-
-        if (reportsEntry == null) {
-            reportsEntry = new com.ext.portlet.reports.model.ReportsEntry(reportsEntryHBM.getEntryId(),
-                    reportsEntryHBM.getCompanyId(),
-                    reportsEntryHBM.getUserId(), reportsEntryHBM.getUserName(),
-                    reportsEntryHBM.getCreateDate(),
-                    reportsEntryHBM.getModifiedDate(), reportsEntryHBM.getName());
-            ReportsEntryPool.put(reportsEntry.getPrimaryKey(), reportsEntry);
-        }
-
-        return reportsEntry;
+        return (com.ext.portlet.reports.model.ReportsEntry) reportsEntryHBM;
     }
 
     public static ReportsEntryHBMUtil getInstance() {

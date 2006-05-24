@@ -25,7 +25,11 @@ public class ReportsEntryPersistence extends BasePersistence {
     private static Log _log = LogFactory.getLog(ReportsEntryPersistence.class);
 
     public com.ext.portlet.reports.model.ReportsEntry create(String entryId) {
-        return new com.ext.portlet.reports.model.ReportsEntry(entryId);
+        ReportsEntryHBM reportsEntryHBM = new ReportsEntryHBM();
+        reportsEntryHBM.setNew(true);
+        reportsEntryHBM.setPrimaryKey(entryId);
+
+        return ReportsEntryHBMUtil.model(reportsEntryHBM);
     }
 
     public com.ext.portlet.reports.model.ReportsEntry remove(String entryId)
@@ -46,12 +50,10 @@ public class ReportsEntryPersistence extends BasePersistence {
                     entryId.toString());
             }
 
-            com.ext.portlet.reports.model.ReportsEntry reportsEntry = ReportsEntryHBMUtil.model(reportsEntryHBM);
             session.delete(reportsEntryHBM);
             session.flush();
-            ReportsEntryPool.remove(entryId);
 
-            return reportsEntry;
+            return ReportsEntryHBMUtil.model(reportsEntryHBM);
         } catch (HibernateException he) {
             throw new SystemException(he);
         } finally {
@@ -69,13 +71,14 @@ public class ReportsEntryPersistence extends BasePersistence {
                 session = openSession();
 
                 if (reportsEntry.isNew()) {
-                    ReportsEntryHBM reportsEntryHBM = new ReportsEntryHBM(reportsEntry.getEntryId(),
-                            reportsEntry.getCompanyId(),
-                            reportsEntry.getUserId(),
-                            reportsEntry.getUserName(),
-                            reportsEntry.getCreateDate(),
-                            reportsEntry.getModifiedDate(),
-                            reportsEntry.getName());
+                    ReportsEntryHBM reportsEntryHBM = new ReportsEntryHBM();
+                    reportsEntryHBM.setEntryId(reportsEntry.getEntryId());
+                    reportsEntryHBM.setCompanyId(reportsEntry.getCompanyId());
+                    reportsEntryHBM.setUserId(reportsEntry.getUserId());
+                    reportsEntryHBM.setUserName(reportsEntry.getUserName());
+                    reportsEntryHBM.setCreateDate(reportsEntry.getCreateDate());
+                    reportsEntryHBM.setModifiedDate(reportsEntry.getModifiedDate());
+                    reportsEntryHBM.setName(reportsEntry.getName());
                     session.save(reportsEntryHBM);
                     session.flush();
                 } else {
@@ -91,13 +94,14 @@ public class ReportsEntryPersistence extends BasePersistence {
                         reportsEntryHBM.setName(reportsEntry.getName());
                         session.flush();
                     } else {
-                        reportsEntryHBM = new ReportsEntryHBM(reportsEntry.getEntryId(),
-                                reportsEntry.getCompanyId(),
-                                reportsEntry.getUserId(),
-                                reportsEntry.getUserName(),
-                                reportsEntry.getCreateDate(),
-                                reportsEntry.getModifiedDate(),
-                                reportsEntry.getName());
+                        reportsEntryHBM = new ReportsEntryHBM();
+                        reportsEntryHBM.setEntryId(reportsEntry.getEntryId());
+                        reportsEntryHBM.setCompanyId(reportsEntry.getCompanyId());
+                        reportsEntryHBM.setUserId(reportsEntry.getUserId());
+                        reportsEntryHBM.setUserName(reportsEntry.getUserName());
+                        reportsEntryHBM.setCreateDate(reportsEntry.getCreateDate());
+                        reportsEntryHBM.setModifiedDate(reportsEntry.getModifiedDate());
+                        reportsEntryHBM.setName(reportsEntry.getName());
                         session.save(reportsEntryHBM);
                         session.flush();
                     }
@@ -105,9 +109,6 @@ public class ReportsEntryPersistence extends BasePersistence {
 
                 reportsEntry.setNew(false);
                 reportsEntry.setModified(false);
-                reportsEntry.protect();
-                ReportsEntryPool.update(reportsEntry.getPrimaryKey(),
-                    reportsEntry);
             }
 
             return reportsEntry;
@@ -120,28 +121,23 @@ public class ReportsEntryPersistence extends BasePersistence {
 
     public com.ext.portlet.reports.model.ReportsEntry findByPrimaryKey(
         String entryId) throws NoSuchEntryException, SystemException {
-        com.ext.portlet.reports.model.ReportsEntry reportsEntry = ReportsEntryPool.get(entryId);
         Session session = null;
 
         try {
-            if (reportsEntry == null) {
-                session = openSession();
+            session = openSession();
 
-                ReportsEntryHBM reportsEntryHBM = (ReportsEntryHBM) session.get(ReportsEntryHBM.class,
-                        entryId);
+            ReportsEntryHBM reportsEntryHBM = (ReportsEntryHBM) session.get(ReportsEntryHBM.class,
+                    entryId);
 
-                if (reportsEntryHBM == null) {
-                    _log.warn("No ReportsEntry exists with the primary key " +
-                        entryId.toString());
-                    throw new NoSuchEntryException(
-                        "No ReportsEntry exists with the primary key " +
-                        entryId.toString());
-                }
-
-                reportsEntry = ReportsEntryHBMUtil.model(reportsEntryHBM, false);
+            if (reportsEntryHBM == null) {
+                _log.warn("No ReportsEntry exists with the primary key " +
+                    entryId.toString());
+                throw new NoSuchEntryException(
+                    "No ReportsEntry exists with the primary key " +
+                    entryId.toString());
             }
 
-            return reportsEntry;
+            return ReportsEntryHBMUtil.model(reportsEntryHBM);
         } catch (HibernateException he) {
             throw new SystemException(he);
         } finally {
@@ -512,7 +508,6 @@ public class ReportsEntryPersistence extends BasePersistence {
 
             while (itr.hasNext()) {
                 ReportsEntryHBM reportsEntryHBM = (ReportsEntryHBM) itr.next();
-                ReportsEntryPool.remove((String) reportsEntryHBM.getPrimaryKey());
                 session.delete(reportsEntryHBM);
             }
 
@@ -546,7 +541,6 @@ public class ReportsEntryPersistence extends BasePersistence {
 
             while (itr.hasNext()) {
                 ReportsEntryHBM reportsEntryHBM = (ReportsEntryHBM) itr.next();
-                ReportsEntryPool.remove((String) reportsEntryHBM.getPrimaryKey());
                 session.delete(reportsEntryHBM);
             }
 

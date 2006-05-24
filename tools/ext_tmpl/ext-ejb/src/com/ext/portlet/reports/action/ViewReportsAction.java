@@ -52,26 +52,19 @@ public class ViewReportsAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		try {
-			if (req.getWindowState().equals(WindowState.NORMAL)) {
-				return mapping.findForward("portlet.ext.reports.view");
-			}
-			else {
-				List reports = new ArrayList();
-
-				reports.add("One");
-				reports.add("Two");
-				reports.add("Three");
-
-				req.setAttribute("reports", reports);
-
-				return mapping.findForward("portlet.ext.reports.view_reports");
-			}
+		if (req.getWindowState().equals(WindowState.NORMAL)) {
+			return mapping.findForward("portlet.ext.reports.view");
 		}
-		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
+		else {
+			List reports = new ArrayList();
 
-			return mapping.findForward(Constants.COMMON_ERROR);
+			reports.add("One");
+			reports.add("Two");
+			reports.add("Three");
+
+			req.setAttribute("reports", reports);
+
+			return mapping.findForward("portlet.ext.reports.view_reports");
 		}
 	}
 
