@@ -57,11 +57,8 @@ public class StripFilter implements Filter {
 		SystemProperties.get(StripFilter.class.getName() + ".encoding"),
 		"UTF-8");
 
-	public void init(FilterConfig filterConfig) {
-		_filterConfig = filterConfig;
-	}
-
-	public void destroy() {
+	public void init(FilterConfig config) {
+		_config = config;
 	}
 
 	public void doFilter(
@@ -265,6 +262,9 @@ public class StripFilter implements Filter {
 		}
 	}
 
+	public void destroy() {
+	}
+
 	private boolean _isAlreadyFiltered(HttpServletRequest req) {
 		if (req.getAttribute(_ALREADY_FILTERED) != null) {
 			return true;
@@ -316,6 +316,6 @@ public class StripFilter implements Filter {
 
 	private static Log _log = LogFactory.getLog(StripFilter.class);
 
-	private FilterConfig _filterConfig;
+	private FilterConfig _config;
 
 }

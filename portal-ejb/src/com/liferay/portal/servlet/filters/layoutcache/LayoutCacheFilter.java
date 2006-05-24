@@ -74,14 +74,14 @@ public class LayoutCacheFilter implements Filter {
 	public static final boolean USE_LAYOUT_CACHE_FILTER = GetterUtil.get(
 		SystemProperties.get(LayoutCacheFilter.class.getName()), true);
 
-	public void init(FilterConfig filterConfig) throws ServletException {
+	public void init(FilterConfig config) throws ServletException {
 		synchronized (FriendlyURLServlet.class) {
-			ServletContext ctx = filterConfig.getServletContext();
+			ServletContext ctx = config.getServletContext();
 
 			_companyId = ctx.getInitParameter("company_id");
 
 			_pattern = GetterUtil.getInteger(
-				filterConfig.getInitParameter("pattern"));
+				config.getInitParameter("pattern"));
 
 			if ((_pattern != _PATTERN_FRIENDLY) &&
 				(_pattern != _PATTERN_LAYOUT) &&
@@ -90,9 +90,6 @@ public class LayoutCacheFilter implements Filter {
 				throw new ServletException("Layout cache pattern is invalid");
 			}
 		}
-	}
-
-	public void destroy() {
 	}
 
 	public void doFilter(
@@ -193,6 +190,9 @@ public class LayoutCacheFilter implements Filter {
 
 			chain.doFilter(req, res);
 		}
+	}
+
+	public void destroy() {
 	}
 
 	protected String getCacheKey(HttpServletRequest req) {

@@ -508,7 +508,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		if (user != null) {
 			try {
 
-				// FIX
+				// FIX ME
 
 				if (false) {
 					SessionErrors.add(

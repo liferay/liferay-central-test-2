@@ -68,8 +68,9 @@ public class BasicLoginModule implements LoginModule {
 		}
 	}
 
-	public void initialize(Subject subject, CallbackHandler callbackHandler,
-						   Map sharedState, Map options) {
+	public void initialize(
+		Subject subject, CallbackHandler callbackHandler, Map sharedState,
+		Map options) {
 
 		_subject = subject;
 		_callbackHandler = callbackHandler;

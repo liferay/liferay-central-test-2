@@ -49,9 +49,9 @@ import org.apache.lucene.store.Directory;
  */
 public class LuceneServlet extends HttpServlet {
 
-	public void init(ServletConfig sc) throws ServletException {
+	public void init(ServletConfig config) throws ServletException {
 		synchronized (LuceneServlet.class) {
-			super.init(sc);
+			super.init(config);
 
 			ServletContext ctx = getServletContext();
 

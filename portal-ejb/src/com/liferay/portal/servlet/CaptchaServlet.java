@@ -58,9 +58,9 @@ import javax.servlet.http.HttpSession;
  */
 public class CaptchaServlet extends HttpServlet {
 
-	public void init(ServletConfig sc) throws ServletException {
+	public void init(ServletConfig config) throws ServletException {
 		synchronized (CaptchaServlet.class) {
-			super.init(sc);
+			super.init(config);
 
 			try {
 				WordList wordList = new WordList(Locale.getDefault());

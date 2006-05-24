@@ -40,8 +40,8 @@ import org.apache.struts.config.ModuleConfig;
  */
 public class PortletActionServlet extends ActionServlet {
 
-	public void init(ServletConfig sc) throws ServletException {
-		super.init(sc);
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
 
 		ServletContext ctx = getServletContext();
 

@@ -207,6 +207,15 @@
 				</if>
 
 				<if>
+					<equals arg1="${war.context}" arg2="laszlo" />
+					<then>
+						<copy todir="${app.server.dir}/webapps/${war.context}/WEB-INF/lib">
+							<fileset dir="${project.dir}/lib" includes="commons-collections.jar,commons-httpclient.jar,jdom.jar" />
+						</copy>
+					</then>
+				</if>
+
+				<if>
 					<equals arg1="${war.context}" arg2="tunnel" />
 					<then>
 						<copy file="../ext-web/docroot/WEB-INF/remoting-servlet-ext.xml" todir="${app.server.dir}/webapps/${war.context}/WEB-INF" />

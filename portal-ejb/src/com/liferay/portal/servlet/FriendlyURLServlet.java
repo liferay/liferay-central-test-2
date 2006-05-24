@@ -61,14 +61,15 @@ import org.apache.commons.logging.LogFactory;
  */
 public class FriendlyURLServlet extends HttpServlet {
 
-	public void init(ServletConfig sc) throws ServletException {
+	public void init(ServletConfig config) throws ServletException {
 		synchronized (FriendlyURLServlet.class) {
-			super.init(sc);
+			super.init(config);
 
 			ServletContext ctx = getServletContext();
 
 			_companyId = ctx.getInitParameter("company_id");
-			_private = GetterUtil.getBoolean(sc.getInitParameter("private"));
+			_private = GetterUtil.getBoolean(
+				config.getInitParameter("private"));
 		}
 	}
 

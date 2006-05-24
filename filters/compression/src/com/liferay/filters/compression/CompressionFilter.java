@@ -75,11 +75,8 @@ public class CompressionFilter implements Filter {
 		SystemProperties.get(CompressionFilter.class.getName() + ".encoding"),
 		"UTF-8");
 
-	public void init(FilterConfig filterConfig) {
-		_filterConfig = filterConfig;
-	}
-
-	public void destroy() {
+	public void init(FilterConfig config) {
+		_config = config;
 	}
 
 	public void doFilter(
@@ -120,6 +117,9 @@ public class CompressionFilter implements Filter {
 
 			chain.doFilter(req, res);
 		}
+	}
+
+	public void destroy() {
 	}
 
 	private boolean _isAlreadyFiltered(HttpServletRequest req) {
@@ -190,6 +190,6 @@ public class CompressionFilter implements Filter {
 
 	private static Log _log = LogFactory.getLog(CompressionFilter.class);
 
-	private FilterConfig _filterConfig;
+	private FilterConfig _config;
 
 }

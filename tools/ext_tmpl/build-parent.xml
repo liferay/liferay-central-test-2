@@ -5,7 +5,7 @@
 
 	<target name="clean">
 		<delete includeEmptyDirs="true">
-			<fileset dir="${app.server.bin.dir}" includes="*.log,ActiveMQ/**" />
+			<fileset dir="${app.server.bin.dir}" includes="*.log*,ActiveMQ/**,alf_data/**" />
 		</delete>
 
 		<if>
@@ -418,31 +418,30 @@
 				<ant dir="themes" target="deploy" inheritAll="false" />
 			</then>
 		</if>
-	</target>
 
-	<target name="deploy-test">
 		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="tomcat" />
-			</or>
+			<and>
+				<equals arg1="${app.server.unified.class.loader}" arg2="off" />
+			</and>
 			<then>
-				<move todir="${app.server.deploy.dir}/WEB-INF/lib">
-					<fileset
-						dir="${app.server.lib.dir}"
-						excludes="ant.jar,commons-logging.jar,hsql.jar,log4j.jar,portal-shared.jar,portlet.jar"
-					/>
-				</move>
+				<if>
+					<equals arg1="${app.server.type}" arg2="tomcat" />
+					<then>
+						<move todir="${app.server.deploy.dir}/WEB-INF/lib">
+							<fileset
+								dir="${app.server.lib.dir}"
+								excludes="ant.jar,commons-logging.jar,hsql.jar,log4j.jar,portal-shared.jar,portlet.jar"
+							/>
+						</move>
 
-				<move todir="${app.server.deploy.dir}/WEB-INF/classes">
-					<fileset
-						dir="${app.server.dir}/common/classes"
-						excludes="log4j.properties,META-INF/log4j.dtd"
-					/>
-				</move>
-
-				<delete dir="${app.server.dir}/webapps/cms" />
-				<delete dir="${app.server.dir}/webapps/laszlo" />
-				<delete dir="${app.server.dir}/webapps/tunnel" />
+						<move todir="${app.server.deploy.dir}/WEB-INF/classes">
+							<fileset
+								dir="${app.server.dir}/common/classes"
+								excludes="log4j.properties,META-INF/log4j.dtd"
+							/>
+						</move>
+					</then>
+				</if>
 			</then>
 		</if>
 	</target>

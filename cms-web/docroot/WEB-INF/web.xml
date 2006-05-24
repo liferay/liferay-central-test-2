@@ -6,18 +6,14 @@
 		<param-name>company_id</param-name>
 		<param-value>liferay.com</param-value>
 	</context-param>
-	<filter>
-		<filter-name>Compression Filter</filter-name>
-		<filter-class>com.liferay.filters.compression.CompressionFilter</filter-class>
-	</filter>
-	<!--<filter-mapping>
-		<filter-name>Compression Filter</filter-name>
-		<url-pattern>/servlet/*</url-pattern>
-	</filter-mapping>-->
 	<servlet>
 		<servlet-name>CMSServlet</servlet-name>
 		<display-name>CMSServlet</display-name>
-		<servlet-class>com.liferay.portal.cms.servlet.CMSServlet</servlet-class>
+		<servlet-class>com.liferay.portal.shared.servlet.PortalServletWrapper</servlet-class>
+		<init-param>
+			<param-name>servlet-class</param-name>
+			<param-value>com.liferay.portal.cms.servlet.CMSServlet</param-value>
+		</init-param>
 		<init-param>
 			<param-name>redirects_conf</param-name>
 			<param-value>cms-redirects</param-value>

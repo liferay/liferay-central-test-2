@@ -55,9 +55,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ImageServlet extends HttpServlet {
 
-	public void init(ServletConfig sc) throws ServletException {
+	public void init(ServletConfig config) throws ServletException {
 		synchronized (ImageServlet.class) {
-			super.init(sc);
+			super.init(config);
 
 			ServletContext ctx = getServletContext();
 

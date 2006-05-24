@@ -32,7 +32,7 @@ Changed - Upgraded to OSCache 2.3
 Changed - Upgraded to Portals Bridges 1.0
 Changed - Upgraded to Quartz 1.5.0
 Changed - Upgraded to SLF4J 1.0
-Changed - Upgraded to Spring 1.2.7
+Changed - Upgraded to Spring 1.2.8
 Changed - Upgraded to Struts 1.2.9
 Changed - Upgraded to Xerces 2.7.1
 

@@ -20,41 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.chat.servlet;
+package com.liferay.portal.shared.servlet;
 
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.shared.util.PortalClassLoaderUtil;
 
-import com.lyrisoft.chat.server.remote.TunnelServlet;
-
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
+import javax.servlet.ServletContextListener;
 
 /**
- * <a href="ChatServlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="SpringServletContextListener.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class ChatServlet extends TunnelServlet {
+public class SpringServletContextListener
+	extends PortalServletContextListenerWrapper {
 
-	public static final boolean CHAT_AVAILABLE = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.CHAT_AVAILABLE));
+	protected ServletContextListener getInstance() throws Exception {
+		Class classObj = Class.forName(
+			_CLASS_NAME, true, PortalClassLoaderUtil.getClassLoader());
 
-	public static final String CHAT_SERVER = "chatServer";
-
-	public void init(ServletConfig config) throws ServletException {
-		synchronized (ChatServlet.class) {
-			if (CHAT_AVAILABLE) {
-				super.init(config);
-			}
-		}
+		return (ServletContextListener)classObj.newInstance();
 	}
 
-	public void destroy() {
-		if (CHAT_AVAILABLE) {
-			super.destroy();
-		}
-	}
+	private static final String _CLASS_NAME =
+		"org.springframework.web.context.ContextLoaderListener";
 
 }

@@ -20,11 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.security.jaas;
+package com.liferay.portal.shared.security.jaas;
 
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.ServerDetector;
-import com.liferay.util.Validator;
+import com.liferay.portal.shared.util.PortalClassLoaderUtil;
 
 import java.util.Map;
 
@@ -45,64 +43,15 @@ import org.apache.commons.logging.LogFactory;
 public class PortalLoginModule implements LoginModule {
 
 	public PortalLoginModule() {
-		String jaasImpl = PropsUtil.get(PropsUtil.PORTAL_JAAS_IMPL);
+		try {
+			Class classObj = Class.forName(
+				_CLASS_NAME, true, PortalClassLoaderUtil.getClassLoader());
 
-		if (Validator.isNotNull(jaasImpl)) {
-			try {
-				_loginModule = (LoginModule)Class.forName(
-					jaasImpl).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
+			_loginModule = (LoginModule)classObj.newInstance();
 		}
-
-		if (_loginModule == null) {
-
-			// Check application servers
-
-			if (ServerDetector.isJBoss()) {
-				_loginModule =
-					new com.liferay.portal.security.jaas.ext.jboss.PortalLoginModule();
-			}
-			else if (ServerDetector.isJOnAS()) {
-				_loginModule =
-					new com.liferay.portal.security.jaas.ext.jonas.PortalLoginModule();
-			}
-			else if (ServerDetector.isPramati()) {
-				_loginModule =
-					new com.liferay.portal.security.jaas.ext.pramati.PortalLoginModule();
-			}
-			else if (ServerDetector.isResin()) {
-				_loginModule =
-					new com.liferay.portal.security.jaas.ext.resin.PortalLoginModule();
-			}
-			else if (ServerDetector.isSun7()) {
-				_loginModule =
-					new com.liferay.portal.security.jaas.ext.sun7.PortalLoginModule();
-			}
-			else if (ServerDetector.isSun8()) {
-				_loginModule =
-					new com.liferay.portal.security.jaas.ext.sun8.PortalLoginModule();
-			}
-			else if (ServerDetector.isWebLogic()) {
-				_loginModule =
-					new com.liferay.portal.security.jaas.ext.weblogic.PortalLoginModule();
-			}
-
-			// Check servlet containers
-
-			else if (ServerDetector.isJetty()) {
-				_loginModule =
-					new com.liferay.portal.security.jaas.ext.jetty.PortalLoginModule();
-			}
-			else if (ServerDetector.isTomcat()) {
-				_loginModule =
-					new com.liferay.portal.security.jaas.ext.tomcat.PortalLoginModule();
-			}
+		catch (Exception e) {
+			_log.error(e);
 		}
-
-		_log.debug(_loginModule.getClass().getName());
 	}
 
 	public boolean abort() throws LoginException {
@@ -127,6 +76,9 @@ public class PortalLoginModule implements LoginModule {
 	public boolean logout() throws LoginException {
 		return _loginModule.logout();
 	}
+
+	private static final String _CLASS_NAME =
+		"com.liferay.portal.security.jaas.PortalLoginModule";
 
  	private static Log _log = LogFactory.getLog(PortalLoginModule.class);
 

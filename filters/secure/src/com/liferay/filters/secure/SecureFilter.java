@@ -54,17 +54,17 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SecureFilter implements Filter {
 
-	public void init(FilterConfig filterConfig) {
+	public void init(FilterConfig config) {
 		String propertyPrefix =
-			filterConfig.getInitParameter("portal_property_prefix");
+			config.getInitParameter("portal_property_prefix");
 
 		String[] hostsAllowedArray = null;
 
 		if (Validator.isNull(propertyPrefix)) {
 			hostsAllowedArray = StringUtil.split(
-				filterConfig.getInitParameter("hosts.allowed"));
+				config.getInitParameter("hosts.allowed"));
 			_httpsRequired = GetterUtil.getBoolean(
-				filterConfig.getInitParameter("https.required"));
+				config.getInitParameter("https.required"));
 		}
 		else {
 			hostsAllowedArray = PropsUtil.getArray(
@@ -76,9 +76,6 @@ public class SecureFilter implements Filter {
 		for (int i = 0; i < hostsAllowedArray.length; i++) {
 			_hostsAllowed.add(hostsAllowedArray[i]);
 		}
-	}
-
-	public void destroy() {
 	}
 
 	public void doFilter(
@@ -133,6 +130,9 @@ public class SecureFilter implements Filter {
 
 			chain.doFilter(req, res);
 		}
+	}
+
+	public void destroy() {
 	}
 
 	protected boolean isAccessAllowed(ServletRequest req) {

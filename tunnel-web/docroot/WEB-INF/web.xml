@@ -12,7 +12,11 @@
 	</context-param>
 	<filter>
 		<filter-name>Secure AxisServlet Filter</filter-name>
-		<filter-class>com.liferay.filters.secure.SecureFilter</filter-class>
+		<filter-class>com.liferay.portal.shared.servlet.PortalFilterWrapper</filter-class>
+		<init-param>
+			<param-name>filter-class</param-name>
+			<param-value>com.liferay.filters.secure.SecureFilter</param-value>
+		</init-param>
 		<init-param>
 			<param-name>portal_property_prefix</param-name>
 			<param-value>axis.servlet.</param-value>
@@ -20,7 +24,11 @@
 	</filter>
 	<filter>
 		<filter-name>Secure LiferayServlet Filter</filter-name>
-		<filter-class>com.liferay.filters.secure.SecureFilter</filter-class>
+		<filter-class>com.liferay.portal.shared.servlet.PortalFilterWrapper</filter-class>
+		<init-param>
+			<param-name>filter-class</param-name>
+			<param-value>com.liferay.filters.secure.SecureFilter</param-value>
+		</init-param>
 		<init-param>
 			<param-name>portal_property_prefix</param-name>
 			<param-value>tunnel.servlet.</param-value>
@@ -28,7 +36,11 @@
 	</filter>
 	<filter>
 		<filter-name>Secure SpringServlet Filter</filter-name>
-		<filter-class>com.liferay.filters.secure.SecureFilter</filter-class>
+		<filter-class>com.liferay.portal.shared.servlet.PortalFilterWrapper</filter-class>
+		<init-param>
+			<param-name>filter-class</param-name>
+			<param-value>com.liferay.filters.secure.SecureFilter</param-value>
+		</init-param>
 		<init-param>
 			<param-name>portal_property_prefix</param-name>
 			<param-value>spring.remoting.servlet.</param-value>
@@ -47,22 +59,34 @@
 		<url-pattern>/spring/*</url-pattern>
 	</filter-mapping>
 	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+		<listener-class>com.liferay.portal.shared.servlet.SpringServletContextListener</listener-class>
 	</listener>
 	<servlet>
 		<servlet-name>AxisServlet</servlet-name>
-		<servlet-class>com.liferay.portal.servlet.AxisServlet</servlet-class>
+		<servlet-class>com.liferay.portal.shared.servlet.PortalServletWrapper</servlet-class>
+		<init-param>
+			<param-name>servlet-class</param-name>
+			<param-value>com.liferay.portal.servlet.AxisServlet</param-value>
+		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>LiferayServlet</servlet-name>
 		<display-name>LiferayServlet</display-name>
-		<servlet-class>com.liferay.portal.servlet.TunnelServlet</servlet-class>
+		<servlet-class>com.liferay.portal.shared.servlet.PortalServletWrapper</servlet-class>
+		<init-param>
+			<param-name>servlet-class</param-name>
+			<param-value>com.liferay.portal.servlet.TunnelServlet</param-value>
+		</init-param>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>SpringServlet</servlet-name>
-		<servlet-class>com.liferay.portal.spring.servlet.RemotingServlet</servlet-class>
+		<servlet-class>com.liferay.portal.shared.servlet.PortalServletWrapper</servlet-class>
+		<init-param>
+			<param-name>servlet-class</param-name>
+			<param-value>com.liferay.portal.spring.servlet.RemotingServlet</param-value>
+		</init-param>
 		<load-on-startup>3</load-on-startup>
 	</servlet>
 	<servlet-mapping>
@@ -125,18 +149,4 @@
 	<security-role>
 		<role-name>users</role-name>
 	</security-role>
-	<ejb-local-ref>
-		<ejb-ref-name>ejb/liferay/RoleLocalServiceHome</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
-		<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
-		<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
-	</ejb-local-ref>
-	<ejb-local-ref>
-		<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<local-home>com.liferay.portal.service.ejb.UserLocalServiceHome</local-home>
-		<local>com.liferay.portal.service.ejb.UserLocalServiceEJB</local>
-		<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
-	</ejb-local-ref>
 </web-app>

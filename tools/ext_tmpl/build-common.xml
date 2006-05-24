@@ -25,6 +25,7 @@
 	<propertycopy name="app.server.deploy.dir" from="app.server.${app.server.type}.deploy.dir" />
 	<propertycopy name="app.server.lib.dir" from="app.server.${app.server.type}.lib.dir" />
 	<propertycopy name="app.server.server.dir" from="app.server.${app.server.type}.server.dir" />
+	<propertycopy name="app.server.unified.class.loader" from="app.server.${app.server.type}.unified.class.loader" />
 
 	<target name="setproxy" if="setproxy.proxy.host">
 		<setproxy proxyhost="${setproxy.proxy.host}" proxyport="${setproxy.proxy.port}" />

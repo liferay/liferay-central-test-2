@@ -57,15 +57,15 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CMSServlet extends HttpServlet {
 
-	public void init(ServletConfig sc) throws ServletException {
+	public void init(ServletConfig config) throws ServletException {
 		synchronized (CMSServlet.class) {
-			super.init(sc);
+			super.init(config);
 
 			ServletContext ctx = getServletContext();
 
 			_companyId = ctx.getInitParameter("company_id");
 
-			String redirectsConf = sc.getInitParameter("redirects_conf");
+			String redirectsConf = config.getInitParameter("redirects_conf");
 
 			if (redirectsConf != null) {
 				_redirectProperties = ExtPropertiesLoader.getInstance(
@@ -73,7 +73,7 @@ public class CMSServlet extends HttpServlet {
 			}
 
 			_redirectsEnabled = GetterUtil.getBoolean(
-				sc.getInitParameter("redirects_enabled"));
+				config.getInitParameter("redirects_enabled"));
 		}
 	}
 
