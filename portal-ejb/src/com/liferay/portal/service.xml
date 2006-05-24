@@ -1114,6 +1114,7 @@
 		<exception>LayoutImport</exception>
 		<exception>LayoutName</exception>
 		<exception>LayoutParentLayoutId</exception>
+		<exception>LayoutPermission</exception>		
 		<exception>LayoutType</exception>
 		<exception>NoteContent</exception>
 		<exception>OrganizationId</exception>

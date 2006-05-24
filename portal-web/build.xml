@@ -9,88 +9,30 @@
 	<target name="clean" depends="build-common-web.clean">
 		<delete dir="${web.dir}/html/skin/color" />
 		<delete dir="${web.dir}/html/themes/classic/color_schemes" />
+
 		<delete>
 			<fileset dir="${web.dir}" includes="**/Thumbs.db" />
 		</delete>
 
-		<antcall target="delete-images">
+		<antcall target="clean-common-images">
 			<param name="theme.name" value="brochure" />
 		</antcall>
-		<antcall target="delete-images">
+
+		<antcall target="clean-common-images">
 			<param name="theme.name" value="genesis" />
 		</antcall>
-		<antcall target="delete-images">
+
+		<antcall target="clean-common-images">
 			<param name="theme.name" value="velocity" />
 		</antcall>
 	</target>
 
-	<target name="copy-images">
-		<copy file="${web.dir}/html/themes/classic/images/spacer.gif" todir="${web.dir}/html/themes/${theme.name}/images" />
-
-		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/arrows" />
-		<copy todir="${web.dir}/html/themes/${theme.name}/images/arrows">
-			<fileset dir="${web.dir}/html/themes/classic/images/arrows" />
-		</copy>
-		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/blogs" />
-		<copy todir="${web.dir}/html/themes/${theme.name}/images/blogs">
-			<fileset dir="${web.dir}/html/themes/classic/images/blogs" />
-		</copy>
-		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/common" />
-		<copy todir="${web.dir}/html/themes/${theme.name}/images/common">
-			<fileset dir="${web.dir}/html/themes/classic/images/common" />
-		</copy>
-		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/document_library" />
-		<copy todir="${web.dir}/html/themes/${theme.name}/images/document_library">
-			<fileset dir="${web.dir}/html/themes/classic/images/document_library" />
-		</copy>
-		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/language" />
-		<copy todir="${web.dir}/html/themes/${theme.name}/images/language">
-			<fileset dir="${web.dir}/html/themes/classic/images/language" />
-		</copy>
-		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/mail" />
-		<copy todir="${web.dir}/html/themes/${theme.name}/images/mail">
-			<fileset dir="${web.dir}/html/themes/classic/images/mail" />
-		</copy>
-		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/message_boards" />
-		<copy todir="${web.dir}/html/themes/${theme.name}/images/message_boards">
-			<fileset dir="${web.dir}/html/themes/classic/images/message_boards" />
-		</copy>
-		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/portlet" />
-		<copy todir="${web.dir}/html/themes/${theme.name}/images/portlet">
-			<fileset dir="${web.dir}/html/themes/classic/images/portlet" />
-		</copy>
-		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/progress_bar" />
-		<copy todir="${web.dir}/html/themes/${theme.name}/images/progress_bar">
-			<fileset dir="${web.dir}/html/themes/classic/images/progress_bar" />
-		</copy>
-		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/shadow" />
-		<copy todir="${web.dir}/html/themes/${theme.name}/images/shadow">
-			<fileset dir="${web.dir}/html/themes/classic/images/shadow" />
-		</copy>
-		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/shopping" />
-		<copy todir="${web.dir}/html/themes/${theme.name}/images/shopping">
-			<fileset dir="${web.dir}/html/themes/classic/images/shopping" />
-		</copy>
-		<mkdir dir="${web.dir}/html/themes/${theme.name}/images/trees" />
-		<copy todir="${web.dir}/html/themes/${theme.name}/images/trees">
-			<fileset dir="${web.dir}/html/themes/classic/images/trees" />
-		</copy>
-	</target>
-
-	<target name="delete-images">
+	<target name="clean-common-images">
 		<delete includeemptydirs="true" quiet="true" failonerror="false">
-			<fileset dir="${web.dir}/html/themes/${theme.name}/images/arrows" />
-			<fileset dir="${web.dir}/html/themes/${theme.name}/images/blogs" />
-			<fileset dir="${web.dir}/html/themes/${theme.name}/images/common" />
-			<fileset dir="${web.dir}/html/themes/${theme.name}/images/document_library" />
-			<fileset dir="${web.dir}/html/themes/${theme.name}/images/language" />
-			<fileset dir="${web.dir}/html/themes/${theme.name}/images/mail" />
-			<fileset dir="${web.dir}/html/themes/${theme.name}/images/message_boards" />
-			<fileset dir="${web.dir}/html/themes/${theme.name}/images/portlet" />
-			<fileset dir="${web.dir}/html/themes/${theme.name}/images/progress_bar" />
-			<fileset dir="${web.dir}/html/themes/${theme.name}/images/shadow" />
-			<fileset dir="${web.dir}/html/themes/${theme.name}/images/shopping" />
-			<fileset dir="${web.dir}/html/themes/${theme.name}/images/trees" />
+			<fileset
+				dir="${web.dir}/html/themes/${theme.name}/images"
+				excludes="**/thumbnail.gif,**/custom/**,**/flash/**"
+			/>
 		</delete>
 	</target>
 
@@ -107,15 +49,26 @@
 	</target>
 
 	<target name="build-common-images">
-		<antcall target="copy-images">
+		<antcall target="build-common-images-theme">
 			<param name="theme.name" value="brochure" />
 		</antcall>
-		<antcall target="copy-images">
+
+		<antcall target="build-common-images-theme">
 			<param name="theme.name" value="genesis" />
 		</antcall>
-		<antcall target="copy-images">
+
+		<antcall target="build-common-images-theme">
 			<param name="theme.name" value="velocity" />
 		</antcall>
+	</target>
+
+	<target name="build-common-images-theme">
+		<copy todir="${web.dir}/html/themes/${theme.name}/images">
+			<fileset
+				dir="${web.dir}/html/themes/classic/images"
+				excludes="**/thumbnail.gif,**/custom/**,**/flash/**"
+			/>
+		</copy>
 	</target>
 
 	<target name="build-javascript">
