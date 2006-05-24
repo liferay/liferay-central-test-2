@@ -291,15 +291,18 @@ var DragDrop = {
 		
 		var arrowImg1 = document.createElement("div");
 		arrowImg1.style.width = "100%";
-		arrowImg1.style.backgroundColor = "red";
 		arrowImg1.style.fontSize = "0";
 		arrowImg1.style.position = "absolute";
 		arrowImg1.style.top = "-9px";
-		arrowImg1.style.background = "url(" + themeDisplay.getPathThemeImage() + "/common/forward.gif) scroll no-repeat top left";
+		arrowImg1.style.backgroundImage = "url(" + themeDisplay.getPathThemeImage() + "/common/forward.gif)";
+		arrowImg1.style.backgroundRepeat = "no-repeat";
+		arrowImg1.style.backgroundPosition = "top left";
 		placeHolder.appendChild(arrowImg1);
 		
 		var arrowImg2 = document.createElement("div");
-		arrowImg2.style.background = "url(" + themeDisplay.getPathThemeImage() + "/common/back.gif) scroll no-repeat top right";
+		arrowImg2.style.background = "url(" + themeDisplay.getPathThemeImage() + "/common/back.gif)";
+		arrowImg2.style.backgroundRepeat = "no-repeat";
+		arrowImg2.style.backgroundPosition = "top right";
 		arrowImg2.style.height = "18px";
 		arrowImg1.appendChild(arrowImg2);
 		

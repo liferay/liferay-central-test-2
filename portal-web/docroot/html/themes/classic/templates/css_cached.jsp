@@ -488,6 +488,10 @@ FONT.bg {
 	background-color: <%= colorScheme.getPortletSectionBodyBg() %>;
 }
 
+#portlet-place-holder DIV {
+	background-color: <%= colorScheme.getPortletMenuBg() %>;
+}
+
 .portlet-loading {
 	background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/loading_animation.gif) no-repeat top center;
 	margin-top: 10px;
