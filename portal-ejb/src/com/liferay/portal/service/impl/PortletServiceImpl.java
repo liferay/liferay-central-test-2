@@ -33,6 +33,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.persistence.PortletPK;
 import com.liferay.portal.service.persistence.PortletUtil;
 import com.liferay.portal.service.spring.PortletService;
+import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.EntityResolver;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -710,7 +711,8 @@ public class PortletServiceImpl
 		PortletCategory portletCategory = new PortletCategory();
 
 		if (xml == null) {
-			return portletCategory;
+			xml = ContentUtil.get(
+				"com/liferay/portal/deploy/dependencies/liferay-display.xml");
 		}
 
 		SAXReader reader = new SAXReader(true);
@@ -739,12 +741,14 @@ public class PortletServiceImpl
 			String portletId = portlet.getPortletId();
 
 			if ((servletContextName != null) && (portlet.isWARFile()) &&
-				(portletId.startsWith(servletContextName) &&
+				(portletId.endsWith(
+					Portlet.WAR_SEPARATOR + servletContextName) &&
 				(!portletIds.contains(portletId)))) {
 
 				undefinedPortletIds.add(portletId);
 			}
 			else if ((servletContextName == null) && (!portlet.isWARFile()) &&
+					 (portletId.indexOf(Portlet.WAR_SEPARATOR) == -1) &&
 					 (!portletIds.contains(portletId))) {
 
 				undefinedPortletIds.add(portletId);
