@@ -33,8 +33,8 @@ import com.liferay.portal.service.spring.PortletServiceUtil;
 import com.liferay.portal.servlet.FriendlyURLServlet;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.BrowserSniffer;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
@@ -207,15 +207,19 @@ public class LayoutCacheFilter implements Filter {
 
 		String languageId = LanguageUtil.getLanguageId(req);
 
-		// The cache must be unique per browser because some browsers do not
-		// support gzip compression, etc.
+		// Browser type
 
-		String userAgent = req.getHeader(HttpHeaders.USER_AGENT);
+		boolean isIe = BrowserSniffer.is_ie(req);
+
+		// Gzip compression
+
+		boolean acceptsGzip = BrowserSniffer.acceptsGzip(req);
 
 		// Cache key
 
 		String key =
-			url + StringPool.POUND + languageId + StringPool.POUND + userAgent;
+			url + StringPool.POUND + languageId + StringPool.POUND + isIe +
+				StringPool.POUND + acceptsGzip;
 
 		return key.trim().toUpperCase();
 	}

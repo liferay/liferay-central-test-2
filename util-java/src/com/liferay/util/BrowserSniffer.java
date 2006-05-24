@@ -34,6 +34,19 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class BrowserSniffer {
 
+	public static boolean acceptsGzip(HttpServletRequest req) {
+		String acceptEncoding = req.getHeader(HttpHeaders.ACCEPT_ENCODING);
+
+    	if ((acceptEncoding != null) &&
+    		(acceptEncoding.indexOf(_GZIP) != -1)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public static boolean is_ie(HttpServletRequest req) {
 		if (req == null) {
 			return false;
@@ -273,5 +286,7 @@ public class BrowserSniffer {
 			return false;
 		}
 	}
+
+	private static final String _GZIP = "gzip";
 
 }

@@ -22,6 +22,7 @@
 
 package com.liferay.filters.compression;
 
+import com.liferay.util.BrowserSniffer;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
@@ -98,7 +99,7 @@ public class CompressionFilter implements Filter {
 		String completeURL = Http.getCompleteURL(request);
 
     	if (useCompressionFilter && _isCompress(request) &&
-			!_isInclude(request) && _isGZip(request) &&
+			!_isInclude(request) && BrowserSniffer.acceptsGzip(request) &&
 			!_isAlreadyFiltered(request)) {
 
 			_log.debug("Compressing " + completeURL);
@@ -153,19 +154,6 @@ public class CompressionFilter implements Filter {
 		}
 	}
 
-	private boolean _isGZip(HttpServletRequest req) {
-		String acceptEncoding = req.getHeader(_ACCEPT_ENCODING);
-
-    	if ((acceptEncoding != null) &&
-    		(acceptEncoding.indexOf(_GZIP) != -1)) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
 	private boolean _isInclude(HttpServletRequest req) {
 		String uri = (String)req.getAttribute(_INCLUDE);
 
@@ -177,14 +165,10 @@ public class CompressionFilter implements Filter {
 		}
 	}
 
-	private static final String _ACCEPT_ENCODING = "Accept-Encoding";
-
 	private static final String _ALREADY_FILTERED =
 		CompressionFilter.class + "_ALREADY_FILTERED";
 
 	private static final String _COMPRESS = "compress";
-
-	private static final String _GZIP = "gzip";
 
 	private static final String _INCLUDE = "javax.servlet.include.request_uri";
 
