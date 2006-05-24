@@ -25,6 +25,7 @@ package com.liferay.portlet.portletconfiguration.action;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -33,7 +34,9 @@ import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.portal.service.spring.PermissionServiceUtil;
 import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
@@ -124,48 +127,46 @@ public class EditPermissionsAction extends PortletAction {
 			selResource = modelResource;
 		}
 
-		if (selResource.equals(Group.class.getName())) {
-			if (!GroupPermission.contains(
-					permissionChecker, resourcePrimKey,
-					ActionKeys.PERMISSIONS)) {
-
-				SessionErrors.add(req, PrincipalException.class.getName());
-
-				setForward(req, "portlet.portlet_configuration.error");
+		try {
+			if (selResource.equals(Group.class.getName())) {
+				GroupPermission.check(
+					permissionChecker, resourcePrimKey, ActionKeys.PERMISSIONS);
 			}
-		}
-		else if (selResource.equals(Layout.class.getName())) {
-			String layoutGroupId = StringUtil.split(resourcePrimKey, ".")[1];
+			else if (selResource.equals(Layout.class.getName())) {
+				String layoutGroupId =
+					StringUtil.split(resourcePrimKey, ".")[1];
 
-			layoutGroupId = StringUtil.replace(layoutGroupId, "}", "");
+				layoutGroupId = StringUtil.replace(layoutGroupId, "}", "");
 
-			if (!GroupPermission.contains(
+				GroupPermission.check(
 					permissionChecker, layoutGroupId,
-					ActionKeys.MANAGE_LAYOUTS)) {
-
-				SessionErrors.add(req, PrincipalException.class.getName());
-
-				setForward(req, "portlet.portlet_configuration.error");
+					ActionKeys.MANAGE_LAYOUTS);
 			}
-		}
-		else if (selResource.equals(User.class.getName())) {
-			User user = UserLocalServiceUtil.getUserById(resourcePrimKey);
+			else if (selResource.equals(User.class.getName())) {
+				User user = UserLocalServiceUtil.getUserById(resourcePrimKey);
 
-			if (!UserPermission.contains(
+				UserPermission.check(
 					permissionChecker, resourcePrimKey,
 					user.getOrganization().getOrganizationId(),
 					user.getLocation().getOrganizationId(),
-					ActionKeys.PERMISSIONS)) {
+					ActionKeys.PERMISSIONS);
+			}
+			else if (resourcePrimKey.startsWith(ownerId)) {
+				if (!permissionChecker.hasPermission(
+						groupId, selResource, resourcePrimKey,
+						ActionKeys.CONFIGURATION)) {
 
-				SessionErrors.add(req, PrincipalException.class.getName());
+					throw new PrincipalException();
+				}
+			}
+			else if (!permissionChecker.hasPermission(
+						groupId, selResource, resourcePrimKey,
+						ActionKeys.PERMISSIONS)) {
 
-				setForward(req, "portlet.portlet_configuration.error");
+				throw new PrincipalException();
 			}
 		}
-		else if (!permissionChecker.hasPermission(
-					groupId, selResource, resourcePrimKey,
-					ActionKeys.PERMISSIONS)) {
-
+		catch (PrincipalException pe) {
 			SessionErrors.add(req, PrincipalException.class.getName());
 
 			setForward(req, "portlet.portlet_configuration.error");
@@ -194,6 +195,15 @@ public class EditPermissionsAction extends PortletAction {
 
 		PermissionServiceUtil.setGroupPermissions(
 			groupId, actionIds, resourceId);
+
+		if (!Layout.isPrivateLayout(layout.getOwnerId())) {
+			Resource resource =
+				ResourceLocalServiceUtil.getResource(resourceId);
+
+			if (resource.getPrimKey().startsWith(layout.getOwnerId())) {
+				LayoutCacheUtil.clearCache(layout.getCompanyId());
+			}
+		}
 	}
 
 	protected void updateOrganizationPermissions(ActionRequest req)

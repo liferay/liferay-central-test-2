@@ -200,6 +200,12 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 		}
 	}
 
+	public Resource getResource(String resourceId)
+		throws PortalException, SystemException {
+
+		return ResourceUtil.findByPrimaryKey(resourceId);
+	}
+
 	public Resource getResource(
 			String companyId, String name, String typeId, String scope,
 			String primKey)

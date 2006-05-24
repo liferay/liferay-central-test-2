@@ -136,6 +136,26 @@ public class ResourceLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Resource getResource(
+		java.lang.String resourceId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+			return resourceLocalService.getResource(resourceId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static com.liferay.portal.model.Resource getResource(
 		java.lang.String companyId, java.lang.String name,
 		java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey)
