@@ -503,23 +503,6 @@ public class ServicePreAction extends Action {
 			layout.getTypeSettings());
 	}
 
-	/*protected void checkLayoutResource(Layout layout)
-		throws PortalException, SystemException {
-
-		try {
-			ResourceLocalServiceUtil.getResource(
-				layout.getCompanyId(), Layout.class.getName(),
-				Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
-				layout.getPrimaryKey().toString());
-		}
-		catch (NoSuchResourceException nsre) {
-			ResourceLocalServiceUtil.addResources(
-				layout.getCompanyId(), layout.getGroupId(),
-				null, Layout.class.getName(), layout.getPrimaryKey().toString(),
-				false, true, true);
-		}
-	}*/
-
 	protected List checkLayoutsPermissions(
 			Layout layout, List layouts, PermissionChecker permissionChecker,
 			HttpServletRequest req)
