@@ -260,7 +260,7 @@ public class ServicePreAction extends Action {
 					layout = LayoutLocalServiceUtil.getLayout(
 						layoutId, ownerId);
 
-					if (!isLayoutViewable(user, ownerId)) {
+					if (!isViewableCommunity(user, ownerId)) {
 						layout = null;
 					}
 					else {
@@ -279,8 +279,11 @@ public class ServicePreAction extends Action {
 				layouts = (List)defaultLayout[1];
 			}
 
-			layouts = checkLayoutsPermissions(
+			Object[] viewableLayouts = getViewableLayouts(
 				layout, layouts, permissionChecker, req);
+
+			layout = (Layout)viewableLayouts[0];
+			layouts = (List)viewableLayouts[1];
 
 			if (layout != null) {
 				plid = layout.getPlid();
@@ -503,50 +506,6 @@ public class ServicePreAction extends Action {
 			layout.getTypeSettings());
 	}
 
-	protected List checkLayoutsPermissions(
-			Layout layout, List layouts, PermissionChecker permissionChecker,
-			HttpServletRequest req)
-		throws PortalException, SystemException {
-
-		if ((layouts != null) && (layouts.size() > 0)) {
-			boolean replaceLayout = true;
-
-			if (LayoutPermission.contains(
-					permissionChecker, layout, ActionKeys.VIEW)) {
-
-				replaceLayout = false;
-			}
-
-			List accessibleLayouts = new ArrayList();
-
-			for (int i = 0; i < layouts.size(); i++) {
-				Layout curLayout = (Layout)layouts.get(i);
-
-				if (LayoutPermission.contains(
-						permissionChecker, curLayout, ActionKeys.VIEW)) {
-
-					if ((accessibleLayouts.size() == 0) && replaceLayout) {
-						layout = curLayout;
-					}
-
-					accessibleLayouts.add(curLayout);
-				}
-			}
-
-			if (accessibleLayouts.size() == 0) {
-				layouts = null;
-
-				SessionErrors.add(
-					req, LayoutPermissionException.class.getName());
-			}
-			else {
-				layouts = accessibleLayouts;
-			}
-		}
-
-		return layouts;
-	}
-
 	protected void deleteDefaultLayouts(User user)
 		throws PortalException, SystemException {
 
@@ -721,7 +680,51 @@ public class ServicePreAction extends Action {
 		return new Object[] {layout, layouts};
 	}
 
-	protected boolean isLayoutViewable(User user, String ownerId)
+	protected Object[] getViewableLayouts(
+			Layout layout, List layouts, PermissionChecker permissionChecker,
+			HttpServletRequest req)
+		throws PortalException, SystemException {
+
+		if ((layouts != null) && (layouts.size() > 0)) {
+			boolean replaceLayout = true;
+
+			if (LayoutPermission.contains(
+					permissionChecker, layout, ActionKeys.VIEW)) {
+
+				replaceLayout = false;
+			}
+
+			List accessibleLayouts = new ArrayList();
+
+			for (int i = 0; i < layouts.size(); i++) {
+				Layout curLayout = (Layout)layouts.get(i);
+
+				if (LayoutPermission.contains(
+						permissionChecker, curLayout, ActionKeys.VIEW)) {
+
+					if ((accessibleLayouts.size() == 0) && replaceLayout) {
+						layout = curLayout;
+					}
+
+					accessibleLayouts.add(curLayout);
+				}
+			}
+
+			if (accessibleLayouts.size() == 0) {
+				layouts = null;
+
+				SessionErrors.add(
+					req, LayoutPermissionException.class.getName());
+			}
+			else {
+				layouts = accessibleLayouts;
+			}
+		}
+
+		return new Object[] {layout, layouts};
+	}
+
+	protected boolean isViewableCommunity(User user, String ownerId)
 		throws PortalException, SystemException {
 
 		// Public layouts are always viewable

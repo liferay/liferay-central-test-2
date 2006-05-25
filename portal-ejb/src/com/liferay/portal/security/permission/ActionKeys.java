@@ -97,6 +97,8 @@ public class ActionKeys {
 
 	public static final String EXPIRE = "EXPIRE";
 
+	public static final String HELP = "HELP";
+
 	public static final String MANAGE_COUPONS = "MANAGE_COUPONS";
 
 	public static final String MANAGE_LAYOUTS = "MANAGE_LAYOUTS";
@@ -108,6 +110,8 @@ public class ActionKeys {
 	public static final String PERMISSIONS_USER = "PERMISSIONS_USER";
 
 	public static final String PREFERENCES = "PREFERENCES";
+
+	public static final String PRINT = "PRINT";
 
 	public static final String SUBSCRIBE = "SUBSCRIBE";
 
