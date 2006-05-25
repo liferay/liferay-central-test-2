@@ -163,13 +163,15 @@ boolean showMoveIcon = !stateMax;
 boolean showPrintIcon = portlet.hasPortletMode(renderResponseImpl.getContentType(), LiferayPortletMode.PRINT);
 
 if (!portletDisplay.getId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
-	if (PortletPermission.contains(permissionChecker, plid, rootPortletId, ActionKeys.CONFIGURATION)) {
+	if (PortletPermission.contains(permissionChecker, plid, rootPortletId, ActionKeys.CONFIGURATION) ||
+		GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS)) {
 		showConfigurationIcon = true;
 	}
 }
 
 if (portlet.hasPortletMode(renderResponseImpl.getContentType(), PortletMode.EDIT)) {
-	if (PortletPermission.contains(permissionChecker, plid, rootPortletId, ActionKeys.PREFERENCES)) {
+	if (PortletPermission.contains(permissionChecker, plid, rootPortletId, ActionKeys.PREFERENCES) ||
+		GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS)) {
 		showEditIcon = true;
 	}
 }

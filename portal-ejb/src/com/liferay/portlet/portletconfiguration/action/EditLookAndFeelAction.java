@@ -22,21 +22,6 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
-import com.liferay.portal.model.Portlet;
-import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.PortletServiceUtil;
-import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactory;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.PropertiesUtil;
-import com.liferay.util.StringPool;
-import com.liferay.util.Validator;
-import com.liferay.util.servlet.SessionErrors;
-
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -50,7 +35,6 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-
 import javax.servlet.ServletContext;
 
 import org.apache.commons.beanutils.DynaClass;
@@ -59,6 +43,25 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.DynaActionForm;
 import org.apache.struts.util.LabelValueBean;
+
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.permission.GroupPermission;
+import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.util.ParamUtil;
+import com.liferay.util.PropertiesUtil;
+import com.liferay.util.StringPool;
+import com.liferay.util.Validator;
+import com.liferay.util.servlet.SessionErrors;
 
 /**
  * <a href="EditLookAndFeelAction.java.html"><b><i>View Source</i></b></a>
@@ -182,7 +185,31 @@ public class EditLookAndFeelAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		String ownerId = Layout.getOwnerId(themeDisplay.getPlid());
+		String groupId = Layout.getGroupId(ownerId);
+		
 		String portletResource = ParamUtil.getString(req, "portletResource");
+		String resourcePrimKey = themeDisplay.getPlid() + Portlet.LAYOUT_SEPARATOR + portletResource;
+		
+		try {
+			if (!permissionChecker.hasPermission(
+					groupId, portletResource, resourcePrimKey,
+					ActionKeys.CONFIGURATION) &&
+				!GroupPermission.contains(
+					permissionChecker, groupId, 
+					ActionKeys.MANAGE_LAYOUTS)) {
+
+				throw new PrincipalException();
+			}
+		}
+		catch (PrincipalException pe) {
+			SessionErrors.add(req, PrincipalException.class.getName());
+
+			setForward(req, "portlet.portlet_configuration.error");
+		}
 
 		PortletPreferences portletSetup =
 			PortletPreferencesFactory.getPortletSetup(

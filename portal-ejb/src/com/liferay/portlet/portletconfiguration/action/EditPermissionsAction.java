@@ -156,7 +156,10 @@ public class EditPermissionsAction extends PortletAction {
 
 				if (!permissionChecker.hasPermission(
 						groupId, selResource, resourcePrimKey,
-						ActionKeys.CONFIGURATION)) {
+						ActionKeys.CONFIGURATION) &&
+					!GroupPermission.contains(
+						permissionChecker, groupId, 
+						ActionKeys.MANAGE_LAYOUTS)) {
 
 					throw new PrincipalException();
 				}

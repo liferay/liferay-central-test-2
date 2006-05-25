@@ -1069,7 +1069,9 @@
 
 		<!-- Portlet Configuration -->
 
-		<action path="/portlet_configuration/edit_configuration" type="com.liferay.portlet.portletconfiguration.action.EditConfigurationAction" />
+		<action path="/portlet_configuration/edit_configuration" type="com.liferay.portlet.portletconfiguration.action.EditConfigurationAction">
+			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />
+		</action>
 
 		<action path="/portlet_configuration/edit_look_and_feel" type="com.liferay.portlet.portletconfiguration.action.EditLookAndFeelAction" name="portletConfigurationLookAndFeelForm">
 			<forward name="portlet.portlet_configuration.edit_look_and_feel" path="portlet.portlet_configuration.edit_look_and_feel" />

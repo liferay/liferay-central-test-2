@@ -22,13 +22,19 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.spring.PortletServiceUtil;
 import com.liferay.portal.struts.DynamicPortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
@@ -62,6 +68,38 @@ public class EditConfigurationAction extends DynamicPortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		String ownerId = Layout.getOwnerId(themeDisplay.getPlid());
+		String groupId = Layout.getGroupId(ownerId);
+		
+		String portletResource = ParamUtil.getString(req, "portletResource");
+		String resourcePrimKey = themeDisplay.getPlid() + Portlet.LAYOUT_SEPARATOR + portletResource;
+		
+		try {
+			if (!permissionChecker.hasPermission(
+					groupId, portletResource, resourcePrimKey,
+					ActionKeys.CONFIGURATION) &&
+				!GroupPermission.contains(
+					permissionChecker, groupId, 
+					ActionKeys.MANAGE_LAYOUTS)) {
+
+				throw new PrincipalException();
+			}
+		}
+		catch (PrincipalException pe) {
+			SessionErrors.add(req, PrincipalException.class.getName());
+
+			setForward(req, "portlet.portlet_configuration.error");
+			
+			res.setTitle(
+				PortalUtil.getPortletTitle(portlet, ctx, themeDisplay.getLocale()));
+
+			return mapping.findForward(getForward(
+					req, "portlet.portlet_configuration.edit_configuration"));
+		}
+		
 		res.setTitle(
 			PortalUtil.getPortletTitle(portlet, ctx, themeDisplay.getLocale()));
 
