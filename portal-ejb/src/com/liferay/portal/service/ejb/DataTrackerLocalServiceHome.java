@@ -22,18 +22,15 @@
 
 package com.liferay.portal.service.ejb;
 
-import java.rmi.RemoteException;
-
 import javax.ejb.CreateException;
-import javax.ejb.EJBHome;
+import javax.ejb.EJBLocalHome;
 
 /**
- * <a href="DataTrackerServiceHome.java.html"><b><i>View Source</i></b></a>
+ * <a href="DataTrackerLocalServiceHome.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public interface DataTrackerServiceHome extends EJBHome {
-	public DataTrackerServiceEJB create()
-		throws CreateException, RemoteException;
+public interface DataTrackerLocalServiceHome extends EJBLocalHome {
+	public DataTrackerLocalServiceEJB create() throws CreateException;
 }

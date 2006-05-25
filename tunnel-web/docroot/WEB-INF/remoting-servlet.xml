@@ -62,18 +62,6 @@
 		<property name="service" ref="com.liferay.portal.service.spring.CountryService.professional" />
 		<property name="serviceInterface" value="com.liferay.portal.service.spring.CountryService" />
 	</bean>
-	<bean name="/com_liferay_portal_service_spring_DataTrackerService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.spring.DataTrackerService.professional" />
-		<property name="serviceInterface" value="com.liferay.portal.service.spring.DataTrackerService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_DataTrackerService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.spring.DataTrackerService.professional" />
-		<property name="serviceInterface" value="com.liferay.portal.service.spring.DataTrackerService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_DataTrackerService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.spring.DataTrackerService.professional" />
-		<property name="serviceInterface" value="com.liferay.portal.service.spring.DataTrackerService" />
-	</bean>
 	<bean name="/com_liferay_portal_service_spring_EmailAddressService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.spring.EmailAddressService.professional" />
 		<property name="serviceInterface" value="com.liferay.portal.service.spring.EmailAddressService" />
@@ -265,30 +253,6 @@
 	<bean name="/com_liferay_portal_service_spring_UserService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.spring.UserService.professional" />
 		<property name="serviceInterface" value="com.liferay.portal.service.spring.UserService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_UserTrackerService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.spring.UserTrackerService.professional" />
-		<property name="serviceInterface" value="com.liferay.portal.service.spring.UserTrackerService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_UserTrackerService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.spring.UserTrackerService.professional" />
-		<property name="serviceInterface" value="com.liferay.portal.service.spring.UserTrackerService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_UserTrackerService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.spring.UserTrackerService.professional" />
-		<property name="serviceInterface" value="com.liferay.portal.service.spring.UserTrackerService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_UserTrackerPathService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.spring.UserTrackerPathService.professional" />
-		<property name="serviceInterface" value="com.liferay.portal.service.spring.UserTrackerPathService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_UserTrackerPathService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.spring.UserTrackerPathService.professional" />
-		<property name="serviceInterface" value="com.liferay.portal.service.spring.UserTrackerPathService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_UserTrackerPathService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.spring.UserTrackerPathService.professional" />
-		<property name="serviceInterface" value="com.liferay.portal.service.spring.UserTrackerPathService" />
 	</bean>
 	<bean name="/com_liferay_portal_service_spring_WebsiteService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.spring.WebsiteService.professional" />

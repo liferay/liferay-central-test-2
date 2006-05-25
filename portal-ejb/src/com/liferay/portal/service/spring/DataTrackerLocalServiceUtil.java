@@ -22,29 +22,11 @@
 
 package com.liferay.portal.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
- * <a href="UserTrackerServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="DataTrackerLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class UserTrackerServiceFactory {
-	public static final String CLASS_NAME = UserTrackerServiceFactory.class.getName();
-
-	public static UserTrackerService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		UserTrackerServiceFactory factory = (UserTrackerServiceFactory)ctx.getBean(CLASS_NAME);
-
-		return factory._service;
-	}
-
-	public void setService(UserTrackerService service) {
-		_service = service;
-	}
-
-	private UserTrackerService _service;
+public class DataTrackerLocalServiceUtil {
 }

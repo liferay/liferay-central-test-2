@@ -20,17 +20,15 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.http;
+package com.liferay.portal.service.impl;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.spring.DataTrackerLocalService;
 
 /**
- * <a href="DataTrackerServiceHttp.java.html"><b><i>View Source</i></b></a>
+ * <a href="DataTrackerLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class DataTrackerServiceHttp {
-	private static Log _log = LogFactory.getLog(DataTrackerServiceHttp.class);
+public class DataTrackerLocalServiceImpl implements DataTrackerLocalService {
 }

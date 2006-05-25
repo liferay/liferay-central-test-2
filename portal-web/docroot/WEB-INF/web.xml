@@ -299,6 +299,13 @@
 		<ejb-link>com_liferay_portal_service_ejb_ContactLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portal.service.ejb.DataTrackerLocalServiceHome</local-home>
+		<local>com.liferay.portal.service.ejb.DataTrackerLocalServiceEJB</local>
+		<ejb-link>com_liferay_portal_service_ejb_DataTrackerLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
 		<local-home>com.liferay.portal.service.ejb.EmailAddressLocalServiceHome</local-home>

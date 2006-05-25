@@ -23,17 +23,10 @@
 package com.liferay.portal.service.spring;
 
 /**
- * <a href="UserTrackerService.java.html"><b><i>View Source</i></b></a>
+ * <a href="DataTrackerLocalService.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public interface UserTrackerService {
-	public void deleteUserTracker(java.lang.String userTrackerId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public java.util.List getUserTrackers(int begin, int end)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
+public interface DataTrackerLocalService {
 }

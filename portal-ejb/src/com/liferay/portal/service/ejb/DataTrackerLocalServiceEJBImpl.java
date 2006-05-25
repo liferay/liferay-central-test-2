@@ -20,33 +20,53 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.spring;
+package com.liferay.portal.service.ejb;
+
+import com.liferay.portal.service.spring.DataTrackerLocalService;
+import com.liferay.portal.spring.util.SpringUtil;
+
+import org.springframework.context.ApplicationContext;
+
+import javax.ejb.CreateException;
+import javax.ejb.SessionBean;
+import javax.ejb.SessionContext;
 
 /**
- * <a href="UserTrackerPathServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="DataTrackerLocalServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class UserTrackerPathServiceUtil {
-	public static java.util.List getUserTrackerPaths(
-		java.lang.String userTrackerId, int begin, int end)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			UserTrackerPathService userTrackerPathService = UserTrackerPathServiceFactory.getService();
+public class DataTrackerLocalServiceEJBImpl implements DataTrackerLocalService,
+	SessionBean {
+	public static final String CLASS_NAME = DataTrackerLocalService.class.getName() +
+		".transaction";
 
-			return userTrackerPathService.getUserTrackerPaths(userTrackerId,
-				begin, end);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+	public static DataTrackerLocalService getService() {
+		ApplicationContext ctx = SpringUtil.getContext();
+
+		return (DataTrackerLocalService)ctx.getBean(CLASS_NAME);
 	}
+
+	public void ejbCreate() throws CreateException {
+	}
+
+	public void ejbRemove() {
+	}
+
+	public void ejbActivate() {
+	}
+
+	public void ejbPassivate() {
+	}
+
+	public SessionContext getSessionContext() {
+		return _sc;
+	}
+
+	public void setSessionContext(SessionContext sc) {
+		_sc = sc;
+	}
+
+	private SessionContext _sc;
 }

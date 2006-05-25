@@ -295,21 +295,21 @@
 			<ref bean="com.liferay.portal.service.persistence.CountryPersistence" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.spring.DataTrackerService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portal.service.spring.DataTrackerLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
 		<property name="businessInterface">
-			<value>com.liferay.portal.service.spring.DataTrackerService</value>
+			<value>com.liferay.portal.service.spring.DataTrackerLocalService</value>
 		</property>
 		<property name="jndiName">
-			<value>com_liferay_portal_service_ejb_DataTrackerServiceEJB</value>
+			<value>ejb/liferay/DataTrackerLocalServiceHome</value>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.spring.DataTrackerService.professional" class="com.liferay.portal.service.impl.DataTrackerServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.spring.DataTrackerService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portal.service.spring.DataTrackerLocalService.professional" class="com.liferay.portal.service.impl.DataTrackerLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.DataTrackerLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portal.service.spring.DataTrackerService.professional" />
+			<ref bean="com.liferay.portal.service.spring.DataTrackerLocalService.professional" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -317,9 +317,9 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.spring.DataTrackerServiceFactory" class="com.liferay.portal.service.spring.DataTrackerServiceFactory" lazy-init="true">
+	<bean id="com.liferay.portal.service.spring.DataTrackerLocalServiceFactory" class="com.liferay.portal.service.spring.DataTrackerLocalServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.portal.service.spring.DataTrackerService.enterprise" />
+			<ref bean="com.liferay.portal.service.spring.DataTrackerLocalService.enterprise" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.DataTrackerPersistence" class="com.liferay.portal.service.persistence.DataTrackerPersistence" lazy-init="true">
@@ -1544,33 +1544,6 @@
 			<ref bean="com.liferay.portal.service.spring.UserTrackerLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.spring.UserTrackerService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
-		<property name="businessInterface">
-			<value>com.liferay.portal.service.spring.UserTrackerService</value>
-		</property>
-		<property name="jndiName">
-			<value>com_liferay_portal_service_ejb_UserTrackerServiceEJB</value>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.spring.UserTrackerService.professional" class="com.liferay.portal.service.impl.UserTrackerServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.spring.UserTrackerService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.spring.UserTrackerService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.spring.UserTrackerServiceFactory" class="com.liferay.portal.service.spring.UserTrackerServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portal.service.spring.UserTrackerService.enterprise" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserTrackerPersistence" class="com.liferay.portal.service.persistence.UserTrackerPersistence" lazy-init="true">
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
@@ -1606,33 +1579,6 @@
 	<bean id="com.liferay.portal.service.spring.UserTrackerPathLocalServiceFactory" class="com.liferay.portal.service.spring.UserTrackerPathLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.spring.UserTrackerPathLocalService.enterprise" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.spring.UserTrackerPathService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
-		<property name="businessInterface">
-			<value>com.liferay.portal.service.spring.UserTrackerPathService</value>
-		</property>
-		<property name="jndiName">
-			<value>com_liferay_portal_service_ejb_UserTrackerPathServiceEJB</value>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.spring.UserTrackerPathService.professional" class="com.liferay.portal.service.impl.UserTrackerPathServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.spring.UserTrackerPathService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.spring.UserTrackerPathService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.spring.UserTrackerPathServiceFactory" class="com.liferay.portal.service.spring.UserTrackerPathServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portal.service.spring.UserTrackerPathService.enterprise" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserTrackerPathPersistence" class="com.liferay.portal.service.persistence.UserTrackerPathPersistence" lazy-init="true">

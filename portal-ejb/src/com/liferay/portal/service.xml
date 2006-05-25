@@ -176,7 +176,7 @@
 			<finder-column name="active" />
 		</finder>
 	</entity>
-	<entity name="DataTracker" local-service="false" remote-service="true">
+	<entity name="DataTracker" local-service="true" remote-service="remote">
 
 		<!-- PK fields -->
 
@@ -993,7 +993,7 @@
 			<finder-column name="userId" />
 		</finder>
 	</entity>
-	<entity name="UserTracker" local-service="true" remote-service="true">
+	<entity name="UserTracker" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
@@ -1020,7 +1020,7 @@
 			<finder-column name="userId" />
 		</finder>
 	</entity>
-	<entity name="UserTrackerPath" local-service="true" remote-service="true">
+	<entity name="UserTrackerPath" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 

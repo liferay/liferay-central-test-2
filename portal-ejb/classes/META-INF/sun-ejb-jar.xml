@@ -94,8 +94,8 @@
 			</bean-pool>
 		</ejb>
 		<ejb>
-			<ejb-name>com_liferay_portal_service_ejb_DataTrackerServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portal_service_ejb_DataTrackerServiceEJB</jndi-name>
+			<ejb-name>com_liferay_portal_service_ejb_DataTrackerLocalServiceEJB</ejb-name>
+			<jndi-name>ejb/liferay/DataTrackerLocalServiceHome</jndi-name>
 			<bean-pool>
 				<steady-pool-size>0</steady-pool-size>
 				<resize-quantity>60</resize-quantity>
@@ -464,28 +464,8 @@
 			</bean-pool>
 		</ejb>
 		<ejb>
-			<ejb-name>com_liferay_portal_service_ejb_UserTrackerServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portal_service_ejb_UserTrackerServiceEJB</jndi-name>
-			<bean-pool>
-				<steady-pool-size>0</steady-pool-size>
-				<resize-quantity>60</resize-quantity>
-				<max-pool-size>60</max-pool-size>
-				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
-			</bean-pool>
-		</ejb>
-		<ejb>
 			<ejb-name>com_liferay_portal_service_ejb_UserTrackerPathLocalServiceEJB</ejb-name>
 			<jndi-name>ejb/liferay/UserTrackerPathLocalServiceHome</jndi-name>
-			<bean-pool>
-				<steady-pool-size>0</steady-pool-size>
-				<resize-quantity>60</resize-quantity>
-				<max-pool-size>60</max-pool-size>
-				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
-			</bean-pool>
-		</ejb>
-		<ejb>
-			<ejb-name>com_liferay_portal_service_ejb_UserTrackerPathServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portal_service_ejb_UserTrackerPathServiceEJB</jndi-name>
 			<bean-pool>
 				<steady-pool-size>0</steady-pool-size>
 				<resize-quantity>60</resize-quantity>

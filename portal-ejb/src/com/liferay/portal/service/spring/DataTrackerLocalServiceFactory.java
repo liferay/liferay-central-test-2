@@ -22,47 +22,29 @@
 
 package com.liferay.portal.service.spring;
 
+import com.liferay.portal.spring.util.SpringUtil;
+
+import org.springframework.context.ApplicationContext;
+
 /**
- * <a href="UserTrackerServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="DataTrackerLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class UserTrackerServiceUtil {
-	public static void deleteUserTracker(java.lang.String userTrackerId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			UserTrackerService userTrackerService = UserTrackerServiceFactory.getService();
-			userTrackerService.deleteUserTracker(userTrackerId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+public class DataTrackerLocalServiceFactory {
+	public static final String CLASS_NAME = DataTrackerLocalServiceFactory.class.getName();
+
+	public static DataTrackerLocalService getService() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		DataTrackerLocalServiceFactory factory = (DataTrackerLocalServiceFactory)ctx.getBean(CLASS_NAME);
+
+		return factory._service;
 	}
 
-	public static java.util.List getUserTrackers(int begin, int end)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			UserTrackerService userTrackerService = UserTrackerServiceFactory.getService();
-
-			return userTrackerService.getUserTrackers(begin, end);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+	public void setService(DataTrackerLocalService service) {
+		_service = service;
 	}
+
+	private DataTrackerLocalService _service;
 }

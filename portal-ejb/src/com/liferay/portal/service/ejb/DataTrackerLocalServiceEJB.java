@@ -20,16 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.impl;
+package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.DataTrackerService;
+import com.liferay.portal.service.spring.DataTrackerLocalService;
+
+import javax.ejb.EJBLocalObject;
 
 /**
- * <a href="DataTrackerServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="DataTrackerLocalServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class DataTrackerServiceImpl extends PrincipalBean
-	implements DataTrackerService {
+public interface DataTrackerLocalServiceEJB extends EJBLocalObject,
+	DataTrackerLocalService {
 }
