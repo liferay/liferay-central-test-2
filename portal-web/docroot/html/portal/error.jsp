@@ -76,3 +76,9 @@ if (company.getAuthType().equals(Company.AUTH_TYPE_ID)) {
 
 	<%= LanguageUtil.format(pageContext, "if-you-are-not-x-logout-and-try-again", user.getFullName(), false) %>
 </c:if>
+
+<c:if test="<%= SessionErrors.contains(request, LayoutPermissionException.class.getName()) %>">
+	<span class="portlet-msg-error">
+	<%= LanguageUtil.get(pageContext, "you-do-not-have-permission-to-view-this-page") %>
+	</span>
+</c:if>

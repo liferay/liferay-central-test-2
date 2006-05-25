@@ -22,7 +22,25 @@
 
 package com.liferay.portal.events;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
+
+import javax.portlet.PortletMode;
+import javax.portlet.PortletURL;
+import javax.portlet.WindowState;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.Globals;
+
+import com.liferay.portal.LayoutPermissionException;
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -32,6 +50,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -40,8 +59,10 @@ import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.permission.GroupPermission;
+import com.liferay.portal.service.permission.LayoutPermission;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
+import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.ActionException;
@@ -65,22 +86,7 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-
-import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
-
-import javax.portlet.PortletMode;
-import javax.portlet.PortletURL;
-import javax.portlet.WindowState;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.struts.Globals;
+import com.liferay.util.servlet.SessionErrors;
 
 /**
  * <a href="ServicePreAction.java.html"><b><i>View Source</i></b></a>
@@ -275,6 +281,39 @@ public class ServicePreAction extends Action {
 				layouts = (List)defaultLayout[1];
 			}
 
+			if (layouts != null && layouts.size() > 0) {
+				boolean isReplaceLayout = true;
+				
+				checkResource(layout, company.getCompanyId());
+				
+				if (LayoutPermission.contains(permissionChecker, layout.getLayoutId(), layout.getOwnerId(), ActionKeys.VIEW) || !signedIn) {
+					isReplaceLayout = false;
+				}
+				
+				List accessibleLayouts = new ArrayList();
+				
+				for (int i = 0; i < layouts.size(); i++) {
+					Layout curLayout = (Layout)layouts.get(i);
+	
+					checkResource(curLayout, company.getCompanyId());
+					
+					if (LayoutPermission.contains(permissionChecker, curLayout.getLayoutId(), curLayout.getOwnerId(), ActionKeys.VIEW) || !signedIn) {
+						if (accessibleLayouts.size() == 0 && isReplaceLayout) {
+							layout = curLayout;
+						}
+						
+						accessibleLayouts.add(curLayout);
+					}
+				}
+				
+				if (accessibleLayouts.size() == 0 && signedIn) {
+					layouts = null;
+					SessionErrors.add(req, LayoutPermissionException.class.getName());
+				} else {
+					layouts = accessibleLayouts;
+				}
+			}
+			
 			if (layout != null) {
 				plid = layout.getPlid();
 
@@ -384,18 +423,25 @@ public class ServicePreAction extends Action {
 			themeDisplay.setURLHome(protocol + company.getHomeURL());
 
 			if (layout != null) {
-				if (GroupPermission.contains(
-						permissionChecker, portletGroupId,
-						ActionKeys.MANAGE_LAYOUTS)) {
-
+				boolean hasManageLayoutsPermission = GroupPermission.contains(
+														permissionChecker, portletGroupId,
+														ActionKeys.MANAGE_LAYOUTS);
+				boolean hasUpdateLayoutPermission = LayoutPermission.contains(
+														permissionChecker, layoutId, 
+														ownerId, ActionKeys.UPDATE);
+				
+				if (hasManageLayoutsPermission || hasUpdateLayoutPermission) {
 					themeDisplay.setShowAddContentIcon(true);
-					themeDisplay.setShowPageSettingsIcon(true);
 
 					themeDisplay.setURLAddContent(
-						"LayoutConfiguration.toggle('" +
-							PortletKeys.LAYOUT_CONFIGURATION + "', '" + plid +
-								"', '" + mainPath + "','" +
-									themeDisplay.getPathThemeImage() + "');");
+							"LayoutConfiguration.toggle('" +
+								PortletKeys.LAYOUT_CONFIGURATION + "', '" + plid +
+									"', '" + mainPath + "','" +
+										themeDisplay.getPathThemeImage() + "');");
+				}
+
+				if (hasManageLayoutsPermission) {
+					themeDisplay.setShowPageSettingsIcon(true);
 
 					PortletURL pageSettingsURL = new PortletURLImpl(
 						req, PortletKeys.LAYOUT_MANAGEMENT, plid, false);
@@ -485,6 +531,24 @@ public class ServicePreAction extends Action {
 		LayoutLocalServiceUtil.updateLayout(
 			layout.getLayoutId(), layout.getOwnerId(),
 			layout.getTypeSettings());
+	}
+
+	protected void checkResource(Layout layout, String companyId)
+		throws PortalException, SystemException {
+		
+		try {
+			ResourceLocalServiceUtil.getResource(
+				companyId, Layout.class.getName(), 
+				Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL, 
+				layout.getLayoutId());
+		}
+		catch (NoSuchResourceException nsre) {
+			ResourceLocalServiceUtil.addResources(
+				companyId, layout.getGroupId(), 
+				null, Layout.class.getName(), 
+				layout.getPrimaryKey().toString(), 
+				false, false, false);
+		}
 	}
 
 	protected void deleteDefaultLayouts(User user)

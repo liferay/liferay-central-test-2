@@ -22,6 +22,19 @@
 
 package com.liferay.portal.service.impl;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.LayoutHiddenException;
 import com.liferay.portal.LayoutImportException;
@@ -45,6 +58,7 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.LayoutLocalService;
 import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceUtil;
@@ -57,20 +71,6 @@ import com.liferay.util.Validator;
 import com.liferay.util.xml.XMLFormatter;
 import com.liferay.util.zip.ZipReader;
 import com.liferay.util.zip.ZipWriter;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.StringReader;
-
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="LayoutLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -115,6 +115,12 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		LayoutUtil.update(layout);
 
+		ResourceLocalServiceUtil.addResources(
+			user.getActualCompanyId(), groupId,
+			user.getUserId(), Layout.class.getName(),
+			layout.getPrimaryKey().toString(), false, true,
+			true);
+		
 		LayoutSetLocalServiceUtil.updatePageCount(ownerId);
 
 		return layout;

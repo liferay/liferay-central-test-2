@@ -22,6 +22,7 @@
 
 package com.liferay.portal.struts;
 
+import com.liferay.portal.LayoutPermissionException;
 import com.liferay.portal.PortletActiveException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.RequiredRoleException;
@@ -475,7 +476,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			if (themeDisplay.getLayouts().size() == 0) {
+			if (themeDisplay.getLayouts() == null || themeDisplay.getLayouts().size() == 0) {
 				SessionErrors.add(
 					req, RequiredLayoutException.class.getName());
 
@@ -554,6 +555,12 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			}
 		}
 
+		// Authenticated users must have access to at least one layout
+
+		if (SessionErrors.contains(req, LayoutPermissionException.class.getName())) {
+			return _PATH_PORTAL_ERROR;
+		}
+		
 		return path;
 	}
 

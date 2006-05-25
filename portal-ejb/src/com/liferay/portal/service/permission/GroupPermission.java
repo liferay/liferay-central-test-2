@@ -48,7 +48,7 @@ public class GroupPermission {
 		PermissionChecker permissionChecker, String groupId, String actionId) {
 
 		return permissionChecker.hasPermission(
-			null, Group.class.getName(), groupId, actionId);
+			groupId, Group.class.getName(), groupId, actionId);
 	}
 
 }

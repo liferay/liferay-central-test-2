@@ -62,7 +62,7 @@ if (layoutFamilySet.size() >= depth) {
 
 	StringBuffer sb = new StringBuffer();
 
-	_buildNavigation(depthLevelLayout, layout, layoutFamilySet, themeDisplay, 1, bulletStyle, showTitle, sb);
+	_buildNavigation(depthLevelLayout, layout, layoutFamilySet, themeDisplay, 1, bulletStyle, showTitle, sb, permissionChecker);
 %>
 
 	<%= sb.toString() %>
@@ -72,7 +72,7 @@ if (layoutFamilySet.size() >= depth) {
 %>
 
 <%!
-private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilySet, ThemeDisplay themeDisplay, int layoutLevel, int bulletStyle, boolean showTitle, StringBuffer sb) throws Exception {
+private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilySet, ThemeDisplay themeDisplay, int layoutLevel, int bulletStyle, boolean showTitle, StringBuffer sb, PermissionChecker permissionChecker) throws Exception {
 	List layoutChildren = layout.getChildren();
 
 	if (layoutChildren.size() > 0) {
@@ -116,6 +116,10 @@ private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilyS
 			for (int i = 0; i < layoutChildren.size(); i++) {
 				Layout layoutChild = (Layout)layoutChildren.get(i);
 
+				if (!LayoutPermission.contains(permissionChecker, layoutChild.getLayoutId(), layoutChild.getOwnerId(), ActionKeys.VIEW) && themeDisplay.isSignedIn()) {
+					layoutChild.setHidden(true);
+				}
+
 				if (!layoutChild.isHidden()) {
 					String layoutURL = PortalUtil.getLayoutURL(layoutChild, themeDisplay);
 					String target = PortalUtil.getLayoutTarget(layoutChild);
@@ -131,7 +135,7 @@ private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilyS
 					sb.append("</li>");
 
 					if (layoutFamilySet.contains(layoutChild)) {
-						_buildNavigation(layoutChild, selLayout, layoutFamilySet, themeDisplay, layoutLevel + 1, bulletStyle, showTitle, sb);
+						_buildNavigation(layoutChild, selLayout, layoutFamilySet, themeDisplay, layoutLevel + 1, bulletStyle, showTitle, sb, permissionChecker);
 					}
 				}
 			}
@@ -148,6 +152,10 @@ private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilyS
 
 			for (int i = 0; i < layoutChildren.size(); i++) {
 				Layout layoutChild = (Layout)layoutChildren.get(i);
+
+				if (!LayoutPermission.contains(permissionChecker, layoutChild.getLayoutId(), layoutChild.getOwnerId(), ActionKeys.VIEW) && themeDisplay.isSignedIn()) {
+					layoutChild.setHidden(true);
+				}
 
 				if (!layoutChild.isHidden()) {
 					String layoutURL = PortalUtil.getLayoutURL(layoutChild, themeDisplay);
@@ -206,7 +214,7 @@ private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilyS
 					}
 
 					if (layoutFamilySet.contains(layoutChild)) {
-						_buildNavigation(layoutChild, selLayout, layoutFamilySet, themeDisplay, layoutLevel + 1, bulletStyle, showTitle, sb);
+						_buildNavigation(layoutChild, selLayout, layoutFamilySet, themeDisplay, layoutLevel + 1, bulletStyle, showTitle, sb, permissionChecker);
 					}
 				}
 			}

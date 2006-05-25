@@ -57,7 +57,7 @@ public class LayoutPermission {
 
 			return true;
 		}
-
+		
 		return permissionChecker.hasPermission(
 			groupId, Layout.class.getName(),
 			new LayoutPK(layoutId, ownerId).toString(), actionId);
