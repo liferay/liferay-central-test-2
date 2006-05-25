@@ -151,7 +151,9 @@ public class EditPermissionsAction extends PortletAction {
 					user.getLocation().getOrganizationId(),
 					ActionKeys.PERMISSIONS);
 			}
-			else if (resourcePrimKey.startsWith(ownerId)) {
+			else if (resourcePrimKey.startsWith(
+						themeDisplay.getPlid() + Portlet.LAYOUT_SEPARATOR)) {
+
 				if (!permissionChecker.hasPermission(
 						groupId, selResource, resourcePrimKey,
 						ActionKeys.CONFIGURATION)) {
@@ -200,7 +202,9 @@ public class EditPermissionsAction extends PortletAction {
 			Resource resource =
 				ResourceLocalServiceUtil.getResource(resourceId);
 
-			if (resource.getPrimKey().startsWith(layout.getOwnerId())) {
+			if (resource.getPrimKey().startsWith(
+					layout.getPlid() + Portlet.LAYOUT_SEPARATOR)) {
+
 				LayoutCacheUtil.clearCache(layout.getCompanyId());
 			}
 		}
