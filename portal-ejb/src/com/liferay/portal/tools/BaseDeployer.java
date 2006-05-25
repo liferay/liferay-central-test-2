@@ -26,6 +26,7 @@ import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
+import com.liferay.util.SystemProperties;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
 import com.liferay.util.ant.CopyTask;
@@ -296,7 +297,9 @@ public class BaseDeployer {
 
 		DeleteTask.deleteDirectory(deployDir);
 
-		File tempDir = new File(Time.getTimestamp());
+		File tempDir = new File(
+			SystemProperties.get(SystemProperties.TMP_DIR) + File.separator +
+				Time.getTimestamp());
 
 		ExpandTask.expand(srcFile, tempDir);
 

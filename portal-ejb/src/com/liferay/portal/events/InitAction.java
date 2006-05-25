@@ -133,7 +133,9 @@ public class InitAction extends SimpleAction {
 			if (!repistoryRoot.exists()) {
 				repistoryRoot.mkdirs();
 
-				File tempFile = new File(Time.getTimestamp());
+				File tempFile = new File(
+					SystemProperties.get(SystemProperties.TMP_DIR) +
+						File.separator + Time.getTimestamp());
 
 				String content = StringUtil.read(
 					getClass().getClassLoader(),

@@ -221,8 +221,8 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		Element header = root.addElement("header");
 
-		header.addAttribute("buildNumber", Integer.toString(buildNumber));
-		header.addAttribute("ownerId", ownerId);
+		header.addAttribute("build-number", Integer.toString(buildNumber));
+		header.addAttribute("owner-id", ownerId);
 		header.addAttribute("exportDate", Time.getRFC822());
 		header.addAttribute("themeId", layoutSet.getThemeId());
 		header.addAttribute("colorSchemeId", layoutSet.getColorSchemeId());
@@ -332,7 +332,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			int buildNumber = ReleaseInfo.getBuildNumber();
 
 			int importBuildNumber = GetterUtil.getInteger(
-				header.attributeValue("buildNumber"));
+				header.attributeValue("build-number"));
 
 			if (buildNumber != importBuildNumber) {
 				throw new LayoutImportException();

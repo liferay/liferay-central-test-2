@@ -51,6 +51,8 @@ public class SystemProperties {
 	public static final String SYSTEM_PROPERTIES_FINAL =
 		"system.properties.final";
 
+	public static final String TMP_DIR = "java.io.tmpdir";
+
 	public static String get(String key) {
 		String value = (String)_instance._props.get(key);
 

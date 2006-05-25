@@ -88,7 +88,7 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 		throws PortalException, SystemException {
 
 		try {
-			String tmpDir = SystemProperties.get("java.io.tmpdir");
+			String tmpDir = SystemProperties.get(SystemProperties.TMP_DIR);
 
 			for (int i = 0; (i < isbns.length) && (i < 50); i++) {
 				String isbn = isbns[i];

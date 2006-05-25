@@ -49,7 +49,7 @@ public class DeployUtil {
 	}
 
 	private String _getResourcePath(String resource) throws IOException {
-		String tmpDir = SystemProperties.get("java.io.tmpdir");
+		String tmpDir = SystemProperties.get(SystemProperties.TMP_DIR);
 
 		File file = new File(
 			tmpDir + "/liferay/com/liferay/portal/deploy/dependencies/" +
