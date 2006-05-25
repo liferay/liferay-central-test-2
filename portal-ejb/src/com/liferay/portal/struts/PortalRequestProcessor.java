@@ -69,6 +69,7 @@ import com.liferay.util.servlet.SessionErrors;
 import java.io.IOException;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -457,8 +458,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			Boolean staleSession =
 				(Boolean)ses.getAttribute(WebKeys.STALE_SESSION);
 
-			if ((user != null) &&
-				(staleSession != null && staleSession.booleanValue() == true)) {
+			if ((user != null) && (staleSession != null) &&
+				(staleSession.booleanValue())) {
 
 				return _PATH_PORTAL_ERROR;
 			}
@@ -476,7 +477,9 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			if (themeDisplay.getLayouts() == null || themeDisplay.getLayouts().size() == 0) {
+			List layouts = themeDisplay.getLayouts();
+
+			if ((layouts == null) || (layouts.size() == 0)) {
 				SessionErrors.add(
 					req, RequiredLayoutException.class.getName());
 
@@ -557,10 +560,12 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Authenticated users must have access to at least one layout
 
-		if (SessionErrors.contains(req, LayoutPermissionException.class.getName())) {
+		if (SessionErrors.contains(
+				req, LayoutPermissionException.class.getName())) {
+
 			return _PATH_PORTAL_ERROR;
 		}
-		
+
 		return path;
 	}
 

@@ -47,6 +47,8 @@ public class GroupPermission {
 	public static boolean contains(
 		PermissionChecker permissionChecker, String groupId, String actionId) {
 
+		// Group id must be set so that users can modify their personal pages
+
 		return permissionChecker.hasPermission(
 			groupId, Group.class.getName(), groupId, actionId);
 	}

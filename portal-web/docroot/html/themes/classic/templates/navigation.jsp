@@ -85,15 +85,6 @@
 			tabText = "<a href=\"" + tabHREF + "\" " + target + ">" + tabName + "</a>";
 		}
 
-		/*
-		if (LayoutPermission.contains(permissionChecker, curLayout.getLayoutId(), curLayout.getOwnerId(), ActionKeys.VIEW)) {
-			rows[rowCounter][currentTab] = tabText;
-		}
-		else {
-			rows[rowCounter][currentTab] = null;
-		}
-		*/
-		
 		rows[rowCounter][currentTab] = tabText;
 
 		if (currentTab == tabsPerRow - 1) {

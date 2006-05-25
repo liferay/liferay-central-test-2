@@ -26,36 +26,38 @@
 	<div id="layout-inner-side-decoration">
 		<div id="layout-box">
 			<div id="layout-top-banner">
-				<div>
-					<a href="<%= themeDisplay.getURLHome() %>"><img border="0" hspace="0" src="<%= themeDisplay.getCompanyLogo() %>" vspace="0"></a>
-				</div>
+				<a href="<%= themeDisplay.getURLHome() %>"><img src="<%= themeDisplay.getCompanyLogo() %>"></a>
 
-				<div id="layout-user-menu" style="text-align: right">
-					<span style="font-weight: bold"><%= user.getGreeting() %></span>
+				<div id="layout-user-menu" style="text-align: right;">
+					<span style="font-weight: bold;"><%= user.getGreeting() %></span>
+
 					<div class="font-small" style="margin-top: 5px;">
 						<a href="<%= themeDisplay.getURLHome() %>"><bean:message key="home" /></a> -
 
-						<c:if test="<%= !themeDisplay.isSignedIn() %>">
-							<a href="<%= themeDisplay.getURLSignIn() %>"><bean:message key="sign-in" /></a>
-						</c:if>
+						<c:choose>
+							<c:when test="<%= themeDisplay.isSignedIn() %>">
+								<c:if test="<%= themeDisplay.isShowMyAccountIcon() %>">
+									<a href="<%= themeDisplay.getURLMyAccount() %>"><bean:message key="my-account" /></a> -
+								</c:if>
 
-						<c:if test="<%= themeDisplay.isSignedIn() %>">
-							<c:if test="<%= themeDisplay.isShowMyAccountIcon() %>">
-								<a href="<%= themeDisplay.getURLMyAccount() %>"><bean:message key="my-account" /></a> -
-							</c:if>
+								<a href="<%= themeDisplay.getURLSignOut() %>"><bean:message key="sign-out" /></a><br>
 
-							<a href="<%= themeDisplay.getURLSignOut() %>"><bean:message key="sign-out" /></a><br />
+								<c:if test="<%= themeDisplay.isShowAddContentIcon() %>">
+									<a href="javascript: void(0);" onClick="<%= themeDisplay.getURLAddContent() %>"><bean:message key="add-content" /></a>
+								</c:if>
 
-							<c:if test="<%= themeDisplay.isShowAddContentIcon() %>">
-								<a href="javascript: void(0);" onClick="<%= themeDisplay.getURLAddContent() %>"><bean:message key="add-content" /></a>
-							</c:if>
+								<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
+									-
 
-							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
-								&nbsp;-&nbsp;<a href="<%= themeDisplay.getURLPageSettings().toString() %>"><bean:message key="page-settings" /></a>
-							</c:if>
+									<a href="<%= themeDisplay.getURLPageSettings().toString() %>"><bean:message key="page-settings" /></a>
+								</c:if>
 
-							<div id="layout-my-places"><liferay-portlet:runtime portletName="<%= PortletKeys.MY_PLACES %>" /></div>
-						</c:if>
+								<div id="layout-my-places"><liferay-portlet:runtime portletName="<%= PortletKeys.MY_PLACES %>" /></div>
+							</c:when>
+							<c:otherwise>
+								<a href="<%= themeDisplay.getURLSignIn() %>"><bean:message key="sign-in" /></a>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 			</div>

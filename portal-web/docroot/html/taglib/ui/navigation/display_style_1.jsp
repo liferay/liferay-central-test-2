@@ -39,12 +39,7 @@ List selLayoutChildren = layout.getChildren();
 				for (int i = 0; i < selLayoutChildren.size(); i++) {
 					Layout selLayoutChild = (Layout)selLayoutChildren.get(i);
 
-					if (!LayoutPermission.contains(permissionChecker, selLayoutChild.getLayoutId(), selLayoutChild.getOwnerId(), ActionKeys.VIEW) && themeDisplay.isSignedIn()) {
-						System.out.println("Hello .5");
-						selLayoutChild.setHidden(true);
-					}
-					
-					if (!selLayoutChild.isHidden()) {
+					if (!selLayoutChild.isHidden() && LayoutPermission.contains(permissionChecker, selLayoutChild, ActionKeys.VIEW)) {
 						String layoutURL = PortalUtil.getLayoutURL(selLayoutChild, themeDisplay);
 						String target = PortalUtil.getLayoutTarget(selLayoutChild);
 				%>

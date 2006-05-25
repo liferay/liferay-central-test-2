@@ -22,11 +22,16 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.NoSuchResourceException;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.Resource;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.persistence.LayoutPK;
+import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
+import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 
 /**
  * <a href="LayoutPermission.java.html"><b><i>View Source</i></b></a>
@@ -39,28 +44,60 @@ public class LayoutPermission {
 	public static void check(
 			PermissionChecker permissionChecker, String layoutId,
 			String ownerId, String actionId)
-		throws PrincipalException {
+		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, layoutId, ownerId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
-	public static boolean contains(
-		PermissionChecker permissionChecker, String layoutId, String ownerId,
-		String actionId) {
+	public static void check(
+			PermissionChecker permissionChecker, Layout layout, String actionId)
+		throws PortalException, SystemException {
 
-		String groupId = Layout.getGroupId(ownerId);
+		if (!contains(permissionChecker, layout, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, String layoutId,
+			String ownerId, String actionId)
+		throws PortalException, SystemException {
+
+		Layout layout =
+			LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+
+		return contains(permissionChecker, layout, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, Layout layout, String actionId)
+		throws PortalException, SystemException {
 
 		if (GroupPermission.contains(
-				permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
+				permissionChecker, layout.getGroupId(),
+				ActionKeys.MANAGE_LAYOUTS)) {
 
 			return true;
 		}
-		
+
+		try {
+			ResourceLocalServiceUtil.getResource(
+				layout.getCompanyId(), Layout.class.getName(),
+				Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+				layout.getPrimaryKey().toString());
+		}
+		catch (NoSuchResourceException nsre) {
+			ResourceLocalServiceUtil.addResources(
+				layout.getCompanyId(), layout.getGroupId(),
+				null, Layout.class.getName(), layout.getPrimaryKey().toString(),
+				false, true, true);
+		}
+
 		return permissionChecker.hasPermission(
-			groupId, Layout.class.getName(),
-			new LayoutPK(layoutId, ownerId).toString(), actionId);
+			layout.getGroupId(), Layout.class.getName(),
+			layout.getPrimaryKey().toString(), actionId);
 	}
 
 }

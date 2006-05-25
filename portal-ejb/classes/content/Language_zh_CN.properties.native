@@ -2127,6 +2127,7 @@ you-cannot-edit-this-page-because-it-was-locked-by-x-on-x=因为已经被 {0} �
 you-cannot-modify-this-document-because-it-was-locked-by-x-on-x=You cannot modify this document because it was locked by {0} on {1}.
 you-did-not-select-any-messages=您沒有选择任何讯息。在您想要选择的讯息旁边鲇擊复选框。
 you-do-not-have-an-email-address-registered-with-this-company=您沒有一封电子邮件向这个公司登记。
+you-do-not-have-permission-to-view-this-page=您没有允许观看这页。
 you-do-not-have-the-required-permissions=您沒有许可权限。
 you-do-not-have-the-roles-required-to-access-this-page=您不安排角色必须存取这页。
 you-do-not-have-the-roles-required-to-access-this-portlet=您不具备存取这portlet的角色 。

@@ -2127,6 +2127,7 @@ you-cannot-edit-this-page-because-it-was-locked-by-x-on-x=You cannot edit this p
 you-cannot-modify-this-document-because-it-was-locked-by-x-on-x=You cannot modify this document because it was locked by {0} on {1}.
 you-did-not-select-any-messages=あなたはどのメッセージをも選ばなかった。あなたが選びたいメ
 you-do-not-have-an-email-address-registered-with-this-company=あなたはこの会社と登録されるeメールアドレスを有しない。
+you-do-not-have-permission-to-view-this-page=このページを見る許可を持っていない。
 you-do-not-have-the-required-permissions=あなたは要求された許可を有しない。
 you-do-not-have-the-roles-required-to-access-this-page=あなたは役割をこのページにアクセスするために必要なもらわな
 you-do-not-have-the-roles-required-to-access-this-portlet=あなたは役割をこのportlet にアクセスするために必要なもらわ

@@ -34,7 +34,7 @@ if (company.getAuthType().equals(Company.AUTH_TYPE_ID)) {
 }
 %>
 
-<c:if test="<%= staleSession != null && staleSession.booleanValue() == true %>">
+<c:if test="<%= (staleSession != null) && staleSession.booleanValue() %>">
 	<span class="portlet-msg-error">
 	<%= LanguageUtil.get(pageContext, "you-have-been-logged-off-because-you-signed-on-with-this-account-using-a-different-session") %>
 	</span>
@@ -43,6 +43,12 @@ if (company.getAuthType().equals(Company.AUTH_TYPE_ID)) {
 	session.invalidate();
 	%>
 
+</c:if>
+
+<c:if test="<%= SessionErrors.contains(request, LayoutPermissionException.class.getName()) %>">
+	<span class="portlet-msg-error">
+	<%= LanguageUtil.get(pageContext, "you-do-not-have-permission-to-view-this-page") %>
+	</span>
 </c:if>
 
 <c:if test="<%= SessionErrors.contains(request, PortletActiveException.class.getName()) %>">
@@ -75,10 +81,4 @@ if (company.getAuthType().equals(Company.AUTH_TYPE_ID)) {
 	</span>
 
 	<%= LanguageUtil.format(pageContext, "if-you-are-not-x-logout-and-try-again", user.getFullName(), false) %>
-</c:if>
-
-<c:if test="<%= SessionErrors.contains(request, LayoutPermissionException.class.getName()) %>">
-	<span class="portlet-msg-error">
-	<%= LanguageUtil.get(pageContext, "you-do-not-have-permission-to-view-this-page") %>
-	</span>
 </c:if>

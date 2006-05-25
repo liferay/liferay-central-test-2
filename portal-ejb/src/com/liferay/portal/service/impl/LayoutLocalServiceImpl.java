@@ -22,19 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.StringReader;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
-
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.LayoutHiddenException;
 import com.liferay.portal.LayoutImportException;
@@ -48,6 +35,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.PortletPreferences;
+import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPK;
@@ -72,6 +60,20 @@ import com.liferay.util.xml.XMLFormatter;
 import com.liferay.util.zip.ZipReader;
 import com.liferay.util.zip.ZipWriter;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
+
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+
 /**
  * <a href="LayoutLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -85,6 +87,8 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			String parentLayoutId, String name, String type, boolean hidden,
 			String friendlyURL)
 		throws PortalException, SystemException {
+
+		// Layout
 
 		String ownerId = null;
 
@@ -115,12 +119,15 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		LayoutUtil.update(layout);
 
+		// Resources
+
 		ResourceLocalServiceUtil.addResources(
-			user.getActualCompanyId(), groupId,
-			user.getUserId(), Layout.class.getName(),
-			layout.getPrimaryKey().toString(), false, true,
-			true);
-		
+			user.getActualCompanyId(), groupId, user.getUserId(),
+			Layout.class.getName(), layout.getPrimaryKey().toString(), false,
+			true, true);
+
+		// Layout set
+
 		LayoutSetLocalServiceUtil.updatePageCount(ownerId);
 
 		return layout;
@@ -164,6 +171,12 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		if (updateLayoutSet) {
 			LayoutSetLocalServiceUtil.updatePageCount(layout.getOwnerId());
 		}
+
+		// Resources
+
+		ResourceLocalServiceUtil.deleteResource(
+			layout.getCompanyId(), Layout.class.getName(), Resource.TYPE_CLASS,
+			Resource.SCOPE_INDIVIDUAL, layout.getPrimaryKey().toString());
 
 		// Layout
 

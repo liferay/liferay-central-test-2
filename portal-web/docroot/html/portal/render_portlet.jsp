@@ -74,9 +74,10 @@ catch (NoSuchResourceException nsre) {
 	}
 }
 
-boolean access = PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.VIEW) || 
-					GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS) || 
-					LayoutPermission.contains(permissionChecker, layout.getLayoutId(), layout.getOwnerId(), ActionKeys.UPDATE);
+boolean access =
+	PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.VIEW) ||
+	GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS) ||
+	LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE);
 
 boolean stateMax = layoutTypePortlet.hasStateMaxPortletId(portletId);
 boolean stateMin = layoutTypePortlet.hasStateMinPortletId(portletId);
@@ -173,12 +174,14 @@ if (portlet.hasPortletMode(renderResponseImpl.getContentType(), PortletMode.EDIT
 	}
 }
 
-// Unauthenticated users or users without MANAGE_LAYOUTS permission cannot modify the layout
+// Unauthenticated users, users without MANAGE_LAYOUTS permission for the
+// community, and users without UPDATE permission for the layout cannot modify
+// the layout
 
-if (!themeDisplay.isSignedIn() || 
+if (!themeDisplay.isSignedIn() ||
 	(!GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS) &&
-	!LayoutPermission.contains(permissionChecker, layout.getLayoutId(), layout.getOwnerId(), ActionKeys.UPDATE))) {
-	
+	 !LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE))) {
+
 	showCloseIcon = false;
 	showEditIcon = false;
 	showMaxIcon = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.LAYOUT_GUEST_SHOW_MAX_ICON));

@@ -332,10 +332,9 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 						portlet.getPortletId(), ActionKeys.VIEW) &&
 					!GroupPermission.contains(
 						permissionChecker, layout.getGroupId(),
-						ActionKeys.MANAGE_LAYOUTS) && 
+						ActionKeys.MANAGE_LAYOUTS) &&
 					!LayoutPermission.contains(
-						permissionChecker, layout.getLayoutId(),
-						layout.getOwnerId(), ActionKeys.UPDATE)) {
+						permissionChecker, layout, ActionKeys.UPDATE)) {
 
 					throw new PrincipalException();
 				}
