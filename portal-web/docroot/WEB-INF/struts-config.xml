@@ -253,7 +253,8 @@
 		</action>
 
 		<action path="/alfresco_content/view" type="com.liferay.portlet.alfrescocontent.action.ViewAction">
-			<forward name="portlet.alfresco_content.view" path="portlet.alfresco_content.view" />
+			<forward name="portlet.alfresco_content.view_1" path="portlet.alfresco_content.view_1" />
+			<forward name="portlet.alfresco_content.view_2" path="portlet.alfresco_content.view_2" />
 		</action>
 
 		<!-- Amazon Rankings -->

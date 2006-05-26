@@ -74,7 +74,12 @@ public class ViewAction extends PortletAction {
 
 		req.setAttribute(WebKeys.ALFRESCO_CONTENT, content);
 
-		return mapping.findForward("portlet.alfresco_content.view");
+		if (Validator.isNull(previewURL)) {
+			return mapping.findForward("portlet.alfresco_content.view_1");
+		}
+		else {
+			return mapping.findForward("portlet.alfresco_content.view_2");
+		}
 	}
 
 }

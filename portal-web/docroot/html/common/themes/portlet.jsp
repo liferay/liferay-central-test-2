@@ -28,6 +28,7 @@
 
 <tiles:useAttribute id="tilesPortletContent" name="portlet_content" classname="java.lang.String" ignore="true" />
 <tiles:useAttribute id="tilesPortletDecorate" name="portlet_decorate" classname="java.lang.String" ignore="true" />
+<tiles:useAttribute id="tilesPortletPadding" name="portlet_padding" classname="java.lang.String" ignore="true" />
 
 <%
 Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
@@ -47,6 +48,14 @@ boolean portletDecorate = GetterUtil.getBoolean(portletSetup.getValue("portlet-s
 //if (!renderRequest.getWindowState().equals(WindowState.NORMAL)) {
 //	portletDecorate = true;
 //}
+
+// Portlet padding
+
+boolean portletPadding = GetterUtil.getBoolean(tilesPortletPadding, true);
+
+if (!portletDecorate) {
+	portletPadding = false;
+}
 
 Properties cssProps = PropertiesUtil.load(portletSetup.getValue("portlet-setup-css", StringPool.BLANK));
 %>

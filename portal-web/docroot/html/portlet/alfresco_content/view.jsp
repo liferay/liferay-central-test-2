@@ -25,13 +25,13 @@
 <%@ include file="/html/portlet/alfresco_content/init.jsp" %>
 
 <%
-boolean preview = true || Validator.isNotNull(request.getParameter("previewURL"));
+boolean preview = Validator.isNotNull(request.getParameter("previewURL"));
 
 String content = (String)request.getAttribute(WebKeys.ALFRESCO_CONTENT);
 %>
 
 <c:if test="<%= preview %>">
-	<table border="1" bordercolor="#FF0000" cellpadding="0" cellspacing="0" width="100%">
+	<table border="2" bordercolor="#FF0000" cellpadding="8" cellspacing="0" width="100%">
 	<tr>
 		<td>
 </c:if>

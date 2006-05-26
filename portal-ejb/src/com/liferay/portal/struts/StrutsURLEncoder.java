@@ -192,7 +192,7 @@ public class StrutsURLEncoder implements URLEncoder {
 
 	private String _contextPath;
 	private String _mainPath;
-	private String _servletMapping;
+	private String _servletMapping = StringPool.BLANK;
 	private PortletURLImpl _portletURL;
 	private WindowState _windowState;
 	private PortletMode _portletMode;

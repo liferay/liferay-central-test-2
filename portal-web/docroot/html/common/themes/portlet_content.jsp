@@ -26,7 +26,7 @@
 	<c:if test="<%= portletDisplay.isAccess() %>">
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
-			<td <%= portletDecorate ? "style=\"padding: 4px 8px 10px 8px;\"" : "" %>>
+			<td <%= portletPadding ? "style=\"padding: 4px 8px 10px 8px;\"" : "" %>>
 				<c:if test='<%= !tilesPortletContent.endsWith("/error.jsp") %>'>
 					<%@ include file="/html/common/themes/portlet_messages.jsp" %>
 				</c:if>

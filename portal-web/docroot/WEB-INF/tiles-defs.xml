@@ -9,6 +9,7 @@
 		<put name="portlet_sub_nav" value="" />
 		<put name="portlet_content" value="" />
 		<put name="portlet_decorate" value="true" />
+		<put name="portlet_padding" value="true" />
 	</definition>
 
 	<!-- Portal -->
@@ -131,8 +132,13 @@
 		<put name="portlet_configuration_content" value="/portlet/alfresco_content/edit_configuration.jsp" />
 	</definition>
 
-	<definition name="portlet.alfresco_content.view" extends="portlet.alfresco_content">
+	<definition name="portlet.alfresco_content.view_1" extends="portlet.alfresco_content">
 		<put name="portlet_content" value="/portlet/alfresco_content/view.jsp" />
+	</definition>
+
+	<definition name="portlet.alfresco_content.view_2" extends="portlet.alfresco_content">
+		<put name="portlet_content" value="/portlet/alfresco_content/view.jsp" />
+		<put name="portlet_padding" value="false" />
 	</definition>
 
 	<!-- Amazon Rankings -->
