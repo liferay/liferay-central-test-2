@@ -50,3 +50,9 @@ String content = (String)request.getAttribute(WebKeys.ALFRESCO_CONTENT);
 	</tr>
 	</table>
 </c:if>
+
+<c:if test="<%= !preview && Validator.isNotNull(nodeId) %>">
+	<br>
+
+	<liferay-ui:icon image="edit" message="edit-content" url='<%= "javascript: window.open(\'/alfresco/navigate/showDocDetails/workspace/SpacesStore/" + nodeId + "\'); void(\'\');" %>' />
+</c:if>
