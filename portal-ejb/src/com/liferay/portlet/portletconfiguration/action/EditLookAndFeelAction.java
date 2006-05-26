@@ -22,28 +22,6 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-import javax.servlet.ServletContext;
-
-import org.apache.commons.beanutils.DynaClass;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.DynaActionForm;
-import org.apache.struts.util.LabelValueBean;
-
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -62,6 +40,29 @@ import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
+
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+
+import javax.servlet.ServletContext;
+
+import org.apache.commons.beanutils.DynaClass;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.DynaActionForm;
+import org.apache.struts.util.LabelValueBean;
 
 /**
  * <a href="EditLookAndFeelAction.java.html"><b><i>View Source</i></b></a>
@@ -190,17 +191,17 @@ public class EditLookAndFeelAction extends PortletAction {
 
 		String ownerId = Layout.getOwnerId(themeDisplay.getPlid());
 		String groupId = Layout.getGroupId(ownerId);
-		
+
 		String portletResource = ParamUtil.getString(req, "portletResource");
-		String resourcePrimKey = themeDisplay.getPlid() + Portlet.LAYOUT_SEPARATOR + portletResource;
-		
+		String resourcePrimKey =
+			themeDisplay.getPlid() + Portlet.LAYOUT_SEPARATOR + portletResource;
+
 		try {
 			if (!permissionChecker.hasPermission(
 					groupId, portletResource, resourcePrimKey,
 					ActionKeys.CONFIGURATION) &&
 				!GroupPermission.contains(
-					permissionChecker, groupId, 
-					ActionKeys.MANAGE_LAYOUTS)) {
+					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
 
 				throw new PrincipalException();
 			}

@@ -158,7 +158,7 @@ public class EditPermissionsAction extends PortletAction {
 						groupId, selResource, resourcePrimKey,
 						ActionKeys.CONFIGURATION) &&
 					!GroupPermission.contains(
-						permissionChecker, groupId, 
+						permissionChecker, groupId,
 						ActionKeys.MANAGE_LAYOUTS)) {
 
 					throw new PrincipalException();

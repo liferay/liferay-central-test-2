@@ -165,6 +165,7 @@ boolean showPrintIcon = portlet.hasPortletMode(renderResponseImpl.getContentType
 if (!portletDisplay.getId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	if (PortletPermission.contains(permissionChecker, plid, rootPortletId, ActionKeys.CONFIGURATION) ||
 		GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS)) {
+
 		showConfigurationIcon = true;
 	}
 }
@@ -172,6 +173,7 @@ if (!portletDisplay.getId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
 if (portlet.hasPortletMode(renderResponseImpl.getContentType(), PortletMode.EDIT)) {
 	if (PortletPermission.contains(permissionChecker, plid, rootPortletId, ActionKeys.PREFERENCES) ||
 		GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS)) {
+
 		showEditIcon = true;
 	}
 }

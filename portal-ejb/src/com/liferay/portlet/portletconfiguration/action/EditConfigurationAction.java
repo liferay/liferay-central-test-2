@@ -73,17 +73,20 @@ public class EditConfigurationAction extends DynamicPortletAction {
 
 		String ownerId = Layout.getOwnerId(themeDisplay.getPlid());
 		String groupId = Layout.getGroupId(ownerId);
-		
+
 		String portletResource = ParamUtil.getString(req, "portletResource");
-		String resourcePrimKey = themeDisplay.getPlid() + Portlet.LAYOUT_SEPARATOR + portletResource;
-		
+		String resourcePrimKey =
+			themeDisplay.getPlid() + Portlet.LAYOUT_SEPARATOR + portletResource;
+
+		res.setTitle(
+			PortalUtil.getPortletTitle(portlet, ctx, themeDisplay.getLocale()));
+
 		try {
 			if (!permissionChecker.hasPermission(
 					groupId, portletResource, resourcePrimKey,
 					ActionKeys.CONFIGURATION) &&
 				!GroupPermission.contains(
-					permissionChecker, groupId, 
-					ActionKeys.MANAGE_LAYOUTS)) {
+					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
 
 				throw new PrincipalException();
 			}
@@ -92,16 +95,10 @@ public class EditConfigurationAction extends DynamicPortletAction {
 			SessionErrors.add(req, PrincipalException.class.getName());
 
 			setForward(req, "portlet.portlet_configuration.error");
-			
-			res.setTitle(
-				PortalUtil.getPortletTitle(portlet, ctx, themeDisplay.getLocale()));
 
 			return mapping.findForward(getForward(
 					req, "portlet.portlet_configuration.edit_configuration"));
 		}
-		
-		res.setTitle(
-			PortalUtil.getPortletTitle(portlet, ctx, themeDisplay.getLocale()));
 
 		return super.render(mapping, form, config, req, res);
 	}
