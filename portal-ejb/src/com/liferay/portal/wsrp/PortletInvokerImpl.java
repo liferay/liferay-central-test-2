@@ -27,8 +27,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesServiceUtil;
-import com.liferay.portal.service.spring.PortletServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PropsUtil;
@@ -117,7 +117,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 			ServletContext portalCtx = ctx.getContext(PropsUtil
 					.get(PropsUtil.PORTAL_CTX));
 
-			Portlet portlet = PortletServiceUtil.getPortletById(companyId,
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(companyId,
 					portletHandle);
 			CachePortlet cachePortlet = PortletInstanceFactory.create(portlet,
 					portalCtx);
@@ -197,7 +197,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 			ServletContext portalCtx = ctx.getContext(PropsUtil
 					.get(PropsUtil.PORTAL_CTX));
 
-			Portlet portlet = PortletServiceUtil.getPortletById(companyId,
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(companyId,
 					portletHandle);
 			CachePortlet cachePortlet = PortletInstanceFactory.create(portlet,
 					portalCtx);

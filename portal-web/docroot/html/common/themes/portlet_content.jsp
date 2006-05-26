@@ -24,10 +24,6 @@
 
 <c:if test="<%= portletDisplay.isActive() %>">
 	<c:if test="<%= portletDisplay.isAccess() %>">
-		<c:if test="<%= Validator.isNotNull(tilesPortletSubNav) %>">
-			<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesPortletSubNav %>" />
-		</c:if>
-
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
 			<td <%= portletDecorate ? "style=\"padding: 4px 8px 10px 8px;\"" : "" %>>

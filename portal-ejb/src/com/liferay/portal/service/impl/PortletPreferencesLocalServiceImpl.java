@@ -30,8 +30,8 @@ import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.service.persistence.LayoutPK;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesLocalService;
-import com.liferay.portal.service.spring.PortletServiceUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
@@ -72,7 +72,7 @@ public class PortletPreferencesLocalServiceImpl
 			String companyId, String portletId)
 		throws PortalException, SystemException {
 
-		Portlet portlet = PortletServiceUtil.getPortletById(
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			companyId, portletId);
 
 		return PortletPreferencesSerializer.fromDefaultXML(
@@ -102,7 +102,7 @@ public class PortletPreferencesLocalServiceImpl
 		if (prefs == null) {
 			PortletPreferences portletPreferences = null;
 
-			Portlet portlet = PortletServiceUtil.getPortletById(
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				companyId, pk.portletId);
 
 			try {

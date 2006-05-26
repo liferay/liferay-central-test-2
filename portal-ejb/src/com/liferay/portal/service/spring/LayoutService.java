@@ -40,9 +40,14 @@ public interface LayoutService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public java.util.List getLayouts(java.lang.String companyId,
-		java.lang.String portletId, java.lang.String prefsKey,
-		java.lang.String prefsValue)
+	public java.lang.String getLayoutName(java.lang.String layoutId,
+		java.lang.String ownerId, java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public com.liferay.portal.model.LayoutReference[] getLayoutReferences(
+		java.lang.String companyId, java.lang.String portletId,
+		java.lang.String prefsKey, java.lang.String prefsValue)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public void setLayouts(java.lang.String ownerId,

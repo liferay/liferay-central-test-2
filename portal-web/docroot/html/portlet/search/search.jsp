@@ -71,7 +71,7 @@ for (int i = 0; i < results.getLength(); i++) {
 
 	String portletId = (String)doc.get(LuceneFields.PORTLET_ID);
 
-	Portlet portlet = PortletServiceUtil.getPortletById(company.getCompanyId(), portletId);
+	Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletId);
 	String portletTitle = PortalUtil.getPortletTitle(portlet, application, locale);
 
 	String groupId = (String)doc.get(LuceneFields.GROUP_ID);

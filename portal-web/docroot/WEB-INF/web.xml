@@ -341,13 +341,6 @@
 		<ejb-link>com_liferay_portal_service_ejb_LayoutSetLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
-		<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<local-home>com.liferay.portal.service.ejb.NoteLocalServiceHome</local-home>
-		<local>com.liferay.portal.service.ejb.NoteLocalServiceEJB</local>
-		<ejb-link>com_liferay_portal_service_ejb_NoteLocalServiceEJB</ejb-link>
-	</ejb-local-ref>
-	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
 		<local-home>com.liferay.portal.service.ejb.OrganizationLocalServiceHome</local-home>
@@ -381,6 +374,13 @@
 		<local-home>com.liferay.portal.service.ejb.PhoneLocalServiceHome</local-home>
 		<local>com.liferay.portal.service.ejb.PhoneLocalServiceEJB</local>
 		<ejb-link>com_liferay_portal_service_ejb_PhoneLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portal.service.ejb.PortletLocalServiceHome</local-home>
+		<local>com.liferay.portal.service.ejb.PortletLocalServiceEJB</local>
+		<ejb-link>com_liferay_portal_service_ejb_PortletLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>

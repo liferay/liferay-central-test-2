@@ -28,8 +28,8 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesServiceUtil;
-import com.liferay.portal.service.spring.PortletServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -180,7 +180,7 @@ public class PortletPreferencesFactory {
 
 		String companyId = PortalUtil.getCompanyId(req);
 
-		Portlet portlet = PortletServiceUtil.getPortletById(
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			companyId, portletId);
 
 		String layoutId = null;

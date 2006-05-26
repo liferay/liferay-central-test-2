@@ -34,37 +34,4 @@ public interface PortletService {
 		java.lang.String roles, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public com.liferay.portal.model.PortletCategory getEARDisplay(
-		java.lang.String xml)
-		throws org.dom4j.DocumentException, java.io.IOException, 
-			java.rmi.RemoteException;
-
-	public com.liferay.portal.model.PortletCategory getWARDisplay(
-		java.lang.String servletContextName, java.lang.String xml)
-		throws org.dom4j.DocumentException, java.io.IOException, 
-			java.rmi.RemoteException;
-
-	public com.liferay.portal.model.Portlet getPortletById(
-		java.lang.String companyId, java.lang.String portletId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public com.liferay.portal.model.Portlet getPortletByStrutsPath(
-		java.lang.String companyId, java.lang.String strutsPath)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public java.util.List getPortlets(java.lang.String companyId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public void initEAR(java.lang.String[] xmls)
-		throws java.rmi.RemoteException;
-
-	public java.util.List initWAR(java.lang.String servletContextName,
-		java.lang.String[] xmls) throws java.rmi.RemoteException;
-
-	public com.liferay.portal.model.Portlet updatePortlet(
-		java.lang.String portletId, boolean narrow, java.lang.String roles,
-		boolean active)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
 }

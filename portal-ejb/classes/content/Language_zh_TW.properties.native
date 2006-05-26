@@ -1217,6 +1217,7 @@ no-zip-code-was-found-associated-with-the-given-street-city-and-state=郵政編�
 no-zip-codes-were-found-associated-with-the-given-city-and-state=郵政編碼未被發現有關以指定的城市和州。
 no-zip-codes-were-found-associated-with-the-given-street-city-and-state=郵政編碼未被發現有關以指定的街道、城市, 和州。
 no=否
+node-id=結身份證
 node=節點
 nodes-require-at-least-one-read-role=節點要求至少一個讀取的角色。
 nodes-require-at-least-one-write-role=節點要求至少一寫入角色。

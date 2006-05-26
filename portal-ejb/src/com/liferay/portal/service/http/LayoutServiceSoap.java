@@ -68,15 +68,31 @@ public class LayoutServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.LayoutModel[] getLayouts(
+	public static java.lang.String getLayoutName(java.lang.String layoutId,
+		java.lang.String ownerId, java.lang.String languageId)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = LayoutServiceUtil.getLayoutName(layoutId,
+					ownerId, languageId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static com.liferay.portal.model.LayoutReference[] getLayoutReferences(
 		java.lang.String companyId, java.lang.String portletId,
 		java.lang.String prefsKey, java.lang.String prefsValue)
 		throws RemoteException {
 		try {
-			java.util.List returnValue = LayoutServiceUtil.getLayouts(companyId,
+			com.liferay.portal.model.LayoutReference[] returnValue = LayoutServiceUtil.getLayoutReferences(companyId,
 					portletId, prefsKey, prefsValue);
 
-			return (com.liferay.portal.model.Layout[])returnValue.toArray(new com.liferay.portal.model.Layout[0]);
+			return returnValue;
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);

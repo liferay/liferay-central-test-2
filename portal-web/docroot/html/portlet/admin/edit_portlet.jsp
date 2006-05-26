@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String portletId = ParamUtil.getString(request, "portletId");
 
-Portlet portlet = PortletServiceUtil.getPortletById(company.getCompanyId(), portletId);
+Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletId);
 %>
 
 <script type="text/javascript">

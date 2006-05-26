@@ -52,7 +52,7 @@ if (Validator.isNull(modelResource)) {
 
 	redirect = portletURL.toString();
 
-	Portlet portlet = PortletServiceUtil.getPortletById(company.getCompanyId(), portletResource);
+	Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 
 	selResource = portlet.getRootPortletId();
 	selResourceDescription = PortalUtil.getPortletTitle(portlet, application, locale);

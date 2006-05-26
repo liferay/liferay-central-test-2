@@ -29,7 +29,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.servlet.FriendlyURLServlet;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -359,7 +359,7 @@ public class LayoutCacheFilter implements Filter {
 					String portletId = StringUtil.extractFirst(
 						portlets[j], Portlet.INSTANCE_SEPARATOR);
 
-					Portlet portlet = PortletServiceUtil.getPortletById(
+					Portlet portlet = PortletLocalServiceUtil.getPortletById(
 						_companyId, portletId);
 
 					if (!portlet.isLayoutCacheable()) {

@@ -31,7 +31,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.LayoutPermission;
 import com.liferay.portal.service.permission.PortletPermission;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
@@ -306,7 +306,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				(PortletConfigImpl)req.getAttribute(
 					WebKeys.JAVAX_PORTLET_CONFIG);
 
-			Portlet portlet = PortletServiceUtil.getPortletById(
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				user.getCompanyId(), portletConfig.getPortletId());
 
 			if (portlet == null) {

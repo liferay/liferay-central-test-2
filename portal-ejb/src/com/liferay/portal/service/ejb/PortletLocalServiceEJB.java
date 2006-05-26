@@ -22,15 +22,16 @@
 
 package com.liferay.portal.service.ejb;
 
-import javax.ejb.CreateException;
-import javax.ejb.EJBLocalHome;
+import com.liferay.portal.service.spring.PortletLocalService;
+
+import javax.ejb.EJBLocalObject;
 
 /**
- * <a href="NoteLocalServiceHome.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletLocalServiceEJB.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public interface NoteLocalServiceHome extends EJBLocalHome {
-	public NoteLocalServiceEJB create() throws CreateException;
+public interface PortletLocalServiceEJB extends EJBLocalObject,
+	PortletLocalService {
 }

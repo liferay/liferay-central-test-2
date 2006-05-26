@@ -32,7 +32,7 @@ headerNames.add("roles");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-List portlets = PortletServiceUtil.getPortlets(company.getCompanyId());
+List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId());
 
 Collections.sort(portlets, new PortletTitleComparator(application, locale));
 

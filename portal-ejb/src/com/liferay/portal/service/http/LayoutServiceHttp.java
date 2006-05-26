@@ -171,10 +171,71 @@ public class LayoutServiceHttp {
 		}
 	}
 
-	public static java.util.List getLayouts(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String portletId,
-		java.lang.String prefsKey, java.lang.String prefsValue)
-		throws com.liferay.portal.SystemException {
+	public static java.lang.String getLayoutName(HttpPrincipal httpPrincipal,
+		java.lang.String layoutId, java.lang.String ownerId,
+		java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = layoutId;
+
+			if (layoutId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = ownerId;
+
+			if (ownerId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = languageId;
+
+			if (languageId == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
+					"getLayoutName",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw e;
+			}
+
+			return (java.lang.String)returnObj;
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			_log.error(StackTraceUtil.getStackTrace(pe));
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(StackTraceUtil.getStackTrace(se));
+			throw se;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new com.liferay.portal.SystemException(stackTrace);
+		}
+	}
+
+	public static com.liferay.portal.model.LayoutReference[] getLayoutReferences(
+		HttpPrincipal httpPrincipal, java.lang.String companyId,
+		java.lang.String portletId, java.lang.String prefsKey,
+		java.lang.String prefsValue) throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = companyId;
 
@@ -201,7 +262,7 @@ public class LayoutServiceHttp {
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"getLayouts",
+					"getLayoutReferences",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 			Object returnObj = null;
 
@@ -216,7 +277,7 @@ public class LayoutServiceHttp {
 				throw e;
 			}
 
-			return (java.util.List)returnObj;
+			return (com.liferay.portal.model.LayoutReference[])returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(StackTraceUtil.getStackTrace(se));

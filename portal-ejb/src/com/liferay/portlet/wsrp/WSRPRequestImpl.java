@@ -23,7 +23,7 @@
 package com.liferay.portlet.wsrp;
 
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.wsrp.util.WSRPUtil;
 import com.liferay.util.CollectionFactory;
@@ -173,7 +173,7 @@ public class WSRPRequestImpl extends GenericWSRPBaseRequestImpl implements
 
 		String companyId = PortalUtil.getCompanyId(_portletRequest);
 		try {
-			Portlet portlet = PortletServiceUtil.getPortletById(companyId,
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(companyId,
 					_windowSession.getWindowID());
 			Map portletModesMap = portlet.getPortletModes();
 			Collection mimeTypes = portletModesMap.values();

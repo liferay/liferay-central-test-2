@@ -23,7 +23,7 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
@@ -55,8 +55,8 @@ public class RenderPortletAction extends Action {
 		String companyId = PortalUtil.getCompanyId(req);
 		String portletId = ParamUtil.getString(req, "p_p_id");
 
-		Portlet portlet =
-			PortletServiceUtil.getPortletById(companyId, portletId);
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			companyId, portletId);
 
 		String columnId = ParamUtil.getString(req, "p_p_col_id");
 		int columnPos = ParamUtil.getInteger(req, "p_p_col_pos");

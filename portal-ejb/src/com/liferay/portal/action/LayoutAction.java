@@ -26,8 +26,8 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesServiceUtil;
-import com.liferay.portal.service.spring.PortletServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
@@ -190,8 +190,8 @@ public class LayoutAction extends Action {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 		String portletId = ParamUtil.getString(req, "p_p_id");
 
-		Portlet portlet =
-			PortletServiceUtil.getPortletById(companyId, portletId);
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			companyId, portletId);
 
 		ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
 

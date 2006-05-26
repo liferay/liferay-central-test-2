@@ -22,7 +22,7 @@
 
 package com.liferay.portal.wsrp;
 
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.wsrp.util.WSRPUtil;
 import com.liferay.util.CollectionFactory;
 
@@ -57,7 +57,7 @@ public class PortletPoolImpl implements PortletPool {
 		List wsrpPortlets = new ArrayList();
 
 		try {
-			List liferayPortlets = PortletServiceUtil.getPortlets(companyId);
+			List liferayPortlets = PortletLocalServiceUtil.getPortlets(companyId);
 
 			for (int i = 0; i < liferayPortlets.size(); i++) {
 				com.liferay.portal.model.Portlet liferayPortlet = (com.liferay.portal.model.Portlet) liferayPortlets
@@ -112,7 +112,7 @@ public class PortletPoolImpl implements PortletPool {
 			if (wsrpPortlet == null) {
 				String companyId = WSRPUtil.getCompanyId();
 
-				com.liferay.portal.model.Portlet liferayPortlet = PortletServiceUtil
+				com.liferay.portal.model.Portlet liferayPortlet = PortletLocalServiceUtil
 						.getPortletById(companyId, portletHandle);
 
 				if (liferayPortlet != null) {

@@ -38,7 +38,7 @@ import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.shared.util.PortalClassLoaderUtil;
 import com.liferay.portal.struts.MultiMessageResources;
@@ -193,7 +193,7 @@ public class MainServlet extends ActionServlet {
 						"/WEB-INF/liferay-portlet-ext.xml"))
 				};
 
-				PortletServiceUtil.initEAR(xmls);
+				PortletLocalServiceUtil.initEAR(xmls);
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -216,7 +216,7 @@ public class MainServlet extends ActionServlet {
 				}
 
 				PortletCategory newPortletCategory =
-					PortletServiceUtil.getEARDisplay(xml);
+					PortletLocalServiceUtil.getEARDisplay(xml);
 
 				portletCategory.merge(newPortletCategory);
 
@@ -309,8 +309,8 @@ public class MainServlet extends ActionServlet {
 			_log.debug("Scheduler");
 
 			try {
-				Iterator itr =
-					PortletServiceUtil.getPortlets(_companyId).iterator();
+				Iterator itr = PortletLocalServiceUtil.getPortlets(
+					_companyId).iterator();
 
 				while (itr.hasNext()) {
 					Portlet portlet = (Portlet)itr.next();
@@ -835,8 +835,8 @@ public class MainServlet extends ActionServlet {
 		// Destroy portlets
 
 		try {
-			Iterator itr =
-				PortletServiceUtil.getPortlets(_companyId).iterator();
+			Iterator itr = PortletLocalServiceUtil.getPortlets(
+				_companyId).iterator();
 
 			while (itr.hasNext()) {
 				Portlet portlet = (Portlet)itr.next();

@@ -186,19 +186,6 @@
 		<field name="name" type="String" />
 		<field name="type" type="String" />
 	</model>
-	<model name="com.liferay.portal.model.Note">
-		<field name="noteId" type="String" />
-		<field name="companyId" type="String" />
-		<field name="userId" type="String" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="className" type="String" />
-		<field name="classPK" type="String" />
-		<field name="content" type="String">
-			<hint-collection name="BLOB" />
-		</field>
-	</model>
 	<model name="com.liferay.portal.model.Organization">
 		<field name="organizationId" type="String" />
 		<field name="companyId" type="String" />

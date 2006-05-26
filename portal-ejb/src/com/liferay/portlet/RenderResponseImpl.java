@@ -24,7 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
@@ -276,7 +276,7 @@ public class RenderResponseImpl implements RenderResponse {
 	public Portlet getPortlet() {
 		if (_portlet == null) {
 			try {
-				_portlet = PortletServiceUtil.getPortletById(
+				_portlet = PortletLocalServiceUtil.getPortletById(
 					_companyId, _portletName);
 			}
 			catch (Exception e) {

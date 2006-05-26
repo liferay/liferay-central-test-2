@@ -60,6 +60,7 @@ public class EditConfigurationAction extends PortletAction {
 
 		String baseURL = ParamUtil.getString(req, "baseURL");
 		String indexURL = ParamUtil.getString(req, "indexURL");
+		String nodeId = ParamUtil.getString(req, "nodeId");
 		String userId = ParamUtil.getString(req, "userId");
 		String password = ParamUtil.getString(req, "password");
 		boolean maximizeLinks = ParamUtil.getBoolean(req, "maximizeLinks");
@@ -73,6 +74,7 @@ public class EditConfigurationAction extends PortletAction {
 
 		prefs.setValue("base-url", baseURL);
 		prefs.setValue("index-url", indexURL);
+		prefs.setValue("node-id", nodeId);
 		prefs.setValue("user-id", userId);
 		prefs.setValue("password", password);
 		prefs.setValue("maximize-links", Boolean.toString(maximizeLinks));

@@ -1217,6 +1217,7 @@ no-zip-code-was-found-associated-with-the-given-street-city-and-state=Κανέν
 no-zip-codes-were-found-associated-with-the-given-city-and-state=Κανένας ταχυδρομικός κώδικας δεν βρέθηκε συνδεμένος με τη δεδομένη πόλη και πολιτεία.
 no-zip-codes-were-found-associated-with-the-given-street-city-and-state=Κανένας ταχυδρομικός κώδικας δεν βρέθηκε συνδεμένος με τη δεδομένη οδό, πόλη, και πολιτεία.
 no=Όχι
+node-id=Ταυτότητα κόμβων
 node=Κόμβος
 nodes-require-at-least-one-read-role=Οι κόμβοι απαιτούν τουλάχιστον ένα ρόλο ανάγνωσης.
 nodes-require-at-least-one-write-role=Οι κόμβοι απαιτούν τουλάχιστον ένα ρόλο καταχώρησης.

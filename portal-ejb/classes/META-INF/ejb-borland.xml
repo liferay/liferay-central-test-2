@@ -84,10 +84,6 @@
 			<bean-home-name>com_liferay_portal_service_ejb_ListTypeServiceEJB</bean-home-name>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portal_service_ejb_NoteLocalServiceEJB</ejb-name>
-			<bean-local-home-name>ejb/liferay/NoteLocalServiceHome</bean-local-home-name>
-		</session>
-		<session>
 			<ejb-name>com_liferay_portal_service_ejb_OrganizationLocalServiceEJB</ejb-name>
 			<bean-local-home-name>ejb/liferay/OrganizationLocalServiceHome</bean-local-home-name>
 		</session>
@@ -126,6 +122,10 @@
 		<session>
 			<ejb-name>com_liferay_portal_service_ejb_PortalServiceEJB</ejb-name>
 			<bean-home-name>com_liferay_portal_service_ejb_PortalServiceEJB</bean-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portal_service_ejb_PortletLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/PortletLocalServiceHome</bean-local-home-name>
 		</session>
 		<session>
 			<ejb-name>com_liferay_portal_service_ejb_PortletServiceEJB</ejb-name>

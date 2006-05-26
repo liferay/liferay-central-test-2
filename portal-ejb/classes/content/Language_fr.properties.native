@@ -1218,6 +1218,7 @@ no-zip-code-was-found-associated-with-the-given-street-city-and-state=Aucun code
 no-zip-codes-were-found-associated-with-the-given-city-and-state=Aucun code postal n'a été trouvé associé à la ville et à l'état
 no-zip-codes-were-found-associated-with-the-given-street-city-and-state=Aucun code postal n'a été trouvé associé à la rue, à la ville,
 no=Non
+node-id=Identification De Noeud
 node=Noeud
 nodes-require-at-least-one-read-role=Les noeuds doivent être associés avec au moins un rôle autorisé à les lire.
 nodes-require-at-least-one-write-role=Les noeuds doivent être associés avec au moins un rôle autorisé en écriture.

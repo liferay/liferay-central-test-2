@@ -25,8 +25,16 @@
 <%@ include file="/html/portlet/alfresco_content/init.jsp" %>
 
 <%
+boolean preview = true || Validator.isNotNull(request.getParameter("previewURL"));
+
 String content = (String)request.getAttribute(WebKeys.ALFRESCO_CONTENT);
 %>
+
+<c:if test="<%= preview %>">
+	<table border="1" bordercolor="#FF0000" cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td>
+</c:if>
 
 <c:choose>
 	<c:when test="<%= Validator.isNotNull(content) %>">
@@ -36,3 +44,9 @@ String content = (String)request.getAttribute(WebKeys.ALFRESCO_CONTENT);
 		<%= LanguageUtil.get(pageContext, "please-contact-the-administrator-to-setup-this-portlet") %>
 	</c:otherwise>
 </c:choose>
+
+<c:if test="<%= preview %>">
+		</td>
+	</tr>
+	</table>
+</c:if>

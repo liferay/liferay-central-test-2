@@ -33,7 +33,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.portal.service.spring.PermissionServiceUtil;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
@@ -177,7 +177,7 @@ public class EditPermissionsAction extends PortletAction {
 			setForward(req, "portlet.portlet_configuration.error");
 		}
 
-		Portlet portlet = PortletServiceUtil.getPortletById(
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			themeDisplay.getCompanyId(), portletResource);
 
 		ServletContext ctx =

@@ -40,8 +40,8 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesServiceUtil;
-import com.liferay.portal.service.spring.PortletServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
@@ -535,7 +535,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				String portletId = ParamUtil.getString(req, "p_p_id");
 
 				if (Validator.isNotNull(portletId)) {
-					portlet = PortletServiceUtil.getPortletById(
+					portlet = PortletLocalServiceUtil.getPortletById(
 						companyId, portletId);
 				}
 
@@ -543,7 +543,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 					String strutsPath = path.substring(
 						1, path.lastIndexOf(StringPool.SLASH));
 
-					portlet = PortletServiceUtil.getPortletByStrutsPath(
+					portlet = PortletLocalServiceUtil.getPortletByStrutsPath(
 						companyId, strutsPath);
 				}
 
@@ -612,7 +612,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				String portletId = ParamUtil.getString(req, "p_p_id");
 
 				if (Validator.isNotNull(portletId)) {
-					portlet = PortletServiceUtil.getPortletById(
+					portlet = PortletLocalServiceUtil.getPortletById(
 						user.getCompanyId(), portletId);
 				}
 
@@ -625,7 +625,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 					}
 				}
 				else {
-					portlet = PortletServiceUtil.getPortletByStrutsPath(
+					portlet = PortletLocalServiceUtil.getPortletByStrutsPath(
 						user.getCompanyId(), strutsPath);
 				}
 

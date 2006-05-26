@@ -542,18 +542,6 @@ create table MBTopic (
 	lastPostDate DATE null
 );
 
-create table Note (
-	noteId VARCHAR(75) not null primary key,
-	companyId VARCHAR(75) not null,
-	userId VARCHAR(75) not null,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	className VARCHAR(75) null,
-	classPK VARCHAR(75) null,
-	content TEXT null
-);
-
 create table Organization_ (
 	organizationId VARCHAR(75) not null primary key,
 	companyId VARCHAR(75) not null,

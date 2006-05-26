@@ -98,7 +98,7 @@
 	<sql id="com.liferay.portal.service.persistence.LayoutFinder.findByC_P_P">
 		<![CDATA[
 			SELECT
-				DISTINCT Layout.layoutId AS layoutLayoutId, Layout.ownerId AS layoutOwnerId
+				DISTINCT Layout.layoutId AS layoutLayoutId, Layout.ownerId AS layoutOwnerId, PortletPreferences.portletId AS prefsPortletId
 			FROM
 				Layout
 			INNER JOIN

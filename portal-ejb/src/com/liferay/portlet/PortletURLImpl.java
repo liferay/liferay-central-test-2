@@ -26,7 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -445,7 +445,7 @@ public class PortletURLImpl implements PortletURL {
 	protected Portlet getPortlet() {
 		if (_portlet == null) {
 			try {
-				_portlet = PortletServiceUtil.getPortletById(
+				_portlet = PortletLocalServiceUtil.getPortletById(
 					PortalUtil.getCompanyId(_req), _portletName);
 			}
 			catch (SystemException se) {

@@ -37,7 +37,7 @@ String modelResource = ParamUtil.getString(request, "modelResource");
 
 String portletResourceName = null;
 if (Validator.isNotNull(portletResource)) {
-	Portlet portlet = PortletServiceUtil.getPortletById(company.getCompanyId(), portletResource);
+	Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 
 	portletResourceName = PortalUtil.getPortletTitle(portlet, application, locale);
 }
@@ -449,7 +449,7 @@ if (Validator.isNotNull(modelResource)) {
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		List portlets = PortletServiceUtil.getPortlets(company.getCompanyId());
+		List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId());
 
 		Collections.sort(portlets, new PortletTitleComparator(application, locale));
 

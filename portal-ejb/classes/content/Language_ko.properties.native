@@ -1217,6 +1217,7 @@ no-zip-code-was-found-associated-with-the-given-street-city-and-state=우편 번
 no-zip-codes-were-found-associated-with-the-given-city-and-state=우편 번호는 준 도시 및 국가에 연합했던
 no-zip-codes-were-found-associated-with-the-given-street-city-and-state=우편 번호는 준 거리, 도시, 및 국가에
 no=부정
+node-id=마디 식별
 node=마디
 nodes-require-at-least-one-read-role=마디는 가장 작은 한 읽은 역할에 요구한다.
 nodes-require-at-least-one-write-role=마디는 가장 작은 하나개에 쓴다 역할을 요구한다.

@@ -223,9 +223,9 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		header.addAttribute("build-number", Integer.toString(buildNumber));
 		header.addAttribute("owner-id", ownerId);
-		header.addAttribute("exportDate", Time.getRFC822());
-		header.addAttribute("themeId", layoutSet.getThemeId());
-		header.addAttribute("colorSchemeId", layoutSet.getColorSchemeId());
+		header.addAttribute("export-date", Time.getRFC822());
+		header.addAttribute("theme-id", layoutSet.getThemeId());
+		header.addAttribute("color-scheme-id", layoutSet.getColorSchemeId());
 
 		Iterator itr = getLayouts(ownerId).iterator();
 
@@ -234,16 +234,17 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 			Element el = root.addElement("layout");
 
-			el.addAttribute("layoutId", layout.getLayoutId());
-			el.addElement("parentLayoutId").addText(layout.getParentLayoutId());
+			el.addAttribute("layout-id", layout.getLayoutId());
+			el.addElement("parent-layout-id").addText(
+				layout.getParentLayoutId());
 			el.addElement("name").addCDATA(layout.getName());
 			el.addElement("type").addText(layout.getType());
-			el.addElement("typeSettings").addCDATA(layout.getTypeSettings());
+			el.addElement("type-settings").addCDATA(layout.getTypeSettings());
 			el.addElement("hidden").addText(
 				Boolean.toString(layout.getHidden()));
-			el.addElement("friendlyURL").addText(layout.getFriendlyURL());
-			el.addElement("themeId").addText(layout.getThemeId());
-			el.addElement("colorSchemeId").addText(layout.getColorSchemeId());
+			el.addElement("friendly-url").addText(layout.getFriendlyURL());
+			el.addElement("theme-id").addText(layout.getThemeId());
+			el.addElement("color-scheme-id").addText(layout.getColorSchemeId());
 			el.addElement("priority").addText(
 				Integer.toString(layout.getPriority()));
 		}
@@ -254,10 +255,10 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		while (itr.hasNext()) {
 			PortletPreferences prefs = (PortletPreferences)itr.next();
 
-			Element el = root.addElement("portletPreferences");
+			Element el = root.addElement("portlet-preferences");
 
-			el.addAttribute("portletId", prefs.getPortletId());
-			el.addAttribute("layoutId", prefs.getLayoutId());
+			el.addAttribute("portlet-id", prefs.getPortletId());
+			el.addAttribute("layout-id", prefs.getLayoutId());
 			el.addElement("preferences").addCDATA(prefs.getPreferences());
 		}
 
@@ -340,8 +341,8 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 			// Update look and feel
 
-			String themeId = header.attributeValue("themeId");
-			String colorSchemeId = header.attributeValue("colorSchemeId");
+			String themeId = header.attributeValue("theme-id");
+			String colorSchemeId = header.attributeValue("color-scheme-id");
 
 			LayoutSetLocalServiceUtil.updateLookAndFeel(
 				ownerId, themeId, colorSchemeId);
@@ -357,15 +358,15 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			while (itr.hasNext()) {
 				Element el = (Element)itr.next();
 
-				String layoutId = el.attributeValue("layoutId");
-				String parentLayoutId = el.elementText("parentLayoutId");
+				String layoutId = el.attributeValue("layout-id");
+				String parentLayoutId = el.elementText("parent-layout-id");
 				String name = el.elementText("name");
 				String type = el.elementText("type");
-				String typeSettings = el.elementText("typeSettings");
+				String typeSettings = el.elementText("type-settings");
 				boolean hidden = Boolean.getBoolean(el.elementText("hidden"));
-				String friendlyURL = el.elementText("friendlyURL");
-				themeId = el.elementText("themeId");
-				colorSchemeId = el.elementText("colorSchemeId");
+				String friendlyURL = el.elementText("friendly-url");
+				themeId = el.elementText("theme-id");
+				colorSchemeId = el.elementText("color-scheme-id");
 				int priority = Integer.parseInt(el.elementText("priority"));
 
 				Layout layout = LayoutUtil.create(
@@ -389,13 +390,13 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 			PortletPreferencesUtil.removeByOwnerId(ownerId);
 
-			itr = root.elements("portletPreferences").iterator();
+			itr = root.elements("portlet-preferences").iterator();
 
 			while (itr.hasNext()) {
 				Element el = (Element)itr.next();
 
-				String portletId = el.attributeValue("portletId");
-				String layoutId = el.attributeValue("layoutId");
+				String portletId = el.attributeValue("portlet-id");
+				String layoutId = el.attributeValue("layout-id");
 				String preferences = el.elementText("preferences");
 
 				PortletPreferences prefs = PortletPreferencesUtil.create(

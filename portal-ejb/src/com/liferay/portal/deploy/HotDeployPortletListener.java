@@ -26,7 +26,7 @@ import com.liferay.portal.apache.bridges.struts.LiferayServletContextProvider;
 import com.liferay.portal.job.Scheduler;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.shared.deploy.HotDeployEvent;
@@ -110,7 +110,7 @@ public class HotDeployPortletListener implements HotDeployListener {
 
 			_log.info("Registering portlets for " + servletContextName);
 
-			List portlets = PortletServiceUtil.initWAR(
+			List portlets = PortletLocalServiceUtil.initWAR(
 				servletContextName, xmls);
 
 			// Class loader
@@ -244,7 +244,7 @@ public class HotDeployPortletListener implements HotDeployListener {
 				"/WEB-INF/liferay-display.xml"));
 
 			PortletCategory newPortletCategory =
-				PortletServiceUtil.getWARDisplay(servletContextName, xml);
+				PortletLocalServiceUtil.getWARDisplay(servletContextName, xml);
 
 			for (int i = 0; i < companyIds.length; i++) {
 				String companyId = companyIds[i];

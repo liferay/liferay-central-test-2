@@ -26,7 +26,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.spring.LayoutServiceUtil;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
@@ -119,7 +119,7 @@ public class UpdateLayoutAction extends Action {
 
 				String companyId = PortalUtil.getCompanyId(req);
 
-				Portlet portlet = PortletServiceUtil.getPortletById(
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(
 					companyId, portletId);
 
 				DynamicServletRequest dynamicReq = null;

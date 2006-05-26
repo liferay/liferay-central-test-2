@@ -46,7 +46,7 @@ Iterator itr1 = portletCategory.getPortlets().iterator();
 while (itr1.hasNext()) {
 	String portletId = (String)itr1.next();
 
-	Portlet portlet = PortletServiceUtil.getPortletById(user.getCompanyId(), portletId);
+	Portlet portlet = PortletLocalServiceUtil.getPortletById(user.getCompanyId(), portletId);
 
 	if (portlet != null) {
 		if (portlet.isSystem()) {

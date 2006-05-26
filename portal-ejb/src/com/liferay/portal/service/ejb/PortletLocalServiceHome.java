@@ -20,17 +20,17 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.service.ejb;
+
+import javax.ejb.CreateException;
+import javax.ejb.EJBLocalHome;
 
 /**
- * <a href="Note.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletLocalServiceHome.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class Note extends NoteModel {
-
-	public Note() {
-	}
-
+public interface PortletLocalServiceHome extends EJBLocalHome {
+	public PortletLocalServiceEJB create() throws CreateException;
 }

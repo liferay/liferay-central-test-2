@@ -28,7 +28,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.permission.GroupPermission;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.struts.DynamicPortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -113,7 +113,8 @@ public class EditConfigurationAction extends DynamicPortletAction {
 		String companyId = PortalUtil.getCompanyId(req);
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
-		return PortletServiceUtil.getPortletById(companyId, portletResource);
+		return PortletLocalServiceUtil.getPortletById(
+			companyId, portletResource);
 	}
 
 }

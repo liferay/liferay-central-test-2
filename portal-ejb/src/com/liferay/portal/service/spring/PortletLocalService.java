@@ -23,31 +23,39 @@
 package com.liferay.portal.service.spring;
 
 /**
- * <a href="PortletServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletLocalService.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class PortletServiceUtil {
-	public static com.liferay.portal.model.Portlet updatePortlet(
+public interface PortletLocalService {
+	public com.liferay.portal.model.PortletCategory getEARDisplay(
+		java.lang.String xml)
+		throws org.dom4j.DocumentException, java.io.IOException;
+
+	public com.liferay.portal.model.PortletCategory getWARDisplay(
+		java.lang.String servletContextName, java.lang.String xml)
+		throws org.dom4j.DocumentException, java.io.IOException;
+
+	public com.liferay.portal.model.Portlet getPortletById(
+		java.lang.String companyId, java.lang.String portletId)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Portlet getPortletByStrutsPath(
+		java.lang.String companyId, java.lang.String strutsPath)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List getPortlets(java.lang.String companyId)
+		throws com.liferay.portal.SystemException;
+
+	public void initEAR(java.lang.String[] xmls);
+
+	public java.util.List initWAR(java.lang.String servletContextName,
+		java.lang.String[] xmls);
+
+	public com.liferay.portal.model.Portlet updatePortlet(
 		java.lang.String companyId, java.lang.String portletId,
 		java.lang.String roles, boolean active)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			PortletService portletService = PortletServiceFactory.getService();
-
-			return portletService.updatePortlet(companyId, portletId, roles,
-				active);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
+			com.liferay.portal.SystemException;
 }

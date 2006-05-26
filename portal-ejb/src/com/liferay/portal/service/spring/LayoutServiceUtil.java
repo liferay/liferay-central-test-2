@@ -71,14 +71,35 @@ public class LayoutServiceUtil {
 		}
 	}
 
-	public static java.util.List getLayouts(java.lang.String companyId,
-		java.lang.String portletId, java.lang.String prefsKey,
-		java.lang.String prefsValue) throws com.liferay.portal.SystemException {
+	public static java.lang.String getLayoutName(java.lang.String layoutId,
+		java.lang.String ownerId, java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
 		try {
 			LayoutService layoutService = LayoutServiceFactory.getService();
 
-			return layoutService.getLayouts(companyId, portletId, prefsKey,
-				prefsValue);
+			return layoutService.getLayoutName(layoutId, ownerId, languageId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static com.liferay.portal.model.LayoutReference[] getLayoutReferences(
+		java.lang.String companyId, java.lang.String portletId,
+		java.lang.String prefsKey, java.lang.String prefsValue)
+		throws com.liferay.portal.SystemException {
+		try {
+			LayoutService layoutService = LayoutServiceFactory.getService();
+
+			return layoutService.getLayoutReferences(companyId, portletId,
+				prefsKey, prefsValue);
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;

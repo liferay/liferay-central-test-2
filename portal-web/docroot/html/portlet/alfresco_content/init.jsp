@@ -35,6 +35,7 @@ if (Validator.isNotNull(portletResource)) {
 
 String baseURL = prefs.getValue("base-url", StringPool.BLANK);
 String indexURL = prefs.getValue("index-url", StringPool.BLANK);
+String nodeId = prefs.getValue("node-id", StringPool.BLANK);
 String userId = prefs.getValue("user-id", StringPool.BLANK);
 String password = prefs.getValue("password", StringPool.BLANK);
 boolean maximizeLinks = GetterUtil.getBoolean(prefs.getValue("maximize-links", StringPool.BLANK));

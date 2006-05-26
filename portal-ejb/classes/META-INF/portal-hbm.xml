@@ -199,20 +199,6 @@
 		<property name="name" />
 		<property name="type" column="type_" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.NoteHBM" table="Note">
-		<cache usage="read-write" />
-		<id name="noteId" type="java.lang.String">
-			<generator class="assigned" />
-		</id>
-		<property name="companyId" />
-		<property name="userId" />
-		<property name="userName" />
-		<property name="createDate" />
-		<property name="modifiedDate" />
-		<property name="className" />
-		<property name="classPK" />
-		<property name="content" />
-	</class>
 	<class name="com.liferay.portal.service.persistence.OrganizationHBM" table="Organization_">
 		<cache usage="read-write" />
 		<id name="organizationId" type="java.lang.String">

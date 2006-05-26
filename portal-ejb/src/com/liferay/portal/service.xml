@@ -415,53 +415,6 @@
 			<finder-column name="type" />
 		</finder>
 	</entity>
-	<entity name="Note" local-service="true" remote-service="false">
-
-		<!-- PK fields -->
-
-		<column name="noteId" type="String" primary="true" />
-
-		<!-- Audit fields -->
-
-		<column name="companyId" type="String" />
-		<column name="userId" type="String" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
-
-		<!-- Other fields -->
-
-		<column name="className" type="String" />
-		<column name="classPK" type="String" />
-		<column name="content" type="String" />
-
-		<!-- Order -->
-
-		<order by="desc">
-			<order-column name="companyId" />
-			<order-column name="className" />
-			<order-column name="classPK" />
-			<order-column name="createDate" />
-		</order>
-
-		<!-- Finder methods -->
-
-		<finder name="CompanyId" return-type="Collection">
-			<finder-column name="companyId" />
-		</finder>
-		<finder name="UserId" return-type="Collection">
-			<finder-column name="userId" />
-		</finder>
-		<finder name="C_C" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="className" />
-		</finder>
-		<finder name="C_C_C" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="className" />
-			<finder-column name="classPK" />
-		</finder>
-	</entity>
 	<entity name="Organization" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -688,7 +641,7 @@
 		</finder>
 	</entity>
 	<entity name="Portal" local-service="false" remote-service="true" />
-	<entity name="Portlet" local-service="false" remote-service="true">
+	<entity name="Portlet" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 

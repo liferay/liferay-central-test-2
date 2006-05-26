@@ -25,7 +25,7 @@ package com.liferay.portlet.journal.action;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
@@ -403,7 +403,7 @@ public class EditArticleAction extends PortletAction {
 
 		Layout layout = themeDisplay.getLayout();
 
-		Portlet portlet = PortletServiceUtil.getPortletById(
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			themeDisplay.getCompanyId(), portletResource);
 
 		JournalContentSearchLocalServiceUtil.updateContentSearch(

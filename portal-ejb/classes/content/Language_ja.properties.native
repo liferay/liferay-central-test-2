@@ -1216,6 +1216,7 @@ no-zip-code-was-found-associated-with-the-given-street-city-and-state=郵便番�
 no-zip-codes-were-found-associated-with-the-given-city-and-state=郵便番号ある特定の都市および州と準見つけられなかった。
 no-zip-codes-were-found-associated-with-the-given-street-city-and-state=郵便番号ある特定の通り、都市、および州と準見つけられなかった。
 no=否
+node-id=ノードID
 node=ノード
 nodes-require-at-least-one-read-role=ノードは少なくとも1 つの読まれた役割を要求する。
 nodes-require-at-least-one-write-role=ノードは少なくとも1 つを書く役割を要求する。

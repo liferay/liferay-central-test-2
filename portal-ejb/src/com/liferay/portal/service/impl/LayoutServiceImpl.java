@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.LayoutPermission;
@@ -65,13 +66,24 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 		LayoutLocalServiceUtil.deleteLayout(layoutId, ownerId);
 	}
 
-	public List getLayouts(
+	public String getLayoutName(
+			String layoutId, String ownerId, String languageId)
+		throws PortalException, SystemException {
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+
+		return layout.getName(languageId);
+	}
+
+	public LayoutReference[] getLayoutReferences(
 			String companyId, String portletId, String prefsKey,
 			String prefsValue)
 		throws SystemException {
 
-		return LayoutLocalServiceUtil.getLayouts(
+		List list = LayoutLocalServiceUtil.getLayouts(
 			companyId, portletId, prefsKey, prefsValue);
+
+		return (LayoutReference[])list.toArray(new LayoutReference[0]);
 	}
 
 	public void setLayouts(

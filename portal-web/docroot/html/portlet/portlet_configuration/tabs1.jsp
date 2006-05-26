@@ -30,7 +30,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 String portletResource = ParamUtil.getString(request, "portletResource");
 String previewWidth = ParamUtil.getString(request, "previewWidth");
 
-Portlet portlet = PortletServiceUtil.getPortletById(company.getCompanyId(), portletResource);
+Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 
 String tabNames = "look-and-feel,permissions";
 String tabValues = tabNames;

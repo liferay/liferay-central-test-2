@@ -26,8 +26,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesServiceUtil;
-import com.liferay.portal.service.spring.PortletServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.util.xml.XMLFormatter;
@@ -230,8 +230,8 @@ public class PortletPreferencesImpl
 		}
 
 		try {
-			Portlet portlet =
-				PortletServiceUtil.getPortletById(_companyId, _pk.portletId);
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				_companyId, _pk.portletId);
 
 			if (!_pk.portletId.equals(PortletKeys.PORTAL)) {
 				PreferencesValidator prefsValidator =

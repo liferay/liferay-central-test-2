@@ -23,7 +23,7 @@
 package com.liferay.portal.wsrp;
 
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.wsrp.util.WSRPUtil;
@@ -75,7 +75,7 @@ public class DescriptionHandlerImpl implements DescriptionHandler {
 		Portlet portlet = null;
 
 		try {
-			portlet = PortletServiceUtil.getPortletById(companyId,
+			portlet = PortletLocalServiceUtil.getPortletById(companyId,
 					portletHandle);
 		}
 		catch (Exception e) {
@@ -99,7 +99,7 @@ public class DescriptionHandlerImpl implements DescriptionHandler {
 		PortletDescription[] portletDescriptions = null;
 
 		try {
-			List portlets = PortletServiceUtil.getPortlets(companyId);
+			List portlets = PortletLocalServiceUtil.getPortlets(companyId);
 			portletDescriptions = new PortletDescription[portlets.size()];
 
 			for (int i = 0; i < portlets.size(); i++) {

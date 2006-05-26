@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.NoteLocalService;
+import com.liferay.portal.service.spring.PortletLocalService;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -32,58 +32,66 @@ import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 
 /**
- * <a href="NoteLocalServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletLocalServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class NoteLocalServiceEJBImpl implements NoteLocalService, SessionBean {
-	public static final String CLASS_NAME = NoteLocalService.class.getName() +
+public class PortletLocalServiceEJBImpl implements PortletLocalService,
+	SessionBean {
+	public static final String CLASS_NAME = PortletLocalService.class.getName() +
 		".transaction";
 
-	public static NoteLocalService getService() {
+	public static PortletLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
 
-		return (NoteLocalService)ctx.getBean(CLASS_NAME);
+		return (PortletLocalService)ctx.getBean(CLASS_NAME);
 	}
 
-	public com.liferay.portal.model.Note addNote(java.lang.String userId,
-		java.lang.String className, java.lang.String classPK,
-		java.lang.String content)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		return getService().addNote(userId, className, classPK, content);
+	public com.liferay.portal.model.PortletCategory getEARDisplay(
+		java.lang.String xml)
+		throws org.dom4j.DocumentException, java.io.IOException {
+		return getService().getEARDisplay(xml);
 	}
 
-	public void deleteNote(java.lang.String noteId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		getService().deleteNote(noteId);
+	public com.liferay.portal.model.PortletCategory getWARDisplay(
+		java.lang.String servletContextName, java.lang.String xml)
+		throws org.dom4j.DocumentException, java.io.IOException {
+		return getService().getWARDisplay(servletContextName, xml);
 	}
 
-	public void deleteNotes(java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK)
+	public com.liferay.portal.model.Portlet getPortletById(
+		java.lang.String companyId, java.lang.String portletId)
 		throws com.liferay.portal.SystemException {
-		getService().deleteNotes(companyId, className, classPK);
+		return getService().getPortletById(companyId, portletId);
 	}
 
-	public com.liferay.portal.model.Note getNote(java.lang.String noteId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		return getService().getNote(noteId);
-	}
-
-	public java.util.List getNotes(java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK)
+	public com.liferay.portal.model.Portlet getPortletByStrutsPath(
+		java.lang.String companyId, java.lang.String strutsPath)
 		throws com.liferay.portal.SystemException {
-		return getService().getNotes(companyId, className, classPK);
+		return getService().getPortletByStrutsPath(companyId, strutsPath);
 	}
 
-	public com.liferay.portal.model.Note updateNote(java.lang.String noteId,
-		java.lang.String content)
+	public java.util.List getPortlets(java.lang.String companyId)
+		throws com.liferay.portal.SystemException {
+		return getService().getPortlets(companyId);
+	}
+
+	public void initEAR(java.lang.String[] xmls) {
+		getService().initEAR(xmls);
+	}
+
+	public java.util.List initWAR(java.lang.String servletContextName,
+		java.lang.String[] xmls) {
+		return getService().initWAR(servletContextName, xmls);
+	}
+
+	public com.liferay.portal.model.Portlet updatePortlet(
+		java.lang.String companyId, java.lang.String portletId,
+		java.lang.String roles, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateNote(noteId, content);
+		return getService().updatePortlet(companyId, portletId, roles, active);
 	}
 
 	public void ejbCreate() throws CreateException {

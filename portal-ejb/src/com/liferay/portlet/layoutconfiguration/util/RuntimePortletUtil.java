@@ -23,7 +23,7 @@
 package com.liferay.portlet.layoutconfiguration.util;
 
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.PortletDisplayFactory;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -78,7 +78,7 @@ public class RuntimePortletUtil {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		Portlet portlet = PortletServiceUtil.getPortletById(
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			themeDisplay.getCompanyId(), portletId);
 
 		if ((portlet != null) && portlet.isInstanceable()) {
@@ -89,7 +89,7 @@ public class RuntimePortletUtil {
 				portletId +=
 					Portlet.INSTANCE_SEPARATOR + instanceId;
 
-				portlet = PortletServiceUtil.getPortletById(
+				portlet = PortletLocalServiceUtil.getPortletById(
 					themeDisplay.getCompanyId(), portletId);
 			}
 			else {

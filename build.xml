@@ -508,6 +508,14 @@
 		/>
 	</target>
 
+	<target name="zip-portal-client" depends="init-release">
+		<delete file="liferay-portal-client-${lp.version.file.name}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-client-${lp.version.file.name}.zip"
+			basedir="."
+			includes="lib/activation.jar,lib/axis.jar,lib/commons-discovery.jar,lib/commons-logging.jar,lib/jaxrpc.jar,lib/mail.jar,lib/saaj.jar,lib/wsdl4j.jar,portal-client/portal-client.jar,portal-client/test/setenv.bat,portal-client/test/Test.java"
+		/>		
+	</target>
+
 	<target name="zip-resin" depends="init-release">
 		<delete file="liferay-portal-resin-${lp.version.file.name}.zip" failonerror="false" />
 		<zip zipfile="liferay-portal-resin-${lp.version.file.name}.zip"

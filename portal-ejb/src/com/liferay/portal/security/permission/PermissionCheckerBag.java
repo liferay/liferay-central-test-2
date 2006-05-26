@@ -34,6 +34,9 @@ import java.util.List;
  */
 public class PermissionCheckerBag implements Serializable {
 
+	public PermissionCheckerBag() {
+	}
+
 	public PermissionCheckerBag(List userOrgs, List userOrgGroups) {
 		_userOrgs = userOrgs;
 		_userOrgGroups = userOrgGroups;

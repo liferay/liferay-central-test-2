@@ -99,11 +99,6 @@ create index MBTopic_ix_CompanyId on MBTopic (companyId);
 create index MailReceipt_ix_CompanyId on MailReceipt (companyId);
 create index MailReceipt_ix_UserId on MailReceipt (userId);
 
-create index Note_ix_C_C on Note (companyId, className);
-create index Note_ix_C_C_C on Note (companyId, className, classPK);
-create index Note_ix_CompanyId on Note (companyId);
-create index Note_ix_UserId on Note (userId);
-
 create index OrgGroupPermission_ix_Permissi on OrgGroupPermission (permissionId);
 
 create index OrgGroupRole_ix_RoleId on OrgGroupRole (roleId);

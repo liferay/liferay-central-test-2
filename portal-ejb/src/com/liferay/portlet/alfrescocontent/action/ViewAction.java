@@ -28,6 +28,7 @@ import com.liferay.portlet.alfrescocontent.util.AlfrescoContentUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
+import com.liferay.util.Validator;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
@@ -60,10 +61,16 @@ public class ViewAction extends PortletAction {
 		boolean maximizeLinks = GetterUtil.getBoolean(
 			prefs.getValue("maximize-links", StringPool.BLANK));
 
-		String url = ParamUtil.getString(req, "url", indexURL);
+		String url = baseURL + "/" + ParamUtil.getString(req, "url", indexURL);
+
+		String previewURL = ParamUtil.getString(req, "previewURL");
+
+		if (Validator.isNotNull(previewURL)) {
+			url = previewURL;
+		}
 
 		String content = AlfrescoContentUtil.getContent(
-			baseURL, url, userId, password, maximizeLinks, res);
+			url, userId, password, maximizeLinks, res);
 
 		req.setAttribute(WebKeys.ALFRESCO_CONTENT, content);
 

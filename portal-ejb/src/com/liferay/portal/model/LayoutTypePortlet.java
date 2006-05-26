@@ -26,7 +26,7 @@ import com.germinus.easyconf.Filter;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.PwdGenerator;
@@ -175,7 +175,7 @@ public class LayoutTypePortlet extends LayoutType {
 		List portlets = new ArrayList(portletIds.length);
 
 		for (int i = 0; i < portletIds.length; i++) {
-			Portlet portlet = PortletServiceUtil.getPortletById(
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				getLayout().getCompanyId(), portletIds[i]);
 
 			if (portlet != null) {
@@ -252,7 +252,7 @@ public class LayoutTypePortlet extends LayoutType {
 		Portlet portlet = null;
 
 		try {
-			portlet = PortletServiceUtil.getPortletById(
+			portlet = PortletLocalServiceUtil.getPortletById(
 				getLayout().getCompanyId(), portletId);
 
 			if (!portlet.hasAddPortletPermission(userId)) {
@@ -757,7 +757,7 @@ public class LayoutTypePortlet extends LayoutType {
 		List portlets = new ArrayList();
 
 		for (int i = 0; i < portletIds.length; i++) {
-			Portlet portlet = PortletServiceUtil.getPortletById(
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				getLayout().getCompanyId(), portletIds[i]);
 
 			if ((portlet != null) && (!portlet.isInstanceable())) {

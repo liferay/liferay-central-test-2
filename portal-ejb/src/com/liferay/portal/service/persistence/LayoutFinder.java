@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -69,6 +70,7 @@ public class LayoutFinder {
 
 			q.addScalar("layoutLayoutId", Hibernate.STRING);
 			q.addScalar("layoutOwnerId", Hibernate.STRING);
+			q.addScalar("prefsPortletId", Hibernate.STRING);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -84,11 +86,12 @@ public class LayoutFinder {
 
 				String layoutId = (String)array[0];
 				String ownerId = (String)array[1];
+				String prefsPortletId = (String)array[2];
 
 				Layout layout = LayoutUtil.findByPrimaryKey(
 					new LayoutPK(layoutId, ownerId));
 
-				list.add(layout);
+				list.add(new LayoutReference(layout, prefsPortletId));
 			}
 		}
 		catch (Exception e) {

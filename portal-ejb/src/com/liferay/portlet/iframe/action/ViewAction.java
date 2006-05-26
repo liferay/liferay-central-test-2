@@ -25,7 +25,7 @@ package com.liferay.portlet.iframe.action;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -129,7 +129,7 @@ public class ViewAction extends PortletAction {
 
 				String portletId = configImpl.getPortletId();
 
-				Portlet portlet = PortletServiceUtil.getPortletById(
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(
 					themeDisplay.getCompanyId(), portletId);
 
 				src =

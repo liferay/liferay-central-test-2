@@ -208,11 +208,15 @@ public class Layout extends LayoutModel {
 	}
 
 	public String getName(Locale locale) {
+		String localeLanguageId = LocaleUtil.toLanguageId(locale);
+
+		return getName(localeLanguageId);
+	}
+
+	public String getName(String localeLanguageId) {
 		String name = null;
 
 		try {
-			String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
 			String defaultLanguageId =
 				LocaleUtil.toLanguageId(Locale.getDefault());
 

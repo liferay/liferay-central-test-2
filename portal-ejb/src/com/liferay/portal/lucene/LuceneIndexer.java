@@ -23,7 +23,7 @@
 package com.liferay.portal.lucene;
 
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.util.comparator.PortletLuceneComparator;
 import com.liferay.util.InstancePool;
 import com.liferay.util.ServerDetector;
@@ -96,7 +96,7 @@ public class LuceneIndexer implements Runnable {
 		String[] indexIds = new String[] {_companyId};
 
 		try {
-			List portlets = PortletServiceUtil.getPortlets(_companyId);
+			List portlets = PortletLocalServiceUtil.getPortlets(_companyId);
 
 			Collections.sort(portlets, new PortletLuceneComparator());
 

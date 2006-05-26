@@ -67,13 +67,22 @@ public class LayoutServiceEJBImpl implements LayoutService, SessionBean {
 		getService().deleteLayout(layoutId, ownerId);
 	}
 
-	public java.util.List getLayouts(java.lang.String companyId,
-		java.lang.String portletId, java.lang.String prefsKey,
-		java.lang.String prefsValue)
+	public java.lang.String getLayoutName(java.lang.String layoutId,
+		java.lang.String ownerId, java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().getLayoutName(layoutId, ownerId, languageId);
+	}
+
+	public com.liferay.portal.model.LayoutReference[] getLayoutReferences(
+		java.lang.String companyId, java.lang.String portletId,
+		java.lang.String prefsKey, java.lang.String prefsValue)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getLayouts(companyId, portletId, prefsKey,
+		return getService().getLayoutReferences(companyId, portletId, prefsKey,
 			prefsValue);
 	}
 

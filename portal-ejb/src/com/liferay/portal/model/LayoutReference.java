@@ -20,31 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.spring;
+package com.liferay.portal.model;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
+import java.io.Serializable;
 
 /**
- * <a href="NoteLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="LayoutReference.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class NoteLocalServiceFactory {
-	public static final String CLASS_NAME = NoteLocalServiceFactory.class.getName();
+public class LayoutReference implements Serializable {
 
-	public static NoteLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		NoteLocalServiceFactory factory = (NoteLocalServiceFactory)ctx.getBean(CLASS_NAME);
-
-		return factory._service;
+	public LayoutReference() {
 	}
 
-	public void setService(NoteLocalService service) {
-		_service = service;
+	public LayoutReference(LayoutModel layoutModel, String portletId) {
+		_layoutModel = layoutModel;
+		_portletId = portletId;
 	}
 
-	private NoteLocalService _service;
+	public LayoutModel getLayoutModel() {
+		return _layoutModel;
+	}
+
+	public void setLayoutModel(LayoutModel layoutModel) {
+		_layoutModel = layoutModel;
+	}
+
+	public String getPortletId() {
+		return _portletId;
+	}
+
+	public void setPortletId(String portletId) {
+		_portletId = portletId;
+	}
+
+	private LayoutModel _layoutModel;
+	private String _portletId;
+
 }

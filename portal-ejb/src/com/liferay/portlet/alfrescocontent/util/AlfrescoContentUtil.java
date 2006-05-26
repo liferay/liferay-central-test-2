@@ -51,23 +51,23 @@ import org.apache.commons.logging.LogFactory;
 public class AlfrescoContentUtil {
 
 	public static String getContent(
-		String baseURL, String url, String userId, String password,
-		boolean maximizeLinks, RenderResponse res) {
+		String url, String userId, String password, boolean maximizeLinks,
+		RenderResponse res) {
 
-		if (Validator.isNull(baseURL) || Validator.isNull(url) ||
-			Validator.isNull(userId) || Validator.isNull(password)) {
+		if (Validator.isNull(url) || Validator.isNull(userId) ||
+			Validator.isNull(password)) {
 
 			return null;
 		}
 
 		String content = null;
 
-		HttpMethod method = new GetMethod(baseURL + "/" + url);
+		HttpMethod method = new GetMethod(url);
 
 		try {
 			HttpClient client = new HttpClient();
 
-			URL urlObj = new URL(baseURL);
+			URL urlObj = new URL(url);
 
 			client.getState().setCredentials(
 				new AuthScope(

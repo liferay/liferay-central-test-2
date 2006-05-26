@@ -1218,6 +1218,7 @@ no-zip-code-was-found-associated-with-the-given-street-city-and-state=Non è sta
 no-zip-codes-were-found-associated-with-the-given-city-and-state=Non è stato trovato nessun codice di avviamento postale con citt� e stato indicati
 no-zip-codes-were-found-associated-with-the-given-street-city-and-state=Non è stato trovato nessun codice di avviamento postale con via, citt� e stato indicati,
 no=No
+node-id=Identificazione Di Nodo
 node=Nodo
 nodes-require-at-least-one-read-role=I nodi richiedono almeno un ruolo di lettura.
 nodes-require-at-least-one-write-role=I nodi richiedono almeno un ruolo di scrittura.

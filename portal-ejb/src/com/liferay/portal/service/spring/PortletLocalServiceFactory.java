@@ -22,37 +22,29 @@
 
 package com.liferay.portal.service.spring;
 
+import com.liferay.portal.spring.util.SpringUtil;
+
+import org.springframework.context.ApplicationContext;
+
 /**
- * <a href="NoteLocalService.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public interface NoteLocalService {
-	public com.liferay.portal.model.Note addNote(java.lang.String userId,
-		java.lang.String className, java.lang.String classPK,
-		java.lang.String content)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException;
+public class PortletLocalServiceFactory {
+	public static final String CLASS_NAME = PortletLocalServiceFactory.class.getName();
 
-	public void deleteNote(java.lang.String noteId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException;
+	public static PortletLocalService getService() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		PortletLocalServiceFactory factory = (PortletLocalServiceFactory)ctx.getBean(CLASS_NAME);
 
-	public void deleteNotes(java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException;
+		return factory._service;
+	}
 
-	public com.liferay.portal.model.Note getNote(java.lang.String noteId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException;
+	public void setService(PortletLocalService service) {
+		_service = service;
+	}
 
-	public java.util.List getNotes(java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Note updateNote(java.lang.String noteId,
-		java.lang.String content)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException;
+	private PortletLocalService _service;
 }

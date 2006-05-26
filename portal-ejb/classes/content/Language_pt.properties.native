@@ -1218,6 +1218,7 @@ no-zip-code-was-found-associated-with-the-given-street-city-and-state=Nenhum có
 no-zip-codes-were-found-associated-with-the-given-city-and-state=Nenhum código de fecho de correr foi encontrado associado com a cidade e o estado dados.
 no-zip-codes-were-found-associated-with-the-given-street-city-and-state=Nenhum código de fecho de correr foi encontrado associado com a rua, a cidade, e o estado dados.
 no=Não
+node-id=Nó Id
 node=Nó
 nodes-require-at-least-one-read-role=Os nós requerem ao menos um papel lido.
 nodes-require-at-least-one-write-role=Os nós requerem ao menos um escrevem o papel.

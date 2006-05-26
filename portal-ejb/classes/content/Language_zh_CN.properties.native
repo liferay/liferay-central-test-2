@@ -1217,6 +1217,7 @@ no-zip-code-was-found-associated-with-the-given-street-city-and-state=邮政编�
 no-zip-codes-were-found-associated-with-the-given-city-and-state=邮政编码未被发现有关以指定的城市和州。
 no-zip-codes-were-found-associated-with-the-given-street-city-and-state=邮政编码未被发现有关以指定的街道、城市, 和州。
 no=否
+node-id=结身份证
 node=节鲇
 nodes-require-at-least-one-read-role=节鲇要求至少一个读取的角色。
 nodes-require-at-least-one-write-role=节鲇要求至少一写入角色。

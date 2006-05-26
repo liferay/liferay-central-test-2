@@ -47,6 +47,15 @@
 	</td>
 </tr>
 <tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "node-id") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<input class="form-text" name="<portlet:namespace />nodeId" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= nodeId %>">
+	</td>
+</tr>
+<tr>
 	<td colspan="3">
 		<br>
 	</td>
