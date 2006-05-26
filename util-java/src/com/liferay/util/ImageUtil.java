@@ -122,18 +122,31 @@ public class ImageUtil {
 		return op.filter(image, null);
 	}
 
-	public static BufferedImage scale(BufferedImage image, int pixels) {
-		if ((image.getHeight() <= pixels) && (image.getWidth() <= pixels)) {
+	public static BufferedImage scale(BufferedImage image, int maxHeight, int maxWidth) {
+		int imageHeight = image.getHeight();
+		int imageWidth = image.getWidth();
+		
+		if (maxHeight == 0) {
+			maxHeight = imageHeight;
+		}
+
+		if (maxWidth == 0) {
+			maxWidth = imageWidth;
+		}
+
+		if (imageHeight <= maxHeight && imageWidth <= maxWidth) {
 			return image;
 		}
 
 		double factor = 0.1;
+		int heightDelta = imageHeight - maxHeight;
+		int widthDelta = imageWidth - maxWidth;
 
-		if (image.getHeight() > image.getWidth()) {
-			factor = (double)pixels / image.getHeight();
+		if (heightDelta > widthDelta) {
+			factor = (double)maxHeight / imageHeight;
 		}
 		else {
-			factor = (double)pixels / image.getWidth();
+			factor = (double)maxWidth / imageWidth;
 		}
 
 		return scale(image, factor);
