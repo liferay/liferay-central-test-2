@@ -29,7 +29,8 @@ import com.liferay.portlet.shopping.service.spring.ShoppingOrderItemLocalService
 import java.util.List;
 
 /**
- * <a href="ShoppingOrderItemLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShoppingOrderItemLocalServiceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author  Brian Wing Shun Chan
  *

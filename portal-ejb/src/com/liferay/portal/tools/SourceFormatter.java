@@ -126,9 +126,9 @@ public class SourceFormatter {
 					"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
 					"**\\PropsUtil.java", "**\\UserAttributes.java",
 					"**\\WebKeys.java", "**\\portal\\service\\**",
-					"**\\portlet\\**\\service\\**", "**\\model\\*Model.java",
-					"**\\tools\\ext_tmpl\\**", "**\\util-wsrp\\**",
-					"**\\WEB-INF\\jcvs\\work\\**"
+					"**\\portal-client\\**", "**\\portlet\\**\\service\\**",
+					"**\\model\\*Model.java", "**\\tools\\ext_tmpl\\**",
+					"**\\util-wsrp\\**", "**\\WEB-INF\\jcvs\\work\\**"
 				});
 			ds.setBasedir(basedir);
 			ds.scan();

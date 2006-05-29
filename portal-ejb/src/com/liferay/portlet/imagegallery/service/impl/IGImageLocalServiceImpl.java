@@ -301,11 +301,12 @@ public class IGImageLocalServiceImpl implements IGImageLocalService {
 
 			int thumbnailMaxHeight = GetterUtil.getInteger(
 				PropsUtil.get(PropsUtil.IG_IMAGE_THUMBNAIL_MAX_HEIGHT));
-			
+
 			int thumbnailMaxWidth = GetterUtil.getInteger(
 				PropsUtil.get(PropsUtil.IG_IMAGE_THUMBNAIL_MAX_WIDTH));
-			
-			BufferedImage thumbnail = ImageUtil.scale(bufferedImage, thumbnailMaxHeight, thumbnailMaxWidth);
+
+			BufferedImage thumbnail = ImageUtil.scale(
+				bufferedImage, thumbnailMaxHeight, thumbnailMaxWidth);
 
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 

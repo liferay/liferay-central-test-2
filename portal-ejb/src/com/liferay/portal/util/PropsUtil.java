@@ -594,6 +594,10 @@ public class PropsUtil {
 
 	public static final String IG_IMAGE_EXTENSIONS = "ig.image.extensions";
 
+	public static final String IG_IMAGE_THUMBNAIL_MAX_HEIGHT = "ig.image.thumbnail.max.height";
+
+	public static final String IG_IMAGE_THUMBNAIL_MAX_WIDTH = "ig.image.thumbnail.max.width";
+
 	// Journal Portlet
 
 	public static final String JOURNAL_ARTICLE_TYPES = "journal.article.types";
