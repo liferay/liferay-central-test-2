@@ -535,6 +535,211 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
+	public List findByC_T_S_P(String companyId, String typeId, String scope,
+		String primKey) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("companyId = ?");
+			query.append(" AND ");
+			query.append("typeId = ?");
+			query.append(" AND ");
+			query.append("scope = ?");
+			query.append(" AND ");
+			query.append("primKey = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setString(queryPos++, companyId);
+			q.setString(queryPos++, typeId);
+			q.setString(queryPos++, scope);
+			q.setString(queryPos++, primKey);
+
+			Iterator itr = q.list().iterator();
+			List list = new ArrayList();
+
+			while (itr.hasNext()) {
+				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
+				list.add(ResourceHBMUtil.model(resourceHBM));
+			}
+
+			return list;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByC_T_S_P(String companyId, String typeId, String scope,
+		String primKey, int begin, int end) throws SystemException {
+		return findByC_T_S_P(companyId, typeId, scope, primKey, begin, end, null);
+	}
+
+	public List findByC_T_S_P(String companyId, String typeId, String scope,
+		String primKey, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("companyId = ?");
+			query.append(" AND ");
+			query.append("typeId = ?");
+			query.append(" AND ");
+			query.append("scope = ?");
+			query.append(" AND ");
+			query.append("primKey = ?");
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setString(queryPos++, companyId);
+			q.setString(queryPos++, typeId);
+			q.setString(queryPos++, scope);
+			q.setString(queryPos++, primKey);
+
+			List list = new ArrayList();
+			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
+
+			while (itr.hasNext()) {
+				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
+				list.add(ResourceHBMUtil.model(resourceHBM));
+			}
+
+			return list;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public com.liferay.portal.model.Resource findByC_T_S_P_First(
+		String companyId, String typeId, String scope, String primKey,
+		OrderByComparator obc) throws NoSuchResourceException, SystemException {
+		List list = findByC_T_S_P(companyId, typeId, scope, primKey, 0, 1, obc);
+
+		if (list.size() == 0) {
+			String msg = "No Resource exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "typeId=";
+			msg += typeId;
+			msg += ", ";
+			msg += "scope=";
+			msg += scope;
+			msg += ", ";
+			msg += "primKey=";
+			msg += primKey;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchResourceException(msg);
+		}
+		else {
+			return (com.liferay.portal.model.Resource)list.get(0);
+		}
+	}
+
+	public com.liferay.portal.model.Resource findByC_T_S_P_Last(
+		String companyId, String typeId, String scope, String primKey,
+		OrderByComparator obc) throws NoSuchResourceException, SystemException {
+		int count = countByC_T_S_P(companyId, typeId, scope, primKey);
+		List list = findByC_T_S_P(companyId, typeId, scope, primKey, count - 1,
+				count, obc);
+
+		if (list.size() == 0) {
+			String msg = "No Resource exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "typeId=";
+			msg += typeId;
+			msg += ", ";
+			msg += "scope=";
+			msg += scope;
+			msg += ", ";
+			msg += "primKey=";
+			msg += primKey;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchResourceException(msg);
+		}
+		else {
+			return (com.liferay.portal.model.Resource)list.get(0);
+		}
+	}
+
+	public com.liferay.portal.model.Resource[] findByC_T_S_P_PrevAndNext(
+		String resourceId, String companyId, String typeId, String scope,
+		String primKey, OrderByComparator obc)
+		throws NoSuchResourceException, SystemException {
+		com.liferay.portal.model.Resource resource = findByPrimaryKey(resourceId);
+		int count = countByC_T_S_P(companyId, typeId, scope, primKey);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("companyId = ?");
+			query.append(" AND ");
+			query.append("typeId = ?");
+			query.append(" AND ");
+			query.append("scope = ?");
+			query.append(" AND ");
+			query.append("primKey = ?");
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setString(queryPos++, companyId);
+			q.setString(queryPos++, typeId);
+			q.setString(queryPos++, scope);
+			q.setString(queryPos++, primKey);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					resource, ResourceHBMUtil.getInstance());
+			com.liferay.portal.model.Resource[] array = new com.liferay.portal.model.Resource[3];
+			array[0] = (com.liferay.portal.model.Resource)objArray[0];
+			array[1] = (com.liferay.portal.model.Resource)objArray[1];
+			array[2] = (com.liferay.portal.model.Resource)objArray[2];
+
+			return array;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public com.liferay.portal.model.Resource findByC_N_T_S_P(String companyId,
 		String name, String typeId, String scope, String primKey)
 		throws NoSuchResourceException, SystemException {
@@ -705,6 +910,49 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByC_T_S_P(String companyId, String typeId, String scope,
+		String primKey) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("companyId = ?");
+			query.append(" AND ");
+			query.append("typeId = ?");
+			query.append(" AND ");
+			query.append("scope = ?");
+			query.append(" AND ");
+			query.append("primKey = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setString(queryPos++, companyId);
+			q.setString(queryPos++, typeId);
+			q.setString(queryPos++, scope);
+			q.setString(queryPos++, primKey);
+
+			Iterator itr = q.list().iterator();
+
+			while (itr.hasNext()) {
+				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
+				session.delete(resourceHBM);
+			}
+
+			session.flush();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public void removeByC_N_T_S_P(String companyId, String name, String typeId,
 		String scope, String primKey)
 		throws NoSuchResourceException, SystemException {
@@ -837,6 +1085,53 @@ public class ResourcePersistence extends BasePersistence {
 			q.setString(queryPos++, name);
 			q.setString(queryPos++, typeId);
 			q.setString(queryPos++, scope);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Integer count = (Integer)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByC_T_S_P(String companyId, String typeId, String scope,
+		String primKey) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("companyId = ?");
+			query.append(" AND ");
+			query.append("typeId = ?");
+			query.append(" AND ");
+			query.append("scope = ?");
+			query.append(" AND ");
+			query.append("primKey = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setString(queryPos++, companyId);
+			q.setString(queryPos++, typeId);
+			q.setString(queryPos++, scope);
+			q.setString(queryPos++, primKey);
 
 			Iterator itr = q.list().iterator();
 

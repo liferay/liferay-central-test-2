@@ -105,7 +105,7 @@ catch (RuntimeException re) {
 	re.printStackTrace();
 }
 
-PortletPreferences portletPrefs = PortletPreferencesServiceUtil.getPreferences(company.getCompanyId(), PortletPreferencesFactory.getPortletPreferencesPK(request, portletId));
+PortletPreferences portletPrefs = PortletPreferencesLocalServiceUtil.getPreferences(company.getCompanyId(), PortletPreferencesFactory.getPortletPreferencesPK(request, portletId));
 
 PortletConfig portletConfig = PortletConfigFactory.create(portlet, application);
 PortletContext portletCtx = portletConfig.getPortletContext();

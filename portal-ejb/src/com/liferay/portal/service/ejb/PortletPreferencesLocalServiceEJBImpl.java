@@ -48,15 +48,14 @@ public class PortletPreferencesLocalServiceEJBImpl
 		return (PortletPreferencesLocalService)ctx.getBean(CLASS_NAME);
 	}
 
-	public void deleteAllByLayout(
-		com.liferay.portal.service.persistence.LayoutPK pk)
+	public void deletePortletPreferences(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException {
-		getService().deleteAllByLayout(pk);
+		getService().deletePortletPreferences(ownerId);
 	}
 
-	public void deleteAllByUser(java.lang.String ownerId)
-		throws com.liferay.portal.SystemException {
-		getService().deleteAllByUser(ownerId);
+	public void deletePortletPreferences(java.lang.String layoutId,
+		java.lang.String ownerId) throws com.liferay.portal.SystemException {
+		getService().deletePortletPreferences(layoutId, ownerId);
 	}
 
 	public javax.portlet.PortletPreferences getDefaultPreferences(

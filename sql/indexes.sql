@@ -141,6 +141,7 @@ create index Region_ix_CountryId on Region (countryId);
 
 create index Resource_ix_C_N_T_S on Resource_ (companyId, name, typeId, scope);
 create index Resource_ix_C_N_T_S_P on Resource_ (companyId, name, typeId, scope, primKey);
+create index Resource_ix_C_T_S_P on Resource_ (companyId, typeId, scope, primKey);
 create index Resource_ix_CompanyId on Resource_ (companyId);
 
 create index Role_ix_C_C_C on Role_ (companyId, className, classPK);

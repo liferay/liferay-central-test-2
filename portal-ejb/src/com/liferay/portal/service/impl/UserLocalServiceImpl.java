@@ -73,7 +73,6 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.ContactLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.PasswordTrackerLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.service.spring.UserIdMapperLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalService;
@@ -454,10 +453,6 @@ public class UserLocalServiceImpl implements UserLocalService {
 		// Portrait
 
 		ImageLocalUtil.remove(userId);
-
-		// Portlet preferences
-
-		PortletPreferencesLocalServiceUtil.deleteAllByUser(userId);
 
 		// Old passwords
 

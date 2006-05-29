@@ -28,7 +28,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletPreferencesServiceUtil;
+import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PropsUtil;
@@ -132,7 +132,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 			HttpServletRequest httpReq = new WSRPServletRequest(WSRPUtil
 					.getHttpServletRequest(), reqLocale, reqMimeType,
 					renderParameters);
-			PortletPreferences prefs = PortletPreferencesServiceUtil
+			PortletPreferences prefs = PortletPreferencesLocalServiceUtil
 					.getPreferences(companyId, PortletPreferencesFactory
 							.getPortletPreferencesPK(httpReq, portlet
 									.getPortletId()));
@@ -213,7 +213,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 			HttpServletRequest httpReq = new WSRPServletRequest(WSRPUtil
 					.getHttpServletRequest(), reqLocale, reqMimeType,
 					actionParameters);
-			PortletPreferences prefs = PortletPreferencesServiceUtil
+			PortletPreferences prefs = PortletPreferencesLocalServiceUtil
 					.getPreferences(companyId, PortletPreferencesFactory
 							.getPortletPreferencesPK(httpReq, portlet
 									.getPortletId()));

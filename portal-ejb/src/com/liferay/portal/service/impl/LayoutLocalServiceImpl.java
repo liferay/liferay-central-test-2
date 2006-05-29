@@ -34,6 +34,7 @@ import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
@@ -42,6 +43,7 @@ import com.liferay.portal.service.persistence.LayoutPK;
 import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
+import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.LayoutLocalService;
 import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
@@ -158,8 +160,8 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		// Portlet preferences
 
-		PortletPreferencesLocalServiceUtil.deleteAllByLayout(
-			layout.getPrimaryKey());
+		PortletPreferencesLocalServiceUtil.deletePortletPreferences(
+			layout.getLayoutId(), layout.getOwnerId());
 
 		// Journal content searches
 
@@ -173,6 +175,16 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		}
 
 		// Resources
+
+		Iterator itr = ResourceFinder.findByC_P(
+			layout.getCompanyId(), layout.getPlid() +
+				Portlet.LAYOUT_SEPARATOR + "%").iterator();
+
+		while (itr.hasNext()) {
+			Resource resource = (Resource)itr.next();
+
+			ResourceLocalServiceUtil.deleteResource(resource);
+		}
 
 		ResourceLocalServiceUtil.deleteResource(
 			layout.getCompanyId(), Layout.class.getName(), Resource.TYPE_CLASS,

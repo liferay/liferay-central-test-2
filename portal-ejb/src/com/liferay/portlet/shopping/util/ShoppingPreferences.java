@@ -25,7 +25,7 @@ package com.liferay.portlet.shopping.util;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
-import com.liferay.portal.service.spring.PortletPreferencesServiceUtil;
+import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -404,7 +404,7 @@ public class ShoppingPreferences {
 			PortletKeys.SHOPPING, PortletKeys.PREFS_LAYOUT_ID_SHARED,
 			PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD + groupId);
 
-		_prefs = PortletPreferencesServiceUtil.getPreferences(
+		_prefs = PortletPreferencesLocalServiceUtil.getPreferences(
 			companyId, prefsPK);
 	}
 

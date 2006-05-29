@@ -37,7 +37,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.PortletPreferencesServiceUtil;
+import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.DateFormats;
 import com.liferay.portal.util.PortalUtil;
@@ -569,7 +569,7 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 					event.getGroupId());
 
 			PortletPreferences prefs =
-				PortletPreferencesServiceUtil.getPreferences(
+				PortletPreferencesLocalServiceUtil.getPreferences(
 					event.getCompanyId(), prefsPK);
 
 			Company company = CompanyUtil.findByPrimaryKey(user.getCompanyId());

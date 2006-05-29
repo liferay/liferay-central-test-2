@@ -660,7 +660,7 @@
 			<finder-column name="companyId" />
 		</finder>
 	</entity>
-	<entity name="PortletPreferences" local-service="true" remote-service="true">
+	<entity name="PortletPreferences" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
@@ -777,6 +777,12 @@
 			<finder-column name="name" />
 			<finder-column name="typeId" />
 			<finder-column name="scope" />
+		</finder>
+		<finder name="C_T_S_P" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="typeId" />
+			<finder-column name="scope" />
+			<finder-column name="primKey" />
 		</finder>
 		<finder name="C_N_T_S_P" return-type="Resource">
 			<finder-column name="companyId" />

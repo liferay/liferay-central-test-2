@@ -29,12 +29,11 @@ package com.liferay.portal.service.spring;
  *
  */
 public interface PortletPreferencesLocalService {
-	public void deleteAllByLayout(
-		com.liferay.portal.service.persistence.LayoutPK pk)
+	public void deletePortletPreferences(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException;
 
-	public void deleteAllByUser(java.lang.String ownerId)
-		throws com.liferay.portal.SystemException;
+	public void deletePortletPreferences(java.lang.String layoutId,
+		java.lang.String ownerId) throws com.liferay.portal.SystemException;
 
 	public javax.portlet.PortletPreferences getDefaultPreferences(
 		java.lang.String companyId, java.lang.String portletId)

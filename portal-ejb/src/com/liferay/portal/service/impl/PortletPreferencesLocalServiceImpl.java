@@ -27,7 +27,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferences;
-import com.liferay.portal.service.persistence.LayoutPK;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
@@ -49,21 +48,18 @@ import java.util.Map;
 public class PortletPreferencesLocalServiceImpl
 	implements PortletPreferencesLocalService {
 
-	public void deleteAllByLayout(LayoutPK pk) throws SystemException {
-		/*if (Layout.isGroup(pk.layoutId)) {
-			PortletPreferencesUtil.removeByLayoutId(pk.layoutId);
+	public void deletePortletPreferences(String ownerId)
+		throws SystemException {
 
-			PortletPreferencesLocalUtil.clearPreferencesPool();
-		}
-		else {
-			PortletPreferencesUtil.removeByL_O(pk.layoutId, pk.ownerId);
+		PortletPreferencesUtil.removeByOwnerId(ownerId);
 
-			PortletPreferencesLocalUtil.clearPreferencesPool(pk.ownerId);
-		}*/ // FIX ME
+		PortletPreferencesLocalUtil.clearPreferencesPool(ownerId);
 	}
 
-	public void deleteAllByUser(String ownerId) throws SystemException {
-		PortletPreferencesUtil.removeByOwnerId(ownerId);
+	public void deletePortletPreferences(String layoutId, String ownerId)
+		throws SystemException {
+
+		PortletPreferencesUtil.removeByL_O(layoutId, ownerId);
 
 		PortletPreferencesLocalUtil.clearPreferencesPool(ownerId);
 	}

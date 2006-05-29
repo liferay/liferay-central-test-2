@@ -27,7 +27,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletPreferencesServiceUtil;
+import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
@@ -205,7 +205,8 @@ public class LayoutAction extends Action {
 			PortletPreferencesFactory.getPortletPreferencesPK(req, portletId);
 
 		PortletPreferences prefs =
-			PortletPreferencesServiceUtil.getPreferences(companyId, prefsPK);
+			PortletPreferencesLocalServiceUtil.getPreferences(
+				companyId, prefsPK);
 
 		PortletConfig portletConfig = PortletConfigFactory.create(portlet, ctx);
 		PortletContext portletCtx = portletConfig.getPortletContext();

@@ -29,12 +29,11 @@ package com.liferay.portal.service.spring;
  *
  */
 public class PortletPreferencesLocalServiceUtil {
-	public static void deleteAllByLayout(
-		com.liferay.portal.service.persistence.LayoutPK pk)
+	public static void deletePortletPreferences(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException {
 		try {
 			PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-			portletPreferencesLocalService.deleteAllByLayout(pk);
+			portletPreferencesLocalService.deletePortletPreferences(ownerId);
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;
@@ -44,11 +43,12 @@ public class PortletPreferencesLocalServiceUtil {
 		}
 	}
 
-	public static void deleteAllByUser(java.lang.String ownerId)
-		throws com.liferay.portal.SystemException {
+	public static void deletePortletPreferences(java.lang.String layoutId,
+		java.lang.String ownerId) throws com.liferay.portal.SystemException {
 		try {
 			PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-			portletPreferencesLocalService.deleteAllByUser(ownerId);
+			portletPreferencesLocalService.deletePortletPreferences(layoutId,
+				ownerId);
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;

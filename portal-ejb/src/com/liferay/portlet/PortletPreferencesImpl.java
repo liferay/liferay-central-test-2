@@ -27,7 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletPreferencesServiceUtil;
+import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.util.xml.XMLFormatter;
@@ -201,7 +201,7 @@ public class PortletPreferencesImpl
 			try {
 				if (!_pk.portletId.equals(PortletKeys.PORTAL)) {
 					_defaultPreferences =
-						PortletPreferencesServiceUtil.getDefaultPreferences(
+						PortletPreferencesLocalServiceUtil.getDefaultPreferences(
 							_companyId, _pk.portletId);
 				}
 			}
@@ -242,7 +242,7 @@ public class PortletPreferencesImpl
 				}
 			}
 
-			PortletPreferencesServiceUtil.updatePreferences(_pk, this);
+			PortletPreferencesLocalServiceUtil.updatePreferences(_pk, this);
 		}
 		catch (PortalException pe) {
 			pe.printStackTrace();

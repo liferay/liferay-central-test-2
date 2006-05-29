@@ -37,7 +37,7 @@ import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.ImageLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletPreferencesServiceUtil;
+import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -308,7 +308,7 @@ public class JournalArticleLocalServiceImpl
 							article.getGroupId());
 
 					PortletPreferences prefs =
-						PortletPreferencesServiceUtil.getPreferences(
+						PortletPreferencesLocalServiceUtil.getPreferences(
 							article.getCompanyId(), prefsPK);
 
 					sendEmail(article, articleURL, prefs, "review");

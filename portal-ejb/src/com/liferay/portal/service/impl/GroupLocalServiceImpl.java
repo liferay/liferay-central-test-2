@@ -41,6 +41,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupUtil;
+import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.GroupLocalService;
@@ -66,6 +67,7 @@ import com.liferay.util.Validator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -252,6 +254,16 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		WikiNodeLocalServiceUtil.deleteNodes(groupId);
 
 		// Resources
+
+		Iterator itr = ResourceUtil.findByC_T_S_P(
+			group.getCompanyId(), Resource.TYPE_CLASS, Resource.SCOPE_GROUP,
+			groupId).iterator();
+
+		while (itr.hasNext()) {
+			Resource resource = (Resource)itr.next();
+
+			ResourceLocalServiceUtil.deleteResource(resource);
+		}
 
 		ResourceLocalServiceUtil.deleteResource(
 			group.getCompanyId(), Group.class.getName(), Resource.TYPE_CLASS,

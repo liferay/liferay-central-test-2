@@ -354,6 +354,17 @@
 				(Permission_.resourceId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.ResourceFinder.findByC_P">
+		<![CDATA[
+			SELECT
+				{Resource_.*}
+			FROM
+				Resource_
+			WHERE
+				(Resource_.companyId = ?) AND
+				(Resource_.primKey LIKE ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByC_N_1">
 		<![CDATA[
 			SELECT

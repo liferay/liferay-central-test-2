@@ -194,18 +194,6 @@
 		<property name="service" ref="com.liferay.portal.service.spring.PortletService.professional" />
 		<property name="serviceInterface" value="com.liferay.portal.service.spring.PortletService" />
 	</bean>
-	<bean name="/com_liferay_portal_service_spring_PortletPreferencesService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.spring.PortletPreferencesService.professional" />
-		<property name="serviceInterface" value="com.liferay.portal.service.spring.PortletPreferencesService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_PortletPreferencesService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.spring.PortletPreferencesService.professional" />
-		<property name="serviceInterface" value="com.liferay.portal.service.spring.PortletPreferencesService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_PortletPreferencesService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.spring.PortletPreferencesService.professional" />
-		<property name="serviceInterface" value="com.liferay.portal.service.spring.PortletPreferencesService" />
-	</bean>
 	<bean name="/com_liferay_portal_service_spring_RegionService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.spring.RegionService.professional" />
 		<property name="serviceInterface" value="com.liferay.portal.service.spring.RegionService" />

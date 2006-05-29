@@ -53,6 +53,10 @@ public interface ResourceLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public void deleteResource(com.liferay.portal.model.Resource resource)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public void deleteResource(java.lang.String companyId,
 		java.lang.String name, java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey)

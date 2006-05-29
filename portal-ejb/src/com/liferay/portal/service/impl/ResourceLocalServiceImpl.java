@@ -161,18 +161,23 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 	public void deleteResource(String resourceId)
 		throws PortalException, SystemException {
 
-		// Delete resource
-
 		try {
-			ResourceUtil.remove(resourceId);
+			Resource resource = ResourceUtil.findByPrimaryKey(resourceId);
+
+			deleteResource(resource);
 		}
 		catch (NoSuchResourceException nsre) {
-			_log.error(nsre);
+			_log.warn(nsre);
 		}
+	}
 
-		// Delete all permissions associated with this resource
+	public void deleteResource(Resource resource)
+		throws PortalException, SystemException {
 
-		Iterator itr = PermissionUtil.findByResourceId(resourceId).iterator();
+		// Permissions
+
+		Iterator itr = PermissionUtil.findByResourceId(
+			resource.getResourceId()).iterator();
 
 		while (itr.hasNext()) {
 			Permission permission = (Permission)itr.next();
@@ -181,7 +186,11 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 				permission.getPermissionId());
 		}
 
-		PermissionUtil.removeByResourceId(resourceId);
+		PermissionUtil.removeByResourceId(resource.getResourceId());
+
+		// Resource
+
+		ResourceUtil.remove(resource.getResourceId());
 	}
 
 	public void deleteResource(
@@ -196,7 +205,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 			deleteResource(resource.getResourceId());
 		}
 		catch (NoSuchResourceException nsre) {
-			_log.error(nsre);
+			_log.warn(nsre);
 		}
 	}
 

@@ -29,7 +29,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletPreferencesServiceUtil;
+import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -76,7 +76,7 @@ public class PortletPreferencesFactory {
 
 		if (themeDisplay.isSignedIn()) {
 			PortletPreferencesImpl prefsImpl = (PortletPreferencesImpl)
-				PortletPreferencesServiceUtil.getPreferences(
+				PortletPreferencesLocalServiceUtil.getPreferences(
 					themeDisplay.getCompanyId(), pk);
 
 			portalPrefs = new PortalPreferences(
@@ -90,7 +90,7 @@ public class PortletPreferencesFactory {
 
 			if (portalPrefs == null) {
 				PortletPreferencesImpl prefsImpl = (PortletPreferencesImpl)
-					PortletPreferencesServiceUtil.getPreferences(
+					PortletPreferencesLocalServiceUtil.getPreferences(
 						themeDisplay.getCompanyId(), pk);
 
 				prefsImpl = (PortletPreferencesImpl)prefsImpl.clone();
@@ -140,7 +140,7 @@ public class PortletPreferencesFactory {
 
 		String companyId = PortalUtil.getCompanyId(req);
 
-		return PortletPreferencesServiceUtil.getPreferences(
+		return PortletPreferencesLocalServiceUtil.getPreferences(
 			companyId, getPortletPreferencesPK(req, portletId));
 	}
 
@@ -265,7 +265,7 @@ public class PortletPreferencesFactory {
 		PortletPreferencesPK pk = new PortletPreferencesPK(
 			portletId, layoutId, ownerId);
 
-		return PortletPreferencesServiceUtil.getPreferences(
+		return PortletPreferencesLocalServiceUtil.getPreferences(
 			layout.getCompanyId(), pk);
 	}
 

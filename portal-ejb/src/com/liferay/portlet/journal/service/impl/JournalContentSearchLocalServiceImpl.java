@@ -32,7 +32,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletPreferencesServiceUtil;
+import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.NoSuchContentSearchException;
 import com.liferay.portlet.journal.model.JournalContentSearch;
@@ -105,7 +105,7 @@ public class JournalContentSearchLocalServiceImpl
 							layout.getOwnerId());
 
 						PortletPreferences prefs =
-							PortletPreferencesServiceUtil.getPreferences(
+							PortletPreferencesLocalServiceUtil.getPreferences(
 								layout.getCompanyId(), prefsPK);
 
 						String articleId = prefs.getValue(

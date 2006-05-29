@@ -28,7 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
-import com.liferay.portal.service.spring.PortletPreferencesServiceUtil;
+import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
@@ -454,7 +454,7 @@ public class MailUtil {
 				req, PortletKeys.MAIL);
 
 		PortletPreferences prefs =
-			PortletPreferencesServiceUtil.getPreferences(
+			PortletPreferencesLocalServiceUtil.getPreferences(
 				PortalUtil.getCompanyId(req), prefsPK);
 
 		return prefs;

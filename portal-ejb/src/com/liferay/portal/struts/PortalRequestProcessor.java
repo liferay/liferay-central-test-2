@@ -41,7 +41,7 @@ import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletPreferencesServiceUtil;
+import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
@@ -789,7 +789,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			PortletPreferencesFactory.getPortletPreferencesPK(req, portletId);
 
 		PortletPreferences prefs =
-			PortletPreferencesServiceUtil.getPreferences(
+			PortletPreferencesLocalServiceUtil.getPreferences(
 				portlet.getCompanyId(), prefsPK);
 
 		PortletConfig portletConfig = PortletConfigFactory.create(portlet, ctx);

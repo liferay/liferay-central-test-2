@@ -27,7 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
-import com.liferay.portal.service.spring.PortletPreferencesServiceUtil;
+import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.spring.RoleLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -121,7 +121,8 @@ public class OmniadminUtil {
 			PortletKeys.PORTAL, PortletKeys.PREFS_LAYOUT_ID_SHARED,
 			PortletKeys.PREFS_OWNER_ID_COMPANY + StringPool.PERIOD + companyId);
 
-		return PortletPreferencesServiceUtil.getPreferences(companyId, prefsPK);
+		return PortletPreferencesLocalServiceUtil.getPreferences(
+			companyId, prefsPK);
 	}
 
 	public static boolean isOmniadmin(String userId) {

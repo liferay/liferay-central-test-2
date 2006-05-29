@@ -216,6 +216,60 @@ public class ResourceUtil {
 			companyId, name, typeId, scope, obc);
 	}
 
+	public static java.util.List findByC_T_S_P(java.lang.String companyId,
+		java.lang.String typeId, java.lang.String scope,
+		java.lang.String primKey) throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_T_S_P(companyId, typeId, scope, primKey);
+	}
+
+	public static java.util.List findByC_T_S_P(java.lang.String companyId,
+		java.lang.String typeId, java.lang.String scope,
+		java.lang.String primKey, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_T_S_P(companyId, typeId, scope,
+			primKey, begin, end);
+	}
+
+	public static java.util.List findByC_T_S_P(java.lang.String companyId,
+		java.lang.String typeId, java.lang.String scope,
+		java.lang.String primKey, int begin, int end,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_T_S_P(companyId, typeId, scope,
+			primKey, begin, end, obc);
+	}
+
+	public static com.liferay.portal.model.Resource findByC_T_S_P_First(
+		java.lang.String companyId, java.lang.String typeId,
+		java.lang.String scope, java.lang.String primKey,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchResourceException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_T_S_P_First(companyId, typeId, scope,
+			primKey, obc);
+	}
+
+	public static com.liferay.portal.model.Resource findByC_T_S_P_Last(
+		java.lang.String companyId, java.lang.String typeId,
+		java.lang.String scope, java.lang.String primKey,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchResourceException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_T_S_P_Last(companyId, typeId, scope,
+			primKey, obc);
+	}
+
+	public static com.liferay.portal.model.Resource[] findByC_T_S_P_PrevAndNext(
+		java.lang.String resourceId, java.lang.String companyId,
+		java.lang.String typeId, java.lang.String scope,
+		java.lang.String primKey,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchResourceException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_T_S_P_PrevAndNext(resourceId,
+			companyId, typeId, scope, primKey, obc);
+	}
+
 	public static com.liferay.portal.model.Resource findByC_N_T_S_P(
 		java.lang.String companyId, java.lang.String name,
 		java.lang.String typeId, java.lang.String scope,
@@ -242,6 +296,12 @@ public class ResourceUtil {
 		getPersistence().removeByC_N_T_S(companyId, name, typeId, scope);
 	}
 
+	public static void removeByC_T_S_P(java.lang.String companyId,
+		java.lang.String typeId, java.lang.String scope,
+		java.lang.String primKey) throws com.liferay.portal.SystemException {
+		getPersistence().removeByC_T_S_P(companyId, typeId, scope, primKey);
+	}
+
 	public static void removeByC_N_T_S_P(java.lang.String companyId,
 		java.lang.String name, java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey)
@@ -260,6 +320,12 @@ public class ResourceUtil {
 		java.lang.String name, java.lang.String typeId, java.lang.String scope)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_N_T_S(companyId, name, typeId, scope);
+	}
+
+	public static int countByC_T_S_P(java.lang.String companyId,
+		java.lang.String typeId, java.lang.String scope,
+		java.lang.String primKey) throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_T_S_P(companyId, typeId, scope, primKey);
 	}
 
 	public static int countByC_N_T_S_P(java.lang.String companyId,
