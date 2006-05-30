@@ -162,7 +162,9 @@ public class PropsUtil {
 
 	// Organizations and Locations
 
-	public static final String ORGANIZATIONS_REQUIRED = "organizations.required";
+	public static final String ORGANIZATIONS_PARENT_ORGANIZATION_REQUIRED = "organizations.parent.organization.required";
+
+	public static final String ORGANIZATIONS_LOCATION_REQUIRED = "organizations.location.required";
 
 	// Look and Feel
 

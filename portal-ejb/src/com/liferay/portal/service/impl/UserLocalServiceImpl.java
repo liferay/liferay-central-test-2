@@ -283,11 +283,14 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		// Organization and location
 
-		if (Validator.isNotNull(organizationId) &&
-			Validator.isNotNull(locationId)) {
+		UserUtil.clearOrganizations(userId);
 
-			UserUtil.setOrganizations(
-				userId, new String[] {organizationId, locationId});
+		if (Validator.isNotNull(organizationId)) {
+			UserUtil.addOrganization(userId, organizationId);
+		}
+
+		if (Validator.isNotNull(locationId)) {
+			UserUtil.addOrganization(userId, locationId);
 		}
 
 		// Group
@@ -995,11 +998,14 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		// Organization and location
 
-		if (Validator.isNotNull(organizationId) &&
-			Validator.isNotNull(locationId)) {
+		UserUtil.clearOrganizations(userId);
 
-			UserUtil.setOrganizations(
-				userId, new String[] {organizationId, locationId});
+		if (Validator.isNotNull(organizationId)) {
+			UserUtil.addOrganization(userId, organizationId);
+		}
+
+		if (Validator.isNotNull(locationId)) {
+			UserUtil.addOrganization(userId, locationId);
 		}
 
 		return user;
@@ -1372,23 +1378,34 @@ public class UserLocalServiceImpl implements UserLocalService {
 			String companyId, String organizationId, String locationId)
 		throws PortalException, SystemException {
 
-		if (Validator.isNull(organizationId) && Validator.isNull(locationId) &&
-			!GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.ORGANIZATIONS_REQUIRED))) {
+		boolean organizationRequired = GetterUtil.getBoolean(PropsUtil.get(
+			PropsUtil.ORGANIZATIONS_PARENT_ORGANIZATION_REQUIRED));
 
-			return;
+		boolean locationRequired = GetterUtil.getBoolean(PropsUtil.get(
+			PropsUtil.ORGANIZATIONS_LOCATION_REQUIRED));
+
+		if (locationRequired) {
+			organizationRequired = true;
 		}
 
-		Organization organization =
-			OrganizationUtil.findByPrimaryKey(organizationId);
+		Organization organization = null;
 
-		Organization location =
-			OrganizationUtil.findByPrimaryKey(locationId);
+		if (organizationRequired || Validator.isNotNull(organizationId)) {
+			organization = OrganizationUtil.findByPrimaryKey(organizationId);
+		}
 
-		if (!location.getParentOrganizationId().equals(
-				organization.getOrganizationId())) {
+		Organization location = null;
 
-			throw new OrganizationParentException();
+		if (locationRequired || Validator.isNotNull(locationId)) {
+			location = OrganizationUtil.findByPrimaryKey(locationId);
+		}
+
+		if ((organization != null) && (location != null)) {
+			if (!location.getParentOrganizationId().equals(
+					organization.getOrganizationId())) {
+
+				throw new OrganizationParentException();
+			}
 		}
 	}
 

@@ -181,9 +181,13 @@ portletURL.setParameter("tabs1", tabs1);
 				row.addText(user2.getFullName(), rowURL);
 				row.addText(contact2.getJobTitle(), rowURL);
 
-				// Location
+				// Organization or location
 
 				Organization location = user2.getLocation();
+
+				if (Validator.isNull(location.getOrganizationId())) {
+					location = user2.getOrganization();
+				}
 
 				row.addText(location.getName(), rowURL);
 

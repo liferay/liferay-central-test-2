@@ -102,6 +102,28 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />removeLocation() {
+		document.<portlet:namespace />fm.<portlet:namespace />locationId.value = "";
+
+		var nameEl = document.getElementById("<portlet:namespace />locationName");
+
+		nameEl.href = "#";
+		nameEl.innerHTML = "";
+
+		document.getElementById("<portlet:namespace />removeLocationButton").disabled = true;
+	}
+
+	function <portlet:namespace />removeOrganization() {
+		document.<portlet:namespace />fm.<portlet:namespace />organizationId.value = "";
+
+		var nameEl = document.getElementById("<portlet:namespace />organizationName");
+
+		nameEl.href = "#";
+		nameEl.innerHTML = "";
+
+		document.getElementById("<portlet:namespace />removeOrganizationButton").disabled = true;
+	}
+
 	function selectLocation(locationId, name) {
 		document.<portlet:namespace />fm.<portlet:namespace />locationId.value = locationId;
 
@@ -310,6 +332,10 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 
 				<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && editable %>">
 					<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();">
+
+					<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_PARENT_ORGANIZATION_REQUIRED)) %>">
+						<input <%= Validator.isNull(organizationId) ? "disabled" : "" %> class="portlet-form-button" id="<portlet:namespace />removeOrganizationButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeOrganization();">
+					</c:if>
 				</c:if>
 			</td>
 		</tr>
@@ -327,6 +353,10 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 
 				<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && editable %>">
 					<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var locationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_location" /></portlet:renderURL>&<portlet:namespace />parentOrganizationId=' + document.<portlet:namespace />fm.<portlet:namespace />organizationId.value, 'location', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); locationWindow.focus();">
+
+					<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_REQUIRED)) %>">
+						<input <%= Validator.isNull(locationId) ? "disabled" : "" %> class="portlet-form-button" id="<portlet:namespace />removeLocationButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeLocation();">
+					</c:if>
 				</c:if>
 			</td>
 		</tr>
