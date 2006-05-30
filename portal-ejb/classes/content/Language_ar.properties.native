@@ -1,4 +1,12 @@
 ##
+## Language settings
+##
+
+lang.dir=rtl
+lang.line.begin=right
+lang.line.end=left
+
+##
 ## Portlet titles
 ##
 

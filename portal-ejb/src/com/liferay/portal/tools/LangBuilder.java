@@ -129,6 +129,15 @@ public class LangBuilder {
 					if (line.indexOf("{") != -1 || line.indexOf("<") != -1) {
 						translatedText = value;
 					}
+					else if (key.equals("lang.dir")) {
+						translatedText = "ltr";
+					}
+					else if (key.equals("lang.line.begin")) {
+						translatedText = "left";
+					}
+					else if (key.equals("lang.line.end")) {
+						translatedText = "right";
+					}
 					else {
 						translatedText = _translate(translationId, value);
 					}
