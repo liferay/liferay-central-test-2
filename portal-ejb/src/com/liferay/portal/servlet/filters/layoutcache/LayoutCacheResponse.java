@@ -95,7 +95,8 @@ public class LayoutCacheResponse extends HttpServletResponseWrapper {
 		_stream = _createOutputStream();
 
 		_writer = new PrintWriter(new OutputStreamWriter(
-			_stream, _res.getCharacterEncoding()));
+			//_stream, _res.getCharacterEncoding()));
+			_stream, LayoutCacheFilter.ENCODING));
 
 		return _writer;
 	}
@@ -106,6 +107,8 @@ public class LayoutCacheResponse extends HttpServletResponseWrapper {
 
 	public void setContentType(String contentType) {
 		_contentType = contentType;
+
+		super.setContentType(contentType);
 	}
 
 	public byte[] getData() {

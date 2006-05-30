@@ -74,6 +74,10 @@ public class LayoutCacheFilter implements Filter {
 	public static final boolean USE_LAYOUT_CACHE_FILTER = GetterUtil.get(
 		SystemProperties.get(LayoutCacheFilter.class.getName()), true);
 
+	public static final String ENCODING = GetterUtil.getString(
+		SystemProperties.get(LayoutCacheFilter.class.getName() + ".encoding"),
+		"UTF-8");
+
 	public void init(FilterConfig config) throws ServletException {
 		synchronized (FriendlyURLServlet.class) {
 			ServletContext ctx = config.getServletContext();
@@ -105,6 +109,8 @@ public class LayoutCacheFilter implements Filter {
 
 		HttpServletRequest request = (HttpServletRequest)req;
 		HttpServletResponse response = (HttpServletResponse)res;
+
+		request.setCharacterEncoding(ENCODING);
 
 		if (USE_LAYOUT_CACHE_FILTER && !_isPortletRequest(request) &&
 			_isLayout(request) && !_isSignedIn(request) &&

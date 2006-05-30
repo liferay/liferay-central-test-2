@@ -144,6 +144,10 @@
 
 	<target name="build-lang-native2ascii-all">
 		<antcall target="build-lang-native2ascii">
+			<param name="lang.code" value="ar" />
+		</antcall>
+
+		<antcall target="build-lang-native2ascii">
 			<param name="lang.code" value="zh_CN" />
 		</antcall>
 
