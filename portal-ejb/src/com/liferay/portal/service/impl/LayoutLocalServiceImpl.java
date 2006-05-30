@@ -29,15 +29,19 @@ import com.liferay.portal.LayoutNameException;
 import com.liferay.portal.LayoutParentLayoutIdException;
 import com.liferay.portal.LayoutTypeException;
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPK;
 import com.liferay.portal.service.persistence.LayoutUtil;
@@ -45,8 +49,10 @@ import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutLocalService;
 import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.spring.PermissionLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -70,6 +76,9 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -227,9 +236,14 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
 
+		Group guestGroup = GroupLocalServiceUtil.getGroup(
+			layoutSet.getCompanyId(), Group.GUEST);
+
 		Document doc = DocumentHelper.createDocument();
 
 		Element root = doc.addElement("root");
+
+		// Build compatibility
 
 		Element header = root.addElement("header");
 
@@ -239,27 +253,75 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		header.addAttribute("theme-id", layoutSet.getThemeId());
 		header.addAttribute("color-scheme-id", layoutSet.getColorSchemeId());
 
+		// Layouts
+
 		Iterator itr = getLayouts(ownerId).iterator();
 
 		while (itr.hasNext()) {
 			Layout layout = (Layout)itr.next();
 
-			Element el = root.addElement("layout");
+			Element layoutEl = root.addElement("layout");
 
-			el.addAttribute("layout-id", layout.getLayoutId());
-			el.addElement("parent-layout-id").addText(
+			layoutEl.addAttribute("layout-id", layout.getLayoutId());
+			layoutEl.addElement("parent-layout-id").addText(
 				layout.getParentLayoutId());
-			el.addElement("name").addCDATA(layout.getName());
-			el.addElement("type").addText(layout.getType());
-			el.addElement("type-settings").addCDATA(layout.getTypeSettings());
-			el.addElement("hidden").addText(
+			layoutEl.addElement("name").addCDATA(layout.getName());
+			layoutEl.addElement("type").addText(layout.getType());
+			layoutEl.addElement("type-settings").addCDATA(
+				layout.getTypeSettings());
+			layoutEl.addElement("hidden").addText(
 				Boolean.toString(layout.getHidden()));
-			el.addElement("friendly-url").addText(layout.getFriendlyURL());
-			el.addElement("theme-id").addText(layout.getThemeId());
-			el.addElement("color-scheme-id").addText(layout.getColorSchemeId());
-			el.addElement("priority").addText(
+			layoutEl.addElement("friendly-url").addText(
+				layout.getFriendlyURL());
+			layoutEl.addElement("theme-id").addText(layout.getThemeId());
+			layoutEl.addElement("color-scheme-id").addText(
+				layout.getColorSchemeId());
+			layoutEl.addElement("priority").addText(
 				Integer.toString(layout.getPriority()));
+
+			// Layout permissions
+
+			Element permissionsEl = layoutEl.addElement("permissions");
+
+			exportLayoutPermissions(
+				layout, layout.getGroupId(), permissionsEl,
+				"community-actions");
+
+			if (!layout.getGroupId().equals(guestGroup.getGroupId())) {
+				exportLayoutPermissions(
+					layout, guestGroup.getGroupId(), permissionsEl,
+					"guest-actions");
+			}
+
+			// Portlet permissions
+
+			if (layout.getType().equals(Layout.TYPE_PORTLET)) {
+				LayoutTypePortlet layoutTypePortlet =
+					(LayoutTypePortlet)layout.getLayoutType();
+
+				List portletIds = layoutTypePortlet.getPortletIds();
+
+				for (int i = 0; i < portletIds.size(); i++) {
+					String portletId = (String)portletIds.get(i);
+
+					Element portletEl = permissionsEl.addElement("portlet");
+
+					portletEl.addAttribute("portlet-id", portletId);
+
+					exportPortletPermissions(
+						portletId, layout, layout.getGroupId(), portletEl,
+						"community-actions");
+
+					if (!layout.getGroupId().equals(guestGroup.getGroupId())) {
+						exportPortletPermissions(
+							portletId, layout, guestGroup.getGroupId(),
+							portletEl, "guest-actions");
+					}
+				}
+			}
 		}
+
+		// Portlet preferences
 
 		itr = PortletPreferencesLocalServiceUtil.getPortletPreferences(
 			ownerId).iterator();
@@ -273,6 +335,8 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			el.addAttribute("layout-id", prefs.getLayoutId());
 			el.addElement("preferences").addCDATA(prefs.getPreferences());
 		}
+
+		// XML file
 
 		String fileName = "layouts.xml";
 
@@ -326,7 +390,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		try {
 
-			// Grab XML file
+			// XML file
 
 			ZipReader zipReader = new ZipReader(file);
 
@@ -338,7 +402,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 			Element root = doc.getRootElement();
 
-			// Check build compatibility
+			// Build compatibility
 
 			Element header = (Element)root.element("header");
 
@@ -351,7 +415,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 				throw new LayoutImportException();
 			}
 
-			// Update look and feel
+			// Look and feel
 
 			String themeId = header.attributeValue("theme-id");
 			String colorSchemeId = header.attributeValue("color-scheme-id");
@@ -359,7 +423,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			LayoutSetLocalServiceUtil.updateLookAndFeel(
 				ownerId, themeId, colorSchemeId);
 
-			// Update layouts
+			// Layouts
 
 			User user = UserUtil.findByPrimaryKey(userId);
 
@@ -396,9 +460,14 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 				layout.setPriority(priority);
 
 				LayoutUtil.update(layout);
+
+				// Layout permissions
+
+				// Portlet permissions
+
 			}
 
-			// Update portlet preferences
+			// Portlet preferences
 
 			PortletPreferencesUtil.removeByOwnerId(ownerId);
 
@@ -419,7 +488,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 				PortletPreferencesUtil.update(prefs);
 			}
 
-			// Update page count
+			// Page count
 
 			LayoutSetLocalServiceUtil.updatePageCount(ownerId);
 		}
@@ -561,6 +630,66 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		LayoutUtil.update(layout);
 
 		return layout;
+	}
+
+	protected void exportLayoutPermissions(
+			Layout layout, String groupId, Element parentEl, String elName)
+		throws PortalException, SystemException {
+
+		Element el = parentEl.addElement(elName);
+
+		try {
+			Resource resource = ResourceLocalServiceUtil.getResource(
+				layout.getCompanyId(), Layout.class.getName(),
+				Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+				layout.getPrimaryKey().toString());
+
+			List permissions = PermissionLocalServiceUtil.getGroupPermissions(
+				groupId, resource.getResourceId());
+
+			List actions = ResourceActionsUtil.getActions(permissions);
+
+			for (int i = 0; i < actions.size(); i++) {
+				String action = (String)actions.get(i);
+
+				el.addElement("action-key").addText(action);
+			}
+		}
+		catch (NoSuchResourceException nsre) {
+			_log.warn(nsre);
+		}
+	}
+
+	protected void exportPortletPermissions(
+			String portletId, Layout layout, String groupId, Element parentEl,
+			String elName)
+		throws PortalException, SystemException {
+
+		Element el = parentEl.addElement(elName);
+
+		try {
+			String name = Portlet.getRootPortletId(portletId);
+			String primKey =
+				layout.getPlid() + Portlet.LAYOUT_SEPARATOR + portletId;
+
+			Resource resource = ResourceLocalServiceUtil.getResource(
+				layout.getCompanyId(), name, Resource.TYPE_CLASS,
+				Resource.SCOPE_INDIVIDUAL, primKey);
+
+			List permissions = PermissionLocalServiceUtil.getGroupPermissions(
+				groupId, resource.getResourceId());
+
+			List actions = ResourceActionsUtil.getActions(permissions);
+
+			for (int i = 0; i < actions.size(); i++) {
+				String action = (String)actions.get(i);
+
+				el.addElement("action-key").addText(action);
+			}
+		}
+		catch (NoSuchResourceException nsre) {
+			_log.warn(nsre);
+		}
 	}
 
 	protected String getNextLayoutId(String ownerId) throws SystemException {
@@ -771,5 +900,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			}
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(LayoutLocalServiceImpl.class);
 
 }
