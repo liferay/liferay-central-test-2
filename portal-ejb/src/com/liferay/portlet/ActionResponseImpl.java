@@ -23,11 +23,16 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.Validator;
 
 import java.io.IOException;
+
+import java.lang.reflect.Constructor;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -262,8 +267,31 @@ public class ActionResponseImpl implements ActionResponse {
 	}
 
 	protected PortletURL createPortletURL(boolean action) {
+
+		// Wrap portlet URL with a custom wrapper if and only if a custom
+		// wrapper for the portlet has been defined
+
+		Portlet portlet = getPortlet();
+
+		String portletURLClass = portlet.getPortletURLClass();
+
+		if (Validator.isNotNull(portletURLClass)) {
+			try {
+				Class portletURLClassObj = Class.forName(portletURLClass);
+
+				Constructor constructor =
+					portletURLClassObj.getConstructors()[0];
+
+				return (PortletURL)constructor.newInstance(
+					new Object[] {this, new Boolean(action)});
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
 		return new PortletURLImpl(
-				_req, _portletName, _layout.getLayoutId(), action);
+			_req, _portletName, _layout.getPlid(), action);
 	}
 
 	protected Layout getLayout() {
@@ -282,6 +310,20 @@ public class ActionResponseImpl implements ActionResponse {
 		return _portletName;
 	}
 
+	public Portlet getPortlet() {
+		if (_portlet == null) {
+			try {
+				_portlet = PortletLocalServiceUtil.getPortletById(
+					_companyId, _portletName);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return _portlet;
+	}
+
 	protected ActionResponseImpl() {
 		_log.debug("Creating new instance " + hashCode());
 	}
@@ -295,6 +337,7 @@ public class ActionResponseImpl implements ActionResponse {
 		_req = req;
 		_res = res;
 		_portletName = portletName;
+		_companyId = layout.getCompanyId();
 		_user = user;
 		_layout = layout;
 		setWindowState(windowState);
@@ -309,6 +352,7 @@ public class ActionResponseImpl implements ActionResponse {
 		_req = null;
 		_res = null;
 		_portletName = null;
+		_companyId = null;
 		_user = null;
 		_layout = null;
 		_windowState = null;
@@ -343,6 +387,8 @@ public class ActionResponseImpl implements ActionResponse {
 	private ActionRequestImpl _req;
 	private HttpServletResponse _res;
 	private String _portletName;
+	private Portlet _portlet;
+	private String _companyId;
 	private User _user;
 	private Layout _layout;
 	private Map _properties;
