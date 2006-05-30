@@ -336,6 +336,12 @@
 		</antcall>
 	</target>
 
+	<target name="build-service-portlet-test">
+		<antcall target="build-service">
+			<param name="service.file" value="src/com/liferay/portlet/test/service.xml" />
+		</antcall>
+	</target>
+
 	<target name="build-service-portlet-wiki">
 		<antcall target="build-service">
 			<param name="service.file" value="src/com/liferay/portlet/wiki/service.xml" />
