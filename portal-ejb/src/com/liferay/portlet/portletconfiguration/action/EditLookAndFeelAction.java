@@ -52,10 +52,12 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.DynaClass;
 import org.apache.struts.action.ActionForm;
@@ -183,34 +185,12 @@ public class EditLookAndFeelAction extends PortletAction {
 
 		DynaActionForm stylesForm = (DynaActionForm)form;
 
+		checkPermissions(req);
+		
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		PermissionChecker permissionChecker =
-			themeDisplay.getPermissionChecker();
-
-		String ownerId = Layout.getOwnerId(themeDisplay.getPlid());
-		String groupId = Layout.getGroupId(ownerId);
-
 		String portletResource = ParamUtil.getString(req, "portletResource");
-		String resourcePrimKey =
-			themeDisplay.getPlid() + Portlet.LAYOUT_SEPARATOR + portletResource;
-
-		try {
-			if (!permissionChecker.hasPermission(
-					groupId, portletResource, resourcePrimKey,
-					ActionKeys.CONFIGURATION) &&
-				!GroupPermission.contains(
-					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
-
-				throw new PrincipalException();
-			}
-		}
-		catch (PrincipalException pe) {
-			SessionErrors.add(req, PrincipalException.class.getName());
-
-			setForward(req, "portlet.portlet_configuration.error");
-		}
 
 		PortletPreferences portletSetup =
 			PortletPreferencesFactory.getPortletSetup(
@@ -270,6 +250,8 @@ public class EditLookAndFeelAction extends PortletAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
+		
+		checkPermissions(req);
 
 		PortletPreferences portletSetup =
 			PortletPreferencesFactory.getPortletSetup(
@@ -311,4 +293,36 @@ public class EditLookAndFeelAction extends PortletAction {
 		portletSetup.store();
 	}
 
+	protected void checkPermissions(PortletRequest req)
+		throws Exception {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		String ownerId = Layout.getOwnerId(themeDisplay.getPlid());
+		String groupId = Layout.getGroupId(ownerId);
+
+		String portletResource = ParamUtil.getString(req, "portletResource");
+		String resourcePrimKey =
+			themeDisplay.getPlid() + Portlet.LAYOUT_SEPARATOR + portletResource;
+
+		try {
+			if (!permissionChecker.hasPermission(
+					groupId, portletResource, resourcePrimKey,
+					ActionKeys.CONFIGURATION) &&
+				!GroupPermission.contains(
+					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
+
+				throw new PrincipalException();
+			}
+		}
+		catch (PrincipalException pe) {
+			SessionErrors.add(req, PrincipalException.class.getName());
+
+			setForward(req, "portlet.portlet_configuration.error");
+		}
+	}	
 }

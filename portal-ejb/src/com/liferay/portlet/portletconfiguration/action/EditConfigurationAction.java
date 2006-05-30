@@ -60,11 +60,41 @@ public class EditConfigurationAction extends DynamicPortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		Portlet portlet = getPortlet(req);
+		Portlet portlet = null;
+
+		try {
+			portlet = getPortlet(req);
+		}
+		catch (PrincipalException pe) {
+			SessionErrors.add(req, PrincipalException.class.getName());
+
+			setForward(req, "portlet.portlet_configuration.error");
+
+			return mapping.findForward(getForward(
+					req, "portlet.portlet_configuration.edit_configuration"));
+		}
 
 		ServletContext ctx =
 			(ServletContext)req.getAttribute(WebKeys.CTX);
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		res.setTitle(
+			PortalUtil.getPortletTitle(portlet, ctx, themeDisplay.getLocale()));
+
+		return super.render(mapping, form, config, req, res);
+	}
+
+	protected String getPath(PortletRequest req) throws Exception {
+		Portlet portlet = getPortlet(req);
+
+		return portlet.getConfigurationPath();
+	}
+
+	protected Portlet getPortlet(PortletRequest req) throws Exception {
+		String companyId = PortalUtil.getCompanyId(req);
+		
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
@@ -78,40 +108,14 @@ public class EditConfigurationAction extends DynamicPortletAction {
 		String resourcePrimKey =
 			themeDisplay.getPlid() + Portlet.LAYOUT_SEPARATOR + portletResource;
 
-		res.setTitle(
-			PortalUtil.getPortletTitle(portlet, ctx, themeDisplay.getLocale()));
+		if (!permissionChecker.hasPermission(
+				groupId, portletResource, resourcePrimKey,
+				ActionKeys.CONFIGURATION) &&
+			!GroupPermission.contains(
+				permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
 
-		try {
-			if (!permissionChecker.hasPermission(
-					groupId, portletResource, resourcePrimKey,
-					ActionKeys.CONFIGURATION) &&
-				!GroupPermission.contains(
-					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
-
-				throw new PrincipalException();
-			}
+			throw new PrincipalException();
 		}
-		catch (PrincipalException pe) {
-			SessionErrors.add(req, PrincipalException.class.getName());
-
-			setForward(req, "portlet.portlet_configuration.error");
-
-			return mapping.findForward(getForward(
-					req, "portlet.portlet_configuration.edit_configuration"));
-		}
-
-		return super.render(mapping, form, config, req, res);
-	}
-
-	protected String getPath(PortletRequest req) throws Exception {
-		Portlet portlet = getPortlet(req);
-
-		return portlet.getConfigurationPath();
-	}
-
-	protected Portlet getPortlet(PortletRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
-		String portletResource = ParamUtil.getString(req, "portletResource");
 
 		return PortletLocalServiceUtil.getPortletById(
 			companyId, portletResource);
