@@ -20,71 +20,59 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.tools;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.util.ant.Wsdl2JavaTask;
 
-import java.text.DateFormat;
+import java.io.File;
 
-import java.util.Date;
+import java.util.Iterator;
+
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalClientBuilder.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class PortalClientBuilder {
 
-	static String name = "Liferay Portal";
-
-	static {
-		if (PropsUtil.get(PropsUtil.PORTAL_RELEASE).equals("enterprise")) {
-			name += " Enterprise";
+	public static void main(String[] args) {
+		if (args.length == 3) {
+			new PortalClientBuilder(args[0], args[1], args[2]);
 		}
 		else {
-			name += " Professional";
+			throw new IllegalArgumentException();
 		}
 	}
 
-	static String version = "4.0.0 RC2";
+	public PortalClientBuilder(String fileName, String outputDir, String url) {
+		try {
+			SAXReader reader = new SAXReader();
 
-	static String codeName = "Lloyd-Jones";
+			Document doc = reader.read(new File(fileName));
 
-	static String build = "2967";
+			Element root = doc.getRootElement();
 
-	static String date = "May 30, 2006";
+			Iterator itr = root.elements("service").iterator();
 
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
+			while (itr.hasNext()) {
+				Element service = (Element)itr.next();
 
-	static String serverInfo = name + " / " + version;
+				String name = service.attributeValue("name");
 
-	public static final String getVersion() {
-		return version;
-	}
-
-	public static final String getCodeName() {
-		return codeName;
-	}
-
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
-	}
-
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
+				if (name.startsWith("Portal_") || name.startsWith("Portlet_")) {
+					Wsdl2JavaTask.generateJava(
+						url + "/" +  name + "?wsdl", outputDir);
+				}
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

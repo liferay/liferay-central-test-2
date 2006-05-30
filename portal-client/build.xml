@@ -5,14 +5,28 @@
 
 	<property name="deploy.dir" value="${app.server.lib}" />
 	<property name="jar.file" value="${ant.project.name}.jar" />
-	<property name="axis.url" value="http://localhost:8080/tunnel/axis" />
+	<property name="client.url" value="http://localhost:8080/tunnel/axis" />
 
 	<target name="build-client">
+		<delete dir="${source.dir}" />
 		<mkdir dir="${source.dir}" />
 
+		<!--
 		<axis-wsdl2java
 			output="${source.dir}"
 			url="${axis.url}/Portal_LayoutService?wsdl"
 		/>
+		-->
+
+		<java
+			classname="com.liferay.portal.tools.PortalClientBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<arg value="${project.dir}/tunnel-web/docroot/WEB-INF/server-config.wsdd" />
+			<arg value="${source.dir}" />
+			<arg value="${client.url}" />
+		</java>
 	</target>
 </project>
