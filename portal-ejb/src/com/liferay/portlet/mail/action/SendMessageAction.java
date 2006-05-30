@@ -32,7 +32,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.mail.MailMessageException;
 import com.liferay.portlet.mail.model.MailReceipt;
-import com.liferay.portlet.mail.service.spring.MailReceiptLocalServiceUtil;
 import com.liferay.portlet.mail.util.MailUtil;
 import com.liferay.portlet.mail.util.multiaccount.MailAccount;
 import com.liferay.portlet.mail.util.multiaccount.MailAccounts;
