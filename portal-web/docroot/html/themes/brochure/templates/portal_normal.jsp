@@ -24,7 +24,7 @@
 
 <%@ include file="portal_init.jsp" %>
 
-<html>
+<html dir="<bean:message key="lang.dir" />">
 
 <head>
 	<title><%= company.getName() + " - " + title %></title>

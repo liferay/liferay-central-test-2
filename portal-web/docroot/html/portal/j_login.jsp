@@ -37,7 +37,7 @@ String jPassword = (String)session.getAttribute("j_password");
 
 <c:choose>
 	<c:when test="<%= Validator.isNotNull(jUserName) && Validator.isNotNull(jPassword) %>">
-		<html>
+		<html dir="<bean:message key="lang.dir" />">
 
 		<head>
 			<meta content="<%= Constants.TEXT_HTML %>; charset=<%= LanguageUtil.getCharset(locale) %>" http-equiv="content-type">
@@ -102,7 +102,7 @@ String jPassword = (String)session.getAttribute("j_password");
 		}
 		%>
 
-		<html>
+		<html dir="<bean:message key="lang.dir" />">
 
 		<head>
 			<title></title>

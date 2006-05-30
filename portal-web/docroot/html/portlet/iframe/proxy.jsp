@@ -28,7 +28,7 @@
 String[] hiddenVariablesArray = StringUtil.split(hiddenVariables, StringPool.SEMICOLON);
 %>
 
-<html>
+<html dir="<bean:message key="lang.dir" />">
 
 <head>
 	<meta content="no-cache" http-equiv="Cache-Control">

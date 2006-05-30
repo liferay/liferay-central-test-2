@@ -24,7 +24,7 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
-<html>
+<html dir="<bean:message key="lang.dir" />">
 
 <head>
 	<meta content="<%= Constants.TEXT_HTML %>; charset=<%= LanguageUtil.getCharset(locale) %>" http-equiv="content-type">
