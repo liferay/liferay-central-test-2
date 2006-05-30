@@ -4939,14 +4939,6 @@
 			<jndi-name>ejb/liferay/UserLocalServiceHome</jndi-name>
 			<local-jndi-name>com_liferay_portal_service_ejb_UserLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABContactLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABListLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABListLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLFileRankLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/DLFileRankLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5074,14 +5066,6 @@
 			<is-clustered>true</is-clustered>
 			<jndi-name>com_liferay_portal_service_ejb_UserServiceEJB</jndi-name>
 			<local-jndi-name>com_liferay_portal_service_ejb_UserServiceEJB__PRAMATI_LOCAL</local-jndi-name>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABContactLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABListLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABListLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLFileRankLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/DLFileRankLocalServiceHome__PRAMATI_LOCAL</ejb-link>
@@ -5785,78 +5769,6 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/WebsiteLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/WebsiteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-		</ejb>
-		<ejb>
-			<name>com_liferay_portlet_addressbook_service_ejb_ABContactLocalServiceEJB</name>
-			<max-pool-size>40</max-pool-size>
-			<min-pool-size>20</min-pool-size>
-			<enable-freepool>false</enable-freepool>
-			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
-			<low-activity-interval>20</low-activity-interval>
-			<is-secure>false</is-secure>
-			<is-clustered>true</is-clustered>
-			<jndi-name>ejb/liferay/ABContactLocalServiceHome</jndi-name>
-			<local-jndi-name>com_liferay_portlet_addressbook_service_ejb_ABContactLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABListLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABListLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-		</ejb>
-		<ejb>
-			<name>com_liferay_portlet_addressbook_service_ejb_ABContactServiceEJB</name>
-			<max-pool-size>40</max-pool-size>
-			<min-pool-size>20</min-pool-size>
-			<enable-freepool>false</enable-freepool>
-			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
-			<low-activity-interval>20</low-activity-interval>
-			<is-secure>false</is-secure>
-			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portlet_addressbook_service_ejb_ABContactServiceEJB</jndi-name>
-			<local-jndi-name>com_liferay_portlet_addressbook_service_ejb_ABContactServiceEJB__PRAMATI_LOCAL</local-jndi-name>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABContactLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABListLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABListLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-		</ejb>
-		<ejb>
-			<name>com_liferay_portlet_addressbook_service_ejb_ABListLocalServiceEJB</name>
-			<max-pool-size>40</max-pool-size>
-			<min-pool-size>20</min-pool-size>
-			<enable-freepool>false</enable-freepool>
-			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
-			<low-activity-interval>20</low-activity-interval>
-			<is-secure>false</is-secure>
-			<is-clustered>true</is-clustered>
-			<jndi-name>ejb/liferay/ABListLocalServiceHome</jndi-name>
-			<local-jndi-name>com_liferay_portlet_addressbook_service_ejb_ABListLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABContactLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-		</ejb>
-		<ejb>
-			<name>com_liferay_portlet_addressbook_service_ejb_ABListServiceEJB</name>
-			<max-pool-size>40</max-pool-size>
-			<min-pool-size>20</min-pool-size>
-			<enable-freepool>false</enable-freepool>
-			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
-			<low-activity-interval>20</low-activity-interval>
-			<is-secure>false</is-secure>
-			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portlet_addressbook_service_ejb_ABListServiceEJB</jndi-name>
-			<local-jndi-name>com_liferay_portlet_addressbook_service_ejb_ABListServiceEJB__PRAMATI_LOCAL</local-jndi-name>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABContactLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABListLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABListLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 		</ejb>
 		<ejb>
@@ -6593,26 +6505,6 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/UserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-		</ejb>
-		<ejb>
-			<name>com_liferay_portlet_mail_service_ejb_MailReceiptServiceEJB</name>
-			<max-pool-size>40</max-pool-size>
-			<min-pool-size>20</min-pool-size>
-			<enable-freepool>false</enable-freepool>
-			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
-			<low-activity-interval>20</low-activity-interval>
-			<is-secure>false</is-secure>
-			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portlet_mail_service_ejb_MailReceiptServiceEJB</jndi-name>
-			<local-jndi-name>com_liferay_portlet_mail_service_ejb_MailReceiptServiceEJB__PRAMATI_LOCAL</local-jndi-name>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MailReceiptLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/MailReceiptLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 		</ejb>
 		<ejb>

@@ -103,6 +103,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -123,10 +127,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -145,6 +145,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -219,6 +223,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -239,10 +247,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -261,6 +265,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -331,6 +339,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -351,10 +363,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -373,6 +381,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -447,6 +459,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -467,10 +483,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -489,6 +501,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -559,6 +575,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -579,10 +599,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -601,6 +617,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -675,6 +695,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -695,10 +719,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -717,6 +737,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -787,6 +811,10 @@
 				<ejb-link>ejb/liferay/CompanyLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -807,10 +835,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -829,6 +853,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -903,6 +931,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -923,10 +955,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -945,6 +973,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -1019,6 +1051,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -1039,10 +1075,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -1061,6 +1093,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -1108,7 +1144,7 @@
 			</ejb-local-ref>
 		</ejb>
 		<ejb>
-			<name>com_liferay_portal_service_ejb_DataTrackerServiceEJB</name>
+			<name>com_liferay_portal_service_ejb_DataTrackerLocalServiceEJB</name>
 			<max-pool-size>40</max-pool-size>
 			<min-pool-size>20</min-pool-size>
 			<enable-freepool>false</enable-freepool>
@@ -1116,8 +1152,8 @@
 			<low-activity-interval>20</low-activity-interval>
 			<is-secure>false</is-secure>
 			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portal_service_ejb_DataTrackerServiceEJB</jndi-name>
-			<local-jndi-name>com_liferay_portal_service_ejb_DataTrackerServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<jndi-name>ejb/liferay/DataTrackerLocalServiceHome</jndi-name>
+			<local-jndi-name>com_liferay_portal_service_ejb_DataTrackerLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/AccountLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/AccountLocalServiceHome__PRAMATI_LOCAL</ejb-link>
@@ -1155,10 +1191,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -1177,6 +1209,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -1251,6 +1287,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/GroupLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/GroupLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -1265,10 +1305,6 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/LayoutSetLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
@@ -1289,6 +1325,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -1363,6 +1403,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -1383,10 +1427,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -1405,6 +1445,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -1519,6 +1563,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -1533,10 +1581,6 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/LayoutSetLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
@@ -1557,6 +1601,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -1671,6 +1719,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -1691,10 +1743,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -1713,6 +1761,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -1787,6 +1839,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -1801,10 +1857,6 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/LayoutSetLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
@@ -1825,6 +1877,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -1903,6 +1959,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -1917,10 +1977,6 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/LayoutSetLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
@@ -1941,6 +1997,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -2019,6 +2079,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -2039,10 +2103,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -2061,6 +2121,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -2135,6 +2199,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -2149,10 +2217,6 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/LayoutLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/LayoutLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
@@ -2173,6 +2237,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -2247,6 +2315,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -2267,10 +2339,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -2289,6 +2357,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -2363,120 +2435,8 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/GroupLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/GroupLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ImageLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ImageLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/LayoutLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/LayoutLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/LayoutSetLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/OrgLaborLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/OrgLaborLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PasswordTrackerLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PasswordTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PermissionLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PermissionLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PortletPreferencesLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PropertiesLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PropertiesLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ReleaseLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ReleaseLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ResourceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/RoleLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/RoleLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/SubscriptionLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserIdMapperLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserIdMapperLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserTrackerLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserTrackerPathLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserTrackerPathLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/WebsiteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/WebsiteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-		</ejb>
-		<ejb>
-			<name>com_liferay_portal_service_ejb_NoteLocalServiceEJB</name>
-			<max-pool-size>40</max-pool-size>
-			<min-pool-size>20</min-pool-size>
-			<enable-freepool>false</enable-freepool>
-			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
-			<low-activity-interval>20</low-activity-interval>
-			<is-secure>false</is-secure>
-			<is-clustered>true</is-clustered>
-			<jndi-name>ejb/liferay/NoteLocalServiceHome</jndi-name>
-			<local-jndi-name>com_liferay_portal_service_ejb_NoteLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/AccountLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/AccountLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/AddressLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/AddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/CompanyLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/CompanyLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ContactLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
@@ -2517,6 +2477,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -2591,6 +2555,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -2611,10 +2579,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrgLaborLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrgLaborLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -2629,6 +2593,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -2703,6 +2671,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -2723,10 +2695,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -2745,6 +2713,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -2819,6 +2791,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -2839,10 +2815,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -2857,6 +2829,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -2931,6 +2907,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -2951,10 +2931,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -2973,6 +2949,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -3047,6 +3027,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -3067,10 +3051,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -3085,6 +3065,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -3159,6 +3143,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -3179,10 +3167,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -3197,6 +3181,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -3271,6 +3259,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -3291,10 +3283,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -3313,6 +3301,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -3387,6 +3379,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -3407,10 +3403,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -3425,6 +3417,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PermissionLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PermissionLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -3499,6 +3495,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -3519,10 +3519,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -3541,6 +3537,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -3615,6 +3615,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -3635,8 +3639,124 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/OrgLaborLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/OrgLaborLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PasswordTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PasswordTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PermissionLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PermissionLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletPreferencesLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PropertiesLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PropertiesLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ReleaseLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ReleaseLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ResourceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/RoleLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/RoleLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/SubscriptionLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/UserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserIdMapperLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/UserIdMapperLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/UserTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserTrackerPathLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/UserTrackerPathLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/WebsiteLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/WebsiteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+		</ejb>
+		<ejb>
+			<name>com_liferay_portal_service_ejb_PortletLocalServiceEJB</name>
+			<max-pool-size>40</max-pool-size>
+			<min-pool-size>20</min-pool-size>
+			<enable-freepool>false</enable-freepool>
+			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
+			<low-activity-interval>20</low-activity-interval>
+			<is-secure>false</is-secure>
+			<is-clustered>true</is-clustered>
+			<jndi-name>ejb/liferay/PortletLocalServiceHome</jndi-name>
+			<local-jndi-name>com_liferay_portal_service_ejb_PortletLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/AccountLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/AccountLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/AddressLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/AddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CompanyLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/CompanyLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ContactLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/GroupLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/GroupLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ImageLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ImageLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/LayoutLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/LayoutLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/LayoutSetLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
@@ -3731,6 +3851,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -3751,10 +3875,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -3773,6 +3893,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -3847,116 +3971,8 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/GroupLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/GroupLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ImageLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ImageLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/LayoutLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/LayoutLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/LayoutSetLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/OrgLaborLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/OrgLaborLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PasswordTrackerLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PasswordTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PermissionLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PermissionLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PropertiesLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PropertiesLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ReleaseLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ReleaseLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ResourceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/RoleLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/RoleLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/SubscriptionLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserIdMapperLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserIdMapperLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserTrackerLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserTrackerPathLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserTrackerPathLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/WebsiteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/WebsiteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-		</ejb>
-		<ejb>
-			<name>com_liferay_portal_service_ejb_PortletPreferencesServiceEJB</name>
-			<max-pool-size>40</max-pool-size>
-			<min-pool-size>20</min-pool-size>
-			<enable-freepool>false</enable-freepool>
-			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
-			<low-activity-interval>20</low-activity-interval>
-			<is-secure>false</is-secure>
-			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portal_service_ejb_PortletPreferencesServiceEJB</jndi-name>
-			<local-jndi-name>com_liferay_portal_service_ejb_PortletPreferencesServiceEJB__PRAMATI_LOCAL</local-jndi-name>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/AccountLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/AccountLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/AddressLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/AddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/CompanyLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/CompanyLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ContactLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
@@ -3979,10 +3995,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4003,8 +4015,8 @@
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PortletPreferencesLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PropertiesLocalServiceHome</ejb-ref-name>
@@ -4075,6 +4087,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4095,10 +4111,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4117,6 +4129,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -4187,6 +4203,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4207,10 +4227,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4229,6 +4245,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -4303,6 +4323,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4323,10 +4347,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4345,6 +4365,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -4415,6 +4439,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4435,10 +4463,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4457,6 +4481,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -4527,6 +4555,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4547,10 +4579,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4569,6 +4597,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -4643,6 +4675,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4663,10 +4699,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4685,6 +4717,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -4755,6 +4791,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4775,10 +4815,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4797,6 +4833,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -4871,6 +4911,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4891,10 +4935,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -4913,6 +4953,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -4967,14 +5011,6 @@
 			<jndi-name>ejb/liferay/UserLocalServiceHome</jndi-name>
 			<local-jndi-name>com_liferay_portal_service_ejb_UserLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABContactLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABListLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABListLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLFileRankLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/DLFileRankLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5003,6 +5039,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5023,10 +5063,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5045,6 +5081,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -5099,14 +5139,6 @@
 			<jndi-name>com_liferay_portal_service_ejb_UserServiceEJB</jndi-name>
 			<local-jndi-name>com_liferay_portal_service_ejb_UserServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABContactLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABListLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABListLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLFileRankLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/DLFileRankLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5135,6 +5167,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5155,10 +5191,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5177,6 +5209,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -5251,6 +5287,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5271,10 +5311,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5293,6 +5329,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -5363,6 +5403,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5383,10 +5427,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5405,6 +5445,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -5437,122 +5481,6 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/UserIdMapperLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/UserIdMapperLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserTrackerPathLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserTrackerPathLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/WebsiteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/WebsiteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-		</ejb>
-		<ejb>
-			<name>com_liferay_portal_service_ejb_UserTrackerServiceEJB</name>
-			<max-pool-size>40</max-pool-size>
-			<min-pool-size>20</min-pool-size>
-			<enable-freepool>false</enable-freepool>
-			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
-			<low-activity-interval>20</low-activity-interval>
-			<is-secure>false</is-secure>
-			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portal_service_ejb_UserTrackerServiceEJB</jndi-name>
-			<local-jndi-name>com_liferay_portal_service_ejb_UserTrackerServiceEJB__PRAMATI_LOCAL</local-jndi-name>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/AccountLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/AccountLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/AddressLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/AddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/CompanyLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/CompanyLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ContactLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/GroupLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/GroupLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ImageLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ImageLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/LayoutLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/LayoutLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/LayoutSetLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/OrgLaborLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/OrgLaborLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PasswordTrackerLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PasswordTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PermissionLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PermissionLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PortletPreferencesLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PropertiesLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PropertiesLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ReleaseLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ReleaseLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ResourceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/RoleLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/RoleLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/SubscriptionLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserIdMapperLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserIdMapperLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserTrackerLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/UserTrackerPathLocalServiceHome</ejb-ref-name>
@@ -5591,6 +5519,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5611,10 +5543,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5633,6 +5561,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -5669,122 +5601,6 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/UserTrackerLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/UserTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/WebsiteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/WebsiteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-		</ejb>
-		<ejb>
-			<name>com_liferay_portal_service_ejb_UserTrackerPathServiceEJB</name>
-			<max-pool-size>40</max-pool-size>
-			<min-pool-size>20</min-pool-size>
-			<enable-freepool>false</enable-freepool>
-			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
-			<low-activity-interval>20</low-activity-interval>
-			<is-secure>false</is-secure>
-			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portal_service_ejb_UserTrackerPathServiceEJB</jndi-name>
-			<local-jndi-name>com_liferay_portal_service_ejb_UserTrackerPathServiceEJB__PRAMATI_LOCAL</local-jndi-name>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/AccountLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/AccountLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/AddressLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/AddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/CompanyLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/CompanyLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ContactLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/GroupLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/GroupLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ImageLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ImageLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/LayoutLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/LayoutLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/LayoutSetLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/OrgLaborLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/OrgLaborLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PasswordTrackerLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PasswordTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PermissionLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PermissionLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PortletPreferencesLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/PropertiesLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/PropertiesLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ReleaseLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ReleaseLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ResourceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/RoleLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/RoleLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/SubscriptionLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserIdMapperLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserIdMapperLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserTrackerLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserTrackerPathLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserTrackerPathLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/WebsiteLocalServiceHome</ejb-ref-name>
@@ -5819,6 +5635,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5839,10 +5659,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5861,6 +5677,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -5931,6 +5751,10 @@
 				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DataTrackerLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/EmailAddressLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5951,10 +5775,6 @@
 				<ejb-link>ejb/liferay/LayoutSetLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/NoteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/OrganizationLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5973,6 +5793,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PhoneLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/PortletLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -6017,78 +5841,6 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/WebsiteLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/WebsiteLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-		</ejb>
-		<ejb>
-			<name>com_liferay_portlet_addressbook_service_ejb_ABContactLocalServiceEJB</name>
-			<max-pool-size>40</max-pool-size>
-			<min-pool-size>20</min-pool-size>
-			<enable-freepool>false</enable-freepool>
-			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
-			<low-activity-interval>20</low-activity-interval>
-			<is-secure>false</is-secure>
-			<is-clustered>true</is-clustered>
-			<jndi-name>ejb/liferay/ABContactLocalServiceHome</jndi-name>
-			<local-jndi-name>com_liferay_portlet_addressbook_service_ejb_ABContactLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABListLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABListLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-		</ejb>
-		<ejb>
-			<name>com_liferay_portlet_addressbook_service_ejb_ABContactServiceEJB</name>
-			<max-pool-size>40</max-pool-size>
-			<min-pool-size>20</min-pool-size>
-			<enable-freepool>false</enable-freepool>
-			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
-			<low-activity-interval>20</low-activity-interval>
-			<is-secure>false</is-secure>
-			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portlet_addressbook_service_ejb_ABContactServiceEJB</jndi-name>
-			<local-jndi-name>com_liferay_portlet_addressbook_service_ejb_ABContactServiceEJB__PRAMATI_LOCAL</local-jndi-name>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABContactLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABListLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABListLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-		</ejb>
-		<ejb>
-			<name>com_liferay_portlet_addressbook_service_ejb_ABListLocalServiceEJB</name>
-			<max-pool-size>40</max-pool-size>
-			<min-pool-size>20</min-pool-size>
-			<enable-freepool>false</enable-freepool>
-			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
-			<low-activity-interval>20</low-activity-interval>
-			<is-secure>false</is-secure>
-			<is-clustered>true</is-clustered>
-			<jndi-name>ejb/liferay/ABListLocalServiceHome</jndi-name>
-			<local-jndi-name>com_liferay_portlet_addressbook_service_ejb_ABListLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABContactLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-		</ejb>
-		<ejb>
-			<name>com_liferay_portlet_addressbook_service_ejb_ABListServiceEJB</name>
-			<max-pool-size>40</max-pool-size>
-			<min-pool-size>20</min-pool-size>
-			<enable-freepool>false</enable-freepool>
-			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
-			<low-activity-interval>20</low-activity-interval>
-			<is-secure>false</is-secure>
-			<is-clustered>true</is-clustered>
-			<jndi-name>com_liferay_portlet_addressbook_service_ejb_ABListServiceEJB</jndi-name>
-			<local-jndi-name>com_liferay_portlet_addressbook_service_ejb_ABListServiceEJB__PRAMATI_LOCAL</local-jndi-name>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABContactLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABListLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/ABListLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 		</ejb>
 		<ejb>
@@ -7852,6 +7604,10 @@
 			<ejb-link>com_liferay_portal_service_ejb_ContactLocalServiceEJB</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
+			<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+			<ejb-link>com_liferay_portal_service_ejb_DataTrackerLocalServiceEJB</ejb-link>
+		</ejb-local-ref>
+		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
 			<ejb-link>com_liferay_portal_service_ejb_EmailAddressLocalServiceEJB</ejb-link>
 		</ejb-local-ref>
@@ -7872,10 +7628,6 @@
 			<ejb-link>com_liferay_portal_service_ejb_LayoutSetLocalServiceEJB</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
-			<ejb-ref-name>ejb/liferay/NoteLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_NoteLocalServiceEJB</ejb-link>
-		</ejb-local-ref>
-		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
 			<ejb-link>com_liferay_portal_service_ejb_OrganizationLocalServiceEJB</ejb-link>
 		</ejb-local-ref>
@@ -7894,6 +7646,10 @@
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
 			<ejb-link>com_liferay_portal_service_ejb_PhoneLocalServiceEJB</ejb-link>
+		</ejb-local-ref>
+		<ejb-local-ref>
+			<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+			<ejb-link>com_liferay_portal_service_ejb_PortletLocalServiceEJB</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
@@ -7938,14 +7694,6 @@
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/WebsiteLocalServiceHome</ejb-ref-name>
 			<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
-		</ejb-local-ref>
-		<ejb-local-ref>
-			<ejb-ref-name>ejb/liferay/ABContactLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_addressbook_service_ejb_ABContactLocalServiceEJB</ejb-link>
-		</ejb-local-ref>
-		<ejb-local-ref>
-			<ejb-ref-name>ejb/liferay/ABListLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_addressbook_service_ejb_ABListLocalServiceEJB</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/BlogsCategoryLocalServiceHome</ejb-ref-name>
@@ -8101,14 +7849,6 @@
 	<web-module>
 		<name>/tunnel</name>
 		<module-name>tunnel-web.war</module-name>
-		<ejb-local-ref>
-			<ejb-ref-name>ejb/liferay/RoleLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
-		</ejb-local-ref>
-		<ejb-local-ref>
-			<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
-		</ejb-local-ref>
 	</web-module>
 	<role-mapping>
 		<module-name>counter-ejb.jar</module-name>

@@ -644,6 +644,20 @@
 		<field name="smallImage" type="boolean" />
 		<field name="smallImageURL" type="String" />
 	</model>
+	<model name="com.liferay.portlet.mail.model.MailReceipt">
+		<field name="receiptId" type="String" />
+		<field name="companyId" type="String" />
+		<field name="userId" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="recipientName" type="String" />
+		<field name="recipientAddress" type="String" />
+		<field name="subject" type="String" />
+		<field name="sentDate" type="Date" />
+		<field name="readCount" type="int" />
+		<field name="firstReadDate" type="Date" />
+		<field name="lastReadDate" type="Date" />
+	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBCategory">
 		<field name="categoryId" type="String" />
 		<field name="groupId" type="String" />
@@ -972,65 +986,5 @@
 		</field>
 		<field name="format" type="String" />
 		<field name="head" type="boolean" />
-	</model>
-	<model name="com.liferay.portlet.addressbook.model.ABContact">
-		<field name="contactId" type="String" />
-		<field name="userId" type="String" />
-		<field name="firstName" type="String" />
-		<field name="middleName" type="String" />
-		<field name="lastName" type="String" />
-		<field name="nickName" type="String" />
-		<field name="emailAddress" type="String" />
-		<field name="homeStreet" type="String" />
-		<field name="homeCity" type="String" />
-		<field name="homeState" type="String" />
-		<field name="homeZip" type="String" />
-		<field name="homeCountry" type="String" />
-		<field name="homePhone" type="String" />
-		<field name="homeFax" type="String" />
-		<field name="homeCell" type="String" />
-		<field name="homePager" type="String" />
-		<field name="homeTollFree" type="String" />
-		<field name="homeEmailAddress" type="String" />
-		<field name="businessCompany" type="String" />
-		<field name="businessStreet" type="String" />
-		<field name="businessCity" type="String" />
-		<field name="businessState" type="String" />
-		<field name="businessZip" type="String" />
-		<field name="businessCountry" type="String" />
-		<field name="businessPhone" type="String" />
-		<field name="businessFax" type="String" />
-		<field name="businessCell" type="String" />
-		<field name="businessPager" type="String" />
-		<field name="businessTollFree" type="String" />
-		<field name="businessEmailAddress" type="String" />
-		<field name="employeeNumber" type="String" />
-		<field name="jobTitle" type="String" />
-		<field name="jobClass" type="String" />
-		<field name="hoursOfOperation" type="String" />
-		<field name="birthday" type="Date" />
-		<field name="timeZoneId" type="String" />
-		<field name="instantMessenger" type="String" />
-		<field name="website" type="String" />
-		<field name="comments" type="String" />
-	</model>
-	<model name="com.liferay.portlet.addressbook.model.ABList">
-		<field name="listId" type="String" />
-		<field name="userId" type="String" />
-		<field name="name" type="String" />
-	</model>
-	<model name="com.liferay.portlet.mail.model.MailReceipt">
-		<field name="receiptId" type="String" />
-		<field name="companyId" type="String" />
-		<field name="userId" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="recipientName" type="String" />
-		<field name="recipientAddress" type="String" />
-		<field name="subject" type="String" />
-		<field name="sentDate" type="Date" />
-		<field name="readCount" type="int" />
-		<field name="firstReadDate" type="Date" />
-		<field name="lastReadDate" type="Date" />
 	</model>
 </model-hints>

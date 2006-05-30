@@ -485,66 +485,6 @@
 		<property name="typeId" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portlet.addressbook.service.persistence.ABContactHBM" table="ABContact">
-		<cache usage="read-write" />
-		<id name="contactId" type="java.lang.String">
-			<generator class="assigned" />
-		</id>
-		<property name="userId" />
-		<property name="firstName" />
-		<property name="middleName" />
-		<property name="lastName" />
-		<property name="nickName" />
-		<property name="emailAddress" />
-		<property name="homeStreet" />
-		<property name="homeCity" />
-		<property name="homeState" />
-		<property name="homeZip" />
-		<property name="homeCountry" />
-		<property name="homePhone" />
-		<property name="homeFax" />
-		<property name="homeCell" />
-		<property name="homePager" />
-		<property name="homeTollFree" />
-		<property name="homeEmailAddress" />
-		<property name="businessCompany" />
-		<property name="businessStreet" />
-		<property name="businessCity" />
-		<property name="businessState" />
-		<property name="businessZip" />
-		<property name="businessCountry" />
-		<property name="businessPhone" />
-		<property name="businessFax" />
-		<property name="businessCell" />
-		<property name="businessPager" />
-		<property name="businessTollFree" />
-		<property name="businessEmailAddress" />
-		<property name="employeeNumber" />
-		<property name="jobTitle" />
-		<property name="jobClass" />
-		<property name="hoursOfOperation" />
-		<property name="birthday" />
-		<property name="timeZoneId" />
-		<property name="instantMessenger" />
-		<property name="website" />
-		<property name="comments" />
-		<set name="lists" table="ABContacts_ABLists" lazy="true">
-			<key column="contactId" />
-			<many-to-many class="com.liferay.portlet.addressbook.service.persistence.ABListHBM" column="listId" />
-		</set>
-	</class>
-	<class name="com.liferay.portlet.addressbook.service.persistence.ABListHBM" table="ABList">
-		<cache usage="read-write" />
-		<id name="listId" type="java.lang.String">
-			<generator class="assigned" />
-		</id>
-		<property name="userId" />
-		<property name="name" />
-		<set name="contacts" table="ABContacts_ABLists" lazy="true">
-			<key column="listId" />
-			<many-to-many class="com.liferay.portlet.addressbook.service.persistence.ABContactHBM" column="contactId" />
-		</set>
-	</class>
 	<class name="com.liferay.portlet.blogs.service.persistence.BlogsCategoryHBM" table="BlogsCategory">
 		<cache usage="read-write" />
 		<id name="categoryId" type="java.lang.String">

@@ -79,8 +79,6 @@ import com.liferay.portal.service.spring.UserLocalService;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.addressbook.service.spring.ABContactLocalServiceUtil;
-import com.liferay.portlet.addressbook.service.spring.ABListLocalServiceUtil;
 import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalServiceUtil;
 import com.liferay.portlet.enterpriseadmin.search.UserSearchTerms;
@@ -464,11 +462,6 @@ public class UserLocalServiceImpl implements UserLocalService {
 		// External user ids
 
 		UserIdMapperLocalServiceUtil.deleteUserIdMappers(userId);
-
-		// Address book
-
-		ABContactLocalServiceUtil.deleteAll(userId);
-		ABListLocalServiceUtil.deleteAll(userId);
 
 		// Document library
 

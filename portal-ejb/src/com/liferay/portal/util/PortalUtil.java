@@ -55,7 +55,6 @@ import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesWrapper;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderRequestImpl;
-import com.liferay.portlet.addressbook.util.ABUtil;
 import com.liferay.portlet.wsrp.URLGeneratorImpl;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
@@ -203,7 +202,6 @@ public class PortalUtil {
 		List recipients = new ArrayList();
 
 		recipients.addAll(getRecipients());
-		recipients.addAll(ABUtil.getRecipients());
 
 		Collections.sort(recipients, new RecipientComparator());
 

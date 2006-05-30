@@ -23,7 +23,6 @@
 package com.liferay.portlet.mail.job;
 
 import com.liferay.portal.job.IntervalJob;
-import com.liferay.portlet.mail.service.spring.MailReceiptServiceUtil;
 import com.liferay.util.Time;
 
 import org.apache.commons.logging.Log;
@@ -52,7 +51,7 @@ public class CheckReceiptJob implements IntervalJob {
 		throws JobExecutionException {
 
 		try {
-			MailReceiptServiceUtil.checkReceipts();
+			//MailReceiptServiceUtil.checkReceipts();
 		}
 		catch (Exception e) {
 			_log.error(e);

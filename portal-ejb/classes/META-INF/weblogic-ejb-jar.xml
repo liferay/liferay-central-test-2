@@ -195,22 +195,6 @@
 		<jndi-name>com_liferay_portal_service_ejb_WebsiteServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
-		<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABContactLocalServiceEJB</ejb-name>
-		<local-jndi-name>ejb/liferay/ABContactLocalServiceHome</local-jndi-name>
-	</weblogic-enterprise-bean>
-	<weblogic-enterprise-bean>
-		<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABContactServiceEJB</ejb-name>
-		<jndi-name>com_liferay_portlet_addressbook_service_ejb_ABContactServiceEJB</jndi-name>
-	</weblogic-enterprise-bean>
-	<weblogic-enterprise-bean>
-		<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABListLocalServiceEJB</ejb-name>
-		<local-jndi-name>ejb/liferay/ABListLocalServiceHome</local-jndi-name>
-	</weblogic-enterprise-bean>
-	<weblogic-enterprise-bean>
-		<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABListServiceEJB</ejb-name>
-		<jndi-name>com_liferay_portlet_addressbook_service_ejb_ABListServiceEJB</jndi-name>
-	</weblogic-enterprise-bean>
-	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_blogs_service_ejb_BlogsCategoryLocalServiceEJB</ejb-name>
 		<local-jndi-name>ejb/liferay/BlogsCategoryLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
@@ -321,10 +305,6 @@
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_mail_service_ejb_MailReceiptLocalServiceEJB</ejb-name>
 		<local-jndi-name>ejb/liferay/MailReceiptLocalServiceHome</local-jndi-name>
-	</weblogic-enterprise-bean>
-	<weblogic-enterprise-bean>
-		<ejb-name>com_liferay_portlet_mail_service_ejb_MailReceiptServiceEJB</ejb-name>
-		<jndi-name>com_liferay_portlet_mail_service_ejb_MailReceiptServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-name>

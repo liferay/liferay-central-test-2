@@ -271,9 +271,9 @@
 	</target>
 
 	<target name="build-service-portlet-addressbook">
-		<antcall target="build-service">
+		<!--<antcall target="build-service">
 			<param name="service.file" value="src/com/liferay/portlet/addressbook/service.xml" />
-		</antcall>
+		</antcall>-->
 	</target>
 
 	<target name="build-service-portlet-blogs">
@@ -388,9 +388,9 @@
 	</target>
 
 	<target name="build-wsdd-portlet-addressbook">
-		<antcall target="build-wsdd">
+		<!--<antcall target="build-wsdd">
 			<param name="service.file" value="src/com/liferay/portlet/addressbook/service.xml" />
-		</antcall>
+		</antcall>-->
 	</target>
 
 	<target name="build-wsdd-portlet-blogs">

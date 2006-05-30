@@ -1234,102 +1234,6 @@
 			<ref bean="com.liferay.portal.service.persistence.WebsitePersistence" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.addressbook.service.spring.ABContactLocalService.professional" class="com.liferay.portlet.addressbook.service.impl.ABContactLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.addressbook.service.spring.ABContactLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.addressbook.service.spring.ABContactLocalService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.addressbook.service.spring.ABContactLocalServiceFactory" class="com.liferay.portlet.addressbook.service.spring.ABContactLocalServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.addressbook.service.spring.ABContactLocalService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.addressbook.service.spring.ABContactService.professional" class="com.liferay.portlet.addressbook.service.impl.ABContactServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.addressbook.service.spring.ABContactService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.addressbook.service.spring.ABContactService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.addressbook.service.spring.ABContactServiceFactory" class="com.liferay.portlet.addressbook.service.spring.ABContactServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.addressbook.service.spring.ABContactService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.addressbook.service.persistence.ABContactPersistence" class="com.liferay.portlet.addressbook.service.persistence.ABContactPersistence" lazy-init="true">
-		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.addressbook.service.persistence.ABContactUtil" class="com.liferay.portlet.addressbook.service.persistence.ABContactUtil" lazy-init="true">
-		<property name="persistence">
-			<ref bean="com.liferay.portlet.addressbook.service.persistence.ABContactPersistence" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.addressbook.service.spring.ABListLocalService.professional" class="com.liferay.portlet.addressbook.service.impl.ABListLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.addressbook.service.spring.ABListLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.addressbook.service.spring.ABListLocalService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.addressbook.service.spring.ABListLocalServiceFactory" class="com.liferay.portlet.addressbook.service.spring.ABListLocalServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.addressbook.service.spring.ABListLocalService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.addressbook.service.spring.ABListService.professional" class="com.liferay.portlet.addressbook.service.impl.ABListServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.addressbook.service.spring.ABListService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.addressbook.service.spring.ABListService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.addressbook.service.spring.ABListServiceFactory" class="com.liferay.portlet.addressbook.service.spring.ABListServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.addressbook.service.spring.ABListService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.addressbook.service.persistence.ABListPersistence" class="com.liferay.portlet.addressbook.service.persistence.ABListPersistence" lazy-init="true">
-		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.addressbook.service.persistence.ABListUtil" class="com.liferay.portlet.addressbook.service.persistence.ABListUtil" lazy-init="true">
-		<property name="persistence">
-			<ref bean="com.liferay.portlet.addressbook.service.persistence.ABListPersistence" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalService.professional" class="com.liferay.portlet.blogs.service.impl.BlogsCategoryLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -2010,25 +1914,6 @@
 	<bean id="com.liferay.portlet.mail.service.spring.MailReceiptLocalServiceFactory" class="com.liferay.portlet.mail.service.spring.MailReceiptLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.mail.service.spring.MailReceiptLocalService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.mail.service.spring.MailReceiptService.professional" class="com.liferay.portlet.mail.service.impl.MailReceiptServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.mail.service.spring.MailReceiptService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.mail.service.spring.MailReceiptService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.mail.service.spring.MailReceiptServiceFactory" class="com.liferay.portlet.mail.service.spring.MailReceiptServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.mail.service.spring.MailReceiptService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.mail.service.persistence.MailReceiptPersistence" class="com.liferay.portlet.mail.service.persistence.MailReceiptPersistence" lazy-init="true">

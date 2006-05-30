@@ -340,34 +340,6 @@
 			<timeout>3000</timeout>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABContactLocalServiceEJB</ejb-name>
-			<local-jndi-name>ejb/liferay/ABContactLocalServiceHome</local-jndi-name>
-			<cluster-home>false</cluster-home>
-			<cluster-object>false</cluster-object>
-			<timeout>3000</timeout>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABContactServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_addressbook_service_ejb_ABContactServiceEJB</jndi-name>
-			<cluster-home>false</cluster-home>
-			<cluster-object>false</cluster-object>
-			<timeout>3000</timeout>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABListLocalServiceEJB</ejb-name>
-			<local-jndi-name>ejb/liferay/ABListLocalServiceHome</local-jndi-name>
-			<cluster-home>false</cluster-home>
-			<cluster-object>false</cluster-object>
-			<timeout>3000</timeout>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABListServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_addressbook_service_ejb_ABListServiceEJB</jndi-name>
-			<cluster-home>false</cluster-home>
-			<cluster-object>false</cluster-object>
-			<timeout>3000</timeout>
-		</session>
-		<session>
 			<ejb-name>com_liferay_portlet_blogs_service_ejb_BlogsCategoryLocalServiceEJB</ejb-name>
 			<local-jndi-name>ejb/liferay/BlogsCategoryLocalServiceHome</local-jndi-name>
 			<cluster-home>false</cluster-home>
@@ -559,13 +531,6 @@
 		<session>
 			<ejb-name>com_liferay_portlet_mail_service_ejb_MailReceiptLocalServiceEJB</ejb-name>
 			<local-jndi-name>ejb/liferay/MailReceiptLocalServiceHome</local-jndi-name>
-			<cluster-home>false</cluster-home>
-			<cluster-object>false</cluster-object>
-			<timeout>3000</timeout>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_mail_service_ejb_MailReceiptServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_mail_service_ejb_MailReceiptServiceEJB</jndi-name>
 			<cluster-home>false</cluster-home>
 			<cluster-object>false</cluster-object>
 			<timeout>3000</timeout>

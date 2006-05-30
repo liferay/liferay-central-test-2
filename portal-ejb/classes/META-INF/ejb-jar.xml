@@ -8130,20 +8130,6 @@
 			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
 			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABContactLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.addressbook.service.ejb.ABContactLocalServiceHome</local-home>
-				<local>com.liferay.portlet.addressbook.service.ejb.ABContactLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_addressbook_service_ejb_ABContactLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABListLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.addressbook.service.ejb.ABListLocalServiceHome</local-home>
-				<local>com.liferay.portlet.addressbook.service.ejb.ABListLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_addressbook_service_ejb_ABListLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLFileRankLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.documentlibrary.service.ejb.DLFileRankLocalServiceHome</local-home>
@@ -8355,20 +8341,6 @@
 			<ejb-class>com.liferay.portal.service.ejb.UserServiceEJBImpl</ejb-class>
 			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABContactLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.addressbook.service.ejb.ABContactLocalServiceHome</local-home>
-				<local>com.liferay.portlet.addressbook.service.ejb.ABContactLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_addressbook_service_ejb_ABContactLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABListLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.addressbook.service.ejb.ABListLocalServiceHome</local-home>
-				<local>com.liferay.portlet.addressbook.service.ejb.ABListLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_addressbook_service_ejb_ABListLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLFileRankLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
@@ -9543,84 +9515,6 @@
 			</ejb-local-ref>
 		</session>
 		<session>
-			<display-name>ABContactLocalServiceEJB</display-name>
-			<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABContactLocalServiceEJB</ejb-name>
-			<local-home>com.liferay.portlet.addressbook.service.ejb.ABContactLocalServiceHome</local-home>
-			<local>com.liferay.portlet.addressbook.service.ejb.ABContactLocalServiceEJB</local>
-			<ejb-class>com.liferay.portlet.addressbook.service.ejb.ABContactLocalServiceEJBImpl</ejb-class>
-			<session-type>Stateless</session-type>
-			<transaction-type>Bean</transaction-type>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABListLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.addressbook.service.ejb.ABListLocalServiceHome</local-home>
-				<local>com.liferay.portlet.addressbook.service.ejb.ABListLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_addressbook_service_ejb_ABListLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-		</session>
-		<session>
-			<display-name>ABContactServiceEJB</display-name>
-			<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABContactServiceEJB</ejb-name>
-			<home>com.liferay.portlet.addressbook.service.ejb.ABContactServiceHome</home>
-			<remote>com.liferay.portlet.addressbook.service.ejb.ABContactServiceEJB</remote>
-			<ejb-class>com.liferay.portlet.addressbook.service.ejb.ABContactServiceEJBImpl</ejb-class>
-			<session-type>Stateless</session-type>
-			<transaction-type>Bean</transaction-type>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABContactLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.addressbook.service.ejb.ABContactLocalServiceHome</local-home>
-				<local>com.liferay.portlet.addressbook.service.ejb.ABContactLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_addressbook_service_ejb_ABContactLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABListLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.addressbook.service.ejb.ABListLocalServiceHome</local-home>
-				<local>com.liferay.portlet.addressbook.service.ejb.ABListLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_addressbook_service_ejb_ABListLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-		</session>
-		<session>
-			<display-name>ABListLocalServiceEJB</display-name>
-			<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABListLocalServiceEJB</ejb-name>
-			<local-home>com.liferay.portlet.addressbook.service.ejb.ABListLocalServiceHome</local-home>
-			<local>com.liferay.portlet.addressbook.service.ejb.ABListLocalServiceEJB</local>
-			<ejb-class>com.liferay.portlet.addressbook.service.ejb.ABListLocalServiceEJBImpl</ejb-class>
-			<session-type>Stateless</session-type>
-			<transaction-type>Bean</transaction-type>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABContactLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.addressbook.service.ejb.ABContactLocalServiceHome</local-home>
-				<local>com.liferay.portlet.addressbook.service.ejb.ABContactLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_addressbook_service_ejb_ABContactLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-		</session>
-		<session>
-			<display-name>ABListServiceEJB</display-name>
-			<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABListServiceEJB</ejb-name>
-			<home>com.liferay.portlet.addressbook.service.ejb.ABListServiceHome</home>
-			<remote>com.liferay.portlet.addressbook.service.ejb.ABListServiceEJB</remote>
-			<ejb-class>com.liferay.portlet.addressbook.service.ejb.ABListServiceEJBImpl</ejb-class>
-			<session-type>Stateless</session-type>
-			<transaction-type>Bean</transaction-type>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABContactLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.addressbook.service.ejb.ABContactLocalServiceHome</local-home>
-				<local>com.liferay.portlet.addressbook.service.ejb.ABContactLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_addressbook_service_ejb_ABContactLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ABListLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.addressbook.service.ejb.ABListLocalServiceHome</local-home>
-				<local>com.liferay.portlet.addressbook.service.ejb.ABListLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_addressbook_service_ejb_ABListLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-		</session>
-		<session>
 			<display-name>BlogsCategoryLocalServiceEJB</display-name>
 			<ejb-name>com_liferay_portlet_blogs_service_ejb_BlogsCategoryLocalServiceEJB</ejb-name>
 			<local-home>com.liferay.portlet.blogs.service.ejb.BlogsCategoryLocalServiceHome</local-home>
@@ -10570,29 +10464,6 @@
 				<local-home>com.liferay.portal.service.ejb.UserLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.UserLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-		</session>
-		<session>
-			<display-name>MailReceiptServiceEJB</display-name>
-			<ejb-name>com_liferay_portlet_mail_service_ejb_MailReceiptServiceEJB</ejb-name>
-			<home>com.liferay.portlet.mail.service.ejb.MailReceiptServiceHome</home>
-			<remote>com.liferay.portlet.mail.service.ejb.MailReceiptServiceEJB</remote>
-			<ejb-class>com.liferay.portlet.mail.service.ejb.MailReceiptServiceEJBImpl</ejb-class>
-			<session-type>Stateless</session-type>
-			<transaction-type>Bean</transaction-type>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portal.service.ejb.UserLocalServiceHome</local-home>
-				<local>com.liferay.portal.service.ejb.UserLocalServiceEJB</local>
-				<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MailReceiptLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.mail.service.ejb.MailReceiptLocalServiceHome</local-home>
-				<local>com.liferay.portlet.mail.service.ejb.MailReceiptLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_mail_service_ejb_MailReceiptLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 		</session>
 		<session>
@@ -12166,22 +12037,6 @@
 				<method-name>*</method-name>
 			</method>
 			<method>
-				<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABContactLocalServiceEJB</ejb-name>
-				<method-name>*</method-name>
-			</method>
-			<method>
-				<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABContactServiceEJB</ejb-name>
-				<method-name>*</method-name>
-			</method>
-			<method>
-				<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABListLocalServiceEJB</ejb-name>
-				<method-name>*</method-name>
-			</method>
-			<method>
-				<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABListServiceEJB</ejb-name>
-				<method-name>*</method-name>
-			</method>
-			<method>
 				<ejb-name>com_liferay_portlet_blogs_service_ejb_BlogsCategoryLocalServiceEJB</ejb-name>
 				<method-name>*</method-name>
 			</method>
@@ -12291,10 +12146,6 @@
 			</method>
 			<method>
 				<ejb-name>com_liferay_portlet_mail_service_ejb_MailReceiptLocalServiceEJB</ejb-name>
-				<method-name>*</method-name>
-			</method>
-			<method>
-				<ejb-name>com_liferay_portlet_mail_service_ejb_MailReceiptServiceEJB</ejb-name>
 				<method-name>*</method-name>
 			</method>
 			<method>

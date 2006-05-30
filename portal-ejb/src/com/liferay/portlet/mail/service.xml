@@ -3,7 +3,7 @@
 
 <service-builder root-dir=".." package-path="com.liferay.portlet">
 	<portlet name="Mail" short-name="Mail" />
-	<entity name="MailReceipt" local-service="true" remote-service="true">
+	<entity name="MailReceipt" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 

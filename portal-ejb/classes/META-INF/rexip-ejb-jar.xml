@@ -339,34 +339,6 @@
 			<cache-size>20</cache-size>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABContactLocalServiceEJB</ejb-name>
-			<local-jndi-name>ejb/liferay/ABContactLocalServiceHome</local-jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABContactServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_addressbook_service_ejb_ABContactServiceEJB</jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABListLocalServiceEJB</ejb-name>
-			<local-jndi-name>ejb/liferay/ABListLocalServiceHome</local-jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_addressbook_service_ejb_ABListServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_addressbook_service_ejb_ABListServiceEJB</jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
 			<ejb-name>com_liferay_portlet_blogs_service_ejb_BlogsCategoryLocalServiceEJB</ejb-name>
 			<local-jndi-name>ejb/liferay/BlogsCategoryLocalServiceHome</local-jndi-name>
 			<clustered>true</clustered>
@@ -558,13 +530,6 @@
 		<session>
 			<ejb-name>com_liferay_portlet_mail_service_ejb_MailReceiptLocalServiceEJB</ejb-name>
 			<local-jndi-name>ejb/liferay/MailReceiptLocalServiceHome</local-jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_mail_service_ejb_MailReceiptServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_mail_service_ejb_MailReceiptServiceEJB</jndi-name>
 			<clustered>true</clustered>
 			<pool-size>20</pool-size>
 			<cache-size>20</cache-size>

@@ -254,30 +254,6 @@
 		<property name="service" ref="com.liferay.portal.service.spring.WebsiteService.professional" />
 		<property name="serviceInterface" value="com.liferay.portal.service.spring.WebsiteService" />
 	</bean>
-	<bean name="/com_liferay_portlet_addressbook_service_spring_ABContactService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.addressbook.service.spring.ABContactService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.addressbook.service.spring.ABContactService" />
-	</bean>
-	<bean name="/com_liferay_portlet_addressbook_service_spring_ABContactService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.addressbook.service.spring.ABContactService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.addressbook.service.spring.ABContactService" />
-	</bean>
-	<bean name="/com_liferay_portlet_addressbook_service_spring_ABContactService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.addressbook.service.spring.ABContactService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.addressbook.service.spring.ABContactService" />
-	</bean>
-	<bean name="/com_liferay_portlet_addressbook_service_spring_ABListService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.addressbook.service.spring.ABListService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.addressbook.service.spring.ABListService" />
-	</bean>
-	<bean name="/com_liferay_portlet_addressbook_service_spring_ABListService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.addressbook.service.spring.ABListService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.addressbook.service.spring.ABListService" />
-	</bean>
-	<bean name="/com_liferay_portlet_addressbook_service_spring_ABListService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.addressbook.service.spring.ABListService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.addressbook.service.spring.ABListService" />
-	</bean>
 	<bean name="/com_liferay_portlet_blogs_service_spring_BlogsCategoryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.blogs.service.spring.BlogsCategoryService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.blogs.service.spring.BlogsCategoryService" />
@@ -421,18 +397,6 @@
 	<bean name="/com_liferay_portlet_journal_service_spring_JournalTemplateService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
 		<property name="service" ref="com.liferay.portlet.journal.service.spring.JournalTemplateService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.journal.service.spring.JournalTemplateService" />
-	</bean>
-	<bean name="/com_liferay_portlet_mail_service_spring_MailReceiptService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.mail.service.spring.MailReceiptService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.mail.service.spring.MailReceiptService" />
-	</bean>
-	<bean name="/com_liferay_portlet_mail_service_spring_MailReceiptService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.mail.service.spring.MailReceiptService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.mail.service.spring.MailReceiptService" />
-	</bean>
-	<bean name="/com_liferay_portlet_mail_service_spring_MailReceiptService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.mail.service.spring.MailReceiptService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.mail.service.spring.MailReceiptService" />
 	</bean>
 	<bean name="/com_liferay_portlet_messageboards_service_spring_MBCategoryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.messageboards.service.spring.MBCategoryService.professional" />

@@ -928,8 +928,6 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.portlet.addressbook" entity="ABContact" />
-		<reference package-path="com.liferay.portlet.addressbook" entity="ABList" />
 		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFileRank" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessageFlag" />
 		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingCart" />
