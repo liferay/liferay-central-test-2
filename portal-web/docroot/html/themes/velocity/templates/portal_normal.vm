@@ -24,7 +24,7 @@
 
 #parse("$fullTemplatesPath/portal_init.vm")
 
-<html dir="<bean:message key="lang.dir" />">
+<html dir="$languageUtil.get($pageContext, "lang.dir")">
 
 <head>
 	<title>$tilesTitle</title>
