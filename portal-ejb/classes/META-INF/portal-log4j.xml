@@ -76,6 +76,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.service.impl.LayoutLocalServiceImpl">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.portal.service.impl.PermissionLocalServiceImpl">
 		<priority value="ERROR" />
 	</category>

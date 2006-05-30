@@ -90,8 +90,8 @@ public class LayoutPermission {
 		}
 		catch (NoSuchResourceException nsre) {
 			ResourceLocalServiceUtil.addResources(
-				layout.getCompanyId(), layout.getGroupId(),
-				null, Layout.class.getName(), layout.getPrimaryKey().toString(),
+				layout.getCompanyId(), layout.getGroupId(), null,
+				Layout.class.getName(), layout.getPrimaryKey().toString(),
 				false, true, true);
 		}
 

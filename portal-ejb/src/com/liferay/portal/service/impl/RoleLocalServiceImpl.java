@@ -115,9 +115,13 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
-			role.getCompanyId(), Role.class.getName(), Resource.TYPE_CLASS,
-			Resource.SCOPE_INDIVIDUAL, role.getPrimaryKey().toString());
+		if (Validator.isNull(role.getClassName()) &&
+			Validator.isNull(role.getClassPK())) {
+
+			ResourceLocalServiceUtil.deleteResource(
+				role.getCompanyId(), Role.class.getName(), Resource.TYPE_CLASS,
+				Resource.SCOPE_INDIVIDUAL, role.getPrimaryKey().toString());
+		}
 
 		// Role
 
