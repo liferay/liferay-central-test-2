@@ -111,6 +111,17 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		return _pw;
 	}
 
+	public void resetBuffer() {
+		if (_callGetOutputStream) {
+			_baos.reset();
+		}
+		else if (_callGetWriter) {
+			StringBuffer sb = _sw.getBuffer();
+
+			sb.delete(0, sb.length());
+		}
+	}
+
 	public void recycle() {
 		_urlEncoder = null;
 		_baos.reset();

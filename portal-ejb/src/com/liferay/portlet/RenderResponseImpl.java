@@ -260,6 +260,7 @@ public class RenderResponseImpl implements RenderResponse {
 	}
 
 	public void resetBuffer() {
+		_res.resetBuffer();
 	}
 
 	public boolean isCommitted() {
