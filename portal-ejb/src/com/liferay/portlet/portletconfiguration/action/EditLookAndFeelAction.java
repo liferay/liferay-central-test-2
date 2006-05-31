@@ -57,7 +57,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.DynaClass;
 import org.apache.struts.action.ActionForm;
@@ -155,27 +154,18 @@ public class EditLookAndFeelAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
-
 		try {
-			updateLookAndFeel(mapping, (DynaActionForm)form, req);
-
-			String redirect = ParamUtil.getString(req, "lookAndFeelRedirect");
-
-			sendRedirect(req, res, redirect);
+			checkPermissions(req);
 		}
-		catch (Exception e) {
-			if (e != null &&
-				e instanceof PrincipalException) {
-
-				SessionErrors.add(req, e.getClass().getName());
-
-				setForward(req, "portlet.portlet_configuration.error");
-			}
-			else {
-				throw e;
-			}
+		catch (PrincipalException pe) {
+			return;
 		}
+
+		updateLookAndFeel(mapping, (DynaActionForm)form, req);
+
+		String redirect = ParamUtil.getString(req, "lookAndFeelRedirect");
+
+		sendRedirect(req, res, redirect);
 	}
 
 	public ActionForward render(
@@ -183,10 +173,17 @@ public class EditLookAndFeelAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
+		try {
+			checkPermissions(req);
+		}
+		catch (PrincipalException pe) {
+			SessionErrors.add(req, PrincipalException.class.getName());
+
+			return mapping.findForward("portlet.portlet_configuration.error");
+		}
+
 		DynaActionForm stylesForm = (DynaActionForm)form;
 
-		checkPermissions(req);
-		
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
@@ -228,8 +225,8 @@ public class EditLookAndFeelAction extends PortletAction {
 
 		req.setAttribute(WebKeys.FORM_NAME, dynaClass.getName());
 
-		return mapping.findForward(getForward(
-			req, "portlet.portlet_configuration.edit_look_and_feel"));
+		return mapping.findForward(
+			"portlet.portlet_configuration.edit_look_and_feel");
 	}
 
 	protected void populateCollections(DynaActionForm form) {
@@ -250,8 +247,6 @@ public class EditLookAndFeelAction extends PortletAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
-		
-		checkPermissions(req);
 
 		PortletPreferences portletSetup =
 			PortletPreferencesFactory.getPortletSetup(
@@ -293,9 +288,7 @@ public class EditLookAndFeelAction extends PortletAction {
 		portletSetup.store();
 	}
 
-	protected void checkPermissions(PortletRequest req)
-		throws Exception {
-
+	protected void checkPermissions(PortletRequest req) throws Exception {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
@@ -309,20 +302,14 @@ public class EditLookAndFeelAction extends PortletAction {
 		String resourcePrimKey =
 			themeDisplay.getPlid() + Portlet.LAYOUT_SEPARATOR + portletResource;
 
-		try {
-			if (!permissionChecker.hasPermission(
-					groupId, portletResource, resourcePrimKey,
-					ActionKeys.CONFIGURATION) &&
-				!GroupPermission.contains(
-					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
+		if (!permissionChecker.hasPermission(
+				groupId, portletResource, resourcePrimKey,
+				ActionKeys.CONFIGURATION) &&
+			!GroupPermission.contains(
+				permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
 
-				throw new PrincipalException();
-			}
+			throw new PrincipalException();
 		}
-		catch (PrincipalException pe) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+	}
 
-			setForward(req, "portlet.portlet_configuration.error");
-		}
-	}	
 }

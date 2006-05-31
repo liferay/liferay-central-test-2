@@ -68,10 +68,7 @@ public class EditConfigurationAction extends DynamicPortletAction {
 		catch (PrincipalException pe) {
 			SessionErrors.add(req, PrincipalException.class.getName());
 
-			setForward(req, "portlet.portlet_configuration.error");
-
-			return mapping.findForward(getForward(
-					req, "portlet.portlet_configuration.edit_configuration"));
+			return mapping.findForward("portlet.portlet_configuration.error");
 		}
 
 		ServletContext ctx =
@@ -94,7 +91,7 @@ public class EditConfigurationAction extends DynamicPortletAction {
 
 	protected Portlet getPortlet(PortletRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
-		
+
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
