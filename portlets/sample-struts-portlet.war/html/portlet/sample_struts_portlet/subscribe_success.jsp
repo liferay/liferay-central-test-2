@@ -22,6 +22,4 @@
  */
 %>
 
-<font class="portlet-font" style="font-size: x-small;"><b>
-Subscribe Success
-</b></font>
+<b>Subscribe Success</b>

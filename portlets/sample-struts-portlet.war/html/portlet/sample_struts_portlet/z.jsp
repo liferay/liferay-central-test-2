@@ -22,11 +22,9 @@
  */
 %>
 
-<font class="portlet-font" style="font-size: x-small;">
+<b>Page Z</b>
 
-<b>Page Z</b><br>
+<br><br>
 
 <%= request.getParameter("hello") %><br>
 <%= request.getParameter("hi") %>
-
-</font>

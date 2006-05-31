@@ -24,16 +24,12 @@
 
 <%@ include file="/html/portlet/sample_struts_portlet/init.jsp" %>
 
-<font class="portlet-font" style="font-size: x-small;">
+<b>Page X</b>
 
-<b>Page X</b><br>
+<br><br>
 
 <bean:message key="hello-there" />
 
-<br>
-<br>
+<br><br>
 
 <%= request.getAttribute("x_param") %>
-
-
-</font>

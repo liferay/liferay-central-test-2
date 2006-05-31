@@ -20,40 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.samplestrutsportlet;
+package com.liferay.samplestrutsportlet.struts.form;
 
-import com.liferay.portlet.CustomUserAttributes;
-import com.liferay.portlet.UserAttributes;
-
-import java.util.Map;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.upload.FormFile;
 
 /**
- * <a href="SampleUserAttributes.java.html"><b><i>View Source</i></b></a>
+ * <a href="UploadForm.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class SampleUserAttributes extends CustomUserAttributes {
+public class UploadForm extends ActionForm {
 
-	public String getValue(String name, Map userInfo) {
-		if (name == null) {
-			return null;
-		}
-
-		String companyId = (String)userInfo.get(
-			UserAttributes.LIFERAY_COMPANY_ID);
-		String userId = (String)userInfo.get(UserAttributes.LIFERAY_USER_ID);
-
-		if (name.equals("user.name.test")) {
-			return "Test Name";
-		}
-		else {
-			return super.getValue(name, userInfo);
-		}
+	public FormFile getFile() {
+		return _file;
 	}
 
-	public Object clone() {
-		return new SampleUserAttributes();
+	public void setFile(FormFile file) {
+		_file = file;
 	}
+
+	private FormFile _file;
 
 }

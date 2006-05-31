@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.samplestrutsportlet.action;
+package com.liferay.samplestrutsportlet.struts.render;
 
-import com.liferay.portlet.samplestrutsportlet.SampleException;
+import com.liferay.samplestrutsportlet.struts.form.SubscribeForm;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,31 +35,25 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="XAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="SubscribeAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class XAction extends Action {
+public class SubscribeAction extends Action {
 
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
 		throws Exception {
 
-		_log.info("processAction");
+		SubscribeForm subscribeForm = (SubscribeForm)form;
 
-		req.setAttribute("x_param", "x_value");
+		_log.info(subscribeForm.toString());
 
-		String exception = req.getParameter("action_exception");
-
-		if ((exception != null) && (exception.equals("true"))) {
-			throw new SampleException();
-		}
-
-		return mapping.findForward("portlet.sample_struts_portlet.x");
+		return mapping.findForward("portlet.sample_struts_portlet.subscribe");
 	}
 
-	private static Log _log = LogFactory.getLog(XAction.class);
+	private static Log _log = LogFactory.getLog(SubscribeAction.class);
 
 }

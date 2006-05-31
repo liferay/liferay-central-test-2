@@ -24,17 +24,14 @@
 
 <%@ include file="/html/portlet/sample_struts_portlet/init.jsp" %>
 
+<html:form action="/sample_struts_portlet/upload/action" enctype="multipart/form-data" method="post" focus="file">
+
 <table border="0" cellpadding="0" cellspacing="0">
-
-<html:form action="/sample_struts_portlet/action/upload" enctype="multipart/form-data" method="post" focus="file">
-
 <tr>
 	<td>
-		<font class="portlet-font" style="font-size: x-small;">File Location</font>
+		File Location
 	</td>
-	<td width="10">
-		&nbsp;
-	</td>
+	<td style="padding-left: 10px;"></td>
 	<td>
 		<html:file property="file" />
 	</td>
@@ -50,7 +47,6 @@
 		<html:submit>Upload File</html:submit>
 	</td>
 </tr>
+</table>
 
 </html:form>
-
-</table>

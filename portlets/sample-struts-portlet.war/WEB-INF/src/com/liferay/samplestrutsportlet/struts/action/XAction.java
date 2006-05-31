@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.samplestrutsportlet.render;
+package com.liferay.samplestrutsportlet.struts.action;
 
-import com.liferay.portlet.samplestrutsportlet.SampleException;
+import com.liferay.samplestrutsportlet.SampleException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,9 +46,12 @@ public class XAction extends Action {
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
 		throws Exception {
-		_log.info("render " + req.getParameter("x_param"));
 
-		String exception = req.getParameter("render_exception");
+		_log.info("processAction");
+
+		req.setAttribute("x_param", "x_value");
+
+		String exception = req.getParameter("action_exception");
 
 		if ((exception != null) && (exception.equals("true"))) {
 			throw new SampleException();

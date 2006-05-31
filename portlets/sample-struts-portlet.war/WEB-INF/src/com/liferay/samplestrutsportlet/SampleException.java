@@ -20,39 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.samplestrutsportlet.render;
+package com.liferay.samplestrutsportlet;
 
-import com.liferay.portlet.samplestrutsportlet.form.UnsubscribeForm;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.apache.commons.lang.exception.NestableException;
 
 /**
- * <a href="UnsubscribeAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="SampleException.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class UnsubscribeAction extends Action {
+public class SampleException extends NestableException {
 
-	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
-		throws Exception {
-		UnsubscribeForm unsubscribeForm = (UnsubscribeForm)form;
-
-		_log.info(unsubscribeForm.toString());
-
-		return mapping.findForward("portlet.sample_struts_portlet.unsubscribe");
+	public SampleException() {
+		super();
 	}
 
-	private static Log _log = LogFactory.getLog(UnsubscribeAction.class);
+	public SampleException(String msg) {
+		super(msg);
+	}
+
+	public SampleException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public SampleException(Throwable cause) {
+		super(cause);
+	}
 
 }

@@ -28,75 +28,44 @@
 <bean:define id="lastName" name="unsubscribeForm" property="lastName" type="java.lang.String" />
 <bean:define id="emailAddress" name="unsubscribeForm" property="emailAddress" type="java.lang.String" />
 
+<span class="portlet-msg-error">
+<html:errors />
+</span>
+
+<html:form action="/sample_struts_portlet/unsubscribe/action" method="post" focus="firstName">
+
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
-		<font class="portlet-msg-error" style="font-size: x-small;">
-		<html:errors />
-		</font>
+		First Name
 	</td>
-</tr>
-</table>
-
-<table border="0" cellpadding="0" cellspacing="0">
-
-<html:form action="/sample_struts_portlet/action/unsubscribe" method="post" focus="firstName">
-
-<tr>
-	<td>
-		<font class="portlet-font" style="font-size: x-small;">First Name</font>
-	</td>
-	<td width="10">
-		&nbsp;
-	</td>
+	<td style="padding-left: 10px;"></td>
 	<td>
 		<html:text name="unsubscribeForm" property="firstName" size="23" styleClass="form-text" />
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
-		<br>
-	</td>
-</tr>
-<tr>
 	<td>
-		<font class="portlet-font" style="font-size: x-small;">Last Name</font>
+		Last Name
 	</td>
-	<td width="10">
-		&nbsp;
-	</td>
+	<td style="padding-left: 10px;"></td>
 	<td>
 		<html:text name="unsubscribeForm" property="lastName" size="23" styleClass="form-text" />
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
-		<br>
-	</td>
-</tr>
-<tr>
 	<td>
-		<font class="portlet-font" style="font-size: x-small;">Email Address</font>
+		Email Address
 	</td>
-	<td width="10">
-		&nbsp;
-	</td>
+	<td style="padding-left: 10px;"></td>
 	<td>
 		<html:text name="unsubscribeForm" property="emailAddress" size="23" styleClass="form-text" />
 	</td>
 </tr>
-<tr>
-	<td colspan="3">
-		<br>
-	</td>
-</tr>
-<tr>
-	<td colspan="2"></td>
-	<td>
-		<html:submit>Unsubscribe</html:submit>
-	</td>
-</tr>
+</table>
+
+<br>
+
+<html:submit styleClass="portlet-form-button">Unsubscribe</html:submit>
 
 </html:form>
-
-</table>

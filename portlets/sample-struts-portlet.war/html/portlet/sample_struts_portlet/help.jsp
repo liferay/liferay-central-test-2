@@ -22,6 +22,4 @@
  */
 %>
 
-<font class="portlet-font" style="font-size: x-small;"><b>
-Help
-</b></font>
+<b>Help</b>

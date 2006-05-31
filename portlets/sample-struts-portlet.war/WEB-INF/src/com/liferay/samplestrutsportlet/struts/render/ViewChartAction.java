@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.samplestrutsportlet.render;
+package com.liferay.samplestrutsportlet.struts.render;
 
 import com.liferay.portlet.LiferaySessionUtil;
 

@@ -20,40 +20,40 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.samplestrutsportlet.render;
+package com.liferay.samplestrutsportlet;
 
-import com.liferay.portlet.samplestrutsportlet.form.SubscribeForm;
+import com.liferay.portlet.CustomUserAttributes;
+import com.liferay.portlet.UserAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import java.util.Map;
 
 /**
- * <a href="SubscribeAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="SampleUserAttributes.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class SubscribeAction extends Action {
+public class SampleUserAttributes extends CustomUserAttributes {
 
-	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
-		throws Exception {
+	public String getValue(String name, Map userInfo) {
+		if (name == null) {
+			return null;
+		}
 
-		SubscribeForm subscribeForm = (SubscribeForm)form;
+		String companyId = (String)userInfo.get(
+			UserAttributes.LIFERAY_COMPANY_ID);
+		String userId = (String)userInfo.get(UserAttributes.LIFERAY_USER_ID);
 
-		_log.info(subscribeForm.toString());
-
-		return mapping.findForward("portlet.sample_struts_portlet.subscribe");
+		if (name.equals("user.name.test")) {
+			return "Test Name";
+		}
+		else {
+			return super.getValue(name, userInfo);
+		}
 	}
 
-	private static Log _log = LogFactory.getLog(SubscribeAction.class);
+	public Object clone() {
+		return new SampleUserAttributes();
+	}
 
 }

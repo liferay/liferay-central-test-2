@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.samplestrutsportlet.action;
+package com.liferay.samplestrutsportlet.struts.render;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,22 +33,23 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="UnsubscribeAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="YAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class UnsubscribeAction extends Action {
+public class YAction extends Action {
 
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
 		throws Exception {
 
-		return mapping.findForward(
-			"/sample_struts_portlet/unsubscribe_success");
+		_log.info("render");
+
+		return mapping.findForward("portlet.sample_struts_portlet.y");
 	}
 
-	private static Log _log = LogFactory.getLog(UnsubscribeAction.class);
+	private static Log _log = LogFactory.getLog(YAction.class);
 
 }

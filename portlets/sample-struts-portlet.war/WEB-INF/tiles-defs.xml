@@ -3,7 +3,7 @@
 
 <tiles-definitions>
 
-	<!-- Test Struts -->
+	<!-- Sample Struts -->
 
 	<definition name="portlet.sample_struts_portlet" path="/html/portlet/sample_struts_portlet/template.jsp" />
 

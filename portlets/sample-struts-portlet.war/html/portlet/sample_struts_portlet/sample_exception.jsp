@@ -22,6 +22,4 @@
  */
 %>
 
-<font class="portlet-font" style="font-size: x-small;"><b>
-Sample Exception
-</b></font>
+<b>Sample Exception</b>

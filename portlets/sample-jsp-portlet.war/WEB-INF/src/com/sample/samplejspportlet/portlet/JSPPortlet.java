@@ -22,12 +22,11 @@
 
 package com.sample.samplejspportlet.portlet;
 
-import javax.portlet.GenericPortlet;
-
 import java.io.IOException;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.GenericPortlet;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;

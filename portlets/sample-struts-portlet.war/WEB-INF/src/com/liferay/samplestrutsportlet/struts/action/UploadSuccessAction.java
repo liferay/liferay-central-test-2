@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.samplestrutsportlet.render;
+package com.liferay.samplestrutsportlet.struts.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,23 +33,22 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="YAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="UploadSuccessAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
+ * @author Brian Wing Shun Chan
  *
  */
-public class YAction extends Action {
+public class UploadSuccessAction extends Action {
 
-	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
-		throws Exception {
+	public ActionForward execute(ActionMapping mapping, ActionForm form,
+			HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-		_log.info("render");
+		_log.info("processAction");
 
-		return mapping.findForward("portlet.sample_struts_portlet.y");
+		return mapping
+				.findForward("portlet.sample_struts_portlet.upload_success");
 	}
 
-	private static Log _log = LogFactory.getLog(YAction.class);
+	private static Log _log = LogFactory.getLog(UploadAction.class);
 
 }

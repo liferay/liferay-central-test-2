@@ -20,57 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.samplestrutsportlet.form;
+package com.liferay.samplestrutsportlet.struts.action;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.validator.ValidatorForm;
 
 /**
- * <a href="UnsubscribeForm.java.html"><b><i>View Source</i></b></a>
+ * <a href="UnsubscribeAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class UnsubscribeForm extends ValidatorForm {
+public class UnsubscribeAction extends Action {
 
-	public String getFirstName() {
-		return _firstName;
+	public ActionForward execute(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
+		throws Exception {
+
+		return mapping.findForward(
+			"/sample_struts_portlet/unsubscribe_success");
 	}
 
-	public void setFirstName(String firstName) {
-		_firstName = firstName;
-	}
-
-	public String getLastName() {
-		return _lastName;
-	}
-
-	public void setLastName(String lastName) {
-		_lastName = lastName;
-	}
-
-	public String getEmailAddress() {
-		return _emailAddress;
-	}
-
-	public void setEmailAddress(String emailAddress) {
-		_emailAddress = emailAddress;
-	}
-
-	public void reset(ActionMapping mapping, HttpServletRequest req) {
-		_firstName = null;
-		_lastName = null;
-		_emailAddress = null;
-	}
-
-	public String toString() {
-		return _firstName + " " + _lastName + " " + _emailAddress;
-	}
-
-	private String _firstName;
-	private String _lastName;
-	private String _emailAddress;
+	private static Log _log = LogFactory.getLog(UnsubscribeAction.class);
 
 }

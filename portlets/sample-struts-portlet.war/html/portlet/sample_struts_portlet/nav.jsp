@@ -24,15 +24,19 @@
 
 <%@ include file="/html/portlet/sample_struts_portlet/init.jsp" %>
 
-<font class="portlet-font" style="font-size: x-small;">
+View Page:
 
-View Page:&nbsp;
+<html:link page="/portlet_action/sample_struts_portlet/view">Default</html:link>
 
-<html:link page="/portlet_action/sample_struts_portlet/view">Default</html:link> &nbsp;|&nbsp;
+|
 
-<html:link page="/portlet_action/sample_struts_portlet/render/x">X</html:link> &nbsp;|&nbsp;
+<html:link page="/portlet_action/sample_struts_portlet/x/render">X</html:link>
 
-<html:link page="/portlet_action/sample_struts_portlet/render/y?hello=Hello+World%21">Y</html:link> &nbsp;|&nbsp;
+|
+
+<html:link page="/portlet_action/sample_struts_portlet/y/render?hello=Hello+World%21">Y</html:link>
+
+|
 
 <%
 Map zParams = new HashMap();
@@ -43,36 +47,60 @@ zParams.put("hi", "Hi Mom!");
 pageContext.setAttribute("zParams", zParams);
 %>
 
-<html:link name="zParams" page="/portlet_action/sample_struts_portlet/z">Z</html:link><br><br>
+<html:link name="zParams" page="/portlet_action/sample_struts_portlet/z">Z</html:link>
 
-Portlet URL:&nbsp;
+<br><br>
 
-<html:link actionURL="true" page="/portlet_action/sample_struts_portlet/action/x?x_param=bad_x_value">Action</html:link> &nbsp;|&nbsp;
-<html:link page="/portlet_action/sample_struts_portlet/render/x">Render</html:link> <br><br>
+Portlet URL:
 
-Chart:&nbsp;
+<html:link actionURL="true" page="/portlet_action/sample_struts_portlet/x/action?x_param=bad_x_value">Action</html:link>
 
-<a href="javascript: var viewChartWindow = window.open('<%= request.getContextPath() %>/portlet_action/sample_struts_portlet/view_chart?chart_type=area', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();">Area</a> &nbsp;|&nbsp;
+|
 
-<a href="javascript: var viewChartWindow = window.open('<%= request.getContextPath() %>/portlet_action/sample_struts_portlet/view_chart?chart_type=horizontal_bar', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();">Horizontal Bar</a> &nbsp;|&nbsp;
+<html:link page="/portlet_action/sample_struts_portlet/x/render">Render</html:link>
 
-<a href="javascript: var viewChartWindow = window.open('<%= request.getContextPath() %>/portlet_action/sample_struts_portlet/view_chart?chart_type=line', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();">Line</a> &nbsp;|&nbsp;
+<br><br>
 
-<a href="javascript: var viewChartWindow = window.open('<%= request.getContextPath() %>/portlet_action/sample_struts_portlet/view_chart?chart_type=pie', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();">Pie</a> &nbsp;|&nbsp;
+Chart:
 
-<a href="javascript: var viewChartWindow = window.open('<%= request.getContextPath() %>/portlet_action/sample_struts_portlet/view_chart?chart_type=vertical_bar', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();">Vertical Bar</a><br><br>
+<a href="javascript: var viewChartWindow = window.open('<%= request.getContextPath() %>/portlet_action/sample_struts_portlet/view_chart?chart_type=area', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();">Area</a>
 
-Struts Form:&nbsp;
+|
 
-<html:link page="/portlet_action/sample_struts_portlet/render/subscribe?firstName=John&lastName=Wayne&emailAddress=test@liferay.com">Subscribe</html:link> &nbsp;|&nbsp;
+<a href="javascript: var viewChartWindow = window.open('<%= request.getContextPath() %>/portlet_action/sample_struts_portlet/view_chart?chart_type=horizontal_bar', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();">Horizontal Bar</a>
 
-<html:link page="/portlet_action/sample_struts_portlet/render/unsubscribe?firstName=John&lastName=Wayne&emailAddress=test@liferay.com">Unsubscribe</html:link> &nbsp;|&nbsp;
+|
 
-<html:link page="/portlet_action/sample_struts_portlet/render/upload">Upload</html:link><br><br>
+<a href="javascript: var viewChartWindow = window.open('<%= request.getContextPath() %>/portlet_action/sample_struts_portlet/view_chart?chart_type=line', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();">Line</a>
 
-Struts Exception:&nbsp;
-<html:link actionURL="true" page="/portlet_action/sample_struts_portlet/action/x?action_exception=true">Action</html:link> &nbsp;|&nbsp;
+|
 
-<html:link page="/portlet_action/sample_struts_portlet/render/x?render_exception=true">Render</html:link> <br><br>
+<a href="javascript: var viewChartWindow = window.open('<%= request.getContextPath() %>/portlet_action/sample_struts_portlet/view_chart?chart_type=pie', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();">Pie</a>
 
-</font>
+|
+
+<a href="javascript: var viewChartWindow = window.open('<%= request.getContextPath() %>/portlet_action/sample_struts_portlet/view_chart?chart_type=vertical_bar', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();">Vertical Bar</a>
+
+<br><br>
+
+Struts Form:
+
+<html:link page="/portlet_action/sample_struts_portlet/subscribe/render?firstName=John&lastName=Wayne&emailAddress=test@liferay.com">Subscribe</html:link>
+
+|
+
+<html:link page="/portlet_action/sample_struts_portlet/unsubscribe/render?firstName=John&lastName=Wayne&emailAddress=test@liferay.com">Unsubscribe</html:link>
+
+|
+
+<html:link page="/portlet_action/sample_struts_portlet/upload/render">Upload</html:link>
+
+<br><br>
+
+Struts Exception:
+
+<html:link actionURL="true" page="/portlet_action/sample_struts_portlet/x/action?action_exception=true">Action</html:link>
+
+|
+
+<html:link page="/portlet_action/sample_struts_portlet/x/render?render_exception=true">Render</html:link>

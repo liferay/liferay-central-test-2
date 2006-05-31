@@ -20,66 +20,38 @@
  * SOFTWARE.
  */
 
-package com.liferay.servlet.testsession;
+package com.liferay.samplestrutsportlet.struts.render;
 
-import java.io.IOException;
+import com.liferay.portal.struts.PortletAction;
 
-import java.util.Enumeration;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="TestSessionServlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="UploadSuccessAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class TestSessionServlet extends HttpServlet {
+public class UploadSuccessAction extends PortletAction {
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
+	public ActionForward execute(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
+		throws Exception {
 
-		HttpSession ses = req.getSession();
+		_log.info("render " + req.getParameter("file_name"));
 
-		StringBuffer sb = new StringBuffer();
-
-		// Remote User
-
-		sb.append("<b>Remote User:</b><br><br>");
-		sb.append(req.getRemoteUser());
-		sb.append("<br><br>");
-
-		// Session ID
-
-		sb.append("<b>Session ID:</b><br><br>");
-		sb.append(req.getRequestedSessionId());
-		sb.append("<br><br>");
-
-		// Servlet Session Attributes
-
-		sb.append("<b>Servlet Session Attributes:</b><br><br>");
-
-		Enumeration enu = ses.getAttributeNames();
-
-		while (enu.hasMoreElements()) {
-			String attrName = (String)enu.nextElement();
-
-			Object attrValue = ses.getAttribute(attrName);
-
-			sb.append(attrName);
-			sb.append("=");
-			sb.append(attrValue);
-			sb.append("<br>");
-		}
-
-		res.setContentType("text/html");
-
-		res.getOutputStream().print(sb.toString());
-		res.getOutputStream().flush();
+		return mapping.findForward(
+			"portlet.sample_struts_portlet.upload_success");
 	}
+
+	private static Log _log = LogFactory.getLog(UploadAction.class);
 
 }

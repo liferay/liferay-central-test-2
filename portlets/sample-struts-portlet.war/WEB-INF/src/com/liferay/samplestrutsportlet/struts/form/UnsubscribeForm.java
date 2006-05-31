@@ -20,22 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.samplestrutsportlet.form;
+package com.liferay.samplestrutsportlet.struts.form;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.struts.action.ActionErrors;
-import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
+import org.apache.struts.validator.ValidatorForm;
 
 /**
- * <a href="SubscribeForm.java.html"><b><i>View Source</i></b></a>
+ * <a href="UnsubscribeForm.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class SubscribeForm extends ActionForm {
+public class UnsubscribeForm extends ValidatorForm {
 
 	public String getFirstName() {
 		return _firstName;
@@ -65,25 +63,6 @@ public class SubscribeForm extends ActionForm {
 		_firstName = null;
 		_lastName = null;
 		_emailAddress = null;
-	}
-
-	public ActionErrors validate(
-		ActionMapping mapping, HttpServletRequest req) {
-
-		ActionErrors errors = new ActionErrors();
-
-		if ((_lastName == null) || (_lastName.length() < 1)) {
-			errors.add(
-				"lastName", new ActionMessage("error.lastName.required"));
-		}
-
-		if ((_emailAddress == null) || (_emailAddress.length() < 1)) {
-			errors.add(
-				"emailAddress",
-				new ActionMessage("error.emailAddress.required"));
-		}
-
-		return errors;
 	}
 
 	public String toString() {

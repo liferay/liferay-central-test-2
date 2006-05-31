@@ -24,6 +24,4 @@
 
 <%@ include file="/html/portlet/sample_struts_portlet/init.jsp" %>
 
-<font class="portlet-font" style="font-size: x-small;"><b>
-View <bean:message key="hello-there" />
-</b></font>
+<b>View <bean:message key="hello-there" /></b>

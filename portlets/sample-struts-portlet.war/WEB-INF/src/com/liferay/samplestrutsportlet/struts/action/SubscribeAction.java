@@ -20,32 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.samplestrutsportlet;
+package com.liferay.samplestrutsportlet.struts.action;
 
-import org.apache.commons.lang.exception.NestableException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="SampleException.java.html"><b><i>View Source</i></b></a>
+ * <a href="SubscribeAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class SampleException extends NestableException {
+public class SubscribeAction extends Action {
 
-	public SampleException() {
-		super();
+	public ActionForward execute(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
+		throws Exception {
+
+		return mapping.findForward("/sample_struts_portlet/subscribe_success");
 	}
 
-	public SampleException(String msg) {
-		super(msg);
-	}
-
-	public SampleException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public SampleException(Throwable cause) {
-		super(cause);
-	}
+	private static Log _log = LogFactory.getLog(SubscribeAction.class);
 
 }
