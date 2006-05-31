@@ -8,6 +8,9 @@
 	<property name="client.url" value="http://localhost:8080/tunnel/axis" />
 
 	<target name="build-client">
+		<echo message="Make sure the server is running at ${client.url}." />
+		<echo message="" />
+
 		<delete dir="${source.dir}" />
 		<mkdir dir="${source.dir}" />
 

@@ -52,8 +52,25 @@ public class Test {
 		LayoutServiceSoapServiceLocator locator =
 			new LayoutServiceSoapServiceLocator();
 
-		LayoutServiceSoap soap = locator.getPortal_LayoutService(new URL(
-			"http://localhost:8080/tunnel/axis/Portal_LayoutService"));
+		// Unathenticated url
+
+		String url = "http://localhost:8080/tunnel/axis/Portal_LayoutService";
+
+		// Authenticated url
+
+		if (true) {
+
+			String userId = "liferay.com.1";
+			String password = "test";
+			
+			url =
+				"http://" + userId + ":" + password +
+					"@localhost:8080/tunnel/secure/axis/Portal_LayoutService";
+		}
+
+		// Call service
+
+		LayoutServiceSoap soap = locator.getPortal_LayoutService(new URL(url));
 
 		LayoutReference[] layoutReferences = soap.getLayoutReferences(
 			"liferay.com", "56", "article-id", "PRODUCTS-LICENSING");
