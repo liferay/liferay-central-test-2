@@ -357,10 +357,12 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			start = System.currentTimeMillis();
 		}
 
-		if (PermissionFinder.countByGroupsPermissions(
-				permissions, groups) > 0) {
+		if (groups.size() > 0) {
+			if (PermissionFinder.countByGroupsPermissions(
+					permissions, groups) > 0) {
 
-			return true;
+				return true;
+			}
 		}
 
 		logUserPermission(userId, actionId, resourceId, start, 5);
