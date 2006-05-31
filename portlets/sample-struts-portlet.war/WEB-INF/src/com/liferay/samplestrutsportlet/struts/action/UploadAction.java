@@ -78,8 +78,7 @@ public class UploadAction extends Action {
 
 		req.setAttribute("file_name", itemName);
 
-		return mapping.findForward(
-			"/sample_struts_portlet/upload_success");
+		return mapping.findForward("/sample_struts_portlet/upload_success");
 	}
 
 	private static Log _log = LogFactory.getLog(UploadAction.class);

@@ -45,8 +45,8 @@ public class UploadSuccessAction extends Action {
 
 		_log.info("processAction");
 
-		return mapping
-				.findForward("portlet.sample_struts_portlet.upload_success");
+		return mapping.findForward(
+			"portlet.sample_struts_portlet.upload_success");
 	}
 
 	private static Log _log = LogFactory.getLog(UploadAction.class);

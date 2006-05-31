@@ -46,6 +46,7 @@ public class UnsubscribeAction extends Action {
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
 		throws Exception {
+
 		UnsubscribeForm unsubscribeForm = (UnsubscribeForm)form;
 
 		_log.info(unsubscribeForm.toString());
