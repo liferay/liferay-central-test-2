@@ -6,7 +6,7 @@
 	<property name="deploy.dir" value="${app.server.ear}" />
 
 	<target name="war">
-		<delete>
+		<!--<delete>
 			<fileset dir="." includes="**/Thumbs.db" />
 		</delete>
 
@@ -15,7 +15,7 @@
 			destfile="../sample_pack_01_themes.war"
 			excludes="WEB-INF/web.xml"
 			webxml="sample_pack_01_themes.war/WEB-INF/web.xml"
-		/>
+		/>-->
 	</target>
 
 	<target name="deploy">
