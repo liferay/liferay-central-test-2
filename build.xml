@@ -463,6 +463,7 @@
 		<antcall target="zip-jboss" />
 		<antcall target="zip-jetty" />
 		<antcall target="zip-jonas" />
+		<antcall target="zip-portal-client" />
 		<antcall target="zip-resin" />
 		<antcall target="zip-sql" />
 		<antcall target="zip-src" />
@@ -593,10 +594,6 @@
 		<ant dir="layouttpl" target="war" />
 		<ant dir="portlets" target="war" />
 		<ant dir="themes" target="war" />
-
-		<copy file="layouttpl-deployer.xml" tofile="layouttpl-deployer-${lp.version.file.name}.xml" />
-		<copy file="portlet-deployer.xml" tofile="portlet-deployer-${lp.version.file.name}.xml" />
-		<copy file="theme-deployer.xml" tofile="theme-deployer-${lp.version.file.name}.xml" />
 
 		<!--<ftp server="upload.sourceforge.net"
 			userid="anonymous"
