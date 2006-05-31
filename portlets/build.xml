@@ -15,6 +15,10 @@
 		</antcall>
 
 		<antcall target="clean-module">
+			<param name="module.name" value="sample-json-portlet" />
+		</antcall>
+
+		<antcall target="clean-module">
 			<param name="module.name" value="sample-jsp-portlet" />
 		</antcall>
 
@@ -40,6 +44,10 @@
 
 		<antcall target="compile-module">
 			<param name="module.name" value="sample-jsf-sun-portlet" />
+		</antcall>
+
+		<antcall target="compile-module">
+			<param name="module.name" value="sample-json-portlet" />
 		</antcall>
 
 		<antcall target="compile-module">
@@ -73,6 +81,10 @@
 
 		<antcall target="war-module">
 			<param name="module.name" value="sample-jsf-sun-portlet" />
+		</antcall>
+
+		<antcall target="war-module">
+			<param name="module.name" value="sample-json-portlet" />
 		</antcall>
 
 		<antcall target="war-module">
