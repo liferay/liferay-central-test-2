@@ -11,7 +11,7 @@
 		<listener-class>com.liferay.portal.shared.servlet.PortletContextListener</listener-class>
 	</listener>
 	<servlet>
-		<servlet-name>sample_jon_portlet</servlet-name>
+		<servlet-name>sample_json_portlet</servlet-name>
 		<servlet-class>com.liferay.portal.shared.servlet.PortletServlet</servlet-class>
 		<init-param>
 			<param-name>portlet-class</param-name>
@@ -24,8 +24,8 @@
 		<servlet-class>com.sample.json.servlet.JSONServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>sample_jon_portlet</servlet-name>
-		<url-pattern>/sample_jon_portlet/*</url-pattern>
+		<servlet-name>sample_json_portlet</servlet-name>
+		<url-pattern>/sample_json_portlet/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Sample JSON Servlet</servlet-name>

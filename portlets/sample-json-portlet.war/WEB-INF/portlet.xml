@@ -2,7 +2,7 @@
 
 <portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd" version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd">
 	<portlet>
-		<portlet-name>sample_jon_portlet</portlet-name>
+		<portlet-name>sample_json_portlet</portlet-name>
 		<display-name>Sample JSON Portlet</display-name>
 		<portlet-class>com.sample.json.portlet.JSONPortlet</portlet-class>
 		<expiration-cache>0</expiration-cache>
@@ -14,6 +14,9 @@
 			<short-title>Sample JSON Portlet</short-title>
 			<keywords>Sample JSON Portlet</keywords>
 		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
 		<security-role-ref>
 			<role-name>guest</role-name>
 		</security-role-ref>

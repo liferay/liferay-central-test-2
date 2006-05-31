@@ -8,7 +8,8 @@ toString : function() {
 	clickMe.style.cursor = "pointer";
 	
 	var image = document.createElement("img");
-	image.src = "http://portal.liferay.com/image/company_logo?img_id=liferay.com&key=63152";
+
+	image.src = "http://www.liferay.com/image/company_logo?img_id=liferay.com";
 	image.setAttribute("onclick", "document.getElementById('click_link').style.display = 'inline'; this.style.display = 'none'");
 	image.style.cursor = "pointer";
 	image.id = "click_image";
