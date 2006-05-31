@@ -371,7 +371,7 @@ if (Validator.isNotNull(modelResource)) {
 						<option value=""></option>
 						<option <%= hasCompanyScope ? "selected" : "" %> value="<%= Resource.SCOPE_COMPANY %>"><%= LanguageUtil.get(pageContext, "enterprise") %></option>
 
-						<c:if test="<%= !portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) && !portletResource.equals(PortletKeys.PORTAL_CONFIGURATION) %>">
+						<c:if test="<%= !portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) && !portletResource.equals(PortletKeys.PORTAL) %>">
 							<option <%= hasGroupScope ? "selected" : "" %> value="<%= Resource.SCOPE_GROUP %>"><%= LanguageUtil.get(pageContext, "community") %></option>
 						</c:if>
 					</select>
@@ -449,7 +449,7 @@ if (Validator.isNotNull(modelResource)) {
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId());
+		List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, true);
 
 		Collections.sort(portlets, new PortletTitleComparator(application, locale));
 

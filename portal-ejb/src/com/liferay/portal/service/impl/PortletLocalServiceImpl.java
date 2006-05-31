@@ -49,7 +49,6 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -124,12 +123,39 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 	}
 
 	public List getPortlets(String companyId) throws SystemException {
-		List list = ListUtil.fromCollection(
-			_getPortletsPool(companyId).values());
+		return getPortlets(companyId, true, true);
+	}
 
-		Collections.sort(list);
+	public List getPortlets(
+			String companyId, boolean showSystem, boolean showPortal)
+		throws SystemException {
 
-		return list;
+		Map portletsPool = _getPortletsPool(companyId);
+
+		List portlets = ListUtil.fromCollection(portletsPool.values());
+
+		if (!showSystem || !showPortal) {
+			Iterator itr = portlets.iterator();
+
+			while (itr.hasNext()) {
+				Portlet portlet = (Portlet)itr.next();
+
+				if (showPortal &&
+					portlet.getPortletId().equals(PortletKeys.PORTAL)) {
+
+				}
+				else if (!showPortal &&
+						 portlet.getPortletId().equals(PortletKeys.PORTAL)) {
+
+					itr.remove();
+				}
+				else if (!showSystem && portlet.isSystem()) {
+					itr.remove();
+				}
+			}
+		}
+
+		return portlets;
 	}
 
 	public void initEAR(String[] xmls) {

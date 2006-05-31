@@ -64,6 +64,8 @@ public class PortletKeys {
 
 	public static final String LAYOUT_MANAGEMENT = "88";
 
+	public static final String LIFERAY_PORTAL = "LIFERAY_PORTAL";
+
 	public static final String LOCATION_ADMIN = "40";
 
 	public static final String MAIL = "1";
@@ -78,9 +80,7 @@ public class PortletKeys {
 
 	public static final String POLLS = "25";
 
-	public static final String PORTAL = "LIFERAY_PORTAL";
-
-	public static final String PORTAL_CONFIGURATION = "90";
+	public static final String PORTAL = "90";
 
 	public static final String PORTLET_CONFIGURATION = "86";
 

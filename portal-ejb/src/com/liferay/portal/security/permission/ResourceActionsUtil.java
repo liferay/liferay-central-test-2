@@ -328,7 +328,7 @@ public class ResourceActionsUtil {
 			synchronized (this) {
 				actions.clear();
 
-				if (name.equals(PortletKeys.PORTAL_CONFIGURATION)) {
+				if (name.equals(PortletKeys.PORTAL)) {
 					actions.add(ActionKeys.ADD_COMMUNITY);
 					actions.add(ActionKeys.ADD_ORGANIZATION);
 					actions.add(ActionKeys.ADD_ROLE);

@@ -48,6 +48,10 @@ public interface PortletLocalService {
 	public java.util.List getPortlets(java.lang.String companyId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getPortlets(java.lang.String companyId,
+		boolean showSystem, boolean showPortal)
+		throws com.liferay.portal.SystemException;
+
 	public void initEAR(java.lang.String[] xmls);
 
 	public java.util.List initWAR(java.lang.String servletContextName,

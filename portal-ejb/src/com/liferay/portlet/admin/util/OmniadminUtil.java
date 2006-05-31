@@ -115,10 +115,10 @@ public class OmniadminUtil {
 	public static PortletPreferences getPreferences()
 		throws PortalException, SystemException {
 
-		String companyId = PortletKeys.PORTAL;
+		String companyId = PortletKeys.LIFERAY_PORTAL;
 
 		PortletPreferencesPK prefsPK = new PortletPreferencesPK(
-			PortletKeys.PORTAL, PortletKeys.PREFS_LAYOUT_ID_SHARED,
+			PortletKeys.LIFERAY_PORTAL, PortletKeys.PREFS_LAYOUT_ID_SHARED,
 			PortletKeys.PREFS_OWNER_ID_COMPANY + StringPool.PERIOD + companyId);
 
 		return PortletPreferencesLocalServiceUtil.getPreferences(

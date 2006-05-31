@@ -413,7 +413,7 @@ if (Validator.isNotNull(modelResource)) {
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId());
+		List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
 
 		Collections.sort(portlets, new PortletTitleComparator(application, locale));
 

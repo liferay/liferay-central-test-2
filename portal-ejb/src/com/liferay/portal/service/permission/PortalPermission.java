@@ -47,7 +47,7 @@ public class PortalPermission {
 		PermissionChecker permissionChecker, String actionId) {
 
 		return permissionChecker.hasPermission(
-			null, PortletKeys.PORTAL_CONFIGURATION, null, actionId);
+			null, PortletKeys.PORTAL, null, actionId);
 	}
 
 }

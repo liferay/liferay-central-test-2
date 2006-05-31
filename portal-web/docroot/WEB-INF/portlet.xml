@@ -1833,7 +1833,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>90</portlet-name>
-		<display-name>Portal Configuration</display-name>
+		<display-name>Portal</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<expiration-cache>0</expiration-cache>
 		<supports>

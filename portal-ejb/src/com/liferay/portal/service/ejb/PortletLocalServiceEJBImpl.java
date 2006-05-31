@@ -77,6 +77,12 @@ public class PortletLocalServiceEJBImpl implements PortletLocalService,
 		return getService().getPortlets(companyId);
 	}
 
+	public java.util.List getPortlets(java.lang.String companyId,
+		boolean showSystem, boolean showPortal)
+		throws com.liferay.portal.SystemException {
+		return getService().getPortlets(companyId, showSystem, showPortal);
+	}
+
 	public void initEAR(java.lang.String[] xmls) {
 		getService().initEAR(xmls);
 	}

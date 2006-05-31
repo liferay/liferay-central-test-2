@@ -65,7 +65,7 @@ public class PortletPreferencesFactory {
 
 		PortalPreferences portalPrefs = null;
 
-		String portletId = PortletKeys.PORTAL;
+		String portletId = PortletKeys.LIFERAY_PORTAL;
 		String layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
 
 		ThemeDisplay themeDisplay =

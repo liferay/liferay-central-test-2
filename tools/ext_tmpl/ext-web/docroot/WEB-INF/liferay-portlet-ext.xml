@@ -408,7 +408,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>90</portlet-name>
-		<struts-path>portal_configuration</struts-path>
+		<struts-path>portal</struts-path>
 		<include>true</include>
 	</portlet>
 	<portlet>

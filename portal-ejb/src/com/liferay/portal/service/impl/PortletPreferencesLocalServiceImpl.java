@@ -108,7 +108,7 @@ public class PortletPreferencesLocalServiceImpl
 			catch (NoSuchPortletPreferencesException nsppe) {
 				portletPreferences = PortletPreferencesUtil.create(pk);
 
-				if (pk.portletId.equals(PortletKeys.PORTAL)) {
+				if (pk.portletId.equals(PortletKeys.LIFERAY_PORTAL)) {
 					portletPreferences.setPreferences(
 						Portlet.DEFAULT_PREFERENCES);
 				}

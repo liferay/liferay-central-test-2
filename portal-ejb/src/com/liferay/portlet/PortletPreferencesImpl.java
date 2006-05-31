@@ -199,7 +199,7 @@ public class PortletPreferencesImpl
 
 		if (_defaultPreferences == null) {
 			try {
-				if (!_pk.portletId.equals(PortletKeys.PORTAL)) {
+				if (!_pk.portletId.equals(PortletKeys.LIFERAY_PORTAL)) {
 					_defaultPreferences =
 						PortletPreferencesLocalServiceUtil.getDefaultPreferences(
 							_companyId, _pk.portletId);
@@ -233,7 +233,7 @@ public class PortletPreferencesImpl
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				_companyId, _pk.portletId);
 
-			if (!_pk.portletId.equals(PortletKeys.PORTAL)) {
+			if (!_pk.portletId.equals(PortletKeys.LIFERAY_PORTAL)) {
 				PreferencesValidator prefsValidator =
 					PortalUtil.getPreferencesValidator(portlet);
 

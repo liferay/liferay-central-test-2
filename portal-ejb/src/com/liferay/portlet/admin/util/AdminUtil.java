@@ -216,7 +216,7 @@ public class AdminUtil {
 		throws PortalException, SystemException {
 
 		PortletPreferencesPK prefsPK = new PortletPreferencesPK(
-			PortletKeys.PORTAL, PortletKeys.PREFS_LAYOUT_ID_SHARED,
+			PortletKeys.LIFERAY_PORTAL, PortletKeys.PREFS_LAYOUT_ID_SHARED,
 			PortletKeys.PREFS_OWNER_ID_COMPANY + StringPool.PERIOD + companyId);
 
 		return PortletPreferencesLocalServiceUtil.getPreferences(
