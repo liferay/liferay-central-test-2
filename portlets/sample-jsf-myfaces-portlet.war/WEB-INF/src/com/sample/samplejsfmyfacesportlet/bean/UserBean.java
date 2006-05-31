@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.sample.portlet.samplejsfmyfacesportlet.bean;
+package com.sample.samplejsfmyfacesportlet.bean;
 
 /**
  * <a href="UserBean.java.html"><b><i>View Source</i></b></a>

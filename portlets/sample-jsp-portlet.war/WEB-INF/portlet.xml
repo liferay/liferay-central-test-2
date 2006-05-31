@@ -4,10 +4,10 @@
 	<portlet>
 		<portlet-name>sample_jsp_portlet</portlet-name>
 		<display-name>Sample JSP Portlet</display-name>
-		<portlet-class>com.sample.portlet.jsp.JSPPortlet</portlet-class>
+		<portlet-class>com.sample.samplejspportlet.portlet.JSPPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/portlet/sample_jsp_portlet/view.jsp</value>
+			<value>/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

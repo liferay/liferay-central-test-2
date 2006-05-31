@@ -15,7 +15,7 @@
 		<servlet-class>com.liferay.portal.shared.servlet.PortletServlet</servlet-class>
 		<init-param>
 			<param-name>portlet-class</param-name>
-			<param-value>com.sample.portlet.jsp.JSPPortlet</param-value>
+			<param-value>com.sample.samplejspportlet.portlet.JSPPortlet</param-value>
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>

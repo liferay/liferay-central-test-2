@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.sample.portlet.jsp;
+package com.sample.samplejspportlet.portlet;
 
 import javax.portlet.GenericPortlet;
 
@@ -94,7 +94,7 @@ public class JSPPortlet extends GenericPortlet {
 		throws IOException, PortletException {
 
 		PortletRequestDispatcher prd =
-			getPortletContext().getRequestDispatcher("/html" + path);
+			getPortletContext().getRequestDispatcher(path);
 
 		if (prd == null) {
 			_log.error(path + " is not a valid include");
