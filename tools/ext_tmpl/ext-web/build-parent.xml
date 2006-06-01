@@ -330,7 +330,7 @@
 						<equals arg1="${app.server.type}" arg2="weblogic" />
 					</or>
 					<then>
-						<property name="war.file" value="portal-web-complete.war" />
+						<property name="war.file" value="_portal-web-complete.war" />
 					</then>
 					<elseif>
 						<or>
@@ -338,7 +338,7 @@
 							<equals arg1="${app.server.type}" arg2="orion" />
 						</or>
 						<then>
-							<property name="war.file" value="portal-web-complete" />
+							<property name="war.file" value="_portal-web-complete" />
 						</then>
 					</elseif>
 				</if>

@@ -44,8 +44,6 @@ import org.apache.commons.logging.LogFactory;
 public class PortalServletWrapper extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-
 		String servletClass = config.getInitParameter("servlet-class");
 
 		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();

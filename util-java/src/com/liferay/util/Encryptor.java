@@ -22,6 +22,8 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.shared.util.ServerDetector;
+
 import java.io.UnsupportedEncodingException;
 
 import java.security.Key;

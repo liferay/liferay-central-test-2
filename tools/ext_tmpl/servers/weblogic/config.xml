@@ -48,8 +48,9 @@
         <EJBComponent Name="mail-ejb.jar" Targets="myserver" URI="mail-ejb.jar"/>
         <EJBComponent Name="portal-ejb.jar" Targets="myserver" URI="portal-ejb.jar"/>
         <EJBComponent Name="ext-ejb.jar" Targets="myserver" URI="ext-ejb.jar"/>
+        <WebAppComponent Name="/" Targets="myserver" URI="_portal-web-complete.war"/>
+        <WebAppComponent Name="/cms" Targets="myserver" URI="cms-web.war"/>
         <WebAppComponent Name="/laszlo" Targets="myserver" URI="laszlo-web.war"/>
-        <WebAppComponent Name="/" Targets="myserver" URI="portal-web-complete.war"/>
         <WebAppComponent Name="/tunnel" Targets="myserver" URI="tunnel-web.war"/>
     </Application>
 </Domain>

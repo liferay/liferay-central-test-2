@@ -232,16 +232,9 @@
 			<then>
 
 				<!--
-				JBoss 4.0.3 SP1 defaults to different versions of dom4j and
-				Commons Collections.
+				JBoss 4.0.4 defaults to different versions of Commons
+				Collections and Hibernate.
 				-->
-
-				<copy todir="${app.server.dir}/lib">
-					<fileset
-						dir="lib"
-						includes="dom4j.jar,jaxen.jar"
-					/>
-				</copy>
 
 				<copy todir="${app.server.dir}/server/default/lib">
 					<fileset
@@ -249,6 +242,13 @@
 						includes="commons-collections.jar"
 					/>
 				</copy>
+
+				<delete>
+					<fileset
+						dir="${app.server.dir}/server/default/lib"
+						includes="hibernate3.jar,jboss-hibernate.jar"
+					/>
+				</delete>
 			</then>
 			<elseif>
 				<or>

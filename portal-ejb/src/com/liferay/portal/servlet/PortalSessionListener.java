@@ -25,13 +25,13 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.service.spring.UserTrackerLocalServiceUtil;
+import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mail.util.MailUtil;
-import com.liferay.util.ServerDetector;
 
 import java.util.Map;
 

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.shared.util;
 
 /**
  * <a href="ServerDetector.java.html"><b><i>View Source</i></b></a>

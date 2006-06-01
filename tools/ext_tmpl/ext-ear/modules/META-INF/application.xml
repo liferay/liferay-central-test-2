@@ -23,6 +23,12 @@
 	</module>
 	<module>
 		<web>
+			<web-uri>_portal-web-complete.war</web-uri>
+			<context-root>/</context-root>
+		</web>
+	</module>
+	<module>
+		<web>
 			<web-uri>cms-web.war</web-uri>
 			<context-root>/cms</context-root>
 		</web>
@@ -31,12 +37,6 @@
 		<web>
 			<web-uri>laszlo-web.war</web-uri>
 			<context-root>/laszlo</context-root>
-		</web>
-	</module>
-	<module>
-		<web>
-			<web-uri>portal-web-complete.war</web-uri>
-			<context-root>/</context-root>
 		</web>
 	</module>
 	<module>

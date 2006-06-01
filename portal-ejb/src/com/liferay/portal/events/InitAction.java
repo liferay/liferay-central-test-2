@@ -24,12 +24,12 @@ package com.liferay.portal.events;
 
 import com.liferay.portal.jcr.jackrabbit.JCRFactoryImpl;
 import com.liferay.portal.security.jaas.PortalConfiguration;
+import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.ServerDetector;
 import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Time;

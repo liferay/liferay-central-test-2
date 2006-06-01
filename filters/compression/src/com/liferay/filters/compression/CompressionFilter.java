@@ -22,11 +22,11 @@
 
 package com.liferay.filters.compression;
 
+import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.util.BrowserSniffer;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.ServerDetector;
 import com.liferay.util.SystemProperties;
 
 import java.io.IOException;

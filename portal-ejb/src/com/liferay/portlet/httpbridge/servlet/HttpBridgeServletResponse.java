@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.httpbridge.servlet;
 
-import com.liferay.util.ServerDetector;
+import com.liferay.portal.shared.util.ServerDetector;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;

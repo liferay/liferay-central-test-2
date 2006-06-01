@@ -22,8 +22,8 @@
 
 package com.liferay.portal.security.jaas;
 
+import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.ServerDetector;
 import com.liferay.util.Validator;
 
 import java.util.Map;

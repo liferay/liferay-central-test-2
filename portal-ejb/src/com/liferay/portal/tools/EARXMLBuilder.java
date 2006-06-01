@@ -49,7 +49,7 @@ public class EARXMLBuilder {
 	};
 
 	public static String[] WEB_PATHS = {
-		"../portal-web-complete", "../tunnel-web"
+		"../portal-web-complete", "../cms-web", "../laszlo-web", "../tunnel-web"
 	};
 
 	public static void main(String[] args) {
@@ -183,7 +183,14 @@ public class EARXMLBuilder {
 
 		sb.append("\t<web-module>\n");
 		sb.append("\t\t<name>").append(contextRoot).append("</name>\n");
-		sb.append("\t\t<module-name>").append(path.substring(3, path.length())).append(".war</module-name>\n");
+
+		sb.append("\t\t<module-name>");
+
+		if (path.endsWith("-complete")) {
+			sb.append("_");
+		}
+		
+		sb.append(path.substring(3, path.length())).append(".war</module-name>\n");
 
 		SAXReader reader = new SAXReader();
 

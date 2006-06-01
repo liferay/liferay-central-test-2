@@ -23,8 +23,8 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.servlet.PortletSessionPool;
+import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.ServerDetector;
 
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;

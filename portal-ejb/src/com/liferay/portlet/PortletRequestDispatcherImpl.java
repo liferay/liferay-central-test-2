@@ -23,10 +23,10 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.servlet.NamespaceServletRequest;
+import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.portal.struts.StrutsURLEncoder;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.ServerDetector;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.DynamicServletRequest;
