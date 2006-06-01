@@ -150,7 +150,7 @@ public class EditRolePermissionsAction extends PortletAction {
 
 			if (scope.equals(Resource.SCOPE_COMPANY)) {
 				PermissionServiceUtil.setRolePermission(
-					roleId, selResource, Resource.TYPE_CLASS, scope,
+					roleId, themeDisplay.getPortletGroupId(), selResource, Resource.TYPE_CLASS, scope,
 					themeDisplay.getCompanyId(), actionId);
 			}
 			else if (scope.equals(Resource.SCOPE_GROUP)) {
@@ -161,11 +161,11 @@ public class EditRolePermissionsAction extends PortletAction {
 				// Remove company and group permissions
 
 				PermissionServiceUtil.unsetRolePermissions(
-					roleId, selResource, Resource.TYPE_CLASS,
+					roleId, themeDisplay.getPortletGroupId(), selResource, Resource.TYPE_CLASS,
 					Resource.SCOPE_COMPANY, actionId);
 
 				PermissionServiceUtil.unsetRolePermissions(
-					roleId, selResource, Resource.TYPE_CLASS,
+					roleId, themeDisplay.getPortletGroupId(), selResource, Resource.TYPE_CLASS,
 					Resource.SCOPE_GROUP, actionId);
 			}
 		}
@@ -215,13 +215,13 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		for (int i = 0; i < addGroupIds.length; i++) {
 			PermissionServiceUtil.setRolePermission(
-				roleId, selResource, Resource.TYPE_CLASS, Resource.SCOPE_GROUP,
+				roleId, themeDisplay.getPortletGroupId(), selResource, Resource.TYPE_CLASS, Resource.SCOPE_GROUP,
 				addGroupIds[i], actionId);
 		}
 
 		for (int i = 0; i < removeGroupIds.length; i++) {
 			PermissionServiceUtil.unsetRolePermission(
-				roleId, selResource, Resource.TYPE_CLASS, Resource.SCOPE_GROUP,
+				roleId, themeDisplay.getPortletGroupId(), selResource, Resource.TYPE_CLASS, Resource.SCOPE_GROUP,
 				removeGroupIds[i], actionId);
 		}
 

@@ -98,52 +98,77 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 	}
 
 	public void setRolePermission(java.lang.String roleId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().setRolePermission(roleId, name, typeId, scope, primKey,
-			actionId);
-	}
-
-	public void setUserPermissions(java.lang.String userId,
-		java.lang.String[] actionIds, java.lang.String resourceId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-		getService().setUserPermissions(userId, actionIds, resourceId);
-	}
-
-	public boolean unsetRolePermission(java.lang.String roleId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
-		java.lang.String primKey, java.lang.String actionId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().unsetRolePermission(roleId, name, typeId, scope,
+		getService().setRolePermission(roleId, groupId, name, typeId, scope,
 			primKey, actionId);
 	}
 
+	public void setUserPermissions(java.lang.String userId,
+		java.lang.String groupId, java.lang.String[] actionIds,
+		java.lang.String resourceId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		getService().setUserPermissions(userId, groupId, actionIds, resourceId);
+	}
+
+	public boolean unsetRolePermission(java.lang.String roleId,
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String typeId, java.lang.String scope,
+		java.lang.String primKey, java.lang.String actionId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().unsetRolePermission(roleId, groupId, name, typeId,
+			scope, primKey, actionId);
+	}
+
 	public boolean unsetRolePermissions(java.lang.String roleId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String typeId, java.lang.String scope,
 		java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().unsetRolePermissions(roleId, name, typeId, scope,
-			actionId);
+		return getService().unsetRolePermissions(roleId, groupId, name, typeId,
+			scope, actionId);
 	}
 
 	public boolean unsetUserPermissions(java.lang.String userId,
-		java.lang.String[] actionIds, java.lang.String resourceId)
+		java.lang.String groupId, java.lang.String[] actionIds,
+		java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().unsetUserPermissions(userId, actionIds, resourceId);
+		return getService().unsetUserPermissions(userId, groupId, actionIds,
+			resourceId);
+	}
+
+	public void checkPermission(
+		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
+		java.lang.String groupId, java.lang.String resourceId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		getService().checkPermission(permissionChecker, groupId, resourceId);
+	}
+
+	public void checkPermission(
+		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String primKey)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		getService().checkPermission(permissionChecker, groupId, name, primKey);
 	}
 
 	public void ejbCreate() throws CreateException {

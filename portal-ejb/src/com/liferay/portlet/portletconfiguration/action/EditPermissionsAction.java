@@ -22,20 +22,25 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
-import com.liferay.portal.model.Group;
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+import javax.servlet.ServletContext;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Resource;
-import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.permission.GroupPermission;
-import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.portal.service.spring.PermissionServiceUtil;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -46,18 +51,6 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
-
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-
-import javax.servlet.ServletContext;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
 
 /**
  * <a href="EditPermissionsAction.java.html"><b><i>View Source</i></b></a>
@@ -128,48 +121,7 @@ public class EditPermissionsAction extends PortletAction {
 		}
 
 		try {
-			if (selResource.equals(Group.class.getName())) {
-				GroupPermission.check(
-					permissionChecker, resourcePrimKey, ActionKeys.PERMISSIONS);
-			}
-			else if (selResource.equals(Layout.class.getName())) {
-				String layoutGroupId =
-					StringUtil.split(resourcePrimKey, ".")[1];
-
-				layoutGroupId = StringUtil.replace(layoutGroupId, "}", "");
-
-				GroupPermission.check(
-					permissionChecker, layoutGroupId,
-					ActionKeys.MANAGE_LAYOUTS);
-			}
-			else if (selResource.equals(User.class.getName())) {
-				User user = UserLocalServiceUtil.getUserById(resourcePrimKey);
-
-				UserPermission.check(
-					permissionChecker, resourcePrimKey,
-					user.getOrganization().getOrganizationId(),
-					user.getLocation().getOrganizationId(),
-					ActionKeys.PERMISSIONS);
-			}
-			else if (resourcePrimKey.startsWith(
-						themeDisplay.getPlid() + Portlet.LAYOUT_SEPARATOR)) {
-
-				if (!permissionChecker.hasPermission(
-						groupId, selResource, resourcePrimKey,
-						ActionKeys.CONFIGURATION) &&
-					!GroupPermission.contains(
-						permissionChecker, groupId,
-						ActionKeys.MANAGE_LAYOUTS)) {
-
-					throw new PrincipalException();
-				}
-			}
-			else if (!permissionChecker.hasPermission(
-						groupId, selResource, resourcePrimKey,
-						ActionKeys.PERMISSIONS)) {
-
-				throw new PrincipalException();
-			}
+			PermissionServiceUtil.checkPermission(permissionChecker, groupId, selResource, resourcePrimKey);
 		}
 		catch (PrincipalException pe) {
 			SessionErrors.add(req, PrincipalException.class.getName());
@@ -183,9 +135,11 @@ public class EditPermissionsAction extends PortletAction {
 		ServletContext ctx =
 			(ServletContext)req.getAttribute(WebKeys.CTX);
 
-		res.setTitle(
-			PortalUtil.getPortletTitle(portlet, ctx, themeDisplay.getLocale()));
-
+		if (portlet != null) {
+			res.setTitle(
+				PortalUtil.getPortletTitle(portlet, ctx, themeDisplay.getLocale()));
+		}
+			
 		return mapping.findForward(
 			getForward(req, "portlet.portlet_configuration.edit_permissions"));
 	}
@@ -241,8 +195,11 @@ public class EditPermissionsAction extends PortletAction {
 		String userId = ParamUtil.getString(req, "userIdsPosValue");
 		String[] actionIds = StringUtil.split(
 			ParamUtil.getString(req, "userIdActionIds"));
+		
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		PermissionServiceUtil.setUserPermissions(userId, actionIds, resourceId);
+		PermissionServiceUtil.setUserPermissions(userId, themeDisplay.getPortletGroupId(), actionIds, resourceId);
 	}
 
 }

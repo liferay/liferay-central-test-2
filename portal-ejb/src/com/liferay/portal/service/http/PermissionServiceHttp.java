@@ -367,8 +367,8 @@ public class PermissionServiceHttp {
 	}
 
 	public static void setRolePermission(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, java.lang.String name,
-		java.lang.String typeId, java.lang.String scope,
+		java.lang.String roleId, java.lang.String groupId,
+		java.lang.String name, java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -379,41 +379,47 @@ public class PermissionServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = name;
+			Object paramObj1 = groupId;
 
-			if (name == null) {
+			if (groupId == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = typeId;
+			Object paramObj2 = name;
 
-			if (typeId == null) {
+			if (name == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = scope;
+			Object paramObj3 = typeId;
 
-			if (scope == null) {
+			if (typeId == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = primKey;
+			Object paramObj4 = scope;
 
-			if (primKey == null) {
+			if (scope == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = actionId;
+			Object paramObj5 = primKey;
+
+			if (primKey == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = actionId;
 
 			if (actionId == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
+				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
 					"setRolePermission",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj5, paramObj6
 					});
 			Object returnObj = null;
 
@@ -448,8 +454,8 @@ public class PermissionServiceHttp {
 	}
 
 	public static void setUserPermissions(HttpPrincipal httpPrincipal,
-		java.lang.String userId, java.lang.String[] actionIds,
-		java.lang.String resourceId)
+		java.lang.String userId, java.lang.String groupId,
+		java.lang.String[] actionIds, java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -459,21 +465,27 @@ public class PermissionServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = actionIds;
+			Object paramObj1 = groupId;
 
-			if (actionIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+			if (groupId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = resourceId;
+			Object paramObj2 = actionIds;
+
+			if (actionIds == null) {
+				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj3 = resourceId;
 
 			if (resourceId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
 					"setUserPermissions",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 			Object returnObj = null;
 
 			try {
@@ -507,8 +519,8 @@ public class PermissionServiceHttp {
 	}
 
 	public static boolean unsetRolePermission(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, java.lang.String name,
-		java.lang.String typeId, java.lang.String scope,
+		java.lang.String roleId, java.lang.String groupId,
+		java.lang.String name, java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -519,41 +531,47 @@ public class PermissionServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = name;
+			Object paramObj1 = groupId;
 
-			if (name == null) {
+			if (groupId == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = typeId;
+			Object paramObj2 = name;
 
-			if (typeId == null) {
+			if (name == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = scope;
+			Object paramObj3 = typeId;
 
-			if (scope == null) {
+			if (typeId == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = primKey;
+			Object paramObj4 = scope;
 
-			if (primKey == null) {
+			if (scope == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = actionId;
+			Object paramObj5 = primKey;
+
+			if (primKey == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = actionId;
 
 			if (actionId == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
+				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
 					"unsetRolePermission",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj5, paramObj6
 					});
 			Object returnObj = null;
 
@@ -590,8 +608,8 @@ public class PermissionServiceHttp {
 	}
 
 	public static boolean unsetRolePermissions(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, java.lang.String name,
-		java.lang.String typeId, java.lang.String scope,
+		java.lang.String roleId, java.lang.String groupId,
+		java.lang.String name, java.lang.String typeId, java.lang.String scope,
 		java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -602,34 +620,41 @@ public class PermissionServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = name;
+			Object paramObj1 = groupId;
 
-			if (name == null) {
+			if (groupId == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = typeId;
+			Object paramObj2 = name;
 
-			if (typeId == null) {
+			if (name == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = scope;
+			Object paramObj3 = typeId;
 
-			if (scope == null) {
+			if (typeId == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = actionId;
+			Object paramObj4 = scope;
+
+			if (scope == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = actionId;
 
 			if (actionId == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
+				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
 					"unsetRolePermissions",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
 					});
 			Object returnObj = null;
 
@@ -666,8 +691,8 @@ public class PermissionServiceHttp {
 	}
 
 	public static boolean unsetUserPermissions(HttpPrincipal httpPrincipal,
-		java.lang.String userId, java.lang.String[] actionIds,
-		java.lang.String resourceId)
+		java.lang.String userId, java.lang.String groupId,
+		java.lang.String[] actionIds, java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -677,21 +702,27 @@ public class PermissionServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = actionIds;
+			Object paramObj1 = groupId;
 
-			if (actionIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+			if (groupId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = resourceId;
+			Object paramObj2 = actionIds;
+
+			if (actionIds == null) {
+				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj3 = resourceId;
 
 			if (resourceId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
 					"unsetUserPermissions",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 			Object returnObj = null;
 
 			try {
@@ -710,6 +741,133 @@ public class PermissionServiceHttp {
 			}
 
 			return ((Boolean)returnObj).booleanValue();
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			_log.error(StackTraceUtil.getStackTrace(pe));
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(StackTraceUtil.getStackTrace(se));
+			throw se;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new com.liferay.portal.SystemException(stackTrace);
+		}
+	}
+
+	public static void checkPermission(HttpPrincipal httpPrincipal,
+		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
+		java.lang.String groupId, java.lang.String resourceId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = permissionChecker;
+
+			if (permissionChecker == null) {
+				paramObj0 = new NullWrapper(
+						"com.liferay.portal.security.permission.PermissionChecker");
+			}
+
+			Object paramObj1 = groupId;
+
+			if (groupId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = resourceId;
+
+			if (resourceId == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"checkPermission",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw e;
+			}
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			_log.error(StackTraceUtil.getStackTrace(pe));
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(StackTraceUtil.getStackTrace(se));
+			throw se;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new com.liferay.portal.SystemException(stackTrace);
+		}
+	}
+
+	public static void checkPermission(HttpPrincipal httpPrincipal,
+		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String primKey)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = permissionChecker;
+
+			if (permissionChecker == null) {
+				paramObj0 = new NullWrapper(
+						"com.liferay.portal.security.permission.PermissionChecker");
+			}
+
+			Object paramObj1 = groupId;
+
+			if (groupId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = primKey;
+
+			if (primKey == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"checkPermission",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw e;
+			}
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));

@@ -114,12 +114,13 @@ public class PermissionServiceSoap {
 	}
 
 	public static void setRolePermission(java.lang.String roleId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
 		throws RemoteException {
 		try {
-			PermissionServiceUtil.setRolePermission(roleId, name, typeId,
-				scope, primKey, actionId);
+			PermissionServiceUtil.setRolePermission(roleId, groupId, name,
+				typeId, scope, primKey, actionId);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -129,11 +130,11 @@ public class PermissionServiceSoap {
 	}
 
 	public static void setUserPermissions(java.lang.String userId,
-		java.lang.String[] actionIds, java.lang.String resourceId)
-		throws RemoteException {
+		java.lang.String groupId, java.lang.String[] actionIds,
+		java.lang.String resourceId) throws RemoteException {
 		try {
-			PermissionServiceUtil.setUserPermissions(userId, actionIds,
-				resourceId);
+			PermissionServiceUtil.setUserPermissions(userId, groupId,
+				actionIds, resourceId);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -143,12 +144,13 @@ public class PermissionServiceSoap {
 	}
 
 	public static boolean unsetRolePermission(java.lang.String roleId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
 		throws RemoteException {
 		try {
 			boolean returnValue = PermissionServiceUtil.unsetRolePermission(roleId,
-					name, typeId, scope, primKey, actionId);
+					groupId, name, typeId, scope, primKey, actionId);
 
 			return returnValue;
 		}
@@ -160,11 +162,12 @@ public class PermissionServiceSoap {
 	}
 
 	public static boolean unsetRolePermissions(java.lang.String roleId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String typeId, java.lang.String scope,
 		java.lang.String actionId) throws RemoteException {
 		try {
 			boolean returnValue = PermissionServiceUtil.unsetRolePermissions(roleId,
-					name, typeId, scope, actionId);
+					groupId, name, typeId, scope, actionId);
 
 			return returnValue;
 		}
@@ -176,13 +179,43 @@ public class PermissionServiceSoap {
 	}
 
 	public static boolean unsetUserPermissions(java.lang.String userId,
-		java.lang.String[] actionIds, java.lang.String resourceId)
-		throws RemoteException {
+		java.lang.String groupId, java.lang.String[] actionIds,
+		java.lang.String resourceId) throws RemoteException {
 		try {
 			boolean returnValue = PermissionServiceUtil.unsetUserPermissions(userId,
-					actionIds, resourceId);
+					groupId, actionIds, resourceId);
 
 			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static void checkPermission(
+		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
+		java.lang.String groupId, java.lang.String resourceId)
+		throws RemoteException {
+		try {
+			PermissionServiceUtil.checkPermission(permissionChecker, groupId,
+				resourceId);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static void checkPermission(
+		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String primKey) throws RemoteException {
+		try {
+			PermissionServiceUtil.checkPermission(permissionChecker, groupId,
+				name, primKey);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);

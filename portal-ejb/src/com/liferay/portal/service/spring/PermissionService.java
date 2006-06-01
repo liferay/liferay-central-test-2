@@ -59,30 +59,48 @@ public interface PermissionService {
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public void setRolePermission(java.lang.String roleId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public void setUserPermissions(java.lang.String userId,
-		java.lang.String[] actionIds, java.lang.String resourceId)
+		java.lang.String groupId, java.lang.String[] actionIds,
+		java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public boolean unsetRolePermission(java.lang.String roleId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public boolean unsetRolePermissions(java.lang.String roleId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String typeId, java.lang.String scope,
 		java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public boolean unsetUserPermissions(java.lang.String userId,
-		java.lang.String[] actionIds, java.lang.String resourceId)
+		java.lang.String groupId, java.lang.String[] actionIds,
+		java.lang.String resourceId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public void checkPermission(
+		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
+		java.lang.String groupId, java.lang.String resourceId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public void checkPermission(
+		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 }

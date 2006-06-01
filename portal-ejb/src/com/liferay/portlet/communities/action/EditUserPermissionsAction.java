@@ -23,10 +23,12 @@
 package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.spring.PermissionServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -106,12 +108,13 @@ public class EditUserPermissionsAction extends PortletAction {
 	}
 
 	protected void updateUserPermissions(ActionRequest req) throws Exception {
+		String groupId = ParamUtil.getString(req, "groupId");
 		String resourceId = ParamUtil.getString(req, "resourceId");
 		String userId = ParamUtil.getString(req, "userIdsPosValue");
 		String[] actionIds = StringUtil.split(
 			ParamUtil.getString(req, "userIdActionIds"));
 
-		PermissionServiceUtil.setUserPermissions(userId, actionIds, resourceId);
+		PermissionServiceUtil.setUserPermissions(userId, groupId, actionIds, resourceId);
 	}
 
 }
