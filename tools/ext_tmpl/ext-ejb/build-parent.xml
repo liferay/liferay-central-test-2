@@ -101,6 +101,16 @@
 					<replacetoken>portal.release=enterprise</replacetoken>
 					<replacevalue>portal.release=professional</replacevalue>
 				</replace>
+
+				<if>
+					<equals arg1="${app.server.type}" arg2="resin" />
+					<then>
+						<replace file="${properties.dir}/portal-ext.properties">
+							<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+							<replacevalue>auto.deploy.dest.dir=webapps</replacevalue>
+						</replace>
+					</then>
+				</if>
 			</then>
 			<else>
 				<if>

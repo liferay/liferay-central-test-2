@@ -103,7 +103,7 @@
 			rowLength="3"
 			rowPadding="30"
 			rowValign="top"
-			rowBreak="<br />">
+			rowBreak="&lt;br /&gt;">
 
 			<%
 			int month = tableIteratorObj.get(Calendar.MONTH);

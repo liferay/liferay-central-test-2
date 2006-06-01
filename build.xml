@@ -545,6 +545,12 @@
 		<zip zipfile="liferay-portal-tomcat-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/tomcat"
 		/>
+
+		<delete file="liferay-portal-tomcat-jdk5-${lp.version.file.name}.zip" failonerror="false" />
+		<zip zipfile="liferay-portal-tomcat-jdk5-${lp.version.file.name}.zip"
+			basedir="${lp.ext.dir}/servers/tomcat"
+			excludes="bin/jmx.jar,common/endorsed/xercesImpl.jar,common/endorsed/xml-apis.jar"
+		/>
 	</target>
 
 	<target name="release" depends="init-release">

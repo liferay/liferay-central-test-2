@@ -265,18 +265,19 @@
 
 					<!--
 					Jetty 5.1.10 defaults to a different version of Commons
-					Logging.
+					Logging and Hypersonic.
 					-->
 
 					<if>
 						<equals arg1="${app.server.type}" arg2="jetty" />
 						<then>
 							<delete file="${app.server.dir}/ext/commons-logging.jar" />
+							<delete file="${app.server.dir}/extra/ext/hsqldb.jar" />
 						</then>
 					</if>
 
 					<!--
-					Tomcat 5.5.12 requires JDK 5.0 and the latest Xerces.
+					Tomcat 5.5.17 requires JDK 5.0 and the latest Xerces.
 					-->
 
 					<if>
@@ -353,6 +354,7 @@
 
 		<if>
 			<or>
+				<equals arg1="${app.server.type}" arg2="jetty" />
 				<equals arg1="${app.server.type}" arg2="oc4j" />
 				<equals arg1="${app.server.type}" arg2="orion" />
 				<equals arg1="${app.server.type}" arg2="resin" />
@@ -425,21 +427,45 @@
 			</and>
 			<then>
 				<if>
-					<equals arg1="${app.server.type}" arg2="tomcat" />
+					<or>
+						<equals arg1="${app.server.type}" arg2="jetty" />
+						<equals arg1="${app.server.type}" arg2="resin" />
+						<equals arg1="${app.server.type}" arg2="tomcat" />
+					</or>
 					<then>
 						<move todir="${app.server.deploy.dir}/WEB-INF/lib">
 							<fileset
 								dir="${app.server.lib.dir}"
-								excludes="ant.jar,commons-logging.jar,hsql.jar,log4j.jar,portal-shared.jar,portlet.jar"
+								excludes="activation.jar,ant.jar,commons-logging.jar,hsql.jar,log4j.jar,mail.jar,portal-shared.jar,portlet.jar"
 							/>
 						</move>
 
-						<move todir="${app.server.deploy.dir}/WEB-INF/classes">
-							<fileset
-								dir="${app.server.dir}/common/classes"
-								excludes="log4j.properties,META-INF/log4j.dtd"
-							/>
-						</move>
+						<if>
+							<equals arg1="${app.server.type}" arg2="jetty" />
+							<then>
+								<move todir="${app.server.deploy.dir}/WEB-INF/classes">
+									<fileset
+										dir="${app.server.deploy.dir}/WEB-INF/lib"
+										includes="portal-ext.properties,system-ext.properties,content/Language*.properties"
+									/>
+								</move>
+							</then>
+						</if>
+
+						<if>
+							<or>
+								<equals arg1="${app.server.type}" arg2="resin" />
+								<equals arg1="${app.server.type}" arg2="tomcat" />
+							</or>
+							<then>
+								<move todir="${app.server.deploy.dir}/WEB-INF/classes">
+									<fileset
+										dir="${app.server.dir}/common/classes"
+										excludes="log4j.properties,META-INF/log4j.dtd"
+									/>
+								</move>
+							</then>
+						</if>
 					</then>
 				</if>
 			</then>
