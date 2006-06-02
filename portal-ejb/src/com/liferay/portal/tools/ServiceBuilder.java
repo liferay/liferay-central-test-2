@@ -1633,10 +1633,18 @@ public class ServiceBuilder {
 					}
 				}
 				else {
-					sb.append("if (get" + col.getMethodName() + "() < " + entity.getVarName() + ".get" + col.getMethodName() + "()) {");
+					String ltComparator = "<";
+					String gtComparator = ">";
+
+					if (col.getType().equals("boolean")) {
+						ltComparator = "==";
+						gtComparator = "!=";
+					}
+
+					sb.append("if (get" + col.getMethodName() + "() " + ltComparator + " " + entity.getVarName() + ".get" + col.getMethodName() + "()) {");
 					sb.append("value = -1;");
 					sb.append("}");
-					sb.append("else if (get" + col.getMethodName() + "() > " + entity.getVarName() + ".get" + col.getMethodName() + "()) {");
+					sb.append("else if (get" + col.getMethodName() + "() " + gtComparator + " " + entity.getVarName() + ".get" + col.getMethodName() + "()) {");
 					sb.append("value = 1;");
 					sb.append("}");
 					sb.append("else {");

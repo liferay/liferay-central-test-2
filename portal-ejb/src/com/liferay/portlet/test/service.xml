@@ -12,6 +12,13 @@
 		<!-- Other fields -->
 
 		<column name="field1" type="String" />
+		<column name="field2" type="boolean" />
 
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="field1" />
+			<order-column name="field2" />
+		</order>
 	</entity>
 </service-builder>
