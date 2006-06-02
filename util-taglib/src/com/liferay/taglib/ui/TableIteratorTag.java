@@ -23,6 +23,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.util.GetterUtil;
+import com.liferay.util.Html;
 import com.liferay.util.Validator;
 
 import java.util.List;
@@ -186,7 +187,7 @@ public class TableIteratorTag extends TagSupport {
 	}
 
 	public void setRowBreak(String rowBreak) {
-		_rowBreak = rowBreak;
+		_rowBreak = Html.formatFrom(rowBreak);
 	}
 
 	private static final String _START_PAGE =

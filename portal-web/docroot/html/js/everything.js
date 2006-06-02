@@ -472,7 +472,7 @@ for(var i=0;i<portlets.length;i++){portlets[i].style.display="block";}}
 else{word=word.toLowerCase();for(var i=0;i<categories.length;i++){categories[i].style.display="none";}
 for(var i=0;i<portlets.length;i++){if(portlets[i].id.toLowerCase().match(word)){portlets[i].style.display="block";this.showCategories(categories,portlets[i].id);}
 else{portlets[i].style.display="none";}}}
-this.resize();},showCategories:function(categories,name){var colon=name.lastIndexOf(":");while(colon!=-1){name=name.substr(0,colon);for(var i=0;i<categories.length;i++){if(categories[i].id.match(name)){categories[i].style.display="block";this.toggleCategory(categories[i].getElementsByTagName("table")[0],"block");}}
+this.resize();},showCategories:function(categories,name){var colon=name.lastIndexOf(":");while(colon!=-1){name=name.substr(0,colon);for(var i=0;i<categories.length;i++){if(name.match(categories[i].id)){categories[i].style.display="block";this.toggleCategory(categories[i].getElementsByTagName("table")[0],"block");}}
 colon=name.lastIndexOf(":");}},toggleCategory:function(obj,display){var parent=obj;while(parent.nodeName.toLowerCase()!="table"){parent=parent.parentNode;}
 var data=parent.rows[1].cells[0];var pane=getElementByClassName(data,"layout_configuration_category_pane");var image=obj.getElementsByTagName("img")[0];if(display){pane.style.display=display;if(display.toLowerCase().match("block")){image.src=this.imagePath+"/arrows/01_down.gif";}
 else{image.src=this.imagePath+"/arrows/01_right.gif";}}

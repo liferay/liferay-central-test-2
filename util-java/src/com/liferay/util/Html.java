@@ -107,6 +107,8 @@ public class Html {
 
 		// Optimize this
 
+		text = StringUtil.replace(text, "&lt;", "<");
+		text = StringUtil.replace(text, "&gt;", ">");
 		text = StringUtil.replace(text, "&#34;", "\"");
 		text = StringUtil.replace(text, "&#38;", "&");
 		text = StringUtil.replace(text, "&#42;", "*");
