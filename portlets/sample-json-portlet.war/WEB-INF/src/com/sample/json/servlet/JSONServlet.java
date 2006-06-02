@@ -87,7 +87,7 @@ public class JSONServlet extends HttpServlet {
 
 		JSONRaw jsonRaw = new JSONRaw(script);
 
-		jsonObj.put(jsonRaw);
+		jsonObj.put("click_image", jsonRaw);
 
 		return callback + "(" + jsonObj.toString() + ");";
 	}
