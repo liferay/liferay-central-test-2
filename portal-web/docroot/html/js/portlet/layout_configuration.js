@@ -164,7 +164,7 @@ var LayoutConfiguration = {
 				}
 			}
 		}
-		
+
 		this.resize();
 	},
 
@@ -175,7 +175,7 @@ var LayoutConfiguration = {
 			name = name.substr(0, colon);
 
 			for (var i = 0; i < categories.length; i++) {
-				if (categories[i].id.match(name)) {
+				if (name.match(categories[i].id)) {
 					categories[i].style.display = "block";
 					this.toggleCategory(categories[i].getElementsByTagName("table")[0], "block");
 				}
