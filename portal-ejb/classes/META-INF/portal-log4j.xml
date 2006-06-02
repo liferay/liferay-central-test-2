@@ -61,7 +61,7 @@
 	</category>
 
 	<category name="com.liferay.portal.events.StartupAction">
-		<priority value="DEBUG" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.model.ModelHintsUtil">
