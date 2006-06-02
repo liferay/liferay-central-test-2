@@ -1,7 +1,3 @@
-create index ABContact_ix_UserId on ABContact (userId);
-
-create index ABList_ix_UserId on ABList (userId);
-
 create index Address_ix_C_C on Address (companyId, className);
 create index Address_ix_C_C_C on Address (companyId, className, classPK);
 create index Address_ix_C_C_C_M on Address (companyId, className, classPK, mailing);

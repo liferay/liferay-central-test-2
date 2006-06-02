@@ -38,6 +38,9 @@ import com.liferay.portlet.PortletPreferencesSerializer;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="PortletPreferencesLocalServiceImpl.java.html"><b><i>View Source</i>
  * </b></a>
@@ -101,6 +104,14 @@ public class PortletPreferencesLocalServiceImpl
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				companyId, pk.portletId);
 
+			if (portlet == null) {
+				_log.warn(
+					"Returning preferences for a portlet that does not exist");
+
+				return PortletPreferencesSerializer.fromXML(
+					companyId, pk, Portlet.DEFAULT_PREFERENCES);
+			}
+
 			try {
 				portletPreferences =
 					PortletPreferencesUtil.findByPrimaryKey(pk);
@@ -146,5 +157,8 @@ public class PortletPreferencesLocalServiceImpl
 
 		return portletPrefences;
 	}
+
+	private static Log _log =
+		LogFactory.getLog(PortletPreferencesLocalServiceImpl.class);
 
 }

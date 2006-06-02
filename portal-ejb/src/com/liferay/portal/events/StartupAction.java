@@ -91,7 +91,7 @@ public class StartupAction extends SimpleAction {
 							upgradeProcesses[i]).newInstance();
 
 					if ((upgradeProcess.getThreshold() == 0) ||
-						(upgradeProcess.getThreshold() > buildNumber)) {
+						(upgradeProcess.getThreshold() >= buildNumber)) {
 
 						_log.debug("Running upgrade " + upgradeProcesses[i]);
 

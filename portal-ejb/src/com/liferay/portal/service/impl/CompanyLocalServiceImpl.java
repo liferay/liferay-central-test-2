@@ -385,7 +385,7 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 
 			account.setCreateDate(now);
 			account.setCompanyId(companyId);
-			account.setUserId(StringPool.BLANK);
+			account.setUserId(User.getDefaultUserId(companyId));
 			account.setUserName(StringPool.BLANK);
 		}
 

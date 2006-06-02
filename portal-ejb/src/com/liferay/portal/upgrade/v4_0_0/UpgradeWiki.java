@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_0_0;
 
+import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -84,6 +85,11 @@ public class UpgradeWiki extends UpgradeProcess {
 
 				_upgradePage(nodeId);
 			}
+		}
+		catch (NoSuchGroupException nsge) {
+			_log.error(
+				"Upgrade failed because data does not have a valid group id. " +
+					"Manually assign a group id in the database.");
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);

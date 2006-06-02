@@ -103,6 +103,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 		String rootPortletId = Portlet.getRootPortletId(portletId);
 
 		if (portletId.equals(rootPortletId)) {
+
 			portlet = (Portlet)companyPortletsPool.get(portletId);
 		}
 		else {
@@ -386,6 +387,15 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			portletsPool = CollectionFactory.getSyncHashMap();
 
 			Map parentPortletsPool = _getPortletsPool();
+
+			if (parentPortletsPool == null) {
+
+				// The Upgrade scripts sometimes try to access portlet
+				// preferences before the portal's been initialized. Return an
+				// empty pool.
+
+				return portletsPool;
+			}
 
 			Iterator itr = parentPortletsPool.values().iterator();
 

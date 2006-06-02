@@ -32,7 +32,7 @@
 			</or>
 			<then>
 				<delete includeEmptyDirs="true" failonerror="false">
-					<fileset dir="${app.server.deploy.dir}" includes="1sample_*.war/**" />
+					<fileset dir="${app.server.deploy.dir}" includes="1*.war/**" />
 				</delete>
 
 				<if>
@@ -422,6 +422,23 @@
 		</if>
 
 		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+			</or>
+			<then>
+				<copy todir="${app.server.lib.dir}">
+					<fileset
+						dir="${ear.lib.dir}"
+						includes="${classpath.global}"
+					/>
+				</copy>
+			</then>
+		</if>
+
+		<if>
 			<and>
 				<equals arg1="${app.server.unified.class.loader}" arg2="off" />
 			</and>
@@ -436,7 +453,7 @@
 						<move todir="${app.server.deploy.dir}/WEB-INF/lib">
 							<fileset
 								dir="${app.server.lib.dir}"
-								excludes="activation.jar,ant.jar,commons-logging.jar,hsql.jar,log4j.jar,mail.jar,portal-shared.jar,portlet.jar"
+								excludes="${classpath.global}"
 							/>
 						</move>
 

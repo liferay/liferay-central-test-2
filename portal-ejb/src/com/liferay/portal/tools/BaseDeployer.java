@@ -112,7 +112,8 @@ public class BaseDeployer {
 		}
 
 		if (!appServerType.startsWith("jboss") &&
-			!appServerType.startsWith("jetty") &&
+			!appServerType.startsWith("jonas") &&
+			!appServerType.equals("jetty") &&
 			!appServerType.equals("oc4j") &&
 			!appServerType.equals("orion") &&
 			!appServerType.equals("resin") &&

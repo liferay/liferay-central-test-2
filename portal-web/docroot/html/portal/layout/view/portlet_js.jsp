@@ -133,8 +133,8 @@ function addPortletReturn(xmlHttpReq) {
 				</c:choose>
 
 			}
-			catch(e) {
-				alert(e);
+			catch (e) {
+				//alert(e);
 			}
 		}
 	}
