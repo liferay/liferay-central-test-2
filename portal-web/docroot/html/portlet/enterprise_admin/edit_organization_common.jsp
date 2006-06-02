@@ -35,7 +35,7 @@ String parentOrganizationId = request.getParameter("parentOrganizationId");
 
 boolean editable = false;
 
-if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || (!rootOrganization && portletName.equals(PortletKeys.LOCATION_ADMIN)) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
+if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || (!rootOrganization && portletName.equals(PortletKeys.LOCATION_ADMIN)) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 	editable = true;
 
 	if (rootOrganization) {
@@ -84,6 +84,14 @@ if (!rootOrganization) {
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
 	<liferay-util:param name="tabs1" value='<%= rootOrganization ? "organizations" : "locations" %>' />
 </liferay-util:include>
+
+<liferay-util:include page="/html/portlet/my_account/tabs1.jsp">
+	<liferay-util:param name="tabs1" value="profile" />
+</liferay-util:include>
+
+<c:if test="<%= portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+	<liferay-ui:tabs names='<%= rootOrganization ? "organization" : "location" %>' />
+</c:if>
 
 <%@ include file="/html/portlet/enterprise_admin/edit_organization_profile.jsp" %>
 

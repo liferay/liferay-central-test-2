@@ -33,6 +33,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ServerDetector {
 
+	public static final String GERONIMO_CLASS =
+		"/org/apache/geronimo/system/main/Daemon.class";
+
 	public static final String JBOSS_CLASS = "/org/jboss/Main.class";
 
 	public static final String JETTY_CLASS = "/org/mortbay/jetty/Server.class";
@@ -71,7 +74,10 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._serverId == null) {
-			if (ServerDetector.isJBoss()) {
+			if (ServerDetector.isGeronimo()) {
+				sd._serverId = "geronimo";
+			}
+			else if (ServerDetector.isJBoss()) {
 				sd._serverId = "jboss";
 			}
 			else if (ServerDetector.isJOnAS()) {
@@ -118,6 +124,23 @@ public class ServerDetector {
 		}
 
 		return sd._serverId;
+	}
+
+	public static boolean isGeronimo() {
+		ServerDetector sd = _instance;
+
+		if (sd._geronimo == null) {
+			Class c = sd.getClass();
+
+			if (c.getResource(GERONIMO_CLASS) != null) {
+				sd._geronimo = Boolean.TRUE;
+			}
+			else {
+				sd._geronimo = Boolean.FALSE;
+			}
+		}
+
+		return sd._geronimo.booleanValue();
 	}
 
 	public static boolean isJBoss() {
@@ -358,6 +381,7 @@ public class ServerDetector {
 	private static ServerDetector _instance = new ServerDetector();
 
 	private String _serverId;
+	private Boolean _geronimo;
 	private Boolean _jBoss;
 	private Boolean _jetty;
 	private Boolean _jonas;

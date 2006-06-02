@@ -111,7 +111,8 @@ public class BaseDeployer {
 				"The system property deployer.app.server.type is not set");
 		}
 
-		if (!appServerType.startsWith("jboss") &&
+		if (!appServerType.startsWith("geronimo") &&
+			!appServerType.startsWith("jboss") &&
 			!appServerType.startsWith("jonas") &&
 			!appServerType.equals("jetty") &&
 			!appServerType.equals("oc4j") &&
