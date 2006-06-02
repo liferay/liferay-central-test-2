@@ -110,7 +110,11 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 									<%= PortalUtil.getPortletTitle(portlet, application, locale) %>
 								</td>
 								<td align="right">
-									<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "add") %>" onClick="addPortlet('<%= plid %>', '<%= portlet.getPortletId() %>');">
+									<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "add") %>"
+										onClick="addPortlet('<%= plid %>', '<%= portlet.getPortletId() %>');
+											if (<%= !portlet.isInstanceable() %>) {
+												var div = document.getElementById('<%= newCategoryPath %>:<%= PortalUtil.getPortletTitle(portlet, application, locale) %>');
+												div.parentNode.removeChild(div); };">
 								</td>
 							</tr>
 							</table>

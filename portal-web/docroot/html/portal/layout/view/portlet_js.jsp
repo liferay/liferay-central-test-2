@@ -153,6 +153,10 @@ function closePortlet(plid, portletId) {
 			parent.removeChild(curItem);
 		}
 
+		if (LayoutConfiguration) {
+			LayoutConfiguration.initialized = false;
+		}
+		
 		if (DragDrop.layoutMaximized) {
 			self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&<%= Constants.CMD %>=<%= Constants.DELETE %>&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid) + "&refresh=1";
 		}
