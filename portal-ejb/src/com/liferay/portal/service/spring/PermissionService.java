@@ -29,6 +29,11 @@ package com.liferay.portal.service.spring;
  *
  */
 public interface PermissionService {
+	public void checkPermission(java.lang.String groupId,
+		java.lang.String name, java.lang.String primKey)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public boolean hasGroupPermission(java.lang.String groupId,
 		java.lang.String actionId, java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 
@@ -88,19 +93,6 @@ public interface PermissionService {
 	public boolean unsetUserPermissions(java.lang.String userId,
 		java.lang.String groupId, java.lang.String[] actionIds,
 		java.lang.String resourceId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public void checkPermission(
-		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
-		java.lang.String groupId, java.lang.String resourceId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public void checkPermission(
-		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
-		java.lang.String groupId, java.lang.String name,
-		java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 }

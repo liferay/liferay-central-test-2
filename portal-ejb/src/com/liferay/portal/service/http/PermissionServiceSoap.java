@@ -37,6 +37,19 @@ import java.rmi.RemoteException;
  *
  */
 public class PermissionServiceSoap {
+	public static void checkPermission(java.lang.String groupId,
+		java.lang.String name, java.lang.String primKey)
+		throws RemoteException {
+		try {
+			PermissionServiceUtil.checkPermission(groupId, name, primKey);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static boolean hasGroupPermission(java.lang.String groupId,
 		java.lang.String actionId, java.lang.String resourceId)
 		throws RemoteException {
@@ -186,36 +199,6 @@ public class PermissionServiceSoap {
 					groupId, actionIds, resourceId);
 
 			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static void checkPermission(
-		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
-		java.lang.String groupId, java.lang.String resourceId)
-		throws RemoteException {
-		try {
-			PermissionServiceUtil.checkPermission(permissionChecker, groupId,
-				resourceId);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static void checkPermission(
-		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
-		java.lang.String groupId, java.lang.String name,
-		java.lang.String primKey) throws RemoteException {
-		try {
-			PermissionServiceUtil.checkPermission(permissionChecker, groupId,
-				name, primKey);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);

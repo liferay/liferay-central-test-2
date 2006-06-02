@@ -26,7 +26,6 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.spring.PermissionServiceUtil;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
@@ -105,9 +104,6 @@ public class EditPermissionsAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		PermissionChecker permissionChecker =
-			themeDisplay.getPermissionChecker();
-
 		String ownerId = Layout.getOwnerId(themeDisplay.getPlid());
 		String groupId = Layout.getGroupId(ownerId);
 
@@ -123,7 +119,7 @@ public class EditPermissionsAction extends PortletAction {
 
 		try {
 			PermissionServiceUtil.checkPermission(
-				permissionChecker, groupId, selResource, resourcePrimKey);
+				groupId, selResource, resourcePrimKey);
 		}
 		catch (PrincipalException pe) {
 			SessionErrors.add(req, PrincipalException.class.getName());

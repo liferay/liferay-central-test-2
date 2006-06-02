@@ -48,6 +48,14 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 		return (PermissionService)ctx.getBean(CLASS_NAME);
 	}
 
+	public void checkPermission(java.lang.String groupId,
+		java.lang.String name, java.lang.String primKey)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		getService().checkPermission(groupId, name, primKey);
+	}
+
 	public boolean hasGroupPermission(java.lang.String groupId,
 		java.lang.String actionId, java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 
@@ -150,25 +158,6 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 
 		return getService().unsetUserPermissions(userId, groupId, actionIds,
 			resourceId);
-	}
-
-	public void checkPermission(
-		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
-		java.lang.String groupId, java.lang.String resourceId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-		getService().checkPermission(permissionChecker, groupId, resourceId);
-	}
-
-	public void checkPermission(
-		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
-		java.lang.String groupId, java.lang.String name,
-		java.lang.String primKey)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-		getService().checkPermission(permissionChecker, groupId, name, primKey);
 	}
 
 	public void ejbCreate() throws CreateException {

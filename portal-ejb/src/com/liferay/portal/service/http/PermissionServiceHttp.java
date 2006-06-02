@@ -39,6 +39,65 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class PermissionServiceHttp {
+	public static void checkPermission(HttpPrincipal httpPrincipal,
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String primKey)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = groupId;
+
+			if (groupId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = primKey;
+
+			if (primKey == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"checkPermission",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw e;
+			}
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			_log.error(StackTraceUtil.getStackTrace(pe));
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(StackTraceUtil.getStackTrace(se));
+			throw se;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new com.liferay.portal.SystemException(stackTrace);
+		}
+	}
+
 	public static boolean hasGroupPermission(HttpPrincipal httpPrincipal,
 		java.lang.String groupId, java.lang.String actionId,
 		java.lang.String resourceId)
@@ -741,133 +800,6 @@ public class PermissionServiceHttp {
 			}
 
 			return ((Boolean)returnObj).booleanValue();
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static void checkPermission(HttpPrincipal httpPrincipal,
-		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
-		java.lang.String groupId, java.lang.String resourceId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = permissionChecker;
-
-			if (permissionChecker == null) {
-				paramObj0 = new NullWrapper(
-						"com.liferay.portal.security.permission.PermissionChecker");
-			}
-
-			Object paramObj1 = groupId;
-
-			if (groupId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = resourceId;
-
-			if (resourceId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
-					"checkPermission",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static void checkPermission(HttpPrincipal httpPrincipal,
-		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
-		java.lang.String groupId, java.lang.String name,
-		java.lang.String primKey)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = permissionChecker;
-
-			if (permissionChecker == null) {
-				paramObj0 = new NullWrapper(
-						"com.liferay.portal.security.permission.PermissionChecker");
-			}
-
-			Object paramObj1 = groupId;
-
-			if (groupId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = name;
-
-			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = primKey;
-
-			if (primKey == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
-					"checkPermission",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));

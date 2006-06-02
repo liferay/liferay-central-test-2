@@ -51,6 +51,12 @@ import com.liferay.util.StringUtil;
 public class PermissionServiceImpl
 	extends PrincipalBean implements PermissionService {
 
+	public void checkPermission(String groupId, String name, String primKey)
+		throws PortalException, SystemException {
+
+		checkPermission(getPermissionChecker(), groupId, name, primKey);
+	}
+
 	public boolean hasGroupPermission(
 			String groupId, String actionId, String resourceId)
 		throws PortalException, SystemException {
@@ -160,7 +166,7 @@ public class PermissionServiceImpl
 			userId, actionIds, resourceId);
 	}
 
-	public void checkPermission(
+	protected void checkPermission(
 			PermissionChecker permissionChecker, String groupId,
 			String resourceId)
 		throws PortalException, SystemException {
@@ -172,7 +178,7 @@ public class PermissionServiceImpl
 			resource.getPrimKey().toString());
 	}
 
-	public void checkPermission(
+	protected void checkPermission(
 			PermissionChecker permissionChecker, String groupId, String name,
 			String primKey)
 		throws PortalException, SystemException {
