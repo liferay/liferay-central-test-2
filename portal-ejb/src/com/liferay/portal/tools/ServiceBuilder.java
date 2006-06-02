@@ -5006,6 +5006,10 @@ public class ServiceBuilder {
 
 		File sqlFile = new File(sqlPath + "/portal-tables.sql");
 
+		if (!sqlFile.exists()) {
+			FileUtil.write(sqlFile, StringPool.BLANK);
+		}
+
 		String content = FileUtil.read(sqlFile);
 
 		for (int i = 0; i < _ejbList.size(); i++) {
@@ -5170,6 +5174,10 @@ public class ServiceBuilder {
 				}
 
 				sb.append(line).append('\n');
+			}
+
+			if (appendNewTable) {
+				sb.append("\n" + newCreateTableString);
 			}
 
 			br.close();
