@@ -116,7 +116,7 @@ textarea { font-family: Arial; }
 	background-color: #D3D3D3;
 	border: 2px Outset #FFFFFF;
 	display: none;
-	padding: 4;
+	padding: 4px;
 	position: absolute;
 	text-align: left;
 	z-index: 10;
