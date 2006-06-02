@@ -61,6 +61,8 @@
 		<ant dir="tunnel-web" target="clean" />
 		<ant dir="web-sites" target="clean" />
 
+		<ant dir="portlets" target="clean" />
+
 		<ant dir="portal-ear" target="clean" />
 
 		<delete>
@@ -85,6 +87,8 @@
 		<ant dir="portal-ejb" target="compile" />
 		<ant dir="filters" target="compile" />
 		<ant dir="util-taglib" target="deploy" />
+
+		<ant dir="portlets" target="compile" />
 	</target>
 
 	<target name="jar">
