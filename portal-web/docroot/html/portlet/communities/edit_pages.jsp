@@ -634,8 +634,6 @@ portletURL.setParameter("groupId", groupId);
 						RequiredLayoutException rle = (RequiredLayoutException)errorException;
 						%>
 
-						<span class="portlet-msg-error" style="font-size: xx-small;">
-
 						<c:if test="<%= rle.getType() == RequiredLayoutException.AT_LEAST_ONE %>">
 							<%= LanguageUtil.get(pageContext, "you-must-have-at-least-one-page") %>
 						</c:if>
@@ -647,10 +645,6 @@ portletURL.setParameter("groupId", groupId);
 						<c:if test="<%= rle.getType() == RequiredLayoutException.FIRST_LAYOUT_HIDDEN %>">
 							<%= LanguageUtil.get(pageContext, "your-first-page-must-not-be-hidden") %>
 						</c:if>
-
-						</span>
-
-						<br><br>
 					</liferay-ui:error>
 
 					<%= LanguageUtil.get(pageContext, "set-the-display-order-of-child-pages") %>
