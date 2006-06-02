@@ -122,7 +122,8 @@ public class EditPermissionsAction extends PortletAction {
 		}
 
 		try {
-			PermissionServiceUtil.checkPermission(permissionChecker, groupId, selResource, resourcePrimKey);
+			PermissionServiceUtil.checkPermission(
+				permissionChecker, groupId, selResource, resourcePrimKey);
 		}
 		catch (PrincipalException pe) {
 			SessionErrors.add(req, PrincipalException.class.getName());
@@ -138,7 +139,8 @@ public class EditPermissionsAction extends PortletAction {
 
 		if (portlet != null) {
 			res.setTitle(
-				PortalUtil.getPortletTitle(portlet, ctx, themeDisplay.getLocale()));
+				PortalUtil.getPortletTitle(
+					portlet, ctx, themeDisplay.getLocale()));
 		}
 
 		return mapping.findForward(
@@ -192,15 +194,16 @@ public class EditPermissionsAction extends PortletAction {
 	}
 
 	protected void updateUserPermissions(ActionRequest req) throws Exception {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
 		String resourceId = ParamUtil.getString(req, "resourceId");
 		String userId = ParamUtil.getString(req, "userIdsPosValue");
 		String[] actionIds = StringUtil.split(
 			ParamUtil.getString(req, "userIdActionIds"));
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		PermissionServiceUtil.setUserPermissions(userId, themeDisplay.getPortletGroupId(), actionIds, resourceId);
+		PermissionServiceUtil.setUserPermissions(
+			userId, themeDisplay.getPortletGroupId(), actionIds, resourceId);
 	}
 
 }

@@ -101,11 +101,12 @@ public class PermissionServiceImpl
 	}
 
 	public void setRolePermission(
-			String roleId, String groupId, String name, String typeId, String scope,
-			String primKey, String actionId)
+			String roleId, String groupId, String name, String typeId,
+			String scope, String primKey, String actionId)
 		throws PortalException, SystemException {
 
-		checkPermission(getPermissionChecker(), groupId, Role.class.getName(), roleId);
+		checkPermission(
+			getPermissionChecker(), groupId, Role.class.getName(), roleId);
 
 		PermissionLocalServiceUtil.setRolePermission(
 			roleId, getUser().getCompanyId(), name, typeId, scope, primKey,
@@ -113,7 +114,8 @@ public class PermissionServiceImpl
 	}
 
 	public void setUserPermissions(
-			String userId, String groupId, String[] actionIds, String resourceId)
+			String userId, String groupId, String[] actionIds,
+			String resourceId)
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
@@ -123,11 +125,12 @@ public class PermissionServiceImpl
 	}
 
 	public boolean unsetRolePermission(
-			String roleId, String groupId, String name, String typeId, String scope,
-			String primKey, String actionId)
+			String roleId, String groupId, String name, String typeId,
+			String scope, String primKey, String actionId)
 		throws PortalException, SystemException {
 
-		checkPermission(getPermissionChecker(), groupId, Role.class.getName(), roleId);
+		checkPermission(
+			getPermissionChecker(), groupId, Role.class.getName(), roleId);
 
 		return PermissionLocalServiceUtil.unsetRolePermission(
 			roleId, getUser().getCompanyId(), name, typeId, scope, primKey,
@@ -135,18 +138,20 @@ public class PermissionServiceImpl
 	}
 
 	public boolean unsetRolePermissions(
-			String roleId, String groupId, String name, String typeId, String scope,
-			String actionId)
+			String roleId, String groupId, String name, String typeId,
+			String scope, String actionId)
 		throws PortalException, SystemException {
 
-		checkPermission(getPermissionChecker(), groupId, Role.class.getName(), roleId);
+		checkPermission(
+			getPermissionChecker(), groupId, Role.class.getName(), roleId);
 
 		return PermissionLocalServiceUtil.unsetRolePermissions(
 			roleId, getUser().getCompanyId(), name, typeId, scope, actionId);
 	}
 
 	public boolean unsetUserPermissions(
-			String userId, String groupId, String[] actionIds, String resourceId)
+			String userId, String groupId, String[] actionIds,
+			String resourceId)
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
@@ -156,16 +161,20 @@ public class PermissionServiceImpl
 	}
 
 	public void checkPermission(
-			PermissionChecker permissionChecker, String groupId, String resourceId)
+			PermissionChecker permissionChecker, String groupId,
+			String resourceId)
 		throws PortalException, SystemException {
 
 		Resource resource = ResourceLocalServiceUtil.getResource(resourceId);
 
-		checkPermission(permissionChecker, groupId, resource.getName(), resource.getPrimKey().toString());
+		checkPermission(
+			permissionChecker, groupId, resource.getName(),
+			resource.getPrimKey().toString());
 	}
 
 	public void checkPermission(
-			PermissionChecker permissionChecker, String groupId, String name, String primKey)
+			PermissionChecker permissionChecker, String groupId, String name,
+			String primKey)
 		throws PortalException, SystemException {
 
 		if (name.equals(Group.class.getName())) {
@@ -173,14 +182,12 @@ public class PermissionServiceImpl
 				permissionChecker, primKey, ActionKeys.PERMISSIONS);
 		}
 		else if (name.equals(Layout.class.getName())) {
-			String layoutGroupId =
-				StringUtil.split(primKey, ".")[1];
+			String layoutGroupId = StringUtil.split(primKey, ".")[1];
 
 			layoutGroupId = StringUtil.replace(layoutGroupId, "}", "");
 
 			GroupPermission.check(
-				permissionChecker, layoutGroupId,
-				ActionKeys.MANAGE_LAYOUTS);
+				permissionChecker, layoutGroupId, ActionKeys.MANAGE_LAYOUTS);
 		}
 		else if (name.equals(User.class.getName())) {
 			User user = UserLocalServiceUtil.getUserById(primKey);
@@ -188,28 +195,26 @@ public class PermissionServiceImpl
 			UserPermission.check(
 				permissionChecker, primKey,
 				user.getOrganization().getOrganizationId(),
-				user.getLocation().getOrganizationId(),
-				ActionKeys.PERMISSIONS);
+				user.getLocation().getOrganizationId(), ActionKeys.PERMISSIONS);
 		}
-		else if (primKey != null && primKey.indexOf(Portlet.LAYOUT_SEPARATOR) > -1) {
+		else if ((primKey != null) &&
+				 (primKey.indexOf(Portlet.LAYOUT_SEPARATOR) > -1)) {
+
 			if (!permissionChecker.hasPermission(
-					groupId, name, primKey,
-					ActionKeys.CONFIGURATION) &&
+					groupId, name, primKey, ActionKeys.CONFIGURATION) &&
 				!GroupPermission.contains(
-					permissionChecker, groupId,
-					ActionKeys.MANAGE_LAYOUTS)) {
+					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
 
 				throw new PrincipalException();
 			}
 		}
 		else if (!permissionChecker.hasPermission(
-					groupId, name, primKey,
-					ActionKeys.PERMISSIONS) &&
+					groupId, name, primKey, ActionKeys.PERMISSIONS) &&
 				 !permissionChecker.hasPermission(
-					groupId, name, primKey,
-					ActionKeys.ADD_PERMISSIONS)) {
+					groupId, name, primKey, ActionKeys.ADD_PERMISSIONS)) {
 
 			throw new PrincipalException();
 		}
 	}
+
 }

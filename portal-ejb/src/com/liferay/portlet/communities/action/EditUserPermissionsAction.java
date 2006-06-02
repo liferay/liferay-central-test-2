@@ -112,7 +112,8 @@ public class EditUserPermissionsAction extends PortletAction {
 		String[] actionIds = StringUtil.split(
 			ParamUtil.getString(req, "userIdActionIds"));
 
-		PermissionServiceUtil.setUserPermissions(userId, groupId, actionIds, resourceId);
+		PermissionServiceUtil.setUserPermissions(
+			userId, groupId, actionIds, resourceId);
 	}
 
 }

@@ -150,8 +150,9 @@ public class EditRolePermissionsAction extends PortletAction {
 
 			if (scope.equals(Resource.SCOPE_COMPANY)) {
 				PermissionServiceUtil.setRolePermission(
-					roleId, themeDisplay.getPortletGroupId(), selResource, Resource.TYPE_CLASS, scope,
-					themeDisplay.getCompanyId(), actionId);
+					roleId, themeDisplay.getPortletGroupId(), selResource,
+					Resource.TYPE_CLASS, scope, themeDisplay.getCompanyId(),
+					actionId);
 			}
 			else if (scope.equals(Resource.SCOPE_GROUP)) {
 				groupScopeActionIds.add(actionId);
@@ -161,12 +162,12 @@ public class EditRolePermissionsAction extends PortletAction {
 				// Remove company and group permissions
 
 				PermissionServiceUtil.unsetRolePermissions(
-					roleId, themeDisplay.getPortletGroupId(), selResource, Resource.TYPE_CLASS,
-					Resource.SCOPE_COMPANY, actionId);
+					roleId, themeDisplay.getPortletGroupId(), selResource,
+					Resource.TYPE_CLASS, Resource.SCOPE_COMPANY, actionId);
 
 				PermissionServiceUtil.unsetRolePermissions(
-					roleId, themeDisplay.getPortletGroupId(), selResource, Resource.TYPE_CLASS,
-					Resource.SCOPE_GROUP, actionId);
+					roleId, themeDisplay.getPortletGroupId(), selResource,
+					Resource.TYPE_CLASS, Resource.SCOPE_GROUP, actionId);
 			}
 		}
 
@@ -215,14 +216,16 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		for (int i = 0; i < addGroupIds.length; i++) {
 			PermissionServiceUtil.setRolePermission(
-				roleId, themeDisplay.getPortletGroupId(), selResource, Resource.TYPE_CLASS, Resource.SCOPE_GROUP,
-				addGroupIds[i], actionId);
+				roleId, themeDisplay.getPortletGroupId(), selResource,
+				Resource.TYPE_CLASS, Resource.SCOPE_GROUP, addGroupIds[i],
+				actionId);
 		}
 
 		for (int i = 0; i < removeGroupIds.length; i++) {
 			PermissionServiceUtil.unsetRolePermission(
-				roleId, themeDisplay.getPortletGroupId(), selResource, Resource.TYPE_CLASS, Resource.SCOPE_GROUP,
-				removeGroupIds[i], actionId);
+				roleId, themeDisplay.getPortletGroupId(), selResource,
+				Resource.TYPE_CLASS, Resource.SCOPE_GROUP, removeGroupIds[i],
+				actionId);
 		}
 
 		String redirect = ParamUtil.getString(req, "redirect");

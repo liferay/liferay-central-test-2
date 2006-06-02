@@ -154,8 +154,8 @@ if (Validator.isNotNull(modelResource)) {
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />permissionsRedirect" type="hidden" value="">
 <input name="<portlet:namespace />cur" type="hidden" value="<%= cur %>">
-<input name="<portlet:namespace />resourceId" type="hidden" value='<%= (resource != null) ? resource.getResourceId() : "" %>'>
 <input name="<portlet:namespace />groupId" type="hidden" value='<%= group.getGroupId() %>'>
+<input name="<portlet:namespace />resourceId" type="hidden" value='<%= (resource != null) ? resource.getResourceId() : "" %>'>
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
