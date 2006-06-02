@@ -22,6 +22,9 @@
 
 package com.liferay.portal.shared.util;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="ServerDetector.java.html"><b><i>View Source</i></b></a>
  *
@@ -71,8 +74,8 @@ public class ServerDetector {
 			if (ServerDetector.isJBoss()) {
 				sd._serverId = "jboss";
 			}
-			else if (ServerDetector.isJetty()) {
-				sd._serverId = "jetty";
+			else if (ServerDetector.isJOnAS()) {
+				sd._serverId = "jonas";
 			}
 			else if (ServerDetector.isOC4J()) {
 				sd._serverId = "oc4j";
@@ -83,14 +86,34 @@ public class ServerDetector {
 			else if (ServerDetector.isResin()) {
 				sd._serverId = "resin";
 			}
-			else if (ServerDetector.isTomcat()) {
-				sd._serverId = "tomcat";
-			}
 			else if (ServerDetector.isWebLogic()) {
 				sd._serverId = "weblogic";
 			}
-			else {
+			else if (ServerDetector.isWebSphere()) {
 				sd._serverId = "websphere";
+			}
+
+			if (ServerDetector.isJetty()) {
+				if (sd._serverId == null) {
+					sd._serverId = "jetty";
+				}
+				else {
+					sd._serverId += "-jetty";
+				}
+			}
+			else if (ServerDetector.isTomcat()) {
+				if (sd._serverId == null) {
+					sd._serverId = "tomcat";
+				}
+				else {
+					sd._serverId += "-tomcat";
+				}
+			}
+
+			_log.info("Detected server " + sd._serverId);
+
+			if (sd._serverId == null) {
+				throw new RuntimeException("Server is not supported");
 			}
 		}
 
@@ -329,6 +352,8 @@ public class ServerDetector {
 
 	private ServerDetector() {
 	}
+
+	private static Log _log = LogFactory.getLog(ServerDetector.class);
 
 	private static ServerDetector _instance = new ServerDetector();
 

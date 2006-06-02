@@ -192,6 +192,11 @@
 								</java>
 		
 								<delete dir="${tstamp.dir}" />
+
+								<replace file="${app.server.deploy.dir}/${ext.ear.file}/ext-ejb.jar/portal-ext.properties">
+									<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+									<replacevalue>auto.deploy.dest.dir=../../webapps/autoload</replacevalue>
+								</replace>
 							</then>
 						</if>
 					</else>

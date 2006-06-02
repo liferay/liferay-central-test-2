@@ -73,7 +73,7 @@ public class PermissionServiceImpl
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
-		
+
 		PermissionLocalServiceUtil.setGroupPermissions(
 			groupId, actionIds, resourceId);
 	}
@@ -84,7 +84,7 @@ public class PermissionServiceImpl
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
-		
+
 		PermissionLocalServiceUtil.setGroupPermissions(
 			organizationId, groupId, actionIds, resourceId);
 	}
@@ -95,7 +95,7 @@ public class PermissionServiceImpl
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
-		
+
 		PermissionLocalServiceUtil.setOrgGroupPermissions(
 			organizationId, groupId, actionIds, resourceId);
 	}
@@ -106,7 +106,7 @@ public class PermissionServiceImpl
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, Role.class.getName(), roleId);
-		
+
 		PermissionLocalServiceUtil.setRolePermission(
 			roleId, getUser().getCompanyId(), name, typeId, scope, primKey,
 			actionId);
@@ -117,7 +117,7 @@ public class PermissionServiceImpl
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
-		
+
 		PermissionLocalServiceUtil.setUserPermissions(
 			userId, actionIds, resourceId);
 	}
@@ -128,7 +128,7 @@ public class PermissionServiceImpl
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, Role.class.getName(), roleId);
-		
+
 		return PermissionLocalServiceUtil.unsetRolePermission(
 			roleId, getUser().getCompanyId(), name, typeId, scope, primKey,
 			actionId);
@@ -140,7 +140,7 @@ public class PermissionServiceImpl
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, Role.class.getName(), roleId);
-		
+
 		return PermissionLocalServiceUtil.unsetRolePermissions(
 			roleId, getUser().getCompanyId(), name, typeId, scope, actionId);
 	}
@@ -150,7 +150,7 @@ public class PermissionServiceImpl
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
-		
+
 		return PermissionLocalServiceUtil.unsetUserPermissions(
 			userId, actionIds, resourceId);
 	}
@@ -158,9 +158,9 @@ public class PermissionServiceImpl
 	public void checkPermission(
 			PermissionChecker permissionChecker, String groupId, String resourceId)
 		throws PortalException, SystemException {
-	
+
 		Resource resource = ResourceLocalServiceUtil.getResource(resourceId);
-		
+
 		checkPermission(permissionChecker, groupId, resource.getName(), resource.getPrimKey().toString());
 	}
 
@@ -204,12 +204,12 @@ public class PermissionServiceImpl
 		}
 		else if (!permissionChecker.hasPermission(
 					groupId, name, primKey,
-					ActionKeys.PERMISSIONS) && 
+					ActionKeys.PERMISSIONS) &&
 				 !permissionChecker.hasPermission(
 					groupId, name, primKey,
 					ActionKeys.ADD_PERMISSIONS)) {
 
 			throw new PrincipalException();
 		}
-	}	
+	}
 }

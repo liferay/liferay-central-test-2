@@ -22,22 +22,23 @@
  */
 %>
 
-// Preload Loading Animation
 var loadingAnimation = new Image();
+
 loadingAnimation.src =  "<%= themeDisplay.getPathThemeImage() %>/progress_bar/loading_animation.gif";
 
 var themeDisplay = {
 	getPathThemeRoot : function() {
 		return("<%= themeDisplay.getPathThemeRoot() %>");
 	},
-
 	getPathThemeImage : function() {
 		return("<%= themeDisplay.getPathThemeImage() %>");
+	},
+	getPathMain : function() {
+		return("<%= themeDisplay.getPathMain() %>");
 	}
 };
 
 function addPortlet(plid, portletId) {
-	// List portlets that require a page refresh
 	var refreshPortletList = "";
 
 	if (refreshPortletList.match("," + portletId + ",")) {
@@ -46,7 +47,6 @@ function addPortlet(plid, portletId) {
 	else {
 		loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid + "&#p_" + portletId), addPortletReturn);
 
-		// Create loading animation
 		var loadingDiv = document.createElement("div");
 		var container = document.getElementById("layout-column_column-1");
 
@@ -87,9 +87,12 @@ function addPortletReturn(xmlHttpReq) {
 	portletBound.parentNode.removeChild(portletBound);
 
 	var portletId = portletBound.id;
+
 	portletId = portletId.replace(/^p_p_id_/,"");
 	portletId = portletId.replace(/_$/,"");
+
 	portletBound.portletId = portletId;
+
 	container.removeChild(loadingDiv);
 	container.insertBefore(portletBound, container.endPlaceholder);
 
@@ -98,22 +101,41 @@ function addPortletReturn(xmlHttpReq) {
 		DragDrop.makeItemDragable(portletBound, handle);
 	}
 
-	window.location.hash = "p_" + portletId;
+	if (window.location.hash) {
+		window.location.hash = "p_" + portletId;
+	}
 
 	var scripts = portletBound.getElementsByTagName("script");
 
 	for (var i = 0; i < scripts.length; i++) {
-		try {
-			<% if (BrowserSniffer.is_safari(request)) { %>
-				eval(scripts[i].innerHTML);
-			<% } else if (BrowserSniffer.is_mozilla(request)) { %>
-				eval(scripts[i].textContent);
-			<% } else { %>
-				eval(scripts[i].text);
-			<% } %>
+		if (scripts[i].src) {
+			var head = document.getElementsByTagName("head")[0];
+			var scriptObj = document.createElement("script");
+
+			scriptObj.setAttribute("type", "text/javascript");
+			scriptObj.setAttribute("src", scripts[i].src);
+
+			head.appendChild(scriptObj);
 		}
-		catch(e) {
-			alert(e);
+		else {
+			try {
+
+				<c:choose>
+					<c:when test="<%= BrowserSniffer.is_safari(request) %>">
+						eval(scripts[i].innerHTML);
+					</c:when>
+					<c:when test="<%= BrowserSniffer.is_mozilla(request) %>">
+						eval(scripts[i].textContent);
+					</c:when>
+					<c:otherwise>
+						eval(scripts[i].text);
+					</c:otherwise>
+				</c:choose>
+
+			}
+			catch(e) {
+				alert(e);
+			}
 		}
 	}
 }
@@ -122,10 +144,12 @@ function closePortlet(plid, portletId) {
 	if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-remove-this-component") %>')) {
 		var curItem = document.getElementById("p_p_id_" + portletId + "_");
 		var parent = curItem.parentNode;
+
 		parent.removeChild(curItem);
 
 		if (curItem = document.getElementById(portletId)) {
 			parent = curItem.parentNode;
+
 			parent.removeChild(curItem);
 		}
 
@@ -148,6 +172,7 @@ function minimizePortlet(plid, portletId, restore) {
 	else {
 		if (restore) {
 			var portletEl = document.getElementById("p_p_body_" + portletId);
+
 			portletEl.style.display = "block";
 			portletEl.style.overflow = "hidden";
 			portletEl.style.height = "1px";
@@ -168,6 +193,7 @@ function minimizePortlet(plid, portletId, restore) {
 		}
 		else {
 			var portletEl = document.getElementById("p_p_body_" + portletId);
+
 			portletEl.style.overflow = "hidden";
 
 			slideMinimize("p_p_body_" + portletId, portletEl.offsetHeight, 20);
@@ -175,6 +201,7 @@ function minimizePortlet(plid, portletId, restore) {
 			var buttonsEl = document.getElementById("p_p_body_" + portletId + "_min_buttons");
 
 			var html = buttonsEl.innerHTML;
+
 			html = html.replace(", false", ", true");
 			html = html.replace("minimize.gif", "restore.gif");
 			html = html.replace("<%= LanguageUtil.get(pageContext, "minimize") %>", "<%= LanguageUtil.get(pageContext, "restore") %>");

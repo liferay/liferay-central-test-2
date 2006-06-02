@@ -378,8 +378,10 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			return true;
 		}
 
-		if (PermissionFinder.countByGroupsRoles(permissions, groups) > 0) {
-			return true;
+		if (groups.size() > 0) {
+			if (PermissionFinder.countByGroupsRoles(permissions, groups) > 0) {
+				return true;
+			}
 		}
 
 		logUserPermission(userId, actionId, resourceId, start, 6);

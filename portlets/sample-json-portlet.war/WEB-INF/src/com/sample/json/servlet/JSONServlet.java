@@ -73,9 +73,12 @@ public class JSONServlet extends HttpServlet {
 	protected String getContent(HttpServletRequest req, HttpServletResponse res)
 		throws Exception {
 
-		String variable = ParamUtil.getString(req, "variable");
+		String id = ParamUtil.getString(req, "id");
+		String callback = ParamUtil.getString(req, "callback");
 
 		JSONObject jsonObj = new JSONObject();
+
+		jsonObj.put("id", id);
 
 		ServletContext ctx = getServletContext();
 
@@ -86,7 +89,7 @@ public class JSONServlet extends HttpServlet {
 
 		jsonObj.put(jsonRaw);
 
-		return "var " + variable + "=" + jsonObj.toString() + ";\n";
+		return callback + "(" + jsonObj.toString() + ");";
 	}
 
 }

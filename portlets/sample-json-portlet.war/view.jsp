@@ -24,17 +24,8 @@
 
 <%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
 
-<%@ page import="com.liferay.util.PwdGenerator" %>
-<%@ page import="com.liferay.util.StringPool" %>
-
 <portlet:defineObjects />
 
-<%
-String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
-%>
+<div id="<portlet:namespace />json"></div>
 
-<script src="<%= request.getContextPath() %>/servlet/do?variable=<%= randomNamespace %>json" type="text/javascript"></script>
-
-<script type="text/javascript">
-	document.write(<%= randomNamespace %>json || "");
-</script>
+<script src="<%= request.getContextPath() %>/servlet/do?id=<portlet:namespace />json&callback=printJSON" type="text/javascript"></script>

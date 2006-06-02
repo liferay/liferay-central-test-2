@@ -112,6 +112,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.shared.util.ServerDetector">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.spring">
 		<priority value="ERROR" />
 	</category>

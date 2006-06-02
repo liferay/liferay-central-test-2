@@ -22,17 +22,6 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-import javax.servlet.ServletContext;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Resource;
@@ -51,6 +40,18 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+
+import javax.servlet.ServletContext;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 /**
  * <a href="EditPermissionsAction.java.html"><b><i>View Source</i></b></a>
@@ -139,7 +140,7 @@ public class EditPermissionsAction extends PortletAction {
 			res.setTitle(
 				PortalUtil.getPortletTitle(portlet, ctx, themeDisplay.getLocale()));
 		}
-			
+
 		return mapping.findForward(
 			getForward(req, "portlet.portlet_configuration.edit_permissions"));
 	}
@@ -195,7 +196,7 @@ public class EditPermissionsAction extends PortletAction {
 		String userId = ParamUtil.getString(req, "userIdsPosValue");
 		String[] actionIds = StringUtil.split(
 			ParamUtil.getString(req, "userIdActionIds"));
-		
+
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
