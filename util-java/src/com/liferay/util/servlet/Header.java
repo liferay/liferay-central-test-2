@@ -26,7 +26,6 @@ package com.liferay.util.servlet;
  * <a href="Header.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Michael Young
- * @version $Revision: $
  *
  */
 public class Header {

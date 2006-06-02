@@ -26,19 +26,18 @@ package com.sample.samplejsfmyfacesportlet.bean;
  * <a href="UserBean.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Myunghun Kim
- * @version $Revision: 1.2 $
  *
  */
 public class UserBean {
 
 	public String getName() {
-		return name;
+		return _name;
 	}
 
-	public void setName(String newValue) {
-		name = newValue;
+	public void setName(String name) {
+		_name = name;
 	}
 
-	private String name;
+	private String _name;
 
 }

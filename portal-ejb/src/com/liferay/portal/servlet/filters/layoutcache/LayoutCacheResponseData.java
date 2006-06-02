@@ -30,7 +30,6 @@ import java.util.Map;
  * <a href="LayoutCacheResponseData.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Michael Young
- * @version $Revision: $
  *
  */
 public class LayoutCacheResponseData implements Serializable {

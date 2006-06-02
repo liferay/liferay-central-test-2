@@ -1091,7 +1091,6 @@ public class ServiceBuilder {
 				sb.append(" * <a href=\"" + exception + "Exception.java.html\"><b><i>View Source</i></b></a>\n");
 				sb.append(" *\n");
 				sb.append(" * @author  Brian Wing Shun Chan\n");
-				sb.append(" * @version $Revision: 1.183 $\n");
 				sb.append(" *\n");
 				sb.append(" */\n");
 			}

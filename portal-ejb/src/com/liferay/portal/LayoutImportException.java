@@ -26,7 +26,6 @@ package com.liferay.portal;
  * <a href="LayoutImportException.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
- * @version $Revision: 1.183 $
  *
  */
 public class LayoutImportException extends PortalException {
