@@ -106,3 +106,12 @@ function loadPage(path, queryString, returnFunction, returnArgs) {
 	catch (e) {
 	}
 }
+
+function printJSON(data) {
+	if (data && data.id) {
+		var target = document.getElementById(data.id);
+		if (target) {
+			target.innerHTML = data.toString();
+		}
+	}
+}
