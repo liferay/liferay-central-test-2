@@ -45,7 +45,7 @@
 	<entry name="Breeze">
 		<description>Breeze gives you a view of the portal through a window, literally.</description>
 		<categories>Fun,Liferay</categories>
-		<download>sample-pack-01-themes.war</download>
+		<download>breeze-themes.war</download>
 		<image-large>THEME-BREEZE.screenshot-full.png</image-large>
 		<image-medium>THEME-BREEZE.screenshot-handprint.jpg</image-medium>
 		<image-small>THEME-BREEZE.screenshot-thumbnail.jpg</image-small>
@@ -85,7 +85,7 @@
 	<entry name="Clean">
 		<description>Clean aims to remove clutter by providing a clean portal interface. The navigation bar also deviates from the traditional tabbed feel to use a Start button.</description>
 		<categories>Liferay,Professional</categories>
-		<download>sample-pack-01-themes.war</download>
+		<download>clean-themes.war</download>
 		<image-large>THEME-CLEAN.screenshot-full.png</image-large>
 		<image-medium>THEME-CLEAN.screenshot-handprint.jpg</image-medium>
 		<image-small>THEME-CLEAN.screenshot-thumbnail.jpg</image-small>
