@@ -28,27 +28,13 @@
 List reports = (List)request.getAttribute("reports");
 %>
 
-<liferay:box top="/html/common/box_top.jsp" bottom="/html/common/box_bottom.jsp">
-	<liferay:param name="box_title" value="<%= LanguageUtil.get(pageContext, \"view-all\") %>" />
+<%
+for (int i = 0; i < reports.size(); i++) {
+	String reportName = (String)reports.get(i);
+%>
 
-	<table border="0" cellpadding="0" cellspacing="0">
+	<%= reportName %><br>
 
-	<%
-	for (int i = 0; i < reports.size(); i++) {
-		String reportName = (String)reports.get(i);
-	%>
-
-		<tr>
-			<td>
-				<font class="bg" size="2">
-				<%= reportName %>
-				</font>
-			</td>
-		</tr>
-
-	<%
-	}
-	%>
-
-	</table>
-</liferay:box>
+<%
+}
+%>

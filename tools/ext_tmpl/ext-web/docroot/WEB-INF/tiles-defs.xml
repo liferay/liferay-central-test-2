@@ -10,7 +10,6 @@
 	</definition>
 
 	<definition name="portlet.ext.reports.view_reports" extends="portlet">
-		<put name="portlet_sub_nav" value="/portlet/ext/reports/sub_nav.jsp" />
 		<put name="portlet_content" value="/portlet/ext/reports/view_reports.jsp" />
 	</definition>
 </tiles-definitions>

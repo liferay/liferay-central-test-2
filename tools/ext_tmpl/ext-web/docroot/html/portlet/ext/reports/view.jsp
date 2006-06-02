@@ -24,12 +24,4 @@
 
 <%@ include file="/html/portlet/ext/reports/init.jsp" %>
 
-<liferay:include page="/html/portlet/ext/reports/sub_nav.jsp" />
-
-<table border="0" cellpadding="4" cellspacing="0" width="100%">
-<tr>
-	<td align="center">
-		<font class="gamma" size="2">Test <%= prefs.getValue("test", "") %></font>
-	</td>
-</tr>
-</table>
+<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />">Test <%= prefs.getValue("test", "") %></a>
