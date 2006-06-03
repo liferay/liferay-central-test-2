@@ -144,18 +144,24 @@ public class PortletPreferencesLocalServiceImpl
 			PortletPreferencesPK pk, PortletPreferencesImpl prefs)
 		throws PortalException, SystemException {
 
-		PortletPreferences portletPrefences =
-			PortletPreferencesUtil.findByPrimaryKey(pk);
+		PortletPreferences portletPreferences = null;
+		
+		try {
+			portletPreferences = PortletPreferencesUtil.findByPrimaryKey(pk);
+		}
+		catch (NoSuchPortletPreferencesException nsppe) {
+			portletPreferences = PortletPreferencesUtil.create(pk);
+		}
 
 		String xml = PortletPreferencesSerializer.toXML(prefs);
 
-		portletPrefences.setPreferences(xml);
+		portletPreferences.setPreferences(xml);
 
-		PortletPreferencesUtil.update(portletPrefences);
+		PortletPreferencesUtil.update(portletPreferences);
 
 		PortletPreferencesLocalUtil.clearPreferencesPool(pk.ownerId);
 
-		return portletPrefences;
+		return portletPreferences;
 	}
 
 	private static Log _log =
