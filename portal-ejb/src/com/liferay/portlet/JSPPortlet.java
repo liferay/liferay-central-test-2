@@ -61,6 +61,14 @@ public class JSPPortlet extends LiferayPortlet {
 			getInitParameter("copy-request-parameters"), true);
 	}
 
+	public void processAction(ActionRequest req, ActionResponse res)
+		throws IOException, PortletException {
+
+		if (copyRequestParameters) {
+			PortalUtil.copyRequestParameters(req, res);
+		}
+	}
+
 	public void doDispatch(RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {
 
@@ -130,14 +138,6 @@ public class JSPPortlet extends LiferayPortlet {
 		throws IOException, PortletException {
 
 		include(viewJSP, req, res);
-	}
-
-	public void processAction(ActionRequest req, ActionResponse res)
-		throws IOException, PortletException {
-
-		if (copyRequestParameters) {
-			PortalUtil.copyRequestParameters(req, res);
-		}
 	}
 
 	protected void include(String path, RenderRequest req, RenderResponse res)

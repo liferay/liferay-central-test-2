@@ -145,7 +145,7 @@ public class PortletPreferencesLocalServiceImpl
 		throws PortalException, SystemException {
 
 		PortletPreferences portletPreferences = null;
-		
+
 		try {
 			portletPreferences = PortletPreferencesUtil.findByPrimaryKey(pk);
 		}

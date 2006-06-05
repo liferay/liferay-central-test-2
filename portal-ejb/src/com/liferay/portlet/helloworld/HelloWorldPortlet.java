@@ -41,16 +41,16 @@ import javax.portlet.RenderResponse;
  */
 public class HelloWorldPortlet extends GenericPortlet {
 
+	public void processAction(ActionRequest req, ActionResponse res)
+		throws IOException, PortletException {
+	}
+
 	public void doView(RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {
 
 		res.setContentType(Constants.TEXT_HTML);
 
 		res.getWriter().print("Hello World!");
-	}
-
-	public void processAction(ActionRequest req, ActionResponse res)
-		throws IOException, PortletException {
 	}
 
 }

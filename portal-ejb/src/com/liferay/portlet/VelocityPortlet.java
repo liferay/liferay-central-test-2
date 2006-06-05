@@ -82,6 +82,10 @@ public class VelocityPortlet extends GenericPortlet {
 		_viewTemplate = getInitParameter("view-template");
 	}
 
+	public void processAction(ActionRequest req, ActionResponse res)
+		throws IOException, PortletException {
+	}
+
 	public void doEdit(RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {
 
@@ -118,10 +122,6 @@ public class VelocityPortlet extends GenericPortlet {
 		catch (Exception e) {
 			throw new PortletException(e);
 		}
-	}
-
-	public void processAction(ActionRequest req, ActionResponse res)
-		throws IOException, PortletException {
 	}
 
 	protected Context getContext(PortletRequest req, PortletResponse res) {
