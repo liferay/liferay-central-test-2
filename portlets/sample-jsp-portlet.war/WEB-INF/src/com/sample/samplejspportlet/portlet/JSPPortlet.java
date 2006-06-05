@@ -98,8 +98,9 @@ public class JSPPortlet extends GenericPortlet {
 		if (prd == null) {
 			_log.error(path + " is not a valid include");
 		}
-
-		prd.include(req, res);
+		else {
+			prd.include(req, res);
+		}
 	}
 
 	protected String editJSP;

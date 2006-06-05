@@ -50,8 +50,9 @@ public class JSONPortlet extends GenericPortlet {
 		if (prd == null) {
 			_log.error("/view.jsp is not a valid include");
 		}
-
-		prd.include(req, res);
+		else {
+			prd.include(req, res);
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(JSONPortlet.class);

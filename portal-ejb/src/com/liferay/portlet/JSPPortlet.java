@@ -150,8 +150,9 @@ public class JSPPortlet extends LiferayPortlet {
 		if (prd == null) {
 			_log.error(path + " is not a valid include");
 		}
-
-		prd.include(req, res);
+		else {
+			prd.include(req, res);
+		}
 
 		if (copyRequestParameters) {
 			PortalUtil.clearRequestParameters(req);
