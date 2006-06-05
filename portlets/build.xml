@@ -7,6 +7,10 @@
 
 	<target name="clean">
 		<antcall target="clean-module">
+			<param name="module.name" value="sample-dao-portlet" />
+		</antcall>
+
+		<antcall target="clean-module">
 			<param name="module.name" value="sample-jsf-myfaces-portlet" />
 		</antcall>
 
@@ -38,6 +42,10 @@
 	</target>
 
 	<target name="compile">
+		<antcall target="compile-module">
+			<param name="module.name" value="sample-dao-portlet" />
+		</antcall>
+
 		<antcall target="compile-module">
 			<param name="module.name" value="sample-jsf-myfaces-portlet" />
 		</antcall>
@@ -74,7 +82,11 @@
 		/>
 	</target>
 
-	<target name="war" depends="compile">
+	<target name="war">
+		<antcall target="war-module">
+			<param name="module.name" value="sample-dao-portlet" />
+		</antcall>
+
 		<antcall target="war-module">
 			<param name="module.name" value="sample-jsf-myfaces-portlet" />
 		</antcall>
@@ -96,7 +108,7 @@
 		</antcall>
 	</target>
 
-	<target name="war-module" depends="compile">
+	<target name="war-module">
 		<war
 			basedir="${module.name}.war"
 			destfile="../${module.name}.war"
