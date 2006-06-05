@@ -34,6 +34,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.GenericPortlet;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
@@ -108,14 +109,28 @@ public class DAOPortlet extends GenericPortlet {
 	public void doView(RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {
 
-		PortletRequestDispatcher prd =
-			getPortletContext().getRequestDispatcher("/view.jsp");
+		PortletContext ctx = getPortletContext();
+
+		PortletRequestDispatcher prd = ctx.getRequestDispatcher("/view.jsp");
 
 		if (prd == null) {
 			_log.error("/view.jsp is not a valid include");
 		}
+		else {
+			try {
+				prd.include(req, res);
+			}
+			catch (Exception e) {
+				prd = ctx.getRequestDispatcher("/error.jsp");
 
-		prd.include(req, res);
+				if (prd == null) {
+					_log.error("/error.jsp is not a valid include");
+				}
+				else {
+					prd.include(req, res);
+				}
+			}
+		}
 	}
 
 	public void destroy() {
