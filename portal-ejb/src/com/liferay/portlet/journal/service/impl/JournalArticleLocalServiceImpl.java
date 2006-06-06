@@ -268,7 +268,7 @@ public class JournalArticleLocalServiceImpl
 				article.getDisplayDate());
 		}
 		catch (IOException ioe) {
-			_log.error(ioe.getMessage());
+			_log.error(ioe);
 		}
 
 		return article;
@@ -363,7 +363,7 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 		catch (IOException ioe) {
-			_log.error(ioe.getMessage());
+			_log.error(ioe);
 		}
 
 		// Email
@@ -745,7 +745,7 @@ public class JournalArticleLocalServiceImpl
 
 						// Continue indexing even if one article fails
 
-						_log.error(e1.getMessage());
+						_log.error(e1);
 					}
 				}
 			}
@@ -963,7 +963,7 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 		catch (IOException ioe) {
-			_log.error(ioe.getMessage());
+			_log.error(ioe);
 		}
 
 		return article;
@@ -974,10 +974,12 @@ public class JournalArticleLocalServiceImpl
 		String companyId, String content, String structureId, Map images) {
 
 		if (Validator.isNotNull(structureId)) {
-			try {
-				SAXReader reader = new SAXReader();
+			SAXReader reader = new SAXReader();
 
-				Document doc = reader.read(new StringReader(content));
+			Document doc = null;
+			
+			try {
+				doc = reader.read(new StringReader(content));
 
 				Element root = doc.getRootElement();
 
@@ -988,10 +990,10 @@ public class JournalArticleLocalServiceImpl
 				content = JournalUtil.formatXML(doc);
 			}
 			catch (DocumentException de) {
-				de.printStackTrace();
+				_log.error(de);
 			}
 			catch (IOException ioe) {
-				ioe.printStackTrace();
+				_log.error(ioe);
 			}
 		}
 

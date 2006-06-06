@@ -346,12 +346,14 @@ public class EditArticleAction extends PortletAction {
 					JournalArticleServiceUtil.getArticle(
 						companyId, articleId, version);
 
-				JournalStructure structure =
-					JournalStructureServiceUtil.getStructure(
-						companyId, structureId);
+				if (Validator.isNotNull(curArticle.getStructureId())) {
+					JournalStructure structure =
+						JournalStructureServiceUtil.getStructure(
+							companyId, structureId);
 
-				content = JournalUtil.mergeLocaleContent(
-					curArticle.getContent(), content, structure.getXsd());
+					content = JournalUtil.mergeLocaleContent(
+						curArticle.getContent(), content, structure.getXsd());
+				}
 			}
 
 			// Update article

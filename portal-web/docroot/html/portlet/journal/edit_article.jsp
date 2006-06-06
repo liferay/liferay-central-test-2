@@ -160,8 +160,10 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	</c:if>
 
 	function <portlet:namespace />deleteArticle() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-		submitForm(document.<portlet:namespace />fm);
+		if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this") %>")) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+			submitForm(document.<portlet:namespace />fm);
+		}
 	}
 
 	function <portlet:namespace />disableInputDate(date, checked) {
@@ -255,6 +257,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 							else {
 								elContentValue = elContent.value;
 							}
+
 							elContentValue = "<![CDATA[" + elContentValue + "]]>";
 						}
 						else if (elTypeValue == "image") {
@@ -265,9 +268,11 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 							}
 
 							var elDeleteState = document.getElementById("<portlet:namespace />structure_el" + i + "_delete_state");
+
 							if ((elDeleteState != null) && (elDeleteState.value == "yes")) {
 								elContentValue = "delete";
 							}
+
 							elContentValue = "<![CDATA[" + elContentValue + "]]>";
 						}
 						else if (elTypeValue == "boolean") {
