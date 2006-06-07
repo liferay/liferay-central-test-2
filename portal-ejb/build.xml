@@ -459,6 +459,12 @@
 		</antcall>
 	</target>
 
+	<target name="build-wsdd-portlet-test">
+		<antcall target="build-wsdd">
+			<param name="service.file" value="src/com/liferay/portlet/test/service.xml" />
+		</antcall>
+	</target>
+
 	<target name="build-wsdd-portlet-wiki">
 		<antcall target="build-wsdd">
 			<param name="service.file" value="src/com/liferay/portlet/wiki/service.xml" />
