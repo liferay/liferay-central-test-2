@@ -43,11 +43,11 @@ String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METH
 	<script type="text/javascript" src="fckeditor/fckeditor.js"></script>
 	<script type="text/javascript">
 		function getHTML() {
-			return (document.getElementById("FCKeditor1___Frame").contentWindow.document.getElementById("eEditorArea")).contentWindow.document.body.innerHTML;
+			return FCKeditorAPI.GetInstance("FCKeditor1").GetXHTML();
 		}
 
 		function getText() {
-			return (document.getElementById("FCKeditor1___Frame").contentWindow.document.getElementById("eEditorArea")).contentWindow.document.body.innerText;
+			return FCKeditorAPI.GetInstance("FCKeditor1").GetXHTML();
 		}
 	</script>
 </head>
