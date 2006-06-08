@@ -26,7 +26,10 @@
 	<model-resource>
 		<model-name>com.liferay.portal.model.Location</model-name>
 		<portlet-ref>
+			<portlet-name>11</portlet-name>
+			<portlet-name>40</portlet-name>
 			<portlet-name>79</portlet-name>
+			<portlet-name>80</portlet-name>
 		</portlet-ref>
 		<supports>
 			<action-key>ADD_USER</action-key>
@@ -52,7 +55,10 @@
 	<model-resource>
 		<model-name>com.liferay.portal.model.Organization</model-name>
 		<portlet-ref>
+			<portlet-name>11</portlet-name>
+			<portlet-name>40</portlet-name>
 			<portlet-name>79</portlet-name>
+			<portlet-name>80</portlet-name>
 		</portlet-ref>
 		<supports>
 			<action-key>ADD_LOCATION</action-key>
@@ -101,7 +107,10 @@
 	<model-resource>
 		<model-name>com.liferay.portal.model.User</model-name>
 		<portlet-ref>
+			<portlet-name>11</portlet-name>
+			<portlet-name>40</portlet-name>
 			<portlet-name>79</portlet-name>
+			<portlet-name>80</portlet-name>
 		</portlet-ref>
 		<supports>
 			<action-key>DELETE</action-key>
