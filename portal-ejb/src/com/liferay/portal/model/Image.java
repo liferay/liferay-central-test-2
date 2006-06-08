@@ -69,6 +69,10 @@ public class Image extends ImageModel {
 	}
 
 	public String getType() {
+		if (_textObj == null) {
+			getTextObj();
+		}
+
 		if ((_type == null) && (_textObj != null)) {
 			MemoryCacheImageInputStream mcis = new MemoryCacheImageInputStream(
 				new ByteArrayInputStream(_textObj));
