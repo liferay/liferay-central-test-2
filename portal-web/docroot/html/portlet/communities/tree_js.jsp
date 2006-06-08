@@ -24,7 +24,8 @@
 
 <script language="JavaScript" src="<%= themeDisplay.getPathJavaScript() %>/tree.js"></script>
 <script type="text/javascript">
-	var layoutsIcons	= new Array();
+	var layoutsIcons = new Array();
+
 	layoutsIcons[0] = "<%= themeDisplay.getPathThemeImage() %>/trees/root.gif";
 	layoutsIcons[1] = "<%= themeDisplay.getPathThemeImage() %>/trees/spacer.gif";
 	layoutsIcons[2] = "<%= themeDisplay.getPathThemeImage() %>/trees/line.gif";
@@ -57,6 +58,7 @@
 		// position
 
 		name = "<nobr>" + name + "</nobr>";
+
 		if (selPlid.equals(objId)) {
 			name = "<b>" + name + "</b>";
 		}

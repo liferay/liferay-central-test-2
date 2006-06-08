@@ -33,10 +33,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
 if (group == null) {
-	group = layout.getGroup();
+	group = user.getGroup();
 }
 
-String groupId = BeanParamUtil.getString(group, request, "groupId");
+String groupId = group.getGroupId();
 
 String selPlid = ParamUtil.getString(request, "selPlid", Layout.DEFAULT_PARENT_LAYOUT_ID);
 String layoutId = Layout.getLayoutId(selPlid);

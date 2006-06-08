@@ -127,17 +127,8 @@ public class ServicePreAction extends Action {
 
 			// Company logo
 
-			String companyLogo = StringPool.BLANK;
-
-			if (true) {
-
-				// For now, always set the company logo URL. This behavior may
-				// change if it makes life easier for the theme designer. The
-				// company logo URL would then be blank if the company has never
-				// set a logo.
-
-				companyLogo = imagePath + "/company_logo?img_id=" + companyId;
-			}
+			String companyLogo =
+				imagePath + "/company_logo?img_id=" + companyId;
 
 			// User
 

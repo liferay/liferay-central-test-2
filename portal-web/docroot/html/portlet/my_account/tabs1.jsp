@@ -24,15 +24,17 @@
 
 <%@ include file="/html/portlet/my_account/init.jsp" %>
 
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
-	<portlet:param name="struts_action" value="/my_account/edit_pages" />
-	<portlet:param name="tabs2" value='<%= layout.isPrivateLayout() ? "private" : "public" %>' />
-</portlet:renderURL>
+<c:if test="<%= user.isLayoutsRequired() %>">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+		<portlet:param name="struts_action" value="/my_account/edit_pages" />
+		<portlet:param name="tabs2" value='<%= layout.isPrivateLayout() ? "private" : "public" %>' />
+	</portlet:renderURL>
 
-<c:if test="<%= portletName.equals(PortletKeys.MY_ACCOUNT) %>">
-	<liferay-ui:tabs
-		names="profile,pages"
-		url0="<%= themeDisplay.getURLMyAccount().toString() %>"
-		url1="<%= portletURL %>"
-	/>
+	<c:if test="<%= portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+		<liferay-ui:tabs
+			names="profile,pages"
+			url0="<%= themeDisplay.getURLMyAccount().toString() %>"
+			url1="<%= portletURL %>"
+		/>
+	</c:if>
 </c:if>

@@ -229,6 +229,30 @@ public class EditLookAndFeelAction extends PortletAction {
 			"portlet.portlet_configuration.edit_look_and_feel");
 	}
 
+	protected void checkPermissions(PortletRequest req) throws Exception {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		String ownerId = Layout.getOwnerId(themeDisplay.getPlid());
+		String groupId = Layout.getGroupId(ownerId);
+
+		String portletResource = ParamUtil.getString(req, "portletResource");
+		String resourcePrimKey =
+			themeDisplay.getPlid() + Portlet.LAYOUT_SEPARATOR + portletResource;
+
+		if (!permissionChecker.hasPermission(
+				groupId, portletResource, resourcePrimKey,
+				ActionKeys.CONFIGURATION) &&
+			!GroupPermission.contains(
+				permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
+
+			throw new PrincipalException();
+		}
+	}
+
 	protected void populateCollections(DynaActionForm form) {
 		form.set("listBorderWidths", listBorderWidths);
 		form.set("listBorderStyles", listBorderStyles);
@@ -286,30 +310,6 @@ public class EditLookAndFeelAction extends PortletAction {
 		portletSetup.setValue("portlet-setup-css", sb.toString());
 
 		portletSetup.store();
-	}
-
-	protected void checkPermissions(PortletRequest req) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		PermissionChecker permissionChecker =
-			themeDisplay.getPermissionChecker();
-
-		String ownerId = Layout.getOwnerId(themeDisplay.getPlid());
-		String groupId = Layout.getGroupId(ownerId);
-
-		String portletResource = ParamUtil.getString(req, "portletResource");
-		String resourcePrimKey =
-			themeDisplay.getPlid() + Portlet.LAYOUT_SEPARATOR + portletResource;
-
-		if (!permissionChecker.hasPermission(
-				groupId, portletResource, resourcePrimKey,
-				ActionKeys.CONFIGURATION) &&
-			!GroupPermission.contains(
-				permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
-
-			throw new PrincipalException();
-		}
 	}
 
 }

@@ -34,8 +34,11 @@ import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupServiceUtil;
@@ -44,8 +47,10 @@ import com.liferay.portal.service.spring.LayoutServiceUtil;
 import com.liferay.portal.service.spring.LayoutSetServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.PortletPreferencesImpl;
@@ -60,6 +65,7 @@ import java.util.List;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -81,6 +87,13 @@ public class EditPagesAction extends PortletAction {
 			ActionMapping mapping, ActionForm form, PortletConfig config,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
+
+		try {
+			checkPermissions(req);
+		}
+		catch (PrincipalException pe) {
+			return;
+		}
 
 		PageForm pageForm = (PageForm)form;
 
@@ -144,6 +157,15 @@ public class EditPagesAction extends PortletAction {
 		throws Exception {
 
 		try {
+			checkPermissions(req);
+		}
+		catch (PrincipalException pe) {
+			SessionErrors.add(req, PrincipalException.class.getName());
+
+			return mapping.findForward("portlet.communities.error");
+		}
+
+		try {
 			ActionUtil.getGroup(req);
 		}
 		catch (Exception e) {
@@ -162,6 +184,38 @@ public class EditPagesAction extends PortletAction {
 
 		return mapping.findForward(
 			getForward(req, "portlet.communities.edit_pages"));
+	}
+
+	protected void checkPermissions(PortletRequest req) throws Exception {
+
+		// See LEP-850
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		User user = themeDisplay.getUser();
+
+		String groupId = ParamUtil.getString(req, "groupId");
+
+		Group group = null;
+
+		if (Validator.isNotNull(groupId)) {
+			group = GroupLocalServiceUtil.getGroup(groupId);
+		}
+
+		if (group == null) {
+			group = user.getGroup();
+		}
+
+		GroupPermission.check(
+			themeDisplay.getPermissionChecker(), group.getGroupId(),
+			ActionKeys.MANAGE_LAYOUTS);
+
+		if (group.isUser() && group.getClassPK().equals(user.getUserId()) &&
+			!user.isLayoutsRequired()) {
+
+			throw new PrincipalException();
+		}
 	}
 
 	protected void copyPreferences(
