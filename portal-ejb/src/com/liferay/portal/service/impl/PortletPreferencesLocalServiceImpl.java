@@ -104,14 +104,6 @@ public class PortletPreferencesLocalServiceImpl
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				companyId, pk.portletId);
 
-			if (portlet == null) {
-				_log.warn(
-					"Returning preferences for a portlet that does not exist");
-
-				return PortletPreferencesSerializer.fromXML(
-					companyId, pk, Portlet.DEFAULT_PREFERENCES);
-			}
-
 			try {
 				portletPreferences =
 					PortletPreferencesUtil.findByPrimaryKey(pk);
@@ -119,7 +111,7 @@ public class PortletPreferencesLocalServiceImpl
 			catch (NoSuchPortletPreferencesException nsppe) {
 				portletPreferences = PortletPreferencesUtil.create(pk);
 
-				if (pk.portletId.equals(PortletKeys.LIFERAY_PORTAL)) {
+				if (portlet == null) {
 					portletPreferences.setPreferences(
 						Portlet.DEFAULT_PREFERENCES);
 				}
