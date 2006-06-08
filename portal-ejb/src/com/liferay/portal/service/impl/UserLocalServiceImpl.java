@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
 import com.liferay.mail.service.spring.MailServiceUtil;
 import com.liferay.portal.ContactBirthdayException;
 import com.liferay.portal.ContactFirstNameException;
@@ -41,7 +40,6 @@ import com.liferay.portal.ReservedUserIdException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
-import com.liferay.portal.UserIdValidator;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserPortraitException;
 import com.liferay.portal.UserSmsException;
@@ -79,6 +77,8 @@ import com.liferay.portal.service.spring.UserLocalService;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.UserIdGenerator;
+import com.liferay.portal.util.UserIdValidator;
 import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalServiceUtil;
 import com.liferay.portlet.enterpriseadmin.search.UserSearchTerms;
@@ -178,10 +178,15 @@ public class UserLocalServiceImpl implements UserLocalService {
 		validateOrganizations(companyId, organizationId, locationId);
 
 		if (autoUserId) {
-			userId =
-				companyId + "." +
-				Long.toString(CounterServiceUtil.increment(
-					User.class.getName() + "." + companyId));
+			UserIdGenerator userIdGenerator = (UserIdGenerator)InstancePool.get(
+				PropsUtil.get(PropsUtil.USERS_ID_GENERATOR));
+
+			try {
+				userId = userIdGenerator.generate(companyId);
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
 		}
 
 		if (autoPassword) {

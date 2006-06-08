@@ -134,6 +134,8 @@ public class PropsUtil {
 
 	public static final String USERS_ID_ALWAYS_AUTOGENERATE = "users.id.always.autogenerate";
 
+	public static final String USERS_ID_GENERATOR = "users.id.generator";
+
 	public static final String USERS_ID_VALIDATOR = "users.id.validator";
 
 	public static final String USERS_IMAGE_MAX_SIZE = "users.image.max.size";

@@ -22,69 +22,32 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.util.GetterUtil;
-
-import java.text.DateFormat;
-
-import java.util.Date;
+import com.liferay.portal.model.User;
+import com.liferay.util.Validator;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserIdValidator.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class UserIdValidator {
 
-	static String name = "Liferay Portal";
+	public boolean validate(String userId, String companyId) {
+		if (Validator.isNull(userId) ||
+			Validator.isNumber(userId) ||
+			Validator.isEmailAddress(userId) ||
+			(userId.equalsIgnoreCase("cyrus")) ||
+			(userId.equalsIgnoreCase("postfix")) ||
+			(userId.indexOf(User.DEFAULT) != -1) ||
+			(userId.indexOf(companyId) != -1) ||
+			(userId.indexOf("_") != -1)) {
 
-	static {
-		if (PropsUtil.get(PropsUtil.PORTAL_RELEASE).equals("enterprise")) {
-			name += " Enterprise";
+			return false;
 		}
 		else {
-			name += " Professional";
+			return true;
 		}
-	}
-
-	static String version = "4.0.0";
-
-	static String codeName = "Lloyd-Jones";
-
-	static String build = "2993";
-
-	static String date = "June 8, 2006";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
-	}
-
-	public static final String getCodeName() {
-		return codeName;
-	}
-
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
-	}
-
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
 	}
 
 }

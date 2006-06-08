@@ -977,7 +977,7 @@ public class JournalArticleLocalServiceImpl
 			SAXReader reader = new SAXReader();
 
 			Document doc = null;
-			
+
 			try {
 				doc = reader.read(new StringReader(content));
 
