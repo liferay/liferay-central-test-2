@@ -26,7 +26,7 @@
 		<servlet-class>com.liferay.portal.shared.servlet.PortletServlet</servlet-class>
 		<init-param>
 			<param-name>portlet-class</param-name>
-			<param-value>com.sample.samplejsfmyfacesportlet.portlet.MyFacesGenericPortlet</param-value>
+			<param-value>com.sample.jsfmyfaces.portlet.MyFacesGenericPortlet</param-value>
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>

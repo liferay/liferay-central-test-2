@@ -30,7 +30,7 @@
 	</servlet>
 	<servlet>
 		<servlet-name>TestSessionServlet</servlet-name>
-		<servlet-class>com.liferay.samplestrutsportlet.servlet.TestSessionServlet</servlet-class>
+		<servlet-class>com.liferay.struts.servlet.TestSessionServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet-mapping>
