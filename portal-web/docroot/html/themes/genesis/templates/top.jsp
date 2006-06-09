@@ -42,13 +42,13 @@
 						</c:if>
 
 						<c:if test="<%= themeDisplay.isSignedIn() %>">
-							<c:if test="<%= themeDisplay.getURLMyAccount() != null %>">
+							<c:if test="<%= themeDisplay.isShowMyAccountIcon() %>">
 								<a href="<%= themeDisplay.getURLMyAccount() %>"><bean:message key="my-account" /></a> -
 							</c:if>
 
 							<a href="<%= themeDisplay.getURLSignOut() %>"><bean:message key="sign-out" /></a><br />
-							<a href="javascript: void(0);" onClick="<%= themeDisplay.getURLAddContent() %>">Add Content</a>&nbsp;-&nbsp;
-							<a href="<%= themeDisplay.getURLPageSettings().toString() %>">Page Settings</a>
+							<a href="javascript: void(0);" onClick="<%= themeDisplay.getURLAddContent() %>"><bean:message key="add-content" /></a>&nbsp;-&nbsp;
+							<a href="<%= themeDisplay.getURLPageSettings().toString() %>"><bean:message key="page-settings" /></a>
 							<div id="layout-my-places"><liferay-portlet:runtime portletName="<%= PortletKeys.MY_PLACES %>" /></div>
 						</c:if>
 					</div>
