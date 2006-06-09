@@ -250,13 +250,15 @@ public class RenderResponseImpl implements RenderResponse {
 	}
 
 	public int getBufferSize() {
-		return 0;
+		return _res.getBufferSize();
 	}
 
 	public void setBufferSize(int size) {
+		_res.setBufferSize(size);
 	}
 
 	public void flushBuffer() throws IOException {
+		_res.flushBuffer();
 	}
 
 	public void resetBuffer() {
