@@ -44,6 +44,7 @@ public class ClassUtil {
 
 		StreamTokenizer st = new StreamTokenizer(
 			new BufferedReader(new FileReader(file)));
+
 		st.resetSyntax();
 		st.slashSlashComments(true);
 		st.slashStarComments(true);
@@ -135,7 +136,7 @@ public class ClassUtil {
 		}
 
 		for (Class x = a; x != null; x = x.getSuperclass()) {
-			if (x.getClass().getName().equals(s)) {
+			if (x.getName().equals(s)) {
 				return true;
 			}
 
