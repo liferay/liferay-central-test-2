@@ -22,17 +22,6 @@
 
 package com.sample.samplejsfmyfacesportlet.portlet;
 
-import java.io.IOException;
-
-import javax.portlet.GenericPortlet;
-import javax.portlet.PortletException;
-import javax.portlet.PortletRequestDispatcher;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="MyFacesGenericPortlet.java.html"><b><i>View Source</i></b></a>
  *

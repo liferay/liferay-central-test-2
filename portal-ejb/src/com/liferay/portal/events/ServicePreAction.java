@@ -423,6 +423,7 @@ public class ServicePreAction extends Action {
 						pageSettingsURL.setParameter("tabs2", "public");
 					}
 
+					pageSettingsURL.setParameter("groupId", portletGroupId);
 					pageSettingsURL.setParameter("selPlid", plid);
 
 					themeDisplay.setURLPageSettings(pageSettingsURL);

@@ -28,6 +28,7 @@
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 		<portlet:param name="struts_action" value="/my_account/edit_pages" />
 		<portlet:param name="tabs2" value='<%= layout.isPrivateLayout() ? "private" : "public" %>' />
+		<portlet:param name="groupId" value="<%= user.getGroup().getGroupId() %>" />
 	</portlet:renderURL>
 
 	<c:if test="<%= portletName.equals(PortletKeys.MY_ACCOUNT) %>">

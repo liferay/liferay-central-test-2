@@ -182,19 +182,28 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 <%
 String tabs2Names = "users,organizations,locations,community,guest,associated";
 
-if (layout.getGroup().isUser()) {
-	tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
-}
-
 if (modelResource.equals(Organization.class.getName()) || modelResource.equals("com.liferay.portal.model.Location")) {
 	tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
 	tabs2Names = StringUtil.replace(tabs2Names, "guest,", StringPool.BLANK);
 }
 else if (modelResource.equals(Layout.class.getName())) {
+	int x = resourcePrimKey.indexOf("ownerId=");
+	int y = resourcePrimKey.indexOf("}", x);
+
+	String ownerId = resourcePrimKey.substring(x + 8, y);
+	String groupId = Layout.getGroupId(ownerId);
+
+	Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+	// User layouts should not have community assignments
+
+	if (group.isUser()) {
+		tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
+	}
 
 	// Private layouts should not have guest assignments
 
-	if (resourcePrimKey.indexOf("ownerId=PRI.") != -1) {
+	if (Layout.isPrivateLayout(ownerId)) {
 		tabs2Names = StringUtil.replace(tabs2Names, "guest,", StringPool.BLANK);
 	}
 }

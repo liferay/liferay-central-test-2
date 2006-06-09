@@ -197,15 +197,7 @@ public class EditPagesAction extends PortletAction {
 
 		String groupId = ParamUtil.getString(req, "groupId");
 
-		Group group = null;
-
-		if (Validator.isNotNull(groupId)) {
-			group = GroupLocalServiceUtil.getGroup(groupId);
-		}
-
-		if (group == null) {
-			group = user.getGroup();
-		}
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		GroupPermission.check(
 			themeDisplay.getPermissionChecker(), group.getGroupId(),
