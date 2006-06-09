@@ -4,7 +4,8 @@
 	<portlet>
 		<portlet-name>sample_jsf_myfaces_portlet</portlet-name>
 		<display-name>Sample JSF MyFaces Portlet</display-name>
-		<portlet-class>org.apache.myfaces.portlet.MyFacesGenericPortlet</portlet-class>
+		<!--<portlet-class>org.apache.myfaces.portlet.MyFacesGenericPortlet</portlet-class>-->
+		<portlet-class>com.sample.samplejsfmyfacesportlet.portlet.MyFacesGenericPortlet</portlet-class>
 		<init-param>
 			<name>default-view</name>
 			<value>/index.jsp</value>
