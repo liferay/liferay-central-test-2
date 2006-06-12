@@ -15,6 +15,30 @@ var DragDrop = {
 	portletBoundName : "portlet-boundary",
 	start_next : null,
 
+	findHandle : function(curItem) {
+		items2 = curItem.getElementsByTagName("div");
+		items3 = curItem.getElementsByTagName("span");
+		foundHandle = null;
+
+		for (j = 0; j < items2.length; j++) {
+			if (items2[j].className && items2[j].className.match("portlet-title")) {
+				items2[j].style.cursor= "move";
+				foundHandle = items2[j];
+				break;
+			}
+		}
+		if (!foundHandle) {
+			for (j = 0; j < items3.length; j++) {
+				if (items3[j].className && items3[j].className.match("portlet-title")) {
+					items3[j].style.cursor= "move";
+					foundHandle = items3[j];
+					break;
+				}
+			}
+		}
+		return foundHandle;
+	},
+
 	makeListContainer : function(list, groupId, enableDragDrop) {
 		// each container becomes a linked list node
 		if (this.firstContainer == null) {
@@ -45,27 +69,7 @@ var DragDrop = {
 
 			if (curItem.className == DragDrop.portletBoundName) {
 				if (!curItem.isStatic && enableDragDrop) {
-					// if it's not static, make it moveable
-					items2 = curItem.getElementsByTagName("div");
-					items3 = curItem.getElementsByTagName("span");
-					foundHandle = null;
-
-					for (j = 0; j < items2.length; j++) {
-						if (items2[j].className && items2[j].className.match("portlet-title")) {
-							items2[j].style.cursor= "move";
-							foundHandle = items2[j];
-							break;
-						}
-					}
-					if (!foundHandle) {
-						for (j = 0; j < items3.length; j++) {
-							if (items3[j].className && items3[j].className.match("portlet-title")) {
-								items3[j].style.cursor= "move";
-								foundHandle = items3[j];
-								break;
-							}
-						}
-					}
+					foundHandle = this.findHandle(curItem);
 
 					if (foundHandle) {
 						DragDrop.makeItemDragable(curItem, foundHandle);

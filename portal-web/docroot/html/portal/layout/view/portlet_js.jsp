@@ -70,18 +70,9 @@ function addPortletReturn(xmlHttpReq) {
 
 	var portletBound = getElementByClassName(addDiv, "portlet-boundary");
 	var container = document.getElementById("layout-column_column-1");
-	var spanList = portletBound.getElementsByTagName("span");
-	var handle = null;
 
 	if (container == null) {
 		return;
-	}
-
-	for (var i = 0; i < spanList.length; i++) {
-		if (spanList[i].className && spanList[i].className.match("portlet-title")) {
-			handle = spanList[i];
-			break;
-		}
 	}
 
 	portletBound.parentNode.removeChild(portletBound);
@@ -96,10 +87,8 @@ function addPortletReturn(xmlHttpReq) {
 	container.removeChild(loadingDiv);
 	container.insertBefore(portletBound, container.endPlaceholder);
 
-	if (handle) {
-		handle.style.cursor = "move";
-		DragDrop.makeItemDragable(portletBound, handle);
-	}
+	var handle = DragDrop.findHandle(portletBound);
+	DragDrop.makeItemDragable(portletBound, handle);
 
 	if (window.location.hash) {
 		window.location.hash = "p_" + portletId;
