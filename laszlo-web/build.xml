@@ -4,7 +4,7 @@
 	<import file="../build-common-web.xml" />
 
 	<property name="deploy.dir" value="${app.server.ear}" />
-	<property name="lps.file" value="lps-3.1.war" />
+	<property name="lps.file" value="lps-3.3.1.war" />
 	<property name="war.file" value="${ant.project.name}.war" />
 
 	<target name="clean" depends="build-common-web.clean">

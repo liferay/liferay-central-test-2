@@ -53,7 +53,7 @@ JSTL 1.0.6 (removed META-INF/*.tld)
 JTA 1.0.1b
 jTDS 1.2
 jYMSG 0.6
-Laszlo 3.1 (patched to work with JDOM 1.0 and Commons HttpClient 3.0 RC4)
+Laszlo 3.3.1 (patched to work with Commons HttpClient 3.0)
 Log4j 1.2.12
 Lucene 1.9.1
 MSNM 1.2.2
