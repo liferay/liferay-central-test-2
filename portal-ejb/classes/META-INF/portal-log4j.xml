@@ -64,6 +64,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.lucene.LuceneFileExtractor">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.model.ModelHintsUtil">
 		<priority value="ERROR" />
 	</category>

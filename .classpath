@@ -74,6 +74,7 @@
 	<classpathentry kind="lib" path="lib/jabber.jar"/>
 	<classpathentry kind="lib" path="lib/jabberbeans.jar"/>
 	<classpathentry kind="lib" path="lib/jackrabbit-core.jar"/>
+	<classpathentry kind="lib" path="lib/jackrabbit-index-filters.jar"/>
 	<classpathentry kind="lib" path="lib/jackrabbit-jcr-commons.jar"/>
 	<classpathentry kind="lib" path="lib/jaim.jar"/>
 	<classpathentry kind="lib" path="lib/jalopy.jar"/>
@@ -105,6 +106,7 @@
 	<classpathentry kind="lib" path="lib/msnm.jar"/>
 	<classpathentry kind="lib" path="lib/myfaces.jar"/>
 	<classpathentry kind="lib" path="lib/mysql.jar"/>
+	<classpathentry kind="lib" path="lib/nekohtml.jar"/>
 	<classpathentry kind="lib" path="lib/netscape.jar"/>
 	<classpathentry kind="lib" path="lib/nfc-client.jar"/>
 	<classpathentry kind="lib" path="lib/nfc-server.jar"/>

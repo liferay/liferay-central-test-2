@@ -22,33 +22,34 @@
 
 package com.liferay.portal.lucene;
 
-import com.liferay.util.GetterUtil;
-import com.liferay.util.poi.XLSTextStripper;
+import com.liferay.util.StringPool;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.StringWriter;
 
-import javax.swing.text.DefaultStyledDocument;
-import javax.swing.text.html.HTMLEditorKit;
-import javax.swing.text.rtf.RTFEditorKit;
+import java.util.Iterator;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.jackrabbit.core.PropertyId;
+import org.apache.jackrabbit.core.query.HTMLTextFilter;
+import org.apache.jackrabbit.core.query.MsExcelTextFilter;
+import org.apache.jackrabbit.core.query.MsPowerPointTextFilter;
+import org.apache.jackrabbit.core.query.MsWordTextFilter;
+import org.apache.jackrabbit.core.query.OpenOfficeTextFilter;
+import org.apache.jackrabbit.core.query.PdfTextFilter;
+import org.apache.jackrabbit.core.query.RTFTextFilter;
+import org.apache.jackrabbit.core.query.TextFilter;
+import org.apache.jackrabbit.core.query.XMLTextFilter;
+import org.apache.jackrabbit.core.state.PropertyState;
+import org.apache.jackrabbit.core.value.InternalValue;
 import org.apache.lucene.document.Field;
-
-import org.pdfbox.pdfparser.PDFParser;
-import org.pdfbox.pdmodel.PDDocument;
-import org.pdfbox.util.PDFTextStripper;
-
-import org.textmining.text.extraction.WordExtractor;
 
 /**
  * <a href="LuceneFileExtractor.java.html"><b><i>View Source</i></b></a>
@@ -59,131 +60,87 @@ import org.textmining.text.extraction.WordExtractor;
 public class LuceneFileExtractor {
 
 	public Field getFile(String field, InputStream is, String fileExt) {
-		fileExt = fileExt.toLowerCase();
-
-		Reader reader = new BufferedReader(new InputStreamReader(is));
-
-		String text = null;
+		String text = StringPool.BLANK;
 
 		try {
+			fileExt = fileExt.toLowerCase();
+
+			PropertyId id = null;
+			PropertyState state = new PropertyState(id, 1, true);
+			InternalValue value = InternalValue.create(is);
+
+			state.setValues(new InternalValue[] {value});
+
+			TextFilter filter = null;
+
 			if (fileExt.equals(".doc")) {
-				try {
-					WordExtractor wordExtractor = new WordExtractor();
-
-					text = wordExtractor.extractText(is);
-					text = GetterUtil.getString(text);
-
-					/*WordDocument wordDocument = new WordDocument(is);
-
-					StringWriter stringWriter = new StringWriter();
-
-					wordDocument.writeAllText(stringWriter);
-
-					text = stringWriter.toString();
-
-					stringWriter.close();*/
-				}
-				catch (Exception e1) {
-					_log.error(e1.getMessage());
-				}
+				filter = new MsWordTextFilter();
 			}
 			else if (fileExt.equals(".htm") || fileExt.equals(".html")) {
-				try {
-					DefaultStyledDocument dsd = new DefaultStyledDocument();
+				filter = new HTMLTextFilter();
+			}
+			else if (fileExt.equals(".odp") || fileExt.equals(".ods") ||
+					 fileExt.equals(".odt")) {
 
-					HTMLEditorKit htmlEditorKit = new HTMLEditorKit();
-					htmlEditorKit.read(reader, dsd, 0);
-
-					text = dsd.getText(0, dsd.getLength());
-				}
-				catch (Exception e) {
-					_log.error(e);
-				}
+				filter = new OpenOfficeTextFilter();
 			}
 			else if (fileExt.equals(".pdf")) {
-				PDDocument pdDoc= null;
-				StringWriter stringWriter = null;
-
-				try {
-					PDFParser parser = new PDFParser(is);
-
-					parser.parse();
-
-					pdDoc = parser.getPDDocument();
-					stringWriter = new StringWriter();
-
-					PDFTextStripper stripper = new PDFTextStripper();
-
-					stripper.setLineSeparator("\n");
-					stripper.writeText(pdDoc, stringWriter);
-
-					text = stringWriter.toString();
-				}
-				catch (Exception e) {
-					_log.error(e);
-				}
-				finally {
-					try {
-						stringWriter.close();
-					}
-					catch (Exception e) {
-					}
-
-					try {
-						pdDoc.close();
-					}
-					catch (Exception e) {
-					}
-				}
+				filter = new PdfTextFilter();
+			}
+			else if (fileExt.equals(".ppt")) {
+				filter = new MsPowerPointTextFilter();
 			}
 			else if (fileExt.equals(".rtf")) {
-				try {
-					DefaultStyledDocument dsd = new DefaultStyledDocument();
-
-					RTFEditorKit rtfEditorKit = new RTFEditorKit();
-					rtfEditorKit.read(reader, dsd, 0);
-
-					text = dsd.getText(0, dsd.getLength());
-				}
-				catch (Exception e) {
-					_log.error(e);
-				}
+				filter = new RTFTextFilter();
 			}
 			else if (fileExt.equals(".xls")) {
-				try {
-					XLSTextStripper stripper = new XLSTextStripper(is);
-
-					text = stripper.getText();
-				}
-				catch (Exception e) {
-					_log.error(e);
-				}
+				filter = new MsExcelTextFilter();
+			}
+			else if (fileExt.equals(".xml")) {
+				filter = new XMLTextFilter();
 			}
 
-			if (text != null) {
-				return new Field(
-					field, text, Field.Store.YES, Field.Index.TOKENIZED);
-			}
-			else {
-				return new Field(field, reader);
-			}
-		}
-		finally {
-			if (text != null) {
-				try {
+			if (filter != null) {
+				_log.debug(
+					"Using filter " + filter.getClass().getName() +
+						" for extension " + fileExt);
+
+				StringBuffer sb = new StringBuffer();
+
+				Map fields = filter.doFilter(
+					state, System.getProperty("encoding"));
+
+				Iterator itr = fields.keySet().iterator();
+
+				while (itr.hasNext()) {
+					String key = (String)itr.next();
+
+					Reader reader = (Reader)fields.get(key);
+
+					int i;
+
+					while ((i = reader.read()) != -1) {
+						sb.append((char) i);
+					}
+
 					reader.close();
 				}
-				catch (Exception e) {
-				}
 
-				try {
-					is.close();
-				}
-				catch (Exception e) {
-				}
+				text = sb.toString();
+			}
+			else {
+				_log.debug("No filter found for extension " + fileExt);
 			}
 		}
+		catch (Exception e) {
+			_log.error(e);
+		}
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Filter returned text:\n\n" + text);
+		}
+
+		return new Field(field, text, Field.Store.YES, Field.Index.TOKENIZED);
 	}
 
 	public Field getFile(String field, byte[] byteArray, String fileExt)
