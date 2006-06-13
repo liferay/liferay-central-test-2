@@ -23,13 +23,16 @@
 package com.liferay.portlet.language.action;
 
 import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
+import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.ParamUtil;
@@ -86,6 +89,20 @@ public class ViewAction extends PortletAction {
 			LanguageUtil.getAvailableLocales());
 
 		if (availableLocales.contains(locale)) {
+			if (themeDisplay.isSignedIn()) {
+				User user = themeDisplay.getUser();
+
+				Contact contact = user.getContact();
+
+				AdminUtil.updateUser(
+					req, user.getUserId(), user.getEmailAddress(), languageId,
+					user.getTimeZoneId(), user.getGreeting(),
+					user.getResolution(), user.getComments(),
+					contact.getSmsSn(), contact.getAimSn(), contact.getIcqSn(),
+					contact.getMsnSn(), contact.getSkypeSn(),
+					contact.getYmSn());
+			}
+
 			httpSes.setAttribute(Globals.LOCALE_KEY, locale);
 
 			LanguageUtil.updateCookie(httpRes, locale);
