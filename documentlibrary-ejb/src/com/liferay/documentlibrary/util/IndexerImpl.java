@@ -203,8 +203,9 @@ public class IndexerImpl {
 			deleteFile(companyId, portletId, repositoryId, fileName);
 		}
 		catch (IOException ioe) {
-			addFile(companyId, portletId, groupId, repositoryId, fileName);
 		}
+
+		addFile(companyId, portletId, groupId, repositoryId, fileName);
 	}
 
 	private static Log _log = LogFactory.getLog(IndexerImpl.class);
