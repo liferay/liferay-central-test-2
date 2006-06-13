@@ -1,5 +1,5 @@
 ActiveMQ 3.2
-AjaxTags 1.1b1
+AjaxTags 1.2b2
 Ant 1.6.5
 Ant Contrib 0.6
 ANTLR 2.7.6 RC1

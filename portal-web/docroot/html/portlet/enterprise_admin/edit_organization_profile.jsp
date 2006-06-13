@@ -137,7 +137,7 @@ String statusId = BeanParamUtil.getString(organization, request, "statusId");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<select name="<portlet:namespace />countryId">
+				<select id="<portlet:namespace />countryId" name="<portlet:namespace />countryId">
 					<option value=""></option>
 
 					<%
@@ -202,10 +202,6 @@ String statusId = BeanParamUtil.getString(organization, request, "statusId");
 	function <portlet:namespace />selectCountryPost() {
 		setSelectedValue(document.<portlet:namespace />fm.<portlet:namespace />regionId, "<%= regionId %>");
 	}
-
-	function <portlet:namespace />selectCountryEmpty() {
-		document.<portlet:namespace />fm.<portlet:namespace />regionId.options.length = 0;
-	}
 </script>
 
 <ajax:select
@@ -214,5 +210,4 @@ String statusId = BeanParamUtil.getString(organization, request, "statusId");
 	target='<%= renderResponse.getNamespace() + "regionId" %>'
 	parameters='<%= "compress=0,countryId={" + renderResponse.getNamespace() + "countryId}" %>'
 	postFunction='<%= renderResponse.getNamespace() + "selectCountryPost" %>'
-	emptyFunction='<%= renderResponse.getNamespace() + "selectCountryEmpty" %>'
 />
