@@ -97,5 +97,5 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 </form>
 
 <script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />src.focus();
+	document.<portlet:namespace />fm.<portlet:namespace />movie.focus();
 </script>
