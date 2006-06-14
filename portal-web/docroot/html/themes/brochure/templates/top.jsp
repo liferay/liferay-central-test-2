@@ -52,8 +52,16 @@
 							</c:if>
 
 							<a href="<%= themeDisplay.getURLSignOut() %>"><bean:message key="sign-out" /></a><br />
-							<a href="javascript: void(0);" onClick="<%= themeDisplay.getURLAddContent() %>"><bean:message key="add-content" /></a>&nbsp;-&nbsp;
-							<a href="<%= themeDisplay.getURLPageSettings().toString() %>"><bean:message key="page-settings" /></a>
+
+							<c:if test="<%= themeDisplay.isShowAddContentIcon() %>">
+								<a href="javascript: void(0);" onClick="<%= themeDisplay.getURLAddContent() %>"><bean:message key="add-content" /></a>
+							</c:if>
+
+							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
+								-
+
+								<a href="<%= themeDisplay.getURLPageSettings().toString() %>"><bean:message key="page-settings" /></a>
+							</c:if>
 						</c:if>
 					</div>
 				</div>
