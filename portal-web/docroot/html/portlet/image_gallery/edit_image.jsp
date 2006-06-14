@@ -34,52 +34,18 @@ String imageId = BeanParamUtil.getString(image, request, "imageId");
 String folderId = BeanParamUtil.getString(image, request, "folderId");
 %>
 
-<script type="text/javascript">
-	function <portlet:namespace />saveImage() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= image == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-</script>
-
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/edit_image" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveImage(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />imageId" type="hidden" value="<%= imageId %>">
-<input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>">
-
 <liferay-ui:tabs names="image" />
-
-<liferay-ui:error exception="<%= ImageNameException.class %>">
-
-	<%
-	String[] imageExtensions = PropsUtil.getArray(PropsUtil.IG_IMAGE_EXTENSIONS);
-	%>
-
-	<%= LanguageUtil.get(pageContext, "image-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(imageExtensions, ", ") %>.
-</liferay-ui:error>
-
-<liferay-ui:error exception="<%= ImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
 <%= IGUtil.getBreadcrumbs(folderId, null, pageContext, renderRequest, renderResponse) %>
 
 <br><br>
-
-<%
-String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(PropsUtil.IG_IMAGE_MAX_SIZE)) / 1024);
-%>
-
-<c:if test='<%= !imageMaxSize.equals("0") %>'>
-	<%= LanguageUtil.format(pageContext, "upload-images-no-larger-than-x-k", imageMaxSize, false) %>
-
-	<br><br>
-</c:if>
 
 <table border="0" cellpadding="0" cellspacing="0">
 
 <c:if test="<%= image != null %>">
 	<tr>
 		<td>
-			<b><%= LanguageUtil.get(pageContext, "thumbnail") %></b>
+			<%= LanguageUtil.get(pageContext, "thumbnail") %>
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
@@ -95,7 +61,7 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 	</tr>
 	<tr>
 		<td>
-			<b><%= LanguageUtil.get(pageContext, "height") %></b>
+			<%= LanguageUtil.get(pageContext, "height") %>
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
@@ -104,7 +70,7 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 	</tr>
 	<tr>
 		<td>
-			<b><%= LanguageUtil.get(pageContext, "width") %></b>
+			<%= LanguageUtil.get(pageContext, "width") %>
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
@@ -113,7 +79,7 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 	</tr>
 	<tr>
 		<td>
-			<b><%= LanguageUtil.get(pageContext, "size") %></b>
+			<%= LanguageUtil.get(pageContext, "size") %>
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
@@ -127,7 +93,7 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 	</tr>
 	<tr>
 		<td>
-			<b><%= LanguageUtil.get(pageContext, "url") %></b>
+			<%= LanguageUtil.get(pageContext, "url") %>
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
@@ -143,52 +109,22 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 	</tr>
 </c:if>
 
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "file") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<input class="form-text" name="<portlet:namespace />file" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="file">
-	</td>
-</tr>
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "description") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<liferay-ui:input-field model="<%= IGImage.class %>" bean="<%= image %>" field="description" />
-	</td>
-</tr>
-
-<c:if test="<%= image == null %>">
-	<tr>
-		<td colspan="3">
-			<br>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<%= LanguageUtil.get(pageContext, "permissions") %>
-		</td>
-		<td style="padding-left: 10px;"></td>
-		<td>
-			<liferay-ui:input-permissions />
-		</td>
-	</tr>
-</c:if>
-
 </table>
 
-<br>
+<%
+String uploadProgressId = "igImageUploadProgress";
+%>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="portletURL">
+	<portlet:param name="struts_action" value="/image_gallery/edit_image" />
+	<portlet:param name="redirect" value="<%= redirect %>" />
+	<portlet:param name="uploadProgressId" value="<%= uploadProgressId %>" />
+	<portlet:param name="imageId" value="<%= imageId %>" />
+	<portlet:param name="folderId" value="<%= folderId %>" />
+</portlet:renderURL>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
-
-</form>
-
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />file.focus();
-</script>
+<liferay-ui:upload-progress
+	id="<%= uploadProgressId %>"
+	iframeSrc="<%= portletURL %>"
+	redirect="<%= redirect %>"
+/>

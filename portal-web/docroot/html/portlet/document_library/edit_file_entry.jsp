@@ -44,10 +44,6 @@ portletURL.setParameter("name", name);
 
 <script type="text/javascript">
 	function <portlet:namespace />saveFileEntry() {
-		if (document.<portlet:namespace />fm.<portlet:namespace />file.value != "") {
-			<liferay-ui:upload-progress />
-		}
-
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= fileEntry == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}

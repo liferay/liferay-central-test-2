@@ -279,7 +279,7 @@ if (urlBack != null) {
 		</c:choose>
 	</c:when>
 	<c:otherwise>
-		<table border="0" cellpadding="8" cellspacing="0" width="100%">
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
 			<td>
 				<c:if test="<%= Validator.isNotNull(tilesPortletContent) %>">

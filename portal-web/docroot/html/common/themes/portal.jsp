@@ -24,12 +24,18 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
+<tiles:useAttribute id="tilesPopUp" name="pop_up" classname="java.lang.String" ignore="true" />
+
+<%
+boolean popUp = GetterUtil.getBoolean(tilesPopUp);
+%>
+
 <c:choose>
-	<c:when test="<%= !themeDisplay.isStatePopUp() %>">
-		<liferay-theme:include page="portal_normal.jsp" />
+	<c:when test="<%= popUp || themeDisplay.isStatePopUp() %>">
+		<liferay-theme:include page="portal_pop_up.jsp" />
 	</c:when>
 	<c:otherwise>
-		<liferay-theme:include page="portal_pop_up.jsp" />
+		<liferay-theme:include page="portal_normal.jsp" />
 	</c:otherwise>
 </c:choose>
 

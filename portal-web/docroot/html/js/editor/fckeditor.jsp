@@ -40,7 +40,7 @@ String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METH
 
 <head>
 	<title>Editor</title>
-	<script type="text/javascript" src="fckeditor/fckeditor.js"></script>
+	<script src="fckeditor/fckeditor.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		function getHTML() {
 			return FCKeditorAPI.GetInstance("FCKeditor1").GetXHTML();

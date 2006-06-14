@@ -22,37 +22,34 @@
  */
 %>
 
-<%@ include file="/html/common/init.jsp" %>
+<%@ include file="/html/portal/init.jsp" %>
 
-<html dir="<bean:message key="lang.dir" />">
+<%
+String fileName = GetterUtil.getString((String)session.getAttribute(LiferayFileUpload.FILE_NAME));
 
-<head>
-	<meta content="<%= Constants.TEXT_HTML %>; charset=<%= LanguageUtil.getCharset(locale) %>" http-equiv="content-type">
-	<meta content="no-cache" http-equiv="Cache-Control">
-	<meta content="no-cache" http-equiv="Pragma">
-	<meta content="0" http-equiv="Expires">
-	<script src="<%= themeDisplay.getPathJavaScript() %>/xp_progress.js" type="text/javascript"></script>
-</head>
+Float percent = (Float)session.getAttribute(LiferayFileUpload.PERCENT);
 
-<body onLoad="self.location = '<%= themeDisplay.getPathMain() %>/portal/protected';">
+if (percent == null) {
+	percent = new Float(1);
+}
 
-<center>
+if (percent.floatValue() >= 1) {
+	session.removeAttribute(LiferayFileUpload.FILE_NAME);
+	session.removeAttribute(LiferayFileUpload.PERCENT);
+}
+%>
 
-<table border="0" cellpadding="0" cellspacing="0" height="100%" width="600">
-<tr>
-	<td align="center" valign="middle">
-		<font face="Verdana, Tahoma, Arial" size="3">
-		<b><%= LanguageUtil.get(pageContext, "processing-login") %>
-		</font><br><br>
+<html>
 
-		<script type="text/javascript">
-		var progressBar = createBar(300, 15, "#FFFFFF", 1, "#000000", "<%= colorScheme.getPortletTitleBg() %>", 85, 7, 3, "");
-		</script>
-	</td>
-</tr>
-</table>
+<body>
 
-</center>
+<script type="text/javascript">
+	parent.igImageUploadProgress.updateBar(<%= (int)(percent.floatValue() * 100) %>, "<%= fileName %>");
+
+	<c:if test="<%= percent.floatValue() < 1 %>">
+		setTimeout("window.location.reload();", 1000);
+	</c:if>
+</script>
 
 </body>
 

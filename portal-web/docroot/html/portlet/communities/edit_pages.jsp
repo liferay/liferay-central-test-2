@@ -178,6 +178,7 @@ portletURL.setParameter("groupId", groupId);
 
 		<script type="text/javascript">
 			var layoutsTree = new Tree("layoutsTree", layoutsArray, layoutsIcons, "gamma");
+
 			layoutsTree.create("<%= SessionTreeJSClicks.getOpenNodes(request, "layoutsTree") %>");
 		</script>
 	</td>

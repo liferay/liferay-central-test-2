@@ -22,7 +22,8 @@
  */
 %>
 
-<script language="JavaScript" src="<%= themeDisplay.getPathJavaScript() %>/tree.js"></script>
+<script src="<%= themeDisplay.getPathJavaScript() %>/tree.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 	var layoutsIcons = new Array();
 

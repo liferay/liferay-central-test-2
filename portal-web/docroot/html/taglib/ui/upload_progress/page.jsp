@@ -24,9 +24,35 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%--var winWidth = 400;
-var winHeight = 140;
-var winLeft = (screen.width - winWidth) / 2;
-var winTop = (screen.height - winHeight) / 2;
-var uploadProgressWindow = window.open('<%= themeDisplay.getPathMain() %>/portal/upload_progress?p_p_state=<%= LiferayWindowState.POP_UP %>&cache_control=0', 'uploadProgress', 'top=' + winTop + ',left=' + winLeft + ',height=' + winHeight + ',width=' + winWidth + ',directories=no,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no');
-uploadProgressWindow.focus();--%>
+<%
+String id = (String)request.getAttribute("liferay-ui:upload-progress:id");
+String iframeSrc = (String)request.getAttribute("liferay-ui:upload-progress:iframe-src");
+String redirect = (String)request.getAttribute("liferay-ui:upload-progress:redirect");
+%>
+
+<script src="<%= themeDisplay.getPathJavaScript() %>/upload_progress.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	var igImageUploadProgress = new UploadProgress("<%= id %>", "<%= themeDisplay.getPathMain() %>", "<%= Http.encodeURL(redirect) %>");
+</script>
+
+<iframe frameborder="0" id="<%= id %>-iframe" src="<%= iframeSrc %>" style="width: 100%;"></iframe>
+
+<iframe frameborder="0" id="<%= id %>-poller" src="" style="width: 0; height: 0;"></iframe>
+
+<div id="<%= id %>-bar-div" style="text-align: center; display: none;">
+	<br>
+
+	<div style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/incomplete_middle.gif) scroll repeat-x top left; margin: auto; text-align: left; width: 80%;">
+		<div style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/incomplete_left.gif) scroll no-repeat top left;">
+			<div style="height: 23px; background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/incomplete_right.gif) scroll no-repeat top right;">
+				<div id="<%= id %>-bar" style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/complete_middle.gif) scroll repeat-x top left; overflow: hidden; width: 0;">
+					<div style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/complete_left.gif) scroll no-repeat top left;">
+						<div class="font-small" style="font-weight: bold; height: 23px; padding-top: 3px; text-align: center; background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/complete_right.gif) scroll no-repeat top right;">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

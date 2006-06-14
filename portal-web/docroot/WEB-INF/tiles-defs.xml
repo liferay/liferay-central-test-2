@@ -17,6 +17,7 @@
 	<definition name="portal" path="/common/themes/portal.jsp">
 		<put name="title" value="" />
 		<put name="selectable" value="false" />
+		<put name="pop_up" value="false" />
 	</definition>
 
 	<definition name="portal.change_password" extends="portal">
@@ -70,8 +71,9 @@
 		<put name="content" value="/portal/test.jsp" />
 	</definition>
 
-	<definition name="portal.upload_progress" extends="portal">
-		<put name="content" value="/portal/upload_progress.jsp" />
+	<definition name="portal.upload_progress_poller" extends="portal">
+		<put name="content" value="/portal/upload_progress_poller.jsp" />
+		<put name="pop_up" value="true" />
 	</definition>
 
 	<!-- Address Book -->
@@ -479,6 +481,10 @@
 
 	<definition name="portlet.image_gallery.edit_image" extends="portlet.image_gallery">
 		<put name="portlet_content" value="/portlet/image_gallery/edit_image.jsp" />
+	</definition>
+
+	<definition name="portlet.image_gallery.edit_image_form" extends="portlet.image_gallery">
+		<put name="portlet_content" value="/portlet/image_gallery/edit_image_form.jsp" />
 	</definition>
 
 	<definition name="portlet.image_gallery.error" extends="portlet.image_gallery">

@@ -164,7 +164,7 @@
 
 		<action path="/portal/update_terms_of_use" type="com.liferay.portal.action.UpdateTermsOfUseAction" />
 
-		<action path="/portal/upload_progress" forward="portal.upload_progress" />
+		<action path="/portal/upload_progress_poller" forward="portal.upload_progress_poller" />
 
 		<action path="/portal/xml_regions" type="com.liferay.portal.action.XMLRegionsAction" />
 
@@ -597,6 +597,7 @@
 
 		<action path="/image_gallery/edit_image" type="com.liferay.portlet.imagegallery.action.EditImageAction">
 			<forward name="portlet.image_gallery.edit_image" path="portlet.image_gallery.edit_image" />
+			<forward name="portlet.image_gallery.edit_image_form" path="portlet.image_gallery.edit_image_form" />
 			<forward name="portlet.image_gallery.error" path="portlet.image_gallery.error" />
 		</action>
 

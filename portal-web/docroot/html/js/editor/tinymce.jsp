@@ -31,9 +31,9 @@ String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
 <html>
 <head>
 	<title>Editor</title>
-	<script language="JavaScript" src="../sniffer.js"></script>
-	<script language="JavaScript" src="../util.js"></script>
-	<script language="javascript" type="text/javascript" src="tinymce/tiny_mce.js"></script>
+	<script src="../sniffer.js" type="text/javascript"></script>
+	<script src="../util.js" type="text/javascript"></script>
+	<script src="tinymce/tiny_mce.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		tinyMCE.init({
 			mode : "textareas",
