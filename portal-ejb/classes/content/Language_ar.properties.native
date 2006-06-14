@@ -1475,7 +1475,6 @@ posted-as-a-reply-to=مرسلة كردّ على: <a href="{0}">رسالة رقم
 posted-by=مرسلة من
 pound=رطل
 precompile-jsps-for-faster-speed=Precompile jsps for faster speed.
-precompile-jsps=Precompile JSPs
 preferences=التفضيلات
 prefix=البادئ
 press-release=بيان صحفي
@@ -1593,7 +1592,6 @@ romanian=روماني
 root=الجذر
 rounded-edges=حواف مدوّرة
 ru_en=روسي إلى إنجليزي
-run-garbage-collector=أطلق منظف الذاكرة
 run-the-garbage-collector-to-free-up-memory=أطلق منظف الذاكرة للحصول على مزيد من الذاكرة من خلال تفريغ الأجزاء المهملة.
 russian=روسي
 safe-search=بحث آمن

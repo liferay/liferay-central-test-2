@@ -47,6 +47,8 @@ import org.hibernate.cache.Timestamper;
 public class OSCache implements Cache {
 
 	public OSCache(int refreshPeriod, String cron, String region) {
+		CacheRegistry.register(this);
+
 		_refreshPeriod = refreshPeriod;
 		_cron = cron;
 		_regionName = region;

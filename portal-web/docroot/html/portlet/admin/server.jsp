@@ -101,18 +101,6 @@ numberFormat = NumberFormat.getInstance(locale);
 	<c:otherwise>
 		<br><div class="beta-separator"></div><br>
 
-		<%= LanguageUtil.get(pageContext, "run-the-garbage-collector-to-free-up-memory") %>
-
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "run-garbage-collector") %>' onClick="<portlet:namespace />saveServer('gc');">
-
-		<br><br>
-
-		<%= LanguageUtil.get(pageContext, "precompile-jsps-for-faster-speed") %>
-
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "precompile-jsps") %>' onClick="<portlet:namespace />saveServer('precompile');"><br>
-
-		<br><div class="beta-separator"></div><br>
-
 		<%= LanguageUtil.get(pageContext, "shutdown-the-server-in-the-specified-number-of-minutes") %>
 
 		<br><br>
@@ -145,6 +133,77 @@ numberFormat = NumberFormat.getInstance(locale);
 		<br><div class="beta-separator"></div><br>
 
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+			<td>
+				<table border="0" cellpadding="4" cellspacing="0" width="100%">
+				<tr>
+					<td class="beta-gradient">
+						<b><%= LanguageUtil.get(pageContext, "tasks") %>:</b>
+					</td>
+					<td align="right" class="beta-gradient">
+						<span style="font-size: xx-small;">
+						[
+						<a href="javascript: document.getElementById('<portlet:namespace />tasks').style.display = ''; void(''); self.focus();"><%= LanguageUtil.get(pageContext, "show") %></a>
+						/
+						<a href="javascript: document.getElementById('<portlet:namespace />tasks').style.display = 'none'; void(''); self.focus();"><%= LanguageUtil.get(pageContext, "hide") %></a>
+						]
+						</span>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td id="<portlet:namespace />tasks" style="display: none;">
+				<table border="0" cellpadding="4" cellspacing="0" width="100%">
+				<tr class="portlet-section-alternate">
+					<td>
+						<%= LanguageUtil.get(pageContext, "run-the-garbage-collector-to-free-up-memory") %>
+					</td>
+					</td>
+					<td align="right">
+						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('gc');">
+					</td>
+				</tr>
+				<tr class="portlet-section-body">
+					<td>
+						<%= LanguageUtil.get(pageContext, "clear-content-cached-by-this-vm") %>
+					</td>
+					</td>
+					<td align="right">
+						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('cacheSingle');">
+					</td>
+				</tr>
+				<tr class="portlet-section-alternate">
+					<td>
+						<%= LanguageUtil.get(pageContext, "clear-content-cached-across-the-cluster") %>
+					</td>
+					</td>
+					<td align="right">
+						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('cacheMulti');">
+					</td>
+				</tr>
+				<tr class="portlet-section-body">
+					<td>
+						<%= LanguageUtil.get(pageContext, "clear-the-database-cache") %>
+					</td>
+					</td>
+					<td align="right">
+						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('cacheDb');">
+					</td>
+				</tr>
+				<tr class="portlet-section-alternate">
+					<td>
+						<%= LanguageUtil.get(pageContext, "precompile-jsps-for-faster-speed") %>
+					</td>
+					</td>
+					<td align="right">
+						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('precompile');">
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
 		<tr>
 			<td>
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">

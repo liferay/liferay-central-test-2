@@ -46,6 +46,10 @@ public class WebCachePool {
 			PropsFiles.CACHE_SINGLE_VM).getProperties());
 	}
 
+	public static void clear() {
+		cache.flushAll();
+	}
+
 	public static Object get(String key, WebCacheable wc) {
 		Object obj = null;
 

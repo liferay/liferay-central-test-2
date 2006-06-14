@@ -422,10 +422,6 @@ public class PropsUtil {
 
 	public static final String LUCENE_ANALYZER = "lucene.analyzer";
 
-	// Value Object
-
-	public static final String VALUE_OBJECT_CACHEABLE = "value.object.cacheable";
-
 	// Last Modified
 
 	public static final String LAST_MODIFIED_CHECK = "last.modified.check";
@@ -435,92 +431,6 @@ public class PropsUtil {
 	// XSS (Cross Site Scripting)
 
 	public static final String XSS_ALLOW = "xss.allow";
-
-	// Cache Server
-
-	public static final String CACHE_CLEAR_ON_STARTUP = "cache.clear.on.startup";
-
-	// Document Library Server
-
-	public static final String DL_ROOT_DIR = "dl.root.dir";
-
-	public static final String DL_VERSION_ROOT_DIR = "dl.version.root.dir";
-
-	public static final String DL_FILE_MAX_SIZE = "dl.file.max.size";
-
-	public static final String DL_FILE_EXTENSIONS = "dl.file.extensions";
-
-	public static final String DL_VERSION_CACHE_DIRECTORY_VIEWS = "dl.version.cache.directory.views";
-
-	// Mail Server
-
-	public static final String MAIL_MX_UPDATE = "mail.mx.update";
-
-	public static final String MAIL_HOOK_IMPL = "mail.hook.impl";
-
-	public static final String MAIL_HOOK_CYRUS_ADD_USER = "mail.hook.cyrus.add.user";
-
-	public static final String MAIL_HOOK_CYRUS_DELETE_USER = "mail.hook.cyrus.delete.user";
-
-	public static final String MAIL_HOOK_CYRUS_HOME = "mail.hook.cyrus.home";
-
-	public static final String MAIL_HOOK_RHEMS_ADD_USER = "mail.hook.rhems.add.user";
-
-	public static final String MAIL_HOOK_RHEMS_DELETE_USER = "mail.hook.rhems.delete.user";
-
-	public static final String MAIL_HOOK_RHEMS_LDAP_INITIAL_CONTEXT_FACTORY = "mail.hook.rhems.ldap.initial.context.factory";
-
-	public static final String MAIL_HOOK_RHEMS_LDAP_SERVER_CONTEXT = "mail.hook.rhems.ldap.server.context";
-
-	public static final String MAIL_HOOK_RHEMS_LDAP_SECURITY_AUTHENTICATION = "mail.hook.rhems.ldap.security.authentication";
-
-	public static final String MAIL_HOOK_RHEMS_LDAP_SECURITY_PRINCIPAL = "mail.hook.rhems.ldap.security.principal";
-
-	public static final String MAIL_HOOK_RHEMS_LDAP_SECURITY_CREDENTIALS = "mail.hook.rhems.ldap.security.credentials";
-
-	public static final String MAIL_HOOK_RHEMS_LOGIN = "mail.hook.rhems.login";
-
-	public static final String MAIL_HOOK_RHEMS_WEB_SERVER = "mail.hook.rhems.web.server";
-
-	public static final String MAIL_HOOK_SENDMAIL_ADD_USER = "mail.hook.sendmail.add.user";
-
-	public static final String MAIL_HOOK_SENDMAIL_CHANGE_PASSWORD = "mail.hook.sendmail.change.password";
-
-	public static final String MAIL_HOOK_SENDMAIL_DELETE_USER = "mail.hook.sendmail.delete.user";
-
-	public static final String MAIL_HOOK_SENDMAIL_HOME = "mail.hook.sendmail.home";
-
-	public static final String MAIL_HOOK_SENDMAIL_VIRTUSERTABLE = "mail.hook.sendmail.virtusertable";
-
-	public static final String MAIL_HOOK_SENDMAIL_VIRTUSERTABLE_REFRESH = "mail.hook.sendmail.virtusertable.refresh";
-
-	public static final String MAIL_HOOK_SHELL_SCRIPT = "mail.hook.shell.script";
-
-	public static final String MAIL_BOX_STYLE = "mail.box.style";
-
-	public static final String MAIL_INBOX_NAME = "mail.inbox.name";
-
-	public static final String MAIL_JUNK_NAME = "mail.junk.name";
-
-	public static final String MAIL_SENT_NAME = "mail.sent.name";
-
-	public static final String MAIL_DRAFTS_NAME = "mail.drafts.name";
-
-	public static final String MAIL_TRASH_NAME = "mail.trash.name";
-
-	public static final String MAIL_JUNK_MAIL_WARNING_SIZE = "mail.junk-mail.warning.size";
-
-	public static final String MAIL_TRASH_WARNING_SIZE = "mail.trash.warning.size";
-
-	public static final String MAIL_USERNAME_REPLACE = "mail.username.replace";
-
-	public static final String MAIL_SMTP_DEBUG = "mail.smtp.debug";
-
-	public static final String MAIL_AUDIT_TRAIL = "mail.audit.trail";
-
-	public static final String MAIL_ATTACHMENTS_MAX_SIZE = "mail.attachments.max.size";
-
-	public static final String MAIL_ACCOUNT_FINDER = "mail.account.finder";
 
 	// JCR
 
@@ -592,6 +502,18 @@ public class PropsUtil {
 
 	public static final String CHAT_SERVER_DEFAULT_PORT = "chat.server.default.port";
 
+	// Document Library Portlet
+
+	public static final String DL_ROOT_DIR = "dl.root.dir";
+
+	public static final String DL_VERSION_ROOT_DIR = "dl.version.root.dir";
+
+	public static final String DL_FILE_MAX_SIZE = "dl.file.max.size";
+
+	public static final String DL_FILE_EXTENSIONS = "dl.file.extensions";
+
+	public static final String DL_VERSION_CACHE_DIRECTORY_VIEWS = "dl.version.cache.directory.views";
+
 	// Image Gallery Portlet
 
 	public static final String IG_IMAGE_MAX_SIZE = "ig.image.max.size";
@@ -643,6 +565,76 @@ public class PropsUtil {
 	public static final String JOURNAL_EMAIL_ARTICLE_REVIEW_SUBJECT = "journal.email.article.review.subject";
 	
 	public static final String JOURNAL_EMAIL_ARTICLE_REVIEW_BODY = "journal.email.article.review.body";
+
+	// Mail Portlet
+
+	public static final String MAIL_MX_UPDATE = "mail.mx.update";
+
+	public static final String MAIL_HOOK_IMPL = "mail.hook.impl";
+
+	public static final String MAIL_HOOK_CYRUS_ADD_USER = "mail.hook.cyrus.add.user";
+
+	public static final String MAIL_HOOK_CYRUS_DELETE_USER = "mail.hook.cyrus.delete.user";
+
+	public static final String MAIL_HOOK_CYRUS_HOME = "mail.hook.cyrus.home";
+
+	public static final String MAIL_HOOK_RHEMS_ADD_USER = "mail.hook.rhems.add.user";
+
+	public static final String MAIL_HOOK_RHEMS_DELETE_USER = "mail.hook.rhems.delete.user";
+
+	public static final String MAIL_HOOK_RHEMS_LDAP_INITIAL_CONTEXT_FACTORY = "mail.hook.rhems.ldap.initial.context.factory";
+
+	public static final String MAIL_HOOK_RHEMS_LDAP_SERVER_CONTEXT = "mail.hook.rhems.ldap.server.context";
+
+	public static final String MAIL_HOOK_RHEMS_LDAP_SECURITY_AUTHENTICATION = "mail.hook.rhems.ldap.security.authentication";
+
+	public static final String MAIL_HOOK_RHEMS_LDAP_SECURITY_PRINCIPAL = "mail.hook.rhems.ldap.security.principal";
+
+	public static final String MAIL_HOOK_RHEMS_LDAP_SECURITY_CREDENTIALS = "mail.hook.rhems.ldap.security.credentials";
+
+	public static final String MAIL_HOOK_RHEMS_LOGIN = "mail.hook.rhems.login";
+
+	public static final String MAIL_HOOK_RHEMS_WEB_SERVER = "mail.hook.rhems.web.server";
+
+	public static final String MAIL_HOOK_SENDMAIL_ADD_USER = "mail.hook.sendmail.add.user";
+
+	public static final String MAIL_HOOK_SENDMAIL_CHANGE_PASSWORD = "mail.hook.sendmail.change.password";
+
+	public static final String MAIL_HOOK_SENDMAIL_DELETE_USER = "mail.hook.sendmail.delete.user";
+
+	public static final String MAIL_HOOK_SENDMAIL_HOME = "mail.hook.sendmail.home";
+
+	public static final String MAIL_HOOK_SENDMAIL_VIRTUSERTABLE = "mail.hook.sendmail.virtusertable";
+
+	public static final String MAIL_HOOK_SENDMAIL_VIRTUSERTABLE_REFRESH = "mail.hook.sendmail.virtusertable.refresh";
+
+	public static final String MAIL_HOOK_SHELL_SCRIPT = "mail.hook.shell.script";
+
+	public static final String MAIL_BOX_STYLE = "mail.box.style";
+
+	public static final String MAIL_INBOX_NAME = "mail.inbox.name";
+
+	public static final String MAIL_JUNK_NAME = "mail.junk.name";
+
+	public static final String MAIL_SENT_NAME = "mail.sent.name";
+
+	public static final String MAIL_DRAFTS_NAME = "mail.drafts.name";
+
+	public static final String MAIL_TRASH_NAME = "mail.trash.name";
+
+	public static final String MAIL_JUNK_MAIL_WARNING_SIZE = "mail.junk-mail.warning.size";
+
+	public static final String MAIL_TRASH_WARNING_SIZE = "mail.trash.warning.size";
+
+	public static final String MAIL_USERNAME_REPLACE = "mail.username.replace";
+
+	public static final String MAIL_SMTP_DEBUG = "mail.smtp.debug";
+
+	public static final String MAIL_AUDIT_TRAIL = "mail.audit.trail";
+
+	public static final String MAIL_ATTACHMENTS_MAX_SIZE = "mail.attachments.max.size";
+
+	public static final String MAIL_ACCOUNT_FINDER = "mail.account.finder";
 
 	// Message Boards Portlet
 

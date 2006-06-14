@@ -25,14 +25,19 @@ package com.liferay.portlet.admin.action;
 import com.liferay.portal.deploy.AutoDeployLayoutTemplateListener;
 import com.liferay.portal.deploy.AutoDeployPortletListener;
 import com.liferay.portal.deploy.AutoDeployThemeListener;
+import com.liferay.portal.lastmodified.LastModifiedCSS;
+import com.liferay.portal.lastmodified.LastModifiedJavaScript;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.shared.deploy.AutoDeployDir;
 import com.liferay.portal.shared.deploy.AutoDeployUtil;
+import com.liferay.portal.spring.hibernate.CacheRegistry;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.ClusterPool;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.EntityResolver;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ShutdownUtil;
+import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
@@ -99,6 +104,15 @@ public class EditServerAction extends PortletAction {
 		if (cmd.equals("autoDeploy")) {
 			autoDeploy(req);
 		}
+		else if (cmd.equals("cacheDb")) {
+			cacheDb();
+		}
+		else if (cmd.equals("cacheMulti")) {
+			cacheMulti();
+		}
+		else if (cmd.equals("cacheSingle")) {
+			cacheSingle();
+		}
 		else if (cmd.equals("gc")) {
 			gc();
 		}
@@ -159,6 +173,20 @@ public class EditServerAction extends PortletAction {
 			interval, autoDeployListeners);
 
 		AutoDeployUtil.registerDir(autoDeployDir);
+	}
+
+	protected void cacheDb() throws Exception {
+		CacheRegistry.clear();
+	}
+
+	protected void cacheMulti() throws Exception {
+		ClusterPool.clear();
+	}
+
+	protected void cacheSingle() throws Exception {
+		LastModifiedCSS.clear();
+		LastModifiedJavaScript.clear();
+		WebCachePool.clear();
 	}
 
 	protected void gc() throws Exception {

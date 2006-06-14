@@ -20,44 +20,33 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.spring.hibernate;
 
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.io.Serializable;
+import org.hibernate.cache.Cache;
 
 /**
- * <a href="BaseModel.java.html"><b><i>View Source</i></b></a>
+ * <a href="CacheRegistry.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public abstract class BaseModel implements Cloneable, Comparable, Serializable {
+public class CacheRegistry {
 
-	public static boolean XSS_ALLOW = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.XSS_ALLOW));
+	public static void clear() {
+		for (int i = 0; i < _registry.size(); i++) {
+			Cache cache = (Cache)_registry.get(i);
 
-	public BaseModel() {
+			cache.clear();
+		}
 	}
 
-	public boolean isNew() {
-		return _new;
+	public static void register(Cache cache) {
+		_registry.add(cache);
 	}
 
-	public boolean setNew(boolean n) {
-		return _new = n;
-	}
-
-	public boolean isModified() {
-		return _modified;
-	}
-
-	public void setModified(boolean modified) {
-		_modified = modified;
-	}
-
-	private boolean _new;
-	private boolean _modified;
+	private static List _registry = new ArrayList();
 
 }

@@ -1414,7 +1414,6 @@ posted-as-a-reply-to=Отправлено как ответ на: <a href="{0}">
 posted-by=Отправлено
 pound=Фунт
 precompile-jsps-for-faster-speed=Прекомпиляция jsps для увеличения скорости работы.
-precompile-jsps=Прекомпилировать JSPs
 preferences=Настроить
 prefix=Префикс
 press-release=Пресс-релиз
@@ -1531,7 +1530,6 @@ romanian=Румынский
 root=Корень
 rounded-edges=Закругленные углы
 ru_en=С Русского на Английский
-run-garbage-collector=Запустить сборщик мусора
 run-the-garbage-collector-to-free-up-memory=Запуск сборщика мусора для освобождения ОЗУ занятого ненужными данными.
 russian=Русский
 safe-search=Надежный поиск
