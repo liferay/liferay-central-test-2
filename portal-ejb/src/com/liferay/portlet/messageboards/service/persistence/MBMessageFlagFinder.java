@@ -56,7 +56,7 @@ public class MBMessageFlagFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -66,7 +66,7 @@ public class MBMessageFlagFinder {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();

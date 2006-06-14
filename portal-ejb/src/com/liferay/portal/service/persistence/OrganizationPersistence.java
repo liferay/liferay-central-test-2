@@ -285,7 +285,7 @@ public class OrganizationPersistence extends BasePersistence {
 			Iterator itr = q.iterate();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -626,7 +626,7 @@ public class OrganizationPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(SQL_CONTAINSUSER);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -635,7 +635,7 @@ public class OrganizationPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if ((count != null) && (count.intValue() > 0)) {
 					return true;
@@ -661,7 +661,7 @@ public class OrganizationPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(SQL_CONTAINSUSERS);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -669,7 +669,7 @@ public class OrganizationPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if ((count != null) && (count.intValue() > 0)) {
 					return true;
@@ -1680,7 +1680,7 @@ public class OrganizationPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -1717,7 +1717,7 @@ public class OrganizationPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -1758,7 +1758,7 @@ public class OrganizationPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -1799,7 +1799,7 @@ public class OrganizationPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();

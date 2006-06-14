@@ -24,6 +24,8 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
+import javax.servlet.ServletRequest;
+
 /**
  * <a href="UploadProgressTag.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,11 +35,37 @@ import com.liferay.taglib.util.IncludeTag;
  */
 public class UploadProgressTag extends IncludeTag {
 
+	public int doStartTag() {
+		ServletRequest req = pageContext.getRequest();
+
+		req.setAttribute("liferay-ui:upload-progress:id", _id);
+		req.setAttribute("liferay-ui:upload-progress:iframe-src", _iframeSrc);
+		req.setAttribute("liferay-ui:upload-progress:redirect", _redirect);
+
+		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setId(String id) {
+		_id = id;
+	}
+
+	public void setIframeSrc(String iframeSrc) {
+		_iframeSrc = iframeSrc;
+	}
+
+	public void setRedirect(String redirect) {
+		_redirect = redirect;
+	}
+
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
 
 	private static final String _PAGE =
 		"/html/taglib/ui/upload_progress/page.jsp";
+
+	private String _id;
+	private String _iframeSrc;
+	private String _redirect;
 
 }

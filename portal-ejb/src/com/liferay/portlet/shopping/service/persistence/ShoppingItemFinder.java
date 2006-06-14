@@ -65,7 +65,7 @@ public class ShoppingItemFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -78,7 +78,7 @@ public class ShoppingItemFinder {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -137,7 +137,7 @@ public class ShoppingItemFinder {
 			Iterator itr = q.iterate();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -205,7 +205,7 @@ public class ShoppingItemFinder {
 			Iterator itr = q.iterate();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -264,7 +264,7 @@ public class ShoppingItemFinder {
 			Iterator itr = q.iterate();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();

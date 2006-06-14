@@ -358,7 +358,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 			Iterator itr = q.iterate();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -1294,7 +1294,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -1335,7 +1335,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();

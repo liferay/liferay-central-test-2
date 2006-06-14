@@ -2156,7 +2156,7 @@ public class ServiceBuilder {
 
 				sb.append("Iterator itr = q.iterate();");
 				sb.append("if (itr.hasNext()) {");
-				sb.append("Integer count = (Integer)itr.next();");
+				sb.append("Long count = (Long)itr.next();");
 				sb.append("if (count != null) {");
 				sb.append("return count.intValue();");
 				sb.append("}");
@@ -2393,13 +2393,13 @@ public class ServiceBuilder {
 					sb.append("try {");
 					sb.append("session = openSession();");
 					sb.append("SQLQuery q = session.createSQLQuery(SQL_CONTAINS" + tempEntity.getName().toUpperCase() + ");");
-					sb.append("q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);");
+					sb.append("q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);");
 					sb.append("QueryPos qPos = QueryPos.getInstance(q);");
 					sb.append("qPos.add(pk);");
 					sb.append("qPos.add(" + tempEntity.getVarName() + "PK);");
 					sb.append("Iterator itr = q.list().iterator();");
 					sb.append("if (itr.hasNext()) {");
-					sb.append("Integer count = (Integer)itr.next();");
+					sb.append("Long count = (Long)itr.next();");
 					sb.append("if ((count != null) && (count.intValue() > 0)) {");
 					sb.append("return true;");
 					sb.append("}");
@@ -2479,12 +2479,12 @@ public class ServiceBuilder {
 					sb.append("try {");
 					sb.append("session = openSession();");
 					sb.append("SQLQuery q = session.createSQLQuery(SQL_CONTAINS" + tempEntity.getName().toUpperCase() + "S);");
-					sb.append("q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);");
+					sb.append("q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);");
 					sb.append("QueryPos qPos = QueryPos.getInstance(q);");
 					sb.append("qPos.add(pk);");
 					sb.append("Iterator itr = q.list().iterator();");
 					sb.append("if (itr.hasNext()) {");
-					sb.append("Integer count = (Integer)itr.next();");
+					sb.append("Long count = (Long)itr.next();");
 					sb.append("if ((count != null) && (count.intValue() > 0)) {");
 					sb.append("return true;");
 					sb.append("}");
@@ -3556,7 +3556,7 @@ public class ServiceBuilder {
 
 			sb.append("Iterator itr = q.list().iterator();");
 			sb.append("if (itr.hasNext()) {");
-			sb.append("Integer count = (Integer)itr.next();");
+			sb.append("Long count = (Long)itr.next();");
 			sb.append("if (count != null) {");
 			sb.append("return count.intValue();");
 			sb.append("}");

@@ -26,6 +26,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.imagegallery.ImageNameException;
 import com.liferay.portlet.imagegallery.ImageSizeException;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
@@ -69,9 +70,9 @@ public class EditImageAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteImage(req);
-			}
 
-			sendRedirect(req, res);
+				sendRedirect(req, res);
+			}
 		}
 		catch (Exception e) {
 			if (e != null &&
@@ -117,8 +118,13 @@ public class EditImageAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(
-			getForward(req, "portlet.image_gallery.edit_image"));
+		String forward = "portlet.image_gallery.edit_image";
+
+		if (req.getWindowState().equals(LiferayWindowState.POP_UP)) {
+			forward = "portlet.image_gallery.edit_image_form";
+		}
+
+		return mapping.findForward(getForward(req, forward));
 	}
 
 	protected void deleteImage(ActionRequest req) throws Exception {

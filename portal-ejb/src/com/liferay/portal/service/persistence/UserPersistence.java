@@ -326,7 +326,7 @@ public class UserPersistence extends BasePersistence {
 			Iterator itr = q.iterate();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -654,7 +654,7 @@ public class UserPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(SQL_CONTAINSGROUP);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -663,7 +663,7 @@ public class UserPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if ((count != null) && (count.intValue() > 0)) {
 					return true;
@@ -689,7 +689,7 @@ public class UserPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(SQL_CONTAINSGROUPS);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -697,7 +697,7 @@ public class UserPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if ((count != null) && (count.intValue() > 0)) {
 					return true;
@@ -1022,7 +1022,7 @@ public class UserPersistence extends BasePersistence {
 			Iterator itr = q.iterate();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -1357,7 +1357,7 @@ public class UserPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(SQL_CONTAINSORGANIZATION);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -1366,7 +1366,7 @@ public class UserPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if ((count != null) && (count.intValue() > 0)) {
 					return true;
@@ -1392,7 +1392,7 @@ public class UserPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(SQL_CONTAINSORGANIZATIONS);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -1400,7 +1400,7 @@ public class UserPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if ((count != null) && (count.intValue() > 0)) {
 					return true;
@@ -1724,7 +1724,7 @@ public class UserPersistence extends BasePersistence {
 			Iterator itr = q.iterate();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -2057,7 +2057,7 @@ public class UserPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(SQL_CONTAINSPERMISSION);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -2066,7 +2066,7 @@ public class UserPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if ((count != null) && (count.intValue() > 0)) {
 					return true;
@@ -2092,7 +2092,7 @@ public class UserPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(SQL_CONTAINSPERMISSIONS);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -2100,7 +2100,7 @@ public class UserPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if ((count != null) && (count.intValue() > 0)) {
 					return true;
@@ -2425,7 +2425,7 @@ public class UserPersistence extends BasePersistence {
 			Iterator itr = q.iterate();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -2752,7 +2752,7 @@ public class UserPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(SQL_CONTAINSROLE);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -2761,7 +2761,7 @@ public class UserPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if ((count != null) && (count.intValue() > 0)) {
 					return true;
@@ -2787,7 +2787,7 @@ public class UserPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(SQL_CONTAINSROLES);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -2795,7 +2795,7 @@ public class UserPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if ((count != null) && (count.intValue() > 0)) {
 					return true;
@@ -3658,7 +3658,7 @@ public class UserPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -3699,7 +3699,7 @@ public class UserPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -3740,7 +3740,7 @@ public class UserPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -3781,7 +3781,7 @@ public class UserPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Long count = (Long)itr.next();
 
 				if (count != null) {
 					return count.intValue();
