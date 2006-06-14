@@ -35,6 +35,18 @@ public interface GroupLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Group addGroup(java.lang.String userId,
+		java.lang.String className, java.lang.String classPK,
+		java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String friendlyURL)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public boolean addCommunityOrgs(java.lang.String groupId,
+		java.lang.String[] orgIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public boolean addRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
@@ -50,6 +62,11 @@ public interface GroupLocalService {
 			com.liferay.portal.SystemException;
 
 	public void deleteGroup(java.lang.String groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public boolean hasCommunityOrg(java.lang.String communityGroupId,
+		java.lang.String organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
@@ -104,7 +121,8 @@ public interface GroupLocalService {
 
 	public java.util.List getUserGroups(java.lang.String companyId,
 		java.lang.String userId, boolean privateLayout)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
 
 	public java.util.List search(java.lang.String companyId,
 		java.lang.String name, java.util.Map params)
@@ -122,6 +140,11 @@ public interface GroupLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public boolean unsetCommunityOrgs(java.lang.String groupId,
+		java.lang.String[] orgIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public boolean unsetRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
@@ -129,6 +152,13 @@ public interface GroupLocalService {
 
 	public com.liferay.portal.model.Group updateGroup(
 		java.lang.String groupId, java.lang.String name,
+		java.lang.String friendlyURL)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Group updateGroup(
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String description, java.lang.String type,
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;

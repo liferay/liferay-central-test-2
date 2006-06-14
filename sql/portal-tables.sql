@@ -253,6 +253,13 @@ create table EmailAddress (
 	primary_ BOOLEAN
 );
 
+create table GroupRel (
+	groupId VARCHAR(75) not null,
+	className VARCHAR(75) not null,
+	classPK VARCHAR(75) not null,
+	primary key (groupId, className, classPK)
+);
+
 create table Group_ (
 	groupId VARCHAR(75) not null primary key,
 	companyId VARCHAR(75) not null,
@@ -261,7 +268,8 @@ create table Group_ (
 	parentGroupId VARCHAR(75) null,
 	name VARCHAR(75) null,
 	description STRING null,
-	friendlyURL VARCHAR(75) null
+	friendlyURL VARCHAR(75) null,
+	type_ VARCHAR(75) null
 );
 
 create table Groups_Permissions (

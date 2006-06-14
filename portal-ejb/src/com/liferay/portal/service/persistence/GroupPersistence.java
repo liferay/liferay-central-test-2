@@ -111,6 +111,7 @@ public class GroupPersistence extends BasePersistence {
 					groupHBM.setName(group.getName());
 					groupHBM.setDescription(group.getDescription());
 					groupHBM.setFriendlyURL(group.getFriendlyURL());
+					groupHBM.setType(group.getType());
 					groupHBM.setPermissions(new HashSet());
 					groupHBM.setRoles(new HashSet());
 					groupHBM.setUsers(new HashSet());
@@ -129,6 +130,7 @@ public class GroupPersistence extends BasePersistence {
 						groupHBM.setName(group.getName());
 						groupHBM.setDescription(group.getDescription());
 						groupHBM.setFriendlyURL(group.getFriendlyURL());
+						groupHBM.setType(group.getType());
 						session.flush();
 					}
 					else {
@@ -141,6 +143,7 @@ public class GroupPersistence extends BasePersistence {
 						groupHBM.setName(group.getName());
 						groupHBM.setDescription(group.getDescription());
 						groupHBM.setFriendlyURL(group.getFriendlyURL());
+						groupHBM.setType(group.getType());
 						session.save(groupHBM);
 						session.flush();
 					}

@@ -60,6 +60,8 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	if (tabs1.equals("current")) {
 		groupParams.put("usersGroups", user.getUserId());
 	}
+	
+	request.setAttribute("tabs1", tabs1);
 
 	int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), groupParams);
 

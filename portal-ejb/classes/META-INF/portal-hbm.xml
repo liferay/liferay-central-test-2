@@ -140,6 +140,7 @@
 		<property name="name" />
 		<property name="description" />
 		<property name="friendlyURL" />
+		<property name="type" column="type_" />
 		<set name="permissions" table="Groups_Permissions" lazy="true">
 			<key column="groupId" />
 			<many-to-many class="com.liferay.portal.service.persistence.PermissionHBM" column="permissionId" />
@@ -152,6 +153,14 @@
 			<key column="groupId" />
 			<many-to-many class="com.liferay.portal.service.persistence.UserHBM" column="userId" />
 		</set>
+	</class>
+	<class name="com.liferay.portal.service.persistence.GroupRelHBM" table="GroupRel">
+		<cache usage="read-write" />
+		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.GroupRelPK">
+			<key-property name="groupId" />
+			<key-property name="className" />
+			<key-property name="classPK" />
+		</composite-id>
 	</class>
 	<class name="com.liferay.portal.service.persistence.ImageHBM" table="Image">
 		<cache usage="read-write" />

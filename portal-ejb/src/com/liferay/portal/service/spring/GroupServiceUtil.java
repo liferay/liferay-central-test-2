@@ -49,6 +49,47 @@ public class GroupServiceUtil {
 		}
 	}
 
+	public static com.liferay.portal.model.Group addGroup(
+		java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String friendlyURL)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			GroupService groupService = GroupServiceFactory.getService();
+
+			return groupService.addGroup(name, description, type, friendlyURL);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static boolean addCommunityOrgs(java.lang.String groupId,
+		java.lang.String[] orgIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			GroupService groupService = GroupServiceFactory.getService();
+
+			return groupService.addCommunityOrgs(groupId, orgIds);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static boolean addRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
@@ -166,6 +207,26 @@ public class GroupServiceUtil {
 		}
 	}
 
+	public static boolean unsetCommunityOrgs(java.lang.String groupId,
+		java.lang.String[] orgIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			GroupService groupService = GroupServiceFactory.getService();
+
+			return groupService.unsetCommunityOrgs(groupId, orgIds);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static boolean unsetRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
@@ -195,6 +256,29 @@ public class GroupServiceUtil {
 			GroupService groupService = GroupServiceFactory.getService();
 
 			return groupService.updateGroup(groupId, name, friendlyURL);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static com.liferay.portal.model.Group updateGroup(
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String friendlyURL)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			GroupService groupService = GroupServiceFactory.getService();
+
+			return groupService.updateGroup(groupId, name, description, type,
+				friendlyURL);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

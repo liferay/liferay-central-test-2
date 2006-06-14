@@ -33,6 +33,7 @@ String groupId = BeanParamUtil.getString(group, request, "groupId");
 
 String name = BeanParamUtil.getString(group, request, "name");
 String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
+String type = BeanParamUtil.getString(group, request, "type");
 %>
 
 <script type="text/javascript">
@@ -62,6 +63,23 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 	<td style="padding-left: 10px;"></td>
 	<td>
 		<input class="form-text" name="<portlet:namespace />name" size="30" type="text" value="<%= name %>">
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "description") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<liferay-ui:input-field model="<%= Group.class %>" bean="<%= group %>" field="description" />
+	</td>
+</tr>
+<tr>
+	<td></td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<input <%= (type != null && type.equals(Group.COMMUNITY_OPEN)) ? "checked" : "" %> name="<portlet:namespace />type" value="<%= Group.COMMUNITY_OPEN %>" type="checkbox">
+		<%= LanguageUtil.get(pageContext, "is-this-an-open-community") %>
 	</td>
 </tr>
 </table>

@@ -34,6 +34,17 @@ public interface GroupService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
+	public com.liferay.portal.model.Group addGroup(java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String friendlyURL)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public boolean addCommunityOrgs(java.lang.String groupId,
+		java.lang.String[] orgIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public boolean addRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
@@ -62,6 +73,11 @@ public interface GroupService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
+	public boolean unsetCommunityOrgs(java.lang.String groupId,
+		java.lang.String[] orgIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public boolean unsetRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
@@ -69,6 +85,13 @@ public interface GroupService {
 
 	public com.liferay.portal.model.Group updateGroup(
 		java.lang.String groupId, java.lang.String name,
+		java.lang.String friendlyURL)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public com.liferay.portal.model.Group updateGroup(
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String description, java.lang.String type,
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;

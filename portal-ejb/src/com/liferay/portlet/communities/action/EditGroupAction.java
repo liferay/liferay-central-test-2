@@ -134,19 +134,25 @@ public class EditGroupAction extends PortletAction {
 		String groupId = ParamUtil.getString(req, "groupId");
 
 		String name = ParamUtil.getString(req, "name");
+		String description = ParamUtil.getString(req, "description");
+		String type = ParamUtil.getString(req, "type");
 		String friendlyURL = ParamUtil.getString(req, "friendlyURL");
 
+		if (type.equals("")) {
+			type = Group.COMMUNITY_CLOSED;
+		}
+		
 		if (Validator.isNull(groupId)) {
 
 			// Add group
 
-			Group group = GroupServiceUtil.addGroup(name, friendlyURL);
+			Group group = GroupServiceUtil.addGroup(name, description, type, friendlyURL);
 		}
 		else {
 
 			// Update group
 
-			GroupServiceUtil.updateGroup(groupId, name, friendlyURL);
+			GroupServiceUtil.updateGroup(groupId, name, description, type, friendlyURL);
 		}
 	}
 

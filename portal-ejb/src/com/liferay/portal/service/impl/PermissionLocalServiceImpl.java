@@ -45,6 +45,7 @@ import com.liferay.portal.service.persistence.PermissionUtil;
 import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.PermissionLocalService;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.util.Validator;
@@ -319,7 +320,9 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		//List userGroups = UserUtil.getGroups(userId);
 
 		if (Validator.isNotNull(groupId)) {
-			userGroups.add(GroupUtil.findByPrimaryKey(groupId));
+			if (GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
+				userGroups.add(GroupUtil.findByPrimaryKey(groupId));
+			}
 		}
 
 		List userOrgs = permissionCheckerBag.getUserOrgs();

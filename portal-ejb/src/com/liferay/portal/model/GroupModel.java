@@ -61,6 +61,9 @@ public class GroupModel extends BaseModel {
 	public static boolean XSS_ALLOW_FRIENDLYURL = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Group.friendlyURL"),
 			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_TYPE = GetterUtil.get(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Group.type"),
+			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.GroupModel"));
 
@@ -218,6 +221,23 @@ public class GroupModel extends BaseModel {
 		}
 	}
 
+	public String getType() {
+		return GetterUtil.getString(_type);
+	}
+
+	public void setType(String type) {
+		if (((type == null) && (_type != null)) ||
+				((type != null) && (_type == null)) ||
+				((type != null) && (_type != null) && !type.equals(_type))) {
+			if (!XSS_ALLOW_TYPE) {
+				type = XSSUtil.strip(type);
+			}
+
+			_type = type;
+			setModified(true);
+		}
+	}
+
 	public Object clone() {
 		Group clone = new Group();
 		clone.setGroupId(getGroupId());
@@ -228,6 +248,7 @@ public class GroupModel extends BaseModel {
 		clone.setName(getName());
 		clone.setDescription(getDescription());
 		clone.setFriendlyURL(getFriendlyURL());
+		clone.setType(getType());
 
 		return clone;
 	}
@@ -284,4 +305,5 @@ public class GroupModel extends BaseModel {
 	private String _name;
 	private String _description;
 	private String _friendlyURL;
+	private String _type;
 }

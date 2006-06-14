@@ -143,6 +143,12 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="friendlyURL" type="String" />
+		<field name="type" type="String" />
+	</model>
+	<model name="com.liferay.portal.model.GroupRel">
+		<field name="groupId" type="String" />
+		<field name="className" type="String" />
+		<field name="classPK" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.Image">
 		<field name="imageId" type="String">

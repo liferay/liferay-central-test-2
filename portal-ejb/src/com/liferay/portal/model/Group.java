@@ -36,6 +36,10 @@ public class Group extends GroupModel {
 	public static final String DEFAULT_PARENT_GROUP_ID = "-1";
 
 	public static final String GUEST = GroupNames.GUEST;
+	
+	public static final String COMMUNITY_OPEN = "COMMUNITY_OPEN";
+	
+	public static final String COMMUNITY_CLOSED = "COMMUNITY_CLOSED";
 
 	public static final String[] SYSTEM_GROUPS = GroupNames.SYSTEM_GROUPS;
 

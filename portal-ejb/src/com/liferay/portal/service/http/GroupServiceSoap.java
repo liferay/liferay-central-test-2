@@ -53,6 +53,38 @@ public class GroupServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.GroupModel addGroup(
+		java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String friendlyURL)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(name,
+					description, type, friendlyURL);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static boolean addCommunityOrgs(java.lang.String groupId,
+		java.lang.String[] orgIds) throws RemoteException {
+		try {
+			boolean returnValue = GroupServiceUtil.addCommunityOrgs(groupId,
+					orgIds);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static boolean addRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds) throws RemoteException {
 		try {
@@ -137,6 +169,21 @@ public class GroupServiceSoap {
 		}
 	}
 
+	public static boolean unsetCommunityOrgs(java.lang.String groupId,
+		java.lang.String[] orgIds) throws RemoteException {
+		try {
+			boolean returnValue = GroupServiceUtil.unsetCommunityOrgs(groupId,
+					orgIds);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static boolean unsetRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds) throws RemoteException {
 		try {
@@ -158,6 +205,23 @@ public class GroupServiceSoap {
 		try {
 			com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateGroup(groupId,
 					name, friendlyURL);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static com.liferay.portal.model.GroupModel updateGroup(
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String friendlyURL) throws RemoteException {
+		try {
+			com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateGroup(groupId,
+					name, description, type, friendlyURL);
 
 			return returnValue;
 		}

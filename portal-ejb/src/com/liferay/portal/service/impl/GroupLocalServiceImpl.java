@@ -22,16 +22,24 @@
 
 package com.liferay.portal.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import com.liferay.counter.service.spring.CounterServiceUtil;
 import com.liferay.portal.DuplicateGroupException;
 import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.NoSuchGroupRelException;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupRel;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -40,6 +48,8 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.GroupFinder;
+import com.liferay.portal.service.persistence.GroupRelPK;
+import com.liferay.portal.service.persistence.GroupRelUtil;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.RoleUtil;
@@ -65,12 +75,6 @@ import com.liferay.portlet.wiki.service.spring.WikiNodeLocalServiceUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 /**
  * <a href="GroupLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -82,6 +86,14 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 	public Group addGroup(
 			String userId, String className, String classPK, String name,
 			String friendlyURL)
+		throws PortalException, SystemException {
+		
+		return addGroup(userId, className, classPK, name, null, null, friendlyURL);
+	}
+	
+	public Group addGroup(
+			String userId, String className, String classPK, String name,
+			String description, String type, String friendlyURL)
 		throws PortalException, SystemException {
 
 		// Group
@@ -108,6 +120,12 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		group.setClassPK(classPK);
 		group.setParentGroupId(Group.DEFAULT_PARENT_GROUP_ID);
 		group.setName(name);
+		if (description != null) {
+			group.setDescription(description);
+		}
+		if (type != null) {
+			group.setType(type);
+		}
 		group.setFriendlyURL(friendlyURL);
 
 		GroupUtil.update(group);
@@ -148,6 +166,24 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		return group;
 	}
 
+	public boolean addCommunityOrgs(String groupId, String[] orgIds)
+		throws PortalException, SystemException {
+	
+		for (int i=0; i < orgIds.length; i++) {
+			GroupRelPK groupRelPK = new GroupRelPK(groupId, Organization.class.getName(), orgIds[i]);
+			
+			try {
+				GroupRelUtil.findByPrimaryKey(groupRelPK);
+			}
+			catch (NoSuchGroupRelException nsgre) {
+				GroupRel groupRel = GroupRelUtil.create(groupRelPK);
+				GroupRelUtil.update(groupRel);
+			}
+		}
+		
+		return true;
+	}
+	
 	public boolean addRoleGroups(String roleId, String[] groupIds)
 		throws PortalException, SystemException {
 
@@ -274,6 +310,23 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		GroupUtil.remove(groupId);
 	}
 
+	public boolean hasCommunityOrg(String communityGroupId, String organizationId)
+		throws PortalException, SystemException {
+	
+		List groupRels = GroupRelUtil.findByC_C(Organization.class.getName(), organizationId);
+		
+		if (groupRels != null && groupRels.size() > 0) {
+			for (int i=0; i < groupRels.size(); i++) {
+				GroupRel groupRel = (GroupRel)groupRels.get(i);
+				if (groupRel.getGroupId().equals(communityGroupId)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+	
 	public boolean hasRoleGroup(String roleId, String groupId)
 		throws PortalException, SystemException {
 
@@ -283,8 +336,22 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 	public boolean hasUserGroup(String userId, String groupId)
 		throws PortalException, SystemException {
 
-		return UserUtil.containsGroup(userId, groupId);
+		User user = UserLocalServiceUtil.getUserById(userId);
+		Map params = new HashMap();
+		params.put("usersGroups", userId);
+		
+		List communities = GroupFinder.findByC_N_U(user.getCompanyId(), null, userId, params);
+		
+		for (int i=0; communities != null && i < communities.size(); i++) {
+			Group community = (Group)communities.get(i);
+			if (community.getGroupId().equals(groupId)) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
+
 
 	public Group getFriendlyURLGroup(String companyId, String friendlyURL)
 		throws PortalException, SystemException {
@@ -360,14 +427,14 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 
 	public List getUserGroups(
 			String companyId, String userId, boolean privateLayout)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		Map params = new HashMap();
 
 		params.put("usersGroups", userId);
 		params.put("layoutSet", new Boolean(privateLayout));
 
-		return GroupFinder.findByC_N_1(companyId, null, params);
+		return GroupFinder.findByC_N_U(companyId, null, userId, params);
 	}
 
 	public List search(String companyId, String name, Map params)
@@ -395,6 +462,20 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		RoleUtil.setGroups(roleId, groupIds);
 	}
 
+	public boolean unsetCommunityOrgs(String groupId, String[] orgIds)
+		throws PortalException, SystemException {
+	
+		for (int i=0; i < orgIds.length; i++) {
+			try {
+				GroupRelUtil.remove(new GroupRelPK(groupId, Organization.class.getName(), orgIds[i]));
+			}
+			catch (NoSuchGroupRelException nsgre) {
+			}
+		}
+		
+		return true;
+	}
+	
 	public boolean unsetRoleGroups(String roleId, String[] groupIds)
 		throws PortalException, SystemException {
 
@@ -402,6 +483,12 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 	}
 
 	public Group updateGroup(String groupId, String name, String friendlyURL)
+		throws PortalException, SystemException {
+
+		return updateGroup(groupId, name, null, null, friendlyURL);
+	}
+		
+	public Group updateGroup(String groupId, String name, String description, String type, String friendlyURL)
 		throws PortalException, SystemException {
 
 		Group group = GroupUtil.findByPrimaryKey(groupId);
@@ -423,6 +510,12 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 			group.getGroupId(), group.getCompanyId(), friendlyURL);
 
 		group.setName(name);
+		if (description != null) {
+			group.setDescription(description);
+		}
+		if (type != null) {
+			group.setType(type);
+		}
 		group.setFriendlyURL(friendlyURL);
 
 		GroupUtil.update(group);

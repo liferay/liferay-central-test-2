@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.PortalPermission;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupService;
@@ -43,13 +44,25 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 	public Group addGroup(String name, String friendlyURL)
 		throws PortalException, SystemException {
 
+		return addGroup(name, null, null, friendlyURL);
+	}
+
+	public Group addGroup(String name, String description, String type, String friendlyURL)
+		throws PortalException, SystemException {
+
 		PortalPermission.check(
 			getPermissionChecker(), ActionKeys.ADD_COMMUNITY);
 
 		return GroupLocalServiceUtil.addGroup(
-			getUserId(), null, null, name, friendlyURL);
+			getUserId(), null, null, name, description, type, friendlyURL);
 	}
-
+		
+	public boolean addCommunityOrgs(String groupId, String[] orgIds)
+		throws PortalException, SystemException {
+	
+		return GroupLocalServiceUtil.addCommunityOrgs(groupId, orgIds);
+	}
+	
 	public boolean addRoleGroups(String roleId, String[] groupIds)
 		throws PortalException, SystemException {
 
@@ -86,6 +99,12 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 		GroupLocalServiceUtil.setRoleGroups(roleId, groupIds);
 	}
 
+	public boolean unsetCommunityOrgs(String groupId, String[] orgIds)
+		throws PortalException, SystemException {
+	
+		return GroupLocalServiceUtil.unsetCommunityOrgs(groupId, orgIds);
+	}
+	
 	public boolean unsetRoleGroups(String roleId, String[] groupIds)
 		throws PortalException, SystemException {
 
@@ -95,7 +114,15 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 	public Group updateGroup(String groupId, String name, String friendlyURL)
 		throws PortalException, SystemException {
 
-		return GroupLocalServiceUtil.updateGroup(groupId, name, friendlyURL);
+		return updateGroup(groupId, name, null, null, friendlyURL);
+	}
+
+	public Group updateGroup(String groupId, String name, String description, String type, String friendlyURL)
+		throws PortalException, SystemException {
+	
+		GroupPermission.check(getPermissionChecker(), groupId, ActionKeys.UPDATE);
+		
+		return GroupLocalServiceUtil.updateGroup(groupId, name, description, type, friendlyURL);
 	}
 
 }

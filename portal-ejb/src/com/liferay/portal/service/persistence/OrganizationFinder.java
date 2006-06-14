@@ -64,6 +64,9 @@ public class OrganizationFinder {
 	public static String JOIN_BY_ORGANIZATIONS_ROLES =
 		OrganizationFinder.class.getName() + ".joinByOrganizationsRoles";
 
+	public static String JOIN_BY_ORGANIZATIONS_GROUPS =
+		OrganizationFinder.class.getName() + ".joinByOrganizationsGroups";
+
 	public static int countByC_PO_N_S_C_Z_R_C(
 			String companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
@@ -461,7 +464,7 @@ public class OrganizationFinder {
 
 			String key = (String)entry.getKey();
 
-			if (key.equals("organizationsRoles")) {
+			if (key.equals("organizationsRoles") || key.equals("organizationsGroups")) {
 				sb.append(_getJoin(key));
 			}
 		}
@@ -474,6 +477,8 @@ public class OrganizationFinder {
 
 		if (key.equals("organizationsRoles")) {
 			sb.append(CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_ROLES));
+		} else if (key.equals("organizationsGroups")) {
+			sb.append(CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_GROUPS));
 		}
 
 		return sb.toString();
@@ -488,7 +493,7 @@ public class OrganizationFinder {
 
 				String key = (String)entry.getKey();
 
-				if (key.equals("organizationsRoles")) {
+				if (key.equals("organizationsRoles") || key.equals("organizationsGroups")) {
 					List values = (List)entry.getValue();
 
 					for (int i = 0; i < values.size(); i++) {

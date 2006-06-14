@@ -57,6 +57,25 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 		return getService().addGroup(name, friendlyURL);
 	}
 
+	public com.liferay.portal.model.Group addGroup(java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String friendlyURL)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().addGroup(name, description, type, friendlyURL);
+	}
+
+	public boolean addCommunityOrgs(java.lang.String groupId,
+		java.lang.String[] orgIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().addCommunityOrgs(groupId, orgIds);
+	}
+
 	public boolean addRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
@@ -107,6 +126,15 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 		getService().setRoleGroups(roleId, groupIds);
 	}
 
+	public boolean unsetCommunityOrgs(java.lang.String groupId,
+		java.lang.String[] orgIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().unsetCommunityOrgs(groupId, orgIds);
+	}
+
 	public boolean unsetRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
@@ -124,6 +152,18 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return getService().updateGroup(groupId, name, friendlyURL);
+	}
+
+	public com.liferay.portal.model.Group updateGroup(
+		java.lang.String groupId, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String friendlyURL)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().updateGroup(groupId, name, description, type,
+			friendlyURL);
 	}
 
 	public void ejbCreate() throws CreateException {

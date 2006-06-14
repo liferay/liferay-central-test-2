@@ -12,13 +12,10 @@
 			<action-key>MANAGE_LAYOUTS</action-key>
 			<action-key>PERMISSIONS</action-key>
 			<action-key>UPDATE</action-key>
-			<action-key>VIEW</action-key>
 		</supports>
 		<community-defaults>
-			<action-key>VIEW</action-key>
 		</community-defaults>
 		<guest-defaults>
-			<action-key>VIEW</action-key>
 		</guest-defaults>
 		<guest-unsupported>
 		</guest-unsupported>

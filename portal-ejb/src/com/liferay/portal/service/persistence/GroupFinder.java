@@ -25,6 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.StringPool;
@@ -34,6 +35,7 @@ import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +60,9 @@ public class GroupFinder {
 
 	public static String FIND_BY_C_N_2 =
 		GroupFinder.class.getName() + ".findByC_N_2";
+
+	public static String FIND_BY_ORGS_GROUPS =
+		GroupFinder.class.getName() + ".findByOrgsGroups";
 
 	public static String JOIN_BY_GROUPS_ROLES =
 		GroupFinder.class.getName() + ".joinByGroupsRoles";
@@ -136,7 +141,7 @@ public class GroupFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("Group_", GroupHBM.class);
+			q.addScalar("groupId", Hibernate.STRING);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -150,9 +155,9 @@ public class GroupFinder {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				GroupHBM groupHBM = (GroupHBM)itr.next();
-
-				Group group = GroupHBMUtil.model(groupHBM);
+				String groupId = (String)itr.next();
+				
+				Group group = GroupUtil.findByPrimaryKey(groupId);
 
 				list.add(group);
 			}
@@ -186,7 +191,7 @@ public class GroupFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("Group_", GroupHBM.class);
+			q.addScalar("groupId", Hibernate.STRING);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -201,9 +206,9 @@ public class GroupFinder {
 				q, HibernateUtil.getDialect(), begin, end);
 
 			while (itr.hasNext()) {
-				GroupHBM groupHBM = (GroupHBM)itr.next();
-
-				Group group = GroupHBMUtil.model(groupHBM);
+				String groupId = (String)itr.next();
+				
+				Group group = GroupUtil.findByPrimaryKey(groupId);
 
 				list.add(group);
 			}
@@ -259,6 +264,75 @@ public class GroupFinder {
 				name + "}");
 	}
 
+	public static List findByC_N_U(String companyId, String name, String userId, Map params)
+		throws SystemException {
+	
+		name = StringUtil.lowerCase(name);
+	
+		List list = new ArrayList();
+	
+		Session session = null;
+	
+		try {
+			session = HibernateUtil.openSession();
+
+			Map orgsGroupsParams = new HashMap();
+			orgsGroupsParams.putAll(params);
+			orgsGroupsParams.remove("usersGroups");
+			
+			String sql = null; 
+				
+			sql = "(";
+			sql += CustomSQLUtil.get(FIND_BY_C_N_1);
+			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
+			sql += ")";
+			
+			sql += " UNION ";
+			
+			sql += "(";
+			sql += CustomSQLUtil.get(FIND_BY_ORGS_GROUPS);
+			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(orgsGroupsParams));
+			sql += ")";
+			
+			sql += " ORDER BY groupName ASC";
+			
+			SQLQuery q = session.createSQLQuery(sql);
+	
+			q.addScalar("groupId", Hibernate.STRING);
+	
+			QueryPos qPos = QueryPos.getInstance(q);
+	
+			_setJoin(qPos, params);
+			qPos.add(companyId);
+			qPos.add(StringPool.BLANK);
+			qPos.add(StringPool.BLANK);
+			qPos.add(name);
+			qPos.add(name);
+
+			_setJoin(qPos, orgsGroupsParams);
+			qPos.add(userId);
+			qPos.add(Organization.class.getName());
+	
+			Iterator itr = q.list().iterator();
+	
+			while (itr.hasNext()) {
+				String groupId = (String)itr.next();
+	
+				Group group = GroupUtil.findByPrimaryKey(groupId);
+	
+				list.add(group);
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	
+		return list;
+	}
+	
 	private static String _getJoin(Map params) {
 		if (params == null) {
 			return StringPool.BLANK;
