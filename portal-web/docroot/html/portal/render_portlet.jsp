@@ -187,7 +187,6 @@ if (!themeDisplay.isSignedIn() ||
 	 !LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE))) {
 
 	showCloseIcon = false;
-	showEditIcon = false;
 	showMaxIcon = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.LAYOUT_GUEST_SHOW_MAX_ICON));
 	showMinIcon = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.LAYOUT_GUEST_SHOW_MIN_ICON));
 	showMoveIcon = false;
