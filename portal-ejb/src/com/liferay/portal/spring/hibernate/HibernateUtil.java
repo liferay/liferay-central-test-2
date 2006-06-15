@@ -45,13 +45,13 @@ import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
  */
 public class HibernateUtil {
 
-	public static final String SESSION_FACTORY_NAME =
+	public static final String SPRING_HIBERNATE_SESSION_FACTORY =
 		PropsUtil.get(PropsUtil.SPRING_HIBERNATE_SESSION_FACTORY);
 
 	public static final String COUNT_COLUMN_NAME = "COUNT_VALUE";
 
 	public static SessionFactoryImplementor getSessionFactory() {
-		return getSessionFactory(SESSION_FACTORY_NAME);
+		return getSessionFactory(SPRING_HIBERNATE_SESSION_FACTORY);
 	}
 
 	public static SessionFactoryImplementor getSessionFactory(
@@ -66,7 +66,7 @@ public class HibernateUtil {
 	}
 
 	public static Dialect getDialect() {
-		return getDialect(SESSION_FACTORY_NAME);
+		return getDialect(SPRING_HIBERNATE_SESSION_FACTORY);
 	}
 
 	public static Dialect getDialect(String sessionFactoryName) {
@@ -88,7 +88,7 @@ public class HibernateUtil {
 	}
 
 	public static Session openSession() throws HibernateException {
-		return openSession(SESSION_FACTORY_NAME);
+		return openSession(SPRING_HIBERNATE_SESSION_FACTORY);
 	}
 
 	public static Session openSession(String sessionFactoryName)

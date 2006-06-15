@@ -52,6 +52,9 @@ import org.dom4j.io.SAXReader;
  */
 public class CustomSQLUtil {
 
+	public static final String CUSTOM_SQL_FUNCTION_ISNULL =
+		PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNULL);
+
 	public static String replaceAndOperator(String sql, boolean andOperator) {
 		String andOrConnector = "OR";
 		String andOrNullCheck = "AND ? IS NOT NULL";
@@ -67,6 +70,22 @@ public class CustomSQLUtil {
 				"[$AND_OR_CONNECTOR$]", "[$AND_OR_NULL_CHECK$]"},
 			new String[] {
 				andOrConnector, andOrNullCheck});
+
+		sql = replaceIsNull(sql);
+
+		return sql;
+	}
+
+	public static String replaceIsNull(String sql) {
+		if (Validator.isNotNull(CUSTOM_SQL_FUNCTION_ISNULL)) {
+			sql = StringUtil.replace(
+				sql,
+				new String[] {
+					"? IS NULL", "? IS NOT NULL"},
+				new String[] {
+					CUSTOM_SQL_FUNCTION_ISNULL + "(?, 1) = 1",
+					CUSTOM_SQL_FUNCTION_ISNULL + "(?, 1) = 0"});
+		}
 
 		return sql;
 	}
@@ -159,6 +178,8 @@ public class CustomSQLUtil {
 			else {
 				String id = sql.attributeValue("id");
 				String content = _trim(sql.getText());
+
+				content = replaceIsNull(content);
 
 				_sqlPool.put(id, content);
 			}

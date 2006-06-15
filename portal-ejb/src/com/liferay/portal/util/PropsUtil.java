@@ -114,6 +114,8 @@ public class PropsUtil {
 
 	public static final String CUSTOM_SQL_CONFIGS = "custom.sql.configs";
 
+	public static final String CUSTOM_SQL_FUNCTION_ISNULL = "custom.sql.function.isnull";
+
 	// JavaScript
 
 	public static final String JAVASCRIPT_FAST_LOAD = "javascript.fast.load";
