@@ -33,9 +33,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PortalFilterWrapper.java.html"><b><i>View Source</i></b></a>
  *
@@ -97,8 +94,6 @@ public class PortalFilterWrapper implements Filter {
 			Thread.currentThread().setContextClassLoader(contextClassLoader);
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(PortalFilterWrapper.class);
 
 	private Filter _filter;
 

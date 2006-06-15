@@ -22,13 +22,12 @@
 
 package com.liferay.portal.shared.servlet;
 
+import com.liferay.portal.shared.log.Log;
+import com.liferay.portal.shared.log.LogFactoryUtil;
 import com.liferay.portal.shared.util.PortalClassLoaderUtil;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortalServletContextListenerWrapper.java.html"><b><i>View Source</i>
@@ -82,7 +81,7 @@ public abstract class PortalServletContextListenerWrapper
 	protected abstract ServletContextListener getInstance() throws Exception;
 
 	private static Log _log =
-		LogFactory.getLog(PortalServletContextListenerWrapper.class);
+		LogFactoryUtil.getLog(PortalServletContextListenerWrapper.class);
 
 	private ServletContextListener _servletContextListener;
 

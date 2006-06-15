@@ -20,71 +20,54 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.log;
 
-import com.liferay.util.GetterUtil;
-
-import java.text.DateFormat;
-
-import java.util.Date;
+import com.liferay.portal.shared.log.Log;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="LogImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class LogImpl implements Log {
 
-	static String name = "Liferay Portal";
-
-	static {
-		if (PropsUtil.get(PropsUtil.PORTAL_RELEASE).equals("enterprise")) {
-			name += " Enterprise";
-		}
-		else {
-			name += " Professional";
-		}
+	public LogImpl(org.apache.commons.logging.Log log) {
+		_log = log;
 	}
 
-	static String version = "4.0.0";
-
-	static String codeName = "Lloyd-Jones";
-
-	static String build = "3006";
-
-	static String date = "June 14, 2006";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+	public void debug(String msg) {
+		_log.debug(msg);
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public void debug(Throwable t) {
+		_log.debug(t);
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
+	public void error(String msg) {
+		_log.error(msg);
 	}
 
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
+	public void error(Throwable t) {
+		_log.error(t);
 	}
 
-	public static final String getReleaseInfo() {
-		return releaseInfo;
+	public void info(String msg) {
+		_log.info(msg);
 	}
 
-	public static final String getServerInfo() {
-		return serverInfo;
+	public void info(Throwable t) {
+		_log.info(t);
 	}
+
+	public void warn(String msg) {
+		_log.warn(msg);
+	}
+
+	public void warn(Throwable t) {
+		_log.warn(t);
+	}
+
+	private org.apache.commons.logging.Log _log;
 
 }

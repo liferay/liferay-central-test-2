@@ -20,48 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.shared.deploy;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.liferay.portal.shared.log;
 
 /**
- * <a href="AutoDeployUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="LogFactory.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Ivica Cardic
  * @author  Brian Wing Shun Chan
  *
  */
-public class AutoDeployUtil {
+public interface LogFactory {
 
-	public static void registerDir(AutoDeployDir dir) {
-		_instance._registerDir(dir);
-	}
-
-	public static void unregisterDir(String name) {
-		_instance._unregisterDir(name);
-	}
-
-	private AutoDeployUtil() {
-		_dirs = new HashMap();
-	}
-
-	private void _registerDir(AutoDeployDir dir) {
-		_dirs.put(dir.getName(), dir);
-
-		dir.start();
-	}
-
-	private void _unregisterDir(String name) {
-		AutoDeployDir dir = (AutoDeployDir)_dirs.remove(name);
-
-		if (dir != null) {
-			dir.stop();
-		}
-	}
-
-	private static AutoDeployUtil _instance = new AutoDeployUtil();
-
-	private Map _dirs;
+	public Log getLog(Class c);
 
 }

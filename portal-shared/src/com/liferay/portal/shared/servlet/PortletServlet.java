@@ -22,6 +22,9 @@
 
 package com.liferay.portal.shared.servlet;
 
+import com.liferay.portal.shared.log.Log;
+import com.liferay.portal.shared.log.LogFactoryUtil;
+
 import java.io.IOException;
 
 import javax.portlet.ActionRequest;
@@ -37,9 +40,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletServlet.java.html"><b><i>View Source</i></b></a>
@@ -84,12 +84,12 @@ public class PortletServlet extends HttpServlet {
 			}
 		}
 		catch (PortletException pe) {
-			_log.error(pe.getMessage());
+			_log.error(pe);
 
 			throw new ServletException(pe);
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PortletServlet.class);
+	private static Log _log = LogFactoryUtil.getLog(PortletServlet.class);
 
 }

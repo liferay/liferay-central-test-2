@@ -20,48 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.shared.deploy;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.liferay.portal.shared.log;
 
 /**
- * <a href="AutoDeployUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="Log.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Ivica Cardic
  * @author  Brian Wing Shun Chan
  *
  */
-public class AutoDeployUtil {
+public interface Log {
 
-	public static void registerDir(AutoDeployDir dir) {
-		_instance._registerDir(dir);
-	}
+	public void debug(String msg);
 
-	public static void unregisterDir(String name) {
-		_instance._unregisterDir(name);
-	}
+	public void debug(Throwable t);
 
-	private AutoDeployUtil() {
-		_dirs = new HashMap();
-	}
+	public void error(String msg);
 
-	private void _registerDir(AutoDeployDir dir) {
-		_dirs.put(dir.getName(), dir);
+	public void error(Throwable t);
 
-		dir.start();
-	}
+	public void info(String msg);
 
-	private void _unregisterDir(String name) {
-		AutoDeployDir dir = (AutoDeployDir)_dirs.remove(name);
+	public void info(Throwable t);
 
-		if (dir != null) {
-			dir.stop();
-		}
-	}
+	public void warn(String msg);
 
-	private static AutoDeployUtil _instance = new AutoDeployUtil();
-
-	private Map _dirs;
+	public void warn(Throwable t);
 
 }

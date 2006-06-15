@@ -175,7 +175,7 @@
 			<name>view-action</name>
 			<value>/news/view</value>
 		</init-param>
-		<expiration-cache>300</expiration-cache>
+		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>edit</portlet-mode>
@@ -207,7 +207,7 @@
 			<name>view-jsp</name>
 			<value>/portlet/reverend_fun/view.jsp</value>
 		</init-param>
-		<expiration-cache>300</expiration-cache>
+		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
@@ -429,7 +429,7 @@
 			<name>view-action</name>
 			<value>/currency_converter/view</value>
 		</init-param>
-		<expiration-cache>300</expiration-cache>
+		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>edit</portlet-mode>
@@ -927,7 +927,7 @@
 			<name>view-action</name>
 			<value>/rss/view</value>
 		</init-param>
-		<expiration-cache>300</expiration-cache>
+		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>edit</portlet-mode>

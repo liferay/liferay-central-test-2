@@ -40,7 +40,6 @@ import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
-import com.liferay.portal.shared.util.PortalClassLoaderUtil;
 import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
@@ -376,16 +375,6 @@ public class MainServlet extends ActionServlet {
 						_lastModifiedPaths.add(lastModifiedPath);
 					}
 				}
-			}
-
-			// Class loader
-
-			try {
-				PortalClassLoaderUtil.setClassLoader(
-					Thread.currentThread().getContextClassLoader());
-			}
-			catch (Exception e) {
-				e.printStackTrace();
 			}
 
 			// Process startup events

@@ -22,14 +22,13 @@
 
 package com.liferay.portal.shared.deploy;
 
+import com.liferay.portal.shared.log.Log;
+import com.liferay.portal.shared.log.LogFactoryUtil;
 import com.liferay.portal.shared.util.StackTraceUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="HotDeployUtil.java.html"><b><i>View Source</i></b></a>
@@ -90,7 +89,7 @@ public class HotDeployUtil {
 		_listeners.add(listener);
 	}
 
-	private static Log _log = LogFactory.getLog(HotDeployUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(HotDeployUtil.class);
 
 	private static HotDeployUtil _instance = new HotDeployUtil();
 

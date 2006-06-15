@@ -18,7 +18,7 @@ Commons FileUpload 1.1dev (July 15, 2005, 1.1 makes all file names lower case)
 Commons HttpClient 3.0
 Commons IO 1.0
 Commons Lang 2.0
-Commons Logging 1.0.4 (fixed to work with Log4j class loading)
+Commons Logging 1.1
 Commons Pool 1.2
 Commons Validator 1.1.4
 Compass 0.9.0
@@ -54,7 +54,7 @@ JTA 1.0.1b
 jTDS 1.2
 jYMSG 0.6
 Laszlo 3.3.1 (patched to work with Commons HttpClient 3.0)
-Log4j 1.2.12
+Log4j 1.2.13
 Lucene 1.9.1
 MSNM 1.2.2
 MyFaces 1.1.1
@@ -69,7 +69,7 @@ Portals Bridges 1.0
 Portlet 1.0
 Quartz 1.5.0
 Secure FTP 1.6.3
-SLF4J 1.0
+SLF4J 1.0.2
 Spring 1.2.8
 SSHTerm 0.2.2
 SSHVnc 0.1.3

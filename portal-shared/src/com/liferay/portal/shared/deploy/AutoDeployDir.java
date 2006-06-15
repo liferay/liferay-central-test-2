@@ -22,6 +22,8 @@
 
 package com.liferay.portal.shared.deploy;
 
+import com.liferay.portal.shared.log.Log;
+import com.liferay.portal.shared.log.LogFactoryUtil;
 import com.liferay.portal.shared.util.StackTraceUtil;
 
 import java.io.File;
@@ -31,9 +33,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="AutoDeployDir.java.html"><b><i>View Source</i></b></a>
@@ -149,7 +148,7 @@ public class AutoDeployDir {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(AutoDeployDir.class);
+	private static Log _log = LogFactoryUtil.getLog(AutoDeployDir.class);
 
 	private String _name;
 	private File _deployDir;

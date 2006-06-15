@@ -22,6 +22,8 @@
 
 package com.liferay.portal.shared.security.jaas;
 
+import com.liferay.portal.shared.log.Log;
+import com.liferay.portal.shared.log.LogFactoryUtil;
 import com.liferay.portal.shared.util.PortalClassLoaderUtil;
 
 import java.util.Map;
@@ -30,9 +32,6 @@ import javax.security.auth.Subject;
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortalLoginModule.java.html"><b><i>View Source</i></b></a>
@@ -80,7 +79,7 @@ public class PortalLoginModule implements LoginModule {
 	private static final String _CLASS_NAME =
 		"com.liferay.portal.security.jaas.PortalLoginModule";
 
- 	private static Log _log = LogFactory.getLog(PortalLoginModule.class);
+ 	private static Log _log = LogFactoryUtil.getLog(PortalLoginModule.class);
 
 	private LoginModule _loginModule;
 

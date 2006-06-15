@@ -23,7 +23,10 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.jcr.jackrabbit.JCRFactoryImpl;
+import com.liferay.portal.log.LogFactoryImpl;
 import com.liferay.portal.security.jaas.PortalConfiguration;
+import com.liferay.portal.shared.log.LogFactoryUtil;
+import com.liferay.portal.shared.util.PortalClassLoaderUtil;
 import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
@@ -98,9 +101,28 @@ public class InitAction extends SimpleAction {
 		TimeZone.setDefault(
 			TimeZone.getTimeZone(SystemProperties.get("user.timezone")));
 
+		// Shared class loader
+
+		try {
+			PortalClassLoaderUtil.setClassLoader(
+				Thread.currentThread().getContextClassLoader());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// Shared log
+
+		try {
+			LogFactoryUtil.setLogFactory(new LogFactoryImpl());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		// Log4J
 
-		if (GetterUtil.get(SystemProperties.get(
+		if (GetterUtil.getBoolean(SystemProperties.get(
 				"log4j.configure.on.startup"), true) &&
 			!ServerDetector.isSun()) {
 
