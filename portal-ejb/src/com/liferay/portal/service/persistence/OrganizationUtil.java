@@ -118,6 +118,123 @@ public class OrganizationUtil {
 		return organization;
 	}
 
+	public static java.util.List getGroups(java.lang.String pk)
+		throws com.liferay.portal.NoSuchOrganizationException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().getGroups(pk);
+	}
+
+	public static java.util.List getGroups(java.lang.String pk, int begin,
+		int end)
+		throws com.liferay.portal.NoSuchOrganizationException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().getGroups(pk, begin, end);
+	}
+
+	public static java.util.List getGroups(java.lang.String pk, int begin,
+		int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchOrganizationException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().getGroups(pk, begin, end, obc);
+	}
+
+	public static int getGroupsSize(java.lang.String pk)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().getGroupsSize(pk);
+	}
+
+	public static void setGroups(java.lang.String pk, java.lang.String[] pks)
+		throws com.liferay.portal.NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		getPersistence().setGroups(pk, pks);
+	}
+
+	public static void setGroups(java.lang.String pk, java.util.List groups)
+		throws com.liferay.portal.NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		getPersistence().setGroups(pk, groups);
+	}
+
+	public static boolean addGroup(java.lang.String pk, java.lang.String groupPK)
+		throws com.liferay.portal.NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().addGroup(pk, groupPK);
+	}
+
+	public static boolean addGroup(java.lang.String pk,
+		com.liferay.portal.model.Group group)
+		throws com.liferay.portal.NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().addGroup(pk, group);
+	}
+
+	public static boolean addGroups(java.lang.String pk,
+		java.lang.String[] groupPKs)
+		throws com.liferay.portal.NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().addGroups(pk, groupPKs);
+	}
+
+	public static boolean addGroups(java.lang.String pk, java.util.List groups)
+		throws com.liferay.portal.NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().addGroups(pk, groups);
+	}
+
+	public static void clearGroups(java.lang.String pk)
+		throws com.liferay.portal.NoSuchOrganizationException, 
+			com.liferay.portal.SystemException {
+		getPersistence().clearGroups(pk);
+	}
+
+	public static boolean containsGroup(java.lang.String pk,
+		java.lang.String groupPK) throws com.liferay.portal.SystemException {
+		return getPersistence().containsGroup(pk, groupPK);
+	}
+
+	public static boolean containsGroups(java.lang.String pk)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().containsGroups(pk);
+	}
+
+	public static boolean removeGroup(java.lang.String pk,
+		java.lang.String groupPK)
+		throws com.liferay.portal.NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().removeGroup(pk, groupPK);
+	}
+
+	public static boolean removeGroup(java.lang.String pk,
+		com.liferay.portal.model.Group group)
+		throws com.liferay.portal.NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().removeGroup(pk, group);
+	}
+
+	public static boolean removeGroups(java.lang.String pk,
+		java.lang.String[] groupPKs)
+		throws com.liferay.portal.NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().removeGroups(pk, groupPKs);
+	}
+
+	public static boolean removeGroups(java.lang.String pk,
+		java.util.List groups)
+		throws com.liferay.portal.NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().removeGroups(pk, groups);
+	}
+
 	public static java.util.List getUsers(java.lang.String pk)
 		throws com.liferay.portal.NoSuchOrganizationException, 
 			com.liferay.portal.SystemException {

@@ -42,8 +42,6 @@ create index EmailAddress_ix_C_C_C_P on EmailAddress (companyId, className, clas
 create index EmailAddress_ix_CompanyId on EmailAddress (companyId);
 create index EmailAddress_ix_UserId on EmailAddress (userId);
 
-create index GroupRel_ix_C_C on GroupRel (className, classPK);
-
 create index Group_ix_C_C_C on Group_ (companyId, className, classPK);
 create index Group_ix_C_F on Group_ (companyId, friendlyURL);
 

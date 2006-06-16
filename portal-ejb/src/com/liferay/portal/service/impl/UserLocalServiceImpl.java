@@ -300,7 +300,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		GroupLocalServiceUtil.addGroup(
 			user.getUserId(), User.class.getName(),
-			user.getPrimaryKey().toString(), null, null);
+			user.getPrimaryKey().toString(), null, null, null, null);
 
 		// Default groups
 

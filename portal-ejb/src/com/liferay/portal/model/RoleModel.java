@@ -52,6 +52,9 @@ public class RoleModel extends BaseModel {
 	public static boolean XSS_ALLOW_NAME = GetterUtil.get(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Role.name"),
 			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.get(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Role.description"),
+			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.RoleModel"));
 
@@ -155,6 +158,24 @@ public class RoleModel extends BaseModel {
 		}
 	}
 
+	public String getDescription() {
+		return GetterUtil.getString(_description);
+	}
+
+	public void setDescription(String description) {
+		if (((description == null) && (_description != null)) ||
+				((description != null) && (_description == null)) ||
+				((description != null) && (_description != null) &&
+				!description.equals(_description))) {
+			if (!XSS_ALLOW_DESCRIPTION) {
+				description = XSSUtil.strip(description);
+			}
+
+			_description = description;
+			setModified(true);
+		}
+	}
+
 	public Object clone() {
 		Role clone = new Role();
 		clone.setRoleId(getRoleId());
@@ -162,6 +183,7 @@ public class RoleModel extends BaseModel {
 		clone.setClassName(getClassName());
 		clone.setClassPK(getClassPK());
 		clone.setName(getName());
+		clone.setDescription(getDescription());
 
 		return clone;
 	}
@@ -215,4 +237,5 @@ public class RoleModel extends BaseModel {
 	private String _className;
 	private String _classPK;
 	private String _name;
+	private String _description;
 }

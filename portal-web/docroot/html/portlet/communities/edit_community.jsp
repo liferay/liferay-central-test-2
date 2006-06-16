@@ -32,8 +32,8 @@ Group group = (Group)request.getAttribute(WebKeys.GROUP);
 String groupId = BeanParamUtil.getString(group, request, "groupId");
 
 String name = BeanParamUtil.getString(group, request, "name");
-String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 String type = BeanParamUtil.getString(group, request, "type");
+String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 %>
 
 <script type="text/javascript">
@@ -75,11 +75,12 @@ String type = BeanParamUtil.getString(group, request, "type");
 	</td>
 </tr>
 <tr>
-	<td></td>
+	<td>
+		<%= LanguageUtil.get(pageContext, "open") %>
+	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input <%= (type != null && type.equals(Group.COMMUNITY_OPEN)) ? "checked" : "" %> name="<portlet:namespace />type" value="<%= Group.COMMUNITY_OPEN %>" type="checkbox">
-		<%= LanguageUtil.get(pageContext, "is-this-an-open-community") %>
+		<input <%= type.equals(Group.TYPE_COMMUNITY_OPEN) ? "checked" : "" %> name="<portlet:namespace />type" value="<%= Group.TYPE_COMMUNITY_OPEN %>" type="checkbox">
 	</td>
 </tr>
 </table>

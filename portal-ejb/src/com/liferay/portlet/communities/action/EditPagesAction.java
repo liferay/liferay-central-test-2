@@ -296,7 +296,9 @@ public class EditPagesAction extends PortletAction {
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-		GroupServiceUtil.updateGroup(groupId, group.getName(), friendlyURL);
+		GroupServiceUtil.updateGroup(
+			groupId, group.getName(), group.getDescription(), group.getType(),
+			friendlyURL);
 	}
 
 	protected void updateLayout(PageForm pageForm, ActionRequest req)

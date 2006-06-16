@@ -36,6 +36,7 @@ import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.OrganizationFinder;
 import com.liferay.portal.service.persistence.OrganizationUtil;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -61,6 +62,13 @@ import java.util.Map;
  *
  */
 public class OrganizationLocalServiceImpl implements OrganizationLocalService {
+
+	public boolean addGroupOrganizations(
+			String groupId, String[] organizationIds)
+		throws PortalException, SystemException {
+
+		return GroupUtil.addOrganizations(groupId, organizationIds);
+	}
 
 	public Organization addOrganization(
 			String userId, String parentOrganizationId, String name,
@@ -96,7 +104,7 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 
 		GroupLocalServiceUtil.addGroup(
 			userId, Organization.class.getName(),
-			organization.getPrimaryKey().toString(), null, null);
+			organization.getPrimaryKey().toString(), null, null, null, null);
 
 		// Resources
 
@@ -196,10 +204,22 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 		return OrganizationUtil.findByPrimaryKey(organizationId);
 	}
 
+	public List getGroupOrganizations(String groupId)
+		throws PortalException, SystemException {
+
+		return GroupUtil.getOrganizations(groupId);
+	}
+
 	public List getUserOrganizations(String userId)
 		throws PortalException, SystemException {
 
 		return UserUtil.getOrganizations(userId);
+	}
+
+	public boolean hasGroupOrganization(String groupId, String organizationId)
+		throws PortalException, SystemException {
+
+		return GroupUtil.containsOrganization(groupId, organizationId);
 	}
 
 	public List search(
@@ -225,6 +245,19 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 		return OrganizationFinder.countByC_PO_N_S_C_Z_R_C(
 			companyId, parentOrganizationId, parentOrganizationComparator, name,
 			street, city, zip, regionId, countryId, params, andOperator);
+	}
+
+	public void setGroupOrganizations(String groupId, String[] organizationIds)
+		throws PortalException, SystemException {
+
+		GroupUtil.setOrganizations(groupId, organizationIds);
+	}
+
+	public boolean unsetGroupOrganizations(
+			String groupId, String[] organizationIds)
+		throws PortalException, SystemException {
+
+		return GroupUtil.removeOrganizations(groupId, organizationIds);
 	}
 
 	public Organization updateOrganization(

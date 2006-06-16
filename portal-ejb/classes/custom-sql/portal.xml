@@ -15,6 +15,22 @@
                 (lower(Group_.name) LIKE ? OR ? IS NULL)
         ]]>
     </sql>
+    <sql id="com.liferay.portal.service.persistence.GroupFinder.countByOrgsGroups">
+        <![CDATA[
+			SELECT
+                COUNT(*) AS COUNT_VALUE
+			FROM
+				Group_
+			INNER JOIN
+				Groups_Orgs ON
+					(Groups_Orgs.groupId = Group_.groupId) AND
+					(Group_.groupId = ?)
+			INNER JOIN
+				Users_Orgs ON
+					(Users_Orgs.organizationId = Groups_Orgs.organizationId) AND
+					(Users_Orgs.userId = ?)
+        ]]>
+    </sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.findByC_N_1">
         <![CDATA[
             SELECT
@@ -42,19 +58,18 @@
     </sql>
     <sql id="com.liferay.portal.service.persistence.GroupFinder.findByOrgsGroups">
         <![CDATA[
-			SELECT 
+			SELECT
 				Group_.groupId AS groupId, Group_.name AS groupName
-			FROM 
+			FROM
 				Group_
-            [$JOIN$]
-			INNER JOIN 
+			[$JOIN$]
+			INNER JOIN
+				Groups_Orgs ON
+					(Groups_Orgs.groupId = Group_.groupId)
+			INNER JOIN
 				Users_Orgs ON
+					(Users_Orgs.organizationId = Groups_Orgs.organizationId) AND
 					(Users_Orgs.userId = ?)
-			INNER JOIN 
-				GroupRel ON
-					(GroupRel.className = ?) AND
-					(GroupRel.classPK = Users_Orgs.organizationId) AND
-					(GroupRel.groupId = Group_.groupId)
         ]]>
     </sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByGroupsRoles">
@@ -209,6 +224,14 @@
 					(Groups_Permissions.groupId = Group_.groupId) AND
 					(Groups_Permissions.permissionId = Permission_.permissionId)
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.joinByOrganizationsGroups">
+		<![CDATA[
+			INNER JOIN
+				Groups_Orgs ON
+					(Groups_Orgs.organizationId = Organization_.organizationId) AND
+					(Groups_Orgs.groupId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.joinByOrganizationsRoles">
 		<![CDATA[
 			INNER JOIN
@@ -219,15 +242,6 @@
 				Groups_Roles ON
 					(Groups_Roles.groupId = Group_.groupId) AND
 					(Groups_Roles.roleId = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.joinByOrganizationsGroups">
-		<![CDATA[
-			INNER JOIN
-				GroupRel ON
-					(GroupRel.className = ?) AND
-					(GroupRel.classPK = Organization_.organizationId) AND
-					(GroupRel.groupId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.joinByOrgGroupPermission">

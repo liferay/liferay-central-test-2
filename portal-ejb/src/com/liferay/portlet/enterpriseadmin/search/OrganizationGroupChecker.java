@@ -24,8 +24,7 @@ package com.liferay.portlet.enterpriseadmin.search;
 
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.Role;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
+import com.liferay.portal.service.spring.OrganizationLocalServiceUtil;
 import com.liferay.util.dao.search.RowChecker;
 
 import javax.portlet.RenderResponse;
@@ -51,7 +50,7 @@ public class OrganizationGroupChecker extends RowChecker {
 		Organization organization = (Organization)obj;
 
 		try {
-			return GroupLocalServiceUtil.hasCommunityOrg(
+			return OrganizationLocalServiceUtil.hasGroupOrganization(
 				_group.getGroupId(), organization.getOrganizationId());
 		}
 		catch (Exception e){

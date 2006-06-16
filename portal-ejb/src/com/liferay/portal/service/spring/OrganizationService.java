@@ -29,6 +29,11 @@ package com.liferay.portal.service.spring;
  *
  */
 public interface OrganizationService {
+	public boolean addGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public com.liferay.portal.model.Organization addOrganization(
 		java.lang.String parentOrganizationId, java.lang.String name,
 		java.lang.String regionId, java.lang.String countryId,
@@ -42,6 +47,16 @@ public interface OrganizationService {
 
 	public com.liferay.portal.model.Organization getOrganization(
 		java.lang.String organizationId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public void setGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public boolean unsetGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 

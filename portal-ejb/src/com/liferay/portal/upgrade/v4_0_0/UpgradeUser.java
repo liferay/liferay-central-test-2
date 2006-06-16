@@ -154,7 +154,8 @@ public class UpgradeUser extends UpgradeProcess {
 				if (!User.isDefaultUser(userId)) {
 					GroupLocalServiceUtil.addGroup(
 						user.getUserId(), User.class.getName(),
-						user.getPrimaryKey().toString(), null, null);
+						user.getPrimaryKey().toString(), null, null, null,
+						null);
 				}
 			}
 		}

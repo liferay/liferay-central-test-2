@@ -61,11 +61,11 @@ public class OrganizationFinder {
 	public static String JOIN_BY_ORG_GROUP_PERMISSION =
 		OrganizationFinder.class.getName() + ".joinByOrgGroupPermission";
 
-	public static String JOIN_BY_ORGANIZATIONS_ROLES =
-		OrganizationFinder.class.getName() + ".joinByOrganizationsRoles";
-
 	public static String JOIN_BY_ORGANIZATIONS_GROUPS =
 		OrganizationFinder.class.getName() + ".joinByOrganizationsGroups";
+
+	public static String JOIN_BY_ORGANIZATIONS_ROLES =
+		OrganizationFinder.class.getName() + ".joinByOrganizationsRoles";
 
 	public static int countByC_PO_N_S_C_Z_R_C(
 			String companyId, String parentOrganizationId,
@@ -464,7 +464,9 @@ public class OrganizationFinder {
 
 			String key = (String)entry.getKey();
 
-			if (key.equals("organizationsRoles") || key.equals("organizationsGroups")) {
+			if (key.equals("organizationsGroups") ||
+				key.equals("organizationsRoles")) {
+
 				sb.append(_getJoin(key));
 			}
 		}
@@ -475,10 +477,11 @@ public class OrganizationFinder {
 	private static String _getJoin(String key) {
 		StringBuffer sb = new StringBuffer();
 
-		if (key.equals("organizationsRoles")) {
-			sb.append(CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_ROLES));
-		} else if (key.equals("organizationsGroups")) {
+		if (key.equals("organizationsGroups")) {
 			sb.append(CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_GROUPS));
+		}
+		else if (key.equals("organizationsRoles")) {
+			sb.append(CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_ROLES));
 		}
 
 		return sb.toString();
@@ -493,7 +496,9 @@ public class OrganizationFinder {
 
 				String key = (String)entry.getKey();
 
-				if (key.equals("organizationsRoles") || key.equals("organizationsGroups")) {
+				if (key.equals("organizationsGroups") ||
+					key.equals("organizationsRoles")) {
+
 					List values = (List)entry.getValue();
 
 					for (int i = 0; i < values.size(); i++) {

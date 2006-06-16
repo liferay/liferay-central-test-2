@@ -107,6 +107,7 @@ public class RolePersistence extends BasePersistence {
 					roleHBM.setClassName(role.getClassName());
 					roleHBM.setClassPK(role.getClassPK());
 					roleHBM.setName(role.getName());
+					roleHBM.setDescription(role.getDescription());
 					roleHBM.setGroups(new HashSet());
 					roleHBM.setPermissions(new HashSet());
 					roleHBM.setUsers(new HashSet());
@@ -122,6 +123,7 @@ public class RolePersistence extends BasePersistence {
 						roleHBM.setClassName(role.getClassName());
 						roleHBM.setClassPK(role.getClassPK());
 						roleHBM.setName(role.getName());
+						roleHBM.setDescription(role.getDescription());
 						session.flush();
 					}
 					else {
@@ -131,6 +133,7 @@ public class RolePersistence extends BasePersistence {
 						roleHBM.setClassName(role.getClassName());
 						roleHBM.setClassPK(role.getClassPK());
 						roleHBM.setName(role.getName());
+						roleHBM.setDescription(role.getDescription());
 						session.save(roleHBM);
 						session.flush();
 					}

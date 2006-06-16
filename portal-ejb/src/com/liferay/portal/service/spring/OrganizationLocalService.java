@@ -29,6 +29,11 @@ package com.liferay.portal.service.spring;
  *
  */
 public interface OrganizationLocalService {
+	public boolean addGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Organization addOrganization(
 		java.lang.String userId, java.lang.String parentOrganizationId,
 		java.lang.String name, java.lang.String regionId,
@@ -55,7 +60,16 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public java.util.List getGroupOrganizations(java.lang.String groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public java.util.List getUserOrganizations(java.lang.String userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public boolean hasGroupOrganization(java.lang.String groupId,
+		java.lang.String organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
@@ -74,6 +88,16 @@ public interface OrganizationLocalService {
 		java.lang.String regionId, java.lang.String countryId,
 		java.util.Map params, boolean andOperator)
 		throws com.liferay.portal.SystemException;
+
+	public void setGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public boolean unsetGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Organization updateOrganization(
 		java.lang.String companyId, java.lang.String organizationId,

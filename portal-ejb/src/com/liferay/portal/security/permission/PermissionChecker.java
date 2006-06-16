@@ -104,7 +104,7 @@ public class PermissionChecker {
 					OrganizationLocalServiceUtil.getUserOrganizations(
 						user.getUserId());
 
-				List userOrgGroups = GroupServiceUtil.getOrganizationGroups(
+				List userOrgGroups = GroupServiceUtil.getOrganizationsGroups(
 					userOrgs);
 
 				permissionCheckerBag = new PermissionCheckerBag(

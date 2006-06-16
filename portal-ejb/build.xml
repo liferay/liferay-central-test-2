@@ -219,7 +219,7 @@
 			fork="true"
 			newenvironment="true"
 		>
-			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog" />
+			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 		</java>
 	</target>
 
@@ -239,7 +239,7 @@
 			fork="true"
 			newenvironment="true"
 		>
-			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog" />
+			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 		</java>
 	</target>
 
@@ -251,7 +251,7 @@
 			maxmemory="512m"
 			newenvironment="true"
 		>
-			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog" />
+			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 			<arg value="${service.file}" />
 			<arg value="classes/META-INF/portal-hbm.xml" />
 			<arg value="classes/META-INF/portal-model-hints.xml" />
@@ -380,7 +380,7 @@
 			maxmemory="256m"
 			newenvironment="true"
 		>
-			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog" />
+			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 			<arg value="${service.file}" />
 			<arg value="../tunnel-web/docroot/WEB-INF/server-config.wsdd" />
 		</java>

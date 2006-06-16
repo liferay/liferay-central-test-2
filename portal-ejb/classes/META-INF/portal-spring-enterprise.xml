@@ -460,16 +460,6 @@
 			<ref bean="com.liferay.portal.service.persistence.GroupPersistence" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.GroupRelPersistence" class="com.liferay.portal.service.persistence.GroupRelPersistence" lazy-init="true">
-		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.GroupRelUtil" class="com.liferay.portal.service.persistence.GroupRelUtil" lazy-init="true">
-		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.GroupRelPersistence" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.service.spring.ImageLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
 		<property name="businessInterface">
 			<value>com.liferay.portal.service.spring.ImageLocalService</value>

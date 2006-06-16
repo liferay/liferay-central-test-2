@@ -25,7 +25,6 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Organization;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.StringPool;
@@ -54,6 +53,9 @@ public class GroupFinder {
 
 	public static String COUNT_BY_C_N_1 =
 		GroupFinder.class.getName() + ".countByC_N_1";
+
+	public static String COUNT_BY_ORGS_GROUPS =
+		GroupFinder.class.getName() + ".countByOrgsGroups";
 
 	public static String FIND_BY_C_N_1 =
 		GroupFinder.class.getName() + ".findByC_N_1";
@@ -123,6 +125,45 @@ public class GroupFinder {
 		}
 	}
 
+	public static int countByOrgsGroups(String groupId, String userId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_ORGS_GROUPS);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
 	public static List findByC_N_1(String companyId, String name, Map params)
 		throws SystemException {
 
@@ -156,7 +197,7 @@ public class GroupFinder {
 
 			while (itr.hasNext()) {
 				String groupId = (String)itr.next();
-				
+
 				Group group = GroupUtil.findByPrimaryKey(groupId);
 
 				list.add(group);
@@ -207,7 +248,7 @@ public class GroupFinder {
 
 			while (itr.hasNext()) {
 				String groupId = (String)itr.next();
-				
+
 				Group group = GroupUtil.findByPrimaryKey(groupId);
 
 				list.add(group);
@@ -264,45 +305,53 @@ public class GroupFinder {
 				name + "}");
 	}
 
-	public static List findByC_N_U(String companyId, String name, String userId, Map params)
+	public static List findByOrgsGroups(
+			String companyId, String userId, Boolean privateLayout)
 		throws SystemException {
-	
-		name = StringUtil.lowerCase(name);
-	
+
+		String name = null;
+
+		Map cn1Params = new HashMap();
+		Map orgsGroupsParams = new HashMap();
+
+		cn1Params.put("usersGroups", userId);
+
+		if (privateLayout != null) {
+			cn1Params.put("layoutSet", privateLayout);
+			orgsGroupsParams.put("layoutSet", privateLayout);
+		}
+
 		List list = new ArrayList();
-	
+
 		Session session = null;
-	
+
 		try {
 			session = HibernateUtil.openSession();
 
-			Map orgsGroupsParams = new HashMap();
-			orgsGroupsParams.putAll(params);
-			orgsGroupsParams.remove("usersGroups");
-			
-			String sql = null; 
-				
+			String sql = null;
+
 			sql = "(";
 			sql += CustomSQLUtil.get(FIND_BY_C_N_1);
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
+			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(cn1Params));
 			sql += ")";
-			
+
 			sql += " UNION ";
-			
+
 			sql += "(";
 			sql += CustomSQLUtil.get(FIND_BY_ORGS_GROUPS);
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(orgsGroupsParams));
+			sql = StringUtil.replace(
+				sql, "[$JOIN$]", _getJoin(orgsGroupsParams));
 			sql += ")";
-			
+
 			sql += " ORDER BY groupName ASC";
-			
+
 			SQLQuery q = session.createSQLQuery(sql);
-	
+
 			q.addScalar("groupId", Hibernate.STRING);
-	
+
 			QueryPos qPos = QueryPos.getInstance(q);
-	
-			_setJoin(qPos, params);
+
+			_setJoin(qPos, cn1Params);
 			qPos.add(companyId);
 			qPos.add(StringPool.BLANK);
 			qPos.add(StringPool.BLANK);
@@ -311,15 +360,14 @@ public class GroupFinder {
 
 			_setJoin(qPos, orgsGroupsParams);
 			qPos.add(userId);
-			qPos.add(Organization.class.getName());
-	
+
 			Iterator itr = q.list().iterator();
-	
+
 			while (itr.hasNext()) {
 				String groupId = (String)itr.next();
-	
+
 				Group group = GroupUtil.findByPrimaryKey(groupId);
-	
+
 				list.add(group);
 			}
 		}
@@ -329,10 +377,10 @@ public class GroupFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-	
+
 		return list;
 	}
-	
+
 	private static String _getJoin(Map params) {
 		if (params == null) {
 			return StringPool.BLANK;

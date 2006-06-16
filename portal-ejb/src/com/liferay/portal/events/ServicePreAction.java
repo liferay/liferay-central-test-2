@@ -630,7 +630,7 @@ public class ServicePreAction extends Action {
 
 			if (layout == null) {
 				List groups = GroupLocalServiceUtil.getUserGroups(
-					user.getUserId());
+					user.getCompanyId(), user.getUserId());
 
 				for (int i = 0; i < groups.size(); i++) {
 					Group group = (Group)groups.get(i);

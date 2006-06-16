@@ -114,6 +114,7 @@ public class OrganizationPersistence extends BasePersistence {
 					organizationHBM.setCountryId(organization.getCountryId());
 					organizationHBM.setStatusId(organization.getStatusId());
 					organizationHBM.setComments(organization.getComments());
+					organizationHBM.setGroups(new HashSet());
 					organizationHBM.setUsers(new HashSet());
 					session.save(organizationHBM);
 					session.flush();
@@ -154,6 +155,726 @@ public class OrganizationPersistence extends BasePersistence {
 			}
 
 			return organization;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List getGroups(String pk)
+		throws NoSuchOrganizationException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			OrganizationHBM organizationHBM = (OrganizationHBM)session.get(OrganizationHBM.class,
+					pk);
+
+			if (organizationHBM == null) {
+				_log.warn("No Organization exists with the primary key " +
+					pk.toString());
+				throw new NoSuchOrganizationException(
+					"No Organization exists with the primary key " +
+					pk.toString());
+			}
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT groupHBM FROM ");
+			query.append(com.liferay.portal.service.persistence.OrganizationHBM.class.getName());
+			query.append(" organizationHBM ");
+			query.append("JOIN organizationHBM.groups AS groupHBM ");
+			query.append("WHERE organizationHBM.organizationId = ? ");
+			query.append("ORDER BY ");
+			query.append("groupHBM.name ASC");
+
+			Query q = session.createQuery(query.toString());
+			q.setString(0, pk);
+
+			Iterator itr = q.list().iterator();
+			List list = new ArrayList();
+
+			while (itr.hasNext()) {
+				com.liferay.portal.service.persistence.GroupHBM groupHBM = (com.liferay.portal.service.persistence.GroupHBM)itr.next();
+				list.add(com.liferay.portal.service.persistence.GroupHBMUtil.model(
+						groupHBM));
+			}
+
+			return list;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List getGroups(String pk, int begin, int end)
+		throws NoSuchOrganizationException, SystemException {
+		return getGroups(pk, begin, end, null);
+	}
+
+	public List getGroups(String pk, int begin, int end, OrderByComparator obc)
+		throws NoSuchOrganizationException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			OrganizationHBM organizationHBM = (OrganizationHBM)session.get(OrganizationHBM.class,
+					pk);
+
+			if (organizationHBM == null) {
+				_log.warn("No Organization exists with the primary key " +
+					pk.toString());
+				throw new NoSuchOrganizationException(
+					"No Organization exists with the primary key " +
+					pk.toString());
+			}
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT groupHBM FROM ");
+			query.append(com.liferay.portal.service.persistence.OrganizationHBM.class.getName());
+			query.append(" organizationHBM ");
+			query.append("JOIN organizationHBM.groups AS groupHBM ");
+			query.append("WHERE organizationHBM.organizationId = ? ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("groupHBM.name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setString(0, pk);
+
+			List list = new ArrayList();
+			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
+
+			while (itr.hasNext()) {
+				com.liferay.portal.service.persistence.GroupHBM groupHBM = (com.liferay.portal.service.persistence.GroupHBM)itr.next();
+				list.add(com.liferay.portal.service.persistence.GroupHBMUtil.model(
+						groupHBM));
+			}
+
+			return list;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int getGroupsSize(String pk) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) FROM ");
+			query.append(com.liferay.portal.service.persistence.OrganizationHBM.class.getName());
+			query.append(" organizationHBM ");
+			query.append("JOIN organizationHBM.groups AS groupHBM ");
+			query.append("WHERE organizationHBM.organizationId = ? ");
+
+			Query q = session.createQuery(query.toString());
+			q.setString(0, pk);
+
+			Iterator itr = q.iterate();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public void setGroups(String pk, String[] pks)
+		throws NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			OrganizationHBM organizationHBM = (OrganizationHBM)session.get(OrganizationHBM.class,
+					pk);
+
+			if (organizationHBM == null) {
+				_log.warn("No Organization exists with the primary key " +
+					pk.toString());
+				throw new NoSuchOrganizationException(
+					"No Organization exists with the primary key " +
+					pk.toString());
+			}
+
+			Set groupsSet = new HashSet();
+
+			for (int i = 0; (pks != null) && (i < pks.length); i++) {
+				com.liferay.portal.service.persistence.GroupHBM groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
+						pks[i]);
+
+				if (groupHBM == null) {
+					_log.warn("No Group exists with the primary key " +
+						pks[i].toString());
+					throw new com.liferay.portal.NoSuchGroupException(
+						"No Group exists with the primary key " +
+						pks[i].toString());
+				}
+
+				groupsSet.add(groupHBM);
+			}
+
+			organizationHBM.setGroups(groupsSet);
+			session.flush();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public void setGroups(String pk, List groups)
+		throws NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			OrganizationHBM organizationHBM = (OrganizationHBM)session.get(OrganizationHBM.class,
+					pk);
+
+			if (organizationHBM == null) {
+				_log.warn("No Organization exists with the primary key " +
+					pk.toString());
+				throw new NoSuchOrganizationException(
+					"No Organization exists with the primary key " +
+					pk.toString());
+			}
+
+			Set groupsSet = new HashSet();
+			Iterator itr = groups.iterator();
+
+			while (itr.hasNext()) {
+				com.liferay.portal.model.Group group = (com.liferay.portal.model.Group)itr.next();
+				com.liferay.portal.service.persistence.GroupHBM groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
+						group.getPrimaryKey());
+
+				if (groupHBM == null) {
+					_log.warn("No Group exists with the primary key " +
+						group.getPrimaryKey().toString());
+					throw new com.liferay.portal.NoSuchGroupException(
+						"No Group exists with the primary key " +
+						group.getPrimaryKey().toString());
+				}
+
+				groupsSet.add(groupHBM);
+			}
+
+			organizationHBM.setGroups(groupsSet);
+			session.flush();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean addGroup(String pk, String groupPK)
+		throws NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			OrganizationHBM organizationHBM = (OrganizationHBM)session.get(OrganizationHBM.class,
+					pk);
+
+			if (organizationHBM == null) {
+				_log.warn("No Organization exists with the primary key " +
+					pk.toString());
+				throw new NoSuchOrganizationException(
+					"No Organization exists with the primary key " +
+					pk.toString());
+			}
+
+			com.liferay.portal.service.persistence.GroupHBM groupHBM = null;
+			groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
+					groupPK);
+
+			if (groupHBM == null) {
+				_log.warn("No Group exists with the primary key " +
+					groupPK.toString());
+				throw new com.liferay.portal.NoSuchGroupException(
+					"No Group exists with the primary key " +
+					groupPK.toString());
+			}
+
+			boolean value = organizationHBM.getGroups().add(groupHBM);
+			session.flush();
+
+			return value;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean addGroup(String pk, com.liferay.portal.model.Group group)
+		throws NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			OrganizationHBM organizationHBM = (OrganizationHBM)session.get(OrganizationHBM.class,
+					pk);
+
+			if (organizationHBM == null) {
+				_log.warn("No Organization exists with the primary key " +
+					pk.toString());
+				throw new NoSuchOrganizationException(
+					"No Organization exists with the primary key " +
+					pk.toString());
+			}
+
+			com.liferay.portal.service.persistence.GroupHBM groupHBM = null;
+			groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
+					group.getPrimaryKey());
+
+			if (groupHBM == null) {
+				_log.warn("No Group exists with the primary key " +
+					group.getPrimaryKey().toString());
+				throw new com.liferay.portal.NoSuchGroupException(
+					"No Group exists with the primary key " +
+					group.getPrimaryKey().toString());
+			}
+
+			boolean value = organizationHBM.getGroups().add(groupHBM);
+			session.flush();
+
+			return value;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean addGroups(String pk, String[] groupPKs)
+		throws NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			OrganizationHBM organizationHBM = (OrganizationHBM)session.get(OrganizationHBM.class,
+					pk);
+
+			if (organizationHBM == null) {
+				_log.warn("No Organization exists with the primary key " +
+					pk.toString());
+				throw new NoSuchOrganizationException(
+					"No Organization exists with the primary key " +
+					pk.toString());
+			}
+
+			boolean value = false;
+
+			for (int i = 0; i < groupPKs.length; i++) {
+				com.liferay.portal.service.persistence.GroupHBM groupHBM = null;
+				groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
+						groupPKs[i]);
+
+				if (groupHBM == null) {
+					_log.warn("No Group exists with the primary key " +
+						groupPKs[i].toString());
+					throw new com.liferay.portal.NoSuchGroupException(
+						"No Group exists with the primary key " +
+						groupPKs[i].toString());
+				}
+
+				if (organizationHBM.getGroups().add(groupHBM)) {
+					value = true;
+				}
+			}
+
+			session.flush();
+
+			return value;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean addGroups(String pk, List groups)
+		throws NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			OrganizationHBM organizationHBM = (OrganizationHBM)session.get(OrganizationHBM.class,
+					pk);
+
+			if (organizationHBM == null) {
+				_log.warn("No Organization exists with the primary key " +
+					pk.toString());
+				throw new NoSuchOrganizationException(
+					"No Organization exists with the primary key " +
+					pk.toString());
+			}
+
+			boolean value = false;
+
+			for (int i = 0; i < groups.size(); i++) {
+				com.liferay.portal.model.Group group = (com.liferay.portal.model.Group)groups.get(i);
+				com.liferay.portal.service.persistence.GroupHBM groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
+						group.getPrimaryKey());
+
+				if (groupHBM == null) {
+					_log.warn("No Group exists with the primary key " +
+						group.getPrimaryKey().toString());
+					throw new com.liferay.portal.NoSuchGroupException(
+						"No Group exists with the primary key " +
+						group.getPrimaryKey().toString());
+				}
+
+				if (organizationHBM.getGroups().add(groupHBM)) {
+					value = true;
+				}
+			}
+
+			session.flush();
+
+			return value;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public void clearGroups(String pk)
+		throws NoSuchOrganizationException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			OrganizationHBM organizationHBM = (OrganizationHBM)session.get(OrganizationHBM.class,
+					pk);
+
+			if (organizationHBM == null) {
+				_log.warn("No Organization exists with the primary key " +
+					pk.toString());
+				throw new NoSuchOrganizationException(
+					"No Organization exists with the primary key " +
+					pk.toString());
+			}
+
+			organizationHBM.getGroups().clear();
+			session.flush();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public static final String SQL_CONTAINSGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Orgs WHERE organizationId = ? AND groupId = ?";
+
+	public boolean containsGroup(String pk, String groupPK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(SQL_CONTAINSGROUP);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+			qPos.add(pk);
+			qPos.add(groupPK);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if ((count != null) && (count.intValue() > 0)) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public static final String SQL_CONTAINSGROUPS = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Orgs WHERE organizationId = ?";
+
+	public boolean containsGroups(String pk) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(SQL_CONTAINSGROUPS);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+			qPos.add(pk);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if ((count != null) && (count.intValue() > 0)) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean removeGroup(String pk, String groupPK)
+		throws NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			OrganizationHBM organizationHBM = (OrganizationHBM)session.get(OrganizationHBM.class,
+					pk);
+
+			if (organizationHBM == null) {
+				_log.warn("No Organization exists with the primary key " +
+					pk.toString());
+				throw new NoSuchOrganizationException(
+					"No Organization exists with the primary key " +
+					pk.toString());
+			}
+
+			com.liferay.portal.service.persistence.GroupHBM groupHBM = null;
+			groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
+					groupPK);
+
+			if (groupHBM == null) {
+				_log.warn("No Group exists with the primary key " +
+					groupPK.toString());
+				throw new com.liferay.portal.NoSuchGroupException(
+					"No Group exists with the primary key " +
+					groupPK.toString());
+			}
+
+			boolean value = organizationHBM.getGroups().remove(groupHBM);
+			session.flush();
+
+			return value;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean removeGroup(String pk, com.liferay.portal.model.Group group)
+		throws NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			OrganizationHBM organizationHBM = (OrganizationHBM)session.get(OrganizationHBM.class,
+					pk);
+
+			if (organizationHBM == null) {
+				_log.warn("No Organization exists with the primary key " +
+					pk.toString());
+				throw new NoSuchOrganizationException(
+					"No Organization exists with the primary key " +
+					pk.toString());
+			}
+
+			com.liferay.portal.service.persistence.GroupHBM groupHBM = null;
+			groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
+					group.getPrimaryKey());
+
+			if (groupHBM == null) {
+				_log.warn("No Group exists with the primary key " +
+					group.getPrimaryKey().toString());
+				throw new com.liferay.portal.NoSuchGroupException(
+					"No Group exists with the primary key " +
+					group.getPrimaryKey().toString());
+			}
+
+			boolean value = organizationHBM.getGroups().remove(groupHBM);
+			session.flush();
+
+			return value;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean removeGroups(String pk, String[] groupPKs)
+		throws NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			OrganizationHBM organizationHBM = (OrganizationHBM)session.get(OrganizationHBM.class,
+					pk);
+
+			if (organizationHBM == null) {
+				_log.warn("No Organization exists with the primary key " +
+					pk.toString());
+				throw new NoSuchOrganizationException(
+					"No Organization exists with the primary key " +
+					pk.toString());
+			}
+
+			boolean value = false;
+
+			for (int i = 0; i < groupPKs.length; i++) {
+				com.liferay.portal.service.persistence.GroupHBM groupHBM = null;
+				groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
+						groupPKs[i]);
+
+				if (groupHBM == null) {
+					_log.warn("No Group exists with the primary key " +
+						groupPKs[i].toString());
+					throw new com.liferay.portal.NoSuchGroupException(
+						"No Group exists with the primary key " +
+						groupPKs[i].toString());
+				}
+
+				if (organizationHBM.getGroups().remove(groupHBM)) {
+					value = true;
+				}
+			}
+
+			session.flush();
+
+			return value;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean removeGroups(String pk, List groups)
+		throws NoSuchOrganizationException, 
+			com.liferay.portal.NoSuchGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			OrganizationHBM organizationHBM = (OrganizationHBM)session.get(OrganizationHBM.class,
+					pk);
+
+			if (organizationHBM == null) {
+				_log.warn("No Organization exists with the primary key " +
+					pk.toString());
+				throw new NoSuchOrganizationException(
+					"No Organization exists with the primary key " +
+					pk.toString());
+			}
+
+			boolean value = false;
+
+			for (int i = 0; i < groups.size(); i++) {
+				com.liferay.portal.model.Group group = (com.liferay.portal.model.Group)groups.get(i);
+				com.liferay.portal.service.persistence.GroupHBM groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
+						group.getPrimaryKey());
+
+				if (groupHBM == null) {
+					_log.warn("No Group exists with the primary key " +
+						group.getPrimaryKey().toString());
+					throw new com.liferay.portal.NoSuchGroupException(
+						"No Group exists with the primary key " +
+						group.getPrimaryKey().toString());
+				}
+
+				if (organizationHBM.getGroups().remove(groupHBM)) {
+					value = true;
+				}
+			}
+
+			session.flush();
+
+			return value;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

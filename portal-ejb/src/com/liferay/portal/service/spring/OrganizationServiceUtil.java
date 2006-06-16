@@ -29,6 +29,27 @@ package com.liferay.portal.service.spring;
  *
  */
 public class OrganizationServiceUtil {
+	public static boolean addGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			OrganizationService organizationService = OrganizationServiceFactory.getService();
+
+			return organizationService.addGroupOrganizations(groupId,
+				organizationIds);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static com.liferay.portal.model.Organization addOrganization(
 		java.lang.String parentOrganizationId, java.lang.String name,
 		java.lang.String regionId, java.lang.String countryId,
@@ -78,6 +99,46 @@ public class OrganizationServiceUtil {
 			OrganizationService organizationService = OrganizationServiceFactory.getService();
 
 			return organizationService.getOrganization(organizationId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static void setGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			OrganizationService organizationService = OrganizationServiceFactory.getService();
+			organizationService.setGroupOrganizations(groupId, organizationIds);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static boolean unsetGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			OrganizationService organizationService = OrganizationServiceFactory.getService();
+
+			return organizationService.unsetGroupOrganizations(groupId,
+				organizationIds);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

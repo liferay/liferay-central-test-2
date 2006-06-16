@@ -357,7 +357,8 @@ public class UpgradeLayout extends UpgradeProcess {
 					}
 					catch (NoSuchGroupException nsge) {
 						group = GroupLocalServiceUtil.addGroup(
-							userId, User.class.getName(), userId, null, null);
+							userId, User.class.getName(), userId, null, null,
+							null, null);
 
 						String groupId = group.getGroupId();
 

@@ -139,8 +139,12 @@
 		<property name="parentGroupId" />
 		<property name="name" />
 		<property name="description" />
-		<property name="friendlyURL" />
 		<property name="type" column="type_" />
+		<property name="friendlyURL" />
+		<set name="orgs" table="Groups_Orgs" lazy="true">
+			<key column="groupId" />
+			<many-to-many class="com.liferay.portal.service.persistence.OrganizationHBM" column="organizationId" />
+		</set>
 		<set name="permissions" table="Groups_Permissions" lazy="true">
 			<key column="groupId" />
 			<many-to-many class="com.liferay.portal.service.persistence.PermissionHBM" column="permissionId" />
@@ -153,14 +157,6 @@
 			<key column="groupId" />
 			<many-to-many class="com.liferay.portal.service.persistence.UserHBM" column="userId" />
 		</set>
-	</class>
-	<class name="com.liferay.portal.service.persistence.GroupRelHBM" table="GroupRel">
-		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.GroupRelPK">
-			<key-property name="groupId" />
-			<key-property name="className" />
-			<key-property name="classPK" />
-		</composite-id>
 	</class>
 	<class name="com.liferay.portal.service.persistence.ImageHBM" table="Image">
 		<cache usage="read-write" />
@@ -221,6 +217,10 @@
 		<property name="countryId" />
 		<property name="statusId" />
 		<property name="comments" />
+		<set name="groups" table="Groups_Orgs" lazy="true">
+			<key column="organizationId" />
+			<many-to-many class="com.liferay.portal.service.persistence.GroupHBM" column="groupId" />
+		</set>
 		<set name="users" table="Users_Orgs" lazy="true">
 			<key column="organizationId" />
 			<many-to-many class="com.liferay.portal.service.persistence.UserHBM" column="userId" />
@@ -378,6 +378,7 @@
 		<property name="className" />
 		<property name="classPK" />
 		<property name="name" />
+		<property name="description" />
 		<set name="groups" table="Groups_Roles" lazy="true">
 			<key column="roleId" />
 			<many-to-many class="com.liferay.portal.service.persistence.GroupHBM" column="groupId" />

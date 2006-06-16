@@ -152,9 +152,9 @@ public class PermissionUserFinder {
 			String primKey, String actionId, UserSearchTerms searchTerms)
 		throws SystemException {
 
-		Session session = null;
-
 		int count = 0;
+
+		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
@@ -209,9 +209,9 @@ public class PermissionUserFinder {
 			String actionId, UserSearchTerms searchTerms)
 		throws SystemException {
 
-		Session session = null;
-
 		int count = 0;
+
+		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();

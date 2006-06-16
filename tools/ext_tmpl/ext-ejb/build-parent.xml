@@ -224,7 +224,7 @@
 			maxmemory="256m"
 			newenvironment="true"
 		>
-			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog" />
+			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 			<arg value="${service.file}" />
 			<arg value="classes/META-INF/ext-hbm.xml" />
 			<arg value="classes/META-INF/ext-model-hints.xml" />
@@ -248,7 +248,7 @@
 			maxmemory="256m"
 			newenvironment="true"
 		>
-			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog" />
+			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 			<arg value="${service.file}" />
 			<arg value="../ext-web/docroot/WEB-INF/server-config.wsdd" />
 		</java>

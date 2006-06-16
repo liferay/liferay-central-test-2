@@ -36,6 +36,14 @@ public class GroupHBM extends Group {
 	protected GroupHBM() {
 	}
 
+	protected Set getOrgs() {
+		return _orgs;
+	}
+
+	protected void setOrgs(Set orgs) {
+		_orgs = orgs;
+	}
+
 	protected Set getPermissions() {
 		return _permissions;
 	}
@@ -60,6 +68,7 @@ public class GroupHBM extends Group {
 		_users = users;
 	}
 
+	private Set _orgs;
 	private Set _permissions;
 	private Set _roles;
 	private Set _users;

@@ -29,6 +29,27 @@ package com.liferay.portal.service.spring;
  *
  */
 public class OrganizationLocalServiceUtil {
+	public static boolean addGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+			return organizationLocalService.addGroupOrganizations(groupId,
+				organizationIds);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static com.liferay.portal.model.Organization addOrganization(
 		java.lang.String userId, java.lang.String parentOrganizationId,
 		java.lang.String name, java.lang.String regionId,
@@ -130,6 +151,25 @@ public class OrganizationLocalServiceUtil {
 		}
 	}
 
+	public static java.util.List getGroupOrganizations(java.lang.String groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+			return organizationLocalService.getGroupOrganizations(groupId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static java.util.List getUserOrganizations(java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -137,6 +177,27 @@ public class OrganizationLocalServiceUtil {
 			OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 			return organizationLocalService.getUserOrganizations(userId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static boolean hasGroupOrganization(java.lang.String groupId,
+		java.lang.String organizationId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+			return organizationLocalService.hasGroupOrganization(groupId,
+				organizationId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -185,6 +246,47 @@ public class OrganizationLocalServiceUtil {
 			return organizationLocalService.searchCount(companyId,
 				parentOrganizationId, parentOrganizationComparator, name,
 				street, city, zip, regionId, countryId, params, andOperator);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static void setGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+			organizationLocalService.setGroupOrganizations(groupId,
+				organizationIds);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static boolean unsetGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+			return organizationLocalService.unsetGroupOrganizations(groupId,
+				organizationIds);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;

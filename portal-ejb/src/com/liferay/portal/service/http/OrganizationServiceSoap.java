@@ -37,6 +37,21 @@ import java.rmi.RemoteException;
  *
  */
 public class OrganizationServiceSoap {
+	public static boolean addGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds) throws RemoteException {
+		try {
+			boolean returnValue = OrganizationServiceUtil.addGroupOrganizations(groupId,
+					organizationIds);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static com.liferay.portal.model.OrganizationModel addOrganization(
 		java.lang.String parentOrganizationId, java.lang.String name,
 		java.lang.String regionId, java.lang.String countryId,
@@ -70,6 +85,34 @@ public class OrganizationServiceSoap {
 		java.lang.String organizationId) throws RemoteException {
 		try {
 			com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.getOrganization(organizationId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static void setGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds) throws RemoteException {
+		try {
+			OrganizationServiceUtil.setGroupOrganizations(groupId,
+				organizationIds);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static boolean unsetGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds) throws RemoteException {
+		try {
+			boolean returnValue = OrganizationServiceUtil.unsetGroupOrganizations(groupId,
+					organizationIds);
 
 			return returnValue;
 		}

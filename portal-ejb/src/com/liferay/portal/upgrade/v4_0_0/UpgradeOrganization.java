@@ -85,7 +85,7 @@ public class UpgradeOrganization extends UpgradeProcess {
 
 						GroupLocalServiceUtil.addGroup(
 							user.getUserId(), Organization.class.getName(),
-							organizationId, null, null);
+							organizationId, null, null, null, null);
 					}
 					catch (Exception e) {
 					}

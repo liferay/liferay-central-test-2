@@ -49,15 +49,6 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 
 	public com.liferay.portal.model.Group addGroup(java.lang.String userId,
 		java.lang.String className, java.lang.String classPK,
-		java.lang.String name, java.lang.String friendlyURL)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		return getService().addGroup(userId, className, classPK, name,
-			friendlyURL);
-	}
-
-	public com.liferay.portal.model.Group addGroup(java.lang.String userId,
-		java.lang.String className, java.lang.String classPK,
 		java.lang.String name, java.lang.String description,
 		java.lang.String type, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
@@ -66,25 +57,11 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 			description, type, friendlyURL);
 	}
 
-	public boolean addCommunityOrgs(java.lang.String groupId,
-		java.lang.String[] orgIds)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		return getService().addCommunityOrgs(groupId, orgIds);
-	}
-
 	public boolean addRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return getService().addRoleGroups(roleId, groupIds);
-	}
-
-	public boolean addUserGroups(java.lang.String userId,
-		java.lang.String[] groupIds)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		return getService().addUserGroups(userId, groupIds);
 	}
 
 	public void checkSystemGroups(java.lang.String companyId)
@@ -97,27 +74,6 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		getService().deleteGroup(groupId);
-	}
-
-	public boolean hasCommunityOrg(java.lang.String communityGroupId,
-		java.lang.String organizationId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		return getService().hasCommunityOrg(communityGroupId, organizationId);
-	}
-
-	public boolean hasRoleGroup(java.lang.String roleId,
-		java.lang.String groupId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		return getService().hasRoleGroup(roleId, groupId);
-	}
-
-	public boolean hasUserGroup(java.lang.String userId,
-		java.lang.String groupId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		return getService().hasUserGroup(userId, groupId);
 	}
 
 	public com.liferay.portal.model.Group getFriendlyURLGroup(
@@ -147,10 +103,10 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 		return getService().getOrganizationGroup(companyId, organizationId);
 	}
 
-	public java.util.List getOrganizationGroups(java.util.List organizations)
+	public java.util.List getOrganizationsGroups(java.util.List organizations)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getOrganizationGroups(organizations);
+		return getService().getOrganizationsGroups(organizations);
 	}
 
 	public java.util.List getPublicGroups(java.lang.String companyId)
@@ -171,17 +127,27 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 		return getService().getUserGroup(companyId, userId);
 	}
 
-	public java.util.List getUserGroups(java.lang.String userId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		return getService().getUserGroups(userId);
+	public java.util.List getUserGroups(java.lang.String companyId,
+		java.lang.String userId) throws com.liferay.portal.SystemException {
+		return getService().getUserGroups(companyId, userId);
 	}
 
 	public java.util.List getUserGroups(java.lang.String companyId,
 		java.lang.String userId, boolean privateLayout)
+		throws com.liferay.portal.SystemException {
+		return getService().getUserGroups(companyId, userId, privateLayout);
+	}
+
+	public boolean hasRoleGroup(java.lang.String roleId,
+		java.lang.String groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getUserGroups(companyId, userId, privateLayout);
+		return getService().hasRoleGroup(roleId, groupId);
+	}
+
+	public boolean hasUserGroup(java.lang.String userId,
+		java.lang.String groupId) throws com.liferay.portal.SystemException {
+		return getService().hasUserGroup(userId, groupId);
 	}
 
 	public java.util.List search(java.lang.String companyId,
@@ -208,26 +174,11 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 		getService().setRoleGroups(roleId, groupIds);
 	}
 
-	public boolean unsetCommunityOrgs(java.lang.String groupId,
-		java.lang.String[] orgIds)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		return getService().unsetCommunityOrgs(groupId, orgIds);
-	}
-
 	public boolean unsetRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return getService().unsetRoleGroups(roleId, groupIds);
-	}
-
-	public com.liferay.portal.model.Group updateGroup(
-		java.lang.String groupId, java.lang.String name,
-		java.lang.String friendlyURL)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		return getService().updateGroup(groupId, name, friendlyURL);
 	}
 
 	public com.liferay.portal.model.Group updateGroup(

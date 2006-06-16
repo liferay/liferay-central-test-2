@@ -27,9 +27,10 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-String tabs1 = (String)request.getAttribute("tabs1");
+Object[] objArray = (Object[])row.getObject();
 
-Group group = (Group)row.getObject();
+Group group = (Group)objArray[0];
+String tabs1 = (String)objArray[1];
 %>
 
 <c:if test="<%= GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.UPDATE) %>">
@@ -83,6 +84,35 @@ Group group = (Group)row.getObject();
 	<liferay-ui:icon image="assign" url="<%= portletURL %>" />
 </c:if>
 
+<c:choose>
+	<c:when test='<%= tabs1.equals("current") %>'%>
+		<c:if test="<%= group.getType().equals(Group.TYPE_COMMUNITY_OPEN) %>">
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+				<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
+				<portlet:param name="<%= Constants.CMD %>" value="group_users" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="groupId" value="<%= group.getGroupId() %>" />
+				<portlet:param name="removeUserIds" value="<%= user.getUserId() %>" />
+			</portlet:actionURL>
+
+			<liferay-ui:icon image="leave" url="<%= portletURL %>" />
+		</c:if>
+	</c:when>
+	<c:otherwise>
+		<c:if test="<%= group.getType().equals(Group.TYPE_COMMUNITY_OPEN) %>">
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+				<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
+				<portlet:param name="<%= Constants.CMD %>" value="group_users" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="groupId" value="<%= group.getGroupId() %>" />
+				<portlet:param name="addUserIds" value="<%= user.getUserId() %>" />
+			</portlet:actionURL>
+
+			<liferay-ui:icon image="join" url="<%= portletURL %>" />
+		</c:if>
+	</c:otherwise>
+</c:choose>
+
 <c:if test="<%= GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.DELETE) %>">
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 		<portlet:param name="struts_action" value="/communities/edit_community" />
@@ -92,28 +122,4 @@ Group group = (Group)row.getObject();
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= portletURL %>" />
-</c:if>
-
-<c:if test="<%= Group.COMMUNITY_OPEN.equals(group.getType()) && tabs1.equals("available") %>">
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
-		<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
-		<portlet:param name="<%= Constants.CMD %>" value="community_users" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="groupId" value="<%= group.getGroupId() %>" />
-		<portlet:param name="addUserIds" value="<%= user.getUserId() %>" />		
-	</portlet:actionURL>
-
-	<liferay-ui:icon image="join" url="<%= portletURL %>" />
-</c:if>
-
-<c:if test="<%= Group.COMMUNITY_OPEN.equals(group.getType()) && tabs1.equals("current") %>">
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
-		<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
-		<portlet:param name="<%= Constants.CMD %>" value="community_users" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="groupId" value="<%= group.getGroupId() %>" />
-		<portlet:param name="removeUserIds" value="<%= user.getUserId() %>" />		
-	</portlet:actionURL>
-
-	<liferay-ui:icon image="leave" url="<%= portletURL %>" />
 </c:if>

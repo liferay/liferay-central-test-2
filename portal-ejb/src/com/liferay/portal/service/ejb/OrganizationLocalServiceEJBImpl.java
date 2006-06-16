@@ -48,6 +48,13 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		return (OrganizationLocalService)ctx.getBean(CLASS_NAME);
 	}
 
+	public boolean addGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().addGroupOrganizations(groupId, organizationIds);
+	}
+
 	public com.liferay.portal.model.Organization addOrganization(
 		java.lang.String userId, java.lang.String parentOrganizationId,
 		java.lang.String name, java.lang.String regionId,
@@ -85,10 +92,23 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		return getService().getOrganization(organizationId);
 	}
 
+	public java.util.List getGroupOrganizations(java.lang.String groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().getGroupOrganizations(groupId);
+	}
+
 	public java.util.List getUserOrganizations(java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return getService().getUserOrganizations(userId);
+	}
+
+	public boolean hasGroupOrganization(java.lang.String groupId,
+		java.lang.String organizationId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().hasGroupOrganization(groupId, organizationId);
 	}
 
 	public java.util.List search(java.lang.String companyId,
@@ -113,6 +133,20 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		return getService().searchCount(companyId, parentOrganizationId,
 			parentOrganizationComparator, name, street, city, zip, regionId,
 			countryId, params, andOperator);
+	}
+
+	public void setGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().setGroupOrganizations(groupId, organizationIds);
+	}
+
+	public boolean unsetGroupOrganizations(java.lang.String groupId,
+		java.lang.String[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().unsetGroupOrganizations(groupId, organizationIds);
 	}
 
 	public com.liferay.portal.model.Organization updateOrganization(

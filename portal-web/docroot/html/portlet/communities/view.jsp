@@ -60,8 +60,6 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	if (tabs1.equals("current")) {
 		groupParams.put("usersGroups", user.getUserId());
 	}
-	
-	request.setAttribute("tabs1", tabs1);
 
 	int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), groupParams);
 
@@ -95,7 +93,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	for (int i = 0; i < results.size(); i++) {
 		Group group = (Group)results.get(i);
 
-		ResultRow row = new ResultRow(group, group.getPrimaryKey().toString(), i);
+		ResultRow row = new ResultRow(new Object[] {group, tabs1}, group.getPrimaryKey().toString(), i);
 
 		// Name
 

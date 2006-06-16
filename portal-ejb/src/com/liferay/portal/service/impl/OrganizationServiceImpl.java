@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.LocationPermission;
 import com.liferay.portal.service.permission.OrganizationPermission;
 import com.liferay.portal.service.permission.PortalPermission;
@@ -41,6 +42,17 @@ import com.liferay.portal.service.spring.OrganizationService;
  */
 public class OrganizationServiceImpl extends PrincipalBean
 	implements OrganizationService {
+
+	public boolean addGroupOrganizations(
+			String groupId, String[] organizationIds)
+		throws PortalException, SystemException {
+
+		GroupPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.UPDATE);
+
+		return OrganizationLocalServiceUtil.addGroupOrganizations(
+			groupId, organizationIds);
+	}
 
 	public Organization addOrganization(
 			String parentOrganizationId, String name, String regionId,
@@ -76,6 +88,27 @@ public class OrganizationServiceImpl extends PrincipalBean
 		checkPermission(organizationId, ActionKeys.VIEW);
 
 		return OrganizationLocalServiceUtil.getOrganization(organizationId);
+	}
+
+	public void setGroupOrganizations(String groupId, String[] organizationIds)
+		throws PortalException, SystemException {
+
+		GroupPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.UPDATE);
+
+		OrganizationLocalServiceUtil.setGroupOrganizations(
+			groupId, organizationIds);
+	}
+
+	public boolean unsetGroupOrganizations(
+			String groupId, String[] organizationIds)
+		throws PortalException, SystemException {
+
+		GroupPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.UPDATE);
+
+		return OrganizationLocalServiceUtil.unsetGroupOrganizations(
+			groupId, organizationIds);
 	}
 
 	public Organization updateOrganization(

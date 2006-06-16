@@ -46,16 +46,16 @@ portletURL.setParameter("groupId", group.getGroupId());
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />updateCommunityOrgs(redirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "community_orgs";
+	function <portlet:namespace />updateGroupOrganizations(redirect) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "group_organizations";
 		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
-		document.<portlet:namespace />fm.<portlet:namespace />addOrgIds.value = listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		document.<portlet:namespace />fm.<portlet:namespace />removeOrgIds.value = listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />addOrganizationIds.value = listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />removeOrganizationIds.value = listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
 	}
 
-	function <portlet:namespace />updateCommunityUsers(redirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "community_users";
+	function <portlet:namespace />updateGroupUsers(redirect) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "group_users";
 		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
 		document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
@@ -93,73 +93,73 @@ portletURL.setParameter("groupId", group.getGroupId());
 
 		<%
 		UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
-		
+
 		searchContainer.setRowChecker(new UserGroupChecker(renderResponse, group));
 		%>
-		
+
 		<liferay-ui:search-form
 			page="/html/portlet/enterprise_admin/user_search.jsp"
 			searchContainer="<%= searchContainer %>"
 		/>
-		
+
 		<%
 		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
-		
+
 		Map userParams = new HashMap();
-		
+
 		if (tabs2.equals("current")) {
 			userParams.put("usersGroups", group.getGroupId());
 		}
-		
+
 		int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
-		
+
 		searchContainer.setTotal(total);
-		
+
 		List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
-		
+
 		searchContainer.setResults(results);
 		%>
-		
+
 		<br><div class="beta-separator"></div><br>
-		
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateCommunityUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
-		
+
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+
 		<br><br>
-		
+
 		<%
 		List headerNames = new ArrayList();
-		
+
 		headerNames.add("name");
 		headerNames.add("email-address");
-		
+
 		searchContainer.setHeaderNames(headerNames);
-		
+
 		List resultRows = searchContainer.getResultRows();
-		
+
 		for (int i = 0; i < results.size(); i++) {
 			User user2 = (User)results.get(i);
-		
+
 			ResultRow row = new ResultRow(user2, user2.getPrimaryKey().toString(), i);
-		
+
 			// Name and email address
-		
+
 			row.addText(user2.getFullName());
 			row.addText(user2.getEmailAddress());
-		
+
 			// Add result row
-		
+
 			resultRows.add(row);
 		}
 		%>
-		
+
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-		
+
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
-	</c:when>	
+	</c:when>
 	<c:when test='<%= tabs1.equals("organizations") || tabs1.equals("locations") %>'>
-		<input name="<portlet:namespace />addOrgIds" type="hidden" value="">
-		<input name="<portlet:namespace />removeOrgIds" type="hidden" value="">
+		<input name="<portlet:namespace />addOrganizationIds" type="hidden" value="">
+		<input name="<portlet:namespace />removeOrganizationIds" type="hidden" value="">
 
 		<liferay-ui:tabs
 			names="current,available"
@@ -195,7 +195,6 @@ portletURL.setParameter("groupId", group.getGroupId());
 		if (tabs2.equals("current")) {
 			List organizationsGroups = new ArrayList();
 
-			organizationsGroups.add(Organization.class.getName());
 			organizationsGroups.add(group.getGroupId());
 
 			organizationParams.put("organizationsGroups", organizationsGroups);
@@ -212,7 +211,7 @@ portletURL.setParameter("groupId", group.getGroupId());
 
 		<br><div class="beta-separator"></div><br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateCommunityOrgs('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateGroupOrganizations('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
 		<br><br>
 

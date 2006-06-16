@@ -38,22 +38,6 @@ import java.rmi.RemoteException;
  */
 public class GroupServiceSoap {
 	public static com.liferay.portal.model.GroupModel addGroup(
-		java.lang.String name, java.lang.String friendlyURL)
-		throws RemoteException {
-		try {
-			com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(name,
-					friendlyURL);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portal.model.GroupModel addGroup(
 		java.lang.String name, java.lang.String description,
 		java.lang.String type, java.lang.String friendlyURL)
 		throws RemoteException {
@@ -70,40 +54,10 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static boolean addCommunityOrgs(java.lang.String groupId,
-		java.lang.String[] orgIds) throws RemoteException {
-		try {
-			boolean returnValue = GroupServiceUtil.addCommunityOrgs(groupId,
-					orgIds);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
 	public static boolean addRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds) throws RemoteException {
 		try {
 			boolean returnValue = GroupServiceUtil.addRoleGroups(roleId,
-					groupIds);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static boolean addUserGroups(java.lang.String userId,
-		java.lang.String[] groupIds) throws RemoteException {
-		try {
-			boolean returnValue = GroupServiceUtil.addUserGroups(userId,
 					groupIds);
 
 			return returnValue;
@@ -143,10 +97,10 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.GroupModel[] getOrganizationGroups(
+	public static com.liferay.portal.model.GroupModel[] getOrganizationsGroups(
 		java.util.List organizations) throws RemoteException {
 		try {
-			java.util.List returnValue = GroupServiceUtil.getOrganizationGroups(organizations);
+			java.util.List returnValue = GroupServiceUtil.getOrganizationsGroups(organizations);
 
 			return (com.liferay.portal.model.Group[])returnValue.toArray(new com.liferay.portal.model.Group[0]);
 		}
@@ -169,42 +123,11 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static boolean unsetCommunityOrgs(java.lang.String groupId,
-		java.lang.String[] orgIds) throws RemoteException {
-		try {
-			boolean returnValue = GroupServiceUtil.unsetCommunityOrgs(groupId,
-					orgIds);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
 	public static boolean unsetRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds) throws RemoteException {
 		try {
 			boolean returnValue = GroupServiceUtil.unsetRoleGroups(roleId,
 					groupIds);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portal.model.GroupModel updateGroup(
-		java.lang.String groupId, java.lang.String name,
-		java.lang.String friendlyURL) throws RemoteException {
-		try {
-			com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateGroup(groupId,
-					name, friendlyURL);
 
 			return returnValue;
 		}

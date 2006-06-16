@@ -40,6 +40,60 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class OrganizationServiceHttp {
+	public static boolean addGroupOrganizations(HttpPrincipal httpPrincipal,
+		java.lang.String groupId, java.lang.String[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = groupId;
+
+			if (groupId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = organizationIds;
+
+			if (organizationIds == null) {
+				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"addGroupOrganizations",
+					new Object[] { paramObj0, paramObj1 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw e;
+			}
+
+			return ((Boolean)returnObj).booleanValue();
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			_log.error(StackTraceUtil.getStackTrace(pe));
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(StackTraceUtil.getStackTrace(se));
+			throw se;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new com.liferay.portal.SystemException(stackTrace);
+		}
+	}
+
 	public static com.liferay.portal.model.Organization addOrganization(
 		HttpPrincipal httpPrincipal, java.lang.String parentOrganizationId,
 		java.lang.String name, java.lang.String regionId,
@@ -194,6 +248,112 @@ public class OrganizationServiceHttp {
 			}
 
 			return (com.liferay.portal.model.Organization)returnObj;
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			_log.error(StackTraceUtil.getStackTrace(pe));
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(StackTraceUtil.getStackTrace(se));
+			throw se;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new com.liferay.portal.SystemException(stackTrace);
+		}
+	}
+
+	public static void setGroupOrganizations(HttpPrincipal httpPrincipal,
+		java.lang.String groupId, java.lang.String[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = groupId;
+
+			if (groupId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = organizationIds;
+
+			if (organizationIds == null) {
+				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"setGroupOrganizations",
+					new Object[] { paramObj0, paramObj1 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw e;
+			}
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			_log.error(StackTraceUtil.getStackTrace(pe));
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(StackTraceUtil.getStackTrace(se));
+			throw se;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new com.liferay.portal.SystemException(stackTrace);
+		}
+	}
+
+	public static boolean unsetGroupOrganizations(HttpPrincipal httpPrincipal,
+		java.lang.String groupId, java.lang.String[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = groupId;
+
+			if (groupId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = organizationIds;
+
+			if (organizationIds == null) {
+				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"unsetGroupOrganizations",
+					new Object[] { paramObj0, paramObj1 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw e;
+			}
+
+			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));

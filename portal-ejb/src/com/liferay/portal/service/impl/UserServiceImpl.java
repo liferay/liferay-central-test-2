@@ -29,6 +29,8 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.permission.GroupPermission;
+import com.liferay.portal.service.permission.RolePermission;
 import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -49,11 +51,16 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public boolean addGroupUsers(String groupId, String[] userIds)
 		throws PortalException, SystemException {
 
+		GroupPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.UPDATE);
+
 		return UserLocalServiceUtil.addGroupUsers(groupId, userIds);
 	}
 
 	public boolean addRoleUsers(String roleId, String[] userIds)
 		throws PortalException, SystemException {
+
+		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
 		return UserLocalServiceUtil.addRoleUsers(roleId, userIds);
 	}
@@ -137,11 +144,16 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public void setGroupUsers(String groupId, String[] userIds)
 		throws PortalException, SystemException {
 
+		GroupPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.UPDATE);
+
 		UserLocalServiceUtil.setGroupUsers(groupId, userIds);
 	}
 
 	public void setRoleUsers(String roleId, String[] userIds)
 		throws PortalException, SystemException {
+
+		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
 		UserLocalServiceUtil.setRoleUsers(roleId, userIds);
 	}
@@ -149,11 +161,16 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public boolean unsetGroupUsers(String groupId, String[] userIds)
 		throws PortalException, SystemException {
 
+		GroupPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.UPDATE);
+
 		return UserLocalServiceUtil.unsetGroupUsers(groupId, userIds);
 	}
 
 	public boolean unsetRoleUsers(String roleId, String[] userIds)
 		throws PortalException, SystemException {
+
+		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
 		return UserLocalServiceUtil.unsetRoleUsers(roleId, userIds);
 	}

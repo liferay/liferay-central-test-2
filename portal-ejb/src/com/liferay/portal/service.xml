@@ -266,11 +266,12 @@
 		<column name="parentGroupId" type="String" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
-		<column name="friendlyURL" type="String" />
 		<column name="type" type="String" />
+		<column name="friendlyURL" type="String" />
 
 		<!-- Relationships -->
 
+		<column name="orgs" type="Collection" entity="Organization" mapping-table="Groups_Orgs" />
 		<column name="permissions" type="Collection" entity="Permission" mapping-table="Groups_Permissions" />
 		<column name="roles" type="Collection" entity="Role" mapping-table="Groups_Roles" />
 		<column name="users" type="Collection" entity="User" mapping-table="Users_Groups" />
@@ -305,21 +306,6 @@
 		<reference package-path="com.liferay.portlet.polls" entity="PollsQuestion" />
 		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingCart" />
 		<reference package-path="com.liferay.portlet.wiki" entity="WikiNode" />
-	</entity>
-	<entity name="GroupRel" local-service="false" remote-service="false">
-
-		<!-- PK fields -->
-
-		<column name="groupId" type="String" primary="true" />
-		<column name="className" type="String" primary="true" />
-		<column name="classPK" type="String" primary="true" />
-
-		<!-- Finder methods -->
-
-		<finder name="C_C" return-type="Collection">
-			<finder-column name="className" />
-			<finder-column name="classPK" />
-		</finder>
 	</entity>
 	<entity name="Image" local-service="true" remote-service="false">
 
@@ -453,6 +439,7 @@
 
 		<!-- Relationships -->
 
+		<column name="groups" type="Collection" entity="Group" mapping-table="Groups_Orgs" />
 		<column name="users" type="Collection" entity="User" mapping-table="Users_Orgs" />
 
 		<!-- Order -->
@@ -823,6 +810,7 @@
 		<column name="className" type="String" />
 		<column name="classPK" type="String" />
 		<column name="name" type="String" />
+		<column name="description" type="String" />
 
 		<!-- Relationships -->
 

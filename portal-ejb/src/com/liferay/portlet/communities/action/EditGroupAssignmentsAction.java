@@ -24,13 +24,12 @@ package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.GroupServiceUtil;
+import com.liferay.portal.service.spring.OrganizationServiceUtil;
 import com.liferay.portal.service.spring.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -59,16 +58,14 @@ public class EditGroupAssignmentsAction extends PortletAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		try {
-			if (cmd.equals("community_orgs")) {
-				updateCommunityOrgs(req);
+			if (cmd.equals("group_organizations")) {
+				updateGroupOrganizations(req);
 			}
-			else if (cmd.equals("community_users")) {
-				updateCommunityUsers(req);
+			else if (cmd.equals("group_users")) {
+				updateGroupUsers(req);
 			}
 
-			if (Validator.isNotNull(cmd)) {
-				sendRedirect(req, res);
-			}
+			sendRedirect(req, res);
 		}
 		catch (Exception e) {
 			if (e != null &&
@@ -111,19 +108,23 @@ public class EditGroupAssignmentsAction extends PortletAction {
 			getForward(req, "portlet.communities.edit_community_assignments"));
 	}
 
-	protected void updateCommunityOrgs(ActionRequest req) throws Exception {
+	protected void updateGroupOrganizations(ActionRequest req)
+		throws Exception {
+
 		String groupId = ParamUtil.getString(req, "groupId");
 
-		String[] addOrgIds = StringUtil.split(
-			ParamUtil.getString(req, "addOrgIds"));
-		String[] removeOrgIds = StringUtil.split(
-			ParamUtil.getString(req, "removeOrgIds"));
+		String[] addOrganizationIds = StringUtil.split(
+			ParamUtil.getString(req, "addOrganizationIds"));
+		String[] removeOrganizationIds = StringUtil.split(
+			ParamUtil.getString(req, "removeOrganizationIds"));
 
-		GroupServiceUtil.addCommunityOrgs(groupId, addOrgIds);
-		GroupServiceUtil.unsetCommunityOrgs(groupId, removeOrgIds);
+		OrganizationServiceUtil.addGroupOrganizations(
+			groupId, addOrganizationIds);
+		OrganizationServiceUtil.unsetGroupOrganizations(
+			groupId, removeOrganizationIds);
 	}
 
-	protected void updateCommunityUsers(ActionRequest req) throws Exception {
+	protected void updateGroupUsers(ActionRequest req) throws Exception {
 		String groupId = ParamUtil.getString(req, "groupId");
 
 		String[] addUserIds = StringUtil.split(
