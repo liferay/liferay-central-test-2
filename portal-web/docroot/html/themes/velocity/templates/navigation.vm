@@ -23,7 +23,7 @@
 *#
 
 #if ($layouts.size() > 0)
-	<div id="layout-nav-container" style="width: $themeDisplay.getResolution()">
+	<div id="layout-nav-container">
 		<div class="layout-nav-tabs">
 			<div class="layout-nav-row" style="background-color: none;">
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -62,7 +62,7 @@
 
 					<td>
 						<div class="layout-nav-tab$tempVariable1">
-							<img src="$themeDisplay.getPathThemeImage()/tabs/bullet.gif"> <span class="layout-tab$tempVariable1"><a href="$tabHREF" style="font-size: smaller" $tabTarget>$curLayout.getName($locale)</a></span>
+							<img src="$themeDisplay.getPathThemeImage()/custom/bullet.gif"> <span class="layout-tab$tempVariable1"><a href="$tabHREF" style="font-size: smaller" $tabTarget>$curLayout.getName($locale)</a></span>
 						</div>
 					</td>
 				#end

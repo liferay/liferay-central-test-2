@@ -25,7 +25,9 @@
 <%@ include file="init.jsp" %>
 
 #layout-outer-side-decoration {
-	width: <%= themeDisplay.getResolution() %>px;
+	width: <%= (themeDisplay.getResolution() > 0) ?
+			(themeDisplay.getResolution() + "px") :
+			("99%") %>;
 }
 
 <c:if test="<%= themeDisplay.isStatePopUp() %>">

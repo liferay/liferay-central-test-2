@@ -381,7 +381,7 @@ FONT.bg {
 }
 
 .layout-nav-tabs {
-	background: url($themeDisplay.getPathThemeImage()/tabs/navigation.gif) no-repeat;
+	background: url($themeDisplay.getPathThemeImage()/custom/navigation.gif) repeat-x;
 }
 
 .layout-nav-row {
@@ -392,7 +392,7 @@ FONT.bg {
 }
 
 .layout-nav-tab-left {
-	background: url($themeDisplay.getPathThemeImage()/tabs/bullet.gif) no-repeat;
+	background: url($themeDisplay.getPathThemeImage()/custom/bullet.gif) no-repeat;
 	height: $tabImageHeight;
 	left: -$tabImageSideWidth;
 	overflow: hidden;
@@ -411,7 +411,7 @@ FONT.bg {
 }
 
 .layout-nav-tab-left-end {
-	background: url($themeDisplay.getPathThemeImage()/tabs/bullet.gif) no-repeat;
+	background: url($themeDisplay.getPathThemeImage()/custom/bullet.gif) no-repeat;
 	height: $tabImageHeight;
 	left: -$tabImageSideWidth;
 	overflow: hidden;
@@ -430,7 +430,7 @@ FONT.bg {
 }
 
 .layout-nav-tab-selected-left {
-	background: url($themeDisplay.getPathThemeImage()/tabs/bullet.gif) no-repeat;
+	background: url($themeDisplay.getPathThemeImage()/custom/bullet.gif) no-repeat;
 	height: $tabImageHeight;
 	left: -$tabImageSideWidth;
 	overflow: hidden;
@@ -448,7 +448,7 @@ FONT.bg {
 	width: $tabImageSideWidth;
 }
 .layout-nav-tab-selected-left-end {
-	background: url($themeDisplay.getPathThemeImage()/tabs/bullet.gif) no-repeat;
+	background: url($themeDisplay.getPathThemeImage()/custom/bullet.gif) no-repeat;
 	height: $tabImageHeight;
 	left: -$tabImageSideWidth;
 	overflow: hidden;

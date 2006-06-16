@@ -25,16 +25,14 @@
 #set($tabImageHeight = 33)
 #set($tabImageSideWidth = 23)
 
-#set($layoutPadding = 0)
-#set($layoutBorder = 0)
-#set($layoutBoxWidth = $themeDisplay.getResolution() + ($layoutPadding * 2))
-
-#if ($browserSniffer.is_ie($request))
-	#set($layoutBoxWidth = $layoutBoxWidth + ($layoutBorder * 2))
+#if($themeDisplay.getResolution() > 0)
+	#set($layoutBoxWidth = "$themeDisplay.getResolution()px")
+#else
+	#set($layoutBoxWidth = "99%")
 #end
 
 #layout-box {
-	width: ${layoutBoxWidth}px;
+	width: ${layoutBoxWidth};
 }
 
 #layout-content-container {

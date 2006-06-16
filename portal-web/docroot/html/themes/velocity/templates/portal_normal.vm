@@ -43,9 +43,7 @@ $taglibLiferay.include("/html/common/themes/top_warning.jsp")
 	$taglibLiferay.include("/html$tilesContent")
 #else
 	$portletDisplay.recycle()
-
 	$portletDisplay.setTitle($tilesTitle)
-	$portletDisplay.setWidth($themeDisplay.getResolution())
 
 	#if ($tilesSubNav.equals(""))
 		#parse("$fullTemplatesPath/portlet_top.vm")

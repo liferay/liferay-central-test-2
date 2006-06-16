@@ -31,7 +31,9 @@
 		</c:when>
 		<c:otherwise>
 			margin-top: 5px;
-			width: <%= Integer.toString(themeDisplay.getResolution()) %>;
+			width: <%= (themeDisplay.getResolution() > 0) ?
+					(themeDisplay.getResolution() + "px") :
+					("99%") %>;
 		</c:otherwise>
 	</c:choose>
 }

@@ -52,7 +52,7 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 	<liferay-util:param name="tabs1" value="look-and-feel" />
 </liferay-util:include>
 
-<div style="height: 150px; margin: auto; overflow: auto; width: <%= themeDisplay.getResolution() - 50 %>px">
+<div style="height: 150px; margin: auto; overflow: auto; width: 95%">
 	<div style="margin: 3px; width: <%= Validator.isNotNull(previewWidth) ? ((GetterUtil.getInteger(previewWidth) + 20) + "px") : "100%" %>;">
 		<liferay-portlet:runtime portletName="<%= portletResource %>" />
 	</div>
