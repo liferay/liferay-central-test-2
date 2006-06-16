@@ -68,6 +68,10 @@ public class Html {
 					sb.append("&quot;");
 					break;
 
+				case ',':
+					sb.append("&#44;");
+					break;
+
 				case '\r':
 					if (stripBlankSpaces) {
 						break;

@@ -530,7 +530,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationIdsArray[organizationIdsPos]);
 				%>
 
-				<liferay-ui:tabs names="<%= organization.getName() %>" />
+				<liferay-ui:tabs names="<%= Html.escape(organization.getName(), false) %>" />
 
 				<%
 				boolean organizationIntersection = false;
