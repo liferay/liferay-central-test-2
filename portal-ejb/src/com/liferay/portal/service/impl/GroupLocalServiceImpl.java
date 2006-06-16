@@ -339,14 +339,14 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 	public List getUserGroups(String companyId, String userId)
 		throws SystemException {
 
-		return GroupFinder.findByOrgsGroups(companyId, userId, null);
+		return GroupFinder.findByGroupsOrgs(companyId, userId, null);
 	}
 
 	public List getUserGroups(
 			String companyId, String userId, boolean privateLayout)
 		throws SystemException {
 
-		return GroupFinder.findByOrgsGroups(
+		return GroupFinder.findByGroupsOrgs(
 			companyId, userId, new Boolean(privateLayout));
 	}
 
@@ -363,7 +363,7 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 			return true;
 		}
 		else {
-			if (GroupFinder.countByOrgsGroups(groupId, userId) > 0) {
+			if (GroupFinder.countByGroupsOrgs(groupId, userId) > 0) {
 				return true;
 			}
 			else {

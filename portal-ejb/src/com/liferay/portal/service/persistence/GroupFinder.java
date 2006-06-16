@@ -54,8 +54,8 @@ public class GroupFinder {
 	public static String COUNT_BY_C_N_1 =
 		GroupFinder.class.getName() + ".countByC_N_1";
 
-	public static String COUNT_BY_ORGS_GROUPS =
-		GroupFinder.class.getName() + ".countByOrgsGroups";
+	public static String COUNT_BY_GROUPS_ORGS =
+		GroupFinder.class.getName() + ".countByGroupsOrgs";
 
 	public static String FIND_BY_C_N_1 =
 		GroupFinder.class.getName() + ".findByC_N_1";
@@ -63,8 +63,8 @@ public class GroupFinder {
 	public static String FIND_BY_C_N_2 =
 		GroupFinder.class.getName() + ".findByC_N_2";
 
-	public static String FIND_BY_ORGS_GROUPS =
-		GroupFinder.class.getName() + ".findByOrgsGroups";
+	public static String FIND_BY_GROUPS_ORGS =
+		GroupFinder.class.getName() + ".findByGroupsOrgs";
 
 	public static String JOIN_BY_GROUPS_ROLES =
 		GroupFinder.class.getName() + ".joinByGroupsRoles";
@@ -125,7 +125,7 @@ public class GroupFinder {
 		}
 	}
 
-	public static int countByOrgsGroups(String groupId, String userId)
+	public static int countByGroupsOrgs(String groupId, String userId)
 		throws SystemException {
 
 		Session session = null;
@@ -133,7 +133,7 @@ public class GroupFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_ORGS_GROUPS);
+			String sql = CustomSQLUtil.get(COUNT_BY_GROUPS_ORGS);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -305,7 +305,7 @@ public class GroupFinder {
 				name + "}");
 	}
 
-	public static List findByOrgsGroups(
+	public static List findByGroupsOrgs(
 			String companyId, String userId, Boolean privateLayout)
 		throws SystemException {
 
@@ -338,7 +338,7 @@ public class GroupFinder {
 			sql += " UNION ";
 
 			sql += "(";
-			sql += CustomSQLUtil.get(FIND_BY_ORGS_GROUPS);
+			sql += CustomSQLUtil.get(FIND_BY_GROUPS_ORGS);
 			sql = StringUtil.replace(
 				sql, "[$JOIN$]", _getJoin(orgsGroupsParams));
 			sql += ")";

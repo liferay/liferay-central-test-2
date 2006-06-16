@@ -15,7 +15,7 @@
                 (lower(Group_.name) LIKE ? OR ? IS NULL)
         ]]>
     </sql>
-    <sql id="com.liferay.portal.service.persistence.GroupFinder.countByOrgsGroups">
+    <sql id="com.liferay.portal.service.persistence.GroupFinder.countByGroupsOrgs">
         <![CDATA[
 			SELECT
                 COUNT(*) AS COUNT_VALUE
@@ -56,7 +56,7 @@
                 (lower(Group_.name) = ?)
         ]]>
     </sql>
-    <sql id="com.liferay.portal.service.persistence.GroupFinder.findByOrgsGroups">
+    <sql id="com.liferay.portal.service.persistence.GroupFinder.findByGroupsOrgs">
         <![CDATA[
 			SELECT
 				Group_.groupId AS groupId, Group_.name AS groupName

@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -34,6 +35,7 @@ import com.liferay.portal.service.permission.RolePermission;
 import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.service.spring.UserService;
 
@@ -51,8 +53,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public boolean addGroupUsers(String groupId, String[] userIds)
 		throws PortalException, SystemException {
 
-		GroupPermission.check(
-			getPermissionChecker(), groupId, ActionKeys.UPDATE);
+		checkPermission(groupId, userIds);
 
 		return UserLocalServiceUtil.addGroupUsers(groupId, userIds);
 	}
@@ -161,8 +162,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public boolean unsetGroupUsers(String groupId, String[] userIds)
 		throws PortalException, SystemException {
 
-		GroupPermission.check(
-			getPermissionChecker(), groupId, ActionKeys.UPDATE);
+		checkPermission(groupId, userIds);
 
 		return UserLocalServiceUtil.unsetGroupUsers(groupId, userIds);
 	}
@@ -255,6 +255,37 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserPermission.check(
 			getPermissionChecker(), userId, organizationId, locationId,
 			actionId);
+	}
+
+	protected void checkPermission(String groupId, String[] userIds)
+		throws PortalException, SystemException {
+
+		try {
+			GroupPermission.check(
+				getPermissionChecker(), groupId, ActionKeys.UPDATE);
+		}
+		catch (PrincipalException pe) {
+
+			// Allow users to join and leave open communities
+
+			boolean hasPermission = false;
+
+			User user = getUser();
+
+			if ((userIds.length == 1) &&
+				(user.getUserId().equals(userIds[0]))) {
+
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+				if (group.getType().equals(Group.TYPE_COMMUNITY_OPEN)) {
+					hasPermission = true;
+				}
+			}
+
+			if (!hasPermission) {
+				throw new PrincipalException();
+			}
+		}
 	}
 
 }
