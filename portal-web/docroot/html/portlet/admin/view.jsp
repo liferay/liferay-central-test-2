@@ -63,13 +63,21 @@ portletURL.setParameter("tabs3", tabs3);
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>">
 <input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" /></portlet:renderURL>">
 
+<%
+String tabsNames = "server,auto-deploy,enterprise,portlets,users";
+
+if (!OmniadminUtil.isOmniadmin(user.getUserId())) {
+	tabsNames = StringUtil.replace(tabsNames, "auto-deploy,", "");
+}
+%>
+
 <liferay-ui:tabs
-	names="server,auto-deploy,enterprise,portlets,users"
+	names="<%= tabsNames %>"
 	url="<%= portletURL.toString() %>"
 />
 
 <c:choose>
-	<c:when test='<%= tabs1.equals("auto-deploy") %>'>
+	<c:when test='<%= tabs1.equals("auto-deploy") && OmniadminUtil.isOmniadmin(user.getUserId()) %>'>
 		<%@ include file="/html/portlet/admin/auto_deploy.jsp" %>
 	</c:when>
 	<c:when test='<%= tabs1.equals("enterprise") %>'>
