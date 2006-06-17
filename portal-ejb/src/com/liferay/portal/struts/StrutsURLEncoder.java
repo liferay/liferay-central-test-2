@@ -109,7 +109,7 @@ public class StrutsURLEncoder implements URLEncoder {
 		if (path.startsWith("//") ||
 			path.startsWith(_contextPath + _servletMapping)) {
 
-			// Replacle // with /
+			// Replace // with /
 
 			path = StringUtil.replace(path, "//", "/");
 
