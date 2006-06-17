@@ -85,7 +85,7 @@ String tabs1 = (String)objArray[1];
 </c:if>
 
 <c:choose>
-	<c:when test='<%= tabs1.equals("current") %>'%>
+	<c:when test='<%= tabs1.equals("current") %>'>
 		<c:if test="<%= group.getType().equals(Group.TYPE_COMMUNITY_OPEN) %>">
 			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 				<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
