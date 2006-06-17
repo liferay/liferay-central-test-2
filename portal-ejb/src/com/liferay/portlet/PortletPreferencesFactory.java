@@ -28,6 +28,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
@@ -203,14 +204,18 @@ public class PortletPreferencesFactory {
 			modeEditGuest = true;
 		}
 
-		if (!layout.isPrivateLayout() && themeDisplay.isShowAddContentIcon()) {
-		}
-		else {
+		if (modeEditGuest) {
+			if (!layout.isPrivateLayout() &&
+				themeDisplay.isShowAddContentIcon()) {
 
-			// Only users with the correct permissions can update guest
-			// preferences
+			}
+			else {
 
-			//throw new PrincipalException();
+				// Only users with the correct permissions can update guest
+				// preferences
+
+				throw new PrincipalException();
+			}
 		}
 
 		if (portlet.isPreferencesCompanyWide()) {
