@@ -23,9 +23,11 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.journal.model.JournalTemplate;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -71,10 +73,19 @@ public class JournalTemplateFinder {
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_T_G_S_N_D);
 
+			boolean customSqlVendorOracle = GetterUtil.getBoolean(
+				PropsUtil.get(PropsUtil.CUSTOM_SQL_VENDOR_ORACLE));
+
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
+				String replaceWith =
+					"structureId != ? AND structureId IS NOT NULL";
+
+				if (customSqlVendorOracle) {
+					replaceWith = "structureId IS NOT NULL";
+				}
+
 				sql = StringUtil.replace(
-					sql, "structureId = ? [$AND_OR_NULL_CHECK$]",
-					"structureId != ? AND structureId IS NOT NULL");
+					sql, "structureId = ? [$AND_OR_NULL_CHECK$]", replaceWith);
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
@@ -89,7 +100,17 @@ public class JournalTemplateFinder {
 			qPos.add(groupId);
 			qPos.add(templateId);
 			qPos.add(templateId);
-			qPos.add(structureId);
+
+			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
+				if (customSqlVendorOracle) {
+				}
+				else {
+					qPos.add(structureId);
+				}
+			}
+			else {
+				qPos.add(structureId);
+			}
 
 			if (structureIdComparator.equals(StringPool.EQUAL)) {
 				qPos.add(structureId);
@@ -140,10 +161,19 @@ public class JournalTemplateFinder {
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_T_G_S_N_D);
 
+			boolean customSqlVendorOracle = GetterUtil.getBoolean(
+				PropsUtil.get(PropsUtil.CUSTOM_SQL_VENDOR_ORACLE));
+
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
+				String replaceWith =
+					"structureId != ? AND structureId IS NOT NULL";
+
+				if (customSqlVendorOracle) {
+					replaceWith = "structureId IS NOT NULL";
+				}
+
 				sql = StringUtil.replace(
-					sql, "structureId = ? [$AND_OR_NULL_CHECK$]",
-					"structureId != ? AND structureId IS NOT NULL");
+					sql, "structureId = ? [$AND_OR_NULL_CHECK$]", replaceWith);
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
@@ -159,7 +189,17 @@ public class JournalTemplateFinder {
 			qPos.add(groupId);
 			qPos.add(templateId);
 			qPos.add(templateId);
-			qPos.add(structureId);
+
+			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
+				if (customSqlVendorOracle) {
+				}
+				else {
+					qPos.add(structureId);
+				}
+			}
+			else {
+				qPos.add(structureId);
+			}
 
 			if (structureIdComparator.equals(StringPool.EQUAL)) {
 				qPos.add(structureId);
