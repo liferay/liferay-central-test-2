@@ -178,12 +178,6 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		JournalContentSearchLocalServiceUtil.deleteLayoutContentSearches(
 			layout.getLayoutId(), layout.getOwnerId());
 
-		// Layout set
-
-		if (updateLayoutSet) {
-			LayoutSetLocalServiceUtil.updatePageCount(layout.getOwnerId());
-		}
-
 		// Resources
 
 		Iterator itr = ResourceFinder.findByC_P(
@@ -203,6 +197,12 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		// Layout
 
 		LayoutUtil.remove(layout.getPrimaryKey());
+
+		// Layout set
+
+		if (updateLayoutSet) {
+			LayoutSetLocalServiceUtil.updatePageCount(layout.getOwnerId());
+		}
 	}
 
 	public void deleteLayouts(String ownerId)
