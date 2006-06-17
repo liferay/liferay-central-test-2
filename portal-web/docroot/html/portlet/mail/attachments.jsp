@@ -84,7 +84,7 @@ else {
 				<td align="center">
 					<br>
 
-					<input class="portlet-form-button" name="<portlet:namespace />attach_btn" type="button" value="<bean:message key="attach-to-message" />" onClick="<liferay-ui:upload-progress /> document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<portlet:actionURL><portlet:param name="struts_action" value="/mail/attachments" /><portlet:param name="html_cb_1" value='<%= (msgModel.isHTMLFormat()) ? "on" : "" %>' /></portlet:actionURL>'; if (typeof document.<portlet:namespace />fm.<portlet:namespace />attachments != 'undefined') { document.<portlet:namespace />fm.<portlet:namespace />attachments_list.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />attachments); } submitForm(document.<portlet:namespace />fm);">
+					<input class="portlet-form-button" name="<portlet:namespace />attach_btn" type="button" value="<bean:message key="attach-to-message" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<portlet:actionURL><portlet:param name="struts_action" value="/mail/attachments" /><portlet:param name="html_cb_1" value='<%= (msgModel.isHTMLFormat()) ? "on" : "" %>' /></portlet:actionURL>'; if (typeof document.<portlet:namespace />fm.<portlet:namespace />attachments != 'undefined') { document.<portlet:namespace />fm.<portlet:namespace />attachments_list.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />attachments); } submitForm(document.<portlet:namespace />fm);">
 
 					<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "finished") %>">
 				</td>
