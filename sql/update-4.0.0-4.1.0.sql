@@ -6,4 +6,4 @@ create table Groups_Orgs (
 	primary key (groupId, organizationId)
 );
 
-alter table Role_ description VARCHAR(75) null;
+alter table Role_ add description VARCHAR(75) null;
