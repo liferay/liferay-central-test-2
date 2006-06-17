@@ -77,6 +77,9 @@ public interface RoleLocalService {
 			com.liferay.portal.SystemException;
 
 	public java.util.List search(java.lang.String companyId,
+		java.lang.String name) throws com.liferay.portal.SystemException;
+
+	public java.util.List search(java.lang.String companyId,
 		java.lang.String name, int begin, int end)
 		throws com.liferay.portal.SystemException;
 

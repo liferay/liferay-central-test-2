@@ -71,7 +71,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LayoutCacheFilter implements Filter {
 
-	public static final boolean USE_LAYOUT_CACHE_FILTER = GetterUtil.get(
+	public static final boolean USE_LAYOUT_CACHE_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(LayoutCacheFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(

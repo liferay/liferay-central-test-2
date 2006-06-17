@@ -318,7 +318,7 @@ public class LanguageUtil {
 		try {
 			int pos = desc.indexOf(" ");
 
-			int x = GetterUtil.get(desc.substring(0, pos), 0);
+			int x = GetterUtil.getInteger(desc.substring(0, pos));
 
 			value =
 				x + " " +

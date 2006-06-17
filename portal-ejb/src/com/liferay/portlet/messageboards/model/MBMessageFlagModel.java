@@ -37,19 +37,19 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class MBMessageFlagModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessageFlag"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_TOPICID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_TOPICID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessageFlag.topicId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_MESSAGEID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_MESSAGEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessageFlag.messageId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessageFlag.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_FLAG = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_FLAG = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessageFlag.flag"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

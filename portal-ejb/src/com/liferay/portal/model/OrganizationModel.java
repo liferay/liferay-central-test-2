@@ -35,30 +35,30 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class OrganizationModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Organization"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_ORGANIZATIONID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_ORGANIZATIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Organization.organizationId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Organization.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PARENTORGANIZATIONID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PARENTORGANIZATIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Organization.parentOrganizationId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Organization.name"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_REGIONID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_REGIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Organization.regionId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COUNTRYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COUNTRYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Organization.countryId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_STATUSID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_STATUSID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Organization.statusId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMMENTS = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMMENTS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Organization.comments"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

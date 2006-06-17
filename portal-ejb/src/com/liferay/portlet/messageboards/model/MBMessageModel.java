@@ -39,34 +39,34 @@ import java.util.Date;
  *
  */
 public class MBMessageModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_TOPICID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_TOPICID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.topicId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_MESSAGEID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_MESSAGEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.messageId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.userName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_THREADID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_THREADID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.threadId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PARENTMESSAGEID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PARENTMESSAGEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.parentMessageId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SUBJECT = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SUBJECT = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.subject"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BODY = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BODY = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.body"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

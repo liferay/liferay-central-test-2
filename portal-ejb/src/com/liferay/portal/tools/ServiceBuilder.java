@@ -375,11 +375,11 @@ public class ServiceBuilder {
 					}
 				}
 
-				boolean localService = GetterUtil.get(
+				boolean localService = GetterUtil.getBoolean(
 					entityEl.attributeValue("local-service"), false);
-				boolean remoteService = GetterUtil.get(
+				boolean remoteService = GetterUtil.getBoolean(
 					entityEl.attributeValue("remote-service"), true);
-				String persistenceClass = GetterUtil.get(
+				String persistenceClass = GetterUtil.getString(
 					entityEl.attributeValue("persistence-class"),
 					_packagePath + ".service.persistence."+ ejbName +
 						"Persistence");
@@ -410,7 +410,7 @@ public class ServiceBuilder {
 					}
 
 					String columnType = column.attributeValue("type");
-					boolean primary = GetterUtil.get(
+					boolean primary = GetterUtil.getBoolean(
 						column.attributeValue("primary"), false);
 					String collectionEntity = column.attributeValue("entity");
 					String mappingKey = column.attributeValue("mapping-key");
@@ -461,7 +461,7 @@ public class ServiceBuilder {
 
 						String orderColName =
 							orderColEl.attributeValue("name");
-						boolean orderColCaseSensitive = GetterUtil.get(
+						boolean orderColCaseSensitive = GetterUtil.getBoolean(
 							orderColEl.attributeValue("case-sensitive"),
 							true);
 
@@ -501,7 +501,7 @@ public class ServiceBuilder {
 						finder.attributeValue("return-type");
 					String finderWhere =
 						finder.attributeValue("where");
-					boolean finderDBIndex = GetterUtil.get(
+					boolean finderDBIndex = GetterUtil.getBoolean(
 						finder.attributeValue("db-index"), true);
 
 					List finderColsList = new ArrayList();
@@ -526,7 +526,7 @@ public class ServiceBuilder {
 							}
 						}
 
-						String finderColComparator = GetterUtil.get(
+						String finderColComparator = GetterUtil.getString(
 							finderEl.attributeValue("comparator"), "=");
 
 						EntityColumn col = Entity.getColumn(
@@ -1466,13 +1466,13 @@ public class ServiceBuilder {
 
 		// Fields
 
-		sb.append("public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(\"xss.allow." + _packagePath + ".model." + entity.getName() + "\"), XSS_ALLOW);");
+		sb.append("public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(\"xss.allow." + _packagePath + ".model." + entity.getName() + "\"), XSS_ALLOW);");
 
 		for (int i = 0; i < columnList.size(); i++) {
 			EntityColumn col = (EntityColumn)columnList.get(i);
 
 			if (col.getType().equals("String")) {
-				sb.append("public static boolean XSS_ALLOW_" + col.getName().toUpperCase() + " = GetterUtil.get(PropsUtil.get(\"xss.allow." + _packagePath + ".model." + entity.getName() + "." + col.getName() + "\"), XSS_ALLOW_BY_MODEL);");
+				sb.append("public static boolean XSS_ALLOW_" + col.getName().toUpperCase() + " = GetterUtil.getBoolean(PropsUtil.get(\"xss.allow." + _packagePath + ".model." + entity.getName() + "." + col.getName() + "\"), XSS_ALLOW_BY_MODEL);");
 			}
 		}
 

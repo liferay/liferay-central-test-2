@@ -317,7 +317,7 @@ public class ThemeLocalUtil {
 				colorSchemeModel = new ColorScheme(id);
 			}
 
-			colorSchemeModel.setName(GetterUtil.get(
+			colorSchemeModel.setName(GetterUtil.getString(
 				name, colorSchemeModel.getName()));
 
 			Properties p = new NullSafeProperties();
@@ -427,22 +427,22 @@ public class ThemeLocalUtil {
 				themeModel.setServletContextName(servletContextName);
 			}
 
-			themeModel.setName(GetterUtil.get(
+			themeModel.setName(GetterUtil.getString(
 				theme.attributeValue("name"),
 				themeModel.getName()));
-			themeModel.setRootPath(GetterUtil.get(
+			themeModel.setRootPath(GetterUtil.getString(
 				theme.elementText("root-path"),
 				themeModel.getRootPath()));
-			themeModel.setTemplatesPath(GetterUtil.get(
+			themeModel.setTemplatesPath(GetterUtil.getString(
 				theme.elementText("templates-path"),
 				themeModel.getTemplatesPath()));
-			themeModel.setImagesPath(GetterUtil.get(
+			themeModel.setImagesPath(GetterUtil.getString(
 				theme.elementText("images-path"),
 				themeModel.getImagesPath()));
-			themeModel.setTemplateExtension(GetterUtil.get(
+			themeModel.setTemplateExtension(GetterUtil.getString(
 				theme.elementText("template-extension"),
 				themeModel.getTemplateExtension()));
-			themeModel.setEnableDragAndDrop(GetterUtil.get(
+			themeModel.setEnableDragAndDrop(GetterUtil.getBoolean(
 				theme.elementText("enable-drag-and-drop"),
 				themeModel.isEnableDragAndDrop()));
 

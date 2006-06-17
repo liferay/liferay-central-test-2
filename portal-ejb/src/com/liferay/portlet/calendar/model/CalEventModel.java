@@ -37,37 +37,37 @@ import java.util.Date;
  *
  */
 public class CalEventModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.calendar.model.CalEvent"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_EVENTID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_EVENTID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.eventId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_GROUPID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_GROUPID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.groupId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.userName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TITLE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.title"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.description"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.type"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_RECURRENCE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_RECURRENCE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.recurrence"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_REMINDBY = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_REMINDBY = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.remindBy"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

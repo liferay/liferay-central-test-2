@@ -482,9 +482,9 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 						.getPortletSession(handle);
 
 				int sessionScope = javax.portlet.PortletSession.PORTLET_SCOPE;
-				boolean clearSessionCtx = GetterUtil.get(
+				boolean clearSessionCtx = GetterUtil.getBoolean(
 						(String) jsrPortletSession.getAttribute(
-								WebKeys.WSRP_NEW_SESSION, sessionScope), false);
+								WebKeys.WSRP_NEW_SESSION, sessionScope));
 
 				if (clearSessionCtx) {
 					portletSession.setSessionContext(null);
@@ -518,9 +518,8 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 			javax.portlet.PortletSession portletSession) throws WSRPException {
 
 		int sessionScope = javax.portlet.PortletSession.PORTLET_SCOPE;
-		boolean regProducer = GetterUtil.get((String) portletSession
-				.getAttribute(WebKeys.WSRP_REGISTER_PRODUCER, sessionScope),
-				false);
+		boolean regProducer = GetterUtil.getBoolean((String) portletSession
+				.getAttribute(WebKeys.WSRP_REGISTER_PRODUCER, sessionScope));
 
 		ProducerRegistry producerReg = _consumerEnv.getProducerRegistry();
 		Producer producer = producerReg.getProducer(PRODUCER_ID);
@@ -666,7 +665,7 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 			portlet = _consumerEnv.getPortletRegistry().getPortlet(portletKey);
 			if (portlet == null) {
 				// not yet in registry, create new one
-				String parentHandle = GetterUtil.get((String) preferences
+				String parentHandle = GetterUtil.getString((String) preferences
 						.get("parent-handle"), (String) preferences
 						.get("portlet-handle"));
 

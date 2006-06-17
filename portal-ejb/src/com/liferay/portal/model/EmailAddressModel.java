@@ -37,30 +37,30 @@ import java.util.Date;
  *
  */
 public class EmailAddressModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.EmailAddress"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_EMAILADDRESSID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_EMAILADDRESSID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.EmailAddress.emailAddressId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.EmailAddress.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.EmailAddress.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.EmailAddress.userName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.EmailAddress.className"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.EmailAddress.classPK"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ADDRESS = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_ADDRESS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.EmailAddress.address"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPEID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_TYPEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.EmailAddress.typeId"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

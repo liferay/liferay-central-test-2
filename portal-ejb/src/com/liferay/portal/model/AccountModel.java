@@ -37,48 +37,48 @@ import java.util.Date;
  *
  */
 public class AccountModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_ACCOUNTID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_ACCOUNTID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account.accountId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account.userName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PARENTACCOUNTID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PARENTACCOUNTID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account.parentAccountId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account.name"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LEGALNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_LEGALNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account.legalName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LEGALID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_LEGALID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account.legalId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LEGALTYPE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_LEGALTYPE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account.legalType"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SICCODE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SICCODE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account.sicCode"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TICKERSYMBOL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_TICKERSYMBOL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account.tickerSymbol"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_INDUSTRY = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_INDUSTRY = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account.industry"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account.type"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SIZE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SIZE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account.size"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

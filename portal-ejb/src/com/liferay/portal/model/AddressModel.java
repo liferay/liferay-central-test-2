@@ -37,48 +37,48 @@ import java.util.Date;
  *
  */
 public class AddressModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_ADDRESSID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_ADDRESSID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address.addressId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address.userName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address.className"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address.classPK"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_STREET1 = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_STREET1 = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address.street1"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_STREET2 = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_STREET2 = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address.street2"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_STREET3 = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_STREET3 = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address.street3"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CITY = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CITY = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address.city"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ZIP = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_ZIP = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address.zip"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_REGIONID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_REGIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address.regionId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COUNTRYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COUNTRYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address.countryId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPEID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_TYPEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address.typeId"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

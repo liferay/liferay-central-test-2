@@ -51,7 +51,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CompressionFilter implements Filter {
 
-	static boolean useCompressionFilter = GetterUtil.get(
+	static boolean useCompressionFilter = GetterUtil.getBoolean(
 		SystemProperties.get(CompressionFilter.class.getName()), true);
 
 	static {

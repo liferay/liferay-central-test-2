@@ -1120,8 +1120,8 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 				UserUtil.update(user);
 
-				int maxFailures = GetterUtil.get(PropsUtil.get(
-					PropsUtil.AUTH_MAX_FAILURES_LIMIT), 0);
+				int maxFailures = GetterUtil.getInteger(PropsUtil.get(
+					PropsUtil.AUTH_MAX_FAILURES_LIMIT));
 
 				if ((failedLoginAttempts >= maxFailures) &&
 					(maxFailures != 0)) {

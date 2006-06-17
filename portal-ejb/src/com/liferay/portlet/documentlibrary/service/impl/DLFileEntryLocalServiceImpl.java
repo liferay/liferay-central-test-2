@@ -324,7 +324,7 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		DLFileVersion fileVersion = DLFileVersionUtil.create(
 			new DLFileVersionPK(folderId, name, oldVersion));
 
-		String versionUserId = GetterUtil.get(
+		String versionUserId = GetterUtil.getString(
 			fileEntry.getVersionUserId(), fileEntry.getUserId());
 
 		String versionUserName = GetterUtil.getString(

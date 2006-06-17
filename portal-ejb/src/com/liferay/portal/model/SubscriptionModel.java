@@ -37,27 +37,27 @@ import java.util.Date;
  *
  */
 public class SubscriptionModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Subscription"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_SUBSCRIPTIONID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SUBSCRIPTIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Subscription.subscriptionId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Subscription.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Subscription.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Subscription.userName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Subscription.className"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Subscription.classPK"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_FREQUENCY = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_FREQUENCY = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Subscription.frequency"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

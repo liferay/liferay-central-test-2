@@ -61,7 +61,7 @@ public class Encryptor {
 	public static final String IBM_PROVIDER_CLASS =
 		"com.ibm.crypto.provider.IBMJCE";
 
-	public static final String PROVIDER_CLASS = GetterUtil.get(
+	public static final String PROVIDER_CLASS = GetterUtil.getString(
 		SystemProperties.get(Encryptor.class.getName() + ".provider.class"),
 		SUN_PROVIDER_CLASS);
 

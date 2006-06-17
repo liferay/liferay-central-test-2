@@ -67,7 +67,7 @@ public class LoginPostAction extends Action {
 			Map currentUsers =
 				(Map)WebAppPool.get(companyId, WebKeys.CURRENT_USERS);
 
-			boolean simultaenousLogins = GetterUtil.get(
+			boolean simultaenousLogins = GetterUtil.getBoolean(
 				PropsUtil.get(PropsUtil.AUTH_SIMULTANEOUS_LOGINS), true);
 
 			if (!simultaenousLogins) {

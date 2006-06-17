@@ -36,18 +36,18 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class UserIdMapperModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserIdMapper"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserIdMapper.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserIdMapper.type"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserIdMapper.description"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_EXTERNALUSERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_EXTERNALUSERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserIdMapper.externalUserId"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

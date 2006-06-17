@@ -297,8 +297,8 @@ public class MainServlet extends ActionServlet {
 				_log.debug("Check journal content search");
 			}
 
-			if (GetterUtil.get(PropsUtil.get(
-					PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP), false)) {
+			if (GetterUtil.getBoolean(PropsUtil.get(
+					PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP))) {
 
 				try {
 					JournalContentSearchLocalServiceUtil.checkContentSearches(

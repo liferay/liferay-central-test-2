@@ -51,7 +51,7 @@ public class OSCacheProvider implements CacheProvider {
 	public Cache buildCache(String region, Properties properties)
 		throws CacheException {
 
-		int refreshPeriod = GetterUtil.get(
+		int refreshPeriod = GetterUtil.getInteger(
 			PropsUtil.get(StringHelper.qualify(region, OSCACHE_REFRESH_PERIOD)),
 			CacheEntry.INDEFINITE_EXPIRY);
 

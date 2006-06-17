@@ -37,15 +37,15 @@ import java.util.Date;
  *
  */
 public class UserTrackerPathModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTrackerPath"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERTRACKERPATHID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERTRACKERPATHID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTrackerPath.userTrackerPathId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERTRACKERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERTRACKERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTrackerPath.userTrackerId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PATH = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PATH = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTrackerPath.path"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

@@ -37,46 +37,46 @@ import java.util.Date;
  *
  */
 public class ShoppingItemModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_ITEMID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_ITEMID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.itemId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.userName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CATEGORYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CATEGORYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.categoryId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SKU = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SKU = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.sku"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.name"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.description"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PROPERTIES = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PROPERTIES = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.properties"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_FIELDSQUANTITIES = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_FIELDSQUANTITIES = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.fieldsQuantities"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SMALLIMAGEURL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SMALLIMAGEURL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.smallImageURL"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_MEDIUMIMAGEURL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_MEDIUMIMAGEURL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.mediumImageURL"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LARGEIMAGEURL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_LARGEIMAGEURL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.largeImageURL"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

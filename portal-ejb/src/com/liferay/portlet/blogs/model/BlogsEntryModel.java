@@ -37,31 +37,31 @@ import java.util.Date;
  *
  */
 public class BlogsEntryModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_ENTRYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_ENTRYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.entryId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_GROUPID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_GROUPID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.groupId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.userName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CATEGORYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CATEGORYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.categoryId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TITLE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.title"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CONTENT = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CONTENT = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.content"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

@@ -37,75 +37,75 @@ import java.util.Date;
  *
  */
 public class ContactModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_CONTACTID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CONTACTID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.contactId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.userName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ACCOUNTID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_ACCOUNTID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.accountId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PARENTCONTACTID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PARENTCONTACTID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.parentContactId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_FIRSTNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_FIRSTNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.firstName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_MIDDLENAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_MIDDLENAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.middleName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LASTNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_LASTNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.lastName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NICKNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_NICKNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.nickName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PREFIXID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PREFIXID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.prefixId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SUFFIXID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SUFFIXID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.suffixId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SMSSN = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SMSSN = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.smsSn"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_AIMSN = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_AIMSN = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.aimSn"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ICQSN = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_ICQSN = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.icqSn"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_MSNSN = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_MSNSN = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.msnSn"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SKYPESN = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SKYPESN = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.skypeSn"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_YMSN = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_YMSN = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.ymSn"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_EMPLOYEESTATUSID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_EMPLOYEESTATUSID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.employeeStatusId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_EMPLOYEENUMBER = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_EMPLOYEENUMBER = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.employeeNumber"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_JOBTITLE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_JOBTITLE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.jobTitle"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_JOBCLASS = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_JOBCLASS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.jobClass"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_HOURSOFOPERATION = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_HOURSOFOPERATION = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.hoursOfOperation"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

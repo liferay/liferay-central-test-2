@@ -35,15 +35,15 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class OrgLaborModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgLabor"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_ORGLABORID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_ORGLABORID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgLabor.orgLaborId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ORGANIZATIONID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_ORGANIZATIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgLabor.organizationId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPEID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_TYPEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgLabor.typeId"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

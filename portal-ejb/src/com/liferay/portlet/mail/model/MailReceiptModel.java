@@ -37,25 +37,25 @@ import java.util.Date;
  *
  */
 public class MailReceiptModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.mail.model.MailReceipt"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_RECEIPTID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_RECEIPTID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.mail.model.MailReceipt.receiptId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.mail.model.MailReceipt.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.mail.model.MailReceipt.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_RECIPIENTNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_RECIPIENTNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.mail.model.MailReceipt.recipientName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_RECIPIENTADDRESS = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_RECIPIENTADDRESS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.mail.model.MailReceipt.recipientAddress"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SUBJECT = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SUBJECT = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.mail.model.MailReceipt.subject"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

@@ -36,19 +36,19 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class PortletPreferencesModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PortletPreferences"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_PORTLETID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PORTLETID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PortletPreferences.portletId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LAYOUTID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_LAYOUTID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PortletPreferences.layoutId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_OWNERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_OWNERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PortletPreferences.ownerId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PREFERENCES = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PREFERENCES = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PortletPreferences.preferences"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

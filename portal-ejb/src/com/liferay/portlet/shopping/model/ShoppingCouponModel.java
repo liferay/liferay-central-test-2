@@ -37,37 +37,37 @@ import java.util.Date;
  *
  */
 public class ShoppingCouponModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_COUPONID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COUPONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.couponId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_GROUPID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_GROUPID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.groupId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.userName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.name"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.description"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LIMITCATEGORIES = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_LIMITCATEGORIES = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.limitCategories"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LIMITSKUS = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_LIMITSKUS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.limitSkus"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DISCOUNTTYPE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_DISCOUNTTYPE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.discountType"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

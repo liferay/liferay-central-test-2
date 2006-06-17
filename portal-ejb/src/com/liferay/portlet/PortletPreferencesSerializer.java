@@ -98,8 +98,8 @@ public class PortletPreferencesSerializer {
 					values.add(valueEl.getTextTrim());
 				}
 
-				boolean readOnly =
-					GetterUtil.get(prefEl.elementText("read-only"), false);
+				boolean readOnly = GetterUtil.getBoolean(
+					prefEl.elementText("read-only"));
 
 				Preference preference = new Preference(
 					name, (String[])values.toArray(new String[0]), readOnly);

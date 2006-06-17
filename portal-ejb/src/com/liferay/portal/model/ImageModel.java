@@ -37,12 +37,12 @@ import java.util.Date;
  *
  */
 public class ImageModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Image"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_IMAGEID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_IMAGEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Image.imageId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TEXT = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_TEXT = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Image.text"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

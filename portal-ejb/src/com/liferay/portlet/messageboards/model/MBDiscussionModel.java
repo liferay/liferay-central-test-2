@@ -35,19 +35,19 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class MBDiscussionModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBDiscussion"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_DISCUSSIONID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_DISCUSSIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBDiscussion.discussionId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBDiscussion.className"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBDiscussion.classPK"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_THREADID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_THREADID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBDiscussion.threadId"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

@@ -37,16 +37,16 @@ import java.util.Date;
  *
  */
 public class MBThreadModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBThread"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_THREADID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_THREADID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBThread.threadId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ROOTMESSAGEID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_ROOTMESSAGEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBThread.rootMessageId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TOPICID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_TOPICID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBThread.topicId"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

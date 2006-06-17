@@ -228,6 +228,21 @@ public class RoleLocalServiceUtil {
 	}
 
 	public static java.util.List search(java.lang.String companyId,
+		java.lang.String name) throws com.liferay.portal.SystemException {
+		try {
+			RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+			return roleLocalService.search(companyId, name);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static java.util.List search(java.lang.String companyId,
 		java.lang.String name, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		try {

@@ -36,36 +36,36 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class LayoutModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_LAYOUTID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_LAYOUTID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.layoutId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_OWNERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_OWNERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.ownerId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PARENTLAYOUTID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PARENTLAYOUTID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.parentLayoutId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.name"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.type"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPESETTINGS = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_TYPESETTINGS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.typeSettings"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_FRIENDLYURL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_FRIENDLYURL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.friendlyURL"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_THEMEID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_THEMEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.themeId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COLORSCHEMEID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COLORSCHEMEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.colorSchemeId"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

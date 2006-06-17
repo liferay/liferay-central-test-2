@@ -835,67 +835,67 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			Portlet portletModel = (Portlet)portletsPool.get(portletId);
 
 			if (portletModel != null) {
-				portletModel.setStrutsPath(GetterUtil.get(
+				portletModel.setStrutsPath(GetterUtil.getString(
 					portlet.elementText("struts-path"),
 					portletModel.getStrutsPath()));
-				portletModel.setConfigurationPath(GetterUtil.get(
+				portletModel.setConfigurationPath(GetterUtil.getString(
 					portlet.elementText("configuration-path"),
 					portletModel.getConfigurationPath()));
-				portletModel.setIndexerClass(GetterUtil.get(
+				portletModel.setIndexerClass(GetterUtil.getString(
 					portlet.elementText("indexer-class"),
 					portletModel.getIndexerClass()));
-				portletModel.setSchedulerClass(GetterUtil.get(
+				portletModel.setSchedulerClass(GetterUtil.getString(
 					portlet.elementText("scheduler-class"),
 					portletModel.getSchedulerClass()));
-				portletModel.setPortletURLClass(GetterUtil.get(
+				portletModel.setPortletURLClass(GetterUtil.getString(
 					portlet.elementText("portlet-url-class"),
 					portletModel.getPortletURLClass()));
-				portletModel.setPreferencesCompanyWide(GetterUtil.get(
+				portletModel.setPreferencesCompanyWide(GetterUtil.getBoolean(
 					portlet.elementText("preferences-company-wide"),
 					portletModel.isPreferencesCompanyWide()));
-				portletModel.setPreferencesUniquePerLayout(GetterUtil.get(
+				portletModel.setPreferencesUniquePerLayout(GetterUtil.getBoolean(
 					portlet.elementText("preferences-unique-per-layout"),
 					portletModel.isPreferencesUniquePerLayout()));
-				portletModel.setPreferencesOwnedByGroup(GetterUtil.get(
+				portletModel.setPreferencesOwnedByGroup(GetterUtil.getBoolean(
 					portlet.elementText("preferences-owned-by-group"),
 					portletModel.isPreferencesOwnedByGroup()));
-				portletModel.setUseDefaultTemplate(GetterUtil.get(
+				portletModel.setUseDefaultTemplate(GetterUtil.getBoolean(
 					portlet.elementText("use-default-template"),
 					portletModel.isUseDefaultTemplate()));
-				portletModel.setShowPortletAccessDenied(GetterUtil.get(
+				portletModel.setShowPortletAccessDenied(GetterUtil.getBoolean(
 					portlet.elementText("show-portlet-access-denied"),
 					portletModel.isShowPortletAccessDenied()));
-				portletModel.setShowPortletInactive(GetterUtil.get(
+				portletModel.setShowPortletInactive(GetterUtil.getBoolean(
 					portlet.elementText("show-portlet-inactive"),
 					portletModel.isShowPortletInactive()));
-				portletModel.setRestoreCurrentView(GetterUtil.get(
+				portletModel.setRestoreCurrentView(GetterUtil.getBoolean(
 					portlet.elementText("restore-current-view"),
 					portletModel.isRestoreCurrentView()));
-				portletModel.setMaximizeEdit(GetterUtil.get(
+				portletModel.setMaximizeEdit(GetterUtil.getBoolean(
 					portlet.elementText("maximize-edit"),
 					portletModel.isMaximizeEdit()));
-				portletModel.setMaximizeHelp(GetterUtil.get(
+				portletModel.setMaximizeHelp(GetterUtil.getBoolean(
 					portlet.elementText("maximize-help"),
 					portletModel.isMaximizeHelp()));
-				portletModel.setMaximizePrint(GetterUtil.get(
+				portletModel.setMaximizePrint(GetterUtil.getBoolean(
 					portlet.elementText("maximize-print"),
 					portletModel.isMaximizePrint()));
-				portletModel.setLayoutCacheable(GetterUtil.get(
+				portletModel.setLayoutCacheable(GetterUtil.getBoolean(
 					portlet.elementText("layout-cacheable"),
 					portletModel.isLayoutCacheable()));
-				portletModel.setInstanceable(GetterUtil.get(
+				portletModel.setInstanceable(GetterUtil.getBoolean(
 					portlet.elementText("instanceable"),
 					portletModel.isInstanceable()));
-				portletModel.setPrivateRequestAttributes(GetterUtil.get(
+				portletModel.setPrivateRequestAttributes(GetterUtil.getBoolean(
 					portlet.elementText("private-request-attributes"),
 					portletModel.isPrivateRequestAttributes()));
-				portletModel.setSystem(GetterUtil.get(
+				portletModel.setSystem(GetterUtil.getBoolean(
 					portlet.elementText("system"),
 					portletModel.isSystem()));
-				portletModel.setActive(GetterUtil.get(
+				portletModel.setActive(GetterUtil.getBoolean(
 					portlet.elementText("active"),
 					portletModel.isActive()));
-				portletModel.setInclude(GetterUtil.get(
+				portletModel.setInclude(GetterUtil.getBoolean(
 					portlet.elementText("include"),
 					portletModel.isInclude()));
 

@@ -71,8 +71,8 @@ import org.dom4j.io.SAXReader;
 public class ColorSchemeBuilder {
 
 	public static void main(String[] args) {
-		boolean overwrite = GetterUtil.get(
-			System.getProperty("color.scheme.builder.overwrite"), false);
+		boolean overwrite = GetterUtil.getBoolean(
+			System.getProperty("color.scheme.builder.overwrite"));
 
 		try {
 			ColorSchemeBuilder.build(

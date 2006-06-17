@@ -131,10 +131,10 @@ public class SystemProperties {
 
 		// Set system properties
 
-		boolean systemPropertiesLoad = GetterUtil.get(
+		boolean systemPropertiesLoad = GetterUtil.getBoolean(
 			System.getProperty(SYSTEM_PROPERTIES_LOAD), true);
 
-		boolean systemPropertiesFinal = GetterUtil.get(
+		boolean systemPropertiesFinal = GetterUtil.getBoolean(
 			System.getProperty(SYSTEM_PROPERTIES_FINAL), true);
 
 		if (systemPropertiesLoad) {

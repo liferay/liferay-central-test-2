@@ -42,7 +42,7 @@ public class AccountFinderLocator {
 	}
 
 	protected static String getAccountFinderClassName() {
-		return GetterUtil.get(
+		return GetterUtil.getString(
 			PropsUtil.get(PropsUtil.MAIL_ACCOUNT_FINDER),
 			SingleAccountFinder.class.getName());
 	}

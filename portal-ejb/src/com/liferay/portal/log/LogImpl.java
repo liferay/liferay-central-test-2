@@ -52,12 +52,52 @@ public class LogImpl implements Log {
 		_log.error(t);
 	}
 
+	public void fatal(String msg) {
+		_log.fatal(msg);
+	}
+
+	public void fatal(Throwable t) {
+		_log.fatal(t);
+	}
+
 	public void info(String msg) {
 		_log.info(msg);
 	}
 
 	public void info(Throwable t) {
 		_log.info(t);
+	}
+
+	public boolean isDebugEnabled() {
+		return _log.isDebugEnabled();
+	}
+
+	public boolean isErrorEnabled() {
+		return _log.isErrorEnabled();
+	}
+
+	public boolean isFatalEnabled() {
+		return _log.isFatalEnabled();
+	}
+
+	public boolean isInfoEnabled() {
+		return _log.isInfoEnabled();
+	}
+
+	public boolean isTraceEnabled() {
+		return _log.isTraceEnabled();
+	}
+
+	public boolean isWarnEnabled() {
+		return _log.isWarnEnabled();
+	}
+
+	public void trace(String msg) {
+		_log.trace(msg);
+	}
+
+	public void trace(Throwable t) {
+		_log.trace(t);
 	}
 
 	public void warn(String msg) {

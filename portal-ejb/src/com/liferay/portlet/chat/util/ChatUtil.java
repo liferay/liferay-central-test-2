@@ -47,7 +47,7 @@ public class ChatUtil {
 	}
 
 	private ChatUtil() {
-		int defaultPort = GetterUtil.get(
+		int defaultPort = GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.CHAT_SERVER_DEFAULT_PORT), 7777);
 
 		_port = new IntegerWrapper(defaultPort);

@@ -525,7 +525,7 @@ public class PortalUtil {
 			sb.append(serverHost);
 		}
 
-		int serverHttpPort = GetterUtil.get(
+		int serverHttpPort = GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.WEB_SERVER_HTTP_PORT), -1);
 
 		if (serverHttpPort == -1) {
@@ -541,7 +541,7 @@ public class PortalUtil {
 			}
 		}
 
-		int serverHttpsPort = GetterUtil.get(
+		int serverHttpsPort = GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.WEB_SERVER_HTTPS_PORT), -1);
 
 		if (serverHttpsPort == -1) {
@@ -563,7 +563,7 @@ public class PortalUtil {
 	public static String getPortletGroupId(String plid) {
 		String ownerId = Layout.getOwnerId(plid);
 
-		return GetterUtil.get(
+		return GetterUtil.getString(
 			Layout.getGroupId(ownerId), Group.DEFAULT_PARENT_GROUP_ID);
 	}
 

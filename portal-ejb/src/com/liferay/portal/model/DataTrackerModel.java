@@ -37,27 +37,27 @@ import java.util.Date;
  *
  */
 public class DataTrackerModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.DataTracker"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_DATATRACKERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_DATATRACKERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.DataTracker.dataTrackerId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.DataTracker.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CREATEDBYUSERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CREATEDBYUSERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.DataTracker.createdByUserId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CREATEDBYUSERNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CREATEDBYUSERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.DataTracker.createdByUserName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_UPDATEDBY = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_UPDATEDBY = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.DataTracker.updatedBy"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.DataTracker.className"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.DataTracker.classPK"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

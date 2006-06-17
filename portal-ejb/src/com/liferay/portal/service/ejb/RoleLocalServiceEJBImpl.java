@@ -115,6 +115,11 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 	}
 
 	public java.util.List search(java.lang.String companyId,
+		java.lang.String name) throws com.liferay.portal.SystemException {
+		return getService().search(companyId, name);
+	}
+
+	public java.util.List search(java.lang.String companyId,
 		java.lang.String name, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getService().search(companyId, name, begin, end);

@@ -44,7 +44,7 @@ import javax.servlet.http.HttpSession;
  */
 public class SessionParameters {
 
-	public static final boolean USE_SESSION_PARAMETERS = GetterUtil.get(
+	public static final boolean USE_SESSION_PARAMETERS = GetterUtil.getBoolean(
 		SystemProperties.get(SessionParameters.class.getName()), true);
 
 	public static final String KEY = SessionParameters.class.getName();

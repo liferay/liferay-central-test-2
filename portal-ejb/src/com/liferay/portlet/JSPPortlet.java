@@ -58,7 +58,7 @@ public class JSPPortlet extends LiferayPortlet {
 		printJSP = getInitParameter("print-jsp");
 		viewJSP = getInitParameter("view-jsp");
 
-		copyRequestParameters = GetterUtil.get(
+		copyRequestParameters = GetterUtil.getBoolean(
 			getInitParameter("copy-request-parameters"), true);
 	}
 

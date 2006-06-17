@@ -62,7 +62,7 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 			UploadServletRequest.class.getName() + ".max.size"));
 
 	public static final File DEFAULT_TEMP_DIR = new File(
-		GetterUtil.get(
+		GetterUtil.getString(
 			SystemProperties.get(
 				UploadServletRequest.class.getName() + ".temp.dir"),
 			SystemProperties.get(SystemProperties.TMP_DIR)));

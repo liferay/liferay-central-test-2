@@ -37,42 +37,42 @@ import java.util.Date;
  *
  */
 public class UserModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CONTACTID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CONTACTID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.contactId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PASSWORD = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PASSWORD = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.password"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_EMAILADDRESS = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_EMAILADDRESS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.emailAddress"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LANGUAGEID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_LANGUAGEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.languageId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TIMEZONEID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_TIMEZONEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.timeZoneId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_GREETING = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_GREETING = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.greeting"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_RESOLUTION = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_RESOLUTION = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.resolution"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMMENTS = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMMENTS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.comments"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LOGINIP = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_LOGINIP = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.loginIP"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LASTLOGINIP = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_LASTLOGINIP = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.lastLoginIP"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

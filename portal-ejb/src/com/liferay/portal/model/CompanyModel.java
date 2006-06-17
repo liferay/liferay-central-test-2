@@ -35,21 +35,21 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class CompanyModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Company"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Company.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_KEY = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_KEY = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Company.key"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PORTALURL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PORTALURL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Company.portalURL"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_HOMEURL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_HOMEURL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Company.homeURL"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_MX = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_MX = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Company.mx"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

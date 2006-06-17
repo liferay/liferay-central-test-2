@@ -300,7 +300,7 @@ public class WebSiteBuilder {
 			new FileInputStream("../portal-ejb/classes/portal.properties"));
 
 		String sessionTimeout =
-			GetterUtil.get(props.getProperty("session.timeout"), "30");
+			GetterUtil.getString(props.getProperty("session.timeout"), "30");
 
 		// Default NFC
 

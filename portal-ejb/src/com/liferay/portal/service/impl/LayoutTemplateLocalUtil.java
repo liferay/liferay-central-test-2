@@ -229,13 +229,13 @@ public class LayoutTemplateLocalUtil {
 			}
 
 			layoutTemplateModel.setStandard(standard);
-			layoutTemplateModel.setName(GetterUtil.get(
+			layoutTemplateModel.setName(GetterUtil.getString(
 				layoutTemplate.attributeValue("name"),
 				layoutTemplateModel.getName()));
-			layoutTemplateModel.setTemplatePath(GetterUtil.get(
+			layoutTemplateModel.setTemplatePath(GetterUtil.getString(
 				layoutTemplate.elementText("template-path"),
 				layoutTemplateModel.getTemplatePath()));
-			layoutTemplateModel.setThumbnailPath(GetterUtil.get(
+			layoutTemplateModel.setThumbnailPath(GetterUtil.getString(
 				layoutTemplate.elementText("thumbnail-path"),
 				layoutTemplateModel.getThumbnailPath()));
 

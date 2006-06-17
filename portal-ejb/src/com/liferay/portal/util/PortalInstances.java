@@ -73,8 +73,8 @@ public class PortalInstances {
 	}
 
 	private boolean _matches() {
-		int instances =
-			GetterUtil.get(PropsUtil.get(PropsUtil.PORTAL_INSTANCES), 1);
+		int instances = GetterUtil.getInteger(
+			PropsUtil.get(PropsUtil.PORTAL_INSTANCES), 1);
 
 		if (instances > _companyIds.size()) {
 			return false;

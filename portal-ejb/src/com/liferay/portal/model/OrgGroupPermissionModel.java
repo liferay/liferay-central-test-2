@@ -36,16 +36,16 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class OrgGroupPermissionModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgGroupPermission"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_ORGANIZATIONID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_ORGANIZATIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgGroupPermission.organizationId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_GROUPID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_GROUPID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgGroupPermission.groupId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PERMISSIONID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PERMISSIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgGroupPermission.permissionId"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

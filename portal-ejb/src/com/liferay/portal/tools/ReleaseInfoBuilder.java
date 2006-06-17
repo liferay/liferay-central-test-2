@@ -73,7 +73,7 @@ public class ReleaseInfoBuilder {
 			x = content.indexOf("\"", x) + 1;
 			y = content.indexOf("\"", x);
 
-			int build = GetterUtil.get(content.substring(x, y), 0) + 1;
+			int build = GetterUtil.getInteger(content.substring(x, y)) + 1;
 
 			content =
 				content.substring(0, x) + build +

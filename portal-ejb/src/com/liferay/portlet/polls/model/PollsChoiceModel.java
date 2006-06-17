@@ -37,16 +37,16 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class PollsChoiceModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsChoice"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_QUESTIONID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_QUESTIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsChoice.questionId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CHOICEID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CHOICEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsChoice.choiceId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsChoice.description"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

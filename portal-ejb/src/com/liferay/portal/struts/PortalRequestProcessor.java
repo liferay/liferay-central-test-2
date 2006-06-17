@@ -435,7 +435,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		// Authenticated users must agree to Terms of Use
 
 		if ((user != null) && (!user.isAgreedToTermsOfUse())) {
-			boolean termsOfUseRequired = GetterUtil.get(
+			boolean termsOfUseRequired = GetterUtil.getBoolean(
 				PropsUtil.get(PropsUtil.TERMS_OF_USE_REQUIRED), true);
 
 			if (termsOfUseRequired) {
@@ -453,7 +453,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Authenticated users may not be allowed to have simultaneous logins
 
-		boolean simultaenousLogins = GetterUtil.get(
+		boolean simultaenousLogins = GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.AUTH_SIMULTANEOUS_LOGINS), true);
 
 		if (!simultaenousLogins) {
@@ -687,7 +687,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		defaultPathSB.append(mainPath);
 		defaultPathSB.append(_PATH_PORTAL_LAYOUT);
 
-		boolean forwardByLastPath = GetterUtil.get(
+		boolean forwardByLastPath = GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.AUTH_FORWARD_BY_LAST_PATH), true);
 
 		if (!forwardByLastPath) {

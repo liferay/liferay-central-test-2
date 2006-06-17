@@ -90,7 +90,7 @@ public class WSDDBuilder {
 
 				String entityName = entity.attributeValue("name");
 
-				boolean remoteService = GetterUtil.get(
+				boolean remoteService = GetterUtil.getBoolean(
 					entity.attributeValue("remote-service"), true);
 
 				if (remoteService) {

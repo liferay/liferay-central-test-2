@@ -45,7 +45,7 @@ import java.util.Set;
  */
 public class CollectionFactory {
 
-	public static final boolean TROVE = GetterUtil.get(
+	public static final boolean TROVE = GetterUtil.getBoolean(
 		SystemProperties.get("trove"), true);
 
 	public static Map getHashMap() {

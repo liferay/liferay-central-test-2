@@ -39,27 +39,27 @@ import java.util.Date;
  *
  */
 public class WikiPageModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPage"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_NODEID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_NODEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.nodeId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TITLE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.title"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.userName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CONTENT = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CONTENT = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.content"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_FORMAT = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_FORMAT = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.format"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

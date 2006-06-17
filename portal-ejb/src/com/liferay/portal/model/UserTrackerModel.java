@@ -37,24 +37,24 @@ import java.util.Date;
  *
  */
 public class UserTrackerModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTracker"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERTRACKERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERTRACKERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTracker.userTrackerId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTracker.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTracker.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_REMOTEADDR = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_REMOTEADDR = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTracker.remoteAddr"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_REMOTEHOST = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_REMOTEHOST = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTracker.remoteHost"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERAGENT = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERAGENT = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTracker.userAgent"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

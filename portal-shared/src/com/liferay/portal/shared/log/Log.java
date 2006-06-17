@@ -38,9 +38,29 @@ public interface Log {
 
 	public void error(Throwable t);
 
+	public void fatal(String msg);
+
+	public void fatal(Throwable t);
+
 	public void info(String msg);
 
 	public void info(Throwable t);
+
+	public boolean isDebugEnabled();
+
+	public boolean isErrorEnabled();
+
+	public boolean isFatalEnabled();
+
+	public boolean isInfoEnabled();
+
+	public boolean isTraceEnabled();
+
+	public boolean isWarnEnabled();
+
+	public void trace(String msg);
+
+	public void trace(Throwable t);
 
 	public void warn(String msg);
 

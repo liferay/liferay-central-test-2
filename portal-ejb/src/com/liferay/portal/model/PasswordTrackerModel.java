@@ -37,15 +37,15 @@ import java.util.Date;
  *
  */
 public class PasswordTrackerModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PasswordTracker"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_PASSWORDTRACKERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PASSWORDTRACKERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PasswordTracker.passwordTrackerId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PasswordTracker.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PASSWORD = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PASSWORD = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PasswordTracker.password"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

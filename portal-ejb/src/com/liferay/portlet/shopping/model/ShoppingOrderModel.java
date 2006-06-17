@@ -37,115 +37,115 @@ import java.util.Date;
  *
  */
 public class ShoppingOrderModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_ORDERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_ORDERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.orderId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_GROUPID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_GROUPID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.groupId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.userId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.userName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ALTSHIPPING = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_ALTSHIPPING = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.altShipping"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COUPONIDS = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COUPONIDS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.couponIds"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGFIRSTNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BILLINGFIRSTNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingFirstName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGLASTNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BILLINGLASTNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingLastName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGEMAILADDRESS = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BILLINGEMAILADDRESS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingEmailAddress"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGCOMPANY = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BILLINGCOMPANY = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingCompany"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGSTREET = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BILLINGSTREET = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingStreet"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGCITY = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BILLINGCITY = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingCity"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGSTATE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BILLINGSTATE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingState"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGZIP = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BILLINGZIP = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingZip"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGCOUNTRY = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BILLINGCOUNTRY = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingCountry"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGPHONE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BILLINGPHONE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingPhone"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGFIRSTNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SHIPPINGFIRSTNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingFirstName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGLASTNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SHIPPINGLASTNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingLastName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGEMAILADDRESS = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SHIPPINGEMAILADDRESS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingEmailAddress"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGCOMPANY = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SHIPPINGCOMPANY = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingCompany"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGSTREET = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SHIPPINGSTREET = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingStreet"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGCITY = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SHIPPINGCITY = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingCity"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGSTATE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SHIPPINGSTATE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingState"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGZIP = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SHIPPINGZIP = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingZip"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGCOUNTRY = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SHIPPINGCOUNTRY = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingCountry"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGPHONE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_SHIPPINGPHONE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingPhone"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CCNAME = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CCNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.ccName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CCTYPE = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CCTYPE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.ccType"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CCNUMBER = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CCNUMBER = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.ccNumber"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CCVERNUMBER = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_CCVERNUMBER = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.ccVerNumber"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMMENTS = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMMENTS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.comments"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PPTXNID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PPTXNID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.ppTxnId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PPPAYMENTSTATUS = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PPPAYMENTSTATUS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.ppPaymentStatus"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PPRECEIVEREMAIL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PPRECEIVEREMAIL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.ppReceiverEmail"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PPPAYEREMAIL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PPPAYEREMAIL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.ppPayerEmail"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

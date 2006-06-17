@@ -35,18 +35,18 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class PermissionModel extends BaseModel {
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Permission"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_PERMISSIONID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_PERMISSIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Permission.permissionId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Permission.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ACTIONID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_ACTIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Permission.actionId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_RESOURCEID = GetterUtil.get(PropsUtil.get(
+	public static boolean XSS_ALLOW_RESOURCEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Permission.resourceId"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
