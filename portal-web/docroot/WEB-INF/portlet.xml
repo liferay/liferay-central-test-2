@@ -133,6 +133,10 @@
 			<value>/weather/edit</value>
 		</init-param>
 		<init-param>
+			<name>edit-guest-action</name>
+			<value>/weather/edit</value>
+		</init-param>
+		<init-param>
 			<name>view-action</name>
 			<value>/weather/view</value>
 		</init-param>
@@ -140,6 +144,7 @@
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>edit</portlet-mode>
+			<portlet-mode>edit_guest</portlet-mode>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>
@@ -172,6 +177,10 @@
 			<value>/news/edit</value>
 		</init-param>
 		<init-param>
+			<name>edit-guest-action</name>
+			<value>/news/edit</value>
+		</init-param>
+		<init-param>
 			<name>view-action</name>
 			<value>/news/view</value>
 		</init-param>
@@ -179,6 +188,7 @@
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>edit</portlet-mode>
+			<portlet-mode>edit_guest</portlet-mode>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>
@@ -325,6 +335,10 @@
 			<value>/stocks/edit</value>
 		</init-param>
 		<init-param>
+			<name>edit-guest-action</name>
+			<value>/stocks/edit</value>
+		</init-param>
+		<init-param>
 			<name>view-action</name>
 			<value>/stocks/view</value>
 		</init-param>
@@ -332,6 +346,7 @@
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>edit</portlet-mode>
+			<portlet-mode>edit_guest</portlet-mode>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>
@@ -426,6 +441,10 @@
 			<value>/currency_converter/edit</value>
 		</init-param>
 		<init-param>
+			<name>edit-guest-action</name>
+			<value>/currency_converter/edit</value>
+		</init-param>
+		<init-param>
 			<name>view-action</name>
 			<value>/currency_converter/view</value>
 		</init-param>
@@ -433,6 +452,7 @@
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>edit</portlet-mode>
+			<portlet-mode>edit_guest</portlet-mode>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>
@@ -542,6 +562,10 @@
 			<value>/portlet/random_bible_verse/edit.jsp</value>
 		</init-param>
 		<init-param>
+			<name>edit-guest-jsp</name>
+			<value>/portlet/random_bible_verse/edit.jsp</value>
+		</init-param>
+		<init-param>
 			<name>view-jsp</name>
 			<value>/portlet/random_bible_verse/view.jsp</value>
 		</init-param>
@@ -549,6 +573,7 @@
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>edit</portlet-mode>
+			<portlet-mode>edit_guest</portlet-mode>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>
@@ -833,6 +858,10 @@
 			<value>/google/edit</value>
 		</init-param>
 		<init-param>
+			<name>edit-guest-action</name>
+			<value>/google/edit</value>
+		</init-param>
+		<init-param>
 			<name>view-action</name>
 			<value>/google/view</value>
 		</init-param>
@@ -840,6 +869,7 @@
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>edit</portlet-mode>
+			<portlet-mode>edit_guest</portlet-mode>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>
@@ -924,6 +954,10 @@
 			<value>/rss/edit</value>
 		</init-param>
 		<init-param>
+			<name>edit-guest-action</name>
+			<value>/rss/edit</value>
+		</init-param>
+		<init-param>
 			<name>view-action</name>
 			<value>/rss/view</value>
 		</init-param>
@@ -931,6 +965,7 @@
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>edit</portlet-mode>
+			<portlet-mode>edit_guest</portlet-mode>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>

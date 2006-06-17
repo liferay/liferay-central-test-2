@@ -20,33 +20,58 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet;
+package com.liferay.util;
 
-import javax.portlet.PortletMode;
+import com.opensymphony.oscache.base.CacheEntry;
+import com.opensymphony.oscache.base.EntryRefreshPolicy;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="LiferayPortletMode.java.html"><b><i>View Source</i></b></a>
+ * <a href="CachePolicy.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class LiferayPortletMode extends PortletMode {
+public class CachePolicy implements EntryRefreshPolicy {
 
-	public final static PortletMode ABOUT = new PortletMode("about");
-
-	public final static PortletMode CONFIG = new PortletMode("config");
-
-	public final static PortletMode EDIT_DEFAULTS =
-		new PortletMode("edit_defaults");
-
-	public final static PortletMode EDIT_GUEST = new PortletMode("edit_guest");
-
-	public final static PortletMode PREVIEW = new PortletMode("preview");
-
-	public final static PortletMode PRINT = new PortletMode("print");
-
-	public LiferayPortletMode(String name) {
-		super(name);
+	public CachePolicy(long refresh) {
+		_refresh = refresh;
 	}
+
+	public boolean needsRefresh(CacheEntry entry) {
+		if (_refresh <= 0) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Cache is never stale for " + entry.getKey() +
+						" because refresh less than or equal to 0");
+			}
+
+			return false;
+		}
+
+		long lastUpdate = entry.getLastUpdate();
+		long now = System.currentTimeMillis();
+
+		if (lastUpdate + _refresh < now) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Cache is stale for " + entry.getKey());
+			}
+
+			return true;
+		}
+		else {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Cache is not stale for " + entry.getKey());
+			}
+
+			return false;
+		}
+	}
+
+	private static Log _log = LogFactory.getLog(CachePolicy.class);
+
+	private static long _refresh;
 
 }

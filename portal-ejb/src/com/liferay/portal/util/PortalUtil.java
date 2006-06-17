@@ -973,6 +973,9 @@ public class PortalUtil {
 			else if (layoutType.hasModeEditDefaultsPortletId(portletId)) {
 				return LiferayPortletMode.EDIT_DEFAULTS;
 			}
+			else if (layoutType.hasModeEditGuestPortletId(portletId)) {
+				return LiferayPortletMode.EDIT_GUEST;
+			}
 			else if (layoutType.hasModeHelpPortletId(portletId)) {
 				return PortletMode.HELP;
 			}
@@ -1014,6 +1017,13 @@ public class PortalUtil {
 					 !layoutType.hasModeEditDefaultsPortletId(portletId)) {
 
 				layoutType.addModeEditDefaultsPortletId(portletId);
+
+				updateLayout = true;
+			}
+			else if (portletMode.equals(LiferayPortletMode.EDIT_GUEST) &&
+					 !layoutType.hasModeEditGuestPortletId(portletId)) {
+
+				layoutType.addModeEditGuestPortletId(portletId);
 
 				updateLayout = true;
 			}

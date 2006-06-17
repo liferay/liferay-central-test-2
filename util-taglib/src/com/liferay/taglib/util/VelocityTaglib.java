@@ -25,6 +25,7 @@ package com.liferay.taglib.util;
 import com.liferay.taglib.portletext.IconBackTag;
 import com.liferay.taglib.portletext.IconCloseTag;
 import com.liferay.taglib.portletext.IconConfigurationTag;
+import com.liferay.taglib.portletext.IconEditGuestTag;
 import com.liferay.taglib.portletext.IconEditTag;
 import com.liferay.taglib.portletext.IconHelpTag;
 import com.liferay.taglib.portletext.IconMaximizeTag;
@@ -85,6 +86,14 @@ public class VelocityTaglib {
 		_res.recycle();
 
 		IconEditTag.doTag(_ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String iconEditGuest() throws Exception {
+		_res.recycle();
+
+		IconEditGuestTag.doTag(_ctx, _req, _res);
 
 		return _res.getString();
 	}

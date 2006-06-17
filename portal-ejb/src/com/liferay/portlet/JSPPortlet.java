@@ -52,6 +52,7 @@ public class JSPPortlet extends LiferayPortlet {
 		configJSP = getInitParameter("config-jsp");
 		editJSP = getInitParameter("edit-jsp");
 		editDefaultsJSP = getInitParameter("edit-defaults-jsp");
+		editGuestJSP = getInitParameter("edit-guest-jsp");
 		helpJSP = getInitParameter("help-jsp");
 		previewJSP = getInitParameter("preview-jsp");
 		printJSP = getInitParameter("print-jsp");
@@ -116,6 +117,17 @@ public class JSPPortlet extends LiferayPortlet {
 		}
 	}
 
+	public void doEditGuest(RenderRequest req, RenderResponse res)
+		throws IOException, PortletException {
+
+		if (req.getPreferences() == null) {
+			super.doEdit(req, res);
+		}
+		else {
+			include(editGuestJSP, req, res);
+		}
+	}
+
 	public void doHelp(RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {
 
@@ -163,6 +175,7 @@ public class JSPPortlet extends LiferayPortlet {
 	protected String configJSP;
 	protected String editJSP;
 	protected String editDefaultsJSP;
+	protected String editGuestJSP;
 	protected String helpJSP;
 	protected String previewJSP;
 	protected String printJSP;

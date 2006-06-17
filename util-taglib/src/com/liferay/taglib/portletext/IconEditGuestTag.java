@@ -1,4 +1,3 @@
-#*
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -20,46 +19,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-*#
 
-<div class="portlet-container">
-	<div class="portlet-box-right">
-	<div class="portlet-box">
+package com.liferay.taglib.portletext;
 
-	<div class="portlet-header-bar">
-		<div class="portlet-header-decoration">
-			<div><div>
-				#if ($portletDisplay.getTitle() != "")
-					<span class="portlet-title">$portletDisplay.getTitle()</span>
-				#end
-			</div></div>
-		</div>
+import com.liferay.taglib.ui.IconTag;
 
-		<div class="portlet-small-icon-bar">
-		
-			$taglibLiferay.iconConfiguration()
+import java.io.IOException;
 
-			$taglibLiferay.iconEdit()
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-			$taglibLiferay.iconGuestEdit()
+/**
+ * <a href="IconEditGuestTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class IconEditGuestTag extends IconTag {
 
-			$taglibLiferay.iconHelp()
+	public static void doTag(
+			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+		throws IOException, ServletException {
 
-			$taglibLiferay.iconPrint()
+		RequestDispatcher rd = ctx.getRequestDispatcher(_PAGE);
 
-			$taglibLiferay.iconMinimize()
+		rd.include(req, res);
+	}
 
-			$taglibLiferay.iconMaximize()
+	protected String getDefaultPage() {
+		return _PAGE;
+	}
 
-			$taglibLiferay.iconClose()
+	private static final String _PAGE =
+		"/html/taglib/portlet/icon_edit_guest/page.jsp";
 
-		</div>
-	</div>
-
-	#if ($portletDisplay.isStateMin())
-		#set($tempVariable1 = "style='display: none;'")
-	#else
-		#set($tempVariable1 = "")
-	#end
-
-	<div class="portlet-content" id="p_p_body_$portletDisplay.getId()" $tempVariable1>
+}

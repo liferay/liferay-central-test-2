@@ -128,6 +128,27 @@ else {
 
 portletDisplay.setURLEdit(urlEdit.toString());
 
+// URL guest edit
+
+PortletURLImpl urlEditGuest = new PortletURLImpl(request, portletDisplay.getId(), plid, false);
+
+if (portletDisplay.isModeEditGuest()) {
+	urlEditGuest.setWindowState(WindowState.NORMAL);
+	urlEditGuest.setPortletMode(PortletMode.VIEW);
+}
+else {
+	if (portlet.isMaximizeEdit()) {
+		urlEditGuest.setWindowState(WindowState.MAXIMIZED);
+	}
+	else {
+		urlEditGuest.setWindowState(WindowState.NORMAL);
+	}
+
+	urlEditGuest.setPortletMode(LiferayPortletMode.EDIT_GUEST);
+}
+
+portletDisplay.setURLEditGuest(urlEditGuest.toString());
+
 // URL help
 
 PortletURLImpl urlHelp = new PortletURLImpl(request, portletDisplay.getId(), plid, false);

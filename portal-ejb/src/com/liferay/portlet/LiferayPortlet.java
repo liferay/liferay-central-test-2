@@ -62,6 +62,9 @@ public class LiferayPortlet extends GenericPortlet {
 			else if (mode.equals(LiferayPortletMode.EDIT_DEFAULTS)) {
 				doEditDefaults(req, res);
 			}
+			else if (mode.equals(LiferayPortletMode.EDIT_GUEST)) {
+				doEditGuest(req, res);
+			}
 			else if (mode.equals(PortletMode.HELP)) {
 				doHelp(req, res);
 			}
@@ -93,6 +96,12 @@ public class LiferayPortlet extends GenericPortlet {
 		throws IOException, PortletException {
 
 		throw new PortletException("doEditDefaults method not implemented");
+	}
+
+	protected void doEditGuest(RenderRequest req, RenderResponse res)
+		throws IOException, PortletException {
+
+		throw new PortletException("doEditGuest method not implemented");
 	}
 
 	protected void doPreview(RenderRequest req, RenderResponse res)

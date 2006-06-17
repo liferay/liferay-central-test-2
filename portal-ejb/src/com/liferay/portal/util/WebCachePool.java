@@ -22,6 +22,7 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.util.CachePolicy;
 import com.liferay.util.ConverterException;
 import com.liferay.util.ExtPropertiesLoader;
 
@@ -61,7 +62,7 @@ public class WebCachePool {
 				obj = wc.convert(key);
 
 				cache.putInCache(
-					key, obj, new WebCachePolicy(wc.getRefreshTime()));
+					key, obj, new CachePolicy(wc.getRefreshTime()));
 			}
 			catch (ConverterException ce) {
 				_log.error(ce.getMessage());

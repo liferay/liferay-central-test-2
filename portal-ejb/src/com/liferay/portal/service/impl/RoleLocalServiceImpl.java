@@ -170,6 +170,10 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 		return false;
 	}
 
+	public List search(String companyId, String name) throws SystemException {
+		return RoleFinder.findByC_N_1(companyId, name);
+	}
+
 	public List search(String companyId, String name, int begin, int end)
 		throws SystemException {
 

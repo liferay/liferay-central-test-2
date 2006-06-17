@@ -66,6 +66,8 @@ public class LayoutTypePortlet extends LayoutType {
 
 	public static final String MODE_EDIT_DEFAULTS = "mode-edit-defaults";
 
+	public static final String MODE_EDIT_GUEST = "mode-edit-guest";
+
 	public static final String MODE_HELP = "mode-help";
 
 	public static final String MODE_PREVIEW = "mode-preview";
@@ -610,6 +612,29 @@ public class LayoutTypePortlet extends LayoutType {
 			StringUtil.remove(getModeEditDefaults(), portletId));
 	}
 
+	// Edit guest mode
+
+	public String getModeEditGuest() {
+		return getTypeSettingsProperties().getProperty(MODE_EDIT_GUEST);
+	}
+
+	public void setModeEditGuest(String modeEditGuest) {
+		getTypeSettingsProperties().setProperty(MODE_EDIT_GUEST, modeEditGuest);
+	}
+
+	public void addModeEditGuestPortletId(String portletId) {
+		removeModesPortletId(portletId);
+		setModeEditGuest(StringUtil.add(getModeEditGuest(), portletId));
+	}
+
+	public boolean hasModeEditGuestPortletId(String portletId) {
+		return StringUtil.contains(getModeEditGuest(), portletId);
+	}
+
+	public void removeModeEditGuestPortletId(String portletId) {
+		setModeEditGuest(StringUtil.remove(getModeEditGuest(), portletId));
+	}
+
 	// Help mode
 
 	public String getModeHelp() {
@@ -686,6 +711,7 @@ public class LayoutTypePortlet extends LayoutType {
 			hasModeConfigPortletId(portletId) ||
 			hasModeEditPortletId(portletId) ||
 			hasModeEditDefaultsPortletId(portletId) ||
+			hasModeEditGuestPortletId(portletId) ||
 			hasModeHelpPortletId(portletId) ||
 			hasModePreviewPortletId(portletId) ||
 			hasModePrintPortletId(portletId)) {
@@ -704,6 +730,7 @@ public class LayoutTypePortlet extends LayoutType {
 		setModeConfig(StringPool.BLANK);
 		setModeEdit(StringPool.BLANK);
 		setModeEditDefaults(StringPool.BLANK);
+		setModeEditGuest(StringPool.BLANK);
 		setModeHelp(StringPool.BLANK);
 		setModePreview(StringPool.BLANK);
 		setModePrint(StringPool.BLANK);
@@ -714,6 +741,7 @@ public class LayoutTypePortlet extends LayoutType {
 		removeModeConfigPortletId(portletId);
 		removeModeEditPortletId(portletId);
 		removeModeEditDefaultsPortletId(portletId);
+		removeModeEditGuestPortletId(portletId);
 		removeModeHelpPortletId(portletId);
 		removeModePreviewPortletId(portletId);
 		removeModePrintPortletId(portletId);

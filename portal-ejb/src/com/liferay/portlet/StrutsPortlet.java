@@ -60,6 +60,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		configAction = getInitParameter("config-action");
 		editAction = getInitParameter("edit-action");
 		editDefaultsAction = getInitParameter("edit-defaults-action");
+		editGuestAction = getInitParameter("edit-guest-action");
 		helpAction = getInitParameter("help-action");
 		previewAction = getInitParameter("preview-action");
 		printAction = getInitParameter("print-action");
@@ -143,6 +144,19 @@ public class StrutsPortlet extends LiferayPortlet {
 		}
 		else {
 			req.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, editDefaultsAction);
+
+			include(req, res);
+		}
+	}
+
+	public void doEditGuest(RenderRequest req, RenderResponse res)
+		throws IOException, PortletException {
+
+		if (req.getPreferences() == null) {
+			super.doEdit(req, res);
+		}
+		else {
+			req.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, editGuestAction);
 
 			include(req, res);
 		}
@@ -241,6 +255,7 @@ public class StrutsPortlet extends LiferayPortlet {
 	protected String configAction;
 	protected String editAction;
 	protected String editDefaultsAction;
+	protected String editGuestAction;
 	protected String helpAction;
 	protected String previewAction;
 	protected String printAction;

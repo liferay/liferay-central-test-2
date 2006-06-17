@@ -25,6 +25,7 @@ package com.liferay.portlet;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
@@ -37,6 +38,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.InstancePool;
+import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.portlet.RenderRequestWrapper;
@@ -146,7 +148,7 @@ public class PortletPreferencesFactory {
 
 	public static PortletPreferencesPK getPortletPreferencesPK(
 			HttpServletRequest req, String portletId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
@@ -155,7 +157,7 @@ public class PortletPreferencesFactory {
 
 	public static PortletPreferencesPK getPortletPreferencesPK(
 			HttpServletRequest req, String portletId, String selPlid)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		// Below is a list of  the possible combinations, where we specify the
 		// portlet id, the layout id, the owner id, and the function.
@@ -178,19 +180,44 @@ public class PortletPreferencesFactory {
 		// 56_INSTANCE_abcd, 3, PUB.10.USER.liferay.com.1, preference is scoped
 		// per portlet, user, and layout
 
-		String companyId = PortalUtil.getCompanyId(req);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
+		LayoutTypePortlet layoutTypePortlet =
+			themeDisplay.getLayoutTypePortlet();
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
-			companyId, portletId);
+			themeDisplay.getCompanyId(), portletId);
 
 		String layoutId = null;
 		String ownerId = null;
+
+		boolean modeEditGuest = false;
+
+		String portletMode = ParamUtil.getString(req, "p_p_mode");
+
+		if (portletMode.equals(LiferayPortletMode.EDIT_GUEST.toString()) ||
+			layoutTypePortlet.hasModeEditGuestPortletId(portletId)) {
+
+			modeEditGuest = true;
+		}
+
+		if (!layout.isPrivateLayout() && themeDisplay.isShowAddContentIcon()) {
+		}
+		else {
+
+			// Only users with the correct permissions can update guest
+			// preferences
+
+			//throw new PrincipalException();
+		}
 
 		if (portlet.isPreferencesCompanyWide()) {
 			layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
 			ownerId =
 				PortletKeys.PREFS_OWNER_ID_COMPANY + StringPool.PERIOD +
-					companyId;
+					themeDisplay.getCompanyId();
 		}
 		else {
 			if (portlet.isPreferencesUniquePerLayout()) {
@@ -202,8 +229,9 @@ public class PortletPreferencesFactory {
 				else {
 					String userId = PortalUtil.getUserId(req);
 
-					if (userId == null) {
-						userId = User.getDefaultUserId(companyId);
+					if ((userId == null) || modeEditGuest) {
+						userId = User.getDefaultUserId(
+							themeDisplay.getCompanyId());
 					}
 
 					ownerId +=
@@ -223,8 +251,9 @@ public class PortletPreferencesFactory {
 				else {
 					String userId = PortalUtil.getUserId(req);
 
-					if (userId == null) {
-						userId = User.getDefaultUserId(companyId);
+					if ((userId == null) || modeEditGuest) {
+						userId = User.getDefaultUserId(
+							themeDisplay.getCompanyId());
 					}
 
 					ownerId =

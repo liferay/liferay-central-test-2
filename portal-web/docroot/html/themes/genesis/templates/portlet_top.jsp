@@ -52,6 +52,8 @@
 
 					<liferay-portlet:icon-edit />
 
+					<liferay-portlet:icon-edit-guest />
+
 					<liferay-portlet:icon-help />
 
 					<liferay-portlet:icon-print />

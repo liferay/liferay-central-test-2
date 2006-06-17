@@ -98,6 +98,50 @@ public class RoleFinder {
 		}
 	}
 
+	public static List findByC_N_1(String companyId, String name)
+		throws SystemException {
+
+		name = StringUtil.lowerCase(name);
+
+		List list = new ArrayList();
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_C_N_1);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Role_", RoleHBM.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(name);
+			qPos.add(name);
+
+			Iterator itr = q.list().iterator();
+
+			while (itr.hasNext()) {
+				RoleHBM roleHBM = (RoleHBM)itr.next();
+
+				Role role = RoleHBMUtil.model(roleHBM);
+
+				list.add(role);
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+
+		return list;
+	}
+
 	public static List findByC_N_1(
 			String companyId, String name, int begin, int end)
 		throws SystemException {

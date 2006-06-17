@@ -99,6 +99,11 @@
 		<bodycontent>JSP</bodycontent>
 	</tag>
 	<tag>
+		<name>icon-edit-guest</name>
+		<tagclass>com.liferay.taglib.portletext.IconEditGuestTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+	</tag>
+	<tag>
 		<name>icon-help</name>
 		<tagclass>com.liferay.taglib.portletext.IconHelpTag</tagclass>
 		<bodycontent>JSP</bodycontent>

@@ -100,11 +100,13 @@ public class LayoutCacheFilter implements Filter {
 			ServletRequest req, ServletResponse res, FilterChain chain)
 		throws IOException, ServletException {
 
-		if (USE_LAYOUT_CACHE_FILTER) {
-			_log.debug("Layout cache is enabled");
-		}
-		else {
-			_log.debug("Layout cache is disabled");
+		if (_log.isDebugEnabled()) {
+			if (USE_LAYOUT_CACHE_FILTER) {
+				_log.debug("Layout cache is enabled");
+			}
+			else {
+				_log.debug("Layout cache is disabled");
+			}
 		}
 
 		HttpServletRequest request = (HttpServletRequest)req;

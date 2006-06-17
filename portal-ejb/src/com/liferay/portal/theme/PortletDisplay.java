@@ -155,6 +155,14 @@ public class PortletDisplay implements Cloneable {
 		_modeEditDefaults = modeEditDefaults;
 	}
 
+	public boolean isModeEditGuest() {
+		return _modeEditGuest;
+	}
+
+	public void setModeEditGuest(boolean modeEditGuest) {
+		_modeEditGuest = modeEditGuest;
+	}
+
 	public boolean isModeHelp() {
 		return _modeHelp;
 	}
@@ -209,6 +217,14 @@ public class PortletDisplay implements Cloneable {
 
 	public void setShowEditIcon(boolean showEditIcon) {
 		_showEditIcon = showEditIcon;
+	}
+
+	public boolean isShowEditGuestIcon() {
+		return _showEditGuestIcon;
+	}
+
+	public void setShowEditGuestIcon(boolean showEditGuestIcon) {
+		_showEditGuestIcon = showEditGuestIcon;
 	}
 
 	public boolean isShowHelpIcon() {
@@ -283,6 +299,14 @@ public class PortletDisplay implements Cloneable {
 		_urlEdit = urlEdit;
 	}
 
+	public String getURLEditGuest() {
+		return _urlEditGuest;
+	}
+
+	public void setURLEditGuest(String urlEditGuest) {
+		_urlEditGuest = urlEditGuest;
+	}
+
 	public String getURLHelp() {
 		return _urlHelp;
 	}
@@ -339,6 +363,7 @@ public class PortletDisplay implements Cloneable {
 		_modeConfig = false;
 		_modeEdit = false;
 		_modeEditDefaults = false;
+		_modeEditGuest = false;
 		_modeHelp = false;
 		_modePreview = false;
 		_modePrint = false;
@@ -346,6 +371,7 @@ public class PortletDisplay implements Cloneable {
 		_showCloseIcon = false;
 		_showConfigurationIcon = false;
 		_showEditIcon = false;
+		_showEditGuestIcon = false;
 		_showHelpIcon = false;
 		_showMaxIcon = false;
 		_showMinIcon = false;
@@ -355,6 +381,7 @@ public class PortletDisplay implements Cloneable {
 		_urlClose = null;
 		_urlConfiguration = null;
 		_urlEdit = null;
+		_urlEditGuest = null;
 		_urlHelp = null;
 		_urlMax = null;
 		_urlMin = null;
@@ -376,6 +403,7 @@ public class PortletDisplay implements Cloneable {
 		_modeConfig = master.isModeConfig();
 		_modeEdit = master.isModeEdit();
 		_modeEditDefaults = master.isModeEditDefaults();
+		_modeEditGuest = master.isModeEditGuest();
 		_modeHelp = master.isModeHelp();
 		_modePreview = master.isModePreview();
 		_modePrint = master.isModePrint();
@@ -383,6 +411,7 @@ public class PortletDisplay implements Cloneable {
 		_showCloseIcon = master.isShowCloseIcon();
 		_showConfigurationIcon = master.isShowConfigurationIcon();
 		_showEditIcon = master.isShowEditIcon();
+		_showEditGuestIcon = master.isShowEditGuestIcon();
 		_showHelpIcon = master.isShowHelpIcon();
 		_showMaxIcon = master.isShowMaxIcon();
 		_showMinIcon = master.isShowMinIcon();
@@ -392,6 +421,7 @@ public class PortletDisplay implements Cloneable {
 		_urlClose = master.getURLClose();
 		_urlConfiguration = master.getURLConfiguration();
 		_urlEdit = master.getURLEdit();
+		_urlEditGuest = master.getURLEditGuest();
 		_urlHelp = master.getURLHelp();
 		_urlMax = master.getURLMax();
 		_urlMin = master.getURLMin();
@@ -413,6 +443,7 @@ public class PortletDisplay implements Cloneable {
 		slave.setModeConfig(_modeConfig);
 		slave.setModeEdit(_modeEdit);
 		slave.setModeEditDefaults(_modeEditDefaults);
+		slave.setModeEditGuest(_modeEditGuest);
 		slave.setModeHelp(_modeHelp);
 		slave.setModePreview(_modePreview);
 		slave.setModePrint(_modePrint);
@@ -420,6 +451,7 @@ public class PortletDisplay implements Cloneable {
 		slave.setShowCloseIcon(_showCloseIcon);
 		slave.setShowConfigurationIcon(_showConfigurationIcon);
 		slave.setShowEditIcon(_showEditIcon);
+		slave.setShowEditGuestIcon(_showEditGuestIcon);
 		slave.setShowHelpIcon(_showHelpIcon);
 		slave.setShowMaxIcon(_showMaxIcon);
 		slave.setShowMinIcon(_showMinIcon);
@@ -429,6 +461,7 @@ public class PortletDisplay implements Cloneable {
 		slave.setURLClose(_urlClose);
 		slave.setURLConfiguration(_urlConfiguration);
 		slave.setURLEdit(_urlEdit);
+		slave.setURLEditGuest(_urlEditGuest);
 		slave.setURLHelp(_urlHelp);
 		slave.setURLMax(_urlMax);
 		slave.setURLMin(_urlMin);
@@ -472,6 +505,7 @@ public class PortletDisplay implements Cloneable {
 	private boolean _modeConfig;
 	private boolean _modeEdit;
 	private boolean _modeEditDefaults;
+	private boolean _modeEditGuest;
 	private boolean _modeHelp;
 	private boolean _modePreview;
 	private boolean _modePrint;
@@ -479,6 +513,7 @@ public class PortletDisplay implements Cloneable {
 	private boolean _showCloseIcon;
 	private boolean _showConfigurationIcon;
 	private boolean _showEditIcon;
+	private boolean _showEditGuestIcon;
 	private boolean _showHelpIcon;
 	private boolean _showMaxIcon;
 	private boolean _showMinIcon;
@@ -488,6 +523,7 @@ public class PortletDisplay implements Cloneable {
 	private String _urlClose;
 	private String _urlConfiguration;
 	private String _urlEdit;
+	private String _urlEditGuest;
 	private String _urlHelp;
 	private String _urlMax;
 	private String _urlMin;

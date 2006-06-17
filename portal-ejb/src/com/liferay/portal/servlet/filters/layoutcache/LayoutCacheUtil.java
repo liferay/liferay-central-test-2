@@ -24,7 +24,10 @@ package com.liferay.portal.servlet.filters.layoutcache;
 
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.portal.util.PortalInstances;
+import com.liferay.util.CachePolicy;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
+import com.liferay.util.SystemProperties;
 import com.liferay.util.Validator;
 
 import com.opensymphony.oscache.base.NeedsRefreshException;
@@ -44,6 +47,10 @@ public class LayoutCacheUtil {
 	public static String[] GROUP_NAME_ARRAY;
 
 	public static String GROUP = "_GROUP_";
+
+	public static final long REFRESH_TIME = GetterUtil.getLong(
+		SystemProperties.get(
+			LayoutCacheFilter.class.getName() + ".refresh.time"));
 
 	static {
 		String[] companyIds = PortalInstances.getCompanyIds();
@@ -68,7 +75,9 @@ public class LayoutCacheUtil {
 
 		_cache.flushGroup(groupName);
 
-		_log.info("Cleared layout cache for " + companyId);
+		if (_log.isInfoEnabled()) {
+			_log.info("Cleared layout cache for " + companyId);
+		}
 	}
 
 	public static LayoutCacheResponseData getLayoutCacheResponseData(
@@ -86,7 +95,9 @@ public class LayoutCacheUtil {
 			data = (LayoutCacheResponseData)_cache.getFromCache(key);
 		}
 		catch (NeedsRefreshException nre) {
-			_log.warn("Layout " + key + " is not cached");
+			if (_log.isWarnEnabled()) {
+				_log.warn("Layout " + key + " is not cached");
+			}
 		}
 		finally {
 			if (data == null) {
@@ -103,7 +114,8 @@ public class LayoutCacheUtil {
 		if (data != null) {
 			key = _encodeKey(companyId, key);
 
-			_cache.putInCache(key, data, GROUP_NAME_ARRAY);
+			_cache.putInCache(
+				key, data, GROUP_NAME_ARRAY, new CachePolicy(REFRESH_TIME));
 		}
 	}
 

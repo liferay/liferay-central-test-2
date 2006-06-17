@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -19,43 +20,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portal.util;
+<%@ include file="/html/taglib/init.jsp" %>
 
-import com.opensymphony.oscache.base.CacheEntry;
-import com.opensymphony.oscache.base.EntryRefreshPolicy;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-/**
- * <a href="WebCachePolicy.java.html"><b><i>View Source</i></b></a>
- *
- * @author  Brian Wing Shun Chan
- *
- */
-public class WebCachePolicy implements EntryRefreshPolicy {
-
-	public WebCachePolicy(long refresh) {
-		_refresh = refresh;
-	}
-
-	public boolean needsRefresh(CacheEntry entry) {
-		long lastUpdate = entry.getLastUpdate();
-		long now = System.currentTimeMillis();
-
-		if (lastUpdate + _refresh < now) {
-			_log.debug("### Cache is stale for " + entry.getKey());
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	private static Log _log = LogFactory.getLog(WebCachePolicy.class);
-
-	private static long _refresh;
-
-}
+<c:if test="<%= portletDisplay.isShowEditGuestIcon() %>">
+	<liferay-ui:icon image="../portlet/edit_guest" message="guest-preferences" url="<%= portletDisplay.getURLEditGuest() %>" />
+</c:if>

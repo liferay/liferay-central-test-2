@@ -86,6 +86,7 @@ boolean modeAbout = layoutTypePortlet.hasModeAboutPortletId(portletId);
 boolean modeConfig = layoutTypePortlet.hasModeConfigPortletId(portletId);
 boolean modeEdit = layoutTypePortlet.hasModeEditPortletId(portletId);
 boolean modeEditDefaults = layoutTypePortlet.hasModeEditDefaultsPortletId(portletId);
+boolean modeEditGuest = layoutTypePortlet.hasModeEditGuestPortletId(portletId);
 boolean modeHelp = layoutTypePortlet.hasModeHelpPortletId(portletId);
 boolean modePreview = layoutTypePortlet.hasModePreviewPortletId(portletId);
 boolean modePrint = layoutTypePortlet.hasModePrintPortletId(portletId);
@@ -133,6 +134,9 @@ else if (modeEdit) {
 else if (modeEditDefaults) {
 	portletMode = LiferayPortletMode.EDIT_DEFAULTS;
 }
+else if (modeEditGuest) {
+	portletMode = LiferayPortletMode.EDIT_GUEST;
+}
 else if (modeHelp) {
 	portletMode = PortletMode.HELP;
 }
@@ -156,6 +160,7 @@ renderRequestImpl.defineObjects(portletConfig, renderResponseImpl);
 boolean showCloseIcon = true;
 boolean showConfigurationIcon = false;
 boolean showEditIcon = false;
+boolean showEditGuestIcon = false;
 boolean showHelpIcon = portlet.hasPortletMode(renderResponseImpl.getContentType(), PortletMode.HELP);
 boolean showMaxIcon = true;
 boolean showMinIcon = true;
@@ -175,6 +180,12 @@ if (portlet.hasPortletMode(renderResponseImpl.getContentType(), PortletMode.EDIT
 		GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS)) {
 
 		showEditIcon = true;
+	}
+}
+
+if (portlet.hasPortletMode(renderResponseImpl.getContentType(), LiferayPortletMode.EDIT_GUEST)) {
+	if (showEditIcon && !layout.isPrivateLayout() && themeDisplay.isShowAddContentIcon()) {
+		showEditGuestIcon = true;
 	}
 }
 
@@ -226,6 +237,7 @@ portletDisplay.setModeAbout(modeAbout);
 portletDisplay.setModeConfig(modeConfig);
 portletDisplay.setModeEdit(modeEdit);
 portletDisplay.setModeEditDefaults(modeEditDefaults);
+portletDisplay.setModeEditGuest(modeEditGuest);
 portletDisplay.setModeHelp(modeHelp);
 portletDisplay.setModePreview(modePreview);
 portletDisplay.setModePrint(modePrint);
@@ -233,6 +245,7 @@ portletDisplay.setModePrint(modePrint);
 portletDisplay.setShowConfigurationIcon(showConfigurationIcon);
 portletDisplay.setShowCloseIcon(showCloseIcon);
 portletDisplay.setShowEditIcon(showEditIcon);
+portletDisplay.setShowEditGuestIcon(showEditGuestIcon);
 portletDisplay.setShowHelpIcon(showHelpIcon);
 portletDisplay.setShowMaxIcon(showMaxIcon);
 portletDisplay.setShowMinIcon(showMinIcon);
