@@ -109,10 +109,6 @@ public class StrutsURLEncoder implements URLEncoder {
 		if (path.startsWith("//") ||
 			path.startsWith(_contextPath + _servletMapping)) {
 
-			// Replace // with /
-
-			path = StringUtil.replace(path, "//", "/");
-
 			// Struts uses &amp; instead of & to delimit parameter key value
 			// pairs when you set the "name" attribute for html:link.
 
