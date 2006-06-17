@@ -41,7 +41,7 @@
 
 			$taglibLiferay.iconEdit()
 
-			$taglibLiferay.iconGuestEdit()
+			$taglibLiferay.iconEditGuest()
 
 			$taglibLiferay.iconHelp()
 
