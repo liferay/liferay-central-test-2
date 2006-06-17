@@ -24,16 +24,6 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
-<c:if test="<%= themeDisplay.isSignedIn() %>">
-	<script type="text/javascript">
-		chatMainText = decodeURIComponent(Cookie.read("<%= user.getUserId() %>_chats"));
-		if (chatMainText != "null") {
-			document.write(chatMainText);
-		}
-		Messaging.init("<%= user.getUserId() %>");
-	</script>
-</c:if>
-
 <c:if test="<%= ShutdownUtil.isInProcess() %>">
 	<table border="0" cellpadding="1" cellspacing="0" width="100%">
 	<tr>

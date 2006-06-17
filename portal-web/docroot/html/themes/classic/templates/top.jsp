@@ -40,9 +40,7 @@
 									<a href="<%= themeDisplay.getURLMyAccount() %>"><bean:message key="my-account" /></a> -
 								</c:if>
 
-								<a href="<%= themeDisplay.getURLSignOut() %>"><bean:message key="sign-out" /></a>
-								- <a href="javascript:void(0);" onclick="Messaging.createChat('<%= user.getUserId() %>', '<%= user.getFullName() %>')">c</a>
-								<br />
+								<a href="<%= themeDisplay.getURLSignOut() %>"><bean:message key="sign-out" /><br />
 
 								<c:if test="<%= themeDisplay.isShowAddContentIcon() %>">
 									<a href="javascript: void(0);" onClick="<%= themeDisplay.getURLAddContent() %>"><bean:message key="add-content" /></a>
