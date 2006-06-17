@@ -132,9 +132,12 @@ public class JCRFactoryImpl implements JCRFactory {
 			throw e;
 		}
 
-		_log.info(
-			"Jackrabbit JCR intialized with config file path " +
-				CONFIG_FILE_PATH + " and repository home " + REPOSITORY_HOME);
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Jackrabbit JCR intialized with config file path " +
+					CONFIG_FILE_PATH + " and repository home " +
+						REPOSITORY_HOME);
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(JCRFactoryImpl.class);

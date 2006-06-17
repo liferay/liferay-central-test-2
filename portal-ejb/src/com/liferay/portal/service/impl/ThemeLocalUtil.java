@@ -219,9 +219,11 @@ public class ThemeLocalUtil {
 				ThemeCompanyLimit companyLimit =
 					(ThemeCompanyLimit)_themeCompanyLimits.get(themeId);
 
-				_log.debug(
-					"Check if theme " + themeId + " is available for " +
-						companyId);
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Check if theme " + themeId + " is available for " +
+							companyId);
+				}
 
 				if (companyLimit != null) {
 					List includes = companyLimit.getIncludes();
@@ -233,7 +235,9 @@ public class ThemeLocalUtil {
 						// make sure the current company id is included and also
 						// not excluded
 
-						_log.debug("Check includes and excludes");
+						if (_log.isDebugEnabled()) {
+							_log.debug("Check includes and excludes");
+						}
 
 						available = companyLimit.isIncluded(companyId);
 
@@ -246,7 +250,9 @@ public class ThemeLocalUtil {
 						// Since no includes are specified, check to make sure
 						// the current company id is not excluded
 
-						_log.debug("Check excludes");
+						if (_log.isDebugEnabled()) {
+							_log.debug("Check excludes");
+						}
 
 						available = !companyLimit.isExcluded(companyId);
 					}
@@ -255,7 +261,9 @@ public class ThemeLocalUtil {
 						// Since no excludes are specified, check to make sure
 						// the current company id is included
 
-						_log.debug("Check includes");
+						if (_log.isDebugEnabled()) {
+							_log.debug("Check includes");
+						}
 
 						available = companyLimit.isIncluded(companyId);
 					}
@@ -264,15 +272,20 @@ public class ThemeLocalUtil {
 						// Since no includes or excludes are specified, this
 						// theme is available for every company
 
-						_log.debug("No includes or excludes set");
+						if (_log.isDebugEnabled()) {
+							_log.debug("No includes or excludes set");
+						}
 
 						available = true;
 					}
 				}
 
-				_log.debug(
-					"Theme " + themeId + " is " + (!available ? "NOT " : "") +
-						"available for " + companyId);
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Theme " + themeId + " is " +
+							(!available ? "NOT " : "") + "available for " +
+								companyId);
+				}
 
 				if (available) {
 					themes.put(themeId, theme);

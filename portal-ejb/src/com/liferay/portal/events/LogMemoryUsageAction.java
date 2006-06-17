@@ -52,9 +52,11 @@ public class LogMemoryUsageAction extends Action {
 		String totalMemory = nf.format(runtime.totalMemory());
 		String maxMemory = nf.format(runtime.maxMemory());
 
-		_log.debug(
-			"Memory Usage:\t" + freeMemory + "\t" + totalMemory + "\t" +
-				maxMemory);
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Memory Usage:\t" + freeMemory + "\t" + totalMemory + "\t" +
+					maxMemory);
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(LogMemoryUsageAction.class);

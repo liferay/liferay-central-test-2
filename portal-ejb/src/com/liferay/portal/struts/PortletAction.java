@@ -107,7 +107,9 @@ public class PortletAction extends Action {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		_log.debug("Forward to " + getForward(req));
+		if (_log.isDebugEnabled()) {
+			_log.debug("Forward to " + getForward(req));
+		}
 
 		return mapping.findForward(getForward(req));
 	}

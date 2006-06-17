@@ -65,7 +65,9 @@ public class LuceneIndexer implements Runnable {
 	}
 
 	public void reIndex() {
-		_log.info("Re-indexing Lucene started");
+		if (_log.isInfoEnabled()) {
+			_log.info("Re-indexing Lucene started");
+		}
 
 		if (ServerDetector.isOrion()) {
 
@@ -108,26 +110,36 @@ public class LuceneIndexer implements Runnable {
 				String className = portlet.getIndexerClass();
 
 				if (portlet.isActive() && className != null) {
-					_log.debug("Re-indexing with " + className + " started");
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Re-indexing with " + className + " started");
+					}
 
 					Indexer indexer = (Indexer)InstancePool.get(className);
 
 					indexer.reIndex(indexIds);
 
-					_log.debug("Re-indexing with " + className + " completed");
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Re-indexing with " + className + " completed");
+					}
 				}
 			}
 
 			long end = System.currentTimeMillis();
 
-			_log.info(
-				"Re-indexing Lucene completed in " +
-					((end - start) / Time.SECOND) + " seconds");
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Re-indexing Lucene completed in " +
+						((end - start) / Time.SECOND) + " seconds");
+			}
 		}
 		catch (Exception e) {
 			_log.error(e);
 
-			_log.info("Re-indexing Lucene failed");
+			if (_log.isInfoEnabled()) {
+				_log.info("Re-indexing Lucene failed");
+			}
 		}
 
 		_finished = true;

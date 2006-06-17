@@ -36,13 +36,17 @@ public class PrincipalThreadLocal {
 	public static String getName() {
 		String name = (String)_threadLocal.get();
 
-		_log.warn("getName " + name);
+		if (_log.isDebugEnabled()) {
+			_log.debug("getName " + name);
+		}
 
 		return name;
 	}
 
 	public static void setName(String name) {
-		_log.debug("setName " + name);
+		if (_log.isDebugEnabled()) {
+			_log.debug("setName " + name);
+		}
 
 		_threadLocal.set(name);
 	}

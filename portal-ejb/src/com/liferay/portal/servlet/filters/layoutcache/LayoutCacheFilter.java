@@ -127,14 +127,18 @@ public class LayoutCacheFilter implements Filter {
 
 			if (data == null) {
 				if (!_isCacheable(request)) {
-					_log.debug("Layout is not cacheable " + key);
+					if (_log.isDebugEnabled()) {
+						_log.debug("Layout is not cacheable " + key);
+					}
 
 					chain.doFilter(req, res);
 
 					return;
 				}
 
-				_log.info("Caching layout " + key);
+				if (_log.isInfoEnabled()) {
+					_log.info("Caching layout " + key);
+				}
 
 				LayoutCacheResponse layoutCacheResponse =
 					new LayoutCacheResponse(response);
@@ -194,7 +198,9 @@ public class LayoutCacheFilter implements Filter {
 			out.close();
 		}
 		else {
-			_log.debug("Did not request a layout");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Did not request a layout");
+			}
 
 			chain.doFilter(req, res);
 		}

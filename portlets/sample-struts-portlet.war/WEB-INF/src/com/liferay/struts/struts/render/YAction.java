@@ -45,7 +45,9 @@ public class YAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
-		_log.info("render");
+		if (_log.isInfoEnabled()) {
+			_log.info("render");
+		}
 
 		return mapping.findForward("portlet.sample_struts_portlet.y");
 	}

@@ -53,7 +53,9 @@ public class UpdateReceiptAction extends Action {
 		try {
 			String receiptId = ParamUtil.getString(req, "receipt_id");
 
-			_log.debug("Updating receipt: " + receiptId);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Updating receipt " + receiptId);
+			}
 
 			MailReceiptLocalServiceUtil.updateReceipt(receiptId);
 

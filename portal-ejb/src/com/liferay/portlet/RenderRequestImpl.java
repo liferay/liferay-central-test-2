@@ -450,7 +450,9 @@ public class RenderRequestImpl implements RenderRequest {
 	}
 
 	protected RenderRequestImpl() {
-		_log.debug("Creating new instance " + hashCode());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Creating new instance " + hashCode());
+		}
 	}
 
 	protected void init(
@@ -584,7 +586,9 @@ public class RenderRequestImpl implements RenderRequest {
 	}
 
 	protected void recycle() {
-		_log.debug("Recycling instance " + hashCode());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Recycling instance " + hashCode());
+		}
 
 		_req.removeAttribute(WebKeys.JAVAX_PORTLET_CONFIG);
 		_req.removeAttribute(WebKeys.JAVAX_PORTLET_REQUEST);

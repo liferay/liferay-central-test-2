@@ -57,7 +57,9 @@ public class ServletResponseUtil {
 			String contentType)
 		throws IOException {
 
-		_log.debug("Sending file of type " + contentType);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Sending file of type " + contentType);
+		}
 
 		res.setContentType(contentType);
 
@@ -106,7 +108,9 @@ public class ServletResponseUtil {
 			String contentType)
 		throws IOException {
 
-		_log.debug("Sending file of type " + contentType);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Sending file of type " + contentType);
+		}
 
 		res.setContentType(contentType);
 

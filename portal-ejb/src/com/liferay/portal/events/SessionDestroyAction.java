@@ -39,11 +39,8 @@ import org.apache.commons.logging.LogFactory;
 public class SessionDestroyAction extends SessionAction {
 
 	public void run(HttpSession ses) throws ActionException {
-		try {
+		if (_log.isDebugEnabled()) {
 			_log.debug(ses.getId());
-		}
-		catch (Exception e) {
-			throw new ActionException(e);
 		}
 	}
 

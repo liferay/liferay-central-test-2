@@ -102,7 +102,9 @@ public class PortalLoginModule implements LoginModule {
 			}
 		}
 
-		_log.debug(_loginModule.getClass().getName());
+		if (_log.isDebugEnabled()) {
+			_log.debug(_loginModule.getClass().getName());
+		}
 	}
 
 	public boolean abort() throws LoginException {

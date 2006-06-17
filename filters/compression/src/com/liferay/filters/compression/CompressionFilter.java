@@ -84,11 +84,13 @@ public class CompressionFilter implements Filter {
 			ServletRequest req, ServletResponse res, FilterChain chain)
 		throws IOException, ServletException {
 
-		if (useCompressionFilter) {
-			_log.debug("Compression is enabled");
-		}
-		else {
-			_log.debug("Compression is disabled");
+		if (_log.isDebugEnabled()) {
+			if (useCompressionFilter) {
+				_log.debug("Compression is enabled");
+			}
+			else {
+				_log.debug("Compression is disabled");
+			}
 		}
 
 		HttpServletRequest request = (HttpServletRequest)req;
@@ -102,7 +104,9 @@ public class CompressionFilter implements Filter {
 			!_isInclude(request) && BrowserSniffer.acceptsGzip(request) &&
 			!_isAlreadyFiltered(request)) {
 
-			_log.debug("Compressing " + completeURL);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Compressing " + completeURL);
+			}
 
 			request.setAttribute(_ALREADY_FILTERED, Boolean.TRUE);
 
@@ -114,7 +118,9 @@ public class CompressionFilter implements Filter {
 			compressionResponse.finishResponse();
 		}
 		else {
-			_log.debug("Not compressing " + completeURL);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Not compressing " + completeURL);
+			}
 
 			chain.doFilter(req, res);
 		}

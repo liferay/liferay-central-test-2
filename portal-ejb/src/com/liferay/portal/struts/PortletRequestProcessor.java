@@ -478,7 +478,9 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 					" does not have any paths specified");
 		}
 		else {
-			_log.debug("Processing path " + path);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Processing path " + path);
+			}
 		}
 
 		return path;

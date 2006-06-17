@@ -46,7 +46,9 @@ public class UploadSuccessAction extends PortletAction {
 			HttpServletResponse res)
 		throws Exception {
 
-		_log.info("render " + req.getParameter("file_name"));
+		if (_log.isInfoEnabled()) {
+			_log.info("render " + req.getParameter("file_name"));
+		}
 
 		return mapping.findForward(
 			"portlet.sample_struts_portlet.upload_success");

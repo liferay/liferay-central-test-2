@@ -65,12 +65,16 @@ public class SimpleHTTPSender extends HTTPSender {
 		String url = ctx.getStrProp(MessageContext.TRANS_URL);
 
 		if (URL_PATTERN.matcher(url).matches()) {
-			_log.debug("A match was found for " + url);
+			if (_log.isDebugEnabled()) {
+				_log.debug("A match was found for " + url);
+			}
 
 			_invoke(ctx, url);
 		}
 		else {
-			_log.debug("No match was found for " + url);
+			if (_log.isDebugEnabled()) {
+				_log.debug("No match was found for " + url);
+			}
 
 			super.invoke(ctx);
 

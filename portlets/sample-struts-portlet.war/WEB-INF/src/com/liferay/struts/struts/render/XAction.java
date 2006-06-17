@@ -47,7 +47,9 @@ public class XAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
-		_log.info("render " + req.getParameter("x_param"));
+		if (_log.isInfoEnabled()) {
+			_log.info("render " + req.getParameter("x_param"));
+		}
 
 		String exception = req.getParameter("render_exception");
 

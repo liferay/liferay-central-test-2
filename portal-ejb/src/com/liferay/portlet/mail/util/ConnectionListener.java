@@ -50,7 +50,9 @@ public class ConnectionListener implements javax.mail.event.ConnectionListener {
 
 		URLName url = store.getURLName();
 
-		_log.debug("Connected to " + url.getUsername());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Connected to " + url.getUsername());
+		}
 	}
 
 	private void _disconnected(ConnectionEvent e) {
@@ -58,7 +60,9 @@ public class ConnectionListener implements javax.mail.event.ConnectionListener {
 
 		URLName url = store.getURLName();
 
-		_log.debug("Disconnecting from " + url.getUsername());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Disconnecting from " + url.getUsername());
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(ConnectionListener.class);

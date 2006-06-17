@@ -65,7 +65,9 @@ public class ViewChartAction extends Action {
 		throws Exception {
 
 		try {
-			_log.info("execute");
+			if (_log.isInfoEnabled()) {
+				_log.info("execute");
+			}
 
 			String portletName = "sample_struts_portlet";
 			String attrName = "chart_name";

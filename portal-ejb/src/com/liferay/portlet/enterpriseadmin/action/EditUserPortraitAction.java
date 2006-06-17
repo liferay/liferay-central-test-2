@@ -108,11 +108,13 @@ public class EditUserPortraitAction extends PortletAction {
 
 		boolean isMultiPartContent = PortletFileUpload.isMultipartContent(req);
 
-		if (isMultiPartContent) {
-			_log.info("The given request is a multipart request");
-		}
-		else {
-			_log.info("The given request is NOT a multipart request");
+		if (_log.isInfoEnabled()) {
+			if (isMultiPartContent) {
+				_log.info("The given request is a multipart request");
+			}
+			else {
+				_log.info("The given request is NOT a multipart request");
+			}
 		}
 
 		// Check for the number of file items
@@ -123,14 +125,18 @@ public class EditUserPortraitAction extends PortletAction {
 
 		List fileItems = upload.parseRequest(req);
 
-		_log.info(
-			"Apache commons upload was able to parse " + fileItems.size() +
-				" items");
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Apache commons upload was able to parse " + fileItems.size() +
+					" items");
+		}
 
 		for (int i = 0; i < fileItems.size(); i++) {
 			DiskFileItem fileItem = (DiskFileItem)fileItems.get(i);
 
-			_log.info("Item " + i + " fileItem");
+			if (_log.isInfoEnabled()) {
+				_log.info("Item " + i + " fileItem");
+			}
 		}
 
 		// Read directly from the portlet input stream
@@ -153,8 +159,11 @@ public class EditUserPortraitAction extends PortletAction {
 
 			byte[] bytes = out.toByteArray();
 
-			_log.info(
-				"Byte array size from the raw input stream is " + bytes.length);
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Byte array size from the raw input stream is " +
+						bytes.length);
+			}
 		}
 	}
 

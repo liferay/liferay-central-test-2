@@ -65,7 +65,9 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 
 		float percent = _totalRead / _totalSize;
 
-		_log.debug(bytesRead + "/" + _totalRead + "=" + percent);
+		if (_log.isDebugEnabled()) {
+			_log.debug(bytesRead + "/" + _totalRead + "=" + percent);
+		}
 
 		_ses.setAttribute(LiferayFileUpload.PERCENT, new Float(percent));
 

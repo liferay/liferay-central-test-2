@@ -46,7 +46,9 @@ public class MailCache {
 	public static Store getStore(String userId, String accountPrefix) {
 		String storeId = getStoreId(userId, accountPrefix);
 
-		_log.debug("Get store " + storeId);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Get store " + storeId);
+		}
 
 		return (Store)SimpleCachePool.get(storeId);
 	}
@@ -54,7 +56,9 @@ public class MailCache {
 	public static void removeStore(String userId, String accountPrefix) {
 		String storeId = getStoreId(userId, accountPrefix);
 
-		_log.debug("Remove store " + storeId);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Remove store " + storeId);
+		}
 
 		SimpleCachePool.remove(storeId);
 	}
@@ -64,7 +68,9 @@ public class MailCache {
 
 		String storeId = getStoreId(userId, accountPrefix);
 
-		_log.debug("Put store " + storeId);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Put store " + storeId);
+		}
 
 		SimpleCachePool.put(storeId, store);
 	}
@@ -76,12 +82,16 @@ public class MailCache {
 	// Clean up
 
 	public static void clearCache(String userId) {
-		_log.debug("Clearing the mail cache for user " + userId);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Clearing the mail cache for user " + userId);
+		}
 
 		Collection accounts = getUserAccounts(userId);
 
 		if (accounts != null) {
-			_log.debug("User has " + accounts.size() + " cached accounts");
+			if (_log.isDebugEnabled()) {
+				_log.debug("User has " + accounts.size() + " cached accounts");
+			}
 
 			Iterator itr = accounts.iterator();
 
@@ -129,7 +139,9 @@ public class MailCache {
 	public static Collection getUserAccounts(String userId) {
 		String userAccountsId = getUserAccountsId(userId);
 
-		_log.debug("Get user accounts " + userId);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Get user accounts " + userId);
+		}
 
 		return (Collection)SimpleCachePool.get(userAccountsId);
 	}
@@ -137,7 +149,9 @@ public class MailCache {
 	public static void putUserAcounts(String userId, Collection accounts) {
 		String userAccountsId = getUserAccountsId(userId);
 
-		_log.debug("Put all user accounts " + userId);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Put all user accounts " + userId);
+		}
 
 		SimpleCachePool.put(userAccountsId, accounts);
 	}
@@ -145,7 +159,9 @@ public class MailCache {
 	private static void removeUserAccounts(String userId) {
 		String userAccountsId = getUserAccountsId(userId);
 
-		_log.debug("Remove user accounts " + userId);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Remove user accounts " + userId);
+		}
 
 		SimpleCachePool.remove(userAccountsId);
 	}

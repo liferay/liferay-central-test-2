@@ -66,7 +66,9 @@ public class StrutsUtil {
 			HttpServletResponse res)
 		throws ServletException {
 
-		_log.debug("Forward " + uri);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Forward " + uri);
+		}
 
 		if (uri.equals(Constants.COMMON_NULL)) {
 			return;
@@ -121,7 +123,9 @@ public class StrutsUtil {
 			HttpServletResponse res)
 		throws ServletException {
 
-		_log.debug("Include " + uri);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Include " + uri);
+		}
 
 		String path = Constants.TEXT_HTML_DIR + uri;
 

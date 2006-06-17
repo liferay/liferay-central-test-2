@@ -37,27 +37,39 @@ import org.apache.commons.logging.LogFactory;
 public class UserListener implements ModelListener {
 
 	public void onBeforeCreate(BaseModel model) throws ModelListenerException {
-		_log.debug("onBeforeCreate");
+		if (_log.isDebugEnabled()) {
+			_log.debug("onBeforeCreate");
+		}
 	}
 
 	public void onAfterCreate(BaseModel model) throws ModelListenerException {
-		_log.debug("onAfterCreate");
+		if (_log.isDebugEnabled()) {
+			_log.debug("onAfterCreate");
+		}
 	}
 
 	public void onBeforeRemove(BaseModel model) throws ModelListenerException {
-		_log.debug("onBeforeRemove");
+		if (_log.isDebugEnabled()) {
+			_log.debug("onBeforeRemove");
+		}
 	}
 
 	public void onAfterRemove(BaseModel model) throws ModelListenerException {
-		_log.debug("onAfterRemove");
+		if (_log.isDebugEnabled()) {
+			_log.debug("onAfterRemove");
+		}
 	}
 
 	public void onBeforeUpdate(BaseModel model) throws ModelListenerException {
-		_log.debug("onBeforeUpdate");
+		if (_log.isDebugEnabled()) {
+			_log.debug("onBeforeUpdate");
+		}
 	}
 
 	public void onAfterUpdate(BaseModel model) throws ModelListenerException {
-		_log.debug("onAfterUpdate");
+		if (_log.isDebugEnabled()) {
+			_log.debug("onAfterUpdate");
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(UserListener.class);

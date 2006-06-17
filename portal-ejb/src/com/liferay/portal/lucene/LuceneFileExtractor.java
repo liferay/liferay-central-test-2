@@ -101,9 +101,11 @@ public class LuceneFileExtractor {
 			}
 
 			if (filter != null) {
-				_log.debug(
-					"Using filter " + filter.getClass().getName() +
-						" for extension " + fileExt);
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Using filter " + filter.getClass().getName() +
+							" for extension " + fileExt);
+				}
 
 				StringBuffer sb = new StringBuffer();
 
@@ -129,7 +131,9 @@ public class LuceneFileExtractor {
 				text = sb.toString();
 			}
 			else {
-				_log.debug("No filter found for extension " + fileExt);
+				if (_log.isDebugEnabled()) {
+					_log.debug("No filter found for extension " + fileExt);
+				}
 			}
 		}
 		catch (Exception e) {

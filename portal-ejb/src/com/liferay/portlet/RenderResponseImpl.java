@@ -291,7 +291,9 @@ public class RenderResponseImpl implements RenderResponse {
 	}
 
 	protected RenderResponseImpl() {
-		_log.debug("Creating new instance " + hashCode());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Creating new instance " + hashCode());
+		}
 	}
 
 	protected void init(
@@ -306,7 +308,9 @@ public class RenderResponseImpl implements RenderResponse {
 	}
 
 	protected void recycle() {
-		_log.debug("Recycling instance " + hashCode());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Recycling instance " + hashCode());
+		}
 
 		_req = null;
 		_res = null;

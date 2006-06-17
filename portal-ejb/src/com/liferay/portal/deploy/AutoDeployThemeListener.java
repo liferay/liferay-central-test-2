@@ -47,7 +47,9 @@ public class AutoDeployThemeListener implements AutoDeployListener {
 	}
 
 	public void deploy(File file) throws AutoDeployException {
-		_log.debug("Invoking deploy for " + file.getPath());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking deploy for " + file.getPath());
+		}
 
 		ZipFile zipFile = null;
 
@@ -55,9 +57,11 @@ public class AutoDeployThemeListener implements AutoDeployListener {
 			zipFile = new ZipFile(file);
 
 			if (zipFile.getEntry("WEB-INF/liferay-look-and-feel.xml") == null) {
-				_log.debug(
-					file.getPath() +
-						" does not have WEB-INF/liferay-look-and-feel.xml");
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						file.getPath() +
+							" does not have WEB-INF/liferay-look-and-feel.xml");
+				}
 
 				return;
 			}
@@ -75,11 +79,15 @@ public class AutoDeployThemeListener implements AutoDeployListener {
 			}
 		}
 
-		_log.info("Copying themes for " + file.getPath());
+		if (_log.isInfoEnabled()) {
+			_log.info("Copying themes for " + file.getPath());
+		}
 
 		_deployer.deploy(file.getName());
 
-		_log.info("Themes for " + file.getPath() + " copied successfully");
+		if (_log.isInfoEnabled()) {
+			_log.info("Themes for " + file.getPath() + " copied successfully");
+		}
 	}
 
 	private static Log _log =

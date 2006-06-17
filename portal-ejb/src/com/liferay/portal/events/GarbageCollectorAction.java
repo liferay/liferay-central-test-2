@@ -41,28 +41,26 @@ import org.apache.commons.logging.LogFactory;
 public class GarbageCollectorAction extends SessionAction {
 
 	public void run(HttpSession ses) throws ActionException {
+		Runtime runtime = Runtime.getRuntime();
 
-		try {
-			Runtime runtime = Runtime.getRuntime();
+		NumberFormat nf = NumberFormat.getInstance();
 
-			NumberFormat nf = NumberFormat.getInstance();
-
+		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Before:\t\t" +
 					nf.format(runtime.freeMemory()) + "\t" +
 						nf.format(runtime.totalMemory()) + "\t" +
 							nf.format(runtime.maxMemory()));
+		}
 
-			System.gc();
+		System.gc();
 
+		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"After:\t\t" +
 					nf.format(runtime.freeMemory()) + "\t" +
 						nf.format(runtime.totalMemory()) + "\t" +
 							nf.format(runtime.maxMemory()));
-		}
-		catch (Exception e) {
-			throw new ActionException(e);
 		}
 	}
 

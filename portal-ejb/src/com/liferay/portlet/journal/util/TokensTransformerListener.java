@@ -51,19 +51,25 @@ public class TokensTransformerListener extends TransformerListener {
 		"[$_TEMP_ESCAPED_AT_CLOSE$]";
 
 	public String onXml(String s) {
-		_log.debug("onXml");
+		if (_log.isDebugEnabled()) {
+			_log.debug("onXml");
+		}
 
 		return s;
 	}
 
 	public String onScript(String s) {
-		_log.debug("onScript");
+		if (_log.isDebugEnabled()) {
+			_log.debug("onScript");
+		}
 
 		return replaceTokens(s);
 	}
 
 	public String onOutput(String s) {
-		_log.debug("onOutput");
+		if (_log.isDebugEnabled()) {
+			_log.debug("onOutput");
+		}
 
 		return replaceTokens(s);
 	}

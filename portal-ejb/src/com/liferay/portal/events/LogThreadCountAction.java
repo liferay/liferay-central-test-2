@@ -42,7 +42,9 @@ public class LogThreadCountAction extends Action {
 	public void run(HttpServletRequest req, HttpServletResponse res)
 		throws ActionException {
 
-		_log.debug("Active Threads:\t" + Thread.activeCount());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Active Threads:\t" + Thread.activeCount());
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(LogThreadCountAction.class);

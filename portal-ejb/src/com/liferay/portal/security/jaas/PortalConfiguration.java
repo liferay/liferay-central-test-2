@@ -50,7 +50,9 @@ public class PortalConfiguration extends Configuration {
 			_config.getAppConfigurationEntry(name);
 
 		if (name != null && !name.equals(Constants.JBOSS_LOGIN_MODULE)) {
-			_log.debug(name);
+			if (_log.isDebugEnabled()) {
+				_log.debug(name);
+			}
 
 			Map options = null;
 			if (aceArray == null || aceArray.length == 0) {
@@ -99,10 +101,11 @@ public class PortalConfiguration extends Configuration {
 							newAceArray[i].getOptions());
 					}
 
-					_log.debug(
-						newAceArray[i].getLoginModuleName() + " " +
-						newAceArray[i].getControlFlag()
-					);
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							newAceArray[i].getLoginModuleName() + " " +
+								newAceArray[i].getControlFlag());
+					}
 				}
 			}
 		}

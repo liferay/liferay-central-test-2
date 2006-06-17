@@ -47,7 +47,9 @@ public class XAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
-		_log.info("processAction");
+		if (_log.isInfoEnabled()) {
+			_log.info("processAction");
+		}
 
 		req.setAttribute("x_param", "x_value");
 

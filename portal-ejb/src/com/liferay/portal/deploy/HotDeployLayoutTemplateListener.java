@@ -62,7 +62,9 @@ public class HotDeployLayoutTemplateListener implements HotDeployListener {
 				ctx.getServletContextName(), StringPool.SPACE,
 				StringPool.UNDERLINE);
 
-			_log.debug("Invoking deploy for " + servletContextName);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Invoking deploy for " + servletContextName);
+			}
 
 			String[] xmls = new String[] {
 				Http.URLtoString(ctx.getResource(
@@ -73,16 +75,21 @@ public class HotDeployLayoutTemplateListener implements HotDeployListener {
 				return;
 			}
 
-			_log.info("Registering layout templates for " + servletContextName);
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Registering layout templates for " + servletContextName);
+			}
 
 			List layoutTemplateIds = LayoutTemplateLocalUtil.init(
 				servletContextName, ctx, xmls);
 
 			_vars.put(servletContextName, layoutTemplateIds);
 
-			_log.info(
-				"Layout templates for " + servletContextName +
-					" registered successfully");
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Layout templates for " + servletContextName +
+						" registered successfully");
+			}
 		}
 		catch (Exception e) {
 			throw new HotDeployException(
@@ -101,13 +108,18 @@ public class HotDeployLayoutTemplateListener implements HotDeployListener {
 				ctx.getServletContextName(), StringPool.SPACE,
 				StringPool.UNDERLINE);
 
-			_log.debug("Invoking undeploy for " + servletContextName);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Invoking undeploy for " + servletContextName);
+			}
 
 			List layoutTemplateIds = (List)_vars.get(servletContextName);
 
 			if (layoutTemplateIds != null) {
-				_log.info(
-					"Unregistering layout templates for " + servletContextName);
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Unregistering layout templates for " +
+							servletContextName);
+				}
 
 				Iterator itr = layoutTemplateIds.iterator();
 
@@ -128,9 +140,11 @@ public class HotDeployLayoutTemplateListener implements HotDeployListener {
 
 				layoutTemplateIds = null;
 
-				_log.info(
-					"Layout templates for " + servletContextName +
-						" unregistered successfully");
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Layout templates for " + servletContextName +
+							" unregistered successfully");
+				}
 			}
 		}
 		catch (Exception e2) {

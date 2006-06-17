@@ -465,7 +465,9 @@ public class ThemeDisplay {
 	}
 
 	public void recycle() {
-		_log.debug("Recycling instance " + hashCode());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Recycling instance " + hashCode());
+		}
 
 		_company = null;
 		_companyLogo = null;
@@ -514,7 +516,9 @@ public class ThemeDisplay {
 	}
 
 	protected ThemeDisplay() {
-		_log.debug("Creating new instance " + hashCode());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Creating new instance " + hashCode());
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(ThemeDisplay.class);

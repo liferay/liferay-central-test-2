@@ -66,13 +66,18 @@ public class UploadAction extends Action {
 		    FileItem item = (FileItem) iter.next();
 
 		    if (!item.isFormField()) {
-		    	_log.info("Field Name: " + item.getFieldName());
+		    	if (_log.isInfoEnabled()) {
+					_log.info("Field name " + item.getFieldName());
+				}
 
 		    	itemName = item.getName();
-		    	_log.info("Name: " + itemName);
-		    	_log.info("Content Type: " + item.getContentType());
-		    	_log.info("In Memory: " + item.isInMemory());
-		    	_log.info("Size: " + item.getSize());
+
+				if (_log.isInfoEnabled()) {
+					_log.info("Name " + itemName);
+					_log.info("Content type " + item.getContentType());
+					_log.info("In memory " + item.isInMemory());
+					_log.info("Size " + item.getSize());
+				}
 		    }
 		}
 

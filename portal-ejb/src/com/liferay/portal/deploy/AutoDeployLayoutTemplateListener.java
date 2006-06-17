@@ -48,7 +48,9 @@ public class AutoDeployLayoutTemplateListener implements AutoDeployListener {
 	}
 
 	public void deploy(File file) throws AutoDeployException {
-		_log.debug("Invoking deploy for " + file.getPath());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking deploy for " + file.getPath());
+		}
 
 		ZipFile zipFile = null;
 
@@ -58,9 +60,11 @@ public class AutoDeployLayoutTemplateListener implements AutoDeployListener {
 			if (zipFile.getEntry(
 					"WEB-INF/liferay-layout-templates.xml") == null) {
 
-				_log.debug(
-					file.getPath() +
-						" does not have WEB-INF/liferay-layout-templates.xml");
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						file.getPath() + " does not have WEB-INF/" +
+							"liferay-layout-templates.xml");
+				}
 
 				return;
 			}
@@ -78,12 +82,17 @@ public class AutoDeployLayoutTemplateListener implements AutoDeployListener {
 			}
 		}
 
-		_log.info("Copying layout templates for " + file.getPath());
+		if (_log.isInfoEnabled()) {
+			_log.info("Copying layout templates for " + file.getPath());
+		}
 
 		_deployer.deploy(file.getName());
 
-		_log.info(
-			"Layout templates for " + file.getPath() + " copied successfully");
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Layout templates for " + file.getPath() +
+					" copied successfully");
+		}
 	}
 
 	private static Log _log =

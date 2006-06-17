@@ -175,7 +175,9 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		if ((mapping == null) && !path.startsWith(_PATH_WSRP)) {
 			String lastPath = getLastPath(req);
 
-			_log.debug("Last path " + lastPath);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Last path " + lastPath);
+			}
 
 			res.sendRedirect(lastPath);
 

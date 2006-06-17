@@ -65,11 +65,13 @@ public class StripFilter implements Filter {
 			ServletRequest req, ServletResponse res, FilterChain chain)
 		throws IOException, ServletException {
 
-		if (USE_STRIP_FILTER) {
-			_log.debug("Strip is enabled");
-		}
-		else {
-			_log.debug("Strip is disabled");
+		if (_log.isDebugEnabled()) {
+			if (USE_STRIP_FILTER) {
+				_log.debug("Strip is enabled");
+			}
+			else {
+				_log.debug("Strip is disabled");
+			}
 		}
 
 		HttpServletRequest request = (HttpServletRequest)req;
@@ -82,7 +84,9 @@ public class StripFilter implements Filter {
     	if (USE_STRIP_FILTER && _isStrip(request) && !_isInclude(request) &&
 			!_isAlreadyFiltered(request)) {
 
-			_log.debug("Stripping " + completeURL);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Stripping " + completeURL);
+			}
 
 			request.setAttribute(_ALREADY_FILTERED, Boolean.TRUE);
 
@@ -99,7 +103,9 @@ public class StripFilter implements Filter {
 				byte[] newByteArray = new byte[oldByteArray.length];
 				int newByteArrayPos = 0;
 
-				_log.debug("Stripping content of type " + contentType);
+				if (_log.isDebugEnabled()) {
+					_log.debug("Stripping content of type " + contentType);
+				}
 
 				if (contentType.toLowerCase().indexOf("text/") != -1) {
 					boolean ignore = false;
@@ -256,7 +262,9 @@ public class StripFilter implements Filter {
 			}
 		}
 		else {
-			_log.debug("Not stripping " + completeURL);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Not stripping " + completeURL);
+			}
 
 			chain.doFilter(req, res);
 		}

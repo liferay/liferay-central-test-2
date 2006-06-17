@@ -198,11 +198,15 @@ public class PortletContextImpl implements PortletContext {
 	}
 
 	public void log(String msg) {
-		_log.info(msg);
+		if (_log.isInfoEnabled()) {
+			_log.info(msg);
+		}
 	}
 
 	public void log(String msg, Throwable throwable) {
-		_log.info(msg, throwable);
+		if (_log.isInfoEnabled()) {
+			_log.info(msg, throwable);
+		}
 	}
 
 	private static int _MAJOR_VERSION = 1;

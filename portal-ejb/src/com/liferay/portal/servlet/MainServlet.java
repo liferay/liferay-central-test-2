@@ -120,13 +120,17 @@ public class MainServlet extends ActionServlet {
 
 			// Initialize
 
-			_log.debug("Initialize");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Initialize");
+			}
 
 			super.init();
 
 			// Process startup events
 
-			_log.debug("Process startup events");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Process startup events");
+			}
 
 			try {
 				EventsProcessor.process(
@@ -141,7 +145,9 @@ public class MainServlet extends ActionServlet {
 
 			// Company id
 
-			_log.debug("Company id");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Company id");
+			}
 
 			ServletContext ctx = getServletContext();
 
@@ -151,7 +157,9 @@ public class MainServlet extends ActionServlet {
 
 			// Paths
 
-			_log.debug("Paths");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Paths");
+			}
 
 			String rootPath = GetterUtil.getString(
 				ctx.getInitParameter("root_path"), StringPool.SLASH);
@@ -179,7 +187,9 @@ public class MainServlet extends ActionServlet {
 
 			// Initialize portlets
 
-			_log.debug("Initialize portlets");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Initialize portlets");
+			}
 
 			try {
 				String[] xmls = new String[] {
@@ -200,7 +210,9 @@ public class MainServlet extends ActionServlet {
 
 			// Initialize display
 
-			_log.debug("Initialize display");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Initialize display");
+			}
 
 			try {
 				String xml = Http.URLtoString(ctx.getResource(
@@ -228,7 +240,9 @@ public class MainServlet extends ActionServlet {
 
 			// Initialize layout templates
 
-			_log.debug("Initialize layout templates");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Initialize layout templates");
+			}
 
 			try {
 				String[] xmls = new String[] {
@@ -246,7 +260,9 @@ public class MainServlet extends ActionServlet {
 
 			// Initialize look and feel
 
-			_log.debug("Initialize look and feel");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Initialize look and feel");
+			}
 
 			try {
 				String[] xmls = new String[] {
@@ -264,7 +280,9 @@ public class MainServlet extends ActionServlet {
 
 			// Check company
 
-			_log.debug("Check company");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Check company");
+			}
 
 			try {
 				CompanyLocalServiceUtil.checkCompany(_companyId);
@@ -275,7 +293,9 @@ public class MainServlet extends ActionServlet {
 
 			// Check journal content search
 
-			_log.debug("Check journal content search");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Check journal content search");
+			}
 
 			if (GetterUtil.get(PropsUtil.get(
 					PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP), false)) {
@@ -291,7 +311,9 @@ public class MainServlet extends ActionServlet {
 
 			// Check web settings
 
-			_log.debug("Check web settings");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Check web settings");
+			}
 
 			try {
 				String xml = Http.URLtoString(ctx.getResource(
@@ -305,7 +327,9 @@ public class MainServlet extends ActionServlet {
 
 			// Scheduler
 
-			_log.debug("Scheduler");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Scheduler");
+			}
 
 			try {
 				Iterator itr = PortletLocalServiceUtil.getPortlets(
@@ -332,7 +356,9 @@ public class MainServlet extends ActionServlet {
 
 			// Message resources
 
-			_log.debug("Message resources");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Message resources");
+			}
 
 			MultiMessageResources messageResources =
 				(MultiMessageResources)ctx.getAttribute(Globals.MESSAGES_KEY);
@@ -343,13 +369,17 @@ public class MainServlet extends ActionServlet {
 
 			// Current users
 
-			_log.debug("Current users");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Current users");
+			}
 
 			WebAppPool.put(_companyId, WebKeys.CURRENT_USERS, new TreeMap());
 
 			// HttpBridge
 
-			_log.debug("HttpBridge");
+			if (_log.isDebugEnabled()) {
+				_log.debug("HttpBridge");
+			}
 
 			TaskController.bridgeUserServicePath = "/httpbridge/home";
 			TaskController.bridgeHttpServicePath = "/httpbridge/http";
@@ -359,7 +389,9 @@ public class MainServlet extends ActionServlet {
 
 			// Last modified paths
 
-			_log.debug("Last modified paths");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Last modified paths");
+			}
 
 			if (_lastModifiedPaths == null) {
 				_lastModifiedPaths = CollectionFactory.getHashSet();
@@ -379,7 +411,9 @@ public class MainServlet extends ActionServlet {
 
 			// Process startup events
 
-			_log.debug("Process startup events");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Process startup events");
+			}
 
 			try {
 				EventsProcessor.process(PropsUtil.getArray(

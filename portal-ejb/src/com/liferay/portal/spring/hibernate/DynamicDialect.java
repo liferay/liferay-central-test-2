@@ -72,11 +72,13 @@ public class DynamicDialect extends Dialect {
 			String dialectClass =
 				PropsUtil.get(PropsUtil.HIBERNATE_DIALECT + urlPrefix);
 
-			if (dialectClass != null) {
-				_log.debug("Class implementation " + dialectClass);
-			}
-			else {
-				_log.debug("Class implementation is null");
+			if (_log.isDebugEnabled()) {
+				if (dialectClass != null) {
+					_log.debug("Class implementation " + dialectClass);
+				}
+				else {
+					_log.debug("Class implementation is null");
+				}
 			}
 
 			if (dialectClass != null) {

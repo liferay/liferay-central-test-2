@@ -43,9 +43,11 @@ public class PermissionCheckerFactory {
 	public static PermissionChecker create(User user, boolean signedIn)
 		throws Exception {
 
-		_log.debug(
-			"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
-				_instance._pool.getNumActive());
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
+					_instance._pool.getNumActive());
+		}
 
 		PermissionChecker permissionChecker =
 			(PermissionChecker)_instance._pool.borrowObject();
@@ -58,9 +60,11 @@ public class PermissionCheckerFactory {
 	public static void recycle(PermissionChecker permissionChecker)
 		throws Exception {
 
-		_log.debug(
-			"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
-				_instance._pool.getNumActive());
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
+					_instance._pool.getNumActive());
+		}
 
 		_instance._pool.returnObject(permissionChecker);
 	}

@@ -95,11 +95,15 @@ public class ActionRequestImpl
 	}
 
 	protected ActionRequestImpl() {
-		_log.debug("Creating new instance " + hashCode());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Creating new instance " + hashCode());
+		}
 	}
 
 	protected void recycle() {
-		_log.debug("Recycling instance " + hashCode());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Recycling instance " + hashCode());
+		}
 
 		super.recycle();
 

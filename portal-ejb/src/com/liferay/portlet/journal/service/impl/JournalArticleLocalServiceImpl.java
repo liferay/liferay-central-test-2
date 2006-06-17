@@ -560,8 +560,11 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		try {
-			_log.debug(
-				"Transforming " + articleId + " " + version + " " + languageId);
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Transforming " + articleId + " " + version + " " +
+						languageId);
+			}
 
 			String script = null;
 			String langType = null;

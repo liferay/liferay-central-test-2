@@ -231,9 +231,11 @@ public class MailUtil {
 		String imapHost = getIMAPHost();
 
 		try {
-			_log.debug("Connecting to IMAP host " + imapHost);
-			_log.debug("User login is " + login);
-			//_log.debug("User password is " + password);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Connecting to IMAP host " + imapHost);
+				_log.debug("User login is " + login);
+				//_log.debug("User password is " + password);
+			}
 
 			store.connect(imapHost, login, password);
 		}
@@ -511,7 +513,9 @@ public class MailUtil {
 			if (store == null) {
 				store = createStore(req, currentAccount);
 
-				_log.debug("New store created " + store);
+				if (_log.isDebugEnabled()) {
+					_log.debug("New store created " + store);
+				}
 
 			}
 
@@ -889,10 +893,14 @@ public class MailUtil {
 
 			if (!folder.exists()) {
 				if (folder.create(Folder.HOLDS_MESSAGES)) {
-					_log.debug("Created " + folderName);
+					if (_log.isDebugEnabled()) {
+						_log.debug("Created " + folderName);
+					}
 				}
 				else {
-					_log.debug("Failed to create " + folderName);
+					if (_log.isDebugEnabled()) {
+						_log.debug("Failed to create " + folderName);
+					}
 				}
 			}
 

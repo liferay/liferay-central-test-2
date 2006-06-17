@@ -169,7 +169,9 @@ public class StrutsURLEncoder implements URLEncoder {
 
 			encodedURL = _portletURL.toString();
 
-			_log.debug("Encoded portlet URL " + encodedURL);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Encoded portlet URL " + encodedURL);
+			}
 		}
 
 		return encodedURL;

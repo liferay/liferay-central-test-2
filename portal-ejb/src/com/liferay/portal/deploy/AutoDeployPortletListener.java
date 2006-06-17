@@ -47,7 +47,9 @@ public class AutoDeployPortletListener implements AutoDeployListener {
 	}
 
 	public void deploy(File file) throws AutoDeployException {
-		_log.debug("Invoking deploy for " + file.getPath());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking deploy for " + file.getPath());
+		}
 
 		ZipFile zipFile = null;
 
@@ -55,8 +57,10 @@ public class AutoDeployPortletListener implements AutoDeployListener {
 			zipFile = new ZipFile(file);
 
 			if (zipFile.getEntry("WEB-INF/portlet.xml") == null) {
-				_log.debug(
-					file.getPath() + " does not have WEB-INF/portlet.xml");
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						file.getPath() + " does not have WEB-INF/portlet.xml");
+				}
 
 				return;
 			}
@@ -74,11 +78,16 @@ public class AutoDeployPortletListener implements AutoDeployListener {
 			}
 		}
 
-		_log.info("Copying portlets for " + file.getPath());
+		if (_log.isInfoEnabled()) {
+			_log.info("Copying portlets for " + file.getPath());
+		}
 
 		_deployer.deploy(file.getName());
 
-		_log.info("Portlets for " + file.getPath() + " copied successfully");
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Portlets for " + file.getPath() + " copied successfully");
+		}
 	}
 
 	private static Log _log =

@@ -30,6 +30,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.connection.ConnectionProvider;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.engine.SessionFactoryImplementor;
 
@@ -49,11 +50,13 @@ public class BasePersistence {
 		_sessionFactory = (SessionFactoryImplementor)sessionFactory;
 		_dialect = _sessionFactory.getDialect();
 
-		_log.debug(
-			"Connection provider " +
-				_sessionFactory.getConnectionProvider().getClass().getName());
+		if (_log.isDebugEnabled()) {
+			ConnectionProvider provider =
+				_sessionFactory.getConnectionProvider();
 
-		_log.debug("Dialect " + _dialect.getClass().getName());
+			_log.debug("Connection provider " + provider.getClass().getName());
+			_log.debug("Dialect " + _dialect.getClass().getName());
+		}
 	}
 
 	protected Dialect getDialect() {

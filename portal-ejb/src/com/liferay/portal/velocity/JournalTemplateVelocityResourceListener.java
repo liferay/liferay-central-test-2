@@ -62,8 +62,11 @@ public class JournalTemplateVelocityResourceListener
 				String companyId = source.substring(x + 1, y);
 				String templateId = source.substring(y + 1);
 
-				_log.debug(
-					"Loading " + new JournalTemplatePK(companyId, templateId));
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Loading " +
+							new JournalTemplatePK(companyId, templateId));
+				}
 
 				JournalTemplate template =
 					JournalTemplateLocalServiceUtil.getTemplate(

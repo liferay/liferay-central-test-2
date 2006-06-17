@@ -62,7 +62,9 @@ public class HotDeployThemeListener implements HotDeployListener {
 				ctx.getServletContextName(), StringPool.SPACE,
 				StringPool.UNDERLINE);
 
-			_log.debug("Invoking deploy for " + servletContextName);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Invoking deploy for " + servletContextName);
+			}
 
 			String[] xmls = new String[] {
 				Http.URLtoString(ctx.getResource(
@@ -73,7 +75,9 @@ public class HotDeployThemeListener implements HotDeployListener {
 				return;
 			}
 
-			_log.info("Registering themes for " + servletContextName);
+			if (_log.isInfoEnabled()) {
+				_log.info("Registering themes for " + servletContextName);
+			}
 
 			List themeIds = ThemeLocalUtil.init(servletContextName, ctx, xmls);
 
@@ -81,9 +85,11 @@ public class HotDeployThemeListener implements HotDeployListener {
 
 			_vars.put(servletContextName, themeIds);
 
-			_log.info(
-				"Themes for " + servletContextName +
-					" registered successfully");
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Themes for " + servletContextName +
+						" registered successfully");
+			}
 		}
 		catch (Exception e) {
 			throw new HotDeployException(
@@ -101,12 +107,16 @@ public class HotDeployThemeListener implements HotDeployListener {
 				ctx.getServletContextName(), StringPool.SPACE,
 				StringPool.UNDERLINE);
 
-			_log.debug("Invoking undeploy for " + servletContextName);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Invoking undeploy for " + servletContextName);
+			}
 
 			List themeIds = (List)_vars.remove(servletContextName);
 
 			if (themeIds != null) {
-				_log.info("Unregistering themes for " + servletContextName);
+				if (_log.isInfoEnabled()) {
+					_log.info("Unregistering themes for " + servletContextName);
+				}
 
 				try {
 					ThemeLocalUtil.uninstallThemes(themeIds);
@@ -124,9 +134,11 @@ public class HotDeployThemeListener implements HotDeployListener {
 			LastModifiedCSS.clear();
 			LastModifiedJavaScript.clear();
 
-			_log.info(
-				"Themes for " + servletContextName +
-					" unregistered successfully");
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Themes for " + servletContextName +
+						" unregistered successfully");
+			}
 		}
 		catch (Exception e2) {
 			throw new HotDeployException(

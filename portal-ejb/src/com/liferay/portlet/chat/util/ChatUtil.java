@@ -91,7 +91,9 @@ public class ChatUtil {
 			}
 		}
 
-		_log.debug("Using port " + _port.getValue());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Using port " + _port.getValue());
+		}
 
 		int returnValue = _port.getValue();
 

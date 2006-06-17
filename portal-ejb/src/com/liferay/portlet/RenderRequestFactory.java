@@ -62,9 +62,11 @@ public class RenderRequestFactory {
 			PortletMode portletMode, PortletPreferences prefs, String plid)
 		throws Exception {
 
-		_log.debug(
-			"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
-				_instance._pool.getNumActive());
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
+					_instance._pool.getNumActive());
+		}
 
 		RenderRequestImpl renderRequestImpl =
 			(RenderRequestImpl)_instance._pool.borrowObject();
@@ -79,9 +81,11 @@ public class RenderRequestFactory {
 	public static void recycle(RenderRequestImpl renderRequestImpl)
 		throws Exception {
 
-		_log.debug(
-			"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
-				_instance._pool.getNumActive());
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
+					_instance._pool.getNumActive());
+		}
 
 		_instance._pool.returnObject(renderRequestImpl);
 	}

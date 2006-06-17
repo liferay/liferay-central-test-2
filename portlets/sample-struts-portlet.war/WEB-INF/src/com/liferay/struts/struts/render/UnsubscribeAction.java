@@ -49,7 +49,9 @@ public class UnsubscribeAction extends Action {
 
 		UnsubscribeForm unsubscribeForm = (UnsubscribeForm)form;
 
-		_log.info(unsubscribeForm.toString());
+		if (_log.isInfoEnabled()) {
+			_log.info(unsubscribeForm.toString());
+		}
 
 		return mapping.findForward("portlet.sample_struts_portlet.unsubscribe");
 	}

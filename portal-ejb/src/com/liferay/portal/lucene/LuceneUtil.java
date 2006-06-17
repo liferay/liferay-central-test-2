@@ -171,10 +171,14 @@ public class LuceneUtil {
 					PropsUtil.LUCENE_STORE_JDBC_DIALECT + urlPrefix);
 
 				if (dialectClass != null) {
-					_log.debug("JDBC class implementation " + dialectClass);
+					if (_log.isDebugEnabled()) {
+						_log.debug("JDBC class implementation " + dialectClass);
+					}
 				}
 				else {
-					_log.debug("JDBC class implementation is null");
+					if (_log.isDebugEnabled()) {
+						_log.debug("JDBC class implementation is null");
+					}
 				}
 
 				if (dialectClass != null) {

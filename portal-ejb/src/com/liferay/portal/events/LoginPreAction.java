@@ -42,11 +42,8 @@ public class LoginPreAction extends Action {
 	public void run(HttpServletRequest req, HttpServletResponse res)
 		throws ActionException {
 
-		try {
+		if (_log.isDebugEnabled()) {
 			_log.debug("Running");
-		}
-		catch (Exception e) {
-			throw new ActionException(e);
 		}
 	}
 

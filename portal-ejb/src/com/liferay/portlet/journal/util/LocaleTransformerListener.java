@@ -47,7 +47,9 @@ import org.dom4j.io.SAXReader;
 public class LocaleTransformerListener extends TransformerListener {
 
 	public String onXml(String s) {
-		_log.debug("onXml");
+		if (_log.isDebugEnabled()) {
+			_log.debug("onXml");
+		}
 
 		s = localize(s);
 
@@ -55,7 +57,9 @@ public class LocaleTransformerListener extends TransformerListener {
 	}
 
 	public String onScript(String s) {
-		_log.debug("onScript");
+		if (_log.isDebugEnabled()) {
+			_log.debug("onScript");
+		}
 
 		s = StringUtil.replace(s, "@language_id@", _requestedLocale);
 
@@ -63,7 +67,9 @@ public class LocaleTransformerListener extends TransformerListener {
 	}
 
 	public String onOutput(String s) {
-		_log.debug("onOutput");
+		if (_log.isDebugEnabled()) {
+			_log.debug("onOutput");
+		}
 
 		return s;
 	}

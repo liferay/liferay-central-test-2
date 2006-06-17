@@ -89,7 +89,9 @@ public class AutoDeployDir {
 
 				_scanner.start();
 
-				_log.info("Auto deploy scanner started for " + _deployDir);
+				if (_log.isInfoEnabled()) {
+					_log.info("Auto deploy scanner started for " + _deployDir);
+				}
 			}
 			catch (Exception e) {
 				_log.error(StackTraceUtil.getStackTrace(e));
@@ -100,7 +102,9 @@ public class AutoDeployDir {
 			}
 		}
 		else {
-			_log.info("Auto deploy scanning is disabled for " + _deployDir);
+			if (_log.isInfoEnabled()) {
+				_log.info("Auto deploy scanning is disabled for " + _deployDir);
+			}
 		}
 	}
 

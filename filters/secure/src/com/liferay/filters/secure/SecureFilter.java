@@ -85,19 +85,25 @@ public class SecureFilter implements Filter {
 		String remoteAddr = req.getRemoteAddr();
 
 		if (isAccessAllowed(req)) {
-			_log.debug("Access allowed for " + remoteAddr);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Access allowed for " + remoteAddr);
+			}
 		}
 		else {
-			_log.error("Access denied for " + remoteAddr);
+			if (_log.isErrorEnabled()) {
+				_log.error("Access denied for " + remoteAddr);
+			}
 
 			return;
 		}
 
-		if (_httpsRequired) {
-			_log.debug("https is required");
-		}
-		else {
-			_log.debug("https is not required");
+		if (_log.isDebugEnabled()) {
+			if (_httpsRequired) {
+				_log.debug("https is required");
+			}
+			else {
+				_log.debug("https is not required");
+			}
 		}
 
 		HttpServletRequest request = (HttpServletRequest)req;
@@ -106,7 +112,9 @@ public class SecureFilter implements Filter {
 		String completeURL = Http.getCompleteURL(request);
 
 		if (_httpsRequired && !request.isSecure()) {
-			_log.debug("Securing " + completeURL);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Securing " + completeURL);
+			}
 
 			StringBuffer redirectURL = new StringBuffer();
 
@@ -121,12 +129,16 @@ public class SecureFilter implements Filter {
 				redirectURL.append(request.getQueryString());
 			}
 
-			_log.debug("Redirect to " + redirectURL);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Redirect to " + redirectURL);
+			}
 
 			response.sendRedirect(redirectURL.toString());
 		}
 		else {
-			_log.debug("Not securing " + completeURL);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Not securing " + completeURL);
+			}
 
 			chain.doFilter(req, res);
 		}

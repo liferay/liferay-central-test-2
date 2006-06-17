@@ -156,11 +156,15 @@ public class EditServerAction extends PortletAction {
 
 		prefs.store();
 
-		_log.info("Unregistering auto deploy directories");
+		if (_log.isInfoEnabled()) {
+			_log.info("Unregistering auto deploy directories");
+		}
 
 		AutoDeployUtil.unregisterDir("defaultAutoDeployDir");
 
-		_log.info("Registering auto deploy directories");
+		if (_log.isInfoEnabled()) {
+			_log.info("Registering auto deploy directories");
+		}
 
 		List autoDeployListeners = new ArrayList();
 
@@ -312,7 +316,9 @@ public class EditServerAction extends PortletAction {
 				RequestDispatcher rd = ctx.getRequestDispatcher(jsp);
 
 				if (rd != null) {
-					_log.info("Precompiling " + jsp);
+					if (_log.isInfoEnabled()) {
+						_log.info("Precompiling " + jsp);
+					}
 
 					rd.include(httpReq, httpRes);
 				}

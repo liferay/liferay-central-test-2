@@ -45,9 +45,11 @@ public class LogSessionIdAction extends Action {
 
 		HttpSession ses = req.getSession();
 
-		_log.debug(
-			"Session id " + ses.getId() + " is " +
-				(!ses.isNew() ? "not " : "") + "new");
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Session id " + ses.getId() + " is " +
+					(!ses.isNew() ? "not " : "") + "new");
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(LogSessionIdAction.class);

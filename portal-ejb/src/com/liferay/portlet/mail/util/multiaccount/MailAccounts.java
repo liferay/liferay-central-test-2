@@ -64,7 +64,9 @@ public class MailAccounts {
 
 		MailAccount account = _getAccount(req, accountName);
 
-		_log.info("Current account " + account);
+		if (_log.isInfoEnabled()) {
+			_log.info("Current account " + account);
+		}
 
 		ses.setAttribute(WebKeys.MAIL_CURRENT_ACCOUNT, account);
 

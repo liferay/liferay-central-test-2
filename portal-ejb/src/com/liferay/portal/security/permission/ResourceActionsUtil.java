@@ -420,7 +420,9 @@ public class ResourceActionsUtil {
 			return;
 		}
 
-		_log.debug("Loading " + source);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Loading " + source);
+		}
 
 		SAXReader reader = new SAXReader();
 

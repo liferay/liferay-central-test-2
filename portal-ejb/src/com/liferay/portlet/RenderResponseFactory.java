@@ -51,9 +51,11 @@ public class RenderResponseFactory {
 			String companyId, String plid)
 		throws Exception {
 
-		_log.debug(
-			"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
-				_instance._pool.getNumActive());
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
+					_instance._pool.getNumActive());
+		}
 
 		RenderResponseImpl renderResponseImpl =
 			(RenderResponseImpl)_instance._pool.borrowObject();
@@ -66,9 +68,11 @@ public class RenderResponseFactory {
 	public static void recycle(RenderResponseImpl renderResponseImpl)
 		throws Exception {
 
-		_log.debug(
-			"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
-				_instance._pool.getNumActive());
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
+					_instance._pool.getNumActive());
+		}
 
 		_instance._pool.returnObject(renderResponseImpl);
 	}

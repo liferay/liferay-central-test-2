@@ -70,7 +70,9 @@ public class RemotingServlet extends DispatcherServlet {
 
 		String remoteUser = req.getRemoteUser();
 
-		_log.debug("Remote user " + remoteUser);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Remote user " + remoteUser);
+		}
 
 		if (remoteUser != null) {
 			PrincipalThreadLocal.setName(remoteUser);

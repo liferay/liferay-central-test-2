@@ -45,7 +45,9 @@ public class TestAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
-		_log.info("Running");
+		if (_log.isInfoEnabled()) {
+			_log.info("Running");
+		}
 
 		return mapping.findForward("portal.test");
 	}

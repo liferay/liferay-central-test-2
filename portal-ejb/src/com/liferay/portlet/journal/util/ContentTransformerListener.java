@@ -51,7 +51,9 @@ import org.dom4j.io.SAXReader;
 public class ContentTransformerListener extends TransformerListener {
 
 	public String onXml(String s) {
-		_log.debug("onXml");
+		if (_log.isDebugEnabled()) {
+			_log.debug("onXml");
+		}
 
 		s = replaceContent(s);
 
@@ -59,13 +61,17 @@ public class ContentTransformerListener extends TransformerListener {
 	}
 
 	public String onScript(String s) {
-		_log.debug("onScript");
+		if (_log.isDebugEnabled()) {
+			_log.debug("onScript");
+		}
 
 		return s;
 	}
 
 	public String onOutput(String s) {
-		_log.debug("onOutput");
+		if (_log.isDebugEnabled()) {
+			_log.debug("onOutput");
+		}
 
 		return s;
 	}

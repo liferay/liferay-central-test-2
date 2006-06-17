@@ -45,7 +45,9 @@ public class PortalServiceImpl extends PrincipalBean implements PortalService {
 			e.printStackTrace();
 		}
 
-		_log.info(userId);
+		if (_log.isInfoEnabled()) {
+			_log.info(userId);
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(PortalServiceImpl.class);

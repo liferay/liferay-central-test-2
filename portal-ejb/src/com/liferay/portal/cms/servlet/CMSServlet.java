@@ -118,7 +118,9 @@ public class CMSServlet extends HttpServlet {
 		String content = getContent(path, languageId, rootPath);
 
 		if (Validator.isNotNull(content)) {
-			_log.debug("Content found for " + path);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Content found for " + path);
+			}
 
 			String mimeType = ParamUtil.getString(
 				req, "mimeType", Constants.TEXT_HTML);
@@ -141,7 +143,9 @@ public class CMSServlet extends HttpServlet {
 			}
 		}
 		else {
-			_log.debug("Content NOT found for " + path);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Content NOT found for " + path);
+			}
 		}
 	}
 

@@ -49,7 +49,9 @@ public class SubscribeAction extends Action {
 
 		SubscribeForm subscribeForm = (SubscribeForm)form;
 
-		_log.info(subscribeForm.toString());
+		if (_log.isInfoEnabled()) {
+			_log.info(subscribeForm.toString());
+		}
 
 		return mapping.findForward("portlet.sample_struts_portlet.subscribe");
 	}

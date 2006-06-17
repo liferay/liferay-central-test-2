@@ -93,10 +93,12 @@ public class RuntimePortletUtil {
 					themeDisplay.getCompanyId(), portletId);
 			}
 			else {
-				_log.debug(
-					"Portlet " + portlet.getPortletId() +
-						" is instanceable but does not have a " +
-							"valid instance id");
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Portlet " + portlet.getPortletId() +
+							" is instanceable but does not have a " +
+								"valid instance id");
+				}
 
 				portlet = null;
 			}

@@ -123,7 +123,9 @@ public class MultiMessageResources extends PropertyMessageResources {
 
 				is.close();
 
-				_log.info("Loading " + url);
+				if (_log.isInfoEnabled()) {
+					_log.info("Loading " + url);
+				}
 			}
 		}
 		catch (Exception e) {

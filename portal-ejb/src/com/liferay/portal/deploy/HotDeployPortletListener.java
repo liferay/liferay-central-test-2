@@ -89,7 +89,9 @@ public class HotDeployPortletListener implements HotDeployListener {
 				ctx.getServletContextName(), StringPool.SPACE,
 				StringPool.UNDERLINE);
 
-			_log.debug("Invoking deploy for " + servletContextName);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Invoking deploy for " + servletContextName);
+			}
 
 			// Company ids
 
@@ -108,7 +110,9 @@ public class HotDeployPortletListener implements HotDeployListener {
 				return;
 			}
 
-			_log.info("Registering portlets for " + servletContextName);
+			if (_log.isInfoEnabled()) {
+				_log.info("Registering portlets for " + servletContextName);
+			}
 
 			List portlets = PortletLocalServiceUtil.initWAR(
 				servletContextName, xmls);
@@ -261,9 +265,11 @@ public class HotDeployPortletListener implements HotDeployListener {
 			_vars.put(
 				servletContextName, new ObjectValuePair(companyIds, portlets));
 
-			_log.info(
-				"Portlets for " + servletContextName +
-					" registered successfully");
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Portlets for " + servletContextName +
+						" registered successfully");
+			}
 		}
 		catch (Exception e2) {
 			throw new HotDeployException(
@@ -281,7 +287,9 @@ public class HotDeployPortletListener implements HotDeployListener {
 				ctx.getServletContextName(), StringPool.SPACE,
 				StringPool.UNDERLINE);
 
-			_log.debug("Invoking undeploy for " + servletContextName);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Invoking undeploy for " + servletContextName);
+			}
 
 			ObjectValuePair ovp =
 				(ObjectValuePair)_vars.remove(servletContextName);
@@ -296,7 +304,10 @@ public class HotDeployPortletListener implements HotDeployListener {
 			Set portletIds = new HashSet();
 
 			if (portlets != null) {
-				_log.info("Unregistering portlets for " + servletContextName);
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Unregistering portlets for " + servletContextName);
+				}
 
 				Iterator itr = portlets.iterator();
 
@@ -321,9 +332,11 @@ public class HotDeployPortletListener implements HotDeployListener {
 				}
 			}
 
-			_log.info(
-				"Portlets for " + servletContextName +
-					" unregistered successfully");
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Portlets for " + servletContextName +
+						" unregistered successfully");
+			}
 		}
 		catch (Exception e) {
 			throw new HotDeployException(

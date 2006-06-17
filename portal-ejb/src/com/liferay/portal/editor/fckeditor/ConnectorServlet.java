@@ -65,7 +65,9 @@ public class ConnectorServlet extends HttpServlet {
 		try {
 			HttpSession ses = req.getSession();
 
-			_log.debug("URL " + req.getRequestURL());
+			if (_log.isDebugEnabled()) {
+				_log.debug("URL " + req.getRequestURL());
+			}
 
 			// The servlet accepts commands sent in the format:
 			// connector?Command=&Type=&CurrentFolder=. The servlet then
@@ -77,10 +79,12 @@ public class ConnectorServlet extends HttpServlet {
 			String currentFolder = req.getParameter("CurrentFolder");
 			String newFolder = ParamUtil.getString(req, "NewFolderName");
 
-			_log.debug("command " + command);
-			_log.debug("type " + type);
-			_log.debug("currentFolder " + currentFolder);
-			_log.debug("newFolder " + newFolder);
+			if (_log.isDebugEnabled()) {
+				_log.debug("command " + command);
+				_log.debug("type " + type);
+				_log.debug("currentFolder " + currentFolder);
+				_log.debug("newFolder " + newFolder);
+			}
 
 			// Populate a barebones ThemeDisplay that is used by
 			// PageCommandReceiver
@@ -103,13 +107,15 @@ public class ConnectorServlet extends HttpServlet {
 			// browser open or else these values will be null. This happens
 			// because of a bug in Orion 2.0.7.
 
-			_log.debug("company " + company);
-			_log.debug("user " + user);
-			_log.debug("plid " + plid);
-			_log.debug("groupId " + groupId);
-			_log.debug("mainPath " + mainPath);
-			_log.debug("friendlyURLPrivatePath " + friendlyURLPrivatePath);
-			_log.debug("friendlyURLPublicPath " + friendlyURLPublicPath);
+			if (_log.isDebugEnabled()) {
+				_log.debug("company " + company);
+				_log.debug("user " + user);
+				_log.debug("plid " + plid);
+				_log.debug("groupId " + groupId);
+				_log.debug("mainPath " + mainPath);
+				_log.debug("friendlyURLPrivatePath " + friendlyURLPrivatePath);
+				_log.debug("friendlyURLPublicPath " + friendlyURLPublicPath);
+			}
 
 			themeDisplay.setCompany(company);
 			themeDisplay.setUser(user);

@@ -152,15 +152,15 @@ public class MailEngine {
 
 		if (_log.isDebugEnabled()) {
 			start = System.currentTimeMillis();
-		}
 
-		_log.debug("From: " + from);
-		_log.debug("To: " + to);
-		_log.debug("CC: " + cc);
-		_log.debug("BCC: " + bcc);
-		_log.debug("Subject: " + subject);
-		_log.debug("Body: " + body);
-		_log.debug("HTML Format: " + htmlFormat);
+			_log.debug("From: " + from);
+			_log.debug("To: " + to);
+			_log.debug("CC: " + cc);
+			_log.debug("BCC: " + bcc);
+			_log.debug("Subject: " + subject);
+			_log.debug("Body: " + body);
+			_log.debug("HTML Format: " + htmlFormat);
+		}
 
 		try {
 			Session session = getSession();

@@ -64,7 +64,9 @@ public class MultipleResourceLoader extends FileResourceLoader {
 	public InputStream getResourceStream(String source)
 		throws ResourceNotFoundException {
 
-		_log.debug("Get resource for " + source);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Get resource for " + source);
+		}
 
 		InputStream is = null;
 
@@ -80,7 +82,9 @@ public class MultipleResourceLoader extends FileResourceLoader {
 			throw new ResourceNotFoundException(source);
 		}
 
-		_log.debug("Successfully got " + source);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Successfully got " + source);
+		}
 
 		return is;
 	}

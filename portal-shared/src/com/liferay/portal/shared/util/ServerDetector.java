@@ -116,7 +116,9 @@ public class ServerDetector {
 				}
 			}
 
-			_log.info("Detected server " + sd._serverId);
+			if (_log.isInfoEnabled()) {
+				_log.info("Detected server " + sd._serverId);
+			}
 
 			if (sd._serverId == null) {
 				throw new RuntimeException("Server is not supported");

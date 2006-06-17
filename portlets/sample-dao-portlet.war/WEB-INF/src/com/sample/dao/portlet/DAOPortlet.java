@@ -54,7 +54,9 @@ public class DAOPortlet extends GenericPortlet {
 	public void init(PortletConfig config) throws PortletException {
 		super.init(config);
 
-		_log.info("Initializing portlet");
+		if (_log.isInfoEnabled()) {
+			_log.info("Initializing portlet");
+		}
 	}
 
 	public void processAction(ActionRequest req, ActionResponse res)
@@ -134,7 +136,9 @@ public class DAOPortlet extends GenericPortlet {
 	}
 
 	public void destroy() {
-		_log.info("Destroying portlet");
+		if (_log.isInfoEnabled()) {
+			_log.info("Destroying portlet");
+		}
 
 		try {
 			ConnectionPool.destroy();

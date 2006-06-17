@@ -59,9 +59,11 @@ public class IndexerImpl {
 		throws IOException {
 
 		synchronized (IndexWriter.class) {
-			_log.debug(
-				"Indexing document " + companyId + " " + portletId + " " +
-					groupId + " " + repositoryId + " " + fileName);
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Indexing document " + companyId + " " + portletId + " " +
+						groupId + " " + repositoryId + " " + fileName);
+			}
 
 			String fileExt = fileName;
 
@@ -98,10 +100,12 @@ public class IndexerImpl {
 			}
 
 			if (is == null) {
-				_log.debug(
-					"Document " + companyId + " " + portletId + " " + groupId +
-						" " + repositoryId + " " + fileName +
-							" does not have any content");
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Document " + companyId + " " + portletId + " " +
+							groupId + " " + repositoryId + " " + fileName +
+								" does not have any content");
+				}
 
 				return;
 			}
@@ -132,10 +136,12 @@ public class IndexerImpl {
 
 			LuceneUtil.write(writer);
 
-			_log.debug(
-				"Document " + companyId + " " + portletId + " " + groupId +
-					" " + repositoryId + " " + fileName +
-						" indexed successfully");
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Document " + companyId + " " + portletId + " " + groupId +
+						" " + repositoryId + " " + fileName +
+							" indexed successfully");
+			}
 		}
 	}
 

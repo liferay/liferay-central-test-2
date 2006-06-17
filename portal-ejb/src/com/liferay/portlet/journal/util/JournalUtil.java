@@ -671,22 +671,30 @@ public class JournalUtil {
 
 			// Modify XML
 
-			_log.debug("XML before listener\n" + xml);
+			if (_log.isDebugEnabled()) {
+				_log.debug("XML before listener\n" + xml);
+			}
 
 			if (listener != null) {
 				xml = listener.onXml(xml);
 
-				_log.debug("XML after listener\n" + xml);
+				if (_log.isDebugEnabled()) {
+					_log.debug("XML after listener\n" + xml);
+				}
 			}
 
 			// Modify script
 
-			_log.debug("Transform script before listener\n" + script);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Transform script before listener\n" + script);
+			}
 
 			if (listener != null) {
 				script = listener.onScript(script);
 
-				_log.debug("Transform script after listener\n" + script);
+				if (_log.isDebugEnabled()) {
+					_log.debug("Transform script after listener\n" + script);
+				}
 			}
 		}
 
@@ -712,11 +720,15 @@ public class JournalUtil {
 
 			// Modify output
 
-			_log.debug("Output before listener\n" + output);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Output before listener\n" + output);
+			}
 
 			output = listener.onOutput(output);
 
-			_log.debug("Output after listener\n" + output);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Output after listener\n" + output);
+			}
 		}
 
 		return output;

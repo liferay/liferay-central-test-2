@@ -348,7 +348,9 @@ public class PortletDisplay implements Cloneable {
 	}
 
 	public void recycle() {
-		_log.debug("Recycling instance " + hashCode());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Recycling instance " + hashCode());
+		}
 
 		_id = StringPool.BLANK;
 		_namespace = null;
@@ -485,7 +487,9 @@ public class PortletDisplay implements Cloneable {
 	}
 
 	protected PortletDisplay() {
-		_log.debug("Creating new instance " + hashCode());
+		if (_log.isDebugEnabled()) {
+			_log.debug("Creating new instance " + hashCode());
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(PortletDisplay.class);
