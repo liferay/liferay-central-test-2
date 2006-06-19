@@ -17,12 +17,12 @@ insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, theme
 insert into Group_ (groupId, companyId, parentGroupId, name, friendlyURL) values ('2', 'liferay.com', '-1', 'CMS', '');
 insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.2', 'liferay.com', '2', '2', TRUE, 'classic', '01', 1.0);
 insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PUB.2', 'liferay.com', '2', '2', FALSE, 'classic', '01', 0.0);
-insert into Layout (layoutId, ownerId, companyId, parentLayoutId, name, type_, typeSettings, hidden_, friendlyURL, themeId, colorSchemeId, priority) values ('1', 'PRI.2', 'liferay.com', '-1', '<?xml version="1.0"?>\n\n<root>\n  <name>CMS</name>\n</root>', 'portlet', 'layout-template-id=2_columns_ii\ncolumn-1=64,\ncolumn-2=15,31,20,', FALSE, '', 'classic', '01', 0.0);
+insert into Layout (layoutId, ownerId, companyId, parentLayoutId, name, type_, typeSettings, hidden_, friendlyURL, priority) values ('1', 'PRI.2', 'liferay.com', '-1', '<?xml version="1.0"?>\n\n<root>\n  <name>CMS</name>\n</root>', 'portlet', 'layout-template-id=2_columns_ii\ncolumn-1=64,\ncolumn-2=15,31,20,', FALSE, '', 0.0);
 
 insert into Group_ (groupId, companyId, parentGroupId, name, friendlyURL) values ('3', 'liferay.com', '-1', 'Support', '');
 insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.3', 'liferay.com', '3', '3', TRUE, 'classic', '01', 1.0);
 insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PUB.3', 'liferay.com', '3', '3', FALSE, 'classic', '01', 0.0);
-insert into Layout (layoutId, ownerId, companyId, parentLayoutId, name, type_, typeSettings, hidden_, friendlyURL, themeId, colorSchemeId, priority) values ('1', 'PRI.3', 'liferay.com', '-1', '<?xml version="1.0"?>\n\n<root>\n  <name>Support</name>\n</root>', 'portlet', 'layout-template-id=2_columns_ii\ncolumn-1=3,\ncolumn-2=19,', FALSE, '', 'classic', '01', 0.0);
+insert into Layout (layoutId, ownerId, companyId, parentLayoutId, name, type_, typeSettings, hidden_, friendlyURL, priority) values ('1', 'PRI.3', 'liferay.com', '-1', '<?xml version="1.0"?>\n\n<root>\n  <name>Support</name>\n</root>', 'portlet', 'layout-template-id=2_columns_ii\ncolumn-1=3,\ncolumn-2=19,', FALSE, '', 0.0);
 
 ##
 ## Organizations
@@ -122,7 +122,7 @@ insert into EmailAddress (emailAddressId, companyId, userId, className, classPK,
 insert into Group_ (groupId, companyId, className, classPK, parentGroupId, name, friendlyURL) values ('15', 'liferay.com', 'com.liferay.portal.model.User', 'liferay.com.1', '-1', '15', '/joebloggs');
 insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.15', 'liferay.com', '15', '15', TRUE, 'classic', '01', 1.0);
 insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PUB.15', 'liferay.com', '15', '15', FALSE, 'classic', '01', 0.0);
-insert into Layout (layoutId, ownerId, companyId, parentLayoutId, name, type_, typeSettings, hidden_, friendlyURL, themeId, colorSchemeId, priority) values ('1', 'PRI.15', 'liferay.com', '-1', '<?xml version="1.0"?>\n\n<root>\n  <name>Home A1</name>\n</root>', 'portlet', 'column-1=71_INSTANCE_OY0d,61,65,\ncolumn-2=9,29,79,8,\nlayout-template-id=2_columns_ii\n', FALSE, '', 'classic', '01', 0.0);
+insert into Layout (layoutId, ownerId, companyId, parentLayoutId, name, type_, typeSettings, hidden_, friendlyURL, priority) values ('1', 'PRI.15', 'liferay.com', '-1', '<?xml version="1.0"?>\n\n<root>\n  <name>Home A1</name>\n</root>', 'portlet', 'column-1=71_INSTANCE_OY0d,61,65,\ncolumn-2=9,29,79,8,\nlayout-template-id=2_columns_ii\n', FALSE, '', 0.0);
 
 insert into Users_Groups values ('liferay.com.1', '1');
 insert into Users_Groups values ('liferay.com.1', '2');
