@@ -796,8 +796,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 					list="<%= templates %>"
 					listType="com.liferay.portlet.journal.model.JournalTemplate"
 					rowLength="3"
-					rowPadding="30"
-					rowBreak="&lt;br /&gt;">
+					rowPadding="30">
 
 					<%
 					boolean templateChecked = false;

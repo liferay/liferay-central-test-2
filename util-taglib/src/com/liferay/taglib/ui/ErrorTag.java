@@ -23,6 +23,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.Html;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -52,6 +53,7 @@ public class ErrorTag extends TagSupport {
 			req.setAttribute(
 				"liferay-ui:error:translateMessage",
 				String.valueOf(_translateMessage));
+			req.setAttribute("liferay-ui:error:rowBreak", _rowBreak);
 
 			if ((_exception != null) && (Validator.isNull(_message)) &&
 				(SessionErrors.contains(renderRequest, _exception.getName()))) {
@@ -150,6 +152,10 @@ public class ErrorTag extends TagSupport {
 		_translateMessage = translateMessage;
 	}
 
+	public void setRowBreak(String rowBreak) {
+		_rowBreak = Html.formatFrom(rowBreak);
+	}
+
 	private static final String _START_PAGE = "/html/taglib/ui/error/start.jsp";
 
 	private static final String _END_PAGE = "/html/taglib/ui/error/end.jsp";
@@ -160,5 +166,6 @@ public class ErrorTag extends TagSupport {
 	private String _key;
 	private String _message;
 	private boolean _translateMessage = true;
+	private String _rowBreak = "<br /><br />";
 
 }

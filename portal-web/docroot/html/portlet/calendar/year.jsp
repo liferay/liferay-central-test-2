@@ -102,8 +102,7 @@
 			listType="java.util.Calendar"
 			rowLength="3"
 			rowPadding="30"
-			rowValign="top"
-			rowBreak="&lt;br /&gt;">
+			rowValign="top">
 
 			<%
 			int month = tableIteratorObj.get(Calendar.MONTH);

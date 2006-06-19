@@ -28,6 +28,7 @@
 String key = (String)request.getAttribute("liferay-ui:error:key");
 String message = (String)request.getAttribute("liferay-ui:error:message");
 boolean translateMessage = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:error:translateMessage"));
+String rowBreak = (String)request.getAttribute("liferay-ui:error:rowBreak");
 %>
 
 <c:choose>
@@ -35,7 +36,7 @@ boolean translateMessage = GetterUtil.getBoolean((String)request.getAttribute("l
 		<c:if test="<%= SessionErrors.contains(renderRequest, key) %>">
 			</span>
 
-			<br><br>
+			<%= rowBreak %>
 		</c:if>
 	</c:when>
 	<c:when test="<%= key == null %>">
@@ -44,7 +45,7 @@ boolean translateMessage = GetterUtil.getBoolean((String)request.getAttribute("l
 			<%= LanguageUtil.get(pageContext, "you-have-entered-invalid-data") %>
 			</span>
 
-			<br><br>
+			<%= rowBreak %>
 		</c:if>
 	</c:when>
 	<c:otherwise>
@@ -62,7 +63,7 @@ boolean translateMessage = GetterUtil.getBoolean((String)request.getAttribute("l
 
 			</span>
 
-			<br><br>
+			<%= rowBreak %>
 		</c:if>
 	</c:otherwise>
 </c:choose>

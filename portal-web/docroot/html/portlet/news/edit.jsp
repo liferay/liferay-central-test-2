@@ -138,7 +138,8 @@ portletURL.setParameter("tabs1", tabs1);
 				<liferay-ui:table-iterator
 					list="<%= ListUtil.fromCollection(feedSet) %>"
 					listType="com.liferay.portlet.news.model.Feed"
-					rowLength="3">
+					rowLength="3"
+					rowBreak="">
 
 					<input <%= (selFeeds != null) && (selFeeds.contains(tableIteratorObj)) ? "checked" : "" %> name="<portlet:namespace />feed" type="checkbox" value="<%= tableIteratorObj.getFeedURL() %>">
 

@@ -728,8 +728,7 @@ portletURL.setParameter("groupId", groupId);
 						<liferay-ui:table-iterator
 							list="<%= themes %>"
 							listType="com.liferay.portal.model.Theme"
-							rowLength="2"
-							rowBreak="&lt;br /&gt;">
+							rowLength="2">
 
 							<table border="0" cellpadding="0" cellspacing="0">
 							<tr>
@@ -753,8 +752,7 @@ portletURL.setParameter("groupId", groupId);
 						<liferay-ui:table-iterator
 							list="<%= colorSchemes %>"
 							listType="com.liferay.portal.model.ColorScheme"
-							rowLength="1"
-							rowBreak="&lt;br /&gt;">
+							rowLength="1">
 
 							<table border="0" cellpadding="0" cellspacing="0">
 							<tr>

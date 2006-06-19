@@ -208,6 +208,6 @@ public class TableIteratorTag extends TagSupport {
 	private int _rowLength;
 	private String _rowPadding = "0";
 	private String _rowValign = "middle";
-	private String _rowBreak;
+	private String _rowBreak = "<br />";
 
 }
