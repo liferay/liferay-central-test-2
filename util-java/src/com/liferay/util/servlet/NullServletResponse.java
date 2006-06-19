@@ -48,6 +48,15 @@ public class NullServletResponse extends HttpServletResponseWrapper {
 		return _pw;
 	}
 
+	/*public void sendError(int sc) throws IOException {
+	}
+
+	public void sendError(int sc, String msg) throws IOException {
+	}
+
+	public void sendRedirect(String location) throws IOException {
+	}*/
+
 	private ServletOutputStream _sos = new NullServletOutputStream();
 	private PrintWriter _pw = new PrintWriter(_sos, true);
 

@@ -30,6 +30,7 @@ import com.liferay.portal.lastmodified.LastModifiedJavaScript;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.shared.deploy.AutoDeployDir;
 import com.liferay.portal.shared.deploy.AutoDeployUtil;
+import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.spring.hibernate.CacheRegistry;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.ClusterPool;
@@ -324,6 +325,7 @@ public class EditServerAction extends PortletAction {
 				}
 			}
 			catch (Exception e) {
+				_log.debug(StackTraceUtil.getStackTrace(e));
 			}
 		}
 	}
