@@ -325,11 +325,15 @@ public class CachePortlet implements Portlet {
 		}
 
 		if ((properties != null) && (properties.size() > 0)) {
-			String expCache = (String)properties.get(
-				RenderResponse.EXPIRATION_CACHE);
+			if (_expCache != null) {
+				String[] expCache = (String[])properties.get(
+					RenderResponse.EXPIRATION_CACHE);
 
-			if ((expCache != null) && (_expCache != null)) {
-				_expCache = new Integer(GetterUtil.getInteger(expCache));
+				if ((expCache != null) && (expCache.length > 0) &&
+					(expCache[0] != null)) {
+
+					_expCache = new Integer(GetterUtil.getInteger(expCache[0]));
+				}
 			}
 		}
 	}
