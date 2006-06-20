@@ -290,7 +290,7 @@ public class ServiceBuilder {
 		if (oldContent == null || !oldContent.equals(newContent)) {
 			FileUtil.write(file, newContent);
 
-			System.out.println(file);
+			System.out.println("Writing " + file);
 
 			// Workaround for bug with XJavaDoc
 
@@ -607,6 +607,8 @@ public class ServiceBuilder {
 
 						_createModel(entity);
 						_createExtendedModel(entity);
+
+						_createPool(entity);
 
 						if (entity.getPKList().size() > 1) {
 							_createEJBPK(entity);
@@ -3776,6 +3778,16 @@ public class ServiceBuilder {
 		File ejbFile = new File(_outputPath + "/service/persistence/" + entity.getName() + "Util.java");
 
 		writeFile(ejbFile, sb.toString());
+	}
+
+	private void _createPool(Entity entity) throws IOException {
+		File ejbFile = new File(_outputPath + "/service/persistence/" + entity.getName() + "Pool.java");
+
+		if (ejbFile.exists()) {
+			System.out.println("Removing deprecated " + ejbFile);
+
+			ejbFile.delete();
+		}
 	}
 
 	private void _createService(Entity entity, int sessionType) throws IOException {
