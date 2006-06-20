@@ -31,7 +31,12 @@
 </style>
 
 <div class="portlet-container">
-	<div id="portlet-header-bar_<%= portletDisplay.getId() %>" class="portlet-header-bar" onMouseEnter="document.all.portlet_small_icon_bar_<%= portletDisplay.getId() %>.style.visibility='visible'" onMouseLeave="document.all.portlet_small_icon_bar_<%= portletDisplay.getId() %>.style.visibility='hidden'">
+	<div id="portlet-header-bar_<%= portletDisplay.getId() %>" class="portlet-header-bar"
+		<c:if test="<%= !portletDisplay.isShowBackIcon() %>">
+			onMouseEnter="document.all.portlet_small_icon_bar_<%= portletDisplay.getId() %>.style.visibility='visible'"
+			onMouseLeave="document.all.portlet_small_icon_bar_<%= portletDisplay.getId() %>.style.visibility='hidden'"
+		</c:if>
+		>
 		<c:if test="<%= Validator.isNotNull(portletDisplay.getTitle()) %>">
 			<div class="portlet-title"><div><div></div></div>
 
@@ -42,7 +47,7 @@
 			</div>
 		</c:if>
 
-		<div id="portlet_small_icon_bar_<%= portletDisplay.getId() %>" class="portlet-small-icon-bar">
+		<div id="portlet_small_icon_bar_<%= portletDisplay.getId() %>" class="portlet-small-icon-bar" style="visibility: <%= portletDisplay.isShowBackIcon() ? "visible" : "hidden" %>">
 			<c:choose>
 				<c:when test="<%= portletDisplay.isShowBackIcon() %>">
 					<liferay-portlet:icon-back />

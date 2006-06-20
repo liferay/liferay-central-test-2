@@ -329,7 +329,6 @@ FONT.bg {
 }
 
 #layout-box {
-	width: <%= themeDisplay.getResolution() %>px;
 	margin: 0 auto 0 auto;
 }
 
@@ -571,7 +570,6 @@ FONT.bg {
 	font-size: 7pt;
 	font-weight: normal;
 	text-align: left;
-	width: <%= themeDisplay.getResolution() %>px;
 }
 
 .portal-add-content {
@@ -585,7 +583,6 @@ FONT.bg {
 	clear: both;
 	padding: 0;
 	text-align: left;
-	width: <%= themeDisplay.getResolution() %>;
 }
 
 #bottom-content {
@@ -673,7 +670,6 @@ FONT.bg {
 .portlet-borderless-bar { text-align: left; font-size: <%= fontXS %>; }
 
 .portlet-small-icon-bar {
-	visibility: hidden;
 	height: 17px;
 	padding: 3px 10px 0 0;
 	position: absolute;

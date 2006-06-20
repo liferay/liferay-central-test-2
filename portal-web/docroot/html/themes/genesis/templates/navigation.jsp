@@ -114,7 +114,7 @@
 	}
 	%>
 
-	<div id="layout-nav-container" style="width: <%= themeDisplay.getResolution() %>">
+	<div id="layout-nav-container">
 		<div class="layout-nav-tabs">
 
 			<%
@@ -166,20 +166,23 @@
 						}
 
 
+						int navWidth = themeDisplay.getResolution();
+						navWidth = (navWidth > 0) ? navWidth : 1024;
+						
 						if (layouts.size() == 1) {
 							// Make an exception if there is only one tab
 							if (rows.length == 1) {
 								// For one row, set lenght to half
-								tabWidth = themeDisplay.getResolution()/2;
+								tabWidth = navWidth/2;
 								tabRight= "";
 							}
 							else {
 								// Otherwise, set it to full
-								tabWidth = themeDisplay.getResolution();
+								tabWidth = navWidth;
 							}
 						}
 						else {
-							tabWidth = (themeDisplay.getResolution() + ((tabsInRow - 1) * tabOverlap)) / tabsInRow;
+							tabWidth = (navWidth + ((tabsInRow - 1) * tabOverlap)) / tabsInRow;
 						}
 
 						tabBodyWidth = tabWidth - tabLeftImageWidth - tabSeparatorWidth;
