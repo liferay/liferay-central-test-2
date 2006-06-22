@@ -150,8 +150,12 @@ public class EditGroupAssignmentsAction extends PortletAction {
 		String[] removeUserIds = StringUtil.split(
 			ParamUtil.getString(req, "removeUserIds"));
 
-		UserServiceUtil.addGroupUsers(groupId, addUserIds);
-		UserServiceUtil.unsetGroupUsers(groupId, removeUserIds);
+		if (addUserIds.length > 0) {
+			UserServiceUtil.addGroupUsers(groupId, addUserIds);
+		}
+		if (removeUserIds.length > 0) {
+			UserServiceUtil.unsetGroupUsers(groupId, removeUserIds);
+		}
 	}
 
 }

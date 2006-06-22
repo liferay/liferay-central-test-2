@@ -204,7 +204,7 @@ if (Validator.isNotNull(modelResource)) {
 
 				groupParams.put("rolePermissions", rolePermissions);
 
-				List groups = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams);
+				List groups = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, 0, 0);
 
 				for (int j = 0; j < groups.size(); j++) {
 					Group group = (Group)groups.get(j);
