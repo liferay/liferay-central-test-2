@@ -80,7 +80,7 @@ public class MBTopicServiceImpl
 			getPermissionChecker(), topicId, ActionKeys.UPDATE);
 
 		return MBTopicLocalServiceUtil.updateTopic(
-			getUserId(), categoryId, name, description);
+			topicId, categoryId, name, description);
 	}
 
 }
