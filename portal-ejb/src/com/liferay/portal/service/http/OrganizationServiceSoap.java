@@ -95,6 +95,20 @@ public class OrganizationServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.OrganizationModel[] getUserOrganizations(
+		java.lang.String userId) throws RemoteException {
+		try {
+			java.util.List returnValue = OrganizationServiceUtil.getUserOrganizations(userId);
+
+			return (com.liferay.portal.model.Organization[])returnValue.toArray(new com.liferay.portal.model.Organization[0]);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static void setGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds) throws RemoteException {
 		try {

@@ -61,6 +61,7 @@ public class ConnectorServlet extends HttpServlet {
 		throws IOException, ServletException {
 
 		ThemeDisplay themeDisplay = null;
+		PermissionChecker permissionChecker = null;
 
 		try {
 			HttpSession ses = req.getSession();
@@ -130,11 +131,9 @@ public class ConnectorServlet extends HttpServlet {
 			if (user != null) {
 				PrincipalThreadLocal.setName(user.getUserId());
 
-				PermissionChecker permissionChecker =
-					PermissionCheckerFactory.create(user, true);
+				permissionChecker = PermissionCheckerFactory.create(user, true);
 
-				PermissionThreadLocal.setPermissionChecker(
-					permissionChecker);
+				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 			}
 
 			CommandArgument arg = new CommandArgument(
@@ -150,6 +149,12 @@ public class ConnectorServlet extends HttpServlet {
 		finally {
 			try {
 				ThemeDisplayFactory.recycle(themeDisplay);
+			}
+			catch (Exception e) {
+			}
+
+			try {
+				PermissionCheckerFactory.recycle(permissionChecker);
 			}
 			catch (Exception e) {
 			}

@@ -94,6 +94,20 @@ public class UserGroupServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.UserGroupModel[] getUserUserGroups(
+		java.lang.String userId) throws RemoteException {
+		try {
+			java.util.List returnValue = UserGroupServiceUtil.getUserUserGroups(userId);
+
+			return (com.liferay.portal.model.UserGroup[])returnValue.toArray(new com.liferay.portal.model.UserGroup[0]);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static boolean unsetGroupUserGroups(java.lang.String groupId,
 		java.lang.String[] userGroupIds) throws RemoteException {
 		try {

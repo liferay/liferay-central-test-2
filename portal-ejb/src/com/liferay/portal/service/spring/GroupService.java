@@ -44,6 +44,10 @@ public interface GroupService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
+	public com.liferay.portal.model.Group getGroup(java.lang.String groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public com.liferay.portal.model.Group getGroup(java.lang.String companyId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, 

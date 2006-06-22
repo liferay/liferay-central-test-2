@@ -31,7 +31,21 @@ import com.liferay.portal.shared.util.MethodInvoker;
 import com.liferay.portal.shared.util.MethodWrapper;
 import com.liferay.util.ObjectValuePair;
 import com.liferay.util.StringPool;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.shared.util.StackTraceUtil;
+import java.io.IOException;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -58,43 +72,65 @@ public class TunnelServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
-		ObjectInputStream ois = new ObjectInputStream(req.getInputStream());
-
-		Object returnObj = null;
+		PermissionChecker permissionChecker = null;
 
 		try {
-			ObjectValuePair ovp = (ObjectValuePair)ois.readObject();
+			ObjectInputStream ois = new ObjectInputStream(req.getInputStream());
 
-			HttpPrincipal httpPrincipal = (HttpPrincipal)ovp.getKey();
-			MethodWrapper methodWrapper = (MethodWrapper)ovp.getValue();
+			Object returnObj = null;
 
-			PrincipalThreadLocal.setName(httpPrincipal.getUserId());
+			try {
+				ObjectValuePair ovp = (ObjectValuePair)ois.readObject();
 
-			if (returnObj == null) {
-				returnObj = MethodInvoker.invoke(methodWrapper);
+				HttpPrincipal httpPrincipal = (HttpPrincipal)ovp.getKey();
+				MethodWrapper methodWrapper = (MethodWrapper)ovp.getValue();
+
+				if (httpPrincipal.getUserId() != null) {
+					PrincipalThreadLocal.setName(httpPrincipal.getUserId());
+
+					User user = UserLocalServiceUtil.getUserById(
+						httpPrincipal.getUserId());
+
+					permissionChecker =
+						PermissionCheckerFactory.create(user, true);
+
+					PermissionThreadLocal.setPermissionChecker(
+						permissionChecker);
+				}
+
+				if (returnObj == null) {
+					returnObj = MethodInvoker.invoke(methodWrapper);
+				}
+			}
+			catch (InvocationTargetException ite) {
+				returnObj = ite.getCause();
+
+				if (!(returnObj instanceof PortalException)) {
+					ite.printStackTrace();
+
+					returnObj = new SystemException();
+				}
+			}
+			catch (Exception e) {
+				_log.error(StackTraceUtil.getStackTrace(e));
+			}
+
+			if (returnObj != null) {
+				ObjectOutputStream oos =
+					new ObjectOutputStream(res.getOutputStream());
+
+				oos.writeObject(returnObj);
+
+				oos.flush();
+				oos.close();
 			}
 		}
-		catch (InvocationTargetException ite) {
-			returnObj = ite.getCause();
-
-			if (!(returnObj instanceof PortalException)) {
-				ite.printStackTrace();
-
-				returnObj = new SystemException();
+		finally {
+			try {
+				PermissionCheckerFactory.recycle(permissionChecker);
 			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		if (returnObj != null) {
-			ObjectOutputStream oos =
-				new ObjectOutputStream(res.getOutputStream());
-
-			oos.writeObject(returnObj);
-
-			oos.flush();
-			oos.close();
+			catch (Exception e) {
+			}
 		}
 	}
 

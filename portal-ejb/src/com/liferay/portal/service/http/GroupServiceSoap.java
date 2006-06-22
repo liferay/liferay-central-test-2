@@ -82,6 +82,20 @@ public class GroupServiceSoap {
 	}
 
 	public static com.liferay.portal.model.GroupModel getGroup(
+		java.lang.String groupId) throws RemoteException {
+		try {
+			com.liferay.portal.model.Group returnValue = GroupServiceUtil.getGroup(groupId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static com.liferay.portal.model.GroupModel getGroup(
 		java.lang.String companyId, java.lang.String name)
 		throws RemoteException {
 		try {

@@ -67,6 +67,12 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 		GroupLocalServiceUtil.deleteGroup(groupId);
 	}
 
+	public Group getGroup(String groupId)
+		throws PortalException, SystemException {
+
+		return GroupLocalServiceUtil.getGroup(groupId);
+	}
+
 	public Group getGroup(String companyId, String name)
 		throws PortalException, SystemException {
 

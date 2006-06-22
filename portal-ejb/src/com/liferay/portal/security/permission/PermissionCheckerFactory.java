@@ -60,6 +60,10 @@ public class PermissionCheckerFactory {
 	public static void recycle(PermissionChecker permissionChecker)
 		throws Exception {
 
+		if (permissionChecker == null) {
+			return;
+		}
+
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +

@@ -31,13 +31,12 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupServiceUtil;
-import com.liferay.portal.service.spring.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.spring.PermissionServiceUtil;
 import com.liferay.portal.service.spring.ResourceServiceUtil;
 import com.liferay.portal.service.spring.RoleServiceUtil;
-import com.liferay.portal.service.spring.UserGroupLocalServiceUtil;
+import com.liferay.portal.service.spring.UserGroupServiceUtil;
+import com.liferay.portal.service.spring.OrganizationServiceUtil;
 import com.liferay.portal.service.spring.UserServiceUtil;
 import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.util.CollectionFactory;
@@ -102,18 +101,17 @@ public class PermissionChecker {
 		if (signedIn && (permissionCheckerBag == null)) {
 			try {
 				List userOrgs =
-					OrganizationLocalServiceUtil.getUserOrganizations(
+					OrganizationServiceUtil.getUserOrganizations(
 						user.getUserId());
 
-				List userOrgGroups = GroupServiceUtil.getOrganizationsGroups(
-					userOrgs);
+				List userOrgGroups =
+					GroupServiceUtil.getOrganizationsGroups(userOrgs);
 
 				List userUserGroups =
-					UserGroupLocalServiceUtil.getUserUserGroups(
-						user.getUserId());
+					UserGroupServiceUtil.getUserUserGroups(user.getUserId());
 
-				List userUserGroupGroups = GroupServiceUtil.getUserGroupsGroups(
-					userUserGroups);
+				List userUserGroupGroups =
+					GroupServiceUtil.getUserGroupsGroups(userUserGroups);
 
 				permissionCheckerBag = new PermissionCheckerBag(
 					userOrgs, userOrgGroups, userUserGroupGroups);
@@ -331,7 +329,7 @@ public class PermissionChecker {
 		}
 
 		try {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
+			Group group = GroupServiceUtil.getGroup(groupId);
 
 			if (group.getClassName().equals(User.class.getName()) &&
 				group.getClassPK().equals(user.getUserId())) {

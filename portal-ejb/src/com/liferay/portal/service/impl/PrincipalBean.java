@@ -79,10 +79,4 @@ public class PrincipalBean {
 		return PermissionThreadLocal.getPermissionChecker();
 	}
 
-	public boolean hasAdministrator(String companyId)
-		throws PortalException, SystemException {
-
-		return true; // FIX ME
-	}
-
 }

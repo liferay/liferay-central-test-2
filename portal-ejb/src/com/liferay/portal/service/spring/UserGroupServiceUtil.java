@@ -107,6 +107,25 @@ public class UserGroupServiceUtil {
 		}
 	}
 
+	public static java.util.List getUserUserGroups(java.lang.String userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			UserGroupService userGroupService = UserGroupServiceFactory.getService();
+
+			return userGroupService.getUserUserGroups(userId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static boolean unsetGroupUserGroups(java.lang.String groupId,
 		java.lang.String[] userGroupIds)
 		throws com.liferay.portal.PortalException, 

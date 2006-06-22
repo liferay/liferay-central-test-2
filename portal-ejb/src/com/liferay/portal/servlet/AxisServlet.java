@@ -23,6 +23,8 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.UserLocalServiceUtil;
 
 import java.io.IOException;
 
@@ -32,6 +34,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.shared.util.StackTraceUtil;
 
 /**
  * <a href="AxisServlet.java.html"><b><i>View Source</i></b></a>
@@ -44,17 +50,37 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
-		String remoteUser = req.getRemoteUser();
+		PermissionChecker permissionChecker = null;
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Remote user " + remoteUser);
+		try {
+			String remoteUser = req.getRemoteUser();
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Remote user " + remoteUser);
+			}
+
+			if (remoteUser != null) {
+				PrincipalThreadLocal.setName(remoteUser);
+
+				User user = UserLocalServiceUtil.getUserById(remoteUser);
+
+				permissionChecker = PermissionCheckerFactory.create(user, true);
+
+				PermissionThreadLocal.setPermissionChecker(permissionChecker);
+			}
+
+			super.service(req, res);
 		}
-
-		if (remoteUser != null) {
-			PrincipalThreadLocal.setName(remoteUser);
+		catch (Exception e) {
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
-
-		super.service(req, res);
+		finally {
+			try {
+				PermissionCheckerFactory.recycle(permissionChecker);
+			}
+			catch (Exception e) {
+			}
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(AxisServlet.class);

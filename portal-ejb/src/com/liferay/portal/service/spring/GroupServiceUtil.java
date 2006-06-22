@@ -89,6 +89,26 @@ public class GroupServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Group getGroup(
+		java.lang.String groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			GroupService groupService = GroupServiceFactory.getService();
+
+			return groupService.getGroup(groupId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static com.liferay.portal.model.Group getGroup(
 		java.lang.String companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

@@ -111,6 +111,25 @@ public class OrganizationServiceUtil {
 		}
 	}
 
+	public static java.util.List getUserOrganizations(java.lang.String userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			OrganizationService organizationService = OrganizationServiceFactory.getService();
+
+			return organizationService.getUserOrganizations(userId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static void setGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 

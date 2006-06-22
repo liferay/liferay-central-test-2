@@ -34,6 +34,8 @@ import com.liferay.portal.service.persistence.OrganizationUtil;
 import com.liferay.portal.service.spring.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.spring.OrganizationService;
 
+import java.util.List;
+
 /**
  * <a href="OrganizationServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -88,6 +90,12 @@ public class OrganizationServiceImpl extends PrincipalBean
 		checkPermission(organizationId, ActionKeys.VIEW);
 
 		return OrganizationLocalServiceUtil.getOrganization(organizationId);
+	}
+
+	public List getUserOrganizations(String userId)
+		throws PortalException, SystemException {
+
+		return OrganizationLocalServiceUtil.getUserOrganizations(userId);
 	}
 
 	public void setGroupOrganizations(String groupId, String[] organizationIds)

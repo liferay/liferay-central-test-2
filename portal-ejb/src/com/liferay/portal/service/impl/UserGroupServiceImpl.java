@@ -32,6 +32,7 @@ import com.liferay.portal.service.permission.PortalPermission;
 import com.liferay.portal.service.permission.UserGroupPermission;
 import com.liferay.portal.service.spring.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.spring.UserGroupService;
+import java.util.List;
 
 /**
  * <a href="UserGroupServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -82,6 +83,12 @@ public class UserGroupServiceImpl extends PrincipalBean
 			getPermissionChecker(), userGroupId, ActionKeys.VIEW);
 
 		return UserGroupLocalServiceUtil.getUserGroup(userGroupId);
+	}
+
+	public List getUserUserGroups(String userId)
+		throws PortalException, SystemException {
+
+		return UserGroupLocalServiceUtil.getUserUserGroups(userId);
 	}
 
 	public boolean unsetGroupUserGroups(

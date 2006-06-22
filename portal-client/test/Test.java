@@ -58,10 +58,11 @@ public class Test {
 
 		// Authenticated url
 
-		if (false) {
+		if (true) {
 
 			String userId = "liferay.com.1";
-			String password = "test";
+			//String password = "test";
+			String password = "qUqP5cyxm6YcTAhz05Hph5gvu9M=";
 			
 			url =
 				"http://" + userId + ":" + password +

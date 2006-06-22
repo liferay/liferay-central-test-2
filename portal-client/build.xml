@@ -16,7 +16,7 @@
 		</jar>
 	</target>
 
-	<target name="build-client">
+	<target name="build-client" depends="clean">
 		<echo message="Make sure the server is listening on ${client.url}." />
 		<echo message="" />
 

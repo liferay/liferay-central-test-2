@@ -95,7 +95,7 @@ public class LuceneServlet extends HttpServlet {
 					}
 				}
 				catch (IOException ioe) {
-					ioe.printStackTrace();
+					_log.error(ioe);
 				}
 				finally {
 					if (writer != null) {
@@ -103,7 +103,7 @@ public class LuceneServlet extends HttpServlet {
 							writer.close();
 						}
 						catch (IOException ioe) {
-							ioe.printStackTrace();
+							_log.error(ioe);
 						}
 					}
 				}
@@ -127,8 +127,6 @@ public class LuceneServlet extends HttpServlet {
 			}
 			catch (InterruptedException e) {
 				_log.error("Lucene indexer shutdown interrupted", e);
-
-				e.printStackTrace();
 			}
 		}
 

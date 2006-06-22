@@ -86,6 +86,14 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 		return getService().getOrganization(organizationId);
 	}
 
+	public java.util.List getUserOrganizations(java.lang.String userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().getUserOrganizations(userId);
+	}
+
 	public void setGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 

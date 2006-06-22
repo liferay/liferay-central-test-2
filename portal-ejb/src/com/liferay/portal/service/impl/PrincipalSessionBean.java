@@ -141,7 +141,7 @@ public class PrincipalSessionBean {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e.getMessage());
+			_log.error(e);
 		}
 	}
 
