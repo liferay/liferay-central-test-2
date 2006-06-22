@@ -37,6 +37,10 @@ public class Entity {
 	public static EntityColumn getColumn(String name, List columnList) {
 		int pos = columnList.indexOf(new EntityColumn(name));
 
+		if (pos == -1) {
+			throw new RuntimeException("Column " + name + " not found");
+		}
+
 		return (EntityColumn)columnList.get(pos);
 	}
 
