@@ -33,6 +33,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.permission.PermissionCheckerBag;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.persistence.GroupUtil;
@@ -44,6 +45,7 @@ import com.liferay.portal.service.persistence.PermissionFinder;
 import com.liferay.portal.service.persistence.PermissionUtil;
 import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.RoleUtil;
+import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.PermissionLocalService;
@@ -327,11 +329,16 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 		List userOrgs = permissionCheckerBag.getUserOrgs();
 		List userOrgGroups = permissionCheckerBag.getUserOrgGroups();
+		List userUserGroupGroups =
+			permissionCheckerBag.getUserUserGroupGroups();
 
-		List groups = new ArrayList(userGroups.size() + userOrgGroups.size());
+		List groups = new ArrayList(
+			userGroups.size() + userOrgGroups.size() +
+				userUserGroupGroups.size());
 
 		groups.addAll(userGroups);
 		groups.addAll(userOrgGroups);
+		groups.addAll(userUserGroupGroups);
 
 		logUserPermission(userId, actionId, resourceId, start, 3);
 
@@ -414,19 +421,28 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	public void setGroupPermissions(
-			String organizationId, String groupId, String[] actionIds,
-			String resourceId)
+			String className, String classPK, String groupId,
+			String[] actionIds, String resourceId)
 		throws PortalException, SystemException {
 
-		Organization organization =
-			OrganizationUtil.findByPrimaryKey(organizationId);
+		String associatedGroupId = null;
 
-		OrgGroupPermissionFinder.removeByO_G_R(
-			organizationId, groupId, resourceId);
+		if (className.equals(Organization.class.getName())) {
+			Organization organization =
+				OrganizationUtil.findByPrimaryKey(classPK);
 
-		String orgGroupId = organization.getGroup().getGroupId();
+			OrgGroupPermissionFinder.removeByO_G_R(
+				classPK, groupId, resourceId);
 
-		setGroupPermissions(orgGroupId, actionIds, resourceId);
+			associatedGroupId = organization.getGroup().getGroupId();
+		}
+		else if (className.equals(UserGroup.class.getName())) {
+			UserGroup userGroup = UserGroupUtil.findByPrimaryKey(classPK);
+
+			associatedGroupId = userGroup.getGroup().getGroupId();
+		}
+
+		setGroupPermissions(associatedGroupId, actionIds, resourceId);
 	}
 
 	public void setOrgGroupPermissions(

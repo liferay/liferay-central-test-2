@@ -30,6 +30,8 @@
 --%><%@ page import="com.liferay.portal.util.comparator.ContactLastNameComparator" %><%--
 --%><%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearch" %><%--
 --%><%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearchTerms" %><%--
+--%><%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearch" %><%--
+--%><%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearchTerms" %><%--
 --%><%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %><%--
 --%><%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %><%--
 

@@ -31,7 +31,6 @@ Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
 String groupId = BeanParamUtil.getString(group, request, "groupId");
 
-String name = BeanParamUtil.getString(group, request, "name");
 String type = BeanParamUtil.getString(group, request, "type");
 String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 %>
@@ -62,7 +61,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />name" size="30" type="text" value="<%= name %>">
+		<liferay-ui:input-field model="<%= Group.class %>" bean="<%= group %>" field="name" />
 	</td>
 </tr>
 <tr>

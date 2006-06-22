@@ -264,12 +264,17 @@ public class GroupLocalServiceUtil {
 		}
 	}
 
-	public static java.util.List getUserGroups(java.lang.String companyId,
-		java.lang.String userId) throws com.liferay.portal.SystemException {
+	public static com.liferay.portal.model.Group getUserGroupGroup(
+		java.lang.String companyId, java.lang.String userGroupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
 		try {
 			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.getUserGroups(companyId, userId);
+			return groupLocalService.getUserGroupGroup(companyId, userGroupId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;
@@ -279,14 +284,16 @@ public class GroupLocalServiceUtil {
 		}
 	}
 
-	public static java.util.List getUserGroups(java.lang.String companyId,
-		java.lang.String userId, boolean privateLayout)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List getUserGroupsGroups(java.util.List userGroups)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
 		try {
 			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.getUserGroups(companyId, userId,
-				privateLayout);
+			return groupLocalService.getUserGroupsGroups(userGroups);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;
@@ -332,28 +339,14 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.util.Map params)
+		java.lang.String name, java.lang.String description,
+		java.util.Map params, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		try {
 			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.search(companyId, name, params);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
-	public static java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.util.Map params, int begin, int end)
-		throws com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
-
-			return groupLocalService.search(companyId, name, params, begin, end);
+			return groupLocalService.search(companyId, name, description,
+				params, begin, end);
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;
@@ -364,12 +357,13 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static int searchCount(java.lang.String companyId,
-		java.lang.String name, java.util.Map params)
-		throws com.liferay.portal.SystemException {
+		java.lang.String name, java.lang.String description,
+		java.util.Map params) throws com.liferay.portal.SystemException {
 		try {
 			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.searchCount(companyId, name, params);
+			return groupLocalService.searchCount(companyId, name, description,
+				params);
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;

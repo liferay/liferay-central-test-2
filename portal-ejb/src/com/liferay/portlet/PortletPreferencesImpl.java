@@ -46,6 +46,9 @@ import javax.portlet.PreferencesValidator;
 import javax.portlet.ReadOnlyException;
 import javax.portlet.ValidatorException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="PortletPreferencesImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -200,13 +203,12 @@ public class PortletPreferencesImpl
 		if (_defaultPreferences == null) {
 			try {
 				if (!_pk.portletId.equals(PortletKeys.LIFERAY_PORTAL)) {
-					_defaultPreferences =
-						PortletPreferencesLocalServiceUtil.getDefaultPreferences(
-							_companyId, _pk.portletId);
+					_defaultPreferences = PortletPreferencesLocalServiceUtil.
+						getDefaultPreferences(_companyId, _pk.portletId);
 				}
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e);
 			}
 		}
 
@@ -245,7 +247,7 @@ public class PortletPreferencesImpl
 			PortletPreferencesLocalServiceUtil.updatePreferences(_pk, this);
 		}
 		catch (PortalException pe) {
-			pe.printStackTrace();
+			_log.error(pe);
 
 			throw new IOException(pe.getMessage());
 		}
@@ -341,7 +343,9 @@ public class PortletPreferencesImpl
 		return xmlSafeValues;
 	}
 
-	private static String _NULL_VALUE = "NULL_VALUE";
+	private static final String _NULL_VALUE = "NULL_VALUE";
+
+	private static Log _log = LogFactory.getLog(PortletPreferencesImpl.class);
 
 	private String _companyId = null;
 	private PortletPreferencesPK _pk = null;

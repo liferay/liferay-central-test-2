@@ -96,7 +96,7 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 
 		for (int i = 0; i < systemRoles.length; i++) {
 			try {
-				RoleFinder.findByC_N_2(companyId, systemRoles[i]);
+				RoleFinder.findByC_N(companyId, systemRoles[i]);
 			}
 			catch (NoSuchRoleException nsre) {
 				addRole(null, companyId, systemRoles[i]);
@@ -141,7 +141,7 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 	public Role getRole(String companyId, String name)
 		throws PortalException, SystemException {
 
-		return RoleFinder.findByC_N_2(companyId, name);
+		return RoleFinder.findByC_N(companyId, name);
 	}
 
 	public List getUserRoles(String userId)
@@ -153,7 +153,7 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 	public boolean hasUserRole(String userId, String companyId, String name)
 		throws PortalException, SystemException {
 
-		Role role = RoleFinder.findByC_N_2(companyId, name);
+		Role role = RoleFinder.findByC_N(companyId, name);
 
 		return UserUtil.containsRole(userId, role.getRoleId());
 	}
@@ -170,20 +170,18 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 		return false;
 	}
 
-	public List search(String companyId, String name) throws SystemException {
-		return RoleFinder.findByC_N_1(companyId, name);
-	}
-
-	public List search(String companyId, String name, int begin, int end)
+	public List search(
+			String companyId, String name, String description, int begin,
+			int end)
 		throws SystemException {
 
-		return RoleFinder.findByC_N_1(companyId, name, begin, end);
+		return RoleFinder.findByC_N_D(companyId, name, description, begin, end);
 	}
 
-	public int searchCount(String companyId, String name)
+	public int searchCount(String companyId, String name, String description)
 		throws SystemException {
 
-		return RoleFinder.countByC_N_1(companyId, name);
+		return RoleFinder.countByC_N_D(companyId, name, description);
 	}
 
 	public void setUserRoles(String userId, String[] roleIds)
@@ -221,7 +219,7 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 		}
 
 		try {
-			Role role = RoleFinder.findByC_N_2(companyId, name);
+			Role role = RoleFinder.findByC_N(companyId, name);
 
 			if ((roleId == null) || !role.getRoleId().equals(roleId)) {
 				throw new DuplicateRoleException();

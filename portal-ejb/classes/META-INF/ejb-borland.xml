@@ -176,6 +176,14 @@
 			<bean-home-name>com_liferay_portal_service_ejb_UserServiceEJB</bean-home-name>
 		</session>
 		<session>
+			<ejb-name>com_liferay_portal_service_ejb_UserGroupLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/UserGroupLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portal_service_ejb_UserGroupServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portal_service_ejb_UserGroupServiceEJB</bean-home-name>
+		</session>
+		<session>
 			<ejb-name>com_liferay_portal_service_ejb_UserIdMapperLocalServiceEJB</ejb-name>
 			<bean-local-home-name>ejb/liferay/UserIdMapperLocalServiceHome</bean-local-home-name>
 		</session>

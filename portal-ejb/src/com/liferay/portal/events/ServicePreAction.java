@@ -70,8 +70,10 @@ import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 import javax.portlet.PortletMode;
@@ -629,8 +631,12 @@ public class ServicePreAction extends Action {
 			// Check the user's communities
 
 			if (layout == null) {
-				List groups = GroupLocalServiceUtil.getUserGroups(
-					user.getCompanyId(), user.getUserId());
+				Map groupParams = new HashMap();
+
+				groupParams.put("usersGroups", user.getUserId());
+
+				List groups = GroupLocalServiceUtil.search(
+					user.getCompanyId(), null, null, groupParams, -1, -1);
 
 				for (int i = 0; i < groups.size(); i++) {
 					Group group = (Group)groups.get(i);

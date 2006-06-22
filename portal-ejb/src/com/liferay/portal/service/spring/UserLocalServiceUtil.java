@@ -69,6 +69,26 @@ public class UserLocalServiceUtil {
 		}
 	}
 
+	public static boolean addUserGroupUsers(java.lang.String userGroupId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+			return userLocalService.addUserGroupUsers(userGroupId, userIds);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static com.liferay.portal.model.User addUser(
 		java.lang.String creatorUserId, java.lang.String companyId,
 		boolean autoUserId, java.lang.String userId, boolean autoPassword,
@@ -504,6 +524,26 @@ public class UserLocalServiceUtil {
 		}
 	}
 
+	public static boolean hasUserGroupUser(java.lang.String userGroupId,
+		java.lang.String userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+			return userLocalService.hasUserGroupUser(userGroupId, userId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static java.util.List search(java.lang.String companyId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String emailAddress,
@@ -603,6 +643,25 @@ public class UserLocalServiceUtil {
 		}
 	}
 
+	public static void setUserGroupUsers(java.lang.String userGroupId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			UserLocalService userLocalService = UserLocalServiceFactory.getService();
+			userLocalService.setUserGroupUsers(userGroupId, userIds);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static boolean unsetGroupUsers(java.lang.String groupId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
@@ -631,6 +690,26 @@ public class UserLocalServiceUtil {
 			UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 			return userLocalService.unsetRoleUsers(roleId, userIds);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static boolean unsetUserGroupUsers(java.lang.String userGroupId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+			return userLocalService.unsetUserGroupUsers(userGroupId, userIds);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

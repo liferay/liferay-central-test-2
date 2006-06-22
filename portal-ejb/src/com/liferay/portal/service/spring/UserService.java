@@ -39,6 +39,11 @@ public interface UserService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
+	public boolean addUserGroupUsers(java.lang.String userGroupId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public com.liferay.portal.model.User addUser(java.lang.String companyId,
 		boolean autoUserId, java.lang.String userId, boolean autoPassword,
 		java.lang.String password1, java.lang.String password2,
@@ -84,12 +89,22 @@ public interface UserService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
+	public void setUserGroupUsers(java.lang.String userGroupId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public boolean unsetGroupUsers(java.lang.String groupId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public boolean unsetRoleUsers(java.lang.String roleId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public boolean unsetUserGroupUsers(java.lang.String userGroupId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;

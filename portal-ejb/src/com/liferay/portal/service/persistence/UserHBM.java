@@ -68,8 +68,17 @@ public class UserHBM extends User {
 		_roles = roles;
 	}
 
+	protected Set getUserGroups() {
+		return _userGroups;
+	}
+
+	protected void setUserGroups(Set userGroups) {
+		_userGroups = userGroups;
+	}
+
 	private Set _groups;
 	private Set _orgs;
 	private Set _permissions;
 	private Set _roles;
+	private Set _userGroups;
 }

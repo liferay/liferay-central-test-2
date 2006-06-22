@@ -51,23 +51,26 @@ import org.hibernate.Session;
  */
 public class GroupFinder {
 
-	public static String COUNT_BY_C_N_1 =
-		GroupFinder.class.getName() + ".countByC_N_1";
+	public static String COUNT_BY_GROUP_ID =
+		GroupFinder.class.getName() + ".countByGroupId";
 
-	public static String COUNT_BY_GROUPS_ORGS =
-		GroupFinder.class.getName() + ".countByGroupsOrgs";
+	public static String COUNT_BY_C_N_D =
+		GroupFinder.class.getName() + ".countByC_N_D";
 
-	public static String FIND_BY_C_N_1 =
-		GroupFinder.class.getName() + ".findByC_N_1";
+	public static String FIND_BY_C_N =
+		GroupFinder.class.getName() + ".findByC_N";
 
-	public static String FIND_BY_C_N_2 =
-		GroupFinder.class.getName() + ".findByC_N_2";
+	public static String FIND_BY_C_N_D =
+		GroupFinder.class.getName() + ".findByC_N_D";
 
-	public static String FIND_BY_GROUPS_ORGS =
-		GroupFinder.class.getName() + ".findByGroupsOrgs";
+	public static String JOIN_BY_GROUPS_ORGS =
+		GroupFinder.class.getName() + ".joinByGroupsOrgs";
 
 	public static String JOIN_BY_GROUPS_ROLES =
 		GroupFinder.class.getName() + ".joinByGroupsRoles";
+
+	public static String JOIN_BY_GROUPS_USER_GROUPS =
+		GroupFinder.class.getName() + ".joinByGroupsUserGroups";
 
 	public static String JOIN_BY_LAYOUT_SET =
 		GroupFinder.class.getName() + ".joinByLayoutSet";
@@ -78,44 +81,90 @@ public class GroupFinder {
 	public static String JOIN_BY_USERS_GROUPS =
 		GroupFinder.class.getName() + ".joinByUsersGroups";
 
-	public static int countByC_N_1(String companyId, String name, Map params)
+	public static int countByG_U(String groupId, String userId)
+		throws SystemException {
+
+		Map params1 = new HashMap();
+
+		params1.put("usersGroups", userId);
+
+		Map params2 = new HashMap();
+
+		params2.put("groupsOrgs", userId);
+
+		Map params3 = new HashMap();
+
+		params3.put("groupsUserGroups", userId);
+
+		int count = 0;
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			count += _countByGroupId(session, groupId, params1);
+			count += _countByGroupId(session, groupId, params2);
+			count += _countByGroupId(session, groupId, params3);
+
+			return count;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static int countByC_N_D(
+			String companyId, String name, String description, Map params)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
+		description = StringUtil.lowerCase(description);
+
+		String userId = (String)params.get("usersGroups");
+
+		Map params1 = params;
+
+		Map params2 = new HashMap();
+
+		params2.putAll(params1);
+
+		if (Validator.isNotNull(userId)) {
+			params2.remove("usersGroups");
+			params2.put("groupsOrgs", userId);
+		}
+
+		Map params3 = new HashMap();
+
+		params3.putAll(params1);
+
+		if (Validator.isNotNull(userId)) {
+			params3.remove("usersGroups");
+			params3.put("groupsUserGroups", userId);
+		}
+
+		int count = 0;
 
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_N_1);
+			count += _countByC_N_D(
+				session, companyId, name, description, params1);
 
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
+			if (Validator.isNotNull(userId)) {
+				count += _countByC_N_D(
+					session, companyId, name, description, params2);
 
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			_setJoin(qPos, params);
-			qPos.add(companyId);
-			qPos.add(StringPool.BLANK);
-			qPos.add(StringPool.BLANK);
-			qPos.add(name);
-			qPos.add(name);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
+				count += _countByC_N_D(
+					session, companyId, name, description, params3);
 			}
 
-			return 0;
+			return count;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -125,146 +174,7 @@ public class GroupFinder {
 		}
 	}
 
-	public static int countByGroupsOrgs(String groupId, String userId)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_GROUPS_ORGS);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(userId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-	}
-
-	public static List findByC_N_1(String companyId, String name, Map params)
-		throws SystemException {
-
-		name = StringUtil.lowerCase(name);
-
-		List list = new ArrayList();
-
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_C_N_1);
-
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar("groupId", Hibernate.STRING);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			_setJoin(qPos, params);
-			qPos.add(companyId);
-			qPos.add(StringPool.BLANK);
-			qPos.add(StringPool.BLANK);
-			qPos.add(name);
-			qPos.add(name);
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				String groupId = (String)itr.next();
-
-				Group group = GroupUtil.findByPrimaryKey(groupId);
-
-				list.add(group);
-			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-
-		return list;
-	}
-
-	public static List findByC_N_1(
-			String companyId, String name, Map params, int begin, int end)
-		throws SystemException {
-
-		name = StringUtil.lowerCase(name);
-
-		List list = new ArrayList();
-
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_C_N_1);
-
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar("groupId", Hibernate.STRING);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			_setJoin(qPos, params);
-			qPos.add(companyId);
-			qPos.add(StringPool.BLANK);
-			qPos.add(StringPool.BLANK);
-			qPos.add(name);
-			qPos.add(name);
-
-			Iterator itr = QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				String groupId = (String)itr.next();
-
-				Group group = GroupUtil.findByPrimaryKey(groupId);
-
-				list.add(group);
-			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-
-		return list;
-	}
-
-	public static Group findByC_N_2(String companyId, String name)
+	public static Group findByC_N(String companyId, String name)
 		throws NoSuchGroupException, SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -274,7 +184,7 @@ public class GroupFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_N_2);
+			String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -305,20 +215,34 @@ public class GroupFinder {
 				name + "}");
 	}
 
-	public static List findByGroupsOrgs(
-			String companyId, String userId, Boolean privateLayout)
+	public static List findByC_N_D(
+			String companyId, String name, String description, Map params,
+			int begin, int end)
 		throws SystemException {
 
-		String name = null;
+		name = StringUtil.lowerCase(name);
+		description = StringUtil.lowerCase(description);
 
-		Map cn1Params = new HashMap();
-		Map orgsGroupsParams = new HashMap();
+		String userId = (String)params.get("usersGroups");
 
-		cn1Params.put("usersGroups", userId);
+		Map params1 = params;
 
-		if (privateLayout != null) {
-			cn1Params.put("layoutSet", privateLayout);
-			orgsGroupsParams.put("layoutSet", privateLayout);
+		Map params2 = new HashMap();
+
+		params2.putAll(params1);
+
+		if (Validator.isNotNull(userId)) {
+			params2.remove("usersGroups");
+			params2.put("groupsOrgs", userId);
+		}
+
+		Map params3 = new HashMap();
+
+		params3.putAll(params1);
+
+		if (Validator.isNotNull(userId)) {
+			params3.remove("usersGroups");
+			params3.put("groupsUserGroups", userId);
 		}
 
 		List list = new ArrayList();
@@ -331,17 +255,25 @@ public class GroupFinder {
 			String sql = null;
 
 			sql = "(";
-			sql += CustomSQLUtil.get(FIND_BY_C_N_1);
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(cn1Params));
+			sql += CustomSQLUtil.get(FIND_BY_C_N_D);
+			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params1));
 			sql += ")";
 
-			sql += " UNION ";
+			if (Validator.isNotNull(userId)) {
+				sql += " UNION ";
 
-			sql += "(";
-			sql += CustomSQLUtil.get(FIND_BY_GROUPS_ORGS);
-			sql = StringUtil.replace(
-				sql, "[$JOIN$]", _getJoin(orgsGroupsParams));
-			sql += ")";
+				sql += "(";
+				sql += CustomSQLUtil.get(FIND_BY_C_N_D);
+				sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params2));
+				sql += ")";
+
+				sql += " UNION ";
+
+				sql += "(";
+				sql += CustomSQLUtil.get(FIND_BY_C_N_D);
+				sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params3));
+				sql += ")";
+			}
 
 			sql += " ORDER BY groupName ASC";
 
@@ -351,17 +283,31 @@ public class GroupFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setJoin(qPos, cn1Params);
+			_setJoin(qPos, params1);
 			qPos.add(companyId);
-			qPos.add(StringPool.BLANK);
-			qPos.add(StringPool.BLANK);
 			qPos.add(name);
 			qPos.add(name);
+			qPos.add(description);
+			qPos.add(description);
 
-			_setJoin(qPos, orgsGroupsParams);
-			qPos.add(userId);
+			if (Validator.isNotNull(userId)) {
+				_setJoin(qPos, params2);
+				qPos.add(companyId);
+				qPos.add(name);
+				qPos.add(name);
+				qPos.add(description);
+				qPos.add(description);
 
-			Iterator itr = q.list().iterator();
+				_setJoin(qPos, params3);
+				qPos.add(companyId);
+				qPos.add(name);
+				qPos.add(name);
+				qPos.add(description);
+				qPos.add(description);
+			}
+
+			Iterator itr = QueryUtil.iterate(
+				q, HibernateUtil.getDialect(), begin, end);
 
 			while (itr.hasNext()) {
 				String groupId = (String)itr.next();
@@ -381,6 +327,71 @@ public class GroupFinder {
 		return list;
 	}
 
+	private static int _countByGroupId(
+			Session session, String groupId, Map params)
+		throws SystemException {
+
+		String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
+
+		sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		_setJoin(qPos, params);
+		qPos.add(groupId);
+
+		Iterator itr = q.list().iterator();
+
+		if (itr.hasNext()) {
+			Long count = (Long)itr.next();
+
+			if (count != null) {
+				return count.intValue();
+			}
+		}
+
+		return 0;
+	}
+
+	private static int _countByC_N_D(
+			Session session, String companyId, String name, String description,
+			Map params)
+		throws SystemException {
+
+		String sql = CustomSQLUtil.get(COUNT_BY_C_N_D);
+
+		sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		_setJoin(qPos, params);
+		qPos.add(companyId);
+		qPos.add(name);
+		qPos.add(name);
+		qPos.add(description);
+		qPos.add(description);
+
+		Iterator itr = q.list().iterator();
+
+		if (itr.hasNext()) {
+			Long count = (Long)itr.next();
+
+			if (count != null) {
+				return count.intValue();
+			}
+		}
+
+		return 0;
+	}
+
 	private static String _getJoin(Map params) {
 		if (params == null) {
 			return StringPool.BLANK;
@@ -394,16 +405,10 @@ public class GroupFinder {
 			Map.Entry entry = (Map.Entry)itr.next();
 
 			String key = (String)entry.getKey();
+			Object value = entry.getValue();
 
-			if (key.equals("layoutSet") || key.equals("rolePermissions")) {
+			if (value != null) {
 				sb.append(_getJoin(key));
-			}
-			else {
-				String value = (String)entry.getValue();
-
-				if (Validator.isNotNull(value)) {
-					sb.append(_getJoin(key));
-				}
 			}
 		}
 
@@ -413,8 +418,14 @@ public class GroupFinder {
 	private static String _getJoin(String key) {
 		StringBuffer sb = new StringBuffer();
 
-		if (key.equals("groupsRoles")) {
+		if (key.equals("groupsOrgs")) {
+			sb.append(CustomSQLUtil.get(JOIN_BY_GROUPS_ORGS));
+		}
+		else if (key.equals("groupsRoles")) {
 			sb.append(CustomSQLUtil.get(JOIN_BY_GROUPS_ROLES));
+		}
+		else if (key.equals("groupsUserGroups")) {
+			sb.append(CustomSQLUtil.get(JOIN_BY_GROUPS_USER_GROUPS));
 		}
 		else if (key.equals("layoutSet")) {
 			sb.append(CustomSQLUtil.get(JOIN_BY_LAYOUT_SET));
@@ -442,7 +453,6 @@ public class GroupFinder {
 					Boolean value = (Boolean)entry.getValue();
 
 					qPos.add(value);
-					qPos.add(0);
 				}
 				else if (key.equals("rolePermissions")) {
 					List values = (List)entry.getValue();

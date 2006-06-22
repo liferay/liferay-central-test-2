@@ -115,19 +115,14 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 	}
 
 	public java.util.List search(java.lang.String companyId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
-		return getService().search(companyId, name);
+		java.lang.String name, java.lang.String description, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().search(companyId, name, description, begin, end);
 	}
 
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, int begin, int end)
-		throws com.liferay.portal.SystemException {
-		return getService().search(companyId, name, begin, end);
-	}
-
-	public int searchCount(java.lang.String companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException {
-		return getService().searchCount(companyId, name);
+	public int searchCount(java.lang.String companyId, java.lang.String name,
+		java.lang.String description) throws com.liferay.portal.SystemException {
+		return getService().searchCount(companyId, name, description);
 	}
 
 	public void setUserRoles(java.lang.String userId, java.lang.String[] roleIds)

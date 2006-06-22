@@ -30,8 +30,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
 String roleId = BeanParamUtil.getString(role, request, "roleId");
-
-String name = BeanParamUtil.getString(role, request, "name");
 %>
 
 <script type="text/javascript">
@@ -74,7 +72,7 @@ String name = BeanParamUtil.getString(role, request, "name");
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />name" size="30" type="text" value="<%= name %>">
+		<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="name" />
 	</td>
 </tr>
 </table>

@@ -33,7 +33,7 @@
 
 	tabs1URL.setParameter("struts_action", "/enterprise_admin/view");
 
-	String tabs1Names = "users,organizations,locations";
+	String tabs1Names = "users,organizations,locations,user-groups";
 	String tabs1Values = tabs1Names;
 
 	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {

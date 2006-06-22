@@ -387,6 +387,14 @@
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_user.jsp" />
 	</definition>
 
+	<definition name="portlet.enterprise_admin.edit_user_group" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/edit_user_group.jsp" />
+	</definition>
+
+	<definition name="portlet.enterprise_admin.edit_user_group_assignments" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/edit_user_group_assignments.jsp" />
+	</definition>
+
 	<definition name="portlet.enterprise_admin.edit_user_portrait" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_user_portrait.jsp" />
 	</definition>

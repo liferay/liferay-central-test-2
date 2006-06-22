@@ -37,6 +37,7 @@ import com.liferay.portal.service.spring.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.spring.PermissionServiceUtil;
 import com.liferay.portal.service.spring.ResourceServiceUtil;
 import com.liferay.portal.service.spring.RoleServiceUtil;
+import com.liferay.portal.service.spring.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.spring.UserServiceUtil;
 import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.util.CollectionFactory;
@@ -107,8 +108,15 @@ public class PermissionChecker {
 				List userOrgGroups = GroupServiceUtil.getOrganizationsGroups(
 					userOrgs);
 
+				List userUserGroups =
+					UserGroupLocalServiceUtil.getUserUserGroups(
+						user.getUserId());
+
+				List userUserGroupGroups = GroupServiceUtil.getUserGroupsGroups(
+					userUserGroups);
+
 				permissionCheckerBag = new PermissionCheckerBag(
-					userOrgs, userOrgGroups);
+					userOrgs, userOrgGroups, userUserGroupGroups);
 			}
 			catch (Exception e) {
 				_log.error(StackTraceUtil.getStackTrace(e));

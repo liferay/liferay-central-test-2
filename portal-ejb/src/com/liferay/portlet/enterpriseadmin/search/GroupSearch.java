@@ -56,6 +56,8 @@ public class GroupSearch extends SearchContainer {
 
 		iteratorURL.setParameter(
 			GroupDisplayTerms.NAME, displayTerms.getName());
+		iteratorURL.setParameter(
+			GroupDisplayTerms.DESCRIPTION, displayTerms.getDescription());
 	}
 
 }

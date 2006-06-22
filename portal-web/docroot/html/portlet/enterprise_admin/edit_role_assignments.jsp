@@ -44,15 +44,17 @@ portletURL.setParameter("roleId", role.getRoleId());
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />updateRoleGroups() {
+	function <portlet:namespace />updateRoleGroups(redirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "role_groups";
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
 		document.<portlet:namespace />fm.<portlet:namespace />addGroupIds.value = listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		document.<portlet:namespace />fm.<portlet:namespace />removeGroupIds.value = listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />updateRoleUsers() {
+	function <portlet:namespace />updateRoleUsers(redirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "role_users";
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
 		document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
@@ -64,7 +66,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>">
+<input name="<portlet:namespace />redirect" type="hidden" value="">
 <input name="<portlet:namespace />roleId" type="hidden" value="<%= role.getRoleId() %>">
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
@@ -76,7 +78,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 <br><br>
 
 <liferay-ui:tabs
-	names="users,communities,organizations,locations"
+	names="users,communities,organizations,locations,user-groups"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
 />
@@ -123,7 +125,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 
 		<br><div class="beta-separator"></div><br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleUsers();">
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
 		<br><br>
 
@@ -187,18 +189,18 @@ portletURL.setParameter("roleId", role.getRoleId());
 			groupParams.put("groupsRoles", role.getRoleId());
 		}
 
-		int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), groupParams);
+		int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
 
 		searchContainer.setTotal(total);
 
-		List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), groupParams, searchContainer.getStart(), searchContainer.getEnd());
+		List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 		%>
 
 		<br><div class="beta-separator"></div><br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups();">
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
 		<br><br>
 
@@ -266,12 +268,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 		Map organizationParams = new HashMap();
 
 		if (tabs3.equals("current")) {
-			List organizationsRoles = new ArrayList();
-
-			organizationsRoles.add(Organization.class.getName());
-			organizationsRoles.add(role.getRoleId());
-
-			organizationParams.put("organizationsRoles", organizationsRoles);
+			organizationParams.put("organizationsRoles", role.getRoleId());
 		}
 
 		int total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionId(), searchTerms.getCountryId(), organizationParams, searchTerms.isAndOperator());
@@ -285,7 +282,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 
 		<br><div class="beta-separator"></div><br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups();">
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
 		<br><br>
 
@@ -317,6 +314,81 @@ portletURL.setParameter("roleId", role.getRoleId());
 			Address address = organization.getAddress();
 
 			row.addText(address.getCity());
+
+			// Add result row
+
+			resultRows.add(row);
+		}
+		%>
+
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+	</c:when>
+	<c:when test='<%= tabs2.equals("user-groups") %>'>
+		<input name="<portlet:namespace />addGroupIds" type="hidden" value="">
+		<input name="<portlet:namespace />removeGroupIds" type="hidden" value="">
+
+		<liferay-ui:tabs
+			names="current,available"
+			param="tabs3"
+			url="<%= portletURL.toString() %>"
+		/>
+
+		<%
+		UserGroupSearch searchContainer = new UserGroupSearch(renderRequest, portletURL);
+
+		searchContainer.setRowChecker(new UserGroupRoleChecker(renderResponse, role));
+		%>
+
+		<liferay-ui:search-form
+			page="/html/portlet/enterprise_admin/user_group_search.jsp"
+			searchContainer="<%= searchContainer %>"
+		/>
+
+		<%
+		UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
+
+		Map userGroupParams = new HashMap();
+
+		if (tabs3.equals("current")) {
+			List userGroupsRoles = new ArrayList();
+
+			userGroupParams.put("userGroupsRoles", role.getRoleId());
+		}
+
+		int total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams);
+
+		searchContainer.setTotal(total);
+
+		List results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd());
+
+		searchContainer.setResults(results);
+		%>
+
+		<br><div class="beta-separator"></div><br>
+
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+
+		<br><br>
+
+		<%
+		List headerNames = new ArrayList();
+
+		headerNames.add("name");
+
+		searchContainer.setHeaderNames(headerNames);
+
+		List resultRows = searchContainer.getResultRows();
+
+		for (int i = 0; i < results.size(); i++) {
+			UserGroup userGroup = (UserGroup)results.get(i);
+
+			ResultRow row = new ResultRow(userGroup, userGroup.getGroup().getPrimaryKey().toString(), i);
+
+			// Name
+
+			row.addText(userGroup.getName());
 
 			// Add result row
 

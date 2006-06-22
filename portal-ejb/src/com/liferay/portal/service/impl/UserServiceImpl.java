@@ -32,6 +32,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.RolePermission;
+import com.liferay.portal.service.permission.UserGroupPermission;
 import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -64,6 +65,15 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
 		return UserLocalServiceUtil.addRoleUsers(roleId, userIds);
+	}
+
+	public boolean addUserGroupUsers(String userGroupId, String[] userIds)
+		throws PortalException, SystemException {
+
+		UserGroupPermission.check(
+			getPermissionChecker(), userGroupId, ActionKeys.UPDATE);
+
+		return UserLocalServiceUtil.addUserGroupUsers(userGroupId, userIds);
 	}
 
 	public User addUser(
@@ -159,6 +169,15 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.setRoleUsers(roleId, userIds);
 	}
 
+	public void setUserGroupUsers(String userGroupId, String[] userIds)
+		throws PortalException, SystemException {
+
+		UserGroupPermission.check(
+			getPermissionChecker(), userGroupId, ActionKeys.UPDATE);
+
+		UserLocalServiceUtil.setUserGroupUsers(userGroupId, userIds);
+	}
+
 	public boolean unsetGroupUsers(String groupId, String[] userIds)
 		throws PortalException, SystemException {
 
@@ -173,6 +192,15 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
 		return UserLocalServiceUtil.unsetRoleUsers(roleId, userIds);
+	}
+
+	public boolean unsetUserGroupUsers(String userGroupId, String[] userIds)
+		throws PortalException, SystemException {
+
+		UserGroupPermission.check(
+			getPermissionChecker(), userGroupId, ActionKeys.UPDATE);
+
+		return UserLocalServiceUtil.unsetUserGroupUsers(userGroupId, userIds);
 	}
 
 	public User updateActive(String userId, boolean active)

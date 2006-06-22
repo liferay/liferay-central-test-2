@@ -27,7 +27,7 @@
 <%
 groupId = ParamUtil.getString(request, "groupId", groupId);
 
-List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null);
+List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, null, -1, -1);
 %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">

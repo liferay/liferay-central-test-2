@@ -37,9 +37,12 @@ public class PermissionCheckerBag implements Serializable {
 	public PermissionCheckerBag() {
 	}
 
-	public PermissionCheckerBag(List userOrgs, List userOrgGroups) {
+	public PermissionCheckerBag(List userOrgs, List userOrgGroups,
+								List userUserGroupGroups) {
+
 		_userOrgs = userOrgs;
 		_userOrgGroups = userOrgGroups;
+		_userUserGroupGroups = userUserGroupGroups;
 	}
 
 	public List getUserOrgs() {
@@ -50,7 +53,12 @@ public class PermissionCheckerBag implements Serializable {
 		return _userOrgGroups;
 	}
 
+	public List getUserUserGroupGroups() {
+		return _userUserGroupGroups;
+	}
+
 	private List _userOrgs = null;
 	private List _userOrgGroups = null;
+	private List _userUserGroupGroups = null;
 
 }

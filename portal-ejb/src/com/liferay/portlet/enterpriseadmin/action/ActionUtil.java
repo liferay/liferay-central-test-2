@@ -28,6 +28,7 @@ import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.service.spring.AddressServiceUtil;
 import com.liferay.portal.service.spring.EmailAddressServiceUtil;
@@ -35,6 +36,7 @@ import com.liferay.portal.service.spring.OrgLaborServiceUtil;
 import com.liferay.portal.service.spring.OrganizationServiceUtil;
 import com.liferay.portal.service.spring.PhoneServiceUtil;
 import com.liferay.portal.service.spring.RoleServiceUtil;
+import com.liferay.portal.service.spring.UserGroupServiceUtil;
 import com.liferay.portal.service.spring.WebsiteServiceUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
@@ -217,6 +219,34 @@ public class ActionUtil {
 		}
 
 		req.setAttribute(WebKeys.ROLE, role);
+	}
+
+	public static void getUserGroup(ActionRequest req) throws Exception {
+		HttpServletRequest httpReq =
+			((ActionRequestImpl)req).getHttpServletRequest();
+
+		getUserGroup(httpReq);
+	}
+
+	public static void getUserGroup(RenderRequest req) throws Exception {
+		HttpServletRequest httpReq =
+			((RenderRequestImpl)req).getHttpServletRequest();
+
+		getUserGroup(httpReq);
+	}
+
+	public static void getUserGroup(HttpServletRequest req)
+		throws Exception {
+
+		String userGroupId = ParamUtil.getString(req, "userGroupId");
+
+		UserGroup userGroup = null;
+
+		if (Validator.isNotNull(userGroupId)) {
+			userGroup = UserGroupServiceUtil.getUserGroup(userGroupId);
+		}
+
+		req.setAttribute(WebKeys.USER_GROUP, userGroup);
 	}
 
 	public static void getWebsite(ActionRequest req) throws Exception {

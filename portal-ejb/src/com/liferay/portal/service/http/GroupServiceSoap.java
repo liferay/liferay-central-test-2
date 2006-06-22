@@ -111,6 +111,20 @@ public class GroupServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.GroupModel[] getUserGroupsGroups(
+		java.util.List userGroups) throws RemoteException {
+		try {
+			java.util.List returnValue = GroupServiceUtil.getUserGroupsGroups(userGroups);
+
+			return (com.liferay.portal.model.Group[])returnValue.toArray(new com.liferay.portal.model.Group[0]);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static void setRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds) throws RemoteException {
 		try {

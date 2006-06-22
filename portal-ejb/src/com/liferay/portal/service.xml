@@ -274,6 +274,7 @@
 		<column name="orgs" type="Collection" entity="Organization" mapping-table="Groups_Orgs" />
 		<column name="permissions" type="Collection" entity="Permission" mapping-table="Groups_Permissions" />
 		<column name="roles" type="Collection" entity="Role" mapping-table="Groups_Roles" />
+		<column name="userGroups" type="Collection" entity="UserGroup" mapping-table="Groups_UserGroups" />
 		<column name="users" type="Collection" entity="User" mapping-table="Users_Groups" />
 
 		<!-- Order -->
@@ -911,6 +912,7 @@
 		<column name="orgs" type="Collection" entity="Organization" mapping-table="Users_Orgs" />
 		<column name="permissions" type="Collection" entity="Permission" mapping-table="Users_Permissions" />
 		<column name="roles" type="Collection" entity="Role" mapping-table="Users_Roles" />
+		<column name="userGroups" type="Collection" entity="UserGroup" mapping-table="Users_UserGroups" />
 
 		<!-- Finder methods -->
 
@@ -935,6 +937,46 @@
 		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFileRank" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessageFlag" />
 		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingCart" />
+	</entity>
+	<entity name="UserGroup" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="userGroupId" type="String" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="String" />
+
+		<!-- Other fields -->
+
+		<column name="parentUserGroupId" type="String" />
+		<column name="name" type="String" />
+		<column name="description" type="String" />
+
+		<!-- Relationships -->
+
+		<column name="users" type="Collection" entity="User" mapping-table="Users_UserGroups" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<!--<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="C_P" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="parentUserGroupId" />
+		</finder>
+		<finder name="C_N" return-type="UserGroup">
+			<finder-column name="companyId" />
+			<finder-column name="name" />
+		</finder>-->
 	</entity>
 	<entity name="UserIdMapper" local-service="true" remote-service="false">
 
@@ -1066,6 +1108,7 @@
 		<exception>DuplicateOrganization</exception>
 		<exception>DuplicateRole</exception>
 		<exception>DuplicateUserEmailAddress</exception>
+		<exception>DuplicateUserGroup</exception>
 		<exception>DuplicateUserId</exception>
 		<exception>GroupFriendlyURL</exception>
 		<exception>GroupName</exception>
@@ -1089,12 +1132,15 @@
 		<exception>RequiredOrganization</exception>
 		<exception>RequiredRole</exception>
 		<exception>RequiredUser</exception>
+		<exception>RequiredUser</exception>
+		<exception>RequiredUserGroup</exception>
 		<exception>ReservedUserEmailAddress</exception>
 		<exception>ReservedUserId</exception>
 		<exception>RoleName</exception>
 		<exception>SendPassword</exception>
 		<exception>UserActive</exception>
 		<exception>UserEmailAddress</exception>
+		<exception>UserGroupName</exception>
 		<exception>UserId</exception>
 		<exception>UserIdMapperExternalUserId</exception>
 		<exception>UserPassword</exception>

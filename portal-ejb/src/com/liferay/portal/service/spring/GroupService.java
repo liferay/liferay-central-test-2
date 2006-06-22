@@ -53,6 +53,10 @@ public interface GroupService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
+	public java.util.List getUserGroupsGroups(java.util.List userGroups)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public void setRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 

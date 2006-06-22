@@ -69,6 +69,26 @@ public class UserServiceUtil {
 		}
 	}
 
+	public static boolean addUserGroupUsers(java.lang.String userGroupId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			UserService userService = UserServiceFactory.getService();
+
+			return userService.addUserGroupUsers(userGroupId, userIds);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static com.liferay.portal.model.User addUser(
 		java.lang.String companyId, boolean autoUserId,
 		java.lang.String userId, boolean autoPassword,
@@ -238,6 +258,25 @@ public class UserServiceUtil {
 		}
 	}
 
+	public static void setUserGroupUsers(java.lang.String userGroupId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			UserService userService = UserServiceFactory.getService();
+			userService.setUserGroupUsers(userGroupId, userIds);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static boolean unsetGroupUsers(java.lang.String groupId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
@@ -266,6 +305,26 @@ public class UserServiceUtil {
 			UserService userService = UserServiceFactory.getService();
 
 			return userService.unsetRoleUsers(roleId, userIds);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static boolean unsetUserGroupUsers(java.lang.String userGroupId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			UserService userService = UserServiceFactory.getService();
+
+			return userService.unsetUserGroupUsers(userGroupId, userIds);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

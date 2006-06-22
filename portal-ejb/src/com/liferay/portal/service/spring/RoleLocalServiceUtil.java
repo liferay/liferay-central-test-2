@@ -228,27 +228,13 @@ public class RoleLocalServiceUtil {
 	}
 
 	public static java.util.List search(java.lang.String companyId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
-		try {
-			RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
-
-			return roleLocalService.search(companyId, name);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
-	public static java.util.List search(java.lang.String companyId,
-		java.lang.String name, int begin, int end)
+		java.lang.String name, java.lang.String description, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		try {
 			RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
-			return roleLocalService.search(companyId, name, begin, end);
+			return roleLocalService.search(companyId, name, description, begin,
+				end);
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;
@@ -259,11 +245,12 @@ public class RoleLocalServiceUtil {
 	}
 
 	public static int searchCount(java.lang.String companyId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
+		java.lang.String name, java.lang.String description)
+		throws com.liferay.portal.SystemException {
 		try {
 			RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
-			return roleLocalService.searchCount(companyId, name);
+			return roleLocalService.searchCount(companyId, name, description);
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;

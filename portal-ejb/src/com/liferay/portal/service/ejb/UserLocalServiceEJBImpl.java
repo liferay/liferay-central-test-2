@@ -61,6 +61,13 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		return getService().addRoleUsers(roleId, userIds);
 	}
 
+	public boolean addUserGroupUsers(java.lang.String userGroupId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().addUserGroupUsers(userGroupId, userIds);
+	}
+
 	public com.liferay.portal.model.User addUser(
 		java.lang.String creatorUserId, java.lang.String companyId,
 		boolean autoUserId, java.lang.String userId, boolean autoPassword,
@@ -231,6 +238,13 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		return getService().hasRoleUser(roleId, userId);
 	}
 
+	public boolean hasUserGroupUser(java.lang.String userGroupId,
+		java.lang.String userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().hasUserGroupUser(userGroupId, userId);
+	}
+
 	public java.util.List search(java.lang.String companyId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String emailAddress,
@@ -272,6 +286,13 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		getService().setRoleUsers(roleId, userIds);
 	}
 
+	public void setUserGroupUsers(java.lang.String userGroupId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().setUserGroupUsers(userGroupId, userIds);
+	}
+
 	public boolean unsetGroupUsers(java.lang.String groupId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
@@ -284,6 +305,13 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return getService().unsetRoleUsers(roleId, userIds);
+	}
+
+	public boolean unsetUserGroupUsers(java.lang.String userGroupId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().unsetUserGroupUsers(userGroupId, userIds);
 	}
 
 	public com.liferay.portal.model.User updateActive(java.lang.String userId,

@@ -61,11 +61,11 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 		groupParams.put("usersGroups", user.getUserId());
 	}
 
-	int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), groupParams);
+	int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
 
 	searchContainer.setTotal(total);
 
-	List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), groupParams, searchContainer.getStart(), searchContainer.getEnd());
+	List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 	%>

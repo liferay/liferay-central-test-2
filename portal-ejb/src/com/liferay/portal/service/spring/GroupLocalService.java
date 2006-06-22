@@ -84,12 +84,14 @@ public interface GroupLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
-	public java.util.List getUserGroups(java.lang.String companyId,
-		java.lang.String userId) throws com.liferay.portal.SystemException;
+	public com.liferay.portal.model.Group getUserGroupGroup(
+		java.lang.String companyId, java.lang.String userGroupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
 
-	public java.util.List getUserGroups(java.lang.String companyId,
-		java.lang.String userId, boolean privateLayout)
-		throws com.liferay.portal.SystemException;
+	public java.util.List getUserGroupsGroups(java.util.List userGroups)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
 
 	public boolean hasRoleGroup(java.lang.String roleId,
 		java.lang.String groupId)
@@ -100,15 +102,13 @@ public interface GroupLocalService {
 		java.lang.String groupId) throws com.liferay.portal.SystemException;
 
 	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.util.Map params)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.util.Map params, int begin, int end)
+		java.lang.String name, java.lang.String description,
+		java.util.Map params, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(java.lang.String companyId, java.lang.String name,
-		java.util.Map params) throws com.liferay.portal.SystemException;
+		java.lang.String description, java.util.Map params)
+		throws com.liferay.portal.SystemException;
 
 	public void setRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)

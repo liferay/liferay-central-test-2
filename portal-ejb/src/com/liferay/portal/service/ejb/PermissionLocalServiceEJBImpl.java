@@ -145,13 +145,13 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 		getService().setGroupPermissions(groupId, actionIds, resourceId);
 	}
 
-	public void setGroupPermissions(java.lang.String organizationId,
-		java.lang.String groupId, java.lang.String[] actionIds,
-		java.lang.String resourceId)
+	public void setGroupPermissions(java.lang.String className,
+		java.lang.String classPK, java.lang.String groupId,
+		java.lang.String[] actionIds, java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().setGroupPermissions(organizationId, groupId, actionIds,
-			resourceId);
+		getService().setGroupPermissions(className, classPK, groupId,
+			actionIds, resourceId);
 	}
 
 	public void setOrgGroupPermissions(java.lang.String organizationId,

@@ -128,6 +128,25 @@ public class GroupServiceUtil {
 		}
 	}
 
+	public static java.util.List getUserGroupsGroups(java.util.List userGroups)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			GroupService groupService = GroupServiceFactory.getService();
+
+			return groupService.getUserGroupsGroups(userGroups);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static void setRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 

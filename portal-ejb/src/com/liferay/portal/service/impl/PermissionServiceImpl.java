@@ -85,14 +85,14 @@ public class PermissionServiceImpl
 	}
 
 	public void setGroupPermissions(
-			String organizationId, String groupId, String[] actionIds,
-			String resourceId)
+			String className, String classPK, String groupId,
+			String[] actionIds, String resourceId)
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
 
 		PermissionLocalServiceUtil.setGroupPermissions(
-			organizationId, groupId, actionIds, resourceId);
+			className, classPK, groupId, actionIds, resourceId);
 	}
 
 	public void setOrgGroupPermissions(

@@ -127,15 +127,17 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 		return getService().getUserGroup(companyId, userId);
 	}
 
-	public java.util.List getUserGroups(java.lang.String companyId,
-		java.lang.String userId) throws com.liferay.portal.SystemException {
-		return getService().getUserGroups(companyId, userId);
+	public com.liferay.portal.model.Group getUserGroupGroup(
+		java.lang.String companyId, java.lang.String userGroupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().getUserGroupGroup(companyId, userGroupId);
 	}
 
-	public java.util.List getUserGroups(java.lang.String companyId,
-		java.lang.String userId, boolean privateLayout)
-		throws com.liferay.portal.SystemException {
-		return getService().getUserGroups(companyId, userId, privateLayout);
+	public java.util.List getUserGroupsGroups(java.util.List userGroups)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().getUserGroupsGroups(userGroups);
 	}
 
 	public boolean hasRoleGroup(java.lang.String roleId,
@@ -151,20 +153,17 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 	}
 
 	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.util.Map params)
+		java.lang.String name, java.lang.String description,
+		java.util.Map params, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getService().search(companyId, name, params);
-	}
-
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, java.util.Map params, int begin, int end)
-		throws com.liferay.portal.SystemException {
-		return getService().search(companyId, name, params, begin, end);
+		return getService().search(companyId, name, description, params, begin,
+			end);
 	}
 
 	public int searchCount(java.lang.String companyId, java.lang.String name,
-		java.util.Map params) throws com.liferay.portal.SystemException {
-		return getService().searchCount(companyId, name, params);
+		java.lang.String description, java.util.Map params)
+		throws com.liferay.portal.SystemException {
+		return getService().searchCount(companyId, name, description, params);
 	}
 
 	public void setRoleGroups(java.lang.String roleId,

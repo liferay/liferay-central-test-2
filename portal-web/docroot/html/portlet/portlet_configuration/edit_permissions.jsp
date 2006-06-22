@@ -117,6 +117,29 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
 	}
 
+	function <portlet:namespace />saveUserGroupPermissions(userGroupIdsPos, userGroupIdsPosValue) {
+
+		<%
+		PortletURL saveUserGroupPermissionsRedirectURL = PortletURLUtil.clone(portletURL, false, renderResponse);
+
+		new UserGroupSearch(renderRequest, saveUserGroupPermissionsRedirectURL);
+		%>
+
+		var userGroupIds = document.<portlet:namespace />fm.<portlet:namespace />userGroupIds.value;
+
+		if (userGroupIdsPos == -1) {
+			userGroupIds = "";
+			userGroupIdsPos = 0;
+		}
+
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "user_group_permissions";
+		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveUserGroupPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= cur %>&<portlet:namespace />userGroupIds=" + userGroupIds + "&<portlet:namespace />userGroupIdsPos=" + userGroupIdsPos;
+		document.<portlet:namespace />fm.<portlet:namespace />userGroupIds.value = userGroupIds;
+		document.<portlet:namespace />fm.<portlet:namespace />userGroupIdsPosValue.value = userGroupIdsPosValue;
+		document.<portlet:namespace />fm.<portlet:namespace />userGroupIdActionIds.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
+	}
+
 	function <portlet:namespace />saveUserPermissions(userIdsPos, userIdsPosValue) {
 
 		<%
@@ -142,6 +165,11 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 	function <portlet:namespace />updateOrganizationPermissions() {
 		document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value = listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />updateUserGroupPermissions() {
+		document.<portlet:namespace />fm.<portlet:namespace />userGroupIds.value = listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
 	}
 
@@ -180,7 +208,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 </c:choose>
 
 <%
-String tabs2Names = "users,organizations,locations,community,guest,associated";
+String tabs2Names = "users,organizations,locations,user-groups,community,guest,associated";
 
 if (modelResource.equals(Organization.class.getName()) || modelResource.equals("com.liferay.portal.model.Location")) {
 	tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
@@ -620,6 +648,168 @@ else if (modelResource.equals(Layout.class.getName())) {
 					</td>
 					<td align="right">
 						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "finished") %>' onClick="<portlet:namespace />saveOrganizationPermissions(-1, '<%= organizationIdsArray[organizationIdsPos] %>');">
+					</td>
+				</tr>
+				</table>
+			</c:otherwise>
+		</c:choose>
+	</c:when>
+	<c:when test='<%= tabs2.equals("user-groups") %>'>
+
+		<%
+		String userGroupIds = ParamUtil.getString(request, "userGroupIds");
+		String[] userGroupIdsArray = StringUtil.split(userGroupIds);
+		int userGroupIdsPos = ParamUtil.getInteger(request, "userGroupIdsPos");
+		%>
+
+		<input name="<portlet:namespace />userGroupIds" type="hidden" value="<%= userGroupIds %>">
+		<input name="<portlet:namespace />userGroupIdsPos" type="hidden" value="<%= userGroupIdsPos %>">
+		<input name="<portlet:namespace />userGroupIdsPosValue" type="hidden" value="">
+		<input name="<portlet:namespace />userGroupIdActionIds" type="hidden" value="">
+
+		<c:choose>
+			<c:when test="<%= userGroupIdsArray.length == 0 %>">
+				<liferay-ui:tabs
+					names="current,available"
+					param="tabs3"
+					url="<%= portletURL.toString() %>"
+				/>
+
+				<%
+				UserGroupSearch searchContainer = new UserGroupSearch(renderRequest, portletURL);
+
+				searchContainer.setRowChecker(new RowChecker(renderResponse));
+				%>
+
+				<liferay-ui:search-form
+					page="/html/portlet/enterprise_admin/user_group_search.jsp"
+					searchContainer="<%= searchContainer %>"
+				/>
+
+				<%
+				UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
+
+				Map userGroupParams = new HashMap();
+
+				if (tabs3.equals("current")) {
+					userGroupParams.put("permissionsResourceId", resource.getResourceId());
+				}
+
+				int total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams);
+
+				searchContainer.setTotal(total);
+
+				List results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd());
+
+				searchContainer.setResults(results);
+				%>
+
+				<br><div class="beta-separator"></div><br>
+
+				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-permissions") %>' onClick="<portlet:namespace />updateUserGroupPermissions();">
+
+				<br><br>
+
+				<%
+				List headerNames = new ArrayList();
+
+				headerNames.add("name");
+				headerNames.add("permissions");
+
+				searchContainer.setHeaderNames(headerNames);
+
+				List resultRows = searchContainer.getResultRows();
+
+				for (int i = 0; i < results.size(); i++) {
+					UserGroup userGroup = (UserGroup)results.get(i);
+
+					ResultRow row = new ResultRow(userGroup, userGroup.getPrimaryKey().toString(), i);
+
+					// Name
+
+					row.addText(userGroup.getName());
+
+					// Permissions
+
+					List permissions = PermissionLocalServiceUtil.getGroupPermissions(userGroup.getGroup().getGroupId(), resource.getResourceId());
+
+					List actions = ResourceActionsUtil.getActions(permissions);
+					List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
+
+					row.addText(StringUtil.merge(actionsNames, ", "));
+
+					// Add result row
+
+					resultRows.add(row);
+				}
+				%>
+
+				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+			</c:when>
+			<c:otherwise>
+
+				<%
+				UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupIdsArray[userGroupIdsPos]);
+				%>
+
+				<liferay-ui:tabs names="<%= userGroup.getName() %>" />
+
+				<%
+				List permissions = PermissionLocalServiceUtil.getGroupPermissions(userGroup.getGroup().getGroupId(), resource.getResourceId());
+
+				List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+				List actions2 = ResourceActionsUtil.getActions(permissions);
+
+				// Left list
+
+				List leftList = new ArrayList();
+
+				for (int i = 0; i < actions2.size(); i++) {
+					String actionId = (String)actions2.get(i);
+
+					leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+				}
+
+				Collections.sort(leftList, new KeyValuePairComparator(false, true));
+
+				// Right list
+
+				List rightList = new ArrayList();
+
+				for (int i = 0; i < actions1.size(); i++) {
+					String actionId = (String)actions1.get(i);
+
+					if (!actions2.contains(actionId)) {
+						rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+					}
+				}
+
+				Collections.sort(rightList, new KeyValuePairComparator(false, true));
+				%>
+
+				<liferay-ui:input-move-boxes
+					formName="fm"
+					leftTitle='<%= LanguageUtil.get(pageContext, "current") %>'
+					rightTitle='<%= LanguageUtil.get(pageContext, "available") %>'
+					leftBoxName="current_actions"
+					rightBoxName="available_actions"
+					leftList="<%= leftList %>"
+					rightList="<%= rightList %>"
+				/>
+
+				<br>
+
+				<table border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tr>
+					<td>
+						<input class="portlet-form-button" <%= userGroupIdsPos > 0 ? "" : "disabled" %> type="button" value='<%= LanguageUtil.get(pageContext, "previous") %>' onClick="<portlet:namespace />saveUserGroupPermissions(<%= userGroupIdsPos - 1 %>, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
+
+						<input class="portlet-form-button" <%= userGroupIdsPos + 1 < userGroupIdsArray.length ? "" : "disabled" %> type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="<portlet:namespace />saveUserGroupPermissions(<%= userGroupIdsPos + 1 %>, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
+					</td>
+					<td align="right">
+						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "finished") %>' onClick="<portlet:namespace />saveUserGroupPermissions(-1, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
 					</td>
 				</tr>
 				</table>

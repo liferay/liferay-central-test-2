@@ -25,6 +25,7 @@ package com.liferay.portlet.communities.action;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.spring.OrganizationServiceUtil;
+import com.liferay.portal.service.spring.UserGroupServiceUtil;
 import com.liferay.portal.service.spring.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
@@ -60,6 +61,9 @@ public class EditGroupAssignmentsAction extends PortletAction {
 		try {
 			if (cmd.equals("group_organizations")) {
 				updateGroupOrganizations(req);
+			}
+			else if (cmd.equals("group_user_groups")) {
+				updateGroupUserGroups(req);
 			}
 			else if (cmd.equals("group_users")) {
 				updateGroupUsers(req);
@@ -122,6 +126,20 @@ public class EditGroupAssignmentsAction extends PortletAction {
 			groupId, addOrganizationIds);
 		OrganizationServiceUtil.unsetGroupOrganizations(
 			groupId, removeOrganizationIds);
+	}
+
+	protected void updateGroupUserGroups(ActionRequest req)
+		throws Exception {
+
+		String groupId = ParamUtil.getString(req, "groupId");
+
+		String[] addUserGroupIds = StringUtil.split(
+			ParamUtil.getString(req, "addUserGroupIds"));
+		String[] removeUserGroupIds = StringUtil.split(
+			ParamUtil.getString(req, "removeUserGroupIds"));
+
+		UserGroupServiceUtil.addGroupUserGroups(groupId, addUserGroupIds);
+		UserGroupServiceUtil.unsetGroupUserGroups(groupId, removeUserGroupIds);
 	}
 
 	protected void updateGroupUsers(ActionRequest req) throws Exception {

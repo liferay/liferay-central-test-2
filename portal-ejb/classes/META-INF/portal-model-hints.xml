@@ -138,7 +138,9 @@
 		<field name="className" type="String" />
 		<field name="classPK" type="String" />
 		<field name="parentGroupId" type="String" />
-		<field name="name" type="String" />
+		<field name="name" type="String">
+			<hint name="display-width">30</hint>
+		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
@@ -322,7 +324,9 @@
 		<field name="companyId" type="String" />
 		<field name="className" type="String" />
 		<field name="classPK" type="String" />
-		<field name="name" type="String" />
+		<field name="name" type="String">
+			<hint name="display-width">30</hint>
+		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
@@ -366,6 +370,17 @@
 		<field name="failedLoginAttempts" type="int" />
 		<field name="agreedToTermsOfUse" type="boolean" />
 		<field name="active" type="boolean" />
+	</model>
+	<model name="com.liferay.portal.model.UserGroup">
+		<field name="userGroupId" type="String" />
+		<field name="companyId" type="String" />
+		<field name="parentUserGroupId" type="String" />
+		<field name="name" type="String">
+			<hint name="display-width">30</hint>
+		</field>
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
 	</model>
 	<model name="com.liferay.portal.model.UserIdMapper">
 		<field name="userId" type="String" />

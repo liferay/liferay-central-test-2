@@ -112,7 +112,6 @@ public class OrganizationFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(Organization.class.getName());
 			_setJoin(qPos, params);
 			qPos.add(companyId);
 			qPos.add(parentOrganizationId);
@@ -206,7 +205,6 @@ public class OrganizationFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(Organization.class.getName());
 			_setJoin(qPos, params);
 			qPos.add(companyId);
 			qPos.add(parentOrganizationId);
@@ -295,13 +293,9 @@ public class OrganizationFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < 2; i++) {
-				qPos.add(Organization.class.getName());
 				qPos.add(resourceId);
 
-				if (i == 0) {
-					qPos.add(Organization.class.getName());
-				}
-				else if (i == 1) {
+				if (i == 1) {
 					qPos.add(groupId);
 				}
 
@@ -394,13 +388,9 @@ public class OrganizationFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < 2; i++) {
-				qPos.add(Organization.class.getName());
 				qPos.add(resourceId);
 
-				if (i == 0) {
-					qPos.add(Organization.class.getName());
-				}
-				else if (i == 1) {
+				if (i == 1) {
 					qPos.add(groupId);
 				}
 
@@ -463,10 +453,9 @@ public class OrganizationFinder {
 			Map.Entry entry = (Map.Entry)itr.next();
 
 			String key = (String)entry.getKey();
+			Object value = entry.getValue();
 
-			if (key.equals("organizationsGroups") ||
-				key.equals("organizationsRoles")) {
-
+			if (value != null) {
 				sb.append(_getJoin(key));
 			}
 		}
@@ -494,18 +483,10 @@ public class OrganizationFinder {
 			while (itr.hasNext()) {
 				Map.Entry entry = (Map.Entry)itr.next();
 
-				String key = (String)entry.getKey();
+				String value = (String)entry.getValue();
 
-				if (key.equals("organizationsGroups") ||
-					key.equals("organizationsRoles")) {
-
-					List values = (List)entry.getValue();
-
-					for (int i = 0; i < values.size(); i++) {
-						String value = (String)values.get(i);
-
-						qPos.add(value);
-					}
+				if (Validator.isNotNull(value)) {
+					qPos.add(value);
 				}
 			}
 		}

@@ -69,6 +69,9 @@ public class UserFinder {
 	public static String JOIN_BY_USERS_ROLES =
 		UserFinder.class.getName() + ".joinByUsersRoles";
 
+	public static String JOIN_BY_USERS_USER_GROUPS =
+		UserFinder.class.getName() + ".joinByUsersUserGroups";
+
 	public static int countByC_FN_MN_LN_EA_A(
 			String companyId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean active, Map params,
@@ -204,9 +207,9 @@ public class UserFinder {
 			Map.Entry entry = (Map.Entry)itr.next();
 
 			String key = (String)entry.getKey();
-			String value = (String)entry.getValue();
+			Object value = entry.getValue();
 
-			if (Validator.isNotNull(value)) {
+			if (value != null) {
 				sb.append(_getJoin(key));
 			}
 		}
@@ -228,6 +231,9 @@ public class UserFinder {
 		}
 		else if (key.equals("usersRoles")) {
 			sb.append(CustomSQLUtil.get(JOIN_BY_USERS_ROLES));
+		}
+		else if (key.equals("usersUserGroups")) {
+			sb.append(CustomSQLUtil.get(JOIN_BY_USERS_USER_GROUPS));
 		}
 
 		return sb.toString();

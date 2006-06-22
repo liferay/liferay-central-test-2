@@ -39,6 +39,11 @@ public interface UserLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public boolean addUserGroupUsers(java.lang.String userGroupId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.User addUser(
 		java.lang.String creatorUserId, java.lang.String companyId,
 		boolean autoUserId, java.lang.String userId, boolean autoPassword,
@@ -158,6 +163,11 @@ public interface UserLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public boolean hasUserGroupUser(java.lang.String userGroupId,
+		java.lang.String userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public java.util.List search(java.lang.String companyId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String emailAddress,
@@ -186,12 +196,22 @@ public interface UserLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public void setUserGroupUsers(java.lang.String userGroupId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public boolean unsetGroupUsers(java.lang.String groupId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
 	public boolean unsetRoleUsers(java.lang.String roleId,
+		java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public boolean unsetUserGroupUsers(java.lang.String userGroupId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;

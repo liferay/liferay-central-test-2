@@ -153,6 +153,10 @@
 			<key column="groupId" />
 			<many-to-many class="com.liferay.portal.service.persistence.RoleHBM" column="roleId" />
 		</set>
+		<set name="userGroups" table="Groups_UserGroups" lazy="true">
+			<key column="groupId" />
+			<many-to-many class="com.liferay.portal.service.persistence.UserGroupHBM" column="userGroupId" />
+		</set>
 		<set name="users" table="Users_Groups" lazy="true">
 			<key column="groupId" />
 			<many-to-many class="com.liferay.portal.service.persistence.UserHBM" column="userId" />
@@ -447,6 +451,24 @@
 		<set name="roles" table="Users_Roles" lazy="true">
 			<key column="userId" />
 			<many-to-many class="com.liferay.portal.service.persistence.RoleHBM" column="roleId" />
+		</set>
+		<set name="userGroups" table="Users_UserGroups" lazy="true">
+			<key column="userId" />
+			<many-to-many class="com.liferay.portal.service.persistence.UserGroupHBM" column="userGroupId" />
+		</set>
+	</class>
+	<class name="com.liferay.portal.service.persistence.UserGroupHBM" table="UserGroup">
+		<cache usage="read-write" />
+		<id name="userGroupId" type="java.lang.String">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" />
+		<property name="parentUserGroupId" />
+		<property name="name" />
+		<property name="description" />
+		<set name="users" table="Users_UserGroups" lazy="true">
+			<key column="userGroupId" />
+			<many-to-many class="com.liferay.portal.service.persistence.UserHBM" column="userId" />
 		</set>
 	</class>
 	<class name="com.liferay.portal.service.persistence.UserIdMapperHBM" table="UserIdMapper">

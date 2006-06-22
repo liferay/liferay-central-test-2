@@ -283,6 +283,12 @@ create table Groups_Roles (
 	primary key (groupId, roleId)
 );
 
+create table Groups_UserGroups (
+	groupId VARCHAR(75) not null,
+	userGroupId VARCHAR(75) not null,
+	primary key (groupId, userGroupId)
+);
+
 create table IGFolder (
 	folderId VARCHAR(75) not null primary key,
 	groupId VARCHAR(75) not null,
@@ -842,6 +848,14 @@ create table Subscription (
 	frequency VARCHAR(75) null
 );
 
+create table UserGroup (
+	userGroupId VARCHAR(75) not null primary key,
+	companyId VARCHAR(75) not null,
+	parentUserGroupId VARCHAR(75) null,
+	name VARCHAR(75) null,
+	description STRING null
+);
+
 create table User_ (
 	userId VARCHAR(75) not null primary key,
 	companyId VARCHAR(75) not null,
@@ -897,6 +911,12 @@ create table Users_Roles (
 	userId VARCHAR(75) not null,
 	roleId VARCHAR(75) not null,
 	primary key (userId, roleId)
+);
+
+create table Users_UserGroups (
+	userId VARCHAR(75) not null,
+	userGroupId VARCHAR(75) not null,
+	primary key (userId, userGroupId)
 );
 
 create table UserTracker (

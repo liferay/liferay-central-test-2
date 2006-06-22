@@ -513,6 +513,16 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
+		<action path="/enterprise_admin/edit_user_group" type="com.liferay.portlet.enterpriseadmin.action.EditUserGroupAction">
+			<forward name="portlet.enterprise_admin.edit_user_group" path="portlet.enterprise_admin.edit_user_group" />
+			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
+		</action>
+
+		<action path="/enterprise_admin/edit_user_group_assignments" type="com.liferay.portlet.enterpriseadmin.action.EditUserGroupAssignmentsAction">
+			<forward name="portlet.enterprise_admin.edit_user_group_assignments" path="portlet.enterprise_admin.edit_user_group_assignments" />
+			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
+		</action>
+
 		<action path="/enterprise_admin/edit_user_portrait" type="com.liferay.portlet.enterpriseadmin.action.EditUserPortraitAction">
 			<forward name="portlet.enterprise_admin.edit_user_portrait" path="portlet.enterprise_admin.edit_user_portrait" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />

@@ -288,15 +288,15 @@ public class PermissionLocalServiceUtil {
 		}
 	}
 
-	public static void setGroupPermissions(java.lang.String organizationId,
-		java.lang.String groupId, java.lang.String[] actionIds,
-		java.lang.String resourceId)
+	public static void setGroupPermissions(java.lang.String className,
+		java.lang.String classPK, java.lang.String groupId,
+		java.lang.String[] actionIds, java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
-			permissionLocalService.setGroupPermissions(organizationId, groupId,
-				actionIds, resourceId);
+			permissionLocalService.setGroupPermissions(className, classPK,
+				groupId, actionIds, resourceId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

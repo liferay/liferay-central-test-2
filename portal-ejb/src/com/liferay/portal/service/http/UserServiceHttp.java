@@ -147,6 +147,59 @@ public class UserServiceHttp {
 		}
 	}
 
+	public static boolean addUserGroupUsers(HttpPrincipal httpPrincipal,
+		java.lang.String userGroupId, java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = userGroupId;
+
+			if (userGroupId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = userIds;
+
+			if (userIds == null) {
+				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"addUserGroupUsers", new Object[] { paramObj0, paramObj1 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw e;
+			}
+
+			return ((Boolean)returnObj).booleanValue();
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			_log.error(StackTraceUtil.getStackTrace(pe));
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(StackTraceUtil.getStackTrace(se));
+			throw se;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new com.liferay.portal.SystemException(stackTrace);
+		}
+	}
+
 	public static com.liferay.portal.model.User addUser(
 		HttpPrincipal httpPrincipal, java.lang.String companyId,
 		boolean autoUserId, java.lang.String userId, boolean autoPassword,
@@ -662,6 +715,57 @@ public class UserServiceHttp {
 		}
 	}
 
+	public static void setUserGroupUsers(HttpPrincipal httpPrincipal,
+		java.lang.String userGroupId, java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = userGroupId;
+
+			if (userGroupId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = userIds;
+
+			if (userIds == null) {
+				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"setUserGroupUsers", new Object[] { paramObj0, paramObj1 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw e;
+			}
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			_log.error(StackTraceUtil.getStackTrace(pe));
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(StackTraceUtil.getStackTrace(se));
+			throw se;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new com.liferay.portal.SystemException(stackTrace);
+		}
+	}
+
 	public static boolean unsetGroupUsers(HttpPrincipal httpPrincipal,
 		java.lang.String groupId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
@@ -734,6 +838,59 @@ public class UserServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"unsetRoleUsers", new Object[] { paramObj0, paramObj1 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw e;
+			}
+
+			return ((Boolean)returnObj).booleanValue();
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			_log.error(StackTraceUtil.getStackTrace(pe));
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(StackTraceUtil.getStackTrace(se));
+			throw se;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new com.liferay.portal.SystemException(stackTrace);
+		}
+	}
+
+	public static boolean unsetUserGroupUsers(HttpPrincipal httpPrincipal,
+		java.lang.String userGroupId, java.lang.String[] userIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = userGroupId;
+
+			if (userGroupId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = userIds;
+
+			if (userIds == null) {
+				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"unsetUserGroupUsers", new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;
 
 			try {

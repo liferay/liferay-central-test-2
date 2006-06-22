@@ -476,6 +476,126 @@ public class GroupUtil {
 		return getPersistence().removeRoles(pk, roles);
 	}
 
+	public static java.util.List getUserGroups(java.lang.String pk)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().getUserGroups(pk);
+	}
+
+	public static java.util.List getUserGroups(java.lang.String pk, int begin,
+		int end)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().getUserGroups(pk, begin, end);
+	}
+
+	public static java.util.List getUserGroups(java.lang.String pk, int begin,
+		int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().getUserGroups(pk, begin, end, obc);
+	}
+
+	public static int getUserGroupsSize(java.lang.String pk)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().getUserGroupsSize(pk);
+	}
+
+	public static void setUserGroups(java.lang.String pk, java.lang.String[] pks)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.SystemException {
+		getPersistence().setUserGroups(pk, pks);
+	}
+
+	public static void setUserGroups(java.lang.String pk,
+		java.util.List userGroups)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.SystemException {
+		getPersistence().setUserGroups(pk, userGroups);
+	}
+
+	public static boolean addUserGroup(java.lang.String pk,
+		java.lang.String userGroupPK)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().addUserGroup(pk, userGroupPK);
+	}
+
+	public static boolean addUserGroup(java.lang.String pk,
+		com.liferay.portal.model.UserGroup userGroup)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().addUserGroup(pk, userGroup);
+	}
+
+	public static boolean addUserGroups(java.lang.String pk,
+		java.lang.String[] userGroupPKs)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().addUserGroups(pk, userGroupPKs);
+	}
+
+	public static boolean addUserGroups(java.lang.String pk,
+		java.util.List userGroups)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().addUserGroups(pk, userGroups);
+	}
+
+	public static void clearUserGroups(java.lang.String pk)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		getPersistence().clearUserGroups(pk);
+	}
+
+	public static boolean containsUserGroup(java.lang.String pk,
+		java.lang.String userGroupPK) throws com.liferay.portal.SystemException {
+		return getPersistence().containsUserGroup(pk, userGroupPK);
+	}
+
+	public static boolean containsUserGroups(java.lang.String pk)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().containsUserGroups(pk);
+	}
+
+	public static boolean removeUserGroup(java.lang.String pk,
+		java.lang.String userGroupPK)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().removeUserGroup(pk, userGroupPK);
+	}
+
+	public static boolean removeUserGroup(java.lang.String pk,
+		com.liferay.portal.model.UserGroup userGroup)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().removeUserGroup(pk, userGroup);
+	}
+
+	public static boolean removeUserGroups(java.lang.String pk,
+		java.lang.String[] userGroupPKs)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().removeUserGroups(pk, userGroupPKs);
+	}
+
+	public static boolean removeUserGroups(java.lang.String pk,
+		java.util.List userGroups)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().removeUserGroups(pk, userGroups);
+	}
+
 	public static java.util.List getUsers(java.lang.String pk)
 		throws com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.SystemException {

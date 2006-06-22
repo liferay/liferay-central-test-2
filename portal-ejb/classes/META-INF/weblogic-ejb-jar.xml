@@ -175,6 +175,14 @@
 		<jndi-name>com_liferay_portal_service_ejb_UserServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
+		<ejb-name>com_liferay_portal_service_ejb_UserGroupLocalServiceEJB</ejb-name>
+		<local-jndi-name>ejb/liferay/UserGroupLocalServiceHome</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>com_liferay_portal_service_ejb_UserGroupServiceEJB</ejb-name>
+		<jndi-name>com_liferay_portal_service_ejb_UserGroupServiceEJB</jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_UserIdMapperLocalServiceEJB</ejb-name>
 		<local-jndi-name>ejb/liferay/UserIdMapperLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>

@@ -204,7 +204,7 @@ if (Validator.isNotNull(modelResource)) {
 
 				groupParams.put("rolePermissions", rolePermissions);
 
-				List groups = GroupLocalServiceUtil.search(company.getCompanyId(), null, groupParams);
+				List groups = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams);
 
 				for (int j = 0; j < groups.size(); j++) {
 					Group group = (Group)groups.get(j);
@@ -284,11 +284,11 @@ if (Validator.isNotNull(modelResource)) {
 			groupParams.put("rolePermissions", rolePermissions);
 		}
 
-		int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), groupParams);
+		int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
 
 		searchContainer.setTotal(total);
 
-		List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), groupParams, searchContainer.getStart(), searchContainer.getEnd());
+		List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 		%>

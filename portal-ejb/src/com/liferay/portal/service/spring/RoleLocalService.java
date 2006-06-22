@@ -77,14 +77,11 @@ public interface RoleLocalService {
 			com.liferay.portal.SystemException;
 
 	public java.util.List search(java.lang.String companyId,
-		java.lang.String name) throws com.liferay.portal.SystemException;
-
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String name, int begin, int end)
+		java.lang.String name, java.lang.String description, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int searchCount(java.lang.String companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException;
+	public int searchCount(java.lang.String companyId, java.lang.String name,
+		java.lang.String description) throws com.liferay.portal.SystemException;
 
 	public void setUserRoles(java.lang.String userId, java.lang.String[] roleIds)
 		throws com.liferay.portal.PortalException, 

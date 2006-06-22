@@ -177,9 +177,7 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 
 		Group group = organization.getGroup();
 
-		if (group != null) {
-			GroupLocalServiceUtil.deleteGroup(group.getGroupId());
-		}
+		GroupLocalServiceUtil.deleteGroup(group.getGroupId());
 
 		// Resources
 

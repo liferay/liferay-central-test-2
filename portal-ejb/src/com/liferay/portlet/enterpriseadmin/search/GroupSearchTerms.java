@@ -38,6 +38,7 @@ public class GroupSearchTerms extends GroupDisplayTerms {
 		super(req);
 
 		name = DAOParamUtil.getLike(req, NAME);
+		description = DAOParamUtil.getLike(req, DESCRIPTION);
 	}
 
 }

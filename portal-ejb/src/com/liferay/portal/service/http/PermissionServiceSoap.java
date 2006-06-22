@@ -98,12 +98,13 @@ public class PermissionServiceSoap {
 		}
 	}
 
-	public static void setGroupPermissions(java.lang.String organizationId,
-		java.lang.String groupId, java.lang.String[] actionIds,
-		java.lang.String resourceId) throws RemoteException {
+	public static void setGroupPermissions(java.lang.String className,
+		java.lang.String classPK, java.lang.String groupId,
+		java.lang.String[] actionIds, java.lang.String resourceId)
+		throws RemoteException {
 		try {
-			PermissionServiceUtil.setGroupPermissions(organizationId, groupId,
-				actionIds, resourceId);
+			PermissionServiceUtil.setGroupPermissions(className, classPK,
+				groupId, actionIds, resourceId);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);

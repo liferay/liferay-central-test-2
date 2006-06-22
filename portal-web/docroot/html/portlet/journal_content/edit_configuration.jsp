@@ -29,7 +29,7 @@ String cur = ParamUtil.getString(request, "cur");
 
 String groupId = null;
 
-List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, 0, 1);
+List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, null, 0, 1);
 
 if (communities.size() > 0) {
 	Group group = (Group)communities.get(0);

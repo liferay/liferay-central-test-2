@@ -283,6 +283,8 @@ public class WebKeys {
 
 	public static final String USER = "USER";
 
+	public static final String USER_GROUP = "USER_GROUP";
+	
 	public static final String USER_ID = "USER_ID";
 
 	public static final String USER_PASSWORD = "USER_PASSWORD";

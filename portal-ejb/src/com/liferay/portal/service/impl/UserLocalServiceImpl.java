@@ -67,6 +67,7 @@ import com.liferay.portal.service.persistence.PermissionUserFinder;
 import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserFinder;
+import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.ContactLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
@@ -127,6 +128,12 @@ public class UserLocalServiceImpl implements UserLocalService {
 		throws PortalException, SystemException {
 
 		return RoleUtil.addUsers(roleId, userIds);
+	}
+
+	public boolean addUserGroupUsers(String userGroupId, String[] userIds)
+		throws PortalException, SystemException {
+
+		return UserGroupUtil.addUsers(userGroupId, userIds);
 	}
 
 	public User addUser(
@@ -310,7 +317,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		for (int i = 0; i < defaultGroupNames.length; i++) {
 			try {
-				Group group = GroupFinder.findByC_N_2(
+				Group group = GroupFinder.findByC_N(
 					companyId, defaultGroupNames[i]);
 
 				groups.add(group);
@@ -329,7 +336,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		for (int i = 0; i < defaultRoleNames.length; i++) {
 			try {
-				Role role = RoleFinder.findByC_N_2(
+				Role role = RoleFinder.findByC_N(
 					companyId, defaultRoleNames[i]);
 
 				roles.add(role);
@@ -452,9 +459,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		Group group = user.getGroup();
 
-		if (group != null) {
-			GroupLocalServiceUtil.deleteGroup(group.getGroupId());
-		}
+		GroupLocalServiceUtil.deleteGroup(group.getGroupId());
 
 		// Portrait
 
@@ -631,6 +636,12 @@ public class UserLocalServiceImpl implements UserLocalService {
 		return RoleUtil.containsUser(roleId, userId);
 	}
 
+	public boolean hasUserGroupUser(String userGroupId, String userId)
+		throws PortalException, SystemException {
+
+		return UserGroupUtil.containsUser(userGroupId, userId);
+	}
+
 	public List search(
 			String companyId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean active, Map params,
@@ -775,6 +786,12 @@ public class UserLocalServiceImpl implements UserLocalService {
 		RoleUtil.setUsers(roleId, userIds);
 	}
 
+	public void setUserGroupUsers(String userGroupId, String[] userIds)
+		throws PortalException, SystemException {
+
+		UserGroupUtil.setUsers(userGroupId, userIds);
+	}
+
 	public boolean unsetGroupUsers(String groupId, String[] userIds)
 		throws PortalException, SystemException {
 
@@ -785,6 +802,12 @@ public class UserLocalServiceImpl implements UserLocalService {
 		throws PortalException, SystemException {
 
 		return RoleUtil.removeUsers(roleId, userIds);
+	}
+
+	public boolean unsetUserGroupUsers(String userGroupId, String[] userIds)
+		throws PortalException, SystemException {
+
+		return UserGroupUtil.removeUsers(userGroupId, userIds);
 	}
 
 	public User updateActive(String userId, boolean active)

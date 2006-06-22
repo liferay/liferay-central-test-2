@@ -1099,6 +1099,54 @@
 			<ref bean="com.liferay.portal.service.persistence.UserPersistence" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.spring.UserGroupLocalService.professional" class="com.liferay.portal.service.impl.UserGroupLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.UserGroupLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.UserGroupLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.UserGroupLocalServiceFactory" class="com.liferay.portal.service.spring.UserGroupLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.UserGroupLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.UserGroupService.professional" class="com.liferay.portal.service.impl.UserGroupServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.spring.UserGroupService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.spring.UserGroupService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.spring.UserGroupServiceFactory" class="com.liferay.portal.service.spring.UserGroupServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.spring.UserGroupService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserGroupPersistence" class="com.liferay.portal.service.persistence.UserGroupPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserGroupUtil" class="com.liferay.portal.service.persistence.UserGroupUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.UserGroupPersistence" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.spring.UserIdMapperLocalService.professional" class="com.liferay.portal.service.impl.UserIdMapperLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.spring.UserIdMapperLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">

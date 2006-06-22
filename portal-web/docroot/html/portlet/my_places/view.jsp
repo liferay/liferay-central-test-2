@@ -63,7 +63,12 @@
 		</c:if>
 
 		<%
-		List communities = GroupLocalServiceUtil.getUserGroups(company.getCompanyId(), user.getUserId(), false);
+		Map groupParams = new HashMap();
+
+		groupParams.put("usersGroups", user.getUserId());
+		groupParams.put("layoutSet", Boolean.FALSE);
+
+		List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, -1, -1);
 
 		for (int i = 0; i < communities.size(); i++) {
 			Group community = (Group)communities.get(i);
@@ -99,7 +104,9 @@
 		</c:if>
 
 		<%
-		communities = GroupLocalServiceUtil.getUserGroups(company.getCompanyId(), user.getUserId(), true);
+		groupParams.put("layoutSet", Boolean.TRUE);
+
+		communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, -1, -1);
 
 		for (int i = 0; i < communities.size(); i++) {
 			Group community = (Group)communities.get(i);

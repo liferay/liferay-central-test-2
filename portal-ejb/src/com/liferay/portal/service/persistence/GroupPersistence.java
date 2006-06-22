@@ -115,6 +115,7 @@ public class GroupPersistence extends BasePersistence {
 					groupHBM.setOrgs(new HashSet());
 					groupHBM.setPermissions(new HashSet());
 					groupHBM.setRoles(new HashSet());
+					groupHBM.setUserGroups(new HashSet());
 					groupHBM.setUsers(new HashSet());
 					session.save(groupHBM);
 					session.flush();
@@ -2246,6 +2247,710 @@ public class GroupPersistence extends BasePersistence {
 				}
 
 				if (groupHBM.getRoles().remove(roleHBM)) {
+					value = true;
+				}
+			}
+
+			session.flush();
+
+			return value;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List getUserGroups(String pk)
+		throws NoSuchGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			GroupHBM groupHBM = (GroupHBM)session.get(GroupHBM.class, pk);
+
+			if (groupHBM == null) {
+				_log.warn("No Group exists with the primary key " +
+					pk.toString());
+				throw new NoSuchGroupException(
+					"No Group exists with the primary key " + pk.toString());
+			}
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT userGroupHBM FROM ");
+			query.append(com.liferay.portal.service.persistence.GroupHBM.class.getName());
+			query.append(" groupHBM ");
+			query.append("JOIN groupHBM.userGroups AS userGroupHBM ");
+			query.append("WHERE groupHBM.groupId = ? ");
+			query.append("ORDER BY ");
+			query.append("userGroupHBM.name ASC");
+
+			Query q = session.createQuery(query.toString());
+			q.setString(0, pk);
+
+			Iterator itr = q.list().iterator();
+			List list = new ArrayList();
+
+			while (itr.hasNext()) {
+				com.liferay.portal.service.persistence.UserGroupHBM userGroupHBM =
+					(com.liferay.portal.service.persistence.UserGroupHBM)itr.next();
+				list.add(com.liferay.portal.service.persistence.UserGroupHBMUtil.model(
+						userGroupHBM));
+			}
+
+			return list;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List getUserGroups(String pk, int begin, int end)
+		throws NoSuchGroupException, SystemException {
+		return getUserGroups(pk, begin, end, null);
+	}
+
+	public List getUserGroups(String pk, int begin, int end,
+		OrderByComparator obc) throws NoSuchGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			GroupHBM groupHBM = (GroupHBM)session.get(GroupHBM.class, pk);
+
+			if (groupHBM == null) {
+				_log.warn("No Group exists with the primary key " +
+					pk.toString());
+				throw new NoSuchGroupException(
+					"No Group exists with the primary key " + pk.toString());
+			}
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT userGroupHBM FROM ");
+			query.append(com.liferay.portal.service.persistence.GroupHBM.class.getName());
+			query.append(" groupHBM ");
+			query.append("JOIN groupHBM.userGroups AS userGroupHBM ");
+			query.append("WHERE groupHBM.groupId = ? ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("userGroupHBM.name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setString(0, pk);
+
+			List list = new ArrayList();
+			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
+
+			while (itr.hasNext()) {
+				com.liferay.portal.service.persistence.UserGroupHBM userGroupHBM =
+					(com.liferay.portal.service.persistence.UserGroupHBM)itr.next();
+				list.add(com.liferay.portal.service.persistence.UserGroupHBMUtil.model(
+						userGroupHBM));
+			}
+
+			return list;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int getUserGroupsSize(String pk) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) FROM ");
+			query.append(com.liferay.portal.service.persistence.GroupHBM.class.getName());
+			query.append(" groupHBM ");
+			query.append("JOIN groupHBM.userGroups AS userGroupHBM ");
+			query.append("WHERE groupHBM.groupId = ? ");
+
+			Query q = session.createQuery(query.toString());
+			q.setString(0, pk);
+
+			Iterator itr = q.iterate();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public void setUserGroups(String pk, String[] pks)
+		throws NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			GroupHBM groupHBM = (GroupHBM)session.get(GroupHBM.class, pk);
+
+			if (groupHBM == null) {
+				_log.warn("No Group exists with the primary key " +
+					pk.toString());
+				throw new NoSuchGroupException(
+					"No Group exists with the primary key " + pk.toString());
+			}
+
+			Set userGroupsSet = new HashSet();
+
+			for (int i = 0; (pks != null) && (i < pks.length); i++) {
+				com.liferay.portal.service.persistence.UserGroupHBM userGroupHBM =
+					(com.liferay.portal.service.persistence.UserGroupHBM)session.get(com.liferay.portal.service.persistence.UserGroupHBM.class,
+						pks[i]);
+
+				if (userGroupHBM == null) {
+					_log.warn("No UserGroup exists with the primary key " +
+						pks[i].toString());
+					throw new com.liferay.portal.NoSuchUserGroupException(
+						"No UserGroup exists with the primary key " +
+						pks[i].toString());
+				}
+
+				userGroupsSet.add(userGroupHBM);
+			}
+
+			groupHBM.setUserGroups(userGroupsSet);
+			session.flush();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public void setUserGroups(String pk, List userGroups)
+		throws NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			GroupHBM groupHBM = (GroupHBM)session.get(GroupHBM.class, pk);
+
+			if (groupHBM == null) {
+				_log.warn("No Group exists with the primary key " +
+					pk.toString());
+				throw new NoSuchGroupException(
+					"No Group exists with the primary key " + pk.toString());
+			}
+
+			Set userGroupsSet = new HashSet();
+			Iterator itr = userGroups.iterator();
+
+			while (itr.hasNext()) {
+				com.liferay.portal.model.UserGroup userGroup = (com.liferay.portal.model.UserGroup)itr.next();
+				com.liferay.portal.service.persistence.UserGroupHBM userGroupHBM =
+					(com.liferay.portal.service.persistence.UserGroupHBM)session.get(com.liferay.portal.service.persistence.UserGroupHBM.class,
+						userGroup.getPrimaryKey());
+
+				if (userGroupHBM == null) {
+					_log.warn("No UserGroup exists with the primary key " +
+						userGroup.getPrimaryKey().toString());
+					throw new com.liferay.portal.NoSuchUserGroupException(
+						"No UserGroup exists with the primary key " +
+						userGroup.getPrimaryKey().toString());
+				}
+
+				userGroupsSet.add(userGroupHBM);
+			}
+
+			groupHBM.setUserGroups(userGroupsSet);
+			session.flush();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean addUserGroup(String pk, String userGroupPK)
+		throws NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			GroupHBM groupHBM = (GroupHBM)session.get(GroupHBM.class, pk);
+
+			if (groupHBM == null) {
+				_log.warn("No Group exists with the primary key " +
+					pk.toString());
+				throw new NoSuchGroupException(
+					"No Group exists with the primary key " + pk.toString());
+			}
+
+			com.liferay.portal.service.persistence.UserGroupHBM userGroupHBM = null;
+			userGroupHBM = (com.liferay.portal.service.persistence.UserGroupHBM)session.get(com.liferay.portal.service.persistence.UserGroupHBM.class,
+					userGroupPK);
+
+			if (userGroupHBM == null) {
+				_log.warn("No UserGroup exists with the primary key " +
+					userGroupPK.toString());
+				throw new com.liferay.portal.NoSuchUserGroupException(
+					"No UserGroup exists with the primary key " +
+					userGroupPK.toString());
+			}
+
+			boolean value = groupHBM.getUserGroups().add(userGroupHBM);
+			session.flush();
+
+			return value;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean addUserGroup(String pk,
+		com.liferay.portal.model.UserGroup userGroup)
+		throws NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			GroupHBM groupHBM = (GroupHBM)session.get(GroupHBM.class, pk);
+
+			if (groupHBM == null) {
+				_log.warn("No Group exists with the primary key " +
+					pk.toString());
+				throw new NoSuchGroupException(
+					"No Group exists with the primary key " + pk.toString());
+			}
+
+			com.liferay.portal.service.persistence.UserGroupHBM userGroupHBM = null;
+			userGroupHBM = (com.liferay.portal.service.persistence.UserGroupHBM)session.get(com.liferay.portal.service.persistence.UserGroupHBM.class,
+					userGroup.getPrimaryKey());
+
+			if (userGroupHBM == null) {
+				_log.warn("No UserGroup exists with the primary key " +
+					userGroup.getPrimaryKey().toString());
+				throw new com.liferay.portal.NoSuchUserGroupException(
+					"No UserGroup exists with the primary key " +
+					userGroup.getPrimaryKey().toString());
+			}
+
+			boolean value = groupHBM.getUserGroups().add(userGroupHBM);
+			session.flush();
+
+			return value;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean addUserGroups(String pk, String[] userGroupPKs)
+		throws NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			GroupHBM groupHBM = (GroupHBM)session.get(GroupHBM.class, pk);
+
+			if (groupHBM == null) {
+				_log.warn("No Group exists with the primary key " +
+					pk.toString());
+				throw new NoSuchGroupException(
+					"No Group exists with the primary key " + pk.toString());
+			}
+
+			boolean value = false;
+
+			for (int i = 0; i < userGroupPKs.length; i++) {
+				com.liferay.portal.service.persistence.UserGroupHBM userGroupHBM =
+					null;
+				userGroupHBM = (com.liferay.portal.service.persistence.UserGroupHBM)session.get(com.liferay.portal.service.persistence.UserGroupHBM.class,
+						userGroupPKs[i]);
+
+				if (userGroupHBM == null) {
+					_log.warn("No UserGroup exists with the primary key " +
+						userGroupPKs[i].toString());
+					throw new com.liferay.portal.NoSuchUserGroupException(
+						"No UserGroup exists with the primary key " +
+						userGroupPKs[i].toString());
+				}
+
+				if (groupHBM.getUserGroups().add(userGroupHBM)) {
+					value = true;
+				}
+			}
+
+			session.flush();
+
+			return value;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean addUserGroups(String pk, List userGroups)
+		throws NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			GroupHBM groupHBM = (GroupHBM)session.get(GroupHBM.class, pk);
+
+			if (groupHBM == null) {
+				_log.warn("No Group exists with the primary key " +
+					pk.toString());
+				throw new NoSuchGroupException(
+					"No Group exists with the primary key " + pk.toString());
+			}
+
+			boolean value = false;
+
+			for (int i = 0; i < userGroups.size(); i++) {
+				com.liferay.portal.model.UserGroup userGroup = (com.liferay.portal.model.UserGroup)userGroups.get(i);
+				com.liferay.portal.service.persistence.UserGroupHBM userGroupHBM =
+					(com.liferay.portal.service.persistence.UserGroupHBM)session.get(com.liferay.portal.service.persistence.UserGroupHBM.class,
+						userGroup.getPrimaryKey());
+
+				if (userGroupHBM == null) {
+					_log.warn("No UserGroup exists with the primary key " +
+						userGroup.getPrimaryKey().toString());
+					throw new com.liferay.portal.NoSuchUserGroupException(
+						"No UserGroup exists with the primary key " +
+						userGroup.getPrimaryKey().toString());
+				}
+
+				if (groupHBM.getUserGroups().add(userGroupHBM)) {
+					value = true;
+				}
+			}
+
+			session.flush();
+
+			return value;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public void clearUserGroups(String pk)
+		throws NoSuchGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			GroupHBM groupHBM = (GroupHBM)session.get(GroupHBM.class, pk);
+
+			if (groupHBM == null) {
+				_log.warn("No Group exists with the primary key " +
+					pk.toString());
+				throw new NoSuchGroupException(
+					"No Group exists with the primary key " + pk.toString());
+			}
+
+			groupHBM.getUserGroups().clear();
+			session.flush();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public static final String SQL_CONTAINSUSERGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_UserGroups WHERE groupId = ? AND userGroupId = ?";
+
+	public boolean containsUserGroup(String pk, String userGroupPK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(SQL_CONTAINSUSERGROUP);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+			qPos.add(pk);
+			qPos.add(userGroupPK);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if ((count != null) && (count.intValue() > 0)) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public static final String SQL_CONTAINSUSERGROUPS = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_UserGroups WHERE groupId = ?";
+
+	public boolean containsUserGroups(String pk) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(SQL_CONTAINSUSERGROUPS);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+			qPos.add(pk);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if ((count != null) && (count.intValue() > 0)) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean removeUserGroup(String pk, String userGroupPK)
+		throws NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			GroupHBM groupHBM = (GroupHBM)session.get(GroupHBM.class, pk);
+
+			if (groupHBM == null) {
+				_log.warn("No Group exists with the primary key " +
+					pk.toString());
+				throw new NoSuchGroupException(
+					"No Group exists with the primary key " + pk.toString());
+			}
+
+			com.liferay.portal.service.persistence.UserGroupHBM userGroupHBM = null;
+			userGroupHBM = (com.liferay.portal.service.persistence.UserGroupHBM)session.get(com.liferay.portal.service.persistence.UserGroupHBM.class,
+					userGroupPK);
+
+			if (userGroupHBM == null) {
+				_log.warn("No UserGroup exists with the primary key " +
+					userGroupPK.toString());
+				throw new com.liferay.portal.NoSuchUserGroupException(
+					"No UserGroup exists with the primary key " +
+					userGroupPK.toString());
+			}
+
+			boolean value = groupHBM.getUserGroups().remove(userGroupHBM);
+			session.flush();
+
+			return value;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean removeUserGroup(String pk,
+		com.liferay.portal.model.UserGroup userGroup)
+		throws NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			GroupHBM groupHBM = (GroupHBM)session.get(GroupHBM.class, pk);
+
+			if (groupHBM == null) {
+				_log.warn("No Group exists with the primary key " +
+					pk.toString());
+				throw new NoSuchGroupException(
+					"No Group exists with the primary key " + pk.toString());
+			}
+
+			com.liferay.portal.service.persistence.UserGroupHBM userGroupHBM = null;
+			userGroupHBM = (com.liferay.portal.service.persistence.UserGroupHBM)session.get(com.liferay.portal.service.persistence.UserGroupHBM.class,
+					userGroup.getPrimaryKey());
+
+			if (userGroupHBM == null) {
+				_log.warn("No UserGroup exists with the primary key " +
+					userGroup.getPrimaryKey().toString());
+				throw new com.liferay.portal.NoSuchUserGroupException(
+					"No UserGroup exists with the primary key " +
+					userGroup.getPrimaryKey().toString());
+			}
+
+			boolean value = groupHBM.getUserGroups().remove(userGroupHBM);
+			session.flush();
+
+			return value;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean removeUserGroups(String pk, String[] userGroupPKs)
+		throws NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			GroupHBM groupHBM = (GroupHBM)session.get(GroupHBM.class, pk);
+
+			if (groupHBM == null) {
+				_log.warn("No Group exists with the primary key " +
+					pk.toString());
+				throw new NoSuchGroupException(
+					"No Group exists with the primary key " + pk.toString());
+			}
+
+			boolean value = false;
+
+			for (int i = 0; i < userGroupPKs.length; i++) {
+				com.liferay.portal.service.persistence.UserGroupHBM userGroupHBM =
+					null;
+				userGroupHBM = (com.liferay.portal.service.persistence.UserGroupHBM)session.get(com.liferay.portal.service.persistence.UserGroupHBM.class,
+						userGroupPKs[i]);
+
+				if (userGroupHBM == null) {
+					_log.warn("No UserGroup exists with the primary key " +
+						userGroupPKs[i].toString());
+					throw new com.liferay.portal.NoSuchUserGroupException(
+						"No UserGroup exists with the primary key " +
+						userGroupPKs[i].toString());
+				}
+
+				if (groupHBM.getUserGroups().remove(userGroupHBM)) {
+					value = true;
+				}
+			}
+
+			session.flush();
+
+			return value;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean removeUserGroups(String pk, List userGroups)
+		throws NoSuchGroupException, 
+			com.liferay.portal.NoSuchUserGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			GroupHBM groupHBM = (GroupHBM)session.get(GroupHBM.class, pk);
+
+			if (groupHBM == null) {
+				_log.warn("No Group exists with the primary key " +
+					pk.toString());
+				throw new NoSuchGroupException(
+					"No Group exists with the primary key " + pk.toString());
+			}
+
+			boolean value = false;
+
+			for (int i = 0; i < userGroups.size(); i++) {
+				com.liferay.portal.model.UserGroup userGroup = (com.liferay.portal.model.UserGroup)userGroups.get(i);
+				com.liferay.portal.service.persistence.UserGroupHBM userGroupHBM =
+					(com.liferay.portal.service.persistence.UserGroupHBM)session.get(com.liferay.portal.service.persistence.UserGroupHBM.class,
+						userGroup.getPrimaryKey());
+
+				if (userGroupHBM == null) {
+					_log.warn("No UserGroup exists with the primary key " +
+						userGroup.getPrimaryKey().toString());
+					throw new com.liferay.portal.NoSuchUserGroupException(
+						"No UserGroup exists with the primary key " +
+						userGroup.getPrimaryKey().toString());
+				}
+
+				if (groupHBM.getUserGroups().remove(userGroupHBM)) {
 					value = true;
 				}
 			}

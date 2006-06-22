@@ -23,8 +23,10 @@
 package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.spring.PermissionServiceUtil;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
@@ -73,6 +75,9 @@ public class EditPermissionsAction extends PortletAction {
 			}
 			else if (cmd.equals("organization_permissions")) {
 				updateOrganizationPermissions(req);
+			}
+			else if (cmd.equals("user_group_permissions")) {
+				updateUserGroupPermissions(req);
 			}
 			else if (cmd.equals("user_permissions")) {
 				updateUserPermissions(req);
@@ -181,12 +186,29 @@ public class EditPermissionsAction extends PortletAction {
 
 		if (!organizationIntersection) {
 			PermissionServiceUtil.setGroupPermissions(
-				organizationId, layout.getGroupId(), actionIds, resourceId);
+				Organization.class.getName(), organizationId,
+				layout.getGroupId(), actionIds, resourceId);
 		}
 		else {
 			PermissionServiceUtil.setOrgGroupPermissions(
 				organizationId, layout.getGroupId(), actionIds, resourceId);
 		}
+	}
+
+	protected void updateUserGroupPermissions(ActionRequest req)
+		throws Exception {
+
+		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+
+		String resourceId = ParamUtil.getString(req, "resourceId");
+		String userGroupId = ParamUtil.getString(
+			req, "userGroupIdsPosValue");
+		String[] actionIds = StringUtil.split(
+			ParamUtil.getString(req, "userGroupIdActionIds"));
+
+		PermissionServiceUtil.setGroupPermissions(
+			UserGroup.class.getName(), userGroupId, layout.getGroupId(),
+			actionIds, resourceId);
 	}
 
 	protected void updateUserPermissions(ActionRequest req) throws Exception {

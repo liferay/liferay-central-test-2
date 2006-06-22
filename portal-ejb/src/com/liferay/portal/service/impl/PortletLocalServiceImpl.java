@@ -853,9 +853,10 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				portletModel.setPreferencesCompanyWide(GetterUtil.getBoolean(
 					portlet.elementText("preferences-company-wide"),
 					portletModel.isPreferencesCompanyWide()));
-				portletModel.setPreferencesUniquePerLayout(GetterUtil.getBoolean(
-					portlet.elementText("preferences-unique-per-layout"),
-					portletModel.isPreferencesUniquePerLayout()));
+				portletModel.setPreferencesUniquePerLayout(
+					GetterUtil.getBoolean(
+						portlet.elementText("preferences-unique-per-layout"),
+						portletModel.isPreferencesUniquePerLayout()));
 				portletModel.setPreferencesOwnedByGroup(GetterUtil.getBoolean(
 					portlet.elementText("preferences-owned-by-group"),
 					portletModel.isPreferencesOwnedByGroup()));

@@ -39,6 +39,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.ResourceUtil;
@@ -165,7 +166,7 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 			Group group = null;
 
 			try {
-				group = GroupFinder.findByC_N_2(companyId, systemGroups[i]);
+				group = GroupFinder.findByC_N(companyId, systemGroups[i]);
 			}
 			catch (NoSuchGroupException nsge) {
 				group = addGroup(
@@ -261,9 +262,14 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 			ResourceLocalServiceUtil.deleteResource(resource);
 		}
 
-		ResourceLocalServiceUtil.deleteResource(
-			group.getCompanyId(), Group.class.getName(), Resource.TYPE_CLASS,
-			Resource.SCOPE_INDIVIDUAL, group.getPrimaryKey().toString());
+		if (Validator.isNull(group.getClassName()) &&
+			Validator.isNull(group.getClassPK())) {
+
+			ResourceLocalServiceUtil.deleteResource(
+				group.getCompanyId(), Group.class.getName(),
+				Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+				group.getPrimaryKey().toString());
+		}
 
 		// Group
 
@@ -289,7 +295,7 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 	public Group getGroup(String companyId, String name)
 		throws PortalException, SystemException {
 
-		return GroupFinder.findByC_N_2(companyId, name);
+		return GroupFinder.findByC_N(companyId, name);
 	}
 
 	public Group getOrganizationGroup(String companyId, String organizationId)
@@ -320,7 +326,7 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 
 		params.put("layoutSet", Boolean.FALSE);
 
-		return GroupFinder.findByC_N_1(companyId, null, params);
+		return GroupFinder.findByC_N_D(companyId, null, null, params, -1, -1);
 	}
 
 	public List getRoleGroups(String roleId)
@@ -336,18 +342,27 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 			companyId, User.class.getName(), userId);
 	}
 
-	public List getUserGroups(String companyId, String userId)
-		throws SystemException {
+	public Group getUserGroupGroup(String companyId, String userGroupId)
+		throws PortalException, SystemException {
 
-		return GroupFinder.findByGroupsOrgs(companyId, userId, null);
+		return GroupUtil.findByC_C_C(
+			companyId, UserGroup.class.getName(), userGroupId);
 	}
 
-	public List getUserGroups(
-			String companyId, String userId, boolean privateLayout)
-		throws SystemException {
+	public List getUserGroupsGroups(List userGroups)
+		throws PortalException, SystemException {
 
-		return GroupFinder.findByGroupsOrgs(
-			companyId, userId, new Boolean(privateLayout));
+		List userGroupGroups = new ArrayList();
+
+		for (int i = 0; i < userGroups.size(); i++) {
+			UserGroup userGroup = (UserGroup)userGroups.get(i);
+
+			Group group = userGroup.getGroup();
+
+			userGroupGroups.add(group);
+		}
+
+		return userGroupGroups;
 	}
 
 	public boolean hasRoleGroup(String roleId, String groupId)
@@ -359,36 +374,28 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 	public boolean hasUserGroup(String userId, String groupId)
 		throws SystemException {
 
-		if (UserUtil.containsGroup(userId, groupId)) {
+		if (GroupFinder.countByG_U(groupId, userId) > 0) {
 			return true;
 		}
 		else {
-			if (GroupFinder.countByGroupsOrgs(groupId, userId) > 0) {
-				return true;
-			}
-			else {
-				return false;
-			}
+			return false;
 		}
 	}
 
-	public List search(String companyId, String name, Map params)
-		throws SystemException {
-
-		return GroupFinder.findByC_N_1(companyId, name, params);
-	}
-
 	public List search(
-			String companyId, String name, Map params, int begin, int end)
+			String companyId, String name, String description, Map params,
+			int begin, int end)
 		throws SystemException {
 
-		return GroupFinder.findByC_N_1(companyId, name, params, begin, end);
+		return GroupFinder.findByC_N_D(
+			companyId, name, description, params, begin, end);
 	}
 
-	public int searchCount(String companyId, String name, Map params)
+	public int searchCount(
+			String companyId, String name, String description, Map params)
 		throws SystemException {
 
-		return GroupFinder.countByC_N_1(companyId, name, params);
+		return GroupFinder.countByC_N_D(companyId, name, description, params);
 	}
 
 	public void setRoleGroups(String roleId, String[] groupIds)
@@ -504,7 +511,7 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		}
 
 		try {
-			Group group = GroupFinder.findByC_N_2(companyId, name);
+			Group group = GroupFinder.findByC_N(companyId, name);
 
 			if ((groupId == null) || !group.getGroupId().equals(groupId)) {
 				throw new DuplicateGroupException();

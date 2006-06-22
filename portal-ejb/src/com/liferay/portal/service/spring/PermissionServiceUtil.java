@@ -111,14 +111,14 @@ public class PermissionServiceUtil {
 		}
 	}
 
-	public static void setGroupPermissions(java.lang.String organizationId,
-		java.lang.String groupId, java.lang.String[] actionIds,
-		java.lang.String resourceId)
+	public static void setGroupPermissions(java.lang.String className,
+		java.lang.String classPK, java.lang.String groupId,
+		java.lang.String[] actionIds, java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			PermissionService permissionService = PermissionServiceFactory.getService();
-			permissionService.setGroupPermissions(organizationId, groupId,
+			permissionService.setGroupPermissions(className, classPK, groupId,
 				actionIds, resourceId);
 		}
 		catch (com.liferay.portal.PortalException pe) {

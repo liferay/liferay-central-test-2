@@ -47,26 +47,28 @@ import org.hibernate.Session;
  */
 public class RoleFinder {
 
-	public static String COUNT_BY_C_N_1 =
-		RoleFinder.class.getName() + ".countByC_N_1";
+	public static String COUNT_BY_C_N_D =
+		RoleFinder.class.getName() + ".countByC_N_D";
 
-	public static String FIND_BY_C_N_1 =
-		RoleFinder.class.getName() + ".findByC_N_1";
+	public static String FIND_BY_C_N =
+		RoleFinder.class.getName() + ".findByC_N";
 
-	public static String FIND_BY_C_N_2 =
-		RoleFinder.class.getName() + ".findByC_N_2";
+	public static String FIND_BY_C_N_D =
+		RoleFinder.class.getName() + ".findByC_N_D";
 
-	public static int countByC_N_1(String companyId, String name)
+	public static int countByC_N_D(
+			String companyId, String name, String description)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
+		description = StringUtil.lowerCase(description);
 
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_N_1);
+			String sql = CustomSQLUtil.get(COUNT_BY_C_N_D);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -77,6 +79,8 @@ public class RoleFinder {
 			qPos.add(companyId);
 			qPos.add(name);
 			qPos.add(name);
+			qPos.add(description);
+			qPos.add(description);
 
 			Iterator itr = q.list().iterator();
 
@@ -98,97 +102,7 @@ public class RoleFinder {
 		}
 	}
 
-	public static List findByC_N_1(String companyId, String name)
-		throws SystemException {
-
-		name = StringUtil.lowerCase(name);
-
-		List list = new ArrayList();
-
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_C_N_1);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("Role_", RoleHBM.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-			qPos.add(name);
-			qPos.add(name);
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				RoleHBM roleHBM = (RoleHBM)itr.next();
-
-				Role role = RoleHBMUtil.model(roleHBM);
-
-				list.add(role);
-			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-
-		return list;
-	}
-
-	public static List findByC_N_1(
-			String companyId, String name, int begin, int end)
-		throws SystemException {
-
-		name = StringUtil.lowerCase(name);
-
-		List list = new ArrayList();
-
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_C_N_1);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("Role_", RoleHBM.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-			qPos.add(name);
-			qPos.add(name);
-
-			Iterator itr = QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				RoleHBM roleHBM = (RoleHBM)itr.next();
-
-				Role role = RoleHBMUtil.model(roleHBM);
-
-				list.add(role);
-			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-
-		return list;
-	}
-
-	public static Role findByC_N_2(String companyId, String name)
+	public static Role findByC_N(String companyId, String name)
 		throws NoSuchRoleException, SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -198,7 +112,7 @@ public class RoleFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_N_2);
+			String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -227,6 +141,56 @@ public class RoleFinder {
 		throw new NoSuchRoleException(
 			"No Role exists with the key {companyId=" + companyId + ", name=" +
 				name + "}");
+	}
+
+	public static List findByC_N_D(
+			String companyId, String name, String description, int begin,
+			int end)
+		throws SystemException {
+
+		name = StringUtil.lowerCase(name);
+		description = StringUtil.lowerCase(description);
+
+		List list = new ArrayList();
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_C_N_D);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Role_", RoleHBM.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(name);
+			qPos.add(name);
+			qPos.add(description);
+			qPos.add(description);
+
+			Iterator itr = QueryUtil.iterate(
+				q, HibernateUtil.getDialect(), begin, end);
+
+			while (itr.hasNext()) {
+				RoleHBM roleHBM = (RoleHBM)itr.next();
+
+				Role role = RoleHBMUtil.model(roleHBM);
+
+				list.add(role);
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+
+		return list;
 	}
 
 }
