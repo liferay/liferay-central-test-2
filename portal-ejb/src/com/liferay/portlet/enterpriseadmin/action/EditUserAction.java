@@ -217,8 +217,8 @@ public class EditUserAction extends PortletAction {
 			req, user.getUserId(), user.getEmailAddress(), user.getLanguageId(),
 			user.getTimeZoneId(), user.getGreeting(), user.getResolution(),
 			comments, contact.getSmsSn(), contact.getAimSn(),
-			contact.getIcqSn(), contact.getMsnSn(), contact.getSkypeSn(),
-			contact.getYmSn());
+			contact.getIcqSn(), contact.getJabberSn(), contact.getMsnSn(),
+			contact.getSkypeSn(), contact.getYmSn());
 
 		return user;
 	}
@@ -239,7 +239,8 @@ public class EditUserAction extends PortletAction {
 			req, user.getUserId(), user.getEmailAddress(), languageId,
 			timeZoneId, greeting, resolution, user.getComments(),
 			contact.getSmsSn(), contact.getAimSn(), contact.getIcqSn(),
-			contact.getMsnSn(), contact.getSkypeSn(), contact.getYmSn());
+			contact.getJabberSn(), contact.getMsnSn(), contact.getSkypeSn(),
+			contact.getYmSn());
 
 		// Reset the locale
 
@@ -260,6 +261,7 @@ public class EditUserAction extends PortletAction {
 	protected User updateIm(ActionRequest req) throws Exception {
 		String aimSn = ParamUtil.getString(req, "aimSn");
 		String icqSn = ParamUtil.getString(req, "icqSn");
+		String jabberSn = ParamUtil.getString(req, "jabberSn");
 		String msnSn = ParamUtil.getString(req, "msnSn");
 		String skypeSn = ParamUtil.getString(req, "skypeSn");
 		String ymSn = ParamUtil.getString(req, "ymSn");
@@ -271,8 +273,8 @@ public class EditUserAction extends PortletAction {
 		AdminUtil.updateUser(
 			req, user.getUserId(), user.getEmailAddress(), user.getLanguageId(),
 			user.getTimeZoneId(), user.getGreeting(), user.getResolution(),
-			user.getComments(), contact.getSmsSn(), aimSn, icqSn, msnSn,
-			skypeSn, ymSn);
+			user.getComments(), contact.getSmsSn(), aimSn, icqSn, jabberSn,
+			msnSn, skypeSn, ymSn);
 
 		return user;
 	}
@@ -309,7 +311,8 @@ public class EditUserAction extends PortletAction {
 			req, user.getUserId(), user.getEmailAddress(), user.getLanguageId(),
 			user.getTimeZoneId(), user.getGreeting(), user.getResolution(),
 			user.getComments(), smsSn, contact.getAimSn(), contact.getIcqSn(),
-			contact.getMsnSn(), contact.getSkypeSn(), contact.getYmSn());
+			contact.getJabberSn(), contact.getMsnSn(), contact.getSkypeSn(),
+			contact.getYmSn());
 
 		return user;
 	}
@@ -371,8 +374,9 @@ public class EditUserAction extends PortletAction {
 				user.getComments(), firstName, middleName, lastName, nickName,
 				prefixId, suffixId, male, birthdayMonth, birthdayDay,
 				birthdayYear, contact.getSmsSn(), contact.getAimSn(),
-				contact.getIcqSn(), contact.getMsnSn(), contact.getSkypeSn(),
-				contact.getYmSn(), jobTitle, organizationId, locationId);
+				contact.getIcqSn(), contact.getJabberSn(), contact.getMsnSn(),
+				contact.getSkypeSn(), contact.getYmSn(), jobTitle,
+				organizationId, locationId);
 		}
 
 		return user;

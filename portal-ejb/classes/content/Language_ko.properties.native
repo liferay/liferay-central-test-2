@@ -1025,6 +1025,7 @@ item=품목
 items=품목
 ja_en=영어에 일본어
 jaas-is-not-configured-properly=JAAS은 적당하게 형성하지 않는다.
+jabber=빨리 지껄임
 jboss-prefix=JBoss접두어
 job-class=일 종류
 job-title=직위

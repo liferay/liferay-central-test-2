@@ -1147,7 +1147,8 @@ public class UserServiceHttp {
 		java.lang.String nickName, java.lang.String prefixId,
 		java.lang.String suffixId, boolean male, int birthdayMonth,
 		int birthdayDay, int birthdayYear, java.lang.String smsSn,
-		java.lang.String aimSn, java.lang.String icqSn, java.lang.String msnSn,
+		java.lang.String aimSn, java.lang.String icqSn,
+		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String skypeSn, java.lang.String ymSn,
 		java.lang.String jobTitle, java.lang.String organizationId,
 		java.lang.String locationId)
@@ -1260,40 +1261,46 @@ public class UserServiceHttp {
 				paramObj20 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj21 = msnSn;
+			Object paramObj21 = jabberSn;
 
-			if (msnSn == null) {
+			if (jabberSn == null) {
 				paramObj21 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj22 = skypeSn;
+			Object paramObj22 = msnSn;
 
-			if (skypeSn == null) {
+			if (msnSn == null) {
 				paramObj22 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj23 = ymSn;
+			Object paramObj23 = skypeSn;
 
-			if (ymSn == null) {
+			if (skypeSn == null) {
 				paramObj23 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj24 = jobTitle;
+			Object paramObj24 = ymSn;
 
-			if (jobTitle == null) {
+			if (ymSn == null) {
 				paramObj24 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj25 = organizationId;
+			Object paramObj25 = jobTitle;
 
-			if (organizationId == null) {
+			if (jobTitle == null) {
 				paramObj25 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj26 = locationId;
+			Object paramObj26 = organizationId;
+
+			if (organizationId == null) {
+				paramObj26 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj27 = locationId;
 
 			if (locationId == null) {
-				paramObj26 = new NullWrapper("java.lang.String");
+				paramObj27 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -1305,7 +1312,7 @@ public class UserServiceHttp {
 						paramObj14, paramObj15, paramObj16, paramObj17,
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
-						paramObj26
+						paramObj26, paramObj27
 					});
 			Object returnObj = null;
 

@@ -99,8 +99,8 @@ public class ViewAction extends PortletAction {
 					user.getTimeZoneId(), user.getGreeting(),
 					user.getResolution(), user.getComments(),
 					contact.getSmsSn(), contact.getAimSn(), contact.getIcqSn(),
-					contact.getMsnSn(), contact.getSkypeSn(),
-					contact.getYmSn());
+					contact.getJabberSn(), contact.getMsnSn(),
+					contact.getSkypeSn(), contact.getYmSn());
 			}
 
 			httpSes.setAttribute(Globals.LOCALE_KEY, locale);

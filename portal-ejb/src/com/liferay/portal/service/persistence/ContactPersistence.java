@@ -116,6 +116,7 @@ public class ContactPersistence extends BasePersistence {
 					contactHBM.setSmsSn(contact.getSmsSn());
 					contactHBM.setAimSn(contact.getAimSn());
 					contactHBM.setIcqSn(contact.getIcqSn());
+					contactHBM.setJabberSn(contact.getJabberSn());
 					contactHBM.setMsnSn(contact.getMsnSn());
 					contactHBM.setSkypeSn(contact.getSkypeSn());
 					contactHBM.setYmSn(contact.getYmSn());
@@ -150,6 +151,7 @@ public class ContactPersistence extends BasePersistence {
 						contactHBM.setSmsSn(contact.getSmsSn());
 						contactHBM.setAimSn(contact.getAimSn());
 						contactHBM.setIcqSn(contact.getIcqSn());
+						contactHBM.setJabberSn(contact.getJabberSn());
 						contactHBM.setMsnSn(contact.getMsnSn());
 						contactHBM.setSkypeSn(contact.getSkypeSn());
 						contactHBM.setYmSn(contact.getYmSn());
@@ -181,6 +183,7 @@ public class ContactPersistence extends BasePersistence {
 						contactHBM.setSmsSn(contact.getSmsSn());
 						contactHBM.setAimSn(contact.getAimSn());
 						contactHBM.setIcqSn(contact.getIcqSn());
+						contactHBM.setJabberSn(contact.getJabberSn());
 						contactHBM.setMsnSn(contact.getMsnSn());
 						contactHBM.setSkypeSn(contact.getSkypeSn());
 						contactHBM.setYmSn(contact.getYmSn());

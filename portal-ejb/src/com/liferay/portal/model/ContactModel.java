@@ -84,6 +84,9 @@ public class ContactModel extends BaseModel {
 	public static boolean XSS_ALLOW_ICQSN = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.icqSn"),
 			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_JABBERSN = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Contact.jabberSn"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_MSNSN = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.msnSn"),
 			XSS_ALLOW_BY_MODEL);
@@ -446,6 +449,24 @@ public class ContactModel extends BaseModel {
 		}
 	}
 
+	public String getJabberSn() {
+		return GetterUtil.getString(_jabberSn);
+	}
+
+	public void setJabberSn(String jabberSn) {
+		if (((jabberSn == null) && (_jabberSn != null)) ||
+				((jabberSn != null) && (_jabberSn == null)) ||
+				((jabberSn != null) && (_jabberSn != null) &&
+				!jabberSn.equals(_jabberSn))) {
+			if (!XSS_ALLOW_JABBERSN) {
+				jabberSn = XSSUtil.strip(jabberSn);
+			}
+
+			_jabberSn = jabberSn;
+			setModified(true);
+		}
+	}
+
 	public String getMsnSn() {
 		return GetterUtil.getString(_msnSn);
 	}
@@ -609,6 +630,7 @@ public class ContactModel extends BaseModel {
 		clone.setSmsSn(getSmsSn());
 		clone.setAimSn(getAimSn());
 		clone.setIcqSn(getIcqSn());
+		clone.setJabberSn(getJabberSn());
 		clone.setMsnSn(getMsnSn());
 		clone.setSkypeSn(getSkypeSn());
 		clone.setYmSn(getYmSn());
@@ -679,6 +701,7 @@ public class ContactModel extends BaseModel {
 	private String _smsSn;
 	private String _aimSn;
 	private String _icqSn;
+	private String _jabberSn;
 	private String _msnSn;
 	private String _skypeSn;
 	private String _ymSn;

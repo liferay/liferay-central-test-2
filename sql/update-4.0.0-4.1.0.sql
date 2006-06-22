@@ -1,3 +1,5 @@
+alter table Contact_ add jabberSn VARCHAR(75) null;
+
 alter table Group_ add type_ VARCHAR(75) null;
 
 create table Groups_Orgs (

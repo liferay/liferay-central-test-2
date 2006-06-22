@@ -90,6 +90,7 @@
 		<field name="smsSn" type="String" />
 		<field name="aimSn" type="String" />
 		<field name="icqSn" type="String" />
+		<field name="jabberSn" type="String" />
 		<field name="msnSn" type="String" />
 		<field name="skypeSn" type="String" />
 		<field name="ymSn" type="String" />

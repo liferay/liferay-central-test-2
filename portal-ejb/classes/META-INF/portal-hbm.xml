@@ -79,6 +79,7 @@
 		<property name="smsSn" />
 		<property name="aimSn" />
 		<property name="icqSn" />
+		<property name="jabberSn" />
 		<property name="msnSn" />
 		<property name="skypeSn" />
 		<property name="ymSn" />

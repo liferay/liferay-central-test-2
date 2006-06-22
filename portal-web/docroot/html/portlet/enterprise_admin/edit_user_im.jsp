@@ -50,6 +50,16 @@
 </tr>
 <tr>
 	<td>
+		<%= LanguageUtil.get(pageContext, "jabber") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="jabberSn" />
+	</td>
+	<td colspan="2"></td>
+</tr>
+<tr>
+	<td>
 		<%= LanguageUtil.get(pageContext, "msn") %>
 	</td>
 	<td style="padding-left: 10px;"></td>

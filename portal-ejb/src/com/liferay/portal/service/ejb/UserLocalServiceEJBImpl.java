@@ -359,7 +359,8 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		java.lang.String nickName, java.lang.String prefixId,
 		java.lang.String suffixId, boolean male, int birthdayMonth,
 		int birthdayDay, int birthdayYear, java.lang.String smsSn,
-		java.lang.String aimSn, java.lang.String icqSn, java.lang.String msnSn,
+		java.lang.String aimSn, java.lang.String icqSn,
+		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String skypeSn, java.lang.String ymSn,
 		java.lang.String jobTitle, java.lang.String organizationId,
 		java.lang.String locationId)
@@ -369,7 +370,7 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 			languageId, timeZoneId, greeting, resolution, comments, firstName,
 			middleName, lastName, nickName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, icqSn,
-			msnSn, skypeSn, ymSn, jobTitle, organizationId, locationId);
+			jabberSn, msnSn, skypeSn, ymSn, jobTitle, organizationId, locationId);
 	}
 
 	public void ejbCreate() throws CreateException {
