@@ -16,13 +16,13 @@ Commons Email 1.0
 Commons FileUpload 1.1dev (July 15, 2005, 1.1 makes all file names lower case)
 Commons HttpClient 3.0
 Commons IO 1.0
-Commons Lang 2.0
+Commons Lang 2.1
 Commons Logging 1.1
 Commons Pool 1.2
 Commons Validator 1.1.4
 Compass 0.9.0
 Concurrent 1.3.4
-Display Tag Library 1.0
+Display Tag Library 1.1
 dom4j 1.6.1
 EasyConf 0.9
 Ehcache 1.1

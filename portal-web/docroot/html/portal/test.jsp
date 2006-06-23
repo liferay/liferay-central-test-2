@@ -24,8 +24,8 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
-<%--
-List users = CompanyLocalServiceUtil.getUsers(company.getCompanyId(), 0, 10);
+<%
+List users = UserLocalServiceUtil.search("liferay.com", null, null, null, null, true, null, true, 0, 10, null);
 
 request.setAttribute("users", users);
 %>
@@ -33,7 +33,7 @@ request.setAttribute("users", users);
 <display:table name="users">
 	<display:column property="userId" title="User ID" />
 	<display:column property="emailAddress" title="Email Address" />
-</display:table>--%>
+</display:table>
 
 <%
 System.out.println(request.getClass().getName());
@@ -41,14 +41,4 @@ System.out.println("request.getRemoteUser() " + request.getRemoteUser());
 PortalServiceUtil.test();
 %>
 
-<%--
-<table>
-<tr>
-	<td>
-		<font class="gamma" size="2"><b>
-		Test
-		</font>
-	</td>
-</tr>
-</table>
---%>
+Test
