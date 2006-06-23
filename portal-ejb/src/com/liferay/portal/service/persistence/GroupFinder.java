@@ -306,15 +306,8 @@ public class GroupFinder {
 				qPos.add(description);
 			}
 
-			Iterator itr = null;
-			
-			if (begin > 0 || end > 0) {
-				itr = QueryUtil.iterate(
-						q, HibernateUtil.getDialect(), begin, end);
-			}
-			else {
-				itr = q.list().iterator();
-			}
+			Iterator itr = QueryUtil.iterate(
+				q, HibernateUtil.getDialect(), begin, end);
 
 			while (itr.hasNext()) {
 				String groupId = (String)itr.next();

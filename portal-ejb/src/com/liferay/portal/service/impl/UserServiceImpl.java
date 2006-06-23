@@ -54,6 +54,10 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public boolean addGroupUsers(String groupId, String[] userIds)
 		throws PortalException, SystemException {
 
+		if ((userIds == null) || (userIds.length == 0)) {
+			return false;
+		}
+
 		checkPermission(groupId, userIds);
 
 		return UserLocalServiceUtil.addGroupUsers(groupId, userIds);
@@ -180,6 +184,10 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 
 	public boolean unsetGroupUsers(String groupId, String[] userIds)
 		throws PortalException, SystemException {
+
+		if ((userIds == null) || (userIds.length == 0)) {
+			return false;
+		}
 
 		checkPermission(groupId, userIds);
 
