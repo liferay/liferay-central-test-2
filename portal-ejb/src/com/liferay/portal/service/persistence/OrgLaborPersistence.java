@@ -216,7 +216,14 @@ public class OrgLaborPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM OrgLabor IN CLASS com.liferay.portal.service.persistence.OrgLaborHBM WHERE ");
-			query.append("organizationId = ?");
+
+			if (organizationId == null) {
+				query.append("organizationId is null");
+			}
+			else {
+				query.append("organizationId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("organizationId ASC").append(", ");
@@ -224,7 +231,10 @@ public class OrgLaborPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, organizationId);
+
+			if (organizationId != null) {
+				q.setString(queryPos++, organizationId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -259,7 +269,14 @@ public class OrgLaborPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM OrgLabor IN CLASS com.liferay.portal.service.persistence.OrgLaborHBM WHERE ");
-			query.append("organizationId = ?");
+
+			if (organizationId == null) {
+				query.append("organizationId is null");
+			}
+			else {
+				query.append("organizationId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -273,7 +290,10 @@ public class OrgLaborPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, organizationId);
+
+			if (organizationId != null) {
+				q.setString(queryPos++, organizationId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -343,7 +363,14 @@ public class OrgLaborPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM OrgLabor IN CLASS com.liferay.portal.service.persistence.OrgLaborHBM WHERE ");
-			query.append("organizationId = ?");
+
+			if (organizationId == null) {
+				query.append("organizationId is null");
+			}
+			else {
+				query.append("organizationId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -357,7 +384,10 @@ public class OrgLaborPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, organizationId);
+
+			if (organizationId != null) {
+				q.setString(queryPos++, organizationId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					orgLabor, OrgLaborHBMUtil.getInstance());
@@ -418,7 +448,14 @@ public class OrgLaborPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM OrgLabor IN CLASS com.liferay.portal.service.persistence.OrgLaborHBM WHERE ");
-			query.append("organizationId = ?");
+
+			if (organizationId == null) {
+				query.append("organizationId is null");
+			}
+			else {
+				query.append("organizationId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("organizationId ASC").append(", ");
@@ -426,7 +463,10 @@ public class OrgLaborPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, organizationId);
+
+			if (organizationId != null) {
+				q.setString(queryPos++, organizationId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -456,12 +496,22 @@ public class OrgLaborPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM OrgLabor IN CLASS com.liferay.portal.service.persistence.OrgLaborHBM WHERE ");
-			query.append("organizationId = ?");
+
+			if (organizationId == null) {
+				query.append("organizationId is null");
+			}
+			else {
+				query.append("organizationId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, organizationId);
+
+			if (organizationId != null) {
+				q.setString(queryPos++, organizationId);
+			}
 
 			Iterator itr = q.list().iterator();
 

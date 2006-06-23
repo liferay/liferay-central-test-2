@@ -194,7 +194,14 @@ public class WikiPagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("nodeId ASC").append(", ");
@@ -203,7 +210,10 @@ public class WikiPagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -238,7 +248,14 @@ public class WikiPagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -253,7 +270,10 @@ public class WikiPagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -323,7 +343,14 @@ public class WikiPagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -338,7 +365,10 @@ public class WikiPagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					wikiPage, WikiPageHBMUtil.getInstance());
@@ -367,9 +397,23 @@ public class WikiPagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("title = ?");
+
+			if (title == null) {
+				query.append("title is null");
+			}
+			else {
+				query.append("title = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("nodeId ASC").append(", ");
@@ -378,8 +422,14 @@ public class WikiPagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
-			q.setString(queryPos++, title);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
+
+			if (title != null) {
+				q.setString(queryPos++, title);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -414,9 +464,23 @@ public class WikiPagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("title = ?");
+
+			if (title == null) {
+				query.append("title is null");
+			}
+			else {
+				query.append("title = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -431,8 +495,14 @@ public class WikiPagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
-			q.setString(queryPos++, title);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
+
+			if (title != null) {
+				q.setString(queryPos++, title);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -508,9 +578,23 @@ public class WikiPagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("title = ?");
+
+			if (title == null) {
+				query.append("title is null");
+			}
+			else {
+				query.append("title = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -525,8 +609,14 @@ public class WikiPagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
-			q.setString(queryPos++, title);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
+
+			if (title != null) {
+				q.setString(queryPos++, title);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					wikiPage, WikiPageHBMUtil.getInstance());
@@ -555,7 +645,14 @@ public class WikiPagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" AND ");
 			query.append("head = ?");
 			query.append(" ");
@@ -566,7 +663,11 @@ public class WikiPagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
+
 			q.setBoolean(queryPos++, head);
 
 			Iterator itr = q.list().iterator();
@@ -602,7 +703,14 @@ public class WikiPagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" AND ");
 			query.append("head = ?");
 			query.append(" ");
@@ -619,7 +727,11 @@ public class WikiPagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
+
 			q.setBoolean(queryPos++, head);
 
 			List list = new ArrayList();
@@ -696,7 +808,14 @@ public class WikiPagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" AND ");
 			query.append("head = ?");
 			query.append(" ");
@@ -713,7 +832,11 @@ public class WikiPagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
+
 			q.setBoolean(queryPos++, head);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -743,9 +866,23 @@ public class WikiPagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("title = ?");
+
+			if (title == null) {
+				query.append("title is null");
+			}
+			else {
+				query.append("title = ?");
+			}
+
 			query.append(" AND ");
 			query.append("head = ?");
 			query.append(" ");
@@ -756,8 +893,15 @@ public class WikiPagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
-			q.setString(queryPos++, title);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
+
+			if (title != null) {
+				q.setString(queryPos++, title);
+			}
+
 			q.setBoolean(queryPos++, head);
 
 			Iterator itr = q.list().iterator();
@@ -793,9 +937,23 @@ public class WikiPagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("title = ?");
+
+			if (title == null) {
+				query.append("title is null");
+			}
+			else {
+				query.append("title = ?");
+			}
+
 			query.append(" AND ");
 			query.append("head = ?");
 			query.append(" ");
@@ -812,8 +970,15 @@ public class WikiPagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
-			q.setString(queryPos++, title);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
+
+			if (title != null) {
+				q.setString(queryPos++, title);
+			}
+
 			q.setBoolean(queryPos++, head);
 
 			List list = new ArrayList();
@@ -896,9 +1061,23 @@ public class WikiPagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("title = ?");
+
+			if (title == null) {
+				query.append("title is null");
+			}
+			else {
+				query.append("title = ?");
+			}
+
 			query.append(" AND ");
 			query.append("head = ?");
 			query.append(" ");
@@ -915,8 +1094,15 @@ public class WikiPagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
-			q.setString(queryPos++, title);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
+
+			if (title != null) {
+				q.setString(queryPos++, title);
+			}
+
 			q.setBoolean(queryPos++, head);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -978,7 +1164,14 @@ public class WikiPagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("nodeId ASC").append(", ");
@@ -987,7 +1180,10 @@ public class WikiPagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -1016,9 +1212,23 @@ public class WikiPagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("title = ?");
+
+			if (title == null) {
+				query.append("title is null");
+			}
+			else {
+				query.append("title = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("nodeId ASC").append(", ");
@@ -1027,8 +1237,14 @@ public class WikiPagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
-			q.setString(queryPos++, title);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
+
+			if (title != null) {
+				q.setString(queryPos++, title);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -1057,7 +1273,14 @@ public class WikiPagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" AND ");
 			query.append("head = ?");
 			query.append(" ");
@@ -1068,7 +1291,11 @@ public class WikiPagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
+
 			q.setBoolean(queryPos++, head);
 
 			Iterator itr = q.list().iterator();
@@ -1098,9 +1325,23 @@ public class WikiPagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("title = ?");
+
+			if (title == null) {
+				query.append("title is null");
+			}
+			else {
+				query.append("title = ?");
+			}
+
 			query.append(" AND ");
 			query.append("head = ?");
 			query.append(" ");
@@ -1111,8 +1352,15 @@ public class WikiPagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
-			q.setString(queryPos++, title);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
+
+			if (title != null) {
+				q.setString(queryPos++, title);
+			}
+
 			q.setBoolean(queryPos++, head);
 
 			Iterator itr = q.list().iterator();
@@ -1142,12 +1390,22 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -1180,15 +1438,35 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("title = ?");
+
+			if (title == null) {
+				query.append("title is null");
+			}
+			else {
+				query.append("title = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
-			q.setString(queryPos++, title);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
+
+			if (title != null) {
+				q.setString(queryPos++, title);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -1221,14 +1499,25 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" AND ");
 			query.append("head = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
+
 			q.setBoolean(queryPos++, head);
 
 			Iterator itr = q.list().iterator();
@@ -1262,17 +1551,38 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
-			query.append("nodeId = ?");
+
+			if (nodeId == null) {
+				query.append("nodeId is null");
+			}
+			else {
+				query.append("nodeId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("title = ?");
+
+			if (title == null) {
+				query.append("title is null");
+			}
+			else {
+				query.append("title = ?");
+			}
+
 			query.append(" AND ");
 			query.append("head = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, nodeId);
-			q.setString(queryPos++, title);
+
+			if (nodeId != null) {
+				q.setString(queryPos++, nodeId);
+			}
+
+			if (title != null) {
+				q.setString(queryPos++, title);
+			}
+
 			q.setBoolean(queryPos++, head);
 
 			Iterator itr = q.list().iterator();

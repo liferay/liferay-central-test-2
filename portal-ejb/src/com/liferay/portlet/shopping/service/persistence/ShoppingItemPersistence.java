@@ -950,14 +950,24 @@ public class ShoppingItemPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ShoppingItem IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemHBM WHERE ");
-			query.append("categoryId = ?");
+
+			if (categoryId == null) {
+				query.append("categoryId is null");
+			}
+			else {
+				query.append("categoryId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("itemId ASC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, categoryId);
+
+			if (categoryId != null) {
+				q.setString(queryPos++, categoryId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -992,7 +1002,14 @@ public class ShoppingItemPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ShoppingItem IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemHBM WHERE ");
-			query.append("categoryId = ?");
+
+			if (categoryId == null) {
+				query.append("categoryId is null");
+			}
+			else {
+				query.append("categoryId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -1005,7 +1022,10 @@ public class ShoppingItemPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, categoryId);
+
+			if (categoryId != null) {
+				q.setString(queryPos++, categoryId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -1075,7 +1095,14 @@ public class ShoppingItemPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ShoppingItem IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemHBM WHERE ");
-			query.append("categoryId = ?");
+
+			if (categoryId == null) {
+				query.append("categoryId is null");
+			}
+			else {
+				query.append("categoryId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -1088,7 +1115,10 @@ public class ShoppingItemPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, categoryId);
+
+			if (categoryId != null) {
+				q.setString(queryPos++, categoryId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingItem, ShoppingItemHBMUtil.getInstance());
@@ -1118,17 +1148,37 @@ public class ShoppingItemPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ShoppingItem IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("sku = ?");
+
+			if (sku == null) {
+				query.append("sku is null");
+			}
+			else {
+				query.append("sku = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("itemId ASC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, sku);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (sku != null) {
+				q.setString(queryPos++, sku);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -1196,14 +1246,24 @@ public class ShoppingItemPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ShoppingItem IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemHBM WHERE ");
-			query.append("categoryId = ?");
+
+			if (categoryId == null) {
+				query.append("categoryId is null");
+			}
+			else {
+				query.append("categoryId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("itemId ASC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, categoryId);
+
+			if (categoryId != null) {
+				q.setString(queryPos++, categoryId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -1232,17 +1292,37 @@ public class ShoppingItemPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ShoppingItem IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("sku = ?");
+
+			if (sku == null) {
+				query.append("sku is null");
+			}
+			else {
+				query.append("sku = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("itemId ASC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, sku);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (sku != null) {
+				q.setString(queryPos++, sku);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -1284,12 +1364,22 @@ public class ShoppingItemPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM ShoppingItem IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemHBM WHERE ");
-			query.append("categoryId = ?");
+
+			if (categoryId == null) {
+				query.append("categoryId is null");
+			}
+			else {
+				query.append("categoryId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, categoryId);
+
+			if (categoryId != null) {
+				q.setString(queryPos++, categoryId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -1322,15 +1412,35 @@ public class ShoppingItemPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM ShoppingItem IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("sku = ?");
+
+			if (sku == null) {
+				query.append("sku is null");
+			}
+			else {
+				query.append("sku = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, sku);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (sku != null) {
+				q.setString(queryPos++, sku);
+			}
 
 			Iterator itr = q.list().iterator();
 

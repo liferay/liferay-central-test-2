@@ -200,7 +200,14 @@ public class LayoutPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("parentLayoutId ASC").append(", ");
@@ -208,7 +215,10 @@ public class LayoutPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -243,7 +253,14 @@ public class LayoutPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -257,7 +274,10 @@ public class LayoutPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -325,7 +345,14 @@ public class LayoutPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -339,7 +366,10 @@ public class LayoutPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout,
 					LayoutHBMUtil.getInstance());
@@ -368,9 +398,23 @@ public class LayoutPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentLayoutId = ?");
+
+			if (parentLayoutId == null) {
+				query.append("parentLayoutId is null");
+			}
+			else {
+				query.append("parentLayoutId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("parentLayoutId ASC").append(", ");
@@ -378,8 +422,14 @@ public class LayoutPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
-			q.setString(queryPos++, parentLayoutId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
+
+			if (parentLayoutId != null) {
+				q.setString(queryPos++, parentLayoutId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -414,9 +464,23 @@ public class LayoutPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentLayoutId = ?");
+
+			if (parentLayoutId == null) {
+				query.append("parentLayoutId is null");
+			}
+			else {
+				query.append("parentLayoutId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -430,8 +494,14 @@ public class LayoutPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
-			q.setString(queryPos++, parentLayoutId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
+
+			if (parentLayoutId != null) {
+				q.setString(queryPos++, parentLayoutId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -507,9 +577,23 @@ public class LayoutPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentLayoutId = ?");
+
+			if (parentLayoutId == null) {
+				query.append("parentLayoutId is null");
+			}
+			else {
+				query.append("parentLayoutId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -523,8 +607,14 @@ public class LayoutPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
-			q.setString(queryPos++, parentLayoutId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
+
+			if (parentLayoutId != null) {
+				q.setString(queryPos++, parentLayoutId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout,
 					LayoutHBMUtil.getInstance());
@@ -553,9 +643,23 @@ public class LayoutPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("friendlyURL = ?");
+
+			if (friendlyURL == null) {
+				query.append("friendlyURL is null");
+			}
+			else {
+				query.append("friendlyURL = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("parentLayoutId ASC").append(", ");
@@ -563,8 +667,14 @@ public class LayoutPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
-			q.setString(queryPos++, friendlyURL);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
+
+			if (friendlyURL != null) {
+				q.setString(queryPos++, friendlyURL);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -633,7 +743,14 @@ public class LayoutPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("parentLayoutId ASC").append(", ");
@@ -641,7 +758,10 @@ public class LayoutPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -670,9 +790,23 @@ public class LayoutPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentLayoutId = ?");
+
+			if (parentLayoutId == null) {
+				query.append("parentLayoutId is null");
+			}
+			else {
+				query.append("parentLayoutId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("parentLayoutId ASC").append(", ");
@@ -680,8 +814,14 @@ public class LayoutPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
-			q.setString(queryPos++, parentLayoutId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
+
+			if (parentLayoutId != null) {
+				q.setString(queryPos++, parentLayoutId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -710,9 +850,23 @@ public class LayoutPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("friendlyURL = ?");
+
+			if (friendlyURL == null) {
+				query.append("friendlyURL is null");
+			}
+			else {
+				query.append("friendlyURL = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("parentLayoutId ASC").append(", ");
@@ -720,8 +874,14 @@ public class LayoutPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
-			q.setString(queryPos++, friendlyURL);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
+
+			if (friendlyURL != null) {
+				q.setString(queryPos++, friendlyURL);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -763,12 +923,22 @@ public class LayoutPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -801,15 +971,35 @@ public class LayoutPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentLayoutId = ?");
+
+			if (parentLayoutId == null) {
+				query.append("parentLayoutId is null");
+			}
+			else {
+				query.append("parentLayoutId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
-			q.setString(queryPos++, parentLayoutId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
+
+			if (parentLayoutId != null) {
+				q.setString(queryPos++, parentLayoutId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -842,15 +1032,35 @@ public class LayoutPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("friendlyURL = ?");
+
+			if (friendlyURL == null) {
+				query.append("friendlyURL is null");
+			}
+			else {
+				query.append("friendlyURL = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
-			q.setString(queryPos++, friendlyURL);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
+
+			if (friendlyURL != null) {
+				q.setString(queryPos++, friendlyURL);
+			}
 
 			Iterator itr = q.list().iterator();
 

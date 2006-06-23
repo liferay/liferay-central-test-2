@@ -318,20 +318,50 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ShoppingOrder IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingOrderHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("ppPaymentStatus = ?");
+
+			if (ppPaymentStatus == null) {
+				query.append("ppPaymentStatus is null");
+			}
+			else {
+				query.append("ppPaymentStatus = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate DESC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, userId);
-			q.setString(queryPos++, ppPaymentStatus);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
+
+			if (ppPaymentStatus != null) {
+				q.setString(queryPos++, ppPaymentStatus);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -367,11 +397,32 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ShoppingOrder IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingOrderHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("ppPaymentStatus = ?");
+
+			if (ppPaymentStatus == null) {
+				query.append("ppPaymentStatus is null");
+			}
+			else {
+				query.append("ppPaymentStatus = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -384,9 +435,18 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, userId);
-			q.setString(queryPos++, ppPaymentStatus);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
+
+			if (ppPaymentStatus != null) {
+				q.setString(queryPos++, ppPaymentStatus);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -469,11 +529,32 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ShoppingOrder IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingOrderHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("ppPaymentStatus = ?");
+
+			if (ppPaymentStatus == null) {
+				query.append("ppPaymentStatus is null");
+			}
+			else {
+				query.append("ppPaymentStatus = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -486,9 +567,18 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, userId);
-			q.setString(queryPos++, ppPaymentStatus);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
+
+			if (ppPaymentStatus != null) {
+				q.setString(queryPos++, ppPaymentStatus);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingOrder, ShoppingOrderHBMUtil.getInstance());
@@ -548,20 +638,50 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ShoppingOrder IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingOrderHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("ppPaymentStatus = ?");
+
+			if (ppPaymentStatus == null) {
+				query.append("ppPaymentStatus is null");
+			}
+			else {
+				query.append("ppPaymentStatus = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate DESC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, userId);
-			q.setString(queryPos++, ppPaymentStatus);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
+
+			if (ppPaymentStatus != null) {
+				q.setString(queryPos++, ppPaymentStatus);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -591,18 +711,48 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM ShoppingOrder IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingOrderHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("ppPaymentStatus = ?");
+
+			if (ppPaymentStatus == null) {
+				query.append("ppPaymentStatus is null");
+			}
+			else {
+				query.append("ppPaymentStatus = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, userId);
-			q.setString(queryPos++, ppPaymentStatus);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
+
+			if (ppPaymentStatus != null) {
+				q.setString(queryPos++, ppPaymentStatus);
+			}
 
 			Iterator itr = q.list().iterator();
 

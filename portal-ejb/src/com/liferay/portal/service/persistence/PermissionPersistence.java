@@ -2337,12 +2337,22 @@ public class PermissionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Permission_ IN CLASS com.liferay.portal.service.persistence.PermissionHBM WHERE ");
-			query.append("resourceId = ?");
+
+			if (resourceId == null) {
+				query.append("resourceId is null");
+			}
+			else {
+				query.append("resourceId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, resourceId);
+
+			if (resourceId != null) {
+				q.setString(queryPos++, resourceId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -2377,7 +2387,14 @@ public class PermissionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Permission_ IN CLASS com.liferay.portal.service.persistence.PermissionHBM WHERE ");
-			query.append("resourceId = ?");
+
+			if (resourceId == null) {
+				query.append("resourceId is null");
+			}
+			else {
+				query.append("resourceId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -2386,7 +2403,10 @@ public class PermissionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, resourceId);
+
+			if (resourceId != null) {
+				q.setString(queryPos++, resourceId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -2456,7 +2476,14 @@ public class PermissionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Permission_ IN CLASS com.liferay.portal.service.persistence.PermissionHBM WHERE ");
-			query.append("resourceId = ?");
+
+			if (resourceId == null) {
+				query.append("resourceId is null");
+			}
+			else {
+				query.append("resourceId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -2465,7 +2492,10 @@ public class PermissionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, resourceId);
+
+			if (resourceId != null) {
+				q.setString(queryPos++, resourceId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					permission, PermissionHBMUtil.getInstance());
@@ -2494,15 +2524,35 @@ public class PermissionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Permission_ IN CLASS com.liferay.portal.service.persistence.PermissionHBM WHERE ");
-			query.append("actionId = ?");
+
+			if (actionId == null) {
+				query.append("actionId is null");
+			}
+			else {
+				query.append("actionId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("resourceId = ?");
+
+			if (resourceId == null) {
+				query.append("resourceId is null");
+			}
+			else {
+				query.append("resourceId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, actionId);
-			q.setString(queryPos++, resourceId);
+
+			if (actionId != null) {
+				q.setString(queryPos++, actionId);
+			}
+
+			if (resourceId != null) {
+				q.setString(queryPos++, resourceId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -2568,12 +2618,22 @@ public class PermissionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Permission_ IN CLASS com.liferay.portal.service.persistence.PermissionHBM WHERE ");
-			query.append("resourceId = ?");
+
+			if (resourceId == null) {
+				query.append("resourceId is null");
+			}
+			else {
+				query.append("resourceId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, resourceId);
+
+			if (resourceId != null) {
+				q.setString(queryPos++, resourceId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -2602,15 +2662,35 @@ public class PermissionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Permission_ IN CLASS com.liferay.portal.service.persistence.PermissionHBM WHERE ");
-			query.append("actionId = ?");
+
+			if (actionId == null) {
+				query.append("actionId is null");
+			}
+			else {
+				query.append("actionId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("resourceId = ?");
+
+			if (resourceId == null) {
+				query.append("resourceId is null");
+			}
+			else {
+				query.append("resourceId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, actionId);
-			q.setString(queryPos++, resourceId);
+
+			if (actionId != null) {
+				q.setString(queryPos++, actionId);
+			}
+
+			if (resourceId != null) {
+				q.setString(queryPos++, resourceId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -2652,12 +2732,22 @@ public class PermissionPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM Permission_ IN CLASS com.liferay.portal.service.persistence.PermissionHBM WHERE ");
-			query.append("resourceId = ?");
+
+			if (resourceId == null) {
+				query.append("resourceId is null");
+			}
+			else {
+				query.append("resourceId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, resourceId);
+
+			if (resourceId != null) {
+				q.setString(queryPos++, resourceId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -2690,15 +2780,35 @@ public class PermissionPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM Permission_ IN CLASS com.liferay.portal.service.persistence.PermissionHBM WHERE ");
-			query.append("actionId = ?");
+
+			if (actionId == null) {
+				query.append("actionId is null");
+			}
+			else {
+				query.append("actionId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("resourceId = ?");
+
+			if (resourceId == null) {
+				query.append("resourceId is null");
+			}
+			else {
+				query.append("resourceId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, actionId);
-			q.setString(queryPos++, resourceId);
+
+			if (actionId != null) {
+				q.setString(queryPos++, actionId);
+			}
+
+			if (resourceId != null) {
+				q.setString(queryPos++, resourceId);
+			}
 
 			Iterator itr = q.list().iterator();
 

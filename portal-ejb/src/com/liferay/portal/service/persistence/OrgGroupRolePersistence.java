@@ -175,12 +175,22 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM OrgGroupRole IN CLASS com.liferay.portal.service.persistence.OrgGroupRoleHBM WHERE ");
-			query.append("roleId = ?");
+
+			if (roleId == null) {
+				query.append("roleId is null");
+			}
+			else {
+				query.append("roleId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, roleId);
+
+			if (roleId != null) {
+				q.setString(queryPos++, roleId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -215,7 +225,14 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM OrgGroupRole IN CLASS com.liferay.portal.service.persistence.OrgGroupRoleHBM WHERE ");
-			query.append("roleId = ?");
+
+			if (roleId == null) {
+				query.append("roleId is null");
+			}
+			else {
+				query.append("roleId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -224,7 +241,10 @@ public class OrgGroupRolePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, roleId);
+
+			if (roleId != null) {
+				q.setString(queryPos++, roleId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -294,7 +314,14 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM OrgGroupRole IN CLASS com.liferay.portal.service.persistence.OrgGroupRoleHBM WHERE ");
-			query.append("roleId = ?");
+
+			if (roleId == null) {
+				query.append("roleId is null");
+			}
+			else {
+				query.append("roleId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -303,7 +330,10 @@ public class OrgGroupRolePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, roleId);
+
+			if (roleId != null) {
+				q.setString(queryPos++, roleId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					orgGroupRole, OrgGroupRoleHBMUtil.getInstance());
@@ -360,12 +390,22 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM OrgGroupRole IN CLASS com.liferay.portal.service.persistence.OrgGroupRoleHBM WHERE ");
-			query.append("roleId = ?");
+
+			if (roleId == null) {
+				query.append("roleId is null");
+			}
+			else {
+				query.append("roleId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, roleId);
+
+			if (roleId != null) {
+				q.setString(queryPos++, roleId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -394,12 +434,22 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM OrgGroupRole IN CLASS com.liferay.portal.service.persistence.OrgGroupRoleHBM WHERE ");
-			query.append("roleId = ?");
+
+			if (roleId == null) {
+				query.append("roleId is null");
+			}
+			else {
+				query.append("roleId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, roleId);
+
+			if (roleId != null) {
+				q.setString(queryPos++, roleId);
+			}
 
 			Iterator itr = q.list().iterator();
 

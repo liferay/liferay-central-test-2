@@ -181,12 +181,22 @@ public class UserTrackerPathPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM UserTrackerPath IN CLASS com.liferay.portal.service.persistence.UserTrackerPathHBM WHERE ");
-			query.append("userTrackerId = ?");
+
+			if (userTrackerId == null) {
+				query.append("userTrackerId is null");
+			}
+			else {
+				query.append("userTrackerId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userTrackerId);
+
+			if (userTrackerId != null) {
+				q.setString(queryPos++, userTrackerId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -221,7 +231,14 @@ public class UserTrackerPathPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM UserTrackerPath IN CLASS com.liferay.portal.service.persistence.UserTrackerPathHBM WHERE ");
-			query.append("userTrackerId = ?");
+
+			if (userTrackerId == null) {
+				query.append("userTrackerId is null");
+			}
+			else {
+				query.append("userTrackerId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -230,7 +247,10 @@ public class UserTrackerPathPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userTrackerId);
+
+			if (userTrackerId != null) {
+				q.setString(queryPos++, userTrackerId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -300,7 +320,14 @@ public class UserTrackerPathPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM UserTrackerPath IN CLASS com.liferay.portal.service.persistence.UserTrackerPathHBM WHERE ");
-			query.append("userTrackerId = ?");
+
+			if (userTrackerId == null) {
+				query.append("userTrackerId is null");
+			}
+			else {
+				query.append("userTrackerId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -309,7 +336,10 @@ public class UserTrackerPathPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userTrackerId);
+
+			if (userTrackerId != null) {
+				q.setString(queryPos++, userTrackerId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userTrackerPath, UserTrackerPathHBMUtil.getInstance());
@@ -367,12 +397,22 @@ public class UserTrackerPathPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM UserTrackerPath IN CLASS com.liferay.portal.service.persistence.UserTrackerPathHBM WHERE ");
-			query.append("userTrackerId = ?");
+
+			if (userTrackerId == null) {
+				query.append("userTrackerId is null");
+			}
+			else {
+				query.append("userTrackerId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userTrackerId);
+
+			if (userTrackerId != null) {
+				q.setString(queryPos++, userTrackerId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -402,12 +442,22 @@ public class UserTrackerPathPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM UserTrackerPath IN CLASS com.liferay.portal.service.persistence.UserTrackerPathHBM WHERE ");
-			query.append("userTrackerId = ?");
+
+			if (userTrackerId == null) {
+				query.append("userTrackerId is null");
+			}
+			else {
+				query.append("userTrackerId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userTrackerId);
+
+			if (userTrackerId != null) {
+				q.setString(queryPos++, userTrackerId);
+			}
 
 			Iterator itr = q.list().iterator();
 

@@ -3733,12 +3733,22 @@ public class UserPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM User_ IN CLASS com.liferay.portal.service.persistence.UserHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -3773,7 +3783,14 @@ public class UserPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM User_ IN CLASS com.liferay.portal.service.persistence.UserHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -3782,7 +3799,10 @@ public class UserPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -3852,7 +3872,14 @@ public class UserPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM User_ IN CLASS com.liferay.portal.service.persistence.UserHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -3861,7 +3888,10 @@ public class UserPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, user,
 					UserHBMUtil.getInstance());
@@ -3890,15 +3920,35 @@ public class UserPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM User_ IN CLASS com.liferay.portal.service.persistence.UserHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, userId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -3936,15 +3986,35 @@ public class UserPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM User_ IN CLASS com.liferay.portal.service.persistence.UserHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("password_ = ?");
+
+			if (password == null) {
+				query.append("password_ is null");
+			}
+			else {
+				query.append("password_ = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, password);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (password != null) {
+				q.setString(queryPos++, password);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -3979,9 +4049,23 @@ public class UserPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM User_ IN CLASS com.liferay.portal.service.persistence.UserHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("password_ = ?");
+
+			if (password == null) {
+				query.append("password_ is null");
+			}
+			else {
+				query.append("password_ = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -3990,8 +4074,14 @@ public class UserPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, password);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (password != null) {
+				q.setString(queryPos++, password);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -4067,9 +4157,23 @@ public class UserPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM User_ IN CLASS com.liferay.portal.service.persistence.UserHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("password_ = ?");
+
+			if (password == null) {
+				query.append("password_ is null");
+			}
+			else {
+				query.append("password_ = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -4078,8 +4182,14 @@ public class UserPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, password);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (password != null) {
+				q.setString(queryPos++, password);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, user,
 					UserHBMUtil.getInstance());
@@ -4108,15 +4218,35 @@ public class UserPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM User_ IN CLASS com.liferay.portal.service.persistence.UserHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("emailAddress = ?");
+
+			if (emailAddress == null) {
+				query.append("emailAddress is null");
+			}
+			else {
+				query.append("emailAddress = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, emailAddress);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (emailAddress != null) {
+				q.setString(queryPos++, emailAddress);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -4182,12 +4312,22 @@ public class UserPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM User_ IN CLASS com.liferay.portal.service.persistence.UserHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -4216,15 +4356,35 @@ public class UserPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM User_ IN CLASS com.liferay.portal.service.persistence.UserHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, userId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -4266,15 +4426,35 @@ public class UserPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM User_ IN CLASS com.liferay.portal.service.persistence.UserHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("password_ = ?");
+
+			if (password == null) {
+				query.append("password_ is null");
+			}
+			else {
+				query.append("password_ = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, password);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (password != null) {
+				q.setString(queryPos++, password);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -4303,15 +4483,35 @@ public class UserPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM User_ IN CLASS com.liferay.portal.service.persistence.UserHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("emailAddress = ?");
+
+			if (emailAddress == null) {
+				query.append("emailAddress is null");
+			}
+			else {
+				query.append("emailAddress = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, emailAddress);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (emailAddress != null) {
+				q.setString(queryPos++, emailAddress);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -4353,12 +4553,22 @@ public class UserPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM User_ IN CLASS com.liferay.portal.service.persistence.UserHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -4391,15 +4601,35 @@ public class UserPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM User_ IN CLASS com.liferay.portal.service.persistence.UserHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, userId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -4432,15 +4662,35 @@ public class UserPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM User_ IN CLASS com.liferay.portal.service.persistence.UserHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("password_ = ?");
+
+			if (password == null) {
+				query.append("password_ is null");
+			}
+			else {
+				query.append("password_ = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, password);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (password != null) {
+				q.setString(queryPos++, password);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -4473,15 +4723,35 @@ public class UserPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM User_ IN CLASS com.liferay.portal.service.persistence.UserHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("emailAddress = ?");
+
+			if (emailAddress == null) {
+				query.append("emailAddress is null");
+			}
+			else {
+				query.append("emailAddress = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, emailAddress);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (emailAddress != null) {
+				q.setString(queryPos++, emailAddress);
+			}
 
 			Iterator itr = q.list().iterator();
 

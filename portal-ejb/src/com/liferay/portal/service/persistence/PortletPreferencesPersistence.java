@@ -178,12 +178,22 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM PortletPreferences IN CLASS com.liferay.portal.service.persistence.PortletPreferencesHBM WHERE ");
-			query.append("layoutId = ?");
+
+			if (layoutId == null) {
+				query.append("layoutId is null");
+			}
+			else {
+				query.append("layoutId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, layoutId);
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -218,7 +228,14 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM PortletPreferences IN CLASS com.liferay.portal.service.persistence.PortletPreferencesHBM WHERE ");
-			query.append("layoutId = ?");
+
+			if (layoutId == null) {
+				query.append("layoutId is null");
+			}
+			else {
+				query.append("layoutId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -227,7 +244,10 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, layoutId);
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -298,7 +318,14 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM PortletPreferences IN CLASS com.liferay.portal.service.persistence.PortletPreferencesHBM WHERE ");
-			query.append("layoutId = ?");
+
+			if (layoutId == null) {
+				query.append("layoutId is null");
+			}
+			else {
+				query.append("layoutId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -307,7 +334,10 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, layoutId);
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					portletPreferences, PortletPreferencesHBMUtil.getInstance());
@@ -335,12 +365,22 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM PortletPreferences IN CLASS com.liferay.portal.service.persistence.PortletPreferencesHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -375,7 +415,14 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM PortletPreferences IN CLASS com.liferay.portal.service.persistence.PortletPreferencesHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -384,7 +431,10 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -455,7 +505,14 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM PortletPreferences IN CLASS com.liferay.portal.service.persistence.PortletPreferencesHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -464,7 +521,10 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					portletPreferences, PortletPreferencesHBMUtil.getInstance());
@@ -493,15 +553,35 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM PortletPreferences IN CLASS com.liferay.portal.service.persistence.PortletPreferencesHBM WHERE ");
-			query.append("layoutId = ?");
+
+			if (layoutId == null) {
+				query.append("layoutId is null");
+			}
+			else {
+				query.append("layoutId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, layoutId);
-			q.setString(queryPos++, ownerId);
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
+			}
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -536,9 +616,23 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM PortletPreferences IN CLASS com.liferay.portal.service.persistence.PortletPreferencesHBM WHERE ");
-			query.append("layoutId = ?");
+
+			if (layoutId == null) {
+				query.append("layoutId is null");
+			}
+			else {
+				query.append("layoutId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -547,8 +641,14 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, layoutId);
-			q.setString(queryPos++, ownerId);
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
+			}
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -625,9 +725,23 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM PortletPreferences IN CLASS com.liferay.portal.service.persistence.PortletPreferencesHBM WHERE ");
-			query.append("layoutId = ?");
+
+			if (layoutId == null) {
+				query.append("layoutId is null");
+			}
+			else {
+				query.append("layoutId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -636,8 +750,14 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, layoutId);
-			q.setString(queryPos++, ownerId);
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
+			}
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					portletPreferences, PortletPreferencesHBMUtil.getInstance());
@@ -694,12 +814,22 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM PortletPreferences IN CLASS com.liferay.portal.service.persistence.PortletPreferencesHBM WHERE ");
-			query.append("layoutId = ?");
+
+			if (layoutId == null) {
+				query.append("layoutId is null");
+			}
+			else {
+				query.append("layoutId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, layoutId);
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -727,12 +857,22 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM PortletPreferences IN CLASS com.liferay.portal.service.persistence.PortletPreferencesHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -761,15 +901,35 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM PortletPreferences IN CLASS com.liferay.portal.service.persistence.PortletPreferencesHBM WHERE ");
-			query.append("layoutId = ?");
+
+			if (layoutId == null) {
+				query.append("layoutId is null");
+			}
+			else {
+				query.append("layoutId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, layoutId);
-			q.setString(queryPos++, ownerId);
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
+			}
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -798,12 +958,22 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM PortletPreferences IN CLASS com.liferay.portal.service.persistence.PortletPreferencesHBM WHERE ");
-			query.append("layoutId = ?");
+
+			if (layoutId == null) {
+				query.append("layoutId is null");
+			}
+			else {
+				query.append("layoutId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, layoutId);
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -835,12 +1005,22 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM PortletPreferences IN CLASS com.liferay.portal.service.persistence.PortletPreferencesHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -873,15 +1053,35 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM PortletPreferences IN CLASS com.liferay.portal.service.persistence.PortletPreferencesHBM WHERE ");
-			query.append("layoutId = ?");
+
+			if (layoutId == null) {
+				query.append("layoutId is null");
+			}
+			else {
+				query.append("layoutId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, layoutId);
-			q.setString(queryPos++, ownerId);
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
+			}
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Iterator itr = q.list().iterator();
 

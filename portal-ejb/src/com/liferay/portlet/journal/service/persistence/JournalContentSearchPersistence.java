@@ -185,12 +185,22 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -226,7 +236,14 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -235,7 +252,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -308,7 +328,14 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -317,7 +344,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalContentSearch,
@@ -347,15 +377,35 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("layoutId = ?");
+
+			if (layoutId == null) {
+				query.append("layoutId is null");
+			}
+			else {
+				query.append("layoutId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, layoutId);
-			q.setString(queryPos++, ownerId);
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
+			}
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -391,9 +441,23 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("layoutId = ?");
+
+			if (layoutId == null) {
+				query.append("layoutId is null");
+			}
+			else {
+				query.append("layoutId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -402,8 +466,14 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, layoutId);
-			q.setString(queryPos++, ownerId);
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
+			}
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -482,9 +552,23 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("layoutId = ?");
+
+			if (layoutId == null) {
+				query.append("layoutId is null");
+			}
+			else {
+				query.append("layoutId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -493,8 +577,14 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, layoutId);
-			q.setString(queryPos++, ownerId);
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
+			}
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalContentSearch,
@@ -524,15 +614,35 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("articleId = ?");
+
+			if (articleId == null) {
+				query.append("articleId is null");
+			}
+			else {
+				query.append("articleId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
-			q.setString(queryPos++, articleId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
+
+			if (articleId != null) {
+				q.setString(queryPos++, articleId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -568,9 +678,23 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("articleId = ?");
+
+			if (articleId == null) {
+				query.append("articleId is null");
+			}
+			else {
+				query.append("articleId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -579,8 +703,14 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
-			q.setString(queryPos++, articleId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
+
+			if (articleId != null) {
+				q.setString(queryPos++, articleId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -659,9 +789,23 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("articleId = ?");
+
+			if (articleId == null) {
+				query.append("articleId is null");
+			}
+			else {
+				query.append("articleId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -670,8 +814,14 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
-			q.setString(queryPos++, articleId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
+
+			if (articleId != null) {
+				q.setString(queryPos++, articleId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalContentSearch,
@@ -701,15 +851,35 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("articleId = ?");
+
+			if (articleId == null) {
+				query.append("articleId is null");
+			}
+			else {
+				query.append("articleId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, articleId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (articleId != null) {
+				q.setString(queryPos++, articleId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -745,9 +915,23 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("articleId = ?");
+
+			if (articleId == null) {
+				query.append("articleId is null");
+			}
+			else {
+				query.append("articleId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -756,8 +940,14 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, articleId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (articleId != null) {
+				q.setString(queryPos++, articleId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -836,9 +1026,23 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("articleId = ?");
+
+			if (articleId == null) {
+				query.append("articleId is null");
+			}
+			else {
+				query.append("articleId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -847,8 +1051,14 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, articleId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (articleId != null) {
+				q.setString(queryPos++, articleId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalContentSearch,
@@ -907,12 +1117,22 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -941,15 +1161,35 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("layoutId = ?");
+
+			if (layoutId == null) {
+				query.append("layoutId is null");
+			}
+			else {
+				query.append("layoutId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, layoutId);
-			q.setString(queryPos++, ownerId);
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
+			}
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -978,15 +1218,35 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("articleId = ?");
+
+			if (articleId == null) {
+				query.append("articleId is null");
+			}
+			else {
+				query.append("articleId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
-			q.setString(queryPos++, articleId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
+
+			if (articleId != null) {
+				q.setString(queryPos++, articleId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -1015,15 +1275,35 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("articleId = ?");
+
+			if (articleId == null) {
+				query.append("articleId is null");
+			}
+			else {
+				query.append("articleId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, articleId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (articleId != null) {
+				q.setString(queryPos++, articleId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -1052,12 +1332,22 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -1090,15 +1380,35 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("layoutId = ?");
+
+			if (layoutId == null) {
+				query.append("layoutId is null");
+			}
+			else {
+				query.append("layoutId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, layoutId);
-			q.setString(queryPos++, ownerId);
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
+			}
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -1131,15 +1441,35 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("ownerId = ?");
+
+			if (ownerId == null) {
+				query.append("ownerId is null");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("articleId = ?");
+
+			if (articleId == null) {
+				query.append("articleId is null");
+			}
+			else {
+				query.append("articleId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, ownerId);
-			q.setString(queryPos++, articleId);
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
+
+			if (articleId != null) {
+				q.setString(queryPos++, articleId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -1172,15 +1502,35 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("articleId = ?");
+
+			if (articleId == null) {
+				query.append("articleId is null");
+			}
+			else {
+				query.append("articleId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, articleId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (articleId != null) {
+				q.setString(queryPos++, articleId);
+			}
 
 			Iterator itr = q.list().iterator();
 

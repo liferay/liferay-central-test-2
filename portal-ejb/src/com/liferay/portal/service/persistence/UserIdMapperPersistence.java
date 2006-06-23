@@ -179,12 +179,22 @@ public class UserIdMapperPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM UserIdMapper IN CLASS com.liferay.portal.service.persistence.UserIdMapperHBM WHERE ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userId);
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -219,7 +229,14 @@ public class UserIdMapperPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM UserIdMapper IN CLASS com.liferay.portal.service.persistence.UserIdMapperHBM WHERE ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -228,7 +245,10 @@ public class UserIdMapperPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userId);
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -298,7 +318,14 @@ public class UserIdMapperPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM UserIdMapper IN CLASS com.liferay.portal.service.persistence.UserIdMapperHBM WHERE ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -307,7 +334,10 @@ public class UserIdMapperPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userId);
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userIdMapper, UserIdMapperHBMUtil.getInstance());
@@ -364,12 +394,22 @@ public class UserIdMapperPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM UserIdMapper IN CLASS com.liferay.portal.service.persistence.UserIdMapperHBM WHERE ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userId);
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -398,12 +438,22 @@ public class UserIdMapperPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM UserIdMapper IN CLASS com.liferay.portal.service.persistence.UserIdMapperHBM WHERE ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userId);
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			Iterator itr = q.list().iterator();
 

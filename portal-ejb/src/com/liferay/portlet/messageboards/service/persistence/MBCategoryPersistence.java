@@ -197,7 +197,14 @@ public class MBCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("parentCategoryId ASC").append(", ");
@@ -205,7 +212,10 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -240,7 +250,14 @@ public class MBCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -254,7 +271,10 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -324,7 +344,14 @@ public class MBCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -338,7 +365,10 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbCategory, MBCategoryHBMUtil.getInstance());
@@ -367,9 +397,23 @@ public class MBCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentCategoryId = ?");
+
+			if (parentCategoryId == null) {
+				query.append("parentCategoryId is null");
+			}
+			else {
+				query.append("parentCategoryId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("parentCategoryId ASC").append(", ");
@@ -377,8 +421,14 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, parentCategoryId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (parentCategoryId != null) {
+				q.setString(queryPos++, parentCategoryId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -413,9 +463,23 @@ public class MBCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentCategoryId = ?");
+
+			if (parentCategoryId == null) {
+				query.append("parentCategoryId is null");
+			}
+			else {
+				query.append("parentCategoryId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -429,8 +493,14 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, parentCategoryId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (parentCategoryId != null) {
+				q.setString(queryPos++, parentCategoryId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -506,9 +576,23 @@ public class MBCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentCategoryId = ?");
+
+			if (parentCategoryId == null) {
+				query.append("parentCategoryId is null");
+			}
+			else {
+				query.append("parentCategoryId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -522,8 +606,14 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, parentCategoryId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (parentCategoryId != null) {
+				q.setString(queryPos++, parentCategoryId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbCategory, MBCategoryHBMUtil.getInstance());
@@ -583,7 +673,14 @@ public class MBCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("parentCategoryId ASC").append(", ");
@@ -591,7 +688,10 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -620,9 +720,23 @@ public class MBCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentCategoryId = ?");
+
+			if (parentCategoryId == null) {
+				query.append("parentCategoryId is null");
+			}
+			else {
+				query.append("parentCategoryId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("parentCategoryId ASC").append(", ");
@@ -630,8 +744,14 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, parentCategoryId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (parentCategoryId != null) {
+				q.setString(queryPos++, parentCategoryId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -660,12 +780,22 @@ public class MBCategoryPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -698,15 +828,35 @@ public class MBCategoryPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentCategoryId = ?");
+
+			if (parentCategoryId == null) {
+				query.append("parentCategoryId is null");
+			}
+			else {
+				query.append("parentCategoryId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, parentCategoryId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (parentCategoryId != null) {
+				q.setString(queryPos++, parentCategoryId);
+			}
 
 			Iterator itr = q.list().iterator();
 

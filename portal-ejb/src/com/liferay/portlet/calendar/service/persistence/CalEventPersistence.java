@@ -229,7 +229,14 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("startDate ASC").append(", ");
@@ -237,7 +244,10 @@ public class CalEventPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -272,7 +282,14 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -286,7 +303,10 @@ public class CalEventPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -356,7 +376,14 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -370,7 +397,10 @@ public class CalEventPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					calEvent, CalEventHBMUtil.getInstance());
@@ -399,9 +429,23 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("type_ = ?");
+
+			if (type == null) {
+				query.append("type_ is null");
+			}
+			else {
+				query.append("type_ = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("startDate ASC").append(", ");
@@ -409,8 +453,14 @@ public class CalEventPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, type);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (type != null) {
+				q.setString(queryPos++, type);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -445,9 +495,23 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("type_ = ?");
+
+			if (type == null) {
+				query.append("type_ is null");
+			}
+			else {
+				query.append("type_ = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -461,8 +525,14 @@ public class CalEventPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, type);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (type != null) {
+				q.setString(queryPos++, type);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -538,9 +608,23 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("type_ = ?");
+
+			if (type == null) {
+				query.append("type_ is null");
+			}
+			else {
+				query.append("type_ = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -554,8 +638,14 @@ public class CalEventPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, type);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (type != null) {
+				q.setString(queryPos++, type);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					calEvent, CalEventHBMUtil.getInstance());
@@ -584,7 +674,14 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
 			query.append("repeating = ?");
 			query.append(" ");
@@ -594,7 +691,11 @@ public class CalEventPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
 			q.setBoolean(queryPos++, repeating);
 
 			Iterator itr = q.list().iterator();
@@ -630,7 +731,14 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
 			query.append("repeating = ?");
 			query.append(" ");
@@ -646,7 +754,11 @@ public class CalEventPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
 			q.setBoolean(queryPos++, repeating);
 
 			List list = new ArrayList();
@@ -723,7 +835,14 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
 			query.append("repeating = ?");
 			query.append(" ");
@@ -739,7 +858,11 @@ public class CalEventPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
 			q.setBoolean(queryPos++, repeating);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -800,7 +923,14 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("startDate ASC").append(", ");
@@ -808,7 +938,10 @@ public class CalEventPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -837,9 +970,23 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("type_ = ?");
+
+			if (type == null) {
+				query.append("type_ is null");
+			}
+			else {
+				query.append("type_ = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("startDate ASC").append(", ");
@@ -847,8 +994,14 @@ public class CalEventPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, type);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (type != null) {
+				q.setString(queryPos++, type);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -877,7 +1030,14 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
 			query.append("repeating = ?");
 			query.append(" ");
@@ -887,7 +1047,11 @@ public class CalEventPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
 			q.setBoolean(queryPos++, repeating);
 
 			Iterator itr = q.list().iterator();
@@ -917,12 +1081,22 @@ public class CalEventPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -955,15 +1129,35 @@ public class CalEventPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("type_ = ?");
+
+			if (type == null) {
+				query.append("type_ is null");
+			}
+			else {
+				query.append("type_ = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, type);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (type != null) {
+				q.setString(queryPos++, type);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -996,14 +1190,25 @@ public class CalEventPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
 			query.append("repeating = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
 			q.setBoolean(queryPos++, repeating);
 
 			Iterator itr = q.list().iterator();

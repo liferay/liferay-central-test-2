@@ -24,6 +24,15 @@ import com.liferay.portal.model.LayoutModel;
 import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.service.http.LayoutServiceSoap;
 import com.liferay.portal.service.http.LayoutServiceSoapServiceLocator;
+import com.liferay.portlet.messageboards.model.MBCategoryModel;
+import com.liferay.portlet.messageboards.model.MBMessageModel;
+import com.liferay.portlet.messageboards.model.MBTopicModel;
+import com.liferay.portlet.messageboards.service.http.MBCategoryServiceSoap;
+import com.liferay.portlet.messageboards.service.http.MBCategoryServiceSoapServiceLocator;
+import com.liferay.portlet.messageboards.service.http.MBMessageServiceSoap;
+import com.liferay.portlet.messageboards.service.http.MBMessageServiceSoapServiceLocator;
+import com.liferay.portlet.messageboards.service.http.MBTopicServiceSoap;
+import com.liferay.portlet.messageboards.service.http.MBTopicServiceSoapServiceLocator;
 
 import java.net.URL;
 
@@ -41,37 +50,43 @@ public class Test {
 		try {
 			Test test = new Test();
 
-			test.test();
+			test.portalLayout();
+			test.portletMessageBoardsCategory();
+			test.portletMessageBoardsTopic();
+			test.portletMessageBoardsMessage();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void test() throws Exception {
-		LayoutServiceSoapServiceLocator locator =
-			new LayoutServiceSoapServiceLocator();
+	public URL getURL(String serviceName) throws Exception {
 
 		// Unathenticated url
 
-		String url = "http://localhost:8080/tunnel/axis/Portal_LayoutService";
+		String url = "http://localhost:8080/tunnel/axis/" + serviceName;
 
 		// Authenticated url
 
 		if (true) {
 
 			String userId = "liferay.com.1";
-			//String password = "test";
 			String password = "qUqP5cyxm6YcTAhz05Hph5gvu9M=";
 			
 			url =
 				"http://" + userId + ":" + password +
-					"@localhost:8080/tunnel/secure/axis/Portal_LayoutService";
+					"@localhost:8080/tunnel/secure/axis/" + serviceName;
 		}
 
-		// Call service
+		return new URL(url);
+	}
 
-		LayoutServiceSoap soap = locator.getPortal_LayoutService(new URL(url));
+	public void portalLayout() throws Exception {
+		LayoutServiceSoapServiceLocator locator =
+			new LayoutServiceSoapServiceLocator();
+
+		LayoutServiceSoap soap = locator.getPortal_LayoutService(
+			getURL("Portal_LayoutService"));
 
 		LayoutReference[] layoutReferences = soap.getLayoutReferences(
 			"liferay.com", "56", "article-id", "PRODUCTS-LICENSING");
@@ -88,6 +103,50 @@ public class Test {
 			System.out.println("Layout name " + layoutName);
 			System.out.println("Portlet id " + portletId);
 		}
+	}
+
+	public void portletMessageBoardsCategory() throws Exception {
+		MBCategoryServiceSoapServiceLocator locator =
+			new MBCategoryServiceSoapServiceLocator();
+
+		MBCategoryServiceSoap soap =
+			locator.getPortlet_Message_Boards_MBCategoryService(
+				getURL("Portlet_Message_Boards_MBCategoryService"));
+
+		MBCategoryModel category = soap.addCategory(
+			"PRI.3.1", "-1", "Test Category", "This is a test category.", true,
+			true);
+
+		soap.deleteCategory(category.getCategoryId());
+	}
+
+	public void portletMessageBoardsTopic() throws Exception {
+		MBTopicServiceSoapServiceLocator locator =
+			new MBTopicServiceSoapServiceLocator();
+
+		MBTopicServiceSoap soap =
+			locator.getPortlet_Message_Boards_MBTopicService(
+				getURL("Portlet_Message_Boards_MBTopicService"));
+
+		MBTopicModel topic = soap.addTopic(
+			"1", "Test Topic", "This is a test topic.", true, true);
+
+		soap.deleteTopic(topic.getTopicId());
+	}
+
+	public void portletMessageBoardsMessage() throws Exception {
+		MBMessageServiceSoapServiceLocator locator =
+			new MBMessageServiceSoapServiceLocator();
+
+		MBMessageServiceSoap soap =
+			locator.getPortlet_Message_Boards_MBMessageService(
+				getURL("Portlet_Message_Boards_MBMessageService"));
+
+		MBMessageModel message = soap.addMessage(
+			"1", "Test Subject", "This is a test body.", new Object[0], false,
+			true, true);
+
+		soap.deleteMessage(message.getTopicId(), message.getMessageId());
 	}
 
 }

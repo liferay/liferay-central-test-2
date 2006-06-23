@@ -194,12 +194,22 @@ public class SubscriptionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userId);
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -234,7 +244,14 @@ public class SubscriptionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -243,7 +260,10 @@ public class SubscriptionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userId);
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -313,7 +333,14 @@ public class SubscriptionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -322,7 +349,10 @@ public class SubscriptionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userId);
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					subscription, SubscriptionHBMUtil.getInstance());
@@ -351,18 +381,48 @@ public class SubscriptionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("className = ?");
+
+			if (className == null) {
+				query.append("className is null");
+			}
+			else {
+				query.append("className = ?");
+			}
+
 			query.append(" AND ");
-			query.append("classPK = ?");
+
+			if (classPK == null) {
+				query.append("classPK is null");
+			}
+			else {
+				query.append("classPK = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, className);
-			q.setString(queryPos++, classPK);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (className != null) {
+				q.setString(queryPos++, className);
+			}
+
+			if (classPK != null) {
+				q.setString(queryPos++, classPK);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -397,11 +457,32 @@ public class SubscriptionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("className = ?");
+
+			if (className == null) {
+				query.append("className is null");
+			}
+			else {
+				query.append("className = ?");
+			}
+
 			query.append(" AND ");
-			query.append("classPK = ?");
+
+			if (classPK == null) {
+				query.append("classPK is null");
+			}
+			else {
+				query.append("classPK = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -410,9 +491,18 @@ public class SubscriptionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, className);
-			q.setString(queryPos++, classPK);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (className != null) {
+				q.setString(queryPos++, className);
+			}
+
+			if (classPK != null) {
+				q.setString(queryPos++, classPK);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -498,11 +588,32 @@ public class SubscriptionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("className = ?");
+
+			if (className == null) {
+				query.append("className is null");
+			}
+			else {
+				query.append("className = ?");
+			}
+
 			query.append(" AND ");
-			query.append("classPK = ?");
+
+			if (classPK == null) {
+				query.append("classPK is null");
+			}
+			else {
+				query.append("classPK = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -511,9 +622,18 @@ public class SubscriptionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, className);
-			q.setString(queryPos++, classPK);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (className != null) {
+				q.setString(queryPos++, className);
+			}
+
+			if (classPK != null) {
+				q.setString(queryPos++, classPK);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					subscription, SubscriptionHBMUtil.getInstance());
@@ -543,21 +663,61 @@ public class SubscriptionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("className = ?");
+
+			if (className == null) {
+				query.append("className is null");
+			}
+			else {
+				query.append("className = ?");
+			}
+
 			query.append(" AND ");
-			query.append("classPK = ?");
+
+			if (classPK == null) {
+				query.append("classPK is null");
+			}
+			else {
+				query.append("classPK = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, userId);
-			q.setString(queryPos++, className);
-			q.setString(queryPos++, classPK);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
+
+			if (className != null) {
+				q.setString(queryPos++, className);
+			}
+
+			if (classPK != null) {
+				q.setString(queryPos++, classPK);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -629,12 +789,22 @@ public class SubscriptionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userId);
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -663,18 +833,48 @@ public class SubscriptionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("className = ?");
+
+			if (className == null) {
+				query.append("className is null");
+			}
+			else {
+				query.append("className = ?");
+			}
+
 			query.append(" AND ");
-			query.append("classPK = ?");
+
+			if (classPK == null) {
+				query.append("classPK is null");
+			}
+			else {
+				query.append("classPK = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, className);
-			q.setString(queryPos++, classPK);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (className != null) {
+				q.setString(queryPos++, className);
+			}
+
+			if (classPK != null) {
+				q.setString(queryPos++, classPK);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -704,21 +904,61 @@ public class SubscriptionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("className = ?");
+
+			if (className == null) {
+				query.append("className is null");
+			}
+			else {
+				query.append("className = ?");
+			}
+
 			query.append(" AND ");
-			query.append("classPK = ?");
+
+			if (classPK == null) {
+				query.append("classPK is null");
+			}
+			else {
+				query.append("classPK = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, userId);
-			q.setString(queryPos++, className);
-			q.setString(queryPos++, classPK);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
+
+			if (className != null) {
+				q.setString(queryPos++, className);
+			}
+
+			if (classPK != null) {
+				q.setString(queryPos++, classPK);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -766,12 +1006,22 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userId);
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -804,18 +1054,48 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("className = ?");
+
+			if (className == null) {
+				query.append("className is null");
+			}
+			else {
+				query.append("className = ?");
+			}
+
 			query.append(" AND ");
-			query.append("classPK = ?");
+
+			if (classPK == null) {
+				query.append("classPK is null");
+			}
+			else {
+				query.append("classPK = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, className);
-			q.setString(queryPos++, classPK);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (className != null) {
+				q.setString(queryPos++, className);
+			}
+
+			if (classPK != null) {
+				q.setString(queryPos++, classPK);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -848,21 +1128,61 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("className = ?");
+
+			if (className == null) {
+				query.append("className is null");
+			}
+			else {
+				query.append("className = ?");
+			}
+
 			query.append(" AND ");
-			query.append("classPK = ?");
+
+			if (classPK == null) {
+				query.append("classPK is null");
+			}
+			else {
+				query.append("classPK = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
-			q.setString(queryPos++, userId);
-			q.setString(queryPos++, className);
-			q.setString(queryPos++, classPK);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
+
+			if (className != null) {
+				q.setString(queryPos++, className);
+			}
+
+			if (classPK != null) {
+				q.setString(queryPos++, classPK);
+			}
 
 			Iterator itr = q.list().iterator();
 

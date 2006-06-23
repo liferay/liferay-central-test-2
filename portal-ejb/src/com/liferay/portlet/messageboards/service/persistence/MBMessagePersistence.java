@@ -205,7 +205,14 @@ public class MBMessagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBMessage IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageHBM WHERE ");
-			query.append("topicId = ?");
+
+			if (topicId == null) {
+				query.append("topicId is null");
+			}
+			else {
+				query.append("topicId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC").append(", ");
@@ -213,7 +220,10 @@ public class MBMessagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, topicId);
+
+			if (topicId != null) {
+				q.setString(queryPos++, topicId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -248,7 +258,14 @@ public class MBMessagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBMessage IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageHBM WHERE ");
-			query.append("topicId = ?");
+
+			if (topicId == null) {
+				query.append("topicId is null");
+			}
+			else {
+				query.append("topicId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -262,7 +279,10 @@ public class MBMessagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, topicId);
+
+			if (topicId != null) {
+				q.setString(queryPos++, topicId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -332,7 +352,14 @@ public class MBMessagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBMessage IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageHBM WHERE ");
-			query.append("topicId = ?");
+
+			if (topicId == null) {
+				query.append("topicId is null");
+			}
+			else {
+				query.append("topicId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -346,7 +373,10 @@ public class MBMessagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, topicId);
+
+			if (topicId != null) {
+				q.setString(queryPos++, topicId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessage, MBMessageHBMUtil.getInstance());
@@ -374,7 +404,14 @@ public class MBMessagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBMessage IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageHBM WHERE ");
-			query.append("threadId = ?");
+
+			if (threadId == null) {
+				query.append("threadId is null");
+			}
+			else {
+				query.append("threadId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC").append(", ");
@@ -382,7 +419,10 @@ public class MBMessagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, threadId);
+
+			if (threadId != null) {
+				q.setString(queryPos++, threadId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -417,7 +457,14 @@ public class MBMessagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBMessage IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageHBM WHERE ");
-			query.append("threadId = ?");
+
+			if (threadId == null) {
+				query.append("threadId is null");
+			}
+			else {
+				query.append("threadId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -431,7 +478,10 @@ public class MBMessagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, threadId);
+
+			if (threadId != null) {
+				q.setString(queryPos++, threadId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -501,7 +551,14 @@ public class MBMessagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBMessage IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageHBM WHERE ");
-			query.append("threadId = ?");
+
+			if (threadId == null) {
+				query.append("threadId is null");
+			}
+			else {
+				query.append("threadId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -515,7 +572,10 @@ public class MBMessagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, threadId);
+
+			if (threadId != null) {
+				q.setString(queryPos++, threadId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessage, MBMessageHBMUtil.getInstance());
@@ -544,9 +604,23 @@ public class MBMessagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBMessage IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageHBM WHERE ");
-			query.append("threadId = ?");
+
+			if (threadId == null) {
+				query.append("threadId is null");
+			}
+			else {
+				query.append("threadId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentMessageId = ?");
+
+			if (parentMessageId == null) {
+				query.append("parentMessageId is null");
+			}
+			else {
+				query.append("parentMessageId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC").append(", ");
@@ -554,8 +628,14 @@ public class MBMessagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, threadId);
-			q.setString(queryPos++, parentMessageId);
+
+			if (threadId != null) {
+				q.setString(queryPos++, threadId);
+			}
+
+			if (parentMessageId != null) {
+				q.setString(queryPos++, parentMessageId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -590,9 +670,23 @@ public class MBMessagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBMessage IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageHBM WHERE ");
-			query.append("threadId = ?");
+
+			if (threadId == null) {
+				query.append("threadId is null");
+			}
+			else {
+				query.append("threadId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentMessageId = ?");
+
+			if (parentMessageId == null) {
+				query.append("parentMessageId is null");
+			}
+			else {
+				query.append("parentMessageId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -606,8 +700,14 @@ public class MBMessagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, threadId);
-			q.setString(queryPos++, parentMessageId);
+
+			if (threadId != null) {
+				q.setString(queryPos++, threadId);
+			}
+
+			if (parentMessageId != null) {
+				q.setString(queryPos++, parentMessageId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -683,9 +783,23 @@ public class MBMessagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBMessage IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageHBM WHERE ");
-			query.append("threadId = ?");
+
+			if (threadId == null) {
+				query.append("threadId is null");
+			}
+			else {
+				query.append("threadId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentMessageId = ?");
+
+			if (parentMessageId == null) {
+				query.append("parentMessageId is null");
+			}
+			else {
+				query.append("parentMessageId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -699,8 +813,14 @@ public class MBMessagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, threadId);
-			q.setString(queryPos++, parentMessageId);
+
+			if (threadId != null) {
+				q.setString(queryPos++, threadId);
+			}
+
+			if (parentMessageId != null) {
+				q.setString(queryPos++, parentMessageId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessage, MBMessageHBMUtil.getInstance());
@@ -760,7 +880,14 @@ public class MBMessagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBMessage IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageHBM WHERE ");
-			query.append("topicId = ?");
+
+			if (topicId == null) {
+				query.append("topicId is null");
+			}
+			else {
+				query.append("topicId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC").append(", ");
@@ -768,7 +895,10 @@ public class MBMessagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, topicId);
+
+			if (topicId != null) {
+				q.setString(queryPos++, topicId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -796,7 +926,14 @@ public class MBMessagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBMessage IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageHBM WHERE ");
-			query.append("threadId = ?");
+
+			if (threadId == null) {
+				query.append("threadId is null");
+			}
+			else {
+				query.append("threadId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC").append(", ");
@@ -804,7 +941,10 @@ public class MBMessagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, threadId);
+
+			if (threadId != null) {
+				q.setString(queryPos++, threadId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -833,9 +973,23 @@ public class MBMessagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBMessage IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageHBM WHERE ");
-			query.append("threadId = ?");
+
+			if (threadId == null) {
+				query.append("threadId is null");
+			}
+			else {
+				query.append("threadId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentMessageId = ?");
+
+			if (parentMessageId == null) {
+				query.append("parentMessageId is null");
+			}
+			else {
+				query.append("parentMessageId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC").append(", ");
@@ -843,8 +997,14 @@ public class MBMessagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, threadId);
-			q.setString(queryPos++, parentMessageId);
+
+			if (threadId != null) {
+				q.setString(queryPos++, threadId);
+			}
+
+			if (parentMessageId != null) {
+				q.setString(queryPos++, parentMessageId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -873,12 +1033,22 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM MBMessage IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageHBM WHERE ");
-			query.append("topicId = ?");
+
+			if (topicId == null) {
+				query.append("topicId is null");
+			}
+			else {
+				query.append("topicId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, topicId);
+
+			if (topicId != null) {
+				q.setString(queryPos++, topicId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -910,12 +1080,22 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM MBMessage IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageHBM WHERE ");
-			query.append("threadId = ?");
+
+			if (threadId == null) {
+				query.append("threadId is null");
+			}
+			else {
+				query.append("threadId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, threadId);
+
+			if (threadId != null) {
+				q.setString(queryPos++, threadId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -948,15 +1128,35 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM MBMessage IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageHBM WHERE ");
-			query.append("threadId = ?");
+
+			if (threadId == null) {
+				query.append("threadId is null");
+			}
+			else {
+				query.append("threadId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentMessageId = ?");
+
+			if (parentMessageId == null) {
+				query.append("parentMessageId is null");
+			}
+			else {
+				query.append("parentMessageId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, threadId);
-			q.setString(queryPos++, parentMessageId);
+
+			if (threadId != null) {
+				q.setString(queryPos++, threadId);
+			}
+
+			if (parentMessageId != null) {
+				q.setString(queryPos++, parentMessageId);
+			}
 
 			Iterator itr = q.list().iterator();
 

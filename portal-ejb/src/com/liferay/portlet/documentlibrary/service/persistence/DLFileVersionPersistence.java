@@ -192,9 +192,23 @@ public class DLFileVersionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFileVersion IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("name = ?");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("folderId DESC").append(", ");
@@ -203,8 +217,14 @@ public class DLFileVersionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
-			q.setString(queryPos++, name);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -239,9 +259,23 @@ public class DLFileVersionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFileVersion IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("name = ?");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -256,8 +290,14 @@ public class DLFileVersionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
-			q.setString(queryPos++, name);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -334,9 +374,23 @@ public class DLFileVersionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFileVersion IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("name = ?");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -351,8 +405,14 @@ public class DLFileVersionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
-			q.setString(queryPos++, name);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileVersion, DLFileVersionHBMUtil.getInstance());
@@ -414,9 +474,23 @@ public class DLFileVersionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFileVersion IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("name = ?");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("folderId DESC").append(", ");
@@ -425,8 +499,14 @@ public class DLFileVersionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
-			q.setString(queryPos++, name);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -456,15 +536,35 @@ public class DLFileVersionPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM DLFileVersion IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("name = ?");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
-			q.setString(queryPos++, name);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
 
 			Iterator itr = q.list().iterator();
 

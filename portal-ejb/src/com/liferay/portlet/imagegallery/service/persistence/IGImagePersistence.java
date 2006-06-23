@@ -196,14 +196,24 @@ public class IGImagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM IGImage IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGImageHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("imageId ASC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -238,7 +248,14 @@ public class IGImagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM IGImage IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGImageHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -251,7 +268,10 @@ public class IGImagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -321,7 +341,14 @@ public class IGImagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM IGImage IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGImageHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -334,7 +361,10 @@ public class IGImagePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					igImage, IGImageHBMUtil.getInstance());
@@ -393,14 +423,24 @@ public class IGImagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM IGImage IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGImageHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("imageId ASC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -429,12 +469,22 @@ public class IGImagePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM IGImage IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGImageHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
 
 			Iterator itr = q.list().iterator();
 

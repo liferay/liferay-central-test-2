@@ -201,12 +201,22 @@ public class DLFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -241,7 +251,14 @@ public class DLFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -250,7 +267,10 @@ public class DLFolderPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -320,7 +340,14 @@ public class DLFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -329,7 +356,10 @@ public class DLFolderPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFolder, DLFolderHBMUtil.getInstance());
@@ -357,12 +387,22 @@ public class DLFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -397,7 +437,14 @@ public class DLFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -406,7 +453,10 @@ public class DLFolderPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -476,7 +526,14 @@ public class DLFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -485,7 +542,10 @@ public class DLFolderPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFolder, DLFolderHBMUtil.getInstance());
@@ -514,15 +574,35 @@ public class DLFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentFolderId = ?");
+
+			if (parentFolderId == null) {
+				query.append("parentFolderId is null");
+			}
+			else {
+				query.append("parentFolderId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, parentFolderId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (parentFolderId != null) {
+				q.setString(queryPos++, parentFolderId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -557,9 +637,23 @@ public class DLFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentFolderId = ?");
+
+			if (parentFolderId == null) {
+				query.append("parentFolderId is null");
+			}
+			else {
+				query.append("parentFolderId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -568,8 +662,14 @@ public class DLFolderPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, parentFolderId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (parentFolderId != null) {
+				q.setString(queryPos++, parentFolderId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -645,9 +745,23 @@ public class DLFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentFolderId = ?");
+
+			if (parentFolderId == null) {
+				query.append("parentFolderId is null");
+			}
+			else {
+				query.append("parentFolderId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -656,8 +770,14 @@ public class DLFolderPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, parentFolderId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (parentFolderId != null) {
+				q.setString(queryPos++, parentFolderId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFolder, DLFolderHBMUtil.getInstance());
@@ -687,15 +807,35 @@ public class DLFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("parentFolderId = ?");
+
+			if (parentFolderId == null) {
+				query.append("parentFolderId is null");
+			}
+			else {
+				query.append("parentFolderId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("name = ?");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, parentFolderId);
-			q.setString(queryPos++, name);
+
+			if (parentFolderId != null) {
+				q.setString(queryPos++, parentFolderId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -761,12 +901,22 @@ public class DLFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -794,12 +944,22 @@ public class DLFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -828,15 +988,35 @@ public class DLFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentFolderId = ?");
+
+			if (parentFolderId == null) {
+				query.append("parentFolderId is null");
+			}
+			else {
+				query.append("parentFolderId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, parentFolderId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (parentFolderId != null) {
+				q.setString(queryPos++, parentFolderId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -865,15 +1045,35 @@ public class DLFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("parentFolderId = ?");
+
+			if (parentFolderId == null) {
+				query.append("parentFolderId is null");
+			}
+			else {
+				query.append("parentFolderId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("name = ?");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, parentFolderId);
-			q.setString(queryPos++, name);
+
+			if (parentFolderId != null) {
+				q.setString(queryPos++, parentFolderId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -915,12 +1115,22 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -952,12 +1162,22 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("companyId = ?");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, companyId);
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -990,15 +1210,35 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("groupId = ?");
+
+			if (groupId == null) {
+				query.append("groupId is null");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("parentFolderId = ?");
+
+			if (parentFolderId == null) {
+				query.append("parentFolderId is null");
+			}
+			else {
+				query.append("parentFolderId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, groupId);
-			q.setString(queryPos++, parentFolderId);
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
+			}
+
+			if (parentFolderId != null) {
+				q.setString(queryPos++, parentFolderId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -1031,15 +1271,35 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM DLFolder IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM WHERE ");
-			query.append("parentFolderId = ?");
+
+			if (parentFolderId == null) {
+				query.append("parentFolderId is null");
+			}
+			else {
+				query.append("parentFolderId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("name = ?");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, parentFolderId);
-			q.setString(queryPos++, name);
+
+			if (parentFolderId != null) {
+				q.setString(queryPos++, parentFolderId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
 
 			Iterator itr = q.list().iterator();
 

@@ -181,14 +181,24 @@ public class DLFileRankPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFileRank IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileRankHBM WHERE ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate DESC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userId);
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -223,7 +233,14 @@ public class DLFileRankPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFileRank IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileRankHBM WHERE ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -236,7 +253,10 @@ public class DLFileRankPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userId);
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -306,7 +326,14 @@ public class DLFileRankPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFileRank IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileRankHBM WHERE ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -319,7 +346,10 @@ public class DLFileRankPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userId);
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileRank, DLFileRankHBMUtil.getInstance());
@@ -348,17 +378,37 @@ public class DLFileRankPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFileRank IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileRankHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("name = ?");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate DESC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
-			q.setString(queryPos++, name);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -393,9 +443,23 @@ public class DLFileRankPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFileRank IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileRankHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("name = ?");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -408,8 +472,14 @@ public class DLFileRankPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
-			q.setString(queryPos++, name);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -485,9 +555,23 @@ public class DLFileRankPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFileRank IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileRankHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("name = ?");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -500,8 +584,14 @@ public class DLFileRankPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
-			q.setString(queryPos++, name);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileRank, DLFileRankHBMUtil.getInstance());
@@ -560,14 +650,24 @@ public class DLFileRankPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFileRank IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileRankHBM WHERE ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate DESC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userId);
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -596,17 +696,37 @@ public class DLFileRankPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM DLFileRank IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileRankHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("name = ?");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate DESC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
-			q.setString(queryPos++, name);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -635,12 +755,22 @@ public class DLFileRankPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM DLFileRank IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileRankHBM WHERE ");
-			query.append("userId = ?");
+
+			if (userId == null) {
+				query.append("userId is null");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, userId);
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -673,15 +803,35 @@ public class DLFileRankPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM DLFileRank IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileRankHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" AND ");
-			query.append("name = ?");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
-			q.setString(queryPos++, name);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
 
 			Iterator itr = q.list().iterator();
 

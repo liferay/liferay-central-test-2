@@ -176,12 +176,22 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM OrgGroupPermission IN CLASS com.liferay.portal.service.persistence.OrgGroupPermissionHBM WHERE ");
-			query.append("permissionId = ?");
+
+			if (permissionId == null) {
+				query.append("permissionId is null");
+			}
+			else {
+				query.append("permissionId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, permissionId);
+
+			if (permissionId != null) {
+				q.setString(queryPos++, permissionId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -216,7 +226,14 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM OrgGroupPermission IN CLASS com.liferay.portal.service.persistence.OrgGroupPermissionHBM WHERE ");
-			query.append("permissionId = ?");
+
+			if (permissionId == null) {
+				query.append("permissionId is null");
+			}
+			else {
+				query.append("permissionId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -225,7 +242,10 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, permissionId);
+
+			if (permissionId != null) {
+				q.setString(queryPos++, permissionId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -296,7 +316,14 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM OrgGroupPermission IN CLASS com.liferay.portal.service.persistence.OrgGroupPermissionHBM WHERE ");
-			query.append("permissionId = ?");
+
+			if (permissionId == null) {
+				query.append("permissionId is null");
+			}
+			else {
+				query.append("permissionId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -305,7 +332,10 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, permissionId);
+
+			if (permissionId != null) {
+				q.setString(queryPos++, permissionId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					orgGroupPermission, OrgGroupPermissionHBMUtil.getInstance());
@@ -363,12 +393,22 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM OrgGroupPermission IN CLASS com.liferay.portal.service.persistence.OrgGroupPermissionHBM WHERE ");
-			query.append("permissionId = ?");
+
+			if (permissionId == null) {
+				query.append("permissionId is null");
+			}
+			else {
+				query.append("permissionId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, permissionId);
+
+			if (permissionId != null) {
+				q.setString(queryPos++, permissionId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -398,12 +438,22 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM OrgGroupPermission IN CLASS com.liferay.portal.service.persistence.OrgGroupPermissionHBM WHERE ");
-			query.append("permissionId = ?");
+
+			if (permissionId == null) {
+				query.append("permissionId is null");
+			}
+			else {
+				query.append("permissionId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, permissionId);
+
+			if (permissionId != null) {
+				q.setString(queryPos++, permissionId);
+			}
 
 			Iterator itr = q.list().iterator();
 

@@ -197,7 +197,14 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ShoppingItemPrice IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceHBM WHERE ");
-			query.append("itemId = ?");
+
+			if (itemId == null) {
+				query.append("itemId is null");
+			}
+			else {
+				query.append("itemId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("itemId ASC").append(", ");
@@ -205,7 +212,10 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, itemId);
+
+			if (itemId != null) {
+				q.setString(queryPos++, itemId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -240,7 +250,14 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ShoppingItemPrice IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceHBM WHERE ");
-			query.append("itemId = ?");
+
+			if (itemId == null) {
+				query.append("itemId is null");
+			}
+			else {
+				query.append("itemId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -254,7 +271,10 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, itemId);
+
+			if (itemId != null) {
+				q.setString(queryPos++, itemId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -324,7 +344,14 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ShoppingItemPrice IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceHBM WHERE ");
-			query.append("itemId = ?");
+
+			if (itemId == null) {
+				query.append("itemId is null");
+			}
+			else {
+				query.append("itemId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -338,7 +365,10 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, itemId);
+
+			if (itemId != null) {
+				q.setString(queryPos++, itemId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingItemPrice, ShoppingItemPriceHBMUtil.getInstance());
@@ -398,7 +428,14 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ShoppingItemPrice IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceHBM WHERE ");
-			query.append("itemId = ?");
+
+			if (itemId == null) {
+				query.append("itemId is null");
+			}
+			else {
+				query.append("itemId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("itemId ASC").append(", ");
@@ -406,7 +443,10 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, itemId);
+
+			if (itemId != null) {
+				q.setString(queryPos++, itemId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -435,12 +475,22 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM ShoppingItemPrice IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceHBM WHERE ");
-			query.append("itemId = ?");
+
+			if (itemId == null) {
+				query.append("itemId is null");
+			}
+			else {
+				query.append("itemId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, itemId);
+
+			if (itemId != null) {
+				q.setString(queryPos++, itemId);
+			}
 
 			Iterator itr = q.list().iterator();
 

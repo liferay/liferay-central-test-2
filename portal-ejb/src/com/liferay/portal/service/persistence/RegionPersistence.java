@@ -179,14 +179,24 @@ public class RegionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
-			query.append("countryId = ?");
+
+			if (countryId == null) {
+				query.append("countryId is null");
+			}
+			else {
+				query.append("countryId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, countryId);
+
+			if (countryId != null) {
+				q.setString(queryPos++, countryId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -221,7 +231,14 @@ public class RegionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
-			query.append("countryId = ?");
+
+			if (countryId == null) {
+				query.append("countryId is null");
+			}
+			else {
+				query.append("countryId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -234,7 +251,10 @@ public class RegionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, countryId);
+
+			if (countryId != null) {
+				q.setString(queryPos++, countryId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -304,7 +324,14 @@ public class RegionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
-			query.append("countryId = ?");
+
+			if (countryId == null) {
+				query.append("countryId is null");
+			}
+			else {
+				query.append("countryId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -317,7 +344,10 @@ public class RegionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, countryId);
+
+			if (countryId != null) {
+				q.setString(queryPos++, countryId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region,
 					RegionHBMUtil.getInstance());
@@ -510,7 +540,14 @@ public class RegionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
-			query.append("countryId = ?");
+
+			if (countryId == null) {
+				query.append("countryId is null");
+			}
+			else {
+				query.append("countryId = ?");
+			}
+
 			query.append(" AND ");
 			query.append("active_ = ?");
 			query.append(" ");
@@ -519,7 +556,11 @@ public class RegionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, countryId);
+
+			if (countryId != null) {
+				q.setString(queryPos++, countryId);
+			}
+
 			q.setBoolean(queryPos++, active);
 
 			Iterator itr = q.list().iterator();
@@ -555,7 +596,14 @@ public class RegionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
-			query.append("countryId = ?");
+
+			if (countryId == null) {
+				query.append("countryId is null");
+			}
+			else {
+				query.append("countryId = ?");
+			}
+
 			query.append(" AND ");
 			query.append("active_ = ?");
 			query.append(" ");
@@ -570,7 +618,11 @@ public class RegionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, countryId);
+
+			if (countryId != null) {
+				q.setString(queryPos++, countryId);
+			}
+
 			q.setBoolean(queryPos++, active);
 
 			List list = new ArrayList();
@@ -647,7 +699,14 @@ public class RegionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
-			query.append("countryId = ?");
+
+			if (countryId == null) {
+				query.append("countryId is null");
+			}
+			else {
+				query.append("countryId = ?");
+			}
+
 			query.append(" AND ");
 			query.append("active_ = ?");
 			query.append(" ");
@@ -662,7 +721,11 @@ public class RegionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, countryId);
+
+			if (countryId != null) {
+				q.setString(queryPos++, countryId);
+			}
+
 			q.setBoolean(queryPos++, active);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region,
@@ -722,14 +785,24 @@ public class RegionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
-			query.append("countryId = ?");
+
+			if (countryId == null) {
+				query.append("countryId is null");
+			}
+			else {
+				query.append("countryId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, countryId);
+
+			if (countryId != null) {
+				q.setString(queryPos++, countryId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -793,7 +866,14 @@ public class RegionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
-			query.append("countryId = ?");
+
+			if (countryId == null) {
+				query.append("countryId is null");
+			}
+			else {
+				query.append("countryId = ?");
+			}
+
 			query.append(" AND ");
 			query.append("active_ = ?");
 			query.append(" ");
@@ -802,7 +882,11 @@ public class RegionPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, countryId);
+
+			if (countryId != null) {
+				q.setString(queryPos++, countryId);
+			}
+
 			q.setBoolean(queryPos++, active);
 
 			Iterator itr = q.list().iterator();
@@ -832,12 +916,22 @@ public class RegionPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
-			query.append("countryId = ?");
+
+			if (countryId == null) {
+				query.append("countryId is null");
+			}
+			else {
+				query.append("countryId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, countryId);
+
+			if (countryId != null) {
+				q.setString(queryPos++, countryId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -907,14 +1001,25 @@ public class RegionPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
-			query.append("countryId = ?");
+
+			if (countryId == null) {
+				query.append("countryId is null");
+			}
+			else {
+				query.append("countryId = ?");
+			}
+
 			query.append(" AND ");
 			query.append("active_ = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, countryId);
+
+			if (countryId != null) {
+				q.setString(queryPos++, countryId);
+			}
+
 			q.setBoolean(queryPos++, active);
 
 			Iterator itr = q.list().iterator();

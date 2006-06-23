@@ -197,7 +197,14 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM BookmarksEntry IN CLASS com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("folderId ASC").append(", ");
@@ -205,7 +212,10 @@ public class BookmarksEntryPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -240,7 +250,14 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM BookmarksEntry IN CLASS com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -254,7 +271,10 @@ public class BookmarksEntryPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -324,7 +344,14 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM BookmarksEntry IN CLASS com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -338,7 +365,10 @@ public class BookmarksEntryPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					bookmarksEntry, BookmarksEntryHBMUtil.getInstance());
@@ -398,7 +428,14 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM BookmarksEntry IN CLASS com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("folderId ASC").append(", ");
@@ -406,7 +443,10 @@ public class BookmarksEntryPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -435,12 +475,22 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM BookmarksEntry IN CLASS com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryHBM WHERE ");
-			query.append("folderId = ?");
+
+			if (folderId == null) {
+				query.append("folderId is null");
+			}
+			else {
+				query.append("folderId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, folderId);
+
+			if (folderId != null) {
+				q.setString(queryPos++, folderId);
+			}
 
 			Iterator itr = q.list().iterator();
 

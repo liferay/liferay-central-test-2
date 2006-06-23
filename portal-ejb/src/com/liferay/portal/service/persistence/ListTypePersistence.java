@@ -173,14 +173,24 @@ public class ListTypePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ListType IN CLASS com.liferay.portal.service.persistence.ListTypeHBM WHERE ");
-			query.append("type_ = ?");
+
+			if (type == null) {
+				query.append("type_ is null");
+			}
+			else {
+				query.append("type_ = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, type);
+
+			if (type != null) {
+				q.setString(queryPos++, type);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -215,7 +225,14 @@ public class ListTypePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ListType IN CLASS com.liferay.portal.service.persistence.ListTypeHBM WHERE ");
-			query.append("type_ = ?");
+
+			if (type == null) {
+				query.append("type_ is null");
+			}
+			else {
+				query.append("type_ = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -228,7 +245,10 @@ public class ListTypePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, type);
+
+			if (type != null) {
+				q.setString(queryPos++, type);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -296,7 +316,14 @@ public class ListTypePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ListType IN CLASS com.liferay.portal.service.persistence.ListTypeHBM WHERE ");
-			query.append("type_ = ?");
+
+			if (type == null) {
+				query.append("type_ is null");
+			}
+			else {
+				query.append("type_ = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -309,7 +336,10 @@ public class ListTypePersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, type);
+
+			if (type != null) {
+				q.setString(queryPos++, type);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					listType, ListTypeHBMUtil.getInstance());
@@ -368,14 +398,24 @@ public class ListTypePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM ListType IN CLASS com.liferay.portal.service.persistence.ListTypeHBM WHERE ");
-			query.append("type_ = ?");
+
+			if (type == null) {
+				query.append("type_ is null");
+			}
+			else {
+				query.append("type_ = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, type);
+
+			if (type != null) {
+				q.setString(queryPos++, type);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -404,12 +444,22 @@ public class ListTypePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM ListType IN CLASS com.liferay.portal.service.persistence.ListTypeHBM WHERE ");
-			query.append("type_ = ?");
+
+			if (type == null) {
+				query.append("type_ is null");
+			}
+			else {
+				query.append("type_ = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, type);
+
+			if (type != null) {
+				q.setString(queryPos++, type);
+			}
 
 			Iterator itr = q.list().iterator();
 

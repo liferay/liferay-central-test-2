@@ -180,15 +180,35 @@ public class MBDiscussionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBDiscussion IN CLASS com.liferay.portlet.messageboards.service.persistence.MBDiscussionHBM WHERE ");
-			query.append("className = ?");
+
+			if (className == null) {
+				query.append("className is null");
+			}
+			else {
+				query.append("className = ?");
+			}
+
 			query.append(" AND ");
-			query.append("classPK = ?");
+
+			if (classPK == null) {
+				query.append("classPK is null");
+			}
+			else {
+				query.append("classPK = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, className);
-			q.setString(queryPos++, classPK);
+
+			if (className != null) {
+				q.setString(queryPos++, className);
+			}
+
+			if (classPK != null) {
+				q.setString(queryPos++, classPK);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -255,15 +275,35 @@ public class MBDiscussionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM MBDiscussion IN CLASS com.liferay.portlet.messageboards.service.persistence.MBDiscussionHBM WHERE ");
-			query.append("className = ?");
+
+			if (className == null) {
+				query.append("className is null");
+			}
+			else {
+				query.append("className = ?");
+			}
+
 			query.append(" AND ");
-			query.append("classPK = ?");
+
+			if (classPK == null) {
+				query.append("classPK is null");
+			}
+			else {
+				query.append("classPK = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, className);
-			q.setString(queryPos++, classPK);
+
+			if (className != null) {
+				q.setString(queryPos++, className);
+			}
+
+			if (classPK != null) {
+				q.setString(queryPos++, classPK);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -306,15 +346,35 @@ public class MBDiscussionPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM MBDiscussion IN CLASS com.liferay.portlet.messageboards.service.persistence.MBDiscussionHBM WHERE ");
-			query.append("className = ?");
+
+			if (className == null) {
+				query.append("className is null");
+			}
+			else {
+				query.append("className = ?");
+			}
+
 			query.append(" AND ");
-			query.append("classPK = ?");
+
+			if (classPK == null) {
+				query.append("classPK is null");
+			}
+			else {
+				query.append("classPK = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, className);
-			q.setString(queryPos++, classPK);
+
+			if (className != null) {
+				q.setString(queryPos++, className);
+			}
+
+			if (classPK != null) {
+				q.setString(queryPos++, classPK);
+			}
 
 			Iterator itr = q.list().iterator();
 

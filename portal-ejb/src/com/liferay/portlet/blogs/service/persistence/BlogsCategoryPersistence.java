@@ -195,14 +195,24 @@ public class BlogsCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM BlogsCategory IN CLASS com.liferay.portlet.blogs.service.persistence.BlogsCategoryHBM WHERE ");
-			query.append("parentCategoryId = ?");
+
+			if (parentCategoryId == null) {
+				query.append("parentCategoryId is null");
+			}
+			else {
+				query.append("parentCategoryId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, parentCategoryId);
+
+			if (parentCategoryId != null) {
+				q.setString(queryPos++, parentCategoryId);
+			}
 
 			Iterator itr = q.list().iterator();
 			List list = new ArrayList();
@@ -237,7 +247,14 @@ public class BlogsCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM BlogsCategory IN CLASS com.liferay.portlet.blogs.service.persistence.BlogsCategoryHBM WHERE ");
-			query.append("parentCategoryId = ?");
+
+			if (parentCategoryId == null) {
+				query.append("parentCategoryId is null");
+			}
+			else {
+				query.append("parentCategoryId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -250,7 +267,10 @@ public class BlogsCategoryPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, parentCategoryId);
+
+			if (parentCategoryId != null) {
+				q.setString(queryPos++, parentCategoryId);
+			}
 
 			List list = new ArrayList();
 			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
@@ -321,7 +341,14 @@ public class BlogsCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM BlogsCategory IN CLASS com.liferay.portlet.blogs.service.persistence.BlogsCategoryHBM WHERE ");
-			query.append("parentCategoryId = ?");
+
+			if (parentCategoryId == null) {
+				query.append("parentCategoryId is null");
+			}
+			else {
+				query.append("parentCategoryId = ?");
+			}
+
 			query.append(" ");
 
 			if (obc != null) {
@@ -334,7 +361,10 @@ public class BlogsCategoryPersistence extends BasePersistence {
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, parentCategoryId);
+
+			if (parentCategoryId != null) {
+				q.setString(queryPos++, parentCategoryId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsCategory, BlogsCategoryHBMUtil.getInstance());
@@ -394,14 +424,24 @@ public class BlogsCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM BlogsCategory IN CLASS com.liferay.portlet.blogs.service.persistence.BlogsCategoryHBM WHERE ");
-			query.append("parentCategoryId = ?");
+
+			if (parentCategoryId == null) {
+				query.append("parentCategoryId is null");
+			}
+			else {
+				query.append("parentCategoryId = ?");
+			}
+
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, parentCategoryId);
+
+			if (parentCategoryId != null) {
+				q.setString(queryPos++, parentCategoryId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -431,12 +471,22 @@ public class BlogsCategoryPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM BlogsCategory IN CLASS com.liferay.portlet.blogs.service.persistence.BlogsCategoryHBM WHERE ");
-			query.append("parentCategoryId = ?");
+
+			if (parentCategoryId == null) {
+				query.append("parentCategoryId is null");
+			}
+			else {
+				query.append("parentCategoryId = ?");
+			}
+
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
-			q.setString(queryPos++, parentCategoryId);
+
+			if (parentCategoryId != null) {
+				q.setString(queryPos++, parentCategoryId);
+			}
 
 			Iterator itr = q.list().iterator();
 
