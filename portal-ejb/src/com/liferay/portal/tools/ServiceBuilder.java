@@ -704,6 +704,22 @@ public class ServiceBuilder {
 		}
 	}
 
+	private void _appendNullLogic(EntityColumn col, StringBuffer sb) {
+		sb.append("if (" + col.getName() + " == null) {");
+			
+		if (col.getComparator().equals("=")) {
+			sb.append("query.append(\"" + col.getDBName() + " is null\");");
+		}	
+		else if (col.getComparator().equals("<>") || col.getComparator().equals("!=")) {
+			sb.append("query.append(\"" + col.getDBName() + " is not null\");");
+		}
+		else {
+			sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " null\");");
+		}
+			
+		sb.append("} else {");
+	}
+
 	private void _createEJBPK(Entity entity) throws IOException {
 		List pkList = entity.getPKList();
 
@@ -2686,7 +2702,15 @@ public class ServiceBuilder {
 			for (int j = 0; j < finderColsList.size(); j++) {
 				EntityColumn col = (EntityColumn)finderColsList.get(j);
 
+				if (_requiresNullCheck(col)) {
+					_appendNullLogic(col, sb);
+				}
+					
 				sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
+
+				if (_requiresNullCheck(col)) {
+					sb.append("}");
+				}
 
 				if ((j + 1) != finderColsList.size()) {
 					sb.append("query.append(\" AND \");");
@@ -2726,6 +2750,10 @@ public class ServiceBuilder {
 
 			for (int j = 0; j < finderColsList.size(); j++) {
 				EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+				if (_requiresNullCheck(col)) {
+					sb.append("if (" + col.getName() + " != null) {");
+				}
 
 				String colType = col.getType();
 				String colObjType = colType;
@@ -2773,6 +2801,10 @@ public class ServiceBuilder {
 				}
 
 				sb.append(");");
+				
+				if (_requiresNullCheck(col)) {
+					sb.append("}");
+				}
 			}
 
 			sb.append("Iterator itr = q.list().iterator();");
@@ -2867,7 +2899,15 @@ public class ServiceBuilder {
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
+					if (_requiresNullCheck(col)) {
+						_appendNullLogic(col, sb);
+					}
+
 					sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
+
+					if (_requiresNullCheck(col)) {
+						sb.append("}");
+					}
 
 					if ((j + 1) != finderColsList.size()) {
 						sb.append("query.append(\" AND \");");
@@ -2912,6 +2952,10 @@ public class ServiceBuilder {
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+					if (_requiresNullCheck(col)) {
+						sb.append("if (" + col.getName() + " != null) {");
+					}
 
 					String colType = col.getType();
 					String colObjType = colType;
@@ -2959,6 +3003,10 @@ public class ServiceBuilder {
 					}
 
 					sb.append(");");
+				
+					if (_requiresNullCheck(col)) {
+						sb.append("}");
+					}
 				}
 
 				sb.append("List list = new ArrayList();");
@@ -3123,7 +3171,15 @@ public class ServiceBuilder {
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
+					if (_requiresNullCheck(col)) {
+						_appendNullLogic(col, sb);
+					}
+
 					sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
+
+					if (_requiresNullCheck(col)) {
+						sb.append("}");
+					}
 
 					if ((j + 1) != finderColsList.size()) {
 						sb.append("query.append(\" AND \");");
@@ -3168,6 +3224,10 @@ public class ServiceBuilder {
 
 				for (int j = 0; j < finderColsList.size(); j++) {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+					if (_requiresNullCheck(col)) {
+						sb.append("if (" + col.getName() + " != null) {");
+					}
 
 					String colType = col.getType();
 					String colObjType = colType;
@@ -3215,6 +3275,10 @@ public class ServiceBuilder {
 					}
 
 					sb.append(");");
+				
+					if (_requiresNullCheck(col)) {
+						sb.append("}");
+					}
 				}
 
 				sb.append("Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, " + entity.getVarName() + ", " + entity.getName() + "HBMUtil.getInstance());");
@@ -3320,7 +3384,15 @@ public class ServiceBuilder {
 			for (int j = 0; j < finderColsList.size(); j++) {
 				EntityColumn col = (EntityColumn)finderColsList.get(j);
 
+				if (_requiresNullCheck(col)) {
+					_appendNullLogic(col, sb);
+				}
+
 				sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
+
+				if (_requiresNullCheck(col)) {
+					sb.append("}");
+				}
 
 				if ((j + 1) != finderColsList.size()) {
 					sb.append("query.append(\" AND \");");
@@ -3358,6 +3430,10 @@ public class ServiceBuilder {
 
 			for (int j = 0; j < finderColsList.size(); j++) {
 				EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+				if (_requiresNullCheck(col)) {
+					sb.append("if (" + col.getName() + " != null) {");
+				}
 
 				String colType = col.getType();
 				String colObjType = colType;
@@ -3405,6 +3481,10 @@ public class ServiceBuilder {
 				}
 
 				sb.append(");");
+
+				if (_requiresNullCheck(col)) {
+					sb.append("}");
+				}
 			}
 
 			sb.append("Iterator itr = q.list().iterator();");
@@ -3488,7 +3568,15 @@ public class ServiceBuilder {
 			for (int j = 0; j < finderColsList.size(); j++) {
 				EntityColumn col = (EntityColumn)finderColsList.get(j);
 
+				if (_requiresNullCheck(col)) {
+					_appendNullLogic(col, sb);
+				}
+
 				sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
+
+				if (_requiresNullCheck(col)) {
+					sb.append("}");
+				}
 
 				if ((j + 1) != finderColsList.size()) {
 					sb.append("query.append(\" AND \");");
@@ -3507,6 +3595,10 @@ public class ServiceBuilder {
 
 			for (int j = 0; j < finderColsList.size(); j++) {
 				EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+				if (_requiresNullCheck(col)) {
+					sb.append("if (" + col.getName() + " != null) {");
+				}
 
 				String colType = col.getType();
 				String colObjType = colType;
@@ -3554,6 +3646,10 @@ public class ServiceBuilder {
 				}
 
 				sb.append(");");
+
+				if (_requiresNullCheck(col)) {
+					sb.append("}");
+				}
 			}
 
 			sb.append("Iterator itr = q.list().iterator();");
@@ -5385,6 +5481,10 @@ public class ServiceBuilder {
 		}
 
 		return true;
+	}
+
+	private boolean _requiresNullCheck(EntityColumn col) {
+		return !col.isPrimitiveType();
 	}
 
 	private static final int _REMOTE = 0;
