@@ -22,8 +22,6 @@
  */
 %><%--
 
---%><%@ taglib uri="http://ajaxtags.org/tags/ajax" prefix="ajax" %><%--
-
 --%><%@ taglib uri="http://displaytag.sf.net" prefix="display" %><%--
 
 --%><%@ taglib uri="http://easyconf.sourceforge.net/tags-easyconf" prefix="easyconf" %><%--

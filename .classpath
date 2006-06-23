@@ -22,7 +22,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/activation.jar"/>
 	<classpathentry kind="lib" path="lib/activemq.jar"/>
-	<classpathentry kind="lib" path="lib/ajaxtags.jar"/>
 	<classpathentry kind="lib" path="lib/ant.jar"/>
 	<classpathentry kind="lib" path="lib/ant-contrib.jar"/>
 	<classpathentry kind="lib" path="lib/antlr.jar"/>
@@ -96,6 +95,7 @@
 	<classpathentry kind="lib" path="lib/jsf-api.jar"/>
 	<classpathentry kind="lib" path="lib/jsf-impl.jar"/>
 	<classpathentry kind="lib" path="lib/jsf-portlet.jar"/>
+	<classpathentry kind="lib" path="lib/jsonrpc.jar"/>
 	<classpathentry kind="lib" path="lib/jstl.jar"/>
 	<classpathentry kind="lib" path="lib/jstl-impl.jar"/>
 	<classpathentry kind="lib" path="lib/jta.jar"/>

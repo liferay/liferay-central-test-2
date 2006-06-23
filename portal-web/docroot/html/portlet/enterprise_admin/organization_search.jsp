@@ -163,7 +163,7 @@ if (Validator.isNotNull(displayTerms.getParentOrganizationId())) {
 	}
 
 	DynamicSelect.create(
-		"<%= themeDisplay.getPathMain() %>/portal/xml_regions",
+		"<%= themeDisplay.getPathMain() %>/portal/json_regions",
 		document.<portlet:namespace />fm.<portlet:namespace /><%= OrganizationDisplayTerms.COUNTRY_ID %>,
 		document.<portlet:namespace />fm.<portlet:namespace /><%= OrganizationDisplayTerms.REGION_ID %>,
 		<portlet:namespace />selectCountryPost,

@@ -228,9 +228,9 @@ String typeId = BeanParamUtil.getString(address, request, "typeId");
 	function <portlet:namespace />selectCountryPost() {
 		setSelectedValue(document.<portlet:namespace />fm.<portlet:namespace />regionId, "<%= regionId %>");
 	}
-	
+
 	DynamicSelect.create(
-		"<%= themeDisplay.getPathMain() %>/portal/xml_regions",
+		"<%= themeDisplay.getPathMain() %>/portal/json_regions",
 		document.<portlet:namespace />fm.<portlet:namespace />countryId,
 		document.<portlet:namespace />fm.<portlet:namespace />regionId,
 		<portlet:namespace />selectCountryPost

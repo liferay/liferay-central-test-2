@@ -128,6 +128,8 @@
 			<forward name="modified.jsp" path="/portal/javascript_cached.jsp" />
 		</action>
 
+		<action path="/portal/json_regions" type="com.liferay.portal.action.JSONRegionsAction" />
+
 		<action path="/portal/layout" type="com.liferay.portal.action.LayoutAction">
 			<forward name="portal.layout" path="portal.layout" />
 		</action>
@@ -165,8 +167,6 @@
 		<action path="/portal/update_terms_of_use" type="com.liferay.portal.action.UpdateTermsOfUseAction" />
 
 		<action path="/portal/upload_progress_poller" forward="portal.upload_progress_poller" />
-
-		<action path="/portal/xml_regions" type="com.liferay.portal.action.JSONRegionsAction" />
 
 		<!-- Address Book -->
 

@@ -22,6 +22,11 @@
 
 package com.liferay.portal.struts;
 
+import com.liferay.portal.util.Constants;
+import com.liferay.util.HttpHeaders;
+import com.liferay.util.ParamUtil;
+import com.liferay.util.Validator;
+
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,11 +36,6 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
-import com.liferay.portal.util.Constants;
-import com.liferay.util.HttpHeaders;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 
 /**
  * <a href="JSONAction.java.html"><b><i>View Source</i></b></a>
@@ -57,7 +57,7 @@ public abstract class JSONAction extends Action {
 
 		try {
 			json = getJSON(mapping, form, req, res);
-			
+
 			if (Validator.isNotNull(callback)) {
 				json = callback + "(" + json + ");";
 			}
@@ -74,6 +74,7 @@ public abstract class JSONAction extends Action {
 
 		res.setContentType(Constants.TEXT_JAVASCRIPT);
 		res.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
+
 		if (ajaxId != null) {
 			res.setHeader("Ajax-ID", ajaxId);
 		}

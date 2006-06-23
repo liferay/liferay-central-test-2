@@ -22,6 +22,11 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.model.Region;
+import com.liferay.portal.service.spring.RegionServiceUtil;
+import com.liferay.portal.struts.JSONAction;
+import com.liferay.util.ParamUtil;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,13 +34,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import com.liferay.portal.model.Region;
-import com.liferay.portal.service.spring.RegionServiceUtil;
-import com.liferay.portal.struts.JSONAction;
-import com.liferay.util.ParamUtil;
 
 /**
  * <a href="JSONRegionsAction.java.html"><b><i>View Source</i></b></a>
@@ -53,27 +54,33 @@ public class JSONRegionsAction extends JSONAction {
 		boolean nullable = ParamUtil.getBoolean(req, "nullable");
 		String countryId = ParamUtil.getString(req, "sourceValue");
 		List regions = RegionServiceUtil.getRegions(countryId, true);
-		
-		JSONObject jo = new JSONObject();
-		JSONArray ja = new JSONArray();
-		
+
+		JSONObject jsonObj = new JSONObject();
+		JSONArray jsonArray = new JSONArray();
+
 		if (nullable) {
 			JSONObject option = new JSONObject();
+
 			option.put("name", "");
 			option.put("value", "");
-			ja.put(option);
+
+			jsonArray.put(option);
 		}
-		
+
 		for (int i = 0; i < regions.size(); i++) {
 			JSONObject option = new JSONObject();
+
 			Region region = (Region)regions.get(i);
+
 			option.put("name", region.getName());
 			option.put("value", region.getRegionId());
-			ja.put(option);
+
+			jsonArray.put(option);
 		}
-		
-		jo.put("options", ja);
-		return jo.toString();
+
+		jsonObj.put("options", jsonArray);
+
+		return jsonObj.toString();
 	}
 
 }
