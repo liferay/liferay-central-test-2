@@ -28,6 +28,7 @@
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessageDisplay" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBThread" %>
+<%@ page import="com.liferay.portlet.messageboards.model.MBTopic" %>
 <%@ page import="com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission" %>
 <%@ page import="com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.util.TreeWalker" %>
@@ -44,6 +45,7 @@ String redirect = (String)request.getAttribute("liferay-ui:discussion:redirect")
 
 MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getDiscussionMessageDisplay(userId, className, classPK);
 
+MBTopic topic = messageDisplay.getTopic();
 MBThread thread = messageDisplay.getThread();
 TreeWalker treeWalker = messageDisplay.getTreeWalker();
 MBMessage rootMessage = treeWalker.getRoot();
@@ -156,11 +158,12 @@ List messages = treeWalker.getMessages();
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, rootMessage);
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, message);
+		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_TOPIC, topic);
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, new Boolean(lastChildNode));
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
 	%>
 
-		<liferay-util:include page="/html/portlet/message_boards/view_message_thread.jsp" />
+		<liferay-util:include page="/html/taglib/ui/discussion/view_message_thread.jsp" />
 
 	<%
 	}

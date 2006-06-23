@@ -178,15 +178,15 @@ public class MBMessageLocalServiceEJBImpl implements MBMessageLocalService,
 		return getService().getReadMessagesCount(topicId, userId);
 	}
 
-	public java.util.List getThreadMessages(java.lang.String threadId)
-		throws com.liferay.portal.SystemException {
-		return getService().getThreadMessages(threadId);
+	public java.util.List getThreadMessages(java.lang.String threadId,
+		java.lang.String userId) throws com.liferay.portal.SystemException {
+		return getService().getThreadMessages(threadId, userId);
 	}
 
 	public java.util.List getThreadMessages(java.lang.String threadId,
-		java.util.Comparator comparator)
+		java.lang.String userId, java.util.Comparator comparator)
 		throws com.liferay.portal.SystemException {
-		return getService().getThreadMessages(threadId, comparator);
+		return getService().getThreadMessages(threadId, userId, comparator);
 	}
 
 	public int getThreadMessagesCount(java.lang.String threadId)

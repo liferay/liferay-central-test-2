@@ -1004,7 +1004,7 @@ post-date=Datum odeslání
 post-new-message=Odešli nový příspěvek
 post-new-thread=Odešli nové vlákno
 post=Odešli
-posted-as-a-reply-to=Posted as a reply to: <a href="{0}">Message #{1}</a> by {2}.
+posted-as-a-reply-to=as a reply to {0}.
 posted-by=Odesláno od
 pound=Pound
 preferences=Preference

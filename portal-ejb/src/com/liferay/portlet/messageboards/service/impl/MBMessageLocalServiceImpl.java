@@ -553,7 +553,9 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		MBTopic topic = MBTopicUtil.findByPrimaryKey(message.getTopicId());
 
-		if (userId != null) {
+		// Message flags are now tracked by TreeWalker
+
+		/*if (userId != null) {
 			MBMessageFlagPK flagPK = new MBMessageFlagPK(
 				message.getTopicId(), message.getMessageId(), userId);
 
@@ -567,7 +569,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 				MBMessageFlagUtil.update(messageFlag);
 			}
-		}
+		}*/
 
 		MBMessage parentMessage = null;
 
@@ -578,7 +580,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		MBThread thread = MBThreadUtil.findByPrimaryKey(message.getThreadId());
 
-		TreeWalker treeWalker = new TreeWalker(message);
+		TreeWalker treeWalker = new TreeWalker(message, userId);
 
 		ThreadLastPostDateComparator comparator =
 			new ThreadLastPostDateComparator(false);
@@ -609,7 +611,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		return new MBMessageDisplay(
 			topic, message, parentMessage, thread, treeWalker, previousThread,
-			nextThread, firstThread, lastThread);
+			nextThread, firstThread, lastThread, userId);
 	}
 
 	public int getReadMessagesCount(String topicId, String userId)
@@ -618,14 +620,41 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		return MBMessageFlagUtil.countByT_U(topicId, userId);
 	}
 
-	public List getThreadMessages(String threadId) throws SystemException {
-		return getThreadMessages(threadId, new MessageThreadComparator());
+	public List getThreadMessages(String threadId, String userId)
+		throws SystemException {
+
+		return getThreadMessages(
+			threadId, userId, new MessageThreadComparator());
 	}
 
-	public List getThreadMessages(String threadId, Comparator comparator)
+	public List getThreadMessages(
+			String threadId, String userId, Comparator comparator)
 		throws SystemException {
 
 		List messages = MBMessageUtil.findByThreadId(threadId);
+
+		if (userId != null) {
+			Iterator itr = messages.iterator();
+
+			while (itr.hasNext()) {
+				MBMessage message = (MBMessage)itr.next();
+
+				MBMessageFlagPK flagPK = new MBMessageFlagPK(
+					message.getTopicId(), message.getMessageId(), userId);
+
+				try {
+					MBMessageFlagUtil.findByPrimaryKey(flagPK);
+				}
+				catch (NoSuchMessageFlagException nsmfe) {
+					MBMessageFlag messageFlag =
+						MBMessageFlagUtil.create(flagPK);
+
+					messageFlag.setFlag(MBMessageFlag.READ_FLAG);
+
+					MBMessageFlagUtil.update(messageFlag);
+				}
+			}
+		}
 
 		Collections.sort(messages, comparator);
 

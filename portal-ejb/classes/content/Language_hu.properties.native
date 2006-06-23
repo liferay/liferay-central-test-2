@@ -1070,7 +1070,7 @@ post-date=Közzétevés dátuma
 post-new-message=Új üzenet közzétevése
 post-new-thread=Új szál indítása
 post=Közzétevés
-posted-as-a-reply-to=Posted as a reply to: <a href="{0}">Message #{1}</a> by {2}.
+posted-as-a-reply-to=as a reply to {0}.
 posted-by=Közzétevõ
 pound=font (ang.)
 preferences=Preferenciák

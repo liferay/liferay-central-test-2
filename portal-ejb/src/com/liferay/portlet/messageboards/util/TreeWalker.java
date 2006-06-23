@@ -46,12 +46,12 @@ public class TreeWalker implements Serializable {
 	public TreeWalker() {
 	}
 
-	public TreeWalker(MBMessage message) {
+	public TreeWalker(MBMessage message, String userId) {
 		_messageIdsMap = CollectionFactory.getHashMap();
 
 		try {
 			_messages = MBMessageLocalServiceUtil.getThreadMessages(
-				message.getThreadId());
+				message.getThreadId(), userId);
 
 			for (int i = 0; i < _messages.size(); i++) {
 				MBMessage curMessage = (MBMessage)_messages.get(i);

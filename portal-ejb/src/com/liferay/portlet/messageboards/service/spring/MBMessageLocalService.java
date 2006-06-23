@@ -119,11 +119,11 @@ public interface MBMessageLocalService {
 	public int getReadMessagesCount(java.lang.String topicId,
 		java.lang.String userId) throws com.liferay.portal.SystemException;
 
-	public java.util.List getThreadMessages(java.lang.String threadId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List getThreadMessages(java.lang.String threadId,
+		java.lang.String userId) throws com.liferay.portal.SystemException;
 
 	public java.util.List getThreadMessages(java.lang.String threadId,
-		java.util.Comparator comparator)
+		java.lang.String userId, java.util.Comparator comparator)
 		throws com.liferay.portal.SystemException;
 
 	public int getThreadMessagesCount(java.lang.String threadId)

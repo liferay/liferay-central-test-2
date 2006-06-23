@@ -1471,7 +1471,7 @@ post-new-message=أرسل رسالة جديدة
 post-new-thread=أرسل نقاش جديد
 post-reply=أرسل رد
 post=أرسل
-posted-as-a-reply-to=مرسلة كردّ على: <a href="{0}">رسالة رقم {1} من قبل {2}.
+posted-as-a-reply-to=as a reply to {0}.
 posted-by=مرسلة من
 pound=رطل
 precompile-jsps-for-faster-speed=Precompile jsps for faster speed.

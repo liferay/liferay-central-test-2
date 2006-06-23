@@ -44,13 +44,13 @@ public class MBMessageDisplay implements Serializable {
 							MBMessage parentMessage, MBThread thread,
 							TreeWalker treeWalker, MBThread previousThread,
 							MBThread nextThread, MBThread firstThread,
-							MBThread lastThread) {
+							MBThread lastThread, String userId) {
 
 		_topic = topic;
 		_message = message;
 		_parentMessage = parentMessage;
 		_thread = thread;
-		_treeWalker = new TreeWalker(message);
+		_treeWalker = new TreeWalker(message, userId);
 		_previousThread = previousThread;
 		_nextThread = nextThread;
 		_firstThread = firstThread;

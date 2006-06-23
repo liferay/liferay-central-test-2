@@ -199,6 +199,8 @@ public class WebKeys {
 
 	public static final String MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE = "MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE";
 
+	public static final String MESSAGE_BOARDS_TREE_WALKER_TOPIC = "MESSAGE_BOARDS_TREE_WALKER_TOPIC";
+
 	public static final String NOTES_LIST = "NOTES_LIST";
 
 	public static final String ORG_LABOR = "ORG_LABOR";

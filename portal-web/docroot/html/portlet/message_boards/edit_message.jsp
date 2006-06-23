@@ -38,12 +38,15 @@ String parentMessageId = BeanParamUtil.getString(message, request, "parentMessag
 String subject = BeanParamUtil.getString(message, request, "subject");
 
 if (Validator.isNotNull(threadId) && Validator.isNull(subject)) {
-	subject = "RE: ";
-
 	try {
 		MBMessage parentMessage = MBMessageLocalServiceUtil.getMessage(topicId, parentMessageId);
 
-		subject += parentMessage.getSubject();
+		if (parentMessage.getSubject().startsWith("RE: ")) {
+			subject = parentMessage.getSubject();
+		}
+		else {
+			subject = "RE: " + parentMessage.getSubject();
+		}
 	}
 	catch (Exception e) {
 	}

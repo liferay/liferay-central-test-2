@@ -1410,7 +1410,7 @@ post-new-message=Отправить новое сообщение
 post-new-thread=Отправить новую тему
 post-reply=Отправить ответ
 post=Отправить
-posted-as-a-reply-to=Отправлено как ответ на: <a href="{0}">Сообщение #{1}</a> {2}.
+posted-as-a-reply-to=as a reply to {0}.
 posted-by=Отправлено
 pound=Фунт
 precompile-jsps-for-faster-speed=Прекомпиляция jsps для увеличения скорости работы.

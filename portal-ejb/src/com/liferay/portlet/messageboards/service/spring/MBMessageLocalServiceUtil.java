@@ -357,12 +357,12 @@ public class MBMessageLocalServiceUtil {
 		}
 	}
 
-	public static java.util.List getThreadMessages(java.lang.String threadId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List getThreadMessages(java.lang.String threadId,
+		java.lang.String userId) throws com.liferay.portal.SystemException {
 		try {
 			MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-			return mbMessageLocalService.getThreadMessages(threadId);
+			return mbMessageLocalService.getThreadMessages(threadId, userId);
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;
@@ -373,12 +373,13 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static java.util.List getThreadMessages(java.lang.String threadId,
-		java.util.Comparator comparator)
+		java.lang.String userId, java.util.Comparator comparator)
 		throws com.liferay.portal.SystemException {
 		try {
 			MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-			return mbMessageLocalService.getThreadMessages(threadId, comparator);
+			return mbMessageLocalService.getThreadMessages(threadId, userId,
+				comparator);
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;

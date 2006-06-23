@@ -690,7 +690,7 @@ portlets=Portletler
 portuguese=Portekizce
 post-new-message=Yeni iletiyi gönder
 post=Posta
-posted-as-a-reply-to=Posted as a reply to: <a href="{0}">Message #{1}</a> by {2}.
+posted-as-a-reply-to=as a reply to {0}.
 previous-close=Önceki kapanma
 previous=Önceki
 price-for-x-items-and-above=Price for {0} Items and Above:
