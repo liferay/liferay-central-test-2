@@ -85,6 +85,7 @@ import com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalService
 import com.liferay.portlet.enterpriseadmin.search.UserSearchTerms;
 import com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalServiceUtil;
 import com.liferay.portlet.shopping.service.spring.ShoppingCartLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalServiceUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.GetterUtil;
@@ -480,6 +481,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 		// Message boards
 
 		MBMessageFlagLocalServiceUtil.deleteFlags(userId);
+		MBStatsUserLocalServiceUtil.deleteStatsUserByUserId(userId);
 
 		// Shopping cart
 

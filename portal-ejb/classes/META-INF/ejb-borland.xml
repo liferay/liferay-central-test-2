@@ -336,6 +336,10 @@
 			<bean-local-home-name>ejb/liferay/MBMessageFlagLocalServiceHome</bean-local-home-name>
 		</session>
 		<session>
+			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/MBStatsUserLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
 			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-name>
 			<bean-local-home-name>ejb/liferay/MBThreadLocalServiceHome</bean-local-home-name>
 		</session>

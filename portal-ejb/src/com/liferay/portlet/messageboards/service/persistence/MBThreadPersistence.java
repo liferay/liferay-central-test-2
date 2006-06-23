@@ -104,6 +104,7 @@ public class MBThreadPersistence extends BasePersistence {
 					mbThreadHBM.setRootMessageId(mbThread.getRootMessageId());
 					mbThreadHBM.setTopicId(mbThread.getTopicId());
 					mbThreadHBM.setMessageCount(mbThread.getMessageCount());
+					mbThreadHBM.setViewCount(mbThread.getViewCount());
 					mbThreadHBM.setLastPostDate(mbThread.getLastPostDate());
 					session.save(mbThreadHBM);
 					session.flush();
@@ -116,6 +117,7 @@ public class MBThreadPersistence extends BasePersistence {
 						mbThreadHBM.setRootMessageId(mbThread.getRootMessageId());
 						mbThreadHBM.setTopicId(mbThread.getTopicId());
 						mbThreadHBM.setMessageCount(mbThread.getMessageCount());
+						mbThreadHBM.setViewCount(mbThread.getViewCount());
 						mbThreadHBM.setLastPostDate(mbThread.getLastPostDate());
 						session.flush();
 					}
@@ -125,6 +127,7 @@ public class MBThreadPersistence extends BasePersistence {
 						mbThreadHBM.setRootMessageId(mbThread.getRootMessageId());
 						mbThreadHBM.setTopicId(mbThread.getTopicId());
 						mbThreadHBM.setMessageCount(mbThread.getMessageCount());
+						mbThreadHBM.setViewCount(mbThread.getViewCount());
 						mbThreadHBM.setLastPostDate(mbThread.getLastPostDate());
 						session.save(mbThreadHBM);
 						session.flush();

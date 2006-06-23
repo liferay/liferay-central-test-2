@@ -45,6 +45,8 @@ import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.NoSuchTopicException;
+import com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalServiceUtil;
+
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
@@ -278,6 +280,13 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			addMessageResources(
 				category, message, addCommunityPermissions,
 				addGuestPermissions);
+		}
+
+		// Statistics
+		
+		if (category != null) {
+			MBStatsUserLocalServiceUtil.updateStatsUser(
+				category.getGroupId(), userId);
 		}
 
 		// Subscriptions
@@ -579,6 +588,10 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		}
 
 		MBThread thread = MBThreadUtil.findByPrimaryKey(message.getThreadId());
+
+		thread.setViewCount(thread.getViewCount() + 1);
+
+		MBThreadUtil.update(thread);
 
 		TreeWalker treeWalker = new TreeWalker(message, userId);
 

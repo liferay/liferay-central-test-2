@@ -1511,6 +1511,10 @@
 				<ejb-link>ejb/liferay/MBCategoryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/MBStatsUserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PollsQuestionLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/PollsQuestionLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -1669,6 +1673,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/MBCategoryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/MBStatsUserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PollsQuestionLocalServiceHome</ejb-ref-name>
@@ -5111,6 +5119,10 @@
 				<ejb-link>ejb/liferay/MBMessageFlagLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/MBStatsUserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ShoppingCartLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -5241,6 +5253,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/MBMessageFlagLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/MBStatsUserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
@@ -6967,6 +6983,10 @@
 				<ejb-link>ejb/liferay/MBMessageFlagLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/MBStatsUserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/MBThreadLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -7001,6 +7021,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/MBMessageFlagLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/MBStatsUserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
@@ -7041,6 +7065,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/MBMessageFlagLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/MBStatsUserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
@@ -7087,6 +7115,10 @@
 				<ejb-link>ejb/liferay/MBMessageFlagLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/MBStatsUserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/MBThreadLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -7113,6 +7145,42 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBMessageLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/MBMessageLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/MBStatsUserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/MBThreadLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBTopicLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/MBTopicLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+		</ejb>
+		<ejb>
+			<name>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</name>
+			<max-pool-size>40</max-pool-size>
+			<min-pool-size>20</min-pool-size>
+			<enable-freepool>false</enable-freepool>
+			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
+			<low-activity-interval>20</low-activity-interval>
+			<is-secure>false</is-secure>
+			<is-clustered>true</is-clustered>
+			<jndi-name>ejb/liferay/MBStatsUserLocalServiceHome</jndi-name>
+			<local-jndi-name>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/MBCategoryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBMessageLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/MBMessageLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/MBMessageFlagLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
@@ -7147,6 +7215,10 @@
 				<ejb-link>ejb/liferay/MBMessageFlagLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/MBStatsUserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBTopicLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/MBTopicLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -7179,6 +7251,10 @@
 				<ejb-link>ejb/liferay/MBMessageFlagLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/MBStatsUserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/MBThreadLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -7209,6 +7285,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/MBMessageFlagLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/MBStatsUserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>

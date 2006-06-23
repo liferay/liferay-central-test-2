@@ -146,6 +146,26 @@
 			<finder-column name="userId" />
 		</finder>
 	</entity>
+	<entity name="MBStatsUser" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="groupId" type="String" primary="true" />
+		<column name="userId" type="String" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="messageCount" type="int" />
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+	</entity>
 	<entity name="MBThread" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
@@ -157,6 +177,7 @@
 		<column name="rootMessageId" type="String" />
 		<column name="topicId" type="String" />
 		<column name="messageCount" type="int" />
+		<column name="viewCount" type="int" />
 		<column name="lastPostDate" type="Date" />
 
 		<!-- Order -->

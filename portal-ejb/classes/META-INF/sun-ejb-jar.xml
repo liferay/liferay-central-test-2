@@ -834,6 +834,16 @@
 			</bean-pool>
 		</ejb>
 		<ejb>
+			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-name>
+			<jndi-name>ejb/liferay/MBStatsUserLocalServiceHome</jndi-name>
+			<bean-pool>
+				<steady-pool-size>0</steady-pool-size>
+				<resize-quantity>60</resize-quantity>
+				<max-pool-size>60</max-pool-size>
+				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
+			</bean-pool>
+		</ejb>
+		<ejb>
 			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-name>
 			<jndi-name>ejb/liferay/MBThreadLocalServiceHome</jndi-name>
 			<bean-pool>

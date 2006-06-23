@@ -2773,6 +2773,43 @@
 			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
+		<property name="businessInterface">
+			<value>com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalService</value>
+		</property>
+		<property name="jndiName">
+			<value>ejb/liferay/MBStatsUserLocalServiceHome</value>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalService.professional" class="com.liferay.portlet.messageboards.service.impl.MBStatsUserLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalServiceFactory" class="com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalService.enterprise" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence" lazy-init="true">
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil" class="com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.spring.MBThreadLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
 		<property name="businessInterface">
 			<value>com.liferay.portlet.messageboards.service.spring.MBThreadLocalService</value>

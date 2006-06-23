@@ -48,6 +48,7 @@
 --%><%@ page import="com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.service.spring.MBThreadLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.service.spring.MBTopicLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.util.MBUtil" %><%--
@@ -56,5 +57,6 @@
 --%><%@ page import="org.apache.lucene.document.Document" %><%--
 
 --%><%
+DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

@@ -14,6 +14,15 @@ create table Groups_UserGroups (
 	primary key (groupId, userGroupId)
 );
 
+create table MBStatsUser (
+	groupId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	messageCount INTEGER,
+	primary key (groupId, userId)
+);
+
+alter table MBThread add viewCount INTEGER;
+
 alter table Role_ add description VARCHAR(75) null;
 
 create table UserGroup (

@@ -62,8 +62,8 @@ if (treeWalker.isOdd()) {
 
 								<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= message.getUserId() %>" style="margin:10px 0px; width:75%;"><br>
 
-								<%= LanguageUtil.get(pageContext, "posts") %>: 777<br>
-								<%= LanguageUtil.get(pageContext, "created") %>: <%= dateFormatDateTime.format(messageUser.getCreateDate()) %><br>
+								<%= LanguageUtil.get(pageContext, "posts") %>: <%= MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId, message.getUserId()).getMessageCount() %><br>
+								<%= LanguageUtil.get(pageContext, "created") %>: <%= dateFormatDate.format(messageUser.getCreateDate()) %><br>
 								<%= LanguageUtil.get(pageContext, "organization") %>: <%= messageUser.getOrganization().getName() %><br>
 								<%= LanguageUtil.get(pageContext, "location") %>: <%= messageUser.getLocation().getName() %>
 

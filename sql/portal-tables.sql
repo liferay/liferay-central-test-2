@@ -421,6 +421,13 @@ create table ListType (
 	type_ VARCHAR(75) null
 );
 
+create table MBStatsUser (
+	groupId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	messageCount INTEGER,
+	primary key (groupId, userId)
+);
+
 create table MailReceipt (
 	receiptId VARCHAR(75) not null primary key,
 	companyId VARCHAR(75) not null,
@@ -486,6 +493,7 @@ create table MBThread (
 	rootMessageId VARCHAR(75) null,
 	topicId VARCHAR(75) null,
 	messageCount INTEGER,
+	viewCount INTEGER,
 	lastPostDate DATE null
 );
 

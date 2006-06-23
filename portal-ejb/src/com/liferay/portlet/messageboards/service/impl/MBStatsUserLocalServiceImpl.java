@@ -1,0 +1,106 @@
+/**
+ * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portlet.messageboards.service.impl;
+
+import com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalService;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portlet.messageboards.NoSuchStatsUserException;
+import com.liferay.portlet.messageboards.model.MBStatsUser;
+import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK;
+import com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil;
+import com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalService;
+
+import java.util.List;
+
+/**
+ * <a href="MBStatsUserLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class MBStatsUserLocalServiceImpl implements MBStatsUserLocalService {
+
+	public void deleteStatsUserByGroupId(String groupId)
+		throws SystemException {
+
+		MBStatsUserUtil.removeByGroupId(groupId);
+	}
+
+	public void deleteStatsUserByUserId(String userId) throws SystemException {
+		MBStatsUserUtil.removeByUserId(userId);
+	}
+
+	public MBStatsUser getStatsUser(String groupId, String userId)
+		throws PortalException, SystemException {
+
+		MBStatsUserPK statsUserPK = new MBStatsUserPK(groupId, userId);
+
+		MBStatsUser statsUser = null;
+
+		try {
+			statsUser = MBStatsUserUtil.findByPrimaryKey(statsUserPK);
+		}
+		catch (NoSuchStatsUserException nssue) {
+			statsUser = MBStatsUserUtil.create(statsUserPK);
+
+			MBStatsUserUtil.update(statsUser);
+		}
+
+		return statsUser;
+	}
+
+	public List getStatsUsers(String groupId, int begin, int end)
+		throws SystemException {
+
+		return MBStatsUserUtil.findByGroupId(groupId, begin, end);
+	}
+
+	public void updateStatsUser(String groupId, String userId)
+		throws PortalException, SystemException {
+
+		update(groupId, userId);
+		update(Group.DEFAULT_PARENT_GROUP_ID, userId);
+	}
+
+	protected void update(String groupId, String userId)
+		throws PortalException, SystemException {
+
+		MBStatsUserPK statsUserPK = new MBStatsUserPK(groupId, userId);
+
+		MBStatsUser statsUser = null;
+
+		try {
+			statsUser = MBStatsUserUtil.findByPrimaryKey(statsUserPK);
+		}
+		catch (NoSuchStatsUserException nssue) {
+			statsUser = MBStatsUserUtil.create(statsUserPK);
+		}
+
+		statsUser.setMessageCount(statsUser.getMessageCount() + 1);
+
+		MBStatsUserUtil.update(statsUser);
+	}
+
+}

@@ -335,6 +335,10 @@
 		<jndi-name>ejb/liferay/MBMessageFlagLocalServiceHome</jndi-name>
 	</jonas-session>
 	<jonas-session>
+		<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-name>
+		<jndi-name>ejb/liferay/MBStatsUserLocalServiceHome</jndi-name>
+	</jonas-session>
+	<jonas-session>
 		<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-name>
 		<jndi-name>ejb/liferay/MBThreadLocalServiceHome</jndi-name>
 	</jonas-session>

@@ -721,11 +721,17 @@
 		<field name="userId" type="String" />
 		<field name="flag" type="String" />
 	</model>
+	<model name="com.liferay.portlet.messageboards.model.MBStatsUser">
+		<field name="groupId" type="String" />
+		<field name="userId" type="String" />
+		<field name="messageCount" type="int" />
+	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBThread">
 		<field name="threadId" type="String" />
 		<field name="rootMessageId" type="String" />
 		<field name="topicId" type="String" />
 		<field name="messageCount" type="int" />
+		<field name="viewCount" type="int" />
 		<field name="lastPostDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBTopic">

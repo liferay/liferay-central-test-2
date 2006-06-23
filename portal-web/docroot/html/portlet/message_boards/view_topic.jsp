@@ -53,6 +53,7 @@ List headerNames = new ArrayList();
 headerNames.add("thread");
 headerNames.add("started-by");
 headerNames.add("num-of-posts");
+headerNames.add("num-of-views");
 headerNames.add("last-post-date");
 headerNames.add(StringPool.BLANK);
 
@@ -100,6 +101,10 @@ for (int i = 0; i < results.size(); i++) {
 	// Number of posts
 
 	row.addText(Integer.toString(thread.getMessageCount()), rowURL);
+
+	// Number of views
+
+	row.addText(Integer.toString(thread.getViewCount()), rowURL);
 
 	// Last post date
 

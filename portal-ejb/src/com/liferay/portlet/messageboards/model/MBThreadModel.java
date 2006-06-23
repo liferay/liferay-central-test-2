@@ -128,6 +128,17 @@ public class MBThreadModel extends BaseModel {
 		}
 	}
 
+	public int getViewCount() {
+		return _viewCount;
+	}
+
+	public void setViewCount(int viewCount) {
+		if (viewCount != _viewCount) {
+			_viewCount = viewCount;
+			setModified(true);
+		}
+	}
+
 	public Date getLastPostDate() {
 		return _lastPostDate;
 	}
@@ -148,6 +159,7 @@ public class MBThreadModel extends BaseModel {
 		clone.setRootMessageId(getRootMessageId());
 		clone.setTopicId(getTopicId());
 		clone.setMessageCount(getMessageCount());
+		clone.setViewCount(getViewCount());
 		clone.setLastPostDate(getLastPostDate());
 
 		return clone;
@@ -202,5 +214,6 @@ public class MBThreadModel extends BaseModel {
 	private String _rootMessageId;
 	private String _topicId;
 	private int _messageCount;
+	private int _viewCount;
 	private Date _lastPostDate;
 }

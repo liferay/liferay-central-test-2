@@ -60,6 +60,7 @@ import com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalServiceUt
 import com.liferay.portlet.imagegallery.service.spring.IGFolderLocalServiceUtil;
 import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalServiceUtil;
 import com.liferay.portlet.polls.service.spring.PollsQuestionLocalServiceUtil;
 import com.liferay.portlet.shopping.service.spring.ShoppingCartLocalServiceUtil;
 import com.liferay.portlet.wiki.service.spring.WikiNodeLocalServiceUtil;
@@ -236,6 +237,7 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		// Message boards
 
 		MBCategoryLocalServiceUtil.deleteCategories(groupId);
+		MBStatsUserLocalServiceUtil.deleteStatsUserByGroupId(groupId);
 
 		// Polls
 

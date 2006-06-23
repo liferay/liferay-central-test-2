@@ -596,6 +596,13 @@
 		<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
+		<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
 		<local-home>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceHome</local-home>

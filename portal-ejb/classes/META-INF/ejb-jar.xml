@@ -2479,6 +2479,13 @@
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PollsQuestionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.polls.service.ejb.PollsQuestionLocalServiceHome</local-home>
@@ -2745,6 +2752,13 @@
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceHome</local-home>
 				<local>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/PollsQuestionLocalServiceHome</ejb-ref-name>
@@ -8431,6 +8445,13 @@
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingCartLocalServiceHome</local-home>
@@ -8648,6 +8669,13 @@
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceHome</local-home>
 				<local>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
@@ -11235,6 +11263,13 @@
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceHome</local-home>
@@ -11284,6 +11319,13 @@
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceHome</local-home>
 				<local>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
@@ -11342,6 +11384,13 @@
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceHome</local-home>
 				<local>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
@@ -11409,6 +11458,13 @@
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceHome</local-home>
@@ -11444,6 +11500,57 @@
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBMessageLocalServiceHome</local-home>
 				<local>com.liferay.portlet.messageboards.service.ejb.MBMessageLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBTopicLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBTopicLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+		</session>
+		<session>
+			<display-name>MBStatsUserLocalServiceEJB</display-name>
+			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-name>
+			<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
+			<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
+			<ejb-class>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJBImpl</ejb-class>
+			<session-type>Stateless</session-type>
+			<transaction-type>Bean</transaction-type>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBMessageLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBMessageLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBMessageLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
@@ -11490,6 +11597,13 @@
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBTopicLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceHome</local-home>
@@ -11534,6 +11648,13 @@
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceHome</local-home>
@@ -11576,6 +11697,13 @@
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceHome</local-home>
 				<local>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
+				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
@@ -12913,6 +13041,10 @@
 			</method>
 			<method>
 				<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<method>
+				<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-name>
 				<method-name>*</method-name>
 			</method>
 			<method>
