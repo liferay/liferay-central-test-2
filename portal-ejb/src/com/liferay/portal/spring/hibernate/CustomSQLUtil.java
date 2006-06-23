@@ -83,8 +83,8 @@ public class CustomSQLUtil {
 				new String[] {
 					"? IS NULL", "? IS NOT NULL"},
 				new String[] {
-					CUSTOM_SQL_FUNCTION_ISNULL + "(?, 1) = 1",
-					CUSTOM_SQL_FUNCTION_ISNULL + "(?, 1) = 0"});
+					CUSTOM_SQL_FUNCTION_ISNULL + "(?, '1') = '1'",
+					CUSTOM_SQL_FUNCTION_ISNULL + "(?, '1') = '0'"});
 		}
 
 		return sql;

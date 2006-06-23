@@ -321,14 +321,6 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		return organizationGroups;
 	}
 
-	public List getPublicGroups(String companyId) throws SystemException {
-		Map params = new HashMap();
-
-		params.put("layoutSet", Boolean.FALSE);
-
-		return GroupFinder.findByC_N_D(companyId, null, null, params, -1, -1);
-	}
-
 	public List getRoleGroups(String roleId)
 		throws PortalException, SystemException {
 

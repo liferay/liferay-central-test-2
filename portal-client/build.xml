@@ -40,5 +40,7 @@
 			<arg value="${source.dir}" />
 			<arg value="${client.url}" />
 		</java>
+
+		<antcall target="jar" />
 	</target>
 </project>

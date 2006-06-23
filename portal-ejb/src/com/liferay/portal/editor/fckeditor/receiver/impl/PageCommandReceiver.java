@@ -35,7 +35,9 @@ import com.liferay.util.Validator;
 
 import java.io.File;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.apache.commons.logging.Log;
@@ -228,8 +230,12 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 		root.appendChild(foldersEl);
 
 		if (arg.getCurrentFolder().equals("/")) {
-			List groups = GroupLocalServiceUtil.getPublicGroups(
-				arg.getCompanyId());
+			Map groupParams = new HashMap();
+
+			groupParams.put("layoutSet", Boolean.FALSE);
+
+			List groups = GroupLocalServiceUtil.search(
+				arg.getCompanyId(), null, null, groupParams, -1, -1);
 
 			for (int i = 0; i < groups.size(); ++i) {
 				Group group = (Group)groups.get(i);

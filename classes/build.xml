@@ -5,8 +5,12 @@
 
 	<target name="clean">
 		<delete>
-			<fileset dir="." includes="*.class" />
+			<fileset dir="." excludes="JWhich.class" includes="*.class" />
 		</delete>
+
+		<delete dir="com" />
+		<delete dir="oasis" />
+		<delete dir="org" />
 	</target>
 
 	<target name="compile">

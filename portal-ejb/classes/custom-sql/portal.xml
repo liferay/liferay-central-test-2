@@ -89,7 +89,7 @@
 				LayoutSet ON
 					(LayoutSet.groupId = Group_.groupId) AND
 					(LayoutSet.privateLayout = ?) AND
-					(LayoutSet.pageCount != '0')
+					(LayoutSet.pageCount != 0)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByRolePermissions">

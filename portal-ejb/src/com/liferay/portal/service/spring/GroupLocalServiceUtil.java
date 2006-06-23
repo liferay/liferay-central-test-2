@@ -210,21 +210,6 @@ public class GroupLocalServiceUtil {
 		}
 	}
 
-	public static java.util.List getPublicGroups(java.lang.String companyId)
-		throws com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
-
-			return groupLocalService.getPublicGroups(companyId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
 	public static java.util.List getRoleGroups(java.lang.String roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

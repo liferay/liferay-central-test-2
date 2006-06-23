@@ -39,6 +39,8 @@
 	</target>
 
 	<target name="clean">
+		<ant dir="classes" target="clean" />
+
 		<ant dir="portal-shared" target="clean" />
 
 		<ant dir="util-java" target="clean" />

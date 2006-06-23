@@ -101,7 +101,6 @@ public class DBBuilder {
 		sb.append("connect 'lportal.gdb' user 'sysdba' password 'masterkey';\n");
 		sb.append(
 			_readSQL("../sql/portal/portal-firebird.sql", _FIREBIRD[0], ";\n"));
-		sb.append("commit;\n");
 
 		FileUtil.write(file, sb.toString());
 
@@ -119,7 +118,7 @@ public class DBBuilder {
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes.sql"));
 		sb.append("\n\n");
-		sb.append("commit;");
+		sb.append(FileUtil.read("../sql/sequences.sql"));
 
 		FileUtil.write(file, sb.toString());
 
@@ -139,8 +138,6 @@ public class DBBuilder {
 		sb.append(FileUtil.read("../sql/indexes.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/sequences.sql"));
-		sb.append("\n\n");
-		sb.append("commit;\n");
 		sb.append("\n");
 		sb.append("quit");
 
@@ -181,7 +178,19 @@ public class DBBuilder {
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes.sql"));
 		sb.append("\n\n");
-		sb.append("go");
+		sb.append(FileUtil.read("../sql/sequences.sql"));
+
+		FileUtil.write(file, sb.toString());
+
+		// Sybase
+
+		file = new File("../sql/create/create-sybase.sql");
+
+		sb = new StringBuffer();
+
+		sb.append("use lportal\n");
+		sb.append("\n");
+		sb.append(_readSQL("../sql/portal/portal-sybase.sql", _SYBASE[0], "\n"));
 
 		FileUtil.write(file, sb.toString());
 	}
@@ -223,7 +232,7 @@ public class DBBuilder {
 
 		// DB2
 
-		String db2 = _buildTemplate(fileName, _DB2);
+		String db2 = _buildTemplate(fileName, _DB2, "db2");
 
 		db2 = _rewordDb2(db2);
 		db2 = _removeLongInserts(db2);
@@ -237,7 +246,7 @@ public class DBBuilder {
 
 		// Firebird
 
-		String firebird = _buildTemplate(fileName, _FIREBIRD);
+		String firebird = _buildTemplate(fileName, _FIREBIRD, "firebird");
 
 		firebird = _rewordFirebird(firebird);
 		firebird = _removeInserts(firebird);
@@ -248,7 +257,7 @@ public class DBBuilder {
 
 		// Hypersonic
 
-		String hypersonic = _buildTemplate(fileName, _HYPERSONIC);
+		String hypersonic = _buildTemplate(fileName, _HYPERSONIC, "hypersonic");
 
 		hypersonic = _rewordHypersonic(hypersonic);
 		hypersonic = StringUtil.replace(hypersonic, "\\'", "''");
@@ -264,7 +273,7 @@ public class DBBuilder {
 
 		// JDataStore
 
-		String jDataStore = _buildTemplate(fileName, _JDATASTORE);
+		String jDataStore = _buildTemplate(fileName, _JDATASTORE, "jdatastore");
 
 		jDataStore = _rewordFirebird(jDataStore);
 		jDataStore = StringUtil.replace(
@@ -278,7 +287,7 @@ public class DBBuilder {
 
 		// MySQL
 
-		String mysql = _buildTemplate(fileName, _MYSQL, true);
+		String mysql = _buildTemplate(fileName, _MYSQL, "mysql");
 
 		mysql = _rewordMysql(mysql);
 		mysql = StringUtil.replace(
@@ -291,7 +300,7 @@ public class DBBuilder {
 
 		// Oracle
 
-		String oracle = _buildTemplate(fileName, _ORACLE);
+		String oracle = _buildTemplate(fileName, _ORACLE, "oracle");
 
 		oracle = _rewordOracle(oracle);
 		oracle = StringUtil.replace(
@@ -364,10 +373,6 @@ public class DBBuilder {
 		}
 
 		oracle = _removeLongInserts(oracle);
-		/*oracle = StringUtil.replace(
-			oracle,
-			new String[] {"\\'", "\\n", "\\r"},
-			new String[] {"''", "\n", "\r"});*/
 		oracle = StringUtil.replace(oracle, "\\n", "'||CHR(10)||'");
 
 		FileUtil.write(
@@ -375,7 +380,7 @@ public class DBBuilder {
 
 		// PostgreSQL
 
-		String postgresql = _buildTemplate(fileName, _POSTGRESQL);
+		String postgresql = _buildTemplate(fileName, _POSTGRESQL, "postgresql");
 
 		postgresql = _rewordPostgreSQL(postgresql);
 
@@ -385,7 +390,7 @@ public class DBBuilder {
 
 		// SAP
 
-		String sap = _buildTemplate(fileName, _SAP);
+		String sap = _buildTemplate(fileName, _SAP, "sap");
 
 		sap = _rewordSAP(sap);
 
@@ -395,7 +400,7 @@ public class DBBuilder {
 
 		// SQL Server
 
-		String sqlServer = _buildTemplate(fileName, _SQL_SERVER);
+		String sqlServer = _buildTemplate(fileName, _SQL_SERVER, "sql-server");
 
 		sqlServer = _rewordSQLServer(sqlServer);
 		sqlServer = StringUtil.replace(
@@ -406,16 +411,19 @@ public class DBBuilder {
 		FileUtil.write(
 			"../sql/" + fileName + "/" + fileName + "-sql-server.sql",
 			sqlServer);
-	}
 
-	private String _buildTemplate(String fileName, String[] replace)
-		throws IOException {
+		// Sybase
 
-		return _buildTemplate(fileName, replace, false);
+		String sybase = _buildTemplate(fileName, _SYBASE, "sybase");
+
+		//sybase = _rewordSybase(sybase);
+
+		FileUtil.write(
+			"../sql/" + fileName + "/" + fileName + "-sybase.sql", sybase);
 	}
 
 	private String _buildTemplate(
-			String fileName, String[] replace, boolean mysql)
+			String fileName, String[] replace, String server)
 		throws IOException {
 
 		File file = new File("../sql/" + fileName + ".sql");
@@ -449,8 +457,15 @@ public class DBBuilder {
 						}
 					}
 
+					/*if (includeFileName.equals("portal-data-image.sql") &&
+						server.equals("sybase")) {
+
+						include = StringUtil.replace(
+							include, ");\n", ");\nCOMMIT_TRANSACTION;\n");
+					}*/
+
 					//if (line.indexOf("portal-tables.sql") != -1) {
-						include = _convertTimestamp(include, mysql);
+						include = _convertTimestamp(include, server);
 						include = StringUtil.replace(
 							include, _TEMPLATE, replace);
 					//}
@@ -469,18 +484,18 @@ public class DBBuilder {
 			template = sb.toString();
 		}
 
-		if (fileName.startsWith("update-")) {
-			template = _convertTimestamp(template, mysql);
+		//if (fileName.startsWith("update-")) {
+			template = _convertTimestamp(template, server);
 			template = StringUtil.replace(template, _TEMPLATE, replace);
-		}
+		//}
 
 		return template;
 	}
 
-	private String _convertTimestamp(String data, boolean mysql) {
+	private String _convertTimestamp(String data, String server) {
 		String s = null;
 
-		if (mysql) {
+		if (server.equals("mysql")) {
 			s = StringUtil.replace(data, "SPECIFIC_TIMESTAMP_", "");
 		}
 		else {
@@ -873,70 +888,77 @@ public class DBBuilder {
 		"##", "TRUE", "FALSE",
 		"'01/01/1970'", "CURRENT_TIMESTAMP",
 		" BOOLEAN", " DATE", " DOUBLE", " INTEGER", " STRING", " TEXT",
-		" VARCHAR", " IDENTITY"
+		" VARCHAR", " IDENTITY", "COMMIT_TRANSACTION"
 	};
 
 	private static String[] _DB2 = {
 		"--", "1", "0",
 		"'1970-01-01-00.00.00.000000'", "current timestamp",
 		" smallint", " timestamp", " double", " integer", " long varchar",
-		" long varchar", " varchar", " generated always as identity"
+		" long varchar", " varchar", " generated always as identity", "commit"
 	};
 
 	private static String[] _FIREBIRD = {
 		"--", "1", "0",
 		"'01/01/1970'", "current_timestamp",
 		" smallint", " timestamp", " double precision", " integer", " varchar(4000)",
-		" blob", " varchar", ""
+		" blob", " varchar", "", "commit"
 	};
 
 	private static String[] _HYPERSONIC = {
 		"//", "true", "false",
 		"'1970-01-01'", "now()",
 		" bit", " timestamp", " double", " int", " longvarchar", " longvarchar",
-		" varchar", ""
+		" varchar", "", "commit"
 	};
 
 	private static String[] _JDATASTORE = {
 		"--", "TRUE", "FALSE",
 		"'1970-01-01'", "current_timestamp",
 		" boolean", " date", " double", " integer", " long varchar",
-		" long varchar", " varchar", ""
+		" long varchar", " varchar", "", "commit"
 	};
 
 	private static String[] _MYSQL = {
 		"##", "1", "0",
 		"'1970-01-01'", "now()",
 		" tinyint", " datetime", " double", " integer", " longtext",
-		" longtext", " varchar", "  auto_increment"
+		" longtext", " varchar", "  auto_increment", "commit"
 	};
 
 	private static String[] _ORACLE = {
 		"--", "1", "0",
 		"to_date('1970-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS')", "sysdate",
 		" number(1, 0)", " timestamp", " number(30,20)", " number(30,0)",
-		" varchar2(4000)", " clob", " varchar2", ""
+		" varchar2(4000)", " clob", " varchar2", "", "commit"
 	};
 
 	private static String[] _POSTGRESQL = {
 		"--", "true", "false",
 		"'01/01/1970'", "current_timestamp",
 		" bool", " timestamp", " double precision", " integer", " text", " text",
-		" varchar", ""
+		" varchar", "", "commit"
 	};
 
 	private static String[] _SAP = {
 		"##", "TRUE", "FALSE",
 		"'1970-01-01 00:00:00.000000'", "timestamp",
 		" boolean", " timestamp", " float", " int", " long", " long",
-		" varchar", ""
+		" varchar", "", "commit"
 	};
 
 	private static String[] _SQL_SERVER = {
 		"--", "1", "0",
 		"'19700101'", "GetDate()",
 		" bit", " datetime", " float", " int", " varchar(1000)", " text",
-		" varchar", "  identity(1,1)"
+		" varchar", "  identity(1,1)", "go"
+	};
+
+	private static String[] _SYBASE = {
+		"--", "1", "0",
+		"'19700101'", "getdate()",
+		" bit", " datetime", " float", " int", " varchar(1000)", " text",
+		" varchar", "  identity(1,1)", "go"
 	};
 
 }

@@ -45,6 +45,7 @@
 		<antcall target="rebuild-oracle" />
 		<antcall target="rebuild-postgresql" />
 		<antcall target="rebuild-sql-server" />
+		<antcall target="rebuild-sybase" />
 	</target>
 
 	<target name="rebuild-database">
@@ -129,6 +130,14 @@
 			<param name="executable" value="${sql-server.executable}" />
 			<param name="arg.line" value="${sql-server.arg.line}" />
 			<param name="log" value="${sql-server.log}" />
+		</antcall>
+	</target>
+
+	<target name="rebuild-sybase">
+		<antcall target="rebuild-database">
+			<param name="executable" value="${sybase.executable}" />
+			<param name="arg.line" value="${sybase.arg.line}" />
+			<param name="log" value="${sybase.log}" />
 		</antcall>
 	</target>
 </project>
