@@ -161,12 +161,12 @@ if (Validator.isNotNull(displayTerms.getParentOrganizationId())) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= OrganizationDisplayTerms.REGION_ID %>.options[0] = new Option("", "");
 		document.<portlet:namespace />fm.<portlet:namespace /><%= OrganizationDisplayTerms.REGION_ID %>.selectedIndex = 0;
 	}
-</script>
 
-<ajax:select
-	baseUrl='<%= themeDisplay.getPathMain() + "/portal/xml_regions" %>'
-	source="<%= renderResponse.getNamespace() + OrganizationDisplayTerms.COUNTRY_ID %>"
-	target="<%= renderResponse.getNamespace() + OrganizationDisplayTerms.REGION_ID %>"
-	parameters='<%= "compress=0,nullable=1,countryId={" + renderResponse.getNamespace() + OrganizationDisplayTerms.COUNTRY_ID + "}" %>'
-	postFunction='<%= renderResponse.getNamespace() + "selectCountryPost" %>'
-/>
+	DynamicSelect.create(
+		"<%= themeDisplay.getPathMain() %>/portal/xml_regions",
+		document.<portlet:namespace />fm.<portlet:namespace /><%= OrganizationDisplayTerms.COUNTRY_ID %>,
+		document.<portlet:namespace />fm.<portlet:namespace /><%= OrganizationDisplayTerms.REGION_ID %>,
+		<portlet:namespace />selectCountryPost,
+		"nullable=1"
+	)
+</script>

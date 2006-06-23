@@ -166,7 +166,7 @@
 
 		<action path="/portal/upload_progress_poller" forward="portal.upload_progress_poller" />
 
-		<action path="/portal/xml_regions" type="com.liferay.portal.action.XMLRegionsAction" />
+		<action path="/portal/xml_regions" type="com.liferay.portal.action.JSONRegionsAction" />
 
 		<!-- Address Book -->
 

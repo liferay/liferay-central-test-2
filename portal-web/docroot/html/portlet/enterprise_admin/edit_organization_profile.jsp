@@ -202,12 +202,11 @@ String statusId = BeanParamUtil.getString(organization, request, "statusId");
 	function <portlet:namespace />selectCountryPost() {
 		setSelectedValue(document.<portlet:namespace />fm.<portlet:namespace />regionId, "<%= regionId %>");
 	}
+	
+	DynamicSelect.create(
+		"<%= themeDisplay.getPathMain() %>/portal/xml_regions",
+		document.<portlet:namespace />fm.<portlet:namespace />countryId,
+		document.<portlet:namespace />fm.<portlet:namespace />regionId,
+		<portlet:namespace />selectCountryPost
+	)
 </script>
-
-<ajax:select
-	baseUrl='<%= themeDisplay.getPathMain() + "/portal/xml_regions" %>'
-	source='<%= renderResponse.getNamespace() + "countryId" %>'
-	target='<%= renderResponse.getNamespace() + "regionId" %>'
-	parameters='<%= "compress=0,countryId={" + renderResponse.getNamespace() + "countryId}" %>'
-	postFunction='<%= renderResponse.getNamespace() + "selectCountryPost" %>'
-/>

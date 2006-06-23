@@ -19,7 +19,47 @@ function changeBackground(path, extension) {
 		} 
 	} 
 }
- 
+
+var DynamicSelect = {
+	create : function(url, source, target, callback, query) {
+		var returnObj = new Object();
+		returnObj["callback"] = callback;
+		returnObj["target"] = target;
+		
+		source.onchange = function() {
+			loadPage(url, (query ? (query + "&") : "") + "sourceValue=" + this.value, DynamicSelect.returnFunction, returnObj);
+		}
+	},
+	
+	returnFunction : function(xmlHttpReq, returnObj) {
+		var select;
+		var target = returnObj["target"];
+		var callback = returnObj["callback"];
+		
+		try {
+			select = eval("(" + xmlHttpReq.responseText + ")");
+		}
+		catch (err) {
+		}
+		
+		target.length = 0;
+		if (select.options.length > 0) {
+			target.disabled = false;
+			var options = select.options;
+			for (var i = 0; i < options.length; i++) {
+				target.options[i] = new Option(options[i].name, options[i].value);
+			}
+		}
+		else {
+			target.disabled = true;
+		}
+		
+		if (callback != null) {
+			callback();
+		}
+	}
+}
+
 var PortletHeaderBar = {
 
 	fadeIn : function (id) {
@@ -32,14 +72,12 @@ var PortletHeaderBar = {
 		if (bar.startOut) {
 			// stop fadeOut prematurely
 			clearTimeout(bar.timerOut);
-			//debug_div.innerHTML += bar.timerOut + " stop OUT prematurely<br/>";
 			bar.timerOut = 0;
 		}
 		bar.startOut = false;		
 		bar.startIn = true;		
 
 		bar.opac += 20;
-		//debug_div.innerHTML += "IN "+bar.opac+"<br/>";
 		for (var i = 0; i < bar.iconList.length; i++) {
 			changeOpacity(bar.iconList[i], bar.opac);
 		}
@@ -64,14 +102,12 @@ var PortletHeaderBar = {
 		if (bar.startIn) {
 			// stop fadeIn prematurely
 			clearTimeout(bar.timerIn);
-			//debug_div.innerHTML += + bar.timerIn + " stop IN prematurely<br/>";
 			bar.timerIn = 0;
 		}
 		bar.startIn = false;
 		bar.startOut = true;		
 		
 		bar.opac -= 20;
-		//debug_div.innerHTML += "OUT "+bar.opac+"<br/>";
 		for (var i = 0; i < bar.iconList.length; i++) {
 			changeOpacity(bar.iconList[i], bar.opac);
 		}
@@ -98,12 +134,10 @@ var PortletHeaderBar = {
 	
 	hide : function (id) {
 		var bar = document.getElementById(id);
-		//debug_div.innerHTML += "<br/>hide " + bar.timerIn + " " + bar.startIn + " <br/>";
 		
 		// If fadeIn timer has been set, but hasn't started, cancel it
 		if (bar.timerIn && !bar.startIn) {
 			// cancel unstarted fadeIn
-			//debug_div.innerHTML +=  "cancel unstarted IN<br/>";
 			clearTimeout(bar.timerIn);
 			bar.timerIn = 0;
 		}	
@@ -112,24 +146,20 @@ var PortletHeaderBar = {
 			if (bar.timerOut) {
 				// reset unstarted fadeOut timer
 				clearTimeout(bar.timerOut);
-				//debug_div.innerHTML += "Out restarted<br/>";
 				bar.timerOut = 0;
 			}
 
 			this.init(bar);
 			bar.timerOut = setTimeout("PortletHeaderBar.fadeOut(\"" + id + "\")", 150);
-			//debug_div.innerHTML += bar.timerOut + " hide OUT<br/>";
 		}
 	},
 	
 	show : function (id) {
-		//debug_div.innerHTML += "<br/>show<br/>";
 		var bar = document.getElementById(id);
 		
 		// If fadeOut timer has been set, but hasn't started, cancel it
 		if (bar.timerOut && !bar.startOut) {
 			// cancel unstarted fadeOut
-			//debug_div.innerHTML +=  "cancel unstarted OUT<br/>";
 			clearTimeout(bar.timerOut);
 			bar.timerOut = 0;
 		}
@@ -142,13 +172,11 @@ var PortletHeaderBar = {
 			if (bar.timerIn) {
 				// reset unstarted fadeIn timer
 				clearTimeout(bar.timerIn);
-				//debug_div.innerHTML += "In restarted<br/>";
 				bar.timerIn = 0;
 			}
 
 			this.init(bar);
 			bar.timerIn = setTimeout("PortletHeaderBar.fadeIn(\"" + id + "\")", 150);
-			//debug_div.innerHTML += bar.timerIn + " show IN<br/>";
 		}
 	}
 }
