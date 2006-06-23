@@ -49,6 +49,7 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 
 <liferay-ui:tabs names="category" />
 
+<liferay-ui:error exception="<%= CaptchaException.class %>" message="text-verification-failed" />
 <liferay-ui:error exception="<%= CategoryNameException.class %>" message="please-enter-a-valid-name" />
 
 <c:if test="<%= !parentCategoryId.equals(MBCategory.DEFAULT_PARENT_CATEGORY_ID) %>">
@@ -97,6 +98,14 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 </table>
 
 <br>
+
+<c:if test="<%= category == null %>">
+	<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+		<portlet:param name="struts_action" value="/message_boards/captcha" />
+	</portlet:actionURL>
+
+	<liferay-ui:captcha url="<%= captchaURL %>" />
+</c:if>
 
 <input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

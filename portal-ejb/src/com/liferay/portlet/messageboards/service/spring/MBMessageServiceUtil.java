@@ -56,6 +56,29 @@ public class MBMessageServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		java.lang.String topicId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+
+			return mbMessageService.addMessage(topicId, subject, body, files,
+				anonymous, addCommunityPermissions, addGuestPermissions);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String topicId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
 		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -65,6 +88,31 @@ public class MBMessageServiceUtil {
 
 			return mbMessageService.addMessage(topicId, subject, body, files,
 				anonymous, prefs, addCommunityPermissions, addGuestPermissions);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String topicId, java.lang.String threadId,
+		java.lang.String parentMessageId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+
+			return mbMessageService.addMessage(topicId, threadId,
+				parentMessageId, subject, body, files, anonymous,
+				addCommunityPermissions, addGuestPermissions);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -212,6 +260,28 @@ public class MBMessageServiceUtil {
 
 			return mbMessageService.updateDiscussionMessage(groupId, className,
 				classPK, messageId, subject, body);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
+		java.lang.String topicId, java.lang.String messageId,
+		java.lang.String subject, java.lang.String body, java.util.List files)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+
+			return mbMessageService.updateMessage(topicId, messageId, subject,
+				body, files);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

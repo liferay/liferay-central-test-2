@@ -168,7 +168,7 @@
 
 						int navWidth = themeDisplay.getResolution();
 						navWidth = (navWidth > 0) ? navWidth : 1024;
-						
+
 						if (layouts.size() == 1) {
 							// Make an exception if there is only one tab
 							if (rows.length == 1) {

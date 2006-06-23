@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -20,17 +19,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
 
---%><%@ include file="/html/common/init.jsp" %><%--
+package com.liferay.taglib.ui;
 
---%><%@ page import="com.liferay.portal.ContactFirstNameException" %><%--
---%><%@ page import="com.liferay.portal.ContactLastNameException" %><%--
---%><%@ page import="com.liferay.portal.DuplicateUserEmailAddressException" %><%--
---%><%@ page import="com.liferay.portal.DuplicateUserIdException" %><%--
---%><%@ page import="com.liferay.portal.ReservedUserEmailAddressException" %><%--
---%><%@ page import="com.liferay.portal.ReservedUserIdException" %><%--
---%><%@ page import="com.liferay.portal.UserEmailAddressException" %><%--
---%><%@ page import="com.liferay.portal.UserIdException" %><%--
+import com.liferay.taglib.util.IncludeTag;
 
---%><portlet:defineObjects />
+import javax.servlet.ServletRequest;
+
+/**
+ * <a href="CaptchaTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class CaptchaTag extends IncludeTag {
+
+	public int doStartTag() {
+		ServletRequest req = pageContext.getRequest();
+
+		req.setAttribute("liferay-ui:captcha:url", _url);
+
+		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setUrl(String url) {
+		_url = url;
+	}
+
+	protected String getDefaultPage() {
+		return _PAGE;
+	}
+
+	private static final String _PAGE = "/html/taglib/ui/captcha/page.jsp";
+
+	private String _url;
+
+}

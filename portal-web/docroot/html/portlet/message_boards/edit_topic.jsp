@@ -49,6 +49,7 @@ String categoryId = BeanParamUtil.getString(topic, request, "categoryId", MBCate
 
 <liferay-ui:tabs names="topic" />
 
+<liferay-ui:error exception="<%= CaptchaException.class %>" message="text-verification-failed" />
 <liferay-ui:error exception="<%= TopicNameException.class %>" message="please-enter-a-valid-name" />
 
 <%= MBUtil.getBreadcrumbs(categoryId, null, null, pageContext, renderResponse) %>
@@ -95,6 +96,14 @@ String categoryId = BeanParamUtil.getString(topic, request, "categoryId", MBCate
 </table>
 
 <br>
+
+<c:if test="<%= topic == null %>">
+	<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+		<portlet:param name="struts_action" value="/message_boards/captcha" />
+	</portlet:actionURL>
+
+	<liferay-ui:captcha url="<%= captchaURL %>" />
+</c:if>
 
 <input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 

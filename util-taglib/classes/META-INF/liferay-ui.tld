@@ -92,6 +92,21 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>captcha</name>
+		<tagclass>com.liferay.taglib.ui.CaptchaTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>url</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>discussion</name>
 		<tagclass>com.liferay.taglib.ui.DiscussionTag</tagclass>
 		<bodycontent>JSP</bodycontent>

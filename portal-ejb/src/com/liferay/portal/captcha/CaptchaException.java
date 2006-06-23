@@ -20,33 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.captcha;
+package com.liferay.portal.captcha;
 
-import com.octo.captcha.component.wordgenerator.DictionaryReader;
-import com.octo.captcha.component.wordgenerator.WordList;
-
-import java.util.Locale;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="WordListDictionnary.java.html"><b><i>View Source</i></b></a>
+ * <a href="CaptchaException.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class WordListDictionnary implements DictionaryReader {
+public class CaptchaException extends PortalException {
 
-	public WordListDictionnary(WordList wordlist) {
-		_wordList = wordlist;
+	public CaptchaException() {
+		super();
 	}
 
-	public WordList getWordList() {
-		return getWordList(Locale.getDefault());
+	public CaptchaException(String msg) {
+		super(msg);
 	}
 
-	public WordList getWordList(Locale locale) {
-		return _wordList;
+	public CaptchaException(String msg, Throwable cause) {
+		super(msg, cause);
 	}
 
-	private WordList _wordList;
+	public CaptchaException(Throwable cause) {
+		super(cause);
+	}
 
 }

@@ -169,7 +169,6 @@ public class MainServlet extends ActionServlet {
 
 			ctx.setAttribute(WebKeys.ROOT_PATH, rootPath);
 			ctx.setAttribute(WebKeys.MAIN_PATH, rootPath + DEFAULT_MAIN_PATH);
-			ctx.setAttribute(WebKeys.CAPTCHA_PATH, rootPath + "/captcha");
 
 			String friendlyURLPrivatePath = rootPath + PropsUtil.get(
 				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING);
@@ -570,20 +569,6 @@ public class MainServlet extends ActionServlet {
 		}
 
 		req.setAttribute(WebKeys.MAIN_PATH, mainPath);
-
-		// CAPTCHA_PATH variable
-
-		String captchaPath = (String)ctx.getAttribute(WebKeys.CAPTCHA_PATH);
-
-		if (portalCtx.getAttribute(WebKeys.CAPTCHA_PATH) == null) {
-			portalCtx.setAttribute(WebKeys.CAPTCHA_PATH, captchaPath);
-		}
-
-		if (ses.getAttribute(WebKeys.CAPTCHA_PATH) == null) {
-			ses.setAttribute(WebKeys.CAPTCHA_PATH, captchaPath);
-		}
-
-		req.setAttribute(WebKeys.CAPTCHA_PATH, captchaPath);
 
 		// FRIENDLY_URL_PRIVATE_PATH variable
 

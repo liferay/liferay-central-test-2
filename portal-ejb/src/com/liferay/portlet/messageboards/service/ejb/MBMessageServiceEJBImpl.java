@@ -65,6 +65,18 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		java.lang.String topicId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().addMessage(topicId, subject, body, files,
+			anonymous, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String topicId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
 		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -73,6 +85,20 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 
 		return getService().addMessage(topicId, subject, body, files,
 			anonymous, prefs, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String topicId, java.lang.String threadId,
+		java.lang.String parentMessageId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().addMessage(topicId, threadId, parentMessageId,
+			subject, body, files, anonymous, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
@@ -143,6 +169,17 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 
 		return getService().updateDiscussionMessage(groupId, className,
 			classPK, messageId, subject, body);
+	}
+
+	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
+		java.lang.String topicId, java.lang.String messageId,
+		java.lang.String subject, java.lang.String body, java.util.List files)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().updateMessage(topicId, messageId, subject, body,
+			files);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(

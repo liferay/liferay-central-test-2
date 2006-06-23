@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.myaccount.action;
 
-import com.liferay.portal.CaptchaException;
 import com.liferay.portal.ContactFirstNameException;
 import com.liferay.portal.ContactLastNameException;
 import com.liferay.portal.DuplicateUserEmailAddressException;
@@ -33,6 +32,8 @@ import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserSmsException;
+import com.liferay.portal.captcha.CaptchaException;
+import com.liferay.portal.captcha.CaptchaUtil;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
@@ -41,28 +42,21 @@ import com.liferay.portal.service.spring.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
-import com.octo.captcha.Captcha;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -129,8 +123,6 @@ public class AddUserAction extends PortletAction {
 	protected void addUser(ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		PortletSession ses = req.getPortletSession();
-
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
@@ -163,32 +155,7 @@ public class AddUserAction extends PortletAction {
 		String organizationId = ParamUtil.getString(req, "organizationId");
 		String locationId = ParamUtil.getString(req, "locationId");
 
-		Captcha captcha = null;
-
-		if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.CAPTCHA_CHALLENGE))) {
-			captcha = (Captcha)ses.getAttribute(
-				WebKeys.CAPTCHA, PortletSession.APPLICATION_SCOPE);
-
-			// Captcha should never be null, but on the rare occasion it is,
-			// just let people register.
-
-			if (captcha != null) {
-				Boolean validResponse = captcha.validateResponse(
-					ParamUtil.getString(req, "captcha"));
-
-				if ((validResponse == null) ||
-					(validResponse.equals(Boolean.FALSE))) {
-
-					ses.removeAttribute(
-						WebKeys.CAPTCHA, PortletSession.APPLICATION_SCOPE);
-
-					throw new CaptchaException();
-				}
-			}
-			else {
-				_log.error("Captcha is null");
-			}
-		}
+		CaptchaUtil.check(req);
 
 		User user = UserServiceUtil.addUser(
 			company.getCompanyId(), autoUserId, userId, autoPassword,
@@ -196,13 +163,6 @@ public class AddUserAction extends PortletAction {
 			themeDisplay.getLocale(), firstName, middleName, lastName,
 			nickName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
 			birthdayYear, jobTitle, organizationId, locationId);
-
-		if (captcha != null) {
-			captcha.disposeChallenge();
-
-			ses.removeAttribute(
-				WebKeys.CAPTCHA, PortletSession.APPLICATION_SCOPE);
-		}
 
 		// Session messages
 
@@ -225,7 +185,5 @@ public class AddUserAction extends PortletAction {
 
 		res.sendRedirect(redirect);
 	}
-
-	private static Log _log = LogFactory.getLog(AddUserAction.class);
 
 }

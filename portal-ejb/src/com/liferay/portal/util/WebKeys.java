@@ -55,8 +55,6 @@ public class WebKeys {
 
 	public static final String CAPTCHA = "CAPTCHA";
 
-	public static final String CAPTCHA_PATH = "CAPTCHA_PATH";
-
 	public static final String COLOR_SCHEME = "COLOR_SCHEME";
 
 	public static final String COMIC_ENTRY = "COMIC_ENTRY";

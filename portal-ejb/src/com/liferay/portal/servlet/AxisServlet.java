@@ -22,9 +22,13 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.shared.util.StackTraceUtil;
 
 import java.io.IOException;
 
@@ -34,10 +38,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionCheckerFactory;
-import com.liferay.portal.security.permission.PermissionThreadLocal;
-import com.liferay.portal.shared.util.StackTraceUtil;
 
 /**
  * <a href="AxisServlet.java.html"><b><i>View Source</i></b></a>

@@ -24,28 +24,19 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
-import com.liferay.portal.shared.util.MethodInvoker;
-import com.liferay.portal.shared.util.MethodWrapper;
-import com.liferay.util.ObjectValuePair;
-import com.liferay.util.StringPool;
-import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
-import com.liferay.portal.shared.util.StackTraceUtil;
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.shared.util.MethodInvoker;
+import com.liferay.portal.shared.util.MethodWrapper;
+import com.liferay.portal.shared.util.StackTraceUtil;
+import com.liferay.util.ObjectValuePair;
+import com.liferay.util.StringPool;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

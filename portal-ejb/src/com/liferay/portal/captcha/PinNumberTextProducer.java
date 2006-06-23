@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -20,17 +19,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
 
---%><%@ include file="/html/common/init.jsp" %><%--
+package com.liferay.portal.captcha;
 
---%><%@ page import="com.liferay.portal.ContactFirstNameException" %><%--
---%><%@ page import="com.liferay.portal.ContactLastNameException" %><%--
---%><%@ page import="com.liferay.portal.DuplicateUserEmailAddressException" %><%--
---%><%@ page import="com.liferay.portal.DuplicateUserIdException" %><%--
---%><%@ page import="com.liferay.portal.ReservedUserEmailAddressException" %><%--
---%><%@ page import="com.liferay.portal.ReservedUserIdException" %><%--
---%><%@ page import="com.liferay.portal.UserEmailAddressException" %><%--
---%><%@ page import="com.liferay.portal.UserIdException" %><%--
+import com.liferay.util.PwdGenerator;
 
---%><portlet:defineObjects />
+import java.util.Properties;
+
+import nl.captcha.text.TextProducer;
+
+/**
+ * <a href="PinNumberTextProducer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class PinNumberTextProducer implements TextProducer {
+
+	public PinNumberTextProducer() {
+	}
+
+	public void setProperties(Properties props) {
+		_props = props;
+	}
+
+	public String getText() {
+		return PwdGenerator.getPinNumber();
+	}
+
+	private Properties _props;
+
+}

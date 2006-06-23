@@ -61,6 +61,20 @@ public class MBMessageServiceImpl
 
 	public MBMessage addMessage(
 			String topicId, String subject, String body, List files,
+			boolean anonymous, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		MBTopicPermission.check(
+			getPermissionChecker(), topicId, ActionKeys.ADD_MESSAGE);
+
+		return MBMessageLocalServiceUtil.addMessage(
+			getUserId(), topicId, subject, body, files, anonymous, null,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public MBMessage addMessage(
+			String topicId, String subject, String body, List files,
 			boolean anonymous, PortletPreferences prefs,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -71,6 +85,21 @@ public class MBMessageServiceImpl
 		return MBMessageLocalServiceUtil.addMessage(
 			getUserId(), topicId, subject, body, files, anonymous, prefs,
 			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public MBMessage addMessage(
+			String topicId, String threadId, String parentMessageId,
+			String subject, String body, List files, boolean anonymous,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		MBTopicPermission.check(
+			getPermissionChecker(), topicId, ActionKeys.ADD_MESSAGE);
+
+		return MBMessageLocalServiceUtil.addMessage(
+			getUserId(), topicId, threadId, parentMessageId, subject, body,
+			files, anonymous, null, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public MBMessage addMessage(
@@ -149,6 +178,18 @@ public class MBMessageServiceImpl
 
 		return MBMessageLocalServiceUtil.updateDiscussionMessage(
 			messageId, subject, body);
+	}
+
+	public MBMessage updateMessage(
+			String topicId, String messageId, String subject, String body,
+			List files)
+		throws PortalException, SystemException {
+
+		MBMessagePermission.check(
+			getPermissionChecker(), topicId, messageId, ActionKeys.UPDATE);
+
+		return MBMessageLocalServiceUtil.updateMessage(
+			topicId, messageId, subject, body, files, null);
 	}
 
 	public MBMessage updateMessage(

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.messageboards.action;
 
+import com.liferay.portal.captcha.CaptchaException;
+import com.liferay.portal.captcha.CaptchaUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
@@ -79,6 +81,7 @@ public class EditCategoryAction extends PortletAction {
 				setForward(req, "portlet.message_boards.error");
 			}
 			else if (e != null &&
+					 e instanceof CaptchaException ||
 					 e instanceof CategoryNameException) {
 
 				SessionErrors.add(req, e.getClass().getName());
@@ -136,6 +139,7 @@ public class EditCategoryAction extends PortletAction {
 			req, "addGuestPermissions");
 
 		if (Validator.isNull(categoryId)) {
+			CaptchaUtil.check(req);
 
 			// Add category
 

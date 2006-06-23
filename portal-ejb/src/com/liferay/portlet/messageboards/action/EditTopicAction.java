@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.messageboards.action;
 
+import com.liferay.portal.captcha.CaptchaException;
+import com.liferay.portal.captcha.CaptchaUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
@@ -79,6 +81,7 @@ public class EditTopicAction extends PortletAction {
 				setForward(req, "portlet.message_boards.error");
 			}
 			else if (e != null &&
+					 e instanceof CaptchaException ||
 					 e instanceof TopicNameException) {
 
 				SessionErrors.add(req, e.getClass().getName());
@@ -134,6 +137,7 @@ public class EditTopicAction extends PortletAction {
 			req, "addGuestPermissions");
 
 		if (Validator.isNull(topicId)) {
+			CaptchaUtil.check(req);
 
 			// Add topic
 

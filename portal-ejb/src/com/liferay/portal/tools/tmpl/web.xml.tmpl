@@ -38,19 +38,13 @@
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet>
-		<servlet-name>CaptchaServlet</servlet-name>
-		<display-name>CaptchaServlet</display-name>
-		<servlet-class>com.liferay.portal.servlet.CaptchaServlet</servlet-class>
-		<load-on-startup>3</load-on-startup>
-	</servlet>
-	<servlet>
 		<servlet-name>FriendlyURLPrivateServlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.FriendlyURLServlet</servlet-class>
 		<init-param>
 			<param-name>private</param-name>
 			<param-value>true</param-value>
 		</init-param>
-		<load-on-startup>4</load-on-startup>
+		<load-on-startup>3</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>FriendlyURLPublicServlet</servlet-name>
@@ -59,29 +53,29 @@
 			<param-name>private</param-name>
 			<param-value>false</param-value>
 		</init-param>
-		<load-on-startup>5</load-on-startup>
+		<load-on-startup>4</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>ImageServlet</servlet-name>
 		<display-name>ImageServlet</display-name>
 		<servlet-class>com.liferay.portal.servlet.ImageServlet</servlet-class>
-		<load-on-startup>6</load-on-startup>
+		<load-on-startup>5</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>LuceneServlet</servlet-name>
 		<display-name>LuceneServlet</display-name>
 		<servlet-class>com.liferay.portal.servlet.LuceneServlet</servlet-class>
-		<load-on-startup>7</load-on-startup>
+		<load-on-startup>6</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>FCKeditorServlet</servlet-name>
 		<servlet-class>com.liferay.portal.editor.fckeditor.ConnectorServlet</servlet-class>
-		<load-on-startup>8</load-on-startup>
+		<load-on-startup>7</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>ResourceProxyServlet</servlet-name>
 		<servlet-class>com.liferay.portal.wsrp.servlet.ResourceProxyServlet</servlet-class>
-		<load-on-startup>9</load-on-startup>
+		<load-on-startup>8</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>ChatServlet</servlet-name>
@@ -95,25 +89,21 @@
 			<param-name>config</param-name>
 			<param-value>nfc/nfc.conf</param-value>
 		</init-param>
-		<load-on-startup>10</load-on-startup>
+		<load-on-startup>9</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>HttpService</servlet-name>
 		<servlet-class>com.liferay.portlet.httpbridge.servlet.HttpService</servlet-class>
-		<load-on-startup>11</load-on-startup>
+		<load-on-startup>10</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>UserService</servlet-name>
 		<servlet-class>com.liferay.portlet.httpbridge.servlet.UserService</servlet-class>
-		<load-on-startup>12</load-on-startup>
+		<load-on-startup>11</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MainServlet</servlet-name>
 		<url-pattern>/c/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>CaptchaServlet</servlet-name>
-		<url-pattern>/captcha/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>FriendlyURLPrivateServlet</servlet-name>

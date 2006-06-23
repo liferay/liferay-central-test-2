@@ -1945,7 +1945,6 @@ this-page-is-part-of-an-inactive-portlet=هذه الصفحة جزء من بور�
 this-portlet-is-inactive=هذه البورتلت معطلة.
 this-topic-is-empty=هذا  العنوان الرئيسي فارغ.
 this-topic=هذا العنوان الرئيسي
-this-word-does-not-match-the-image=هذه الكلمة لا تطبق الصورة.
 thread=نقاش
 threaded-replies=ردود تابعة لنقاش
 three-columns=ثلاثة أعمدة
@@ -2096,7 +2095,6 @@ wide=عريض
 width=عرض
 wikis=ويكي
 word-search=بحث بالكلمة
-word-verification=التأكد من الكلمة
 worm=دودة
 write-roles=أدوار الكتابة
 wsrp-markup-endpoint=Markup Endpoint

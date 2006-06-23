@@ -1099,7 +1099,6 @@
 		<exception>AddressCity</exception>
 		<exception>AddressStreet</exception>
 		<exception>AddressZip</exception>
-		<exception>Captcha</exception>
 		<exception>CompanyHomeURL</exception>
 		<exception>CompanyPortalURL</exception>
 		<exception>ContactBirthday</exception>

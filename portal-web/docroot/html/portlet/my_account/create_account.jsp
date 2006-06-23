@@ -35,13 +35,11 @@ birthday.set(Calendar.DATE, 1);
 birthday.set(Calendar.YEAR, 1970);
 
 boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
-
-String captcha = ParamUtil.getString(request, "captcha");
 %>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/my_account/create_account" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 
-<liferay-ui:error exception="<%= CaptchaException.class %>" message="this-word-does-not-match-the-image" />
+<liferay-ui:error exception="<%= CaptchaException.class %>" message="text-verification-failed" />
 <liferay-ui:error exception="<%= ContactFirstNameException.class %>" message="please-enter-a-valid-first-name" />
 <liferay-ui:error exception="<%= ContactLastNameException.class %>" message="please-enter-a-valid-last-name" />
 <liferay-ui:error exception="<%= DuplicateUserEmailAddressException.class %>" message="the-email-address-you-requested-is-already-taken" />
@@ -157,23 +155,11 @@ String captcha = ParamUtil.getString(request, "captcha");
 	</td>
 	<td style="padding-left: 30px;"></td>
 	<td valign="top">
-		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.CAPTCHA_CHALLENGE)) %>">
-			<table border="0" cellpadding="0" cellspacing="0">
-			<tr>
-				<td>
-					<%= LanguageUtil.get(pageContext, "word-verification") %>
-				</td>
-				<td style="padding-left: 10px;"></td>
-				<td>
-					<input class="form-text" name="<portlet:namespace />captcha" size="8" type="text" value="<%= captcha %>">
-				</td>
-			</tr>
-			</table>
+		<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+			<portlet:param name="struts_action" value="/my_account/captcha" />
+		</portlet:actionURL>
 
-			<br>
-
-			<img height="100" src="<%= themeDisplay.getPathCaptcha() %>/challenge" width="300">
-		</c:if>
+		<liferay-ui:captcha url="<%= captchaURL %>" />
 	</td>
 </tr>
 </table>

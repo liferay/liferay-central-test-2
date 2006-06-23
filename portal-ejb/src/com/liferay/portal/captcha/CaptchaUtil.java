@@ -20,30 +20,49 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal;
+package com.liferay.portal.captcha;
+
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.ParamUtil;
+
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletSession;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="CaptchaException.java.html"><b><i>View Source</i></b></a>
+ * <a href="CaptchaUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class CaptchaException extends PortalException {
+public class CaptchaUtil {
 
-	public CaptchaException() {
-		super();
+	public static void check(PortletRequest req) throws CaptchaException {
+		if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.CAPTCHA_CHALLENGE))) {
+			PortletSession ses = req.getPortletSession();
+
+			String captcha = (String)ses.getAttribute(WebKeys.CAPTCHA);
+
+			// Captcha should never be null, but on the rare occasion it is,
+			// just let people register.
+
+			if (captcha != null) {
+				if (!captcha.equals(ParamUtil.getString(req, "captcha"))) {
+					throw new CaptchaException();
+				}
+			}
+			else {
+				if (_log.isErrorEnabled()) {
+					_log.error("Captcha is null");
+				}
+			}
+		}
 	}
 
-	public CaptchaException(String msg) {
-		super(msg);
-	}
-
-	public CaptchaException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public CaptchaException(Throwable cause) {
-		super(cause);
-	}
+	private static Log _log = LogFactory.getLog(CaptchaUtil.class);
 
 }

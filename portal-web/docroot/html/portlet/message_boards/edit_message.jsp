@@ -77,6 +77,7 @@ boolean attachments = BeanParamUtil.getBoolean(message, request, "attachments");
 
 <liferay-ui:tabs names="message" />
 
+<liferay-ui:error exception="<%= CaptchaException.class %>" message="text-verification-failed" />
 <liferay-ui:error exception="<%= MessageBodyException.class %>" message="please-enter-a-valid-message" />
 <liferay-ui:error exception="<%= MessageSubjectException.class %>" message="please-enter-a-valid-subject" />
 
@@ -196,6 +197,14 @@ if (message != null) {
 </table>
 
 <br>
+
+<c:if test="<%= message == null %>">
+	<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+		<portlet:param name="struts_action" value="/message_boards/captcha" />
+	</portlet:actionURL>
+
+	<liferay-ui:captcha url="<%= captchaURL %>" />
+</c:if>
 
 <input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, (message != null) ? "update" : ((Validator.isNull(threadId) ? "post-new-thread" : "reply"))) %>'>
 

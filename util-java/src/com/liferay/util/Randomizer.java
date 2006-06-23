@@ -36,6 +36,10 @@ import java.util.Set;
  */
 public class Randomizer extends Random {
 
+	public static Randomizer getInstance() {
+		return _instance;
+	}
+
 	public Randomizer() {
 		super();
 	}
@@ -141,5 +145,7 @@ public class Randomizer extends Random {
 
 		return new String(array);
 	}
+
+	private static Randomizer _instance = new Randomizer();
 
 }

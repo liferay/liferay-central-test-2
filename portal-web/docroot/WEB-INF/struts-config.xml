@@ -889,6 +889,8 @@
 
 		<!-- Message Boards -->
 
+		<action path="/message_boards/captcha" type="com.liferay.portal.captcha.CaptchaAction" />
+
 		<action path="/message_boards/edit" type="com.liferay.portlet.messageboards.action.EditPreferencesAction">
 			<forward name="portlet.message_boards.edit" path="portlet.message_boards.edit" />
 		</action>
@@ -937,6 +939,8 @@
 		</action>
 
 		<!-- My Account -->
+
+		<action path="/my_account/captcha" type="com.liferay.portal.captcha.CaptchaAction" />
 
 		<action path="/my_account/create_account" type="com.liferay.portlet.myaccount.action.AddUserAction">
 			<forward name="portlet.my_account.create_account" path="portlet.my_account.create_account" />

@@ -56,6 +56,45 @@ public class MBMessageServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessageModel addMessage(
+		java.lang.String topicId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(topicId,
+					subject, body, files, anonymous, addCommunityPermissions,
+					addGuestPermissions);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessageModel addMessage(
+		java.lang.String topicId, java.lang.String threadId,
+		java.lang.String parentMessageId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(topicId,
+					threadId, parentMessageId, subject, body, files, anonymous,
+					addCommunityPermissions, addGuestPermissions);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static void deleteDiscussionMessage(java.lang.String groupId,
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String messageId) throws RemoteException {
@@ -130,6 +169,23 @@ public class MBMessageServiceSoap {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateDiscussionMessage(groupId,
 					className, classPK, messageId, subject, body);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessageModel updateMessage(
+		java.lang.String topicId, java.lang.String messageId,
+		java.lang.String subject, java.lang.String body, java.util.List files)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateMessage(topicId,
+					messageId, subject, body, files);
 
 			return returnValue;
 		}

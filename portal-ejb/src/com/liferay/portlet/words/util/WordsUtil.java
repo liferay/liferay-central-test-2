@@ -25,6 +25,8 @@ package com.liferay.portlet.words.util;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portlet.words.ScramblerException;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.ListUtil;
+import com.liferay.util.Randomizer;
 import com.liferay.util.StringUtil;
 import com.liferay.util.jazzy.BasicSpellCheckListener;
 
@@ -37,7 +39,9 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -55,8 +59,16 @@ public class WordsUtil {
 		return _instance._checkSpelling(text);
 	}
 
-	public static Set getDictionary() {
-		return _instance._getDictionary();
+	public static List getDictionaryList() {
+		return _instance._getDictionaryList();
+	}
+
+	public static Set getDictionarySet() {
+		return _instance._getDictionarySet();
+	}
+
+	public static String getRandomWord() {
+		return _instance._getRandomWord();
 	}
 
 	public static boolean isDictionaryWord(String word) {
@@ -74,15 +86,17 @@ public class WordsUtil {
 	}
 
 	private WordsUtil() {
-		_dictionary = CollectionFactory.getHashSet(150000);
-
-		String[] dictionaryWords = StringUtil.split(
+		_dictionaryList = ListUtil.fromArray(StringUtil.split(
 			ContentUtil.get("com/liferay/portlet/words/dependencies/words.txt"),
-			"\n");
+			"\n"));
 
-		for (int i = 0; i < dictionaryWords.length; i++) {
-			_dictionary.add(dictionaryWords[i]);
-		}
+		_dictionaryList = Collections.unmodifiableList(_dictionaryList);
+
+		_dictionarySet = CollectionFactory.getHashSet(_dictionaryList.size());
+
+		_dictionarySet.addAll(_dictionaryList);
+
+		_dictionarySet = Collections.unmodifiableSet(_dictionarySet);
 
 		try {
 			_spellDictionary = new SpellDictionaryHashMap();
@@ -117,12 +131,22 @@ public class WordsUtil {
 		return listener.getInvalidWords();
 	}
 
-	private Set _getDictionary() {
-		return _dictionary;
+	private List _getDictionaryList() {
+		return _dictionaryList;
+	}
+
+	private Set _getDictionarySet() {
+		return _dictionarySet;
+	}
+
+	private String _getRandomWord() {
+		int pos = Randomizer.getInstance().nextInt(_dictionaryList.size());
+
+		return (String)_dictionaryList.get(pos);
 	}
 
 	private boolean _isDictionaryWord(String word) {
-		return _dictionary.contains(word);
+		return _dictionarySet.contains(word);
 	}
 
 	private String[] _unscramble(String word) throws ScramblerException {
@@ -131,7 +155,7 @@ public class WordsUtil {
 		String[] words = scramble(word);
 
 		for (int i = 0; i < words.length; i++) {
-			if (_dictionary.contains(words[i])) {
+			if (_dictionarySet.contains(words[i])) {
 				validWords.add(words[i]);
 			}
 		}
@@ -143,7 +167,9 @@ public class WordsUtil {
 
 	private static WordsUtil _instance = new WordsUtil();
 
-	private Set _dictionary;
+	private List _dictionaryList;
+	private Set _dictionarySet;
 	private SpellDictionaryHashMap _spellDictionary;
+	private Random _random = new Random();
 
 }

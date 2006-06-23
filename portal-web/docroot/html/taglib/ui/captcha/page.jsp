@@ -20,17 +20,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/common/init.jsp" %><%--
+<%@ include file="/html/taglib/init.jsp" %>
 
---%><%@ page import="com.liferay.portal.ContactFirstNameException" %><%--
---%><%@ page import="com.liferay.portal.ContactLastNameException" %><%--
---%><%@ page import="com.liferay.portal.DuplicateUserEmailAddressException" %><%--
---%><%@ page import="com.liferay.portal.DuplicateUserIdException" %><%--
---%><%@ page import="com.liferay.portal.ReservedUserEmailAddressException" %><%--
---%><%@ page import="com.liferay.portal.ReservedUserIdException" %><%--
---%><%@ page import="com.liferay.portal.UserEmailAddressException" %><%--
---%><%@ page import="com.liferay.portal.UserIdException" %><%--
+<%
+String url = (String)request.getAttribute("liferay-ui:captcha:url");
+%>
 
---%><portlet:defineObjects />
+<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.CAPTCHA_CHALLENGE)) %>">
+	<div>
+		<img src="<%= url %>">
+	</div>
+
+	<br>
+
+	<table border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "text-verification") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" name="<%= namespace %>captcha" size="10" type="text" value="">
+		</td>
+	</tr>
+	</table>
+
+	<br>
+</c:if>

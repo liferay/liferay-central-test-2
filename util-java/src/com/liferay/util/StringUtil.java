@@ -244,9 +244,7 @@ public class StringUtil {
 	}
 
 	public static String randomize(String s) {
-		Randomizer r = new Randomizer();
-
-		return r.randomize(s);
+		return Randomizer.getInstance().randomize(s);
 	}
 
 	public static String read(ClassLoader classLoader, String name)

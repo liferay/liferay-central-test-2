@@ -120,7 +120,6 @@ public class ServicePreAction extends Action {
 
 			String rootPath = (String)req.getAttribute(WebKeys.ROOT_PATH);
 			String mainPath = (String)req.getAttribute(WebKeys.MAIN_PATH);
-			String captchaPath = (String)req.getAttribute(WebKeys.CAPTCHA_PATH);
 			String friendlyURLPrivatePath =
 				(String)req.getAttribute(WebKeys.FRIENDLY_URL_PRIVATE_PATH);
 			String friendlyURLPublicPath =
@@ -363,7 +362,6 @@ public class ServicePreAction extends Action {
 			themeDisplay.setResolution(resolution);
 			themeDisplay.setStatePopUp(LiferayWindowState.isPopUp(req));
 			themeDisplay.setPathApplet(contextPath + "/applets");
-			themeDisplay.setPathCaptcha(captchaPath);
 			themeDisplay.setPathContext(contextPath);
 			themeDisplay.setPathFlash(contextPath + "/flash");
 			themeDisplay.setPathFriendlyURLPrivate(friendlyURLPrivatePath);
