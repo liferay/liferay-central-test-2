@@ -67,8 +67,83 @@
 				</div>
 				<div id="layout-my-places"><liferay-portlet:runtime portletName="<%= PortletKeys.MY_PLACES %>" /></div>
 				<c:if test="<%= !themeDisplay.isSignedIn() %>">
-					<div style="position: absolute; right: 40px; top: 3px">
-						<a href="<%= themeDisplay.getURLSignIn() %>"><bean:message key="sign-in" /></a>
+					<script type="text/javascript">
+						<!--
+						function displayLogin() {
+							var loginDiv = document.getElementById("dhtml_login");
+							var divStyle = loginDiv.style;
+							divStyle.display = "block"; 
+							divStyle.position = "relative";
+							divStyle.top = "2px"; 
+							divStyle.left = "35px";
+							divStyle.width = "210px";
+							divStyle.border = "1px solid black";
+						}
+						
+						function closeLogin() {
+							var loginDiv = document.getElementById("dhtml_login");
+							var divStyle = loginDiv.style;
+							divStyle.display = "none"; 
+						}
+						-->
+					</script>
+					<div align="right" style="position: absolute; right: 40px; top: 3px; z-index:15;">
+						<a href="javascript:void(0);" onClick="displayLogin()"><bean:message key="sign-in" /></a>			
+
+						<div id="dhtml_login" style="display:none; background:#dddddd;">
+							<%
+							String password = ParamUtil.getString(request, SessionParameters.get(request, "password"));
+							boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
+							%>
+							<form action="/c/portal/login" method="post" name="fm1">
+								<input name="cmd" type="hidden" value="already-registered">
+								<input name="rememberMe" type="hidden" value="false">
+	
+								<div style="clear:both"></div>
+
+								<span class="font-small" style="float:left; margin-top:2px; padding:5px; text-align:right; width:65px;"><%= LanguageUtil.get(pageContext, "login") %></span> 
+								<span style="float:left; padding:5px; text-align:right;"><input class="form-text" name="login" style="width: 120px;" type="text"/></span>
+
+								<div style="clear:both"></div>
+
+								<span class="font-small" style="float:left; margin-top:2px; padding:5px; text-align:right; width:65px;"><%= LanguageUtil.get(pageContext, "password") %></span> 
+								<span style="float:left; padding:5px; text-align:right;;"><input class="form-text" name="<%= SessionParameters.get(request, "password") %>" style="width: 120px;" type="password"/></span>
+
+								<div style="clear:both"></div>
+								
+								<div align="center" style="margin-bottom:3px">
+									<input class="portlet-form-button" type="submit" value="Sign In">
+									<input class="portlet-form-button" type="button" value="Close" onClick="closeLogin()">
+								</div>
+								
+								<div align="center">
+									<table border="0" cellpadding="0" cellspacing="0">
+									<tr>
+										<td valign="middle">
+											<input <%= rememberMe ? "checked" : "" %> type="checkbox"
+												onClick="
+													<c:if test="<%= company.isAutoLogin() && !request.isSecure() %>">
+														if (this.checked) {
+															document.fm1.rememberMe.value = 'on';
+														}
+														else {
+															document.fm1.rememberMe.value = 'off';
+														}
+													</c:if>"
+											>
+										</td>
+										<td class="font-small" valign="middle">
+											<%= LanguageUtil.get(pageContext, "remember-me") %>
+										</td>
+									</tr>
+									</table>
+									</span>
+								</div>
+								<div align="center" class="font-small">
+										<a href="/c/portal/login"><%= LanguageUtil.get(pageContext, "forgot-password") %></a>
+								</div>
+							</form>
+						</div>
 					</div>
 				</c:if>
 				<div id="layout-global-search"><liferay-ui:journal-content-search /></div>
