@@ -540,6 +540,10 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		return getMessageDisplay(message, userId);
 	}
 
+	public int getGroupMessagesCount(String groupId) throws SystemException {
+		return MBMessageFinder.countByGroupId(groupId);
+	}
+
 	public MBMessage getMessage(String topicId, String messageId)
 		throws PortalException, SystemException {
 

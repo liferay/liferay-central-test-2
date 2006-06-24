@@ -219,6 +219,10 @@ public class MBTopicLocalServiceImpl implements MBTopicLocalService {
 		return MBTopicFinder.countByCategoryIds(categoryIds);
 	}
 
+	public int getGroupTopicsCount(String groupId) throws SystemException {
+		return MBTopicFinder.countByGroupId(groupId);
+	}
+
 	public MBTopic getTopic(String topicId)
 		throws PortalException, SystemException {
 

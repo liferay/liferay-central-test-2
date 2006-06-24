@@ -191,6 +191,10 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 		return MBCategoryUtil.findByG_P(groupId, parentCategoryId, begin, end);
 	}
 
+	public int getCategoriesCount(String groupId) throws SystemException {
+		return MBCategoryUtil.countByGroupId(groupId);
+	}
+
 	public int getCategoriesCount(String groupId, String parentCategoryId)
 		throws SystemException {
 

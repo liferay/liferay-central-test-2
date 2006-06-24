@@ -26,6 +26,7 @@
 
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "categories");
+String tabs2 = ParamUtil.getString(request, "tabs2", "general");
 
 MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CATEGORY);
 
@@ -39,6 +40,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/message_boards/view");
 portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("categoryId", categoryId);
 %>
 
@@ -305,91 +307,104 @@ portletURL.setParameter("categoryId", categoryId);
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("statistics") %>'>
-		<b>Top Posters</b>
+		<liferay-ui:tabs
+			names="general,top-posters"
+			param="tabs2"
+			url="<%= portletURL.toString() %>"
+		/>
 
-		<br><br>
+		<c:choose>
+			<c:when test='<%= tabs2.equals("general") %>'>
+				<%= LanguageUtil.get(pageContext, "num-of-categories") %>: <%= numberFormat.format(MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId)) %><br>
+				<%= LanguageUtil.get(pageContext, "num-of-topics") %>: <%= numberFormat.format(MBTopicLocalServiceUtil.getGroupTopicsCount(portletGroupId)) %><br>
+				<%= LanguageUtil.get(pageContext, "num-of-posts") %>: <%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(portletGroupId)) %><br>
+				<%= LanguageUtil.get(pageContext, "num-of-participants") %>: <%= numberFormat.format(MBStatsUserLocalServiceUtil.getStatsUsersCount(portletGroupId)) %>
+			</c:when>
+			<c:when test='<%= tabs2.equals("top-posters") %>'>
 
-		<%
-		List headerNames = new ArrayList();
+				<%
+				List headerNames = new ArrayList();
 
-		headerNames.add("name");
-		headerNames.add("num-of-posts");
-		headerNames.add("join-date");
-		headerNames.add("last-post-date");
+				headerNames.add("name");
+				headerNames.add("num-of-posts");
+				headerNames.add("join-date");
+				headerNames.add("last-post-date");
 
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		int total = MBStatsUserLocalServiceUtil.getStatsUsersCount(portletGroupId);
+				int total = MBStatsUserLocalServiceUtil.getStatsUsersCount(portletGroupId);
 
-		searchContainer.setTotal(total);
+				searchContainer.setTotal(total);
 
-		List results = MBStatsUserLocalServiceUtil.getStatsUsers(portletGroupId, searchContainer.getStart(), searchContainer.getEnd());
+				List results = MBStatsUserLocalServiceUtil.getStatsUsers(portletGroupId, searchContainer.getStart(), searchContainer.getEnd());
 
-		searchContainer.setResults(results);
+				searchContainer.setResults(results);
 
-		List resultRows = searchContainer.getResultRows();
+				List resultRows = searchContainer.getResultRows();
 
-		for (int i = 0; i < results.size(); i++) {
-			MBStatsUser statsUser = (MBStatsUser)results.get(i);
+				for (int i = 0; i < results.size(); i++) {
+					MBStatsUser statsUser = (MBStatsUser)results.get(i);
 
-			ResultRow row = new ResultRow(statsUser, statsUser.getPrimaryKey().toString(), i);
+					ResultRow row = new ResultRow(statsUser, statsUser.getPrimaryKey().toString(), i);
 
-			PortletURL rowURL = null;
+					PortletURL rowURL = null;
 
-			String fullName = null;
-			Date createDate = null;
+					String fullName = null;
+					Date createDate = null;
 
-			try {
-				User user2 = UserLocalServiceUtil.getUserById(statsUser.getUserId());
+					try {
+						User user2 = UserLocalServiceUtil.getUserById(statsUser.getUserId());
 
-				rowURL = new PortletURLImpl(request, PortletKeys.DIRECTORY, plid, false);
+						rowURL = new PortletURLImpl(request, PortletKeys.DIRECTORY, plid, false);
 
-				rowURL.setWindowState(WindowState.MAXIMIZED);
-				rowURL.setPortletMode(PortletMode.VIEW);
+						rowURL.setWindowState(WindowState.MAXIMIZED);
+						rowURL.setPortletMode(PortletMode.VIEW);
 
-				rowURL.setParameter("struts_action", "/directory/edit_user");
-				rowURL.setParameter("p_u_e_a", user2.getEmailAddress());
+						rowURL.setParameter("struts_action", "/directory/edit_user");
+						rowURL.setParameter("p_u_e_a", user2.getEmailAddress());
 
-				fullName = user2.getFullName();
-				createDate = user2.getCreateDate();
-			}
-			catch (NoSuchUserException nsue) {
-			}
+						fullName = user2.getFullName();
+						createDate = user2.getCreateDate();
+					}
+					catch (NoSuchUserException nsue) {
+					}
 
-			// Name
+					// Name
 
-			row.addText(fullName, rowURL);
+					row.addText(fullName, rowURL);
 
-			// Number of posts
+					// Number of posts
 
-			row.addText(Integer.toString(statsUser.getMessageCount()), rowURL);
+					row.addText(Integer.toString(statsUser.getMessageCount()), rowURL);
 
-			// Join date
+					// Join date
 
-			if (createDate == null) {
-				row.addText(LanguageUtil.get(pageContext, "not-available"), rowURL);
-			}
-			else {
-				row.addText(dateFormatDateTime.format(createDate), rowURL);
-			}
+					if (createDate == null) {
+						row.addText(LanguageUtil.get(pageContext, "not-available"), rowURL);
+					}
+					else {
+						row.addText(dateFormatDateTime.format(createDate), rowURL);
+					}
 
-			// Last post date
+					// Last post date
 
-			if (statsUser.getLastPostDate() == null) {
-				row.addText(LanguageUtil.get(pageContext, "not-available"), rowURL);
-			}
-			else {
-				row.addText(dateFormatDateTime.format(statsUser.getLastPostDate()), rowURL);
-			}
+					if (statsUser.getLastPostDate() == null) {
+						row.addText(LanguageUtil.get(pageContext, "not-available"), rowURL);
+					}
+					else {
+						row.addText(dateFormatDateTime.format(statsUser.getLastPostDate()), rowURL);
+					}
 
-			// Add result row
+					// Add result row
 
-			resultRows.add(row);
-		}
-		%>
+					resultRows.add(row);
+				}
+				%>
 
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+			</c:when>
+		</c:choose>
 	</c:when>
 </c:choose>

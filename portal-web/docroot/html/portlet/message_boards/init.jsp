@@ -60,4 +60,6 @@
 --%><%
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+
+NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 %>

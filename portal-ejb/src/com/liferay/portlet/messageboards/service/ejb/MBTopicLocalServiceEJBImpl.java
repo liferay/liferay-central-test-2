@@ -101,6 +101,11 @@ public class MBTopicLocalServiceEJBImpl implements MBTopicLocalService,
 		return getService().getCategoriesTopicsCount(categoryIds);
 	}
 
+	public int getGroupTopicsCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException {
+		return getService().getGroupTopicsCount(groupId);
+	}
+
 	public com.liferay.portlet.messageboards.model.MBTopic getTopic(
 		java.lang.String topicId)
 		throws com.liferay.portal.PortalException, 

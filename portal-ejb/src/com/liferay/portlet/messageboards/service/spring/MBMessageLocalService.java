@@ -99,6 +99,9 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public int getGroupMessagesCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBMessage getMessage(
 		java.lang.String topicId, java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 

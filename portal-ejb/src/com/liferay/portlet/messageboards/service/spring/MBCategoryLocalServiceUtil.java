@@ -167,6 +167,21 @@ public class MBCategoryLocalServiceUtil {
 		}
 	}
 
+	public static int getCategoriesCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException {
+		try {
+			MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+			return mbCategoryLocalService.getCategoriesCount(groupId);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static int getCategoriesCount(java.lang.String groupId,
 		java.lang.String parentCategoryId)
 		throws com.liferay.portal.SystemException {

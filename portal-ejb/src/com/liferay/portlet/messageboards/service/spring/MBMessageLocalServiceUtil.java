@@ -279,6 +279,21 @@ public class MBMessageLocalServiceUtil {
 		}
 	}
 
+	public static int getGroupMessagesCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException {
+		try {
+			MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+			return mbMessageLocalService.getGroupMessagesCount(groupId);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessage getMessage(
 		java.lang.String topicId, java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 

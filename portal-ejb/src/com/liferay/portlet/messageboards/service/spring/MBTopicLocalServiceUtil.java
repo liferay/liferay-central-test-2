@@ -164,6 +164,21 @@ public class MBTopicLocalServiceUtil {
 		}
 	}
 
+	public static int getGroupTopicsCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException {
+		try {
+			MBTopicLocalService mbTopicLocalService = MBTopicLocalServiceFactory.getService();
+
+			return mbTopicLocalService.getGroupTopicsCount(groupId);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBTopic getTopic(
 		java.lang.String topicId)
 		throws com.liferay.portal.PortalException, 

@@ -64,6 +64,9 @@ public interface MBTopicLocalService {
 	public int getCategoriesTopicsCount(java.util.List categoryIds)
 		throws com.liferay.portal.SystemException;
 
+	public int getGroupTopicsCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBTopic getTopic(
 		java.lang.String topicId)
 		throws com.liferay.portal.PortalException, 

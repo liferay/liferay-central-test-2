@@ -65,6 +65,9 @@ public interface MBCategoryLocalService {
 		java.lang.String parentCategoryId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
+	public int getCategoriesCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException;
+
 	public int getCategoriesCount(java.lang.String groupId,
 		java.lang.String parentCategoryId)
 		throws com.liferay.portal.SystemException;

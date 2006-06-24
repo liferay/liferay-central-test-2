@@ -13,6 +13,21 @@
 					(MBTopic.topicId = MBMessage.topicId)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.countByGroupId">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				MBMessage
+			INNER JOIN
+				MBTopic ON
+					(MBTopic.topicId = MBMessage.topicId)
+			INNER JOIN
+				MBCategory ON
+					(MBCategory.categoryId = MBTopic.categoryId) AND
+					(MBCategory.groupId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.countByT_U">
 		<![CDATA[
 			SELECT
@@ -34,6 +49,18 @@
 			FROM
 				MBTopic
 			WHERE [$CATEGORY_ID$]
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBTopicFinder.countByGroupId">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				MBTopic
+			INNER JOIN
+				MBCategory ON
+					(MBCategory.categoryId = MBTopic.categoryId) AND
+					(MBCategory.groupId = ?)
 		]]>
 	</sql>
 </custom-sql>

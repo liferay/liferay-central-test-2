@@ -46,6 +46,9 @@ public class MBTopicFinder {
 	public static String COUNT_BY_CATEGORY_IDS =
 		MBTopicFinder.class.getName() + ".countByCategoryIds";
 
+	public static String COUNT_BY_GROUP_ID =
+		MBTopicFinder.class.getName() + ".countByGroupId";
+
 	public static int countByCategoryIds(List categoryIds)
 		throws SystemException {
 
@@ -70,6 +73,42 @@ public class MBTopicFinder {
 
 				qPos.add(categoryId);
 			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static int countByGroupId(String groupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
 
 			Iterator itr = q.list().iterator();
 

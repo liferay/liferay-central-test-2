@@ -102,6 +102,11 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 		return getService().getCategories(groupId, parentCategoryId, begin, end);
 	}
 
+	public int getCategoriesCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException {
+		return getService().getCategoriesCount(groupId);
+	}
+
 	public int getCategoriesCount(java.lang.String groupId,
 		java.lang.String parentCategoryId)
 		throws com.liferay.portal.SystemException {

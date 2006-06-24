@@ -150,6 +150,11 @@ public class MBMessageLocalServiceEJBImpl implements MBMessageLocalService,
 			classPK);
 	}
 
+	public int getGroupMessagesCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException {
+		return getService().getGroupMessagesCount(groupId);
+	}
+
 	public com.liferay.portlet.messageboards.model.MBMessage getMessage(
 		java.lang.String topicId, java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
