@@ -61,7 +61,7 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 
 <br><br>
 
-<div style="margin-bottom: 5px; text-align: right;">
+<div style="margin-bottom: 5px; text-align: left;">
 	<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text">
 	<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 </div>
