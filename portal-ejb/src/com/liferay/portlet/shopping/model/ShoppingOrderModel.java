@@ -25,6 +25,7 @@ package com.liferay.portlet.shopping.model;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -1057,7 +1058,8 @@ public class ShoppingOrderModel extends BaseModel {
 
 		ShoppingOrder shoppingOrder = (ShoppingOrder)obj;
 		int value = 0;
-		value = getCreateDate().compareTo(shoppingOrder.getCreateDate());
+		value = DateUtil.compareTo(getCreateDate(),
+				shoppingOrder.getCreateDate());
 		value = value * -1;
 
 		if (value != 0) {

@@ -23,6 +23,7 @@
 package com.liferay.portal.util.comparator;
 
 import com.liferay.portal.model.UserTracker;
+import com.liferay.util.DateUtil;
 
 import java.io.Serializable;
 
@@ -50,8 +51,8 @@ public class UserTrackerModifiedDateComparator
 		UserTracker userTracker1 = (UserTracker)obj1;
 		UserTracker userTracker2 = (UserTracker)obj2;
 
-		int value = userTracker1.getModifiedDate().compareTo(
-			userTracker2.getModifiedDate());
+		int value = DateUtil.compareTo(
+			userTracker1.getModifiedDate(), userTracker2.getModifiedDate());
 
 		if (_asc) {
 			return value;

@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.model;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -172,7 +173,7 @@ public class MBThreadModel extends BaseModel {
 
 		MBThread mbThread = (MBThread)obj;
 		int value = 0;
-		value = getLastPostDate().compareTo(mbThread.getLastPostDate());
+		value = DateUtil.compareTo(getLastPostDate(), mbThread.getLastPostDate());
 		value = value * -1;
 
 		if (value != 0) {

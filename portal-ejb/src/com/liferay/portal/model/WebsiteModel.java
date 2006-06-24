@@ -25,6 +25,7 @@ package com.liferay.portal.model;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -287,7 +288,7 @@ public class WebsiteModel extends BaseModel {
 
 		Website website = (Website)obj;
 		int value = 0;
-		value = getCreateDate().compareTo(website.getCreateDate());
+		value = DateUtil.compareTo(getCreateDate(), website.getCreateDate());
 
 		if (value != 0) {
 			return value;

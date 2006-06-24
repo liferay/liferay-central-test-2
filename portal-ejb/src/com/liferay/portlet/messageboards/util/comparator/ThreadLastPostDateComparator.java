@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.util.comparator;
 
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.util.DateUtil;
 import com.liferay.util.dao.hibernate.OrderByComparator;
 
 import java.util.Date;
@@ -59,7 +60,7 @@ public class ThreadLastPostDateComparator extends OrderByComparator {
 			return 0;
 		}
 
-		int value = lastPostDate1.compareTo(lastPostDate2);
+		int value = DateUtil.compareTo(lastPostDate1, lastPostDate2);
 
 		if (_asc) {
 			return value;

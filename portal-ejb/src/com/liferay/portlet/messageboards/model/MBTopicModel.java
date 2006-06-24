@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.model;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -265,7 +266,7 @@ public class MBTopicModel extends BaseModel {
 
 		MBTopic mbTopic = (MBTopic)obj;
 		int value = 0;
-		value = getCreateDate().compareTo(mbTopic.getCreateDate());
+		value = DateUtil.compareTo(getCreateDate(), mbTopic.getCreateDate());
 		value = value * -1;
 
 		if (value != 0) {

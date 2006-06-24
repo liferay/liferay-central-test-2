@@ -25,6 +25,7 @@ package com.liferay.portlet.shopping.model;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -386,7 +387,8 @@ public class ShoppingCouponModel extends BaseModel {
 
 		ShoppingCoupon shoppingCoupon = (ShoppingCoupon)obj;
 		int value = 0;
-		value = getCreateDate().compareTo(shoppingCoupon.getCreateDate());
+		value = DateUtil.compareTo(getCreateDate(),
+				shoppingCoupon.getCreateDate());
 
 		if (value != 0) {
 			return value;

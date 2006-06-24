@@ -25,6 +25,7 @@ package com.liferay.portal.model;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -288,7 +289,7 @@ public class EmailAddressModel extends BaseModel {
 
 		EmailAddress emailAddress = (EmailAddress)obj;
 		int value = 0;
-		value = getCreateDate().compareTo(emailAddress.getCreateDate());
+		value = DateUtil.compareTo(getCreateDate(), emailAddress.getCreateDate());
 
 		if (value != 0) {
 			return value;

@@ -27,6 +27,7 @@ import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK;
 
+import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -174,7 +175,7 @@ public class DLFileRankModel extends BaseModel {
 
 		DLFileRank dlFileRank = (DLFileRank)obj;
 		int value = 0;
-		value = getCreateDate().compareTo(dlFileRank.getCreateDate());
+		value = DateUtil.compareTo(getCreateDate(), dlFileRank.getCreateDate());
 		value = value * -1;
 
 		if (value != 0) {

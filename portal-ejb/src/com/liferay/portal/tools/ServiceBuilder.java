@@ -171,6 +171,7 @@ public class ServiceBuilder {
 			"com.liferay.portal.shared.util.NullWrapper",
 			"com.liferay.portal.shared.util.ShortWrapper",
 			"com.liferay.portal.shared.util.StackTraceUtil",
+			"com.liferay.util.DateUtil",
 			"com.liferay.util.GetterUtil",
 			"com.liferay.util.InstancePool",
 			"com.liferay.util.StringPool",
@@ -731,6 +732,7 @@ public class ServiceBuilder {
 
 		// Imports
 
+		sb.append("import com.liferay.util.DateUtil;");
 		sb.append("import com.liferay.util.StringPool;");
 		sb.append("import java.io.Serializable;");
 		sb.append("import java.util.Date;");
@@ -803,12 +805,17 @@ public class ServiceBuilder {
 		for (int i = 0; i < pkList.size(); i++) {
 			EntityColumn col = (EntityColumn)pkList.get(i);
 
+			String colType = col.getType();
+
 			if (!col.isPrimitiveType()) {
-				sb.append("value = " + col.getName() + ".compareTo(pk." + col.getName() + ");");
+				if (colType.equals("Date")) {
+					sb.append("value = DateUtil.compareTo(" + col.getName() + ", pk." + col.getName() + ");");
+				}
+				else {
+					sb.append("value = " + col.getName() + ".compareTo(pk." + col.getName() + ");");
+				}
 			}
 			else {
-				String colType = col.getType();
-
 				if (colType.equals("boolean")) {
 					sb.append("if (!" + col.getName() + " && pk." + col.getName() + ") {");
 					sb.append("value = -1;");
@@ -1474,6 +1481,7 @@ public class ServiceBuilder {
 
 		sb.append("import com.liferay.portal.model.BaseModel;");
 		sb.append("import com.liferay.portal.util.PropsUtil;");
+		sb.append("import com.liferay.util.DateUtil;");
 		sb.append("import com.liferay.util.GetterUtil;");
 		sb.append("import com.liferay.util.XSSUtil;");
 		sb.append("import java.util.Date;");
@@ -1641,19 +1649,26 @@ public class ServiceBuilder {
 			for (int i = 0; i < orderList.size(); i++) {
 				EntityColumn col = (EntityColumn)orderList.get(i);
 
+				String colType = col.getType(); 
+
 				if (!col.isPrimitiveType()) {
-					if (col.isCaseSensitive()) {
-						sb.append("value = get" + col.getMethodName() + "().compareTo(" + entity.getVarName() + ".get" + col.getMethodName() + "());");
+					if (colType.equals("Date")) {
+						sb.append("value = DateUtil.compareTo(get" + col.getMethodName() + "(), " + entity.getVarName() + ".get" + col.getMethodName() + "());");
 					}
 					else {
-						sb.append("value = get" + col.getMethodName() + "().toLowerCase().compareTo(" + entity.getVarName() + ".get" + col.getMethodName() + "().toLowerCase());");
+						if (col.isCaseSensitive()) {
+							sb.append("value = get" + col.getMethodName() + "().compareTo(" + entity.getVarName() + ".get" + col.getMethodName() + "());");
+						}
+						else {
+							sb.append("value = get" + col.getMethodName() + "().toLowerCase().compareTo(" + entity.getVarName() + ".get" + col.getMethodName() + "().toLowerCase());");
+						}
 					}
 				}
 				else {
 					String ltComparator = "<";
 					String gtComparator = ">";
 
-					if (col.getType().equals("boolean")) {
+					if (colType.equals("boolean")) {
 						ltComparator = "==";
 						gtComparator = "!=";
 					}

@@ -25,6 +25,7 @@ package com.liferay.portal.model;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -310,7 +311,7 @@ public class PhoneModel extends BaseModel {
 
 		Phone phone = (Phone)obj;
 		int value = 0;
-		value = getCreateDate().compareTo(phone.getCreateDate());
+		value = DateUtil.compareTo(getCreateDate(), phone.getCreateDate());
 
 		if (value != 0) {
 			return value;

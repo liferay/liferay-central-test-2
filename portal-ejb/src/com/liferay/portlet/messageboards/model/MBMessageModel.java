@@ -27,6 +27,7 @@ import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePK;
 
+import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -329,7 +330,7 @@ public class MBMessageModel extends BaseModel {
 
 		MBMessage mbMessage = (MBMessage)obj;
 		int value = 0;
-		value = getCreateDate().compareTo(mbMessage.getCreateDate());
+		value = DateUtil.compareTo(getCreateDate(), mbMessage.getCreateDate());
 
 		if (value != 0) {
 			return value;

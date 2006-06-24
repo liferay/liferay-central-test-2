@@ -23,6 +23,7 @@
 package com.liferay.portlet.wiki.util.comparator;
 
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.util.DateUtil;
 import com.liferay.util.dao.hibernate.OrderByComparator;
 
 /**
@@ -49,7 +50,8 @@ public class PageCreateDateComparator extends OrderByComparator {
 		WikiPage page1 = (WikiPage)obj1;
 		WikiPage page2 = (WikiPage)obj2;
 
-		int value = page1.getCreateDate().compareTo(page2.getCreateDate());
+		int value = DateUtil.compareTo(
+			page1.getCreateDate(), page2.getCreateDate());
 
 		if (_asc) {
 			return value;

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.mail.util.comparator;
 
+import com.liferay.util.DateUtil;
+
 import java.io.Serializable;
 
 import java.util.Comparator;
@@ -42,12 +44,8 @@ public class DateComparator implements Comparator, Serializable {
 		Message msg2 = (Message)obj2;
 
 		try {
-			if (msg1.getReceivedDate().before(msg2.getReceivedDate())) {
-				return 1;
-			}
-			else if (msg1.getReceivedDate().after(msg2.getReceivedDate())) {
-				return -1;
-			}
+			return DateUtil.compareTo(
+				msg1.getReceivedDate(), msg2.getReceivedDate());
 		}
 		catch (MessagingException me) {
 			me.printStackTrace();

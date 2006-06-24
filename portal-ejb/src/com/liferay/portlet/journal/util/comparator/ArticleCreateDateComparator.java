@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.util.comparator;
 
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.util.DateUtil;
 import com.liferay.util.dao.hibernate.OrderByComparator;
 
 /**
@@ -49,8 +50,8 @@ public class ArticleCreateDateComparator extends OrderByComparator {
 		JournalArticle article1 = (JournalArticle)obj1;
 		JournalArticle article2 = (JournalArticle)obj2;
 
-		int value =
-			article1.getCreateDate().compareTo(article2.getCreateDate());
+		int value =	DateUtil.compareTo(
+			article1.getCreateDate(), article2.getCreateDate());
 
 		if (_asc) {
 			return value;

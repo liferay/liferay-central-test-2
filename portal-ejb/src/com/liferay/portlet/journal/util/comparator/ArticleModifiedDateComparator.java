@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.util.comparator;
 
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.util.DateUtil;
 import com.liferay.util.dao.hibernate.OrderByComparator;
 
 /**
@@ -50,8 +51,8 @@ public class ArticleModifiedDateComparator extends OrderByComparator {
 		JournalArticle article1 = (JournalArticle)obj1;
 		JournalArticle article2 = (JournalArticle)obj2;
 
-		int value =
-			article1.getModifiedDate().compareTo(article2.getModifiedDate());
+		int value = DateUtil.compareTo(
+			article1.getModifiedDate(), article2.getModifiedDate());
 
 		if (_asc) {
 			return value;

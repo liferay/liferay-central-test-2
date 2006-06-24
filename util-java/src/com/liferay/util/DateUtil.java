@@ -20,56 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.shopping.util.comparator;
+package com.liferay.util;
 
-import com.liferay.portlet.shopping.model.ShoppingOrder;
-import com.liferay.util.DateUtil;
-import com.liferay.util.dao.hibernate.OrderByComparator;
+import java.util.Date;
 
 /**
- * <a href="OrderDateComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="DateUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class OrderDateComparator extends OrderByComparator {
+public class DateUtil {
 
-	public static String ORDER_BY_ASC = "createDate ASC";
+	public static int compareTo(Date date1, Date date2) {
 
-	public static String ORDER_BY_DESC = "createDate DESC";
+		// Workaround for bug in JDK 1.5.x. This bug is fixed in JDK 1.5.07. See
+		// http://bugs.sun.com/bugdatabase/view_bug.do;:YfiG?bug_id=6207898 for
+		// more information.
 
-	public OrderDateComparator() {
-		this(false);
-	}
+		long time1 = date1.getTime();
+		long time2 = date2.getTime();
 
-	public OrderDateComparator(boolean asc) {
-		_asc = asc;
-	}
-
-	public int compare(Object obj1, Object obj2) {
-		ShoppingOrder order1 = (ShoppingOrder)obj1;
-		ShoppingOrder order2 = (ShoppingOrder)obj2;
-
-		int value = DateUtil.compareTo(
-			order1.getCreateDate(), order2.getCreateDate());
-
-		if (_asc) {
-			return value;
+		if (time1 == time2) {
+			return 0;
+		}
+		else if (time1 < time2) {
+			return -1;
 		}
 		else {
-			return -value;
+			return 1;
 		}
 	}
-
-	public String getOrderBy() {
-		if (_asc) {
-			return ORDER_BY_ASC;
-		}
-		else {
-			return ORDER_BY_DESC;
-		}
-	}
-
-	private boolean _asc;
 
 }

@@ -25,6 +25,7 @@ package com.liferay.portlet.calendar.model;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -441,7 +442,7 @@ public class CalEventModel extends BaseModel {
 
 		CalEvent calEvent = (CalEvent)obj;
 		int value = 0;
-		value = getStartDate().compareTo(calEvent.getStartDate());
+		value = DateUtil.compareTo(getStartDate(), calEvent.getStartDate());
 
 		if (value != 0) {
 			return value;

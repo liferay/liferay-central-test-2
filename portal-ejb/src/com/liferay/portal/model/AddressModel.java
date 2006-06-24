@@ -25,6 +25,7 @@ package com.liferay.portal.model;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -434,7 +435,7 @@ public class AddressModel extends BaseModel {
 
 		Address address = (Address)obj;
 		int value = 0;
-		value = getCreateDate().compareTo(address.getCreateDate());
+		value = DateUtil.compareTo(getCreateDate(), address.getCreateDate());
 
 		if (value != 0) {
 			return value;

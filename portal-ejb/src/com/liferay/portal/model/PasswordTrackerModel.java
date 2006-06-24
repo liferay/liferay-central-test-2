@@ -25,6 +25,7 @@ package com.liferay.portal.model;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -154,7 +155,8 @@ public class PasswordTrackerModel extends BaseModel {
 			return value;
 		}
 
-		value = getCreateDate().compareTo(passwordTracker.getCreateDate());
+		value = DateUtil.compareTo(getCreateDate(),
+				passwordTracker.getCreateDate());
 		value = value * -1;
 
 		if (value != 0) {

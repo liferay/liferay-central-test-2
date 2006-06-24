@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.util.comparator;
 
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.util.DateUtil;
 
 import java.io.Serializable;
 
@@ -44,7 +45,8 @@ public class MessageThreadComparator implements Comparator, Serializable {
 			msg1.getParentMessageId().compareTo(msg2.getParentMessageId());
 
 		if (value == 0) {
-			value = msg1.getCreateDate().compareTo(msg2.getCreateDate());
+			value = DateUtil.compareTo(
+				msg1.getCreateDate(), msg2.getCreateDate());
 		}
 
 		if (value == 0) {

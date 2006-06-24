@@ -25,6 +25,7 @@ package com.liferay.portlet.blogs.model;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -287,7 +288,7 @@ public class BlogsEntryModel extends BaseModel {
 
 		BlogsEntry blogsEntry = (BlogsEntry)obj;
 		int value = 0;
-		value = getDisplayDate().compareTo(blogsEntry.getDisplayDate());
+		value = DateUtil.compareTo(getDisplayDate(), blogsEntry.getDisplayDate());
 		value = value * -1;
 
 		if (value != 0) {

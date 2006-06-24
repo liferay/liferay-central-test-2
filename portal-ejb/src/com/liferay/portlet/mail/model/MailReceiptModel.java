@@ -25,6 +25,7 @@ package com.liferay.portlet.mail.model;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -286,7 +287,7 @@ public class MailReceiptModel extends BaseModel {
 
 		MailReceipt mailReceipt = (MailReceipt)obj;
 		int value = 0;
-		value = getCreateDate().compareTo(mailReceipt.getCreateDate());
+		value = DateUtil.compareTo(getCreateDate(), mailReceipt.getCreateDate());
 		value = value * -1;
 
 		if (value != 0) {

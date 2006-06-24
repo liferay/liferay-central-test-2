@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.util.comparator;
 
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.util.DateUtil;
 import com.liferay.util.dao.hibernate.OrderByComparator;
 
 /**
@@ -49,8 +50,8 @@ public class MessageCreateDateComparator extends OrderByComparator {
 		MBMessage message1 = (MBMessage)obj1;
 		MBMessage message2 = (MBMessage)obj2;
 
-		int value = message1.getCreateDate().compareTo(
-			message2.getCreateDate());
+		int value = DateUtil.compareTo(
+			message1.getCreateDate(), message2.getCreateDate());
 
 		if (_asc) {
 			return value;

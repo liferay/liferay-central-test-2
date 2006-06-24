@@ -25,6 +25,7 @@ package com.liferay.portlet.polls.model;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -280,7 +281,8 @@ public class PollsQuestionModel extends BaseModel {
 
 		PollsQuestion pollsQuestion = (PollsQuestion)obj;
 		int value = 0;
-		value = getCreateDate().compareTo(pollsQuestion.getCreateDate());
+		value = DateUtil.compareTo(getCreateDate(),
+				pollsQuestion.getCreateDate());
 		value = value * -1;
 
 		if (value != 0) {
