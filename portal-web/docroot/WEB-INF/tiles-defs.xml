@@ -493,6 +493,7 @@
 
 	<definition name="portlet.image_gallery.edit_image_form" extends="portlet.image_gallery">
 		<put name="portlet_content" value="/portlet/image_gallery/edit_image_form.jsp" />
+		<put name="portlet_padding" value="false" />
 	</definition>
 
 	<definition name="portlet.image_gallery.error" extends="portlet.image_gallery">

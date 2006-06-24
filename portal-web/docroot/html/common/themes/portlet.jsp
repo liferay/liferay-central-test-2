@@ -302,7 +302,7 @@ if (urlBack != null) {
 	<c:otherwise>
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
-			<td>
+			<td <%= portletPadding ? "style=\"padding: 4px 8px 10px 8px;\"" : "" %>>
 				<c:if test="<%= Validator.isNotNull(tilesPortletContent) %>">
 					<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesPortletContent %>" />
 				</c:if>
