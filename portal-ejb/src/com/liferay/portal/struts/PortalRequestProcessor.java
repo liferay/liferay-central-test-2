@@ -128,6 +128,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		_publicPaths.add(_PATH_C);
 		_publicPaths.add(_PATH_PORTAL_CSS);
 		_publicPaths.add(_PATH_PORTAL_CSS_CACHED);
+		_publicPaths.add(_PATH_PORTAL_FLASH);
 		_publicPaths.add(_PATH_PORTAL_J_LOGIN);
 		_publicPaths.add(_PATH_PORTAL_JAVASCRIPT);
 		_publicPaths.add(_PATH_PORTAL_JAVASCRIPT_CACHED);
@@ -852,6 +853,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	private static String _PATH_PORTAL_CSS_CACHED = "/portal/css_cached";
 
 	private static String _PATH_PORTAL_ERROR = Constants.PORTAL_ERROR;
+
+	private static String _PATH_PORTAL_FLASH = "/portal/flash";
 
 	private static String _PATH_PORTAL_J_LOGIN = "/portal/j_login";
 
