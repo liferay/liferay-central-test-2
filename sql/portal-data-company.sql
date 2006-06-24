@@ -115,7 +115,7 @@ insert into EmailAddress (emailAddressId, companyId, userId, className, classPK,
 ## User (test@liferay.com)
 ##
 
-insert into User_ (userId, companyId, createDate, modifiedDate, password_, passwordEncrypted, passwordReset, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.1', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'test', FALSE, FALSE, 'test@liferay.com', 'Welcome Joe Bloggs!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
+insert into User_ (userId, companyId, createDate, modifiedDate, password_, passwordEncrypted, passwordReset, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.1', 'liferay.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'qUqP5cyxm6YcTAhz05Hph5gvu9M=', TRUE, FALSE, 'test@liferay.com', 'Welcome Joe Bloggs!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
 insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values ('liferay.com.1', 'default', 'liferay.com', '', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'liferay.com', '-1', 'Joe', '', 'Bloggs', 'Duke', TRUE, '01/01/1970');
 insert into EmailAddress (emailAddressId, companyId, userId, className, classPK, address, typeId, primary_) values ('3', 'liferay.com', 'liferay.com.1', 'com.liferay.portal.model.Contact', 'liferay.com.1', 'test@liferay.com', '11003', TRUE);
 
