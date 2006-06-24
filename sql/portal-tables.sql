@@ -425,6 +425,7 @@ create table MBStatsUser (
 	groupId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	messageCount INTEGER,
+	lastPostDate DATE null,
 	primary key (groupId, userId)
 );
 

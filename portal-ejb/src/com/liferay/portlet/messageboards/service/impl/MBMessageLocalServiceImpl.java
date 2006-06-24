@@ -45,8 +45,6 @@ import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.NoSuchTopicException;
-import com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalServiceUtil;
-
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
@@ -66,6 +64,7 @@ import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBTopicUtil;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalService;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.portlet.messageboards.util.TreeWalker;
@@ -283,7 +282,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		}
 
 		// Statistics
-		
+
 		if (category != null) {
 			MBStatsUserLocalServiceUtil.updateStatsUser(
 				category.getGroupId(), userId);

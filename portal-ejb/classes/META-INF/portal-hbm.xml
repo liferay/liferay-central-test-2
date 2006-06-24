@@ -835,6 +835,7 @@
 			<key-property name="userId" />
 		</composite-id>
 		<property name="messageCount" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="lastPostDate" />
 	</class>
 	<class name="com.liferay.portlet.messageboards.service.persistence.MBThreadHBM" table="MBThread">
 		<cache usage="read-write" />

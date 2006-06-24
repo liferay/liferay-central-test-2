@@ -30,6 +30,8 @@ import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.util.Date;
+
 /**
  * <a href="MBStatsUserModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -108,11 +110,26 @@ public class MBStatsUserModel extends BaseModel {
 		}
 	}
 
+	public Date getLastPostDate() {
+		return _lastPostDate;
+	}
+
+	public void setLastPostDate(Date lastPostDate) {
+		if (((lastPostDate == null) && (_lastPostDate != null)) ||
+				((lastPostDate != null) && (_lastPostDate == null)) ||
+				((lastPostDate != null) && (_lastPostDate != null) &&
+				!lastPostDate.equals(_lastPostDate))) {
+			_lastPostDate = lastPostDate;
+			setModified(true);
+		}
+	}
+
 	public Object clone() {
 		MBStatsUser clone = new MBStatsUser();
 		clone.setGroupId(getGroupId());
 		clone.setUserId(getUserId());
 		clone.setMessageCount(getMessageCount());
+		clone.setLastPostDate(getLastPostDate());
 
 		return clone;
 	}
@@ -123,9 +140,25 @@ public class MBStatsUserModel extends BaseModel {
 		}
 
 		MBStatsUser mbStatsUser = (MBStatsUser)obj;
-		MBStatsUserPK pk = mbStatsUser.getPrimaryKey();
+		int value = 0;
 
-		return getPrimaryKey().compareTo(pk);
+		if (getMessageCount() < mbStatsUser.getMessageCount()) {
+			value = -1;
+		}
+		else if (getMessageCount() > mbStatsUser.getMessageCount()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
+
+		value = value * -1;
+
+		if (value != 0) {
+			return value;
+		}
+
+		return 0;
 	}
 
 	public boolean equals(Object obj) {
@@ -159,4 +192,5 @@ public class MBStatsUserModel extends BaseModel {
 	private String _groupId;
 	private String _userId;
 	private int _messageCount;
+	private Date _lastPostDate;
 }

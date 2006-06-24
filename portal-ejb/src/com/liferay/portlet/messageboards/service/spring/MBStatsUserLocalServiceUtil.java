@@ -92,6 +92,21 @@ public class MBStatsUserLocalServiceUtil {
 		}
 	}
 
+	public static int getStatsUsersCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException {
+		try {
+			MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
+			return mbStatsUserLocalService.getStatsUsersCount(groupId);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static void updateStatsUser(java.lang.String groupId,
 		java.lang.String userId)
 		throws com.liferay.portal.PortalException, 

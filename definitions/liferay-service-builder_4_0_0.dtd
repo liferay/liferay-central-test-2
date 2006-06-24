@@ -335,7 +335,7 @@ removeByCompanyId and countByCompanyId.
 
 See com.liferay.portal.service.persistence.LayoutPersistence for a good example.
 
-The attribute comparator takes in the values =, <, <=, >, >=, or LIKE and is
+The attribute comparator takes in the values =, !=, <, <=, >, >=, or LIKE and is
 used to compare this column.
 -->
 <!ATTLIST finder-column

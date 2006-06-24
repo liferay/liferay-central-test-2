@@ -40,6 +40,7 @@
 --%><%@ page import="com.liferay.portlet.messageboards.model.MBCategory" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.model.MBMessageDisplay" %><%--
+--%><%@ page import="com.liferay.portlet.messageboards.model.MBStatsUser" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.model.MBThread" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.model.MBTopic" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.service.permission.MBCategoryPermission" %><%--

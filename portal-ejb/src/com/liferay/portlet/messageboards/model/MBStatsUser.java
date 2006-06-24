@@ -29,6 +29,8 @@ package com.liferay.portlet.messageboards.model;
  *
  */
 public class MBStatsUser extends MBStatsUserModel {
+
 	public MBStatsUser() {
 	}
+
 }

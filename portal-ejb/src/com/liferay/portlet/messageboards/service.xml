@@ -156,6 +156,13 @@
 		<!-- Other fields -->
 
 		<column name="messageCount" type="int" />
+		<column name="lastPostDate" type="Date" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="messageCount" />
+		</order>
 
 		<!-- Finder methods -->
 
@@ -164,6 +171,10 @@
 		</finder>
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
+		</finder>
+		<finder name="G_M" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="messageCount" comparator="!=" />
 		</finder>
 	</entity>
 	<entity name="MBThread" local-service="true" remote-service="false">

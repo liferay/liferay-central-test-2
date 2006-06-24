@@ -71,6 +71,11 @@ public class MBStatsUserLocalServiceEJBImpl implements MBStatsUserLocalService,
 		return getService().getStatsUsers(groupId, begin, end);
 	}
 
+	public int getStatsUsersCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException {
+		return getService().getStatsUsersCount(groupId);
+	}
+
 	public void updateStatsUser(java.lang.String groupId,
 		java.lang.String userId)
 		throws com.liferay.portal.PortalException, 

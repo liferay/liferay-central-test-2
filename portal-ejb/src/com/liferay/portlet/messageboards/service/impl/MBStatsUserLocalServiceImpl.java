@@ -22,16 +22,16 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
-import com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalService;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Group;
 import com.liferay.portlet.messageboards.NoSuchStatsUserException;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil;
-import com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalService;
+import com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalService;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -74,7 +74,11 @@ public class MBStatsUserLocalServiceImpl implements MBStatsUserLocalService {
 	public List getStatsUsers(String groupId, int begin, int end)
 		throws SystemException {
 
-		return MBStatsUserUtil.findByGroupId(groupId, begin, end);
+		return MBStatsUserUtil.findByG_M(groupId, 0, begin, end);
+	}
+
+	public int getStatsUsersCount(String groupId) throws SystemException {
+		return MBStatsUserUtil.countByG_M(groupId, 0);
 	}
 
 	public void updateStatsUser(String groupId, String userId)
@@ -98,6 +102,7 @@ public class MBStatsUserLocalServiceImpl implements MBStatsUserLocalService {
 			statsUser = MBStatsUserUtil.create(statsUserPK);
 		}
 
+		statsUser.setLastPostDate(new Date());
 		statsUser.setMessageCount(statsUser.getMessageCount() + 1);
 
 		MBStatsUserUtil.update(statsUser);

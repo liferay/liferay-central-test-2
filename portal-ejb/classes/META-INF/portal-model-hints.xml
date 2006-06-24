@@ -725,6 +725,7 @@
 		<field name="groupId" type="String" />
 		<field name="userId" type="String" />
 		<field name="messageCount" type="int" />
+		<field name="lastPostDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBThread">
 		<field name="threadId" type="String" />
