@@ -44,7 +44,7 @@ if (treeWalker.isOdd()) {
 <div style="margin: 5px 0px 0px <%= depth * 10 %>px; border: 1px solid <%= colorScheme.getPortletFontDim() %>; <%= BrowserSniffer.is_ie(request) ? "width: 100%;" : "" %>">
 	<table cellpadding="0" cellspacing="0" style="table-layout: fixed;" width="100%">
 	<tr>
-		<td class="<%= className %>" rowspan="2" style="border-right: 1px solid <%= colorScheme.getPortletFontDim() %>;" width="100">
+		<td class="<%= className %>" rowspan="2" style="border-right: 1px solid <%= colorScheme.getPortletFontDim() %>; vertical-align: top;" width="100">
 			<div class="message-board-thread-left" style="padding:5px;">
 				<c:choose>
 					<c:when test="<%= message.isAnonymous() %>">
