@@ -61,20 +61,9 @@ boolean attachments = BeanParamUtil.getBoolean(message, request, "attachments");
 		return "<%= UnicodeFormatter.toString(body) %>";
 	}
 
-	function <portlet:namespace />copyMessage() {
-		<c:choose>
-			<c:when test="<%= BrowserSniffer.is_rtf(request) %>">
-				document.<portlet:namespace />fm.<portlet:namespace />body.value = parent.<portlet:namespace />editor.getHTML();
-			</c:when>
-			<c:otherwise>
-				document.<portlet:namespace />fm.<portlet:namespace />body.value = parent.<portlet:namespace />editor.value;
-			</c:otherwise>
-		</c:choose>
-	}
-
 	function <portlet:namespace />saveMessage() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= message == null ? Constants.ADD : Constants.UPDATE %>";
-		<portlet:namespace />copyMessage();
+		document.<portlet:namespace />fm.<portlet:namespace />body.value = parent.<portlet:namespace />editor.getHTML();
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
@@ -143,14 +132,7 @@ if (message != null) {
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<c:choose>
-			<c:when test="<%= BrowserSniffer.is_rtf(request) %>">
-				<iframe frameborder="0" height="400" id="<portlet:namespace />editor" name="<portlet:namespace />editor" scrolling="no" src="<%= themeDisplay.getPathJavaScript() %>/editor/editor.jsp?p_l_id=<%= plid %>&editorImpl=<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>" width="640"></iframe>
-			</c:when>
-			<c:otherwise>
-				<textarea class="form-text" cols="70" id="<portlet:namespace />editor" name="<portlet:namespace />editor" rows="10" style="font-family: 'Courier New', courier, monospace; font-size: 12;"><%= body %></textarea>
-			</c:otherwise>
-		</c:choose>
+		<iframe frameborder="0" height="400" id="<portlet:namespace />editor" name="<portlet:namespace />editor" scrolling="no" src="<%= themeDisplay.getPathJavaScript() %>/editor/editor.jsp?p_l_id=<%= plid %>&editorImpl=<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>" width="640"></iframe>
 
 		<input name="<portlet:namespace />body" type="hidden" value="">
 	</td>
@@ -229,7 +211,7 @@ if (message != null) {
 
 <input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, (message != null) ? "update" : ((Validator.isNull(threadId) ? "post-new-thread" : "reply"))) %>'>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, ((attachments) ? "remove" : "attach") + "-files") %>' onClick="<portlet:namespace />copyMessage(); document.<portlet:namespace />fm.<portlet:namespace />attachments.value = '<%= !attachments %>'; submitForm(document.<portlet:namespace />fm);">
+<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, ((attachments) ? "remove" : "attach") + "-files") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = parent.<portlet:namespace />editor.getHTML(); document.<portlet:namespace />fm.<portlet:namespace />attachments.value = '<%= !attachments %>'; submitForm(document.<portlet:namespace />fm);">
 
 <input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 

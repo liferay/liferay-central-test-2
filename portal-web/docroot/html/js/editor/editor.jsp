@@ -24,10 +24,14 @@
 
 <%@ page import="com.liferay.portal.util.Constants" %>
 <%@ page import="com.liferay.portal.util.PropsUtil" %>
+<%@ page import="com.liferay.util.BrowserSniffer" %>
 <%@ page import="com.liferay.util.ParamUtil" %>
 
 <%
-String editorImpl = ParamUtil.get(request, "editorImpl", PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY));
+String editorImpl = "simple";
+if (BrowserSniffer.is_rtf(request)) {
+	editorImpl = ParamUtil.get(request, "editorImpl", PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY));
+}
 
 //editorImpl = "fckeditor";
 //editorImpl = "liferay";
