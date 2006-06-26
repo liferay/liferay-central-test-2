@@ -165,22 +165,21 @@ if (message != null) {
 
 </c:if>
 
-<tr>
-	<td colspan="3">
-		<br>
-	</td>
-</tr>
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "anonymous") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<liferay-ui:input-checkbox param="anonymous" />
-	</td>
-</tr>
-
 <c:if test="<%= message == null %>">
+	<tr>
+		<td colspan="3">
+			<br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "anonymous") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<liferay-ui:input-checkbox param="anonymous" />
+		</td>
+	</tr>
 	<tr>
 		<td colspan="3">
 			<br>
