@@ -34,13 +34,6 @@ String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
 	<script src="../sniffer.js" type="text/javascript"></script>
 	<script src="../util.js" type="text/javascript"></script>
 	<script type="text/javascript">
-		function fileBrowserCallBack(field_name, url, type) {
-		}
-
-		function init(value) {
-			setHTML(decodeURIComponent(value));
-		}
-
 		function getHTML() {
 			return textArea.value;
 		}
@@ -50,14 +43,14 @@ String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
 		}
 
 		function initEditor() {
-			init(parent.<%= initMethod %>());
+			setHTML(parent.<%= initMethod %>());
 		}
 	</script>
 </head>
 
 <body leftmargin="0" marginheight="0" marginwidth="0" rightmargin="0" topmargin="0" onLoad="initEditor();">
 
-<textarea cols="70" id="textArea" name="textArea" rows="28"></textarea>
+<textarea cols="70" id="textArea" name="textArea" rows="15"></textarea>
 
 </body>
 

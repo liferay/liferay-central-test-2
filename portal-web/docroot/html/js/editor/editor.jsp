@@ -29,6 +29,7 @@
 
 <%
 String editorImpl = "simple";
+
 if (BrowserSniffer.is_rtf(request)) {
 	editorImpl = ParamUtil.get(request, "editorImpl", PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY));
 }

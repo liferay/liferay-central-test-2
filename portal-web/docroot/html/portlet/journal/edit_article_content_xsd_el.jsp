@@ -72,7 +72,7 @@ for (int i = 0; i < elPathNames.length; i++) {
 			if ((i + 1) == elPathNames.length) {
 				elContent = tempEl.elementText("dynamic-content");
 
-				if (!(elType.equals("text_area") && BrowserSniffer.is_rtf(request))) {
+				if (!elType.equals("text_area")) {
 					elContent = Html.toInputSafe(elContent);
 				}
 
@@ -129,28 +129,21 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 						</c:if>
 
 						<c:if test='<%= elType.equals("text_area") %>'>
-							<c:choose>
-								<c:when test="<%= BrowserSniffer.is_rtf(request) %>">
-									<script type="text/javascript">
-										function initEditor<%= count.getValue() %>() {
-											return "<%= UnicodeFormatter.toString(elContent) %>";
-										}
-									</script>
+							<script type="text/javascript">
+								function initEditor<%= count.getValue() %>() {
+									return "<%= UnicodeFormatter.toString(elContent) %>";
+								}
+							</script>
 
-									<%
-									String editorUrl = themeDisplay.getPathJavaScript() + "/editor/editor.jsp?p_l_id=" + plid + "&editorImpl=" + PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) + "&initMethod=initEditor" + count.getValue();
+							<%
+							String editorUrl = themeDisplay.getPathJavaScript() + "/editor/editor.jsp?p_l_id=" + plid + "&editorImpl=" + PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) + "&initMethod=initEditor" + count.getValue();
 
-									if (false) {
-										editorUrl += ("&panel=" + EDITOR_PANEL + "&disable_control=1&disable_right_click=1&paste_text=1");
-									}
-									%>
+							if (false) {
+								editorUrl += ("&panel=" + EDITOR_PANEL + "&disable_control=1&disable_right_click=1&paste_text=1");
+							}
+							%>
 
-									<iframe frameborder="0" height="250" id="<portlet:namespace />structure_el<%= count.getValue() %>_content" name="<portlet:namespace />structure_el<%= count.getValue() %>_content" scrolling="no" src="<%= editorUrl %>" width="600"></iframe>
-								</c:when>
-								<c:otherwise>
-									<textarea class="form-text" cols="70" id="<portlet:namespace />structure_el<%= count.getValue() %>_content" rows="10" style="font-family: 'Courier New', courier, monospace; font-size: 12;"><%= elContent %></textarea>
-								</c:otherwise>
-							</c:choose>
+							<iframe frameborder="0" height="250" id="<portlet:namespace />structure_el<%= count.getValue() %>_content" name="<portlet:namespace />structure_el<%= count.getValue() %>_content" scrolling="no" src="<%= editorUrl %>" width="600"></iframe>
 						</c:if>
 
 						<c:if test='<%= elType.equals("image") %>'>

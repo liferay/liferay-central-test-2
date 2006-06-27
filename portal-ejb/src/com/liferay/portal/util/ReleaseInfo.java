@@ -49,11 +49,11 @@ public class ReleaseInfo {
 
 	static String version = "4.0.0";
 
-	static String codeName = "Lloyd-Jones";
+	static String codeName = "Cowper";
 
-	static String build = "3041";
+	static String build = "3044";
 
-	static String date = "June 26, 2006";
+	static String date = "June 27, 2006";
 
 	static String releaseInfo =
 		name + " " + version + " (" + codeName + " / Build " + build + " / " +
