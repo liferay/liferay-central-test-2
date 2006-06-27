@@ -529,11 +529,12 @@
 		<portlet-preferences>
 			<preference>
 				<name>ranks</name>
-				<value>Intern=0</value>
-				<value>Technician=10</value>
-				<value>Programmer=25</value>
-				<value>Engineer=50</value>
-				<value>Architect=100</value>
+				<value>Youngling=0</value>
+				<value>Padawan=25</value>
+				<value>Jedi Knight=100</value>
+				<value>Jedi Master=250</value>
+				<value>Jedi Council Member=500</value>
+				<value>Yoda=1000</value>
 			</preference>
 		</portlet-preferences>
 		<security-role-ref>

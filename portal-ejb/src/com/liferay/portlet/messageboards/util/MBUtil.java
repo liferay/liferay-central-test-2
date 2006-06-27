@@ -37,9 +37,6 @@ import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeMap;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
@@ -286,21 +283,21 @@ public class MBUtil {
 		}
 	}
 
-	public static String getRank(
-			PortletPreferences prefs, PageContext pageContext, int posts)
+	public static String getRank(PortletPreferences prefs, int posts)
 		throws Exception {
 
-		String [] ranks = StringUtil.split(
-			prefs.getValue("ranks", StringPool.BLANK), StringPool.NEW_LINE);
+		String rank = StringPool.BLANK;
 
-		TreeMap map = getRanksMap(ranks);
+		String[] ranks = prefs.getValues("ranks", new String[0]);
 
-		String rank = LanguageUtil.get(pageContext, "none");
-		for (Iterator itr = map.keySet().iterator(); itr.hasNext(); ) {
-			Integer key = (Integer)itr.next();
+		for (int i = 0; i < ranks.length; i++) {
+			String[] kvp = StringUtil.split(ranks[i], StringPool.EQUAL);
 
-			if (posts >= key.intValue()) {
-				rank = (String)map.get(key);
+			String kvpName = kvp[0];
+			int kvpPosts = GetterUtil.getInteger(kvp[1]);
+
+			if (posts >= kvpPosts) {
+				rank = kvpName;
 			}
 			else {
 				break;
@@ -308,23 +305,6 @@ public class MBUtil {
 		}
 
 		return rank;
-	}
-
-	public static TreeMap getRanksMap(String [] ranks) {
-		TreeMap map = new TreeMap();
-
-		for (int i = 0; i < ranks.length; i++) {
-			String [] pair = StringUtil.split(ranks[i], StringPool.EQUAL);
-
-			if (pair.length == 2) {
-				Integer key = new Integer(pair[1]);
-				String value = (String)pair[0];
-
-				map.put(key, value.trim());
-			}
-		}
-
-		return map;
 	}
 
 }

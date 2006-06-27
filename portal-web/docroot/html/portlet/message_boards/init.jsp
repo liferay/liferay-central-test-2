@@ -33,6 +33,7 @@
 --%><%@ page import="com.liferay.portlet.messageboards.MessageSubjectException" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.NoSuchCategoryException" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.NoSuchMessageException" %><%--
+--%><%@ page import="com.liferay.portlet.messageboards.NoSuchStatsUserException" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.NoSuchThreadException" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.NoSuchTopicException" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.RequiredMessageException" %><%--
@@ -58,6 +59,8 @@
 --%><%@ page import="org.apache.lucene.document.Document" %><%--
 
 --%><%
+PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portletDisplay.getId(), false, true);
+
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 

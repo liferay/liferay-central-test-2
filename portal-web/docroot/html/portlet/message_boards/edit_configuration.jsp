@@ -270,9 +270,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br><br>
 
-		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />ranks" rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>" wrap="soft"><%= prefs.getValue("ranks", StringPool.BLANK) %></textarea>
-
-		<br><br>
+		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />ranks" rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>" wrap="soft"><%= StringUtil.merge(prefs.getValues("ranks", new String[0]), StringPool.NEW_LINE) %></textarea><br>
 	</c:when>
 </c:choose>
 

@@ -22,19 +22,20 @@
 
 package com.liferay.portlet.messageboards.action;
 
-import java.util.Iterator;
-import java.util.TreeMap;
-
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
-import com.liferay.portlet.messageboards.util.MBUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -46,7 +47,6 @@ import javax.portlet.RenderResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.xml.utils.FastStringBuffer;
 
 /**
  * <a href="EditConfigurationAction.java.html"><b><i>View Source</i></b></a>
@@ -175,26 +175,43 @@ public class EditConfigurationAction extends PortletAction {
 		}
 	}
 
-	protected void updateRank(
-			ActionRequest req, PortletPreferences prefs)
+	protected void updateRank(ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		String [] ranks = StringUtil.split(
-				ParamUtil.getString(req, "ranks"), StringPool.NEW_LINE);
+		// Sort ranks by posts
 
-		TreeMap map = MBUtil.getRanksMap(ranks);
+		String[] ranks = StringUtil.split(
+			ParamUtil.getString(req, "ranks"), StringPool.NEW_LINE);
 
-		FastStringBuffer sb = new FastStringBuffer();
-		for (Iterator itr = map.keySet().iterator(); itr.hasNext(); ) {
-			Integer key = (Integer)itr.next();
+		Map map = new TreeMap();
 
-			sb.append(map.get(key) + StringPool.EQUAL + key);
-			if (itr.hasNext()) {
-				sb.append(StringPool.NEW_LINE);
-			}
+		for (int i = 0; i < ranks.length; i++) {
+			String[] kvp = StringUtil.split(ranks[i], StringPool.EQUAL);
+
+			String kvpName = kvp[0];
+			Integer kvpPosts = new Integer(GetterUtil.getInteger(kvp[1]));
+
+			map.put(kvpPosts, kvpName);
 		}
 
-		prefs.setValue("ranks", sb.toString());
+		ranks = new String[map.size()];
+
+		int count = 0;
+
+		Iterator itr = map.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			Integer kvpPosts = (Integer)entry.getKey();
+			String kvpName = (String)entry.getValue();
+
+			ranks[count++] = kvpName + StringPool.EQUAL + kvpPosts.toString();
+		}
+
+		// Set ranks
+
+		prefs.setValues("ranks", ranks);
 	}
 
 }
