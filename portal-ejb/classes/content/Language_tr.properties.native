@@ -369,6 +369,7 @@ enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-t
 enter-one-url-per-line=<b>Herbir satıra</b> bir site adresi (URL) girin.
 enter-one-user-email-address-per-line-to-reserve-the-user-email-address=Enter one user email address <b>per line</b> to reserve the user email address.
 enter-one-user-id-per-line-to-reserve-the-user-id=Enter one user ID <b>per line</b> to reserve the user ID.
+enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>.
 enter-the-default-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default group names <b>per line</b> that are associated with newly created users.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Enter the default role names <b>per line</b> that are associated with newly created users.
 entries=Girişler

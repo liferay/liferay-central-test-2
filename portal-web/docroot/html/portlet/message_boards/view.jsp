@@ -44,10 +44,7 @@ portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("categoryId", categoryId);
 %>
 
-<liferay-ui:tabs
-	names="categories,statistics"
-	url="<%= portletURL.toString() %>"
-/>
+<liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("categories") %>'>
@@ -305,6 +302,90 @@ portletURL.setParameter("categoryId", categoryId);
 				}
 			</script>
 		</c:if>
+	</c:when>
+	<c:when test='<%= tabs1.equals("recent-posts") %>'>
+
+		<%
+		List headerNames = new ArrayList();
+
+		headerNames.add("thread");
+		headerNames.add("started-by");
+		headerNames.add("num-of-posts");
+		headerNames.add("num-of-views");
+		headerNames.add("last-post-date");
+		headerNames.add(StringPool.BLANK);
+
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+
+		int total = MBThreadLocalServiceUtil.getGroupThreadsCount(portletGroupId);
+
+		searchContainer.setTotal(total);
+
+		List results = MBThreadLocalServiceUtil.getGroupThreads(portletGroupId, searchContainer.getStart(), searchContainer.getEnd());
+
+		searchContainer.setResults(results);
+
+		List resultRows = searchContainer.getResultRows();
+
+		for (int i = 0; i < results.size(); i++) {
+			MBThread thread = (MBThread)results.get(i);
+
+			MBMessage message = MBMessageLocalServiceUtil.getMessage(thread.getTopicId(), thread.getRootMessageId());
+			boolean readThread = MBThreadLocalServiceUtil.hasReadThread(request.getRemoteUser(), thread.getThreadId());
+
+			ResultRow row = new ResultRow(message, thread.getPrimaryKey().toString(), i, !readThread);
+
+			PortletURL rowURL = renderResponse.createRenderURL();
+
+			rowURL.setWindowState(WindowState.MAXIMIZED);
+
+			rowURL.setParameter("struts_action", "/message_boards/view_message");
+			rowURL.setParameter("topicId", message.getTopicId());
+			rowURL.setParameter("messageId", message.getMessageId());
+
+			// Thread
+
+			row.addText(message.getSubject(), rowURL);
+
+			// Started by
+
+			if (message.isAnonymous()) {
+				row.addText(LanguageUtil.get(pageContext, "anonymous"), rowURL);
+			}
+			else {
+				row.addText(PortalUtil.getUserName(message.getUserId(), message.getUserName()), rowURL);
+			}
+
+			// Number of posts
+
+			row.addText(Integer.toString(thread.getMessageCount()), rowURL);
+
+			// Number of views
+
+			row.addText(Integer.toString(thread.getViewCount()), rowURL);
+
+			// Last post date
+
+			if (thread.getLastPostDate() == null) {
+				row.addText(LanguageUtil.get(pageContext, "never"), rowURL);
+			}
+			else {
+				row.addText(dateFormatDateTime.format(thread.getLastPostDate()), rowURL);
+			}
+
+			// Action
+
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/message_boards/message_action.jsp");
+
+			// Add result row
+
+			resultRows.add(row);
+		}
+		%>
+
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test='<%= tabs1.equals("statistics") %>'>
 		<liferay-ui:tabs

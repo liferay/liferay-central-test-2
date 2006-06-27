@@ -25,8 +25,7 @@ package com.liferay.portlet.messageboards.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.portlet.messageboards.model.MBTopic;
-import com.liferay.util.StringUtil;
+import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -39,66 +38,18 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="MBTopicFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBThreadFinder.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class MBTopicFinder {
-
-	public static String COUNT_BY_CATEGORY_IDS =
-		MBTopicFinder.class.getName() + ".countByCategoryIds";
+public class MBThreadFinder {
 
 	public static String COUNT_BY_GROUP_ID =
-		MBTopicFinder.class.getName() + ".countByGroupId";
+		MBThreadFinder.class.getName() + ".countByGroupId";
 
 	public static String FIND_BY_GROUP_ID =
-		MBTopicFinder.class.getName() + ".findByGroupId";
-
-	public static int countByCategoryIds(List categoryIds)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_CATEGORY_IDS);
-
-			sql = StringUtil.replace(
-				sql, "[$CATEGORY_ID$]", _getCategoryIds(categoryIds));
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			for (int i = 0; i < categoryIds.size(); i++) {
-				String categoryId = (String)categoryIds.get(i);
-
-				qPos.add(categoryId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-	}
+		MBThreadFinder.class.getName() + ".findByGroupId";
 
 	public static int countByGroupId(String groupId) throws SystemException {
 		Session session = null;
@@ -150,7 +101,7 @@ public class MBTopicFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("MBTopic", MBTopicHBM.class);
+			q.addEntity("MBThread", MBThreadHBM.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -160,11 +111,11 @@ public class MBTopicFinder {
 				q, HibernateUtil.getDialect(), begin, end);
 
 			while (itr.hasNext()) {
-				MBTopicHBM topicHBM = (MBTopicHBM)itr.next();
+				MBThreadHBM threadHBM = (MBThreadHBM)itr.next();
 
-				MBTopic topic = MBTopicHBMUtil.model(topicHBM);
+				MBThread thread = MBThreadHBMUtil.model(threadHBM);
 
-				list.add(topic);
+				list.add(thread);
 			}
 		}
 		catch (Exception e) {

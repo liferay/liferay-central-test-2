@@ -499,6 +499,7 @@ enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-t
 enter-one-url-per-line=Vlož jedno URL na <b>každý řádek</b>.
 enter-one-user-email-address-per-line-to-reserve-the-user-email-address=Vlož jedenuživatelský e-mail na <b>každý řádek</b> pro rezervaci.
 enter-one-user-id-per-line-to-reserve-the-user-id=Vlož jeden uživatelský identifikátor (User ID) na <b>každý řádek</b> pro rezervaci ID.
+enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>.
 enter-the-default-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default group names <b>per line</b> that are associated with newly created users.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Enter the default role names <b>per line</b> that are associated with newly created users.
 entries=Záznamy

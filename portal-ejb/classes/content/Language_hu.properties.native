@@ -567,6 +567,7 @@ enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-t
 enter-one-url-per-line=Egy URL-t írjon be <b>soronként</b>.
 enter-one-user-email-address-per-line-to-reserve-the-user-email-address=Egy felhasználó e-mail címet írjon be <b>soronként</b> hogy lefoglalja a felhasználó e-mail címet.
 enter-one-user-id-per-line-to-reserve-the-user-id=Egy felhasználó azonosítót írjon be <b>soronként</b> hogy lefoglalja a felhasználó azonosítót.
+enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>.
 enter-the-default-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default group names <b>per line</b> that are associated with newly created users.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Enter the default role names <b>per line</b> that are associated with newly created users.
 entries=Bejegyzések

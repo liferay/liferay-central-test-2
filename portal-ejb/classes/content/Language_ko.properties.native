@@ -811,6 +811,7 @@ enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-t
 enter-one-url-per-line=Enter one URL <b>per line</b>.
 enter-one-user-email-address-per-line-to-reserve-the-user-email-address=Enter one user email address <b>per line</b> to reserve the user email address.
 enter-one-user-id-per-line-to-reserve-the-user-id=Enter one user ID <b>per line</b> to reserve the user ID.
+enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>.
 enter-the-default-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default group names <b>per line</b> that are associated with newly created users.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Enter the default role names <b>per line</b> that are associated with newly created users.
 enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages=공중과 개인 페이지 모두에의해 이용할 것이다 친절한url에 들어가십시요.
@@ -1541,6 +1542,7 @@ read-more=더를 읽으십시요
 read-roles=역할을 읽으십시요
 receiver-email-address=수신기 Email.address
 recent-changes=최근 변경
+recent-posts=최근 지점
 recent=최근
 recur-every=각 재발하십시요
 references-only=다만의 참조

@@ -811,6 +811,7 @@ enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-t
 enter-one-url-per-line=Inserire un URL <b>per riga</b>.
 enter-one-user-email-address-per-line-to-reserve-the-user-email-address=Inserire un indirizzo email <b>per linea</b>.
 enter-one-user-id-per-line-to-reserve-the-user-id=Inserire un ID Utente <b>per linea</b>.
+enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>.
 enter-the-default-group-names-per-line-that-are-associated-with-newly-created-users=Inserire i nomi dei gruppi di default<b>per linea </b> che sono associati ai nuovi utenti creati.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Inserire i nomi dei ruoli di default<b>per linea </b> che sono associati ai nuovi utenti creati.
 enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages=Inserire il friendly url che sar� usato in entrambe le pagine pubblica e privata.
@@ -1542,6 +1543,7 @@ read-more=Leggi ancora
 read-roles=Ruoli di Lettura
 receiver-email-address=Indirizzo Email Destinario
 recent-changes=Cambiamenti Recenti
+recent-posts=Alberini Recenti
 recent=Recenti
 recur-every=Ogni Ripetizione
 references-only=Solo Riferimenti

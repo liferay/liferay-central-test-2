@@ -57,14 +57,11 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 <input name="<portlet:namespace />topicIds" type="hidden" value="<%= topic.getTopicId() %>">
 <input name="<portlet:namespace />threadId" type="hidden" value="<%= message.getThreadId() %>">
 
+<liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
+
 <%= MBUtil.getBreadcrumbs(null, topic, message, pageContext, renderResponse) %>
 
 <br><br>
-
-<div style="margin-bottom: 5px; text-align: left;">
-	<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text">
-	<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
-</div>
 
 <div style="background-color: <%= colorScheme.getLayoutTabBg() %>; border: 1px solid <%= colorScheme.getPortletFontDim() %>; margin-bottom: 5px; padding: 3px 5px;">
 	<span style="float: left;">
@@ -173,7 +170,3 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 </div>
 
 </form>
-
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />keywords.focus();
-</script>

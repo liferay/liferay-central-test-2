@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 import com.liferay.portlet.messageboards.service.spring.MBThreadLocalService;
 
@@ -37,6 +38,26 @@ import java.util.List;
  *
  */
 public class MBThreadLocalServiceImpl implements MBThreadLocalService {
+
+	public List getGroupThreads(String groupId, int begin, int end)
+		throws SystemException {
+
+		return MBThreadFinder.findByGroupId(groupId, begin, end);
+	}
+
+	public int getGroupThreadsCount(String groupId) throws SystemException {
+		return MBThreadFinder.countByGroupId(groupId);
+	}
+
+	public List getThreads(String topicId, int begin, int end)
+		throws SystemException {
+
+		return MBThreadUtil.findByTopicId(topicId, begin, end);
+	}
+
+	public int getThreadsCount(String topicId) throws SystemException {
+		return MBThreadUtil.countByTopicId(topicId);
+	}
 
 	public boolean hasReadThread(String userId, String threadId)
 		throws SystemException {
@@ -57,16 +78,6 @@ public class MBThreadLocalServiceImpl implements MBThreadLocalService {
 		else {
 			return true;
 		}
-	}
-
-	public List getThreads(String topicId, int begin, int end)
-		throws SystemException {
-
-		return MBThreadUtil.findByTopicId(topicId, begin, end);
-	}
-
-	public int getThreadsCount(String topicId) throws SystemException {
-		return MBThreadUtil.countByTopicId(topicId);
 	}
 
 }

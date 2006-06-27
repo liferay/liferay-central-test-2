@@ -811,6 +811,7 @@ enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-t
 enter-one-url-per-line=<b>每行</b>輸入一個網址.
 enter-one-user-email-address-per-line-to-reserve-the-user-email-address=輸入使用者電子郵件地址 <b>每行</b> 以保留使用者電子郵件地址.
 enter-one-user-id-per-line-to-reserve-the-user-id=輸入使用者 ID <b>每行</b> 以保留使用者編號.
+enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>.
 enter-the-default-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default group names <b>per line</b> that are associated with newly created users.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Enter the default role names <b>per line</b> that are associated with newly created users.
 enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages=進入將由公開和私有頁使用的友好的url 。
@@ -1542,6 +1543,7 @@ read-more=讀取更多
 read-roles=讀取角色
 receiver-email-address=接收者電子郵件
 recent-changes=最近變動
+recent-posts=最近崗位
 recent=最近
 recur-every=重複每
 references-only=參考唯一

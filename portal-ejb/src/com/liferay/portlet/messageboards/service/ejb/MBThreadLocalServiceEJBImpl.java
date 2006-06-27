@@ -49,9 +49,14 @@ public class MBThreadLocalServiceEJBImpl implements MBThreadLocalService,
 		return (MBThreadLocalService)ctx.getBean(CLASS_NAME);
 	}
 
-	public boolean hasReadThread(java.lang.String userId,
-		java.lang.String threadId) throws com.liferay.portal.SystemException {
-		return getService().hasReadThread(userId, threadId);
+	public java.util.List getGroupThreads(java.lang.String groupId, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getService().getGroupThreads(groupId, begin, end);
+	}
+
+	public int getGroupThreadsCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException {
+		return getService().getGroupThreadsCount(groupId);
 	}
 
 	public java.util.List getThreads(java.lang.String topicId, int begin,
@@ -62,6 +67,11 @@ public class MBThreadLocalServiceEJBImpl implements MBThreadLocalService,
 	public int getThreadsCount(java.lang.String topicId)
 		throws com.liferay.portal.SystemException {
 		return getService().getThreadsCount(topicId);
+	}
+
+	public boolean hasReadThread(java.lang.String userId,
+		java.lang.String threadId) throws com.liferay.portal.SystemException {
+		return getService().hasReadThread(userId, threadId);
 	}
 
 	public void ejbCreate() throws CreateException {

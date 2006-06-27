@@ -758,6 +758,7 @@ enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-t
 enter-one-url-per-line=Введите только один URL <b>на каждой строке</b>.
 enter-one-user-email-address-per-line-to-reserve-the-user-email-address=Введите по одному email адресу <b>на каждой строке</b> для резервирования пользовательских email адресов.
 enter-one-user-id-per-line-to-reserve-the-user-id=Введите по одному ID пользователя <b>на каждой строке</b> для резервирования ID пользователей.
+enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>.
 enter-the-default-group-names-per-line-that-are-associated-with-newly-created-users=Введите имена групп по умолчанию, по одному <b>на каждой строке</b>, которые будут ассоциированы с вновь создаваемыми пользователями.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Введите имена ролей по умолчанию, по одному <b>на каждой строке</b>, которые будут ассоциированы с вновь создаваемыми пользователями.
 enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages=Введите удобный url который будет использоваться как публичными и частными страницами.

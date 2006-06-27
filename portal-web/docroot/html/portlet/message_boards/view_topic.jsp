@@ -34,7 +34,7 @@ String topicId = topic.getTopicId();
 <input name="<portlet:namespace />breadcrumbsTopicId" type="hidden" value="<%= topicId %>">
 <input name="<portlet:namespace />topicIds" type="hidden" value="<%= topic.getTopicId() %>">
 
-<liferay-ui:tabs names="topics" />
+<liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
 
 <%= MBUtil.getBreadcrumbs(null, topic, null, pageContext, renderResponse) %>
 

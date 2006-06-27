@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -19,28 +20,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portlet.messageboards.service.spring;
+<%@ include file="/html/portlet/message_boards/init.jsp" %>
 
-/**
- * <a href="MBThreadLocalService.java.html"><b><i>View Source</i></b></a>
- *
- * @author  Brian Wing Shun Chan
- *
- */
-public interface MBThreadLocalService {
-	public java.util.List getGroupThreads(java.lang.String groupId, int begin,
-		int end) throws com.liferay.portal.SystemException;
+<%
+PortletURL tabs1URL = renderResponse.createRenderURL();
 
-	public int getGroupThreadsCount(java.lang.String groupId)
-		throws com.liferay.portal.SystemException;
+tabs1URL.setParameter("struts_action", "/message_boards/view");
+%>
 
-	public java.util.List getThreads(java.lang.String topicId, int begin,
-		int end) throws com.liferay.portal.SystemException;
-
-	public int getThreadsCount(java.lang.String topicId)
-		throws com.liferay.portal.SystemException;
-
-	public boolean hasReadThread(java.lang.String userId,
-		java.lang.String threadId) throws com.liferay.portal.SystemException;
-}
+<liferay-ui:tabs
+	names="categories,recent-posts,statistics"
+	url="<%= tabs1URL.toString() %>"
+/>
