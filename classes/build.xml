@@ -17,6 +17,7 @@
 		<javac
 			classpathref="project.classpath"
 			compiler="${javac.compiler}"
+			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
 			fork="${javac.fork}"
 			includes="*.java"
