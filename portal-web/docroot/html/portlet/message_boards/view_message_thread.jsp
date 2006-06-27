@@ -58,11 +58,16 @@ if (treeWalker.isOdd()) {
 							<%
 							try {
 								User user2 = UserLocalServiceUtil.getUserById(message.getUserId());
+								int posts = MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId, message.getUserId()).getMessageCount();
+
+								PortletPreferences prefs = renderRequest.getPreferences();
+								String rank = MBUtil.getRank(prefs, pageContext, posts);
 							%>
 
 								<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= message.getUserId() %>" style="margin:10px 0px; width:75%;"><br>
 
-								<%= LanguageUtil.get(pageContext, "posts") %>: <%= MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId, message.getUserId()).getMessageCount() %><br>
+								<%= LanguageUtil.get(pageContext, "rank") %>: <%= rank %><br>
+								<%= LanguageUtil.get(pageContext, "posts") %>: <%= posts %><br>
 								<%= LanguageUtil.get(pageContext, "joined") %>: <%= dateFormatDate.format(user2.getCreateDate()) %>
 
 							<%

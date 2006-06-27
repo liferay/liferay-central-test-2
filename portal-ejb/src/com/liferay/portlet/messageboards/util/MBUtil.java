@@ -33,9 +33,13 @@ import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUti
 import com.liferay.portlet.messageboards.service.spring.MBTopicLocalServiceUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeMap;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
@@ -280,6 +284,47 @@ public class MBUtil {
 			return ContentUtil.get(PropsUtil.get(
 				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT));
 		}
+	}
+
+	public static String getRank(
+			PortletPreferences prefs, PageContext pageContext, int posts)
+		throws Exception {
+
+		String [] ranks = StringUtil.split(
+			prefs.getValue("ranks", StringPool.BLANK), StringPool.NEW_LINE);
+
+		TreeMap map = getRanksMap(ranks);
+
+		String rank = LanguageUtil.get(pageContext, "none");
+		for (Iterator itr = map.keySet().iterator(); itr.hasNext(); ) {
+			Integer key = (Integer)itr.next();
+
+			if (posts >= key.intValue()) {
+				rank = (String)map.get(key);
+			}
+			else {
+				break;
+			}
+		}
+
+		return rank;
+	}
+
+	public static TreeMap getRanksMap(String [] ranks) {
+		TreeMap map = new TreeMap();
+
+		for (int i = 0; i < ranks.length; i++) {
+			String [] pair = StringUtil.split(ranks[i], StringPool.EQUAL);
+
+			if (pair.length == 2) {
+				Integer key = new Integer(pair[1]);
+				String value = (String)pair[0];
+
+				map.put(key, value.trim());
+			}
+		}
+
+		return map;
 	}
 
 }

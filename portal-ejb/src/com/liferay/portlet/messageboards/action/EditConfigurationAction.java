@@ -22,10 +22,16 @@
 
 package com.liferay.portlet.messageboards.action;
 
+import java.util.Iterator;
+import java.util.TreeMap;
+
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringPool;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
@@ -40,6 +46,7 @@ import javax.portlet.RenderResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.xml.utils.FastStringBuffer;
 
 /**
  * <a href="EditConfigurationAction.java.html"><b><i>View Source</i></b></a>
@@ -77,6 +84,9 @@ public class EditConfigurationAction extends PortletAction {
 		}
 		else if (tabs2.equals("message-updated-email")) {
 			updateEmailMessageUpdated(req, prefs);
+		}
+		else if (tabs2.equals("rank")) {
+			updateRank(req, prefs);
 		}
 
 		if (SessionErrors.isEmpty(req)) {
@@ -163,6 +173,28 @@ public class EditConfigurationAction extends PortletAction {
 			prefs.setValue(
 				"email-message-updated-body", emailMessageUpdatedBody);
 		}
+	}
+
+	protected void updateRank(
+			ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		String [] ranks = StringUtil.split(
+				ParamUtil.getString(req, "ranks"), StringPool.NEW_LINE);
+
+		TreeMap map = MBUtil.getRanksMap(ranks);
+
+		FastStringBuffer sb = new FastStringBuffer();
+		for (Iterator itr = map.keySet().iterator(); itr.hasNext(); ) {
+			Integer key = (Integer)itr.next();
+
+			sb.append(map.get(key) + StringPool.EQUAL + key);
+			if (itr.hasNext()) {
+				sb.append(StringPool.NEW_LINE);
+			}
+		}
+
+		prefs.setValue("ranks", sb.toString());
 	}
 
 }

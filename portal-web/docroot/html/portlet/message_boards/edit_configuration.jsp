@@ -83,7 +83,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
 
 <liferay-ui:tabs
-	names="email-from,message-added-email,message-updated-email"
+	names="email-from,message-added-email,message-updated-email,rank"
 	param="tabs2"
 	url="<%= portletURL %>"
 />
@@ -264,6 +264,15 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 		</tr>
 		</table>
+	</c:when>
+	<c:when test='<%= tabs2.equals("rank") %>'>
+		<%= LanguageUtil.get(pageContext, "enter-rank-and-minimum-post-pairs-per-line") %>
+
+		<br><br>
+
+		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />ranks" rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>" wrap="soft"><%= prefs.getValue("ranks", StringPool.BLANK) %></textarea>
+
+		<br><br>
 	</c:when>
 </c:choose>
 
