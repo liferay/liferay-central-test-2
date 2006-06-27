@@ -26,7 +26,6 @@ import com.httpbridge.webproxy.http.TaskController;
 
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.events.StartupAction;
-import com.liferay.portal.job.JobScheduler;
 import com.liferay.portal.job.Scheduler;
 import com.liferay.portal.lastmodified.LastModifiedAction;
 import com.liferay.portal.model.Company;
@@ -140,7 +139,7 @@ public class MainServlet extends ActionServlet {
 					true);
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e);
 			}
 
 			// Company id
@@ -204,7 +203,7 @@ public class MainServlet extends ActionServlet {
 				PortletLocalServiceUtil.initEAR(xmls);
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e);
 			}
 
 			// Initialize display
@@ -234,7 +233,7 @@ public class MainServlet extends ActionServlet {
 					_companyId, WebKeys.PORTLET_CATEGORY, portletCategory);
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e);
 			}
 
 			// Initialize layout templates
@@ -254,7 +253,7 @@ public class MainServlet extends ActionServlet {
 				LayoutTemplateLocalUtil.init(ctx, xmls);
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e);
 			}
 
 			// Initialize look and feel
@@ -274,7 +273,7 @@ public class MainServlet extends ActionServlet {
 				ThemeLocalUtil.init(ctx, xmls);
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e);
 			}
 
 			// Check company
@@ -287,7 +286,7 @@ public class MainServlet extends ActionServlet {
 				CompanyLocalServiceUtil.checkCompany(_companyId);
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e);
 			}
 
 			// Check journal content search
@@ -304,7 +303,7 @@ public class MainServlet extends ActionServlet {
 						_companyId);
 				}
 				catch (Exception e) {
-					e.printStackTrace();
+					_log.error(e);
 				}
 			}
 
@@ -321,7 +320,7 @@ public class MainServlet extends ActionServlet {
 				_checkWebSettings(xml);
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e);
 			}
 
 			// Scheduler
@@ -350,7 +349,7 @@ public class MainServlet extends ActionServlet {
 			catch (ObjectAlreadyExistsException oaee) {
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e);
 			}
 
 			// Message resources
@@ -423,7 +422,7 @@ public class MainServlet extends ActionServlet {
 					new String[] {_companyId});
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e);
 			}
 
 			PortalInstances.init(_companyId);
@@ -790,7 +789,7 @@ public class MainServlet extends ActionServlet {
 					PropsUtil.LOGIN_EVENTS_POST), req, res);
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e);
 			}
 		}
 
@@ -853,12 +852,26 @@ public class MainServlet extends ActionServlet {
 			}
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(e);
 		}
 
-		// Scheduler
+		// Process shutdown events
 
-		JobScheduler.shutdown();
+		if (_log.isDebugEnabled()) {
+			_log.debug("Process shutdown events");
+		}
+
+		try {
+			EventsProcessor.process(PropsUtil.getArray(
+				PropsUtil.GLOBAL_SHUTDOWN_EVENTS), true);
+
+			EventsProcessor.process(PropsUtil.getArray(
+				PropsUtil.APPLICATION_SHUTDOWN_EVENTS),
+				new String[] {_companyId});
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
 
 		// Parent
 

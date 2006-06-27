@@ -22,7 +22,11 @@
 
 package com.liferay.portal.shared.servlet;
 
+import com.liferay.portal.shared.log.Log;
+import com.liferay.portal.shared.log.LogFactoryUtil;
 import com.liferay.portal.shared.util.PortalClassLoaderUtil;
+import com.liferay.portal.shared.util.PortalInitable;
+import com.liferay.portal.shared.util.PortalInitableUtil;
 
 import java.io.IOException;
 
@@ -39,27 +43,27 @@ import javax.servlet.ServletResponse;
  * @author  Brian Wing Shun Chan
  *
  */
-public class PortalFilterWrapper implements Filter {
+public class PortalFilterWrapper implements Filter, PortalInitable {
+
+	public void portalInit() {
+		try {
+			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+
+			String filterClass = _config.getInitParameter("filter-class");
+
+			_filter = (Filter)classLoader.loadClass(filterClass).newInstance();
+
+			_filter.init(_config);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+	}
 
 	public void init(FilterConfig config) throws ServletException {
-		String filterClass = config.getInitParameter("filter-class");
+		_config = config;
 
-		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
-
-		try {
-			_filter = (Filter)classLoader.loadClass(filterClass).newInstance();
-		}
-		catch (ClassNotFoundException cnfe) {
-			throw new ServletException(cnfe.getMessage());
-		}
-		catch (IllegalAccessException iae) {
-			throw new ServletException(iae.getMessage());
-		}
-		catch (InstantiationException ie) {
-			throw new ServletException(ie.getMessage());
-		}
-
-		_filter.init(config);
+		PortalInitableUtil.init(this);
 	}
 
 	public void doFilter(
@@ -95,6 +99,9 @@ public class PortalFilterWrapper implements Filter {
 		}
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(PortalFilterWrapper.class);
+
 	private Filter _filter;
+	private FilterConfig _config;
 
 }

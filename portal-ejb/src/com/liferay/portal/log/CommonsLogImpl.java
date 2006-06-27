@@ -25,14 +25,14 @@ package com.liferay.portal.log;
 import com.liferay.portal.shared.log.Log;
 
 /**
- * <a href="LogImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="CommonsLogImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class LogImpl implements Log {
+public class CommonsLogImpl implements Log {
 
-	public LogImpl(org.apache.commons.logging.Log log) {
+	public CommonsLogImpl(org.apache.commons.logging.Log log) {
 		_log = log;
 	}
 
@@ -44,12 +44,20 @@ public class LogImpl implements Log {
 		_log.debug(t);
 	}
 
+	public void debug(String msg, Throwable t) {
+		_log.debug(msg, t);
+	}
+
 	public void error(String msg) {
 		_log.error(msg);
 	}
 
 	public void error(Throwable t) {
 		_log.error(t);
+	}
+
+	public void error(String msg, Throwable t) {
+		_log.error(msg, t);
 	}
 
 	public void fatal(String msg) {
@@ -60,12 +68,20 @@ public class LogImpl implements Log {
 		_log.fatal(t);
 	}
 
+	public void fatal(String msg, Throwable t) {
+		_log.fatal(msg, t);
+	}
+
 	public void info(String msg) {
 		_log.info(msg);
 	}
 
 	public void info(Throwable t) {
 		_log.info(t);
+	}
+
+	public void info(String msg, Throwable t) {
+		_log.info(msg, t);
 	}
 
 	public boolean isDebugEnabled() {
@@ -100,12 +116,20 @@ public class LogImpl implements Log {
 		_log.trace(t);
 	}
 
+	public void trace(String msg, Throwable t) {
+		_log.trace(msg, t);
+	}
+
 	public void warn(String msg) {
 		_log.warn(msg);
 	}
 
 	public void warn(Throwable t) {
 		_log.warn(t);
+	}
+
+	public void warn(String msg, Throwable t) {
+		_log.warn(msg, t);
 	}
 
 	private org.apache.commons.logging.Log _log;

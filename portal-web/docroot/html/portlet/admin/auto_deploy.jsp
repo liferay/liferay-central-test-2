@@ -84,44 +84,17 @@
 	</td>
 </tr>
 
-<c:choose>
-	<c:when test="<%= ServerDetector.isJBoss() %>">
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "jboss-prefix") %>
-			</td>
-			<td style="padding-left: 10px;"></td>
-			<td>
-				<select name="<portlet:namespace />jbossPrefix">
-
-					<%
-					int jbossPrefix = GetterUtil.getInteger(OmniadminUtil.getAutoDeployJbossPrefix());
-
-					for (int i = 1; i <= 9; i++) {
-					%>
-
-						<option <%= (jbossPrefix == i) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
-
-					<%
-					}
-					%>
-
-				</select>
-			</td>
-		</tr>
-	</c:when>
-	<c:when test="<%= ServerDetector.isTomcat() %>">
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "tomcat-lib-dir") %>
-			</td>
-			<td style="padding-left: 10px;"></td>
-			<td>
-				<input class="form-text" name="<portlet:namespace />tomcatLibDir" size="75" type="text" value="<%= OmniadminUtil.getAutoDeployTomcatLibDir() %>">
-			</td>
-		</tr>
-	</c:when>
-</c:choose>
+<c:if test="<%= ServerDetector.isTomcat() %>">
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "tomcat-lib-dir") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" name="<portlet:namespace />tomcatLibDir" size="75" type="text" value="<%= OmniadminUtil.getAutoDeployTomcatLibDir() %>">
+		</td>
+	</tr>
+</c:if>
 
 </table>
 

@@ -51,7 +51,6 @@ public class AutoPortletDeployer
 			portletTaglibDTD = DeployUtil.getResourcePath(
 				"liferay-portlet.tld");
 			unpackWar = OmniadminUtil.getAutoDeployUnpackWar();
-			jbossPrefix = OmniadminUtil.getAutoDeployJbossPrefix();
 			tomcatLibDir = OmniadminUtil.getAutoDeployTomcatLibDir();
 
 			List jars = new ArrayList();

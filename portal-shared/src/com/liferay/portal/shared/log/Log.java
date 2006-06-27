@@ -34,17 +34,25 @@ public interface Log {
 
 	public void debug(Throwable t);
 
+	public void debug(String msg, Throwable t);
+
 	public void error(String msg);
 
 	public void error(Throwable t);
+
+	public void error(String msg, Throwable t);
 
 	public void fatal(String msg);
 
 	public void fatal(Throwable t);
 
+	public void fatal(String msg, Throwable t);
+
 	public void info(String msg);
 
 	public void info(Throwable t);
+
+	public void info(String msg, Throwable t);
 
 	public boolean isDebugEnabled();
 
@@ -62,8 +70,12 @@ public interface Log {
 
 	public void trace(Throwable t);
 
+	public void trace(String msg, Throwable t);
+
 	public void warn(String msg);
 
 	public void warn(Throwable t);
+
+	public void warn(String msg, Throwable t);
 
 }

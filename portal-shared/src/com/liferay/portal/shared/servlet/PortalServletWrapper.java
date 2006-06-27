@@ -22,7 +22,11 @@
 
 package com.liferay.portal.shared.servlet;
 
+import com.liferay.portal.shared.log.Log;
+import com.liferay.portal.shared.log.LogFactoryUtil;
 import com.liferay.portal.shared.util.PortalClassLoaderUtil;
+import com.liferay.portal.shared.util.PortalInitable;
+import com.liferay.portal.shared.util.PortalInitableUtil;
 
 import java.io.IOException;
 
@@ -38,28 +42,29 @@ import javax.servlet.http.HttpServletResponse;
  * @author  Brian Wing Shun Chan
  *
  */
-public class PortalServletWrapper extends HttpServlet {
+public class PortalServletWrapper
+	extends HttpServlet implements PortalInitable {
 
-	public void init(ServletConfig config) throws ServletException {
-		String servletClass = config.getInitParameter("servlet-class");
-
-		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
-
+	public void portalInit() {
 		try {
+			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+
+			String servletClass = _config.getInitParameter("servlet-class");
+
 			_servlet = (HttpServlet)classLoader.loadClass(
 				servletClass).newInstance();
-		}
-		catch (ClassNotFoundException cnfe) {
-			throw new ServletException(cnfe.getMessage());
-		}
-		catch (IllegalAccessException iae) {
-			throw new ServletException(iae.getMessage());
-		}
-		catch (InstantiationException ie) {
-			throw new ServletException(ie.getMessage());
-		}
 
-		_servlet.init(config);
+			_servlet.init(_config);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+	}
+
+	public void init(ServletConfig config) throws ServletException {
+		_config = config;
+
+		PortalInitableUtil.init(this);
 	}
 
 	public void service(HttpServletRequest req, HttpServletResponse res)
@@ -94,6 +99,9 @@ public class PortalServletWrapper extends HttpServlet {
 		}
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(PortalServletWrapper.class);
+
 	private HttpServlet _servlet;
+	private ServletConfig _config;
 
 }

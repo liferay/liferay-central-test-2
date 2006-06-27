@@ -304,8 +304,6 @@
 			</filterset>
 		</copy>
 
-		<copy file="tools/ext_tmpl/servers/tomcat.log4j.properties" tofile="${lp.ext.dir}/servers/tomcat.log4j.properties" overwrite="yes" />
-
 		<copy todir="${lp.ext.dir}/lib" overwrite="yes">
 			<fileset
 				dir="lib"

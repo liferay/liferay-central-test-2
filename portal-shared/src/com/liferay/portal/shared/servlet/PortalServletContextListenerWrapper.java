@@ -25,6 +25,8 @@ package com.liferay.portal.shared.servlet;
 import com.liferay.portal.shared.log.Log;
 import com.liferay.portal.shared.log.LogFactoryUtil;
 import com.liferay.portal.shared.util.PortalClassLoaderUtil;
+import com.liferay.portal.shared.util.PortalInitable;
+import com.liferay.portal.shared.util.PortalInitableUtil;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -37,15 +39,36 @@ import javax.servlet.ServletContextListener;
  *
  */
 public abstract class PortalServletContextListenerWrapper
-	implements ServletContextListener {
+	implements PortalInitable, ServletContextListener {
 
 	public PortalServletContextListenerWrapper() {
+	}
+
+	public void portalInit() {
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
+
 		try {
+			Thread.currentThread().setContextClassLoader(
+				PortalClassLoaderUtil.getClassLoader());
+
 			_servletContextListener = getInstance();
+
+			_servletContextListener.contextInitialized(_sce);
 		}
 		catch (Exception e) {
 			_log.error(e);
 		}
+		finally {
+			Thread.currentThread().setContextClassLoader(
+				contextClassLoader);
+		}
+	}
+
+	public void contextInitialized(ServletContextEvent sce) {
+		_sce = sce;
+
+		PortalInitableUtil.init(this);
 	}
 
 	public void contextDestroyed(ServletContextEvent sce) {
@@ -63,26 +86,12 @@ public abstract class PortalServletContextListenerWrapper
 		}
 	}
 
-	public void contextInitialized(ServletContextEvent sce) {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
-
-		try {
-			Thread.currentThread().setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
-
-			_servletContextListener.contextInitialized(sce);
-		}
-		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
-		}
-	}
-
 	protected abstract ServletContextListener getInstance() throws Exception;
 
 	private static Log _log =
 		LogFactoryUtil.getLog(PortalServletContextListenerWrapper.class);
 
 	private ServletContextListener _servletContextListener;
+	private ServletContextEvent _sce;
 
 }

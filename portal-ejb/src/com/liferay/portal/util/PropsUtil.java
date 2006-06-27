@@ -86,8 +86,6 @@ public class PropsUtil {
 
 	public static final String AUTO_DEPLOY_UNPACK_WAR = "auto.deploy.unpack.war";
 
-	public static final String AUTO_DEPLOY_JBOSS_PREFIX = "auto.deploy.jboss.prefix";
-
 	public static final String AUTO_DEPLOY_TOMCAT_LIB_DIR = "auto.deploy.tomcat.lib.dir";
 
 	// Resource Actions
@@ -277,6 +275,12 @@ public class PropsUtil {
 	public static final String GLOBAL_STARTUP_EVENTS = "global.startup.events";
 
 	public static final String APPLICATION_STARTUP_EVENTS = "application.startup.events";
+
+	// Shutdown Events
+
+	public static final String GLOBAL_SHUTDOWN_EVENTS = "global.shutdown.events";
+
+	public static final String APPLICATION_SHUTDOWN_EVENTS = "application.shutdown.events";
 
 	// Portal Events
 

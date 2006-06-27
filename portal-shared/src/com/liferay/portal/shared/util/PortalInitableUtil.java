@@ -20,18 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.shared.log;
+package com.liferay.portal.shared.util;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 
 /**
- * <a href="LogFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalInitableUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public interface LogFactory {
+public class PortalInitableUtil {
 
-	public Log getLog(Class c);
+	public synchronized static void init(PortalInitable initable) {
+		if (_initables == null) {
+			initable.portalInit();
+		}
+		else {
+			_initables.add(initable);
+		}
+	}
 
-	public Log getLog(String name);
+	public synchronized static void flushInitables() {
+		if (_initables != null) {
+			Iterator itr = _initables.iterator();
+
+			while (itr.hasNext()) {
+				PortalInitable initable = (PortalInitable)itr.next();
+
+				initable.portalInit();
+
+				itr.remove();
+			}
+
+			_initables = null;
+		}
+	}
+
+	private static List _initables = new Vector();
 
 }

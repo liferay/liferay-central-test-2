@@ -32,6 +32,7 @@ import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.shared.deploy.AutoDeployDir;
 import com.liferay.portal.shared.deploy.AutoDeployUtil;
 import com.liferay.portal.shared.deploy.HotDeployUtil;
+import com.liferay.portal.shared.util.PortalInitableUtil;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
 import com.liferay.portal.util.PropsUtil;
@@ -69,6 +70,20 @@ public class GlobalStartupAction extends SimpleAction {
 			_log.error(e);
 		}
 
+		// Portal initable
+
+		PortalInitableUtil.flushInitables();
+
+		// Hot deploy
+
+		_log.debug("Registering hot deploy listeners");
+
+		HotDeployUtil.registerListener(new HotDeployLayoutTemplateListener());
+		HotDeployUtil.registerListener(new HotDeployPortletListener());
+		HotDeployUtil.registerListener(new HotDeployThemeListener());
+
+		HotDeployUtil.flushEvents();
+
 		// Auto deploy
 
 		try {
@@ -93,14 +108,6 @@ public class GlobalStartupAction extends SimpleAction {
 		catch (Exception e) {
 			_log.error(e);
 		}
-
-		// Hot deploy
-
-		_log.debug("Registering hot deploy listeners");
-
-		HotDeployUtil.registerListener(new HotDeployLayoutTemplateListener());
-		HotDeployUtil.registerListener(new HotDeployPortletListener());
-		HotDeployUtil.registerListener(new HotDeployThemeListener());
 	}
 
 	private static Log _log = LogFactory.getLog(GlobalStartupAction.class);

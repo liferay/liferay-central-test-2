@@ -19,12 +19,12 @@
 		/>
 
 		<war
-			basedir="${app.server.deploy.dir}/${ext.ear.file}/_portal-web-complete.war"
-			destfile="_portal-web-complete.war"
+			basedir="${app.server.deploy.dir}/${ext.ear.file}/portal-web-complete.war"
+			destfile="portal-web-complete.war"
 			excludes="WEB-INF/web.xml"
 			includes="**/*.*"
-			webxml="${app.server.deploy.dir}/${ext.ear.file}/_portal-web-complete.war/WEB-INF/web.xml" 
-			manifest="${app.server.deploy.dir}/${ext.ear.file}/_portal-web-complete.war/META-INF/MANIFEST.MF" 
+			webxml="${app.server.deploy.dir}/${ext.ear.file}/portal-web-complete.war/WEB-INF/web.xml" 
+			manifest="${app.server.deploy.dir}/${ext.ear.file}/portal-web-complete.war/META-INF/MANIFEST.MF" 
 			update="no"
 		/>
 
@@ -37,11 +37,11 @@
 		>
 			<fileset dir="${app.server.deploy.dir}/${ext.ear.file}" includes="lib/*.jar" />
 			<fileset dir="." includes="ext-ejb.jar" />
-			<fileset dir="." includes="_portal-web-complete.war" />
+			<fileset dir="." includes="portal-web-complete.war" />
 		</ear>
 
 		<delete file="ext-ejb.jar" />
-		<delete file="_portal-web-complete.war" />
+		<delete file="portal-web-complete.war" />
 	</target>
 
 	<target name="deploy">

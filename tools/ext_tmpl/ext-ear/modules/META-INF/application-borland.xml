@@ -22,17 +22,17 @@
 	</module>
 	<module>
 		<web>
-			<web-uri>_portal-web-complete.war</web-uri>
-		</web>
-	</module>
-	<module>
-		<web>
 			<web-uri>cms-web.war</web-uri>
 		</web>
 	</module>
 	<module>
 		<web>
 			<web-uri>laszlo-web.war</web-uri>
+		</web>
+	</module>
+	<module>
+		<web>
+			<web-uri>portal-web-complete.war</web-uri>
 		</web>
 	</module>
 	<module>

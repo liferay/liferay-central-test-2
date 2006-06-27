@@ -26,6 +26,9 @@ import com.liferay.util.Time;
 
 import java.util.Date;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -102,7 +105,7 @@ public class JobScheduler {
 			_scheduler.start();
 		}
 		catch (SchedulerException se) {
-			se.printStackTrace();
+			_log.error(se);
 		}
 	}
 
@@ -113,9 +116,11 @@ public class JobScheduler {
 			}
 		}
 		catch (SchedulerException se) {
-			se.printStackTrace();
+			_log.error(se);
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(JobScheduler.class);
 
 	private static JobScheduler _instance = new JobScheduler();
 

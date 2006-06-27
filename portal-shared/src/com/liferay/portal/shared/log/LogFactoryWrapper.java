@@ -22,16 +22,66 @@
 
 package com.liferay.portal.shared.log;
 
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
 /**
- * <a href="LogFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="LogFactoryWrapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public interface LogFactory {
+public class LogFactoryWrapper implements LogFactory {
 
-	public Log getLog(Class c);
+	public LogFactoryWrapper(LogFactory logFactory) {
+		_logFactory = logFactory;
+	}
 
-	public Log getLog(String name);
+	public void setLogFactory(LogFactory logFactory) {
+		_logFactory = logFactory;
+
+		Iterator itr1 = _logs.entrySet().iterator();
+
+		while (itr1.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr1.next();
+
+			String name = (String)entry.getKey();
+			List list = (List)entry.getValue();
+
+			Iterator itr2 = list.iterator();
+
+			while (itr2.hasNext()) {
+				LogWrapper logWrapper = (LogWrapper)itr2.next();
+
+				logWrapper.setLog(_logFactory.getLog(name));
+			}
+		}
+	}
+
+	public Log getLog(Class c) {
+		return getLog(c.getName());
+	}
+
+	public Log getLog(String name) {
+		List list = (List)_logs.get(name);
+
+		if (list == null) {
+			list = new Vector();
+
+			_logs.put(name, list);
+		}
+
+		Log log = new LogWrapper(_logFactory.getLog(name));
+
+		list.add(log);
+
+		return log;
+	}
+
+	private LogFactory _logFactory;
+	private Map _logs = new Hashtable();
 
 }

@@ -20,18 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.shared.log;
+package com.liferay.portal.log;
+
+import com.liferay.portal.shared.log.Log;
+import com.liferay.portal.shared.log.LogFactory;
 
 /**
- * <a href="LogFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="CommonsLogFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public interface LogFactory {
+public class CommonsLogFactoryImpl implements LogFactory {
 
-	public Log getLog(Class c);
+	public Log getLog(Class c) {
+		return getLog(c.getName());
+	}
 
-	public Log getLog(String name);
+	public Log getLog(String name) {
+		return new CommonsLogImpl(
+			org.apache.commons.logging.LogFactory.getLog(name));
+	}
 
 }

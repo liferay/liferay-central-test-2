@@ -68,16 +68,6 @@ public class OmniadminUtil {
 		return prefs.getValue(PropsUtil.AUTO_DEPLOY_DEST_DIR, destDir);
 	}
 
-	public static String getAutoDeployJbossPrefix()
-		throws PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences();
-
-		String jbossPrefix = PropsUtil.get(PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX);
-
-		return prefs.getValue(PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX, jbossPrefix);
-	}
-
 	public static long getAutoDeployInterval()
 		throws PortalException, SystemException {
 

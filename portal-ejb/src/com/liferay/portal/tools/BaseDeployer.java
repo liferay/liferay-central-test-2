@@ -80,7 +80,6 @@ public class BaseDeployer {
 		utilTaglibDTD = System.getProperty("deployer.util.taglib.dtd");
 		unpackWar = GetterUtil.getBoolean(
 			System.getProperty("deployer.unpack.war"), true);
-		jbossPrefix = System.getProperty("deployer.jboss.prefix");
 		tomcatLibDir = System.getProperty("deployer.tomcat.lib.dir");
 		this.wars = wars;
 		this.jars = jars;
@@ -124,10 +123,6 @@ public class BaseDeployer {
 
 			throw new IllegalArgumentException(
 				appServerType + " is not a valid application server type");
-		}
-
-		if (!Validator.isNumber(jbossPrefix)) {
-			jbossPrefix = "1";
 		}
 	}
 
@@ -190,14 +185,11 @@ public class BaseDeployer {
 
 					String deployDir = srcFile.getName();
 
-					if (appServerType.startsWith("jboss")) {
-						deployDir = jbossPrefix + deployDir;
-					}
-					else if (appServerType.equals("jetty") ||
-							 appServerType.equals("oc4j") ||
-							 appServerType.equals("orion") ||
-							 appServerType.equals("resin") ||
-							 appServerType.equals("tomcat")) {
+					if (appServerType.equals("jetty") ||
+						appServerType.equals("oc4j") ||
+						appServerType.equals("orion") ||
+						appServerType.equals("resin") ||
+						appServerType.equals("tomcat")) {
 
 						if (unpackWar) {
 							deployDir =
@@ -312,13 +304,8 @@ public class BaseDeployer {
 
 	protected String getDisplayName(File srcFile) {
 		String displayName = srcFile.getName();
-		displayName = displayName.substring(0, displayName.length() - 4);
 
-		if (displayName.startsWith(jbossPrefix)) {
-			displayName = displayName.substring(1, displayName.length());
-		}
-
-		return displayName;
+		return displayName.substring(0, displayName.length() - 4);
 	}
 
 	protected String getExtraContent(File srcFile, String displayName)
@@ -400,7 +387,6 @@ public class BaseDeployer {
 	protected String uiTaglibDTD;
 	protected String utilTaglibDTD;
 	protected boolean unpackWar;
-	protected String jbossPrefix;
 	protected String tomcatLibDir;
 	protected List wars;
 	protected List jars;

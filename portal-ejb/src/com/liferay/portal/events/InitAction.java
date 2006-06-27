@@ -23,7 +23,7 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.jcr.jackrabbit.JCRFactoryImpl;
-import com.liferay.portal.log.LogFactoryImpl;
+import com.liferay.portal.log.CommonsLogFactoryImpl;
 import com.liferay.portal.security.jaas.PortalConfiguration;
 import com.liferay.portal.shared.log.LogFactoryUtil;
 import com.liferay.portal.shared.util.PortalClassLoaderUtil;
@@ -114,7 +114,7 @@ public class InitAction extends SimpleAction {
 		// Shared log
 
 		try {
-			LogFactoryUtil.setLogFactory(new LogFactoryImpl());
+			LogFactoryUtil.setLogFactory(new CommonsLogFactoryImpl());
 		}
 		catch (Exception e) {
 			e.printStackTrace();

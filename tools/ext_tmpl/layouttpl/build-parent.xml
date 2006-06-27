@@ -35,15 +35,7 @@
 				<jvmarg value="-Ddeployer.base.dir=./" />
 				<jvmarg value="-Ddeployer.dest.dir=${theme.deploy.dir}" />
 				<jvmarg value="-Ddeployer.app.server.type=${app.server.type}" />
-
-				<!-- Optional Arguments -->
-
-				<jvmarg value="-Ddeployer.jboss.prefix=1" />
-				<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.lib.dir}" />
-
-				<!-- Dependent Libraries -->
-
-				<arg value="${project.dir}/lib/util-java.jar" />
+				<jvmarg value="-Ddeployer.unpack.war=true" />
 		</java>
 	</target>
 </project>

@@ -31,11 +31,11 @@
 
 		<copy file="${project.dir}/laszlo-web/laszlo-web.war" tofile="modules/laszlo-web.war" />
 
-		<copy file="${project.dir}/portal-web/portal-web.war" tofile="modules/_portal-web-complete.war" overwrite="yes" />
-		<touch file="modules/_portal-web-complete.war" datetime="01/01/1990 12:00 am" />
+		<copy file="${project.dir}/portal-web/portal-web.war" tofile="modules/portal-web-complete.war" overwrite="yes" />
+		<touch file="modules/portal-web-complete.war" datetime="01/01/1990 12:00 am" />
 		<war
 			basedir="${project.dir}/web-sites/liferay.com-web/docroot"
-			destfile="modules/_portal-web-complete.war"
+			destfile="modules/portal-web-complete.war"
 			excludes="WEB-INF/web.xml"
 			includes="index.html,WEB-INF/**"
 			webxml="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml"
@@ -110,7 +110,7 @@
 			<arg value="pro-war/WEB-INF/web.xml" />
 		</java>
 
-		<copy file="modules/_portal-web-complete.war" tofile="${war.file}" overwrite="yes" />
+		<copy file="modules/portal-web-complete.war" tofile="${war.file}" overwrite="yes" />
 		<war
 			basedir="pro-war"
 			destfile="${war.file}"

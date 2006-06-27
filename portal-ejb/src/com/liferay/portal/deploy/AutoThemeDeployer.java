@@ -51,7 +51,6 @@ public class AutoThemeDeployer
 			themeTaglibDTD = DeployUtil.getResourcePath("liferay-theme.tld");
 			utilTaglibDTD = DeployUtil.getResourcePath("liferay-util.tld");
 			unpackWar = OmniadminUtil.getAutoDeployUnpackWar();
-			jbossPrefix = OmniadminUtil.getAutoDeployJbossPrefix();
 			tomcatLibDir = OmniadminUtil.getAutoDeployTomcatLibDir();
 
 			List jars = new ArrayList();

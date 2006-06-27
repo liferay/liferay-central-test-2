@@ -26,9 +26,9 @@ import com.liferay.portal.shared.log.Log;
 import com.liferay.portal.shared.log.LogFactoryUtil;
 import com.liferay.portal.shared.util.StackTraceUtil;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * <a href="HotDeployUtil.java.html"><b><i>View Source</i></b></a>
@@ -51,11 +51,28 @@ public class HotDeployUtil {
 		_instance._registerListener(listener);
 	}
 
+	public static void flushEvents() {
+		_instance._flushEvents();
+	}
+
 	private HotDeployUtil() {
-		_listeners = new ArrayList();
+		_listeners = new Vector();
+		_events = new Vector();
 	}
 
 	private void _fireDeployEvent(HotDeployEvent event) {
+
+		// Capture events that are fired before the portal initialized. These
+		// events are later fired by flushEvents.
+
+		if (_events != null) {
+			_events.add(event);
+
+			return;
+		}
+
+		// Fire current event
+
 		Iterator itr = _listeners.iterator();
 
 		while (itr.hasNext()) {
@@ -89,10 +106,32 @@ public class HotDeployUtil {
 		_listeners.add(listener);
 	}
 
+	private void _flushEvents() {
+		for (int i = 0; i < _events.size(); i++) {
+			HotDeployEvent event = (HotDeployEvent)_events.get(i);
+
+			Iterator itr = _listeners.iterator();
+
+			while (itr.hasNext()) {
+				HotDeployListener listener = (HotDeployListener)itr.next();
+
+				try {
+					listener.invokeDeploy(event);
+				}
+				catch (HotDeployException hde) {
+					_log.error(StackTraceUtil.getStackTrace(hde));
+				}
+			}
+		}
+
+		_events = null;
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(HotDeployUtil.class);
 
 	private static HotDeployUtil _instance = new HotDeployUtil();
 
 	private List _listeners;
+	private List _events;
 
 }

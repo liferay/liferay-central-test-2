@@ -22,7 +22,8 @@
 
 package com.liferay.portal.im;
 
-import java.io.IOException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import rath.msnm.MSNMessenger;
 import rath.msnm.SwitchboardSession;
@@ -51,12 +52,14 @@ public class MSNMessageAdapter extends MsnAdapter {
 				ss.cleanUp();
 			}
 		}
-		catch (IOException e) {
-			e.printStackTrace();
+		catch (Exception e) {
+			_log.warn(e);
 		}
 
 		_msn.removeMsnListener(this);
 	}
+
+	private static Log _log = LogFactory.getLog(MSNConnector.class);
 
 	private MSNMessenger _msn;
 	private String _to;

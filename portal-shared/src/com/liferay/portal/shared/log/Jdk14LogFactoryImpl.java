@@ -22,16 +22,22 @@
 
 package com.liferay.portal.shared.log;
 
+import java.util.logging.Logger;
+
 /**
- * <a href="LogFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="Jdk14LogFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public interface LogFactory {
+public class Jdk14LogFactoryImpl implements LogFactory {
 
-	public Log getLog(Class c);
+	public Log getLog(Class c) {
+		return getLog(c.getName());
+	}
 
-	public Log getLog(String name);
+	public Log getLog(String name) {
+		return new Jdk14LogImpl(Logger.getLogger(name));
+	}
 
 }

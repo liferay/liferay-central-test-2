@@ -20,18 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.shared.log;
+package com.liferay.portal.events;
+
+import com.liferay.portal.struts.ActionException;
+import com.liferay.portal.struts.SimpleAction;
 
 /**
- * <a href="LogFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="AppShutdownAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public interface LogFactory {
+public class AppShutdownAction extends SimpleAction {
 
-	public Log getLog(Class c);
-
-	public Log getLog(String name);
+	public void run(String[] ids) throws ActionException {
+	}
 
 }

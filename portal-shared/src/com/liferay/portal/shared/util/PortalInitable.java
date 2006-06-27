@@ -20,21 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.log;
-
-import com.liferay.portal.shared.log.Log;
-import com.liferay.portal.shared.log.LogFactory;
+package com.liferay.portal.shared.util;
 
 /**
- * <a href="LogFactoryImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalInitable.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class LogFactoryImpl implements LogFactory {
+public interface PortalInitable {
 
-	public Log getLog(Class c) {
-		return new LogImpl(org.apache.commons.logging.LogFactory.getLog(c));
-	}
+	public void portalInit();
 
 }

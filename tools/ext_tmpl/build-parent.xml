@@ -32,7 +32,7 @@
 			</or>
 			<then>
 				<delete includeEmptyDirs="true" failonerror="false">
-					<fileset dir="${app.server.deploy.dir}" includes="1*.war/**" />
+					<fileset dir="${app.server.deploy.dir}" includes="sample-*.war/**" />
 				</delete>
 
 				<if>
@@ -321,21 +321,6 @@
 					</copy>
 				</then>
 			</elseif>
-		</if>
-
-		<if>
-			<equals arg1="${app.server.type}" arg2="tomcat" />
-			<then>
-				<unjar src="lib/log4j.jar" dest="${app.server.dir}/common/classes">
-					<patternset>
-						<include name="org/apache/log4j/xml/log4j.dtd" />
-					</patternset>
-				</unjar>
-				<move file="${app.server.dir}/common/classes/org/apache/log4j/xml/log4j.dtd" tofile="${app.server.dir}/common/classes/META-INF/log4j.dtd" />
-				<delete dir="${app.server.dir}/common/classes/org" />
-
-				<copy file="servers/tomcat.log4j.properties" tofile="${app.server.dir}/common/classes/log4j.properties" />
-			</then>
 		</if>
 
 		<delete>

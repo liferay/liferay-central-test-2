@@ -22,15 +22,6 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.im.AIMConnector;
-import com.liferay.portal.im.ICQConnector;
-import com.liferay.portal.im.MSNConnector;
-import com.liferay.portal.im.YMConnector;
-import com.liferay.portal.jcr.JCRFactoryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="ShutdownHook.java.html"><b><i>View Source</i></b></a>
  *
@@ -40,58 +31,6 @@ import org.apache.commons.logging.LogFactory;
 public class ShutdownHook implements Runnable {
 
 	public void run() {
-
-		// Disconnect AIM
-
-		try {
-			_log.debug("Shutting down AIM");
-
-			AIMConnector.disconnect();
-		}
-		catch (Exception e) {
-		}
-
-		// Disconnect ICQ
-
-		try {
-			_log.debug("Shutting down ICQ");
-
-			ICQConnector.disconnect();
-		}
-		catch (Exception e) {
-		}
-
-		// Disconnect MSN
-
-		try {
-			_log.debug("Shutting down MSN");
-
-			MSNConnector.disconnect();
-		}
-		catch (Exception e) {
-		}
-
-		// Disconnect YM
-
-		try {
-			_log.debug("Shutting down YM");
-
-			YMConnector.disconnect();
-		}
-		catch (Exception e) {
-		}
-
-		// Shutdown JCR
-
-		try {
-			_log.debug("Shutting down JCR");
-
-			JCRFactoryUtil.shutdown();
-		}
-		catch (Exception e) {
-		}
 	}
-
-	private static Log _log = LogFactory.getLog(ShutdownHook.class);
 
 }

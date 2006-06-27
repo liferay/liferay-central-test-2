@@ -49,8 +49,6 @@ public class AutoLayoutTemplateDeployer
 			destDir = OmniadminUtil.getAutoDeployDestDir();
 			appServerType = ServerDetector.getServerId();
 			unpackWar = OmniadminUtil.getAutoDeployUnpackWar();
-			jbossPrefix = OmniadminUtil.getAutoDeployJbossPrefix();
-			tomcatLibDir = OmniadminUtil.getAutoDeployTomcatLibDir();
 
 			List jars = new ArrayList();
 
