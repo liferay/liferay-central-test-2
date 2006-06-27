@@ -124,6 +124,10 @@ public class GroupFinder {
 		name = StringUtil.lowerCase(name);
 		description = StringUtil.lowerCase(description);
 
+		if (params == null) {
+			params = new HashMap();
+		}
+
 		String userId = (String)params.get("usersGroups");
 
 		Map params1 = params;
@@ -222,6 +226,10 @@ public class GroupFinder {
 
 		name = StringUtil.lowerCase(name);
 		description = StringUtil.lowerCase(description);
+
+		if (params == null) {
+			params = new HashMap();
+		}
 
 		String userId = (String)params.get("usersGroups");
 

@@ -18,8 +18,6 @@
 	insert into Users_Roles values ('liferay.com.${userId}', '4');
 #end
 
-COMMIT_TRANSACTION;
-
 #foreach($userId in [200..209])
 	#set($count = $userId - 199)
 	#set($groupId = $userId)
@@ -39,8 +37,6 @@ COMMIT_TRANSACTION;
 
 	insert into Users_Roles values ('liferay.com.${userId}', '4');
 #end
-
-COMMIT_TRANSACTION;
 
 #foreach($userId in [300..309])
 	#set($count = $userId - 299)
@@ -62,8 +58,6 @@ COMMIT_TRANSACTION;
 	insert into Users_Roles values ('liferay.com.${userId}', '4');
 #end
 
-COMMIT_TRANSACTION;
-
 #foreach($userId in [400..409])
 	#set($count = $userId - 399)
 	#set($groupId = $userId)
@@ -83,8 +77,6 @@ COMMIT_TRANSACTION;
 
 	insert into Users_Roles values ('liferay.com.${userId}', '4');
 #end
-
-COMMIT_TRANSACTION;
 
 #foreach($userId in [500..509])
 	#set($count = $userId - 499)
@@ -106,8 +98,6 @@ COMMIT_TRANSACTION;
 	insert into Users_Roles values ('liferay.com.${userId}', '4');
 #end
 
-COMMIT_TRANSACTION;
-
 #foreach($userId in [600..609])
 	#set($count = $userId - 599)
 	#set($groupId = $userId)
@@ -127,8 +117,6 @@ COMMIT_TRANSACTION;
 
 	insert into Users_Roles values ('liferay.com.${userId}', '4');
 #end
-
-COMMIT_TRANSACTION;
 
 #foreach($userId in [700..709])
 	#set($count = $userId - 699)
@@ -150,8 +138,6 @@ COMMIT_TRANSACTION;
 	insert into Users_Roles values ('liferay.com.${userId}', '4');
 #end
 
-COMMIT_TRANSACTION;
-
 #foreach($userId in [800..809])
 	#set($count = $userId - 799)
 	#set($groupId = $userId)
@@ -171,5 +157,3 @@ COMMIT_TRANSACTION;
 
 	insert into Users_Roles values ('liferay.com.${userId}', '4');
 #end
-
-COMMIT_TRANSACTION;

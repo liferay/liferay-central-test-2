@@ -1,7 +1,5 @@
 @include portal-tables.sql
 
-COMMIT_TRANSACTION;
-
 @include portal-data-common.sql
 
 @include portal-data-counter.sql
