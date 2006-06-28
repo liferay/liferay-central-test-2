@@ -190,7 +190,11 @@ public class DBBuilder {
 
 		sb.append("use lportal\n");
 		sb.append("\n");
-		sb.append(_readSQL("../sql/portal/portal-sybase.sql", _SYBASE[0], "\n"));
+		sb.append(FileUtil.read("../sql/portal/portal-sybase.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/indexes.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/sequences.sql"));
 
 		FileUtil.write(file, sb.toString());
 	}
@@ -416,7 +420,15 @@ public class DBBuilder {
 
 		String sybase = _buildTemplate(fileName, _SYBASE, "sybase");
 
-		//sybase = _rewordSybase(sybase);
+		//sybase = StringUtil.replace(sybase, ");\n\n", ");\n\ngo\n\n");
+		sybase = StringUtil.replace(sybase, ");\n", ")\ngo\n");
+
+		sybase = StringUtil.replace(
+			sybase,
+			new String[] {"\\\\", "\\'", "\\\"", "\\n", "\\r"},
+			new String[] {"\\", "''", "\"", "\n", "\r"});
+
+		//sybase = StringUtil.replace(sybase, "\\'", "''");
 
 		FileUtil.write(
 			"../sql/" + fileName + "/" + fileName + "-sybase.sql", sybase);
@@ -957,7 +969,7 @@ public class DBBuilder {
 	private static String[] _SYBASE = {
 		"--", "1", "0",
 		"'19700101'", "getdate()",
-		" bit", " datetime", " float", " int", " varchar(1000)", " text",
+		" int", " datetime", " float", " int", " varchar(1000)", " text",
 		" varchar", "  identity(1,1)", "go"
 	};
 
