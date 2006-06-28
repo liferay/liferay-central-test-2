@@ -22,12 +22,13 @@
 
 package com.liferay.util.lucene;
 
-import com.liferay.util.Time;
 
 import java.io.IOException;
 import java.io.Serializable;
 
 import org.apache.lucene.document.Document;
+
+import com.liferay.util.Time;
 
 /**
  * <a href="Hits.java.html"><b><i>View Source</i></b></a>
@@ -44,23 +45,15 @@ public class Hits implements Serializable {
 	public void recordHits(org.apache.lucene.search.Hits hits)
 		throws IOException {
 
+		_hits = hits;
 		_length = hits.length();
 		_docs = new Document[_length];
 		_scores = new float[_length];
-
-		for (int i = 0; i < _length; i++) {
-			_docs[i] = hits.doc(i);
-			_scores[i] = hits.score(i);
-		}
-
-		_searchTime =
-			(float)(System.currentTimeMillis() - _start) / Time.SECOND;
 	}
 
 	public long getStart() {
 		return _start;
 	}
-
 	public void setStart(long start) {
 		_start = start;
 	}
@@ -108,10 +101,26 @@ public class Hits implements Serializable {
 	}
 
 	public Document doc(int n) {
+		try {
+			if ((_docs[n] == null) && (_hits != null)) {
+				_docs[n] = _hits.doc(n);
+			}
+		}
+		catch(IOException ioe) {
+		}
+
 		return _docs[n];
 	}
 
 	public float score(int n) {
+		try {
+			if ((_scores[n] == 0) && (_hits != null)) {
+				_scores[n] = _hits.score(n);
+			}
+		}
+		catch (IOException ioe) {
+		}
+
 		return _scores[n];
 	}
 
@@ -119,8 +128,7 @@ public class Hits implements Serializable {
 		Hits subset = new Hits();
 
 		if ((begin > - 1) && (begin <= end)) {
-			subset.setStart(getStart());
-			subset.setSearchTime(getSearchTime());
+			subset.setStart(getStart());			
 
 			Document[] subsetDocs = new Document[getLength()];
 			float[] subsetScores = new float[getLength()];
@@ -136,11 +144,17 @@ public class Hits implements Serializable {
 
 			subset.setDocs(subsetDocs);
 			subset.setScores(subsetScores);
+
+			_searchTime =
+				(float)(System.currentTimeMillis() - _start) / Time.SECOND;
+
+			subset.setSearchTime(getSearchTime());
 		}
 
 		return subset;
 	}
 
+	private org.apache.lucene.search.Hits _hits;
 	private long _start;
 	private float _searchTime;
 	private Document[] _docs;
