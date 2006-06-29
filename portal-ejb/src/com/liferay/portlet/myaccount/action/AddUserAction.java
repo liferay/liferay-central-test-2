@@ -30,6 +30,7 @@ import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.UserEmailAddressException;
+import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.captcha.CaptchaException;
@@ -88,6 +89,7 @@ public class AddUserAction extends PortletAction {
 				e instanceof RequiredUserException ||
 				e instanceof ReservedUserEmailAddressException ||
 				e instanceof UserEmailAddressException ||
+				e instanceof UserIdException || 
 				e instanceof UserPasswordException ||
 				e instanceof UserSmsException) {
 
