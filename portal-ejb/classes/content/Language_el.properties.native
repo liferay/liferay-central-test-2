@@ -1571,6 +1571,7 @@ reply-as-anonymous=Ανώνυμη Απάντηση
 reply-related-settings=Ρυθμίσεις Σχετικές με την Απάντηση
 reply-to-address=Διεύθυνση Απάντησης
 reply=Απάντηση
+replying-to=Απάντηση σε:
 repositories-require-at-least-one-read-role=Οι χώροι φύλαξης απαιτούν τουλάχιστον ένα ρόλο ανάγνωσης.
 repositories-require-at-least-one-write-role=Οι χώροι φύλαξης απαιτούν τουλάχιστον ένα ρόλο καταχώρησης.
 repositories=χώροι φύλαξης

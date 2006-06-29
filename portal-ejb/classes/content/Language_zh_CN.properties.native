@@ -1571,6 +1571,7 @@ reply-as-anonymous=以匿名回覆
 reply-related-settings=回覆有关设定
 reply-to-address=回覆到地址
 reply=回覆
+replying-to=回复对:
 repositories-require-at-least-one-read-role=贮藏库要求至少一个读取的角色。
 repositories-require-at-least-one-write-role=贮藏库要求至少一写入的角色。
 repositories=贮藏库

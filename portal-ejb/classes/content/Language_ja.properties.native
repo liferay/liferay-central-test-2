@@ -1570,6 +1570,7 @@ reply-as-anonymous=匿名ように答えなさい
 reply-related-settings=応答は設定を関連付けた
 reply-to-address=住所答えへ
 reply=応答
+replying-to=に応答:
 repositories-require-at-least-one-read-role=貯蔵場所は少なくとも1 つの読まれた役割を要求する。
 repositories-require-at-least-one-write-role=貯蔵場所は少なくとも1 つを書く役割を要求する。
 repositories=貯蔵場所

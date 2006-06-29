@@ -1573,6 +1573,7 @@ reply-as-anonymous=Resposta como anonymous
 reply-related-settings=Ajustes Relacionados Da Resposta
 reply-to-address=Respond- Ao Endereço
 reply=Resposta
+replying-to=Responder a:
 repositories-require-at-least-one-read-role=Os repositórios requerem ao menos um papel lido.
 repositories-require-at-least-one-write-role=Os repositórios requerem ao menos um escrevem o papel.
 repositories=Repositórios
