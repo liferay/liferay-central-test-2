@@ -73,7 +73,7 @@ select {
 
 ul {
 	list-style-type: none;
-	list-style-image: url(<%= themeDisplay.getPathThemeImage() %>/custom/bullet.gif);
+	list-style-image: url($themeDisplay.getPathThemeImage()/custom/bullet.gif);
 	margin: 5px 0 10px 15px;
 	padding: 0;
 }

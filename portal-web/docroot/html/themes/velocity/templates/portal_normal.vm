@@ -35,9 +35,9 @@
 
 $taglibLiferay.include("/html/common/themes/top_warning.jsp")
 
-#parse("$fullTemplatesPath/top.vm")<br>
+#parse("$fullTemplatesPath/top.vm")
 
-#parse("$fullTemplatesPath/navigation.vm")<br>
+#parse("$fullTemplatesPath/navigation.vm")
 
 #if ($tilesSelectable.equals("true"))
 	$taglibLiferay.include("/html$tilesContent")
@@ -45,43 +45,17 @@ $taglibLiferay.include("/html/common/themes/top_warning.jsp")
 	$portletDisplay.recycle()
 	$portletDisplay.setTitle($tilesTitle)
 
-	#if ($tilesSubNav.equals(""))
-		#parse("$fullTemplatesPath/portlet_top.vm")
-			<br>
+	#parse("$fullTemplatesPath/portlet_top.vm")
 
-			<table border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tr>
-				<td align="center">
-					$taglibLiferay.include("/html$tilesContent")
-				</td>
-			</tr>
-			</table>
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td align="center">
+			$taglibLiferay.include("/html$tilesContent")
+		</td>
+	</tr>
+	</table>
 
-			<br>
-		#parse("$fullTemplatesPath/portlet_bottom.vm")
-	#else
-		#parse("$fullTemplatesPath/portlet_top.vm")
-			<table border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tr class="beta">
-				<td>
-					$taglibLiferay.include("/html$tilesSubNav")
-				</td>
-			</tr>
-			</table>
-
-			<br>
-
-			<table border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tr>
-				<td align="center">
-					$taglibLiferay.include("/html$tilesContent")
-				</td>
-			</tr>
-			</table>
-
-			<br>
-		#parse("$fullTemplatesPath/portlet_bottom.vm")
-	#end
+	#parse("$fullTemplatesPath/portlet_bottom.vm")
 #end
 
 #parse("$fullTemplatesPath/bottom.vm")
