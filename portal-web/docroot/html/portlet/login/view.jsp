@@ -60,27 +60,29 @@
 			<input class="form-text" name="<portlet:namespace />password" style="width: 120px;" type="password" value="<%= password %>">
 		</td>
 	</tr>
-	<tr>
-		<td>
-			<span style="font-size: xx-small;">
-			<%= LanguageUtil.get(pageContext, "remember-me") %>
-			</span>
-		</td>
-		<td style="padding-left: 10px;"></td>
-		<td>
-			<input <%= rememberMe ? "checked" : "" %> type="checkbox"
-				onClick="
-					<c:if test="<%= company.isAutoLogin() && !request.isSecure() %>">
+
+	<c:if test="<%= company.isAutoLogin() && !request.isSecure() %>">
+		<tr>
+			<td>
+				<span style="font-size: xx-small;">
+				<%= LanguageUtil.get(pageContext, "remember-me") %>
+				</span>
+			</td>
+			<td style="padding-left: 10px;"></td>
+			<td>
+				<input <%= rememberMe ? "checked" : "" %> type="checkbox"
+					onClick="
 						if (this.checked) {
 							document.<portlet:namespace />fm.<portlet:namespace />rememberMe.value = 'on';
 						}
 						else {
 							document.<portlet:namespace />fm.<portlet:namespace />rememberMe.value = 'off';
-						}
-					</c:if>"
-			>
-		</td>
-	</tr>
+						}"
+				>
+			</td>
+		</tr>
+	</c:if>
+
 	</table>
 
 	<br>
