@@ -45,7 +45,7 @@
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByGroupId">
 		<![CDATA[
 			SELECT
-				COUNT(*) AS COUNT_VALUE
+				COUNT(DISTINCT MBThread.threadId) AS COUNT_VALUE
 			FROM
 				MBThread
 			INNER JOIN
@@ -63,7 +63,7 @@
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByGroupId">
 		<![CDATA[
 			SELECT
-				DISTINCT {MBThread.*}, MBTopic.lastPostDate
+				DISTINCT {MBThread.*}
 			FROM
 				MBThread
 			INNER JOIN
@@ -77,7 +77,7 @@
 					(MBCategory.categoryId = MBTopic.categoryId) AND
 					(MBCategory.groupId = ?)
 			ORDER BY
-				MBTopic.lastPostDate DESC
+				MBThread.lastPostDate DESC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBTopicFinder.countByCategoryIds">
