@@ -353,7 +353,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 </c:if>
 
 <%
-boolean showAvailability = GetterUtil.getBoolean(CompanyPropsUtil.get(company.getCompanyId(), PropsUtil.SHOPPING_ITEM_SHOW_AVAILABILITY));
+boolean showAvailability = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.SHOPPING_ITEM_SHOW_AVAILABILITY);
 
 StringBuffer itemIds = new StringBuffer();
 

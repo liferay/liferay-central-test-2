@@ -28,15 +28,18 @@ import com.liferay.mail.model.CyrusVirtual;
 import com.liferay.mail.service.persistence.CyrusUserUtil;
 import com.liferay.mail.service.persistence.CyrusVirtualUtil;
 import com.liferay.portal.shared.util.ProcessUtil;
+import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
 import java.io.File;
-import java.io.IOException;
 
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="CyrusHook.java.html"><b><i>View Source</i></b></a>
@@ -72,8 +75,8 @@ public class CyrusHook implements Hook {
 				}
 			}
 		}
-		catch (IOException ioe) {
-			ioe.printStackTrace();
+		catch (Exception e) {
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
 
@@ -109,7 +112,7 @@ public class CyrusHook implements Hook {
 			ProcessUtil.close(p);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
 
@@ -134,8 +137,8 @@ public class CyrusHook implements Hook {
 				FileUtil.write(vacation, emailAddress + "\n" + vacationMessage);
 			}
 		}
-		catch (IOException ioe) {
-			ioe.printStackTrace();
+		catch (Exception e) {
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
 
@@ -144,7 +147,7 @@ public class CyrusHook implements Hook {
 			CyrusVirtualUtil.removeByUserId(userId);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
 
@@ -205,7 +208,7 @@ public class CyrusHook implements Hook {
 			}
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
 
@@ -237,8 +240,8 @@ public class CyrusHook implements Hook {
 		try {
 			FileUtil.write(file, sb.toString());
 		}
-		catch (IOException ioe) {
-			ioe.printStackTrace();
+		catch (Exception e) {
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
 
@@ -251,7 +254,7 @@ public class CyrusHook implements Hook {
 			CyrusVirtualUtil.update(virtual);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
 
@@ -265,7 +268,7 @@ public class CyrusHook implements Hook {
 			user = new CyrusUser(userId, password);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 
 		try {
@@ -274,8 +277,10 @@ public class CyrusHook implements Hook {
 			CyrusUserUtil.update(user);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(CyrusHook.class);
 
 }

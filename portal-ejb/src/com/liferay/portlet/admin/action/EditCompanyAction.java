@@ -64,9 +64,6 @@ public class EditCompanyAction extends PortletAction {
 			else if (cmd.equals("display")) {
 				updateDisplay(req);
 			}
-			else if (cmd.equals("security")) {
-				updateSecurity(req);
-			}
 
 			sendRedirect(req, res);
 		}
@@ -123,17 +120,6 @@ public class EditCompanyAction extends PortletAction {
 
 		CompanyServiceUtil.updateDisplay(
 			companyId, languageId, timeZoneId, resolution);
-	}
-
-	protected void updateSecurity(ActionRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
-
-		String authType = ParamUtil.getString(req, "authType");
-		boolean autoLogin = ParamUtil.getBoolean(req, "autoLogin");
-		boolean strangers = ParamUtil.getBoolean(req, "strangers");
-
-		CompanyServiceUtil.updateSecurity(
-			companyId, authType, autoLogin, strangers);
 	}
 
 	private static Log _log = LogFactory.getLog(EditCompanyAction.class);

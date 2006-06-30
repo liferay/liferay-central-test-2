@@ -35,8 +35,8 @@ import com.liferay.portal.shared.deploy.HotDeployUtil;
 import com.liferay.portal.shared.util.PortalInitableUtil;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.GetterUtil;
 
 import java.io.File;
@@ -89,9 +89,12 @@ public class GlobalStartupAction extends SimpleAction {
 		try {
 			_log.debug("Registering auto deploy directories");
 
-			File deployDir = new File(OmniadminUtil.getAutoDeployDeployDir());
-			File destDir = new File(OmniadminUtil.getAutoDeployDestDir());
-			long interval = OmniadminUtil.getAutoDeployInterval();
+			File deployDir = new File(
+				PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR));
+			File destDir = new File(
+				PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEST_DIR));
+			long interval = PrefsPropsUtil.getLong(
+				PropsUtil.AUTO_DEPLOY_INTERVAL);
 
 			List autoDeployListeners = new ArrayList();
 

@@ -77,10 +77,10 @@ import com.liferay.portal.service.spring.UserIdMapperLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalService;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.UserIdGenerator;
 import com.liferay.portal.util.UserIdValidator;
-import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalServiceUtil;
 import com.liferay.portlet.enterpriseadmin.search.UserSearchTerms;
 import com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalServiceUtil;
@@ -314,7 +314,8 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		List groups = new ArrayList();
 
-		String[] defaultGroupNames = AdminUtil.getDefaultGroupNames(companyId);
+		String[] defaultGroupNames = PrefsPropsUtil.getStringArray(
+			companyId, PropsUtil.ADMIN_DEFAULT_GROUP_NAMES);
 
 		for (int i = 0; i < defaultGroupNames.length; i++) {
 			try {
@@ -333,7 +334,8 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		List roles = new ArrayList();
 
-		String[] defaultRoleNames = AdminUtil.getDefaultRoleNames(companyId);
+		String[] defaultRoleNames = PrefsPropsUtil.getStringArray(
+			companyId, PropsUtil.ADMIN_DEFAULT_ROLE_NAMES);
 
 		for (int i = 0; i < defaultRoleNames.length; i++) {
 			try {
@@ -671,7 +673,9 @@ public class UserLocalServiceImpl implements UserLocalService {
 			String remoteHost, String userAgent)
 		throws PortalException, SystemException {
 
-		if (!AdminUtil.getEmailPasswordSentEnabled(companyId)) {
+		if (!PrefsPropsUtil.getBoolean(
+				companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_ENABLED)) {
+
 			return;
 		}
 
@@ -699,14 +703,18 @@ public class UserLocalServiceImpl implements UserLocalService {
 		}
 
 		try {
-			String fromName = AdminUtil.getEmailFromName(companyId);
-			String fromAddress = AdminUtil.getEmailFromAddress(companyId);
+			String fromName = PrefsPropsUtil.getString(
+				companyId, PropsUtil.ADMIN_EMAIL_FROM_NAME);
+			String fromAddress = PrefsPropsUtil.getString(
+				companyId, PropsUtil.ADMIN_EMAIL_FROM_ADDRESS);
 
 			String toName = user.getFullName();
 			String toAddress = user.getEmailAddress();
 
-			String subject = AdminUtil.getEmailPasswordSentSubject(companyId);
-			String body = AdminUtil.getEmailPasswordSentBody(companyId);
+			String subject = PrefsPropsUtil.getString(
+				companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT);
+			String body = PrefsPropsUtil.getString(
+				companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_BODY);
 
 			subject = StringUtil.replace(
 				subject,
@@ -1176,7 +1184,10 @@ public class UserLocalServiceImpl implements UserLocalService {
 	protected void sendEmail(User user, String password)
 		throws PortalException, SystemException {
 
-		if (!AdminUtil.getEmailUserAddedEnabled(user.getCompanyId())) {
+		if (!PrefsPropsUtil.getBoolean(
+				user.getCompanyId(),
+				PropsUtil.ADMIN_EMAIL_USER_ADDED_ENABLED)) {
+
 			return;
 		}
 
@@ -1185,14 +1196,18 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 			Company company = CompanyUtil.findByPrimaryKey(companyId);
 
-			String fromName = AdminUtil.getEmailFromName(companyId);
-			String fromAddress = AdminUtil.getEmailFromAddress(companyId);
+			String fromName = PrefsPropsUtil.getString(
+				companyId, PropsUtil.ADMIN_EMAIL_FROM_NAME);
+			String fromAddress = PrefsPropsUtil.getString(
+				companyId, PropsUtil.ADMIN_EMAIL_FROM_ADDRESS);
 
 			String toName = user.getFullName();
 			String toAddress = user.getEmailAddress();
 
-			String subject = AdminUtil.getEmailUserAddedSubject(companyId);
-			String body = AdminUtil.getEmailUserAddedBody(companyId);
+			String subject = PrefsPropsUtil.getString(
+				companyId, PropsUtil.ADMIN_EMAIL_USER_ADDED_SUBJECT);
+			String body = PrefsPropsUtil.getString(
+				companyId, PropsUtil.ADMIN_EMAIL_USER_ADDED_BODY);
 
 			subject = StringUtil.replace(
 				subject,
@@ -1273,8 +1288,8 @@ public class UserLocalServiceImpl implements UserLocalService {
 			catch (NoSuchUserException nsue) {
 			}
 
-			String[] reservedEmailAddresses =
-				AdminUtil.getReservedEmailAddresses(user.getCompanyId());
+			String[] reservedEmailAddresses = PrefsPropsUtil.getStringArray(
+				user.getCompanyId(), PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES);
 
 			for (int i = 0; i < reservedEmailAddresses.length; i++) {
 				if (emailAddress.equalsIgnoreCase(reservedEmailAddresses[i])) {
@@ -1344,8 +1359,8 @@ public class UserLocalServiceImpl implements UserLocalService {
 			catch (NoSuchUserException nsue) {
 			}
 
-			String[] reservedUserIds =
-				AdminUtil.getReservedUserIds(companyId);
+			String[] reservedUserIds = PrefsPropsUtil.getStringArray(
+				companyId, PropsUtil.ADMIN_RESERVED_USER_IDS);
 
 			for (int i = 0; i < reservedUserIds.length; i++) {
 				if (userId.equalsIgnoreCase(reservedUserIds[i])) {
@@ -1381,8 +1396,8 @@ public class UserLocalServiceImpl implements UserLocalService {
 			catch (NoSuchUserException nsue) {
 			}
 
-			String[] reservedEmailAddresses =
-				AdminUtil.getReservedEmailAddresses(companyId);
+			String[] reservedEmailAddresses = PrefsPropsUtil.getStringArray(
+				companyId, PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES);
 
 			for (int i = 0; i < reservedEmailAddresses.length; i++) {
 				if (emailAddress.equalsIgnoreCase(reservedEmailAddresses[i])) {

@@ -23,9 +23,9 @@
 package com.liferay.portal.struts;
 
 import com.liferay.portal.shared.util.StackTraceUtil;
-import com.liferay.portal.util.CompanyPropsUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.BrowserSniffer;
 
@@ -193,11 +193,19 @@ public class StrutsUtil {
 	}
 
 	private static ServletContext _getPortalCtx(
-			ServletContext ctx, HttpServletRequest req) {
-        String companyId = PortalUtil.getCompanyId(req);
+		ServletContext ctx, HttpServletRequest req) {
 
-		ServletContext portalCtx = ctx.getContext(
-			CompanyPropsUtil.get(companyId, PropsUtil.PORTAL_CTX));
+		String companyId = PortalUtil.getCompanyId(req);
+
+		ServletContext portalCtx = null;
+
+		try {
+			portalCtx = ctx.getContext(
+				PrefsPropsUtil.getString(companyId, PropsUtil.PORTAL_CTX));
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
 
 		if (portalCtx == null) {
 			portalCtx = ctx;

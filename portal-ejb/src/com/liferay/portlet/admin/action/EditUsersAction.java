@@ -23,15 +23,28 @@
 package com.liferay.portlet.admin.action;
 
 import com.liferay.portal.model.Role;
+import com.liferay.portal.security.auth.LDAPAuth;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.spring.CompanyServiceUtil;
 import com.liferay.portal.service.spring.RoleLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.admin.util.AdminUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.InstancePool;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
+import java.util.Properties;
+
+import javax.naming.Context;
+import javax.naming.ldap.InitialLdapContext;
+import javax.naming.ldap.LdapContext;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -68,7 +81,7 @@ public class EditUsersAction extends PortletAction {
 			return;
 		}
 
-		PortletPreferences prefs = AdminUtil.getPreferences(companyId);
+		PortletPreferences prefs = PrefsPropsUtil.getPreferences(companyId);
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
@@ -78,15 +91,23 @@ public class EditUsersAction extends PortletAction {
 		else if (cmd.equals("updateEmails")) {
 			updateEmails(req, prefs);
 		}
+		else if (cmd.equals("updateLdap")) {
+			updateLdap(req);
+		}
 		else if (cmd.equals("updateMailHostNames")) {
 			updateMailHostNames(req, prefs);
 		}
 		else if (cmd.equals("updateReservedUsers")) {
 			updateReservedUsers(req, prefs);
 		}
+		else if (cmd.equals("updateSecurity")) {
+			updateSecurity(req);
+		}
 
 		if (SessionErrors.isEmpty(req)) {
-			prefs.store();
+			if (!cmd.equals("updateLdap") && !cmd.equals("updateSecurity")) {
+				prefs.store();
+			}
 
 			sendRedirect(req, res);
 		}
@@ -103,8 +124,8 @@ public class EditUsersAction extends PortletAction {
 			req, "defaultGroupNames");
 		String defaultRoleNames = ParamUtil.getString(req, "defaultRoleNames");
 
-		prefs.setValue("defaultGroupNames", defaultGroupNames);
-		prefs.setValue("defaultRoleNames", defaultRoleNames);
+		prefs.setValue(PropsUtil.ADMIN_DEFAULT_GROUP_NAMES, defaultGroupNames);
+		prefs.setValue(PropsUtil.ADMIN_DEFAULT_ROLE_NAMES, defaultRoleNames);
 	}
 
 	protected void updateEmails(
@@ -129,10 +150,13 @@ public class EditUsersAction extends PortletAction {
 			}
 			else {
 				prefs.setValue(
-					"email-user-added-enabled", emailUserAddedEnabled);
+					PropsUtil.ADMIN_EMAIL_USER_ADDED_ENABLED,
+					emailUserAddedEnabled);
 				prefs.setValue(
-					"email-user-added-subject", emailUserAddedSubject);
-				prefs.setValue("email-user-added-body", emailUserAddedBody);
+					PropsUtil.ADMIN_EMAIL_USER_ADDED_SUBJECT,
+					emailUserAddedSubject);
+				prefs.setValue(
+					PropsUtil.ADMIN_EMAIL_USER_ADDED_BODY, emailUserAddedBody);
 			}
 		}
 		else if (tabs3.equals("password-sent-email")) {
@@ -151,11 +175,14 @@ public class EditUsersAction extends PortletAction {
 			}
 			else {
 				prefs.setValue(
-					"email-password-sent-enabled", emailPasswordSentEnabled);
+					PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_ENABLED,
+					emailPasswordSentEnabled);
 				prefs.setValue(
-					"email-password-sent-subject", emailPasswordSentSubject);
+					PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT,
+					emailPasswordSentSubject);
 				prefs.setValue(
-					"email-password-sent-body", emailPasswordSentBody);
+					PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_BODY,
+					emailPasswordSentBody);
 			}
 		}
 		else {
@@ -170,10 +197,67 @@ public class EditUsersAction extends PortletAction {
 				SessionErrors.add(req, "emailFromAddress");
 			}
 			else {
-				prefs.setValue("email-from-name", emailFromName);
-				prefs.setValue("email-from-address", emailFromAddress);
+				prefs.setValue(PropsUtil.ADMIN_EMAIL_FROM_NAME, emailFromName);
+				prefs.setValue(
+					PropsUtil.ADMIN_EMAIL_FROM_ADDRESS, emailFromAddress);
 			}
 		}
+	}
+
+	protected void updateLdap(ActionRequest req) throws Exception {
+		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
+
+		boolean enabled = ParamUtil.getBoolean(req, "enabled");
+		String url = ParamUtil.getString(req, "url");
+		String principal = ParamUtil.getString(req, "principal");
+		String credentials = ParamUtil.getString(req, "credentials");
+		String searchFilter = ParamUtil.getString(req, "searchFilter");
+		String userMappings = ParamUtil.getString(req, "userMappings");
+
+		try {
+			if (enabled) {
+				Properties env = new Properties();
+
+				env.put(
+					Context.INITIAL_CONTEXT_FACTORY,
+					PrefsPropsUtil.getString(
+						PropsUtil.AUTH_IMPL_LDAP_FACTORY_INITIAL));
+				env.put(Context.PROVIDER_URL, url);
+				env.put(Context.SECURITY_PRINCIPAL, principal);
+				env.put(Context.SECURITY_CREDENTIALS, credentials);
+
+				if (_log.isDebugEnabled()) {
+					StringWriter sw = new StringWriter();
+
+					env.list(new PrintWriter(sw));
+
+					_log.debug(sw.getBuffer().toString());
+				}
+
+				LdapContext ctx = new InitialLdapContext(env, null);
+			}
+		}
+		catch (Exception e) {
+			SessionErrors.add(req, "ldapAuthentication");
+
+			return;
+		}
+
+		prefs.setValue(
+			PropsUtil.AUTH_IMPL_LDAP_ENABLED, Boolean.toString(enabled));
+		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_PROVIDER_URL, url);
+		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_SECURITY_PRINCIPAL, principal);
+		prefs.setValue(
+			PropsUtil.AUTH_IMPL_LDAP_SECURITY_CREDENTIALS, credentials);
+		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_SEARCH_FILTER, searchFilter);
+		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_USER_MAPPINGS, userMappings);
+
+		prefs.store();
+
+		LDAPAuth ldapAuth = (LDAPAuth)InstancePool.get(
+			LDAPAuth.class.getName());
+
+		ldapAuth.setEnabled(enabled);
 	}
 
 	protected void updateMailHostNames(
@@ -182,7 +266,7 @@ public class EditUsersAction extends PortletAction {
 
 		String mailHostNames = ParamUtil.getString(req, "mailHostNames");
 
-		prefs.setValue("mailHostNames", mailHostNames);
+		prefs.setValue(PropsUtil.ADMIN_MAIL_HOST_NAMES, mailHostNames);
 	}
 
 	protected void updateReservedUsers(
@@ -193,8 +277,20 @@ public class EditUsersAction extends PortletAction {
 		String reservedEmailAddresses = ParamUtil.getString(
 			req, "reservedEmailAddresses");
 
-		prefs.setValue("reservedUserIds", reservedUserIds);
-		prefs.setValue("reservedEmailAddresses", reservedEmailAddresses);
+		prefs.setValue(PropsUtil.ADMIN_RESERVED_USER_IDS, reservedUserIds);
+		prefs.setValue(
+			PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES, reservedEmailAddresses);
+	}
+
+	protected void updateSecurity(ActionRequest req) throws Exception {
+		String companyId = PortalUtil.getCompanyId(req);
+
+		String authType = ParamUtil.getString(req, "authType");
+		boolean autoLogin = ParamUtil.getBoolean(req, "autoLogin");
+		boolean strangers = ParamUtil.getBoolean(req, "strangers");
+
+		CompanyServiceUtil.updateSecurity(
+			companyId, authType, autoLogin, strangers);
 	}
 
 	private static Log _log = LogFactory.getLog(EditUsersAction.class);

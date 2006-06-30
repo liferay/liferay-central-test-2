@@ -22,20 +22,11 @@
 
 package com.liferay.portlet.admin.util;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
-import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.spring.RoleLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringPool;
-
-import javax.portlet.PortletPreferences;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -47,73 +38,6 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class OmniadminUtil {
-
-	public static String getAutoDeployDeployDir()
-		throws PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences();
-
-		String deployDir = PropsUtil.get(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
-
-		return prefs.getValue(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR, deployDir);
-	}
-
-	public static String getAutoDeployDestDir()
-		throws PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences();
-
-		String destDir = PropsUtil.get(PropsUtil.AUTO_DEPLOY_DEST_DIR);
-
-		return prefs.getValue(PropsUtil.AUTO_DEPLOY_DEST_DIR, destDir);
-	}
-
-	public static long getAutoDeployInterval()
-		throws PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences();
-
-		String interval = PropsUtil.get(PropsUtil.AUTO_DEPLOY_INTERVAL);
-
-		return GetterUtil.getLong(
-			prefs.getValue(PropsUtil.AUTO_DEPLOY_INTERVAL, interval));
-	}
-
-	public static String getAutoDeployTomcatLibDir()
-		throws PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences();
-
-		String tomcatLibDir = PropsUtil.get(
-			PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR);
-
-		return prefs.getValue(
-			PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR, tomcatLibDir);
-	}
-
-	public static boolean getAutoDeployUnpackWar()
-		throws PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences();
-
-		String unpackWar = PropsUtil.get(PropsUtil.AUTO_DEPLOY_UNPACK_WAR);
-
-		return GetterUtil.getBoolean(
-			prefs.getValue(PropsUtil.AUTO_DEPLOY_UNPACK_WAR, unpackWar));
-	}
-
-	public static PortletPreferences getPreferences()
-		throws PortalException, SystemException {
-
-		String companyId = PortletKeys.LIFERAY_PORTAL;
-
-		PortletPreferencesPK prefsPK = new PortletPreferencesPK(
-			PortletKeys.LIFERAY_PORTAL, PortletKeys.PREFS_LAYOUT_ID_SHARED,
-			PortletKeys.PREFS_OWNER_ID_COMPANY + StringPool.PERIOD + companyId);
-
-		return PortletPreferencesLocalServiceUtil.getPreferences(
-			companyId, prefsPK);
-	}
 
 	public static boolean isOmniadmin(String userId) {
 		if (userId == null) {

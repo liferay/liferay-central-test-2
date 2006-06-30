@@ -691,23 +691,6 @@
 			<finder-column name="ownerId" />
 		</finder>
 	</entity>
-	<entity name="Properties" local-service="true" remote-service="false">
-
-		<!-- PK fields -->
-
-		<column name="companyId" type="String" primary="true" />
-		<column name="type" type="String" primary="true" />
-
-		<!-- Other fields -->
-
-		<column name="properties" type="String" />
-
-		<!-- Finder methods -->
-
-		<finder name="CompanyId" return-type="Collection">
-			<finder-column name="companyId" />
-		</finder>
-	</entity>
 	<entity name="Region" local-service="false" remote-service="true">
 
 		<!-- PK fields -->

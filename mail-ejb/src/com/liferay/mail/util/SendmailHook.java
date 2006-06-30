@@ -23,6 +23,7 @@
 package com.liferay.mail.util;
 
 import com.liferay.portal.shared.util.ProcessUtil;
+import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
@@ -30,9 +31,11 @@ import com.liferay.util.StringUtil;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SendmailHook.java.html"><b><i>View Source</i></b></a>
@@ -64,8 +67,8 @@ public class SendmailHook implements Hook {
 				}
 			}
 		}
-		catch (IOException ioe) {
-			ioe.printStackTrace();
+		catch (Exception e) {
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
 
@@ -90,7 +93,7 @@ public class SendmailHook implements Hook {
 			ProcessUtil.close(p);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 
 		updatePassword(userId, password);
@@ -125,7 +128,7 @@ public class SendmailHook implements Hook {
 			ProcessUtil.close(p);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
 
@@ -160,8 +163,8 @@ public class SendmailHook implements Hook {
 		try {
 			FileUtil.write(file, sb.toString());
 		}
-		catch (IOException ioe) {
-			ioe.printStackTrace();
+		catch (Exception e) {
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
 
@@ -201,7 +204,7 @@ public class SendmailHook implements Hook {
 			ProcessUtil.close(p);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
 
@@ -230,8 +233,10 @@ public class SendmailHook implements Hook {
 			ProcessUtil.close(p);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(SendmailHook.class);
 
 }

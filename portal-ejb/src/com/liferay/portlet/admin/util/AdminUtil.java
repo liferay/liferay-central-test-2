@@ -25,29 +25,17 @@ package com.liferay.portlet.admin.util;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Contact;
-import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
-import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.service.spring.UserServiceUtil;
-import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
-import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
-
-import java.io.IOException;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import javax.portlet.ActionRequest;
-import javax.portlet.PortletPreferences;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -61,185 +49,6 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class AdminUtil {
-
-	public static String getEmailFromAddress(String companyId)
-		throws PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences(companyId);
-
-		String emailFromAddress = PropsUtil.get(
-			PropsUtil.ADMIN_EMAIL_FROM_ADDRESS);
-
-		return prefs.getValue("email-from-address", emailFromAddress);
-	}
-
-	public static String getEmailFromName(String companyId)
-		throws PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences(companyId);
-
-		String emailFromName = PropsUtil.get(PropsUtil.ADMIN_EMAIL_FROM_NAME);
-
-		return prefs.getValue("email-from-name", emailFromName);
-	}
-
-	public static boolean getEmailPasswordSentEnabled(String companyId)
-		throws PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences(companyId);
-
-		String emailPasswordSentEnabled = prefs.getValue(
-			"email-password-sent-enabled", StringPool.BLANK);
-
-		if (Validator.isNotNull(emailPasswordSentEnabled)) {
-			return GetterUtil.getBoolean(emailPasswordSentEnabled);
-		}
-		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_ENABLED));
-		}
-	}
-
-	public static String getEmailPasswordSentBody(String companyId)
-		throws IOException, PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences(companyId);
-
-		String emailPasswordSentBody = prefs.getValue(
-			"email-password-sent-body", StringPool.BLANK);
-
-		if (Validator.isNotNull(emailPasswordSentBody)) {
-			return emailPasswordSentBody;
-		}
-		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_BODY));
-		}
-	}
-
-	public static String getEmailPasswordSentSubject(String companyId)
-		throws IOException, PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences(companyId);
-
-		String emailPasswordSentSubject = prefs.getValue(
-			"email-password-sent-subject", StringPool.BLANK);
-
-		if (Validator.isNotNull(emailPasswordSentSubject)) {
-			return emailPasswordSentSubject;
-		}
-		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT));
-		}
-	}
-
-	public static boolean getEmailUserAddedEnabled(String companyId)
-		throws PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences(companyId);
-
-		String emailUserAddedEnabled = prefs.getValue(
-			"email-user-added-enabled", StringPool.BLANK);
-
-		if (Validator.isNotNull(emailUserAddedEnabled)) {
-			return GetterUtil.getBoolean(emailUserAddedEnabled);
-		}
-		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.ADMIN_EMAIL_USER_ADDED_ENABLED));
-		}
-	}
-
-	public static String getEmailUserAddedBody(String companyId)
-		throws IOException, PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences(companyId);
-
-		String emailUserAddedBody = prefs.getValue(
-			"email-user-added-body", StringPool.BLANK);
-
-		if (Validator.isNotNull(emailUserAddedBody)) {
-			return emailUserAddedBody;
-		}
-		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.ADMIN_EMAIL_USER_ADDED_BODY));
-		}
-	}
-
-	public static String getEmailUserAddedSubject(String companyId)
-		throws IOException, PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences(companyId);
-
-		String emailUserAddedSubject = prefs.getValue(
-			"email-user-added-subject", StringPool.BLANK);
-
-		if (Validator.isNotNull(emailUserAddedSubject)) {
-			return emailUserAddedSubject;
-		}
-		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.ADMIN_EMAIL_USER_ADDED_SUBJECT));
-		}
-	}
-
-	public static String[] getDefaultGroupNames(String companyId)
-		throws PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences(companyId);
-
-		return StringUtil.split(prefs.getValue(
-			"defaultGroupNames", StringPool.BLANK), "\n");
-	}
-
-	public static String[] getDefaultRoleNames(String companyId)
-		throws PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences(companyId);
-
-		return StringUtil.split(prefs.getValue(
-			"defaultRoleNames", Role.POWER_USER + "\n" + Role.USER), "\n");
-	}
-
-	public static String[] getMailHostNames(String companyId)
-		throws PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences(companyId);
-
-		return StringUtil.split(prefs.getValue(
-			"mailHostNames", StringPool.BLANK), "\n");
-	}
-
-	public static PortletPreferences getPreferences(String companyId)
-		throws PortalException, SystemException {
-
-		PortletPreferencesPK prefsPK = new PortletPreferencesPK(
-			PortletKeys.LIFERAY_PORTAL, PortletKeys.PREFS_LAYOUT_ID_SHARED,
-			PortletKeys.PREFS_OWNER_ID_COMPANY + StringPool.PERIOD + companyId);
-
-		return PortletPreferencesLocalServiceUtil.getPreferences(
-			companyId, prefsPK);
-	}
-
-	public static String[] getReservedEmailAddresses(String companyId)
-		throws PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences(companyId);
-
-		return StringUtil.split(prefs.getValue(
-			"reservedEmailAddresses", StringPool.BLANK), "\n");
-	}
-
-	public static String[] getReservedUserIds(String companyId)
-		throws PortalException, SystemException {
-
-		PortletPreferences prefs = getPreferences(companyId);
-
-		return StringUtil.split(prefs.getValue(
-			"reservedUserIds", StringPool.BLANK), "\n");
-	}
 
 	public static String getUpdateUserPassword(
 		HttpServletRequest req, String userId) {

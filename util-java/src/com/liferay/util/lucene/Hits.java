@@ -22,13 +22,12 @@
 
 package com.liferay.util.lucene;
 
+import com.liferay.util.Time;
 
 import java.io.IOException;
 import java.io.Serializable;
 
 import org.apache.lucene.document.Document;
-
-import com.liferay.util.Time;
 
 /**
  * <a href="Hits.java.html"><b><i>View Source</i></b></a>
@@ -128,7 +127,7 @@ public class Hits implements Serializable {
 		Hits subset = new Hits();
 
 		if ((begin > - 1) && (begin <= end)) {
-			subset.setStart(getStart());			
+			subset.setStart(getStart());
 
 			Document[] subsetDocs = new Document[getLength()];
 			float[] subsetScores = new float[getLength()];

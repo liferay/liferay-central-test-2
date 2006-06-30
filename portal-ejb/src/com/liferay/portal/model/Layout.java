@@ -385,7 +385,7 @@ public class Layout extends LayoutModel {
 		}
 	}
 
-	public Theme getTheme() {
+	public Theme getTheme() throws PortalException, SystemException {
 		if (isInheritLookAndFeel()) {
 			return getLayoutSet().getTheme();
 		}
@@ -394,7 +394,9 @@ public class Layout extends LayoutModel {
 		}
 	}
 
-	public ColorScheme getColorScheme() {
+	public ColorScheme getColorScheme()
+		throws PortalException, SystemException {
+
 		if (isInheritLookAndFeel()) {
 			return getLayoutSet().getColorScheme();
 		}

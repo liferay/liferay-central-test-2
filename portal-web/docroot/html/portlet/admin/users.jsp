@@ -23,18 +23,159 @@
 %>
 
 <liferay-ui:tabs
-	names="live-sessions,default-groups-and-roles,reserved-users,mail-host-names,emails"
+	names="live-sessions,authentication,default-groups-and-roles,reserved-users,mail-host-names,emails"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
 />
 
 <c:choose>
+	<c:when test='<%= tabs2.equals("authentication") %>'>
+		<liferay-ui:tabs
+			names="general,ldap"
+			param="tabs3"
+			url="<%= portletURL.toString() %>"
+		/>
+
+		<liferay-ui:error key="ldapAuthentication" message="failed-to-bind-to-the-ldap-server-with-given-values" />
+
+		<c:choose>
+			<c:when test='<%= tabs3.equals("ldap") %>'>
+				<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "enabled") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= ParamUtil.getBoolean(request, "enabled", PrefsPropsUtil.getBoolean(PropsUtil.AUTH_IMPL_LDAP_ENABLED)) %>' />
+					</td>
+				</tr>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "url") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<input class="form-text" name="<portlet:namespace />url" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= ParamUtil.getString(request, "url", PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_PROVIDER_URL)) %>">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "principal") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<input class="form-text" name="<portlet:namespace />principal" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= ParamUtil.getString(request, "principal", PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_SECURITY_PRINCIPAL)) %>">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "credentials") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<input class="form-text" name="<portlet:namespace />credentials" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_SECURITY_CREDENTIALS)) %>">
+					</td>
+				</tr>
+				</table>
+
+				<br>
+
+				<%= LanguageUtil.get(pageContext, "enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user") %>
+
+				<br><br>
+
+				<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />searchFilter"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= ParamUtil.getString(request, "searchFilter", PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_SEARCH_FILTER)) %></textarea>
+
+				<br><br>
+
+				<%= LanguageUtil.get(pageContext, "if-the-user-is-valid-and-the-user-exists-in-the-ldap-server-but-not-in-liferay") %>
+
+				<br><br>
+
+				<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />userMappings"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= ParamUtil.getString(request, "userMappings", PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_USER_MAPPINGS)) %></textarea>
+
+				<br><br>
+
+				<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<select name="<portlet:namespace />defaultLdap">
+							<option></option>
+							<option>Apache Directory Server</option>
+							<option>Microsoft Active Directory Server</option>
+							<option>Novell eDirectory</option>
+						</select>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "Reset Values") %>' onClick="<portlet:namespace />updateDefaultLdap();">
+					</td>
+				</tr>
+				</table>
+
+				<br>
+
+				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUsers('updateLdap');">
+			</c:when>
+			<c:otherwise>
+				<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "how-do-users-authenticate") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<select name="<portlet:namespace />authType">
+							<option <%= company.getAuthType().equals(Company.AUTH_TYPE_EA) ? "selected" : "" %> value="<%= Company.AUTH_TYPE_EA %>"><%= LanguageUtil.get(pageContext, "by-email-address") %></option>
+							<option <%= company.getAuthType().equals(Company.AUTH_TYPE_ID) ? "selected" : "" %> value="<%= Company.AUTH_TYPE_ID %>"><%= LanguageUtil.get(pageContext, "by-user-id") %></option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "allow-users-to-automatically-login") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<select name="<portlet:namespace />autoLogin">
+							<option <%= (company.isAutoLogin()) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
+							<option <%= (!company.isAutoLogin()) ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "allow-strangers-to-create-accounts") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<select name="<portlet:namespace />strangers">
+							<option <%= (company.isStrangers()) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
+							<option <%= (!company.isStrangers()) ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
+						</select>
+					</td>
+				</tr>
+				</table>
+
+				<br>
+
+				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUsers('updateSecurity');">
+			</c:otherwise>
+		</c:choose>
+	</c:when>
 	<c:when test='<%= tabs2.equals("default-groups-and-roles") %>'>
 		<%= LanguageUtil.get(pageContext, "enter-the-default-group-names-per-line-that-are-associated-with-newly-created-users") %>
 
 		<br><br>
 
-		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />defaultGroupNames"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= StringUtil.merge(AdminUtil.getDefaultGroupNames(company.getCompanyId()), "\n") %></textarea>
+		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />defaultGroupNames"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_GROUP_NAMES) %></textarea>
 
 		<br><br>
 
@@ -42,7 +183,7 @@
 
 		<br><br>
 
-		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />defaultRoleNames"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= StringUtil.merge(AdminUtil.getDefaultRoleNames(company.getCompanyId()), "\n") %></textarea>
+		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />defaultRoleNames"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_ROLE_NAMES) %></textarea>
 
 		<br><br>
 
@@ -53,7 +194,7 @@
 
 		<br><br>
 
-		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />reservedUserIds"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= StringUtil.merge(AdminUtil.getReservedUserIds(company.getCompanyId()), "\n") %></textarea>
+		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />reservedUserIds"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_USER_IDS) %></textarea>
 
 		<br><br>
 
@@ -61,7 +202,7 @@
 
 		<br><br>
 
-		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />reservedEmailAddresses"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= StringUtil.merge(AdminUtil.getReservedEmailAddresses(company.getCompanyId()), "\n") %></textarea>
+		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />reservedEmailAddresses"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES) %></textarea>
 
 		<br><br>
 
@@ -72,7 +213,7 @@
 
 		<br><br>
 
-		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />mailHostNames"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= StringUtil.merge(AdminUtil.getMailHostNames(company.getCompanyId()), "\n") %></textarea>
+		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />mailHostNames"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_MAIL_HOST_NAMES) %></textarea>
 
 		<br><br>
 
@@ -82,14 +223,14 @@
 		<script type="text/javascript">
 
 			<%
-			String emailFromName = ParamUtil.getString(request, "emailFromName", AdminUtil.getEmailFromName(company.getCompanyId()));
-			String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", AdminUtil.getEmailFromAddress(company.getCompanyId()));
+			String emailFromName = ParamUtil.getString(request, "emailFromName", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_FROM_NAME));
+			String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_FROM_ADDRESS));
 
-			String emailUserAddedSubject = ParamUtil.getString(request, "emailUserAddedSubject", AdminUtil.getEmailUserAddedSubject(company.getCompanyId()));
-			String emailUserAddedBody = ParamUtil.getString(request, "emailUserAddedBody", AdminUtil.getEmailUserAddedBody(company.getCompanyId()));
+			String emailUserAddedSubject = ParamUtil.getString(request, "emailUserAddedSubject", PrefsPropsUtil.getContent(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_USER_ADDED_SUBJECT));
+			String emailUserAddedBody = ParamUtil.getString(request, "emailUserAddedBody", PrefsPropsUtil.getContent(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_USER_ADDED_BODY));
 
-			String emailPasswordSentSubject = ParamUtil.getString(request, "emailPasswordSentSubject", AdminUtil.getEmailPasswordSentSubject(company.getCompanyId()));
-			String emailPasswordSentBody = ParamUtil.getString(request, "emailPasswordSentBody", AdminUtil.getEmailPasswordSentBody(company.getCompanyId()));
+			String emailPasswordSentSubject = ParamUtil.getString(request, "emailPasswordSentSubject", PrefsPropsUtil.getContent(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT));
+			String emailPasswordSentBody = ParamUtil.getString(request, "emailPasswordSentBody", PrefsPropsUtil.getContent(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_BODY));
 
 			String editorParam = "";
 			String editorContent = "";
@@ -143,10 +284,10 @@
 					<td>
 						<c:choose>
 							<c:when test='<%= tabs3.equals("user-added-email") %>'>
-								<liferay-ui:input-checkbox param="emailUserAddedEnabled" defaultValue="<%= AdminUtil.getEmailUserAddedEnabled(company.getCompanyId()) %>" />
+								<liferay-ui:input-checkbox param="emailUserAddedEnabled" defaultValue="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_USER_ADDED_ENABLED) %>" />
 							</c:when>
 							<c:when test='<%= tabs3.equals("password-sent-email") %>'>
-								<liferay-ui:input-checkbox param="emailPasswordSentEnabled" defaultValue="<%= AdminUtil.getEmailPasswordSentEnabled(company.getCompanyId()) %>" />
+								<liferay-ui:input-checkbox param="emailPasswordSentEnabled" defaultValue="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_ENABLED) %>" />
 							</c:when>
 						</c:choose>
 					</td>

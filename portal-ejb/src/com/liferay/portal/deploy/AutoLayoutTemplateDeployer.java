@@ -25,7 +25,8 @@ package com.liferay.portal.deploy;
 import com.liferay.portal.shared.deploy.AutoDeployException;
 import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.portal.tools.LayoutTemplateDeployer;
-import com.liferay.portlet.admin.util.OmniadminUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,10 +46,12 @@ public class AutoLayoutTemplateDeployer
 
 	public AutoLayoutTemplateDeployer() {
 		try {
-			baseDir = OmniadminUtil.getAutoDeployDeployDir();
-			destDir = OmniadminUtil.getAutoDeployDestDir();
+			baseDir = PrefsPropsUtil.getString(
+				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
+			destDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEST_DIR);
 			appServerType = ServerDetector.getServerId();
-			unpackWar = OmniadminUtil.getAutoDeployUnpackWar();
+			unpackWar = PrefsPropsUtil.getBoolean(
+				PropsUtil.AUTO_DEPLOY_UNPACK_WAR);
 
 			List jars = new ArrayList();
 

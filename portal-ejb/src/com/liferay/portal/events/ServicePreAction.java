@@ -49,10 +49,10 @@ import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.theme.ThemeDisplayFactory;
-import com.liferay.portal.util.CompanyPropsUtil;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.Resolution;
 import com.liferay.portal.util.WebKeys;
@@ -111,7 +111,7 @@ public class ServicePreAction extends Action {
 
 			// Paths
 
-			String contextPath = CompanyPropsUtil.get(
+			String contextPath = PrefsPropsUtil.getString(
 				companyId, PropsUtil.PORTAL_CTX);
 
 			if (contextPath.equals(StringPool.SLASH)) {
@@ -316,11 +316,11 @@ public class ServicePreAction extends Action {
 			else {
 				theme = ThemeLocalUtil.getTheme(
 					companyId,
-					CompanyPropsUtil.get(
+					PrefsPropsUtil.getString(
 						companyId, PropsUtil.DEFAULT_THEME_ID));
 				colorScheme = ThemeLocalUtil.getColorScheme(
 					companyId, theme.getThemeId(),
-					CompanyPropsUtil.get(
+					PrefsPropsUtil.getString(
 						companyId, PropsUtil.DEFAULT_COLOR_SCHEME_ID));
 			}
 

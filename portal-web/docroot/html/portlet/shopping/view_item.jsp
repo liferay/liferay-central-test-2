@@ -165,7 +165,7 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 
 		<br>
 
-		<c:if test="<%= GetterUtil.getBoolean(CompanyPropsUtil.get(company.getCompanyId(), PropsUtil.SHOPPING_ITEM_SHOW_AVAILABILITY)) %>">
+		<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.SHOPPING_ITEM_SHOW_AVAILABILITY) %>">
 			<c:choose>
 				<c:when test="<%= ShoppingUtil.isInStock(item) %>">
 					<%= LanguageUtil.get(pageContext, "availability") %>: <span class="portlet-msg-success"><%= LanguageUtil.get(pageContext, "in-stock") %></span><br>

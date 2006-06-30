@@ -22,8 +22,6 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.service.spring.PropertiesLocalServiceUtil;
 import com.liferay.util.ExtPropertiesLoader;
 import com.liferay.util.StringUtil;
 
@@ -47,16 +45,7 @@ public class CompanyPropsUtil {
 	public static String get(String companyId, String key) {
 		String value = null;
 
-		try {
-			java.util.Properties propsFromDatabase =
-				PropertiesLocalServiceUtil.getPortalProperties(companyId);
-
-			value = propsFromDatabase.getProperty(key);
-		}
-		catch (SystemException se) {
-		}
-
-		if (value == null) {
+		if (companyId != null) {
 			ExtPropertiesLoader propsFromFile =
 				ExtPropertiesLoader.getInstance(PropsFiles.PORTAL, companyId);
 

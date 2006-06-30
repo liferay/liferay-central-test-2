@@ -42,13 +42,13 @@ import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
-import com.liferay.portal.util.CompanyPropsUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.EntityResolver;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.util.ShutdownUtil;
@@ -473,8 +473,15 @@ public class MainServlet extends ActionServlet {
 
 		ServletContext ctx = getServletContext();
 
-		ServletContext portalCtx = ctx.getContext(
-			CompanyPropsUtil.get(_companyId, PropsUtil.PORTAL_CTX));
+		ServletContext portalCtx = null;
+
+		try {
+			portalCtx = ctx.getContext(
+				PrefsPropsUtil.getString(_companyId, PropsUtil.PORTAL_CTX));
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
 
 		if (portalCtx == null) {
 			portalCtx = ctx;

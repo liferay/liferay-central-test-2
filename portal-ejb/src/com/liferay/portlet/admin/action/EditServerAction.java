@@ -36,6 +36,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.EntityResolver;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebCachePool;
@@ -137,7 +138,7 @@ public class EditServerAction extends PortletAction {
 		boolean unpackWar = ParamUtil.getBoolean(req, "unpackWar");
 		String tomcatLibDir = ParamUtil.getString(req, "tomcatLibDir");
 
-		PortletPreferences prefs = OmniadminUtil.getPreferences();
+		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
 
 		prefs.setValue(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR, deployDir);
 		prefs.setValue(PropsUtil.AUTO_DEPLOY_DEST_DIR, destDir);

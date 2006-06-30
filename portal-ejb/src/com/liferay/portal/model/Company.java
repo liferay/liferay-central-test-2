@@ -22,12 +22,13 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.service.spring.AccountLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
-import com.liferay.portal.util.CompanyPropsUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.Base64;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
 import java.security.Key;
@@ -141,26 +142,19 @@ public class Company extends CompanyModel {
 		return "Administrator";
 	}
 
-	public String getAuthType() {
-		return
-			GetterUtil.getString(
-				CompanyPropsUtil.get(
-					getCompanyId(), PropsUtil.COMPANY_SECURITY_AUTH_TYPE),
-				AUTH_TYPE_EA);
+	public String getAuthType() throws PortalException, SystemException {
+		return PrefsPropsUtil.getString(
+			getCompanyId(), PropsUtil.COMPANY_SECURITY_AUTH_TYPE);
 	}
 
-	public boolean isAutoLogin() {
-		return
-			GetterUtil.getBoolean(
-				CompanyPropsUtil.get(
-					getCompanyId(), PropsUtil.COMPANY_SECURITY_AUTO_LOGIN));
+	public boolean isAutoLogin() throws PortalException, SystemException {
+		return PrefsPropsUtil.getBoolean(
+			getCompanyId(), PropsUtil.COMPANY_SECURITY_AUTO_LOGIN);
 	}
 
-	public boolean isStrangers() {
-		return
-			GetterUtil.getBoolean(
-				CompanyPropsUtil.get(
-					getCompanyId(), PropsUtil.COMPANY_SECURITY_STRANGERS));
+	public boolean isStrangers() throws PortalException, SystemException {
+		return PrefsPropsUtil.getBoolean(
+			getCompanyId(), PropsUtil.COMPANY_SECURITY_STRANGERS);
 	}
 
 	private static Log _log = LogFactory.getLog(Company.class);

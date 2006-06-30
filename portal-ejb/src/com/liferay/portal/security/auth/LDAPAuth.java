@@ -25,9 +25,33 @@ package com.liferay.portal.security.auth;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.shared.util.StackTraceUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.LDAPUtil;
+import com.liferay.util.PropertiesUtil;
+import com.liferay.util.StringPool;
+import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 
-import java.util.Date;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
+import java.util.Calendar;
 import java.util.Locale;
+import java.util.Properties;
+
+import javax.naming.Binding;
+import javax.naming.Context;
+import javax.naming.NamingEnumeration;
+import javax.naming.directory.Attribute;
+import javax.naming.directory.Attributes;
+import javax.naming.directory.SearchControls;
+import javax.naming.ldap.InitialLdapContext;
+import javax.naming.ldap.LdapContext;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LDAPAuth.java.html"><b><i>View Source</i></b></a>
@@ -37,61 +61,27 @@ import java.util.Locale;
  */
 public class LDAPAuth implements Authenticator {
 
+	public LDAPAuth() {
+		try {
+			_enabled = PrefsPropsUtil.getBoolean(
+				PropsUtil.AUTH_IMPL_LDAP_ENABLED);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+	}
+
 	public int authenticateByEmailAddress(
 			String companyId, String emailAddress, String password)
 		throws AuthException {
 
 		try {
-
-			// Check the LDAP server to ensure the company id, email address,
-			// and password is valid
-
-			boolean success = true;
-
-			if (success) {
-
-				// Make sure the user has a portal account
-
-				User user = null;
-
-				try {
-					user = UserLocalServiceUtil.getUserByEmailAddress(
-						companyId, emailAddress);
-				}
-				catch (NoSuchUserException nsue) {
-
-					// Grab attributes from LDAP
-
-					boolean autoUserId = true;
-					String userId = "";
-					boolean autoPassword = false;
-					String password1 = password;
-					String password2 = password;
-					boolean passwordReset = false;
-					String firstName = "";
-					String middleName = "";
-					String lastName = "";
-					String nickName = "";
-					boolean male = true;
-					Date birthday = new Date();
-					Locale locale = Locale.US;
-
-					/*
-					user = UserLocalServiceUtil.addUser(
-						companyId, autoUserId, userId, autoPassword, password1,
-						password2, passwordReset, firstName, middleName,
-						lastName, nickName, male, birthday, emailAddress,
-						locale);
-					*/
-				}
-
-				return SUCCESS;
-			}
-			else {
-				return FAILURE;
-			}
+			return authenticate(
+				companyId, emailAddress, StringPool.BLANK, password);
 		}
 		catch (Exception e) {
+			_log.error(StackTraceUtil.getStackTrace(e));
+
 			throw new AuthException(e);
 		}
 	}
@@ -101,57 +91,220 @@ public class LDAPAuth implements Authenticator {
 		throws AuthException {
 
 		try {
-
-			// Check the LDAP server to ensure the company id, user id, and
-			// password is valid
-
-			boolean success = true;
-
-			if (success) {
-
-				// Make sure the user has a portal account
-
-				User user = null;
-
-				try {
-					user = UserLocalServiceUtil.getUserById(companyId, userId);
-				}
-				catch (NoSuchUserException nsue) {
-
-					// Grab attributes from LDAP
-
-					boolean autoUserId = true;
-					boolean autoPassword = false;
-					String password1 = password;
-					String password2 = password;
-					boolean passwordReset = false;
-					String firstName = "";
-					String middleName = "";
-					String lastName = "";
-					String nickName = "";
-					boolean male = true;
-					Date birthday = new Date();
-					String emailAddress = "";
-					Locale locale = Locale.US;
-
-					/*
-					user = UserLocalServiceUtil.addUser(
-						companyId, autoUserId, userId, autoPassword, password1,
-						password2, passwordReset, firstName, middleName,
-						lastName, nickName, male, birthday, emailAddress,
-						locale);
-					*/
-				}
-
-				return SUCCESS;
-			}
-			else {
-				return FAILURE;
-			}
+			return authenticate(companyId, StringPool.BLANK, userId, password);
 		}
 		catch (Exception e) {
+			_log.error(StackTraceUtil.getStackTrace(e));
+
 			throw new AuthException(e);
 		}
 	}
+
+	protected int authenticate(
+			String companyId, String emailAddress, String userId,
+			String password)
+		throws Exception {
+
+		if (!_enabled) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Authenticator is not enabled");
+			}
+
+			return SUCCESS;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Authenticator is enabled");
+		}
+
+		Properties env = new Properties();
+
+		env.put(
+			Context.INITIAL_CONTEXT_FACTORY,
+			PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_FACTORY_INITIAL));
+		env.put(
+			Context.PROVIDER_URL,
+			PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_PROVIDER_URL));
+		env.put(
+			Context.SECURITY_PRINCIPAL,
+			PrefsPropsUtil.getString(
+				PropsUtil.AUTH_IMPL_LDAP_SECURITY_PRINCIPAL));
+		env.put(
+			Context.SECURITY_CREDENTIALS,
+			PrefsPropsUtil.getString(
+				PropsUtil.AUTH_IMPL_LDAP_SECURITY_CREDENTIALS));
+
+		if (_log.isDebugEnabled()) {
+			StringWriter sw = new StringWriter();
+
+			env.list(new PrintWriter(sw));
+
+			_log.debug(sw.getBuffer().toString());
+		}
+
+		LdapContext ctx = null;
+
+		try {
+			ctx = new InitialLdapContext(env, null);
+		}
+		catch (Exception e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Failed to bind to the LDAP server");
+			}
+
+			return SUCCESS;
+		}
+
+		String filter = PrefsPropsUtil.getString(
+			PropsUtil.AUTH_IMPL_LDAP_SEARCH_FILTER);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Search filter before transformation " + filter);
+		}
+
+		filter = StringUtil.replace(
+			filter,
+			new String[] {
+				"@company_id@", "@email_address@", "@user_id@"
+			},
+			new String[] {
+				companyId, emailAddress, userId
+			});
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Search filter after transformation " + filter);
+		}
+
+		SearchControls cons = new SearchControls(
+			SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
+
+		NamingEnumeration enu = ctx.search(StringPool.BLANK, filter, cons);
+
+		if (enu.hasMore()) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Search filter returned at least one result");
+			}
+
+			Binding binding = (Binding)enu.next();
+
+			Attributes attrs = ctx.getAttributes(binding.getName());
+
+			Properties userMappings = PropertiesUtil.load(
+				PrefsPropsUtil.getString(
+					PropsUtil.AUTH_IMPL_LDAP_USER_MAPPINGS));
+
+			if (_log.isDebugEnabled()) {
+				StringWriter sw = new StringWriter();
+
+				userMappings.list(new PrintWriter(sw));
+
+				_log.debug(sw.getBuffer().toString());
+			}
+
+			String creatorUserId = null;
+			boolean autoUserId = false;
+
+			if (Validator.isNull(userId)) {
+				userId = LDAPUtil.getAttributeValue(
+					attrs, userMappings.getProperty("userId"));
+			}
+
+			boolean autoPassword = false;
+			String password1 = password;
+			String password2 = password;
+			boolean passwordReset = false;
+
+			if (Validator.isNull(emailAddress)) {
+				emailAddress = LDAPUtil.getAttributeValue(
+					attrs, userMappings.getProperty("mail"));
+			}
+
+			Locale locale = Locale.US;
+			String firstName = LDAPUtil.getAttributeValue(
+				attrs, userMappings.getProperty("firstName"));
+			String middleName = StringPool.BLANK;
+			String lastName = LDAPUtil.getAttributeValue(
+				attrs, userMappings.getProperty("lastName"));
+			String nickName = null;
+			String prefixId = null;
+			String suffixId = null;
+			boolean male = true;
+			int birthdayMonth = Calendar.JANUARY;
+			int birthdayDay = 1;
+			int birthdayYear = 1970;
+			String jobTitle = null;
+			String organizationId = null;
+			String locationId = null;
+			boolean sendEmail = false;
+
+			// Check passwords by either doing a comparison between the
+			// passwords or by binding to the LDAP server
+
+			Attribute userPassword = attrs.get("userPassword");
+
+			if (userPassword != null) {
+				String ldapPassword =
+					new String((byte[])userPassword.get());
+
+				if (!ldapPassword.equals(password)) {
+					_log.error(
+						"LDAP password " + ldapPassword +
+							" does not match with given password " + password +
+								" for user id " + userId);
+
+					return FAILURE;
+				}
+			}
+			else {
+				try {
+					env.put(Context.SECURITY_PRINCIPAL, userId);
+					env.put(Context.SECURITY_CREDENTIALS, password);
+				}
+				catch (Exception e) {
+					_log.error(
+						"Failed to bind to the LDAP server with " + userId +
+							" " + password, e);
+
+					return FAILURE;
+				}
+			}
+
+			// Make sure the user has a portal account
+
+			User user = null;
+
+			try {
+				user = UserLocalServiceUtil.getUserByEmailAddress(
+					companyId, emailAddress);
+			}
+			catch (NoSuchUserException nsue) {
+				user = UserLocalServiceUtil.addUser(
+					creatorUserId, companyId, autoUserId, userId, autoPassword,
+					password1, password2, passwordReset, emailAddress, locale,
+					firstName, middleName, lastName, nickName, prefixId,
+					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+					jobTitle, organizationId, locationId, sendEmail);
+			}
+		}
+		else {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Search filter did not return any results");
+			}
+		}
+
+		return SUCCESS;
+	}
+
+	public boolean isEnabled() {
+		return _enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		_enabled = enabled;
+	}
+
+	private static Log _log = LogFactory.getLog(LDAPAuth.class);
+
+	private boolean _enabled;
 
 }

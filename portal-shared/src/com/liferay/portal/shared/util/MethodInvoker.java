@@ -55,7 +55,7 @@ public class MethodInvoker {
 
 		String className = methodWrapper.getClassName();
 		String methodName = methodWrapper.getMethodName();
-		Object args[] = methodWrapper.getArgs();
+		Object[] args = methodWrapper.getArgs();
 
 		List parameterTypes = new ArrayList();
 

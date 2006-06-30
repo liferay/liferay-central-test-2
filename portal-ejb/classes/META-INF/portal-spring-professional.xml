@@ -839,35 +839,6 @@
 			<ref bean="com.liferay.portal.service.persistence.PortletPreferencesPersistence" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.spring.PropertiesLocalService.professional" class="com.liferay.portal.service.impl.PropertiesLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.spring.PropertiesLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.spring.PropertiesLocalService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.spring.PropertiesLocalServiceFactory" class="com.liferay.portal.service.spring.PropertiesLocalServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portal.service.spring.PropertiesLocalService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.PropertiesPersistence" class="com.liferay.portal.service.persistence.PropertiesPersistence" lazy-init="true">
-		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.PropertiesUtil" class="com.liferay.portal.service.persistence.PropertiesUtil" lazy-init="true">
-		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.PropertiesPersistence" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.service.spring.RegionService.professional" class="com.liferay.portal.service.impl.RegionServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.spring.RegionService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">

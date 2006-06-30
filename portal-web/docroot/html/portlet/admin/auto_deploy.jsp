@@ -29,7 +29,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />deployDir" size="75" type="text" value="<%= OmniadminUtil.getAutoDeployDeployDir() %>">
+		<input class="form-text" name="<portlet:namespace />deployDir" size="75" type="text" value="<%= PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR) %>">
 	</td>
 </tr>
 <tr>
@@ -38,7 +38,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />destDir" size="75" type="text" value="<%= OmniadminUtil.getAutoDeployDestDir() %>">
+		<input class="form-text" name="<portlet:namespace />destDir" size="75" type="text" value="<%= PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEST_DIR) %>">
 	</td>
 </tr>
 <tr>
@@ -51,7 +51,7 @@
 			<option value="0"><%= LanguageUtil.get(pageContext, "disable") %></option>
 
 			<%
-			long interval = OmniadminUtil.getAutoDeployInterval();
+			long interval = PrefsPropsUtil.getInteger(PropsUtil.AUTO_DEPLOY_INTERVAL);
 
 			for (int i = 0;;) {
 				if (i < Time.MINUTE) {
@@ -80,7 +80,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<liferay-ui:input-checkbox param="unpackWar" defaultValue="<%= OmniadminUtil.getAutoDeployUnpackWar() %>" />
+		<liferay-ui:input-checkbox param="unpackWar" defaultValue="<%= PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_UNPACK_WAR) %>" />
 	</td>
 </tr>
 
@@ -91,7 +91,7 @@
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="<portlet:namespace />tomcatLibDir" size="75" type="text" value="<%= OmniadminUtil.getAutoDeployTomcatLibDir() %>">
+			<input class="form-text" name="<portlet:namespace />tomcatLibDir" size="75" type="text" value="<%= PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR) %>">
 		</td>
 	</tr>
 </c:if>

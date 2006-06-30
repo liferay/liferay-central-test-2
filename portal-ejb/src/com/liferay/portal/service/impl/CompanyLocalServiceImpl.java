@@ -43,11 +43,10 @@ import com.liferay.portal.service.persistence.ContactUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.CompanyLocalService;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.PropertiesLocalServiceUtil;
 import com.liferay.portal.service.spring.RoleLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.FileUtil;
@@ -67,7 +66,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Properties;
 
 import javax.imageio.ImageIO;
 
@@ -146,11 +144,14 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 
 				updateSecurity(companyId, Company.AUTH_TYPE_EA, true, true);
 
-				PortletPreferences prefs = AdminUtil.getPreferences(companyId);
+				PortletPreferences prefs =
+					PrefsPropsUtil.getPreferences(companyId);
 
 				try {
-					prefs.setValue("email-from-name", "Liferay Demo");
-					prefs.setValue("email-from-address", "test@liferay.net");
+					prefs.setValue(
+						PropsUtil.ADMIN_EMAIL_FROM_NAME, "Liferay Demo");
+					prefs.setValue(
+						PropsUtil.ADMIN_EMAIL_FROM_ADDRESS, "test@liferay.net");
 
 					prefs.store();
 				}
@@ -456,18 +457,25 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 			boolean strangers)
 		throws PortalException, SystemException {
 
-		Properties propertiesObj =
-			PropertiesLocalServiceUtil.getPortalProperties(companyId);
+		PortletPreferences prefs = PrefsPropsUtil.getPreferences(companyId);
 
-		propertiesObj.setProperty(
-			PropsUtil.COMPANY_SECURITY_AUTH_TYPE, authType);
-		propertiesObj.setProperty(
-			PropsUtil.COMPANY_SECURITY_AUTO_LOGIN, Boolean.toString(autoLogin));
-		propertiesObj.setProperty(
-			PropsUtil.COMPANY_SECURITY_STRANGERS, Boolean.toString(strangers));
+		try {
+			prefs.setValue(PropsUtil.COMPANY_SECURITY_AUTH_TYPE, authType);
+			prefs.setValue(
+				PropsUtil.COMPANY_SECURITY_AUTO_LOGIN,
+				Boolean.toString(autoLogin));
+			prefs.setValue(
+				PropsUtil.COMPANY_SECURITY_STRANGERS,
+				Boolean.toString(strangers));
 
-		PropertiesLocalServiceUtil.updatePortalProperties(
-			companyId, propertiesObj);
+			prefs.store();
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+		catch (PortletException pe) {
+			throw new SystemException(pe);
+		}
 	}
 
 	protected void validate(String portalURL, String homeURL, String name)

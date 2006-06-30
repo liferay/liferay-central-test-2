@@ -212,19 +212,19 @@ public class PropsUtil {
 
 	public static final String AUTH_PIPELINE_ENABLE_LIFERAY_CHECK = "auth.pipeline.enable.liferay.check";
 
-	public static final String AUTH_IMPL_ADS_INITIAL_CONTEXT_FACTORY = "auth.impl.ads.initial.context.factory";
+	public static final String AUTH_IMPL_LDAP_ENABLED = "auth.impl.ldap.enabled";
 
-	public static final String AUTH_IMPL_ADS_SECURITY_AUTHENTICATION = "auth.impl.ads.security.authentication";
+	public static final String AUTH_IMPL_LDAP_FACTORY_INITIAL = "auth.impl.ldap.factory.initial";
 
-	public static final String AUTH_IMPL_ADS_HOST = "auth.impl.ads.host";
+    public static final String AUTH_IMPL_LDAP_PROVIDER_URL = "auth.impl.ldap.provider.url";
 
-	public static final String AUTH_IMPL_ADS_PORT = "auth.impl.ads.port";
+	public static final String AUTH_IMPL_LDAP_SECURITY_PRINCIPAL = "auth.impl.ldap.security.principal";
 
-	public static final String AUTH_IMPL_ADS_USERID = "auth.impl.ads.userid";
+	public static final String AUTH_IMPL_LDAP_SECURITY_CREDENTIALS = "auth.impl.ldap.security.credentials";
 
-	public static final String AUTH_IMPL_ADS_PASSWORD = "auth.impl.ads.password";
+	public static final String AUTH_IMPL_LDAP_SEARCH_FILTER = "auth.impl.ldap.search.filter";
 
-	public static final String AUTH_IMPL_ADS_DOMAINLOOKUP = "auth.impl.ads.domainlookup";
+	public static final String AUTH_IMPL_LDAP_USER_MAPPINGS = "auth.impl.ldap.user.mappings";
 
 	public static final String AUTH_FAILURE = "auth.failure";
 
@@ -474,6 +474,16 @@ public class PropsUtil {
 
 	// Admin Portlet
 
+    public static final String ADMIN_DEFAULT_GROUP_NAMES = "admin.default.group.names";
+
+	public static final String ADMIN_DEFAULT_ROLE_NAMES = "admin.default.role.names";
+
+    public static final String ADMIN_MAIL_HOST_NAMES = "admin.mail.host.names";
+
+    public static final String ADMIN_RESERVED_EMAIL_ADDRESSES = "admin.reserved.email.addresses";
+
+	public static final String ADMIN_RESERVED_USER_IDS = "admin.reserved.user.ids";
+
 	public static final String ADMIN_EMAIL_FROM_NAME = "admin.email.from.name";
 
 	public static final String ADMIN_EMAIL_FROM_ADDRESS = "admin.email.from.address";
@@ -585,24 +595,6 @@ public class PropsUtil {
 	public static final String MAIL_HOOK_CYRUS_DELETE_USER = "mail.hook.cyrus.delete.user";
 
 	public static final String MAIL_HOOK_CYRUS_HOME = "mail.hook.cyrus.home";
-
-	public static final String MAIL_HOOK_RHEMS_ADD_USER = "mail.hook.rhems.add.user";
-
-	public static final String MAIL_HOOK_RHEMS_DELETE_USER = "mail.hook.rhems.delete.user";
-
-	public static final String MAIL_HOOK_RHEMS_LDAP_INITIAL_CONTEXT_FACTORY = "mail.hook.rhems.ldap.initial.context.factory";
-
-	public static final String MAIL_HOOK_RHEMS_LDAP_SERVER_CONTEXT = "mail.hook.rhems.ldap.server.context";
-
-	public static final String MAIL_HOOK_RHEMS_LDAP_SECURITY_AUTHENTICATION = "mail.hook.rhems.ldap.security.authentication";
-
-	public static final String MAIL_HOOK_RHEMS_LDAP_SECURITY_PRINCIPAL = "mail.hook.rhems.ldap.security.principal";
-
-	public static final String MAIL_HOOK_RHEMS_LDAP_SECURITY_CREDENTIALS = "mail.hook.rhems.ldap.security.credentials";
-
-	public static final String MAIL_HOOK_RHEMS_LOGIN = "mail.hook.rhems.login";
-
-	public static final String MAIL_HOOK_RHEMS_WEB_SERVER = "mail.hook.rhems.web.server";
 
 	public static final String MAIL_HOOK_SENDMAIL_ADD_USER = "mail.hook.sendmail.add.user";
 

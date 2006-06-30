@@ -24,6 +24,8 @@ create table MBStatsUser (
 
 alter table MBThread add viewCount INTEGER;
 
+drop table Properties;
+
 alter table Role_ add description VARCHAR(75) null;
 
 create table UserGroup (

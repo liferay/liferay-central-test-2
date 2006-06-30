@@ -22,6 +22,8 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 
 /**
@@ -35,11 +37,13 @@ public class LayoutSet extends LayoutSetModel {
 	public LayoutSet() {
 	}
 
-	public Theme getTheme() {
+	public Theme getTheme() throws PortalException, SystemException {
 		return ThemeLocalUtil.getTheme(getCompanyId(), getThemeId());
 	}
 
-	public ColorScheme getColorScheme() {
+	public ColorScheme getColorScheme()
+		throws PortalException, SystemException {
+
 		return ThemeLocalUtil.getColorScheme(
 			getCompanyId(), getTheme().getThemeId(), getColorSchemeId());
 	}

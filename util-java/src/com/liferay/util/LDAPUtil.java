@@ -22,11 +22,9 @@
 
 package com.liferay.util;
 
-import java.util.Hashtable;
-
 import javax.naming.NamingException;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.InitialDirContext;
+import javax.naming.directory.Attribute;
+import javax.naming.directory.Attributes;
 
 /**
  * <a href="LDAPUtil.java.html"><b><i>View Source</i></b></a>
@@ -36,17 +34,26 @@ import javax.naming.directory.InitialDirContext;
  */
 public class LDAPUtil {
 
-	public static DirContext getDirContext(Hashtable env){
-		DirContext ctx = null;
+	public static String getAttributeValue(Attributes attrs, String id)
+		throws NamingException {
+
+		return getAttributeValue(attrs, id, id);
+	}
+
+	public static String getAttributeValue(
+			Attributes attrs, String id, String defaultValue)
+		throws NamingException {
 
 		try {
-			ctx = new InitialDirContext(env);
-		}
-		catch (NamingException ne) {
-			ne.printStackTrace();
-		}
+			Attribute attr = attrs.get(id);
 
-		return ctx;
+			Object obj = attr.get();
+
+			return obj.toString();
+		}
+		catch (NullPointerException npe) {
+			return defaultValue;
+		}
 	}
 
 }

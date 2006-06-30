@@ -27,8 +27,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
-import com.liferay.portal.util.CompanyPropsUtil;
 import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.TransformException;
@@ -510,7 +510,9 @@ public class JournalUtil {
 		return script;
 	}
 
-	public static Map getTokens(String companyId, String rootPath) {
+	public static Map getTokens(String companyId, String rootPath)
+		throws PortalException, SystemException {
+
 		Map tokens = CollectionFactory.getHashMap();
 
 		try {
@@ -522,7 +524,7 @@ public class JournalUtil {
 			String friendlyURLPublicPath = rootPath + PropsUtil.get(
 				PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
 
-			String portalCtx = CompanyPropsUtil.get(
+			String portalCtx = PrefsPropsUtil.getString(
 				companyId, PropsUtil.PORTAL_CTX);
 
 			if (portalCtx.equals(StringPool.SLASH)) {

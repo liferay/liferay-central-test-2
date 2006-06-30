@@ -632,13 +632,6 @@ create table PortletPreferences (
 	primary key (portletId, layoutId, ownerId)
 );
 
-create table Properties (
-	companyId VARCHAR(75) not null,
-	type_ VARCHAR(75) not null,
-	properties TEXT null,
-	primary key (companyId, type_)
-);
-
 create table Region (
 	regionId VARCHAR(75) not null primary key,
 	countryId VARCHAR(75) null,

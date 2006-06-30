@@ -499,6 +499,10 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 					portletId + Portlet.WAR_SEPARATOR + servletContextName;
 			}
 
+			if (_log.isDebugEnabled()) {
+				_log.debug("Reading portlet " + portletId);
+			}
+
 			portletIds.add(portletId);
 
 			Portlet portletModel = (Portlet)portletsPool.get(portletId);
@@ -825,9 +829,14 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			Element portlet = (Element)itr1.next();
 
 			String portletId = portlet.elementText("portlet-name");
+
 			if (servletContextName != null) {
 				portletId =
 					portletId + Portlet.WAR_SEPARATOR + servletContextName;
+			}
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Reading portlet extension " + portletId);
 			}
 
 			liferayPortletIds.add(portletId);

@@ -76,7 +76,8 @@ import org.apache.struts.action.ActionMapping;
 public class LoginAction extends Action {
 
 	public static String getLogin(
-		HttpServletRequest req, String paramName, Company company) {
+			HttpServletRequest req, String paramName, Company company)
+		throws PortalException, SystemException {
 
 		String login = req.getParameter(paramName);
 

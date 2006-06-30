@@ -24,6 +24,7 @@ package com.liferay.mail.service.jms;
 
 import com.liferay.portal.shared.util.MethodInvoker;
 import com.liferay.portal.shared.util.MethodWrapper;
+import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.mail.MailEngine;
 import com.liferay.util.mail.MailMessage;
@@ -67,7 +68,7 @@ public class MailConsumer implements MessageListener {
 			con.start();
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
 
@@ -85,7 +86,7 @@ public class MailConsumer implements MessageListener {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
 

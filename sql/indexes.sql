@@ -133,8 +133,6 @@ create index PortletPreferences_ix_OwnerId on PortletPreferences (ownerId);
 
 create index Portlet_ix_CompanyId on Portlet (companyId);
 
-create index Properties_ix_CompanyId on Properties (companyId);
-
 create index Region_ix_Active on Region (active_);
 create index Region_ix_C_A on Region (countryId, active_);
 create index Region_ix_CountryId on Region (countryId);

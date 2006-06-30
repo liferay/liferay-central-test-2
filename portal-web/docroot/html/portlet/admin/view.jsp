@@ -54,6 +54,46 @@ portletURL.setParameter("tabs3", tabs3);
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_users" /></portlet:actionURL>");
 	}
+
+	function <portlet:namespace />updateDefaultLdap() {
+		var url = "";
+		var principal = "";
+		var credentials = "";
+		var searchFilter = "";
+		var userMappings = "";
+
+		var ldapType = document.<portlet:namespace />fm.<portlet:namespace />defaultLdap.selectedIndex;
+
+		if (ldapType == 1) {
+			url = "ldap://localhost:10389/dc=example,dc=com";
+			principal = "uid=admin,ou=system";
+			credentials = "secret";
+			searchFilter = "(mail=@email_address@)";
+			userMappings = "userId=cn\npassword=userPassword\nemailAddress=mail\nfirstName=givenName\nlastName=sn\njobTitle=title";
+		}
+		else if (ldapType == 2) {
+			url = "";
+			principal = "";
+			credentials = "";
+			searchFilter = "";
+			userMappings = "";
+		}
+		else if (ldapType == 3) {
+			url = "";
+			principal = "";
+			credentials = "";
+			searchFilter = "";
+			userMappings = "";
+		}
+
+		if ((ldapType >= 1) && (ldapType <= 3)) {
+			document.<portlet:namespace />fm.<portlet:namespace />url.value = url;
+			document.<portlet:namespace />fm.<portlet:namespace />principal.value = principal;
+			document.<portlet:namespace />fm.<portlet:namespace />credentials.value = credentials;
+			document.<portlet:namespace />fm.<portlet:namespace />searchFilter.value = searchFilter;
+			document.<portlet:namespace />fm.<portlet:namespace />userMappings.value = userMappings;
+		}
+	}
 </script>
 
 <form method="post" name="<portlet:namespace />fm">

@@ -72,6 +72,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.security.auth.LDAPAuth">
+		<priority value="DEBUG" />
+	</category>
+
 	<category name="com.liferay.portal.security.permission.PermissionChecker">
 		<priority value="ERROR" />
 	</category>
@@ -92,6 +96,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.service.impl.PortletLocalServiceImpl">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.service.impl.ResourceLocalServiceImpl">
 		<priority value="WARN" />
 	</category>
@@ -105,6 +113,10 @@
 	</category>
 
 	<category name="com.liferay.portal.servlet.ImageServlet">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.servlet.MainServlet">
 		<priority value="ERROR" />
 	</category>
 

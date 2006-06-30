@@ -335,14 +335,6 @@
 		</composite-id>
 		<property name="preferences" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.PropertiesHBM" table="Properties">
-		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.PropertiesPK">
-			<key-property name="companyId" />
-			<key-property name="type" column="type_" />
-		</composite-id>
-		<property name="properties" />
-	</class>
 	<class name="com.liferay.portal.service.persistence.RegionHBM" table="Region">
 		<cache usage="read-write" />
 		<id name="regionId" type="java.lang.String">

@@ -22,13 +22,15 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.ThemeCompanyId;
 import com.liferay.portal.model.ThemeCompanyLimit;
-import com.liferay.portal.util.CompanyPropsUtil;
 import com.liferay.portal.util.EntityResolver;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.util.CollectionFactory;
@@ -69,7 +71,8 @@ import org.dom4j.io.SAXReader;
 public class ThemeLocalUtil {
 
 	public static ColorScheme getColorScheme(
-		String companyId, String themeId, String colorSchemeId) {
+			String companyId, String themeId, String colorSchemeId)
+		throws PortalException, SystemException {
 
 		colorSchemeId = GetterUtil.getString(colorSchemeId);
 
@@ -90,7 +93,7 @@ public class ThemeLocalUtil {
 
 		if (colorScheme == null) {
 			colorScheme = (ColorScheme)colorSchemesMap.get(
-				CompanyPropsUtil.get(
+				PrefsPropsUtil.getString(
 					companyId, PropsUtil.DEFAULT_COLOR_SCHEME_ID));
 		}
 
@@ -101,14 +104,17 @@ public class ThemeLocalUtil {
 		return colorScheme;
 	}
 
-	public static Theme getTheme(String companyId, String themeId) {
+	public static Theme getTheme(String companyId, String themeId)
+		throws PortalException, SystemException {
+
 		themeId = GetterUtil.getString(themeId);
 
 		Theme theme = (Theme)_getThemes(companyId).get(themeId);
 
 		if (theme == null) {
 			theme = (Theme)_themes.get(
-				CompanyPropsUtil.get(companyId, PropsUtil.DEFAULT_THEME_ID));
+				PrefsPropsUtil.getString(
+					companyId, PropsUtil.DEFAULT_THEME_ID));
 		}
 
 		return theme;

@@ -22,8 +22,6 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
 import com.liferay.portal.service.spring.ContactLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
@@ -31,8 +29,8 @@ import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.spring.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.spring.RoleLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
@@ -140,7 +138,8 @@ public class User extends UserModel {
 		}
 
 		try {
-			String[] mailHostNames = AdminUtil.getMailHostNames(getCompanyId());
+			String[] mailHostNames = PrefsPropsUtil.getStringArray(
+				getCompanyId(), PropsUtil.ADMIN_MAIL_HOST_NAMES);
 
 			for (int i = 0; i < mailHostNames.length; i++) {
 				if (mx.equalsIgnoreCase(mailHostNames[i])) {
@@ -297,7 +296,7 @@ public class User extends UserModel {
 		return new Organization();
 	}
 
-	public Organization getLocation() throws PortalException, SystemException {
+	public Organization getLocation() {
 		try {
 			List organizations =
 				OrganizationLocalServiceUtil.getUserOrganizations(getUserId());

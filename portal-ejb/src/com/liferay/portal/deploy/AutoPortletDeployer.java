@@ -25,7 +25,8 @@ package com.liferay.portal.deploy;
 import com.liferay.portal.shared.deploy.AutoDeployException;
 import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.portal.tools.PortletDeployer;
-import com.liferay.portlet.admin.util.OmniadminUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,13 +46,16 @@ public class AutoPortletDeployer
 
 	public AutoPortletDeployer() {
 		try {
-			baseDir = OmniadminUtil.getAutoDeployDeployDir();
-			destDir = OmniadminUtil.getAutoDeployDestDir();
+			baseDir = PrefsPropsUtil.getString(
+				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
+			destDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEST_DIR);
 			appServerType = ServerDetector.getServerId();
 			portletTaglibDTD = DeployUtil.getResourcePath(
 				"liferay-portlet.tld");
-			unpackWar = OmniadminUtil.getAutoDeployUnpackWar();
-			tomcatLibDir = OmniadminUtil.getAutoDeployTomcatLibDir();
+			unpackWar = PrefsPropsUtil.getBoolean(
+				PropsUtil.AUTO_DEPLOY_UNPACK_WAR);
+			tomcatLibDir = PrefsPropsUtil.getString(
+				PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR);
 
 			List jars = new ArrayList();
 

@@ -89,7 +89,7 @@ public class AddUserAction extends PortletAction {
 				e instanceof RequiredUserException ||
 				e instanceof ReservedUserEmailAddressException ||
 				e instanceof UserEmailAddressException ||
-				e instanceof UserIdException || 
+				e instanceof UserIdException ||
 				e instanceof UserPasswordException ||
 				e instanceof UserSmsException) {
 

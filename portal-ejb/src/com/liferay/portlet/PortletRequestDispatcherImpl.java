@@ -24,6 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.shared.util.ServerDetector;
+import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.struts.StrutsURLEncoder;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
@@ -47,6 +48,8 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
 
 /**
@@ -223,11 +226,14 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 			_rd.include(portletServletReq, portletServletRes);
 		}
 		catch (ServletException se) {
-			se.printStackTrace();
+			_log.error(StackTraceUtil.getStackTrace(se));
 
 			throw new PortletException(se);
 		}
 	}
+
+	private static Log _log =
+		LogFactory.getLog(PortletRequestDispatcherImpl.class);
 
 	private RequestDispatcher _rd;
 	private PortletContext _portletCtx;

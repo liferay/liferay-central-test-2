@@ -31,7 +31,7 @@ Map items = cart.getItems();
 
 ShoppingCoupon coupon = cart.getCoupon();
 
-boolean minQuantityMultiple = GetterUtil.getBoolean(CompanyPropsUtil.get(company.getCompanyId(), PropsUtil.SHOPPING_CART_MIN_QTY_MULTIPLE));
+boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.SHOPPING_CART_MIN_QTY_MULTIPLE);
 %>
 
 <script type="text/javascript">
@@ -249,7 +249,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		sb.append(propsValue);
 	}*/
 
-	if (GetterUtil.getBoolean(CompanyPropsUtil.get(company.getCompanyId(), PropsUtil.SHOPPING_ITEM_SHOW_AVAILABILITY))) {
+	if (PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.SHOPPING_ITEM_SHOW_AVAILABILITY)) {
 		sb.append("<br><br>");
 
 		if (ShoppingUtil.isInStock(item, itemFields, fieldsArray)) {

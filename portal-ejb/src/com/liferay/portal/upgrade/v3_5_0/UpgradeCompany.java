@@ -22,18 +22,15 @@
 
 package com.liferay.portal.upgrade.v3_5_0;
 
-import com.liferay.portal.service.spring.PropertiesLocalServiceUtil;
+import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -77,20 +74,8 @@ public class UpgradeCompany extends UpgradeProcess {
 
 				_log.debug("Upgrading company " + companyId);
 
-				Properties propertiesObj =
-					PropertiesLocalServiceUtil.getPortalProperties(companyId);
-
-				propertiesObj.setProperty(
-					PropsUtil.COMPANY_SECURITY_AUTH_TYPE, authType);
-				propertiesObj.setProperty(
-					PropsUtil.COMPANY_SECURITY_AUTO_LOGIN,
-					Boolean.toString(autoLogin));
-				propertiesObj.setProperty(
-					PropsUtil.COMPANY_SECURITY_STRANGERS,
-					Boolean.toString(strangers));
-
-				PropertiesLocalServiceUtil.updatePortalProperties(
-					companyId, propertiesObj);
+				CompanyLocalServiceUtil.updateSecurity(
+					companyId, authType, autoLogin, strangers);
 			}
 		}
 		finally {
