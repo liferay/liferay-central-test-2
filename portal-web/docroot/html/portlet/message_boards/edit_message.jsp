@@ -37,17 +37,17 @@ String parentMessageId = BeanParamUtil.getString(message, request, "parentMessag
 
 String subject = BeanParamUtil.getString(message, request, "subject");
 
-MBMessage parentMessage = null;
+MBMessage curParentMessage = null;
 
 if (Validator.isNotNull(threadId) && Validator.isNull(subject)) {
 	try {
-		parentMessage = MBMessageLocalServiceUtil.getMessage(topicId, parentMessageId);
+		curParentMessage = MBMessageLocalServiceUtil.getMessage(topicId, parentMessageId);
 
-		if (parentMessage.getSubject().startsWith("RE: ")) {
-			subject = parentMessage.getSubject();
+		if (curParentMessage.getSubject().startsWith("RE: ")) {
+			subject = curParentMessage.getSubject();
 		}
 		else {
-			subject = "RE: " + parentMessage.getSubject();
+			subject = "RE: " + curParentMessage.getSubject();
 		}
 	}
 	catch (Exception e) {
@@ -216,111 +216,27 @@ if (message != null) {
 
 <input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
-</form>
+<c:if test="<%= curParentMessage != null %>">
+	<br><br>
 
-<c:if test="<%= parentMessage != null %>">
-<br>
-<%= LanguageUtil.get(pageContext, "replying-to") %>
+	<%= LanguageUtil.get(pageContext, "replying-to") %>:
 
-<div style="margin: 5px 0px 0px 0px; border: 1px solid <%= colorScheme.getPortletFontDim() %>; <%= BrowserSniffer.is_ie(request) ? "width: 100%;" : "" %>">
-	<table cellpadding="0" cellspacing="0" style="table-layout: fixed;" width="100%">
-	<tr>
-		<td class="portlet-section-body" rowspan="2" style="border-right: 1px solid <%= colorScheme.getPortletFontDim() %>; vertical-align: top;" width="100">
-			<div class="message-board-thread-left" style="padding:5px;">
-				<c:choose>
-					<c:when test="<%= parentMessage.isAnonymous() %>">
-						<%= LanguageUtil.get(pageContext, "anonymous") %>
-					</c:when>
-					<c:otherwise>
-						<b><%= PortalUtil.getUserName(parentMessage.getUserId(), parentMessage.getUserName(), request) %></b><br>
+	<%
+	boolean editable = false;
 
-						<span style="font-size: xx-small;">
+	message = curParentMessage;
+	MBTopic topic = null;
 
-							<%
-							try {
-								User user2 = UserLocalServiceUtil.getUserById(parentMessage.getUserId());
-								int posts = MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId, parentMessage.getUserId()).getMessageCount();
-								String rank = MBUtil.getRank(portletSetup, posts);
-							%>
+	int depth = 0;
 
-								<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= parentMessage.getUserId() %>" style="margin:10px 0px; width:75%;"><br>
+	String className = "portlet-section-body";
+	String classHoverName = "portlet-section-body-hover";
+	%>
 
-								<%= LanguageUtil.get(pageContext, "rank") %>: <%= rank %><br>
-								<%= LanguageUtil.get(pageContext, "posts") %>: <%= posts %><br>
-								<%= LanguageUtil.get(pageContext, "joined") %>: <%= dateFormatDate.format(user2.getCreateDate()) %>
-
-							<%
-							}
-							catch (NoSuchStatsUserException nssue) {
-							}
-							catch (NoSuchUserException nsue) {
-							}
-							%>
-
-						</span>
-					</c:otherwise>
-				</c:choose>
-			</div>
-		</td>
-		<td class="portlet-section-body" valign="top">
-			<div class="message-board-thread-top" style="border-bottom: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 3px 5px;">
-				<div style="float: left;">
-					<span>
-						<b><%= StringUtil.shorten(parentMessage.getSubject(), 50) %></b>
-					</span>
-					<span style="font-size: xx-small;">
-						|
-
-						<%= dateFormatDateTime.format(parentMessage.getModifiedDate()) %>
-					</span>
-				</div>
-
-				<div style="clear: both;"></div>
-			</div>
-			<div class="message-board-thread-body" style="padding: 15px;">
-				<%= parentMessage.getBody() %>
-
-				<c:if test="<%= parentMessage.isAttachments() %>">
-					<br><br>
-
-					<table border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td valign="top">
-							<b><%= LanguageUtil.get(pageContext, "attachments") %>:</b>
-						</td>
-						<td style="padding-left: 10px;"></td>
-						<td>
-
-							<%
-							String[] fileNames = null;
-
-							try {
-								fileNames = DLServiceUtil.getFileNames(company.getCompanyId(), Company.SYSTEM, parentMessage.getAttachmentsDir());
-							}
-							catch (NoSuchDirectoryException nsde) {
-							}
-
-							for (int i = 0; (fileNames != null) && (i < fileNames.length); i++) {
-								String fileName = FileUtil.getShortFileName(fileNames[i]);
-								long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), Company.SYSTEM, fileNames[i]);
-							%>
-
-								<a href="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/message_boards/get_message_attachment" /><portlet:param name="topicId" value="<%= message.getTopicId() %>" /><portlet:param name="messageId" value="<%= message.getMessageId() %>" /><portlet:param name="attachment" value="<%= fileName %>" /></portlet:actionURL>"><%= fileName %></a> (<%= TextFormatter.formatKB(fileSize, locale) %>k)&nbsp;&nbsp;&nbsp;
-
-							<%
-							}
-							%>
-
-						</td>
-					</tr>
-					</table>
-				</c:if>
-			</div>
-		</td>
-	</tr>
-	</table>
-</div>
+	<%@ include file="/html/portlet/message_boards/view_message_thread_message.jsp" %>
 </c:if>
+
+</form>
 
 <script type="text/javascript">
 	document.<portlet:namespace />fm.<portlet:namespace />subject.focus();
