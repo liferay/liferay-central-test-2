@@ -74,7 +74,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 		font-family: monospace;
 	}
 
-	.message-board-lines {
+	.message-board-code-lines {
 		border-right: 1px solid <%= colorScheme.getPortletFontDim() %>;
 		color: <%= colorScheme.getPortletFontDim() %>;
 		margin-right: 5px;

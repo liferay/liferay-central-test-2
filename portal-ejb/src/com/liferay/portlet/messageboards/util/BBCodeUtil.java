@@ -79,7 +79,7 @@ public class BBCodeUtil {
 				String index = Integer.toString(i + 1);
 				int ld = index.length();
 
-				sb.append("<span class='message-board-lines'>");
+				sb.append("<span class='message-board-code-lines'>");
 
 				for (int j = 0; j < digits - ld; j++) {
 					sb.append("&nbsp;");
