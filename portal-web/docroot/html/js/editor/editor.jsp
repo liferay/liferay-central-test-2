@@ -36,6 +36,7 @@ if (BrowserSniffer.is_rtf(request)) {
 
 //editorImpl = "fckeditor";
 //editorImpl = "liferay";
+//editorImpl = "simple";
 //editorImpl = "tinymce";
 
 // Resin won't allow dynamic content inside the jsp:include tag

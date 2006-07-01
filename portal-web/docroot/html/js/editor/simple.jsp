@@ -50,7 +50,13 @@ String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
 
 <body leftmargin="0" marginheight="0" marginwidth="0" rightmargin="0" topmargin="0" onLoad="initEditor();">
 
-<textarea cols="70" id="textArea" name="textArea" rows="15"></textarea>
+<table bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" height="100%" width="100%">
+<tr>
+	<td bgcolor="#FFFFFF" height="100%">
+		<textarea style="width: 100%; height: 100%;" id="textArea" name="textArea"></textarea>
+	</td>
+</tr>
+</table>
 
 </body>
 

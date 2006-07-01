@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.model;
 
 import com.liferay.portal.model.Company;
+import com.liferay.portlet.messageboards.util.BBCodeUtil;
 import com.liferay.util.Validator;
 
 /**
@@ -53,6 +54,15 @@ public class MBMessage extends MBMessageModel {
 
 	public String getAttachmentsDir() {
 		return "messageboards/" + getTopicId() + "/" + getMessageId();
+	}
+
+	public String getBody(boolean translated) {
+		if (translated) {
+			return BBCodeUtil.getHTML(getBody());
+		}
+		else {
+			return getBody();
+		}
 	}
 
 }

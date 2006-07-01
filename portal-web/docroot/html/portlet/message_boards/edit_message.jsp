@@ -38,17 +38,22 @@ String parentMessageId = BeanParamUtil.getString(message, request, "parentMessag
 String subject = BeanParamUtil.getString(message, request, "subject");
 
 MBMessage curParentMessage = null;
+String parentAuthor = null;
 
-if (Validator.isNotNull(threadId) && Validator.isNull(subject)) {
+if (Validator.isNotNull(threadId)) {
 	try {
 		curParentMessage = MBMessageLocalServiceUtil.getMessage(topicId, parentMessageId);
 
-		if (curParentMessage.getSubject().startsWith("RE: ")) {
-			subject = curParentMessage.getSubject();
+		if (Validator.isNull(subject)) {
+			if (curParentMessage.getSubject().startsWith("RE: ")) {
+				subject = curParentMessage.getSubject();
+			}
+			else {
+				subject = "RE: " + curParentMessage.getSubject();
+			}
 		}
-		else {
-			subject = "RE: " + curParentMessage.getSubject();
-		}
+		
+		parentAuthor = curParentMessage.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : PortalUtil.getUserName(curParentMessage.getUserId(), curParentMessage.getUserName());
 	}
 	catch (Exception e) {
 	}
@@ -56,19 +61,57 @@ if (Validator.isNotNull(threadId) && Validator.isNull(subject)) {
 
 String body = BeanParamUtil.getString(message, request, "body");
 boolean attachments = BeanParamUtil.getBoolean(message, request, "attachments");
+boolean preview = BeanParamUtil.getBoolean(message, request, "preview");
 %>
 
 <script type="text/javascript">
-	function initEditor() {
-		return "<%= UnicodeFormatter.toString(body) %>";
-	}
-
 	function <portlet:namespace />saveMessage() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= message == null ? Constants.ADD : Constants.UPDATE %>";
-		document.<portlet:namespace />fm.<portlet:namespace />body.value = parent.<portlet:namespace />editor.getHTML();
+		document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML();
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
+
+<c:if test="<%= preview %>">
+	<%= LanguageUtil.get(pageContext, "preview") %>:
+
+	<%
+	MBMessage temp = null;
+	if (message != null) {
+		temp = (MBMessage) message.clone();
+		message.setBody(body);
+	}
+	else {
+		message = new MBMessage();
+		message.setSubject(subject);
+		message.setBody(body);
+		message.setAnonymous(BeanParamUtil.getBoolean(message, request, "anonymous"));
+		message.setCreateDate(new Date());
+		message.setModifiedDate(new Date());
+		message.setUserId(user.getUserId());
+		message.setUserName(user.getFullName());
+		message.setThreadId(threadId);
+		message.setTopicId(topicId);
+	}
+
+	boolean editable = false;
+
+	MBTopic topic = null;
+
+	int depth = 0;
+
+	String className = "portlet-section-body";
+	String classHoverName = "portlet-section-body-hover";
+	%>
+
+	<%@ include file="/html/portlet/message_boards/view_message_thread_message.jsp" %>
+	
+	<%
+	message = temp;
+	%>
+	
+	<br>
+</c:if>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveMessage(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
@@ -79,6 +122,7 @@ boolean attachments = BeanParamUtil.getBoolean(message, request, "attachments");
 <input name="<portlet:namespace />threadId" type="hidden" value="<%= threadId %>">
 <input name="<portlet:namespace />parentMessageId" type="hidden" value="<%= parentMessageId %>">
 <input name="<portlet:namespace />attachments" type="hidden" value="<%= attachments %>">
+<input name="<portlet:namespace />preview" type="hidden" value="">
 
 <liferay-ui:tabs names="message" />
 
@@ -134,7 +178,7 @@ if (message != null) {
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<iframe frameborder="0" height="400" id="<portlet:namespace />editor" name="<portlet:namespace />editor" scrolling="no" src="<%= themeDisplay.getPathJavaScript() %>/editor/editor.jsp?p_l_id=<%= plid %>&editorImpl=<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>" width="640"></iframe>
+		<%@ include file="/html/portlet/message_boards/bbcode_editor.jsp" %>
 
 		<input name="<portlet:namespace />body" type="hidden" value="">
 	</td>
@@ -212,7 +256,9 @@ if (message != null) {
 
 <input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, (message != null) ? "update" : ((Validator.isNull(threadId) ? "post-new-thread" : "reply"))) %>'>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, ((attachments) ? "remove" : "attach") + "-files") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = parent.<portlet:namespace />editor.getHTML(); document.<portlet:namespace />fm.<portlet:namespace />attachments.value = '<%= !attachments %>'; submitForm(document.<portlet:namespace />fm);">
+<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, ((attachments) ? "remove" : "attach") + "-files") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML(); document.<portlet:namespace />fm.<portlet:namespace />attachments.value = '<%= !attachments %>'; submitForm(document.<portlet:namespace />fm);">
+
+<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "preview") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML(); document.<portlet:namespace />fm.<portlet:namespace />preview.value = 'true'; submitForm(document.<portlet:namespace />fm);">
 
 <input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
@@ -241,7 +287,3 @@ if (message != null) {
 <script type="text/javascript">
 	document.<portlet:namespace />fm.<portlet:namespace />subject.focus();
 </script>
-
-<%!
-public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.message_boards.edit_message.jsp";
-%>

@@ -3,7 +3,7 @@
  * Modified by Liferay
  */
  
-function ColorPicker (src) {
+function ColorPicker (src, func) {
 	var cp = document.createElement("div");
 	var image = document.createElement("img");
 	var body = document.getElementsByTagName("body")[0];
@@ -33,6 +33,9 @@ function ColorPicker (src) {
 	 
 	this.hide = function () {
 		cp.style.display = "none";
+		if (func != null) {
+			func();
+		}
 	}
 	
 	this.toggle = function (obj) {

@@ -120,7 +120,7 @@
 				<div style="clear: both;"></div>
 			</div>
 			<div class="message-board-thread-body" style="padding: 15px;">
-				<%= message.getBody() %>
+				<%= message.getBody(true) %>
 
 				<c:if test="<%= message.isAttachments() %>">
 					<br><br>
