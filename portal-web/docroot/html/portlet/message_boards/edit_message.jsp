@@ -52,7 +52,7 @@ if (Validator.isNotNull(threadId)) {
 				subject = "RE: " + curParentMessage.getSubject();
 			}
 		}
-		
+
 		parentAuthor = curParentMessage.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : PortalUtil.getUserName(curParentMessage.getUserId(), curParentMessage.getUserName());
 	}
 	catch (Exception e) {
@@ -77,21 +77,24 @@ boolean preview = BeanParamUtil.getBoolean(message, request, "preview");
 
 	<%
 	MBMessage temp = null;
+
 	if (message != null) {
-		temp = (MBMessage) message.clone();
+		temp = (MBMessage)message.clone();
+
 		message.setBody(body);
 	}
 	else {
 		message = new MBMessage();
+
+		message.setTopicId(topicId);
+		message.setUserId(user.getUserId());
+		message.setUserName(user.getFullName());
+		message.setCreateDate(new Date());
+		message.setModifiedDate(new Date());
+		message.setThreadId(threadId);
 		message.setSubject(subject);
 		message.setBody(body);
 		message.setAnonymous(BeanParamUtil.getBoolean(message, request, "anonymous"));
-		message.setCreateDate(new Date());
-		message.setModifiedDate(new Date());
-		message.setUserId(user.getUserId());
-		message.setUserName(user.getFullName());
-		message.setThreadId(threadId);
-		message.setTopicId(topicId);
 	}
 
 	boolean editable = false;
@@ -105,11 +108,11 @@ boolean preview = BeanParamUtil.getBoolean(message, request, "preview");
 	%>
 
 	<%@ include file="/html/portlet/message_boards/view_message_thread_message.jsp" %>
-	
+
 	<%
 	message = temp;
 	%>
-	
+
 	<br>
 </c:if>
 

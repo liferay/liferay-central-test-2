@@ -53,7 +53,7 @@ String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
 <table bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" height="100%" width="100%">
 <tr>
 	<td bgcolor="#FFFFFF" height="100%">
-		<textarea style="width: 100%; height: 100%;" id="textArea" name="textArea"></textarea>
+		<textarea style="height: 100%; width: 100%;" id="textArea" name="textArea"></textarea>
 	</td>
 </tr>
 </table>

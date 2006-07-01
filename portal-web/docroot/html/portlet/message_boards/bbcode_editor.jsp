@@ -53,6 +53,7 @@
 		width: 2px;
 	}
 </style>
+
 <script type="text/javascript">
 	function <portlet:namespace />buttonDown(button) {
 		button.className = "button-down";
@@ -79,8 +80,9 @@
 			<c:when test="<%= Validator.isNull(body) && curParentMessage != null %>">
 				var respondee = "<%= UnicodeFormatter.toString(parentAuthor) %>";
 				var quote = "<%= UnicodeFormatter.toString(curParentMessage.getBody(false)) %>";
+
 				<portlet:namespace />insertTag("quote", respondee, quote);
-			</c:when>		
+			</c:when>
 			<c:otherwise>
 				<portlet:namespace />setHTML("<%= UnicodeFormatter.toString(GetterUtil.getString(body)) %>");
 			</c:otherwise>
@@ -89,11 +91,13 @@
 
 	function <portlet:namespace />insertColor() {
 		var color = document.getElementById("fontColor").value;
+
 		<portlet:namespace />insertTag("color", color);
 	}
 
 	function <portlet:namespace />insertEmail() {
 		var addy = prompt("Enter an email address:", "");
+
 		if (addy != null && addy != "") {
 			var name = prompt("Enter a name associated with the email:", "");
 
@@ -109,21 +113,25 @@
 
 	function <portlet:namespace />insertImage() {
 		var url = prompt("Enter a address for a picture:", "http://");
+
 		if (url != null && url != "") {
 			<portlet:namespace />resetSelection();
 			<portlet:namespace />insertTag('img', null, url);
 		}
 	}
-	
+
 	function <portlet:namespace />insertList(ordered) {
 		var list = "\n";
 		var entry;
+
 		while (entry = prompt("Enter a list item.  Click 'cancel' or leave blank to end the list.", "")) {
 			if (entry == null || entry == "") {
 				break;
 			}
+
 			list += '[*]' + entry + '\n';
 		}
+
 		if (list != "\n") {
 			<portlet:namespace />resetSelection();
 			<portlet:namespace />insertTag("list", ordered, list);
@@ -132,6 +140,7 @@
 
 	function <portlet:namespace />insertUrl() {
 		var url = prompt("Enter a address:", "http://");
+
 		if (url != null) {
 			var title = prompt("Enter a title for the link:");
 
@@ -147,18 +156,23 @@
 
 	function <portlet:namespace />insertTag(tag, param, content) {
 		var begTag;
+
 		if (param != null) {
-			begTag = "[" + tag + "=" + param + "]";		
+			begTag = "[" + tag + "=" + param + "]";
 		}
 		else {
 			begTag = "[" + tag + "]";
 		}
+
 		var endTag = "[/" + tag + "]";
-	
-		var field = document.getElementById("textArea");	
+
+		var field = document.getElementById("textArea");
+
 		if (is_ie) {
 			field.focus();
+
 			var sel = document.selection.createRange();
+
 			if (content != null) {
 				sel.text = begTag + content + endTag;
 			}
@@ -169,13 +183,13 @@
 		else if (field.selectionStart || field.selectionStart == "0") {
 			var startPos = field.selectionStart;
 			var endPos = field.selectionEnd;
-			
+
 			var preSel = field.value.substring(0, startPos);
 			var sel = field.value.substring(startPos, endPos);
 			var postSel = field.value.substring(endPos, field.value.length);
 
 			if (content != null) {
-				field.value = preSel + begTag + content + endTag + postSel;				
+				field.value = preSel + begTag + content + endTag + postSel;
 			}
 			else {
 				field.value = preSel + begTag + sel + endTag + postSel;
@@ -185,12 +199,15 @@
 			field.value += begTag + content + endTag;
 		}
 	}
-	
+
 	function <portlet:namespace />resetSelection() {
 		var field = document.getElementById("textArea");
+
 		if (is_ie) {
 			field.focus();
+
 			var sel = document.selection.createRange();
+
 			sel.collapse(false);
 			sel.select();
 		}
@@ -258,7 +275,7 @@
 </tr>
 <tr>
 	<td bgcolor="#FFFFFF" height="100%">
-		<textarea style="width: 100%; height: 100%;" id="textArea" name="textArea"></textarea>
+		<textarea style="height: 100%; width: 100%;" id="textArea" name="textArea"></textarea>
 	</td>
 </tr>
 </table>
