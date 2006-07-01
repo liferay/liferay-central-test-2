@@ -80,7 +80,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<liferay-ui:input-checkbox param="unpackWar" defaultValue="<%= PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_UNPACK_WAR) %>" />
+		<liferay-ui:input-checkbox param="unpackWar" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_UNPACK_WAR) %>" />
 	</td>
 </tr>
 
