@@ -28,6 +28,7 @@ import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.LDAPUtil;
 import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringPool;
@@ -222,9 +223,41 @@ public class LDAPAuth implements Authenticator {
 			Locale locale = Locale.US;
 			String firstName = LDAPUtil.getAttributeValue(
 				attrs, userMappings.getProperty("firstName"));
-			String middleName = StringPool.BLANK;
+			String middleName = LDAPUtil.getAttributeValue(
+				attrs, userMappings.getProperty("middleName"));
 			String lastName = LDAPUtil.getAttributeValue(
 				attrs, userMappings.getProperty("lastName"));
+
+			if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
+				String fullName = LDAPUtil.getAttributeValue(
+					attrs, userMappings.getProperty("fullName"));
+
+				if (Validator.isNotNull(fullName)) {
+					String [] name = StringUtil.split(fullName, " ");
+
+					firstName = name[0];
+					lastName = name[name.length - 1];
+
+					if (name.length > 2) {
+						for (int i = 1; i < name.length - 1; i++) {
+							if (Validator.isNull(name[i].trim())) {
+								continue;
+							}
+
+							if (i != 1) {
+								middleName += " ";
+							}
+
+							middleName += name[i].trim();
+						}
+					}
+				}
+				else {
+					firstName = GetterUtil.getString(firstName, lastName);
+					lastName = firstName;
+				}
+			}
+
 			String nickName = null;
 			String prefixId = null;
 			String suffixId = null;
@@ -232,7 +265,8 @@ public class LDAPAuth implements Authenticator {
 			int birthdayMonth = Calendar.JANUARY;
 			int birthdayDay = 1;
 			int birthdayYear = 1970;
-			String jobTitle = null;
+			String jobTitle = LDAPUtil.getAttributeValue(
+				attrs, userMappings.getProperty("jobTitle"));
 			String organizationId = null;
 			String locationId = null;
 			boolean sendEmail = false;
