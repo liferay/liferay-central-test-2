@@ -75,7 +75,7 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 
 		<%= LanguageUtil.get(pageContext, "previous") %>
 
-		<c:if test="<%= !isFirstThread %>">
+		<c:if test="<%= previousThread != null %>">
 			</a>
 		</c:if>
 
@@ -87,7 +87,7 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 
 		<%= LanguageUtil.get(pageContext, "next") %>
 
-		<c:if test="<%= isLastThread %>">
+		<c:if test="<%= nextThread != null %>">
 			</a>
 		</c:if>
 
