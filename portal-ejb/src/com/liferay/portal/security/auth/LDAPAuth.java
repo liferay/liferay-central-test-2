@@ -216,7 +216,7 @@ public class LDAPAuth implements Authenticator {
 
 			if (Validator.isNull(emailAddress)) {
 				emailAddress = LDAPUtil.getAttributeValue(
-					attrs, userMappings.getProperty("mail"));
+					attrs, userMappings.getProperty("emailAddress"));
 			}
 
 			Locale locale = Locale.US;
