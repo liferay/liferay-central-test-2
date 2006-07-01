@@ -61,7 +61,7 @@ if (Validator.isNotNull(threadId)) {
 
 String body = BeanParamUtil.getString(message, request, "body");
 boolean attachments = BeanParamUtil.getBoolean(message, request, "attachments");
-boolean preview = BeanParamUtil.getBoolean(message, request, "preview");
+boolean preview = ParamUtil.getBoolean(request, "preview");
 %>
 
 <script type="text/javascript">
