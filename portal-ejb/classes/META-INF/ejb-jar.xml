@@ -10218,6 +10218,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.documentlibrary.service.ejb.DLLocalServiceHome</local-home>
+				<local>com.liferay.documentlibrary.service.ejb.DLLocalServiceEJB</local>
+				<ejb-link>com_liferay_documentlibrary_service_ejb_DLLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLFileEntryLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.documentlibrary.service.ejb.DLFileEntryLocalServiceHome</local-home>
@@ -10253,6 +10260,13 @@
 				<local-home>com.liferay.portal.service.ejb.ResourceLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.ResourceLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.documentlibrary.service.ejb.DLLocalServiceHome</local-home>
+				<local>com.liferay.documentlibrary.service.ejb.DLLocalServiceEJB</local>
+				<ejb-link>com_liferay_documentlibrary_service_ejb_DLLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLFileEntryLocalServiceHome</ejb-ref-name>

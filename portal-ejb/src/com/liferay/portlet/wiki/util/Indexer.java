@@ -41,10 +41,8 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Hits;
-import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Searcher;
 
 /**
@@ -76,16 +74,14 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 					LuceneFields.UID,
 					LuceneFields.getUID(PORTLET_ID, nodeId, title)));
 
-			doc.add(LuceneFields.getKeyword(
-				LuceneFields.COMPANY_ID, companyId));
-			doc.add(LuceneFields.getKeyword(
-				LuceneFields.PORTLET_ID, PORTLET_ID));
+			doc.add(
+				LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
+			doc.add(
+				LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
 			doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
 
-			doc.add(new Field(LuceneFields.TITLE, title, Field.Store.YES,
-					Field.Index.TOKENIZED));
-			doc.add(new Field(LuceneFields.CONTENT, content, Field.Store.YES,
-					Field.Index.TOKENIZED));
+			doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
+			doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
 
 			doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
 
@@ -126,12 +122,7 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 
 			Searcher searcher = LuceneUtil.getSearcher(companyId);
 
-			QueryParser queryParser = new QueryParser(LuceneFields.CONTENT,
-					LuceneUtil.getAnalyzer());
-
-			Query query = queryParser.parse(booleanQuery.toString());
-
-			Hits hits = searcher.search(query);
+			Hits hits = searcher.search(booleanQuery);
 
 			if (hits.length() > 0) {
 				IndexReader reader = LuceneUtil.getReader(companyId);
@@ -174,6 +165,7 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 		// Content
 
 		String content = doc.get(LuceneFields.CONTENT);
+
 		content = StringUtil.shorten(content, 200);
 
 		// URL

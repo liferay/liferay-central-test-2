@@ -158,6 +158,17 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference>
+			<![CDATA[
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.documentlibrary.service.ejb.DLLocalServiceHome</local-home>
+				<local>com.liferay.documentlibrary.service.ejb.DLLocalServiceEJB</local>
+				<ejb-link>com_liferay_documentlibrary_service_ejb_DLLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			]]>
+		</reference>
 	</entity>
 	<exceptions>
 		<exception>FolderName</exception>

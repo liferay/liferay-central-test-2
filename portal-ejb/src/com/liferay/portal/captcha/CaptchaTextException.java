@@ -25,26 +25,26 @@ package com.liferay.portal.captcha;
 import com.liferay.portal.PortalException;
 
 /**
- * <a href="CaptchaException.java.html"><b><i>View Source</i></b></a>
+ * <a href="CaptchaTextException.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class CaptchaException extends PortalException {
+public class CaptchaTextException extends PortalException {
 
-	public CaptchaException() {
+	public CaptchaTextException() {
 		super();
 	}
 
-	public CaptchaException(String msg) {
+	public CaptchaTextException(String msg) {
 		super(msg);
 	}
 
-	public CaptchaException(String msg, Throwable cause) {
+	public CaptchaTextException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public CaptchaException(Throwable cause) {
+	public CaptchaTextException(Throwable cause) {
 		super(cause);
 	}
 

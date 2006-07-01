@@ -38,15 +38,12 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.jcr.JCRConstants;
 import com.liferay.portal.jcr.JCRFactoryUtil;
-import com.liferay.portal.lucene.LuceneFields;
-import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.lucene.Hits;
 import com.liferay.util.lucene.IndexerException;
 
 import java.io.BufferedInputStream;
@@ -68,14 +65,6 @@ import javax.jcr.version.VersionHistory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.index.Term;
-import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.queryParser.QueryParser;
-import org.apache.lucene.search.BooleanClause;
-import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Query;
-import org.apache.lucene.search.Searcher;
-import org.apache.lucene.search.TermQuery;
 
 /**
  * <a href="DLServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -486,58 +475,6 @@ public class DLServiceImpl implements DLService {
 		}
 		catch (IndexerException ie) {
 			throw new SystemException(ie);
-		}
-	}
-
-	public Hits search(
-			String companyId, String portletId, String groupId,
-			String[] repositoryIds, String keywords)
-		throws SystemException {
-
-		try {
-			Hits hits = new Hits();
-
-			if (Validator.isNull(keywords)) {
-				return hits;
-			}
-
-			BooleanQuery booleanQuery = new BooleanQuery();
-
-			LuceneUtil.addRequiredTerm(
-				booleanQuery, LuceneFields.PORTLET_ID, portletId);
-			LuceneUtil.addRequiredTerm(
-				booleanQuery, LuceneFields.GROUP_ID, groupId);
-
-			if ((repositoryIds != null) && (repositoryIds.length > 0)) {
-				BooleanQuery repositoryIdsQuery = new BooleanQuery();
-
-				for (int i = 0; i < repositoryIds.length; i++) {
-					repositoryIdsQuery.add(new TermQuery(new Term(
-						"repositoryId", repositoryIds[i])),
-						BooleanClause.Occur.SHOULD);
-				}
-
-				booleanQuery.add(repositoryIdsQuery, BooleanClause.Occur.MUST);
-			}
-
-			LuceneUtil.addTerm(booleanQuery, LuceneFields.CONTENT, keywords);
-
-			Searcher searcher = LuceneUtil.getSearcher(companyId);
-
-			QueryParser queryParser = new QueryParser(LuceneFields.CONTENT,
-					LuceneUtil.getAnalyzer());
-
-			Query query = queryParser.parse(booleanQuery.toString());
-
-			hits.recordHits(searcher.search(query));
-
-			return hits;
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
-		catch (ParseException pe) {
-			throw new SystemException(pe);
 		}
 	}
 

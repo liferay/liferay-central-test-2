@@ -24,7 +24,6 @@ package com.liferay.documentlibrary.service.spring;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.util.lucene.Hits;
 
 import java.rmi.RemoteException;
 
@@ -78,11 +77,6 @@ public interface DLService {
 		throws PortalException, RemoteException, SystemException;
 
 	public void reIndex(String[] ids) throws RemoteException, SystemException;
-
-	public Hits search(
-			String companyId, String portletId, String groupId,
-			String[] repositoryIds, String keywords)
-		throws RemoteException, SystemException;
 
 	public void updateFile(
 			String companyId, String portletId, String groupId,

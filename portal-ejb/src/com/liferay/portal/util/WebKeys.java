@@ -53,7 +53,9 @@ public class WebKeys {
 
 	public static final String CALENDAR_EVENT = "CALENDAR_EVENT";
 
-	public static final String CAPTCHA = "CAPTCHA";
+	public static final String CAPTCHA_COUNT = "CAPTCHA_COUNT";
+
+	public static final String CAPTCHA_TEXT = "CAPTCHA_TEXT";
 
 	public static final String COLOR_SCHEME = "COLOR_SCHEME";
 

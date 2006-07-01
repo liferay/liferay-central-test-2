@@ -23,7 +23,7 @@
 package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.counter.service.spring.CounterServiceUtil;
-import com.liferay.documentlibrary.service.spring.DLServiceUtil;
+import com.liferay.documentlibrary.service.spring.DLLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Resource;
@@ -220,7 +220,7 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 			String keywords)
 		throws PortalException, SystemException {
 
-		return DLServiceUtil.search(
+		return DLLocalServiceUtil.search(
 			companyId, PortletKeys.DOCUMENT_LIBRARY, groupId, folderIds,
 			keywords);
 	}

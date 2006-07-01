@@ -24,7 +24,6 @@ package com.liferay.documentlibrary.service.spring;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.util.lucene.Hits;
 
 /**
  * <a href="DLServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -231,25 +230,6 @@ public class DLServiceUtil {
 			DLService dlService = DLServiceFactory.getService();
 
 			dlService.reIndex(ids);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
-	public static Hits search(
-			String companyId, String portletId, String groupId,
-			String[] repositoryIds, String keywords)
-		throws PortalException, SystemException {
-
-		try {
-			DLService dlService = DLServiceFactory.getService();
-
-			return dlService.search(
-				companyId, portletId, groupId, repositoryIds, keywords);
 		}
 		catch (SystemException se) {
 			throw se;

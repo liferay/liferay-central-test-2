@@ -73,9 +73,7 @@ import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
 
 import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Searcher;
 
 /**
@@ -332,11 +330,7 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 
 			Searcher searcher = LuceneUtil.getSearcher(companyId);
 
-			Query query = QueryParser.parse(
-				booleanQuery.toString(), LuceneFields.CONTENT,
-				LuceneUtil.getAnalyzer());
-
-			hits.recordHits(searcher.search(query));
+			hits.recordHits(searcher.search(booleanQuery));
 
 			return hits;
 		}

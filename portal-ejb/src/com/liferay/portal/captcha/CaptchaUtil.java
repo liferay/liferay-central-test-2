@@ -41,25 +41,73 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CaptchaUtil {
 
-	public static void check(PortletRequest req) throws CaptchaException {
-		if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.CAPTCHA_CHALLENGE))) {
+	public static void check(PortletRequest req) throws CaptchaTextException {
+		if (isEnabled(req)) {
 			PortletSession ses = req.getPortletSession();
 
-			String captcha = (String)ses.getAttribute(WebKeys.CAPTCHA);
+			String captchaText = (String)ses.getAttribute(WebKeys.CAPTCHA_TEXT);
 
 			// Captcha should never be null, but on the rare occasion it is,
 			// just let people register.
 
-			if (captcha != null) {
-				if (!captcha.equals(ParamUtil.getString(req, "captcha"))) {
-					throw new CaptchaException();
+			if (captchaText != null) {
+				if (!captchaText.equals(
+						ParamUtil.getString(req, "captchaText"))) {
+
+					throw new CaptchaTextException();
+				}
+				else {
+					if (_log.isDebugEnabled()) {
+						_log.debug("Captcha text is valid");
+					}
+
+					int captchaMaxChallenges = GetterUtil.getInteger(
+						PropsUtil.get(PropsUtil.CAPTCHA_MAX_CHALLENGES));
+
+					if (captchaMaxChallenges > 0) {
+						Integer count = (Integer)ses.getAttribute(
+							WebKeys.CAPTCHA_COUNT);
+
+						if (count == null) {
+							count = new Integer(1);
+						}
+						else {
+							count = new Integer(count.intValue() + 1);
+						}
+
+						ses.setAttribute(WebKeys.CAPTCHA_COUNT, count);
+					}
 				}
 			}
 			else {
 				if (_log.isErrorEnabled()) {
-					_log.error("Captcha is null");
+					_log.error("Captcha text is null");
 				}
 			}
+		}
+	}
+
+	public static boolean isEnabled(PortletRequest req) {
+		int captchaMaxChallenges = GetterUtil.getInteger(
+			PropsUtil.get(PropsUtil.CAPTCHA_MAX_CHALLENGES));
+
+		if (captchaMaxChallenges > 0) {
+			PortletSession ses = req.getPortletSession();
+
+			Integer count = (Integer)ses.getAttribute(WebKeys.CAPTCHA_COUNT);
+
+			if ((count != null) && (captchaMaxChallenges <= count.intValue())) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+		else if (captchaMaxChallenges < 0) {
+			return false;
+		}
+		else {
+			return true;
 		}
 	}
 

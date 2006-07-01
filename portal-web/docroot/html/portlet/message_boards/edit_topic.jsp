@@ -49,7 +49,7 @@ String categoryId = BeanParamUtil.getString(topic, request, "categoryId", MBCate
 
 <liferay-ui:tabs names="topic" />
 
-<liferay-ui:error exception="<%= CaptchaException.class %>" message="text-verification-failed" />
+<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 <liferay-ui:error exception="<%= TopicNameException.class %>" message="please-enter-a-valid-name" />
 
 <%= MBUtil.getBreadcrumbs(categoryId, null, null, pageContext, renderResponse) %>

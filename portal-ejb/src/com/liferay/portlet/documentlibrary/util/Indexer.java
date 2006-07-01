@@ -71,6 +71,7 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 		// Content
 
 		String content = doc.get(LuceneFields.CONTENT);
+
 		content = StringUtil.shorten(content, 200);
 
 		// URL

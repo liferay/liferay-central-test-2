@@ -268,7 +268,7 @@ public class PropsUtil {
 
 	// Captcha
 
-	public static final String CAPTCHA_CHALLENGE = "captcha.challenge";
+	public static final String CAPTCHA_MAX_CHALLENGES = "captcha.max.challenges";
 
 	// Startup Events
 

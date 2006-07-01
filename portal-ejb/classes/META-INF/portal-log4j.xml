@@ -64,8 +64,12 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.lucene.LuceneFileExtractor">
+	<category name="com.liferay.portal.lucene">
 		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.lucene.LuceneFileExtractor">
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.model.ModelHintsUtil">
@@ -73,7 +77,7 @@
 	</category>
 
 	<category name="com.liferay.portal.security.auth.LDAPAuth">
-		<priority value="DEBUG" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.security.permission.PermissionChecker">
@@ -192,18 +196,6 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portlet.messageboards.service.persistence.MBTopicPool">
-		<priority value="ERROR" />
-	</category>
-
-	<category name="com.liferay.portlet.polls.service.persistence.PollsQuestionPool">
-		<priority value="ERROR" />
-	</category>
-
-	<category name="com.liferay.portlet.teststruts">
-		<priority value="INFO" />
-	</category>
-
 	<category name="com.liferay.portlet.wsrp">
 		<priority value="ERROR" />
 	</category>
@@ -217,10 +209,6 @@
 	</category>
 
 	<category name="com.liferay.util.servlet.ServletResponseUtil">
-		<priority value="ERROR" />
-	</category>
-
-	<category name="com.objectparadigms">
 		<priority value="ERROR" />
 	</category>
 

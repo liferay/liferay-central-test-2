@@ -29,7 +29,12 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.jcr.JCRConstants;
 import com.liferay.portal.jcr.JCRFactoryUtil;
+import com.liferay.portal.lucene.LuceneFields;
+import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.util.Validator;
+import com.liferay.util.lucene.Hits;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import javax.jcr.Node;
@@ -39,6 +44,13 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.version.Version;
 import javax.jcr.version.VersionHistory;
+
+import org.apache.lucene.index.Term;
+import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.Searcher;
+import org.apache.lucene.search.TermQuery;
 
 /**
  * <a href="DLLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -119,6 +131,55 @@ public class DLLocalServiceImpl implements DLLocalService {
 		}
 
 		return contentNode;
+	}
+
+	public Hits search(
+			String companyId, String portletId, String groupId,
+			String[] repositoryIds, String keywords)
+		throws SystemException {
+
+		try {
+			Hits hits = new Hits();
+
+			if (Validator.isNull(keywords)) {
+				return hits;
+			}
+
+			BooleanQuery booleanQuery = new BooleanQuery();
+
+			LuceneUtil.addRequiredTerm(
+				booleanQuery, LuceneFields.PORTLET_ID, portletId);
+			LuceneUtil.addRequiredTerm(
+				booleanQuery, LuceneFields.GROUP_ID, groupId);
+
+			if ((repositoryIds != null) && (repositoryIds.length > 0)) {
+				BooleanQuery repositoryIdsQuery = new BooleanQuery();
+
+				for (int i = 0; i < repositoryIds.length; i++) {
+					Term term = new Term("repositoryId", repositoryIds[i]);
+					TermQuery termQuery = new TermQuery(term);
+
+					repositoryIdsQuery.add(
+						termQuery, BooleanClause.Occur.SHOULD);
+				}
+
+				booleanQuery.add(repositoryIdsQuery, BooleanClause.Occur.MUST);
+			}
+
+			LuceneUtil.addTerm(booleanQuery, LuceneFields.CONTENT, keywords);
+
+			Searcher searcher = LuceneUtil.getSearcher(companyId);
+
+			hits.recordHits(searcher.search(booleanQuery));
+
+			return hits;
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+		catch (ParseException pe) {
+			throw new SystemException(pe);
+		}
 	}
 
 }

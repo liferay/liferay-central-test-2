@@ -49,14 +49,22 @@ public class KeywordsUtil {
 		return text;
 	}
 
-	public static String toWildcard(String keywords) {
+	public static String toFuzzy(String keywords) {
 		if (keywords == null) {
 			return null;
 		}
 
-		/*if (!keywords.startsWith(StringPool.STAR)) {
-			keywords = StringPool.STAR + keywords;
-		}*/
+		if (!keywords.endsWith(StringPool.TILDE)) {
+			keywords = keywords + StringPool.TILDE;
+		}
+
+		return keywords;
+	}
+
+	public static String toWildcard(String keywords) {
+		if (keywords == null) {
+			return null;
+		}
 
 		if (!keywords.endsWith(StringPool.STAR)) {
 			keywords = keywords + StringPool.STAR;

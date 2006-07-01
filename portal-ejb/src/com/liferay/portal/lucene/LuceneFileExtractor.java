@@ -101,8 +101,8 @@ public class LuceneFileExtractor {
 			}
 
 			if (filter != null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
+				if (_log.isInfoEnabled()) {
+					_log.info(
 						"Using filter " + filter.getClass().getName() +
 							" for extension " + fileExt);
 				}
@@ -131,8 +131,8 @@ public class LuceneFileExtractor {
 				text = sb.toString();
 			}
 			else {
-				if (_log.isDebugEnabled()) {
-					_log.debug("No filter found for extension " + fileExt);
+				if (_log.isInfoEnabled()) {
+					_log.info("No filter found for extension " + fileExt);
 				}
 			}
 		}
@@ -144,7 +144,7 @@ public class LuceneFileExtractor {
 			_log.debug("Filter returned text:\n\n" + text);
 		}
 
-		return new Field(field, text, Field.Store.YES, Field.Index.TOKENIZED);
+		return LuceneFields.getText(field, text);
 	}
 
 	public Field getFile(String field, byte[] byteArray, String fileExt)

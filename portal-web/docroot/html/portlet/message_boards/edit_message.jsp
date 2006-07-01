@@ -82,7 +82,7 @@ boolean attachments = BeanParamUtil.getBoolean(message, request, "attachments");
 
 <liferay-ui:tabs names="message" />
 
-<liferay-ui:error exception="<%= CaptchaException.class %>" message="text-verification-failed" />
+<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 <liferay-ui:error exception="<%= MessageBodyException.class %>" message="please-enter-a-valid-message" />
 <liferay-ui:error exception="<%= MessageSubjectException.class %>" message="please-enter-a-valid-subject" />
 

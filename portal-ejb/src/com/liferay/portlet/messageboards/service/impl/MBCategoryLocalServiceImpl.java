@@ -56,9 +56,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.queryParser.QueryParser;
+import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.TermQuery;
 
@@ -292,22 +291,26 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 				BooleanQuery categoryIdsQuery = new BooleanQuery();
 
 				for (int i = 0; i < categoryIds.length; i++) {
-					categoryIdsQuery.add(new TermQuery(new Term(
-						"categoryId", categoryIds[i])), false, false);
+					Term term = new Term("categoryId", categoryIds[i]);
+					TermQuery termQuery = new TermQuery(term);
+
+					categoryIdsQuery.add(termQuery, BooleanClause.Occur.SHOULD);
 				}
 
-				booleanQuery.add(categoryIdsQuery, true, false);
+				booleanQuery.add(categoryIdsQuery, BooleanClause.Occur.MUST);
 			}
 
 			if ((topicIds != null) && (topicIds.length > 0)) {
 				BooleanQuery topicIdsQuery = new BooleanQuery();
 
 				for (int i = 0; i < topicIds.length; i++) {
-					topicIdsQuery.add(new TermQuery(new Term(
-						"topicId", topicIds[i])), false, false);
+					Term term = new Term("topicId", topicIds[i]);
+					TermQuery termQuery = new TermQuery(term);
+
+					topicIdsQuery.add(termQuery, BooleanClause.Occur.SHOULD);
 				}
 
-				booleanQuery.add(topicIdsQuery, true, false);
+				booleanQuery.add(topicIdsQuery, BooleanClause.Occur.MUST);
 			}
 
 			if (Validator.isNotNull(threadId)) {
@@ -319,11 +322,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 			Searcher searcher = LuceneUtil.getSearcher(companyId);
 
-			Query query = QueryParser.parse(
-				booleanQuery.toString(), LuceneFields.CONTENT,
-				LuceneUtil.getAnalyzer());
-
-			hits.recordHits(searcher.search(query));
+			hits.recordHits(searcher.search(booleanQuery));
 
 			return hits;
 		}

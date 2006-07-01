@@ -119,10 +119,10 @@ public class IndexerImpl {
 					LuceneFields.UID,
 					LuceneFields.getUID(portletId, repositoryId, fileName)));
 
-			doc.add(LuceneFields.getKeyword(
-				LuceneFields.COMPANY_ID, companyId));
-			doc.add(LuceneFields.getKeyword(
-				LuceneFields.PORTLET_ID, portletId));
+			doc.add(
+				LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
+			doc.add(
+				LuceneFields.getKeyword(LuceneFields.PORTLET_ID, portletId));
 			doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
 
 			doc.add(LuceneFields.getFile(LuceneFields.CONTENT, is, fileExt));

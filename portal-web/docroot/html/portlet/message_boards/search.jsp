@@ -47,6 +47,8 @@ String keywords = ParamUtil.getString(request, "keywords");
 <input name="<portlet:namespace />topicIds" type="hidden" value="<%= topicIds %>">
 <input name="<portlet:namespace />threadId" type="hidden" value="<%= threadId %>">
 
+<liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
+
 <%= MBUtil.getBreadcrumbs(breadcrumbsCategoryId, breadcrumbsTopicId, breadcrumbsMessageId, pageContext, renderResponse) %> &raquo; <%= LanguageUtil.get(pageContext, "search") %>
 
 <br><br>

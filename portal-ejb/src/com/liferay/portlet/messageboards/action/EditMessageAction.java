@@ -24,7 +24,7 @@ package com.liferay.portlet.messageboards.action;
 
 import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.FileSizeException;
-import com.liferay.portal.captcha.CaptchaException;
+import com.liferay.portal.captcha.CaptchaTextException;
 import com.liferay.portal.captcha.CaptchaUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
@@ -104,7 +104,7 @@ public class EditMessageAction extends PortletAction {
 				setForward(req, "portlet.message_boards.error");
 			}
 			else if (e != null &&
-					 e instanceof CaptchaException ||
+					 e instanceof CaptchaTextException ||
 					 e instanceof FileNameException ||
 					 e instanceof FileSizeException ||
 					 e instanceof MessageBodyException ||

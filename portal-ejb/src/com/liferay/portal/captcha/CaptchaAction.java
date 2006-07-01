@@ -69,14 +69,14 @@ public class CaptchaAction extends PortletAction {
 		try {
 			PortletSession ses = req.getPortletSession();
 
-			String captcha = _producer.createText();
+			String captchaText = _producer.createText();
 
-			ses.setAttribute(WebKeys.CAPTCHA, captcha);
+			ses.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
 
 			HttpServletResponse httpRes =
 				((ActionResponseImpl)res).getHttpServletResponse();
 
-			_producer.createImage(httpRes.getOutputStream(), captcha);
+			_producer.createImage(httpRes.getOutputStream(), captchaText);
 		}
 		catch (Exception e) {
 			_log.error(e);

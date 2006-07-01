@@ -24,6 +24,7 @@ package com.liferay.documentlibrary.service.spring;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.util.lucene.Hits;
 
 import java.io.InputStream;
 
@@ -94,6 +95,25 @@ public class DLLocalServiceUtil {
 		}
 		catch (PortalException pe) {
 			throw pe;
+		}
+		catch (SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
+
+	public static Hits search(
+			String companyId, String portletId, String groupId,
+			String[] repositoryIds, String keywords)
+		throws PortalException, SystemException {
+
+		try {
+			DLLocalService dlLocalService = DLLocalServiceFactory.getService();
+
+			return dlLocalService.search(
+				companyId, portletId, groupId, repositoryIds, keywords);
 		}
 		catch (SystemException se) {
 			throw se;

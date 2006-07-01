@@ -24,11 +24,13 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
+<%@ page import="com.liferay.portal.captcha.CaptchaUtil" %>
+
 <%
 String url = (String)request.getAttribute("liferay-ui:captcha:url");
 %>
 
-<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.CAPTCHA_CHALLENGE)) %>">
+<c:if test="<%= CaptchaUtil.isEnabled(renderRequest) %>">
 	<div>
 		<img src="<%= url %>">
 	</div>
@@ -42,7 +44,7 @@ String url = (String)request.getAttribute("liferay-ui:captcha:url");
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="<%= namespace %>captcha" size="10" type="text" value="">
+			<input class="form-text" name="<%= namespace %>captchaText" size="10" type="text" value="">
 		</td>
 	</tr>
 	</table>

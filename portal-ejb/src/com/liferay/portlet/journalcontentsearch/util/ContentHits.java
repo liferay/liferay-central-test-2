@@ -49,6 +49,8 @@ public class ContentHits extends Hits {
 	public void recordHits(Hits hits, String ownerId)
 		throws IOException, SystemException {
 
+		// This can later be optimized according to LEP-915.
+
 		List docs = new ArrayList(hits.getLength());
 		List scores = new ArrayList(hits.getLength());
 		List layoutIdsList = new ArrayList(hits.getLength());

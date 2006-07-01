@@ -93,9 +93,7 @@ import javax.portlet.PortletPreferences;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.Sort;
 import org.apache.lucene.search.SortField;
@@ -801,11 +799,7 @@ public class JournalArticleLocalServiceImpl
 
 			Searcher searcher = LuceneUtil.getSearcher(companyId);
 
-			Query query = QueryParser.parse(
-				booleanQuery.toString(), LuceneFields.CONTENT,
-				LuceneUtil.getAnalyzer());
-
-			hits.recordHits(searcher.search(query, sort));
+			hits.recordHits(searcher.search(booleanQuery, sort));
 
 			return hits;
 		}

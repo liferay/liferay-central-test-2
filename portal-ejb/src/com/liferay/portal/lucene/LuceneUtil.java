@@ -74,13 +74,13 @@ public class LuceneUtil {
 		throws ParseException {
 
 		if (Validator.isNotNull(text)) {
-			if (text.indexOf(StringPool.SPACE) == -1) {
-				text = KeywordsUtil.toWildcard(text);
-			}
-
 			QueryParser queryParser = new QueryParser(field, getAnalyzer());
 
-			Query query = queryParser.parse(text);
+			Query query = queryParser.parse(KeywordsUtil.toWildcard(text));
+
+			booleanQuery.add(query, BooleanClause.Occur.SHOULD);
+
+			query = queryParser.parse(KeywordsUtil.toFuzzy(text));
 
 			booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 		}

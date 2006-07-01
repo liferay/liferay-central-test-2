@@ -33,7 +33,7 @@ import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserSmsException;
-import com.liferay.portal.captcha.CaptchaException;
+import com.liferay.portal.captcha.CaptchaTextException;
 import com.liferay.portal.captcha.CaptchaUtil;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Company;
@@ -80,7 +80,7 @@ public class AddUserAction extends PortletAction {
 		}
 		catch (Exception e) {
 			if (e != null &&
-				e instanceof CaptchaException ||
+				e instanceof CaptchaTextException ||
 				e instanceof ContactFirstNameException ||
 				e instanceof ContactLastNameException ||
 				e instanceof DuplicateUserEmailAddressException ||

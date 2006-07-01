@@ -53,7 +53,7 @@ jTDS 1.2
 jYMSG 0.6
 Laszlo 3.3.1 (patched to work with Commons HttpClient 3.0)
 Log4j 1.2.13
-Lucene 1.9.1
+Lucene 2.0.0
 MSNM 1.2.2
 MyFaces 1.1.1
 MySQL Connector/J 3.1.10

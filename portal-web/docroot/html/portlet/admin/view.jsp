@@ -72,11 +72,11 @@ portletURL.setParameter("tabs3", tabs3);
 			userMappings = "userId=cn\npassword=userPassword\nemailAddress=mail\nfirstName=givenName\nlastName=sn\njobTitle=title";
 		}
 		else if (ldapType == 2) {
-			url = "";
-			principal = "";
-			credentials = "";
-			searchFilter = "";
-			userMappings = "";
+			url = "ldap://localhost:389";
+			principal = "cn=admin,ou=test";
+			credentials = "secret";
+			searchFilter = "(mail=@email_address@)";
+			userMappings = "userId=cn\npassword=userPassword\nemailAddress=mail\nfirstName=givenName\nlastName=sn\njobTitle=title";
 		}
 		else if (ldapType == 3) {
 			url = "";

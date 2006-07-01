@@ -140,9 +140,13 @@ public class LuceneFields {
 		Field fieldObj = new Field(
 			field, keyword, Field.Store.YES, Field.Index.UN_TOKENIZED);
 
-		fieldObj.setBoost(0);
+		//fieldObj.setBoost(0);
 
 		return fieldObj;
+	}
+
+	public static Field getText(String field, String text) {
+		return new Field(field, text, Field.Store.YES, Field.Index.TOKENIZED);
 	}
 
 	private static final String _UID_PORTLET = "_PORTLET_";

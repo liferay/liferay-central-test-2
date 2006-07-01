@@ -71,18 +71,17 @@ public class LuceneIndexer implements Runnable {
 
 		if (ServerDetector.isOrion()) {
 
-			// Wait 30 seconds because Orion 2.0.7 initiates LuceneServlet
+			// Wait 10 seconds because Orion 2.0.7 initiates LuceneServlet
 			// before it initiates MainServlet.
 
 			try {
-
-				Thread.sleep(Time.SECOND * 30);
+				Thread.sleep(Time.SECOND * 10);
 			}
 			catch (InterruptedException ie) {
 			}
 		}
 
-		long start = System.currentTimeMillis();
+		long start1 = System.currentTimeMillis();
 
 		LuceneUtil.delete(_companyId);
 
@@ -110,6 +109,8 @@ public class LuceneIndexer implements Runnable {
 				String className = portlet.getIndexerClass();
 
 				if (portlet.isActive() && className != null) {
+					long start2 = System.currentTimeMillis();
+
 					if (_log.isDebugEnabled()) {
 						_log.debug(
 							"Re-indexing with " + className + " started");
@@ -119,19 +120,22 @@ public class LuceneIndexer implements Runnable {
 
 					indexer.reIndex(indexIds);
 
+					long end2 = System.currentTimeMillis();
+
 					if (_log.isDebugEnabled()) {
 						_log.debug(
-							"Re-indexing with " + className + " completed");
+							"Re-indexing with " + className + " completed in " +
+								((end2 - start2) / Time.SECOND) + " seconds");
 					}
 				}
 			}
 
-			long end = System.currentTimeMillis();
+			long end1 = System.currentTimeMillis();
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
 					"Re-indexing Lucene completed in " +
-						((end - start) / Time.SECOND) + " seconds");
+						((end1 - start1) / Time.SECOND) + " seconds");
 			}
 		}
 		catch (Exception e) {

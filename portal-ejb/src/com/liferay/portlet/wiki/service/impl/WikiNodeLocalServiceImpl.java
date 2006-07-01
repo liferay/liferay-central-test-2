@@ -53,9 +53,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.queryParser.QueryParser;
+import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.TermQuery;
 
@@ -258,22 +257,20 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 				BooleanQuery nodeIdsQuery = new BooleanQuery();
 
 				for (int i = 0; i < nodeIds.length; i++) {
-					nodeIdsQuery.add(new TermQuery(new Term(
-						"nodeId", nodeIds[i])), false, false);
+					Term term = new Term("nodeId", nodeIds[i]);
+					TermQuery termQuery = new TermQuery(term);
+
+					nodeIdsQuery.add(termQuery, BooleanClause.Occur.SHOULD);
 				}
 
-				booleanQuery.add(nodeIdsQuery, true, false);
+				booleanQuery.add(nodeIdsQuery, BooleanClause.Occur.MUST);
 			}
 
 			LuceneUtil.addTerm(booleanQuery, LuceneFields.CONTENT, keywords);
 
 			Searcher searcher = LuceneUtil.getSearcher(companyId);
 
-			Query query = QueryParser.parse(
-				booleanQuery.toString(), LuceneFields.CONTENT,
-				LuceneUtil.getAnalyzer());
-
-			hits.recordHits(searcher.search(query));
+			hits.recordHits(searcher.search(booleanQuery));
 
 			return hits;
 		}

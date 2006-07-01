@@ -6283,6 +6283,10 @@
 				<ejb-link>ejb/liferay/ResourceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DLLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLFileEntryLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/DLFileEntryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -6309,6 +6313,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ResourceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/DLLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLFileEntryLocalServiceHome</ejb-ref-name>
