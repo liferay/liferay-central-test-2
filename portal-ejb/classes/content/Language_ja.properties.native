@@ -183,6 +183,7 @@ action.DELETE=削除
 action.DELETE_DISCUSSION=削除の議論
 action.DELETE_USER=削除のユーザー
 action.EDIT=編集しなさい
+action.EXPIRE=切らしなさい
 action.HELP=助け
 action.MANAGE_COUPONS=クーポンを経営しなさい
 action.MANAGE_LAYOUTS=ページを経営しなさい

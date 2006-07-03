@@ -183,6 +183,7 @@ action.DELETE=Διαγράψτε
 action.DELETE_DISCUSSION=Διαγράψτε τη συζήτηση
 action.DELETE_USER=Διαγράψτε το χρήστη
 action.EDIT=Εκδώστε
+action.EXPIRE=Λήξτε
 action.HELP=Βοήθεια
 action.MANAGE_COUPONS=Διαχειριστείτε τα δελτία
 action.MANAGE_LAYOUTS=Διαχειριστείτε τις σελίδες

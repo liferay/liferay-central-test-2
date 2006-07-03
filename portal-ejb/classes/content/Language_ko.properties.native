@@ -183,6 +183,7 @@ action.DELETE=감소
 action.DELETE_DISCUSSION=감소 면담
 action.DELETE_USER=감소 사용자
 action.EDIT=편집하십시요
+action.EXPIRE=만료되십시요
 action.HELP=도움
 action.MANAGE_COUPONS=쿠폰을 처리하십시요
 action.MANAGE_LAYOUTS=페이지를 처리하십시요

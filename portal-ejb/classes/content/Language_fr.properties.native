@@ -183,6 +183,7 @@ action.DELETE=Effacement
 action.DELETE_DISCUSSION=Discussion D'Effacement
 action.DELETE_USER=Utilisateur D'Effacement
 action.EDIT=Éditez
+action.EXPIRE=Expirez
 action.HELP=Aide
 action.MANAGE_COUPONS=Contrôlez Les Bons
 action.MANAGE_LAYOUTS=Contrôlez Les Pages

@@ -183,6 +183,7 @@ action.DELETE=Supressão
 action.DELETE_DISCUSSION=Discussão Da Supressão
 action.DELETE_USER=Usuário Da Supressão
 action.EDIT=Edite
+action.EXPIRE=Expire
 action.HELP=Ajuda
 action.MANAGE_COUPONS=Controle Coupons
 action.MANAGE_LAYOUTS=Controle Páginas

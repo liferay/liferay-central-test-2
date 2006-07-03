@@ -183,6 +183,7 @@ action.DELETE=L�schen
 action.DELETE_DISCUSSION=Diskussion L�schen
 action.DELETE_USER=Löschung-Benutzer
 action.EDIT=Bearbeiten
+action.EXPIRE=Laufen Sie ab
 action.HELP=Hilfe
 action.MANAGE_COUPONS=Handhaben Sie Kupons
 action.MANAGE_LAYOUTS=Seiten Verwalten

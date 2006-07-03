@@ -183,6 +183,7 @@ action.DELETE=删除
 action.DELETE_DISCUSSION=删除讨论
 action.DELETE_USER=删除用户
 action.EDIT=编辑
+action.EXPIRE=到期
 action.HELP=帮助
 action.MANAGE_COUPONS=处理优惠券
 action.MANAGE_LAYOUTS=调整页面布局

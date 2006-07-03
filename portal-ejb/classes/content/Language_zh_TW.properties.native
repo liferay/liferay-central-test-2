@@ -183,6 +183,7 @@ action.DELETE=刪除
 action.DELETE_DISCUSSION=刪除討論
 action.DELETE_USER=刪除用戶
 action.EDIT=編輯
+action.EXPIRE=到期
 action.HELP=幫助
 action.MANAGE_COUPONS=處理優惠券
 action.MANAGE_LAYOUTS=處理頁
