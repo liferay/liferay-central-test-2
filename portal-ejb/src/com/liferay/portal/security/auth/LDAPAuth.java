@@ -233,7 +233,7 @@ public class LDAPAuth implements Authenticator {
 					attrs, userMappings.getProperty("fullName"));
 
 				if (Validator.isNotNull(fullName)) {
-					String [] name = StringUtil.split(fullName, " ");
+					String[] name = StringUtil.split(fullName, " ");
 
 					firstName = name[0];
 					lastName = name[name.length - 1];
