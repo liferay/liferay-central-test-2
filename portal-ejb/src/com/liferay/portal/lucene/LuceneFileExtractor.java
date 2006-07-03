@@ -47,6 +47,7 @@ import org.apache.jackrabbit.core.query.PdfTextFilter;
 import org.apache.jackrabbit.core.query.RTFTextFilter;
 import org.apache.jackrabbit.core.query.TextFilter;
 import org.apache.jackrabbit.core.query.XMLTextFilter;
+import org.apache.jackrabbit.core.query.lucene.TextPlainTextFilter;
 import org.apache.jackrabbit.core.state.PropertyState;
 import org.apache.jackrabbit.core.value.InternalValue;
 import org.apache.lucene.document.Field;
@@ -92,6 +93,9 @@ public class LuceneFileExtractor {
 			}
 			else if (fileExt.equals(".rtf")) {
 				filter = new RTFTextFilter();
+			}
+			else if (fileExt.equals(".txt")) {
+				filter = new TextPlainTextFilter();
 			}
 			else if (fileExt.equals(".xls")) {
 				filter = new MsExcelTextFilter();
