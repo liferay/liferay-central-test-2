@@ -91,9 +91,9 @@ http://content.liferay.com/4.0.0/docs/api/portal-ejb/com/liferay/portal/struts/S
 
 <!--
 The portlet-url-class value must be a class that implements
-com.liferay.portal.servlet.FriendlyURLPortletPlugin.class. Use this if content
-inside a portlet needs to have a friendly URL. See the Message Boards portlet
-for an example of its uses.
+com.liferay.portal.servlet.FriendlyURLPortletPlugin. Use this if content inside
+a portlet needs to have a friendly URL. See the Message Boards portlet for an
+example of its uses.
 
 See:
 
