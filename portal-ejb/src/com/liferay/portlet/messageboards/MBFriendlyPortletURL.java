@@ -75,7 +75,7 @@ public class MBFriendlyPortletURL extends PortletURLImplWrapper {
 				Validator.isNotNull(messageId)) {
 
 				friendlyURL =
-					"/message_boards/messages/" + topicId + "/" + messageId;
+					"/message_boards/message/" + topicId + "/" + messageId;
 			}
 		}
 
