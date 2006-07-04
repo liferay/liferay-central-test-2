@@ -60,6 +60,10 @@ public class PortletLocalServiceEJBImpl implements PortletLocalService,
 		return getService().getWARDisplay(servletContextName, xml);
 	}
 
+	public java.util.Map getFriendlyURLPlugins() {
+		return getService().getFriendlyURLPlugins();
+	}
+
 	public com.liferay.portal.model.Portlet getPortletById(
 		java.lang.String companyId, java.lang.String portletId)
 		throws com.liferay.portal.SystemException {

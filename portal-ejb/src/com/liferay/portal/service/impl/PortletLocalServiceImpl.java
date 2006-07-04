@@ -89,6 +89,10 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 		return _readLiferayDisplayXML(servletContextName, xml);
 	}
 
+	public Map getFriendlyURLPlugins() {
+		return _getFriendlyURLPlugins();
+	}
+
 	public Portlet getPortletById(String companyId, String portletId)
 		throws SystemException {
 
@@ -172,6 +176,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 
 		try {
 			Set portletIds = _readPortletXML(xmls[0], portletsPool);
+
 			portletIds.addAll(_readPortletXML(xmls[1], portletsPool));
 
 			Set liferayPortletIds =
@@ -339,6 +344,21 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 		portlet.setActive(active);
 
 		return portlet;
+	}
+
+	private Map _getFriendlyURLPlugins() {
+		String scpId =
+			PortletServiceImpl.class.getName() + ".friendlyURLPlugins";
+
+		Map friendlyURLPlugins = (Map)SimpleCachePool.get(scpId);
+
+		if (friendlyURLPlugins == null) {
+			friendlyURLPlugins = CollectionFactory.getHashMap();
+
+			SimpleCachePool.put(scpId, friendlyURLPlugins);
+		}
+
+		return friendlyURLPlugins;
 	}
 
 	private String _getPortletId(String securityPath) throws SystemException {
@@ -823,6 +843,8 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			}
 		}
 
+		Map friendlyURLPlugins = _getFriendlyURLPlugins();
+
 		itr1 = root.elements("portlet").iterator();
 
 		while (itr1.hasNext()) {
@@ -859,6 +881,21 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				portletModel.setPortletURLClass(GetterUtil.getString(
 					portlet.elementText("portlet-url-class"),
 					portletModel.getPortletURLClass()));
+
+				portletModel.setFriendlyURLPluginClass(GetterUtil.getString(
+					portlet.elementText("friendly-url-plugin-class"),
+					portletModel.getFriendlyURLPluginClass()));
+
+				if (Validator.isNull(
+						portletModel.getFriendlyURLPluginClass())) {
+
+					friendlyURLPlugins.remove(portletId);
+				}
+				else {
+					friendlyURLPlugins.put(
+						portletId, portletModel.getFriendlyURLPluginClass());
+				}
+
 				portletModel.setPreferencesCompanyWide(GetterUtil.getBoolean(
 					portlet.elementText("preferences-company-wide"),
 					portletModel.isPreferencesCompanyWide()));

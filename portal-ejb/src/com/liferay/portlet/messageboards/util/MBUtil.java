@@ -102,6 +102,8 @@ public class MBUtil {
 		categoriesURL.setWindowState(WindowState.MAXIMIZED);
 
 		categoriesURL.setParameter("struts_action", "/message_boards/view");
+		categoriesURL.setParameter(
+			"categoryId", MBCategory.DEFAULT_PARENT_CATEGORY_ID);
 
 		String categoriesLink =
 			"<a href=\"" + categoriesURL.toString() + "\">" +

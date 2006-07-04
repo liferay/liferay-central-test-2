@@ -287,6 +287,89 @@ public class PortletURLImpl implements PortletURL {
 			return _toString;
 		}
 
+		_toString = generateToString();
+
+		return _toString;
+	}
+
+	protected String getPlid() {
+		return _plid;
+	}
+
+	protected Layout getLayout() {
+		if (_layout == null) {
+			try {
+				String layoutId = Layout.getLayoutId(_plid);
+				String ownerId = Layout.getOwnerId(_plid);
+
+				_layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+			}
+			catch (Exception e) {
+				_log.warn("Layout cannot be found for " + _plid);
+			}
+		}
+
+		return _layout;
+	}
+
+	protected String getLayoutFriendlyURL() {
+		return _layoutFriendlyURL;
+	}
+
+	protected String getParameter(String name) {
+		String[] values = (String[])_params.get(name);
+
+		if ((values != null) && (values.length > 0)) {
+			return values[0];
+		}
+		else {
+			return null;
+		}
+	}
+
+	protected Map getParams() {
+		return _params;
+	}
+
+	protected Portlet getPortlet() {
+		if (_portlet == null) {
+			try {
+				_portlet = PortletLocalServiceUtil.getPortletById(
+					PortalUtil.getCompanyId(_req), _portletName);
+			}
+			catch (SystemException se) {
+				_log.error(se.getMessage());
+			}
+		}
+
+		return _portlet;
+	}
+
+	protected PortletRequest getPortletReq() {
+		return _portletReq;
+	}
+
+	protected HttpServletRequest getReq() {
+		return _req;
+	}
+
+	protected boolean isAction() {
+		return _action;
+	}
+
+	protected boolean isAnchor() {
+		return _anchor;
+	}
+
+	protected boolean isEncrypt() {
+		return _encrypt;
+	}
+
+	protected boolean isSecure() {
+		return _secure;
+	}
+
+	protected String generateToString() {
 		StringBuffer sb = new StringBuffer();
 
 		ThemeDisplay themeDisplay =
@@ -296,14 +379,14 @@ public class PortletURLImpl implements PortletURL {
 
 		sb.append(PortalUtil.getPortalURL(_req, _secure));
 
-		String layoutFriendlyURL = null;
-
 		try {
-			Layout layout = getLayout();
+			if (_layoutFriendlyURL == null) {
+				Layout layout = getLayout();
 
-			if (layout != null) {
-				layoutFriendlyURL = PortalUtil.getLayoutFriendlyURL(
-					layout, themeDisplay);
+				if (layout != null) {
+					_layoutFriendlyURL = PortalUtil.getLayoutFriendlyURL(
+						layout, themeDisplay);
+				}
 			}
 		}
 		catch (Exception e) {
@@ -321,7 +404,7 @@ public class PortletURLImpl implements PortletURL {
 			_log.error(e);
 		}
 
-		if (Validator.isNull(layoutFriendlyURL)) {
+		if (Validator.isNull(_layoutFriendlyURL)) {
 			sb.append(themeDisplay.getPathMain());
 			sb.append("/portal/layout?");
 
@@ -331,7 +414,7 @@ public class PortletURLImpl implements PortletURL {
 			sb.append(StringPool.AMPERSAND);
 		}
 		else {
-			sb.append(layoutFriendlyURL);
+			sb.append(_layoutFriendlyURL);
 			sb.append(StringPool.QUESTION);
 		}
 
@@ -413,71 +496,7 @@ public class PortletURLImpl implements PortletURL {
 			}
 		}
 
-		_toString = sb.toString();
-
-		return _toString;
-	}
-
-	protected String getPlid() {
-		return _plid;
-	}
-
-	protected Layout getLayout() {
-		if (_layout == null) {
-			try {
-				String layoutId = Layout.getLayoutId(_plid);
-				String ownerId = Layout.getOwnerId(_plid);
-
-				_layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
-			}
-			catch (Exception e) {
-				_log.warn("Layout cannot be found for " + _plid);
-			}
-		}
-
-		return _layout;
-	}
-
-	protected Map getParams() {
-		return _params;
-	}
-
-	protected Portlet getPortlet() {
-		if (_portlet == null) {
-			try {
-				_portlet = PortletLocalServiceUtil.getPortletById(
-					PortalUtil.getCompanyId(_req), _portletName);
-			}
-			catch (SystemException se) {
-				_log.error(se.getMessage());
-			}
-		}
-
-		return _portlet;
-	}
-
-	protected PortletRequest getPortletReq() {
-		return _portletReq;
-	}
-
-	protected HttpServletRequest getReq() {
-		return _req;
-	}
-
-	protected boolean isAction() {
-		return _action;
-	}
-
-	protected boolean isAnchor() {
-		return _anchor;
-	}
-
-	protected boolean isEncrypt() {
-		return _encrypt;
-	}
-
-	protected boolean isSecure() {
-		return _secure;
+		return sb.toString();
 	}
 
 	private String _processValue(Key key, int value) {
@@ -506,6 +525,7 @@ public class PortletURLImpl implements PortletURL {
 	private Portlet _portlet;
 	private String _plid;
 	private Layout _layout;
+	private String _layoutFriendlyURL;
 	private boolean _action;
 	private WindowState _windowState;
 	private PortletMode _portletMode;

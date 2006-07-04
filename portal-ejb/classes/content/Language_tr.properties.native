@@ -635,6 +635,7 @@ please-contact-the-administrator-because-you-do-not-have-any-pages-configured=L�
 please-email-all-questions-to=Please email all questions to {0}.
 please-ensure-the-administrator-has-configured-a-proper-google-license=Lütfen sistem yöneticinizin geçerli Google lisansını ayarlara eklediğinden emin olunuz
 please-enter-a-file-with-a-valid-file-size=Lütfen uygun uzunluğu olan dosya ismini giriniz.
+please-enter-a-friendly-url-that-does-not-conflict-with-the-portlet-keyword-x=Please enter a friendly url that does not conflict with the portlet keyword <b>{0}</b>.
 please-enter-a-longer-duration=Lütfen daha uzun süre giriniz.
 please-enter-a-sms-id-that-is-a-valid-email-address=Lütfen SMS adresiniz olacak geçerli E-Posta adresini giriniz.   
 please-enter-a-unique-document-name=Lütfen daha önce kullanılmamış döküman ismi giriniz.

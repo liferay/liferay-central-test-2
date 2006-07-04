@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 4.0.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_4_0_0.dtd">
+<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 4.1.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_4_1_0.dtd">
 
 <liferay-portlet-app>
 	<portlet>
@@ -155,6 +155,8 @@
 		<struts-path>message_boards</struts-path>
 		<configuration-path>/message_boards/edit_configuration</configuration-path>
 		<indexer-class>com.liferay.portlet.messageboards.util.Indexer</indexer-class>
+		<portlet-url-class>com.liferay.portlet.messageboards.MBFriendlyPortletURL</portlet-url-class>
+		<friendly-url-plugin-class>com.liferay.portlet.messageboards.MBFriendlyURLPortletPlugin</friendly-url-plugin-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>

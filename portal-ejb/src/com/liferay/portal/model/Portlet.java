@@ -143,21 +143,21 @@ public class Portlet extends PortletModel {
 	public Portlet(String portletId, String companyId, String strutsPath,
 				   String configurationPath, String portletClass,
 				   String indexerClass, String schedulerClass,
-				   String portletURLClass, String defaultPreferences,
-				   String prefsValidator, boolean prefsCompanyWide,
-				   boolean prefsUniquePerLayout, boolean prefsOwnedByGroup,
-				   boolean useDefaultTemplate, boolean showPortletAccessDenied,
-				   boolean showPortletInactive, boolean restoreCurrentView,
-				   boolean maximizeEdit, boolean maximizeHelp,
-				   boolean maximizePrint, boolean layoutCacheable,
-				   boolean instanceable, boolean privateRequestAttributes,
-				   boolean narrow, String roles, Set unlinkedRoles,
-				   Map roleMappers, boolean system, boolean active,
-				   boolean include, Map initParams, Integer expCache,
-				   Map portletModes, Set supportedLocales,
-				   String resourceBundle, PortletInfo portletInfo,
-				   Set userAttributes, Map customUserAttributes,
-				   boolean warFile) {
+				   String portletURLClass, String friendlyURLPluginClass,
+				   String defaultPreferences, String prefsValidator,
+				   boolean prefsCompanyWide, boolean prefsUniquePerLayout,
+				   boolean prefsOwnedByGroup, boolean useDefaultTemplate,
+				   boolean showPortletAccessDenied, boolean showPortletInactive,
+				   boolean restoreCurrentView, boolean maximizeEdit,
+				   boolean maximizeHelp, boolean maximizePrint,
+				   boolean layoutCacheable, boolean instanceable,
+				   boolean privateRequestAttributes, boolean narrow,
+				   String roles, Set unlinkedRoles, Map roleMappers,
+				   boolean system, boolean active, boolean include,
+				   Map initParams, Integer expCache, Map portletModes,
+				   Set supportedLocales, String resourceBundle,
+				   PortletInfo portletInfo, Set userAttributes,
+				   Map customUserAttributes, boolean warFile) {
 
 		setPortletId(portletId);
 		setCompanyId(companyId);
@@ -167,6 +167,7 @@ public class Portlet extends PortletModel {
 		_indexerClass = indexerClass;
 		_schedulerClass = schedulerClass;
 		_portletURLClass = portletURLClass;
+		_friendlyURLPluginClass = friendlyURLPluginClass;
 		_defaultPreferences = defaultPreferences;
 		_prefsValidator = prefsValidator;
 		_prefsCompanyWide = prefsCompanyWide;
@@ -329,6 +330,25 @@ public class Portlet extends PortletModel {
 	 */
 	public void setPortletURLClass(String portletURLClass) {
 		_portletURLClass = portletURLClass;
+	}
+
+	/**
+	 * Gets the name of the friendly URL plugin class of the portlet.
+	 *
+	 * @return		the name of the friendly URL plugin class of the portlet
+	 */
+	public String getFriendlyURLPluginClass() {
+		return _friendlyURLPluginClass;
+	}
+
+	/**
+	 * Sets the name of the friendly URL plugin class of the portlet.
+	 *
+	 * @param		friendlyURLPluginClass the name of the friendly URL plugin
+	 *				class of the portlet
+	 */
+	public void setFriendlyURLPluginClass(String friendlyURLPluginClass) {
+		_friendlyURLPluginClass = friendlyURLPluginClass;
 	}
 
 	/**
@@ -1369,7 +1389,8 @@ public class Portlet extends PortletModel {
 		return new Portlet(
 			getPortletId(), getCompanyId(), getStrutsPath(),
 			getConfigurationPath(), getPortletClass(), getIndexerClass(),
-			getSchedulerClass(), getPortletURLClass(), getDefaultPreferences(),
+			getSchedulerClass(), getPortletURLClass(),
+			getFriendlyURLPluginClass(), getDefaultPreferences(),
 			getPreferencesValidator(), isPreferencesCompanyWide(),
 			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
 			isUseDefaultTemplate(), isShowPortletAccessDenied(),
@@ -1432,6 +1453,11 @@ public class Portlet extends PortletModel {
 	 * The name of the portlet URL class of the portlet.
 	 */
 	private String _portletURLClass;
+
+	/**
+	 * The name of the friendly URL plugin class of the portlet.
+	 */
+	private String _friendlyURLPluginClass;
 
 	/**
 	 * The default preferences of the portlet.

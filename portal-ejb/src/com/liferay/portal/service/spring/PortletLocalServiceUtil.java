@@ -54,6 +54,18 @@ public class PortletLocalServiceUtil {
 		}
 	}
 
+	public static java.util.Map getFriendlyURLPlugins()
+		throws com.liferay.portal.SystemException {
+		try {
+			PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+
+			return portletLocalService.getFriendlyURLPlugins();
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static com.liferay.portal.model.Portlet getPortletById(
 		java.lang.String companyId, java.lang.String portletId)
 		throws com.liferay.portal.SystemException {

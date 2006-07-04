@@ -45,6 +45,8 @@ public class LayoutFriendlyURLException extends PortalException {
 
 	public static final int DUPLICATE = 6;
 
+	public static final int PORTLET_CONFLICT = 7;
+
 	public static int validate(String friendlyURL) {
 		if (friendlyURL.length() < 2) {
 			return TOO_SHORT;
@@ -83,6 +85,15 @@ public class LayoutFriendlyURLException extends PortalException {
 		return _type;
 	}
 
+	public String getPortletConflictMapping() {
+		return _portletConflictMapping;
+	}
+
+	public void setPortletConflictMapping(String portletConflictMapping) {
+		_portletConflictMapping = portletConflictMapping;
+	}
+
 	private int _type;
+	private String _portletConflictMapping;
 
 }

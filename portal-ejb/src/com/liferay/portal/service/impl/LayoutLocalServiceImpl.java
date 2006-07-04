@@ -53,13 +53,16 @@ import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutLocalService;
 import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.spring.PermissionLocalServiceUtil;
+import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
+import com.liferay.portal.servlet.FriendlyURLPortletPlugin;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.InstancePool;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Time;
@@ -76,6 +79,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -932,6 +936,32 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			}
 			catch (NoSuchLayoutException nsle) {
 			}
+
+			Map portletPlugins =
+				PortletLocalServiceUtil.getFriendlyURLPlugins();
+
+			Iterator itr = portletPlugins.entrySet().iterator();
+
+			while (itr.hasNext()) {
+				Map.Entry entry = (Map.Entry)itr.next();
+
+				String className = (String)entry.getValue();
+
+				FriendlyURLPortletPlugin portletPlugin =
+					(FriendlyURLPortletPlugin)InstancePool.get(className);
+
+				if (friendlyURL.indexOf(portletPlugin.getMapping()) != -1) {
+					LayoutFriendlyURLException lfurle =
+						new LayoutFriendlyURLException(
+							LayoutFriendlyURLException.PORTLET_CONFLICT);
+
+					lfurle.setPortletConflictMapping(
+						portletPlugin.getMapping());
+
+					throw lfurle;
+				}
+			}
+
 		}
 	}
 

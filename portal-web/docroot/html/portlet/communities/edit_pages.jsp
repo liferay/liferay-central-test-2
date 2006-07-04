@@ -243,6 +243,10 @@ portletURL.setParameter("groupId", groupId);
 			<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.DUPLICATE %>">
 				<%= LanguageUtil.get(pageContext, "please-enter-a-unique-friendly-url") %>
 			</c:if>
+
+			<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.PORTLET_CONFLICT %>">
+				<%= LanguageUtil.format(pageContext, "please-enter-a-friendly-url-that-does-not-conflict-with-the-portlet-keyword-x", lfurle.getPortletConflictMapping()) %>
+			</c:if>
 		</liferay-ui:error>
 
 		<liferay-ui:error exception="<%= LayoutHiddenException.class %>" message="your-first-page-must-not-be-hidden" />

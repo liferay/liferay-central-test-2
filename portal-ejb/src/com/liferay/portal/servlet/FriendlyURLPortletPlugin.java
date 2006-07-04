@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -20,23 +19,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/message_boards/init.jsp" %>
+package com.liferay.portal.servlet;
 
-<%
-PortletURL tabs1URL = renderResponse.createRenderURL();
+/**
+ * <a href="FriendlyURLPortletPlugin.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Myunghun Kim
+ *
+ */
+public interface FriendlyURLPortletPlugin {
 
-tabs1URL.setParameter("struts_action", "/message_boards/view");
+	public String getMapping();
 
-PortletURL url0URL = renderResponse.createRenderURL();
+	public String[] getValues(String url, int pos);
 
-url0URL.setParameter("struts_action", "/message_boards/view");
-url0URL.setParameter("categoryId", MBCategory.DEFAULT_PARENT_CATEGORY_ID);
-%>
-
-<liferay-ui:tabs
-	names="categories,recent-posts,statistics"
-	url="<%= tabs1URL.toString() %>"
-	url0="<%= url0URL.toString() %>"
-/>
+}

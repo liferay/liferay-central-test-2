@@ -37,6 +37,8 @@ public interface PortletLocalService {
 		java.lang.String servletContextName, java.lang.String xml)
 		throws org.dom4j.DocumentException, java.io.IOException;
 
+	public java.util.Map getFriendlyURLPlugins();
+
 	public com.liferay.portal.model.Portlet getPortletById(
 		java.lang.String companyId, java.lang.String portletId)
 		throws com.liferay.portal.SystemException;

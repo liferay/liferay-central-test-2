@@ -163,7 +163,7 @@ portletURL.setParameter("categoryId", categoryId);
 
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
-		<c:if test="<%= category != null %>">
+		<c:if test="<%= (category != null) && (showAddCategoryButton || (results.size() > 0)) %>">
 			<br>
 		</c:if>
 

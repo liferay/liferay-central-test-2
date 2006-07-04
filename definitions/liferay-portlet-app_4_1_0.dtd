@@ -3,8 +3,8 @@ This is the DTD for the Portlet Application parameters that are specific to
 Liferay Portal.
 
 <!DOCTYPE liferay-portlet-app PUBLIC
-	"-//Liferay//DTD Portlet Application 4.0.0//EN"
-	"http://www.liferay.com/dtd/liferay-portlet-app_4_0_0.dtd">
+	"-//Liferay//DTD Portlet Application 4.1.0//EN"
+	"http://www.liferay.com/dtd/liferay-portlet-app_4_1_0.dtd">
 -->
 
 <!--
@@ -17,7 +17,8 @@ a Liferay portlet application.
 The portlet element contains the declarative data of a portlet.
 -->
 <!ELEMENT portlet (portlet-name, struts-path?, configuration-path?,
-indexer-class?, scheduler-class?, portlet-url-class?, preferences-company-wide?,
+indexer-class?, scheduler-class?, portlet-url-class?,
+friendly-url-plugin-class?, preferences-company-wide?,
 preferences-unique-per-layout?, preferences-owned-by-group?,
 use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
 restore-current-view?, maximize-edit?, maximize-help?, maximize-print?,
@@ -87,6 +88,18 @@ See:
 http://content.liferay.com/4.0.0/docs/api/portal-ejb/com/liferay/portal/struts/StrutsActionPortletURL.html
 -->
 <!ELEMENT portlet-url-class (#PCDATA)>
+
+<!--
+The portlet-url-class value must be a class that implements
+com.liferay.portal.servlet.FriendlyURLPortletPlugin.class. Use this if content
+inside a portlet needs to have a friendly URL. See the Message Boards portlet
+for an example of its uses.
+
+See:
+
+http://content.liferay.com/4.0.0/docs/api/portal-ejb/com/liferay/portlet/enterpriseadmin/EnterpriseAdminPortletURL.html
+-->
+<!ELEMENT friendly-url-plugin-class (#PCDATA)>
 
 <!--
 Set the preferences-company-wide value to true if the preferences for the

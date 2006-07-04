@@ -1372,6 +1372,7 @@ please-email-all-questions-to=Veuillez envoyer toutes vos questions par email à
 please-ensure-the-administrator-has-configured-a-proper-google-license=Veuillez vous assurer que l'administrateur a bien configuré la licence Google.
 please-enter-a-file-with-a-valid-file-size=Veuillez entrer une taille de fichier valide.
 please-enter-a-friendly-url-that-begins-with-a-slash=Veuillez écrire un URL amical qui commence par une estafilade.
+please-enter-a-friendly-url-that-does-not-conflict-with-the-portlet-keyword-x=Please enter a friendly url that does not conflict with the portlet keyword <b>{0}</b>.
 please-enter-a-friendly-url-that-does-not-end-with-a-slash=Veuillez écrire un URL amical qui ne finit pas avec une estafilade.
 please-enter-a-friendly-url-that-does-not-have-adjacent-slashes=Veuillez écrire un URL amical qui n'a pas des estafilades adjacentes.
 please-enter-a-friendly-url-that-is-at-least-two-characters-long=Veuillez écrire un URL amical qui est au moins deux caractères longs.
