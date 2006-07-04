@@ -48,6 +48,8 @@ public class DBBuilder {
 	public DBBuilder() {
 		try {
 			_buildSQL("portal");
+			_buildSQL("indexes");
+			_buildSQL("sequences");
 			_buildSQL("update-1.7.5-1.8.0");
 			_buildSQL("update-1.8.0-1.9.0");
 			_buildSQL("update-1.9.1-1.9.5");
@@ -192,9 +194,9 @@ public class DBBuilder {
 		sb.append("\n");
 		sb.append(FileUtil.read("../sql/portal/portal-sybase.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes.sql"));
+		sb.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences.sql"));
+		sb.append(FileUtil.read("../sql/sequences/sequences-sybase.sql"));
 
 		FileUtil.write(file, sb.toString());
 	}
@@ -420,15 +422,16 @@ public class DBBuilder {
 
 		String sybase = _buildTemplate(fileName, _SYBASE, "sybase");
 
-		//sybase = StringUtil.replace(sybase, ");\n\n", ");\n\ngo\n\n");
+		if (fileName.equals("indexes")) {
+			sybase = _removeBooleanIndexes(sybase);
+		}
+
 		sybase = StringUtil.replace(sybase, ");\n", ")\ngo\n");
 
 		sybase = StringUtil.replace(
 			sybase,
 			new String[] {"\\\\", "\\'", "\\\"", "\\n", "\\r"},
 			new String[] {"\\", "''", "\"", "\n", "\r"});
-
-		//sybase = StringUtil.replace(sybase, "\\'", "''");
 
 		FileUtil.write(
 			"../sql/" + fileName + "/" + fileName + "-sybase.sql", sybase);
@@ -580,6 +583,57 @@ public class DBBuilder {
 				else {
 					sb.append(line);
 				}
+			}
+		}
+
+		br.close();
+
+		return sb.toString();
+	}
+
+	private String _removeBooleanIndexes(String data) throws IOException {
+		String portalData = FileUtil.read("../sql/portal-tables.sql");
+
+		BufferedReader br = new BufferedReader(new StringReader(data));
+
+		StringBuffer sb = new StringBuffer();
+
+		String line = null;
+
+		while ((line = br.readLine()) != null) {
+			boolean append = true;
+
+			int x = line.indexOf(" on ");
+
+			if (x != -1) {
+				int y = line.indexOf(" (", x);
+
+				String table = line.substring(x + 4, y);
+
+				x = y + 2;
+				y = line.indexOf(")", x);
+
+				String[] columns = StringUtil.split(line.substring(x, y));
+
+				x = portalData.indexOf("create table " + table + " (");
+				y = portalData.indexOf(");", x);
+
+				String portalTableData = portalData.substring(x, y);
+
+				for (int i = 0; i < columns.length; i++) {
+					if (portalTableData.indexOf(
+							columns[i].trim() + " BOOLEAN") != -1) {
+
+						append = false;
+
+						break;
+					}
+				}
+			}
+
+			if (append) {
+				sb.append(line);
+				sb.append("\n");
 			}
 		}
 
