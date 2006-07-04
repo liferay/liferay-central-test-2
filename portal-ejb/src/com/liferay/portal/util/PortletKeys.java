@@ -68,6 +68,8 @@ public class PortletKeys {
 
 	public static final String LOCATION_ADMIN = "40";
 
+	public static final String LOGIN = "58";
+
 	public static final String MAIL = "1";
 
 	public static final String MESSAGE_BOARDS = "19";
