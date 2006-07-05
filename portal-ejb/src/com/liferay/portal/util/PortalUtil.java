@@ -908,11 +908,8 @@ public class PortalUtil {
 		}
 
 		req.setAttribute(WebKeys.RENDER_PORTLET, portlet);
-
 		req.setAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID, columnId);
-
 		req.setAttribute(WebKeys.RENDER_PORTLET_COLUMN_POS, columnPos);
-
 		req.setAttribute(WebKeys.RENDER_PORTLET_COLUMN_COUNT, columnCount);
 
 		RequestDispatcher rd = ctx.getRequestDispatcher(

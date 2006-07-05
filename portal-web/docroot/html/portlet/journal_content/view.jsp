@@ -36,9 +36,9 @@ String content = (String)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT);
 		RuntimeLogic actionURLLogic = new ActionURLLogic(renderResponse);
 		RuntimeLogic renderURLLogic = new RenderURLLogic(renderResponse);
 
-		content = RuntimePortletUtil.processXML(content, portletLogic);
-		content = RuntimePortletUtil.processXML(content, actionURLLogic);
-		content = RuntimePortletUtil.processXML(content, renderURLLogic);
+		content = RuntimePortletUtil.processXML(request, content, portletLogic);
+		content = RuntimePortletUtil.processXML(request, content, actionURLLogic);
+		content = RuntimePortletUtil.processXML(request, content, renderURLLogic);
 		%>
 
 		<%= content %>

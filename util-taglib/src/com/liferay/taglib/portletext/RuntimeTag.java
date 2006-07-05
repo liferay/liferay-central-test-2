@@ -83,9 +83,16 @@ public class RuntimeTag extends TagSupport {
 
 		StringBuffer renderPortletSB = new StringBuffer();
 
-		RuntimePortletUtil.processPortlet(
-			renderPortletSB, ctx, req, res, renderRequest, renderResponse,
-			rootPortletId, instanceId);
+		try {
+			req.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
+
+			RuntimePortletUtil.processPortlet(
+				renderPortletSB, ctx, req, res, renderRequest, renderResponse,
+				rootPortletId, instanceId);
+		}
+		finally {
+			req.removeAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
+		}
 
 		if (pageContext != null) {
 			pageContext.getOut().print(renderPortletSB.toString());

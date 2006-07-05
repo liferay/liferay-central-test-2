@@ -168,41 +168,48 @@ public class RuntimePortletUtil {
 	}
 
 	public static String processXML(
-			String content, RuntimeLogic runtimeLogic)
+			HttpServletRequest req, String content, RuntimeLogic runtimeLogic)
 		throws Exception {
 
 		if (Validator.isNull(content)) {
 			return StringPool.BLANK;
 		}
 
-		StringBuffer sb = new StringBuffer();
+		try {
+			req.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
 
-		int x = 0;
-		int y = content.indexOf(runtimeLogic.getOpenTag());
+			StringBuffer sb = new StringBuffer();
 
-		while (y != -1) {
-			sb.append(content.substring(x, y));
+			int x = 0;
+			int y = content.indexOf(runtimeLogic.getOpenTag());
 
-			int close1 = content.indexOf(runtimeLogic.getClose1Tag(), y);
-			int close2 = content.indexOf(runtimeLogic.getClose2Tag(), y);
+			while (y != -1) {
+				sb.append(content.substring(x, y));
 
-			if ((close2 == -1) || ((close1 != -1) && (close1 < close2))) {
-				x = close1 + runtimeLogic.getClose1Tag().length();
+				int close1 = content.indexOf(runtimeLogic.getClose1Tag(), y);
+				int close2 = content.indexOf(runtimeLogic.getClose2Tag(), y);
+
+				if ((close2 == -1) || ((close1 != -1) && (close1 < close2))) {
+					x = close1 + runtimeLogic.getClose1Tag().length();
+				}
+				else {
+					x = close2 + runtimeLogic.getClose2Tag().length();
+				}
+
+				runtimeLogic.processXML(sb, content.substring(y, x));
+
+				y = content.indexOf(runtimeLogic.getOpenTag(), x);
 			}
-			else {
-				x = close2 + runtimeLogic.getClose2Tag().length();
+
+			if (y == -1) {
+				sb.append(content.substring(x, content.length()));
 			}
 
-			runtimeLogic.processXML(sb, content.substring(y, x));
-
-			y = content.indexOf(runtimeLogic.getOpenTag(), x);
+			return sb.toString();
 		}
-
-		if (y == -1) {
-			sb.append(content.substring(x, content.length()));
+		finally {
+			req.removeAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
 		}
-
-		return sb.toString();
 	}
 
 	private static void _defineObjects(
