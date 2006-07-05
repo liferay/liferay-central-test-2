@@ -46,9 +46,6 @@ catch (NoSuchResourceException nsre) {
 	else if (portletId.equals(PortletKeys.JOURNAL_CONTENT_SEARCH)) {
 		addDefaultResource = true;
 	}
-	else if (portletId.equals(PortletKeys.LOGIN)) {
-		addDefaultResource = true;
-	}
 	else if (portletId.equals(PortletKeys.MY_ACCOUNT)) {
 		addDefaultResource = true;
 	}
@@ -78,9 +75,9 @@ catch (NoSuchResourceException nsre) {
 }
 
 boolean access =
-	PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.VIEW) ||
 	GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS) ||
-	LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE);
+	LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE) ||
+	PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.VIEW);
 
 boolean stateMax = layoutTypePortlet.hasStateMaxPortletId(portletId);
 boolean stateMin = layoutTypePortlet.hasStateMinPortletId(portletId);
@@ -171,16 +168,18 @@ boolean showMoveIcon = !stateMax;
 boolean showPrintIcon = portlet.hasPortletMode(renderResponseImpl.getContentType(), LiferayPortletMode.PRINT);
 
 if (!portletDisplay.getId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
-	if (PortletPermission.contains(permissionChecker, plid, rootPortletId, ActionKeys.CONFIGURATION) ||
-		GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS)) {
+	if (GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS) ||
+		LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE) ||
+		PortletPermission.contains(permissionChecker, plid, rootPortletId, ActionKeys.CONFIGURATION)) {
 
 		showConfigurationIcon = true;
 	}
 }
 
 if (portlet.hasPortletMode(renderResponseImpl.getContentType(), PortletMode.EDIT)) {
-	if (PortletPermission.contains(permissionChecker, plid, rootPortletId, ActionKeys.PREFERENCES) ||
-		GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS)) {
+	if (GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS) ||
+		LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE) ||
+		PortletPermission.contains(permissionChecker, plid, rootPortletId, ActionKeys.PREFERENCES)) {
 
 		showEditIcon = true;
 	}

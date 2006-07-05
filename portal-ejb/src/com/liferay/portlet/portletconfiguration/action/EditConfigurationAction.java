@@ -22,12 +22,13 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.permission.GroupPermission;
+import com.liferay.portal.service.permission.LayoutPermission;
+import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.struts.DynamicPortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -98,24 +99,23 @@ public class EditConfigurationAction extends DynamicPortletAction {
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		String ownerId = Layout.getOwnerId(themeDisplay.getPlid());
-		String groupId = Layout.getGroupId(ownerId);
+		String portletId = ParamUtil.getString(req, "portletResource");
+		String rootPortletId = Portlet.getRootPortletId(portletId);
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
-		String resourcePrimKey =
-			themeDisplay.getPlid() + Portlet.LAYOUT_SEPARATOR + portletResource;
-
-		if (!permissionChecker.hasPermission(
-				groupId, portletResource, resourcePrimKey,
-				ActionKeys.CONFIGURATION) &&
-			!GroupPermission.contains(
-				permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
+		if (!GroupPermission.contains(
+				permissionChecker, themeDisplay.getPortletGroupId(),
+				ActionKeys.MANAGE_LAYOUTS) &&
+			!LayoutPermission.contains(
+				permissionChecker, themeDisplay.getLayout(),
+				ActionKeys.UPDATE) &&
+			!PortletPermission.contains(
+				permissionChecker, themeDisplay.getPlid(), rootPortletId,
+				ActionKeys.CONFIGURATION)) {
 
 			throw new PrincipalException();
 		}
 
-		return PortletLocalServiceUtil.getPortletById(
-			companyId, portletResource);
+		return PortletLocalServiceUtil.getPortletById(companyId, portletId);
 	}
 
 }

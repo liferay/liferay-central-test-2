@@ -35,6 +35,8 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerBag;
 import com.liferay.portal.service.permission.GroupPermission;
+import com.liferay.portal.service.permission.LayoutPermission;
+import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.portal.service.spring.PermissionLocalServiceUtil;
 import com.liferay.portal.service.spring.PermissionService;
@@ -204,12 +206,26 @@ public class PermissionServiceImpl
 				user.getLocation().getOrganizationId(), ActionKeys.PERMISSIONS);
 		}
 		else if ((primKey != null) &&
-				 (primKey.indexOf(Portlet.LAYOUT_SEPARATOR) > -1)) {
+				 (primKey.indexOf(Portlet.LAYOUT_SEPARATOR) != -1)) {
 
-			if (!permissionChecker.hasPermission(
-					groupId, name, primKey, ActionKeys.CONFIGURATION) &&
-				!GroupPermission.contains(
-					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
+			int pos = primKey.indexOf(Portlet.LAYOUT_SEPARATOR);
+
+			String plid = primKey.substring(0, pos);
+
+			String layoutId = Layout.getLayoutId(plid);
+			String ownerId = Layout.getOwnerId(plid);
+
+			String portletId = primKey.substring(
+				pos + Portlet.LAYOUT_SEPARATOR.length() , primKey.length());
+			String rootPortletId = Portlet.getRootPortletId(portletId);
+
+			if (!GroupPermission.contains(
+					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS) &&
+				!LayoutPermission.contains(
+					permissionChecker, layoutId, ownerId, ActionKeys.UPDATE) &&
+				!PortletPermission.contains(
+					permissionChecker, plid, rootPortletId,
+					ActionKeys.CONFIGURATION)) {
 
 				throw new PrincipalException();
 			}
