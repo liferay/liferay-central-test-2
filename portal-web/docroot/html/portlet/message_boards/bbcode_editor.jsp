@@ -275,7 +275,7 @@
 </tr>
 <tr>
 	<td bgcolor="#FFFFFF" height="100%">
-		<textarea style="height: 100%; width: 100%;" id="textArea" name="textArea"></textarea>
+		<textarea style="font-family: monospace; height: 100%; width: 100%;" id="textArea" name="textArea"></textarea>
 	</td>
 </tr>
 </table>

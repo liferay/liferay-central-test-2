@@ -89,9 +89,9 @@ ul {
 
 img { border: 0; margin: 0; padding: 0 }
 
-input, button, select, textarea { font-size: <%= fontXS %>; }
+input, button, select { font-size: <%= fontXS %>; }
 
-textarea { font-family: Arial; }
+textarea { font-family: Arial; font-size: <%= fontDefault %>; }
 
 .form-button {
 	border-color: <%= colorScheme.getPortletTitleBg() %>;

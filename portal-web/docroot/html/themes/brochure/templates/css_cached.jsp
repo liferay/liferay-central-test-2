@@ -90,7 +90,9 @@ ul {
 
 img { border: 0; margin: 0; padding: 0 }
 
-input, button, select, textarea { font-size: <%= fontXS %>; }
+input, button, select { font-size: <%= fontXS %>; }
+
+textarea { font-size: <%= fontDefault %>; }
 
 .form-button {
 	background-color: <%= colorScheme.getLayoutBg() %>;
