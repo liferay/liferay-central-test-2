@@ -366,6 +366,8 @@ public class PropsUtil {
 
 	public static final String LAYOUT_SHOW_PORTLET_INACTIVE = "layout.show.portlet.inactive";
 
+	public static final String LAYOUT_DEFAULT_TEMPLATE_ID = "layout.default.template.id";
+
 	// Preferences
 
 	public static final String PREFERENCE_VALIDATE_ON_STARTUP = "preference.validate.on.startup";

@@ -50,8 +50,6 @@ public class LayoutTypePortlet extends LayoutType {
 
 	public static final String LAYOUT_TEMPLATE_ID = "layout-template-id";
 
-	public static final String DEFAULT_LAYOUT_TEMPLATE_ID = "2_columns_ii";
-
 	public static final String STATE_MAX = "state-max";
 
 	public static final String STATE_MAX_PREVIOUS = "state-max-previous";

@@ -50,6 +50,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletPreferencesFactory;
@@ -334,7 +335,7 @@ public class EditPagesAction extends PortletAction {
 					(LayoutTypePortlet)layout.getLayoutType();
 
 				layoutTypePortlet.setLayoutTemplateId(
-					LayoutTypePortlet.DEFAULT_LAYOUT_TEMPLATE_ID);
+					PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_TEMPLATE_ID));
 
 				LayoutServiceUtil.updateLayout(
 					layout.getLayoutId(), layout.getOwnerId(),
