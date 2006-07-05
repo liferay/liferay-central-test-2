@@ -43,8 +43,9 @@ public class MBFriendlyPortletURL extends PortletURLImplWrapper {
 		String toString = super.generateToString();
 
 		String layoutFriendlyURL = getLayoutFriendlyURL();
+		String tabs2 = getParameter("tabs2");
 
-		if (Validator.isNull(layoutFriendlyURL)) {
+		if (Validator.isNull(layoutFriendlyURL) || Validator.isNotNull(tabs2)) {
 			return toString;
 		}
 
@@ -55,9 +56,8 @@ public class MBFriendlyPortletURL extends PortletURLImplWrapper {
 
 		if (strutsAction.equals("/message_boards/view")) {
 			String categoryId = getParameter("categoryId");
-			String tabs1 = GetterUtil.get(getParameter("tabs1"), "categories");
 
-			if (Validator.isNotNull(categoryId) && tabs1.equals("categories")) {
+			if (Validator.isNotNull(categoryId)) {
 				friendlyURL = "/message_boards/category/" + categoryId;
 			}
 		}

@@ -29,14 +29,17 @@ PortletURL tabs1URL = renderResponse.createRenderURL();
 
 tabs1URL.setParameter("struts_action", "/message_boards/view");
 
-PortletURL url0URL = renderResponse.createRenderURL();
+String url0HREF = tabs1URL.toString();
 
-url0URL.setParameter("struts_action", "/message_boards/view");
-url0URL.setParameter("categoryId", MBCategory.DEFAULT_PARENT_CATEGORY_ID);
+if (Validator.isNotNull(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay))) {
+	url0HREF = PortalUtil.getLayoutURL(layout, themeDisplay) + "/message_boards/";
+}
+else {
+}
 %>
 
 <liferay-ui:tabs
 	names="categories,recent-posts,statistics"
 	url="<%= tabs1URL.toString() %>"
-	url0="<%= url0URL.toString() %>"
+	url0="<%= url0HREF %>"
 />

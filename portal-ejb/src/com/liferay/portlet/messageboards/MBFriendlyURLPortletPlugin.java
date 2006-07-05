@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards;
 
 import com.liferay.portal.servlet.FriendlyURLPortletPlugin;
+import com.liferay.portlet.messageboards.model.MBCategory;
 
 /**
  * <a href="MBFriendlyURLPortletPlugin.java.html"><b><i>View Source</i></b></a>
@@ -43,6 +44,14 @@ public class MBFriendlyURLPortletPlugin implements FriendlyURLPortletPlugin {
 
 		int x = url.indexOf("/", pos + 1);
 		int y = url.indexOf("/", x + 1);
+
+		if (y == -1) {
+			queryString +=
+				"&_19_struts_action=%2Fmessage_boards%2Fview&_19_categoryId=" +
+					MBCategory.DEFAULT_PARENT_CATEGORY_ID;
+
+			return new String[] {friendlyURL, queryString};
+		}
 
 		String type = url.substring(x + 1, y);
 

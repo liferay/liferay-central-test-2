@@ -77,19 +77,14 @@ public class DBBuilder {
 
 		StringBuffer sb = new StringBuffer();
 
-		sb.append("drop database lportal\n");
-		sb.append("create database lportal\n");
-		sb.append("connect to lportal\n");
-		sb.append(_readSQL("../sql/portal/portal-db2.sql", _DB2[0], "\n"));
-
-		/*sb.append(
-			StringUtil.replace(
-				FileUtil.read("../sql/indexes.sql"),
-				new String[] {"\n", ";"},
-				new String[] {"", "\n"}));*/
-
+		sb.append("drop database lportal;\n");
+		sb.append("create database lportal;\n");
+		sb.append("connect to lportal;\n");
+		sb.append(FileUtil.read("../sql/portal/portal-db2.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences.sql"));
+		sb.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/sequences/sequences-db2.sql"));
 
 		FileUtil.write(file, sb.toString());
 
@@ -118,9 +113,9 @@ public class DBBuilder {
 		sb.append("\n");
 		sb.append(FileUtil.read("../sql/portal/portal-mysql.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes.sql"));
+		sb.append(FileUtil.read("../sql/indexes/indexes-mysql.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences.sql"));
+		sb.append(FileUtil.read("../sql/sequences/sequences-mysql.sql"));
 
 		FileUtil.write(file, sb.toString());
 
@@ -137,9 +132,9 @@ public class DBBuilder {
 		sb.append("\n");
 		sb.append(FileUtil.read("../sql/portal/portal-oracle.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes.sql"));
+		sb.append(FileUtil.read("../sql/indexes/indexes-oracle.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences.sql"));
+		sb.append(FileUtil.read("../sql/sequences/sequences-oracle.sql"));
 		sb.append("\n");
 		sb.append("quit");
 
@@ -157,9 +152,9 @@ public class DBBuilder {
 		sb.append("\n");
 		sb.append(FileUtil.read("../sql/portal/portal-postgresql.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes.sql"));
+		sb.append(FileUtil.read("../sql/indexes/indexes-postgresql.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences.sql"));
+		sb.append(FileUtil.read("../sql/sequences/sequences-postgresql.sql"));
 
 		FileUtil.write(file, sb.toString());
 
@@ -178,9 +173,9 @@ public class DBBuilder {
 		sb.append("\n");
 		sb.append(FileUtil.read("../sql/portal/portal-sql-server.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes.sql"));
+		sb.append(FileUtil.read("../sql/indexes/indexes-sql-server.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences.sql"));
+		sb.append(FileUtil.read("../sql/sequences/sequences-sql-server.sql"));
 
 		FileUtil.write(file, sb.toString());
 
@@ -241,12 +236,9 @@ public class DBBuilder {
 		String db2 = _buildTemplate(fileName, _DB2, "db2");
 
 		db2 = _rewordDb2(db2);
-		db2 = _removeLongInserts(db2);
+		//db2 = _removeLongInserts(db2);
 		db2 = _removeNull(db2);
-		db2 = StringUtil.replace(
-			db2,
-			new String[] {"\\'"},
-			new String[] {"''"});
+		db2 = StringUtil.replace(db2, "\\'", "''");
 
 		FileUtil.write("../sql/" + fileName + "/" + fileName + "-db2.sql", db2);
 
@@ -296,10 +288,7 @@ public class DBBuilder {
 		String mysql = _buildTemplate(fileName, _MYSQL, "mysql");
 
 		mysql = _rewordMysql(mysql);
-		mysql = StringUtil.replace(
-			mysql,
-			new String[] {"\\'"},
-			new String[] {"''"});
+		mysql = StringUtil.replace(mysql, "\\'", "''");
 
 		FileUtil.write(
 			"../sql/" + fileName + "/" + fileName + "-mysql.sql", mysql);
@@ -400,8 +389,6 @@ public class DBBuilder {
 
 		sap = _rewordSAP(sap);
 
-		//sap = StringUtil.replace(sap, "varchar(100)", "varchar(75)");
-
 		FileUtil.write("../sql/" + fileName + "/" + fileName + "-sap.sql", sap);
 
 		// SQL Server
@@ -422,12 +409,8 @@ public class DBBuilder {
 
 		String sybase = _buildTemplate(fileName, _SYBASE, "sybase");
 
-		if (fileName.equals("indexes")) {
-			sybase = _removeBooleanIndexes(sybase);
-		}
-
+		sybase = _rewordSybase(sybase);
 		sybase = StringUtil.replace(sybase, ");\n", ")\ngo\n");
-
 		sybase = StringUtil.replace(
 			sybase,
 			new String[] {"\\\\", "\\'", "\\\"", "\\n", "\\r"},
@@ -472,18 +455,8 @@ public class DBBuilder {
 						}
 					}
 
-					/*if (includeFileName.equals("portal-data-image.sql") &&
-						server.equals("sybase")) {
-
-						include = StringUtil.replace(
-							include, ");\n", ");\nCOMMIT_TRANSACTION;\n");
-					}*/
-
-					//if (line.indexOf("portal-tables.sql") != -1) {
-						include = _convertTimestamp(include, server);
-						include = StringUtil.replace(
-							include, _TEMPLATE, replace);
-					//}
+					include = _convertTimestamp(include, server);
+					include = StringUtil.replace(include, _TEMPLATE, replace);
 
 					sb.append(include);
 					sb.append("\n\n");
@@ -503,6 +476,10 @@ public class DBBuilder {
 			template = _convertTimestamp(template, server);
 			template = StringUtil.replace(template, _TEMPLATE, replace);
 		//}
+
+		if (fileName.equals("indexes") && server.equals("sybase")) {
+			template = _removeBooleanIndexes(template);
+		}
 
 		return template;
 	}
@@ -940,6 +917,10 @@ public class DBBuilder {
 		br.close();
 
 		return sb.toString();
+	}
+
+	private String _rewordSybase(String data) throws IOException {
+		return _rewordSQLServer(data);
 	}
 
 	private static String _ALTER_COLUMN_TYPE = "alter_column_type ";
