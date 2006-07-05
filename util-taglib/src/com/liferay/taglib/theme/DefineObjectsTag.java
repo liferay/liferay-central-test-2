@@ -53,7 +53,10 @@ public class DefineObjectsTag extends TagSupport {
 				pageContext.setAttribute("layout", themeDisplay.getLayout());
 			}
 
-			pageContext.setAttribute("layouts", themeDisplay.getLayouts());
+			if (themeDisplay.getLayouts() != null) {
+				pageContext.setAttribute("layouts", themeDisplay.getLayouts());
+			}
+
 			pageContext.setAttribute("plid", themeDisplay.getPlid());
 
 			if (themeDisplay.getLayoutTypePortlet() != null) {
