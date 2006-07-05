@@ -348,6 +348,8 @@ public class PropsUtil {
 
 	public static final String LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND = "layout.friendly.url.page.not.found";
 
+	public static final String LAYOUT_FRIENDLY_URL_KEYWORDS = "layout.friendly.url.keywords";
+
 	public static final String LAYOUT_ADD_PORTLETS = "layout.add.portlets";
 
 	public static final String LAYOUT_NAME_MAX_LENGTH = "layout.name.max.length";

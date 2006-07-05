@@ -45,7 +45,7 @@ public class LayoutFriendlyURLException extends PortalException {
 
 	public static final int DUPLICATE = 6;
 
-	public static final int PORTLET_CONFLICT = 7;
+	public static final int KEYWORD_CONFLICT = 7;
 
 	public static int validate(String friendlyURL) {
 		if (friendlyURL.length() < 2) {
@@ -85,15 +85,15 @@ public class LayoutFriendlyURLException extends PortalException {
 		return _type;
 	}
 
-	public String getPortletConflictMapping() {
-		return _portletConflictMapping;
+	public String getKeywordConflict() {
+		return _keywordConflict;
 	}
 
-	public void setPortletConflictMapping(String portletConflictMapping) {
-		_portletConflictMapping = portletConflictMapping;
+	public void setKeywordConflict(String keywordConflict) {
+		_keywordConflict = keywordConflict;
 	}
 
 	private int _type;
-	private String _portletConflictMapping;
+	private String _keywordConflict;
 
 }

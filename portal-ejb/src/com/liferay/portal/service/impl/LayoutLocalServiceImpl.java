@@ -58,6 +58,7 @@ import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.servlet.FriendlyURLPortletPlugin;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceUtil;
 import com.liferay.util.CollectionFactory;
@@ -937,6 +938,21 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			catch (NoSuchLayoutException nsle) {
 			}
 
+			String[] keywords = PropsUtil.getArray(
+				PropsUtil.LAYOUT_FRIENDLY_URL_KEYWORDS);
+
+			for (int i = 0; i < keywords.length; i++) {
+				if (friendlyURL.indexOf(keywords[i]) != -1) {
+					LayoutFriendlyURLException lfurle =
+						new LayoutFriendlyURLException(
+							LayoutFriendlyURLException.KEYWORD_CONFLICT);
+
+					lfurle.setKeywordConflict(keywords[i]);
+
+					throw lfurle;
+				}
+			}
+
 			Map portletPlugins =
 				PortletLocalServiceUtil.getFriendlyURLPlugins();
 
@@ -953,10 +969,9 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 				if (friendlyURL.indexOf(portletPlugin.getMapping()) != -1) {
 					LayoutFriendlyURLException lfurle =
 						new LayoutFriendlyURLException(
-							LayoutFriendlyURLException.PORTLET_CONFLICT);
+							LayoutFriendlyURLException.KEYWORD_CONFLICT);
 
-					lfurle.setPortletConflictMapping(
-						portletPlugin.getMapping());
+					lfurle.setKeywordConflict(portletPlugin.getMapping());
 
 					throw lfurle;
 				}

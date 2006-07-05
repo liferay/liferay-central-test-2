@@ -244,8 +244,8 @@ portletURL.setParameter("groupId", groupId);
 				<%= LanguageUtil.get(pageContext, "please-enter-a-unique-friendly-url") %>
 			</c:if>
 
-			<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.PORTLET_CONFLICT %>">
-				<%= LanguageUtil.format(pageContext, "please-enter-a-friendly-url-that-does-not-conflict-with-the-portlet-keyword-x", lfurle.getPortletConflictMapping()) %>
+			<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.KEYWORD_CONFLICT %>">
+				<%= LanguageUtil.format(pageContext, "please-enter-a-friendly-url-that-does-not-conflict-with-the-keyword-x", lfurle.getKeywordConflict()) %>
 			</c:if>
 		</liferay-ui:error>
 
