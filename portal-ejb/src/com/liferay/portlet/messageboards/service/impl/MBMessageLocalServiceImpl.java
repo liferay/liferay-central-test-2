@@ -747,7 +747,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			String topicId, String messageId, String subject, String body)
 		throws PortalException, SystemException {
 
-		String categoryId = null;
+		String categoryId = Company.SYSTEM;
 		List files = new ArrayList();
 		PortletPreferences prefs = null;
 
