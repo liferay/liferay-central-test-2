@@ -166,6 +166,47 @@ public class MBCategoryUtil {
 			obc);
 	}
 
+	public static java.util.List findByCompanyId(java.lang.String companyId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId);
+	}
+
+	public static java.util.List findByCompanyId(java.lang.String companyId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId, begin, end);
+	}
+
+	public static java.util.List findByCompanyId(java.lang.String companyId,
+		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBCategory findByCompanyId_First(
+		java.lang.String companyId,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portlet.messageboards.NoSuchCategoryException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId_First(companyId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBCategory findByCompanyId_Last(
+		java.lang.String companyId,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portlet.messageboards.NoSuchCategoryException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId_Last(companyId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBCategory[] findByCompanyId_PrevAndNext(
+		java.lang.String categoryId, java.lang.String companyId,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portlet.messageboards.NoSuchCategoryException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId_PrevAndNext(categoryId,
+			companyId, obc);
+	}
+
 	public static java.util.List findByG_P(java.lang.String groupId,
 		java.lang.String parentCategoryId)
 		throws com.liferay.portal.SystemException {
@@ -222,6 +263,11 @@ public class MBCategoryUtil {
 		getPersistence().removeByGroupId(groupId);
 	}
 
+	public static void removeByCompanyId(java.lang.String companyId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByCompanyId(companyId);
+	}
+
 	public static void removeByG_P(java.lang.String groupId,
 		java.lang.String parentCategoryId)
 		throws com.liferay.portal.SystemException {
@@ -231,6 +277,11 @@ public class MBCategoryUtil {
 	public static int countByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByGroupId(groupId);
+	}
+
+	public static int countByCompanyId(java.lang.String companyId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByCompanyId(companyId);
 	}
 
 	public static int countByG_P(java.lang.String groupId,

@@ -22,6 +22,11 @@ create table MBStatsUser (
 	primary key (groupId, userId)
 );
 
+alter table MBCategory add lastPostDate DATE null;
+
+alter table MBMessage add categoryId VARCHAR(75) null;
+
+alter table MBThread add categoryId VARCHAR(75) null;
 alter table MBThread add viewCount INTEGER;
 
 drop table Properties;

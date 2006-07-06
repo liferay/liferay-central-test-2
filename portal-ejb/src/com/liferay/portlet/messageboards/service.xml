@@ -26,6 +26,7 @@
 		<column name="parentCategoryId" type="String" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
+		<column name="lastPostDate" type="Date" />
 
 		<!-- Order -->
 
@@ -38,6 +39,9 @@
 
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
+		</finder>
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
 		</finder>
 		<finder name="G_P" return-type="Collection">
 			<finder-column name="groupId" />
@@ -84,6 +88,7 @@
 
 		<!-- Other fields -->
 
+		<column name="categoryId" type="String" />
 		<column name="threadId" type="String" />
 		<column name="parentMessageId" type="String" />
 		<column name="subject" type="String" />
@@ -100,8 +105,8 @@
 
 		<!-- Finder methods -->
 
-		<finder name="TopicId" return-type="Collection">
-			<finder-column name="topicId" />
+		<finder name="CategoryId" return-type="Collection">
+			<finder-column name="categoryId" />
 		</finder>
 		<finder name="ThreadId" return-type="Collection">
 			<finder-column name="threadId" />
@@ -185,8 +190,9 @@
 
 		<!-- Other fields -->
 
-		<column name="rootMessageId" type="String" />
+		<column name="categoryId" type="String" />
 		<column name="topicId" type="String" />
+		<column name="rootMessageId" type="String" />
 		<column name="messageCount" type="int" />
 		<column name="viewCount" type="int" />
 		<column name="lastPostDate" type="Date" />
@@ -199,55 +205,14 @@
 
 		<!-- Finder methods -->
 
-		<finder name="TopicId" return-type="Collection">
-			<finder-column name="topicId" />
-		</finder>
-	</entity>
-	<entity name="MBTopic" local-service="true" remote-service="true">
-
-		<!-- PK fields -->
-
-		<column name="topicId" type="String" primary="true" />
-
-		<!-- Audit fields -->
-
-		<column name="companyId" type="String" />
-		<column name="userId" type="String" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
-
-		<!-- Other fields -->
-
-		<column name="categoryId" type="String" />
-		<column name="name" type="String" />
-		<column name="description" type="String" />
-		<column name="lastPostDate" type="Date" />
-
-		<!-- Order -->
-
-		<order by="desc">
-			<order-column name="createDate" />
-		</order>
-
-		<!-- Finder methods -->
-
-		<finder name="CompanyId" return-type="Collection">
-			<finder-column name="companyId" />
-		</finder>
 		<finder name="CategoryId" return-type="Collection">
 			<finder-column name="categoryId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
 	<exceptions>
 		<exception>CategoryName</exception>
 		<exception>MessageBody</exception>
 		<exception>MessageSubject</exception>
 		<exception>RequiredMessage</exception>
-		<exception>TopicName</exception>
 	</exceptions>
 </service-builder>

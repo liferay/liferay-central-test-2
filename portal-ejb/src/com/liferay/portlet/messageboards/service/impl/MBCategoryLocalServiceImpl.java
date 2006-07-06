@@ -36,12 +36,10 @@ import com.liferay.portlet.messageboards.CategoryNameException;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.model.MBTopic;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
-import com.liferay.portlet.messageboards.service.persistence.MBTopicUtil;
 import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalService;
-import com.liferay.portlet.messageboards.service.spring.MBTopicLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.spring.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.Hits;
@@ -167,9 +165,22 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 			deleteCategory(curCategory);
 		}
 
-		// Topics
+		// Lucene
 
-		MBTopicLocalServiceUtil.deleteTopics(category.getCategoryId());
+		try {
+			Indexer.deleteMessages(
+				category.getCompanyId(), category.getCategoryId());
+		}
+		catch (IOException ioe) {
+			_log.error(ioe.getMessage());
+		}
+		catch (ParseException pe) {
+			_log.error(pe.getMessage());
+		}
+
+		// Threads
+
+		MBThreadLocalServiceUtil.deleteThreads(category.getCategoryId());
 
 		// Resources
 
@@ -226,21 +237,22 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 		try {
 			String companyId = ids[0];
 
-			Iterator itr1 = MBTopicUtil.findByCompanyId(companyId).iterator();
+			Iterator itr1 = MBCategoryUtil.findByCompanyId(
+				companyId).iterator();
 
 			while (itr1.hasNext()) {
-				MBTopic topic = (MBTopic)itr1.next();
+				MBCategory category = (MBCategory)itr1.next();
 
-				String topicId = topic.getTopicId();
-				MBCategory category = topic.getCategory();
+				String categoryId = category.getCategoryId();
 
-				Iterator itr2 = MBMessageUtil.findByTopicId(topicId).iterator();
+				Iterator itr2 = MBMessageUtil.findByCategoryId(
+					categoryId).iterator();
 
 				while (itr2.hasNext()) {
 					MBMessage message = (MBMessage)itr2.next();
 
 					String groupId = category.getGroupId();
-					String categoryId = category.getCategoryId();
+					String topicId = message.getTopicId();
 					String threadId = message.getThreadId();
 					String messageId = message.getMessageId();
 					String title = message.getSubject();
@@ -270,7 +282,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 	public Hits search(
    			String companyId, String groupId, String[] categoryIds,
-			String[] topicIds, String threadId, String keywords)
+			String threadId, String keywords)
 		throws SystemException {
 
 		try {
@@ -298,19 +310,6 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 				}
 
 				booleanQuery.add(categoryIdsQuery, BooleanClause.Occur.MUST);
-			}
-
-			if ((topicIds != null) && (topicIds.length > 0)) {
-				BooleanQuery topicIdsQuery = new BooleanQuery();
-
-				for (int i = 0; i < topicIds.length; i++) {
-					Term term = new Term("topicId", topicIds[i]);
-					TermQuery termQuery = new TermQuery(term);
-
-					topicIdsQuery.add(termQuery, BooleanClause.Occur.SHOULD);
-				}
-
-				booleanQuery.add(topicIdsQuery, BooleanClause.Occur.MUST);
 			}
 
 			if (Validator.isNotNull(threadId)) {

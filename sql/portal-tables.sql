@@ -454,7 +454,8 @@ create table MBCategory (
 	modifiedDate DATE null,
 	parentCategoryId VARCHAR(75) null,
 	name VARCHAR(75) null,
-	description STRING null
+	description STRING null,
+	lastPostDate DATE null
 );
 
 create table MBDiscussion (
@@ -472,6 +473,7 @@ create table MBMessage (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	categoryId VARCHAR(75) null,
 	threadId VARCHAR(75) null,
 	parentMessageId VARCHAR(75) null,
 	subject VARCHAR(75) null,
@@ -491,8 +493,9 @@ create table MBMessageFlag (
 
 create table MBThread (
 	threadId VARCHAR(75) not null primary key,
-	rootMessageId VARCHAR(75) null,
+	categoryId VARCHAR(75) null,
 	topicId VARCHAR(75) null,
+	rootMessageId VARCHAR(75) null,
 	messageCount INTEGER,
 	viewCount INTEGER,
 	lastPostDate DATE null

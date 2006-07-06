@@ -110,6 +110,7 @@ public class MBCategoryPersistence extends BasePersistence {
 					mbCategoryHBM.setParentCategoryId(mbCategory.getParentCategoryId());
 					mbCategoryHBM.setName(mbCategory.getName());
 					mbCategoryHBM.setDescription(mbCategory.getDescription());
+					mbCategoryHBM.setLastPostDate(mbCategory.getLastPostDate());
 					session.save(mbCategoryHBM);
 					session.flush();
 				}
@@ -127,6 +128,7 @@ public class MBCategoryPersistence extends BasePersistence {
 						mbCategoryHBM.setParentCategoryId(mbCategory.getParentCategoryId());
 						mbCategoryHBM.setName(mbCategory.getName());
 						mbCategoryHBM.setDescription(mbCategory.getDescription());
+						mbCategoryHBM.setLastPostDate(mbCategory.getLastPostDate());
 						session.flush();
 					}
 					else {
@@ -141,6 +143,7 @@ public class MBCategoryPersistence extends BasePersistence {
 						mbCategoryHBM.setParentCategoryId(mbCategory.getParentCategoryId());
 						mbCategoryHBM.setName(mbCategory.getName());
 						mbCategoryHBM.setDescription(mbCategory.getDescription());
+						mbCategoryHBM.setLastPostDate(mbCategory.getLastPostDate());
 						session.save(mbCategoryHBM);
 						session.flush();
 					}
@@ -368,6 +371,205 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			if (groupId != null) {
 				q.setString(queryPos++, groupId);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					mbCategory, MBCategoryHBMUtil.getInstance());
+			com.liferay.portlet.messageboards.model.MBCategory[] array = new com.liferay.portlet.messageboards.model.MBCategory[3];
+			array[0] = (com.liferay.portlet.messageboards.model.MBCategory)objArray[0];
+			array[1] = (com.liferay.portlet.messageboards.model.MBCategory)objArray[1];
+			array[2] = (com.liferay.portlet.messageboards.model.MBCategory)objArray[2];
+
+			return array;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByCompanyId(String companyId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("parentCategoryId ASC").append(", ");
+			query.append("name ASC");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			Iterator itr = q.list().iterator();
+			List list = new ArrayList();
+
+			while (itr.hasNext()) {
+				MBCategoryHBM mbCategoryHBM = (MBCategoryHBM)itr.next();
+				list.add(MBCategoryHBMUtil.model(mbCategoryHBM));
+			}
+
+			return list;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByCompanyId(String companyId, int begin, int end)
+		throws SystemException {
+		return findByCompanyId(companyId, begin, end, null);
+	}
+
+	public List findByCompanyId(String companyId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("parentCategoryId ASC").append(", ");
+				query.append("name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			List list = new ArrayList();
+			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
+
+			while (itr.hasNext()) {
+				MBCategoryHBM mbCategoryHBM = (MBCategoryHBM)itr.next();
+				list.add(MBCategoryHBMUtil.model(mbCategoryHBM));
+			}
+
+			return list;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public com.liferay.portlet.messageboards.model.MBCategory findByCompanyId_First(
+		String companyId, OrderByComparator obc)
+		throws NoSuchCategoryException, SystemException {
+		List list = findByCompanyId(companyId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			String msg = "No MBCategory exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchCategoryException(msg);
+		}
+		else {
+			return (com.liferay.portlet.messageboards.model.MBCategory)list.get(0);
+		}
+	}
+
+	public com.liferay.portlet.messageboards.model.MBCategory findByCompanyId_Last(
+		String companyId, OrderByComparator obc)
+		throws NoSuchCategoryException, SystemException {
+		int count = countByCompanyId(companyId);
+		List list = findByCompanyId(companyId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			String msg = "No MBCategory exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchCategoryException(msg);
+		}
+		else {
+			return (com.liferay.portlet.messageboards.model.MBCategory)list.get(0);
+		}
+	}
+
+	public com.liferay.portlet.messageboards.model.MBCategory[] findByCompanyId_PrevAndNext(
+		String categoryId, String companyId, OrderByComparator obc)
+		throws NoSuchCategoryException, SystemException {
+		com.liferay.portlet.messageboards.model.MBCategory mbCategory = findByPrimaryKey(categoryId);
+		int count = countByCompanyId(companyId);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("parentCategoryId ASC").append(", ");
+				query.append("name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -710,6 +912,52 @@ public class MBCategoryPersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByCompanyId(String companyId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("parentCategoryId ASC").append(", ");
+			query.append("name ASC");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			while (itr.hasNext()) {
+				MBCategoryHBM mbCategoryHBM = (MBCategoryHBM)itr.next();
+				session.delete(mbCategoryHBM);
+			}
+
+			session.flush();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public void removeByG_P(String groupId, String parentCategoryId)
 		throws SystemException {
 		Session session = null;
@@ -795,6 +1043,53 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			if (groupId != null) {
 				q.setString(queryPos++, groupId);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByCompanyId(String companyId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId is null");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
 			}
 
 			Iterator itr = q.list().iterator();

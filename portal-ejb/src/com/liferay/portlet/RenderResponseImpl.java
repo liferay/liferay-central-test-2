@@ -87,8 +87,11 @@ public class RenderResponseImpl implements RenderResponse {
 			try {
 				Class portletURLClassObj = Class.forName(portletURLClass);
 
-				Constructor constructor =
-					portletURLClassObj.getConstructors()[0];
+				Constructor constructor = portletURLClassObj.getConstructor(
+					new Class[] {
+						com.liferay.portlet.RenderResponseImpl.class,
+						boolean.class
+					});
 
 				return (PortletURL)constructor.newInstance(
 					new Object[] {this, new Boolean(action)});

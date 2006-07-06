@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards;
 
+import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletURLImplWrapper;
 import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.util.GetterUtil;
@@ -34,6 +35,10 @@ import com.liferay.util.Validator;
  *
  */
 public class MBFriendlyPortletURL extends PortletURLImplWrapper {
+
+	public MBFriendlyPortletURL(ActionResponseImpl res, boolean action) {
+		super(res, action);
+	}
 
 	public MBFriendlyPortletURL(RenderResponseImpl res, boolean action) {
 		super(res, action);

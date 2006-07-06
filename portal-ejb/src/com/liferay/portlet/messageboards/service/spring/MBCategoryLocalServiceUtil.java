@@ -251,14 +251,13 @@ public class MBCategoryLocalServiceUtil {
 
 	public static com.liferay.util.lucene.Hits search(
 		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String[] categoryIds, java.lang.String[] topicIds,
-		java.lang.String threadId, java.lang.String keywords)
-		throws com.liferay.portal.SystemException {
+		java.lang.String[] categoryIds, java.lang.String threadId,
+		java.lang.String keywords) throws com.liferay.portal.SystemException {
 		try {
 			MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
 			return mbCategoryLocalService.search(companyId, groupId,
-				categoryIds, topicIds, threadId, keywords);
+				categoryIds, threadId, keywords);
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;

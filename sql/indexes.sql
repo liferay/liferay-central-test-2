@@ -73,6 +73,7 @@ create index Layout_ix_OwnerId on Layout (ownerId);
 
 create index ListType_ix_Type on ListType (type_);
 
+create index MBCategory_ix_CompanyId on MBCategory (companyId);
 create index MBCategory_ix_G_P on MBCategory (groupId, parentCategoryId);
 create index MBCategory_ix_GroupId on MBCategory (groupId);
 
@@ -83,18 +84,15 @@ create index MBMessageFlag_ix_T_U on MBMessageFlag (topicId, userId);
 create index MBMessageFlag_ix_TopicId on MBMessageFlag (topicId);
 create index MBMessageFlag_ix_UserId on MBMessageFlag (userId);
 
+create index MBMessage_ix_CategoryId on MBMessage (categoryId);
 create index MBMessage_ix_T_P on MBMessage (threadId, parentMessageId);
 create index MBMessage_ix_ThreadId on MBMessage (threadId);
-create index MBMessage_ix_TopicId on MBMessage (topicId);
 
 create index MBStatsUser_ix_G_M on MBStatsUser (groupId, messageCount);
 create index MBStatsUser_ix_GroupId on MBStatsUser (groupId);
 create index MBStatsUser_ix_UserId on MBStatsUser (userId);
 
-create index MBThread_ix_TopicId on MBThread (topicId);
-
-create index MBTopic_ix_CategoryId on MBTopic (categoryId);
-create index MBTopic_ix_CompanyId on MBTopic (companyId);
+create index MBThread_ix_CategoryId on MBThread (categoryId);
 
 create index MailReceipt_ix_CompanyId on MailReceipt (companyId);
 create index MailReceipt_ix_UserId on MailReceipt (userId);

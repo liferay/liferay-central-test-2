@@ -26,14 +26,10 @@
 
 <%
 String breadcrumbsCategoryId = ParamUtil.getString(request, "breadcrumbsCategoryId");
-String breadcrumbsTopicId = ParamUtil.getString(request, "breadcrumbsTopicId");
 String breadcrumbsMessageId = ParamUtil.getString(request, "breadcrumbsMessageId");
 
 String categoryIds = ParamUtil.getString(request, "categoryIds");
 String[] categoryIdsArray = StringUtil.split(categoryIds);
-
-String topicIds = ParamUtil.getString(request, "topicIds");
-String[] topicIdsArray = StringUtil.split(topicIds);
 
 String threadId = ParamUtil.getString(request, "threadId");
 String keywords = ParamUtil.getString(request, "keywords");
@@ -41,15 +37,13 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= breadcrumbsCategoryId %>">
-<input name="<portlet:namespace />breadcrumbsTopicId" type="hidden" value="<%= breadcrumbsTopicId %>">
 <input name="<portlet:namespace />breadcrumbsMessageId" type="hidden" value="<%= breadcrumbsMessageId %>">
 <input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryIds %>">
-<input name="<portlet:namespace />topicIds" type="hidden" value="<%= topicIds %>">
 <input name="<portlet:namespace />threadId" type="hidden" value="<%= threadId %>">
 
 <liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
 
-<%= MBUtil.getBreadcrumbs(breadcrumbsCategoryId, breadcrumbsTopicId, breadcrumbsMessageId, pageContext, renderResponse) %> &raquo; <%= LanguageUtil.get(pageContext, "search") %>
+<%= MBUtil.getBreadcrumbs(breadcrumbsCategoryId, null, breadcrumbsMessageId, pageContext, renderResponse) %> &raquo; <%= LanguageUtil.get(pageContext, "search") %>
 
 <br><br>
 
@@ -60,10 +54,8 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/message_boards/search");
 portletURL.setParameter("breadcrumbsCategoryId", breadcrumbsCategoryId);
-portletURL.setParameter("breadcrumbsTopicId", breadcrumbsTopicId);
 portletURL.setParameter("breadcrumbsMessageId", breadcrumbsMessageId);
 portletURL.setParameter("categoryIds", categoryIds);
-portletURL.setParameter("topicIds", topicIds);
 portletURL.setParameter("threadId", threadId);
 portletURL.setParameter("keywords", keywords);
 
@@ -71,13 +63,12 @@ List headerNames = new ArrayList();
 
 headerNames.add("#");
 headerNames.add("category");
-headerNames.add("topic");
 headerNames.add("message");
 headerNames.add("score");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-messages-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
 
-Hits hits = MBCategoryLocalServiceUtil.search(company.getCompanyId(), portletGroupId, categoryIdsArray, topicIdsArray, threadId, keywords);
+Hits hits = MBCategoryLocalServiceUtil.search(company.getCompanyId(), portletGroupId, categoryIdsArray, threadId, keywords);
 
 Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
 int total = hits.getLength();
@@ -95,14 +86,13 @@ for (int i = 0; i < results.getLength(); i++) {
 
 	row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
 
-	// Category, topic, and message
+	// Category and message
 
 	String categoryId = doc.get("categoryId");
 	String topicId = doc.get("topicId");
 	String messageId = doc.get("messageId");
 
 	MBCategory category = MBCategoryLocalServiceUtil.getCategory(categoryId);
-	MBTopic topic = MBTopicLocalServiceUtil.getTopic(topicId);
 	MBMessage message = MBMessageLocalServiceUtil.getMessage(topicId, messageId);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
@@ -114,7 +104,6 @@ for (int i = 0; i < results.getLength(); i++) {
 	rowURL.setParameter("messageId", messageId);
 
 	row.addText(category.getName(), rowURL);
-	row.addText(topic.getName(), rowURL);
 	row.addText(message.getSubject(), rowURL);
 
 	// Score

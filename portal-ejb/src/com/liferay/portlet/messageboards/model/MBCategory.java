@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+import com.liferay.portal.model.Company;
 import com.liferay.util.Validator;
 
 /**
@@ -40,6 +41,10 @@ public class MBCategory extends MBCategoryModel {
 	public boolean isRoot() {
 		return Validator.equals(
 			getParentCategoryId(), DEFAULT_PARENT_CATEGORY_ID);
+	}
+
+	public boolean isDiscussion() {
+		return Validator.equals(getCategoryId(), Company.SYSTEM);
 	}
 
 }

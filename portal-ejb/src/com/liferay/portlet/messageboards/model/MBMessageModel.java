@@ -58,6 +58,9 @@ public class MBMessageModel extends BaseModel {
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.userName"),
 			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_CATEGORYID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.categoryId"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_THREADID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.threadId"),
 			XSS_ALLOW_BY_MODEL);
@@ -203,6 +206,24 @@ public class MBMessageModel extends BaseModel {
 		}
 	}
 
+	public String getCategoryId() {
+		return GetterUtil.getString(_categoryId);
+	}
+
+	public void setCategoryId(String categoryId) {
+		if (((categoryId == null) && (_categoryId != null)) ||
+				((categoryId != null) && (_categoryId == null)) ||
+				((categoryId != null) && (_categoryId != null) &&
+				!categoryId.equals(_categoryId))) {
+			if (!XSS_ALLOW_CATEGORYID) {
+				categoryId = XSSUtil.strip(categoryId);
+			}
+
+			_categoryId = categoryId;
+			setModified(true);
+		}
+	}
+
 	public String getThreadId() {
 		return GetterUtil.getString(_threadId);
 	}
@@ -313,6 +334,7 @@ public class MBMessageModel extends BaseModel {
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
+		clone.setCategoryId(getCategoryId());
 		clone.setThreadId(getThreadId());
 		clone.setParentMessageId(getParentMessageId());
 		clone.setSubject(getSubject());
@@ -380,6 +402,7 @@ public class MBMessageModel extends BaseModel {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _categoryId;
 	private String _threadId;
 	private String _parentMessageId;
 	private String _subject;

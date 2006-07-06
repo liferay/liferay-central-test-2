@@ -32,7 +32,6 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePK;
 import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.spring.MBTopicLocalServiceUtil;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
@@ -69,7 +68,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection(Constants.DATA_SOURCE);
 
-			ps = con.prepareStatement(_UPGRADE_CATEGORY);
+			ps = con.prepareStatement(_UPGRADE_CATEGORY_1);
 
 			ps.setString(1, Group.DEFAULT_PARENT_GROUP_ID);
 
@@ -92,7 +91,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 					userId, plid, parentCategoryId, name, description,
 					addCommunityPermissions, addGuestPermissions);
 
-				_upgradeTopic(groupId, category.getCategoryId());
+				_upgradeCategory(groupId, userId, category.getCategoryId());
 			}
 		}
 		catch (NoSuchGroupException nsge) {
@@ -105,7 +104,10 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		}
 	}
 
-	private void _upgradeMessage(String topicId) throws Exception {
+	private void _upgradeCategory(
+			String groupId, String userId, String categoryId)
+		throws Exception {
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -113,7 +115,46 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection(Constants.DATA_SOURCE);
 
-			ps = con.prepareStatement(_UPGRADE_MESSAGE);
+			ps = con.prepareStatement(_UPGRADE_CATEGORY_2);
+
+			ps.setString(1, groupId);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String topicId = rs.getString("topicId");
+				String name = rs.getString("name");
+				String description = rs.getString("description");
+
+				String plid = Layout.PUBLIC + groupId + ".1";
+				boolean addCommunityPermissions = true;
+				boolean addGuestPermissions = true;
+
+				_log.debug("Upgrading topic " + topicId);
+
+				MBCategory category = MBCategoryLocalServiceUtil.addCategory(
+					userId, plid, categoryId, name, description,
+					addCommunityPermissions, addGuestPermissions);
+
+				_upgradeMessage(categoryId, topicId);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	private void _upgradeMessage(String categoryId, String topicId)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection(Constants.DATA_SOURCE);
+
+			ps = con.prepareStatement(_UPGRADE_MESSAGE_1);
 
 			ps.setString(1, topicId);
 
@@ -129,63 +170,33 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 					"Upgrading message " + new MBMessagePK(topicId, messageId));
 
 				MBMessageLocalServiceUtil.addMessageResources(
-					topicId, messageId, addCommunityPermissions,
+					categoryId, topicId, messageId, addCommunityPermissions,
 					addGuestPermissions);
 			}
+
+			ps = con.prepareStatement(_UPGRADE_MESSAGE_2);
+
+			ps.setString(1, categoryId);
+			ps.setString(2, topicId);
+
+			ps.executeUpdate();
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
-	private void _upgradeTopic(String groupId, String categoryId)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection(Constants.DATA_SOURCE);
-
-			ps = con.prepareStatement(_UPGRADE_TOPIC);
-
-			ps.setString(1, groupId);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				String topicId = rs.getString("topicId");
-				String name = rs.getString("name");
-				String description = rs.getString("description");
-
-				boolean addCommunityPermissions = true;
-				boolean addGuestPermissions = true;
-
-				_log.debug("Upgrading topic " + topicId);
-
-				MBTopicLocalServiceUtil.updateTopic(
-					topicId, categoryId, name, description);
-
-				MBTopicLocalServiceUtil.addTopicResources(
-					topicId, addCommunityPermissions, addGuestPermissions);
-
-				_upgradeMessage(topicId);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	public static final String _UPGRADE_CATEGORY =
+	public static final String _UPGRADE_CATEGORY_1 =
 		"SELECT DISTINCT groupId, userId FROM MBTopic WHERE groupId != ?";
 
-	public static final String _UPGRADE_MESSAGE =
+	public static final String _UPGRADE_CATEGORY_2 =
+		"SELECT * FROM MBTopic WHERE groupId = ?";
+
+	public static final String _UPGRADE_MESSAGE_1 =
 		"SELECT * FROM MBMessage WHERE topicId = ?";
 
-	public static final String _UPGRADE_TOPIC =
-		"SELECT * FROM MBTopic WHERE groupId = ?";
+	public static final String _UPGRADE_MESSAGE_2 =
+		"UPDATE MBMessage SET categoryId = ? WHERE topicId = ?";
 
 	private static Log _log = LogFactory.getLog(UpgradeMessageBoards.class);
 

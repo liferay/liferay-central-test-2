@@ -591,20 +591,6 @@
 			<cache-size>20</cache-size>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBTopicLocalServiceEJB</ejb-name>
-			<local-jndi-name>ejb/liferay/MBTopicLocalServiceHome</local-jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBTopicServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_messageboards_service_ejb_MBTopicServiceEJB</jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
 			<ejb-name>com_liferay_portlet_polls_service_ejb_PollsChoiceLocalServiceEJB</ejb-name>
 			<local-jndi-name>ejb/liferay/PollsChoiceLocalServiceHome</local-jndi-name>
 			<clustered>true</clustered>

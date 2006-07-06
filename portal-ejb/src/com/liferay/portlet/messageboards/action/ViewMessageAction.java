@@ -26,7 +26,6 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
-import com.liferay.portlet.messageboards.NoSuchTopicException;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
 import com.liferay.util.ParamUtil;
@@ -68,7 +67,6 @@ public class ViewMessageAction extends PortletAction {
 		catch (Exception e) {
 			if (e != null &&
 				e instanceof NoSuchMessageException ||
-				e instanceof NoSuchTopicException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

@@ -340,14 +340,6 @@
 			<bean-local-home-name>ejb/liferay/MBThreadLocalServiceHome</bean-local-home-name>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBTopicLocalServiceEJB</ejb-name>
-			<bean-local-home-name>ejb/liferay/MBTopicLocalServiceHome</bean-local-home-name>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBTopicServiceEJB</ejb-name>
-			<bean-home-name>com_liferay_portlet_messageboards_service_ejb_MBTopicServiceEJB</bean-home-name>
-		</session>
-		<session>
 			<ejb-name>com_liferay_portlet_polls_service_ejb_PollsChoiceLocalServiceEJB</ejb-name>
 			<bean-local-home-name>ejb/liferay/PollsChoiceLocalServiceHome</bean-local-home-name>
 		</session>

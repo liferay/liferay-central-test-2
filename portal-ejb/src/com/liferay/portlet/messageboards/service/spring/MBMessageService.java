@@ -38,14 +38,14 @@ public interface MBMessageService {
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		java.lang.String topicId, java.lang.String subject,
+		java.lang.String categoryId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		java.lang.String topicId, java.lang.String subject,
+		java.lang.String categoryId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
 		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -53,7 +53,7 @@ public interface MBMessageService {
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		java.lang.String topicId, java.lang.String threadId,
+		java.lang.String categoryId, java.lang.String threadId,
 		java.lang.String parentMessageId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -61,7 +61,7 @@ public interface MBMessageService {
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		java.lang.String topicId, java.lang.String threadId,
+		java.lang.String categoryId, java.lang.String threadId,
 		java.lang.String parentMessageId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
 		javax.portlet.PortletPreferences prefs,
@@ -71,7 +71,7 @@ public interface MBMessageService {
 
 	public void deleteDiscussionMessage(java.lang.String groupId,
 		java.lang.String className, java.lang.String classPK,
-		java.lang.String messageId)
+		java.lang.String topicId, java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
@@ -97,20 +97,23 @@ public interface MBMessageService {
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		java.lang.String groupId, java.lang.String className,
-		java.lang.String classPK, java.lang.String messageId,
-		java.lang.String subject, java.lang.String body)
+		java.lang.String classPK, java.lang.String topicId,
+		java.lang.String messageId, java.lang.String subject,
+		java.lang.String body)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		java.lang.String topicId, java.lang.String messageId,
-		java.lang.String subject, java.lang.String body, java.util.List files)
+		java.lang.String categoryId, java.lang.String subject,
+		java.lang.String body, java.util.List files)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		java.lang.String topicId, java.lang.String messageId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
+		java.lang.String categoryId, java.lang.String subject,
+		java.lang.String body, java.util.List files,
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;

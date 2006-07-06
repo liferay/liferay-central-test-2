@@ -49,6 +49,25 @@ public class MBThreadLocalServiceEJBImpl implements MBThreadLocalService,
 		return (MBThreadLocalService)ctx.getBean(CLASS_NAME);
 	}
 
+	public void deleteThread(java.lang.String threadId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().deleteThread(threadId);
+	}
+
+	public void deleteThread(
+		com.liferay.portlet.messageboards.model.MBThread thread)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().deleteThread(thread);
+	}
+
+	public void deleteThreads(java.lang.String categoryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().deleteThreads(categoryId);
+	}
+
 	public java.util.List getGroupThreads(java.lang.String groupId, int begin,
 		int end) throws com.liferay.portal.SystemException {
 		return getService().getGroupThreads(groupId, begin, end);
@@ -59,14 +78,14 @@ public class MBThreadLocalServiceEJBImpl implements MBThreadLocalService,
 		return getService().getGroupThreadsCount(groupId);
 	}
 
-	public java.util.List getThreads(java.lang.String topicId, int begin,
+	public java.util.List getThreads(java.lang.String categoryId, int begin,
 		int end) throws com.liferay.portal.SystemException {
-		return getService().getThreads(topicId, begin, end);
+		return getService().getThreads(categoryId, begin, end);
 	}
 
-	public int getThreadsCount(java.lang.String topicId)
+	public int getThreadsCount(java.lang.String categoryId)
 		throws com.liferay.portal.SystemException {
-		return getService().getThreadsCount(topicId);
+		return getService().getThreadsCount(categoryId);
 	}
 
 	public boolean hasReadThread(java.lang.String userId,

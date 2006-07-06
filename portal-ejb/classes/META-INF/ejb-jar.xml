@@ -10749,13 +10749,6 @@
 				<local>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBTopicLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBTopicLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
 		</session>
 		<session>
 			<display-name>MBCategoryServiceEJB</display-name>
@@ -10806,13 +10799,6 @@
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceHome</local-home>
 				<local>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBTopicLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBTopicLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 		</session>
 		<session>
@@ -10871,13 +10857,6 @@
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceHome</local-home>
 				<local>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBTopicLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBTopicLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 		</session>
 		<session>
@@ -10944,13 +10923,6 @@
 				<local>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBTopicLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBTopicLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
 		</session>
 		<session>
 			<display-name>MBMessageFlagLocalServiceEJB</display-name>
@@ -10987,13 +10959,6 @@
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceHome</local-home>
 				<local>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBTopicLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBTopicLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 		</session>
 		<session>
@@ -11032,13 +10997,6 @@
 				<local>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBTopicLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBTopicLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
 		</session>
 		<session>
 			<display-name>MBThreadLocalServiceEJB</display-name>
@@ -11075,122 +11033,6 @@
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
 				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBTopicLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBTopicLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-		</session>
-		<session>
-			<display-name>MBTopicLocalServiceEJB</display-name>
-			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBTopicLocalServiceEJB</ejb-name>
-			<local-home>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceHome</local-home>
-			<local>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceEJB</local>
-			<ejb-class>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceEJBImpl</ejb-class>
-			<session-type>Stateless</session-type>
-			<transaction-type>Bean</transaction-type>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portal.service.ejb.ResourceLocalServiceHome</local-home>
-				<local>com.liferay.portal.service.ejb.ResourceLocalServiceEJB</local>
-				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBMessageLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBMessageLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBMessageLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-		</session>
-		<session>
-			<display-name>MBTopicServiceEJB</display-name>
-			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBTopicServiceEJB</ejb-name>
-			<home>com.liferay.portlet.messageboards.service.ejb.MBTopicServiceHome</home>
-			<remote>com.liferay.portlet.messageboards.service.ejb.MBTopicServiceEJB</remote>
-			<ejb-class>com.liferay.portlet.messageboards.service.ejb.MBTopicServiceEJBImpl</ejb-class>
-			<session-type>Stateless</session-type>
-			<transaction-type>Bean</transaction-type>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portal.service.ejb.ResourceLocalServiceHome</local-home>
-				<local>com.liferay.portal.service.ejb.ResourceLocalServiceEJB</local>
-				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBMessageLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBMessageLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBMessageLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBMessageFlagLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/MBTopicLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceHome</local-home>
-				<local>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceEJB</local>
-				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBTopicLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 		</session>
 		<session>
@@ -12518,14 +12360,6 @@
 			</method>
 			<method>
 				<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-name>
-				<method-name>*</method-name>
-			</method>
-			<method>
-				<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBTopicLocalServiceEJB</ejb-name>
-				<method-name>*</method-name>
-			</method>
-			<method>
-				<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBTopicServiceEJB</ejb-name>
 				<method-name>*</method-name>
 			</method>
 			<method>

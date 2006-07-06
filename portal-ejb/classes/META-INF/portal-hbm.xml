@@ -783,6 +783,7 @@
 		<property name="parentCategoryId" />
 		<property name="name" />
 		<property name="description" />
+		<property name="lastPostDate" />
 	</class>
 	<class name="com.liferay.portlet.messageboards.service.persistence.MBDiscussionHBM" table="MBDiscussion">
 		<cache usage="read-write" />
@@ -804,6 +805,7 @@
 		<property name="userName" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
+		<property name="categoryId" />
 		<property name="threadId" />
 		<property name="parentMessageId" />
 		<property name="subject" />
@@ -834,25 +836,11 @@
 		<id name="threadId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="rootMessageId" />
+		<property name="categoryId" />
 		<property name="topicId" />
+		<property name="rootMessageId" />
 		<property name="messageCount" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="viewCount" type="com.liferay.util.dao.hibernate.IntegerType" />
-		<property name="lastPostDate" />
-	</class>
-	<class name="com.liferay.portlet.messageboards.service.persistence.MBTopicHBM" table="MBTopic">
-		<cache usage="read-write" />
-		<id name="topicId" type="java.lang.String">
-			<generator class="assigned" />
-		</id>
-		<property name="companyId" />
-		<property name="userId" />
-		<property name="userName" />
-		<property name="createDate" />
-		<property name="modifiedDate" />
-		<property name="categoryId" />
-		<property name="name" />
-		<property name="description" />
 		<property name="lastPostDate" />
 	</class>
 	<class name="com.liferay.portlet.polls.service.persistence.PollsChoiceHBM" table="PollsChoice">

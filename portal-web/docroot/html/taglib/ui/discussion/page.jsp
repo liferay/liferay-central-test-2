@@ -24,11 +24,11 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
+<%@ page import="com.liferay.portlet.messageboards.model.MBCategory" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBDiscussion" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessageDisplay" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBThread" %>
-<%@ page import="com.liferay.portlet.messageboards.model.MBTopic" %>
 <%@ page import="com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission" %>
 <%@ page import="com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.util.TreeWalker" %>
@@ -45,7 +45,7 @@ String redirect = (String)request.getAttribute("liferay-ui:discussion:redirect")
 
 MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getDiscussionMessageDisplay(userId, className, classPK);
 
-MBTopic topic = messageDisplay.getTopic();
+MBCategory category = messageDisplay.getCategory();
 MBThread thread = messageDisplay.getThread();
 TreeWalker treeWalker = messageDisplay.getTreeWalker();
 MBMessage rootMessage = treeWalker.getRoot();
@@ -96,6 +96,7 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 <input name="<%= namespace %>redirect" type="hidden" value="<%= redirect %>">
 <input name="<%= namespace %>className" type="hidden" value="<%= className %>">
 <input name="<%= namespace %>classPK" type="hidden" value="<%= classPK %>">
+<input name="<%= namespace %>topicId" type="hidden" value="<%= rootMessage.getTopicId() %>">
 <input name="<%= namespace %>messageId" type="hidden" value="">
 <input name="<%= namespace %>threadId" type="hidden" value="<%= thread.getThreadId() %>">
 <input name="<%= namespace %>parentMessageId" type="hidden" value="">
@@ -158,7 +159,7 @@ List messages = treeWalker.getMessages();
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, rootMessage);
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, message);
-		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_TOPIC, topic);
+		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY, category);
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, new Boolean(lastChildNode));
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
 	%>

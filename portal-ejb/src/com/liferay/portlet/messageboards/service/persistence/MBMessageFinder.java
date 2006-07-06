@@ -134,7 +134,7 @@ public class MBMessageFinder {
 		StringBuffer sb = new StringBuffer();
 
 		for (int i = 0; i < categoryIds.size(); i++) {
-			sb.append("MBTopic.categoryId = ? ");
+			sb.append("categoryId = ? ");
 
 			if ((i + 1) != categoryIds.size()) {
 				sb.append("OR ");

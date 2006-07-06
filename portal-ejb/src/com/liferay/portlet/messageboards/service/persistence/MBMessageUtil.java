@@ -125,46 +125,46 @@ public class MBMessageUtil {
 		return getPersistence().findByPrimaryKey(mbMessagePK);
 	}
 
-	public static java.util.List findByTopicId(java.lang.String topicId)
+	public static java.util.List findByCategoryId(java.lang.String categoryId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByTopicId(topicId);
+		return getPersistence().findByCategoryId(categoryId);
 	}
 
-	public static java.util.List findByTopicId(java.lang.String topicId,
+	public static java.util.List findByCategoryId(java.lang.String categoryId,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findByTopicId(topicId, begin, end);
+		return getPersistence().findByCategoryId(categoryId, begin, end);
 	}
 
-	public static java.util.List findByTopicId(java.lang.String topicId,
+	public static java.util.List findByCategoryId(java.lang.String categoryId,
 		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByTopicId(topicId, begin, end, obc);
+		return getPersistence().findByCategoryId(categoryId, begin, end, obc);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMessage findByTopicId_First(
-		java.lang.String topicId,
+	public static com.liferay.portlet.messageboards.model.MBMessage findByCategoryId_First(
+		java.lang.String categoryId,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portlet.messageboards.NoSuchMessageException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByTopicId_First(topicId, obc);
+		return getPersistence().findByCategoryId_First(categoryId, obc);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMessage findByTopicId_Last(
-		java.lang.String topicId,
+	public static com.liferay.portlet.messageboards.model.MBMessage findByCategoryId_Last(
+		java.lang.String categoryId,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portlet.messageboards.NoSuchMessageException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByTopicId_Last(topicId, obc);
+		return getPersistence().findByCategoryId_Last(categoryId, obc);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMessage[] findByTopicId_PrevAndNext(
+	public static com.liferay.portlet.messageboards.model.MBMessage[] findByCategoryId_PrevAndNext(
 		com.liferay.portlet.messageboards.service.persistence.MBMessagePK mbMessagePK,
-		java.lang.String topicId,
+		java.lang.String categoryId,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portlet.messageboards.NoSuchMessageException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByTopicId_PrevAndNext(mbMessagePK, topicId,
-			obc);
+		return getPersistence().findByCategoryId_PrevAndNext(mbMessagePK,
+			categoryId, obc);
 	}
 
 	public static java.util.List findByThreadId(java.lang.String threadId)
@@ -260,9 +260,9 @@ public class MBMessageUtil {
 		return getPersistence().findAll();
 	}
 
-	public static void removeByTopicId(java.lang.String topicId)
+	public static void removeByCategoryId(java.lang.String categoryId)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeByTopicId(topicId);
+		getPersistence().removeByCategoryId(categoryId);
 	}
 
 	public static void removeByThreadId(java.lang.String threadId)
@@ -276,9 +276,9 @@ public class MBMessageUtil {
 		getPersistence().removeByT_P(threadId, parentMessageId);
 	}
 
-	public static int countByTopicId(java.lang.String topicId)
+	public static int countByCategoryId(java.lang.String categoryId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByTopicId(topicId);
+		return getPersistence().countByCategoryId(categoryId);
 	}
 
 	public static int countByThreadId(java.lang.String threadId)

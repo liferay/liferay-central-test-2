@@ -31,7 +31,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
-import com.liferay.portlet.messageboards.NoSuchTopicException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.service.spring.MBMessageServiceUtil;
 import com.liferay.util.ParamUtil;
@@ -76,7 +75,6 @@ public class EditDiscussionAction extends PortletAction {
 		catch (Exception e) {
 			if (e != null &&
 				e instanceof NoSuchMessageException ||
-				e instanceof NoSuchTopicException ||
 				e instanceof PrincipalException ||
 				e instanceof RequiredMessageException) {
 
@@ -111,10 +109,11 @@ public class EditDiscussionAction extends PortletAction {
 		String className = ParamUtil.getString(req, "className");
 		String classPK = ParamUtil.getString(req, "classPK");
 
+		String topicId = ParamUtil.getString(req, "topicId");
 		String messageId = ParamUtil.getString(req, "messageId");
 
 		MBMessageServiceUtil.deleteDiscussionMessage(
-			groupId, className, classPK, messageId);
+			groupId, className, classPK, topicId, messageId);
 	}
 
 	protected void updateMessage(ActionRequest req) throws Exception {
@@ -122,6 +121,7 @@ public class EditDiscussionAction extends PortletAction {
 		String className = ParamUtil.getString(req, "className");
 		String classPK = ParamUtil.getString(req, "classPK");
 
+		String topicId = ParamUtil.getString(req, "topicId");
 		String messageId = ParamUtil.getString(req, "messageId");
 
 		String threadId = ParamUtil.getString(req, "threadId");
@@ -142,7 +142,7 @@ public class EditDiscussionAction extends PortletAction {
 			// Update message
 
 			MBMessageServiceUtil.updateDiscussionMessage(
-				groupId, className, classPK, messageId, subject, body);
+				groupId, className, classPK, topicId, messageId, subject, body);
 		}
 	}
 

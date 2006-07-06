@@ -2138,54 +2138,6 @@
 			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.spring.MBTopicLocalService.professional" class="com.liferay.portlet.messageboards.service.impl.MBTopicLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.messageboards.service.spring.MBTopicLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.messageboards.service.spring.MBTopicLocalService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.spring.MBTopicLocalServiceFactory" class="com.liferay.portlet.messageboards.service.spring.MBTopicLocalServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.messageboards.service.spring.MBTopicLocalService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.spring.MBTopicService.professional" class="com.liferay.portlet.messageboards.service.impl.MBTopicServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.messageboards.service.spring.MBTopicService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.messageboards.service.spring.MBTopicService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.spring.MBTopicServiceFactory" class="com.liferay.portlet.messageboards.service.spring.MBTopicServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.messageboards.service.spring.MBTopicService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBTopicPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBTopicPersistence" lazy-init="true">
-		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBTopicUtil" class="com.liferay.portlet.messageboards.service.persistence.MBTopicUtil" lazy-init="true">
-		<property name="persistence">
-			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBTopicPersistence" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portlet.polls.service.spring.PollsChoiceLocalService.professional" class="com.liferay.portlet.polls.service.impl.PollsChoiceLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.polls.service.spring.PollsChoiceLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">

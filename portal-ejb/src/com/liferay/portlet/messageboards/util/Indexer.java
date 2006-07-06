@@ -110,8 +110,7 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 		}
 	}
 
-	public static void deleteMessages(
-			String companyId, String topicId)
+	public static void deleteMessages(String companyId, String threadId)
 		throws IOException, ParseException {
 
 		synchronized (IndexWriter.class) {
@@ -120,7 +119,7 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 			LuceneUtil.addRequiredTerm(
 				booleanQuery, LuceneFields.PORTLET_ID, PORTLET_ID);
 
-			LuceneUtil.addRequiredTerm(booleanQuery, "topicId", topicId);
+			LuceneUtil.addRequiredTerm(booleanQuery, "threadId", threadId);
 
 			Searcher searcher = LuceneUtil.getSearcher(companyId);
 
@@ -178,8 +177,8 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 		String topicId = doc.get("topicId");
 
 		portletURL.setParameter("struts_action", "/message_boards/view_message");
-		portletURL.setParameter("messageId", messageId);
 		portletURL.setParameter("topicId", topicId);
+		portletURL.setParameter("messageId", messageId);
 
 		return new DocumentSummary(title, content, portletURL);
 	}

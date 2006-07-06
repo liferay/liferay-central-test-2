@@ -28,9 +28,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.model.MBTopic;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.spring.MBTopicLocalServiceUtil;
 
 /**
  * <a href="MBMessagePermission.java.html"><b><i>View Source</i></b></a>
@@ -76,9 +74,7 @@ public class MBMessagePermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		MBTopic topic = MBTopicLocalServiceUtil.getTopic(
-			message.getTopicId());
-		MBCategory category = topic.getCategory();
+		MBCategory category = message.getCategory();
 
 		return permissionChecker.hasPermission(
 			category.getGroupId(), MBMessage.class.getName(),

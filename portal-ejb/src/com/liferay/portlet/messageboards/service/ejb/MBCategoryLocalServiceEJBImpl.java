@@ -133,10 +133,10 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 
 	public com.liferay.util.lucene.Hits search(java.lang.String companyId,
 		java.lang.String groupId, java.lang.String[] categoryIds,
-		java.lang.String[] topicIds, java.lang.String threadId,
-		java.lang.String keywords) throws com.liferay.portal.SystemException {
-		return getService().search(companyId, groupId, categoryIds, topicIds,
-			threadId, keywords);
+		java.lang.String threadId, java.lang.String keywords)
+		throws com.liferay.portal.SystemException {
+		return getService().search(companyId, groupId, categoryIds, threadId,
+			keywords);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBCategory updateCategory(

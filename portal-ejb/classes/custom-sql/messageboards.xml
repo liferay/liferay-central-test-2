@@ -7,10 +7,8 @@
 				COUNT(*) AS COUNT_VALUE
 			FROM
 				MBMessage
-			INNER JOIN
-				MBTopic ON
-					([$CATEGORY_ID$]) AND
-					(MBTopic.topicId = MBMessage.topicId)
+			WHERE
+				([$CATEGORY_ID$])
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.countByGroupId">
@@ -20,11 +18,8 @@
 			FROM
 				MBMessage
 			INNER JOIN
-				MBTopic ON
-					(MBTopic.topicId = MBMessage.topicId)
-			INNER JOIN
 				MBCategory ON
-					(MBCategory.categoryId = MBTopic.categoryId) AND
+					(MBCategory.categoryId = MBMessage.categoryId) AND
 					(MBCategory.groupId = ?)
 		]]>
 	</sql>
@@ -52,11 +47,8 @@
 				MBMessage ON
 					(MBMessage.threadId = MBThread.threadId)
 			INNER JOIN
-				MBTopic ON
-					(MBTopic.topicId = MBMessage.topicId)
-			INNER JOIN
 				MBCategory ON
-					(MBCategory.categoryId = MBTopic.categoryId) AND
+					(MBCategory.categoryId = MBMessage.categoryId) AND
 					(MBCategory.groupId = ?)
 		]]>
 	</sql>
@@ -70,35 +62,11 @@
 				MBMessage ON
 					(MBMessage.threadId = MBThread.threadId)
 			INNER JOIN
-				MBTopic ON
-					(MBTopic.topicId = MBMessage.topicId)
-			INNER JOIN
 				MBCategory ON
-					(MBCategory.categoryId = MBTopic.categoryId) AND
+					(MBCategory.categoryId = MBMessage.categoryId) AND
 					(MBCategory.groupId = ?)
 			ORDER BY
 				MBThread.lastPostDate DESC
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBTopicFinder.countByCategoryIds">
-		<![CDATA[
-			SELECT
-				COUNT(*) AS COUNT_VALUE
-			FROM
-				MBTopic
-			WHERE [$CATEGORY_ID$]
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBTopicFinder.countByGroupId">
-		<![CDATA[
-			SELECT
-				COUNT(*) AS COUNT_VALUE
-			FROM
-				MBTopic
-			INNER JOIN
-				MBCategory ON
-					(MBCategory.categoryId = MBTopic.categoryId) AND
-					(MBCategory.groupId = ?)
 		]]>
 	</sql>
 </custom-sql>

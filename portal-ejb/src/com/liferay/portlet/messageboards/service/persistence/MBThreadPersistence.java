@@ -101,8 +101,9 @@ public class MBThreadPersistence extends BasePersistence {
 				if (mbThread.isNew()) {
 					MBThreadHBM mbThreadHBM = new MBThreadHBM();
 					mbThreadHBM.setThreadId(mbThread.getThreadId());
-					mbThreadHBM.setRootMessageId(mbThread.getRootMessageId());
+					mbThreadHBM.setCategoryId(mbThread.getCategoryId());
 					mbThreadHBM.setTopicId(mbThread.getTopicId());
+					mbThreadHBM.setRootMessageId(mbThread.getRootMessageId());
 					mbThreadHBM.setMessageCount(mbThread.getMessageCount());
 					mbThreadHBM.setViewCount(mbThread.getViewCount());
 					mbThreadHBM.setLastPostDate(mbThread.getLastPostDate());
@@ -114,8 +115,9 @@ public class MBThreadPersistence extends BasePersistence {
 							mbThread.getPrimaryKey());
 
 					if (mbThreadHBM != null) {
-						mbThreadHBM.setRootMessageId(mbThread.getRootMessageId());
+						mbThreadHBM.setCategoryId(mbThread.getCategoryId());
 						mbThreadHBM.setTopicId(mbThread.getTopicId());
+						mbThreadHBM.setRootMessageId(mbThread.getRootMessageId());
 						mbThreadHBM.setMessageCount(mbThread.getMessageCount());
 						mbThreadHBM.setViewCount(mbThread.getViewCount());
 						mbThreadHBM.setLastPostDate(mbThread.getLastPostDate());
@@ -124,8 +126,9 @@ public class MBThreadPersistence extends BasePersistence {
 					else {
 						mbThreadHBM = new MBThreadHBM();
 						mbThreadHBM.setThreadId(mbThread.getThreadId());
-						mbThreadHBM.setRootMessageId(mbThread.getRootMessageId());
+						mbThreadHBM.setCategoryId(mbThread.getCategoryId());
 						mbThreadHBM.setTopicId(mbThread.getTopicId());
+						mbThreadHBM.setRootMessageId(mbThread.getRootMessageId());
 						mbThreadHBM.setMessageCount(mbThread.getMessageCount());
 						mbThreadHBM.setViewCount(mbThread.getViewCount());
 						mbThreadHBM.setLastPostDate(mbThread.getLastPostDate());
@@ -176,7 +179,7 @@ public class MBThreadPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByTopicId(String topicId) throws SystemException {
+	public List findByCategoryId(String categoryId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -186,11 +189,11 @@ public class MBThreadPersistence extends BasePersistence {
 			query.append(
 				"FROM MBThread IN CLASS com.liferay.portlet.messageboards.service.persistence.MBThreadHBM WHERE ");
 
-			if (topicId == null) {
-				query.append("topicId is null");
+			if (categoryId == null) {
+				query.append("categoryId is null");
 			}
 			else {
-				query.append("topicId = ?");
+				query.append("categoryId = ?");
 			}
 
 			query.append(" ");
@@ -200,8 +203,8 @@ public class MBThreadPersistence extends BasePersistence {
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
 
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
+			if (categoryId != null) {
+				q.setString(queryPos++, categoryId);
 			}
 
 			Iterator itr = q.list().iterator();
@@ -222,12 +225,12 @@ public class MBThreadPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByTopicId(String topicId, int begin, int end)
+	public List findByCategoryId(String categoryId, int begin, int end)
 		throws SystemException {
-		return findByTopicId(topicId, begin, end, null);
+		return findByCategoryId(categoryId, begin, end, null);
 	}
 
-	public List findByTopicId(String topicId, int begin, int end,
+	public List findByCategoryId(String categoryId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -238,11 +241,11 @@ public class MBThreadPersistence extends BasePersistence {
 			query.append(
 				"FROM MBThread IN CLASS com.liferay.portlet.messageboards.service.persistence.MBThreadHBM WHERE ");
 
-			if (topicId == null) {
-				query.append("topicId is null");
+			if (categoryId == null) {
+				query.append("categoryId is null");
 			}
 			else {
-				query.append("topicId = ?");
+				query.append("categoryId = ?");
 			}
 
 			query.append(" ");
@@ -258,8 +261,8 @@ public class MBThreadPersistence extends BasePersistence {
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
 
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
+			if (categoryId != null) {
+				q.setString(queryPos++, categoryId);
 			}
 
 			List list = new ArrayList();
@@ -280,16 +283,16 @@ public class MBThreadPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBThread findByTopicId_First(
-		String topicId, OrderByComparator obc)
+	public com.liferay.portlet.messageboards.model.MBThread findByCategoryId_First(
+		String categoryId, OrderByComparator obc)
 		throws NoSuchThreadException, SystemException {
-		List list = findByTopicId(topicId, 0, 1, obc);
+		List list = findByCategoryId(categoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			String msg = "No MBThread exists with the key ";
 			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "topicId=";
-			msg += topicId;
+			msg += "categoryId=";
+			msg += categoryId;
 			msg += StringPool.CLOSE_CURLY_BRACE;
 			throw new NoSuchThreadException(msg);
 		}
@@ -298,17 +301,17 @@ public class MBThreadPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBThread findByTopicId_Last(
-		String topicId, OrderByComparator obc)
+	public com.liferay.portlet.messageboards.model.MBThread findByCategoryId_Last(
+		String categoryId, OrderByComparator obc)
 		throws NoSuchThreadException, SystemException {
-		int count = countByTopicId(topicId);
-		List list = findByTopicId(topicId, count - 1, count, obc);
+		int count = countByCategoryId(categoryId);
+		List list = findByCategoryId(categoryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			String msg = "No MBThread exists with the key ";
 			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "topicId=";
-			msg += topicId;
+			msg += "categoryId=";
+			msg += categoryId;
 			msg += StringPool.CLOSE_CURLY_BRACE;
 			throw new NoSuchThreadException(msg);
 		}
@@ -317,11 +320,11 @@ public class MBThreadPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBThread[] findByTopicId_PrevAndNext(
-		String threadId, String topicId, OrderByComparator obc)
+	public com.liferay.portlet.messageboards.model.MBThread[] findByCategoryId_PrevAndNext(
+		String threadId, String categoryId, OrderByComparator obc)
 		throws NoSuchThreadException, SystemException {
 		com.liferay.portlet.messageboards.model.MBThread mbThread = findByPrimaryKey(threadId);
-		int count = countByTopicId(topicId);
+		int count = countByCategoryId(categoryId);
 		Session session = null;
 
 		try {
@@ -331,11 +334,11 @@ public class MBThreadPersistence extends BasePersistence {
 			query.append(
 				"FROM MBThread IN CLASS com.liferay.portlet.messageboards.service.persistence.MBThreadHBM WHERE ");
 
-			if (topicId == null) {
-				query.append("topicId is null");
+			if (categoryId == null) {
+				query.append("categoryId is null");
 			}
 			else {
-				query.append("topicId = ?");
+				query.append("categoryId = ?");
 			}
 
 			query.append(" ");
@@ -351,8 +354,8 @@ public class MBThreadPersistence extends BasePersistence {
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
 
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
+			if (categoryId != null) {
+				q.setString(queryPos++, categoryId);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -403,7 +406,7 @@ public class MBThreadPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByTopicId(String topicId) throws SystemException {
+	public void removeByCategoryId(String categoryId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -413,11 +416,11 @@ public class MBThreadPersistence extends BasePersistence {
 			query.append(
 				"FROM MBThread IN CLASS com.liferay.portlet.messageboards.service.persistence.MBThreadHBM WHERE ");
 
-			if (topicId == null) {
-				query.append("topicId is null");
+			if (categoryId == null) {
+				query.append("categoryId is null");
 			}
 			else {
-				query.append("topicId = ?");
+				query.append("categoryId = ?");
 			}
 
 			query.append(" ");
@@ -427,8 +430,8 @@ public class MBThreadPersistence extends BasePersistence {
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
 
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
+			if (categoryId != null) {
+				q.setString(queryPos++, categoryId);
 			}
 
 			Iterator itr = q.list().iterator();
@@ -448,7 +451,7 @@ public class MBThreadPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByTopicId(String topicId) throws SystemException {
+	public int countByCategoryId(String categoryId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -459,11 +462,11 @@ public class MBThreadPersistence extends BasePersistence {
 			query.append(
 				"FROM MBThread IN CLASS com.liferay.portlet.messageboards.service.persistence.MBThreadHBM WHERE ");
 
-			if (topicId == null) {
-				query.append("topicId is null");
+			if (categoryId == null) {
+				query.append("categoryId is null");
 			}
 			else {
-				query.append("topicId = ?");
+				query.append("categoryId = ?");
 			}
 
 			query.append(" ");
@@ -471,8 +474,8 @@ public class MBThreadPersistence extends BasePersistence {
 			Query q = session.createQuery(query.toString());
 			int queryPos = 0;
 
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
+			if (categoryId != null) {
+				q.setString(queryPos++, categoryId);
 			}
 
 			Iterator itr = q.list().iterator();

@@ -27,6 +27,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Validator;
 
@@ -279,8 +280,11 @@ public class ActionResponseImpl implements ActionResponse {
 			try {
 				Class portletURLClassObj = Class.forName(portletURLClass);
 
-				Constructor constructor =
-					portletURLClassObj.getConstructors()[0];
+				Constructor constructor = portletURLClassObj.getConstructor(
+					new Class[] {
+						com.liferay.portlet.ActionResponseImpl.class,
+						boolean.class
+					});
 
 				return (PortletURL)constructor.newInstance(
 					new Object[] {this, new Boolean(action)});
@@ -296,6 +300,22 @@ public class ActionResponseImpl implements ActionResponse {
 
 	protected Layout getLayout() {
 		return _layout;
+	}
+
+	protected String getPlid() {
+		return _plid;
+	}
+
+	protected void setPlid(String plid) {
+		_plid = plid;
+
+		if (_plid == null) {
+			Layout layout = (Layout)_req.getAttribute(WebKeys.LAYOUT);
+
+			if (layout != null) {
+				_plid = layout.getPlid();
+			}
+		}
 	}
 
 	protected Map getParams() {
@@ -342,6 +362,7 @@ public class ActionResponseImpl implements ActionResponse {
 		_companyId = layout.getCompanyId();
 		_user = user;
 		_layout = layout;
+		setPlid(layout.getPlid());
 		setWindowState(windowState);
 		setPortletMode(portletMode);
 		_params = new LinkedHashMap();
@@ -359,6 +380,7 @@ public class ActionResponseImpl implements ActionResponse {
 		_companyId = null;
 		_user = null;
 		_layout = null;
+		_plid = null;
 		_windowState = null;
 		_portletMode = null;
 		_params = new LinkedHashMap();
@@ -395,6 +417,7 @@ public class ActionResponseImpl implements ActionResponse {
 	private String _companyId;
 	private User _user;
 	private Layout _layout;
+	private String _plid;
 	private Map _properties;
 	private WindowState _windowState;
 	private PortletMode _portletMode;

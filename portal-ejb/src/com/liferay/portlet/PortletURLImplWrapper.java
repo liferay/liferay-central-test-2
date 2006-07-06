@@ -30,6 +30,10 @@ package com.liferay.portlet;
  */
 public class PortletURLImplWrapper extends PortletURLImpl {
 
+	public PortletURLImplWrapper(ActionResponseImpl res, boolean action) {
+		super(res.getReq(), res.getPortletName(), res.getPlid(), action);
+	}
+
 	public PortletURLImplWrapper(RenderResponseImpl res, boolean action) {
 		super(res.getReq(), res.getPortletName(), res.getPlid(), action);
 	}

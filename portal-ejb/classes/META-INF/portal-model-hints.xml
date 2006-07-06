@@ -684,6 +684,7 @@
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
+		<field name="lastPostDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBDiscussion">
 		<field name="discussionId" type="String" />
@@ -699,6 +700,7 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="categoryId" type="String" />
 		<field name="threadId" type="String" />
 		<field name="parentMessageId" type="String" />
 		<field name="subject" type="String" />
@@ -722,24 +724,11 @@
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBThread">
 		<field name="threadId" type="String" />
-		<field name="rootMessageId" type="String" />
+		<field name="categoryId" type="String" />
 		<field name="topicId" type="String" />
+		<field name="rootMessageId" type="String" />
 		<field name="messageCount" type="int" />
 		<field name="viewCount" type="int" />
-		<field name="lastPostDate" type="Date" />
-	</model>
-	<model name="com.liferay.portlet.messageboards.model.MBTopic">
-		<field name="topicId" type="String" />
-		<field name="companyId" type="String" />
-		<field name="userId" type="String" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="categoryId" type="String" />
-		<field name="name" type="String" />
-		<field name="description" type="String">
-			<hint-collection name="TEXTAREA" />
-		</field>
 		<field name="lastPostDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.polls.model.PollsChoice">

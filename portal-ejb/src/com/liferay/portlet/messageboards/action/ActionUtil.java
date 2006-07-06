@@ -27,10 +27,8 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.model.MBTopic;
 import com.liferay.portlet.messageboards.service.spring.MBCategoryServiceUtil;
 import com.liferay.portlet.messageboards.service.spring.MBMessageServiceUtil;
-import com.liferay.portlet.messageboards.service.spring.MBTopicServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
@@ -100,32 +98,6 @@ public class ActionUtil {
 		}
 
 		req.setAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE, message);
-	}
-
-	public static void getTopic(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
-
-		getTopic(httpReq);
-	}
-
-	public static void getTopic(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
-
-		getTopic(httpReq);
-	}
-
-	public static void getTopic(HttpServletRequest req) throws Exception {
-		String topicId = ParamUtil.getString(req, "topicId");
-
-		MBTopic topic = null;
-
-		if (Validator.isNotNull(topicId)) {
-			topic = MBTopicServiceUtil.getTopic(topicId);
-		}
-
-		req.setAttribute(WebKeys.MESSAGE_BOARDS_TOPIC, topic);
 	}
 
 }

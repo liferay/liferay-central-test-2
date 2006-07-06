@@ -67,35 +67,36 @@ public class MBMessageLocalServiceEJBImpl implements MBMessageLocalService,
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		java.lang.String userId, java.lang.String topicId,
+		java.lang.String userId, java.lang.String categoryId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
 		boolean anonymous, javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addMessage(userId, topicId, subject, body, files,
-			anonymous, prefs, addCommunityPermissions, addGuestPermissions);
+		return getService().addMessage(userId, categoryId, subject, body,
+			files, anonymous, prefs, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		java.lang.String userId, java.lang.String topicId,
+		java.lang.String userId, java.lang.String categoryId,
 		java.lang.String threadId, java.lang.String parentMessageId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
 		boolean anonymous, javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addMessage(userId, topicId, threadId,
+		return getService().addMessage(userId, categoryId, threadId,
 			parentMessageId, subject, body, files, anonymous, prefs,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void addMessageResources(java.lang.String topicId,
-		java.lang.String messageId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public void addMessageResources(java.lang.String categoryId,
+		java.lang.String topicId, java.lang.String messageId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addMessageResources(topicId, messageId,
+		getService().addMessageResources(categoryId, topicId, messageId,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -109,10 +110,11 @@ public class MBMessageLocalServiceEJBImpl implements MBMessageLocalService,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void deleteDiscussionMessage(java.lang.String messageId)
+	public void deleteDiscussionMessage(java.lang.String topicId,
+		java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteDiscussionMessage(messageId);
+		getService().deleteDiscussionMessage(topicId, messageId);
 	}
 
 	public void deleteDiscussionMessages(java.lang.String className,
@@ -136,9 +138,28 @@ public class MBMessageLocalServiceEJBImpl implements MBMessageLocalService,
 		getService().deleteMessage(message);
 	}
 
+	public java.util.List getCategoryMessages(java.lang.String categoryId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return getService().getCategoryMessages(categoryId, begin, end);
+	}
+
+	public int getCategoryMessagesCount(java.lang.String categoryId)
+		throws com.liferay.portal.SystemException {
+		return getService().getCategoryMessagesCount(categoryId);
+	}
+
 	public int getCategoriesMessagesCount(java.util.List categoryIds)
 		throws com.liferay.portal.SystemException {
 		return getService().getCategoriesMessagesCount(categoryIds);
+	}
+
+	public java.lang.String getCategoryMessagesCountRSS(
+		java.lang.String categoryId, int begin, int end, double version,
+		java.lang.String url)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().getCategoryMessagesCountRSS(categoryId, begin, end,
+			version, url);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
@@ -199,24 +220,6 @@ public class MBMessageLocalServiceEJBImpl implements MBMessageLocalService,
 		return getService().getThreadMessagesCount(threadId);
 	}
 
-	public java.util.List getTopicMessages(java.lang.String topicId, int begin,
-		int end) throws com.liferay.portal.SystemException {
-		return getService().getTopicMessages(topicId, begin, end);
-	}
-
-	public int getTopicMessagesCount(java.lang.String topicId)
-		throws com.liferay.portal.SystemException {
-		return getService().getTopicMessagesCount(topicId);
-	}
-
-	public java.lang.String getTopicMessagesCountRSS(java.lang.String topicId,
-		int begin, int end, double version, java.lang.String url)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		return getService().getTopicMessagesCountRSS(topicId, begin, end,
-			version, url);
-	}
-
 	public void subscribeMessage(java.lang.String userId,
 		java.lang.String topicId, java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
@@ -232,21 +235,23 @@ public class MBMessageLocalServiceEJBImpl implements MBMessageLocalService,
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
-		java.lang.String messageId, java.lang.String subject,
-		java.lang.String body)
+		java.lang.String topicId, java.lang.String messageId,
+		java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateDiscussionMessage(messageId, subject, body);
+		return getService().updateDiscussionMessage(topicId, messageId,
+			subject, body);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		java.lang.String topicId, java.lang.String messageId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
+		java.lang.String categoryId, java.lang.String subject,
+		java.lang.String body, java.util.List files,
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateMessage(topicId, messageId, subject, body,
-			files, prefs);
+		return getService().updateMessage(topicId, messageId, categoryId,
+			subject, body, files, prefs);
 	}
 
 	public void ejbCreate() throws CreateException {

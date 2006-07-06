@@ -603,13 +603,6 @@
 		<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
-		<ejb-ref-name>ejb/liferay/MBTopicLocalServiceHome</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<local-home>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceHome</local-home>
-		<local>com.liferay.portlet.messageboards.service.ejb.MBTopicLocalServiceEJB</local>
-		<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBTopicLocalServiceEJB</ejb-link>
-	</ejb-local-ref>
-	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/PollsChoiceLocalServiceHome</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
 		<local-home>com.liferay.portlet.polls.service.ejb.PollsChoiceLocalServiceHome</local-home>

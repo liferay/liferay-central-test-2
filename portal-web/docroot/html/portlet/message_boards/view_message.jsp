@@ -27,8 +27,9 @@
 <%
 MBMessageDisplay messageDisplay = (MBMessageDisplay)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE);
 
-MBTopic topic = messageDisplay.getTopic();
 MBMessage message = messageDisplay.getMessage();
+
+MBCategory category = messageDisplay.getCategory();
 
 MBMessage previousMessage = messageDisplay.getPreviousMessage();
 MBMessage nextMessage = messageDisplay.getNextMessage();
@@ -52,14 +53,13 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 %>
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace />breadcrumbsTopicId" type="hidden" value="<%= topic.getTopicId() %>">
+<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= category.getCategoryId() %>">
 <input name="<portlet:namespace />breadcrumbsMessageId" type="hidden" value="<%= message.getMessageId() %>">
-<input name="<portlet:namespace />topicIds" type="hidden" value="<%= topic.getTopicId() %>">
 <input name="<portlet:namespace />threadId" type="hidden" value="<%= message.getThreadId() %>">
 
 <liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
 
-<%= MBUtil.getBreadcrumbs(null, topic, message, pageContext, renderResponse) %>
+<%= MBUtil.getBreadcrumbs(null, message, pageContext, renderResponse) %>
 
 <br><br>
 
@@ -70,7 +70,7 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 		[
 
 		<c:if test="<%= previousThread != null %>">
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="topicId" value="<%= topic.getTopicId() %>" /><portlet:param name="messageId" value="<%= previousThread.getRootMessageId() %>" /></portlet:renderURL>">
+			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="topicId" value="<%= message.getTopicId() %>" /><portlet:param name="messageId" value="<%= previousThread.getRootMessageId() %>" /></portlet:renderURL>">
 		</c:if>
 
 		<%= LanguageUtil.get(pageContext, "previous") %>
@@ -82,7 +82,7 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 		|
 
 		<c:if test="<%= nextThread != null %>">
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="topicId" value="<%= topic.getTopicId() %>" /><portlet:param name="messageId" value="<%= nextThread.getRootMessageId() %>" /></portlet:renderURL>">
+			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="topicId" value="<%= message.getTopicId() %>" /><portlet:param name="messageId" value="<%= nextThread.getRootMessageId() %>" /></portlet:renderURL>">
 		</c:if>
 
 		<%= LanguageUtil.get(pageContext, "next") %>
@@ -96,12 +96,12 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 	<span style="float: right;">
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
-			<c:if test="<%= MBTopicPermission.contains(permissionChecker, topic, ActionKeys.ADD_MESSAGE) %>">
+			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) %>">
 				<td>
 					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 						<portlet:param name="struts_action" value="/message_boards/edit_message" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="topicId" value="<%= topic.getTopicId() %>" />
+						<portlet:param name="categoryId" value="<%= category.getCategoryId() %>" />
 					</portlet:renderURL>
 
 					<liferay-ui:icon image="post" message="post-new-thread" url="<%= portletURL %>" />
@@ -161,7 +161,7 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
 	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, message);
 	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, treeWalker.getRoot());
-	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_TOPIC, topic);
+	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY, category);
 	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, new Boolean(false));
 	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
 	%>

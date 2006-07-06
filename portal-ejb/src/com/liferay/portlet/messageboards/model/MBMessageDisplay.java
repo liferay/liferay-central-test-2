@@ -40,15 +40,15 @@ public class MBMessageDisplay implements Serializable {
 	public MBMessageDisplay() {
 	}
 
-	public MBMessageDisplay(MBTopic topic, MBMessage message,
-							MBMessage parentMessage, MBThread thread,
+	public MBMessageDisplay(MBMessage message, MBMessage parentMessage,
+							MBCategory category, MBThread thread,
 							TreeWalker treeWalker, MBThread previousThread,
 							MBThread nextThread, MBThread firstThread,
 							MBThread lastThread, String userId) {
 
-		_topic = topic;
 		_message = message;
 		_parentMessage = parentMessage;
+		_category = category;
 		_thread = thread;
 		_treeWalker = new TreeWalker(message, userId);
 		_previousThread = previousThread;
@@ -83,16 +83,16 @@ public class MBMessageDisplay implements Serializable {
 		}
 	}
 
-	public MBTopic getTopic() {
-		return _topic;
-	}
-
 	public MBMessage getMessage() {
 		return _message;
 	}
 
 	public MBMessage getParentMessage() {
 		return _parentMessage;
+	}
+
+	public MBCategory getCategory() {
+		return _category;
 	}
 
 	public MBThread getThread() {
@@ -198,9 +198,9 @@ public class MBMessageDisplay implements Serializable {
 		}
 	}
 
-	private MBTopic _topic;
 	private MBMessage _message;
 	private MBMessage _parentMessage;
+	private MBCategory _category;
 	private MBThread _thread;
 	private TreeWalker _treeWalker;
 	private MBThread _previousThread;

@@ -32,6 +32,7 @@ MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSA
 String topicId = BeanParamUtil.getString(message, request, "topicId");
 String messageId = BeanParamUtil.getString(message, request, "messageId");
 
+String categoryId = BeanParamUtil.getString(message, request, "categoryId");
 String threadId = BeanParamUtil.getString(message, request, "threadId");
 String parentMessageId = BeanParamUtil.getString(message, request, "parentMessageId", MBMessage.DEFAULT_PARENT_MESSAGE_ID);
 
@@ -99,7 +100,7 @@ boolean preview = ParamUtil.getBoolean(request, "preview");
 
 	boolean editable = false;
 
-	MBTopic topic = null;
+	MBCategory category = null;
 
 	int depth = 0;
 
@@ -119,9 +120,9 @@ boolean preview = ParamUtil.getBoolean(request, "preview");
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveMessage(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />messageRedirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="topicId" value="<%= topicId %>" /></portlet:renderURL>&<portlet:namespace />messageId=">
 <input name="<portlet:namespace />topicId" type="hidden" value="<%= topicId %>">
 <input name="<portlet:namespace />messageId" type="hidden" value="<%= messageId %>">
+<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>">
 <input name="<portlet:namespace />threadId" type="hidden" value="<%= threadId %>">
 <input name="<portlet:namespace />parentMessageId" type="hidden" value="<%= parentMessageId %>">
 <input name="<portlet:namespace />attachments" type="hidden" value="<%= attachments %>">
@@ -274,7 +275,7 @@ if (message != null) {
 	boolean editable = false;
 
 	message = curParentMessage;
-	MBTopic topic = null;
+	MBCategory category = null;
 
 	int depth = 0;
 

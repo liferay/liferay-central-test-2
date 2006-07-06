@@ -101,11 +101,12 @@
 					</span>
 				</div>
 
-				<c:if test="<%= editable && MBTopicPermission.contains(permissionChecker, topic, ActionKeys.ADD_MESSAGE) %>">
+				<c:if test="<%= editable && MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) %>">
 					<div style="float: right;">
 						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 							<portlet:param name="struts_action" value="/message_boards/edit_message" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
+							<portlet:param name="categoryId" value="<%= message.getCategoryId() %>" />
 							<portlet:param name="topicId" value="<%= message.getTopicId() %>" />
 							<portlet:param name="threadId" value="<%= message.getThreadId() %>" />
 							<portlet:param name="parentMessageId" value="<%= message.getMessageId() %>" />
@@ -190,18 +191,18 @@
 					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.DELETE) %>">
 
 						<%
-						PortletURL topicURL = renderResponse.createRenderURL();
+						PortletURL categoryURL = renderResponse.createRenderURL();
 
-						topicURL.setWindowState(WindowState.MAXIMIZED);
+						categoryURL.setWindowState(WindowState.MAXIMIZED);
 
-						topicURL.setParameter("struts_action", "/message_boards/view_topic");
-						topicURL.setParameter("topicId", message.getTopicId());
+						categoryURL.setParameter("struts_action", "/message_boards/view");
+						categoryURL.setParameter("categoryId", message.getCategoryId());
 						%>
 
 						<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 							<portlet:param name="struts_action" value="/message_boards/edit_message" />
 							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-							<portlet:param name="redirect" value="<%= topicURL.toString() %>" />
+							<portlet:param name="redirect" value="<%= categoryURL %>" />
 							<portlet:param name="topicId" value="<%= message.getTopicId() %>" />
 							<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
 						</portlet:actionURL>

@@ -29,16 +29,29 @@ package com.liferay.portlet.messageboards.service.spring;
  *
  */
 public interface MBThreadLocalService {
+	public void deleteThread(java.lang.String threadId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public void deleteThread(
+		com.liferay.portlet.messageboards.model.MBThread thread)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public void deleteThreads(java.lang.String categoryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public java.util.List getGroupThreads(java.lang.String groupId, int begin,
 		int end) throws com.liferay.portal.SystemException;
 
 	public int getGroupThreadsCount(java.lang.String groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getThreads(java.lang.String topicId, int begin,
+	public java.util.List getThreads(java.lang.String categoryId, int begin,
 		int end) throws com.liferay.portal.SystemException;
 
-	public int getThreadsCount(java.lang.String topicId)
+	public int getThreadsCount(java.lang.String categoryId)
 		throws com.liferay.portal.SystemException;
 
 	public boolean hasReadThread(java.lang.String userId,

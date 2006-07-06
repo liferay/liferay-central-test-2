@@ -53,7 +53,7 @@ portletURL.setParameter("categoryId", categoryId);
 		<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= StringUtil.merge(categoryIds) %>">
 
 		<c:if test="<%= category != null %>">
-			<%= MBUtil.getBreadcrumbs(category, null, null, pageContext, renderResponse) %>
+			<%= MBUtil.getBreadcrumbs(category, null, pageContext, renderResponse) %>
 
 			<br><br>
 		</c:if>
@@ -63,7 +63,7 @@ portletURL.setParameter("categoryId", categoryId);
 
 		headerNames.add("category");
 		headerNames.add("num-of-categories");
-		headerNames.add("num-of-topics");
+		headerNames.add("num-of-threads");
 		headerNames.add("num-of-posts");
 		headerNames.add(StringPool.BLANK);
 
@@ -115,11 +115,11 @@ portletURL.setParameter("categoryId", categoryId);
 			MBCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, portletGroupId, curCategory.getCategoryId());
 
 			int categoriesCount = subcategoryIds.size() - 1;
-			int topicsCount = MBTopicLocalServiceUtil.getCategoriesTopicsCount(subcategoryIds);
+			int threadsCount = 0;// FIX ME MBTopicLocalServiceUtil.getCategoriesTopicsCount(subcategoryIds);
 			int messagesCount = MBMessageLocalServiceUtil.getCategoriesMessagesCount(subcategoryIds);
 
 			row.addText(Integer.toString(categoriesCount), rowURL);
-			row.addText(Integer.toString(topicsCount), rowURL);
+			row.addText(Integer.toString(threadsCount), rowURL);
 			row.addText(Integer.toString(messagesCount), rowURL);
 
 			// Action
@@ -180,94 +180,94 @@ portletURL.setParameter("categoryId", categoryId);
 			<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>">
 			<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryId %>">
 
-			<liferay-ui:tabs names="topics" />
+			<liferay-ui:tabs names="threads" />
 
 			<%
 			headerNames.clear();
 
-			headerNames.add("topic");
-			headerNames.add("num-of-threads");
-			headerNames.add(LanguageUtil.get(pageContext, "num-of-posts") + " <span style=\"font-size: xx-small; font-weight: normal;\">(" + LanguageUtil.get(pageContext, "new-over-total") + ")</span>");
+			headerNames.add("thread");
+			headerNames.add("started-by");
+			headerNames.add("num-of-posts");
+			headerNames.add("num-of-views");
 			headerNames.add("last-post-date");
 			headerNames.add(StringPool.BLANK);
 
 			searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-			total = MBTopicLocalServiceUtil.getTopicsCount(categoryId);
+			total = MBThreadLocalServiceUtil.getThreadsCount(categoryId);
 
 			searchContainer.setTotal(total);
 
-			results = MBTopicLocalServiceUtil.getTopics(categoryId, searchContainer.getStart(), searchContainer.getEnd());
+			results = MBThreadLocalServiceUtil.getThreads(categoryId, searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 
 			resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {
-				MBTopic topic = (MBTopic)results.get(i);
+				MBThread thread = (MBThread)results.get(i);
 
-				ResultRow row = new ResultRow(topic, topic.getPrimaryKey().toString(), i);
+				MBMessage message = MBMessageLocalServiceUtil.getMessage(thread.getTopicId(), thread.getRootMessageId());
+				boolean readThread = MBThreadLocalServiceUtil.hasReadThread(request.getRemoteUser(), thread.getThreadId());
+
+				ResultRow row = new ResultRow(message, thread.getPrimaryKey().toString(), i, !readThread);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
 
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
-				rowURL.setParameter("struts_action", "/message_boards/view_topic");
-				rowURL.setParameter("topicId", topic.getTopicId());
+				rowURL.setParameter("struts_action", "/message_boards/view_message");
+				rowURL.setParameter("topicId", message.getTopicId());
+				rowURL.setParameter("messageId", message.getMessageId());
 
-				// Name and description
+				// Thread
 
-				StringBuffer sb = new StringBuffer();
+				row.addText(message.getSubject(), rowURL);
 
-				sb.append(topic.getName());
+				// Started by
 
-				if (Validator.isNotNull(topic.getDescription())) {
-					sb.append("<br>");
-					sb.append("<span style=\"font-size: xx-small;\">");
-					sb.append(topic.getDescription());
-					sb.append("</span>");
+				if (message.isAnonymous()) {
+					row.addText(LanguageUtil.get(pageContext, "anonymous"), rowURL);
+				}
+				else {
+					row.addText(PortalUtil.getUserName(message.getUserId(), message.getUserName()), rowURL);
 				}
 
-				row.addText(sb.toString(), rowURL);
+				// Number of posts
 
-				// Statistics
+				row.addText(Integer.toString(thread.getMessageCount()), rowURL);
 
-				int threadsCount = MBThreadLocalServiceUtil.getThreadsCount(topic.getTopicId());
+				// Number of views
 
-				int messagesTotalCount = MBMessageLocalServiceUtil.getTopicMessagesCount(topic.getTopicId());
-				int messagesReadCount = MBMessageLocalServiceUtil.getReadMessagesCount(topic.getTopicId(), user.getUserId());
-				int messagesUnreadCount = messagesTotalCount - messagesReadCount;
-
-				row.addText(Integer.toString(threadsCount), rowURL);
-				row.addText(messagesUnreadCount + "/" + messagesTotalCount, rowURL);
+				row.addText(Integer.toString(thread.getViewCount()), rowURL);
 
 				// Last post date
 
-				if (topic.getLastPostDate() == null) {
+				if (thread.getLastPostDate() == null) {
 					row.addText(LanguageUtil.get(pageContext, "never"), rowURL);
 				}
 				else {
-					row.addText(dateFormatDateTime.format(topic.getLastPostDate()), rowURL);
+					row.addText(dateFormatDateTime.format(thread.getLastPostDate()), rowURL);
 				}
 
 				// Action
 
-				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/message_boards/topic_action.jsp");
+				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/message_boards/message_action.jsp");
 
 				// Add result row
 
 				resultRows.add(row);
 			}
 
-			boolean showAddTopicButton = MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_TOPIC);
+			boolean showAddMessageButton = MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE);
 			%>
 
-			<c:if test="<%= showAddTopicButton || (results.size() > 0) %>">
+			<c:if test="<%= showAddMessageButton || (results.size() > 0) %>">
 				<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
-					<c:if test="<%= showAddTopicButton %>">
+					<c:if test="<%= showAddMessageButton %>">
 						<td>
-							<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-topic") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_topic" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
+							<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "post-new-thread") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
 						</td>
 						<td style="padding-left: 30px;"></td>
 					</c:if>
@@ -276,7 +276,7 @@ portletURL.setParameter("categoryId", categoryId);
 						<td>
 							<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text">
 
-							<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search-topics") %>">
+							<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search-threads") %>">
 						</td>
 					</c:if>
 				</tr>
@@ -397,7 +397,6 @@ portletURL.setParameter("categoryId", categoryId);
 		<c:choose>
 			<c:when test='<%= tabs2.equals("general") %>'>
 				<%= LanguageUtil.get(pageContext, "num-of-categories") %>: <%= numberFormat.format(MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId)) %><br>
-				<%= LanguageUtil.get(pageContext, "num-of-topics") %>: <%= numberFormat.format(MBTopicLocalServiceUtil.getGroupTopicsCount(portletGroupId)) %><br>
 				<%= LanguageUtil.get(pageContext, "num-of-posts") %>: <%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(portletGroupId)) %><br>
 				<%= LanguageUtil.get(pageContext, "num-of-participants") %>: <%= numberFormat.format(MBStatsUserLocalServiceUtil.getStatsUsersCount(portletGroupId)) %>
 			</c:when>

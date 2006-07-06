@@ -27,9 +27,9 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 import com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
-import com.liferay.portlet.messageboards.service.permission.MBTopicPermission;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.spring.MBMessageService;
 
@@ -60,73 +60,74 @@ public class MBMessageServiceImpl
 	}
 
 	public MBMessage addMessage(
-			String topicId, String subject, String body, List files,
+			String categoryId, String subject, String body, List files,
 			boolean anonymous, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		MBTopicPermission.check(
-			getPermissionChecker(), topicId, ActionKeys.ADD_MESSAGE);
+		MBCategoryPermission.check(
+			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
 
 		return MBMessageLocalServiceUtil.addMessage(
-			getUserId(), topicId, subject, body, files, anonymous, null,
+			getUserId(), categoryId, subject, body, files, anonymous, null,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public MBMessage addMessage(
-			String topicId, String subject, String body, List files,
+			String categoryId, String subject, String body, List files,
 			boolean anonymous, PortletPreferences prefs,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		MBTopicPermission.check(
-			getPermissionChecker(), topicId, ActionKeys.ADD_MESSAGE);
+		MBCategoryPermission.check(
+			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
 
 		return MBMessageLocalServiceUtil.addMessage(
-			getUserId(), topicId, subject, body, files, anonymous, prefs,
+			getUserId(), categoryId, subject, body, files, anonymous, prefs,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public MBMessage addMessage(
-			String topicId, String threadId, String parentMessageId,
+			String categoryId, String threadId, String parentMessageId,
 			String subject, String body, List files, boolean anonymous,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		MBTopicPermission.check(
-			getPermissionChecker(), topicId, ActionKeys.ADD_MESSAGE);
+		MBCategoryPermission.check(
+			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
 
 		return MBMessageLocalServiceUtil.addMessage(
-			getUserId(), topicId, threadId, parentMessageId, subject, body,
+			getUserId(), categoryId, threadId, parentMessageId, subject, body,
 			files, anonymous, null, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public MBMessage addMessage(
-			String topicId, String threadId, String parentMessageId,
+			String categoryId, String threadId, String parentMessageId,
 			String subject, String body, List files, boolean anonymous,
 			PortletPreferences prefs, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		MBTopicPermission.check(
-			getPermissionChecker(), topicId, ActionKeys.ADD_MESSAGE);
+		MBCategoryPermission.check(
+			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
 
 		return MBMessageLocalServiceUtil.addMessage(
-			getUserId(), topicId, threadId, parentMessageId, subject, body,
+			getUserId(), categoryId, threadId, parentMessageId, subject, body,
 			files, anonymous, prefs, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public void deleteDiscussionMessage(
-			String groupId, String className, String classPK, String messageId)
+			String groupId, String className, String classPK, String topicId,
+			String messageId)
 		throws PortalException, SystemException {
 
 		MBDiscussionPermission.check(
 			getPermissionChecker(), groupId, className, classPK,
 			ActionKeys.DELETE_DISCUSSION);
 
-		MBMessageLocalServiceUtil.deleteDiscussionMessage(messageId);
+		MBMessageLocalServiceUtil.deleteDiscussionMessage(topicId, messageId);
 	}
 
 	public void deleteMessage(String topicId, String messageId)
@@ -168,8 +169,8 @@ public class MBMessageServiceImpl
 	}
 
 	public MBMessage updateDiscussionMessage(
-			String groupId, String className, String classPK, String messageId,
-			String subject, String body)
+			String groupId, String className, String classPK, String topicId,
+			String messageId, String subject, String body)
 		throws PortalException, SystemException {
 
 		MBDiscussionPermission.check(
@@ -177,31 +178,31 @@ public class MBMessageServiceImpl
 			ActionKeys.UPDATE_DISCUSSION);
 
 		return MBMessageLocalServiceUtil.updateDiscussionMessage(
-			messageId, subject, body);
+			topicId, messageId, subject, body);
 	}
 
 	public MBMessage updateMessage(
-			String topicId, String messageId, String subject, String body,
-			List files)
+			String topicId, String messageId, String categoryId, String subject,
+			String body, List files)
 		throws PortalException, SystemException {
 
 		MBMessagePermission.check(
 			getPermissionChecker(), topicId, messageId, ActionKeys.UPDATE);
 
 		return MBMessageLocalServiceUtil.updateMessage(
-			topicId, messageId, subject, body, files, null);
+			topicId, messageId, categoryId, subject, body, files, null);
 	}
 
 	public MBMessage updateMessage(
-			String topicId, String messageId, String subject, String body,
-			List files, PortletPreferences prefs)
+			String topicId, String messageId, String categoryId, String subject,
+			String body, List files, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
 		MBMessagePermission.check(
 			getPermissionChecker(), topicId, messageId, ActionKeys.UPDATE);
 
 		return MBMessageLocalServiceUtil.updateMessage(
-			topicId, messageId, subject, body, files, prefs);
+			topicId, messageId, categoryId, subject, body, files, prefs);
 	}
 
 }

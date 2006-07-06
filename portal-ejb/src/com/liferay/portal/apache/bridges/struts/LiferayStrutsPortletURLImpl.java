@@ -22,6 +22,7 @@
 
 package com.liferay.portal.apache.bridges.struts;
 
+import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletURLImplWrapper;
 import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.util.Http;
@@ -37,6 +38,10 @@ import org.apache.portals.bridges.struts.StrutsPortletURL;
  *
  */
 public class LiferayStrutsPortletURLImpl extends PortletURLImplWrapper {
+
+	public LiferayStrutsPortletURLImpl(ActionResponseImpl res, boolean action) {
+		super(res, action);
+	}
 
 	public LiferayStrutsPortletURLImpl(RenderResponseImpl res, boolean action) {
 		super(res, action);

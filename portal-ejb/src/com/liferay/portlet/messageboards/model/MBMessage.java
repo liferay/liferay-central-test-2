@@ -23,8 +23,12 @@
 package com.liferay.portlet.messageboards.model;
 
 import com.liferay.portal.model.Company;
+import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.BBCodeUtil;
 import com.liferay.util.Validator;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MBMessage.java.html"><b><i>View Source</i></b></a>
@@ -34,9 +38,30 @@ import com.liferay.util.Validator;
  */
 public class MBMessage extends MBMessageModel {
 
+	public static final String DEPRECATED_TOPIC_ID = "-1";
+
 	public static final String DEFAULT_PARENT_MESSAGE_ID = "-1";
 
 	public MBMessage() {
+	}
+
+	public MBCategory getCategory() {
+		if (getCategoryId().equals(Company.SYSTEM)) {
+			return null;
+		}
+
+		MBCategory category = null;
+
+		try {
+			category = MBCategoryLocalServiceUtil.getCategory(getCategoryId());
+		}
+		catch (Exception e) {
+			category = new MBCategory();
+
+			_log.error(e);
+		}
+
+		return category;
 	}
 
 	public boolean isRoot() {
@@ -49,11 +74,15 @@ public class MBMessage extends MBMessageModel {
 	}
 
 	public boolean isDiscussion() {
-		return Validator.equals(getTopicId(), Company.SYSTEM);
+		return Validator.equals(getCategoryId(), Company.SYSTEM);
+	}
+
+	public String getThreadAttachmentsDir() {
+		return "messageboards/" + getThreadId();
 	}
 
 	public String getAttachmentsDir() {
-		return "messageboards/" + getTopicId() + "/" + getMessageId();
+		return "messageboards/" + getThreadId() + "/" + getMessageId();
 	}
 
 	public String getBody(boolean translated) {
@@ -64,5 +93,7 @@ public class MBMessage extends MBMessageModel {
 			return getBody();
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(MBMessage.class);
 
 }

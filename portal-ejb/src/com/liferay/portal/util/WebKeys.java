@@ -189,8 +189,6 @@ public class WebKeys {
 
 	public static final String MESSAGE_BOARDS_MESSAGE = "MESSAGE_BOARDS_MESSAGE";
 
-	public static final String MESSAGE_BOARDS_TOPIC = "MSG_BOARDS_TOPIC";
-
 	public static final String MESSAGE_BOARDS_TREE_WALKER = "MESSAGE_BOARDS_TREE_WALKER";
 
 	public static final String MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE = "MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE";
@@ -201,7 +199,7 @@ public class WebKeys {
 
 	public static final String MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE = "MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE";
 
-	public static final String MESSAGE_BOARDS_TREE_WALKER_TOPIC = "MESSAGE_BOARDS_TREE_WALKER_TOPIC";
+	public static final String MESSAGE_BOARDS_TREE_WALKER_CATEGORY = "MESSAGE_BOARDS_TREE_WALKER_CATEGORY";
 
 	public static final String NOTES_LIST = "NOTES_LIST";
 

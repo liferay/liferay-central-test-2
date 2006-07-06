@@ -249,6 +249,20 @@ public class MBCategoryModel extends BaseModel {
 		}
 	}
 
+	public Date getLastPostDate() {
+		return _lastPostDate;
+	}
+
+	public void setLastPostDate(Date lastPostDate) {
+		if (((lastPostDate == null) && (_lastPostDate != null)) ||
+				((lastPostDate != null) && (_lastPostDate == null)) ||
+				((lastPostDate != null) && (_lastPostDate != null) &&
+				!lastPostDate.equals(_lastPostDate))) {
+			_lastPostDate = lastPostDate;
+			setModified(true);
+		}
+	}
+
 	public Object clone() {
 		MBCategory clone = new MBCategory();
 		clone.setCategoryId(getCategoryId());
@@ -261,6 +275,7 @@ public class MBCategoryModel extends BaseModel {
 		clone.setParentCategoryId(getParentCategoryId());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
+		clone.setLastPostDate(getLastPostDate());
 
 		return clone;
 	}
@@ -326,4 +341,5 @@ public class MBCategoryModel extends BaseModel {
 	private String _parentCategoryId;
 	private String _name;
 	private String _description;
+	private Date _lastPostDate;
 }

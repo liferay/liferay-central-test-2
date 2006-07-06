@@ -30,10 +30,10 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
-import com.liferay.portlet.messageboards.NoSuchTopicException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.spring.MBMessageServiceUtil;
@@ -52,6 +52,7 @@ import java.util.List;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -88,14 +89,16 @@ public class EditMessageAction extends PortletAction {
 				unsubscribeMessage(req);
 			}
 
-			if (Validator.isNotNull(cmd)) {
+			if (cmd.equals(Constants.DELETE) ||
+				cmd.equals(Constants.SUBSCRIBE) ||
+				cmd.equals(Constants.UNSUBSCRIBE)) {
+
 				sendRedirect(req, res);
 			}
 		}
 		catch (Exception e) {
 			if (e != null &&
 				e instanceof NoSuchMessageException ||
-				e instanceof NoSuchTopicException ||
 				e instanceof PrincipalException ||
 				e instanceof RequiredMessageException) {
 
@@ -171,6 +174,7 @@ public class EditMessageAction extends PortletAction {
 		String topicId = ParamUtil.getString(req, "topicId");
 		String messageId = ParamUtil.getString(req, "messageId");
 
+		String categoryId = ParamUtil.getString(req, "categoryId");
 		String threadId = ParamUtil.getString(req, "threadId");
 		String parentMessageId = ParamUtil.getString(req, "parentMessageId");
 		String subject = ParamUtil.getString(req, "subject");
@@ -213,7 +217,7 @@ public class EditMessageAction extends PortletAction {
 				// Post new thread
 
 				message = MBMessageServiceUtil.addMessage(
-					topicId, subject, body, files, anonymous,
+					categoryId, subject, body, files, anonymous,
 					req.getPreferences(), addCommunityPermissions,
 					addGuestPermissions);
 			}
@@ -222,7 +226,7 @@ public class EditMessageAction extends PortletAction {
 				// Post reply
 
 				message = MBMessageServiceUtil.addMessage(
-					topicId, threadId, parentMessageId, subject, body, files,
+					categoryId, threadId, parentMessageId, subject, body, files,
 					anonymous, req.getPreferences(), addCommunityPermissions,
 					addGuestPermissions);
 			}
@@ -232,14 +236,17 @@ public class EditMessageAction extends PortletAction {
 			// Update message
 
 			message = MBMessageServiceUtil.updateMessage(
-				topicId, messageId, subject, body, files, req.getPreferences());
+				topicId, messageId, categoryId, subject, body, files,
+				req.getPreferences());
 		}
 
-		String redirect =
-			ParamUtil.getString(req, "messageRedirect") +
-				message.getMessageId();
+		PortletURL portletURL = ((ActionResponseImpl)res).createRenderURL();
 
-		res.sendRedirect(redirect);
+		portletURL.setParameter("struts_action", "/message_boards/view_message");
+		portletURL.setParameter("topicId", message.getTopicId());
+		portletURL.setParameter("messageId", message.getMessageId());
+
+		res.sendRedirect(portletURL.toString());
 	}
 
 }

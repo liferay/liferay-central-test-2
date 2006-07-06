@@ -27,10 +27,8 @@ import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.model.MBTopic;
 import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.spring.MBTopicLocalServiceUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
@@ -59,17 +57,10 @@ public class MBUtil {
 		throws Exception {
 
 		if (Validator.isNotNull(topicId) && Validator.isNotNull(messageId)) {
-			MBTopic topic = MBTopicLocalServiceUtil.getTopic(topicId);
 			MBMessage message = MBMessageLocalServiceUtil.getMessage(
 				topicId, messageId);
 
-			return getBreadcrumbs(null, topic, message, pageContext, res);
-		}
-		else if (Validator.isNotNull(topicId)) {
-			MBTopic topic = MBTopicLocalServiceUtil.getTopic(topicId);
-
-			return getBreadcrumbs(
-				topic.getCategory(), topic, null, pageContext, res);
+			return getBreadcrumbs(null, message, pageContext, res);
 		}
 		else {
 			MBCategory category = null;
@@ -80,21 +71,17 @@ public class MBUtil {
 			catch (Exception e) {
 			}
 
-			return getBreadcrumbs(category, null, null, pageContext, res);
+			return getBreadcrumbs(category, null, pageContext, res);
 		}
 	}
 
 	public static String getBreadcrumbs(
-			MBCategory category, MBTopic topic, MBMessage message,
-			PageContext pageContext, RenderResponse res)
+			MBCategory category, MBMessage message, PageContext pageContext,
+			RenderResponse res)
 		throws Exception {
 
-		if ((message != null) && (topic == null)) {
-			topic = MBTopicLocalServiceUtil.getTopic(message.getTopicId());
-		}
-
-		if ((topic != null) && (category == null)) {
-			category = topic.getCategory();
+		if ((message != null) && (category == null)) {
+			category = message.getCategory();
 		}
 
 		PortletURL categoriesURL = res.createRenderURL();
@@ -146,21 +133,6 @@ public class MBUtil {
 
 		breadcrumbs = categoriesLink + " &raquo; " + breadcrumbs;
 
-		if (topic != null) {
-			PortletURL topicURL = res.createRenderURL();
-
-			topicURL.setWindowState(WindowState.MAXIMIZED);
-
-			topicURL.setParameter("struts_action", "/message_boards/view_topic");
-			topicURL.setParameter("topicId", topic.getTopicId());
-
-			String topicLink =
-				"<a href=\"" + topicURL.toString() + "\">" + topic.getName() +
-					"</a>";
-
-			breadcrumbs = breadcrumbs + " &raquo; " + topicLink;
-		}
-
 		if (message != null) {
 			PortletURL messageURL = res.createRenderURL();
 
@@ -168,8 +140,8 @@ public class MBUtil {
 
 			messageURL.setParameter(
 				"struts_action", "/message_boards/view_message");
+			messageURL.setParameter("topicId", message.getTopicId());
 			messageURL.setParameter("messageId", message.getMessageId());
-			messageURL.setParameter("topicId", topic.getTopicId());
 
 			String messageLink =
 				"<a href=\"" + messageURL.toString() + "\">" +

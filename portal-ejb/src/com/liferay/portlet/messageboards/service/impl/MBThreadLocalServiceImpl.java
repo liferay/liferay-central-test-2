@@ -22,14 +22,22 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
+import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.spring.MBThreadLocalService;
 
+import java.util.Iterator;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MBThreadLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -38,6 +46,39 @@ import java.util.List;
  *
  */
 public class MBThreadLocalServiceImpl implements MBThreadLocalService {
+
+	public void deleteThread(String threadId)
+		throws PortalException, SystemException {
+
+		MBThread thread = MBThreadUtil.findByPrimaryKey(threadId);
+
+		deleteThread(thread);
+	}
+
+	public void deleteThread(MBThread thread)
+		throws PortalException, SystemException {
+
+		Iterator itr = MBMessageUtil.findByThreadId(
+			thread.getThreadId()).iterator();
+
+		while (itr.hasNext()) {
+			MBMessage message = (MBMessage)itr.next();
+
+			MBMessageLocalServiceUtil.deleteMessage(message);
+		}
+	}
+
+	public void deleteThreads(String categoryId)
+		throws PortalException, SystemException {
+
+		Iterator itr = MBThreadUtil.findByCategoryId(categoryId).iterator();
+
+		while (itr.hasNext()) {
+			MBThread thread = (MBThread)itr.next();
+
+			deleteThread(thread);
+		}
+	}
 
 	public List getGroupThreads(String groupId, int begin, int end)
 		throws SystemException {
@@ -49,14 +90,14 @@ public class MBThreadLocalServiceImpl implements MBThreadLocalService {
 		return MBThreadFinder.countByGroupId(groupId);
 	}
 
-	public List getThreads(String topicId, int begin, int end)
+	public List getThreads(String categoryId, int begin, int end)
 		throws SystemException {
 
-		return MBThreadUtil.findByTopicId(topicId, begin, end);
+		return MBThreadUtil.findByCategoryId(categoryId, begin, end);
 	}
 
-	public int getThreadsCount(String topicId) throws SystemException {
-		return MBThreadUtil.countByTopicId(topicId);
+	public int getThreadsCount(String categoryId) throws SystemException {
+		return MBThreadUtil.countByCategoryId(categoryId);
 	}
 
 	public boolean hasReadThread(String userId, String threadId)
@@ -79,5 +120,7 @@ public class MBThreadLocalServiceImpl implements MBThreadLocalService {
 			return true;
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(MBThreadLocalServiceImpl.class);
 
 }
