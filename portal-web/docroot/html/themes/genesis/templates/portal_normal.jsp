@@ -51,45 +51,19 @@
 		portletDisplay.setTitle(title);
 		%>
 
-		<c:if test="<%= tilesSubNav.equals(StringPool.BLANK) %>">
-			<liferay-theme:box top="portlet_top.jsp" bottom="portlet_bottom.jsp">
-				<br>
+		<liferay-theme:box top="portlet_top.jsp" bottom="portlet_bottom.jsp">
+			<br>
 
-				<table border="0" cellpadding="0" cellspacing="0" width="100%">
-				<tr>
-					<td align="center">
-						<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesContent %>" />
-					</td>
-				</tr>
-				</table>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+				<td align="center">
+					<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesContent %>" />
+				</td>
+			</tr>
+			</table>
 
-				<br>
-			</liferay-theme:box>
-		</c:if>
-
-		<c:if test="<%= !tilesSubNav.equals(StringPool.BLANK) %>">
-			<liferay-theme:box top="portlet_top.jsp" bottom="portlet_bottom.jsp">
-				<table border="0" cellpadding="0" cellspacing="0" width="100%">
-				<tr class="beta">
-					<td>
-						<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesSubNav %>" />
-					</td>
-				</tr>
-				</table>
-
-				<br>
-
-				<table border="0" cellpadding="0" cellspacing="0" width="100%">
-				<tr>
-					<td align="center">
-						<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesContent %>" />
-					</td>
-				</tr>
-				</table>
-
-				<br>
-			</liferay-theme:box>
-		</c:if>
+			<br>
+		</liferay-theme:box>
 	</c:otherwise>
 </c:choose>
 

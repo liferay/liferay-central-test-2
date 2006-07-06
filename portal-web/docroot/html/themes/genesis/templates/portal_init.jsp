@@ -24,15 +24,13 @@
 
 <%@ include file="init.jsp" %>
 
-<tiles:useAttribute id="tilesTop" name="top" classname="java.lang.String" ignore="true" />
 <tiles:useAttribute id="tilesTitle" name="title" classname="java.lang.String" ignore="true" />
-<tiles:useAttribute id="tilesSubNav" name="sub_nav" classname="java.lang.String" ignore="true" />
 <tiles:useAttribute id="tilesContent" name="content" classname="java.lang.String" ignore="true" />
-<tiles:useAttribute id="tilesBottom" name="bottom" classname="java.lang.String" ignore="true" />
 <tiles:useAttribute id="tilesSelectable" name="selectable" classname="java.lang.String" ignore="true" />
 
 <%
 String title = LanguageUtil.get(pageContext, tilesTitle);
+
 if (layout != null) {
 	title = LanguageUtil.get(pageContext, tilesTitle, layout.getName(locale));
 }
