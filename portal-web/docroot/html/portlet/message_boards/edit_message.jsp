@@ -157,7 +157,7 @@ if (message != null) {
 }
 %>
 
-<%= MBUtil.getBreadcrumbs(null, topicId, breadcrumbsMessageId, pageContext, renderResponse) %>
+<%= MBUtil.getBreadcrumbs(categoryId, topicId, breadcrumbsMessageId, pageContext, renderResponse) %>
 
 <br><br>
 

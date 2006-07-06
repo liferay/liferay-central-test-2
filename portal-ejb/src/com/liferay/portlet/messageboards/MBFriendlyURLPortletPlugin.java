@@ -24,6 +24,7 @@ package com.liferay.portlet.messageboards;
 
 import com.liferay.portal.servlet.FriendlyURLPortletPlugin;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBMessage;
 
 /**
  * <a href="MBFriendlyURLPortletPlugin.java.html"><b><i>View Source</i></b></a>
@@ -70,10 +71,7 @@ public class MBFriendlyURLPortletPlugin implements FriendlyURLPortletPlugin {
 					"&_19_topicId=" + topicId;
 		}
 		else if (type.equals("message")) {
-			x = y;
-			y = url.indexOf("/", x + 1);
-
-			String topicId = url.substring(x + 1, y);
+			String topicId = MBMessage.DEPRECATED_TOPIC_ID;
 			String messageId = url.substring(y + 1, url.length());
 
 			queryString +=

@@ -80,6 +80,12 @@ public class MBThreadLocalServiceImpl implements MBThreadLocalService {
 		}
 	}
 
+	public int getCategoriesThreadsCount(List categoryIds)
+		throws SystemException {
+
+		return MBThreadFinder.countByCategoryIds(categoryIds);
+	}
+
 	public List getGroupThreads(String groupId, int begin, int end)
 		throws SystemException {
 

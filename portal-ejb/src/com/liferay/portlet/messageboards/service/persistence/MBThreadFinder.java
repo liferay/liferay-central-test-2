@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -45,11 +46,59 @@ import org.hibernate.Session;
  */
 public class MBThreadFinder {
 
+	public static String COUNT_BY_CATEGORY_IDS =
+		MBThreadFinder.class.getName() + ".countByCategoryIds";
+
 	public static String COUNT_BY_GROUP_ID =
 		MBThreadFinder.class.getName() + ".countByGroupId";
 
 	public static String FIND_BY_GROUP_ID =
 		MBThreadFinder.class.getName() + ".findByGroupId";
+
+	public static int countByCategoryIds(List categoryIds)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_CATEGORY_IDS);
+
+			sql = StringUtil.replace(
+				sql, "[$CATEGORY_ID$]", _getCategoryIds(categoryIds));
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			for (int i = 0; i < categoryIds.size(); i++) {
+				String categoryId = (String)categoryIds.get(i);
+
+				qPos.add(categoryId);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Integer count = (Integer)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
 
 	public static int countByGroupId(String groupId) throws SystemException {
 		Session session = null;

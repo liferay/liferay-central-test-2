@@ -27,6 +27,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -231,6 +232,28 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 			getSubcategoryIds(
 				categoryIds, category.getGroupId(), category.getCategoryId());
 		}
+	}
+
+	public MBCategory getSystemCategory()
+		throws PortalException, SystemException {
+
+		MBCategory category = null;
+
+		String categoryId = Company.SYSTEM;
+
+		try {
+			category = MBCategoryUtil.findByPrimaryKey(categoryId);
+		}
+		catch (NoSuchCategoryException nsce) {
+			category = MBCategoryUtil.create(categoryId);
+
+			category.setCompanyId(categoryId);
+			category.setUserId(categoryId);
+
+			MBCategoryUtil.update(category);
+		}
+
+		return category;
 	}
 
 	public void reIndex(String[] ids) throws SystemException {

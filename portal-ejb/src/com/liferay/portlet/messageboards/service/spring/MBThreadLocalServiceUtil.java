@@ -84,6 +84,21 @@ public class MBThreadLocalServiceUtil {
 		}
 	}
 
+	public static int getCategoriesThreadsCount(java.util.List categoryIds)
+		throws com.liferay.portal.SystemException {
+		try {
+			MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+			return mbThreadLocalService.getCategoriesThreadsCount(categoryIds);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static java.util.List getGroupThreads(java.lang.String groupId,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		try {

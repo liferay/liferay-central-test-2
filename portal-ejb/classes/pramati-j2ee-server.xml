@@ -6663,6 +6663,10 @@
 			<jndi-name>ejb/liferay/MBCategoryLocalServiceHome</jndi-name>
 			<local-jndi-name>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ContactLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ResourceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -6694,6 +6698,10 @@
 			<is-clustered>true</is-clustered>
 			<jndi-name>com_liferay_portlet_messageboards_service_ejb_MBCategoryServiceEJB</jndi-name>
 			<local-jndi-name>com_liferay_portlet_messageboards_service_ejb_MBCategoryServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ContactLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ContactLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ResourceLocalServiceHome__PRAMATI_LOCAL</ejb-link>

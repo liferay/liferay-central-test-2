@@ -42,6 +42,9 @@ public interface MBThreadLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public int getCategoriesThreadsCount(java.util.List categoryIds)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List getGroupThreads(java.lang.String groupId, int begin,
 		int end) throws com.liferay.portal.SystemException;
 

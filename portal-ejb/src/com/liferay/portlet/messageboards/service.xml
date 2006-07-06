@@ -50,6 +50,7 @@
 
 		<!-- References -->
 
+		<reference package-path="com.liferay.portal" entity="Contact" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
 	<entity name="MBDiscussion" local-service="false" remote-service="false">

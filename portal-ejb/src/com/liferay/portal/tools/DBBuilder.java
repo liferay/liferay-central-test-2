@@ -411,6 +411,7 @@ public class DBBuilder {
 
 		sybase = _rewordSybase(sybase);
 		sybase = StringUtil.replace(sybase, ");\n", ")\ngo\n");
+		sybase = StringUtil.replace(sybase, "\ngo;\n", "\ngo\n");
 		sybase = StringUtil.replace(
 			sybase,
 			new String[] {"\\\\", "\\'", "\\\"", "\\n", "\\r"},

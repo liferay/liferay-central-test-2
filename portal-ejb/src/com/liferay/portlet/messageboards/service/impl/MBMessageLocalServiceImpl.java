@@ -40,7 +40,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
-import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.NoSuchMessageFlagException;
@@ -61,6 +60,7 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePK;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
+import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalService;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalServiceUtil;
@@ -127,17 +127,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
 
-		try {
-			MBCategoryUtil.findByPrimaryKey(categoryId);
-		}
-		catch (NoSuchCategoryException nsce) {
-			MBCategory category = MBCategoryUtil.create(categoryId);
-
-			category.setCompanyId(categoryId);
-			category.setUserId(categoryId);
-
-			MBCategoryUtil.update(category);
-		}
+		MBCategoryLocalServiceUtil.getSystemCategory();
 
 		return addMessage(
 			userId, categoryId, threadId, parentMessageId, subject, body, files,

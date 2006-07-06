@@ -68,6 +68,11 @@ public class MBThreadLocalServiceEJBImpl implements MBThreadLocalService,
 		getService().deleteThreads(categoryId);
 	}
 
+	public int getCategoriesThreadsCount(java.util.List categoryIds)
+		throws com.liferay.portal.SystemException {
+		return getService().getCategoriesThreadsCount(categoryIds);
+	}
+
 	public java.util.List getGroupThreads(java.lang.String groupId, int begin,
 		int end) throws com.liferay.portal.SystemException {
 		return getService().getGroupThreads(groupId, begin, end);

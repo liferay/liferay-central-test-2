@@ -235,6 +235,25 @@ public class MBCategoryLocalServiceUtil {
 		}
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBCategory getSystemCategory()
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+			return mbCategoryLocalService.getSystemCategory();
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		try {

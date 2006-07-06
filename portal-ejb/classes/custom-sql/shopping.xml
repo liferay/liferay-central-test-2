@@ -7,7 +7,8 @@
 				COUNT(*) AS COUNT_VALUE
 			FROM
 				ShoppingItem
-			WHERE [$CATEGORY_ID$]
+			WHERE
+				[$CATEGORY_ID$]
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder.countByC_G_C_A_DT">

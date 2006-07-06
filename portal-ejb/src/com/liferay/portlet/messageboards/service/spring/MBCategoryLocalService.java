@@ -81,6 +81,10 @@ public interface MBCategoryLocalService {
 		java.lang.String groupId, java.lang.String categoryId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBCategory getSystemCategory()
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 

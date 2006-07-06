@@ -115,7 +115,7 @@ portletURL.setParameter("categoryId", categoryId);
 			MBCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, portletGroupId, curCategory.getCategoryId());
 
 			int categoriesCount = subcategoryIds.size() - 1;
-			int threadsCount = 0;// FIX ME MBTopicLocalServiceUtil.getCategoriesTopicsCount(subcategoryIds);
+			int threadsCount = MBThreadLocalServiceUtil.getCategoriesThreadsCount(subcategoryIds);
 			int messagesCount = MBMessageLocalServiceUtil.getCategoriesMessagesCount(subcategoryIds);
 
 			row.addText(Integer.toString(categoriesCount), rowURL);
