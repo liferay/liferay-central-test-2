@@ -172,10 +172,10 @@ boolean showMinIcon = true;
 boolean showMoveIcon = !stateMax;
 boolean showPrintIcon = portlet.hasPortletMode(renderResponseImpl.getContentType(), LiferayPortletMode.PRINT);
 
-if (!portletDisplay.getId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
+if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	if (GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS) ||
 		LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE) ||
-		PortletPermission.contains(permissionChecker, plid, rootPortletId, ActionKeys.CONFIGURATION)) {
+		PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.CONFIGURATION)) {
 
 		showConfigurationIcon = true;
 	}
@@ -184,7 +184,7 @@ if (!portletDisplay.getId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
 if (portlet.hasPortletMode(renderResponseImpl.getContentType(), PortletMode.EDIT)) {
 	if (GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS) ||
 		LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE) ||
-		PortletPermission.contains(permissionChecker, plid, rootPortletId, ActionKeys.PREFERENCES)) {
+		PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.PREFERENCES)) {
 
 		showEditIcon = true;
 	}
