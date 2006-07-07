@@ -109,11 +109,10 @@ public class EditDiscussionAction extends PortletAction {
 		String className = ParamUtil.getString(req, "className");
 		String classPK = ParamUtil.getString(req, "classPK");
 
-		String topicId = ParamUtil.getString(req, "topicId");
 		String messageId = ParamUtil.getString(req, "messageId");
 
 		MBMessageServiceUtil.deleteDiscussionMessage(
-			groupId, className, classPK, topicId, messageId);
+			groupId, className, classPK, messageId);
 	}
 
 	protected void updateMessage(ActionRequest req) throws Exception {
@@ -121,7 +120,6 @@ public class EditDiscussionAction extends PortletAction {
 		String className = ParamUtil.getString(req, "className");
 		String classPK = ParamUtil.getString(req, "classPK");
 
-		String topicId = ParamUtil.getString(req, "topicId");
 		String messageId = ParamUtil.getString(req, "messageId");
 
 		String threadId = ParamUtil.getString(req, "threadId");
@@ -142,7 +140,7 @@ public class EditDiscussionAction extends PortletAction {
 			// Update message
 
 			MBMessageServiceUtil.updateDiscussionMessage(
-				groupId, className, classPK, topicId, messageId, subject, body);
+				groupId, className, classPK, messageId, subject, body);
 		}
 	}
 

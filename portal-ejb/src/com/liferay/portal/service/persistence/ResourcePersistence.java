@@ -360,6 +360,190 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
+	public List findByName(String name) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			Iterator itr = q.list().iterator();
+			List list = new ArrayList();
+
+			while (itr.hasNext()) {
+				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
+				list.add(ResourceHBMUtil.model(resourceHBM));
+			}
+
+			return list;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByName(String name, int begin, int end)
+		throws SystemException {
+		return findByName(name, begin, end, null);
+	}
+
+	public List findByName(String name, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			List list = new ArrayList();
+			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
+
+			while (itr.hasNext()) {
+				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
+				list.add(ResourceHBMUtil.model(resourceHBM));
+			}
+
+			return list;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public com.liferay.portal.model.Resource findByName_First(String name,
+		OrderByComparator obc) throws NoSuchResourceException, SystemException {
+		List list = findByName(name, 0, 1, obc);
+
+		if (list.size() == 0) {
+			String msg = "No Resource exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "name=";
+			msg += name;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchResourceException(msg);
+		}
+		else {
+			return (com.liferay.portal.model.Resource)list.get(0);
+		}
+	}
+
+	public com.liferay.portal.model.Resource findByName_Last(String name,
+		OrderByComparator obc) throws NoSuchResourceException, SystemException {
+		int count = countByName(name);
+		List list = findByName(name, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			String msg = "No Resource exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "name=";
+			msg += name;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchResourceException(msg);
+		}
+		else {
+			return (com.liferay.portal.model.Resource)list.get(0);
+		}
+	}
+
+	public com.liferay.portal.model.Resource[] findByName_PrevAndNext(
+		String resourceId, String name, OrderByComparator obc)
+		throws NoSuchResourceException, SystemException {
+		com.liferay.portal.model.Resource resource = findByPrimaryKey(resourceId);
+		int count = countByName(name);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					resource, ResourceHBMUtil.getInstance());
+			com.liferay.portal.model.Resource[] array = new com.liferay.portal.model.Resource[3];
+			array[0] = (com.liferay.portal.model.Resource)objArray[0];
+			array[1] = (com.liferay.portal.model.Resource)objArray[1];
+			array[2] = (com.liferay.portal.model.Resource)objArray[2];
+
+			return array;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List findByC_N_T_S(String companyId, String name, String typeId,
 		String scope) throws SystemException {
 		Session session = null;
@@ -1197,6 +1381,49 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByName(String name) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			while (itr.hasNext()) {
+				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
+				session.delete(resourceHBM);
+			}
+
+			session.flush();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public void removeByC_N_T_S(String companyId, String name, String typeId,
 		String scope) throws SystemException {
 		Session session = null;
@@ -1507,6 +1734,53 @@ public class ResourcePersistence extends BasePersistence {
 
 			if (companyId != null) {
 				q.setString(queryPos++, companyId);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByName(String name) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+
+			if (name == null) {
+				query.append("name is null");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (name != null) {
+				q.setString(queryPos++, name);
 			}
 
 			Iterator itr = q.list().iterator();

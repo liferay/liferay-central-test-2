@@ -275,7 +275,6 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 					MBMessage message = (MBMessage)itr2.next();
 
 					String groupId = category.getGroupId();
-					String topicId = message.getTopicId();
 					String threadId = message.getThreadId();
 					String messageId = message.getMessageId();
 					String title = message.getSubject();
@@ -283,8 +282,8 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 					try {
 						Indexer.addMessage(
-							companyId, groupId, categoryId, topicId, threadId,
-							messageId, title, content);
+							companyId, groupId, categoryId, threadId, messageId,
+							title, content);
 					}
 					catch (Exception e1) {
 

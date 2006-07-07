@@ -52,13 +52,12 @@ import javax.servlet.jsp.PageContext;
 public class MBUtil {
 
 	public static String getBreadcrumbs(
-			String categoryId, String topicId, String messageId,
-			PageContext pageContext, RenderResponse res)
+			String categoryId, String messageId, PageContext pageContext,
+			RenderResponse res)
 		throws Exception {
 
-		if (Validator.isNotNull(topicId) && Validator.isNotNull(messageId)) {
-			MBMessage message = MBMessageLocalServiceUtil.getMessage(
-				topicId, messageId);
+		if (Validator.isNotNull(messageId)) {
+			MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
 			return getBreadcrumbs(null, message, pageContext, res);
 		}
@@ -140,7 +139,6 @@ public class MBUtil {
 
 			messageURL.setParameter(
 				"struts_action", "/message_boards/view_message");
-			messageURL.setParameter("topicId", message.getTopicId());
 			messageURL.setParameter("messageId", message.getMessageId());
 
 			String messageLink =

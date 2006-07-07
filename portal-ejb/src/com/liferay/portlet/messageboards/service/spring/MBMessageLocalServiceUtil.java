@@ -125,14 +125,14 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static void addMessageResources(java.lang.String categoryId,
-		java.lang.String topicId, java.lang.String messageId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String messageId, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-			mbMessageLocalService.addMessageResources(categoryId, topicId,
-				messageId, addCommunityPermissions, addGuestPermissions);
+			mbMessageLocalService.addMessageResources(categoryId, messageId,
+				addCommunityPermissions, addGuestPermissions);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -167,13 +167,12 @@ public class MBMessageLocalServiceUtil {
 		}
 	}
 
-	public static void deleteDiscussionMessage(java.lang.String topicId,
-		java.lang.String messageId)
+	public static void deleteDiscussionMessage(java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-			mbMessageLocalService.deleteDiscussionMessage(topicId, messageId);
+			mbMessageLocalService.deleteDiscussionMessage(messageId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -205,13 +204,12 @@ public class MBMessageLocalServiceUtil {
 		}
 	}
 
-	public static void deleteMessage(java.lang.String topicId,
-		java.lang.String messageId)
+	public static void deleteMessage(java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-			mbMessageLocalService.deleteMessage(topicId, messageId);
+			mbMessageLocalService.deleteMessage(messageId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -350,13 +348,13 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage getMessage(
-		java.lang.String topicId, java.lang.String messageId)
+		java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-			return mbMessageLocalService.getMessage(topicId, messageId);
+			return mbMessageLocalService.getMessage(messageId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -370,15 +368,13 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		java.lang.String topicId, java.lang.String messageId,
-		java.lang.String userId)
+		java.lang.String messageId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-			return mbMessageLocalService.getMessageDisplay(topicId, messageId,
-				userId);
+			return mbMessageLocalService.getMessageDisplay(messageId, userId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -403,21 +399,6 @@ public class MBMessageLocalServiceUtil {
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
-	}
-
-	public static int getReadMessagesCount(java.lang.String topicId,
-		java.lang.String userId) throws com.liferay.portal.SystemException {
-		try {
-			MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-			return mbMessageLocalService.getReadMessagesCount(topicId, userId);
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;
@@ -475,12 +456,12 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static void subscribeMessage(java.lang.String userId,
-		java.lang.String topicId, java.lang.String messageId)
+		java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-			mbMessageLocalService.subscribeMessage(userId, topicId, messageId);
+			mbMessageLocalService.subscribeMessage(userId, messageId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -494,12 +475,12 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static void unsubscribeMessage(java.lang.String userId,
-		java.lang.String topicId, java.lang.String messageId)
+		java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-			mbMessageLocalService.unsubscribeMessage(userId, topicId, messageId);
+			mbMessageLocalService.unsubscribeMessage(userId, messageId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -513,15 +494,15 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
-		java.lang.String topicId, java.lang.String messageId,
-		java.lang.String subject, java.lang.String body)
+		java.lang.String messageId, java.lang.String subject,
+		java.lang.String body)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-			return mbMessageLocalService.updateDiscussionMessage(topicId,
-				messageId, subject, body);
+			return mbMessageLocalService.updateDiscussionMessage(messageId,
+				subject, body);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -535,17 +516,16 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
-		java.lang.String topicId, java.lang.String messageId,
-		java.lang.String categoryId, java.lang.String subject,
-		java.lang.String body, java.util.List files,
+		java.lang.String messageId, java.lang.String categoryId,
+		java.lang.String subject, java.lang.String body, java.util.List files,
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-			return mbMessageLocalService.updateMessage(topicId, messageId,
-				categoryId, subject, body, files, prefs);
+			return mbMessageLocalService.updateMessage(messageId, categoryId,
+				subject, body, files, prefs);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

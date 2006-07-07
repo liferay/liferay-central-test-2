@@ -34,6 +34,8 @@ String categoryId = BeanParamUtil.getString(category, request, "categoryId", MBC
 
 List categoryIds = new ArrayList();
 
+categoryIds.add(categoryId);
+
 MBCategoryLocalServiceUtil.getSubcategoryIds(categoryIds, portletGroupId, categoryId);
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -207,7 +209,7 @@ portletURL.setParameter("categoryId", categoryId);
 			for (int i = 0; i < results.size(); i++) {
 				MBThread thread = (MBThread)results.get(i);
 
-				MBMessage message = MBMessageLocalServiceUtil.getMessage(thread.getTopicId(), thread.getRootMessageId());
+				MBMessage message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
 				boolean readThread = MBThreadLocalServiceUtil.hasReadThread(request.getRemoteUser(), thread.getThreadId());
 
 				ResultRow row = new ResultRow(message, thread.getPrimaryKey().toString(), i, !readThread);
@@ -217,7 +219,6 @@ portletURL.setParameter("categoryId", categoryId);
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
 				rowURL.setParameter("struts_action", "/message_boards/view_message");
-				rowURL.setParameter("topicId", message.getTopicId());
 				rowURL.setParameter("messageId", message.getMessageId());
 
 				// Thread
@@ -330,7 +331,7 @@ portletURL.setParameter("categoryId", categoryId);
 		for (int i = 0; i < results.size(); i++) {
 			MBThread thread = (MBThread)results.get(i);
 
-			MBMessage message = MBMessageLocalServiceUtil.getMessage(thread.getTopicId(), thread.getRootMessageId());
+			MBMessage message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
 			boolean readThread = MBThreadLocalServiceUtil.hasReadThread(request.getRemoteUser(), thread.getThreadId());
 
 			ResultRow row = new ResultRow(message, thread.getPrimaryKey().toString(), i, !readThread);
@@ -340,7 +341,6 @@ portletURL.setParameter("categoryId", categoryId);
 			rowURL.setWindowState(WindowState.MAXIMIZED);
 
 			rowURL.setParameter("struts_action", "/message_boards/view_message");
-			rowURL.setParameter("topicId", message.getTopicId());
 			rowURL.setParameter("messageId", message.getMessageId());
 
 			// Thread

@@ -95,6 +95,12 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 		getService().deleteResource(companyId, name, typeId, scope, primKey);
 	}
 
+	public void deleteResources(java.lang.String name)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().deleteResources(name);
+	}
+
 	public com.liferay.portal.model.Resource getResource(
 		java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 

@@ -34,7 +34,6 @@ MBMessage message = (MBMessage)row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 		<portlet:param name="struts_action" value="/message_boards/edit_message" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="topicId" value="<%= message.getTopicId() %>" />
 		<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
 	</portlet:renderURL>
 
@@ -59,7 +58,6 @@ MBMessage message = (MBMessage)row.getObject();
 				<portlet:param name="struts_action" value="/message_boards/edit_message" />
 				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="topicId" value="<%= message.getTopicId() %>" />
 				<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
 			</portlet:actionURL>
 
@@ -70,7 +68,6 @@ MBMessage message = (MBMessage)row.getObject();
 				<portlet:param name="struts_action" value="/message_boards/edit_message" />
 				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="topicId" value="<%= message.getTopicId() %>" />
 				<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
 			</portlet:actionURL>
 
@@ -84,7 +81,6 @@ MBMessage message = (MBMessage)row.getObject();
 		<portlet:param name="struts_action" value="/message_boards/edit_message" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="topicId" value="<%= message.getTopicId() %>" />
 		<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
 	</portlet:actionURL>
 

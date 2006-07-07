@@ -88,13 +88,12 @@ public class ActionUtil {
 	}
 
 	public static void getMessage(HttpServletRequest req) throws Exception {
-		String topicId = ParamUtil.getString(req, "topicId");
 		String messageId = ParamUtil.getString(req, "messageId");
 
 		MBMessage message = null;
 
-		if (Validator.isNotNull(topicId) && Validator.isNotNull(messageId)) {
-			message = MBMessageServiceUtil.getMessage(topicId, messageId);
+		if (Validator.isNotNull(messageId)) {
+			message = MBMessageServiceUtil.getMessage(messageId);
 		}
 
 		req.setAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE, message);

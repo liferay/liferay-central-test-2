@@ -96,7 +96,6 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 <input name="<%= namespace %>redirect" type="hidden" value="<%= redirect %>">
 <input name="<%= namespace %>className" type="hidden" value="<%= className %>">
 <input name="<%= namespace %>classPK" type="hidden" value="<%= classPK %>">
-<input name="<%= namespace %>topicId" type="hidden" value="<%= rootMessage.getTopicId() %>">
 <input name="<%= namespace %>messageId" type="hidden" value="">
 <input name="<%= namespace %>threadId" type="hidden" value="<%= thread.getThreadId() %>">
 <input name="<%= namespace %>parentMessageId" type="hidden" value="">

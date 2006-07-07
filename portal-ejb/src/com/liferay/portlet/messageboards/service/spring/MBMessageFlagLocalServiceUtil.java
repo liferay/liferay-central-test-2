@@ -43,15 +43,14 @@ public class MBMessageFlagLocalServiceUtil {
 		}
 	}
 
-	public static boolean hasReadFlag(java.lang.String topicId,
-		java.lang.String messageId, java.lang.String userId)
+	public static boolean hasReadFlag(java.lang.String messageId,
+		java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
 
-			return mbMessageFlagLocalService.hasReadFlag(topicId, messageId,
-				userId);
+			return mbMessageFlagLocalService.hasReadFlag(messageId, userId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

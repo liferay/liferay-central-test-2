@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.messageboards.NoSuchMessageFlagException;
+import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalService;
@@ -43,7 +44,7 @@ public class MBMessageFlagLocalServiceImpl
 		MBMessageFlagUtil.removeByUserId(userId);
 	}
 
-	public boolean hasReadFlag(String topicId, String messageId, String userId)
+	public boolean hasReadFlag(String messageId, String userId)
 		throws PortalException, SystemException {
 
 		if (userId == null) {
@@ -54,8 +55,8 @@ public class MBMessageFlagLocalServiceImpl
 		}
 
 		try {
-			MBMessageFlagUtil.findByPrimaryKey(
-				new MBMessageFlagPK(topicId, messageId, userId));
+			MBMessageFlagUtil.findByPrimaryKey(new MBMessageFlagPK(
+				MBMessage.DEPRECATED_TOPIC_ID, messageId, userId));
 
 			return true;
 		}

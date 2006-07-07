@@ -58,12 +58,10 @@ public class GetMessageAttachmentAction extends PortletAction {
 		throws Exception {
 
 		try {
-			String topicId = ParamUtil.getString(req, "topicId");
 			String messageId = ParamUtil.getString(req, "messageId");
 			String fileName = ParamUtil.getString(req, "attachment");
 
-			MBMessage message = MBMessageServiceUtil.getMessage(
-				topicId, messageId);
+			MBMessage message = MBMessageServiceUtil.getMessage(messageId);
 
 			InputStream is = DLLocalServiceUtil.getFileAsStream(
 				message.getCompanyId(), Company.SYSTEM,

@@ -55,7 +55,6 @@ public class FindMessageAction extends Action {
 		throws Exception {
 
 		try {
-			String topicId = ParamUtil.getString(req, "topicId");
 			String messageId = ParamUtil.getString(req, "messageId");
 
 			PortletURL portletURL = new PortletURLImpl(
@@ -66,7 +65,6 @@ public class FindMessageAction extends Action {
 
 			portletURL.setParameter(
 				"struts_action", "/message_boards/view_message");
-			portletURL.setParameter("topicId", topicId);
 			portletURL.setParameter("messageId", messageId);
 
 			res.sendRedirect(portletURL.toString());

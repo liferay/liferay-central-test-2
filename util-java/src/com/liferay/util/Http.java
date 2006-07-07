@@ -328,6 +328,7 @@ public class Http {
 			client.executeMethod(method);
 
 			Header locationHeader = method.getResponseHeader("location");
+
 			if (locationHeader != null) {
 				return URLtoByteArray(locationHeader.getValue(), cookies, post);
 			}

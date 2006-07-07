@@ -56,7 +56,7 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 	public static final String PORTLET_ID = PortletKeys.MESSAGE_BOARDS;
 
 	public static void addMessage(
-			String companyId, String groupId, String categoryId, String topicId,
+			String companyId, String groupId, String categoryId,
 			String threadId, String messageId, String title, String content)
 		throws IOException {
 
@@ -70,7 +70,7 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 			doc.add(
 				LuceneFields.getKeyword(
 					LuceneFields.UID,
-					LuceneFields.getUID(PORTLET_ID, topicId, messageId)));
+					LuceneFields.getUID(PORTLET_ID, messageId)));
 
 			doc.add(
 				LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
@@ -84,7 +84,6 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 			doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
 
 			doc.add(LuceneFields.getKeyword("categoryId", categoryId));
-			doc.add(LuceneFields.getKeyword("topicId", topicId));
 			doc.add(LuceneFields.getKeyword("threadId", threadId));
 			doc.add(LuceneFields.getKeyword("messageId", messageId));
 
@@ -94,8 +93,7 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 		}
 	}
 
-	public static void deleteMessage(
-			String companyId, String topicId, String messageId)
+	public static void deleteMessage(String companyId, String messageId)
 		throws IOException {
 
 		synchronized (IndexWriter.class) {
@@ -104,7 +102,7 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 			reader.deleteDocuments(
 				new Term(
 					LuceneFields.UID,
-					LuceneFields.getUID(PORTLET_ID, topicId, messageId)));
+					LuceneFields.getUID(PORTLET_ID, messageId)));
 
 			reader.close();
 		}
@@ -143,18 +141,18 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 	}
 
 	public static void updateMessage(
-			String companyId, String groupId, String categoryId, String topicId,
+			String companyId, String groupId, String categoryId,
 			String threadId, String messageId, String title, String content)
 		throws IOException {
 
 		try {
-			deleteMessage(companyId, topicId, messageId);
+			deleteMessage(companyId, messageId);
 		}
 		catch (IOException ioe) {
 		}
 
 		addMessage(
-			companyId, groupId, categoryId, topicId, threadId, messageId, title,
+			companyId, groupId, categoryId, threadId, messageId, title,
 			content);
 	}
 
@@ -174,10 +172,8 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 		// URL
 
 		String messageId = doc.get("messageId");
-		String topicId = doc.get("topicId");
 
 		portletURL.setParameter("struts_action", "/message_boards/view_message");
-		portletURL.setParameter("topicId", topicId);
 		portletURL.setParameter("messageId", messageId);
 
 		return new DocumentSummary(title, content, portletURL);

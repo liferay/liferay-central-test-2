@@ -59,8 +59,8 @@ public interface MBMessageLocalService {
 			com.liferay.portal.SystemException;
 
 	public void addMessageResources(java.lang.String categoryId,
-		java.lang.String topicId, java.lang.String messageId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String messageId, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
@@ -71,8 +71,7 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
-	public void deleteDiscussionMessage(java.lang.String topicId,
-		java.lang.String messageId)
+	public void deleteDiscussionMessage(java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
@@ -81,8 +80,7 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
-	public void deleteMessage(java.lang.String topicId,
-		java.lang.String messageId)
+	public void deleteMessage(java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
@@ -116,13 +114,12 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage getMessage(
-		java.lang.String topicId, java.lang.String messageId)
+		java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		java.lang.String topicId, java.lang.String messageId,
-		java.lang.String userId)
+		java.lang.String messageId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
@@ -131,9 +128,6 @@ public interface MBMessageLocalService {
 		java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
-
-	public int getReadMessagesCount(java.lang.String topicId,
-		java.lang.String userId) throws com.liferay.portal.SystemException;
 
 	public java.util.List getThreadMessages(java.lang.String threadId,
 		java.lang.String userId) throws com.liferay.portal.SystemException;
@@ -146,25 +140,24 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void subscribeMessage(java.lang.String userId,
-		java.lang.String topicId, java.lang.String messageId)
+		java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
 	public void unsubscribeMessage(java.lang.String userId,
-		java.lang.String topicId, java.lang.String messageId)
+		java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
-		java.lang.String topicId, java.lang.String messageId,
-		java.lang.String subject, java.lang.String body)
+		java.lang.String messageId, java.lang.String subject,
+		java.lang.String body)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
-		java.lang.String topicId, java.lang.String messageId,
-		java.lang.String categoryId, java.lang.String subject,
-		java.lang.String body, java.util.List files,
+		java.lang.String messageId, java.lang.String categoryId,
+		java.lang.String subject, java.lang.String body, java.util.List files,
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;

@@ -209,6 +209,18 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 		}
 	}
 
+	public void deleteResources(String name)
+		throws PortalException, SystemException {
+
+		Iterator itr = ResourceUtil.findByName(name).iterator();
+
+		while (itr.hasNext()) {
+			Resource resource = (Resource)itr.next();
+
+			deleteResource(resource);
+		}
+	}
+
 	public Resource getResource(String resourceId)
 		throws PortalException, SystemException {
 

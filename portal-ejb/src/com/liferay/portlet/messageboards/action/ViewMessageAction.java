@@ -53,12 +53,11 @@ public class ViewMessageAction extends PortletAction {
 		throws Exception {
 
 		try {
-			String topicId = ParamUtil.getString(req, "topicId");
 			String messageId = ParamUtil.getString(req, "messageId");
 
 			MBMessageDisplay messageDisplay =
 				MBMessageLocalServiceUtil.getMessageDisplay(
-					topicId, messageId, req.getRemoteUser());
+					messageId, req.getRemoteUser());
 
 			req.setAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE, messageDisplay);
 

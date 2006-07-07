@@ -66,13 +66,6 @@ public class MBFriendlyPortletURL extends PortletURLImplWrapper {
 				friendlyURL = "/message_boards/category/" + categoryId;
 			}
 		}
-		else if (strutsAction.equals("/message_boards/view_topic")) {
-			String topicId = getParameter("topicId");
-
-			if (Validator.isNotNull(topicId)) {
-				friendlyURL = "/message_boards/topic/" + topicId;
-			}
-		}
 		else if (strutsAction.equals("/message_boards/view_message")) {
 			String messageId = getParameter("messageId");
 

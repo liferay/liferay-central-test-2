@@ -165,6 +165,46 @@ public class ResourceUtil {
 			companyId, obc);
 	}
 
+	public static java.util.List findByName(java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByName(name);
+	}
+
+	public static java.util.List findByName(java.lang.String name, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByName(name, begin, end);
+	}
+
+	public static java.util.List findByName(java.lang.String name, int begin,
+		int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByName(name, begin, end, obc);
+	}
+
+	public static com.liferay.portal.model.Resource findByName_First(
+		java.lang.String name,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchResourceException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByName_First(name, obc);
+	}
+
+	public static com.liferay.portal.model.Resource findByName_Last(
+		java.lang.String name,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchResourceException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByName_Last(name, obc);
+	}
+
+	public static com.liferay.portal.model.Resource[] findByName_PrevAndNext(
+		java.lang.String resourceId, java.lang.String name,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchResourceException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByName_PrevAndNext(resourceId, name, obc);
+	}
+
 	public static java.util.List findByC_N_T_S(java.lang.String companyId,
 		java.lang.String name, java.lang.String typeId, java.lang.String scope)
 		throws com.liferay.portal.SystemException {
@@ -290,6 +330,11 @@ public class ResourceUtil {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
+	public static void removeByName(java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByName(name);
+	}
+
 	public static void removeByC_N_T_S(java.lang.String companyId,
 		java.lang.String name, java.lang.String typeId, java.lang.String scope)
 		throws com.liferay.portal.SystemException {
@@ -314,6 +359,11 @@ public class ResourceUtil {
 	public static int countByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
+	}
+
+	public static int countByName(java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByName(name);
 	}
 
 	public static int countByC_N_T_S(java.lang.String companyId,

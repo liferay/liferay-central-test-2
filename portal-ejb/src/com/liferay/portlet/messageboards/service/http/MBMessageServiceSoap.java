@@ -97,11 +97,10 @@ public class MBMessageServiceSoap {
 
 	public static void deleteDiscussionMessage(java.lang.String groupId,
 		java.lang.String className, java.lang.String classPK,
-		java.lang.String topicId, java.lang.String messageId)
-		throws RemoteException {
+		java.lang.String messageId) throws RemoteException {
 		try {
 			MBMessageServiceUtil.deleteDiscussionMessage(groupId, className,
-				classPK, topicId, messageId);
+				classPK, messageId);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -110,10 +109,10 @@ public class MBMessageServiceSoap {
 		}
 	}
 
-	public static void deleteMessage(java.lang.String topicId,
-		java.lang.String messageId) throws RemoteException {
+	public static void deleteMessage(java.lang.String messageId)
+		throws RemoteException {
 		try {
-			MBMessageServiceUtil.deleteMessage(topicId, messageId);
+			MBMessageServiceUtil.deleteMessage(messageId);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -123,11 +122,9 @@ public class MBMessageServiceSoap {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageModel getMessage(
-		java.lang.String topicId, java.lang.String messageId)
-		throws RemoteException {
+		java.lang.String messageId) throws RemoteException {
 		try {
-			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.getMessage(topicId,
-					messageId);
+			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.getMessage(messageId);
 
 			return returnValue;
 		}
@@ -138,10 +135,10 @@ public class MBMessageServiceSoap {
 		}
 	}
 
-	public static void subscribeMessage(java.lang.String topicId,
-		java.lang.String messageId) throws RemoteException {
+	public static void subscribeMessage(java.lang.String messageId)
+		throws RemoteException {
 		try {
-			MBMessageServiceUtil.subscribeMessage(topicId, messageId);
+			MBMessageServiceUtil.subscribeMessage(messageId);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -150,10 +147,10 @@ public class MBMessageServiceSoap {
 		}
 	}
 
-	public static void unsubscribeMessage(java.lang.String topicId,
-		java.lang.String messageId) throws RemoteException {
+	public static void unsubscribeMessage(java.lang.String messageId)
+		throws RemoteException {
 		try {
-			MBMessageServiceUtil.unsubscribeMessage(topicId, messageId);
+			MBMessageServiceUtil.unsubscribeMessage(messageId);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -164,12 +161,12 @@ public class MBMessageServiceSoap {
 
 	public static com.liferay.portlet.messageboards.model.MBMessageModel updateDiscussionMessage(
 		java.lang.String groupId, java.lang.String className,
-		java.lang.String classPK, java.lang.String topicId,
-		java.lang.String messageId, java.lang.String subject,
-		java.lang.String body) throws RemoteException {
+		java.lang.String classPK, java.lang.String messageId,
+		java.lang.String subject, java.lang.String body)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateDiscussionMessage(groupId,
-					className, classPK, topicId, messageId, subject, body);
+					className, classPK, messageId, subject, body);
 
 			return returnValue;
 		}
@@ -181,12 +178,12 @@ public class MBMessageServiceSoap {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageModel updateMessage(
-		java.lang.String topicId, java.lang.String messageId,
-		java.lang.String categoryId, java.lang.String subject,
-		java.lang.String body, java.util.List files) throws RemoteException {
+		java.lang.String messageId, java.lang.String categoryId,
+		java.lang.String subject, java.lang.String body, java.util.List files)
+		throws RemoteException {
 		try {
-			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateMessage(topicId,
-					messageId, categoryId, subject, body, files);
+			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateMessage(messageId,
+					categoryId, subject, body, files);
 
 			return returnValue;
 		}

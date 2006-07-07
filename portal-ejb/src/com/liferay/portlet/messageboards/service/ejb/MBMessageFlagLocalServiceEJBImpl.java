@@ -54,11 +54,11 @@ public class MBMessageFlagLocalServiceEJBImpl
 		getService().deleteFlags(userId);
 	}
 
-	public boolean hasReadFlag(java.lang.String topicId,
-		java.lang.String messageId, java.lang.String userId)
+	public boolean hasReadFlag(java.lang.String messageId,
+		java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().hasReadFlag(topicId, messageId, userId);
+		return getService().hasReadFlag(messageId, userId);
 	}
 
 	public void ejbCreate() throws CreateException {

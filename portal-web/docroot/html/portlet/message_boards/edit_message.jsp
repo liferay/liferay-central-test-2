@@ -29,7 +29,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE);
 
-String topicId = BeanParamUtil.getString(message, request, "topicId");
 String messageId = BeanParamUtil.getString(message, request, "messageId");
 
 String categoryId = BeanParamUtil.getString(message, request, "categoryId");
@@ -43,7 +42,7 @@ String parentAuthor = null;
 
 if (Validator.isNotNull(threadId)) {
 	try {
-		curParentMessage = MBMessageLocalServiceUtil.getMessage(topicId, parentMessageId);
+		curParentMessage = MBMessageLocalServiceUtil.getMessage(parentMessageId);
 
 		if (Validator.isNull(subject)) {
 			if (curParentMessage.getSubject().startsWith("RE: ")) {
@@ -87,7 +86,6 @@ boolean preview = ParamUtil.getBoolean(request, "preview");
 	else {
 		message = new MBMessage();
 
-		message.setTopicId(topicId);
 		message.setUserId(user.getUserId());
 		message.setUserName(user.getFullName());
 		message.setCreateDate(new Date());
@@ -120,7 +118,6 @@ boolean preview = ParamUtil.getBoolean(request, "preview");
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveMessage(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />topicId" type="hidden" value="<%= topicId %>">
 <input name="<portlet:namespace />messageId" type="hidden" value="<%= messageId %>">
 <input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>">
 <input name="<portlet:namespace />threadId" type="hidden" value="<%= threadId %>">
@@ -157,7 +154,7 @@ if (message != null) {
 }
 %>
 
-<%= MBUtil.getBreadcrumbs(categoryId, topicId, breadcrumbsMessageId, pageContext, renderResponse) %>
+<%= MBUtil.getBreadcrumbs(categoryId, breadcrumbsMessageId, pageContext, renderResponse) %>
 
 <br><br>
 

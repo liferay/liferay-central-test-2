@@ -431,4 +431,22 @@ public class FileUtil {
 		bw.close();
 	}
 
+	public static void write(String fileName, byte[] byteArray)
+		throws IOException {
+
+		write(new File(fileName), byteArray);
+	}
+
+	public static void write(File file, byte[] byteArray) throws IOException {
+		if (file.getParent() != null) {
+			mkdirs(file.getParent());
+		}
+
+		FileOutputStream fos = new FileOutputStream(file);
+
+		fos.write(byteArray);
+
+		fos.close();
+	}
+
 }

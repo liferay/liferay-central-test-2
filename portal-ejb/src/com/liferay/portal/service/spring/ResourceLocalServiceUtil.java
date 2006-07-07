@@ -154,6 +154,24 @@ public class ResourceLocalServiceUtil {
 		}
 	}
 
+	public static void deleteResources(java.lang.String name)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+			resourceLocalService.deleteResources(name);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static com.liferay.portal.model.Resource getResource(
 		java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 

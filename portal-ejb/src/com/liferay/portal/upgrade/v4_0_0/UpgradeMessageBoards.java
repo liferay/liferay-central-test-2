@@ -170,7 +170,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 					"Upgrading message " + new MBMessagePK(topicId, messageId));
 
 				MBMessageLocalServiceUtil.addMessageResources(
-					categoryId, topicId, messageId, addCommunityPermissions,
+					categoryId, messageId, addCommunityPermissions,
 					addGuestPermissions);
 			}
 

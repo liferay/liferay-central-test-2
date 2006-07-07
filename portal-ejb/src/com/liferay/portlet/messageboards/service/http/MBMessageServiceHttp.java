@@ -471,8 +471,7 @@ public class MBMessageServiceHttp {
 
 	public static void deleteDiscussionMessage(HttpPrincipal httpPrincipal,
 		java.lang.String groupId, java.lang.String className,
-		java.lang.String classPK, java.lang.String topicId,
-		java.lang.String messageId)
+		java.lang.String classPK, java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -494,23 +493,15 @@ public class MBMessageServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = topicId;
-
-			if (topicId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = messageId;
+			Object paramObj3 = messageId;
 
 			if (messageId == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"deleteDiscussionMessage",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 			Object returnObj = null;
 
 			try {
@@ -544,24 +535,18 @@ public class MBMessageServiceHttp {
 	}
 
 	public static void deleteMessage(HttpPrincipal httpPrincipal,
-		java.lang.String topicId, java.lang.String messageId)
+		java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = topicId;
+			Object paramObj0 = messageId;
 
-			if (topicId == null) {
+			if (messageId == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = messageId;
-
-			if (messageId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"deleteMessage", new Object[] { paramObj0, paramObj1 });
+					"deleteMessage", new Object[] { paramObj0 });
 			Object returnObj = null;
 
 			try {
@@ -595,25 +580,18 @@ public class MBMessageServiceHttp {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage getMessage(
-		HttpPrincipal httpPrincipal, java.lang.String topicId,
-		java.lang.String messageId)
+		HttpPrincipal httpPrincipal, java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = topicId;
+			Object paramObj0 = messageId;
 
-			if (topicId == null) {
+			if (messageId == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = messageId;
-
-			if (messageId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"getMessage", new Object[] { paramObj0, paramObj1 });
+					"getMessage", new Object[] { paramObj0 });
 			Object returnObj = null;
 
 			try {
@@ -649,24 +627,18 @@ public class MBMessageServiceHttp {
 	}
 
 	public static void subscribeMessage(HttpPrincipal httpPrincipal,
-		java.lang.String topicId, java.lang.String messageId)
+		java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = topicId;
+			Object paramObj0 = messageId;
 
-			if (topicId == null) {
+			if (messageId == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = messageId;
-
-			if (messageId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"subscribeMessage", new Object[] { paramObj0, paramObj1 });
+					"subscribeMessage", new Object[] { paramObj0 });
 			Object returnObj = null;
 
 			try {
@@ -700,24 +672,18 @@ public class MBMessageServiceHttp {
 	}
 
 	public static void unsubscribeMessage(HttpPrincipal httpPrincipal,
-		java.lang.String topicId, java.lang.String messageId)
+		java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = topicId;
+			Object paramObj0 = messageId;
 
-			if (topicId == null) {
+			if (messageId == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = messageId;
-
-			if (messageId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"unsubscribeMessage", new Object[] { paramObj0, paramObj1 });
+					"unsubscribeMessage", new Object[] { paramObj0 });
 			Object returnObj = null;
 
 			try {
@@ -753,8 +719,8 @@ public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		HttpPrincipal httpPrincipal, java.lang.String groupId,
 		java.lang.String className, java.lang.String classPK,
-		java.lang.String topicId, java.lang.String messageId,
-		java.lang.String subject, java.lang.String body)
+		java.lang.String messageId, java.lang.String subject,
+		java.lang.String body)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -776,115 +742,26 @@ public class MBMessageServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = topicId;
+			Object paramObj3 = messageId;
 
-			if (topicId == null) {
+			if (messageId == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = messageId;
+			Object paramObj4 = subject;
 
-			if (messageId == null) {
+			if (subject == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = subject;
-
-			if (subject == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = body;
+			Object paramObj5 = body;
 
 			if (body == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
+				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"updateDiscussionMessage",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
-					});
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw e;
-			}
-
-			return (com.liferay.portlet.messageboards.model.MBMessage)returnObj;
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
-		HttpPrincipal httpPrincipal, java.lang.String topicId,
-		java.lang.String messageId, java.lang.String categoryId,
-		java.lang.String subject, java.lang.String body, java.util.List files)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = topicId;
-
-			if (topicId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = messageId;
-
-			if (messageId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = categoryId;
-
-			if (categoryId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = subject;
-
-			if (subject == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = body;
-
-			if (body == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = files;
-
-			if (files == null) {
-				paramObj5 = new NullWrapper("java.util.List");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"updateMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5
@@ -924,60 +801,130 @@ public class MBMessageServiceHttp {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
-		HttpPrincipal httpPrincipal, java.lang.String topicId,
-		java.lang.String messageId, java.lang.String categoryId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
+		HttpPrincipal httpPrincipal, java.lang.String messageId,
+		java.lang.String categoryId, java.lang.String subject,
+		java.lang.String body, java.util.List files)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = messageId;
+
+			if (messageId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = categoryId;
+
+			if (categoryId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = subject;
+
+			if (subject == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = body;
+
+			if (body == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = files;
+
+			if (files == null) {
+				paramObj4 = new NullWrapper("java.util.List");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
+					"updateMessage",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw e;
+			}
+
+			return (com.liferay.portlet.messageboards.model.MBMessage)returnObj;
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			_log.error(StackTraceUtil.getStackTrace(pe));
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(StackTraceUtil.getStackTrace(se));
+			throw se;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new com.liferay.portal.SystemException(stackTrace);
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
+		HttpPrincipal httpPrincipal, java.lang.String messageId,
+		java.lang.String categoryId, java.lang.String subject,
+		java.lang.String body, java.util.List files,
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = topicId;
+			Object paramObj0 = messageId;
 
-			if (topicId == null) {
+			if (messageId == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = messageId;
+			Object paramObj1 = categoryId;
 
-			if (messageId == null) {
+			if (categoryId == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = categoryId;
+			Object paramObj2 = subject;
 
-			if (categoryId == null) {
+			if (subject == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = subject;
+			Object paramObj3 = body;
 
-			if (subject == null) {
+			if (body == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = body;
-
-			if (body == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = files;
+			Object paramObj4 = files;
 
 			if (files == null) {
-				paramObj5 = new NullWrapper("java.util.List");
+				paramObj4 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj6 = prefs;
+			Object paramObj5 = prefs;
 
 			if (prefs == null) {
-				paramObj6 = new NullWrapper("javax.portlet.PortletPreferences");
+				paramObj5 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"updateMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5
 					});
 			Object returnObj = null;
 

@@ -43,7 +43,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 <liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
 
-<%= MBUtil.getBreadcrumbs(breadcrumbsCategoryId, null, breadcrumbsMessageId, pageContext, renderResponse) %> &raquo; <%= LanguageUtil.get(pageContext, "search") %>
+<%= MBUtil.getBreadcrumbs(breadcrumbsCategoryId, breadcrumbsMessageId, pageContext, renderResponse) %> &raquo; <%= LanguageUtil.get(pageContext, "search") %>
 
 <br><br>
 
@@ -89,18 +89,16 @@ for (int i = 0; i < results.getLength(); i++) {
 	// Category and message
 
 	String categoryId = doc.get("categoryId");
-	String topicId = doc.get("topicId");
 	String messageId = doc.get("messageId");
 
 	MBCategory category = MBCategoryLocalServiceUtil.getCategory(categoryId);
-	MBMessage message = MBMessageLocalServiceUtil.getMessage(topicId, messageId);
+	MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
 	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/message_boards/view_message");
-	rowURL.setParameter("topicId", topicId);
 	rowURL.setParameter("messageId", messageId);
 
 	row.addText(category.getName(), rowURL);

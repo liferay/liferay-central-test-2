@@ -77,7 +77,7 @@
 						MBMessage parentMessage = null;
 
 						try {
-							parentMessage = MBMessageLocalServiceUtil.getMessage(message.getTopicId(), message.getParentMessageId());
+							parentMessage = MBMessageLocalServiceUtil.getMessage(message.getParentMessageId());
 						}
 						catch (Exception e) {}
 						%>
@@ -90,7 +90,6 @@
 							parentMessageURL.setWindowState(WindowState.MAXIMIZED);
 
 							parentMessageURL.setParameter("struts_action", "/message_boards/view_message");
-							parentMessageURL.setParameter("topicId", parentMessage.getTopicId());
 							parentMessageURL.setParameter("messageId", parentMessage.getMessageId());
 
 							String author = parentMessage.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : PortalUtil.getUserName(parentMessage.getUserId(), parentMessage.getUserName());
@@ -107,7 +106,6 @@
 							<portlet:param name="struts_action" value="/message_boards/edit_message" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
 							<portlet:param name="categoryId" value="<%= message.getCategoryId() %>" />
-							<portlet:param name="topicId" value="<%= message.getTopicId() %>" />
 							<portlet:param name="threadId" value="<%= message.getThreadId() %>" />
 							<portlet:param name="parentMessageId" value="<%= message.getMessageId() %>" />
 						</portlet:renderURL>
@@ -148,7 +146,7 @@
 								long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), Company.SYSTEM, fileNames[i]);
 							%>
 
-								<a href="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/message_boards/get_message_attachment" /><portlet:param name="topicId" value="<%= message.getTopicId() %>" /><portlet:param name="messageId" value="<%= message.getMessageId() %>" /><portlet:param name="attachment" value="<%= fileName %>" /></portlet:actionURL>"><%= fileName %></a> (<%= TextFormatter.formatKB(fileSize, locale) %>k)&nbsp;&nbsp;&nbsp;
+								<a href="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/message_boards/get_message_attachment" /><portlet:param name="messageId" value="<%= message.getMessageId() %>" /><portlet:param name="attachment" value="<%= fileName %>" /></portlet:actionURL>"><%= fileName %></a> (<%= TextFormatter.formatKB(fileSize, locale) %>k)&nbsp;&nbsp;&nbsp;
 
 							<%
 							}
@@ -170,7 +168,6 @@
 						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 							<portlet:param name="struts_action" value="/message_boards/edit_message" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="topicId" value="<%= message.getTopicId() %>" />
 							<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
 						</portlet:renderURL>
 
@@ -203,7 +200,6 @@
 							<portlet:param name="struts_action" value="/message_boards/edit_message" />
 							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 							<portlet:param name="redirect" value="<%= categoryURL %>" />
-							<portlet:param name="topicId" value="<%= message.getTopicId() %>" />
 							<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
 						</portlet:actionURL>
 

@@ -119,58 +119,55 @@ public class MBMessageServiceImpl
 	}
 
 	public void deleteDiscussionMessage(
-			String groupId, String className, String classPK, String topicId,
-			String messageId)
+			String groupId, String className, String classPK, String messageId)
 		throws PortalException, SystemException {
 
 		MBDiscussionPermission.check(
 			getPermissionChecker(), groupId, className, classPK,
 			ActionKeys.DELETE_DISCUSSION);
 
-		MBMessageLocalServiceUtil.deleteDiscussionMessage(topicId, messageId);
+		MBMessageLocalServiceUtil.deleteDiscussionMessage(messageId);
 	}
 
-	public void deleteMessage(String topicId, String messageId)
+	public void deleteMessage(String messageId)
 		throws PortalException, SystemException {
 
 		MBMessagePermission.check(
-			getPermissionChecker(), topicId, messageId, ActionKeys.DELETE);
+			getPermissionChecker(), messageId, ActionKeys.DELETE);
 
-		MBMessageLocalServiceUtil.deleteMessage(topicId, messageId);
+		MBMessageLocalServiceUtil.deleteMessage(messageId);
 	}
 
-	public MBMessage getMessage(String topicId, String messageId)
+	public MBMessage getMessage(String messageId)
 		throws PortalException, SystemException {
 
 		MBMessagePermission.check(
-			getPermissionChecker(), topicId, messageId, ActionKeys.VIEW);
+			getPermissionChecker(), messageId, ActionKeys.VIEW);
 
-		return MBMessageLocalServiceUtil.getMessage(topicId, messageId);
+		return MBMessageLocalServiceUtil.getMessage(messageId);
 	}
 
-	public void subscribeMessage(String topicId, String messageId)
+	public void subscribeMessage(String messageId)
 		throws PortalException, SystemException {
 
 		MBMessagePermission.check(
-			getPermissionChecker(), topicId, messageId, ActionKeys.SUBSCRIBE);
+			getPermissionChecker(), messageId, ActionKeys.SUBSCRIBE);
 
-		MBMessageLocalServiceUtil.subscribeMessage(
-			getUserId(), topicId, messageId);
+		MBMessageLocalServiceUtil.subscribeMessage(getUserId(), messageId);
 	}
 
-	public void unsubscribeMessage(String topicId, String messageId)
+	public void unsubscribeMessage(String messageId)
 		throws PortalException, SystemException {
 
 		MBMessagePermission.check(
-			getPermissionChecker(), topicId, messageId, ActionKeys.SUBSCRIBE);
+			getPermissionChecker(), messageId, ActionKeys.SUBSCRIBE);
 
-		MBMessageLocalServiceUtil.unsubscribeMessage(
-			getUserId(), topicId, messageId);
+		MBMessageLocalServiceUtil.unsubscribeMessage(getUserId(), messageId);
 	}
 
 	public MBMessage updateDiscussionMessage(
-			String groupId, String className, String classPK, String topicId,
-			String messageId, String subject, String body)
+			String groupId, String className, String classPK, String messageId,
+			String subject, String body)
 		throws PortalException, SystemException {
 
 		MBDiscussionPermission.check(
@@ -178,31 +175,31 @@ public class MBMessageServiceImpl
 			ActionKeys.UPDATE_DISCUSSION);
 
 		return MBMessageLocalServiceUtil.updateDiscussionMessage(
-			topicId, messageId, subject, body);
+			messageId, subject, body);
 	}
 
 	public MBMessage updateMessage(
-			String topicId, String messageId, String categoryId, String subject,
-			String body, List files)
+			String messageId, String categoryId, String subject, String body,
+			List files)
 		throws PortalException, SystemException {
 
 		MBMessagePermission.check(
-			getPermissionChecker(), topicId, messageId, ActionKeys.UPDATE);
+			getPermissionChecker(), messageId, ActionKeys.UPDATE);
 
 		return MBMessageLocalServiceUtil.updateMessage(
-			topicId, messageId, categoryId, subject, body, files, null);
+			messageId, categoryId, subject, body, files, null);
 	}
 
 	public MBMessage updateMessage(
-			String topicId, String messageId, String categoryId, String subject,
-			String body, List files, PortletPreferences prefs)
+			String messageId, String categoryId, String subject, String body,
+			List files, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
 		MBMessagePermission.check(
-			getPermissionChecker(), topicId, messageId, ActionKeys.UPDATE);
+			getPermissionChecker(), messageId, ActionKeys.UPDATE);
 
 		return MBMessageLocalServiceUtil.updateMessage(
-			topicId, messageId, categoryId, subject, body, files, prefs);
+			messageId, categoryId, subject, body, files, prefs);
 	}
 
 }

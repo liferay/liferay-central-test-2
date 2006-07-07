@@ -260,11 +260,11 @@ public class DLServiceImpl implements DLService {
 
 			Node rootNode = DLUtil.getRootNode(session, companyId);
 			Node repositoryNode = DLUtil.getFolderNode(rootNode, repositoryId);
+			Node dirNode = repositoryNode.getNode(dirName);
 
-			_deleteDirectory(companyId, portletId, repositoryId, dirName,
-				repositoryNode);
+			_deleteDirectory(companyId, portletId, repositoryId, dirNode);
 
-			Indexer.deleteFile(companyId, portletId, repositoryId, dirName);
+			dirNode.remove();
 
 			session.save();
 		}
@@ -566,7 +566,7 @@ public class DLServiceImpl implements DLService {
 
 	private void _deleteDirectory(
 			String companyId, String portletId, String repositoryId,
-			String dirName, Node dirNode)
+			Node dirNode)
 		throws IOException {
 
 		try {
@@ -579,18 +579,16 @@ public class DLServiceImpl implements DLService {
 					node.getPrimaryNodeType().getName();
 
 				if (primaryNodeTypeName.equals(JCRConstants.NT_FOLDER)) {
-
-					// This needs to be fixed to recurse properly. Right now,
-					// if we did recurse, the node name for the file type would
-					// not have a correctly namespaced path.
-
-					//_deleteDirectory(node);
+					_deleteDirectory(companyId, portletId, repositoryId, node);
 				}
 				else if (primaryNodeTypeName.equals(JCRConstants.NT_FILE)) {
 					Indexer.deleteFile(
 						companyId, portletId, repositoryId, node.getName());
 				}
 			}
+
+			Indexer.deleteFile(
+				companyId, portletId, repositoryId, dirNode.getName());
 		}
 		catch (RepositoryException e) {
 			_log.error(e);

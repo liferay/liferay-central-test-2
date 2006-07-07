@@ -148,30 +148,26 @@ public class EditMessageAction extends PortletAction {
 	}
 
 	protected void deleteMessage(ActionRequest req) throws Exception {
-		String topicId = ParamUtil.getString(req, "topicId");
 		String messageId = ParamUtil.getString(req, "messageId");
 
-		MBMessageServiceUtil.deleteMessage(topicId, messageId);
+		MBMessageServiceUtil.deleteMessage(messageId);
 	}
 
 	protected void subscribeMessage(ActionRequest req) throws Exception {
-		String topicId = ParamUtil.getString(req, "topicId");
 		String messageId = ParamUtil.getString(req, "messageId");
 
-		MBMessageServiceUtil.subscribeMessage(topicId, messageId);
+		MBMessageServiceUtil.subscribeMessage(messageId);
 	}
 
 	protected void unsubscribeMessage(ActionRequest req) throws Exception {
-		String topicId = ParamUtil.getString(req, "topicId");
 		String messageId = ParamUtil.getString(req, "messageId");
 
-		MBMessageServiceUtil.unsubscribeMessage(topicId, messageId);
+		MBMessageServiceUtil.unsubscribeMessage(messageId);
 	}
 
 	protected void updateMessage(ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		String topicId = ParamUtil.getString(req, "topicId");
 		String messageId = ParamUtil.getString(req, "messageId");
 
 		String categoryId = ParamUtil.getString(req, "categoryId");
@@ -236,14 +232,13 @@ public class EditMessageAction extends PortletAction {
 			// Update message
 
 			message = MBMessageServiceUtil.updateMessage(
-				topicId, messageId, categoryId, subject, body, files,
+				messageId, categoryId, subject, body, files,
 				req.getPreferences());
 		}
 
 		PortletURL portletURL = ((ActionResponseImpl)res).createRenderURL();
 
 		portletURL.setParameter("struts_action", "/message_boards/view_message");
-		portletURL.setParameter("topicId", message.getTopicId());
 		portletURL.setParameter("messageId", message.getMessageId());
 
 		res.sendRedirect(portletURL.toString());

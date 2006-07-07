@@ -70,7 +70,7 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 		[
 
 		<c:if test="<%= previousThread != null %>">
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="topicId" value="<%= message.getTopicId() %>" /><portlet:param name="messageId" value="<%= previousThread.getRootMessageId() %>" /></portlet:renderURL>">
+			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="messageId" value="<%= previousThread.getRootMessageId() %>" /></portlet:renderURL>">
 		</c:if>
 
 		<%= LanguageUtil.get(pageContext, "previous") %>
@@ -82,7 +82,7 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 		|
 
 		<c:if test="<%= nextThread != null %>">
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="topicId" value="<%= message.getTopicId() %>" /><portlet:param name="messageId" value="<%= nextThread.getRootMessageId() %>" /></portlet:renderURL>">
+			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="messageId" value="<%= nextThread.getRootMessageId() %>" /></portlet:renderURL>">
 		</c:if>
 
 		<%= LanguageUtil.get(pageContext, "next") %>
@@ -119,7 +119,6 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
 								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="topicId" value="<%= message.getTopicId() %>" />
 								<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
 							</portlet:actionURL>
 
@@ -132,7 +131,6 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
 								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="topicId" value="<%= message.getTopicId() %>" />
 								<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
 							</portlet:actionURL>
 

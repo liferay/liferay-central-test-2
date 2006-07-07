@@ -39,11 +39,11 @@ import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUti
 public class MBMessagePermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String topicId,
-			String messageId, String actionId)
+			PermissionChecker permissionChecker, String messageId,
+			String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, topicId, messageId, actionId)) {
+		if (!contains(permissionChecker, messageId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -59,12 +59,11 @@ public class MBMessagePermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String topicId,
-			String messageId, String actionId)
+			PermissionChecker permissionChecker, String messageId,
+			String actionId)
 		throws PortalException, SystemException {
 
-		MBMessage message =  MBMessageLocalServiceUtil.getMessage(
-			topicId, messageId);
+		MBMessage message =  MBMessageLocalServiceUtil.getMessage(messageId);
 
 		return contains(permissionChecker, message, actionId);
 	}

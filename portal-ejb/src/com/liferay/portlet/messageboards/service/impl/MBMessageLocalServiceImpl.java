@@ -299,8 +299,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			if (!category.isDiscussion()) {
 				Indexer.addMessage(
 					message.getCompanyId(), category.getGroupId(),
-					category.getCategoryId(), message.getTopicId(), threadId,
-					messageId, subject, body);
+					category.getCategoryId(), threadId, messageId, subject,
+					body);
 			}
 		}
 		catch (IOException ioe) {
@@ -311,13 +311,13 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 	}
 
 	public void addMessageResources(
-			String categoryId, String topicId, String messageId,
+			String categoryId, String messageId,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
 		MBMessage message = MBMessageUtil.findByPrimaryKey(
-			new MBMessagePK(topicId, messageId));
+			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
 
 		addMessageResources(
 			category, message, addCommunityPermissions, addGuestPermissions);
@@ -334,10 +334,10 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			false, addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void deleteDiscussionMessage(String topicId, String messageId)
+	public void deleteDiscussionMessage(String messageId)
 		throws PortalException, SystemException {
 
-		deleteMessage(topicId, messageId);
+		deleteMessage(messageId);
 	}
 
 	public void deleteDiscussionMessages(String className, String classPK)
@@ -352,7 +352,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 			MBMessage message = (MBMessage)messages.get(0);
 
-			deleteMessage(message.getTopicId(), message.getMessageId());
+			deleteMessage(message.getMessageId());
 
 			MBDiscussionUtil.remove(discussion.getDiscussionId());
 		}
@@ -360,11 +360,11 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		}
 	}
 
-	public void deleteMessage(String topicId, String messageId)
+	public void deleteMessage(String messageId)
 		throws PortalException, SystemException {
 
 		MBMessage message = MBMessageUtil.findByPrimaryKey(
-			new MBMessagePK(topicId, messageId));
+			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
 
 		deleteMessage(message);
 	}
@@ -376,8 +376,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		try {
 			Indexer.deleteMessage(
-				message.getCompanyId(), message.getTopicId(),
-				message.getMessageId());
+				message.getCompanyId(), message.getMessageId());
 		}
 		catch (IOException ioe) {
 			_log.error(ioe.getMessage());
@@ -572,18 +571,17 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		return MBMessageFinder.countByGroupId(groupId);
 	}
 
-	public MBMessage getMessage(String topicId, String messageId)
+	public MBMessage getMessage(String messageId)
 		throws PortalException, SystemException {
 
 		return MBMessageUtil.findByPrimaryKey(
-			new MBMessagePK(topicId, messageId));
+			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
 	}
 
-	public MBMessageDisplay getMessageDisplay(
-			String topicId, String messageId, String userId)
+	public MBMessageDisplay getMessageDisplay(String messageId, String userId)
 		throws PortalException, SystemException {
 
-		MBMessage message = getMessage(topicId, messageId);
+		MBMessage message = getMessage(messageId);
 
 		return getMessageDisplay(message, userId);
 	}
@@ -660,12 +658,6 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			previousThread, nextThread, firstThread, lastThread, userId);
 	}
 
-	public int getReadMessagesCount(String topicId, String userId)
-		throws SystemException {
-
-		return MBMessageFlagUtil.countByT_U(topicId, userId);
-	}
-
 	public List getThreadMessages(String threadId, String userId)
 		throws SystemException {
 
@@ -711,30 +703,28 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		return MBMessageUtil.countByThreadId(threadId);
 	}
 
-	public void subscribeMessage(
-			String userId, String topicId, String messageId)
+	public void subscribeMessage(String userId, String messageId)
 		throws PortalException, SystemException {
 
 		MBMessage message = MBMessageUtil.findByPrimaryKey(
-			new MBMessagePK(topicId, messageId));
+			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
 
 		SubscriptionLocalServiceUtil.addSubscription(
 			userId, MBThread.class.getName(), message.getThreadId());
 	}
 
-	public void unsubscribeMessage(
-			String userId, String topicId, String messageId)
+	public void unsubscribeMessage(String userId, String messageId)
 		throws PortalException, SystemException {
 
 		MBMessage message = MBMessageUtil.findByPrimaryKey(
-			new MBMessagePK(topicId, messageId));
+			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
 
 		SubscriptionLocalServiceUtil.deleteSubscription(
 			userId, MBThread.class.getName(), message.getThreadId());
 	}
 
 	public MBMessage updateDiscussionMessage(
-			String topicId, String messageId, String subject, String body)
+			String messageId, String subject, String body)
 		throws PortalException, SystemException {
 
 		String categoryId = Company.SYSTEM;
@@ -742,12 +732,12 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		PortletPreferences prefs = null;
 
 		return updateMessage(
-			topicId, messageId, categoryId, subject, body, files, prefs);
+			messageId, categoryId, subject, body, files, prefs);
 	}
 
 	public MBMessage updateMessage(
-			String topicId, String messageId, String categoryId, String subject,
-			String body, List files, PortletPreferences prefs)
+			String messageId, String categoryId, String subject, String body,
+			List files, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
 		// Message
@@ -758,7 +748,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		validate(subject, body);
 
 		MBMessage message = MBMessageUtil.findByPrimaryKey(
-			new MBMessagePK(topicId, messageId));
+			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
 
 		// File attachments
 
@@ -819,8 +809,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			if (!category.isDiscussion()) {
 				Indexer.updateMessage(
 					message.getCompanyId(), category.getGroupId(),
-					category.getCategoryId(), message.getTopicId(),
-					message.getThreadId(), messageId, subject, body);
+					category.getCategoryId(), message.getThreadId(), messageId,
+					subject, body);
 			}
 		}
 		catch (IOException ioe) {

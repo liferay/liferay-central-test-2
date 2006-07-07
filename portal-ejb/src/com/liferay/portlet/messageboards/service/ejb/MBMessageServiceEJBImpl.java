@@ -118,83 +118,77 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 
 	public void deleteDiscussionMessage(java.lang.String groupId,
 		java.lang.String className, java.lang.String classPK,
-		java.lang.String topicId, java.lang.String messageId)
+		java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		getService().deleteDiscussionMessage(groupId, className, classPK,
-			topicId, messageId);
+			messageId);
 	}
 
-	public void deleteMessage(java.lang.String topicId,
-		java.lang.String messageId)
+	public void deleteMessage(java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteMessage(topicId, messageId);
+		getService().deleteMessage(messageId);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage getMessage(
-		java.lang.String topicId, java.lang.String messageId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().getMessage(topicId, messageId);
-	}
-
-	public void subscribeMessage(java.lang.String topicId,
 		java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().subscribeMessage(topicId, messageId);
+
+		return getService().getMessage(messageId);
 	}
 
-	public void unsubscribeMessage(java.lang.String topicId,
-		java.lang.String messageId)
+	public void subscribeMessage(java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().unsubscribeMessage(topicId, messageId);
+		getService().subscribeMessage(messageId);
+	}
+
+	public void unsubscribeMessage(java.lang.String messageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		getService().unsubscribeMessage(messageId);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		java.lang.String groupId, java.lang.String className,
-		java.lang.String classPK, java.lang.String topicId,
-		java.lang.String messageId, java.lang.String subject,
-		java.lang.String body)
+		java.lang.String classPK, java.lang.String messageId,
+		java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return getService().updateDiscussionMessage(groupId, className,
-			classPK, topicId, messageId, subject, body);
+			classPK, messageId, subject, body);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
-		java.lang.String topicId, java.lang.String messageId,
-		java.lang.String categoryId, java.lang.String subject,
-		java.lang.String body, java.util.List files)
+		java.lang.String messageId, java.lang.String categoryId,
+		java.lang.String subject, java.lang.String body, java.util.List files)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateMessage(topicId, messageId, categoryId,
-			subject, body, files);
+		return getService().updateMessage(messageId, categoryId, subject, body,
+			files);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
-		java.lang.String topicId, java.lang.String messageId,
-		java.lang.String categoryId, java.lang.String subject,
-		java.lang.String body, java.util.List files,
+		java.lang.String messageId, java.lang.String categoryId,
+		java.lang.String subject, java.lang.String body, java.util.List files,
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateMessage(topicId, messageId, categoryId,
-			subject, body, files, prefs);
+		return getService().updateMessage(messageId, categoryId, subject, body,
+			files, prefs);
 	}
 
 	public void ejbCreate() throws CreateException {
