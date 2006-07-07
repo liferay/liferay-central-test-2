@@ -217,14 +217,13 @@ public class PermissionServiceImpl
 
 			String portletId = primKey.substring(
 				pos + Portlet.LAYOUT_SEPARATOR.length() , primKey.length());
-			String rootPortletId = Portlet.getRootPortletId(portletId);
 
 			if (!GroupPermission.contains(
 					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS) &&
 				!LayoutPermission.contains(
 					permissionChecker, layoutId, ownerId, ActionKeys.UPDATE) &&
 				!PortletPermission.contains(
-					permissionChecker, plid, rootPortletId,
+					permissionChecker, plid, portletId,
 					ActionKeys.CONFIGURATION)) {
 
 				throw new PrincipalException();

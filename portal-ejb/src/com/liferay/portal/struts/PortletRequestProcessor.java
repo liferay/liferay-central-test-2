@@ -327,14 +327,14 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				PermissionChecker permissionChecker =
 					themeDisplay.getPermissionChecker();
 
-				if (!PortletPermission.contains(
-						permissionChecker, layout.getPlid(),
-						portlet.getPortletId(), ActionKeys.VIEW) &&
-					!GroupPermission.contains(
+				if (!GroupPermission.contains(
 						permissionChecker, layout.getGroupId(),
 						ActionKeys.MANAGE_LAYOUTS) &&
 					!LayoutPermission.contains(
-						permissionChecker, layout, ActionKeys.UPDATE)) {
+						permissionChecker, layout, ActionKeys.UPDATE) &&
+					!PortletPermission.contains(
+						permissionChecker, layout.getPlid(),
+						portlet.getPortletId(), ActionKeys.VIEW)) {
 
 					throw new PrincipalException();
 				}

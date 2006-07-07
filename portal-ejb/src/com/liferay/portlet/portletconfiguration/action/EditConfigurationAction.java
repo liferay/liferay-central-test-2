@@ -100,7 +100,6 @@ public class EditConfigurationAction extends DynamicPortletAction {
 			themeDisplay.getPermissionChecker();
 
 		String portletId = ParamUtil.getString(req, "portletResource");
-		String rootPortletId = Portlet.getRootPortletId(portletId);
 
 		if (!GroupPermission.contains(
 				permissionChecker, themeDisplay.getPortletGroupId(),
@@ -109,7 +108,7 @@ public class EditConfigurationAction extends DynamicPortletAction {
 				permissionChecker, themeDisplay.getLayout(),
 				ActionKeys.UPDATE) &&
 			!PortletPermission.contains(
-				permissionChecker, themeDisplay.getPlid(), rootPortletId,
+				permissionChecker, themeDisplay.getPlid(), portletId,
 				ActionKeys.CONFIGURATION)) {
 
 			throw new PrincipalException();
