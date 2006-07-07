@@ -199,7 +199,7 @@
 						<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 							<portlet:param name="struts_action" value="/message_boards/edit_message" />
 							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-							<portlet:param name="redirect" value="<%= categoryURL %>" />
+							<portlet:param name="redirect" value="<%= categoryURL.toString() %>" />
 							<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
 						</portlet:actionURL>
 
