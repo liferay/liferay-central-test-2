@@ -58,6 +58,6 @@ public interface DLLocalService {
 	public Hits search(
 			String companyId, String portletId, String groupId,
 			String[] repositoryIds, String keywords)
-		throws RemoteException, SystemException;
+		throws SystemException;
 
 }

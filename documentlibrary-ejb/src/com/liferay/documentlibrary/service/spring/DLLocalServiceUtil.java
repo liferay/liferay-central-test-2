@@ -107,7 +107,7 @@ public class DLLocalServiceUtil {
 	public static Hits search(
 			String companyId, String portletId, String groupId,
 			String[] repositoryIds, String keywords)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			DLLocalService dlLocalService = DLLocalServiceFactory.getService();
