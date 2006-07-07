@@ -67,7 +67,6 @@
 	<classpathentry kind="lib" path="lib/jaxen.jar"/>
 	<classpathentry kind="lib" path="lib/jaxrpc.jar"/>
 	<classpathentry kind="lib" path="lib/jazzy.jar"/>
-	<classpathentry kind="lib" path="lib/jcaptcha.jar"/>
 	<classpathentry kind="lib" path="lib/jce.jar"/>
 	<classpathentry kind="lib" path="lib/jcommon.jar"/>
 	<classpathentry kind="lib" path="lib/jcr.jar"/>
@@ -116,6 +115,7 @@
 	<classpathentry kind="lib" path="lib/saxpath.jar"/>
 	<classpathentry kind="lib" path="lib/secure-filter.jar"/>
 	<classpathentry kind="lib" path="lib/servlet.jar"/>
+	<classpathentry kind="lib" path="lib/simplecaptcha.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-log4j12.jar"/>
 	<classpathentry kind="lib" path="lib/smtp.jar"/>
 	<classpathentry kind="lib" path="lib/soap.jar"/>
