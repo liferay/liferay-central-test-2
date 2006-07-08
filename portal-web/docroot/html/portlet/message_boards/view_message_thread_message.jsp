@@ -102,7 +102,7 @@
 
 				<c:if test="<%= editable && MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) %>">
 					<div style="float: right;">
-						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="replyURL">
 							<portlet:param name="struts_action" value="/message_boards/edit_message" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
 							<portlet:param name="categoryId" value="<%= message.getCategoryId() %>" />
@@ -110,9 +110,22 @@
 							<portlet:param name="parentMessageId" value="<%= message.getMessageId() %>" />
 						</portlet:renderURL>
 
-						<liferay-ui:icon image="reply" url="<%= portletURL %>" />
+						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="quoteURL">
+							<portlet:param name="struts_action" value="/message_boards/edit_message" />
+							<portlet:param name="redirect" value="<%= currentURL %>" />
+							<portlet:param name="categoryId" value="<%= message.getCategoryId() %>" />
+							<portlet:param name="threadId" value="<%= message.getThreadId() %>" />
+							<portlet:param name="parentMessageId" value="<%= message.getMessageId() %>" />
+							<portlet:param name="quote" value="true" />
+						</portlet:renderURL>
 
-						<a href="<%= portletURL.toString() %>"><%= LanguageUtil.get(pageContext, "reply") %></a>
+						<liferay-ui:icon image="reply" url="<%= replyURL %>" />
+
+						<a href="<%= replyURL.toString() %>"><%= LanguageUtil.get(pageContext, "reply") %></a>
+
+						<liferay-ui:icon image="quote" url="<%= quoteURL %>" />
+
+						<a href="<%= quoteURL.toString() %>"><%= LanguageUtil.get(pageContext, "reply-with-quote") %></a>
 					</div>
 				</c:if>
 

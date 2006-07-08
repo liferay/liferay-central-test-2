@@ -77,7 +77,7 @@
 
 	function <portlet:namespace />initEditor() {
 		<c:choose>
-			<c:when test="<%= Validator.isNull(body) && curParentMessage != null %>">
+			<c:when test="<%= quote && Validator.isNull(body) && curParentMessage != null %>">
 				var respondee = "<%= UnicodeFormatter.toString(parentAuthor) %>";
 				var quote = "<%= UnicodeFormatter.toString(curParentMessage.getBody(false)) %>";
 
