@@ -105,6 +105,9 @@ public class JournalVmUtil {
 				throw new TransformException(
 					"Error reading velocity template", e);
 			}
+			else if (e instanceof TransformException) {
+				throw (TransformException)e;
+			}
 			else {
 				throw new TransformException("Unhandled exception", e);
 			}
