@@ -320,6 +320,13 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 			ps = con.prepareStatement(_UPGRADE_MESSAGE_6);
 
+			ps.setString(1, "ADD_MESSAGE");
+			ps.setString(2, "ADD_TOPIC");
+
+			ps.executeUpdate();
+
+			ps = con.prepareStatement(_UPGRADE_MESSAGE_7);
+
 			ps.setString(
 				1,
 				"{topicId=" + MBMessage.DEPRECATED_TOPIC_ID + ", messageId=" +
@@ -422,6 +429,9 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			"WHERE topicId = ? AND rootMessageId = ?";
 
 	public static final String _UPGRADE_MESSAGE_6 =
+		"UPDATE Permission_ SET actionId = ? WHERE actionId = ?";
+
+	public static final String _UPGRADE_MESSAGE_7 =
 		"UPDATE Resource_ SET primKey = ? WHERE name = ? AND primKey = ?";
 
 	private static Log _log = LogFactory.getLog(UpgradeMessageBoards.class);
