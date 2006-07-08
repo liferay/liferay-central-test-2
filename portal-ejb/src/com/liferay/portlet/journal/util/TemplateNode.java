@@ -37,7 +37,24 @@ public class TemplateNode {
 		_children = new ArrayList();
 		_data = data;
 		_name = name;
+		_options = new ArrayList();
 		_type = type;
+	}
+
+	public void appendOption(String option) {
+		_options.add(option);
+	}
+
+	public void appendOptions(List options) {
+		_options.addAll(options);
+	}
+
+	public List getOptions() {
+		return _options;
+	}
+
+	public void appendChild(TemplateNode child) {
+		_children.add(child);
 	}
 
 	public void appendChildren(List children) {
@@ -63,6 +80,7 @@ public class TemplateNode {
 	private List _children;
 	private String _data;
 	private String _name;
+	private List _options;
 	private String _type;
 
 }

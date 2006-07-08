@@ -148,6 +148,15 @@ public class JournalVmUtil {
 			if (element.element("dynamic-element") != null) {
 				node.appendChildren(_extractDynamicContents(element));
 			}
+			else if (content.element("option") != null) {
+				Iterator oi = content.elementIterator("option");
+
+				while (oi.hasNext()) {
+					Element option = (Element)oi.next();
+
+					node.appendOption(CDATAUtil.strip(option.getText()));				
+				}
+			}
 
 			nodes.add(node);
 		}
