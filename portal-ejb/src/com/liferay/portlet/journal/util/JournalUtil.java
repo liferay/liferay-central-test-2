@@ -151,6 +151,10 @@ public class JournalUtil {
 			value);
 	}
 
+	public static String formatVM(String xml) {
+		return xml;
+	}
+
 	public static String formatXML(String xml)
 		throws DocumentException, IOException {
 

@@ -90,7 +90,12 @@ public class JournalTemplateLocalServiceImpl
 
 		try {
 			if (formatXsl) {
-				xsl = JournalUtil.formatXML(xsl);
+				if (JournalTemplate.LANG_TYPE_VM.equals(langType)) {
+					xsl = JournalUtil.formatVM(xsl);
+				}
+				else {
+					xsl = JournalUtil.formatXML(xsl);
+				}
 			}
 		}
 		catch (DocumentException de) {
@@ -310,7 +315,12 @@ public class JournalTemplateLocalServiceImpl
 
 		try {
 			if (formatXsl) {
-				xsl = JournalUtil.formatXML(xsl);
+				if (JournalTemplate.LANG_TYPE_VM.equals(langType)) {
+					xsl = JournalUtil.formatVM(xsl);
+				}
+				else {
+					xsl = JournalUtil.formatXML(xsl);
+				}
 			}
 		}
 		catch (DocumentException de) {
