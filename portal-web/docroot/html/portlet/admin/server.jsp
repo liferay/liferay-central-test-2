@@ -144,9 +144,7 @@
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
 							[
-							<a href="javascript: document.getElementById('<portlet:namespace />tasks').style.display = ''; void(''); self.focus();"><%= LanguageUtil.get(pageContext, "show") %></a>
-							/
-							<a href="javascript: document.getElementById('<portlet:namespace />tasks').style.display = 'none'; void(''); self.focus();"><%= LanguageUtil.get(pageContext, "hide") %></a>
+							<a href="javascript: void(0);" onclick="toggleByIdSpan(this, '<portlet:namespace />tasks'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>
 							]
 							</span>
 						</td>
@@ -155,54 +153,56 @@
 				</td>
 			</tr>
 			<tr>
-				<td id="<portlet:namespace />tasks" style="display: none;">
-					<table border="0" cellpadding="4" cellspacing="0" width="100%">
-					<tr class="portlet-section-alternate">
-						<td>
-							<%= LanguageUtil.get(pageContext, "run-the-garbage-collector-to-free-up-memory") %>
-						</td>
-						</td>
-						<td align="right">
-							<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('gc');">
-						</td>
-					</tr>
-					<tr class="portlet-section-body">
-						<td>
-							<%= LanguageUtil.get(pageContext, "clear-content-cached-by-this-vm") %>
-						</td>
-						</td>
-						<td align="right">
-							<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('cacheSingle');">
-						</td>
-					</tr>
-					<tr class="portlet-section-alternate">
-						<td>
-							<%= LanguageUtil.get(pageContext, "clear-content-cached-across-the-cluster") %>
-						</td>
-						</td>
-						<td align="right">
-							<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('cacheMulti');">
-						</td>
-					</tr>
-					<tr class="portlet-section-body">
-						<td>
-							<%= LanguageUtil.get(pageContext, "clear-the-database-cache") %>
-						</td>
-						</td>
-						<td align="right">
-							<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('cacheDb');">
-						</td>
-					</tr>
-					<tr class="portlet-section-alternate">
-						<td>
-							<%= LanguageUtil.get(pageContext, "precompile-jsps-for-faster-speed") %>
-						</td>
-						</td>
-						<td align="right">
-							<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="alert('<%= UnicodeLanguageUtil.get(pageContext, "please-be-patient") %>'); <portlet:namespace />saveServer('precompile');">
-						</td>
-					</tr>
-					</table>
+				<td>
+					<div id="<portlet:namespace />tasks" style="display: none;">
+						<table border="0" cellpadding="4" cellspacing="0" width="100%">
+						<tr class="portlet-section-alternate">
+							<td>
+								<%= LanguageUtil.get(pageContext, "run-the-garbage-collector-to-free-up-memory") %>
+							</td>
+							</td>
+							<td align="right">
+								<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('gc');">
+							</td>
+						</tr>
+						<tr class="portlet-section-body">
+							<td>
+								<%= LanguageUtil.get(pageContext, "clear-content-cached-by-this-vm") %>
+							</td>
+							</td>
+							<td align="right">
+								<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('cacheSingle');">
+							</td>
+						</tr>
+						<tr class="portlet-section-alternate">
+							<td>
+								<%= LanguageUtil.get(pageContext, "clear-content-cached-across-the-cluster") %>
+							</td>
+							</td>
+							<td align="right">
+								<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('cacheMulti');">
+							</td>
+						</tr>
+						<tr class="portlet-section-body">
+							<td>
+								<%= LanguageUtil.get(pageContext, "clear-the-database-cache") %>
+							</td>
+							</td>
+							<td align="right">
+								<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="<portlet:namespace />saveServer('cacheDb');">
+							</td>
+						</tr>
+						<tr class="portlet-section-alternate">
+							<td>
+								<%= LanguageUtil.get(pageContext, "precompile-jsps-for-faster-speed") %>
+							</td>
+							</td>
+							<td align="right">
+								<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "execute") %>' onClick="alert('<%= UnicodeLanguageUtil.get(pageContext, "please-be-patient") %>'); <portlet:namespace />saveServer('precompile');">
+							</td>
+						</tr>
+						</table>
+					</div>
 				</td>
 			</tr>
 			<tr>
@@ -215,9 +215,7 @@
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
 							[
-							<a href="javascript: document.getElementById('<portlet:namespace />logLevels').style.display = ''; void(''); self.focus();"><%= LanguageUtil.get(pageContext, "show") %></a>
-							/
-							<a href="javascript: document.getElementById('<portlet:namespace />logLevels').style.display = 'none'; void(''); self.focus();"><%= LanguageUtil.get(pageContext, "hide") %></a>
+							<a href="javascript: void(0);" onclick="toggleByIdSpan(this, '<portlet:namespace />logLevels'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>
 							]
 							</span>
 						</td>
@@ -226,79 +224,81 @@
 				</td>
 			</tr>
 			<tr>
-				<td id="<portlet:namespace />logLevels" style="display: none;">
-
-					<%
-					Map currentLoggerNames = new TreeMap();
-
-					Enumeration enu = LogManager.getCurrentLoggers();
-
-					while (enu.hasMoreElements()) {
-						Logger logger = (Logger)enu.nextElement();
-
-						currentLoggerNames.put(logger.getName(), logger);
-					}
-					%>
-
-					<table border="0" cellpadding="4" cellspacing="0" width="100%">
-
-					<%
-					int counter = 0;
-
-					Iterator itr = currentLoggerNames.entrySet().iterator();
-
-					while (itr.hasNext()) {
-						Map.Entry entry = (Map.Entry)itr.next();
-
-						String name = (String)entry.getKey();
-						Logger logger = (Logger)entry.getValue();
-					%>
-
-						<c:if test="<%= logger.getLevel() != null %>">
-
-							<%
-							String className = "portlet-section-body";
-							String classHoverName = "portlet-section-body-hover";
-
-							if (MathUtil.isEven(counter++)) {
-								className = "portlet-section-alternate";
-								classHoverName = "portlet-section-alternate-hover";
-							}
-							%>
-
-							<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-								<td>
-									<%= name %>
-								</td>
-								<td>
-									<select class="form-button" name="<portlet:namespace />logLevel<%= name %>">
-
-										<%
-										for (int i = 0; i < Levels.ALL_LEVELS.length; i++) {
-										%>
-
-											<option <%= logger.getLevel().equals(Levels.ALL_LEVELS[i]) ? "selected" : "" %> value="<%= Levels.ALL_LEVELS[i] %>"><%= Levels.ALL_LEVELS[i] %></option>
-
-										<%
-										}
-										%>
-
-									</select>
-								</td>
-							</tr>
-						</c:if>
-
-					<%
-					}
-					%>
-
-					</table>
-
-					<br>
-
-					<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveServer('updateLogLevels');">
-
-					<br><br>
+				<td>
+					<div id="<portlet:namespace />logLevels" style="display: none;">
+	
+						<%
+						Map currentLoggerNames = new TreeMap();
+	
+						Enumeration enu = LogManager.getCurrentLoggers();
+	
+						while (enu.hasMoreElements()) {
+							Logger logger = (Logger)enu.nextElement();
+	
+							currentLoggerNames.put(logger.getName(), logger);
+						}
+						%>
+	
+						<table border="0" cellpadding="4" cellspacing="0" width="100%">
+	
+						<%
+						int counter = 0;
+	
+						Iterator itr = currentLoggerNames.entrySet().iterator();
+	
+						while (itr.hasNext()) {
+							Map.Entry entry = (Map.Entry)itr.next();
+	
+							String name = (String)entry.getKey();
+							Logger logger = (Logger)entry.getValue();
+						%>
+	
+							<c:if test="<%= logger.getLevel() != null %>">
+	
+								<%
+								String className = "portlet-section-body";
+								String classHoverName = "portlet-section-body-hover";
+	
+								if (MathUtil.isEven(counter++)) {
+									className = "portlet-section-alternate";
+									classHoverName = "portlet-section-alternate-hover";
+								}
+								%>
+	
+								<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+									<td>
+										<%= name %>
+									</td>
+									<td>
+										<select class="form-button" name="<portlet:namespace />logLevel<%= name %>">
+	
+											<%
+											for (int i = 0; i < Levels.ALL_LEVELS.length; i++) {
+											%>
+	
+												<option <%= logger.getLevel().equals(Levels.ALL_LEVELS[i]) ? "selected" : "" %> value="<%= Levels.ALL_LEVELS[i] %>"><%= Levels.ALL_LEVELS[i] %></option>
+	
+											<%
+											}
+											%>
+	
+										</select>
+									</td>
+								</tr>
+							</c:if>
+	
+						<%
+						}
+						%>
+	
+						</table>
+	
+						<br>
+	
+						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveServer('updateLogLevels');">
+	
+						<br><br>
+					</div>
 				</td>
 			</tr>
 			<tr>
@@ -311,9 +311,7 @@
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
 							[
-							<a href="javascript: document.getElementById('<portlet:namespace />system_properties').style.display = ''; void(''); self.focus();"><%= LanguageUtil.get(pageContext, "show") %></a>
-							/
-							<a href="javascript: document.getElementById('<portlet:namespace />system_properties').style.display = 'none'; void(''); self.focus();"><%= LanguageUtil.get(pageContext, "hide") %></a>
+							<a href="javascript: void(0);" onclick="toggleByIdSpan(this, '<portlet:namespace />system_properties'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>
 							]
 							</span>
 						</td>
@@ -322,48 +320,50 @@
 				</td>
 			</tr>
 			<tr>
-				<td id="<portlet:namespace />system_properties" style="display: none;">
-					<table border="0" cellpadding="4" cellspacing="0" width="100%">
-
-					<%
-					counter = 0;
-
-					Properties systemProps = new SortedProperties();
-
-					PropertiesUtil.copyProperties(System.getProperties(), systemProps);
-
-					enu = systemProps.propertyNames();
-
-					while (enu.hasMoreElements()) {
-						String name = (String)enu.nextElement();
-
-						String className = "portlet-section-body";
-						String classHoverName = "portlet-section-body-hover";
-
-						if (MathUtil.isEven(counter++)) {
-							className = "portlet-section-alternate";
-							classHoverName = "portlet-section-alternate-hover";
+				<td>
+					<div id="<portlet:namespace />system_properties" style="display: none;">
+						<table border="0" cellpadding="4" cellspacing="0" width="100%">
+	
+						<%
+						counter = 0;
+	
+						Properties systemProps = new SortedProperties();
+	
+						PropertiesUtil.copyProperties(System.getProperties(), systemProps);
+	
+						enu = systemProps.propertyNames();
+	
+						while (enu.hasMoreElements()) {
+							String name = (String)enu.nextElement();
+	
+							String className = "portlet-section-body";
+							String classHoverName = "portlet-section-body-hover";
+	
+							if (MathUtil.isEven(counter++)) {
+								className = "portlet-section-alternate";
+								classHoverName = "portlet-section-alternate-hover";
+							}
+	
+							String value = System.getProperty(name);
+						%>
+	
+							<tr class="<%= className %>" style="font-size: xx-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+								<td title="<%= name %>">
+									<%= StringUtil.shorten(name, 65) %>
+								</td>
+								<td title="<%= value %>">
+									<%= StringUtil.shorten(value, 75) %>
+								</td>
+							</tr>
+	
+						<%
 						}
-
-						String value = System.getProperty(name);
-					%>
-
-						<tr class="<%= className %>" style="font-size: xx-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-							<td title="<%= name %>">
-								<%= StringUtil.shorten(name, 65) %>
-							</td>
-							<td title="<%= value %>">
-								<%= StringUtil.shorten(value, 75) %>
-							</td>
-						</tr>
-
-					<%
-					}
-					%>
-
-					</table>
-
-					<br>
+						%>
+	
+						</table>
+	
+						<br>
+					</div>
 				</td>
 			</tr>
 			<tr>
@@ -376,9 +376,7 @@
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
 							[
-							<a href="javascript: document.getElementById('<portlet:namespace />portal_properties').style.display = ''; void(''); self.focus();"><%= LanguageUtil.get(pageContext, "show") %></a>
-							/
-							<a href="javascript: document.getElementById('<portlet:namespace />portal_properties').style.display = 'none'; void(''); self.focus();"><%= LanguageUtil.get(pageContext, "hide") %></a>
+							<a href="javascript: void(0);" onclick="toggleByIdSpan(this, '<portlet:namespace />portal_properties'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>
 							]
 							</span>
 						</td>
@@ -387,46 +385,48 @@
 				</td>
 			</tr>
 			<tr>
-				<td id="<portlet:namespace />portal_properties" style="display: none;">
-					<table border="0" cellpadding="4" cellspacing="0" width="100%">
-
-					<%
-					counter = 0;
-
-					Properties portalProps = new SortedProperties();
-
-					PropertiesUtil.copyProperties(PropsUtil.getProperties(), portalProps);
-
-					enu = portalProps.propertyNames();
-
-					while (enu.hasMoreElements()) {
-						String name = (String)enu.nextElement();
-
-						String className = "portlet-section-body";
-						String classHoverName = "portlet-section-body-hover";
-
-						if (MathUtil.isEven(counter++)) {
-							className = "portlet-section-alternate";
-							classHoverName = "portlet-section-alternate-hover";
+				<td>
+					<div id="<portlet:namespace />portal_properties" style="display: none;">
+						<table border="0" cellpadding="4" cellspacing="0" width="100%">
+	
+						<%
+						counter = 0;
+	
+						Properties portalProps = new SortedProperties();
+	
+						PropertiesUtil.copyProperties(PropsUtil.getProperties(), portalProps);
+	
+						enu = portalProps.propertyNames();
+	
+						while (enu.hasMoreElements()) {
+							String name = (String)enu.nextElement();
+	
+							String className = "portlet-section-body";
+							String classHoverName = "portlet-section-body-hover";
+	
+							if (MathUtil.isEven(counter++)) {
+								className = "portlet-section-alternate";
+								classHoverName = "portlet-section-alternate-hover";
+							}
+	
+							String value = PropsUtil.get(name);
+						%>
+	
+							<tr class="<%= className %>" style="font-size: xx-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+								<td title="<%= name %>">
+									<%= StringUtil.shorten(name, 65) %>
+								</td>
+								<td title="<%= value %>">
+									<%= StringUtil.shorten(value, 75) %>
+								</td>
+							</tr>
+	
+						<%
 						}
-
-						String value = PropsUtil.get(name);
-					%>
-
-						<tr class="<%= className %>" style="font-size: xx-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-							<td title="<%= name %>">
-								<%= StringUtil.shorten(name, 65) %>
-							</td>
-							<td title="<%= value %>">
-								<%= StringUtil.shorten(value, 75) %>
-							</td>
-						</tr>
-
-					<%
-					}
-					%>
-
-					</table>
+						%>
+	
+						</table>
+					</div>
 				</td>
 			</tr>
 			</table>

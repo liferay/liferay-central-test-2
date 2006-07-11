@@ -899,6 +899,20 @@ function toggleById(id, returnState, displayType) {
 	}
 }
 
+function toggleByIdSpan(obj, id) {
+	var hidden = toggleById(id, true);
+	var spanText = obj.getElementsByTagName("span");
+
+	if (hidden) {
+		spanText[0].style.display = "none";
+		spanText[1].style.display = "";
+	}
+	else {
+		spanText[0].style.display = "";
+		spanText[1].style.display = "none";
+	}
+}
+
 function toggleByObject(obj, returnState, displayType) {
 	var hidden = false;
 	var display = "block";
