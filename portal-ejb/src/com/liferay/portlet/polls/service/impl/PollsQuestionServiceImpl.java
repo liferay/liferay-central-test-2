@@ -54,7 +54,7 @@ public class PollsQuestionServiceImpl
 
 		PortletPermission.check(
 			getPermissionChecker(), plid, PortletKeys.POLLS,
-			ActionKeys.ADD_EVENT);
+			ActionKeys.ADD_QUESTION);
 
 		return PollsQuestionLocalServiceUtil.addQuestion(
 			getUserId(), plid, title, description, expirationDateMonth,
