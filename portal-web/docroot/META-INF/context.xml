@@ -1,0 +1,27 @@
+<Context path="">
+	<Resource
+		name="jdbc/LiferayPool"
+		auth="Container"
+		type="javax.sql.DataSource"
+		driverClassName="org.hsqldb.jdbcDriver"
+		url="jdbc:hsqldb:test"
+		username="sa"
+		password=""
+		maxActive="20"
+	/>
+	<Resource
+		name="mail/MailSession"
+		auth="Container"
+		type="javax.mail.Session"
+		mail.transport.protocol="smtp"
+		mail.smtp.host="localhost"
+	/>
+	<Realm 
+		className="org.apache.catalina.realm.JAASRealm"
+		appName="PortalRealm"
+		userClassNames="com.liferay.portal.security.jaas.PortalPrincipal"
+		roleClassNames="com.liferay.portal.security.jaas.PortalRole"
+		debug="99"
+		useContextClassLoader="false"
+	/>
+</Context>

@@ -99,10 +99,11 @@ public class TunnelUtil {
 		if (httpPrincipal.getUserId() == null ||
 			httpPrincipal.getPassword() == null) {
 
-			url = new URL(httpPrincipal.getUrl() + "/tunnel/liferay/do");
+			url = new URL(httpPrincipal.getUrl() + "/tunnel-web/liferay/do");
 		}
 		else {
-			url = new URL(httpPrincipal.getUrl() + "/tunnel/secure/liferay/do");
+			url = new URL(
+				httpPrincipal.getUrl() + "/tunnel-web/secure/liferay/do");
 		}
 
 		HttpURLConnection urlc = (HttpURLConnection)url.openConnection();

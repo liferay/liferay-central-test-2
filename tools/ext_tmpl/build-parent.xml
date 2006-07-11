@@ -4,7 +4,7 @@
 	<import file="build-common.xml" />
 
 	<target name="clean">
-		<delete includeEmptyDirs="true">
+		<delete includeemptydirs="true">
 			<fileset dir="${app.server.bin.dir}" includes="*.log*,ActiveMQ/**,alf_data/**" />
 		</delete>
 
@@ -31,7 +31,7 @@
 				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 			</or>
 			<then>
-				<delete includeEmptyDirs="true" failonerror="false">
+				<delete includeemptydirs="true" failonerror="false">
 					<fileset dir="${app.server.deploy.dir}" includes="sample-*.war/**" />
 				</delete>
 
@@ -337,7 +337,7 @@
 			/>
 		</delete>
 
-		<copy todir="${app.server.lib.dir}" includeEmptyDirs="false">
+		<copy todir="${app.server.lib.dir}" includeemptydirs="false">
 			<fileset
 				dir="ext-lib"
 				excludes="**/readme.txt"				

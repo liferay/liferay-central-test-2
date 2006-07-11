@@ -4,8 +4,8 @@
 	<import file="../build-common.xml" />
 
 	<target name="clean">
-		<delete dir="${classes.dir}" />
-		<delete dir="${tmp.dir}" />
+		<delete dir="classes" />
+		<delete dir="tmp" />
 	</target>
 
 	<target name="compile-common-lib">
@@ -53,9 +53,9 @@
 	</target>
 
 	<target name="compile-common-jsp">
-		<move file="${tmp.dir}/WEB-INF/web.xml" tofile="${tmp.dir}/WEB-INF/web.xml.bak" />
+		<move file="tmp/WEB-INF/web.xml" tofile="tmp/WEB-INF/web.xml.bak" />
 
-		<copy file="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml" tofile="${tmp.dir}/WEB-INF/web.xml" />
+		<copy file="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml" tofile="tmp/WEB-INF/web.xml" />
 
 		<java
 			classname="org.apache.jasper.JspC"
@@ -66,7 +66,7 @@
 			<arg line="${arg.line}" />
 		</java>
 
-		<move file="${tmp.dir}/WEB-INF/web.xml.bak" tofile="${tmp.dir}/WEB-INF/web.xml" />
+		<move file="tmp/WEB-INF/web.xml.bak" tofile="tmp/WEB-INF/web.xml" />
 
 		<java
 			classname="com.liferay.portal.tools.JSPCompiler"
@@ -82,7 +82,7 @@
 	</target>
 
 	<target name="compile-jboss-jetty" depends="merge">
-		<property name="jspc.classes.dir" value="${classes.dir}/${app.server.type}" />
+		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
 		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.deploy.dir}/jbossweb-jetty.sar/jasper-compiler.jar;${app.server.deploy.dir}/jbossweb-jetty.sar/jasper-runtime.jar" />
 
 		<antcall target="compile-common-lib" />
@@ -92,12 +92,12 @@
 		<unjar src="${app.server.deploy.dir}/jbossweb-jetty.sar/commons-el.jar" dest="${classpath.jsp}" />
 
 		<antcall target="compile-common-jsp">
-			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${tmp.dir}" />
+			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp tmp" />
 		</antcall>
 	</target>
 
 	<target name="compile-jboss-tomcat" depends="merge">
-		<property name="jspc.classes.dir" value="${classes.dir}/${app.server.type}" />
+		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
 		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.deploy.dir}/jbossweb-tomcat55.sar/jasper-compiler.jar;${app.server.deploy.dir}/jbossweb-tomcat55.sar/jasper-runtime.jar" />
 
 		<antcall target="compile-common-lib" />
@@ -107,12 +107,12 @@
 		<unjar src="${app.server.deploy.dir}/jbossweb-tomcat55.sar/commons-el.jar" dest="${classpath.jsp}" />
 
 		<antcall target="compile-common-jsp">
-			<param name="arg.line" value="-classpath ${jspc.classpath} -d ${jspc.classes.dir} -webapp ${tmp.dir}" />
+			<param name="arg.line" value="-classpath ${jspc.classpath} -d ${jspc.classes.dir} -webapp tmp" />
 		</antcall>
 	</target>
 
 	<target name="compile-jetty" depends="merge">
-		<property name="jspc.classes.dir" value="${classes.dir}/${app.server.type}" />
+		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
 		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/ext/commons-el.jar;${app.server.dir}/ext/jasper-compiler.jar;${app.server.dir}/ext/jasper-runtime.jar" />
 
 		<antcall target="compile-common-lib" />
@@ -120,12 +120,12 @@
 		<unjar src="${app.server.dir}/lib/javax.servlet.jar" dest="${classpath.jsp}" />
 
 		<antcall target="compile-common-jsp">
-			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${tmp.dir}" />
+			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp tmp" />
 		</antcall>
 	</target>
 
 	<target name="compile-jonas-jetty" depends="merge">
-		<property name="jspc.classes.dir" value="${classes.dir}/${app.server.type}" />
+		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
 		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/jetty/ext/commons-el.jar;${app.server.dir}/lib/jetty/ext/jasper-compiler.jar;${app.server.dir}/lib/jetty/ext/jasper-runtime.jar" />
 
 		<antcall target="compile-common-lib" />
@@ -134,12 +134,12 @@
 		<unjar src="${app.server.dir}/lib/commons/j2ee/servlet-2_4.jar" dest="${classpath.jsp}" />
 
 		<antcall target="compile-common-jsp">
-			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${tmp.dir}" />
+			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp tmp" />
 		</antcall>
 	</target>
 
 	<target name="compile-jonas-tomcat" depends="merge">
-		<property name="jspc.classes.dir" value="${classes.dir}/${app.server.type}" />
+		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
 		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/catalina/common/lib/commons-el.jar;${app.server.dir}/lib/catalina/common/lib/jasper-compiler.jar;${app.server.dir}/lib/catalina/common/lib/jasper-runtime.jar" />
 
 		<antcall target="compile-common-lib" />
@@ -148,12 +148,12 @@
 		<unjar src="${app.server.dir}/lib/commons/j2ee/servlet-2_4.jar" dest="${classpath.jsp}" />
 
 		<antcall target="compile-common-jsp">
-			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${tmp.dir}" />
+			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp tmp" />
 		</antcall>
 	</target>
 
 	<target name="compile-resin" depends="merge">
-		<property name="jspc.classes.dir" value="${classes.dir}/${app.server.type}" />
+		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
 		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${env.JAVA_HOME}/lib/tools.jar;${classpath.jsp};${app.server.dir}/lib/jms-11.jar;${app.server.dir}/lib/jmx-12.jar;${app.server.dir}/lib/jsdk-24.jar;${app.server.dir}/lib/jstl-11.jar;${app.server.dir}/lib/jta-101.jar;${app.server.dir}/lib/resin.jar" />
 
 		<antcall target="compile-common-lib" />
@@ -170,11 +170,11 @@
 		<unjar src="${project.dir}/lib/strip-filter.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/struts-el.jar" dest="${classpath.jsp}" />
 
-		<move file="${tmp.dir}/WEB-INF/web.xml" tofile="${tmp.dir}/WEB-INF/web.xml.bak" />
+		<move file="tmp/WEB-INF/web.xml" tofile="tmp/WEB-INF/web.xml.bak" />
 
-		<copy file="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml" tofile="${tmp.dir}/WEB-INF/web.xml" />
+		<copy file="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml" tofile="tmp/WEB-INF/web.xml" />
 
-		<replace file="${tmp.dir}/WEB-INF/web.xml">
+		<replace file="tmp/WEB-INF/web.xml">
 			<replacefilter token="&lt;resource-ref&gt;" value="" />
 			<replacefilter token="&lt;/resource-ref&gt;" value="" />
 		</replace>
@@ -186,14 +186,14 @@
 			maxmemory="512m"
 			newenvironment="true"
 		>
-			<arg line="${tmp.dir} ${jspc.classes.dir}" />
+			<arg line="tmp ${jspc.classes.dir}" />
 		</java>
 
-		<move file="${tmp.dir}/WEB-INF/web.xml.bak" tofile="${tmp.dir}/WEB-INF/web.xml" />
+		<move file="tmp/WEB-INF/web.xml.bak" tofile="tmp/WEB-INF/web.xml" />
 	</target>
 
 	<target name="compile-tomcat" depends="merge">
-		<property name="jspc.classes.dir" value="${classes.dir}/${app.server.type}" />
+		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
 		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/common/lib/commons-el.jar;${app.server.dir}/common/lib/jasper-compiler.jar;${app.server.dir}/common/lib/jasper-runtime.jar" />
 
 		<antcall target="compile-common-lib" />
@@ -202,7 +202,7 @@
 		<unjar src="${app.server.dir}/common/lib/servlet-api.jar" dest="${classpath.jsp}" />
 
 		<antcall target="compile-common-jsp">
-			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${tmp.dir}" />
+			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp tmp" />
 		</antcall>
 	</target>
 
@@ -218,40 +218,40 @@
 	<target name="merge">
 		<if>
 			<not>
-				<uptodate srcfile="${project.dir}/ext-ear/modules/portal-web.war" targetfile="${tmp.dir}" />
+				<uptodate srcfile="${project.dir}/ext-ear/modules/portal-web.war" targetfile="tmp" />
 			</not>
 			<then>
-				<delete dir="${tmp.dir}" />
-				<mkdir dir="${tmp.dir}" />
+				<delete dir="tmp" />
+				<mkdir dir="tmp" />
 
 				<unjar
-					dest="${tmp.dir}"
+					dest="tmp"
 					src="${project.dir}/ext-ear/modules/portal-web.war"
 				/>
 
-				<copy todir="${tmp.dir}" overwrite="true">
-					<fileset dir="${web.dir}" excludes="**/struts-config.xml,**/tiles-defs.xml,**/web.xml" />
+				<copy todir="tmp" overwrite="true">
+					<fileset dir="docroot" excludes="**/struts-config.xml,**/tiles-defs.xml,**/web.xml" />
 				</copy>
 			</then>
 		</if>
 
-		<copy todir="${tmp.dir}" overwrite="false">
-			<fileset dir="${web.dir}" excludes="**/struts-config.xml,**/tiles-defs.xml,**/web.xml" />
+		<copy todir="tmp" overwrite="false">
+			<fileset dir="docroot" excludes="**/struts-config.xml,**/tiles-defs.xml,**/web.xml" />
 		</copy>
 
 		<copy
-			file="${web.dir}/WEB-INF/struts-config.xml"
-			tofile="${tmp.dir}/WEB-INF/struts-config-ext.xml"
+			file="docroot/WEB-INF/struts-config.xml"
+			tofile="tmp/WEB-INF/struts-config-ext.xml"
 		/>
 
 		<copy
-			file="${web.dir}/WEB-INF/tiles-defs.xml"
-			tofile="${tmp.dir}/WEB-INF/tiles-defs-ext.xml"
+			file="docroot/WEB-INF/tiles-defs.xml"
+			tofile="tmp/WEB-INF/tiles-defs-ext.xml"
 		/>
 
 		<copy
-			file="${web.dir}/WEB-INF/web.xml"
-			tofile="${tmp.dir}/WEB-INF/web.xml"
+			file="docroot/WEB-INF/web.xml"
+			tofile="tmp/WEB-INF/web.xml"
 			overwrite="true"
 		/>
 
@@ -262,7 +262,7 @@
 		<antcall target="build-color-scheme" />
 
 		<copy
-			file="${tmp.dir}/index.html"
+			file="tmp/index.html"
 			tofile="${project.dir}/web-sites/liferay.com-web/docroot/index.html"
 			failonerror="false"
 		/>
@@ -275,7 +275,7 @@
 			</or>
 			<then>
 				<copy todir="${app.server.deploy.dir}">
-					<fileset dir="${tmp.dir}" excludes="WEB-INF/web.xml" />
+					<fileset dir="tmp" excludes="WEB-INF/web.xml" />
 					<fileset dir="${project.dir}/web-sites/liferay.com-web/docroot" />
 				</copy>
 
@@ -312,7 +312,7 @@
 						duplicate="preserve"
 						webxml="${app.server.deploy.dir}/web.xml"
 					>
-						<fileset dir="${tmp.dir}" excludes="WEB-INF/web.xml" />
+						<fileset dir="tmp" excludes="WEB-INF/web.xml" />
 						<fileset dir="${project.dir}/web-sites/liferay.com-web/docroot" excludes="WEB-INF/web.xml" />
 					</war>
 
@@ -343,19 +343,19 @@
 					</elseif>
 				</if>
 
-				<copy todir="${app.server.deploy.dir}/${ext.ear.file}/${war.file}">
-					<fileset dir="${tmp.dir}" excludes="WEB-INF/web.xml" />
+				<copy todir="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war">
+					<fileset dir="tmp" excludes="WEB-INF/web.xml" />
 					<fileset dir="${project.dir}/web-sites/liferay.com-web/docroot" />
 				</copy>
 
-				<manifest file="${app.server.deploy.dir}/${ext.ear.file}/${war.file}/META-INF/MANIFEST.MF">
+				<manifest file="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war/META-INF/MANIFEST.MF">
 					<attribute name="Class-Path" value="${classpath.manifest}" />
 				</manifest>
 
 				<if>
 					<equals arg1="${app.server.type}" arg2="jonas-jetty" />
 					<then>
-						<copy file="${app.server.deploy.dir}/${ext.ear.file}/${war.file}/WEB-INF/web-jetty.xml.JOnAS_Jetty" tofile="${app.server.deploy.dir}/${ext.ear.file}/${war.file}/WEB-INF/web-jetty.xml" overwrite="yes" />
+						<copy file="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war/WEB-INF/web-jetty.xml.JOnAS_Jetty" tofile="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war/WEB-INF/web-jetty.xml" overwrite="yes" />
 					</then>
 				</if>
 
@@ -365,12 +365,12 @@
 						<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 					</or>
 					<then>
-						<replace file="${app.server.deploy.dir}/${ext.ear.file}/${war.file}/WEB-INF/web.xml">
+						<replace file="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war/WEB-INF/web.xml">
 							<replacetoken><![CDATA[<ejb-link>com_liferay_]]></replacetoken>
 							<replacevalue><![CDATA[<ejb-link>portal-ejb.jar#com_liferay_]]></replacevalue>
 						</replace>
 
-						<replace file="${app.server.deploy.dir}/${ext.ear.file}/${war.file}/WEB-INF/web.xml">
+						<replace file="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war/WEB-INF/web.xml">
 							<replacetoken><![CDATA[<ejb-link>portal-ejb.jar#com_liferay_documentlibrary_]]></replacetoken>
 							<replacevalue><![CDATA[<ejb-link>documentlibrary-ejb.jar#com_liferay_documentlibrary_]]></replacevalue>
 						</replace>
@@ -388,7 +388,7 @@
 						<antcall target="compile-jboss-jetty" />
 
 						<copy todir="${app.server.server.dir}/work">
-							<fileset dir="${classes.dir}/${app.server.type}">
+							<fileset dir="classes/${app.server.type}">
 								<exclude name="**/*.jspc_error" />
 								<exclude name="**/*.java" />
 							</fileset>
@@ -400,7 +400,7 @@
 							<antcall target="compile-jboss-tomcat" />
 
 							<copy todir="${app.server.server.dir}/work/jboss.web/localhost/_">
-								<fileset dir="${classes.dir}/${app.server.type}">
+								<fileset dir="classes/${app.server.type}">
 									<exclude name="**/*.jspc_error" />
 									<exclude name="**/*.java" />
 								</fileset>
@@ -413,7 +413,7 @@
 							<antcall target="compile-jetty" />
 
 							<copy todir="${app.server.dir}/work/Jetty__9000__">
-								<fileset dir="${classes.dir}/${app.server.type}">
+								<fileset dir="classes/${app.server.type}">
 									<exclude name="**/*.jspc_error" />
 									<exclude name="**/*.java" />
 								</fileset>
@@ -426,7 +426,7 @@
 							<antcall target="compile-jonas-jetty" />
 
 							<copy todir="${app.server.dir}/work">
-								<fileset dir="${classes.dir}/${app.server.type}">
+								<fileset dir="classes/${app.server.type}">
 									<exclude name="**/*.jspc_error" />
 									<exclude name="**/*.java" />
 								</fileset>
@@ -439,7 +439,7 @@
 							<antcall target="compile-jonas-tomcat" />
 
 							<copy todir="${app.server.dir}/work/jonas/localhost/_">
-								<fileset dir="${classes.dir}/${app.server.type}">
+								<fileset dir="classes/${app.server.type}">
 									<exclude name="**/*.jspc_error" />
 									<exclude name="**/*.java" />
 								</fileset>
@@ -452,7 +452,7 @@
 							<antcall target="compile-resin" />
 
 							<copy todir="${app.server.deploy.dir}/WEB-INF/work">
-								<fileset dir="${classes.dir}/${app.server.type}">
+								<fileset dir="classes/${app.server.type}">
 									<exclude name="**/*.jspc_error" />
 									<exclude name="**/*.java" />
 								</fileset>
@@ -465,7 +465,7 @@
 							<antcall target="compile-tomcat" />
 
 							<copy todir="${app.server.dir}/work/Catalina/localhost/_">
-								<fileset dir="${classes.dir}/${app.server.type}">
+								<fileset dir="classes/${app.server.type}">
 									<exclude name="**/*.jspc_error" />
 									<exclude name="**/*.java" />
 								</fileset>

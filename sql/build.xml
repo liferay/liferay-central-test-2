@@ -6,6 +6,7 @@
 	<property file="sql.${user.name}.properties" />
 	<property file="sql.${env.COMPUTERNAME}.properties" />
 	<property file="sql.properties" />
+
 	<mkdir dir="log" />
 
 	<target name="build-db">
@@ -27,6 +28,7 @@
 	<target name="load-db">
 		<delete file="test.properties" failonerror="false" />
 		<delete file="test.script" failonerror="false" />
+
 		<java
 			classname="com.liferay.portal.tools.DBLoader"
 			classpathref="project.classpath"
@@ -64,6 +66,7 @@
 
 	<target name="rebuild-firebird">
 		<delete file="lportal.gdb" failonerror="false" />
+
 		<antcall target="rebuild-database">
 			<param name="executable" value="${firebird.executable}" />
 			<param name="arg.line" value="${firebird.arg.line}" />

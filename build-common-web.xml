@@ -4,15 +4,15 @@
 	<import file="build-common.xml" />
 
 	<target name="clean">
-		<delete file="${war.file}" failonerror="false" />
+		<delete file="${war.file}.war" failonerror="false" />
 	</target>
 
 	<target name="war">
 		<war
-			basedir="${web.dir}"
-			destfile="${war.file}"
+			basedir="docroot"
+			destfile="${war.file}.war"
 			excludes="WEB-INF/web.xml"
-			webxml="${web.dir}/WEB-INF/web.xml"
+			webxml="docroot/WEB-INF/web.xml"
 		>
 			<manifest>
 				<attribute name="Class-Path" value="${classpath.manifest}" />
@@ -21,6 +21,19 @@
 	</target>
 
 	<target name="deploy" depends="war">
-		<copy file="${war.file}" todir="${deploy.dir}" />
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+			</or>
+			<then>
+				<property name="war.file.dest" value="${app.server.portal.dir}/${war.file}.war" />
+			</then>
+			<else>
+				<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}" />
+			</else>
+		</if>
+
+		<unwar src="${war.file}.war" dest="${war.file.dest}" />
 	</target>
 </project>

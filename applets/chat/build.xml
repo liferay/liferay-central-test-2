@@ -5,11 +5,11 @@
 
 	<import file="${project.dir}/build-common-java.xml" />
 
-	<property name="deploy.dir" value="${applets.dir}/chat" />
-	<property name="jar.file" value="${ant.project.name}.jar" />
+	<property name="deploy.dir" value="${project.dir}/portal-web/docroot/applets/chat" />
+	<property name="jar.file" value="${ant.project.name}" />
 
 	<target name="deploy" depends="build-common-java.deploy">
-		<copy file="${project.dir}/lib/nfc-client.jar" todir="${deploy.dir}" />
+		<copy file="${project.dir}/lib/development/nfc-client.jar" todir="${deploy.dir}" />
 	</target>
 
 	<target name="run" depends="compile">

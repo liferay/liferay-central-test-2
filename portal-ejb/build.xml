@@ -3,23 +3,22 @@
 <project name="portal-ejb" basedir="." default="compile">
 	<import file="../build-common-ejb.xml" />
 
-	<property name="deploy.dir" value="${app.server.ear}" />
-	<property name="jar.file" value="${ant.project.name}.jar" />
+	<property name="jar.file" value="${ant.project.name}" />
 	<property name="service.file" value="service.xml" />
 
 	<target name="compile" depends="compile-common,build-common-java.compile">
-		<copy todir="${classes.dir}/com/liferay/portal/definitions">
+		<copy todir="classes/com/liferay/portal/definitions">
 			<fileset dir="${project.dir}/definitions" />
 		</copy>
 
-		<copy todir="${classes.dir}">
-			<fileset dir="${source.dir}">
+		<copy todir="classes">
+			<fileset dir="src">
 				<include name="**/dependencies/**" />
 			</fileset>
 		</copy>
 
-		<copy todir="${classes.dir}">
-			<fileset dir="${source.dir}">
+		<copy todir="classes">
+			<fileset dir="src">
 				<include name="**/service.xml" />
 			</fileset>
 		</copy>
@@ -30,19 +29,19 @@
 	</target>
 
 	<target name="compile-common">
-		<mkdir dir="${classes.dir}" />
+		<mkdir dir="classes" />
 
 		<javac
 			classpathref="project.classpath"
 			compiler="${javac.compiler}"
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
-			destdir="${classes.dir}"
+			destdir="classes"
 			includes="**/portal/PortalException.java,**/portal/SystemException.java,**/portal/jcr/JCRConstants.java,**/portal/jcr/JCRFactory.java,**/portal/jcr/JCRFactoryUtil.java,**/portal/lucene/Lucene*.java,**/portal/service/persistence/BasePersistence.java,**/portal/spring/util/SpringUtil.java,**/portal/util/PropsUtil.java"
 			fork="${javac.fork}"
 			memoryMaximumSize="${javac.memoryMaximumSize}"
 			nowarn="${javac.nowarn}"
-			srcdir="${source.dir}"
+			srcdir="src"
 		/>
 	</target>
 
@@ -52,31 +51,31 @@
 			compiler="${javac.compiler}"
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
-			destdir="${classes.dir}"
+			destdir="classes"
 			includes="**/portal/tools/*.java"
 			fork="${javac.fork}"
 			memoryMaximumSize="${javac.memoryMaximumSize}"
 			nowarn="${javac.nowarn}"
-			srcdir="${source.dir}"
+			srcdir="src"
 		/>
 	</target>
 
 	<target name="jar" depends="compile">
-		<manifest file="${classes.dir}/META-INF/MANIFEST.MF.JOnAS">
+		<manifest file="classes/META-INF/MANIFEST.MF.JOnAS">
 			<attribute name="Class-Path" value="${classpath.manifest.jonas}" />
 		</manifest>
 
 		<jar
-			basedir="${classes.dir}"
+			basedir="classes"
 			excludes="portal-ext.properties,system-ext.properties"
-			jarfile="${jar.file}"
+			jarfile="${jar.file}.jar"
 		>
 			<manifest>
 				<attribute name="Class-Path" value="counter-ejb.jar documentlibrary-ejb.jar lock-ejb.jar mail-ejb.jar ${classpath.manifest}" />
 			</manifest>
 		</jar>
 
-		<copy file="${jar.file}" todir="${project.dir}/portal-ear/modules" />
+		<copy file="${jar.file}.jar" todir="${project.dir}/portal-ear/modules" />
 	</target>
 
 	<target name="build-color-scheme">
@@ -261,6 +260,7 @@
 		</java>
 
 		<delete file="ServiceBuilder.temp" />
+
 		<antcall target="build-ejbxml" />
 	</target>
 
@@ -268,12 +268,6 @@
 		<antcall target="build-service">
 			<param name="service.file" value="src/com/liferay/portal/service.xml" />
 		</antcall>
-	</target>
-
-	<target name="build-service-portlet-addressbook">
-		<!--<antcall target="build-service">
-			<param name="service.file" value="src/com/liferay/portlet/addressbook/service.xml" />
-		</antcall>-->
 	</target>
 
 	<target name="build-service-portlet-blogs">
@@ -350,7 +344,6 @@
 
 	<target name="build-services">
 		<antcall target="build-service-portal" />
-		<antcall target="build-service-portlet-addressbook" />
 		<antcall target="build-service-portlet-blogs" />
 		<antcall target="build-service-portlet-bookmarks" />
 		<antcall target="build-service-portlet-calendar" />
@@ -384,6 +377,7 @@
 			<arg value="${service.file}" />
 			<arg value="../tunnel-web/docroot/WEB-INF/server-config.wsdd" />
 		</java>
+
 		<antcall target="build-webxml" />
 	</target>
 
@@ -391,12 +385,6 @@
 		<antcall target="build-wsdd">
 			<param name="service.file" value="src/com/liferay/portal/service.xml" />
 		</antcall>
-	</target>
-
-	<target name="build-wsdd-portlet-addressbook">
-		<!--<antcall target="build-wsdd">
-			<param name="service.file" value="src/com/liferay/portlet/addressbook/service.xml" />
-		</antcall>-->
 	</target>
 
 	<target name="build-wsdd-portlet-blogs">
@@ -473,7 +461,6 @@
 
 	<target name="build-wsdds">
 		<antcall target="build-wsdd-portal" />
-		<antcall target="build-wsdd-portlet-addressbook" />
 		<antcall target="build-wsdd-portlet-blogs" />
 		<antcall target="build-wsdd-portlet-bookmarks" />
 		<antcall target="build-wsdd-portlet-calendar" />
@@ -494,7 +481,9 @@
 			fork="true"
 			newenvironment="true"
 		/>
+
 		<delete file="EJBBuilder.temp" />
+
 		<antcall target="build-releaseinfo" />
 	</target>
 

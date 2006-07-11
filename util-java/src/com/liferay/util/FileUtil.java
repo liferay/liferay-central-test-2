@@ -249,6 +249,10 @@ public class FileUtil {
 	}
 
 	public static String[] listFiles(String fileName) throws IOException {
+		if (Validator.isNull(fileName)) {
+			return new String[0];
+		}
+
 		return listFiles(new File(fileName));
 	}
 
@@ -257,7 +261,7 @@ public class FileUtil {
 
 		File[] fileArray = file.listFiles();
 
-		for (int i = 0; i < fileArray.length; i++) {
+		for (int i = 0; (fileArray != null) && (i < fileArray.length); i++) {
 			if (fileArray[i].isFile()) {
 				files.add(fileArray[i].getName());
 			}

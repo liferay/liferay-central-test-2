@@ -3,45 +3,41 @@
 <project name="laszlo-web" basedir="." default="war">
 	<import file="../build-common-web.xml" />
 
-	<property name="deploy.dir" value="${app.server.ear}" />
 	<property name="lps.file" value="lps-3.3.1.war" />
-	<property name="war.file" value="${ant.project.name}.war" />
+	<property name="war.file" value="${ant.project.name}" />
 
 	<target name="clean" depends="build-common-web.clean">
-		<delete dir="${tmp.dir}" />
+		<delete dir="tmp" />
 	</target>
 
 	<target name="merge">
 		<if>
 			<not>
-				<uptodate srcfile="${lps.file}" targetfile="${tmp.dir}" />
+				<uptodate srcfile="${lps.file}" targetfile="tmp" />
 			</not>
 			<then>
-				<delete dir="${tmp.dir}" />
-				<mkdir dir="${tmp.dir}" />
+				<delete dir="tmp" />
+				<mkdir dir="tmp" />
 
-				<unjar
-					dest="${tmp.dir}"
-					src="${lps.file}"
-				/>
+				<unjar dest="tmp" src="${lps.file}" />
 
-				<copy todir="${tmp.dir}" overwrite="true">
-					<fileset dir="${web.dir}" />
+				<copy todir="tmp" overwrite="true">
+					<fileset dir="docroot" />
 				</copy>
 			</then>
 		</if>
 
-		<copy todir="${tmp.dir}" overwrite="false">
-			<fileset dir="${web.dir}" />
+		<copy todir="tmp" overwrite="false">
+			<fileset dir="docroot" />
 		</copy>
 	</target>
 
 	<target name="war" depends="merge">
 		<war
-			basedir="${tmp.dir}"
-			destfile="${war.file}"
+			basedir="tmp"
+			destfile="${war.file}.war"
 			excludes="WEB-INF/web.xml"
-			webxml="${web.dir}/WEB-INF/web.xml"
+			webxml="docroot/WEB-INF/web.xml"
 		/>
 	</target>
 </project>

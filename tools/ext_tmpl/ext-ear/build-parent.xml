@@ -87,7 +87,7 @@
 				<equals arg1="${app.server.type}" arg2="websphere" />
 			</or>
 			<then>
-				<copy file="modules/${jar.file}" todir="${app.server.lib.dir}" />
+				<copy file="modules/${jar.file}.jar" todir="${app.server.lib.dir}" />
 			</then>
 			<else>
 				<if>
@@ -101,13 +101,13 @@
 							<then>
 								<if>
 									<not>
-										<uptodate srcfile="modules/${jar.file}" targetfile="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}" />
+										<uptodate srcfile="modules/${jar.file}.jar" targetfile="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar" />
 									</not>
 									<then>
-										<delete dir="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}" />
-										<unjar src="modules/${jar.file}" dest="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}" />
+										<delete dir="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar" />
+										<unjar src="modules/${jar.file}.jar" dest="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar" />
 										
-										<copy file="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}/META-INF/MANIFEST.MF.JOnAS" tofile="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}/META-INF/MANIFEST.MF" overwrite="yes" />
+										<copy file="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar/META-INF/MANIFEST.MF.JOnAS" tofile="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar/META-INF/MANIFEST.MF" overwrite="yes" />
 		
 										<tstamp>
 											<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
@@ -134,7 +134,7 @@
 											<arg value="jrmp" />
 											<arg value="-keepgenerated" />
 											<arg value="-invokecmd" />
-											<arg value="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}/META-INF/ejb-jar.xml" />
+											<arg value="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar/META-INF/ejb-jar.xml" />
 										</java>
 		
 										<javac
@@ -151,7 +151,7 @@
 											includes="**/*Home.class,**/*Remote.class"
 										/>
 		
-										<copy todir="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}">
+										<copy todir="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar">
 											<fileset dir="${tstamp.dir}" includes="**/*.class,**/*.xml" />
 										</copy>
 		
@@ -160,18 +160,18 @@
 								</if>
 							</then>
 							<else>
-								<copy file="modules/${jar.file}" todir="${app.server.lib.dir}" />
+								<copy file="modules/${jar.file}.jar" todir="${app.server.lib.dir}" />
 							</else>
 						</if>
 					</then>
 					<else>
 						<if>
 							<not>
-								<uptodate srcfile="modules/${jar.file}" targetfile="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}" />
+								<uptodate srcfile="modules/${jar.file}.jar" targetfile="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar" />
 							</not>
 							<then>
-								<delete dir="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}" />
-								<unjar src="modules/${jar.file}" dest="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}" />
+								<delete dir="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar" />
+								<unjar src="modules/${jar.file}.jar" dest="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar" />
 							</then>
 						</if>
 					</else>
@@ -263,17 +263,17 @@
 
 				<if>
 					<not>
-						<uptodate srcfile="modules/${war.context}-web.war" targetfile="${app.server.deploy.dir}/${ext.ear.file}/${war.file}" />
+						<uptodate srcfile="modules/${war.context}-web.war" targetfile="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war" />
 					</not>
 					<then>
-						<unjar src="modules/${war.context}-web.war" dest="${app.server.deploy.dir}/${ext.ear.file}/${war.file}" />
+						<unjar src="modules/${war.context}-web.war" dest="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war" />
 					</then>
 				</if>
 
 				<if>
 					<equals arg1="${app.server.type}" arg2="jonas-jetty" />
 					<then>
-						<copy file="${app.server.deploy.dir}/${ext.ear.file}/${war.file}/WEB-INF/web-jetty.xml.JOnAS_Jetty" tofile="${app.server.deploy.dir}/${ext.ear.file}/${war.file}/WEB-INF/web-jetty.xml" overwrite="yes" failonerror="false" />
+						<copy file="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war/WEB-INF/web-jetty.xml.JOnAS_Jetty" tofile="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war/WEB-INF/web-jetty.xml" overwrite="yes" failonerror="false" />
 					</then>
 				</if>
 
@@ -283,12 +283,12 @@
 						<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 					</or>
 					<then>
-						<replace file="${app.server.deploy.dir}/${ext.ear.file}/${war.file}/WEB-INF/web.xml">
+						<replace file="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war/WEB-INF/web.xml">
 							<replacetoken><![CDATA[<ejb-link>com_liferay_]]></replacetoken>
 							<replacevalue><![CDATA[<ejb-link>portal-ejb.jar#com_liferay_]]></replacevalue>
 						</replace>
 
-						<replace file="${app.server.deploy.dir}/${ext.ear.file}/${war.file}/WEB-INF/web.xml">
+						<replace file="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war/WEB-INF/web.xml">
 							<replacetoken><![CDATA[<ejb-link>portal-ejb.jar#com_liferay_documentlibrary_]]></replacetoken>
 							<replacevalue><![CDATA[<ejb-link>documentlibrary-ejb.jar#com_liferay_documentlibrary_]]></replacevalue>
 						</replace>
@@ -321,7 +321,7 @@
 				<if>
 					<equals arg1="${war.context}" arg2="tunnel" />
 					<then>
-						<copy file="../ext-web/docroot/WEB-INF/remoting-servlet-ext.xml" todir="${app.server.deploy.dir}/${ext.ear.file}/${war.file}/WEB-INF" />
+						<copy file="../ext-web/docroot/WEB-INF/remoting-servlet-ext.xml" todir="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war/WEB-INF" />
 
 						<java
 							classname="com.liferay.portal.tools.WSDDMerger"
@@ -330,7 +330,7 @@
 							newenvironment="true"
 						>
 							<arg value="../ext-web/docroot/WEB-INF/server-config.wsdd" />
-							<arg value="${app.server.deploy.dir}/${ext.ear.file}/${war.file}/WEB-INF/server-config.wsdd" />
+							<arg value="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war/WEB-INF/server-config.wsdd" />
 						</java>
 					</then>
 				</if>

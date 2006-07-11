@@ -5,8 +5,8 @@
 
 	<import file="${project.dir}/build-common-java.xml" />
 
-	<property name="deploy.dir" value="${applets.dir}" />
-	<property name="jar.file" value="${ant.project.name}.jar" />
+	<property name="deploy.dir" value="${project.dir}/portal-web/docroot/applets" />
+	<property name="jar.file" value="${ant.project.name}" />
 
 	<target name="compile">
 
@@ -14,14 +14,14 @@
 		The editor applet cannot properly compile with Jikes.
 		-->
 
-		<mkdir dir="${classes.dir}" />
+		<mkdir dir="classes" />
 		<javac
 			classpathref="project.classpath"
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
-			destdir="${classes.dir}"
+			destdir="classes"
 			nowarn="${javac.nowarn}"
-			srcdir="${source.dir}"
+			srcdir="src"
 			source="1.3"
 			target="1.3"
 		/>
@@ -29,8 +29,8 @@
 
 	<target name="jar" depends="compile">
 		<jar
-			basedir="${classes.dir}"
-			jarfile="${jar.file}"
+			basedir="classes"
+			jarfile="${jar.file}.jar"
 		/>
 
 		<antcall target="signjar" />
@@ -46,7 +46,7 @@
 		-->
 
 		<signjar
-			jar="${jar.file}"
+			jar="${jar.file}.jar"
 			alias="${signjar.alias}"
 			storepass="${signjar.password}"
 			signedjar="${ant.project.name}-signed.jar"

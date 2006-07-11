@@ -64,7 +64,7 @@ public class Test {
 
 		// Unathenticated url
 
-		String url = "http://localhost:8080/tunnel/axis/" + serviceName;
+		String url = "http://localhost:8080/tunnel-web/axis/" + serviceName;
 
 		// Authenticated url
 
@@ -75,7 +75,7 @@ public class Test {
 			
 			url =
 				"http://" + userId + ":" + password +
-					"@localhost:8080/tunnel/secure/axis/" + serviceName;
+					"@localhost:8080/tunnel-web/secure/axis/" + serviceName;
 		}
 
 		return new URL(url);

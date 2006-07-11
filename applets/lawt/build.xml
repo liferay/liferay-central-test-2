@@ -5,6 +5,6 @@
 
 	<import file="${project.dir}/build-common-java.xml" />
 
-	<property name="deploy.dir" value="${applets.dir}" />
-	<property name="jar.file" value="${ant.project.name}.jar" />
+	<property name="deploy.dir" value="${project.dir}/portal-web/docroot/applets" />
+	<property name="jar.file" value="${ant.project.name}" />
 </project>

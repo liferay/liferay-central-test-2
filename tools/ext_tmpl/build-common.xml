@@ -20,8 +20,8 @@
 	</path>
 	<taskdef classpathref="project.classpath" resource="net/sf/antcontrib/antcontrib.properties" />
 	<taskdef classpathref="project.classpath" resource="axis-tasks.properties" />
-	<property name="java2html.dir" value="${api.dir}/${ant.project.name}" />
-	<property name="javadoc.dir" value="${api.dir}/${ant.project.name}" />
+	<property name="java2html.dir" value="${project.dir}/api/${ant.project.name}" />
+	<property name="javadoc.dir" value="${project.dir}/api/${ant.project.name}" />
 	<propertycopy name="app.server.dir" from="app.server.${app.server.type}.dir" />
 	<propertycopy name="app.server.bin.dir" from="app.server.${app.server.type}.bin.dir" />
 	<propertycopy name="app.server.deploy.dir" from="app.server.${app.server.type}.deploy.dir" />

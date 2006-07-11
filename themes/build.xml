@@ -3,14 +3,12 @@
 <project name="themes" basedir="." default="deploy">
 	<import file="../build-common.xml" />
 
-	<property name="deploy.dir" value="${app.server.ear}" />
-
 	<target name="war">
-		<!--<delete>
+		<delete>
 			<fileset dir="." includes="**/Thumbs.db" />
 		</delete>
 
-		<war
+		<!--<war
 			basedir="sample_pack_01_themes.war"
 			destfile="../sample_pack_01_themes.war"
 			excludes="WEB-INF/web.xml"
@@ -28,10 +26,15 @@
 				<!-- Required Arguments -->
 
 				<jvmarg value="-Ddeployer.base.dir=./" />
-				<jvmarg value="-Ddeployer.dest.dir=${deploy.dir}" />
-				<jvmarg value="-Ddeployer.app.server.type=orion" />
+				<jvmarg value="-Ddeployer.dest.dir=${app.server.deploy.dir}" />
+				<jvmarg value="-Ddeployer.app.server.type=${app.server.type}" />
 				<jvmarg value="-Ddeployer.theme.taglib.dtd=${project.dir}/util-taglib/classes/META-INF/liferay-theme.tld" />
 				<jvmarg value="-Ddeployer.util.taglib.dtd=${project.dir}/util-taglib/classes/META-INF/liferay-util.tld" />
+				<jvmarg value="-Ddeployer.unpack.war=true" />
+
+				<!-- Optional Arguments -->
+
+				<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.lib.dir}" />
 
 				<!-- Dependent Libraries -->
 

@@ -1,26 +1,52 @@
 <?xml version="1.0"?>
 
 <project name="common">
-	<property environment="env" />
 	<property name="project.dir" value=".." />
+
+	<property environment="env" />
 	<property name="env.COMPUTERNAME" value="${env.HOSTNAME}"/>
+
 	<property file="${project.dir}/app.server.${user.name}.properties" />
 	<property file="${project.dir}/app.server.${env.COMPUTERNAME}.properties" />
 	<property file="${project.dir}/app.server.properties" />
+
 	<property file="${project.dir}/build.${user.name}.properties" />
 	<property file="${project.dir}/build.${env.COMPUTERNAME}.properties" />
 	<property file="${project.dir}/build.properties" />
+
 	<property file="${project.dir}/release.${user.name}.properties" />
 	<property file="${project.dir}/release.${env.COMPUTERNAME}.properties" />
 	<property file="${project.dir}/release.properties" />
+
+	<path id="lib.classpath">
+		<fileset dir="${project.dir}/lib/development" includes="*.jar" />
+		<fileset dir="${project.dir}/lib/jdbc" includes="*.jar" />
+		<fileset dir="${project.dir}/lib/global" includes="*.jar" />
+		<fileset dir="${project.dir}/lib/portal" includes="*.jar" />
+	</path>
+
 	<path id="project.classpath">
 		<pathelement path="${classpath}" />
-		<fileset dir="${project.dir}/lib" includes="*.jar" />
+		<path refid="lib.classpath" />
 	</path>
-	<taskdef classpathref="project.classpath" resource="net/sf/antcontrib/antcontrib.properties" />
-	<taskdef classpathref="project.classpath" resource="axis-tasks.properties" />
-	<property name="java2html.dir" value="${api.dir}/${ant.project.name}" />
-	<property name="javadoc.dir" value="${api.dir}/${ant.project.name}" />
+
+	<taskdef classpathref="lib.classpath" resource="net/sf/antcontrib/antcontrib.properties" />
+	<taskdef classpathref="lib.classpath" resource="axis-tasks.properties" />
+
+	<property name="java2html.dir" value="${project.dir}/api/${ant.project.name}" />
+	<property name="javadoc.dir" value="${project.dir}/api/${ant.project.name}" />
+
+	<propertycopy name="app.server.dir" from="app.server.${app.server.type}.dir" />
+	<propertycopy name="app.server.bin.dir" from="app.server.${app.server.type}.bin.dir" />
+	<propertycopy name="app.server.classes.global.dir" from="app.server.${app.server.type}.classes.global.dir" />
+	<propertycopy name="app.server.classes.portal.dir" from="app.server.${app.server.type}.classes.portal.dir" />
+	<propertycopy name="app.server.deploy.dir" from="app.server.${app.server.type}.deploy.dir" />
+	<propertycopy name="app.server.lib.global.dir" from="app.server.${app.server.type}.lib.global.dir" />
+	<propertycopy name="app.server.lib.portal.dir" from="app.server.${app.server.type}.lib.portal.dir" />
+	<propertycopy name="app.server.portal.dir" from="app.server.${app.server.type}.portal.dir" />
+	<propertycopy name="app.server.log.dir" from="app.server.${app.server.type}.log.dir" />
+	<propertycopy name="app.server.temp.dir" from="app.server.${app.server.type}.temp.dir" />
+	<propertycopy name="app.server.work.dir" from="app.server.${app.server.type}.work.dir" />
 
 	<target name="setproxy" if="setproxy.proxy.host">
 		<setproxy proxyhost="${setproxy.proxy.host}" proxyport="${setproxy.proxy.port}" />

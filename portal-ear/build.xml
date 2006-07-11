@@ -110,10 +110,10 @@
 			<arg value="pro-war/WEB-INF/web.xml" />
 		</java>
 
-		<copy file="modules/portal-web-complete.war" tofile="${war.file}" overwrite="yes" />
+		<copy file="modules/portal-web-complete.war" tofile="${war.file}.war" overwrite="yes" />
 		<war
 			basedir="pro-war"
-			destfile="${war.file}"
+			destfile="${war.file}.war"
 			excludes="WEB-INF/web.xml"
 			webxml="pro-war/WEB-INF/web.xml"
 			update="yes"
@@ -206,11 +206,11 @@
 			jarfile="liferay-portal-jaas.jar"
 		>
 			<fileset
-				dir="${project.dir}/portal-ejb/${classes.dir}"
+				dir="${project.dir}/portal-ejb/classes"
 				includes="**/portal/security/jaas/ext/pramati/PortalUserManager.class,**/portal/security/jaas/ext/sun*/PortalRealm.class,**/portal/security/jaas/ext/websphere/PortalUserRegistry.class,**/portal/util/Constants.class"
 			/>
 			<fileset
-				dir="${project.dir}/util-java/${classes.dir}"
+				dir="${project.dir}/util-java/classes"
 				includes="**/util/JNDIUtil.class,**/util/dao/DataAccess.class"
 			/>
 		</jar>

@@ -1,200 +1,198 @@
 <?xml version="1.0"?>
 
 <project name="portal" basedir="." default="compile">
-	<target name="init-app-server">
-		<property environment="env" />
-		<property name="env.COMPUTERNAME" value="${env.HOSTNAME}"/>
-		<property file="app.server.${user.name}.properties" />
-		<property file="app.server.${env.COMPUTERNAME}.properties" />
-  		<property file="app.server.properties" />
-	</target>
+	<property name="project.dir" value="." />
 
-	<target name="init-build">
-		<property environment="env" />
-		<property name="env.COMPUTERNAME" value="${env.HOSTNAME}"/>
-		<property file="build.${user.name}.properties" />
-		<property file="build.${env.COMPUTERNAME}.properties" />
-  		<property file="build.properties" />
-	</target>
-
-	<target name="init-release">
-		<property environment="env" />
-		<property name="env.COMPUTERNAME" value="${env.HOSTNAME}"/>
-  		<property file="release.${user.name}.properties" />
-		<property file="release.${env.COMPUTERNAME}.properties" />
-  		<property file="release.properties" />
-	</target>
+	<import file="build-common.xml" />
 
 	<target name="all" depends="clean,start,deploy" />
 
 	<target name="start">
 		<antcall target="compile" />
-  		<ant dir="sql" target="build-db" />
-		<ant dir="portal-ejb" target="build-newscategories" />
-		<ant dir="portal-ejb" target="build-reverendfun" />
-  		<ant dir="portal-ejb" target="build-color-scheme" />
-  		<ant dir="portal-ejb" target="build-common-images" />
-  		<ant dir="portal-ejb" target="build-website" />
+
+		<ant dir="sql" target="build-db" inheritAll="false" />
+		
+		<ant dir="portal-ejb" target="build-newscategories" inheritAll="false" />
+		<ant dir="portal-ejb" target="build-reverendfun" inheritAll="false" />
+  		<ant dir="portal-ejb" target="build-color-scheme" inheritAll="false" />
+  		<ant dir="portal-ejb" target="build-common-images" inheritAll="false" />
+  		<ant dir="portal-ejb" target="build-website" inheritAll="false" />
+
 		<antcall target="jar" />
 	</target>
 
 	<target name="clean">
-		<ant dir="classes" target="clean" />
+		<ant dir="classes" target="clean" inheritAll="false" />
 
-		<ant dir="portal-shared" target="clean" />
+		<ant dir="portal-shared" target="clean" inheritAll="false" />
 
-		<ant dir="util-java" target="clean" />
-		<ant dir="util-jsf" target="clean" />
-		<ant dir="util-wsrp" target="clean" />
+		<ant dir="util-java" target="clean" inheritAll="false" />
+		<ant dir="util-jsf" target="clean" inheritAll="false" />
+		<ant dir="util-taglib" target="clean" inheritAll="false" />
+		<ant dir="util-wsrp" target="clean" inheritAll="false" />
 
-		<ant dir="applets" target="clean" />
-		<ant dir="counter-ejb" target="clean" />
+		<ant dir="applets" target="clean" inheritAll="false" />
+		<ant dir="filters" target="clean" inheritAll="false" />
 
-		<ant dir="documentlibrary-ejb" target="clean" />
-		<ant dir="lock-ejb" target="clean" />
-		<ant dir="mail-ejb" target="clean" />
-		<ant dir="portal-ejb" target="clean" />
-		<ant dir="filters" target="clean" />
-		<ant dir="util-taglib" target="clean" />
+		<ant dir="counter-ejb" target="clean" inheritAll="false" />
+		<ant dir="documentlibrary-ejb" target="clean" inheritAll="false" />
+		<ant dir="lock-ejb" target="clean" inheritAll="false" />
+		<ant dir="mail-ejb" target="clean" inheritAll="false" />
+		<ant dir="portal-ejb" target="clean" inheritAll="false" />
 
-		<ant dir="cms-web" target="clean" />
-		<ant dir="laszlo-web" target="clean" />
-		<ant dir="portal-web" target="clean" />
-		<ant dir="tunnel-web" target="clean" />
-		<ant dir="web-sites" target="clean" />
+		<ant dir="cms-web" target="clean" inheritAll="false" />
+		<ant dir="laszlo-web" target="clean" inheritAll="false" />
+		<ant dir="portal-web" target="clean" inheritAll="false" />
+		<ant dir="tunnel-web" target="clean" inheritAll="false" />
+		<ant dir="web-sites" target="clean" inheritAll="false" />
 
-		<ant dir="portlets" target="clean" />
-
-		<ant dir="portal-ear" target="clean" />
+		<ant dir="portlets" target="clean" inheritAll="false" />
 
 		<delete>
 			<fileset dir="." includes="*.ear,*.war,*.zip" />
 		</delete>
+
+		<if>
+			<equals arg1="${app.server.type}" arg2="orion" />
+			<then>
+				<delete>
+					<fileset
+						dir="${app.server.dir}"
+						includes="**/state.ser,**/transaction.state"
+					/>
+				</delete>
+			</then>
+		</if>
+
+		<delete>
+			<fileset dir="${app.server.bin.dir}" includes="test.*" />
+		</delete>
+
+		<delete failonerror="false">
+			<fileset dir="${app.server.classes.portal.dir}">
+				<include name="*-ext.properties" />
+			</fileset>
+		</delete>
+
+		<delete includeemptydirs="true">
+			<fileset
+				dir="${app.server.deploy.dir}"
+				includes="cms-web*/**,laszlo-web*/**,sample*/**,tunnel-web*/**"
+			/>
+		</delete>
+
+		<delete dir="${app.server.log.dir}" />
+		<mkdir dir="${app.server.log.dir}" />
+
+		<delete dir="${app.server.portal.dir}" />
+
+		<delete dir="${app.server.temp.dir}" />
+		<mkdir dir="${app.server.temp.dir}" />
+
+		<delete dir="${app.server.work.dir}" />
+		<mkdir dir="${app.server.work.dir}" />
 	</target>
 
 	<target name="compile">
-		<ant dir="portal-shared" target="compile" />
+		<ant dir="portal-shared" target="compile" inheritAll="false" />
 
-		<ant dir="util-java" target="compile" />
-		<ant dir="util-jsf" target="compile" />
-		<ant dir="util-wsrp" target="compile" />
-		<ant dir="portal-ejb" target="compile-common" />
+		<ant dir="util-java" target="compile" inheritAll="false" />
+		<ant dir="util-jsf" target="compile" inheritAll="false" />
+		<ant dir="util-wsrp" target="compile" inheritAll="false" />
 
-		<ant dir="applets" target="compile" />
-		<ant dir="counter-ejb" target="compile" />
+		<ant dir="portal-ejb" target="compile-common" inheritAll="false" />
 
-		<ant dir="documentlibrary-ejb" target="compile" />
-		<ant dir="lock-ejb" target="compile" />
-		<ant dir="mail-ejb" target="compile" />
-		<ant dir="portal-ejb" target="compile" />
-		<ant dir="filters" target="compile" />
-		<ant dir="util-taglib" target="deploy" />
+		<ant dir="applets" target="compile" inheritAll="false" />
+		<ant dir="filters" target="compile" inheritAll="false" />
 
-		<ant dir="portlets" target="compile" />
+		<ant dir="counter-ejb" target="compile" inheritAll="false" />
+		<ant dir="documentlibrary-ejb" target="compile" inheritAll="false" />
+		<ant dir="lock-ejb" target="compile" inheritAll="false" />
+		<ant dir="mail-ejb" target="compile" inheritAll="false" />
+		<ant dir="portal-ejb" target="compile" inheritAll="false" />
+
+		<ant dir="portlets" target="compile" inheritAll="false" />
 	</target>
 
 	<target name="jar">
-		<ant dir="portal-shared" target="jar" />
+		<ant dir="portal-shared" target="jar" inheritAll="false" />
 
-		<ant dir="util-java" target="jar" />
-		<ant dir="util-jsf" target="jar" />
-		<ant dir="util-wsrp" target="jar" />
+		<ant dir="util-java" target="jar" inheritAll="false" />
+		<ant dir="util-jsf" target="jar" inheritAll="false" />
+		<ant dir="util-taglib" target="deploy" inheritAll="false" />
+		<ant dir="util-wsrp" target="jar" inheritAll="false" />
 
-		<ant dir="applets" target="deploy" />
-		<ant dir="counter-ejb" target="jar" />
+		<ant dir="applets" target="deploy" inheritAll="false" />
+		<ant dir="filters" target="jar" inheritAll="false" />
 
-		<ant dir="portal-ejb" target="compile" />
-		<ant dir="documentlibrary-ejb" target="jar" />
-		<ant dir="lock-ejb" target="jar" />
-		<ant dir="mail-ejb" target="jar" />
-		<ant dir="filters" target="jar" />
-		<ant dir="util-taglib" target="deploy" />
-		<ant dir="portal-ejb" target="jar" />
+		<ant dir="counter-ejb" target="jar" inheritAll="false" />
+		<ant dir="documentlibrary-ejb" target="jar" inheritAll="false" />
+		<ant dir="lock-ejb" target="jar" inheritAll="false" />
+		<ant dir="mail-ejb" target="jar" inheritAll="false" />
+		<ant dir="portal-ejb" target="jar" inheritAll="false" />
 
-		<ant dir="cms-web" target="war" />
-		<ant dir="laszlo-web" target="war" />
-		<ant dir="portal-web" target="war" />
-		<ant dir="tunnel-web" target="war" />
-		<ant dir="web-sites" target="war" />
+		<ant dir="cms-web" target="war" inheritAll="false" />
+		<ant dir="laszlo-web" target="war" inheritAll="false" />
+		<ant dir="portal-web" target="war" inheritAll="false" />
+		<ant dir="tunnel-web" target="war" inheritAll="false" />
+		<ant dir="web-sites" target="war" inheritAll="false" />
 
-		<ant dir="portal-ear" target="ear" />
+		<ant dir="portlets" target="war" inheritAll="false" />
 	</target>
 
 	<target name="java2html">
 		<delete dir="api" />
 
-		<ant dir="portal-shared" target="java2html" />
+		<ant dir="portal-shared" target="java2html" inheritAll="false" />
 
-		<ant dir="util-java" target="java2html" />
-		<ant dir="util-jsf" target="java2html" />
-		<ant dir="util-wsrp" target="java2html" />
+		<ant dir="util-java" target="java2html" inheritAll="false" />
+		<ant dir="util-jsf" target="java2html" inheritAll="false" />
+		<ant dir="util-taglib" target="java2html" inheritAll="false" />
+		<ant dir="util-wsrp" target="java2html" inheritAll="false" />
 
-		<ant dir="applets" target="java2html" />
-		<ant dir="counter-ejb" target="java2html" />
+		<ant dir="applets" target="java2html" inheritAll="false" />
+		<ant dir="filters" target="java2html" inheritAll="false" />
 
-		<ant dir="documentlibrary-ejb" target="java2html" />
-		<ant dir="lock-ejb" target="java2html" />
-		<ant dir="mail-ejb" target="java2html" />
-		<ant dir="portal-ejb" target="java2html" />
-		<ant dir="filters" target="java2html" />
-		<ant dir="util-taglib" target="java2html" />
+		<ant dir="counter-ejb" target="java2html" inheritAll="false" />
+		<ant dir="documentlibrary-ejb" target="java2html" inheritAll="false" />
+		<ant dir="lock-ejb" target="java2html" inheritAll="false" />
+		<ant dir="mail-ejb" target="java2html" inheritAll="false" />
+		<ant dir="portal-ejb" target="java2html" inheritAll="false" />
 	</target>
 
 	<target name="javadoc">
-		<ant dir="portal-shared" target="javadoc" />
+		<ant dir="portal-shared" target="javadoc" inheritAll="false" />
 
-		<ant dir="util-java" target="javadoc" />
-		<ant dir="util-jsf" target="javadoc" />
-		<ant dir="util-wsrp" target="javadoc" />
+		<ant dir="util-java" target="javadoc" inheritAll="false" />
+		<ant dir="util-jsf" target="javadoc" inheritAll="false" />
+		<ant dir="util-taglib" target="javadoc" inheritAll="false" />
+		<ant dir="util-wsrp" target="javadoc" inheritAll="false" />
 
-		<ant dir="applets" target="javadoc" />
-		<ant dir="counter-ejb" target="javadoc" />
+		<ant dir="applets" target="javadoc" inheritAll="false" />
+		<ant dir="filters" target="javadoc" inheritAll="false" />
 
-		<ant dir="documentlibrary-ejb" target="javadoc" />
-		<ant dir="lock-ejb" target="javadoc" />
-		<ant dir="mail-ejb" target="javadoc" />
-		<ant dir="portal-ejb" target="javadoc" />
-		<ant dir="filters" target="javadoc" />
-		<ant dir="util-taglib" target="javadoc" />
+		<ant dir="counter-ejb" target="javadoc" inheritAll="false" />
+		<ant dir="documentlibrary-ejb" target="javadoc" inheritAll="false" />
+		<ant dir="lock-ejb" target="javadoc" inheritAll="false" />
+		<ant dir="mail-ejb" target="javadoc" inheritAll="false" />
+		<ant dir="portal-ejb" target="javadoc" inheritAll="false" />
 	</target>
 
-	<target name="deploy" depends="init-app-server,init-build">
-		<delete dir="${app.server.temp}" />
-		<mkdir dir="${app.server.temp}" />
-
-		<delete dir="${app.server.ear}" />
-		<mkdir dir="${app.server.ear}" />
-
-		<copy todir="${app.server.lib}">
-			<fileset
-				dir="lib"
-				includes="${libraries.current}"
-			/>
-		</copy>
-		<delete>
-			<fileset
-				dir="${app.server.lib}"
-				includes="${libraries.old}"
-			/>
-		</delete>
-
-		<copy file="${app.server}/xerces.jar" todir="${app.server.lib}" failonerror="false" />
-		<copy file="${env.ORION_HOME}/xerces.jar" todir="${app.server.lib}" failonerror="false" />
-
+	<target name="deploy">
 		<ant dir="portal-shared" target="deploy" inheritAll="false" />
 
 		<ant dir="util-java" target="deploy" inheritAll="false" />
+		<ant dir="util-taglib" target="deploy" inheritAll="false" />
 		<ant dir="util-wsrp" target="deploy" inheritAll="false" />
 
 		<ant dir="applets" target="deploy" inheritAll="false" />
-		<ant dir="counter-ejb" target="deploy" inheritAll="false" />
+		<ant dir="filters" target="deploy" inheritAll="false" />
 
+		<ant dir="counter-ejb" target="deploy" inheritAll="false" />
 		<ant dir="documentlibrary-ejb" target="deploy" inheritAll="false" />
 		<ant dir="lock-ejb" target="deploy" inheritAll="false" />
 		<ant dir="mail-ejb" target="deploy" inheritAll="false" />
 		<ant dir="portal-ejb" target="deploy" inheritAll="false" />
-		<ant dir="filters" target="deploy" inheritAll="false" />
-		<ant dir="util-taglib" target="deploy" inheritAll="false" />
 
 		<ant dir="cms-web" target="deploy" inheritAll="false" />
 		<ant dir="laszlo-web" target="deploy" inheritAll="false" />
@@ -205,21 +203,41 @@
 		<ant dir="layouttpl" target="deploy" inheritAll="false" />
 		<ant dir="portlets" target="deploy" inheritAll="false" />
 		<ant dir="themes" target="deploy" inheritAll="false" />
+
+		<copy todir="${app.server.bin.dir}">
+			<fileset dir="sql">
+				<include name="test.*" />
+			</fileset>
+		</copy>
+
+		<copy todir="${app.server.classes.portal.dir}">
+			<fileset dir="portal-ejb/classes">
+				<include name="*-ext.properties" />
+			</fileset>
+		</copy>
+
+		<copy todir="${app.server.lib.global.dir}">
+			<fileset dir="lib/global" />
+		</copy>
+
+		<copy todir="${app.server.lib.portal.dir}">
+			<fileset dir="lib/portal" />
+		</copy>
+
+		<if>
+			<equals arg1="${app.server.type}" arg2="tomcat" />
+			<then>
+				<copy todir="${app.server.lib.portal.dir}">
+					<fileset
+						dir="lib/development"
+						includes="activation.jar,jms.jar,jta.jar,mail.jar"
+					/>
+				</copy>
+			</then>
+		</if>
 	</target>
 
-	<target name="deploy-mail" depends="init-app-server">
-		<antcall target="deploy" />
-
-		<move file="${app.server.ear}/portal-ejb.jar" todir="${app.server.lib}" />
-	</target>
-
-	<target name="deploy-web" depends="init-app-server">
-		<antcall target="deploy" />
-
-		<move file="${app.server.ear}/mail-ejb.jar" todir="${app.server.lib}" />
-	</target>
-
-	<target name="reset-orion" depends="init-app-server">
+	<!--<target name="reset-orion" depends="init-app-server">
 		<delete>
 			<fileset dir="${app.server}" includes="**/state.ser,**/transaction.state" />
 		</delete>
@@ -558,22 +576,6 @@
 	</target>
 
 	<target name="release" depends="init-release">
-		<!--<cvs
-			cvsRoot=":ext:bwchan@cvs.sourceforge.net:/cvsroot/lportal"
-			cvsRsh="ssh"
-			command="update -CdP"
-			package="portal"
-			dest="${lp.source.dir}"
-		/>
-
-		<cvs
-			cvsRoot=":ext:bwchan@cvs.sourceforge.net:/cvsroot/lportal"
-			cvsRsh="ssh"
-			command="tag -c ${lp.cvs.tag}"
-			package="portal"
-			dest="${lp.source.dir}"
-		/>-->
-
 		<delete>
 			<fileset dir="${lp.source.dir}" defaultexcludes="no">
 				<include name="**/.#*" />
@@ -604,15 +606,6 @@
 		<ant dir="layouttpl" target="war" />
 		<ant dir="portlets" target="war" />
 		<ant dir="themes" target="war" />
-
-		<!--<ftp server="upload.sourceforge.net"
-			userid="anonymous"
-			password="anonymous@anonymous.com"
-			remotedir="/incoming"
-			verbose="yes"
-		>
-			<fileset dir="." includes="*${lp.version.file.name}*.*,sample*.war" />
-		</ftp>-->
 	</target>
 
 	<target name="test-release" depends="init-release">
@@ -626,5 +619,5 @@
 		<antcall target="build-ext-jonas-tomcat" />
 		<antcall target="build-ext-resin" />
 		<antcall target="build-ext-tomcat" />
-	</target>
+	</target>-->
 </project>

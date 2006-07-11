@@ -3,8 +3,6 @@
 <project name="web-sites" basedir="." default="war">
 	<import file="../build-common.xml" />
 
-	<property name="deploy.dir" value="${app.server.ear}" />
-
 	<target name="clean">
 		<delete>
 			<fileset dir="." includes="*.war" />
@@ -21,8 +19,23 @@
 	</target>
 
 	<target name="deploy" depends="war">
-		<copy todir="${deploy.dir}">
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+			</or>
+			<then>
+				<property name="war.file.dest" value="${app.server.portal.dir}/portal-web.war" />
+			</then>
+			<else>
+				<property name="war.file.dest" value="${app.server.portal.dir}" />
+			</else>
+		</if>
+
+		<unwar src="liferay.com-web.war" dest="${war.file.dest}" />
+
+		<!--<copy todir="${deploy.dir}">
 			<fileset dir="." includes="*.war" />
-		</copy>
+		</copy>-->
 	</target>
 </project>

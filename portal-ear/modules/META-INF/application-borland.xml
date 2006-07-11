@@ -29,7 +29,7 @@
 	</module>
 	<module>
 		<web>
-			<web-uri>portal-web-complete.war</web-uri>
+			<web-uri>portal-web.war</web-uri>
 		</web>
 	</module>
 	<module>

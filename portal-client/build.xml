@@ -3,16 +3,15 @@
 <project name="portal-client" basedir="." default="compile">
 	<import file="../build-common-java.xml" />
 
-	<property name="deploy.dir" value="${app.server.lib}" />
-	<property name="jar.file" value="${ant.project.name}.jar" />
-	<property name="client.url" value="http://localhost:8080/tunnel/axis" />
+	<property name="jar.file" value="${ant.project.name}" />
+	<property name="client.url" value="http://localhost:8080/tunnel-web/axis" />
 
 	<target name="jar" depends="compile">
 		<jar
-			jarfile="${jar.file}"
+			jarfile="${jar.file}.jar"
 		>
-			<fileset dir="${classes.dir}" />
-			<fileset dir="${source.dir}" />
+			<fileset dir="classes" />
+			<fileset dir="src" />
 		</jar>
 	</target>
 
@@ -20,12 +19,12 @@
 		<echo message="Make sure the server is listening on ${client.url}." />
 		<echo message="" />
 
-		<delete dir="${source.dir}" />
-		<mkdir dir="${source.dir}" />
+		<delete dir="src" />
+		<mkdir dir="src" />
 
 		<!--
 		<axis-wsdl2java
-			output="${source.dir}"
+			output="src"
 			url="${axis.url}/Portal_LayoutService?wsdl"
 		/>
 		-->
@@ -37,7 +36,7 @@
 			newenvironment="true"
 		>
 			<arg value="${project.dir}/tunnel-web/docroot/WEB-INF/server-config.wsdd" />
-			<arg value="${source.dir}" />
+			<arg value="src" />
 			<arg value="${client.url}" />
 		</java>
 

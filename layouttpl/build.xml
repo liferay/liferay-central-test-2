@@ -3,8 +3,6 @@
 <project name="layouttpl" basedir="." default="deploy">
 	<import file="../build-common.xml" />
 
-	<property name="deploy.dir" value="${app.server.ear}" />
-
 	<target name="war">
 		<delete>
 			<fileset dir="." includes="**/Thumbs.db" />
@@ -28,12 +26,9 @@
 				<!-- Required Arguments -->
 
 				<jvmarg value="-Ddeployer.base.dir=./" />
-				<jvmarg value="-Ddeployer.dest.dir=${deploy.dir}" />
-				<jvmarg value="-Ddeployer.app.server.type=orion" />
-
-				<!-- Dependent Libraries -->
-
-				<arg value="${project.dir}/util-java/util-java.jar" />
+				<jvmarg value="-Ddeployer.dest.dir=${app.server.deploy.dir}" />
+				<jvmarg value="-Ddeployer.app.server.type=${app.server.type}" />
+				<jvmarg value="-Ddeployer.unpack.war=true" />
 		</java>
 	</target>
 </project>

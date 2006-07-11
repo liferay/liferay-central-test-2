@@ -2,7 +2,7 @@ ActiveMQ 3.2
 Ant 1.6.5
 Ant Contrib 0.6
 ANTLR 2.7.6 RC1
-Axis 1.3 (removed log4j.properties)
+Axis 1.4 (removed log4j.properties)
 Burlap 2.1.12
 c3p0 0.9.0.4
 Commons Beanutils 1.7.0
@@ -37,7 +37,7 @@ Jackrabbit 1.0.1
 JAIMBot 1.4
 Jalopy 1.0b11
 Jaxen 1.1b4
-JavaMail 1.3.3
+JavaMail 1.4
 Jazzy 0.5
 JCommon 1.0.0
 JCR 1.0

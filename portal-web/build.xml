@@ -3,15 +3,22 @@
 <project name="portal-web" basedir="." default="war">
 	<import file="../build-common-web.xml" />
 
-	<property name="deploy.dir" value="${app.server.ear}" />
-	<property name="war.file" value="${ant.project.name}.war" />
+	<if>
+		<equals arg1="${app.server.type}" arg2="tomcat" />
+		<then>
+			<property name="war.file" value="ROOT" />
+		</then>
+		<else>
+			<property name="war.file" value="portal-web" />
+		</else>
+	</if>
 
 	<target name="clean" depends="build-common-web.clean">
-		<delete dir="${web.dir}/html/skin/color" />
-		<delete dir="${web.dir}/html/themes/classic/color_schemes" />
+		<delete dir="docroot/html/skin/color" />
+		<delete dir="docroot/html/themes/classic/color_schemes" />
 
 		<delete>
-			<fileset dir="${web.dir}" includes="**/Thumbs.db" />
+			<fileset dir="docroot" includes="**/Thumbs.db" />
 		</delete>
 
 		<antcall target="clean-common-images">
@@ -30,7 +37,7 @@
 	<target name="clean-common-images">
 		<delete includeemptydirs="true" quiet="true" failonerror="false">
 			<fileset
-				dir="${web.dir}/html/themes/${theme.name}/images"
+				dir="docroot/html/themes/${theme.name}/images"
 				excludes="**/thumbnail.gif,**/custom/**,**/flash/**"
 			/>
 		</delete>
@@ -63,9 +70,9 @@
 	</target>
 
 	<target name="build-common-images-theme">
-		<copy todir="${web.dir}/html/themes/${theme.name}/images">
+		<copy todir="docroot/html/themes/${theme.name}/images">
 			<fileset
-				dir="${web.dir}/html/themes/classic/images"
+				dir="docroot/html/themes/classic/images"
 				excludes="**/thumbnail.gif,**/custom/**,**/flash/**"
 			/>
 		</copy>
@@ -79,7 +86,7 @@
 			newenvironment="false"
 		>
 			<arg value="${javascript.files}" />
-			<arg value="${web.dir}/html/js/everything.js" />
+			<arg value="docroot/html/js/everything.js" />
 			<arg value="true" />
 		</java>
 
@@ -97,6 +104,7 @@
 			<jvmarg value="-Dapp.server.orion.web.xml.jsp.check=${app.server.orion.web.xml.jsp.check}" />
 			<arg line="${asp.portal-ext.properties} ${asp.available.web-apps} ${asp.orion.config}" />
 		</java>
+
 		<antcall target="build-webxml" />
 	</target>
 
@@ -107,18 +115,5 @@
 			fork="true"
 			newenvironment="true"
 		/>
-	</target>
-
-	<target name="war">
-		<copy file="${web.dir}/WEB-INF/orion-web.xml.tmpl" tofile="${web.dir}/WEB-INF/orion-web.xml" overwrite="yes">
-			<filterset>
-				<filter token="app.server.orion.web.xml.development" value="${app.server.orion.web.xml.development}" />
-			</filterset>
-			<filterset>
-				<filter token="app.server.orion.web.xml.jsp.check" value="${app.server.orion.web.xml.jsp.check}" />
-			</filterset>
-		</copy>
-
-		<antcall target="build-common-web.war" />
 	</target>
 </project>
