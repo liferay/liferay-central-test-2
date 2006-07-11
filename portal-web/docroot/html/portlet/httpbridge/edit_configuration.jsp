@@ -34,7 +34,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />src" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" value="<%= src %>">
+		<input class="form-text" name="<portlet:namespace />src" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= src %>">
 	</td>
 </tr>
 </table>

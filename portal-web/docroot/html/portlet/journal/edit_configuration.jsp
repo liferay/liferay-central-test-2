@@ -122,7 +122,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="<portlet:namespace />emailFromName" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= emailFromName %>">
+				<input class="form-text" name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
 			</td>
 		</tr>
 		<tr>
@@ -131,7 +131,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="<portlet:namespace />emailFromAddress" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= emailFromAddress %>">
+				<input class="form-text" name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
 			</td>
 		</tr>
 		</table>
@@ -173,16 +173,16 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("article-approval-denied-email") %>'>
-						<input class="form-text" name="<portlet:namespace />emailArticleApprovalDeniedSubject" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= emailArticleApprovalDeniedSubject %>">
+						<input class="form-text" name="<portlet:namespace />emailArticleApprovalDeniedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailArticleApprovalDeniedSubject %>">
 					</c:when>
 					<c:when test='<%= tabs2.equals("article-approval-granted-email") %>'>
-						<input class="form-text" name="<portlet:namespace />emailArticleApprovalGrantedSubject" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= emailArticleApprovalGrantedSubject %>">
+						<input class="form-text" name="<portlet:namespace />emailArticleApprovalGrantedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailArticleApprovalGrantedSubject %>">
 					</c:when>
 					<c:when test='<%= tabs2.equals("article-approval-requested-email") %>'>
-						<input class="form-text" name="<portlet:namespace />emailArticleApprovalRequestedSubject" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= emailArticleApprovalRequestedSubject %>">
+						<input class="form-text" name="<portlet:namespace />emailArticleApprovalRequestedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailArticleApprovalRequestedSubject %>">
 					</c:when>
 					<c:when test='<%= tabs2.equals("article-review-email") %>'>
-						<input class="form-text" name="<portlet:namespace />emailArticleReviewSubject" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= emailArticleReviewSubject %>">
+						<input class="form-text" name="<portlet:namespace />emailArticleReviewSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailArticleReviewSubject %>">
 					</c:when>
 				</c:choose>
 			</td>

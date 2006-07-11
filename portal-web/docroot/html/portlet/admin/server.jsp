@@ -122,7 +122,7 @@
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />message"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= GetterUtil.getString(ShutdownUtil.getMessage()) %></textarea>
+					<textarea class="form-text" name="<portlet:namespace />message" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;"><%= GetterUtil.getString(ShutdownUtil.getMessage()) %></textarea>
 				</td>
 			</tr>
 			</table>

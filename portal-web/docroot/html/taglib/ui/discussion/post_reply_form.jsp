@@ -40,7 +40,7 @@
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="<%= namespace %>postReplySubject<%= i %>" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text"><br>
+				<input class="form-text" name="<%= namespace %>postReplySubject<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text"><br>
 			</td>
 		</tr>
 		<tr>
@@ -49,7 +49,7 @@
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<%= namespace %>postReplyBody<%= i %>" rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>" wrap="soft"></textarea>
+				<textarea class="form-text" name="<%= namespace %>postReplyBody<%= i %>" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;" wrap="soft"></textarea>
 			</td>
 		</tr>
 		</table>
@@ -74,7 +74,7 @@
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<input class="form-text" name="<%= namespace %>editSubject<%= i %>" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= Html.toInputSafe(message.getSubject()) %>"><br>
+					<input class="form-text" name="<%= namespace %>editSubject<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= Html.toInputSafe(message.getSubject()) %>"><br>
 				</td>
 			</tr>
 			<tr>
@@ -83,7 +83,7 @@
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<%= namespace %>editBody<%= i %>" rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>" wrap="soft"><%= Html.toInputSafe(message.getBody()) %></textarea>
+					<textarea class="form-text" name="<%= namespace %>editBody<%= i %>" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;" wrap="soft"><%= Html.toInputSafe(message.getBody()) %></textarea>
 				</td>
 			</tr>
 			</table>

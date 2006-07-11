@@ -104,7 +104,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="<portlet:namespace />emailFromName" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= emailFromName %>">
+				<input class="form-text" name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
 			</td>
 		</tr>
 		<tr>
@@ -113,7 +113,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="<portlet:namespace />emailFromAddress" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= emailFromAddress %>">
+				<input class="form-text" name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
 			</td>
 		</tr>
 		</table>
@@ -149,10 +149,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("message-added-email") %>'>
-						<input class="form-text" name="<portlet:namespace />emailMessageAddedSubject" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= emailMessageAddedSubject %>">
+						<input class="form-text" name="<portlet:namespace />emailMessageAddedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageAddedSubject %>">
 					</c:when>
 					<c:when test='<%= tabs2.equals("message-updated-email") %>'>
-						<input class="form-text" name="<portlet:namespace />emailMessageUpdatedSubject" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= emailMessageUpdatedSubject %>">
+						<input class="form-text" name="<portlet:namespace />emailMessageUpdatedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageUpdatedSubject %>">
 					</c:when>
 				</c:choose>
 			</td>
@@ -270,7 +270,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br><br>
 
-		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />ranks" rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>" wrap="soft"><%= StringUtil.merge(prefs.getValues("ranks", new String[0]), StringPool.NEW_LINE) %></textarea><br>
+		<textarea class="form-text" name="<portlet:namespace />ranks" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;" wrap="soft"><%= StringUtil.merge(prefs.getValues("ranks", new String[0]), StringPool.NEW_LINE) %></textarea><br>
 	</c:when>
 </c:choose>
 

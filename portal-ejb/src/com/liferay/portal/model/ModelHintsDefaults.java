@@ -30,15 +30,15 @@ package com.liferay.portal.model;
  */
 public class ModelHintsDefaults {
 
-	public static final String TEXT_DISPLAY_HEIGHT = "1";
+	public static final String TEXT_DISPLAY_HEIGHT = "15";
 
-	public static final String TEXT_DISPLAY_WIDTH = "75";
+	public static final String TEXT_DISPLAY_WIDTH = "350";
 
 	public static final String TEXT_MAX_LENGTH = "75";
 
-	public static final String TEXTAREA_DISPLAY_HEIGHT = "7";
+	public static final String TEXTAREA_DISPLAY_HEIGHT = "100";
 
-	public static final String TEXTAREA_DISPLAY_WIDTH = "110";
+	public static final String TEXTAREA_DISPLAY_WIDTH = "500";
 
 	public static final String TEXTAREA_MAX_LENGTH = "4000";
 

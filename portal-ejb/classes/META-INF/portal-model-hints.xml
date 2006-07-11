@@ -5,13 +5,13 @@
 		<hint name="max-length">2000000</hint>
 	</hint-collection>
 	<hint-collection name="TEXTAREA">
-		<hint name="display-height">7</hint>
-		<hint name="display-width">110</hint>
+		<hint name="display-height">105</hint>
+		<hint name="display-width">500</hint>
 		<hint name="max-length">4000</hint>
 	</hint-collection>
 	<model name="com.liferay.portal.model.Account">
 		<default-hints>
-			<hint name="display-width">30</hint>
+			<hint name="display-width">150</hint>
 		</default-hints>
 		<field name="accountId" type="String" />
 		<field name="companyId" type="String" />
@@ -32,7 +32,7 @@
 	</model>
 	<model name="com.liferay.portal.model.Address">
 		<default-hints>
-			<hint name="display-width">30</hint>
+			<hint name="display-width">150</hint>
 		</default-hints>
 		<field name="addressId" type="String" />
 		<field name="companyId" type="String" />
@@ -55,7 +55,7 @@
 	</model>
 	<model name="com.liferay.portal.model.Company">
 		<default-hints>
-			<hint name="display-width">30</hint>
+			<hint name="display-width">150</hint>
 		</default-hints>
 		<field name="companyId" type="String" />
 		<field name="key" type="String">
@@ -67,7 +67,7 @@
 	</model>
 	<model name="com.liferay.portal.model.Contact">
 		<default-hints>
-			<hint name="display-width">30</hint>
+			<hint name="display-width">150</hint>
 		</default-hints>
 		<field name="contactId" type="String" />
 		<field name="companyId" type="String" />
@@ -128,7 +128,7 @@
 		<field name="className" type="String" />
 		<field name="classPK" type="String" />
 		<field name="address" type="String">
-			<hint name="display-width">30</hint>
+			<hint name="display-width">150</hint>
 		</field>
 		<field name="typeId" type="String" />
 		<field name="primary" type="boolean" />
@@ -140,7 +140,7 @@
 		<field name="classPK" type="String" />
 		<field name="parentGroupId" type="String" />
 		<field name="name" type="String">
-			<hint name="display-width">30</hint>
+			<hint name="display-width">150</hint>
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -195,7 +195,7 @@
 		<field name="companyId" type="String" />
 		<field name="parentOrganizationId" type="String" />
 		<field name="name" type="String">
-			<hint name="display-width">30</hint>
+			<hint name="display-width">150</hint>
 		</field>
 		<field name="recursable" type="boolean" />
 		<field name="regionId" type="String" />
@@ -256,10 +256,10 @@
 		<field name="className" type="String" />
 		<field name="classPK" type="String" />
 		<field name="number" type="String">
-			<hint name="display-width">12</hint>
+			<hint name="display-width">60</hint>
 		</field>
 		<field name="extension" type="String">
-			<hint name="display-width">4</hint>
+			<hint name="display-width">20</hint>
 		</field>
 		<field name="typeId" type="String" />
 		<field name="primary" type="boolean" />
@@ -319,7 +319,7 @@
 		<field name="className" type="String" />
 		<field name="classPK" type="String" />
 		<field name="name" type="String">
-			<hint name="display-width">30</hint>
+			<hint name="display-width">150</hint>
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -338,7 +338,7 @@
 	</model>
 	<model name="com.liferay.portal.model.User">
 		<default-hints>
-			<hint name="display-width">30</hint>
+			<hint name="display-width">150</hint>
 		</default-hints>
 		<field name="userId" type="String" />
 		<field name="companyId" type="String" />
@@ -370,7 +370,7 @@
 		<field name="companyId" type="String" />
 		<field name="parentUserGroupId" type="String" />
 		<field name="name" type="String">
-			<hint name="display-width">30</hint>
+			<hint name="display-width">150</hint>
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -846,7 +846,7 @@
 		<field name="useShippingFormula" type="boolean" />
 		<field name="requiresShipping" type="boolean" />
 		<field name="stockQuantity" type="int">
-			<hint name="display-width">4</hint>
+			<hint name="display-width">20</hint>
 		</field>
 		<field name="featured" type="boolean" />
 		<field name="sale" type="boolean" />
@@ -861,22 +861,22 @@
 		<field name="itemFieldId" type="String" />
 		<field name="itemId" type="String" />
 		<field name="name" type="String">
-			<hint name="display-width">20</hint>
+			<hint name="display-width">100</hint>
 		</field>
 		<field name="values" type="String">
 			<hint-collection name="TEXTAREA" />
-			<hint name="display-height">1</hint>
-			<hint name="display-width">20</hint>
+			<hint name="display-height">15</hint>
+			<hint name="display-width">100</hint>
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
-			<hint name="display-height">1</hint>
-			<hint name="display-width">30</hint>
+			<hint name="display-height">15</hint>
+			<hint name="display-width">150</hint>
 		</field>
 	</model>
 	<model name="com.liferay.portlet.shopping.model.ShoppingItemPrice">
 		<default-hints>
-			<hint name="display-width">5</hint>
+			<hint name="display-width">25</hint>
 		</default-hints>
 		<field name="itemPriceId" type="String" />
 		<field name="itemId" type="String" />
@@ -891,7 +891,7 @@
 	</model>
 	<model name="com.liferay.portlet.shopping.model.ShoppingOrder">
 		<default-hints>
-			<hint name="display-width">30</hint>
+			<hint name="display-width">150</hint>
 		</default-hints>
 		<field name="orderId" type="String" />
 		<field name="groupId" type="String" />
@@ -935,7 +935,7 @@
 		<field name="ccExpMonth" type="int" />
 		<field name="ccExpYear" type="int" />
 		<field name="ccVerNumber" type="String">
-			<hint name="display-width">4</hint>
+			<hint name="display-width">20</hint>
 		</field>
 		<field name="comments" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -989,8 +989,8 @@
 		<field name="createDate" type="Date" />
 		<field name="content" type="String">
 			<hint-collection name="BLOB" />
-			<hint name="display-height">25</hint>
-			<hint name="display-width">170</hint>
+			<hint name="display-height">375</hint>
+			<hint name="display-width">850</hint>
 			<hint name="check-tab">true</hint>
 		</field>
 		<field name="format" type="String" />

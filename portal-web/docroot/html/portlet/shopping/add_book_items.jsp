@@ -46,7 +46,7 @@ String categoryId = ParamUtil.get(request, "categoryId", ShoppingCategory.DEFAUL
 
 <br><br>
 
-<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />isbns" rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>" wrap="soft"></textarea>
+<textarea class="form-text" name="<portlet:namespace />isbns" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;" wrap="soft"></textarea>
 
 <br><br>
 

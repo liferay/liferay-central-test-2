@@ -87,7 +87,7 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 
 <br><br>
 
-<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />roles"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= StringUtil.merge(portlet.getRolesArray(), "\n") %></textarea>
+<textarea class="form-text" name="<portlet:namespace />roles" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;"><%= StringUtil.merge(portlet.getRolesArray(), "\n") %></textarea>
 
 <br><br>
 

@@ -40,7 +40,7 @@ if (translation == null) {
 	<br><br>
 </c:if>
 
-<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />text" rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>" wrap="soft"><%= translation.getFromText() %></textarea>
+<textarea class="form-text" name="<portlet:namespace />text" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;" wrap="soft"><%= translation.getFromText() %></textarea>
 
 <br><br>
 

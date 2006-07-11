@@ -86,7 +86,7 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />file" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="file">
+		<input class="form-text" name="<portlet:namespace />file" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
 	</td>
 </tr>
 <tr>

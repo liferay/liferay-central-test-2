@@ -62,7 +62,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input class="form-text" name="<portlet:namespace />url" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= ParamUtil.getString(request, "url", PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_PROVIDER_URL)) %>">
+						<input class="form-text" name="<portlet:namespace />url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= ParamUtil.getString(request, "url", PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_PROVIDER_URL)) %>">
 					</td>
 				</tr>
 				<tr>
@@ -71,7 +71,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input class="form-text" name="<portlet:namespace />principal" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= ParamUtil.getString(request, "principal", PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_SECURITY_PRINCIPAL)) %>">
+						<input class="form-text" name="<portlet:namespace />principal" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= ParamUtil.getString(request, "principal", PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_SECURITY_PRINCIPAL)) %>">
 					</td>
 				</tr>
 				<tr>
@@ -80,7 +80,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input class="form-text" name="<portlet:namespace />credentials" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_SECURITY_CREDENTIALS)) %>">
+						<input class="form-text" name="<portlet:namespace />credentials" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_SECURITY_CREDENTIALS)) %>">
 					</td>
 				</tr>
 				</table>
@@ -91,7 +91,7 @@
 
 				<br><br>
 
-				<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />searchFilter"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= ParamUtil.getString(request, "searchFilter", PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_SEARCH_FILTER)) %></textarea>
+				<textarea class="form-text" name="<portlet:namespace />searchFilter" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;"><%= ParamUtil.getString(request, "searchFilter", PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_SEARCH_FILTER)) %></textarea>
 
 				<br><br>
 
@@ -99,7 +99,7 @@
 
 				<br><br>
 
-				<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />userMappings"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= ParamUtil.getString(request, "userMappings", PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_USER_MAPPINGS)) %></textarea>
+				<textarea class="form-text" name="<portlet:namespace />userMappings" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;"><%= ParamUtil.getString(request, "userMappings", PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_USER_MAPPINGS)) %></textarea>
 
 				<br><br>
 
@@ -175,7 +175,7 @@
 
 		<br><br>
 
-		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />defaultGroupNames"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_GROUP_NAMES) %></textarea>
+		<textarea class="form-text" name="<portlet:namespace />defaultGroupNames" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_GROUP_NAMES) %></textarea>
 
 		<br><br>
 
@@ -183,7 +183,7 @@
 
 		<br><br>
 
-		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />defaultRoleNames"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_ROLE_NAMES) %></textarea>
+		<textarea class="form-text" name="<portlet:namespace />defaultRoleNames" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_ROLE_NAMES) %></textarea>
 
 		<br><br>
 
@@ -194,7 +194,7 @@
 
 		<br><br>
 
-		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />reservedUserIds"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_USER_IDS) %></textarea>
+		<textarea class="form-text" name="<portlet:namespace />reservedUserIds" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_USER_IDS) %></textarea>
 
 		<br><br>
 
@@ -202,7 +202,7 @@
 
 		<br><br>
 
-		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />reservedEmailAddresses"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES) %></textarea>
+		<textarea class="form-text" name="<portlet:namespace />reservedEmailAddresses" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES) %></textarea>
 
 		<br><br>
 
@@ -213,7 +213,7 @@
 
 		<br><br>
 
-		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />mailHostNames"  rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_MAIL_HOST_NAMES) %></textarea>
+		<textarea class="form-text" name="<portlet:namespace />mailHostNames" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_MAIL_HOST_NAMES) %></textarea>
 
 		<br><br>
 
@@ -305,10 +305,10 @@
 					<td>
 						<c:choose>
 							<c:when test='<%= tabs3.equals("user-added-email") %>'>
-								<input class="form-text" name="<portlet:namespace />emailUserAddedSubject" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= emailUserAddedSubject %>">
+								<input class="form-text" name="<portlet:namespace />emailUserAddedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailUserAddedSubject %>">
 							</c:when>
 							<c:when test='<%= tabs3.equals("password-sent-email") %>'>
-								<input class="form-text" name="<portlet:namespace />emailPasswordSentSubject" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= emailPasswordSentSubject %>">
+								<input class="form-text" name="<portlet:namespace />emailPasswordSentSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailPasswordSentSubject %>">
 							</c:when>
 						</c:choose>
 					</td>
@@ -446,7 +446,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input class="form-text" name="<portlet:namespace />emailFromName" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= emailFromName %>">
+						<input class="form-text" name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
 					</td>
 				</tr>
 				<tr>
@@ -455,7 +455,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input class="form-text" name="<portlet:namespace />emailFromAddress" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= emailFromAddress %>">
+						<input class="form-text" name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
 					</td>
 				</tr>
 				</table>

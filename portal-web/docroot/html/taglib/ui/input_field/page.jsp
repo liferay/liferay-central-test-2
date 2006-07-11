@@ -148,9 +148,9 @@ Map hints = ModelHintsUtil.getHints(model, field);
 				value = defaultString;
 			}
 
-			String displayHeight = "1";
-			String displayWidth = "75";
-			String maxLength = "75";
+			String displayHeight = ModelHintsDefaults.TEXT_DISPLAY_HEIGHT;
+			String displayWidth = ModelHintsDefaults.TEXT_DISPLAY_WIDTH;
+			String maxLength = ModelHintsDefaults.TEXT_MAX_LENGTH;
 			boolean upperCase = false;
 			boolean checkTab = false;
 
@@ -164,17 +164,11 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			%>
 
 			<c:choose>
-				<c:when test='<%= displayHeight.equals("1") %>'>
-					<input class="form-text" <%= disabled ? "disabled" : "" %> maxlength="<%= maxLength %>" name="<%= fieldParam %>" size="<%= displayWidth %>"
-
-					<c:if test="<%= upperCase %>">
-						style="text-transform: uppercase;"
-					</c:if>
-
-					type="text" value="<%= value %>">
+				<c:when test='<%= displayHeight.equals(ModelHintsDefaults.TEXT_DISPLAY_HEIGHT) %>'>
+					<input class="form-text" <%= disabled ? "disabled" : "" %> maxlength="<%= maxLength %>" name="<%= fieldParam %>" style='width: <%= displayWidth %>px;<%= upperCase ? " text-transform: uppercase;" : "" %>' type="text" value="<%= value %>">
 				</c:when>
 				<c:otherwise>
-					<textarea class="form-text" <%= disabled ? "disabled" : "" %> id="<%= namespace %><%= field %>" name="<%= fieldParam %>" cols="<%= displayWidth %>" rows="<%= displayHeight %>" wrap="soft" onKeyDown="<%= checkTab ? "checkTab(this); " : "" %> disableEsc();" onKeyPress="checkMaxLength(this, <%= maxLength %>);"><%= value %></textarea>
+					<textarea class="form-text" <%= disabled ? "disabled" : "" %> id="<%= namespace %><%= field %>" name="<%= fieldParam %>" style="width: <%= displayWidth %>px; height: <%= displayHeight %>px;" wrap="soft" onKeyDown="<%= checkTab ? "checkTab(this); " : "" %> disableEsc();" onKeyPress="checkMaxLength(this, <%= maxLength %>);"><%= value %></textarea>
 				</c:otherwise>
 			</c:choose>
 		</c:when>

@@ -630,7 +630,7 @@ for (int i = 0; i < pricesCount; i++) {
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />smallFile" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="file">
+		<input class="form-text" name="<portlet:namespace />smallFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
 	</td>
 </tr>
 <tr>
@@ -662,7 +662,7 @@ for (int i = 0; i < pricesCount; i++) {
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />mediumFile" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="file">
+		<input class="form-text" name="<portlet:namespace />mediumFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
 	</td>
 </tr>
 <tr>
@@ -694,7 +694,7 @@ for (int i = 0; i < pricesCount; i++) {
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />largeFile" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="file">
+		<input class="form-text" name="<portlet:namespace />largeFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
 	</td>
 </tr>
 <tr>

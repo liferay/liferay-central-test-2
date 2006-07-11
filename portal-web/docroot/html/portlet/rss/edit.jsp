@@ -62,7 +62,7 @@ urlsString = StringUtil.merge(urls, StringPool.NEW_LINE);
 
 <br><br>
 
-<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />urls" rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>" wrap="soft"><%= urlsString %></textarea>
+<textarea class="form-text" name="<portlet:namespace />urls" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;" wrap="soft"><%= urlsString %></textarea>
 
 <br><br>
 

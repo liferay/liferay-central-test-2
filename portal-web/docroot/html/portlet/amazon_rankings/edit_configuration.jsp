@@ -62,7 +62,7 @@ isbnsString = StringUtil.merge(isbns, StringPool.SPACE);
 
 <br><br>
 
-<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />isbns" rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>" wrap="soft"><%= isbnsString %></textarea>
+<textarea class="form-text" name="<portlet:namespace />isbns" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;" wrap="soft"><%= isbnsString %></textarea>
 
 <br><br>
 

@@ -47,7 +47,7 @@ String htmlAttributes =
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />src" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= src %>">
+		<input class="form-text" name="<portlet:namespace />src" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= src %>">
 	</td>
 </tr>
 <tr>
@@ -94,7 +94,7 @@ String htmlAttributes =
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />userName" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= userName %>">
+		<input class="form-text" name="<portlet:namespace />userName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= userName %>">
 	</td>
 </tr>
 <tr>
@@ -103,7 +103,7 @@ String htmlAttributes =
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />password" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= password %>">
+		<input class="form-text" name="<portlet:namespace />password" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= password %>">
 	</td>
 </tr>
 <tr>
@@ -112,7 +112,7 @@ String htmlAttributes =
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />hiddenVariables" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<%= hiddenVariables %>">
+		<input class="form-text" name="<portlet:namespace />hiddenVariables" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= hiddenVariables %>">
 	</td>
 </tr>
 <tr>
@@ -126,7 +126,7 @@ String htmlAttributes =
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<textarea class="form-text" name="<portlet:namespace />htmlAttributes" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>" wrap="soft" onKeyDown="checkTab(this); disableEsc();"><%= htmlAttributes %></textarea>
+		<textarea class="form-text" name="<portlet:namespace />htmlAttributes" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;" wrap="soft" onKeyDown="checkTab(this); disableEsc();"><%= htmlAttributes %></textarea>
 	</td>
 </tr>
 </table>

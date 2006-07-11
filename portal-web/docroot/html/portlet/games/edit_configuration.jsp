@@ -35,7 +35,7 @@ hangmanWordList = ParamUtil.getString(request, "hangmanWordList", hangmanWordLis
 
 <br><br>
 
-<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="<portlet:namespace />hangmanWordList" rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>" wrap="soft"><%= hangmanWordList %></textarea>
+<textarea class="form-text" name="<portlet:namespace />hangmanWordList" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;" wrap="soft"><%= hangmanWordList %></textarea>
 
 <br><br>
 

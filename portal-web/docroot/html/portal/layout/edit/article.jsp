@@ -31,7 +31,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="TypeSettingsProperties(article-id)" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(article-id)" />">
+		<input class="form-text" name="TypeSettingsProperties(article-id)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(article-id)" />">
 	</td>
 </tr>
 </table>

@@ -31,7 +31,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="TypeSettingsProperties(url)" size="<%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(url)" />">
+		<input class="form-text" name="TypeSettingsProperties(url)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(url)" />">
 	</td>
 </tr>
 <tr>
@@ -40,7 +40,7 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<textarea class="form-text" cols="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>" name="TypeSettingsProperties(description)" rows="<%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(description)" /></textarea>
+		<textarea class="form-text" name="TypeSettingsProperties(description)" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(description)" /></textarea>
 	</td>
 </tr>
 </table>
