@@ -28,8 +28,6 @@ import com.liferay.util.lucene.Hits;
 
 import java.io.InputStream;
 
-import java.rmi.RemoteException;
-
 import javax.jcr.Node;
 import javax.jcr.Session;
 

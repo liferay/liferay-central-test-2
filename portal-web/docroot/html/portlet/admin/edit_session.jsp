@@ -152,9 +152,7 @@ UserTracker userTracker = (UserTracker)currentUsers.get(userTrackerId);
 					</td>
 					<td align="right" class="beta-gradient">
 						<span style="font-size: xx-small;">
-						[
-						<a href="javascript: void(0);" onclick="toggleByIdSpan(this, '<portlet:namespace />accessedUrls'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>
-						]
+						[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />accessedUrls'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
 						</span>
 					</td>
 				</tr>
@@ -165,22 +163,22 @@ UserTracker userTracker = (UserTracker)currentUsers.get(userTrackerId);
 			<td>
 				<div id="<portlet:namespace />accessedUrls" style="display: none;">
 					<table border="0" cellpadding="4" cellspacing="0" width="100%">
-	
+
 					<%
 					List paths = userTracker.getPaths();
-	
+
 					for (int i = 0; i < paths.size(); i++) {
 						UserTrackerPath userTrackerPath = (UserTrackerPath)paths.get(i);
-	
+
 						String className = "portlet-section-body";
 						String classHoverName = "portlet-section-body-hover";
-	
+
 						if (MathUtil.isEven(i)) {
 							className = "portlet-section-alternate";
 							classHoverName = "portlet-section-alternate-hover";
 						}
 					%>
-	
+
 						<tr class="<%= className %>" style="font-size: xx-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
 							<td valign="top">
 								<%= StringUtil.replace(userTrackerPath.getPath(), "&", "& ") %>
@@ -189,11 +187,11 @@ UserTracker userTracker = (UserTracker)currentUsers.get(userTrackerId);
 								<%= dateFormatDateTime.format(userTrackerPath.getPathDate()) %>
 							</td>
 						</tr>
-	
+
 					<%
 					}
 					%>
-	
+
 					</table>
 				</div>
 			</td>
@@ -207,9 +205,7 @@ UserTracker userTracker = (UserTracker)currentUsers.get(userTrackerId);
 					</td>
 					<td align="right" class="beta-gradient">
 						<span style="font-size: xx-small;">
-						[
-						<a href="javascript: void(0);" onclick="toggleByIdSpan(this, '<portlet:namespace />sessionAttributes'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>
-						]
+						[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />sessionAttributes'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
 						</span>
 					</td>
 				</tr>
@@ -220,57 +216,57 @@ UserTracker userTracker = (UserTracker)currentUsers.get(userTrackerId);
 			<td>
 				<div id="<portlet:namespace />sessionAttributes" style="display: none;">
 					<table border="0" cellpadding="4" cellspacing="0" width="100%">
-	
+
 					<%
 					boolean userSessionAlive = true;
-	
+
 					HttpSession userSession = PortalSessionContext.get(userTrackerId);
-	
+
 					if (userSession != null) {
 						try {
 							int counter = 0;
-	
+
 							Set sortedAttrNames = new TreeSet();
-	
+
 							Enumeration enu = userSession.getAttributeNames();
-	
+
 							while (enu.hasMoreElements()) {
 								String attrName = (String)enu.nextElement();
-	
+
 								sortedAttrNames.add(attrName);
 							}
-	
+
 							Iterator itr = sortedAttrNames.iterator();
-	
+
 							while (itr.hasNext()) {
 								String attrName = (String)itr.next();
-	
+
 								String className = "portlet-section-body";
 								String classHoverName = "portlet-section-body-hover";
-	
+
 								if (MathUtil.isEven(counter++)) {
 									className = "portlet-section-alternate";
 									classHoverName = "portlet-section-alternate-hover";
 								}
 					%>
-	
+
 								<tr class="<%= className %>" style="font-size: xx-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
 									<td valign="top">
 										<%= attrName %>
 									</td>
 								</tr>
-	
+
 					<%
 							}
 						}
 						catch (Exception e) {
 							userSessionAlive = false;
-	
+
 							e.printStackTrace();
 						}
 					}
 					%>
-	
+
 					</table>
 				</div>
 			</td>

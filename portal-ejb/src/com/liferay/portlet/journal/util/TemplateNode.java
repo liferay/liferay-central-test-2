@@ -34,11 +34,23 @@ import java.util.List;
 public class TemplateNode {
 
 	public TemplateNode(String name, String data, String type) {
-		_children = new ArrayList();
-		_data = data;
 		_name = name;
-		_options = new ArrayList();
+		_data = data;
 		_type = type;
+		_options = new ArrayList();
+		_children = new ArrayList();
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public String getData() {
+		return _data;
+	}
+
+	public String getType() {
+		return _type;
 	}
 
 	public void appendOption(String option) {
@@ -65,22 +77,10 @@ public class TemplateNode {
 		return _children;
 	}
 
-	public String getData() {
-		return _data;
-	}
-
-	public String getName() {
-		return _name;
-	}
-
-	public String getType() {
-		return _type;
-	}
-
-	private List _children;
-	private String _data;
 	private String _name;
-	private List _options;
+	private String _data;
 	private String _type;
+	private List _options;
+	private List _children;
 
 }

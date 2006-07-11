@@ -151,8 +151,8 @@ public class JournalUtil {
 			value);
 	}
 
-	public static String formatVM(String xml) {
-		return xml;
+	public static String formatVM(String vm) {
+		return vm;
 	}
 
 	public static String formatXML(String xml)

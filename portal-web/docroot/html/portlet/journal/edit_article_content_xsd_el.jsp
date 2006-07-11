@@ -151,9 +151,7 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 
 							<c:if test="<%= Validator.isNotNull(elContent) %>">
 								<span style="font-size: xx-small; margin-left: 15px;">
-									[
-									<a href="javascript: void(0);" onclick="toggleByIdSpan(this, '<portlet:namespace />image_<%= elName %>'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>
-									]
+								[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />image_<%= elName %>'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
 								</span>
 							</c:if>
 						</c:if>

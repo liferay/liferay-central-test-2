@@ -62,7 +62,7 @@ symbolsString = StringUtil.merge(symbols, StringPool.SPACE);
 
 <br><br>
 
-<textarea class="form-text" name="<portlet:namespace />symbols" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;" wrap="soft"><%= symbolsString %></textarea>
+<textarea class="form-text" name="<portlet:namespace />symbols" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= symbolsString %></textarea>
 
 <br><br>
 

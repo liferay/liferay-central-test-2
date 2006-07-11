@@ -126,18 +126,20 @@ public class JournalVmUtil {
 
 		List nodes = new ArrayList();
 
-		Iterator itr = parent.elementIterator("dynamic-element");
+		Iterator itr1 = parent.elementIterator("dynamic-element");
 
-		while (itr.hasNext()) {
-			Element element = (Element) itr.next();
+		while (itr1.hasNext()) {
+			Element element = (Element)itr1.next();
 
 			Element content = element.element("dynamic-content");
+
 			if (content == null) {
 				throw new TransformException(
 					"Element missing \"dynamic-content\"");
 			}
 
 			String name = element.attributeValue("name", "");
+
 			if (name.length() == 0) {
 				throw new TransformException(
 					"Element missing \"name\" attribute");
@@ -152,12 +154,12 @@ public class JournalVmUtil {
 				node.appendChildren(_extractDynamicContents(element));
 			}
 			else if (content.element("option") != null) {
-				Iterator oi = content.elementIterator("option");
+				Iterator itr2 = content.elementIterator("option");
 
-				while (oi.hasNext()) {
-					Element option = (Element)oi.next();
+				while (itr2.hasNext()) {
+					Element option = (Element)itr2.next();
 
-					node.appendOption(CDATAUtil.strip(option.getText()));				
+					node.appendOption(CDATAUtil.strip(option.getText()));
 				}
 			}
 

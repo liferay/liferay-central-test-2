@@ -62,7 +62,7 @@ zipsString = StringUtil.merge(zips, StringPool.NEW_LINE);
 
 <br><br>
 
-<textarea class="form-text" name="<portlet:namespace />zips" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;" wrap="soft"><%= zipsString %></textarea>
+<textarea class="form-text" name="<portlet:namespace />zips" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= zipsString %></textarea>
 
 <br><br>
 

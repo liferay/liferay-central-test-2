@@ -76,7 +76,7 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<textarea class="form-text" name="<portlet:namespace />flashAttributes" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;" wrap="soft" onKeyDown="checkTab(this); disableEsc();"><%= flashAttributes %></textarea>
+		<textarea class="form-text" name="<portlet:namespace />flashAttributes" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyDown="checkTab(this); disableEsc();"><%= flashAttributes %></textarea>
 	</td>
 </tr>
 <tr>
@@ -85,7 +85,7 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<textarea class="form-text" name="<portlet:namespace />flashVariables" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;" wrap="soft" onKeyDown="checkTab(this); disableEsc();"><%= flashVariables %></textarea>
+		<textarea class="form-text" name="<portlet:namespace />flashVariables" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyDown="checkTab(this); disableEsc();"><%= flashVariables %></textarea>
 	</td>
 </tr>
 </table>

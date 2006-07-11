@@ -102,30 +102,38 @@
 
 				<c:if test="<%= editable && MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) %>">
 					<div style="float: right;">
-						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="replyURL">
-							<portlet:param name="struts_action" value="/message_boards/edit_message" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="categoryId" value="<%= message.getCategoryId() %>" />
-							<portlet:param name="threadId" value="<%= message.getThreadId() %>" />
-							<portlet:param name="parentMessageId" value="<%= message.getMessageId() %>" />
-						</portlet:renderURL>
+						<table border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td>
+								<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="replyURL">
+									<portlet:param name="struts_action" value="/message_boards/edit_message" />
+									<portlet:param name="redirect" value="<%= currentURL %>" />
+									<portlet:param name="categoryId" value="<%= message.getCategoryId() %>" />
+									<portlet:param name="threadId" value="<%= message.getThreadId() %>" />
+									<portlet:param name="parentMessageId" value="<%= message.getMessageId() %>" />
+								</portlet:renderURL>
 
-						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="quoteURL">
-							<portlet:param name="struts_action" value="/message_boards/edit_message" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="categoryId" value="<%= message.getCategoryId() %>" />
-							<portlet:param name="threadId" value="<%= message.getThreadId() %>" />
-							<portlet:param name="parentMessageId" value="<%= message.getMessageId() %>" />
-							<portlet:param name="quote" value="true" />
-						</portlet:renderURL>
+								<liferay-ui:icon image="reply" url="<%= replyURL %>" />
 
-						<liferay-ui:icon image="reply" url="<%= replyURL %>" />
+								<a href="<%= replyURL.toString() %>"><%= LanguageUtil.get(pageContext, "reply") %></a>
+							</td>
+							<td style="padding-left: 15px;"></td>
+							<td>
+								<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="quoteURL">
+									<portlet:param name="struts_action" value="/message_boards/edit_message" />
+									<portlet:param name="redirect" value="<%= currentURL %>" />
+									<portlet:param name="categoryId" value="<%= message.getCategoryId() %>" />
+									<portlet:param name="threadId" value="<%= message.getThreadId() %>" />
+									<portlet:param name="parentMessageId" value="<%= message.getMessageId() %>" />
+									<portlet:param name="quote" value="true" />
+								</portlet:renderURL>
 
-						<a href="<%= replyURL.toString() %>"><%= LanguageUtil.get(pageContext, "reply") %></a>
+								<liferay-ui:icon image="quote" url="<%= quoteURL %>" />
 
-						<liferay-ui:icon image="quote" url="<%= quoteURL %>" />
-
-						<a href="<%= quoteURL.toString() %>"><%= LanguageUtil.get(pageContext, "reply-with-quote") %></a>
+								<a href="<%= quoteURL.toString() %>"><%= LanguageUtil.get(pageContext, "reply-with-quote") %></a>
+							</td>
+						</tr>
+						</table>
 					</div>
 				</c:if>
 

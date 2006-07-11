@@ -90,7 +90,7 @@ public class JournalTemplateLocalServiceImpl
 
 		try {
 			if (formatXsl) {
-				if (JournalTemplate.LANG_TYPE_VM.equals(langType)) {
+				if (langType.equals(JournalTemplate.LANG_TYPE_VM)) {
 					xsl = JournalUtil.formatVM(xsl);
 				}
 				else {
@@ -315,7 +315,7 @@ public class JournalTemplateLocalServiceImpl
 
 		try {
 			if (formatXsl) {
-				if (JournalTemplate.LANG_TYPE_VM.equals(langType)) {
+				if (langType.equals(JournalTemplate.LANG_TYPE_VM)) {
 					xsl = JournalUtil.formatVM(xsl);
 				}
 				else {

@@ -31,6 +31,7 @@ Set amazonRankingsSet = new TreeSet();
 
 for (int i = 0; i < isbns.length; i++) {
 	AmazonRankings rankings = AmazonRankingsUtil.getAmazonRankings(isbns[i]);
+
 	if (rankings != null) {
 		amazonRankingsSet.add(rankings);
 	}

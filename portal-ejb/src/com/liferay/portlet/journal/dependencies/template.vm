@@ -1,7 +1,9 @@
+##
 ## VELOCITY TRANSFORM TEMPLATE
 ##
 ## All dynamic elements in a structure can be accessed as a Velocity variable.
 ## The given structure:
+##
 ##   <root>
 ##     <dynamic-element name='main-text' type='text_area'>
 ##       <dynamic-element name='sub-image' type='image'></dynamic-element>
@@ -16,6 +18,7 @@
 ##   </root>
 ##
 ## The dynamic element 'main-text' can be accessed in the following ways:
+##
 ##   $main-text.getName()      - The name "main-text"
 ##   $main-text.getData()      - The data in the article for main-text
 ##   $main-text.getType()      - The type "text-area"
@@ -24,9 +27,11 @@
 ##                               clause
 ##
 ## One special accessor exists for elements of type 'multi-list':
+##
 ##   $ms-list.getOptions()     - A collection with up to three string entries
 ##                               (chocolate, strawberry, or vanilla) that can be
 ##                               used in the #foreach clause
 ##
 ## Additionally, the variable $journalTemplatesPath can be used to include
 ## another Journal template, e.g. #parse("$journalTemplatesPath/LAYOUT-PARENT")
+##

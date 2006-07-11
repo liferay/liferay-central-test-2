@@ -122,7 +122,7 @@
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<textarea class="form-text" name="<portlet:namespace />message" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;"><%= GetterUtil.getString(ShutdownUtil.getMessage()) %></textarea>
+					<textarea class="form-text" name="<portlet:namespace />message" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= GetterUtil.getString(ShutdownUtil.getMessage()) %></textarea>
 				</td>
 			</tr>
 			</table>
@@ -143,9 +143,7 @@
 						</td>
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
-							[
-							<a href="javascript: void(0);" onclick="toggleByIdSpan(this, '<portlet:namespace />tasks'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>
-							]
+							[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />tasks'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
 							</span>
 						</td>
 					</tr>
@@ -214,9 +212,7 @@
 						</td>
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
-							[
-							<a href="javascript: void(0);" onclick="toggleByIdSpan(this, '<portlet:namespace />logLevels'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>
-							]
+							[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />logLevels'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
 							</span>
 						</td>
 					</tr>
@@ -226,77 +222,77 @@
 			<tr>
 				<td>
 					<div id="<portlet:namespace />logLevels" style="display: none;">
-	
+
 						<%
 						Map currentLoggerNames = new TreeMap();
-	
+
 						Enumeration enu = LogManager.getCurrentLoggers();
-	
+
 						while (enu.hasMoreElements()) {
 							Logger logger = (Logger)enu.nextElement();
-	
+
 							currentLoggerNames.put(logger.getName(), logger);
 						}
 						%>
-	
+
 						<table border="0" cellpadding="4" cellspacing="0" width="100%">
-	
+
 						<%
 						int counter = 0;
-	
+
 						Iterator itr = currentLoggerNames.entrySet().iterator();
-	
+
 						while (itr.hasNext()) {
 							Map.Entry entry = (Map.Entry)itr.next();
-	
+
 							String name = (String)entry.getKey();
 							Logger logger = (Logger)entry.getValue();
 						%>
-	
+
 							<c:if test="<%= logger.getLevel() != null %>">
-	
+
 								<%
 								String className = "portlet-section-body";
 								String classHoverName = "portlet-section-body-hover";
-	
+
 								if (MathUtil.isEven(counter++)) {
 									className = "portlet-section-alternate";
 									classHoverName = "portlet-section-alternate-hover";
 								}
 								%>
-	
+
 								<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
 									<td>
 										<%= name %>
 									</td>
 									<td>
 										<select class="form-button" name="<portlet:namespace />logLevel<%= name %>">
-	
+
 											<%
 											for (int i = 0; i < Levels.ALL_LEVELS.length; i++) {
 											%>
-	
+
 												<option <%= logger.getLevel().equals(Levels.ALL_LEVELS[i]) ? "selected" : "" %> value="<%= Levels.ALL_LEVELS[i] %>"><%= Levels.ALL_LEVELS[i] %></option>
-	
+
 											<%
 											}
 											%>
-	
+
 										</select>
 									</td>
 								</tr>
 							</c:if>
-	
+
 						<%
 						}
 						%>
-	
+
 						</table>
-	
+
 						<br>
-	
+
 						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveServer('updateLogLevels');">
-	
+
 						<br><br>
 					</div>
 				</td>
@@ -310,9 +306,7 @@
 						</td>
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
-							[
-							<a href="javascript: void(0);" onclick="toggleByIdSpan(this, '<portlet:namespace />system_properties'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>
-							]
+							[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />system_properties'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
 							</span>
 						</td>
 					</tr>
@@ -323,30 +317,30 @@
 				<td>
 					<div id="<portlet:namespace />system_properties" style="display: none;">
 						<table border="0" cellpadding="4" cellspacing="0" width="100%">
-	
+
 						<%
 						counter = 0;
-	
+
 						Properties systemProps = new SortedProperties();
-	
+
 						PropertiesUtil.copyProperties(System.getProperties(), systemProps);
-	
+
 						enu = systemProps.propertyNames();
-	
+
 						while (enu.hasMoreElements()) {
 							String name = (String)enu.nextElement();
-	
+
 							String className = "portlet-section-body";
 							String classHoverName = "portlet-section-body-hover";
-	
+
 							if (MathUtil.isEven(counter++)) {
 								className = "portlet-section-alternate";
 								classHoverName = "portlet-section-alternate-hover";
 							}
-	
+
 							String value = System.getProperty(name);
 						%>
-	
+
 							<tr class="<%= className %>" style="font-size: xx-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
 								<td title="<%= name %>">
 									<%= StringUtil.shorten(name, 65) %>
@@ -355,13 +349,13 @@
 									<%= StringUtil.shorten(value, 75) %>
 								</td>
 							</tr>
-	
+
 						<%
 						}
 						%>
-	
+
 						</table>
-	
+
 						<br>
 					</div>
 				</td>
@@ -375,9 +369,7 @@
 						</td>
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
-							[
-							<a href="javascript: void(0);" onclick="toggleByIdSpan(this, '<portlet:namespace />portal_properties'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>
-							]
+							[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />portal_properties'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
 							</span>
 						</td>
 					</tr>
@@ -388,30 +380,30 @@
 				<td>
 					<div id="<portlet:namespace />portal_properties" style="display: none;">
 						<table border="0" cellpadding="4" cellspacing="0" width="100%">
-	
+
 						<%
 						counter = 0;
-	
+
 						Properties portalProps = new SortedProperties();
-	
+
 						PropertiesUtil.copyProperties(PropsUtil.getProperties(), portalProps);
-	
+
 						enu = portalProps.propertyNames();
-	
+
 						while (enu.hasMoreElements()) {
 							String name = (String)enu.nextElement();
-	
+
 							String className = "portlet-section-body";
 							String classHoverName = "portlet-section-body-hover";
-	
+
 							if (MathUtil.isEven(counter++)) {
 								className = "portlet-section-alternate";
 								classHoverName = "portlet-section-alternate-hover";
 							}
-	
+
 							String value = PropsUtil.get(name);
 						%>
-	
+
 							<tr class="<%= className %>" style="font-size: xx-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
 								<td title="<%= name %>">
 									<%= StringUtil.shorten(name, 65) %>
@@ -420,11 +412,11 @@
 									<%= StringUtil.shorten(value, 75) %>
 								</td>
 							</tr>
-	
+
 						<%
 						}
 						%>
-	
+
 						</table>
 					</div>
 				</td>

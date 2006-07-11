@@ -49,7 +49,7 @@
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<textarea class="form-text" name="<%= namespace %>postReplyBody<%= i %>" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;" wrap="soft"></textarea>
+				<textarea class="form-text" name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"></textarea>
 			</td>
 		</tr>
 		</table>
@@ -83,7 +83,7 @@
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<textarea class="form-text" name="<%= namespace %>editBody<%= i %>" style="width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px; height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;" wrap="soft"><%= Html.toInputSafe(message.getBody()) %></textarea>
+					<textarea class="form-text" name="<%= namespace %>editBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= Html.toInputSafe(message.getBody()) %></textarea>
 				</td>
 			</tr>
 			</table>
