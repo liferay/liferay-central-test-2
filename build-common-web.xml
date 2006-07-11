@@ -22,15 +22,23 @@
 
 	<target name="deploy" depends="war">
 		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-			</or>
+			<equals arg1="${war.file}" arg2="liferay-portal" />
 			<then>
-				<property name="war.file.dest" value="${app.server.portal.dir}/${war.file}.war" />
+				<property name="war.file.dest" value="${app.server.portal.dir}" />
 			</then>
 			<else>
-				<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}" />
+				<if>
+					<or>
+						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+					</or>
+					<then>
+						<property name="war.file.dest" value="${app.server.portal.dir}/${war.file}.war" />
+					</then>
+					<else>
+						<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}" />
+					</else>
+				</if>
 			</else>
 		</if>
 

@@ -69,9 +69,10 @@
 		</delete>
 
 		<delete failonerror="false">
-			<fileset dir="${app.server.classes.portal.dir}">
-				<include name="*-ext.properties" />
-			</fileset>
+			<fileset
+				dir="${app.server.classes.portal.dir}"
+				includes="*-ext.properties"
+			/>
 		</delete>
 
 		<delete includeemptydirs="true">
@@ -79,6 +80,17 @@
 				dir="${app.server.deploy.dir}"
 				includes="cms-web*/**,laszlo-web*/**,sample*/**,tunnel-web*/**"
 			/>
+		</delete>
+
+		<delete>
+			<fileset
+				dir="${app.server.lib.global.dir}"
+				excludes="firebird.jar,hsql.jar,interbase.jar,jtds.jar,mysql.jar,p6spy.jar,postgresql.jar,sap.jar"
+			/>
+		</delete>
+
+		<delete>
+			<fileset dir="${app.server.lib.portal.dir}" />
 		</delete>
 
 		<delete dir="${app.server.log.dir}" />
@@ -218,6 +230,7 @@
 
 		<copy todir="${app.server.lib.global.dir}">
 			<fileset dir="lib/global" />
+			<fileset dir="lib/jdbc" includes="hsql.jar" />
 		</copy>
 
 		<copy todir="${app.server.lib.portal.dir}">
@@ -225,15 +238,37 @@
 		</copy>
 
 		<if>
-			<equals arg1="${app.server.type}" arg2="tomcat" />
+			<equals arg1="${app.server.type}" arg2="jetty" />
 			<then>
 				<copy todir="${app.server.lib.portal.dir}">
 					<fileset
 						dir="lib/development"
-						includes="activation.jar,jms.jar,jta.jar,mail.jar"
+						includes="jms.jar,jta.jar"
 					/>
 				</copy>
 			</then>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="resin" />
+				<then>
+					<copy todir="${app.server.lib.global.dir}">
+						<fileset
+							dir="lib/development"
+							includes="activation.jar,mail.jar"
+						/>
+					</copy>
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+				<then>
+					<copy todir="${app.server.lib.portal.dir}">
+						<fileset
+							dir="lib/development"
+							includes="activation.jar,jms.jar,jta.jar,mail.jar"
+						/>
+					</copy>
+				</then>
+			</elseif>
 		</if>
 	</target>
 
