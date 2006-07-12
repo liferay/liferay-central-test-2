@@ -13,6 +13,6 @@ set J2H_PARAMETER=
 
 :end
 
-set CLASSPATH=../lib/j2h.jar;../../lib/j2h.jar
+set CLASSPATH=../lib/development/j2h.jar;../../lib/development/j2h.jar
 
 java j2h %J2H_PARAMETER%

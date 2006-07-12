@@ -16,16 +16,17 @@
 	<target name="ear">
 		<antcall target="jar-jaas" />
 
-		<copy file="${project.dir}/counter-ejb/counter-ejb.jar" todir="modules" />
-		<copy file="${project.dir}/documentlibrary-ejb/documentlibrary-ejb.jar" todir="modules" />
-		<copy file="${project.dir}/lock-ejb/lock-ejb.jar" todir="modules" />
-		<copy file="${project.dir}/mail-ejb/mail-ejb.jar" todir="modules" />
-		<copy file="${project.dir}/portal-ejb/portal-ejb.jar" todir="modules" />
-
-		<copy file="${project.dir}/cms-web/cms-web.war" todir="modules" />
-		<copy file="${project.dir}/laszlo-web/laszlo-web.war" todir="modules" />
-		<copy file="${project.dir}/portal-web/portal-web.war" todir="modules" overwrite="yes" />
-		<copy file="${project.dir}/tunnel-web/tunnel-web.war" todir="modules" />
+		<copy todir="modules" overwrite="yes">
+			<fileset dir="${project.dir}/counter-ejb" includes="counter-ejb.jar" />
+			<fileset dir="${project.dir}/documentlibrary-ejb" includes="documentlibrary-ejb.jar" />
+			<fileset dir="${project.dir}/lock-ejb" includes="lock-ejb.jar" />
+			<fileset dir="${project.dir}/mail-ejb" includes="mail-ejb.jar" />
+			<fileset dir="${project.dir}/portal-ejb" includes="portal-ejb.jar" />
+			<fileset dir="${project.dir}/cms-web" includes="cms-web.jar" />
+			<fileset dir="${project.dir}/laszlo-web" includes="laszlo-web.jar" />
+			<fileset dir="${project.dir}/portal-web" includes="portal-web.jar" />
+			<fileset dir="${project.dir}/tunnel-web" includes="tunnel-web.jar" />
+		</copy>
 
 		<touch file="modules/portal-web.war" datetime="01/01/1990 12:00 am" />
 
@@ -44,6 +45,7 @@
 			<fileset dir="${project.dir}/filters/secure" includes="secure-filter.jar" />
 			<fileset dir="${project.dir}/filters/strip" includes="strip-filter.jar" />
 			<fileset dir="${project.dir}/util-java" includes="util-java.jar" />
+			<fileset dir="${project.dir}/util-jsf" includes="util-java.jar" />
 			<fileset dir="${project.dir}/util-wsrp" includes="util-wsrp.jar" />
 			<fileset dir="${project.dir}/lib/portal" />
 		</copy>

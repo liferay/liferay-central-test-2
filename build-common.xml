@@ -20,7 +20,6 @@
 
 	<path id="lib.classpath">
 		<fileset dir="${project.dir}/lib/development" includes="*.jar" />
-		<fileset dir="${project.dir}/lib/jdbc" includes="*.jar" />
 		<fileset dir="${project.dir}/lib/global" includes="*.jar" />
 		<fileset dir="${project.dir}/lib/portal" includes="*.jar" />
 	</path>

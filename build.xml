@@ -213,6 +213,7 @@
 		<ant dir="portal-shared" target="deploy" inheritAll="false" />
 
 		<ant dir="util-java" target="deploy" inheritAll="false" />
+		<ant dir="util-jsf" target="deploy" inheritAll="false" />
 		<ant dir="util-taglib" target="deploy" inheritAll="false" />
 		<ant dir="util-wsrp" target="deploy" inheritAll="false" />
 
@@ -275,8 +276,8 @@
 		</if>
 
 		<copy todir="${app.server.lib.global.dir}">
+			<fileset dir="lib/development" includes="hsql.jar" />
 			<fileset dir="lib/global" />
-			<fileset dir="lib/jdbc" includes="hsql.jar" />
 		</copy>
 
 		<copy todir="${app.server.lib.portal.dir}">
@@ -318,13 +319,7 @@
 		</if>
 	</target>
 
-	<!--<target name="reset-orion" depends="init-app-server">
-		<delete>
-			<fileset dir="${app.server}" includes="**/state.ser,**/transaction.state" />
-		</delete>
-	</target>
-
-	<target name="build-eclipse" depends="init-release">
+	<target name="build-eclipse">
 		<copy todir="${lp.eclipse.dir}" overwrite="yes">
 			<fileset dir="tools/eclipse_workspace_tmpl" />
 			<filterset>
@@ -332,53 +327,88 @@
 			</filterset>
 		</copy>
 
-  		<property file="${lp.ext.dir}/app.server.${user.name}.properties" prefix="ext" />
-  		<property file="${lp.ext.dir}/app.server.properties" prefix="ext" />
-
 		<replace file="${lp.eclipse.dir}/.metadata/.plugins/org.eclipse.debug.core/.launches/jboss-jetty.launch">
 			<replacefilter
 				token="@JBOSS_HOME@"
-				value="${ext.app.server.jboss-jetty.dir}"
+				value="${app.server.jboss-jetty.dir}"
 			/>
 		</replace>
 
 		<replace file="${lp.eclipse.dir}/.metadata/.plugins/org.eclipse.debug.core/.launches/jboss-tomcat.launch">
 			<replacefilter
 				token="@JBOSS_HOME@"
-				value="${ext.app.server.jboss-tomcat.dir}"
+				value="${app.server.jboss-tomcat.dir}"
 			/>
 		</replace>
 
 		<replace file="${lp.eclipse.dir}/.metadata/.plugins/org.eclipse.debug.core/.launches/orion.launch">
 			<replacefilter
 				token="@ORION_HOME@"
-				value="${ext.app.server.orion.dir}"
+				value="${app.server.orion.dir}"
 			/>
 		</replace>
 	</target>
 
-	<target name="build-ext" depends="init-release">
+	<target name="build-ext">
 		<available file="${lp.ext.dir}" type="dir" property="lp.ext.dir.available" />
 
 		<antcall target="build-ext-dir-new" />
 		<antcall target="build-ext-dir-update" />
 
-		<copy file="tools/ext_tmpl/.classpath" tofile="${lp.ext.dir}/.classpath" overwrite="yes" />
-
-		<copy file="tools/ext_tmpl/.project" tofile="${lp.ext.dir}/.project" overwrite="yes">
+		<copy todir="${lp.ext.dir}" overwrite="yes">
+			<fileset
+				dir="tools/ext_tmpl"
+				includes=".classpath,.project,app.server.properties,readme.txt"
+			/>
 			<filterset>
+				<filter token="lp.version" value="${lp.version}" />
+				<filter token="lp.version.file.name" value="${lp.version.file.name}" />
 				<filter token="lp.eclipse.project.name" value="${lp.eclipse.project.name}" />
 			</filterset>
 		</copy>
 
 		<mkdir dir="${lp.ext.dir}/downloads" />
 
+		<copy todir="${lp.ext.dir}/ext-ear/modules" overwrite="yes">
+			<fileset dir="${project.dir}/counter-ejb" includes="counter-ejb.jar" />
+			<fileset dir="${project.dir}/documentlibrary-ejb" includes="documentlibrary-ejb.jar" />
+			<fileset dir="${project.dir}/lock-ejb" includes="lock-ejb.jar" />
+			<fileset dir="${project.dir}/mail-ejb" includes="mail-ejb.jar" />
+			<fileset dir="${project.dir}/portal-ejb" includes="portal-ejb.jar" />
+			<fileset dir="${project.dir}/cms-web" includes="cms-web.jar" />
+			<fileset dir="${project.dir}/laszlo-web" includes="laszlo-web.jar" />
+			<fileset dir="${project.dir}/portal-web" includes="portal-web.jar" />
+			<fileset dir="${project.dir}/tunnel-web" includes="tunnel-web.jar" />
+		</copy>
+
 		<mkdir dir="${lp.ext.dir}/ext-lib" />
-		<copy file="tools/ext_tmpl/ext-lib/readme.txt" tofile="${lp.ext.dir}/ext-lib/readme.txt" overwrite="yes" />
-
 		<mkdir dir="${lp.ext.dir}/ext-lib/development" />
-		<copy file="tools/ext_tmpl/ext-lib/development/readme.txt" tofile="${lp.ext.dir}/ext-lib/development/readme.txt" overwrite="yes" />
+		<mkdir dir="${lp.ext.dir}/ext-lib/global" />
+		<mkdir dir="${lp.ext.dir}/ext-lib/portal" />
 
+		<copy file="lib/readme.txt" todir="${lp.ext.dir}/ext-lib" />
+
+		<copy todir="${lp.ext.dir}/lib" overwrite="yes">
+			<fileset dir="lib" />
+		</copy>
+
+		<copy
+			file="${project.dir}/portal-shared/portal-shared.jar"
+			todir="${lp.ext.dir}/lib/global"
+			overwrite="yes"
+		/>
+
+		<copy todir="${lp.ext.dir}/lib/portal" overwrite="yes">
+			<fileset dir="${project.dir}/filters/compression" includes="compression-filter.jar" />
+			<fileset dir="${project.dir}/filters/secure" includes="secure-filter.jar" />
+			<fileset dir="${project.dir}/filters/strip" includes="strip-filter.jar" />
+			<fileset dir="${project.dir}/util-java" includes="util-java.jar" />
+			<fileset dir="${project.dir}/util-jsf" includes="util-jsf.jar" />
+			<fileset dir="${project.dir}/util-wsrp" includes="util-wsrp.jar" />
+		</copy>
+
+		<mkdir dir="${lp.ext.dir}/servers/geronimo-jetty" />
+		<mkdir dir="${lp.ext.dir}/servers/geronimo-tomcat" />
 		<mkdir dir="${lp.ext.dir}/servers/jboss-jetty" />
 		<mkdir dir="${lp.ext.dir}/servers/jboss-tomcat" />
 		<mkdir dir="${lp.ext.dir}/servers/jetty" />
@@ -387,50 +417,25 @@
 		<mkdir dir="${lp.ext.dir}/servers/resin" />
 		<mkdir dir="${lp.ext.dir}/servers/tomcat" />
 
-		<copy file="tools/java2html.bat" tofile="${lp.ext.dir}/tools/java2html.bat" overwrite="yes" />
-		<copy file="tools/javadoc.css" tofile="${lp.ext.dir}/tools/javadoc.css" overwrite="yes" />
+		<ant dir="sql" target="build-db" inheritAll="false" />
+		<ant dir="sql" target="load-db" inheritAll="false" />
 
-		<copy file="tools/ext_tmpl/app.server.properties" tofile="${lp.ext.dir}/app.server.properties" overwrite="yes">
-			<filterset>
-				<filter token="lp.version.file.name" value="${lp.version.file.name}" />
-			</filterset>
+		<copy todir="${lp.ext.dir}/sql" overwrite="yes">
+			<fileset dir="sql">
+				<exclude name="**/log/**" />
+			</fileset>
 		</copy>
 
-		<copy file="tools/ext_tmpl/readme.txt" tofile="${lp.ext.dir}/readme.txt" overwrite="yes">
-			<filterset>
-				<filter token="lp.version" value="${lp.version}" />
-				<filter token="lp.version.file.name" value="${lp.version.file.name}" />
-			</filterset>
+		<copy todir="${lp.ext.dir}/tools" overwrite="yes">
+			<fileset dir="tools" includes="java2html.bat,javadoc.css" />
 		</copy>
 
-		<copy todir="${lp.ext.dir}/lib" overwrite="yes">
-			<fileset
-				dir="lib"
-				includes="**/*.jar"
-			/>
-		</copy>
+		<copy
+			file="web-sites/liferay.com-web/docroot/WEB-INF/web.xml"
+			todir="${lp.ext.dir}/web-sites/liferay.com-web/docroot/WEB-INF"
+			overwrite="yes"
+		/>
 
-		<copy file="portal-shared/portal-shared.jar" todir="${lp.ext.dir}/lib" />
-
-		<copy file="filters/compression/compression-filter.jar" todir="${lp.ext.dir}/lib" />
-		<copy file="filters/secure/secure-filter.jar" todir="${lp.ext.dir}/lib" />
-		<copy file="filters/strip/strip-filter.jar" todir="${lp.ext.dir}/lib" />
-		<copy file="util-java/util-java.jar" todir="${lp.ext.dir}/lib" />
-		<copy file="util-jsf/util-jsf.jar" todir="${lp.ext.dir}/lib" />
-		<copy file="util-wsrp/util-wsrp.jar" todir="${lp.ext.dir}/lib" />
-
-		<copy file="counter-ejb/counter-ejb.jar" todir="${lp.ext.dir}/ext-ear/modules" />
-		<copy file="documentlibrary-ejb/documentlibrary-ejb.jar" todir="${lp.ext.dir}/ext-ear/modules" />
-		<copy file="lock-ejb/lock-ejb.jar" todir="${lp.ext.dir}/ext-ear/modules" />
-		<copy file="mail-ejb/mail-ejb.jar" todir="${lp.ext.dir}/ext-ear/modules" />
-		<copy file="portal-ejb/portal-ejb.jar" todir="${lp.ext.dir}/ext-ear/modules" />
-
-		<copy file="cms-web/cms-web.war" todir="${lp.ext.dir}/ext-ear/modules" />
-		<copy file="laszlo-web/laszlo-web.war" todir="${lp.ext.dir}/ext-ear/modules" />
-		<copy file="portal-web/portal-web.war" todir="${lp.ext.dir}/ext-ear/modules" />
-		<copy file="tunnel-web/tunnel-web.war" todir="${lp.ext.dir}/ext-ear/modules" />
-
-		<copy file="web-sites/liferay.com-web/docroot/WEB-INF/web.xml" todir="${lp.ext.dir}/web-sites/liferay.com-web/docroot/WEB-INF" overwrite="yes" />
 		<replace file="${lp.ext.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml">
 			<replacefilter
 				token="/WEB-INF/struts-config.xml"
@@ -444,23 +449,9 @@
 				includes="index.html,WEB-INF/lib/*.jar,WEB-INF/tld/*.tld"
 			/>
 		</copy>
-
-		<ant dir="sql" target="build-db" />
-		<copy todir="${lp.ext.dir}/sql">
-			<fileset dir="sql">
-				<exclude name="**/log/**" />
-			</fileset>
-		</copy>
-
-		<ant dir="sql" target="load-db" />
-		<copy todir="${lp.ext.dir}/sql">
-			<fileset dir="sql">
-				<include name="test.*" />
-			</fileset>
-		</copy>
 	</target>
 
-	<target name="build-ext-dir-new" depends="init-release" unless="lp.ext.dir.available">
+	<target name="build-ext-dir-new" unless="lp.ext.dir.available">
 		<filter token="lp.eclipse.project.name" value="${lp.eclipse.project.name}" />
 
 		<copy todir="${lp.ext.dir}" filtering="true">
@@ -468,7 +459,7 @@
 		</copy>
 	</target>
 
-	<target name="build-ext-dir-update" depends="init-release" if="lp.ext.dir.available">
+	<target name="build-ext-dir-update" if="lp.ext.dir.available">
 		<copy todir="${lp.ext.dir}" overwrite="true">
 			<fileset
 				dir="tools/ext_tmpl"
@@ -484,49 +475,49 @@
 		</copy>
 	</target>
 
-	<target name="build-ext-jboss-jetty" depends="init-release">
+	<!--<target name="build-ext-jboss-jetty">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jboss-jetty</echo>
 		<ant dir="${lp.ext.dir}" target="clean" />
 		<ant dir="${lp.ext.dir}" target="deploy" />
 	</target>
 
-	<target name="build-ext-jboss-tomcat" depends="init-release">
+	<target name="build-ext-jboss-tomcat">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jboss-tomcat</echo>
 		<ant dir="${lp.ext.dir}" target="clean" />
 		<ant dir="${lp.ext.dir}" target="deploy" />
 	</target>
 
-	<target name="build-ext-jetty" depends="init-release">
+	<target name="build-ext-jetty">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jetty</echo>
 		<ant dir="${lp.ext.dir}" target="clean" />
 		<ant dir="${lp.ext.dir}" target="deploy" />
 	</target>
 
-	<target name="build-ext-jonas-jetty" depends="init-release">
+	<target name="build-ext-jonas-jetty">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-jetty</echo>
 		<ant dir="${lp.ext.dir}" target="clean" />
 		<ant dir="${lp.ext.dir}" target="deploy" />
 	</target>
 
-	<target name="build-ext-jonas-tomcat" depends="init-release">
+	<target name="build-ext-jonas-tomcat">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-tomcat</echo>
 		<ant dir="${lp.ext.dir}" target="clean" />
 		<ant dir="${lp.ext.dir}" target="deploy" />
 	</target>
 
-	<target name="build-ext-resin" depends="init-release">
+	<target name="build-ext-resin">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=resin</echo>
 		<ant dir="${lp.ext.dir}" target="clean" />
 		<ant dir="${lp.ext.dir}" target="deploy" />
 	</target>
 
-	<target name="build-ext-tomcat" depends="init-release">
+	<target name="build-ext-tomcat">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=tomcat</echo>
 		<ant dir="${lp.ext.dir}" target="clean" />
 		<ant dir="${lp.ext.dir}" target="deploy" />
 	</target>
 
-	<target name="clean-ext" depends="init-release">
+	<target name="clean-ext">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jboss-jetty</echo>
 		<ant dir="${lp.ext.dir}" target="clean" />
 
@@ -547,9 +538,9 @@
 
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=tomcat</echo>
 		<ant dir="${lp.ext.dir}" target="clean" />
-	</target>
+	</target>-->
 
-	<target name="sync-ext" depends="init-release">
+	<target name="sync-ext">
 		<copy todir="tools/ext_tmpl/ext-ejb" overwrite="yes">
 			<fileset
 				dir="${lp.ext.dir}/ext-ejb"
@@ -557,11 +548,20 @@
 			/>
 		</copy>
 
-		<copy file="${lp.ext.dir}/ext-web/docroot/WEB-INF/remoting-servlet-ext.xml" todir="tools/ext_tmpl/ext-web/docroot/WEB-INF" overwrite="yes" />
-		<copy file="${lp.ext.dir}/ext-web/docroot/WEB-INF/server-config.wsdd" todir="tools/ext_tmpl/ext-web/docroot/WEB-INF" overwrite="yes" />
+		<copy
+			file="${lp.ext.dir}/ext-web/docroot/WEB-INF/remoting-servlet-ext.xml"
+			todir="tools/ext_tmpl/ext-web/docroot/WEB-INF"
+			overwrite="yes"
+		/>
+
+		<copy
+			file="${lp.ext.dir}/ext-web/docroot/WEB-INF/server-config.wsdd"
+			todir="tools/ext_tmpl/ext-web/docroot/WEB-INF"
+			overwrite="yes"
+		/>
 	</target>
 
-	<target name="zip">
+	<!--<target name="zip">
 		<antcall target="zip-api" />
 		<antcall target="zip-jboss" />
 		<antcall target="zip-jetty" />
@@ -573,7 +573,7 @@
 		<antcall target="zip-tomcat" />
 	</target>
 
-	<target name="zip-api" depends="init-release">
+	<target name="zip-api">
 		<delete file="liferay-portal-doc-${lp.version.file.name}.zip" failonerror="false" />
 		<zip zipfile="liferay-portal-doc-${lp.version.file.name}.zip"
 			basedir="."
@@ -581,7 +581,7 @@
 		/>
 	</target>
 
-	<target name="zip-jboss" depends="init-release">
+	<target name="zip-jboss">
 		<delete file="liferay-portal-jboss-jetty-${lp.version.file.name}.zip" failonerror="false" />
 		<zip zipfile="liferay-portal-jboss-jetty-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/jboss-jetty"
@@ -593,14 +593,14 @@
 		/>
 	</target>
 
-	<target name="zip-jetty" depends="init-release">
+	<target name="zip-jetty">
 		<delete file="liferay-portal-jetty-${lp.version.file.name}.zip" failonerror="false" />
 		<zip zipfile="liferay-portal-jetty-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/jetty"
 		/>
 	</target>
 
-	<target name="zip-jonas" depends="init-release">
+	<target name="zip-jonas">
 		<delete file="liferay-portal-jonas-jetty-${lp.version.file.name}.zip" failonerror="false" />
 		<zip zipfile="liferay-portal-jonas-jetty-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/jonas-jetty"
@@ -612,7 +612,7 @@
 		/>
 	</target>
 
-	<target name="zip-portal-client" depends="init-release">
+	<target name="zip-portal-client">
 		<delete file="liferay-portal-client-${lp.version.file.name}.zip" failonerror="false" />
 		<zip zipfile="liferay-portal-client-${lp.version.file.name}.zip"
 			basedir="."
@@ -620,14 +620,14 @@
 		/>		
 	</target>
 
-	<target name="zip-resin" depends="init-release">
+	<target name="zip-resin">
 		<delete file="liferay-portal-resin-${lp.version.file.name}.zip" failonerror="false" />
 		<zip zipfile="liferay-portal-resin-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/resin"
 		/>
 	</target>
 
-	<target name="zip-sql" depends="init-release">
+	<target name="zip-sql">
 		<delete file="liferay-portal-sql-${lp.version.file.name}.zip" failonerror="false" />
 		<zip zipfile="liferay-portal-sql-${lp.version.file.name}.zip"
 			basedir="sql"
@@ -635,7 +635,7 @@
 		/>
 	</target>
 
-	<target name="zip-src" depends="init-release">
+	<target name="zip-src">
 		<delete file="liferay-portal-src-${lp.version.file.name}.zip" failonerror="false" />
 		<zip zipfile="liferay-portal-src-${lp.version.file.name}.zip"
 			basedir="${lp.source.dir}"
@@ -643,7 +643,7 @@
 		/>
 	</target>
 
-	<target name="zip-tomcat" depends="init-release">
+	<target name="zip-tomcat">
 		<delete file="liferay-portal-tomcat-${lp.version.file.name}.zip" failonerror="false" />
 		<zip zipfile="liferay-portal-tomcat-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/tomcat"
@@ -656,7 +656,7 @@
 		/>
 	</target>
 
-	<target name="release" depends="init-release">
+	<target name="release">
 		<delete>
 			<fileset dir="${lp.source.dir}" defaultexcludes="no">
 				<include name="**/.#*" />
@@ -689,7 +689,7 @@
 		<ant dir="themes" target="war" />
 	</target>
 
-	<target name="test-release" depends="init-release">
+	<target name="test-release">
 		<antcall target="clean" />
 		<antcall target="start" />
 		<antcall target="build-ext" />
