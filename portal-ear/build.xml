@@ -3,46 +3,40 @@
 <project name="portal-ear" basedir="." default="ear">
 	<import file="../build-common.xml" />
 
-	<property name="ear.file" value="liferay-portal.ear" />
-	<property name="war.file" value="liferay-portal.war" />
-
 	<target name="clean">
 		<delete>
 			<fileset dir="." includes="liferay-portal*.*" />
 			<fileset dir="modules" includes="*.ear,*.jar,*.war" />
 		</delete>
+
 		<delete dir="modules/lib" />
-		<delete failonerror="false">
-			<fileset dir="pro-war" excludes="**/.cvsignore" />
-		</delete>
+		<delete dir="pro-war" />
 	</target>
 
-	<target name="ear" if="portal-ear.ear">
-
-		<!-- JAAS -->
-
+	<target name="ear">
 		<antcall target="jar-jaas" />
 
-		<!-- EAR -->
+		<copy file="${project.dir}/counter-ejb/counter-ejb.jar" todir="modules" />
+		<copy file="${project.dir}/documentlibrary-ejb/documentlibrary-ejb.jar" todir="modules" />
+		<copy file="${project.dir}/lock-ejb/lock-ejb.jar" todir="modules" />
+		<copy file="${project.dir}/mail-ejb/mail-ejb.jar" todir="modules" />
+		<copy file="${project.dir}/portal-ejb/portal-ejb.jar" todir="modules" />
 
-		<antcall target="ear-jonas" />
+		<copy file="${project.dir}/cms-web/cms-web.war" todir="modules" />
+		<copy file="${project.dir}/laszlo-web/laszlo-web.war" todir="modules" />
+		<copy file="${project.dir}/portal-web/portal-web.war" todir="modules" overwrite="yes" />
+		<copy file="${project.dir}/tunnel-web/tunnel-web.war" todir="modules" />
 
-		<copy file="${project.dir}/cms-web/cms-web.war" tofile="modules/cms-web.war" />
+		<touch file="modules/portal-web.war" datetime="01/01/1990 12:00 am" />
 
-		<copy file="${project.dir}/laszlo-web/laszlo-web.war" tofile="modules/laszlo-web.war" />
-
-		<copy file="${project.dir}/portal-web/portal-web.war" tofile="modules/portal-web-complete.war" overwrite="yes" />
-		<touch file="modules/portal-web-complete.war" datetime="01/01/1990 12:00 am" />
 		<war
 			basedir="${project.dir}/web-sites/liferay.com-web/docroot"
-			destfile="modules/portal-web-complete.war"
+			destfile="modules/portal-web.war"
 			excludes="WEB-INF/web.xml"
 			includes="index.html,WEB-INF/**"
 			webxml="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml"
 			update="yes"
 		/>
-
-		<copy file="${project.dir}/tunnel-web/tunnel-web.war" tofile="modules/tunnel-web.war" />
 
 		<copy todir="modules/lib">
 			<fileset dir="${project.dir}/portal-shared" includes="portal-shared.jar" />
@@ -51,20 +45,18 @@
 			<fileset dir="${project.dir}/filters/strip" includes="strip-filter.jar" />
 			<fileset dir="${project.dir}/util-java" includes="util-java.jar" />
 			<fileset dir="${project.dir}/util-wsrp" includes="util-wsrp.jar" />
-			<fileset dir="${project.dir}/lib" includes="${libraries.current}" />
+			<fileset dir="${project.dir}/lib/portal" />
 		</copy>
 
-		<delete file="${ear.file}" failonerror="false" />
+		<delete file="liferay-portal.ear" failonerror="false" />
 
 		<ear
 			appxml="modules/META-INF/application.xml"
 			basedir="modules"
-			destfile="${ear.file}"
+			destfile="liferay-portal.ear"
 			excludes="META-INF/application.xml"
 			includes="**/*.jar,*.war,pramati*.xml,META-INF/*.xml"
 		/>
-
-		<!-- WAR -->
 
 		<copy todir="pro-war/WEB-INF/lib">
 			<fileset dir="modules" includes="*-ejb.jar" />
@@ -73,13 +65,16 @@
 			<fileset dir="${project.dir}/filters/secure" includes="secure-filter.jar" />
 			<fileset dir="${project.dir}/filters/strip" includes="strip-filter.jar" />
 			<fileset dir="${project.dir}/util-java" includes="util-java.jar" />
-			<fileset dir="${project.dir}/util-jsf" includes="util-jsf.jar" />
 			<fileset dir="${project.dir}/util-wsrp" includes="util-wsrp.jar" />
-			<fileset dir="${project.dir}/lib" includes="${libraries.current}" />
-			<fileset dir="${project.dir}/lib" includes="jms.jar,jta.jar,mail.jar" />
+			<fileset dir="${project.dir}/lib/development" includes="activation.jar,jms.jar,jta.jar,mail.jar" />
+			<fileset dir="${project.dir}/lib/portal" />
 		</copy>
 
-		<copy file="${project.dir}/portal-ejb/classes/portal.properties" tofile="portal.properties" overwrite="yes" />
+		<copy
+			file="${project.dir}/portal-ejb/classes/portal.properties"
+			tofile="portal.properties"
+			overwrite="yes"
+		/>
 
 		<replace file="portal.properties">
 			<replacetoken>    portal.release=enterprise</replacetoken>
@@ -100,7 +95,12 @@
 
 		<delete file="portal.properties" />
 
-		<copy file="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml" tofile="pro-war/WEB-INF/web.xml" overwrite="yes" />
+		<copy
+			file="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml"
+			tofile="pro-war/WEB-INF/web.xml"
+			overwrite="yes"
+		/>
+
 		<java
 			classname="com.liferay.portal.tools.WebXMLStripper"
 			classpathref="project.classpath"
@@ -110,95 +110,21 @@
 			<arg value="pro-war/WEB-INF/web.xml" />
 		</java>
 
-		<copy file="modules/portal-web-complete.war" tofile="${war.file}.war" overwrite="yes" />
+		<copy
+			file="modules/portal-web.war"
+			tofile="liferay-portal.war"
+			overwrite="yes"
+		/>
+
 		<war
 			basedir="pro-war"
-			destfile="${war.file}.war"
+			destfile="liferay-portal.war"
 			excludes="WEB-INF/web.xml"
 			webxml="pro-war/WEB-INF/web.xml"
 			update="yes"
 		/>
 
 		<delete file="velocity.log" failonerror="false" />
-	</target>
-
-	<target name="ear-jonas" if="jonas.genic">
-		<antcall target="ear-jonas-genic">
-			<param name="module.name" value="counter-ejb" />
-		</antcall>
-
-		<antcall target="ear-jonas-genic">
-			<param name="module.name" value="documentlibrary-ejb" />
-		</antcall>
-
-		<antcall target="ear-jonas-genic">
-			<param name="module.name" value="lock-ejb" />
-		</antcall>
-
-		<antcall target="ear-jonas-genic">
-			<param name="module.name" value="mail-ejb" />
-		</antcall>
-
-		<antcall target="ear-jonas-genic">
-			<param name="module.name" value="portal-ejb" />
-		</antcall>
-	</target>
-
-	<target name="ear-jonas-genic">
-		<tstamp>
-			<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<mkdir dir="${tstamp.dir}" />
-
-		<java
-			classname="org.objectweb.jonas.server.Bootstrap"
-			classpath="${classpath.jonas.genic}"
-			fork="true"
-			maxmemory="512m"
-		>
-			<jvmarg value="-Dinstall.root=${env.JONAS_ROOT}" />
-			<jvmarg value="-Djonas.base=${env.JONAS_ROOT}" />
-			<jvmarg value="-Djava.security.policy=${env.JONAS_ROOT}/conf/java.policy" />
-			<jvmarg value="-Djava.endorsed.dirs=${env.JONAS_ROOT}/lib/endorsed" />
-			<jvmarg value="-Djava.io.tmpdir=${tstamp.dir}" />
-			<arg value="org.objectweb.jonas_ejb.genic.GenIC" />
-			<arg value="-d" />
-			<arg value="${tstamp.dir}" />
-			<arg value="-nocompil" />
-			<arg value="-protocols" />
-			<arg value="jrmp" />
-			<arg value="-keepgenerated" />
-			<arg value="-invokecmd" />
-			<arg value="../${module.name}/classes/META-INF/ejb-jar.xml" />
-		</java>
-
-		<javac
-			classpath="${classpath.jonas.compiler}"
-			srcdir="${tstamp.dir}"
-			fork="true"
-			memoryMaximumSize="512m"
-		/>
-
-		<rmic
-			base="${tstamp.dir}"
-			classpath="${classpath.jonas.compiler}"
-			excludes="**/*LocalHome.class"
-			includes="**/*Home.class,**/*Remote.class"
-		/>
-
-		<jar
-			duplicate="preserve"
-			jarfile="modules/${module.name}.jar"
-			update="yes"
-		>
-			<fileset
-				dir="${tstamp.dir}"
-				includes="**/*.class,**/*.xml"
-			/>
-		</jar>
-
-		<delete dir="${tstamp.dir}" />
 	</target>
 
 	<target name="jar-jaas">

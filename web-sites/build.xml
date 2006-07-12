@@ -28,6 +28,10 @@
 			</or>
 			<then>
 				<property name="war.file.dest" value="${app.server.portal.dir}/portal-web.war" />
+
+				<copy todir="${app.server.portal.dir}">
+					<fileset dir="${project.dir}/portal-ear/modules" />
+				</copy>
 			</then>
 			<else>
 				<property name="war.file.dest" value="${app.server.portal.dir}" />

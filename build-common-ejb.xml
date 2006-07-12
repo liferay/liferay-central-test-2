@@ -20,8 +20,6 @@
 		</jar>
 
 		<antcall target="jar-jonas-genic" />
-
-		<copy file="${jar.file}.jar" todir="${project.dir}/portal-ear/modules" />
 	</target>
 
 	<target name="jar-jonas-genic" if="jonas.genic">
