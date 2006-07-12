@@ -3,6 +3,7 @@
 <project name="ext-ejb-parent">
 	<import file="../build-common.xml" />
 
+	<property name="jar.file" value="${ant.project.name}" />
 	<property name="service.file" value="service.xml" />
 
 	<target name="clean">
@@ -33,6 +34,88 @@
 		</copy>
 	</target>
 
+	<target name="jar" depends="compile">
+		<manifest file="classes/META-INF/MANIFEST.MF.JOnAS">
+			<attribute name="Class-Path" value="${classpath.manifest.jonas}" />
+			<attribute name="Genic-Jonas-Version" value="${app.server.jonas-jetty.ejbgen.version}" />
+			<attribute name="Genic-Jonas-protocols" value="${app.server.jonas-jetty.ejbgen.protocols}" />
+		</manifest>
+
+		<jar
+			basedir="classes"
+			excludes="portal-ext.properties,system-ext.properties"
+			jarfile="${jar.file}.jar"
+		>
+			<manifest>
+				<attribute name="Class-Path" value="counter-ejb.jar documentlibrary-ejb.jar lock-ejb.jar mail-ejb.jar portal-ejb.jar ${classpath.manifest}" />
+			</manifest>
+		</jar>
+
+		<antcall target="jar-jonas-genic" />
+	</target>
+
+	<target name="jar-jonas-genic">
+		<if>
+			<equals arg1="${app.server.jonas-jetty.ejbgen.compile}" arg2="on" />
+			<then>
+				<tstamp>
+					<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+				</tstamp>
+
+				<mkdir dir="${tstamp.dir}" />
+
+				<java
+					classname="org.objectweb.jonas.server.Bootstrap"
+					classpath="${classpath.jonas.genic}"
+					fork="true"
+					maxmemory="512m"
+				>
+					<jvmarg value="-Dinstall.root=${env.JONAS_ROOT}" />
+					<jvmarg value="-Djonas.base=${env.JONAS_ROOT}" />
+					<jvmarg value="-Djava.security.policy=${env.JONAS_ROOT}/conf/java.policy" />
+					<jvmarg value="-Djava.endorsed.dirs=${env.JONAS_ROOT}/lib/endorsed" />
+					<jvmarg value="-Djava.io.tmpdir=${tstamp.dir}" />
+					<arg value="org.objectweb.jonas_ejb.genic.GenIC" />
+					<arg value="-d" />
+					<arg value="${tstamp.dir}" />
+					<arg value="-nocompil" />
+					<arg value="-protocols" />
+					<arg value="jrmp" />
+					<arg value="-keepgenerated" />
+					<arg value="-invokecmd" />
+					<arg value="classes/META-INF/ejb-jar.xml" />
+				</java>
+
+				<javac
+					classpath="${classpath.jonas.compiler}"
+					srcdir="${tstamp.dir}"
+					fork="true"
+					memoryMaximumSize="512m"
+				/>
+
+				<rmic
+					base="${tstamp.dir}"
+					classpath="${classpath.jonas.compiler}"
+					excludes="**/*LocalHome.class"
+					includes="**/*Home.class,**/*Remote.class"
+				/>
+
+				<jar
+					duplicate="preserve"
+					jarfile="${jar.file}.jar"
+					update="yes"
+				>
+					<fileset
+						dir="${tstamp.dir}"
+						includes="**/*.class,**/*.xml"
+					/>
+				</jar>
+
+				<delete dir="${tstamp.dir}" />
+			</then>
+		</if>
+	</target>
+
 	<target name="java2html">
 		<java
 			classname="com.liferay.util.Java2Html"
@@ -42,8 +125,11 @@
 				<arg value="src" />
 				<arg value="${java2html.dir}" />
 		</java>
+		
 		<move file="${java2html.dir}/stylesheet.css" tofile="${java2html.dir}/java2html.css" />
+		
 		<antcall target="javadoc" />
+		
 		<replace dir="${java2html.dir}">
 			<include name="**/package-summary.html" />
 			<replacefilter
@@ -55,6 +141,7 @@
 
 	<target name="javadoc">
 		<mkdir dir="${javadoc.dir}" />
+
 		<javadoc
 			classpathref="project.classpath"
 			destdir="${project.dir}/api/ext-ejb"
@@ -63,144 +150,39 @@
 		/>
 	</target>
 
-	<target name="deploy" depends="compile">
+	<target name="deploy" depends="jar">
 		<if>
 			<or>
-				<equals arg1="${app.server.type}" arg2="jetty" />
-				<equals arg1="${app.server.type}" arg2="resin" />
-				<equals arg1="${app.server.type}" arg2="tomcat" />
-				<equals arg1="${app.server.type}" arg2="websphere" />
+				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 			</or>
 			<then>
-				<jar
-					basedir="classes"
-					excludes="portal-ext.properties,system-ext.properties,content/Language*.properties"
-					jarfile="ext-ejb.jar"
-				/>
-
-				<copy file="ext-ejb.jar" todir="${app.server.lib.dir}" />
-
-				<if>
-					<or>
-						<equals arg1="${app.server.type}" arg2="resin" />
-						<equals arg1="${app.server.type}" arg2="tomcat" />
-					</or>
-					<then>
-						<property name="properties.dir" value="${app.server.dir}/common/classes" />
-					</then>
-					<else>
-						<property name="properties.dir" value="${app.server.lib.dir}" />
-					</else>
-				</if>
-
-				<copy todir="${properties.dir}">
-					<fileset dir="classes" includes="*.properties,content/Language*.properties" />
-				</copy>
-
-				<replace file="${properties.dir}/portal-ext.properties">
-					<replacetoken>portal.release=enterprise</replacetoken>
-					<replacevalue>portal.release=professional</replacevalue>
-				</replace>
-
-				<if>
-					<equals arg1="${app.server.type}" arg2="resin" />
-					<then>
-						<replace file="${properties.dir}/portal-ext.properties">
-							<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
-							<replacevalue>auto.deploy.dest.dir=webapps</replacevalue>
-						</replace>
-					</then>
-				</if>
+				<unjar src="${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
 			</then>
+			<elseif>
+				<or>
+					<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+					<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+				</or>
+				<then>
+					<copy file="${jar.file}.jar" todir="${app.server.portal.dir}" />
+
+					<jar
+						basedir="."
+						destfile="${app.server.portal.dir}/${jar.file}.jar"
+						manifest="classes/META-INF/MANIFEST.MF.JOnAS"
+						update="yes"
+					/>
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="orion" />
+				<then>
+					<copy file="${jar.file}.jar" todir="${app.server.deploy.dir}" />
+				</then>
+			</elseif>
 			<else>
-				<if>
-					<and>
-						<or>
-							<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-							<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-						</or>
-						<equals arg1="${jboss.ejb.expand}" arg2="off" />
-					</and>
-					<then>
-						<jar
-							basedir="classes"
-							excludes="portal-ext.properties,system-ext.properties,content/Language*.properties"
-							jarfile="ext-ejb.jar"
-						/>
-			
-						<copy file="ext-ejb.jar" todir="${app.server.lib.dir}" />
-					</then>
-					<else>
-						<copy todir="${app.server.deploy.dir}/${ext.ear.file}/ext-ejb.jar">
-							<fileset dir="classes" />
-							<fileset dir="src" includes="${classes.dir.excludes}" />
-						</copy>
-		
-						<manifest file="${app.server.deploy.dir}/${ext.ear.file}/ext-ejb.jar/META-INF/MANIFEST.MF">
-							<attribute name="Class-Path" value="${classpath.manifest}" />
-						</manifest>					
-
-						<if>
-							<or>
-								<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-								<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-							</or>
-							<then>
-								<replace file="${app.server.deploy.dir}/${ext.ear.file}/ext-ejb.jar/portal-ext.properties">
-									<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
-									<replacevalue>auto.deploy.dest.dir=../server/default/deploy</replacevalue>
-								</replace>
-							</then>
-						</if>
-
-						<if>
-							<or>
-								<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-								<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-							</or>
-							<then>
-								<manifest file="${app.server.deploy.dir}/${ext.ear.file}/ext-ejb.jar/META-INF/MANIFEST.MF">
-									<attribute name="Class-Path" value="${classpath.manifest.jonas}" />
-								</manifest>
-		
-								<tstamp>
-									<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
-								</tstamp>
-		
-								<mkdir dir="${tstamp.dir}" />
-		
-								<java
-									classname="org.objectweb.jonas.server.Bootstrap"
-									classpath="${classpath.jonas.genic}"
-									fork="true"
-									maxmemory="512m"
-								>
-									<jvmarg value="-Dinstall.root=${env.JONAS_ROOT}" />
-									<jvmarg value="-Djonas.base=${env.JONAS_ROOT}" />
-									<jvmarg value="-Djava.security.policy=${env.JONAS_ROOT}/conf/java.policy" />
-									<jvmarg value="-Djava.endorsed.dirs=${env.JONAS_ROOT}/lib/endorsed" />
-									<jvmarg value="-Djava.io.tmpdir=${tstamp.dir}" />
-									<arg value="org.objectweb.jonas_ejb.genic.GenIC" />
-									<arg value="-d" />
-									<arg value="${app.server.deploy.dir}/${ext.ear.file}/ext-ejb.jar" />
-									<arg value="-noaddinjar" />
-									<arg value="-protocols" />
-									<arg value="jrmp" />
-									<arg value="-keepgenerated" />
-									<arg value="-invokecmd" />
-									<arg value="classes/META-INF/ejb-jar.xml" />
-								</java>
-		
-								<delete dir="${tstamp.dir}" />
-
-								<replace file="${app.server.deploy.dir}/${ext.ear.file}/ext-ejb.jar/portal-ext.properties">
-									<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
-									<replacevalue>auto.deploy.dest.dir=../../webapps/autoload</replacevalue>
-								</replace>
-							</then>
-						</if>
-					</else>
-				</if>
+				<copy file="${jar.file}.jar" todir="${app.server.lib.portal.dir}" />
 			</else>
 		</if>
 	</target>
@@ -232,7 +214,9 @@
 			<arg value="classes/META-INF/ext-spring-professional.xml" />
 			<arg value="com.liferay.portal.spring.util.SpringUtil" />
 		</java>
+
 		<delete file="ServiceBuilder.temp" />
+		
 		<antcall target="build-ejbxml" />
 	</target>
 
@@ -252,6 +236,7 @@
 			<arg value="${service.file}" />
 			<arg value="../ext-web/docroot/WEB-INF/server-config.wsdd" />
 		</java>
+
 		<antcall target="build-webxml" />
 	</target>
 </project>

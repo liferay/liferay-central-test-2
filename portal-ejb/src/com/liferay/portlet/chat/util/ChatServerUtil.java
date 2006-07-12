@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -20,10 +19,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+package com.liferay.portlet.chat.util;
 
---%><%@ page import="com.liferay.portlet.chat.servlet.ChatServlet" %><%--
---%><%@ page import="com.liferay.portlet.chat.util.ChatServer" %><%--
---%><%@ page import="com.liferay.portlet.chat.util.ChatServerUtil" %>
+import com.liferay.portal.shared.util.IntegerWrapper;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.GetterUtil;
+
+import java.io.IOException;
+
+import java.net.BindException;
+import java.net.ServerSocket;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+/**
+ * <a href="ChatServerUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * Pass in the ChatServer object as a workaround for a Jikes compile bug.
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class ChatServerUtil {
+
+	public int getRoomCount(ChatServer server) {
+		return server.getRoomCount();
+	}
+
+	public int getUserCount(ChatServer server) {
+		return server.getUserCount();
+	}
+
+}

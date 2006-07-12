@@ -67,6 +67,7 @@
 
 	<target name="compile-module">
 		<mkdir dir="${module.name}.war/WEB-INF/classes" />
+		
 		<javac
 			classpathref="project.classpath"
 			compiler="${javac.compiler}"
@@ -132,13 +133,13 @@
 
 				<!-- Optional Arguments -->
 
-				<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.lib.dir}" />
+				<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
 
 				<!-- Dependent Libraries -->
 
-				<arg value="${project.dir}/util-taglib/util-taglib.jar" />
 				<arg value="${project.dir}/util-java/util-java.jar" />
 				<arg value="${project.dir}/util-jsf/util-jsf.jar" />
+				<arg value="${project.dir}/util-taglib/util-taglib.jar" />
 		</java>
 	</target>
 </project>

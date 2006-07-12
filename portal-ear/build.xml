@@ -34,7 +34,6 @@
 			basedir="${project.dir}/web-sites/liferay.com-web/docroot"
 			destfile="modules/portal-web.war"
 			excludes="WEB-INF/web.xml"
-			includes="index.html,WEB-INF/**"
 			webxml="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml"
 			update="yes"
 		/>

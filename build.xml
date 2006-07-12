@@ -70,15 +70,15 @@
 				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 			</or>
 			<then>
-				<delete>
+				<delete failonerror="false">
 					<fileset dir="${app.server.bin.dir}/nt" includes="test.*" />
 				</delete>
-				<delete>
+				<delete failonerror="false">
 					<fileset dir="${app.server.bin.dir}/unix" includes="test.*" />
 				</delete>
 			</then>
 			<else>
-				<delete>
+				<delete failonerror="false">
 					<fileset dir="${app.server.bin.dir}" includes="test.*" />
 				</delete>
 			</else>
@@ -91,14 +91,14 @@
 			/>
 		</delete>
 
-		<delete includeemptydirs="true">
+		<delete includeemptydirs="true" failonerror="false">
 			<fileset
 				dir="${app.server.deploy.dir}"
 				includes="cms-web*/**,laszlo-web*/**,sample*/**,tunnel-web*/**"
 			/>
 		</delete>
 
-		<delete>
+		<delete failonerror="false">
 			<fileset
 				dir="${app.server.lib.global.dir}"
 				excludes="${jdbc.drivers}"
@@ -113,15 +113,9 @@
 		</delete>
 
 		<delete dir="${app.server.log.dir}" />
-		<mkdir dir="${app.server.log.dir}" />
-
 		<delete dir="${app.server.portal.dir}" />
-
 		<delete dir="${app.server.temp.dir}" />
-		<mkdir dir="${app.server.temp.dir}" />
-
 		<delete dir="${app.server.work.dir}" />
-		<mkdir dir="${app.server.work.dir}" />
 	</target>
 
 	<target name="compile">
@@ -317,6 +311,10 @@
 				</then>
 			</elseif>
 		</if>
+
+		<mkdir dir="${app.server.log.dir}" />
+		<mkdir dir="${app.server.temp.dir}" />
+		<mkdir dir="${app.server.work.dir}" />
 	</target>
 
 	<target name="build-eclipse">
@@ -375,10 +373,10 @@
 			<fileset dir="${project.dir}/lock-ejb" includes="lock-ejb.jar" />
 			<fileset dir="${project.dir}/mail-ejb" includes="mail-ejb.jar" />
 			<fileset dir="${project.dir}/portal-ejb" includes="portal-ejb.jar" />
-			<fileset dir="${project.dir}/cms-web" includes="cms-web.jar" />
-			<fileset dir="${project.dir}/laszlo-web" includes="laszlo-web.jar" />
-			<fileset dir="${project.dir}/portal-web" includes="portal-web.jar" />
-			<fileset dir="${project.dir}/tunnel-web" includes="tunnel-web.jar" />
+			<fileset dir="${project.dir}/cms-web" includes="cms-web.war" />
+			<fileset dir="${project.dir}/laszlo-web" includes="laszlo-web.war" />
+			<fileset dir="${project.dir}/portal-web" includes="portal-web.war" />
+			<fileset dir="${project.dir}/tunnel-web" includes="tunnel-web.war" />
 		</copy>
 
 		<mkdir dir="${lp.ext.dir}/ext-lib" />
@@ -388,7 +386,7 @@
 
 		<copy file="lib/readme.txt" todir="${lp.ext.dir}/ext-lib" />
 
-		<copy todir="${lp.ext.dir}/lib" overwrite="yes">
+		<!--<copy todir="${lp.ext.dir}/lib" overwrite="yes">
 			<fileset dir="lib" />
 		</copy>
 
@@ -424,7 +422,7 @@
 			<fileset dir="sql">
 				<exclude name="**/log/**" />
 			</fileset>
-		</copy>
+		</copy>-->
 
 		<copy todir="${lp.ext.dir}/tools" overwrite="yes">
 			<fileset dir="tools" includes="java2html.bat,javadoc.css" />

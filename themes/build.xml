@@ -3,19 +3,6 @@
 <project name="themes" basedir="." default="deploy">
 	<import file="../build-common.xml" />
 
-	<target name="war">
-		<delete>
-			<fileset dir="." includes="**/Thumbs.db" />
-		</delete>
-
-		<!--<war
-			basedir="sample_pack_01_themes.war"
-			destfile="../sample_pack_01_themes.war"
-			excludes="WEB-INF/web.xml"
-			webxml="sample_pack_01_themes.war/WEB-INF/web.xml"
-		/>-->
-	</target>
-
 	<target name="deploy">
 		<java
 			classname="com.liferay.portal.tools.ThemeDeployer"
@@ -34,12 +21,12 @@
 
 				<!-- Optional Arguments -->
 
-				<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.lib.dir}" />
+				<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
 
 				<!-- Dependent Libraries -->
 
-				<arg value="${project.dir}/util-taglib/util-taglib.jar" />
 				<arg value="${project.dir}/util-java/util-java.jar" />
+				<arg value="${project.dir}/util-taglib/util-taglib.jar" />
 		</java>
 	</target>
 </project>

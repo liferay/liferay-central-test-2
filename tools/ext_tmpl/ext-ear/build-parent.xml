@@ -9,332 +9,117 @@
 		</delete>
 	</target>
 
-	<target name="ear" depends="deploy,clean">
-		<jar
-			basedir="${app.server.deploy.dir}/${ext.ear.file}/ext-ejb.jar"
-			destfile="ext-ejb.jar"
-			includes="**/*.*" 
-			manifest="${app.server.deploy.dir}/${ext.ear.file}/ext-ejb.jar/META-INF/MANIFEST.MF" 
-			update="no"
-		/>
-
-		<war
-			basedir="${app.server.deploy.dir}/${ext.ear.file}/portal-web-complete.war"
-			destfile="portal-web-complete.war"
-			excludes="WEB-INF/web.xml"
-			includes="**/*.*"
-			webxml="${app.server.deploy.dir}/${ext.ear.file}/portal-web-complete.war/WEB-INF/web.xml" 
-			manifest="${app.server.deploy.dir}/${ext.ear.file}/portal-web-complete.war/META-INF/MANIFEST.MF" 
-			update="no"
-		/>
-
-		<ear
-			appxml="modules/META-INF/application.xml"
-			basedir="modules"
-			destfile="${ext.ear.file}"
-			excludes="META-INF/application.xml,portal-web.war"
-			includes="**/*.jar,*.war,META-INF/*.xml"
-		>
-			<fileset dir="${app.server.deploy.dir}/${ext.ear.file}" includes="lib/*.jar" />
-			<fileset dir="." includes="ext-ejb.jar" />
-			<fileset dir="." includes="portal-web-complete.war" />
-		</ear>
-
-		<delete file="ext-ejb.jar" />
-		<delete file="portal-web-complete.war" />
-	</target>
-
 	<target name="deploy">
 		<antcall target="deploy-ejb-jar">
-			<param name="jar.file" value="counter-ejb.jar" />
+			<param name="jar.file" value="counter-ejb" />
 		</antcall>
 
 		<antcall target="deploy-ejb-jar">
-			<param name="jar.file" value="documentlibrary-ejb.jar" />
+			<param name="jar.file" value="documentlibrary-ejb" />
 		</antcall>
 
 		<antcall target="deploy-ejb-jar">
-			<param name="jar.file" value="lock-ejb.jar" />
+			<param name="jar.file" value="lock-ejb" />
 		</antcall>
 
 		<antcall target="deploy-ejb-jar">
-			<param name="jar.file" value="mail-ejb.jar" />
+			<param name="jar.file" value="mail-ejb" />
 		</antcall>
 
 		<antcall target="deploy-ejb-jar">
-			<param name="jar.file" value="portal-ejb.jar" />
+			<param name="jar.file" value="portal-ejb" />
 		</antcall>
 
 		<antcall target="deploy-war">
-			<param name="war.context" value="cms" />
+			<param name="war.file" value="cms-web" />
 		</antcall>
 
 		<antcall target="deploy-war">
-			<param name="war.context" value="laszlo" />
+			<param name="war.file" value="laszlo-web" />
 		</antcall>
 
 		<antcall target="deploy-war">
-			<param name="war.context" value="tunnel" />
+			<param name="war.file" value="tunnel-web" />
 		</antcall>
 	</target>
 
 	<target name="deploy-ejb-jar">
 		<if>
 			<or>
-				<equals arg1="${app.server.type}" arg2="jetty" />
-				<equals arg1="${app.server.type}" arg2="resin" />
-				<equals arg1="${app.server.type}" arg2="tomcat" />
-				<equals arg1="${app.server.type}" arg2="websphere" />
+				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 			</or>
 			<then>
-				<copy file="modules/${jar.file}.jar" todir="${app.server.lib.dir}" />
+				<unjar src="modules/${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
 			</then>
+			<elseif>
+				<or>
+					<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+					<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+				</or>
+				<then>
+					<copy file="modules/${jar.file}.jar" todir="${app.server.portal.dir}" />
+
+					<jar
+						basedir="."
+						destfile="${app.server.portal.dir}/${jar.file}.jar"
+						manifest="classes/META-INF/MANIFEST.MF.JOnAS"
+						update="yes"
+					/>
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="orion" />
+				<then>
+					<copy file="modules/${jar.file}.jar" todir="${app.server.deploy.dir}" />
+				</then>
+			</elseif>
 			<else>
-				<if>
-					<or>
-						<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-						<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-					</or>
-					<then>
-						<if>
-							<equals arg1="${jboss.ejb.expand}" arg2="on" />
-							<then>
-								<if>
-									<not>
-										<uptodate srcfile="modules/${jar.file}.jar" targetfile="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar" />
-									</not>
-									<then>
-										<delete dir="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar" />
-										<unjar src="modules/${jar.file}.jar" dest="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar" />
-										
-										<copy file="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar/META-INF/MANIFEST.MF.JOnAS" tofile="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar/META-INF/MANIFEST.MF" overwrite="yes" />
-		
-										<tstamp>
-											<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
-										</tstamp>
-		
-										<mkdir dir="${tstamp.dir}" />
-		
-										<java
-											classname="org.objectweb.jonas.server.Bootstrap"
-											classpath="${classpath.jonas.genic}"
-											fork="true"
-											maxmemory="512m"
-										>
-											<jvmarg value="-Dinstall.root=${env.JONAS_ROOT}" />
-											<jvmarg value="-Djonas.base=${env.JONAS_ROOT}" />
-											<jvmarg value="-Djava.security.policy=${env.JONAS_ROOT}/conf/java.policy" />
-											<jvmarg value="-Djava.endorsed.dirs=${env.JONAS_ROOT}/lib/endorsed" />
-											<jvmarg value="-Djava.io.tmpdir=${tstamp.dir}" />
-											<arg value="org.objectweb.jonas_ejb.genic.GenIC" />
-											<arg value="-d" />
-											<arg value="${tstamp.dir}" />
-											<arg value="-nocompil" />
-											<arg value="-protocols" />
-											<arg value="jrmp" />
-											<arg value="-keepgenerated" />
-											<arg value="-invokecmd" />
-											<arg value="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar/META-INF/ejb-jar.xml" />
-										</java>
-		
-										<javac
-											classpath="${classpath.jonas.compiler}"
-											srcdir="${tstamp.dir}"
-											fork="true"
-											memoryMaximumSize="512m"
-										/>
-		
-										<rmic
-											base="${tstamp.dir}"
-											classpath="${classpath.jonas.compiler}"
-											excludes="**/*LocalHome.class"
-											includes="**/*Home.class,**/*Remote.class"
-										/>
-		
-										<copy todir="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar">
-											<fileset dir="${tstamp.dir}" includes="**/*.class,**/*.xml" />
-										</copy>
-		
-										<delete dir="${tstamp.dir}" />
-									</then>
-								</if>
-							</then>
-							<else>
-								<copy file="modules/${jar.file}.jar" todir="${app.server.lib.dir}" />
-							</else>
-						</if>
-					</then>
-					<else>
-						<if>
-							<not>
-								<uptodate srcfile="modules/${jar.file}.jar" targetfile="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar" />
-							</not>
-							<then>
-								<delete dir="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar" />
-								<unjar src="modules/${jar.file}.jar" dest="${app.server.deploy.dir}/${ext.ear.file}/${jar.file}.jar" />
-							</then>
-						</if>
-					</else>
-				</if>
+				<copy file="modules/${jar.file}.jar" todir="${app.server.lib.portal.dir}" />
 			</else>
-		</if>
+		</if>		
 	</target>
 
 	<target name="deploy-war">
 		<if>
 			<or>
-				<equals arg1="${app.server.type}" arg2="jetty" />
-				<equals arg1="${app.server.type}" arg2="resin" />
-				<equals arg1="${app.server.type}" arg2="tomcat" />
+				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 			</or>
 			<then>
-				<if>
-					<not>
-						<uptodate srcfile="modules/${war.context}-web.war" targetfile="${app.server.dir}/webapps/${war.context}" />
-					</not>
-					<then>
-						<unjar src="modules/${war.context}-web.war" dest="${app.server.dir}/webapps/${war.context}" />
+				<property name="war.file.dest" value="${app.server.portal.dir}/${war.file}.war" />
+			</then>
+			<else>
+				<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}" />
+			</else>
+		</if>
 
-						<java
-							classname="com.liferay.portal.tools.WebXMLStripper"
-							classpathref="project.classpath"
-							fork="true"
-							newenvironment="true"
-						>
-							<arg value="${app.server.dir}/webapps/${war.context}/WEB-INF/web.xml" />
-						</java>
-					</then>
-				</if>
+		<if>
+			<equals arg1="${app.server.type}" arg2="orion" />
+			<then>
+				<copy file="modules/${war.file}.war" todir="${app.server.deploy.dir}" />
+			</then>
+			<else>
+				<unwar src="modules/${war.file}.war" dest="${war.file.dest}" />
+			</else>
+		</if>
 
-				<if>
-					<equals arg1="${war.context}" arg2="laszlo" />
-					<then>
-						<copy todir="${app.server.dir}/webapps/${war.context}/WEB-INF/lib">
-							<fileset dir="${project.dir}/lib" includes="commons-collections.jar,commons-httpclient.jar,jdom.jar" />
-						</copy>
-					</then>
-				</if>
-
-				<if>
-					<equals arg1="${war.context}" arg2="tunnel" />
-					<then>
-						<copy file="../ext-web/docroot/WEB-INF/remoting-servlet-ext.xml" todir="${app.server.dir}/webapps/${war.context}/WEB-INF" />
-
-						<java
-							classname="com.liferay.portal.tools.WSDDMerger"
-							classpathref="project.classpath"
-							fork="true"
-							newenvironment="true"
-						>
-							<arg value="../ext-web/docroot/WEB-INF/server-config.wsdd" />
-							<arg value="${app.server.dir}/webapps/${war.context}/WEB-INF/server-config.wsdd" />
-						</java>
-					</then>
-				</if>
+		<if>
+			<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+			<then>
+				<move
+					file="${war.file.dest}/WEB-INF/web-jetty.xml.JOnAS_Jetty"
+					tofile="${war.file.dest}/WEB-INF/web-jetty.xml"
+				/>
 			</then>
 			<elseif>
-				<equals arg1="${app.server.type}" arg2="websphere" />
+				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 				<then>
+					<delete file="${war.file.dest}/META-INF/context.xml" />
 				</then>
 			</elseif>
-			<else>
-				<if>
-					<or>
-						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-						<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-						<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-						<equals arg1="${app.server.type}" arg2="rexip" />
-						<equals arg1="${app.server.type}" arg2="weblogic" />
-					</or>
-					<then>
-						<property name="war.file" value="${war.context}-web.war" />
-					</then>
-					<elseif>
-						<or>
-							<equals arg1="${app.server.type}" arg2="oc4j" />
-							<equals arg1="${app.server.type}" arg2="orion" />
-						</or>
-						<then>
-							<property name="war.file" value="${war.context}-web" />
-						</then>
-					</elseif>
-				</if>
-
-				<if>
-					<not>
-						<uptodate srcfile="modules/${war.context}-web.war" targetfile="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war" />
-					</not>
-					<then>
-						<unjar src="modules/${war.context}-web.war" dest="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war" />
-					</then>
-				</if>
-
-				<if>
-					<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-					<then>
-						<copy file="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war/WEB-INF/web-jetty.xml.JOnAS_Jetty" tofile="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war/WEB-INF/web-jetty.xml" overwrite="yes" failonerror="false" />
-					</then>
-				</if>
-
-				<if>
-					<or>
-						<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-						<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-					</or>
-					<then>
-						<replace file="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war/WEB-INF/web.xml">
-							<replacetoken><![CDATA[<ejb-link>com_liferay_]]></replacetoken>
-							<replacevalue><![CDATA[<ejb-link>portal-ejb.jar#com_liferay_]]></replacevalue>
-						</replace>
-
-						<replace file="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war/WEB-INF/web.xml">
-							<replacetoken><![CDATA[<ejb-link>portal-ejb.jar#com_liferay_documentlibrary_]]></replacetoken>
-							<replacevalue><![CDATA[<ejb-link>documentlibrary-ejb.jar#com_liferay_documentlibrary_]]></replacevalue>
-						</replace>
-					</then>
-				</if>
-
-				<copy todir="${app.server.deploy.dir}/${ext.ear.file}">
-					<fileset dir="modules" includes="META-INF/*.xml" />
-				</copy>
-
-				<if>
-					<or>
-						<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-						<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-					</or>
-					<then>
-						<replace file="${app.server.deploy.dir}/${ext.ear.file}/META-INF/application.xml">
-							<replacetoken><![CDATA[
-	<module>
-		<web>
-			<web-uri>${war.context}-web.war</web-uri>
-			<context-root>/${war.context}</context-root>
-		</web>
-	</module>]]></replacetoken>
-							<replacevalue></replacevalue>
-						</replace>
-					</then>
-				</if>
-
-				<if>
-					<equals arg1="${war.context}" arg2="tunnel" />
-					<then>
-						<copy file="../ext-web/docroot/WEB-INF/remoting-servlet-ext.xml" todir="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war/WEB-INF" />
-
-						<java
-							classname="com.liferay.portal.tools.WSDDMerger"
-							classpathref="project.classpath"
-							fork="true"
-							newenvironment="true"
-						>
-							<arg value="../ext-web/docroot/WEB-INF/server-config.wsdd" />
-							<arg value="${app.server.deploy.dir}/${ext.ear.file}/${war.file}.war/WEB-INF/server-config.wsdd" />
-						</java>
-					</then>
-				</if>
-			</else>
 		</if>
 	</target>
 </project>

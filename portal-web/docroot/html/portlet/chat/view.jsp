@@ -49,8 +49,8 @@ String roomName = ParamUtil.getString(request, "roomName");
 		</c:if>
 
 		<%
-		int userCount = chatServer.getUserCount();
-		int roomCount = chatServer.getRoomCount();
+		int userCount = ChatServerUtil.getUserCount(chatServer);
+		int roomCount = ChatServerUtil.getRoomCount(chatServer);
 
 		/*if (Validator.isNotNull(roomName)) {
 			userCount++;
@@ -58,7 +58,7 @@ String roomName = ParamUtil.getString(request, "roomName");
 		}*/
 		%>
 
-		<%= LanguageUtil.format(pageContext, "there-are-currently-x-users-in-x-rooms", new Object[] {Integer.toString(userCount), Integer.toString(roomCount)}, false) %>
+		<%--<%= LanguageUtil.format(pageContext, "there-are-currently-x-users-in-x-rooms", new Object[] {Integer.toString(userCount), Integer.toString(roomCount)}, false) %>
 
 		<br><br>
 
@@ -94,9 +94,9 @@ String roomName = ParamUtil.getString(request, "roomName");
 		</tr>
 		</table>
 
-		</form>
+		</form>--%>
 	</c:when>
 	<c:otherwise>
-		<liferay-util:include page="/html/portal/portlet_inactive.jsp" />
+		<%--<liferay-util:include page="/html/portal/portlet_inactive.jsp" />--%>
 	</c:otherwise>
 </c:choose>

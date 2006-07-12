@@ -6,8 +6,8 @@
 	<target name="jar" depends="compile">
 		<manifest file="classes/META-INF/MANIFEST.MF.JOnAS">
 			<attribute name="Class-Path" value="${classpath.manifest.jonas}" />
-			<attribute name="Genic-Jonas-Version" value="${jonas.version}" />
-			<attribute name="Genic-Jonas-protocols" value="${jonas.protocols}" />
+			<attribute name="Genic-Jonas-Version" value="${app.server.jonas-jetty.ejbgen.version}" />
+			<attribute name="Genic-Jonas-protocols" value="${app.server.jonas-jetty.ejbgen.protocols}" />
 		</manifest>
 
 		<jar
@@ -22,61 +22,66 @@
 		<antcall target="jar-jonas-genic" />
 	</target>
 
-	<target name="jar-jonas-genic" if="jonas.genic">
-		<tstamp>
-			<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
+	<target name="jar-jonas-genic">
+		<if>
+			<equals arg1="${app.server.jonas-jetty.ejbgen.compile}" arg2="on" />
+			<then>
+				<tstamp>
+					<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+				</tstamp>
 
-		<mkdir dir="${tstamp.dir}" />
+				<mkdir dir="${tstamp.dir}" />
 
-		<java
-			classname="org.objectweb.jonas.server.Bootstrap"
-			classpath="${classpath.jonas.genic}"
-			fork="true"
-			maxmemory="512m"
-		>
-			<jvmarg value="-Dinstall.root=${env.JONAS_ROOT}" />
-			<jvmarg value="-Djonas.base=${env.JONAS_ROOT}" />
-			<jvmarg value="-Djava.security.policy=${env.JONAS_ROOT}/conf/java.policy" />
-			<jvmarg value="-Djava.endorsed.dirs=${env.JONAS_ROOT}/lib/endorsed" />
-			<jvmarg value="-Djava.io.tmpdir=${tstamp.dir}" />
-			<arg value="org.objectweb.jonas_ejb.genic.GenIC" />
-			<arg value="-d" />
-			<arg value="${tstamp.dir}" />
-			<arg value="-nocompil" />
-			<arg value="-protocols" />
-			<arg value="jrmp" />
-			<arg value="-keepgenerated" />
-			<arg value="-invokecmd" />
-			<arg value="classes/META-INF/ejb-jar.xml" />
-		</java>
+				<java
+					classname="org.objectweb.jonas.server.Bootstrap"
+					classpath="${classpath.jonas.genic}"
+					fork="true"
+					maxmemory="512m"
+				>
+					<jvmarg value="-Dinstall.root=${env.JONAS_ROOT}" />
+					<jvmarg value="-Djonas.base=${env.JONAS_ROOT}" />
+					<jvmarg value="-Djava.security.policy=${env.JONAS_ROOT}/conf/java.policy" />
+					<jvmarg value="-Djava.endorsed.dirs=${env.JONAS_ROOT}/lib/endorsed" />
+					<jvmarg value="-Djava.io.tmpdir=${tstamp.dir}" />
+					<arg value="org.objectweb.jonas_ejb.genic.GenIC" />
+					<arg value="-d" />
+					<arg value="${tstamp.dir}" />
+					<arg value="-nocompil" />
+					<arg value="-protocols" />
+					<arg value="jrmp" />
+					<arg value="-keepgenerated" />
+					<arg value="-invokecmd" />
+					<arg value="classes/META-INF/ejb-jar.xml" />
+				</java>
 
-		<javac
-			classpath="${classpath.jonas.compiler}"
-			srcdir="${tstamp.dir}"
-			fork="true"
-			memoryMaximumSize="512m"
-		/>
+				<javac
+					classpath="${classpath.jonas.compiler}"
+					srcdir="${tstamp.dir}"
+					fork="true"
+					memoryMaximumSize="512m"
+				/>
 
-		<rmic
-			base="${tstamp.dir}"
-			classpath="${classpath.jonas.compiler}"
-			excludes="**/*LocalHome.class"
-			includes="**/*Home.class,**/*Remote.class"
-		/>
+				<rmic
+					base="${tstamp.dir}"
+					classpath="${classpath.jonas.compiler}"
+					excludes="**/*LocalHome.class"
+					includes="**/*Home.class,**/*Remote.class"
+				/>
 
-		<jar
-			duplicate="preserve"
-			jarfile="${jar.file}.jar"
-			update="yes"
-		>
-			<fileset
-				dir="${tstamp.dir}"
-				includes="**/*.class,**/*.xml"
-			/>
-		</jar>
+				<jar
+					duplicate="preserve"
+					jarfile="${jar.file}.jar"
+					update="yes"
+				>
+					<fileset
+						dir="${tstamp.dir}"
+						includes="**/*.class,**/*.xml"
+					/>
+				</jar>
 
-		<delete dir="${tstamp.dir}" />
+				<delete dir="${tstamp.dir}" />
+			</then>
+		</if>
 	</target>
 
 	<target name="deploy" depends="jar">

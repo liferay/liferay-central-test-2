@@ -3,6 +3,9 @@
 <project name="portlets-parent">
 	<import file="../build-common.xml" />
 
+	<target name="clean">
+	</target>
+
 	<target name="clean-module">
 		<delete file="../${module.name}.war" failonerror="false" />
 		<delete dir="${module.name}.war/WEB-INF/classes/com" failonerror="false" />
@@ -17,6 +20,8 @@
 	</target>
 
 	<target name="compile-module">
+		<mkdir dir="${module.name}.war/WEB-INF/classes" />
+		
 		<javac
 			classpathref="project.classpath"
 			compiler="${javac.compiler}"
@@ -30,36 +35,19 @@
 		/>
 	</target>
 
-	<target name="war-module" depends="compile">
+	<target name="war">
+	</target>
+
+	<target name="war-module">
 		<war
 			basedir="${module.name}.war"
-			destfile="../${module.name}.war"
+			destfile="../${module.name}-${lp.version.file.name}.war"
 			excludes="WEB-INF/web.xml*"
 			webxml="${module.name}.war/WEB-INF/web.xml"
 		/>
 	</target>
 
 	<target name="deploy">
-		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="jetty" />
-				<equals arg1="${app.server.type}" arg2="resin" />
-				<equals arg1="${app.server.type}" arg2="tomcat" />
-			</or>
-			<then>
-				<property name="portlet.deploy.dir" value="${app.server.dir}/webapps" />
-			</then>
-			<elseif>
-				<equals arg1="${app.server.type}" arg2="weblogic" />
-				<then>
-					<property name="portlet.deploy.dir" value="${app.server.deploy.dir}/${ext.ear.file}" />
-				</then>
-			</elseif>
-			<else>
-				<property name="portlet.deploy.dir" value="${app.server.deploy.dir}" />
-			</else>
-		</if>
-
 		<java
 			classname="com.liferay.portal.tools.PortletDeployer"
 			classpathref="project.classpath"
@@ -69,14 +57,14 @@
 				<!-- Required Arguments -->
 
 				<jvmarg value="-Ddeployer.base.dir=./" />
-				<jvmarg value="-Ddeployer.dest.dir=${portlet.deploy.dir}" />
+				<jvmarg value="-Ddeployer.dest.dir=${app.server.deploy.dir}" />
 				<jvmarg value="-Ddeployer.app.server.type=${app.server.type}" />
 				<jvmarg value="-Ddeployer.portlet.taglib.dtd=${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/tld/liferay-portlet.tld" />
 				<jvmarg value="-Ddeployer.unpack.war=true" />
 
 				<!-- Optional Arguments -->
 
-				<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.lib.dir}" />
+				<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
 
 				<!-- Dependent Libraries -->
 

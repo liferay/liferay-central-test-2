@@ -63,8 +63,8 @@
 	<target name="jar" depends="compile">
 		<manifest file="classes/META-INF/MANIFEST.MF.JOnAS">
 			<attribute name="Class-Path" value="${classpath.manifest.jonas}" />
-			<attribute name="Genic-Jonas-Version" value="${jonas.version}" />
-			<attribute name="Genic-Jonas-protocols" value="${jonas.protocols}" />
+			<attribute name="Genic-Jonas-Version" value="${app.server.jonas-jetty.ejbgen.version}" />
+			<attribute name="Genic-Jonas-protocols" value="${app.server.jonas-jetty.ejbgen.protocols}" />
 		</manifest>
 
 		<jar
