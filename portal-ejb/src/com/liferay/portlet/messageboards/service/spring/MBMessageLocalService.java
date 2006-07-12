@@ -161,4 +161,10 @@ public interface MBMessageLocalService {
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
+		java.lang.String messageId, java.util.Date createDate,
+		java.util.Date modifiedDate)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
 }

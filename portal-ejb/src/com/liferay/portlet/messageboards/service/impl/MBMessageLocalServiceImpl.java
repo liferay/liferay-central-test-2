@@ -820,6 +820,40 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		return message;
 	}
 
+	public MBMessage updateMessage(
+			String messageId, Date createDate, Date modifiedDate)
+		throws PortalException, SystemException {
+
+		// Message
+
+		MBMessage message = MBMessageUtil.findByPrimaryKey(
+			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
+
+		message.setCreateDate(createDate);
+		message.setModifiedDate(modifiedDate);
+
+		MBMessageUtil.update(message);
+
+		// Thread
+		
+		MBThread thread = MBThreadUtil.findByPrimaryKey(message.getThreadId());
+
+		thread.setLastPostDate(modifiedDate);
+
+		MBThreadUtil.update(thread);
+
+		// Category
+
+		MBCategory category = MBCategoryUtil.findByPrimaryKey(
+			message.getCategoryId());
+
+		category.setLastPostDate(modifiedDate);
+
+		MBCategoryUtil.update(category);
+
+		return message;
+	}
+
 	protected String exportToRSS(
 			String name, String description, double version, String url,
 			List messages)

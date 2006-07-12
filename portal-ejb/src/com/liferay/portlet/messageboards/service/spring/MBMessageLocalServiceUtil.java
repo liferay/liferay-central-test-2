@@ -537,4 +537,26 @@ public class MBMessageLocalServiceUtil {
 			throw new com.liferay.portal.SystemException(e);
 		}
 	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
+		java.lang.String messageId, java.util.Date createDate,
+		java.util.Date modifiedDate)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+			return mbMessageLocalService.updateMessage(messageId, createDate,
+				modifiedDate);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
 }
