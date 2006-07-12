@@ -34,8 +34,6 @@
 	<classpathentry kind="lib" path="lib/development/servlet.jar"/>
 	<classpathentry kind="lib" path="lib/development/smtp.jar"/>
 	<classpathentry kind="lib" path="lib/development/xalan.jar"/>
-	<classpathentry kind="lib" path="lib/development/xercesImpl.jar"/>
-	<classpathentry kind="lib" path="lib/development/xjavadoc.jar"/>
 	<classpathentry kind="lib" path="lib/development/xml-apis.jar"/>
 	<classpathentry kind="lib" path="lib/global/portlet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/activemq.jar"/>
@@ -125,6 +123,8 @@
 	<classpathentry kind="lib" path="lib/portal/velocity.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wbmp.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wsdl4j.jar"/>
+	<classpathentry kind="lib" path="lib/portal/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="lib/portal/xml-apis.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ym.jar"/>
 	<classpathentry kind="lib" path="web-sites/liferay.com-web/docroot/WEB-INF/lib/util-taglib.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>

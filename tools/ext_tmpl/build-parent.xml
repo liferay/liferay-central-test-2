@@ -230,5 +230,53 @@
 		<mkdir dir="${app.server.log.dir}" />
 		<mkdir dir="${app.server.temp.dir}" />
 		<mkdir dir="${app.server.work.dir}" />
+
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+			</or>
+			<then>
+
+				<!--
+				JBoss 4.0.4 defaults to different versions of dom4j, Commons
+				Collections, and Hibernate.
+				-->
+
+				<copy todir="${app.server.dir}/lib">
+					<fileset
+						dir="lib/portal"
+						includes="dom4j.jar,jaxen.jar"
+					/>
+				</copy>
+
+				<copy todir="${app.server.dir}/server/default/lib">
+					<fileset
+						dir="lib"
+						includes="commons-collections.jar"
+					/>
+				</copy>
+
+				<delete>
+					<fileset
+						dir="${app.server.dir}/server/default/lib"
+						includes="hibernate3.jar,jboss-hibernate.jar"
+					/>
+				</delete>
+			</then>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="jetty" />
+				<then>
+
+					<!--
+					Jetty 5.1.10 defaults to a different version of Commons
+					Logging and Hypersonic.
+					-->
+
+					<delete file="${app.server.dir}/ext/commons-logging.jar" />
+					<delete file="${app.server.dir}/extra/ext/hsqldb.jar" />
+				</then>
+			</elseif>
+		</if>
 	</target>
 </project>

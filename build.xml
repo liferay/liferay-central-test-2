@@ -367,6 +367,54 @@
 		<mkdir dir="${app.server.log.dir}" />
 		<mkdir dir="${app.server.temp.dir}" />
 		<mkdir dir="${app.server.work.dir}" />
+
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+			</or>
+			<then>
+
+				<!--
+				JBoss 4.0.4 defaults to different versions of dom4j, Commons
+				Collections, and Hibernate.
+				-->
+
+				<copy todir="${app.server.dir}/lib">
+					<fileset
+						dir="lib/portal"
+						includes="dom4j.jar,jaxen.jar"
+					/>
+				</copy>
+
+				<copy todir="${app.server.dir}/server/default/lib">
+					<fileset
+						dir="lib"
+						includes="commons-collections.jar"
+					/>
+				</copy>
+
+				<delete>
+					<fileset
+						dir="${app.server.dir}/server/default/lib"
+						includes="hibernate3.jar,jboss-hibernate.jar"
+					/>
+				</delete>
+			</then>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="jetty" />
+				<then>
+
+					<!--
+					Jetty 5.1.10 defaults to a different version of Commons
+					Logging and Hypersonic.
+					-->
+
+					<delete file="${app.server.dir}/ext/commons-logging.jar" />
+					<delete file="${app.server.dir}/extra/ext/hsqldb.jar" />
+				</then>
+			</elseif>
+		</if>
 	</target>
 
 	<target name="build-eclipse">
@@ -438,7 +486,7 @@
 
 		<copy file="lib/readme.txt" todir="${lp.ext.dir}/ext-lib" />
 
-		<!--<copy todir="${lp.ext.dir}/lib" overwrite="yes">
+		<copy todir="${lp.ext.dir}/lib" overwrite="yes">
 			<fileset dir="lib" />
 		</copy>
 
@@ -474,7 +522,7 @@
 			<fileset dir="sql">
 				<exclude name="**/log/**" />
 			</fileset>
-		</copy>-->
+		</copy>
 
 		<copy todir="${lp.ext.dir}/tools" overwrite="yes">
 			<fileset dir="tools" includes="java2html.bat,javadoc.css" />
@@ -525,44 +573,51 @@
 		</copy>
 	</target>
 
-	<!--<target name="build-ext-jboss-jetty">
+	<target name="build-ext-jboss-jetty">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jboss-jetty</echo>
+
 		<ant dir="${lp.ext.dir}" target="clean" />
 		<ant dir="${lp.ext.dir}" target="deploy" />
 	</target>
 
 	<target name="build-ext-jboss-tomcat">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jboss-tomcat</echo>
+
 		<ant dir="${lp.ext.dir}" target="clean" />
 		<ant dir="${lp.ext.dir}" target="deploy" />
 	</target>
 
 	<target name="build-ext-jetty">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jetty</echo>
+		
 		<ant dir="${lp.ext.dir}" target="clean" />
 		<ant dir="${lp.ext.dir}" target="deploy" />
 	</target>
 
 	<target name="build-ext-jonas-jetty">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-jetty</echo>
+		
 		<ant dir="${lp.ext.dir}" target="clean" />
 		<ant dir="${lp.ext.dir}" target="deploy" />
 	</target>
 
 	<target name="build-ext-jonas-tomcat">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-tomcat</echo>
+		
 		<ant dir="${lp.ext.dir}" target="clean" />
 		<ant dir="${lp.ext.dir}" target="deploy" />
 	</target>
 
 	<target name="build-ext-resin">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=resin</echo>
+		
 		<ant dir="${lp.ext.dir}" target="clean" />
 		<ant dir="${lp.ext.dir}" target="deploy" />
 	</target>
 
 	<target name="build-ext-tomcat">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=tomcat</echo>
+		
 		<ant dir="${lp.ext.dir}" target="clean" />
 		<ant dir="${lp.ext.dir}" target="deploy" />
 	</target>
@@ -588,7 +643,7 @@
 
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=tomcat</echo>
 		<ant dir="${lp.ext.dir}" target="clean" />
-	</target>-->
+	</target>
 
 	<target name="sync-ext">
 		<copy todir="tools/ext_tmpl/ext-ejb" overwrite="yes">
@@ -611,7 +666,7 @@
 		/>
 	</target>
 
-	<!--<target name="zip">
+	<target name="zip">
 		<antcall target="zip-api" />
 		<antcall target="zip-jboss" />
 		<antcall target="zip-jetty" />
@@ -625,6 +680,7 @@
 
 	<target name="zip-api">
 		<delete file="liferay-portal-doc-${lp.version.file.name}.zip" failonerror="false" />
+		
 		<zip zipfile="liferay-portal-doc-${lp.version.file.name}.zip"
 			basedir="."
 			includes="api/**/*.css,api/**/*.gif,api/**/*.html"
@@ -633,11 +689,13 @@
 
 	<target name="zip-jboss">
 		<delete file="liferay-portal-jboss-jetty-${lp.version.file.name}.zip" failonerror="false" />
+		
 		<zip zipfile="liferay-portal-jboss-jetty-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/jboss-jetty"
 		/>
 
 		<delete file="liferay-portal-jboss-tomcat-${lp.version.file.name}.zip" failonerror="false" />
+		
 		<zip zipfile="liferay-portal-jboss-tomcat-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/jboss-tomcat"
 		/>
@@ -645,6 +703,7 @@
 
 	<target name="zip-jetty">
 		<delete file="liferay-portal-jetty-${lp.version.file.name}.zip" failonerror="false" />
+		
 		<zip zipfile="liferay-portal-jetty-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/jetty"
 		/>
@@ -652,11 +711,13 @@
 
 	<target name="zip-jonas">
 		<delete file="liferay-portal-jonas-jetty-${lp.version.file.name}.zip" failonerror="false" />
+		
 		<zip zipfile="liferay-portal-jonas-jetty-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/jonas-jetty"
 		/>
 
 		<delete file="liferay-portal-jonas-tomcat-${lp.version.file.name}.zip" failonerror="false" />
+		
 		<zip zipfile="liferay-portal-jonas-tomcat-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/jonas-tomcat"
 		/>
@@ -664,14 +725,16 @@
 
 	<target name="zip-portal-client">
 		<delete file="liferay-portal-client-${lp.version.file.name}.zip" failonerror="false" />
+
 		<zip zipfile="liferay-portal-client-${lp.version.file.name}.zip"
 			basedir="."
-			includes="lib/activation.jar,lib/axis.jar,lib/commons-discovery.jar,lib/commons-logging.jar,lib/jaxrpc.jar,lib/mail.jar,lib/saaj.jar,lib/wsdl4j.jar,portal-client/portal-client.jar,portal-client/test/setenv.bat,portal-client/test/Test.java"
+			includes="lib/development/activation.jar,lib/development/mail.jar,lib/portal/axis.jar,lib/portal/commons-discovery.jar,lib/portal/commons-logging.jar,lib/portal/jaxrpc.jar,lib/portal/saaj.jar,lib/portal/wsdl4j.jar,portal-client/portal-client.jar,portal-client/test/setenv.bat,portal-client/test/Test.java"
 		/>		
 	</target>
 
 	<target name="zip-resin">
 		<delete file="liferay-portal-resin-${lp.version.file.name}.zip" failonerror="false" />
+		
 		<zip zipfile="liferay-portal-resin-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/resin"
 		/>
@@ -679,6 +742,7 @@
 
 	<target name="zip-sql">
 		<delete file="liferay-portal-sql-${lp.version.file.name}.zip" failonerror="false" />
+		
 		<zip zipfile="liferay-portal-sql-${lp.version.file.name}.zip"
 			basedir="sql"
 			includes="**/*.sql"
@@ -687,6 +751,7 @@
 
 	<target name="zip-src">
 		<delete file="liferay-portal-src-${lp.version.file.name}.zip" failonerror="false" />
+		
 		<zip zipfile="liferay-portal-src-${lp.version.file.name}.zip"
 			basedir="${lp.source.dir}"
 			excludes="**/CVS/**"
@@ -695,11 +760,13 @@
 
 	<target name="zip-tomcat">
 		<delete file="liferay-portal-tomcat-${lp.version.file.name}.zip" failonerror="false" />
+		
 		<zip zipfile="liferay-portal-tomcat-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/tomcat"
 		/>
 
 		<delete file="liferay-portal-tomcat-jdk5-${lp.version.file.name}.zip" failonerror="false" />
+		
 		<zip zipfile="liferay-portal-tomcat-jdk5-${lp.version.file.name}.zip"
 			basedir="${lp.ext.dir}/servers/tomcat"
 			excludes="bin/jmx.jar,common/endorsed/xercesImpl.jar,common/endorsed/xml-apis.jar"
@@ -750,5 +817,5 @@
 		<antcall target="build-ext-jonas-tomcat" />
 		<antcall target="build-ext-resin" />
 		<antcall target="build-ext-tomcat" />
-	</target>-->
+	</target>
 </project>

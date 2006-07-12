@@ -26,13 +26,10 @@ import com.liferay.portal.service.http.LayoutServiceSoap;
 import com.liferay.portal.service.http.LayoutServiceSoapServiceLocator;
 import com.liferay.portlet.messageboards.model.MBCategoryModel;
 import com.liferay.portlet.messageboards.model.MBMessageModel;
-import com.liferay.portlet.messageboards.model.MBTopicModel;
 import com.liferay.portlet.messageboards.service.http.MBCategoryServiceSoap;
 import com.liferay.portlet.messageboards.service.http.MBCategoryServiceSoapServiceLocator;
 import com.liferay.portlet.messageboards.service.http.MBMessageServiceSoap;
 import com.liferay.portlet.messageboards.service.http.MBMessageServiceSoapServiceLocator;
-import com.liferay.portlet.messageboards.service.http.MBTopicServiceSoap;
-import com.liferay.portlet.messageboards.service.http.MBTopicServiceSoapServiceLocator;
 
 import java.net.URL;
 
@@ -52,7 +49,6 @@ public class Test {
 
 			test.portalLayout();
 			test.portletMessageBoardsCategory();
-			test.portletMessageBoardsTopic();
 			test.portletMessageBoardsMessage();
 		}
 		catch (Exception e) {
@@ -117,21 +113,7 @@ public class Test {
 			"PRI.3.1", "-1", "Test Category", "This is a test category.", true,
 			true);
 
-		soap.deleteCategory(category.getCategoryId());
-	}
-
-	public void portletMessageBoardsTopic() throws Exception {
-		MBTopicServiceSoapServiceLocator locator =
-			new MBTopicServiceSoapServiceLocator();
-
-		MBTopicServiceSoap soap =
-			locator.getPortlet_Message_Boards_MBTopicService(
-				getURL("Portlet_Message_Boards_MBTopicService"));
-
-		MBTopicModel topic = soap.addTopic(
-			"1", "Test Topic", "This is a test topic.", true, true);
-
-		soap.deleteTopic(topic.getTopicId());
+		//soap.deleteCategory(category.getCategoryId());
 	}
 
 	public void portletMessageBoardsMessage() throws Exception {
@@ -146,7 +128,7 @@ public class Test {
 			"1", "Test Subject", "This is a test body.", new Object[0], false,
 			true, true);
 
-		soap.deleteMessage(message.getTopicId(), message.getMessageId());
+		//soap.deleteMessage(message.getMessageId());
 	}
 
 }
