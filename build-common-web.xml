@@ -31,6 +31,8 @@
 					<or>
 						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
 						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+						<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+						<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 					</or>
 					<then>
 						<property name="war.file.dest" value="${app.server.portal.dir}/${war.file}.war" />
@@ -42,6 +44,30 @@
 			</else>
 		</if>
 
-		<unwar src="${war.file}.war" dest="${war.file.dest}" />
+		<if>
+			<equals arg1="${app.server.type}" arg2="orion" />
+			<then>
+				<copy file="${war.file}.war" todir="${app.server.deploy.dir}" />
+			</then>
+			<else>
+				<unwar src="${war.file}.war" dest="${war.file.dest}" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+			<then>
+				<move
+					file="${war.file.dest}/WEB-INF/web-jetty.xml.JOnAS_Jetty"
+					tofile="${war.file.dest}/WEB-INF/web-jetty.xml"
+				/>
+			</then>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+				<then>
+					<delete file="${war.file.dest}/META-INF/context.xml" />
+				</then>
+			</elseif>
+		</if>
 	</target>
 </project>

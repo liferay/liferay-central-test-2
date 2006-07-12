@@ -7,6 +7,9 @@
 		<or>
 			<equals arg1="${app.server.type}" arg2="jboss-jetty" />
 			<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+			<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+			<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+			<equals arg1="${app.server.type}" arg2="orion" />
 		</or>
 		<then>
 			<property name="war.file" value="portal-web" />

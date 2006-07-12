@@ -64,9 +64,25 @@
 			</then>
 		</if>
 
-		<delete>
-			<fileset dir="${app.server.bin.dir}" includes="test.*" />
-		</delete>
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+			</or>
+			<then>
+				<delete>
+					<fileset dir="${app.server.bin.dir}/nt" includes="test.*" />
+				</delete>
+				<delete>
+					<fileset dir="${app.server.bin.dir}/unix" includes="test.*" />
+				</delete>
+			</then>
+			<else>
+				<delete>
+					<fileset dir="${app.server.bin.dir}" includes="test.*" />
+				</delete>
+			</else>
+		</if>
 
 		<delete failonerror="false">
 			<fileset
@@ -85,12 +101,15 @@
 		<delete>
 			<fileset
 				dir="${app.server.lib.global.dir}"
-				excludes="firebird.jar,hsql.jar,interbase.jar,jtds.jar,mysql.jar,p6spy.jar,postgresql.jar,sap.jar"
+				excludes="${jdbc.drivers}"
 			/>
 		</delete>
 
-		<delete>
-			<fileset dir="${app.server.lib.portal.dir}" />
+		<delete failonerror="false">
+			<fileset
+				dir="${app.server.lib.portal.dir}"
+				excludes="${jdbc.drivers}"
+			/>
 		</delete>
 
 		<delete dir="${app.server.log.dir}" />
@@ -216,17 +235,44 @@
 		<ant dir="portlets" target="deploy" inheritAll="false" />
 		<ant dir="themes" target="deploy" inheritAll="false" />
 
-		<copy todir="${app.server.bin.dir}">
-			<fileset dir="sql">
-				<include name="test.*" />
-			</fileset>
-		</copy>
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+			</or>
+			<then>
+				<copy todir="${app.server.bin.dir}/nt">
+					<fileset dir="sql">
+						<include name="test.*" />
+					</fileset>
+				</copy>
+				<copy todir="${app.server.bin.dir}/unix">
+					<fileset dir="sql">
+						<include name="test.*" />
+					</fileset>
+				</copy>
+			</then>
+			<else>
+				<copy todir="${app.server.bin.dir}">
+					<fileset dir="sql">
+						<include name="test.*" />
+					</fileset>
+				</copy>
+			</else>
+		</if>
 
-		<copy todir="${app.server.classes.portal.dir}">
-			<fileset dir="portal-ejb/classes">
-				<include name="*-ext.properties" />
-			</fileset>
-		</copy>
+		<if>
+			<not>
+				<equals arg1="${app.server.type}" arg2="orion" />
+			</not>
+			<then>
+				<copy todir="${app.server.classes.portal.dir}">
+					<fileset dir="portal-ejb/classes">
+						<include name="*-ext.properties" />
+					</fileset>
+				</copy>
+			</then>
+		</if>
 
 		<copy todir="${app.server.lib.global.dir}">
 			<fileset dir="lib/global" />

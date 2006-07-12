@@ -6,6 +6,8 @@
 	<target name="jar" depends="compile">
 		<manifest file="classes/META-INF/MANIFEST.MF.JOnAS">
 			<attribute name="Class-Path" value="${classpath.manifest.jonas}" />
+			<attribute name="Genic-Jonas-Version" value="${jonas.version}" />
+			<attribute name="Genic-Jonas-protocols" value="${jonas.protocols}" />
 		</manifest>
 
 		<jar
@@ -17,7 +19,66 @@
 			</manifest>
 		</jar>
 
+		<antcall target="jar-jonas-genic" />
+
 		<copy file="${jar.file}.jar" todir="${project.dir}/portal-ear/modules" />
+	</target>
+
+	<target name="jar-jonas-genic" if="jonas.genic">
+		<tstamp>
+			<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<mkdir dir="${tstamp.dir}" />
+
+		<java
+			classname="org.objectweb.jonas.server.Bootstrap"
+			classpath="${classpath.jonas.genic}"
+			fork="true"
+			maxmemory="512m"
+		>
+			<jvmarg value="-Dinstall.root=${env.JONAS_ROOT}" />
+			<jvmarg value="-Djonas.base=${env.JONAS_ROOT}" />
+			<jvmarg value="-Djava.security.policy=${env.JONAS_ROOT}/conf/java.policy" />
+			<jvmarg value="-Djava.endorsed.dirs=${env.JONAS_ROOT}/lib/endorsed" />
+			<jvmarg value="-Djava.io.tmpdir=${tstamp.dir}" />
+			<arg value="org.objectweb.jonas_ejb.genic.GenIC" />
+			<arg value="-d" />
+			<arg value="${tstamp.dir}" />
+			<arg value="-nocompil" />
+			<arg value="-protocols" />
+			<arg value="jrmp" />
+			<arg value="-keepgenerated" />
+			<arg value="-invokecmd" />
+			<arg value="classes/META-INF/ejb-jar.xml" />
+		</java>
+
+		<javac
+			classpath="${classpath.jonas.compiler}"
+			srcdir="${tstamp.dir}"
+			fork="true"
+			memoryMaximumSize="512m"
+		/>
+
+		<rmic
+			base="${tstamp.dir}"
+			classpath="${classpath.jonas.compiler}"
+			excludes="**/*LocalHome.class"
+			includes="**/*Home.class,**/*Remote.class"
+		/>
+
+		<jar
+			duplicate="preserve"
+			jarfile="${jar.file}.jar"
+			update="yes"
+		>
+			<fileset
+				dir="${tstamp.dir}"
+				includes="**/*.class,**/*.xml"
+			/>
+		</jar>
+
+		<delete dir="${tstamp.dir}" />
 	</target>
 
 	<target name="deploy" depends="jar">
@@ -29,6 +90,28 @@
 			<then>
 				<unjar src="${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
 			</then>
+			<elseif>
+				<or>
+					<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+					<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+				</or>
+				<then>
+					<copy file="${jar.file}.jar" todir="${app.server.portal.dir}" />
+
+					<jar
+						basedir="."
+						destfile="${app.server.portal.dir}/${jar.file}.jar"
+						manifest="classes/META-INF/MANIFEST.MF.JOnAS"
+						update="yes"
+					/>
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="orion" />
+				<then>
+					<copy file="${jar.file}.jar" todir="${app.server.deploy.dir}" />
+				</then>
+			</elseif>
 			<else>
 				<copy file="${jar.file}.jar" todir="${app.server.lib.portal.dir}" />
 			</else>

@@ -21,13 +21,13 @@
 	<module>
 		<web>
 			<web-uri>cms-web.war</web-uri>
-			<context-root>/cms</context-root>
+			<context-root>/cms-web</context-root>
 		</web>
 	</module>
 	<module>
 		<web>
 			<web-uri>laszlo-web.war</web-uri>
-			<context-root>/laszlo</context-root>
+			<context-root>/laszlo-web</context-root>
 		</web>
 	</module>
 	<module>
@@ -39,7 +39,7 @@
 	<module>
 		<web>
 			<web-uri>tunnel-web.war</web-uri>
-			<context-root>/tunnel</context-root>
+			<context-root>/tunnel-web</context-root>
 		</web>
 	</module>
 	<security-role>

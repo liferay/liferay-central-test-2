@@ -23,6 +23,8 @@
 			<or>
 				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
 				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 			</or>
 			<then>
 				<property name="war.file.dest" value="${app.server.portal.dir}/portal-web.war" />
@@ -32,10 +34,13 @@
 			</else>
 		</if>
 
-		<unwar src="liferay.com-web.war" dest="${war.file.dest}" />
-
-		<!--<copy todir="${deploy.dir}">
-			<fileset dir="." includes="*.war" />
-		</copy>-->
+		<if>
+			<not>
+				<equals arg1="${app.server.type}" arg2="orion" />
+			</not>
+			<then>
+				<unwar src="liferay.com-web.war" dest="${war.file.dest}" />
+			</then>
+		</if>
 	</target>
 </project>
