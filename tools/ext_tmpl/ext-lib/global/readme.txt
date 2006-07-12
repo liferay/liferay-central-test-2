@@ -1,1 +1,0 @@
-JARs in this directory will be loaded by the application server's class loader.

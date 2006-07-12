@@ -1,1 +1,0 @@
-JARs in this directory will be loaded by the portal application class loader.
