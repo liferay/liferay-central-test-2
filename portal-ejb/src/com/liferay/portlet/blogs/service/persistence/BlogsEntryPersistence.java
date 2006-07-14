@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class BlogsEntryPersistence extends BasePersistence {
 					entryId);
 
 			if (blogsEntry == null) {
-				_log.warn("No BlogsEntry exists with the primary key " +
-					entryId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No BlogsEntry exists with the primary key " +
+						entryId.toString());
+				}
+
 				throw new NoSuchEntryException(
 					"No BlogsEntry exists with the primary key " +
 					entryId.toString());
@@ -165,12 +167,6 @@ public class BlogsEntryPersistence extends BasePersistence {
 
 	public BlogsEntry findByPrimaryKey(String entryId)
 		throws NoSuchEntryException, SystemException {
-		return findByPrimaryKey(entryId, true);
-	}
-
-	public BlogsEntry findByPrimaryKey(String entryId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchEntryException, SystemException {
 		Session session = null;
 
 		try {
@@ -180,10 +176,9 @@ public class BlogsEntryPersistence extends BasePersistence {
 					entryId);
 
 			if (blogsEntry == null) {
-				_log.warn("No BlogsEntry exists with the primary key " +
-					entryId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No BlogsEntry exists with the primary key " +
+						entryId.toString());
 					throw new NoSuchEntryException(
 						"No BlogsEntry exists with the primary key " +
 						entryId.toString());
@@ -191,6 +186,23 @@ public class BlogsEntryPersistence extends BasePersistence {
 			}
 
 			return blogsEntry;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public BlogsEntry fetchByPrimaryKey(String entryId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (BlogsEntry)session.get(BlogsEntry.class, entryId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

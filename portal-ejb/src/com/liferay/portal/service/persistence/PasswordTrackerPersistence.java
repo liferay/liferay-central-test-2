@@ -38,7 +38,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +67,11 @@ public class PasswordTrackerPersistence extends BasePersistence {
 					passwordTrackerId);
 
 			if (passwordTracker == null) {
-				_log.warn("No PasswordTracker exists with the primary key " +
-					passwordTrackerId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No PasswordTracker exists with the primary key " +
+						passwordTrackerId.toString());
+				}
+
 				throw new NoSuchPasswordTrackerException(
 					"No PasswordTracker exists with the primary key " +
 					passwordTrackerId.toString());
@@ -143,12 +145,6 @@ public class PasswordTrackerPersistence extends BasePersistence {
 
 	public PasswordTracker findByPrimaryKey(String passwordTrackerId)
 		throws NoSuchPasswordTrackerException, SystemException {
-		return findByPrimaryKey(passwordTrackerId, true);
-	}
-
-	public PasswordTracker findByPrimaryKey(String passwordTrackerId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchPasswordTrackerException, SystemException {
 		Session session = null;
 
 		try {
@@ -158,10 +154,9 @@ public class PasswordTrackerPersistence extends BasePersistence {
 					passwordTrackerId);
 
 			if (passwordTracker == null) {
-				_log.warn("No PasswordTracker exists with the primary key " +
-					passwordTrackerId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No PasswordTracker exists with the primary key " +
+						passwordTrackerId.toString());
 					throw new NoSuchPasswordTrackerException(
 						"No PasswordTracker exists with the primary key " +
 						passwordTrackerId.toString());
@@ -169,6 +164,24 @@ public class PasswordTrackerPersistence extends BasePersistence {
 			}
 
 			return passwordTracker;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public PasswordTracker fetchByPrimaryKey(String passwordTrackerId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (PasswordTracker)session.get(PasswordTracker.class,
+				passwordTrackerId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

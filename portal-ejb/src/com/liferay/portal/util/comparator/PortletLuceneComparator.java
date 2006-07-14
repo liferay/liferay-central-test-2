@@ -28,7 +28,6 @@ import com.liferay.portal.util.PortletKeys;
 import java.io.Serializable;
 
 import java.util.Comparator;
-import java.util.Locale;
 
 /**
  * <a href="PortletLuceneComparator.java.html"><b><i>View Source</i></b></a>
@@ -54,8 +53,5 @@ public class PortletLuceneComparator implements Comparator, Serializable {
 			return portletId1.compareTo(portletId2);
 		}
 	}
-
-	private String _companyId;
-	private Locale _locale;
 
 }

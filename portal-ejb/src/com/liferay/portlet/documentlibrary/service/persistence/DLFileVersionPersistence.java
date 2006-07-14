@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class DLFileVersionPersistence extends BasePersistence {
 					dlFileVersionPK);
 
 			if (dlFileVersion == null) {
-				_log.warn("No DLFileVersion exists with the primary key " +
-					dlFileVersionPK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No DLFileVersion exists with the primary key " +
+						dlFileVersionPK.toString());
+				}
+
 				throw new NoSuchFileVersionException(
 					"No DLFileVersion exists with the primary key " +
 					dlFileVersionPK.toString());
@@ -154,12 +156,6 @@ public class DLFileVersionPersistence extends BasePersistence {
 
 	public DLFileVersion findByPrimaryKey(DLFileVersionPK dlFileVersionPK)
 		throws NoSuchFileVersionException, SystemException {
-		return findByPrimaryKey(dlFileVersionPK, true);
-	}
-
-	public DLFileVersion findByPrimaryKey(DLFileVersionPK dlFileVersionPK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchFileVersionException, SystemException {
 		Session session = null;
 
 		try {
@@ -169,10 +165,9 @@ public class DLFileVersionPersistence extends BasePersistence {
 					dlFileVersionPK);
 
 			if (dlFileVersion == null) {
-				_log.warn("No DLFileVersion exists with the primary key " +
-					dlFileVersionPK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No DLFileVersion exists with the primary key " +
+						dlFileVersionPK.toString());
 					throw new NoSuchFileVersionException(
 						"No DLFileVersion exists with the primary key " +
 						dlFileVersionPK.toString());
@@ -180,6 +175,24 @@ public class DLFileVersionPersistence extends BasePersistence {
 			}
 
 			return dlFileVersion;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public DLFileVersion fetchByPrimaryKey(DLFileVersionPK dlFileVersionPK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (DLFileVersion)session.get(DLFileVersion.class,
+				dlFileVersionPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

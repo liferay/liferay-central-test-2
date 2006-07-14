@@ -48,6 +48,10 @@ public class DLServiceEJBImpl extends DLServiceImpl implements SessionBean {
 	public void ejbPassivate() {
 	}
 
+	public SessionContext getSessionContext() {
+		return _sc;
+	}
+
 	public void setSessionContext(SessionContext sc) {
 		_sc = sc;
 	}

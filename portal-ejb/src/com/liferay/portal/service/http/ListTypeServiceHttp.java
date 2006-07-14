@@ -142,10 +142,9 @@ public class ListTypeServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(ListTypeServiceUtil.class.getName(),
 					"validate", new Object[] { paramObj0, paramObj1 });
-			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.PortalException) {

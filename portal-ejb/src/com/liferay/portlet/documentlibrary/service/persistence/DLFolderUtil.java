@@ -125,12 +125,9 @@ public class DLFolderUtil {
 		return getPersistence().findByPrimaryKey(folderId);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolder findByPrimaryKey(
-		java.lang.String folderId, boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.documentlibrary.NoSuchFolderException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(folderId,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.documentlibrary.model.DLFolder fetchByPrimaryKey(
+		java.lang.String folderId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(folderId);
 	}
 
 	public static java.util.List findByGroupId(java.lang.String groupId)
@@ -267,13 +264,10 @@ public class DLFolderUtil {
 		return getPersistence().findByP_N(parentFolderId, name);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolder findByP_N(
-		java.lang.String parentFolderId, java.lang.String name,
-		boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.documentlibrary.NoSuchFolderException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByP_N(parentFolderId, name,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.documentlibrary.model.DLFolder fetchByP_N(
+		java.lang.String parentFolderId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByP_N(parentFolderId, name);
 	}
 
 	public static java.util.List findAll()

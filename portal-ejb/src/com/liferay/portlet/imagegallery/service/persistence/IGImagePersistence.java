@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +67,11 @@ public class IGImagePersistence extends BasePersistence {
 			IGImage igImage = (IGImage)session.get(IGImage.class, igImagePK);
 
 			if (igImage == null) {
-				_log.warn("No IGImage exists with the primary key " +
-					igImagePK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No IGImage exists with the primary key " +
+						igImagePK.toString());
+				}
+
 				throw new NoSuchImageException(
 					"No IGImage exists with the primary key " +
 					igImagePK.toString());
@@ -160,12 +162,6 @@ public class IGImagePersistence extends BasePersistence {
 
 	public IGImage findByPrimaryKey(IGImagePK igImagePK)
 		throws NoSuchImageException, SystemException {
-		return findByPrimaryKey(igImagePK, true);
-	}
-
-	public IGImage findByPrimaryKey(IGImagePK igImagePK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchImageException, SystemException {
 		Session session = null;
 
 		try {
@@ -174,10 +170,9 @@ public class IGImagePersistence extends BasePersistence {
 			IGImage igImage = (IGImage)session.get(IGImage.class, igImagePK);
 
 			if (igImage == null) {
-				_log.warn("No IGImage exists with the primary key " +
-					igImagePK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No IGImage exists with the primary key " +
+						igImagePK.toString());
 					throw new NoSuchImageException(
 						"No IGImage exists with the primary key " +
 						igImagePK.toString());
@@ -185,6 +180,23 @@ public class IGImagePersistence extends BasePersistence {
 			}
 
 			return igImage;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public IGImage fetchByPrimaryKey(IGImagePK igImagePK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (IGImage)session.get(IGImage.class, igImagePK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

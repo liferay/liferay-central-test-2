@@ -40,7 +40,6 @@ import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class DLFolderPersistence extends BasePersistence {
 			DLFolder dlFolder = (DLFolder)session.get(DLFolder.class, folderId);
 
 			if (dlFolder == null) {
-				_log.warn("No DLFolder exists with the primary key " +
-					folderId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No DLFolder exists with the primary key " +
+						folderId.toString());
+				}
+
 				throw new NoSuchFolderException(
 					"No DLFolder exists with the primary key " +
 					folderId.toString());
@@ -165,12 +167,6 @@ public class DLFolderPersistence extends BasePersistence {
 
 	public DLFolder findByPrimaryKey(String folderId)
 		throws NoSuchFolderException, SystemException {
-		return findByPrimaryKey(folderId, true);
-	}
-
-	public DLFolder findByPrimaryKey(String folderId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchFolderException, SystemException {
 		Session session = null;
 
 		try {
@@ -179,10 +175,9 @@ public class DLFolderPersistence extends BasePersistence {
 			DLFolder dlFolder = (DLFolder)session.get(DLFolder.class, folderId);
 
 			if (dlFolder == null) {
-				_log.warn("No DLFolder exists with the primary key " +
-					folderId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No DLFolder exists with the primary key " +
+						folderId.toString());
 					throw new NoSuchFolderException(
 						"No DLFolder exists with the primary key " +
 						folderId.toString());
@@ -190,6 +185,23 @@ public class DLFolderPersistence extends BasePersistence {
 			}
 
 			return dlFolder;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public DLFolder fetchByPrimaryKey(String folderId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (DLFolder)session.get(DLFolder.class, folderId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -748,12 +760,6 @@ public class DLFolderPersistence extends BasePersistence {
 
 	public DLFolder findByP_N(String parentFolderId, String name)
 		throws NoSuchFolderException, SystemException {
-		return findByP_N(parentFolderId, name, true);
-	}
-
-	public DLFolder findByP_N(String parentFolderId, String name,
-		boolean throwNoSuchObjectException)
-		throws NoSuchFolderException, SystemException {
 		Session session = null;
 
 		try {
@@ -804,6 +810,64 @@ public class DLFolderPersistence extends BasePersistence {
 				msg += name;
 				msg += StringPool.CLOSE_CURLY_BRACE;
 				throw new NoSuchFolderException(msg);
+			}
+
+			DLFolder dlFolder = (DLFolder)list.get(0);
+
+			return dlFolder;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public DLFolder fetchByP_N(String parentFolderId, String name)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+
+			if (parentFolderId == null) {
+				query.append("parentFolderId IS NULL");
+			}
+			else {
+				query.append("parentFolderId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (parentFolderId != null) {
+				q.setString(queryPos++, parentFolderId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
 			}
 
 			DLFolder dlFolder = (DLFolder)list.get(0);

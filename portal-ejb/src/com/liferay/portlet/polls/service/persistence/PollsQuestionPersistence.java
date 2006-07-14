@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class PollsQuestionPersistence extends BasePersistence {
 					questionId);
 
 			if (pollsQuestion == null) {
-				_log.warn("No PollsQuestion exists with the primary key " +
-					questionId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No PollsQuestion exists with the primary key " +
+						questionId.toString());
+				}
+
 				throw new NoSuchQuestionException(
 					"No PollsQuestion exists with the primary key " +
 					questionId.toString());
@@ -165,12 +167,6 @@ public class PollsQuestionPersistence extends BasePersistence {
 
 	public PollsQuestion findByPrimaryKey(String questionId)
 		throws NoSuchQuestionException, SystemException {
-		return findByPrimaryKey(questionId, true);
-	}
-
-	public PollsQuestion findByPrimaryKey(String questionId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchQuestionException, SystemException {
 		Session session = null;
 
 		try {
@@ -180,10 +176,9 @@ public class PollsQuestionPersistence extends BasePersistence {
 					questionId);
 
 			if (pollsQuestion == null) {
-				_log.warn("No PollsQuestion exists with the primary key " +
-					questionId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No PollsQuestion exists with the primary key " +
+						questionId.toString());
 					throw new NoSuchQuestionException(
 						"No PollsQuestion exists with the primary key " +
 						questionId.toString());
@@ -191,6 +186,23 @@ public class PollsQuestionPersistence extends BasePersistence {
 			}
 
 			return pollsQuestion;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public PollsQuestion fetchByPrimaryKey(String questionId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (PollsQuestion)session.get(PollsQuestion.class, questionId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

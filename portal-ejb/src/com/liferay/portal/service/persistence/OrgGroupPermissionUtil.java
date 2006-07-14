@@ -125,13 +125,10 @@ public class OrgGroupPermissionUtil {
 		return getPersistence().findByPrimaryKey(orgGroupPermissionPK);
 	}
 
-	public static com.liferay.portal.model.OrgGroupPermission findByPrimaryKey(
-		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK,
-		boolean throwNoSuchObjectException)
-		throws com.liferay.portal.NoSuchOrgGroupPermissionException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(orgGroupPermissionPK,
-			throwNoSuchObjectException);
+	public static com.liferay.portal.model.OrgGroupPermission fetchByPrimaryKey(
+		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(orgGroupPermissionPK);
 	}
 
 	public static java.util.List findByPermissionId(

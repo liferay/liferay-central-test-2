@@ -39,9 +39,6 @@ import javax.portlet.ActionRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="AdminUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -118,7 +115,5 @@ public class AdminUtil {
 			timeZoneId, greeting, resolution, comments, smsSn, aimSn, icqSn,
 			jabberSn, msnSn, skypeSn, ymSn);
 	}
-
-	private static Log _log = LogFactory.getLog(AdminUtil.class);
 
 }

@@ -55,7 +55,6 @@ public class VelocityTaglib {
 		_ctx = ctx;
 		_req = req;
 		_res = res;
-		_pageContext = pageContext;
 	}
 
 	public String iconBack() throws Exception {
@@ -173,6 +172,5 @@ public class VelocityTaglib {
 	private ServletContext _ctx;
 	private HttpServletRequest _req;
 	private StringServletResponse _res;
-	private PageContext _pageContext;
 
 }

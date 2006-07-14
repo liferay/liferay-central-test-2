@@ -130,10 +130,9 @@ public class OrgLaborServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(OrgLaborServiceUtil.class.getName(),
 					"deleteOrgLabor", new Object[] { paramObj0 });
-			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.PortalException) {

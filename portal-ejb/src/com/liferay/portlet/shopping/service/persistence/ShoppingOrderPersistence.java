@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class ShoppingOrderPersistence extends BasePersistence {
 					orderId);
 
 			if (shoppingOrder == null) {
-				_log.warn("No ShoppingOrder exists with the primary key " +
-					orderId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No ShoppingOrder exists with the primary key " +
+						orderId.toString());
+				}
+
 				throw new NoSuchOrderException(
 					"No ShoppingOrder exists with the primary key " +
 					orderId.toString());
@@ -282,12 +284,6 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 	public ShoppingOrder findByPrimaryKey(String orderId)
 		throws NoSuchOrderException, SystemException {
-		return findByPrimaryKey(orderId, true);
-	}
-
-	public ShoppingOrder findByPrimaryKey(String orderId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchOrderException, SystemException {
 		Session session = null;
 
 		try {
@@ -297,10 +293,9 @@ public class ShoppingOrderPersistence extends BasePersistence {
 					orderId);
 
 			if (shoppingOrder == null) {
-				_log.warn("No ShoppingOrder exists with the primary key " +
-					orderId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No ShoppingOrder exists with the primary key " +
+						orderId.toString());
 					throw new NoSuchOrderException(
 						"No ShoppingOrder exists with the primary key " +
 						orderId.toString());
@@ -308,6 +303,23 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			}
 
 			return shoppingOrder;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ShoppingOrder fetchByPrimaryKey(String orderId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (ShoppingOrder)session.get(ShoppingOrder.class, orderId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

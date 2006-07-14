@@ -48,8 +48,6 @@ public class LayoutCacheResponse extends HttpServletResponseWrapper {
 
 	public LayoutCacheResponse(HttpServletResponse res) {
 		super(res);
-
-		_res = res;
 	}
 
 	public void finishResponse() {
@@ -215,7 +213,6 @@ public class LayoutCacheResponse extends HttpServletResponseWrapper {
 		return _headers;
 	}
 
-	private HttpServletResponse _res = null;
 	private ByteArrayOutputStream _baos = new ByteArrayOutputStream();
 	private ServletOutputStream _stream = null;
 	private PrintWriter _writer = null;

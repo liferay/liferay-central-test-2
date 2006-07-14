@@ -135,7 +135,7 @@ public class EditUserPortraitAction extends PortletAction {
 			DiskFileItem fileItem = (DiskFileItem)fileItems.get(i);
 
 			if (_log.isInfoEnabled()) {
-				_log.info("Item " + i + " fileItem");
+				_log.info("Item " + i + " " + fileItem);
 			}
 		}
 

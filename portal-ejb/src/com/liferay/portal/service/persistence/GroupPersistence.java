@@ -53,7 +53,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -82,8 +81,11 @@ public class GroupPersistence extends BasePersistence {
 			Group group = (Group)session.get(Group.class, groupId);
 
 			if (group == null) {
-				_log.warn("No Group exists with the primary key " +
-					groupId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Group exists with the primary key " +
+						groupId.toString());
+				}
+
 				throw new NoSuchGroupException(
 					"No Group exists with the primary key " +
 					groupId.toString());
@@ -176,12 +178,6 @@ public class GroupPersistence extends BasePersistence {
 
 	public Group findByPrimaryKey(String groupId)
 		throws NoSuchGroupException, SystemException {
-		return findByPrimaryKey(groupId, true);
-	}
-
-	public Group findByPrimaryKey(String groupId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchGroupException, SystemException {
 		Session session = null;
 
 		try {
@@ -190,10 +186,9 @@ public class GroupPersistence extends BasePersistence {
 			Group group = (Group)session.get(Group.class, groupId);
 
 			if (group == null) {
-				_log.warn("No Group exists with the primary key " +
-					groupId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Group exists with the primary key " +
+						groupId.toString());
 					throw new NoSuchGroupException(
 						"No Group exists with the primary key " +
 						groupId.toString());
@@ -210,13 +205,23 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public Group findByC_N(String companyId, String name)
-		throws NoSuchGroupException, SystemException {
-		return findByC_N(companyId, name, true);
+	public Group fetchByPrimaryKey(String groupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Group)session.get(Group.class, groupId);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
-	public Group findByC_N(String companyId, String name,
-		boolean throwNoSuchObjectException)
+	public Group findByC_N(String companyId, String name)
 		throws NoSuchGroupException, SystemException {
 		Session session = null;
 
@@ -283,13 +288,66 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public Group findByC_F(String companyId, String friendlyURL)
-		throws NoSuchGroupException, SystemException {
-		return findByC_F(companyId, friendlyURL, true);
+	public Group fetchByC_N(String companyId, String name)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.Group WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("name ASC");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			Group group = (Group)list.get(0);
+
+			return group;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
-	public Group findByC_F(String companyId, String friendlyURL,
-		boolean throwNoSuchObjectException)
+	public Group findByC_F(String companyId, String friendlyURL)
 		throws NoSuchGroupException, SystemException {
 		Session session = null;
 
@@ -356,13 +414,66 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
-	public Group findByC_C_C(String companyId, String className, String classPK)
-		throws NoSuchGroupException, SystemException {
-		return findByC_C_C(companyId, className, classPK, true);
+	public Group fetchByC_F(String companyId, String friendlyURL)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.Group WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (friendlyURL == null) {
+				query.append("friendlyURL IS NULL");
+			}
+			else {
+				query.append("friendlyURL = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("name ASC");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (friendlyURL != null) {
+				q.setString(queryPos++, friendlyURL);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			Group group = (Group)list.get(0);
+
+			return group;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
-	public Group findByC_C_C(String companyId, String className,
-		String classPK, boolean throwNoSuchObjectException)
+	public Group findByC_C_C(String companyId, String className, String classPK)
 		throws NoSuchGroupException, SystemException {
 		Session session = null;
 
@@ -431,6 +542,78 @@ public class GroupPersistence extends BasePersistence {
 				msg += classPK;
 				msg += StringPool.CLOSE_CURLY_BRACE;
 				throw new NoSuchGroupException(msg);
+			}
+
+			Group group = (Group)list.get(0);
+
+			return group;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Group fetchByC_C_C(String companyId, String className, String classPK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.Group WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (className == null) {
+				query.append("className IS NULL");
+			}
+			else {
+				query.append("className = ?");
+			}
+
+			query.append(" AND ");
+
+			if (classPK == null) {
+				query.append("classPK IS NULL");
+			}
+			else {
+				query.append("classPK = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("name ASC");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (className != null) {
+				q.setString(queryPos++, className);
+			}
+
+			if (classPK != null) {
+				q.setString(queryPos++, classPK);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
 			}
 
 			Group group = (Group)list.get(0);
@@ -2101,7 +2284,6 @@ public class GroupPersistence extends BasePersistence {
 	protected class ContainsOrganization extends MappingSqlQuery {
 		protected ContainsOrganization(GroupPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSORGANIZATION);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2125,8 +2307,6 @@ public class GroupPersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private GroupPersistence _persistence;
 	}
 
 	protected class AddOrganization extends SqlUpdate {
@@ -2153,7 +2333,6 @@ public class GroupPersistence extends BasePersistence {
 		protected ClearOrganizations(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Orgs WHERE groupId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2161,15 +2340,12 @@ public class GroupPersistence extends BasePersistence {
 		protected void clear(String groupId) {
 			update(new Object[] { groupId });
 		}
-
-		private GroupPersistence _persistence;
 	}
 
 	protected class RemoveOrganization extends SqlUpdate {
 		protected RemoveOrganization(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Orgs WHERE groupId = ? AND organizationId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2178,14 +2354,11 @@ public class GroupPersistence extends BasePersistence {
 		protected void remove(String groupId, String organizationId) {
 			update(new Object[] { groupId, organizationId });
 		}
-
-		private GroupPersistence _persistence;
 	}
 
 	protected class ContainsPermission extends MappingSqlQuery {
 		protected ContainsPermission(GroupPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSPERMISSION);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2209,8 +2382,6 @@ public class GroupPersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private GroupPersistence _persistence;
 	}
 
 	protected class AddPermission extends SqlUpdate {
@@ -2236,7 +2407,6 @@ public class GroupPersistence extends BasePersistence {
 		protected ClearPermissions(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Permissions WHERE groupId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2244,15 +2414,12 @@ public class GroupPersistence extends BasePersistence {
 		protected void clear(String groupId) {
 			update(new Object[] { groupId });
 		}
-
-		private GroupPersistence _persistence;
 	}
 
 	protected class RemovePermission extends SqlUpdate {
 		protected RemovePermission(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Permissions WHERE groupId = ? AND permissionId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2261,14 +2428,11 @@ public class GroupPersistence extends BasePersistence {
 		protected void remove(String groupId, String permissionId) {
 			update(new Object[] { groupId, permissionId });
 		}
-
-		private GroupPersistence _persistence;
 	}
 
 	protected class ContainsRole extends MappingSqlQuery {
 		protected ContainsRole(GroupPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSROLE);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2292,8 +2456,6 @@ public class GroupPersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private GroupPersistence _persistence;
 	}
 
 	protected class AddRole extends SqlUpdate {
@@ -2319,7 +2481,6 @@ public class GroupPersistence extends BasePersistence {
 		protected ClearRoles(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Roles WHERE groupId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2327,15 +2488,12 @@ public class GroupPersistence extends BasePersistence {
 		protected void clear(String groupId) {
 			update(new Object[] { groupId });
 		}
-
-		private GroupPersistence _persistence;
 	}
 
 	protected class RemoveRole extends SqlUpdate {
 		protected RemoveRole(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Roles WHERE groupId = ? AND roleId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2344,14 +2502,11 @@ public class GroupPersistence extends BasePersistence {
 		protected void remove(String groupId, String roleId) {
 			update(new Object[] { groupId, roleId });
 		}
-
-		private GroupPersistence _persistence;
 	}
 
 	protected class ContainsUserGroup extends MappingSqlQuery {
 		protected ContainsUserGroup(GroupPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSUSERGROUP);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2375,8 +2530,6 @@ public class GroupPersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private GroupPersistence _persistence;
 	}
 
 	protected class AddUserGroup extends SqlUpdate {
@@ -2402,7 +2555,6 @@ public class GroupPersistence extends BasePersistence {
 		protected ClearUserGroups(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_UserGroups WHERE groupId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2410,15 +2562,12 @@ public class GroupPersistence extends BasePersistence {
 		protected void clear(String groupId) {
 			update(new Object[] { groupId });
 		}
-
-		private GroupPersistence _persistence;
 	}
 
 	protected class RemoveUserGroup extends SqlUpdate {
 		protected RemoveUserGroup(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_UserGroups WHERE groupId = ? AND userGroupId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2427,14 +2576,11 @@ public class GroupPersistence extends BasePersistence {
 		protected void remove(String groupId, String userGroupId) {
 			update(new Object[] { groupId, userGroupId });
 		}
-
-		private GroupPersistence _persistence;
 	}
 
 	protected class ContainsUser extends MappingSqlQuery {
 		protected ContainsUser(GroupPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSUSER);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2458,8 +2604,6 @@ public class GroupPersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private GroupPersistence _persistence;
 	}
 
 	protected class AddUser extends SqlUpdate {
@@ -2485,7 +2629,6 @@ public class GroupPersistence extends BasePersistence {
 		protected ClearUsers(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Groups WHERE groupId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2493,15 +2636,12 @@ public class GroupPersistence extends BasePersistence {
 		protected void clear(String groupId) {
 			update(new Object[] { groupId });
 		}
-
-		private GroupPersistence _persistence;
 	}
 
 	protected class RemoveUser extends SqlUpdate {
 		protected RemoveUser(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Groups WHERE groupId = ? AND userId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2510,8 +2650,6 @@ public class GroupPersistence extends BasePersistence {
 		protected void remove(String groupId, String userId) {
 			update(new Object[] { groupId, userId });
 		}
-
-		private GroupPersistence _persistence;
 	}
 
 	private static final String _SQL_GETORGANIZATIONS = "SELECT {Organization_.*} FROM Organization_ INNER JOIN Groups_Orgs ON (Groups_Orgs.groupId = ?) AND (Groups_Orgs.organizationId = Organization_.organizationId)";

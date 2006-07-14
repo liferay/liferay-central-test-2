@@ -125,12 +125,9 @@ public class CalEventUtil {
 		return getPersistence().findByPrimaryKey(eventId);
 	}
 
-	public static com.liferay.portlet.calendar.model.CalEvent findByPrimaryKey(
-		java.lang.String eventId, boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.calendar.NoSuchEventException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(eventId,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.calendar.model.CalEvent fetchByPrimaryKey(
+		java.lang.String eventId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(eventId);
 	}
 
 	public static java.util.List findByGroupId(java.lang.String groupId)

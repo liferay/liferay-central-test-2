@@ -38,7 +38,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -67,8 +66,11 @@ public class AddressPersistence extends BasePersistence {
 			Address address = (Address)session.get(Address.class, addressId);
 
 			if (address == null) {
-				_log.warn("No Address exists with the primary key " +
-					addressId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Address exists with the primary key " +
+						addressId.toString());
+				}
+
 				throw new NoSuchAddressException(
 					"No Address exists with the primary key " +
 					addressId.toString());
@@ -183,12 +185,6 @@ public class AddressPersistence extends BasePersistence {
 
 	public Address findByPrimaryKey(String addressId)
 		throws NoSuchAddressException, SystemException {
-		return findByPrimaryKey(addressId, true);
-	}
-
-	public Address findByPrimaryKey(String addressId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchAddressException, SystemException {
 		Session session = null;
 
 		try {
@@ -197,10 +193,9 @@ public class AddressPersistence extends BasePersistence {
 			Address address = (Address)session.get(Address.class, addressId);
 
 			if (address == null) {
-				_log.warn("No Address exists with the primary key " +
-					addressId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Address exists with the primary key " +
+						addressId.toString());
 					throw new NoSuchAddressException(
 						"No Address exists with the primary key " +
 						addressId.toString());
@@ -208,6 +203,23 @@ public class AddressPersistence extends BasePersistence {
 			}
 
 			return address;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Address fetchByPrimaryKey(String addressId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Address)session.get(Address.class, addressId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

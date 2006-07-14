@@ -69,8 +69,6 @@ public class Messages {
 
 	private static Properties msgMap = new Properties();
 
-	private static Messages messages = new Messages();
-
 	/**
 	 Private constructor loads messages from <code>messages.properties</code> file in
 	 <code>org.apache.wsrp4j.exception</code>

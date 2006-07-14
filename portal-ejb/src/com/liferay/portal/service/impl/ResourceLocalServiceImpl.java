@@ -59,13 +59,10 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 			String primKey)
 		throws PortalException, SystemException {
 
-		Resource resource = null;
+		Resource resource = ResourceUtil.fetchByC_N_T_S_P(
+			companyId, name, typeId, scope, primKey);
 
-		try {
-			resource = ResourceUtil.findByC_N_T_S_P(
-				companyId, name, typeId, scope, primKey);
-		}
-		catch (NoSuchResourceException nsre) {
+		if (resource == null) {
 			String resourceId = Long.toString(CounterServiceUtil.increment(
 				Resource.class.getName()));
 

@@ -125,12 +125,9 @@ public class ShoppingItemUtil {
 		return getPersistence().findByPrimaryKey(itemId);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingItem findByPrimaryKey(
-		java.lang.String itemId, boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.shopping.NoSuchItemException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(itemId,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.shopping.model.ShoppingItem fetchByPrimaryKey(
+		java.lang.String itemId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(itemId);
 	}
 
 	public static java.util.List findByCategoryId(java.lang.String categoryId)
@@ -181,13 +178,10 @@ public class ShoppingItemUtil {
 		return getPersistence().findByC_S(companyId, sku);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingItem findByC_S(
-		java.lang.String companyId, java.lang.String sku,
-		boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.shopping.NoSuchItemException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByC_S(companyId, sku,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.shopping.model.ShoppingItem fetchByC_S(
+		java.lang.String companyId, java.lang.String sku)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_S(companyId, sku);
 	}
 
 	public static java.util.List findAll()

@@ -108,8 +108,6 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
 
 import org.hibernate.util.FastHashMap;
@@ -1280,8 +1278,6 @@ public class PortalUtil {
 			return false;
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(PortalUtil.class);
 
 	private static PortalUtil _instance = new PortalUtil();
 

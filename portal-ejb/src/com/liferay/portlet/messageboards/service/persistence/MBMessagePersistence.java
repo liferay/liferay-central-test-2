@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class MBMessagePersistence extends BasePersistence {
 					mbMessagePK);
 
 			if (mbMessage == null) {
-				_log.warn("No MBMessage exists with the primary key " +
-					mbMessagePK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No MBMessage exists with the primary key " +
+						mbMessagePK.toString());
+				}
+
 				throw new NoSuchMessageException(
 					"No MBMessage exists with the primary key " +
 					mbMessagePK.toString());
@@ -173,12 +175,6 @@ public class MBMessagePersistence extends BasePersistence {
 
 	public MBMessage findByPrimaryKey(MBMessagePK mbMessagePK)
 		throws NoSuchMessageException, SystemException {
-		return findByPrimaryKey(mbMessagePK, true);
-	}
-
-	public MBMessage findByPrimaryKey(MBMessagePK mbMessagePK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchMessageException, SystemException {
 		Session session = null;
 
 		try {
@@ -188,10 +184,9 @@ public class MBMessagePersistence extends BasePersistence {
 					mbMessagePK);
 
 			if (mbMessage == null) {
-				_log.warn("No MBMessage exists with the primary key " +
-					mbMessagePK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No MBMessage exists with the primary key " +
+						mbMessagePK.toString());
 					throw new NoSuchMessageException(
 						"No MBMessage exists with the primary key " +
 						mbMessagePK.toString());
@@ -199,6 +194,23 @@ public class MBMessagePersistence extends BasePersistence {
 			}
 
 			return mbMessage;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public MBMessage fetchByPrimaryKey(MBMessagePK mbMessagePK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (MBMessage)session.get(MBMessage.class, mbMessagePK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

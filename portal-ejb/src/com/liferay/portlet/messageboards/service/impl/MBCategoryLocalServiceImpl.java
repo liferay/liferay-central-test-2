@@ -34,7 +34,6 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.CategoryNameException;
-import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
@@ -237,14 +236,11 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 	public MBCategory getSystemCategory()
 		throws PortalException, SystemException {
 
-		MBCategory category = null;
-
 		String categoryId = Company.SYSTEM;
 
-		try {
-			category = MBCategoryUtil.findByPrimaryKey(categoryId);
-		}
-		catch (NoSuchCategoryException nsce) {
+		MBCategory category = MBCategoryUtil.fetchByPrimaryKey(categoryId);
+
+		if (category == null) {
 			category = MBCategoryUtil.create(categoryId);
 
 			category.setCompanyId(categoryId);
@@ -378,21 +374,18 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 	protected String getParentCategoryId(
 			String companyId, String parentCategoryId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (!parentCategoryId.equals(MBCategory.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			// Ensure parent category exists and belongs to the proper company
 
-			try {
-				MBCategory parentCategory =
-					MBCategoryUtil.findByPrimaryKey(parentCategoryId);
+			MBCategory parentCategory =
+				MBCategoryUtil.fetchByPrimaryKey(parentCategoryId);
 
-				if (!companyId.equals(parentCategory.getCompanyId())) {
-					parentCategoryId = MBCategory.DEFAULT_PARENT_CATEGORY_ID;
-				}
-			}
-			catch (NoSuchCategoryException nsce) {
+			if ((parentCategory == null) ||
+				(!companyId.equals(parentCategory.getCompanyId()))) {
+
 				parentCategoryId = MBCategory.DEFAULT_PARENT_CATEGORY_ID;
 			}
 		}

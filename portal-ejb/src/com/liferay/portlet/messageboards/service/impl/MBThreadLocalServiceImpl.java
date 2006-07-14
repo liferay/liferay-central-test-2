@@ -36,9 +36,6 @@ import com.liferay.portlet.messageboards.service.spring.MBThreadLocalService;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="MBThreadLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -126,7 +123,5 @@ public class MBThreadLocalServiceImpl implements MBThreadLocalService {
 			return true;
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(MBThreadLocalServiceImpl.class);
 
 }

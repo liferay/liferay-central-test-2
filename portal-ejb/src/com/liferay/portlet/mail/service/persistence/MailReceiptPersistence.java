@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class MailReceiptPersistence extends BasePersistence {
 					receiptId);
 
 			if (mailReceipt == null) {
-				_log.warn("No MailReceipt exists with the primary key " +
-					receiptId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No MailReceipt exists with the primary key " +
+						receiptId.toString());
+				}
+
 				throw new NoSuchReceiptException(
 					"No MailReceipt exists with the primary key " +
 					receiptId.toString());
@@ -168,12 +170,6 @@ public class MailReceiptPersistence extends BasePersistence {
 
 	public MailReceipt findByPrimaryKey(String receiptId)
 		throws NoSuchReceiptException, SystemException {
-		return findByPrimaryKey(receiptId, true);
-	}
-
-	public MailReceipt findByPrimaryKey(String receiptId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchReceiptException, SystemException {
 		Session session = null;
 
 		try {
@@ -183,10 +179,9 @@ public class MailReceiptPersistence extends BasePersistence {
 					receiptId);
 
 			if (mailReceipt == null) {
-				_log.warn("No MailReceipt exists with the primary key " +
-					receiptId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No MailReceipt exists with the primary key " +
+						receiptId.toString());
 					throw new NoSuchReceiptException(
 						"No MailReceipt exists with the primary key " +
 						receiptId.toString());
@@ -194,6 +189,23 @@ public class MailReceiptPersistence extends BasePersistence {
 			}
 
 			return mailReceipt;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public MailReceipt fetchByPrimaryKey(String receiptId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (MailReceipt)session.get(MailReceipt.class, receiptId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.polls.DuplicateVoteException;
 import com.liferay.portlet.polls.NoSuchVoteException;
-import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.model.PollsVote;
 import com.liferay.portlet.polls.service.persistence.PollsChoicePK;
@@ -76,7 +75,7 @@ public class PollsVoteLocalServiceImpl implements PollsVoteLocalService {
 			PollsChoicePK choicePK =
 				new PollsChoicePK(questionId, choiceId);
 
-			PollsChoice choice = PollsChoiceUtil.findByPrimaryKey(choicePK);
+			PollsChoiceUtil.findByPrimaryKey(choicePK);
 
 			vote.setChoiceId(choiceId);
 			vote.setVoteDate(now);

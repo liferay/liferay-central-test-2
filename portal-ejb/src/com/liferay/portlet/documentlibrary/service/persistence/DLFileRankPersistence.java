@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class DLFileRankPersistence extends BasePersistence {
 					dlFileRankPK);
 
 			if (dlFileRank == null) {
-				_log.warn("No DLFileRank exists with the primary key " +
-					dlFileRankPK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No DLFileRank exists with the primary key " +
+						dlFileRankPK.toString());
+				}
+
 				throw new NoSuchFileRankException(
 					"No DLFileRank exists with the primary key " +
 					dlFileRankPK.toString());
@@ -144,12 +146,6 @@ public class DLFileRankPersistence extends BasePersistence {
 
 	public DLFileRank findByPrimaryKey(DLFileRankPK dlFileRankPK)
 		throws NoSuchFileRankException, SystemException {
-		return findByPrimaryKey(dlFileRankPK, true);
-	}
-
-	public DLFileRank findByPrimaryKey(DLFileRankPK dlFileRankPK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchFileRankException, SystemException {
 		Session session = null;
 
 		try {
@@ -159,10 +155,9 @@ public class DLFileRankPersistence extends BasePersistence {
 					dlFileRankPK);
 
 			if (dlFileRank == null) {
-				_log.warn("No DLFileRank exists with the primary key " +
-					dlFileRankPK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No DLFileRank exists with the primary key " +
+						dlFileRankPK.toString());
 					throw new NoSuchFileRankException(
 						"No DLFileRank exists with the primary key " +
 						dlFileRankPK.toString());
@@ -170,6 +165,23 @@ public class DLFileRankPersistence extends BasePersistence {
 			}
 
 			return dlFileRank;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public DLFileRank fetchByPrimaryKey(DLFileRankPK dlFileRankPK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (DLFileRank)session.get(DLFileRank.class, dlFileRankPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

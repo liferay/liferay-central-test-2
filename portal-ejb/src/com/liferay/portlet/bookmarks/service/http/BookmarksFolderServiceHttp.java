@@ -128,10 +128,9 @@ public class BookmarksFolderServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(BookmarksFolderServiceUtil.class.getName(),
 					"deleteFolder", new Object[] { paramObj0 });
-			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.PortalException) {

@@ -33,7 +33,5 @@ public interface MBMessageFlagLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public boolean hasReadFlag(java.lang.String messageId,
-		java.lang.String userId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException;
+		java.lang.String userId) throws com.liferay.portal.SystemException;
 }

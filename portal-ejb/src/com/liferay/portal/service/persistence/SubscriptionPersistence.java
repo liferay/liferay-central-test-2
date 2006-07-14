@@ -39,7 +39,6 @@ import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class SubscriptionPersistence extends BasePersistence {
 					subscriptionId);
 
 			if (subscription == null) {
-				_log.warn("No Subscription exists with the primary key " +
-					subscriptionId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Subscription exists with the primary key " +
+						subscriptionId.toString());
+				}
+
 				throw new NoSuchSubscriptionException(
 					"No Subscription exists with the primary key " +
 					subscriptionId.toString());
@@ -159,12 +161,6 @@ public class SubscriptionPersistence extends BasePersistence {
 
 	public Subscription findByPrimaryKey(String subscriptionId)
 		throws NoSuchSubscriptionException, SystemException {
-		return findByPrimaryKey(subscriptionId, true);
-	}
-
-	public Subscription findByPrimaryKey(String subscriptionId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchSubscriptionException, SystemException {
 		Session session = null;
 
 		try {
@@ -174,10 +170,9 @@ public class SubscriptionPersistence extends BasePersistence {
 					subscriptionId);
 
 			if (subscription == null) {
-				_log.warn("No Subscription exists with the primary key " +
-					subscriptionId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Subscription exists with the primary key " +
+						subscriptionId.toString());
 					throw new NoSuchSubscriptionException(
 						"No Subscription exists with the primary key " +
 						subscriptionId.toString());
@@ -185,6 +180,23 @@ public class SubscriptionPersistence extends BasePersistence {
 			}
 
 			return subscription;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Subscription fetchByPrimaryKey(String subscriptionId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Subscription)session.get(Subscription.class, subscriptionId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -622,12 +634,6 @@ public class SubscriptionPersistence extends BasePersistence {
 	public Subscription findByC_U_C_C(String companyId, String userId,
 		String className, String classPK)
 		throws NoSuchSubscriptionException, SystemException {
-		return findByC_U_C_C(companyId, userId, className, classPK, true);
-	}
-
-	public Subscription findByC_U_C_C(String companyId, String userId,
-		String className, String classPK, boolean throwNoSuchObjectException)
-		throws NoSuchSubscriptionException, SystemException {
 		Session session = null;
 
 		try {
@@ -709,6 +715,89 @@ public class SubscriptionPersistence extends BasePersistence {
 				msg += classPK;
 				msg += StringPool.CLOSE_CURLY_BRACE;
 				throw new NoSuchSubscriptionException(msg);
+			}
+
+			Subscription subscription = (Subscription)list.get(0);
+
+			return subscription;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Subscription fetchByC_U_C_C(String companyId, String userId,
+		String className, String classPK) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (userId == null) {
+				query.append("userId IS NULL");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (className == null) {
+				query.append("className IS NULL");
+			}
+			else {
+				query.append("className = ?");
+			}
+
+			query.append(" AND ");
+
+			if (classPK == null) {
+				query.append("classPK IS NULL");
+			}
+			else {
+				query.append("classPK = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
+
+			if (className != null) {
+				q.setString(queryPos++, className);
+			}
+
+			if (classPK != null) {
+				q.setString(queryPos++, classPK);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
 			}
 
 			Subscription subscription = (Subscription)list.get(0);

@@ -38,7 +38,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -67,8 +66,11 @@ public class ListTypePersistence extends BasePersistence {
 			ListType listType = (ListType)session.get(ListType.class, listTypeId);
 
 			if (listType == null) {
-				_log.warn("No ListType exists with the primary key " +
-					listTypeId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No ListType exists with the primary key " +
+						listTypeId.toString());
+				}
+
 				throw new NoSuchListTypeException(
 					"No ListType exists with the primary key " +
 					listTypeId.toString());
@@ -138,12 +140,6 @@ public class ListTypePersistence extends BasePersistence {
 
 	public ListType findByPrimaryKey(String listTypeId)
 		throws NoSuchListTypeException, SystemException {
-		return findByPrimaryKey(listTypeId, true);
-	}
-
-	public ListType findByPrimaryKey(String listTypeId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchListTypeException, SystemException {
 		Session session = null;
 
 		try {
@@ -152,10 +148,9 @@ public class ListTypePersistence extends BasePersistence {
 			ListType listType = (ListType)session.get(ListType.class, listTypeId);
 
 			if (listType == null) {
-				_log.warn("No ListType exists with the primary key " +
-					listTypeId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No ListType exists with the primary key " +
+						listTypeId.toString());
 					throw new NoSuchListTypeException(
 						"No ListType exists with the primary key " +
 						listTypeId.toString());
@@ -163,6 +158,23 @@ public class ListTypePersistence extends BasePersistence {
 			}
 
 			return listType;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ListType fetchByPrimaryKey(String listTypeId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (ListType)session.get(ListType.class, listTypeId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

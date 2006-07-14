@@ -141,10 +141,9 @@ public class JournalStructureServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalStructureServiceUtil.class.getName(),
 					"deleteStructure", new Object[] { paramObj0, paramObj1 });
-			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.PortalException) {

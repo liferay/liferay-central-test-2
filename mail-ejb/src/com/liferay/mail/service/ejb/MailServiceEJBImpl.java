@@ -124,6 +124,10 @@ public class MailServiceEJBImpl implements MailService, SessionBean {
 	public void ejbPassivate() {
 	}
 
+	public SessionContext getSessionContext() {
+		return _sc;
+	}
+
 	public void setSessionContext(SessionContext sc) {
 		_sc = sc;
 	}

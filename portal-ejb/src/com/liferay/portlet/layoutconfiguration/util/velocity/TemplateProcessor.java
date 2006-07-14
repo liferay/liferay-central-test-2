@@ -22,9 +22,6 @@
 
 package com.liferay.portlet.layoutconfiguration.util.velocity;
 
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.WebKeys;
-
 import java.util.HashMap;
 
 import javax.servlet.ServletContext;
@@ -46,7 +43,6 @@ public class TemplateProcessor {
 		_ctx = ctx;
 		_req = req;
 		_res = res;
-		_themeDisplay = (ThemeDisplay)_req.getAttribute(WebKeys.THEME_DISPLAY);
 		_portletId = portletId;
 	}
 
@@ -77,7 +73,6 @@ public class TemplateProcessor {
 	private ServletContext _ctx;
 	private HttpServletRequest _req;
 	private HttpServletResponse _res;
-	private ThemeDisplay _themeDisplay;
 	private String _portletId;
 
 }

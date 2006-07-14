@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class BookmarksFolderPersistence extends BasePersistence {
 					folderId);
 
 			if (bookmarksFolder == null) {
-				_log.warn("No BookmarksFolder exists with the primary key " +
-					folderId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No BookmarksFolder exists with the primary key " +
+						folderId.toString());
+				}
+
 				throw new NoSuchFolderException(
 					"No BookmarksFolder exists with the primary key " +
 					folderId.toString());
@@ -159,12 +161,6 @@ public class BookmarksFolderPersistence extends BasePersistence {
 
 	public BookmarksFolder findByPrimaryKey(String folderId)
 		throws NoSuchFolderException, SystemException {
-		return findByPrimaryKey(folderId, true);
-	}
-
-	public BookmarksFolder findByPrimaryKey(String folderId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchFolderException, SystemException {
 		Session session = null;
 
 		try {
@@ -174,10 +170,9 @@ public class BookmarksFolderPersistence extends BasePersistence {
 					folderId);
 
 			if (bookmarksFolder == null) {
-				_log.warn("No BookmarksFolder exists with the primary key " +
-					folderId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No BookmarksFolder exists with the primary key " +
+						folderId.toString());
 					throw new NoSuchFolderException(
 						"No BookmarksFolder exists with the primary key " +
 						folderId.toString());
@@ -185,6 +180,23 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			}
 
 			return bookmarksFolder;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public BookmarksFolder fetchByPrimaryKey(String folderId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (BookmarksFolder)session.get(BookmarksFolder.class, folderId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

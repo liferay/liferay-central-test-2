@@ -53,7 +53,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -82,8 +81,11 @@ public class RolePersistence extends BasePersistence {
 			Role role = (Role)session.get(Role.class, roleId);
 
 			if (role == null) {
-				_log.warn("No Role exists with the primary key " +
-					roleId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Role exists with the primary key " +
+						roleId.toString());
+				}
+
 				throw new NoSuchRoleException(
 					"No Role exists with the primary key " + roleId.toString());
 			}
@@ -164,12 +166,6 @@ public class RolePersistence extends BasePersistence {
 
 	public Role findByPrimaryKey(String roleId)
 		throws NoSuchRoleException, SystemException {
-		return findByPrimaryKey(roleId, true);
-	}
-
-	public Role findByPrimaryKey(String roleId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchRoleException, SystemException {
 		Session session = null;
 
 		try {
@@ -178,10 +174,9 @@ public class RolePersistence extends BasePersistence {
 			Role role = (Role)session.get(Role.class, roleId);
 
 			if (role == null) {
-				_log.warn("No Role exists with the primary key " +
-					roleId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Role exists with the primary key " +
+						roleId.toString());
 					throw new NoSuchRoleException(
 						"No Role exists with the primary key " +
 						roleId.toString());
@@ -189,6 +184,22 @@ public class RolePersistence extends BasePersistence {
 			}
 
 			return role;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Role fetchByPrimaryKey(String roleId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Role)session.get(Role.class, roleId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -373,12 +384,6 @@ public class RolePersistence extends BasePersistence {
 
 	public Role findByC_N(String companyId, String name)
 		throws NoSuchRoleException, SystemException {
-		return findByC_N(companyId, name, true);
-	}
-
-	public Role findByC_N(String companyId, String name,
-		boolean throwNoSuchObjectException)
-		throws NoSuchRoleException, SystemException {
 		Session session = null;
 
 		try {
@@ -444,13 +449,66 @@ public class RolePersistence extends BasePersistence {
 		}
 	}
 
-	public Role findByC_C_C(String companyId, String className, String classPK)
-		throws NoSuchRoleException, SystemException {
-		return findByC_C_C(companyId, className, classPK, true);
+	public Role fetchByC_N(String companyId, String name)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.Role WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("name ASC");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			Role role = (Role)list.get(0);
+
+			return role;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
-	public Role findByC_C_C(String companyId, String className, String classPK,
-		boolean throwNoSuchObjectException)
+	public Role findByC_C_C(String companyId, String className, String classPK)
 		throws NoSuchRoleException, SystemException {
 		Session session = null;
 
@@ -519,6 +577,78 @@ public class RolePersistence extends BasePersistence {
 				msg += classPK;
 				msg += StringPool.CLOSE_CURLY_BRACE;
 				throw new NoSuchRoleException(msg);
+			}
+
+			Role role = (Role)list.get(0);
+
+			return role;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Role fetchByC_C_C(String companyId, String className, String classPK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.Role WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (className == null) {
+				query.append("className IS NULL");
+			}
+			else {
+				query.append("className = ?");
+			}
+
+			query.append(" AND ");
+
+			if (classPK == null) {
+				query.append("classPK IS NULL");
+			}
+			else {
+				query.append("classPK = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("name ASC");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (className != null) {
+				q.setString(queryPos++, className);
+			}
+
+			if (classPK != null) {
+				q.setString(queryPos++, classPK);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
 			}
 
 			Role role = (Role)list.get(0);
@@ -1660,7 +1790,6 @@ public class RolePersistence extends BasePersistence {
 	protected class ContainsGroup extends MappingSqlQuery {
 		protected ContainsGroup(RolePersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSGROUP);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -1684,8 +1813,6 @@ public class RolePersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private RolePersistence _persistence;
 	}
 
 	protected class AddGroup extends SqlUpdate {
@@ -1711,7 +1838,6 @@ public class RolePersistence extends BasePersistence {
 		protected ClearGroups(RolePersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Roles WHERE roleId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -1719,15 +1845,12 @@ public class RolePersistence extends BasePersistence {
 		protected void clear(String roleId) {
 			update(new Object[] { roleId });
 		}
-
-		private RolePersistence _persistence;
 	}
 
 	protected class RemoveGroup extends SqlUpdate {
 		protected RemoveGroup(RolePersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Roles WHERE roleId = ? AND groupId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -1736,14 +1859,11 @@ public class RolePersistence extends BasePersistence {
 		protected void remove(String roleId, String groupId) {
 			update(new Object[] { roleId, groupId });
 		}
-
-		private RolePersistence _persistence;
 	}
 
 	protected class ContainsPermission extends MappingSqlQuery {
 		protected ContainsPermission(RolePersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSPERMISSION);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -1767,8 +1887,6 @@ public class RolePersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private RolePersistence _persistence;
 	}
 
 	protected class AddPermission extends SqlUpdate {
@@ -1794,7 +1912,6 @@ public class RolePersistence extends BasePersistence {
 		protected ClearPermissions(RolePersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Roles_Permissions WHERE roleId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -1802,15 +1919,12 @@ public class RolePersistence extends BasePersistence {
 		protected void clear(String roleId) {
 			update(new Object[] { roleId });
 		}
-
-		private RolePersistence _persistence;
 	}
 
 	protected class RemovePermission extends SqlUpdate {
 		protected RemovePermission(RolePersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Roles_Permissions WHERE roleId = ? AND permissionId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -1819,14 +1933,11 @@ public class RolePersistence extends BasePersistence {
 		protected void remove(String roleId, String permissionId) {
 			update(new Object[] { roleId, permissionId });
 		}
-
-		private RolePersistence _persistence;
 	}
 
 	protected class ContainsUser extends MappingSqlQuery {
 		protected ContainsUser(RolePersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSUSER);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -1850,8 +1961,6 @@ public class RolePersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private RolePersistence _persistence;
 	}
 
 	protected class AddUser extends SqlUpdate {
@@ -1877,7 +1986,6 @@ public class RolePersistence extends BasePersistence {
 		protected ClearUsers(RolePersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Roles WHERE roleId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -1885,15 +1993,12 @@ public class RolePersistence extends BasePersistence {
 		protected void clear(String roleId) {
 			update(new Object[] { roleId });
 		}
-
-		private RolePersistence _persistence;
 	}
 
 	protected class RemoveUser extends SqlUpdate {
 		protected RemoveUser(RolePersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Roles WHERE roleId = ? AND userId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -1902,8 +2007,6 @@ public class RolePersistence extends BasePersistence {
 		protected void remove(String roleId, String userId) {
 			update(new Object[] { roleId, userId });
 		}
-
-		private RolePersistence _persistence;
 	}
 
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Groups_Roles ON (Groups_Roles.roleId = ?) AND (Groups_Roles.groupId = Group_.groupId)";

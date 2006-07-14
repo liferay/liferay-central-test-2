@@ -38,7 +38,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +67,11 @@ public class EmailAddressPersistence extends BasePersistence {
 					emailAddressId);
 
 			if (emailAddress == null) {
-				_log.warn("No EmailAddress exists with the primary key " +
-					emailAddressId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No EmailAddress exists with the primary key " +
+						emailAddressId.toString());
+				}
+
 				throw new NoSuchEmailAddressException(
 					"No EmailAddress exists with the primary key " +
 					emailAddressId.toString());
@@ -164,12 +166,6 @@ public class EmailAddressPersistence extends BasePersistence {
 
 	public EmailAddress findByPrimaryKey(String emailAddressId)
 		throws NoSuchEmailAddressException, SystemException {
-		return findByPrimaryKey(emailAddressId, true);
-	}
-
-	public EmailAddress findByPrimaryKey(String emailAddressId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchEmailAddressException, SystemException {
 		Session session = null;
 
 		try {
@@ -179,10 +175,9 @@ public class EmailAddressPersistence extends BasePersistence {
 					emailAddressId);
 
 			if (emailAddress == null) {
-				_log.warn("No EmailAddress exists with the primary key " +
-					emailAddressId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No EmailAddress exists with the primary key " +
+						emailAddressId.toString());
 					throw new NoSuchEmailAddressException(
 						"No EmailAddress exists with the primary key " +
 						emailAddressId.toString());
@@ -190,6 +185,23 @@ public class EmailAddressPersistence extends BasePersistence {
 			}
 
 			return emailAddress;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public EmailAddress fetchByPrimaryKey(String emailAddressId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (EmailAddress)session.get(EmailAddress.class, emailAddressId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

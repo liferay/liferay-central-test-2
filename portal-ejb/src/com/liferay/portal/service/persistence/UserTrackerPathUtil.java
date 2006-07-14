@@ -125,12 +125,10 @@ public class UserTrackerPathUtil {
 		return getPersistence().findByPrimaryKey(userTrackerPathId);
 	}
 
-	public static com.liferay.portal.model.UserTrackerPath findByPrimaryKey(
-		java.lang.String userTrackerPathId, boolean throwNoSuchObjectException)
-		throws com.liferay.portal.NoSuchUserTrackerPathException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(userTrackerPathId,
-			throwNoSuchObjectException);
+	public static com.liferay.portal.model.UserTrackerPath fetchByPrimaryKey(
+		java.lang.String userTrackerPathId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(userTrackerPathId);
 	}
 
 	public static java.util.List findByUserTrackerId(

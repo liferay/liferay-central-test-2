@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,12 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 					shoppingOrderItemPK);
 
 			if (shoppingOrderItem == null) {
-				_log.warn("No ShoppingOrderItem exists with the primary key " +
-					shoppingOrderItemPK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"No ShoppingOrderItem exists with the primary key " +
+						shoppingOrderItemPK.toString());
+				}
+
 				throw new NoSuchOrderItemException(
 					"No ShoppingOrderItem exists with the primary key " +
 					shoppingOrderItemPK.toString());
@@ -159,13 +162,6 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 	public ShoppingOrderItem findByPrimaryKey(
 		ShoppingOrderItemPK shoppingOrderItemPK)
 		throws NoSuchOrderItemException, SystemException {
-		return findByPrimaryKey(shoppingOrderItemPK, true);
-	}
-
-	public ShoppingOrderItem findByPrimaryKey(
-		ShoppingOrderItemPK shoppingOrderItemPK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchOrderItemException, SystemException {
 		Session session = null;
 
 		try {
@@ -175,10 +171,10 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 					shoppingOrderItemPK);
 
 			if (shoppingOrderItem == null) {
-				_log.warn("No ShoppingOrderItem exists with the primary key " +
-					shoppingOrderItemPK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"No ShoppingOrderItem exists with the primary key " +
+						shoppingOrderItemPK.toString());
 					throw new NoSuchOrderItemException(
 						"No ShoppingOrderItem exists with the primary key " +
 						shoppingOrderItemPK.toString());
@@ -186,6 +182,24 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 			}
 
 			return shoppingOrderItem;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ShoppingOrderItem fetchByPrimaryKey(
+		ShoppingOrderItemPK shoppingOrderItemPK) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (ShoppingOrderItem)session.get(ShoppingOrderItem.class,
+				shoppingOrderItemPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

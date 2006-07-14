@@ -25,7 +25,6 @@ package com.liferay.portal.tools;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.shared.util.ClassUtil;
 import com.liferay.portal.util.EntityResolver;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.SimpleCachePool;
@@ -47,8 +46,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
-
-import java.lang.reflect.Field;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -193,9 +190,12 @@ public class ServiceBuilder {
 			"java.util.Collections",
 			"java.util.Date",
 			"java.util.HashSet",
+			"java.util.Iterator",
 			"java.util.Properties",
 			"java.util.Set",
 			"javax.sql.DataSource",
+			"org.apache.commons.logging.Log",
+			"org.apache.commons.logging.LogFactory",
 			"org.hibernate.Hibernate",
 			"org.hibernate.ObjectNotFoundException",
 			"org.hibernate.Query",
@@ -357,9 +357,6 @@ public class ServiceBuilder {
 
 			_portletShortName =
 				root.element("portlet").attributeValue("short-name");
-
-			_portletClassName =
-				TextFormatter.format(_portletName, TextFormatter.D);
 
 			_portletPackageName =
 				TextFormatter.format(_portletName, TextFormatter.B);
@@ -1163,9 +1160,6 @@ public class ServiceBuilder {
 	}
 
 	private void _createExtendedModel(Entity entity) throws IOException {
-		List pkList = entity.getPKList();
-		List columnList = entity.getColumnList();
-
 		StringBuffer sb = new StringBuffer();
 
 		// Package
@@ -1222,7 +1216,6 @@ public class ServiceBuilder {
 
 			List pkList = entity.getPKList();
 			List columnList = entity.getColumnList();
-			List finderList = entity.getFinderList();
 
 			if (entity.hasColumns()) {
 				sb.append("\t<class name=\"" + _packagePath + ".model." + entity.getName() + "\" table=\"" + entity.getTable() + "\">\n");
@@ -1660,9 +1653,7 @@ public class ServiceBuilder {
 		for (int i = 0; i < _ejbList.size(); i++) {
 			Entity entity = (Entity)_ejbList.get(i);
 
-			List pkList = entity.getPKList();
 			List columnList = entity.getColumnList();
-			List finderList = entity.getFinderList();
 
 			if (entity.hasColumns()) {
 				sb.append("\t<model name=\"" + _packagePath + ".model." + entity.getName() + "\">\n");
@@ -1771,7 +1762,6 @@ public class ServiceBuilder {
 	}
 
 	private void _createPersistence(Entity entity) throws IOException {
-		List pkList = entity.getPKList();
 		List columnList = entity.getColumnList();
 		List finderList = entity.getFinderList();
 
@@ -1797,7 +1787,6 @@ public class ServiceBuilder {
 		sb.append("import java.sql.ResultSet;");
 		sb.append("import java.sql.SQLException;");
 		sb.append("import java.sql.Types;");
-		sb.append("import java.util.ArrayList;");
 		sb.append("import java.util.Collection;");
 		sb.append("import java.util.Collections;");
 		sb.append("import java.util.Date;");
@@ -1842,7 +1831,9 @@ public class ServiceBuilder {
 		sb.append("session = openSession();");
 		sb.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")session.get(" + entity.getName() + ".class, " + pkVarName + ");");
 		sb.append("if (" + entity.getVarName() + " == null) {");
+		sb.append("if (_log.isWarnEnabled()) {");
 		sb.append("_log.warn(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ".toString());");
+		sb.append("}");
 		sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ".toString());");
 		sb.append("}");
 		sb.append("session.delete(" + entity.getVarName() + ");");
@@ -1936,21 +1927,31 @@ public class ServiceBuilder {
 		// Finder methods
 
 		sb.append("public " + entity.getName() + " findByPrimaryKey(" + pkClassName + " " + pkVarName + ") throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
-		sb.append("return findByPrimaryKey(" + pkVarName + ", true);");
-		sb.append("}");
-
-		sb.append("public " + entity.getName() + " findByPrimaryKey(" + pkClassName + " " + pkVarName + ", boolean throwNoSuchObjectException) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
 		sb.append("Session session = null;");
 		sb.append("try {");
 		sb.append("session = openSession();");
 		sb.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")session.get(" + entity.getName() + ".class, " + pkVarName + ");");
 		sb.append("if (" + entity.getVarName() + " == null) {");
+		sb.append("if (_log.isWarnEnabled()) {");
 		sb.append("_log.warn(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ".toString());");
-		sb.append("if (throwNoSuchObjectException) {");
 		sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ".toString());");
 		sb.append("}");
 		sb.append("}");
 		sb.append("return " + entity.getVarName() + ";");
+		sb.append("}");
+		sb.append("catch (HibernateException he) {");
+		sb.append("throw new SystemException(he);");
+		sb.append("}");
+		sb.append("finally {");
+		sb.append("closeSession(session);");
+		sb.append("}");
+		sb.append("}");
+
+		sb.append("public " + entity.getName() + " fetchByPrimaryKey(" + pkClassName + " " + pkVarName + ") throws SystemException {");
+		sb.append("Session session = null;");
+		sb.append("try {");
+		sb.append("session = openSession();");
+		sb.append("return (" + entity.getName() + ")session.get(" + entity.getName() + ".class, " + pkVarName + ");");
 		sb.append("}");
 		sb.append("catch (HibernateException he) {");
 		sb.append("throw new SystemException(he);");
@@ -1977,30 +1978,8 @@ public class ServiceBuilder {
 						sb.append(", ");
 					}
 				}
-
-				sb.append(") throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
-				sb.append("return findBy" + finder.getName() + "(");
-
-				for (int j = 0; j < finderColsList.size(); j++) {
-					EntityColumn col = (EntityColumn)finderColsList.get(j);
-
-					sb.append(col.getName());
-					sb.append(", ");
-				}
-
-				sb.append("true);");
-				sb.append("}");
-
-				sb.append("public " + entity.getName() + " findBy" + finder.getName() + "(");
-
-				for (int j = 0; j < finderColsList.size(); j++) {
-					EntityColumn col = (EntityColumn)finderColsList.get(j);
-
-					sb.append(col.getType() + " " + col.getName());
-					sb.append(", ");
-				}
 				
-				sb.append("boolean throwNoSuchObjectException) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
+				sb.append(") throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
 				sb.append("Session session = null;");
 				sb.append("try {");
 				sb.append("session = openSession();");
@@ -2141,6 +2120,146 @@ public class ServiceBuilder {
 				sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(msg);");
 				sb.append("}");
 
+				sb.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")list.get(0);");
+				sb.append("return " + entity.getVarName() + ";");
+				sb.append("}");
+				sb.append("catch (HibernateException he) {");
+				sb.append("throw new SystemException(he);");
+				sb.append("}");
+				sb.append("finally {");
+				sb.append("closeSession(session);");
+				sb.append("}");
+				sb.append("}");
+
+				sb.append("public " + entity.getName() + " fetchBy" + finder.getName() + "(");
+
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+					sb.append(col.getType() + " " + col.getName());
+
+					if ((j + 1) != finderColsList.size()) {
+						sb.append(", ");
+					}
+				}
+				
+				sb.append(") throws SystemException {");
+				sb.append("Session session = null;");
+				sb.append("try {");
+				sb.append("session = openSession();");
+				sb.append("StringBuffer query = new StringBuffer();");
+				sb.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " WHERE \");");
+
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+					if (_requiresNullCheck(col)) {
+						_appendNullLogic(col, sb);
+					}
+						
+					sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
+
+					if (_requiresNullCheck(col)) {
+						sb.append("}");
+					}
+
+					if ((j + 1) != finderColsList.size()) {
+						sb.append("query.append(\" AND \");");
+					}
+					else if (Validator.isNull(finder.getWhere())) {
+						sb.append("query.append(\" \");");
+					}
+					else {
+						sb.append("query.append(\" AND " + finder.getWhere() + " \");");
+					}
+				}
+
+				if (order != null) {
+					List orderList = order.getColumns();
+
+					sb.append("query.append(\"ORDER BY \");");
+
+					for (int j = 0; j < orderList.size(); j++) {
+						EntityColumn col = (EntityColumn)orderList.get(j);
+
+						sb.append("query.append(\"" + col.getDBName() + " " + (col.isOrderByAscending() ? "ASC" : "DESC") + "\")");
+
+						if ((j + 1) != orderList.size()) {
+							sb.append(".append(\", \");");
+						}
+						else {
+							sb.append(";");
+						}
+					}
+				}
+
+				sb.append("Query q = session.createQuery(query.toString());");
+
+				sb.append("int queryPos = 0;");
+
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+					if (_requiresNullCheck(col)) {
+						sb.append("if (" + col.getName() + " != null) {");
+					}
+
+					String colType = col.getType();
+					String colObjType = colType;
+
+					if (col.isPrimitiveType()) {
+						if (colType.equals("boolean")) {
+							colObjType = "Boolean";
+						}
+						else if (colType.equals("double")) {
+							colObjType = "Double";
+						}
+						else if (colType.equals("float")) {
+							colObjType = "Float";
+						}
+						else if (colType.equals("int")) {
+							colObjType = "Integer";
+						}
+						else if (colType.equals("long")) {
+							colObjType = "Long";
+						}
+						else if (colType.equals("short")) {
+							colObjType = "Short";
+						}
+					}
+
+					sb.append("q.set" + colObjType + "(queryPos++, " + col.getName());
+
+					if (colType.equals("Boolean")) {
+						sb.append(".booleanValue()");
+					}
+					else if (colType.equals("Double")) {
+						sb.append(".doubleValue()");
+					}
+					else if (colType.equals("Float")) {
+						sb.append(".floatValue()");
+					}
+					else if (colType.equals("Integer")) {
+						sb.append(".intValue()");
+					}
+					else if (colType.equals("Long")) {
+						sb.append(".longValue()");
+					}
+					else if (colType.equals("Short")) {
+						sb.append(".shortValue()");
+					}
+
+					sb.append(");");
+					
+					if (_requiresNullCheck(col)) {
+						sb.append("}");
+					}
+				}
+
+				sb.append("List list = q.list();");
+				sb.append("if (list.size() == 0) {");
+				sb.append("return null;");
+				sb.append("}");
 				sb.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")list.get(0);");
 				sb.append("return " + entity.getVarName() + ";");
 				sb.append("}");
@@ -3417,7 +3536,6 @@ public class ServiceBuilder {
 				sb.append("protected class Contains" + tempEntity.getName() + " extends MappingSqlQuery {");
 				sb.append("protected Contains" + tempEntity.getName() + "(" + entity.getName() + "Persistence persistence) {");
 				sb.append("super(persistence.getDataSource(), _SQL_CONTAINS" + tempEntity.getName().toUpperCase() + ");");
-				sb.append("_persistence = persistence;");
 				sb.append("declareParameter(new SqlParameter(Types.VARCHAR));");
 				sb.append("declareParameter(new SqlParameter(Types.VARCHAR));");
 				sb.append("compile();");
@@ -3435,7 +3553,6 @@ public class ServiceBuilder {
 				sb.append("}");
 				sb.append("return false;");
 				sb.append("}");
-				sb.append("private " + entity.getName() + "Persistence _persistence;");
 				sb.append("}");
 
 				if (col.isMappingManyToMany()) {
@@ -3463,14 +3580,12 @@ public class ServiceBuilder {
 					sb.append("protected class Clear" + tempEntity.getNames() + " extends SqlUpdate {");
 					sb.append("protected Clear" + tempEntity.getNames() + "(" + entity.getName() + "Persistence persistence) {");
 					sb.append("super(persistence.getDataSource(), \"DELETE FROM " + col.getMappingTable() + " WHERE " + pkVarName + " = ?\");");
-					sb.append("_persistence = persistence;");
 					sb.append("declareParameter(new SqlParameter(Types.VARCHAR));");
 					sb.append("compile();");
 					sb.append("}");
 					sb.append("protected void clear(" + pkClassName + " " + pkVarName + ") {");
 					sb.append("update(new Object[] {" + pkVarName + "});");
 					sb.append("}");
-					sb.append("private " + entity.getName() + "Persistence _persistence;");
 					sb.append("}");
 
 					// removeUser(String pk, String userPK)
@@ -3478,7 +3593,6 @@ public class ServiceBuilder {
 					sb.append("protected class Remove" + tempEntity.getName() + " extends SqlUpdate {");
 					sb.append("protected Remove" + tempEntity.getName() + "(" + entity.getName() + "Persistence persistence) {");
 					sb.append("super(persistence.getDataSource(), \"DELETE FROM " + col.getMappingTable() + " WHERE " + pkVarName + " = ? AND " + tempEntity.getPKVarName() + " = ?\");");
-					sb.append("_persistence = persistence;");
 					sb.append("declareParameter(new SqlParameter(Types.VARCHAR));");
 					sb.append("declareParameter(new SqlParameter(Types.VARCHAR));");
 					sb.append("compile();");
@@ -3486,7 +3600,6 @@ public class ServiceBuilder {
 					sb.append("protected void remove(" + pkClassName + " " + pkVarName + ", " + tempEntity.getPKClassName() + " " + tempEntity.getPKVarName() + ") {");
 					sb.append("update(new Object[] {" + pkVarName + ", " + tempEntity.getPKVarName() + "});");
 					sb.append("}");
-					sb.append("private " + entity.getName() + "Persistence _persistence;");
 					sb.append("}");
 				}
 			}
@@ -4242,10 +4355,17 @@ public class ServiceBuilder {
 					sb.append("});");
 				}
 
-				sb.append("Object returnObj = null;");
+				if (!returnTypeName.equals("void")) {
+					sb.append("Object returnObj = null;");
+				}
 
 				sb.append("try {");
-				sb.append("returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);");
+				
+				if (!returnTypeName.equals("void")) {
+					sb.append("returnObj =");
+				}
+				
+				sb.append("TunnelUtil.invoke(httpPrincipal, methodWrapper);");
 				sb.append("}");
 				sb.append("catch (Exception e) {");
 
@@ -4313,7 +4433,9 @@ public class ServiceBuilder {
 
 		// Fields
 
-		sb.append("private static Log _log = LogFactory.getLog(" + entity.getName() + "ServiceHttp.class);");
+		if (sb.indexOf("_log.") != -1) {
+			sb.append("private static Log _log = LogFactory.getLog(" + entity.getName() + "ServiceHttp.class);");
+		}
 
 		// Class close brace
 
@@ -4356,32 +4478,6 @@ public class ServiceBuilder {
 		if (!ejbFile.exists()) {
 			writeFile(ejbFile, sb.toString());
 		}
-	}
-
-	private void _createServiceRemoteEJBImpl(Entity entity) throws IOException {
-		StringBuffer sb = new StringBuffer();
-
-		// Package
-
-		sb.append("package " + _packagePath + ".service.ejb;");
-
-		// Imports
-
-		sb.append("import com.liferay.portal.service.impl.PrincipalSessionBean;");
-
-		// Class declaration
-
-		sb.append("public class " + entity.getName() + "RemoteServiceEJBImpl extends " + entity.getName() + "LocalServiceEJBImpl {");
-
-		// Class close brace
-
-		sb.append("}");
-
-		// Write file
-
-		File ejbFile = new File(_outputPath + "/service/ejb/" + entity.getName() + "RemoteServiceEJBImpl.java");
-
-		writeFile(ejbFile, sb.toString());
 	}
 
 	private void _createServiceSoap(Entity entity) throws IOException {
@@ -4514,7 +4610,9 @@ public class ServiceBuilder {
 
 		// Fields
 
-		sb.append("private static Log _log = LogFactory.getLog(" + entity.getName() + "ServiceSoap.class);");
+		if (sb.indexOf("_log.") != -1) {
+			sb.append("private static Log _log = LogFactory.getLog(" + entity.getName() + "ServiceSoap.class);");
+		}
 
 		// Class close brace
 
@@ -4819,8 +4917,6 @@ public class ServiceBuilder {
 
 		br.close();
 
-		String content = FileUtil.read(sqlFile);
-
 		for (int i = 0; i < _ejbList.size(); i++) {
 			Entity entity = (Entity)_ejbList.get(i);
 
@@ -4918,8 +5014,6 @@ public class ServiceBuilder {
 
 		br.close();
 
-		String content = FileUtil.read(sqlFile);
-
 		for (int i = 0; i < _ejbList.size(); i++) {
 			Entity entity = (Entity)_ejbList.get(i);
 
@@ -4973,8 +5067,6 @@ public class ServiceBuilder {
 		if (!sqlFile.exists()) {
 			FileUtil.write(sqlFile, StringPool.BLANK);
 		}
-
-		String content = FileUtil.read(sqlFile);
 
 		for (int i = 0; i < _ejbList.size(); i++) {
 			Entity entity = (Entity)_ejbList.get(i);
@@ -5388,7 +5480,6 @@ public class ServiceBuilder {
 	private String _portalRoot;
 	private String _portletName;
 	private String _portletShortName;
-	private String _portletClassName;
 	private String _portletPackageName;
 	private String _outputPath;
 	private String _packagePath;

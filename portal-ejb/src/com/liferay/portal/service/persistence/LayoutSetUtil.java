@@ -124,12 +124,9 @@ public class LayoutSetUtil {
 		return getPersistence().findByPrimaryKey(ownerId);
 	}
 
-	public static com.liferay.portal.model.LayoutSet findByPrimaryKey(
-		java.lang.String ownerId, boolean throwNoSuchObjectException)
-		throws com.liferay.portal.NoSuchLayoutSetException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(ownerId,
-			throwNoSuchObjectException);
+	public static com.liferay.portal.model.LayoutSet fetchByPrimaryKey(
+		java.lang.String ownerId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(ownerId);
 	}
 
 	public static java.util.List findAll()

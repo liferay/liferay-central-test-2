@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,12 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 					itemFieldId);
 
 			if (shoppingItemField == null) {
-				_log.warn("No ShoppingItemField exists with the primary key " +
-					itemFieldId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"No ShoppingItemField exists with the primary key " +
+						itemFieldId.toString());
+				}
+
 				throw new NoSuchItemFieldException(
 					"No ShoppingItemField exists with the primary key " +
 					itemFieldId.toString());
@@ -147,12 +150,6 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 
 	public ShoppingItemField findByPrimaryKey(String itemFieldId)
 		throws NoSuchItemFieldException, SystemException {
-		return findByPrimaryKey(itemFieldId, true);
-	}
-
-	public ShoppingItemField findByPrimaryKey(String itemFieldId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchItemFieldException, SystemException {
 		Session session = null;
 
 		try {
@@ -162,10 +159,10 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 					itemFieldId);
 
 			if (shoppingItemField == null) {
-				_log.warn("No ShoppingItemField exists with the primary key " +
-					itemFieldId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"No ShoppingItemField exists with the primary key " +
+						itemFieldId.toString());
 					throw new NoSuchItemFieldException(
 						"No ShoppingItemField exists with the primary key " +
 						itemFieldId.toString());
@@ -173,6 +170,24 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 			}
 
 			return shoppingItemField;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ShoppingItemField fetchByPrimaryKey(String itemFieldId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (ShoppingItemField)session.get(ShoppingItemField.class,
+				itemFieldId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

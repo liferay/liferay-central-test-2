@@ -48,6 +48,10 @@ public class LockServiceEJBImpl extends LockServiceImpl implements SessionBean {
 	public void ejbPassivate() {
 	}
 
+	public SessionContext getSessionContext() {
+		return _sc;
+	}
+
 	public void setSessionContext(SessionContext sc) {
 		_sc = sc;
 	}

@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class PollsVotePersistence extends BasePersistence {
 					pollsVotePK);
 
 			if (pollsVote == null) {
-				_log.warn("No PollsVote exists with the primary key " +
-					pollsVotePK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No PollsVote exists with the primary key " +
+						pollsVotePK.toString());
+				}
+
 				throw new NoSuchVoteException(
 					"No PollsVote exists with the primary key " +
 					pollsVotePK.toString());
@@ -143,12 +145,6 @@ public class PollsVotePersistence extends BasePersistence {
 
 	public PollsVote findByPrimaryKey(PollsVotePK pollsVotePK)
 		throws NoSuchVoteException, SystemException {
-		return findByPrimaryKey(pollsVotePK, true);
-	}
-
-	public PollsVote findByPrimaryKey(PollsVotePK pollsVotePK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchVoteException, SystemException {
 		Session session = null;
 
 		try {
@@ -158,10 +154,9 @@ public class PollsVotePersistence extends BasePersistence {
 					pollsVotePK);
 
 			if (pollsVote == null) {
-				_log.warn("No PollsVote exists with the primary key " +
-					pollsVotePK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No PollsVote exists with the primary key " +
+						pollsVotePK.toString());
 					throw new NoSuchVoteException(
 						"No PollsVote exists with the primary key " +
 						pollsVotePK.toString());
@@ -169,6 +164,23 @@ public class PollsVotePersistence extends BasePersistence {
 			}
 
 			return pollsVote;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public PollsVote fetchByPrimaryKey(PollsVotePK pollsVotePK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (PollsVote)session.get(PollsVote.class, pollsVotePK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

@@ -38,7 +38,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -67,8 +66,11 @@ public class OrgLaborPersistence extends BasePersistence {
 			OrgLabor orgLabor = (OrgLabor)session.get(OrgLabor.class, orgLaborId);
 
 			if (orgLabor == null) {
-				_log.warn("No OrgLabor exists with the primary key " +
-					orgLaborId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No OrgLabor exists with the primary key " +
+						orgLaborId.toString());
+				}
+
 				throw new NoSuchOrgLaborException(
 					"No OrgLabor exists with the primary key " +
 					orgLaborId.toString());
@@ -180,12 +182,6 @@ public class OrgLaborPersistence extends BasePersistence {
 
 	public OrgLabor findByPrimaryKey(String orgLaborId)
 		throws NoSuchOrgLaborException, SystemException {
-		return findByPrimaryKey(orgLaborId, true);
-	}
-
-	public OrgLabor findByPrimaryKey(String orgLaborId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchOrgLaborException, SystemException {
 		Session session = null;
 
 		try {
@@ -194,10 +190,9 @@ public class OrgLaborPersistence extends BasePersistence {
 			OrgLabor orgLabor = (OrgLabor)session.get(OrgLabor.class, orgLaborId);
 
 			if (orgLabor == null) {
-				_log.warn("No OrgLabor exists with the primary key " +
-					orgLaborId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No OrgLabor exists with the primary key " +
+						orgLaborId.toString());
 					throw new NoSuchOrgLaborException(
 						"No OrgLabor exists with the primary key " +
 						orgLaborId.toString());
@@ -205,6 +200,23 @@ public class OrgLaborPersistence extends BasePersistence {
 			}
 
 			return orgLabor;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public OrgLabor fetchByPrimaryKey(String orgLaborId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (OrgLabor)session.get(OrgLabor.class, orgLaborId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

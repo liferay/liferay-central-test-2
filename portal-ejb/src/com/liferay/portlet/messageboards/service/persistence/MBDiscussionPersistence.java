@@ -38,7 +38,6 @@ import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +67,11 @@ public class MBDiscussionPersistence extends BasePersistence {
 					discussionId);
 
 			if (mbDiscussion == null) {
-				_log.warn("No MBDiscussion exists with the primary key " +
-					discussionId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No MBDiscussion exists with the primary key " +
+						discussionId.toString());
+				}
+
 				throw new NoSuchDiscussionException(
 					"No MBDiscussion exists with the primary key " +
 					discussionId.toString());
@@ -143,12 +145,6 @@ public class MBDiscussionPersistence extends BasePersistence {
 
 	public MBDiscussion findByPrimaryKey(String discussionId)
 		throws NoSuchDiscussionException, SystemException {
-		return findByPrimaryKey(discussionId, true);
-	}
-
-	public MBDiscussion findByPrimaryKey(String discussionId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchDiscussionException, SystemException {
 		Session session = null;
 
 		try {
@@ -158,10 +154,9 @@ public class MBDiscussionPersistence extends BasePersistence {
 					discussionId);
 
 			if (mbDiscussion == null) {
-				_log.warn("No MBDiscussion exists with the primary key " +
-					discussionId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No MBDiscussion exists with the primary key " +
+						discussionId.toString());
 					throw new NoSuchDiscussionException(
 						"No MBDiscussion exists with the primary key " +
 						discussionId.toString());
@@ -178,13 +173,24 @@ public class MBDiscussionPersistence extends BasePersistence {
 		}
 	}
 
-	public MBDiscussion findByC_C(String className, String classPK)
-		throws NoSuchDiscussionException, SystemException {
-		return findByC_C(className, classPK, true);
+	public MBDiscussion fetchByPrimaryKey(String discussionId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (MBDiscussion)session.get(MBDiscussion.class, discussionId);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
-	public MBDiscussion findByC_C(String className, String classPK,
-		boolean throwNoSuchObjectException)
+	public MBDiscussion findByC_C(String className, String classPK)
 		throws NoSuchDiscussionException, SystemException {
 		Session session = null;
 
@@ -236,6 +242,64 @@ public class MBDiscussionPersistence extends BasePersistence {
 				msg += classPK;
 				msg += StringPool.CLOSE_CURLY_BRACE;
 				throw new NoSuchDiscussionException(msg);
+			}
+
+			MBDiscussion mbDiscussion = (MBDiscussion)list.get(0);
+
+			return mbDiscussion;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public MBDiscussion fetchByC_C(String className, String classPK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
+
+			if (className == null) {
+				query.append("className IS NULL");
+			}
+			else {
+				query.append("className = ?");
+			}
+
+			query.append(" AND ");
+
+			if (classPK == null) {
+				query.append("classPK IS NULL");
+			}
+			else {
+				query.append("classPK = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (className != null) {
+				q.setString(queryPos++, className);
+			}
+
+			if (classPK != null) {
+				q.setString(queryPos++, classPK);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
 			}
 
 			MBDiscussion mbDiscussion = (MBDiscussion)list.get(0);

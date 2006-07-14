@@ -39,7 +39,6 @@ import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +67,11 @@ public class LayoutPersistence extends BasePersistence {
 			Layout layout = (Layout)session.get(Layout.class, layoutPK);
 
 			if (layout == null) {
-				_log.warn("No Layout exists with the primary key " +
-					layoutPK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Layout exists with the primary key " +
+						layoutPK.toString());
+				}
+
 				throw new NoSuchLayoutException(
 					"No Layout exists with the primary key " +
 					layoutPK.toString());
@@ -165,12 +167,6 @@ public class LayoutPersistence extends BasePersistence {
 
 	public Layout findByPrimaryKey(LayoutPK layoutPK)
 		throws NoSuchLayoutException, SystemException {
-		return findByPrimaryKey(layoutPK, true);
-	}
-
-	public Layout findByPrimaryKey(LayoutPK layoutPK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchLayoutException, SystemException {
 		Session session = null;
 
 		try {
@@ -179,10 +175,9 @@ public class LayoutPersistence extends BasePersistence {
 			Layout layout = (Layout)session.get(Layout.class, layoutPK);
 
 			if (layout == null) {
-				_log.warn("No Layout exists with the primary key " +
-					layoutPK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Layout exists with the primary key " +
+						layoutPK.toString());
 					throw new NoSuchLayoutException(
 						"No Layout exists with the primary key " +
 						layoutPK.toString());
@@ -190,6 +185,23 @@ public class LayoutPersistence extends BasePersistence {
 			}
 
 			return layout;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Layout fetchByPrimaryKey(LayoutPK layoutPK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Layout)session.get(Layout.class, layoutPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -601,12 +613,6 @@ public class LayoutPersistence extends BasePersistence {
 
 	public Layout findByO_F(String ownerId, String friendlyURL)
 		throws NoSuchLayoutException, SystemException {
-		return findByO_F(ownerId, friendlyURL, true);
-	}
-
-	public Layout findByO_F(String ownerId, String friendlyURL,
-		boolean throwNoSuchObjectException)
-		throws NoSuchLayoutException, SystemException {
 		Session session = null;
 
 		try {
@@ -659,6 +665,66 @@ public class LayoutPersistence extends BasePersistence {
 				msg += friendlyURL;
 				msg += StringPool.CLOSE_CURLY_BRACE;
 				throw new NoSuchLayoutException(msg);
+			}
+
+			Layout layout = (Layout)list.get(0);
+
+			return layout;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Layout fetchByO_F(String ownerId, String friendlyURL)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.Layout WHERE ");
+
+			if (ownerId == null) {
+				query.append("ownerId IS NULL");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (friendlyURL == null) {
+				query.append("friendlyURL IS NULL");
+			}
+			else {
+				query.append("friendlyURL = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("parentLayoutId ASC").append(", ");
+			query.append("priority ASC");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
+
+			if (friendlyURL != null) {
+				q.setString(queryPos++, friendlyURL);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
 			}
 
 			Layout layout = (Layout)list.get(0);

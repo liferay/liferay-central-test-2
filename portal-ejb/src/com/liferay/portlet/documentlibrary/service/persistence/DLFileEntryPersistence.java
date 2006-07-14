@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class DLFileEntryPersistence extends BasePersistence {
 					dlFileEntryPK);
 
 			if (dlFileEntry == null) {
-				_log.warn("No DLFileEntry exists with the primary key " +
-					dlFileEntryPK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No DLFileEntry exists with the primary key " +
+						dlFileEntryPK.toString());
+				}
+
 				throw new NoSuchFileEntryException(
 					"No DLFileEntry exists with the primary key " +
 					dlFileEntryPK.toString());
@@ -173,12 +175,6 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 	public DLFileEntry findByPrimaryKey(DLFileEntryPK dlFileEntryPK)
 		throws NoSuchFileEntryException, SystemException {
-		return findByPrimaryKey(dlFileEntryPK, true);
-	}
-
-	public DLFileEntry findByPrimaryKey(DLFileEntryPK dlFileEntryPK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchFileEntryException, SystemException {
 		Session session = null;
 
 		try {
@@ -188,10 +184,9 @@ public class DLFileEntryPersistence extends BasePersistence {
 					dlFileEntryPK);
 
 			if (dlFileEntry == null) {
-				_log.warn("No DLFileEntry exists with the primary key " +
-					dlFileEntryPK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No DLFileEntry exists with the primary key " +
+						dlFileEntryPK.toString());
 					throw new NoSuchFileEntryException(
 						"No DLFileEntry exists with the primary key " +
 						dlFileEntryPK.toString());
@@ -199,6 +194,23 @@ public class DLFileEntryPersistence extends BasePersistence {
 			}
 
 			return dlFileEntry;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public DLFileEntry fetchByPrimaryKey(DLFileEntryPK dlFileEntryPK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (DLFileEntry)session.get(DLFileEntry.class, dlFileEntryPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

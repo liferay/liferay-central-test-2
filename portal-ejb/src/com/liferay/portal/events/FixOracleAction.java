@@ -36,9 +36,6 @@ import com.liferay.portlet.journal.service.spring.JournalTemplateLocalServiceUti
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="FixOracleAction.java.html"><b><i>View Source</i></b></a>
  *
@@ -140,7 +137,5 @@ public class FixOracleAction extends SimpleAction {
 			}
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(FixOracleAction.class);
 
 }

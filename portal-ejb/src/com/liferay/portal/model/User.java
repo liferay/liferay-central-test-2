@@ -381,6 +381,5 @@ public class User extends UserModel {
 	private String _passwordUnencrypted;
 	private Locale _locale;
 	private TimeZone _timeZone;
-	private User _user;
 
 }

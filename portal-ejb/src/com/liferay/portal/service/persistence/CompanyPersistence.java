@@ -34,8 +34,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -63,8 +61,11 @@ public class CompanyPersistence extends BasePersistence {
 			Company company = (Company)session.get(Company.class, companyId);
 
 			if (company == null) {
-				_log.warn("No Company exists with the primary key " +
-					companyId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Company exists with the primary key " +
+						companyId.toString());
+				}
+
 				throw new NoSuchCompanyException(
 					"No Company exists with the primary key " +
 					companyId.toString());
@@ -140,12 +141,6 @@ public class CompanyPersistence extends BasePersistence {
 
 	public Company findByPrimaryKey(String companyId)
 		throws NoSuchCompanyException, SystemException {
-		return findByPrimaryKey(companyId, true);
-	}
-
-	public Company findByPrimaryKey(String companyId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchCompanyException, SystemException {
 		Session session = null;
 
 		try {
@@ -154,10 +149,9 @@ public class CompanyPersistence extends BasePersistence {
 			Company company = (Company)session.get(Company.class, companyId);
 
 			if (company == null) {
-				_log.warn("No Company exists with the primary key " +
-					companyId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Company exists with the primary key " +
+						companyId.toString());
 					throw new NoSuchCompanyException(
 						"No Company exists with the primary key " +
 						companyId.toString());
@@ -165,6 +159,23 @@ public class CompanyPersistence extends BasePersistence {
 			}
 
 			return company;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Company fetchByPrimaryKey(String companyId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Company)session.get(Company.class, companyId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

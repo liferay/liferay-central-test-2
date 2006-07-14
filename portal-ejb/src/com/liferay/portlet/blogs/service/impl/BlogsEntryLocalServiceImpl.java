@@ -54,7 +54,6 @@ import com.liferay.util.Validator;
 import com.liferay.util.lucene.Hits;
 
 import de.nava.informa.core.ChannelIF;
-import de.nava.informa.core.ItemIF;
 import de.nava.informa.impl.basic.ChannelBuilder;
 
 import java.io.IOException;
@@ -274,7 +273,7 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 						Html.stripHtml(entry.getContent()), 80,
 						StringPool.BLANK);
 
-				ItemIF item = builder.createItem(
+				builder.createItem(
 					channel, entry.getTitle(), firstLine,
 					new URL(url + "&entryId=" + entry.getEntryId()));
 			}

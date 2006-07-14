@@ -199,7 +199,7 @@ public class LockPool {
 
 	private boolean _isLocked(String className, Comparable pk) {
 		try {
-			Lock lock = _getLock(className, pk);
+			_getLock(className, pk);
 
 			return true;
 		}

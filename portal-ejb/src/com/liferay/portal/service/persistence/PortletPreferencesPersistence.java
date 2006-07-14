@@ -38,7 +38,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +67,12 @@ public class PortletPreferencesPersistence extends BasePersistence {
 					portletPreferencesPK);
 
 			if (portletPreferences == null) {
-				_log.warn("No PortletPreferences exists with the primary key " +
-					portletPreferencesPK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"No PortletPreferences exists with the primary key " +
+						portletPreferencesPK.toString());
+				}
+
 				throw new NoSuchPortletPreferencesException(
 					"No PortletPreferences exists with the primary key " +
 					portletPreferencesPK.toString());
@@ -142,13 +145,6 @@ public class PortletPreferencesPersistence extends BasePersistence {
 	public PortletPreferences findByPrimaryKey(
 		PortletPreferencesPK portletPreferencesPK)
 		throws NoSuchPortletPreferencesException, SystemException {
-		return findByPrimaryKey(portletPreferencesPK, true);
-	}
-
-	public PortletPreferences findByPrimaryKey(
-		PortletPreferencesPK portletPreferencesPK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchPortletPreferencesException, SystemException {
 		Session session = null;
 
 		try {
@@ -158,10 +154,10 @@ public class PortletPreferencesPersistence extends BasePersistence {
 					portletPreferencesPK);
 
 			if (portletPreferences == null) {
-				_log.warn("No PortletPreferences exists with the primary key " +
-					portletPreferencesPK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"No PortletPreferences exists with the primary key " +
+						portletPreferencesPK.toString());
 					throw new NoSuchPortletPreferencesException(
 						"No PortletPreferences exists with the primary key " +
 						portletPreferencesPK.toString());
@@ -169,6 +165,24 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			}
 
 			return portletPreferences;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public PortletPreferences fetchByPrimaryKey(
+		PortletPreferencesPK portletPreferencesPK) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (PortletPreferences)session.get(PortletPreferences.class,
+				portletPreferencesPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

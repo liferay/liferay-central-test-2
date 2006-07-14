@@ -125,12 +125,9 @@ public class BookmarksFolderUtil {
 		return getPersistence().findByPrimaryKey(folderId);
 	}
 
-	public static com.liferay.portlet.bookmarks.model.BookmarksFolder findByPrimaryKey(
-		java.lang.String folderId, boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.bookmarks.NoSuchFolderException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(folderId,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.bookmarks.model.BookmarksFolder fetchByPrimaryKey(
+		java.lang.String folderId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(folderId);
 	}
 
 	public static java.util.List findByGroupId(java.lang.String groupId)

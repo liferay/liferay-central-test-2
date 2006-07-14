@@ -220,15 +220,11 @@ public class MailEngine {
 	}
 
 	public static void send(byte[] msgByteArray) throws MailEngineException {
-		InternetAddress[] from = null;
-
 		try {
 			Session session = getSession();
 
 			Message msg = new MimeMessage(
 				session, new ByteArrayInputStream(msgByteArray));
-
-			from = (InternetAddress[])msg.getFrom();
 
 			_send(session, msg);
 		}

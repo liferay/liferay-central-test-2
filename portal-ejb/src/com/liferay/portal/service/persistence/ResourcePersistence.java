@@ -39,7 +39,6 @@ import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +67,11 @@ public class ResourcePersistence extends BasePersistence {
 			Resource resource = (Resource)session.get(Resource.class, resourceId);
 
 			if (resource == null) {
-				_log.warn("No Resource exists with the primary key " +
-					resourceId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Resource exists with the primary key " +
+						resourceId.toString());
+				}
+
 				throw new NoSuchResourceException(
 					"No Resource exists with the primary key " +
 					resourceId.toString());
@@ -148,12 +150,6 @@ public class ResourcePersistence extends BasePersistence {
 
 	public Resource findByPrimaryKey(String resourceId)
 		throws NoSuchResourceException, SystemException {
-		return findByPrimaryKey(resourceId, true);
-	}
-
-	public Resource findByPrimaryKey(String resourceId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchResourceException, SystemException {
 		Session session = null;
 
 		try {
@@ -162,10 +158,9 @@ public class ResourcePersistence extends BasePersistence {
 			Resource resource = (Resource)session.get(Resource.class, resourceId);
 
 			if (resource == null) {
-				_log.warn("No Resource exists with the primary key " +
-					resourceId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Resource exists with the primary key " +
+						resourceId.toString());
 					throw new NoSuchResourceException(
 						"No Resource exists with the primary key " +
 						resourceId.toString());
@@ -173,6 +168,23 @@ public class ResourcePersistence extends BasePersistence {
 			}
 
 			return resource;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Resource fetchByPrimaryKey(String resourceId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Resource)session.get(Resource.class, resourceId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1120,13 +1132,6 @@ public class ResourcePersistence extends BasePersistence {
 	public Resource findByC_N_T_S_P(String companyId, String name,
 		String typeId, String scope, String primKey)
 		throws NoSuchResourceException, SystemException {
-		return findByC_N_T_S_P(companyId, name, typeId, scope, primKey, true);
-	}
-
-	public Resource findByC_N_T_S_P(String companyId, String name,
-		String typeId, String scope, String primKey,
-		boolean throwNoSuchObjectException)
-		throws NoSuchResourceException, SystemException {
 		Session session = null;
 
 		try {
@@ -1224,6 +1229,102 @@ public class ResourcePersistence extends BasePersistence {
 				msg += primKey;
 				msg += StringPool.CLOSE_CURLY_BRACE;
 				throw new NoSuchResourceException(msg);
+			}
+
+			Resource resource = (Resource)list.get(0);
+
+			return resource;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Resource fetchByC_N_T_S_P(String companyId, String name,
+		String typeId, String scope, String primKey) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" AND ");
+
+			if (typeId == null) {
+				query.append("typeId IS NULL");
+			}
+			else {
+				query.append("typeId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (scope == null) {
+				query.append("scope IS NULL");
+			}
+			else {
+				query.append("scope = ?");
+			}
+
+			query.append(" AND ");
+
+			if (primKey == null) {
+				query.append("primKey IS NULL");
+			}
+			else {
+				query.append("primKey = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			if (typeId != null) {
+				q.setString(queryPos++, typeId);
+			}
+
+			if (scope != null) {
+				q.setString(queryPos++, scope);
+			}
+
+			if (primKey != null) {
+				q.setString(queryPos++, primKey);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
 			}
 
 			Resource resource = (Resource)list.get(0);

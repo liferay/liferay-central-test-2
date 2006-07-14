@@ -125,13 +125,10 @@ public class JournalContentSearchUtil {
 		return getPersistence().findByPrimaryKey(journalContentSearchPK);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalContentSearch findByPrimaryKey(
-		com.liferay.portlet.journal.service.persistence.JournalContentSearchPK journalContentSearchPK,
-		boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.journal.NoSuchContentSearchException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(journalContentSearchPK,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.journal.model.JournalContentSearch fetchByPrimaryKey(
+		com.liferay.portlet.journal.service.persistence.JournalContentSearchPK journalContentSearchPK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(journalContentSearchPK);
 	}
 
 	public static java.util.List findByOwnerId(java.lang.String ownerId)

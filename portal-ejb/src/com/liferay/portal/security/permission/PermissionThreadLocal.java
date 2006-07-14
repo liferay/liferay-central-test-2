@@ -22,9 +22,6 @@
 
 package com.liferay.portal.security.permission;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PermissionThreadLocal.java.html"><b><i>View Source</i></b></a>
  *
@@ -42,8 +39,6 @@ public class PermissionThreadLocal {
 
 		_threadLocal.set(permissionChecker);
 	}
-
-	private static Log _log = LogFactory.getLog(PermissionThreadLocal.class);
 
 	private static ThreadLocal _threadLocal = new ThreadLocal();
 

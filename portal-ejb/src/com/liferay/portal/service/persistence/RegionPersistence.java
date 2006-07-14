@@ -38,7 +38,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -67,8 +66,11 @@ public class RegionPersistence extends BasePersistence {
 			Region region = (Region)session.get(Region.class, regionId);
 
 			if (region == null) {
-				_log.warn("No Region exists with the primary key " +
-					regionId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Region exists with the primary key " +
+						regionId.toString());
+				}
+
 				throw new NoSuchRegionException(
 					"No Region exists with the primary key " +
 					regionId.toString());
@@ -144,12 +146,6 @@ public class RegionPersistence extends BasePersistence {
 
 	public Region findByPrimaryKey(String regionId)
 		throws NoSuchRegionException, SystemException {
-		return findByPrimaryKey(regionId, true);
-	}
-
-	public Region findByPrimaryKey(String regionId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchRegionException, SystemException {
 		Session session = null;
 
 		try {
@@ -158,10 +154,9 @@ public class RegionPersistence extends BasePersistence {
 			Region region = (Region)session.get(Region.class, regionId);
 
 			if (region == null) {
-				_log.warn("No Region exists with the primary key " +
-					regionId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Region exists with the primary key " +
+						regionId.toString());
 					throw new NoSuchRegionException(
 						"No Region exists with the primary key " +
 						regionId.toString());
@@ -169,6 +164,22 @@ public class RegionPersistence extends BasePersistence {
 			}
 
 			return region;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Region fetchByPrimaryKey(String regionId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Region)session.get(Region.class, regionId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

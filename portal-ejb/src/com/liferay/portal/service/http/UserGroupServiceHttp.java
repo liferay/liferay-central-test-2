@@ -58,10 +58,9 @@ public class UserGroupServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserGroupServiceUtil.class.getName(),
 					"addGroupUserGroups", new Object[] { paramObj0, paramObj1 });
-			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.PortalException) {
@@ -157,10 +156,9 @@ public class UserGroupServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserGroupServiceUtil.class.getName(),
 					"deleteUserGroup", new Object[] { paramObj0 });
-			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.PortalException) {
@@ -303,10 +301,9 @@ public class UserGroupServiceHttp {
 			MethodWrapper methodWrapper = new MethodWrapper(UserGroupServiceUtil.class.getName(),
 					"unsetGroupUserGroups",
 					new Object[] { paramObj0, paramObj1 });
-			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.PortalException) {

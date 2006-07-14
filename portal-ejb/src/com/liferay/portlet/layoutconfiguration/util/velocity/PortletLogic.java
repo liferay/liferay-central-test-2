@@ -34,9 +34,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PortletLogic.java.html"><b><i>View Source</i></b></a>
  *
@@ -81,8 +78,6 @@ public class PortletLogic extends RuntimeLogic {
 			sb, _ctx, _req, _res, _renderRequest, _renderResponse, portletId,
 			instanceId);
 	}
-
-	private static Log _log = LogFactory.getLog(PortletLogic.class);
 
 	private ServletContext _ctx;
 	private HttpServletRequest _req;

@@ -246,7 +246,6 @@ public class PortletDeployer extends BaseDeployer {
 
 					String paramName = initParam.elementText("param-name");
 					String paramValue = initParam.elementText("param-value");
-					String paramDesc = initParam.elementText("description");
 
 					if ((paramName != null) &&
 						(paramName.equals("servlet-class"))) {

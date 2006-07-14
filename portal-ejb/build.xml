@@ -344,8 +344,7 @@
 		</antcall>
 	</target>
 
-	<target name="build-services">
-		<antcall target="build-service-portal" />
+	<target name="build-service-portlets">
 		<antcall target="build-service-portlet-blogs" />
 		<antcall target="build-service-portlet-bookmarks" />
 		<antcall target="build-service-portlet-calendar" />
@@ -357,6 +356,11 @@
 		<antcall target="build-service-portlet-polls" />
 		<antcall target="build-service-portlet-shopping" />
 		<antcall target="build-service-portlet-wiki" />
+	</target>
+
+	<target name="build-services">
+		<antcall target="build-service-portal" />
+		<antcall target="build-service-portlets" />
 	</target>
 
 	<target name="build-website">
@@ -461,8 +465,7 @@
 		</antcall>
 	</target>
 
-	<target name="build-wsdds">
-		<antcall target="build-wsdd-portal" />
+	<target name="build-wsdd-portlets">
 		<antcall target="build-wsdd-portlet-blogs" />
 		<antcall target="build-wsdd-portlet-bookmarks" />
 		<antcall target="build-wsdd-portlet-calendar" />
@@ -474,6 +477,11 @@
 		<antcall target="build-wsdd-portlet-polls" />
 		<antcall target="build-wsdd-portlet-shopping" />
 		<antcall target="build-wsdd-portlet-wiki" />
+	</target>
+
+	<target name="build-wsdds">
+		<antcall target="build-wsdd-portal" />
+		<antcall target="build-wsdd-portlets" />
 	</target>
 
 	<target name="format-source">

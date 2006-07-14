@@ -410,9 +410,6 @@ public class Layout extends LayoutModel {
 
 	private String _plid;
 	private String _groupId;
-	private boolean _group;
-	private String _userId;
-	private boolean _user;
 	private boolean _privateLayout;
 	private Properties _typeSettingsProperties = null;
 

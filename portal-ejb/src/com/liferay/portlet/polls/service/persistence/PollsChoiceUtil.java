@@ -125,13 +125,10 @@ public class PollsChoiceUtil {
 		return getPersistence().findByPrimaryKey(pollsChoicePK);
 	}
 
-	public static com.liferay.portlet.polls.model.PollsChoice findByPrimaryKey(
-		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK,
-		boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.polls.NoSuchChoiceException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(pollsChoicePK,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.polls.model.PollsChoice fetchByPrimaryKey(
+		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(pollsChoicePK);
 	}
 
 	public static java.util.List findByQuestionId(java.lang.String questionId)

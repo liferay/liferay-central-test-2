@@ -125,12 +125,10 @@ public class OrganizationUtil {
 		return getPersistence().findByPrimaryKey(organizationId);
 	}
 
-	public static com.liferay.portal.model.Organization findByPrimaryKey(
-		java.lang.String organizationId, boolean throwNoSuchObjectException)
-		throws com.liferay.portal.NoSuchOrganizationException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(organizationId,
-			throwNoSuchObjectException);
+	public static com.liferay.portal.model.Organization fetchByPrimaryKey(
+		java.lang.String organizationId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(organizationId);
 	}
 
 	public static java.util.List findByCompanyId(java.lang.String companyId)
@@ -271,13 +269,10 @@ public class OrganizationUtil {
 		return getPersistence().findByC_N(companyId, name);
 	}
 
-	public static com.liferay.portal.model.Organization findByC_N(
-		java.lang.String companyId, java.lang.String name,
-		boolean throwNoSuchObjectException)
-		throws com.liferay.portal.NoSuchOrganizationException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByC_N(companyId, name,
-			throwNoSuchObjectException);
+	public static com.liferay.portal.model.Organization fetchByC_N(
+		java.lang.String companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_N(companyId, name);
 	}
 
 	public static java.util.List findAll()

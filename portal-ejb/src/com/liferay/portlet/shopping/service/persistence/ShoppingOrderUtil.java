@@ -125,12 +125,9 @@ public class ShoppingOrderUtil {
 		return getPersistence().findByPrimaryKey(orderId);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingOrder findByPrimaryKey(
-		java.lang.String orderId, boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.shopping.NoSuchOrderException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(orderId,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.shopping.model.ShoppingOrder fetchByPrimaryKey(
+		java.lang.String orderId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(orderId);
 	}
 
 	public static java.util.List findByG_U_PPPS(java.lang.String groupId,

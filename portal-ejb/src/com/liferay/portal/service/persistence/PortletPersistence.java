@@ -38,7 +38,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -67,8 +66,11 @@ public class PortletPersistence extends BasePersistence {
 			Portlet portlet = (Portlet)session.get(Portlet.class, portletPK);
 
 			if (portlet == null) {
-				_log.warn("No Portlet exists with the primary key " +
-					portletPK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Portlet exists with the primary key " +
+						portletPK.toString());
+				}
+
 				throw new NoSuchPortletException(
 					"No Portlet exists with the primary key " +
 					portletPK.toString());
@@ -143,12 +145,6 @@ public class PortletPersistence extends BasePersistence {
 
 	public Portlet findByPrimaryKey(PortletPK portletPK)
 		throws NoSuchPortletException, SystemException {
-		return findByPrimaryKey(portletPK, true);
-	}
-
-	public Portlet findByPrimaryKey(PortletPK portletPK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchPortletException, SystemException {
 		Session session = null;
 
 		try {
@@ -157,10 +153,9 @@ public class PortletPersistence extends BasePersistence {
 			Portlet portlet = (Portlet)session.get(Portlet.class, portletPK);
 
 			if (portlet == null) {
-				_log.warn("No Portlet exists with the primary key " +
-					portletPK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Portlet exists with the primary key " +
+						portletPK.toString());
 					throw new NoSuchPortletException(
 						"No Portlet exists with the primary key " +
 						portletPK.toString());
@@ -168,6 +163,23 @@ public class PortletPersistence extends BasePersistence {
 			}
 
 			return portlet;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Portlet fetchByPrimaryKey(PortletPK portletPK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Portlet)session.get(Portlet.class, portletPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

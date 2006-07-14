@@ -124,12 +124,9 @@ public class CountryUtil {
 		return getPersistence().findByPrimaryKey(countryId);
 	}
 
-	public static com.liferay.portal.model.Country findByPrimaryKey(
-		java.lang.String countryId, boolean throwNoSuchObjectException)
-		throws com.liferay.portal.NoSuchCountryException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(countryId,
-			throwNoSuchObjectException);
+	public static com.liferay.portal.model.Country fetchByPrimaryKey(
+		java.lang.String countryId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(countryId);
 	}
 
 	public static java.util.List findByActive(boolean active)

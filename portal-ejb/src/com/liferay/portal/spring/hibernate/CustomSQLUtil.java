@@ -141,10 +141,6 @@ public class CustomSQLUtil {
 		return (String)_sqlPool.get(id);
 	}
 
-	private void _put(String id, String sql) {
-		_sqlPool.put(id, sql);
-	}
-
 	private void _read(ClassLoader classLoader, String source)
 		throws Exception {
 

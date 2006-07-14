@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class BookmarksEntryPersistence extends BasePersistence {
 					entryId);
 
 			if (bookmarksEntry == null) {
-				_log.warn("No BookmarksEntry exists with the primary key " +
-					entryId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No BookmarksEntry exists with the primary key " +
+						entryId.toString());
+				}
+
 				throw new NoSuchEntryException(
 					"No BookmarksEntry exists with the primary key " +
 					entryId.toString());
@@ -162,12 +164,6 @@ public class BookmarksEntryPersistence extends BasePersistence {
 
 	public BookmarksEntry findByPrimaryKey(String entryId)
 		throws NoSuchEntryException, SystemException {
-		return findByPrimaryKey(entryId, true);
-	}
-
-	public BookmarksEntry findByPrimaryKey(String entryId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchEntryException, SystemException {
 		Session session = null;
 
 		try {
@@ -177,10 +173,9 @@ public class BookmarksEntryPersistence extends BasePersistence {
 					entryId);
 
 			if (bookmarksEntry == null) {
-				_log.warn("No BookmarksEntry exists with the primary key " +
-					entryId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No BookmarksEntry exists with the primary key " +
+						entryId.toString());
 					throw new NoSuchEntryException(
 						"No BookmarksEntry exists with the primary key " +
 						entryId.toString());
@@ -188,6 +183,23 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			}
 
 			return bookmarksEntry;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public BookmarksEntry fetchByPrimaryKey(String entryId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (BookmarksEntry)session.get(BookmarksEntry.class, entryId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

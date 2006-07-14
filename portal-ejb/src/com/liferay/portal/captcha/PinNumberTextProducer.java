@@ -40,13 +40,10 @@ public class PinNumberTextProducer implements TextProducer {
 	}
 
 	public void setProperties(Properties props) {
-		_props = props;
 	}
 
 	public String getText() {
 		return PwdGenerator.getPinNumber();
 	}
-
-	private Properties _props;
 
 }

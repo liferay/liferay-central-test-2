@@ -22,9 +22,6 @@
 
 package com.liferay.portal.upgrade;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="UpgradePause.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,7 +33,5 @@ public class UpgradePause extends UpgradeProcess {
 	public void upgrade() throws UpgradeException {
 		System.exit(0);
 	}
-
-	private static Log _log = LogFactory.getLog(UpgradePause.class);
 
 }

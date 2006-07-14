@@ -125,12 +125,10 @@ public class UserTrackerUtil {
 		return getPersistence().findByPrimaryKey(userTrackerId);
 	}
 
-	public static com.liferay.portal.model.UserTracker findByPrimaryKey(
-		java.lang.String userTrackerId, boolean throwNoSuchObjectException)
-		throws com.liferay.portal.NoSuchUserTrackerException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(userTrackerId,
-			throwNoSuchObjectException);
+	public static com.liferay.portal.model.UserTracker fetchByPrimaryKey(
+		java.lang.String userTrackerId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(userTrackerId);
 	}
 
 	public static java.util.List findByCompanyId(java.lang.String companyId)

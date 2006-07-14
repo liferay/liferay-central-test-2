@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class ShoppingCartPersistence extends BasePersistence {
 					cartId);
 
 			if (shoppingCart == null) {
-				_log.warn("No ShoppingCart exists with the primary key " +
-					cartId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No ShoppingCart exists with the primary key " +
+						cartId.toString());
+				}
+
 				throw new NoSuchCartException(
 					"No ShoppingCart exists with the primary key " +
 					cartId.toString());
@@ -165,12 +167,6 @@ public class ShoppingCartPersistence extends BasePersistence {
 
 	public ShoppingCart findByPrimaryKey(String cartId)
 		throws NoSuchCartException, SystemException {
-		return findByPrimaryKey(cartId, true);
-	}
-
-	public ShoppingCart findByPrimaryKey(String cartId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchCartException, SystemException {
 		Session session = null;
 
 		try {
@@ -180,10 +176,9 @@ public class ShoppingCartPersistence extends BasePersistence {
 					cartId);
 
 			if (shoppingCart == null) {
-				_log.warn("No ShoppingCart exists with the primary key " +
-					cartId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No ShoppingCart exists with the primary key " +
+						cartId.toString());
 					throw new NoSuchCartException(
 						"No ShoppingCart exists with the primary key " +
 						cartId.toString());
@@ -191,6 +186,23 @@ public class ShoppingCartPersistence extends BasePersistence {
 			}
 
 			return shoppingCart;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ShoppingCart fetchByPrimaryKey(String cartId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (ShoppingCart)session.get(ShoppingCart.class, cartId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

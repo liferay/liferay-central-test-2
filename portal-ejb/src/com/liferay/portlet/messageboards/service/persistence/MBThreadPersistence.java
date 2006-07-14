@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +67,11 @@ public class MBThreadPersistence extends BasePersistence {
 			MBThread mbThread = (MBThread)session.get(MBThread.class, threadId);
 
 			if (mbThread == null) {
-				_log.warn("No MBThread exists with the primary key " +
-					threadId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No MBThread exists with the primary key " +
+						threadId.toString());
+				}
+
 				throw new NoSuchThreadException(
 					"No MBThread exists with the primary key " +
 					threadId.toString());
@@ -152,12 +154,6 @@ public class MBThreadPersistence extends BasePersistence {
 
 	public MBThread findByPrimaryKey(String threadId)
 		throws NoSuchThreadException, SystemException {
-		return findByPrimaryKey(threadId, true);
-	}
-
-	public MBThread findByPrimaryKey(String threadId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchThreadException, SystemException {
 		Session session = null;
 
 		try {
@@ -166,10 +162,9 @@ public class MBThreadPersistence extends BasePersistence {
 			MBThread mbThread = (MBThread)session.get(MBThread.class, threadId);
 
 			if (mbThread == null) {
-				_log.warn("No MBThread exists with the primary key " +
-					threadId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No MBThread exists with the primary key " +
+						threadId.toString());
 					throw new NoSuchThreadException(
 						"No MBThread exists with the primary key " +
 						threadId.toString());
@@ -177,6 +172,23 @@ public class MBThreadPersistence extends BasePersistence {
 			}
 
 			return mbThread;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public MBThread fetchByPrimaryKey(String threadId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (MBThread)session.get(MBThread.class, threadId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

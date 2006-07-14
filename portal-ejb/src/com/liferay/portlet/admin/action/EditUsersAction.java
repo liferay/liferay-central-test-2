@@ -44,7 +44,6 @@ import java.util.Properties;
 
 import javax.naming.Context;
 import javax.naming.ldap.InitialLdapContext;
-import javax.naming.ldap.LdapContext;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -235,7 +234,7 @@ public class EditUsersAction extends PortletAction {
 					_log.debug(sw.getBuffer().toString());
 				}
 
-				LdapContext ctx = new InitialLdapContext(env, null);
+				new InitialLdapContext(env, null);
 			}
 		}
 		catch (Exception e) {

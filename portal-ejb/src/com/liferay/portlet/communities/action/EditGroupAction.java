@@ -27,7 +27,6 @@ import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.RequiredGroupException;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.spring.GroupServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -142,8 +141,7 @@ public class EditGroupAction extends PortletAction {
 
 			// Add group
 
-			Group group = GroupServiceUtil.addGroup(
-				name, description, type, friendlyURL);
+			GroupServiceUtil.addGroup(name, description, type, friendlyURL);
 		}
 		else {
 

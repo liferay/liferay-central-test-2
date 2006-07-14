@@ -154,7 +154,7 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		)
 	};
 
-	private static KeyValuePair[] _SYSTEM_IDS = {
+	/*private static KeyValuePair[] _SYSTEM_IDS = {
 		new KeyValuePair(
 			"http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd",
 			"portlet-app_1_0.xsd"
@@ -164,6 +164,6 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 			"http://www.w3.org/2001/xml.xsd",
 			"xml.xsd"
 		)
-	};
+	};*/
 
 }

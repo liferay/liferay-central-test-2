@@ -164,8 +164,6 @@ public class EditStructureAction extends PortletAction {
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String companyId = PortalUtil.getCompanyId(req);
-
 		String structureId = ParamUtil.getString(req, "structureId");
 		boolean autoStructureId = ParamUtil.getBoolean(req, "autoStructureId");
 

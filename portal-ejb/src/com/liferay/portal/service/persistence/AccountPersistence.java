@@ -34,8 +34,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -63,8 +61,11 @@ public class AccountPersistence extends BasePersistence {
 			Account account = (Account)session.get(Account.class, accountId);
 
 			if (account == null) {
-				_log.warn("No Account exists with the primary key " +
-					accountId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Account exists with the primary key " +
+						accountId.toString());
+				}
+
 				throw new NoSuchAccountException(
 					"No Account exists with the primary key " +
 					accountId.toString());
@@ -173,12 +174,6 @@ public class AccountPersistence extends BasePersistence {
 
 	public Account findByPrimaryKey(String accountId)
 		throws NoSuchAccountException, SystemException {
-		return findByPrimaryKey(accountId, true);
-	}
-
-	public Account findByPrimaryKey(String accountId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchAccountException, SystemException {
 		Session session = null;
 
 		try {
@@ -187,10 +182,9 @@ public class AccountPersistence extends BasePersistence {
 			Account account = (Account)session.get(Account.class, accountId);
 
 			if (account == null) {
-				_log.warn("No Account exists with the primary key " +
-					accountId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Account exists with the primary key " +
+						accountId.toString());
 					throw new NoSuchAccountException(
 						"No Account exists with the primary key " +
 						accountId.toString());
@@ -198,6 +192,23 @@ public class AccountPersistence extends BasePersistence {
 			}
 
 			return account;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Account fetchByPrimaryKey(String accountId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Account)session.get(Account.class, accountId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

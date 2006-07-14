@@ -76,7 +76,7 @@ public class AlfrescoContentUtil {
 
 			method.setDoAuthentication(true);
 
-			int status = client.executeMethod(method);
+			client.executeMethod(method);
 
 			content = method.getResponseBodyAsString();
 		}

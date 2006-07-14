@@ -44,16 +44,11 @@ public class MBMessageFlagLocalServiceUtil {
 	}
 
 	public static boolean hasReadFlag(java.lang.String messageId,
-		java.lang.String userId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		java.lang.String userId) throws com.liferay.portal.SystemException {
 		try {
 			MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
 
 			return mbMessageFlagLocalService.hasReadFlag(messageId, userId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			throw se;

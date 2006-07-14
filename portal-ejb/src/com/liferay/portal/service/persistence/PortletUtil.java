@@ -124,13 +124,10 @@ public class PortletUtil {
 		return getPersistence().findByPrimaryKey(portletPK);
 	}
 
-	public static com.liferay.portal.model.Portlet findByPrimaryKey(
-		com.liferay.portal.service.persistence.PortletPK portletPK,
-		boolean throwNoSuchObjectException)
-		throws com.liferay.portal.NoSuchPortletException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(portletPK,
-			throwNoSuchObjectException);
+	public static com.liferay.portal.model.Portlet fetchByPrimaryKey(
+		com.liferay.portal.service.persistence.PortletPK portletPK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(portletPK);
 	}
 
 	public static java.util.List findByCompanyId(java.lang.String companyId)

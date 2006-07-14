@@ -31,8 +31,6 @@ import java.io.InputStream;
 
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.document.DateTools;
 import org.apache.lucene.document.Field;
 
@@ -152,7 +150,5 @@ public class LuceneFields {
 	private static final String _UID_PORTLET = "_PORTLET_";
 
 	private static final String _UID_FIELD = "_FIELD_";
-
-	private static Log _log = LogFactory.getLog(LuceneFields.class);
 
 }

@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class JournalTemplatePersistence extends BasePersistence {
 					journalTemplatePK);
 
 			if (journalTemplate == null) {
-				_log.warn("No JournalTemplate exists with the primary key " +
-					journalTemplatePK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No JournalTemplate exists with the primary key " +
+						journalTemplatePK.toString());
+				}
+
 				throw new NoSuchTemplateException(
 					"No JournalTemplate exists with the primary key " +
 					journalTemplatePK.toString());
@@ -173,12 +175,6 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 	public JournalTemplate findByPrimaryKey(JournalTemplatePK journalTemplatePK)
 		throws NoSuchTemplateException, SystemException {
-		return findByPrimaryKey(journalTemplatePK, true);
-	}
-
-	public JournalTemplate findByPrimaryKey(
-		JournalTemplatePK journalTemplatePK, boolean throwNoSuchObjectException)
-		throws NoSuchTemplateException, SystemException {
 		Session session = null;
 
 		try {
@@ -188,10 +184,9 @@ public class JournalTemplatePersistence extends BasePersistence {
 					journalTemplatePK);
 
 			if (journalTemplate == null) {
-				_log.warn("No JournalTemplate exists with the primary key " +
-					journalTemplatePK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No JournalTemplate exists with the primary key " +
+						journalTemplatePK.toString());
 					throw new NoSuchTemplateException(
 						"No JournalTemplate exists with the primary key " +
 						journalTemplatePK.toString());
@@ -199,6 +194,24 @@ public class JournalTemplatePersistence extends BasePersistence {
 			}
 
 			return journalTemplate;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public JournalTemplate fetchByPrimaryKey(
+		JournalTemplatePK journalTemplatePK) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (JournalTemplate)session.get(JournalTemplate.class,
+				journalTemplatePK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

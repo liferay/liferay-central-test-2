@@ -160,7 +160,5 @@ public class Company extends CompanyModel {
 	private static Log _log = LogFactory.getLog(Company.class);
 
 	private Key _keyObj = null;
-	private String _imageURL;
-	private Company _company;
 
 }

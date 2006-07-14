@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +67,11 @@ public class CalEventPersistence extends BasePersistence {
 			CalEvent calEvent = (CalEvent)session.get(CalEvent.class, eventId);
 
 			if (calEvent == null) {
-				_log.warn("No CalEvent exists with the primary key " +
-					eventId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No CalEvent exists with the primary key " +
+						eventId.toString());
+				}
+
 				throw new NoSuchEventException(
 					"No CalEvent exists with the primary key " +
 					eventId.toString());
@@ -194,12 +196,6 @@ public class CalEventPersistence extends BasePersistence {
 
 	public CalEvent findByPrimaryKey(String eventId)
 		throws NoSuchEventException, SystemException {
-		return findByPrimaryKey(eventId, true);
-	}
-
-	public CalEvent findByPrimaryKey(String eventId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchEventException, SystemException {
 		Session session = null;
 
 		try {
@@ -208,10 +204,9 @@ public class CalEventPersistence extends BasePersistence {
 			CalEvent calEvent = (CalEvent)session.get(CalEvent.class, eventId);
 
 			if (calEvent == null) {
-				_log.warn("No CalEvent exists with the primary key " +
-					eventId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No CalEvent exists with the primary key " +
+						eventId.toString());
 					throw new NoSuchEventException(
 						"No CalEvent exists with the primary key " +
 						eventId.toString());
@@ -219,6 +214,22 @@ public class CalEventPersistence extends BasePersistence {
 			}
 
 			return calEvent;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public CalEvent fetchByPrimaryKey(String eventId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (CalEvent)session.get(CalEvent.class, eventId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

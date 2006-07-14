@@ -38,7 +38,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +67,11 @@ public class OrgGroupRolePersistence extends BasePersistence {
 					orgGroupRolePK);
 
 			if (orgGroupRole == null) {
-				_log.warn("No OrgGroupRole exists with the primary key " +
-					orgGroupRolePK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No OrgGroupRole exists with the primary key " +
+						orgGroupRolePK.toString());
+				}
+
 				throw new NoSuchOrgGroupRoleException(
 					"No OrgGroupRole exists with the primary key " +
 					orgGroupRolePK.toString());
@@ -138,12 +140,6 @@ public class OrgGroupRolePersistence extends BasePersistence {
 
 	public OrgGroupRole findByPrimaryKey(OrgGroupRolePK orgGroupRolePK)
 		throws NoSuchOrgGroupRoleException, SystemException {
-		return findByPrimaryKey(orgGroupRolePK, true);
-	}
-
-	public OrgGroupRole findByPrimaryKey(OrgGroupRolePK orgGroupRolePK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchOrgGroupRoleException, SystemException {
 		Session session = null;
 
 		try {
@@ -153,10 +149,9 @@ public class OrgGroupRolePersistence extends BasePersistence {
 					orgGroupRolePK);
 
 			if (orgGroupRole == null) {
-				_log.warn("No OrgGroupRole exists with the primary key " +
-					orgGroupRolePK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No OrgGroupRole exists with the primary key " +
+						orgGroupRolePK.toString());
 					throw new NoSuchOrgGroupRoleException(
 						"No OrgGroupRole exists with the primary key " +
 						orgGroupRolePK.toString());
@@ -164,6 +159,23 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			}
 
 			return orgGroupRole;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public OrgGroupRole fetchByPrimaryKey(OrgGroupRolePK orgGroupRolePK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (OrgGroupRole)session.get(OrgGroupRole.class, orgGroupRolePK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

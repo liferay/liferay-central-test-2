@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class ShoppingCouponPersistence extends BasePersistence {
 					couponId);
 
 			if (shoppingCoupon == null) {
-				_log.warn("No ShoppingCoupon exists with the primary key " +
-					couponId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No ShoppingCoupon exists with the primary key " +
+						couponId.toString());
+				}
+
 				throw new NoSuchCouponException(
 					"No ShoppingCoupon exists with the primary key " +
 					couponId.toString());
@@ -183,12 +185,6 @@ public class ShoppingCouponPersistence extends BasePersistence {
 
 	public ShoppingCoupon findByPrimaryKey(String couponId)
 		throws NoSuchCouponException, SystemException {
-		return findByPrimaryKey(couponId, true);
-	}
-
-	public ShoppingCoupon findByPrimaryKey(String couponId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchCouponException, SystemException {
 		Session session = null;
 
 		try {
@@ -198,10 +194,9 @@ public class ShoppingCouponPersistence extends BasePersistence {
 					couponId);
 
 			if (shoppingCoupon == null) {
-				_log.warn("No ShoppingCoupon exists with the primary key " +
-					couponId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No ShoppingCoupon exists with the primary key " +
+						couponId.toString());
 					throw new NoSuchCouponException(
 						"No ShoppingCoupon exists with the primary key " +
 						couponId.toString());
@@ -209,6 +204,23 @@ public class ShoppingCouponPersistence extends BasePersistence {
 			}
 
 			return shoppingCoupon;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ShoppingCoupon fetchByPrimaryKey(String couponId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (ShoppingCoupon)session.get(ShoppingCoupon.class, couponId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

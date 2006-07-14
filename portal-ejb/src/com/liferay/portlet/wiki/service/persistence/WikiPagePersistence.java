@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +67,11 @@ public class WikiPagePersistence extends BasePersistence {
 			WikiPage wikiPage = (WikiPage)session.get(WikiPage.class, wikiPagePK);
 
 			if (wikiPage == null) {
-				_log.warn("No WikiPage exists with the primary key " +
-					wikiPagePK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No WikiPage exists with the primary key " +
+						wikiPagePK.toString());
+				}
+
 				throw new NoSuchPageException(
 					"No WikiPage exists with the primary key " +
 					wikiPagePK.toString());
@@ -159,12 +161,6 @@ public class WikiPagePersistence extends BasePersistence {
 
 	public WikiPage findByPrimaryKey(WikiPagePK wikiPagePK)
 		throws NoSuchPageException, SystemException {
-		return findByPrimaryKey(wikiPagePK, true);
-	}
-
-	public WikiPage findByPrimaryKey(WikiPagePK wikiPagePK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchPageException, SystemException {
 		Session session = null;
 
 		try {
@@ -173,10 +169,9 @@ public class WikiPagePersistence extends BasePersistence {
 			WikiPage wikiPage = (WikiPage)session.get(WikiPage.class, wikiPagePK);
 
 			if (wikiPage == null) {
-				_log.warn("No WikiPage exists with the primary key " +
-					wikiPagePK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No WikiPage exists with the primary key " +
+						wikiPagePK.toString());
 					throw new NoSuchPageException(
 						"No WikiPage exists with the primary key " +
 						wikiPagePK.toString());
@@ -184,6 +179,23 @@ public class WikiPagePersistence extends BasePersistence {
 			}
 
 			return wikiPage;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public WikiPage fetchByPrimaryKey(WikiPagePK wikiPagePK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (WikiPage)session.get(WikiPage.class, wikiPagePK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

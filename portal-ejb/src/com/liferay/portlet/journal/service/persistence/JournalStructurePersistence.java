@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,12 @@ public class JournalStructurePersistence extends BasePersistence {
 					journalStructurePK);
 
 			if (journalStructure == null) {
-				_log.warn("No JournalStructure exists with the primary key " +
-					journalStructurePK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"No JournalStructure exists with the primary key " +
+						journalStructurePK.toString());
+				}
+
 				throw new NoSuchStructureException(
 					"No JournalStructure exists with the primary key " +
 					journalStructurePK.toString());
@@ -162,13 +165,6 @@ public class JournalStructurePersistence extends BasePersistence {
 	public JournalStructure findByPrimaryKey(
 		JournalStructurePK journalStructurePK)
 		throws NoSuchStructureException, SystemException {
-		return findByPrimaryKey(journalStructurePK, true);
-	}
-
-	public JournalStructure findByPrimaryKey(
-		JournalStructurePK journalStructurePK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchStructureException, SystemException {
 		Session session = null;
 
 		try {
@@ -178,10 +174,10 @@ public class JournalStructurePersistence extends BasePersistence {
 					journalStructurePK);
 
 			if (journalStructure == null) {
-				_log.warn("No JournalStructure exists with the primary key " +
-					journalStructurePK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"No JournalStructure exists with the primary key " +
+						journalStructurePK.toString());
 					throw new NoSuchStructureException(
 						"No JournalStructure exists with the primary key " +
 						journalStructurePK.toString());
@@ -189,6 +185,24 @@ public class JournalStructurePersistence extends BasePersistence {
 			}
 
 			return journalStructure;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public JournalStructure fetchByPrimaryKey(
+		JournalStructurePK journalStructurePK) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (JournalStructure)session.get(JournalStructure.class,
+				journalStructurePK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

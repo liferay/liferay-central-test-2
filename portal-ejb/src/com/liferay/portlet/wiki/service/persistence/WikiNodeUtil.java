@@ -125,12 +125,9 @@ public class WikiNodeUtil {
 		return getPersistence().findByPrimaryKey(nodeId);
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiNode findByPrimaryKey(
-		java.lang.String nodeId, boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.wiki.NoSuchNodeException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(nodeId,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.wiki.model.WikiNode fetchByPrimaryKey(
+		java.lang.String nodeId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(nodeId);
 	}
 
 	public static java.util.List findByGroupId(java.lang.String groupId)

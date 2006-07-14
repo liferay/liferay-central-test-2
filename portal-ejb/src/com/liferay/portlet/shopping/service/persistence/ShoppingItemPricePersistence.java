@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,12 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 					itemPriceId);
 
 			if (shoppingItemPrice == null) {
-				_log.warn("No ShoppingItemPrice exists with the primary key " +
-					itemPriceId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"No ShoppingItemPrice exists with the primary key " +
+						itemPriceId.toString());
+				}
+
 				throw new NoSuchItemPriceException(
 					"No ShoppingItemPrice exists with the primary key " +
 					itemPriceId.toString());
@@ -162,12 +165,6 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 
 	public ShoppingItemPrice findByPrimaryKey(String itemPriceId)
 		throws NoSuchItemPriceException, SystemException {
-		return findByPrimaryKey(itemPriceId, true);
-	}
-
-	public ShoppingItemPrice findByPrimaryKey(String itemPriceId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchItemPriceException, SystemException {
 		Session session = null;
 
 		try {
@@ -177,10 +174,10 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 					itemPriceId);
 
 			if (shoppingItemPrice == null) {
-				_log.warn("No ShoppingItemPrice exists with the primary key " +
-					itemPriceId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"No ShoppingItemPrice exists with the primary key " +
+						itemPriceId.toString());
 					throw new NoSuchItemPriceException(
 						"No ShoppingItemPrice exists with the primary key " +
 						itemPriceId.toString());
@@ -188,6 +185,24 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 			}
 
 			return shoppingItemPrice;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ShoppingItemPrice fetchByPrimaryKey(String itemPriceId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (ShoppingItemPrice)session.get(ShoppingItemPrice.class,
+				itemPriceId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

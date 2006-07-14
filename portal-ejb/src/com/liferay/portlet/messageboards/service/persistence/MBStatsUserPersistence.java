@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class MBStatsUserPersistence extends BasePersistence {
 					mbStatsUserPK);
 
 			if (mbStatsUser == null) {
-				_log.warn("No MBStatsUser exists with the primary key " +
-					mbStatsUserPK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No MBStatsUser exists with the primary key " +
+						mbStatsUserPK.toString());
+				}
+
 				throw new NoSuchStatsUserException(
 					"No MBStatsUser exists with the primary key " +
 					mbStatsUserPK.toString());
@@ -143,12 +145,6 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 	public MBStatsUser findByPrimaryKey(MBStatsUserPK mbStatsUserPK)
 		throws NoSuchStatsUserException, SystemException {
-		return findByPrimaryKey(mbStatsUserPK, true);
-	}
-
-	public MBStatsUser findByPrimaryKey(MBStatsUserPK mbStatsUserPK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchStatsUserException, SystemException {
 		Session session = null;
 
 		try {
@@ -158,10 +154,9 @@ public class MBStatsUserPersistence extends BasePersistence {
 					mbStatsUserPK);
 
 			if (mbStatsUser == null) {
-				_log.warn("No MBStatsUser exists with the primary key " +
-					mbStatsUserPK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No MBStatsUser exists with the primary key " +
+						mbStatsUserPK.toString());
 					throw new NoSuchStatsUserException(
 						"No MBStatsUser exists with the primary key " +
 						mbStatsUserPK.toString());
@@ -169,6 +164,23 @@ public class MBStatsUserPersistence extends BasePersistence {
 			}
 
 			return mbStatsUser;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public MBStatsUser fetchByPrimaryKey(MBStatsUserPK mbStatsUserPK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (MBStatsUser)session.get(MBStatsUser.class, mbStatsUserPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

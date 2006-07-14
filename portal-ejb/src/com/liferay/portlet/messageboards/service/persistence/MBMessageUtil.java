@@ -125,13 +125,10 @@ public class MBMessageUtil {
 		return getPersistence().findByPrimaryKey(mbMessagePK);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMessage findByPrimaryKey(
-		com.liferay.portlet.messageboards.service.persistence.MBMessagePK mbMessagePK,
-		boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.messageboards.NoSuchMessageException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(mbMessagePK,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.messageboards.model.MBMessage fetchByPrimaryKey(
+		com.liferay.portlet.messageboards.service.persistence.MBMessagePK mbMessagePK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(mbMessagePK);
 	}
 
 	public static java.util.List findByCategoryId(java.lang.String categoryId)

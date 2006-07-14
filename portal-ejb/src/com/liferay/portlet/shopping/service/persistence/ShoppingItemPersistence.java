@@ -53,7 +53,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -83,8 +82,11 @@ public class ShoppingItemPersistence extends BasePersistence {
 					itemId);
 
 			if (shoppingItem == null) {
-				_log.warn("No ShoppingItem exists with the primary key " +
-					itemId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No ShoppingItem exists with the primary key " +
+						itemId.toString());
+				}
+
 				throw new NoSuchItemException(
 					"No ShoppingItem exists with the primary key " +
 					itemId.toString());
@@ -236,12 +238,6 @@ public class ShoppingItemPersistence extends BasePersistence {
 
 	public ShoppingItem findByPrimaryKey(String itemId)
 		throws NoSuchItemException, SystemException {
-		return findByPrimaryKey(itemId, true);
-	}
-
-	public ShoppingItem findByPrimaryKey(String itemId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchItemException, SystemException {
 		Session session = null;
 
 		try {
@@ -251,10 +247,9 @@ public class ShoppingItemPersistence extends BasePersistence {
 					itemId);
 
 			if (shoppingItem == null) {
-				_log.warn("No ShoppingItem exists with the primary key " +
-					itemId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No ShoppingItem exists with the primary key " +
+						itemId.toString());
 					throw new NoSuchItemException(
 						"No ShoppingItem exists with the primary key " +
 						itemId.toString());
@@ -262,6 +257,23 @@ public class ShoppingItemPersistence extends BasePersistence {
 			}
 
 			return shoppingItem;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ShoppingItem fetchByPrimaryKey(String itemId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (ShoppingItem)session.get(ShoppingItem.class, itemId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -451,12 +463,6 @@ public class ShoppingItemPersistence extends BasePersistence {
 
 	public ShoppingItem findByC_S(String companyId, String sku)
 		throws NoSuchItemException, SystemException {
-		return findByC_S(companyId, sku, true);
-	}
-
-	public ShoppingItem findByC_S(String companyId, String sku,
-		boolean throwNoSuchObjectException)
-		throws NoSuchItemException, SystemException {
 		Session session = null;
 
 		try {
@@ -509,6 +515,66 @@ public class ShoppingItemPersistence extends BasePersistence {
 				msg += sku;
 				msg += StringPool.CLOSE_CURLY_BRACE;
 				throw new NoSuchItemException(msg);
+			}
+
+			ShoppingItem shoppingItem = (ShoppingItem)list.get(0);
+
+			return shoppingItem;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ShoppingItem fetchByC_S(String companyId, String sku)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (sku == null) {
+				query.append("sku IS NULL");
+			}
+			else {
+				query.append("sku = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("itemId ASC");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (sku != null) {
+				q.setString(queryPos++, sku);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
 			}
 
 			ShoppingItem shoppingItem = (ShoppingItem)list.get(0);
@@ -879,7 +945,6 @@ public class ShoppingItemPersistence extends BasePersistence {
 	protected class ContainsShoppingItemPrice extends MappingSqlQuery {
 		protected ContainsShoppingItemPrice(ShoppingItemPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSSHOPPINGITEMPRICE);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -903,8 +968,6 @@ public class ShoppingItemPersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private ShoppingItemPersistence _persistence;
 	}
 
 	private static final String _SQL_GETSHOPPINGITEMPRICES = "SELECT {ShoppingItemPrice.*} FROM ShoppingItemPrice INNER JOIN ShoppingItem ON (ShoppingItem.itemId = ?) AND (ShoppingItem.itemPriceId = ShoppingItemPrice.itemPriceId)";

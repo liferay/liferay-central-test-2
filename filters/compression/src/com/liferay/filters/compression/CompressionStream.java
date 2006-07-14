@@ -140,27 +140,9 @@ public class CompressionStream extends ServletOutputStream {
 	public void reset() {
 	}
 
-	private void _checkBufferSize(int length) throws IOException {
-		if (_bufferedOutput instanceof ByteArrayOutputStream) {
-			ByteArrayOutputStream baos = (ByteArrayOutputStream)_bufferedOutput;
-
-			if (baos.size() + length > _BUFFER_SIZE) {
-				_res.addHeader(_CONTENT_ENCODING, _GZIP);
-
-				GZIPOutputStream gzipOutput = new GZIPOutputStream(_output);
-
-				gzipOutput.write(baos.toByteArray());
-
-				_bufferedOutput = gzipOutput;
-			}
-		}
-	}
-
 	private static final String _CONTENT_ENCODING = "Content-Encoding";
 
 	private static final String _GZIP = "gzip";
-
-	private static final int _BUFFER_SIZE = 50000;
 
 	private static Log _log = LogFactory.getLog(CompressionStream.class);
 

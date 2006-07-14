@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class BlogsCategoryPersistence extends BasePersistence {
 					categoryId);
 
 			if (blogsCategory == null) {
-				_log.warn("No BlogsCategory exists with the primary key " +
-					categoryId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No BlogsCategory exists with the primary key " +
+						categoryId.toString());
+				}
+
 				throw new NoSuchCategoryException(
 					"No BlogsCategory exists with the primary key " +
 					categoryId.toString());
@@ -159,12 +161,6 @@ public class BlogsCategoryPersistence extends BasePersistence {
 
 	public BlogsCategory findByPrimaryKey(String categoryId)
 		throws NoSuchCategoryException, SystemException {
-		return findByPrimaryKey(categoryId, true);
-	}
-
-	public BlogsCategory findByPrimaryKey(String categoryId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchCategoryException, SystemException {
 		Session session = null;
 
 		try {
@@ -174,10 +170,9 @@ public class BlogsCategoryPersistence extends BasePersistence {
 					categoryId);
 
 			if (blogsCategory == null) {
-				_log.warn("No BlogsCategory exists with the primary key " +
-					categoryId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No BlogsCategory exists with the primary key " +
+						categoryId.toString());
 					throw new NoSuchCategoryException(
 						"No BlogsCategory exists with the primary key " +
 						categoryId.toString());
@@ -185,6 +180,23 @@ public class BlogsCategoryPersistence extends BasePersistence {
 			}
 
 			return blogsCategory;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public BlogsCategory fetchByPrimaryKey(String categoryId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (BlogsCategory)session.get(BlogsCategory.class, categoryId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

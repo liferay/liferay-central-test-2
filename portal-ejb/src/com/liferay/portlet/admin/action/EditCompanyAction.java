@@ -37,8 +37,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
@@ -121,7 +119,5 @@ public class EditCompanyAction extends PortletAction {
 		CompanyServiceUtil.updateDisplay(
 			companyId, languageId, timeZoneId, resolution);
 	}
-
-	private static Log _log = LogFactory.getLog(EditCompanyAction.class);
 
 }

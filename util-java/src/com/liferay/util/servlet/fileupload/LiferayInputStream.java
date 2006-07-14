@@ -48,7 +48,6 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 	public LiferayInputStream(HttpServletRequest req) throws IOException {
 		super(req.getInputStream());
 
-		_req = req;
 		_ses = req.getSession();
 		_totalSize = req.getContentLength();
 	}
@@ -83,7 +82,6 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 
 	private static Log _log = LogFactory.getLog(LiferayInputStream.class);
 
-	private HttpServletRequest _req;
 	private HttpSession _ses;
 	private float _totalRead;
 	private int _totalSize;

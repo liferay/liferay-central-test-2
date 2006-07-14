@@ -181,8 +181,6 @@ public class ColorScheme implements Comparable, Serializable {
 		catch (IOException ioe) {
 			_log.error(ioe);
 		}
-
-		_settings = settings;
 	}
 
 	public Properties getSettingsProperties() {
@@ -375,7 +373,6 @@ public class ColorScheme implements Comparable, Serializable {
 
 	private String _colorSchemeId;
 	private String _name;
-	private String _settings;
 	private Properties _settingsProperties = new NullSafeProperties();
 
 }

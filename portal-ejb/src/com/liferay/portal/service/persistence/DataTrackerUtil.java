@@ -125,12 +125,10 @@ public class DataTrackerUtil {
 		return getPersistence().findByPrimaryKey(dataTrackerId);
 	}
 
-	public static com.liferay.portal.model.DataTracker findByPrimaryKey(
-		java.lang.String dataTrackerId, boolean throwNoSuchObjectException)
-		throws com.liferay.portal.NoSuchDataTrackerException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(dataTrackerId,
-			throwNoSuchObjectException);
+	public static com.liferay.portal.model.DataTracker fetchByPrimaryKey(
+		java.lang.String dataTrackerId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(dataTrackerId);
 	}
 
 	public static java.util.List findAll()

@@ -124,12 +124,9 @@ public class ReleaseUtil {
 		return getPersistence().findByPrimaryKey(releaseId);
 	}
 
-	public static com.liferay.portal.model.Release findByPrimaryKey(
-		java.lang.String releaseId, boolean throwNoSuchObjectException)
-		throws com.liferay.portal.NoSuchReleaseException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(releaseId,
-			throwNoSuchObjectException);
+	public static com.liferay.portal.model.Release fetchByPrimaryKey(
+		java.lang.String releaseId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(releaseId);
 	}
 
 	public static java.util.List findAll()

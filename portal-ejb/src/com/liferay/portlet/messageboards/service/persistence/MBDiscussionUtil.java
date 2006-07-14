@@ -125,12 +125,10 @@ public class MBDiscussionUtil {
 		return getPersistence().findByPrimaryKey(discussionId);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBDiscussion findByPrimaryKey(
-		java.lang.String discussionId, boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.messageboards.NoSuchDiscussionException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(discussionId,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.messageboards.model.MBDiscussion fetchByPrimaryKey(
+		java.lang.String discussionId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(discussionId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBDiscussion findByC_C(
@@ -140,13 +138,10 @@ public class MBDiscussionUtil {
 		return getPersistence().findByC_C(className, classPK);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBDiscussion findByC_C(
-		java.lang.String className, java.lang.String classPK,
-		boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.messageboards.NoSuchDiscussionException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByC_C(className, classPK,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.messageboards.model.MBDiscussion fetchByC_C(
+		java.lang.String className, java.lang.String classPK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_C(className, classPK);
 	}
 
 	public static java.util.List findAll()

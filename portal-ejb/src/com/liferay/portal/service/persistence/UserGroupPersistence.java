@@ -51,7 +51,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -81,8 +80,11 @@ public class UserGroupPersistence extends BasePersistence {
 					userGroupId);
 
 			if (userGroup == null) {
-				_log.warn("No UserGroup exists with the primary key " +
-					userGroupId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No UserGroup exists with the primary key " +
+						userGroupId.toString());
+				}
+
 				throw new NoSuchUserGroupException(
 					"No UserGroup exists with the primary key " +
 					userGroupId.toString());
@@ -159,12 +161,6 @@ public class UserGroupPersistence extends BasePersistence {
 
 	public UserGroup findByPrimaryKey(String userGroupId)
 		throws NoSuchUserGroupException, SystemException {
-		return findByPrimaryKey(userGroupId, true);
-	}
-
-	public UserGroup findByPrimaryKey(String userGroupId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchUserGroupException, SystemException {
 		Session session = null;
 
 		try {
@@ -174,10 +170,9 @@ public class UserGroupPersistence extends BasePersistence {
 					userGroupId);
 
 			if (userGroup == null) {
-				_log.warn("No UserGroup exists with the primary key " +
-					userGroupId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No UserGroup exists with the primary key " +
+						userGroupId.toString());
 					throw new NoSuchUserGroupException(
 						"No UserGroup exists with the primary key " +
 						userGroupId.toString());
@@ -185,6 +180,23 @@ public class UserGroupPersistence extends BasePersistence {
 			}
 
 			return userGroup;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public UserGroup fetchByPrimaryKey(String userGroupId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (UserGroup)session.get(UserGroup.class, userGroupId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -461,7 +473,6 @@ public class UserGroupPersistence extends BasePersistence {
 	protected class ContainsUser extends MappingSqlQuery {
 		protected ContainsUser(UserGroupPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSUSER);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -485,8 +496,6 @@ public class UserGroupPersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private UserGroupPersistence _persistence;
 	}
 
 	protected class AddUser extends SqlUpdate {
@@ -512,7 +521,6 @@ public class UserGroupPersistence extends BasePersistence {
 		protected ClearUsers(UserGroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_UserGroups WHERE userGroupId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -520,15 +528,12 @@ public class UserGroupPersistence extends BasePersistence {
 		protected void clear(String userGroupId) {
 			update(new Object[] { userGroupId });
 		}
-
-		private UserGroupPersistence _persistence;
 	}
 
 	protected class RemoveUser extends SqlUpdate {
 		protected RemoveUser(UserGroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_UserGroups WHERE userGroupId = ? AND userId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -537,8 +542,6 @@ public class UserGroupPersistence extends BasePersistence {
 		protected void remove(String userGroupId, String userId) {
 			update(new Object[] { userGroupId, userId });
 		}
-
-		private UserGroupPersistence _persistence;
 	}
 
 	private static final String _SQL_GETUSERS = "SELECT {User_.*} FROM User_ INNER JOIN Users_UserGroups ON (Users_UserGroups.userGroupId = ?) AND (Users_UserGroups.userId = User_.userId)";

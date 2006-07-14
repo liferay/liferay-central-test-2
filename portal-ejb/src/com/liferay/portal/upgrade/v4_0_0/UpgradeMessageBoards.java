@@ -132,7 +132,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 				_log.debug("Upgrading topic " + topicId);
 
-				MBCategory category = MBCategoryLocalServiceUtil.addCategory(
+				MBCategoryLocalServiceUtil.addCategory(
 					userId, plid, categoryId, name, description,
 					addCommunityPermissions, addGuestPermissions);
 

@@ -34,8 +34,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -63,8 +61,11 @@ public class ReleasePersistence extends BasePersistence {
 			Release release = (Release)session.get(Release.class, releaseId);
 
 			if (release == null) {
-				_log.warn("No Release exists with the primary key " +
-					releaseId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Release exists with the primary key " +
+						releaseId.toString());
+				}
+
 				throw new NoSuchReleaseException(
 					"No Release exists with the primary key " +
 					releaseId.toString());
@@ -140,12 +141,6 @@ public class ReleasePersistence extends BasePersistence {
 
 	public Release findByPrimaryKey(String releaseId)
 		throws NoSuchReleaseException, SystemException {
-		return findByPrimaryKey(releaseId, true);
-	}
-
-	public Release findByPrimaryKey(String releaseId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchReleaseException, SystemException {
 		Session session = null;
 
 		try {
@@ -154,10 +149,9 @@ public class ReleasePersistence extends BasePersistence {
 			Release release = (Release)session.get(Release.class, releaseId);
 
 			if (release == null) {
-				_log.warn("No Release exists with the primary key " +
-					releaseId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Release exists with the primary key " +
+						releaseId.toString());
 					throw new NoSuchReleaseException(
 						"No Release exists with the primary key " +
 						releaseId.toString());
@@ -165,6 +159,23 @@ public class ReleasePersistence extends BasePersistence {
 			}
 
 			return release;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Release fetchByPrimaryKey(String releaseId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Release)session.get(Release.class, releaseId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

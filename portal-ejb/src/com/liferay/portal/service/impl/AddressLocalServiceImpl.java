@@ -29,9 +29,7 @@ import com.liferay.portal.AddressZipException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Address;
-import com.liferay.portal.model.Country;
 import com.liferay.portal.model.ListType;
-import com.liferay.portal.model.Region;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.AddressUtil;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -166,9 +164,9 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 			throw new AddressZipException();
 		}
 
-		Region region = RegionServiceUtil.getRegion(regionId);
+		RegionServiceUtil.getRegion(regionId);
 
-		Country country = CountryServiceUtil.getCountry(countryId);
+		CountryServiceUtil.getCountry(countryId);
 
 		if (addressId != null) {
 			Address address = AddressUtil.findByPrimaryKey(addressId);

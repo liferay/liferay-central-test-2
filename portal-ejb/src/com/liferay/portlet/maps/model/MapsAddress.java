@@ -70,7 +70,6 @@ public class MapsAddress implements Serializable {
 	private String _city;
 	private String _state;
 	private String _zip;
-	private String _mapId;
 	private String _mapDirect;
 
 }

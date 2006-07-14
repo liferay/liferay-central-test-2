@@ -38,7 +38,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +67,11 @@ public class UserTrackerPersistence extends BasePersistence {
 					userTrackerId);
 
 			if (userTracker == null) {
-				_log.warn("No UserTracker exists with the primary key " +
-					userTrackerId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No UserTracker exists with the primary key " +
+						userTrackerId.toString());
+				}
+
 				throw new NoSuchUserTrackerException(
 					"No UserTracker exists with the primary key " +
 					userTrackerId.toString());
@@ -152,12 +154,6 @@ public class UserTrackerPersistence extends BasePersistence {
 
 	public UserTracker findByPrimaryKey(String userTrackerId)
 		throws NoSuchUserTrackerException, SystemException {
-		return findByPrimaryKey(userTrackerId, true);
-	}
-
-	public UserTracker findByPrimaryKey(String userTrackerId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchUserTrackerException, SystemException {
 		Session session = null;
 
 		try {
@@ -167,10 +163,9 @@ public class UserTrackerPersistence extends BasePersistence {
 					userTrackerId);
 
 			if (userTracker == null) {
-				_log.warn("No UserTracker exists with the primary key " +
-					userTrackerId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No UserTracker exists with the primary key " +
+						userTrackerId.toString());
 					throw new NoSuchUserTrackerException(
 						"No UserTracker exists with the primary key " +
 						userTrackerId.toString());
@@ -178,6 +173,23 @@ public class UserTrackerPersistence extends BasePersistence {
 			}
 
 			return userTracker;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public UserTracker fetchByPrimaryKey(String userTrackerId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (UserTracker)session.get(UserTracker.class, userTrackerId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

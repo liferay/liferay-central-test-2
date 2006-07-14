@@ -52,9 +52,6 @@ import javax.portlet.RenderRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PortletPreferencesFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -364,8 +361,5 @@ public class PortletPreferencesFactory {
 			return prefsValidator;
 		}
 	}
-
-	private static Log _log =
-		LogFactory.getLog(PortletPreferencesFactory.class);
 
 }

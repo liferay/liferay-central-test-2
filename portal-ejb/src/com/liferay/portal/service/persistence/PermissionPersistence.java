@@ -53,7 +53,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -83,8 +82,11 @@ public class PermissionPersistence extends BasePersistence {
 					permissionId);
 
 			if (permission == null) {
-				_log.warn("No Permission exists with the primary key " +
-					permissionId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Permission exists with the primary key " +
+						permissionId.toString());
+				}
+
 				throw new NoSuchPermissionException(
 					"No Permission exists with the primary key " +
 					permissionId.toString());
@@ -161,12 +163,6 @@ public class PermissionPersistence extends BasePersistence {
 
 	public Permission findByPrimaryKey(String permissionId)
 		throws NoSuchPermissionException, SystemException {
-		return findByPrimaryKey(permissionId, true);
-	}
-
-	public Permission findByPrimaryKey(String permissionId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchPermissionException, SystemException {
 		Session session = null;
 
 		try {
@@ -176,10 +172,9 @@ public class PermissionPersistence extends BasePersistence {
 					permissionId);
 
 			if (permission == null) {
-				_log.warn("No Permission exists with the primary key " +
-					permissionId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Permission exists with the primary key " +
+						permissionId.toString());
 					throw new NoSuchPermissionException(
 						"No Permission exists with the primary key " +
 						permissionId.toString());
@@ -187,6 +182,23 @@ public class PermissionPersistence extends BasePersistence {
 			}
 
 			return permission;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Permission fetchByPrimaryKey(String permissionId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Permission)session.get(Permission.class, permissionId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -365,12 +377,6 @@ public class PermissionPersistence extends BasePersistence {
 
 	public Permission findByA_R(String actionId, String resourceId)
 		throws NoSuchPermissionException, SystemException {
-		return findByA_R(actionId, resourceId, true);
-	}
-
-	public Permission findByA_R(String actionId, String resourceId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchPermissionException, SystemException {
 		Session session = null;
 
 		try {
@@ -420,6 +426,63 @@ public class PermissionPersistence extends BasePersistence {
 				msg += resourceId;
 				msg += StringPool.CLOSE_CURLY_BRACE;
 				throw new NoSuchPermissionException(msg);
+			}
+
+			Permission permission = (Permission)list.get(0);
+
+			return permission;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Permission fetchByA_R(String actionId, String resourceId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.Permission WHERE ");
+
+			if (actionId == null) {
+				query.append("actionId IS NULL");
+			}
+			else {
+				query.append("actionId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (resourceId == null) {
+				query.append("resourceId IS NULL");
+			}
+			else {
+				query.append("resourceId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (actionId != null) {
+				q.setString(queryPos++, actionId);
+			}
+
+			if (resourceId != null) {
+				q.setString(queryPos++, resourceId);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
 			}
 
 			Permission permission = (Permission)list.get(0);
@@ -1398,7 +1461,6 @@ public class PermissionPersistence extends BasePersistence {
 	protected class ContainsGroup extends MappingSqlQuery {
 		protected ContainsGroup(PermissionPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSGROUP);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -1422,8 +1484,6 @@ public class PermissionPersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private PermissionPersistence _persistence;
 	}
 
 	protected class AddGroup extends SqlUpdate {
@@ -1449,7 +1509,6 @@ public class PermissionPersistence extends BasePersistence {
 		protected ClearGroups(PermissionPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Permissions WHERE permissionId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -1457,15 +1516,12 @@ public class PermissionPersistence extends BasePersistence {
 		protected void clear(String permissionId) {
 			update(new Object[] { permissionId });
 		}
-
-		private PermissionPersistence _persistence;
 	}
 
 	protected class RemoveGroup extends SqlUpdate {
 		protected RemoveGroup(PermissionPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Permissions WHERE permissionId = ? AND groupId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -1474,14 +1530,11 @@ public class PermissionPersistence extends BasePersistence {
 		protected void remove(String permissionId, String groupId) {
 			update(new Object[] { permissionId, groupId });
 		}
-
-		private PermissionPersistence _persistence;
 	}
 
 	protected class ContainsRole extends MappingSqlQuery {
 		protected ContainsRole(PermissionPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSROLE);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -1505,8 +1558,6 @@ public class PermissionPersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private PermissionPersistence _persistence;
 	}
 
 	protected class AddRole extends SqlUpdate {
@@ -1532,7 +1583,6 @@ public class PermissionPersistence extends BasePersistence {
 		protected ClearRoles(PermissionPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Roles_Permissions WHERE permissionId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -1540,15 +1590,12 @@ public class PermissionPersistence extends BasePersistence {
 		protected void clear(String permissionId) {
 			update(new Object[] { permissionId });
 		}
-
-		private PermissionPersistence _persistence;
 	}
 
 	protected class RemoveRole extends SqlUpdate {
 		protected RemoveRole(PermissionPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Roles_Permissions WHERE permissionId = ? AND roleId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -1557,14 +1604,11 @@ public class PermissionPersistence extends BasePersistence {
 		protected void remove(String permissionId, String roleId) {
 			update(new Object[] { permissionId, roleId });
 		}
-
-		private PermissionPersistence _persistence;
 	}
 
 	protected class ContainsUser extends MappingSqlQuery {
 		protected ContainsUser(PermissionPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSUSER);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -1588,8 +1632,6 @@ public class PermissionPersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private PermissionPersistence _persistence;
 	}
 
 	protected class AddUser extends SqlUpdate {
@@ -1615,7 +1657,6 @@ public class PermissionPersistence extends BasePersistence {
 		protected ClearUsers(PermissionPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Permissions WHERE permissionId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -1623,15 +1664,12 @@ public class PermissionPersistence extends BasePersistence {
 		protected void clear(String permissionId) {
 			update(new Object[] { permissionId });
 		}
-
-		private PermissionPersistence _persistence;
 	}
 
 	protected class RemoveUser extends SqlUpdate {
 		protected RemoveUser(PermissionPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Permissions WHERE permissionId = ? AND userId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -1640,8 +1678,6 @@ public class PermissionPersistence extends BasePersistence {
 		protected void remove(String permissionId, String userId) {
 			update(new Object[] { permissionId, userId });
 		}
-
-		private PermissionPersistence _persistence;
 	}
 
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Groups_Permissions ON (Groups_Permissions.permissionId = ?) AND (Groups_Permissions.groupId = Group_.groupId)";

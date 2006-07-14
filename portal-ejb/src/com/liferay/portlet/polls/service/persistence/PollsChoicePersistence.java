@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class PollsChoicePersistence extends BasePersistence {
 					pollsChoicePK);
 
 			if (pollsChoice == null) {
-				_log.warn("No PollsChoice exists with the primary key " +
-					pollsChoicePK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No PollsChoice exists with the primary key " +
+						pollsChoicePK.toString());
+				}
+
 				throw new NoSuchChoiceException(
 					"No PollsChoice exists with the primary key " +
 					pollsChoicePK.toString());
@@ -140,12 +142,6 @@ public class PollsChoicePersistence extends BasePersistence {
 
 	public PollsChoice findByPrimaryKey(PollsChoicePK pollsChoicePK)
 		throws NoSuchChoiceException, SystemException {
-		return findByPrimaryKey(pollsChoicePK, true);
-	}
-
-	public PollsChoice findByPrimaryKey(PollsChoicePK pollsChoicePK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchChoiceException, SystemException {
 		Session session = null;
 
 		try {
@@ -155,10 +151,9 @@ public class PollsChoicePersistence extends BasePersistence {
 					pollsChoicePK);
 
 			if (pollsChoice == null) {
-				_log.warn("No PollsChoice exists with the primary key " +
-					pollsChoicePK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No PollsChoice exists with the primary key " +
+						pollsChoicePK.toString());
 					throw new NoSuchChoiceException(
 						"No PollsChoice exists with the primary key " +
 						pollsChoicePK.toString());
@@ -166,6 +161,23 @@ public class PollsChoicePersistence extends BasePersistence {
 			}
 
 			return pollsChoice;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public PollsChoice fetchByPrimaryKey(PollsChoicePK pollsChoicePK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (PollsChoice)session.get(PollsChoice.class, pollsChoicePK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

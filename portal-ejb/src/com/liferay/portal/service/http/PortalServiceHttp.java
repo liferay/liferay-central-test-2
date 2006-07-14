@@ -43,10 +43,9 @@ public class PortalServiceHttp {
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(PortalServiceUtil.class.getName(),
 					"test", new Object[0]);
-			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				throw e;

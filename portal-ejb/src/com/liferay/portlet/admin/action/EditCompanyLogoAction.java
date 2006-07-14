@@ -39,8 +39,6 @@ import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -106,7 +104,5 @@ public class EditCompanyLogoAction extends PortletAction {
 
 		CompanyServiceUtil.updateLogo(companyId, file);
 	}
-
-	private static Log _log = LogFactory.getLog(EditCompanyLogoAction.class);
 
 }

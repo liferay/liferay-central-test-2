@@ -125,13 +125,10 @@ public class ShoppingOrderItemUtil {
 		return getPersistence().findByPrimaryKey(shoppingOrderItemPK);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingOrderItem findByPrimaryKey(
-		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK shoppingOrderItemPK,
-		boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.shopping.NoSuchOrderItemException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(shoppingOrderItemPK,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.shopping.model.ShoppingOrderItem fetchByPrimaryKey(
+		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK shoppingOrderItemPK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(shoppingOrderItemPK);
 	}
 
 	public static java.util.List findByOrderId(java.lang.String orderId)

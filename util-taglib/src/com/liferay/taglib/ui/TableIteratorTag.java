@@ -119,7 +119,6 @@ public class TableIteratorTag extends TagSupport {
 			_endPage = null;
 			_list = null;
 			_listPos = 0;
-			_listType = null;
 			_rowLength = 0;
 			_rowPadding = "0";
 			_rowValign = "middle";
@@ -171,7 +170,6 @@ public class TableIteratorTag extends TagSupport {
 	}
 
 	public void setListType(String listType) {
-		_listType = listType;
 	}
 
 	public void setRowLength(String rowLength) {
@@ -204,7 +202,6 @@ public class TableIteratorTag extends TagSupport {
 	private String _endPage;
 	private List _list;
 	private int _listPos;
-	private String _listType;
 	private int _rowLength;
 	private String _rowPadding = "0";
 	private String _rowValign = "middle";

@@ -222,7 +222,6 @@ public class LayoutTypePortlet extends LayoutType {
 
 		for (int i = 0; i < portlets.size(); i++) {
 			Portlet portlet = (Portlet)portlets.get(i);
-			String portletId = portlet.getPortletId();
 
 			// Add the portlet if and only if it is not also a static portlet
 
@@ -747,16 +746,6 @@ public class LayoutTypePortlet extends LayoutType {
 
 	// Private methods
 
-	private String[] _getPortletIds(Portlet[] portlets) {
-		String[] portletIds = new String[portlets.length];
-
-		for (int i = 0; i < portlets.length; i++) {
-			portletIds[i] = portlets[i].getPortletId();
-		}
-
-		return portletIds;
-	}
-
 	private String[] _getStaticPortletIds(String position) {
 		Layout layout = getLayout();
 
@@ -803,7 +792,5 @@ public class LayoutTypePortlet extends LayoutType {
 	}
 
 	private static Log _log = LogFactory.getLog(LayoutTypePortlet.class);
-
-	private int _numOfColumns;
 
 }

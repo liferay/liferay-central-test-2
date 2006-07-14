@@ -38,7 +38,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -67,8 +66,11 @@ public class ContactPersistence extends BasePersistence {
 			Contact contact = (Contact)session.get(Contact.class, contactId);
 
 			if (contact == null) {
-				_log.warn("No Contact exists with the primary key " +
-					contactId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Contact exists with the primary key " +
+						contactId.toString());
+				}
+
 				throw new NoSuchContactException(
 					"No Contact exists with the primary key " +
 					contactId.toString());
@@ -213,12 +215,6 @@ public class ContactPersistence extends BasePersistence {
 
 	public Contact findByPrimaryKey(String contactId)
 		throws NoSuchContactException, SystemException {
-		return findByPrimaryKey(contactId, true);
-	}
-
-	public Contact findByPrimaryKey(String contactId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchContactException, SystemException {
 		Session session = null;
 
 		try {
@@ -227,10 +223,9 @@ public class ContactPersistence extends BasePersistence {
 			Contact contact = (Contact)session.get(Contact.class, contactId);
 
 			if (contact == null) {
-				_log.warn("No Contact exists with the primary key " +
-					contactId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Contact exists with the primary key " +
+						contactId.toString());
 					throw new NoSuchContactException(
 						"No Contact exists with the primary key " +
 						contactId.toString());
@@ -238,6 +233,23 @@ public class ContactPersistence extends BasePersistence {
 			}
 
 			return contact;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Contact fetchByPrimaryKey(String contactId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Contact)session.get(Contact.class, contactId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

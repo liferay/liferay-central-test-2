@@ -60,8 +60,6 @@ public class JSPCompiler {
 					   String directory, boolean checkTimeStamp) {
 
 		try {
-			_appServerType = appServerType;
-
 			_compiler = compiler;
 
 			if (!_compiler.equals("jikes")) {
@@ -159,7 +157,6 @@ public class JSPCompiler {
 		}
 	}
 
-	private String _appServerType;
 	private String _compiler;
 	private String _classPath;
 	private String _directory;

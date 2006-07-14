@@ -125,13 +125,10 @@ public class WikiPageUtil {
 		return getPersistence().findByPrimaryKey(wikiPagePK);
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiPage findByPrimaryKey(
-		com.liferay.portlet.wiki.service.persistence.WikiPagePK wikiPagePK,
-		boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.wiki.NoSuchPageException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(wikiPagePK,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.wiki.model.WikiPage fetchByPrimaryKey(
+		com.liferay.portlet.wiki.service.persistence.WikiPagePK wikiPagePK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(wikiPagePK);
 	}
 
 	public static java.util.List findByNodeId(java.lang.String nodeId)

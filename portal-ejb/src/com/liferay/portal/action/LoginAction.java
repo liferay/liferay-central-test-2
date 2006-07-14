@@ -310,8 +310,6 @@ public class LoginAction extends Action {
 	private void _login(HttpServletRequest req, HttpServletResponse res)
 		throws Exception {
 
-		HttpSession ses = req.getSession();
-
 		String login = ParamUtil.getString(req, "login").toLowerCase();
 		String password = ParamUtil.getString(
 			req, SessionParameters.get(req, "password"));

@@ -124,12 +124,9 @@ public class UserGroupUtil {
 		return getPersistence().findByPrimaryKey(userGroupId);
 	}
 
-	public static com.liferay.portal.model.UserGroup findByPrimaryKey(
-		java.lang.String userGroupId, boolean throwNoSuchObjectException)
-		throws com.liferay.portal.NoSuchUserGroupException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(userGroupId,
-			throwNoSuchObjectException);
+	public static com.liferay.portal.model.UserGroup fetchByPrimaryKey(
+		java.lang.String userGroupId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(userGroupId);
 	}
 
 	public static java.util.List findAll()

@@ -766,7 +766,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			// Ensure parent layout exists
 
 			try {
-				Layout layout = LayoutUtil.findByPrimaryKey(
+				LayoutUtil.findByPrimaryKey(
 					new LayoutPK(parentLayoutId, ownerId));
 			}
 			catch (NoSuchLayoutException nsfe) {

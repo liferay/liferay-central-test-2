@@ -60,7 +60,6 @@ import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -135,7 +134,7 @@ public class RenderRequestImpl implements RenderRequest {
 		}*/
 
 		if ((_ses == null) && create) {
-			HttpSession httpSes = _req.getSession(create);
+			_req.getSession(create);
 
 			_ses = new PortletSessionImpl(
 				_req, _portletName, _portletCtx, _portalSessionId, _plid);
@@ -152,6 +151,7 @@ public class RenderRequestImpl implements RenderRequest {
 		List values = new ArrayList();
 
 		String value = _portalCtx.getProperty(name);
+
 		if (value != null) {
 			values.add(value);
 		}
@@ -570,7 +570,6 @@ public class RenderRequestImpl implements RenderRequest {
 
 		_req = dynamicReq;
 		_portlet = portlet;
-		_cachePortlet = cachePortlet;
 		_portalCtx = new PortalContextImpl();
 		_portletCtx = portletCtx;
 		_windowState = windowState;
@@ -596,7 +595,6 @@ public class RenderRequestImpl implements RenderRequest {
 
 		_req = null;
 		_portlet = null;
-		_cachePortlet = null;
 		_portletName = null;
 		_portalCtx = null;
 		_portletCtx = null;
@@ -635,7 +633,6 @@ public class RenderRequestImpl implements RenderRequest {
 
 	private DynamicServletRequest _req;
 	private Portlet _portlet;
-	private CachePortlet _cachePortlet;
 	private String _portletName;
 	private PortalContext _portalCtx;
 	private PortletContext _portletCtx;

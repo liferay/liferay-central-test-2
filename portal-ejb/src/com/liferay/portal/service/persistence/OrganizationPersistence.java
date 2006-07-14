@@ -53,7 +53,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -83,8 +82,11 @@ public class OrganizationPersistence extends BasePersistence {
 					organizationId);
 
 			if (organization == null) {
-				_log.warn("No Organization exists with the primary key " +
-					organizationId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Organization exists with the primary key " +
+						organizationId.toString());
+				}
+
 				throw new NoSuchOrganizationException(
 					"No Organization exists with the primary key " +
 					organizationId.toString());
@@ -175,12 +177,6 @@ public class OrganizationPersistence extends BasePersistence {
 
 	public Organization findByPrimaryKey(String organizationId)
 		throws NoSuchOrganizationException, SystemException {
-		return findByPrimaryKey(organizationId, true);
-	}
-
-	public Organization findByPrimaryKey(String organizationId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchOrganizationException, SystemException {
 		Session session = null;
 
 		try {
@@ -190,10 +186,9 @@ public class OrganizationPersistence extends BasePersistence {
 					organizationId);
 
 			if (organization == null) {
-				_log.warn("No Organization exists with the primary key " +
-					organizationId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Organization exists with the primary key " +
+						organizationId.toString());
 					throw new NoSuchOrganizationException(
 						"No Organization exists with the primary key " +
 						organizationId.toString());
@@ -201,6 +196,23 @@ public class OrganizationPersistence extends BasePersistence {
 			}
 
 			return organization;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Organization fetchByPrimaryKey(String organizationId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Organization)session.get(Organization.class, organizationId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -790,12 +802,6 @@ public class OrganizationPersistence extends BasePersistence {
 
 	public Organization findByC_N(String companyId, String name)
 		throws NoSuchOrganizationException, SystemException {
-		return findByC_N(companyId, name, true);
-	}
-
-	public Organization findByC_N(String companyId, String name,
-		boolean throwNoSuchObjectException)
-		throws NoSuchOrganizationException, SystemException {
 		Session session = null;
 
 		try {
@@ -847,6 +853,65 @@ public class OrganizationPersistence extends BasePersistence {
 				msg += name;
 				msg += StringPool.CLOSE_CURLY_BRACE;
 				throw new NoSuchOrganizationException(msg);
+			}
+
+			Organization organization = (Organization)list.get(0);
+
+			return organization;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Organization fetchByC_N(String companyId, String name)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.Organization WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("name ASC");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
 			}
 
 			Organization organization = (Organization)list.get(0);
@@ -1798,7 +1863,6 @@ public class OrganizationPersistence extends BasePersistence {
 	protected class ContainsGroup extends MappingSqlQuery {
 		protected ContainsGroup(OrganizationPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSGROUP);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -1822,8 +1886,6 @@ public class OrganizationPersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private OrganizationPersistence _persistence;
 	}
 
 	protected class AddGroup extends SqlUpdate {
@@ -1849,7 +1911,6 @@ public class OrganizationPersistence extends BasePersistence {
 		protected ClearGroups(OrganizationPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Orgs WHERE organizationId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -1857,15 +1918,12 @@ public class OrganizationPersistence extends BasePersistence {
 		protected void clear(String organizationId) {
 			update(new Object[] { organizationId });
 		}
-
-		private OrganizationPersistence _persistence;
 	}
 
 	protected class RemoveGroup extends SqlUpdate {
 		protected RemoveGroup(OrganizationPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Orgs WHERE organizationId = ? AND groupId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -1874,14 +1932,11 @@ public class OrganizationPersistence extends BasePersistence {
 		protected void remove(String organizationId, String groupId) {
 			update(new Object[] { organizationId, groupId });
 		}
-
-		private OrganizationPersistence _persistence;
 	}
 
 	protected class ContainsUser extends MappingSqlQuery {
 		protected ContainsUser(OrganizationPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSUSER);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -1905,8 +1960,6 @@ public class OrganizationPersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private OrganizationPersistence _persistence;
 	}
 
 	protected class AddUser extends SqlUpdate {
@@ -1932,7 +1985,6 @@ public class OrganizationPersistence extends BasePersistence {
 		protected ClearUsers(OrganizationPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Orgs WHERE organizationId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -1940,15 +1992,12 @@ public class OrganizationPersistence extends BasePersistence {
 		protected void clear(String organizationId) {
 			update(new Object[] { organizationId });
 		}
-
-		private OrganizationPersistence _persistence;
 	}
 
 	protected class RemoveUser extends SqlUpdate {
 		protected RemoveUser(OrganizationPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Orgs WHERE organizationId = ? AND userId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -1957,8 +2006,6 @@ public class OrganizationPersistence extends BasePersistence {
 		protected void remove(String organizationId, String userId) {
 			update(new Object[] { organizationId, userId });
 		}
-
-		private OrganizationPersistence _persistence;
 	}
 
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Groups_Orgs ON (Groups_Orgs.organizationId = ?) AND (Groups_Orgs.groupId = Group_.groupId)";

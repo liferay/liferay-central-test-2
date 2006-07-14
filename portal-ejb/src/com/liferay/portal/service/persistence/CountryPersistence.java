@@ -38,7 +38,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -67,8 +66,11 @@ public class CountryPersistence extends BasePersistence {
 			Country country = (Country)session.get(Country.class, countryId);
 
 			if (country == null) {
-				_log.warn("No Country exists with the primary key " +
-					countryId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Country exists with the primary key " +
+						countryId.toString());
+				}
+
 				throw new NoSuchCountryException(
 					"No Country exists with the primary key " +
 					countryId.toString());
@@ -141,12 +143,6 @@ public class CountryPersistence extends BasePersistence {
 
 	public Country findByPrimaryKey(String countryId)
 		throws NoSuchCountryException, SystemException {
-		return findByPrimaryKey(countryId, true);
-	}
-
-	public Country findByPrimaryKey(String countryId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchCountryException, SystemException {
 		Session session = null;
 
 		try {
@@ -155,10 +151,9 @@ public class CountryPersistence extends BasePersistence {
 			Country country = (Country)session.get(Country.class, countryId);
 
 			if (country == null) {
-				_log.warn("No Country exists with the primary key " +
-					countryId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Country exists with the primary key " +
+						countryId.toString());
 					throw new NoSuchCountryException(
 						"No Country exists with the primary key " +
 						countryId.toString());
@@ -166,6 +161,23 @@ public class CountryPersistence extends BasePersistence {
 			}
 
 			return country;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Country fetchByPrimaryKey(String countryId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Country)session.get(Country.class, countryId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

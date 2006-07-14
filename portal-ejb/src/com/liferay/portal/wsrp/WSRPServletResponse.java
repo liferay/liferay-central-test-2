@@ -46,7 +46,6 @@ public class WSRPServletResponse implements HttpServletResponse, Serializable {
 	public static final int DEFAULT_STATUS_CODE = 200;
 
 	public WSRPServletResponse() {
-		_statusCode = DEFAULT_STATUS_CODE;
 		_locale = new Locale("en", "US");
 
 		setContentType("text/html");
@@ -106,12 +105,9 @@ public class WSRPServletResponse implements HttpServletResponse, Serializable {
 	}
 
 	public void setStatus(int statusCode) {
-		_statusCode = statusCode;
 	}
 
 	public void setStatus(int statusCode, String message) {
-		_statusCode = statusCode;
-		_statusMessage = message;
 	}
 
 	public String getString() throws UnsupportedEncodingException {
@@ -180,7 +176,6 @@ public class WSRPServletResponse implements HttpServletResponse, Serializable {
 	}
 
 	public void sendRedirect(String location) {
-		_redirectURI = location;
 	}
 
 	private ByteArrayOutputStream _baos = new ByteArrayOutputStream();
@@ -192,15 +187,10 @@ public class WSRPServletResponse implements HttpServletResponse, Serializable {
 	};
 
 	private String _encoding;
-	private String _redirectURI;
-	private String _statusMessage;
-	private StringWriter _stringWriter;
 	private StringWriter _sw = new StringWriter();
 	private PrintWriter _pw = new PrintWriter(_sw);
 	private boolean _callGetOutputStream;
 	private boolean _callGetWriter;
-	private boolean _isFinished;
-	private int _statusCode;
 	private String _contentType;
 
 }

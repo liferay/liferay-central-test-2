@@ -173,8 +173,6 @@ public class EditTemplateAction extends PortletAction {
 
 		Layout layout = (Layout)uploadReq.getAttribute(WebKeys.LAYOUT);
 
-		String companyId = PortalUtil.getCompanyId(uploadReq);
-
 		String templateId = ParamUtil.getString(uploadReq, "templateId");
 		boolean autoTemplateId = ParamUtil.getBoolean(
 			uploadReq, "autoTemplateId");

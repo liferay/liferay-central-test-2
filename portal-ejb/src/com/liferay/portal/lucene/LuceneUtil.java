@@ -298,7 +298,7 @@ public class LuceneUtil {
 			companyId, StringPool.PERIOD, StringPool.UNDERLINE);
 	}
 
-	private static final String _LUCENE_STORE_TYPE_FILE = "file";
+	//private static final String _LUCENE_STORE_TYPE_FILE = "file";
 
 	private static final String _LUCENE_STORE_TYPE_JDBC = "jdbc";
 

@@ -37,9 +37,6 @@ import com.liferay.portlet.PortletPreferencesSerializer;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PortletPreferencesLocalServiceImpl.java.html"><b><i>View Source</i>
  * </b></a>
@@ -154,8 +151,5 @@ public class PortletPreferencesLocalServiceImpl
 
 		return portletPreferences;
 	}
-
-	private static Log _log =
-		LogFactory.getLog(PortletPreferencesLocalServiceImpl.class);
 
 }

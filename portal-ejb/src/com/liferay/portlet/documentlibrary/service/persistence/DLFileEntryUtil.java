@@ -125,13 +125,10 @@ public class DLFileEntryUtil {
 		return getPersistence().findByPrimaryKey(dlFileEntryPK);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByPrimaryKey(
-		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK dlFileEntryPK,
-		boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(dlFileEntryPK,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByPrimaryKey(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK dlFileEntryPK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(dlFileEntryPK);
 	}
 
 	public static java.util.List findByFolderId(java.lang.String folderId)

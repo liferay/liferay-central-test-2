@@ -68,7 +68,6 @@ public class PollsUtil {
 		while (itr.hasNext()) {
 			PollsChoice choice = (PollsChoice)itr.next();
 
-			String category = choice.getChoiceId();
 			Integer number = new Integer(
 				PollsVoteLocalServiceUtil.getVotesCount(
 					questionId, choice.getChoiceId()));

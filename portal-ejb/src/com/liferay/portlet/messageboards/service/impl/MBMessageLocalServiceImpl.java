@@ -41,8 +41,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
-import com.liferay.portlet.messageboards.NoSuchMessageException;
-import com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -78,7 +76,6 @@ import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
 import de.nava.informa.core.ChannelIF;
-import de.nava.informa.core.ItemIF;
 import de.nava.informa.impl.basic.ChannelBuilder;
 
 import java.io.IOException;
@@ -186,22 +183,17 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		// Thread
 
-		try {
-			MBMessageUtil.findByPrimaryKey(
-				new MBMessagePK(message.getTopicId(), parentMessageId));
-		}
-		catch (NoSuchMessageException nsme) {
+		MBMessage parentMessage = MBMessageUtil.fetchByPrimaryKey(
+			new MBMessagePK(message.getTopicId(), parentMessageId));
+
+		if (parentMessage == null) {
 			parentMessageId = MBMessage.DEFAULT_PARENT_MESSAGE_ID;
 		}
 
 		MBThread thread = null;
 
 		if (threadId != null) {
-			try {
-				thread = MBThreadUtil.findByPrimaryKey(threadId);
-			}
-			catch (NoSuchThreadException nste) {
-			}
+			thread = MBThreadUtil.fetchByPrimaryKey(threadId);
 		}
 
 		if (thread == null ||
@@ -618,14 +610,15 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		// Message flags are now tracked by TreeWalker
 
 		/*if (userId != null) {
-			MBMessageFlagPK flagPK = new MBMessageFlagPK(
+			MBMessageFlagPK messageFlagPK = new MBMessageFlagPK(
 				message.getTopicId(), message.getMessageId(), userId);
 
 			try {
-				MBMessageFlagUtil.findByPrimaryKey(flagPK);
+				MBMessageFlagUtil.findByPrimaryKey(messageFlagPK);
 			}
 			catch (NoSuchMessageFlagException nsmfe) {
-				MBMessageFlag messageFlag = MBMessageFlagUtil.create(flagPK);
+				MBMessageFlag messageFlag =
+					MBMessageFlagUtil.create(messageFlagPK);
 
 				messageFlag.setFlag(MBMessageFlag.READ_FLAG);
 
@@ -700,15 +693,14 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			while (itr.hasNext()) {
 				MBMessage message = (MBMessage)itr.next();
 
-				MBMessageFlagPK flagPK = new MBMessageFlagPK(
+				MBMessageFlagPK messageFlagPK = new MBMessageFlagPK(
 					message.getTopicId(), message.getMessageId(), userId);
 
-				try {
-					MBMessageFlagUtil.findByPrimaryKey(flagPK);
-				}
-				catch (NoSuchMessageFlagException nsmfe) {
-					MBMessageFlag messageFlag =
-						MBMessageFlagUtil.create(flagPK);
+				MBMessageFlag messageFlag =
+					MBMessageFlagUtil.fetchByPrimaryKey(messageFlagPK);
+
+				if (messageFlag == null) {
+					messageFlag = MBMessageFlagUtil.create(messageFlagPK);
 
 					messageFlag.setFlag(MBMessageFlag.READ_FLAG);
 
@@ -899,7 +891,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 						Html.stripHtml(message.getBody()), 80,
 						StringPool.BLANK);
 
-				ItemIF item = builder.createItem(
+				builder.createItem(
 					channel, message.getSubject(), firstLine,
 					new URL(url + "&messageId=" + message.getMessageId()));
 			}

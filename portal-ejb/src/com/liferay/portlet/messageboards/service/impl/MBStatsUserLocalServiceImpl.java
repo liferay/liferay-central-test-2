@@ -25,7 +25,6 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
-import com.liferay.portlet.messageboards.NoSuchStatsUserException;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil;
@@ -59,10 +58,9 @@ public class MBStatsUserLocalServiceImpl implements MBStatsUserLocalService {
 
 		MBStatsUser statsUser = null;
 
-		try {
-			statsUser = MBStatsUserUtil.findByPrimaryKey(statsUserPK);
-		}
-		catch (NoSuchStatsUserException nssue) {
+		statsUser = MBStatsUserUtil.fetchByPrimaryKey(statsUserPK);
+
+		if (statsUser == null) {
 			statsUser = MBStatsUserUtil.create(statsUserPK);
 
 			MBStatsUserUtil.update(statsUser);
@@ -93,12 +91,9 @@ public class MBStatsUserLocalServiceImpl implements MBStatsUserLocalService {
 
 		MBStatsUserPK statsUserPK = new MBStatsUserPK(groupId, userId);
 
-		MBStatsUser statsUser = null;
+		MBStatsUser statsUser = MBStatsUserUtil.fetchByPrimaryKey(statsUserPK);
 
-		try {
-			statsUser = MBStatsUserUtil.findByPrimaryKey(statsUserPK);
-		}
-		catch (NoSuchStatsUserException nssue) {
+		if (statsUser == null) {
 			statsUser = MBStatsUserUtil.create(statsUserPK);
 		}
 

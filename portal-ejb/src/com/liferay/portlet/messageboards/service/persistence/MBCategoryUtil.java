@@ -125,12 +125,9 @@ public class MBCategoryUtil {
 		return getPersistence().findByPrimaryKey(categoryId);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBCategory findByPrimaryKey(
-		java.lang.String categoryId, boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.messageboards.NoSuchCategoryException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(categoryId,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.messageboards.model.MBCategory fetchByPrimaryKey(
+		java.lang.String categoryId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(categoryId);
 	}
 
 	public static java.util.List findByGroupId(java.lang.String groupId)

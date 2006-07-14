@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +67,11 @@ public class WikiNodePersistence extends BasePersistence {
 			WikiNode wikiNode = (WikiNode)session.get(WikiNode.class, nodeId);
 
 			if (wikiNode == null) {
-				_log.warn("No WikiNode exists with the primary key " +
-					nodeId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No WikiNode exists with the primary key " +
+						nodeId.toString());
+				}
+
 				throw new NoSuchNodeException(
 					"No WikiNode exists with the primary key " +
 					nodeId.toString());
@@ -161,12 +163,6 @@ public class WikiNodePersistence extends BasePersistence {
 
 	public WikiNode findByPrimaryKey(String nodeId)
 		throws NoSuchNodeException, SystemException {
-		return findByPrimaryKey(nodeId, true);
-	}
-
-	public WikiNode findByPrimaryKey(String nodeId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchNodeException, SystemException {
 		Session session = null;
 
 		try {
@@ -175,10 +171,9 @@ public class WikiNodePersistence extends BasePersistence {
 			WikiNode wikiNode = (WikiNode)session.get(WikiNode.class, nodeId);
 
 			if (wikiNode == null) {
-				_log.warn("No WikiNode exists with the primary key " +
-					nodeId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No WikiNode exists with the primary key " +
+						nodeId.toString());
 					throw new NoSuchNodeException(
 						"No WikiNode exists with the primary key " +
 						nodeId.toString());
@@ -186,6 +181,22 @@ public class WikiNodePersistence extends BasePersistence {
 			}
 
 			return wikiNode;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public WikiNode fetchByPrimaryKey(String nodeId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (WikiNode)session.get(WikiNode.class, nodeId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

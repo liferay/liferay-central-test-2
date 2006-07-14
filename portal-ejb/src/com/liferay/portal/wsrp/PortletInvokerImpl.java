@@ -69,8 +69,6 @@ import oasis.names.tc.wsrp.v1.types.NamedString;
 import oasis.names.tc.wsrp.v1.types.PerformBlockingInteraction;
 import oasis.names.tc.wsrp.v1.types.UpdateResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.wsrp4j.exception.WSRPException;
 import org.apache.wsrp4j.producer.provider.PortletInvoker;
 import org.apache.wsrp4j.producer.provider.Provider;
@@ -353,7 +351,5 @@ public class PortletInvokerImpl implements PortletInvoker {
 	}
 
 	private Provider _provider;
-
-	private static Log _log = LogFactory.getLog(PortletInvokerImpl.class);
 
 }

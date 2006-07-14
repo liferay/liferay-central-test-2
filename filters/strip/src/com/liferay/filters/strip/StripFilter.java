@@ -58,7 +58,6 @@ public class StripFilter implements Filter {
 		"UTF-8");
 
 	public void init(FilterConfig config) {
-		_config = config;
 	}
 
 	public void doFilter(
@@ -323,7 +322,5 @@ public class StripFilter implements Filter {
 	private static final String _INCLUDE = "javax.servlet.include.request_uri";
 
 	private static Log _log = LogFactory.getLog(StripFilter.class);
-
-	private FilterConfig _config;
 
 }

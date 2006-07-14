@@ -41,9 +41,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -302,7 +299,5 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 			}
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(PageCommandReceiver.class);
 
 }

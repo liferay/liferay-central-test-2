@@ -235,11 +235,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			for (int i = messages.size() - 1; i >= 0; i--) {
 				Object[] array = (Object[])messages.get(i);
 
-				String companyId = (String)array[0];
-				String threadId = (String)array[1];
 				String oldMessageId = (String)array[2];
 				String newMessageId = (String)array[3];
-				List files = (List)array[4];
 
 				_log.debug(
 					"Upgrading message " +
@@ -356,7 +353,6 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 			while (rs.next()) {
 				String topicId = rs.getString("topicId");
-				String companyId = rs.getString("companyId");
 				String userId = rs.getString("userId");
 				Timestamp createDate = rs.getTimestamp("createDate");
 				Timestamp modifiedDate = rs.getTimestamp("modifiedDate");

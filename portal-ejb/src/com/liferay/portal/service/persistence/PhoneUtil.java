@@ -124,12 +124,9 @@ public class PhoneUtil {
 		return getPersistence().findByPrimaryKey(phoneId);
 	}
 
-	public static com.liferay.portal.model.Phone findByPrimaryKey(
-		java.lang.String phoneId, boolean throwNoSuchObjectException)
-		throws com.liferay.portal.NoSuchPhoneException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(phoneId,
-			throwNoSuchObjectException);
+	public static com.liferay.portal.model.Phone fetchByPrimaryKey(
+		java.lang.String phoneId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(phoneId);
 	}
 
 	public static java.util.List findByCompanyId(java.lang.String companyId)

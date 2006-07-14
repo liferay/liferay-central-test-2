@@ -38,7 +38,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +67,11 @@ public class UserTrackerPathPersistence extends BasePersistence {
 					userTrackerPathId);
 
 			if (userTrackerPath == null) {
-				_log.warn("No UserTrackerPath exists with the primary key " +
-					userTrackerPathId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No UserTrackerPath exists with the primary key " +
+						userTrackerPathId.toString());
+				}
+
 				throw new NoSuchUserTrackerPathException(
 					"No UserTrackerPath exists with the primary key " +
 					userTrackerPathId.toString());
@@ -143,12 +145,6 @@ public class UserTrackerPathPersistence extends BasePersistence {
 
 	public UserTrackerPath findByPrimaryKey(String userTrackerPathId)
 		throws NoSuchUserTrackerPathException, SystemException {
-		return findByPrimaryKey(userTrackerPathId, true);
-	}
-
-	public UserTrackerPath findByPrimaryKey(String userTrackerPathId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchUserTrackerPathException, SystemException {
 		Session session = null;
 
 		try {
@@ -158,10 +154,9 @@ public class UserTrackerPathPersistence extends BasePersistence {
 					userTrackerPathId);
 
 			if (userTrackerPath == null) {
-				_log.warn("No UserTrackerPath exists with the primary key " +
-					userTrackerPathId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No UserTrackerPath exists with the primary key " +
+						userTrackerPathId.toString());
 					throw new NoSuchUserTrackerPathException(
 						"No UserTrackerPath exists with the primary key " +
 						userTrackerPathId.toString());
@@ -169,6 +164,24 @@ public class UserTrackerPathPersistence extends BasePersistence {
 			}
 
 			return userTrackerPath;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public UserTrackerPath fetchByPrimaryKey(String userTrackerPathId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (UserTrackerPath)session.get(UserTrackerPath.class,
+				userTrackerPathId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

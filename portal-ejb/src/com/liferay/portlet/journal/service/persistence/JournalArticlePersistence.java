@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class JournalArticlePersistence extends BasePersistence {
 					journalArticlePK);
 
 			if (journalArticle == null) {
-				_log.warn("No JournalArticle exists with the primary key " +
-					journalArticlePK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No JournalArticle exists with the primary key " +
+						journalArticlePK.toString());
+				}
+
 				throw new NoSuchArticleException(
 					"No JournalArticle exists with the primary key " +
 					journalArticlePK.toString());
@@ -193,12 +195,6 @@ public class JournalArticlePersistence extends BasePersistence {
 
 	public JournalArticle findByPrimaryKey(JournalArticlePK journalArticlePK)
 		throws NoSuchArticleException, SystemException {
-		return findByPrimaryKey(journalArticlePK, true);
-	}
-
-	public JournalArticle findByPrimaryKey(JournalArticlePK journalArticlePK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchArticleException, SystemException {
 		Session session = null;
 
 		try {
@@ -208,10 +204,9 @@ public class JournalArticlePersistence extends BasePersistence {
 					journalArticlePK);
 
 			if (journalArticle == null) {
-				_log.warn("No JournalArticle exists with the primary key " +
-					journalArticlePK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No JournalArticle exists with the primary key " +
+						journalArticlePK.toString());
 					throw new NoSuchArticleException(
 						"No JournalArticle exists with the primary key " +
 						journalArticlePK.toString());
@@ -219,6 +214,24 @@ public class JournalArticlePersistence extends BasePersistence {
 			}
 
 			return journalArticle;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public JournalArticle fetchByPrimaryKey(JournalArticlePK journalArticlePK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (JournalArticle)session.get(JournalArticle.class,
+				journalArticlePK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

@@ -125,12 +125,9 @@ public class MBThreadUtil {
 		return getPersistence().findByPrimaryKey(threadId);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBThread findByPrimaryKey(
-		java.lang.String threadId, boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.messageboards.NoSuchThreadException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(threadId,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.messageboards.model.MBThread fetchByPrimaryKey(
+		java.lang.String threadId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(threadId);
 	}
 
 	public static java.util.List findByCategoryId(java.lang.String categoryId)

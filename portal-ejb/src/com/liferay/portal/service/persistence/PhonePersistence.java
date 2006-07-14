@@ -38,7 +38,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -67,8 +66,11 @@ public class PhonePersistence extends BasePersistence {
 			Phone phone = (Phone)session.get(Phone.class, phoneId);
 
 			if (phone == null) {
-				_log.warn("No Phone exists with the primary key " +
-					phoneId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Phone exists with the primary key " +
+						phoneId.toString());
+				}
+
 				throw new NoSuchPhoneException(
 					"No Phone exists with the primary key " +
 					phoneId.toString());
@@ -165,12 +167,6 @@ public class PhonePersistence extends BasePersistence {
 
 	public Phone findByPrimaryKey(String phoneId)
 		throws NoSuchPhoneException, SystemException {
-		return findByPrimaryKey(phoneId, true);
-	}
-
-	public Phone findByPrimaryKey(String phoneId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchPhoneException, SystemException {
 		Session session = null;
 
 		try {
@@ -179,10 +175,9 @@ public class PhonePersistence extends BasePersistence {
 			Phone phone = (Phone)session.get(Phone.class, phoneId);
 
 			if (phone == null) {
-				_log.warn("No Phone exists with the primary key " +
-					phoneId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Phone exists with the primary key " +
+						phoneId.toString());
 					throw new NoSuchPhoneException(
 						"No Phone exists with the primary key " +
 						phoneId.toString());
@@ -190,6 +185,22 @@ public class PhonePersistence extends BasePersistence {
 			}
 
 			return phone;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Phone fetchByPrimaryKey(String phoneId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Phone)session.get(Phone.class, phoneId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

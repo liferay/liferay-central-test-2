@@ -55,9 +55,7 @@ public class MBMessageFlagLocalServiceEJBImpl
 	}
 
 	public boolean hasReadFlag(java.lang.String messageId,
-		java.lang.String userId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		java.lang.String userId) throws com.liferay.portal.SystemException {
 		return getService().hasReadFlag(messageId, userId);
 	}
 

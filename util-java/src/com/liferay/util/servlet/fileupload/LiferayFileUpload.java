@@ -55,7 +55,6 @@ public class LiferayFileUpload extends ServletFileUpload {
 
 		super(fileItemFactory);
 
-		_req = req;
 		_ses = req.getSession();
 	}
 
@@ -83,7 +82,6 @@ public class LiferayFileUpload extends ServletFileUpload {
 		return item;
 	}
 
-	private HttpServletRequest _req;
 	private HttpSession _ses;
 
 }

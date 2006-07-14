@@ -38,7 +38,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -67,8 +66,11 @@ public class WebsitePersistence extends BasePersistence {
 			Website website = (Website)session.get(Website.class, websiteId);
 
 			if (website == null) {
-				_log.warn("No Website exists with the primary key " +
-					websiteId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Website exists with the primary key " +
+						websiteId.toString());
+				}
+
 				throw new NoSuchWebsiteException(
 					"No Website exists with the primary key " +
 					websiteId.toString());
@@ -162,12 +164,6 @@ public class WebsitePersistence extends BasePersistence {
 
 	public Website findByPrimaryKey(String websiteId)
 		throws NoSuchWebsiteException, SystemException {
-		return findByPrimaryKey(websiteId, true);
-	}
-
-	public Website findByPrimaryKey(String websiteId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchWebsiteException, SystemException {
 		Session session = null;
 
 		try {
@@ -176,10 +172,9 @@ public class WebsitePersistence extends BasePersistence {
 			Website website = (Website)session.get(Website.class, websiteId);
 
 			if (website == null) {
-				_log.warn("No Website exists with the primary key " +
-					websiteId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Website exists with the primary key " +
+						websiteId.toString());
 					throw new NoSuchWebsiteException(
 						"No Website exists with the primary key " +
 						websiteId.toString());
@@ -187,6 +182,23 @@ public class WebsitePersistence extends BasePersistence {
 			}
 
 			return website;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Website fetchByPrimaryKey(String websiteId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Website)session.get(Website.class, websiteId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

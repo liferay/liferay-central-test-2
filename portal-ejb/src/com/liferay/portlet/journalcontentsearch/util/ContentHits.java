@@ -53,7 +53,6 @@ public class ContentHits extends Hits {
 
 		List docs = new ArrayList(hits.getLength());
 		List scores = new ArrayList(hits.getLength());
-		List layoutIdsList = new ArrayList(hits.getLength());
 
 		for (int i = 0; i < hits.getLength(); i++) {
 			Document doc = hits.doc(i);

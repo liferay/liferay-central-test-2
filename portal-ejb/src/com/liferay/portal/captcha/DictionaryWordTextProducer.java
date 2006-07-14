@@ -40,13 +40,10 @@ public class DictionaryWordTextProducer implements TextProducer {
 	}
 
 	public void setProperties(Properties props) {
-		_props = props;
 	}
 
 	public String getText() {
 		return WordsUtil.getRandomWord();
 	}
-
-	private Properties _props;
 
 }

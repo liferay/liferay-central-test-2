@@ -122,12 +122,9 @@ public class RoleUtil {
 		return getPersistence().findByPrimaryKey(roleId);
 	}
 
-	public static com.liferay.portal.model.Role findByPrimaryKey(
-		java.lang.String roleId, boolean throwNoSuchObjectException)
-		throws com.liferay.portal.NoSuchRoleException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(roleId,
-			throwNoSuchObjectException);
+	public static com.liferay.portal.model.Role fetchByPrimaryKey(
+		java.lang.String roleId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(roleId);
 	}
 
 	public static java.util.List findByCompanyId(java.lang.String companyId)
@@ -178,13 +175,10 @@ public class RoleUtil {
 		return getPersistence().findByC_N(companyId, name);
 	}
 
-	public static com.liferay.portal.model.Role findByC_N(
-		java.lang.String companyId, java.lang.String name,
-		boolean throwNoSuchObjectException)
-		throws com.liferay.portal.NoSuchRoleException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByC_N(companyId, name,
-			throwNoSuchObjectException);
+	public static com.liferay.portal.model.Role fetchByC_N(
+		java.lang.String companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_N(companyId, name);
 	}
 
 	public static com.liferay.portal.model.Role findByC_C_C(
@@ -195,13 +189,10 @@ public class RoleUtil {
 		return getPersistence().findByC_C_C(companyId, className, classPK);
 	}
 
-	public static com.liferay.portal.model.Role findByC_C_C(
+	public static com.liferay.portal.model.Role fetchByC_C_C(
 		java.lang.String companyId, java.lang.String className,
-		java.lang.String classPK, boolean throwNoSuchObjectException)
-		throws com.liferay.portal.NoSuchRoleException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByC_C_C(companyId, className, classPK,
-			throwNoSuchObjectException);
+		java.lang.String classPK) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_C_C(companyId, className, classPK);
 	}
 
 	public static java.util.List findAll()

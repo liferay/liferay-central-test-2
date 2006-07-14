@@ -124,10 +124,9 @@ public class EmailAddressServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(EmailAddressServiceUtil.class.getName(),
 					"deleteEmailAddress", new Object[] { paramObj0 });
-			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.PortalException) {

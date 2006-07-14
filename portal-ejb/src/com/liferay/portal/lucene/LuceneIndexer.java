@@ -53,7 +53,6 @@ public class LuceneIndexer implements Runnable {
 	}
 
 	public void halt() {
-		_halt = true;
 	}
 
 	public boolean isFinished() {
@@ -152,7 +151,6 @@ public class LuceneIndexer implements Runnable {
 	private static Log _log = LogFactory.getLog(LuceneIndexer.class);
 
 	private String _companyId;
-	private boolean _halt;
 	private boolean _finished;
 
 }

@@ -125,13 +125,10 @@ public class UserIdMapperUtil {
 		return getPersistence().findByPrimaryKey(userIdMapperPK);
 	}
 
-	public static com.liferay.portal.model.UserIdMapper findByPrimaryKey(
-		com.liferay.portal.service.persistence.UserIdMapperPK userIdMapperPK,
-		boolean throwNoSuchObjectException)
-		throws com.liferay.portal.NoSuchUserIdMapperException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(userIdMapperPK,
-			throwNoSuchObjectException);
+	public static com.liferay.portal.model.UserIdMapper fetchByPrimaryKey(
+		com.liferay.portal.service.persistence.UserIdMapperPK userIdMapperPK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(userIdMapperPK);
 	}
 
 	public static java.util.List findByUserId(java.lang.String userId)

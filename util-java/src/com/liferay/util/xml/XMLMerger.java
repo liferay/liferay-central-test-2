@@ -57,11 +57,10 @@ public class XMLMerger {
 		Element root1 = mergedDoc.getRootElement();
 		Element root2 = slaveDoc.getRootElement();
 
-		List children1 = root1.elements();
-		List children2 = root2.elements();
+		List children = root2.elements();
 
-		for (int i = 0; i < children2.size(); i++) {
-			Element el2 = (Element)children2.get(i);
+		for (int i = 0; i < children.size(); i++) {
+			Element el2 = (Element)children.get(i);
 
 			Element el2Clone = (Element)el2.clone();
 			el2Clone.detach();

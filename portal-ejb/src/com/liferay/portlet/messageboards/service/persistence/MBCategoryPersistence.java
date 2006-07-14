@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class MBCategoryPersistence extends BasePersistence {
 					categoryId);
 
 			if (mbCategory == null) {
-				_log.warn("No MBCategory exists with the primary key " +
-					categoryId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No MBCategory exists with the primary key " +
+						categoryId.toString());
+				}
+
 				throw new NoSuchCategoryException(
 					"No MBCategory exists with the primary key " +
 					categoryId.toString());
@@ -165,12 +167,6 @@ public class MBCategoryPersistence extends BasePersistence {
 
 	public MBCategory findByPrimaryKey(String categoryId)
 		throws NoSuchCategoryException, SystemException {
-		return findByPrimaryKey(categoryId, true);
-	}
-
-	public MBCategory findByPrimaryKey(String categoryId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchCategoryException, SystemException {
 		Session session = null;
 
 		try {
@@ -180,10 +176,9 @@ public class MBCategoryPersistence extends BasePersistence {
 					categoryId);
 
 			if (mbCategory == null) {
-				_log.warn("No MBCategory exists with the primary key " +
-					categoryId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No MBCategory exists with the primary key " +
+						categoryId.toString());
 					throw new NoSuchCategoryException(
 						"No MBCategory exists with the primary key " +
 						categoryId.toString());
@@ -191,6 +186,23 @@ public class MBCategoryPersistence extends BasePersistence {
 			}
 
 			return mbCategory;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public MBCategory fetchByPrimaryKey(String categoryId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (MBCategory)session.get(MBCategory.class, categoryId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

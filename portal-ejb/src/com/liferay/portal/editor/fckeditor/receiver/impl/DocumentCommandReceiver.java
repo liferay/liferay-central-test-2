@@ -41,9 +41,6 @@ import java.io.File;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -204,7 +201,5 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			folderEl.setAttribute("name", folder.getName());
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(DocumentCommandReceiver.class);
 
 }

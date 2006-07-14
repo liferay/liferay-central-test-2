@@ -53,7 +53,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -82,8 +81,11 @@ public class UserPersistence extends BasePersistence {
 			User user = (User)session.get(User.class, userId);
 
 			if (user == null) {
-				_log.warn("No User exists with the primary key " +
-					userId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No User exists with the primary key " +
+						userId.toString());
+				}
+
 				throw new NoSuchUserException(
 					"No User exists with the primary key " + userId.toString());
 			}
@@ -214,12 +216,6 @@ public class UserPersistence extends BasePersistence {
 
 	public User findByPrimaryKey(String userId)
 		throws NoSuchUserException, SystemException {
-		return findByPrimaryKey(userId, true);
-	}
-
-	public User findByPrimaryKey(String userId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchUserException, SystemException {
 		Session session = null;
 
 		try {
@@ -228,10 +224,9 @@ public class UserPersistence extends BasePersistence {
 			User user = (User)session.get(User.class, userId);
 
 			if (user == null) {
-				_log.warn("No User exists with the primary key " +
-					userId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No User exists with the primary key " +
+						userId.toString());
 					throw new NoSuchUserException(
 						"No User exists with the primary key " +
 						userId.toString());
@@ -239,6 +234,22 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			return user;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public User fetchByPrimaryKey(String userId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (User)session.get(User.class, userId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -413,12 +424,6 @@ public class UserPersistence extends BasePersistence {
 
 	public User findByC_U(String companyId, String userId)
 		throws NoSuchUserException, SystemException {
-		return findByC_U(companyId, userId, true);
-	}
-
-	public User findByC_U(String companyId, String userId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchUserException, SystemException {
 		Session session = null;
 
 		try {
@@ -468,6 +473,63 @@ public class UserPersistence extends BasePersistence {
 				msg += userId;
 				msg += StringPool.CLOSE_CURLY_BRACE;
 				throw new NoSuchUserException(msg);
+			}
+
+			User user = (User)list.get(0);
+
+			return user;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public User fetchByC_U(String companyId, String userId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.User WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (userId == null) {
+				query.append("userId IS NULL");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
 			}
 
 			User user = (User)list.get(0);
@@ -694,12 +756,6 @@ public class UserPersistence extends BasePersistence {
 
 	public User findByC_EA(String companyId, String emailAddress)
 		throws NoSuchUserException, SystemException {
-		return findByC_EA(companyId, emailAddress, true);
-	}
-
-	public User findByC_EA(String companyId, String emailAddress,
-		boolean throwNoSuchObjectException)
-		throws NoSuchUserException, SystemException {
 		Session session = null;
 
 		try {
@@ -749,6 +805,63 @@ public class UserPersistence extends BasePersistence {
 				msg += emailAddress;
 				msg += StringPool.CLOSE_CURLY_BRACE;
 				throw new NoSuchUserException(msg);
+			}
+
+			User user = (User)list.get(0);
+
+			return user;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public User fetchByC_EA(String companyId, String emailAddress)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.User WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (emailAddress == null) {
+				query.append("emailAddress IS NULL");
+			}
+			else {
+				query.append("emailAddress = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (emailAddress != null) {
+				q.setString(queryPos++, emailAddress);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
 			}
 
 			User user = (User)list.get(0);
@@ -2460,7 +2573,6 @@ public class UserPersistence extends BasePersistence {
 	protected class ContainsGroup extends MappingSqlQuery {
 		protected ContainsGroup(UserPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSGROUP);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2484,8 +2596,6 @@ public class UserPersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private UserPersistence _persistence;
 	}
 
 	protected class AddGroup extends SqlUpdate {
@@ -2511,7 +2621,6 @@ public class UserPersistence extends BasePersistence {
 		protected ClearGroups(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Groups WHERE userId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2519,15 +2628,12 @@ public class UserPersistence extends BasePersistence {
 		protected void clear(String userId) {
 			update(new Object[] { userId });
 		}
-
-		private UserPersistence _persistence;
 	}
 
 	protected class RemoveGroup extends SqlUpdate {
 		protected RemoveGroup(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Groups WHERE userId = ? AND groupId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2536,14 +2642,11 @@ public class UserPersistence extends BasePersistence {
 		protected void remove(String userId, String groupId) {
 			update(new Object[] { userId, groupId });
 		}
-
-		private UserPersistence _persistence;
 	}
 
 	protected class ContainsOrganization extends MappingSqlQuery {
 		protected ContainsOrganization(UserPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSORGANIZATION);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2567,8 +2670,6 @@ public class UserPersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private UserPersistence _persistence;
 	}
 
 	protected class AddOrganization extends SqlUpdate {
@@ -2595,7 +2696,6 @@ public class UserPersistence extends BasePersistence {
 		protected ClearOrganizations(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Orgs WHERE userId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2603,15 +2703,12 @@ public class UserPersistence extends BasePersistence {
 		protected void clear(String userId) {
 			update(new Object[] { userId });
 		}
-
-		private UserPersistence _persistence;
 	}
 
 	protected class RemoveOrganization extends SqlUpdate {
 		protected RemoveOrganization(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Orgs WHERE userId = ? AND organizationId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2620,14 +2717,11 @@ public class UserPersistence extends BasePersistence {
 		protected void remove(String userId, String organizationId) {
 			update(new Object[] { userId, organizationId });
 		}
-
-		private UserPersistence _persistence;
 	}
 
 	protected class ContainsPermission extends MappingSqlQuery {
 		protected ContainsPermission(UserPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSPERMISSION);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2651,8 +2745,6 @@ public class UserPersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private UserPersistence _persistence;
 	}
 
 	protected class AddPermission extends SqlUpdate {
@@ -2678,7 +2770,6 @@ public class UserPersistence extends BasePersistence {
 		protected ClearPermissions(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Permissions WHERE userId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2686,15 +2777,12 @@ public class UserPersistence extends BasePersistence {
 		protected void clear(String userId) {
 			update(new Object[] { userId });
 		}
-
-		private UserPersistence _persistence;
 	}
 
 	protected class RemovePermission extends SqlUpdate {
 		protected RemovePermission(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Permissions WHERE userId = ? AND permissionId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2703,14 +2791,11 @@ public class UserPersistence extends BasePersistence {
 		protected void remove(String userId, String permissionId) {
 			update(new Object[] { userId, permissionId });
 		}
-
-		private UserPersistence _persistence;
 	}
 
 	protected class ContainsRole extends MappingSqlQuery {
 		protected ContainsRole(UserPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSROLE);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2734,8 +2819,6 @@ public class UserPersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private UserPersistence _persistence;
 	}
 
 	protected class AddRole extends SqlUpdate {
@@ -2761,7 +2844,6 @@ public class UserPersistence extends BasePersistence {
 		protected ClearRoles(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Roles WHERE userId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2769,15 +2851,12 @@ public class UserPersistence extends BasePersistence {
 		protected void clear(String userId) {
 			update(new Object[] { userId });
 		}
-
-		private UserPersistence _persistence;
 	}
 
 	protected class RemoveRole extends SqlUpdate {
 		protected RemoveRole(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Roles WHERE userId = ? AND roleId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2786,14 +2865,11 @@ public class UserPersistence extends BasePersistence {
 		protected void remove(String userId, String roleId) {
 			update(new Object[] { userId, roleId });
 		}
-
-		private UserPersistence _persistence;
 	}
 
 	protected class ContainsUserGroup extends MappingSqlQuery {
 		protected ContainsUserGroup(UserPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSUSERGROUP);
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2817,8 +2893,6 @@ public class UserPersistence extends BasePersistence {
 
 			return false;
 		}
-
-		private UserPersistence _persistence;
 	}
 
 	protected class AddUserGroup extends SqlUpdate {
@@ -2844,7 +2918,6 @@ public class UserPersistence extends BasePersistence {
 		protected ClearUserGroups(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_UserGroups WHERE userId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2852,15 +2925,12 @@ public class UserPersistence extends BasePersistence {
 		protected void clear(String userId) {
 			update(new Object[] { userId });
 		}
-
-		private UserPersistence _persistence;
 	}
 
 	protected class RemoveUserGroup extends SqlUpdate {
 		protected RemoveUserGroup(UserPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_UserGroups WHERE userId = ? AND userGroupId = ?");
-			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
@@ -2869,8 +2939,6 @@ public class UserPersistence extends BasePersistence {
 		protected void remove(String userId, String userGroupId) {
 			update(new Object[] { userId, userGroupId });
 		}
-
-		private UserPersistence _persistence;
 	}
 
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Users_Groups ON (Users_Groups.userId = ?) AND (Users_Groups.groupId = Group_.groupId)";

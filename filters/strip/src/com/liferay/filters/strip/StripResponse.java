@@ -41,8 +41,6 @@ public class StripResponse extends HttpServletResponseWrapper {
 
 	public StripResponse(HttpServletResponse res) {
 		super(res);
-
-		_res = res;
 	}
 
 	public void finishResponse() {
@@ -114,7 +112,6 @@ public class StripResponse extends HttpServletResponseWrapper {
 		return new StripStream(_baos);
 	}
 
-	private HttpServletResponse _res = null;
 	private ByteArrayOutputStream _baos = new ByteArrayOutputStream();
 	private ServletOutputStream _stream = null;
 	private PrintWriter _writer = null;

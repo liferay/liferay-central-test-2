@@ -34,8 +34,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -63,8 +61,11 @@ public class ImagePersistence extends BasePersistence {
 			Image image = (Image)session.get(Image.class, imageId);
 
 			if (image == null) {
-				_log.warn("No Image exists with the primary key " +
-					imageId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Image exists with the primary key " +
+						imageId.toString());
+				}
+
 				throw new NoSuchImageException(
 					"No Image exists with the primary key " +
 					imageId.toString());
@@ -134,12 +135,6 @@ public class ImagePersistence extends BasePersistence {
 
 	public Image findByPrimaryKey(String imageId)
 		throws NoSuchImageException, SystemException {
-		return findByPrimaryKey(imageId, true);
-	}
-
-	public Image findByPrimaryKey(String imageId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchImageException, SystemException {
 		Session session = null;
 
 		try {
@@ -148,10 +143,9 @@ public class ImagePersistence extends BasePersistence {
 			Image image = (Image)session.get(Image.class, imageId);
 
 			if (image == null) {
-				_log.warn("No Image exists with the primary key " +
-					imageId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No Image exists with the primary key " +
+						imageId.toString());
 					throw new NoSuchImageException(
 						"No Image exists with the primary key " +
 						imageId.toString());
@@ -159,6 +153,22 @@ public class ImagePersistence extends BasePersistence {
 			}
 
 			return image;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Image fetchByPrimaryKey(String imageId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (Image)session.get(Image.class, imageId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

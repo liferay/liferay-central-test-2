@@ -35,13 +35,11 @@ import com.liferay.portal.shared.util.MethodInvoker;
 import com.liferay.portal.shared.util.MethodWrapper;
 import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.util.ObjectValuePair;
-import com.liferay.util.StringPool;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.ServletException;
@@ -124,35 +122,6 @@ public class TunnelServlet extends HttpServlet {
 			}
 		}
 	}
-
-	private String _getCompanyId(String userId)
-		throws PortalException, SystemException {
-
-		if (userId == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return UserLocalServiceUtil.getUserById(userId).getCompanyId();
-		}
-	}
-
-	private String _getPortletId(String className) {
-		String portletId = null;
-
-		try {
-			Object obj = Class.forName(className).newInstance();
-
-			Field field = obj.getClass().getField(_PORTLET_ID);
-
-			portletId = (String)field.get(obj);
-		}
-		catch (Exception e) {
-		}
-
-		return portletId;
-	}
-
-	private static final String _PORTLET_ID = "PORTLET_ID";
 
 	private static Log _log = LogFactory.getLog(TunnelServlet.class);
 

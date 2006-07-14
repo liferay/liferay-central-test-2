@@ -41,7 +41,6 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -170,6 +169,5 @@ public class WordsUtil {
 	private List _dictionaryList;
 	private Set _dictionarySet;
 	private SpellDictionaryHashMap _spellDictionary;
-	private Random _random = new Random();
 
 }

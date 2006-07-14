@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,8 +68,11 @@ public class MBMessageFlagPersistence extends BasePersistence {
 					mbMessageFlagPK);
 
 			if (mbMessageFlag == null) {
-				_log.warn("No MBMessageFlag exists with the primary key " +
-					mbMessageFlagPK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No MBMessageFlag exists with the primary key " +
+						mbMessageFlagPK.toString());
+				}
+
 				throw new NoSuchMessageFlagException(
 					"No MBMessageFlag exists with the primary key " +
 					mbMessageFlagPK.toString());
@@ -142,12 +144,6 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 	public MBMessageFlag findByPrimaryKey(MBMessageFlagPK mbMessageFlagPK)
 		throws NoSuchMessageFlagException, SystemException {
-		return findByPrimaryKey(mbMessageFlagPK, true);
-	}
-
-	public MBMessageFlag findByPrimaryKey(MBMessageFlagPK mbMessageFlagPK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchMessageFlagException, SystemException {
 		Session session = null;
 
 		try {
@@ -157,10 +153,9 @@ public class MBMessageFlagPersistence extends BasePersistence {
 					mbMessageFlagPK);
 
 			if (mbMessageFlag == null) {
-				_log.warn("No MBMessageFlag exists with the primary key " +
-					mbMessageFlagPK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No MBMessageFlag exists with the primary key " +
+						mbMessageFlagPK.toString());
 					throw new NoSuchMessageFlagException(
 						"No MBMessageFlag exists with the primary key " +
 						mbMessageFlagPK.toString());
@@ -168,6 +163,24 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			}
 
 			return mbMessageFlag;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public MBMessageFlag fetchByPrimaryKey(MBMessageFlagPK mbMessageFlagPK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (MBMessageFlag)session.get(MBMessageFlag.class,
+				mbMessageFlagPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

@@ -38,7 +38,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +67,12 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 					orgGroupPermissionPK);
 
 			if (orgGroupPermission == null) {
-				_log.warn("No OrgGroupPermission exists with the primary key " +
-					orgGroupPermissionPK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"No OrgGroupPermission exists with the primary key " +
+						orgGroupPermissionPK.toString());
+				}
+
 				throw new NoSuchOrgGroupPermissionException(
 					"No OrgGroupPermission exists with the primary key " +
 					orgGroupPermissionPK.toString());
@@ -139,13 +142,6 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 	public OrgGroupPermission findByPrimaryKey(
 		OrgGroupPermissionPK orgGroupPermissionPK)
 		throws NoSuchOrgGroupPermissionException, SystemException {
-		return findByPrimaryKey(orgGroupPermissionPK, true);
-	}
-
-	public OrgGroupPermission findByPrimaryKey(
-		OrgGroupPermissionPK orgGroupPermissionPK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchOrgGroupPermissionException, SystemException {
 		Session session = null;
 
 		try {
@@ -155,10 +151,10 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 					orgGroupPermissionPK);
 
 			if (orgGroupPermission == null) {
-				_log.warn("No OrgGroupPermission exists with the primary key " +
-					orgGroupPermissionPK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"No OrgGroupPermission exists with the primary key " +
+						orgGroupPermissionPK.toString());
 					throw new NoSuchOrgGroupPermissionException(
 						"No OrgGroupPermission exists with the primary key " +
 						orgGroupPermissionPK.toString());
@@ -166,6 +162,24 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			}
 
 			return orgGroupPermission;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public OrgGroupPermission fetchByPrimaryKey(
+		OrgGroupPermissionPK orgGroupPermissionPK) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (OrgGroupPermission)session.get(OrgGroupPermission.class,
+				orgGroupPermissionPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

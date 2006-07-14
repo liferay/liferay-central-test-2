@@ -172,8 +172,6 @@ public class EncryptTag extends TagSupport {
 	}
 
 	public void setUnencryptedParams(String unencryptedParams) {
-		_unencryptedParams = unencryptedParams;
-
 		_unencryptedParamsSet.clear();
 
 		String[] unencryptedParamsArray = StringUtil.split(unencryptedParams);
@@ -196,7 +194,6 @@ public class EncryptTag extends TagSupport {
 	private String _className;
 	private String _style;
 	private String _protocol;
-	private String _unencryptedParams;
 	private Set _unencryptedParamsSet = new HashSet();
 	private String _url;
 	private String _target;

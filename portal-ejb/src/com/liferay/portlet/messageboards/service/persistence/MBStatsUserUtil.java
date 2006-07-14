@@ -125,13 +125,10 @@ public class MBStatsUserUtil {
 		return getPersistence().findByPrimaryKey(mbStatsUserPK);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBStatsUser findByPrimaryKey(
-		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK mbStatsUserPK,
-		boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.messageboards.NoSuchStatsUserException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(mbStatsUserPK,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.messageboards.model.MBStatsUser fetchByPrimaryKey(
+		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK mbStatsUserPK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(mbStatsUserPK);
 	}
 
 	public static java.util.List findByGroupId(java.lang.String groupId)

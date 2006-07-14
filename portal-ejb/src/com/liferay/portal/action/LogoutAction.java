@@ -39,8 +39,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.PageContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -111,7 +109,5 @@ public class LogoutAction extends Action {
 			return mapping.findForward(Constants.COMMON_ERROR);
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(LogoutAction.class);
 
 }

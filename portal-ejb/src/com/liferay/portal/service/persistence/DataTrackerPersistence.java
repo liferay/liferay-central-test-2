@@ -34,8 +34,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -64,8 +62,11 @@ public class DataTrackerPersistence extends BasePersistence {
 					dataTrackerId);
 
 			if (dataTracker == null) {
-				_log.warn("No DataTracker exists with the primary key " +
-					dataTrackerId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No DataTracker exists with the primary key " +
+						dataTrackerId.toString());
+				}
+
 				throw new NoSuchDataTrackerException(
 					"No DataTracker exists with the primary key " +
 					dataTrackerId.toString());
@@ -157,12 +158,6 @@ public class DataTrackerPersistence extends BasePersistence {
 
 	public DataTracker findByPrimaryKey(String dataTrackerId)
 		throws NoSuchDataTrackerException, SystemException {
-		return findByPrimaryKey(dataTrackerId, true);
-	}
-
-	public DataTracker findByPrimaryKey(String dataTrackerId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchDataTrackerException, SystemException {
 		Session session = null;
 
 		try {
@@ -172,10 +167,9 @@ public class DataTrackerPersistence extends BasePersistence {
 					dataTrackerId);
 
 			if (dataTracker == null) {
-				_log.warn("No DataTracker exists with the primary key " +
-					dataTrackerId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No DataTracker exists with the primary key " +
+						dataTrackerId.toString());
 					throw new NoSuchDataTrackerException(
 						"No DataTracker exists with the primary key " +
 						dataTrackerId.toString());
@@ -183,6 +177,23 @@ public class DataTrackerPersistence extends BasePersistence {
 			}
 
 			return dataTracker;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public DataTracker fetchByPrimaryKey(String dataTrackerId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (DataTracker)session.get(DataTracker.class, dataTrackerId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

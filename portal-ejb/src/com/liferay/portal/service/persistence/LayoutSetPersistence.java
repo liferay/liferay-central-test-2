@@ -34,8 +34,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -64,8 +62,11 @@ public class LayoutSetPersistence extends BasePersistence {
 					ownerId);
 
 			if (layoutSet == null) {
-				_log.warn("No LayoutSet exists with the primary key " +
-					ownerId.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No LayoutSet exists with the primary key " +
+						ownerId.toString());
+				}
+
 				throw new NoSuchLayoutSetException(
 					"No LayoutSet exists with the primary key " +
 					ownerId.toString());
@@ -150,12 +151,6 @@ public class LayoutSetPersistence extends BasePersistence {
 
 	public LayoutSet findByPrimaryKey(String ownerId)
 		throws NoSuchLayoutSetException, SystemException {
-		return findByPrimaryKey(ownerId, true);
-	}
-
-	public LayoutSet findByPrimaryKey(String ownerId,
-		boolean throwNoSuchObjectException)
-		throws NoSuchLayoutSetException, SystemException {
 		Session session = null;
 
 		try {
@@ -165,10 +160,9 @@ public class LayoutSetPersistence extends BasePersistence {
 					ownerId);
 
 			if (layoutSet == null) {
-				_log.warn("No LayoutSet exists with the primary key " +
-					ownerId.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No LayoutSet exists with the primary key " +
+						ownerId.toString());
 					throw new NoSuchLayoutSetException(
 						"No LayoutSet exists with the primary key " +
 						ownerId.toString());
@@ -176,6 +170,23 @@ public class LayoutSetPersistence extends BasePersistence {
 			}
 
 			return layoutSet;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public LayoutSet fetchByPrimaryKey(String ownerId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (LayoutSet)session.get(LayoutSet.class, ownerId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

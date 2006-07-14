@@ -39,7 +39,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -71,9 +70,12 @@ public class JournalContentSearchPersistence extends BasePersistence {
 					journalContentSearchPK);
 
 			if (journalContentSearch == null) {
-				_log.warn(
-					"No JournalContentSearch exists with the primary key " +
-					journalContentSearchPK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"No JournalContentSearch exists with the primary key " +
+						journalContentSearchPK.toString());
+				}
+
 				throw new NoSuchContentSearchException(
 					"No JournalContentSearch exists with the primary key " +
 					journalContentSearchPK.toString());
@@ -150,13 +152,6 @@ public class JournalContentSearchPersistence extends BasePersistence {
 	public JournalContentSearch findByPrimaryKey(
 		JournalContentSearchPK journalContentSearchPK)
 		throws NoSuchContentSearchException, SystemException {
-		return findByPrimaryKey(journalContentSearchPK, true);
-	}
-
-	public JournalContentSearch findByPrimaryKey(
-		JournalContentSearchPK journalContentSearchPK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchContentSearchException, SystemException {
 		Session session = null;
 
 		try {
@@ -166,11 +161,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 					journalContentSearchPK);
 
 			if (journalContentSearch == null) {
-				_log.warn(
-					"No JournalContentSearch exists with the primary key " +
-					journalContentSearchPK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"No JournalContentSearch exists with the primary key " +
+						journalContentSearchPK.toString());
 					throw new NoSuchContentSearchException(
 						"No JournalContentSearch exists with the primary key " +
 						journalContentSearchPK.toString());
@@ -178,6 +172,25 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 
 			return journalContentSearch;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public JournalContentSearch fetchByPrimaryKey(
+		JournalContentSearchPK journalContentSearchPK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (JournalContentSearch)session.get(JournalContentSearch.class,
+				journalContentSearchPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

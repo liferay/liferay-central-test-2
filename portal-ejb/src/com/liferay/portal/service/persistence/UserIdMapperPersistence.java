@@ -38,7 +38,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,8 +67,11 @@ public class UserIdMapperPersistence extends BasePersistence {
 					userIdMapperPK);
 
 			if (userIdMapper == null) {
-				_log.warn("No UserIdMapper exists with the primary key " +
-					userIdMapperPK.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("No UserIdMapper exists with the primary key " +
+						userIdMapperPK.toString());
+				}
+
 				throw new NoSuchUserIdMapperException(
 					"No UserIdMapper exists with the primary key " +
 					userIdMapperPK.toString());
@@ -142,12 +144,6 @@ public class UserIdMapperPersistence extends BasePersistence {
 
 	public UserIdMapper findByPrimaryKey(UserIdMapperPK userIdMapperPK)
 		throws NoSuchUserIdMapperException, SystemException {
-		return findByPrimaryKey(userIdMapperPK, true);
-	}
-
-	public UserIdMapper findByPrimaryKey(UserIdMapperPK userIdMapperPK,
-		boolean throwNoSuchObjectException)
-		throws NoSuchUserIdMapperException, SystemException {
 		Session session = null;
 
 		try {
@@ -157,10 +153,9 @@ public class UserIdMapperPersistence extends BasePersistence {
 					userIdMapperPK);
 
 			if (userIdMapper == null) {
-				_log.warn("No UserIdMapper exists with the primary key " +
-					userIdMapperPK.toString());
-
-				if (throwNoSuchObjectException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("No UserIdMapper exists with the primary key " +
+						userIdMapperPK.toString());
 					throw new NoSuchUserIdMapperException(
 						"No UserIdMapper exists with the primary key " +
 						userIdMapperPK.toString());
@@ -168,6 +163,23 @@ public class UserIdMapperPersistence extends BasePersistence {
 			}
 
 			return userIdMapper;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public UserIdMapper fetchByPrimaryKey(UserIdMapperPK userIdMapperPK)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (UserIdMapper)session.get(UserIdMapper.class, userIdMapperPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

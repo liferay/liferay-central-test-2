@@ -65,8 +65,4 @@ public class WebSiteWar {
 		}
 	}
 
-	private String _portalExtProperties = null;
-	private String _orionConfigDir = null;
-	private int _nfcListenPort = 7777;
-
 }

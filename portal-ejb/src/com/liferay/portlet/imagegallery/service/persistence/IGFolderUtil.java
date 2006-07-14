@@ -125,12 +125,9 @@ public class IGFolderUtil {
 		return getPersistence().findByPrimaryKey(folderId);
 	}
 
-	public static com.liferay.portlet.imagegallery.model.IGFolder findByPrimaryKey(
-		java.lang.String folderId, boolean throwNoSuchObjectException)
-		throws com.liferay.portlet.imagegallery.NoSuchFolderException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(folderId,
-			throwNoSuchObjectException);
+	public static com.liferay.portlet.imagegallery.model.IGFolder fetchByPrimaryKey(
+		java.lang.String folderId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(folderId);
 	}
 
 	public static java.util.List findByGroupId(java.lang.String groupId)
