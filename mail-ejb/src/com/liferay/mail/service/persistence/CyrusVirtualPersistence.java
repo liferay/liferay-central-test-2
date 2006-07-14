@@ -27,7 +27,6 @@ import com.liferay.mail.model.CyrusVirtual;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -44,6 +43,9 @@ import org.hibernate.Session;
  */
 public class CyrusVirtualPersistence extends BasePersistence {
 
+	public static String FIND_BY_USER_ID =
+		"FROM " + CyrusVirtual.class.getName() + " WHERE userId = ?";
+
 	public void remove(String emailAddress)
 		throws NoSuchCyrusVirtualException, SystemException {
 
@@ -52,10 +54,10 @@ public class CyrusVirtualPersistence extends BasePersistence {
 		try {
 			session = getSessionFactory().openSession();
 
-			CyrusVirtualHBM hbm = (CyrusVirtualHBM)session.load(
-				CyrusVirtualHBM.class, emailAddress);
+			CyrusVirtual virtual = (CyrusVirtual)session.load(
+				CyrusVirtual.class, emailAddress);
 
-			session.delete(hbm);
+			session.delete(virtual);
 
 			session.flush();
 		}
@@ -72,25 +74,25 @@ public class CyrusVirtualPersistence extends BasePersistence {
 		}
 	}
 
-	public void update(CyrusVirtual user) throws SystemException {
+	public void update(CyrusVirtual virtual) throws SystemException {
 		Session session = null;
 
 		try {
 			session = getSessionFactory().openSession();
 
 			try {
-				CyrusVirtualHBM hbm = (CyrusVirtualHBM)session.load(
-					CyrusVirtualHBM.class, user.getEmailAddress());
+				CyrusVirtual virtualModel = (CyrusVirtual)session.load(
+					CyrusVirtual.class, virtual.getEmailAddress());
 
-				hbm.setUserId(user.getUserId());
+				virtualModel.setUserId(virtual.getUserId());
 
 				session.flush();
 			}
 			catch (ObjectNotFoundException onfe) {
-				CyrusVirtualHBM hbm = new CyrusVirtualHBM(
-					user.getEmailAddress(), user.getUserId());
+				CyrusVirtual virtualModel = new CyrusVirtual(
+					virtual.getEmailAddress(), virtual.getUserId());
 
-				session.save(hbm);
+				session.save(virtualModel);
 
 				session.flush();
 			}
@@ -103,26 +105,15 @@ public class CyrusVirtualPersistence extends BasePersistence {
 		}
 	}
 
-	public CyrusVirtual model(CyrusVirtualHBM hbm) {
-		return new CyrusVirtual(hbm.getEmailAddress(), hbm.getUserId());
-	}
-
 	public CyrusVirtual findByPrimaryKey(String emailAddress)
 		throws NoSuchCyrusVirtualException, SystemException {
-
-		CyrusVirtual model = null;
 
 		Session session = null;
 
 		try {
 			session = getSessionFactory().openSession();
 
-			CyrusVirtualHBM hbm = (CyrusVirtualHBM)session.load(
-				CyrusVirtualHBM.class, emailAddress);
-
-			model = model(hbm);
-
-			return model;
+			return (CyrusVirtual)session.load(CyrusVirtual.class, emailAddress);
 		}
 		catch (HibernateException he) {
 			if (he instanceof ObjectNotFoundException) {
@@ -143,29 +134,11 @@ public class CyrusVirtualPersistence extends BasePersistence {
 		try {
 			session = getSessionFactory().openSession();
 
-			StringBuffer query = new StringBuffer();
-			query.append("FROM CyrusVirtual ");
-			query.append("IN CLASS ");
-			query.append(CyrusVirtualHBM.class.getName());
-			query.append(" ");
-			query.append("WHERE ");
-			query.append("userId = ?");
-
-			Query q = session.createQuery(query.toString());
+			Query q = session.createQuery(FIND_BY_USER_ID);
 
 			q.setString(0, userId);
 
-			Iterator itr = q.iterate();
-
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				CyrusVirtualHBM hbm = (CyrusVirtualHBM)itr.next();
-
-				list.add(model(hbm));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -181,24 +154,16 @@ public class CyrusVirtualPersistence extends BasePersistence {
 		try {
 			session = getSessionFactory().openSession();
 
-			StringBuffer query = new StringBuffer();
-			query.append("FROM CyrusVirtual ");
-			query.append("IN CLASS ");
-			query.append(CyrusVirtualHBM.class.getName());
-			query.append(" ");
-			query.append("WHERE ");
-			query.append("userId = ?");
-
-			Query q = session.createQuery(query.toString());
+			Query q = session.createQuery(FIND_BY_USER_ID);
 
 			q.setString(0, userId);
 
 			Iterator itr = q.iterate();
 
 			while (itr.hasNext()) {
-				CyrusVirtualHBM hbm = (CyrusVirtualHBM)itr.next();
+				CyrusVirtual virtual = (CyrusVirtual)itr.next();
 
-				session.delete(hbm);
+				session.delete(virtual);
 			}
 
 			session.flush();

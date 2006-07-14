@@ -22,6 +22,9 @@
 		</property>
 	</bean>
 	<bean id="com.ext.portlet.reports.service.persistence.ReportsEntryPersistence" class="com.ext.portlet.reports.service.persistence.ReportsEntryPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>

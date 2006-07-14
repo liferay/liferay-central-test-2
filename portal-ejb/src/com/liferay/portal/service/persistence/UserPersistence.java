@@ -90,6 +90,11 @@ public class UserPersistence extends BasePersistence {
 
 			session.delete(user);
 			session.flush();
+			clearGroups.clear(userId);
+			clearOrganizations.clear(userId);
+			clearPermissions.clear(userId);
+			clearRoles.clear(userId);
+			clearUserGroups.clear(userId);
 
 			return user;
 		}

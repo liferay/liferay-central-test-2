@@ -49,10 +49,6 @@ public class CyrusUserUtil {
 		getPersistence().update(user);
 	}
 
-	public static CyrusUser model(CyrusUserHBM hbm) {
-		return getPersistence().model(hbm);
-	}
-
 	public static CyrusUser findByPrimaryKey(String userId)
 		throws NoSuchCyrusUserException, SystemException {
 

@@ -22,6 +22,7 @@
 
 package com.liferay.counter.service.persistence;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
@@ -51,15 +52,14 @@ public class CounterPersistence extends BasePersistence {
 
 			List list = new ArrayList();
 
-			Query q = session.createQuery(
-				"FROM Counter IN CLASS " + CounterHBM.class.getName());
+			Query q = session.createQuery("FROM " + Counter.class.getName());
 
 			Iterator itr = q.iterate();
 
 			while (itr.hasNext()) {
-				CounterHBM counterHBM = (CounterHBM)itr.next();
+				Counter counter = (Counter)itr.next();
 
-				list.add(counterHBM.getName());
+				list.add(counter.getName());
 			}
 
 			Collections.sort(list);
@@ -92,26 +92,25 @@ public class CounterPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			CounterHBM counterHBM = null;
+			Counter counter = null;
 
 			try {
-				counterHBM =
-					(CounterHBM)session.load(CounterHBM.class, name);
+				counter = (Counter)session.load(Counter.class, name);
 			}
 			catch (ObjectNotFoundException onfe) {
-				counterHBM = new CounterHBM();
+				counter = new Counter();
 
-				counterHBM.setName(name);
-				counterHBM.setCurrentId(_DEFAULT_CURRENT_ID);
+				counter.setName(name);
+				counter.setCurrentId(_DEFAULT_CURRENT_ID);
 
-				session.save(counterHBM);
+				session.save(counter);
 
 				session.flush();
 			}
 
-			long currentId = counterHBM.getCurrentId() + size;
+			long currentId = counter.getCurrentId() + size;
 
-			counterHBM.setCurrentId(currentId);
+			counter.setCurrentId(currentId);
 
 			session.flush();
 
@@ -135,19 +134,18 @@ public class CounterPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			CounterHBM counterHBM =
-				(CounterHBM)session.load(CounterHBM.class, oldName);
+			Counter counter = (Counter)session.load(Counter.class, oldName);
 
-			long currentId = counterHBM.getCurrentId();
+			long currentId = counter.getCurrentId();
 
-			session.delete(counterHBM);
+			session.delete(counter);
 
-			counterHBM = new CounterHBM();
+			counter = new Counter();
 
-			counterHBM.setName(newName);
-			counterHBM.setCurrentId(currentId);
+			counter.setName(newName);
+			counter.setCurrentId(currentId);
 
-			session.save(counterHBM);
+			session.save(counter);
 
 			session.flush();
 		}
@@ -167,10 +165,9 @@ public class CounterPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			CounterHBM counterHBM =
-				(CounterHBM)session.load(CounterHBM.class, name);
+			Counter counter = (Counter)session.load(Counter.class, name);
 
-			session.delete(counterHBM);
+			session.delete(counter);
 
 			session.flush();
 		}

@@ -91,6 +91,11 @@ public class GroupPersistence extends BasePersistence {
 
 			session.delete(group);
 			session.flush();
+			clearOrganizations.clear(groupId);
+			clearPermissions.clear(groupId);
+			clearRoles.clear(groupId);
+			clearUserGroups.clear(groupId);
+			clearUsers.clear(groupId);
 
 			return group;
 		}

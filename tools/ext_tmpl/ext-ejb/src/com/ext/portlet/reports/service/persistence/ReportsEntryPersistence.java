@@ -1,6 +1,7 @@
 package com.ext.portlet.reports.service.persistence;
 
 import com.ext.portlet.reports.NoSuchEntryException;
+import com.ext.portlet.reports.model.ReportsEntry;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
@@ -24,25 +25,25 @@ import java.util.List;
 public class ReportsEntryPersistence extends BasePersistence {
     private static Log _log = LogFactory.getLog(ReportsEntryPersistence.class);
 
-    public com.ext.portlet.reports.model.ReportsEntry create(String entryId) {
-        ReportsEntryHBM reportsEntryHBM = new ReportsEntryHBM();
-        reportsEntryHBM.setNew(true);
-        reportsEntryHBM.setPrimaryKey(entryId);
+    public ReportsEntry create(String entryId) {
+        ReportsEntry reportsEntry = new ReportsEntry();
+        reportsEntry.setNew(true);
+        reportsEntry.setPrimaryKey(entryId);
 
-        return ReportsEntryHBMUtil.model(reportsEntryHBM);
+        return reportsEntry;
     }
 
-    public com.ext.portlet.reports.model.ReportsEntry remove(String entryId)
+    public ReportsEntry remove(String entryId)
         throws NoSuchEntryException, SystemException {
         Session session = null;
 
         try {
             session = openSession();
 
-            ReportsEntryHBM reportsEntryHBM = (ReportsEntryHBM) session.get(ReportsEntryHBM.class,
+            ReportsEntry reportsEntry = (ReportsEntry) session.get(ReportsEntry.class,
                     entryId);
 
-            if (reportsEntryHBM == null) {
+            if (reportsEntry == null) {
                 _log.warn("No ReportsEntry exists with the primary key " +
                     entryId.toString());
                 throw new NoSuchEntryException(
@@ -50,10 +51,10 @@ public class ReportsEntryPersistence extends BasePersistence {
                     entryId.toString());
             }
 
-            session.delete(reportsEntryHBM);
+            session.delete(reportsEntry);
             session.flush();
 
-            return ReportsEntryHBMUtil.model(reportsEntryHBM);
+            return reportsEntry;
         } catch (HibernateException he) {
             throw new SystemException(he);
         } finally {
@@ -71,38 +72,38 @@ public class ReportsEntryPersistence extends BasePersistence {
                 session = openSession();
 
                 if (reportsEntry.isNew()) {
-                    ReportsEntryHBM reportsEntryHBM = new ReportsEntryHBM();
-                    reportsEntryHBM.setEntryId(reportsEntry.getEntryId());
-                    reportsEntryHBM.setCompanyId(reportsEntry.getCompanyId());
-                    reportsEntryHBM.setUserId(reportsEntry.getUserId());
-                    reportsEntryHBM.setUserName(reportsEntry.getUserName());
-                    reportsEntryHBM.setCreateDate(reportsEntry.getCreateDate());
-                    reportsEntryHBM.setModifiedDate(reportsEntry.getModifiedDate());
-                    reportsEntryHBM.setName(reportsEntry.getName());
-                    session.save(reportsEntryHBM);
+                    ReportsEntry reportsEntryModel = new ReportsEntry();
+                    reportsEntryModel.setEntryId(reportsEntry.getEntryId());
+                    reportsEntryModel.setCompanyId(reportsEntry.getCompanyId());
+                    reportsEntryModel.setUserId(reportsEntry.getUserId());
+                    reportsEntryModel.setUserName(reportsEntry.getUserName());
+                    reportsEntryModel.setCreateDate(reportsEntry.getCreateDate());
+                    reportsEntryModel.setModifiedDate(reportsEntry.getModifiedDate());
+                    reportsEntryModel.setName(reportsEntry.getName());
+                    session.save(reportsEntryModel);
                     session.flush();
                 } else {
-                    ReportsEntryHBM reportsEntryHBM = (ReportsEntryHBM) session.get(ReportsEntryHBM.class,
+                    ReportsEntry reportsEntryModel = (ReportsEntry) session.get(ReportsEntry.class,
                             reportsEntry.getPrimaryKey());
 
-                    if (reportsEntryHBM != null) {
-                        reportsEntryHBM.setCompanyId(reportsEntry.getCompanyId());
-                        reportsEntryHBM.setUserId(reportsEntry.getUserId());
-                        reportsEntryHBM.setUserName(reportsEntry.getUserName());
-                        reportsEntryHBM.setCreateDate(reportsEntry.getCreateDate());
-                        reportsEntryHBM.setModifiedDate(reportsEntry.getModifiedDate());
-                        reportsEntryHBM.setName(reportsEntry.getName());
+                    if (reportsEntryModel != null) {
+                        reportsEntryModel.setCompanyId(reportsEntry.getCompanyId());
+                        reportsEntryModel.setUserId(reportsEntry.getUserId());
+                        reportsEntryModel.setUserName(reportsEntry.getUserName());
+                        reportsEntryModel.setCreateDate(reportsEntry.getCreateDate());
+                        reportsEntryModel.setModifiedDate(reportsEntry.getModifiedDate());
+                        reportsEntryModel.setName(reportsEntry.getName());
                         session.flush();
                     } else {
-                        reportsEntryHBM = new ReportsEntryHBM();
-                        reportsEntryHBM.setEntryId(reportsEntry.getEntryId());
-                        reportsEntryHBM.setCompanyId(reportsEntry.getCompanyId());
-                        reportsEntryHBM.setUserId(reportsEntry.getUserId());
-                        reportsEntryHBM.setUserName(reportsEntry.getUserName());
-                        reportsEntryHBM.setCreateDate(reportsEntry.getCreateDate());
-                        reportsEntryHBM.setModifiedDate(reportsEntry.getModifiedDate());
-                        reportsEntryHBM.setName(reportsEntry.getName());
-                        session.save(reportsEntryHBM);
+                        reportsEntryModel = new ReportsEntry();
+                        reportsEntryModel.setEntryId(reportsEntry.getEntryId());
+                        reportsEntryModel.setCompanyId(reportsEntry.getCompanyId());
+                        reportsEntryModel.setUserId(reportsEntry.getUserId());
+                        reportsEntryModel.setUserName(reportsEntry.getUserName());
+                        reportsEntryModel.setCreateDate(reportsEntry.getCreateDate());
+                        reportsEntryModel.setModifiedDate(reportsEntry.getModifiedDate());
+                        reportsEntryModel.setName(reportsEntry.getName());
+                        session.save(reportsEntryModel);
                         session.flush();
                     }
                 }
@@ -119,17 +120,17 @@ public class ReportsEntryPersistence extends BasePersistence {
         }
     }
 
-    public com.ext.portlet.reports.model.ReportsEntry findByPrimaryKey(
-        String entryId) throws NoSuchEntryException, SystemException {
+    public ReportsEntry findByPrimaryKey(String entryId)
+        throws NoSuchEntryException, SystemException {
         Session session = null;
 
         try {
             session = openSession();
 
-            ReportsEntryHBM reportsEntryHBM = (ReportsEntryHBM) session.get(ReportsEntryHBM.class,
+            ReportsEntry reportsEntry = (ReportsEntry) session.get(ReportsEntry.class,
                     entryId);
 
-            if (reportsEntryHBM == null) {
+            if (reportsEntry == null) {
                 _log.warn("No ReportsEntry exists with the primary key " +
                     entryId.toString());
                 throw new NoSuchEntryException(
@@ -137,7 +138,7 @@ public class ReportsEntryPersistence extends BasePersistence {
                     entryId.toString());
             }
 
-            return ReportsEntryHBMUtil.model(reportsEntryHBM);
+            return reportsEntry;
         } catch (HibernateException he) {
             throw new SystemException(he);
         } finally {
@@ -153,10 +154,10 @@ public class ReportsEntryPersistence extends BasePersistence {
 
             StringBuffer query = new StringBuffer();
             query.append(
-                "FROM ReportsEntry IN CLASS com.ext.portlet.reports.service.persistence.ReportsEntryHBM WHERE ");
+                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
             if (companyId == null) {
-                query.append("companyId is null");
+                query.append("companyId IS NULL");
             } else {
                 query.append("companyId = ?");
             }
@@ -172,13 +173,7 @@ public class ReportsEntryPersistence extends BasePersistence {
                 q.setString(queryPos++, companyId);
             }
 
-            Iterator itr = q.list().iterator();
-            List list = new ArrayList();
-
-            while (itr.hasNext()) {
-                ReportsEntryHBM reportsEntryHBM = (ReportsEntryHBM) itr.next();
-                list.add(ReportsEntryHBMUtil.model(reportsEntryHBM));
-            }
+            List list = q.list();
 
             return list;
         } catch (HibernateException he) {
@@ -202,10 +197,10 @@ public class ReportsEntryPersistence extends BasePersistence {
 
             StringBuffer query = new StringBuffer();
             query.append(
-                "FROM ReportsEntry IN CLASS com.ext.portlet.reports.service.persistence.ReportsEntryHBM WHERE ");
+                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
             if (companyId == null) {
-                query.append("companyId is null");
+                query.append("companyId IS NULL");
             } else {
                 query.append("companyId = ?");
             }
@@ -226,15 +221,7 @@ public class ReportsEntryPersistence extends BasePersistence {
                 q.setString(queryPos++, companyId);
             }
 
-            List list = new ArrayList();
-            Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-            while (itr.hasNext()) {
-                ReportsEntryHBM reportsEntryHBM = (ReportsEntryHBM) itr.next();
-                list.add(ReportsEntryHBMUtil.model(reportsEntryHBM));
-            }
-
-            return list;
+            return QueryUtil.list(q, getDialect(), begin, end);
         } catch (HibernateException he) {
             throw new SystemException(he);
         } finally {
@@ -242,9 +229,8 @@ public class ReportsEntryPersistence extends BasePersistence {
         }
     }
 
-    public com.ext.portlet.reports.model.ReportsEntry findByCompanyId_First(
-        String companyId, OrderByComparator obc)
-        throws NoSuchEntryException, SystemException {
+    public ReportsEntry findByCompanyId_First(String companyId,
+        OrderByComparator obc) throws NoSuchEntryException, SystemException {
         List list = findByCompanyId(companyId, 0, 1, obc);
 
         if (list.size() == 0) {
@@ -255,13 +241,12 @@ public class ReportsEntryPersistence extends BasePersistence {
             msg += StringPool.CLOSE_CURLY_BRACE;
             throw new NoSuchEntryException(msg);
         } else {
-            return (com.ext.portlet.reports.model.ReportsEntry) list.get(0);
+            return (ReportsEntry) list.get(0);
         }
     }
 
-    public com.ext.portlet.reports.model.ReportsEntry findByCompanyId_Last(
-        String companyId, OrderByComparator obc)
-        throws NoSuchEntryException, SystemException {
+    public ReportsEntry findByCompanyId_Last(String companyId,
+        OrderByComparator obc) throws NoSuchEntryException, SystemException {
         int count = countByCompanyId(companyId);
         List list = findByCompanyId(companyId, count - 1, count, obc);
 
@@ -273,14 +258,14 @@ public class ReportsEntryPersistence extends BasePersistence {
             msg += StringPool.CLOSE_CURLY_BRACE;
             throw new NoSuchEntryException(msg);
         } else {
-            return (com.ext.portlet.reports.model.ReportsEntry) list.get(0);
+            return (ReportsEntry) list.get(0);
         }
     }
 
-    public com.ext.portlet.reports.model.ReportsEntry[] findByCompanyId_PrevAndNext(
-        String entryId, String companyId, OrderByComparator obc)
+    public ReportsEntry[] findByCompanyId_PrevAndNext(String entryId,
+        String companyId, OrderByComparator obc)
         throws NoSuchEntryException, SystemException {
-        com.ext.portlet.reports.model.ReportsEntry reportsEntry = findByPrimaryKey(entryId);
+        ReportsEntry reportsEntry = findByPrimaryKey(entryId);
         int count = countByCompanyId(companyId);
         Session session = null;
 
@@ -289,10 +274,10 @@ public class ReportsEntryPersistence extends BasePersistence {
 
             StringBuffer query = new StringBuffer();
             query.append(
-                "FROM ReportsEntry IN CLASS com.ext.portlet.reports.service.persistence.ReportsEntryHBM WHERE ");
+                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
             if (companyId == null) {
-                query.append("companyId is null");
+                query.append("companyId IS NULL");
             } else {
                 query.append("companyId = ?");
             }
@@ -314,11 +299,11 @@ public class ReportsEntryPersistence extends BasePersistence {
             }
 
             Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-                    reportsEntry, ReportsEntryHBMUtil.getInstance());
-            com.ext.portlet.reports.model.ReportsEntry[] array = new com.ext.portlet.reports.model.ReportsEntry[3];
-            array[0] = (com.ext.portlet.reports.model.ReportsEntry) objArray[0];
-            array[1] = (com.ext.portlet.reports.model.ReportsEntry) objArray[1];
-            array[2] = (com.ext.portlet.reports.model.ReportsEntry) objArray[2];
+                    reportsEntry);
+            ReportsEntry[] array = new ReportsEntry[3];
+            array[0] = (ReportsEntry) objArray[0];
+            array[1] = (ReportsEntry) objArray[1];
+            array[2] = (ReportsEntry) objArray[2];
 
             return array;
         } catch (HibernateException he) {
@@ -336,10 +321,10 @@ public class ReportsEntryPersistence extends BasePersistence {
 
             StringBuffer query = new StringBuffer();
             query.append(
-                "FROM ReportsEntry IN CLASS com.ext.portlet.reports.service.persistence.ReportsEntryHBM WHERE ");
+                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
             if (userId == null) {
-                query.append("userId is null");
+                query.append("userId IS NULL");
             } else {
                 query.append("userId = ?");
             }
@@ -355,13 +340,7 @@ public class ReportsEntryPersistence extends BasePersistence {
                 q.setString(queryPos++, userId);
             }
 
-            Iterator itr = q.list().iterator();
-            List list = new ArrayList();
-
-            while (itr.hasNext()) {
-                ReportsEntryHBM reportsEntryHBM = (ReportsEntryHBM) itr.next();
-                list.add(ReportsEntryHBMUtil.model(reportsEntryHBM));
-            }
+            List list = q.list();
 
             return list;
         } catch (HibernateException he) {
@@ -385,10 +364,10 @@ public class ReportsEntryPersistence extends BasePersistence {
 
             StringBuffer query = new StringBuffer();
             query.append(
-                "FROM ReportsEntry IN CLASS com.ext.portlet.reports.service.persistence.ReportsEntryHBM WHERE ");
+                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
             if (userId == null) {
-                query.append("userId is null");
+                query.append("userId IS NULL");
             } else {
                 query.append("userId = ?");
             }
@@ -409,15 +388,7 @@ public class ReportsEntryPersistence extends BasePersistence {
                 q.setString(queryPos++, userId);
             }
 
-            List list = new ArrayList();
-            Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-            while (itr.hasNext()) {
-                ReportsEntryHBM reportsEntryHBM = (ReportsEntryHBM) itr.next();
-                list.add(ReportsEntryHBMUtil.model(reportsEntryHBM));
-            }
-
-            return list;
+            return QueryUtil.list(q, getDialect(), begin, end);
         } catch (HibernateException he) {
             throw new SystemException(he);
         } finally {
@@ -425,8 +396,7 @@ public class ReportsEntryPersistence extends BasePersistence {
         }
     }
 
-    public com.ext.portlet.reports.model.ReportsEntry findByUserId_First(
-        String userId, OrderByComparator obc)
+    public ReportsEntry findByUserId_First(String userId, OrderByComparator obc)
         throws NoSuchEntryException, SystemException {
         List list = findByUserId(userId, 0, 1, obc);
 
@@ -438,12 +408,11 @@ public class ReportsEntryPersistence extends BasePersistence {
             msg += StringPool.CLOSE_CURLY_BRACE;
             throw new NoSuchEntryException(msg);
         } else {
-            return (com.ext.portlet.reports.model.ReportsEntry) list.get(0);
+            return (ReportsEntry) list.get(0);
         }
     }
 
-    public com.ext.portlet.reports.model.ReportsEntry findByUserId_Last(
-        String userId, OrderByComparator obc)
+    public ReportsEntry findByUserId_Last(String userId, OrderByComparator obc)
         throws NoSuchEntryException, SystemException {
         int count = countByUserId(userId);
         List list = findByUserId(userId, count - 1, count, obc);
@@ -456,14 +425,14 @@ public class ReportsEntryPersistence extends BasePersistence {
             msg += StringPool.CLOSE_CURLY_BRACE;
             throw new NoSuchEntryException(msg);
         } else {
-            return (com.ext.portlet.reports.model.ReportsEntry) list.get(0);
+            return (ReportsEntry) list.get(0);
         }
     }
 
-    public com.ext.portlet.reports.model.ReportsEntry[] findByUserId_PrevAndNext(
-        String entryId, String userId, OrderByComparator obc)
+    public ReportsEntry[] findByUserId_PrevAndNext(String entryId,
+        String userId, OrderByComparator obc)
         throws NoSuchEntryException, SystemException {
-        com.ext.portlet.reports.model.ReportsEntry reportsEntry = findByPrimaryKey(entryId);
+        ReportsEntry reportsEntry = findByPrimaryKey(entryId);
         int count = countByUserId(userId);
         Session session = null;
 
@@ -472,10 +441,10 @@ public class ReportsEntryPersistence extends BasePersistence {
 
             StringBuffer query = new StringBuffer();
             query.append(
-                "FROM ReportsEntry IN CLASS com.ext.portlet.reports.service.persistence.ReportsEntryHBM WHERE ");
+                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
             if (userId == null) {
-                query.append("userId is null");
+                query.append("userId IS NULL");
             } else {
                 query.append("userId = ?");
             }
@@ -497,11 +466,11 @@ public class ReportsEntryPersistence extends BasePersistence {
             }
 
             Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-                    reportsEntry, ReportsEntryHBMUtil.getInstance());
-            com.ext.portlet.reports.model.ReportsEntry[] array = new com.ext.portlet.reports.model.ReportsEntry[3];
-            array[0] = (com.ext.portlet.reports.model.ReportsEntry) objArray[0];
-            array[1] = (com.ext.portlet.reports.model.ReportsEntry) objArray[1];
-            array[2] = (com.ext.portlet.reports.model.ReportsEntry) objArray[2];
+                    reportsEntry);
+            ReportsEntry[] array = new ReportsEntry[3];
+            array[0] = (ReportsEntry) objArray[0];
+            array[1] = (ReportsEntry) objArray[1];
+            array[2] = (ReportsEntry) objArray[2];
 
             return array;
         } catch (HibernateException he) {
@@ -518,21 +487,13 @@ public class ReportsEntryPersistence extends BasePersistence {
             session = openSession();
 
             StringBuffer query = new StringBuffer();
-            query.append(
-                "FROM ReportsEntry IN CLASS com.ext.portlet.reports.service.persistence.ReportsEntryHBM ");
+            query.append("FROM com.ext.portlet.reports.model.ReportsEntry ");
             query.append("ORDER BY ");
             query.append("name ASC");
 
             Query q = session.createQuery(query.toString());
-            Iterator itr = q.iterate();
-            List list = new ArrayList();
 
-            while (itr.hasNext()) {
-                ReportsEntryHBM reportsEntryHBM = (ReportsEntryHBM) itr.next();
-                list.add(ReportsEntryHBMUtil.model(reportsEntryHBM));
-            }
-
-            return list;
+            return q.list();
         } catch (HibernateException he) {
             throw new SystemException(he);
         } finally {
@@ -548,10 +509,10 @@ public class ReportsEntryPersistence extends BasePersistence {
 
             StringBuffer query = new StringBuffer();
             query.append(
-                "FROM ReportsEntry IN CLASS com.ext.portlet.reports.service.persistence.ReportsEntryHBM WHERE ");
+                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
             if (companyId == null) {
-                query.append("companyId is null");
+                query.append("companyId IS NULL");
             } else {
                 query.append("companyId = ?");
             }
@@ -570,8 +531,8 @@ public class ReportsEntryPersistence extends BasePersistence {
             Iterator itr = q.list().iterator();
 
             while (itr.hasNext()) {
-                ReportsEntryHBM reportsEntryHBM = (ReportsEntryHBM) itr.next();
-                session.delete(reportsEntryHBM);
+                ReportsEntry reportsEntry = (ReportsEntry) itr.next();
+                session.delete(reportsEntry);
             }
 
             session.flush();
@@ -590,10 +551,10 @@ public class ReportsEntryPersistence extends BasePersistence {
 
             StringBuffer query = new StringBuffer();
             query.append(
-                "FROM ReportsEntry IN CLASS com.ext.portlet.reports.service.persistence.ReportsEntryHBM WHERE ");
+                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
             if (userId == null) {
-                query.append("userId is null");
+                query.append("userId IS NULL");
             } else {
                 query.append("userId = ?");
             }
@@ -612,8 +573,8 @@ public class ReportsEntryPersistence extends BasePersistence {
             Iterator itr = q.list().iterator();
 
             while (itr.hasNext()) {
-                ReportsEntryHBM reportsEntryHBM = (ReportsEntryHBM) itr.next();
-                session.delete(reportsEntryHBM);
+                ReportsEntry reportsEntry = (ReportsEntry) itr.next();
+                session.delete(reportsEntry);
             }
 
             session.flush();
@@ -633,10 +594,10 @@ public class ReportsEntryPersistence extends BasePersistence {
             StringBuffer query = new StringBuffer();
             query.append("SELECT COUNT(*) ");
             query.append(
-                "FROM ReportsEntry IN CLASS com.ext.portlet.reports.service.persistence.ReportsEntryHBM WHERE ");
+                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
             if (companyId == null) {
-                query.append("companyId is null");
+                query.append("companyId IS NULL");
             } else {
                 query.append("companyId = ?");
             }
@@ -677,10 +638,10 @@ public class ReportsEntryPersistence extends BasePersistence {
             StringBuffer query = new StringBuffer();
             query.append("SELECT COUNT(*) ");
             query.append(
-                "FROM ReportsEntry IN CLASS com.ext.portlet.reports.service.persistence.ReportsEntryHBM WHERE ");
+                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
             if (userId == null) {
-                query.append("userId is null");
+                query.append("userId IS NULL");
             } else {
                 query.append("userId = ?");
             }
@@ -710,5 +671,8 @@ public class ReportsEntryPersistence extends BasePersistence {
         } finally {
             closeSession(session);
         }
+    }
+
+    protected void initDao() {
     }
 }

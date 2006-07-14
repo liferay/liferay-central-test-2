@@ -20,41 +20,38 @@
  * SOFTWARE.
  */
 
-package com.liferay.mail.service.persistence;
+package com.liferay.counter.model;
+
+import java.io.Serializable;
 
 /**
- * <a href="CyrusVirtualHBM.java.html"><b><i>View Source</i></b></a>
+ * <a href="Counter.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class CyrusVirtualHBM {
+public class Counter implements Serializable {
 
-	public CyrusVirtualHBM() {
+	public Counter() {
 	}
 
-	public CyrusVirtualHBM(String emailAddress, String userId) {
-		_emailAddress = emailAddress;
-		_userId = userId;
+	public String getName() {
+		return _name;
 	}
 
-	public String getEmailAddress() {
-		return _emailAddress;
+	public void setName(String name) {
+		_name = name;
 	}
 
-	public void setEmailAddress(String emailAddress) {
-		_emailAddress = emailAddress;
+	public long getCurrentId() {
+		return _currentId;
 	}
 
-	public String getUserId() {
-		return _userId;
+	public void setCurrentId(long currentId) {
+		_currentId = currentId;
 	}
 
-	public void setUserId(String userId) {
-		_userId = userId;
-	}
-
-	private String _emailAddress;
-	private String _userId;
+	private String _name;
+	private long _currentId;
 
 }

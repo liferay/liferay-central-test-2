@@ -59,7 +59,7 @@
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="actionIds" type="tns:ArrayOf_xsd_string"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="resourceId" type="tns:string"></parameter> 
 		</operation>  
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="unsetRolePermission" qname="operNS:unsetRolePermission" returnQName="unsetRolePermissionReturn" returnType="rtns:boolean" soapAction="">  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unsetRolePermission" qname="operNS:unsetRolePermission" soapAction="">  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>  
@@ -68,7 +68,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="primKey" type="tns:string"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="actionId" type="tns:string"></parameter> 
 		</operation>  
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="unsetRolePermissions" qname="operNS:unsetRolePermissions" returnQName="unsetRolePermissionsReturn" returnType="rtns:boolean" soapAction="">  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unsetRolePermissions" qname="operNS:unsetRolePermissions" soapAction="">  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>  
@@ -76,7 +76,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="scope" type="tns:string"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="actionId" type="tns:string"></parameter> 
 		</operation>  
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="unsetUserPermissions" qname="operNS:unsetUserPermissions" returnQName="unsetUserPermissionsReturn" returnType="rtns:boolean" soapAction="">  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unsetUserPermissions" qname="operNS:unsetUserPermissions" soapAction="">  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="actionIds" type="tns:ArrayOf_xsd_string"></parameter>  

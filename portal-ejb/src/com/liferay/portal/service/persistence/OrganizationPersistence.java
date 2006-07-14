@@ -92,6 +92,8 @@ public class OrganizationPersistence extends BasePersistence {
 
 			session.delete(organization);
 			session.flush();
+			clearGroups.clear(organizationId);
+			clearUsers.clear(organizationId);
 
 			return organization;
 		}

@@ -90,6 +90,7 @@ public class UserGroupPersistence extends BasePersistence {
 
 			session.delete(userGroup);
 			session.flush();
+			clearUsers.clear(userGroupId);
 
 			return userGroup;
 		}

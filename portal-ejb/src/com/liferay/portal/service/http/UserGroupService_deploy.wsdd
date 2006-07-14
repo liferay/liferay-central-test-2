@@ -12,7 +12,7 @@
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getUserGroup" qname="operNS:getUserGroup" returnQName="getUserGroupReturn" returnType="rtns:UserGroupModel" soapAction="">  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userGroupId" type="tns:string"></parameter> 
 		</operation>  
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="addGroupUserGroups" qname="operNS:addGroupUserGroups" returnQName="addGroupUserGroupsReturn" returnType="rtns:boolean" soapAction="">  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="addGroupUserGroups" qname="operNS:addGroupUserGroups" soapAction="">  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userGroupIds" type="tns:ArrayOf_xsd_string"></parameter> 
 		</operation>  
@@ -26,7 +26,7 @@
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getUserUserGroups" qname="operNS:getUserUserGroups" returnQName="getUserUserGroupsReturn" returnType="rtns:ArrayOf_tns2_UserGroupModel" returnItemType="tns2:UserGroupModel" soapAction="">  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter> 
 		</operation>  
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="unsetGroupUserGroups" qname="operNS:unsetGroupUserGroups" returnQName="unsetGroupUserGroupsReturn" returnType="rtns:boolean" soapAction="">  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unsetGroupUserGroups" qname="operNS:unsetGroupUserGroups" soapAction="">  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userGroupIds" type="tns:ArrayOf_xsd_string"></parameter> 
 		</operation>  

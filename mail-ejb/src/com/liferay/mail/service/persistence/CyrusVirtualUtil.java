@@ -51,10 +51,6 @@ public class CyrusVirtualUtil {
 		getPersistence().update(user);
 	}
 
-	public static CyrusVirtual model(CyrusVirtualHBM hbm) {
-		return getPersistence().model(hbm);
-	}
-
 	public static CyrusVirtual findByPrimaryKey(String emailAddress)
 		throws NoSuchCyrusVirtualException, SystemException {
 

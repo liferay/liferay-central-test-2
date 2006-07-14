@@ -23,9 +23,9 @@
 			<fileset dir="${project.dir}/mail-ejb" includes="mail-ejb.jar" />
 			<fileset dir="${project.dir}/portal-ejb" includes="portal-ejb.jar" />
 			<fileset dir="${project.dir}/cms-web" includes="cms-web.jar" />
-			<fileset dir="${project.dir}/laszlo-web" includes="laszlo-web.jar" />
-			<fileset dir="${project.dir}/portal-web" includes="portal-web.jar" />
-			<fileset dir="${project.dir}/tunnel-web" includes="tunnel-web.jar" />
+			<fileset dir="${project.dir}/laszlo-web" includes="laszlo-web.war" />
+			<fileset dir="${project.dir}/portal-web" includes="portal-web.war" />
+			<fileset dir="${project.dir}/tunnel-web" includes="tunnel-web.war" />
 		</copy>
 
 		<touch file="modules/portal-web.war" datetime="01/01/1990 12:00 am" />

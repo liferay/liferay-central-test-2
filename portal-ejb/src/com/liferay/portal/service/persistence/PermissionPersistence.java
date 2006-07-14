@@ -92,6 +92,9 @@ public class PermissionPersistence extends BasePersistence {
 
 			session.delete(permission);
 			session.flush();
+			clearGroups.clear(permissionId);
+			clearRoles.clear(permissionId);
+			clearUsers.clear(permissionId);
 
 			return permission;
 		}

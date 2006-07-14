@@ -202,6 +202,10 @@ public class ReportsEntryUtil {
         return getPersistence().countByUserId(userId);
     }
 
+    public static void initDao() {
+        getPersistence().initDao();
+    }
+
     public static ReportsEntryPersistence getPersistence() {
         ApplicationContext ctx = SpringUtil.getContext();
         ReportsEntryUtil util = (ReportsEntryUtil) ctx.getBean(CLASS_NAME);

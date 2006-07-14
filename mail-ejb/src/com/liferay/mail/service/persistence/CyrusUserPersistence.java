@@ -47,10 +47,9 @@ public class CyrusUserPersistence extends BasePersistence {
 		try {
 			session = getSessionFactory().openSession();
 
-			CyrusUserHBM hbm = (CyrusUserHBM)session.load(
-				CyrusUserHBM.class, userId);
+			CyrusUser user = (CyrusUser)session.load(CyrusUser.class, userId);
 
-			session.delete(hbm);
+			session.delete(user);
 
 			session.flush();
 		}
@@ -74,18 +73,18 @@ public class CyrusUserPersistence extends BasePersistence {
 			session = getSessionFactory().openSession();
 
 			try {
-				CyrusUserHBM hbm = (CyrusUserHBM)session.load(
-					CyrusUserHBM.class, user.getUserId());
+				CyrusUser userModel = (CyrusUser)session.load(
+					CyrusUser.class, user.getUserId());
 
-				hbm.setPassword(user.getPassword());
+				userModel.setPassword(user.getPassword());
 
 				session.flush();
 			}
 			catch (ObjectNotFoundException onfe) {
-				CyrusUserHBM hbm = new CyrusUserHBM(
+				CyrusUser userModel = new CyrusUser(
 					user.getUserId(), user.getPassword());
 
-				session.save(hbm);
+				session.save(userModel);
 
 				session.flush();
 			}
@@ -98,26 +97,15 @@ public class CyrusUserPersistence extends BasePersistence {
 		}
 	}
 
-	public CyrusUser model(CyrusUserHBM hbm) {
-		return new CyrusUser(hbm.getUserId(), hbm.getPassword());
-	}
-
 	public CyrusUser findByPrimaryKey(String userId)
 		throws NoSuchCyrusUserException, SystemException {
-
-		CyrusUser model = null;
 
 		Session session = null;
 
 		try {
 			session = getSessionFactory().openSession();
 
-			CyrusUserHBM hbm = (CyrusUserHBM)session.load(
-				CyrusUserHBM.class, userId);
-
-			model = model(hbm);
-
-			return model;
+			return (CyrusUser)session.load(CyrusUser.class, userId);
 		}
 		catch (HibernateException he) {
 			if (he instanceof ObjectNotFoundException) {

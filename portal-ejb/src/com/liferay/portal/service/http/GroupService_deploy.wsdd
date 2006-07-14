@@ -15,7 +15,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="type" type="tns:string"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="friendlyURL" type="tns:string"></parameter> 
 		</operation>  
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="addRoleGroups" qname="operNS:addRoleGroups" returnQName="addRoleGroupsReturn" returnType="rtns:boolean" soapAction="">  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="addRoleGroups" qname="operNS:addRoleGroups" soapAction="">  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="groupIds" type="tns:ArrayOf_xsd_string"></parameter> 
 		</operation>  
@@ -39,7 +39,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="groupIds" type="tns:ArrayOf_xsd_string"></parameter> 
 		</operation>  
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="unsetRoleGroups" qname="operNS:unsetRoleGroups" returnQName="unsetRoleGroupsReturn" returnType="rtns:boolean" soapAction="">  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unsetRoleGroups" qname="operNS:unsetRoleGroups" soapAction="">  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="groupIds" type="tns:ArrayOf_xsd_string"></parameter> 
 		</operation>  

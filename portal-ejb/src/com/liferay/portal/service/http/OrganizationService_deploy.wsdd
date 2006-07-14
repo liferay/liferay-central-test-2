@@ -12,7 +12,7 @@
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getOrganization" qname="operNS:getOrganization" returnQName="getOrganizationReturn" returnType="rtns:OrganizationModel" soapAction="">  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:string"></parameter> 
 		</operation>  
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="addGroupOrganizations" qname="operNS:addGroupOrganizations" returnQName="addGroupOrganizationsReturn" returnType="rtns:boolean" soapAction="">  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="addGroupOrganizations" qname="operNS:addGroupOrganizations" soapAction="">  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="organizationIds" type="tns:ArrayOf_xsd_string"></parameter> 
 		</operation>  
@@ -34,7 +34,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="organizationIds" type="tns:ArrayOf_xsd_string"></parameter> 
 		</operation>  
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="unsetGroupOrganizations" qname="operNS:unsetGroupOrganizations" returnQName="unsetGroupOrganizationsReturn" returnType="rtns:boolean" soapAction="">  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unsetGroupOrganizations" qname="operNS:unsetGroupOrganizations" soapAction="">  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="organizationIds" type="tns:ArrayOf_xsd_string"></parameter> 
 		</operation>  

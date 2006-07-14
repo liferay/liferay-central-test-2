@@ -1847,6 +1847,19 @@ public class ServiceBuilder {
 		sb.append("}");
 		sb.append("session.delete(" + entity.getVarName() + ");");
 		sb.append("session.flush();");
+
+		for (int i = 0; i < columnList.size(); i++) {
+			EntityColumn col = (EntityColumn)columnList.get(i);
+
+			if (col.isCollection() && col.isMappingManyToMany()) {
+				Entity tempEntity = getEntity(col.getEJBName());
+
+				// clearUsers(String pk)
+
+				sb.append("clear" + tempEntity.getNames() + ".clear(" + pkVarName + ");");
+			}
+		}
+		
 		sb.append("return " + entity.getVarName() + ";");
 		sb.append("}");
 		sb.append("catch (HibernateException he) {");
@@ -2926,7 +2939,6 @@ public class ServiceBuilder {
 
 				Entity tempEntity = getEntity(col.getEJBName());
 				EntityOrder tempOrder = tempEntity.getOrder();
-				EntityColumn tempCol = tempEntity.getColumnByMappingTable(col.getMappingTable());
 
 				// getUsers(String pk)
 
@@ -3423,6 +3435,7 @@ public class ServiceBuilder {
 			List parameters = xMethod.getParameters();
 
 			String p0Name = "";
+
 			if (parameters.size() > 0) {
 				p0Name = ((XParameter)parameters.get(0)).getName();
 			}

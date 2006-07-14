@@ -90,6 +90,9 @@ public class RolePersistence extends BasePersistence {
 
 			session.delete(role);
 			session.flush();
+			clearGroups.clear(roleId);
+			clearPermissions.clear(roleId);
+			clearUsers.clear(roleId);
 
 			return role;
 		}
