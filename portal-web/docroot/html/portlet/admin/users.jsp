@@ -50,12 +50,24 @@
 						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= ParamUtil.getBoolean(request, "enabled", PrefsPropsUtil.getBoolean(PropsUtil.AUTH_IMPL_LDAP_ENABLED)) %>' />
 					</td>
 				</tr>
-				</tr>
 				<tr>
-					<td colspan="3">
-						<br>
+					<td>
+						<%= LanguageUtil.get(pageContext, "required") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<liferay-ui:input-checkbox param="required" defaultValue='<%= ParamUtil.getBoolean(request, "required", PrefsPropsUtil.getBoolean(PropsUtil.AUTH_IMPL_LDAP_REQUIRED)) %>' />
 					</td>
 				</tr>
+				</table>
+
+				<br>
+
+				<%= LanguageUtil.get(pageContext, "the-ldap-url-format-is") %>
+
+				<br><br>
+
+				<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td>
 						<%= LanguageUtil.get(pageContext, "url") %>

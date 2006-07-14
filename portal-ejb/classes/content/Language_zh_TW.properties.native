@@ -1883,6 +1883,7 @@ the-group-cannot-be-deleted-because-it-is-a-required-system-group=小組無法�
 the-group-could-not-be-found=群組找不到。
 the-item-could-not-be-found=項目找不到。
 the-item-sku-you-requested-is-already-taken=您請求的SKU 項目已經被取用。
+the-ldap-url-format-is=The LDAP URL format is <i>ldap://host:port/searchdn</i>, where <i>searchdn</i> specifies the initial search context for users and is optional. For example: ldap://localhost:389/ou=Users,o=Example
 the-link-could-not-be-found=鏈接找不到。
 the-message-board-is-empty=留言簿是空的。
 the-message-could-not-be-found=訊息找不到。

@@ -1848,6 +1848,7 @@ the-group-cannot-be-deleted-because-it-is-a-required-system-group=لا يمكن 
 the-group-could-not-be-found=لم يتم العثور على هذه المجموعة
 the-item-could-not-be-found=لم يتم العثور على هذه السلعة
 the-item-sku-you-requested-is-already-taken=السلع التي طلبتها من SKU محجوزة من قبل
+the-ldap-url-format-is=The LDAP URL format is <i>ldap://host:port/searchdn</i>, where <i>searchdn</i> specifies the initial search context for users and is optional. For example: ldap://localhost:389/ou=Users,o=Example
 the-link-could-not-be-found=لم يتم العثور على الرابط.
 the-message-board-is-empty=قائمة الرسائل فارغة.
 the-message-could-not-be-found=لم يتم العثور على الرسالة.

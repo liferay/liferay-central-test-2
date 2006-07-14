@@ -1309,6 +1309,7 @@ the-following-zip-codes-were-found-associated-with-the-given-street-city-and-sta
 the-group-could-not-be-found=Không tìm thấy nhóm.
 the-item-could-not-be-found=Không tìm thấy mặt hàng.
 the-item-sku-you-requested-is-already-taken=Mặt hàng SKU bạn yêu cầu đã có.
+the-ldap-url-format-is=The LDAP URL format is <i>ldap://host:port/searchdn</i>, where <i>searchdn</i> specifies the initial search context for users and is optional. For example: ldap://localhost:389/ou=Users,o=Example
 the-link-could-not-be-found=Không tìm thấy liên kết.
 the-message-board-is-empty=Chưa có gì.
 the-message-could-not-be-found=Bản tin khôn tìm thấy.

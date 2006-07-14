@@ -1881,6 +1881,7 @@ the-group-cannot-be-deleted-because-it-is-a-required-system-group=Η ομάδα 
 the-group-could-not-be-found=Η ομάδα δεν μπόρεσε να βρεθεί.
 the-item-could-not-be-found=Το είδος δεν μπόρεσε να βρεθεί.
 the-item-sku-you-requested-is-already-taken=Το SKU είδους που ζητήσατε έχει ήδη χρησιμοποιηθεί.
+the-ldap-url-format-is=The LDAP URL format is <i>ldap://host:port/searchdn</i>, where <i>searchdn</i> specifies the initial search context for users and is optional. For example: ldap://localhost:389/ou=Users,o=Example
 the-link-could-not-be-found=Ο σύνδεσμος δεν βρέθηκε.
 the-message-board-is-empty=Ο πίνακας μηνυμάτων είναι άδειος.
 the-message-could-not-be-found=Το μύνημα δεν μπόρεσε να βρεθεί.

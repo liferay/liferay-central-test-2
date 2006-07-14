@@ -1883,6 +1883,7 @@ the-group-cannot-be-deleted-because-it-is-a-required-system-group=De groep kan w
 the-group-could-not-be-found=De groep kon niet worden gevonden.
 the-item-could-not-be-found=Het punt kon niet worden gevonden.
 the-item-sku-you-requested-is-already-taken=Het punt SKU u vroeg wordt reeds genomen.
+the-ldap-url-format-is=The LDAP URL format is <i>ldap://host:port/searchdn</i>, where <i>searchdn</i> specifies the initial search context for users and is optional. For example: ldap://localhost:389/ou=Users,o=Example
 the-link-could-not-be-found=De verbinding kon niet worden gevonden.
 the-message-board-is-empty=De berichtraad is leeg.
 the-message-could-not-be-found=Het bericht kon niet worden gevonden.

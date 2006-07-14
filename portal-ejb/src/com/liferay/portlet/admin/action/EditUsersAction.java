@@ -208,6 +208,7 @@ public class EditUsersAction extends PortletAction {
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
 
 		boolean enabled = ParamUtil.getBoolean(req, "enabled");
+		boolean required = ParamUtil.getBoolean(req, "required");
 		String url = ParamUtil.getString(req, "url");
 		String principal = ParamUtil.getString(req, "principal");
 		String credentials = ParamUtil.getString(req, "credentials");
@@ -245,6 +246,8 @@ public class EditUsersAction extends PortletAction {
 
 		prefs.setValue(
 			PropsUtil.AUTH_IMPL_LDAP_ENABLED, Boolean.toString(enabled));
+		prefs.setValue(
+			PropsUtil.AUTH_IMPL_LDAP_REQUIRED, Boolean.toString(required));
 		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_PROVIDER_URL, url);
 		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_SECURITY_PRINCIPAL, principal);
 		prefs.setValue(

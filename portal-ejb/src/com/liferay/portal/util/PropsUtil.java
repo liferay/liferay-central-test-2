@@ -214,6 +214,8 @@ public class PropsUtil {
 
 	public static final String AUTH_IMPL_LDAP_ENABLED = "auth.impl.ldap.enabled";
 
+	public static final String AUTH_IMPL_LDAP_REQUIRED = "auth.impl.ldap.required";
+
 	public static final String AUTH_IMPL_LDAP_FACTORY_INITIAL = "auth.impl.ldap.factory.initial";
 
     public static final String AUTH_IMPL_LDAP_PROVIDER_URL = "auth.impl.ldap.provider.url";

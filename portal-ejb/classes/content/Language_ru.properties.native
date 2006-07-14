@@ -1782,6 +1782,7 @@ the-group-cannot-be-deleted-because-it-is-a-required-system-group=Группа �
 the-group-could-not-be-found=Группа не найдена.
 the-item-could-not-be-found=Товар не найден.
 the-item-sku-you-requested-is-already-taken=Указанный Вами SKU товара уже занят.
+the-ldap-url-format-is=The LDAP URL format is <i>ldap://host:port/searchdn</i>, where <i>searchdn</i> specifies the initial search context for users and is optional. For example: ldap://localhost:389/ou=Users,o=Example
 the-link-could-not-be-found=Ссылка не найдена.
 the-message-board-is-empty=Доска сообщений пуста.
 the-message-could-not-be-found=Сообщение не найдено.

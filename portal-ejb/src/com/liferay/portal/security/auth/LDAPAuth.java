@@ -28,6 +28,7 @@ import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.LDAPUtil;
 import com.liferay.util.PropertiesUtil;
@@ -323,6 +324,28 @@ public class LDAPAuth implements Authenticator {
 		else {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Search filter did not return any results");
+			}
+
+			if (PrefsPropsUtil.getBoolean(PropsUtil.AUTH_IMPL_LDAP_REQUIRED)) {
+				if (Validator.isNotNull(userId)) {
+					if (OmniadminUtil.isOmniadmin(userId)) {
+						return SUCCESS;
+					}
+				}
+				else if (Validator.isNotNull(emailAddress)) {
+					try {
+						User user = UserLocalServiceUtil.getUserByEmailAddress(
+							companyId, emailAddress);
+
+						if (OmniadminUtil.isOmniadmin(user.getUserId())) {
+							return SUCCESS;
+						}
+					}
+					catch (NoSuchUserException nsue) {
+					}
+				}
+
+				return DNE;
 			}
 		}
 
