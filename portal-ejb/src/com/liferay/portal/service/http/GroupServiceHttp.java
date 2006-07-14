@@ -107,7 +107,7 @@ public class GroupServiceHttp {
 		}
 	}
 
-	public static boolean addRoleGroups(HttpPrincipal httpPrincipal,
+	public static void addRoleGroups(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -142,8 +142,6 @@ public class GroupServiceHttp {
 
 				throw e;
 			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));
@@ -451,7 +449,7 @@ public class GroupServiceHttp {
 		}
 	}
 
-	public static boolean unsetRoleGroups(HttpPrincipal httpPrincipal,
+	public static void unsetRoleGroups(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -486,8 +484,6 @@ public class GroupServiceHttp {
 
 				throw e;
 			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));

@@ -129,6 +129,10 @@ public class CompanyUtil {
 		return getPersistence().findAll();
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static CompanyPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		CompanyUtil util = (CompanyUtil)ctx.getBean(CLASS_NAME);

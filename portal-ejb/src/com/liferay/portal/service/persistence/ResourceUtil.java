@@ -385,6 +385,10 @@ public class ResourceUtil {
 			scope, primKey);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static ResourcePersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		ResourceUtil util = (ResourceUtil)ctx.getBean(CLASS_NAME);

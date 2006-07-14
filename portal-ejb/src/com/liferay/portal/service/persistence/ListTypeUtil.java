@@ -179,6 +179,10 @@ public class ListTypeUtil {
 		return getPersistence().countByType(type);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static ListTypePersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		ListTypeUtil util = (ListTypeUtil)ctx.getBean(CLASS_NAME);

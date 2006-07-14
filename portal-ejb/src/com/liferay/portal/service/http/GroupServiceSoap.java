@@ -54,13 +54,10 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static boolean addRoleGroups(java.lang.String roleId,
+	public static void addRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds) throws RemoteException {
 		try {
-			boolean returnValue = GroupServiceUtil.addRoleGroups(roleId,
-					groupIds);
-
-			return returnValue;
+			GroupServiceUtil.addRoleGroups(roleId, groupIds);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -151,13 +148,10 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static boolean unsetRoleGroups(java.lang.String roleId,
+	public static void unsetRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds) throws RemoteException {
 		try {
-			boolean returnValue = GroupServiceUtil.unsetRoleGroups(roleId,
-					groupIds);
-
-			return returnValue;
+			GroupServiceUtil.unsetRoleGroups(roleId, groupIds);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);

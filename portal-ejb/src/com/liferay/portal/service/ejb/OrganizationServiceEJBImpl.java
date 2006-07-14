@@ -49,13 +49,12 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 		return (OrganizationService)ctx.getBean(CLASS_NAME);
 	}
 
-	public boolean addGroupOrganizations(java.lang.String groupId,
+	public void addGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().addGroupOrganizations(groupId, organizationIds);
+		getService().addGroupOrganizations(groupId, organizationIds);
 	}
 
 	public com.liferay.portal.model.Organization addOrganization(
@@ -102,13 +101,12 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 		getService().setGroupOrganizations(groupId, organizationIds);
 	}
 
-	public boolean unsetGroupOrganizations(java.lang.String groupId,
+	public void unsetGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().unsetGroupOrganizations(groupId, organizationIds);
+		getService().unsetGroupOrganizations(groupId, organizationIds);
 	}
 
 	public com.liferay.portal.model.Organization updateOrganization(

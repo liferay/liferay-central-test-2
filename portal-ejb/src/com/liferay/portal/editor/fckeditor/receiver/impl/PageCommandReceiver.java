@@ -32,6 +32,7 @@ import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
+import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.io.File;
 
@@ -235,7 +236,8 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 			groupParams.put("layoutSet", Boolean.FALSE);
 
 			List groups = GroupLocalServiceUtil.search(
-				arg.getCompanyId(), null, null, groupParams, -1, -1);
+				arg.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
 
 			for (int i = 0; i < groups.size(); ++i) {
 				Group group = (Group)groups.get(i);

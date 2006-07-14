@@ -281,6 +281,10 @@ public class RegionUtil {
 		return getPersistence().countByC_A(countryId, active);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static RegionPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		RegionUtil util = (RegionUtil)ctx.getBean(CLASS_NAME);

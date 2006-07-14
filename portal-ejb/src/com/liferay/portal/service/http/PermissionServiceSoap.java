@@ -157,16 +157,14 @@ public class PermissionServiceSoap {
 		}
 	}
 
-	public static boolean unsetRolePermission(java.lang.String roleId,
+	public static void unsetRolePermission(java.lang.String roleId,
 		java.lang.String groupId, java.lang.String name,
 		java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
 		throws RemoteException {
 		try {
-			boolean returnValue = PermissionServiceUtil.unsetRolePermission(roleId,
-					groupId, name, typeId, scope, primKey, actionId);
-
-			return returnValue;
+			PermissionServiceUtil.unsetRolePermission(roleId, groupId, name,
+				typeId, scope, primKey, actionId);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -175,15 +173,13 @@ public class PermissionServiceSoap {
 		}
 	}
 
-	public static boolean unsetRolePermissions(java.lang.String roleId,
+	public static void unsetRolePermissions(java.lang.String roleId,
 		java.lang.String groupId, java.lang.String name,
 		java.lang.String typeId, java.lang.String scope,
 		java.lang.String actionId) throws RemoteException {
 		try {
-			boolean returnValue = PermissionServiceUtil.unsetRolePermissions(roleId,
-					groupId, name, typeId, scope, actionId);
-
-			return returnValue;
+			PermissionServiceUtil.unsetRolePermissions(roleId, groupId, name,
+				typeId, scope, actionId);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -192,14 +188,12 @@ public class PermissionServiceSoap {
 		}
 	}
 
-	public static boolean unsetUserPermissions(java.lang.String userId,
+	public static void unsetUserPermissions(java.lang.String userId,
 		java.lang.String groupId, java.lang.String[] actionIds,
 		java.lang.String resourceId) throws RemoteException {
 		try {
-			boolean returnValue = PermissionServiceUtil.unsetUserPermissions(userId,
-					groupId, actionIds, resourceId);
-
-			return returnValue;
+			PermissionServiceUtil.unsetUserPermissions(userId, groupId,
+				actionIds, resourceId);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);

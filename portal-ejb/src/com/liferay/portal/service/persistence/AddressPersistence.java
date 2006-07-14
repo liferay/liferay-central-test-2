@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchAddressException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Address;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.util.StringPool;
@@ -48,25 +49,24 @@ import java.util.List;
  *
  */
 public class AddressPersistence extends BasePersistence {
-	public com.liferay.portal.model.Address create(String addressId) {
-		AddressHBM addressHBM = new AddressHBM();
-		addressHBM.setNew(true);
-		addressHBM.setPrimaryKey(addressId);
+	public Address create(String addressId) {
+		Address address = new Address();
+		address.setNew(true);
+		address.setPrimaryKey(addressId);
 
-		return AddressHBMUtil.model(addressHBM);
+		return address;
 	}
 
-	public com.liferay.portal.model.Address remove(String addressId)
+	public Address remove(String addressId)
 		throws NoSuchAddressException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			AddressHBM addressHBM = (AddressHBM)session.get(AddressHBM.class,
-					addressId);
+			Address address = (Address)session.get(Address.class, addressId);
 
-			if (addressHBM == null) {
+			if (address == null) {
 				_log.warn("No Address exists with the primary key " +
 					addressId.toString());
 				throw new NoSuchAddressException(
@@ -74,10 +74,10 @@ public class AddressPersistence extends BasePersistence {
 					addressId.toString());
 			}
 
-			session.delete(addressHBM);
+			session.delete(address);
 			session.flush();
 
-			return AddressHBMUtil.model(addressHBM);
+			return address;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -96,73 +96,73 @@ public class AddressPersistence extends BasePersistence {
 				session = openSession();
 
 				if (address.isNew()) {
-					AddressHBM addressHBM = new AddressHBM();
-					addressHBM.setAddressId(address.getAddressId());
-					addressHBM.setCompanyId(address.getCompanyId());
-					addressHBM.setUserId(address.getUserId());
-					addressHBM.setUserName(address.getUserName());
-					addressHBM.setCreateDate(address.getCreateDate());
-					addressHBM.setModifiedDate(address.getModifiedDate());
-					addressHBM.setClassName(address.getClassName());
-					addressHBM.setClassPK(address.getClassPK());
-					addressHBM.setStreet1(address.getStreet1());
-					addressHBM.setStreet2(address.getStreet2());
-					addressHBM.setStreet3(address.getStreet3());
-					addressHBM.setCity(address.getCity());
-					addressHBM.setZip(address.getZip());
-					addressHBM.setRegionId(address.getRegionId());
-					addressHBM.setCountryId(address.getCountryId());
-					addressHBM.setTypeId(address.getTypeId());
-					addressHBM.setMailing(address.getMailing());
-					addressHBM.setPrimary(address.getPrimary());
-					session.save(addressHBM);
+					Address addressModel = new Address();
+					addressModel.setAddressId(address.getAddressId());
+					addressModel.setCompanyId(address.getCompanyId());
+					addressModel.setUserId(address.getUserId());
+					addressModel.setUserName(address.getUserName());
+					addressModel.setCreateDate(address.getCreateDate());
+					addressModel.setModifiedDate(address.getModifiedDate());
+					addressModel.setClassName(address.getClassName());
+					addressModel.setClassPK(address.getClassPK());
+					addressModel.setStreet1(address.getStreet1());
+					addressModel.setStreet2(address.getStreet2());
+					addressModel.setStreet3(address.getStreet3());
+					addressModel.setCity(address.getCity());
+					addressModel.setZip(address.getZip());
+					addressModel.setRegionId(address.getRegionId());
+					addressModel.setCountryId(address.getCountryId());
+					addressModel.setTypeId(address.getTypeId());
+					addressModel.setMailing(address.getMailing());
+					addressModel.setPrimary(address.getPrimary());
+					session.save(addressModel);
 					session.flush();
 				}
 				else {
-					AddressHBM addressHBM = (AddressHBM)session.get(AddressHBM.class,
+					Address addressModel = (Address)session.get(Address.class,
 							address.getPrimaryKey());
 
-					if (addressHBM != null) {
-						addressHBM.setCompanyId(address.getCompanyId());
-						addressHBM.setUserId(address.getUserId());
-						addressHBM.setUserName(address.getUserName());
-						addressHBM.setCreateDate(address.getCreateDate());
-						addressHBM.setModifiedDate(address.getModifiedDate());
-						addressHBM.setClassName(address.getClassName());
-						addressHBM.setClassPK(address.getClassPK());
-						addressHBM.setStreet1(address.getStreet1());
-						addressHBM.setStreet2(address.getStreet2());
-						addressHBM.setStreet3(address.getStreet3());
-						addressHBM.setCity(address.getCity());
-						addressHBM.setZip(address.getZip());
-						addressHBM.setRegionId(address.getRegionId());
-						addressHBM.setCountryId(address.getCountryId());
-						addressHBM.setTypeId(address.getTypeId());
-						addressHBM.setMailing(address.getMailing());
-						addressHBM.setPrimary(address.getPrimary());
+					if (addressModel != null) {
+						addressModel.setCompanyId(address.getCompanyId());
+						addressModel.setUserId(address.getUserId());
+						addressModel.setUserName(address.getUserName());
+						addressModel.setCreateDate(address.getCreateDate());
+						addressModel.setModifiedDate(address.getModifiedDate());
+						addressModel.setClassName(address.getClassName());
+						addressModel.setClassPK(address.getClassPK());
+						addressModel.setStreet1(address.getStreet1());
+						addressModel.setStreet2(address.getStreet2());
+						addressModel.setStreet3(address.getStreet3());
+						addressModel.setCity(address.getCity());
+						addressModel.setZip(address.getZip());
+						addressModel.setRegionId(address.getRegionId());
+						addressModel.setCountryId(address.getCountryId());
+						addressModel.setTypeId(address.getTypeId());
+						addressModel.setMailing(address.getMailing());
+						addressModel.setPrimary(address.getPrimary());
 						session.flush();
 					}
 					else {
-						addressHBM = new AddressHBM();
-						addressHBM.setAddressId(address.getAddressId());
-						addressHBM.setCompanyId(address.getCompanyId());
-						addressHBM.setUserId(address.getUserId());
-						addressHBM.setUserName(address.getUserName());
-						addressHBM.setCreateDate(address.getCreateDate());
-						addressHBM.setModifiedDate(address.getModifiedDate());
-						addressHBM.setClassName(address.getClassName());
-						addressHBM.setClassPK(address.getClassPK());
-						addressHBM.setStreet1(address.getStreet1());
-						addressHBM.setStreet2(address.getStreet2());
-						addressHBM.setStreet3(address.getStreet3());
-						addressHBM.setCity(address.getCity());
-						addressHBM.setZip(address.getZip());
-						addressHBM.setRegionId(address.getRegionId());
-						addressHBM.setCountryId(address.getCountryId());
-						addressHBM.setTypeId(address.getTypeId());
-						addressHBM.setMailing(address.getMailing());
-						addressHBM.setPrimary(address.getPrimary());
-						session.save(addressHBM);
+						addressModel = new Address();
+						addressModel.setAddressId(address.getAddressId());
+						addressModel.setCompanyId(address.getCompanyId());
+						addressModel.setUserId(address.getUserId());
+						addressModel.setUserName(address.getUserName());
+						addressModel.setCreateDate(address.getCreateDate());
+						addressModel.setModifiedDate(address.getModifiedDate());
+						addressModel.setClassName(address.getClassName());
+						addressModel.setClassPK(address.getClassPK());
+						addressModel.setStreet1(address.getStreet1());
+						addressModel.setStreet2(address.getStreet2());
+						addressModel.setStreet3(address.getStreet3());
+						addressModel.setCity(address.getCity());
+						addressModel.setZip(address.getZip());
+						addressModel.setRegionId(address.getRegionId());
+						addressModel.setCountryId(address.getCountryId());
+						addressModel.setTypeId(address.getTypeId());
+						addressModel.setMailing(address.getMailing());
+						addressModel.setPrimary(address.getPrimary());
+						session.save(addressModel);
 						session.flush();
 					}
 				}
@@ -181,17 +181,16 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Address findByPrimaryKey(String addressId)
+	public Address findByPrimaryKey(String addressId)
 		throws NoSuchAddressException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			AddressHBM addressHBM = (AddressHBM)session.get(AddressHBM.class,
-					addressId);
+			Address address = (Address)session.get(Address.class, addressId);
 
-			if (addressHBM == null) {
+			if (address == null) {
 				_log.warn("No Address exists with the primary key " +
 					addressId.toString());
 				throw new NoSuchAddressException(
@@ -199,7 +198,7 @@ public class AddressPersistence extends BasePersistence {
 					addressId.toString());
 			}
 
-			return AddressHBMUtil.model(addressHBM);
+			return address;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -216,11 +215,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -237,13 +235,7 @@ public class AddressPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				list.add(AddressHBMUtil.model(addressHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -268,11 +260,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -295,15 +286,7 @@ public class AddressPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				list.add(AddressHBMUtil.model(addressHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -313,8 +296,7 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Address findByCompanyId_First(
-		String companyId, OrderByComparator obc)
+	public Address findByCompanyId_First(String companyId, OrderByComparator obc)
 		throws NoSuchAddressException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
@@ -327,12 +309,11 @@ public class AddressPersistence extends BasePersistence {
 			throw new NoSuchAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Address)list.get(0);
+			return (Address)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Address findByCompanyId_Last(
-		String companyId, OrderByComparator obc)
+	public Address findByCompanyId_Last(String companyId, OrderByComparator obc)
 		throws NoSuchAddressException, SystemException {
 		int count = countByCompanyId(companyId);
 		List list = findByCompanyId(companyId, count - 1, count, obc);
@@ -346,14 +327,14 @@ public class AddressPersistence extends BasePersistence {
 			throw new NoSuchAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Address)list.get(0);
+			return (Address)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Address[] findByCompanyId_PrevAndNext(
-		String addressId, String companyId, OrderByComparator obc)
+	public Address[] findByCompanyId_PrevAndNext(String addressId,
+		String companyId, OrderByComparator obc)
 		throws NoSuchAddressException, SystemException {
-		com.liferay.portal.model.Address address = findByPrimaryKey(addressId);
+		Address address = findByPrimaryKey(addressId);
 		int count = countByCompanyId(companyId);
 		Session session = null;
 
@@ -361,11 +342,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -388,12 +368,11 @@ public class AddressPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					address, AddressHBMUtil.getInstance());
-			com.liferay.portal.model.Address[] array = new com.liferay.portal.model.Address[3];
-			array[0] = (com.liferay.portal.model.Address)objArray[0];
-			array[1] = (com.liferay.portal.model.Address)objArray[1];
-			array[2] = (com.liferay.portal.model.Address)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
+			Address[] array = new Address[3];
+			array[0] = (Address)objArray[0];
+			array[1] = (Address)objArray[1];
+			array[2] = (Address)objArray[2];
 
 			return array;
 		}
@@ -412,11 +391,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -433,13 +411,7 @@ public class AddressPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				list.add(AddressHBMUtil.model(addressHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -464,11 +436,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -491,15 +462,7 @@ public class AddressPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				list.add(AddressHBMUtil.model(addressHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -509,8 +472,8 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Address findByUserId_First(String userId,
-		OrderByComparator obc) throws NoSuchAddressException, SystemException {
+	public Address findByUserId_First(String userId, OrderByComparator obc)
+		throws NoSuchAddressException, SystemException {
 		List list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -522,12 +485,12 @@ public class AddressPersistence extends BasePersistence {
 			throw new NoSuchAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Address)list.get(0);
+			return (Address)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Address findByUserId_Last(String userId,
-		OrderByComparator obc) throws NoSuchAddressException, SystemException {
+	public Address findByUserId_Last(String userId, OrderByComparator obc)
+		throws NoSuchAddressException, SystemException {
 		int count = countByUserId(userId);
 		List list = findByUserId(userId, count - 1, count, obc);
 
@@ -540,14 +503,13 @@ public class AddressPersistence extends BasePersistence {
 			throw new NoSuchAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Address)list.get(0);
+			return (Address)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Address[] findByUserId_PrevAndNext(
-		String addressId, String userId, OrderByComparator obc)
-		throws NoSuchAddressException, SystemException {
-		com.liferay.portal.model.Address address = findByPrimaryKey(addressId);
+	public Address[] findByUserId_PrevAndNext(String addressId, String userId,
+		OrderByComparator obc) throws NoSuchAddressException, SystemException {
+		Address address = findByPrimaryKey(addressId);
 		int count = countByUserId(userId);
 		Session session = null;
 
@@ -555,11 +517,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -582,12 +543,11 @@ public class AddressPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					address, AddressHBMUtil.getInstance());
-			com.liferay.portal.model.Address[] array = new com.liferay.portal.model.Address[3];
-			array[0] = (com.liferay.portal.model.Address)objArray[0];
-			array[1] = (com.liferay.portal.model.Address)objArray[1];
-			array[2] = (com.liferay.portal.model.Address)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
+			Address[] array = new Address[3];
+			array[0] = (Address)objArray[0];
+			array[1] = (Address)objArray[1];
+			array[2] = (Address)objArray[2];
 
 			return array;
 		}
@@ -607,11 +567,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -620,7 +579,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -641,13 +600,7 @@ public class AddressPersistence extends BasePersistence {
 				q.setString(queryPos++, className);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				list.add(AddressHBMUtil.model(addressHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -672,11 +625,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -685,7 +637,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -712,15 +664,7 @@ public class AddressPersistence extends BasePersistence {
 				q.setString(queryPos++, className);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				list.add(AddressHBMUtil.model(addressHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -730,9 +674,8 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Address findByC_C_First(String companyId,
-		String className, OrderByComparator obc)
-		throws NoSuchAddressException, SystemException {
+	public Address findByC_C_First(String companyId, String className,
+		OrderByComparator obc) throws NoSuchAddressException, SystemException {
 		List list = findByC_C(companyId, className, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -747,13 +690,12 @@ public class AddressPersistence extends BasePersistence {
 			throw new NoSuchAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Address)list.get(0);
+			return (Address)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Address findByC_C_Last(String companyId,
-		String className, OrderByComparator obc)
-		throws NoSuchAddressException, SystemException {
+	public Address findByC_C_Last(String companyId, String className,
+		OrderByComparator obc) throws NoSuchAddressException, SystemException {
 		int count = countByC_C(companyId, className);
 		List list = findByC_C(companyId, className, count - 1, count, obc);
 
@@ -769,14 +711,14 @@ public class AddressPersistence extends BasePersistence {
 			throw new NoSuchAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Address)list.get(0);
+			return (Address)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Address[] findByC_C_PrevAndNext(
-		String addressId, String companyId, String className,
-		OrderByComparator obc) throws NoSuchAddressException, SystemException {
-		com.liferay.portal.model.Address address = findByPrimaryKey(addressId);
+	public Address[] findByC_C_PrevAndNext(String addressId, String companyId,
+		String className, OrderByComparator obc)
+		throws NoSuchAddressException, SystemException {
+		Address address = findByPrimaryKey(addressId);
 		int count = countByC_C(companyId, className);
 		Session session = null;
 
@@ -784,11 +726,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -797,7 +738,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -824,12 +765,11 @@ public class AddressPersistence extends BasePersistence {
 				q.setString(queryPos++, className);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					address, AddressHBMUtil.getInstance());
-			com.liferay.portal.model.Address[] array = new com.liferay.portal.model.Address[3];
-			array[0] = (com.liferay.portal.model.Address)objArray[0];
-			array[1] = (com.liferay.portal.model.Address)objArray[1];
-			array[2] = (com.liferay.portal.model.Address)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
+			Address[] array = new Address[3];
+			array[0] = (Address)objArray[0];
+			array[1] = (Address)objArray[1];
+			array[2] = (Address)objArray[2];
 
 			return array;
 		}
@@ -849,11 +789,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -862,7 +801,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -871,7 +810,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -896,13 +835,7 @@ public class AddressPersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				list.add(AddressHBMUtil.model(addressHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -927,11 +860,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -940,7 +872,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -949,7 +881,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -980,15 +912,7 @@ public class AddressPersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				list.add(AddressHBMUtil.model(addressHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -998,9 +922,9 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Address findByC_C_C_First(
-		String companyId, String className, String classPK,
-		OrderByComparator obc) throws NoSuchAddressException, SystemException {
+	public Address findByC_C_C_First(String companyId, String className,
+		String classPK, OrderByComparator obc)
+		throws NoSuchAddressException, SystemException {
 		List list = findByC_C_C(companyId, className, classPK, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -1018,12 +942,12 @@ public class AddressPersistence extends BasePersistence {
 			throw new NoSuchAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Address)list.get(0);
+			return (Address)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Address findByC_C_C_Last(String companyId,
-		String className, String classPK, OrderByComparator obc)
+	public Address findByC_C_C_Last(String companyId, String className,
+		String classPK, OrderByComparator obc)
 		throws NoSuchAddressException, SystemException {
 		int count = countByC_C_C(companyId, className, classPK);
 		List list = findByC_C_C(companyId, className, classPK, count - 1,
@@ -1044,14 +968,14 @@ public class AddressPersistence extends BasePersistence {
 			throw new NoSuchAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Address)list.get(0);
+			return (Address)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Address[] findByC_C_C_PrevAndNext(
-		String addressId, String companyId, String className, String classPK,
+	public Address[] findByC_C_C_PrevAndNext(String addressId,
+		String companyId, String className, String classPK,
 		OrderByComparator obc) throws NoSuchAddressException, SystemException {
-		com.liferay.portal.model.Address address = findByPrimaryKey(addressId);
+		Address address = findByPrimaryKey(addressId);
 		int count = countByC_C_C(companyId, className, classPK);
 		Session session = null;
 
@@ -1059,11 +983,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1072,7 +995,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1081,7 +1004,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1112,12 +1035,11 @@ public class AddressPersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					address, AddressHBMUtil.getInstance());
-			com.liferay.portal.model.Address[] array = new com.liferay.portal.model.Address[3];
-			array[0] = (com.liferay.portal.model.Address)objArray[0];
-			array[1] = (com.liferay.portal.model.Address)objArray[1];
-			array[2] = (com.liferay.portal.model.Address)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
+			Address[] array = new Address[3];
+			array[0] = (Address)objArray[0];
+			array[1] = (Address)objArray[1];
+			array[2] = (Address)objArray[2];
 
 			return array;
 		}
@@ -1137,11 +1059,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1150,7 +1071,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1159,7 +1080,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1188,13 +1109,7 @@ public class AddressPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, mailing);
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				list.add(AddressHBMUtil.model(addressHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -1222,11 +1137,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1235,7 +1149,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1244,7 +1158,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1279,15 +1193,7 @@ public class AddressPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, mailing);
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				list.add(AddressHBMUtil.model(addressHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1297,9 +1203,9 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Address findByC_C_C_M_First(
-		String companyId, String className, String classPK, boolean mailing,
-		OrderByComparator obc) throws NoSuchAddressException, SystemException {
+	public Address findByC_C_C_M_First(String companyId, String className,
+		String classPK, boolean mailing, OrderByComparator obc)
+		throws NoSuchAddressException, SystemException {
 		List list = findByC_C_C_M(companyId, className, classPK, mailing, 0, 1,
 				obc);
 
@@ -1321,13 +1227,13 @@ public class AddressPersistence extends BasePersistence {
 			throw new NoSuchAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Address)list.get(0);
+			return (Address)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Address findByC_C_C_M_Last(
-		String companyId, String className, String classPK, boolean mailing,
-		OrderByComparator obc) throws NoSuchAddressException, SystemException {
+	public Address findByC_C_C_M_Last(String companyId, String className,
+		String classPK, boolean mailing, OrderByComparator obc)
+		throws NoSuchAddressException, SystemException {
 		int count = countByC_C_C_M(companyId, className, classPK, mailing);
 		List list = findByC_C_C_M(companyId, className, classPK, mailing,
 				count - 1, count, obc);
@@ -1350,15 +1256,14 @@ public class AddressPersistence extends BasePersistence {
 			throw new NoSuchAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Address)list.get(0);
+			return (Address)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Address[] findByC_C_C_M_PrevAndNext(
-		String addressId, String companyId, String className, String classPK,
-		boolean mailing, OrderByComparator obc)
-		throws NoSuchAddressException, SystemException {
-		com.liferay.portal.model.Address address = findByPrimaryKey(addressId);
+	public Address[] findByC_C_C_M_PrevAndNext(String addressId,
+		String companyId, String className, String classPK, boolean mailing,
+		OrderByComparator obc) throws NoSuchAddressException, SystemException {
+		Address address = findByPrimaryKey(addressId);
 		int count = countByC_C_C_M(companyId, className, classPK, mailing);
 		Session session = null;
 
@@ -1366,11 +1271,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1379,7 +1283,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1388,7 +1292,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1423,12 +1327,11 @@ public class AddressPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, mailing);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					address, AddressHBMUtil.getInstance());
-			com.liferay.portal.model.Address[] array = new com.liferay.portal.model.Address[3];
-			array[0] = (com.liferay.portal.model.Address)objArray[0];
-			array[1] = (com.liferay.portal.model.Address)objArray[1];
-			array[2] = (com.liferay.portal.model.Address)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
+			Address[] array = new Address[3];
+			array[0] = (Address)objArray[0];
+			array[1] = (Address)objArray[1];
+			array[2] = (Address)objArray[2];
 
 			return array;
 		}
@@ -1448,11 +1351,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1461,7 +1363,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1470,7 +1372,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1499,13 +1401,7 @@ public class AddressPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, primary);
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				list.add(AddressHBMUtil.model(addressHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -1533,11 +1429,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1546,7 +1441,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1555,7 +1450,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1590,15 +1485,7 @@ public class AddressPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, primary);
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				list.add(AddressHBMUtil.model(addressHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1608,9 +1495,9 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Address findByC_C_C_P_First(
-		String companyId, String className, String classPK, boolean primary,
-		OrderByComparator obc) throws NoSuchAddressException, SystemException {
+	public Address findByC_C_C_P_First(String companyId, String className,
+		String classPK, boolean primary, OrderByComparator obc)
+		throws NoSuchAddressException, SystemException {
 		List list = findByC_C_C_P(companyId, className, classPK, primary, 0, 1,
 				obc);
 
@@ -1632,13 +1519,13 @@ public class AddressPersistence extends BasePersistence {
 			throw new NoSuchAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Address)list.get(0);
+			return (Address)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Address findByC_C_C_P_Last(
-		String companyId, String className, String classPK, boolean primary,
-		OrderByComparator obc) throws NoSuchAddressException, SystemException {
+	public Address findByC_C_C_P_Last(String companyId, String className,
+		String classPK, boolean primary, OrderByComparator obc)
+		throws NoSuchAddressException, SystemException {
 		int count = countByC_C_C_P(companyId, className, classPK, primary);
 		List list = findByC_C_C_P(companyId, className, classPK, primary,
 				count - 1, count, obc);
@@ -1661,15 +1548,14 @@ public class AddressPersistence extends BasePersistence {
 			throw new NoSuchAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Address)list.get(0);
+			return (Address)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Address[] findByC_C_C_P_PrevAndNext(
-		String addressId, String companyId, String className, String classPK,
-		boolean primary, OrderByComparator obc)
-		throws NoSuchAddressException, SystemException {
-		com.liferay.portal.model.Address address = findByPrimaryKey(addressId);
+	public Address[] findByC_C_C_P_PrevAndNext(String addressId,
+		String companyId, String className, String classPK, boolean primary,
+		OrderByComparator obc) throws NoSuchAddressException, SystemException {
+		Address address = findByPrimaryKey(addressId);
 		int count = countByC_C_C_P(companyId, className, classPK, primary);
 		Session session = null;
 
@@ -1677,11 +1563,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1690,7 +1575,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1699,7 +1584,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1734,12 +1619,11 @@ public class AddressPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, primary);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					address, AddressHBMUtil.getInstance());
-			com.liferay.portal.model.Address[] array = new com.liferay.portal.model.Address[3];
-			array[0] = (com.liferay.portal.model.Address)objArray[0];
-			array[1] = (com.liferay.portal.model.Address)objArray[1];
-			array[2] = (com.liferay.portal.model.Address)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
+			Address[] array = new Address[3];
+			array[0] = (Address)objArray[0];
+			array[1] = (Address)objArray[1];
+			array[2] = (Address)objArray[2];
 
 			return array;
 		}
@@ -1758,21 +1642,13 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM ");
+			query.append("FROM com.liferay.portal.model.Address ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				list.add(AddressHBMUtil.model(addressHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1789,11 +1665,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1813,8 +1688,8 @@ public class AddressPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				session.delete(addressHBM);
+				Address address = (Address)itr.next();
+				session.delete(address);
 			}
 
 			session.flush();
@@ -1834,11 +1709,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -1858,8 +1732,8 @@ public class AddressPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				session.delete(addressHBM);
+				Address address = (Address)itr.next();
+				session.delete(address);
 			}
 
 			session.flush();
@@ -1880,11 +1754,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1893,7 +1766,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1917,8 +1790,8 @@ public class AddressPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				session.delete(addressHBM);
+				Address address = (Address)itr.next();
+				session.delete(address);
 			}
 
 			session.flush();
@@ -1939,11 +1812,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1952,7 +1824,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1961,7 +1833,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1989,8 +1861,8 @@ public class AddressPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				session.delete(addressHBM);
+				Address address = (Address)itr.next();
+				session.delete(address);
 			}
 
 			session.flush();
@@ -2011,11 +1883,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -2024,7 +1895,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -2033,7 +1904,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -2065,8 +1936,8 @@ public class AddressPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				session.delete(addressHBM);
+				Address address = (Address)itr.next();
+				session.delete(address);
 			}
 
 			session.flush();
@@ -2087,11 +1958,10 @@ public class AddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -2100,7 +1970,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -2109,7 +1979,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -2141,8 +2011,8 @@ public class AddressPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				AddressHBM addressHBM = (AddressHBM)itr.next();
-				session.delete(addressHBM);
+				Address address = (Address)itr.next();
+				session.delete(address);
 			}
 
 			session.flush();
@@ -2163,11 +2033,10 @@ public class AddressPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -2210,11 +2079,10 @@ public class AddressPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -2258,11 +2126,10 @@ public class AddressPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -2271,7 +2138,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -2319,11 +2186,10 @@ public class AddressPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -2332,7 +2198,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -2341,7 +2207,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -2393,11 +2259,10 @@ public class AddressPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -2406,7 +2271,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -2415,7 +2280,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -2471,11 +2336,10 @@ public class AddressPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Address IN CLASS com.liferay.portal.service.persistence.AddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Address WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -2484,7 +2348,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -2493,7 +2357,7 @@ public class AddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -2538,6 +2402,9 @@ public class AddressPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(AddressPersistence.class);

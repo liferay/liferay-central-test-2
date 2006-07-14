@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchRegionException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Region;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.util.StringPool;
@@ -48,25 +49,24 @@ import java.util.List;
  *
  */
 public class RegionPersistence extends BasePersistence {
-	public com.liferay.portal.model.Region create(String regionId) {
-		RegionHBM regionHBM = new RegionHBM();
-		regionHBM.setNew(true);
-		regionHBM.setPrimaryKey(regionId);
+	public Region create(String regionId) {
+		Region region = new Region();
+		region.setNew(true);
+		region.setPrimaryKey(regionId);
 
-		return RegionHBMUtil.model(regionHBM);
+		return region;
 	}
 
-	public com.liferay.portal.model.Region remove(String regionId)
+	public Region remove(String regionId)
 		throws NoSuchRegionException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			RegionHBM regionHBM = (RegionHBM)session.get(RegionHBM.class,
-					regionId);
+			Region region = (Region)session.get(Region.class, regionId);
 
-			if (regionHBM == null) {
+			if (region == null) {
 				_log.warn("No Region exists with the primary key " +
 					regionId.toString());
 				throw new NoSuchRegionException(
@@ -74,10 +74,10 @@ public class RegionPersistence extends BasePersistence {
 					regionId.toString());
 			}
 
-			session.delete(regionHBM);
+			session.delete(region);
 			session.flush();
 
-			return RegionHBMUtil.model(regionHBM);
+			return region;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -96,34 +96,34 @@ public class RegionPersistence extends BasePersistence {
 				session = openSession();
 
 				if (region.isNew()) {
-					RegionHBM regionHBM = new RegionHBM();
-					regionHBM.setRegionId(region.getRegionId());
-					regionHBM.setCountryId(region.getCountryId());
-					regionHBM.setRegionCode(region.getRegionCode());
-					regionHBM.setName(region.getName());
-					regionHBM.setActive(region.getActive());
-					session.save(regionHBM);
+					Region regionModel = new Region();
+					regionModel.setRegionId(region.getRegionId());
+					regionModel.setCountryId(region.getCountryId());
+					regionModel.setRegionCode(region.getRegionCode());
+					regionModel.setName(region.getName());
+					regionModel.setActive(region.getActive());
+					session.save(regionModel);
 					session.flush();
 				}
 				else {
-					RegionHBM regionHBM = (RegionHBM)session.get(RegionHBM.class,
+					Region regionModel = (Region)session.get(Region.class,
 							region.getPrimaryKey());
 
-					if (regionHBM != null) {
-						regionHBM.setCountryId(region.getCountryId());
-						regionHBM.setRegionCode(region.getRegionCode());
-						regionHBM.setName(region.getName());
-						regionHBM.setActive(region.getActive());
+					if (regionModel != null) {
+						regionModel.setCountryId(region.getCountryId());
+						regionModel.setRegionCode(region.getRegionCode());
+						regionModel.setName(region.getName());
+						regionModel.setActive(region.getActive());
 						session.flush();
 					}
 					else {
-						regionHBM = new RegionHBM();
-						regionHBM.setRegionId(region.getRegionId());
-						regionHBM.setCountryId(region.getCountryId());
-						regionHBM.setRegionCode(region.getRegionCode());
-						regionHBM.setName(region.getName());
-						regionHBM.setActive(region.getActive());
-						session.save(regionHBM);
+						regionModel = new Region();
+						regionModel.setRegionId(region.getRegionId());
+						regionModel.setCountryId(region.getCountryId());
+						regionModel.setRegionCode(region.getRegionCode());
+						regionModel.setName(region.getName());
+						regionModel.setActive(region.getActive());
+						session.save(regionModel);
 						session.flush();
 					}
 				}
@@ -142,17 +142,16 @@ public class RegionPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Region findByPrimaryKey(String regionId)
+	public Region findByPrimaryKey(String regionId)
 		throws NoSuchRegionException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			RegionHBM regionHBM = (RegionHBM)session.get(RegionHBM.class,
-					regionId);
+			Region region = (Region)session.get(Region.class, regionId);
 
-			if (regionHBM == null) {
+			if (region == null) {
 				_log.warn("No Region exists with the primary key " +
 					regionId.toString());
 				throw new NoSuchRegionException(
@@ -160,7 +159,7 @@ public class RegionPersistence extends BasePersistence {
 					regionId.toString());
 			}
 
-			return RegionHBMUtil.model(regionHBM);
+			return region;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -177,11 +176,10 @@ public class RegionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
 			if (countryId == null) {
-				query.append("countryId is null");
+				query.append("countryId IS NULL");
 			}
 			else {
 				query.append("countryId = ?");
@@ -198,13 +196,7 @@ public class RegionPersistence extends BasePersistence {
 				q.setString(queryPos++, countryId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				RegionHBM regionHBM = (RegionHBM)itr.next();
-				list.add(RegionHBMUtil.model(regionHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -229,11 +221,10 @@ public class RegionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
 			if (countryId == null) {
-				query.append("countryId is null");
+				query.append("countryId IS NULL");
 			}
 			else {
 				query.append("countryId = ?");
@@ -256,15 +247,7 @@ public class RegionPersistence extends BasePersistence {
 				q.setString(queryPos++, countryId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				RegionHBM regionHBM = (RegionHBM)itr.next();
-				list.add(RegionHBMUtil.model(regionHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -274,8 +257,7 @@ public class RegionPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Region findByCountryId_First(
-		String countryId, OrderByComparator obc)
+	public Region findByCountryId_First(String countryId, OrderByComparator obc)
 		throws NoSuchRegionException, SystemException {
 		List list = findByCountryId(countryId, 0, 1, obc);
 
@@ -288,12 +270,11 @@ public class RegionPersistence extends BasePersistence {
 			throw new NoSuchRegionException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Region)list.get(0);
+			return (Region)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Region findByCountryId_Last(
-		String countryId, OrderByComparator obc)
+	public Region findByCountryId_Last(String countryId, OrderByComparator obc)
 		throws NoSuchRegionException, SystemException {
 		int count = countByCountryId(countryId);
 		List list = findByCountryId(countryId, count - 1, count, obc);
@@ -307,14 +288,14 @@ public class RegionPersistence extends BasePersistence {
 			throw new NoSuchRegionException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Region)list.get(0);
+			return (Region)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Region[] findByCountryId_PrevAndNext(
-		String regionId, String countryId, OrderByComparator obc)
+	public Region[] findByCountryId_PrevAndNext(String regionId,
+		String countryId, OrderByComparator obc)
 		throws NoSuchRegionException, SystemException {
-		com.liferay.portal.model.Region region = findByPrimaryKey(regionId);
+		Region region = findByPrimaryKey(regionId);
 		int count = countByCountryId(countryId);
 		Session session = null;
 
@@ -322,11 +303,10 @@ public class RegionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
 			if (countryId == null) {
-				query.append("countryId is null");
+				query.append("countryId IS NULL");
 			}
 			else {
 				query.append("countryId = ?");
@@ -349,12 +329,11 @@ public class RegionPersistence extends BasePersistence {
 				q.setString(queryPos++, countryId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region,
-					RegionHBMUtil.getInstance());
-			com.liferay.portal.model.Region[] array = new com.liferay.portal.model.Region[3];
-			array[0] = (com.liferay.portal.model.Region)objArray[0];
-			array[1] = (com.liferay.portal.model.Region)objArray[1];
-			array[2] = (com.liferay.portal.model.Region)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region);
+			Region[] array = new Region[3];
+			array[0] = (Region)objArray[0];
+			array[1] = (Region)objArray[1];
+			array[2] = (Region)objArray[2];
 
 			return array;
 		}
@@ -373,8 +352,7 @@ public class RegionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Region WHERE ");
 			query.append("active_ = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
@@ -384,13 +362,7 @@ public class RegionPersistence extends BasePersistence {
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				RegionHBM regionHBM = (RegionHBM)itr.next();
-				list.add(RegionHBMUtil.model(regionHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -415,8 +387,7 @@ public class RegionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Region WHERE ");
 			query.append("active_ = ?");
 			query.append(" ");
 
@@ -432,15 +403,7 @@ public class RegionPersistence extends BasePersistence {
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				RegionHBM regionHBM = (RegionHBM)itr.next();
-				list.add(RegionHBMUtil.model(regionHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -450,8 +413,8 @@ public class RegionPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Region findByActive_First(boolean active,
-		OrderByComparator obc) throws NoSuchRegionException, SystemException {
+	public Region findByActive_First(boolean active, OrderByComparator obc)
+		throws NoSuchRegionException, SystemException {
 		List list = findByActive(active, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -463,12 +426,12 @@ public class RegionPersistence extends BasePersistence {
 			throw new NoSuchRegionException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Region)list.get(0);
+			return (Region)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Region findByActive_Last(boolean active,
-		OrderByComparator obc) throws NoSuchRegionException, SystemException {
+	public Region findByActive_Last(boolean active, OrderByComparator obc)
+		throws NoSuchRegionException, SystemException {
 		int count = countByActive(active);
 		List list = findByActive(active, count - 1, count, obc);
 
@@ -481,14 +444,13 @@ public class RegionPersistence extends BasePersistence {
 			throw new NoSuchRegionException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Region)list.get(0);
+			return (Region)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Region[] findByActive_PrevAndNext(
-		String regionId, boolean active, OrderByComparator obc)
-		throws NoSuchRegionException, SystemException {
-		com.liferay.portal.model.Region region = findByPrimaryKey(regionId);
+	public Region[] findByActive_PrevAndNext(String regionId, boolean active,
+		OrderByComparator obc) throws NoSuchRegionException, SystemException {
+		Region region = findByPrimaryKey(regionId);
 		int count = countByActive(active);
 		Session session = null;
 
@@ -496,8 +458,7 @@ public class RegionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Region WHERE ");
 			query.append("active_ = ?");
 			query.append(" ");
 
@@ -513,12 +474,11 @@ public class RegionPersistence extends BasePersistence {
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region,
-					RegionHBMUtil.getInstance());
-			com.liferay.portal.model.Region[] array = new com.liferay.portal.model.Region[3];
-			array[0] = (com.liferay.portal.model.Region)objArray[0];
-			array[1] = (com.liferay.portal.model.Region)objArray[1];
-			array[2] = (com.liferay.portal.model.Region)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region);
+			Region[] array = new Region[3];
+			array[0] = (Region)objArray[0];
+			array[1] = (Region)objArray[1];
+			array[2] = (Region)objArray[2];
 
 			return array;
 		}
@@ -538,11 +498,10 @@ public class RegionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
 			if (countryId == null) {
-				query.append("countryId is null");
+				query.append("countryId IS NULL");
 			}
 			else {
 				query.append("countryId = ?");
@@ -563,13 +522,7 @@ public class RegionPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, active);
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				RegionHBM regionHBM = (RegionHBM)itr.next();
-				list.add(RegionHBMUtil.model(regionHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -594,11 +547,10 @@ public class RegionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
 			if (countryId == null) {
-				query.append("countryId is null");
+				query.append("countryId IS NULL");
 			}
 			else {
 				query.append("countryId = ?");
@@ -625,15 +577,7 @@ public class RegionPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, active);
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				RegionHBM regionHBM = (RegionHBM)itr.next();
-				list.add(RegionHBMUtil.model(regionHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -643,9 +587,8 @@ public class RegionPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Region findByC_A_First(String countryId,
-		boolean active, OrderByComparator obc)
-		throws NoSuchRegionException, SystemException {
+	public Region findByC_A_First(String countryId, boolean active,
+		OrderByComparator obc) throws NoSuchRegionException, SystemException {
 		List list = findByC_A(countryId, active, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -660,13 +603,12 @@ public class RegionPersistence extends BasePersistence {
 			throw new NoSuchRegionException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Region)list.get(0);
+			return (Region)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Region findByC_A_Last(String countryId,
-		boolean active, OrderByComparator obc)
-		throws NoSuchRegionException, SystemException {
+	public Region findByC_A_Last(String countryId, boolean active,
+		OrderByComparator obc) throws NoSuchRegionException, SystemException {
 		int count = countByC_A(countryId, active);
 		List list = findByC_A(countryId, active, count - 1, count, obc);
 
@@ -682,14 +624,14 @@ public class RegionPersistence extends BasePersistence {
 			throw new NoSuchRegionException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Region)list.get(0);
+			return (Region)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Region[] findByC_A_PrevAndNext(
-		String regionId, String countryId, boolean active, OrderByComparator obc)
+	public Region[] findByC_A_PrevAndNext(String regionId, String countryId,
+		boolean active, OrderByComparator obc)
 		throws NoSuchRegionException, SystemException {
-		com.liferay.portal.model.Region region = findByPrimaryKey(regionId);
+		Region region = findByPrimaryKey(regionId);
 		int count = countByC_A(countryId, active);
 		Session session = null;
 
@@ -697,11 +639,10 @@ public class RegionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
 			if (countryId == null) {
-				query.append("countryId is null");
+				query.append("countryId IS NULL");
 			}
 			else {
 				query.append("countryId = ?");
@@ -728,12 +669,11 @@ public class RegionPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, active);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region,
-					RegionHBMUtil.getInstance());
-			com.liferay.portal.model.Region[] array = new com.liferay.portal.model.Region[3];
-			array[0] = (com.liferay.portal.model.Region)objArray[0];
-			array[1] = (com.liferay.portal.model.Region)objArray[1];
-			array[2] = (com.liferay.portal.model.Region)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region);
+			Region[] array = new Region[3];
+			array[0] = (Region)objArray[0];
+			array[1] = (Region)objArray[1];
+			array[2] = (Region)objArray[2];
 
 			return array;
 		}
@@ -752,21 +692,13 @@ public class RegionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM ");
+			query.append("FROM com.liferay.portal.model.Region ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				RegionHBM regionHBM = (RegionHBM)itr.next();
-				list.add(RegionHBMUtil.model(regionHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -783,11 +715,10 @@ public class RegionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
 			if (countryId == null) {
-				query.append("countryId is null");
+				query.append("countryId IS NULL");
 			}
 			else {
 				query.append("countryId = ?");
@@ -807,8 +738,8 @@ public class RegionPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				RegionHBM regionHBM = (RegionHBM)itr.next();
-				session.delete(regionHBM);
+				Region region = (Region)itr.next();
+				session.delete(region);
 			}
 
 			session.flush();
@@ -828,8 +759,7 @@ public class RegionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Region WHERE ");
 			query.append("active_ = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
@@ -842,8 +772,8 @@ public class RegionPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				RegionHBM regionHBM = (RegionHBM)itr.next();
-				session.delete(regionHBM);
+				Region region = (Region)itr.next();
+				session.delete(region);
 			}
 
 			session.flush();
@@ -864,11 +794,10 @@ public class RegionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
 			if (countryId == null) {
-				query.append("countryId is null");
+				query.append("countryId IS NULL");
 			}
 			else {
 				query.append("countryId = ?");
@@ -892,8 +821,8 @@ public class RegionPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				RegionHBM regionHBM = (RegionHBM)itr.next();
-				session.delete(regionHBM);
+				Region region = (Region)itr.next();
+				session.delete(region);
 			}
 
 			session.flush();
@@ -914,11 +843,10 @@ public class RegionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
 			if (countryId == null) {
-				query.append("countryId is null");
+				query.append("countryId IS NULL");
 			}
 			else {
 				query.append("countryId = ?");
@@ -961,8 +889,7 @@ public class RegionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Region WHERE ");
 			query.append("active_ = ?");
 			query.append(" ");
 
@@ -999,11 +926,10 @@ public class RegionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Region IN CLASS com.liferay.portal.service.persistence.RegionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Region WHERE ");
 
 			if (countryId == null) {
-				query.append("countryId is null");
+				query.append("countryId IS NULL");
 			}
 			else {
 				query.append("countryId = ?");
@@ -1040,6 +966,9 @@ public class RegionPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(RegionPersistence.class);

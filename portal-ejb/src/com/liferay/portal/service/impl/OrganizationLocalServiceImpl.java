@@ -63,11 +63,11 @@ import java.util.Map;
  */
 public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 
-	public boolean addGroupOrganizations(
+	public void addGroupOrganizations(
 			String groupId, String[] organizationIds)
 		throws PortalException, SystemException {
 
-		return GroupUtil.addOrganizations(groupId, organizationIds);
+		GroupUtil.addOrganizations(groupId, organizationIds);
 	}
 
 	public Organization addOrganization(
@@ -251,11 +251,11 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 		GroupUtil.setOrganizations(groupId, organizationIds);
 	}
 
-	public boolean unsetGroupOrganizations(
+	public void unsetGroupOrganizations(
 			String groupId, String[] organizationIds)
 		throws PortalException, SystemException {
 
-		return GroupUtil.removeOrganizations(groupId, organizationIds);
+		GroupUtil.removeOrganizations(groupId, organizationIds);
 	}
 
 	public Organization updateOrganization(

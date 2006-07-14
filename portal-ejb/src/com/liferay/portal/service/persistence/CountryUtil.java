@@ -177,6 +177,10 @@ public class CountryUtil {
 		return getPersistence().countByActive(active);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static CountryPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		CountryUtil util = (CountryUtil)ctx.getBean(CLASS_NAME);

@@ -38,6 +38,8 @@ import org.hibernate.dialect.Dialect;
  */
 public class QueryUtil {
 
+	public static final int ALL_POS = -1;
+
 	public static Iterator iterate(
 		Query query, Dialect dialect, int begin, int end) {
 
@@ -45,7 +47,7 @@ public class QueryUtil {
 	}
 
 	public static List list(Query query, Dialect dialect, int begin, int end) {
-		if ((begin == -1) && (end == -1)) {
+		if ((begin == ALL_POS) && (end == ALL_POS)) {
 			return query.list();
 		}
 		else {
@@ -80,14 +82,6 @@ public class QueryUtil {
 	public static Comparable[] getPrevAndNext(
 		Query query, int count, OrderByComparator obc, Comparable comparable) {
 
-		return getPrevAndNext(
-			query, count, obc, comparable, DefaultTransformer.getInstance());
-	}
-
-	public static Comparable[] getPrevAndNext(
-		Query query, int count, OrderByComparator obc, Comparable comparable,
-		Transformer transformer) {
-
 		Comparable[] array = new Comparable[3];
 
 		ScrollableResults sr = query.scroll();
@@ -100,7 +94,7 @@ public class QueryUtil {
 					break;
 				}
 
-				Comparable curComparable = transformer.transform(obj);
+				Comparable curComparable = (Comparable)obj;
 
 				int value = obc.compare(comparable, curComparable);
 
@@ -112,13 +106,13 @@ public class QueryUtil {
 					array[1] = curComparable;
 
 					if (sr.previous()) {
-						array[0] = transformer.transform(sr.get(0));
+						array[0] = (Comparable)sr.get(0);
 					}
 
 					sr.next();
 
 					if (sr.next()) {
-						array[2] = transformer.transform(sr.get(0));
+						array[2] = (Comparable)sr.get(0);
 					}
 
 					break;

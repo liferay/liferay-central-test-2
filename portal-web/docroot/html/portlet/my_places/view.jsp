@@ -68,7 +68,7 @@
 		groupParams.put("usersGroups", user.getUserId());
 		groupParams.put("layoutSet", Boolean.FALSE);
 
-		List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, -1, -1);
+		List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (int i = 0; i < communities.size(); i++) {
 			Group community = (Group)communities.get(i);
@@ -106,7 +106,7 @@
 		<%
 		groupParams.put("layoutSet", Boolean.TRUE);
 
-		communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, -1, -1);
+		communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (int i = 0; i < communities.size(); i++) {
 			Group community = (Group)communities.get(i);

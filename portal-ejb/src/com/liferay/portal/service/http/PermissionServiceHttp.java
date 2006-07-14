@@ -586,7 +586,7 @@ public class PermissionServiceHttp {
 		}
 	}
 
-	public static boolean unsetRolePermission(HttpPrincipal httpPrincipal,
+	public static void unsetRolePermission(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, java.lang.String groupId,
 		java.lang.String name, java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
@@ -657,8 +657,6 @@ public class PermissionServiceHttp {
 
 				throw e;
 			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));
@@ -675,7 +673,7 @@ public class PermissionServiceHttp {
 		}
 	}
 
-	public static boolean unsetRolePermissions(HttpPrincipal httpPrincipal,
+	public static void unsetRolePermissions(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, java.lang.String groupId,
 		java.lang.String name, java.lang.String typeId, java.lang.String scope,
 		java.lang.String actionId)
@@ -740,8 +738,6 @@ public class PermissionServiceHttp {
 
 				throw e;
 			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));
@@ -758,7 +754,7 @@ public class PermissionServiceHttp {
 		}
 	}
 
-	public static boolean unsetUserPermissions(HttpPrincipal httpPrincipal,
+	public static void unsetUserPermissions(HttpPrincipal httpPrincipal,
 		java.lang.String userId, java.lang.String groupId,
 		java.lang.String[] actionIds, java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 
@@ -807,8 +803,6 @@ public class PermissionServiceHttp {
 
 				throw e;
 			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));

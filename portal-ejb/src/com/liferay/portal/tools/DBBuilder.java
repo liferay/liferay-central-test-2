@@ -396,6 +396,7 @@ public class DBBuilder {
 		String sqlServer = _buildTemplate(fileName, _SQL_SERVER, "sql-server");
 
 		sqlServer = _rewordSQLServer(sqlServer);
+		sqlServer = StringUtil.replace(sqlServer, "\ngo;\n", "\ngo\n");
 		sqlServer = StringUtil.replace(
 			sqlServer,
 			new String[] {"\\\\", "\\'", "\\\"", "\\n", "\\r"},

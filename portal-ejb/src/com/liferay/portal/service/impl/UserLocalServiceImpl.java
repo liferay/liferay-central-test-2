@@ -119,22 +119,22 @@ import org.apache.commons.logging.LogFactory;
  */
 public class UserLocalServiceImpl implements UserLocalService {
 
-	public boolean addGroupUsers(String groupId, String[] userIds)
+	public void addGroupUsers(String groupId, String[] userIds)
 		throws PortalException, SystemException {
 
-		return GroupUtil.addUsers(groupId, userIds);
+		GroupUtil.addUsers(groupId, userIds);
 	}
 
-	public boolean addRoleUsers(String roleId, String[] userIds)
+	public void addRoleUsers(String roleId, String[] userIds)
 		throws PortalException, SystemException {
 
-		return RoleUtil.addUsers(roleId, userIds);
+		RoleUtil.addUsers(roleId, userIds);
 	}
 
-	public boolean addUserGroupUsers(String userGroupId, String[] userIds)
+	public void addUserGroupUsers(String userGroupId, String[] userIds)
 		throws PortalException, SystemException {
 
-		return UserGroupUtil.addUsers(userGroupId, userIds);
+		UserGroupUtil.addUsers(userGroupId, userIds);
 	}
 
 	public User addUser(
@@ -441,10 +441,10 @@ public class UserLocalServiceImpl implements UserLocalService {
 		}
 	}
 
-	public boolean deleteRoleUser(String roleId, String userId)
+	public void deleteRoleUser(String roleId, String userId)
 		throws PortalException, SystemException {
 
-		return RoleUtil.removeUser(roleId, userId);
+		RoleUtil.removeUser(roleId, userId);
 	}
 
 	public void deleteUser(String userId)
@@ -802,22 +802,22 @@ public class UserLocalServiceImpl implements UserLocalService {
 		UserGroupUtil.setUsers(userGroupId, userIds);
 	}
 
-	public boolean unsetGroupUsers(String groupId, String[] userIds)
+	public void unsetGroupUsers(String groupId, String[] userIds)
 		throws PortalException, SystemException {
 
-		return GroupUtil.removeUsers(groupId, userIds);
+		GroupUtil.removeUsers(groupId, userIds);
 	}
 
-	public boolean unsetRoleUsers(String roleId, String[] userIds)
+	public void unsetRoleUsers(String roleId, String[] userIds)
 		throws PortalException, SystemException {
 
-		return RoleUtil.removeUsers(roleId, userIds);
+		RoleUtil.removeUsers(roleId, userIds);
 	}
 
-	public boolean unsetUserGroupUsers(String userGroupId, String[] userIds)
+	public void unsetUserGroupUsers(String userGroupId, String[] userIds)
 		throws PortalException, SystemException {
 
-		return UserGroupUtil.removeUsers(userGroupId, userIds);
+		UserGroupUtil.removeUsers(userGroupId, userIds);
 	}
 
 	public User updateActive(String userId, boolean active)

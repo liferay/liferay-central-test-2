@@ -182,6 +182,10 @@ public class DLFileEntryUtil {
 		return getPersistence().countByFolderId(folderId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static DLFileEntryPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		DLFileEntryUtil util = (DLFileEntryUtil)ctx.getBean(CLASS_NAME);

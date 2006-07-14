@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.calendar.NoSuchEventException;
+import com.liferay.portlet.calendar.model.CalEvent;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,25 +50,24 @@ import java.util.List;
  *
  */
 public class CalEventPersistence extends BasePersistence {
-	public com.liferay.portlet.calendar.model.CalEvent create(String eventId) {
-		CalEventHBM calEventHBM = new CalEventHBM();
-		calEventHBM.setNew(true);
-		calEventHBM.setPrimaryKey(eventId);
+	public CalEvent create(String eventId) {
+		CalEvent calEvent = new CalEvent();
+		calEvent.setNew(true);
+		calEvent.setPrimaryKey(eventId);
 
-		return CalEventHBMUtil.model(calEventHBM);
+		return calEvent;
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent remove(String eventId)
+	public CalEvent remove(String eventId)
 		throws NoSuchEventException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CalEventHBM calEventHBM = (CalEventHBM)session.get(CalEventHBM.class,
-					eventId);
+			CalEvent calEvent = (CalEvent)session.get(CalEvent.class, eventId);
 
-			if (calEventHBM == null) {
+			if (calEvent == null) {
 				_log.warn("No CalEvent exists with the primary key " +
 					eventId.toString());
 				throw new NoSuchEventException(
@@ -75,10 +75,10 @@ public class CalEventPersistence extends BasePersistence {
 					eventId.toString());
 			}
 
-			session.delete(calEventHBM);
+			session.delete(calEvent);
 			session.flush();
 
-			return CalEventHBMUtil.model(calEventHBM);
+			return calEvent;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -98,82 +98,82 @@ public class CalEventPersistence extends BasePersistence {
 				session = openSession();
 
 				if (calEvent.isNew()) {
-					CalEventHBM calEventHBM = new CalEventHBM();
-					calEventHBM.setEventId(calEvent.getEventId());
-					calEventHBM.setGroupId(calEvent.getGroupId());
-					calEventHBM.setCompanyId(calEvent.getCompanyId());
-					calEventHBM.setUserId(calEvent.getUserId());
-					calEventHBM.setUserName(calEvent.getUserName());
-					calEventHBM.setCreateDate(calEvent.getCreateDate());
-					calEventHBM.setModifiedDate(calEvent.getModifiedDate());
-					calEventHBM.setTitle(calEvent.getTitle());
-					calEventHBM.setDescription(calEvent.getDescription());
-					calEventHBM.setStartDate(calEvent.getStartDate());
-					calEventHBM.setEndDate(calEvent.getEndDate());
-					calEventHBM.setDurationHour(calEvent.getDurationHour());
-					calEventHBM.setDurationMinute(calEvent.getDurationMinute());
-					calEventHBM.setAllDay(calEvent.getAllDay());
-					calEventHBM.setTimeZoneSensitive(calEvent.getTimeZoneSensitive());
-					calEventHBM.setType(calEvent.getType());
-					calEventHBM.setRepeating(calEvent.getRepeating());
-					calEventHBM.setRecurrence(calEvent.getRecurrence());
-					calEventHBM.setRemindBy(calEvent.getRemindBy());
-					calEventHBM.setFirstReminder(calEvent.getFirstReminder());
-					calEventHBM.setSecondReminder(calEvent.getSecondReminder());
-					session.save(calEventHBM);
+					CalEvent calEventModel = new CalEvent();
+					calEventModel.setEventId(calEvent.getEventId());
+					calEventModel.setGroupId(calEvent.getGroupId());
+					calEventModel.setCompanyId(calEvent.getCompanyId());
+					calEventModel.setUserId(calEvent.getUserId());
+					calEventModel.setUserName(calEvent.getUserName());
+					calEventModel.setCreateDate(calEvent.getCreateDate());
+					calEventModel.setModifiedDate(calEvent.getModifiedDate());
+					calEventModel.setTitle(calEvent.getTitle());
+					calEventModel.setDescription(calEvent.getDescription());
+					calEventModel.setStartDate(calEvent.getStartDate());
+					calEventModel.setEndDate(calEvent.getEndDate());
+					calEventModel.setDurationHour(calEvent.getDurationHour());
+					calEventModel.setDurationMinute(calEvent.getDurationMinute());
+					calEventModel.setAllDay(calEvent.getAllDay());
+					calEventModel.setTimeZoneSensitive(calEvent.getTimeZoneSensitive());
+					calEventModel.setType(calEvent.getType());
+					calEventModel.setRepeating(calEvent.getRepeating());
+					calEventModel.setRecurrence(calEvent.getRecurrence());
+					calEventModel.setRemindBy(calEvent.getRemindBy());
+					calEventModel.setFirstReminder(calEvent.getFirstReminder());
+					calEventModel.setSecondReminder(calEvent.getSecondReminder());
+					session.save(calEventModel);
 					session.flush();
 				}
 				else {
-					CalEventHBM calEventHBM = (CalEventHBM)session.get(CalEventHBM.class,
+					CalEvent calEventModel = (CalEvent)session.get(CalEvent.class,
 							calEvent.getPrimaryKey());
 
-					if (calEventHBM != null) {
-						calEventHBM.setGroupId(calEvent.getGroupId());
-						calEventHBM.setCompanyId(calEvent.getCompanyId());
-						calEventHBM.setUserId(calEvent.getUserId());
-						calEventHBM.setUserName(calEvent.getUserName());
-						calEventHBM.setCreateDate(calEvent.getCreateDate());
-						calEventHBM.setModifiedDate(calEvent.getModifiedDate());
-						calEventHBM.setTitle(calEvent.getTitle());
-						calEventHBM.setDescription(calEvent.getDescription());
-						calEventHBM.setStartDate(calEvent.getStartDate());
-						calEventHBM.setEndDate(calEvent.getEndDate());
-						calEventHBM.setDurationHour(calEvent.getDurationHour());
-						calEventHBM.setDurationMinute(calEvent.getDurationMinute());
-						calEventHBM.setAllDay(calEvent.getAllDay());
-						calEventHBM.setTimeZoneSensitive(calEvent.getTimeZoneSensitive());
-						calEventHBM.setType(calEvent.getType());
-						calEventHBM.setRepeating(calEvent.getRepeating());
-						calEventHBM.setRecurrence(calEvent.getRecurrence());
-						calEventHBM.setRemindBy(calEvent.getRemindBy());
-						calEventHBM.setFirstReminder(calEvent.getFirstReminder());
-						calEventHBM.setSecondReminder(calEvent.getSecondReminder());
+					if (calEventModel != null) {
+						calEventModel.setGroupId(calEvent.getGroupId());
+						calEventModel.setCompanyId(calEvent.getCompanyId());
+						calEventModel.setUserId(calEvent.getUserId());
+						calEventModel.setUserName(calEvent.getUserName());
+						calEventModel.setCreateDate(calEvent.getCreateDate());
+						calEventModel.setModifiedDate(calEvent.getModifiedDate());
+						calEventModel.setTitle(calEvent.getTitle());
+						calEventModel.setDescription(calEvent.getDescription());
+						calEventModel.setStartDate(calEvent.getStartDate());
+						calEventModel.setEndDate(calEvent.getEndDate());
+						calEventModel.setDurationHour(calEvent.getDurationHour());
+						calEventModel.setDurationMinute(calEvent.getDurationMinute());
+						calEventModel.setAllDay(calEvent.getAllDay());
+						calEventModel.setTimeZoneSensitive(calEvent.getTimeZoneSensitive());
+						calEventModel.setType(calEvent.getType());
+						calEventModel.setRepeating(calEvent.getRepeating());
+						calEventModel.setRecurrence(calEvent.getRecurrence());
+						calEventModel.setRemindBy(calEvent.getRemindBy());
+						calEventModel.setFirstReminder(calEvent.getFirstReminder());
+						calEventModel.setSecondReminder(calEvent.getSecondReminder());
 						session.flush();
 					}
 					else {
-						calEventHBM = new CalEventHBM();
-						calEventHBM.setEventId(calEvent.getEventId());
-						calEventHBM.setGroupId(calEvent.getGroupId());
-						calEventHBM.setCompanyId(calEvent.getCompanyId());
-						calEventHBM.setUserId(calEvent.getUserId());
-						calEventHBM.setUserName(calEvent.getUserName());
-						calEventHBM.setCreateDate(calEvent.getCreateDate());
-						calEventHBM.setModifiedDate(calEvent.getModifiedDate());
-						calEventHBM.setTitle(calEvent.getTitle());
-						calEventHBM.setDescription(calEvent.getDescription());
-						calEventHBM.setStartDate(calEvent.getStartDate());
-						calEventHBM.setEndDate(calEvent.getEndDate());
-						calEventHBM.setDurationHour(calEvent.getDurationHour());
-						calEventHBM.setDurationMinute(calEvent.getDurationMinute());
-						calEventHBM.setAllDay(calEvent.getAllDay());
-						calEventHBM.setTimeZoneSensitive(calEvent.getTimeZoneSensitive());
-						calEventHBM.setType(calEvent.getType());
-						calEventHBM.setRepeating(calEvent.getRepeating());
-						calEventHBM.setRecurrence(calEvent.getRecurrence());
-						calEventHBM.setRemindBy(calEvent.getRemindBy());
-						calEventHBM.setFirstReminder(calEvent.getFirstReminder());
-						calEventHBM.setSecondReminder(calEvent.getSecondReminder());
-						session.save(calEventHBM);
+						calEventModel = new CalEvent();
+						calEventModel.setEventId(calEvent.getEventId());
+						calEventModel.setGroupId(calEvent.getGroupId());
+						calEventModel.setCompanyId(calEvent.getCompanyId());
+						calEventModel.setUserId(calEvent.getUserId());
+						calEventModel.setUserName(calEvent.getUserName());
+						calEventModel.setCreateDate(calEvent.getCreateDate());
+						calEventModel.setModifiedDate(calEvent.getModifiedDate());
+						calEventModel.setTitle(calEvent.getTitle());
+						calEventModel.setDescription(calEvent.getDescription());
+						calEventModel.setStartDate(calEvent.getStartDate());
+						calEventModel.setEndDate(calEvent.getEndDate());
+						calEventModel.setDurationHour(calEvent.getDurationHour());
+						calEventModel.setDurationMinute(calEvent.getDurationMinute());
+						calEventModel.setAllDay(calEvent.getAllDay());
+						calEventModel.setTimeZoneSensitive(calEvent.getTimeZoneSensitive());
+						calEventModel.setType(calEvent.getType());
+						calEventModel.setRepeating(calEvent.getRepeating());
+						calEventModel.setRecurrence(calEvent.getRecurrence());
+						calEventModel.setRemindBy(calEvent.getRemindBy());
+						calEventModel.setFirstReminder(calEvent.getFirstReminder());
+						calEventModel.setSecondReminder(calEvent.getSecondReminder());
+						session.save(calEventModel);
 						session.flush();
 					}
 				}
@@ -192,17 +192,16 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent findByPrimaryKey(
-		String eventId) throws NoSuchEventException, SystemException {
+	public CalEvent findByPrimaryKey(String eventId)
+		throws NoSuchEventException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CalEventHBM calEventHBM = (CalEventHBM)session.get(CalEventHBM.class,
-					eventId);
+			CalEvent calEvent = (CalEvent)session.get(CalEvent.class, eventId);
 
-			if (calEventHBM == null) {
+			if (calEvent == null) {
 				_log.warn("No CalEvent exists with the primary key " +
 					eventId.toString());
 				throw new NoSuchEventException(
@@ -210,7 +209,7 @@ public class CalEventPersistence extends BasePersistence {
 					eventId.toString());
 			}
 
-			return CalEventHBMUtil.model(calEventHBM);
+			return calEvent;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -228,10 +227,10 @@ public class CalEventPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
+				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -249,13 +248,7 @@ public class CalEventPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				CalEventHBM calEventHBM = (CalEventHBM)itr.next();
-				list.add(CalEventHBMUtil.model(calEventHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -281,10 +274,10 @@ public class CalEventPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
+				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -308,15 +301,7 @@ public class CalEventPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				CalEventHBM calEventHBM = (CalEventHBM)itr.next();
-				list.add(CalEventHBMUtil.model(calEventHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -326,8 +311,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent findByGroupId_First(
-		String groupId, OrderByComparator obc)
+	public CalEvent findByGroupId_First(String groupId, OrderByComparator obc)
 		throws NoSuchEventException, SystemException {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
@@ -340,12 +324,11 @@ public class CalEventPersistence extends BasePersistence {
 			throw new NoSuchEventException(msg);
 		}
 		else {
-			return (com.liferay.portlet.calendar.model.CalEvent)list.get(0);
+			return (CalEvent)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent findByGroupId_Last(
-		String groupId, OrderByComparator obc)
+	public CalEvent findByGroupId_Last(String groupId, OrderByComparator obc)
 		throws NoSuchEventException, SystemException {
 		int count = countByGroupId(groupId);
 		List list = findByGroupId(groupId, count - 1, count, obc);
@@ -359,14 +342,13 @@ public class CalEventPersistence extends BasePersistence {
 			throw new NoSuchEventException(msg);
 		}
 		else {
-			return (com.liferay.portlet.calendar.model.CalEvent)list.get(0);
+			return (CalEvent)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent[] findByGroupId_PrevAndNext(
-		String eventId, String groupId, OrderByComparator obc)
-		throws NoSuchEventException, SystemException {
-		com.liferay.portlet.calendar.model.CalEvent calEvent = findByPrimaryKey(eventId);
+	public CalEvent[] findByGroupId_PrevAndNext(String eventId, String groupId,
+		OrderByComparator obc) throws NoSuchEventException, SystemException {
+		CalEvent calEvent = findByPrimaryKey(eventId);
 		int count = countByGroupId(groupId);
 		Session session = null;
 
@@ -375,10 +357,10 @@ public class CalEventPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
+				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -402,12 +384,11 @@ public class CalEventPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					calEvent, CalEventHBMUtil.getInstance());
-			com.liferay.portlet.calendar.model.CalEvent[] array = new com.liferay.portlet.calendar.model.CalEvent[3];
-			array[0] = (com.liferay.portlet.calendar.model.CalEvent)objArray[0];
-			array[1] = (com.liferay.portlet.calendar.model.CalEvent)objArray[1];
-			array[2] = (com.liferay.portlet.calendar.model.CalEvent)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
+			CalEvent[] array = new CalEvent[3];
+			array[0] = (CalEvent)objArray[0];
+			array[1] = (CalEvent)objArray[1];
+			array[2] = (CalEvent)objArray[2];
 
 			return array;
 		}
@@ -428,10 +409,10 @@ public class CalEventPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
+				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -440,7 +421,7 @@ public class CalEventPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (type == null) {
-				query.append("type_ is null");
+				query.append("type_ IS NULL");
 			}
 			else {
 				query.append("type_ = ?");
@@ -462,13 +443,7 @@ public class CalEventPersistence extends BasePersistence {
 				q.setString(queryPos++, type);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				CalEventHBM calEventHBM = (CalEventHBM)itr.next();
-				list.add(CalEventHBMUtil.model(calEventHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -494,10 +469,10 @@ public class CalEventPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
+				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -506,7 +481,7 @@ public class CalEventPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (type == null) {
-				query.append("type_ is null");
+				query.append("type_ IS NULL");
 			}
 			else {
 				query.append("type_ = ?");
@@ -534,15 +509,7 @@ public class CalEventPersistence extends BasePersistence {
 				q.setString(queryPos++, type);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				CalEventHBM calEventHBM = (CalEventHBM)itr.next();
-				list.add(CalEventHBMUtil.model(calEventHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -552,9 +519,8 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent findByG_T_First(
-		String groupId, String type, OrderByComparator obc)
-		throws NoSuchEventException, SystemException {
+	public CalEvent findByG_T_First(String groupId, String type,
+		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		List list = findByG_T(groupId, type, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -569,13 +535,12 @@ public class CalEventPersistence extends BasePersistence {
 			throw new NoSuchEventException(msg);
 		}
 		else {
-			return (com.liferay.portlet.calendar.model.CalEvent)list.get(0);
+			return (CalEvent)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent findByG_T_Last(
-		String groupId, String type, OrderByComparator obc)
-		throws NoSuchEventException, SystemException {
+	public CalEvent findByG_T_Last(String groupId, String type,
+		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		int count = countByG_T(groupId, type);
 		List list = findByG_T(groupId, type, count - 1, count, obc);
 
@@ -591,14 +556,14 @@ public class CalEventPersistence extends BasePersistence {
 			throw new NoSuchEventException(msg);
 		}
 		else {
-			return (com.liferay.portlet.calendar.model.CalEvent)list.get(0);
+			return (CalEvent)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent[] findByG_T_PrevAndNext(
-		String eventId, String groupId, String type, OrderByComparator obc)
+	public CalEvent[] findByG_T_PrevAndNext(String eventId, String groupId,
+		String type, OrderByComparator obc)
 		throws NoSuchEventException, SystemException {
-		com.liferay.portlet.calendar.model.CalEvent calEvent = findByPrimaryKey(eventId);
+		CalEvent calEvent = findByPrimaryKey(eventId);
 		int count = countByG_T(groupId, type);
 		Session session = null;
 
@@ -607,10 +572,10 @@ public class CalEventPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
+				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -619,7 +584,7 @@ public class CalEventPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (type == null) {
-				query.append("type_ is null");
+				query.append("type_ IS NULL");
 			}
 			else {
 				query.append("type_ = ?");
@@ -647,12 +612,11 @@ public class CalEventPersistence extends BasePersistence {
 				q.setString(queryPos++, type);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					calEvent, CalEventHBMUtil.getInstance());
-			com.liferay.portlet.calendar.model.CalEvent[] array = new com.liferay.portlet.calendar.model.CalEvent[3];
-			array[0] = (com.liferay.portlet.calendar.model.CalEvent)objArray[0];
-			array[1] = (com.liferay.portlet.calendar.model.CalEvent)objArray[1];
-			array[2] = (com.liferay.portlet.calendar.model.CalEvent)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
+			CalEvent[] array = new CalEvent[3];
+			array[0] = (CalEvent)objArray[0];
+			array[1] = (CalEvent)objArray[1];
+			array[2] = (CalEvent)objArray[2];
 
 			return array;
 		}
@@ -673,10 +637,10 @@ public class CalEventPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
+				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -698,13 +662,7 @@ public class CalEventPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, repeating);
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				CalEventHBM calEventHBM = (CalEventHBM)itr.next();
-				list.add(CalEventHBMUtil.model(calEventHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -730,10 +688,10 @@ public class CalEventPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
+				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -761,15 +719,7 @@ public class CalEventPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, repeating);
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				CalEventHBM calEventHBM = (CalEventHBM)itr.next();
-				list.add(CalEventHBMUtil.model(calEventHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -779,9 +729,8 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent findByG_R_First(
-		String groupId, boolean repeating, OrderByComparator obc)
-		throws NoSuchEventException, SystemException {
+	public CalEvent findByG_R_First(String groupId, boolean repeating,
+		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		List list = findByG_R(groupId, repeating, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -796,13 +745,12 @@ public class CalEventPersistence extends BasePersistence {
 			throw new NoSuchEventException(msg);
 		}
 		else {
-			return (com.liferay.portlet.calendar.model.CalEvent)list.get(0);
+			return (CalEvent)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent findByG_R_Last(
-		String groupId, boolean repeating, OrderByComparator obc)
-		throws NoSuchEventException, SystemException {
+	public CalEvent findByG_R_Last(String groupId, boolean repeating,
+		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		int count = countByG_R(groupId, repeating);
 		List list = findByG_R(groupId, repeating, count - 1, count, obc);
 
@@ -818,14 +766,14 @@ public class CalEventPersistence extends BasePersistence {
 			throw new NoSuchEventException(msg);
 		}
 		else {
-			return (com.liferay.portlet.calendar.model.CalEvent)list.get(0);
+			return (CalEvent)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent[] findByG_R_PrevAndNext(
-		String eventId, String groupId, boolean repeating, OrderByComparator obc)
+	public CalEvent[] findByG_R_PrevAndNext(String eventId, String groupId,
+		boolean repeating, OrderByComparator obc)
 		throws NoSuchEventException, SystemException {
-		com.liferay.portlet.calendar.model.CalEvent calEvent = findByPrimaryKey(eventId);
+		CalEvent calEvent = findByPrimaryKey(eventId);
 		int count = countByG_R(groupId, repeating);
 		Session session = null;
 
@@ -834,10 +782,10 @@ public class CalEventPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
+				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -865,12 +813,11 @@ public class CalEventPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, repeating);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					calEvent, CalEventHBMUtil.getInstance());
-			com.liferay.portlet.calendar.model.CalEvent[] array = new com.liferay.portlet.calendar.model.CalEvent[3];
-			array[0] = (com.liferay.portlet.calendar.model.CalEvent)objArray[0];
-			array[1] = (com.liferay.portlet.calendar.model.CalEvent)objArray[1];
-			array[2] = (com.liferay.portlet.calendar.model.CalEvent)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
+			CalEvent[] array = new CalEvent[3];
+			array[0] = (CalEvent)objArray[0];
+			array[1] = (CalEvent)objArray[1];
+			array[2] = (CalEvent)objArray[2];
 
 			return array;
 		}
@@ -889,22 +836,14 @@ public class CalEventPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM ");
+			query.append("FROM com.liferay.portlet.calendar.model.CalEvent ");
 			query.append("ORDER BY ");
 			query.append("startDate ASC").append(", ");
 			query.append("title ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				CalEventHBM calEventHBM = (CalEventHBM)itr.next();
-				list.add(CalEventHBMUtil.model(calEventHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -922,10 +861,10 @@ public class CalEventPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
+				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -946,8 +885,8 @@ public class CalEventPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				CalEventHBM calEventHBM = (CalEventHBM)itr.next();
-				session.delete(calEventHBM);
+				CalEvent calEvent = (CalEvent)itr.next();
+				session.delete(calEvent);
 			}
 
 			session.flush();
@@ -969,10 +908,10 @@ public class CalEventPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
+				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -981,7 +920,7 @@ public class CalEventPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (type == null) {
-				query.append("type_ is null");
+				query.append("type_ IS NULL");
 			}
 			else {
 				query.append("type_ = ?");
@@ -1006,8 +945,8 @@ public class CalEventPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				CalEventHBM calEventHBM = (CalEventHBM)itr.next();
-				session.delete(calEventHBM);
+				CalEvent calEvent = (CalEvent)itr.next();
+				session.delete(calEvent);
 			}
 
 			session.flush();
@@ -1029,10 +968,10 @@ public class CalEventPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
+				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -1057,8 +996,8 @@ public class CalEventPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				CalEventHBM calEventHBM = (CalEventHBM)itr.next();
-				session.delete(calEventHBM);
+				CalEvent calEvent = (CalEvent)itr.next();
+				session.delete(calEvent);
 			}
 
 			session.flush();
@@ -1080,10 +1019,10 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
+				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -1128,10 +1067,10 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
+				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -1140,7 +1079,7 @@ public class CalEventPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (type == null) {
-				query.append("type_ is null");
+				query.append("type_ IS NULL");
 			}
 			else {
 				query.append("type_ = ?");
@@ -1189,10 +1128,10 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM CalEvent IN CLASS com.liferay.portlet.calendar.service.persistence.CalEventHBM WHERE ");
+				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -1229,6 +1168,9 @@ public class CalEventPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(CalEventPersistence.class);

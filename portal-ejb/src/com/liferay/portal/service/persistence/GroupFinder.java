@@ -96,14 +96,12 @@ public class GroupFinder {
 
 		params3.put("groupsUserGroups", userId);
 
-		int count = 0;
-
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			count += _countByGroupId(session, groupId, params1);
+			int count = _countByGroupId(session, groupId, params1);
 			count += _countByGroupId(session, groupId, params2);
 			count += _countByGroupId(session, groupId, params3);
 
@@ -150,14 +148,12 @@ public class GroupFinder {
 			params3.put("groupsUserGroups", userId);
 		}
 
-		int count = 0;
-
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			count += _countByC_N_D(
+			int count = _countByC_N_D(
 				session, companyId, name, description, params1);
 
 			if (Validator.isNotNull(userId)) {
@@ -192,7 +188,7 @@ public class GroupFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("Group_", GroupHBM.class);
+			q.addEntity("Group_", Group.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -202,9 +198,7 @@ public class GroupFinder {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				GroupHBM groupHBM = (GroupHBM)itr.next();
-
-				return GroupHBMUtil.model(groupHBM);
+				return (Group)itr.next();
 			}
 		}
 		catch (Exception e) {
@@ -252,8 +246,6 @@ public class GroupFinder {
 			params3.remove("usersGroups");
 			params3.put("groupsUserGroups", userId);
 		}
-
-		List list = new ArrayList();
 
 		Session session = null;
 
@@ -314,6 +306,8 @@ public class GroupFinder {
 				qPos.add(description);
 			}
 
+			List list = new ArrayList();
+
 			Iterator itr = QueryUtil.iterate(
 				q, HibernateUtil.getDialect(), begin, end);
 
@@ -324,6 +318,8 @@ public class GroupFinder {
 
 				list.add(group);
 			}
+
+			return list;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -331,8 +327,6 @@ public class GroupFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 	private static int _countByGroupId(

@@ -130,6 +130,10 @@ public class DataTrackerUtil {
 		return getPersistence().findAll();
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static DataTrackerPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		DataTrackerUtil util = (DataTrackerUtil)ctx.getBean(CLASS_NAME);

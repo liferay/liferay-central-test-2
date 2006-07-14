@@ -231,6 +231,10 @@ public class MailReceiptUtil {
 		return getPersistence().countByUserId(userId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static MailReceiptPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		MailReceiptUtil util = (MailReceiptUtil)ctx.getBean(CLASS_NAME);

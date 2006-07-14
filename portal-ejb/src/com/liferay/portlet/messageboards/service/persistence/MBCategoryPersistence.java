@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
+import com.liferay.portlet.messageboards.model.MBCategory;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,26 +50,25 @@ import java.util.List;
  *
  */
 public class MBCategoryPersistence extends BasePersistence {
-	public com.liferay.portlet.messageboards.model.MBCategory create(
-		String categoryId) {
-		MBCategoryHBM mbCategoryHBM = new MBCategoryHBM();
-		mbCategoryHBM.setNew(true);
-		mbCategoryHBM.setPrimaryKey(categoryId);
+	public MBCategory create(String categoryId) {
+		MBCategory mbCategory = new MBCategory();
+		mbCategory.setNew(true);
+		mbCategory.setPrimaryKey(categoryId);
 
-		return MBCategoryHBMUtil.model(mbCategoryHBM);
+		return mbCategory;
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory remove(
-		String categoryId) throws NoSuchCategoryException, SystemException {
+	public MBCategory remove(String categoryId)
+		throws NoSuchCategoryException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			MBCategoryHBM mbCategoryHBM = (MBCategoryHBM)session.get(MBCategoryHBM.class,
+			MBCategory mbCategory = (MBCategory)session.get(MBCategory.class,
 					categoryId);
 
-			if (mbCategoryHBM == null) {
+			if (mbCategory == null) {
 				_log.warn("No MBCategory exists with the primary key " +
 					categoryId.toString());
 				throw new NoSuchCategoryException(
@@ -76,10 +76,10 @@ public class MBCategoryPersistence extends BasePersistence {
 					categoryId.toString());
 			}
 
-			session.delete(mbCategoryHBM);
+			session.delete(mbCategory);
 			session.flush();
 
-			return MBCategoryHBMUtil.model(mbCategoryHBM);
+			return mbCategory;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -99,52 +99,52 @@ public class MBCategoryPersistence extends BasePersistence {
 				session = openSession();
 
 				if (mbCategory.isNew()) {
-					MBCategoryHBM mbCategoryHBM = new MBCategoryHBM();
-					mbCategoryHBM.setCategoryId(mbCategory.getCategoryId());
-					mbCategoryHBM.setGroupId(mbCategory.getGroupId());
-					mbCategoryHBM.setCompanyId(mbCategory.getCompanyId());
-					mbCategoryHBM.setUserId(mbCategory.getUserId());
-					mbCategoryHBM.setUserName(mbCategory.getUserName());
-					mbCategoryHBM.setCreateDate(mbCategory.getCreateDate());
-					mbCategoryHBM.setModifiedDate(mbCategory.getModifiedDate());
-					mbCategoryHBM.setParentCategoryId(mbCategory.getParentCategoryId());
-					mbCategoryHBM.setName(mbCategory.getName());
-					mbCategoryHBM.setDescription(mbCategory.getDescription());
-					mbCategoryHBM.setLastPostDate(mbCategory.getLastPostDate());
-					session.save(mbCategoryHBM);
+					MBCategory mbCategoryModel = new MBCategory();
+					mbCategoryModel.setCategoryId(mbCategory.getCategoryId());
+					mbCategoryModel.setGroupId(mbCategory.getGroupId());
+					mbCategoryModel.setCompanyId(mbCategory.getCompanyId());
+					mbCategoryModel.setUserId(mbCategory.getUserId());
+					mbCategoryModel.setUserName(mbCategory.getUserName());
+					mbCategoryModel.setCreateDate(mbCategory.getCreateDate());
+					mbCategoryModel.setModifiedDate(mbCategory.getModifiedDate());
+					mbCategoryModel.setParentCategoryId(mbCategory.getParentCategoryId());
+					mbCategoryModel.setName(mbCategory.getName());
+					mbCategoryModel.setDescription(mbCategory.getDescription());
+					mbCategoryModel.setLastPostDate(mbCategory.getLastPostDate());
+					session.save(mbCategoryModel);
 					session.flush();
 				}
 				else {
-					MBCategoryHBM mbCategoryHBM = (MBCategoryHBM)session.get(MBCategoryHBM.class,
+					MBCategory mbCategoryModel = (MBCategory)session.get(MBCategory.class,
 							mbCategory.getPrimaryKey());
 
-					if (mbCategoryHBM != null) {
-						mbCategoryHBM.setGroupId(mbCategory.getGroupId());
-						mbCategoryHBM.setCompanyId(mbCategory.getCompanyId());
-						mbCategoryHBM.setUserId(mbCategory.getUserId());
-						mbCategoryHBM.setUserName(mbCategory.getUserName());
-						mbCategoryHBM.setCreateDate(mbCategory.getCreateDate());
-						mbCategoryHBM.setModifiedDate(mbCategory.getModifiedDate());
-						mbCategoryHBM.setParentCategoryId(mbCategory.getParentCategoryId());
-						mbCategoryHBM.setName(mbCategory.getName());
-						mbCategoryHBM.setDescription(mbCategory.getDescription());
-						mbCategoryHBM.setLastPostDate(mbCategory.getLastPostDate());
+					if (mbCategoryModel != null) {
+						mbCategoryModel.setGroupId(mbCategory.getGroupId());
+						mbCategoryModel.setCompanyId(mbCategory.getCompanyId());
+						mbCategoryModel.setUserId(mbCategory.getUserId());
+						mbCategoryModel.setUserName(mbCategory.getUserName());
+						mbCategoryModel.setCreateDate(mbCategory.getCreateDate());
+						mbCategoryModel.setModifiedDate(mbCategory.getModifiedDate());
+						mbCategoryModel.setParentCategoryId(mbCategory.getParentCategoryId());
+						mbCategoryModel.setName(mbCategory.getName());
+						mbCategoryModel.setDescription(mbCategory.getDescription());
+						mbCategoryModel.setLastPostDate(mbCategory.getLastPostDate());
 						session.flush();
 					}
 					else {
-						mbCategoryHBM = new MBCategoryHBM();
-						mbCategoryHBM.setCategoryId(mbCategory.getCategoryId());
-						mbCategoryHBM.setGroupId(mbCategory.getGroupId());
-						mbCategoryHBM.setCompanyId(mbCategory.getCompanyId());
-						mbCategoryHBM.setUserId(mbCategory.getUserId());
-						mbCategoryHBM.setUserName(mbCategory.getUserName());
-						mbCategoryHBM.setCreateDate(mbCategory.getCreateDate());
-						mbCategoryHBM.setModifiedDate(mbCategory.getModifiedDate());
-						mbCategoryHBM.setParentCategoryId(mbCategory.getParentCategoryId());
-						mbCategoryHBM.setName(mbCategory.getName());
-						mbCategoryHBM.setDescription(mbCategory.getDescription());
-						mbCategoryHBM.setLastPostDate(mbCategory.getLastPostDate());
-						session.save(mbCategoryHBM);
+						mbCategoryModel = new MBCategory();
+						mbCategoryModel.setCategoryId(mbCategory.getCategoryId());
+						mbCategoryModel.setGroupId(mbCategory.getGroupId());
+						mbCategoryModel.setCompanyId(mbCategory.getCompanyId());
+						mbCategoryModel.setUserId(mbCategory.getUserId());
+						mbCategoryModel.setUserName(mbCategory.getUserName());
+						mbCategoryModel.setCreateDate(mbCategory.getCreateDate());
+						mbCategoryModel.setModifiedDate(mbCategory.getModifiedDate());
+						mbCategoryModel.setParentCategoryId(mbCategory.getParentCategoryId());
+						mbCategoryModel.setName(mbCategory.getName());
+						mbCategoryModel.setDescription(mbCategory.getDescription());
+						mbCategoryModel.setLastPostDate(mbCategory.getLastPostDate());
+						session.save(mbCategoryModel);
 						session.flush();
 					}
 				}
@@ -163,17 +163,17 @@ public class MBCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory findByPrimaryKey(
-		String categoryId) throws NoSuchCategoryException, SystemException {
+	public MBCategory findByPrimaryKey(String categoryId)
+		throws NoSuchCategoryException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			MBCategoryHBM mbCategoryHBM = (MBCategoryHBM)session.get(MBCategoryHBM.class,
+			MBCategory mbCategory = (MBCategory)session.get(MBCategory.class,
 					categoryId);
 
-			if (mbCategoryHBM == null) {
+			if (mbCategory == null) {
 				_log.warn("No MBCategory exists with the primary key " +
 					categoryId.toString());
 				throw new NoSuchCategoryException(
@@ -181,7 +181,7 @@ public class MBCategoryPersistence extends BasePersistence {
 					categoryId.toString());
 			}
 
-			return MBCategoryHBMUtil.model(mbCategoryHBM);
+			return mbCategory;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -199,10 +199,10 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -220,13 +220,7 @@ public class MBCategoryPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				MBCategoryHBM mbCategoryHBM = (MBCategoryHBM)itr.next();
-				list.add(MBCategoryHBMUtil.model(mbCategoryHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -252,10 +246,10 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -279,15 +273,7 @@ public class MBCategoryPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				MBCategoryHBM mbCategoryHBM = (MBCategoryHBM)itr.next();
-				list.add(MBCategoryHBMUtil.model(mbCategoryHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -297,8 +283,7 @@ public class MBCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory findByGroupId_First(
-		String groupId, OrderByComparator obc)
+	public MBCategory findByGroupId_First(String groupId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
@@ -311,12 +296,11 @@ public class MBCategoryPersistence extends BasePersistence {
 			throw new NoSuchCategoryException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBCategory)list.get(0);
+			return (MBCategory)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory findByGroupId_Last(
-		String groupId, OrderByComparator obc)
+	public MBCategory findByGroupId_Last(String groupId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
 		int count = countByGroupId(groupId);
 		List list = findByGroupId(groupId, count - 1, count, obc);
@@ -330,14 +314,14 @@ public class MBCategoryPersistence extends BasePersistence {
 			throw new NoSuchCategoryException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBCategory)list.get(0);
+			return (MBCategory)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory[] findByGroupId_PrevAndNext(
-		String categoryId, String groupId, OrderByComparator obc)
+	public MBCategory[] findByGroupId_PrevAndNext(String categoryId,
+		String groupId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
-		com.liferay.portlet.messageboards.model.MBCategory mbCategory = findByPrimaryKey(categoryId);
+		MBCategory mbCategory = findByPrimaryKey(categoryId);
 		int count = countByGroupId(groupId);
 		Session session = null;
 
@@ -346,10 +330,10 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -374,11 +358,11 @@ public class MBCategoryPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbCategory, MBCategoryHBMUtil.getInstance());
-			com.liferay.portlet.messageboards.model.MBCategory[] array = new com.liferay.portlet.messageboards.model.MBCategory[3];
-			array[0] = (com.liferay.portlet.messageboards.model.MBCategory)objArray[0];
-			array[1] = (com.liferay.portlet.messageboards.model.MBCategory)objArray[1];
-			array[2] = (com.liferay.portlet.messageboards.model.MBCategory)objArray[2];
+					mbCategory);
+			MBCategory[] array = new MBCategory[3];
+			array[0] = (MBCategory)objArray[0];
+			array[1] = (MBCategory)objArray[1];
+			array[2] = (MBCategory)objArray[2];
 
 			return array;
 		}
@@ -398,10 +382,10 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -419,13 +403,7 @@ public class MBCategoryPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				MBCategoryHBM mbCategoryHBM = (MBCategoryHBM)itr.next();
-				list.add(MBCategoryHBMUtil.model(mbCategoryHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -451,10 +429,10 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -478,15 +456,7 @@ public class MBCategoryPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				MBCategoryHBM mbCategoryHBM = (MBCategoryHBM)itr.next();
-				list.add(MBCategoryHBMUtil.model(mbCategoryHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -496,9 +466,8 @@ public class MBCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory findByCompanyId_First(
-		String companyId, OrderByComparator obc)
-		throws NoSuchCategoryException, SystemException {
+	public MBCategory findByCompanyId_First(String companyId,
+		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -510,13 +479,12 @@ public class MBCategoryPersistence extends BasePersistence {
 			throw new NoSuchCategoryException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBCategory)list.get(0);
+			return (MBCategory)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory findByCompanyId_Last(
-		String companyId, OrderByComparator obc)
-		throws NoSuchCategoryException, SystemException {
+	public MBCategory findByCompanyId_Last(String companyId,
+		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		int count = countByCompanyId(companyId);
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
@@ -529,14 +497,14 @@ public class MBCategoryPersistence extends BasePersistence {
 			throw new NoSuchCategoryException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBCategory)list.get(0);
+			return (MBCategory)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory[] findByCompanyId_PrevAndNext(
-		String categoryId, String companyId, OrderByComparator obc)
+	public MBCategory[] findByCompanyId_PrevAndNext(String categoryId,
+		String companyId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
-		com.liferay.portlet.messageboards.model.MBCategory mbCategory = findByPrimaryKey(categoryId);
+		MBCategory mbCategory = findByPrimaryKey(categoryId);
 		int count = countByCompanyId(companyId);
 		Session session = null;
 
@@ -545,10 +513,10 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -573,11 +541,11 @@ public class MBCategoryPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbCategory, MBCategoryHBMUtil.getInstance());
-			com.liferay.portlet.messageboards.model.MBCategory[] array = new com.liferay.portlet.messageboards.model.MBCategory[3];
-			array[0] = (com.liferay.portlet.messageboards.model.MBCategory)objArray[0];
-			array[1] = (com.liferay.portlet.messageboards.model.MBCategory)objArray[1];
-			array[2] = (com.liferay.portlet.messageboards.model.MBCategory)objArray[2];
+					mbCategory);
+			MBCategory[] array = new MBCategory[3];
+			array[0] = (MBCategory)objArray[0];
+			array[1] = (MBCategory)objArray[1];
+			array[2] = (MBCategory)objArray[2];
 
 			return array;
 		}
@@ -598,10 +566,10 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -610,7 +578,7 @@ public class MBCategoryPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (parentCategoryId == null) {
-				query.append("parentCategoryId is null");
+				query.append("parentCategoryId IS NULL");
 			}
 			else {
 				query.append("parentCategoryId = ?");
@@ -632,13 +600,7 @@ public class MBCategoryPersistence extends BasePersistence {
 				q.setString(queryPos++, parentCategoryId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				MBCategoryHBM mbCategoryHBM = (MBCategoryHBM)itr.next();
-				list.add(MBCategoryHBMUtil.model(mbCategoryHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -664,10 +626,10 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -676,7 +638,7 @@ public class MBCategoryPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (parentCategoryId == null) {
-				query.append("parentCategoryId is null");
+				query.append("parentCategoryId IS NULL");
 			}
 			else {
 				query.append("parentCategoryId = ?");
@@ -704,15 +666,7 @@ public class MBCategoryPersistence extends BasePersistence {
 				q.setString(queryPos++, parentCategoryId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				MBCategoryHBM mbCategoryHBM = (MBCategoryHBM)itr.next();
-				list.add(MBCategoryHBMUtil.model(mbCategoryHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -722,9 +676,8 @@ public class MBCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory findByG_P_First(
-		String groupId, String parentCategoryId, OrderByComparator obc)
-		throws NoSuchCategoryException, SystemException {
+	public MBCategory findByG_P_First(String groupId, String parentCategoryId,
+		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		List list = findByG_P(groupId, parentCategoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -739,13 +692,12 @@ public class MBCategoryPersistence extends BasePersistence {
 			throw new NoSuchCategoryException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBCategory)list.get(0);
+			return (MBCategory)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory findByG_P_Last(
-		String groupId, String parentCategoryId, OrderByComparator obc)
-		throws NoSuchCategoryException, SystemException {
+	public MBCategory findByG_P_Last(String groupId, String parentCategoryId,
+		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		int count = countByG_P(groupId, parentCategoryId);
 		List list = findByG_P(groupId, parentCategoryId, count - 1, count, obc);
 
@@ -761,14 +713,14 @@ public class MBCategoryPersistence extends BasePersistence {
 			throw new NoSuchCategoryException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBCategory)list.get(0);
+			return (MBCategory)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory[] findByG_P_PrevAndNext(
-		String categoryId, String groupId, String parentCategoryId,
-		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
-		com.liferay.portlet.messageboards.model.MBCategory mbCategory = findByPrimaryKey(categoryId);
+	public MBCategory[] findByG_P_PrevAndNext(String categoryId,
+		String groupId, String parentCategoryId, OrderByComparator obc)
+		throws NoSuchCategoryException, SystemException {
+		MBCategory mbCategory = findByPrimaryKey(categoryId);
 		int count = countByG_P(groupId, parentCategoryId);
 		Session session = null;
 
@@ -777,10 +729,10 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -789,7 +741,7 @@ public class MBCategoryPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (parentCategoryId == null) {
-				query.append("parentCategoryId is null");
+				query.append("parentCategoryId IS NULL");
 			}
 			else {
 				query.append("parentCategoryId = ?");
@@ -818,11 +770,11 @@ public class MBCategoryPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbCategory, MBCategoryHBMUtil.getInstance());
-			com.liferay.portlet.messageboards.model.MBCategory[] array = new com.liferay.portlet.messageboards.model.MBCategory[3];
-			array[0] = (com.liferay.portlet.messageboards.model.MBCategory)objArray[0];
-			array[1] = (com.liferay.portlet.messageboards.model.MBCategory)objArray[1];
-			array[2] = (com.liferay.portlet.messageboards.model.MBCategory)objArray[2];
+					mbCategory);
+			MBCategory[] array = new MBCategory[3];
+			array[0] = (MBCategory)objArray[0];
+			array[1] = (MBCategory)objArray[1];
+			array[2] = (MBCategory)objArray[2];
 
 			return array;
 		}
@@ -842,21 +794,14 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM ");
+				"FROM com.liferay.portlet.messageboards.model.MBCategory ");
 			query.append("ORDER BY ");
 			query.append("parentCategoryId ASC").append(", ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				MBCategoryHBM mbCategoryHBM = (MBCategoryHBM)itr.next();
-				list.add(MBCategoryHBMUtil.model(mbCategoryHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -874,10 +819,10 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -898,8 +843,8 @@ public class MBCategoryPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				MBCategoryHBM mbCategoryHBM = (MBCategoryHBM)itr.next();
-				session.delete(mbCategoryHBM);
+				MBCategory mbCategory = (MBCategory)itr.next();
+				session.delete(mbCategory);
 			}
 
 			session.flush();
@@ -920,10 +865,10 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -944,8 +889,8 @@ public class MBCategoryPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				MBCategoryHBM mbCategoryHBM = (MBCategoryHBM)itr.next();
-				session.delete(mbCategoryHBM);
+				MBCategory mbCategory = (MBCategory)itr.next();
+				session.delete(mbCategory);
 			}
 
 			session.flush();
@@ -967,10 +912,10 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -979,7 +924,7 @@ public class MBCategoryPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (parentCategoryId == null) {
-				query.append("parentCategoryId is null");
+				query.append("parentCategoryId IS NULL");
 			}
 			else {
 				query.append("parentCategoryId = ?");
@@ -1004,8 +949,8 @@ public class MBCategoryPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				MBCategoryHBM mbCategoryHBM = (MBCategoryHBM)itr.next();
-				session.delete(mbCategoryHBM);
+				MBCategory mbCategory = (MBCategory)itr.next();
+				session.delete(mbCategory);
 			}
 
 			session.flush();
@@ -1027,10 +972,10 @@ public class MBCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -1074,10 +1019,10 @@ public class MBCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1122,10 +1067,10 @@ public class MBCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM MBCategory IN CLASS com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -1134,7 +1079,7 @@ public class MBCategoryPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (parentCategoryId == null) {
-				query.append("parentCategoryId is null");
+				query.append("parentCategoryId IS NULL");
 			}
 			else {
 				query.append("parentCategoryId = ?");
@@ -1171,6 +1116,9 @@ public class MBCategoryPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(MBCategoryPersistence.class);

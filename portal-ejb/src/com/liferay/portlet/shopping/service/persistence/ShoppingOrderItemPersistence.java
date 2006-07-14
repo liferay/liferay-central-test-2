@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.shopping.NoSuchOrderItemException;
+import com.liferay.portlet.shopping.model.ShoppingOrderItem;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,27 +50,25 @@ import java.util.List;
  *
  */
 public class ShoppingOrderItemPersistence extends BasePersistence {
-	public com.liferay.portlet.shopping.model.ShoppingOrderItem create(
-		ShoppingOrderItemPK shoppingOrderItemPK) {
-		ShoppingOrderItemHBM shoppingOrderItemHBM = new ShoppingOrderItemHBM();
-		shoppingOrderItemHBM.setNew(true);
-		shoppingOrderItemHBM.setPrimaryKey(shoppingOrderItemPK);
+	public ShoppingOrderItem create(ShoppingOrderItemPK shoppingOrderItemPK) {
+		ShoppingOrderItem shoppingOrderItem = new ShoppingOrderItem();
+		shoppingOrderItem.setNew(true);
+		shoppingOrderItem.setPrimaryKey(shoppingOrderItemPK);
 
-		return ShoppingOrderItemHBMUtil.model(shoppingOrderItemHBM);
+		return shoppingOrderItem;
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingOrderItem remove(
-		ShoppingOrderItemPK shoppingOrderItemPK)
+	public ShoppingOrderItem remove(ShoppingOrderItemPK shoppingOrderItemPK)
 		throws NoSuchOrderItemException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ShoppingOrderItemHBM shoppingOrderItemHBM = (ShoppingOrderItemHBM)session.get(ShoppingOrderItemHBM.class,
+			ShoppingOrderItem shoppingOrderItem = (ShoppingOrderItem)session.get(ShoppingOrderItem.class,
 					shoppingOrderItemPK);
 
-			if (shoppingOrderItemHBM == null) {
+			if (shoppingOrderItem == null) {
 				_log.warn("No ShoppingOrderItem exists with the primary key " +
 					shoppingOrderItemPK.toString());
 				throw new NoSuchOrderItemException(
@@ -77,10 +76,10 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 					shoppingOrderItemPK.toString());
 			}
 
-			session.delete(shoppingOrderItemHBM);
+			session.delete(shoppingOrderItem);
 			session.flush();
 
-			return ShoppingOrderItemHBMUtil.model(shoppingOrderItemHBM);
+			return shoppingOrderItem;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -100,45 +99,45 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 				session = openSession();
 
 				if (shoppingOrderItem.isNew()) {
-					ShoppingOrderItemHBM shoppingOrderItemHBM = new ShoppingOrderItemHBM();
-					shoppingOrderItemHBM.setOrderId(shoppingOrderItem.getOrderId());
-					shoppingOrderItemHBM.setItemId(shoppingOrderItem.getItemId());
-					shoppingOrderItemHBM.setSku(shoppingOrderItem.getSku());
-					shoppingOrderItemHBM.setName(shoppingOrderItem.getName());
-					shoppingOrderItemHBM.setDescription(shoppingOrderItem.getDescription());
-					shoppingOrderItemHBM.setProperties(shoppingOrderItem.getProperties());
-					shoppingOrderItemHBM.setPrice(shoppingOrderItem.getPrice());
-					shoppingOrderItemHBM.setQuantity(shoppingOrderItem.getQuantity());
-					shoppingOrderItemHBM.setShippedDate(shoppingOrderItem.getShippedDate());
-					session.save(shoppingOrderItemHBM);
+					ShoppingOrderItem shoppingOrderItemModel = new ShoppingOrderItem();
+					shoppingOrderItemModel.setOrderId(shoppingOrderItem.getOrderId());
+					shoppingOrderItemModel.setItemId(shoppingOrderItem.getItemId());
+					shoppingOrderItemModel.setSku(shoppingOrderItem.getSku());
+					shoppingOrderItemModel.setName(shoppingOrderItem.getName());
+					shoppingOrderItemModel.setDescription(shoppingOrderItem.getDescription());
+					shoppingOrderItemModel.setProperties(shoppingOrderItem.getProperties());
+					shoppingOrderItemModel.setPrice(shoppingOrderItem.getPrice());
+					shoppingOrderItemModel.setQuantity(shoppingOrderItem.getQuantity());
+					shoppingOrderItemModel.setShippedDate(shoppingOrderItem.getShippedDate());
+					session.save(shoppingOrderItemModel);
 					session.flush();
 				}
 				else {
-					ShoppingOrderItemHBM shoppingOrderItemHBM = (ShoppingOrderItemHBM)session.get(ShoppingOrderItemHBM.class,
+					ShoppingOrderItem shoppingOrderItemModel = (ShoppingOrderItem)session.get(ShoppingOrderItem.class,
 							shoppingOrderItem.getPrimaryKey());
 
-					if (shoppingOrderItemHBM != null) {
-						shoppingOrderItemHBM.setSku(shoppingOrderItem.getSku());
-						shoppingOrderItemHBM.setName(shoppingOrderItem.getName());
-						shoppingOrderItemHBM.setDescription(shoppingOrderItem.getDescription());
-						shoppingOrderItemHBM.setProperties(shoppingOrderItem.getProperties());
-						shoppingOrderItemHBM.setPrice(shoppingOrderItem.getPrice());
-						shoppingOrderItemHBM.setQuantity(shoppingOrderItem.getQuantity());
-						shoppingOrderItemHBM.setShippedDate(shoppingOrderItem.getShippedDate());
+					if (shoppingOrderItemModel != null) {
+						shoppingOrderItemModel.setSku(shoppingOrderItem.getSku());
+						shoppingOrderItemModel.setName(shoppingOrderItem.getName());
+						shoppingOrderItemModel.setDescription(shoppingOrderItem.getDescription());
+						shoppingOrderItemModel.setProperties(shoppingOrderItem.getProperties());
+						shoppingOrderItemModel.setPrice(shoppingOrderItem.getPrice());
+						shoppingOrderItemModel.setQuantity(shoppingOrderItem.getQuantity());
+						shoppingOrderItemModel.setShippedDate(shoppingOrderItem.getShippedDate());
 						session.flush();
 					}
 					else {
-						shoppingOrderItemHBM = new ShoppingOrderItemHBM();
-						shoppingOrderItemHBM.setOrderId(shoppingOrderItem.getOrderId());
-						shoppingOrderItemHBM.setItemId(shoppingOrderItem.getItemId());
-						shoppingOrderItemHBM.setSku(shoppingOrderItem.getSku());
-						shoppingOrderItemHBM.setName(shoppingOrderItem.getName());
-						shoppingOrderItemHBM.setDescription(shoppingOrderItem.getDescription());
-						shoppingOrderItemHBM.setProperties(shoppingOrderItem.getProperties());
-						shoppingOrderItemHBM.setPrice(shoppingOrderItem.getPrice());
-						shoppingOrderItemHBM.setQuantity(shoppingOrderItem.getQuantity());
-						shoppingOrderItemHBM.setShippedDate(shoppingOrderItem.getShippedDate());
-						session.save(shoppingOrderItemHBM);
+						shoppingOrderItemModel = new ShoppingOrderItem();
+						shoppingOrderItemModel.setOrderId(shoppingOrderItem.getOrderId());
+						shoppingOrderItemModel.setItemId(shoppingOrderItem.getItemId());
+						shoppingOrderItemModel.setSku(shoppingOrderItem.getSku());
+						shoppingOrderItemModel.setName(shoppingOrderItem.getName());
+						shoppingOrderItemModel.setDescription(shoppingOrderItem.getDescription());
+						shoppingOrderItemModel.setProperties(shoppingOrderItem.getProperties());
+						shoppingOrderItemModel.setPrice(shoppingOrderItem.getPrice());
+						shoppingOrderItemModel.setQuantity(shoppingOrderItem.getQuantity());
+						shoppingOrderItemModel.setShippedDate(shoppingOrderItem.getShippedDate());
+						session.save(shoppingOrderItemModel);
 						session.flush();
 					}
 				}
@@ -157,7 +156,7 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingOrderItem findByPrimaryKey(
+	public ShoppingOrderItem findByPrimaryKey(
 		ShoppingOrderItemPK shoppingOrderItemPK)
 		throws NoSuchOrderItemException, SystemException {
 		Session session = null;
@@ -165,10 +164,10 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			ShoppingOrderItemHBM shoppingOrderItemHBM = (ShoppingOrderItemHBM)session.get(ShoppingOrderItemHBM.class,
+			ShoppingOrderItem shoppingOrderItem = (ShoppingOrderItem)session.get(ShoppingOrderItem.class,
 					shoppingOrderItemPK);
 
-			if (shoppingOrderItemHBM == null) {
+			if (shoppingOrderItem == null) {
 				_log.warn("No ShoppingOrderItem exists with the primary key " +
 					shoppingOrderItemPK.toString());
 				throw new NoSuchOrderItemException(
@@ -176,7 +175,7 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 					shoppingOrderItemPK.toString());
 			}
 
-			return ShoppingOrderItemHBMUtil.model(shoppingOrderItemHBM);
+			return shoppingOrderItem;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -194,10 +193,10 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingOrderItem IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem WHERE ");
 
 			if (orderId == null) {
-				query.append("orderId is null");
+				query.append("orderId IS NULL");
 			}
 			else {
 				query.append("orderId = ?");
@@ -215,13 +214,7 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 				q.setString(queryPos++, orderId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				ShoppingOrderItemHBM shoppingOrderItemHBM = (ShoppingOrderItemHBM)itr.next();
-				list.add(ShoppingOrderItemHBMUtil.model(shoppingOrderItemHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -247,10 +240,10 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingOrderItem IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem WHERE ");
 
 			if (orderId == null) {
-				query.append("orderId is null");
+				query.append("orderId IS NULL");
 			}
 			else {
 				query.append("orderId = ?");
@@ -274,15 +267,7 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 				q.setString(queryPos++, orderId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				ShoppingOrderItemHBM shoppingOrderItemHBM = (ShoppingOrderItemHBM)itr.next();
-				list.add(ShoppingOrderItemHBMUtil.model(shoppingOrderItemHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -292,9 +277,8 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingOrderItem findByOrderId_First(
-		String orderId, OrderByComparator obc)
-		throws NoSuchOrderItemException, SystemException {
+	public ShoppingOrderItem findByOrderId_First(String orderId,
+		OrderByComparator obc) throws NoSuchOrderItemException, SystemException {
 		List list = findByOrderId(orderId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -306,13 +290,12 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 			throw new NoSuchOrderItemException(msg);
 		}
 		else {
-			return (com.liferay.portlet.shopping.model.ShoppingOrderItem)list.get(0);
+			return (ShoppingOrderItem)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingOrderItem findByOrderId_Last(
-		String orderId, OrderByComparator obc)
-		throws NoSuchOrderItemException, SystemException {
+	public ShoppingOrderItem findByOrderId_Last(String orderId,
+		OrderByComparator obc) throws NoSuchOrderItemException, SystemException {
 		int count = countByOrderId(orderId);
 		List list = findByOrderId(orderId, count - 1, count, obc);
 
@@ -325,14 +308,14 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 			throw new NoSuchOrderItemException(msg);
 		}
 		else {
-			return (com.liferay.portlet.shopping.model.ShoppingOrderItem)list.get(0);
+			return (ShoppingOrderItem)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingOrderItem[] findByOrderId_PrevAndNext(
+	public ShoppingOrderItem[] findByOrderId_PrevAndNext(
 		ShoppingOrderItemPK shoppingOrderItemPK, String orderId,
 		OrderByComparator obc) throws NoSuchOrderItemException, SystemException {
-		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem = findByPrimaryKey(shoppingOrderItemPK);
+		ShoppingOrderItem shoppingOrderItem = findByPrimaryKey(shoppingOrderItemPK);
 		int count = countByOrderId(orderId);
 		Session session = null;
 
@@ -341,10 +324,10 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingOrderItem IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem WHERE ");
 
 			if (orderId == null) {
-				query.append("orderId is null");
+				query.append("orderId IS NULL");
 			}
 			else {
 				query.append("orderId = ?");
@@ -369,11 +352,11 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					shoppingOrderItem, ShoppingOrderItemHBMUtil.getInstance());
-			com.liferay.portlet.shopping.model.ShoppingOrderItem[] array = new com.liferay.portlet.shopping.model.ShoppingOrderItem[3];
-			array[0] = (com.liferay.portlet.shopping.model.ShoppingOrderItem)objArray[0];
-			array[1] = (com.liferay.portlet.shopping.model.ShoppingOrderItem)objArray[1];
-			array[2] = (com.liferay.portlet.shopping.model.ShoppingOrderItem)objArray[2];
+					shoppingOrderItem);
+			ShoppingOrderItem[] array = new ShoppingOrderItem[3];
+			array[0] = (ShoppingOrderItem)objArray[0];
+			array[1] = (ShoppingOrderItem)objArray[1];
+			array[2] = (ShoppingOrderItem)objArray[2];
 
 			return array;
 		}
@@ -393,21 +376,14 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingOrderItem IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemHBM ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem ");
 			query.append("ORDER BY ");
 			query.append("name ASC").append(", ");
 			query.append("description ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				ShoppingOrderItemHBM shoppingOrderItemHBM = (ShoppingOrderItemHBM)itr.next();
-				list.add(ShoppingOrderItemHBMUtil.model(shoppingOrderItemHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -425,10 +401,10 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingOrderItem IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem WHERE ");
 
 			if (orderId == null) {
-				query.append("orderId is null");
+				query.append("orderId IS NULL");
 			}
 			else {
 				query.append("orderId = ?");
@@ -449,8 +425,8 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				ShoppingOrderItemHBM shoppingOrderItemHBM = (ShoppingOrderItemHBM)itr.next();
-				session.delete(shoppingOrderItemHBM);
+				ShoppingOrderItem shoppingOrderItem = (ShoppingOrderItem)itr.next();
+				session.delete(shoppingOrderItem);
 			}
 
 			session.flush();
@@ -472,10 +448,10 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM ShoppingOrderItem IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem WHERE ");
 
 			if (orderId == null) {
-				query.append("orderId is null");
+				query.append("orderId IS NULL");
 			}
 			else {
 				query.append("orderId = ?");
@@ -508,6 +484,9 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(ShoppingOrderItemPersistence.class);

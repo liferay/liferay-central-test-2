@@ -458,6 +458,10 @@ public class JournalArticleUtil {
 		return getPersistence().countByC_A_A(companyId, articleId, approved);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static JournalArticlePersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		JournalArticleUtil util = (JournalArticleUtil)ctx.getBean(CLASS_NAME);

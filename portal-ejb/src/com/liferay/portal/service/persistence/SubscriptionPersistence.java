@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchSubscriptionException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Subscription;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.util.StringPool;
@@ -49,25 +50,25 @@ import java.util.List;
  *
  */
 public class SubscriptionPersistence extends BasePersistence {
-	public com.liferay.portal.model.Subscription create(String subscriptionId) {
-		SubscriptionHBM subscriptionHBM = new SubscriptionHBM();
-		subscriptionHBM.setNew(true);
-		subscriptionHBM.setPrimaryKey(subscriptionId);
+	public Subscription create(String subscriptionId) {
+		Subscription subscription = new Subscription();
+		subscription.setNew(true);
+		subscription.setPrimaryKey(subscriptionId);
 
-		return SubscriptionHBMUtil.model(subscriptionHBM);
+		return subscription;
 	}
 
-	public com.liferay.portal.model.Subscription remove(String subscriptionId)
+	public Subscription remove(String subscriptionId)
 		throws NoSuchSubscriptionException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			SubscriptionHBM subscriptionHBM = (SubscriptionHBM)session.get(SubscriptionHBM.class,
+			Subscription subscription = (Subscription)session.get(Subscription.class,
 					subscriptionId);
 
-			if (subscriptionHBM == null) {
+			if (subscription == null) {
 				_log.warn("No Subscription exists with the primary key " +
 					subscriptionId.toString());
 				throw new NoSuchSubscriptionException(
@@ -75,10 +76,10 @@ public class SubscriptionPersistence extends BasePersistence {
 					subscriptionId.toString());
 			}
 
-			session.delete(subscriptionHBM);
+			session.delete(subscription);
 			session.flush();
 
-			return SubscriptionHBMUtil.model(subscriptionHBM);
+			return subscription;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -98,46 +99,46 @@ public class SubscriptionPersistence extends BasePersistence {
 				session = openSession();
 
 				if (subscription.isNew()) {
-					SubscriptionHBM subscriptionHBM = new SubscriptionHBM();
-					subscriptionHBM.setSubscriptionId(subscription.getSubscriptionId());
-					subscriptionHBM.setCompanyId(subscription.getCompanyId());
-					subscriptionHBM.setUserId(subscription.getUserId());
-					subscriptionHBM.setUserName(subscription.getUserName());
-					subscriptionHBM.setCreateDate(subscription.getCreateDate());
-					subscriptionHBM.setModifiedDate(subscription.getModifiedDate());
-					subscriptionHBM.setClassName(subscription.getClassName());
-					subscriptionHBM.setClassPK(subscription.getClassPK());
-					subscriptionHBM.setFrequency(subscription.getFrequency());
-					session.save(subscriptionHBM);
+					Subscription subscriptionModel = new Subscription();
+					subscriptionModel.setSubscriptionId(subscription.getSubscriptionId());
+					subscriptionModel.setCompanyId(subscription.getCompanyId());
+					subscriptionModel.setUserId(subscription.getUserId());
+					subscriptionModel.setUserName(subscription.getUserName());
+					subscriptionModel.setCreateDate(subscription.getCreateDate());
+					subscriptionModel.setModifiedDate(subscription.getModifiedDate());
+					subscriptionModel.setClassName(subscription.getClassName());
+					subscriptionModel.setClassPK(subscription.getClassPK());
+					subscriptionModel.setFrequency(subscription.getFrequency());
+					session.save(subscriptionModel);
 					session.flush();
 				}
 				else {
-					SubscriptionHBM subscriptionHBM = (SubscriptionHBM)session.get(SubscriptionHBM.class,
+					Subscription subscriptionModel = (Subscription)session.get(Subscription.class,
 							subscription.getPrimaryKey());
 
-					if (subscriptionHBM != null) {
-						subscriptionHBM.setCompanyId(subscription.getCompanyId());
-						subscriptionHBM.setUserId(subscription.getUserId());
-						subscriptionHBM.setUserName(subscription.getUserName());
-						subscriptionHBM.setCreateDate(subscription.getCreateDate());
-						subscriptionHBM.setModifiedDate(subscription.getModifiedDate());
-						subscriptionHBM.setClassName(subscription.getClassName());
-						subscriptionHBM.setClassPK(subscription.getClassPK());
-						subscriptionHBM.setFrequency(subscription.getFrequency());
+					if (subscriptionModel != null) {
+						subscriptionModel.setCompanyId(subscription.getCompanyId());
+						subscriptionModel.setUserId(subscription.getUserId());
+						subscriptionModel.setUserName(subscription.getUserName());
+						subscriptionModel.setCreateDate(subscription.getCreateDate());
+						subscriptionModel.setModifiedDate(subscription.getModifiedDate());
+						subscriptionModel.setClassName(subscription.getClassName());
+						subscriptionModel.setClassPK(subscription.getClassPK());
+						subscriptionModel.setFrequency(subscription.getFrequency());
 						session.flush();
 					}
 					else {
-						subscriptionHBM = new SubscriptionHBM();
-						subscriptionHBM.setSubscriptionId(subscription.getSubscriptionId());
-						subscriptionHBM.setCompanyId(subscription.getCompanyId());
-						subscriptionHBM.setUserId(subscription.getUserId());
-						subscriptionHBM.setUserName(subscription.getUserName());
-						subscriptionHBM.setCreateDate(subscription.getCreateDate());
-						subscriptionHBM.setModifiedDate(subscription.getModifiedDate());
-						subscriptionHBM.setClassName(subscription.getClassName());
-						subscriptionHBM.setClassPK(subscription.getClassPK());
-						subscriptionHBM.setFrequency(subscription.getFrequency());
-						session.save(subscriptionHBM);
+						subscriptionModel = new Subscription();
+						subscriptionModel.setSubscriptionId(subscription.getSubscriptionId());
+						subscriptionModel.setCompanyId(subscription.getCompanyId());
+						subscriptionModel.setUserId(subscription.getUserId());
+						subscriptionModel.setUserName(subscription.getUserName());
+						subscriptionModel.setCreateDate(subscription.getCreateDate());
+						subscriptionModel.setModifiedDate(subscription.getModifiedDate());
+						subscriptionModel.setClassName(subscription.getClassName());
+						subscriptionModel.setClassPK(subscription.getClassPK());
+						subscriptionModel.setFrequency(subscription.getFrequency());
+						session.save(subscriptionModel);
 						session.flush();
 					}
 				}
@@ -156,18 +157,17 @@ public class SubscriptionPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Subscription findByPrimaryKey(
-		String subscriptionId)
+	public Subscription findByPrimaryKey(String subscriptionId)
 		throws NoSuchSubscriptionException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			SubscriptionHBM subscriptionHBM = (SubscriptionHBM)session.get(SubscriptionHBM.class,
+			Subscription subscription = (Subscription)session.get(Subscription.class,
 					subscriptionId);
 
-			if (subscriptionHBM == null) {
+			if (subscription == null) {
 				_log.warn("No Subscription exists with the primary key " +
 					subscriptionId.toString());
 				throw new NoSuchSubscriptionException(
@@ -175,7 +175,7 @@ public class SubscriptionPersistence extends BasePersistence {
 					subscriptionId.toString());
 			}
 
-			return SubscriptionHBMUtil.model(subscriptionHBM);
+			return subscription;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -192,11 +192,10 @@ public class SubscriptionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -211,13 +210,7 @@ public class SubscriptionPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				SubscriptionHBM subscriptionHBM = (SubscriptionHBM)itr.next();
-				list.add(SubscriptionHBMUtil.model(subscriptionHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -242,11 +235,10 @@ public class SubscriptionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -265,15 +257,7 @@ public class SubscriptionPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				SubscriptionHBM subscriptionHBM = (SubscriptionHBM)itr.next();
-				list.add(SubscriptionHBMUtil.model(subscriptionHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -283,8 +267,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Subscription findByUserId_First(
-		String userId, OrderByComparator obc)
+	public Subscription findByUserId_First(String userId, OrderByComparator obc)
 		throws NoSuchSubscriptionException, SystemException {
 		List list = findByUserId(userId, 0, 1, obc);
 
@@ -297,12 +280,11 @@ public class SubscriptionPersistence extends BasePersistence {
 			throw new NoSuchSubscriptionException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Subscription)list.get(0);
+			return (Subscription)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Subscription findByUserId_Last(
-		String userId, OrderByComparator obc)
+	public Subscription findByUserId_Last(String userId, OrderByComparator obc)
 		throws NoSuchSubscriptionException, SystemException {
 		int count = countByUserId(userId);
 		List list = findByUserId(userId, count - 1, count, obc);
@@ -316,14 +298,14 @@ public class SubscriptionPersistence extends BasePersistence {
 			throw new NoSuchSubscriptionException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Subscription)list.get(0);
+			return (Subscription)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Subscription[] findByUserId_PrevAndNext(
-		String subscriptionId, String userId, OrderByComparator obc)
+	public Subscription[] findByUserId_PrevAndNext(String subscriptionId,
+		String userId, OrderByComparator obc)
 		throws NoSuchSubscriptionException, SystemException {
-		com.liferay.portal.model.Subscription subscription = findByPrimaryKey(subscriptionId);
+		Subscription subscription = findByPrimaryKey(subscriptionId);
 		int count = countByUserId(userId);
 		Session session = null;
 
@@ -331,11 +313,10 @@ public class SubscriptionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -355,11 +336,11 @@ public class SubscriptionPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					subscription, SubscriptionHBMUtil.getInstance());
-			com.liferay.portal.model.Subscription[] array = new com.liferay.portal.model.Subscription[3];
-			array[0] = (com.liferay.portal.model.Subscription)objArray[0];
-			array[1] = (com.liferay.portal.model.Subscription)objArray[1];
-			array[2] = (com.liferay.portal.model.Subscription)objArray[2];
+					subscription);
+			Subscription[] array = new Subscription[3];
+			array[0] = (Subscription)objArray[0];
+			array[1] = (Subscription)objArray[1];
+			array[2] = (Subscription)objArray[2];
 
 			return array;
 		}
@@ -379,11 +360,10 @@ public class SubscriptionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -392,7 +372,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -401,7 +381,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -424,13 +404,7 @@ public class SubscriptionPersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				SubscriptionHBM subscriptionHBM = (SubscriptionHBM)itr.next();
-				list.add(SubscriptionHBMUtil.model(subscriptionHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -455,11 +429,10 @@ public class SubscriptionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -468,7 +441,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -477,7 +450,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -504,15 +477,7 @@ public class SubscriptionPersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				SubscriptionHBM subscriptionHBM = (SubscriptionHBM)itr.next();
-				list.add(SubscriptionHBMUtil.model(subscriptionHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -522,9 +487,8 @@ public class SubscriptionPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Subscription findByC_C_C_First(
-		String companyId, String className, String classPK,
-		OrderByComparator obc)
+	public Subscription findByC_C_C_First(String companyId, String className,
+		String classPK, OrderByComparator obc)
 		throws NoSuchSubscriptionException, SystemException {
 		List list = findByC_C_C(companyId, className, classPK, 0, 1, obc);
 
@@ -543,13 +507,12 @@ public class SubscriptionPersistence extends BasePersistence {
 			throw new NoSuchSubscriptionException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Subscription)list.get(0);
+			return (Subscription)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Subscription findByC_C_C_Last(
-		String companyId, String className, String classPK,
-		OrderByComparator obc)
+	public Subscription findByC_C_C_Last(String companyId, String className,
+		String classPK, OrderByComparator obc)
 		throws NoSuchSubscriptionException, SystemException {
 		int count = countByC_C_C(companyId, className, classPK);
 		List list = findByC_C_C(companyId, className, classPK, count - 1,
@@ -570,15 +533,15 @@ public class SubscriptionPersistence extends BasePersistence {
 			throw new NoSuchSubscriptionException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Subscription)list.get(0);
+			return (Subscription)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Subscription[] findByC_C_C_PrevAndNext(
-		String subscriptionId, String companyId, String className,
-		String classPK, OrderByComparator obc)
+	public Subscription[] findByC_C_C_PrevAndNext(String subscriptionId,
+		String companyId, String className, String classPK,
+		OrderByComparator obc)
 		throws NoSuchSubscriptionException, SystemException {
-		com.liferay.portal.model.Subscription subscription = findByPrimaryKey(subscriptionId);
+		Subscription subscription = findByPrimaryKey(subscriptionId);
 		int count = countByC_C_C(companyId, className, classPK);
 		Session session = null;
 
@@ -586,11 +549,10 @@ public class SubscriptionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -599,7 +561,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -608,7 +570,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -636,11 +598,11 @@ public class SubscriptionPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					subscription, SubscriptionHBMUtil.getInstance());
-			com.liferay.portal.model.Subscription[] array = new com.liferay.portal.model.Subscription[3];
-			array[0] = (com.liferay.portal.model.Subscription)objArray[0];
-			array[1] = (com.liferay.portal.model.Subscription)objArray[1];
-			array[2] = (com.liferay.portal.model.Subscription)objArray[2];
+					subscription);
+			Subscription[] array = new Subscription[3];
+			array[0] = (Subscription)objArray[0];
+			array[1] = (Subscription)objArray[1];
+			array[2] = (Subscription)objArray[2];
 
 			return array;
 		}
@@ -652,8 +614,8 @@ public class SubscriptionPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Subscription findByC_U_C_C(
-		String companyId, String userId, String className, String classPK)
+	public Subscription findByC_U_C_C(String companyId, String userId,
+		String className, String classPK)
 		throws NoSuchSubscriptionException, SystemException {
 		Session session = null;
 
@@ -661,11 +623,10 @@ public class SubscriptionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -674,7 +635,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -683,7 +644,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -692,7 +653,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -719,9 +680,9 @@ public class SubscriptionPersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			Iterator itr = q.list().iterator();
+			List list = q.list();
 
-			if (!itr.hasNext()) {
+			if (list.size() == 0) {
 				String msg = "No Subscription exists with the key ";
 				msg += StringPool.OPEN_CURLY_BRACE;
 				msg += "companyId=";
@@ -739,9 +700,9 @@ public class SubscriptionPersistence extends BasePersistence {
 				throw new NoSuchSubscriptionException(msg);
 			}
 
-			SubscriptionHBM subscriptionHBM = (SubscriptionHBM)itr.next();
+			Subscription subscription = (Subscription)list.get(0);
 
-			return SubscriptionHBMUtil.model(subscriptionHBM);
+			return subscription;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -758,19 +719,11 @@ public class SubscriptionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM ");
+			query.append("FROM com.liferay.portal.model.Subscription ");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				SubscriptionHBM subscriptionHBM = (SubscriptionHBM)itr.next();
-				list.add(SubscriptionHBMUtil.model(subscriptionHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -787,11 +740,10 @@ public class SubscriptionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -809,8 +761,8 @@ public class SubscriptionPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				SubscriptionHBM subscriptionHBM = (SubscriptionHBM)itr.next();
-				session.delete(subscriptionHBM);
+				Subscription subscription = (Subscription)itr.next();
+				session.delete(subscription);
 			}
 
 			session.flush();
@@ -831,11 +783,10 @@ public class SubscriptionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -844,7 +795,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -853,7 +804,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -879,8 +830,8 @@ public class SubscriptionPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				SubscriptionHBM subscriptionHBM = (SubscriptionHBM)itr.next();
-				session.delete(subscriptionHBM);
+				Subscription subscription = (Subscription)itr.next();
+				session.delete(subscription);
 			}
 
 			session.flush();
@@ -902,11 +853,10 @@ public class SubscriptionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -915,7 +865,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -924,7 +874,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -933,7 +883,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -963,8 +913,8 @@ public class SubscriptionPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				SubscriptionHBM subscriptionHBM = (SubscriptionHBM)itr.next();
-				session.delete(subscriptionHBM);
+				Subscription subscription = (Subscription)itr.next();
+				session.delete(subscription);
 			}
 
 			session.flush();
@@ -1004,11 +954,10 @@ public class SubscriptionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -1052,11 +1001,10 @@ public class SubscriptionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1065,7 +1013,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1074,7 +1022,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1126,11 +1074,10 @@ public class SubscriptionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Subscription IN CLASS com.liferay.portal.service.persistence.SubscriptionHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1139,7 +1086,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -1148,7 +1095,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1157,7 +1104,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1202,6 +1149,9 @@ public class SubscriptionPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(SubscriptionPersistence.class);

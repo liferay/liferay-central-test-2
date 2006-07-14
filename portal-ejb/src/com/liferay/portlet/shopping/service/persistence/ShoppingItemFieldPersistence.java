@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.shopping.NoSuchItemFieldException;
+import com.liferay.portlet.shopping.model.ShoppingItemField;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,26 +50,25 @@ import java.util.List;
  *
  */
 public class ShoppingItemFieldPersistence extends BasePersistence {
-	public com.liferay.portlet.shopping.model.ShoppingItemField create(
-		String itemFieldId) {
-		ShoppingItemFieldHBM shoppingItemFieldHBM = new ShoppingItemFieldHBM();
-		shoppingItemFieldHBM.setNew(true);
-		shoppingItemFieldHBM.setPrimaryKey(itemFieldId);
+	public ShoppingItemField create(String itemFieldId) {
+		ShoppingItemField shoppingItemField = new ShoppingItemField();
+		shoppingItemField.setNew(true);
+		shoppingItemField.setPrimaryKey(itemFieldId);
 
-		return ShoppingItemFieldHBMUtil.model(shoppingItemFieldHBM);
+		return shoppingItemField;
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingItemField remove(
-		String itemFieldId) throws NoSuchItemFieldException, SystemException {
+	public ShoppingItemField remove(String itemFieldId)
+		throws NoSuchItemFieldException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ShoppingItemFieldHBM shoppingItemFieldHBM = (ShoppingItemFieldHBM)session.get(ShoppingItemFieldHBM.class,
+			ShoppingItemField shoppingItemField = (ShoppingItemField)session.get(ShoppingItemField.class,
 					itemFieldId);
 
-			if (shoppingItemFieldHBM == null) {
+			if (shoppingItemField == null) {
 				_log.warn("No ShoppingItemField exists with the primary key " +
 					itemFieldId.toString());
 				throw new NoSuchItemFieldException(
@@ -76,10 +76,10 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 					itemFieldId.toString());
 			}
 
-			session.delete(shoppingItemFieldHBM);
+			session.delete(shoppingItemField);
 			session.flush();
 
-			return ShoppingItemFieldHBMUtil.model(shoppingItemFieldHBM);
+			return shoppingItemField;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -99,34 +99,34 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 				session = openSession();
 
 				if (shoppingItemField.isNew()) {
-					ShoppingItemFieldHBM shoppingItemFieldHBM = new ShoppingItemFieldHBM();
-					shoppingItemFieldHBM.setItemFieldId(shoppingItemField.getItemFieldId());
-					shoppingItemFieldHBM.setItemId(shoppingItemField.getItemId());
-					shoppingItemFieldHBM.setName(shoppingItemField.getName());
-					shoppingItemFieldHBM.setValues(shoppingItemField.getValues());
-					shoppingItemFieldHBM.setDescription(shoppingItemField.getDescription());
-					session.save(shoppingItemFieldHBM);
+					ShoppingItemField shoppingItemFieldModel = new ShoppingItemField();
+					shoppingItemFieldModel.setItemFieldId(shoppingItemField.getItemFieldId());
+					shoppingItemFieldModel.setItemId(shoppingItemField.getItemId());
+					shoppingItemFieldModel.setName(shoppingItemField.getName());
+					shoppingItemFieldModel.setValues(shoppingItemField.getValues());
+					shoppingItemFieldModel.setDescription(shoppingItemField.getDescription());
+					session.save(shoppingItemFieldModel);
 					session.flush();
 				}
 				else {
-					ShoppingItemFieldHBM shoppingItemFieldHBM = (ShoppingItemFieldHBM)session.get(ShoppingItemFieldHBM.class,
+					ShoppingItemField shoppingItemFieldModel = (ShoppingItemField)session.get(ShoppingItemField.class,
 							shoppingItemField.getPrimaryKey());
 
-					if (shoppingItemFieldHBM != null) {
-						shoppingItemFieldHBM.setItemId(shoppingItemField.getItemId());
-						shoppingItemFieldHBM.setName(shoppingItemField.getName());
-						shoppingItemFieldHBM.setValues(shoppingItemField.getValues());
-						shoppingItemFieldHBM.setDescription(shoppingItemField.getDescription());
+					if (shoppingItemFieldModel != null) {
+						shoppingItemFieldModel.setItemId(shoppingItemField.getItemId());
+						shoppingItemFieldModel.setName(shoppingItemField.getName());
+						shoppingItemFieldModel.setValues(shoppingItemField.getValues());
+						shoppingItemFieldModel.setDescription(shoppingItemField.getDescription());
 						session.flush();
 					}
 					else {
-						shoppingItemFieldHBM = new ShoppingItemFieldHBM();
-						shoppingItemFieldHBM.setItemFieldId(shoppingItemField.getItemFieldId());
-						shoppingItemFieldHBM.setItemId(shoppingItemField.getItemId());
-						shoppingItemFieldHBM.setName(shoppingItemField.getName());
-						shoppingItemFieldHBM.setValues(shoppingItemField.getValues());
-						shoppingItemFieldHBM.setDescription(shoppingItemField.getDescription());
-						session.save(shoppingItemFieldHBM);
+						shoppingItemFieldModel = new ShoppingItemField();
+						shoppingItemFieldModel.setItemFieldId(shoppingItemField.getItemFieldId());
+						shoppingItemFieldModel.setItemId(shoppingItemField.getItemId());
+						shoppingItemFieldModel.setName(shoppingItemField.getName());
+						shoppingItemFieldModel.setValues(shoppingItemField.getValues());
+						shoppingItemFieldModel.setDescription(shoppingItemField.getDescription());
+						session.save(shoppingItemFieldModel);
 						session.flush();
 					}
 				}
@@ -145,17 +145,17 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingItemField findByPrimaryKey(
-		String itemFieldId) throws NoSuchItemFieldException, SystemException {
+	public ShoppingItemField findByPrimaryKey(String itemFieldId)
+		throws NoSuchItemFieldException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ShoppingItemFieldHBM shoppingItemFieldHBM = (ShoppingItemFieldHBM)session.get(ShoppingItemFieldHBM.class,
+			ShoppingItemField shoppingItemField = (ShoppingItemField)session.get(ShoppingItemField.class,
 					itemFieldId);
 
-			if (shoppingItemFieldHBM == null) {
+			if (shoppingItemField == null) {
 				_log.warn("No ShoppingItemField exists with the primary key " +
 					itemFieldId.toString());
 				throw new NoSuchItemFieldException(
@@ -163,7 +163,7 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 					itemFieldId.toString());
 			}
 
-			return ShoppingItemFieldHBMUtil.model(shoppingItemFieldHBM);
+			return shoppingItemField;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -181,10 +181,10 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingItemField IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingItemField WHERE ");
 
 			if (itemId == null) {
-				query.append("itemId is null");
+				query.append("itemId IS NULL");
 			}
 			else {
 				query.append("itemId = ?");
@@ -202,13 +202,7 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 				q.setString(queryPos++, itemId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				ShoppingItemFieldHBM shoppingItemFieldHBM = (ShoppingItemFieldHBM)itr.next();
-				list.add(ShoppingItemFieldHBMUtil.model(shoppingItemFieldHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -234,10 +228,10 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingItemField IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingItemField WHERE ");
 
 			if (itemId == null) {
-				query.append("itemId is null");
+				query.append("itemId IS NULL");
 			}
 			else {
 				query.append("itemId = ?");
@@ -261,15 +255,7 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 				q.setString(queryPos++, itemId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				ShoppingItemFieldHBM shoppingItemFieldHBM = (ShoppingItemFieldHBM)itr.next();
-				list.add(ShoppingItemFieldHBMUtil.model(shoppingItemFieldHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -279,9 +265,8 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingItemField findByItemId_First(
-		String itemId, OrderByComparator obc)
-		throws NoSuchItemFieldException, SystemException {
+	public ShoppingItemField findByItemId_First(String itemId,
+		OrderByComparator obc) throws NoSuchItemFieldException, SystemException {
 		List list = findByItemId(itemId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -293,13 +278,12 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 			throw new NoSuchItemFieldException(msg);
 		}
 		else {
-			return (com.liferay.portlet.shopping.model.ShoppingItemField)list.get(0);
+			return (ShoppingItemField)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingItemField findByItemId_Last(
-		String itemId, OrderByComparator obc)
-		throws NoSuchItemFieldException, SystemException {
+	public ShoppingItemField findByItemId_Last(String itemId,
+		OrderByComparator obc) throws NoSuchItemFieldException, SystemException {
 		int count = countByItemId(itemId);
 		List list = findByItemId(itemId, count - 1, count, obc);
 
@@ -312,14 +296,14 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 			throw new NoSuchItemFieldException(msg);
 		}
 		else {
-			return (com.liferay.portlet.shopping.model.ShoppingItemField)list.get(0);
+			return (ShoppingItemField)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingItemField[] findByItemId_PrevAndNext(
-		String itemFieldId, String itemId, OrderByComparator obc)
+	public ShoppingItemField[] findByItemId_PrevAndNext(String itemFieldId,
+		String itemId, OrderByComparator obc)
 		throws NoSuchItemFieldException, SystemException {
-		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField = findByPrimaryKey(itemFieldId);
+		ShoppingItemField shoppingItemField = findByPrimaryKey(itemFieldId);
 		int count = countByItemId(itemId);
 		Session session = null;
 
@@ -328,10 +312,10 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingItemField IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingItemField WHERE ");
 
 			if (itemId == null) {
-				query.append("itemId is null");
+				query.append("itemId IS NULL");
 			}
 			else {
 				query.append("itemId = ?");
@@ -356,11 +340,11 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					shoppingItemField, ShoppingItemFieldHBMUtil.getInstance());
-			com.liferay.portlet.shopping.model.ShoppingItemField[] array = new com.liferay.portlet.shopping.model.ShoppingItemField[3];
-			array[0] = (com.liferay.portlet.shopping.model.ShoppingItemField)objArray[0];
-			array[1] = (com.liferay.portlet.shopping.model.ShoppingItemField)objArray[1];
-			array[2] = (com.liferay.portlet.shopping.model.ShoppingItemField)objArray[2];
+					shoppingItemField);
+			ShoppingItemField[] array = new ShoppingItemField[3];
+			array[0] = (ShoppingItemField)objArray[0];
+			array[1] = (ShoppingItemField)objArray[1];
+			array[2] = (ShoppingItemField)objArray[2];
 
 			return array;
 		}
@@ -380,21 +364,14 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingItemField IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldHBM ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingItemField ");
 			query.append("ORDER BY ");
 			query.append("itemId ASC").append(", ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				ShoppingItemFieldHBM shoppingItemFieldHBM = (ShoppingItemFieldHBM)itr.next();
-				list.add(ShoppingItemFieldHBMUtil.model(shoppingItemFieldHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -412,10 +389,10 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingItemField IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingItemField WHERE ");
 
 			if (itemId == null) {
-				query.append("itemId is null");
+				query.append("itemId IS NULL");
 			}
 			else {
 				query.append("itemId = ?");
@@ -436,8 +413,8 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				ShoppingItemFieldHBM shoppingItemFieldHBM = (ShoppingItemFieldHBM)itr.next();
-				session.delete(shoppingItemFieldHBM);
+				ShoppingItemField shoppingItemField = (ShoppingItemField)itr.next();
+				session.delete(shoppingItemField);
 			}
 
 			session.flush();
@@ -459,10 +436,10 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM ShoppingItemField IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingItemField WHERE ");
 
 			if (itemId == null) {
-				query.append("itemId is null");
+				query.append("itemId IS NULL");
 			}
 			else {
 				query.append("itemId = ?");
@@ -495,6 +472,9 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(ShoppingItemFieldPersistence.class);

@@ -103,7 +103,7 @@ public class FileUtil {
 			String oldContent = null;
 
 			try {
-				oldContent = FileUtil.read(source);
+				oldContent = read(source);
 			}
 			catch (Exception e) {
 				return;
@@ -112,7 +112,7 @@ public class FileUtil {
 			String newContent = null;
 
 			try {
-				newContent = FileUtil.read(destination);
+				newContent = read(destination);
 			}
 			catch (Exception e) {
 			}
@@ -297,13 +297,15 @@ public class FileUtil {
 	}
 
 	public static String read(File file) throws IOException {
+		StringBuffer sb = new StringBuffer();
+
 		BufferedReader br = new BufferedReader(new FileReader(file));
 
-		StringBuffer sb = new StringBuffer();
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
-			sb.append(line).append('\n');
+			sb.append(line);
+			sb.append('\n');
 		}
 
 		br.close();
@@ -420,7 +422,7 @@ public class FileUtil {
 		}
 
 		if (file.exists()) {
-			String content = FileUtil.read(file);
+			String content = read(file);
 
 			if (content.equals(s)) {
 				return;

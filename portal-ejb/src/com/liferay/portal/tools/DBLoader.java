@@ -70,14 +70,17 @@ public class DBLoader {
 						sql =
 							StringUtil.replace(
 								sql,
-								new String[] {"\\\"",
-											  "\\\\",
-											  "\\n",
-											  "\\r"},
-								new String[] {"\"",
-											  "\\",
-											  "\\u000a",
-											  "\\u000a"});
+								new String[] {
+									"\\\"",
+									"\\\\",
+									"\\n",
+									"\\r"},
+								new String[] {
+									"\"",
+									"\\",
+									"\\u000a",
+									"\\u000a"
+								});
 
 						sb = new StringBuffer();
 

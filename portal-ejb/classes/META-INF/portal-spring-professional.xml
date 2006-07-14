@@ -41,6 +41,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.AccountPersistence" class="com.liferay.portal.service.persistence.AccountPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -89,6 +92,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.AddressPersistence" class="com.liferay.portal.service.persistence.AddressPersistence2" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -137,6 +143,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.CompanyPersistence" class="com.liferay.portal.service.persistence.CompanyPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -185,6 +194,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.ContactPersistence" class="com.liferay.portal.service.persistence.ContactPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -214,6 +226,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.CountryPersistence" class="com.liferay.portal.service.persistence.CountryPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -243,6 +258,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.DataTrackerPersistence" class="com.liferay.portal.service.persistence.DataTrackerPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -291,6 +309,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.EmailAddressPersistence" class="com.liferay.portal.service.persistence.EmailAddressPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -339,6 +360,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.GroupPersistence" class="com.liferay.portal.service.persistence.GroupPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -368,6 +392,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.ImagePersistence" class="com.liferay.portal.service.persistence.ImagePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -416,6 +443,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.LayoutPersistence" class="com.liferay.portal.service.persistence.LayoutPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -464,6 +494,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.LayoutSetPersistence" class="com.liferay.portal.service.persistence.LayoutSetPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -493,6 +526,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.ListTypePersistence" class="com.liferay.portal.service.persistence.ListTypePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -541,6 +577,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.OrganizationPersistence" class="com.liferay.portal.service.persistence.OrganizationPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -551,6 +590,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionPersistence" class="com.liferay.portal.service.persistence.OrgGroupPermissionPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -561,6 +603,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.OrgGroupRolePersistence" class="com.liferay.portal.service.persistence.OrgGroupRolePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -609,6 +654,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.OrgLaborPersistence" class="com.liferay.portal.service.persistence.OrgLaborPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -638,6 +686,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.PasswordTrackerPersistence" class="com.liferay.portal.service.persistence.PasswordTrackerPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -686,6 +737,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.PermissionPersistence" class="com.liferay.portal.service.persistence.PermissionPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -734,6 +788,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.PhonePersistence" class="com.liferay.portal.service.persistence.PhonePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -801,6 +858,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.PortletPersistence" class="com.liferay.portal.service.persistence.PortletPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -830,6 +890,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.PortletPreferencesPersistence" class="com.liferay.portal.service.persistence.PortletPreferencesPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -859,6 +922,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.RegionPersistence" class="com.liferay.portal.service.persistence.RegionPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -888,6 +954,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.ReleasePersistence" class="com.liferay.portal.service.persistence.ReleasePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -936,6 +1005,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.ResourcePersistence" class="com.liferay.portal.service.persistence.ResourcePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -984,6 +1056,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.RolePersistence" class="com.liferay.portal.service.persistence.RolePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1013,6 +1088,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.SubscriptionPersistence" class="com.liferay.portal.service.persistence.SubscriptionPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1061,6 +1139,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserPersistence" class="com.liferay.portal.service.persistence.UserPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1109,6 +1190,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserGroupPersistence" class="com.liferay.portal.service.persistence.UserGroupPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1138,6 +1222,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserIdMapperPersistence" class="com.liferay.portal.service.persistence.UserIdMapperPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1167,6 +1254,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserTrackerPersistence" class="com.liferay.portal.service.persistence.UserTrackerPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1196,6 +1286,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserTrackerPathPersistence" class="com.liferay.portal.service.persistence.UserTrackerPathPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1244,6 +1337,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.WebsitePersistence" class="com.liferay.portal.service.persistence.WebsitePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1292,6 +1388,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence" class="com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1340,6 +1439,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence" class="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1388,6 +1490,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1436,6 +1541,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1484,6 +1592,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventPersistence" class="com.liferay.portlet.calendar.service.persistence.CalEventPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1532,6 +1643,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1561,6 +1675,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1590,6 +1707,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1638,6 +1758,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1686,6 +1809,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence" class="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1734,6 +1860,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence" class="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1782,6 +1911,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticlePersistence" class="com.liferay.portlet.journal.service.persistence.JournalArticlePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1811,6 +1943,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence" class="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1859,6 +1994,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructurePersistence" class="com.liferay.portlet.journal.service.persistence.JournalStructurePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1907,6 +2045,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence" class="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1936,6 +2077,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.mail.service.persistence.MailReceiptPersistence" class="com.liferay.portlet.mail.service.persistence.MailReceiptPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1984,6 +2128,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -1994,6 +2141,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -2042,6 +2192,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence" class="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -2071,6 +2224,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -2100,6 +2256,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -2129,6 +2288,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -2158,6 +2320,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoicePersistence" class="com.liferay.portlet.polls.service.persistence.PollsChoicePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -2206,6 +2371,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence" class="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -2254,6 +2422,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.persistence.PollsVotePersistence" class="com.liferay.portlet.polls.service.persistence.PollsVotePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -2283,6 +2454,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -2331,6 +2505,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -2379,6 +2556,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -2427,6 +2607,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -2456,6 +2639,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -2485,6 +2671,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -2533,6 +2722,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -2562,6 +2754,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -2610,6 +2805,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence" class="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -2658,6 +2856,9 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence" class="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>

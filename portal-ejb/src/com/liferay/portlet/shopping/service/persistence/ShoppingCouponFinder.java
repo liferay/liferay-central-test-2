@@ -30,7 +30,6 @@ import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -109,8 +108,6 @@ public class ShoppingCouponFinder {
 
 		couponId = StringUtil.upperCase(couponId);
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -122,7 +119,7 @@ public class ShoppingCouponFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("ShoppingCoupon", ShoppingCouponHBM.class);
+			q.addEntity("ShoppingCoupon", ShoppingCoupon.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -134,17 +131,7 @@ public class ShoppingCouponFinder {
 			qPos.add(discountType);
 			qPos.add(discountType);
 
-			Iterator itr = QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				ShoppingCouponHBM couponHBM = (ShoppingCouponHBM)itr.next();
-
-				ShoppingCoupon coupon =
-					ShoppingCouponHBMUtil.model(couponHBM);
-
-				list.add(coupon);
-			}
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -152,8 +139,6 @@ public class ShoppingCouponFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 }

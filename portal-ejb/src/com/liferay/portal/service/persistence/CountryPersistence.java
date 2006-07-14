@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchCountryException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Country;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.util.StringPool;
@@ -48,25 +49,24 @@ import java.util.List;
  *
  */
 public class CountryPersistence extends BasePersistence {
-	public com.liferay.portal.model.Country create(String countryId) {
-		CountryHBM countryHBM = new CountryHBM();
-		countryHBM.setNew(true);
-		countryHBM.setPrimaryKey(countryId);
+	public Country create(String countryId) {
+		Country country = new Country();
+		country.setNew(true);
+		country.setPrimaryKey(countryId);
 
-		return CountryHBMUtil.model(countryHBM);
+		return country;
 	}
 
-	public com.liferay.portal.model.Country remove(String countryId)
+	public Country remove(String countryId)
 		throws NoSuchCountryException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CountryHBM countryHBM = (CountryHBM)session.get(CountryHBM.class,
-					countryId);
+			Country country = (Country)session.get(Country.class, countryId);
 
-			if (countryHBM == null) {
+			if (country == null) {
 				_log.warn("No Country exists with the primary key " +
 					countryId.toString());
 				throw new NoSuchCountryException(
@@ -74,10 +74,10 @@ public class CountryPersistence extends BasePersistence {
 					countryId.toString());
 			}
 
-			session.delete(countryHBM);
+			session.delete(country);
 			session.flush();
 
-			return CountryHBMUtil.model(countryHBM);
+			return country;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -96,31 +96,31 @@ public class CountryPersistence extends BasePersistence {
 				session = openSession();
 
 				if (country.isNew()) {
-					CountryHBM countryHBM = new CountryHBM();
-					countryHBM.setCountryId(country.getCountryId());
-					countryHBM.setCountryCode(country.getCountryCode());
-					countryHBM.setName(country.getName());
-					countryHBM.setActive(country.getActive());
-					session.save(countryHBM);
+					Country countryModel = new Country();
+					countryModel.setCountryId(country.getCountryId());
+					countryModel.setCountryCode(country.getCountryCode());
+					countryModel.setName(country.getName());
+					countryModel.setActive(country.getActive());
+					session.save(countryModel);
 					session.flush();
 				}
 				else {
-					CountryHBM countryHBM = (CountryHBM)session.get(CountryHBM.class,
+					Country countryModel = (Country)session.get(Country.class,
 							country.getPrimaryKey());
 
-					if (countryHBM != null) {
-						countryHBM.setCountryCode(country.getCountryCode());
-						countryHBM.setName(country.getName());
-						countryHBM.setActive(country.getActive());
+					if (countryModel != null) {
+						countryModel.setCountryCode(country.getCountryCode());
+						countryModel.setName(country.getName());
+						countryModel.setActive(country.getActive());
 						session.flush();
 					}
 					else {
-						countryHBM = new CountryHBM();
-						countryHBM.setCountryId(country.getCountryId());
-						countryHBM.setCountryCode(country.getCountryCode());
-						countryHBM.setName(country.getName());
-						countryHBM.setActive(country.getActive());
-						session.save(countryHBM);
+						countryModel = new Country();
+						countryModel.setCountryId(country.getCountryId());
+						countryModel.setCountryCode(country.getCountryCode());
+						countryModel.setName(country.getName());
+						countryModel.setActive(country.getActive());
+						session.save(countryModel);
 						session.flush();
 					}
 				}
@@ -139,17 +139,16 @@ public class CountryPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Country findByPrimaryKey(String countryId)
+	public Country findByPrimaryKey(String countryId)
 		throws NoSuchCountryException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CountryHBM countryHBM = (CountryHBM)session.get(CountryHBM.class,
-					countryId);
+			Country country = (Country)session.get(Country.class, countryId);
 
-			if (countryHBM == null) {
+			if (country == null) {
 				_log.warn("No Country exists with the primary key " +
 					countryId.toString());
 				throw new NoSuchCountryException(
@@ -157,7 +156,7 @@ public class CountryPersistence extends BasePersistence {
 					countryId.toString());
 			}
 
-			return CountryHBMUtil.model(countryHBM);
+			return country;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -174,8 +173,7 @@ public class CountryPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Country IN CLASS com.liferay.portal.service.persistence.CountryHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Country WHERE ");
 			query.append("active_ = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
@@ -185,13 +183,7 @@ public class CountryPersistence extends BasePersistence {
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				CountryHBM countryHBM = (CountryHBM)itr.next();
-				list.add(CountryHBMUtil.model(countryHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -216,8 +208,7 @@ public class CountryPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Country IN CLASS com.liferay.portal.service.persistence.CountryHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Country WHERE ");
 			query.append("active_ = ?");
 			query.append(" ");
 
@@ -233,15 +224,7 @@ public class CountryPersistence extends BasePersistence {
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				CountryHBM countryHBM = (CountryHBM)itr.next();
-				list.add(CountryHBMUtil.model(countryHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -251,8 +234,8 @@ public class CountryPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Country findByActive_First(boolean active,
-		OrderByComparator obc) throws NoSuchCountryException, SystemException {
+	public Country findByActive_First(boolean active, OrderByComparator obc)
+		throws NoSuchCountryException, SystemException {
 		List list = findByActive(active, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -264,12 +247,12 @@ public class CountryPersistence extends BasePersistence {
 			throw new NoSuchCountryException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Country)list.get(0);
+			return (Country)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Country findByActive_Last(boolean active,
-		OrderByComparator obc) throws NoSuchCountryException, SystemException {
+	public Country findByActive_Last(boolean active, OrderByComparator obc)
+		throws NoSuchCountryException, SystemException {
 		int count = countByActive(active);
 		List list = findByActive(active, count - 1, count, obc);
 
@@ -282,14 +265,13 @@ public class CountryPersistence extends BasePersistence {
 			throw new NoSuchCountryException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Country)list.get(0);
+			return (Country)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Country[] findByActive_PrevAndNext(
-		String countryId, boolean active, OrderByComparator obc)
-		throws NoSuchCountryException, SystemException {
-		com.liferay.portal.model.Country country = findByPrimaryKey(countryId);
+	public Country[] findByActive_PrevAndNext(String countryId, boolean active,
+		OrderByComparator obc) throws NoSuchCountryException, SystemException {
+		Country country = findByPrimaryKey(countryId);
 		int count = countByActive(active);
 		Session session = null;
 
@@ -297,8 +279,7 @@ public class CountryPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Country IN CLASS com.liferay.portal.service.persistence.CountryHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Country WHERE ");
 			query.append("active_ = ?");
 			query.append(" ");
 
@@ -314,12 +295,11 @@ public class CountryPersistence extends BasePersistence {
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					country, CountryHBMUtil.getInstance());
-			com.liferay.portal.model.Country[] array = new com.liferay.portal.model.Country[3];
-			array[0] = (com.liferay.portal.model.Country)objArray[0];
-			array[1] = (com.liferay.portal.model.Country)objArray[1];
-			array[2] = (com.liferay.portal.model.Country)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, country);
+			Country[] array = new Country[3];
+			array[0] = (Country)objArray[0];
+			array[1] = (Country)objArray[1];
+			array[2] = (Country)objArray[2];
 
 			return array;
 		}
@@ -338,21 +318,13 @@ public class CountryPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Country IN CLASS com.liferay.portal.service.persistence.CountryHBM ");
+			query.append("FROM com.liferay.portal.model.Country ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				CountryHBM countryHBM = (CountryHBM)itr.next();
-				list.add(CountryHBMUtil.model(countryHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -369,8 +341,7 @@ public class CountryPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Country IN CLASS com.liferay.portal.service.persistence.CountryHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Country WHERE ");
 			query.append("active_ = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
@@ -383,8 +354,8 @@ public class CountryPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				CountryHBM countryHBM = (CountryHBM)itr.next();
-				session.delete(countryHBM);
+				Country country = (Country)itr.next();
+				session.delete(country);
 			}
 
 			session.flush();
@@ -405,8 +376,7 @@ public class CountryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Country IN CLASS com.liferay.portal.service.persistence.CountryHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Country WHERE ");
 			query.append("active_ = ?");
 			query.append(" ");
 
@@ -432,6 +402,9 @@ public class CountryPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(CountryPersistence.class);

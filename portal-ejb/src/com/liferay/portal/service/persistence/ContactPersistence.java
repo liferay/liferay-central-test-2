@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchContactException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Contact;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.util.StringPool;
@@ -48,25 +49,24 @@ import java.util.List;
  *
  */
 public class ContactPersistence extends BasePersistence {
-	public com.liferay.portal.model.Contact create(String contactId) {
-		ContactHBM contactHBM = new ContactHBM();
-		contactHBM.setNew(true);
-		contactHBM.setPrimaryKey(contactId);
+	public Contact create(String contactId) {
+		Contact contact = new Contact();
+		contact.setNew(true);
+		contact.setPrimaryKey(contactId);
 
-		return ContactHBMUtil.model(contactHBM);
+		return contact;
 	}
 
-	public com.liferay.portal.model.Contact remove(String contactId)
+	public Contact remove(String contactId)
 		throws NoSuchContactException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ContactHBM contactHBM = (ContactHBM)session.get(ContactHBM.class,
-					contactId);
+			Contact contact = (Contact)session.get(Contact.class, contactId);
 
-			if (contactHBM == null) {
+			if (contact == null) {
 				_log.warn("No Contact exists with the primary key " +
 					contactId.toString());
 				throw new NoSuchContactException(
@@ -74,10 +74,10 @@ public class ContactPersistence extends BasePersistence {
 					contactId.toString());
 			}
 
-			session.delete(contactHBM);
+			session.delete(contact);
 			session.flush();
 
-			return ContactHBMUtil.model(contactHBM);
+			return contact;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -96,103 +96,103 @@ public class ContactPersistence extends BasePersistence {
 				session = openSession();
 
 				if (contact.isNew()) {
-					ContactHBM contactHBM = new ContactHBM();
-					contactHBM.setContactId(contact.getContactId());
-					contactHBM.setCompanyId(contact.getCompanyId());
-					contactHBM.setUserId(contact.getUserId());
-					contactHBM.setUserName(contact.getUserName());
-					contactHBM.setCreateDate(contact.getCreateDate());
-					contactHBM.setModifiedDate(contact.getModifiedDate());
-					contactHBM.setAccountId(contact.getAccountId());
-					contactHBM.setParentContactId(contact.getParentContactId());
-					contactHBM.setFirstName(contact.getFirstName());
-					contactHBM.setMiddleName(contact.getMiddleName());
-					contactHBM.setLastName(contact.getLastName());
-					contactHBM.setNickName(contact.getNickName());
-					contactHBM.setPrefixId(contact.getPrefixId());
-					contactHBM.setSuffixId(contact.getSuffixId());
-					contactHBM.setMale(contact.getMale());
-					contactHBM.setBirthday(contact.getBirthday());
-					contactHBM.setSmsSn(contact.getSmsSn());
-					contactHBM.setAimSn(contact.getAimSn());
-					contactHBM.setIcqSn(contact.getIcqSn());
-					contactHBM.setJabberSn(contact.getJabberSn());
-					contactHBM.setMsnSn(contact.getMsnSn());
-					contactHBM.setSkypeSn(contact.getSkypeSn());
-					contactHBM.setYmSn(contact.getYmSn());
-					contactHBM.setEmployeeStatusId(contact.getEmployeeStatusId());
-					contactHBM.setEmployeeNumber(contact.getEmployeeNumber());
-					contactHBM.setJobTitle(contact.getJobTitle());
-					contactHBM.setJobClass(contact.getJobClass());
-					contactHBM.setHoursOfOperation(contact.getHoursOfOperation());
-					session.save(contactHBM);
+					Contact contactModel = new Contact();
+					contactModel.setContactId(contact.getContactId());
+					contactModel.setCompanyId(contact.getCompanyId());
+					contactModel.setUserId(contact.getUserId());
+					contactModel.setUserName(contact.getUserName());
+					contactModel.setCreateDate(contact.getCreateDate());
+					contactModel.setModifiedDate(contact.getModifiedDate());
+					contactModel.setAccountId(contact.getAccountId());
+					contactModel.setParentContactId(contact.getParentContactId());
+					contactModel.setFirstName(contact.getFirstName());
+					contactModel.setMiddleName(contact.getMiddleName());
+					contactModel.setLastName(contact.getLastName());
+					contactModel.setNickName(contact.getNickName());
+					contactModel.setPrefixId(contact.getPrefixId());
+					contactModel.setSuffixId(contact.getSuffixId());
+					contactModel.setMale(contact.getMale());
+					contactModel.setBirthday(contact.getBirthday());
+					contactModel.setSmsSn(contact.getSmsSn());
+					contactModel.setAimSn(contact.getAimSn());
+					contactModel.setIcqSn(contact.getIcqSn());
+					contactModel.setJabberSn(contact.getJabberSn());
+					contactModel.setMsnSn(contact.getMsnSn());
+					contactModel.setSkypeSn(contact.getSkypeSn());
+					contactModel.setYmSn(contact.getYmSn());
+					contactModel.setEmployeeStatusId(contact.getEmployeeStatusId());
+					contactModel.setEmployeeNumber(contact.getEmployeeNumber());
+					contactModel.setJobTitle(contact.getJobTitle());
+					contactModel.setJobClass(contact.getJobClass());
+					contactModel.setHoursOfOperation(contact.getHoursOfOperation());
+					session.save(contactModel);
 					session.flush();
 				}
 				else {
-					ContactHBM contactHBM = (ContactHBM)session.get(ContactHBM.class,
+					Contact contactModel = (Contact)session.get(Contact.class,
 							contact.getPrimaryKey());
 
-					if (contactHBM != null) {
-						contactHBM.setCompanyId(contact.getCompanyId());
-						contactHBM.setUserId(contact.getUserId());
-						contactHBM.setUserName(contact.getUserName());
-						contactHBM.setCreateDate(contact.getCreateDate());
-						contactHBM.setModifiedDate(contact.getModifiedDate());
-						contactHBM.setAccountId(contact.getAccountId());
-						contactHBM.setParentContactId(contact.getParentContactId());
-						contactHBM.setFirstName(contact.getFirstName());
-						contactHBM.setMiddleName(contact.getMiddleName());
-						contactHBM.setLastName(contact.getLastName());
-						contactHBM.setNickName(contact.getNickName());
-						contactHBM.setPrefixId(contact.getPrefixId());
-						contactHBM.setSuffixId(contact.getSuffixId());
-						contactHBM.setMale(contact.getMale());
-						contactHBM.setBirthday(contact.getBirthday());
-						contactHBM.setSmsSn(contact.getSmsSn());
-						contactHBM.setAimSn(contact.getAimSn());
-						contactHBM.setIcqSn(contact.getIcqSn());
-						contactHBM.setJabberSn(contact.getJabberSn());
-						contactHBM.setMsnSn(contact.getMsnSn());
-						contactHBM.setSkypeSn(contact.getSkypeSn());
-						contactHBM.setYmSn(contact.getYmSn());
-						contactHBM.setEmployeeStatusId(contact.getEmployeeStatusId());
-						contactHBM.setEmployeeNumber(contact.getEmployeeNumber());
-						contactHBM.setJobTitle(contact.getJobTitle());
-						contactHBM.setJobClass(contact.getJobClass());
-						contactHBM.setHoursOfOperation(contact.getHoursOfOperation());
+					if (contactModel != null) {
+						contactModel.setCompanyId(contact.getCompanyId());
+						contactModel.setUserId(contact.getUserId());
+						contactModel.setUserName(contact.getUserName());
+						contactModel.setCreateDate(contact.getCreateDate());
+						contactModel.setModifiedDate(contact.getModifiedDate());
+						contactModel.setAccountId(contact.getAccountId());
+						contactModel.setParentContactId(contact.getParentContactId());
+						contactModel.setFirstName(contact.getFirstName());
+						contactModel.setMiddleName(contact.getMiddleName());
+						contactModel.setLastName(contact.getLastName());
+						contactModel.setNickName(contact.getNickName());
+						contactModel.setPrefixId(contact.getPrefixId());
+						contactModel.setSuffixId(contact.getSuffixId());
+						contactModel.setMale(contact.getMale());
+						contactModel.setBirthday(contact.getBirthday());
+						contactModel.setSmsSn(contact.getSmsSn());
+						contactModel.setAimSn(contact.getAimSn());
+						contactModel.setIcqSn(contact.getIcqSn());
+						contactModel.setJabberSn(contact.getJabberSn());
+						contactModel.setMsnSn(contact.getMsnSn());
+						contactModel.setSkypeSn(contact.getSkypeSn());
+						contactModel.setYmSn(contact.getYmSn());
+						contactModel.setEmployeeStatusId(contact.getEmployeeStatusId());
+						contactModel.setEmployeeNumber(contact.getEmployeeNumber());
+						contactModel.setJobTitle(contact.getJobTitle());
+						contactModel.setJobClass(contact.getJobClass());
+						contactModel.setHoursOfOperation(contact.getHoursOfOperation());
 						session.flush();
 					}
 					else {
-						contactHBM = new ContactHBM();
-						contactHBM.setContactId(contact.getContactId());
-						contactHBM.setCompanyId(contact.getCompanyId());
-						contactHBM.setUserId(contact.getUserId());
-						contactHBM.setUserName(contact.getUserName());
-						contactHBM.setCreateDate(contact.getCreateDate());
-						contactHBM.setModifiedDate(contact.getModifiedDate());
-						contactHBM.setAccountId(contact.getAccountId());
-						contactHBM.setParentContactId(contact.getParentContactId());
-						contactHBM.setFirstName(contact.getFirstName());
-						contactHBM.setMiddleName(contact.getMiddleName());
-						contactHBM.setLastName(contact.getLastName());
-						contactHBM.setNickName(contact.getNickName());
-						contactHBM.setPrefixId(contact.getPrefixId());
-						contactHBM.setSuffixId(contact.getSuffixId());
-						contactHBM.setMale(contact.getMale());
-						contactHBM.setBirthday(contact.getBirthday());
-						contactHBM.setSmsSn(contact.getSmsSn());
-						contactHBM.setAimSn(contact.getAimSn());
-						contactHBM.setIcqSn(contact.getIcqSn());
-						contactHBM.setJabberSn(contact.getJabberSn());
-						contactHBM.setMsnSn(contact.getMsnSn());
-						contactHBM.setSkypeSn(contact.getSkypeSn());
-						contactHBM.setYmSn(contact.getYmSn());
-						contactHBM.setEmployeeStatusId(contact.getEmployeeStatusId());
-						contactHBM.setEmployeeNumber(contact.getEmployeeNumber());
-						contactHBM.setJobTitle(contact.getJobTitle());
-						contactHBM.setJobClass(contact.getJobClass());
-						contactHBM.setHoursOfOperation(contact.getHoursOfOperation());
-						session.save(contactHBM);
+						contactModel = new Contact();
+						contactModel.setContactId(contact.getContactId());
+						contactModel.setCompanyId(contact.getCompanyId());
+						contactModel.setUserId(contact.getUserId());
+						contactModel.setUserName(contact.getUserName());
+						contactModel.setCreateDate(contact.getCreateDate());
+						contactModel.setModifiedDate(contact.getModifiedDate());
+						contactModel.setAccountId(contact.getAccountId());
+						contactModel.setParentContactId(contact.getParentContactId());
+						contactModel.setFirstName(contact.getFirstName());
+						contactModel.setMiddleName(contact.getMiddleName());
+						contactModel.setLastName(contact.getLastName());
+						contactModel.setNickName(contact.getNickName());
+						contactModel.setPrefixId(contact.getPrefixId());
+						contactModel.setSuffixId(contact.getSuffixId());
+						contactModel.setMale(contact.getMale());
+						contactModel.setBirthday(contact.getBirthday());
+						contactModel.setSmsSn(contact.getSmsSn());
+						contactModel.setAimSn(contact.getAimSn());
+						contactModel.setIcqSn(contact.getIcqSn());
+						contactModel.setJabberSn(contact.getJabberSn());
+						contactModel.setMsnSn(contact.getMsnSn());
+						contactModel.setSkypeSn(contact.getSkypeSn());
+						contactModel.setYmSn(contact.getYmSn());
+						contactModel.setEmployeeStatusId(contact.getEmployeeStatusId());
+						contactModel.setEmployeeNumber(contact.getEmployeeNumber());
+						contactModel.setJobTitle(contact.getJobTitle());
+						contactModel.setJobClass(contact.getJobClass());
+						contactModel.setHoursOfOperation(contact.getHoursOfOperation());
+						session.save(contactModel);
 						session.flush();
 					}
 				}
@@ -211,17 +211,16 @@ public class ContactPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Contact findByPrimaryKey(String contactId)
+	public Contact findByPrimaryKey(String contactId)
 		throws NoSuchContactException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ContactHBM contactHBM = (ContactHBM)session.get(ContactHBM.class,
-					contactId);
+			Contact contact = (Contact)session.get(Contact.class, contactId);
 
-			if (contactHBM == null) {
+			if (contact == null) {
 				_log.warn("No Contact exists with the primary key " +
 					contactId.toString());
 				throw new NoSuchContactException(
@@ -229,7 +228,7 @@ public class ContactPersistence extends BasePersistence {
 					contactId.toString());
 			}
 
-			return ContactHBMUtil.model(contactHBM);
+			return contact;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -246,11 +245,10 @@ public class ContactPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Contact_ IN CLASS com.liferay.portal.service.persistence.ContactHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Contact WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -265,13 +263,7 @@ public class ContactPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				ContactHBM contactHBM = (ContactHBM)itr.next();
-				list.add(ContactHBMUtil.model(contactHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -296,11 +288,10 @@ public class ContactPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Contact_ IN CLASS com.liferay.portal.service.persistence.ContactHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Contact WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -319,15 +310,7 @@ public class ContactPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				ContactHBM contactHBM = (ContactHBM)itr.next();
-				list.add(ContactHBMUtil.model(contactHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -337,8 +320,7 @@ public class ContactPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Contact findByCompanyId_First(
-		String companyId, OrderByComparator obc)
+	public Contact findByCompanyId_First(String companyId, OrderByComparator obc)
 		throws NoSuchContactException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
@@ -351,12 +333,11 @@ public class ContactPersistence extends BasePersistence {
 			throw new NoSuchContactException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Contact)list.get(0);
+			return (Contact)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Contact findByCompanyId_Last(
-		String companyId, OrderByComparator obc)
+	public Contact findByCompanyId_Last(String companyId, OrderByComparator obc)
 		throws NoSuchContactException, SystemException {
 		int count = countByCompanyId(companyId);
 		List list = findByCompanyId(companyId, count - 1, count, obc);
@@ -370,14 +351,14 @@ public class ContactPersistence extends BasePersistence {
 			throw new NoSuchContactException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Contact)list.get(0);
+			return (Contact)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Contact[] findByCompanyId_PrevAndNext(
-		String contactId, String companyId, OrderByComparator obc)
+	public Contact[] findByCompanyId_PrevAndNext(String contactId,
+		String companyId, OrderByComparator obc)
 		throws NoSuchContactException, SystemException {
-		com.liferay.portal.model.Contact contact = findByPrimaryKey(contactId);
+		Contact contact = findByPrimaryKey(contactId);
 		int count = countByCompanyId(companyId);
 		Session session = null;
 
@@ -385,11 +366,10 @@ public class ContactPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Contact_ IN CLASS com.liferay.portal.service.persistence.ContactHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Contact WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -408,12 +388,11 @@ public class ContactPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					contact, ContactHBMUtil.getInstance());
-			com.liferay.portal.model.Contact[] array = new com.liferay.portal.model.Contact[3];
-			array[0] = (com.liferay.portal.model.Contact)objArray[0];
-			array[1] = (com.liferay.portal.model.Contact)objArray[1];
-			array[2] = (com.liferay.portal.model.Contact)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, contact);
+			Contact[] array = new Contact[3];
+			array[0] = (Contact)objArray[0];
+			array[1] = (Contact)objArray[1];
+			array[2] = (Contact)objArray[2];
 
 			return array;
 		}
@@ -432,19 +411,11 @@ public class ContactPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Contact_ IN CLASS com.liferay.portal.service.persistence.ContactHBM ");
+			query.append("FROM com.liferay.portal.model.Contact ");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				ContactHBM contactHBM = (ContactHBM)itr.next();
-				list.add(ContactHBMUtil.model(contactHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -461,11 +432,10 @@ public class ContactPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Contact_ IN CLASS com.liferay.portal.service.persistence.ContactHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Contact WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -483,8 +453,8 @@ public class ContactPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				ContactHBM contactHBM = (ContactHBM)itr.next();
-				session.delete(contactHBM);
+				Contact contact = (Contact)itr.next();
+				session.delete(contact);
 			}
 
 			session.flush();
@@ -505,11 +475,10 @@ public class ContactPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Contact_ IN CLASS com.liferay.portal.service.persistence.ContactHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Contact WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -542,6 +511,9 @@ public class ContactPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(ContactPersistence.class);

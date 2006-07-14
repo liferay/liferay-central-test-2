@@ -268,6 +268,10 @@ public class SubscriptionUtil {
 			classPK);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static SubscriptionPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		SubscriptionUtil util = (SubscriptionUtil)ctx.getBean(CLASS_NAME);

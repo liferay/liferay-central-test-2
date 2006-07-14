@@ -45,14 +45,14 @@ import java.util.List;
 public class OrganizationServiceImpl extends PrincipalBean
 	implements OrganizationService {
 
-	public boolean addGroupOrganizations(
+	public void addGroupOrganizations(
 			String groupId, String[] organizationIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
-		return OrganizationLocalServiceUtil.addGroupOrganizations(
+		OrganizationLocalServiceUtil.addGroupOrganizations(
 			groupId, organizationIds);
 	}
 
@@ -108,14 +108,14 @@ public class OrganizationServiceImpl extends PrincipalBean
 			groupId, organizationIds);
 	}
 
-	public boolean unsetGroupOrganizations(
+	public void unsetGroupOrganizations(
 			String groupId, String[] organizationIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
-		return OrganizationLocalServiceUtil.unsetGroupOrganizations(
+		OrganizationLocalServiceUtil.unsetGroupOrganizations(
 			groupId, organizationIds);
 	}
 

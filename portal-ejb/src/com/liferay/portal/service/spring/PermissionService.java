@@ -76,21 +76,21 @@ public interface PermissionService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public boolean unsetRolePermission(java.lang.String roleId,
+	public void unsetRolePermission(java.lang.String roleId,
 		java.lang.String groupId, java.lang.String name,
 		java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public boolean unsetRolePermissions(java.lang.String roleId,
+	public void unsetRolePermissions(java.lang.String roleId,
 		java.lang.String groupId, java.lang.String name,
 		java.lang.String typeId, java.lang.String scope,
 		java.lang.String actionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public boolean unsetUserPermissions(java.lang.String userId,
+	public void unsetUserPermissions(java.lang.String userId,
 		java.lang.String groupId, java.lang.String[] actionIds,
 		java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 

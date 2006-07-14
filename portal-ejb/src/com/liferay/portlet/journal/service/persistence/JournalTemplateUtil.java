@@ -237,6 +237,10 @@ public class JournalTemplateUtil {
 		return getPersistence().countByC_S(companyId, structureId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static JournalTemplatePersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		JournalTemplateUtil util = (JournalTemplateUtil)ctx.getBean(CLASS_NAME);

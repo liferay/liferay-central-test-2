@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import org.apache.commons.logging.Log;
@@ -44,24 +45,24 @@ import java.util.List;
  *
  */
 public class ImagePersistence extends BasePersistence {
-	public com.liferay.portal.model.Image create(String imageId) {
-		ImageHBM imageHBM = new ImageHBM();
-		imageHBM.setNew(true);
-		imageHBM.setPrimaryKey(imageId);
+	public Image create(String imageId) {
+		Image image = new Image();
+		image.setNew(true);
+		image.setPrimaryKey(imageId);
 
-		return ImageHBMUtil.model(imageHBM);
+		return image;
 	}
 
-	public com.liferay.portal.model.Image remove(String imageId)
+	public Image remove(String imageId)
 		throws NoSuchImageException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ImageHBM imageHBM = (ImageHBM)session.get(ImageHBM.class, imageId);
+			Image image = (Image)session.get(Image.class, imageId);
 
-			if (imageHBM == null) {
+			if (image == null) {
 				_log.warn("No Image exists with the primary key " +
 					imageId.toString());
 				throw new NoSuchImageException(
@@ -69,10 +70,10 @@ public class ImagePersistence extends BasePersistence {
 					imageId.toString());
 			}
 
-			session.delete(imageHBM);
+			session.delete(image);
 			session.flush();
 
-			return ImageHBMUtil.model(imageHBM);
+			return image;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -91,28 +92,28 @@ public class ImagePersistence extends BasePersistence {
 				session = openSession();
 
 				if (image.isNew()) {
-					ImageHBM imageHBM = new ImageHBM();
-					imageHBM.setImageId(image.getImageId());
-					imageHBM.setModifiedDate(image.getModifiedDate());
-					imageHBM.setText(image.getText());
-					session.save(imageHBM);
+					Image imageModel = new Image();
+					imageModel.setImageId(image.getImageId());
+					imageModel.setModifiedDate(image.getModifiedDate());
+					imageModel.setText(image.getText());
+					session.save(imageModel);
 					session.flush();
 				}
 				else {
-					ImageHBM imageHBM = (ImageHBM)session.get(ImageHBM.class,
+					Image imageModel = (Image)session.get(Image.class,
 							image.getPrimaryKey());
 
-					if (imageHBM != null) {
-						imageHBM.setModifiedDate(image.getModifiedDate());
-						imageHBM.setText(image.getText());
+					if (imageModel != null) {
+						imageModel.setModifiedDate(image.getModifiedDate());
+						imageModel.setText(image.getText());
 						session.flush();
 					}
 					else {
-						imageHBM = new ImageHBM();
-						imageHBM.setImageId(image.getImageId());
-						imageHBM.setModifiedDate(image.getModifiedDate());
-						imageHBM.setText(image.getText());
-						session.save(imageHBM);
+						imageModel = new Image();
+						imageModel.setImageId(image.getImageId());
+						imageModel.setModifiedDate(image.getModifiedDate());
+						imageModel.setText(image.getText());
+						session.save(imageModel);
 						session.flush();
 					}
 				}
@@ -131,16 +132,16 @@ public class ImagePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Image findByPrimaryKey(String imageId)
+	public Image findByPrimaryKey(String imageId)
 		throws NoSuchImageException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ImageHBM imageHBM = (ImageHBM)session.get(ImageHBM.class, imageId);
+			Image image = (Image)session.get(Image.class, imageId);
 
-			if (imageHBM == null) {
+			if (image == null) {
 				_log.warn("No Image exists with the primary key " +
 					imageId.toString());
 				throw new NoSuchImageException(
@@ -148,7 +149,7 @@ public class ImagePersistence extends BasePersistence {
 					imageId.toString());
 			}
 
-			return ImageHBMUtil.model(imageHBM);
+			return image;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -165,21 +166,13 @@ public class ImagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Image IN CLASS com.liferay.portal.service.persistence.ImageHBM ");
+			query.append("FROM com.liferay.portal.model.Image ");
 			query.append("ORDER BY ");
 			query.append("imageId ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				ImageHBM imageHBM = (ImageHBM)itr.next();
-				list.add(ImageHBMUtil.model(imageHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -187,6 +180,9 @@ public class ImagePersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(ImagePersistence.class);

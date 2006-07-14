@@ -69,6 +69,7 @@ import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.portlet.messageboards.util.TreeWalker;
 import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
 import com.liferay.portlet.messageboards.util.comparator.ThreadLastPostDateComparator;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
 import com.liferay.util.ObjectValuePair;
 import com.liferay.util.RSSUtil;
@@ -155,6 +156,12 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		long start = 0;
+
+		if (_log.isDebugEnabled()) {
+			start = System.currentTimeMillis();
+		}
+
 		// Message
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -163,10 +170,10 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		validate(subject, body);
 
-		String rootMessageId = Long.toString(CounterServiceUtil.increment(
+		String messageId = Long.toString(CounterServiceUtil.increment(
 			MBMessage.class.getName()));
 
-		String messageId = rootMessageId;
+		start = logAddMessage(messageId, start, 1);
 
 		MBMessage message = MBMessageUtil.create(
 			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
@@ -207,11 +214,13 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 			thread.setCategoryId(categoryId);
 			thread.setTopicId(message.getTopicId());
-			thread.setRootMessageId(rootMessageId);
+			thread.setRootMessageId(messageId);
 		}
 
 		thread.setMessageCount(thread.getMessageCount() + 1);
 		thread.setLastPostDate(now);
+
+		start = logAddMessage(messageId, start, 2);
 
 		// Message
 
@@ -257,10 +266,14 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			}
 		}
 
+		start = logAddMessage(messageId, start, 3);
+
 		// Commit
 
 		MBThreadUtil.update(thread);
 		MBMessageUtil.update(message);
+
+		start = logAddMessage(messageId, start, 4);
 
 		// Resources
 
@@ -270,6 +283,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 				addGuestPermissions);
 		}
 
+		start = logAddMessage(messageId, start, 5);
+
 		// Statistics
 
 		if (!category.isDiscussion()) {
@@ -277,15 +292,21 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 				category.getGroupId(), userId);
 		}
 
+		start = logAddMessage(messageId, start, 6);
+
 		// Subscriptions
 
 		notifySubscribers(message, prefs, false);
+
+		start = logAddMessage(messageId, start, 7);
 
 		// Category
 
 		category.setLastPostDate(now);
 
 		MBCategoryUtil.update(category);
+
+		start = logAddMessage(messageId, start, 8);
 
 		// Testing roll back
 
@@ -306,6 +327,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		catch (IOException ioe) {
 			_log.error(ioe.getMessage());
 		}
+
+		start = logAddMessage(messageId, start, 9);
 
 		return message;
 	}
@@ -835,7 +858,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		MBMessageUtil.update(message);
 
 		// Thread
-		
+
 		MBThread thread = MBThreadUtil.findByPrimaryKey(message.getThreadId());
 
 		thread.setLastPostDate(modifiedDate);
@@ -886,6 +909,26 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		}
 
 		return RSSUtil.export(channel, version);
+	}
+
+	protected long logAddMessage(String messageId, long start, int block) {
+		if (!_log.isDebugEnabled()) {
+			return 0;
+		}
+
+		int messageIdInt = GetterUtil.getInteger(messageId);
+
+		if ((messageIdInt != 1) && ((messageIdInt % 10) != 0)) {
+			return 0;
+		}
+
+		long end = System.currentTimeMillis();
+
+		_log.debug(
+			"Adding message block " + block + " for " + messageId + " takes " +
+				(end - start) + " ms");
+
+		return end;
 	}
 
 	protected void notifySubscribers(

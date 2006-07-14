@@ -44,14 +44,14 @@ import java.util.List;
 public class UserGroupServiceImpl extends PrincipalBean
 	implements UserGroupService {
 
-	public boolean addGroupUserGroups(
+	public void addGroupUserGroups(
 			String groupId, String[] userGroupIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
-		return UserGroupLocalServiceUtil.addGroupUserGroups(
+		UserGroupLocalServiceUtil.addGroupUserGroups(
 			groupId, userGroupIds);
 	}
 
@@ -92,14 +92,14 @@ public class UserGroupServiceImpl extends PrincipalBean
 		return UserGroupLocalServiceUtil.getUserUserGroups(userId);
 	}
 
-	public boolean unsetGroupUserGroups(
+	public void unsetGroupUserGroups(
 			String groupId, String[] userGroupIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
-		return UserGroupLocalServiceUtil.unsetGroupUserGroups(
+		UserGroupLocalServiceUtil.unsetGroupUserGroups(
 			groupId, userGroupIds);
 	}
 

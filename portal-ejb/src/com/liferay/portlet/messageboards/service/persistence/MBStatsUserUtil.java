@@ -288,6 +288,10 @@ public class MBStatsUserUtil {
 		return getPersistence().countByG_M(groupId, messageCount);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static MBStatsUserPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		MBStatsUserUtil util = (MBStatsUserUtil)ctx.getBean(CLASS_NAME);

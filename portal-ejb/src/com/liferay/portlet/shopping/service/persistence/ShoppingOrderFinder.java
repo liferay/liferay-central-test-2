@@ -32,7 +32,6 @@ import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -137,8 +136,6 @@ public class ShoppingOrderFinder {
 
 		orderId = StringUtil.upperCase(orderId);
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -158,7 +155,7 @@ public class ShoppingOrderFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("ShoppingOrder", ShoppingOrderHBM.class);
+			q.addEntity("ShoppingOrder", ShoppingOrder.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -182,16 +179,7 @@ public class ShoppingOrderFinder {
 			qPos.add(shippingEmailAddress);
 			qPos.add(ppPaymentStatus);
 
-			Iterator itr = QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				ShoppingOrderHBM orderHBM = (ShoppingOrderHBM)itr.next();
-
-				ShoppingOrder order = ShoppingOrderHBMUtil.model(orderHBM);
-
-				list.add(order);
-			}
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -199,8 +187,6 @@ public class ShoppingOrderFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 }

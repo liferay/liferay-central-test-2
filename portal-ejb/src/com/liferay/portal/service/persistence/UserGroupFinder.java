@@ -33,7 +33,6 @@ import com.liferay.util.Validator;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -131,7 +130,7 @@ public class UserGroupFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("UserGroup", UserGroupHBM.class);
+			q.addEntity("UserGroup", UserGroup.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -141,9 +140,7 @@ public class UserGroupFinder {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				UserGroupHBM userGroupHBM = (UserGroupHBM)itr.next();
-
-				return UserGroupHBMUtil.model(userGroupHBM);
+				return (UserGroup)itr.next();
 			}
 		}
 		catch (Exception e) {
@@ -166,8 +163,6 @@ public class UserGroupFinder {
 		name = StringUtil.lowerCase(name);
 		description = StringUtil.lowerCase(description);
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -179,7 +174,7 @@ public class UserGroupFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("UserGroup", UserGroupHBM.class);
+			q.addEntity("UserGroup", UserGroup.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -190,16 +185,7 @@ public class UserGroupFinder {
 			qPos.add(description);
 			qPos.add(description);
 
-			Iterator itr = QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				UserGroupHBM userGroupHBM = (UserGroupHBM)itr.next();
-
-				UserGroup userGroup = UserGroupHBMUtil.model(userGroupHBM);
-
-				list.add(userGroup);
-			}
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -207,8 +193,6 @@ public class UserGroupFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 	private static String _getJoin(Map params) {

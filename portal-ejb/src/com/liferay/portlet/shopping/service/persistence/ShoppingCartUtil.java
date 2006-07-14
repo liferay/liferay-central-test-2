@@ -230,6 +230,10 @@ public class ShoppingCartUtil {
 		return getPersistence().countByUserId(userId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static ShoppingCartPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		ShoppingCartUtil util = (ShoppingCartUtil)ctx.getBean(CLASS_NAME);

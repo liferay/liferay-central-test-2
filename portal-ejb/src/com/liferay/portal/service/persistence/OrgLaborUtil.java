@@ -184,6 +184,10 @@ public class OrgLaborUtil {
 		return getPersistence().countByOrganizationId(organizationId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static OrgLaborPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		OrgLaborUtil util = (OrgLaborUtil)ctx.getBean(CLASS_NAME);

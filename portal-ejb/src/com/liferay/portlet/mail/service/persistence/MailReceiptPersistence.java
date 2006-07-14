@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.mail.NoSuchReceiptException;
+import com.liferay.portlet.mail.model.MailReceipt;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,25 +50,25 @@ import java.util.List;
  *
  */
 public class MailReceiptPersistence extends BasePersistence {
-	public com.liferay.portlet.mail.model.MailReceipt create(String receiptId) {
-		MailReceiptHBM mailReceiptHBM = new MailReceiptHBM();
-		mailReceiptHBM.setNew(true);
-		mailReceiptHBM.setPrimaryKey(receiptId);
+	public MailReceipt create(String receiptId) {
+		MailReceipt mailReceipt = new MailReceipt();
+		mailReceipt.setNew(true);
+		mailReceipt.setPrimaryKey(receiptId);
 
-		return MailReceiptHBMUtil.model(mailReceiptHBM);
+		return mailReceipt;
 	}
 
-	public com.liferay.portlet.mail.model.MailReceipt remove(String receiptId)
+	public MailReceipt remove(String receiptId)
 		throws NoSuchReceiptException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			MailReceiptHBM mailReceiptHBM = (MailReceiptHBM)session.get(MailReceiptHBM.class,
+			MailReceipt mailReceipt = (MailReceipt)session.get(MailReceipt.class,
 					receiptId);
 
-			if (mailReceiptHBM == null) {
+			if (mailReceipt == null) {
 				_log.warn("No MailReceipt exists with the primary key " +
 					receiptId.toString());
 				throw new NoSuchReceiptException(
@@ -75,10 +76,10 @@ public class MailReceiptPersistence extends BasePersistence {
 					receiptId.toString());
 			}
 
-			session.delete(mailReceiptHBM);
+			session.delete(mailReceipt);
 			session.flush();
 
-			return MailReceiptHBMUtil.model(mailReceiptHBM);
+			return mailReceipt;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -98,55 +99,55 @@ public class MailReceiptPersistence extends BasePersistence {
 				session = openSession();
 
 				if (mailReceipt.isNew()) {
-					MailReceiptHBM mailReceiptHBM = new MailReceiptHBM();
-					mailReceiptHBM.setReceiptId(mailReceipt.getReceiptId());
-					mailReceiptHBM.setCompanyId(mailReceipt.getCompanyId());
-					mailReceiptHBM.setUserId(mailReceipt.getUserId());
-					mailReceiptHBM.setCreateDate(mailReceipt.getCreateDate());
-					mailReceiptHBM.setModifiedDate(mailReceipt.getModifiedDate());
-					mailReceiptHBM.setRecipientName(mailReceipt.getRecipientName());
-					mailReceiptHBM.setRecipientAddress(mailReceipt.getRecipientAddress());
-					mailReceiptHBM.setSubject(mailReceipt.getSubject());
-					mailReceiptHBM.setSentDate(mailReceipt.getSentDate());
-					mailReceiptHBM.setReadCount(mailReceipt.getReadCount());
-					mailReceiptHBM.setFirstReadDate(mailReceipt.getFirstReadDate());
-					mailReceiptHBM.setLastReadDate(mailReceipt.getLastReadDate());
-					session.save(mailReceiptHBM);
+					MailReceipt mailReceiptModel = new MailReceipt();
+					mailReceiptModel.setReceiptId(mailReceipt.getReceiptId());
+					mailReceiptModel.setCompanyId(mailReceipt.getCompanyId());
+					mailReceiptModel.setUserId(mailReceipt.getUserId());
+					mailReceiptModel.setCreateDate(mailReceipt.getCreateDate());
+					mailReceiptModel.setModifiedDate(mailReceipt.getModifiedDate());
+					mailReceiptModel.setRecipientName(mailReceipt.getRecipientName());
+					mailReceiptModel.setRecipientAddress(mailReceipt.getRecipientAddress());
+					mailReceiptModel.setSubject(mailReceipt.getSubject());
+					mailReceiptModel.setSentDate(mailReceipt.getSentDate());
+					mailReceiptModel.setReadCount(mailReceipt.getReadCount());
+					mailReceiptModel.setFirstReadDate(mailReceipt.getFirstReadDate());
+					mailReceiptModel.setLastReadDate(mailReceipt.getLastReadDate());
+					session.save(mailReceiptModel);
 					session.flush();
 				}
 				else {
-					MailReceiptHBM mailReceiptHBM = (MailReceiptHBM)session.get(MailReceiptHBM.class,
+					MailReceipt mailReceiptModel = (MailReceipt)session.get(MailReceipt.class,
 							mailReceipt.getPrimaryKey());
 
-					if (mailReceiptHBM != null) {
-						mailReceiptHBM.setCompanyId(mailReceipt.getCompanyId());
-						mailReceiptHBM.setUserId(mailReceipt.getUserId());
-						mailReceiptHBM.setCreateDate(mailReceipt.getCreateDate());
-						mailReceiptHBM.setModifiedDate(mailReceipt.getModifiedDate());
-						mailReceiptHBM.setRecipientName(mailReceipt.getRecipientName());
-						mailReceiptHBM.setRecipientAddress(mailReceipt.getRecipientAddress());
-						mailReceiptHBM.setSubject(mailReceipt.getSubject());
-						mailReceiptHBM.setSentDate(mailReceipt.getSentDate());
-						mailReceiptHBM.setReadCount(mailReceipt.getReadCount());
-						mailReceiptHBM.setFirstReadDate(mailReceipt.getFirstReadDate());
-						mailReceiptHBM.setLastReadDate(mailReceipt.getLastReadDate());
+					if (mailReceiptModel != null) {
+						mailReceiptModel.setCompanyId(mailReceipt.getCompanyId());
+						mailReceiptModel.setUserId(mailReceipt.getUserId());
+						mailReceiptModel.setCreateDate(mailReceipt.getCreateDate());
+						mailReceiptModel.setModifiedDate(mailReceipt.getModifiedDate());
+						mailReceiptModel.setRecipientName(mailReceipt.getRecipientName());
+						mailReceiptModel.setRecipientAddress(mailReceipt.getRecipientAddress());
+						mailReceiptModel.setSubject(mailReceipt.getSubject());
+						mailReceiptModel.setSentDate(mailReceipt.getSentDate());
+						mailReceiptModel.setReadCount(mailReceipt.getReadCount());
+						mailReceiptModel.setFirstReadDate(mailReceipt.getFirstReadDate());
+						mailReceiptModel.setLastReadDate(mailReceipt.getLastReadDate());
 						session.flush();
 					}
 					else {
-						mailReceiptHBM = new MailReceiptHBM();
-						mailReceiptHBM.setReceiptId(mailReceipt.getReceiptId());
-						mailReceiptHBM.setCompanyId(mailReceipt.getCompanyId());
-						mailReceiptHBM.setUserId(mailReceipt.getUserId());
-						mailReceiptHBM.setCreateDate(mailReceipt.getCreateDate());
-						mailReceiptHBM.setModifiedDate(mailReceipt.getModifiedDate());
-						mailReceiptHBM.setRecipientName(mailReceipt.getRecipientName());
-						mailReceiptHBM.setRecipientAddress(mailReceipt.getRecipientAddress());
-						mailReceiptHBM.setSubject(mailReceipt.getSubject());
-						mailReceiptHBM.setSentDate(mailReceipt.getSentDate());
-						mailReceiptHBM.setReadCount(mailReceipt.getReadCount());
-						mailReceiptHBM.setFirstReadDate(mailReceipt.getFirstReadDate());
-						mailReceiptHBM.setLastReadDate(mailReceipt.getLastReadDate());
-						session.save(mailReceiptHBM);
+						mailReceiptModel = new MailReceipt();
+						mailReceiptModel.setReceiptId(mailReceipt.getReceiptId());
+						mailReceiptModel.setCompanyId(mailReceipt.getCompanyId());
+						mailReceiptModel.setUserId(mailReceipt.getUserId());
+						mailReceiptModel.setCreateDate(mailReceipt.getCreateDate());
+						mailReceiptModel.setModifiedDate(mailReceipt.getModifiedDate());
+						mailReceiptModel.setRecipientName(mailReceipt.getRecipientName());
+						mailReceiptModel.setRecipientAddress(mailReceipt.getRecipientAddress());
+						mailReceiptModel.setSubject(mailReceipt.getSubject());
+						mailReceiptModel.setSentDate(mailReceipt.getSentDate());
+						mailReceiptModel.setReadCount(mailReceipt.getReadCount());
+						mailReceiptModel.setFirstReadDate(mailReceipt.getFirstReadDate());
+						mailReceiptModel.setLastReadDate(mailReceipt.getLastReadDate());
+						session.save(mailReceiptModel);
 						session.flush();
 					}
 				}
@@ -165,17 +166,17 @@ public class MailReceiptPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.mail.model.MailReceipt findByPrimaryKey(
-		String receiptId) throws NoSuchReceiptException, SystemException {
+	public MailReceipt findByPrimaryKey(String receiptId)
+		throws NoSuchReceiptException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			MailReceiptHBM mailReceiptHBM = (MailReceiptHBM)session.get(MailReceiptHBM.class,
+			MailReceipt mailReceipt = (MailReceipt)session.get(MailReceipt.class,
 					receiptId);
 
-			if (mailReceiptHBM == null) {
+			if (mailReceipt == null) {
 				_log.warn("No MailReceipt exists with the primary key " +
 					receiptId.toString());
 				throw new NoSuchReceiptException(
@@ -183,7 +184,7 @@ public class MailReceiptPersistence extends BasePersistence {
 					receiptId.toString());
 			}
 
-			return MailReceiptHBMUtil.model(mailReceiptHBM);
+			return mailReceipt;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -201,10 +202,10 @@ public class MailReceiptPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MailReceipt IN CLASS com.liferay.portlet.mail.service.persistence.MailReceiptHBM WHERE ");
+				"FROM com.liferay.portlet.mail.model.MailReceipt WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -221,13 +222,7 @@ public class MailReceiptPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				MailReceiptHBM mailReceiptHBM = (MailReceiptHBM)itr.next();
-				list.add(MailReceiptHBMUtil.model(mailReceiptHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -253,10 +248,10 @@ public class MailReceiptPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MailReceipt IN CLASS com.liferay.portlet.mail.service.persistence.MailReceiptHBM WHERE ");
+				"FROM com.liferay.portlet.mail.model.MailReceipt WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -279,15 +274,7 @@ public class MailReceiptPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				MailReceiptHBM mailReceiptHBM = (MailReceiptHBM)itr.next();
-				list.add(MailReceiptHBMUtil.model(mailReceiptHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -297,9 +284,8 @@ public class MailReceiptPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.mail.model.MailReceipt findByCompanyId_First(
-		String companyId, OrderByComparator obc)
-		throws NoSuchReceiptException, SystemException {
+	public MailReceipt findByCompanyId_First(String companyId,
+		OrderByComparator obc) throws NoSuchReceiptException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -311,13 +297,12 @@ public class MailReceiptPersistence extends BasePersistence {
 			throw new NoSuchReceiptException(msg);
 		}
 		else {
-			return (com.liferay.portlet.mail.model.MailReceipt)list.get(0);
+			return (MailReceipt)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.mail.model.MailReceipt findByCompanyId_Last(
-		String companyId, OrderByComparator obc)
-		throws NoSuchReceiptException, SystemException {
+	public MailReceipt findByCompanyId_Last(String companyId,
+		OrderByComparator obc) throws NoSuchReceiptException, SystemException {
 		int count = countByCompanyId(companyId);
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
@@ -330,14 +315,14 @@ public class MailReceiptPersistence extends BasePersistence {
 			throw new NoSuchReceiptException(msg);
 		}
 		else {
-			return (com.liferay.portlet.mail.model.MailReceipt)list.get(0);
+			return (MailReceipt)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.mail.model.MailReceipt[] findByCompanyId_PrevAndNext(
-		String receiptId, String companyId, OrderByComparator obc)
+	public MailReceipt[] findByCompanyId_PrevAndNext(String receiptId,
+		String companyId, OrderByComparator obc)
 		throws NoSuchReceiptException, SystemException {
-		com.liferay.portlet.mail.model.MailReceipt mailReceipt = findByPrimaryKey(receiptId);
+		MailReceipt mailReceipt = findByPrimaryKey(receiptId);
 		int count = countByCompanyId(companyId);
 		Session session = null;
 
@@ -346,10 +331,10 @@ public class MailReceiptPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MailReceipt IN CLASS com.liferay.portlet.mail.service.persistence.MailReceiptHBM WHERE ");
+				"FROM com.liferay.portlet.mail.model.MailReceipt WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -373,11 +358,11 @@ public class MailReceiptPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mailReceipt, MailReceiptHBMUtil.getInstance());
-			com.liferay.portlet.mail.model.MailReceipt[] array = new com.liferay.portlet.mail.model.MailReceipt[3];
-			array[0] = (com.liferay.portlet.mail.model.MailReceipt)objArray[0];
-			array[1] = (com.liferay.portlet.mail.model.MailReceipt)objArray[1];
-			array[2] = (com.liferay.portlet.mail.model.MailReceipt)objArray[2];
+					mailReceipt);
+			MailReceipt[] array = new MailReceipt[3];
+			array[0] = (MailReceipt)objArray[0];
+			array[1] = (MailReceipt)objArray[1];
+			array[2] = (MailReceipt)objArray[2];
 
 			return array;
 		}
@@ -397,10 +382,10 @@ public class MailReceiptPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MailReceipt IN CLASS com.liferay.portlet.mail.service.persistence.MailReceiptHBM WHERE ");
+				"FROM com.liferay.portlet.mail.model.MailReceipt WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -417,13 +402,7 @@ public class MailReceiptPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				MailReceiptHBM mailReceiptHBM = (MailReceiptHBM)itr.next();
-				list.add(MailReceiptHBMUtil.model(mailReceiptHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -449,10 +428,10 @@ public class MailReceiptPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MailReceipt IN CLASS com.liferay.portlet.mail.service.persistence.MailReceiptHBM WHERE ");
+				"FROM com.liferay.portlet.mail.model.MailReceipt WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -475,15 +454,7 @@ public class MailReceiptPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				MailReceiptHBM mailReceiptHBM = (MailReceiptHBM)itr.next();
-				list.add(MailReceiptHBMUtil.model(mailReceiptHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -493,8 +464,7 @@ public class MailReceiptPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.mail.model.MailReceipt findByUserId_First(
-		String userId, OrderByComparator obc)
+	public MailReceipt findByUserId_First(String userId, OrderByComparator obc)
 		throws NoSuchReceiptException, SystemException {
 		List list = findByUserId(userId, 0, 1, obc);
 
@@ -507,12 +477,11 @@ public class MailReceiptPersistence extends BasePersistence {
 			throw new NoSuchReceiptException(msg);
 		}
 		else {
-			return (com.liferay.portlet.mail.model.MailReceipt)list.get(0);
+			return (MailReceipt)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.mail.model.MailReceipt findByUserId_Last(
-		String userId, OrderByComparator obc)
+	public MailReceipt findByUserId_Last(String userId, OrderByComparator obc)
 		throws NoSuchReceiptException, SystemException {
 		int count = countByUserId(userId);
 		List list = findByUserId(userId, count - 1, count, obc);
@@ -526,14 +495,14 @@ public class MailReceiptPersistence extends BasePersistence {
 			throw new NoSuchReceiptException(msg);
 		}
 		else {
-			return (com.liferay.portlet.mail.model.MailReceipt)list.get(0);
+			return (MailReceipt)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.mail.model.MailReceipt[] findByUserId_PrevAndNext(
-		String receiptId, String userId, OrderByComparator obc)
+	public MailReceipt[] findByUserId_PrevAndNext(String receiptId,
+		String userId, OrderByComparator obc)
 		throws NoSuchReceiptException, SystemException {
-		com.liferay.portlet.mail.model.MailReceipt mailReceipt = findByPrimaryKey(receiptId);
+		MailReceipt mailReceipt = findByPrimaryKey(receiptId);
 		int count = countByUserId(userId);
 		Session session = null;
 
@@ -542,10 +511,10 @@ public class MailReceiptPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MailReceipt IN CLASS com.liferay.portlet.mail.service.persistence.MailReceiptHBM WHERE ");
+				"FROM com.liferay.portlet.mail.model.MailReceipt WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -569,11 +538,11 @@ public class MailReceiptPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mailReceipt, MailReceiptHBMUtil.getInstance());
-			com.liferay.portlet.mail.model.MailReceipt[] array = new com.liferay.portlet.mail.model.MailReceipt[3];
-			array[0] = (com.liferay.portlet.mail.model.MailReceipt)objArray[0];
-			array[1] = (com.liferay.portlet.mail.model.MailReceipt)objArray[1];
-			array[2] = (com.liferay.portlet.mail.model.MailReceipt)objArray[2];
+					mailReceipt);
+			MailReceipt[] array = new MailReceipt[3];
+			array[0] = (MailReceipt)objArray[0];
+			array[1] = (MailReceipt)objArray[1];
+			array[2] = (MailReceipt)objArray[2];
 
 			return array;
 		}
@@ -592,21 +561,13 @@ public class MailReceiptPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM MailReceipt IN CLASS com.liferay.portlet.mail.service.persistence.MailReceiptHBM ");
+			query.append("FROM com.liferay.portlet.mail.model.MailReceipt ");
 			query.append("ORDER BY ");
 			query.append("createDate DESC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				MailReceiptHBM mailReceiptHBM = (MailReceiptHBM)itr.next();
-				list.add(MailReceiptHBMUtil.model(mailReceiptHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -624,10 +585,10 @@ public class MailReceiptPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MailReceipt IN CLASS com.liferay.portlet.mail.service.persistence.MailReceiptHBM WHERE ");
+				"FROM com.liferay.portlet.mail.model.MailReceipt WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -647,8 +608,8 @@ public class MailReceiptPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				MailReceiptHBM mailReceiptHBM = (MailReceiptHBM)itr.next();
-				session.delete(mailReceiptHBM);
+				MailReceipt mailReceipt = (MailReceipt)itr.next();
+				session.delete(mailReceipt);
 			}
 
 			session.flush();
@@ -669,10 +630,10 @@ public class MailReceiptPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MailReceipt IN CLASS com.liferay.portlet.mail.service.persistence.MailReceiptHBM WHERE ");
+				"FROM com.liferay.portlet.mail.model.MailReceipt WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -692,8 +653,8 @@ public class MailReceiptPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				MailReceiptHBM mailReceiptHBM = (MailReceiptHBM)itr.next();
-				session.delete(mailReceiptHBM);
+				MailReceipt mailReceipt = (MailReceipt)itr.next();
+				session.delete(mailReceipt);
 			}
 
 			session.flush();
@@ -715,10 +676,10 @@ public class MailReceiptPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM MailReceipt IN CLASS com.liferay.portlet.mail.service.persistence.MailReceiptHBM WHERE ");
+				"FROM com.liferay.portlet.mail.model.MailReceipt WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -762,10 +723,10 @@ public class MailReceiptPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM MailReceipt IN CLASS com.liferay.portlet.mail.service.persistence.MailReceiptHBM WHERE ");
+				"FROM com.liferay.portlet.mail.model.MailReceipt WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -798,6 +759,9 @@ public class MailReceiptPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(MailReceiptPersistence.class);

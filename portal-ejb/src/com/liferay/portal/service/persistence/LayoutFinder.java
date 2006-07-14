@@ -93,6 +93,8 @@ public class LayoutFinder {
 
 				list.add(new LayoutReference(layout, prefsPortletId));
 			}
+
+			return list;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -100,8 +102,6 @@ public class LayoutFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 }

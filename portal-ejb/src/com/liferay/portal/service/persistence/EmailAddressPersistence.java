@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchEmailAddressException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.util.StringPool;
@@ -48,25 +49,25 @@ import java.util.List;
  *
  */
 public class EmailAddressPersistence extends BasePersistence {
-	public com.liferay.portal.model.EmailAddress create(String emailAddressId) {
-		EmailAddressHBM emailAddressHBM = new EmailAddressHBM();
-		emailAddressHBM.setNew(true);
-		emailAddressHBM.setPrimaryKey(emailAddressId);
+	public EmailAddress create(String emailAddressId) {
+		EmailAddress emailAddress = new EmailAddress();
+		emailAddress.setNew(true);
+		emailAddress.setPrimaryKey(emailAddressId);
 
-		return EmailAddressHBMUtil.model(emailAddressHBM);
+		return emailAddress;
 	}
 
-	public com.liferay.portal.model.EmailAddress remove(String emailAddressId)
+	public EmailAddress remove(String emailAddressId)
 		throws NoSuchEmailAddressException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			EmailAddressHBM emailAddressHBM = (EmailAddressHBM)session.get(EmailAddressHBM.class,
+			EmailAddress emailAddress = (EmailAddress)session.get(EmailAddress.class,
 					emailAddressId);
 
-			if (emailAddressHBM == null) {
+			if (emailAddress == null) {
 				_log.warn("No EmailAddress exists with the primary key " +
 					emailAddressId.toString());
 				throw new NoSuchEmailAddressException(
@@ -74,10 +75,10 @@ public class EmailAddressPersistence extends BasePersistence {
 					emailAddressId.toString());
 			}
 
-			session.delete(emailAddressHBM);
+			session.delete(emailAddress);
 			session.flush();
 
-			return EmailAddressHBMUtil.model(emailAddressHBM);
+			return emailAddress;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -97,52 +98,52 @@ public class EmailAddressPersistence extends BasePersistence {
 				session = openSession();
 
 				if (emailAddress.isNew()) {
-					EmailAddressHBM emailAddressHBM = new EmailAddressHBM();
-					emailAddressHBM.setEmailAddressId(emailAddress.getEmailAddressId());
-					emailAddressHBM.setCompanyId(emailAddress.getCompanyId());
-					emailAddressHBM.setUserId(emailAddress.getUserId());
-					emailAddressHBM.setUserName(emailAddress.getUserName());
-					emailAddressHBM.setCreateDate(emailAddress.getCreateDate());
-					emailAddressHBM.setModifiedDate(emailAddress.getModifiedDate());
-					emailAddressHBM.setClassName(emailAddress.getClassName());
-					emailAddressHBM.setClassPK(emailAddress.getClassPK());
-					emailAddressHBM.setAddress(emailAddress.getAddress());
-					emailAddressHBM.setTypeId(emailAddress.getTypeId());
-					emailAddressHBM.setPrimary(emailAddress.getPrimary());
-					session.save(emailAddressHBM);
+					EmailAddress emailAddressModel = new EmailAddress();
+					emailAddressModel.setEmailAddressId(emailAddress.getEmailAddressId());
+					emailAddressModel.setCompanyId(emailAddress.getCompanyId());
+					emailAddressModel.setUserId(emailAddress.getUserId());
+					emailAddressModel.setUserName(emailAddress.getUserName());
+					emailAddressModel.setCreateDate(emailAddress.getCreateDate());
+					emailAddressModel.setModifiedDate(emailAddress.getModifiedDate());
+					emailAddressModel.setClassName(emailAddress.getClassName());
+					emailAddressModel.setClassPK(emailAddress.getClassPK());
+					emailAddressModel.setAddress(emailAddress.getAddress());
+					emailAddressModel.setTypeId(emailAddress.getTypeId());
+					emailAddressModel.setPrimary(emailAddress.getPrimary());
+					session.save(emailAddressModel);
 					session.flush();
 				}
 				else {
-					EmailAddressHBM emailAddressHBM = (EmailAddressHBM)session.get(EmailAddressHBM.class,
+					EmailAddress emailAddressModel = (EmailAddress)session.get(EmailAddress.class,
 							emailAddress.getPrimaryKey());
 
-					if (emailAddressHBM != null) {
-						emailAddressHBM.setCompanyId(emailAddress.getCompanyId());
-						emailAddressHBM.setUserId(emailAddress.getUserId());
-						emailAddressHBM.setUserName(emailAddress.getUserName());
-						emailAddressHBM.setCreateDate(emailAddress.getCreateDate());
-						emailAddressHBM.setModifiedDate(emailAddress.getModifiedDate());
-						emailAddressHBM.setClassName(emailAddress.getClassName());
-						emailAddressHBM.setClassPK(emailAddress.getClassPK());
-						emailAddressHBM.setAddress(emailAddress.getAddress());
-						emailAddressHBM.setTypeId(emailAddress.getTypeId());
-						emailAddressHBM.setPrimary(emailAddress.getPrimary());
+					if (emailAddressModel != null) {
+						emailAddressModel.setCompanyId(emailAddress.getCompanyId());
+						emailAddressModel.setUserId(emailAddress.getUserId());
+						emailAddressModel.setUserName(emailAddress.getUserName());
+						emailAddressModel.setCreateDate(emailAddress.getCreateDate());
+						emailAddressModel.setModifiedDate(emailAddress.getModifiedDate());
+						emailAddressModel.setClassName(emailAddress.getClassName());
+						emailAddressModel.setClassPK(emailAddress.getClassPK());
+						emailAddressModel.setAddress(emailAddress.getAddress());
+						emailAddressModel.setTypeId(emailAddress.getTypeId());
+						emailAddressModel.setPrimary(emailAddress.getPrimary());
 						session.flush();
 					}
 					else {
-						emailAddressHBM = new EmailAddressHBM();
-						emailAddressHBM.setEmailAddressId(emailAddress.getEmailAddressId());
-						emailAddressHBM.setCompanyId(emailAddress.getCompanyId());
-						emailAddressHBM.setUserId(emailAddress.getUserId());
-						emailAddressHBM.setUserName(emailAddress.getUserName());
-						emailAddressHBM.setCreateDate(emailAddress.getCreateDate());
-						emailAddressHBM.setModifiedDate(emailAddress.getModifiedDate());
-						emailAddressHBM.setClassName(emailAddress.getClassName());
-						emailAddressHBM.setClassPK(emailAddress.getClassPK());
-						emailAddressHBM.setAddress(emailAddress.getAddress());
-						emailAddressHBM.setTypeId(emailAddress.getTypeId());
-						emailAddressHBM.setPrimary(emailAddress.getPrimary());
-						session.save(emailAddressHBM);
+						emailAddressModel = new EmailAddress();
+						emailAddressModel.setEmailAddressId(emailAddress.getEmailAddressId());
+						emailAddressModel.setCompanyId(emailAddress.getCompanyId());
+						emailAddressModel.setUserId(emailAddress.getUserId());
+						emailAddressModel.setUserName(emailAddress.getUserName());
+						emailAddressModel.setCreateDate(emailAddress.getCreateDate());
+						emailAddressModel.setModifiedDate(emailAddress.getModifiedDate());
+						emailAddressModel.setClassName(emailAddress.getClassName());
+						emailAddressModel.setClassPK(emailAddress.getClassPK());
+						emailAddressModel.setAddress(emailAddress.getAddress());
+						emailAddressModel.setTypeId(emailAddress.getTypeId());
+						emailAddressModel.setPrimary(emailAddress.getPrimary());
+						session.save(emailAddressModel);
 						session.flush();
 					}
 				}
@@ -161,18 +162,17 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.EmailAddress findByPrimaryKey(
-		String emailAddressId)
+	public EmailAddress findByPrimaryKey(String emailAddressId)
 		throws NoSuchEmailAddressException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			EmailAddressHBM emailAddressHBM = (EmailAddressHBM)session.get(EmailAddressHBM.class,
+			EmailAddress emailAddress = (EmailAddress)session.get(EmailAddress.class,
 					emailAddressId);
 
-			if (emailAddressHBM == null) {
+			if (emailAddress == null) {
 				_log.warn("No EmailAddress exists with the primary key " +
 					emailAddressId.toString());
 				throw new NoSuchEmailAddressException(
@@ -180,7 +180,7 @@ public class EmailAddressPersistence extends BasePersistence {
 					emailAddressId.toString());
 			}
 
-			return EmailAddressHBMUtil.model(emailAddressHBM);
+			return emailAddress;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -197,11 +197,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -218,13 +217,7 @@ public class EmailAddressPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				EmailAddressHBM emailAddressHBM = (EmailAddressHBM)itr.next();
-				list.add(EmailAddressHBMUtil.model(emailAddressHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -249,11 +242,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -276,15 +268,7 @@ public class EmailAddressPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				EmailAddressHBM emailAddressHBM = (EmailAddressHBM)itr.next();
-				list.add(EmailAddressHBMUtil.model(emailAddressHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -294,8 +278,8 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.EmailAddress findByCompanyId_First(
-		String companyId, OrderByComparator obc)
+	public EmailAddress findByCompanyId_First(String companyId,
+		OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
@@ -308,12 +292,12 @@ public class EmailAddressPersistence extends BasePersistence {
 			throw new NoSuchEmailAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.EmailAddress)list.get(0);
+			return (EmailAddress)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.EmailAddress findByCompanyId_Last(
-		String companyId, OrderByComparator obc)
+	public EmailAddress findByCompanyId_Last(String companyId,
+		OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
 		int count = countByCompanyId(companyId);
 		List list = findByCompanyId(companyId, count - 1, count, obc);
@@ -327,14 +311,14 @@ public class EmailAddressPersistence extends BasePersistence {
 			throw new NoSuchEmailAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.EmailAddress)list.get(0);
+			return (EmailAddress)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.EmailAddress[] findByCompanyId_PrevAndNext(
-		String emailAddressId, String companyId, OrderByComparator obc)
+	public EmailAddress[] findByCompanyId_PrevAndNext(String emailAddressId,
+		String companyId, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
-		com.liferay.portal.model.EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
+		EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
 		int count = countByCompanyId(companyId);
 		Session session = null;
 
@@ -342,11 +326,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -370,11 +353,11 @@ public class EmailAddressPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					emailAddress, EmailAddressHBMUtil.getInstance());
-			com.liferay.portal.model.EmailAddress[] array = new com.liferay.portal.model.EmailAddress[3];
-			array[0] = (com.liferay.portal.model.EmailAddress)objArray[0];
-			array[1] = (com.liferay.portal.model.EmailAddress)objArray[1];
-			array[2] = (com.liferay.portal.model.EmailAddress)objArray[2];
+					emailAddress);
+			EmailAddress[] array = new EmailAddress[3];
+			array[0] = (EmailAddress)objArray[0];
+			array[1] = (EmailAddress)objArray[1];
+			array[2] = (EmailAddress)objArray[2];
 
 			return array;
 		}
@@ -393,11 +376,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -414,13 +396,7 @@ public class EmailAddressPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				EmailAddressHBM emailAddressHBM = (EmailAddressHBM)itr.next();
-				list.add(EmailAddressHBMUtil.model(emailAddressHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -445,11 +421,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -472,15 +447,7 @@ public class EmailAddressPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				EmailAddressHBM emailAddressHBM = (EmailAddressHBM)itr.next();
-				list.add(EmailAddressHBMUtil.model(emailAddressHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -490,8 +457,7 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.EmailAddress findByUserId_First(
-		String userId, OrderByComparator obc)
+	public EmailAddress findByUserId_First(String userId, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
 		List list = findByUserId(userId, 0, 1, obc);
 
@@ -504,12 +470,11 @@ public class EmailAddressPersistence extends BasePersistence {
 			throw new NoSuchEmailAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.EmailAddress)list.get(0);
+			return (EmailAddress)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.EmailAddress findByUserId_Last(
-		String userId, OrderByComparator obc)
+	public EmailAddress findByUserId_Last(String userId, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
 		int count = countByUserId(userId);
 		List list = findByUserId(userId, count - 1, count, obc);
@@ -523,14 +488,14 @@ public class EmailAddressPersistence extends BasePersistence {
 			throw new NoSuchEmailAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.EmailAddress)list.get(0);
+			return (EmailAddress)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.EmailAddress[] findByUserId_PrevAndNext(
-		String emailAddressId, String userId, OrderByComparator obc)
+	public EmailAddress[] findByUserId_PrevAndNext(String emailAddressId,
+		String userId, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
-		com.liferay.portal.model.EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
+		EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
 		int count = countByUserId(userId);
 		Session session = null;
 
@@ -538,11 +503,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -566,11 +530,11 @@ public class EmailAddressPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					emailAddress, EmailAddressHBMUtil.getInstance());
-			com.liferay.portal.model.EmailAddress[] array = new com.liferay.portal.model.EmailAddress[3];
-			array[0] = (com.liferay.portal.model.EmailAddress)objArray[0];
-			array[1] = (com.liferay.portal.model.EmailAddress)objArray[1];
-			array[2] = (com.liferay.portal.model.EmailAddress)objArray[2];
+					emailAddress);
+			EmailAddress[] array = new EmailAddress[3];
+			array[0] = (EmailAddress)objArray[0];
+			array[1] = (EmailAddress)objArray[1];
+			array[2] = (EmailAddress)objArray[2];
 
 			return array;
 		}
@@ -590,11 +554,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -603,7 +566,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -624,13 +587,7 @@ public class EmailAddressPersistence extends BasePersistence {
 				q.setString(queryPos++, className);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				EmailAddressHBM emailAddressHBM = (EmailAddressHBM)itr.next();
-				list.add(EmailAddressHBMUtil.model(emailAddressHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -655,11 +612,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -668,7 +624,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -695,15 +651,7 @@ public class EmailAddressPersistence extends BasePersistence {
 				q.setString(queryPos++, className);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				EmailAddressHBM emailAddressHBM = (EmailAddressHBM)itr.next();
-				list.add(EmailAddressHBMUtil.model(emailAddressHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -713,8 +661,8 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.EmailAddress findByC_C_First(
-		String companyId, String className, OrderByComparator obc)
+	public EmailAddress findByC_C_First(String companyId, String className,
+		OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
 		List list = findByC_C(companyId, className, 0, 1, obc);
 
@@ -730,12 +678,12 @@ public class EmailAddressPersistence extends BasePersistence {
 			throw new NoSuchEmailAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.EmailAddress)list.get(0);
+			return (EmailAddress)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.EmailAddress findByC_C_Last(
-		String companyId, String className, OrderByComparator obc)
+	public EmailAddress findByC_C_Last(String companyId, String className,
+		OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
 		int count = countByC_C(companyId, className);
 		List list = findByC_C(companyId, className, count - 1, count, obc);
@@ -752,15 +700,14 @@ public class EmailAddressPersistence extends BasePersistence {
 			throw new NoSuchEmailAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.EmailAddress)list.get(0);
+			return (EmailAddress)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.EmailAddress[] findByC_C_PrevAndNext(
-		String emailAddressId, String companyId, String className,
-		OrderByComparator obc)
+	public EmailAddress[] findByC_C_PrevAndNext(String emailAddressId,
+		String companyId, String className, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
-		com.liferay.portal.model.EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
+		EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
 		int count = countByC_C(companyId, className);
 		Session session = null;
 
@@ -768,11 +715,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -781,7 +727,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -809,11 +755,11 @@ public class EmailAddressPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					emailAddress, EmailAddressHBMUtil.getInstance());
-			com.liferay.portal.model.EmailAddress[] array = new com.liferay.portal.model.EmailAddress[3];
-			array[0] = (com.liferay.portal.model.EmailAddress)objArray[0];
-			array[1] = (com.liferay.portal.model.EmailAddress)objArray[1];
-			array[2] = (com.liferay.portal.model.EmailAddress)objArray[2];
+					emailAddress);
+			EmailAddress[] array = new EmailAddress[3];
+			array[0] = (EmailAddress)objArray[0];
+			array[1] = (EmailAddress)objArray[1];
+			array[2] = (EmailAddress)objArray[2];
 
 			return array;
 		}
@@ -833,11 +779,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -846,7 +791,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -855,7 +800,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -880,13 +825,7 @@ public class EmailAddressPersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				EmailAddressHBM emailAddressHBM = (EmailAddressHBM)itr.next();
-				list.add(EmailAddressHBMUtil.model(emailAddressHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -911,11 +850,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -924,7 +862,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -933,7 +871,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -964,15 +902,7 @@ public class EmailAddressPersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				EmailAddressHBM emailAddressHBM = (EmailAddressHBM)itr.next();
-				list.add(EmailAddressHBMUtil.model(emailAddressHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -982,9 +912,8 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.EmailAddress findByC_C_C_First(
-		String companyId, String className, String classPK,
-		OrderByComparator obc)
+	public EmailAddress findByC_C_C_First(String companyId, String className,
+		String classPK, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
 		List list = findByC_C_C(companyId, className, classPK, 0, 1, obc);
 
@@ -1003,13 +932,12 @@ public class EmailAddressPersistence extends BasePersistence {
 			throw new NoSuchEmailAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.EmailAddress)list.get(0);
+			return (EmailAddress)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.EmailAddress findByC_C_C_Last(
-		String companyId, String className, String classPK,
-		OrderByComparator obc)
+	public EmailAddress findByC_C_C_Last(String companyId, String className,
+		String classPK, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
 		int count = countByC_C_C(companyId, className, classPK);
 		List list = findByC_C_C(companyId, className, classPK, count - 1,
@@ -1030,15 +958,15 @@ public class EmailAddressPersistence extends BasePersistence {
 			throw new NoSuchEmailAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.EmailAddress)list.get(0);
+			return (EmailAddress)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.EmailAddress[] findByC_C_C_PrevAndNext(
-		String emailAddressId, String companyId, String className,
-		String classPK, OrderByComparator obc)
+	public EmailAddress[] findByC_C_C_PrevAndNext(String emailAddressId,
+		String companyId, String className, String classPK,
+		OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
-		com.liferay.portal.model.EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
+		EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
 		int count = countByC_C_C(companyId, className, classPK);
 		Session session = null;
 
@@ -1046,11 +974,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1059,7 +986,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1068,7 +995,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1100,11 +1027,11 @@ public class EmailAddressPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					emailAddress, EmailAddressHBMUtil.getInstance());
-			com.liferay.portal.model.EmailAddress[] array = new com.liferay.portal.model.EmailAddress[3];
-			array[0] = (com.liferay.portal.model.EmailAddress)objArray[0];
-			array[1] = (com.liferay.portal.model.EmailAddress)objArray[1];
-			array[2] = (com.liferay.portal.model.EmailAddress)objArray[2];
+					emailAddress);
+			EmailAddress[] array = new EmailAddress[3];
+			array[0] = (EmailAddress)objArray[0];
+			array[1] = (EmailAddress)objArray[1];
+			array[2] = (EmailAddress)objArray[2];
 
 			return array;
 		}
@@ -1124,11 +1051,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1137,7 +1063,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1146,7 +1072,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1175,13 +1101,7 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, primary);
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				EmailAddressHBM emailAddressHBM = (EmailAddressHBM)itr.next();
-				list.add(EmailAddressHBMUtil.model(emailAddressHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -1209,11 +1129,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1222,7 +1141,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1231,7 +1150,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1266,15 +1185,7 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, primary);
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				EmailAddressHBM emailAddressHBM = (EmailAddressHBM)itr.next();
-				list.add(EmailAddressHBMUtil.model(emailAddressHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1284,9 +1195,8 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.EmailAddress findByC_C_C_P_First(
-		String companyId, String className, String classPK, boolean primary,
-		OrderByComparator obc)
+	public EmailAddress findByC_C_C_P_First(String companyId, String className,
+		String classPK, boolean primary, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
 		List list = findByC_C_C_P(companyId, className, classPK, primary, 0, 1,
 				obc);
@@ -1309,13 +1219,12 @@ public class EmailAddressPersistence extends BasePersistence {
 			throw new NoSuchEmailAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.EmailAddress)list.get(0);
+			return (EmailAddress)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.EmailAddress findByC_C_C_P_Last(
-		String companyId, String className, String classPK, boolean primary,
-		OrderByComparator obc)
+	public EmailAddress findByC_C_C_P_Last(String companyId, String className,
+		String classPK, boolean primary, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
 		int count = countByC_C_C_P(companyId, className, classPK, primary);
 		List list = findByC_C_C_P(companyId, className, classPK, primary,
@@ -1339,15 +1248,15 @@ public class EmailAddressPersistence extends BasePersistence {
 			throw new NoSuchEmailAddressException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.EmailAddress)list.get(0);
+			return (EmailAddress)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.EmailAddress[] findByC_C_C_P_PrevAndNext(
-		String emailAddressId, String companyId, String className,
-		String classPK, boolean primary, OrderByComparator obc)
+	public EmailAddress[] findByC_C_C_P_PrevAndNext(String emailAddressId,
+		String companyId, String className, String classPK, boolean primary,
+		OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
-		com.liferay.portal.model.EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
+		EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
 		int count = countByC_C_C_P(companyId, className, classPK, primary);
 		Session session = null;
 
@@ -1355,11 +1264,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1368,7 +1276,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1377,7 +1285,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1413,11 +1321,11 @@ public class EmailAddressPersistence extends BasePersistence {
 			q.setBoolean(queryPos++, primary);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					emailAddress, EmailAddressHBMUtil.getInstance());
-			com.liferay.portal.model.EmailAddress[] array = new com.liferay.portal.model.EmailAddress[3];
-			array[0] = (com.liferay.portal.model.EmailAddress)objArray[0];
-			array[1] = (com.liferay.portal.model.EmailAddress)objArray[1];
-			array[2] = (com.liferay.portal.model.EmailAddress)objArray[2];
+					emailAddress);
+			EmailAddress[] array = new EmailAddress[3];
+			array[0] = (EmailAddress)objArray[0];
+			array[1] = (EmailAddress)objArray[1];
+			array[2] = (EmailAddress)objArray[2];
 
 			return array;
 		}
@@ -1436,21 +1344,13 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM ");
+			query.append("FROM com.liferay.portal.model.EmailAddress ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				EmailAddressHBM emailAddressHBM = (EmailAddressHBM)itr.next();
-				list.add(EmailAddressHBMUtil.model(emailAddressHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1467,11 +1367,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1491,8 +1390,8 @@ public class EmailAddressPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				EmailAddressHBM emailAddressHBM = (EmailAddressHBM)itr.next();
-				session.delete(emailAddressHBM);
+				EmailAddress emailAddress = (EmailAddress)itr.next();
+				session.delete(emailAddress);
 			}
 
 			session.flush();
@@ -1512,11 +1411,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -1536,8 +1434,8 @@ public class EmailAddressPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				EmailAddressHBM emailAddressHBM = (EmailAddressHBM)itr.next();
-				session.delete(emailAddressHBM);
+				EmailAddress emailAddress = (EmailAddress)itr.next();
+				session.delete(emailAddress);
 			}
 
 			session.flush();
@@ -1558,11 +1456,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1571,7 +1468,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1595,8 +1492,8 @@ public class EmailAddressPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				EmailAddressHBM emailAddressHBM = (EmailAddressHBM)itr.next();
-				session.delete(emailAddressHBM);
+				EmailAddress emailAddress = (EmailAddress)itr.next();
+				session.delete(emailAddress);
 			}
 
 			session.flush();
@@ -1617,11 +1514,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1630,7 +1526,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1639,7 +1535,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1667,8 +1563,8 @@ public class EmailAddressPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				EmailAddressHBM emailAddressHBM = (EmailAddressHBM)itr.next();
-				session.delete(emailAddressHBM);
+				EmailAddress emailAddress = (EmailAddress)itr.next();
+				session.delete(emailAddress);
 			}
 
 			session.flush();
@@ -1689,11 +1585,10 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1702,7 +1597,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1711,7 +1606,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1743,8 +1638,8 @@ public class EmailAddressPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				EmailAddressHBM emailAddressHBM = (EmailAddressHBM)itr.next();
-				session.delete(emailAddressHBM);
+				EmailAddress emailAddress = (EmailAddress)itr.next();
+				session.delete(emailAddress);
 			}
 
 			session.flush();
@@ -1765,11 +1660,10 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1812,11 +1706,10 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -1860,11 +1753,10 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1873,7 +1765,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1921,11 +1813,10 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1934,7 +1825,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1943,7 +1834,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1995,11 +1886,10 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM EmailAddress IN CLASS com.liferay.portal.service.persistence.EmailAddressHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -2008,7 +1898,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -2017,7 +1907,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -2062,6 +1952,9 @@ public class EmailAddressPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(EmailAddressPersistence.class);

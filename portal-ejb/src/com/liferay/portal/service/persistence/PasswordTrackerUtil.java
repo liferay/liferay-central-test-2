@@ -181,6 +181,10 @@ public class PasswordTrackerUtil {
 		return getPersistence().countByUserId(userId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static PasswordTrackerPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		PasswordTrackerUtil util = (PasswordTrackerUtil)ctx.getBean(CLASS_NAME);

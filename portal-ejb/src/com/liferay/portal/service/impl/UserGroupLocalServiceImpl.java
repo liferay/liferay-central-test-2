@@ -53,11 +53,11 @@ import java.util.Map;
  */
 public class UserGroupLocalServiceImpl implements UserGroupLocalService {
 
-	public boolean addGroupUserGroups(
+	public void addGroupUserGroups(
 			String groupId, String[] userGroupIds)
 		throws PortalException, SystemException {
 
-		return GroupUtil.addUserGroups(groupId, userGroupIds);
+		GroupUtil.addUserGroups(groupId, userGroupIds);
 	}
 
 	public UserGroup addUserGroup(
@@ -157,10 +157,10 @@ public class UserGroupLocalServiceImpl implements UserGroupLocalService {
 			companyId, name, description, params);
 	}
 
-	public boolean unsetGroupUserGroups(String groupId, String[] userGroupIds)
+	public void unsetGroupUserGroups(String groupId, String[] userGroupIds)
 		throws PortalException, SystemException {
 
-		return GroupUtil.removeUserGroups(groupId, userGroupIds);
+		GroupUtil.removeUserGroups(groupId, userGroupIds);
 	}
 
 	public UserGroup updateUserGroup(

@@ -341,6 +341,17 @@
 				</copy>
 			</then>
 			<elseif>
+				<equals arg1="${app.server.type}" arg2="orion" />
+				<then>
+					<delete>
+						<fileset
+							dir="${app.server.lib.portal.dir}"
+							includes="xercesImpl.jar,xml-apis.jar"
+						/>
+					</delete>
+				</then>
+			</elseif>
+			<elseif>
 				<equals arg1="${app.server.type}" arg2="resin" />
 				<then>
 					<copy todir="${app.server.lib.global.dir}">
@@ -624,25 +635,25 @@
 
 	<target name="clean-ext">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jboss-jetty</echo>
-		<ant dir="${lp.ext.dir}" target="clean" />
+		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jboss-tomcat</echo>
-		<ant dir="${lp.ext.dir}" target="clean" />
+		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jetty</echo>
-		<ant dir="${lp.ext.dir}" target="clean" />
+		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-jetty</echo>
-		<ant dir="${lp.ext.dir}" target="clean" />
+		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-tomcat</echo>
-		<ant dir="${lp.ext.dir}" target="clean" />
+		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=resin</echo>
-		<ant dir="${lp.ext.dir}" target="clean" />
+		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=tomcat</echo>
-		<ant dir="${lp.ext.dir}" target="clean" />
+		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 	</target>
 
 	<target name="sync-ext">

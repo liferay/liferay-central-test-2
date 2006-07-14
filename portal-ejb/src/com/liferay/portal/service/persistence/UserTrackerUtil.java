@@ -232,6 +232,10 @@ public class UserTrackerUtil {
 		return getPersistence().countByUserId(userId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static UserTrackerPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		UserTrackerUtil util = (UserTrackerUtil)ctx.getBean(CLASS_NAME);

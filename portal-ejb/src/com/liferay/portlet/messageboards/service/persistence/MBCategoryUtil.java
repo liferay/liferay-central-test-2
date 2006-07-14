@@ -290,6 +290,10 @@ public class MBCategoryUtil {
 		return getPersistence().countByG_P(groupId, parentCategoryId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static MBCategoryPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		MBCategoryUtil util = (MBCategoryUtil)ctx.getBean(CLASS_NAME);

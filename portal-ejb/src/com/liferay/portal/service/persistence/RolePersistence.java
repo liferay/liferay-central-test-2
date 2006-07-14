@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
@@ -42,11 +43,19 @@ import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
+import org.springframework.dao.DataAccessException;
+
+import org.springframework.jdbc.core.SqlParameter;
+import org.springframework.jdbc.object.MappingSqlQuery;
+import org.springframework.jdbc.object.SqlUpdate;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 /**
  * <a href="RolePersistence.java.html"><b><i>View Source</i></b></a>
@@ -55,34 +64,34 @@ import java.util.Set;
  *
  */
 public class RolePersistence extends BasePersistence {
-	public com.liferay.portal.model.Role create(String roleId) {
-		RoleHBM roleHBM = new RoleHBM();
-		roleHBM.setNew(true);
-		roleHBM.setPrimaryKey(roleId);
+	public Role create(String roleId) {
+		Role role = new Role();
+		role.setNew(true);
+		role.setPrimaryKey(roleId);
 
-		return RoleHBMUtil.model(roleHBM);
+		return role;
 	}
 
-	public com.liferay.portal.model.Role remove(String roleId)
+	public Role remove(String roleId)
 		throws NoSuchRoleException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, roleId);
+			Role role = (Role)session.get(Role.class, roleId);
 
-			if (roleHBM == null) {
+			if (role == null) {
 				_log.warn("No Role exists with the primary key " +
 					roleId.toString());
 				throw new NoSuchRoleException(
 					"No Role exists with the primary key " + roleId.toString());
 			}
 
-			session.delete(roleHBM);
+			session.delete(role);
 			session.flush();
 
-			return RoleHBMUtil.model(roleHBM);
+			return role;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -101,40 +110,37 @@ public class RolePersistence extends BasePersistence {
 				session = openSession();
 
 				if (role.isNew()) {
-					RoleHBM roleHBM = new RoleHBM();
-					roleHBM.setRoleId(role.getRoleId());
-					roleHBM.setCompanyId(role.getCompanyId());
-					roleHBM.setClassName(role.getClassName());
-					roleHBM.setClassPK(role.getClassPK());
-					roleHBM.setName(role.getName());
-					roleHBM.setDescription(role.getDescription());
-					roleHBM.setGroups(new HashSet());
-					roleHBM.setPermissions(new HashSet());
-					roleHBM.setUsers(new HashSet());
-					session.save(roleHBM);
+					Role roleModel = new Role();
+					roleModel.setRoleId(role.getRoleId());
+					roleModel.setCompanyId(role.getCompanyId());
+					roleModel.setClassName(role.getClassName());
+					roleModel.setClassPK(role.getClassPK());
+					roleModel.setName(role.getName());
+					roleModel.setDescription(role.getDescription());
+					session.save(roleModel);
 					session.flush();
 				}
 				else {
-					RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class,
+					Role roleModel = (Role)session.get(Role.class,
 							role.getPrimaryKey());
 
-					if (roleHBM != null) {
-						roleHBM.setCompanyId(role.getCompanyId());
-						roleHBM.setClassName(role.getClassName());
-						roleHBM.setClassPK(role.getClassPK());
-						roleHBM.setName(role.getName());
-						roleHBM.setDescription(role.getDescription());
+					if (roleModel != null) {
+						roleModel.setCompanyId(role.getCompanyId());
+						roleModel.setClassName(role.getClassName());
+						roleModel.setClassPK(role.getClassPK());
+						roleModel.setName(role.getName());
+						roleModel.setDescription(role.getDescription());
 						session.flush();
 					}
 					else {
-						roleHBM = new RoleHBM();
-						roleHBM.setRoleId(role.getRoleId());
-						roleHBM.setCompanyId(role.getCompanyId());
-						roleHBM.setClassName(role.getClassName());
-						roleHBM.setClassPK(role.getClassPK());
-						roleHBM.setName(role.getName());
-						roleHBM.setDescription(role.getDescription());
-						session.save(roleHBM);
+						roleModel = new Role();
+						roleModel.setRoleId(role.getRoleId());
+						roleModel.setCompanyId(role.getCompanyId());
+						roleModel.setClassName(role.getClassName());
+						roleModel.setClassPK(role.getClassPK());
+						roleModel.setName(role.getName());
+						roleModel.setDescription(role.getDescription());
+						session.save(roleModel);
 						session.flush();
 					}
 				}
@@ -153,2100 +159,23 @@ public class RolePersistence extends BasePersistence {
 		}
 	}
 
-	public List getGroups(String pk)
+	public Role findByPrimaryKey(String roleId)
 		throws NoSuchRoleException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
+			Role role = (Role)session.get(Role.class, roleId);
 
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			StringBuffer query = new StringBuffer();
-			query.append("SELECT groupHBM FROM ");
-			query.append(com.liferay.portal.service.persistence.RoleHBM.class.getName());
-			query.append(" roleHBM ");
-			query.append("JOIN roleHBM.groups AS groupHBM ");
-			query.append("WHERE roleHBM.roleId = ? ");
-			query.append("ORDER BY ");
-			query.append("groupHBM.name ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setString(0, pk);
-
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				com.liferay.portal.service.persistence.GroupHBM groupHBM = (com.liferay.portal.service.persistence.GroupHBM)itr.next();
-				list.add(com.liferay.portal.service.persistence.GroupHBMUtil.model(
-						groupHBM));
-			}
-
-			return list;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List getGroups(String pk, int begin, int end)
-		throws NoSuchRoleException, SystemException {
-		return getGroups(pk, begin, end, null);
-	}
-
-	public List getGroups(String pk, int begin, int end, OrderByComparator obc)
-		throws NoSuchRoleException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			StringBuffer query = new StringBuffer();
-			query.append("SELECT groupHBM FROM ");
-			query.append(com.liferay.portal.service.persistence.RoleHBM.class.getName());
-			query.append(" roleHBM ");
-			query.append("JOIN roleHBM.groups AS groupHBM ");
-			query.append("WHERE roleHBM.roleId = ? ");
-
-			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("groupHBM.name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setString(0, pk);
-
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				com.liferay.portal.service.persistence.GroupHBM groupHBM = (com.liferay.portal.service.persistence.GroupHBM)itr.next();
-				list.add(com.liferay.portal.service.persistence.GroupHBMUtil.model(
-						groupHBM));
-			}
-
-			return list;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int getGroupsSize(String pk) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("SELECT COUNT(*) FROM ");
-			query.append(com.liferay.portal.service.persistence.RoleHBM.class.getName());
-			query.append(" roleHBM ");
-			query.append("JOIN roleHBM.groups AS groupHBM ");
-			query.append("WHERE roleHBM.roleId = ? ");
-
-			Query q = session.createQuery(query.toString());
-			q.setString(0, pk);
-
-			Iterator itr = q.iterate();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void setGroups(String pk, String[] pks)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			Set groupsSet = new HashSet();
-
-			for (int i = 0; (pks != null) && (i < pks.length); i++) {
-				com.liferay.portal.service.persistence.GroupHBM groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
-						pks[i]);
-
-				if (groupHBM == null) {
-					_log.warn("No Group exists with the primary key " +
-						pks[i].toString());
-					throw new com.liferay.portal.NoSuchGroupException(
-						"No Group exists with the primary key " +
-						pks[i].toString());
-				}
-
-				groupsSet.add(groupHBM);
-			}
-
-			roleHBM.setGroups(groupsSet);
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void setGroups(String pk, List groups)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			Set groupsSet = new HashSet();
-			Iterator itr = groups.iterator();
-
-			while (itr.hasNext()) {
-				com.liferay.portal.model.Group group = (com.liferay.portal.model.Group)itr.next();
-				com.liferay.portal.service.persistence.GroupHBM groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
-						group.getPrimaryKey());
-
-				if (groupHBM == null) {
-					_log.warn("No Group exists with the primary key " +
-						group.getPrimaryKey().toString());
-					throw new com.liferay.portal.NoSuchGroupException(
-						"No Group exists with the primary key " +
-						group.getPrimaryKey().toString());
-				}
-
-				groupsSet.add(groupHBM);
-			}
-
-			roleHBM.setGroups(groupsSet);
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean addGroup(String pk, String groupPK)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			com.liferay.portal.service.persistence.GroupHBM groupHBM = null;
-			groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
-					groupPK);
-
-			if (groupHBM == null) {
-				_log.warn("No Group exists with the primary key " +
-					groupPK.toString());
-				throw new com.liferay.portal.NoSuchGroupException(
-					"No Group exists with the primary key " +
-					groupPK.toString());
-			}
-
-			boolean value = roleHBM.getGroups().add(groupHBM);
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean addGroup(String pk, com.liferay.portal.model.Group group)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			com.liferay.portal.service.persistence.GroupHBM groupHBM = null;
-			groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
-					group.getPrimaryKey());
-
-			if (groupHBM == null) {
-				_log.warn("No Group exists with the primary key " +
-					group.getPrimaryKey().toString());
-				throw new com.liferay.portal.NoSuchGroupException(
-					"No Group exists with the primary key " +
-					group.getPrimaryKey().toString());
-			}
-
-			boolean value = roleHBM.getGroups().add(groupHBM);
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean addGroups(String pk, String[] groupPKs)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			boolean value = false;
-
-			for (int i = 0; i < groupPKs.length; i++) {
-				com.liferay.portal.service.persistence.GroupHBM groupHBM = null;
-				groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
-						groupPKs[i]);
-
-				if (groupHBM == null) {
-					_log.warn("No Group exists with the primary key " +
-						groupPKs[i].toString());
-					throw new com.liferay.portal.NoSuchGroupException(
-						"No Group exists with the primary key " +
-						groupPKs[i].toString());
-				}
-
-				if (roleHBM.getGroups().add(groupHBM)) {
-					value = true;
-				}
-			}
-
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean addGroups(String pk, List groups)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			boolean value = false;
-
-			for (int i = 0; i < groups.size(); i++) {
-				com.liferay.portal.model.Group group = (com.liferay.portal.model.Group)groups.get(i);
-				com.liferay.portal.service.persistence.GroupHBM groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
-						group.getPrimaryKey());
-
-				if (groupHBM == null) {
-					_log.warn("No Group exists with the primary key " +
-						group.getPrimaryKey().toString());
-					throw new com.liferay.portal.NoSuchGroupException(
-						"No Group exists with the primary key " +
-						group.getPrimaryKey().toString());
-				}
-
-				if (roleHBM.getGroups().add(groupHBM)) {
-					value = true;
-				}
-			}
-
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void clearGroups(String pk)
-		throws NoSuchRoleException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			roleHBM.getGroups().clear();
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public static final String SQL_CONTAINSGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Roles WHERE roleId = ? AND groupId = ?";
-
-	public boolean containsGroup(String pk, String groupPK)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			SQLQuery q = session.createSQLQuery(SQL_CONTAINSGROUP);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
-			qPos.add(groupPK);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if ((count != null) && (count.intValue() > 0)) {
-					return true;
-				}
-			}
-
-			return false;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public static final String SQL_CONTAINSGROUPS = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Roles WHERE roleId = ?";
-
-	public boolean containsGroups(String pk) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			SQLQuery q = session.createSQLQuery(SQL_CONTAINSGROUPS);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if ((count != null) && (count.intValue() > 0)) {
-					return true;
-				}
-			}
-
-			return false;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean removeGroup(String pk, String groupPK)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			com.liferay.portal.service.persistence.GroupHBM groupHBM = null;
-			groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
-					groupPK);
-
-			if (groupHBM == null) {
-				_log.warn("No Group exists with the primary key " +
-					groupPK.toString());
-				throw new com.liferay.portal.NoSuchGroupException(
-					"No Group exists with the primary key " +
-					groupPK.toString());
-			}
-
-			boolean value = roleHBM.getGroups().remove(groupHBM);
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean removeGroup(String pk, com.liferay.portal.model.Group group)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			com.liferay.portal.service.persistence.GroupHBM groupHBM = null;
-			groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
-					group.getPrimaryKey());
-
-			if (groupHBM == null) {
-				_log.warn("No Group exists with the primary key " +
-					group.getPrimaryKey().toString());
-				throw new com.liferay.portal.NoSuchGroupException(
-					"No Group exists with the primary key " +
-					group.getPrimaryKey().toString());
-			}
-
-			boolean value = roleHBM.getGroups().remove(groupHBM);
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean removeGroups(String pk, String[] groupPKs)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			boolean value = false;
-
-			for (int i = 0; i < groupPKs.length; i++) {
-				com.liferay.portal.service.persistence.GroupHBM groupHBM = null;
-				groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
-						groupPKs[i]);
-
-				if (groupHBM == null) {
-					_log.warn("No Group exists with the primary key " +
-						groupPKs[i].toString());
-					throw new com.liferay.portal.NoSuchGroupException(
-						"No Group exists with the primary key " +
-						groupPKs[i].toString());
-				}
-
-				if (roleHBM.getGroups().remove(groupHBM)) {
-					value = true;
-				}
-			}
-
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean removeGroups(String pk, List groups)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			boolean value = false;
-
-			for (int i = 0; i < groups.size(); i++) {
-				com.liferay.portal.model.Group group = (com.liferay.portal.model.Group)groups.get(i);
-				com.liferay.portal.service.persistence.GroupHBM groupHBM = (com.liferay.portal.service.persistence.GroupHBM)session.get(com.liferay.portal.service.persistence.GroupHBM.class,
-						group.getPrimaryKey());
-
-				if (groupHBM == null) {
-					_log.warn("No Group exists with the primary key " +
-						group.getPrimaryKey().toString());
-					throw new com.liferay.portal.NoSuchGroupException(
-						"No Group exists with the primary key " +
-						group.getPrimaryKey().toString());
-				}
-
-				if (roleHBM.getGroups().remove(groupHBM)) {
-					value = true;
-				}
-			}
-
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List getPermissions(String pk)
-		throws NoSuchRoleException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			StringBuffer query = new StringBuffer();
-			query.append("SELECT permissionHBM FROM ");
-			query.append(com.liferay.portal.service.persistence.RoleHBM.class.getName());
-			query.append(" roleHBM ");
-			query.append("JOIN roleHBM.permissions AS permissionHBM ");
-			query.append("WHERE roleHBM.roleId = ? ");
-
-			Query q = session.createQuery(query.toString());
-			q.setString(0, pk);
-
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				com.liferay.portal.service.persistence.PermissionHBM permissionHBM =
-					(com.liferay.portal.service.persistence.PermissionHBM)itr.next();
-				list.add(com.liferay.portal.service.persistence.PermissionHBMUtil.model(
-						permissionHBM));
-			}
-
-			return list;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List getPermissions(String pk, int begin, int end)
-		throws NoSuchRoleException, SystemException {
-		return getPermissions(pk, begin, end, null);
-	}
-
-	public List getPermissions(String pk, int begin, int end,
-		OrderByComparator obc) throws NoSuchRoleException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			StringBuffer query = new StringBuffer();
-			query.append("SELECT permissionHBM FROM ");
-			query.append(com.liferay.portal.service.persistence.RoleHBM.class.getName());
-			query.append(" roleHBM ");
-			query.append("JOIN roleHBM.permissions AS permissionHBM ");
-			query.append("WHERE roleHBM.roleId = ? ");
-
-			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setString(0, pk);
-
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				com.liferay.portal.service.persistence.PermissionHBM permissionHBM =
-					(com.liferay.portal.service.persistence.PermissionHBM)itr.next();
-				list.add(com.liferay.portal.service.persistence.PermissionHBMUtil.model(
-						permissionHBM));
-			}
-
-			return list;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int getPermissionsSize(String pk) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("SELECT COUNT(*) FROM ");
-			query.append(com.liferay.portal.service.persistence.RoleHBM.class.getName());
-			query.append(" roleHBM ");
-			query.append("JOIN roleHBM.permissions AS permissionHBM ");
-			query.append("WHERE roleHBM.roleId = ? ");
-
-			Query q = session.createQuery(query.toString());
-			q.setString(0, pk);
-
-			Iterator itr = q.iterate();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void setPermissions(String pk, String[] pks)
-		throws NoSuchRoleException, 
-			com.liferay.portal.NoSuchPermissionException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			Set permissionsSet = new HashSet();
-
-			for (int i = 0; (pks != null) && (i < pks.length); i++) {
-				com.liferay.portal.service.persistence.PermissionHBM permissionHBM =
-					(com.liferay.portal.service.persistence.PermissionHBM)session.get(com.liferay.portal.service.persistence.PermissionHBM.class,
-						pks[i]);
-
-				if (permissionHBM == null) {
-					_log.warn("No Permission exists with the primary key " +
-						pks[i].toString());
-					throw new com.liferay.portal.NoSuchPermissionException(
-						"No Permission exists with the primary key " +
-						pks[i].toString());
-				}
-
-				permissionsSet.add(permissionHBM);
-			}
-
-			roleHBM.setPermissions(permissionsSet);
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void setPermissions(String pk, List permissions)
-		throws NoSuchRoleException, 
-			com.liferay.portal.NoSuchPermissionException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			Set permissionsSet = new HashSet();
-			Iterator itr = permissions.iterator();
-
-			while (itr.hasNext()) {
-				com.liferay.portal.model.Permission permission = (com.liferay.portal.model.Permission)itr.next();
-				com.liferay.portal.service.persistence.PermissionHBM permissionHBM =
-					(com.liferay.portal.service.persistence.PermissionHBM)session.get(com.liferay.portal.service.persistence.PermissionHBM.class,
-						permission.getPrimaryKey());
-
-				if (permissionHBM == null) {
-					_log.warn("No Permission exists with the primary key " +
-						permission.getPrimaryKey().toString());
-					throw new com.liferay.portal.NoSuchPermissionException(
-						"No Permission exists with the primary key " +
-						permission.getPrimaryKey().toString());
-				}
-
-				permissionsSet.add(permissionHBM);
-			}
-
-			roleHBM.setPermissions(permissionsSet);
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean addPermission(String pk, String permissionPK)
-		throws NoSuchRoleException, 
-			com.liferay.portal.NoSuchPermissionException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			com.liferay.portal.service.persistence.PermissionHBM permissionHBM = null;
-			permissionHBM = (com.liferay.portal.service.persistence.PermissionHBM)session.get(com.liferay.portal.service.persistence.PermissionHBM.class,
-					permissionPK);
-
-			if (permissionHBM == null) {
-				_log.warn("No Permission exists with the primary key " +
-					permissionPK.toString());
-				throw new com.liferay.portal.NoSuchPermissionException(
-					"No Permission exists with the primary key " +
-					permissionPK.toString());
-			}
-
-			boolean value = roleHBM.getPermissions().add(permissionHBM);
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean addPermission(String pk,
-		com.liferay.portal.model.Permission permission)
-		throws NoSuchRoleException, 
-			com.liferay.portal.NoSuchPermissionException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			com.liferay.portal.service.persistence.PermissionHBM permissionHBM = null;
-			permissionHBM = (com.liferay.portal.service.persistence.PermissionHBM)session.get(com.liferay.portal.service.persistence.PermissionHBM.class,
-					permission.getPrimaryKey());
-
-			if (permissionHBM == null) {
-				_log.warn("No Permission exists with the primary key " +
-					permission.getPrimaryKey().toString());
-				throw new com.liferay.portal.NoSuchPermissionException(
-					"No Permission exists with the primary key " +
-					permission.getPrimaryKey().toString());
-			}
-
-			boolean value = roleHBM.getPermissions().add(permissionHBM);
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean addPermissions(String pk, String[] permissionPKs)
-		throws NoSuchRoleException, 
-			com.liferay.portal.NoSuchPermissionException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			boolean value = false;
-
-			for (int i = 0; i < permissionPKs.length; i++) {
-				com.liferay.portal.service.persistence.PermissionHBM permissionHBM =
-					null;
-				permissionHBM = (com.liferay.portal.service.persistence.PermissionHBM)session.get(com.liferay.portal.service.persistence.PermissionHBM.class,
-						permissionPKs[i]);
-
-				if (permissionHBM == null) {
-					_log.warn("No Permission exists with the primary key " +
-						permissionPKs[i].toString());
-					throw new com.liferay.portal.NoSuchPermissionException(
-						"No Permission exists with the primary key " +
-						permissionPKs[i].toString());
-				}
-
-				if (roleHBM.getPermissions().add(permissionHBM)) {
-					value = true;
-				}
-			}
-
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean addPermissions(String pk, List permissions)
-		throws NoSuchRoleException, 
-			com.liferay.portal.NoSuchPermissionException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			boolean value = false;
-
-			for (int i = 0; i < permissions.size(); i++) {
-				com.liferay.portal.model.Permission permission = (com.liferay.portal.model.Permission)permissions.get(i);
-				com.liferay.portal.service.persistence.PermissionHBM permissionHBM =
-					(com.liferay.portal.service.persistence.PermissionHBM)session.get(com.liferay.portal.service.persistence.PermissionHBM.class,
-						permission.getPrimaryKey());
-
-				if (permissionHBM == null) {
-					_log.warn("No Permission exists with the primary key " +
-						permission.getPrimaryKey().toString());
-					throw new com.liferay.portal.NoSuchPermissionException(
-						"No Permission exists with the primary key " +
-						permission.getPrimaryKey().toString());
-				}
-
-				if (roleHBM.getPermissions().add(permissionHBM)) {
-					value = true;
-				}
-			}
-
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void clearPermissions(String pk)
-		throws NoSuchRoleException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			roleHBM.getPermissions().clear();
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public static final String SQL_CONTAINSPERMISSION = "SELECT COUNT(*) AS COUNT_VALUE FROM Roles_Permissions WHERE roleId = ? AND permissionId = ?";
-
-	public boolean containsPermission(String pk, String permissionPK)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			SQLQuery q = session.createSQLQuery(SQL_CONTAINSPERMISSION);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
-			qPos.add(permissionPK);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if ((count != null) && (count.intValue() > 0)) {
-					return true;
-				}
-			}
-
-			return false;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public static final String SQL_CONTAINSPERMISSIONS = "SELECT COUNT(*) AS COUNT_VALUE FROM Roles_Permissions WHERE roleId = ?";
-
-	public boolean containsPermissions(String pk) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			SQLQuery q = session.createSQLQuery(SQL_CONTAINSPERMISSIONS);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if ((count != null) && (count.intValue() > 0)) {
-					return true;
-				}
-			}
-
-			return false;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean removePermission(String pk, String permissionPK)
-		throws NoSuchRoleException, 
-			com.liferay.portal.NoSuchPermissionException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			com.liferay.portal.service.persistence.PermissionHBM permissionHBM = null;
-			permissionHBM = (com.liferay.portal.service.persistence.PermissionHBM)session.get(com.liferay.portal.service.persistence.PermissionHBM.class,
-					permissionPK);
-
-			if (permissionHBM == null) {
-				_log.warn("No Permission exists with the primary key " +
-					permissionPK.toString());
-				throw new com.liferay.portal.NoSuchPermissionException(
-					"No Permission exists with the primary key " +
-					permissionPK.toString());
-			}
-
-			boolean value = roleHBM.getPermissions().remove(permissionHBM);
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean removePermission(String pk,
-		com.liferay.portal.model.Permission permission)
-		throws NoSuchRoleException, 
-			com.liferay.portal.NoSuchPermissionException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			com.liferay.portal.service.persistence.PermissionHBM permissionHBM = null;
-			permissionHBM = (com.liferay.portal.service.persistence.PermissionHBM)session.get(com.liferay.portal.service.persistence.PermissionHBM.class,
-					permission.getPrimaryKey());
-
-			if (permissionHBM == null) {
-				_log.warn("No Permission exists with the primary key " +
-					permission.getPrimaryKey().toString());
-				throw new com.liferay.portal.NoSuchPermissionException(
-					"No Permission exists with the primary key " +
-					permission.getPrimaryKey().toString());
-			}
-
-			boolean value = roleHBM.getPermissions().remove(permissionHBM);
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean removePermissions(String pk, String[] permissionPKs)
-		throws NoSuchRoleException, 
-			com.liferay.portal.NoSuchPermissionException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			boolean value = false;
-
-			for (int i = 0; i < permissionPKs.length; i++) {
-				com.liferay.portal.service.persistence.PermissionHBM permissionHBM =
-					null;
-				permissionHBM = (com.liferay.portal.service.persistence.PermissionHBM)session.get(com.liferay.portal.service.persistence.PermissionHBM.class,
-						permissionPKs[i]);
-
-				if (permissionHBM == null) {
-					_log.warn("No Permission exists with the primary key " +
-						permissionPKs[i].toString());
-					throw new com.liferay.portal.NoSuchPermissionException(
-						"No Permission exists with the primary key " +
-						permissionPKs[i].toString());
-				}
-
-				if (roleHBM.getPermissions().remove(permissionHBM)) {
-					value = true;
-				}
-			}
-
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean removePermissions(String pk, List permissions)
-		throws NoSuchRoleException, 
-			com.liferay.portal.NoSuchPermissionException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			boolean value = false;
-
-			for (int i = 0; i < permissions.size(); i++) {
-				com.liferay.portal.model.Permission permission = (com.liferay.portal.model.Permission)permissions.get(i);
-				com.liferay.portal.service.persistence.PermissionHBM permissionHBM =
-					(com.liferay.portal.service.persistence.PermissionHBM)session.get(com.liferay.portal.service.persistence.PermissionHBM.class,
-						permission.getPrimaryKey());
-
-				if (permissionHBM == null) {
-					_log.warn("No Permission exists with the primary key " +
-						permission.getPrimaryKey().toString());
-					throw new com.liferay.portal.NoSuchPermissionException(
-						"No Permission exists with the primary key " +
-						permission.getPrimaryKey().toString());
-				}
-
-				if (roleHBM.getPermissions().remove(permissionHBM)) {
-					value = true;
-				}
-			}
-
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List getUsers(String pk) throws NoSuchRoleException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			StringBuffer query = new StringBuffer();
-			query.append("SELECT userHBM FROM ");
-			query.append(com.liferay.portal.service.persistence.RoleHBM.class.getName());
-			query.append(" roleHBM ");
-			query.append("JOIN roleHBM.users AS userHBM ");
-			query.append("WHERE roleHBM.roleId = ? ");
-
-			Query q = session.createQuery(query.toString());
-			q.setString(0, pk);
-
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				com.liferay.portal.service.persistence.UserHBM userHBM = (com.liferay.portal.service.persistence.UserHBM)itr.next();
-				list.add(com.liferay.portal.service.persistence.UserHBMUtil.model(
-						userHBM));
-			}
-
-			return list;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List getUsers(String pk, int begin, int end)
-		throws NoSuchRoleException, SystemException {
-		return getUsers(pk, begin, end, null);
-	}
-
-	public List getUsers(String pk, int begin, int end, OrderByComparator obc)
-		throws NoSuchRoleException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			StringBuffer query = new StringBuffer();
-			query.append("SELECT userHBM FROM ");
-			query.append(com.liferay.portal.service.persistence.RoleHBM.class.getName());
-			query.append(" roleHBM ");
-			query.append("JOIN roleHBM.users AS userHBM ");
-			query.append("WHERE roleHBM.roleId = ? ");
-
-			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setString(0, pk);
-
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				com.liferay.portal.service.persistence.UserHBM userHBM = (com.liferay.portal.service.persistence.UserHBM)itr.next();
-				list.add(com.liferay.portal.service.persistence.UserHBMUtil.model(
-						userHBM));
-			}
-
-			return list;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int getUsersSize(String pk) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("SELECT COUNT(*) FROM ");
-			query.append(com.liferay.portal.service.persistence.RoleHBM.class.getName());
-			query.append(" roleHBM ");
-			query.append("JOIN roleHBM.users AS userHBM ");
-			query.append("WHERE roleHBM.roleId = ? ");
-
-			Query q = session.createQuery(query.toString());
-			q.setString(0, pk);
-
-			Iterator itr = q.iterate();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void setUsers(String pk, String[] pks)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			Set usersSet = new HashSet();
-
-			for (int i = 0; (pks != null) && (i < pks.length); i++) {
-				com.liferay.portal.service.persistence.UserHBM userHBM = (com.liferay.portal.service.persistence.UserHBM)session.get(com.liferay.portal.service.persistence.UserHBM.class,
-						pks[i]);
-
-				if (userHBM == null) {
-					_log.warn("No User exists with the primary key " +
-						pks[i].toString());
-					throw new com.liferay.portal.NoSuchUserException(
-						"No User exists with the primary key " +
-						pks[i].toString());
-				}
-
-				usersSet.add(userHBM);
-			}
-
-			roleHBM.setUsers(usersSet);
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void setUsers(String pk, List users)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			Set usersSet = new HashSet();
-			Iterator itr = users.iterator();
-
-			while (itr.hasNext()) {
-				com.liferay.portal.model.User user = (com.liferay.portal.model.User)itr.next();
-				com.liferay.portal.service.persistence.UserHBM userHBM = (com.liferay.portal.service.persistence.UserHBM)session.get(com.liferay.portal.service.persistence.UserHBM.class,
-						user.getPrimaryKey());
-
-				if (userHBM == null) {
-					_log.warn("No User exists with the primary key " +
-						user.getPrimaryKey().toString());
-					throw new com.liferay.portal.NoSuchUserException(
-						"No User exists with the primary key " +
-						user.getPrimaryKey().toString());
-				}
-
-				usersSet.add(userHBM);
-			}
-
-			roleHBM.setUsers(usersSet);
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean addUser(String pk, String userPK)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			com.liferay.portal.service.persistence.UserHBM userHBM = null;
-			userHBM = (com.liferay.portal.service.persistence.UserHBM)session.get(com.liferay.portal.service.persistence.UserHBM.class,
-					userPK);
-
-			if (userHBM == null) {
-				_log.warn("No User exists with the primary key " +
-					userPK.toString());
-				throw new com.liferay.portal.NoSuchUserException(
-					"No User exists with the primary key " + userPK.toString());
-			}
-
-			boolean value = roleHBM.getUsers().add(userHBM);
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean addUser(String pk, com.liferay.portal.model.User user)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			com.liferay.portal.service.persistence.UserHBM userHBM = null;
-			userHBM = (com.liferay.portal.service.persistence.UserHBM)session.get(com.liferay.portal.service.persistence.UserHBM.class,
-					user.getPrimaryKey());
-
-			if (userHBM == null) {
-				_log.warn("No User exists with the primary key " +
-					user.getPrimaryKey().toString());
-				throw new com.liferay.portal.NoSuchUserException(
-					"No User exists with the primary key " +
-					user.getPrimaryKey().toString());
-			}
-
-			boolean value = roleHBM.getUsers().add(userHBM);
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean addUsers(String pk, String[] userPKs)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			boolean value = false;
-
-			for (int i = 0; i < userPKs.length; i++) {
-				com.liferay.portal.service.persistence.UserHBM userHBM = null;
-				userHBM = (com.liferay.portal.service.persistence.UserHBM)session.get(com.liferay.portal.service.persistence.UserHBM.class,
-						userPKs[i]);
-
-				if (userHBM == null) {
-					_log.warn("No User exists with the primary key " +
-						userPKs[i].toString());
-					throw new com.liferay.portal.NoSuchUserException(
-						"No User exists with the primary key " +
-						userPKs[i].toString());
-				}
-
-				if (roleHBM.getUsers().add(userHBM)) {
-					value = true;
-				}
-			}
-
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean addUsers(String pk, List users)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			boolean value = false;
-
-			for (int i = 0; i < users.size(); i++) {
-				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
-				com.liferay.portal.service.persistence.UserHBM userHBM = (com.liferay.portal.service.persistence.UserHBM)session.get(com.liferay.portal.service.persistence.UserHBM.class,
-						user.getPrimaryKey());
-
-				if (userHBM == null) {
-					_log.warn("No User exists with the primary key " +
-						user.getPrimaryKey().toString());
-					throw new com.liferay.portal.NoSuchUserException(
-						"No User exists with the primary key " +
-						user.getPrimaryKey().toString());
-				}
-
-				if (roleHBM.getUsers().add(userHBM)) {
-					value = true;
-				}
-			}
-
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void clearUsers(String pk)
-		throws NoSuchRoleException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			roleHBM.getUsers().clear();
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public static final String SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Roles WHERE roleId = ? AND userId = ?";
-
-	public boolean containsUser(String pk, String userPK)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			SQLQuery q = session.createSQLQuery(SQL_CONTAINSUSER);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
-			qPos.add(userPK);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if ((count != null) && (count.intValue() > 0)) {
-					return true;
-				}
-			}
-
-			return false;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public static final String SQL_CONTAINSUSERS = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Roles WHERE roleId = ?";
-
-	public boolean containsUsers(String pk) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			SQLQuery q = session.createSQLQuery(SQL_CONTAINSUSERS);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if ((count != null) && (count.intValue() > 0)) {
-					return true;
-				}
-			}
-
-			return false;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean removeUser(String pk, String userPK)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			com.liferay.portal.service.persistence.UserHBM userHBM = null;
-			userHBM = (com.liferay.portal.service.persistence.UserHBM)session.get(com.liferay.portal.service.persistence.UserHBM.class,
-					userPK);
-
-			if (userHBM == null) {
-				_log.warn("No User exists with the primary key " +
-					userPK.toString());
-				throw new com.liferay.portal.NoSuchUserException(
-					"No User exists with the primary key " + userPK.toString());
-			}
-
-			boolean value = roleHBM.getUsers().remove(userHBM);
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean removeUser(String pk, com.liferay.portal.model.User user)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			com.liferay.portal.service.persistence.UserHBM userHBM = null;
-			userHBM = (com.liferay.portal.service.persistence.UserHBM)session.get(com.liferay.portal.service.persistence.UserHBM.class,
-					user.getPrimaryKey());
-
-			if (userHBM == null) {
-				_log.warn("No User exists with the primary key " +
-					user.getPrimaryKey().toString());
-				throw new com.liferay.portal.NoSuchUserException(
-					"No User exists with the primary key " +
-					user.getPrimaryKey().toString());
-			}
-
-			boolean value = roleHBM.getUsers().remove(userHBM);
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean removeUsers(String pk, String[] userPKs)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			boolean value = false;
-
-			for (int i = 0; i < userPKs.length; i++) {
-				com.liferay.portal.service.persistence.UserHBM userHBM = null;
-				userHBM = (com.liferay.portal.service.persistence.UserHBM)session.get(com.liferay.portal.service.persistence.UserHBM.class,
-						userPKs[i]);
-
-				if (userHBM == null) {
-					_log.warn("No User exists with the primary key " +
-						userPKs[i].toString());
-					throw new com.liferay.portal.NoSuchUserException(
-						"No User exists with the primary key " +
-						userPKs[i].toString());
-				}
-
-				if (roleHBM.getUsers().remove(userHBM)) {
-					value = true;
-				}
-			}
-
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean removeUsers(String pk, List users)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, pk);
-
-			if (roleHBM == null) {
-				_log.warn("No Role exists with the primary key " +
-					pk.toString());
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + pk.toString());
-			}
-
-			boolean value = false;
-
-			for (int i = 0; i < users.size(); i++) {
-				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
-				com.liferay.portal.service.persistence.UserHBM userHBM = (com.liferay.portal.service.persistence.UserHBM)session.get(com.liferay.portal.service.persistence.UserHBM.class,
-						user.getPrimaryKey());
-
-				if (userHBM == null) {
-					_log.warn("No User exists with the primary key " +
-						user.getPrimaryKey().toString());
-					throw new com.liferay.portal.NoSuchUserException(
-						"No User exists with the primary key " +
-						user.getPrimaryKey().toString());
-				}
-
-				if (roleHBM.getUsers().remove(userHBM)) {
-					value = true;
-				}
-			}
-
-			session.flush();
-
-			return value;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public com.liferay.portal.model.Role findByPrimaryKey(String roleId)
-		throws NoSuchRoleException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RoleHBM roleHBM = (RoleHBM)session.get(RoleHBM.class, roleId);
-
-			if (roleHBM == null) {
+			if (role == null) {
 				_log.warn("No Role exists with the primary key " +
 					roleId.toString());
 				throw new NoSuchRoleException(
 					"No Role exists with the primary key " + roleId.toString());
 			}
 
-			return RoleHBMUtil.model(roleHBM);
+			return role;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -2263,11 +192,10 @@ public class RolePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Role_ IN CLASS com.liferay.portal.service.persistence.RoleHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Role WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -2284,13 +212,7 @@ public class RolePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				RoleHBM roleHBM = (RoleHBM)itr.next();
-				list.add(RoleHBMUtil.model(roleHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -2315,11 +237,10 @@ public class RolePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Role_ IN CLASS com.liferay.portal.service.persistence.RoleHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Role WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -2342,15 +263,7 @@ public class RolePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				RoleHBM roleHBM = (RoleHBM)itr.next();
-				list.add(RoleHBMUtil.model(roleHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -2360,8 +273,7 @@ public class RolePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Role findByCompanyId_First(
-		String companyId, OrderByComparator obc)
+	public Role findByCompanyId_First(String companyId, OrderByComparator obc)
 		throws NoSuchRoleException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
@@ -2374,12 +286,11 @@ public class RolePersistence extends BasePersistence {
 			throw new NoSuchRoleException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Role)list.get(0);
+			return (Role)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Role findByCompanyId_Last(
-		String companyId, OrderByComparator obc)
+	public Role findByCompanyId_Last(String companyId, OrderByComparator obc)
 		throws NoSuchRoleException, SystemException {
 		int count = countByCompanyId(companyId);
 		List list = findByCompanyId(companyId, count - 1, count, obc);
@@ -2393,14 +304,13 @@ public class RolePersistence extends BasePersistence {
 			throw new NoSuchRoleException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Role)list.get(0);
+			return (Role)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Role[] findByCompanyId_PrevAndNext(
-		String roleId, String companyId, OrderByComparator obc)
-		throws NoSuchRoleException, SystemException {
-		com.liferay.portal.model.Role role = findByPrimaryKey(roleId);
+	public Role[] findByCompanyId_PrevAndNext(String roleId, String companyId,
+		OrderByComparator obc) throws NoSuchRoleException, SystemException {
+		Role role = findByPrimaryKey(roleId);
 		int count = countByCompanyId(companyId);
 		Session session = null;
 
@@ -2408,11 +318,10 @@ public class RolePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Role_ IN CLASS com.liferay.portal.service.persistence.RoleHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Role WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -2435,12 +344,11 @@ public class RolePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, role,
-					RoleHBMUtil.getInstance());
-			com.liferay.portal.model.Role[] array = new com.liferay.portal.model.Role[3];
-			array[0] = (com.liferay.portal.model.Role)objArray[0];
-			array[1] = (com.liferay.portal.model.Role)objArray[1];
-			array[2] = (com.liferay.portal.model.Role)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, role);
+			Role[] array = new Role[3];
+			array[0] = (Role)objArray[0];
+			array[1] = (Role)objArray[1];
+			array[2] = (Role)objArray[2];
 
 			return array;
 		}
@@ -2452,8 +360,7 @@ public class RolePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Role findByC_C_C(String companyId,
-		String className, String classPK)
+	public Role findByC_C_C(String companyId, String className, String classPK)
 		throws NoSuchRoleException, SystemException {
 		Session session = null;
 
@@ -2461,11 +368,10 @@ public class RolePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Role_ IN CLASS com.liferay.portal.service.persistence.RoleHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Role WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -2474,7 +380,7 @@ public class RolePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -2483,7 +389,7 @@ public class RolePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -2508,9 +414,9 @@ public class RolePersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			Iterator itr = q.list().iterator();
+			List list = q.list();
 
-			if (!itr.hasNext()) {
+			if (list.size() == 0) {
 				String msg = "No Role exists with the key ";
 				msg += StringPool.OPEN_CURLY_BRACE;
 				msg += "companyId=";
@@ -2525,9 +431,9 @@ public class RolePersistence extends BasePersistence {
 				throw new NoSuchRoleException(msg);
 			}
 
-			RoleHBM roleHBM = (RoleHBM)itr.next();
+			Role role = (Role)list.get(0);
 
-			return RoleHBMUtil.model(roleHBM);
+			return role;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -2544,21 +450,13 @@ public class RolePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Role_ IN CLASS com.liferay.portal.service.persistence.RoleHBM ");
+			query.append("FROM com.liferay.portal.model.Role ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				RoleHBM roleHBM = (RoleHBM)itr.next();
-				list.add(RoleHBMUtil.model(roleHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -2575,11 +473,10 @@ public class RolePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Role_ IN CLASS com.liferay.portal.service.persistence.RoleHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Role WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -2599,8 +496,8 @@ public class RolePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				RoleHBM roleHBM = (RoleHBM)itr.next();
-				session.delete(roleHBM);
+				Role role = (Role)itr.next();
+				session.delete(role);
 			}
 
 			session.flush();
@@ -2621,11 +518,10 @@ public class RolePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Role_ IN CLASS com.liferay.portal.service.persistence.RoleHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Role WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -2634,7 +530,7 @@ public class RolePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -2643,7 +539,7 @@ public class RolePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -2671,8 +567,8 @@ public class RolePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				RoleHBM roleHBM = (RoleHBM)itr.next();
-				session.delete(roleHBM);
+				Role role = (Role)itr.next();
+				session.delete(role);
 			}
 
 			session.flush();
@@ -2709,11 +605,10 @@ public class RolePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Role_ IN CLASS com.liferay.portal.service.persistence.RoleHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Role WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -2757,11 +652,10 @@ public class RolePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Role_ IN CLASS com.liferay.portal.service.persistence.RoleHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Role WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -2770,7 +664,7 @@ public class RolePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -2779,7 +673,7 @@ public class RolePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -2822,5 +716,983 @@ public class RolePersistence extends BasePersistence {
 		}
 	}
 
+	public List getGroups(String pk)
+		throws NoSuchRoleException, SystemException {
+		return getGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	public List getGroups(String pk, int begin, int end)
+		throws NoSuchRoleException, SystemException {
+		return getGroups(pk, begin, end, null);
+	}
+
+	public List getGroups(String pk, int begin, int end, OrderByComparator obc)
+		throws NoSuchRoleException, SystemException {
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = _SQL_GETGROUPS;
+
+			if (obc != null) {
+				sql += ("ORDER BY " + obc.getOrderBy());
+			}
+			else {
+				sql += "ORDER BY ";
+				sql += "Group_.name ASC";
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+			q.addEntity("Group_", com.liferay.portal.model.Group.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+			qPos.add(pk);
+
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public int getGroupsSize(String pk) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(_SQL_GETGROUPSSIZE);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+			qPos.add(pk);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean containsGroup(String pk, String groupPK)
+		throws SystemException {
+		try {
+			return containsGroup.contains(pk, groupPK);
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public boolean containsGroups(String pk) throws SystemException {
+		if (getGroupsSize(pk) > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public void addGroup(String pk, String groupPK)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
+			SystemException {
+		try {
+			addGroup.add(pk, groupPK);
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void addGroup(String pk, com.liferay.portal.model.Group group)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
+			SystemException {
+		try {
+			addGroup.add(pk, group.getPrimaryKey());
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void addGroups(String pk, String[] groupPKs)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
+			SystemException {
+		try {
+			for (int i = 0; i < groupPKs.length; i++) {
+				addGroup.add(pk, groupPKs[i]);
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void addGroups(String pk, List groups)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
+			SystemException {
+		try {
+			for (int i = 0; i < groups.size(); i++) {
+				com.liferay.portal.model.Group group = (com.liferay.portal.model.Group)groups.get(i);
+				addGroup.add(pk, group.getPrimaryKey());
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void clearGroups(String pk)
+		throws NoSuchRoleException, SystemException {
+		try {
+			clearGroups.clear(pk);
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void removeGroup(String pk, String groupPK)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
+			SystemException {
+		try {
+			removeGroup.remove(pk, groupPK);
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void removeGroup(String pk, com.liferay.portal.model.Group group)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
+			SystemException {
+		try {
+			removeGroup.remove(pk, group.getPrimaryKey());
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void removeGroups(String pk, String[] groupPKs)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
+			SystemException {
+		try {
+			for (int i = 0; i < groupPKs.length; i++) {
+				removeGroup.remove(pk, groupPKs[i]);
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void removeGroups(String pk, List groups)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
+			SystemException {
+		try {
+			for (int i = 0; i < groups.size(); i++) {
+				com.liferay.portal.model.Group group = (com.liferay.portal.model.Group)groups.get(i);
+				removeGroup.remove(pk, group.getPrimaryKey());
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void setGroups(String pk, String[] groupPKs)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
+			SystemException {
+		try {
+			clearGroups.clear(pk);
+
+			for (int i = 0; i < groupPKs.length; i++) {
+				addGroup.add(pk, groupPKs[i]);
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void setGroups(String pk, List groups)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException, 
+			SystemException {
+		try {
+			clearGroups.clear(pk);
+
+			for (int i = 0; i < groups.size(); i++) {
+				com.liferay.portal.model.Group group = (com.liferay.portal.model.Group)groups.get(i);
+				addGroup.add(pk, group.getPrimaryKey());
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public List getPermissions(String pk)
+		throws NoSuchRoleException, SystemException {
+		return getPermissions(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	public List getPermissions(String pk, int begin, int end)
+		throws NoSuchRoleException, SystemException {
+		return getPermissions(pk, begin, end, null);
+	}
+
+	public List getPermissions(String pk, int begin, int end,
+		OrderByComparator obc) throws NoSuchRoleException, SystemException {
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = _SQL_GETPERMISSIONS;
+
+			if (obc != null) {
+				sql += ("ORDER BY " + obc.getOrderBy());
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+			q.addEntity("Permission_", com.liferay.portal.model.Permission.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+			qPos.add(pk);
+
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public int getPermissionsSize(String pk) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(_SQL_GETPERMISSIONSSIZE);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+			qPos.add(pk);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean containsPermission(String pk, String permissionPK)
+		throws SystemException {
+		try {
+			return containsPermission.contains(pk, permissionPK);
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public boolean containsPermissions(String pk) throws SystemException {
+		if (getPermissionsSize(pk) > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public void addPermission(String pk, String permissionPK)
+		throws NoSuchRoleException, 
+			com.liferay.portal.NoSuchPermissionException, SystemException {
+		try {
+			addPermission.add(pk, permissionPK);
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void addPermission(String pk,
+		com.liferay.portal.model.Permission permission)
+		throws NoSuchRoleException, 
+			com.liferay.portal.NoSuchPermissionException, SystemException {
+		try {
+			addPermission.add(pk, permission.getPrimaryKey());
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void addPermissions(String pk, String[] permissionPKs)
+		throws NoSuchRoleException, 
+			com.liferay.portal.NoSuchPermissionException, SystemException {
+		try {
+			for (int i = 0; i < permissionPKs.length; i++) {
+				addPermission.add(pk, permissionPKs[i]);
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void addPermissions(String pk, List permissions)
+		throws NoSuchRoleException, 
+			com.liferay.portal.NoSuchPermissionException, SystemException {
+		try {
+			for (int i = 0; i < permissions.size(); i++) {
+				com.liferay.portal.model.Permission permission = (com.liferay.portal.model.Permission)permissions.get(i);
+				addPermission.add(pk, permission.getPrimaryKey());
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void clearPermissions(String pk)
+		throws NoSuchRoleException, SystemException {
+		try {
+			clearPermissions.clear(pk);
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void removePermission(String pk, String permissionPK)
+		throws NoSuchRoleException, 
+			com.liferay.portal.NoSuchPermissionException, SystemException {
+		try {
+			removePermission.remove(pk, permissionPK);
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void removePermission(String pk,
+		com.liferay.portal.model.Permission permission)
+		throws NoSuchRoleException, 
+			com.liferay.portal.NoSuchPermissionException, SystemException {
+		try {
+			removePermission.remove(pk, permission.getPrimaryKey());
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void removePermissions(String pk, String[] permissionPKs)
+		throws NoSuchRoleException, 
+			com.liferay.portal.NoSuchPermissionException, SystemException {
+		try {
+			for (int i = 0; i < permissionPKs.length; i++) {
+				removePermission.remove(pk, permissionPKs[i]);
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void removePermissions(String pk, List permissions)
+		throws NoSuchRoleException, 
+			com.liferay.portal.NoSuchPermissionException, SystemException {
+		try {
+			for (int i = 0; i < permissions.size(); i++) {
+				com.liferay.portal.model.Permission permission = (com.liferay.portal.model.Permission)permissions.get(i);
+				removePermission.remove(pk, permission.getPrimaryKey());
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void setPermissions(String pk, String[] permissionPKs)
+		throws NoSuchRoleException, 
+			com.liferay.portal.NoSuchPermissionException, SystemException {
+		try {
+			clearPermissions.clear(pk);
+
+			for (int i = 0; i < permissionPKs.length; i++) {
+				addPermission.add(pk, permissionPKs[i]);
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void setPermissions(String pk, List permissions)
+		throws NoSuchRoleException, 
+			com.liferay.portal.NoSuchPermissionException, SystemException {
+		try {
+			clearPermissions.clear(pk);
+
+			for (int i = 0; i < permissions.size(); i++) {
+				com.liferay.portal.model.Permission permission = (com.liferay.portal.model.Permission)permissions.get(i);
+				addPermission.add(pk, permission.getPrimaryKey());
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public List getUsers(String pk) throws NoSuchRoleException, SystemException {
+		return getUsers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	public List getUsers(String pk, int begin, int end)
+		throws NoSuchRoleException, SystemException {
+		return getUsers(pk, begin, end, null);
+	}
+
+	public List getUsers(String pk, int begin, int end, OrderByComparator obc)
+		throws NoSuchRoleException, SystemException {
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = _SQL_GETUSERS;
+
+			if (obc != null) {
+				sql += ("ORDER BY " + obc.getOrderBy());
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+			q.addEntity("User_", com.liferay.portal.model.User.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+			qPos.add(pk);
+
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public int getUsersSize(String pk) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(_SQL_GETUSERSSIZE);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+			qPos.add(pk);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean containsUser(String pk, String userPK)
+		throws SystemException {
+		try {
+			return containsUser.contains(pk, userPK);
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public boolean containsUsers(String pk) throws SystemException {
+		if (getUsersSize(pk) > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public void addUser(String pk, String userPK)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
+			SystemException {
+		try {
+			addUser.add(pk, userPK);
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void addUser(String pk, com.liferay.portal.model.User user)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
+			SystemException {
+		try {
+			addUser.add(pk, user.getPrimaryKey());
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void addUsers(String pk, String[] userPKs)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
+			SystemException {
+		try {
+			for (int i = 0; i < userPKs.length; i++) {
+				addUser.add(pk, userPKs[i]);
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void addUsers(String pk, List users)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
+			SystemException {
+		try {
+			for (int i = 0; i < users.size(); i++) {
+				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
+				addUser.add(pk, user.getPrimaryKey());
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void clearUsers(String pk)
+		throws NoSuchRoleException, SystemException {
+		try {
+			clearUsers.clear(pk);
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void removeUser(String pk, String userPK)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
+			SystemException {
+		try {
+			removeUser.remove(pk, userPK);
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void removeUser(String pk, com.liferay.portal.model.User user)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
+			SystemException {
+		try {
+			removeUser.remove(pk, user.getPrimaryKey());
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void removeUsers(String pk, String[] userPKs)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
+			SystemException {
+		try {
+			for (int i = 0; i < userPKs.length; i++) {
+				removeUser.remove(pk, userPKs[i]);
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void removeUsers(String pk, List users)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
+			SystemException {
+		try {
+			for (int i = 0; i < users.size(); i++) {
+				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
+				removeUser.remove(pk, user.getPrimaryKey());
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void setUsers(String pk, String[] userPKs)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
+			SystemException {
+		try {
+			clearUsers.clear(pk);
+
+			for (int i = 0; i < userPKs.length; i++) {
+				addUser.add(pk, userPKs[i]);
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	public void setUsers(String pk, List users)
+		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException, 
+			SystemException {
+		try {
+			clearUsers.clear(pk);
+
+			for (int i = 0; i < users.size(); i++) {
+				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
+				addUser.add(pk, user.getPrimaryKey());
+			}
+		}
+		catch (DataAccessException dae) {
+			throw new SystemException(dae);
+		}
+	}
+
+	protected void initDao() {
+		containsGroup = new ContainsGroup(this);
+		addGroup = new AddGroup(this);
+		clearGroups = new ClearGroups(this);
+		removeGroup = new RemoveGroup(this);
+		containsPermission = new ContainsPermission(this);
+		addPermission = new AddPermission(this);
+		clearPermissions = new ClearPermissions(this);
+		removePermission = new RemovePermission(this);
+		containsUser = new ContainsUser(this);
+		addUser = new AddUser(this);
+		clearUsers = new ClearUsers(this);
+		removeUser = new RemoveUser(this);
+	}
+
+	protected ContainsGroup containsGroup;
+	protected AddGroup addGroup;
+	protected ClearGroups clearGroups;
+	protected RemoveGroup removeGroup;
+	protected ContainsPermission containsPermission;
+	protected AddPermission addPermission;
+	protected ClearPermissions clearPermissions;
+	protected RemovePermission removePermission;
+	protected ContainsUser containsUser;
+	protected AddUser addUser;
+	protected ClearUsers clearUsers;
+	protected RemoveUser removeUser;
+
+	protected class ContainsGroup extends MappingSqlQuery {
+		protected ContainsGroup(RolePersistence persistence) {
+			super(persistence.getDataSource(), _SQL_CONTAINSGROUP);
+			_persistence = persistence;
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			compile();
+		}
+
+		protected Object mapRow(ResultSet rs, int rowNumber)
+			throws SQLException {
+			return new Integer(rs.getInt("COUNT_VALUE"));
+		}
+
+		protected boolean contains(String roleId, String groupId) {
+			List results = execute(new Object[] { roleId, groupId });
+
+			if (results.size() > 0) {
+				Integer count = (Integer)results.get(0);
+
+				if (count.intValue() > 0) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private RolePersistence _persistence;
+	}
+
+	protected class AddGroup extends SqlUpdate {
+		protected AddGroup(RolePersistence persistence) {
+			super(persistence.getDataSource(),
+				"INSERT INTO Groups_Roles (roleId, groupId) VALUES (?, ?)");
+			_persistence = persistence;
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			compile();
+		}
+
+		protected void add(String roleId, String groupId) {
+			if (!_persistence.containsGroup.contains(roleId, groupId)) {
+				update(new Object[] { roleId, groupId });
+			}
+		}
+
+		private RolePersistence _persistence;
+	}
+
+	protected class ClearGroups extends SqlUpdate {
+		protected ClearGroups(RolePersistence persistence) {
+			super(persistence.getDataSource(),
+				"DELETE FROM Groups_Roles WHERE roleId = ?");
+			_persistence = persistence;
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			compile();
+		}
+
+		protected void clear(String roleId) {
+			update(new Object[] { roleId });
+		}
+
+		private RolePersistence _persistence;
+	}
+
+	protected class RemoveGroup extends SqlUpdate {
+		protected RemoveGroup(RolePersistence persistence) {
+			super(persistence.getDataSource(),
+				"DELETE FROM Groups_Roles WHERE roleId = ? AND groupId = ?");
+			_persistence = persistence;
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			compile();
+		}
+
+		protected void remove(String roleId, String groupId) {
+			update(new Object[] { roleId, groupId });
+		}
+
+		private RolePersistence _persistence;
+	}
+
+	protected class ContainsPermission extends MappingSqlQuery {
+		protected ContainsPermission(RolePersistence persistence) {
+			super(persistence.getDataSource(), _SQL_CONTAINSPERMISSION);
+			_persistence = persistence;
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			compile();
+		}
+
+		protected Object mapRow(ResultSet rs, int rowNumber)
+			throws SQLException {
+			return new Integer(rs.getInt("COUNT_VALUE"));
+		}
+
+		protected boolean contains(String roleId, String permissionId) {
+			List results = execute(new Object[] { roleId, permissionId });
+
+			if (results.size() > 0) {
+				Integer count = (Integer)results.get(0);
+
+				if (count.intValue() > 0) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private RolePersistence _persistence;
+	}
+
+	protected class AddPermission extends SqlUpdate {
+		protected AddPermission(RolePersistence persistence) {
+			super(persistence.getDataSource(),
+				"INSERT INTO Roles_Permissions (roleId, permissionId) VALUES (?, ?)");
+			_persistence = persistence;
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			compile();
+		}
+
+		protected void add(String roleId, String permissionId) {
+			if (!_persistence.containsPermission.contains(roleId, permissionId)) {
+				update(new Object[] { roleId, permissionId });
+			}
+		}
+
+		private RolePersistence _persistence;
+	}
+
+	protected class ClearPermissions extends SqlUpdate {
+		protected ClearPermissions(RolePersistence persistence) {
+			super(persistence.getDataSource(),
+				"DELETE FROM Roles_Permissions WHERE roleId = ?");
+			_persistence = persistence;
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			compile();
+		}
+
+		protected void clear(String roleId) {
+			update(new Object[] { roleId });
+		}
+
+		private RolePersistence _persistence;
+	}
+
+	protected class RemovePermission extends SqlUpdate {
+		protected RemovePermission(RolePersistence persistence) {
+			super(persistence.getDataSource(),
+				"DELETE FROM Roles_Permissions WHERE roleId = ? AND permissionId = ?");
+			_persistence = persistence;
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			compile();
+		}
+
+		protected void remove(String roleId, String permissionId) {
+			update(new Object[] { roleId, permissionId });
+		}
+
+		private RolePersistence _persistence;
+	}
+
+	protected class ContainsUser extends MappingSqlQuery {
+		protected ContainsUser(RolePersistence persistence) {
+			super(persistence.getDataSource(), _SQL_CONTAINSUSER);
+			_persistence = persistence;
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			compile();
+		}
+
+		protected Object mapRow(ResultSet rs, int rowNumber)
+			throws SQLException {
+			return new Integer(rs.getInt("COUNT_VALUE"));
+		}
+
+		protected boolean contains(String roleId, String userId) {
+			List results = execute(new Object[] { roleId, userId });
+
+			if (results.size() > 0) {
+				Integer count = (Integer)results.get(0);
+
+				if (count.intValue() > 0) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private RolePersistence _persistence;
+	}
+
+	protected class AddUser extends SqlUpdate {
+		protected AddUser(RolePersistence persistence) {
+			super(persistence.getDataSource(),
+				"INSERT INTO Users_Roles (roleId, userId) VALUES (?, ?)");
+			_persistence = persistence;
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			compile();
+		}
+
+		protected void add(String roleId, String userId) {
+			if (!_persistence.containsUser.contains(roleId, userId)) {
+				update(new Object[] { roleId, userId });
+			}
+		}
+
+		private RolePersistence _persistence;
+	}
+
+	protected class ClearUsers extends SqlUpdate {
+		protected ClearUsers(RolePersistence persistence) {
+			super(persistence.getDataSource(),
+				"DELETE FROM Users_Roles WHERE roleId = ?");
+			_persistence = persistence;
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			compile();
+		}
+
+		protected void clear(String roleId) {
+			update(new Object[] { roleId });
+		}
+
+		private RolePersistence _persistence;
+	}
+
+	protected class RemoveUser extends SqlUpdate {
+		protected RemoveUser(RolePersistence persistence) {
+			super(persistence.getDataSource(),
+				"DELETE FROM Users_Roles WHERE roleId = ? AND userId = ?");
+			_persistence = persistence;
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.VARCHAR));
+			compile();
+		}
+
+		protected void remove(String roleId, String userId) {
+			update(new Object[] { roleId, userId });
+		}
+
+		private RolePersistence _persistence;
+	}
+
+	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Groups_Roles ON (Groups_Roles.roleId = ?) AND (Groups_Roles.groupId = Group_.groupId)";
+	private static final String _SQL_GETGROUPSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Roles WHERE roleId = ?";
+	private static final String _SQL_CONTAINSGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Roles WHERE roleId = ? AND groupId = ?";
+	private static final String _SQL_GETPERMISSIONS = "SELECT {Permission_.*} FROM Permission_ INNER JOIN Roles_Permissions ON (Roles_Permissions.roleId = ?) AND (Roles_Permissions.permissionId = Permission_.permissionId)";
+	private static final String _SQL_GETPERMISSIONSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Roles_Permissions WHERE roleId = ?";
+	private static final String _SQL_CONTAINSPERMISSION = "SELECT COUNT(*) AS COUNT_VALUE FROM Roles_Permissions WHERE roleId = ? AND permissionId = ?";
+	private static final String _SQL_GETUSERS = "SELECT {User_.*} FROM User_ INNER JOIN Users_Roles ON (Users_Roles.roleId = ?) AND (Users_Roles.userId = User_.userId)";
+	private static final String _SQL_GETUSERSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Roles WHERE roleId = ?";
+	private static final String _SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Roles WHERE roleId = ? AND userId = ?";
 	private static Log _log = LogFactory.getLog(RolePersistence.class);
 }

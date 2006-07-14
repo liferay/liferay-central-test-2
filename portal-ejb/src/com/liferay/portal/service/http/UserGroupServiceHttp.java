@@ -39,7 +39,7 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class UserGroupServiceHttp {
-	public static boolean addGroupUserGroups(HttpPrincipal httpPrincipal,
+	public static void addGroupUserGroups(HttpPrincipal httpPrincipal,
 		java.lang.String groupId, java.lang.String[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -74,8 +74,6 @@ public class UserGroupServiceHttp {
 
 				throw e;
 			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));
@@ -285,7 +283,7 @@ public class UserGroupServiceHttp {
 		}
 	}
 
-	public static boolean unsetGroupUserGroups(HttpPrincipal httpPrincipal,
+	public static void unsetGroupUserGroups(HttpPrincipal httpPrincipal,
 		java.lang.String groupId, java.lang.String[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -321,8 +319,6 @@ public class UserGroupServiceHttp {
 
 				throw e;
 			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));

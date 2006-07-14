@@ -36,7 +36,7 @@ public interface GroupLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
-	public boolean addRoleGroups(java.lang.String roleId,
+	public void addRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
@@ -112,7 +112,7 @@ public interface GroupLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
-	public boolean unsetRoleGroups(java.lang.String roleId,
+	public void unsetRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;

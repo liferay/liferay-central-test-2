@@ -41,6 +41,7 @@ import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
 import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalService;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
+import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -64,7 +65,7 @@ public class JournalContentSearchLocalServiceImpl
 		List layouts = new ArrayList();
 
 		List groups = GroupLocalServiceUtil.search(
-			companyId, null, null, null, -1, -1);
+			companyId, null, null, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (int i = 0; i < groups.size(); i++) {
 			Group group = (Group)groups.get(i);

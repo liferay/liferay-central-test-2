@@ -67,9 +67,11 @@ public class CustomSQLUtil {
 		sql = StringUtil.replace(
 			sql,
 			new String[] {
-				"[$AND_OR_CONNECTOR$]", "[$AND_OR_NULL_CHECK$]"},
+				"[$AND_OR_CONNECTOR$]", "[$AND_OR_NULL_CHECK$]"
+			},
 			new String[] {
-				andOrConnector, andOrNullCheck});
+				andOrConnector, andOrNullCheck
+			});
 
 		sql = replaceIsNull(sql);
 
@@ -81,10 +83,12 @@ public class CustomSQLUtil {
 			sql = StringUtil.replace(
 				sql,
 				new String[] {
-					"? IS NULL", "? IS NOT NULL"},
+					"? IS NULL", "? IS NOT NULL"
+				},
 				new String[] {
 					CUSTOM_SQL_FUNCTION_ISNULL + "(?, '1') = '1'",
-					CUSTOM_SQL_FUNCTION_ISNULL + "(?, '1') = '0'"});
+					CUSTOM_SQL_FUNCTION_ISNULL + "(?, '1') = '0'"
+				});
 		}
 
 		return sql;

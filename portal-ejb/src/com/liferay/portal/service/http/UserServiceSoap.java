@@ -37,12 +37,10 @@ import java.rmi.RemoteException;
  *
  */
 public class UserServiceSoap {
-	public static boolean addGroupUsers(java.lang.String groupId,
+	public static void addGroupUsers(java.lang.String groupId,
 		java.lang.String[] userIds) throws RemoteException {
 		try {
-			boolean returnValue = UserServiceUtil.addGroupUsers(groupId, userIds);
-
-			return returnValue;
+			UserServiceUtil.addGroupUsers(groupId, userIds);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -51,12 +49,10 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static boolean addRoleUsers(java.lang.String roleId,
+	public static void addRoleUsers(java.lang.String roleId,
 		java.lang.String[] userIds) throws RemoteException {
 		try {
-			boolean returnValue = UserServiceUtil.addRoleUsers(roleId, userIds);
-
-			return returnValue;
+			UserServiceUtil.addRoleUsers(roleId, userIds);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -65,13 +61,10 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static boolean addUserGroupUsers(java.lang.String userGroupId,
+	public static void addUserGroupUsers(java.lang.String userGroupId,
 		java.lang.String[] userIds) throws RemoteException {
 		try {
-			boolean returnValue = UserServiceUtil.addUserGroupUsers(userGroupId,
-					userIds);
-
-			return returnValue;
+			UserServiceUtil.addUserGroupUsers(userGroupId, userIds);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -80,12 +73,10 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static boolean deleteRoleUser(java.lang.String roleId,
+	public static void deleteRoleUser(java.lang.String roleId,
 		java.lang.String userId) throws RemoteException {
 		try {
-			boolean returnValue = UserServiceUtil.deleteRoleUser(roleId, userId);
-
-			return returnValue;
+			UserServiceUtil.deleteRoleUser(roleId, userId);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -186,13 +177,10 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static boolean unsetGroupUsers(java.lang.String groupId,
+	public static void unsetGroupUsers(java.lang.String groupId,
 		java.lang.String[] userIds) throws RemoteException {
 		try {
-			boolean returnValue = UserServiceUtil.unsetGroupUsers(groupId,
-					userIds);
-
-			return returnValue;
+			UserServiceUtil.unsetGroupUsers(groupId, userIds);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -201,12 +189,10 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static boolean unsetRoleUsers(java.lang.String roleId,
+	public static void unsetRoleUsers(java.lang.String roleId,
 		java.lang.String[] userIds) throws RemoteException {
 		try {
-			boolean returnValue = UserServiceUtil.unsetRoleUsers(roleId, userIds);
-
-			return returnValue;
+			UserServiceUtil.unsetRoleUsers(roleId, userIds);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -215,13 +201,10 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static boolean unsetUserGroupUsers(java.lang.String userGroupId,
+	public static void unsetUserGroupUsers(java.lang.String userGroupId,
 		java.lang.String[] userIds) throws RemoteException {
 		try {
-			boolean returnValue = UserServiceUtil.unsetUserGroupUsers(userGroupId,
-					userIds);
-
-			return returnValue;
+			UserServiceUtil.unsetUserGroupUsers(userGroupId, userIds);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);

@@ -292,6 +292,10 @@ public class MBMessageUtil {
 		return getPersistence().countByT_P(threadId, parentMessageId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static MBMessagePersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		MBMessageUtil util = (MBMessageUtil)ctx.getBean(CLASS_NAME);

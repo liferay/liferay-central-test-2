@@ -414,6 +414,10 @@ public class EmailAddressUtil {
 			primary);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static EmailAddressPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		EmailAddressUtil util = (EmailAddressUtil)ctx.getBean(CLASS_NAME);

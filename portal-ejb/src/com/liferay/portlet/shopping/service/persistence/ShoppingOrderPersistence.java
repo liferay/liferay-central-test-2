@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.shopping.NoSuchOrderException;
+import com.liferay.portlet.shopping.model.ShoppingOrder;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,26 +50,25 @@ import java.util.List;
  *
  */
 public class ShoppingOrderPersistence extends BasePersistence {
-	public com.liferay.portlet.shopping.model.ShoppingOrder create(
-		String orderId) {
-		ShoppingOrderHBM shoppingOrderHBM = new ShoppingOrderHBM();
-		shoppingOrderHBM.setNew(true);
-		shoppingOrderHBM.setPrimaryKey(orderId);
+	public ShoppingOrder create(String orderId) {
+		ShoppingOrder shoppingOrder = new ShoppingOrder();
+		shoppingOrder.setNew(true);
+		shoppingOrder.setPrimaryKey(orderId);
 
-		return ShoppingOrderHBMUtil.model(shoppingOrderHBM);
+		return shoppingOrder;
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingOrder remove(
-		String orderId) throws NoSuchOrderException, SystemException {
+	public ShoppingOrder remove(String orderId)
+		throws NoSuchOrderException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ShoppingOrderHBM shoppingOrderHBM = (ShoppingOrderHBM)session.get(ShoppingOrderHBM.class,
+			ShoppingOrder shoppingOrder = (ShoppingOrder)session.get(ShoppingOrder.class,
 					orderId);
 
-			if (shoppingOrderHBM == null) {
+			if (shoppingOrder == null) {
 				_log.warn("No ShoppingOrder exists with the primary key " +
 					orderId.toString());
 				throw new NoSuchOrderException(
@@ -76,10 +76,10 @@ public class ShoppingOrderPersistence extends BasePersistence {
 					orderId.toString());
 			}
 
-			session.delete(shoppingOrderHBM);
+			session.delete(shoppingOrder);
 			session.flush();
 
-			return ShoppingOrderHBMUtil.model(shoppingOrderHBM);
+			return shoppingOrder;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -99,169 +99,169 @@ public class ShoppingOrderPersistence extends BasePersistence {
 				session = openSession();
 
 				if (shoppingOrder.isNew()) {
-					ShoppingOrderHBM shoppingOrderHBM = new ShoppingOrderHBM();
-					shoppingOrderHBM.setOrderId(shoppingOrder.getOrderId());
-					shoppingOrderHBM.setGroupId(shoppingOrder.getGroupId());
-					shoppingOrderHBM.setCompanyId(shoppingOrder.getCompanyId());
-					shoppingOrderHBM.setUserId(shoppingOrder.getUserId());
-					shoppingOrderHBM.setUserName(shoppingOrder.getUserName());
-					shoppingOrderHBM.setCreateDate(shoppingOrder.getCreateDate());
-					shoppingOrderHBM.setModifiedDate(shoppingOrder.getModifiedDate());
-					shoppingOrderHBM.setTax(shoppingOrder.getTax());
-					shoppingOrderHBM.setShipping(shoppingOrder.getShipping());
-					shoppingOrderHBM.setAltShipping(shoppingOrder.getAltShipping());
-					shoppingOrderHBM.setRequiresShipping(shoppingOrder.getRequiresShipping());
-					shoppingOrderHBM.setInsure(shoppingOrder.getInsure());
-					shoppingOrderHBM.setInsurance(shoppingOrder.getInsurance());
-					shoppingOrderHBM.setCouponIds(shoppingOrder.getCouponIds());
-					shoppingOrderHBM.setCouponDiscount(shoppingOrder.getCouponDiscount());
-					shoppingOrderHBM.setBillingFirstName(shoppingOrder.getBillingFirstName());
-					shoppingOrderHBM.setBillingLastName(shoppingOrder.getBillingLastName());
-					shoppingOrderHBM.setBillingEmailAddress(shoppingOrder.getBillingEmailAddress());
-					shoppingOrderHBM.setBillingCompany(shoppingOrder.getBillingCompany());
-					shoppingOrderHBM.setBillingStreet(shoppingOrder.getBillingStreet());
-					shoppingOrderHBM.setBillingCity(shoppingOrder.getBillingCity());
-					shoppingOrderHBM.setBillingState(shoppingOrder.getBillingState());
-					shoppingOrderHBM.setBillingZip(shoppingOrder.getBillingZip());
-					shoppingOrderHBM.setBillingCountry(shoppingOrder.getBillingCountry());
-					shoppingOrderHBM.setBillingPhone(shoppingOrder.getBillingPhone());
-					shoppingOrderHBM.setShipToBilling(shoppingOrder.getShipToBilling());
-					shoppingOrderHBM.setShippingFirstName(shoppingOrder.getShippingFirstName());
-					shoppingOrderHBM.setShippingLastName(shoppingOrder.getShippingLastName());
-					shoppingOrderHBM.setShippingEmailAddress(shoppingOrder.getShippingEmailAddress());
-					shoppingOrderHBM.setShippingCompany(shoppingOrder.getShippingCompany());
-					shoppingOrderHBM.setShippingStreet(shoppingOrder.getShippingStreet());
-					shoppingOrderHBM.setShippingCity(shoppingOrder.getShippingCity());
-					shoppingOrderHBM.setShippingState(shoppingOrder.getShippingState());
-					shoppingOrderHBM.setShippingZip(shoppingOrder.getShippingZip());
-					shoppingOrderHBM.setShippingCountry(shoppingOrder.getShippingCountry());
-					shoppingOrderHBM.setShippingPhone(shoppingOrder.getShippingPhone());
-					shoppingOrderHBM.setCcName(shoppingOrder.getCcName());
-					shoppingOrderHBM.setCcType(shoppingOrder.getCcType());
-					shoppingOrderHBM.setCcNumber(shoppingOrder.getCcNumber());
-					shoppingOrderHBM.setCcExpMonth(shoppingOrder.getCcExpMonth());
-					shoppingOrderHBM.setCcExpYear(shoppingOrder.getCcExpYear());
-					shoppingOrderHBM.setCcVerNumber(shoppingOrder.getCcVerNumber());
-					shoppingOrderHBM.setComments(shoppingOrder.getComments());
-					shoppingOrderHBM.setPpTxnId(shoppingOrder.getPpTxnId());
-					shoppingOrderHBM.setPpPaymentStatus(shoppingOrder.getPpPaymentStatus());
-					shoppingOrderHBM.setPpPaymentGross(shoppingOrder.getPpPaymentGross());
-					shoppingOrderHBM.setPpReceiverEmail(shoppingOrder.getPpReceiverEmail());
-					shoppingOrderHBM.setPpPayerEmail(shoppingOrder.getPpPayerEmail());
-					shoppingOrderHBM.setSendOrderEmail(shoppingOrder.getSendOrderEmail());
-					shoppingOrderHBM.setSendShippingEmail(shoppingOrder.getSendShippingEmail());
-					session.save(shoppingOrderHBM);
+					ShoppingOrder shoppingOrderModel = new ShoppingOrder();
+					shoppingOrderModel.setOrderId(shoppingOrder.getOrderId());
+					shoppingOrderModel.setGroupId(shoppingOrder.getGroupId());
+					shoppingOrderModel.setCompanyId(shoppingOrder.getCompanyId());
+					shoppingOrderModel.setUserId(shoppingOrder.getUserId());
+					shoppingOrderModel.setUserName(shoppingOrder.getUserName());
+					shoppingOrderModel.setCreateDate(shoppingOrder.getCreateDate());
+					shoppingOrderModel.setModifiedDate(shoppingOrder.getModifiedDate());
+					shoppingOrderModel.setTax(shoppingOrder.getTax());
+					shoppingOrderModel.setShipping(shoppingOrder.getShipping());
+					shoppingOrderModel.setAltShipping(shoppingOrder.getAltShipping());
+					shoppingOrderModel.setRequiresShipping(shoppingOrder.getRequiresShipping());
+					shoppingOrderModel.setInsure(shoppingOrder.getInsure());
+					shoppingOrderModel.setInsurance(shoppingOrder.getInsurance());
+					shoppingOrderModel.setCouponIds(shoppingOrder.getCouponIds());
+					shoppingOrderModel.setCouponDiscount(shoppingOrder.getCouponDiscount());
+					shoppingOrderModel.setBillingFirstName(shoppingOrder.getBillingFirstName());
+					shoppingOrderModel.setBillingLastName(shoppingOrder.getBillingLastName());
+					shoppingOrderModel.setBillingEmailAddress(shoppingOrder.getBillingEmailAddress());
+					shoppingOrderModel.setBillingCompany(shoppingOrder.getBillingCompany());
+					shoppingOrderModel.setBillingStreet(shoppingOrder.getBillingStreet());
+					shoppingOrderModel.setBillingCity(shoppingOrder.getBillingCity());
+					shoppingOrderModel.setBillingState(shoppingOrder.getBillingState());
+					shoppingOrderModel.setBillingZip(shoppingOrder.getBillingZip());
+					shoppingOrderModel.setBillingCountry(shoppingOrder.getBillingCountry());
+					shoppingOrderModel.setBillingPhone(shoppingOrder.getBillingPhone());
+					shoppingOrderModel.setShipToBilling(shoppingOrder.getShipToBilling());
+					shoppingOrderModel.setShippingFirstName(shoppingOrder.getShippingFirstName());
+					shoppingOrderModel.setShippingLastName(shoppingOrder.getShippingLastName());
+					shoppingOrderModel.setShippingEmailAddress(shoppingOrder.getShippingEmailAddress());
+					shoppingOrderModel.setShippingCompany(shoppingOrder.getShippingCompany());
+					shoppingOrderModel.setShippingStreet(shoppingOrder.getShippingStreet());
+					shoppingOrderModel.setShippingCity(shoppingOrder.getShippingCity());
+					shoppingOrderModel.setShippingState(shoppingOrder.getShippingState());
+					shoppingOrderModel.setShippingZip(shoppingOrder.getShippingZip());
+					shoppingOrderModel.setShippingCountry(shoppingOrder.getShippingCountry());
+					shoppingOrderModel.setShippingPhone(shoppingOrder.getShippingPhone());
+					shoppingOrderModel.setCcName(shoppingOrder.getCcName());
+					shoppingOrderModel.setCcType(shoppingOrder.getCcType());
+					shoppingOrderModel.setCcNumber(shoppingOrder.getCcNumber());
+					shoppingOrderModel.setCcExpMonth(shoppingOrder.getCcExpMonth());
+					shoppingOrderModel.setCcExpYear(shoppingOrder.getCcExpYear());
+					shoppingOrderModel.setCcVerNumber(shoppingOrder.getCcVerNumber());
+					shoppingOrderModel.setComments(shoppingOrder.getComments());
+					shoppingOrderModel.setPpTxnId(shoppingOrder.getPpTxnId());
+					shoppingOrderModel.setPpPaymentStatus(shoppingOrder.getPpPaymentStatus());
+					shoppingOrderModel.setPpPaymentGross(shoppingOrder.getPpPaymentGross());
+					shoppingOrderModel.setPpReceiverEmail(shoppingOrder.getPpReceiverEmail());
+					shoppingOrderModel.setPpPayerEmail(shoppingOrder.getPpPayerEmail());
+					shoppingOrderModel.setSendOrderEmail(shoppingOrder.getSendOrderEmail());
+					shoppingOrderModel.setSendShippingEmail(shoppingOrder.getSendShippingEmail());
+					session.save(shoppingOrderModel);
 					session.flush();
 				}
 				else {
-					ShoppingOrderHBM shoppingOrderHBM = (ShoppingOrderHBM)session.get(ShoppingOrderHBM.class,
+					ShoppingOrder shoppingOrderModel = (ShoppingOrder)session.get(ShoppingOrder.class,
 							shoppingOrder.getPrimaryKey());
 
-					if (shoppingOrderHBM != null) {
-						shoppingOrderHBM.setGroupId(shoppingOrder.getGroupId());
-						shoppingOrderHBM.setCompanyId(shoppingOrder.getCompanyId());
-						shoppingOrderHBM.setUserId(shoppingOrder.getUserId());
-						shoppingOrderHBM.setUserName(shoppingOrder.getUserName());
-						shoppingOrderHBM.setCreateDate(shoppingOrder.getCreateDate());
-						shoppingOrderHBM.setModifiedDate(shoppingOrder.getModifiedDate());
-						shoppingOrderHBM.setTax(shoppingOrder.getTax());
-						shoppingOrderHBM.setShipping(shoppingOrder.getShipping());
-						shoppingOrderHBM.setAltShipping(shoppingOrder.getAltShipping());
-						shoppingOrderHBM.setRequiresShipping(shoppingOrder.getRequiresShipping());
-						shoppingOrderHBM.setInsure(shoppingOrder.getInsure());
-						shoppingOrderHBM.setInsurance(shoppingOrder.getInsurance());
-						shoppingOrderHBM.setCouponIds(shoppingOrder.getCouponIds());
-						shoppingOrderHBM.setCouponDiscount(shoppingOrder.getCouponDiscount());
-						shoppingOrderHBM.setBillingFirstName(shoppingOrder.getBillingFirstName());
-						shoppingOrderHBM.setBillingLastName(shoppingOrder.getBillingLastName());
-						shoppingOrderHBM.setBillingEmailAddress(shoppingOrder.getBillingEmailAddress());
-						shoppingOrderHBM.setBillingCompany(shoppingOrder.getBillingCompany());
-						shoppingOrderHBM.setBillingStreet(shoppingOrder.getBillingStreet());
-						shoppingOrderHBM.setBillingCity(shoppingOrder.getBillingCity());
-						shoppingOrderHBM.setBillingState(shoppingOrder.getBillingState());
-						shoppingOrderHBM.setBillingZip(shoppingOrder.getBillingZip());
-						shoppingOrderHBM.setBillingCountry(shoppingOrder.getBillingCountry());
-						shoppingOrderHBM.setBillingPhone(shoppingOrder.getBillingPhone());
-						shoppingOrderHBM.setShipToBilling(shoppingOrder.getShipToBilling());
-						shoppingOrderHBM.setShippingFirstName(shoppingOrder.getShippingFirstName());
-						shoppingOrderHBM.setShippingLastName(shoppingOrder.getShippingLastName());
-						shoppingOrderHBM.setShippingEmailAddress(shoppingOrder.getShippingEmailAddress());
-						shoppingOrderHBM.setShippingCompany(shoppingOrder.getShippingCompany());
-						shoppingOrderHBM.setShippingStreet(shoppingOrder.getShippingStreet());
-						shoppingOrderHBM.setShippingCity(shoppingOrder.getShippingCity());
-						shoppingOrderHBM.setShippingState(shoppingOrder.getShippingState());
-						shoppingOrderHBM.setShippingZip(shoppingOrder.getShippingZip());
-						shoppingOrderHBM.setShippingCountry(shoppingOrder.getShippingCountry());
-						shoppingOrderHBM.setShippingPhone(shoppingOrder.getShippingPhone());
-						shoppingOrderHBM.setCcName(shoppingOrder.getCcName());
-						shoppingOrderHBM.setCcType(shoppingOrder.getCcType());
-						shoppingOrderHBM.setCcNumber(shoppingOrder.getCcNumber());
-						shoppingOrderHBM.setCcExpMonth(shoppingOrder.getCcExpMonth());
-						shoppingOrderHBM.setCcExpYear(shoppingOrder.getCcExpYear());
-						shoppingOrderHBM.setCcVerNumber(shoppingOrder.getCcVerNumber());
-						shoppingOrderHBM.setComments(shoppingOrder.getComments());
-						shoppingOrderHBM.setPpTxnId(shoppingOrder.getPpTxnId());
-						shoppingOrderHBM.setPpPaymentStatus(shoppingOrder.getPpPaymentStatus());
-						shoppingOrderHBM.setPpPaymentGross(shoppingOrder.getPpPaymentGross());
-						shoppingOrderHBM.setPpReceiverEmail(shoppingOrder.getPpReceiverEmail());
-						shoppingOrderHBM.setPpPayerEmail(shoppingOrder.getPpPayerEmail());
-						shoppingOrderHBM.setSendOrderEmail(shoppingOrder.getSendOrderEmail());
-						shoppingOrderHBM.setSendShippingEmail(shoppingOrder.getSendShippingEmail());
+					if (shoppingOrderModel != null) {
+						shoppingOrderModel.setGroupId(shoppingOrder.getGroupId());
+						shoppingOrderModel.setCompanyId(shoppingOrder.getCompanyId());
+						shoppingOrderModel.setUserId(shoppingOrder.getUserId());
+						shoppingOrderModel.setUserName(shoppingOrder.getUserName());
+						shoppingOrderModel.setCreateDate(shoppingOrder.getCreateDate());
+						shoppingOrderModel.setModifiedDate(shoppingOrder.getModifiedDate());
+						shoppingOrderModel.setTax(shoppingOrder.getTax());
+						shoppingOrderModel.setShipping(shoppingOrder.getShipping());
+						shoppingOrderModel.setAltShipping(shoppingOrder.getAltShipping());
+						shoppingOrderModel.setRequiresShipping(shoppingOrder.getRequiresShipping());
+						shoppingOrderModel.setInsure(shoppingOrder.getInsure());
+						shoppingOrderModel.setInsurance(shoppingOrder.getInsurance());
+						shoppingOrderModel.setCouponIds(shoppingOrder.getCouponIds());
+						shoppingOrderModel.setCouponDiscount(shoppingOrder.getCouponDiscount());
+						shoppingOrderModel.setBillingFirstName(shoppingOrder.getBillingFirstName());
+						shoppingOrderModel.setBillingLastName(shoppingOrder.getBillingLastName());
+						shoppingOrderModel.setBillingEmailAddress(shoppingOrder.getBillingEmailAddress());
+						shoppingOrderModel.setBillingCompany(shoppingOrder.getBillingCompany());
+						shoppingOrderModel.setBillingStreet(shoppingOrder.getBillingStreet());
+						shoppingOrderModel.setBillingCity(shoppingOrder.getBillingCity());
+						shoppingOrderModel.setBillingState(shoppingOrder.getBillingState());
+						shoppingOrderModel.setBillingZip(shoppingOrder.getBillingZip());
+						shoppingOrderModel.setBillingCountry(shoppingOrder.getBillingCountry());
+						shoppingOrderModel.setBillingPhone(shoppingOrder.getBillingPhone());
+						shoppingOrderModel.setShipToBilling(shoppingOrder.getShipToBilling());
+						shoppingOrderModel.setShippingFirstName(shoppingOrder.getShippingFirstName());
+						shoppingOrderModel.setShippingLastName(shoppingOrder.getShippingLastName());
+						shoppingOrderModel.setShippingEmailAddress(shoppingOrder.getShippingEmailAddress());
+						shoppingOrderModel.setShippingCompany(shoppingOrder.getShippingCompany());
+						shoppingOrderModel.setShippingStreet(shoppingOrder.getShippingStreet());
+						shoppingOrderModel.setShippingCity(shoppingOrder.getShippingCity());
+						shoppingOrderModel.setShippingState(shoppingOrder.getShippingState());
+						shoppingOrderModel.setShippingZip(shoppingOrder.getShippingZip());
+						shoppingOrderModel.setShippingCountry(shoppingOrder.getShippingCountry());
+						shoppingOrderModel.setShippingPhone(shoppingOrder.getShippingPhone());
+						shoppingOrderModel.setCcName(shoppingOrder.getCcName());
+						shoppingOrderModel.setCcType(shoppingOrder.getCcType());
+						shoppingOrderModel.setCcNumber(shoppingOrder.getCcNumber());
+						shoppingOrderModel.setCcExpMonth(shoppingOrder.getCcExpMonth());
+						shoppingOrderModel.setCcExpYear(shoppingOrder.getCcExpYear());
+						shoppingOrderModel.setCcVerNumber(shoppingOrder.getCcVerNumber());
+						shoppingOrderModel.setComments(shoppingOrder.getComments());
+						shoppingOrderModel.setPpTxnId(shoppingOrder.getPpTxnId());
+						shoppingOrderModel.setPpPaymentStatus(shoppingOrder.getPpPaymentStatus());
+						shoppingOrderModel.setPpPaymentGross(shoppingOrder.getPpPaymentGross());
+						shoppingOrderModel.setPpReceiverEmail(shoppingOrder.getPpReceiverEmail());
+						shoppingOrderModel.setPpPayerEmail(shoppingOrder.getPpPayerEmail());
+						shoppingOrderModel.setSendOrderEmail(shoppingOrder.getSendOrderEmail());
+						shoppingOrderModel.setSendShippingEmail(shoppingOrder.getSendShippingEmail());
 						session.flush();
 					}
 					else {
-						shoppingOrderHBM = new ShoppingOrderHBM();
-						shoppingOrderHBM.setOrderId(shoppingOrder.getOrderId());
-						shoppingOrderHBM.setGroupId(shoppingOrder.getGroupId());
-						shoppingOrderHBM.setCompanyId(shoppingOrder.getCompanyId());
-						shoppingOrderHBM.setUserId(shoppingOrder.getUserId());
-						shoppingOrderHBM.setUserName(shoppingOrder.getUserName());
-						shoppingOrderHBM.setCreateDate(shoppingOrder.getCreateDate());
-						shoppingOrderHBM.setModifiedDate(shoppingOrder.getModifiedDate());
-						shoppingOrderHBM.setTax(shoppingOrder.getTax());
-						shoppingOrderHBM.setShipping(shoppingOrder.getShipping());
-						shoppingOrderHBM.setAltShipping(shoppingOrder.getAltShipping());
-						shoppingOrderHBM.setRequiresShipping(shoppingOrder.getRequiresShipping());
-						shoppingOrderHBM.setInsure(shoppingOrder.getInsure());
-						shoppingOrderHBM.setInsurance(shoppingOrder.getInsurance());
-						shoppingOrderHBM.setCouponIds(shoppingOrder.getCouponIds());
-						shoppingOrderHBM.setCouponDiscount(shoppingOrder.getCouponDiscount());
-						shoppingOrderHBM.setBillingFirstName(shoppingOrder.getBillingFirstName());
-						shoppingOrderHBM.setBillingLastName(shoppingOrder.getBillingLastName());
-						shoppingOrderHBM.setBillingEmailAddress(shoppingOrder.getBillingEmailAddress());
-						shoppingOrderHBM.setBillingCompany(shoppingOrder.getBillingCompany());
-						shoppingOrderHBM.setBillingStreet(shoppingOrder.getBillingStreet());
-						shoppingOrderHBM.setBillingCity(shoppingOrder.getBillingCity());
-						shoppingOrderHBM.setBillingState(shoppingOrder.getBillingState());
-						shoppingOrderHBM.setBillingZip(shoppingOrder.getBillingZip());
-						shoppingOrderHBM.setBillingCountry(shoppingOrder.getBillingCountry());
-						shoppingOrderHBM.setBillingPhone(shoppingOrder.getBillingPhone());
-						shoppingOrderHBM.setShipToBilling(shoppingOrder.getShipToBilling());
-						shoppingOrderHBM.setShippingFirstName(shoppingOrder.getShippingFirstName());
-						shoppingOrderHBM.setShippingLastName(shoppingOrder.getShippingLastName());
-						shoppingOrderHBM.setShippingEmailAddress(shoppingOrder.getShippingEmailAddress());
-						shoppingOrderHBM.setShippingCompany(shoppingOrder.getShippingCompany());
-						shoppingOrderHBM.setShippingStreet(shoppingOrder.getShippingStreet());
-						shoppingOrderHBM.setShippingCity(shoppingOrder.getShippingCity());
-						shoppingOrderHBM.setShippingState(shoppingOrder.getShippingState());
-						shoppingOrderHBM.setShippingZip(shoppingOrder.getShippingZip());
-						shoppingOrderHBM.setShippingCountry(shoppingOrder.getShippingCountry());
-						shoppingOrderHBM.setShippingPhone(shoppingOrder.getShippingPhone());
-						shoppingOrderHBM.setCcName(shoppingOrder.getCcName());
-						shoppingOrderHBM.setCcType(shoppingOrder.getCcType());
-						shoppingOrderHBM.setCcNumber(shoppingOrder.getCcNumber());
-						shoppingOrderHBM.setCcExpMonth(shoppingOrder.getCcExpMonth());
-						shoppingOrderHBM.setCcExpYear(shoppingOrder.getCcExpYear());
-						shoppingOrderHBM.setCcVerNumber(shoppingOrder.getCcVerNumber());
-						shoppingOrderHBM.setComments(shoppingOrder.getComments());
-						shoppingOrderHBM.setPpTxnId(shoppingOrder.getPpTxnId());
-						shoppingOrderHBM.setPpPaymentStatus(shoppingOrder.getPpPaymentStatus());
-						shoppingOrderHBM.setPpPaymentGross(shoppingOrder.getPpPaymentGross());
-						shoppingOrderHBM.setPpReceiverEmail(shoppingOrder.getPpReceiverEmail());
-						shoppingOrderHBM.setPpPayerEmail(shoppingOrder.getPpPayerEmail());
-						shoppingOrderHBM.setSendOrderEmail(shoppingOrder.getSendOrderEmail());
-						shoppingOrderHBM.setSendShippingEmail(shoppingOrder.getSendShippingEmail());
-						session.save(shoppingOrderHBM);
+						shoppingOrderModel = new ShoppingOrder();
+						shoppingOrderModel.setOrderId(shoppingOrder.getOrderId());
+						shoppingOrderModel.setGroupId(shoppingOrder.getGroupId());
+						shoppingOrderModel.setCompanyId(shoppingOrder.getCompanyId());
+						shoppingOrderModel.setUserId(shoppingOrder.getUserId());
+						shoppingOrderModel.setUserName(shoppingOrder.getUserName());
+						shoppingOrderModel.setCreateDate(shoppingOrder.getCreateDate());
+						shoppingOrderModel.setModifiedDate(shoppingOrder.getModifiedDate());
+						shoppingOrderModel.setTax(shoppingOrder.getTax());
+						shoppingOrderModel.setShipping(shoppingOrder.getShipping());
+						shoppingOrderModel.setAltShipping(shoppingOrder.getAltShipping());
+						shoppingOrderModel.setRequiresShipping(shoppingOrder.getRequiresShipping());
+						shoppingOrderModel.setInsure(shoppingOrder.getInsure());
+						shoppingOrderModel.setInsurance(shoppingOrder.getInsurance());
+						shoppingOrderModel.setCouponIds(shoppingOrder.getCouponIds());
+						shoppingOrderModel.setCouponDiscount(shoppingOrder.getCouponDiscount());
+						shoppingOrderModel.setBillingFirstName(shoppingOrder.getBillingFirstName());
+						shoppingOrderModel.setBillingLastName(shoppingOrder.getBillingLastName());
+						shoppingOrderModel.setBillingEmailAddress(shoppingOrder.getBillingEmailAddress());
+						shoppingOrderModel.setBillingCompany(shoppingOrder.getBillingCompany());
+						shoppingOrderModel.setBillingStreet(shoppingOrder.getBillingStreet());
+						shoppingOrderModel.setBillingCity(shoppingOrder.getBillingCity());
+						shoppingOrderModel.setBillingState(shoppingOrder.getBillingState());
+						shoppingOrderModel.setBillingZip(shoppingOrder.getBillingZip());
+						shoppingOrderModel.setBillingCountry(shoppingOrder.getBillingCountry());
+						shoppingOrderModel.setBillingPhone(shoppingOrder.getBillingPhone());
+						shoppingOrderModel.setShipToBilling(shoppingOrder.getShipToBilling());
+						shoppingOrderModel.setShippingFirstName(shoppingOrder.getShippingFirstName());
+						shoppingOrderModel.setShippingLastName(shoppingOrder.getShippingLastName());
+						shoppingOrderModel.setShippingEmailAddress(shoppingOrder.getShippingEmailAddress());
+						shoppingOrderModel.setShippingCompany(shoppingOrder.getShippingCompany());
+						shoppingOrderModel.setShippingStreet(shoppingOrder.getShippingStreet());
+						shoppingOrderModel.setShippingCity(shoppingOrder.getShippingCity());
+						shoppingOrderModel.setShippingState(shoppingOrder.getShippingState());
+						shoppingOrderModel.setShippingZip(shoppingOrder.getShippingZip());
+						shoppingOrderModel.setShippingCountry(shoppingOrder.getShippingCountry());
+						shoppingOrderModel.setShippingPhone(shoppingOrder.getShippingPhone());
+						shoppingOrderModel.setCcName(shoppingOrder.getCcName());
+						shoppingOrderModel.setCcType(shoppingOrder.getCcType());
+						shoppingOrderModel.setCcNumber(shoppingOrder.getCcNumber());
+						shoppingOrderModel.setCcExpMonth(shoppingOrder.getCcExpMonth());
+						shoppingOrderModel.setCcExpYear(shoppingOrder.getCcExpYear());
+						shoppingOrderModel.setCcVerNumber(shoppingOrder.getCcVerNumber());
+						shoppingOrderModel.setComments(shoppingOrder.getComments());
+						shoppingOrderModel.setPpTxnId(shoppingOrder.getPpTxnId());
+						shoppingOrderModel.setPpPaymentStatus(shoppingOrder.getPpPaymentStatus());
+						shoppingOrderModel.setPpPaymentGross(shoppingOrder.getPpPaymentGross());
+						shoppingOrderModel.setPpReceiverEmail(shoppingOrder.getPpReceiverEmail());
+						shoppingOrderModel.setPpPayerEmail(shoppingOrder.getPpPayerEmail());
+						shoppingOrderModel.setSendOrderEmail(shoppingOrder.getSendOrderEmail());
+						shoppingOrderModel.setSendShippingEmail(shoppingOrder.getSendShippingEmail());
+						session.save(shoppingOrderModel);
 						session.flush();
 					}
 				}
@@ -280,17 +280,17 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingOrder findByPrimaryKey(
-		String orderId) throws NoSuchOrderException, SystemException {
+	public ShoppingOrder findByPrimaryKey(String orderId)
+		throws NoSuchOrderException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ShoppingOrderHBM shoppingOrderHBM = (ShoppingOrderHBM)session.get(ShoppingOrderHBM.class,
+			ShoppingOrder shoppingOrder = (ShoppingOrder)session.get(ShoppingOrder.class,
 					orderId);
 
-			if (shoppingOrderHBM == null) {
+			if (shoppingOrder == null) {
 				_log.warn("No ShoppingOrder exists with the primary key " +
 					orderId.toString());
 				throw new NoSuchOrderException(
@@ -298,7 +298,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 					orderId.toString());
 			}
 
-			return ShoppingOrderHBMUtil.model(shoppingOrderHBM);
+			return shoppingOrder;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -317,10 +317,10 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingOrder IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingOrderHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -329,7 +329,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -338,7 +338,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (ppPaymentStatus == null) {
-				query.append("ppPaymentStatus is null");
+				query.append("ppPaymentStatus IS NULL");
 			}
 			else {
 				query.append("ppPaymentStatus = ?");
@@ -363,13 +363,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 				q.setString(queryPos++, ppPaymentStatus);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				ShoppingOrderHBM shoppingOrderHBM = (ShoppingOrderHBM)itr.next();
-				list.add(ShoppingOrderHBMUtil.model(shoppingOrderHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -396,10 +390,10 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingOrder IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingOrderHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -408,7 +402,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -417,7 +411,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (ppPaymentStatus == null) {
-				query.append("ppPaymentStatus is null");
+				query.append("ppPaymentStatus IS NULL");
 			}
 			else {
 				query.append("ppPaymentStatus = ?");
@@ -448,15 +442,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 				q.setString(queryPos++, ppPaymentStatus);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				ShoppingOrderHBM shoppingOrderHBM = (ShoppingOrderHBM)itr.next();
-				list.add(ShoppingOrderHBMUtil.model(shoppingOrderHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -466,9 +452,9 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingOrder findByG_U_PPPS_First(
-		String groupId, String userId, String ppPaymentStatus,
-		OrderByComparator obc) throws NoSuchOrderException, SystemException {
+	public ShoppingOrder findByG_U_PPPS_First(String groupId, String userId,
+		String ppPaymentStatus, OrderByComparator obc)
+		throws NoSuchOrderException, SystemException {
 		List list = findByG_U_PPPS(groupId, userId, ppPaymentStatus, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -486,13 +472,13 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			throw new NoSuchOrderException(msg);
 		}
 		else {
-			return (com.liferay.portlet.shopping.model.ShoppingOrder)list.get(0);
+			return (ShoppingOrder)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingOrder findByG_U_PPPS_Last(
-		String groupId, String userId, String ppPaymentStatus,
-		OrderByComparator obc) throws NoSuchOrderException, SystemException {
+	public ShoppingOrder findByG_U_PPPS_Last(String groupId, String userId,
+		String ppPaymentStatus, OrderByComparator obc)
+		throws NoSuchOrderException, SystemException {
 		int count = countByG_U_PPPS(groupId, userId, ppPaymentStatus);
 		List list = findByG_U_PPPS(groupId, userId, ppPaymentStatus, count - 1,
 				count, obc);
@@ -512,14 +498,14 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			throw new NoSuchOrderException(msg);
 		}
 		else {
-			return (com.liferay.portlet.shopping.model.ShoppingOrder)list.get(0);
+			return (ShoppingOrder)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingOrder[] findByG_U_PPPS_PrevAndNext(
-		String orderId, String groupId, String userId, String ppPaymentStatus,
+	public ShoppingOrder[] findByG_U_PPPS_PrevAndNext(String orderId,
+		String groupId, String userId, String ppPaymentStatus,
 		OrderByComparator obc) throws NoSuchOrderException, SystemException {
-		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder = findByPrimaryKey(orderId);
+		ShoppingOrder shoppingOrder = findByPrimaryKey(orderId);
 		int count = countByG_U_PPPS(groupId, userId, ppPaymentStatus);
 		Session session = null;
 
@@ -528,10 +514,10 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingOrder IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingOrderHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -540,7 +526,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -549,7 +535,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (ppPaymentStatus == null) {
-				query.append("ppPaymentStatus is null");
+				query.append("ppPaymentStatus IS NULL");
 			}
 			else {
 				query.append("ppPaymentStatus = ?");
@@ -581,11 +567,11 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					shoppingOrder, ShoppingOrderHBMUtil.getInstance());
-			com.liferay.portlet.shopping.model.ShoppingOrder[] array = new com.liferay.portlet.shopping.model.ShoppingOrder[3];
-			array[0] = (com.liferay.portlet.shopping.model.ShoppingOrder)objArray[0];
-			array[1] = (com.liferay.portlet.shopping.model.ShoppingOrder)objArray[1];
-			array[2] = (com.liferay.portlet.shopping.model.ShoppingOrder)objArray[2];
+					shoppingOrder);
+			ShoppingOrder[] array = new ShoppingOrder[3];
+			array[0] = (ShoppingOrder)objArray[0];
+			array[1] = (ShoppingOrder)objArray[1];
+			array[2] = (ShoppingOrder)objArray[2];
 
 			return array;
 		}
@@ -605,20 +591,13 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingOrder IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingOrderHBM ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingOrder ");
 			query.append("ORDER BY ");
 			query.append("createDate DESC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				ShoppingOrderHBM shoppingOrderHBM = (ShoppingOrderHBM)itr.next();
-				list.add(ShoppingOrderHBMUtil.model(shoppingOrderHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -637,10 +616,10 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingOrder IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingOrderHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -649,7 +628,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -658,7 +637,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (ppPaymentStatus == null) {
-				query.append("ppPaymentStatus is null");
+				query.append("ppPaymentStatus IS NULL");
 			}
 			else {
 				query.append("ppPaymentStatus = ?");
@@ -686,8 +665,8 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				ShoppingOrderHBM shoppingOrderHBM = (ShoppingOrderHBM)itr.next();
-				session.delete(shoppingOrderHBM);
+				ShoppingOrder shoppingOrder = (ShoppingOrder)itr.next();
+				session.delete(shoppingOrder);
 			}
 
 			session.flush();
@@ -710,10 +689,10 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM ShoppingOrder IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingOrderHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -722,7 +701,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -731,7 +710,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (ppPaymentStatus == null) {
-				query.append("ppPaymentStatus is null");
+				query.append("ppPaymentStatus IS NULL");
 			}
 			else {
 				query.append("ppPaymentStatus = ?");
@@ -772,6 +751,9 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(ShoppingOrderPersistence.class);

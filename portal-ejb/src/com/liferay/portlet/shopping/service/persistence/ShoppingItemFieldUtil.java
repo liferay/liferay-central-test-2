@@ -181,6 +181,10 @@ public class ShoppingItemFieldUtil {
 		return getPersistence().countByItemId(itemId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static ShoppingItemFieldPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		ShoppingItemFieldUtil util = (ShoppingItemFieldUtil)ctx.getBean(CLASS_NAME);

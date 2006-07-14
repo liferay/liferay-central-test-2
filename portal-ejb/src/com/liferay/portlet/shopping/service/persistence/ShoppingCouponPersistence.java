@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.shopping.NoSuchCouponException;
+import com.liferay.portlet.shopping.model.ShoppingCoupon;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,26 +50,25 @@ import java.util.List;
  *
  */
 public class ShoppingCouponPersistence extends BasePersistence {
-	public com.liferay.portlet.shopping.model.ShoppingCoupon create(
-		String couponId) {
-		ShoppingCouponHBM shoppingCouponHBM = new ShoppingCouponHBM();
-		shoppingCouponHBM.setNew(true);
-		shoppingCouponHBM.setPrimaryKey(couponId);
+	public ShoppingCoupon create(String couponId) {
+		ShoppingCoupon shoppingCoupon = new ShoppingCoupon();
+		shoppingCoupon.setNew(true);
+		shoppingCoupon.setPrimaryKey(couponId);
 
-		return ShoppingCouponHBMUtil.model(shoppingCouponHBM);
+		return shoppingCoupon;
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingCoupon remove(
-		String couponId) throws NoSuchCouponException, SystemException {
+	public ShoppingCoupon remove(String couponId)
+		throws NoSuchCouponException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ShoppingCouponHBM shoppingCouponHBM = (ShoppingCouponHBM)session.get(ShoppingCouponHBM.class,
+			ShoppingCoupon shoppingCoupon = (ShoppingCoupon)session.get(ShoppingCoupon.class,
 					couponId);
 
-			if (shoppingCouponHBM == null) {
+			if (shoppingCoupon == null) {
 				_log.warn("No ShoppingCoupon exists with the primary key " +
 					couponId.toString());
 				throw new NoSuchCouponException(
@@ -76,10 +76,10 @@ public class ShoppingCouponPersistence extends BasePersistence {
 					couponId.toString());
 			}
 
-			session.delete(shoppingCouponHBM);
+			session.delete(shoppingCoupon);
 			session.flush();
 
-			return ShoppingCouponHBMUtil.model(shoppingCouponHBM);
+			return shoppingCoupon;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -99,70 +99,70 @@ public class ShoppingCouponPersistence extends BasePersistence {
 				session = openSession();
 
 				if (shoppingCoupon.isNew()) {
-					ShoppingCouponHBM shoppingCouponHBM = new ShoppingCouponHBM();
-					shoppingCouponHBM.setCouponId(shoppingCoupon.getCouponId());
-					shoppingCouponHBM.setGroupId(shoppingCoupon.getGroupId());
-					shoppingCouponHBM.setCompanyId(shoppingCoupon.getCompanyId());
-					shoppingCouponHBM.setUserId(shoppingCoupon.getUserId());
-					shoppingCouponHBM.setUserName(shoppingCoupon.getUserName());
-					shoppingCouponHBM.setCreateDate(shoppingCoupon.getCreateDate());
-					shoppingCouponHBM.setModifiedDate(shoppingCoupon.getModifiedDate());
-					shoppingCouponHBM.setName(shoppingCoupon.getName());
-					shoppingCouponHBM.setDescription(shoppingCoupon.getDescription());
-					shoppingCouponHBM.setStartDate(shoppingCoupon.getStartDate());
-					shoppingCouponHBM.setEndDate(shoppingCoupon.getEndDate());
-					shoppingCouponHBM.setActive(shoppingCoupon.getActive());
-					shoppingCouponHBM.setLimitCategories(shoppingCoupon.getLimitCategories());
-					shoppingCouponHBM.setLimitSkus(shoppingCoupon.getLimitSkus());
-					shoppingCouponHBM.setMinOrder(shoppingCoupon.getMinOrder());
-					shoppingCouponHBM.setDiscount(shoppingCoupon.getDiscount());
-					shoppingCouponHBM.setDiscountType(shoppingCoupon.getDiscountType());
-					session.save(shoppingCouponHBM);
+					ShoppingCoupon shoppingCouponModel = new ShoppingCoupon();
+					shoppingCouponModel.setCouponId(shoppingCoupon.getCouponId());
+					shoppingCouponModel.setGroupId(shoppingCoupon.getGroupId());
+					shoppingCouponModel.setCompanyId(shoppingCoupon.getCompanyId());
+					shoppingCouponModel.setUserId(shoppingCoupon.getUserId());
+					shoppingCouponModel.setUserName(shoppingCoupon.getUserName());
+					shoppingCouponModel.setCreateDate(shoppingCoupon.getCreateDate());
+					shoppingCouponModel.setModifiedDate(shoppingCoupon.getModifiedDate());
+					shoppingCouponModel.setName(shoppingCoupon.getName());
+					shoppingCouponModel.setDescription(shoppingCoupon.getDescription());
+					shoppingCouponModel.setStartDate(shoppingCoupon.getStartDate());
+					shoppingCouponModel.setEndDate(shoppingCoupon.getEndDate());
+					shoppingCouponModel.setActive(shoppingCoupon.getActive());
+					shoppingCouponModel.setLimitCategories(shoppingCoupon.getLimitCategories());
+					shoppingCouponModel.setLimitSkus(shoppingCoupon.getLimitSkus());
+					shoppingCouponModel.setMinOrder(shoppingCoupon.getMinOrder());
+					shoppingCouponModel.setDiscount(shoppingCoupon.getDiscount());
+					shoppingCouponModel.setDiscountType(shoppingCoupon.getDiscountType());
+					session.save(shoppingCouponModel);
 					session.flush();
 				}
 				else {
-					ShoppingCouponHBM shoppingCouponHBM = (ShoppingCouponHBM)session.get(ShoppingCouponHBM.class,
+					ShoppingCoupon shoppingCouponModel = (ShoppingCoupon)session.get(ShoppingCoupon.class,
 							shoppingCoupon.getPrimaryKey());
 
-					if (shoppingCouponHBM != null) {
-						shoppingCouponHBM.setGroupId(shoppingCoupon.getGroupId());
-						shoppingCouponHBM.setCompanyId(shoppingCoupon.getCompanyId());
-						shoppingCouponHBM.setUserId(shoppingCoupon.getUserId());
-						shoppingCouponHBM.setUserName(shoppingCoupon.getUserName());
-						shoppingCouponHBM.setCreateDate(shoppingCoupon.getCreateDate());
-						shoppingCouponHBM.setModifiedDate(shoppingCoupon.getModifiedDate());
-						shoppingCouponHBM.setName(shoppingCoupon.getName());
-						shoppingCouponHBM.setDescription(shoppingCoupon.getDescription());
-						shoppingCouponHBM.setStartDate(shoppingCoupon.getStartDate());
-						shoppingCouponHBM.setEndDate(shoppingCoupon.getEndDate());
-						shoppingCouponHBM.setActive(shoppingCoupon.getActive());
-						shoppingCouponHBM.setLimitCategories(shoppingCoupon.getLimitCategories());
-						shoppingCouponHBM.setLimitSkus(shoppingCoupon.getLimitSkus());
-						shoppingCouponHBM.setMinOrder(shoppingCoupon.getMinOrder());
-						shoppingCouponHBM.setDiscount(shoppingCoupon.getDiscount());
-						shoppingCouponHBM.setDiscountType(shoppingCoupon.getDiscountType());
+					if (shoppingCouponModel != null) {
+						shoppingCouponModel.setGroupId(shoppingCoupon.getGroupId());
+						shoppingCouponModel.setCompanyId(shoppingCoupon.getCompanyId());
+						shoppingCouponModel.setUserId(shoppingCoupon.getUserId());
+						shoppingCouponModel.setUserName(shoppingCoupon.getUserName());
+						shoppingCouponModel.setCreateDate(shoppingCoupon.getCreateDate());
+						shoppingCouponModel.setModifiedDate(shoppingCoupon.getModifiedDate());
+						shoppingCouponModel.setName(shoppingCoupon.getName());
+						shoppingCouponModel.setDescription(shoppingCoupon.getDescription());
+						shoppingCouponModel.setStartDate(shoppingCoupon.getStartDate());
+						shoppingCouponModel.setEndDate(shoppingCoupon.getEndDate());
+						shoppingCouponModel.setActive(shoppingCoupon.getActive());
+						shoppingCouponModel.setLimitCategories(shoppingCoupon.getLimitCategories());
+						shoppingCouponModel.setLimitSkus(shoppingCoupon.getLimitSkus());
+						shoppingCouponModel.setMinOrder(shoppingCoupon.getMinOrder());
+						shoppingCouponModel.setDiscount(shoppingCoupon.getDiscount());
+						shoppingCouponModel.setDiscountType(shoppingCoupon.getDiscountType());
 						session.flush();
 					}
 					else {
-						shoppingCouponHBM = new ShoppingCouponHBM();
-						shoppingCouponHBM.setCouponId(shoppingCoupon.getCouponId());
-						shoppingCouponHBM.setGroupId(shoppingCoupon.getGroupId());
-						shoppingCouponHBM.setCompanyId(shoppingCoupon.getCompanyId());
-						shoppingCouponHBM.setUserId(shoppingCoupon.getUserId());
-						shoppingCouponHBM.setUserName(shoppingCoupon.getUserName());
-						shoppingCouponHBM.setCreateDate(shoppingCoupon.getCreateDate());
-						shoppingCouponHBM.setModifiedDate(shoppingCoupon.getModifiedDate());
-						shoppingCouponHBM.setName(shoppingCoupon.getName());
-						shoppingCouponHBM.setDescription(shoppingCoupon.getDescription());
-						shoppingCouponHBM.setStartDate(shoppingCoupon.getStartDate());
-						shoppingCouponHBM.setEndDate(shoppingCoupon.getEndDate());
-						shoppingCouponHBM.setActive(shoppingCoupon.getActive());
-						shoppingCouponHBM.setLimitCategories(shoppingCoupon.getLimitCategories());
-						shoppingCouponHBM.setLimitSkus(shoppingCoupon.getLimitSkus());
-						shoppingCouponHBM.setMinOrder(shoppingCoupon.getMinOrder());
-						shoppingCouponHBM.setDiscount(shoppingCoupon.getDiscount());
-						shoppingCouponHBM.setDiscountType(shoppingCoupon.getDiscountType());
-						session.save(shoppingCouponHBM);
+						shoppingCouponModel = new ShoppingCoupon();
+						shoppingCouponModel.setCouponId(shoppingCoupon.getCouponId());
+						shoppingCouponModel.setGroupId(shoppingCoupon.getGroupId());
+						shoppingCouponModel.setCompanyId(shoppingCoupon.getCompanyId());
+						shoppingCouponModel.setUserId(shoppingCoupon.getUserId());
+						shoppingCouponModel.setUserName(shoppingCoupon.getUserName());
+						shoppingCouponModel.setCreateDate(shoppingCoupon.getCreateDate());
+						shoppingCouponModel.setModifiedDate(shoppingCoupon.getModifiedDate());
+						shoppingCouponModel.setName(shoppingCoupon.getName());
+						shoppingCouponModel.setDescription(shoppingCoupon.getDescription());
+						shoppingCouponModel.setStartDate(shoppingCoupon.getStartDate());
+						shoppingCouponModel.setEndDate(shoppingCoupon.getEndDate());
+						shoppingCouponModel.setActive(shoppingCoupon.getActive());
+						shoppingCouponModel.setLimitCategories(shoppingCoupon.getLimitCategories());
+						shoppingCouponModel.setLimitSkus(shoppingCoupon.getLimitSkus());
+						shoppingCouponModel.setMinOrder(shoppingCoupon.getMinOrder());
+						shoppingCouponModel.setDiscount(shoppingCoupon.getDiscount());
+						shoppingCouponModel.setDiscountType(shoppingCoupon.getDiscountType());
+						session.save(shoppingCouponModel);
 						session.flush();
 					}
 				}
@@ -181,17 +181,17 @@ public class ShoppingCouponPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingCoupon findByPrimaryKey(
-		String couponId) throws NoSuchCouponException, SystemException {
+	public ShoppingCoupon findByPrimaryKey(String couponId)
+		throws NoSuchCouponException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ShoppingCouponHBM shoppingCouponHBM = (ShoppingCouponHBM)session.get(ShoppingCouponHBM.class,
+			ShoppingCoupon shoppingCoupon = (ShoppingCoupon)session.get(ShoppingCoupon.class,
 					couponId);
 
-			if (shoppingCouponHBM == null) {
+			if (shoppingCoupon == null) {
 				_log.warn("No ShoppingCoupon exists with the primary key " +
 					couponId.toString());
 				throw new NoSuchCouponException(
@@ -199,7 +199,7 @@ public class ShoppingCouponPersistence extends BasePersistence {
 					couponId.toString());
 			}
 
-			return ShoppingCouponHBMUtil.model(shoppingCouponHBM);
+			return shoppingCoupon;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -217,10 +217,10 @@ public class ShoppingCouponPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingCoupon IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingCouponHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -237,13 +237,7 @@ public class ShoppingCouponPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				ShoppingCouponHBM shoppingCouponHBM = (ShoppingCouponHBM)itr.next();
-				list.add(ShoppingCouponHBMUtil.model(shoppingCouponHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -269,10 +263,10 @@ public class ShoppingCouponPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingCoupon IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingCouponHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -295,15 +289,7 @@ public class ShoppingCouponPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				ShoppingCouponHBM shoppingCouponHBM = (ShoppingCouponHBM)itr.next();
-				list.add(ShoppingCouponHBMUtil.model(shoppingCouponHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -313,9 +299,8 @@ public class ShoppingCouponPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingCoupon findByGroupId_First(
-		String groupId, OrderByComparator obc)
-		throws NoSuchCouponException, SystemException {
+	public ShoppingCoupon findByGroupId_First(String groupId,
+		OrderByComparator obc) throws NoSuchCouponException, SystemException {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -327,13 +312,12 @@ public class ShoppingCouponPersistence extends BasePersistence {
 			throw new NoSuchCouponException(msg);
 		}
 		else {
-			return (com.liferay.portlet.shopping.model.ShoppingCoupon)list.get(0);
+			return (ShoppingCoupon)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingCoupon findByGroupId_Last(
-		String groupId, OrderByComparator obc)
-		throws NoSuchCouponException, SystemException {
+	public ShoppingCoupon findByGroupId_Last(String groupId,
+		OrderByComparator obc) throws NoSuchCouponException, SystemException {
 		int count = countByGroupId(groupId);
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
@@ -346,14 +330,14 @@ public class ShoppingCouponPersistence extends BasePersistence {
 			throw new NoSuchCouponException(msg);
 		}
 		else {
-			return (com.liferay.portlet.shopping.model.ShoppingCoupon)list.get(0);
+			return (ShoppingCoupon)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingCoupon[] findByGroupId_PrevAndNext(
-		String couponId, String groupId, OrderByComparator obc)
+	public ShoppingCoupon[] findByGroupId_PrevAndNext(String couponId,
+		String groupId, OrderByComparator obc)
 		throws NoSuchCouponException, SystemException {
-		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon = findByPrimaryKey(couponId);
+		ShoppingCoupon shoppingCoupon = findByPrimaryKey(couponId);
 		int count = countByGroupId(groupId);
 		Session session = null;
 
@@ -362,10 +346,10 @@ public class ShoppingCouponPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingCoupon IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingCouponHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -389,11 +373,11 @@ public class ShoppingCouponPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					shoppingCoupon, ShoppingCouponHBMUtil.getInstance());
-			com.liferay.portlet.shopping.model.ShoppingCoupon[] array = new com.liferay.portlet.shopping.model.ShoppingCoupon[3];
-			array[0] = (com.liferay.portlet.shopping.model.ShoppingCoupon)objArray[0];
-			array[1] = (com.liferay.portlet.shopping.model.ShoppingCoupon)objArray[1];
-			array[2] = (com.liferay.portlet.shopping.model.ShoppingCoupon)objArray[2];
+					shoppingCoupon);
+			ShoppingCoupon[] array = new ShoppingCoupon[3];
+			array[0] = (ShoppingCoupon)objArray[0];
+			array[1] = (ShoppingCoupon)objArray[1];
+			array[2] = (ShoppingCoupon)objArray[2];
 
 			return array;
 		}
@@ -413,20 +397,13 @@ public class ShoppingCouponPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingCoupon IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingCouponHBM ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingCoupon ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				ShoppingCouponHBM shoppingCouponHBM = (ShoppingCouponHBM)itr.next();
-				list.add(ShoppingCouponHBMUtil.model(shoppingCouponHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -444,10 +421,10 @@ public class ShoppingCouponPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM ShoppingCoupon IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingCouponHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -467,8 +444,8 @@ public class ShoppingCouponPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				ShoppingCouponHBM shoppingCouponHBM = (ShoppingCouponHBM)itr.next();
-				session.delete(shoppingCouponHBM);
+				ShoppingCoupon shoppingCoupon = (ShoppingCoupon)itr.next();
+				session.delete(shoppingCoupon);
 			}
 
 			session.flush();
@@ -490,10 +467,10 @@ public class ShoppingCouponPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM ShoppingCoupon IN CLASS com.liferay.portlet.shopping.service.persistence.ShoppingCouponHBM WHERE ");
+				"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -526,6 +503,9 @@ public class ShoppingCouponPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(ShoppingCouponPersistence.class);

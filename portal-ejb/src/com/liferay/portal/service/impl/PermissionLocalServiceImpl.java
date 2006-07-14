@@ -295,11 +295,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 		String resourceId = resourceIds[0];
 
-		logUserPermission(userId, actionId, resourceId, start, 1);
-
-		if (_log.isDebugEnabled()) {
-			start = System.currentTimeMillis();
-		}
+		start = logHasUserPermissions(userId, actionId, resourceId, start, 1);
 
 		// Is the user directly connected to one of the permissions?
 
@@ -307,11 +303,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			return true;
 		}
 
-		logUserPermission(userId, actionId, resourceId, start, 2);
-
-		if (_log.isDebugEnabled()) {
-			start = System.currentTimeMillis();
-		}
+		start = logHasUserPermissions(userId, actionId, resourceId, start, 2);
 
 		// If we are checking permissions an object that belongs to a community,
 		// then it's only necessary to check the group that represents the
@@ -340,11 +332,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		groups.addAll(userOrgGroups);
 		groups.addAll(userUserGroupGroups);
 
-		logUserPermission(userId, actionId, resourceId, start, 3);
-
-		if (_log.isDebugEnabled()) {
-			start = System.currentTimeMillis();
-		}
+		start = logHasUserPermissions(userId, actionId, resourceId, start, 3);
 
 		// Check the organization and community intersection table. Break out of
 		// this method if the user has one of the permissions set at the
@@ -354,11 +342,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			return true;
 		}
 
-		logUserPermission(userId, actionId, resourceId, start, 4);
-
-		if (_log.isDebugEnabled()) {
-			start = System.currentTimeMillis();
-		}
+		start = logHasUserPermissions(userId, actionId, resourceId, start, 4);
 
 		// Is the user associated with groups or organizations that are directly
 		// connected to one of the permissions?
@@ -375,11 +359,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			}
 		}
 
-		logUserPermission(userId, actionId, resourceId, start, 5);
-
-		if (_log.isDebugEnabled()) {
-			start = System.currentTimeMillis();
-		}
+		start = logHasUserPermissions(userId, actionId, resourceId, start, 5);
 
 		// Is the user connected to one of the permissions via user, group, or
 		// organization roles?
@@ -394,7 +374,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			}
 		}
 
-		logUserPermission(userId, actionId, resourceId, start, 6);
+		start = logHasUserPermissions(userId, actionId, resourceId, start, 6);
 
 		return false;
 	}
@@ -548,12 +528,10 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		UserUtil.addPermissions(userId, permissions);
 	}
 
-	public boolean unsetRolePermission(
+	public void unsetRolePermission(
 			String roleId, String companyId, String name, String typeId,
 			String scope, String primKey, String actionId)
 		throws PortalException, SystemException {
-
-		boolean value = false;
 
 		try {
 			Resource resource = ResourceUtil.findByC_N_T_S_P(
@@ -562,22 +540,18 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			Permission permission = PermissionUtil.findByA_R(
 				actionId, resource.getResourceId());
 
-			value = RoleUtil.removePermission(roleId, permission);
+			RoleUtil.removePermission(roleId, permission);
 		}
 		catch (NoSuchPermissionException nspe) {
 		}
 		catch (NoSuchResourceException nsre) {
 		}
-
-		return value;
 	}
 
-	public boolean unsetRolePermissions(
+	public void unsetRolePermissions(
 			String roleId, String companyId, String name, String typeId,
 			String scope, String actionId)
 		throws PortalException, SystemException {
-
-		boolean value = false;
 
 		Iterator itr = ResourceUtil.findByC_N_T_S(
 			companyId, name, typeId, scope).iterator();
@@ -589,23 +563,21 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 				Permission permission = PermissionUtil.findByA_R(
 					actionId, resource.getResourceId());
 
-				value = RoleUtil.removePermission(roleId, permission);
+				RoleUtil.removePermission(roleId, permission);
 			}
 			catch (NoSuchPermissionException nspe) {
 			}
 		}
-
-		return value;
 	}
 
-	public boolean unsetUserPermissions(
+	public void unsetUserPermissions(
 			String userId, String[] actionIds, String resourceId)
 		throws PortalException, SystemException {
 
 		List permissions = PermissionFinder.findByU_A_R(
 			userId, actionIds, resourceId);
 
-		return UserUtil.removePermissions(userId, permissions);
+		UserUtil.removePermissions(userId, permissions);
 	}
 
 	protected boolean checkOrgGroupPermission(
@@ -665,12 +637,12 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			"User has a permission in OrgGroupPermission that does not match");
 	}
 
-	protected void logUserPermission(
+	protected long logHasUserPermissions(
 		String userId, String actionId, String resourceId, long start,
 		int block) {
 
 		if (!_log.isDebugEnabled()) {
-			return;
+			return 0;
 		}
 
 		long end = System.currentTimeMillis();
@@ -679,6 +651,8 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			"Checking user permission block " + block + " for " + userId + " " +
 				actionId + " " + resourceId + " takes " + (end - start) +
 					" ms");
+
+		return end;
 	}
 
 	private static Log _log =

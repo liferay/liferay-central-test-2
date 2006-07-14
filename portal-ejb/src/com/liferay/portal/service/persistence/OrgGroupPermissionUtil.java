@@ -185,6 +185,10 @@ public class OrgGroupPermissionUtil {
 		return getPersistence().countByPermissionId(permissionId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static OrgGroupPermissionPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		OrgGroupPermissionUtil util = (OrgGroupPermissionUtil)ctx.getBean(CLASS_NAME);

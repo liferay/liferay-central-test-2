@@ -935,9 +935,8 @@ public class Portlet extends PortletModel {
 			if (_rolesArray.length == 0) {
 				return true;
 			}
-
-			if (RoleLocalServiceUtil.hasUserRoles(
-					userId, getCompanyId(), _rolesArray)) {
+			else if (RoleLocalServiceUtil.hasUserRoles(
+						userId, getCompanyId(), _rolesArray)) {
 
 				return true;
 			}
@@ -945,6 +944,11 @@ public class Portlet extends PortletModel {
 						userId, getCompanyId(), Role.ADMINISTRATOR)) {
 
 				return true;
+			}
+			else if (User.isDefaultUser(userId)) {
+				if (hasRoleWithName(Role.GUEST)) {
+					return true;
+				}
 			}
 		}
 		catch (Exception e) {

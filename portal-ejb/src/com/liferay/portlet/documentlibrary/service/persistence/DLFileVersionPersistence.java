@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,27 +50,25 @@ import java.util.List;
  *
  */
 public class DLFileVersionPersistence extends BasePersistence {
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion create(
-		DLFileVersionPK dlFileVersionPK) {
-		DLFileVersionHBM dlFileVersionHBM = new DLFileVersionHBM();
-		dlFileVersionHBM.setNew(true);
-		dlFileVersionHBM.setPrimaryKey(dlFileVersionPK);
+	public DLFileVersion create(DLFileVersionPK dlFileVersionPK) {
+		DLFileVersion dlFileVersion = new DLFileVersion();
+		dlFileVersion.setNew(true);
+		dlFileVersion.setPrimaryKey(dlFileVersionPK);
 
-		return DLFileVersionHBMUtil.model(dlFileVersionHBM);
+		return dlFileVersion;
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion remove(
-		DLFileVersionPK dlFileVersionPK)
+	public DLFileVersion remove(DLFileVersionPK dlFileVersionPK)
 		throws NoSuchFileVersionException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			DLFileVersionHBM dlFileVersionHBM = (DLFileVersionHBM)session.get(DLFileVersionHBM.class,
+			DLFileVersion dlFileVersion = (DLFileVersion)session.get(DLFileVersion.class,
 					dlFileVersionPK);
 
-			if (dlFileVersionHBM == null) {
+			if (dlFileVersion == null) {
 				_log.warn("No DLFileVersion exists with the primary key " +
 					dlFileVersionPK.toString());
 				throw new NoSuchFileVersionException(
@@ -77,10 +76,10 @@ public class DLFileVersionPersistence extends BasePersistence {
 					dlFileVersionPK.toString());
 			}
 
-			session.delete(dlFileVersionHBM);
+			session.delete(dlFileVersion);
 			session.flush();
 
-			return DLFileVersionHBMUtil.model(dlFileVersionHBM);
+			return dlFileVersion;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -100,41 +99,41 @@ public class DLFileVersionPersistence extends BasePersistence {
 				session = openSession();
 
 				if (dlFileVersion.isNew()) {
-					DLFileVersionHBM dlFileVersionHBM = new DLFileVersionHBM();
-					dlFileVersionHBM.setFolderId(dlFileVersion.getFolderId());
-					dlFileVersionHBM.setName(dlFileVersion.getName());
-					dlFileVersionHBM.setVersion(dlFileVersion.getVersion());
-					dlFileVersionHBM.setCompanyId(dlFileVersion.getCompanyId());
-					dlFileVersionHBM.setUserId(dlFileVersion.getUserId());
-					dlFileVersionHBM.setUserName(dlFileVersion.getUserName());
-					dlFileVersionHBM.setCreateDate(dlFileVersion.getCreateDate());
-					dlFileVersionHBM.setSize(dlFileVersion.getSize());
-					session.save(dlFileVersionHBM);
+					DLFileVersion dlFileVersionModel = new DLFileVersion();
+					dlFileVersionModel.setFolderId(dlFileVersion.getFolderId());
+					dlFileVersionModel.setName(dlFileVersion.getName());
+					dlFileVersionModel.setVersion(dlFileVersion.getVersion());
+					dlFileVersionModel.setCompanyId(dlFileVersion.getCompanyId());
+					dlFileVersionModel.setUserId(dlFileVersion.getUserId());
+					dlFileVersionModel.setUserName(dlFileVersion.getUserName());
+					dlFileVersionModel.setCreateDate(dlFileVersion.getCreateDate());
+					dlFileVersionModel.setSize(dlFileVersion.getSize());
+					session.save(dlFileVersionModel);
 					session.flush();
 				}
 				else {
-					DLFileVersionHBM dlFileVersionHBM = (DLFileVersionHBM)session.get(DLFileVersionHBM.class,
+					DLFileVersion dlFileVersionModel = (DLFileVersion)session.get(DLFileVersion.class,
 							dlFileVersion.getPrimaryKey());
 
-					if (dlFileVersionHBM != null) {
-						dlFileVersionHBM.setCompanyId(dlFileVersion.getCompanyId());
-						dlFileVersionHBM.setUserId(dlFileVersion.getUserId());
-						dlFileVersionHBM.setUserName(dlFileVersion.getUserName());
-						dlFileVersionHBM.setCreateDate(dlFileVersion.getCreateDate());
-						dlFileVersionHBM.setSize(dlFileVersion.getSize());
+					if (dlFileVersionModel != null) {
+						dlFileVersionModel.setCompanyId(dlFileVersion.getCompanyId());
+						dlFileVersionModel.setUserId(dlFileVersion.getUserId());
+						dlFileVersionModel.setUserName(dlFileVersion.getUserName());
+						dlFileVersionModel.setCreateDate(dlFileVersion.getCreateDate());
+						dlFileVersionModel.setSize(dlFileVersion.getSize());
 						session.flush();
 					}
 					else {
-						dlFileVersionHBM = new DLFileVersionHBM();
-						dlFileVersionHBM.setFolderId(dlFileVersion.getFolderId());
-						dlFileVersionHBM.setName(dlFileVersion.getName());
-						dlFileVersionHBM.setVersion(dlFileVersion.getVersion());
-						dlFileVersionHBM.setCompanyId(dlFileVersion.getCompanyId());
-						dlFileVersionHBM.setUserId(dlFileVersion.getUserId());
-						dlFileVersionHBM.setUserName(dlFileVersion.getUserName());
-						dlFileVersionHBM.setCreateDate(dlFileVersion.getCreateDate());
-						dlFileVersionHBM.setSize(dlFileVersion.getSize());
-						session.save(dlFileVersionHBM);
+						dlFileVersionModel = new DLFileVersion();
+						dlFileVersionModel.setFolderId(dlFileVersion.getFolderId());
+						dlFileVersionModel.setName(dlFileVersion.getName());
+						dlFileVersionModel.setVersion(dlFileVersion.getVersion());
+						dlFileVersionModel.setCompanyId(dlFileVersion.getCompanyId());
+						dlFileVersionModel.setUserId(dlFileVersion.getUserId());
+						dlFileVersionModel.setUserName(dlFileVersion.getUserName());
+						dlFileVersionModel.setCreateDate(dlFileVersion.getCreateDate());
+						dlFileVersionModel.setSize(dlFileVersion.getSize());
+						session.save(dlFileVersionModel);
 						session.flush();
 					}
 				}
@@ -153,18 +152,17 @@ public class DLFileVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion findByPrimaryKey(
-		DLFileVersionPK dlFileVersionPK)
+	public DLFileVersion findByPrimaryKey(DLFileVersionPK dlFileVersionPK)
 		throws NoSuchFileVersionException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			DLFileVersionHBM dlFileVersionHBM = (DLFileVersionHBM)session.get(DLFileVersionHBM.class,
+			DLFileVersion dlFileVersion = (DLFileVersion)session.get(DLFileVersion.class,
 					dlFileVersionPK);
 
-			if (dlFileVersionHBM == null) {
+			if (dlFileVersion == null) {
 				_log.warn("No DLFileVersion exists with the primary key " +
 					dlFileVersionPK.toString());
 				throw new NoSuchFileVersionException(
@@ -172,7 +170,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 					dlFileVersionPK.toString());
 			}
 
-			return DLFileVersionHBMUtil.model(dlFileVersionHBM);
+			return dlFileVersion;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -191,10 +189,10 @@ public class DLFileVersionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM DLFileVersion IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionHBM WHERE ");
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
 
 			if (folderId == null) {
-				query.append("folderId is null");
+				query.append("folderId IS NULL");
 			}
 			else {
 				query.append("folderId = ?");
@@ -203,7 +201,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -226,13 +224,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 				q.setString(queryPos++, name);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				DLFileVersionHBM dlFileVersionHBM = (DLFileVersionHBM)itr.next();
-				list.add(DLFileVersionHBMUtil.model(dlFileVersionHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -258,10 +250,10 @@ public class DLFileVersionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM DLFileVersion IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionHBM WHERE ");
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
 
 			if (folderId == null) {
-				query.append("folderId is null");
+				query.append("folderId IS NULL");
 			}
 			else {
 				query.append("folderId = ?");
@@ -270,7 +262,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -299,15 +291,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 				q.setString(queryPos++, name);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				DLFileVersionHBM dlFileVersionHBM = (DLFileVersionHBM)itr.next();
-				list.add(DLFileVersionHBMUtil.model(dlFileVersionHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -317,8 +301,8 @@ public class DLFileVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion findByF_N_First(
-		String folderId, String name, OrderByComparator obc)
+	public DLFileVersion findByF_N_First(String folderId, String name,
+		OrderByComparator obc)
 		throws NoSuchFileVersionException, SystemException {
 		List list = findByF_N(folderId, name, 0, 1, obc);
 
@@ -334,12 +318,12 @@ public class DLFileVersionPersistence extends BasePersistence {
 			throw new NoSuchFileVersionException(msg);
 		}
 		else {
-			return (com.liferay.portlet.documentlibrary.model.DLFileVersion)list.get(0);
+			return (DLFileVersion)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion findByF_N_Last(
-		String folderId, String name, OrderByComparator obc)
+	public DLFileVersion findByF_N_Last(String folderId, String name,
+		OrderByComparator obc)
 		throws NoSuchFileVersionException, SystemException {
 		int count = countByF_N(folderId, name);
 		List list = findByF_N(folderId, name, count - 1, count, obc);
@@ -356,15 +340,15 @@ public class DLFileVersionPersistence extends BasePersistence {
 			throw new NoSuchFileVersionException(msg);
 		}
 		else {
-			return (com.liferay.portlet.documentlibrary.model.DLFileVersion)list.get(0);
+			return (DLFileVersion)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion[] findByF_N_PrevAndNext(
+	public DLFileVersion[] findByF_N_PrevAndNext(
 		DLFileVersionPK dlFileVersionPK, String folderId, String name,
 		OrderByComparator obc)
 		throws NoSuchFileVersionException, SystemException {
-		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion = findByPrimaryKey(dlFileVersionPK);
+		DLFileVersion dlFileVersion = findByPrimaryKey(dlFileVersionPK);
 		int count = countByF_N(folderId, name);
 		Session session = null;
 
@@ -373,10 +357,10 @@ public class DLFileVersionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM DLFileVersion IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionHBM WHERE ");
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
 
 			if (folderId == null) {
-				query.append("folderId is null");
+				query.append("folderId IS NULL");
 			}
 			else {
 				query.append("folderId = ?");
@@ -385,7 +369,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -415,11 +399,11 @@ public class DLFileVersionPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					dlFileVersion, DLFileVersionHBMUtil.getInstance());
-			com.liferay.portlet.documentlibrary.model.DLFileVersion[] array = new com.liferay.portlet.documentlibrary.model.DLFileVersion[3];
-			array[0] = (com.liferay.portlet.documentlibrary.model.DLFileVersion)objArray[0];
-			array[1] = (com.liferay.portlet.documentlibrary.model.DLFileVersion)objArray[1];
-			array[2] = (com.liferay.portlet.documentlibrary.model.DLFileVersion)objArray[2];
+					dlFileVersion);
+			DLFileVersion[] array = new DLFileVersion[3];
+			array[0] = (DLFileVersion)objArray[0];
+			array[1] = (DLFileVersion)objArray[1];
+			array[2] = (DLFileVersion)objArray[2];
 
 			return array;
 		}
@@ -439,22 +423,15 @@ public class DLFileVersionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM DLFileVersion IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionHBM ");
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion ");
 			query.append("ORDER BY ");
 			query.append("folderId DESC").append(", ");
 			query.append("name DESC").append(", ");
 			query.append("version DESC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				DLFileVersionHBM dlFileVersionHBM = (DLFileVersionHBM)itr.next();
-				list.add(DLFileVersionHBMUtil.model(dlFileVersionHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -473,10 +450,10 @@ public class DLFileVersionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM DLFileVersion IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionHBM WHERE ");
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
 
 			if (folderId == null) {
-				query.append("folderId is null");
+				query.append("folderId IS NULL");
 			}
 			else {
 				query.append("folderId = ?");
@@ -485,7 +462,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -511,8 +488,8 @@ public class DLFileVersionPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				DLFileVersionHBM dlFileVersionHBM = (DLFileVersionHBM)itr.next();
-				session.delete(dlFileVersionHBM);
+				DLFileVersion dlFileVersion = (DLFileVersion)itr.next();
+				session.delete(dlFileVersion);
 			}
 
 			session.flush();
@@ -535,10 +512,10 @@ public class DLFileVersionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM DLFileVersion IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionHBM WHERE ");
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
 
 			if (folderId == null) {
-				query.append("folderId is null");
+				query.append("folderId IS NULL");
 			}
 			else {
 				query.append("folderId = ?");
@@ -547,7 +524,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -584,6 +561,9 @@ public class DLFileVersionPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(DLFileVersionPersistence.class);

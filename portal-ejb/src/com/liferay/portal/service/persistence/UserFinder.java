@@ -33,7 +33,6 @@ import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -142,8 +141,6 @@ public class UserFinder {
 		lastName = StringUtil.lowerCase(lastName);
 		emailAddress = StringUtil.lowerCase(emailAddress);
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -157,7 +154,7 @@ public class UserFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("User_", UserHBM.class);
+			q.addEntity("User_", User.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -173,16 +170,7 @@ public class UserFinder {
 			qPos.add(emailAddress);
 			qPos.add(active);
 
-			Iterator itr = QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				UserHBM userHBM = (UserHBM)itr.next();
-
-				User user = UserHBMUtil.model(userHBM);
-
-				list.add(user);
-			}
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -190,8 +178,6 @@ public class UserFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 	private static String _getJoin(Map params) {

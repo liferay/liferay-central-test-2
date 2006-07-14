@@ -37,13 +37,11 @@ import java.rmi.RemoteException;
  *
  */
 public class OrganizationServiceSoap {
-	public static boolean addGroupOrganizations(java.lang.String groupId,
+	public static void addGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds) throws RemoteException {
 		try {
-			boolean returnValue = OrganizationServiceUtil.addGroupOrganizations(groupId,
-					organizationIds);
-
-			return returnValue;
+			OrganizationServiceUtil.addGroupOrganizations(groupId,
+				organizationIds);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -122,13 +120,11 @@ public class OrganizationServiceSoap {
 		}
 	}
 
-	public static boolean unsetGroupOrganizations(java.lang.String groupId,
+	public static void unsetGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds) throws RemoteException {
 		try {
-			boolean returnValue = OrganizationServiceUtil.unsetGroupOrganizations(groupId,
-					organizationIds);
-
-			return returnValue;
+			OrganizationServiceUtil.unsetGroupOrganizations(groupId,
+				organizationIds);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);

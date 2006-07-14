@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.journal.NoSuchStructureException;
+import com.liferay.portlet.journal.model.JournalStructure;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,27 +50,25 @@ import java.util.List;
  *
  */
 public class JournalStructurePersistence extends BasePersistence {
-	public com.liferay.portlet.journal.model.JournalStructure create(
-		JournalStructurePK journalStructurePK) {
-		JournalStructureHBM journalStructureHBM = new JournalStructureHBM();
-		journalStructureHBM.setNew(true);
-		journalStructureHBM.setPrimaryKey(journalStructurePK);
+	public JournalStructure create(JournalStructurePK journalStructurePK) {
+		JournalStructure journalStructure = new JournalStructure();
+		journalStructure.setNew(true);
+		journalStructure.setPrimaryKey(journalStructurePK);
 
-		return JournalStructureHBMUtil.model(journalStructureHBM);
+		return journalStructure;
 	}
 
-	public com.liferay.portlet.journal.model.JournalStructure remove(
-		JournalStructurePK journalStructurePK)
+	public JournalStructure remove(JournalStructurePK journalStructurePK)
 		throws NoSuchStructureException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			JournalStructureHBM journalStructureHBM = (JournalStructureHBM)session.get(JournalStructureHBM.class,
+			JournalStructure journalStructure = (JournalStructure)session.get(JournalStructure.class,
 					journalStructurePK);
 
-			if (journalStructureHBM == null) {
+			if (journalStructure == null) {
 				_log.warn("No JournalStructure exists with the primary key " +
 					journalStructurePK.toString());
 				throw new NoSuchStructureException(
@@ -77,10 +76,10 @@ public class JournalStructurePersistence extends BasePersistence {
 					journalStructurePK.toString());
 			}
 
-			session.delete(journalStructureHBM);
+			session.delete(journalStructure);
 			session.flush();
 
-			return JournalStructureHBMUtil.model(journalStructureHBM);
+			return journalStructure;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -100,48 +99,48 @@ public class JournalStructurePersistence extends BasePersistence {
 				session = openSession();
 
 				if (journalStructure.isNew()) {
-					JournalStructureHBM journalStructureHBM = new JournalStructureHBM();
-					journalStructureHBM.setCompanyId(journalStructure.getCompanyId());
-					journalStructureHBM.setStructureId(journalStructure.getStructureId());
-					journalStructureHBM.setGroupId(journalStructure.getGroupId());
-					journalStructureHBM.setUserId(journalStructure.getUserId());
-					journalStructureHBM.setUserName(journalStructure.getUserName());
-					journalStructureHBM.setCreateDate(journalStructure.getCreateDate());
-					journalStructureHBM.setModifiedDate(journalStructure.getModifiedDate());
-					journalStructureHBM.setName(journalStructure.getName());
-					journalStructureHBM.setDescription(journalStructure.getDescription());
-					journalStructureHBM.setXsd(journalStructure.getXsd());
-					session.save(journalStructureHBM);
+					JournalStructure journalStructureModel = new JournalStructure();
+					journalStructureModel.setCompanyId(journalStructure.getCompanyId());
+					journalStructureModel.setStructureId(journalStructure.getStructureId());
+					journalStructureModel.setGroupId(journalStructure.getGroupId());
+					journalStructureModel.setUserId(journalStructure.getUserId());
+					journalStructureModel.setUserName(journalStructure.getUserName());
+					journalStructureModel.setCreateDate(journalStructure.getCreateDate());
+					journalStructureModel.setModifiedDate(journalStructure.getModifiedDate());
+					journalStructureModel.setName(journalStructure.getName());
+					journalStructureModel.setDescription(journalStructure.getDescription());
+					journalStructureModel.setXsd(journalStructure.getXsd());
+					session.save(journalStructureModel);
 					session.flush();
 				}
 				else {
-					JournalStructureHBM journalStructureHBM = (JournalStructureHBM)session.get(JournalStructureHBM.class,
+					JournalStructure journalStructureModel = (JournalStructure)session.get(JournalStructure.class,
 							journalStructure.getPrimaryKey());
 
-					if (journalStructureHBM != null) {
-						journalStructureHBM.setGroupId(journalStructure.getGroupId());
-						journalStructureHBM.setUserId(journalStructure.getUserId());
-						journalStructureHBM.setUserName(journalStructure.getUserName());
-						journalStructureHBM.setCreateDate(journalStructure.getCreateDate());
-						journalStructureHBM.setModifiedDate(journalStructure.getModifiedDate());
-						journalStructureHBM.setName(journalStructure.getName());
-						journalStructureHBM.setDescription(journalStructure.getDescription());
-						journalStructureHBM.setXsd(journalStructure.getXsd());
+					if (journalStructureModel != null) {
+						journalStructureModel.setGroupId(journalStructure.getGroupId());
+						journalStructureModel.setUserId(journalStructure.getUserId());
+						journalStructureModel.setUserName(journalStructure.getUserName());
+						journalStructureModel.setCreateDate(journalStructure.getCreateDate());
+						journalStructureModel.setModifiedDate(journalStructure.getModifiedDate());
+						journalStructureModel.setName(journalStructure.getName());
+						journalStructureModel.setDescription(journalStructure.getDescription());
+						journalStructureModel.setXsd(journalStructure.getXsd());
 						session.flush();
 					}
 					else {
-						journalStructureHBM = new JournalStructureHBM();
-						journalStructureHBM.setCompanyId(journalStructure.getCompanyId());
-						journalStructureHBM.setStructureId(journalStructure.getStructureId());
-						journalStructureHBM.setGroupId(journalStructure.getGroupId());
-						journalStructureHBM.setUserId(journalStructure.getUserId());
-						journalStructureHBM.setUserName(journalStructure.getUserName());
-						journalStructureHBM.setCreateDate(journalStructure.getCreateDate());
-						journalStructureHBM.setModifiedDate(journalStructure.getModifiedDate());
-						journalStructureHBM.setName(journalStructure.getName());
-						journalStructureHBM.setDescription(journalStructure.getDescription());
-						journalStructureHBM.setXsd(journalStructure.getXsd());
-						session.save(journalStructureHBM);
+						journalStructureModel = new JournalStructure();
+						journalStructureModel.setCompanyId(journalStructure.getCompanyId());
+						journalStructureModel.setStructureId(journalStructure.getStructureId());
+						journalStructureModel.setGroupId(journalStructure.getGroupId());
+						journalStructureModel.setUserId(journalStructure.getUserId());
+						journalStructureModel.setUserName(journalStructure.getUserName());
+						journalStructureModel.setCreateDate(journalStructure.getCreateDate());
+						journalStructureModel.setModifiedDate(journalStructure.getModifiedDate());
+						journalStructureModel.setName(journalStructure.getName());
+						journalStructureModel.setDescription(journalStructure.getDescription());
+						journalStructureModel.setXsd(journalStructure.getXsd());
+						session.save(journalStructureModel);
 						session.flush();
 					}
 				}
@@ -160,7 +159,7 @@ public class JournalStructurePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalStructure findByPrimaryKey(
+	public JournalStructure findByPrimaryKey(
 		JournalStructurePK journalStructurePK)
 		throws NoSuchStructureException, SystemException {
 		Session session = null;
@@ -168,10 +167,10 @@ public class JournalStructurePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			JournalStructureHBM journalStructureHBM = (JournalStructureHBM)session.get(JournalStructureHBM.class,
+			JournalStructure journalStructure = (JournalStructure)session.get(JournalStructure.class,
 					journalStructurePK);
 
-			if (journalStructureHBM == null) {
+			if (journalStructure == null) {
 				_log.warn("No JournalStructure exists with the primary key " +
 					journalStructurePK.toString());
 				throw new NoSuchStructureException(
@@ -179,7 +178,7 @@ public class JournalStructurePersistence extends BasePersistence {
 					journalStructurePK.toString());
 			}
 
-			return JournalStructureHBMUtil.model(journalStructureHBM);
+			return journalStructure;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -197,10 +196,10 @@ public class JournalStructurePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalStructure IN CLASS com.liferay.portlet.journal.service.persistence.JournalStructureHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -217,13 +216,7 @@ public class JournalStructurePersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				JournalStructureHBM journalStructureHBM = (JournalStructureHBM)itr.next();
-				list.add(JournalStructureHBMUtil.model(journalStructureHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -249,10 +242,10 @@ public class JournalStructurePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalStructure IN CLASS com.liferay.portlet.journal.service.persistence.JournalStructureHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -275,15 +268,7 @@ public class JournalStructurePersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				JournalStructureHBM journalStructureHBM = (JournalStructureHBM)itr.next();
-				list.add(JournalStructureHBMUtil.model(journalStructureHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -293,9 +278,8 @@ public class JournalStructurePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalStructure findByGroupId_First(
-		String groupId, OrderByComparator obc)
-		throws NoSuchStructureException, SystemException {
+	public JournalStructure findByGroupId_First(String groupId,
+		OrderByComparator obc) throws NoSuchStructureException, SystemException {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -307,13 +291,12 @@ public class JournalStructurePersistence extends BasePersistence {
 			throw new NoSuchStructureException(msg);
 		}
 		else {
-			return (com.liferay.portlet.journal.model.JournalStructure)list.get(0);
+			return (JournalStructure)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalStructure findByGroupId_Last(
-		String groupId, OrderByComparator obc)
-		throws NoSuchStructureException, SystemException {
+	public JournalStructure findByGroupId_Last(String groupId,
+		OrderByComparator obc) throws NoSuchStructureException, SystemException {
 		int count = countByGroupId(groupId);
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
@@ -326,14 +309,14 @@ public class JournalStructurePersistence extends BasePersistence {
 			throw new NoSuchStructureException(msg);
 		}
 		else {
-			return (com.liferay.portlet.journal.model.JournalStructure)list.get(0);
+			return (JournalStructure)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalStructure[] findByGroupId_PrevAndNext(
+	public JournalStructure[] findByGroupId_PrevAndNext(
 		JournalStructurePK journalStructurePK, String groupId,
 		OrderByComparator obc) throws NoSuchStructureException, SystemException {
-		com.liferay.portlet.journal.model.JournalStructure journalStructure = findByPrimaryKey(journalStructurePK);
+		JournalStructure journalStructure = findByPrimaryKey(journalStructurePK);
 		int count = countByGroupId(groupId);
 		Session session = null;
 
@@ -342,10 +325,10 @@ public class JournalStructurePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalStructure IN CLASS com.liferay.portlet.journal.service.persistence.JournalStructureHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -369,11 +352,11 @@ public class JournalStructurePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalStructure, JournalStructureHBMUtil.getInstance());
-			com.liferay.portlet.journal.model.JournalStructure[] array = new com.liferay.portlet.journal.model.JournalStructure[3];
-			array[0] = (com.liferay.portlet.journal.model.JournalStructure)objArray[0];
-			array[1] = (com.liferay.portlet.journal.model.JournalStructure)objArray[1];
-			array[2] = (com.liferay.portlet.journal.model.JournalStructure)objArray[2];
+					journalStructure);
+			JournalStructure[] array = new JournalStructure[3];
+			array[0] = (JournalStructure)objArray[0];
+			array[1] = (JournalStructure)objArray[1];
+			array[2] = (JournalStructure)objArray[2];
 
 			return array;
 		}
@@ -393,20 +376,13 @@ public class JournalStructurePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalStructure IN CLASS com.liferay.portlet.journal.service.persistence.JournalStructureHBM ");
+				"FROM com.liferay.portlet.journal.model.JournalStructure ");
 			query.append("ORDER BY ");
 			query.append("structureId ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				JournalStructureHBM journalStructureHBM = (JournalStructureHBM)itr.next();
-				list.add(JournalStructureHBMUtil.model(journalStructureHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -424,10 +400,10 @@ public class JournalStructurePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalStructure IN CLASS com.liferay.portlet.journal.service.persistence.JournalStructureHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -447,8 +423,8 @@ public class JournalStructurePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				JournalStructureHBM journalStructureHBM = (JournalStructureHBM)itr.next();
-				session.delete(journalStructureHBM);
+				JournalStructure journalStructure = (JournalStructure)itr.next();
+				session.delete(journalStructure);
 			}
 
 			session.flush();
@@ -470,10 +446,10 @@ public class JournalStructurePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM JournalStructure IN CLASS com.liferay.portlet.journal.service.persistence.JournalStructureHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -506,6 +482,9 @@ public class JournalStructurePersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(JournalStructurePersistence.class);

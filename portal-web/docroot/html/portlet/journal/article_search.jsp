@@ -113,7 +113,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 			<c:otherwise>
 
 				<%
-				List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, null, -1, -1);
+				List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 				%>
 
 				<select name="<portlet:namespace /><%= ArticleDisplayTerms.GROUP_ID %>">

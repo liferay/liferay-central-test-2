@@ -129,6 +129,10 @@ public class AccountUtil {
 		return getPersistence().findAll();
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static AccountPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		AccountUtil util = (AccountUtil)ctx.getBean(CLASS_NAME);

@@ -25,8 +25,11 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
 import com.liferay.portal.service.spring.CompanyService;
+import com.liferay.portal.service.spring.RoleLocalServiceUtil;
 
 import java.io.File;
 
@@ -46,6 +49,12 @@ public class CompanyServiceImpl
 			String size)
 		throws PortalException, SystemException {
 
+		if (!RoleLocalServiceUtil.hasUserRole(
+				getUserId(), companyId, Role.ADMINISTRATOR)) {
+
+			throw new PrincipalException();
+		}
+
 		return CompanyLocalServiceUtil.updateCompany(
 			companyId, portalURL, homeURL, mx, name, legalName, legalId,
 			legalType, sicCode, tickerSymbol, industry, type, size);
@@ -56,12 +65,24 @@ public class CompanyServiceImpl
 			String resolution)
 		throws PortalException, SystemException {
 
+		if (!RoleLocalServiceUtil.hasUserRole(
+				getUserId(), companyId, Role.ADMINISTRATOR)) {
+
+			throw new PrincipalException();
+		}
+
 		CompanyLocalServiceUtil.updateDisplay(
 			companyId, languageId, timeZoneId, resolution);
 	}
 
 	public void updateLogo(String companyId, File file)
 		throws PortalException, SystemException {
+
+		if (!RoleLocalServiceUtil.hasUserRole(
+				getUserId(), companyId, Role.ADMINISTRATOR)) {
+
+			throw new PrincipalException();
+		}
 
 		CompanyLocalServiceUtil.updateLogo(companyId, file);
 	}
@@ -70,6 +91,12 @@ public class CompanyServiceImpl
 			String companyId, String authType, boolean autoLogin,
 			boolean strangers)
 		throws PortalException, SystemException {
+
+		if (!RoleLocalServiceUtil.hasUserRole(
+				getUserId(), companyId, Role.ADMINISTRATOR)) {
+
+			throw new PrincipalException();
+		}
 
 		CompanyLocalServiceUtil.updateSecurity(
 			companyId, authType, autoLogin, strangers);

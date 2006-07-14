@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.messageboards.NoSuchStatsUserException;
+import com.liferay.portlet.messageboards.model.MBStatsUser;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,27 +50,25 @@ import java.util.List;
  *
  */
 public class MBStatsUserPersistence extends BasePersistence {
-	public com.liferay.portlet.messageboards.model.MBStatsUser create(
-		MBStatsUserPK mbStatsUserPK) {
-		MBStatsUserHBM mbStatsUserHBM = new MBStatsUserHBM();
-		mbStatsUserHBM.setNew(true);
-		mbStatsUserHBM.setPrimaryKey(mbStatsUserPK);
+	public MBStatsUser create(MBStatsUserPK mbStatsUserPK) {
+		MBStatsUser mbStatsUser = new MBStatsUser();
+		mbStatsUser.setNew(true);
+		mbStatsUser.setPrimaryKey(mbStatsUserPK);
 
-		return MBStatsUserHBMUtil.model(mbStatsUserHBM);
+		return mbStatsUser;
 	}
 
-	public com.liferay.portlet.messageboards.model.MBStatsUser remove(
-		MBStatsUserPK mbStatsUserPK)
+	public MBStatsUser remove(MBStatsUserPK mbStatsUserPK)
 		throws NoSuchStatsUserException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			MBStatsUserHBM mbStatsUserHBM = (MBStatsUserHBM)session.get(MBStatsUserHBM.class,
+			MBStatsUser mbStatsUser = (MBStatsUser)session.get(MBStatsUser.class,
 					mbStatsUserPK);
 
-			if (mbStatsUserHBM == null) {
+			if (mbStatsUser == null) {
 				_log.warn("No MBStatsUser exists with the primary key " +
 					mbStatsUserPK.toString());
 				throw new NoSuchStatsUserException(
@@ -77,10 +76,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 					mbStatsUserPK.toString());
 			}
 
-			session.delete(mbStatsUserHBM);
+			session.delete(mbStatsUser);
 			session.flush();
 
-			return MBStatsUserHBMUtil.model(mbStatsUserHBM);
+			return mbStatsUser;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -100,30 +99,30 @@ public class MBStatsUserPersistence extends BasePersistence {
 				session = openSession();
 
 				if (mbStatsUser.isNew()) {
-					MBStatsUserHBM mbStatsUserHBM = new MBStatsUserHBM();
-					mbStatsUserHBM.setGroupId(mbStatsUser.getGroupId());
-					mbStatsUserHBM.setUserId(mbStatsUser.getUserId());
-					mbStatsUserHBM.setMessageCount(mbStatsUser.getMessageCount());
-					mbStatsUserHBM.setLastPostDate(mbStatsUser.getLastPostDate());
-					session.save(mbStatsUserHBM);
+					MBStatsUser mbStatsUserModel = new MBStatsUser();
+					mbStatsUserModel.setGroupId(mbStatsUser.getGroupId());
+					mbStatsUserModel.setUserId(mbStatsUser.getUserId());
+					mbStatsUserModel.setMessageCount(mbStatsUser.getMessageCount());
+					mbStatsUserModel.setLastPostDate(mbStatsUser.getLastPostDate());
+					session.save(mbStatsUserModel);
 					session.flush();
 				}
 				else {
-					MBStatsUserHBM mbStatsUserHBM = (MBStatsUserHBM)session.get(MBStatsUserHBM.class,
+					MBStatsUser mbStatsUserModel = (MBStatsUser)session.get(MBStatsUser.class,
 							mbStatsUser.getPrimaryKey());
 
-					if (mbStatsUserHBM != null) {
-						mbStatsUserHBM.setMessageCount(mbStatsUser.getMessageCount());
-						mbStatsUserHBM.setLastPostDate(mbStatsUser.getLastPostDate());
+					if (mbStatsUserModel != null) {
+						mbStatsUserModel.setMessageCount(mbStatsUser.getMessageCount());
+						mbStatsUserModel.setLastPostDate(mbStatsUser.getLastPostDate());
 						session.flush();
 					}
 					else {
-						mbStatsUserHBM = new MBStatsUserHBM();
-						mbStatsUserHBM.setGroupId(mbStatsUser.getGroupId());
-						mbStatsUserHBM.setUserId(mbStatsUser.getUserId());
-						mbStatsUserHBM.setMessageCount(mbStatsUser.getMessageCount());
-						mbStatsUserHBM.setLastPostDate(mbStatsUser.getLastPostDate());
-						session.save(mbStatsUserHBM);
+						mbStatsUserModel = new MBStatsUser();
+						mbStatsUserModel.setGroupId(mbStatsUser.getGroupId());
+						mbStatsUserModel.setUserId(mbStatsUser.getUserId());
+						mbStatsUserModel.setMessageCount(mbStatsUser.getMessageCount());
+						mbStatsUserModel.setLastPostDate(mbStatsUser.getLastPostDate());
+						session.save(mbStatsUserModel);
 						session.flush();
 					}
 				}
@@ -142,18 +141,17 @@ public class MBStatsUserPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBStatsUser findByPrimaryKey(
-		MBStatsUserPK mbStatsUserPK)
+	public MBStatsUser findByPrimaryKey(MBStatsUserPK mbStatsUserPK)
 		throws NoSuchStatsUserException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			MBStatsUserHBM mbStatsUserHBM = (MBStatsUserHBM)session.get(MBStatsUserHBM.class,
+			MBStatsUser mbStatsUser = (MBStatsUser)session.get(MBStatsUser.class,
 					mbStatsUserPK);
 
-			if (mbStatsUserHBM == null) {
+			if (mbStatsUser == null) {
 				_log.warn("No MBStatsUser exists with the primary key " +
 					mbStatsUserPK.toString());
 				throw new NoSuchStatsUserException(
@@ -161,7 +159,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 					mbStatsUserPK.toString());
 			}
 
-			return MBStatsUserHBMUtil.model(mbStatsUserHBM);
+			return mbStatsUser;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -179,10 +177,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBStatsUser IN CLASS com.liferay.portlet.messageboards.service.persistence.MBStatsUserHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -199,13 +197,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				MBStatsUserHBM mbStatsUserHBM = (MBStatsUserHBM)itr.next();
-				list.add(MBStatsUserHBMUtil.model(mbStatsUserHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -231,10 +223,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBStatsUser IN CLASS com.liferay.portlet.messageboards.service.persistence.MBStatsUserHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -257,15 +249,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				MBStatsUserHBM mbStatsUserHBM = (MBStatsUserHBM)itr.next();
-				list.add(MBStatsUserHBMUtil.model(mbStatsUserHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -275,8 +259,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBStatsUser findByGroupId_First(
-		String groupId, OrderByComparator obc)
+	public MBStatsUser findByGroupId_First(String groupId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
@@ -289,12 +272,11 @@ public class MBStatsUserPersistence extends BasePersistence {
 			throw new NoSuchStatsUserException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBStatsUser)list.get(0);
+			return (MBStatsUser)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBStatsUser findByGroupId_Last(
-		String groupId, OrderByComparator obc)
+	public MBStatsUser findByGroupId_Last(String groupId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
 		int count = countByGroupId(groupId);
 		List list = findByGroupId(groupId, count - 1, count, obc);
@@ -308,14 +290,14 @@ public class MBStatsUserPersistence extends BasePersistence {
 			throw new NoSuchStatsUserException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBStatsUser)list.get(0);
+			return (MBStatsUser)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBStatsUser[] findByGroupId_PrevAndNext(
+	public MBStatsUser[] findByGroupId_PrevAndNext(
 		MBStatsUserPK mbStatsUserPK, String groupId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
-		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser = findByPrimaryKey(mbStatsUserPK);
+		MBStatsUser mbStatsUser = findByPrimaryKey(mbStatsUserPK);
 		int count = countByGroupId(groupId);
 		Session session = null;
 
@@ -324,10 +306,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBStatsUser IN CLASS com.liferay.portlet.messageboards.service.persistence.MBStatsUserHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -351,11 +333,11 @@ public class MBStatsUserPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbStatsUser, MBStatsUserHBMUtil.getInstance());
-			com.liferay.portlet.messageboards.model.MBStatsUser[] array = new com.liferay.portlet.messageboards.model.MBStatsUser[3];
-			array[0] = (com.liferay.portlet.messageboards.model.MBStatsUser)objArray[0];
-			array[1] = (com.liferay.portlet.messageboards.model.MBStatsUser)objArray[1];
-			array[2] = (com.liferay.portlet.messageboards.model.MBStatsUser)objArray[2];
+					mbStatsUser);
+			MBStatsUser[] array = new MBStatsUser[3];
+			array[0] = (MBStatsUser)objArray[0];
+			array[1] = (MBStatsUser)objArray[1];
+			array[2] = (MBStatsUser)objArray[2];
 
 			return array;
 		}
@@ -375,10 +357,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBStatsUser IN CLASS com.liferay.portlet.messageboards.service.persistence.MBStatsUserHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -395,13 +377,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				MBStatsUserHBM mbStatsUserHBM = (MBStatsUserHBM)itr.next();
-				list.add(MBStatsUserHBMUtil.model(mbStatsUserHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -427,10 +403,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBStatsUser IN CLASS com.liferay.portlet.messageboards.service.persistence.MBStatsUserHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -453,15 +429,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				MBStatsUserHBM mbStatsUserHBM = (MBStatsUserHBM)itr.next();
-				list.add(MBStatsUserHBMUtil.model(mbStatsUserHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -471,8 +439,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBStatsUser findByUserId_First(
-		String userId, OrderByComparator obc)
+	public MBStatsUser findByUserId_First(String userId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
 		List list = findByUserId(userId, 0, 1, obc);
 
@@ -485,12 +452,11 @@ public class MBStatsUserPersistence extends BasePersistence {
 			throw new NoSuchStatsUserException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBStatsUser)list.get(0);
+			return (MBStatsUser)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBStatsUser findByUserId_Last(
-		String userId, OrderByComparator obc)
+	public MBStatsUser findByUserId_Last(String userId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
 		int count = countByUserId(userId);
 		List list = findByUserId(userId, count - 1, count, obc);
@@ -504,14 +470,14 @@ public class MBStatsUserPersistence extends BasePersistence {
 			throw new NoSuchStatsUserException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBStatsUser)list.get(0);
+			return (MBStatsUser)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBStatsUser[] findByUserId_PrevAndNext(
-		MBStatsUserPK mbStatsUserPK, String userId, OrderByComparator obc)
+	public MBStatsUser[] findByUserId_PrevAndNext(MBStatsUserPK mbStatsUserPK,
+		String userId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
-		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser = findByPrimaryKey(mbStatsUserPK);
+		MBStatsUser mbStatsUser = findByPrimaryKey(mbStatsUserPK);
 		int count = countByUserId(userId);
 		Session session = null;
 
@@ -520,10 +486,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBStatsUser IN CLASS com.liferay.portlet.messageboards.service.persistence.MBStatsUserHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -547,11 +513,11 @@ public class MBStatsUserPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbStatsUser, MBStatsUserHBMUtil.getInstance());
-			com.liferay.portlet.messageboards.model.MBStatsUser[] array = new com.liferay.portlet.messageboards.model.MBStatsUser[3];
-			array[0] = (com.liferay.portlet.messageboards.model.MBStatsUser)objArray[0];
-			array[1] = (com.liferay.portlet.messageboards.model.MBStatsUser)objArray[1];
-			array[2] = (com.liferay.portlet.messageboards.model.MBStatsUser)objArray[2];
+					mbStatsUser);
+			MBStatsUser[] array = new MBStatsUser[3];
+			array[0] = (MBStatsUser)objArray[0];
+			array[1] = (MBStatsUser)objArray[1];
+			array[2] = (MBStatsUser)objArray[2];
 
 			return array;
 		}
@@ -572,10 +538,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBStatsUser IN CLASS com.liferay.portlet.messageboards.service.persistence.MBStatsUserHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -596,13 +562,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			q.setInteger(queryPos++, messageCount);
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				MBStatsUserHBM mbStatsUserHBM = (MBStatsUserHBM)itr.next();
-				list.add(MBStatsUserHBMUtil.model(mbStatsUserHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -628,10 +588,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBStatsUser IN CLASS com.liferay.portlet.messageboards.service.persistence.MBStatsUserHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -658,15 +618,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			q.setInteger(queryPos++, messageCount);
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				MBStatsUserHBM mbStatsUserHBM = (MBStatsUserHBM)itr.next();
-				list.add(MBStatsUserHBMUtil.model(mbStatsUserHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -676,9 +628,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBStatsUser findByG_M_First(
-		String groupId, int messageCount, OrderByComparator obc)
-		throws NoSuchStatsUserException, SystemException {
+	public MBStatsUser findByG_M_First(String groupId, int messageCount,
+		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
 		List list = findByG_M(groupId, messageCount, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -693,13 +644,12 @@ public class MBStatsUserPersistence extends BasePersistence {
 			throw new NoSuchStatsUserException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBStatsUser)list.get(0);
+			return (MBStatsUser)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBStatsUser findByG_M_Last(
-		String groupId, int messageCount, OrderByComparator obc)
-		throws NoSuchStatsUserException, SystemException {
+	public MBStatsUser findByG_M_Last(String groupId, int messageCount,
+		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
 		int count = countByG_M(groupId, messageCount);
 		List list = findByG_M(groupId, messageCount, count - 1, count, obc);
 
@@ -715,14 +665,14 @@ public class MBStatsUserPersistence extends BasePersistence {
 			throw new NoSuchStatsUserException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBStatsUser)list.get(0);
+			return (MBStatsUser)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBStatsUser[] findByG_M_PrevAndNext(
-		MBStatsUserPK mbStatsUserPK, String groupId, int messageCount,
-		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
-		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser = findByPrimaryKey(mbStatsUserPK);
+	public MBStatsUser[] findByG_M_PrevAndNext(MBStatsUserPK mbStatsUserPK,
+		String groupId, int messageCount, OrderByComparator obc)
+		throws NoSuchStatsUserException, SystemException {
+		MBStatsUser mbStatsUser = findByPrimaryKey(mbStatsUserPK);
 		int count = countByG_M(groupId, messageCount);
 		Session session = null;
 
@@ -731,10 +681,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBStatsUser IN CLASS com.liferay.portlet.messageboards.service.persistence.MBStatsUserHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -762,11 +712,11 @@ public class MBStatsUserPersistence extends BasePersistence {
 			q.setInteger(queryPos++, messageCount);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbStatsUser, MBStatsUserHBMUtil.getInstance());
-			com.liferay.portlet.messageboards.model.MBStatsUser[] array = new com.liferay.portlet.messageboards.model.MBStatsUser[3];
-			array[0] = (com.liferay.portlet.messageboards.model.MBStatsUser)objArray[0];
-			array[1] = (com.liferay.portlet.messageboards.model.MBStatsUser)objArray[1];
-			array[2] = (com.liferay.portlet.messageboards.model.MBStatsUser)objArray[2];
+					mbStatsUser);
+			MBStatsUser[] array = new MBStatsUser[3];
+			array[0] = (MBStatsUser)objArray[0];
+			array[1] = (MBStatsUser)objArray[1];
+			array[2] = (MBStatsUser)objArray[2];
 
 			return array;
 		}
@@ -786,20 +736,13 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBStatsUser IN CLASS com.liferay.portlet.messageboards.service.persistence.MBStatsUserHBM ");
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser ");
 			query.append("ORDER BY ");
 			query.append("messageCount DESC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				MBStatsUserHBM mbStatsUserHBM = (MBStatsUserHBM)itr.next();
-				list.add(MBStatsUserHBMUtil.model(mbStatsUserHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -817,10 +760,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBStatsUser IN CLASS com.liferay.portlet.messageboards.service.persistence.MBStatsUserHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -840,8 +783,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				MBStatsUserHBM mbStatsUserHBM = (MBStatsUserHBM)itr.next();
-				session.delete(mbStatsUserHBM);
+				MBStatsUser mbStatsUser = (MBStatsUser)itr.next();
+				session.delete(mbStatsUser);
 			}
 
 			session.flush();
@@ -862,10 +805,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBStatsUser IN CLASS com.liferay.portlet.messageboards.service.persistence.MBStatsUserHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -885,8 +828,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				MBStatsUserHBM mbStatsUserHBM = (MBStatsUserHBM)itr.next();
-				session.delete(mbStatsUserHBM);
+				MBStatsUser mbStatsUser = (MBStatsUser)itr.next();
+				session.delete(mbStatsUser);
 			}
 
 			session.flush();
@@ -908,10 +851,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBStatsUser IN CLASS com.liferay.portlet.messageboards.service.persistence.MBStatsUserHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -935,8 +878,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				MBStatsUserHBM mbStatsUserHBM = (MBStatsUserHBM)itr.next();
-				session.delete(mbStatsUserHBM);
+				MBStatsUser mbStatsUser = (MBStatsUser)itr.next();
+				session.delete(mbStatsUser);
 			}
 
 			session.flush();
@@ -958,10 +901,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM MBStatsUser IN CLASS com.liferay.portlet.messageboards.service.persistence.MBStatsUserHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -1005,10 +948,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM MBStatsUser IN CLASS com.liferay.portlet.messageboards.service.persistence.MBStatsUserHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -1053,10 +996,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM MBStatsUser IN CLASS com.liferay.portlet.messageboards.service.persistence.MBStatsUserHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -1093,6 +1036,9 @@ public class MBStatsUserPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(MBStatsUserPersistence.class);

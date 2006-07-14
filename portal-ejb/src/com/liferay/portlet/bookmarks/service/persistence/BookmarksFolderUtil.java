@@ -238,6 +238,10 @@ public class BookmarksFolderUtil {
 		return getPersistence().countByG_P(groupId, parentFolderId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static BookmarksFolderPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		BookmarksFolderUtil util = (BookmarksFolderUtil)ctx.getBean(CLASS_NAME);

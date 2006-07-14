@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPhoneException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Phone;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.util.StringPool;
@@ -48,24 +49,24 @@ import java.util.List;
  *
  */
 public class PhonePersistence extends BasePersistence {
-	public com.liferay.portal.model.Phone create(String phoneId) {
-		PhoneHBM phoneHBM = new PhoneHBM();
-		phoneHBM.setNew(true);
-		phoneHBM.setPrimaryKey(phoneId);
+	public Phone create(String phoneId) {
+		Phone phone = new Phone();
+		phone.setNew(true);
+		phone.setPrimaryKey(phoneId);
 
-		return PhoneHBMUtil.model(phoneHBM);
+		return phone;
 	}
 
-	public com.liferay.portal.model.Phone remove(String phoneId)
+	public Phone remove(String phoneId)
 		throws NoSuchPhoneException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			PhoneHBM phoneHBM = (PhoneHBM)session.get(PhoneHBM.class, phoneId);
+			Phone phone = (Phone)session.get(Phone.class, phoneId);
 
-			if (phoneHBM == null) {
+			if (phone == null) {
 				_log.warn("No Phone exists with the primary key " +
 					phoneId.toString());
 				throw new NoSuchPhoneException(
@@ -73,10 +74,10 @@ public class PhonePersistence extends BasePersistence {
 					phoneId.toString());
 			}
 
-			session.delete(phoneHBM);
+			session.delete(phone);
 			session.flush();
 
-			return PhoneHBMUtil.model(phoneHBM);
+			return phone;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -95,55 +96,55 @@ public class PhonePersistence extends BasePersistence {
 				session = openSession();
 
 				if (phone.isNew()) {
-					PhoneHBM phoneHBM = new PhoneHBM();
-					phoneHBM.setPhoneId(phone.getPhoneId());
-					phoneHBM.setCompanyId(phone.getCompanyId());
-					phoneHBM.setUserId(phone.getUserId());
-					phoneHBM.setUserName(phone.getUserName());
-					phoneHBM.setCreateDate(phone.getCreateDate());
-					phoneHBM.setModifiedDate(phone.getModifiedDate());
-					phoneHBM.setClassName(phone.getClassName());
-					phoneHBM.setClassPK(phone.getClassPK());
-					phoneHBM.setNumber(phone.getNumber());
-					phoneHBM.setExtension(phone.getExtension());
-					phoneHBM.setTypeId(phone.getTypeId());
-					phoneHBM.setPrimary(phone.getPrimary());
-					session.save(phoneHBM);
+					Phone phoneModel = new Phone();
+					phoneModel.setPhoneId(phone.getPhoneId());
+					phoneModel.setCompanyId(phone.getCompanyId());
+					phoneModel.setUserId(phone.getUserId());
+					phoneModel.setUserName(phone.getUserName());
+					phoneModel.setCreateDate(phone.getCreateDate());
+					phoneModel.setModifiedDate(phone.getModifiedDate());
+					phoneModel.setClassName(phone.getClassName());
+					phoneModel.setClassPK(phone.getClassPK());
+					phoneModel.setNumber(phone.getNumber());
+					phoneModel.setExtension(phone.getExtension());
+					phoneModel.setTypeId(phone.getTypeId());
+					phoneModel.setPrimary(phone.getPrimary());
+					session.save(phoneModel);
 					session.flush();
 				}
 				else {
-					PhoneHBM phoneHBM = (PhoneHBM)session.get(PhoneHBM.class,
+					Phone phoneModel = (Phone)session.get(Phone.class,
 							phone.getPrimaryKey());
 
-					if (phoneHBM != null) {
-						phoneHBM.setCompanyId(phone.getCompanyId());
-						phoneHBM.setUserId(phone.getUserId());
-						phoneHBM.setUserName(phone.getUserName());
-						phoneHBM.setCreateDate(phone.getCreateDate());
-						phoneHBM.setModifiedDate(phone.getModifiedDate());
-						phoneHBM.setClassName(phone.getClassName());
-						phoneHBM.setClassPK(phone.getClassPK());
-						phoneHBM.setNumber(phone.getNumber());
-						phoneHBM.setExtension(phone.getExtension());
-						phoneHBM.setTypeId(phone.getTypeId());
-						phoneHBM.setPrimary(phone.getPrimary());
+					if (phoneModel != null) {
+						phoneModel.setCompanyId(phone.getCompanyId());
+						phoneModel.setUserId(phone.getUserId());
+						phoneModel.setUserName(phone.getUserName());
+						phoneModel.setCreateDate(phone.getCreateDate());
+						phoneModel.setModifiedDate(phone.getModifiedDate());
+						phoneModel.setClassName(phone.getClassName());
+						phoneModel.setClassPK(phone.getClassPK());
+						phoneModel.setNumber(phone.getNumber());
+						phoneModel.setExtension(phone.getExtension());
+						phoneModel.setTypeId(phone.getTypeId());
+						phoneModel.setPrimary(phone.getPrimary());
 						session.flush();
 					}
 					else {
-						phoneHBM = new PhoneHBM();
-						phoneHBM.setPhoneId(phone.getPhoneId());
-						phoneHBM.setCompanyId(phone.getCompanyId());
-						phoneHBM.setUserId(phone.getUserId());
-						phoneHBM.setUserName(phone.getUserName());
-						phoneHBM.setCreateDate(phone.getCreateDate());
-						phoneHBM.setModifiedDate(phone.getModifiedDate());
-						phoneHBM.setClassName(phone.getClassName());
-						phoneHBM.setClassPK(phone.getClassPK());
-						phoneHBM.setNumber(phone.getNumber());
-						phoneHBM.setExtension(phone.getExtension());
-						phoneHBM.setTypeId(phone.getTypeId());
-						phoneHBM.setPrimary(phone.getPrimary());
-						session.save(phoneHBM);
+						phoneModel = new Phone();
+						phoneModel.setPhoneId(phone.getPhoneId());
+						phoneModel.setCompanyId(phone.getCompanyId());
+						phoneModel.setUserId(phone.getUserId());
+						phoneModel.setUserName(phone.getUserName());
+						phoneModel.setCreateDate(phone.getCreateDate());
+						phoneModel.setModifiedDate(phone.getModifiedDate());
+						phoneModel.setClassName(phone.getClassName());
+						phoneModel.setClassPK(phone.getClassPK());
+						phoneModel.setNumber(phone.getNumber());
+						phoneModel.setExtension(phone.getExtension());
+						phoneModel.setTypeId(phone.getTypeId());
+						phoneModel.setPrimary(phone.getPrimary());
+						session.save(phoneModel);
 						session.flush();
 					}
 				}
@@ -162,16 +163,16 @@ public class PhonePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Phone findByPrimaryKey(String phoneId)
+	public Phone findByPrimaryKey(String phoneId)
 		throws NoSuchPhoneException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			PhoneHBM phoneHBM = (PhoneHBM)session.get(PhoneHBM.class, phoneId);
+			Phone phone = (Phone)session.get(Phone.class, phoneId);
 
-			if (phoneHBM == null) {
+			if (phone == null) {
 				_log.warn("No Phone exists with the primary key " +
 					phoneId.toString());
 				throw new NoSuchPhoneException(
@@ -179,7 +180,7 @@ public class PhonePersistence extends BasePersistence {
 					phoneId.toString());
 			}
 
-			return PhoneHBMUtil.model(phoneHBM);
+			return phone;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -196,11 +197,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -217,13 +217,7 @@ public class PhonePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				PhoneHBM phoneHBM = (PhoneHBM)itr.next();
-				list.add(PhoneHBMUtil.model(phoneHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -248,11 +242,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -275,15 +268,7 @@ public class PhonePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				PhoneHBM phoneHBM = (PhoneHBM)itr.next();
-				list.add(PhoneHBMUtil.model(phoneHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -293,8 +278,7 @@ public class PhonePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Phone findByCompanyId_First(
-		String companyId, OrderByComparator obc)
+	public Phone findByCompanyId_First(String companyId, OrderByComparator obc)
 		throws NoSuchPhoneException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
@@ -307,12 +291,11 @@ public class PhonePersistence extends BasePersistence {
 			throw new NoSuchPhoneException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Phone)list.get(0);
+			return (Phone)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Phone findByCompanyId_Last(
-		String companyId, OrderByComparator obc)
+	public Phone findByCompanyId_Last(String companyId, OrderByComparator obc)
 		throws NoSuchPhoneException, SystemException {
 		int count = countByCompanyId(companyId);
 		List list = findByCompanyId(companyId, count - 1, count, obc);
@@ -326,14 +309,14 @@ public class PhonePersistence extends BasePersistence {
 			throw new NoSuchPhoneException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Phone)list.get(0);
+			return (Phone)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Phone[] findByCompanyId_PrevAndNext(
-		String phoneId, String companyId, OrderByComparator obc)
+	public Phone[] findByCompanyId_PrevAndNext(String phoneId,
+		String companyId, OrderByComparator obc)
 		throws NoSuchPhoneException, SystemException {
-		com.liferay.portal.model.Phone phone = findByPrimaryKey(phoneId);
+		Phone phone = findByPrimaryKey(phoneId);
 		int count = countByCompanyId(companyId);
 		Session session = null;
 
@@ -341,11 +324,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -368,12 +350,11 @@ public class PhonePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone,
-					PhoneHBMUtil.getInstance());
-			com.liferay.portal.model.Phone[] array = new com.liferay.portal.model.Phone[3];
-			array[0] = (com.liferay.portal.model.Phone)objArray[0];
-			array[1] = (com.liferay.portal.model.Phone)objArray[1];
-			array[2] = (com.liferay.portal.model.Phone)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone);
+			Phone[] array = new Phone[3];
+			array[0] = (Phone)objArray[0];
+			array[1] = (Phone)objArray[1];
+			array[2] = (Phone)objArray[2];
 
 			return array;
 		}
@@ -392,11 +373,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -413,13 +393,7 @@ public class PhonePersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				PhoneHBM phoneHBM = (PhoneHBM)itr.next();
-				list.add(PhoneHBMUtil.model(phoneHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -444,11 +418,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -471,15 +444,7 @@ public class PhonePersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				PhoneHBM phoneHBM = (PhoneHBM)itr.next();
-				list.add(PhoneHBMUtil.model(phoneHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -489,8 +454,8 @@ public class PhonePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Phone findByUserId_First(String userId,
-		OrderByComparator obc) throws NoSuchPhoneException, SystemException {
+	public Phone findByUserId_First(String userId, OrderByComparator obc)
+		throws NoSuchPhoneException, SystemException {
 		List list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -502,12 +467,12 @@ public class PhonePersistence extends BasePersistence {
 			throw new NoSuchPhoneException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Phone)list.get(0);
+			return (Phone)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Phone findByUserId_Last(String userId,
-		OrderByComparator obc) throws NoSuchPhoneException, SystemException {
+	public Phone findByUserId_Last(String userId, OrderByComparator obc)
+		throws NoSuchPhoneException, SystemException {
 		int count = countByUserId(userId);
 		List list = findByUserId(userId, count - 1, count, obc);
 
@@ -520,14 +485,13 @@ public class PhonePersistence extends BasePersistence {
 			throw new NoSuchPhoneException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Phone)list.get(0);
+			return (Phone)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Phone[] findByUserId_PrevAndNext(
-		String phoneId, String userId, OrderByComparator obc)
-		throws NoSuchPhoneException, SystemException {
-		com.liferay.portal.model.Phone phone = findByPrimaryKey(phoneId);
+	public Phone[] findByUserId_PrevAndNext(String phoneId, String userId,
+		OrderByComparator obc) throws NoSuchPhoneException, SystemException {
+		Phone phone = findByPrimaryKey(phoneId);
 		int count = countByUserId(userId);
 		Session session = null;
 
@@ -535,11 +499,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -562,12 +525,11 @@ public class PhonePersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone,
-					PhoneHBMUtil.getInstance());
-			com.liferay.portal.model.Phone[] array = new com.liferay.portal.model.Phone[3];
-			array[0] = (com.liferay.portal.model.Phone)objArray[0];
-			array[1] = (com.liferay.portal.model.Phone)objArray[1];
-			array[2] = (com.liferay.portal.model.Phone)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone);
+			Phone[] array = new Phone[3];
+			array[0] = (Phone)objArray[0];
+			array[1] = (Phone)objArray[1];
+			array[2] = (Phone)objArray[2];
 
 			return array;
 		}
@@ -587,11 +549,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -600,7 +561,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -621,13 +582,7 @@ public class PhonePersistence extends BasePersistence {
 				q.setString(queryPos++, className);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				PhoneHBM phoneHBM = (PhoneHBM)itr.next();
-				list.add(PhoneHBMUtil.model(phoneHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -652,11 +607,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -665,7 +619,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -692,15 +646,7 @@ public class PhonePersistence extends BasePersistence {
 				q.setString(queryPos++, className);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				PhoneHBM phoneHBM = (PhoneHBM)itr.next();
-				list.add(PhoneHBMUtil.model(phoneHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -710,9 +656,8 @@ public class PhonePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Phone findByC_C_First(String companyId,
-		String className, OrderByComparator obc)
-		throws NoSuchPhoneException, SystemException {
+	public Phone findByC_C_First(String companyId, String className,
+		OrderByComparator obc) throws NoSuchPhoneException, SystemException {
 		List list = findByC_C(companyId, className, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -727,13 +672,12 @@ public class PhonePersistence extends BasePersistence {
 			throw new NoSuchPhoneException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Phone)list.get(0);
+			return (Phone)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Phone findByC_C_Last(String companyId,
-		String className, OrderByComparator obc)
-		throws NoSuchPhoneException, SystemException {
+	public Phone findByC_C_Last(String companyId, String className,
+		OrderByComparator obc) throws NoSuchPhoneException, SystemException {
 		int count = countByC_C(companyId, className);
 		List list = findByC_C(companyId, className, count - 1, count, obc);
 
@@ -749,14 +693,14 @@ public class PhonePersistence extends BasePersistence {
 			throw new NoSuchPhoneException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Phone)list.get(0);
+			return (Phone)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Phone[] findByC_C_PrevAndNext(
-		String phoneId, String companyId, String className,
-		OrderByComparator obc) throws NoSuchPhoneException, SystemException {
-		com.liferay.portal.model.Phone phone = findByPrimaryKey(phoneId);
+	public Phone[] findByC_C_PrevAndNext(String phoneId, String companyId,
+		String className, OrderByComparator obc)
+		throws NoSuchPhoneException, SystemException {
+		Phone phone = findByPrimaryKey(phoneId);
 		int count = countByC_C(companyId, className);
 		Session session = null;
 
@@ -764,11 +708,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -777,7 +720,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -804,12 +747,11 @@ public class PhonePersistence extends BasePersistence {
 				q.setString(queryPos++, className);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone,
-					PhoneHBMUtil.getInstance());
-			com.liferay.portal.model.Phone[] array = new com.liferay.portal.model.Phone[3];
-			array[0] = (com.liferay.portal.model.Phone)objArray[0];
-			array[1] = (com.liferay.portal.model.Phone)objArray[1];
-			array[2] = (com.liferay.portal.model.Phone)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone);
+			Phone[] array = new Phone[3];
+			array[0] = (Phone)objArray[0];
+			array[1] = (Phone)objArray[1];
+			array[2] = (Phone)objArray[2];
 
 			return array;
 		}
@@ -829,11 +771,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -842,7 +783,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -851,7 +792,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -876,13 +817,7 @@ public class PhonePersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				PhoneHBM phoneHBM = (PhoneHBM)itr.next();
-				list.add(PhoneHBMUtil.model(phoneHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -907,11 +842,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -920,7 +854,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -929,7 +863,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -960,15 +894,7 @@ public class PhonePersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				PhoneHBM phoneHBM = (PhoneHBM)itr.next();
-				list.add(PhoneHBMUtil.model(phoneHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -978,8 +904,8 @@ public class PhonePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Phone findByC_C_C_First(String companyId,
-		String className, String classPK, OrderByComparator obc)
+	public Phone findByC_C_C_First(String companyId, String className,
+		String classPK, OrderByComparator obc)
 		throws NoSuchPhoneException, SystemException {
 		List list = findByC_C_C(companyId, className, classPK, 0, 1, obc);
 
@@ -998,12 +924,12 @@ public class PhonePersistence extends BasePersistence {
 			throw new NoSuchPhoneException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Phone)list.get(0);
+			return (Phone)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Phone findByC_C_C_Last(String companyId,
-		String className, String classPK, OrderByComparator obc)
+	public Phone findByC_C_C_Last(String companyId, String className,
+		String classPK, OrderByComparator obc)
 		throws NoSuchPhoneException, SystemException {
 		int count = countByC_C_C(companyId, className, classPK);
 		List list = findByC_C_C(companyId, className, classPK, count - 1,
@@ -1024,14 +950,14 @@ public class PhonePersistence extends BasePersistence {
 			throw new NoSuchPhoneException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Phone)list.get(0);
+			return (Phone)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Phone[] findByC_C_C_PrevAndNext(
-		String phoneId, String companyId, String className, String classPK,
-		OrderByComparator obc) throws NoSuchPhoneException, SystemException {
-		com.liferay.portal.model.Phone phone = findByPrimaryKey(phoneId);
+	public Phone[] findByC_C_C_PrevAndNext(String phoneId, String companyId,
+		String className, String classPK, OrderByComparator obc)
+		throws NoSuchPhoneException, SystemException {
+		Phone phone = findByPrimaryKey(phoneId);
 		int count = countByC_C_C(companyId, className, classPK);
 		Session session = null;
 
@@ -1039,11 +965,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1052,7 +977,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1061,7 +986,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1092,12 +1017,11 @@ public class PhonePersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone,
-					PhoneHBMUtil.getInstance());
-			com.liferay.portal.model.Phone[] array = new com.liferay.portal.model.Phone[3];
-			array[0] = (com.liferay.portal.model.Phone)objArray[0];
-			array[1] = (com.liferay.portal.model.Phone)objArray[1];
-			array[2] = (com.liferay.portal.model.Phone)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone);
+			Phone[] array = new Phone[3];
+			array[0] = (Phone)objArray[0];
+			array[1] = (Phone)objArray[1];
+			array[2] = (Phone)objArray[2];
 
 			return array;
 		}
@@ -1117,11 +1041,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1130,7 +1053,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1139,7 +1062,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1168,13 +1091,7 @@ public class PhonePersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, primary);
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				PhoneHBM phoneHBM = (PhoneHBM)itr.next();
-				list.add(PhoneHBMUtil.model(phoneHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -1202,11 +1119,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1215,7 +1131,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1224,7 +1140,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1259,15 +1175,7 @@ public class PhonePersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, primary);
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				PhoneHBM phoneHBM = (PhoneHBM)itr.next();
-				list.add(PhoneHBMUtil.model(phoneHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1277,9 +1185,9 @@ public class PhonePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Phone findByC_C_C_P_First(
-		String companyId, String className, String classPK, boolean primary,
-		OrderByComparator obc) throws NoSuchPhoneException, SystemException {
+	public Phone findByC_C_C_P_First(String companyId, String className,
+		String classPK, boolean primary, OrderByComparator obc)
+		throws NoSuchPhoneException, SystemException {
 		List list = findByC_C_C_P(companyId, className, classPK, primary, 0, 1,
 				obc);
 
@@ -1301,12 +1209,12 @@ public class PhonePersistence extends BasePersistence {
 			throw new NoSuchPhoneException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Phone)list.get(0);
+			return (Phone)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Phone findByC_C_C_P_Last(String companyId,
-		String className, String classPK, boolean primary, OrderByComparator obc)
+	public Phone findByC_C_C_P_Last(String companyId, String className,
+		String classPK, boolean primary, OrderByComparator obc)
 		throws NoSuchPhoneException, SystemException {
 		int count = countByC_C_C_P(companyId, className, classPK, primary);
 		List list = findByC_C_C_P(companyId, className, classPK, primary,
@@ -1330,15 +1238,14 @@ public class PhonePersistence extends BasePersistence {
 			throw new NoSuchPhoneException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Phone)list.get(0);
+			return (Phone)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Phone[] findByC_C_C_P_PrevAndNext(
-		String phoneId, String companyId, String className, String classPK,
-		boolean primary, OrderByComparator obc)
+	public Phone[] findByC_C_C_P_PrevAndNext(String phoneId, String companyId,
+		String className, String classPK, boolean primary, OrderByComparator obc)
 		throws NoSuchPhoneException, SystemException {
-		com.liferay.portal.model.Phone phone = findByPrimaryKey(phoneId);
+		Phone phone = findByPrimaryKey(phoneId);
 		int count = countByC_C_C_P(companyId, className, classPK, primary);
 		Session session = null;
 
@@ -1346,11 +1253,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1359,7 +1265,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1368,7 +1274,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1403,12 +1309,11 @@ public class PhonePersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, primary);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone,
-					PhoneHBMUtil.getInstance());
-			com.liferay.portal.model.Phone[] array = new com.liferay.portal.model.Phone[3];
-			array[0] = (com.liferay.portal.model.Phone)objArray[0];
-			array[1] = (com.liferay.portal.model.Phone)objArray[1];
-			array[2] = (com.liferay.portal.model.Phone)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone);
+			Phone[] array = new Phone[3];
+			array[0] = (Phone)objArray[0];
+			array[1] = (Phone)objArray[1];
+			array[2] = (Phone)objArray[2];
 
 			return array;
 		}
@@ -1427,21 +1332,13 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM ");
+			query.append("FROM com.liferay.portal.model.Phone ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				PhoneHBM phoneHBM = (PhoneHBM)itr.next();
-				list.add(PhoneHBMUtil.model(phoneHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1458,11 +1355,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1482,8 +1378,8 @@ public class PhonePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				PhoneHBM phoneHBM = (PhoneHBM)itr.next();
-				session.delete(phoneHBM);
+				Phone phone = (Phone)itr.next();
+				session.delete(phone);
 			}
 
 			session.flush();
@@ -1503,11 +1399,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -1527,8 +1422,8 @@ public class PhonePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				PhoneHBM phoneHBM = (PhoneHBM)itr.next();
-				session.delete(phoneHBM);
+				Phone phone = (Phone)itr.next();
+				session.delete(phone);
 			}
 
 			session.flush();
@@ -1549,11 +1444,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1562,7 +1456,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1586,8 +1480,8 @@ public class PhonePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				PhoneHBM phoneHBM = (PhoneHBM)itr.next();
-				session.delete(phoneHBM);
+				Phone phone = (Phone)itr.next();
+				session.delete(phone);
 			}
 
 			session.flush();
@@ -1608,11 +1502,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1621,7 +1514,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1630,7 +1523,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1658,8 +1551,8 @@ public class PhonePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				PhoneHBM phoneHBM = (PhoneHBM)itr.next();
-				session.delete(phoneHBM);
+				Phone phone = (Phone)itr.next();
+				session.delete(phone);
 			}
 
 			session.flush();
@@ -1680,11 +1573,10 @@ public class PhonePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1693,7 +1585,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1702,7 +1594,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1734,8 +1626,8 @@ public class PhonePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				PhoneHBM phoneHBM = (PhoneHBM)itr.next();
-				session.delete(phoneHBM);
+				Phone phone = (Phone)itr.next();
+				session.delete(phone);
 			}
 
 			session.flush();
@@ -1756,11 +1648,10 @@ public class PhonePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1803,11 +1694,10 @@ public class PhonePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -1851,11 +1741,10 @@ public class PhonePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1864,7 +1753,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1912,11 +1801,10 @@ public class PhonePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1925,7 +1813,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1934,7 +1822,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1986,11 +1874,10 @@ public class PhonePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Phone IN CLASS com.liferay.portal.service.persistence.PhoneHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1999,7 +1886,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -2008,7 +1895,7 @@ public class PhonePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -2053,6 +1940,9 @@ public class PhonePersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(PhonePersistence.class);

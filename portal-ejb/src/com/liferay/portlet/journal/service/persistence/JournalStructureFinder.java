@@ -31,7 +31,6 @@ import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -116,8 +115,6 @@ public class JournalStructureFinder {
 		name = StringUtil.lowerCase(name);
 		description = StringUtil.lowerCase(description);
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -130,7 +127,7 @@ public class JournalStructureFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("JournalStructure", JournalStructureHBM.class);
+			q.addEntity("JournalStructure", JournalStructure.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -143,18 +140,7 @@ public class JournalStructureFinder {
 			qPos.add(description);
 			qPos.add(description);
 
-			Iterator itr = QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				JournalStructureHBM structureHBM =
-					(JournalStructureHBM)itr.next();
-
-				JournalStructure structure =
-					JournalStructureHBMUtil.model(structureHBM);
-
-				list.add(structure);
-			}
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -162,8 +148,6 @@ public class JournalStructureFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 }

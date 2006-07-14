@@ -182,6 +182,10 @@ public class JournalStructureUtil {
 		return getPersistence().countByGroupId(groupId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static JournalStructurePersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		JournalStructureUtil util = (JournalStructureUtil)ctx.getBean(CLASS_NAME);

@@ -129,6 +129,10 @@ public class ReleaseUtil {
 		return getPersistence().findAll();
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static ReleasePersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		ReleaseUtil util = (ReleaseUtil)ctx.getBean(CLASS_NAME);

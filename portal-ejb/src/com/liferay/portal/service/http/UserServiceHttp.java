@@ -41,7 +41,7 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class UserServiceHttp {
-	public static boolean addGroupUsers(HttpPrincipal httpPrincipal,
+	public static void addGroupUsers(HttpPrincipal httpPrincipal,
 		java.lang.String groupId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -76,8 +76,6 @@ public class UserServiceHttp {
 
 				throw e;
 			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));
@@ -94,7 +92,7 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static boolean addRoleUsers(HttpPrincipal httpPrincipal,
+	public static void addRoleUsers(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -129,8 +127,6 @@ public class UserServiceHttp {
 
 				throw e;
 			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));
@@ -147,7 +143,7 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static boolean addUserGroupUsers(HttpPrincipal httpPrincipal,
+	public static void addUserGroupUsers(HttpPrincipal httpPrincipal,
 		java.lang.String userGroupId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -182,8 +178,6 @@ public class UserServiceHttp {
 
 				throw e;
 			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));
@@ -354,7 +348,7 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static boolean deleteRoleUser(HttpPrincipal httpPrincipal,
+	public static void deleteRoleUser(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -389,8 +383,6 @@ public class UserServiceHttp {
 
 				throw e;
 			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));
@@ -766,7 +758,7 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static boolean unsetGroupUsers(HttpPrincipal httpPrincipal,
+	public static void unsetGroupUsers(HttpPrincipal httpPrincipal,
 		java.lang.String groupId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -801,8 +793,6 @@ public class UserServiceHttp {
 
 				throw e;
 			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));
@@ -819,7 +809,7 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static boolean unsetRoleUsers(HttpPrincipal httpPrincipal,
+	public static void unsetRoleUsers(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -854,8 +844,6 @@ public class UserServiceHttp {
 
 				throw e;
 			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));
@@ -872,7 +860,7 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static boolean unsetUserGroupUsers(HttpPrincipal httpPrincipal,
+	public static void unsetUserGroupUsers(HttpPrincipal httpPrincipal,
 		java.lang.String userGroupId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -907,8 +895,6 @@ public class UserServiceHttp {
 
 				throw e;
 			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));

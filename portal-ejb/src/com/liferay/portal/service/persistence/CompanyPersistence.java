@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import org.apache.commons.logging.Log;
@@ -44,25 +45,24 @@ import java.util.List;
  *
  */
 public class CompanyPersistence extends BasePersistence {
-	public com.liferay.portal.model.Company create(String companyId) {
-		CompanyHBM companyHBM = new CompanyHBM();
-		companyHBM.setNew(true);
-		companyHBM.setPrimaryKey(companyId);
+	public Company create(String companyId) {
+		Company company = new Company();
+		company.setNew(true);
+		company.setPrimaryKey(companyId);
 
-		return CompanyHBMUtil.model(companyHBM);
+		return company;
 	}
 
-	public com.liferay.portal.model.Company remove(String companyId)
+	public Company remove(String companyId)
 		throws NoSuchCompanyException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CompanyHBM companyHBM = (CompanyHBM)session.get(CompanyHBM.class,
-					companyId);
+			Company company = (Company)session.get(Company.class, companyId);
 
-			if (companyHBM == null) {
+			if (company == null) {
 				_log.warn("No Company exists with the primary key " +
 					companyId.toString());
 				throw new NoSuchCompanyException(
@@ -70,10 +70,10 @@ public class CompanyPersistence extends BasePersistence {
 					companyId.toString());
 			}
 
-			session.delete(companyHBM);
+			session.delete(company);
 			session.flush();
 
-			return CompanyHBMUtil.model(companyHBM);
+			return company;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -92,34 +92,34 @@ public class CompanyPersistence extends BasePersistence {
 				session = openSession();
 
 				if (company.isNew()) {
-					CompanyHBM companyHBM = new CompanyHBM();
-					companyHBM.setCompanyId(company.getCompanyId());
-					companyHBM.setKey(company.getKey());
-					companyHBM.setPortalURL(company.getPortalURL());
-					companyHBM.setHomeURL(company.getHomeURL());
-					companyHBM.setMx(company.getMx());
-					session.save(companyHBM);
+					Company companyModel = new Company();
+					companyModel.setCompanyId(company.getCompanyId());
+					companyModel.setKey(company.getKey());
+					companyModel.setPortalURL(company.getPortalURL());
+					companyModel.setHomeURL(company.getHomeURL());
+					companyModel.setMx(company.getMx());
+					session.save(companyModel);
 					session.flush();
 				}
 				else {
-					CompanyHBM companyHBM = (CompanyHBM)session.get(CompanyHBM.class,
+					Company companyModel = (Company)session.get(Company.class,
 							company.getPrimaryKey());
 
-					if (companyHBM != null) {
-						companyHBM.setKey(company.getKey());
-						companyHBM.setPortalURL(company.getPortalURL());
-						companyHBM.setHomeURL(company.getHomeURL());
-						companyHBM.setMx(company.getMx());
+					if (companyModel != null) {
+						companyModel.setKey(company.getKey());
+						companyModel.setPortalURL(company.getPortalURL());
+						companyModel.setHomeURL(company.getHomeURL());
+						companyModel.setMx(company.getMx());
 						session.flush();
 					}
 					else {
-						companyHBM = new CompanyHBM();
-						companyHBM.setCompanyId(company.getCompanyId());
-						companyHBM.setKey(company.getKey());
-						companyHBM.setPortalURL(company.getPortalURL());
-						companyHBM.setHomeURL(company.getHomeURL());
-						companyHBM.setMx(company.getMx());
-						session.save(companyHBM);
+						companyModel = new Company();
+						companyModel.setCompanyId(company.getCompanyId());
+						companyModel.setKey(company.getKey());
+						companyModel.setPortalURL(company.getPortalURL());
+						companyModel.setHomeURL(company.getHomeURL());
+						companyModel.setMx(company.getMx());
+						session.save(companyModel);
 						session.flush();
 					}
 				}
@@ -138,17 +138,16 @@ public class CompanyPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Company findByPrimaryKey(String companyId)
+	public Company findByPrimaryKey(String companyId)
 		throws NoSuchCompanyException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CompanyHBM companyHBM = (CompanyHBM)session.get(CompanyHBM.class,
-					companyId);
+			Company company = (Company)session.get(Company.class, companyId);
 
-			if (companyHBM == null) {
+			if (company == null) {
 				_log.warn("No Company exists with the primary key " +
 					companyId.toString());
 				throw new NoSuchCompanyException(
@@ -156,7 +155,7 @@ public class CompanyPersistence extends BasePersistence {
 					companyId.toString());
 			}
 
-			return CompanyHBMUtil.model(companyHBM);
+			return company;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -173,19 +172,11 @@ public class CompanyPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Company IN CLASS com.liferay.portal.service.persistence.CompanyHBM ");
+			query.append("FROM com.liferay.portal.model.Company ");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				CompanyHBM companyHBM = (CompanyHBM)itr.next();
-				list.add(CompanyHBMUtil.model(companyHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -193,6 +184,9 @@ public class CompanyPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(CompanyPersistence.class);

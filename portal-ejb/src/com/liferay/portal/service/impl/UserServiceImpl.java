@@ -51,33 +51,31 @@ import java.util.Locale;
  */
 public class UserServiceImpl extends PrincipalBean implements UserService {
 
-	public boolean addGroupUsers(String groupId, String[] userIds)
+	public void addGroupUsers(String groupId, String[] userIds)
 		throws PortalException, SystemException {
 
-		if ((userIds == null) || (userIds.length == 0)) {
-			return false;
+		if ((userIds != null) && (userIds.length > 0)) {
+			checkPermission(groupId, userIds);
+
+			UserLocalServiceUtil.addGroupUsers(groupId, userIds);
 		}
-
-		checkPermission(groupId, userIds);
-
-		return UserLocalServiceUtil.addGroupUsers(groupId, userIds);
 	}
 
-	public boolean addRoleUsers(String roleId, String[] userIds)
+	public void addRoleUsers(String roleId, String[] userIds)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
-		return UserLocalServiceUtil.addRoleUsers(roleId, userIds);
+		UserLocalServiceUtil.addRoleUsers(roleId, userIds);
 	}
 
-	public boolean addUserGroupUsers(String userGroupId, String[] userIds)
+	public void addUserGroupUsers(String userGroupId, String[] userIds)
 		throws PortalException, SystemException {
 
 		UserGroupPermission.check(
 			getPermissionChecker(), userGroupId, ActionKeys.UPDATE);
 
-		return UserLocalServiceUtil.addUserGroupUsers(userGroupId, userIds);
+		UserLocalServiceUtil.addUserGroupUsers(userGroupId, userIds);
 	}
 
 	public User addUser(
@@ -113,12 +111,12 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			locationId);
 	}
 
-	public boolean deleteRoleUser(String roleId, String userId)
+	public void deleteRoleUser(String roleId, String userId)
 		throws PortalException, SystemException {
 
 		checkPermission(userId, ActionKeys.UPDATE);
 
-		return UserLocalServiceUtil.deleteRoleUser(roleId, userId);
+		UserLocalServiceUtil.deleteRoleUser(roleId, userId);
 	}
 
 	public void deleteUser(String userId)
@@ -182,33 +180,31 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.setUserGroupUsers(userGroupId, userIds);
 	}
 
-	public boolean unsetGroupUsers(String groupId, String[] userIds)
+	public void unsetGroupUsers(String groupId, String[] userIds)
 		throws PortalException, SystemException {
 
-		if ((userIds == null) || (userIds.length == 0)) {
-			return false;
+		if ((userIds != null) && (userIds.length > 0)) {
+			checkPermission(groupId, userIds);
+
+			UserLocalServiceUtil.unsetGroupUsers(groupId, userIds);
 		}
-
-		checkPermission(groupId, userIds);
-
-		return UserLocalServiceUtil.unsetGroupUsers(groupId, userIds);
 	}
 
-	public boolean unsetRoleUsers(String roleId, String[] userIds)
+	public void unsetRoleUsers(String roleId, String[] userIds)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
-		return UserLocalServiceUtil.unsetRoleUsers(roleId, userIds);
+		UserLocalServiceUtil.unsetRoleUsers(roleId, userIds);
 	}
 
-	public boolean unsetUserGroupUsers(String userGroupId, String[] userIds)
+	public void unsetUserGroupUsers(String userGroupId, String[] userIds)
 		throws PortalException, SystemException {
 
 		UserGroupPermission.check(
 			getPermissionChecker(), userGroupId, ActionKeys.UPDATE);
 
-		return UserLocalServiceUtil.unsetUserGroupUsers(userGroupId, userIds);
+		UserLocalServiceUtil.unsetUserGroupUsers(userGroupId, userIds);
 	}
 
 	public User updateActive(String userId, boolean active)

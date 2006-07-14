@@ -149,6 +149,10 @@ public class MBDiscussionUtil {
 		return getPersistence().countByC_C(className, classPK);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static MBDiscussionPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		MBDiscussionUtil util = (MBDiscussionUtil)ctx.getBean(CLASS_NAME);

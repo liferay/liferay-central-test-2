@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchListTypeException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.ListType;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.util.StringPool;
@@ -48,25 +49,24 @@ import java.util.List;
  *
  */
 public class ListTypePersistence extends BasePersistence {
-	public com.liferay.portal.model.ListType create(String listTypeId) {
-		ListTypeHBM listTypeHBM = new ListTypeHBM();
-		listTypeHBM.setNew(true);
-		listTypeHBM.setPrimaryKey(listTypeId);
+	public ListType create(String listTypeId) {
+		ListType listType = new ListType();
+		listType.setNew(true);
+		listType.setPrimaryKey(listTypeId);
 
-		return ListTypeHBMUtil.model(listTypeHBM);
+		return listType;
 	}
 
-	public com.liferay.portal.model.ListType remove(String listTypeId)
+	public ListType remove(String listTypeId)
 		throws NoSuchListTypeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ListTypeHBM listTypeHBM = (ListTypeHBM)session.get(ListTypeHBM.class,
-					listTypeId);
+			ListType listType = (ListType)session.get(ListType.class, listTypeId);
 
-			if (listTypeHBM == null) {
+			if (listType == null) {
 				_log.warn("No ListType exists with the primary key " +
 					listTypeId.toString());
 				throw new NoSuchListTypeException(
@@ -74,10 +74,10 @@ public class ListTypePersistence extends BasePersistence {
 					listTypeId.toString());
 			}
 
-			session.delete(listTypeHBM);
+			session.delete(listType);
 			session.flush();
 
-			return ListTypeHBMUtil.model(listTypeHBM);
+			return listType;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -96,28 +96,28 @@ public class ListTypePersistence extends BasePersistence {
 				session = openSession();
 
 				if (listType.isNew()) {
-					ListTypeHBM listTypeHBM = new ListTypeHBM();
-					listTypeHBM.setListTypeId(listType.getListTypeId());
-					listTypeHBM.setName(listType.getName());
-					listTypeHBM.setType(listType.getType());
-					session.save(listTypeHBM);
+					ListType listTypeModel = new ListType();
+					listTypeModel.setListTypeId(listType.getListTypeId());
+					listTypeModel.setName(listType.getName());
+					listTypeModel.setType(listType.getType());
+					session.save(listTypeModel);
 					session.flush();
 				}
 				else {
-					ListTypeHBM listTypeHBM = (ListTypeHBM)session.get(ListTypeHBM.class,
+					ListType listTypeModel = (ListType)session.get(ListType.class,
 							listType.getPrimaryKey());
 
-					if (listTypeHBM != null) {
-						listTypeHBM.setName(listType.getName());
-						listTypeHBM.setType(listType.getType());
+					if (listTypeModel != null) {
+						listTypeModel.setName(listType.getName());
+						listTypeModel.setType(listType.getType());
 						session.flush();
 					}
 					else {
-						listTypeHBM = new ListTypeHBM();
-						listTypeHBM.setListTypeId(listType.getListTypeId());
-						listTypeHBM.setName(listType.getName());
-						listTypeHBM.setType(listType.getType());
-						session.save(listTypeHBM);
+						listTypeModel = new ListType();
+						listTypeModel.setListTypeId(listType.getListTypeId());
+						listTypeModel.setName(listType.getName());
+						listTypeModel.setType(listType.getType());
+						session.save(listTypeModel);
 						session.flush();
 					}
 				}
@@ -136,17 +136,16 @@ public class ListTypePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.ListType findByPrimaryKey(String listTypeId)
+	public ListType findByPrimaryKey(String listTypeId)
 		throws NoSuchListTypeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ListTypeHBM listTypeHBM = (ListTypeHBM)session.get(ListTypeHBM.class,
-					listTypeId);
+			ListType listType = (ListType)session.get(ListType.class, listTypeId);
 
-			if (listTypeHBM == null) {
+			if (listType == null) {
 				_log.warn("No ListType exists with the primary key " +
 					listTypeId.toString());
 				throw new NoSuchListTypeException(
@@ -154,7 +153,7 @@ public class ListTypePersistence extends BasePersistence {
 					listTypeId.toString());
 			}
 
-			return ListTypeHBMUtil.model(listTypeHBM);
+			return listType;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -171,11 +170,10 @@ public class ListTypePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM ListType IN CLASS com.liferay.portal.service.persistence.ListTypeHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.ListType WHERE ");
 
 			if (type == null) {
-				query.append("type_ is null");
+				query.append("type_ IS NULL");
 			}
 			else {
 				query.append("type_ = ?");
@@ -192,13 +190,7 @@ public class ListTypePersistence extends BasePersistence {
 				q.setString(queryPos++, type);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				ListTypeHBM listTypeHBM = (ListTypeHBM)itr.next();
-				list.add(ListTypeHBMUtil.model(listTypeHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -223,11 +215,10 @@ public class ListTypePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM ListType IN CLASS com.liferay.portal.service.persistence.ListTypeHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.ListType WHERE ");
 
 			if (type == null) {
-				query.append("type_ is null");
+				query.append("type_ IS NULL");
 			}
 			else {
 				query.append("type_ = ?");
@@ -250,15 +241,7 @@ public class ListTypePersistence extends BasePersistence {
 				q.setString(queryPos++, type);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				ListTypeHBM listTypeHBM = (ListTypeHBM)itr.next();
-				list.add(ListTypeHBMUtil.model(listTypeHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -268,8 +251,8 @@ public class ListTypePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.ListType findByType_First(String type,
-		OrderByComparator obc) throws NoSuchListTypeException, SystemException {
+	public ListType findByType_First(String type, OrderByComparator obc)
+		throws NoSuchListTypeException, SystemException {
 		List list = findByType(type, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -281,12 +264,12 @@ public class ListTypePersistence extends BasePersistence {
 			throw new NoSuchListTypeException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.ListType)list.get(0);
+			return (ListType)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.ListType findByType_Last(String type,
-		OrderByComparator obc) throws NoSuchListTypeException, SystemException {
+	public ListType findByType_Last(String type, OrderByComparator obc)
+		throws NoSuchListTypeException, SystemException {
 		int count = countByType(type);
 		List list = findByType(type, count - 1, count, obc);
 
@@ -299,14 +282,13 @@ public class ListTypePersistence extends BasePersistence {
 			throw new NoSuchListTypeException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.ListType)list.get(0);
+			return (ListType)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.ListType[] findByType_PrevAndNext(
-		String listTypeId, String type, OrderByComparator obc)
-		throws NoSuchListTypeException, SystemException {
-		com.liferay.portal.model.ListType listType = findByPrimaryKey(listTypeId);
+	public ListType[] findByType_PrevAndNext(String listTypeId, String type,
+		OrderByComparator obc) throws NoSuchListTypeException, SystemException {
+		ListType listType = findByPrimaryKey(listTypeId);
 		int count = countByType(type);
 		Session session = null;
 
@@ -314,11 +296,10 @@ public class ListTypePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM ListType IN CLASS com.liferay.portal.service.persistence.ListTypeHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.ListType WHERE ");
 
 			if (type == null) {
-				query.append("type_ is null");
+				query.append("type_ IS NULL");
 			}
 			else {
 				query.append("type_ = ?");
@@ -341,12 +322,11 @@ public class ListTypePersistence extends BasePersistence {
 				q.setString(queryPos++, type);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					listType, ListTypeHBMUtil.getInstance());
-			com.liferay.portal.model.ListType[] array = new com.liferay.portal.model.ListType[3];
-			array[0] = (com.liferay.portal.model.ListType)objArray[0];
-			array[1] = (com.liferay.portal.model.ListType)objArray[1];
-			array[2] = (com.liferay.portal.model.ListType)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, listType);
+			ListType[] array = new ListType[3];
+			array[0] = (ListType)objArray[0];
+			array[1] = (ListType)objArray[1];
+			array[2] = (ListType)objArray[2];
 
 			return array;
 		}
@@ -365,21 +345,13 @@ public class ListTypePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM ListType IN CLASS com.liferay.portal.service.persistence.ListTypeHBM ");
+			query.append("FROM com.liferay.portal.model.ListType ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				ListTypeHBM listTypeHBM = (ListTypeHBM)itr.next();
-				list.add(ListTypeHBMUtil.model(listTypeHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -396,11 +368,10 @@ public class ListTypePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM ListType IN CLASS com.liferay.portal.service.persistence.ListTypeHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.ListType WHERE ");
 
 			if (type == null) {
-				query.append("type_ is null");
+				query.append("type_ IS NULL");
 			}
 			else {
 				query.append("type_ = ?");
@@ -420,8 +391,8 @@ public class ListTypePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				ListTypeHBM listTypeHBM = (ListTypeHBM)itr.next();
-				session.delete(listTypeHBM);
+				ListType listType = (ListType)itr.next();
+				session.delete(listType);
 			}
 
 			session.flush();
@@ -442,11 +413,10 @@ public class ListTypePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM ListType IN CLASS com.liferay.portal.service.persistence.ListTypeHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.ListType WHERE ");
 
 			if (type == null) {
-				query.append("type_ is null");
+				query.append("type_ IS NULL");
 			}
 			else {
 				query.append("type_ = ?");
@@ -479,6 +449,9 @@ public class ListTypePersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(ListTypePersistence.class);

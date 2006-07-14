@@ -31,7 +31,6 @@ import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -116,7 +115,7 @@ public class RoleFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("Role_", RoleHBM.class);
+			q.addEntity("Role_", Role.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -126,9 +125,7 @@ public class RoleFinder {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				RoleHBM roleHBM = (RoleHBM)itr.next();
-
-				return RoleHBMUtil.model(roleHBM);
+				return (Role)itr.next();
 			}
 		}
 		catch (Exception e) {
@@ -151,8 +148,6 @@ public class RoleFinder {
 		name = StringUtil.lowerCase(name);
 		description = StringUtil.lowerCase(description);
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -162,7 +157,7 @@ public class RoleFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("Role_", RoleHBM.class);
+			q.addEntity("Role_", Role.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -172,16 +167,7 @@ public class RoleFinder {
 			qPos.add(description);
 			qPos.add(description);
 
-			Iterator itr = QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				RoleHBM roleHBM = (RoleHBM)itr.next();
-
-				Role role = RoleHBMUtil.model(roleHBM);
-
-				list.add(role);
-			}
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -189,8 +175,6 @@ public class RoleFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 }

@@ -2,8 +2,16 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
+	<bean id="liferayDataSource" class="com.liferay.portal.spring.jndi.JndiObjectFactoryBean" lazy-init="true">
+		<property name="jndiName">
+			<value>jdbc/LiferayPool</value>
+		</property>
+	</bean>
 	<bean id="liferaySessionFactory" class="com.liferay.portal.spring.hibernate.HibernateConfiguration" lazy-init="true"/>
 	<bean id="liferayTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
@@ -18,6 +26,9 @@
 	</bean>
 	<bean id="com.liferay.counter.service.spring.CounterService.professional" class="com.liferay.counter.service.impl.CounterServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.counter.service.persistence.CounterPersistence" class="com.liferay.counter.service.persistence.CounterPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>

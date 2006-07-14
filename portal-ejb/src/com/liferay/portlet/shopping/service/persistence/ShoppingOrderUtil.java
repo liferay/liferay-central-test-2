@@ -193,6 +193,10 @@ public class ShoppingOrderUtil {
 		return getPersistence().countByG_U_PPPS(groupId, userId, ppPaymentStatus);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static ShoppingOrderPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		ShoppingOrderUtil util = (ShoppingOrderUtil)ctx.getBean(CLASS_NAME);

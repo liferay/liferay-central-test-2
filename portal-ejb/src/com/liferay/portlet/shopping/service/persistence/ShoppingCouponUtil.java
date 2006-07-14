@@ -180,6 +180,10 @@ public class ShoppingCouponUtil {
 		return getPersistence().countByGroupId(groupId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static ShoppingCouponPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		ShoppingCouponUtil util = (ShoppingCouponUtil)ctx.getBean(CLASS_NAME);

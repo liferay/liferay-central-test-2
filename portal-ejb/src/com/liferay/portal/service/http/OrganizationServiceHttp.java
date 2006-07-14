@@ -40,7 +40,7 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class OrganizationServiceHttp {
-	public static boolean addGroupOrganizations(HttpPrincipal httpPrincipal,
+	public static void addGroupOrganizations(HttpPrincipal httpPrincipal,
 		java.lang.String groupId, java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -76,8 +76,6 @@ public class OrganizationServiceHttp {
 
 				throw e;
 			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));
@@ -363,7 +361,7 @@ public class OrganizationServiceHttp {
 		}
 	}
 
-	public static boolean unsetGroupOrganizations(HttpPrincipal httpPrincipal,
+	public static void unsetGroupOrganizations(HttpPrincipal httpPrincipal,
 		java.lang.String groupId, java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -399,8 +397,6 @@ public class OrganizationServiceHttp {
 
 				throw e;
 			}
-
-			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			_log.error(StackTraceUtil.getStackTrace(pe));

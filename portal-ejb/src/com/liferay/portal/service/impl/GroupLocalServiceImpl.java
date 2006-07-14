@@ -151,10 +151,10 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		return group;
 	}
 
-	public boolean addRoleGroups(String roleId, String[] groupIds)
+	public void addRoleGroups(String roleId, String[] groupIds)
 		throws PortalException, SystemException {
 
-		return RoleUtil.addGroups(roleId, groupIds);
+		RoleUtil.addGroups(roleId, groupIds);
 	}
 
 	public void checkSystemGroups(String companyId)
@@ -397,10 +397,10 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		RoleUtil.setGroups(roleId, groupIds);
 	}
 
-	public boolean unsetRoleGroups(String roleId, String[] groupIds)
+	public void unsetRoleGroups(String roleId, String[] groupIds)
 		throws PortalException, SystemException {
 
-		return RoleUtil.removeGroups(roleId, groupIds);
+		RoleUtil.removeGroups(roleId, groupIds);
 	}
 
 	public Group updateGroup(

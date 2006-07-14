@@ -29,17 +29,16 @@ package com.liferay.portal.service.spring;
  *
  */
 public interface UserService {
-	public boolean addGroupUsers(java.lang.String groupId,
+	public void addGroupUsers(java.lang.String groupId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public boolean addRoleUsers(java.lang.String roleId,
-		java.lang.String[] userIds)
+	public void addRoleUsers(java.lang.String roleId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public boolean addUserGroupUsers(java.lang.String userGroupId,
+	public void addUserGroupUsers(java.lang.String userGroupId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
@@ -57,8 +56,7 @@ public interface UserService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public boolean deleteRoleUser(java.lang.String roleId,
-		java.lang.String userId)
+	public void deleteRoleUser(java.lang.String roleId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
@@ -94,17 +92,17 @@ public interface UserService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public boolean unsetGroupUsers(java.lang.String groupId,
+	public void unsetGroupUsers(java.lang.String groupId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public boolean unsetRoleUsers(java.lang.String roleId,
+	public void unsetRoleUsers(java.lang.String roleId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public boolean unsetUserGroupUsers(java.lang.String userGroupId,
+	public void unsetUserGroupUsers(java.lang.String userGroupId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;

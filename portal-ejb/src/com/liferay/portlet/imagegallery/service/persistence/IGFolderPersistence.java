@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
+import com.liferay.portlet.imagegallery.model.IGFolder;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,26 +50,24 @@ import java.util.List;
  *
  */
 public class IGFolderPersistence extends BasePersistence {
-	public com.liferay.portlet.imagegallery.model.IGFolder create(
-		String folderId) {
-		IGFolderHBM igFolderHBM = new IGFolderHBM();
-		igFolderHBM.setNew(true);
-		igFolderHBM.setPrimaryKey(folderId);
+	public IGFolder create(String folderId) {
+		IGFolder igFolder = new IGFolder();
+		igFolder.setNew(true);
+		igFolder.setPrimaryKey(folderId);
 
-		return IGFolderHBMUtil.model(igFolderHBM);
+		return igFolder;
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGFolder remove(
-		String folderId) throws NoSuchFolderException, SystemException {
+	public IGFolder remove(String folderId)
+		throws NoSuchFolderException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			IGFolderHBM igFolderHBM = (IGFolderHBM)session.get(IGFolderHBM.class,
-					folderId);
+			IGFolder igFolder = (IGFolder)session.get(IGFolder.class, folderId);
 
-			if (igFolderHBM == null) {
+			if (igFolder == null) {
 				_log.warn("No IGFolder exists with the primary key " +
 					folderId.toString());
 				throw new NoSuchFolderException(
@@ -76,10 +75,10 @@ public class IGFolderPersistence extends BasePersistence {
 					folderId.toString());
 			}
 
-			session.delete(igFolderHBM);
+			session.delete(igFolder);
 			session.flush();
 
-			return IGFolderHBMUtil.model(igFolderHBM);
+			return igFolder;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -99,46 +98,46 @@ public class IGFolderPersistence extends BasePersistence {
 				session = openSession();
 
 				if (igFolder.isNew()) {
-					IGFolderHBM igFolderHBM = new IGFolderHBM();
-					igFolderHBM.setFolderId(igFolder.getFolderId());
-					igFolderHBM.setGroupId(igFolder.getGroupId());
-					igFolderHBM.setCompanyId(igFolder.getCompanyId());
-					igFolderHBM.setUserId(igFolder.getUserId());
-					igFolderHBM.setCreateDate(igFolder.getCreateDate());
-					igFolderHBM.setModifiedDate(igFolder.getModifiedDate());
-					igFolderHBM.setParentFolderId(igFolder.getParentFolderId());
-					igFolderHBM.setName(igFolder.getName());
-					igFolderHBM.setDescription(igFolder.getDescription());
-					session.save(igFolderHBM);
+					IGFolder igFolderModel = new IGFolder();
+					igFolderModel.setFolderId(igFolder.getFolderId());
+					igFolderModel.setGroupId(igFolder.getGroupId());
+					igFolderModel.setCompanyId(igFolder.getCompanyId());
+					igFolderModel.setUserId(igFolder.getUserId());
+					igFolderModel.setCreateDate(igFolder.getCreateDate());
+					igFolderModel.setModifiedDate(igFolder.getModifiedDate());
+					igFolderModel.setParentFolderId(igFolder.getParentFolderId());
+					igFolderModel.setName(igFolder.getName());
+					igFolderModel.setDescription(igFolder.getDescription());
+					session.save(igFolderModel);
 					session.flush();
 				}
 				else {
-					IGFolderHBM igFolderHBM = (IGFolderHBM)session.get(IGFolderHBM.class,
+					IGFolder igFolderModel = (IGFolder)session.get(IGFolder.class,
 							igFolder.getPrimaryKey());
 
-					if (igFolderHBM != null) {
-						igFolderHBM.setGroupId(igFolder.getGroupId());
-						igFolderHBM.setCompanyId(igFolder.getCompanyId());
-						igFolderHBM.setUserId(igFolder.getUserId());
-						igFolderHBM.setCreateDate(igFolder.getCreateDate());
-						igFolderHBM.setModifiedDate(igFolder.getModifiedDate());
-						igFolderHBM.setParentFolderId(igFolder.getParentFolderId());
-						igFolderHBM.setName(igFolder.getName());
-						igFolderHBM.setDescription(igFolder.getDescription());
+					if (igFolderModel != null) {
+						igFolderModel.setGroupId(igFolder.getGroupId());
+						igFolderModel.setCompanyId(igFolder.getCompanyId());
+						igFolderModel.setUserId(igFolder.getUserId());
+						igFolderModel.setCreateDate(igFolder.getCreateDate());
+						igFolderModel.setModifiedDate(igFolder.getModifiedDate());
+						igFolderModel.setParentFolderId(igFolder.getParentFolderId());
+						igFolderModel.setName(igFolder.getName());
+						igFolderModel.setDescription(igFolder.getDescription());
 						session.flush();
 					}
 					else {
-						igFolderHBM = new IGFolderHBM();
-						igFolderHBM.setFolderId(igFolder.getFolderId());
-						igFolderHBM.setGroupId(igFolder.getGroupId());
-						igFolderHBM.setCompanyId(igFolder.getCompanyId());
-						igFolderHBM.setUserId(igFolder.getUserId());
-						igFolderHBM.setCreateDate(igFolder.getCreateDate());
-						igFolderHBM.setModifiedDate(igFolder.getModifiedDate());
-						igFolderHBM.setParentFolderId(igFolder.getParentFolderId());
-						igFolderHBM.setName(igFolder.getName());
-						igFolderHBM.setDescription(igFolder.getDescription());
-						session.save(igFolderHBM);
+						igFolderModel = new IGFolder();
+						igFolderModel.setFolderId(igFolder.getFolderId());
+						igFolderModel.setGroupId(igFolder.getGroupId());
+						igFolderModel.setCompanyId(igFolder.getCompanyId());
+						igFolderModel.setUserId(igFolder.getUserId());
+						igFolderModel.setCreateDate(igFolder.getCreateDate());
+						igFolderModel.setModifiedDate(igFolder.getModifiedDate());
+						igFolderModel.setParentFolderId(igFolder.getParentFolderId());
+						igFolderModel.setName(igFolder.getName());
+						igFolderModel.setDescription(igFolder.getDescription());
+						session.save(igFolderModel);
 						session.flush();
 					}
 				}
@@ -157,17 +156,16 @@ public class IGFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGFolder findByPrimaryKey(
-		String folderId) throws NoSuchFolderException, SystemException {
+	public IGFolder findByPrimaryKey(String folderId)
+		throws NoSuchFolderException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			IGFolderHBM igFolderHBM = (IGFolderHBM)session.get(IGFolderHBM.class,
-					folderId);
+			IGFolder igFolder = (IGFolder)session.get(IGFolder.class, folderId);
 
-			if (igFolderHBM == null) {
+			if (igFolder == null) {
 				_log.warn("No IGFolder exists with the primary key " +
 					folderId.toString());
 				throw new NoSuchFolderException(
@@ -175,7 +173,7 @@ public class IGFolderPersistence extends BasePersistence {
 					folderId.toString());
 			}
 
-			return IGFolderHBMUtil.model(igFolderHBM);
+			return igFolder;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -193,10 +191,10 @@ public class IGFolderPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM IGFolder IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGFolderHBM WHERE ");
+				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -213,13 +211,7 @@ public class IGFolderPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				IGFolderHBM igFolderHBM = (IGFolderHBM)itr.next();
-				list.add(IGFolderHBMUtil.model(igFolderHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -245,10 +237,10 @@ public class IGFolderPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM IGFolder IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGFolderHBM WHERE ");
+				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -271,15 +263,7 @@ public class IGFolderPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				IGFolderHBM igFolderHBM = (IGFolderHBM)itr.next();
-				list.add(IGFolderHBMUtil.model(igFolderHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -289,8 +273,7 @@ public class IGFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGFolder findByGroupId_First(
-		String groupId, OrderByComparator obc)
+	public IGFolder findByGroupId_First(String groupId, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
@@ -303,12 +286,11 @@ public class IGFolderPersistence extends BasePersistence {
 			throw new NoSuchFolderException(msg);
 		}
 		else {
-			return (com.liferay.portlet.imagegallery.model.IGFolder)list.get(0);
+			return (IGFolder)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGFolder findByGroupId_Last(
-		String groupId, OrderByComparator obc)
+	public IGFolder findByGroupId_Last(String groupId, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
 		int count = countByGroupId(groupId);
 		List list = findByGroupId(groupId, count - 1, count, obc);
@@ -322,14 +304,14 @@ public class IGFolderPersistence extends BasePersistence {
 			throw new NoSuchFolderException(msg);
 		}
 		else {
-			return (com.liferay.portlet.imagegallery.model.IGFolder)list.get(0);
+			return (IGFolder)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGFolder[] findByGroupId_PrevAndNext(
-		String folderId, String groupId, OrderByComparator obc)
+	public IGFolder[] findByGroupId_PrevAndNext(String folderId,
+		String groupId, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
-		com.liferay.portlet.imagegallery.model.IGFolder igFolder = findByPrimaryKey(folderId);
+		IGFolder igFolder = findByPrimaryKey(folderId);
 		int count = countByGroupId(groupId);
 		Session session = null;
 
@@ -338,10 +320,10 @@ public class IGFolderPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM IGFolder IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGFolderHBM WHERE ");
+				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -364,12 +346,11 @@ public class IGFolderPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					igFolder, IGFolderHBMUtil.getInstance());
-			com.liferay.portlet.imagegallery.model.IGFolder[] array = new com.liferay.portlet.imagegallery.model.IGFolder[3];
-			array[0] = (com.liferay.portlet.imagegallery.model.IGFolder)objArray[0];
-			array[1] = (com.liferay.portlet.imagegallery.model.IGFolder)objArray[1];
-			array[2] = (com.liferay.portlet.imagegallery.model.IGFolder)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igFolder);
+			IGFolder[] array = new IGFolder[3];
+			array[0] = (IGFolder)objArray[0];
+			array[1] = (IGFolder)objArray[1];
+			array[2] = (IGFolder)objArray[2];
 
 			return array;
 		}
@@ -390,10 +371,10 @@ public class IGFolderPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM IGFolder IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGFolderHBM WHERE ");
+				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -402,7 +383,7 @@ public class IGFolderPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (parentFolderId == null) {
-				query.append("parentFolderId is null");
+				query.append("parentFolderId IS NULL");
 			}
 			else {
 				query.append("parentFolderId = ?");
@@ -423,13 +404,7 @@ public class IGFolderPersistence extends BasePersistence {
 				q.setString(queryPos++, parentFolderId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				IGFolderHBM igFolderHBM = (IGFolderHBM)itr.next();
-				list.add(IGFolderHBMUtil.model(igFolderHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -455,10 +430,10 @@ public class IGFolderPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM IGFolder IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGFolderHBM WHERE ");
+				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -467,7 +442,7 @@ public class IGFolderPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (parentFolderId == null) {
-				query.append("parentFolderId is null");
+				query.append("parentFolderId IS NULL");
 			}
 			else {
 				query.append("parentFolderId = ?");
@@ -494,15 +469,7 @@ public class IGFolderPersistence extends BasePersistence {
 				q.setString(queryPos++, parentFolderId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				IGFolderHBM igFolderHBM = (IGFolderHBM)itr.next();
-				list.add(IGFolderHBMUtil.model(igFolderHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -512,9 +479,8 @@ public class IGFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGFolder findByG_P_First(
-		String groupId, String parentFolderId, OrderByComparator obc)
-		throws NoSuchFolderException, SystemException {
+	public IGFolder findByG_P_First(String groupId, String parentFolderId,
+		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		List list = findByG_P(groupId, parentFolderId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -529,13 +495,12 @@ public class IGFolderPersistence extends BasePersistence {
 			throw new NoSuchFolderException(msg);
 		}
 		else {
-			return (com.liferay.portlet.imagegallery.model.IGFolder)list.get(0);
+			return (IGFolder)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGFolder findByG_P_Last(
-		String groupId, String parentFolderId, OrderByComparator obc)
-		throws NoSuchFolderException, SystemException {
+	public IGFolder findByG_P_Last(String groupId, String parentFolderId,
+		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		int count = countByG_P(groupId, parentFolderId);
 		List list = findByG_P(groupId, parentFolderId, count - 1, count, obc);
 
@@ -551,14 +516,14 @@ public class IGFolderPersistence extends BasePersistence {
 			throw new NoSuchFolderException(msg);
 		}
 		else {
-			return (com.liferay.portlet.imagegallery.model.IGFolder)list.get(0);
+			return (IGFolder)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGFolder[] findByG_P_PrevAndNext(
-		String folderId, String groupId, String parentFolderId,
-		OrderByComparator obc) throws NoSuchFolderException, SystemException {
-		com.liferay.portlet.imagegallery.model.IGFolder igFolder = findByPrimaryKey(folderId);
+	public IGFolder[] findByG_P_PrevAndNext(String folderId, String groupId,
+		String parentFolderId, OrderByComparator obc)
+		throws NoSuchFolderException, SystemException {
+		IGFolder igFolder = findByPrimaryKey(folderId);
 		int count = countByG_P(groupId, parentFolderId);
 		Session session = null;
 
@@ -567,10 +532,10 @@ public class IGFolderPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM IGFolder IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGFolderHBM WHERE ");
+				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -579,7 +544,7 @@ public class IGFolderPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (parentFolderId == null) {
-				query.append("parentFolderId is null");
+				query.append("parentFolderId IS NULL");
 			}
 			else {
 				query.append("parentFolderId = ?");
@@ -606,12 +571,11 @@ public class IGFolderPersistence extends BasePersistence {
 				q.setString(queryPos++, parentFolderId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					igFolder, IGFolderHBMUtil.getInstance());
-			com.liferay.portlet.imagegallery.model.IGFolder[] array = new com.liferay.portlet.imagegallery.model.IGFolder[3];
-			array[0] = (com.liferay.portlet.imagegallery.model.IGFolder)objArray[0];
-			array[1] = (com.liferay.portlet.imagegallery.model.IGFolder)objArray[1];
-			array[2] = (com.liferay.portlet.imagegallery.model.IGFolder)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igFolder);
+			IGFolder[] array = new IGFolder[3];
+			array[0] = (IGFolder)objArray[0];
+			array[1] = (IGFolder)objArray[1];
+			array[2] = (IGFolder)objArray[2];
 
 			return array;
 		}
@@ -631,20 +595,13 @@ public class IGFolderPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM IGFolder IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGFolderHBM ");
+				"FROM com.liferay.portlet.imagegallery.model.IGFolder ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				IGFolderHBM igFolderHBM = (IGFolderHBM)itr.next();
-				list.add(IGFolderHBMUtil.model(igFolderHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -662,10 +619,10 @@ public class IGFolderPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM IGFolder IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGFolderHBM WHERE ");
+				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -685,8 +642,8 @@ public class IGFolderPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				IGFolderHBM igFolderHBM = (IGFolderHBM)itr.next();
-				session.delete(igFolderHBM);
+				IGFolder igFolder = (IGFolder)itr.next();
+				session.delete(igFolder);
 			}
 
 			session.flush();
@@ -708,10 +665,10 @@ public class IGFolderPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM IGFolder IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGFolderHBM WHERE ");
+				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -720,7 +677,7 @@ public class IGFolderPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (parentFolderId == null) {
-				query.append("parentFolderId is null");
+				query.append("parentFolderId IS NULL");
 			}
 			else {
 				query.append("parentFolderId = ?");
@@ -744,8 +701,8 @@ public class IGFolderPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				IGFolderHBM igFolderHBM = (IGFolderHBM)itr.next();
-				session.delete(igFolderHBM);
+				IGFolder igFolder = (IGFolder)itr.next();
+				session.delete(igFolder);
 			}
 
 			session.flush();
@@ -767,10 +724,10 @@ public class IGFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM IGFolder IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGFolderHBM WHERE ");
+				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -815,10 +772,10 @@ public class IGFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM IGFolder IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGFolderHBM WHERE ");
+				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -827,7 +784,7 @@ public class IGFolderPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (parentFolderId == null) {
-				query.append("parentFolderId is null");
+				query.append("parentFolderId IS NULL");
 			}
 			else {
 				query.append("parentFolderId = ?");
@@ -864,6 +821,9 @@ public class IGFolderPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(IGFolderPersistence.class);

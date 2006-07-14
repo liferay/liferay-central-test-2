@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false">
-	<class name="com.liferay.portal.service.persistence.AccountHBM" table="Account_">
+	<class name="com.liferay.portal.model.Account" table="Account_">
 		<cache usage="read-write" />
 		<id name="accountId" type="java.lang.String">
 			<generator class="assigned" />
@@ -23,7 +23,7 @@
 		<property name="type" column="type_" />
 		<property name="size" column="size_" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.AddressHBM" table="Address">
+	<class name="com.liferay.portal.model.Address" table="Address">
 		<cache usage="read-write" />
 		<id name="addressId" type="java.lang.String">
 			<generator class="assigned" />
@@ -46,7 +46,7 @@
 		<property name="mailing" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.CompanyHBM" table="Company">
+	<class name="com.liferay.portal.model.Company" table="Company">
 		<cache usage="read-write" />
 		<id name="companyId" type="java.lang.String">
 			<generator class="assigned" />
@@ -56,7 +56,7 @@
 		<property name="homeURL" />
 		<property name="mx" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.ContactHBM" table="Contact_">
+	<class name="com.liferay.portal.model.Contact" table="Contact_">
 		<cache usage="read-write" />
 		<id name="contactId" type="java.lang.String">
 			<generator class="assigned" />
@@ -89,7 +89,7 @@
 		<property name="jobClass" />
 		<property name="hoursOfOperation" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.CountryHBM" table="Country">
+	<class name="com.liferay.portal.model.Country" table="Country">
 		<cache usage="read-write" />
 		<id name="countryId" type="java.lang.String">
 			<generator class="assigned" />
@@ -98,7 +98,7 @@
 		<property name="name" />
 		<property name="active" column="active_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.DataTrackerHBM" table="DataTracker">
+	<class name="com.liferay.portal.model.DataTracker" table="DataTracker">
 		<cache usage="read-write" />
 		<id name="dataTrackerId" type="java.lang.String">
 			<generator class="assigned" />
@@ -113,7 +113,7 @@
 		<property name="classPK" />
 		<property name="active" column="active_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.EmailAddressHBM" table="EmailAddress">
+	<class name="com.liferay.portal.model.EmailAddress" table="EmailAddress">
 		<cache usage="read-write" />
 		<id name="emailAddressId" type="java.lang.String">
 			<generator class="assigned" />
@@ -129,7 +129,7 @@
 		<property name="typeId" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.GroupHBM" table="Group_">
+	<class name="com.liferay.portal.model.Group" table="Group_">
 		<cache usage="read-write" />
 		<id name="groupId" type="java.lang.String">
 			<generator class="assigned" />
@@ -142,28 +142,8 @@
 		<property name="description" />
 		<property name="type" column="type_" />
 		<property name="friendlyURL" />
-		<set name="orgs" table="Groups_Orgs" lazy="true">
-			<key column="groupId" />
-			<many-to-many class="com.liferay.portal.service.persistence.OrganizationHBM" column="organizationId" />
-		</set>
-		<set name="permissions" table="Groups_Permissions" lazy="true">
-			<key column="groupId" />
-			<many-to-many class="com.liferay.portal.service.persistence.PermissionHBM" column="permissionId" />
-		</set>
-		<set name="roles" table="Groups_Roles" lazy="true">
-			<key column="groupId" />
-			<many-to-many class="com.liferay.portal.service.persistence.RoleHBM" column="roleId" />
-		</set>
-		<set name="userGroups" table="Groups_UserGroups" lazy="true">
-			<key column="groupId" />
-			<many-to-many class="com.liferay.portal.service.persistence.UserGroupHBM" column="userGroupId" />
-		</set>
-		<set name="users" table="Users_Groups" lazy="true">
-			<key column="groupId" />
-			<many-to-many class="com.liferay.portal.service.persistence.UserHBM" column="userId" />
-		</set>
 	</class>
-	<class name="com.liferay.portal.service.persistence.ImageHBM" table="Image">
+	<class name="com.liferay.portal.model.Image" table="Image">
 		<cache usage="read-write" />
 		<id name="imageId" type="java.lang.String">
 			<generator class="assigned" />
@@ -171,7 +151,7 @@
 		<property name="modifiedDate" />
 		<property name="text" column="text_" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.LayoutHBM" table="Layout">
+	<class name="com.liferay.portal.model.Layout" table="Layout">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.LayoutPK">
 			<key-property name="layoutId" />
@@ -188,7 +168,7 @@
 		<property name="colorSchemeId" />
 		<property name="priority" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.LayoutSetHBM" table="LayoutSet">
+	<class name="com.liferay.portal.model.LayoutSet" table="LayoutSet">
 		<cache usage="read-write" />
 		<id name="ownerId" type="java.lang.String">
 			<generator class="assigned" />
@@ -201,7 +181,7 @@
 		<property name="colorSchemeId" />
 		<property name="pageCount" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.ListTypeHBM" table="ListType">
+	<class name="com.liferay.portal.model.ListType" table="ListType">
 		<cache usage="read-write" />
 		<id name="listTypeId" type="java.lang.String">
 			<generator class="assigned" />
@@ -209,7 +189,7 @@
 		<property name="name" />
 		<property name="type" column="type_" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.OrganizationHBM" table="Organization_">
+	<class name="com.liferay.portal.model.Organization" table="Organization_">
 		<cache usage="read-write" />
 		<id name="organizationId" type="java.lang.String">
 			<generator class="assigned" />
@@ -222,16 +202,8 @@
 		<property name="countryId" />
 		<property name="statusId" />
 		<property name="comments" />
-		<set name="groups" table="Groups_Orgs" lazy="true">
-			<key column="organizationId" />
-			<many-to-many class="com.liferay.portal.service.persistence.GroupHBM" column="groupId" />
-		</set>
-		<set name="users" table="Users_Orgs" lazy="true">
-			<key column="organizationId" />
-			<many-to-many class="com.liferay.portal.service.persistence.UserHBM" column="userId" />
-		</set>
 	</class>
-	<class name="com.liferay.portal.service.persistence.OrgGroupPermissionHBM" table="OrgGroupPermission">
+	<class name="com.liferay.portal.model.OrgGroupPermission" table="OrgGroupPermission">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.OrgGroupPermissionPK">
 			<key-property name="organizationId" />
@@ -239,7 +211,7 @@
 			<key-property name="permissionId" />
 		</composite-id>
 	</class>
-	<class name="com.liferay.portal.service.persistence.OrgGroupRoleHBM" table="OrgGroupRole">
+	<class name="com.liferay.portal.model.OrgGroupRole" table="OrgGroupRole">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.OrgGroupRolePK">
 			<key-property name="organizationId" />
@@ -247,7 +219,7 @@
 			<key-property name="roleId" />
 		</composite-id>
 	</class>
-	<class name="com.liferay.portal.service.persistence.OrgLaborHBM" table="OrgLabor">
+	<class name="com.liferay.portal.model.OrgLabor" table="OrgLabor">
 		<cache usage="read-write" />
 		<id name="orgLaborId" type="java.lang.String">
 			<generator class="assigned" />
@@ -269,7 +241,7 @@
 		<property name="satOpen" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="satClose" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.PasswordTrackerHBM" table="PasswordTracker">
+	<class name="com.liferay.portal.model.PasswordTracker" table="PasswordTracker">
 		<cache usage="read-write" />
 		<id name="passwordTrackerId" type="java.lang.String">
 			<generator class="assigned" />
@@ -278,7 +250,7 @@
 		<property name="createDate" />
 		<property name="password" column="password_" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.PermissionHBM" table="Permission_">
+	<class name="com.liferay.portal.model.Permission" table="Permission_">
 		<cache usage="read-write" />
 		<id name="permissionId" type="java.lang.String">
 			<generator class="assigned" />
@@ -286,20 +258,8 @@
 		<property name="companyId" />
 		<property name="actionId" />
 		<property name="resourceId" />
-		<set name="groups" table="Groups_Permissions" lazy="true">
-			<key column="permissionId" />
-			<many-to-many class="com.liferay.portal.service.persistence.GroupHBM" column="groupId" />
-		</set>
-		<set name="roles" table="Roles_Permissions" lazy="true">
-			<key column="permissionId" />
-			<many-to-many class="com.liferay.portal.service.persistence.RoleHBM" column="roleId" />
-		</set>
-		<set name="users" table="Users_Permissions" lazy="true">
-			<key column="permissionId" />
-			<many-to-many class="com.liferay.portal.service.persistence.UserHBM" column="userId" />
-		</set>
 	</class>
-	<class name="com.liferay.portal.service.persistence.PhoneHBM" table="Phone">
+	<class name="com.liferay.portal.model.Phone" table="Phone">
 		<cache usage="read-write" />
 		<id name="phoneId" type="java.lang.String">
 			<generator class="assigned" />
@@ -316,7 +276,7 @@
 		<property name="typeId" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.PortletHBM" table="Portlet">
+	<class name="com.liferay.portal.model.Portlet" table="Portlet">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.PortletPK">
 			<key-property name="portletId" />
@@ -326,7 +286,7 @@
 		<property name="roles" />
 		<property name="active" column="active_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.PortletPreferencesHBM" table="PortletPreferences">
+	<class name="com.liferay.portal.model.PortletPreferences" table="PortletPreferences">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.PortletPreferencesPK">
 			<key-property name="portletId" />
@@ -335,7 +295,7 @@
 		</composite-id>
 		<property name="preferences" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.RegionHBM" table="Region">
+	<class name="com.liferay.portal.model.Region" table="Region">
 		<cache usage="read-write" />
 		<id name="regionId" type="java.lang.String">
 			<generator class="assigned" />
@@ -345,7 +305,7 @@
 		<property name="name" />
 		<property name="active" column="active_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.ReleaseHBM" table="Release_">
+	<class name="com.liferay.portal.model.Release" table="Release_">
 		<cache usage="read-write" />
 		<id name="releaseId" type="java.lang.String">
 			<generator class="assigned" />
@@ -355,7 +315,7 @@
 		<property name="buildNumber" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="buildDate" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.ResourceHBM" table="Resource_">
+	<class name="com.liferay.portal.model.Resource" table="Resource_">
 		<cache usage="read-write" />
 		<id name="resourceId" type="java.lang.String">
 			<generator class="assigned" />
@@ -366,7 +326,7 @@
 		<property name="scope" />
 		<property name="primKey" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.RoleHBM" table="Role_">
+	<class name="com.liferay.portal.model.Role" table="Role_">
 		<cache usage="read-write" />
 		<id name="roleId" type="java.lang.String">
 			<generator class="assigned" />
@@ -376,20 +336,8 @@
 		<property name="classPK" />
 		<property name="name" />
 		<property name="description" />
-		<set name="groups" table="Groups_Roles" lazy="true">
-			<key column="roleId" />
-			<many-to-many class="com.liferay.portal.service.persistence.GroupHBM" column="groupId" />
-		</set>
-		<set name="permissions" table="Roles_Permissions" lazy="true">
-			<key column="roleId" />
-			<many-to-many class="com.liferay.portal.service.persistence.PermissionHBM" column="permissionId" />
-		</set>
-		<set name="users" table="Users_Roles" lazy="true">
-			<key column="roleId" />
-			<many-to-many class="com.liferay.portal.service.persistence.UserHBM" column="userId" />
-		</set>
 	</class>
-	<class name="com.liferay.portal.service.persistence.SubscriptionHBM" table="Subscription">
+	<class name="com.liferay.portal.model.Subscription" table="Subscription">
 		<cache usage="read-write" />
 		<id name="subscriptionId" type="java.lang.String">
 			<generator class="assigned" />
@@ -403,7 +351,7 @@
 		<property name="classPK" />
 		<property name="frequency" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.UserHBM" table="User_">
+	<class name="com.liferay.portal.model.User" table="User_">
 		<cache usage="read-write" />
 		<id name="userId" type="java.lang.String">
 			<generator class="assigned" />
@@ -429,28 +377,8 @@
 		<property name="failedLoginAttempts" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="agreedToTermsOfUse" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="active" column="active_" type="com.liferay.util.dao.hibernate.BooleanType" />
-		<set name="groups" table="Users_Groups" lazy="true">
-			<key column="userId" />
-			<many-to-many class="com.liferay.portal.service.persistence.GroupHBM" column="groupId" />
-		</set>
-		<set name="orgs" table="Users_Orgs" lazy="true">
-			<key column="userId" />
-			<many-to-many class="com.liferay.portal.service.persistence.OrganizationHBM" column="organizationId" />
-		</set>
-		<set name="permissions" table="Users_Permissions" lazy="true">
-			<key column="userId" />
-			<many-to-many class="com.liferay.portal.service.persistence.PermissionHBM" column="permissionId" />
-		</set>
-		<set name="roles" table="Users_Roles" lazy="true">
-			<key column="userId" />
-			<many-to-many class="com.liferay.portal.service.persistence.RoleHBM" column="roleId" />
-		</set>
-		<set name="userGroups" table="Users_UserGroups" lazy="true">
-			<key column="userId" />
-			<many-to-many class="com.liferay.portal.service.persistence.UserGroupHBM" column="userGroupId" />
-		</set>
 	</class>
-	<class name="com.liferay.portal.service.persistence.UserGroupHBM" table="UserGroup">
+	<class name="com.liferay.portal.model.UserGroup" table="UserGroup">
 		<cache usage="read-write" />
 		<id name="userGroupId" type="java.lang.String">
 			<generator class="assigned" />
@@ -459,12 +387,8 @@
 		<property name="parentUserGroupId" />
 		<property name="name" />
 		<property name="description" />
-		<set name="users" table="Users_UserGroups" lazy="true">
-			<key column="userGroupId" />
-			<many-to-many class="com.liferay.portal.service.persistence.UserHBM" column="userId" />
-		</set>
 	</class>
-	<class name="com.liferay.portal.service.persistence.UserIdMapperHBM" table="UserIdMapper">
+	<class name="com.liferay.portal.model.UserIdMapper" table="UserIdMapper">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.UserIdMapperPK">
 			<key-property name="userId" />
@@ -473,7 +397,7 @@
 		<property name="description" />
 		<property name="externalUserId" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.UserTrackerHBM" table="UserTracker">
+	<class name="com.liferay.portal.model.UserTracker" table="UserTracker">
 		<cache usage="read-write" />
 		<id name="userTrackerId" type="java.lang.String">
 			<generator class="assigned" />
@@ -485,7 +409,7 @@
 		<property name="remoteHost" />
 		<property name="userAgent" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.UserTrackerPathHBM" table="UserTrackerPath">
+	<class name="com.liferay.portal.model.UserTrackerPath" table="UserTrackerPath">
 		<cache usage="read-write" />
 		<id name="userTrackerPathId" type="java.lang.String">
 			<generator class="assigned" />
@@ -494,7 +418,7 @@
 		<property name="path" />
 		<property name="pathDate" />
 	</class>
-	<class name="com.liferay.portal.service.persistence.WebsiteHBM" table="Website">
+	<class name="com.liferay.portal.model.Website" table="Website">
 		<cache usage="read-write" />
 		<id name="websiteId" type="java.lang.String">
 			<generator class="assigned" />
@@ -510,7 +434,7 @@
 		<property name="typeId" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portlet.blogs.service.persistence.BlogsCategoryHBM" table="BlogsCategory">
+	<class name="com.liferay.portlet.blogs.model.BlogsCategory" table="BlogsCategory">
 		<cache usage="read-write" />
 		<id name="categoryId" type="java.lang.String">
 			<generator class="assigned" />
@@ -524,7 +448,7 @@
 		<property name="name" />
 		<property name="description" />
 	</class>
-	<class name="com.liferay.portlet.blogs.service.persistence.BlogsEntryHBM" table="BlogsEntry">
+	<class name="com.liferay.portlet.blogs.model.BlogsEntry" table="BlogsEntry">
 		<cache usage="read-write" />
 		<id name="entryId" type="java.lang.String">
 			<generator class="assigned" />
@@ -540,7 +464,7 @@
 		<property name="content" />
 		<property name="displayDate" />
 	</class>
-	<class name="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryHBM" table="BookmarksEntry">
+	<class name="com.liferay.portlet.bookmarks.model.BookmarksEntry" table="BookmarksEntry">
 		<cache usage="read-write" />
 		<id name="entryId" type="java.lang.String">
 			<generator class="assigned" />
@@ -555,7 +479,7 @@
 		<property name="comments" />
 		<property name="visits" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
-	<class name="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderHBM" table="BookmarksFolder">
+	<class name="com.liferay.portlet.bookmarks.model.BookmarksFolder" table="BookmarksFolder">
 		<cache usage="read-write" />
 		<id name="folderId" type="java.lang.String">
 			<generator class="assigned" />
@@ -569,7 +493,7 @@
 		<property name="name" />
 		<property name="description" />
 	</class>
-	<class name="com.liferay.portlet.calendar.service.persistence.CalEventHBM" table="CalEvent">
+	<class name="com.liferay.portlet.calendar.model.CalEvent" table="CalEvent">
 		<cache usage="read-write" />
 		<id name="eventId" type="java.lang.String">
 			<generator class="assigned" />
@@ -595,7 +519,7 @@
 		<property name="firstReminder" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="secondReminder" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
-	<class name="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryHBM" table="DLFileEntry">
+	<class name="com.liferay.portlet.documentlibrary.model.DLFileEntry" table="DLFileEntry">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK">
 			<key-property name="folderId" />
@@ -614,7 +538,7 @@
 		<property name="size" column="size_" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="readCount" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
-	<class name="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankHBM" table="DLFileRank">
+	<class name="com.liferay.portlet.documentlibrary.model.DLFileRank" table="DLFileRank">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK">
 			<key-property name="companyId" />
@@ -624,7 +548,7 @@
 		</composite-id>
 		<property name="createDate" />
 	</class>
-	<class name="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionHBM" table="DLFileVersion">
+	<class name="com.liferay.portlet.documentlibrary.model.DLFileVersion" table="DLFileVersion">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPK">
 			<key-property name="folderId" />
@@ -637,7 +561,7 @@
 		<property name="createDate" />
 		<property name="size" column="size_" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
-	<class name="com.liferay.portlet.documentlibrary.service.persistence.DLFolderHBM" table="DLFolder">
+	<class name="com.liferay.portlet.documentlibrary.model.DLFolder" table="DLFolder">
 		<cache usage="read-write" />
 		<id name="folderId" type="java.lang.String">
 			<generator class="assigned" />
@@ -653,7 +577,7 @@
 		<property name="description" />
 		<property name="lastPostDate" />
 	</class>
-	<class name="com.liferay.portlet.imagegallery.service.persistence.IGFolderHBM" table="IGFolder">
+	<class name="com.liferay.portlet.imagegallery.model.IGFolder" table="IGFolder">
 		<cache usage="read-write" />
 		<id name="folderId" type="java.lang.String">
 			<generator class="assigned" />
@@ -667,7 +591,7 @@
 		<property name="name" />
 		<property name="description" />
 	</class>
-	<class name="com.liferay.portlet.imagegallery.service.persistence.IGImageHBM" table="IGImage">
+	<class name="com.liferay.portlet.imagegallery.model.IGImage" table="IGImage">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.imagegallery.service.persistence.IGImagePK">
 			<key-property name="companyId" />
@@ -682,7 +606,7 @@
 		<property name="width" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="size" column="size_" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
-	<class name="com.liferay.portlet.journal.service.persistence.JournalArticleHBM" table="JournalArticle">
+	<class name="com.liferay.portlet.journal.model.JournalArticle" table="JournalArticle">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.journal.service.persistence.JournalArticlePK">
 			<key-property name="companyId" />
@@ -708,7 +632,7 @@
 		<property name="expirationDate" />
 		<property name="reviewDate" />
 	</class>
-	<class name="com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM" table="JournalContentSearch">
+	<class name="com.liferay.portlet.journal.model.JournalContentSearch" table="JournalContentSearch">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.journal.service.persistence.JournalContentSearchPK">
 			<key-property name="portletId" />
@@ -718,7 +642,7 @@
 		<property name="companyId" />
 		<property name="articleId" />
 	</class>
-	<class name="com.liferay.portlet.journal.service.persistence.JournalStructureHBM" table="JournalStructure">
+	<class name="com.liferay.portlet.journal.model.JournalStructure" table="JournalStructure">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.journal.service.persistence.JournalStructurePK">
 			<key-property name="companyId" />
@@ -733,7 +657,7 @@
 		<property name="description" />
 		<property name="xsd" />
 	</class>
-	<class name="com.liferay.portlet.journal.service.persistence.JournalTemplateHBM" table="JournalTemplate">
+	<class name="com.liferay.portlet.journal.model.JournalTemplate" table="JournalTemplate">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.journal.service.persistence.JournalTemplatePK">
 			<key-property name="companyId" />
@@ -752,7 +676,7 @@
 		<property name="smallImage" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="smallImageURL" />
 	</class>
-	<class name="com.liferay.portlet.mail.service.persistence.MailReceiptHBM" table="MailReceipt">
+	<class name="com.liferay.portlet.mail.model.MailReceipt" table="MailReceipt">
 		<cache usage="read-write" />
 		<id name="receiptId" type="java.lang.String">
 			<generator class="assigned" />
@@ -769,7 +693,7 @@
 		<property name="firstReadDate" />
 		<property name="lastReadDate" />
 	</class>
-	<class name="com.liferay.portlet.messageboards.service.persistence.MBCategoryHBM" table="MBCategory">
+	<class name="com.liferay.portlet.messageboards.model.MBCategory" table="MBCategory">
 		<cache usage="read-write" />
 		<id name="categoryId" type="java.lang.String">
 			<generator class="assigned" />
@@ -785,7 +709,7 @@
 		<property name="description" />
 		<property name="lastPostDate" />
 	</class>
-	<class name="com.liferay.portlet.messageboards.service.persistence.MBDiscussionHBM" table="MBDiscussion">
+	<class name="com.liferay.portlet.messageboards.model.MBDiscussion" table="MBDiscussion">
 		<cache usage="read-write" />
 		<id name="discussionId" type="java.lang.String">
 			<generator class="assigned" />
@@ -794,7 +718,7 @@
 		<property name="classPK" />
 		<property name="threadId" />
 	</class>
-	<class name="com.liferay.portlet.messageboards.service.persistence.MBMessageHBM" table="MBMessage">
+	<class name="com.liferay.portlet.messageboards.model.MBMessage" table="MBMessage">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.messageboards.service.persistence.MBMessagePK">
 			<key-property name="topicId" />
@@ -813,7 +737,7 @@
 		<property name="attachments" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="anonymous" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM" table="MBMessageFlag">
+	<class name="com.liferay.portlet.messageboards.model.MBMessageFlag" table="MBMessageFlag">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK">
 			<key-property name="topicId" />
@@ -822,7 +746,7 @@
 		</composite-id>
 		<property name="flag" />
 	</class>
-	<class name="com.liferay.portlet.messageboards.service.persistence.MBStatsUserHBM" table="MBStatsUser">
+	<class name="com.liferay.portlet.messageboards.model.MBStatsUser" table="MBStatsUser">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK">
 			<key-property name="groupId" />
@@ -831,7 +755,7 @@
 		<property name="messageCount" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="lastPostDate" />
 	</class>
-	<class name="com.liferay.portlet.messageboards.service.persistence.MBThreadHBM" table="MBThread">
+	<class name="com.liferay.portlet.messageboards.model.MBThread" table="MBThread">
 		<cache usage="read-write" />
 		<id name="threadId" type="java.lang.String">
 			<generator class="assigned" />
@@ -843,7 +767,7 @@
 		<property name="viewCount" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="lastPostDate" />
 	</class>
-	<class name="com.liferay.portlet.polls.service.persistence.PollsChoiceHBM" table="PollsChoice">
+	<class name="com.liferay.portlet.polls.model.PollsChoice" table="PollsChoice">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.polls.service.persistence.PollsChoicePK">
 			<key-property name="questionId" />
@@ -851,7 +775,7 @@
 		</composite-id>
 		<property name="description" />
 	</class>
-	<class name="com.liferay.portlet.polls.service.persistence.PollsQuestionHBM" table="PollsQuestion">
+	<class name="com.liferay.portlet.polls.model.PollsQuestion" table="PollsQuestion">
 		<cache usage="read-write" />
 		<id name="questionId" type="java.lang.String">
 			<generator class="assigned" />
@@ -867,7 +791,7 @@
 		<property name="expirationDate" />
 		<property name="lastVoteDate" />
 	</class>
-	<class name="com.liferay.portlet.polls.service.persistence.PollsVoteHBM" table="PollsVote">
+	<class name="com.liferay.portlet.polls.model.PollsVote" table="PollsVote">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.polls.service.persistence.PollsVotePK">
 			<key-property name="questionId" />
@@ -876,7 +800,7 @@
 		<property name="choiceId" />
 		<property name="voteDate" />
 	</class>
-	<class name="com.liferay.portlet.shopping.service.persistence.ShoppingCartHBM" table="ShoppingCart">
+	<class name="com.liferay.portlet.shopping.model.ShoppingCart" table="ShoppingCart">
 		<cache usage="read-write" />
 		<id name="cartId" type="java.lang.String">
 			<generator class="assigned" />
@@ -892,7 +816,7 @@
 		<property name="altShipping" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="insure" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryHBM" table="ShoppingCategory">
+	<class name="com.liferay.portlet.shopping.model.ShoppingCategory" table="ShoppingCategory">
 		<cache usage="read-write" />
 		<id name="categoryId" type="java.lang.String">
 			<generator class="assigned" />
@@ -907,7 +831,7 @@
 		<property name="name" />
 		<property name="description" />
 	</class>
-	<class name="com.liferay.portlet.shopping.service.persistence.ShoppingCouponHBM" table="ShoppingCoupon">
+	<class name="com.liferay.portlet.shopping.model.ShoppingCoupon" table="ShoppingCoupon">
 		<cache usage="read-write" />
 		<id name="couponId" type="java.lang.String">
 			<generator class="assigned" />
@@ -929,7 +853,7 @@
 		<property name="discount" type="com.liferay.util.dao.hibernate.DoubleType" />
 		<property name="discountType" />
 	</class>
-	<class name="com.liferay.portlet.shopping.service.persistence.ShoppingItemHBM" table="ShoppingItem">
+	<class name="com.liferay.portlet.shopping.model.ShoppingItem" table="ShoppingItem">
 		<cache usage="read-write" />
 		<id name="itemId" type="java.lang.String">
 			<generator class="assigned" />
@@ -963,12 +887,8 @@
 		<property name="mediumImageURL" />
 		<property name="largeImage" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="largeImageURL" />
-		<set name="shoppingItemPrices" lazy="true">
-			<key column="itemId" />
-			<one-to-many class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceHBM" />
-		</set>
 	</class>
-	<class name="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldHBM" table="ShoppingItemField">
+	<class name="com.liferay.portlet.shopping.model.ShoppingItemField" table="ShoppingItemField">
 		<cache usage="read-write" />
 		<id name="itemFieldId" type="java.lang.String">
 			<generator class="assigned" />
@@ -978,7 +898,7 @@
 		<property name="values" column="values_" />
 		<property name="description" />
 	</class>
-	<class name="com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceHBM" table="ShoppingItemPrice">
+	<class name="com.liferay.portlet.shopping.model.ShoppingItemPrice" table="ShoppingItemPrice">
 		<cache usage="read-write" />
 		<id name="itemPriceId" type="java.lang.String">
 			<generator class="assigned" />
@@ -993,7 +913,7 @@
 		<property name="useShippingFormula" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="status" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
-	<class name="com.liferay.portlet.shopping.service.persistence.ShoppingOrderHBM" table="ShoppingOrder">
+	<class name="com.liferay.portlet.shopping.model.ShoppingOrder" table="ShoppingOrder">
 		<cache usage="read-write" />
 		<id name="orderId" type="java.lang.String">
 			<generator class="assigned" />
@@ -1048,7 +968,7 @@
 		<property name="sendOrderEmail" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="sendShippingEmail" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemHBM" table="ShoppingOrderItem">
+	<class name="com.liferay.portlet.shopping.model.ShoppingOrderItem" table="ShoppingOrderItem">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK">
 			<key-property name="orderId" />
@@ -1062,7 +982,7 @@
 		<property name="quantity" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="shippedDate" />
 	</class>
-	<class name="com.liferay.portlet.wiki.service.persistence.WikiNodeHBM" table="WikiNode">
+	<class name="com.liferay.portlet.wiki.model.WikiNode" table="WikiNode">
 		<cache usage="read-write" />
 		<id name="nodeId" type="java.lang.String">
 			<generator class="assigned" />
@@ -1077,7 +997,7 @@
 		<property name="description" />
 		<property name="lastPostDate" />
 	</class>
-	<class name="com.liferay.portlet.wiki.service.persistence.WikiPageHBM" table="WikiPage">
+	<class name="com.liferay.portlet.wiki.model.WikiPage" table="WikiPage">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.wiki.service.persistence.WikiPagePK">
 			<key-property name="nodeId" />

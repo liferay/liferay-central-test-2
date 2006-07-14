@@ -29,7 +29,7 @@ package com.liferay.portal.service.spring;
  *
  */
 public interface UserGroupLocalService {
-	public boolean addGroupUserGroups(java.lang.String groupId,
+	public void addGroupUserGroups(java.lang.String groupId,
 		java.lang.String[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
@@ -67,7 +67,7 @@ public interface UserGroupLocalService {
 		java.lang.String description, java.util.Map params)
 		throws com.liferay.portal.SystemException;
 
-	public boolean unsetGroupUserGroups(java.lang.String groupId,
+	public void unsetGroupUserGroups(java.lang.String groupId,
 		java.lang.String[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;

@@ -342,6 +342,10 @@ public class MBMessageFlagUtil {
 		return getPersistence().countByT_U(topicId, userId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static MBMessageFlagPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		MBMessageFlagUtil util = (MBMessageFlagUtil)ctx.getBean(CLASS_NAME);

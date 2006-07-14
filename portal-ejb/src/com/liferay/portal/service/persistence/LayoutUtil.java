@@ -257,6 +257,10 @@ public class LayoutUtil {
 		return getPersistence().countByO_F(ownerId, friendlyURL);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static LayoutPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		LayoutUtil util = (LayoutUtil)ctx.getBean(CLASS_NAME);

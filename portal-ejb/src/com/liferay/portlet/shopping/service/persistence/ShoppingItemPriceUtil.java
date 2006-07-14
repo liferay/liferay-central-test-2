@@ -181,6 +181,10 @@ public class ShoppingItemPriceUtil {
 		return getPersistence().countByItemId(itemId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static ShoppingItemPricePersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		ShoppingItemPriceUtil util = (ShoppingItemPriceUtil)ctx.getBean(CLASS_NAME);

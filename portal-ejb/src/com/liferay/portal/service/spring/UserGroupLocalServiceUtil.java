@@ -29,15 +29,13 @@ package com.liferay.portal.service.spring;
  *
  */
 public class UserGroupLocalServiceUtil {
-	public static boolean addGroupUserGroups(java.lang.String groupId,
+	public static void addGroupUserGroups(java.lang.String groupId,
 		java.lang.String[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
-
-			return userGroupLocalService.addGroupUserGroups(groupId,
-				userGroupIds);
+			userGroupLocalService.addGroupUserGroups(groupId, userGroupIds);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -184,15 +182,13 @@ public class UserGroupLocalServiceUtil {
 		}
 	}
 
-	public static boolean unsetGroupUserGroups(java.lang.String groupId,
+	public static void unsetGroupUserGroups(java.lang.String groupId,
 		java.lang.String[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
-
-			return userGroupLocalService.unsetGroupUserGroups(groupId,
-				userGroupIds);
+			userGroupLocalService.unsetGroupUserGroups(groupId, userGroupIds);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

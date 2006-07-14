@@ -412,6 +412,10 @@ public class PhoneUtil {
 			primary);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static PhonePersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		PhoneUtil util = (PhoneUtil)ctx.getBean(CLASS_NAME);

@@ -236,6 +236,10 @@ public class DLFileRankUtil {
 		return getPersistence().countByF_N(folderId, name);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static DLFileRankPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		DLFileRankUtil util = (DLFileRankUtil)ctx.getBean(CLASS_NAME);

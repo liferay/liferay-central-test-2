@@ -182,6 +182,10 @@ public class IGImageUtil {
 		return getPersistence().countByFolderId(folderId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static IGImagePersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		IGImageUtil util = (IGImageUtil)ctx.getBean(CLASS_NAME);

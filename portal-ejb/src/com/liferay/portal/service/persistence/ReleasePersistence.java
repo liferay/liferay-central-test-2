@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchReleaseException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Release;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import org.apache.commons.logging.Log;
@@ -44,25 +45,24 @@ import java.util.List;
  *
  */
 public class ReleasePersistence extends BasePersistence {
-	public com.liferay.portal.model.Release create(String releaseId) {
-		ReleaseHBM releaseHBM = new ReleaseHBM();
-		releaseHBM.setNew(true);
-		releaseHBM.setPrimaryKey(releaseId);
+	public Release create(String releaseId) {
+		Release release = new Release();
+		release.setNew(true);
+		release.setPrimaryKey(releaseId);
 
-		return ReleaseHBMUtil.model(releaseHBM);
+		return release;
 	}
 
-	public com.liferay.portal.model.Release remove(String releaseId)
+	public Release remove(String releaseId)
 		throws NoSuchReleaseException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ReleaseHBM releaseHBM = (ReleaseHBM)session.get(ReleaseHBM.class,
-					releaseId);
+			Release release = (Release)session.get(Release.class, releaseId);
 
-			if (releaseHBM == null) {
+			if (release == null) {
 				_log.warn("No Release exists with the primary key " +
 					releaseId.toString());
 				throw new NoSuchReleaseException(
@@ -70,10 +70,10 @@ public class ReleasePersistence extends BasePersistence {
 					releaseId.toString());
 			}
 
-			session.delete(releaseHBM);
+			session.delete(release);
 			session.flush();
 
-			return ReleaseHBMUtil.model(releaseHBM);
+			return release;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -92,34 +92,34 @@ public class ReleasePersistence extends BasePersistence {
 				session = openSession();
 
 				if (release.isNew()) {
-					ReleaseHBM releaseHBM = new ReleaseHBM();
-					releaseHBM.setReleaseId(release.getReleaseId());
-					releaseHBM.setCreateDate(release.getCreateDate());
-					releaseHBM.setModifiedDate(release.getModifiedDate());
-					releaseHBM.setBuildNumber(release.getBuildNumber());
-					releaseHBM.setBuildDate(release.getBuildDate());
-					session.save(releaseHBM);
+					Release releaseModel = new Release();
+					releaseModel.setReleaseId(release.getReleaseId());
+					releaseModel.setCreateDate(release.getCreateDate());
+					releaseModel.setModifiedDate(release.getModifiedDate());
+					releaseModel.setBuildNumber(release.getBuildNumber());
+					releaseModel.setBuildDate(release.getBuildDate());
+					session.save(releaseModel);
 					session.flush();
 				}
 				else {
-					ReleaseHBM releaseHBM = (ReleaseHBM)session.get(ReleaseHBM.class,
+					Release releaseModel = (Release)session.get(Release.class,
 							release.getPrimaryKey());
 
-					if (releaseHBM != null) {
-						releaseHBM.setCreateDate(release.getCreateDate());
-						releaseHBM.setModifiedDate(release.getModifiedDate());
-						releaseHBM.setBuildNumber(release.getBuildNumber());
-						releaseHBM.setBuildDate(release.getBuildDate());
+					if (releaseModel != null) {
+						releaseModel.setCreateDate(release.getCreateDate());
+						releaseModel.setModifiedDate(release.getModifiedDate());
+						releaseModel.setBuildNumber(release.getBuildNumber());
+						releaseModel.setBuildDate(release.getBuildDate());
 						session.flush();
 					}
 					else {
-						releaseHBM = new ReleaseHBM();
-						releaseHBM.setReleaseId(release.getReleaseId());
-						releaseHBM.setCreateDate(release.getCreateDate());
-						releaseHBM.setModifiedDate(release.getModifiedDate());
-						releaseHBM.setBuildNumber(release.getBuildNumber());
-						releaseHBM.setBuildDate(release.getBuildDate());
-						session.save(releaseHBM);
+						releaseModel = new Release();
+						releaseModel.setReleaseId(release.getReleaseId());
+						releaseModel.setCreateDate(release.getCreateDate());
+						releaseModel.setModifiedDate(release.getModifiedDate());
+						releaseModel.setBuildNumber(release.getBuildNumber());
+						releaseModel.setBuildDate(release.getBuildDate());
+						session.save(releaseModel);
 						session.flush();
 					}
 				}
@@ -138,17 +138,16 @@ public class ReleasePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Release findByPrimaryKey(String releaseId)
+	public Release findByPrimaryKey(String releaseId)
 		throws NoSuchReleaseException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ReleaseHBM releaseHBM = (ReleaseHBM)session.get(ReleaseHBM.class,
-					releaseId);
+			Release release = (Release)session.get(Release.class, releaseId);
 
-			if (releaseHBM == null) {
+			if (release == null) {
 				_log.warn("No Release exists with the primary key " +
 					releaseId.toString());
 				throw new NoSuchReleaseException(
@@ -156,7 +155,7 @@ public class ReleasePersistence extends BasePersistence {
 					releaseId.toString());
 			}
 
-			return ReleaseHBMUtil.model(releaseHBM);
+			return release;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -173,19 +172,11 @@ public class ReleasePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Release_ IN CLASS com.liferay.portal.service.persistence.ReleaseHBM ");
+			query.append("FROM com.liferay.portal.model.Release ");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				ReleaseHBM releaseHBM = (ReleaseHBM)itr.next();
-				list.add(ReleaseHBMUtil.model(releaseHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -193,6 +184,9 @@ public class ReleasePersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(ReleasePersistence.class);

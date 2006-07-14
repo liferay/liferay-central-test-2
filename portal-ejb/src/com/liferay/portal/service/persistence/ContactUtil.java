@@ -180,6 +180,10 @@ public class ContactUtil {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static ContactPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		ContactUtil util = (ContactUtil)ctx.getBean(CLASS_NAME);

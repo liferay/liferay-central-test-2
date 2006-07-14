@@ -181,6 +181,10 @@ public class BookmarksEntryUtil {
 		return getPersistence().countByFolderId(folderId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static BookmarksEntryPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		BookmarksEntryUtil util = (BookmarksEntryUtil)ctx.getBean(CLASS_NAME);

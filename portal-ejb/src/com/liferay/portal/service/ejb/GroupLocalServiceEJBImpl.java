@@ -57,11 +57,11 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 			description, type, friendlyURL);
 	}
 
-	public boolean addRoleGroups(java.lang.String roleId,
+	public void addRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addRoleGroups(roleId, groupIds);
+		getService().addRoleGroups(roleId, groupIds);
 	}
 
 	public void checkSystemGroups(java.lang.String companyId)
@@ -168,11 +168,11 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 		getService().setRoleGroups(roleId, groupIds);
 	}
 
-	public boolean unsetRoleGroups(java.lang.String roleId,
+	public void unsetRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().unsetRoleGroups(roleId, groupIds);
+		getService().unsetRoleGroups(roleId, groupIds);
 	}
 
 	public com.liferay.portal.model.Group updateGroup(

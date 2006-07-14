@@ -477,6 +477,10 @@ public class AddressUtil {
 			primary);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static AddressPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		AddressUtil util = (AddressUtil)ctx.getBean(CLASS_NAME);

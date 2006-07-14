@@ -28,8 +28,6 @@ import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.SQLQuery;
@@ -49,8 +47,6 @@ public class ImageFinder {
 	public static List findByImageId(String imageId)
 		throws SystemException {
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -60,21 +56,13 @@ public class ImageFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("Image", ImageHBM.class);
+			q.addEntity("Image", Image.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(imageId);
 
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				ImageHBM imageHBM = (ImageHBM)itr.next();
-
-				Image image = ImageHBMUtil.model(imageHBM);
-
-				list.add(image);
-			}
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -82,8 +70,6 @@ public class ImageFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 }

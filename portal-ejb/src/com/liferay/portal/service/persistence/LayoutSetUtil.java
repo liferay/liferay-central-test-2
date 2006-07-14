@@ -129,6 +129,10 @@ public class LayoutSetUtil {
 		return getPersistence().findAll();
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static LayoutSetPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		LayoutSetUtil util = (LayoutSetUtil)ctx.getBean(CLASS_NAME);

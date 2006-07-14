@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.wiki.NoSuchNodeException;
+import com.liferay.portlet.wiki.model.WikiNode;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,25 +50,24 @@ import java.util.List;
  *
  */
 public class WikiNodePersistence extends BasePersistence {
-	public com.liferay.portlet.wiki.model.WikiNode create(String nodeId) {
-		WikiNodeHBM wikiNodeHBM = new WikiNodeHBM();
-		wikiNodeHBM.setNew(true);
-		wikiNodeHBM.setPrimaryKey(nodeId);
+	public WikiNode create(String nodeId) {
+		WikiNode wikiNode = new WikiNode();
+		wikiNode.setNew(true);
+		wikiNode.setPrimaryKey(nodeId);
 
-		return WikiNodeHBMUtil.model(wikiNodeHBM);
+		return wikiNode;
 	}
 
-	public com.liferay.portlet.wiki.model.WikiNode remove(String nodeId)
+	public WikiNode remove(String nodeId)
 		throws NoSuchNodeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			WikiNodeHBM wikiNodeHBM = (WikiNodeHBM)session.get(WikiNodeHBM.class,
-					nodeId);
+			WikiNode wikiNode = (WikiNode)session.get(WikiNode.class, nodeId);
 
-			if (wikiNodeHBM == null) {
+			if (wikiNode == null) {
 				_log.warn("No WikiNode exists with the primary key " +
 					nodeId.toString());
 				throw new NoSuchNodeException(
@@ -75,10 +75,10 @@ public class WikiNodePersistence extends BasePersistence {
 					nodeId.toString());
 			}
 
-			session.delete(wikiNodeHBM);
+			session.delete(wikiNode);
 			session.flush();
 
-			return WikiNodeHBMUtil.model(wikiNodeHBM);
+			return wikiNode;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -98,49 +98,49 @@ public class WikiNodePersistence extends BasePersistence {
 				session = openSession();
 
 				if (wikiNode.isNew()) {
-					WikiNodeHBM wikiNodeHBM = new WikiNodeHBM();
-					wikiNodeHBM.setNodeId(wikiNode.getNodeId());
-					wikiNodeHBM.setGroupId(wikiNode.getGroupId());
-					wikiNodeHBM.setCompanyId(wikiNode.getCompanyId());
-					wikiNodeHBM.setUserId(wikiNode.getUserId());
-					wikiNodeHBM.setUserName(wikiNode.getUserName());
-					wikiNodeHBM.setCreateDate(wikiNode.getCreateDate());
-					wikiNodeHBM.setModifiedDate(wikiNode.getModifiedDate());
-					wikiNodeHBM.setName(wikiNode.getName());
-					wikiNodeHBM.setDescription(wikiNode.getDescription());
-					wikiNodeHBM.setLastPostDate(wikiNode.getLastPostDate());
-					session.save(wikiNodeHBM);
+					WikiNode wikiNodeModel = new WikiNode();
+					wikiNodeModel.setNodeId(wikiNode.getNodeId());
+					wikiNodeModel.setGroupId(wikiNode.getGroupId());
+					wikiNodeModel.setCompanyId(wikiNode.getCompanyId());
+					wikiNodeModel.setUserId(wikiNode.getUserId());
+					wikiNodeModel.setUserName(wikiNode.getUserName());
+					wikiNodeModel.setCreateDate(wikiNode.getCreateDate());
+					wikiNodeModel.setModifiedDate(wikiNode.getModifiedDate());
+					wikiNodeModel.setName(wikiNode.getName());
+					wikiNodeModel.setDescription(wikiNode.getDescription());
+					wikiNodeModel.setLastPostDate(wikiNode.getLastPostDate());
+					session.save(wikiNodeModel);
 					session.flush();
 				}
 				else {
-					WikiNodeHBM wikiNodeHBM = (WikiNodeHBM)session.get(WikiNodeHBM.class,
+					WikiNode wikiNodeModel = (WikiNode)session.get(WikiNode.class,
 							wikiNode.getPrimaryKey());
 
-					if (wikiNodeHBM != null) {
-						wikiNodeHBM.setGroupId(wikiNode.getGroupId());
-						wikiNodeHBM.setCompanyId(wikiNode.getCompanyId());
-						wikiNodeHBM.setUserId(wikiNode.getUserId());
-						wikiNodeHBM.setUserName(wikiNode.getUserName());
-						wikiNodeHBM.setCreateDate(wikiNode.getCreateDate());
-						wikiNodeHBM.setModifiedDate(wikiNode.getModifiedDate());
-						wikiNodeHBM.setName(wikiNode.getName());
-						wikiNodeHBM.setDescription(wikiNode.getDescription());
-						wikiNodeHBM.setLastPostDate(wikiNode.getLastPostDate());
+					if (wikiNodeModel != null) {
+						wikiNodeModel.setGroupId(wikiNode.getGroupId());
+						wikiNodeModel.setCompanyId(wikiNode.getCompanyId());
+						wikiNodeModel.setUserId(wikiNode.getUserId());
+						wikiNodeModel.setUserName(wikiNode.getUserName());
+						wikiNodeModel.setCreateDate(wikiNode.getCreateDate());
+						wikiNodeModel.setModifiedDate(wikiNode.getModifiedDate());
+						wikiNodeModel.setName(wikiNode.getName());
+						wikiNodeModel.setDescription(wikiNode.getDescription());
+						wikiNodeModel.setLastPostDate(wikiNode.getLastPostDate());
 						session.flush();
 					}
 					else {
-						wikiNodeHBM = new WikiNodeHBM();
-						wikiNodeHBM.setNodeId(wikiNode.getNodeId());
-						wikiNodeHBM.setGroupId(wikiNode.getGroupId());
-						wikiNodeHBM.setCompanyId(wikiNode.getCompanyId());
-						wikiNodeHBM.setUserId(wikiNode.getUserId());
-						wikiNodeHBM.setUserName(wikiNode.getUserName());
-						wikiNodeHBM.setCreateDate(wikiNode.getCreateDate());
-						wikiNodeHBM.setModifiedDate(wikiNode.getModifiedDate());
-						wikiNodeHBM.setName(wikiNode.getName());
-						wikiNodeHBM.setDescription(wikiNode.getDescription());
-						wikiNodeHBM.setLastPostDate(wikiNode.getLastPostDate());
-						session.save(wikiNodeHBM);
+						wikiNodeModel = new WikiNode();
+						wikiNodeModel.setNodeId(wikiNode.getNodeId());
+						wikiNodeModel.setGroupId(wikiNode.getGroupId());
+						wikiNodeModel.setCompanyId(wikiNode.getCompanyId());
+						wikiNodeModel.setUserId(wikiNode.getUserId());
+						wikiNodeModel.setUserName(wikiNode.getUserName());
+						wikiNodeModel.setCreateDate(wikiNode.getCreateDate());
+						wikiNodeModel.setModifiedDate(wikiNode.getModifiedDate());
+						wikiNodeModel.setName(wikiNode.getName());
+						wikiNodeModel.setDescription(wikiNode.getDescription());
+						wikiNodeModel.setLastPostDate(wikiNode.getLastPostDate());
+						session.save(wikiNodeModel);
 						session.flush();
 					}
 				}
@@ -159,17 +159,16 @@ public class WikiNodePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiNode findByPrimaryKey(
-		String nodeId) throws NoSuchNodeException, SystemException {
+	public WikiNode findByPrimaryKey(String nodeId)
+		throws NoSuchNodeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			WikiNodeHBM wikiNodeHBM = (WikiNodeHBM)session.get(WikiNodeHBM.class,
-					nodeId);
+			WikiNode wikiNode = (WikiNode)session.get(WikiNode.class, nodeId);
 
-			if (wikiNodeHBM == null) {
+			if (wikiNode == null) {
 				_log.warn("No WikiNode exists with the primary key " +
 					nodeId.toString());
 				throw new NoSuchNodeException(
@@ -177,7 +176,7 @@ public class WikiNodePersistence extends BasePersistence {
 					nodeId.toString());
 			}
 
-			return WikiNodeHBMUtil.model(wikiNodeHBM);
+			return wikiNode;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -194,11 +193,10 @@ public class WikiNodePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiNode IN CLASS com.liferay.portlet.wiki.service.persistence.WikiNodeHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -215,13 +213,7 @@ public class WikiNodePersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				WikiNodeHBM wikiNodeHBM = (WikiNodeHBM)itr.next();
-				list.add(WikiNodeHBMUtil.model(wikiNodeHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -246,11 +238,10 @@ public class WikiNodePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiNode IN CLASS com.liferay.portlet.wiki.service.persistence.WikiNodeHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -273,15 +264,7 @@ public class WikiNodePersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				WikiNodeHBM wikiNodeHBM = (WikiNodeHBM)itr.next();
-				list.add(WikiNodeHBMUtil.model(wikiNodeHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -291,8 +274,7 @@ public class WikiNodePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiNode findByGroupId_First(
-		String groupId, OrderByComparator obc)
+	public WikiNode findByGroupId_First(String groupId, OrderByComparator obc)
 		throws NoSuchNodeException, SystemException {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
@@ -305,12 +287,11 @@ public class WikiNodePersistence extends BasePersistence {
 			throw new NoSuchNodeException(msg);
 		}
 		else {
-			return (com.liferay.portlet.wiki.model.WikiNode)list.get(0);
+			return (WikiNode)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiNode findByGroupId_Last(
-		String groupId, OrderByComparator obc)
+	public WikiNode findByGroupId_Last(String groupId, OrderByComparator obc)
 		throws NoSuchNodeException, SystemException {
 		int count = countByGroupId(groupId);
 		List list = findByGroupId(groupId, count - 1, count, obc);
@@ -324,14 +305,13 @@ public class WikiNodePersistence extends BasePersistence {
 			throw new NoSuchNodeException(msg);
 		}
 		else {
-			return (com.liferay.portlet.wiki.model.WikiNode)list.get(0);
+			return (WikiNode)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiNode[] findByGroupId_PrevAndNext(
-		String nodeId, String groupId, OrderByComparator obc)
-		throws NoSuchNodeException, SystemException {
-		com.liferay.portlet.wiki.model.WikiNode wikiNode = findByPrimaryKey(nodeId);
+	public WikiNode[] findByGroupId_PrevAndNext(String nodeId, String groupId,
+		OrderByComparator obc) throws NoSuchNodeException, SystemException {
+		WikiNode wikiNode = findByPrimaryKey(nodeId);
 		int count = countByGroupId(groupId);
 		Session session = null;
 
@@ -339,11 +319,10 @@ public class WikiNodePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiNode IN CLASS com.liferay.portlet.wiki.service.persistence.WikiNodeHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -366,12 +345,11 @@ public class WikiNodePersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					wikiNode, WikiNodeHBMUtil.getInstance());
-			com.liferay.portlet.wiki.model.WikiNode[] array = new com.liferay.portlet.wiki.model.WikiNode[3];
-			array[0] = (com.liferay.portlet.wiki.model.WikiNode)objArray[0];
-			array[1] = (com.liferay.portlet.wiki.model.WikiNode)objArray[1];
-			array[2] = (com.liferay.portlet.wiki.model.WikiNode)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiNode);
+			WikiNode[] array = new WikiNode[3];
+			array[0] = (WikiNode)objArray[0];
+			array[1] = (WikiNode)objArray[1];
+			array[2] = (WikiNode)objArray[2];
 
 			return array;
 		}
@@ -390,11 +368,10 @@ public class WikiNodePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiNode IN CLASS com.liferay.portlet.wiki.service.persistence.WikiNodeHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -411,13 +388,7 @@ public class WikiNodePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				WikiNodeHBM wikiNodeHBM = (WikiNodeHBM)itr.next();
-				list.add(WikiNodeHBMUtil.model(wikiNodeHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -442,11 +413,10 @@ public class WikiNodePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiNode IN CLASS com.liferay.portlet.wiki.service.persistence.WikiNodeHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -469,15 +439,7 @@ public class WikiNodePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				WikiNodeHBM wikiNodeHBM = (WikiNodeHBM)itr.next();
-				list.add(WikiNodeHBMUtil.model(wikiNodeHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -487,9 +449,8 @@ public class WikiNodePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiNode findByCompanyId_First(
-		String companyId, OrderByComparator obc)
-		throws NoSuchNodeException, SystemException {
+	public WikiNode findByCompanyId_First(String companyId,
+		OrderByComparator obc) throws NoSuchNodeException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -501,12 +462,11 @@ public class WikiNodePersistence extends BasePersistence {
 			throw new NoSuchNodeException(msg);
 		}
 		else {
-			return (com.liferay.portlet.wiki.model.WikiNode)list.get(0);
+			return (WikiNode)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiNode findByCompanyId_Last(
-		String companyId, OrderByComparator obc)
+	public WikiNode findByCompanyId_Last(String companyId, OrderByComparator obc)
 		throws NoSuchNodeException, SystemException {
 		int count = countByCompanyId(companyId);
 		List list = findByCompanyId(companyId, count - 1, count, obc);
@@ -520,14 +480,14 @@ public class WikiNodePersistence extends BasePersistence {
 			throw new NoSuchNodeException(msg);
 		}
 		else {
-			return (com.liferay.portlet.wiki.model.WikiNode)list.get(0);
+			return (WikiNode)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiNode[] findByCompanyId_PrevAndNext(
-		String nodeId, String companyId, OrderByComparator obc)
+	public WikiNode[] findByCompanyId_PrevAndNext(String nodeId,
+		String companyId, OrderByComparator obc)
 		throws NoSuchNodeException, SystemException {
-		com.liferay.portlet.wiki.model.WikiNode wikiNode = findByPrimaryKey(nodeId);
+		WikiNode wikiNode = findByPrimaryKey(nodeId);
 		int count = countByCompanyId(companyId);
 		Session session = null;
 
@@ -535,11 +495,10 @@ public class WikiNodePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiNode IN CLASS com.liferay.portlet.wiki.service.persistence.WikiNodeHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -562,12 +521,11 @@ public class WikiNodePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					wikiNode, WikiNodeHBMUtil.getInstance());
-			com.liferay.portlet.wiki.model.WikiNode[] array = new com.liferay.portlet.wiki.model.WikiNode[3];
-			array[0] = (com.liferay.portlet.wiki.model.WikiNode)objArray[0];
-			array[1] = (com.liferay.portlet.wiki.model.WikiNode)objArray[1];
-			array[2] = (com.liferay.portlet.wiki.model.WikiNode)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiNode);
+			WikiNode[] array = new WikiNode[3];
+			array[0] = (WikiNode)objArray[0];
+			array[1] = (WikiNode)objArray[1];
+			array[2] = (WikiNode)objArray[2];
 
 			return array;
 		}
@@ -586,21 +544,13 @@ public class WikiNodePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiNode IN CLASS com.liferay.portlet.wiki.service.persistence.WikiNodeHBM ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiNode ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				WikiNodeHBM wikiNodeHBM = (WikiNodeHBM)itr.next();
-				list.add(WikiNodeHBMUtil.model(wikiNodeHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -617,11 +567,10 @@ public class WikiNodePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiNode IN CLASS com.liferay.portlet.wiki.service.persistence.WikiNodeHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -641,8 +590,8 @@ public class WikiNodePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				WikiNodeHBM wikiNodeHBM = (WikiNodeHBM)itr.next();
-				session.delete(wikiNodeHBM);
+				WikiNode wikiNode = (WikiNode)itr.next();
+				session.delete(wikiNode);
 			}
 
 			session.flush();
@@ -662,11 +611,10 @@ public class WikiNodePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiNode IN CLASS com.liferay.portlet.wiki.service.persistence.WikiNodeHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -686,8 +634,8 @@ public class WikiNodePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				WikiNodeHBM wikiNodeHBM = (WikiNodeHBM)itr.next();
-				session.delete(wikiNodeHBM);
+				WikiNode wikiNode = (WikiNode)itr.next();
+				session.delete(wikiNode);
 			}
 
 			session.flush();
@@ -708,11 +656,10 @@ public class WikiNodePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM WikiNode IN CLASS com.liferay.portlet.wiki.service.persistence.WikiNodeHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -755,11 +702,10 @@ public class WikiNodePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM WikiNode IN CLASS com.liferay.portlet.wiki.service.persistence.WikiNodeHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -792,6 +738,9 @@ public class WikiNodePersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(WikiNodePersistence.class);

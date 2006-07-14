@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Resource;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.util.StringPool;
@@ -49,25 +50,24 @@ import java.util.List;
  *
  */
 public class ResourcePersistence extends BasePersistence {
-	public com.liferay.portal.model.Resource create(String resourceId) {
-		ResourceHBM resourceHBM = new ResourceHBM();
-		resourceHBM.setNew(true);
-		resourceHBM.setPrimaryKey(resourceId);
+	public Resource create(String resourceId) {
+		Resource resource = new Resource();
+		resource.setNew(true);
+		resource.setPrimaryKey(resourceId);
 
-		return ResourceHBMUtil.model(resourceHBM);
+		return resource;
 	}
 
-	public com.liferay.portal.model.Resource remove(String resourceId)
+	public Resource remove(String resourceId)
 		throws NoSuchResourceException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ResourceHBM resourceHBM = (ResourceHBM)session.get(ResourceHBM.class,
-					resourceId);
+			Resource resource = (Resource)session.get(Resource.class, resourceId);
 
-			if (resourceHBM == null) {
+			if (resource == null) {
 				_log.warn("No Resource exists with the primary key " +
 					resourceId.toString());
 				throw new NoSuchResourceException(
@@ -75,10 +75,10 @@ public class ResourcePersistence extends BasePersistence {
 					resourceId.toString());
 			}
 
-			session.delete(resourceHBM);
+			session.delete(resource);
 			session.flush();
 
-			return ResourceHBMUtil.model(resourceHBM);
+			return resource;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -97,37 +97,37 @@ public class ResourcePersistence extends BasePersistence {
 				session = openSession();
 
 				if (resource.isNew()) {
-					ResourceHBM resourceHBM = new ResourceHBM();
-					resourceHBM.setResourceId(resource.getResourceId());
-					resourceHBM.setCompanyId(resource.getCompanyId());
-					resourceHBM.setName(resource.getName());
-					resourceHBM.setTypeId(resource.getTypeId());
-					resourceHBM.setScope(resource.getScope());
-					resourceHBM.setPrimKey(resource.getPrimKey());
-					session.save(resourceHBM);
+					Resource resourceModel = new Resource();
+					resourceModel.setResourceId(resource.getResourceId());
+					resourceModel.setCompanyId(resource.getCompanyId());
+					resourceModel.setName(resource.getName());
+					resourceModel.setTypeId(resource.getTypeId());
+					resourceModel.setScope(resource.getScope());
+					resourceModel.setPrimKey(resource.getPrimKey());
+					session.save(resourceModel);
 					session.flush();
 				}
 				else {
-					ResourceHBM resourceHBM = (ResourceHBM)session.get(ResourceHBM.class,
+					Resource resourceModel = (Resource)session.get(Resource.class,
 							resource.getPrimaryKey());
 
-					if (resourceHBM != null) {
-						resourceHBM.setCompanyId(resource.getCompanyId());
-						resourceHBM.setName(resource.getName());
-						resourceHBM.setTypeId(resource.getTypeId());
-						resourceHBM.setScope(resource.getScope());
-						resourceHBM.setPrimKey(resource.getPrimKey());
+					if (resourceModel != null) {
+						resourceModel.setCompanyId(resource.getCompanyId());
+						resourceModel.setName(resource.getName());
+						resourceModel.setTypeId(resource.getTypeId());
+						resourceModel.setScope(resource.getScope());
+						resourceModel.setPrimKey(resource.getPrimKey());
 						session.flush();
 					}
 					else {
-						resourceHBM = new ResourceHBM();
-						resourceHBM.setResourceId(resource.getResourceId());
-						resourceHBM.setCompanyId(resource.getCompanyId());
-						resourceHBM.setName(resource.getName());
-						resourceHBM.setTypeId(resource.getTypeId());
-						resourceHBM.setScope(resource.getScope());
-						resourceHBM.setPrimKey(resource.getPrimKey());
-						session.save(resourceHBM);
+						resourceModel = new Resource();
+						resourceModel.setResourceId(resource.getResourceId());
+						resourceModel.setCompanyId(resource.getCompanyId());
+						resourceModel.setName(resource.getName());
+						resourceModel.setTypeId(resource.getTypeId());
+						resourceModel.setScope(resource.getScope());
+						resourceModel.setPrimKey(resource.getPrimKey());
+						session.save(resourceModel);
 						session.flush();
 					}
 				}
@@ -146,17 +146,16 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Resource findByPrimaryKey(String resourceId)
+	public Resource findByPrimaryKey(String resourceId)
 		throws NoSuchResourceException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ResourceHBM resourceHBM = (ResourceHBM)session.get(ResourceHBM.class,
-					resourceId);
+			Resource resource = (Resource)session.get(Resource.class, resourceId);
 
-			if (resourceHBM == null) {
+			if (resource == null) {
 				_log.warn("No Resource exists with the primary key " +
 					resourceId.toString());
 				throw new NoSuchResourceException(
@@ -164,7 +163,7 @@ public class ResourcePersistence extends BasePersistence {
 					resourceId.toString());
 			}
 
-			return ResourceHBMUtil.model(resourceHBM);
+			return resource;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -181,11 +180,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -200,13 +198,7 @@ public class ResourcePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
-				list.add(ResourceHBMUtil.model(resourceHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -231,11 +223,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -254,15 +245,7 @@ public class ResourcePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
-				list.add(ResourceHBMUtil.model(resourceHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -272,9 +255,8 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Resource findByCompanyId_First(
-		String companyId, OrderByComparator obc)
-		throws NoSuchResourceException, SystemException {
+	public Resource findByCompanyId_First(String companyId,
+		OrderByComparator obc) throws NoSuchResourceException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -286,12 +268,11 @@ public class ResourcePersistence extends BasePersistence {
 			throw new NoSuchResourceException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Resource)list.get(0);
+			return (Resource)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Resource findByCompanyId_Last(
-		String companyId, OrderByComparator obc)
+	public Resource findByCompanyId_Last(String companyId, OrderByComparator obc)
 		throws NoSuchResourceException, SystemException {
 		int count = countByCompanyId(companyId);
 		List list = findByCompanyId(companyId, count - 1, count, obc);
@@ -305,14 +286,14 @@ public class ResourcePersistence extends BasePersistence {
 			throw new NoSuchResourceException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Resource)list.get(0);
+			return (Resource)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Resource[] findByCompanyId_PrevAndNext(
-		String resourceId, String companyId, OrderByComparator obc)
+	public Resource[] findByCompanyId_PrevAndNext(String resourceId,
+		String companyId, OrderByComparator obc)
 		throws NoSuchResourceException, SystemException {
-		com.liferay.portal.model.Resource resource = findByPrimaryKey(resourceId);
+		Resource resource = findByPrimaryKey(resourceId);
 		int count = countByCompanyId(companyId);
 		Session session = null;
 
@@ -320,11 +301,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -343,12 +323,11 @@ public class ResourcePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					resource, ResourceHBMUtil.getInstance());
-			com.liferay.portal.model.Resource[] array = new com.liferay.portal.model.Resource[3];
-			array[0] = (com.liferay.portal.model.Resource)objArray[0];
-			array[1] = (com.liferay.portal.model.Resource)objArray[1];
-			array[2] = (com.liferay.portal.model.Resource)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, resource);
+			Resource[] array = new Resource[3];
+			array[0] = (Resource)objArray[0];
+			array[1] = (Resource)objArray[1];
+			array[2] = (Resource)objArray[2];
 
 			return array;
 		}
@@ -367,11 +346,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -386,13 +364,7 @@ public class ResourcePersistence extends BasePersistence {
 				q.setString(queryPos++, name);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
-				list.add(ResourceHBMUtil.model(resourceHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -417,11 +389,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -440,15 +411,7 @@ public class ResourcePersistence extends BasePersistence {
 				q.setString(queryPos++, name);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
-				list.add(ResourceHBMUtil.model(resourceHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -458,8 +421,8 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Resource findByName_First(String name,
-		OrderByComparator obc) throws NoSuchResourceException, SystemException {
+	public Resource findByName_First(String name, OrderByComparator obc)
+		throws NoSuchResourceException, SystemException {
 		List list = findByName(name, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -471,12 +434,12 @@ public class ResourcePersistence extends BasePersistence {
 			throw new NoSuchResourceException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Resource)list.get(0);
+			return (Resource)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Resource findByName_Last(String name,
-		OrderByComparator obc) throws NoSuchResourceException, SystemException {
+	public Resource findByName_Last(String name, OrderByComparator obc)
+		throws NoSuchResourceException, SystemException {
 		int count = countByName(name);
 		List list = findByName(name, count - 1, count, obc);
 
@@ -489,14 +452,13 @@ public class ResourcePersistence extends BasePersistence {
 			throw new NoSuchResourceException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Resource)list.get(0);
+			return (Resource)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Resource[] findByName_PrevAndNext(
-		String resourceId, String name, OrderByComparator obc)
-		throws NoSuchResourceException, SystemException {
-		com.liferay.portal.model.Resource resource = findByPrimaryKey(resourceId);
+	public Resource[] findByName_PrevAndNext(String resourceId, String name,
+		OrderByComparator obc) throws NoSuchResourceException, SystemException {
+		Resource resource = findByPrimaryKey(resourceId);
 		int count = countByName(name);
 		Session session = null;
 
@@ -504,11 +466,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -527,12 +488,11 @@ public class ResourcePersistence extends BasePersistence {
 				q.setString(queryPos++, name);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					resource, ResourceHBMUtil.getInstance());
-			com.liferay.portal.model.Resource[] array = new com.liferay.portal.model.Resource[3];
-			array[0] = (com.liferay.portal.model.Resource)objArray[0];
-			array[1] = (com.liferay.portal.model.Resource)objArray[1];
-			array[2] = (com.liferay.portal.model.Resource)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, resource);
+			Resource[] array = new Resource[3];
+			array[0] = (Resource)objArray[0];
+			array[1] = (Resource)objArray[1];
+			array[2] = (Resource)objArray[2];
 
 			return array;
 		}
@@ -552,11 +512,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -565,7 +524,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -574,7 +533,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (typeId == null) {
-				query.append("typeId is null");
+				query.append("typeId IS NULL");
 			}
 			else {
 				query.append("typeId = ?");
@@ -583,7 +542,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (scope == null) {
-				query.append("scope is null");
+				query.append("scope IS NULL");
 			}
 			else {
 				query.append("scope = ?");
@@ -610,13 +569,7 @@ public class ResourcePersistence extends BasePersistence {
 				q.setString(queryPos++, scope);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
-				list.add(ResourceHBMUtil.model(resourceHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -642,11 +595,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -655,7 +607,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -664,7 +616,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (typeId == null) {
-				query.append("typeId is null");
+				query.append("typeId IS NULL");
 			}
 			else {
 				query.append("typeId = ?");
@@ -673,7 +625,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (scope == null) {
-				query.append("scope is null");
+				query.append("scope IS NULL");
 			}
 			else {
 				query.append("scope = ?");
@@ -704,15 +656,7 @@ public class ResourcePersistence extends BasePersistence {
 				q.setString(queryPos++, scope);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
-				list.add(ResourceHBMUtil.model(resourceHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -722,9 +666,9 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Resource findByC_N_T_S_First(
-		String companyId, String name, String typeId, String scope,
-		OrderByComparator obc) throws NoSuchResourceException, SystemException {
+	public Resource findByC_N_T_S_First(String companyId, String name,
+		String typeId, String scope, OrderByComparator obc)
+		throws NoSuchResourceException, SystemException {
 		List list = findByC_N_T_S(companyId, name, typeId, scope, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -745,13 +689,13 @@ public class ResourcePersistence extends BasePersistence {
 			throw new NoSuchResourceException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Resource)list.get(0);
+			return (Resource)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Resource findByC_N_T_S_Last(
-		String companyId, String name, String typeId, String scope,
-		OrderByComparator obc) throws NoSuchResourceException, SystemException {
+	public Resource findByC_N_T_S_Last(String companyId, String name,
+		String typeId, String scope, OrderByComparator obc)
+		throws NoSuchResourceException, SystemException {
 		int count = countByC_N_T_S(companyId, name, typeId, scope);
 		List list = findByC_N_T_S(companyId, name, typeId, scope, count - 1,
 				count, obc);
@@ -774,15 +718,14 @@ public class ResourcePersistence extends BasePersistence {
 			throw new NoSuchResourceException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Resource)list.get(0);
+			return (Resource)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Resource[] findByC_N_T_S_PrevAndNext(
-		String resourceId, String companyId, String name, String typeId,
-		String scope, OrderByComparator obc)
-		throws NoSuchResourceException, SystemException {
-		com.liferay.portal.model.Resource resource = findByPrimaryKey(resourceId);
+	public Resource[] findByC_N_T_S_PrevAndNext(String resourceId,
+		String companyId, String name, String typeId, String scope,
+		OrderByComparator obc) throws NoSuchResourceException, SystemException {
+		Resource resource = findByPrimaryKey(resourceId);
 		int count = countByC_N_T_S(companyId, name, typeId, scope);
 		Session session = null;
 
@@ -790,11 +733,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -803,7 +745,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -812,7 +754,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (typeId == null) {
-				query.append("typeId is null");
+				query.append("typeId IS NULL");
 			}
 			else {
 				query.append("typeId = ?");
@@ -821,7 +763,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (scope == null) {
-				query.append("scope is null");
+				query.append("scope IS NULL");
 			}
 			else {
 				query.append("scope = ?");
@@ -852,12 +794,11 @@ public class ResourcePersistence extends BasePersistence {
 				q.setString(queryPos++, scope);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					resource, ResourceHBMUtil.getInstance());
-			com.liferay.portal.model.Resource[] array = new com.liferay.portal.model.Resource[3];
-			array[0] = (com.liferay.portal.model.Resource)objArray[0];
-			array[1] = (com.liferay.portal.model.Resource)objArray[1];
-			array[2] = (com.liferay.portal.model.Resource)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, resource);
+			Resource[] array = new Resource[3];
+			array[0] = (Resource)objArray[0];
+			array[1] = (Resource)objArray[1];
+			array[2] = (Resource)objArray[2];
 
 			return array;
 		}
@@ -877,11 +818,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -890,7 +830,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (typeId == null) {
-				query.append("typeId is null");
+				query.append("typeId IS NULL");
 			}
 			else {
 				query.append("typeId = ?");
@@ -899,7 +839,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (scope == null) {
-				query.append("scope is null");
+				query.append("scope IS NULL");
 			}
 			else {
 				query.append("scope = ?");
@@ -908,7 +848,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (primKey == null) {
-				query.append("primKey is null");
+				query.append("primKey IS NULL");
 			}
 			else {
 				query.append("primKey = ?");
@@ -935,13 +875,7 @@ public class ResourcePersistence extends BasePersistence {
 				q.setString(queryPos++, primKey);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
-				list.add(ResourceHBMUtil.model(resourceHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -967,11 +901,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -980,7 +913,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (typeId == null) {
-				query.append("typeId is null");
+				query.append("typeId IS NULL");
 			}
 			else {
 				query.append("typeId = ?");
@@ -989,7 +922,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (scope == null) {
-				query.append("scope is null");
+				query.append("scope IS NULL");
 			}
 			else {
 				query.append("scope = ?");
@@ -998,7 +931,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (primKey == null) {
-				query.append("primKey is null");
+				query.append("primKey IS NULL");
 			}
 			else {
 				query.append("primKey = ?");
@@ -1029,15 +962,7 @@ public class ResourcePersistence extends BasePersistence {
 				q.setString(queryPos++, primKey);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
-				list.add(ResourceHBMUtil.model(resourceHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1047,9 +972,9 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Resource findByC_T_S_P_First(
-		String companyId, String typeId, String scope, String primKey,
-		OrderByComparator obc) throws NoSuchResourceException, SystemException {
+	public Resource findByC_T_S_P_First(String companyId, String typeId,
+		String scope, String primKey, OrderByComparator obc)
+		throws NoSuchResourceException, SystemException {
 		List list = findByC_T_S_P(companyId, typeId, scope, primKey, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -1070,13 +995,13 @@ public class ResourcePersistence extends BasePersistence {
 			throw new NoSuchResourceException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Resource)list.get(0);
+			return (Resource)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Resource findByC_T_S_P_Last(
-		String companyId, String typeId, String scope, String primKey,
-		OrderByComparator obc) throws NoSuchResourceException, SystemException {
+	public Resource findByC_T_S_P_Last(String companyId, String typeId,
+		String scope, String primKey, OrderByComparator obc)
+		throws NoSuchResourceException, SystemException {
 		int count = countByC_T_S_P(companyId, typeId, scope, primKey);
 		List list = findByC_T_S_P(companyId, typeId, scope, primKey, count - 1,
 				count, obc);
@@ -1099,15 +1024,14 @@ public class ResourcePersistence extends BasePersistence {
 			throw new NoSuchResourceException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Resource)list.get(0);
+			return (Resource)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Resource[] findByC_T_S_P_PrevAndNext(
-		String resourceId, String companyId, String typeId, String scope,
-		String primKey, OrderByComparator obc)
-		throws NoSuchResourceException, SystemException {
-		com.liferay.portal.model.Resource resource = findByPrimaryKey(resourceId);
+	public Resource[] findByC_T_S_P_PrevAndNext(String resourceId,
+		String companyId, String typeId, String scope, String primKey,
+		OrderByComparator obc) throws NoSuchResourceException, SystemException {
+		Resource resource = findByPrimaryKey(resourceId);
 		int count = countByC_T_S_P(companyId, typeId, scope, primKey);
 		Session session = null;
 
@@ -1115,11 +1039,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1128,7 +1051,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (typeId == null) {
-				query.append("typeId is null");
+				query.append("typeId IS NULL");
 			}
 			else {
 				query.append("typeId = ?");
@@ -1137,7 +1060,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (scope == null) {
-				query.append("scope is null");
+				query.append("scope IS NULL");
 			}
 			else {
 				query.append("scope = ?");
@@ -1146,7 +1069,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (primKey == null) {
-				query.append("primKey is null");
+				query.append("primKey IS NULL");
 			}
 			else {
 				query.append("primKey = ?");
@@ -1177,12 +1100,11 @@ public class ResourcePersistence extends BasePersistence {
 				q.setString(queryPos++, primKey);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					resource, ResourceHBMUtil.getInstance());
-			com.liferay.portal.model.Resource[] array = new com.liferay.portal.model.Resource[3];
-			array[0] = (com.liferay.portal.model.Resource)objArray[0];
-			array[1] = (com.liferay.portal.model.Resource)objArray[1];
-			array[2] = (com.liferay.portal.model.Resource)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, resource);
+			Resource[] array = new Resource[3];
+			array[0] = (Resource)objArray[0];
+			array[1] = (Resource)objArray[1];
+			array[2] = (Resource)objArray[2];
 
 			return array;
 		}
@@ -1194,8 +1116,8 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Resource findByC_N_T_S_P(String companyId,
-		String name, String typeId, String scope, String primKey)
+	public Resource findByC_N_T_S_P(String companyId, String name,
+		String typeId, String scope, String primKey)
 		throws NoSuchResourceException, SystemException {
 		Session session = null;
 
@@ -1203,11 +1125,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1216,7 +1137,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -1225,7 +1146,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (typeId == null) {
-				query.append("typeId is null");
+				query.append("typeId IS NULL");
 			}
 			else {
 				query.append("typeId = ?");
@@ -1234,7 +1155,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (scope == null) {
-				query.append("scope is null");
+				query.append("scope IS NULL");
 			}
 			else {
 				query.append("scope = ?");
@@ -1243,7 +1164,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (primKey == null) {
-				query.append("primKey is null");
+				query.append("primKey IS NULL");
 			}
 			else {
 				query.append("primKey = ?");
@@ -1274,9 +1195,9 @@ public class ResourcePersistence extends BasePersistence {
 				q.setString(queryPos++, primKey);
 			}
 
-			Iterator itr = q.list().iterator();
+			List list = q.list();
 
-			if (!itr.hasNext()) {
+			if (list.size() == 0) {
 				String msg = "No Resource exists with the key ";
 				msg += StringPool.OPEN_CURLY_BRACE;
 				msg += "companyId=";
@@ -1297,9 +1218,9 @@ public class ResourcePersistence extends BasePersistence {
 				throw new NoSuchResourceException(msg);
 			}
 
-			ResourceHBM resourceHBM = (ResourceHBM)itr.next();
+			Resource resource = (Resource)list.get(0);
 
-			return ResourceHBMUtil.model(resourceHBM);
+			return resource;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1316,19 +1237,11 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM ");
+			query.append("FROM com.liferay.portal.model.Resource ");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
-				list.add(ResourceHBMUtil.model(resourceHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1345,11 +1258,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1367,8 +1279,8 @@ public class ResourcePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
-				session.delete(resourceHBM);
+				Resource resource = (Resource)itr.next();
+				session.delete(resource);
 			}
 
 			session.flush();
@@ -1388,11 +1300,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -1410,8 +1321,8 @@ public class ResourcePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
-				session.delete(resourceHBM);
+				Resource resource = (Resource)itr.next();
+				session.delete(resource);
 			}
 
 			session.flush();
@@ -1432,11 +1343,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1445,7 +1355,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -1454,7 +1364,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (typeId == null) {
-				query.append("typeId is null");
+				query.append("typeId IS NULL");
 			}
 			else {
 				query.append("typeId = ?");
@@ -1463,7 +1373,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (scope == null) {
-				query.append("scope is null");
+				query.append("scope IS NULL");
 			}
 			else {
 				query.append("scope = ?");
@@ -1493,8 +1403,8 @@ public class ResourcePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
-				session.delete(resourceHBM);
+				Resource resource = (Resource)itr.next();
+				session.delete(resource);
 			}
 
 			session.flush();
@@ -1515,11 +1425,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1528,7 +1437,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (typeId == null) {
-				query.append("typeId is null");
+				query.append("typeId IS NULL");
 			}
 			else {
 				query.append("typeId = ?");
@@ -1537,7 +1446,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (scope == null) {
-				query.append("scope is null");
+				query.append("scope IS NULL");
 			}
 			else {
 				query.append("scope = ?");
@@ -1546,7 +1455,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (primKey == null) {
-				query.append("primKey is null");
+				query.append("primKey IS NULL");
 			}
 			else {
 				query.append("primKey = ?");
@@ -1576,8 +1485,8 @@ public class ResourcePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
-				session.delete(resourceHBM);
+				Resource resource = (Resource)itr.next();
+				session.delete(resource);
 			}
 
 			session.flush();
@@ -1599,11 +1508,10 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1612,7 +1520,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -1621,7 +1529,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (typeId == null) {
-				query.append("typeId is null");
+				query.append("typeId IS NULL");
 			}
 			else {
 				query.append("typeId = ?");
@@ -1630,7 +1538,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (scope == null) {
-				query.append("scope is null");
+				query.append("scope IS NULL");
 			}
 			else {
 				query.append("scope = ?");
@@ -1639,7 +1547,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (primKey == null) {
-				query.append("primKey is null");
+				query.append("primKey IS NULL");
 			}
 			else {
 				query.append("primKey = ?");
@@ -1673,8 +1581,8 @@ public class ResourcePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
-				session.delete(resourceHBM);
+				Resource resource = (Resource)itr.next();
+				session.delete(resource);
 			}
 
 			session.flush();
@@ -1717,11 +1625,10 @@ public class ResourcePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1764,11 +1671,10 @@ public class ResourcePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -1812,11 +1718,10 @@ public class ResourcePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1825,7 +1730,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -1834,7 +1739,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (typeId == null) {
-				query.append("typeId is null");
+				query.append("typeId IS NULL");
 			}
 			else {
 				query.append("typeId = ?");
@@ -1843,7 +1748,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (scope == null) {
-				query.append("scope is null");
+				query.append("scope IS NULL");
 			}
 			else {
 				query.append("scope = ?");
@@ -1899,11 +1804,10 @@ public class ResourcePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1912,7 +1816,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (typeId == null) {
-				query.append("typeId is null");
+				query.append("typeId IS NULL");
 			}
 			else {
 				query.append("typeId = ?");
@@ -1921,7 +1825,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (scope == null) {
-				query.append("scope is null");
+				query.append("scope IS NULL");
 			}
 			else {
 				query.append("scope = ?");
@@ -1930,7 +1834,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (primKey == null) {
-				query.append("primKey is null");
+				query.append("primKey IS NULL");
 			}
 			else {
 				query.append("primKey = ?");
@@ -1986,11 +1890,10 @@ public class ResourcePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Resource_ IN CLASS com.liferay.portal.service.persistence.ResourceHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Resource WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1999,7 +1902,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (name == null) {
-				query.append("name is null");
+				query.append("name IS NULL");
 			}
 			else {
 				query.append("name = ?");
@@ -2008,7 +1911,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (typeId == null) {
-				query.append("typeId is null");
+				query.append("typeId IS NULL");
 			}
 			else {
 				query.append("typeId = ?");
@@ -2017,7 +1920,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (scope == null) {
-				query.append("scope is null");
+				query.append("scope IS NULL");
 			}
 			else {
 				query.append("scope = ?");
@@ -2026,7 +1929,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (primKey == null) {
-				query.append("primKey is null");
+				query.append("primKey IS NULL");
 			}
 			else {
 				query.append("primKey = ?");
@@ -2075,6 +1978,9 @@ public class ResourcePersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(ResourcePersistence.class);

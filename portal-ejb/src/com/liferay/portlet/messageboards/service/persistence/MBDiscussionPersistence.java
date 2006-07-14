@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
+import com.liferay.portlet.messageboards.model.MBDiscussion;
 
 import com.liferay.util.StringPool;
 
@@ -48,26 +49,25 @@ import java.util.List;
  *
  */
 public class MBDiscussionPersistence extends BasePersistence {
-	public com.liferay.portlet.messageboards.model.MBDiscussion create(
-		String discussionId) {
-		MBDiscussionHBM mbDiscussionHBM = new MBDiscussionHBM();
-		mbDiscussionHBM.setNew(true);
-		mbDiscussionHBM.setPrimaryKey(discussionId);
+	public MBDiscussion create(String discussionId) {
+		MBDiscussion mbDiscussion = new MBDiscussion();
+		mbDiscussion.setNew(true);
+		mbDiscussion.setPrimaryKey(discussionId);
 
-		return MBDiscussionHBMUtil.model(mbDiscussionHBM);
+		return mbDiscussion;
 	}
 
-	public com.liferay.portlet.messageboards.model.MBDiscussion remove(
-		String discussionId) throws NoSuchDiscussionException, SystemException {
+	public MBDiscussion remove(String discussionId)
+		throws NoSuchDiscussionException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			MBDiscussionHBM mbDiscussionHBM = (MBDiscussionHBM)session.get(MBDiscussionHBM.class,
+			MBDiscussion mbDiscussion = (MBDiscussion)session.get(MBDiscussion.class,
 					discussionId);
 
-			if (mbDiscussionHBM == null) {
+			if (mbDiscussion == null) {
 				_log.warn("No MBDiscussion exists with the primary key " +
 					discussionId.toString());
 				throw new NoSuchDiscussionException(
@@ -75,10 +75,10 @@ public class MBDiscussionPersistence extends BasePersistence {
 					discussionId.toString());
 			}
 
-			session.delete(mbDiscussionHBM);
+			session.delete(mbDiscussion);
 			session.flush();
 
-			return MBDiscussionHBMUtil.model(mbDiscussionHBM);
+			return mbDiscussion;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -98,31 +98,31 @@ public class MBDiscussionPersistence extends BasePersistence {
 				session = openSession();
 
 				if (mbDiscussion.isNew()) {
-					MBDiscussionHBM mbDiscussionHBM = new MBDiscussionHBM();
-					mbDiscussionHBM.setDiscussionId(mbDiscussion.getDiscussionId());
-					mbDiscussionHBM.setClassName(mbDiscussion.getClassName());
-					mbDiscussionHBM.setClassPK(mbDiscussion.getClassPK());
-					mbDiscussionHBM.setThreadId(mbDiscussion.getThreadId());
-					session.save(mbDiscussionHBM);
+					MBDiscussion mbDiscussionModel = new MBDiscussion();
+					mbDiscussionModel.setDiscussionId(mbDiscussion.getDiscussionId());
+					mbDiscussionModel.setClassName(mbDiscussion.getClassName());
+					mbDiscussionModel.setClassPK(mbDiscussion.getClassPK());
+					mbDiscussionModel.setThreadId(mbDiscussion.getThreadId());
+					session.save(mbDiscussionModel);
 					session.flush();
 				}
 				else {
-					MBDiscussionHBM mbDiscussionHBM = (MBDiscussionHBM)session.get(MBDiscussionHBM.class,
+					MBDiscussion mbDiscussionModel = (MBDiscussion)session.get(MBDiscussion.class,
 							mbDiscussion.getPrimaryKey());
 
-					if (mbDiscussionHBM != null) {
-						mbDiscussionHBM.setClassName(mbDiscussion.getClassName());
-						mbDiscussionHBM.setClassPK(mbDiscussion.getClassPK());
-						mbDiscussionHBM.setThreadId(mbDiscussion.getThreadId());
+					if (mbDiscussionModel != null) {
+						mbDiscussionModel.setClassName(mbDiscussion.getClassName());
+						mbDiscussionModel.setClassPK(mbDiscussion.getClassPK());
+						mbDiscussionModel.setThreadId(mbDiscussion.getThreadId());
 						session.flush();
 					}
 					else {
-						mbDiscussionHBM = new MBDiscussionHBM();
-						mbDiscussionHBM.setDiscussionId(mbDiscussion.getDiscussionId());
-						mbDiscussionHBM.setClassName(mbDiscussion.getClassName());
-						mbDiscussionHBM.setClassPK(mbDiscussion.getClassPK());
-						mbDiscussionHBM.setThreadId(mbDiscussion.getThreadId());
-						session.save(mbDiscussionHBM);
+						mbDiscussionModel = new MBDiscussion();
+						mbDiscussionModel.setDiscussionId(mbDiscussion.getDiscussionId());
+						mbDiscussionModel.setClassName(mbDiscussion.getClassName());
+						mbDiscussionModel.setClassPK(mbDiscussion.getClassPK());
+						mbDiscussionModel.setThreadId(mbDiscussion.getThreadId());
+						session.save(mbDiscussionModel);
 						session.flush();
 					}
 				}
@@ -141,17 +141,17 @@ public class MBDiscussionPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBDiscussion findByPrimaryKey(
-		String discussionId) throws NoSuchDiscussionException, SystemException {
+	public MBDiscussion findByPrimaryKey(String discussionId)
+		throws NoSuchDiscussionException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			MBDiscussionHBM mbDiscussionHBM = (MBDiscussionHBM)session.get(MBDiscussionHBM.class,
+			MBDiscussion mbDiscussion = (MBDiscussion)session.get(MBDiscussion.class,
 					discussionId);
 
-			if (mbDiscussionHBM == null) {
+			if (mbDiscussion == null) {
 				_log.warn("No MBDiscussion exists with the primary key " +
 					discussionId.toString());
 				throw new NoSuchDiscussionException(
@@ -159,7 +159,7 @@ public class MBDiscussionPersistence extends BasePersistence {
 					discussionId.toString());
 			}
 
-			return MBDiscussionHBMUtil.model(mbDiscussionHBM);
+			return mbDiscussion;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -169,8 +169,7 @@ public class MBDiscussionPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBDiscussion findByC_C(
-		String className, String classPK)
+	public MBDiscussion findByC_C(String className, String classPK)
 		throws NoSuchDiscussionException, SystemException {
 		Session session = null;
 
@@ -179,10 +178,10 @@ public class MBDiscussionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBDiscussion IN CLASS com.liferay.portlet.messageboards.service.persistence.MBDiscussionHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -191,7 +190,7 @@ public class MBDiscussionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -210,9 +209,9 @@ public class MBDiscussionPersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			Iterator itr = q.list().iterator();
+			List list = q.list();
 
-			if (!itr.hasNext()) {
+			if (list.size() == 0) {
 				String msg = "No MBDiscussion exists with the key ";
 				msg += StringPool.OPEN_CURLY_BRACE;
 				msg += "className=";
@@ -224,9 +223,9 @@ public class MBDiscussionPersistence extends BasePersistence {
 				throw new NoSuchDiscussionException(msg);
 			}
 
-			MBDiscussionHBM mbDiscussionHBM = (MBDiscussionHBM)itr.next();
+			MBDiscussion mbDiscussion = (MBDiscussion)list.get(0);
 
-			return MBDiscussionHBMUtil.model(mbDiscussionHBM);
+			return mbDiscussion;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -244,18 +243,11 @@ public class MBDiscussionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBDiscussion IN CLASS com.liferay.portlet.messageboards.service.persistence.MBDiscussionHBM ");
+				"FROM com.liferay.portlet.messageboards.model.MBDiscussion ");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				MBDiscussionHBM mbDiscussionHBM = (MBDiscussionHBM)itr.next();
-				list.add(MBDiscussionHBMUtil.model(mbDiscussionHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -274,10 +266,10 @@ public class MBDiscussionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBDiscussion IN CLASS com.liferay.portlet.messageboards.service.persistence.MBDiscussionHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -286,7 +278,7 @@ public class MBDiscussionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -308,8 +300,8 @@ public class MBDiscussionPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				MBDiscussionHBM mbDiscussionHBM = (MBDiscussionHBM)itr.next();
-				session.delete(mbDiscussionHBM);
+				MBDiscussion mbDiscussion = (MBDiscussion)itr.next();
+				session.delete(mbDiscussion);
 			}
 
 			session.flush();
@@ -345,10 +337,10 @@ public class MBDiscussionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM MBDiscussion IN CLASS com.liferay.portlet.messageboards.service.persistence.MBDiscussionHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -357,7 +349,7 @@ public class MBDiscussionPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -394,6 +386,9 @@ public class MBDiscussionPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(MBDiscussionPersistence.class);

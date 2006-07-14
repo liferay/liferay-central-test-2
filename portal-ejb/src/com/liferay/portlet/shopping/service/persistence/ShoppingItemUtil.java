@@ -118,118 +118,6 @@ public class ShoppingItemUtil {
 		return shoppingItem;
 	}
 
-	public static java.util.List getShoppingItemPrices(java.lang.String pk)
-		throws com.liferay.portlet.shopping.NoSuchItemException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().getShoppingItemPrices(pk);
-	}
-
-	public static java.util.List getShoppingItemPrices(java.lang.String pk,
-		int begin, int end)
-		throws com.liferay.portlet.shopping.NoSuchItemException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().getShoppingItemPrices(pk, begin, end);
-	}
-
-	public static java.util.List getShoppingItemPrices(java.lang.String pk,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchItemException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().getShoppingItemPrices(pk, begin, end, obc);
-	}
-
-	public static int getShoppingItemPricesSize(java.lang.String pk)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().getShoppingItemPricesSize(pk);
-	}
-
-	public static void setShoppingItemPrices(java.lang.String pk,
-		java.lang.String[] pks)
-		throws com.liferay.portlet.shopping.NoSuchItemException, 
-			com.liferay.portlet.shopping.NoSuchItemPriceException, 
-			com.liferay.portal.SystemException {
-		getPersistence().setShoppingItemPrices(pk, pks);
-	}
-
-	public static void setShoppingItemPrices(java.lang.String pk,
-		java.util.List shoppingItemPrices)
-		throws com.liferay.portlet.shopping.NoSuchItemException, 
-			com.liferay.portlet.shopping.NoSuchItemPriceException, 
-			com.liferay.portal.SystemException {
-		getPersistence().setShoppingItemPrices(pk, shoppingItemPrices);
-	}
-
-	public static boolean addShoppingItemPrice(java.lang.String pk,
-		java.lang.String shoppingItemPricePK)
-		throws com.liferay.portlet.shopping.NoSuchItemException, 
-			com.liferay.portlet.shopping.NoSuchItemPriceException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().addShoppingItemPrice(pk, shoppingItemPricePK);
-	}
-
-	public static boolean addShoppingItemPrice(java.lang.String pk,
-		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
-		throws com.liferay.portlet.shopping.NoSuchItemException, 
-			com.liferay.portlet.shopping.NoSuchItemPriceException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().addShoppingItemPrice(pk, shoppingItemPrice);
-	}
-
-	public static boolean addShoppingItemPrices(java.lang.String pk,
-		java.lang.String[] shoppingItemPricePKs)
-		throws com.liferay.portlet.shopping.NoSuchItemException, 
-			com.liferay.portlet.shopping.NoSuchItemPriceException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().addShoppingItemPrices(pk, shoppingItemPricePKs);
-	}
-
-	public static boolean addShoppingItemPrices(java.lang.String pk,
-		java.util.List shoppingItemPrices)
-		throws com.liferay.portlet.shopping.NoSuchItemException, 
-			com.liferay.portlet.shopping.NoSuchItemPriceException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().addShoppingItemPrices(pk, shoppingItemPrices);
-	}
-
-	public static void clearShoppingItemPrices(java.lang.String pk)
-		throws com.liferay.portlet.shopping.NoSuchItemException, 
-			com.liferay.portal.SystemException {
-		getPersistence().clearShoppingItemPrices(pk);
-	}
-
-	public static boolean removeShoppingItemPrice(java.lang.String pk,
-		java.lang.String shoppingItemPricePK)
-		throws com.liferay.portlet.shopping.NoSuchItemException, 
-			com.liferay.portlet.shopping.NoSuchItemPriceException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().removeShoppingItemPrice(pk, shoppingItemPricePK);
-	}
-
-	public static boolean removeShoppingItemPrice(java.lang.String pk,
-		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
-		throws com.liferay.portlet.shopping.NoSuchItemException, 
-			com.liferay.portlet.shopping.NoSuchItemPriceException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().removeShoppingItemPrice(pk, shoppingItemPrice);
-	}
-
-	public static boolean removeShoppingItemPrices(java.lang.String pk,
-		java.lang.String[] shoppingItemPricePKs)
-		throws com.liferay.portlet.shopping.NoSuchItemException, 
-			com.liferay.portlet.shopping.NoSuchItemPriceException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().removeShoppingItemPrices(pk,
-			shoppingItemPricePKs);
-	}
-
-	public static boolean removeShoppingItemPrices(java.lang.String pk,
-		java.util.List shoppingItemPrices)
-		throws com.liferay.portlet.shopping.NoSuchItemException, 
-			com.liferay.portlet.shopping.NoSuchItemPriceException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().removeShoppingItemPrices(pk, shoppingItemPrices);
-	}
-
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByPrimaryKey(
 		java.lang.String itemId)
 		throws com.liferay.portlet.shopping.NoSuchItemException, 
@@ -310,6 +198,47 @@ public class ShoppingItemUtil {
 	public static int countByC_S(java.lang.String companyId,
 		java.lang.String sku) throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_S(companyId, sku);
+	}
+
+	public static java.util.List getShoppingItemPrices(java.lang.String pk)
+		throws com.liferay.portlet.shopping.NoSuchItemException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().getShoppingItemPrices(pk);
+	}
+
+	public static java.util.List getShoppingItemPrices(java.lang.String pk,
+		int begin, int end)
+		throws com.liferay.portlet.shopping.NoSuchItemException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().getShoppingItemPrices(pk, begin, end);
+	}
+
+	public static java.util.List getShoppingItemPrices(java.lang.String pk,
+		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portlet.shopping.NoSuchItemException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().getShoppingItemPrices(pk, begin, end, obc);
+	}
+
+	public static int getShoppingItemPricesSize(java.lang.String pk)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().getShoppingItemPricesSize(pk);
+	}
+
+	public static boolean containsShoppingItemPrice(java.lang.String pk,
+		java.lang.String shoppingItemPricePK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().containsShoppingItemPrice(pk,
+			shoppingItemPricePK);
+	}
+
+	public static boolean containsShoppingItemPrices(java.lang.String pk)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().containsShoppingItemPrices(pk);
+	}
+
+	public static void initDao() {
+		getPersistence().initDao();
 	}
 
 	public static ShoppingItemPersistence getPersistence() {

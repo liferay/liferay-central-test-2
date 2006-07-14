@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.wiki.NoSuchPageException;
+import com.liferay.portlet.wiki.model.WikiPage;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,25 +50,24 @@ import java.util.List;
  *
  */
 public class WikiPagePersistence extends BasePersistence {
-	public com.liferay.portlet.wiki.model.WikiPage create(WikiPagePK wikiPagePK) {
-		WikiPageHBM wikiPageHBM = new WikiPageHBM();
-		wikiPageHBM.setNew(true);
-		wikiPageHBM.setPrimaryKey(wikiPagePK);
+	public WikiPage create(WikiPagePK wikiPagePK) {
+		WikiPage wikiPage = new WikiPage();
+		wikiPage.setNew(true);
+		wikiPage.setPrimaryKey(wikiPagePK);
 
-		return WikiPageHBMUtil.model(wikiPageHBM);
+		return wikiPage;
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage remove(WikiPagePK wikiPagePK)
+	public WikiPage remove(WikiPagePK wikiPagePK)
 		throws NoSuchPageException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			WikiPageHBM wikiPageHBM = (WikiPageHBM)session.get(WikiPageHBM.class,
-					wikiPagePK);
+			WikiPage wikiPage = (WikiPage)session.get(WikiPage.class, wikiPagePK);
 
-			if (wikiPageHBM == null) {
+			if (wikiPage == null) {
 				_log.warn("No WikiPage exists with the primary key " +
 					wikiPagePK.toString());
 				throw new NoSuchPageException(
@@ -75,10 +75,10 @@ public class WikiPagePersistence extends BasePersistence {
 					wikiPagePK.toString());
 			}
 
-			session.delete(wikiPageHBM);
+			session.delete(wikiPage);
 			session.flush();
 
-			return WikiPageHBMUtil.model(wikiPageHBM);
+			return wikiPage;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -98,47 +98,47 @@ public class WikiPagePersistence extends BasePersistence {
 				session = openSession();
 
 				if (wikiPage.isNew()) {
-					WikiPageHBM wikiPageHBM = new WikiPageHBM();
-					wikiPageHBM.setNodeId(wikiPage.getNodeId());
-					wikiPageHBM.setTitle(wikiPage.getTitle());
-					wikiPageHBM.setVersion(wikiPage.getVersion());
-					wikiPageHBM.setCompanyId(wikiPage.getCompanyId());
-					wikiPageHBM.setUserId(wikiPage.getUserId());
-					wikiPageHBM.setUserName(wikiPage.getUserName());
-					wikiPageHBM.setCreateDate(wikiPage.getCreateDate());
-					wikiPageHBM.setContent(wikiPage.getContent());
-					wikiPageHBM.setFormat(wikiPage.getFormat());
-					wikiPageHBM.setHead(wikiPage.getHead());
-					session.save(wikiPageHBM);
+					WikiPage wikiPageModel = new WikiPage();
+					wikiPageModel.setNodeId(wikiPage.getNodeId());
+					wikiPageModel.setTitle(wikiPage.getTitle());
+					wikiPageModel.setVersion(wikiPage.getVersion());
+					wikiPageModel.setCompanyId(wikiPage.getCompanyId());
+					wikiPageModel.setUserId(wikiPage.getUserId());
+					wikiPageModel.setUserName(wikiPage.getUserName());
+					wikiPageModel.setCreateDate(wikiPage.getCreateDate());
+					wikiPageModel.setContent(wikiPage.getContent());
+					wikiPageModel.setFormat(wikiPage.getFormat());
+					wikiPageModel.setHead(wikiPage.getHead());
+					session.save(wikiPageModel);
 					session.flush();
 				}
 				else {
-					WikiPageHBM wikiPageHBM = (WikiPageHBM)session.get(WikiPageHBM.class,
+					WikiPage wikiPageModel = (WikiPage)session.get(WikiPage.class,
 							wikiPage.getPrimaryKey());
 
-					if (wikiPageHBM != null) {
-						wikiPageHBM.setCompanyId(wikiPage.getCompanyId());
-						wikiPageHBM.setUserId(wikiPage.getUserId());
-						wikiPageHBM.setUserName(wikiPage.getUserName());
-						wikiPageHBM.setCreateDate(wikiPage.getCreateDate());
-						wikiPageHBM.setContent(wikiPage.getContent());
-						wikiPageHBM.setFormat(wikiPage.getFormat());
-						wikiPageHBM.setHead(wikiPage.getHead());
+					if (wikiPageModel != null) {
+						wikiPageModel.setCompanyId(wikiPage.getCompanyId());
+						wikiPageModel.setUserId(wikiPage.getUserId());
+						wikiPageModel.setUserName(wikiPage.getUserName());
+						wikiPageModel.setCreateDate(wikiPage.getCreateDate());
+						wikiPageModel.setContent(wikiPage.getContent());
+						wikiPageModel.setFormat(wikiPage.getFormat());
+						wikiPageModel.setHead(wikiPage.getHead());
 						session.flush();
 					}
 					else {
-						wikiPageHBM = new WikiPageHBM();
-						wikiPageHBM.setNodeId(wikiPage.getNodeId());
-						wikiPageHBM.setTitle(wikiPage.getTitle());
-						wikiPageHBM.setVersion(wikiPage.getVersion());
-						wikiPageHBM.setCompanyId(wikiPage.getCompanyId());
-						wikiPageHBM.setUserId(wikiPage.getUserId());
-						wikiPageHBM.setUserName(wikiPage.getUserName());
-						wikiPageHBM.setCreateDate(wikiPage.getCreateDate());
-						wikiPageHBM.setContent(wikiPage.getContent());
-						wikiPageHBM.setFormat(wikiPage.getFormat());
-						wikiPageHBM.setHead(wikiPage.getHead());
-						session.save(wikiPageHBM);
+						wikiPageModel = new WikiPage();
+						wikiPageModel.setNodeId(wikiPage.getNodeId());
+						wikiPageModel.setTitle(wikiPage.getTitle());
+						wikiPageModel.setVersion(wikiPage.getVersion());
+						wikiPageModel.setCompanyId(wikiPage.getCompanyId());
+						wikiPageModel.setUserId(wikiPage.getUserId());
+						wikiPageModel.setUserName(wikiPage.getUserName());
+						wikiPageModel.setCreateDate(wikiPage.getCreateDate());
+						wikiPageModel.setContent(wikiPage.getContent());
+						wikiPageModel.setFormat(wikiPage.getFormat());
+						wikiPageModel.setHead(wikiPage.getHead());
+						session.save(wikiPageModel);
 						session.flush();
 					}
 				}
@@ -157,17 +157,16 @@ public class WikiPagePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage findByPrimaryKey(
-		WikiPagePK wikiPagePK) throws NoSuchPageException, SystemException {
+	public WikiPage findByPrimaryKey(WikiPagePK wikiPagePK)
+		throws NoSuchPageException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			WikiPageHBM wikiPageHBM = (WikiPageHBM)session.get(WikiPageHBM.class,
-					wikiPagePK);
+			WikiPage wikiPage = (WikiPage)session.get(WikiPage.class, wikiPagePK);
 
-			if (wikiPageHBM == null) {
+			if (wikiPage == null) {
 				_log.warn("No WikiPage exists with the primary key " +
 					wikiPagePK.toString());
 				throw new NoSuchPageException(
@@ -175,7 +174,7 @@ public class WikiPagePersistence extends BasePersistence {
 					wikiPagePK.toString());
 			}
 
-			return WikiPageHBMUtil.model(wikiPageHBM);
+			return wikiPage;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -192,11 +191,10 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -215,13 +213,7 @@ public class WikiPagePersistence extends BasePersistence {
 				q.setString(queryPos++, nodeId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				WikiPageHBM wikiPageHBM = (WikiPageHBM)itr.next();
-				list.add(WikiPageHBMUtil.model(wikiPageHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -246,11 +238,10 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -275,15 +266,7 @@ public class WikiPagePersistence extends BasePersistence {
 				q.setString(queryPos++, nodeId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				WikiPageHBM wikiPageHBM = (WikiPageHBM)itr.next();
-				list.add(WikiPageHBMUtil.model(wikiPageHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -293,8 +276,7 @@ public class WikiPagePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage findByNodeId_First(
-		String nodeId, OrderByComparator obc)
+	public WikiPage findByNodeId_First(String nodeId, OrderByComparator obc)
 		throws NoSuchPageException, SystemException {
 		List list = findByNodeId(nodeId, 0, 1, obc);
 
@@ -307,12 +289,11 @@ public class WikiPagePersistence extends BasePersistence {
 			throw new NoSuchPageException(msg);
 		}
 		else {
-			return (com.liferay.portlet.wiki.model.WikiPage)list.get(0);
+			return (WikiPage)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage findByNodeId_Last(
-		String nodeId, OrderByComparator obc)
+	public WikiPage findByNodeId_Last(String nodeId, OrderByComparator obc)
 		throws NoSuchPageException, SystemException {
 		int count = countByNodeId(nodeId);
 		List list = findByNodeId(nodeId, count - 1, count, obc);
@@ -326,14 +307,14 @@ public class WikiPagePersistence extends BasePersistence {
 			throw new NoSuchPageException(msg);
 		}
 		else {
-			return (com.liferay.portlet.wiki.model.WikiPage)list.get(0);
+			return (WikiPage)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage[] findByNodeId_PrevAndNext(
-		WikiPagePK wikiPagePK, String nodeId, OrderByComparator obc)
+	public WikiPage[] findByNodeId_PrevAndNext(WikiPagePK wikiPagePK,
+		String nodeId, OrderByComparator obc)
 		throws NoSuchPageException, SystemException {
-		com.liferay.portlet.wiki.model.WikiPage wikiPage = findByPrimaryKey(wikiPagePK);
+		WikiPage wikiPage = findByPrimaryKey(wikiPagePK);
 		int count = countByNodeId(nodeId);
 		Session session = null;
 
@@ -341,11 +322,10 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -370,12 +350,11 @@ public class WikiPagePersistence extends BasePersistence {
 				q.setString(queryPos++, nodeId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					wikiPage, WikiPageHBMUtil.getInstance());
-			com.liferay.portlet.wiki.model.WikiPage[] array = new com.liferay.portlet.wiki.model.WikiPage[3];
-			array[0] = (com.liferay.portlet.wiki.model.WikiPage)objArray[0];
-			array[1] = (com.liferay.portlet.wiki.model.WikiPage)objArray[1];
-			array[2] = (com.liferay.portlet.wiki.model.WikiPage)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
+			WikiPage[] array = new WikiPage[3];
+			array[0] = (WikiPage)objArray[0];
+			array[1] = (WikiPage)objArray[1];
+			array[2] = (WikiPage)objArray[2];
 
 			return array;
 		}
@@ -395,11 +374,10 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -408,7 +386,7 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (title == null) {
-				query.append("title is null");
+				query.append("title IS NULL");
 			}
 			else {
 				query.append("title = ?");
@@ -431,13 +409,7 @@ public class WikiPagePersistence extends BasePersistence {
 				q.setString(queryPos++, title);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				WikiPageHBM wikiPageHBM = (WikiPageHBM)itr.next();
-				list.add(WikiPageHBMUtil.model(wikiPageHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -462,11 +434,10 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -475,7 +446,7 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (title == null) {
-				query.append("title is null");
+				query.append("title IS NULL");
 			}
 			else {
 				query.append("title = ?");
@@ -504,15 +475,7 @@ public class WikiPagePersistence extends BasePersistence {
 				q.setString(queryPos++, title);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				WikiPageHBM wikiPageHBM = (WikiPageHBM)itr.next();
-				list.add(WikiPageHBMUtil.model(wikiPageHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -522,9 +485,8 @@ public class WikiPagePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage findByN_T_First(
-		String nodeId, String title, OrderByComparator obc)
-		throws NoSuchPageException, SystemException {
+	public WikiPage findByN_T_First(String nodeId, String title,
+		OrderByComparator obc) throws NoSuchPageException, SystemException {
 		List list = findByN_T(nodeId, title, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -539,13 +501,12 @@ public class WikiPagePersistence extends BasePersistence {
 			throw new NoSuchPageException(msg);
 		}
 		else {
-			return (com.liferay.portlet.wiki.model.WikiPage)list.get(0);
+			return (WikiPage)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage findByN_T_Last(
-		String nodeId, String title, OrderByComparator obc)
-		throws NoSuchPageException, SystemException {
+	public WikiPage findByN_T_Last(String nodeId, String title,
+		OrderByComparator obc) throws NoSuchPageException, SystemException {
 		int count = countByN_T(nodeId, title);
 		List list = findByN_T(nodeId, title, count - 1, count, obc);
 
@@ -561,14 +522,14 @@ public class WikiPagePersistence extends BasePersistence {
 			throw new NoSuchPageException(msg);
 		}
 		else {
-			return (com.liferay.portlet.wiki.model.WikiPage)list.get(0);
+			return (WikiPage)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage[] findByN_T_PrevAndNext(
-		WikiPagePK wikiPagePK, String nodeId, String title,
-		OrderByComparator obc) throws NoSuchPageException, SystemException {
-		com.liferay.portlet.wiki.model.WikiPage wikiPage = findByPrimaryKey(wikiPagePK);
+	public WikiPage[] findByN_T_PrevAndNext(WikiPagePK wikiPagePK,
+		String nodeId, String title, OrderByComparator obc)
+		throws NoSuchPageException, SystemException {
+		WikiPage wikiPage = findByPrimaryKey(wikiPagePK);
 		int count = countByN_T(nodeId, title);
 		Session session = null;
 
@@ -576,11 +537,10 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -589,7 +549,7 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (title == null) {
-				query.append("title is null");
+				query.append("title IS NULL");
 			}
 			else {
 				query.append("title = ?");
@@ -618,12 +578,11 @@ public class WikiPagePersistence extends BasePersistence {
 				q.setString(queryPos++, title);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					wikiPage, WikiPageHBMUtil.getInstance());
-			com.liferay.portlet.wiki.model.WikiPage[] array = new com.liferay.portlet.wiki.model.WikiPage[3];
-			array[0] = (com.liferay.portlet.wiki.model.WikiPage)objArray[0];
-			array[1] = (com.liferay.portlet.wiki.model.WikiPage)objArray[1];
-			array[2] = (com.liferay.portlet.wiki.model.WikiPage)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
+			WikiPage[] array = new WikiPage[3];
+			array[0] = (WikiPage)objArray[0];
+			array[1] = (WikiPage)objArray[1];
+			array[2] = (WikiPage)objArray[2];
 
 			return array;
 		}
@@ -643,11 +602,10 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -670,13 +628,7 @@ public class WikiPagePersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, head);
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				WikiPageHBM wikiPageHBM = (WikiPageHBM)itr.next();
-				list.add(WikiPageHBMUtil.model(wikiPageHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -701,11 +653,10 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -734,15 +685,7 @@ public class WikiPagePersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, head);
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				WikiPageHBM wikiPageHBM = (WikiPageHBM)itr.next();
-				list.add(WikiPageHBMUtil.model(wikiPageHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -752,9 +695,8 @@ public class WikiPagePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage findByN_H_First(
-		String nodeId, boolean head, OrderByComparator obc)
-		throws NoSuchPageException, SystemException {
+	public WikiPage findByN_H_First(String nodeId, boolean head,
+		OrderByComparator obc) throws NoSuchPageException, SystemException {
 		List list = findByN_H(nodeId, head, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -769,13 +711,12 @@ public class WikiPagePersistence extends BasePersistence {
 			throw new NoSuchPageException(msg);
 		}
 		else {
-			return (com.liferay.portlet.wiki.model.WikiPage)list.get(0);
+			return (WikiPage)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage findByN_H_Last(
-		String nodeId, boolean head, OrderByComparator obc)
-		throws NoSuchPageException, SystemException {
+	public WikiPage findByN_H_Last(String nodeId, boolean head,
+		OrderByComparator obc) throws NoSuchPageException, SystemException {
 		int count = countByN_H(nodeId, head);
 		List list = findByN_H(nodeId, head, count - 1, count, obc);
 
@@ -791,14 +732,14 @@ public class WikiPagePersistence extends BasePersistence {
 			throw new NoSuchPageException(msg);
 		}
 		else {
-			return (com.liferay.portlet.wiki.model.WikiPage)list.get(0);
+			return (WikiPage)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage[] findByN_H_PrevAndNext(
-		WikiPagePK wikiPagePK, String nodeId, boolean head,
-		OrderByComparator obc) throws NoSuchPageException, SystemException {
-		com.liferay.portlet.wiki.model.WikiPage wikiPage = findByPrimaryKey(wikiPagePK);
+	public WikiPage[] findByN_H_PrevAndNext(WikiPagePK wikiPagePK,
+		String nodeId, boolean head, OrderByComparator obc)
+		throws NoSuchPageException, SystemException {
+		WikiPage wikiPage = findByPrimaryKey(wikiPagePK);
 		int count = countByN_H(nodeId, head);
 		Session session = null;
 
@@ -806,11 +747,10 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -839,12 +779,11 @@ public class WikiPagePersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, head);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					wikiPage, WikiPageHBMUtil.getInstance());
-			com.liferay.portlet.wiki.model.WikiPage[] array = new com.liferay.portlet.wiki.model.WikiPage[3];
-			array[0] = (com.liferay.portlet.wiki.model.WikiPage)objArray[0];
-			array[1] = (com.liferay.portlet.wiki.model.WikiPage)objArray[1];
-			array[2] = (com.liferay.portlet.wiki.model.WikiPage)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
+			WikiPage[] array = new WikiPage[3];
+			array[0] = (WikiPage)objArray[0];
+			array[1] = (WikiPage)objArray[1];
+			array[2] = (WikiPage)objArray[2];
 
 			return array;
 		}
@@ -864,11 +803,10 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -877,7 +815,7 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (title == null) {
-				query.append("title is null");
+				query.append("title IS NULL");
 			}
 			else {
 				query.append("title = ?");
@@ -904,13 +842,7 @@ public class WikiPagePersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, head);
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				WikiPageHBM wikiPageHBM = (WikiPageHBM)itr.next();
-				list.add(WikiPageHBMUtil.model(wikiPageHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -935,11 +867,10 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -948,7 +879,7 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (title == null) {
-				query.append("title is null");
+				query.append("title IS NULL");
 			}
 			else {
 				query.append("title = ?");
@@ -981,15 +912,7 @@ public class WikiPagePersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, head);
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				WikiPageHBM wikiPageHBM = (WikiPageHBM)itr.next();
-				list.add(WikiPageHBMUtil.model(wikiPageHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -999,8 +922,8 @@ public class WikiPagePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage findByN_T_H_First(
-		String nodeId, String title, boolean head, OrderByComparator obc)
+	public WikiPage findByN_T_H_First(String nodeId, String title,
+		boolean head, OrderByComparator obc)
 		throws NoSuchPageException, SystemException {
 		List list = findByN_T_H(nodeId, title, head, 0, 1, obc);
 
@@ -1019,13 +942,12 @@ public class WikiPagePersistence extends BasePersistence {
 			throw new NoSuchPageException(msg);
 		}
 		else {
-			return (com.liferay.portlet.wiki.model.WikiPage)list.get(0);
+			return (WikiPage)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage findByN_T_H_Last(
-		String nodeId, String title, boolean head, OrderByComparator obc)
-		throws NoSuchPageException, SystemException {
+	public WikiPage findByN_T_H_Last(String nodeId, String title, boolean head,
+		OrderByComparator obc) throws NoSuchPageException, SystemException {
 		int count = countByN_T_H(nodeId, title, head);
 		List list = findByN_T_H(nodeId, title, head, count - 1, count, obc);
 
@@ -1044,14 +966,14 @@ public class WikiPagePersistence extends BasePersistence {
 			throw new NoSuchPageException(msg);
 		}
 		else {
-			return (com.liferay.portlet.wiki.model.WikiPage)list.get(0);
+			return (WikiPage)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage[] findByN_T_H_PrevAndNext(
-		WikiPagePK wikiPagePK, String nodeId, String title, boolean head,
-		OrderByComparator obc) throws NoSuchPageException, SystemException {
-		com.liferay.portlet.wiki.model.WikiPage wikiPage = findByPrimaryKey(wikiPagePK);
+	public WikiPage[] findByN_T_H_PrevAndNext(WikiPagePK wikiPagePK,
+		String nodeId, String title, boolean head, OrderByComparator obc)
+		throws NoSuchPageException, SystemException {
+		WikiPage wikiPage = findByPrimaryKey(wikiPagePK);
 		int count = countByN_T_H(nodeId, title, head);
 		Session session = null;
 
@@ -1059,11 +981,10 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -1072,7 +993,7 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (title == null) {
-				query.append("title is null");
+				query.append("title IS NULL");
 			}
 			else {
 				query.append("title = ?");
@@ -1105,12 +1026,11 @@ public class WikiPagePersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, head);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					wikiPage, WikiPageHBMUtil.getInstance());
-			com.liferay.portlet.wiki.model.WikiPage[] array = new com.liferay.portlet.wiki.model.WikiPage[3];
-			array[0] = (com.liferay.portlet.wiki.model.WikiPage)objArray[0];
-			array[1] = (com.liferay.portlet.wiki.model.WikiPage)objArray[1];
-			array[2] = (com.liferay.portlet.wiki.model.WikiPage)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
+			WikiPage[] array = new WikiPage[3];
+			array[0] = (WikiPage)objArray[0];
+			array[1] = (WikiPage)objArray[1];
+			array[2] = (WikiPage)objArray[2];
 
 			return array;
 		}
@@ -1129,23 +1049,15 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage ");
 			query.append("ORDER BY ");
 			query.append("nodeId ASC").append(", ");
 			query.append("title ASC").append(", ");
 			query.append("version ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				WikiPageHBM wikiPageHBM = (WikiPageHBM)itr.next();
-				list.add(WikiPageHBMUtil.model(wikiPageHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1162,11 +1074,10 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -1188,8 +1099,8 @@ public class WikiPagePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				WikiPageHBM wikiPageHBM = (WikiPageHBM)itr.next();
-				session.delete(wikiPageHBM);
+				WikiPage wikiPage = (WikiPage)itr.next();
+				session.delete(wikiPage);
 			}
 
 			session.flush();
@@ -1210,11 +1121,10 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -1223,7 +1133,7 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (title == null) {
-				query.append("title is null");
+				query.append("title IS NULL");
 			}
 			else {
 				query.append("title = ?");
@@ -1249,8 +1159,8 @@ public class WikiPagePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				WikiPageHBM wikiPageHBM = (WikiPageHBM)itr.next();
-				session.delete(wikiPageHBM);
+				WikiPage wikiPage = (WikiPage)itr.next();
+				session.delete(wikiPage);
 			}
 
 			session.flush();
@@ -1271,11 +1181,10 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -1301,8 +1210,8 @@ public class WikiPagePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				WikiPageHBM wikiPageHBM = (WikiPageHBM)itr.next();
-				session.delete(wikiPageHBM);
+				WikiPage wikiPage = (WikiPage)itr.next();
+				session.delete(wikiPage);
 			}
 
 			session.flush();
@@ -1323,11 +1232,10 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -1336,7 +1244,7 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (title == null) {
-				query.append("title is null");
+				query.append("title IS NULL");
 			}
 			else {
 				query.append("title = ?");
@@ -1366,8 +1274,8 @@ public class WikiPagePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				WikiPageHBM wikiPageHBM = (WikiPageHBM)itr.next();
-				session.delete(wikiPageHBM);
+				WikiPage wikiPage = (WikiPage)itr.next();
+				session.delete(wikiPage);
 			}
 
 			session.flush();
@@ -1388,11 +1296,10 @@ public class WikiPagePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -1436,11 +1343,10 @@ public class WikiPagePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -1449,7 +1355,7 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (title == null) {
-				query.append("title is null");
+				query.append("title IS NULL");
 			}
 			else {
 				query.append("title = ?");
@@ -1497,11 +1403,10 @@ public class WikiPagePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -1549,11 +1454,10 @@ public class WikiPagePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM WikiPage IN CLASS com.liferay.portlet.wiki.service.persistence.WikiPageHBM WHERE ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
 
 			if (nodeId == null) {
-				query.append("nodeId is null");
+				query.append("nodeId IS NULL");
 			}
 			else {
 				query.append("nodeId = ?");
@@ -1562,7 +1466,7 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (title == null) {
-				query.append("title is null");
+				query.append("title IS NULL");
 			}
 			else {
 				query.append("title = ?");
@@ -1603,6 +1507,9 @@ public class WikiPagePersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(WikiPagePersistence.class);

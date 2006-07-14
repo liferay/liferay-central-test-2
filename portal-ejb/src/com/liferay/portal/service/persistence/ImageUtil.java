@@ -129,6 +129,10 @@ public class ImageUtil {
 		return getPersistence().findAll();
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static ImagePersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		ImageUtil util = (ImageUtil)ctx.getBean(CLASS_NAME);

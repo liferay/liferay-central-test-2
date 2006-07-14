@@ -25,6 +25,7 @@ package com.liferay.portlet.shopping.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.util.Randomizer;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -106,7 +107,7 @@ public class ShoppingItemFinder {
 			StringBuffer query = new StringBuffer();
 
 			query.append("SELECT COUNT(*) FROM ");
-			query.append(ShoppingItemHBM.class.getName());
+			query.append(ShoppingItem.class.getName());
 			query.append(" AS shoppingItem ");
 			query.append("WHERE ");
 			query.append("(");
@@ -134,7 +135,7 @@ public class ShoppingItemFinder {
 			q.setBoolean(categoryIds.length + 1, true);
 			q.setBoolean(categoryIds.length + 2, true);
 
-			Iterator itr = q.iterate();
+			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
 				Long count = (Long)itr.next();
@@ -166,7 +167,7 @@ public class ShoppingItemFinder {
 			StringBuffer query = new StringBuffer();
 
 			query.append("SELECT COUNT(*) FROM ");
-			query.append(ShoppingItemHBM.class.getName());
+			query.append(ShoppingItem.class.getName());
 			query.append(" AS shoppingItem ");
 			query.append("WHERE ");
 
@@ -202,7 +203,7 @@ public class ShoppingItemFinder {
 			q.setString(categoryIds.length + 2, keywords);
 			q.setString(categoryIds.length + 3, keywords);
 
-			Iterator itr = q.iterate();
+			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
 				Long count = (Long)itr.next();
@@ -233,7 +234,7 @@ public class ShoppingItemFinder {
 			StringBuffer query = new StringBuffer();
 
 			query.append("SELECT COUNT(*) FROM ");
-			query.append(ShoppingItemHBM.class.getName());
+			query.append(ShoppingItem.class.getName());
 			query.append(" AS shoppingItem ");
 			query.append("WHERE ");
 			query.append("(");
@@ -261,7 +262,7 @@ public class ShoppingItemFinder {
 			q.setBoolean(categoryIds.length + 1, true);
 			q.setBoolean(categoryIds.length + 2, true);
 
-			Iterator itr = q.iterate();
+			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
 				Long count = (Long)itr.next();
@@ -301,7 +302,7 @@ public class ShoppingItemFinder {
 			StringBuffer query = new StringBuffer();
 
 			query.append("SELECT shoppingItem FROM ");
-			query.append(ShoppingItemHBM.class.getName());
+			query.append(ShoppingItem.class.getName());
 			query.append(" AS shoppingItem ");
 			query.append("WHERE ");
 			query.append("(");
@@ -334,15 +335,14 @@ public class ShoppingItemFinder {
 			if (sr.first()) {
 				Randomizer randomizer = new Randomizer();
 
-				int[] scrollIds =
-					randomizer.nextInt(countByFeatured, numOfItems);
+				int[] scrollIds = randomizer.nextInt(
+					countByFeatured, numOfItems);
 
 				for (int i = 0; i < scrollIds.length; i++) {
 					if (sr.scroll(scrollIds[i])) {
-						ShoppingItemHBM shoppingItemHBM =
-							(ShoppingItemHBM)sr.get(0);
+						ShoppingItem item = (ShoppingItem)sr.get(0);
 
-						list.add(ShoppingItemHBMUtil.model(shoppingItemHBM));
+						list.add(item);
 
 						sr.first();
 					}
@@ -372,7 +372,7 @@ public class ShoppingItemFinder {
 			StringBuffer query = new StringBuffer();
 
 			query.append("SELECT shoppingItem FROM ");
-			query.append(ShoppingItemHBM.class.getName());
+			query.append(ShoppingItem.class.getName());
 			query.append(" AS shoppingItem ");
 			query.append("WHERE ");
 
@@ -414,10 +414,9 @@ public class ShoppingItemFinder {
 
 			if (sr.first() && sr.scroll(begin)) {
 				for (int i = begin; i < end; i++) {
-					ShoppingItemHBM shoppingItemHBM =
-						(ShoppingItemHBM)sr.get(0);
+					ShoppingItem item = (ShoppingItem)sr.get(0);
 
-					list.add(ShoppingItemHBMUtil.model(shoppingItemHBM));
+					list.add(item);
 
 					if (!sr.next()) {
 						break;
@@ -455,7 +454,7 @@ public class ShoppingItemFinder {
 			StringBuffer query = new StringBuffer();
 
 			query.append("SELECT shoppingItem FROM ");
-			query.append(ShoppingItemHBM.class.getName());
+			query.append(ShoppingItem.class.getName());
 			query.append(" AS shoppingItem ");
 			query.append("WHERE ");
 			query.append("(");
@@ -491,10 +490,9 @@ public class ShoppingItemFinder {
 
 				for (int i = 0; i < scrollIds.length; i++) {
 					if (sr.scroll(scrollIds[i])) {
-						ShoppingItemHBM shoppingItemHBM =
-							(ShoppingItemHBM)sr.get(0);
+						ShoppingItem item = (ShoppingItem)sr.get(0);
 
-						list.add(ShoppingItemHBMUtil.model(shoppingItemHBM));
+						list.add(item);
 
 						sr.first();
 					}

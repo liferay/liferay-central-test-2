@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchDataTrackerException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.DataTracker;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import org.apache.commons.logging.Log;
@@ -44,25 +45,25 @@ import java.util.List;
  *
  */
 public class DataTrackerPersistence extends BasePersistence {
-	public com.liferay.portal.model.DataTracker create(String dataTrackerId) {
-		DataTrackerHBM dataTrackerHBM = new DataTrackerHBM();
-		dataTrackerHBM.setNew(true);
-		dataTrackerHBM.setPrimaryKey(dataTrackerId);
+	public DataTracker create(String dataTrackerId) {
+		DataTracker dataTracker = new DataTracker();
+		dataTracker.setNew(true);
+		dataTracker.setPrimaryKey(dataTrackerId);
 
-		return DataTrackerHBMUtil.model(dataTrackerHBM);
+		return dataTracker;
 	}
 
-	public com.liferay.portal.model.DataTracker remove(String dataTrackerId)
+	public DataTracker remove(String dataTrackerId)
 		throws NoSuchDataTrackerException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			DataTrackerHBM dataTrackerHBM = (DataTrackerHBM)session.get(DataTrackerHBM.class,
+			DataTracker dataTracker = (DataTracker)session.get(DataTracker.class,
 					dataTrackerId);
 
-			if (dataTrackerHBM == null) {
+			if (dataTracker == null) {
 				_log.warn("No DataTracker exists with the primary key " +
 					dataTrackerId.toString());
 				throw new NoSuchDataTrackerException(
@@ -70,10 +71,10 @@ public class DataTrackerPersistence extends BasePersistence {
 					dataTrackerId.toString());
 			}
 
-			session.delete(dataTrackerHBM);
+			session.delete(dataTracker);
 			session.flush();
 
-			return DataTrackerHBMUtil.model(dataTrackerHBM);
+			return dataTracker;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -93,49 +94,49 @@ public class DataTrackerPersistence extends BasePersistence {
 				session = openSession();
 
 				if (dataTracker.isNew()) {
-					DataTrackerHBM dataTrackerHBM = new DataTrackerHBM();
-					dataTrackerHBM.setDataTrackerId(dataTracker.getDataTrackerId());
-					dataTrackerHBM.setCompanyId(dataTracker.getCompanyId());
-					dataTrackerHBM.setCreatedOn(dataTracker.getCreatedOn());
-					dataTrackerHBM.setCreatedByUserId(dataTracker.getCreatedByUserId());
-					dataTrackerHBM.setCreatedByUserName(dataTracker.getCreatedByUserName());
-					dataTrackerHBM.setUpdatedOn(dataTracker.getUpdatedOn());
-					dataTrackerHBM.setUpdatedBy(dataTracker.getUpdatedBy());
-					dataTrackerHBM.setClassName(dataTracker.getClassName());
-					dataTrackerHBM.setClassPK(dataTracker.getClassPK());
-					dataTrackerHBM.setActive(dataTracker.getActive());
-					session.save(dataTrackerHBM);
+					DataTracker dataTrackerModel = new DataTracker();
+					dataTrackerModel.setDataTrackerId(dataTracker.getDataTrackerId());
+					dataTrackerModel.setCompanyId(dataTracker.getCompanyId());
+					dataTrackerModel.setCreatedOn(dataTracker.getCreatedOn());
+					dataTrackerModel.setCreatedByUserId(dataTracker.getCreatedByUserId());
+					dataTrackerModel.setCreatedByUserName(dataTracker.getCreatedByUserName());
+					dataTrackerModel.setUpdatedOn(dataTracker.getUpdatedOn());
+					dataTrackerModel.setUpdatedBy(dataTracker.getUpdatedBy());
+					dataTrackerModel.setClassName(dataTracker.getClassName());
+					dataTrackerModel.setClassPK(dataTracker.getClassPK());
+					dataTrackerModel.setActive(dataTracker.getActive());
+					session.save(dataTrackerModel);
 					session.flush();
 				}
 				else {
-					DataTrackerHBM dataTrackerHBM = (DataTrackerHBM)session.get(DataTrackerHBM.class,
+					DataTracker dataTrackerModel = (DataTracker)session.get(DataTracker.class,
 							dataTracker.getPrimaryKey());
 
-					if (dataTrackerHBM != null) {
-						dataTrackerHBM.setCompanyId(dataTracker.getCompanyId());
-						dataTrackerHBM.setCreatedOn(dataTracker.getCreatedOn());
-						dataTrackerHBM.setCreatedByUserId(dataTracker.getCreatedByUserId());
-						dataTrackerHBM.setCreatedByUserName(dataTracker.getCreatedByUserName());
-						dataTrackerHBM.setUpdatedOn(dataTracker.getUpdatedOn());
-						dataTrackerHBM.setUpdatedBy(dataTracker.getUpdatedBy());
-						dataTrackerHBM.setClassName(dataTracker.getClassName());
-						dataTrackerHBM.setClassPK(dataTracker.getClassPK());
-						dataTrackerHBM.setActive(dataTracker.getActive());
+					if (dataTrackerModel != null) {
+						dataTrackerModel.setCompanyId(dataTracker.getCompanyId());
+						dataTrackerModel.setCreatedOn(dataTracker.getCreatedOn());
+						dataTrackerModel.setCreatedByUserId(dataTracker.getCreatedByUserId());
+						dataTrackerModel.setCreatedByUserName(dataTracker.getCreatedByUserName());
+						dataTrackerModel.setUpdatedOn(dataTracker.getUpdatedOn());
+						dataTrackerModel.setUpdatedBy(dataTracker.getUpdatedBy());
+						dataTrackerModel.setClassName(dataTracker.getClassName());
+						dataTrackerModel.setClassPK(dataTracker.getClassPK());
+						dataTrackerModel.setActive(dataTracker.getActive());
 						session.flush();
 					}
 					else {
-						dataTrackerHBM = new DataTrackerHBM();
-						dataTrackerHBM.setDataTrackerId(dataTracker.getDataTrackerId());
-						dataTrackerHBM.setCompanyId(dataTracker.getCompanyId());
-						dataTrackerHBM.setCreatedOn(dataTracker.getCreatedOn());
-						dataTrackerHBM.setCreatedByUserId(dataTracker.getCreatedByUserId());
-						dataTrackerHBM.setCreatedByUserName(dataTracker.getCreatedByUserName());
-						dataTrackerHBM.setUpdatedOn(dataTracker.getUpdatedOn());
-						dataTrackerHBM.setUpdatedBy(dataTracker.getUpdatedBy());
-						dataTrackerHBM.setClassName(dataTracker.getClassName());
-						dataTrackerHBM.setClassPK(dataTracker.getClassPK());
-						dataTrackerHBM.setActive(dataTracker.getActive());
-						session.save(dataTrackerHBM);
+						dataTrackerModel = new DataTracker();
+						dataTrackerModel.setDataTrackerId(dataTracker.getDataTrackerId());
+						dataTrackerModel.setCompanyId(dataTracker.getCompanyId());
+						dataTrackerModel.setCreatedOn(dataTracker.getCreatedOn());
+						dataTrackerModel.setCreatedByUserId(dataTracker.getCreatedByUserId());
+						dataTrackerModel.setCreatedByUserName(dataTracker.getCreatedByUserName());
+						dataTrackerModel.setUpdatedOn(dataTracker.getUpdatedOn());
+						dataTrackerModel.setUpdatedBy(dataTracker.getUpdatedBy());
+						dataTrackerModel.setClassName(dataTracker.getClassName());
+						dataTrackerModel.setClassPK(dataTracker.getClassPK());
+						dataTrackerModel.setActive(dataTracker.getActive());
+						session.save(dataTrackerModel);
 						session.flush();
 					}
 				}
@@ -154,18 +155,17 @@ public class DataTrackerPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.DataTracker findByPrimaryKey(
-		String dataTrackerId)
+	public DataTracker findByPrimaryKey(String dataTrackerId)
 		throws NoSuchDataTrackerException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			DataTrackerHBM dataTrackerHBM = (DataTrackerHBM)session.get(DataTrackerHBM.class,
+			DataTracker dataTracker = (DataTracker)session.get(DataTracker.class,
 					dataTrackerId);
 
-			if (dataTrackerHBM == null) {
+			if (dataTracker == null) {
 				_log.warn("No DataTracker exists with the primary key " +
 					dataTrackerId.toString());
 				throw new NoSuchDataTrackerException(
@@ -173,7 +173,7 @@ public class DataTrackerPersistence extends BasePersistence {
 					dataTrackerId.toString());
 			}
 
-			return DataTrackerHBMUtil.model(dataTrackerHBM);
+			return dataTracker;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -190,19 +190,11 @@ public class DataTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM DataTracker IN CLASS com.liferay.portal.service.persistence.DataTrackerHBM ");
+			query.append("FROM com.liferay.portal.model.DataTracker ");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				DataTrackerHBM dataTrackerHBM = (DataTrackerHBM)itr.next();
-				list.add(DataTrackerHBMUtil.model(dataTrackerHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -210,6 +202,9 @@ public class DataTrackerPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(DataTrackerPersistence.class);

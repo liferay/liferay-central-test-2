@@ -238,6 +238,10 @@ public class IGFolderUtil {
 		return getPersistence().countByG_P(groupId, parentFolderId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static IGFolderPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		IGFolderUtil util = (IGFolderUtil)ctx.getBean(CLASS_NAME);

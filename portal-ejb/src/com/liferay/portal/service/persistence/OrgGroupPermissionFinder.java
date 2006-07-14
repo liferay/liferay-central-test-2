@@ -24,13 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchOrgGroupPermissionException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.OrgGroupPermission;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -50,8 +49,6 @@ public class OrgGroupPermissionFinder {
 			String organizatonId, String groupId, String resourceId)
 		throws NoSuchOrgGroupPermissionException, SystemException {
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -61,7 +58,7 @@ public class OrgGroupPermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("OrgGroupPermission", OrgGroupPermissionHBM.class);
+			q.addEntity("OrgGroupPermission", OrgGroupPermission.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -72,11 +69,11 @@ public class OrgGroupPermissionFinder {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				OrgGroupPermissionHBM orgGroupPermissionHBM =
-					(OrgGroupPermissionHBM)itr.next();
+				OrgGroupPermission orgGroupPermission =
+					(OrgGroupPermission)itr.next();
 
 				OrgGroupPermissionUtil.remove(
-					orgGroupPermissionHBM.getPrimaryKey());
+					orgGroupPermission.getPrimaryKey());
 			}
 		}
 		catch (Exception e) {

@@ -34,6 +34,8 @@ String columnId = (String)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID)
 Integer columnPos = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_POS);
 Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_COUNT);
 
+boolean denyAccess = false;
+
 try {
 	ResourceLocalServiceUtil.getResource(company.getCompanyId(), rootPortletId, Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL, plid + Portlet.LAYOUT_SEPARATOR + portletId);
 }
@@ -74,8 +76,15 @@ catch (NoSuchResourceException nsre) {
 		}
 	}
 
+	if (!portlet.hasAddPortletPermission(user.getUserId())) {
+		addDefaultResource = false;
+	}
+
 	if (addDefaultResource) {
 		ResourceLocalServiceUtil.addResources(company.getCompanyId(), layout.getGroupId(), null, rootPortletId, plid + Portlet.LAYOUT_SEPARATOR + portletId, true, true, true);
+	}
+	else {
+		denyAccess = true;
 	}
 }
 
@@ -224,6 +233,22 @@ if (portlet.isStatic()) {
 	showMoveIcon = false;
 }
 
+// Deny access
+
+if (denyAccess) {
+	access = false;
+
+	showCloseIcon = false;
+	showConfigurationIcon = false;
+	showEditIcon = false;
+	showEditGuestIcon = false;
+	showHelpIcon = false;
+	showMaxIcon = false;
+	showMinIcon = false;
+	showMoveIcon = false;
+	showPrintIcon = false;
+}
+
 portletDisplay.recycle();
 
 portletDisplay.setId(portletId);
@@ -249,8 +274,8 @@ portletDisplay.setModeHelp(modeHelp);
 portletDisplay.setModePreview(modePreview);
 portletDisplay.setModePrint(modePrint);
 
-portletDisplay.setShowConfigurationIcon(showConfigurationIcon);
 portletDisplay.setShowCloseIcon(showCloseIcon);
+portletDisplay.setShowConfigurationIcon(showConfigurationIcon);
 portletDisplay.setShowEditIcon(showEditIcon);
 portletDisplay.setShowEditGuestIcon(showEditGuestIcon);
 portletDisplay.setShowHelpIcon(showHelpIcon);

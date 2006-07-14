@@ -22,18 +22,6 @@
 
 package com.liferay.portlet.chat.util;
 
-import com.liferay.portal.shared.util.IntegerWrapper;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
-
-import java.io.IOException;
-
-import java.net.BindException;
-import java.net.ServerSocket;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="ChatServerUtil.java.html"><b><i>View Source</i></b></a>
  *

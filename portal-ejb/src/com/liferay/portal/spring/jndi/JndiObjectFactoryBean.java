@@ -20,17 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.service.persistence;
+package com.liferay.portal.spring.jndi;
 
-import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.util.JNDIUtil;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 /**
- * <a href="MBThreadHBM.java.html"><b><i>View Source</i></b></a>
+ * <a href="JndiObjectFactoryBean.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class MBThreadHBM extends MBThread {
-	protected MBThreadHBM() {
+public class JndiObjectFactoryBean
+	extends org.springframework.jndi.JndiObjectFactoryBean {
+
+	protected Object lookup() throws NamingException {
+		return JNDIUtil.lookup(new InitialContext(), getJndiName());
 	}
+
 }

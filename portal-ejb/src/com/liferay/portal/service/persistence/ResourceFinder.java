@@ -28,8 +28,6 @@ import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.SQLQuery;
@@ -49,8 +47,6 @@ public class ResourceFinder {
 	public static List findByC_P(String companyId, String primKey)
 		throws SystemException {
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -60,22 +56,14 @@ public class ResourceFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("Resource_", ResourceHBM.class);
+			q.addEntity("Resource_", Resource.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
 			qPos.add(primKey);
 
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				ResourceHBM resourceHBM = (ResourceHBM)itr.next();
-
-				Resource resource = ResourceHBMUtil.model(resourceHBM);
-
-				list.add(resource);
-			}
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -83,8 +71,6 @@ public class ResourceFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 }

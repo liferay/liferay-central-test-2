@@ -48,11 +48,11 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		return (OrganizationLocalService)ctx.getBean(CLASS_NAME);
 	}
 
-	public boolean addGroupOrganizations(java.lang.String groupId,
+	public void addGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addGroupOrganizations(groupId, organizationIds);
+		getService().addGroupOrganizations(groupId, organizationIds);
 	}
 
 	public com.liferay.portal.model.Organization addOrganization(
@@ -142,11 +142,11 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		getService().setGroupOrganizations(groupId, organizationIds);
 	}
 
-	public boolean unsetGroupOrganizations(java.lang.String groupId,
+	public void unsetGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().unsetGroupOrganizations(groupId, organizationIds);
+		getService().unsetGroupOrganizations(groupId, organizationIds);
 	}
 
 	public com.liferay.portal.model.Organization updateOrganization(

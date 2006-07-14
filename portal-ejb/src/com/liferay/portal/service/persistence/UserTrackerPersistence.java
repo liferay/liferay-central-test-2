@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserTrackerException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.util.StringPool;
@@ -48,25 +49,25 @@ import java.util.List;
  *
  */
 public class UserTrackerPersistence extends BasePersistence {
-	public com.liferay.portal.model.UserTracker create(String userTrackerId) {
-		UserTrackerHBM userTrackerHBM = new UserTrackerHBM();
-		userTrackerHBM.setNew(true);
-		userTrackerHBM.setPrimaryKey(userTrackerId);
+	public UserTracker create(String userTrackerId) {
+		UserTracker userTracker = new UserTracker();
+		userTracker.setNew(true);
+		userTracker.setPrimaryKey(userTrackerId);
 
-		return UserTrackerHBMUtil.model(userTrackerHBM);
+		return userTracker;
 	}
 
-	public com.liferay.portal.model.UserTracker remove(String userTrackerId)
+	public UserTracker remove(String userTrackerId)
 		throws NoSuchUserTrackerException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			UserTrackerHBM userTrackerHBM = (UserTrackerHBM)session.get(UserTrackerHBM.class,
+			UserTracker userTracker = (UserTracker)session.get(UserTracker.class,
 					userTrackerId);
 
-			if (userTrackerHBM == null) {
+			if (userTracker == null) {
 				_log.warn("No UserTracker exists with the primary key " +
 					userTrackerId.toString());
 				throw new NoSuchUserTrackerException(
@@ -74,10 +75,10 @@ public class UserTrackerPersistence extends BasePersistence {
 					userTrackerId.toString());
 			}
 
-			session.delete(userTrackerHBM);
+			session.delete(userTracker);
 			session.flush();
 
-			return UserTrackerHBMUtil.model(userTrackerHBM);
+			return userTracker;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -97,40 +98,40 @@ public class UserTrackerPersistence extends BasePersistence {
 				session = openSession();
 
 				if (userTracker.isNew()) {
-					UserTrackerHBM userTrackerHBM = new UserTrackerHBM();
-					userTrackerHBM.setUserTrackerId(userTracker.getUserTrackerId());
-					userTrackerHBM.setCompanyId(userTracker.getCompanyId());
-					userTrackerHBM.setUserId(userTracker.getUserId());
-					userTrackerHBM.setModifiedDate(userTracker.getModifiedDate());
-					userTrackerHBM.setRemoteAddr(userTracker.getRemoteAddr());
-					userTrackerHBM.setRemoteHost(userTracker.getRemoteHost());
-					userTrackerHBM.setUserAgent(userTracker.getUserAgent());
-					session.save(userTrackerHBM);
+					UserTracker userTrackerModel = new UserTracker();
+					userTrackerModel.setUserTrackerId(userTracker.getUserTrackerId());
+					userTrackerModel.setCompanyId(userTracker.getCompanyId());
+					userTrackerModel.setUserId(userTracker.getUserId());
+					userTrackerModel.setModifiedDate(userTracker.getModifiedDate());
+					userTrackerModel.setRemoteAddr(userTracker.getRemoteAddr());
+					userTrackerModel.setRemoteHost(userTracker.getRemoteHost());
+					userTrackerModel.setUserAgent(userTracker.getUserAgent());
+					session.save(userTrackerModel);
 					session.flush();
 				}
 				else {
-					UserTrackerHBM userTrackerHBM = (UserTrackerHBM)session.get(UserTrackerHBM.class,
+					UserTracker userTrackerModel = (UserTracker)session.get(UserTracker.class,
 							userTracker.getPrimaryKey());
 
-					if (userTrackerHBM != null) {
-						userTrackerHBM.setCompanyId(userTracker.getCompanyId());
-						userTrackerHBM.setUserId(userTracker.getUserId());
-						userTrackerHBM.setModifiedDate(userTracker.getModifiedDate());
-						userTrackerHBM.setRemoteAddr(userTracker.getRemoteAddr());
-						userTrackerHBM.setRemoteHost(userTracker.getRemoteHost());
-						userTrackerHBM.setUserAgent(userTracker.getUserAgent());
+					if (userTrackerModel != null) {
+						userTrackerModel.setCompanyId(userTracker.getCompanyId());
+						userTrackerModel.setUserId(userTracker.getUserId());
+						userTrackerModel.setModifiedDate(userTracker.getModifiedDate());
+						userTrackerModel.setRemoteAddr(userTracker.getRemoteAddr());
+						userTrackerModel.setRemoteHost(userTracker.getRemoteHost());
+						userTrackerModel.setUserAgent(userTracker.getUserAgent());
 						session.flush();
 					}
 					else {
-						userTrackerHBM = new UserTrackerHBM();
-						userTrackerHBM.setUserTrackerId(userTracker.getUserTrackerId());
-						userTrackerHBM.setCompanyId(userTracker.getCompanyId());
-						userTrackerHBM.setUserId(userTracker.getUserId());
-						userTrackerHBM.setModifiedDate(userTracker.getModifiedDate());
-						userTrackerHBM.setRemoteAddr(userTracker.getRemoteAddr());
-						userTrackerHBM.setRemoteHost(userTracker.getRemoteHost());
-						userTrackerHBM.setUserAgent(userTracker.getUserAgent());
-						session.save(userTrackerHBM);
+						userTrackerModel = new UserTracker();
+						userTrackerModel.setUserTrackerId(userTracker.getUserTrackerId());
+						userTrackerModel.setCompanyId(userTracker.getCompanyId());
+						userTrackerModel.setUserId(userTracker.getUserId());
+						userTrackerModel.setModifiedDate(userTracker.getModifiedDate());
+						userTrackerModel.setRemoteAddr(userTracker.getRemoteAddr());
+						userTrackerModel.setRemoteHost(userTracker.getRemoteHost());
+						userTrackerModel.setUserAgent(userTracker.getUserAgent());
+						session.save(userTrackerModel);
 						session.flush();
 					}
 				}
@@ -149,18 +150,17 @@ public class UserTrackerPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.UserTracker findByPrimaryKey(
-		String userTrackerId)
+	public UserTracker findByPrimaryKey(String userTrackerId)
 		throws NoSuchUserTrackerException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			UserTrackerHBM userTrackerHBM = (UserTrackerHBM)session.get(UserTrackerHBM.class,
+			UserTracker userTracker = (UserTracker)session.get(UserTracker.class,
 					userTrackerId);
 
-			if (userTrackerHBM == null) {
+			if (userTracker == null) {
 				_log.warn("No UserTracker exists with the primary key " +
 					userTrackerId.toString());
 				throw new NoSuchUserTrackerException(
@@ -168,7 +168,7 @@ public class UserTrackerPersistence extends BasePersistence {
 					userTrackerId.toString());
 			}
 
-			return UserTrackerHBMUtil.model(userTrackerHBM);
+			return userTracker;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -185,11 +185,10 @@ public class UserTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM UserTracker IN CLASS com.liferay.portal.service.persistence.UserTrackerHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -204,13 +203,7 @@ public class UserTrackerPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				UserTrackerHBM userTrackerHBM = (UserTrackerHBM)itr.next();
-				list.add(UserTrackerHBMUtil.model(userTrackerHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -235,11 +228,10 @@ public class UserTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM UserTracker IN CLASS com.liferay.portal.service.persistence.UserTrackerHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -258,15 +250,7 @@ public class UserTrackerPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				UserTrackerHBM userTrackerHBM = (UserTrackerHBM)itr.next();
-				list.add(UserTrackerHBMUtil.model(userTrackerHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -276,8 +260,8 @@ public class UserTrackerPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.UserTracker findByCompanyId_First(
-		String companyId, OrderByComparator obc)
+	public UserTracker findByCompanyId_First(String companyId,
+		OrderByComparator obc)
 		throws NoSuchUserTrackerException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
@@ -290,12 +274,12 @@ public class UserTrackerPersistence extends BasePersistence {
 			throw new NoSuchUserTrackerException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.UserTracker)list.get(0);
+			return (UserTracker)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.UserTracker findByCompanyId_Last(
-		String companyId, OrderByComparator obc)
+	public UserTracker findByCompanyId_Last(String companyId,
+		OrderByComparator obc)
 		throws NoSuchUserTrackerException, SystemException {
 		int count = countByCompanyId(companyId);
 		List list = findByCompanyId(companyId, count - 1, count, obc);
@@ -309,14 +293,14 @@ public class UserTrackerPersistence extends BasePersistence {
 			throw new NoSuchUserTrackerException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.UserTracker)list.get(0);
+			return (UserTracker)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.UserTracker[] findByCompanyId_PrevAndNext(
-		String userTrackerId, String companyId, OrderByComparator obc)
+	public UserTracker[] findByCompanyId_PrevAndNext(String userTrackerId,
+		String companyId, OrderByComparator obc)
 		throws NoSuchUserTrackerException, SystemException {
-		com.liferay.portal.model.UserTracker userTracker = findByPrimaryKey(userTrackerId);
+		UserTracker userTracker = findByPrimaryKey(userTrackerId);
 		int count = countByCompanyId(companyId);
 		Session session = null;
 
@@ -324,11 +308,10 @@ public class UserTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM UserTracker IN CLASS com.liferay.portal.service.persistence.UserTrackerHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -348,11 +331,11 @@ public class UserTrackerPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					userTracker, UserTrackerHBMUtil.getInstance());
-			com.liferay.portal.model.UserTracker[] array = new com.liferay.portal.model.UserTracker[3];
-			array[0] = (com.liferay.portal.model.UserTracker)objArray[0];
-			array[1] = (com.liferay.portal.model.UserTracker)objArray[1];
-			array[2] = (com.liferay.portal.model.UserTracker)objArray[2];
+					userTracker);
+			UserTracker[] array = new UserTracker[3];
+			array[0] = (UserTracker)objArray[0];
+			array[1] = (UserTracker)objArray[1];
+			array[2] = (UserTracker)objArray[2];
 
 			return array;
 		}
@@ -371,11 +354,10 @@ public class UserTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM UserTracker IN CLASS com.liferay.portal.service.persistence.UserTrackerHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -390,13 +372,7 @@ public class UserTrackerPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				UserTrackerHBM userTrackerHBM = (UserTrackerHBM)itr.next();
-				list.add(UserTrackerHBMUtil.model(userTrackerHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -421,11 +397,10 @@ public class UserTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM UserTracker IN CLASS com.liferay.portal.service.persistence.UserTrackerHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -444,15 +419,7 @@ public class UserTrackerPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				UserTrackerHBM userTrackerHBM = (UserTrackerHBM)itr.next();
-				list.add(UserTrackerHBMUtil.model(userTrackerHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -462,8 +429,7 @@ public class UserTrackerPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.UserTracker findByUserId_First(
-		String userId, OrderByComparator obc)
+	public UserTracker findByUserId_First(String userId, OrderByComparator obc)
 		throws NoSuchUserTrackerException, SystemException {
 		List list = findByUserId(userId, 0, 1, obc);
 
@@ -476,12 +442,11 @@ public class UserTrackerPersistence extends BasePersistence {
 			throw new NoSuchUserTrackerException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.UserTracker)list.get(0);
+			return (UserTracker)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.UserTracker findByUserId_Last(
-		String userId, OrderByComparator obc)
+	public UserTracker findByUserId_Last(String userId, OrderByComparator obc)
 		throws NoSuchUserTrackerException, SystemException {
 		int count = countByUserId(userId);
 		List list = findByUserId(userId, count - 1, count, obc);
@@ -495,14 +460,14 @@ public class UserTrackerPersistence extends BasePersistence {
 			throw new NoSuchUserTrackerException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.UserTracker)list.get(0);
+			return (UserTracker)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.UserTracker[] findByUserId_PrevAndNext(
-		String userTrackerId, String userId, OrderByComparator obc)
+	public UserTracker[] findByUserId_PrevAndNext(String userTrackerId,
+		String userId, OrderByComparator obc)
 		throws NoSuchUserTrackerException, SystemException {
-		com.liferay.portal.model.UserTracker userTracker = findByPrimaryKey(userTrackerId);
+		UserTracker userTracker = findByPrimaryKey(userTrackerId);
 		int count = countByUserId(userId);
 		Session session = null;
 
@@ -510,11 +475,10 @@ public class UserTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM UserTracker IN CLASS com.liferay.portal.service.persistence.UserTrackerHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -534,11 +498,11 @@ public class UserTrackerPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					userTracker, UserTrackerHBMUtil.getInstance());
-			com.liferay.portal.model.UserTracker[] array = new com.liferay.portal.model.UserTracker[3];
-			array[0] = (com.liferay.portal.model.UserTracker)objArray[0];
-			array[1] = (com.liferay.portal.model.UserTracker)objArray[1];
-			array[2] = (com.liferay.portal.model.UserTracker)objArray[2];
+					userTracker);
+			UserTracker[] array = new UserTracker[3];
+			array[0] = (UserTracker)objArray[0];
+			array[1] = (UserTracker)objArray[1];
+			array[2] = (UserTracker)objArray[2];
 
 			return array;
 		}
@@ -557,19 +521,11 @@ public class UserTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM UserTracker IN CLASS com.liferay.portal.service.persistence.UserTrackerHBM ");
+			query.append("FROM com.liferay.portal.model.UserTracker ");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				UserTrackerHBM userTrackerHBM = (UserTrackerHBM)itr.next();
-				list.add(UserTrackerHBMUtil.model(userTrackerHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -586,11 +542,10 @@ public class UserTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM UserTracker IN CLASS com.liferay.portal.service.persistence.UserTrackerHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -608,8 +563,8 @@ public class UserTrackerPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				UserTrackerHBM userTrackerHBM = (UserTrackerHBM)itr.next();
-				session.delete(userTrackerHBM);
+				UserTracker userTracker = (UserTracker)itr.next();
+				session.delete(userTracker);
 			}
 
 			session.flush();
@@ -629,11 +584,10 @@ public class UserTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM UserTracker IN CLASS com.liferay.portal.service.persistence.UserTrackerHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -651,8 +605,8 @@ public class UserTrackerPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				UserTrackerHBM userTrackerHBM = (UserTrackerHBM)itr.next();
-				session.delete(userTrackerHBM);
+				UserTracker userTracker = (UserTracker)itr.next();
+				session.delete(userTracker);
 			}
 
 			session.flush();
@@ -673,11 +627,10 @@ public class UserTrackerPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM UserTracker IN CLASS com.liferay.portal.service.persistence.UserTrackerHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -720,11 +673,10 @@ public class UserTrackerPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM UserTracker IN CLASS com.liferay.portal.service.persistence.UserTrackerHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -757,6 +709,9 @@ public class UserTrackerPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(UserTrackerPersistence.class);

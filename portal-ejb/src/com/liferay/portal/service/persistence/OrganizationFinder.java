@@ -183,8 +183,6 @@ public class OrganizationFinder {
 			}
 		}
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -229,17 +227,21 @@ public class OrganizationFinder {
 			qPos.add(countryId);
 			qPos.add(countryId);
 
+			List list = new ArrayList();
+
 			Iterator itr = QueryUtil.iterate(
 				q, HibernateUtil.getDialect(), begin, end);
 
 			while (itr.hasNext()) {
 				String organizationId = (String)itr.next();
 
-				Organization organization =
-					OrganizationUtil.findByPrimaryKey(organizationId);
+				Organization organization = OrganizationUtil.findByPrimaryKey(
+					organizationId);
 
 				list.add(organization);
 			}
+
+			return list;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -247,8 +249,6 @@ public class OrganizationFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 	private static int _countByPermissions(
@@ -257,8 +257,6 @@ public class OrganizationFinder {
 			String city, String zip, String regionId, String countryId,
 			String resourceId, String groupId, boolean andOperator)
 		throws SystemException {
-
-		int count = 0;
 
 		Session session = null;
 
@@ -323,6 +321,8 @@ public class OrganizationFinder {
 				qPos.add(countryId);
 			}
 
+			int count = 0;
+
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
@@ -350,8 +350,6 @@ public class OrganizationFinder {
 			String resourceId, String groupId, boolean andOperator, int begin,
 			int end)
 		throws SystemException {
-
-		List list = new ArrayList();
 
 		Session session = null;
 
@@ -418,17 +416,21 @@ public class OrganizationFinder {
 				qPos.add(countryId);
 			}
 
+			List list = new ArrayList();
+
 			Iterator itr = QueryUtil.iterate(
 				q, HibernateUtil.getDialect(), begin, end);
 
 			while (itr.hasNext()) {
 				String organizationId = (String)itr.next();
 
-				Organization organization =
-					OrganizationUtil.findByPrimaryKey(organizationId);
+				Organization organization = OrganizationUtil.findByPrimaryKey(
+					organizationId);
 
 				list.add(organization);
 			}
+
+			return list;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -436,8 +438,6 @@ public class OrganizationFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 	private static String _getJoin(Map params) {

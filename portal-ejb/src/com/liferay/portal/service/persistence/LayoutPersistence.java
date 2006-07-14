@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.util.StringPool;
@@ -49,25 +50,24 @@ import java.util.List;
  *
  */
 public class LayoutPersistence extends BasePersistence {
-	public com.liferay.portal.model.Layout create(LayoutPK layoutPK) {
-		LayoutHBM layoutHBM = new LayoutHBM();
-		layoutHBM.setNew(true);
-		layoutHBM.setPrimaryKey(layoutPK);
+	public Layout create(LayoutPK layoutPK) {
+		Layout layout = new Layout();
+		layout.setNew(true);
+		layout.setPrimaryKey(layoutPK);
 
-		return LayoutHBMUtil.model(layoutHBM);
+		return layout;
 	}
 
-	public com.liferay.portal.model.Layout remove(LayoutPK layoutPK)
+	public Layout remove(LayoutPK layoutPK)
 		throws NoSuchLayoutException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			LayoutHBM layoutHBM = (LayoutHBM)session.get(LayoutHBM.class,
-					layoutPK);
+			Layout layout = (Layout)session.get(Layout.class, layoutPK);
 
-			if (layoutHBM == null) {
+			if (layout == null) {
 				_log.warn("No Layout exists with the primary key " +
 					layoutPK.toString());
 				throw new NoSuchLayoutException(
@@ -75,10 +75,10 @@ public class LayoutPersistence extends BasePersistence {
 					layoutPK.toString());
 			}
 
-			session.delete(layoutHBM);
+			session.delete(layout);
 			session.flush();
 
-			return LayoutHBMUtil.model(layoutHBM);
+			return layout;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -97,54 +97,54 @@ public class LayoutPersistence extends BasePersistence {
 				session = openSession();
 
 				if (layout.isNew()) {
-					LayoutHBM layoutHBM = new LayoutHBM();
-					layoutHBM.setLayoutId(layout.getLayoutId());
-					layoutHBM.setOwnerId(layout.getOwnerId());
-					layoutHBM.setCompanyId(layout.getCompanyId());
-					layoutHBM.setParentLayoutId(layout.getParentLayoutId());
-					layoutHBM.setName(layout.getName());
-					layoutHBM.setType(layout.getType());
-					layoutHBM.setTypeSettings(layout.getTypeSettings());
-					layoutHBM.setHidden(layout.getHidden());
-					layoutHBM.setFriendlyURL(layout.getFriendlyURL());
-					layoutHBM.setThemeId(layout.getThemeId());
-					layoutHBM.setColorSchemeId(layout.getColorSchemeId());
-					layoutHBM.setPriority(layout.getPriority());
-					session.save(layoutHBM);
+					Layout layoutModel = new Layout();
+					layoutModel.setLayoutId(layout.getLayoutId());
+					layoutModel.setOwnerId(layout.getOwnerId());
+					layoutModel.setCompanyId(layout.getCompanyId());
+					layoutModel.setParentLayoutId(layout.getParentLayoutId());
+					layoutModel.setName(layout.getName());
+					layoutModel.setType(layout.getType());
+					layoutModel.setTypeSettings(layout.getTypeSettings());
+					layoutModel.setHidden(layout.getHidden());
+					layoutModel.setFriendlyURL(layout.getFriendlyURL());
+					layoutModel.setThemeId(layout.getThemeId());
+					layoutModel.setColorSchemeId(layout.getColorSchemeId());
+					layoutModel.setPriority(layout.getPriority());
+					session.save(layoutModel);
 					session.flush();
 				}
 				else {
-					LayoutHBM layoutHBM = (LayoutHBM)session.get(LayoutHBM.class,
+					Layout layoutModel = (Layout)session.get(Layout.class,
 							layout.getPrimaryKey());
 
-					if (layoutHBM != null) {
-						layoutHBM.setCompanyId(layout.getCompanyId());
-						layoutHBM.setParentLayoutId(layout.getParentLayoutId());
-						layoutHBM.setName(layout.getName());
-						layoutHBM.setType(layout.getType());
-						layoutHBM.setTypeSettings(layout.getTypeSettings());
-						layoutHBM.setHidden(layout.getHidden());
-						layoutHBM.setFriendlyURL(layout.getFriendlyURL());
-						layoutHBM.setThemeId(layout.getThemeId());
-						layoutHBM.setColorSchemeId(layout.getColorSchemeId());
-						layoutHBM.setPriority(layout.getPriority());
+					if (layoutModel != null) {
+						layoutModel.setCompanyId(layout.getCompanyId());
+						layoutModel.setParentLayoutId(layout.getParentLayoutId());
+						layoutModel.setName(layout.getName());
+						layoutModel.setType(layout.getType());
+						layoutModel.setTypeSettings(layout.getTypeSettings());
+						layoutModel.setHidden(layout.getHidden());
+						layoutModel.setFriendlyURL(layout.getFriendlyURL());
+						layoutModel.setThemeId(layout.getThemeId());
+						layoutModel.setColorSchemeId(layout.getColorSchemeId());
+						layoutModel.setPriority(layout.getPriority());
 						session.flush();
 					}
 					else {
-						layoutHBM = new LayoutHBM();
-						layoutHBM.setLayoutId(layout.getLayoutId());
-						layoutHBM.setOwnerId(layout.getOwnerId());
-						layoutHBM.setCompanyId(layout.getCompanyId());
-						layoutHBM.setParentLayoutId(layout.getParentLayoutId());
-						layoutHBM.setName(layout.getName());
-						layoutHBM.setType(layout.getType());
-						layoutHBM.setTypeSettings(layout.getTypeSettings());
-						layoutHBM.setHidden(layout.getHidden());
-						layoutHBM.setFriendlyURL(layout.getFriendlyURL());
-						layoutHBM.setThemeId(layout.getThemeId());
-						layoutHBM.setColorSchemeId(layout.getColorSchemeId());
-						layoutHBM.setPriority(layout.getPriority());
-						session.save(layoutHBM);
+						layoutModel = new Layout();
+						layoutModel.setLayoutId(layout.getLayoutId());
+						layoutModel.setOwnerId(layout.getOwnerId());
+						layoutModel.setCompanyId(layout.getCompanyId());
+						layoutModel.setParentLayoutId(layout.getParentLayoutId());
+						layoutModel.setName(layout.getName());
+						layoutModel.setType(layout.getType());
+						layoutModel.setTypeSettings(layout.getTypeSettings());
+						layoutModel.setHidden(layout.getHidden());
+						layoutModel.setFriendlyURL(layout.getFriendlyURL());
+						layoutModel.setThemeId(layout.getThemeId());
+						layoutModel.setColorSchemeId(layout.getColorSchemeId());
+						layoutModel.setPriority(layout.getPriority());
+						session.save(layoutModel);
 						session.flush();
 					}
 				}
@@ -163,17 +163,16 @@ public class LayoutPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Layout findByPrimaryKey(LayoutPK layoutPK)
+	public Layout findByPrimaryKey(LayoutPK layoutPK)
 		throws NoSuchLayoutException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			LayoutHBM layoutHBM = (LayoutHBM)session.get(LayoutHBM.class,
-					layoutPK);
+			Layout layout = (Layout)session.get(Layout.class, layoutPK);
 
-			if (layoutHBM == null) {
+			if (layout == null) {
 				_log.warn("No Layout exists with the primary key " +
 					layoutPK.toString());
 				throw new NoSuchLayoutException(
@@ -181,7 +180,7 @@ public class LayoutPersistence extends BasePersistence {
 					layoutPK.toString());
 			}
 
-			return LayoutHBMUtil.model(layoutHBM);
+			return layout;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -198,11 +197,10 @@ public class LayoutPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -220,13 +218,7 @@ public class LayoutPersistence extends BasePersistence {
 				q.setString(queryPos++, ownerId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				LayoutHBM layoutHBM = (LayoutHBM)itr.next();
-				list.add(LayoutHBMUtil.model(layoutHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -251,11 +243,10 @@ public class LayoutPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -279,15 +270,7 @@ public class LayoutPersistence extends BasePersistence {
 				q.setString(queryPos++, ownerId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				LayoutHBM layoutHBM = (LayoutHBM)itr.next();
-				list.add(LayoutHBMUtil.model(layoutHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -297,8 +280,8 @@ public class LayoutPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Layout findByOwnerId_First(String ownerId,
-		OrderByComparator obc) throws NoSuchLayoutException, SystemException {
+	public Layout findByOwnerId_First(String ownerId, OrderByComparator obc)
+		throws NoSuchLayoutException, SystemException {
 		List list = findByOwnerId(ownerId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -310,12 +293,12 @@ public class LayoutPersistence extends BasePersistence {
 			throw new NoSuchLayoutException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Layout)list.get(0);
+			return (Layout)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Layout findByOwnerId_Last(String ownerId,
-		OrderByComparator obc) throws NoSuchLayoutException, SystemException {
+	public Layout findByOwnerId_Last(String ownerId, OrderByComparator obc)
+		throws NoSuchLayoutException, SystemException {
 		int count = countByOwnerId(ownerId);
 		List list = findByOwnerId(ownerId, count - 1, count, obc);
 
@@ -328,14 +311,14 @@ public class LayoutPersistence extends BasePersistence {
 			throw new NoSuchLayoutException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Layout)list.get(0);
+			return (Layout)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Layout[] findByOwnerId_PrevAndNext(
-		LayoutPK layoutPK, String ownerId, OrderByComparator obc)
+	public Layout[] findByOwnerId_PrevAndNext(LayoutPK layoutPK,
+		String ownerId, OrderByComparator obc)
 		throws NoSuchLayoutException, SystemException {
-		com.liferay.portal.model.Layout layout = findByPrimaryKey(layoutPK);
+		Layout layout = findByPrimaryKey(layoutPK);
 		int count = countByOwnerId(ownerId);
 		Session session = null;
 
@@ -343,11 +326,10 @@ public class LayoutPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -371,12 +353,11 @@ public class LayoutPersistence extends BasePersistence {
 				q.setString(queryPos++, ownerId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout,
-					LayoutHBMUtil.getInstance());
-			com.liferay.portal.model.Layout[] array = new com.liferay.portal.model.Layout[3];
-			array[0] = (com.liferay.portal.model.Layout)objArray[0];
-			array[1] = (com.liferay.portal.model.Layout)objArray[1];
-			array[2] = (com.liferay.portal.model.Layout)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout);
+			Layout[] array = new Layout[3];
+			array[0] = (Layout)objArray[0];
+			array[1] = (Layout)objArray[1];
+			array[2] = (Layout)objArray[2];
 
 			return array;
 		}
@@ -396,11 +377,10 @@ public class LayoutPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -409,7 +389,7 @@ public class LayoutPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (parentLayoutId == null) {
-				query.append("parentLayoutId is null");
+				query.append("parentLayoutId IS NULL");
 			}
 			else {
 				query.append("parentLayoutId = ?");
@@ -431,13 +411,7 @@ public class LayoutPersistence extends BasePersistence {
 				q.setString(queryPos++, parentLayoutId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				LayoutHBM layoutHBM = (LayoutHBM)itr.next();
-				list.add(LayoutHBMUtil.model(layoutHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -462,11 +436,10 @@ public class LayoutPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -475,7 +448,7 @@ public class LayoutPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (parentLayoutId == null) {
-				query.append("parentLayoutId is null");
+				query.append("parentLayoutId IS NULL");
 			}
 			else {
 				query.append("parentLayoutId = ?");
@@ -503,15 +476,7 @@ public class LayoutPersistence extends BasePersistence {
 				q.setString(queryPos++, parentLayoutId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				LayoutHBM layoutHBM = (LayoutHBM)itr.next();
-				list.add(LayoutHBMUtil.model(layoutHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -521,9 +486,8 @@ public class LayoutPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Layout findByO_P_First(String ownerId,
-		String parentLayoutId, OrderByComparator obc)
-		throws NoSuchLayoutException, SystemException {
+	public Layout findByO_P_First(String ownerId, String parentLayoutId,
+		OrderByComparator obc) throws NoSuchLayoutException, SystemException {
 		List list = findByO_P(ownerId, parentLayoutId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -538,13 +502,12 @@ public class LayoutPersistence extends BasePersistence {
 			throw new NoSuchLayoutException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Layout)list.get(0);
+			return (Layout)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Layout findByO_P_Last(String ownerId,
-		String parentLayoutId, OrderByComparator obc)
-		throws NoSuchLayoutException, SystemException {
+	public Layout findByO_P_Last(String ownerId, String parentLayoutId,
+		OrderByComparator obc) throws NoSuchLayoutException, SystemException {
 		int count = countByO_P(ownerId, parentLayoutId);
 		List list = findByO_P(ownerId, parentLayoutId, count - 1, count, obc);
 
@@ -560,14 +523,14 @@ public class LayoutPersistence extends BasePersistence {
 			throw new NoSuchLayoutException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Layout)list.get(0);
+			return (Layout)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Layout[] findByO_P_PrevAndNext(
-		LayoutPK layoutPK, String ownerId, String parentLayoutId,
-		OrderByComparator obc) throws NoSuchLayoutException, SystemException {
-		com.liferay.portal.model.Layout layout = findByPrimaryKey(layoutPK);
+	public Layout[] findByO_P_PrevAndNext(LayoutPK layoutPK, String ownerId,
+		String parentLayoutId, OrderByComparator obc)
+		throws NoSuchLayoutException, SystemException {
+		Layout layout = findByPrimaryKey(layoutPK);
 		int count = countByO_P(ownerId, parentLayoutId);
 		Session session = null;
 
@@ -575,11 +538,10 @@ public class LayoutPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -588,7 +550,7 @@ public class LayoutPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (parentLayoutId == null) {
-				query.append("parentLayoutId is null");
+				query.append("parentLayoutId IS NULL");
 			}
 			else {
 				query.append("parentLayoutId = ?");
@@ -616,12 +578,11 @@ public class LayoutPersistence extends BasePersistence {
 				q.setString(queryPos++, parentLayoutId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout,
-					LayoutHBMUtil.getInstance());
-			com.liferay.portal.model.Layout[] array = new com.liferay.portal.model.Layout[3];
-			array[0] = (com.liferay.portal.model.Layout)objArray[0];
-			array[1] = (com.liferay.portal.model.Layout)objArray[1];
-			array[2] = (com.liferay.portal.model.Layout)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout);
+			Layout[] array = new Layout[3];
+			array[0] = (Layout)objArray[0];
+			array[1] = (Layout)objArray[1];
+			array[2] = (Layout)objArray[2];
 
 			return array;
 		}
@@ -633,19 +594,18 @@ public class LayoutPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Layout findByO_F(String ownerId,
-		String friendlyURL) throws NoSuchLayoutException, SystemException {
+	public Layout findByO_F(String ownerId, String friendlyURL)
+		throws NoSuchLayoutException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -654,7 +614,7 @@ public class LayoutPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (friendlyURL == null) {
-				query.append("friendlyURL is null");
+				query.append("friendlyURL IS NULL");
 			}
 			else {
 				query.append("friendlyURL = ?");
@@ -676,9 +636,9 @@ public class LayoutPersistence extends BasePersistence {
 				q.setString(queryPos++, friendlyURL);
 			}
 
-			Iterator itr = q.list().iterator();
+			List list = q.list();
 
-			if (!itr.hasNext()) {
+			if (list.size() == 0) {
 				String msg = "No Layout exists with the key ";
 				msg += StringPool.OPEN_CURLY_BRACE;
 				msg += "ownerId=";
@@ -690,9 +650,9 @@ public class LayoutPersistence extends BasePersistence {
 				throw new NoSuchLayoutException(msg);
 			}
 
-			LayoutHBM layoutHBM = (LayoutHBM)itr.next();
+			Layout layout = (Layout)list.get(0);
 
-			return LayoutHBMUtil.model(layoutHBM);
+			return layout;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -709,22 +669,14 @@ public class LayoutPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM ");
+			query.append("FROM com.liferay.portal.model.Layout ");
 			query.append("ORDER BY ");
 			query.append("parentLayoutId ASC").append(", ");
 			query.append("priority ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				LayoutHBM layoutHBM = (LayoutHBM)itr.next();
-				list.add(LayoutHBMUtil.model(layoutHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -741,11 +693,10 @@ public class LayoutPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -766,8 +717,8 @@ public class LayoutPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				LayoutHBM layoutHBM = (LayoutHBM)itr.next();
-				session.delete(layoutHBM);
+				Layout layout = (Layout)itr.next();
+				session.delete(layout);
 			}
 
 			session.flush();
@@ -788,11 +739,10 @@ public class LayoutPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -801,7 +751,7 @@ public class LayoutPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (parentLayoutId == null) {
-				query.append("parentLayoutId is null");
+				query.append("parentLayoutId IS NULL");
 			}
 			else {
 				query.append("parentLayoutId = ?");
@@ -826,8 +776,8 @@ public class LayoutPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				LayoutHBM layoutHBM = (LayoutHBM)itr.next();
-				session.delete(layoutHBM);
+				Layout layout = (Layout)itr.next();
+				session.delete(layout);
 			}
 
 			session.flush();
@@ -848,11 +798,10 @@ public class LayoutPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -861,7 +810,7 @@ public class LayoutPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (friendlyURL == null) {
-				query.append("friendlyURL is null");
+				query.append("friendlyURL IS NULL");
 			}
 			else {
 				query.append("friendlyURL = ?");
@@ -886,8 +835,8 @@ public class LayoutPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				LayoutHBM layoutHBM = (LayoutHBM)itr.next();
-				session.delete(layoutHBM);
+				Layout layout = (Layout)itr.next();
+				session.delete(layout);
 			}
 
 			session.flush();
@@ -921,11 +870,10 @@ public class LayoutPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -969,11 +917,10 @@ public class LayoutPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -982,7 +929,7 @@ public class LayoutPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (parentLayoutId == null) {
-				query.append("parentLayoutId is null");
+				query.append("parentLayoutId IS NULL");
 			}
 			else {
 				query.append("parentLayoutId = ?");
@@ -1030,11 +977,10 @@ public class LayoutPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Layout IN CLASS com.liferay.portal.service.persistence.LayoutHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Layout WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -1043,7 +989,7 @@ public class LayoutPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (friendlyURL == null) {
-				query.append("friendlyURL is null");
+				query.append("friendlyURL IS NULL");
 			}
 			else {
 				query.append("friendlyURL = ?");
@@ -1080,6 +1026,9 @@ public class LayoutPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(LayoutPersistence.class);

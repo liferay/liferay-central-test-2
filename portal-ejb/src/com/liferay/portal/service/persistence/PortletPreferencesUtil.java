@@ -288,6 +288,10 @@ public class PortletPreferencesUtil {
 		return getPersistence().countByL_O(layoutId, ownerId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static PortletPreferencesPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		PortletPreferencesUtil util = (PortletPreferencesUtil)ctx.getBean(CLASS_NAME);

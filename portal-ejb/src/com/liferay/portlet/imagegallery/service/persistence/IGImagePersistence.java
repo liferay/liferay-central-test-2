@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.imagegallery.NoSuchImageException;
+import com.liferay.portlet.imagegallery.model.IGImage;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,26 +50,24 @@ import java.util.List;
  *
  */
 public class IGImagePersistence extends BasePersistence {
-	public com.liferay.portlet.imagegallery.model.IGImage create(
-		IGImagePK igImagePK) {
-		IGImageHBM igImageHBM = new IGImageHBM();
-		igImageHBM.setNew(true);
-		igImageHBM.setPrimaryKey(igImagePK);
+	public IGImage create(IGImagePK igImagePK) {
+		IGImage igImage = new IGImage();
+		igImage.setNew(true);
+		igImage.setPrimaryKey(igImagePK);
 
-		return IGImageHBMUtil.model(igImageHBM);
+		return igImage;
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGImage remove(
-		IGImagePK igImagePK) throws NoSuchImageException, SystemException {
+	public IGImage remove(IGImagePK igImagePK)
+		throws NoSuchImageException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			IGImageHBM igImageHBM = (IGImageHBM)session.get(IGImageHBM.class,
-					igImagePK);
+			IGImage igImage = (IGImage)session.get(IGImage.class, igImagePK);
 
-			if (igImageHBM == null) {
+			if (igImage == null) {
 				_log.warn("No IGImage exists with the primary key " +
 					igImagePK.toString());
 				throw new NoSuchImageException(
@@ -76,10 +75,10 @@ public class IGImagePersistence extends BasePersistence {
 					igImagePK.toString());
 			}
 
-			session.delete(igImageHBM);
+			session.delete(igImage);
 			session.flush();
 
-			return IGImageHBMUtil.model(igImageHBM);
+			return igImage;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -99,48 +98,48 @@ public class IGImagePersistence extends BasePersistence {
 				session = openSession();
 
 				if (igImage.isNew()) {
-					IGImageHBM igImageHBM = new IGImageHBM();
-					igImageHBM.setCompanyId(igImage.getCompanyId());
-					igImageHBM.setImageId(igImage.getImageId());
-					igImageHBM.setUserId(igImage.getUserId());
-					igImageHBM.setCreateDate(igImage.getCreateDate());
-					igImageHBM.setModifiedDate(igImage.getModifiedDate());
-					igImageHBM.setFolderId(igImage.getFolderId());
-					igImageHBM.setDescription(igImage.getDescription());
-					igImageHBM.setHeight(igImage.getHeight());
-					igImageHBM.setWidth(igImage.getWidth());
-					igImageHBM.setSize(igImage.getSize());
-					session.save(igImageHBM);
+					IGImage igImageModel = new IGImage();
+					igImageModel.setCompanyId(igImage.getCompanyId());
+					igImageModel.setImageId(igImage.getImageId());
+					igImageModel.setUserId(igImage.getUserId());
+					igImageModel.setCreateDate(igImage.getCreateDate());
+					igImageModel.setModifiedDate(igImage.getModifiedDate());
+					igImageModel.setFolderId(igImage.getFolderId());
+					igImageModel.setDescription(igImage.getDescription());
+					igImageModel.setHeight(igImage.getHeight());
+					igImageModel.setWidth(igImage.getWidth());
+					igImageModel.setSize(igImage.getSize());
+					session.save(igImageModel);
 					session.flush();
 				}
 				else {
-					IGImageHBM igImageHBM = (IGImageHBM)session.get(IGImageHBM.class,
+					IGImage igImageModel = (IGImage)session.get(IGImage.class,
 							igImage.getPrimaryKey());
 
-					if (igImageHBM != null) {
-						igImageHBM.setUserId(igImage.getUserId());
-						igImageHBM.setCreateDate(igImage.getCreateDate());
-						igImageHBM.setModifiedDate(igImage.getModifiedDate());
-						igImageHBM.setFolderId(igImage.getFolderId());
-						igImageHBM.setDescription(igImage.getDescription());
-						igImageHBM.setHeight(igImage.getHeight());
-						igImageHBM.setWidth(igImage.getWidth());
-						igImageHBM.setSize(igImage.getSize());
+					if (igImageModel != null) {
+						igImageModel.setUserId(igImage.getUserId());
+						igImageModel.setCreateDate(igImage.getCreateDate());
+						igImageModel.setModifiedDate(igImage.getModifiedDate());
+						igImageModel.setFolderId(igImage.getFolderId());
+						igImageModel.setDescription(igImage.getDescription());
+						igImageModel.setHeight(igImage.getHeight());
+						igImageModel.setWidth(igImage.getWidth());
+						igImageModel.setSize(igImage.getSize());
 						session.flush();
 					}
 					else {
-						igImageHBM = new IGImageHBM();
-						igImageHBM.setCompanyId(igImage.getCompanyId());
-						igImageHBM.setImageId(igImage.getImageId());
-						igImageHBM.setUserId(igImage.getUserId());
-						igImageHBM.setCreateDate(igImage.getCreateDate());
-						igImageHBM.setModifiedDate(igImage.getModifiedDate());
-						igImageHBM.setFolderId(igImage.getFolderId());
-						igImageHBM.setDescription(igImage.getDescription());
-						igImageHBM.setHeight(igImage.getHeight());
-						igImageHBM.setWidth(igImage.getWidth());
-						igImageHBM.setSize(igImage.getSize());
-						session.save(igImageHBM);
+						igImageModel = new IGImage();
+						igImageModel.setCompanyId(igImage.getCompanyId());
+						igImageModel.setImageId(igImage.getImageId());
+						igImageModel.setUserId(igImage.getUserId());
+						igImageModel.setCreateDate(igImage.getCreateDate());
+						igImageModel.setModifiedDate(igImage.getModifiedDate());
+						igImageModel.setFolderId(igImage.getFolderId());
+						igImageModel.setDescription(igImage.getDescription());
+						igImageModel.setHeight(igImage.getHeight());
+						igImageModel.setWidth(igImage.getWidth());
+						igImageModel.setSize(igImage.getSize());
+						session.save(igImageModel);
 						session.flush();
 					}
 				}
@@ -159,17 +158,16 @@ public class IGImagePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGImage findByPrimaryKey(
-		IGImagePK igImagePK) throws NoSuchImageException, SystemException {
+	public IGImage findByPrimaryKey(IGImagePK igImagePK)
+		throws NoSuchImageException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			IGImageHBM igImageHBM = (IGImageHBM)session.get(IGImageHBM.class,
-					igImagePK);
+			IGImage igImage = (IGImage)session.get(IGImage.class, igImagePK);
 
-			if (igImageHBM == null) {
+			if (igImage == null) {
 				_log.warn("No IGImage exists with the primary key " +
 					igImagePK.toString());
 				throw new NoSuchImageException(
@@ -177,7 +175,7 @@ public class IGImagePersistence extends BasePersistence {
 					igImagePK.toString());
 			}
 
-			return IGImageHBMUtil.model(igImageHBM);
+			return igImage;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -195,10 +193,10 @@ public class IGImagePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM IGImage IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGImageHBM WHERE ");
+				"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
 
 			if (folderId == null) {
-				query.append("folderId is null");
+				query.append("folderId IS NULL");
 			}
 			else {
 				query.append("folderId = ?");
@@ -215,13 +213,7 @@ public class IGImagePersistence extends BasePersistence {
 				q.setString(queryPos++, folderId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				IGImageHBM igImageHBM = (IGImageHBM)itr.next();
-				list.add(IGImageHBMUtil.model(igImageHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -247,10 +239,10 @@ public class IGImagePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM IGImage IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGImageHBM WHERE ");
+				"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
 
 			if (folderId == null) {
-				query.append("folderId is null");
+				query.append("folderId IS NULL");
 			}
 			else {
 				query.append("folderId = ?");
@@ -273,15 +265,7 @@ public class IGImagePersistence extends BasePersistence {
 				q.setString(queryPos++, folderId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				IGImageHBM igImageHBM = (IGImageHBM)itr.next();
-				list.add(IGImageHBMUtil.model(igImageHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -291,8 +275,7 @@ public class IGImagePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGImage findByFolderId_First(
-		String folderId, OrderByComparator obc)
+	public IGImage findByFolderId_First(String folderId, OrderByComparator obc)
 		throws NoSuchImageException, SystemException {
 		List list = findByFolderId(folderId, 0, 1, obc);
 
@@ -305,12 +288,11 @@ public class IGImagePersistence extends BasePersistence {
 			throw new NoSuchImageException(msg);
 		}
 		else {
-			return (com.liferay.portlet.imagegallery.model.IGImage)list.get(0);
+			return (IGImage)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGImage findByFolderId_Last(
-		String folderId, OrderByComparator obc)
+	public IGImage findByFolderId_Last(String folderId, OrderByComparator obc)
 		throws NoSuchImageException, SystemException {
 		int count = countByFolderId(folderId);
 		List list = findByFolderId(folderId, count - 1, count, obc);
@@ -324,14 +306,14 @@ public class IGImagePersistence extends BasePersistence {
 			throw new NoSuchImageException(msg);
 		}
 		else {
-			return (com.liferay.portlet.imagegallery.model.IGImage)list.get(0);
+			return (IGImage)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGImage[] findByFolderId_PrevAndNext(
-		IGImagePK igImagePK, String folderId, OrderByComparator obc)
+	public IGImage[] findByFolderId_PrevAndNext(IGImagePK igImagePK,
+		String folderId, OrderByComparator obc)
 		throws NoSuchImageException, SystemException {
-		com.liferay.portlet.imagegallery.model.IGImage igImage = findByPrimaryKey(igImagePK);
+		IGImage igImage = findByPrimaryKey(igImagePK);
 		int count = countByFolderId(folderId);
 		Session session = null;
 
@@ -340,10 +322,10 @@ public class IGImagePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM IGImage IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGImageHBM WHERE ");
+				"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
 
 			if (folderId == null) {
-				query.append("folderId is null");
+				query.append("folderId IS NULL");
 			}
 			else {
 				query.append("folderId = ?");
@@ -366,12 +348,11 @@ public class IGImagePersistence extends BasePersistence {
 				q.setString(queryPos++, folderId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					igImage, IGImageHBMUtil.getInstance());
-			com.liferay.portlet.imagegallery.model.IGImage[] array = new com.liferay.portlet.imagegallery.model.IGImage[3];
-			array[0] = (com.liferay.portlet.imagegallery.model.IGImage)objArray[0];
-			array[1] = (com.liferay.portlet.imagegallery.model.IGImage)objArray[1];
-			array[2] = (com.liferay.portlet.imagegallery.model.IGImage)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igImage);
+			IGImage[] array = new IGImage[3];
+			array[0] = (IGImage)objArray[0];
+			array[1] = (IGImage)objArray[1];
+			array[2] = (IGImage)objArray[2];
 
 			return array;
 		}
@@ -390,21 +371,13 @@ public class IGImagePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM IGImage IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGImageHBM ");
+			query.append("FROM com.liferay.portlet.imagegallery.model.IGImage ");
 			query.append("ORDER BY ");
 			query.append("imageId ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				IGImageHBM igImageHBM = (IGImageHBM)itr.next();
-				list.add(IGImageHBMUtil.model(igImageHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -422,10 +395,10 @@ public class IGImagePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM IGImage IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGImageHBM WHERE ");
+				"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
 
 			if (folderId == null) {
-				query.append("folderId is null");
+				query.append("folderId IS NULL");
 			}
 			else {
 				query.append("folderId = ?");
@@ -445,8 +418,8 @@ public class IGImagePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				IGImageHBM igImageHBM = (IGImageHBM)itr.next();
-				session.delete(igImageHBM);
+				IGImage igImage = (IGImage)itr.next();
+				session.delete(igImage);
 			}
 
 			session.flush();
@@ -468,10 +441,10 @@ public class IGImagePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM IGImage IN CLASS com.liferay.portlet.imagegallery.service.persistence.IGImageHBM WHERE ");
+				"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
 
 			if (folderId == null) {
-				query.append("folderId is null");
+				query.append("folderId IS NULL");
 			}
 			else {
 				query.append("folderId = ?");
@@ -504,6 +477,9 @@ public class IGImagePersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(IGImagePersistence.class);

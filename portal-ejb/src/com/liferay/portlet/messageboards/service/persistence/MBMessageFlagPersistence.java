@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.messageboards.NoSuchMessageFlagException;
+import com.liferay.portlet.messageboards.model.MBMessageFlag;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,27 +50,25 @@ import java.util.List;
  *
  */
 public class MBMessageFlagPersistence extends BasePersistence {
-	public com.liferay.portlet.messageboards.model.MBMessageFlag create(
-		MBMessageFlagPK mbMessageFlagPK) {
-		MBMessageFlagHBM mbMessageFlagHBM = new MBMessageFlagHBM();
-		mbMessageFlagHBM.setNew(true);
-		mbMessageFlagHBM.setPrimaryKey(mbMessageFlagPK);
+	public MBMessageFlag create(MBMessageFlagPK mbMessageFlagPK) {
+		MBMessageFlag mbMessageFlag = new MBMessageFlag();
+		mbMessageFlag.setNew(true);
+		mbMessageFlag.setPrimaryKey(mbMessageFlagPK);
 
-		return MBMessageFlagHBMUtil.model(mbMessageFlagHBM);
+		return mbMessageFlag;
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag remove(
-		MBMessageFlagPK mbMessageFlagPK)
+	public MBMessageFlag remove(MBMessageFlagPK mbMessageFlagPK)
 		throws NoSuchMessageFlagException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			MBMessageFlagHBM mbMessageFlagHBM = (MBMessageFlagHBM)session.get(MBMessageFlagHBM.class,
+			MBMessageFlag mbMessageFlag = (MBMessageFlag)session.get(MBMessageFlag.class,
 					mbMessageFlagPK);
 
-			if (mbMessageFlagHBM == null) {
+			if (mbMessageFlag == null) {
 				_log.warn("No MBMessageFlag exists with the primary key " +
 					mbMessageFlagPK.toString());
 				throw new NoSuchMessageFlagException(
@@ -77,10 +76,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 					mbMessageFlagPK.toString());
 			}
 
-			session.delete(mbMessageFlagHBM);
+			session.delete(mbMessageFlag);
 			session.flush();
 
-			return MBMessageFlagHBMUtil.model(mbMessageFlagHBM);
+			return mbMessageFlag;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -100,29 +99,29 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				session = openSession();
 
 				if (mbMessageFlag.isNew()) {
-					MBMessageFlagHBM mbMessageFlagHBM = new MBMessageFlagHBM();
-					mbMessageFlagHBM.setTopicId(mbMessageFlag.getTopicId());
-					mbMessageFlagHBM.setMessageId(mbMessageFlag.getMessageId());
-					mbMessageFlagHBM.setUserId(mbMessageFlag.getUserId());
-					mbMessageFlagHBM.setFlag(mbMessageFlag.getFlag());
-					session.save(mbMessageFlagHBM);
+					MBMessageFlag mbMessageFlagModel = new MBMessageFlag();
+					mbMessageFlagModel.setTopicId(mbMessageFlag.getTopicId());
+					mbMessageFlagModel.setMessageId(mbMessageFlag.getMessageId());
+					mbMessageFlagModel.setUserId(mbMessageFlag.getUserId());
+					mbMessageFlagModel.setFlag(mbMessageFlag.getFlag());
+					session.save(mbMessageFlagModel);
 					session.flush();
 				}
 				else {
-					MBMessageFlagHBM mbMessageFlagHBM = (MBMessageFlagHBM)session.get(MBMessageFlagHBM.class,
+					MBMessageFlag mbMessageFlagModel = (MBMessageFlag)session.get(MBMessageFlag.class,
 							mbMessageFlag.getPrimaryKey());
 
-					if (mbMessageFlagHBM != null) {
-						mbMessageFlagHBM.setFlag(mbMessageFlag.getFlag());
+					if (mbMessageFlagModel != null) {
+						mbMessageFlagModel.setFlag(mbMessageFlag.getFlag());
 						session.flush();
 					}
 					else {
-						mbMessageFlagHBM = new MBMessageFlagHBM();
-						mbMessageFlagHBM.setTopicId(mbMessageFlag.getTopicId());
-						mbMessageFlagHBM.setMessageId(mbMessageFlag.getMessageId());
-						mbMessageFlagHBM.setUserId(mbMessageFlag.getUserId());
-						mbMessageFlagHBM.setFlag(mbMessageFlag.getFlag());
-						session.save(mbMessageFlagHBM);
+						mbMessageFlagModel = new MBMessageFlag();
+						mbMessageFlagModel.setTopicId(mbMessageFlag.getTopicId());
+						mbMessageFlagModel.setMessageId(mbMessageFlag.getMessageId());
+						mbMessageFlagModel.setUserId(mbMessageFlag.getUserId());
+						mbMessageFlagModel.setFlag(mbMessageFlag.getFlag());
+						session.save(mbMessageFlagModel);
 						session.flush();
 					}
 				}
@@ -141,18 +140,17 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag findByPrimaryKey(
-		MBMessageFlagPK mbMessageFlagPK)
+	public MBMessageFlag findByPrimaryKey(MBMessageFlagPK mbMessageFlagPK)
 		throws NoSuchMessageFlagException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			MBMessageFlagHBM mbMessageFlagHBM = (MBMessageFlagHBM)session.get(MBMessageFlagHBM.class,
+			MBMessageFlag mbMessageFlag = (MBMessageFlag)session.get(MBMessageFlag.class,
 					mbMessageFlagPK);
 
-			if (mbMessageFlagHBM == null) {
+			if (mbMessageFlag == null) {
 				_log.warn("No MBMessageFlag exists with the primary key " +
 					mbMessageFlagPK.toString());
 				throw new NoSuchMessageFlagException(
@@ -160,7 +158,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 					mbMessageFlagPK.toString());
 			}
 
-			return MBMessageFlagHBMUtil.model(mbMessageFlagHBM);
+			return mbMessageFlag;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -178,10 +176,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (topicId == null) {
-				query.append("topicId is null");
+				query.append("topicId IS NULL");
 			}
 			else {
 				query.append("topicId = ?");
@@ -196,13 +194,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				q.setString(queryPos++, topicId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				MBMessageFlagHBM mbMessageFlagHBM = (MBMessageFlagHBM)itr.next();
-				list.add(MBMessageFlagHBMUtil.model(mbMessageFlagHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -228,10 +220,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (topicId == null) {
-				query.append("topicId is null");
+				query.append("topicId IS NULL");
 			}
 			else {
 				query.append("topicId = ?");
@@ -250,15 +242,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				q.setString(queryPos++, topicId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				MBMessageFlagHBM mbMessageFlagHBM = (MBMessageFlagHBM)itr.next();
-				list.add(MBMessageFlagHBMUtil.model(mbMessageFlagHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -268,8 +252,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag findByTopicId_First(
-		String topicId, OrderByComparator obc)
+	public MBMessageFlag findByTopicId_First(String topicId,
+		OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		List list = findByTopicId(topicId, 0, 1, obc);
 
@@ -282,12 +266,12 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			throw new NoSuchMessageFlagException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBMessageFlag)list.get(0);
+			return (MBMessageFlag)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag findByTopicId_Last(
-		String topicId, OrderByComparator obc)
+	public MBMessageFlag findByTopicId_Last(String topicId,
+		OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		int count = countByTopicId(topicId);
 		List list = findByTopicId(topicId, count - 1, count, obc);
@@ -301,14 +285,14 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			throw new NoSuchMessageFlagException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBMessageFlag)list.get(0);
+			return (MBMessageFlag)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByTopicId_PrevAndNext(
+	public MBMessageFlag[] findByTopicId_PrevAndNext(
 		MBMessageFlagPK mbMessageFlagPK, String topicId, OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
-		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag = findByPrimaryKey(mbMessageFlagPK);
+		MBMessageFlag mbMessageFlag = findByPrimaryKey(mbMessageFlagPK);
 		int count = countByTopicId(topicId);
 		Session session = null;
 
@@ -317,10 +301,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (topicId == null) {
-				query.append("topicId is null");
+				query.append("topicId IS NULL");
 			}
 			else {
 				query.append("topicId = ?");
@@ -340,11 +324,11 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessageFlag, MBMessageFlagHBMUtil.getInstance());
-			com.liferay.portlet.messageboards.model.MBMessageFlag[] array = new com.liferay.portlet.messageboards.model.MBMessageFlag[3];
-			array[0] = (com.liferay.portlet.messageboards.model.MBMessageFlag)objArray[0];
-			array[1] = (com.liferay.portlet.messageboards.model.MBMessageFlag)objArray[1];
-			array[2] = (com.liferay.portlet.messageboards.model.MBMessageFlag)objArray[2];
+					mbMessageFlag);
+			MBMessageFlag[] array = new MBMessageFlag[3];
+			array[0] = (MBMessageFlag)objArray[0];
+			array[1] = (MBMessageFlag)objArray[1];
+			array[2] = (MBMessageFlag)objArray[2];
 
 			return array;
 		}
@@ -364,10 +348,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -382,13 +366,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				MBMessageFlagHBM mbMessageFlagHBM = (MBMessageFlagHBM)itr.next();
-				list.add(MBMessageFlagHBMUtil.model(mbMessageFlagHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -414,10 +392,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -436,15 +414,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				MBMessageFlagHBM mbMessageFlagHBM = (MBMessageFlagHBM)itr.next();
-				list.add(MBMessageFlagHBMUtil.model(mbMessageFlagHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -454,8 +424,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag findByUserId_First(
-		String userId, OrderByComparator obc)
+	public MBMessageFlag findByUserId_First(String userId, OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		List list = findByUserId(userId, 0, 1, obc);
 
@@ -468,12 +437,11 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			throw new NoSuchMessageFlagException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBMessageFlag)list.get(0);
+			return (MBMessageFlag)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag findByUserId_Last(
-		String userId, OrderByComparator obc)
+	public MBMessageFlag findByUserId_Last(String userId, OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		int count = countByUserId(userId);
 		List list = findByUserId(userId, count - 1, count, obc);
@@ -487,14 +455,14 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			throw new NoSuchMessageFlagException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBMessageFlag)list.get(0);
+			return (MBMessageFlag)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByUserId_PrevAndNext(
+	public MBMessageFlag[] findByUserId_PrevAndNext(
 		MBMessageFlagPK mbMessageFlagPK, String userId, OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
-		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag = findByPrimaryKey(mbMessageFlagPK);
+		MBMessageFlag mbMessageFlag = findByPrimaryKey(mbMessageFlagPK);
 		int count = countByUserId(userId);
 		Session session = null;
 
@@ -503,10 +471,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -526,11 +494,11 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessageFlag, MBMessageFlagHBMUtil.getInstance());
-			com.liferay.portlet.messageboards.model.MBMessageFlag[] array = new com.liferay.portlet.messageboards.model.MBMessageFlag[3];
-			array[0] = (com.liferay.portlet.messageboards.model.MBMessageFlag)objArray[0];
-			array[1] = (com.liferay.portlet.messageboards.model.MBMessageFlag)objArray[1];
-			array[2] = (com.liferay.portlet.messageboards.model.MBMessageFlag)objArray[2];
+					mbMessageFlag);
+			MBMessageFlag[] array = new MBMessageFlag[3];
+			array[0] = (MBMessageFlag)objArray[0];
+			array[1] = (MBMessageFlag)objArray[1];
+			array[2] = (MBMessageFlag)objArray[2];
 
 			return array;
 		}
@@ -551,10 +519,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (topicId == null) {
-				query.append("topicId is null");
+				query.append("topicId IS NULL");
 			}
 			else {
 				query.append("topicId = ?");
@@ -563,7 +531,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (messageId == null) {
-				query.append("messageId is null");
+				query.append("messageId IS NULL");
 			}
 			else {
 				query.append("messageId = ?");
@@ -582,13 +550,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				q.setString(queryPos++, messageId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				MBMessageFlagHBM mbMessageFlagHBM = (MBMessageFlagHBM)itr.next();
-				list.add(MBMessageFlagHBMUtil.model(mbMessageFlagHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -614,10 +576,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (topicId == null) {
-				query.append("topicId is null");
+				query.append("topicId IS NULL");
 			}
 			else {
 				query.append("topicId = ?");
@@ -626,7 +588,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (messageId == null) {
-				query.append("messageId is null");
+				query.append("messageId IS NULL");
 			}
 			else {
 				query.append("messageId = ?");
@@ -649,15 +611,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				q.setString(queryPos++, messageId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				MBMessageFlagHBM mbMessageFlagHBM = (MBMessageFlagHBM)itr.next();
-				list.add(MBMessageFlagHBMUtil.model(mbMessageFlagHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -667,8 +621,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag findByT_M_First(
-		String topicId, String messageId, OrderByComparator obc)
+	public MBMessageFlag findByT_M_First(String topicId, String messageId,
+		OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		List list = findByT_M(topicId, messageId, 0, 1, obc);
 
@@ -684,12 +638,12 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			throw new NoSuchMessageFlagException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBMessageFlag)list.get(0);
+			return (MBMessageFlag)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag findByT_M_Last(
-		String topicId, String messageId, OrderByComparator obc)
+	public MBMessageFlag findByT_M_Last(String topicId, String messageId,
+		OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		int count = countByT_M(topicId, messageId);
 		List list = findByT_M(topicId, messageId, count - 1, count, obc);
@@ -706,15 +660,15 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			throw new NoSuchMessageFlagException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBMessageFlag)list.get(0);
+			return (MBMessageFlag)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByT_M_PrevAndNext(
+	public MBMessageFlag[] findByT_M_PrevAndNext(
 		MBMessageFlagPK mbMessageFlagPK, String topicId, String messageId,
 		OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
-		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag = findByPrimaryKey(mbMessageFlagPK);
+		MBMessageFlag mbMessageFlag = findByPrimaryKey(mbMessageFlagPK);
 		int count = countByT_M(topicId, messageId);
 		Session session = null;
 
@@ -723,10 +677,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (topicId == null) {
-				query.append("topicId is null");
+				query.append("topicId IS NULL");
 			}
 			else {
 				query.append("topicId = ?");
@@ -735,7 +689,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (messageId == null) {
-				query.append("messageId is null");
+				query.append("messageId IS NULL");
 			}
 			else {
 				query.append("messageId = ?");
@@ -759,11 +713,11 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessageFlag, MBMessageFlagHBMUtil.getInstance());
-			com.liferay.portlet.messageboards.model.MBMessageFlag[] array = new com.liferay.portlet.messageboards.model.MBMessageFlag[3];
-			array[0] = (com.liferay.portlet.messageboards.model.MBMessageFlag)objArray[0];
-			array[1] = (com.liferay.portlet.messageboards.model.MBMessageFlag)objArray[1];
-			array[2] = (com.liferay.portlet.messageboards.model.MBMessageFlag)objArray[2];
+					mbMessageFlag);
+			MBMessageFlag[] array = new MBMessageFlag[3];
+			array[0] = (MBMessageFlag)objArray[0];
+			array[1] = (MBMessageFlag)objArray[1];
+			array[2] = (MBMessageFlag)objArray[2];
 
 			return array;
 		}
@@ -784,10 +738,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (topicId == null) {
-				query.append("topicId is null");
+				query.append("topicId IS NULL");
 			}
 			else {
 				query.append("topicId = ?");
@@ -796,7 +750,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -815,13 +769,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				MBMessageFlagHBM mbMessageFlagHBM = (MBMessageFlagHBM)itr.next();
-				list.add(MBMessageFlagHBMUtil.model(mbMessageFlagHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -847,10 +795,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (topicId == null) {
-				query.append("topicId is null");
+				query.append("topicId IS NULL");
 			}
 			else {
 				query.append("topicId = ?");
@@ -859,7 +807,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -882,15 +830,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				MBMessageFlagHBM mbMessageFlagHBM = (MBMessageFlagHBM)itr.next();
-				list.add(MBMessageFlagHBMUtil.model(mbMessageFlagHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -900,8 +840,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag findByT_U_First(
-		String topicId, String userId, OrderByComparator obc)
+	public MBMessageFlag findByT_U_First(String topicId, String userId,
+		OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		List list = findByT_U(topicId, userId, 0, 1, obc);
 
@@ -917,12 +857,12 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			throw new NoSuchMessageFlagException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBMessageFlag)list.get(0);
+			return (MBMessageFlag)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag findByT_U_Last(
-		String topicId, String userId, OrderByComparator obc)
+	public MBMessageFlag findByT_U_Last(String topicId, String userId,
+		OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
 		int count = countByT_U(topicId, userId);
 		List list = findByT_U(topicId, userId, count - 1, count, obc);
@@ -939,15 +879,15 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			throw new NoSuchMessageFlagException(msg);
 		}
 		else {
-			return (com.liferay.portlet.messageboards.model.MBMessageFlag)list.get(0);
+			return (MBMessageFlag)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByT_U_PrevAndNext(
+	public MBMessageFlag[] findByT_U_PrevAndNext(
 		MBMessageFlagPK mbMessageFlagPK, String topicId, String userId,
 		OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
-		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag = findByPrimaryKey(mbMessageFlagPK);
+		MBMessageFlag mbMessageFlag = findByPrimaryKey(mbMessageFlagPK);
 		int count = countByT_U(topicId, userId);
 		Session session = null;
 
@@ -956,10 +896,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (topicId == null) {
-				query.append("topicId is null");
+				query.append("topicId IS NULL");
 			}
 			else {
 				query.append("topicId = ?");
@@ -968,7 +908,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -992,11 +932,11 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessageFlag, MBMessageFlagHBMUtil.getInstance());
-			com.liferay.portlet.messageboards.model.MBMessageFlag[] array = new com.liferay.portlet.messageboards.model.MBMessageFlag[3];
-			array[0] = (com.liferay.portlet.messageboards.model.MBMessageFlag)objArray[0];
-			array[1] = (com.liferay.portlet.messageboards.model.MBMessageFlag)objArray[1];
-			array[2] = (com.liferay.portlet.messageboards.model.MBMessageFlag)objArray[2];
+					mbMessageFlag);
+			MBMessageFlag[] array = new MBMessageFlag[3];
+			array[0] = (MBMessageFlag)objArray[0];
+			array[1] = (MBMessageFlag)objArray[1];
+			array[2] = (MBMessageFlag)objArray[2];
 
 			return array;
 		}
@@ -1016,18 +956,11 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag ");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				MBMessageFlagHBM mbMessageFlagHBM = (MBMessageFlagHBM)itr.next();
-				list.add(MBMessageFlagHBMUtil.model(mbMessageFlagHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1045,10 +978,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (topicId == null) {
-				query.append("topicId is null");
+				query.append("topicId IS NULL");
 			}
 			else {
 				query.append("topicId = ?");
@@ -1066,8 +999,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				MBMessageFlagHBM mbMessageFlagHBM = (MBMessageFlagHBM)itr.next();
-				session.delete(mbMessageFlagHBM);
+				MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
+				session.delete(mbMessageFlag);
 			}
 
 			session.flush();
@@ -1088,10 +1021,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -1109,8 +1042,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				MBMessageFlagHBM mbMessageFlagHBM = (MBMessageFlagHBM)itr.next();
-				session.delete(mbMessageFlagHBM);
+				MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
+				session.delete(mbMessageFlag);
 			}
 
 			session.flush();
@@ -1132,10 +1065,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (topicId == null) {
-				query.append("topicId is null");
+				query.append("topicId IS NULL");
 			}
 			else {
 				query.append("topicId = ?");
@@ -1144,7 +1077,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (messageId == null) {
-				query.append("messageId is null");
+				query.append("messageId IS NULL");
 			}
 			else {
 				query.append("messageId = ?");
@@ -1166,8 +1099,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				MBMessageFlagHBM mbMessageFlagHBM = (MBMessageFlagHBM)itr.next();
-				session.delete(mbMessageFlagHBM);
+				MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
+				session.delete(mbMessageFlag);
 			}
 
 			session.flush();
@@ -1189,10 +1122,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (topicId == null) {
-				query.append("topicId is null");
+				query.append("topicId IS NULL");
 			}
 			else {
 				query.append("topicId = ?");
@@ -1201,7 +1134,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -1223,8 +1156,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				MBMessageFlagHBM mbMessageFlagHBM = (MBMessageFlagHBM)itr.next();
-				session.delete(mbMessageFlagHBM);
+				MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
+				session.delete(mbMessageFlag);
 			}
 
 			session.flush();
@@ -1246,10 +1179,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (topicId == null) {
-				query.append("topicId is null");
+				query.append("topicId IS NULL");
 			}
 			else {
 				query.append("topicId = ?");
@@ -1293,10 +1226,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -1341,10 +1274,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (topicId == null) {
-				query.append("topicId is null");
+				query.append("topicId IS NULL");
 			}
 			else {
 				query.append("topicId = ?");
@@ -1353,7 +1286,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (messageId == null) {
-				query.append("messageId is null");
+				query.append("messageId IS NULL");
 			}
 			else {
 				query.append("messageId = ?");
@@ -1402,10 +1335,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM MBMessageFlag IN CLASS com.liferay.portlet.messageboards.service.persistence.MBMessageFlagHBM WHERE ");
+				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
 
 			if (topicId == null) {
-				query.append("topicId is null");
+				query.append("topicId IS NULL");
 			}
 			else {
 				query.append("topicId = ?");
@@ -1414,7 +1347,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -1451,6 +1384,9 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(MBMessageFlagPersistence.class);

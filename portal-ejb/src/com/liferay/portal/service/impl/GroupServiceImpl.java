@@ -53,12 +53,12 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 			getUserId(), null, null, name, description, type, friendlyURL);
 	}
 
-	public boolean addRoleGroups(String roleId, String[] groupIds)
+	public void addRoleGroups(String roleId, String[] groupIds)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
-		return GroupLocalServiceUtil.addRoleGroups(roleId, groupIds);
+		GroupLocalServiceUtil.addRoleGroups(roleId, groupIds);
 	}
 
 	public void deleteGroup(String groupId)
@@ -99,12 +99,12 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 		GroupLocalServiceUtil.setRoleGroups(roleId, groupIds);
 	}
 
-	public boolean unsetRoleGroups(String roleId, String[] groupIds)
+	public void unsetRoleGroups(String roleId, String[] groupIds)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
-		return GroupLocalServiceUtil.unsetRoleGroups(roleId, groupIds);
+		GroupLocalServiceUtil.unsetRoleGroups(roleId, groupIds);
 	}
 
 	public Group updateGroup(

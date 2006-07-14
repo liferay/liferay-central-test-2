@@ -181,6 +181,10 @@ public class PortletUtil {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static PortletPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		PortletUtil util = (PortletUtil)ctx.getBean(CLASS_NAME);

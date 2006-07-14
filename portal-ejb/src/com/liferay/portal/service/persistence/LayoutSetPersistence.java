@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import org.apache.commons.logging.Log;
@@ -44,25 +45,25 @@ import java.util.List;
  *
  */
 public class LayoutSetPersistence extends BasePersistence {
-	public com.liferay.portal.model.LayoutSet create(String ownerId) {
-		LayoutSetHBM layoutSetHBM = new LayoutSetHBM();
-		layoutSetHBM.setNew(true);
-		layoutSetHBM.setPrimaryKey(ownerId);
+	public LayoutSet create(String ownerId) {
+		LayoutSet layoutSet = new LayoutSet();
+		layoutSet.setNew(true);
+		layoutSet.setPrimaryKey(ownerId);
 
-		return LayoutSetHBMUtil.model(layoutSetHBM);
+		return layoutSet;
 	}
 
-	public com.liferay.portal.model.LayoutSet remove(String ownerId)
+	public LayoutSet remove(String ownerId)
 		throws NoSuchLayoutSetException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			LayoutSetHBM layoutSetHBM = (LayoutSetHBM)session.get(LayoutSetHBM.class,
+			LayoutSet layoutSet = (LayoutSet)session.get(LayoutSet.class,
 					ownerId);
 
-			if (layoutSetHBM == null) {
+			if (layoutSet == null) {
 				_log.warn("No LayoutSet exists with the primary key " +
 					ownerId.toString());
 				throw new NoSuchLayoutSetException(
@@ -70,10 +71,10 @@ public class LayoutSetPersistence extends BasePersistence {
 					ownerId.toString());
 			}
 
-			session.delete(layoutSetHBM);
+			session.delete(layoutSet);
 			session.flush();
 
-			return LayoutSetHBMUtil.model(layoutSetHBM);
+			return layoutSet;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -92,43 +93,43 @@ public class LayoutSetPersistence extends BasePersistence {
 				session = openSession();
 
 				if (layoutSet.isNew()) {
-					LayoutSetHBM layoutSetHBM = new LayoutSetHBM();
-					layoutSetHBM.setOwnerId(layoutSet.getOwnerId());
-					layoutSetHBM.setCompanyId(layoutSet.getCompanyId());
-					layoutSetHBM.setGroupId(layoutSet.getGroupId());
-					layoutSetHBM.setUserId(layoutSet.getUserId());
-					layoutSetHBM.setPrivateLayout(layoutSet.getPrivateLayout());
-					layoutSetHBM.setThemeId(layoutSet.getThemeId());
-					layoutSetHBM.setColorSchemeId(layoutSet.getColorSchemeId());
-					layoutSetHBM.setPageCount(layoutSet.getPageCount());
-					session.save(layoutSetHBM);
+					LayoutSet layoutSetModel = new LayoutSet();
+					layoutSetModel.setOwnerId(layoutSet.getOwnerId());
+					layoutSetModel.setCompanyId(layoutSet.getCompanyId());
+					layoutSetModel.setGroupId(layoutSet.getGroupId());
+					layoutSetModel.setUserId(layoutSet.getUserId());
+					layoutSetModel.setPrivateLayout(layoutSet.getPrivateLayout());
+					layoutSetModel.setThemeId(layoutSet.getThemeId());
+					layoutSetModel.setColorSchemeId(layoutSet.getColorSchemeId());
+					layoutSetModel.setPageCount(layoutSet.getPageCount());
+					session.save(layoutSetModel);
 					session.flush();
 				}
 				else {
-					LayoutSetHBM layoutSetHBM = (LayoutSetHBM)session.get(LayoutSetHBM.class,
+					LayoutSet layoutSetModel = (LayoutSet)session.get(LayoutSet.class,
 							layoutSet.getPrimaryKey());
 
-					if (layoutSetHBM != null) {
-						layoutSetHBM.setCompanyId(layoutSet.getCompanyId());
-						layoutSetHBM.setGroupId(layoutSet.getGroupId());
-						layoutSetHBM.setUserId(layoutSet.getUserId());
-						layoutSetHBM.setPrivateLayout(layoutSet.getPrivateLayout());
-						layoutSetHBM.setThemeId(layoutSet.getThemeId());
-						layoutSetHBM.setColorSchemeId(layoutSet.getColorSchemeId());
-						layoutSetHBM.setPageCount(layoutSet.getPageCount());
+					if (layoutSetModel != null) {
+						layoutSetModel.setCompanyId(layoutSet.getCompanyId());
+						layoutSetModel.setGroupId(layoutSet.getGroupId());
+						layoutSetModel.setUserId(layoutSet.getUserId());
+						layoutSetModel.setPrivateLayout(layoutSet.getPrivateLayout());
+						layoutSetModel.setThemeId(layoutSet.getThemeId());
+						layoutSetModel.setColorSchemeId(layoutSet.getColorSchemeId());
+						layoutSetModel.setPageCount(layoutSet.getPageCount());
 						session.flush();
 					}
 					else {
-						layoutSetHBM = new LayoutSetHBM();
-						layoutSetHBM.setOwnerId(layoutSet.getOwnerId());
-						layoutSetHBM.setCompanyId(layoutSet.getCompanyId());
-						layoutSetHBM.setGroupId(layoutSet.getGroupId());
-						layoutSetHBM.setUserId(layoutSet.getUserId());
-						layoutSetHBM.setPrivateLayout(layoutSet.getPrivateLayout());
-						layoutSetHBM.setThemeId(layoutSet.getThemeId());
-						layoutSetHBM.setColorSchemeId(layoutSet.getColorSchemeId());
-						layoutSetHBM.setPageCount(layoutSet.getPageCount());
-						session.save(layoutSetHBM);
+						layoutSetModel = new LayoutSet();
+						layoutSetModel.setOwnerId(layoutSet.getOwnerId());
+						layoutSetModel.setCompanyId(layoutSet.getCompanyId());
+						layoutSetModel.setGroupId(layoutSet.getGroupId());
+						layoutSetModel.setUserId(layoutSet.getUserId());
+						layoutSetModel.setPrivateLayout(layoutSet.getPrivateLayout());
+						layoutSetModel.setThemeId(layoutSet.getThemeId());
+						layoutSetModel.setColorSchemeId(layoutSet.getColorSchemeId());
+						layoutSetModel.setPageCount(layoutSet.getPageCount());
+						session.save(layoutSetModel);
 						session.flush();
 					}
 				}
@@ -147,17 +148,17 @@ public class LayoutSetPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.LayoutSet findByPrimaryKey(String ownerId)
+	public LayoutSet findByPrimaryKey(String ownerId)
 		throws NoSuchLayoutSetException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			LayoutSetHBM layoutSetHBM = (LayoutSetHBM)session.get(LayoutSetHBM.class,
+			LayoutSet layoutSet = (LayoutSet)session.get(LayoutSet.class,
 					ownerId);
 
-			if (layoutSetHBM == null) {
+			if (layoutSet == null) {
 				_log.warn("No LayoutSet exists with the primary key " +
 					ownerId.toString());
 				throw new NoSuchLayoutSetException(
@@ -165,7 +166,7 @@ public class LayoutSetPersistence extends BasePersistence {
 					ownerId.toString());
 			}
 
-			return LayoutSetHBMUtil.model(layoutSetHBM);
+			return layoutSet;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -182,19 +183,11 @@ public class LayoutSetPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM LayoutSet IN CLASS com.liferay.portal.service.persistence.LayoutSetHBM ");
+			query.append("FROM com.liferay.portal.model.LayoutSet ");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				LayoutSetHBM layoutSetHBM = (LayoutSetHBM)itr.next();
-				list.add(LayoutSetHBMUtil.model(layoutSetHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -202,6 +195,9 @@ public class LayoutSetPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(LayoutSetPersistence.class);

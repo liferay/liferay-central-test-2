@@ -30,7 +30,6 @@ import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -253,8 +252,6 @@ public class PermissionFinder {
 	public static List findByA_R(String actionId, String[] resourceIds)
 		throws SystemException {
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -267,22 +264,14 @@ public class PermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("Permission_", PermissionHBM.class);
+			q.addEntity("Permission_", Permission.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(actionId);
 			_setResourceIds(qPos, resourceIds);
 
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				PermissionHBM permissionHBM = (PermissionHBM)itr.next();
-
-				Permission permission = PermissionHBMUtil.model(permissionHBM);
-
-				list.add(permission);
-			}
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -290,14 +279,10 @@ public class PermissionFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 	public static List findByG_R(String groupId, String resourceId)
 		throws SystemException {
-
-		List list = new ArrayList();
 
 		Session session = null;
 
@@ -308,22 +293,14 @@ public class PermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("Permission_", PermissionHBM.class);
+			q.addEntity("Permission_", Permission.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
 			qPos.add(resourceId);
 
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				PermissionHBM permissionHBM = (PermissionHBM)itr.next();
-
-				Permission permission = PermissionHBMUtil.model(permissionHBM);
-
-				list.add(permission);
-			}
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -331,14 +308,10 @@ public class PermissionFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 	public static List findByU_R(String userId, String resourceId)
 		throws SystemException {
-
-		List list = new ArrayList();
 
 		Session session = null;
 
@@ -349,22 +322,14 @@ public class PermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("Permission_", PermissionHBM.class);
+			q.addEntity("Permission_", Permission.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(userId);
 			qPos.add(resourceId);
 
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				PermissionHBM permissionHBM = (PermissionHBM)itr.next();
-
-				Permission permission = PermissionHBMUtil.model(permissionHBM);
-
-				list.add(permission);
-			}
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -372,15 +337,11 @@ public class PermissionFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 	public static List findByO_G_R(
 			String organizationId, String groupId, String resourceId)
 		throws SystemException {
-
-		List list = new ArrayList();
 
 		Session session = null;
 
@@ -391,7 +352,7 @@ public class PermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("Permission_", PermissionHBM.class);
+			q.addEntity("Permission_", Permission.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -399,15 +360,7 @@ public class PermissionFinder {
 			qPos.add(groupId);
 			qPos.add(resourceId);
 
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				PermissionHBM permissionHBM = (PermissionHBM)itr.next();
-
-				Permission permission = PermissionHBMUtil.model(permissionHBM);
-
-				list.add(permission);
-			}
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -415,15 +368,11 @@ public class PermissionFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 	public static List findByU_A_R(
 			String userId, String[] actionIds, String resourceId)
 		throws SystemException {
-
-		List list = new ArrayList();
 
 		Session session = null;
 
@@ -437,22 +386,14 @@ public class PermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("Permission_", PermissionHBM.class);
+			q.addEntity("Permission_", Permission.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(userId);
 			qPos.add(resourceId);
 
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				PermissionHBM permissionHBM = (PermissionHBM)itr.next();
-
-				Permission permission = PermissionHBMUtil.model(permissionHBM);
-
-				list.add(permission);
-			}
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -460,8 +401,6 @@ public class PermissionFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 	private static String _getActionIds(String[] actionIds) {

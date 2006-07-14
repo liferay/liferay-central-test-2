@@ -30,7 +30,6 @@ import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -139,8 +138,6 @@ public class MBThreadFinder {
 	public static List findByGroupId(String groupId, int begin, int end)
 		throws SystemException {
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -150,22 +147,13 @@ public class MBThreadFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("MBThread", MBThreadHBM.class);
+			q.addEntity("MBThread", MBThread.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
 
-			Iterator itr = QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				MBThreadHBM threadHBM = (MBThreadHBM)itr.next();
-
-				MBThread thread = MBThreadHBMUtil.model(threadHBM);
-
-				list.add(thread);
-			}
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -173,8 +161,6 @@ public class MBThreadFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 	private static String _getCategoryIds(List categoryIds) {

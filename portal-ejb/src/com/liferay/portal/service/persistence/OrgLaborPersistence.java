@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchOrgLaborException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.util.StringPool;
@@ -48,25 +49,24 @@ import java.util.List;
  *
  */
 public class OrgLaborPersistence extends BasePersistence {
-	public com.liferay.portal.model.OrgLabor create(String orgLaborId) {
-		OrgLaborHBM orgLaborHBM = new OrgLaborHBM();
-		orgLaborHBM.setNew(true);
-		orgLaborHBM.setPrimaryKey(orgLaborId);
+	public OrgLabor create(String orgLaborId) {
+		OrgLabor orgLabor = new OrgLabor();
+		orgLabor.setNew(true);
+		orgLabor.setPrimaryKey(orgLaborId);
 
-		return OrgLaborHBMUtil.model(orgLaborHBM);
+		return orgLabor;
 	}
 
-	public com.liferay.portal.model.OrgLabor remove(String orgLaborId)
+	public OrgLabor remove(String orgLaborId)
 		throws NoSuchOrgLaborException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			OrgLaborHBM orgLaborHBM = (OrgLaborHBM)session.get(OrgLaborHBM.class,
-					orgLaborId);
+			OrgLabor orgLabor = (OrgLabor)session.get(OrgLabor.class, orgLaborId);
 
-			if (orgLaborHBM == null) {
+			if (orgLabor == null) {
 				_log.warn("No OrgLabor exists with the primary key " +
 					orgLaborId.toString());
 				throw new NoSuchOrgLaborException(
@@ -74,10 +74,10 @@ public class OrgLaborPersistence extends BasePersistence {
 					orgLaborId.toString());
 			}
 
-			session.delete(orgLaborHBM);
+			session.delete(orgLabor);
 			session.flush();
 
-			return OrgLaborHBMUtil.model(orgLaborHBM);
+			return orgLabor;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -96,70 +96,70 @@ public class OrgLaborPersistence extends BasePersistence {
 				session = openSession();
 
 				if (orgLabor.isNew()) {
-					OrgLaborHBM orgLaborHBM = new OrgLaborHBM();
-					orgLaborHBM.setOrgLaborId(orgLabor.getOrgLaborId());
-					orgLaborHBM.setOrganizationId(orgLabor.getOrganizationId());
-					orgLaborHBM.setTypeId(orgLabor.getTypeId());
-					orgLaborHBM.setSunOpen(orgLabor.getSunOpen());
-					orgLaborHBM.setSunClose(orgLabor.getSunClose());
-					orgLaborHBM.setMonOpen(orgLabor.getMonOpen());
-					orgLaborHBM.setMonClose(orgLabor.getMonClose());
-					orgLaborHBM.setTueOpen(orgLabor.getTueOpen());
-					orgLaborHBM.setTueClose(orgLabor.getTueClose());
-					orgLaborHBM.setWedOpen(orgLabor.getWedOpen());
-					orgLaborHBM.setWedClose(orgLabor.getWedClose());
-					orgLaborHBM.setThuOpen(orgLabor.getThuOpen());
-					orgLaborHBM.setThuClose(orgLabor.getThuClose());
-					orgLaborHBM.setFriOpen(orgLabor.getFriOpen());
-					orgLaborHBM.setFriClose(orgLabor.getFriClose());
-					orgLaborHBM.setSatOpen(orgLabor.getSatOpen());
-					orgLaborHBM.setSatClose(orgLabor.getSatClose());
-					session.save(orgLaborHBM);
+					OrgLabor orgLaborModel = new OrgLabor();
+					orgLaborModel.setOrgLaborId(orgLabor.getOrgLaborId());
+					orgLaborModel.setOrganizationId(orgLabor.getOrganizationId());
+					orgLaborModel.setTypeId(orgLabor.getTypeId());
+					orgLaborModel.setSunOpen(orgLabor.getSunOpen());
+					orgLaborModel.setSunClose(orgLabor.getSunClose());
+					orgLaborModel.setMonOpen(orgLabor.getMonOpen());
+					orgLaborModel.setMonClose(orgLabor.getMonClose());
+					orgLaborModel.setTueOpen(orgLabor.getTueOpen());
+					orgLaborModel.setTueClose(orgLabor.getTueClose());
+					orgLaborModel.setWedOpen(orgLabor.getWedOpen());
+					orgLaborModel.setWedClose(orgLabor.getWedClose());
+					orgLaborModel.setThuOpen(orgLabor.getThuOpen());
+					orgLaborModel.setThuClose(orgLabor.getThuClose());
+					orgLaborModel.setFriOpen(orgLabor.getFriOpen());
+					orgLaborModel.setFriClose(orgLabor.getFriClose());
+					orgLaborModel.setSatOpen(orgLabor.getSatOpen());
+					orgLaborModel.setSatClose(orgLabor.getSatClose());
+					session.save(orgLaborModel);
 					session.flush();
 				}
 				else {
-					OrgLaborHBM orgLaborHBM = (OrgLaborHBM)session.get(OrgLaborHBM.class,
+					OrgLabor orgLaborModel = (OrgLabor)session.get(OrgLabor.class,
 							orgLabor.getPrimaryKey());
 
-					if (orgLaborHBM != null) {
-						orgLaborHBM.setOrganizationId(orgLabor.getOrganizationId());
-						orgLaborHBM.setTypeId(orgLabor.getTypeId());
-						orgLaborHBM.setSunOpen(orgLabor.getSunOpen());
-						orgLaborHBM.setSunClose(orgLabor.getSunClose());
-						orgLaborHBM.setMonOpen(orgLabor.getMonOpen());
-						orgLaborHBM.setMonClose(orgLabor.getMonClose());
-						orgLaborHBM.setTueOpen(orgLabor.getTueOpen());
-						orgLaborHBM.setTueClose(orgLabor.getTueClose());
-						orgLaborHBM.setWedOpen(orgLabor.getWedOpen());
-						orgLaborHBM.setWedClose(orgLabor.getWedClose());
-						orgLaborHBM.setThuOpen(orgLabor.getThuOpen());
-						orgLaborHBM.setThuClose(orgLabor.getThuClose());
-						orgLaborHBM.setFriOpen(orgLabor.getFriOpen());
-						orgLaborHBM.setFriClose(orgLabor.getFriClose());
-						orgLaborHBM.setSatOpen(orgLabor.getSatOpen());
-						orgLaborHBM.setSatClose(orgLabor.getSatClose());
+					if (orgLaborModel != null) {
+						orgLaborModel.setOrganizationId(orgLabor.getOrganizationId());
+						orgLaborModel.setTypeId(orgLabor.getTypeId());
+						orgLaborModel.setSunOpen(orgLabor.getSunOpen());
+						orgLaborModel.setSunClose(orgLabor.getSunClose());
+						orgLaborModel.setMonOpen(orgLabor.getMonOpen());
+						orgLaborModel.setMonClose(orgLabor.getMonClose());
+						orgLaborModel.setTueOpen(orgLabor.getTueOpen());
+						orgLaborModel.setTueClose(orgLabor.getTueClose());
+						orgLaborModel.setWedOpen(orgLabor.getWedOpen());
+						orgLaborModel.setWedClose(orgLabor.getWedClose());
+						orgLaborModel.setThuOpen(orgLabor.getThuOpen());
+						orgLaborModel.setThuClose(orgLabor.getThuClose());
+						orgLaborModel.setFriOpen(orgLabor.getFriOpen());
+						orgLaborModel.setFriClose(orgLabor.getFriClose());
+						orgLaborModel.setSatOpen(orgLabor.getSatOpen());
+						orgLaborModel.setSatClose(orgLabor.getSatClose());
 						session.flush();
 					}
 					else {
-						orgLaborHBM = new OrgLaborHBM();
-						orgLaborHBM.setOrgLaborId(orgLabor.getOrgLaborId());
-						orgLaborHBM.setOrganizationId(orgLabor.getOrganizationId());
-						orgLaborHBM.setTypeId(orgLabor.getTypeId());
-						orgLaborHBM.setSunOpen(orgLabor.getSunOpen());
-						orgLaborHBM.setSunClose(orgLabor.getSunClose());
-						orgLaborHBM.setMonOpen(orgLabor.getMonOpen());
-						orgLaborHBM.setMonClose(orgLabor.getMonClose());
-						orgLaborHBM.setTueOpen(orgLabor.getTueOpen());
-						orgLaborHBM.setTueClose(orgLabor.getTueClose());
-						orgLaborHBM.setWedOpen(orgLabor.getWedOpen());
-						orgLaborHBM.setWedClose(orgLabor.getWedClose());
-						orgLaborHBM.setThuOpen(orgLabor.getThuOpen());
-						orgLaborHBM.setThuClose(orgLabor.getThuClose());
-						orgLaborHBM.setFriOpen(orgLabor.getFriOpen());
-						orgLaborHBM.setFriClose(orgLabor.getFriClose());
-						orgLaborHBM.setSatOpen(orgLabor.getSatOpen());
-						orgLaborHBM.setSatClose(orgLabor.getSatClose());
-						session.save(orgLaborHBM);
+						orgLaborModel = new OrgLabor();
+						orgLaborModel.setOrgLaborId(orgLabor.getOrgLaborId());
+						orgLaborModel.setOrganizationId(orgLabor.getOrganizationId());
+						orgLaborModel.setTypeId(orgLabor.getTypeId());
+						orgLaborModel.setSunOpen(orgLabor.getSunOpen());
+						orgLaborModel.setSunClose(orgLabor.getSunClose());
+						orgLaborModel.setMonOpen(orgLabor.getMonOpen());
+						orgLaborModel.setMonClose(orgLabor.getMonClose());
+						orgLaborModel.setTueOpen(orgLabor.getTueOpen());
+						orgLaborModel.setTueClose(orgLabor.getTueClose());
+						orgLaborModel.setWedOpen(orgLabor.getWedOpen());
+						orgLaborModel.setWedClose(orgLabor.getWedClose());
+						orgLaborModel.setThuOpen(orgLabor.getThuOpen());
+						orgLaborModel.setThuClose(orgLabor.getThuClose());
+						orgLaborModel.setFriOpen(orgLabor.getFriOpen());
+						orgLaborModel.setFriClose(orgLabor.getFriClose());
+						orgLaborModel.setSatOpen(orgLabor.getSatOpen());
+						orgLaborModel.setSatClose(orgLabor.getSatClose());
+						session.save(orgLaborModel);
 						session.flush();
 					}
 				}
@@ -178,17 +178,16 @@ public class OrgLaborPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.OrgLabor findByPrimaryKey(String orgLaborId)
+	public OrgLabor findByPrimaryKey(String orgLaborId)
 		throws NoSuchOrgLaborException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			OrgLaborHBM orgLaborHBM = (OrgLaborHBM)session.get(OrgLaborHBM.class,
-					orgLaborId);
+			OrgLabor orgLabor = (OrgLabor)session.get(OrgLabor.class, orgLaborId);
 
-			if (orgLaborHBM == null) {
+			if (orgLabor == null) {
 				_log.warn("No OrgLabor exists with the primary key " +
 					orgLaborId.toString());
 				throw new NoSuchOrgLaborException(
@@ -196,7 +195,7 @@ public class OrgLaborPersistence extends BasePersistence {
 					orgLaborId.toString());
 			}
 
-			return OrgLaborHBMUtil.model(orgLaborHBM);
+			return orgLabor;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -214,11 +213,10 @@ public class OrgLaborPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM OrgLabor IN CLASS com.liferay.portal.service.persistence.OrgLaborHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
 
 			if (organizationId == null) {
-				query.append("organizationId is null");
+				query.append("organizationId IS NULL");
 			}
 			else {
 				query.append("organizationId = ?");
@@ -236,13 +234,7 @@ public class OrgLaborPersistence extends BasePersistence {
 				q.setString(queryPos++, organizationId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				OrgLaborHBM orgLaborHBM = (OrgLaborHBM)itr.next();
-				list.add(OrgLaborHBMUtil.model(orgLaborHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -267,11 +259,10 @@ public class OrgLaborPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM OrgLabor IN CLASS com.liferay.portal.service.persistence.OrgLaborHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
 
 			if (organizationId == null) {
-				query.append("organizationId is null");
+				query.append("organizationId IS NULL");
 			}
 			else {
 				query.append("organizationId = ?");
@@ -295,15 +286,7 @@ public class OrgLaborPersistence extends BasePersistence {
 				q.setString(queryPos++, organizationId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				OrgLaborHBM orgLaborHBM = (OrgLaborHBM)itr.next();
-				list.add(OrgLaborHBMUtil.model(orgLaborHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -313,9 +296,8 @@ public class OrgLaborPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.OrgLabor findByOrganizationId_First(
-		String organizationId, OrderByComparator obc)
-		throws NoSuchOrgLaborException, SystemException {
+	public OrgLabor findByOrganizationId_First(String organizationId,
+		OrderByComparator obc) throws NoSuchOrgLaborException, SystemException {
 		List list = findByOrganizationId(organizationId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -327,13 +309,12 @@ public class OrgLaborPersistence extends BasePersistence {
 			throw new NoSuchOrgLaborException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.OrgLabor)list.get(0);
+			return (OrgLabor)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.OrgLabor findByOrganizationId_Last(
-		String organizationId, OrderByComparator obc)
-		throws NoSuchOrgLaborException, SystemException {
+	public OrgLabor findByOrganizationId_Last(String organizationId,
+		OrderByComparator obc) throws NoSuchOrgLaborException, SystemException {
 		int count = countByOrganizationId(organizationId);
 		List list = findByOrganizationId(organizationId, count - 1, count, obc);
 
@@ -346,14 +327,14 @@ public class OrgLaborPersistence extends BasePersistence {
 			throw new NoSuchOrgLaborException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.OrgLabor)list.get(0);
+			return (OrgLabor)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.OrgLabor[] findByOrganizationId_PrevAndNext(
-		String orgLaborId, String organizationId, OrderByComparator obc)
+	public OrgLabor[] findByOrganizationId_PrevAndNext(String orgLaborId,
+		String organizationId, OrderByComparator obc)
 		throws NoSuchOrgLaborException, SystemException {
-		com.liferay.portal.model.OrgLabor orgLabor = findByPrimaryKey(orgLaborId);
+		OrgLabor orgLabor = findByPrimaryKey(orgLaborId);
 		int count = countByOrganizationId(organizationId);
 		Session session = null;
 
@@ -361,11 +342,10 @@ public class OrgLaborPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM OrgLabor IN CLASS com.liferay.portal.service.persistence.OrgLaborHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
 
 			if (organizationId == null) {
-				query.append("organizationId is null");
+				query.append("organizationId IS NULL");
 			}
 			else {
 				query.append("organizationId = ?");
@@ -389,12 +369,11 @@ public class OrgLaborPersistence extends BasePersistence {
 				q.setString(queryPos++, organizationId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					orgLabor, OrgLaborHBMUtil.getInstance());
-			com.liferay.portal.model.OrgLabor[] array = new com.liferay.portal.model.OrgLabor[3];
-			array[0] = (com.liferay.portal.model.OrgLabor)objArray[0];
-			array[1] = (com.liferay.portal.model.OrgLabor)objArray[1];
-			array[2] = (com.liferay.portal.model.OrgLabor)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, orgLabor);
+			OrgLabor[] array = new OrgLabor[3];
+			array[0] = (OrgLabor)objArray[0];
+			array[1] = (OrgLabor)objArray[1];
+			array[2] = (OrgLabor)objArray[2];
 
 			return array;
 		}
@@ -413,22 +392,14 @@ public class OrgLaborPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM OrgLabor IN CLASS com.liferay.portal.service.persistence.OrgLaborHBM ");
+			query.append("FROM com.liferay.portal.model.OrgLabor ");
 			query.append("ORDER BY ");
 			query.append("organizationId ASC").append(", ");
 			query.append("typeId ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				OrgLaborHBM orgLaborHBM = (OrgLaborHBM)itr.next();
-				list.add(OrgLaborHBMUtil.model(orgLaborHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -446,11 +417,10 @@ public class OrgLaborPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM OrgLabor IN CLASS com.liferay.portal.service.persistence.OrgLaborHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
 
 			if (organizationId == null) {
-				query.append("organizationId is null");
+				query.append("organizationId IS NULL");
 			}
 			else {
 				query.append("organizationId = ?");
@@ -471,8 +441,8 @@ public class OrgLaborPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				OrgLaborHBM orgLaborHBM = (OrgLaborHBM)itr.next();
-				session.delete(orgLaborHBM);
+				OrgLabor orgLabor = (OrgLabor)itr.next();
+				session.delete(orgLabor);
 			}
 
 			session.flush();
@@ -494,11 +464,10 @@ public class OrgLaborPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM OrgLabor IN CLASS com.liferay.portal.service.persistence.OrgLaborHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
 
 			if (organizationId == null) {
-				query.append("organizationId is null");
+				query.append("organizationId IS NULL");
 			}
 			else {
 				query.append("organizationId = ?");
@@ -531,6 +500,9 @@ public class OrgLaborPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(OrgLaborPersistence.class);

@@ -20,11 +20,17 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.mail.service.persistence.CyrusVirtualPersistence" class="com.liferay.mail.service.persistence.CyrusVirtualPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
 	<bean id="com.liferay.mail.service.persistence.CyrusVirtualUtil" class="com.liferay.mail.service.persistence.CyrusVirtualUtil" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
 		<property name="persistence">
 			<ref bean="com.liferay.mail.service.persistence.CyrusVirtualPersistence" />
 		</property>

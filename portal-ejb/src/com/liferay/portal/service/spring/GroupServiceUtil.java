@@ -50,14 +50,13 @@ public class GroupServiceUtil {
 		}
 	}
 
-	public static boolean addRoleGroups(java.lang.String roleId,
+	public static void addRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			GroupService groupService = GroupServiceFactory.getService();
-
-			return groupService.addRoleGroups(roleId, groupIds);
+			groupService.addRoleGroups(roleId, groupIds);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -186,14 +185,13 @@ public class GroupServiceUtil {
 		}
 	}
 
-	public static boolean unsetRoleGroups(java.lang.String roleId,
+	public static void unsetRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			GroupService groupService = GroupServiceFactory.getService();
-
-			return groupService.unsetRoleGroups(roleId, groupIds);
+			groupService.unsetRoleGroups(roleId, groupIds);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

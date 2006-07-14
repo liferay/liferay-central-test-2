@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPortletException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.util.StringPool;
@@ -48,25 +49,24 @@ import java.util.List;
  *
  */
 public class PortletPersistence extends BasePersistence {
-	public com.liferay.portal.model.Portlet create(PortletPK portletPK) {
-		PortletHBM portletHBM = new PortletHBM();
-		portletHBM.setNew(true);
-		portletHBM.setPrimaryKey(portletPK);
+	public Portlet create(PortletPK portletPK) {
+		Portlet portlet = new Portlet();
+		portlet.setNew(true);
+		portlet.setPrimaryKey(portletPK);
 
-		return PortletHBMUtil.model(portletHBM);
+		return portlet;
 	}
 
-	public com.liferay.portal.model.Portlet remove(PortletPK portletPK)
+	public Portlet remove(PortletPK portletPK)
 		throws NoSuchPortletException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			PortletHBM portletHBM = (PortletHBM)session.get(PortletHBM.class,
-					portletPK);
+			Portlet portlet = (Portlet)session.get(Portlet.class, portletPK);
 
-			if (portletHBM == null) {
+			if (portlet == null) {
 				_log.warn("No Portlet exists with the primary key " +
 					portletPK.toString());
 				throw new NoSuchPortletException(
@@ -74,10 +74,10 @@ public class PortletPersistence extends BasePersistence {
 					portletPK.toString());
 			}
 
-			session.delete(portletHBM);
+			session.delete(portlet);
 			session.flush();
 
-			return PortletHBMUtil.model(portletHBM);
+			return portlet;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -96,33 +96,33 @@ public class PortletPersistence extends BasePersistence {
 				session = openSession();
 
 				if (portlet.isNew()) {
-					PortletHBM portletHBM = new PortletHBM();
-					portletHBM.setPortletId(portlet.getPortletId());
-					portletHBM.setCompanyId(portlet.getCompanyId());
-					portletHBM.setNarrow(portlet.getNarrow());
-					portletHBM.setRoles(portlet.getRoles());
-					portletHBM.setActive(portlet.getActive());
-					session.save(portletHBM);
+					Portlet portletModel = new Portlet();
+					portletModel.setPortletId(portlet.getPortletId());
+					portletModel.setCompanyId(portlet.getCompanyId());
+					portletModel.setNarrow(portlet.getNarrow());
+					portletModel.setRoles(portlet.getRoles());
+					portletModel.setActive(portlet.getActive());
+					session.save(portletModel);
 					session.flush();
 				}
 				else {
-					PortletHBM portletHBM = (PortletHBM)session.get(PortletHBM.class,
+					Portlet portletModel = (Portlet)session.get(Portlet.class,
 							portlet.getPrimaryKey());
 
-					if (portletHBM != null) {
-						portletHBM.setNarrow(portlet.getNarrow());
-						portletHBM.setRoles(portlet.getRoles());
-						portletHBM.setActive(portlet.getActive());
+					if (portletModel != null) {
+						portletModel.setNarrow(portlet.getNarrow());
+						portletModel.setRoles(portlet.getRoles());
+						portletModel.setActive(portlet.getActive());
 						session.flush();
 					}
 					else {
-						portletHBM = new PortletHBM();
-						portletHBM.setPortletId(portlet.getPortletId());
-						portletHBM.setCompanyId(portlet.getCompanyId());
-						portletHBM.setNarrow(portlet.getNarrow());
-						portletHBM.setRoles(portlet.getRoles());
-						portletHBM.setActive(portlet.getActive());
-						session.save(portletHBM);
+						portletModel = new Portlet();
+						portletModel.setPortletId(portlet.getPortletId());
+						portletModel.setCompanyId(portlet.getCompanyId());
+						portletModel.setNarrow(portlet.getNarrow());
+						portletModel.setRoles(portlet.getRoles());
+						portletModel.setActive(portlet.getActive());
+						session.save(portletModel);
 						session.flush();
 					}
 				}
@@ -141,17 +141,16 @@ public class PortletPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Portlet findByPrimaryKey(
-		PortletPK portletPK) throws NoSuchPortletException, SystemException {
+	public Portlet findByPrimaryKey(PortletPK portletPK)
+		throws NoSuchPortletException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			PortletHBM portletHBM = (PortletHBM)session.get(PortletHBM.class,
-					portletPK);
+			Portlet portlet = (Portlet)session.get(Portlet.class, portletPK);
 
-			if (portletHBM == null) {
+			if (portlet == null) {
 				_log.warn("No Portlet exists with the primary key " +
 					portletPK.toString());
 				throw new NoSuchPortletException(
@@ -159,7 +158,7 @@ public class PortletPersistence extends BasePersistence {
 					portletPK.toString());
 			}
 
-			return PortletHBMUtil.model(portletHBM);
+			return portlet;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -176,11 +175,10 @@ public class PortletPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Portlet IN CLASS com.liferay.portal.service.persistence.PortletHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Portlet WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -195,13 +193,7 @@ public class PortletPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				PortletHBM portletHBM = (PortletHBM)itr.next();
-				list.add(PortletHBMUtil.model(portletHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -226,11 +218,10 @@ public class PortletPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Portlet IN CLASS com.liferay.portal.service.persistence.PortletHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Portlet WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -249,15 +240,7 @@ public class PortletPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				PortletHBM portletHBM = (PortletHBM)itr.next();
-				list.add(PortletHBMUtil.model(portletHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -267,8 +250,7 @@ public class PortletPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Portlet findByCompanyId_First(
-		String companyId, OrderByComparator obc)
+	public Portlet findByCompanyId_First(String companyId, OrderByComparator obc)
 		throws NoSuchPortletException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
@@ -281,12 +263,11 @@ public class PortletPersistence extends BasePersistence {
 			throw new NoSuchPortletException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Portlet)list.get(0);
+			return (Portlet)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Portlet findByCompanyId_Last(
-		String companyId, OrderByComparator obc)
+	public Portlet findByCompanyId_Last(String companyId, OrderByComparator obc)
 		throws NoSuchPortletException, SystemException {
 		int count = countByCompanyId(companyId);
 		List list = findByCompanyId(companyId, count - 1, count, obc);
@@ -300,14 +281,14 @@ public class PortletPersistence extends BasePersistence {
 			throw new NoSuchPortletException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Portlet)list.get(0);
+			return (Portlet)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Portlet[] findByCompanyId_PrevAndNext(
-		PortletPK portletPK, String companyId, OrderByComparator obc)
+	public Portlet[] findByCompanyId_PrevAndNext(PortletPK portletPK,
+		String companyId, OrderByComparator obc)
 		throws NoSuchPortletException, SystemException {
-		com.liferay.portal.model.Portlet portlet = findByPrimaryKey(portletPK);
+		Portlet portlet = findByPrimaryKey(portletPK);
 		int count = countByCompanyId(companyId);
 		Session session = null;
 
@@ -315,11 +296,10 @@ public class PortletPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Portlet IN CLASS com.liferay.portal.service.persistence.PortletHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Portlet WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -338,12 +318,11 @@ public class PortletPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					portlet, PortletHBMUtil.getInstance());
-			com.liferay.portal.model.Portlet[] array = new com.liferay.portal.model.Portlet[3];
-			array[0] = (com.liferay.portal.model.Portlet)objArray[0];
-			array[1] = (com.liferay.portal.model.Portlet)objArray[1];
-			array[2] = (com.liferay.portal.model.Portlet)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, portlet);
+			Portlet[] array = new Portlet[3];
+			array[0] = (Portlet)objArray[0];
+			array[1] = (Portlet)objArray[1];
+			array[2] = (Portlet)objArray[2];
 
 			return array;
 		}
@@ -362,19 +341,11 @@ public class PortletPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Portlet IN CLASS com.liferay.portal.service.persistence.PortletHBM ");
+			query.append("FROM com.liferay.portal.model.Portlet ");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				PortletHBM portletHBM = (PortletHBM)itr.next();
-				list.add(PortletHBMUtil.model(portletHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -391,11 +362,10 @@ public class PortletPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Portlet IN CLASS com.liferay.portal.service.persistence.PortletHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Portlet WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -413,8 +383,8 @@ public class PortletPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				PortletHBM portletHBM = (PortletHBM)itr.next();
-				session.delete(portletHBM);
+				Portlet portlet = (Portlet)itr.next();
+				session.delete(portlet);
 			}
 
 			session.flush();
@@ -435,11 +405,10 @@ public class PortletPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Portlet IN CLASS com.liferay.portal.service.persistence.PortletHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Portlet WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -472,6 +441,9 @@ public class PortletPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(PortletPersistence.class);

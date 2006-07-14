@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchWebsiteException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Website;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.util.StringPool;
@@ -48,25 +49,24 @@ import java.util.List;
  *
  */
 public class WebsitePersistence extends BasePersistence {
-	public com.liferay.portal.model.Website create(String websiteId) {
-		WebsiteHBM websiteHBM = new WebsiteHBM();
-		websiteHBM.setNew(true);
-		websiteHBM.setPrimaryKey(websiteId);
+	public Website create(String websiteId) {
+		Website website = new Website();
+		website.setNew(true);
+		website.setPrimaryKey(websiteId);
 
-		return WebsiteHBMUtil.model(websiteHBM);
+		return website;
 	}
 
-	public com.liferay.portal.model.Website remove(String websiteId)
+	public Website remove(String websiteId)
 		throws NoSuchWebsiteException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			WebsiteHBM websiteHBM = (WebsiteHBM)session.get(WebsiteHBM.class,
-					websiteId);
+			Website website = (Website)session.get(Website.class, websiteId);
 
-			if (websiteHBM == null) {
+			if (website == null) {
 				_log.warn("No Website exists with the primary key " +
 					websiteId.toString());
 				throw new NoSuchWebsiteException(
@@ -74,10 +74,10 @@ public class WebsitePersistence extends BasePersistence {
 					websiteId.toString());
 			}
 
-			session.delete(websiteHBM);
+			session.delete(website);
 			session.flush();
 
-			return WebsiteHBMUtil.model(websiteHBM);
+			return website;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -96,52 +96,52 @@ public class WebsitePersistence extends BasePersistence {
 				session = openSession();
 
 				if (website.isNew()) {
-					WebsiteHBM websiteHBM = new WebsiteHBM();
-					websiteHBM.setWebsiteId(website.getWebsiteId());
-					websiteHBM.setCompanyId(website.getCompanyId());
-					websiteHBM.setUserId(website.getUserId());
-					websiteHBM.setUserName(website.getUserName());
-					websiteHBM.setCreateDate(website.getCreateDate());
-					websiteHBM.setModifiedDate(website.getModifiedDate());
-					websiteHBM.setClassName(website.getClassName());
-					websiteHBM.setClassPK(website.getClassPK());
-					websiteHBM.setUrl(website.getUrl());
-					websiteHBM.setTypeId(website.getTypeId());
-					websiteHBM.setPrimary(website.getPrimary());
-					session.save(websiteHBM);
+					Website websiteModel = new Website();
+					websiteModel.setWebsiteId(website.getWebsiteId());
+					websiteModel.setCompanyId(website.getCompanyId());
+					websiteModel.setUserId(website.getUserId());
+					websiteModel.setUserName(website.getUserName());
+					websiteModel.setCreateDate(website.getCreateDate());
+					websiteModel.setModifiedDate(website.getModifiedDate());
+					websiteModel.setClassName(website.getClassName());
+					websiteModel.setClassPK(website.getClassPK());
+					websiteModel.setUrl(website.getUrl());
+					websiteModel.setTypeId(website.getTypeId());
+					websiteModel.setPrimary(website.getPrimary());
+					session.save(websiteModel);
 					session.flush();
 				}
 				else {
-					WebsiteHBM websiteHBM = (WebsiteHBM)session.get(WebsiteHBM.class,
+					Website websiteModel = (Website)session.get(Website.class,
 							website.getPrimaryKey());
 
-					if (websiteHBM != null) {
-						websiteHBM.setCompanyId(website.getCompanyId());
-						websiteHBM.setUserId(website.getUserId());
-						websiteHBM.setUserName(website.getUserName());
-						websiteHBM.setCreateDate(website.getCreateDate());
-						websiteHBM.setModifiedDate(website.getModifiedDate());
-						websiteHBM.setClassName(website.getClassName());
-						websiteHBM.setClassPK(website.getClassPK());
-						websiteHBM.setUrl(website.getUrl());
-						websiteHBM.setTypeId(website.getTypeId());
-						websiteHBM.setPrimary(website.getPrimary());
+					if (websiteModel != null) {
+						websiteModel.setCompanyId(website.getCompanyId());
+						websiteModel.setUserId(website.getUserId());
+						websiteModel.setUserName(website.getUserName());
+						websiteModel.setCreateDate(website.getCreateDate());
+						websiteModel.setModifiedDate(website.getModifiedDate());
+						websiteModel.setClassName(website.getClassName());
+						websiteModel.setClassPK(website.getClassPK());
+						websiteModel.setUrl(website.getUrl());
+						websiteModel.setTypeId(website.getTypeId());
+						websiteModel.setPrimary(website.getPrimary());
 						session.flush();
 					}
 					else {
-						websiteHBM = new WebsiteHBM();
-						websiteHBM.setWebsiteId(website.getWebsiteId());
-						websiteHBM.setCompanyId(website.getCompanyId());
-						websiteHBM.setUserId(website.getUserId());
-						websiteHBM.setUserName(website.getUserName());
-						websiteHBM.setCreateDate(website.getCreateDate());
-						websiteHBM.setModifiedDate(website.getModifiedDate());
-						websiteHBM.setClassName(website.getClassName());
-						websiteHBM.setClassPK(website.getClassPK());
-						websiteHBM.setUrl(website.getUrl());
-						websiteHBM.setTypeId(website.getTypeId());
-						websiteHBM.setPrimary(website.getPrimary());
-						session.save(websiteHBM);
+						websiteModel = new Website();
+						websiteModel.setWebsiteId(website.getWebsiteId());
+						websiteModel.setCompanyId(website.getCompanyId());
+						websiteModel.setUserId(website.getUserId());
+						websiteModel.setUserName(website.getUserName());
+						websiteModel.setCreateDate(website.getCreateDate());
+						websiteModel.setModifiedDate(website.getModifiedDate());
+						websiteModel.setClassName(website.getClassName());
+						websiteModel.setClassPK(website.getClassPK());
+						websiteModel.setUrl(website.getUrl());
+						websiteModel.setTypeId(website.getTypeId());
+						websiteModel.setPrimary(website.getPrimary());
+						session.save(websiteModel);
 						session.flush();
 					}
 				}
@@ -160,17 +160,16 @@ public class WebsitePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Website findByPrimaryKey(String websiteId)
+	public Website findByPrimaryKey(String websiteId)
 		throws NoSuchWebsiteException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			WebsiteHBM websiteHBM = (WebsiteHBM)session.get(WebsiteHBM.class,
-					websiteId);
+			Website website = (Website)session.get(Website.class, websiteId);
 
-			if (websiteHBM == null) {
+			if (website == null) {
 				_log.warn("No Website exists with the primary key " +
 					websiteId.toString());
 				throw new NoSuchWebsiteException(
@@ -178,7 +177,7 @@ public class WebsitePersistence extends BasePersistence {
 					websiteId.toString());
 			}
 
-			return WebsiteHBMUtil.model(websiteHBM);
+			return website;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -195,11 +194,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -216,13 +214,7 @@ public class WebsitePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				WebsiteHBM websiteHBM = (WebsiteHBM)itr.next();
-				list.add(WebsiteHBMUtil.model(websiteHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -247,11 +239,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -274,15 +265,7 @@ public class WebsitePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				WebsiteHBM websiteHBM = (WebsiteHBM)itr.next();
-				list.add(WebsiteHBMUtil.model(websiteHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -292,8 +275,7 @@ public class WebsitePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Website findByCompanyId_First(
-		String companyId, OrderByComparator obc)
+	public Website findByCompanyId_First(String companyId, OrderByComparator obc)
 		throws NoSuchWebsiteException, SystemException {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
@@ -306,12 +288,11 @@ public class WebsitePersistence extends BasePersistence {
 			throw new NoSuchWebsiteException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Website)list.get(0);
+			return (Website)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Website findByCompanyId_Last(
-		String companyId, OrderByComparator obc)
+	public Website findByCompanyId_Last(String companyId, OrderByComparator obc)
 		throws NoSuchWebsiteException, SystemException {
 		int count = countByCompanyId(companyId);
 		List list = findByCompanyId(companyId, count - 1, count, obc);
@@ -325,14 +306,14 @@ public class WebsitePersistence extends BasePersistence {
 			throw new NoSuchWebsiteException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Website)list.get(0);
+			return (Website)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Website[] findByCompanyId_PrevAndNext(
-		String websiteId, String companyId, OrderByComparator obc)
+	public Website[] findByCompanyId_PrevAndNext(String websiteId,
+		String companyId, OrderByComparator obc)
 		throws NoSuchWebsiteException, SystemException {
-		com.liferay.portal.model.Website website = findByPrimaryKey(websiteId);
+		Website website = findByPrimaryKey(websiteId);
 		int count = countByCompanyId(companyId);
 		Session session = null;
 
@@ -340,11 +321,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -367,12 +347,11 @@ public class WebsitePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					website, WebsiteHBMUtil.getInstance());
-			com.liferay.portal.model.Website[] array = new com.liferay.portal.model.Website[3];
-			array[0] = (com.liferay.portal.model.Website)objArray[0];
-			array[1] = (com.liferay.portal.model.Website)objArray[1];
-			array[2] = (com.liferay.portal.model.Website)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, website);
+			Website[] array = new Website[3];
+			array[0] = (Website)objArray[0];
+			array[1] = (Website)objArray[1];
+			array[2] = (Website)objArray[2];
 
 			return array;
 		}
@@ -391,11 +370,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -412,13 +390,7 @@ public class WebsitePersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				WebsiteHBM websiteHBM = (WebsiteHBM)itr.next();
-				list.add(WebsiteHBMUtil.model(websiteHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -443,11 +415,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -470,15 +441,7 @@ public class WebsitePersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				WebsiteHBM websiteHBM = (WebsiteHBM)itr.next();
-				list.add(WebsiteHBMUtil.model(websiteHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -488,8 +451,8 @@ public class WebsitePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Website findByUserId_First(String userId,
-		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
+	public Website findByUserId_First(String userId, OrderByComparator obc)
+		throws NoSuchWebsiteException, SystemException {
 		List list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -501,12 +464,12 @@ public class WebsitePersistence extends BasePersistence {
 			throw new NoSuchWebsiteException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Website)list.get(0);
+			return (Website)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Website findByUserId_Last(String userId,
-		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
+	public Website findByUserId_Last(String userId, OrderByComparator obc)
+		throws NoSuchWebsiteException, SystemException {
 		int count = countByUserId(userId);
 		List list = findByUserId(userId, count - 1, count, obc);
 
@@ -519,14 +482,13 @@ public class WebsitePersistence extends BasePersistence {
 			throw new NoSuchWebsiteException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Website)list.get(0);
+			return (Website)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Website[] findByUserId_PrevAndNext(
-		String websiteId, String userId, OrderByComparator obc)
-		throws NoSuchWebsiteException, SystemException {
-		com.liferay.portal.model.Website website = findByPrimaryKey(websiteId);
+	public Website[] findByUserId_PrevAndNext(String websiteId, String userId,
+		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
+		Website website = findByPrimaryKey(websiteId);
 		int count = countByUserId(userId);
 		Session session = null;
 
@@ -534,11 +496,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -561,12 +522,11 @@ public class WebsitePersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					website, WebsiteHBMUtil.getInstance());
-			com.liferay.portal.model.Website[] array = new com.liferay.portal.model.Website[3];
-			array[0] = (com.liferay.portal.model.Website)objArray[0];
-			array[1] = (com.liferay.portal.model.Website)objArray[1];
-			array[2] = (com.liferay.portal.model.Website)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, website);
+			Website[] array = new Website[3];
+			array[0] = (Website)objArray[0];
+			array[1] = (Website)objArray[1];
+			array[2] = (Website)objArray[2];
 
 			return array;
 		}
@@ -586,11 +546,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -599,7 +558,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -620,13 +579,7 @@ public class WebsitePersistence extends BasePersistence {
 				q.setString(queryPos++, className);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				WebsiteHBM websiteHBM = (WebsiteHBM)itr.next();
-				list.add(WebsiteHBMUtil.model(websiteHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -651,11 +604,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -664,7 +616,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -691,15 +643,7 @@ public class WebsitePersistence extends BasePersistence {
 				q.setString(queryPos++, className);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				WebsiteHBM websiteHBM = (WebsiteHBM)itr.next();
-				list.add(WebsiteHBMUtil.model(websiteHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -709,9 +653,8 @@ public class WebsitePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Website findByC_C_First(String companyId,
-		String className, OrderByComparator obc)
-		throws NoSuchWebsiteException, SystemException {
+	public Website findByC_C_First(String companyId, String className,
+		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
 		List list = findByC_C(companyId, className, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -726,13 +669,12 @@ public class WebsitePersistence extends BasePersistence {
 			throw new NoSuchWebsiteException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Website)list.get(0);
+			return (Website)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Website findByC_C_Last(String companyId,
-		String className, OrderByComparator obc)
-		throws NoSuchWebsiteException, SystemException {
+	public Website findByC_C_Last(String companyId, String className,
+		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
 		int count = countByC_C(companyId, className);
 		List list = findByC_C(companyId, className, count - 1, count, obc);
 
@@ -748,14 +690,14 @@ public class WebsitePersistence extends BasePersistence {
 			throw new NoSuchWebsiteException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Website)list.get(0);
+			return (Website)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Website[] findByC_C_PrevAndNext(
-		String websiteId, String companyId, String className,
-		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
-		com.liferay.portal.model.Website website = findByPrimaryKey(websiteId);
+	public Website[] findByC_C_PrevAndNext(String websiteId, String companyId,
+		String className, OrderByComparator obc)
+		throws NoSuchWebsiteException, SystemException {
+		Website website = findByPrimaryKey(websiteId);
 		int count = countByC_C(companyId, className);
 		Session session = null;
 
@@ -763,11 +705,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -776,7 +717,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -803,12 +744,11 @@ public class WebsitePersistence extends BasePersistence {
 				q.setString(queryPos++, className);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					website, WebsiteHBMUtil.getInstance());
-			com.liferay.portal.model.Website[] array = new com.liferay.portal.model.Website[3];
-			array[0] = (com.liferay.portal.model.Website)objArray[0];
-			array[1] = (com.liferay.portal.model.Website)objArray[1];
-			array[2] = (com.liferay.portal.model.Website)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, website);
+			Website[] array = new Website[3];
+			array[0] = (Website)objArray[0];
+			array[1] = (Website)objArray[1];
+			array[2] = (Website)objArray[2];
 
 			return array;
 		}
@@ -828,11 +768,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -841,7 +780,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -850,7 +789,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -875,13 +814,7 @@ public class WebsitePersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				WebsiteHBM websiteHBM = (WebsiteHBM)itr.next();
-				list.add(WebsiteHBMUtil.model(websiteHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -906,11 +839,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -919,7 +851,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -928,7 +860,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -959,15 +891,7 @@ public class WebsitePersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				WebsiteHBM websiteHBM = (WebsiteHBM)itr.next();
-				list.add(WebsiteHBMUtil.model(websiteHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -977,9 +901,9 @@ public class WebsitePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Website findByC_C_C_First(
-		String companyId, String className, String classPK,
-		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
+	public Website findByC_C_C_First(String companyId, String className,
+		String classPK, OrderByComparator obc)
+		throws NoSuchWebsiteException, SystemException {
 		List list = findByC_C_C(companyId, className, classPK, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -997,12 +921,12 @@ public class WebsitePersistence extends BasePersistence {
 			throw new NoSuchWebsiteException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Website)list.get(0);
+			return (Website)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Website findByC_C_C_Last(String companyId,
-		String className, String classPK, OrderByComparator obc)
+	public Website findByC_C_C_Last(String companyId, String className,
+		String classPK, OrderByComparator obc)
 		throws NoSuchWebsiteException, SystemException {
 		int count = countByC_C_C(companyId, className, classPK);
 		List list = findByC_C_C(companyId, className, classPK, count - 1,
@@ -1023,14 +947,14 @@ public class WebsitePersistence extends BasePersistence {
 			throw new NoSuchWebsiteException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Website)list.get(0);
+			return (Website)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Website[] findByC_C_C_PrevAndNext(
-		String websiteId, String companyId, String className, String classPK,
+	public Website[] findByC_C_C_PrevAndNext(String websiteId,
+		String companyId, String className, String classPK,
 		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
-		com.liferay.portal.model.Website website = findByPrimaryKey(websiteId);
+		Website website = findByPrimaryKey(websiteId);
 		int count = countByC_C_C(companyId, className, classPK);
 		Session session = null;
 
@@ -1038,11 +962,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1051,7 +974,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1060,7 +983,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1091,12 +1014,11 @@ public class WebsitePersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					website, WebsiteHBMUtil.getInstance());
-			com.liferay.portal.model.Website[] array = new com.liferay.portal.model.Website[3];
-			array[0] = (com.liferay.portal.model.Website)objArray[0];
-			array[1] = (com.liferay.portal.model.Website)objArray[1];
-			array[2] = (com.liferay.portal.model.Website)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, website);
+			Website[] array = new Website[3];
+			array[0] = (Website)objArray[0];
+			array[1] = (Website)objArray[1];
+			array[2] = (Website)objArray[2];
 
 			return array;
 		}
@@ -1116,11 +1038,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1129,7 +1050,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1138,7 +1059,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1167,13 +1088,7 @@ public class WebsitePersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, primary);
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				WebsiteHBM websiteHBM = (WebsiteHBM)itr.next();
-				list.add(WebsiteHBMUtil.model(websiteHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -1201,11 +1116,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1214,7 +1128,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1223,7 +1137,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1258,15 +1172,7 @@ public class WebsitePersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, primary);
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				WebsiteHBM websiteHBM = (WebsiteHBM)itr.next();
-				list.add(WebsiteHBMUtil.model(websiteHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1276,9 +1182,9 @@ public class WebsitePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Website findByC_C_C_P_First(
-		String companyId, String className, String classPK, boolean primary,
-		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
+	public Website findByC_C_C_P_First(String companyId, String className,
+		String classPK, boolean primary, OrderByComparator obc)
+		throws NoSuchWebsiteException, SystemException {
 		List list = findByC_C_C_P(companyId, className, classPK, primary, 0, 1,
 				obc);
 
@@ -1300,13 +1206,13 @@ public class WebsitePersistence extends BasePersistence {
 			throw new NoSuchWebsiteException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Website)list.get(0);
+			return (Website)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Website findByC_C_C_P_Last(
-		String companyId, String className, String classPK, boolean primary,
-		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
+	public Website findByC_C_C_P_Last(String companyId, String className,
+		String classPK, boolean primary, OrderByComparator obc)
+		throws NoSuchWebsiteException, SystemException {
 		int count = countByC_C_C_P(companyId, className, classPK, primary);
 		List list = findByC_C_C_P(companyId, className, classPK, primary,
 				count - 1, count, obc);
@@ -1329,15 +1235,14 @@ public class WebsitePersistence extends BasePersistence {
 			throw new NoSuchWebsiteException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.Website)list.get(0);
+			return (Website)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.Website[] findByC_C_C_P_PrevAndNext(
-		String websiteId, String companyId, String className, String classPK,
-		boolean primary, OrderByComparator obc)
-		throws NoSuchWebsiteException, SystemException {
-		com.liferay.portal.model.Website website = findByPrimaryKey(websiteId);
+	public Website[] findByC_C_C_P_PrevAndNext(String websiteId,
+		String companyId, String className, String classPK, boolean primary,
+		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
+		Website website = findByPrimaryKey(websiteId);
 		int count = countByC_C_C_P(companyId, className, classPK, primary);
 		Session session = null;
 
@@ -1345,11 +1250,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1358,7 +1262,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1367,7 +1271,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1402,12 +1306,11 @@ public class WebsitePersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, primary);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					website, WebsiteHBMUtil.getInstance());
-			com.liferay.portal.model.Website[] array = new com.liferay.portal.model.Website[3];
-			array[0] = (com.liferay.portal.model.Website)objArray[0];
-			array[1] = (com.liferay.portal.model.Website)objArray[1];
-			array[2] = (com.liferay.portal.model.Website)objArray[2];
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, website);
+			Website[] array = new Website[3];
+			array[0] = (Website)objArray[0];
+			array[1] = (Website)objArray[1];
+			array[2] = (Website)objArray[2];
 
 			return array;
 		}
@@ -1426,21 +1329,13 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM ");
+			query.append("FROM com.liferay.portal.model.Website ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				WebsiteHBM websiteHBM = (WebsiteHBM)itr.next();
-				list.add(WebsiteHBMUtil.model(websiteHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1457,11 +1352,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1481,8 +1375,8 @@ public class WebsitePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				WebsiteHBM websiteHBM = (WebsiteHBM)itr.next();
-				session.delete(websiteHBM);
+				Website website = (Website)itr.next();
+				session.delete(website);
 			}
 
 			session.flush();
@@ -1502,11 +1396,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -1526,8 +1419,8 @@ public class WebsitePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				WebsiteHBM websiteHBM = (WebsiteHBM)itr.next();
-				session.delete(websiteHBM);
+				Website website = (Website)itr.next();
+				session.delete(website);
 			}
 
 			session.flush();
@@ -1548,11 +1441,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1561,7 +1453,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1585,8 +1477,8 @@ public class WebsitePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				WebsiteHBM websiteHBM = (WebsiteHBM)itr.next();
-				session.delete(websiteHBM);
+				Website website = (Website)itr.next();
+				session.delete(website);
 			}
 
 			session.flush();
@@ -1607,11 +1499,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1620,7 +1511,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1629,7 +1520,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1657,8 +1548,8 @@ public class WebsitePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				WebsiteHBM websiteHBM = (WebsiteHBM)itr.next();
-				session.delete(websiteHBM);
+				Website website = (Website)itr.next();
+				session.delete(website);
 			}
 
 			session.flush();
@@ -1679,11 +1570,10 @@ public class WebsitePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1692,7 +1582,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1701,7 +1591,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1733,8 +1623,8 @@ public class WebsitePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				WebsiteHBM websiteHBM = (WebsiteHBM)itr.next();
-				session.delete(websiteHBM);
+				Website website = (Website)itr.next();
+				session.delete(website);
 			}
 
 			session.flush();
@@ -1755,11 +1645,10 @@ public class WebsitePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1802,11 +1691,10 @@ public class WebsitePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -1850,11 +1738,10 @@ public class WebsitePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1863,7 +1750,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1911,11 +1798,10 @@ public class WebsitePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1924,7 +1810,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -1933,7 +1819,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -1985,11 +1871,10 @@ public class WebsitePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM Website IN CLASS com.liferay.portal.service.persistence.WebsiteHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.Website WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1998,7 +1883,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (className == null) {
-				query.append("className is null");
+				query.append("className IS NULL");
 			}
 			else {
 				query.append("className = ?");
@@ -2007,7 +1892,7 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (classPK == null) {
-				query.append("classPK is null");
+				query.append("classPK IS NULL");
 			}
 			else {
 				query.append("classPK = ?");
@@ -2052,6 +1937,9 @@ public class WebsitePersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(WebsitePersistence.class);

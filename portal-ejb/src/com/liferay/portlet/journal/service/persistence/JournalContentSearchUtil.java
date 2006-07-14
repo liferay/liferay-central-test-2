@@ -344,6 +344,10 @@ public class JournalContentSearchUtil {
 		return getPersistence().countByC_A(companyId, articleId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static JournalContentSearchPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		JournalContentSearchUtil util = (JournalContentSearchUtil)ctx.getBean(CLASS_NAME);

@@ -412,6 +412,10 @@ public class WebsiteUtil {
 			primary);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static WebsitePersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		WebsiteUtil util = (WebsiteUtil)ctx.getBean(CLASS_NAME);

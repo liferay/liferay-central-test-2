@@ -48,11 +48,11 @@ public class UserGroupLocalServiceEJBImpl implements UserGroupLocalService,
 		return (UserGroupLocalService)ctx.getBean(CLASS_NAME);
 	}
 
-	public boolean addGroupUserGroups(java.lang.String groupId,
+	public void addGroupUserGroups(java.lang.String groupId,
 		java.lang.String[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addGroupUserGroups(groupId, userGroupIds);
+		getService().addGroupUserGroups(groupId, userGroupIds);
 	}
 
 	public com.liferay.portal.model.UserGroup addUserGroup(
@@ -103,11 +103,11 @@ public class UserGroupLocalServiceEJBImpl implements UserGroupLocalService,
 		return getService().searchCount(companyId, name, description, params);
 	}
 
-	public boolean unsetGroupUserGroups(java.lang.String groupId,
+	public void unsetGroupUserGroups(java.lang.String groupId,
 		java.lang.String[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().unsetGroupUserGroups(groupId, userGroupIds);
+		getService().unsetGroupUserGroups(groupId, userGroupIds);
 	}
 
 	public com.liferay.portal.model.UserGroup updateUserGroup(

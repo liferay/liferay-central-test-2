@@ -147,6 +147,7 @@
 --%><%@ page import="com.liferay.util.cal.Recurrence" %><%--
 --%><%@ page import="com.liferay.util.dao.DAOParamUtil" %><%--
 --%><%@ page import="com.liferay.util.dao.hibernate.OrderByComparator" %><%--
+--%><%@ page import="com.liferay.util.dao.hibernate.QueryUtil" %><%--
 --%><%@ page import="com.liferay.util.dao.search.ResultRow" %><%--
 --%><%@ page import="com.liferay.util.dao.search.RowChecker" %><%--
 --%><%@ page import="com.liferay.util.dao.search.SearchContainer" %><%--

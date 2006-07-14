@@ -184,6 +184,10 @@ public class DLFileVersionUtil {
 		return getPersistence().countByF_N(folderId, name);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static DLFileVersionPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		DLFileVersionUtil util = (DLFileVersionUtil)ctx.getBean(CLASS_NAME);

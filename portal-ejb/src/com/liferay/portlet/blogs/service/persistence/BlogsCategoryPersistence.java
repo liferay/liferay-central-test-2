@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.blogs.NoSuchCategoryException;
+import com.liferay.portlet.blogs.model.BlogsCategory;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,26 +50,25 @@ import java.util.List;
  *
  */
 public class BlogsCategoryPersistence extends BasePersistence {
-	public com.liferay.portlet.blogs.model.BlogsCategory create(
-		String categoryId) {
-		BlogsCategoryHBM blogsCategoryHBM = new BlogsCategoryHBM();
-		blogsCategoryHBM.setNew(true);
-		blogsCategoryHBM.setPrimaryKey(categoryId);
+	public BlogsCategory create(String categoryId) {
+		BlogsCategory blogsCategory = new BlogsCategory();
+		blogsCategory.setNew(true);
+		blogsCategory.setPrimaryKey(categoryId);
 
-		return BlogsCategoryHBMUtil.model(blogsCategoryHBM);
+		return blogsCategory;
 	}
 
-	public com.liferay.portlet.blogs.model.BlogsCategory remove(
-		String categoryId) throws NoSuchCategoryException, SystemException {
+	public BlogsCategory remove(String categoryId)
+		throws NoSuchCategoryException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			BlogsCategoryHBM blogsCategoryHBM = (BlogsCategoryHBM)session.get(BlogsCategoryHBM.class,
+			BlogsCategory blogsCategory = (BlogsCategory)session.get(BlogsCategory.class,
 					categoryId);
 
-			if (blogsCategoryHBM == null) {
+			if (blogsCategory == null) {
 				_log.warn("No BlogsCategory exists with the primary key " +
 					categoryId.toString());
 				throw new NoSuchCategoryException(
@@ -76,10 +76,10 @@ public class BlogsCategoryPersistence extends BasePersistence {
 					categoryId.toString());
 			}
 
-			session.delete(blogsCategoryHBM);
+			session.delete(blogsCategory);
 			session.flush();
 
-			return BlogsCategoryHBMUtil.model(blogsCategoryHBM);
+			return blogsCategory;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -99,46 +99,46 @@ public class BlogsCategoryPersistence extends BasePersistence {
 				session = openSession();
 
 				if (blogsCategory.isNew()) {
-					BlogsCategoryHBM blogsCategoryHBM = new BlogsCategoryHBM();
-					blogsCategoryHBM.setCategoryId(blogsCategory.getCategoryId());
-					blogsCategoryHBM.setCompanyId(blogsCategory.getCompanyId());
-					blogsCategoryHBM.setUserId(blogsCategory.getUserId());
-					blogsCategoryHBM.setUserName(blogsCategory.getUserName());
-					blogsCategoryHBM.setCreateDate(blogsCategory.getCreateDate());
-					blogsCategoryHBM.setModifiedDate(blogsCategory.getModifiedDate());
-					blogsCategoryHBM.setParentCategoryId(blogsCategory.getParentCategoryId());
-					blogsCategoryHBM.setName(blogsCategory.getName());
-					blogsCategoryHBM.setDescription(blogsCategory.getDescription());
-					session.save(blogsCategoryHBM);
+					BlogsCategory blogsCategoryModel = new BlogsCategory();
+					blogsCategoryModel.setCategoryId(blogsCategory.getCategoryId());
+					blogsCategoryModel.setCompanyId(blogsCategory.getCompanyId());
+					blogsCategoryModel.setUserId(blogsCategory.getUserId());
+					blogsCategoryModel.setUserName(blogsCategory.getUserName());
+					blogsCategoryModel.setCreateDate(blogsCategory.getCreateDate());
+					blogsCategoryModel.setModifiedDate(blogsCategory.getModifiedDate());
+					blogsCategoryModel.setParentCategoryId(blogsCategory.getParentCategoryId());
+					blogsCategoryModel.setName(blogsCategory.getName());
+					blogsCategoryModel.setDescription(blogsCategory.getDescription());
+					session.save(blogsCategoryModel);
 					session.flush();
 				}
 				else {
-					BlogsCategoryHBM blogsCategoryHBM = (BlogsCategoryHBM)session.get(BlogsCategoryHBM.class,
+					BlogsCategory blogsCategoryModel = (BlogsCategory)session.get(BlogsCategory.class,
 							blogsCategory.getPrimaryKey());
 
-					if (blogsCategoryHBM != null) {
-						blogsCategoryHBM.setCompanyId(blogsCategory.getCompanyId());
-						blogsCategoryHBM.setUserId(blogsCategory.getUserId());
-						blogsCategoryHBM.setUserName(blogsCategory.getUserName());
-						blogsCategoryHBM.setCreateDate(blogsCategory.getCreateDate());
-						blogsCategoryHBM.setModifiedDate(blogsCategory.getModifiedDate());
-						blogsCategoryHBM.setParentCategoryId(blogsCategory.getParentCategoryId());
-						blogsCategoryHBM.setName(blogsCategory.getName());
-						blogsCategoryHBM.setDescription(blogsCategory.getDescription());
+					if (blogsCategoryModel != null) {
+						blogsCategoryModel.setCompanyId(blogsCategory.getCompanyId());
+						blogsCategoryModel.setUserId(blogsCategory.getUserId());
+						blogsCategoryModel.setUserName(blogsCategory.getUserName());
+						blogsCategoryModel.setCreateDate(blogsCategory.getCreateDate());
+						blogsCategoryModel.setModifiedDate(blogsCategory.getModifiedDate());
+						blogsCategoryModel.setParentCategoryId(blogsCategory.getParentCategoryId());
+						blogsCategoryModel.setName(blogsCategory.getName());
+						blogsCategoryModel.setDescription(blogsCategory.getDescription());
 						session.flush();
 					}
 					else {
-						blogsCategoryHBM = new BlogsCategoryHBM();
-						blogsCategoryHBM.setCategoryId(blogsCategory.getCategoryId());
-						blogsCategoryHBM.setCompanyId(blogsCategory.getCompanyId());
-						blogsCategoryHBM.setUserId(blogsCategory.getUserId());
-						blogsCategoryHBM.setUserName(blogsCategory.getUserName());
-						blogsCategoryHBM.setCreateDate(blogsCategory.getCreateDate());
-						blogsCategoryHBM.setModifiedDate(blogsCategory.getModifiedDate());
-						blogsCategoryHBM.setParentCategoryId(blogsCategory.getParentCategoryId());
-						blogsCategoryHBM.setName(blogsCategory.getName());
-						blogsCategoryHBM.setDescription(blogsCategory.getDescription());
-						session.save(blogsCategoryHBM);
+						blogsCategoryModel = new BlogsCategory();
+						blogsCategoryModel.setCategoryId(blogsCategory.getCategoryId());
+						blogsCategoryModel.setCompanyId(blogsCategory.getCompanyId());
+						blogsCategoryModel.setUserId(blogsCategory.getUserId());
+						blogsCategoryModel.setUserName(blogsCategory.getUserName());
+						blogsCategoryModel.setCreateDate(blogsCategory.getCreateDate());
+						blogsCategoryModel.setModifiedDate(blogsCategory.getModifiedDate());
+						blogsCategoryModel.setParentCategoryId(blogsCategory.getParentCategoryId());
+						blogsCategoryModel.setName(blogsCategory.getName());
+						blogsCategoryModel.setDescription(blogsCategory.getDescription());
+						session.save(blogsCategoryModel);
 						session.flush();
 					}
 				}
@@ -157,17 +157,17 @@ public class BlogsCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.blogs.model.BlogsCategory findByPrimaryKey(
-		String categoryId) throws NoSuchCategoryException, SystemException {
+	public BlogsCategory findByPrimaryKey(String categoryId)
+		throws NoSuchCategoryException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			BlogsCategoryHBM blogsCategoryHBM = (BlogsCategoryHBM)session.get(BlogsCategoryHBM.class,
+			BlogsCategory blogsCategory = (BlogsCategory)session.get(BlogsCategory.class,
 					categoryId);
 
-			if (blogsCategoryHBM == null) {
+			if (blogsCategory == null) {
 				_log.warn("No BlogsCategory exists with the primary key " +
 					categoryId.toString());
 				throw new NoSuchCategoryException(
@@ -175,7 +175,7 @@ public class BlogsCategoryPersistence extends BasePersistence {
 					categoryId.toString());
 			}
 
-			return BlogsCategoryHBMUtil.model(blogsCategoryHBM);
+			return blogsCategory;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -194,10 +194,10 @@ public class BlogsCategoryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM BlogsCategory IN CLASS com.liferay.portlet.blogs.service.persistence.BlogsCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.blogs.model.BlogsCategory WHERE ");
 
 			if (parentCategoryId == null) {
-				query.append("parentCategoryId is null");
+				query.append("parentCategoryId IS NULL");
 			}
 			else {
 				query.append("parentCategoryId = ?");
@@ -214,13 +214,7 @@ public class BlogsCategoryPersistence extends BasePersistence {
 				q.setString(queryPos++, parentCategoryId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				BlogsCategoryHBM blogsCategoryHBM = (BlogsCategoryHBM)itr.next();
-				list.add(BlogsCategoryHBMUtil.model(blogsCategoryHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -246,10 +240,10 @@ public class BlogsCategoryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM BlogsCategory IN CLASS com.liferay.portlet.blogs.service.persistence.BlogsCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.blogs.model.BlogsCategory WHERE ");
 
 			if (parentCategoryId == null) {
-				query.append("parentCategoryId is null");
+				query.append("parentCategoryId IS NULL");
 			}
 			else {
 				query.append("parentCategoryId = ?");
@@ -272,15 +266,7 @@ public class BlogsCategoryPersistence extends BasePersistence {
 				q.setString(queryPos++, parentCategoryId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				BlogsCategoryHBM blogsCategoryHBM = (BlogsCategoryHBM)itr.next();
-				list.add(BlogsCategoryHBMUtil.model(blogsCategoryHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -290,9 +276,8 @@ public class BlogsCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.blogs.model.BlogsCategory findByParentCategoryId_First(
-		String parentCategoryId, OrderByComparator obc)
-		throws NoSuchCategoryException, SystemException {
+	public BlogsCategory findByParentCategoryId_First(String parentCategoryId,
+		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		List list = findByParentCategoryId(parentCategoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -304,13 +289,12 @@ public class BlogsCategoryPersistence extends BasePersistence {
 			throw new NoSuchCategoryException(msg);
 		}
 		else {
-			return (com.liferay.portlet.blogs.model.BlogsCategory)list.get(0);
+			return (BlogsCategory)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.blogs.model.BlogsCategory findByParentCategoryId_Last(
-		String parentCategoryId, OrderByComparator obc)
-		throws NoSuchCategoryException, SystemException {
+	public BlogsCategory findByParentCategoryId_Last(String parentCategoryId,
+		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		int count = countByParentCategoryId(parentCategoryId);
 		List list = findByParentCategoryId(parentCategoryId, count - 1, count,
 				obc);
@@ -324,14 +308,14 @@ public class BlogsCategoryPersistence extends BasePersistence {
 			throw new NoSuchCategoryException(msg);
 		}
 		else {
-			return (com.liferay.portlet.blogs.model.BlogsCategory)list.get(0);
+			return (BlogsCategory)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.blogs.model.BlogsCategory[] findByParentCategoryId_PrevAndNext(
+	public BlogsCategory[] findByParentCategoryId_PrevAndNext(
 		String categoryId, String parentCategoryId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
-		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory = findByPrimaryKey(categoryId);
+		BlogsCategory blogsCategory = findByPrimaryKey(categoryId);
 		int count = countByParentCategoryId(parentCategoryId);
 		Session session = null;
 
@@ -340,10 +324,10 @@ public class BlogsCategoryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM BlogsCategory IN CLASS com.liferay.portlet.blogs.service.persistence.BlogsCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.blogs.model.BlogsCategory WHERE ");
 
 			if (parentCategoryId == null) {
-				query.append("parentCategoryId is null");
+				query.append("parentCategoryId IS NULL");
 			}
 			else {
 				query.append("parentCategoryId = ?");
@@ -367,11 +351,11 @@ public class BlogsCategoryPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					blogsCategory, BlogsCategoryHBMUtil.getInstance());
-			com.liferay.portlet.blogs.model.BlogsCategory[] array = new com.liferay.portlet.blogs.model.BlogsCategory[3];
-			array[0] = (com.liferay.portlet.blogs.model.BlogsCategory)objArray[0];
-			array[1] = (com.liferay.portlet.blogs.model.BlogsCategory)objArray[1];
-			array[2] = (com.liferay.portlet.blogs.model.BlogsCategory)objArray[2];
+					blogsCategory);
+			BlogsCategory[] array = new BlogsCategory[3];
+			array[0] = (BlogsCategory)objArray[0];
+			array[1] = (BlogsCategory)objArray[1];
+			array[2] = (BlogsCategory)objArray[2];
 
 			return array;
 		}
@@ -390,21 +374,13 @@ public class BlogsCategoryPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM BlogsCategory IN CLASS com.liferay.portlet.blogs.service.persistence.BlogsCategoryHBM ");
+			query.append("FROM com.liferay.portlet.blogs.model.BlogsCategory ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				BlogsCategoryHBM blogsCategoryHBM = (BlogsCategoryHBM)itr.next();
-				list.add(BlogsCategoryHBMUtil.model(blogsCategoryHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -423,10 +399,10 @@ public class BlogsCategoryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM BlogsCategory IN CLASS com.liferay.portlet.blogs.service.persistence.BlogsCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.blogs.model.BlogsCategory WHERE ");
 
 			if (parentCategoryId == null) {
-				query.append("parentCategoryId is null");
+				query.append("parentCategoryId IS NULL");
 			}
 			else {
 				query.append("parentCategoryId = ?");
@@ -446,8 +422,8 @@ public class BlogsCategoryPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				BlogsCategoryHBM blogsCategoryHBM = (BlogsCategoryHBM)itr.next();
-				session.delete(blogsCategoryHBM);
+				BlogsCategory blogsCategory = (BlogsCategory)itr.next();
+				session.delete(blogsCategory);
 			}
 
 			session.flush();
@@ -470,10 +446,10 @@ public class BlogsCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM BlogsCategory IN CLASS com.liferay.portlet.blogs.service.persistence.BlogsCategoryHBM WHERE ");
+				"FROM com.liferay.portlet.blogs.model.BlogsCategory WHERE ");
 
 			if (parentCategoryId == null) {
-				query.append("parentCategoryId is null");
+				query.append("parentCategoryId IS NULL");
 			}
 			else {
 				query.append("parentCategoryId = ?");
@@ -506,6 +482,9 @@ public class BlogsCategoryPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(BlogsCategoryPersistence.class);

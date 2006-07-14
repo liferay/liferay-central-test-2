@@ -67,6 +67,7 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.dao.hibernate.QueryUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.util.ArrayList;
@@ -634,7 +635,8 @@ public class ServicePreAction extends Action {
 				groupParams.put("usersGroups", user.getUserId());
 
 				List groups = GroupLocalServiceUtil.search(
-					user.getCompanyId(), null, null, groupParams, -1, -1);
+					user.getCompanyId(), null, null, groupParams,
+					QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 				for (int i = 0; i < groups.size(); i++) {
 					Group group = (Group)groups.get(i);

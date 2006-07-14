@@ -24,7 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.enterpriseadmin.search.UserSearchTerms;
@@ -152,14 +151,12 @@ public class PermissionUserFinder {
 			String primKey, String actionId, UserSearchTerms searchTerms)
 		throws SystemException {
 
-		int count = 0;
-
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			count += countUsers(
+			int count = countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ADMIN_ROLE), companyId,
 				groupId, name, primKey, actionId, searchTerms,
 				COUNT_USERS_TYPE_ADMIN);
@@ -209,14 +206,12 @@ public class PermissionUserFinder {
 			String actionId, UserSearchTerms searchTerms)
 		throws SystemException {
 
-		int count = 0;
-
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			count += countUsers(
+			int count = countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ADMIN_ROLE), companyId,
 				null, name, primKey, actionId, searchTerms,
 				COUNT_USERS_TYPE_ADMIN);
@@ -300,8 +295,6 @@ public class PermissionUserFinder {
 			int begin, int end)
 		throws SystemException {
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -360,16 +353,20 @@ public class PermissionUserFinder {
 				qPos.add(searchTerms.getEmailAddress());
 			}
 
+			List list = new ArrayList();
+
 			Iterator itr = QueryUtil.iterate(
 				q, HibernateUtil.getDialect(), begin, end);
 
 			while (itr.hasNext()) {
 				String userId = (String)itr.next();
 
-				User user = UserLocalServiceUtil.getUserById(userId);
+				User user = UserUtil.findByPrimaryKey(userId);
 
 				list.add(user);
 			}
+
+			return list;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -377,8 +374,6 @@ public class PermissionUserFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 	public static List findByUserAndOrgGroupPermission(
@@ -386,8 +381,6 @@ public class PermissionUserFinder {
 			String actionId, UserSearchTerms searchTerms,
 			int begin, int end)
 		throws SystemException {
-
-		List list = new ArrayList();
 
 		Session session = null;
 
@@ -431,16 +424,20 @@ public class PermissionUserFinder {
 				qPos.add(searchTerms.getEmailAddress());
 			}
 
+			List list = new ArrayList();
+
 			Iterator itr = QueryUtil.iterate(
 				q, HibernateUtil.getDialect(), begin, end);
 
 			while (itr.hasNext()) {
 				String userId = (String)itr.next();
 
-				User user = UserLocalServiceUtil.getUserById(userId);
+				User user = UserUtil.findByPrimaryKey(userId);
 
 				list.add(user);
 			}
+
+			return list;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -448,8 +445,6 @@ public class PermissionUserFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 }

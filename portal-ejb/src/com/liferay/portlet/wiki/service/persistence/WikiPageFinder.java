@@ -33,7 +33,6 @@ import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.sql.Timestamp;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -127,8 +126,6 @@ public class WikiPageFinder {
 			int end)
 		throws SystemException {
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -147,7 +144,7 @@ public class WikiPageFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("WikiPage", WikiPageHBM.class);
+			q.addEntity("WikiPage", WikiPage.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -155,16 +152,7 @@ public class WikiPageFinder {
 			qPos.add(createDate);
 			qPos.add(true);
 
-			Iterator itr = QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				WikiPageHBM pageHBM = (WikiPageHBM)itr.next();
-
-				WikiPage page = WikiPageHBMUtil.model(pageHBM);
-
-				list.add(page);
-			}
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -172,8 +160,6 @@ public class WikiPageFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 }

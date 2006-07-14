@@ -308,6 +308,10 @@ public class DLFolderUtil {
 		return getPersistence().countByP_N(parentFolderId, name);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static DLFolderPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		DLFolderUtil util = (DLFolderUtil)ctx.getBean(CLASS_NAME);

@@ -29,15 +29,13 @@ package com.liferay.portal.service.spring;
  *
  */
 public class OrganizationServiceUtil {
-	public static boolean addGroupOrganizations(java.lang.String groupId,
+	public static void addGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			OrganizationService organizationService = OrganizationServiceFactory.getService();
-
-			return organizationService.addGroupOrganizations(groupId,
-				organizationIds);
+			organizationService.addGroupOrganizations(groupId, organizationIds);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -149,15 +147,13 @@ public class OrganizationServiceUtil {
 		}
 	}
 
-	public static boolean unsetGroupOrganizations(java.lang.String groupId,
+	public static void unsetGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			OrganizationService organizationService = OrganizationServiceFactory.getService();
-
-			return organizationService.unsetGroupOrganizations(groupId,
-				organizationIds);
+			organizationService.unsetGroupOrganizations(groupId, organizationIds);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

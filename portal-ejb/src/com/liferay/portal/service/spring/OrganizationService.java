@@ -29,7 +29,7 @@ package com.liferay.portal.service.spring;
  *
  */
 public interface OrganizationService {
-	public boolean addGroupOrganizations(java.lang.String groupId,
+	public void addGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
@@ -59,7 +59,7 @@ public interface OrganizationService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public boolean unsetGroupOrganizations(java.lang.String groupId,
+	public void unsetGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;

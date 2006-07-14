@@ -34,7 +34,6 @@ import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.sql.Timestamp;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -173,8 +172,6 @@ public class JournalArticleFinder {
 		Timestamp displayDateLT_TS = CalendarUtil.getTimestamp(displayDateLT);
 		Timestamp reviewDate_TS = CalendarUtil.getTimestamp(reviewDate);
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -200,7 +197,7 @@ public class JournalArticleFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("JournalArticle", JournalArticleHBM.class);
+			q.addEntity("JournalArticle", JournalArticle.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -240,17 +237,7 @@ public class JournalArticleFinder {
 			qPos.add(reviewDate_TS);
 			qPos.add(reviewDate_TS);
 
-			Iterator itr = QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				JournalArticleHBM articleHBM = (JournalArticleHBM)itr.next();
-
-				JournalArticle article =
-					JournalArticleHBMUtil.model(articleHBM);
-
-				list.add(article);
-			}
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -258,8 +245,6 @@ public class JournalArticleFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 }

@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.journal.NoSuchContentSearchException;
+import com.liferay.portlet.journal.model.JournalContentSearch;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,16 +50,16 @@ import java.util.List;
  *
  */
 public class JournalContentSearchPersistence extends BasePersistence {
-	public com.liferay.portlet.journal.model.JournalContentSearch create(
+	public JournalContentSearch create(
 		JournalContentSearchPK journalContentSearchPK) {
-		JournalContentSearchHBM journalContentSearchHBM = new JournalContentSearchHBM();
-		journalContentSearchHBM.setNew(true);
-		journalContentSearchHBM.setPrimaryKey(journalContentSearchPK);
+		JournalContentSearch journalContentSearch = new JournalContentSearch();
+		journalContentSearch.setNew(true);
+		journalContentSearch.setPrimaryKey(journalContentSearchPK);
 
-		return JournalContentSearchHBMUtil.model(journalContentSearchHBM);
+		return journalContentSearch;
 	}
 
-	public com.liferay.portlet.journal.model.JournalContentSearch remove(
+	public JournalContentSearch remove(
 		JournalContentSearchPK journalContentSearchPK)
 		throws NoSuchContentSearchException, SystemException {
 		Session session = null;
@@ -66,10 +67,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			JournalContentSearchHBM journalContentSearchHBM = (JournalContentSearchHBM)session.get(JournalContentSearchHBM.class,
+			JournalContentSearch journalContentSearch = (JournalContentSearch)session.get(JournalContentSearch.class,
 					journalContentSearchPK);
 
-			if (journalContentSearchHBM == null) {
+			if (journalContentSearch == null) {
 				_log.warn(
 					"No JournalContentSearch exists with the primary key " +
 					journalContentSearchPK.toString());
@@ -78,10 +79,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 					journalContentSearchPK.toString());
 			}
 
-			session.delete(journalContentSearchHBM);
+			session.delete(journalContentSearch);
 			session.flush();
 
-			return JournalContentSearchHBMUtil.model(journalContentSearchHBM);
+			return journalContentSearch;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -102,32 +103,32 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				session = openSession();
 
 				if (journalContentSearch.isNew()) {
-					JournalContentSearchHBM journalContentSearchHBM = new JournalContentSearchHBM();
-					journalContentSearchHBM.setPortletId(journalContentSearch.getPortletId());
-					journalContentSearchHBM.setLayoutId(journalContentSearch.getLayoutId());
-					journalContentSearchHBM.setOwnerId(journalContentSearch.getOwnerId());
-					journalContentSearchHBM.setCompanyId(journalContentSearch.getCompanyId());
-					journalContentSearchHBM.setArticleId(journalContentSearch.getArticleId());
-					session.save(journalContentSearchHBM);
+					JournalContentSearch journalContentSearchModel = new JournalContentSearch();
+					journalContentSearchModel.setPortletId(journalContentSearch.getPortletId());
+					journalContentSearchModel.setLayoutId(journalContentSearch.getLayoutId());
+					journalContentSearchModel.setOwnerId(journalContentSearch.getOwnerId());
+					journalContentSearchModel.setCompanyId(journalContentSearch.getCompanyId());
+					journalContentSearchModel.setArticleId(journalContentSearch.getArticleId());
+					session.save(journalContentSearchModel);
 					session.flush();
 				}
 				else {
-					JournalContentSearchHBM journalContentSearchHBM = (JournalContentSearchHBM)session.get(JournalContentSearchHBM.class,
+					JournalContentSearch journalContentSearchModel = (JournalContentSearch)session.get(JournalContentSearch.class,
 							journalContentSearch.getPrimaryKey());
 
-					if (journalContentSearchHBM != null) {
-						journalContentSearchHBM.setCompanyId(journalContentSearch.getCompanyId());
-						journalContentSearchHBM.setArticleId(journalContentSearch.getArticleId());
+					if (journalContentSearchModel != null) {
+						journalContentSearchModel.setCompanyId(journalContentSearch.getCompanyId());
+						journalContentSearchModel.setArticleId(journalContentSearch.getArticleId());
 						session.flush();
 					}
 					else {
-						journalContentSearchHBM = new JournalContentSearchHBM();
-						journalContentSearchHBM.setPortletId(journalContentSearch.getPortletId());
-						journalContentSearchHBM.setLayoutId(journalContentSearch.getLayoutId());
-						journalContentSearchHBM.setOwnerId(journalContentSearch.getOwnerId());
-						journalContentSearchHBM.setCompanyId(journalContentSearch.getCompanyId());
-						journalContentSearchHBM.setArticleId(journalContentSearch.getArticleId());
-						session.save(journalContentSearchHBM);
+						journalContentSearchModel = new JournalContentSearch();
+						journalContentSearchModel.setPortletId(journalContentSearch.getPortletId());
+						journalContentSearchModel.setLayoutId(journalContentSearch.getLayoutId());
+						journalContentSearchModel.setOwnerId(journalContentSearch.getOwnerId());
+						journalContentSearchModel.setCompanyId(journalContentSearch.getCompanyId());
+						journalContentSearchModel.setArticleId(journalContentSearch.getArticleId());
+						session.save(journalContentSearchModel);
 						session.flush();
 					}
 				}
@@ -146,7 +147,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalContentSearch findByPrimaryKey(
+	public JournalContentSearch findByPrimaryKey(
 		JournalContentSearchPK journalContentSearchPK)
 		throws NoSuchContentSearchException, SystemException {
 		Session session = null;
@@ -154,10 +155,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			JournalContentSearchHBM journalContentSearchHBM = (JournalContentSearchHBM)session.get(JournalContentSearchHBM.class,
+			JournalContentSearch journalContentSearch = (JournalContentSearch)session.get(JournalContentSearch.class,
 					journalContentSearchPK);
 
-			if (journalContentSearchHBM == null) {
+			if (journalContentSearch == null) {
 				_log.warn(
 					"No JournalContentSearch exists with the primary key " +
 					journalContentSearchPK.toString());
@@ -166,7 +167,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 					journalContentSearchPK.toString());
 			}
 
-			return JournalContentSearchHBMUtil.model(journalContentSearchHBM);
+			return journalContentSearch;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -184,10 +185,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -202,14 +203,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				q.setString(queryPos++, ownerId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				JournalContentSearchHBM journalContentSearchHBM = (JournalContentSearchHBM)itr.next();
-				list.add(JournalContentSearchHBMUtil.model(
-						journalContentSearchHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -235,10 +229,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -257,16 +251,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				q.setString(queryPos++, ownerId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				JournalContentSearchHBM journalContentSearchHBM = (JournalContentSearchHBM)itr.next();
-				list.add(JournalContentSearchHBMUtil.model(
-						journalContentSearchHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -276,8 +261,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalContentSearch findByOwnerId_First(
-		String ownerId, OrderByComparator obc)
+	public JournalContentSearch findByOwnerId_First(String ownerId,
+		OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
 		List list = findByOwnerId(ownerId, 0, 1, obc);
 
@@ -290,12 +275,12 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			throw new NoSuchContentSearchException(msg);
 		}
 		else {
-			return (com.liferay.portlet.journal.model.JournalContentSearch)list.get(0);
+			return (JournalContentSearch)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalContentSearch findByOwnerId_Last(
-		String ownerId, OrderByComparator obc)
+	public JournalContentSearch findByOwnerId_Last(String ownerId,
+		OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
 		int count = countByOwnerId(ownerId);
 		List list = findByOwnerId(ownerId, count - 1, count, obc);
@@ -309,16 +294,15 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			throw new NoSuchContentSearchException(msg);
 		}
 		else {
-			return (com.liferay.portlet.journal.model.JournalContentSearch)list.get(0);
+			return (JournalContentSearch)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalContentSearch[] findByOwnerId_PrevAndNext(
+	public JournalContentSearch[] findByOwnerId_PrevAndNext(
 		JournalContentSearchPK journalContentSearchPK, String ownerId,
 		OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch =
-			findByPrimaryKey(journalContentSearchPK);
+		JournalContentSearch journalContentSearch = findByPrimaryKey(journalContentSearchPK);
 		int count = countByOwnerId(ownerId);
 		Session session = null;
 
@@ -327,10 +311,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -350,12 +334,11 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalContentSearch,
-					JournalContentSearchHBMUtil.getInstance());
-			com.liferay.portlet.journal.model.JournalContentSearch[] array = new com.liferay.portlet.journal.model.JournalContentSearch[3];
-			array[0] = (com.liferay.portlet.journal.model.JournalContentSearch)objArray[0];
-			array[1] = (com.liferay.portlet.journal.model.JournalContentSearch)objArray[1];
-			array[2] = (com.liferay.portlet.journal.model.JournalContentSearch)objArray[2];
+					journalContentSearch);
+			JournalContentSearch[] array = new JournalContentSearch[3];
+			array[0] = (JournalContentSearch)objArray[0];
+			array[1] = (JournalContentSearch)objArray[1];
+			array[2] = (JournalContentSearch)objArray[2];
 
 			return array;
 		}
@@ -376,10 +359,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (layoutId == null) {
-				query.append("layoutId is null");
+				query.append("layoutId IS NULL");
 			}
 			else {
 				query.append("layoutId = ?");
@@ -388,7 +371,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -407,14 +390,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				q.setString(queryPos++, ownerId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				JournalContentSearchHBM journalContentSearchHBM = (JournalContentSearchHBM)itr.next();
-				list.add(JournalContentSearchHBMUtil.model(
-						journalContentSearchHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -440,10 +416,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (layoutId == null) {
-				query.append("layoutId is null");
+				query.append("layoutId IS NULL");
 			}
 			else {
 				query.append("layoutId = ?");
@@ -452,7 +428,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -475,16 +451,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				q.setString(queryPos++, ownerId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				JournalContentSearchHBM journalContentSearchHBM = (JournalContentSearchHBM)itr.next();
-				list.add(JournalContentSearchHBMUtil.model(
-						journalContentSearchHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -494,8 +461,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalContentSearch findByL_O_First(
-		String layoutId, String ownerId, OrderByComparator obc)
+	public JournalContentSearch findByL_O_First(String layoutId,
+		String ownerId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
 		List list = findByL_O(layoutId, ownerId, 0, 1, obc);
 
@@ -511,12 +478,12 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			throw new NoSuchContentSearchException(msg);
 		}
 		else {
-			return (com.liferay.portlet.journal.model.JournalContentSearch)list.get(0);
+			return (JournalContentSearch)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalContentSearch findByL_O_Last(
-		String layoutId, String ownerId, OrderByComparator obc)
+	public JournalContentSearch findByL_O_Last(String layoutId, String ownerId,
+		OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
 		int count = countByL_O(layoutId, ownerId);
 		List list = findByL_O(layoutId, ownerId, count - 1, count, obc);
@@ -533,16 +500,15 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			throw new NoSuchContentSearchException(msg);
 		}
 		else {
-			return (com.liferay.portlet.journal.model.JournalContentSearch)list.get(0);
+			return (JournalContentSearch)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalContentSearch[] findByL_O_PrevAndNext(
+	public JournalContentSearch[] findByL_O_PrevAndNext(
 		JournalContentSearchPK journalContentSearchPK, String layoutId,
 		String ownerId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch =
-			findByPrimaryKey(journalContentSearchPK);
+		JournalContentSearch journalContentSearch = findByPrimaryKey(journalContentSearchPK);
 		int count = countByL_O(layoutId, ownerId);
 		Session session = null;
 
@@ -551,10 +517,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (layoutId == null) {
-				query.append("layoutId is null");
+				query.append("layoutId IS NULL");
 			}
 			else {
 				query.append("layoutId = ?");
@@ -563,7 +529,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -587,12 +553,11 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalContentSearch,
-					JournalContentSearchHBMUtil.getInstance());
-			com.liferay.portlet.journal.model.JournalContentSearch[] array = new com.liferay.portlet.journal.model.JournalContentSearch[3];
-			array[0] = (com.liferay.portlet.journal.model.JournalContentSearch)objArray[0];
-			array[1] = (com.liferay.portlet.journal.model.JournalContentSearch)objArray[1];
-			array[2] = (com.liferay.portlet.journal.model.JournalContentSearch)objArray[2];
+					journalContentSearch);
+			JournalContentSearch[] array = new JournalContentSearch[3];
+			array[0] = (JournalContentSearch)objArray[0];
+			array[1] = (JournalContentSearch)objArray[1];
+			array[2] = (JournalContentSearch)objArray[2];
 
 			return array;
 		}
@@ -613,10 +578,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -625,7 +590,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (articleId == null) {
-				query.append("articleId is null");
+				query.append("articleId IS NULL");
 			}
 			else {
 				query.append("articleId = ?");
@@ -644,14 +609,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				q.setString(queryPos++, articleId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				JournalContentSearchHBM journalContentSearchHBM = (JournalContentSearchHBM)itr.next();
-				list.add(JournalContentSearchHBMUtil.model(
-						journalContentSearchHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -677,10 +635,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -689,7 +647,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (articleId == null) {
-				query.append("articleId is null");
+				query.append("articleId IS NULL");
 			}
 			else {
 				query.append("articleId = ?");
@@ -712,16 +670,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				q.setString(queryPos++, articleId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				JournalContentSearchHBM journalContentSearchHBM = (JournalContentSearchHBM)itr.next();
-				list.add(JournalContentSearchHBMUtil.model(
-						journalContentSearchHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -731,8 +680,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalContentSearch findByO_A_First(
-		String ownerId, String articleId, OrderByComparator obc)
+	public JournalContentSearch findByO_A_First(String ownerId,
+		String articleId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
 		List list = findByO_A(ownerId, articleId, 0, 1, obc);
 
@@ -748,12 +697,12 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			throw new NoSuchContentSearchException(msg);
 		}
 		else {
-			return (com.liferay.portlet.journal.model.JournalContentSearch)list.get(0);
+			return (JournalContentSearch)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalContentSearch findByO_A_Last(
-		String ownerId, String articleId, OrderByComparator obc)
+	public JournalContentSearch findByO_A_Last(String ownerId,
+		String articleId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
 		int count = countByO_A(ownerId, articleId);
 		List list = findByO_A(ownerId, articleId, count - 1, count, obc);
@@ -770,16 +719,15 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			throw new NoSuchContentSearchException(msg);
 		}
 		else {
-			return (com.liferay.portlet.journal.model.JournalContentSearch)list.get(0);
+			return (JournalContentSearch)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalContentSearch[] findByO_A_PrevAndNext(
+	public JournalContentSearch[] findByO_A_PrevAndNext(
 		JournalContentSearchPK journalContentSearchPK, String ownerId,
 		String articleId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch =
-			findByPrimaryKey(journalContentSearchPK);
+		JournalContentSearch journalContentSearch = findByPrimaryKey(journalContentSearchPK);
 		int count = countByO_A(ownerId, articleId);
 		Session session = null;
 
@@ -788,10 +736,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -800,7 +748,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (articleId == null) {
-				query.append("articleId is null");
+				query.append("articleId IS NULL");
 			}
 			else {
 				query.append("articleId = ?");
@@ -824,12 +772,11 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalContentSearch,
-					JournalContentSearchHBMUtil.getInstance());
-			com.liferay.portlet.journal.model.JournalContentSearch[] array = new com.liferay.portlet.journal.model.JournalContentSearch[3];
-			array[0] = (com.liferay.portlet.journal.model.JournalContentSearch)objArray[0];
-			array[1] = (com.liferay.portlet.journal.model.JournalContentSearch)objArray[1];
-			array[2] = (com.liferay.portlet.journal.model.JournalContentSearch)objArray[2];
+					journalContentSearch);
+			JournalContentSearch[] array = new JournalContentSearch[3];
+			array[0] = (JournalContentSearch)objArray[0];
+			array[1] = (JournalContentSearch)objArray[1];
+			array[2] = (JournalContentSearch)objArray[2];
 
 			return array;
 		}
@@ -850,10 +797,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -862,7 +809,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (articleId == null) {
-				query.append("articleId is null");
+				query.append("articleId IS NULL");
 			}
 			else {
 				query.append("articleId = ?");
@@ -881,14 +828,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				q.setString(queryPos++, articleId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				JournalContentSearchHBM journalContentSearchHBM = (JournalContentSearchHBM)itr.next();
-				list.add(JournalContentSearchHBMUtil.model(
-						journalContentSearchHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -914,10 +854,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -926,7 +866,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (articleId == null) {
-				query.append("articleId is null");
+				query.append("articleId IS NULL");
 			}
 			else {
 				query.append("articleId = ?");
@@ -949,16 +889,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				q.setString(queryPos++, articleId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				JournalContentSearchHBM journalContentSearchHBM = (JournalContentSearchHBM)itr.next();
-				list.add(JournalContentSearchHBMUtil.model(
-						journalContentSearchHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -968,8 +899,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalContentSearch findByC_A_First(
-		String companyId, String articleId, OrderByComparator obc)
+	public JournalContentSearch findByC_A_First(String companyId,
+		String articleId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
 		List list = findByC_A(companyId, articleId, 0, 1, obc);
 
@@ -985,12 +916,12 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			throw new NoSuchContentSearchException(msg);
 		}
 		else {
-			return (com.liferay.portlet.journal.model.JournalContentSearch)list.get(0);
+			return (JournalContentSearch)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalContentSearch findByC_A_Last(
-		String companyId, String articleId, OrderByComparator obc)
+	public JournalContentSearch findByC_A_Last(String companyId,
+		String articleId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
 		int count = countByC_A(companyId, articleId);
 		List list = findByC_A(companyId, articleId, count - 1, count, obc);
@@ -1007,16 +938,15 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			throw new NoSuchContentSearchException(msg);
 		}
 		else {
-			return (com.liferay.portlet.journal.model.JournalContentSearch)list.get(0);
+			return (JournalContentSearch)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalContentSearch[] findByC_A_PrevAndNext(
+	public JournalContentSearch[] findByC_A_PrevAndNext(
 		JournalContentSearchPK journalContentSearchPK, String companyId,
 		String articleId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch =
-			findByPrimaryKey(journalContentSearchPK);
+		JournalContentSearch journalContentSearch = findByPrimaryKey(journalContentSearchPK);
 		int count = countByC_A(companyId, articleId);
 		Session session = null;
 
@@ -1025,10 +955,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1037,7 +967,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (articleId == null) {
-				query.append("articleId is null");
+				query.append("articleId IS NULL");
 			}
 			else {
 				query.append("articleId = ?");
@@ -1061,12 +991,11 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalContentSearch,
-					JournalContentSearchHBMUtil.getInstance());
-			com.liferay.portlet.journal.model.JournalContentSearch[] array = new com.liferay.portlet.journal.model.JournalContentSearch[3];
-			array[0] = (com.liferay.portlet.journal.model.JournalContentSearch)objArray[0];
-			array[1] = (com.liferay.portlet.journal.model.JournalContentSearch)objArray[1];
-			array[2] = (com.liferay.portlet.journal.model.JournalContentSearch)objArray[2];
+					journalContentSearch);
+			JournalContentSearch[] array = new JournalContentSearch[3];
+			array[0] = (JournalContentSearch)objArray[0];
+			array[1] = (JournalContentSearch)objArray[1];
+			array[2] = (JournalContentSearch)objArray[2];
 
 			return array;
 		}
@@ -1086,19 +1015,11 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch ");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				JournalContentSearchHBM journalContentSearchHBM = (JournalContentSearchHBM)itr.next();
-				list.add(JournalContentSearchHBMUtil.model(
-						journalContentSearchHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1116,10 +1037,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -1137,8 +1058,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				JournalContentSearchHBM journalContentSearchHBM = (JournalContentSearchHBM)itr.next();
-				session.delete(journalContentSearchHBM);
+				JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
+				session.delete(journalContentSearch);
 			}
 
 			session.flush();
@@ -1160,10 +1081,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (layoutId == null) {
-				query.append("layoutId is null");
+				query.append("layoutId IS NULL");
 			}
 			else {
 				query.append("layoutId = ?");
@@ -1172,7 +1093,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -1194,8 +1115,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				JournalContentSearchHBM journalContentSearchHBM = (JournalContentSearchHBM)itr.next();
-				session.delete(journalContentSearchHBM);
+				JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
+				session.delete(journalContentSearch);
 			}
 
 			session.flush();
@@ -1217,10 +1138,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -1229,7 +1150,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (articleId == null) {
-				query.append("articleId is null");
+				query.append("articleId IS NULL");
 			}
 			else {
 				query.append("articleId = ?");
@@ -1251,8 +1172,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				JournalContentSearchHBM journalContentSearchHBM = (JournalContentSearchHBM)itr.next();
-				session.delete(journalContentSearchHBM);
+				JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
+				session.delete(journalContentSearch);
 			}
 
 			session.flush();
@@ -1274,10 +1195,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1286,7 +1207,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (articleId == null) {
-				query.append("articleId is null");
+				query.append("articleId IS NULL");
 			}
 			else {
 				query.append("articleId = ?");
@@ -1308,8 +1229,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				JournalContentSearchHBM journalContentSearchHBM = (JournalContentSearchHBM)itr.next();
-				session.delete(journalContentSearchHBM);
+				JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
+				session.delete(journalContentSearch);
 			}
 
 			session.flush();
@@ -1331,10 +1252,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -1379,10 +1300,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (layoutId == null) {
-				query.append("layoutId is null");
+				query.append("layoutId IS NULL");
 			}
 			else {
 				query.append("layoutId = ?");
@@ -1391,7 +1312,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -1440,10 +1361,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (ownerId == null) {
-				query.append("ownerId is null");
+				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
@@ -1452,7 +1373,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (articleId == null) {
-				query.append("articleId is null");
+				query.append("articleId IS NULL");
 			}
 			else {
 				query.append("articleId = ?");
@@ -1501,10 +1422,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM JournalContentSearch IN CLASS com.liferay.portlet.journal.service.persistence.JournalContentSearchHBM WHERE ");
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 
 			if (companyId == null) {
-				query.append("companyId is null");
+				query.append("companyId IS NULL");
 			}
 			else {
 				query.append("companyId = ?");
@@ -1513,7 +1434,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" AND ");
 
 			if (articleId == null) {
-				query.append("articleId is null");
+				query.append("articleId IS NULL");
 			}
 			else {
 				query.append("articleId = ?");
@@ -1550,6 +1471,9 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(JournalContentSearchPersistence.class);

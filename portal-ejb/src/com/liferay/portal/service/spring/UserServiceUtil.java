@@ -29,14 +29,13 @@ package com.liferay.portal.service.spring;
  *
  */
 public class UserServiceUtil {
-	public static boolean addGroupUsers(java.lang.String groupId,
+	public static void addGroupUsers(java.lang.String groupId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			UserService userService = UserServiceFactory.getService();
-
-			return userService.addGroupUsers(groupId, userIds);
+			userService.addGroupUsers(groupId, userIds);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -49,14 +48,13 @@ public class UserServiceUtil {
 		}
 	}
 
-	public static boolean addRoleUsers(java.lang.String roleId,
+	public static void addRoleUsers(java.lang.String roleId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			UserService userService = UserServiceFactory.getService();
-
-			return userService.addRoleUsers(roleId, userIds);
+			userService.addRoleUsers(roleId, userIds);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -69,14 +67,13 @@ public class UserServiceUtil {
 		}
 	}
 
-	public static boolean addUserGroupUsers(java.lang.String userGroupId,
+	public static void addUserGroupUsers(java.lang.String userGroupId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			UserService userService = UserServiceFactory.getService();
-
-			return userService.addUserGroupUsers(userGroupId, userIds);
+			userService.addUserGroupUsers(userGroupId, userIds);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -122,14 +119,13 @@ public class UserServiceUtil {
 		}
 	}
 
-	public static boolean deleteRoleUser(java.lang.String roleId,
+	public static void deleteRoleUser(java.lang.String roleId,
 		java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			UserService userService = UserServiceFactory.getService();
-
-			return userService.deleteRoleUser(roleId, userId);
+			userService.deleteRoleUser(roleId, userId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -277,14 +273,13 @@ public class UserServiceUtil {
 		}
 	}
 
-	public static boolean unsetGroupUsers(java.lang.String groupId,
+	public static void unsetGroupUsers(java.lang.String groupId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			UserService userService = UserServiceFactory.getService();
-
-			return userService.unsetGroupUsers(groupId, userIds);
+			userService.unsetGroupUsers(groupId, userIds);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -297,14 +292,13 @@ public class UserServiceUtil {
 		}
 	}
 
-	public static boolean unsetRoleUsers(java.lang.String roleId,
+	public static void unsetRoleUsers(java.lang.String roleId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			UserService userService = UserServiceFactory.getService();
-
-			return userService.unsetRoleUsers(roleId, userIds);
+			userService.unsetRoleUsers(roleId, userIds);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -317,14 +311,13 @@ public class UserServiceUtil {
 		}
 	}
 
-	public static boolean unsetUserGroupUsers(java.lang.String userGroupId,
+	public static void unsetUserGroupUsers(java.lang.String userGroupId,
 		java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			UserService userService = UserServiceFactory.getService();
-
-			return userService.unsetUserGroupUsers(userGroupId, userIds);
+			userService.unsetUserGroupUsers(userGroupId, userIds);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

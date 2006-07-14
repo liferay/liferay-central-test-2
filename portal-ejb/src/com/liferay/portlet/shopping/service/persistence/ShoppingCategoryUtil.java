@@ -239,6 +239,10 @@ public class ShoppingCategoryUtil {
 		return getPersistence().countByG_P(groupId, parentCategoryId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static ShoppingCategoryPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		ShoppingCategoryUtil util = (ShoppingCategoryUtil)ctx.getBean(CLASS_NAME);

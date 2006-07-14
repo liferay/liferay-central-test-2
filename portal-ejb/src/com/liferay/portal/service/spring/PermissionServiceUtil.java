@@ -196,7 +196,7 @@ public class PermissionServiceUtil {
 		}
 	}
 
-	public static boolean unsetRolePermission(java.lang.String roleId,
+	public static void unsetRolePermission(java.lang.String roleId,
 		java.lang.String groupId, java.lang.String name,
 		java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
@@ -204,8 +204,7 @@ public class PermissionServiceUtil {
 			com.liferay.portal.SystemException {
 		try {
 			PermissionService permissionService = PermissionServiceFactory.getService();
-
-			return permissionService.unsetRolePermission(roleId, groupId, name,
+			permissionService.unsetRolePermission(roleId, groupId, name,
 				typeId, scope, primKey, actionId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
@@ -219,7 +218,7 @@ public class PermissionServiceUtil {
 		}
 	}
 
-	public static boolean unsetRolePermissions(java.lang.String roleId,
+	public static void unsetRolePermissions(java.lang.String roleId,
 		java.lang.String groupId, java.lang.String name,
 		java.lang.String typeId, java.lang.String scope,
 		java.lang.String actionId)
@@ -227,9 +226,8 @@ public class PermissionServiceUtil {
 			com.liferay.portal.SystemException {
 		try {
 			PermissionService permissionService = PermissionServiceFactory.getService();
-
-			return permissionService.unsetRolePermissions(roleId, groupId,
-				name, typeId, scope, actionId);
+			permissionService.unsetRolePermissions(roleId, groupId, name,
+				typeId, scope, actionId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;
@@ -242,16 +240,15 @@ public class PermissionServiceUtil {
 		}
 	}
 
-	public static boolean unsetUserPermissions(java.lang.String userId,
+	public static void unsetUserPermissions(java.lang.String userId,
 		java.lang.String groupId, java.lang.String[] actionIds,
 		java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			PermissionService permissionService = PermissionServiceFactory.getService();
-
-			return permissionService.unsetUserPermissions(userId, groupId,
-				actionIds, resourceId);
+			permissionService.unsetUserPermissions(userId, groupId, actionIds,
+				resourceId);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

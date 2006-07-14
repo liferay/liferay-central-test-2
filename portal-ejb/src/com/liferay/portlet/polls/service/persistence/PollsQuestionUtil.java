@@ -181,6 +181,10 @@ public class PollsQuestionUtil {
 		return getPersistence().countByGroupId(groupId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static PollsQuestionPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		PollsQuestionUtil util = (PollsQuestionUtil)ctx.getBean(CLASS_NAME);

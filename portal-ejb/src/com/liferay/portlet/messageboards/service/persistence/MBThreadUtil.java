@@ -181,6 +181,10 @@ public class MBThreadUtil {
 		return getPersistence().countByCategoryId(categoryId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static MBThreadPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		MBThreadUtil util = (MBThreadUtil)ctx.getBean(CLASS_NAME);

@@ -189,6 +189,10 @@ public class BlogsCategoryUtil {
 		return getPersistence().countByParentCategoryId(parentCategoryId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static BlogsCategoryPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		BlogsCategoryUtil util = (BlogsCategoryUtil)ctx.getBean(CLASS_NAME);

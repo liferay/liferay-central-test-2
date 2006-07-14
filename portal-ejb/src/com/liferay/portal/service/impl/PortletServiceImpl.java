@@ -25,8 +25,11 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletService;
+import com.liferay.portal.service.spring.RoleLocalServiceUtil;
 
 /**
  * <a href="PortletServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -40,6 +43,12 @@ public class PortletServiceImpl
 	public Portlet updatePortlet(
 			String companyId, String portletId, String roles, boolean active)
 		throws PortalException, SystemException {
+
+		if (!RoleLocalServiceUtil.hasUserRole(
+				getUserId(), companyId, Role.ADMINISTRATOR)) {
+
+			throw new PrincipalException();
+		}
 
 		return PortletLocalServiceUtil.updatePortlet(
 			companyId, portletId, roles, active);

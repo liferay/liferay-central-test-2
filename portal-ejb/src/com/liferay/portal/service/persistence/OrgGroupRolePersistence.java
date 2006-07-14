@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchOrgGroupRoleException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.OrgGroupRole;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.util.StringPool;
@@ -48,27 +49,25 @@ import java.util.List;
  *
  */
 public class OrgGroupRolePersistence extends BasePersistence {
-	public com.liferay.portal.model.OrgGroupRole create(
-		OrgGroupRolePK orgGroupRolePK) {
-		OrgGroupRoleHBM orgGroupRoleHBM = new OrgGroupRoleHBM();
-		orgGroupRoleHBM.setNew(true);
-		orgGroupRoleHBM.setPrimaryKey(orgGroupRolePK);
+	public OrgGroupRole create(OrgGroupRolePK orgGroupRolePK) {
+		OrgGroupRole orgGroupRole = new OrgGroupRole();
+		orgGroupRole.setNew(true);
+		orgGroupRole.setPrimaryKey(orgGroupRolePK);
 
-		return OrgGroupRoleHBMUtil.model(orgGroupRoleHBM);
+		return orgGroupRole;
 	}
 
-	public com.liferay.portal.model.OrgGroupRole remove(
-		OrgGroupRolePK orgGroupRolePK)
+	public OrgGroupRole remove(OrgGroupRolePK orgGroupRolePK)
 		throws NoSuchOrgGroupRoleException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			OrgGroupRoleHBM orgGroupRoleHBM = (OrgGroupRoleHBM)session.get(OrgGroupRoleHBM.class,
+			OrgGroupRole orgGroupRole = (OrgGroupRole)session.get(OrgGroupRole.class,
 					orgGroupRolePK);
 
-			if (orgGroupRoleHBM == null) {
+			if (orgGroupRole == null) {
 				_log.warn("No OrgGroupRole exists with the primary key " +
 					orgGroupRolePK.toString());
 				throw new NoSuchOrgGroupRoleException(
@@ -76,10 +75,10 @@ public class OrgGroupRolePersistence extends BasePersistence {
 					orgGroupRolePK.toString());
 			}
 
-			session.delete(orgGroupRoleHBM);
+			session.delete(orgGroupRole);
 			session.flush();
 
-			return OrgGroupRoleHBMUtil.model(orgGroupRoleHBM);
+			return orgGroupRole;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -99,26 +98,26 @@ public class OrgGroupRolePersistence extends BasePersistence {
 				session = openSession();
 
 				if (orgGroupRole.isNew()) {
-					OrgGroupRoleHBM orgGroupRoleHBM = new OrgGroupRoleHBM();
-					orgGroupRoleHBM.setOrganizationId(orgGroupRole.getOrganizationId());
-					orgGroupRoleHBM.setGroupId(orgGroupRole.getGroupId());
-					orgGroupRoleHBM.setRoleId(orgGroupRole.getRoleId());
-					session.save(orgGroupRoleHBM);
+					OrgGroupRole orgGroupRoleModel = new OrgGroupRole();
+					orgGroupRoleModel.setOrganizationId(orgGroupRole.getOrganizationId());
+					orgGroupRoleModel.setGroupId(orgGroupRole.getGroupId());
+					orgGroupRoleModel.setRoleId(orgGroupRole.getRoleId());
+					session.save(orgGroupRoleModel);
 					session.flush();
 				}
 				else {
-					OrgGroupRoleHBM orgGroupRoleHBM = (OrgGroupRoleHBM)session.get(OrgGroupRoleHBM.class,
+					OrgGroupRole orgGroupRoleModel = (OrgGroupRole)session.get(OrgGroupRole.class,
 							orgGroupRole.getPrimaryKey());
 
-					if (orgGroupRoleHBM != null) {
+					if (orgGroupRoleModel != null) {
 						session.flush();
 					}
 					else {
-						orgGroupRoleHBM = new OrgGroupRoleHBM();
-						orgGroupRoleHBM.setOrganizationId(orgGroupRole.getOrganizationId());
-						orgGroupRoleHBM.setGroupId(orgGroupRole.getGroupId());
-						orgGroupRoleHBM.setRoleId(orgGroupRole.getRoleId());
-						session.save(orgGroupRoleHBM);
+						orgGroupRoleModel = new OrgGroupRole();
+						orgGroupRoleModel.setOrganizationId(orgGroupRole.getOrganizationId());
+						orgGroupRoleModel.setGroupId(orgGroupRole.getGroupId());
+						orgGroupRoleModel.setRoleId(orgGroupRole.getRoleId());
+						session.save(orgGroupRoleModel);
 						session.flush();
 					}
 				}
@@ -137,18 +136,17 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.OrgGroupRole findByPrimaryKey(
-		OrgGroupRolePK orgGroupRolePK)
+	public OrgGroupRole findByPrimaryKey(OrgGroupRolePK orgGroupRolePK)
 		throws NoSuchOrgGroupRoleException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			OrgGroupRoleHBM orgGroupRoleHBM = (OrgGroupRoleHBM)session.get(OrgGroupRoleHBM.class,
+			OrgGroupRole orgGroupRole = (OrgGroupRole)session.get(OrgGroupRole.class,
 					orgGroupRolePK);
 
-			if (orgGroupRoleHBM == null) {
+			if (orgGroupRole == null) {
 				_log.warn("No OrgGroupRole exists with the primary key " +
 					orgGroupRolePK.toString());
 				throw new NoSuchOrgGroupRoleException(
@@ -156,7 +154,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 					orgGroupRolePK.toString());
 			}
 
-			return OrgGroupRoleHBMUtil.model(orgGroupRoleHBM);
+			return orgGroupRole;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -173,11 +171,10 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM OrgGroupRole IN CLASS com.liferay.portal.service.persistence.OrgGroupRoleHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.OrgGroupRole WHERE ");
 
 			if (roleId == null) {
-				query.append("roleId is null");
+				query.append("roleId IS NULL");
 			}
 			else {
 				query.append("roleId = ?");
@@ -192,13 +189,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 				q.setString(queryPos++, roleId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				OrgGroupRoleHBM orgGroupRoleHBM = (OrgGroupRoleHBM)itr.next();
-				list.add(OrgGroupRoleHBMUtil.model(orgGroupRoleHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -223,11 +214,10 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM OrgGroupRole IN CLASS com.liferay.portal.service.persistence.OrgGroupRoleHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.OrgGroupRole WHERE ");
 
 			if (roleId == null) {
-				query.append("roleId is null");
+				query.append("roleId IS NULL");
 			}
 			else {
 				query.append("roleId = ?");
@@ -246,15 +236,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 				q.setString(queryPos++, roleId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				OrgGroupRoleHBM orgGroupRoleHBM = (OrgGroupRoleHBM)itr.next();
-				list.add(OrgGroupRoleHBMUtil.model(orgGroupRoleHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -264,8 +246,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.OrgGroupRole findByRoleId_First(
-		String roleId, OrderByComparator obc)
+	public OrgGroupRole findByRoleId_First(String roleId, OrderByComparator obc)
 		throws NoSuchOrgGroupRoleException, SystemException {
 		List list = findByRoleId(roleId, 0, 1, obc);
 
@@ -278,12 +259,11 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			throw new NoSuchOrgGroupRoleException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.OrgGroupRole)list.get(0);
+			return (OrgGroupRole)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.OrgGroupRole findByRoleId_Last(
-		String roleId, OrderByComparator obc)
+	public OrgGroupRole findByRoleId_Last(String roleId, OrderByComparator obc)
 		throws NoSuchOrgGroupRoleException, SystemException {
 		int count = countByRoleId(roleId);
 		List list = findByRoleId(roleId, count - 1, count, obc);
@@ -297,14 +277,14 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			throw new NoSuchOrgGroupRoleException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.OrgGroupRole)list.get(0);
+			return (OrgGroupRole)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.OrgGroupRole[] findByRoleId_PrevAndNext(
+	public OrgGroupRole[] findByRoleId_PrevAndNext(
 		OrgGroupRolePK orgGroupRolePK, String roleId, OrderByComparator obc)
 		throws NoSuchOrgGroupRoleException, SystemException {
-		com.liferay.portal.model.OrgGroupRole orgGroupRole = findByPrimaryKey(orgGroupRolePK);
+		OrgGroupRole orgGroupRole = findByPrimaryKey(orgGroupRolePK);
 		int count = countByRoleId(roleId);
 		Session session = null;
 
@@ -312,11 +292,10 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM OrgGroupRole IN CLASS com.liferay.portal.service.persistence.OrgGroupRoleHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.OrgGroupRole WHERE ");
 
 			if (roleId == null) {
-				query.append("roleId is null");
+				query.append("roleId IS NULL");
 			}
 			else {
 				query.append("roleId = ?");
@@ -336,11 +315,11 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					orgGroupRole, OrgGroupRoleHBMUtil.getInstance());
-			com.liferay.portal.model.OrgGroupRole[] array = new com.liferay.portal.model.OrgGroupRole[3];
-			array[0] = (com.liferay.portal.model.OrgGroupRole)objArray[0];
-			array[1] = (com.liferay.portal.model.OrgGroupRole)objArray[1];
-			array[2] = (com.liferay.portal.model.OrgGroupRole)objArray[2];
+					orgGroupRole);
+			OrgGroupRole[] array = new OrgGroupRole[3];
+			array[0] = (OrgGroupRole)objArray[0];
+			array[1] = (OrgGroupRole)objArray[1];
+			array[2] = (OrgGroupRole)objArray[2];
 
 			return array;
 		}
@@ -359,19 +338,11 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM OrgGroupRole IN CLASS com.liferay.portal.service.persistence.OrgGroupRoleHBM ");
+			query.append("FROM com.liferay.portal.model.OrgGroupRole ");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				OrgGroupRoleHBM orgGroupRoleHBM = (OrgGroupRoleHBM)itr.next();
-				list.add(OrgGroupRoleHBMUtil.model(orgGroupRoleHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -388,11 +359,10 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM OrgGroupRole IN CLASS com.liferay.portal.service.persistence.OrgGroupRoleHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.OrgGroupRole WHERE ");
 
 			if (roleId == null) {
-				query.append("roleId is null");
+				query.append("roleId IS NULL");
 			}
 			else {
 				query.append("roleId = ?");
@@ -410,8 +380,8 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				OrgGroupRoleHBM orgGroupRoleHBM = (OrgGroupRoleHBM)itr.next();
-				session.delete(orgGroupRoleHBM);
+				OrgGroupRole orgGroupRole = (OrgGroupRole)itr.next();
+				session.delete(orgGroupRole);
 			}
 
 			session.flush();
@@ -432,11 +402,10 @@ public class OrgGroupRolePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM OrgGroupRole IN CLASS com.liferay.portal.service.persistence.OrgGroupRoleHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.OrgGroupRole WHERE ");
 
 			if (roleId == null) {
-				query.append("roleId is null");
+				query.append("roleId IS NULL");
 			}
 			else {
 				query.append("roleId = ?");
@@ -469,6 +438,9 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(OrgGroupRolePersistence.class);

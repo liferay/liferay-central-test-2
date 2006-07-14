@@ -31,9 +31,7 @@ import com.liferay.util.dao.hibernate.QueryPos;
 
 import java.sql.Timestamp;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.SQLQuery;
@@ -61,8 +59,6 @@ public class CalEventFinder {
 		Timestamp startDateGT_TS = CalendarUtil.getTimestamp(startDateGT);
 		Timestamp startDateLT_TS = CalendarUtil.getTimestamp(startDateLT);
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -72,7 +68,7 @@ public class CalEventFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("CalEvent", CalEventHBM.class);
+			q.addEntity("CalEvent", CalEvent.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -82,15 +78,7 @@ public class CalEventFinder {
 			qPos.add(timeZoneSensitive);
 			qPos.add(false);
 
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				CalEventHBM eventHBM = (CalEventHBM)itr.next();
-
-				CalEvent event = CalEventHBMUtil.model(eventHBM);
-
-				list.add(event);
-			}
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -98,13 +86,9 @@ public class CalEventFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 	public static List findByRemindBy() throws SystemException {
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -114,21 +98,13 @@ public class CalEventFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("CalEvent", CalEventHBM.class);
+			q.addEntity("CalEvent", CalEvent.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(CalEvent.REMIND_BY_NONE);
 
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				CalEventHBM eventHBM = (CalEventHBM)itr.next();
-
-				CalEvent event = CalEventHBMUtil.model(eventHBM);
-
-				list.add(event);
-			}
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -136,8 +112,6 @@ public class CalEventFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 }

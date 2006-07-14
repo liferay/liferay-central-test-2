@@ -34,7 +34,6 @@ import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -152,8 +151,6 @@ public class JournalTemplateFinder {
 		name = StringUtil.lowerCase(name);
 		description = StringUtil.lowerCase(description);
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -181,7 +178,7 @@ public class JournalTemplateFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("JournalTemplate", JournalTemplateHBM.class);
+			q.addEntity("JournalTemplate", JournalTemplate.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -210,17 +207,7 @@ public class JournalTemplateFinder {
 			qPos.add(description);
 			qPos.add(description);
 
-			Iterator itr = QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				JournalTemplateHBM templateHBM = (JournalTemplateHBM)itr.next();
-
-				JournalTemplate template =
-					JournalTemplateHBMUtil.model(templateHBM);
-
-				list.add(template);
-			}
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -228,8 +215,6 @@ public class JournalTemplateFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		return list;
 	}
 
 }

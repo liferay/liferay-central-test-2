@@ -182,6 +182,10 @@ public class UserIdMapperUtil {
 		return getPersistence().countByUserId(userId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static UserIdMapperPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		UserIdMapperUtil util = (UserIdMapperUtil)ctx.getBean(CLASS_NAME);

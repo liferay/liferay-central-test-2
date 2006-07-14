@@ -282,6 +282,10 @@ public class BlogsEntryUtil {
 		return getPersistence().countByCategoryId(categoryId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static BlogsEntryPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		BlogsEntryUtil util = (BlogsEntryUtil)ctx.getBean(CLASS_NAME);

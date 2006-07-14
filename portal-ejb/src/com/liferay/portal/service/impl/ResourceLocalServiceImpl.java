@@ -97,13 +97,23 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		long start = 0;
+
+		if (_log.isDebugEnabled()) {
+			start = System.currentTimeMillis();
+		}
+
 		validate(companyId, name, portletActions);
+
+		start = logAddResources(name, primKey, start, 1);
 
 		// Company
 
 		addResource(
 			companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_COMPANY,
 			companyId);
+
+		start = logAddResources(name, primKey, start, 2);
 
 		// Guest
 
@@ -114,13 +124,17 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 			companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_GROUP,
 			guestGroup.getGroupId());
 
+		start = logAddResources(name, primKey, start, 3);
+
 		// Group
 
-		if (groupId != null) {
+		if ((groupId != null) && !guestGroup.getGroupId().equals(groupId)) {
 			addResource(
 				companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_GROUP,
 				groupId);
 		}
+
+		start = logAddResources(name, primKey, start, 4);
 
 		if (primKey != null) {
 
@@ -130,16 +144,22 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 				companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
 				primKey);
 
+			start = logAddResources(name, primKey, start, 5);
+
 			// Permissions
 
 			List permissions = PermissionLocalServiceUtil.addPermissions(
 				companyId, name, resource.getResourceId(), portletActions);
+
+			start = logAddResources(name, primKey, start, 6);
 
 			// User permissions
 
 			if (userId != null) {
 				UserUtil.addPermissions(userId, permissions);
 			}
+
+			start = logAddResources(name, primKey, start, 7);
 
 			// Community permissions
 
@@ -148,13 +168,30 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 					groupId, name, resource.getResourceId(), portletActions);
 			}
 
+			start = logAddResources(name, primKey, start, 8);
+
 			// Guest permissions
 
 			if (addGuestPermissions) {
-				addGuestPermissions(
-					guestGroup.getGroupId(), name, resource.getResourceId(),
-					portletActions);
+
+				// Don't add guest permissions when you've already added
+				// community permissions and the given community is the guest
+				// community.
+
+				if ((groupId != null) && addCommunityPermissions) {
+					if (guestGroup.getGroupId().equals(groupId)) {
+						addGuestPermissions = false;
+					}
+				}
+
+				if (addGuestPermissions) {
+					addGuestPermissions(
+						guestGroup.getGroupId(), name, resource.getResourceId(),
+						portletActions);
+				}
 			}
+
+			start = logAddResources(name, primKey, start, 9);
 		}
 	}
 
@@ -241,7 +278,15 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 			boolean portletActions)
 		throws PortalException, SystemException {
 
+		long start = 0;
+
+		if (_log.isDebugEnabled()) {
+			start = System.currentTimeMillis();
+		}
+
 		Group group = GroupUtil.findByPrimaryKey(groupId);
+
+		start = logAddCommunityPermissions(groupId, name, resourceId, start, 1);
 
 		List actions = null;
 
@@ -256,12 +301,18 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 					name);
 		}
 
+		start = logAddCommunityPermissions(groupId, name, resourceId, start, 2);
+
 		String[] actionIds = (String[])actions.toArray(new String[0]);
 
 		List permissions = PermissionLocalServiceUtil.getPermissions(
 			group.getCompanyId(), actionIds, resourceId);
 
+		start = logAddCommunityPermissions(groupId, name, resourceId, start, 3);
+
 		GroupUtil.addPermissions(groupId, permissions);
+
+		start = logAddCommunityPermissions(groupId, name, resourceId, start, 4);
 	}
 
 	protected void addGuestPermissions(
@@ -288,6 +339,39 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 			group.getCompanyId(), actionIds, resourceId);
 
 		GroupUtil.addPermissions(groupId, permissions);
+	}
+
+	protected long logAddCommunityPermissions(
+		String groupId, String name, String resourceId, long start, int block) {
+
+		if (!_log.isDebugEnabled()) {
+			return 0;
+		}
+
+		long end = System.currentTimeMillis();
+
+		_log.debug(
+			"Adding community permissions block " + block + " for " + groupId +
+				" " + name + " " + resourceId + " takes " + (end - start) +
+					" ms");
+
+		return end;
+	}
+
+	protected long logAddResources(
+		String name, String primKey, long start, int block) {
+
+		if (!_log.isDebugEnabled()) {
+			return 0;
+		}
+
+		long end = System.currentTimeMillis();
+
+		_log.debug(
+			"Adding resources block " + block + " for " + name + " " + primKey +
+				" takes " + (end - start) + " ms");
+
+		return end;
 	}
 
 	protected void validate(

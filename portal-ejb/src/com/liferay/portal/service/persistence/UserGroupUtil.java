@@ -117,6 +117,18 @@ public class UserGroupUtil {
 		return userGroup;
 	}
 
+	public static com.liferay.portal.model.UserGroup findByPrimaryKey(
+		java.lang.String userGroupId)
+		throws com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(userGroupId);
+	}
+
+	public static java.util.List findAll()
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findAll();
+	}
+
 	public static java.util.List getUsers(java.lang.String pk)
 		throws com.liferay.portal.NoSuchUserGroupException, 
 			com.liferay.portal.SystemException {
@@ -142,56 +154,6 @@ public class UserGroupUtil {
 		return getPersistence().getUsersSize(pk);
 	}
 
-	public static void setUsers(java.lang.String pk, java.lang.String[] pks)
-		throws com.liferay.portal.NoSuchUserGroupException, 
-			com.liferay.portal.NoSuchUserException, 
-			com.liferay.portal.SystemException {
-		getPersistence().setUsers(pk, pks);
-	}
-
-	public static void setUsers(java.lang.String pk, java.util.List users)
-		throws com.liferay.portal.NoSuchUserGroupException, 
-			com.liferay.portal.NoSuchUserException, 
-			com.liferay.portal.SystemException {
-		getPersistence().setUsers(pk, users);
-	}
-
-	public static boolean addUser(java.lang.String pk, java.lang.String userPK)
-		throws com.liferay.portal.NoSuchUserGroupException, 
-			com.liferay.portal.NoSuchUserException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().addUser(pk, userPK);
-	}
-
-	public static boolean addUser(java.lang.String pk,
-		com.liferay.portal.model.User user)
-		throws com.liferay.portal.NoSuchUserGroupException, 
-			com.liferay.portal.NoSuchUserException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().addUser(pk, user);
-	}
-
-	public static boolean addUsers(java.lang.String pk,
-		java.lang.String[] userPKs)
-		throws com.liferay.portal.NoSuchUserGroupException, 
-			com.liferay.portal.NoSuchUserException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().addUsers(pk, userPKs);
-	}
-
-	public static boolean addUsers(java.lang.String pk, java.util.List users)
-		throws com.liferay.portal.NoSuchUserGroupException, 
-			com.liferay.portal.NoSuchUserException, 
-			com.liferay.portal.SystemException {
-		return getPersistence().addUsers(pk, users);
-	}
-
-	public static void clearUsers(java.lang.String pk)
-		throws com.liferay.portal.NoSuchUserGroupException, 
-			com.liferay.portal.SystemException {
-		getPersistence().clearUsers(pk);
-	}
-
 	public static boolean containsUser(java.lang.String pk,
 		java.lang.String userPK) throws com.liferay.portal.SystemException {
 		return getPersistence().containsUser(pk, userPK);
@@ -202,47 +164,87 @@ public class UserGroupUtil {
 		return getPersistence().containsUsers(pk);
 	}
 
-	public static boolean removeUser(java.lang.String pk,
-		java.lang.String userPK)
+	public static void addUser(java.lang.String pk, java.lang.String userPK)
 		throws com.liferay.portal.NoSuchUserGroupException, 
 			com.liferay.portal.NoSuchUserException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().removeUser(pk, userPK);
+		getPersistence().addUser(pk, userPK);
 	}
 
-	public static boolean removeUser(java.lang.String pk,
+	public static void addUser(java.lang.String pk,
 		com.liferay.portal.model.User user)
 		throws com.liferay.portal.NoSuchUserGroupException, 
 			com.liferay.portal.NoSuchUserException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().removeUser(pk, user);
+		getPersistence().addUser(pk, user);
 	}
 
-	public static boolean removeUsers(java.lang.String pk,
+	public static void addUsers(java.lang.String pk, java.lang.String[] userPKs)
+		throws com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.NoSuchUserException, 
+			com.liferay.portal.SystemException {
+		getPersistence().addUsers(pk, userPKs);
+	}
+
+	public static void addUsers(java.lang.String pk, java.util.List users)
+		throws com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.NoSuchUserException, 
+			com.liferay.portal.SystemException {
+		getPersistence().addUsers(pk, users);
+	}
+
+	public static void clearUsers(java.lang.String pk)
+		throws com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.SystemException {
+		getPersistence().clearUsers(pk);
+	}
+
+	public static void removeUser(java.lang.String pk, java.lang.String userPK)
+		throws com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.NoSuchUserException, 
+			com.liferay.portal.SystemException {
+		getPersistence().removeUser(pk, userPK);
+	}
+
+	public static void removeUser(java.lang.String pk,
+		com.liferay.portal.model.User user)
+		throws com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.NoSuchUserException, 
+			com.liferay.portal.SystemException {
+		getPersistence().removeUser(pk, user);
+	}
+
+	public static void removeUsers(java.lang.String pk,
 		java.lang.String[] userPKs)
 		throws com.liferay.portal.NoSuchUserGroupException, 
 			com.liferay.portal.NoSuchUserException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().removeUsers(pk, userPKs);
+		getPersistence().removeUsers(pk, userPKs);
 	}
 
-	public static boolean removeUsers(java.lang.String pk, java.util.List users)
+	public static void removeUsers(java.lang.String pk, java.util.List users)
 		throws com.liferay.portal.NoSuchUserGroupException, 
 			com.liferay.portal.NoSuchUserException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().removeUsers(pk, users);
+		getPersistence().removeUsers(pk, users);
 	}
 
-	public static com.liferay.portal.model.UserGroup findByPrimaryKey(
-		java.lang.String userGroupId)
+	public static void setUsers(java.lang.String pk, java.lang.String[] userPKs)
 		throws com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.NoSuchUserException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(userGroupId);
+		getPersistence().setUsers(pk, userPKs);
 	}
 
-	public static java.util.List findAll()
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll();
+	public static void setUsers(java.lang.String pk, java.util.List users)
+		throws com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.NoSuchUserException, 
+			com.liferay.portal.SystemException {
+		getPersistence().setUsers(pk, users);
+	}
+
+	public static void initDao() {
+		getPersistence().initDao();
 	}
 
 	public static UserGroupPersistence getPersistence() {

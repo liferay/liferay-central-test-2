@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.polls.NoSuchQuestionException;
+import com.liferay.portlet.polls.model.PollsQuestion;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,26 +50,25 @@ import java.util.List;
  *
  */
 public class PollsQuestionPersistence extends BasePersistence {
-	public com.liferay.portlet.polls.model.PollsQuestion create(
-		String questionId) {
-		PollsQuestionHBM pollsQuestionHBM = new PollsQuestionHBM();
-		pollsQuestionHBM.setNew(true);
-		pollsQuestionHBM.setPrimaryKey(questionId);
+	public PollsQuestion create(String questionId) {
+		PollsQuestion pollsQuestion = new PollsQuestion();
+		pollsQuestion.setNew(true);
+		pollsQuestion.setPrimaryKey(questionId);
 
-		return PollsQuestionHBMUtil.model(pollsQuestionHBM);
+		return pollsQuestion;
 	}
 
-	public com.liferay.portlet.polls.model.PollsQuestion remove(
-		String questionId) throws NoSuchQuestionException, SystemException {
+	public PollsQuestion remove(String questionId)
+		throws NoSuchQuestionException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			PollsQuestionHBM pollsQuestionHBM = (PollsQuestionHBM)session.get(PollsQuestionHBM.class,
+			PollsQuestion pollsQuestion = (PollsQuestion)session.get(PollsQuestion.class,
 					questionId);
 
-			if (pollsQuestionHBM == null) {
+			if (pollsQuestion == null) {
 				_log.warn("No PollsQuestion exists with the primary key " +
 					questionId.toString());
 				throw new NoSuchQuestionException(
@@ -76,10 +76,10 @@ public class PollsQuestionPersistence extends BasePersistence {
 					questionId.toString());
 			}
 
-			session.delete(pollsQuestionHBM);
+			session.delete(pollsQuestion);
 			session.flush();
 
-			return PollsQuestionHBMUtil.model(pollsQuestionHBM);
+			return pollsQuestion;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -99,52 +99,52 @@ public class PollsQuestionPersistence extends BasePersistence {
 				session = openSession();
 
 				if (pollsQuestion.isNew()) {
-					PollsQuestionHBM pollsQuestionHBM = new PollsQuestionHBM();
-					pollsQuestionHBM.setQuestionId(pollsQuestion.getQuestionId());
-					pollsQuestionHBM.setGroupId(pollsQuestion.getGroupId());
-					pollsQuestionHBM.setCompanyId(pollsQuestion.getCompanyId());
-					pollsQuestionHBM.setUserId(pollsQuestion.getUserId());
-					pollsQuestionHBM.setUserName(pollsQuestion.getUserName());
-					pollsQuestionHBM.setCreateDate(pollsQuestion.getCreateDate());
-					pollsQuestionHBM.setModifiedDate(pollsQuestion.getModifiedDate());
-					pollsQuestionHBM.setTitle(pollsQuestion.getTitle());
-					pollsQuestionHBM.setDescription(pollsQuestion.getDescription());
-					pollsQuestionHBM.setExpirationDate(pollsQuestion.getExpirationDate());
-					pollsQuestionHBM.setLastVoteDate(pollsQuestion.getLastVoteDate());
-					session.save(pollsQuestionHBM);
+					PollsQuestion pollsQuestionModel = new PollsQuestion();
+					pollsQuestionModel.setQuestionId(pollsQuestion.getQuestionId());
+					pollsQuestionModel.setGroupId(pollsQuestion.getGroupId());
+					pollsQuestionModel.setCompanyId(pollsQuestion.getCompanyId());
+					pollsQuestionModel.setUserId(pollsQuestion.getUserId());
+					pollsQuestionModel.setUserName(pollsQuestion.getUserName());
+					pollsQuestionModel.setCreateDate(pollsQuestion.getCreateDate());
+					pollsQuestionModel.setModifiedDate(pollsQuestion.getModifiedDate());
+					pollsQuestionModel.setTitle(pollsQuestion.getTitle());
+					pollsQuestionModel.setDescription(pollsQuestion.getDescription());
+					pollsQuestionModel.setExpirationDate(pollsQuestion.getExpirationDate());
+					pollsQuestionModel.setLastVoteDate(pollsQuestion.getLastVoteDate());
+					session.save(pollsQuestionModel);
 					session.flush();
 				}
 				else {
-					PollsQuestionHBM pollsQuestionHBM = (PollsQuestionHBM)session.get(PollsQuestionHBM.class,
+					PollsQuestion pollsQuestionModel = (PollsQuestion)session.get(PollsQuestion.class,
 							pollsQuestion.getPrimaryKey());
 
-					if (pollsQuestionHBM != null) {
-						pollsQuestionHBM.setGroupId(pollsQuestion.getGroupId());
-						pollsQuestionHBM.setCompanyId(pollsQuestion.getCompanyId());
-						pollsQuestionHBM.setUserId(pollsQuestion.getUserId());
-						pollsQuestionHBM.setUserName(pollsQuestion.getUserName());
-						pollsQuestionHBM.setCreateDate(pollsQuestion.getCreateDate());
-						pollsQuestionHBM.setModifiedDate(pollsQuestion.getModifiedDate());
-						pollsQuestionHBM.setTitle(pollsQuestion.getTitle());
-						pollsQuestionHBM.setDescription(pollsQuestion.getDescription());
-						pollsQuestionHBM.setExpirationDate(pollsQuestion.getExpirationDate());
-						pollsQuestionHBM.setLastVoteDate(pollsQuestion.getLastVoteDate());
+					if (pollsQuestionModel != null) {
+						pollsQuestionModel.setGroupId(pollsQuestion.getGroupId());
+						pollsQuestionModel.setCompanyId(pollsQuestion.getCompanyId());
+						pollsQuestionModel.setUserId(pollsQuestion.getUserId());
+						pollsQuestionModel.setUserName(pollsQuestion.getUserName());
+						pollsQuestionModel.setCreateDate(pollsQuestion.getCreateDate());
+						pollsQuestionModel.setModifiedDate(pollsQuestion.getModifiedDate());
+						pollsQuestionModel.setTitle(pollsQuestion.getTitle());
+						pollsQuestionModel.setDescription(pollsQuestion.getDescription());
+						pollsQuestionModel.setExpirationDate(pollsQuestion.getExpirationDate());
+						pollsQuestionModel.setLastVoteDate(pollsQuestion.getLastVoteDate());
 						session.flush();
 					}
 					else {
-						pollsQuestionHBM = new PollsQuestionHBM();
-						pollsQuestionHBM.setQuestionId(pollsQuestion.getQuestionId());
-						pollsQuestionHBM.setGroupId(pollsQuestion.getGroupId());
-						pollsQuestionHBM.setCompanyId(pollsQuestion.getCompanyId());
-						pollsQuestionHBM.setUserId(pollsQuestion.getUserId());
-						pollsQuestionHBM.setUserName(pollsQuestion.getUserName());
-						pollsQuestionHBM.setCreateDate(pollsQuestion.getCreateDate());
-						pollsQuestionHBM.setModifiedDate(pollsQuestion.getModifiedDate());
-						pollsQuestionHBM.setTitle(pollsQuestion.getTitle());
-						pollsQuestionHBM.setDescription(pollsQuestion.getDescription());
-						pollsQuestionHBM.setExpirationDate(pollsQuestion.getExpirationDate());
-						pollsQuestionHBM.setLastVoteDate(pollsQuestion.getLastVoteDate());
-						session.save(pollsQuestionHBM);
+						pollsQuestionModel = new PollsQuestion();
+						pollsQuestionModel.setQuestionId(pollsQuestion.getQuestionId());
+						pollsQuestionModel.setGroupId(pollsQuestion.getGroupId());
+						pollsQuestionModel.setCompanyId(pollsQuestion.getCompanyId());
+						pollsQuestionModel.setUserId(pollsQuestion.getUserId());
+						pollsQuestionModel.setUserName(pollsQuestion.getUserName());
+						pollsQuestionModel.setCreateDate(pollsQuestion.getCreateDate());
+						pollsQuestionModel.setModifiedDate(pollsQuestion.getModifiedDate());
+						pollsQuestionModel.setTitle(pollsQuestion.getTitle());
+						pollsQuestionModel.setDescription(pollsQuestion.getDescription());
+						pollsQuestionModel.setExpirationDate(pollsQuestion.getExpirationDate());
+						pollsQuestionModel.setLastVoteDate(pollsQuestion.getLastVoteDate());
+						session.save(pollsQuestionModel);
 						session.flush();
 					}
 				}
@@ -163,17 +163,17 @@ public class PollsQuestionPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.polls.model.PollsQuestion findByPrimaryKey(
-		String questionId) throws NoSuchQuestionException, SystemException {
+	public PollsQuestion findByPrimaryKey(String questionId)
+		throws NoSuchQuestionException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			PollsQuestionHBM pollsQuestionHBM = (PollsQuestionHBM)session.get(PollsQuestionHBM.class,
+			PollsQuestion pollsQuestion = (PollsQuestion)session.get(PollsQuestion.class,
 					questionId);
 
-			if (pollsQuestionHBM == null) {
+			if (pollsQuestion == null) {
 				_log.warn("No PollsQuestion exists with the primary key " +
 					questionId.toString());
 				throw new NoSuchQuestionException(
@@ -181,7 +181,7 @@ public class PollsQuestionPersistence extends BasePersistence {
 					questionId.toString());
 			}
 
-			return PollsQuestionHBMUtil.model(pollsQuestionHBM);
+			return pollsQuestion;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -199,10 +199,10 @@ public class PollsQuestionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM PollsQuestion IN CLASS com.liferay.portlet.polls.service.persistence.PollsQuestionHBM WHERE ");
+				"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -219,13 +219,7 @@ public class PollsQuestionPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				PollsQuestionHBM pollsQuestionHBM = (PollsQuestionHBM)itr.next();
-				list.add(PollsQuestionHBMUtil.model(pollsQuestionHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -251,10 +245,10 @@ public class PollsQuestionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM PollsQuestion IN CLASS com.liferay.portlet.polls.service.persistence.PollsQuestionHBM WHERE ");
+				"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -277,15 +271,7 @@ public class PollsQuestionPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				PollsQuestionHBM pollsQuestionHBM = (PollsQuestionHBM)itr.next();
-				list.add(PollsQuestionHBMUtil.model(pollsQuestionHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -295,9 +281,8 @@ public class PollsQuestionPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.polls.model.PollsQuestion findByGroupId_First(
-		String groupId, OrderByComparator obc)
-		throws NoSuchQuestionException, SystemException {
+	public PollsQuestion findByGroupId_First(String groupId,
+		OrderByComparator obc) throws NoSuchQuestionException, SystemException {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -309,13 +294,12 @@ public class PollsQuestionPersistence extends BasePersistence {
 			throw new NoSuchQuestionException(msg);
 		}
 		else {
-			return (com.liferay.portlet.polls.model.PollsQuestion)list.get(0);
+			return (PollsQuestion)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.polls.model.PollsQuestion findByGroupId_Last(
-		String groupId, OrderByComparator obc)
-		throws NoSuchQuestionException, SystemException {
+	public PollsQuestion findByGroupId_Last(String groupId,
+		OrderByComparator obc) throws NoSuchQuestionException, SystemException {
 		int count = countByGroupId(groupId);
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
@@ -328,14 +312,14 @@ public class PollsQuestionPersistence extends BasePersistence {
 			throw new NoSuchQuestionException(msg);
 		}
 		else {
-			return (com.liferay.portlet.polls.model.PollsQuestion)list.get(0);
+			return (PollsQuestion)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.polls.model.PollsQuestion[] findByGroupId_PrevAndNext(
-		String questionId, String groupId, OrderByComparator obc)
+	public PollsQuestion[] findByGroupId_PrevAndNext(String questionId,
+		String groupId, OrderByComparator obc)
 		throws NoSuchQuestionException, SystemException {
-		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion = findByPrimaryKey(questionId);
+		PollsQuestion pollsQuestion = findByPrimaryKey(questionId);
 		int count = countByGroupId(groupId);
 		Session session = null;
 
@@ -344,10 +328,10 @@ public class PollsQuestionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM PollsQuestion IN CLASS com.liferay.portlet.polls.service.persistence.PollsQuestionHBM WHERE ");
+				"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -371,11 +355,11 @@ public class PollsQuestionPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					pollsQuestion, PollsQuestionHBMUtil.getInstance());
-			com.liferay.portlet.polls.model.PollsQuestion[] array = new com.liferay.portlet.polls.model.PollsQuestion[3];
-			array[0] = (com.liferay.portlet.polls.model.PollsQuestion)objArray[0];
-			array[1] = (com.liferay.portlet.polls.model.PollsQuestion)objArray[1];
-			array[2] = (com.liferay.portlet.polls.model.PollsQuestion)objArray[2];
+					pollsQuestion);
+			PollsQuestion[] array = new PollsQuestion[3];
+			array[0] = (PollsQuestion)objArray[0];
+			array[1] = (PollsQuestion)objArray[1];
+			array[2] = (PollsQuestion)objArray[2];
 
 			return array;
 		}
@@ -394,21 +378,13 @@ public class PollsQuestionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM PollsQuestion IN CLASS com.liferay.portlet.polls.service.persistence.PollsQuestionHBM ");
+			query.append("FROM com.liferay.portlet.polls.model.PollsQuestion ");
 			query.append("ORDER BY ");
 			query.append("createDate DESC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				PollsQuestionHBM pollsQuestionHBM = (PollsQuestionHBM)itr.next();
-				list.add(PollsQuestionHBMUtil.model(pollsQuestionHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -426,10 +402,10 @@ public class PollsQuestionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM PollsQuestion IN CLASS com.liferay.portlet.polls.service.persistence.PollsQuestionHBM WHERE ");
+				"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -449,8 +425,8 @@ public class PollsQuestionPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				PollsQuestionHBM pollsQuestionHBM = (PollsQuestionHBM)itr.next();
-				session.delete(pollsQuestionHBM);
+				PollsQuestion pollsQuestion = (PollsQuestion)itr.next();
+				session.delete(pollsQuestion);
 			}
 
 			session.flush();
@@ -472,10 +448,10 @@ public class PollsQuestionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM PollsQuestion IN CLASS com.liferay.portlet.polls.service.persistence.PollsQuestionHBM WHERE ");
+				"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
 
 			if (groupId == null) {
-				query.append("groupId is null");
+				query.append("groupId IS NULL");
 			}
 			else {
 				query.append("groupId = ?");
@@ -508,6 +484,9 @@ public class PollsQuestionPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(PollsQuestionPersistence.class);

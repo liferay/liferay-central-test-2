@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPasswordTrackerException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.util.StringPool;
@@ -48,27 +49,25 @@ import java.util.List;
  *
  */
 public class PasswordTrackerPersistence extends BasePersistence {
-	public com.liferay.portal.model.PasswordTracker create(
-		String passwordTrackerId) {
-		PasswordTrackerHBM passwordTrackerHBM = new PasswordTrackerHBM();
-		passwordTrackerHBM.setNew(true);
-		passwordTrackerHBM.setPrimaryKey(passwordTrackerId);
+	public PasswordTracker create(String passwordTrackerId) {
+		PasswordTracker passwordTracker = new PasswordTracker();
+		passwordTracker.setNew(true);
+		passwordTracker.setPrimaryKey(passwordTrackerId);
 
-		return PasswordTrackerHBMUtil.model(passwordTrackerHBM);
+		return passwordTracker;
 	}
 
-	public com.liferay.portal.model.PasswordTracker remove(
-		String passwordTrackerId)
+	public PasswordTracker remove(String passwordTrackerId)
 		throws NoSuchPasswordTrackerException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			PasswordTrackerHBM passwordTrackerHBM = (PasswordTrackerHBM)session.get(PasswordTrackerHBM.class,
+			PasswordTracker passwordTracker = (PasswordTracker)session.get(PasswordTracker.class,
 					passwordTrackerId);
 
-			if (passwordTrackerHBM == null) {
+			if (passwordTracker == null) {
 				_log.warn("No PasswordTracker exists with the primary key " +
 					passwordTrackerId.toString());
 				throw new NoSuchPasswordTrackerException(
@@ -76,10 +75,10 @@ public class PasswordTrackerPersistence extends BasePersistence {
 					passwordTrackerId.toString());
 			}
 
-			session.delete(passwordTrackerHBM);
+			session.delete(passwordTracker);
 			session.flush();
 
-			return PasswordTrackerHBMUtil.model(passwordTrackerHBM);
+			return passwordTracker;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -99,31 +98,31 @@ public class PasswordTrackerPersistence extends BasePersistence {
 				session = openSession();
 
 				if (passwordTracker.isNew()) {
-					PasswordTrackerHBM passwordTrackerHBM = new PasswordTrackerHBM();
-					passwordTrackerHBM.setPasswordTrackerId(passwordTracker.getPasswordTrackerId());
-					passwordTrackerHBM.setUserId(passwordTracker.getUserId());
-					passwordTrackerHBM.setCreateDate(passwordTracker.getCreateDate());
-					passwordTrackerHBM.setPassword(passwordTracker.getPassword());
-					session.save(passwordTrackerHBM);
+					PasswordTracker passwordTrackerModel = new PasswordTracker();
+					passwordTrackerModel.setPasswordTrackerId(passwordTracker.getPasswordTrackerId());
+					passwordTrackerModel.setUserId(passwordTracker.getUserId());
+					passwordTrackerModel.setCreateDate(passwordTracker.getCreateDate());
+					passwordTrackerModel.setPassword(passwordTracker.getPassword());
+					session.save(passwordTrackerModel);
 					session.flush();
 				}
 				else {
-					PasswordTrackerHBM passwordTrackerHBM = (PasswordTrackerHBM)session.get(PasswordTrackerHBM.class,
+					PasswordTracker passwordTrackerModel = (PasswordTracker)session.get(PasswordTracker.class,
 							passwordTracker.getPrimaryKey());
 
-					if (passwordTrackerHBM != null) {
-						passwordTrackerHBM.setUserId(passwordTracker.getUserId());
-						passwordTrackerHBM.setCreateDate(passwordTracker.getCreateDate());
-						passwordTrackerHBM.setPassword(passwordTracker.getPassword());
+					if (passwordTrackerModel != null) {
+						passwordTrackerModel.setUserId(passwordTracker.getUserId());
+						passwordTrackerModel.setCreateDate(passwordTracker.getCreateDate());
+						passwordTrackerModel.setPassword(passwordTracker.getPassword());
 						session.flush();
 					}
 					else {
-						passwordTrackerHBM = new PasswordTrackerHBM();
-						passwordTrackerHBM.setPasswordTrackerId(passwordTracker.getPasswordTrackerId());
-						passwordTrackerHBM.setUserId(passwordTracker.getUserId());
-						passwordTrackerHBM.setCreateDate(passwordTracker.getCreateDate());
-						passwordTrackerHBM.setPassword(passwordTracker.getPassword());
-						session.save(passwordTrackerHBM);
+						passwordTrackerModel = new PasswordTracker();
+						passwordTrackerModel.setPasswordTrackerId(passwordTracker.getPasswordTrackerId());
+						passwordTrackerModel.setUserId(passwordTracker.getUserId());
+						passwordTrackerModel.setCreateDate(passwordTracker.getCreateDate());
+						passwordTrackerModel.setPassword(passwordTracker.getPassword());
+						session.save(passwordTrackerModel);
 						session.flush();
 					}
 				}
@@ -142,18 +141,17 @@ public class PasswordTrackerPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.PasswordTracker findByPrimaryKey(
-		String passwordTrackerId)
+	public PasswordTracker findByPrimaryKey(String passwordTrackerId)
 		throws NoSuchPasswordTrackerException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			PasswordTrackerHBM passwordTrackerHBM = (PasswordTrackerHBM)session.get(PasswordTrackerHBM.class,
+			PasswordTracker passwordTracker = (PasswordTracker)session.get(PasswordTracker.class,
 					passwordTrackerId);
 
-			if (passwordTrackerHBM == null) {
+			if (passwordTracker == null) {
 				_log.warn("No PasswordTracker exists with the primary key " +
 					passwordTrackerId.toString());
 				throw new NoSuchPasswordTrackerException(
@@ -161,7 +159,7 @@ public class PasswordTrackerPersistence extends BasePersistence {
 					passwordTrackerId.toString());
 			}
 
-			return PasswordTrackerHBMUtil.model(passwordTrackerHBM);
+			return passwordTracker;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -178,11 +176,10 @@ public class PasswordTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM PasswordTracker IN CLASS com.liferay.portal.service.persistence.PasswordTrackerHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.PasswordTracker WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -200,13 +197,7 @@ public class PasswordTrackerPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				PasswordTrackerHBM passwordTrackerHBM = (PasswordTrackerHBM)itr.next();
-				list.add(PasswordTrackerHBMUtil.model(passwordTrackerHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -231,11 +222,10 @@ public class PasswordTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM PasswordTracker IN CLASS com.liferay.portal.service.persistence.PasswordTrackerHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.PasswordTracker WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -259,15 +249,7 @@ public class PasswordTrackerPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				PasswordTrackerHBM passwordTrackerHBM = (PasswordTrackerHBM)itr.next();
-				list.add(PasswordTrackerHBMUtil.model(passwordTrackerHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -277,8 +259,8 @@ public class PasswordTrackerPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.PasswordTracker findByUserId_First(
-		String userId, OrderByComparator obc)
+	public PasswordTracker findByUserId_First(String userId,
+		OrderByComparator obc)
 		throws NoSuchPasswordTrackerException, SystemException {
 		List list = findByUserId(userId, 0, 1, obc);
 
@@ -291,12 +273,12 @@ public class PasswordTrackerPersistence extends BasePersistence {
 			throw new NoSuchPasswordTrackerException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.PasswordTracker)list.get(0);
+			return (PasswordTracker)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.PasswordTracker findByUserId_Last(
-		String userId, OrderByComparator obc)
+	public PasswordTracker findByUserId_Last(String userId,
+		OrderByComparator obc)
 		throws NoSuchPasswordTrackerException, SystemException {
 		int count = countByUserId(userId);
 		List list = findByUserId(userId, count - 1, count, obc);
@@ -310,14 +292,14 @@ public class PasswordTrackerPersistence extends BasePersistence {
 			throw new NoSuchPasswordTrackerException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.PasswordTracker)list.get(0);
+			return (PasswordTracker)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.PasswordTracker[] findByUserId_PrevAndNext(
+	public PasswordTracker[] findByUserId_PrevAndNext(
 		String passwordTrackerId, String userId, OrderByComparator obc)
 		throws NoSuchPasswordTrackerException, SystemException {
-		com.liferay.portal.model.PasswordTracker passwordTracker = findByPrimaryKey(passwordTrackerId);
+		PasswordTracker passwordTracker = findByPrimaryKey(passwordTrackerId);
 		int count = countByUserId(userId);
 		Session session = null;
 
@@ -325,11 +307,10 @@ public class PasswordTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM PasswordTracker IN CLASS com.liferay.portal.service.persistence.PasswordTrackerHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.PasswordTracker WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -354,11 +335,11 @@ public class PasswordTrackerPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					passwordTracker, PasswordTrackerHBMUtil.getInstance());
-			com.liferay.portal.model.PasswordTracker[] array = new com.liferay.portal.model.PasswordTracker[3];
-			array[0] = (com.liferay.portal.model.PasswordTracker)objArray[0];
-			array[1] = (com.liferay.portal.model.PasswordTracker)objArray[1];
-			array[2] = (com.liferay.portal.model.PasswordTracker)objArray[2];
+					passwordTracker);
+			PasswordTracker[] array = new PasswordTracker[3];
+			array[0] = (PasswordTracker)objArray[0];
+			array[1] = (PasswordTracker)objArray[1];
+			array[2] = (PasswordTracker)objArray[2];
 
 			return array;
 		}
@@ -377,22 +358,14 @@ public class PasswordTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM PasswordTracker IN CLASS com.liferay.portal.service.persistence.PasswordTrackerHBM ");
+			query.append("FROM com.liferay.portal.model.PasswordTracker ");
 			query.append("ORDER BY ");
 			query.append("userId DESC").append(", ");
 			query.append("createDate DESC");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				PasswordTrackerHBM passwordTrackerHBM = (PasswordTrackerHBM)itr.next();
-				list.add(PasswordTrackerHBMUtil.model(passwordTrackerHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -409,11 +382,10 @@ public class PasswordTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM PasswordTracker IN CLASS com.liferay.portal.service.persistence.PasswordTrackerHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.PasswordTracker WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -434,8 +406,8 @@ public class PasswordTrackerPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				PasswordTrackerHBM passwordTrackerHBM = (PasswordTrackerHBM)itr.next();
-				session.delete(passwordTrackerHBM);
+				PasswordTracker passwordTracker = (PasswordTracker)itr.next();
+				session.delete(passwordTracker);
 			}
 
 			session.flush();
@@ -456,11 +428,10 @@ public class PasswordTrackerPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM PasswordTracker IN CLASS com.liferay.portal.service.persistence.PasswordTrackerHBM WHERE ");
+			query.append("FROM com.liferay.portal.model.PasswordTracker WHERE ");
 
 			if (userId == null) {
-				query.append("userId is null");
+				query.append("userId IS NULL");
 			}
 			else {
 				query.append("userId = ?");
@@ -493,6 +464,9 @@ public class PasswordTrackerPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(PasswordTrackerPersistence.class);

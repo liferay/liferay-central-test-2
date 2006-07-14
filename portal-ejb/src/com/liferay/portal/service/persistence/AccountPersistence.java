@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchAccountException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Account;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import org.apache.commons.logging.Log;
@@ -44,25 +45,24 @@ import java.util.List;
  *
  */
 public class AccountPersistence extends BasePersistence {
-	public com.liferay.portal.model.Account create(String accountId) {
-		AccountHBM accountHBM = new AccountHBM();
-		accountHBM.setNew(true);
-		accountHBM.setPrimaryKey(accountId);
+	public Account create(String accountId) {
+		Account account = new Account();
+		account.setNew(true);
+		account.setPrimaryKey(accountId);
 
-		return AccountHBMUtil.model(accountHBM);
+		return account;
 	}
 
-	public com.liferay.portal.model.Account remove(String accountId)
+	public Account remove(String accountId)
 		throws NoSuchAccountException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			AccountHBM accountHBM = (AccountHBM)session.get(AccountHBM.class,
-					accountId);
+			Account account = (Account)session.get(Account.class, accountId);
 
-			if (accountHBM == null) {
+			if (account == null) {
 				_log.warn("No Account exists with the primary key " +
 					accountId.toString());
 				throw new NoSuchAccountException(
@@ -70,10 +70,10 @@ public class AccountPersistence extends BasePersistence {
 					accountId.toString());
 			}
 
-			session.delete(accountHBM);
+			session.delete(account);
 			session.flush();
 
-			return AccountHBMUtil.model(accountHBM);
+			return account;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -92,67 +92,67 @@ public class AccountPersistence extends BasePersistence {
 				session = openSession();
 
 				if (account.isNew()) {
-					AccountHBM accountHBM = new AccountHBM();
-					accountHBM.setAccountId(account.getAccountId());
-					accountHBM.setCompanyId(account.getCompanyId());
-					accountHBM.setUserId(account.getUserId());
-					accountHBM.setUserName(account.getUserName());
-					accountHBM.setCreateDate(account.getCreateDate());
-					accountHBM.setModifiedDate(account.getModifiedDate());
-					accountHBM.setParentAccountId(account.getParentAccountId());
-					accountHBM.setName(account.getName());
-					accountHBM.setLegalName(account.getLegalName());
-					accountHBM.setLegalId(account.getLegalId());
-					accountHBM.setLegalType(account.getLegalType());
-					accountHBM.setSicCode(account.getSicCode());
-					accountHBM.setTickerSymbol(account.getTickerSymbol());
-					accountHBM.setIndustry(account.getIndustry());
-					accountHBM.setType(account.getType());
-					accountHBM.setSize(account.getSize());
-					session.save(accountHBM);
+					Account accountModel = new Account();
+					accountModel.setAccountId(account.getAccountId());
+					accountModel.setCompanyId(account.getCompanyId());
+					accountModel.setUserId(account.getUserId());
+					accountModel.setUserName(account.getUserName());
+					accountModel.setCreateDate(account.getCreateDate());
+					accountModel.setModifiedDate(account.getModifiedDate());
+					accountModel.setParentAccountId(account.getParentAccountId());
+					accountModel.setName(account.getName());
+					accountModel.setLegalName(account.getLegalName());
+					accountModel.setLegalId(account.getLegalId());
+					accountModel.setLegalType(account.getLegalType());
+					accountModel.setSicCode(account.getSicCode());
+					accountModel.setTickerSymbol(account.getTickerSymbol());
+					accountModel.setIndustry(account.getIndustry());
+					accountModel.setType(account.getType());
+					accountModel.setSize(account.getSize());
+					session.save(accountModel);
 					session.flush();
 				}
 				else {
-					AccountHBM accountHBM = (AccountHBM)session.get(AccountHBM.class,
+					Account accountModel = (Account)session.get(Account.class,
 							account.getPrimaryKey());
 
-					if (accountHBM != null) {
-						accountHBM.setCompanyId(account.getCompanyId());
-						accountHBM.setUserId(account.getUserId());
-						accountHBM.setUserName(account.getUserName());
-						accountHBM.setCreateDate(account.getCreateDate());
-						accountHBM.setModifiedDate(account.getModifiedDate());
-						accountHBM.setParentAccountId(account.getParentAccountId());
-						accountHBM.setName(account.getName());
-						accountHBM.setLegalName(account.getLegalName());
-						accountHBM.setLegalId(account.getLegalId());
-						accountHBM.setLegalType(account.getLegalType());
-						accountHBM.setSicCode(account.getSicCode());
-						accountHBM.setTickerSymbol(account.getTickerSymbol());
-						accountHBM.setIndustry(account.getIndustry());
-						accountHBM.setType(account.getType());
-						accountHBM.setSize(account.getSize());
+					if (accountModel != null) {
+						accountModel.setCompanyId(account.getCompanyId());
+						accountModel.setUserId(account.getUserId());
+						accountModel.setUserName(account.getUserName());
+						accountModel.setCreateDate(account.getCreateDate());
+						accountModel.setModifiedDate(account.getModifiedDate());
+						accountModel.setParentAccountId(account.getParentAccountId());
+						accountModel.setName(account.getName());
+						accountModel.setLegalName(account.getLegalName());
+						accountModel.setLegalId(account.getLegalId());
+						accountModel.setLegalType(account.getLegalType());
+						accountModel.setSicCode(account.getSicCode());
+						accountModel.setTickerSymbol(account.getTickerSymbol());
+						accountModel.setIndustry(account.getIndustry());
+						accountModel.setType(account.getType());
+						accountModel.setSize(account.getSize());
 						session.flush();
 					}
 					else {
-						accountHBM = new AccountHBM();
-						accountHBM.setAccountId(account.getAccountId());
-						accountHBM.setCompanyId(account.getCompanyId());
-						accountHBM.setUserId(account.getUserId());
-						accountHBM.setUserName(account.getUserName());
-						accountHBM.setCreateDate(account.getCreateDate());
-						accountHBM.setModifiedDate(account.getModifiedDate());
-						accountHBM.setParentAccountId(account.getParentAccountId());
-						accountHBM.setName(account.getName());
-						accountHBM.setLegalName(account.getLegalName());
-						accountHBM.setLegalId(account.getLegalId());
-						accountHBM.setLegalType(account.getLegalType());
-						accountHBM.setSicCode(account.getSicCode());
-						accountHBM.setTickerSymbol(account.getTickerSymbol());
-						accountHBM.setIndustry(account.getIndustry());
-						accountHBM.setType(account.getType());
-						accountHBM.setSize(account.getSize());
-						session.save(accountHBM);
+						accountModel = new Account();
+						accountModel.setAccountId(account.getAccountId());
+						accountModel.setCompanyId(account.getCompanyId());
+						accountModel.setUserId(account.getUserId());
+						accountModel.setUserName(account.getUserName());
+						accountModel.setCreateDate(account.getCreateDate());
+						accountModel.setModifiedDate(account.getModifiedDate());
+						accountModel.setParentAccountId(account.getParentAccountId());
+						accountModel.setName(account.getName());
+						accountModel.setLegalName(account.getLegalName());
+						accountModel.setLegalId(account.getLegalId());
+						accountModel.setLegalType(account.getLegalType());
+						accountModel.setSicCode(account.getSicCode());
+						accountModel.setTickerSymbol(account.getTickerSymbol());
+						accountModel.setIndustry(account.getIndustry());
+						accountModel.setType(account.getType());
+						accountModel.setSize(account.getSize());
+						session.save(accountModel);
 						session.flush();
 					}
 				}
@@ -171,17 +171,16 @@ public class AccountPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.Account findByPrimaryKey(String accountId)
+	public Account findByPrimaryKey(String accountId)
 		throws NoSuchAccountException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			AccountHBM accountHBM = (AccountHBM)session.get(AccountHBM.class,
-					accountId);
+			Account account = (Account)session.get(Account.class, accountId);
 
-			if (accountHBM == null) {
+			if (account == null) {
 				_log.warn("No Account exists with the primary key " +
 					accountId.toString());
 				throw new NoSuchAccountException(
@@ -189,7 +188,7 @@ public class AccountPersistence extends BasePersistence {
 					accountId.toString());
 			}
 
-			return AccountHBMUtil.model(accountHBM);
+			return account;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -206,19 +205,11 @@ public class AccountPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM Account_ IN CLASS com.liferay.portal.service.persistence.AccountHBM ");
+			query.append("FROM com.liferay.portal.model.Account ");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				AccountHBM accountHBM = (AccountHBM)itr.next();
-				list.add(AccountHBMUtil.model(accountHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -226,6 +217,9 @@ public class AccountPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(AccountPersistence.class);

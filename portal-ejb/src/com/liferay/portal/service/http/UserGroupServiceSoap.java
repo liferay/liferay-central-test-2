@@ -37,13 +37,10 @@ import java.rmi.RemoteException;
  *
  */
 public class UserGroupServiceSoap {
-	public static boolean addGroupUserGroups(java.lang.String groupId,
+	public static void addGroupUserGroups(java.lang.String groupId,
 		java.lang.String[] userGroupIds) throws RemoteException {
 		try {
-			boolean returnValue = UserGroupServiceUtil.addGroupUserGroups(groupId,
-					userGroupIds);
-
-			return returnValue;
+			UserGroupServiceUtil.addGroupUserGroups(groupId, userGroupIds);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -108,13 +105,10 @@ public class UserGroupServiceSoap {
 		}
 	}
 
-	public static boolean unsetGroupUserGroups(java.lang.String groupId,
+	public static void unsetGroupUserGroups(java.lang.String groupId,
 		java.lang.String[] userGroupIds) throws RemoteException {
 		try {
-			boolean returnValue = UserGroupServiceUtil.unsetGroupUserGroups(groupId,
-					userGroupIds);
-
-			return returnValue;
+			UserGroupServiceUtil.unsetGroupUserGroups(groupId, userGroupIds);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);

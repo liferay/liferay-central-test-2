@@ -34,13 +34,15 @@ import org.hibernate.connection.ConnectionProvider;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.engine.SessionFactoryImplementor;
 
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
+
 /**
  * <a href="BasePersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class BasePersistence {
+public class BasePersistence extends JdbcDaoSupport {
 
 	public SessionFactory getSessionFactory() {
 		return _sessionFactory;

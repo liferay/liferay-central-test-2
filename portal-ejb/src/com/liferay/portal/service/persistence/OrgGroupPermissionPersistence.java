@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchOrgGroupPermissionException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.OrgGroupPermission;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.util.StringPool;
@@ -48,27 +49,25 @@ import java.util.List;
  *
  */
 public class OrgGroupPermissionPersistence extends BasePersistence {
-	public com.liferay.portal.model.OrgGroupPermission create(
-		OrgGroupPermissionPK orgGroupPermissionPK) {
-		OrgGroupPermissionHBM orgGroupPermissionHBM = new OrgGroupPermissionHBM();
-		orgGroupPermissionHBM.setNew(true);
-		orgGroupPermissionHBM.setPrimaryKey(orgGroupPermissionPK);
+	public OrgGroupPermission create(OrgGroupPermissionPK orgGroupPermissionPK) {
+		OrgGroupPermission orgGroupPermission = new OrgGroupPermission();
+		orgGroupPermission.setNew(true);
+		orgGroupPermission.setPrimaryKey(orgGroupPermissionPK);
 
-		return OrgGroupPermissionHBMUtil.model(orgGroupPermissionHBM);
+		return orgGroupPermission;
 	}
 
-	public com.liferay.portal.model.OrgGroupPermission remove(
-		OrgGroupPermissionPK orgGroupPermissionPK)
+	public OrgGroupPermission remove(OrgGroupPermissionPK orgGroupPermissionPK)
 		throws NoSuchOrgGroupPermissionException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			OrgGroupPermissionHBM orgGroupPermissionHBM = (OrgGroupPermissionHBM)session.get(OrgGroupPermissionHBM.class,
+			OrgGroupPermission orgGroupPermission = (OrgGroupPermission)session.get(OrgGroupPermission.class,
 					orgGroupPermissionPK);
 
-			if (orgGroupPermissionHBM == null) {
+			if (orgGroupPermission == null) {
 				_log.warn("No OrgGroupPermission exists with the primary key " +
 					orgGroupPermissionPK.toString());
 				throw new NoSuchOrgGroupPermissionException(
@@ -76,10 +75,10 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 					orgGroupPermissionPK.toString());
 			}
 
-			session.delete(orgGroupPermissionHBM);
+			session.delete(orgGroupPermission);
 			session.flush();
 
-			return OrgGroupPermissionHBMUtil.model(orgGroupPermissionHBM);
+			return orgGroupPermission;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -99,26 +98,26 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 				session = openSession();
 
 				if (orgGroupPermission.isNew()) {
-					OrgGroupPermissionHBM orgGroupPermissionHBM = new OrgGroupPermissionHBM();
-					orgGroupPermissionHBM.setOrganizationId(orgGroupPermission.getOrganizationId());
-					orgGroupPermissionHBM.setGroupId(orgGroupPermission.getGroupId());
-					orgGroupPermissionHBM.setPermissionId(orgGroupPermission.getPermissionId());
-					session.save(orgGroupPermissionHBM);
+					OrgGroupPermission orgGroupPermissionModel = new OrgGroupPermission();
+					orgGroupPermissionModel.setOrganizationId(orgGroupPermission.getOrganizationId());
+					orgGroupPermissionModel.setGroupId(orgGroupPermission.getGroupId());
+					orgGroupPermissionModel.setPermissionId(orgGroupPermission.getPermissionId());
+					session.save(orgGroupPermissionModel);
 					session.flush();
 				}
 				else {
-					OrgGroupPermissionHBM orgGroupPermissionHBM = (OrgGroupPermissionHBM)session.get(OrgGroupPermissionHBM.class,
+					OrgGroupPermission orgGroupPermissionModel = (OrgGroupPermission)session.get(OrgGroupPermission.class,
 							orgGroupPermission.getPrimaryKey());
 
-					if (orgGroupPermissionHBM != null) {
+					if (orgGroupPermissionModel != null) {
 						session.flush();
 					}
 					else {
-						orgGroupPermissionHBM = new OrgGroupPermissionHBM();
-						orgGroupPermissionHBM.setOrganizationId(orgGroupPermission.getOrganizationId());
-						orgGroupPermissionHBM.setGroupId(orgGroupPermission.getGroupId());
-						orgGroupPermissionHBM.setPermissionId(orgGroupPermission.getPermissionId());
-						session.save(orgGroupPermissionHBM);
+						orgGroupPermissionModel = new OrgGroupPermission();
+						orgGroupPermissionModel.setOrganizationId(orgGroupPermission.getOrganizationId());
+						orgGroupPermissionModel.setGroupId(orgGroupPermission.getGroupId());
+						orgGroupPermissionModel.setPermissionId(orgGroupPermission.getPermissionId());
+						session.save(orgGroupPermissionModel);
 						session.flush();
 					}
 				}
@@ -137,7 +136,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.OrgGroupPermission findByPrimaryKey(
+	public OrgGroupPermission findByPrimaryKey(
 		OrgGroupPermissionPK orgGroupPermissionPK)
 		throws NoSuchOrgGroupPermissionException, SystemException {
 		Session session = null;
@@ -145,10 +144,10 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			OrgGroupPermissionHBM orgGroupPermissionHBM = (OrgGroupPermissionHBM)session.get(OrgGroupPermissionHBM.class,
+			OrgGroupPermission orgGroupPermission = (OrgGroupPermission)session.get(OrgGroupPermission.class,
 					orgGroupPermissionPK);
 
-			if (orgGroupPermissionHBM == null) {
+			if (orgGroupPermission == null) {
 				_log.warn("No OrgGroupPermission exists with the primary key " +
 					orgGroupPermissionPK.toString());
 				throw new NoSuchOrgGroupPermissionException(
@@ -156,7 +155,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 					orgGroupPermissionPK.toString());
 			}
 
-			return OrgGroupPermissionHBMUtil.model(orgGroupPermissionHBM);
+			return orgGroupPermission;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -175,10 +174,10 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM OrgGroupPermission IN CLASS com.liferay.portal.service.persistence.OrgGroupPermissionHBM WHERE ");
+				"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
 
 			if (permissionId == null) {
-				query.append("permissionId is null");
+				query.append("permissionId IS NULL");
 			}
 			else {
 				query.append("permissionId = ?");
@@ -193,13 +192,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 				q.setString(queryPos++, permissionId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				OrgGroupPermissionHBM orgGroupPermissionHBM = (OrgGroupPermissionHBM)itr.next();
-				list.add(OrgGroupPermissionHBMUtil.model(orgGroupPermissionHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -225,10 +218,10 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM OrgGroupPermission IN CLASS com.liferay.portal.service.persistence.OrgGroupPermissionHBM WHERE ");
+				"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
 
 			if (permissionId == null) {
-				query.append("permissionId is null");
+				query.append("permissionId IS NULL");
 			}
 			else {
 				query.append("permissionId = ?");
@@ -247,15 +240,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 				q.setString(queryPos++, permissionId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				OrgGroupPermissionHBM orgGroupPermissionHBM = (OrgGroupPermissionHBM)itr.next();
-				list.add(OrgGroupPermissionHBMUtil.model(orgGroupPermissionHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -265,8 +250,8 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portal.model.OrgGroupPermission findByPermissionId_First(
-		String permissionId, OrderByComparator obc)
+	public OrgGroupPermission findByPermissionId_First(String permissionId,
+		OrderByComparator obc)
 		throws NoSuchOrgGroupPermissionException, SystemException {
 		List list = findByPermissionId(permissionId, 0, 1, obc);
 
@@ -279,12 +264,12 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			throw new NoSuchOrgGroupPermissionException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.OrgGroupPermission)list.get(0);
+			return (OrgGroupPermission)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.OrgGroupPermission findByPermissionId_Last(
-		String permissionId, OrderByComparator obc)
+	public OrgGroupPermission findByPermissionId_Last(String permissionId,
+		OrderByComparator obc)
 		throws NoSuchOrgGroupPermissionException, SystemException {
 		int count = countByPermissionId(permissionId);
 		List list = findByPermissionId(permissionId, count - 1, count, obc);
@@ -298,15 +283,15 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			throw new NoSuchOrgGroupPermissionException(msg);
 		}
 		else {
-			return (com.liferay.portal.model.OrgGroupPermission)list.get(0);
+			return (OrgGroupPermission)list.get(0);
 		}
 	}
 
-	public com.liferay.portal.model.OrgGroupPermission[] findByPermissionId_PrevAndNext(
+	public OrgGroupPermission[] findByPermissionId_PrevAndNext(
 		OrgGroupPermissionPK orgGroupPermissionPK, String permissionId,
 		OrderByComparator obc)
 		throws NoSuchOrgGroupPermissionException, SystemException {
-		com.liferay.portal.model.OrgGroupPermission orgGroupPermission = findByPrimaryKey(orgGroupPermissionPK);
+		OrgGroupPermission orgGroupPermission = findByPrimaryKey(orgGroupPermissionPK);
 		int count = countByPermissionId(permissionId);
 		Session session = null;
 
@@ -315,10 +300,10 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM OrgGroupPermission IN CLASS com.liferay.portal.service.persistence.OrgGroupPermissionHBM WHERE ");
+				"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
 
 			if (permissionId == null) {
-				query.append("permissionId is null");
+				query.append("permissionId IS NULL");
 			}
 			else {
 				query.append("permissionId = ?");
@@ -338,11 +323,11 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					orgGroupPermission, OrgGroupPermissionHBMUtil.getInstance());
-			com.liferay.portal.model.OrgGroupPermission[] array = new com.liferay.portal.model.OrgGroupPermission[3];
-			array[0] = (com.liferay.portal.model.OrgGroupPermission)objArray[0];
-			array[1] = (com.liferay.portal.model.OrgGroupPermission)objArray[1];
-			array[2] = (com.liferay.portal.model.OrgGroupPermission)objArray[2];
+					orgGroupPermission);
+			OrgGroupPermission[] array = new OrgGroupPermission[3];
+			array[0] = (OrgGroupPermission)objArray[0];
+			array[1] = (OrgGroupPermission)objArray[1];
+			array[2] = (OrgGroupPermission)objArray[2];
 
 			return array;
 		}
@@ -361,19 +346,11 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			session = openSession();
 
 			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM OrgGroupPermission IN CLASS com.liferay.portal.service.persistence.OrgGroupPermissionHBM ");
+			query.append("FROM com.liferay.portal.model.OrgGroupPermission ");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				OrgGroupPermissionHBM orgGroupPermissionHBM = (OrgGroupPermissionHBM)itr.next();
-				list.add(OrgGroupPermissionHBMUtil.model(orgGroupPermissionHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -392,10 +369,10 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM OrgGroupPermission IN CLASS com.liferay.portal.service.persistence.OrgGroupPermissionHBM WHERE ");
+				"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
 
 			if (permissionId == null) {
-				query.append("permissionId is null");
+				query.append("permissionId IS NULL");
 			}
 			else {
 				query.append("permissionId = ?");
@@ -413,8 +390,8 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				OrgGroupPermissionHBM orgGroupPermissionHBM = (OrgGroupPermissionHBM)itr.next();
-				session.delete(orgGroupPermissionHBM);
+				OrgGroupPermission orgGroupPermission = (OrgGroupPermission)itr.next();
+				session.delete(orgGroupPermission);
 			}
 
 			session.flush();
@@ -437,10 +414,10 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM OrgGroupPermission IN CLASS com.liferay.portal.service.persistence.OrgGroupPermissionHBM WHERE ");
+				"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
 
 			if (permissionId == null) {
-				query.append("permissionId is null");
+				query.append("permissionId IS NULL");
 			}
 			else {
 				query.append("permissionId = ?");
@@ -473,6 +450,9 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(OrgGroupPermissionPersistence.class);

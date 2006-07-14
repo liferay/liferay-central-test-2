@@ -231,6 +231,10 @@ public class WikiNodeUtil {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static WikiNodePersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		WikiNodeUtil util = (WikiNodeUtil)ctx.getBean(CLASS_NAME);

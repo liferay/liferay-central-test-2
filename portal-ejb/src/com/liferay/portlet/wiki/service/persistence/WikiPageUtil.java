@@ -346,6 +346,10 @@ public class WikiPageUtil {
 		return getPersistence().countByN_T_H(nodeId, title, head);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static WikiPagePersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		WikiPageUtil util = (WikiPageUtil)ctx.getBean(CLASS_NAME);

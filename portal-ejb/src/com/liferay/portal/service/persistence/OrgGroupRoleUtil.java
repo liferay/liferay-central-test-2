@@ -182,6 +182,10 @@ public class OrgGroupRoleUtil {
 		return getPersistence().countByRoleId(roleId);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static OrgGroupRolePersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		OrgGroupRoleUtil util = (OrgGroupRoleUtil)ctx.getBean(CLASS_NAME);

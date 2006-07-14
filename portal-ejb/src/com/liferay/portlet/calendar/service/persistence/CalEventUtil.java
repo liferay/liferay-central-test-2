@@ -287,6 +287,10 @@ public class CalEventUtil {
 		return getPersistence().countByG_R(groupId, repeating);
 	}
 
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
 	public static CalEventPersistence getPersistence() {
 		ApplicationContext ctx = SpringUtil.getContext();
 		CalEventUtil util = (CalEventUtil)ctx.getBean(CLASS_NAME);

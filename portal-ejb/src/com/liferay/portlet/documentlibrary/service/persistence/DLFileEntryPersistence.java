@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
 import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -49,27 +50,25 @@ import java.util.List;
  *
  */
 public class DLFileEntryPersistence extends BasePersistence {
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry create(
-		DLFileEntryPK dlFileEntryPK) {
-		DLFileEntryHBM dlFileEntryHBM = new DLFileEntryHBM();
-		dlFileEntryHBM.setNew(true);
-		dlFileEntryHBM.setPrimaryKey(dlFileEntryPK);
+	public DLFileEntry create(DLFileEntryPK dlFileEntryPK) {
+		DLFileEntry dlFileEntry = new DLFileEntry();
+		dlFileEntry.setNew(true);
+		dlFileEntry.setPrimaryKey(dlFileEntryPK);
 
-		return DLFileEntryHBMUtil.model(dlFileEntryHBM);
+		return dlFileEntry;
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry remove(
-		DLFileEntryPK dlFileEntryPK)
+	public DLFileEntry remove(DLFileEntryPK dlFileEntryPK)
 		throws NoSuchFileEntryException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			DLFileEntryHBM dlFileEntryHBM = (DLFileEntryHBM)session.get(DLFileEntryHBM.class,
+			DLFileEntry dlFileEntry = (DLFileEntry)session.get(DLFileEntry.class,
 					dlFileEntryPK);
 
-			if (dlFileEntryHBM == null) {
+			if (dlFileEntry == null) {
 				_log.warn("No DLFileEntry exists with the primary key " +
 					dlFileEntryPK.toString());
 				throw new NoSuchFileEntryException(
@@ -77,10 +76,10 @@ public class DLFileEntryPersistence extends BasePersistence {
 					dlFileEntryPK.toString());
 			}
 
-			session.delete(dlFileEntryHBM);
+			session.delete(dlFileEntry);
 			session.flush();
 
-			return DLFileEntryHBMUtil.model(dlFileEntryHBM);
+			return dlFileEntry;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -100,60 +99,60 @@ public class DLFileEntryPersistence extends BasePersistence {
 				session = openSession();
 
 				if (dlFileEntry.isNew()) {
-					DLFileEntryHBM dlFileEntryHBM = new DLFileEntryHBM();
-					dlFileEntryHBM.setFolderId(dlFileEntry.getFolderId());
-					dlFileEntryHBM.setName(dlFileEntry.getName());
-					dlFileEntryHBM.setCompanyId(dlFileEntry.getCompanyId());
-					dlFileEntryHBM.setUserId(dlFileEntry.getUserId());
-					dlFileEntryHBM.setUserName(dlFileEntry.getUserName());
-					dlFileEntryHBM.setVersionUserId(dlFileEntry.getVersionUserId());
-					dlFileEntryHBM.setVersionUserName(dlFileEntry.getVersionUserName());
-					dlFileEntryHBM.setCreateDate(dlFileEntry.getCreateDate());
-					dlFileEntryHBM.setModifiedDate(dlFileEntry.getModifiedDate());
-					dlFileEntryHBM.setTitle(dlFileEntry.getTitle());
-					dlFileEntryHBM.setDescription(dlFileEntry.getDescription());
-					dlFileEntryHBM.setVersion(dlFileEntry.getVersion());
-					dlFileEntryHBM.setSize(dlFileEntry.getSize());
-					dlFileEntryHBM.setReadCount(dlFileEntry.getReadCount());
-					session.save(dlFileEntryHBM);
+					DLFileEntry dlFileEntryModel = new DLFileEntry();
+					dlFileEntryModel.setFolderId(dlFileEntry.getFolderId());
+					dlFileEntryModel.setName(dlFileEntry.getName());
+					dlFileEntryModel.setCompanyId(dlFileEntry.getCompanyId());
+					dlFileEntryModel.setUserId(dlFileEntry.getUserId());
+					dlFileEntryModel.setUserName(dlFileEntry.getUserName());
+					dlFileEntryModel.setVersionUserId(dlFileEntry.getVersionUserId());
+					dlFileEntryModel.setVersionUserName(dlFileEntry.getVersionUserName());
+					dlFileEntryModel.setCreateDate(dlFileEntry.getCreateDate());
+					dlFileEntryModel.setModifiedDate(dlFileEntry.getModifiedDate());
+					dlFileEntryModel.setTitle(dlFileEntry.getTitle());
+					dlFileEntryModel.setDescription(dlFileEntry.getDescription());
+					dlFileEntryModel.setVersion(dlFileEntry.getVersion());
+					dlFileEntryModel.setSize(dlFileEntry.getSize());
+					dlFileEntryModel.setReadCount(dlFileEntry.getReadCount());
+					session.save(dlFileEntryModel);
 					session.flush();
 				}
 				else {
-					DLFileEntryHBM dlFileEntryHBM = (DLFileEntryHBM)session.get(DLFileEntryHBM.class,
+					DLFileEntry dlFileEntryModel = (DLFileEntry)session.get(DLFileEntry.class,
 							dlFileEntry.getPrimaryKey());
 
-					if (dlFileEntryHBM != null) {
-						dlFileEntryHBM.setCompanyId(dlFileEntry.getCompanyId());
-						dlFileEntryHBM.setUserId(dlFileEntry.getUserId());
-						dlFileEntryHBM.setUserName(dlFileEntry.getUserName());
-						dlFileEntryHBM.setVersionUserId(dlFileEntry.getVersionUserId());
-						dlFileEntryHBM.setVersionUserName(dlFileEntry.getVersionUserName());
-						dlFileEntryHBM.setCreateDate(dlFileEntry.getCreateDate());
-						dlFileEntryHBM.setModifiedDate(dlFileEntry.getModifiedDate());
-						dlFileEntryHBM.setTitle(dlFileEntry.getTitle());
-						dlFileEntryHBM.setDescription(dlFileEntry.getDescription());
-						dlFileEntryHBM.setVersion(dlFileEntry.getVersion());
-						dlFileEntryHBM.setSize(dlFileEntry.getSize());
-						dlFileEntryHBM.setReadCount(dlFileEntry.getReadCount());
+					if (dlFileEntryModel != null) {
+						dlFileEntryModel.setCompanyId(dlFileEntry.getCompanyId());
+						dlFileEntryModel.setUserId(dlFileEntry.getUserId());
+						dlFileEntryModel.setUserName(dlFileEntry.getUserName());
+						dlFileEntryModel.setVersionUserId(dlFileEntry.getVersionUserId());
+						dlFileEntryModel.setVersionUserName(dlFileEntry.getVersionUserName());
+						dlFileEntryModel.setCreateDate(dlFileEntry.getCreateDate());
+						dlFileEntryModel.setModifiedDate(dlFileEntry.getModifiedDate());
+						dlFileEntryModel.setTitle(dlFileEntry.getTitle());
+						dlFileEntryModel.setDescription(dlFileEntry.getDescription());
+						dlFileEntryModel.setVersion(dlFileEntry.getVersion());
+						dlFileEntryModel.setSize(dlFileEntry.getSize());
+						dlFileEntryModel.setReadCount(dlFileEntry.getReadCount());
 						session.flush();
 					}
 					else {
-						dlFileEntryHBM = new DLFileEntryHBM();
-						dlFileEntryHBM.setFolderId(dlFileEntry.getFolderId());
-						dlFileEntryHBM.setName(dlFileEntry.getName());
-						dlFileEntryHBM.setCompanyId(dlFileEntry.getCompanyId());
-						dlFileEntryHBM.setUserId(dlFileEntry.getUserId());
-						dlFileEntryHBM.setUserName(dlFileEntry.getUserName());
-						dlFileEntryHBM.setVersionUserId(dlFileEntry.getVersionUserId());
-						dlFileEntryHBM.setVersionUserName(dlFileEntry.getVersionUserName());
-						dlFileEntryHBM.setCreateDate(dlFileEntry.getCreateDate());
-						dlFileEntryHBM.setModifiedDate(dlFileEntry.getModifiedDate());
-						dlFileEntryHBM.setTitle(dlFileEntry.getTitle());
-						dlFileEntryHBM.setDescription(dlFileEntry.getDescription());
-						dlFileEntryHBM.setVersion(dlFileEntry.getVersion());
-						dlFileEntryHBM.setSize(dlFileEntry.getSize());
-						dlFileEntryHBM.setReadCount(dlFileEntry.getReadCount());
-						session.save(dlFileEntryHBM);
+						dlFileEntryModel = new DLFileEntry();
+						dlFileEntryModel.setFolderId(dlFileEntry.getFolderId());
+						dlFileEntryModel.setName(dlFileEntry.getName());
+						dlFileEntryModel.setCompanyId(dlFileEntry.getCompanyId());
+						dlFileEntryModel.setUserId(dlFileEntry.getUserId());
+						dlFileEntryModel.setUserName(dlFileEntry.getUserName());
+						dlFileEntryModel.setVersionUserId(dlFileEntry.getVersionUserId());
+						dlFileEntryModel.setVersionUserName(dlFileEntry.getVersionUserName());
+						dlFileEntryModel.setCreateDate(dlFileEntry.getCreateDate());
+						dlFileEntryModel.setModifiedDate(dlFileEntry.getModifiedDate());
+						dlFileEntryModel.setTitle(dlFileEntry.getTitle());
+						dlFileEntryModel.setDescription(dlFileEntry.getDescription());
+						dlFileEntryModel.setVersion(dlFileEntry.getVersion());
+						dlFileEntryModel.setSize(dlFileEntry.getSize());
+						dlFileEntryModel.setReadCount(dlFileEntry.getReadCount());
+						session.save(dlFileEntryModel);
 						session.flush();
 					}
 				}
@@ -172,18 +171,17 @@ public class DLFileEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByPrimaryKey(
-		DLFileEntryPK dlFileEntryPK)
+	public DLFileEntry findByPrimaryKey(DLFileEntryPK dlFileEntryPK)
 		throws NoSuchFileEntryException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			DLFileEntryHBM dlFileEntryHBM = (DLFileEntryHBM)session.get(DLFileEntryHBM.class,
+			DLFileEntry dlFileEntry = (DLFileEntry)session.get(DLFileEntry.class,
 					dlFileEntryPK);
 
-			if (dlFileEntryHBM == null) {
+			if (dlFileEntry == null) {
 				_log.warn("No DLFileEntry exists with the primary key " +
 					dlFileEntryPK.toString());
 				throw new NoSuchFileEntryException(
@@ -191,7 +189,7 @@ public class DLFileEntryPersistence extends BasePersistence {
 					dlFileEntryPK.toString());
 			}
 
-			return DLFileEntryHBMUtil.model(dlFileEntryHBM);
+			return dlFileEntry;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -209,10 +207,10 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM DLFileEntry IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryHBM WHERE ");
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
 
 			if (folderId == null) {
-				query.append("folderId is null");
+				query.append("folderId IS NULL");
 			}
 			else {
 				query.append("folderId = ?");
@@ -227,13 +225,7 @@ public class DLFileEntryPersistence extends BasePersistence {
 				q.setString(queryPos++, folderId);
 			}
 
-			Iterator itr = q.list().iterator();
-			List list = new ArrayList();
-
-			while (itr.hasNext()) {
-				DLFileEntryHBM dlFileEntryHBM = (DLFileEntryHBM)itr.next();
-				list.add(DLFileEntryHBMUtil.model(dlFileEntryHBM));
-			}
+			List list = q.list();
 
 			return list;
 		}
@@ -259,10 +251,10 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM DLFileEntry IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryHBM WHERE ");
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
 
 			if (folderId == null) {
-				query.append("folderId is null");
+				query.append("folderId IS NULL");
 			}
 			else {
 				query.append("folderId = ?");
@@ -281,15 +273,7 @@ public class DLFileEntryPersistence extends BasePersistence {
 				q.setString(queryPos++, folderId);
 			}
 
-			List list = new ArrayList();
-			Iterator itr = QueryUtil.iterate(q, getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				DLFileEntryHBM dlFileEntryHBM = (DLFileEntryHBM)itr.next();
-				list.add(DLFileEntryHBMUtil.model(dlFileEntryHBM));
-			}
-
-			return list;
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -299,9 +283,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByFolderId_First(
-		String folderId, OrderByComparator obc)
-		throws NoSuchFileEntryException, SystemException {
+	public DLFileEntry findByFolderId_First(String folderId,
+		OrderByComparator obc) throws NoSuchFileEntryException, SystemException {
 		List list = findByFolderId(folderId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -313,13 +296,12 @@ public class DLFileEntryPersistence extends BasePersistence {
 			throw new NoSuchFileEntryException(msg);
 		}
 		else {
-			return (com.liferay.portlet.documentlibrary.model.DLFileEntry)list.get(0);
+			return (DLFileEntry)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByFolderId_Last(
-		String folderId, OrderByComparator obc)
-		throws NoSuchFileEntryException, SystemException {
+	public DLFileEntry findByFolderId_Last(String folderId,
+		OrderByComparator obc) throws NoSuchFileEntryException, SystemException {
 		int count = countByFolderId(folderId);
 		List list = findByFolderId(folderId, count - 1, count, obc);
 
@@ -332,14 +314,14 @@ public class DLFileEntryPersistence extends BasePersistence {
 			throw new NoSuchFileEntryException(msg);
 		}
 		else {
-			return (com.liferay.portlet.documentlibrary.model.DLFileEntry)list.get(0);
+			return (DLFileEntry)list.get(0);
 		}
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry[] findByFolderId_PrevAndNext(
+	public DLFileEntry[] findByFolderId_PrevAndNext(
 		DLFileEntryPK dlFileEntryPK, String folderId, OrderByComparator obc)
 		throws NoSuchFileEntryException, SystemException {
-		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry = findByPrimaryKey(dlFileEntryPK);
+		DLFileEntry dlFileEntry = findByPrimaryKey(dlFileEntryPK);
 		int count = countByFolderId(folderId);
 		Session session = null;
 
@@ -348,10 +330,10 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM DLFileEntry IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryHBM WHERE ");
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
 
 			if (folderId == null) {
-				query.append("folderId is null");
+				query.append("folderId IS NULL");
 			}
 			else {
 				query.append("folderId = ?");
@@ -371,11 +353,11 @@ public class DLFileEntryPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					dlFileEntry, DLFileEntryHBMUtil.getInstance());
-			com.liferay.portlet.documentlibrary.model.DLFileEntry[] array = new com.liferay.portlet.documentlibrary.model.DLFileEntry[3];
-			array[0] = (com.liferay.portlet.documentlibrary.model.DLFileEntry)objArray[0];
-			array[1] = (com.liferay.portlet.documentlibrary.model.DLFileEntry)objArray[1];
-			array[2] = (com.liferay.portlet.documentlibrary.model.DLFileEntry)objArray[2];
+					dlFileEntry);
+			DLFileEntry[] array = new DLFileEntry[3];
+			array[0] = (DLFileEntry)objArray[0];
+			array[1] = (DLFileEntry)objArray[1];
+			array[2] = (DLFileEntry)objArray[2];
 
 			return array;
 		}
@@ -395,18 +377,11 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM DLFileEntry IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryHBM ");
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry ");
 
 			Query q = session.createQuery(query.toString());
-			Iterator itr = q.iterate();
-			List list = new ArrayList();
 
-			while (itr.hasNext()) {
-				DLFileEntryHBM dlFileEntryHBM = (DLFileEntryHBM)itr.next();
-				list.add(DLFileEntryHBMUtil.model(dlFileEntryHBM));
-			}
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -424,10 +399,10 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append(
-				"FROM DLFileEntry IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryHBM WHERE ");
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
 
 			if (folderId == null) {
-				query.append("folderId is null");
+				query.append("folderId IS NULL");
 			}
 			else {
 				query.append("folderId = ?");
@@ -445,8 +420,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				DLFileEntryHBM dlFileEntryHBM = (DLFileEntryHBM)itr.next();
-				session.delete(dlFileEntryHBM);
+				DLFileEntry dlFileEntry = (DLFileEntry)itr.next();
+				session.delete(dlFileEntry);
 			}
 
 			session.flush();
@@ -468,10 +443,10 @@ public class DLFileEntryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("SELECT COUNT(*) ");
 			query.append(
-				"FROM DLFileEntry IN CLASS com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryHBM WHERE ");
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
 
 			if (folderId == null) {
-				query.append("folderId is null");
+				query.append("folderId IS NULL");
 			}
 			else {
 				query.append("folderId = ?");
@@ -504,6 +479,9 @@ public class DLFileEntryPersistence extends BasePersistence {
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected void initDao() {
 	}
 
 	private static Log _log = LogFactory.getLog(DLFileEntryPersistence.class);
