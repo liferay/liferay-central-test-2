@@ -158,6 +158,12 @@ public class IGFolderPersistence extends BasePersistence {
 
 	public IGFolder findByPrimaryKey(String folderId)
 		throws NoSuchFolderException, SystemException {
+		return findByPrimaryKey(folderId, true);
+	}
+
+	public IGFolder findByPrimaryKey(String folderId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchFolderException, SystemException {
 		Session session = null;
 
 		try {
@@ -168,9 +174,12 @@ public class IGFolderPersistence extends BasePersistence {
 			if (igFolder == null) {
 				_log.warn("No IGFolder exists with the primary key " +
 					folderId.toString());
-				throw new NoSuchFolderException(
-					"No IGFolder exists with the primary key " +
-					folderId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchFolderException(
+						"No IGFolder exists with the primary key " +
+						folderId.toString());
+				}
 			}
 
 			return igFolder;
@@ -211,9 +220,7 @@ public class IGFolderPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -404,9 +411,7 @@ public class IGFolderPersistence extends BasePersistence {
 				q.setString(queryPos++, parentFolderId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

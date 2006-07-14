@@ -165,6 +165,12 @@ public class PollsQuestionPersistence extends BasePersistence {
 
 	public PollsQuestion findByPrimaryKey(String questionId)
 		throws NoSuchQuestionException, SystemException {
+		return findByPrimaryKey(questionId, true);
+	}
+
+	public PollsQuestion findByPrimaryKey(String questionId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchQuestionException, SystemException {
 		Session session = null;
 
 		try {
@@ -176,9 +182,12 @@ public class PollsQuestionPersistence extends BasePersistence {
 			if (pollsQuestion == null) {
 				_log.warn("No PollsQuestion exists with the primary key " +
 					questionId.toString());
-				throw new NoSuchQuestionException(
-					"No PollsQuestion exists with the primary key " +
-					questionId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchQuestionException(
+						"No PollsQuestion exists with the primary key " +
+						questionId.toString());
+				}
 			}
 
 			return pollsQuestion;
@@ -219,9 +228,7 @@ public class PollsQuestionPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

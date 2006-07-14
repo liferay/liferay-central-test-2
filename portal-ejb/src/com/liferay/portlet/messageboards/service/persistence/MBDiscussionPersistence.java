@@ -143,6 +143,12 @@ public class MBDiscussionPersistence extends BasePersistence {
 
 	public MBDiscussion findByPrimaryKey(String discussionId)
 		throws NoSuchDiscussionException, SystemException {
+		return findByPrimaryKey(discussionId, true);
+	}
+
+	public MBDiscussion findByPrimaryKey(String discussionId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchDiscussionException, SystemException {
 		Session session = null;
 
 		try {
@@ -154,9 +160,12 @@ public class MBDiscussionPersistence extends BasePersistence {
 			if (mbDiscussion == null) {
 				_log.warn("No MBDiscussion exists with the primary key " +
 					discussionId.toString());
-				throw new NoSuchDiscussionException(
-					"No MBDiscussion exists with the primary key " +
-					discussionId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchDiscussionException(
+						"No MBDiscussion exists with the primary key " +
+						discussionId.toString());
+				}
 			}
 
 			return mbDiscussion;
@@ -170,6 +179,12 @@ public class MBDiscussionPersistence extends BasePersistence {
 	}
 
 	public MBDiscussion findByC_C(String className, String classPK)
+		throws NoSuchDiscussionException, SystemException {
+		return findByC_C(className, classPK, true);
+	}
+
+	public MBDiscussion findByC_C(String className, String classPK,
+		boolean throwNoSuchObjectException)
 		throws NoSuchDiscussionException, SystemException {
 		Session session = null;
 

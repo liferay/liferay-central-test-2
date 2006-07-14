@@ -124,6 +124,14 @@ public class ContactUtil {
 		return getPersistence().findByPrimaryKey(contactId);
 	}
 
+	public static com.liferay.portal.model.Contact findByPrimaryKey(
+		java.lang.String contactId, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchContactException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(contactId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);

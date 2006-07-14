@@ -144,6 +144,12 @@ public class DLFileRankPersistence extends BasePersistence {
 
 	public DLFileRank findByPrimaryKey(DLFileRankPK dlFileRankPK)
 		throws NoSuchFileRankException, SystemException {
+		return findByPrimaryKey(dlFileRankPK, true);
+	}
+
+	public DLFileRank findByPrimaryKey(DLFileRankPK dlFileRankPK,
+		boolean throwNoSuchObjectException)
+		throws NoSuchFileRankException, SystemException {
 		Session session = null;
 
 		try {
@@ -155,9 +161,12 @@ public class DLFileRankPersistence extends BasePersistence {
 			if (dlFileRank == null) {
 				_log.warn("No DLFileRank exists with the primary key " +
 					dlFileRankPK.toString());
-				throw new NoSuchFileRankException(
-					"No DLFileRank exists with the primary key " +
-					dlFileRankPK.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchFileRankException(
+						"No DLFileRank exists with the primary key " +
+						dlFileRankPK.toString());
+				}
 			}
 
 			return dlFileRank;
@@ -198,9 +207,7 @@ public class DLFileRankPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -392,9 +399,7 @@ public class DLFileRankPersistence extends BasePersistence {
 				q.setString(queryPos++, name);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

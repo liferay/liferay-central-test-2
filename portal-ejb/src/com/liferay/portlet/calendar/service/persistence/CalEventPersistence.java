@@ -194,6 +194,12 @@ public class CalEventPersistence extends BasePersistence {
 
 	public CalEvent findByPrimaryKey(String eventId)
 		throws NoSuchEventException, SystemException {
+		return findByPrimaryKey(eventId, true);
+	}
+
+	public CalEvent findByPrimaryKey(String eventId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchEventException, SystemException {
 		Session session = null;
 
 		try {
@@ -204,9 +210,12 @@ public class CalEventPersistence extends BasePersistence {
 			if (calEvent == null) {
 				_log.warn("No CalEvent exists with the primary key " +
 					eventId.toString());
-				throw new NoSuchEventException(
-					"No CalEvent exists with the primary key " +
-					eventId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchEventException(
+						"No CalEvent exists with the primary key " +
+						eventId.toString());
+				}
 			}
 
 			return calEvent;
@@ -248,9 +257,7 @@ public class CalEventPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -443,9 +450,7 @@ public class CalEventPersistence extends BasePersistence {
 				q.setString(queryPos++, type);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -662,9 +667,7 @@ public class CalEventPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, repeating);
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

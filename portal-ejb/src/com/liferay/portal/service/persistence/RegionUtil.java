@@ -124,6 +124,14 @@ public class RegionUtil {
 		return getPersistence().findByPrimaryKey(regionId);
 	}
 
+	public static com.liferay.portal.model.Region findByPrimaryKey(
+		java.lang.String regionId, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchRegionException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(regionId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByCountryId(java.lang.String countryId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCountryId(countryId);

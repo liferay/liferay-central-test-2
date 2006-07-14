@@ -44,6 +44,7 @@ create index EmailAddress_ix_UserId on EmailAddress (userId);
 
 create index Group_ix_C_C_C on Group_ (companyId, className, classPK);
 create index Group_ix_C_F on Group_ (companyId, friendlyURL);
+create index Group_ix_C_N on Group_ (companyId, name);
 
 create index IGFolder_ix_G_P on IGFolder (groupId, parentFolderId);
 create index IGFolder_ix_GroupId on IGFolder (groupId);
@@ -142,6 +143,7 @@ create index Resource_ix_CompanyId on Resource_ (companyId);
 create index Resource_ix_Name on Resource_ (name);
 
 create index Role_ix_C_C_C on Role_ (companyId, className, classPK);
+create index Role_ix_C_N on Role_ (companyId, name);
 create index Role_ix_CompanyId on Role_ (companyId);
 
 create index ShoppingCart_ix_GroupId on ShoppingCart (groupId);

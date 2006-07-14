@@ -173,6 +173,12 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 	public DLFileEntry findByPrimaryKey(DLFileEntryPK dlFileEntryPK)
 		throws NoSuchFileEntryException, SystemException {
+		return findByPrimaryKey(dlFileEntryPK, true);
+	}
+
+	public DLFileEntry findByPrimaryKey(DLFileEntryPK dlFileEntryPK,
+		boolean throwNoSuchObjectException)
+		throws NoSuchFileEntryException, SystemException {
 		Session session = null;
 
 		try {
@@ -184,9 +190,12 @@ public class DLFileEntryPersistence extends BasePersistence {
 			if (dlFileEntry == null) {
 				_log.warn("No DLFileEntry exists with the primary key " +
 					dlFileEntryPK.toString());
-				throw new NoSuchFileEntryException(
-					"No DLFileEntry exists with the primary key " +
-					dlFileEntryPK.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchFileEntryException(
+						"No DLFileEntry exists with the primary key " +
+						dlFileEntryPK.toString());
+				}
 			}
 
 			return dlFileEntry;
@@ -225,9 +234,7 @@ public class DLFileEntryPersistence extends BasePersistence {
 				q.setString(queryPos++, folderId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

@@ -161,6 +161,12 @@ public class WikiNodePersistence extends BasePersistence {
 
 	public WikiNode findByPrimaryKey(String nodeId)
 		throws NoSuchNodeException, SystemException {
+		return findByPrimaryKey(nodeId, true);
+	}
+
+	public WikiNode findByPrimaryKey(String nodeId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchNodeException, SystemException {
 		Session session = null;
 
 		try {
@@ -171,9 +177,12 @@ public class WikiNodePersistence extends BasePersistence {
 			if (wikiNode == null) {
 				_log.warn("No WikiNode exists with the primary key " +
 					nodeId.toString());
-				throw new NoSuchNodeException(
-					"No WikiNode exists with the primary key " +
-					nodeId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchNodeException(
+						"No WikiNode exists with the primary key " +
+						nodeId.toString());
+				}
 			}
 
 			return wikiNode;
@@ -213,9 +222,7 @@ public class WikiNodePersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -388,9 +395,7 @@ public class WikiNodePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

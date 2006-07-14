@@ -124,6 +124,14 @@ public class CompanyUtil {
 		return getPersistence().findByPrimaryKey(companyId);
 	}
 
+	public static com.liferay.portal.model.Company findByPrimaryKey(
+		java.lang.String companyId, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchCompanyException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(companyId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();

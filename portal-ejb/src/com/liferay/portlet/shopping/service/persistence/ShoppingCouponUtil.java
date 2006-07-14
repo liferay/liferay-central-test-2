@@ -125,6 +125,14 @@ public class ShoppingCouponUtil {
 		return getPersistence().findByPrimaryKey(couponId);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingCoupon findByPrimaryKey(
+		java.lang.String couponId, boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.shopping.NoSuchCouponException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(couponId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);

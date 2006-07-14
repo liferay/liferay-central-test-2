@@ -180,6 +180,12 @@ public class OrgLaborPersistence extends BasePersistence {
 
 	public OrgLabor findByPrimaryKey(String orgLaborId)
 		throws NoSuchOrgLaborException, SystemException {
+		return findByPrimaryKey(orgLaborId, true);
+	}
+
+	public OrgLabor findByPrimaryKey(String orgLaborId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchOrgLaborException, SystemException {
 		Session session = null;
 
 		try {
@@ -190,9 +196,12 @@ public class OrgLaborPersistence extends BasePersistence {
 			if (orgLabor == null) {
 				_log.warn("No OrgLabor exists with the primary key " +
 					orgLaborId.toString());
-				throw new NoSuchOrgLaborException(
-					"No OrgLabor exists with the primary key " +
-					orgLaborId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchOrgLaborException(
+						"No OrgLabor exists with the primary key " +
+						orgLaborId.toString());
+				}
 			}
 
 			return orgLabor;
@@ -234,9 +243,7 @@ public class OrgLaborPersistence extends BasePersistence {
 				q.setString(queryPos++, organizationId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

@@ -125,6 +125,14 @@ public class BlogsCategoryUtil {
 		return getPersistence().findByPrimaryKey(categoryId);
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsCategory findByPrimaryKey(
+		java.lang.String categoryId, boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.blogs.NoSuchCategoryException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(categoryId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByParentCategoryId(
 		java.lang.String parentCategoryId)
 		throws com.liferay.portal.SystemException {

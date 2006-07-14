@@ -125,6 +125,15 @@ public class JournalTemplateUtil {
 		return getPersistence().findByPrimaryKey(journalTemplatePK);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalTemplate findByPrimaryKey(
+		com.liferay.portlet.journal.service.persistence.JournalTemplatePK journalTemplatePK,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.journal.NoSuchTemplateException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(journalTemplatePK,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);

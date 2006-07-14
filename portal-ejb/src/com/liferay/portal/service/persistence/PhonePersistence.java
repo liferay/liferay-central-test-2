@@ -165,6 +165,12 @@ public class PhonePersistence extends BasePersistence {
 
 	public Phone findByPrimaryKey(String phoneId)
 		throws NoSuchPhoneException, SystemException {
+		return findByPrimaryKey(phoneId, true);
+	}
+
+	public Phone findByPrimaryKey(String phoneId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchPhoneException, SystemException {
 		Session session = null;
 
 		try {
@@ -175,9 +181,12 @@ public class PhonePersistence extends BasePersistence {
 			if (phone == null) {
 				_log.warn("No Phone exists with the primary key " +
 					phoneId.toString());
-				throw new NoSuchPhoneException(
-					"No Phone exists with the primary key " +
-					phoneId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchPhoneException(
+						"No Phone exists with the primary key " +
+						phoneId.toString());
+				}
 			}
 
 			return phone;
@@ -217,9 +226,7 @@ public class PhonePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -393,9 +400,7 @@ public class PhonePersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -582,9 +587,7 @@ public class PhonePersistence extends BasePersistence {
 				q.setString(queryPos++, className);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -817,9 +820,7 @@ public class PhonePersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1091,9 +1092,7 @@ public class PhonePersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, primary);
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

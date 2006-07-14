@@ -150,6 +150,13 @@ public class JournalContentSearchPersistence extends BasePersistence {
 	public JournalContentSearch findByPrimaryKey(
 		JournalContentSearchPK journalContentSearchPK)
 		throws NoSuchContentSearchException, SystemException {
+		return findByPrimaryKey(journalContentSearchPK, true);
+	}
+
+	public JournalContentSearch findByPrimaryKey(
+		JournalContentSearchPK journalContentSearchPK,
+		boolean throwNoSuchObjectException)
+		throws NoSuchContentSearchException, SystemException {
 		Session session = null;
 
 		try {
@@ -162,9 +169,12 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				_log.warn(
 					"No JournalContentSearch exists with the primary key " +
 					journalContentSearchPK.toString());
-				throw new NoSuchContentSearchException(
-					"No JournalContentSearch exists with the primary key " +
-					journalContentSearchPK.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchContentSearchException(
+						"No JournalContentSearch exists with the primary key " +
+						journalContentSearchPK.toString());
+				}
 			}
 
 			return journalContentSearch;
@@ -203,9 +213,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				q.setString(queryPos++, ownerId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -390,9 +398,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				q.setString(queryPos++, ownerId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -609,9 +615,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				q.setString(queryPos++, articleId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -828,9 +832,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				q.setString(queryPos++, articleId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

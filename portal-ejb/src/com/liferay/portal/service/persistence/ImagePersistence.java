@@ -134,6 +134,12 @@ public class ImagePersistence extends BasePersistence {
 
 	public Image findByPrimaryKey(String imageId)
 		throws NoSuchImageException, SystemException {
+		return findByPrimaryKey(imageId, true);
+	}
+
+	public Image findByPrimaryKey(String imageId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchImageException, SystemException {
 		Session session = null;
 
 		try {
@@ -144,9 +150,12 @@ public class ImagePersistence extends BasePersistence {
 			if (image == null) {
 				_log.warn("No Image exists with the primary key " +
 					imageId.toString());
-				throw new NoSuchImageException(
-					"No Image exists with the primary key " +
-					imageId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchImageException(
+						"No Image exists with the primary key " +
+						imageId.toString());
+				}
 			}
 
 			return image;

@@ -162,6 +162,13 @@ public class JournalStructurePersistence extends BasePersistence {
 	public JournalStructure findByPrimaryKey(
 		JournalStructurePK journalStructurePK)
 		throws NoSuchStructureException, SystemException {
+		return findByPrimaryKey(journalStructurePK, true);
+	}
+
+	public JournalStructure findByPrimaryKey(
+		JournalStructurePK journalStructurePK,
+		boolean throwNoSuchObjectException)
+		throws NoSuchStructureException, SystemException {
 		Session session = null;
 
 		try {
@@ -173,9 +180,12 @@ public class JournalStructurePersistence extends BasePersistence {
 			if (journalStructure == null) {
 				_log.warn("No JournalStructure exists with the primary key " +
 					journalStructurePK.toString());
-				throw new NoSuchStructureException(
-					"No JournalStructure exists with the primary key " +
-					journalStructurePK.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchStructureException(
+						"No JournalStructure exists with the primary key " +
+						journalStructurePK.toString());
+				}
 			}
 
 			return journalStructure;
@@ -216,9 +226,7 @@ public class JournalStructurePersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

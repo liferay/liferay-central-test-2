@@ -193,6 +193,12 @@ public class JournalArticlePersistence extends BasePersistence {
 
 	public JournalArticle findByPrimaryKey(JournalArticlePK journalArticlePK)
 		throws NoSuchArticleException, SystemException {
+		return findByPrimaryKey(journalArticlePK, true);
+	}
+
+	public JournalArticle findByPrimaryKey(JournalArticlePK journalArticlePK,
+		boolean throwNoSuchObjectException)
+		throws NoSuchArticleException, SystemException {
 		Session session = null;
 
 		try {
@@ -204,9 +210,12 @@ public class JournalArticlePersistence extends BasePersistence {
 			if (journalArticle == null) {
 				_log.warn("No JournalArticle exists with the primary key " +
 					journalArticlePK.toString());
-				throw new NoSuchArticleException(
-					"No JournalArticle exists with the primary key " +
-					journalArticlePK.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchArticleException(
+						"No JournalArticle exists with the primary key " +
+						journalArticlePK.toString());
+				}
 			}
 
 			return journalArticle;
@@ -248,9 +257,7 @@ public class JournalArticlePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -431,9 +438,7 @@ public class JournalArticlePersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -628,9 +633,7 @@ public class JournalArticlePersistence extends BasePersistence {
 				q.setString(queryPos++, articleId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -857,9 +860,7 @@ public class JournalArticlePersistence extends BasePersistence {
 				q.setString(queryPos++, structureId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1087,9 +1088,7 @@ public class JournalArticlePersistence extends BasePersistence {
 				q.setString(queryPos++, templateId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1320,9 +1319,7 @@ public class JournalArticlePersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, approved);
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

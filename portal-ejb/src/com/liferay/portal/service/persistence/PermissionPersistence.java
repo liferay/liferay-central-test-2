@@ -161,6 +161,12 @@ public class PermissionPersistence extends BasePersistence {
 
 	public Permission findByPrimaryKey(String permissionId)
 		throws NoSuchPermissionException, SystemException {
+		return findByPrimaryKey(permissionId, true);
+	}
+
+	public Permission findByPrimaryKey(String permissionId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchPermissionException, SystemException {
 		Session session = null;
 
 		try {
@@ -172,9 +178,12 @@ public class PermissionPersistence extends BasePersistence {
 			if (permission == null) {
 				_log.warn("No Permission exists with the primary key " +
 					permissionId.toString());
-				throw new NoSuchPermissionException(
-					"No Permission exists with the primary key " +
-					permissionId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchPermissionException(
+						"No Permission exists with the primary key " +
+						permissionId.toString());
+				}
 			}
 
 			return permission;
@@ -212,9 +221,7 @@ public class PermissionPersistence extends BasePersistence {
 				q.setString(queryPos++, resourceId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -357,6 +364,12 @@ public class PermissionPersistence extends BasePersistence {
 	}
 
 	public Permission findByA_R(String actionId, String resourceId)
+		throws NoSuchPermissionException, SystemException {
+		return findByA_R(actionId, resourceId, true);
+	}
+
+	public Permission findByA_R(String actionId, String resourceId,
+		boolean throwNoSuchObjectException)
 		throws NoSuchPermissionException, SystemException {
 		Session session = null;
 

@@ -125,6 +125,14 @@ public class PasswordTrackerUtil {
 		return getPersistence().findByPrimaryKey(passwordTrackerId);
 	}
 
+	public static com.liferay.portal.model.PasswordTracker findByPrimaryKey(
+		java.lang.String passwordTrackerId, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchPasswordTrackerException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(passwordTrackerId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByUserId(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId);

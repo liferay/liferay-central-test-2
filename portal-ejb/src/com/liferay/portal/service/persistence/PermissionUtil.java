@@ -125,6 +125,14 @@ public class PermissionUtil {
 		return getPersistence().findByPrimaryKey(permissionId);
 	}
 
+	public static com.liferay.portal.model.Permission findByPrimaryKey(
+		java.lang.String permissionId, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchPermissionException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(permissionId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByResourceId(java.lang.String resourceId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByResourceId(resourceId);
@@ -171,6 +179,15 @@ public class PermissionUtil {
 		throws com.liferay.portal.NoSuchPermissionException, 
 			com.liferay.portal.SystemException {
 		return getPersistence().findByA_R(actionId, resourceId);
+	}
+
+	public static com.liferay.portal.model.Permission findByA_R(
+		java.lang.String actionId, java.lang.String resourceId,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchPermissionException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByA_R(actionId, resourceId,
+			throwNoSuchObjectException);
 	}
 
 	public static java.util.List findAll()

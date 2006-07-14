@@ -165,6 +165,12 @@ public class DLFolderPersistence extends BasePersistence {
 
 	public DLFolder findByPrimaryKey(String folderId)
 		throws NoSuchFolderException, SystemException {
+		return findByPrimaryKey(folderId, true);
+	}
+
+	public DLFolder findByPrimaryKey(String folderId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchFolderException, SystemException {
 		Session session = null;
 
 		try {
@@ -175,9 +181,12 @@ public class DLFolderPersistence extends BasePersistence {
 			if (dlFolder == null) {
 				_log.warn("No DLFolder exists with the primary key " +
 					folderId.toString());
-				throw new NoSuchFolderException(
-					"No DLFolder exists with the primary key " +
-					folderId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchFolderException(
+						"No DLFolder exists with the primary key " +
+						folderId.toString());
+				}
 			}
 
 			return dlFolder;
@@ -216,9 +225,7 @@ public class DLFolderPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -385,9 +392,7 @@ public class DLFolderPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -568,9 +573,7 @@ public class DLFolderPersistence extends BasePersistence {
 				q.setString(queryPos++, parentFolderId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -744,6 +747,12 @@ public class DLFolderPersistence extends BasePersistence {
 	}
 
 	public DLFolder findByP_N(String parentFolderId, String name)
+		throws NoSuchFolderException, SystemException {
+		return findByP_N(parentFolderId, name, true);
+	}
+
+	public DLFolder findByP_N(String parentFolderId, String name,
+		boolean throwNoSuchObjectException)
 		throws NoSuchFolderException, SystemException {
 		Session session = null;
 

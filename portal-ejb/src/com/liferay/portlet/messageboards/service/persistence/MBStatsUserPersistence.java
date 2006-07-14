@@ -143,6 +143,12 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 	public MBStatsUser findByPrimaryKey(MBStatsUserPK mbStatsUserPK)
 		throws NoSuchStatsUserException, SystemException {
+		return findByPrimaryKey(mbStatsUserPK, true);
+	}
+
+	public MBStatsUser findByPrimaryKey(MBStatsUserPK mbStatsUserPK,
+		boolean throwNoSuchObjectException)
+		throws NoSuchStatsUserException, SystemException {
 		Session session = null;
 
 		try {
@@ -154,9 +160,12 @@ public class MBStatsUserPersistence extends BasePersistence {
 			if (mbStatsUser == null) {
 				_log.warn("No MBStatsUser exists with the primary key " +
 					mbStatsUserPK.toString());
-				throw new NoSuchStatsUserException(
-					"No MBStatsUser exists with the primary key " +
-					mbStatsUserPK.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchStatsUserException(
+						"No MBStatsUser exists with the primary key " +
+						mbStatsUserPK.toString());
+				}
 			}
 
 			return mbStatsUser;
@@ -197,9 +206,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -377,9 +384,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -562,9 +567,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			q.setInteger(queryPos++, messageCount);
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

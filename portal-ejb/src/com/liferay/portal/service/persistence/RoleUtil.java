@@ -122,6 +122,14 @@ public class RoleUtil {
 		return getPersistence().findByPrimaryKey(roleId);
 	}
 
+	public static com.liferay.portal.model.Role findByPrimaryKey(
+		java.lang.String roleId, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchRoleException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(roleId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);
@@ -163,12 +171,37 @@ public class RoleUtil {
 			obc);
 	}
 
+	public static com.liferay.portal.model.Role findByC_N(
+		java.lang.String companyId, java.lang.String name)
+		throws com.liferay.portal.NoSuchRoleException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_N(companyId, name);
+	}
+
+	public static com.liferay.portal.model.Role findByC_N(
+		java.lang.String companyId, java.lang.String name,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchRoleException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_N(companyId, name,
+			throwNoSuchObjectException);
+	}
+
 	public static com.liferay.portal.model.Role findByC_C_C(
 		java.lang.String companyId, java.lang.String className,
 		java.lang.String classPK)
 		throws com.liferay.portal.NoSuchRoleException, 
 			com.liferay.portal.SystemException {
 		return getPersistence().findByC_C_C(companyId, className, classPK);
+	}
+
+	public static com.liferay.portal.model.Role findByC_C_C(
+		java.lang.String companyId, java.lang.String className,
+		java.lang.String classPK, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchRoleException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_C_C(companyId, className, classPK,
+			throwNoSuchObjectException);
 	}
 
 	public static java.util.List findAll()
@@ -181,6 +214,13 @@ public class RoleUtil {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
+	public static void removeByC_N(java.lang.String companyId,
+		java.lang.String name)
+		throws com.liferay.portal.NoSuchRoleException, 
+			com.liferay.portal.SystemException {
+		getPersistence().removeByC_N(companyId, name);
+	}
+
 	public static void removeByC_C_C(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.NoSuchRoleException, 
@@ -191,6 +231,11 @@ public class RoleUtil {
 	public static int countByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
+	}
+
+	public static int countByC_N(java.lang.String companyId,
+		java.lang.String name) throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_N(companyId, name);
 	}
 
 	public static int countByC_C_C(java.lang.String companyId,

@@ -140,6 +140,12 @@ public class ReleasePersistence extends BasePersistence {
 
 	public Release findByPrimaryKey(String releaseId)
 		throws NoSuchReleaseException, SystemException {
+		return findByPrimaryKey(releaseId, true);
+	}
+
+	public Release findByPrimaryKey(String releaseId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchReleaseException, SystemException {
 		Session session = null;
 
 		try {
@@ -150,9 +156,12 @@ public class ReleasePersistence extends BasePersistence {
 			if (release == null) {
 				_log.warn("No Release exists with the primary key " +
 					releaseId.toString());
-				throw new NoSuchReleaseException(
-					"No Release exists with the primary key " +
-					releaseId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchReleaseException(
+						"No Release exists with the primary key " +
+						releaseId.toString());
+				}
 			}
 
 			return release;

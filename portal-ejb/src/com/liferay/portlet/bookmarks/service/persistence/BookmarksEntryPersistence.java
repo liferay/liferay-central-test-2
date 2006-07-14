@@ -162,6 +162,12 @@ public class BookmarksEntryPersistence extends BasePersistence {
 
 	public BookmarksEntry findByPrimaryKey(String entryId)
 		throws NoSuchEntryException, SystemException {
+		return findByPrimaryKey(entryId, true);
+	}
+
+	public BookmarksEntry findByPrimaryKey(String entryId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchEntryException, SystemException {
 		Session session = null;
 
 		try {
@@ -173,9 +179,12 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			if (bookmarksEntry == null) {
 				_log.warn("No BookmarksEntry exists with the primary key " +
 					entryId.toString());
-				throw new NoSuchEntryException(
-					"No BookmarksEntry exists with the primary key " +
-					entryId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchEntryException(
+						"No BookmarksEntry exists with the primary key " +
+						entryId.toString());
+				}
 			}
 
 			return bookmarksEntry;
@@ -217,9 +226,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 				q.setString(queryPos++, folderId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

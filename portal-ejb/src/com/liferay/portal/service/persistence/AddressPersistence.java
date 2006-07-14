@@ -183,6 +183,12 @@ public class AddressPersistence extends BasePersistence {
 
 	public Address findByPrimaryKey(String addressId)
 		throws NoSuchAddressException, SystemException {
+		return findByPrimaryKey(addressId, true);
+	}
+
+	public Address findByPrimaryKey(String addressId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchAddressException, SystemException {
 		Session session = null;
 
 		try {
@@ -193,9 +199,12 @@ public class AddressPersistence extends BasePersistence {
 			if (address == null) {
 				_log.warn("No Address exists with the primary key " +
 					addressId.toString());
-				throw new NoSuchAddressException(
-					"No Address exists with the primary key " +
-					addressId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchAddressException(
+						"No Address exists with the primary key " +
+						addressId.toString());
+				}
 			}
 
 			return address;
@@ -235,9 +244,7 @@ public class AddressPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -411,9 +418,7 @@ public class AddressPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -600,9 +605,7 @@ public class AddressPersistence extends BasePersistence {
 				q.setString(queryPos++, className);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -835,9 +838,7 @@ public class AddressPersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1109,9 +1110,7 @@ public class AddressPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, mailing);
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1401,9 +1400,7 @@ public class AddressPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, primary);
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

@@ -142,6 +142,13 @@ public class PortletPreferencesPersistence extends BasePersistence {
 	public PortletPreferences findByPrimaryKey(
 		PortletPreferencesPK portletPreferencesPK)
 		throws NoSuchPortletPreferencesException, SystemException {
+		return findByPrimaryKey(portletPreferencesPK, true);
+	}
+
+	public PortletPreferences findByPrimaryKey(
+		PortletPreferencesPK portletPreferencesPK,
+		boolean throwNoSuchObjectException)
+		throws NoSuchPortletPreferencesException, SystemException {
 		Session session = null;
 
 		try {
@@ -153,9 +160,12 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			if (portletPreferences == null) {
 				_log.warn("No PortletPreferences exists with the primary key " +
 					portletPreferencesPK.toString());
-				throw new NoSuchPortletPreferencesException(
-					"No PortletPreferences exists with the primary key " +
-					portletPreferencesPK.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchPortletPreferencesException(
+						"No PortletPreferences exists with the primary key " +
+						portletPreferencesPK.toString());
+				}
 			}
 
 			return portletPreferences;
@@ -194,9 +204,7 @@ public class PortletPreferencesPersistence extends BasePersistence {
 				q.setString(queryPos++, layoutId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -367,9 +375,7 @@ public class PortletPreferencesPersistence extends BasePersistence {
 				q.setString(queryPos++, ownerId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -554,9 +560,7 @@ public class PortletPreferencesPersistence extends BasePersistence {
 				q.setString(queryPos++, ownerId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

@@ -125,6 +125,15 @@ public class WikiPageUtil {
 		return getPersistence().findByPrimaryKey(wikiPagePK);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPage findByPrimaryKey(
+		com.liferay.portlet.wiki.service.persistence.WikiPagePK wikiPagePK,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.wiki.NoSuchPageException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(wikiPagePK,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByNodeId(java.lang.String nodeId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByNodeId(nodeId);

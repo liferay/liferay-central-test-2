@@ -173,6 +173,12 @@ public class AccountPersistence extends BasePersistence {
 
 	public Account findByPrimaryKey(String accountId)
 		throws NoSuchAccountException, SystemException {
+		return findByPrimaryKey(accountId, true);
+	}
+
+	public Account findByPrimaryKey(String accountId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchAccountException, SystemException {
 		Session session = null;
 
 		try {
@@ -183,9 +189,12 @@ public class AccountPersistence extends BasePersistence {
 			if (account == null) {
 				_log.warn("No Account exists with the primary key " +
 					accountId.toString());
-				throw new NoSuchAccountException(
-					"No Account exists with the primary key " +
-					accountId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchAccountException(
+						"No Account exists with the primary key " +
+						accountId.toString());
+				}
 			}
 
 			return account;

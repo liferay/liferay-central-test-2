@@ -159,6 +159,12 @@ public class BookmarksFolderPersistence extends BasePersistence {
 
 	public BookmarksFolder findByPrimaryKey(String folderId)
 		throws NoSuchFolderException, SystemException {
+		return findByPrimaryKey(folderId, true);
+	}
+
+	public BookmarksFolder findByPrimaryKey(String folderId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchFolderException, SystemException {
 		Session session = null;
 
 		try {
@@ -170,9 +176,12 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			if (bookmarksFolder == null) {
 				_log.warn("No BookmarksFolder exists with the primary key " +
 					folderId.toString());
-				throw new NoSuchFolderException(
-					"No BookmarksFolder exists with the primary key " +
-					folderId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchFolderException(
+						"No BookmarksFolder exists with the primary key " +
+						folderId.toString());
+				}
 			}
 
 			return bookmarksFolder;
@@ -214,9 +223,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -411,9 +418,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 				q.setString(queryPos++, parentFolderId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

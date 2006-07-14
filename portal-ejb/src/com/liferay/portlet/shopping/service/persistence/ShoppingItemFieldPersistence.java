@@ -147,6 +147,12 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 
 	public ShoppingItemField findByPrimaryKey(String itemFieldId)
 		throws NoSuchItemFieldException, SystemException {
+		return findByPrimaryKey(itemFieldId, true);
+	}
+
+	public ShoppingItemField findByPrimaryKey(String itemFieldId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchItemFieldException, SystemException {
 		Session session = null;
 
 		try {
@@ -158,9 +164,12 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 			if (shoppingItemField == null) {
 				_log.warn("No ShoppingItemField exists with the primary key " +
 					itemFieldId.toString());
-				throw new NoSuchItemFieldException(
-					"No ShoppingItemField exists with the primary key " +
-					itemFieldId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchItemFieldException(
+						"No ShoppingItemField exists with the primary key " +
+						itemFieldId.toString());
+				}
 			}
 
 			return shoppingItemField;
@@ -202,9 +211,7 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 				q.setString(queryPos++, itemId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

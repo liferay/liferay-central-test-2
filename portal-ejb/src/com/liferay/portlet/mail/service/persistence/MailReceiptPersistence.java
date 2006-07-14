@@ -168,6 +168,12 @@ public class MailReceiptPersistence extends BasePersistence {
 
 	public MailReceipt findByPrimaryKey(String receiptId)
 		throws NoSuchReceiptException, SystemException {
+		return findByPrimaryKey(receiptId, true);
+	}
+
+	public MailReceipt findByPrimaryKey(String receiptId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchReceiptException, SystemException {
 		Session session = null;
 
 		try {
@@ -179,9 +185,12 @@ public class MailReceiptPersistence extends BasePersistence {
 			if (mailReceipt == null) {
 				_log.warn("No MailReceipt exists with the primary key " +
 					receiptId.toString());
-				throw new NoSuchReceiptException(
-					"No MailReceipt exists with the primary key " +
-					receiptId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchReceiptException(
+						"No MailReceipt exists with the primary key " +
+						receiptId.toString());
+				}
 			}
 
 			return mailReceipt;
@@ -222,9 +231,7 @@ public class MailReceiptPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -402,9 +409,7 @@ public class MailReceiptPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

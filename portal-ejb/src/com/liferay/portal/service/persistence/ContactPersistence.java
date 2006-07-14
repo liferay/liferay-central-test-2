@@ -213,6 +213,12 @@ public class ContactPersistence extends BasePersistence {
 
 	public Contact findByPrimaryKey(String contactId)
 		throws NoSuchContactException, SystemException {
+		return findByPrimaryKey(contactId, true);
+	}
+
+	public Contact findByPrimaryKey(String contactId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchContactException, SystemException {
 		Session session = null;
 
 		try {
@@ -223,9 +229,12 @@ public class ContactPersistence extends BasePersistence {
 			if (contact == null) {
 				_log.warn("No Contact exists with the primary key " +
 					contactId.toString());
-				throw new NoSuchContactException(
-					"No Contact exists with the primary key " +
-					contactId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchContactException(
+						"No Contact exists with the primary key " +
+						contactId.toString());
+				}
 			}
 
 			return contact;
@@ -263,9 +272,7 @@ public class ContactPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

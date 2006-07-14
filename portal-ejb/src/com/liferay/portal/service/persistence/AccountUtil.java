@@ -124,6 +124,14 @@ public class AccountUtil {
 		return getPersistence().findByPrimaryKey(accountId);
 	}
 
+	public static com.liferay.portal.model.Account findByPrimaryKey(
+		java.lang.String accountId, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchAccountException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(accountId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();

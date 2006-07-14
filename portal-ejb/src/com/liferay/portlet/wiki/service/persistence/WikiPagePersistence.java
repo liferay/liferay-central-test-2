@@ -159,6 +159,12 @@ public class WikiPagePersistence extends BasePersistence {
 
 	public WikiPage findByPrimaryKey(WikiPagePK wikiPagePK)
 		throws NoSuchPageException, SystemException {
+		return findByPrimaryKey(wikiPagePK, true);
+	}
+
+	public WikiPage findByPrimaryKey(WikiPagePK wikiPagePK,
+		boolean throwNoSuchObjectException)
+		throws NoSuchPageException, SystemException {
 		Session session = null;
 
 		try {
@@ -169,9 +175,12 @@ public class WikiPagePersistence extends BasePersistence {
 			if (wikiPage == null) {
 				_log.warn("No WikiPage exists with the primary key " +
 					wikiPagePK.toString());
-				throw new NoSuchPageException(
-					"No WikiPage exists with the primary key " +
-					wikiPagePK.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchPageException(
+						"No WikiPage exists with the primary key " +
+						wikiPagePK.toString());
+				}
 			}
 
 			return wikiPage;
@@ -213,9 +222,7 @@ public class WikiPagePersistence extends BasePersistence {
 				q.setString(queryPos++, nodeId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -409,9 +416,7 @@ public class WikiPagePersistence extends BasePersistence {
 				q.setString(queryPos++, title);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -628,9 +633,7 @@ public class WikiPagePersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, head);
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -842,9 +845,7 @@ public class WikiPagePersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, head);
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

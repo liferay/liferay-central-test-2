@@ -165,6 +165,12 @@ public class BlogsEntryPersistence extends BasePersistence {
 
 	public BlogsEntry findByPrimaryKey(String entryId)
 		throws NoSuchEntryException, SystemException {
+		return findByPrimaryKey(entryId, true);
+	}
+
+	public BlogsEntry findByPrimaryKey(String entryId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchEntryException, SystemException {
 		Session session = null;
 
 		try {
@@ -176,9 +182,12 @@ public class BlogsEntryPersistence extends BasePersistence {
 			if (blogsEntry == null) {
 				_log.warn("No BlogsEntry exists with the primary key " +
 					entryId.toString());
-				throw new NoSuchEntryException(
-					"No BlogsEntry exists with the primary key " +
-					entryId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchEntryException(
+						"No BlogsEntry exists with the primary key " +
+						entryId.toString());
+				}
 			}
 
 			return blogsEntry;
@@ -219,9 +228,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -399,9 +406,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -579,9 +584,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 				q.setString(queryPos++, categoryId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

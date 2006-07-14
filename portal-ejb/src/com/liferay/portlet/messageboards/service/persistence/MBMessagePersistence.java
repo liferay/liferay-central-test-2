@@ -173,6 +173,12 @@ public class MBMessagePersistence extends BasePersistence {
 
 	public MBMessage findByPrimaryKey(MBMessagePK mbMessagePK)
 		throws NoSuchMessageException, SystemException {
+		return findByPrimaryKey(mbMessagePK, true);
+	}
+
+	public MBMessage findByPrimaryKey(MBMessagePK mbMessagePK,
+		boolean throwNoSuchObjectException)
+		throws NoSuchMessageException, SystemException {
 		Session session = null;
 
 		try {
@@ -184,9 +190,12 @@ public class MBMessagePersistence extends BasePersistence {
 			if (mbMessage == null) {
 				_log.warn("No MBMessage exists with the primary key " +
 					mbMessagePK.toString());
-				throw new NoSuchMessageException(
-					"No MBMessage exists with the primary key " +
-					mbMessagePK.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchMessageException(
+						"No MBMessage exists with the primary key " +
+						mbMessagePK.toString());
+				}
 			}
 
 			return mbMessage;
@@ -228,9 +237,7 @@ public class MBMessagePersistence extends BasePersistence {
 				q.setString(queryPos++, categoryId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -411,9 +418,7 @@ public class MBMessagePersistence extends BasePersistence {
 				q.setString(queryPos++, threadId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -608,9 +613,7 @@ public class MBMessagePersistence extends BasePersistence {
 				q.setString(queryPos++, parentMessageId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

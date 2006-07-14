@@ -138,6 +138,12 @@ public class ListTypePersistence extends BasePersistence {
 
 	public ListType findByPrimaryKey(String listTypeId)
 		throws NoSuchListTypeException, SystemException {
+		return findByPrimaryKey(listTypeId, true);
+	}
+
+	public ListType findByPrimaryKey(String listTypeId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchListTypeException, SystemException {
 		Session session = null;
 
 		try {
@@ -148,9 +154,12 @@ public class ListTypePersistence extends BasePersistence {
 			if (listType == null) {
 				_log.warn("No ListType exists with the primary key " +
 					listTypeId.toString());
-				throw new NoSuchListTypeException(
-					"No ListType exists with the primary key " +
-					listTypeId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchListTypeException(
+						"No ListType exists with the primary key " +
+						listTypeId.toString());
+				}
 			}
 
 			return listType;
@@ -190,9 +199,7 @@ public class ListTypePersistence extends BasePersistence {
 				q.setString(queryPos++, type);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

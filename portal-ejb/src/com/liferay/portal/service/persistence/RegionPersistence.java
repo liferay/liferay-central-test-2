@@ -144,6 +144,12 @@ public class RegionPersistence extends BasePersistence {
 
 	public Region findByPrimaryKey(String regionId)
 		throws NoSuchRegionException, SystemException {
+		return findByPrimaryKey(regionId, true);
+	}
+
+	public Region findByPrimaryKey(String regionId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchRegionException, SystemException {
 		Session session = null;
 
 		try {
@@ -154,9 +160,12 @@ public class RegionPersistence extends BasePersistence {
 			if (region == null) {
 				_log.warn("No Region exists with the primary key " +
 					regionId.toString());
-				throw new NoSuchRegionException(
-					"No Region exists with the primary key " +
-					regionId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchRegionException(
+						"No Region exists with the primary key " +
+						regionId.toString());
+				}
 			}
 
 			return region;
@@ -196,9 +205,7 @@ public class RegionPersistence extends BasePersistence {
 				q.setString(queryPos++, countryId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -362,9 +369,7 @@ public class RegionPersistence extends BasePersistence {
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -522,9 +527,7 @@ public class RegionPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, active);
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

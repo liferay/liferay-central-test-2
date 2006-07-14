@@ -124,6 +124,14 @@ public class OrgLaborUtil {
 		return getPersistence().findByPrimaryKey(orgLaborId);
 	}
 
+	public static com.liferay.portal.model.OrgLabor findByPrimaryKey(
+		java.lang.String orgLaborId, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchOrgLaborException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(orgLaborId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByOrganizationId(
 		java.lang.String organizationId)
 		throws com.liferay.portal.SystemException {

@@ -125,6 +125,15 @@ public class MBMessageFlagUtil {
 		return getPersistence().findByPrimaryKey(mbMessageFlagPK);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByPrimaryKey(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK mbMessageFlagPK,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.messageboards.NoSuchMessageFlagException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(mbMessageFlagPK,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByTopicId(java.lang.String topicId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByTopicId(topicId);

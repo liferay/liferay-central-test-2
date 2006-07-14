@@ -162,6 +162,12 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 
 	public ShoppingCategory findByPrimaryKey(String categoryId)
 		throws NoSuchCategoryException, SystemException {
+		return findByPrimaryKey(categoryId, true);
+	}
+
+	public ShoppingCategory findByPrimaryKey(String categoryId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchCategoryException, SystemException {
 		Session session = null;
 
 		try {
@@ -173,9 +179,12 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			if (shoppingCategory == null) {
 				_log.warn("No ShoppingCategory exists with the primary key " +
 					categoryId.toString());
-				throw new NoSuchCategoryException(
-					"No ShoppingCategory exists with the primary key " +
-					categoryId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchCategoryException(
+						"No ShoppingCategory exists with the primary key " +
+						categoryId.toString());
+				}
 			}
 
 			return shoppingCategory;
@@ -217,9 +226,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -414,9 +421,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 				q.setString(queryPos++, parentCategoryId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

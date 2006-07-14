@@ -125,6 +125,14 @@ public class ShoppingItemPriceUtil {
 		return getPersistence().findByPrimaryKey(itemPriceId);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingItemPrice findByPrimaryKey(
+		java.lang.String itemPriceId, boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.shopping.NoSuchItemPriceException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(itemPriceId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByItemId(java.lang.String itemId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByItemId(itemId);

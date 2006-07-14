@@ -165,6 +165,12 @@ public class LayoutPersistence extends BasePersistence {
 
 	public Layout findByPrimaryKey(LayoutPK layoutPK)
 		throws NoSuchLayoutException, SystemException {
+		return findByPrimaryKey(layoutPK, true);
+	}
+
+	public Layout findByPrimaryKey(LayoutPK layoutPK,
+		boolean throwNoSuchObjectException)
+		throws NoSuchLayoutException, SystemException {
 		Session session = null;
 
 		try {
@@ -175,9 +181,12 @@ public class LayoutPersistence extends BasePersistence {
 			if (layout == null) {
 				_log.warn("No Layout exists with the primary key " +
 					layoutPK.toString());
-				throw new NoSuchLayoutException(
-					"No Layout exists with the primary key " +
-					layoutPK.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchLayoutException(
+						"No Layout exists with the primary key " +
+						layoutPK.toString());
+				}
 			}
 
 			return layout;
@@ -218,9 +227,7 @@ public class LayoutPersistence extends BasePersistence {
 				q.setString(queryPos++, ownerId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -411,9 +418,7 @@ public class LayoutPersistence extends BasePersistence {
 				q.setString(queryPos++, parentLayoutId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -595,6 +600,12 @@ public class LayoutPersistence extends BasePersistence {
 	}
 
 	public Layout findByO_F(String ownerId, String friendlyURL)
+		throws NoSuchLayoutException, SystemException {
+		return findByO_F(ownerId, friendlyURL, true);
+	}
+
+	public Layout findByO_F(String ownerId, String friendlyURL,
+		boolean throwNoSuchObjectException)
 		throws NoSuchLayoutException, SystemException {
 		Session session = null;
 

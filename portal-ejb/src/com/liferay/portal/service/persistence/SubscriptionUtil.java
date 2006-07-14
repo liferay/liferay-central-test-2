@@ -125,6 +125,14 @@ public class SubscriptionUtil {
 		return getPersistence().findByPrimaryKey(subscriptionId);
 	}
 
+	public static com.liferay.portal.model.Subscription findByPrimaryKey(
+		java.lang.String subscriptionId, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchSubscriptionException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(subscriptionId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByUserId(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId);
@@ -224,6 +232,16 @@ public class SubscriptionUtil {
 			com.liferay.portal.SystemException {
 		return getPersistence().findByC_U_C_C(companyId, userId, className,
 			classPK);
+	}
+
+	public static com.liferay.portal.model.Subscription findByC_U_C_C(
+		java.lang.String companyId, java.lang.String userId,
+		java.lang.String className, java.lang.String classPK,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchSubscriptionException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_U_C_C(companyId, userId, className,
+			classPK, throwNoSuchObjectException);
 	}
 
 	public static java.util.List findAll()

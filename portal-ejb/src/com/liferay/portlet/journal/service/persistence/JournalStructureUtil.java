@@ -125,6 +125,15 @@ public class JournalStructureUtil {
 		return getPersistence().findByPrimaryKey(journalStructurePK);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalStructure findByPrimaryKey(
+		com.liferay.portlet.journal.service.persistence.JournalStructurePK journalStructurePK,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.journal.NoSuchStructureException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(journalStructurePK,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);

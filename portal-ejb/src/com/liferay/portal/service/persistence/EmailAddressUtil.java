@@ -125,6 +125,14 @@ public class EmailAddressUtil {
 		return getPersistence().findByPrimaryKey(emailAddressId);
 	}
 
+	public static com.liferay.portal.model.EmailAddress findByPrimaryKey(
+		java.lang.String emailAddressId, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchEmailAddressException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(emailAddressId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);

@@ -125,6 +125,15 @@ public class JournalArticleUtil {
 		return getPersistence().findByPrimaryKey(journalArticlePK);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticle findByPrimaryKey(
+		com.liferay.portlet.journal.service.persistence.JournalArticlePK journalArticlePK,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.journal.NoSuchArticleException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(journalArticlePK,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);

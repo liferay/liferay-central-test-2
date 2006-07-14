@@ -141,6 +141,12 @@ public class CountryPersistence extends BasePersistence {
 
 	public Country findByPrimaryKey(String countryId)
 		throws NoSuchCountryException, SystemException {
+		return findByPrimaryKey(countryId, true);
+	}
+
+	public Country findByPrimaryKey(String countryId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchCountryException, SystemException {
 		Session session = null;
 
 		try {
@@ -151,9 +157,12 @@ public class CountryPersistence extends BasePersistence {
 			if (country == null) {
 				_log.warn("No Country exists with the primary key " +
 					countryId.toString());
-				throw new NoSuchCountryException(
-					"No Country exists with the primary key " +
-					countryId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchCountryException(
+						"No Country exists with the primary key " +
+						countryId.toString());
+				}
 			}
 
 			return country;
@@ -183,9 +192,7 @@ public class CountryPersistence extends BasePersistence {
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

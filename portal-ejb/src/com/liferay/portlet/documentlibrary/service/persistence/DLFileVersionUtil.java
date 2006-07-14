@@ -125,6 +125,15 @@ public class DLFileVersionUtil {
 		return getPersistence().findByPrimaryKey(dlFileVersionPK);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByPrimaryKey(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPK dlFileVersionPK,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(dlFileVersionPK,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByF_N(java.lang.String folderId,
 		java.lang.String name) throws com.liferay.portal.SystemException {
 		return getPersistence().findByF_N(folderId, name);

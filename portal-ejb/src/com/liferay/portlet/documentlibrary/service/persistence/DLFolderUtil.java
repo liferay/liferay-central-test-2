@@ -125,6 +125,14 @@ public class DLFolderUtil {
 		return getPersistence().findByPrimaryKey(folderId);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFolder findByPrimaryKey(
+		java.lang.String folderId, boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.documentlibrary.NoSuchFolderException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(folderId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
@@ -257,6 +265,15 @@ public class DLFolderUtil {
 		throws com.liferay.portlet.documentlibrary.NoSuchFolderException, 
 			com.liferay.portal.SystemException {
 		return getPersistence().findByP_N(parentFolderId, name);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFolder findByP_N(
+		java.lang.String parentFolderId, java.lang.String name,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.documentlibrary.NoSuchFolderException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByP_N(parentFolderId, name,
+			throwNoSuchObjectException);
 	}
 
 	public static java.util.List findAll()

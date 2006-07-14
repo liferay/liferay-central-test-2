@@ -124,6 +124,14 @@ public class WebsiteUtil {
 		return getPersistence().findByPrimaryKey(websiteId);
 	}
 
+	public static com.liferay.portal.model.Website findByPrimaryKey(
+		java.lang.String websiteId, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchWebsiteException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(websiteId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);

@@ -175,6 +175,12 @@ public class OrganizationPersistence extends BasePersistence {
 
 	public Organization findByPrimaryKey(String organizationId)
 		throws NoSuchOrganizationException, SystemException {
+		return findByPrimaryKey(organizationId, true);
+	}
+
+	public Organization findByPrimaryKey(String organizationId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchOrganizationException, SystemException {
 		Session session = null;
 
 		try {
@@ -186,9 +192,12 @@ public class OrganizationPersistence extends BasePersistence {
 			if (organization == null) {
 				_log.warn("No Organization exists with the primary key " +
 					organizationId.toString());
-				throw new NoSuchOrganizationException(
-					"No Organization exists with the primary key " +
-					organizationId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchOrganizationException(
+						"No Organization exists with the primary key " +
+						organizationId.toString());
+				}
 			}
 
 			return organization;
@@ -228,9 +237,7 @@ public class OrganizationPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -407,9 +414,7 @@ public class OrganizationPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -600,9 +605,7 @@ public class OrganizationPersistence extends BasePersistence {
 				q.setString(queryPos++, parentOrganizationId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -786,6 +789,12 @@ public class OrganizationPersistence extends BasePersistence {
 	}
 
 	public Organization findByC_N(String companyId, String name)
+		throws NoSuchOrganizationException, SystemException {
+		return findByC_N(companyId, name, true);
+	}
+
+	public Organization findByC_N(String companyId, String name,
+		boolean throwNoSuchObjectException)
 		throws NoSuchOrganizationException, SystemException {
 		Session session = null;
 

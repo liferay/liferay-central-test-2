@@ -183,6 +183,12 @@ public class ShoppingCouponPersistence extends BasePersistence {
 
 	public ShoppingCoupon findByPrimaryKey(String couponId)
 		throws NoSuchCouponException, SystemException {
+		return findByPrimaryKey(couponId, true);
+	}
+
+	public ShoppingCoupon findByPrimaryKey(String couponId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchCouponException, SystemException {
 		Session session = null;
 
 		try {
@@ -194,9 +200,12 @@ public class ShoppingCouponPersistence extends BasePersistence {
 			if (shoppingCoupon == null) {
 				_log.warn("No ShoppingCoupon exists with the primary key " +
 					couponId.toString());
-				throw new NoSuchCouponException(
-					"No ShoppingCoupon exists with the primary key " +
-					couponId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchCouponException(
+						"No ShoppingCoupon exists with the primary key " +
+						couponId.toString());
+				}
 			}
 
 			return shoppingCoupon;
@@ -237,9 +246,7 @@ public class ShoppingCouponPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

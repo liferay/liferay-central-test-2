@@ -143,6 +143,12 @@ public class PortletPersistence extends BasePersistence {
 
 	public Portlet findByPrimaryKey(PortletPK portletPK)
 		throws NoSuchPortletException, SystemException {
+		return findByPrimaryKey(portletPK, true);
+	}
+
+	public Portlet findByPrimaryKey(PortletPK portletPK,
+		boolean throwNoSuchObjectException)
+		throws NoSuchPortletException, SystemException {
 		Session session = null;
 
 		try {
@@ -153,9 +159,12 @@ public class PortletPersistence extends BasePersistence {
 			if (portlet == null) {
 				_log.warn("No Portlet exists with the primary key " +
 					portletPK.toString());
-				throw new NoSuchPortletException(
-					"No Portlet exists with the primary key " +
-					portletPK.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchPortletException(
+						"No Portlet exists with the primary key " +
+						portletPK.toString());
+				}
 			}
 
 			return portlet;
@@ -193,9 +202,7 @@ public class PortletPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

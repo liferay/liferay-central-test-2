@@ -122,6 +122,14 @@ public class UserUtil {
 		return getPersistence().findByPrimaryKey(userId);
 	}
 
+	public static com.liferay.portal.model.User findByPrimaryKey(
+		java.lang.String userId, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchUserException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(userId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);
@@ -168,6 +176,15 @@ public class UserUtil {
 		throws com.liferay.portal.NoSuchUserException, 
 			com.liferay.portal.SystemException {
 		return getPersistence().findByC_U(companyId, userId);
+	}
+
+	public static com.liferay.portal.model.User findByC_U(
+		java.lang.String companyId, java.lang.String userId,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchUserException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_U(companyId, userId,
+			throwNoSuchObjectException);
 	}
 
 	public static java.util.List findByC_P(java.lang.String companyId,
@@ -219,6 +236,15 @@ public class UserUtil {
 		throws com.liferay.portal.NoSuchUserException, 
 			com.liferay.portal.SystemException {
 		return getPersistence().findByC_EA(companyId, emailAddress);
+	}
+
+	public static com.liferay.portal.model.User findByC_EA(
+		java.lang.String companyId, java.lang.String emailAddress,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchUserException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_EA(companyId, emailAddress,
+			throwNoSuchObjectException);
 	}
 
 	public static java.util.List findAll()

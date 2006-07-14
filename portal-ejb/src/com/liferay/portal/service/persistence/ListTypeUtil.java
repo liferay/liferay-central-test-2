@@ -124,6 +124,14 @@ public class ListTypeUtil {
 		return getPersistence().findByPrimaryKey(listTypeId);
 	}
 
+	public static com.liferay.portal.model.ListType findByPrimaryKey(
+		java.lang.String listTypeId, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchListTypeException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(listTypeId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByType(java.lang.String type)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByType(type);

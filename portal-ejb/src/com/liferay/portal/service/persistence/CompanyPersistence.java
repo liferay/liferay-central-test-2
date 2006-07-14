@@ -140,6 +140,12 @@ public class CompanyPersistence extends BasePersistence {
 
 	public Company findByPrimaryKey(String companyId)
 		throws NoSuchCompanyException, SystemException {
+		return findByPrimaryKey(companyId, true);
+	}
+
+	public Company findByPrimaryKey(String companyId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchCompanyException, SystemException {
 		Session session = null;
 
 		try {
@@ -150,9 +156,12 @@ public class CompanyPersistence extends BasePersistence {
 			if (company == null) {
 				_log.warn("No Company exists with the primary key " +
 					companyId.toString());
-				throw new NoSuchCompanyException(
-					"No Company exists with the primary key " +
-					companyId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchCompanyException(
+						"No Company exists with the primary key " +
+						companyId.toString());
+				}
 			}
 
 			return company;

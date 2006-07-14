@@ -139,6 +139,13 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 	public OrgGroupPermission findByPrimaryKey(
 		OrgGroupPermissionPK orgGroupPermissionPK)
 		throws NoSuchOrgGroupPermissionException, SystemException {
+		return findByPrimaryKey(orgGroupPermissionPK, true);
+	}
+
+	public OrgGroupPermission findByPrimaryKey(
+		OrgGroupPermissionPK orgGroupPermissionPK,
+		boolean throwNoSuchObjectException)
+		throws NoSuchOrgGroupPermissionException, SystemException {
 		Session session = null;
 
 		try {
@@ -150,9 +157,12 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			if (orgGroupPermission == null) {
 				_log.warn("No OrgGroupPermission exists with the primary key " +
 					orgGroupPermissionPK.toString());
-				throw new NoSuchOrgGroupPermissionException(
-					"No OrgGroupPermission exists with the primary key " +
-					orgGroupPermissionPK.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchOrgGroupPermissionException(
+						"No OrgGroupPermission exists with the primary key " +
+						orgGroupPermissionPK.toString());
+				}
 			}
 
 			return orgGroupPermission;
@@ -192,9 +202,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 				q.setString(queryPos++, permissionId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

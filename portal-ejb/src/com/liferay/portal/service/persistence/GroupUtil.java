@@ -124,11 +124,44 @@ public class GroupUtil {
 		return getPersistence().findByPrimaryKey(groupId);
 	}
 
+	public static com.liferay.portal.model.Group findByPrimaryKey(
+		java.lang.String groupId, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(groupId,
+			throwNoSuchObjectException);
+	}
+
+	public static com.liferay.portal.model.Group findByC_N(
+		java.lang.String companyId, java.lang.String name)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_N(companyId, name);
+	}
+
+	public static com.liferay.portal.model.Group findByC_N(
+		java.lang.String companyId, java.lang.String name,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_N(companyId, name,
+			throwNoSuchObjectException);
+	}
+
 	public static com.liferay.portal.model.Group findByC_F(
 		java.lang.String companyId, java.lang.String friendlyURL)
 		throws com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.SystemException {
 		return getPersistence().findByC_F(companyId, friendlyURL);
+	}
+
+	public static com.liferay.portal.model.Group findByC_F(
+		java.lang.String companyId, java.lang.String friendlyURL,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_F(companyId, friendlyURL,
+			throwNoSuchObjectException);
 	}
 
 	public static com.liferay.portal.model.Group findByC_C_C(
@@ -139,9 +172,25 @@ public class GroupUtil {
 		return getPersistence().findByC_C_C(companyId, className, classPK);
 	}
 
+	public static com.liferay.portal.model.Group findByC_C_C(
+		java.lang.String companyId, java.lang.String className,
+		java.lang.String classPK, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_C_C(companyId, className, classPK,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
+	}
+
+	public static void removeByC_N(java.lang.String companyId,
+		java.lang.String name)
+		throws com.liferay.portal.NoSuchGroupException, 
+			com.liferay.portal.SystemException {
+		getPersistence().removeByC_N(companyId, name);
 	}
 
 	public static void removeByC_F(java.lang.String companyId,
@@ -156,6 +205,11 @@ public class GroupUtil {
 		throws com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.SystemException {
 		getPersistence().removeByC_C_C(companyId, className, classPK);
+	}
+
+	public static int countByC_N(java.lang.String companyId,
+		java.lang.String name) throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_N(companyId, name);
 	}
 
 	public static int countByC_F(java.lang.String companyId,

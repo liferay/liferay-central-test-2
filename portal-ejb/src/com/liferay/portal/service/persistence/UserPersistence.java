@@ -214,6 +214,12 @@ public class UserPersistence extends BasePersistence {
 
 	public User findByPrimaryKey(String userId)
 		throws NoSuchUserException, SystemException {
+		return findByPrimaryKey(userId, true);
+	}
+
+	public User findByPrimaryKey(String userId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchUserException, SystemException {
 		Session session = null;
 
 		try {
@@ -224,8 +230,12 @@ public class UserPersistence extends BasePersistence {
 			if (user == null) {
 				_log.warn("No User exists with the primary key " +
 					userId.toString());
-				throw new NoSuchUserException(
-					"No User exists with the primary key " + userId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchUserException(
+						"No User exists with the primary key " +
+						userId.toString());
+				}
 			}
 
 			return user;
@@ -263,9 +273,7 @@ public class UserPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -405,6 +413,12 @@ public class UserPersistence extends BasePersistence {
 
 	public User findByC_U(String companyId, String userId)
 		throws NoSuchUserException, SystemException {
+		return findByC_U(companyId, userId, true);
+	}
+
+	public User findByC_U(String companyId, String userId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchUserException, SystemException {
 		Session session = null;
 
 		try {
@@ -507,9 +521,7 @@ public class UserPersistence extends BasePersistence {
 				q.setString(queryPos++, password);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -681,6 +693,12 @@ public class UserPersistence extends BasePersistence {
 	}
 
 	public User findByC_EA(String companyId, String emailAddress)
+		throws NoSuchUserException, SystemException {
+		return findByC_EA(companyId, emailAddress, true);
+	}
+
+	public User findByC_EA(String companyId, String emailAddress,
+		boolean throwNoSuchObjectException)
 		throws NoSuchUserException, SystemException {
 		Session session = null;
 

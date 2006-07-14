@@ -160,6 +160,12 @@ public class IGImagePersistence extends BasePersistence {
 
 	public IGImage findByPrimaryKey(IGImagePK igImagePK)
 		throws NoSuchImageException, SystemException {
+		return findByPrimaryKey(igImagePK, true);
+	}
+
+	public IGImage findByPrimaryKey(IGImagePK igImagePK,
+		boolean throwNoSuchObjectException)
+		throws NoSuchImageException, SystemException {
 		Session session = null;
 
 		try {
@@ -170,9 +176,12 @@ public class IGImagePersistence extends BasePersistence {
 			if (igImage == null) {
 				_log.warn("No IGImage exists with the primary key " +
 					igImagePK.toString());
-				throw new NoSuchImageException(
-					"No IGImage exists with the primary key " +
-					igImagePK.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchImageException(
+						"No IGImage exists with the primary key " +
+						igImagePK.toString());
+				}
 			}
 
 			return igImage;
@@ -213,9 +222,7 @@ public class IGImagePersistence extends BasePersistence {
 				q.setString(queryPos++, folderId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

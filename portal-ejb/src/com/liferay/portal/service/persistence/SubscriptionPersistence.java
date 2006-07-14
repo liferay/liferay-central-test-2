@@ -159,6 +159,12 @@ public class SubscriptionPersistence extends BasePersistence {
 
 	public Subscription findByPrimaryKey(String subscriptionId)
 		throws NoSuchSubscriptionException, SystemException {
+		return findByPrimaryKey(subscriptionId, true);
+	}
+
+	public Subscription findByPrimaryKey(String subscriptionId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchSubscriptionException, SystemException {
 		Session session = null;
 
 		try {
@@ -170,9 +176,12 @@ public class SubscriptionPersistence extends BasePersistence {
 			if (subscription == null) {
 				_log.warn("No Subscription exists with the primary key " +
 					subscriptionId.toString());
-				throw new NoSuchSubscriptionException(
-					"No Subscription exists with the primary key " +
-					subscriptionId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchSubscriptionException(
+						"No Subscription exists with the primary key " +
+						subscriptionId.toString());
+				}
 			}
 
 			return subscription;
@@ -210,9 +219,7 @@ public class SubscriptionPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -404,9 +411,7 @@ public class SubscriptionPersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -616,6 +621,12 @@ public class SubscriptionPersistence extends BasePersistence {
 
 	public Subscription findByC_U_C_C(String companyId, String userId,
 		String className, String classPK)
+		throws NoSuchSubscriptionException, SystemException {
+		return findByC_U_C_C(companyId, userId, className, classPK, true);
+	}
+
+	public Subscription findByC_U_C_C(String companyId, String userId,
+		String className, String classPK, boolean throwNoSuchObjectException)
 		throws NoSuchSubscriptionException, SystemException {
 		Session session = null;
 

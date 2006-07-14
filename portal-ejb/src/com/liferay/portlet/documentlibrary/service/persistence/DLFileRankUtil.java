@@ -125,6 +125,15 @@ public class DLFileRankUtil {
 		return getPersistence().findByPrimaryKey(dlFileRankPK);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileRank findByPrimaryKey(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK dlFileRankPK,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.documentlibrary.NoSuchFileRankException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(dlFileRankPK,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByUserId(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId);

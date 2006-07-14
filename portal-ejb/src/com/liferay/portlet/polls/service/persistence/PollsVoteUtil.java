@@ -125,6 +125,15 @@ public class PollsVoteUtil {
 		return getPersistence().findByPrimaryKey(pollsVotePK);
 	}
 
+	public static com.liferay.portlet.polls.model.PollsVote findByPrimaryKey(
+		com.liferay.portlet.polls.service.persistence.PollsVotePK pollsVotePK,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.polls.NoSuchVoteException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(pollsVotePK,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByQuestionId(java.lang.String questionId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByQuestionId(questionId);

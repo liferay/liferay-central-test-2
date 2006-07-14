@@ -1936,13 +1936,19 @@ public class ServiceBuilder {
 		// Finder methods
 
 		sb.append("public " + entity.getName() + " findByPrimaryKey(" + pkClassName + " " + pkVarName + ") throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
+		sb.append("return findByPrimaryKey(" + pkVarName + ", true);");
+		sb.append("}");
+
+		sb.append("public " + entity.getName() + " findByPrimaryKey(" + pkClassName + " " + pkVarName + ", boolean throwNoSuchObjectException) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
 		sb.append("Session session = null;");
 		sb.append("try {");
 		sb.append("session = openSession();");
 		sb.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")session.get(" + entity.getName() + ".class, " + pkVarName + ");");
 		sb.append("if (" + entity.getVarName() + " == null) {");
 		sb.append("_log.warn(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ".toString());");
+		sb.append("if (throwNoSuchObjectException) {");
 		sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ".toString());");
+		sb.append("}");
 		sb.append("}");
 		sb.append("return " + entity.getVarName() + ";");
 		sb.append("}");
@@ -1959,145 +1965,157 @@ public class ServiceBuilder {
 
 			List finderColsList = finder.getColumns();
 
-			sb.append("public " + (finder.isCollection() ? "List" : entity.getName()) + " findBy" + finder.getName() + "(");
+			if (!finder.isCollection()) {
+				sb.append("public " + entity.getName() + " findBy" + finder.getName() + "(");
 
-			for (int j = 0; j < finderColsList.size(); j++) {
-				EntityColumn col = (EntityColumn)finderColsList.get(j);
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-				sb.append(col.getType() + " " + col.getName());
+					sb.append(col.getType() + " " + col.getName());
 
-				if ((j + 1) != finderColsList.size()) {
+					if ((j + 1) != finderColsList.size()) {
+						sb.append(", ");
+					}
+				}
+
+				sb.append(") throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
+				sb.append("return findBy" + finder.getName() + "(");
+
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+					sb.append(col.getName());
 					sb.append(", ");
 				}
-			}
 
-			if (finder.isCollection()) {
-				sb.append(") throws SystemException {");
-			}
-			else {
-				sb.append(") throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
-			}
+				sb.append("true);");
+				sb.append("}");
 
-			sb.append("Session session = null;");
-			sb.append("try {");
-			sb.append("session = openSession();");
-			sb.append("StringBuffer query = new StringBuffer();");
-			sb.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " WHERE \");");
+				sb.append("public " + entity.getName() + " findBy" + finder.getName() + "(");
 
-			for (int j = 0; j < finderColsList.size(); j++) {
-				EntityColumn col = (EntityColumn)finderColsList.get(j);
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-				if (_requiresNullCheck(col)) {
-					_appendNullLogic(col, sb);
+					sb.append(col.getType() + " " + col.getName());
+					sb.append(", ");
 				}
-					
-				sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
+				
+				sb.append("boolean throwNoSuchObjectException) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
+				sb.append("Session session = null;");
+				sb.append("try {");
+				sb.append("session = openSession();");
+				sb.append("StringBuffer query = new StringBuffer();");
+				sb.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " WHERE \");");
 
-				if (_requiresNullCheck(col)) {
-					sb.append("}");
-				}
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-				if ((j + 1) != finderColsList.size()) {
-					sb.append("query.append(\" AND \");");
-				}
-				else if (Validator.isNull(finder.getWhere())) {
-					sb.append("query.append(\" \");");
-				}
-				else {
-					sb.append("query.append(\" AND " + finder.getWhere() + " \");");
-				}
-			}
+					if (_requiresNullCheck(col)) {
+						_appendNullLogic(col, sb);
+					}
+						
+					sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
 
-			EntityOrder order = entity.getOrder();
+					if (_requiresNullCheck(col)) {
+						sb.append("}");
+					}
 
-			if (order != null) {
-				List orderList = order.getColumns();
-
-				sb.append("query.append(\"ORDER BY \");");
-
-				for (int j = 0; j < orderList.size(); j++) {
-					EntityColumn col = (EntityColumn)orderList.get(j);
-
-					sb.append("query.append(\"" + col.getDBName() + " " + (col.isOrderByAscending() ? "ASC" : "DESC") + "\")");
-
-					if ((j + 1) != orderList.size()) {
-						sb.append(".append(\", \");");
+					if ((j + 1) != finderColsList.size()) {
+						sb.append("query.append(\" AND \");");
+					}
+					else if (Validator.isNull(finder.getWhere())) {
+						sb.append("query.append(\" \");");
 					}
 					else {
-						sb.append(";");
-					}
-				}
-			}
-
-			sb.append("Query q = session.createQuery(query.toString());");
-
-			sb.append("int queryPos = 0;");
-
-			for (int j = 0; j < finderColsList.size(); j++) {
-				EntityColumn col = (EntityColumn)finderColsList.get(j);
-
-				if (_requiresNullCheck(col)) {
-					sb.append("if (" + col.getName() + " != null) {");
-				}
-
-				String colType = col.getType();
-				String colObjType = colType;
-
-				if (col.isPrimitiveType()) {
-					if (colType.equals("boolean")) {
-						colObjType = "Boolean";
-					}
-					else if (colType.equals("double")) {
-						colObjType = "Double";
-					}
-					else if (colType.equals("float")) {
-						colObjType = "Float";
-					}
-					else if (colType.equals("int")) {
-						colObjType = "Integer";
-					}
-					else if (colType.equals("long")) {
-						colObjType = "Long";
-					}
-					else if (colType.equals("short")) {
-						colObjType = "Short";
+						sb.append("query.append(\" AND " + finder.getWhere() + " \");");
 					}
 				}
 
-				sb.append("q.set" + colObjType + "(queryPos++, " + col.getName());
+				EntityOrder order = entity.getOrder();
 
-				if (colType.equals("Boolean")) {
-					sb.append(".booleanValue()");
-				}
-				else if (colType.equals("Double")) {
-					sb.append(".doubleValue()");
-				}
-				else if (colType.equals("Float")) {
-					sb.append(".floatValue()");
-				}
-				else if (colType.equals("Integer")) {
-					sb.append(".intValue()");
-				}
-				else if (colType.equals("Long")) {
-					sb.append(".longValue()");
-				}
-				else if (colType.equals("Short")) {
-					sb.append(".shortValue()");
+				if (order != null) {
+					List orderList = order.getColumns();
+
+					sb.append("query.append(\"ORDER BY \");");
+
+					for (int j = 0; j < orderList.size(); j++) {
+						EntityColumn col = (EntityColumn)orderList.get(j);
+
+						sb.append("query.append(\"" + col.getDBName() + " " + (col.isOrderByAscending() ? "ASC" : "DESC") + "\")");
+
+						if ((j + 1) != orderList.size()) {
+							sb.append(".append(\", \");");
+						}
+						else {
+							sb.append(";");
+						}
+					}
 				}
 
-				sb.append(");");
-				
-				if (_requiresNullCheck(col)) {
-					sb.append("}");
+				sb.append("Query q = session.createQuery(query.toString());");
+
+				sb.append("int queryPos = 0;");
+
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+					if (_requiresNullCheck(col)) {
+						sb.append("if (" + col.getName() + " != null) {");
+					}
+
+					String colType = col.getType();
+					String colObjType = colType;
+
+					if (col.isPrimitiveType()) {
+						if (colType.equals("boolean")) {
+							colObjType = "Boolean";
+						}
+						else if (colType.equals("double")) {
+							colObjType = "Double";
+						}
+						else if (colType.equals("float")) {
+							colObjType = "Float";
+						}
+						else if (colType.equals("int")) {
+							colObjType = "Integer";
+						}
+						else if (colType.equals("long")) {
+							colObjType = "Long";
+						}
+						else if (colType.equals("short")) {
+							colObjType = "Short";
+						}
+					}
+
+					sb.append("q.set" + colObjType + "(queryPos++, " + col.getName());
+
+					if (colType.equals("Boolean")) {
+						sb.append(".booleanValue()");
+					}
+					else if (colType.equals("Double")) {
+						sb.append(".doubleValue()");
+					}
+					else if (colType.equals("Float")) {
+						sb.append(".floatValue()");
+					}
+					else if (colType.equals("Integer")) {
+						sb.append(".intValue()");
+					}
+					else if (colType.equals("Long")) {
+						sb.append(".longValue()");
+					}
+					else if (colType.equals("Short")) {
+						sb.append(".shortValue()");
+					}
+
+					sb.append(");");
+					
+					if (_requiresNullCheck(col)) {
+						sb.append("}");
+					}
 				}
-			}
 
-			sb.append("List list = q.list();");
-
-			if (finder.isCollection()) {
-				sb.append("return list;");
-			}
-			else {
+				sb.append("List list = q.list();");
 				sb.append("if (list.size() == 0) {");
 				sb.append("String msg = \"No " + entity.getName() + " exists with the key \";");
 
@@ -2125,18 +2143,153 @@ public class ServiceBuilder {
 
 				sb.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")list.get(0);");
 				sb.append("return " + entity.getVarName() + ";");
+				sb.append("}");
+				sb.append("catch (HibernateException he) {");
+				sb.append("throw new SystemException(he);");
+				sb.append("}");
+				sb.append("finally {");
+				sb.append("closeSession(session);");
+				sb.append("}");
+				sb.append("}");
 			}
+			else {
+				sb.append("public List findBy" + finder.getName() + "(");
 
-			sb.append("}");
-			sb.append("catch (HibernateException he) {");
-			sb.append("throw new SystemException(he);");
-			sb.append("}");
-			sb.append("finally {");
-			sb.append("closeSession(session);");
-			sb.append("}");
-			sb.append("}");
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
-			if (finder.isCollection()) {
+					sb.append(col.getType() + " " + col.getName());
+
+					if ((j + 1) != finderColsList.size()) {
+						sb.append(", ");
+					}
+				}
+
+				sb.append(") throws SystemException {");
+				sb.append("Session session = null;");
+				sb.append("try {");
+				sb.append("session = openSession();");
+				sb.append("StringBuffer query = new StringBuffer();");
+				sb.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " WHERE \");");
+
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+					if (_requiresNullCheck(col)) {
+						_appendNullLogic(col, sb);
+					}
+						
+					sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
+
+					if (_requiresNullCheck(col)) {
+						sb.append("}");
+					}
+
+					if ((j + 1) != finderColsList.size()) {
+						sb.append("query.append(\" AND \");");
+					}
+					else if (Validator.isNull(finder.getWhere())) {
+						sb.append("query.append(\" \");");
+					}
+					else {
+						sb.append("query.append(\" AND " + finder.getWhere() + " \");");
+					}
+				}
+
+				EntityOrder order = entity.getOrder();
+
+				if (order != null) {
+					List orderList = order.getColumns();
+
+					sb.append("query.append(\"ORDER BY \");");
+
+					for (int j = 0; j < orderList.size(); j++) {
+						EntityColumn col = (EntityColumn)orderList.get(j);
+
+						sb.append("query.append(\"" + col.getDBName() + " " + (col.isOrderByAscending() ? "ASC" : "DESC") + "\")");
+
+						if ((j + 1) != orderList.size()) {
+							sb.append(".append(\", \");");
+						}
+						else {
+							sb.append(";");
+						}
+					}
+				}
+
+				sb.append("Query q = session.createQuery(query.toString());");
+
+				sb.append("int queryPos = 0;");
+
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+					if (_requiresNullCheck(col)) {
+						sb.append("if (" + col.getName() + " != null) {");
+					}
+
+					String colType = col.getType();
+					String colObjType = colType;
+
+					if (col.isPrimitiveType()) {
+						if (colType.equals("boolean")) {
+							colObjType = "Boolean";
+						}
+						else if (colType.equals("double")) {
+							colObjType = "Double";
+						}
+						else if (colType.equals("float")) {
+							colObjType = "Float";
+						}
+						else if (colType.equals("int")) {
+							colObjType = "Integer";
+						}
+						else if (colType.equals("long")) {
+							colObjType = "Long";
+						}
+						else if (colType.equals("short")) {
+							colObjType = "Short";
+						}
+					}
+
+					sb.append("q.set" + colObjType + "(queryPos++, " + col.getName());
+
+					if (colType.equals("Boolean")) {
+						sb.append(".booleanValue()");
+					}
+					else if (colType.equals("Double")) {
+						sb.append(".doubleValue()");
+					}
+					else if (colType.equals("Float")) {
+						sb.append(".floatValue()");
+					}
+					else if (colType.equals("Integer")) {
+						sb.append(".intValue()");
+					}
+					else if (colType.equals("Long")) {
+						sb.append(".longValue()");
+					}
+					else if (colType.equals("Short")) {
+						sb.append(".shortValue()");
+					}
+
+					sb.append(");");
+					
+					if (_requiresNullCheck(col)) {
+						sb.append("}");
+					}
+				}
+
+				sb.append("return q.list();");
+				sb.append("}");
+				sb.append("catch (HibernateException he) {");
+				sb.append("throw new SystemException(he);");
+				sb.append("}");
+				sb.append("finally {");
+				sb.append("closeSession(session);");
+				sb.append("}");
+				sb.append("}");
+
 				sb.append("public List findBy" + finder.getName() + "(");
 
 				for (int j = 0; j < finderColsList.size(); j++) {

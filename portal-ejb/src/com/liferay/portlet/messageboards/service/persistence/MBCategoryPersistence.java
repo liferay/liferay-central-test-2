@@ -165,6 +165,12 @@ public class MBCategoryPersistence extends BasePersistence {
 
 	public MBCategory findByPrimaryKey(String categoryId)
 		throws NoSuchCategoryException, SystemException {
+		return findByPrimaryKey(categoryId, true);
+	}
+
+	public MBCategory findByPrimaryKey(String categoryId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchCategoryException, SystemException {
 		Session session = null;
 
 		try {
@@ -176,9 +182,12 @@ public class MBCategoryPersistence extends BasePersistence {
 			if (mbCategory == null) {
 				_log.warn("No MBCategory exists with the primary key " +
 					categoryId.toString());
-				throw new NoSuchCategoryException(
-					"No MBCategory exists with the primary key " +
-					categoryId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchCategoryException(
+						"No MBCategory exists with the primary key " +
+						categoryId.toString());
+				}
 			}
 
 			return mbCategory;
@@ -220,9 +229,7 @@ public class MBCategoryPersistence extends BasePersistence {
 				q.setString(queryPos++, groupId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -403,9 +410,7 @@ public class MBCategoryPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -600,9 +605,7 @@ public class MBCategoryPersistence extends BasePersistence {
 				q.setString(queryPos++, parentCategoryId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

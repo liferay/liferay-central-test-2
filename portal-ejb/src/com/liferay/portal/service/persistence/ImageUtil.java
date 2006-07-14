@@ -124,6 +124,14 @@ public class ImageUtil {
 		return getPersistence().findByPrimaryKey(imageId);
 	}
 
+	public static com.liferay.portal.model.Image findByPrimaryKey(
+		java.lang.String imageId, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchImageException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(imageId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();

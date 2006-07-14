@@ -138,6 +138,12 @@ public class OrgGroupRolePersistence extends BasePersistence {
 
 	public OrgGroupRole findByPrimaryKey(OrgGroupRolePK orgGroupRolePK)
 		throws NoSuchOrgGroupRoleException, SystemException {
+		return findByPrimaryKey(orgGroupRolePK, true);
+	}
+
+	public OrgGroupRole findByPrimaryKey(OrgGroupRolePK orgGroupRolePK,
+		boolean throwNoSuchObjectException)
+		throws NoSuchOrgGroupRoleException, SystemException {
 		Session session = null;
 
 		try {
@@ -149,9 +155,12 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			if (orgGroupRole == null) {
 				_log.warn("No OrgGroupRole exists with the primary key " +
 					orgGroupRolePK.toString());
-				throw new NoSuchOrgGroupRoleException(
-					"No OrgGroupRole exists with the primary key " +
-					orgGroupRolePK.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchOrgGroupRoleException(
+						"No OrgGroupRole exists with the primary key " +
+						orgGroupRolePK.toString());
+				}
 			}
 
 			return orgGroupRole;
@@ -189,9 +198,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 				q.setString(queryPos++, roleId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

@@ -143,6 +143,12 @@ public class PasswordTrackerPersistence extends BasePersistence {
 
 	public PasswordTracker findByPrimaryKey(String passwordTrackerId)
 		throws NoSuchPasswordTrackerException, SystemException {
+		return findByPrimaryKey(passwordTrackerId, true);
+	}
+
+	public PasswordTracker findByPrimaryKey(String passwordTrackerId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchPasswordTrackerException, SystemException {
 		Session session = null;
 
 		try {
@@ -154,9 +160,12 @@ public class PasswordTrackerPersistence extends BasePersistence {
 			if (passwordTracker == null) {
 				_log.warn("No PasswordTracker exists with the primary key " +
 					passwordTrackerId.toString());
-				throw new NoSuchPasswordTrackerException(
-					"No PasswordTracker exists with the primary key " +
-					passwordTrackerId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchPasswordTrackerException(
+						"No PasswordTracker exists with the primary key " +
+						passwordTrackerId.toString());
+				}
 			}
 
 			return passwordTracker;
@@ -197,9 +206,7 @@ public class PasswordTrackerPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

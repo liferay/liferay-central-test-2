@@ -150,6 +150,12 @@ public class LayoutSetPersistence extends BasePersistence {
 
 	public LayoutSet findByPrimaryKey(String ownerId)
 		throws NoSuchLayoutSetException, SystemException {
+		return findByPrimaryKey(ownerId, true);
+	}
+
+	public LayoutSet findByPrimaryKey(String ownerId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchLayoutSetException, SystemException {
 		Session session = null;
 
 		try {
@@ -161,9 +167,12 @@ public class LayoutSetPersistence extends BasePersistence {
 			if (layoutSet == null) {
 				_log.warn("No LayoutSet exists with the primary key " +
 					ownerId.toString());
-				throw new NoSuchLayoutSetException(
-					"No LayoutSet exists with the primary key " +
-					ownerId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchLayoutSetException(
+						"No LayoutSet exists with the primary key " +
+						ownerId.toString());
+				}
 			}
 
 			return layoutSet;

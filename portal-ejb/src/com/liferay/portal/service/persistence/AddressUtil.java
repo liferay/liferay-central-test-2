@@ -124,6 +124,14 @@ public class AddressUtil {
 		return getPersistence().findByPrimaryKey(addressId);
 	}
 
+	public static com.liferay.portal.model.Address findByPrimaryKey(
+		java.lang.String addressId, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchAddressException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(addressId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);

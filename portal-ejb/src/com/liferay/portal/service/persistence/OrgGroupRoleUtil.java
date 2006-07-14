@@ -125,6 +125,15 @@ public class OrgGroupRoleUtil {
 		return getPersistence().findByPrimaryKey(orgGroupRolePK);
 	}
 
+	public static com.liferay.portal.model.OrgGroupRole findByPrimaryKey(
+		com.liferay.portal.service.persistence.OrgGroupRolePK orgGroupRolePK,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchOrgGroupRoleException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(orgGroupRolePK,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByRoleId(java.lang.String roleId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByRoleId(roleId);

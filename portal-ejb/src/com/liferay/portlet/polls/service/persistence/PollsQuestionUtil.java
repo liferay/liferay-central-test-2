@@ -125,6 +125,14 @@ public class PollsQuestionUtil {
 		return getPersistence().findByPrimaryKey(questionId);
 	}
 
+	public static com.liferay.portlet.polls.model.PollsQuestion findByPrimaryKey(
+		java.lang.String questionId, boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.polls.NoSuchQuestionException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(questionId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);

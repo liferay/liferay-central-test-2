@@ -159,6 +159,12 @@ public class UserGroupPersistence extends BasePersistence {
 
 	public UserGroup findByPrimaryKey(String userGroupId)
 		throws NoSuchUserGroupException, SystemException {
+		return findByPrimaryKey(userGroupId, true);
+	}
+
+	public UserGroup findByPrimaryKey(String userGroupId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchUserGroupException, SystemException {
 		Session session = null;
 
 		try {
@@ -170,9 +176,12 @@ public class UserGroupPersistence extends BasePersistence {
 			if (userGroup == null) {
 				_log.warn("No UserGroup exists with the primary key " +
 					userGroupId.toString());
-				throw new NoSuchUserGroupException(
-					"No UserGroup exists with the primary key " +
-					userGroupId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchUserGroupException(
+						"No UserGroup exists with the primary key " +
+						userGroupId.toString());
+				}
 			}
 
 			return userGroup;

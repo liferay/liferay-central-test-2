@@ -124,6 +124,14 @@ public class ResourceUtil {
 		return getPersistence().findByPrimaryKey(resourceId);
 	}
 
+	public static com.liferay.portal.model.Resource findByPrimaryKey(
+		java.lang.String resourceId, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchResourceException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(resourceId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);
@@ -318,6 +326,16 @@ public class ResourceUtil {
 			com.liferay.portal.SystemException {
 		return getPersistence().findByC_N_T_S_P(companyId, name, typeId, scope,
 			primKey);
+	}
+
+	public static com.liferay.portal.model.Resource findByC_N_T_S_P(
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String typeId, java.lang.String scope,
+		java.lang.String primKey, boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchResourceException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_N_T_S_P(companyId, name, typeId, scope,
+			primKey, throwNoSuchObjectException);
 	}
 
 	public static java.util.List findAll()

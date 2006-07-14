@@ -125,6 +125,15 @@ public class PortletPreferencesUtil {
 		return getPersistence().findByPrimaryKey(portletPreferencesPK);
 	}
 
+	public static com.liferay.portal.model.PortletPreferences findByPrimaryKey(
+		com.liferay.portal.service.persistence.PortletPreferencesPK portletPreferencesPK,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchPortletPreferencesException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(portletPreferencesPK,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByLayoutId(java.lang.String layoutId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByLayoutId(layoutId);

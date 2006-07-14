@@ -176,6 +176,12 @@ public class GroupPersistence extends BasePersistence {
 
 	public Group findByPrimaryKey(String groupId)
 		throws NoSuchGroupException, SystemException {
+		return findByPrimaryKey(groupId, true);
+	}
+
+	public Group findByPrimaryKey(String groupId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchGroupException, SystemException {
 		Session session = null;
 
 		try {
@@ -186,9 +192,12 @@ public class GroupPersistence extends BasePersistence {
 			if (group == null) {
 				_log.warn("No Group exists with the primary key " +
 					groupId.toString());
-				throw new NoSuchGroupException(
-					"No Group exists with the primary key " +
-					groupId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchGroupException(
+						"No Group exists with the primary key " +
+						groupId.toString());
+				}
 			}
 
 			return group;
@@ -201,7 +210,86 @@ public class GroupPersistence extends BasePersistence {
 		}
 	}
 
+	public Group findByC_N(String companyId, String name)
+		throws NoSuchGroupException, SystemException {
+		return findByC_N(companyId, name, true);
+	}
+
+	public Group findByC_N(String companyId, String name,
+		boolean throwNoSuchObjectException)
+		throws NoSuchGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.Group WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("name ASC");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				String msg = "No Group exists with the key ";
+				msg += StringPool.OPEN_CURLY_BRACE;
+				msg += "companyId=";
+				msg += companyId;
+				msg += ", ";
+				msg += "name=";
+				msg += name;
+				msg += StringPool.CLOSE_CURLY_BRACE;
+				throw new NoSuchGroupException(msg);
+			}
+
+			Group group = (Group)list.get(0);
+
+			return group;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public Group findByC_F(String companyId, String friendlyURL)
+		throws NoSuchGroupException, SystemException {
+		return findByC_F(companyId, friendlyURL, true);
+	}
+
+	public Group findByC_F(String companyId, String friendlyURL,
+		boolean throwNoSuchObjectException)
 		throws NoSuchGroupException, SystemException {
 		Session session = null;
 
@@ -269,6 +357,12 @@ public class GroupPersistence extends BasePersistence {
 	}
 
 	public Group findByC_C_C(String companyId, String className, String classPK)
+		throws NoSuchGroupException, SystemException {
+		return findByC_C_C(companyId, className, classPK, true);
+	}
+
+	public Group findByC_C_C(String companyId, String className,
+		String classPK, boolean throwNoSuchObjectException)
 		throws NoSuchGroupException, SystemException {
 		Session session = null;
 
@@ -368,6 +462,77 @@ public class GroupPersistence extends BasePersistence {
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public void removeByC_N(String companyId, String name)
+		throws NoSuchGroupException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.Group WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("name ASC");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			while (itr.hasNext()) {
+				Group group = (Group)itr.next();
+				session.delete(group);
+			}
+
+			session.flush();
+		}
+		catch (HibernateException he) {
+			if (he instanceof ObjectNotFoundException) {
+				String msg = "No Group exists with the key ";
+				msg += StringPool.OPEN_CURLY_BRACE;
+				msg += "companyId=";
+				msg += companyId;
+				msg += ", ";
+				msg += "name=";
+				msg += name;
+				msg += StringPool.CLOSE_CURLY_BRACE;
+				throw new NoSuchGroupException(msg);
+			}
+			else {
+				throw new SystemException(he);
+			}
 		}
 		finally {
 			closeSession(session);
@@ -526,6 +691,66 @@ public class GroupPersistence extends BasePersistence {
 			else {
 				throw new SystemException(he);
 			}
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByC_N(String companyId, String name)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.Group WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
 		}
 		finally {
 			closeSession(session);

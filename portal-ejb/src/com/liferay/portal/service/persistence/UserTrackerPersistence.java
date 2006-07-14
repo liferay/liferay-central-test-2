@@ -152,6 +152,12 @@ public class UserTrackerPersistence extends BasePersistence {
 
 	public UserTracker findByPrimaryKey(String userTrackerId)
 		throws NoSuchUserTrackerException, SystemException {
+		return findByPrimaryKey(userTrackerId, true);
+	}
+
+	public UserTracker findByPrimaryKey(String userTrackerId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchUserTrackerException, SystemException {
 		Session session = null;
 
 		try {
@@ -163,9 +169,12 @@ public class UserTrackerPersistence extends BasePersistence {
 			if (userTracker == null) {
 				_log.warn("No UserTracker exists with the primary key " +
 					userTrackerId.toString());
-				throw new NoSuchUserTrackerException(
-					"No UserTracker exists with the primary key " +
-					userTrackerId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchUserTrackerException(
+						"No UserTracker exists with the primary key " +
+						userTrackerId.toString());
+				}
 			}
 
 			return userTracker;
@@ -203,9 +212,7 @@ public class UserTrackerPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -372,9 +379,7 @@ public class UserTrackerPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

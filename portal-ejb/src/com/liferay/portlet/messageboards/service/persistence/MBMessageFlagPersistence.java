@@ -142,6 +142,12 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 	public MBMessageFlag findByPrimaryKey(MBMessageFlagPK mbMessageFlagPK)
 		throws NoSuchMessageFlagException, SystemException {
+		return findByPrimaryKey(mbMessageFlagPK, true);
+	}
+
+	public MBMessageFlag findByPrimaryKey(MBMessageFlagPK mbMessageFlagPK,
+		boolean throwNoSuchObjectException)
+		throws NoSuchMessageFlagException, SystemException {
 		Session session = null;
 
 		try {
@@ -153,9 +159,12 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			if (mbMessageFlag == null) {
 				_log.warn("No MBMessageFlag exists with the primary key " +
 					mbMessageFlagPK.toString());
-				throw new NoSuchMessageFlagException(
-					"No MBMessageFlag exists with the primary key " +
-					mbMessageFlagPK.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchMessageFlagException(
+						"No MBMessageFlag exists with the primary key " +
+						mbMessageFlagPK.toString());
+				}
 			}
 
 			return mbMessageFlag;
@@ -194,9 +203,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				q.setString(queryPos++, topicId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -366,9 +373,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -550,9 +555,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				q.setString(queryPos++, messageId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -769,9 +772,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

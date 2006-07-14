@@ -124,6 +124,15 @@ public class LayoutUtil {
 		return getPersistence().findByPrimaryKey(layoutPK);
 	}
 
+	public static com.liferay.portal.model.Layout findByPrimaryKey(
+		com.liferay.portal.service.persistence.LayoutPK layoutPK,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchLayoutException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(layoutPK,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByOwnerId(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByOwnerId(ownerId);
@@ -216,6 +225,15 @@ public class LayoutUtil {
 		throws com.liferay.portal.NoSuchLayoutException, 
 			com.liferay.portal.SystemException {
 		return getPersistence().findByO_F(ownerId, friendlyURL);
+	}
+
+	public static com.liferay.portal.model.Layout findByO_F(
+		java.lang.String ownerId, java.lang.String friendlyURL,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portal.NoSuchLayoutException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByO_F(ownerId, friendlyURL,
+			throwNoSuchObjectException);
 	}
 
 	public static java.util.List findAll()

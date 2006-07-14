@@ -159,6 +159,12 @@ public class BlogsCategoryPersistence extends BasePersistence {
 
 	public BlogsCategory findByPrimaryKey(String categoryId)
 		throws NoSuchCategoryException, SystemException {
+		return findByPrimaryKey(categoryId, true);
+	}
+
+	public BlogsCategory findByPrimaryKey(String categoryId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchCategoryException, SystemException {
 		Session session = null;
 
 		try {
@@ -170,9 +176,12 @@ public class BlogsCategoryPersistence extends BasePersistence {
 			if (blogsCategory == null) {
 				_log.warn("No BlogsCategory exists with the primary key " +
 					categoryId.toString());
-				throw new NoSuchCategoryException(
-					"No BlogsCategory exists with the primary key " +
-					categoryId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchCategoryException(
+						"No BlogsCategory exists with the primary key " +
+						categoryId.toString());
+				}
 			}
 
 			return blogsCategory;
@@ -214,9 +223,7 @@ public class BlogsCategoryPersistence extends BasePersistence {
 				q.setString(queryPos++, parentCategoryId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

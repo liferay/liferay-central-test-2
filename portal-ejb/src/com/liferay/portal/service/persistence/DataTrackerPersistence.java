@@ -157,6 +157,12 @@ public class DataTrackerPersistence extends BasePersistence {
 
 	public DataTracker findByPrimaryKey(String dataTrackerId)
 		throws NoSuchDataTrackerException, SystemException {
+		return findByPrimaryKey(dataTrackerId, true);
+	}
+
+	public DataTracker findByPrimaryKey(String dataTrackerId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchDataTrackerException, SystemException {
 		Session session = null;
 
 		try {
@@ -168,9 +174,12 @@ public class DataTrackerPersistence extends BasePersistence {
 			if (dataTracker == null) {
 				_log.warn("No DataTracker exists with the primary key " +
 					dataTrackerId.toString());
-				throw new NoSuchDataTrackerException(
-					"No DataTracker exists with the primary key " +
-					dataTrackerId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchDataTrackerException(
+						"No DataTracker exists with the primary key " +
+						dataTrackerId.toString());
+				}
 			}
 
 			return dataTracker;

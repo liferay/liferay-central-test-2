@@ -142,6 +142,12 @@ public class UserIdMapperPersistence extends BasePersistence {
 
 	public UserIdMapper findByPrimaryKey(UserIdMapperPK userIdMapperPK)
 		throws NoSuchUserIdMapperException, SystemException {
+		return findByPrimaryKey(userIdMapperPK, true);
+	}
+
+	public UserIdMapper findByPrimaryKey(UserIdMapperPK userIdMapperPK,
+		boolean throwNoSuchObjectException)
+		throws NoSuchUserIdMapperException, SystemException {
 		Session session = null;
 
 		try {
@@ -153,9 +159,12 @@ public class UserIdMapperPersistence extends BasePersistence {
 			if (userIdMapper == null) {
 				_log.warn("No UserIdMapper exists with the primary key " +
 					userIdMapperPK.toString());
-				throw new NoSuchUserIdMapperException(
-					"No UserIdMapper exists with the primary key " +
-					userIdMapperPK.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchUserIdMapperException(
+						"No UserIdMapper exists with the primary key " +
+						userIdMapperPK.toString());
+				}
 			}
 
 			return userIdMapper;
@@ -193,9 +202,7 @@ public class UserIdMapperPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

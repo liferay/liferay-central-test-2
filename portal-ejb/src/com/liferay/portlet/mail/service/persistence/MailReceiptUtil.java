@@ -125,6 +125,14 @@ public class MailReceiptUtil {
 		return getPersistence().findByPrimaryKey(receiptId);
 	}
 
+	public static com.liferay.portlet.mail.model.MailReceipt findByPrimaryKey(
+		java.lang.String receiptId, boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.mail.NoSuchReceiptException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(receiptId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);

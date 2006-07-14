@@ -125,6 +125,15 @@ public class IGImageUtil {
 		return getPersistence().findByPrimaryKey(igImagePK);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImage findByPrimaryKey(
+		com.liferay.portlet.imagegallery.service.persistence.IGImagePK igImagePK,
+		boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.imagegallery.NoSuchImageException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(igImagePK,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByFolderId(java.lang.String folderId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId);

@@ -125,6 +125,14 @@ public class BlogsEntryUtil {
 		return getPersistence().findByPrimaryKey(entryId);
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsEntry findByPrimaryKey(
+		java.lang.String entryId, boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.blogs.NoSuchEntryException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(entryId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);

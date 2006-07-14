@@ -148,6 +148,12 @@ public class ResourcePersistence extends BasePersistence {
 
 	public Resource findByPrimaryKey(String resourceId)
 		throws NoSuchResourceException, SystemException {
+		return findByPrimaryKey(resourceId, true);
+	}
+
+	public Resource findByPrimaryKey(String resourceId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchResourceException, SystemException {
 		Session session = null;
 
 		try {
@@ -158,9 +164,12 @@ public class ResourcePersistence extends BasePersistence {
 			if (resource == null) {
 				_log.warn("No Resource exists with the primary key " +
 					resourceId.toString());
-				throw new NoSuchResourceException(
-					"No Resource exists with the primary key " +
-					resourceId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchResourceException(
+						"No Resource exists with the primary key " +
+						resourceId.toString());
+				}
 			}
 
 			return resource;
@@ -198,9 +207,7 @@ public class ResourcePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -364,9 +371,7 @@ public class ResourcePersistence extends BasePersistence {
 				q.setString(queryPos++, name);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -569,9 +574,7 @@ public class ResourcePersistence extends BasePersistence {
 				q.setString(queryPos++, scope);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -875,9 +878,7 @@ public class ResourcePersistence extends BasePersistence {
 				q.setString(queryPos++, primKey);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1118,6 +1119,13 @@ public class ResourcePersistence extends BasePersistence {
 
 	public Resource findByC_N_T_S_P(String companyId, String name,
 		String typeId, String scope, String primKey)
+		throws NoSuchResourceException, SystemException {
+		return findByC_N_T_S_P(companyId, name, typeId, scope, primKey, true);
+	}
+
+	public Resource findByC_N_T_S_P(String companyId, String name,
+		String typeId, String scope, String primKey,
+		boolean throwNoSuchObjectException)
 		throws NoSuchResourceException, SystemException {
 		Session session = null;
 

@@ -282,6 +282,12 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 	public ShoppingOrder findByPrimaryKey(String orderId)
 		throws NoSuchOrderException, SystemException {
+		return findByPrimaryKey(orderId, true);
+	}
+
+	public ShoppingOrder findByPrimaryKey(String orderId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchOrderException, SystemException {
 		Session session = null;
 
 		try {
@@ -293,9 +299,12 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			if (shoppingOrder == null) {
 				_log.warn("No ShoppingOrder exists with the primary key " +
 					orderId.toString());
-				throw new NoSuchOrderException(
-					"No ShoppingOrder exists with the primary key " +
-					orderId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchOrderException(
+						"No ShoppingOrder exists with the primary key " +
+						orderId.toString());
+				}
 			}
 
 			return shoppingOrder;
@@ -363,9 +372,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 				q.setString(queryPos++, ppPaymentStatus);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

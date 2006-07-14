@@ -125,6 +125,14 @@ public class ShoppingCartUtil {
 		return getPersistence().findByPrimaryKey(cartId);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingCart findByPrimaryKey(
+		java.lang.String cartId, boolean throwNoSuchObjectException)
+		throws com.liferay.portlet.shopping.NoSuchCartException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByPrimaryKey(cartId,
+			throwNoSuchObjectException);
+	}
+
 	public static java.util.List findByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);

@@ -152,6 +152,12 @@ public class MBThreadPersistence extends BasePersistence {
 
 	public MBThread findByPrimaryKey(String threadId)
 		throws NoSuchThreadException, SystemException {
+		return findByPrimaryKey(threadId, true);
+	}
+
+	public MBThread findByPrimaryKey(String threadId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchThreadException, SystemException {
 		Session session = null;
 
 		try {
@@ -162,9 +168,12 @@ public class MBThreadPersistence extends BasePersistence {
 			if (mbThread == null) {
 				_log.warn("No MBThread exists with the primary key " +
 					threadId.toString());
-				throw new NoSuchThreadException(
-					"No MBThread exists with the primary key " +
-					threadId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchThreadException(
+						"No MBThread exists with the primary key " +
+						threadId.toString());
+				}
 			}
 
 			return mbThread;
@@ -205,9 +214,7 @@ public class MBThreadPersistence extends BasePersistence {
 				q.setString(queryPos++, categoryId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

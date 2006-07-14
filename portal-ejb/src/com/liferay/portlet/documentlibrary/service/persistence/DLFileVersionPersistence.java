@@ -154,6 +154,12 @@ public class DLFileVersionPersistence extends BasePersistence {
 
 	public DLFileVersion findByPrimaryKey(DLFileVersionPK dlFileVersionPK)
 		throws NoSuchFileVersionException, SystemException {
+		return findByPrimaryKey(dlFileVersionPK, true);
+	}
+
+	public DLFileVersion findByPrimaryKey(DLFileVersionPK dlFileVersionPK,
+		boolean throwNoSuchObjectException)
+		throws NoSuchFileVersionException, SystemException {
 		Session session = null;
 
 		try {
@@ -165,9 +171,12 @@ public class DLFileVersionPersistence extends BasePersistence {
 			if (dlFileVersion == null) {
 				_log.warn("No DLFileVersion exists with the primary key " +
 					dlFileVersionPK.toString());
-				throw new NoSuchFileVersionException(
-					"No DLFileVersion exists with the primary key " +
-					dlFileVersionPK.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchFileVersionException(
+						"No DLFileVersion exists with the primary key " +
+						dlFileVersionPK.toString());
+				}
 			}
 
 			return dlFileVersion;
@@ -224,9 +233,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 				q.setString(queryPos++, name);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

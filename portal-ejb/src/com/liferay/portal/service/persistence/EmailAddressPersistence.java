@@ -164,6 +164,12 @@ public class EmailAddressPersistence extends BasePersistence {
 
 	public EmailAddress findByPrimaryKey(String emailAddressId)
 		throws NoSuchEmailAddressException, SystemException {
+		return findByPrimaryKey(emailAddressId, true);
+	}
+
+	public EmailAddress findByPrimaryKey(String emailAddressId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchEmailAddressException, SystemException {
 		Session session = null;
 
 		try {
@@ -175,9 +181,12 @@ public class EmailAddressPersistence extends BasePersistence {
 			if (emailAddress == null) {
 				_log.warn("No EmailAddress exists with the primary key " +
 					emailAddressId.toString());
-				throw new NoSuchEmailAddressException(
-					"No EmailAddress exists with the primary key " +
-					emailAddressId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchEmailAddressException(
+						"No EmailAddress exists with the primary key " +
+						emailAddressId.toString());
+				}
 			}
 
 			return emailAddress;
@@ -217,9 +226,7 @@ public class EmailAddressPersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -396,9 +403,7 @@ public class EmailAddressPersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -587,9 +592,7 @@ public class EmailAddressPersistence extends BasePersistence {
 				q.setString(queryPos++, className);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -825,9 +828,7 @@ public class EmailAddressPersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1101,9 +1102,7 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, primary);
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

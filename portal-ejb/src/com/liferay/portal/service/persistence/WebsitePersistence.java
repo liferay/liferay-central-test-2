@@ -162,6 +162,12 @@ public class WebsitePersistence extends BasePersistence {
 
 	public Website findByPrimaryKey(String websiteId)
 		throws NoSuchWebsiteException, SystemException {
+		return findByPrimaryKey(websiteId, true);
+	}
+
+	public Website findByPrimaryKey(String websiteId,
+		boolean throwNoSuchObjectException)
+		throws NoSuchWebsiteException, SystemException {
 		Session session = null;
 
 		try {
@@ -172,9 +178,12 @@ public class WebsitePersistence extends BasePersistence {
 			if (website == null) {
 				_log.warn("No Website exists with the primary key " +
 					websiteId.toString());
-				throw new NoSuchWebsiteException(
-					"No Website exists with the primary key " +
-					websiteId.toString());
+
+				if (throwNoSuchObjectException) {
+					throw new NoSuchWebsiteException(
+						"No Website exists with the primary key " +
+						websiteId.toString());
+				}
 			}
 
 			return website;
@@ -214,9 +223,7 @@ public class WebsitePersistence extends BasePersistence {
 				q.setString(queryPos++, companyId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -390,9 +397,7 @@ public class WebsitePersistence extends BasePersistence {
 				q.setString(queryPos++, userId);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -579,9 +584,7 @@ public class WebsitePersistence extends BasePersistence {
 				q.setString(queryPos++, className);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -814,9 +817,7 @@ public class WebsitePersistence extends BasePersistence {
 				q.setString(queryPos++, classPK);
 			}
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -1088,9 +1089,7 @@ public class WebsitePersistence extends BasePersistence {
 
 			q.setBoolean(queryPos++, primary);
 
-			List list = q.list();
-
-			return list;
+			return q.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
