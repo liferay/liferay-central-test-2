@@ -154,10 +154,11 @@ public class PollsChoicePersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No PollsChoice exists with the primary key " +
 						pollsChoicePK.toString());
-					throw new NoSuchChoiceException(
-						"No PollsChoice exists with the primary key " +
-						pollsChoicePK.toString());
 				}
+
+				throw new NoSuchChoiceException(
+					"No PollsChoice exists with the primary key " +
+					pollsChoicePK.toString());
 			}
 
 			return pollsChoice;

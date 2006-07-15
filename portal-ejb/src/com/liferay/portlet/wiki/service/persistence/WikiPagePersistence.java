@@ -172,10 +172,11 @@ public class WikiPagePersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No WikiPage exists with the primary key " +
 						wikiPagePK.toString());
-					throw new NoSuchPageException(
-						"No WikiPage exists with the primary key " +
-						wikiPagePK.toString());
 				}
+
+				throw new NoSuchPageException(
+					"No WikiPage exists with the primary key " +
+					wikiPagePK.toString());
 			}
 
 			return wikiPage;

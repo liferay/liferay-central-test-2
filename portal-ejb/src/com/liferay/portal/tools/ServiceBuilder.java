@@ -1934,8 +1934,8 @@ public class ServiceBuilder {
 		sb.append("if (" + entity.getVarName() + " == null) {");
 		sb.append("if (_log.isWarnEnabled()) {");
 		sb.append("_log.warn(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ".toString());");
-		sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ".toString());");
 		sb.append("}");
+		sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ".toString());");
 		sb.append("}");
 		sb.append("return " + entity.getVarName() + ";");
 		sb.append("}");

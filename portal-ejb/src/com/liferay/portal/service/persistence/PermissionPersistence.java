@@ -175,10 +175,11 @@ public class PermissionPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Permission exists with the primary key " +
 						permissionId.toString());
-					throw new NoSuchPermissionException(
-						"No Permission exists with the primary key " +
-						permissionId.toString());
 				}
+
+				throw new NoSuchPermissionException(
+					"No Permission exists with the primary key " +
+					permissionId.toString());
 			}
 
 			return permission;

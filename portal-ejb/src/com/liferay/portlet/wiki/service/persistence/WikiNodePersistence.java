@@ -174,10 +174,11 @@ public class WikiNodePersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No WikiNode exists with the primary key " +
 						nodeId.toString());
-					throw new NoSuchNodeException(
-						"No WikiNode exists with the primary key " +
-						nodeId.toString());
 				}
+
+				throw new NoSuchNodeException(
+					"No WikiNode exists with the primary key " +
+					nodeId.toString());
 			}
 
 			return wikiNode;

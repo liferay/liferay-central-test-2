@@ -925,6 +925,11 @@
 
 		<action path="/message_boards/search" forward="portlet.message_boards.search" />
 
+		<action path="/message_boards/select_category" type="com.liferay.portlet.messageboards.action.EditCategoryAction">
+			<forward name="portlet.message_boards.edit_category" path="portlet.message_boards.select_category" />
+			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+		</action>
+
 		<action path="/message_boards/view" type="com.liferay.portlet.messageboards.action.ViewAction">
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
 			<forward name="portlet.message_boards.view" path="portlet.message_boards.view" />

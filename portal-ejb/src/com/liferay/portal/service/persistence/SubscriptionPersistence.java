@@ -173,10 +173,11 @@ public class SubscriptionPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Subscription exists with the primary key " +
 						subscriptionId.toString());
-					throw new NoSuchSubscriptionException(
-						"No Subscription exists with the primary key " +
-						subscriptionId.toString());
 				}
+
+				throw new NoSuchSubscriptionException(
+					"No Subscription exists with the primary key " +
+					subscriptionId.toString());
 			}
 
 			return subscription;

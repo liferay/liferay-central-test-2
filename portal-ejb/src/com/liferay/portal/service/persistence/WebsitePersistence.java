@@ -175,10 +175,11 @@ public class WebsitePersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Website exists with the primary key " +
 						websiteId.toString());
-					throw new NoSuchWebsiteException(
-						"No Website exists with the primary key " +
-						websiteId.toString());
 				}
+
+				throw new NoSuchWebsiteException(
+					"No Website exists with the primary key " +
+					websiteId.toString());
 			}
 
 			return website;

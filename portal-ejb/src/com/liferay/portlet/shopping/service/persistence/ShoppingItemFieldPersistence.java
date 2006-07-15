@@ -163,10 +163,11 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 					_log.warn(
 						"No ShoppingItemField exists with the primary key " +
 						itemFieldId.toString());
-					throw new NoSuchItemFieldException(
-						"No ShoppingItemField exists with the primary key " +
-						itemFieldId.toString());
 				}
+
+				throw new NoSuchItemFieldException(
+					"No ShoppingItemField exists with the primary key " +
+					itemFieldId.toString());
 			}
 
 			return shoppingItemField;

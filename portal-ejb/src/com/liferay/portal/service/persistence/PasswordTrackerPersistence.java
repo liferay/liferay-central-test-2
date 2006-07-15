@@ -157,10 +157,11 @@ public class PasswordTrackerPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No PasswordTracker exists with the primary key " +
 						passwordTrackerId.toString());
-					throw new NoSuchPasswordTrackerException(
-						"No PasswordTracker exists with the primary key " +
-						passwordTrackerId.toString());
 				}
+
+				throw new NoSuchPasswordTrackerException(
+					"No PasswordTracker exists with the primary key " +
+					passwordTrackerId.toString());
 			}
 
 			return passwordTracker;

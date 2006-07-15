@@ -158,10 +158,11 @@ public class PortletPreferencesPersistence extends BasePersistence {
 					_log.warn(
 						"No PortletPreferences exists with the primary key " +
 						portletPreferencesPK.toString());
-					throw new NoSuchPortletPreferencesException(
-						"No PortletPreferences exists with the primary key " +
-						portletPreferencesPK.toString());
 				}
+
+				throw new NoSuchPortletPreferencesException(
+					"No PortletPreferences exists with the primary key " +
+					portletPreferencesPK.toString());
 			}
 
 			return portletPreferences;

@@ -43,7 +43,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 <liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
 
-<%= MBUtil.getBreadcrumbs(breadcrumbsCategoryId, breadcrumbsMessageId, pageContext, renderResponse) %> &raquo; <%= LanguageUtil.get(pageContext, "search") %>
+<%= MBUtil.getBreadcrumbs(breadcrumbsCategoryId, breadcrumbsMessageId, pageContext, renderResponse, false) %> &raquo; <%= LanguageUtil.get(pageContext, "search") %>
 
 <br><br>
 

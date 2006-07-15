@@ -173,10 +173,11 @@ public class UserGroupPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No UserGroup exists with the primary key " +
 						userGroupId.toString());
-					throw new NoSuchUserGroupException(
-						"No UserGroup exists with the primary key " +
-						userGroupId.toString());
 				}
+
+				throw new NoSuchUserGroupException(
+					"No UserGroup exists with the primary key " +
+					userGroupId.toString());
 			}
 
 			return userGroup;

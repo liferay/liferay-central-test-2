@@ -157,10 +157,11 @@ public class MBDiscussionPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No MBDiscussion exists with the primary key " +
 						discussionId.toString());
-					throw new NoSuchDiscussionException(
-						"No MBDiscussion exists with the primary key " +
-						discussionId.toString());
 				}
+
+				throw new NoSuchDiscussionException(
+					"No MBDiscussion exists with the primary key " +
+					discussionId.toString());
 			}
 
 			return mbDiscussion;

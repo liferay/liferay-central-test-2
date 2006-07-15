@@ -197,10 +197,11 @@ public class ShoppingCouponPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No ShoppingCoupon exists with the primary key " +
 						couponId.toString());
-					throw new NoSuchCouponException(
-						"No ShoppingCoupon exists with the primary key " +
-						couponId.toString());
 				}
+
+				throw new NoSuchCouponException(
+					"No ShoppingCoupon exists with the primary key " +
+					couponId.toString());
 			}
 
 			return shoppingCoupon;

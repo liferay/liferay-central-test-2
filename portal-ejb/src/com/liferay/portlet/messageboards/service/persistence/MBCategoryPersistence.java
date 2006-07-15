@@ -179,10 +179,11 @@ public class MBCategoryPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No MBCategory exists with the primary key " +
 						categoryId.toString());
-					throw new NoSuchCategoryException(
-						"No MBCategory exists with the primary key " +
-						categoryId.toString());
 				}
+
+				throw new NoSuchCategoryException(
+					"No MBCategory exists with the primary key " +
+					categoryId.toString());
 			}
 
 			return mbCategory;

@@ -151,10 +151,11 @@ public class ListTypePersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No ListType exists with the primary key " +
 						listTypeId.toString());
-					throw new NoSuchListTypeException(
-						"No ListType exists with the primary key " +
-						listTypeId.toString());
 				}
+
+				throw new NoSuchListTypeException(
+					"No ListType exists with the primary key " +
+					listTypeId.toString());
 			}
 
 			return listType;

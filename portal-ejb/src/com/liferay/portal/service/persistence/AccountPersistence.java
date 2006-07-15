@@ -185,10 +185,11 @@ public class AccountPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Account exists with the primary key " +
 						accountId.toString());
-					throw new NoSuchAccountException(
-						"No Account exists with the primary key " +
-						accountId.toString());
 				}
+
+				throw new NoSuchAccountException(
+					"No Account exists with the primary key " +
+					accountId.toString());
 			}
 
 			return account;

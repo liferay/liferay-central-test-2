@@ -189,10 +189,11 @@ public class OrganizationPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Organization exists with the primary key " +
 						organizationId.toString());
-					throw new NoSuchOrganizationException(
-						"No Organization exists with the primary key " +
-						organizationId.toString());
 				}
+
+				throw new NoSuchOrganizationException(
+					"No Organization exists with the primary key " +
+					organizationId.toString());
 			}
 
 			return organization;

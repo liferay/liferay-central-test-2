@@ -306,14 +306,12 @@ public class LDAPAuth implements Authenticator {
 
 			// Make sure the user has a portal account
 
-			User user = null;
-
 			try {
-				user = UserLocalServiceUtil.getUserByEmailAddress(
+				UserLocalServiceUtil.getUserByEmailAddress(
 					companyId, emailAddress);
 			}
 			catch (NoSuchUserException nsue) {
-				user = UserLocalServiceUtil.addUser(
+				UserLocalServiceUtil.addUser(
 					creatorUserId, companyId, autoUserId, userId, autoPassword,
 					password1, password2, passwordReset, emailAddress, locale,
 					firstName, middleName, lastName, nickName, prefixId,

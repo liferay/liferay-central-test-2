@@ -179,10 +179,11 @@ public class PollsQuestionPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No PollsQuestion exists with the primary key " +
 						questionId.toString());
-					throw new NoSuchQuestionException(
-						"No PollsQuestion exists with the primary key " +
-						questionId.toString());
 				}
+
+				throw new NoSuchQuestionException(
+					"No PollsQuestion exists with the primary key " +
+					questionId.toString());
 			}
 
 			return pollsQuestion;

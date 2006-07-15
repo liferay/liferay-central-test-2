@@ -178,10 +178,11 @@ public class PhonePersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Phone exists with the primary key " +
 						phoneId.toString());
-					throw new NoSuchPhoneException(
-						"No Phone exists with the primary key " +
-						phoneId.toString());
 				}
+
+				throw new NoSuchPhoneException(
+					"No Phone exists with the primary key " +
+					phoneId.toString());
 			}
 
 			return phone;

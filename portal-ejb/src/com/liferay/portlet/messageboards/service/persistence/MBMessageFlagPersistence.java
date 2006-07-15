@@ -156,10 +156,11 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No MBMessageFlag exists with the primary key " +
 						mbMessageFlagPK.toString());
-					throw new NoSuchMessageFlagException(
-						"No MBMessageFlag exists with the primary key " +
-						mbMessageFlagPK.toString());
 				}
+
+				throw new NoSuchMessageFlagException(
+					"No MBMessageFlag exists with the primary key " +
+					mbMessageFlagPK.toString());
 			}
 
 			return mbMessageFlag;

@@ -226,10 +226,11 @@ public class ContactPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Contact exists with the primary key " +
 						contactId.toString());
-					throw new NoSuchContactException(
-						"No Contact exists with the primary key " +
-						contactId.toString());
 				}
+
+				throw new NoSuchContactException(
+					"No Contact exists with the primary key " +
+					contactId.toString());
 			}
 
 			return contact;

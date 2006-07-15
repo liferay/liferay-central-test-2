@@ -179,10 +179,11 @@ public class ShoppingCartPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No ShoppingCart exists with the primary key " +
 						cartId.toString());
-					throw new NoSuchCartException(
-						"No ShoppingCart exists with the primary key " +
-						cartId.toString());
 				}
+
+				throw new NoSuchCartException(
+					"No ShoppingCart exists with the primary key " +
+					cartId.toString());
 			}
 
 			return shoppingCart;

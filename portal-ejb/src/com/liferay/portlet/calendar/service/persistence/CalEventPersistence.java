@@ -207,10 +207,11 @@ public class CalEventPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No CalEvent exists with the primary key " +
 						eventId.toString());
-					throw new NoSuchEventException(
-						"No CalEvent exists with the primary key " +
-						eventId.toString());
 				}
+
+				throw new NoSuchEventException(
+					"No CalEvent exists with the primary key " +
+					eventId.toString());
 			}
 
 			return calEvent;

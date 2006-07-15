@@ -187,10 +187,11 @@ public class JournalTemplatePersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No JournalTemplate exists with the primary key " +
 						journalTemplatePK.toString());
-					throw new NoSuchTemplateException(
-						"No JournalTemplate exists with the primary key " +
-						journalTemplatePK.toString());
 				}
+
+				throw new NoSuchTemplateException(
+					"No JournalTemplate exists with the primary key " +
+					journalTemplatePK.toString());
 			}
 
 			return journalTemplate;

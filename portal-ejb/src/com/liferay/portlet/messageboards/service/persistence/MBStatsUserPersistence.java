@@ -157,10 +157,11 @@ public class MBStatsUserPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No MBStatsUser exists with the primary key " +
 						mbStatsUserPK.toString());
-					throw new NoSuchStatsUserException(
-						"No MBStatsUser exists with the primary key " +
-						mbStatsUserPK.toString());
 				}
+
+				throw new NoSuchStatsUserException(
+					"No MBStatsUser exists with the primary key " +
+					mbStatsUserPK.toString());
 			}
 
 			return mbStatsUser;

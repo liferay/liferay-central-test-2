@@ -189,10 +189,11 @@ public class GroupPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Group exists with the primary key " +
 						groupId.toString());
-					throw new NoSuchGroupException(
-						"No Group exists with the primary key " +
-						groupId.toString());
 				}
+
+				throw new NoSuchGroupException(
+					"No Group exists with the primary key " +
+					groupId.toString());
 			}
 
 			return group;

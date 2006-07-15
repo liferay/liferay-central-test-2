@@ -182,10 +182,11 @@ public class MailReceiptPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No MailReceipt exists with the primary key " +
 						receiptId.toString());
-					throw new NoSuchReceiptException(
-						"No MailReceipt exists with the primary key " +
-						receiptId.toString());
 				}
+
+				throw new NoSuchReceiptException(
+					"No MailReceipt exists with the primary key " +
+					receiptId.toString());
 			}
 
 			return mailReceipt;

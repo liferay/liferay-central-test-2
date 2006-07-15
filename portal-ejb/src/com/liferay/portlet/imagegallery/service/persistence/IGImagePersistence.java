@@ -173,10 +173,11 @@ public class IGImagePersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No IGImage exists with the primary key " +
 						igImagePK.toString());
-					throw new NoSuchImageException(
-						"No IGImage exists with the primary key " +
-						igImagePK.toString());
 				}
+
+				throw new NoSuchImageException(
+					"No IGImage exists with the primary key " +
+					igImagePK.toString());
 			}
 
 			return igImage;

@@ -154,10 +154,11 @@ public class CountryPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Country exists with the primary key " +
 						countryId.toString());
-					throw new NoSuchCountryException(
-						"No Country exists with the primary key " +
-						countryId.toString());
 				}
+
+				throw new NoSuchCountryException(
+					"No Country exists with the primary key " +
+					countryId.toString());
 			}
 
 			return country;

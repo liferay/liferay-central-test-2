@@ -179,10 +179,11 @@ public class BlogsEntryPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No BlogsEntry exists with the primary key " +
 						entryId.toString());
-					throw new NoSuchEntryException(
-						"No BlogsEntry exists with the primary key " +
-						entryId.toString());
 				}
+
+				throw new NoSuchEntryException(
+					"No BlogsEntry exists with the primary key " +
+					entryId.toString());
 			}
 
 			return blogsEntry;

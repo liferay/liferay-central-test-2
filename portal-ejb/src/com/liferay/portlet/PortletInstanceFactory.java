@@ -107,6 +107,7 @@ public class PortletInstanceFactory {
 
 	private void _destroy(Portlet portlet) {
 		String poolId = PortletInstanceFactory.class.getName();
+
 		if (!portlet.isWARFile()) {
 			poolId += "." + portlet.getCompanyId();
 		}
@@ -128,7 +129,6 @@ public class PortletInstanceFactory {
 		while (itr.hasNext()) {
 			Map.Entry entry = (Map.Entry)itr.next();
 
-			String portletId = (String)entry.getKey();
 			CachePortlet portletInstance = (CachePortlet)entry.getValue();
 
 			portletInstance.destroy();

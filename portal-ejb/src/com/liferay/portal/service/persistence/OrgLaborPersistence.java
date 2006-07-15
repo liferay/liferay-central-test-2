@@ -193,10 +193,11 @@ public class OrgLaborPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No OrgLabor exists with the primary key " +
 						orgLaborId.toString());
-					throw new NoSuchOrgLaborException(
-						"No OrgLabor exists with the primary key " +
-						orgLaborId.toString());
 				}
+
+				throw new NoSuchOrgLaborException(
+					"No OrgLabor exists with the primary key " +
+					orgLaborId.toString());
 			}
 
 			return orgLabor;

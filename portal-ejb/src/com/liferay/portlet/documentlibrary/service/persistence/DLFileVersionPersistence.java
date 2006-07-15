@@ -168,10 +168,11 @@ public class DLFileVersionPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No DLFileVersion exists with the primary key " +
 						dlFileVersionPK.toString());
-					throw new NoSuchFileVersionException(
-						"No DLFileVersion exists with the primary key " +
-						dlFileVersionPK.toString());
 				}
+
+				throw new NoSuchFileVersionException(
+					"No DLFileVersion exists with the primary key " +
+					dlFileVersionPK.toString());
 			}
 
 			return dlFileVersion;

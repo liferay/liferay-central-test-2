@@ -196,10 +196,11 @@ public class AddressPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Address exists with the primary key " +
 						addressId.toString());
-					throw new NoSuchAddressException(
-						"No Address exists with the primary key " +
-						addressId.toString());
 				}
+
+				throw new NoSuchAddressException(
+					"No Address exists with the primary key " +
+					addressId.toString());
 			}
 
 			return address;

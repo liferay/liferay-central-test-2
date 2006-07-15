@@ -187,10 +187,11 @@ public class MBMessagePersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No MBMessage exists with the primary key " +
 						mbMessagePK.toString());
-					throw new NoSuchMessageException(
-						"No MBMessage exists with the primary key " +
-						mbMessagePK.toString());
 				}
+
+				throw new NoSuchMessageException(
+					"No MBMessage exists with the primary key " +
+					mbMessagePK.toString());
 			}
 
 			return mbMessage;

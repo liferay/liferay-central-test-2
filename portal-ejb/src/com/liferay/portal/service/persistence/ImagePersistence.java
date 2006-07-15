@@ -146,10 +146,11 @@ public class ImagePersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Image exists with the primary key " +
 						imageId.toString());
-					throw new NoSuchImageException(
-						"No Image exists with the primary key " +
-						imageId.toString());
 				}
+
+				throw new NoSuchImageException(
+					"No Image exists with the primary key " +
+					imageId.toString());
 			}
 
 			return image;

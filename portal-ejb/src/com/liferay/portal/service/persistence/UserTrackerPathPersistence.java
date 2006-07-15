@@ -157,10 +157,11 @@ public class UserTrackerPathPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No UserTrackerPath exists with the primary key " +
 						userTrackerPathId.toString());
-					throw new NoSuchUserTrackerPathException(
-						"No UserTrackerPath exists with the primary key " +
-						userTrackerPathId.toString());
 				}
+
+				throw new NoSuchUserTrackerPathException(
+					"No UserTrackerPath exists with the primary key " +
+					userTrackerPathId.toString());
 			}
 
 			return userTrackerPath;

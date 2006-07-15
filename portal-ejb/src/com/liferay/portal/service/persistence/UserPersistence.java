@@ -227,10 +227,10 @@ public class UserPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No User exists with the primary key " +
 						userId.toString());
-					throw new NoSuchUserException(
-						"No User exists with the primary key " +
-						userId.toString());
 				}
+
+				throw new NoSuchUserException(
+					"No User exists with the primary key " + userId.toString());
 			}
 
 			return user;

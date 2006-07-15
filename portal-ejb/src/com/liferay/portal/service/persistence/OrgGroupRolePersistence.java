@@ -152,10 +152,11 @@ public class OrgGroupRolePersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No OrgGroupRole exists with the primary key " +
 						orgGroupRolePK.toString());
-					throw new NoSuchOrgGroupRoleException(
-						"No OrgGroupRole exists with the primary key " +
-						orgGroupRolePK.toString());
 				}
+
+				throw new NoSuchOrgGroupRoleException(
+					"No OrgGroupRole exists with the primary key " +
+					orgGroupRolePK.toString());
 			}
 
 			return orgGroupRole;

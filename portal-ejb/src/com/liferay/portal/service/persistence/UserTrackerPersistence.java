@@ -166,10 +166,11 @@ public class UserTrackerPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No UserTracker exists with the primary key " +
 						userTrackerId.toString());
-					throw new NoSuchUserTrackerException(
-						"No UserTracker exists with the primary key " +
-						userTrackerId.toString());
 				}
+
+				throw new NoSuchUserTrackerException(
+					"No UserTracker exists with the primary key " +
+					userTrackerId.toString());
 			}
 
 			return userTracker;

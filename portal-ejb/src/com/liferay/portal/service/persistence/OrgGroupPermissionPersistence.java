@@ -155,10 +155,11 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 					_log.warn(
 						"No OrgGroupPermission exists with the primary key " +
 						orgGroupPermissionPK.toString());
-					throw new NoSuchOrgGroupPermissionException(
-						"No OrgGroupPermission exists with the primary key " +
-						orgGroupPermissionPK.toString());
 				}
+
+				throw new NoSuchOrgGroupPermissionException(
+					"No OrgGroupPermission exists with the primary key " +
+					orgGroupPermissionPK.toString());
 			}
 
 			return orgGroupPermission;

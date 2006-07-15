@@ -170,10 +170,11 @@ public class DataTrackerPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No DataTracker exists with the primary key " +
 						dataTrackerId.toString());
-					throw new NoSuchDataTrackerException(
-						"No DataTracker exists with the primary key " +
-						dataTrackerId.toString());
 				}
+
+				throw new NoSuchDataTrackerException(
+					"No DataTracker exists with the primary key " +
+					dataTrackerId.toString());
 			}
 
 			return dataTracker;

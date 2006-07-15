@@ -187,10 +187,11 @@ public class DLFileEntryPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No DLFileEntry exists with the primary key " +
 						dlFileEntryPK.toString());
-					throw new NoSuchFileEntryException(
-						"No DLFileEntry exists with the primary key " +
-						dlFileEntryPK.toString());
 				}
+
+				throw new NoSuchFileEntryException(
+					"No DLFileEntry exists with the primary key " +
+					dlFileEntryPK.toString());
 			}
 
 			return dlFileEntry;

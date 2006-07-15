@@ -176,10 +176,11 @@ public class BookmarksEntryPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No BookmarksEntry exists with the primary key " +
 						entryId.toString());
-					throw new NoSuchEntryException(
-						"No BookmarksEntry exists with the primary key " +
-						entryId.toString());
 				}
+
+				throw new NoSuchEntryException(
+					"No BookmarksEntry exists with the primary key " +
+					entryId.toString());
 			}
 
 			return bookmarksEntry;

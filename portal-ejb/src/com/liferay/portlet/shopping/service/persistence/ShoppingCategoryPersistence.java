@@ -178,10 +178,11 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 					_log.warn(
 						"No ShoppingCategory exists with the primary key " +
 						categoryId.toString());
-					throw new NoSuchCategoryException(
-						"No ShoppingCategory exists with the primary key " +
-						categoryId.toString());
 				}
+
+				throw new NoSuchCategoryException(
+					"No ShoppingCategory exists with the primary key " +
+					categoryId.toString());
 			}
 
 			return shoppingCategory;

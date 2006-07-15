@@ -218,7 +218,10 @@ portletURL.setParameter("tabs1", tabs1);
 			<c:if test="<%= results.size() > 0 %>">
 				<br>
 
-				<liferay-ui:tabs names="entries" />
+				<liferay-ui:tabs
+					names="entries"
+					param="tabs2"
+				/>
 
 				<%@ include file="/html/portlet/blogs/view_entries.jsp" %>
 			</c:if>

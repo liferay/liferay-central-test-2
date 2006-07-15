@@ -152,10 +152,11 @@ public class CompanyPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Company exists with the primary key " +
 						companyId.toString());
-					throw new NoSuchCompanyException(
-						"No Company exists with the primary key " +
-						companyId.toString());
 				}
+
+				throw new NoSuchCompanyException(
+					"No Company exists with the primary key " +
+					companyId.toString());
 			}
 
 			return company;

@@ -207,10 +207,11 @@ public class JournalArticlePersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No JournalArticle exists with the primary key " +
 						journalArticlePK.toString());
-					throw new NoSuchArticleException(
-						"No JournalArticle exists with the primary key " +
-						journalArticlePK.toString());
 				}
+
+				throw new NoSuchArticleException(
+					"No JournalArticle exists with the primary key " +
+					journalArticlePK.toString());
 			}
 
 			return journalArticle;

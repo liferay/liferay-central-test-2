@@ -173,10 +173,11 @@ public class BookmarksFolderPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No BookmarksFolder exists with the primary key " +
 						folderId.toString());
-					throw new NoSuchFolderException(
-						"No BookmarksFolder exists with the primary key " +
-						folderId.toString());
 				}
+
+				throw new NoSuchFolderException(
+					"No BookmarksFolder exists with the primary key " +
+					folderId.toString());
 			}
 
 			return bookmarksFolder;

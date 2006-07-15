@@ -178,10 +178,11 @@ public class JournalStructurePersistence extends BasePersistence {
 					_log.warn(
 						"No JournalStructure exists with the primary key " +
 						journalStructurePK.toString());
-					throw new NoSuchStructureException(
-						"No JournalStructure exists with the primary key " +
-						journalStructurePK.toString());
 				}
+
+				throw new NoSuchStructureException(
+					"No JournalStructure exists with the primary key " +
+					journalStructurePK.toString());
 			}
 
 			return journalStructure;

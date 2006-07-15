@@ -161,10 +161,11 @@ public class ResourcePersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Resource exists with the primary key " +
 						resourceId.toString());
-					throw new NoSuchResourceException(
-						"No Resource exists with the primary key " +
-						resourceId.toString());
 				}
+
+				throw new NoSuchResourceException(
+					"No Resource exists with the primary key " +
+					resourceId.toString());
 			}
 
 			return resource;

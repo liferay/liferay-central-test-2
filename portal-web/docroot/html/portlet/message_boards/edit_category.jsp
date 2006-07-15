@@ -39,6 +39,15 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= category == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
+
+	function selectCategory(parentCategoryId, parentCategoryName) {
+		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = parentCategoryId;
+
+		var nameEl = document.getElementById("<portlet:namespace />parentCategoryName");
+
+		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + parentCategoryId;
+		nameEl.innerHTML = parentCategoryName + "&nbsp;";
+	}
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_category" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCategory(); return false;">
@@ -53,12 +62,34 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 <liferay-ui:error exception="<%= CategoryNameException.class %>" message="please-enter-a-valid-name" />
 
 <c:if test="<%= !parentCategoryId.equals(MBCategory.DEFAULT_PARENT_CATEGORY_ID) %>">
-	<%= MBUtil.getBreadcrumbs(parentCategoryId, null, pageContext, renderResponse) %>
+	<%= MBUtil.getBreadcrumbs(parentCategoryId, null, pageContext, renderResponse, false) %>
 
 	<br><br>
 </c:if>
 
 <table border="0" cellpadding="0" cellspacing="0">
+
+<c:if test="<%= category != null %>">
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "parent-category") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+
+			<%
+			MBCategory parentCategory = MBCategoryLocalServiceUtil.getCategory(parentCategoryId);
+			%>
+
+			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /><portlet:param name="categoryId" value="<%= parentCategoryId %>" /></portlet:renderURL>" id="<portlet:namespace />parentCategoryName">
+			<%= parentCategory.getName() %>
+			</a>
+
+			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= parentCategoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
+		</td>
+	</tr>
+</c:if>
+
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>

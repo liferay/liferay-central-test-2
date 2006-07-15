@@ -156,10 +156,11 @@ public class UserIdMapperPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No UserIdMapper exists with the primary key " +
 						userIdMapperPK.toString());
-					throw new NoSuchUserIdMapperException(
-						"No UserIdMapper exists with the primary key " +
-						userIdMapperPK.toString());
 				}
+
+				throw new NoSuchUserIdMapperException(
+					"No UserIdMapper exists with the primary key " +
+					userIdMapperPK.toString());
 			}
 
 			return userIdMapper;

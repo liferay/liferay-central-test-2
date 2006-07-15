@@ -178,10 +178,11 @@ public class LayoutPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Layout exists with the primary key " +
 						layoutPK.toString());
-					throw new NoSuchLayoutException(
-						"No Layout exists with the primary key " +
-						layoutPK.toString());
 				}
+
+				throw new NoSuchLayoutException(
+					"No Layout exists with the primary key " +
+					layoutPK.toString());
 			}
 
 			return layout;

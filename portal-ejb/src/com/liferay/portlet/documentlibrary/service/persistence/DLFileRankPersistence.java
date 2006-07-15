@@ -158,10 +158,11 @@ public class DLFileRankPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No DLFileRank exists with the primary key " +
 						dlFileRankPK.toString());
-					throw new NoSuchFileRankException(
-						"No DLFileRank exists with the primary key " +
-						dlFileRankPK.toString());
 				}
+
+				throw new NoSuchFileRankException(
+					"No DLFileRank exists with the primary key " +
+					dlFileRankPK.toString());
 			}
 
 			return dlFileRank;

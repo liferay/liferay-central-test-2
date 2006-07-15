@@ -178,10 +178,11 @@ public class EmailAddressPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No EmailAddress exists with the primary key " +
 						emailAddressId.toString());
-					throw new NoSuchEmailAddressException(
-						"No EmailAddress exists with the primary key " +
-						emailAddressId.toString());
 				}
+
+				throw new NoSuchEmailAddressException(
+					"No EmailAddress exists with the primary key " +
+					emailAddressId.toString());
 			}
 
 			return emailAddress;

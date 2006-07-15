@@ -54,15 +54,11 @@ public class LiferayGUIFactory extends AppletGUIFactory {
 
 		while (container != null) {
 			if (container instanceof Frame) {
-				_frame = (Frame)container;
-
 				break;
 			}
 
 			container = container.getParent();
 		}
-
-		_frame = new Frame();
 	}
 
 	public Image getImage(String name) {
@@ -100,8 +96,5 @@ public class LiferayGUIFactory extends AppletGUIFactory {
 		_applet.setView((Component)chatRoom);
 		_mainGui.setStatusGui(chatRoom);
 	}
-
-	private Frame _frame;
-	private IConsole _console;
 
 }

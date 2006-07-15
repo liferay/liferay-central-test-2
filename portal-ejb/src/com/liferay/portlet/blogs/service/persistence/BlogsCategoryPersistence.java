@@ -173,10 +173,11 @@ public class BlogsCategoryPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No BlogsCategory exists with the primary key " +
 						categoryId.toString());
-					throw new NoSuchCategoryException(
-						"No BlogsCategory exists with the primary key " +
-						categoryId.toString());
 				}
+
+				throw new NoSuchCategoryException(
+					"No BlogsCategory exists with the primary key " +
+					categoryId.toString());
 			}
 
 			return blogsCategory;

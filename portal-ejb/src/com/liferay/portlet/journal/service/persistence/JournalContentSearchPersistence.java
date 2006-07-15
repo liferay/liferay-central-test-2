@@ -165,10 +165,11 @@ public class JournalContentSearchPersistence extends BasePersistence {
 					_log.warn(
 						"No JournalContentSearch exists with the primary key " +
 						journalContentSearchPK.toString());
-					throw new NoSuchContentSearchException(
-						"No JournalContentSearch exists with the primary key " +
-						journalContentSearchPK.toString());
 				}
+
+				throw new NoSuchContentSearchException(
+					"No JournalContentSearch exists with the primary key " +
+					journalContentSearchPK.toString());
 			}
 
 			return journalContentSearch;

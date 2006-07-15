@@ -33,6 +33,7 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
+import com.liferay.portlet.LiferayWindowState;
 
 import java.io.IOException;
 
@@ -53,13 +54,13 @@ public class MBUtil {
 
 	public static String getBreadcrumbs(
 			String categoryId, String messageId, PageContext pageContext,
-			RenderResponse res)
+			RenderResponse res, boolean popUp)
 		throws Exception {
 
 		if (Validator.isNotNull(messageId)) {
 			MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
-			return getBreadcrumbs(null, message, pageContext, res);
+			return getBreadcrumbs(null, message, pageContext, res, popUp);
 		}
 		else {
 			MBCategory category = null;
@@ -70,13 +71,13 @@ public class MBUtil {
 			catch (Exception e) {
 			}
 
-			return getBreadcrumbs(category, null, pageContext, res);
+			return getBreadcrumbs(category, null, pageContext, res, popUp);
 		}
 	}
 
 	public static String getBreadcrumbs(
 			MBCategory category, MBMessage message, PageContext pageContext,
-			RenderResponse res)
+			RenderResponse res, boolean popUp)
 		throws Exception {
 
 		if ((message != null) && (category == null)) {
@@ -85,11 +86,19 @@ public class MBUtil {
 
 		PortletURL categoriesURL = res.createRenderURL();
 
-		categoriesURL.setWindowState(WindowState.MAXIMIZED);
+		if (popUp) {
+			categoriesURL.setWindowState(LiferayWindowState.POP_UP);
 
-		categoriesURL.setParameter("struts_action", "/message_boards/view");
-		categoriesURL.setParameter(
-			"categoryId", MBCategory.DEFAULT_PARENT_CATEGORY_ID);
+			categoriesURL.setParameter(
+				"struts_action", "/message_boards/select_category");
+		}
+		else {
+			categoriesURL.setWindowState(WindowState.MAXIMIZED);
+
+			categoriesURL.setParameter("struts_action", "/message_boards/view");
+			categoriesURL.setParameter(
+				"categoryId", MBCategory.DEFAULT_PARENT_CATEGORY_ID);
+		}
 
 		String categoriesLink =
 			"<a href=\"" + categoriesURL.toString() + "\">" +
@@ -105,10 +114,22 @@ public class MBUtil {
 			for (int i = 0;; i++) {
 				PortletURL portletURL = res.createRenderURL();
 
-				portletURL.setWindowState(WindowState.MAXIMIZED);
+				if (popUp) {
+					portletURL.setWindowState(LiferayWindowState.POP_UP);
 
-				portletURL.setParameter("struts_action", "/message_boards/view");
-				portletURL.setParameter("categoryId", category.getCategoryId());
+					portletURL.setParameter(
+						"struts_action", "/message_boards/select_category");
+					portletURL.setParameter(
+						"categoryId", category.getCategoryId());
+				}
+				else {
+					portletURL.setWindowState(WindowState.MAXIMIZED);
+
+					portletURL.setParameter(
+						"struts_action", "/message_boards/view");
+					portletURL.setParameter(
+						"categoryId", category.getCategoryId());
+				}
 
 				String categoryLink =
 					"<a href=\"" + portletURL.toString() + "\">" +

@@ -177,10 +177,10 @@ public class RolePersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Role exists with the primary key " +
 						roleId.toString());
-					throw new NoSuchRoleException(
-						"No Role exists with the primary key " +
-						roleId.toString());
 				}
+
+				throw new NoSuchRoleException(
+					"No Role exists with the primary key " + roleId.toString());
 			}
 
 			return role;

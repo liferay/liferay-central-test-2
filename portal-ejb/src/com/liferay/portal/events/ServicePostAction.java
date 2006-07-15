@@ -30,7 +30,6 @@ import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.theme.ThemeDisplayFactory;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.GetterUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -54,7 +53,7 @@ public class ServicePostAction extends Action {
 			// Make sure this is called only once per full request, ignore
 			// requests spawned by the portlet
 
-			String requestURI = GetterUtil.getString(req.getRequestURI());
+			//String requestURI = GetterUtil.getString(req.getRequestURI());
 
 			// Doesn't this cause a memory leak?
 

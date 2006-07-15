@@ -152,10 +152,11 @@ public class ReleasePersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Release exists with the primary key " +
 						releaseId.toString());
-					throw new NoSuchReleaseException(
-						"No Release exists with the primary key " +
-						releaseId.toString());
 				}
+
+				throw new NoSuchReleaseException(
+					"No Release exists with the primary key " +
+					releaseId.toString());
 			}
 
 			return release;

@@ -250,10 +250,11 @@ public class ShoppingItemPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No ShoppingItem exists with the primary key " +
 						itemId.toString());
-					throw new NoSuchItemException(
-						"No ShoppingItem exists with the primary key " +
-						itemId.toString());
 				}
+
+				throw new NoSuchItemException(
+					"No ShoppingItem exists with the primary key " +
+					itemId.toString());
 			}
 
 			return shoppingItem;

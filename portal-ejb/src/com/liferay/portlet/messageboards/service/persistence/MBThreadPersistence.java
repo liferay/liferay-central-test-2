@@ -165,10 +165,11 @@ public class MBThreadPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No MBThread exists with the primary key " +
 						threadId.toString());
-					throw new NoSuchThreadException(
-						"No MBThread exists with the primary key " +
-						threadId.toString());
 				}
+
+				throw new NoSuchThreadException(
+					"No MBThread exists with the primary key " +
+					threadId.toString());
 			}
 
 			return mbThread;
