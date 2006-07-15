@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.util;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
@@ -33,7 +34,6 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import com.liferay.portlet.LiferayWindowState;
 
 import java.io.IOException;
 

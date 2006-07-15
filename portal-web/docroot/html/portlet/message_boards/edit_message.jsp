@@ -71,6 +71,15 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 		document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML();
 		submitForm(document.<portlet:namespace />fm);
 	}
+
+	function selectCategory(categoryId, categoryName) {
+		document.<portlet:namespace />fm.<portlet:namespace />categoryId.value = categoryId;
+
+		var nameEl = document.getElementById("<portlet:namespace />categoryName");
+
+		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + categoryId;
+		nameEl.innerHTML = categoryName + "&nbsp;";
+	}
 </script>
 
 <c:if test="<%= preview %>">
@@ -160,6 +169,33 @@ if (message != null) {
 <br><br>
 
 <table border="0" cellpadding="0" cellspacing="0">
+
+<c:if test="<%= message != null %>">
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "category") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+
+			<%
+			MBCategory category = MBCategoryLocalServiceUtil.getCategory(categoryId);
+			%>
+
+			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
+			<%= category.getName() %>
+			</a>
+
+			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<br>
+		</td>
+	</tr>
+</c:if>
+
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "subject") %>

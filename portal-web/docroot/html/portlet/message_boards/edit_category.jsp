@@ -35,6 +35,15 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />removeCategory() {
+		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = "";
+
+		var nameEl = document.getElementById("<portlet:namespace />parentCategoryName");
+
+		nameEl.href = "";
+		nameEl.innerHTML = "";
+	}
+
 	function <portlet:namespace />saveCategory() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= category == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
@@ -78,14 +87,24 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 		<td>
 
 			<%
-			MBCategory parentCategory = MBCategoryLocalServiceUtil.getCategory(parentCategoryId);
+			String parentCategoryName = "";
+
+			try {
+				MBCategory parentCategory = MBCategoryLocalServiceUtil.getCategory(parentCategoryId);
+
+				parentCategoryName = parentCategory.getName();
+			}
+			catch (NoSuchCategoryException nscce) {
+			}
 			%>
 
 			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /><portlet:param name="categoryId" value="<%= parentCategoryId %>" /></portlet:renderURL>" id="<portlet:namespace />parentCategoryName">
-			<%= parentCategory.getName() %>
+			<%= parentCategoryName %>
 			</a>
 
 			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= parentCategoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
+
+			<input class="portlet-form-button" id="<portlet:namespace />removeCategoryButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeCategory();">
 		</td>
 	</tr>
 </c:if>

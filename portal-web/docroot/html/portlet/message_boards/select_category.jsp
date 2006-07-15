@@ -32,6 +32,8 @@ String categoryId = BeanParamUtil.getString(category, request, "categoryId", MBC
 
 <form method="post" name="<portlet:namespace />fm">
 
+<liferay-ui:tabs names="categories" />
+
 <c:if test="<%= category != null %>">
 	<%= MBUtil.getBreadcrumbs(category, null, pageContext, renderResponse, true) %>
 
