@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
+ * Copyright (c) 2000-2005 Liferay, LLC. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,35 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.shared.servlet;
+package com.liferay.util.apache.bridges.struts;
 
-import javax.portlet.GenericPortlet;
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
+import com.liferay.portal.shared.servlet.ServletContextProvider;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
+import org.apache.portals.bridges.struts.PortletServlet;
 
 /**
- * <a href="LiferayServletContextProvider.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="LiferayPortletServlet.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Michael Young
+ * @version $Revision: $
  *
  */
-public interface ServletContextProvider {
-	public static final String STRUTS_BRIDGES_CONTEXT_PROVIDER =
-		"STRUTS_BRIDGES_CONTEXT_PROVIDER";
-	
-	public ServletContext getServletContext(GenericPortlet portlet);
+public class LiferayPortletServlet extends PortletServlet {
 
-	public ServletContext getServletContext(ServletContext ctx);
-	
-	public HttpServletRequest getHttpServletRequest(
-		GenericPortlet portlet, PortletRequest req);
-
-	public HttpServletResponse getHttpServletResponse(
-		GenericPortlet portlet, PortletResponse res);
+	public ServletContext getServletContext() {
+		ServletContext ctx = super.getServletContext();
+		
+		ServletContextProvider scp = (ServletContextProvider) ctx.getAttribute(
+			ServletContextProvider.
+			STRUTS_BRIDGES_CONTEXT_PROVIDER);
+		
+		if (scp != null) {
+			ctx = scp.getServletContext(ctx); 
+		}
+		
+		return ctx;
+	}
 
 }

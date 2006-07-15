@@ -51,9 +51,13 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 		PortletContextImpl portletCtxImpl =
 			(PortletContextImpl)portlet.getPortletContext();
 
-		return portletCtxImpl.getServletContext();
+		return getServletContext(portletCtxImpl.getServletContext());
 	}
 
+	public ServletContext getServletContext(ServletContext ctx) {
+		return new LiferayServletContext(ctx);		
+	}
+	
 	public HttpServletRequest getHttpServletRequest(
 		GenericPortlet portlet, PortletRequest req) {
 

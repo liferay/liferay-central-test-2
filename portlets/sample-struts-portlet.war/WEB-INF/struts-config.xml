@@ -61,12 +61,12 @@
 		</action>
 
 		<action path="/sample_struts_portlet/x/action" type="com.liferay.struts.struts.action.XAction">
-			<exception key="error.sample.exception" type="com.liferay.portlet.samplestrutsportlet.SampleException" path="portlet.sample_struts_portlet.sample_exception" />
+			<exception key="error.sample.exception" type="com.liferay.struts.SampleException" path="portlet.sample_struts_portlet.sample_exception" />
 			<forward name="portlet.sample_struts_portlet.x" path="portlet.sample_struts_portlet.x" />
 		</action>
 
 		<action path="/sample_struts_portlet/x/render" type="com.liferay.struts.struts.render.XAction">
-			<exception key="error.sample.exception" type="com.liferay.portlet.samplestrutsportlet.SampleException" path="portlet.sample_struts_portlet.sample_exception" />
+			<exception key="error.sample.exception" type="com.liferay.struts.SampleException" path="portlet.sample_struts_portlet.sample_exception" />
 			<forward name="portlet.sample_struts_portlet.x" path="portlet.sample_struts_portlet.x" />
 		</action>
 

@@ -175,9 +175,11 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 		}
 
 		try {
-			Set portletIds = _readPortletXML(xmls[0], portletsPool);
+			List servletURLPatterns = _readWebXML(xmls[4]);
 
-			portletIds.addAll(_readPortletXML(xmls[1], portletsPool));
+			Set portletIds = _readPortletXML(xmls[0], portletsPool, servletURLPatterns);
+
+			portletIds.addAll(_readPortletXML(xmls[1], portletsPool, servletURLPatterns));
 
 			Set liferayPortletIds =
 				_readLiferayPortletXML(xmls[2], portletsPool);
@@ -252,8 +254,10 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 		}
 
 		try {
+			List servletPatterns = _readWebXML(xmls[2]);
+			
 			Set portletIds = _readPortletXML(
-				servletContextName, xmls[0], portletsPool);
+				servletContextName, xmls[0], portletsPool, servletPatterns);
 
 			Set liferayPortletIds = _readLiferayPortletXML(
 				servletContextName, xmls[1], portletsPool);
@@ -451,15 +455,15 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 		return portletsPool;
 	}
 
-	private Set _readPortletXML(String xml, Map portletsPool)
-		throws DocumentException, IOException {
+	private Set _readPortletXML(String xml, Map portletsPool, 
+		List servletURLPatterns) throws DocumentException, IOException {
 
-		return _readPortletXML(null, xml, portletsPool);
+		return _readPortletXML(null, xml, portletsPool, servletURLPatterns);
 	}
 
 	private Set _readPortletXML(
-			String servletContextName, String xml, Map portletsPool)
-		throws DocumentException, IOException {
+			String servletContextName, String xml, Map portletsPool, 
+			List servletURLPatterns) throws DocumentException, IOException {
 
 		Set portletIds = new HashSet();
 
@@ -538,6 +542,10 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				portletModel.setWARFile(true);
 			}
 
+			if (servletURLPatterns != null) {
+				portletModel.setServletURLPatterns(servletURLPatterns);
+			}
+			
 			portletModel.setPortletClass(portlet.elementText("portlet-class"));
 
 			Iterator itr2 = portlet.elements("init-param").iterator();
@@ -957,6 +965,34 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 		return liferayPortletIds;
 	}
 
+	private List _readWebXML(String xml) throws DocumentException, IOException {
+		List servletURLPatterns = new ArrayList();
+
+		if (xml == null) {
+			return servletURLPatterns;
+		}
+
+		SAXReader reader = new SAXReader(true);
+
+		reader.setEntityResolver(new EntityResolver());
+
+		Document doc = reader.read(new StringReader(xml));
+
+		Element root = doc.getRootElement();
+		
+		Iterator itr1 = root.elements("servlet-mapping").iterator();
+		
+		while (itr1.hasNext()) {
+			Element servletMapping = (Element)itr1.next();
+
+			String urlPattern = servletMapping.elementText("url-pattern");
+
+			servletURLPatterns.add(urlPattern);
+		}
+		
+		return servletURLPatterns;
+		
+	}
 	private static final String _SHARED_KEY = "SHARED_KEY";
 
 	private static final String _SAX_PARSER_IMPL =

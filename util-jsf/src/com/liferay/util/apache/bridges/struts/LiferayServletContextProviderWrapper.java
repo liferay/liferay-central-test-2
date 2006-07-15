@@ -43,9 +43,6 @@ import javax.servlet.http.HttpServletResponse;
 public class LiferayServletContextProviderWrapper
 	implements org.apache.portals.bridges.common.ServletContextProvider {
 
-	public static final String STRUTS_BRIDGES_CONTEXT_PROVIDER =
-		"STRUTS_BRIDGES_CONTEXT_PROVIDER";
-
 	public ServletContext getServletContext(GenericPortlet portlet) {
 		ServletContextProvider provider = _getProvider(portlet);
 
@@ -73,7 +70,7 @@ public class LiferayServletContextProviderWrapper
 
 		if (_provider == null) {
 			_provider = (ServletContextProvider)portletCtx.getAttribute(
-				STRUTS_BRIDGES_CONTEXT_PROVIDER);
+				ServletContextProvider.STRUTS_BRIDGES_CONTEXT_PROVIDER);
 		}
 
 		return _provider;

@@ -23,6 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.service.spring.RoleLocalServiceUtil;
+import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.SharedSessionWrapper;
@@ -30,13 +31,11 @@ import com.liferay.util.servlet.SharedSessionWrapper;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.portlet.RenderRequest;
-
+import javax.portlet.PortletRequest;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -54,7 +53,7 @@ import org.apache.commons.logging.LogFactory;
 public class PortletServletRequest extends HttpServletRequestWrapper {
 
 	public PortletServletRequest(HttpServletRequest req,
-								 RenderRequest renderRequest, String pathInfo,
+								 PortletRequest portletRequest, String pathInfo,
 								 String queryString, String requestURI,
 								 String servletPath,
 								 Map sharedHttpSessionAttributes) {
@@ -62,7 +61,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		super(req);
 
 		_req = req;
-		_renderRequest = renderRequest;
+		_portletRequest = portletRequest;
 		_pathInfo = pathInfo;
 		_queryString = queryString;
 		_requestURI = requestURI;
@@ -71,32 +70,35 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public Object getAttribute(String name) {
+		Object retVal = super.getAttribute(name);
+		
 		if (name == null) {
-			return super.getAttribute(name);
+			return retVal;
 		}
+		
+		RenderRequestImpl reqImpl = (RenderRequestImpl)_portletRequest;
 
-		/*if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_CONTEXT_PATH)) {
-			return getContextPath();
+		if (ServerDetector.isWebSphere() && reqImpl.getPortlet().isWARFile()) {
+			if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_CONTEXT_PATH)) {
+				retVal = _portletRequest.getContextPath();
+			}
+			else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_PATH_INFO)) {
+				retVal = _pathInfo;
+			}
+			else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_QUERY_STRING)) {
+				retVal =  _queryString;
+			}
+			else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_REQUEST_URI)) {
+				retVal = _requestURI;
+			}
+			else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_SERVLET_PATH)) {
+				retVal = _servletPath;
+			}
+			System.out.println(name + ":" + retVal);
 		}
-		else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_PATH_INFO)) {
-			return getPathInfo();
-		}
-		else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_QUERY_STRING)) {
-			return getQueryString();
-		}
-		else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_REQUEST_URI)) {
-			return getRequestURI();
-		}
-		else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_SERVLET_PATH)) {
-			return getServletPath();
-		}*/
-
-		if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_QUERY_STRING)) {
-			return getQueryString();
-		}
-		else {
-			return super.getAttribute(name);
-		}
+		
+		
+		return retVal;
 	}
 
 	public String getCharacterEncoding() {
@@ -116,7 +118,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public String getContextPath() {
-		return _renderRequest.getContextPath();
+		return _portletRequest.getContextPath();
 	}
 
 	public ServletInputStream getInputStream() throws IOException{
@@ -124,11 +126,11 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public Locale getLocale() {
-		return _renderRequest.getLocale();
+		return _portletRequest.getLocale();
 	}
 
 	public Enumeration getLocales() {
-		return _renderRequest.getLocales();
+		return _portletRequest.getLocales();
 	}
 
 	public String getPathInfo() {
@@ -200,7 +202,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	private static Log _log = LogFactory.getLog(PortletServletRequest.class);
 
 	private HttpServletRequest _req;
-	private RenderRequest _renderRequest;
+	private PortletRequest _portletRequest;
 	private String _pathInfo;
 	private String _queryString;
 	private String _requestURI;

@@ -449,6 +449,14 @@ public class RenderRequestImpl implements RenderRequest {
 		return false;
 	}
 
+	public Portlet getPortlet() {
+		return _portlet;
+	}
+
+	public void setPortlet(Portlet portlet) {
+		_portlet = portlet;
+	}
+
 	protected RenderRequestImpl() {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Creating new instance " + hashCode());
@@ -629,7 +637,7 @@ public class RenderRequestImpl implements RenderRequest {
 		RenderParametersPool.put(req, plid, _portletName, renderParameters);
     }
 
-	private static Log _log = LogFactory.getLog(RenderRequestImpl.class);
+    private static Log _log = LogFactory.getLog(RenderRequestImpl.class);
 
 	private DynamicServletRequest _req;
 	private Portlet _portlet;

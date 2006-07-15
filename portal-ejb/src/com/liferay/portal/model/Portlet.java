@@ -157,7 +157,8 @@ public class Portlet extends PortletModel {
 				   Map initParams, Integer expCache, Map portletModes,
 				   Set supportedLocales, String resourceBundle,
 				   PortletInfo portletInfo, Set userAttributes,
-				   Map customUserAttributes, boolean warFile) {
+				   Map customUserAttributes, boolean warFile, 
+				   List servletURLPatterns) {
 
 		setPortletId(portletId);
 		setCompanyId(companyId);
@@ -198,7 +199,8 @@ public class Portlet extends PortletModel {
 		_userAttributes = userAttributes;
 		_customUserAttributes = customUserAttributes;
 		_warFile = warFile;
-
+		_servletURLPatterns = servletURLPatterns;
+		
 		if (_instanceable) {
 			_clonedInstances = new Hashtable();
 		}
@@ -1342,6 +1344,22 @@ public class Portlet extends PortletModel {
 	}
 
 	/**
+	 * The servlet url patterns that are part of this application
+	 *
+	 * @return		The servlet url patterns that are part of this application.
+	 */
+	public List getServletURLPatterns() {
+		return _servletURLPatterns;
+	}
+
+	/**
+	 * The servlet url patterns that are part of this application
+	 */
+	public void setServletURLPatterns(List servletURLPatterns) {
+		_servletURLPatterns = servletURLPatterns;
+	}	
+	
+	/**
 	 * Initialize the portlet instance.
 	 */
 	public CachePortlet init(PortletConfig portletConfig)
@@ -1405,7 +1423,7 @@ public class Portlet extends PortletModel {
 			isActive(), isInclude(), getInitParams(), getExpCache(),
 			getPortletModes(), getSupportedLocales(), getResourceBundle(),
 			getPortletInfo(), getUserAttributes(), getCustomUserAttributes(),
-			isWARFile());
+			isWARFile(), getServletURLPatterns());
 	}
 
 	/**
@@ -1632,5 +1650,10 @@ public class Portlet extends PortletModel {
 	 * portlets.
 	 */
 	private boolean _staticPortletStart;
+
+	/**
+	 * The servlet url patterns that are part of this application
+	 */
+	private List _servletURLPatterns;
 
 }

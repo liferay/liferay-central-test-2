@@ -21,7 +21,7 @@
 	</servlet>
 	<servlet>
 		<servlet-name>PortletActionServlet</servlet-name>
-		<servlet-class>org.apache.portals.bridges.struts.PortletServlet</servlet-class>
+		<servlet-class>com.liferay.util.apache.bridges.struts.LiferayPortletServlet</servlet-class>
 		<init-param>
 			<param-name>config</param-name>
 			<param-value>/WEB-INF/struts-config.xml</param-value>

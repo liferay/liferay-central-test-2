@@ -24,8 +24,9 @@ package com.liferay.portlet;
 
 import java.util.Locale;
 
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletResponse;
 import javax.portlet.RenderResponse;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
@@ -38,11 +39,18 @@ import javax.servlet.http.HttpServletResponseWrapper;
 public class PortletServletResponse extends HttpServletResponseWrapper {
 
 	public PortletServletResponse(HttpServletResponse res,
-								  RenderResponse renderResponse) {
+								  PortletResponse portletResponse) {
 
 		super(res);
 
-		_renderResponse = renderResponse;
+		_portletResponse = portletResponse;
+		
+		if (_portletResponse instanceof ActionResponse) {
+			_isAction = true;
+		}
+		else {
+			_isAction = false;
+		}
 	}
 
 	public String encodeRedirectUrl(String url) {
@@ -58,21 +66,49 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public String encodeURL(String path) {
-		return _renderResponse.encodeURL(path);
+		if (_isAction == false) {
+			RenderResponse res = (RenderResponse)_portletResponse;
+			
+			return res.encodeURL(path);
+		}
+		else {
+			throw new UnsupportedOperationException();
+		}
 	}
 
 	public Locale getLocale() {
-		return _renderResponse.getLocale();
+		if (_isAction == false) {
+			RenderResponse res = (RenderResponse)_portletResponse;
+			
+			return res.getLocale();
+		}
+		else {
+			return null;
+		}
 	}
-
 	public int getBufferSize() {
-		return _renderResponse.getBufferSize();
+		if (_isAction == false) {
+			RenderResponse res = (RenderResponse)_portletResponse;
+			
+			return res.getBufferSize();
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean isCommitted() {
-		return _renderResponse.isCommitted();
+		if (_isAction == false) {
+			RenderResponse res = (RenderResponse)_portletResponse;
+			
+			return res.isCommitted();
+		}
+		else {
+			return false;
+		}
 	}
 
-	private RenderResponse _renderResponse;
+	private PortletResponse _portletResponse;
+	private boolean _isAction;
 
 }

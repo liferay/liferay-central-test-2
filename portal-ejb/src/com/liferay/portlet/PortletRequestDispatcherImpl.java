@@ -36,6 +36,7 @@ import java.io.IOException;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletContext;
@@ -184,17 +185,31 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 					httpReq = dynamicReq;
 				}
 
-				pos = pathNoQueryString.indexOf(StringPool.SLASH, 1);
+				List servletURLPatterns = 
+					reqImpl.getPortlet().getServletURLPatterns();
+				
+				Iterator itr = servletURLPatterns.iterator();
 
-				if (pos != -1) {
-					pathInfo = pathNoQueryString.substring(
-						pos, pathNoQueryString.length());
-					servletPath = pathNoQueryString.substring(0, pos);
+				while (itr.hasNext()) {
+					String urlPattern = (String)itr.next();
+					
+					if (urlPattern.endsWith("/*")) {
+						pos = urlPattern.indexOf("/*");
+						urlPattern = urlPattern.substring(0, pos);
+						
+						if (pathNoQueryString.startsWith(urlPattern)) {
+							pathInfo = pathNoQueryString.substring(urlPattern.length());
+							servletPath = urlPattern;
+							break;
+						}
+					}
 				}
-				else {
+
+				if (pathInfo == null && servletPath == null) {
+					pathInfo = StringPool.BLANK;
 					servletPath = pathNoQueryString;
 				}
-
+				
 				requestURI = req.getContextPath() + pathNoQueryString;
 			}
 

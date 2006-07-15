@@ -33,6 +33,7 @@ import com.liferay.portal.shared.deploy.HotDeployEvent;
 import com.liferay.portal.shared.deploy.HotDeployException;
 import com.liferay.portal.shared.deploy.HotDeployListener;
 import com.liferay.portal.shared.servlet.PortletServlet;
+import com.liferay.portal.shared.servlet.ServletContextProvider;
 import com.liferay.portal.shared.util.ClassUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebAppPool;
@@ -103,7 +104,8 @@ public class HotDeployPortletListener implements HotDeployListener {
 			String[] xmls = new String[] {
 				Http.URLtoString(ctx.getResource("/WEB-INF/portlet.xml")),
 				Http.URLtoString(ctx.getResource(
-					"/WEB-INF/liferay-portlet.xml"))
+					"/WEB-INF/liferay-portlet.xml")),
+				Http.URLtoString(ctx.getResource("/WEB-INF/web.xml"))
 			};
 
 			if (xmls[0] == null) {
@@ -117,13 +119,14 @@ public class HotDeployPortletListener implements HotDeployListener {
 			List portlets = PortletLocalServiceUtil.initWAR(
 				servletContextName, xmls);
 
+System.out.println("1");	
 			// Class loader
 
 			ClassLoader portletClassLoader = event.getContextClassLoader();
 
 			ctx.setAttribute(
 				PortletServlet.PORTLET_CLASS_LOADER, portletClassLoader);
-
+System.out.println("1");	
 			// Portlet context wrapper
 
 			boolean strutsBridges = false;
@@ -139,6 +142,7 @@ public class HotDeployPortletListener implements HotDeployListener {
 				javax.portlet.Portlet portletInstance =
 					(javax.portlet.Portlet)portletClass.newInstance();
 
+				System.out.println("1.2");	
 				if (ClassUtil.isSubclass(portletClass,
 					StrutsPortlet.class.getName())) {
 
@@ -152,6 +156,7 @@ public class HotDeployPortletListener implements HotDeployListener {
 						portlet.getIndexerClass()).newInstance();
 				}
 
+				System.out.println("1.3");	
 				Scheduler schedulerInstance = null;
 
 				if (Validator.isNotNull(portlet.getSchedulerClass())) {
@@ -160,6 +165,7 @@ public class HotDeployPortletListener implements HotDeployListener {
 				}
 
 				PreferencesValidator prefsValidator = null;
+				System.out.println("1.4");	
 
 				if (Validator.isNotNull(portlet.getPreferencesValidator())) {
 					prefsValidator =
@@ -181,6 +187,7 @@ public class HotDeployPortletListener implements HotDeployListener {
 								" does not have valid default preferences");
 					}
 				}
+				System.out.println("1.5");	
 
 				Map resourceBundles = null;
 
@@ -208,6 +215,7 @@ public class HotDeployPortletListener implements HotDeployListener {
 						}
 					}
 				}
+				System.out.println("1.6");	
 
 				Map customUserAttributes = CollectionFactory.getHashMap();
 
@@ -224,6 +232,7 @@ public class HotDeployPortletListener implements HotDeployListener {
 						portletClassLoader.loadClass(
 							attrCustomClass).newInstance());
 				}
+				System.out.println("1.7");	
 
 				PortletContextWrapper pcw = new PortletContextWrapper(
 					portlet.getPortletId(), ctx, portletInstance,
@@ -232,15 +241,17 @@ public class HotDeployPortletListener implements HotDeployListener {
 
 				PortletContextPool.put(portlet.getPortletId(), pcw);
 			}
+			System.out.println("2");	
 
 			// Struts bridges
 
 			if (strutsBridges) {
 				ctx.setAttribute(
-					LiferayServletContextProviderWrapper.
+					ServletContextProvider.
 						STRUTS_BRIDGES_CONTEXT_PROVIDER,
 					new LiferayServletContextProvider());
 			}
+			System.out.println("3");	
 
 			// Portlet display
 
@@ -261,6 +272,7 @@ public class HotDeployPortletListener implements HotDeployListener {
 			}
 
 			// Variables
+			System.out.println("4");	
 
 			_vars.put(
 				servletContextName, new ObjectValuePair(companyIds, portlets));
