@@ -94,7 +94,6 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 			else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_SERVLET_PATH)) {
 				retVal = _servletPath;
 			}
-			System.out.println(name + ":" + retVal);
 		}
 		
 		

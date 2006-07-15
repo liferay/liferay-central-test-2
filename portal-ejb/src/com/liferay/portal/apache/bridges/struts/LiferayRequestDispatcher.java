@@ -133,10 +133,6 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 			requestURI = portletReq.getContextPath() + pathNoQueryString;
 		}
 
-System.out.println(pathInfo);
-System.out.println(queryString);
-System.out.println(requestURI);
-System.out.println(servletPath);
 		PortletServletRequest portletServletReq = new PortletServletRequest(
 			(HttpServletRequest)req, portletReq, pathInfo, queryString, requestURI,
 			servletPath, portletReq.getSharedSessionAttributes());
