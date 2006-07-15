@@ -100,28 +100,12 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		return retVal;
 	}
 
-	public String getCharacterEncoding() {
-		return null;
-	}
-
 	public void setCharacterEncoding(String env)
 		throws UnsupportedEncodingException {
 	}
 
-	public int getContentLength() {
-		return 0;
-	}
-
-	public String getContentType() {
-		return null;
-	}
-
 	public String getContextPath() {
 		return _portletRequest.getContextPath();
-	}
-
-	public ServletInputStream getInputStream() throws IOException{
-		return null;
 	}
 
 	public Locale getLocale() {
@@ -136,36 +120,12 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		return _pathInfo;
 	}
 
-	public String getProtocol() {
-		return null;
-	}
-
 	public String getQueryString() {
 		return _queryString;
 	}
 
-	public BufferedReader getReader() throws IOException {
-		return null;
-	}
-
-	public String getRemoteAddr() {
-		return null;
-	}
-
-	public String getRemoteHost() {
-		return null;
-	}
-
-	public String getRealPath(String path) {
-		return null;
-	}
-
 	public String getRequestURI() {
 		return _requestURI;
-	}
-
-	public StringBuffer getRequestURL() {
-		return null;
 	}
 
 	public String getServletPath() {
