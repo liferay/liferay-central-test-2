@@ -96,11 +96,17 @@ public interface Constants {
 
 	// Content types
 
+	public static final String MESSAGE_RFC822 = "message/rfc822";
+	
+	public static final String MULTIPART_ALTERNATE = "multipart/alternate";
+
+	public static final String MULTIPART_MIXED = "multipart/mixed";
+
 	public static final String TEXT_CSS = "text/css";
 
 	public static final String TEXT_HTML = "text/html";
 
-	public static final String TEXT_JAVASCRIPT= "text/javascript";
+	public static final String TEXT_JAVASCRIPT = "text/javascript";
 
 	public static final String TEXT_PLAIN = "text/plain";
 
