@@ -41,8 +41,9 @@ var Coordinates = {
 	},
 
 	fixEvent : function(event) {
-		if (typeof event == 'undefined')
+		if (typeof event == 'undefined') {
     		event = window.event;
+		}
     		
 		event.windowCoordinate = new Coordinate(event.clientX, event.clientY);
 		
