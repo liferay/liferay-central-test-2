@@ -108,7 +108,7 @@ public class MailUtil {
 
 			for (int i = 0; i < folders.length; i++) {
 				if ((folders[i].getType() & Folder.HOLDS_MESSAGES) != 0) {
-					list.add(folders[i].getName());
+					list.add(folders[i]);
 				}
 				else {
 					// TODO: add ability to have a hierarchy of folders

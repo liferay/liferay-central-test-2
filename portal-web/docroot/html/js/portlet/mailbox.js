@@ -23,6 +23,7 @@ var Mailbox = {
 	dragging : false,
 	dragIndicator : null,
 	dragStart : null,
+	foldersList : null,
 	groupStart : null,
 	highlightColor : "#c3d4ee",
 	lastSelected : null,
@@ -97,7 +98,7 @@ var Mailbox = {
 	createFolderSelect : function() {
 		var folderSelect = document.getElementById("portlet-mail-folder-select");
 		var selectCount = 1;
-		var folders = foldersObject.folders;
+		var folders = Mailbox.foldersList;
 		
 		folderSelect.onchange = Mailbox.onMoveFolderChange;
 		folderSelect.options.length = 0;
@@ -190,9 +191,17 @@ var Mailbox = {
 	},
 	
 	getFolders : function() {
+		loadPage("/c/mailbox/action",
+			"cmd=getFolders&userId=" + Mailbox.userId,
+			Mailbox.getFoldersReturn);
+	},
+	
+	getFoldersReturn : function(xmlHttpReq) {
+		foldersObject = eval("(" + xmlHttpReq.responseText + ")");
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
 		var folderList = document.createElement("ul");
 		var folders = foldersObject.folders;
+		Mailbox.foldersList = folders;
 		
 		if (folders.length > 0) {
 			for (var i = 0; i < folders.length; i++) {
@@ -206,13 +215,14 @@ var Mailbox = {
 			folderPane.appendChild(folderList);
 			Mailbox.setCurrentFolder(folders[0]);
 		}
+		
+		Mailbox.getPreview();
 	},
 	
 	getMessageDetails : function(messageId) {
-		loadPage("/c/mailx/action",
+		loadPage("/c/mailbox/action",
 			"cmd=getMessage&userId=" + Mailbox.userId + "&messageId=" + messageId,
 			Mailbox.getMessageDetailsReturn, messageId);
-			//Mailbox.currentMessageId = messageId;
 	},
 	
 	getMessageDetailsReturn : function(xmlHttpReq, messageId) {
@@ -225,7 +235,7 @@ var Mailbox = {
 	},
 	
 	getPreview : function () {
-		loadPage("/c/mailx/action",
+		loadPage("/c/mailbox/action",
 			"cmd=getPreview&userId=" + Mailbox.userId + "&folderId=" + Mailbox.currentFolder.id,
 			Mailbox.getPreviewReturn);
 			
@@ -342,7 +352,6 @@ var Mailbox = {
 		window.unload = function() { Mailbox.clearPreview; }
 		
 		Mailbox.getFolders();
-		Mailbox.getPreview();
 	},
 	
 	moveToFolder : function(folderId, folderName) {
@@ -368,10 +377,7 @@ var Mailbox = {
 		if (Mailbox.currentFolder.id != this.folder.id) {
 			Mailbox.setCurrentFolder(this.folder);
 			Mailbox.clearPreview();
-			
-			if (this.folder.id == 1) {
-				Mailbox.getPreview();
-			}
+			Mailbox.getPreview();
 		}
 	},
 	
@@ -638,7 +644,6 @@ var mailObject = {"preview": [
         {"sender": "Ed Chung", "subject": "News from EDIC", "date": "Today", "id" : "5"}
     ]
 };
-*/
 
 var foldersObject = {"folders": [
         {"name": "Inbox", "id" : "1"},
@@ -649,3 +654,4 @@ var foldersObject = {"folders": [
         {"name": "Support", "id" : "6"}
     ]
 };
+*/

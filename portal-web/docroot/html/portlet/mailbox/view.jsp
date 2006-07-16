@@ -32,7 +32,7 @@
 String mailBgColor = "#f4f5eb";
 String mailLineColor = "#b3b6b0";
 %>
-#p_p_body_94 { background-color: <%= mailBgColor %>; }
+#p_p_body_<%= PortletKeys.MAIL %> { background-color: <%= mailBgColor %>; }
 #portlet-mail-drag-indicator {
 	font-weight: bold;
 	padding: 2px 5px 2px 15px;

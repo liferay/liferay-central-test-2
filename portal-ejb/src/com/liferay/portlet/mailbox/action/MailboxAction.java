@@ -57,12 +57,18 @@ public class MailboxAction extends JSONAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 		String userId = ParamUtil.getString(req, "userId");
 		String rtString = "";
+		
+		req.getSession().setAttribute(WebKeys.USER_ID, userId);
+		req.getSession().setAttribute(WebKeys.USER_PASSWORD, "liferaymailx");
 
 		if ("getFolders".equals(cmd)) {
 			List folders = MailUtil.getAllFolders(MailUtil.getStore(req));
+			
+			rtString = _getFolders(folders);
 		}
 		else if ("getPreview".equals(cmd)) {
-			Folder folder = MailUtil.getFolder(req, "Inbox");
+			String folderId = ParamUtil.getString(req, "folderId");
+			Folder folder = MailUtil.getFolder(req, folderId);
 			
 			rtString = _getPreviewHeaders(userId, folder);
 		}
@@ -75,9 +81,34 @@ public class MailboxAction extends JSONAction {
 			
 		MailUtil.closeStore(req);
 		
-		System.out.println("newnewer");
+		System.out.println("super");
 		
 		return rtString;
+	}
+	
+	private String _getFolders(List folders) {
+		JSONObject jsonObj = new JSONObject();
+		JSONArray jFolders = new JSONArray();
+		
+		try {
+			for (int i = 0; i < folders.size(); i++) {
+				Folder folderObj = (Folder)folders.get(i);
+				JSONObject jFolderObj = new JSONObject();;
+				
+				jFolderObj.put("name", folderObj.getName());
+				jFolderObj.put("id", folderObj.getName());
+				jFolderObj.put("newCount", folderObj.getNewMessageCount());
+				jFolderObj.put("totalCount", folderObj.getMessageCount());
+				
+				jFolders.put(jFolderObj);
+			}
+		}
+		catch (Exception e) {
+		}
+		
+		jsonObj.put("folders", jFolders);
+		
+		return jsonObj.toString();
 	}
 	
 	private String _getMessage(Folder folder, int messageId) {
