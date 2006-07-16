@@ -797,92 +797,14 @@
 			<forward name="portlet.login.view" path="portlet.login.view" />
 		</action>
 
-		<!-- Mail -->
+		<!-- Mailbox -->
 
-		<action path="/mail/add_attachment" type="com.liferay.portlet.mail.action.AddAttachmentAction" />
+		<action path="/mailbox/view" forward="portlet.mailbox.view" />
 
-		<action path="/mail/add_folder" type="com.liferay.portlet.mail.action.AddFolderAction">
-			<forward name="portlet.mail.add_folder" path="portlet.mail.add_folder" />
-		</action>
+		<action path="/mailbox/action" type="com.liferay.portlet.mailbox.action.MailboxAction" />
 
-		<action path="/mail/attachments" type="com.liferay.portlet.mail.action.AttachmentsAction">
-			<forward name="portlet.mail.attachments" path="portlet.mail.attachments" />
-		</action>
-
-		<action path="/mail/block_sender" type="com.liferay.portlet.mail.action.BlockSenderAction" />
-
-		<action path="/mail/cancel_message" type="com.liferay.portlet.mail.action.CancelMessageAction" />
-
-		<action path="/mail/change_order" type="com.liferay.portlet.mail.action.ChangeOrderAction" />
-
-		<action path="/mail/compose_message" type="com.liferay.portlet.mail.action.ComposeMessageAction">
-			<forward name="portlet.mail.compose_message" path="portlet.mail.compose_message" />
-		</action>
-
-		<action path="/mail/compose_message_to" type="com.liferay.portlet.mail.action.ComposeMessageToAction" />
-
-		<action path="/mail/delete_folder" type="com.liferay.portlet.mail.action.DeleteFolderAction" />
-
-		<action path="/mail/delete_message" type="com.liferay.portlet.mail.action.DeleteMessageAction" />
-
-		<action path="/mail/edit" type="com.liferay.portlet.mail.action.EditPreferencesAction">
-			<forward name="portlet.mail.edit" path="portlet.mail.edit" />
-			<forward name="portlet.mail.edit_filter" path="portlet.mail.edit_filter" />
-			<forward name="portlet.mail.edit_forward_address" path="portlet.mail.edit_forward_address" />
-			<forward name="portlet.mail.edit_mail_display" path="portlet.mail.edit_mail_display" />
-			<forward name="portlet.mail.edit_reply_related" path="portlet.mail.edit_reply_related" />
-			<forward name="portlet.mail.edit_signature" path="portlet.mail.edit_signature" />
-			<forward name="portlet.mail.edit_sound" path="portlet.mail.edit_sound" />
-			<forward name="portlet.mail.edit_vacation_message" path="portlet.mail.edit_vacation_message" />
-		</action>
-
-		<action path="/mail/edit_folder" type="com.liferay.portlet.mail.action.EditFolderAction">
-			<forward name="portlet.mail.edit_folder" path="portlet.mail.edit_folder" />
-		</action>
-
-		<action path="/mail/empty_folder" type="com.liferay.portlet.mail.action.EmptyFolderAction" />
-
-		<action path="/mail/move_message" type="com.liferay.portlet.mail.action.MoveMessageAction" />
-
-		<action path="/mail/pop_info" forward="portlet.mail.pop_info" />
-
-		<action path="/mail/register" type="com.liferay.portlet.mail.action.RegisterAction">
-			<forward name="portlet.mail.register" path="portlet.mail.register" />
-		</action>
-
-		<action path="/mail/reorder_attachments" type="com.liferay.portlet.mail.action.ReorderAttachmentsAction" />
-
-		<action path="/mail/save_draft" type="com.liferay.portlet.mail.action.SaveDraftAction" />
-
-		<action path="/mail/save_part" type="com.liferay.portlet.mail.action.SavePartAction" />
-
-		<action path="/mail/search" forward="portlet.mail.search" />
-
-		<action path="/mail/search_results" type="com.liferay.portlet.mail.action.SearchAction">
-			<forward name="portlet.mail.search_results" path="portlet.mail.search_results" />
-		</action>
-
-		<action path="/mail/select_recipients" type="com.liferay.portlet.mail.action.SelectRecipientsAction">
-			<forward name="portlet.mail.select_recipients" path="portlet.mail.select_recipients" />
-		</action>
-
-		<action path="/mail/send_message" type="com.liferay.portlet.mail.action.SendMessageAction">
-			<forward name="portlet.mail.error" path="portlet.mail.error" />
-		</action>
-
-		<action path="/mail/set_html_format" type="com.liferay.portlet.mail.action.SetHTMLFormatAction" />
-
-		<action path="/mail/update_receipt" type="com.liferay.portlet.mail.action.UpdateReceiptAction" />
-
-		<action path="/mail/view_folder" type="com.liferay.portlet.mail.action.ViewFolderAction">
-			<forward name="portlet.mail.view" path="portlet.mail.view" />
-			<forward name="portlet.mail.view_folder" path="portlet.mail.view_folder" />
-		</action>
-
-		<action path="/mail/view_folders" forward="portlet.mail.view_folders" />
-
-		<action path="/mail/view_message" type="com.liferay.portlet.mail.action.ViewMessageAction">
-			<forward name="portlet.mail.view_message" path="portlet.mail.view_message" />
+		<action path="/mailbox/edit_message" type="com.liferay.portlet.mailbox.action.EditMessageAction">
+			<forward name="portlet.mailbox.edit_message" path="portlet.mailbox.edit_message" />
 		</action>
 
 		<!-- Maps -->

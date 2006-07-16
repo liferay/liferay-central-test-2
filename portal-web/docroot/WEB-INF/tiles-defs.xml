@@ -622,109 +622,16 @@
 		<put name="portlet_content" value="/portlet/login/view.jsp" />
 	</definition>
 
-	<!-- Mail -->
+	<!-- Mailbox -->
 
-	<definition name="portlet.mail" extends="portlet">
-		<put name="portlet_sub_nav" value="/portlet/mail/sub_nav.jsp" />
+	<definition name="portlet.mailbox" extends="portlet" />
+
+	<definition name="portlet.mailbox.view" extends="portlet.mailbox">
+		<put name="portlet_content" value="/portlet/mailbox/view.jsp" />
 	</definition>
 
-	<definition name="portlet.mail.add_folder" extends="portlet.mail">
-		<put name="portlet_content" value="/portlet/mail/add_folder.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.attachments" extends="portlet.mail">
-		<put name="portlet_content" value="/portlet/mail/attachments.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.compose_message" extends="portlet.mail">
-		<put name="portlet_content" value="/portlet/mail/compose_message.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.edit" extends="portlet.mail">
-		<put name="portlet_sub_nav" value="" />
-		<put name="portlet_content" value="/portlet/mail/edit.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.edit_filter" extends="portlet.mail">
-		<put name="portlet_sub_nav" value="" />
-		<put name="portlet_content" value="/portlet/mail/edit_filter.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.edit_folder" extends="portlet.mail">
-		<put name="portlet_content" value="/portlet/mail/edit_folder.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.edit_forward_address" extends="portlet.mail">
-		<put name="portlet_sub_nav" value="" />
-		<put name="portlet_content" value="/portlet/mail/edit_forward_address.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.edit_mail_display" extends="portlet.mail">
-		<put name="portlet_sub_nav" value="" />
-		<put name="portlet_content" value="/portlet/mail/edit_mail_display.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.edit_reply_related" extends="portlet.mail">
-		<put name="portlet_sub_nav" value="" />
-		<put name="portlet_content" value="/portlet/mail/edit_reply_related.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.edit_signature" extends="portlet.mail">
-		<put name="portlet_sub_nav" value="" />
-		<put name="portlet_content" value="/portlet/mail/edit_signature.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.edit_sound" extends="portlet.mail">
-		<put name="portlet_sub_nav" value="" />
-		<put name="portlet_content" value="/portlet/mail/edit_sound.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.edit_vacation_message" extends="portlet.mail">
-		<put name="portlet_content" value="/portlet/mail/edit_vacation_message.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.error" extends="portlet.mail">
-		<put name="portlet_content" value="/portlet/mail/error.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.pop_info" extends="portlet.mail">
-		<put name="portlet_content" value="/portlet/mail/pop_info.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.register" extends="portlet.mail">
-		<put name="portlet_sub_nav" value="" />
-		<put name="portlet_content" value="/portlet/mail/register.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.search" extends="portlet.mail">
-		<put name="portlet_content" value="/portlet/mail/search.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.search_results" extends="portlet.mail">
-		<put name="portlet_content" value="/portlet/mail/search_results.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.select_recipients" extends="portlet.mail">
-		<put name="portlet_content" value="/portlet/mail/select_recipients.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.view" extends="portlet.mail">
-		<put name="portlet_sub_nav" value="" />
-		<put name="portlet_content" value="/portlet/mail/view.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.view_folder" extends="portlet.mail">
-		<put name="portlet_sub_nav" value="/portlet/mail/folder_sub_nav.jsp" />
-		<put name="portlet_content" value="/portlet/mail/view_folder.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.view_folders" extends="portlet.mail">
-		<put name="portlet_content" value="/portlet/mail/view_folders.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.view_message" extends="portlet.mail">
-		<put name="portlet_sub_nav" value="/portlet/mail/folder_sub_nav.jsp" />
-		<put name="portlet_content" value="/portlet/mail/view_message.jsp" />
+	<definition name="portlet.mailbox.edit_message" extends="portlet.mailbox">
+		<put name="portlet_content" value="/portlet/mailbox/edit_message.jsp" />
 	</definition>
 
 	<!-- Maps -->

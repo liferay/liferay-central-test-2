@@ -3,20 +3,15 @@
 <portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd" version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd">
 	<portlet>
 		<portlet-name>1</portlet-name>
-		<display-name>Mail</display-name>
+		<display-name>Mailbox</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
-			<name>edit-action</name>
-			<value>/mail/edit</value>
-		</init-param>
-		<init-param>
 			<name>view-action</name>
-			<value>/mail/view_folder</value>
+			<value>/mailbox/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
-			<portlet-mode>edit</portlet-mode>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>

@@ -4,14 +4,12 @@
 <liferay-portlet-app>
 	<portlet>
 		<portlet-name>1</portlet-name>
-		<struts-path>mail</struts-path>
-		<scheduler-class>com.liferay.portlet.mail.job.Scheduler</scheduler-class>
+		<struts-path>mailbox</struts-path>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<preferences-owned-by-group>false</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
-		<include>false</include>
 	</portlet>
 	<portlet>
 		<portlet-name>2</portlet-name>
