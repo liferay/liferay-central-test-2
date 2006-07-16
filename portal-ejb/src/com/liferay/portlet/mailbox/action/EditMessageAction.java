@@ -65,7 +65,7 @@ public class EditMessageAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			//setForward(req, "portlet.mailx.error");
+			//setForward(req, "portlet.mailbox.error");
 		}
 	}
 
@@ -80,7 +80,7 @@ public class EditMessageAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.mailx.edit_message"));
+			getForward(req, "portlet.mailbox.edit_message"));
 	}
 
 }
