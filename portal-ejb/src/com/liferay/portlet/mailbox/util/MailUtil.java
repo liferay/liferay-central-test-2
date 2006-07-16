@@ -26,8 +26,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.activation.DataSource;
 import javax.mail.Address;
 import javax.mail.FetchProfile;
 import javax.mail.Flags;
@@ -41,6 +43,7 @@ import javax.mail.Store;
 import javax.mail.Flags.Flag;
 import javax.mail.Message.RecipientType;
 import javax.mail.internet.InternetAddress;
+import javax.mail.util.ByteArrayDataSource;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -196,6 +199,20 @@ public class MailUtil {
 			he.setMsg(mm.getPlainBody());
 			he.setHtmlMsg(mm.getHtmlBody());
 
+			List attachments = mm.getAttachments();
+			for (Iterator itr = attachments.iterator(); itr.hasNext(); ) {
+				MailAttachment ma = (MailAttachment)itr.next();
+
+				try {
+					DataSource ds = new ByteArrayDataSource(
+						ma.getContent(), ma.getContentType());
+					he.attach(ds, ma.getFilename(), ma.getFilename());
+				}
+				catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			
 			email = he;
 		}
 
@@ -214,14 +231,14 @@ public class MailUtil {
 			email.addTo(toAddy, toName);
 		}
 
-		Address [] ccs = mm.getTo();
+		Address [] ccs = mm.getCc();
 		for (int i = 0; i < ccs.length; i++) {
 			String ccAddy = ((InternetAddress)ccs[i]).getAddress();
 			String ccName = ((InternetAddress)ccs[i]).getPersonal();
 			email.addCc(ccAddy, ccName);
 		}
 
-		Address [] bccs = mm.getTo();
+		Address [] bccs = mm.getBcc();
 		for (int i = 0; i < bccs.length; i++) {
 			String bccAddy = ((InternetAddress)bccs[i]).getAddress();
 			String bccName = ((InternetAddress)bccs[i]).getPersonal();
@@ -245,6 +262,10 @@ public class MailUtil {
         folder.fetch(msgs, fp);
 
         for (int i = 0; i < msgs.length; i++) {
+			if (msgs[i].isExpunged()) {
+				continue;
+			}
+
         	MailEnvelope me = new MailEnvelope();
 
         	if (MAIL_SENT_NAME.equals(folder.getName()) ||

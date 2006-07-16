@@ -36,19 +36,42 @@ String content = "test";
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}
 	
-	function submitMessage() {
+	function <portlet:namespace />sendMessage() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.SEND %>";
+		document.<portlet:namespace />fm.<portlet:namespace />body.value = parent.<portlet:namespace />editor.getHTML();
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/edit_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveArticle(); return false;">
-	To: <input class="portlet-form-input-field" name="toField" /><br />
-	CC: <input class="portlet-form-input-field" name="ccField" /><br />
-	BCC: <input class="portlet-form-input-field" name="bccField" /><br />
-	Attachment: <input class="portlet-form-input-field" type="file" /><br />
-	
-	<input type="button" class="portlet-form-button" value="Send" onclick="submitMessage()" /><br />
-	
-	<iframe frameborder="0" height="250" id="<portlet:namespace />structure_el" scrolling="no" src="<%= editorUrl %>" width="100%"></iframe>
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />body" type="hidden" value="" />
+
+	<table cellpadding="0" cellspacing="2" border="0">
+	<tr>
+		<td><b><%= LanguageUtil.get(pageContext, "to") %>:</b></td>
+		<td><input class="portlet-form-input-field" name="<portlet:namespace />tos" /></td>
+	</tr>
+	<tr>	
+		<td><b><%= LanguageUtil.get(pageContext, "cc") %>:</b></td>
+		<td><input class="portlet-form-input-field" name="<portlet:namespace />ccs" /></td>
+	</tr>
+	<tr>
+		<td><b><%= LanguageUtil.get(pageContext, "bcc") %>:</b></td>
+		<td><input class="portlet-form-input-field" name="<portlet:namespace />bccs" /></td>
+	</tr>
+	<tr>
+		<td><b><%= LanguageUtil.get(pageContext, "subject") %>:</b></td>
+		<td><input class="portlet-form-input-field" name="<portlet:namespace />subject" /></td>
+	</tr>
+	<tr>
+		<td><b><%= LanguageUtil.get(pageContext, "attachments") %>:</b></td>
+		<td><input class="portlet-form-input-field" type="file" name="<portlet:namespace />attachment_0" /></td>
+	</tr>
+	</table>
+
+	<input type="button" class="portlet-form-button" value="<%= LanguageUtil.get(pageContext, "send") %>" onclick="<portlet:namespace />sendMessage()" /><br />
+
+	<iframe frameborder="0" height="250" id="<portlet:namespace />editor" name="<portlet:namespace />editor" scrolling="no" src="<%= editorUrl %>" width="100%"></iframe>
 </form>
 	
