@@ -24,11 +24,6 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
-<%
-boolean ROUNDED_TOP = true;
-boolean ROUNDED_BOTTOM = false;
-%>
-
 <%--
 /* Use the following code to override the color
  * assignments defined in liferay-look-and-feel.xml */
