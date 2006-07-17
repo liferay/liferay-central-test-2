@@ -140,6 +140,8 @@ public class BaseDeployer {
 					jarFullName, srcFile + "/WEB-INF/lib/" + jarName, true);
 			}
 		}
+
+		FileUtil.delete(srcFile + "/WEB-INF/lib/util-jsf.jar");
 	}
 
 	protected void copyTlds(File srcFile) throws Exception {
