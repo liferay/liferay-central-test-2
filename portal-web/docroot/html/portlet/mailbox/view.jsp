@@ -49,11 +49,11 @@ String mailLineColor = "#b3b6b0";
 }
 #portlet-mail-folder-pane ul li { margin: 1px 0 1px 0; }
 .portlet-mail-folder-selected {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/arrows/01_right.gif) scroll no-repeat 3px left;
+	background: url(<%= themeDisplay.getPathThemeImage() %>/arrows/01_right.gif) scroll no-repeat left 3px;
 }
 #portlet-mail-folder-pane ul li { padding: 2px 2px 2px 15px; }
 #portlet-mail-folder-pane-td { border: 1px solid <%= mailLineColor %>; }
-#portlet-mail-folder-pane { overflow: hidden; }
+#portlet-mail-folder-pane { overflow: hidden; width: 100px; }
 #portlet-mail-msgs-pane { width: 100%; }
 .portlet-mail-msgs-pane-td { border: 1px solid <%= mailLineColor %>; }
 #portlet-mail-handle { background-color: <%= mailBgColor %>; }

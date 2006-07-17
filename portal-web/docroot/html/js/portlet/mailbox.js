@@ -19,6 +19,7 @@ function MailSummaryObject(sender, subject, date, id) {
 
 var Mailbox = {
 	currentFolder : null,
+	currentFolderId : "",
 	currentMessageId : null,
 	dragging : false,
 	dragIndicator : null,
@@ -45,14 +46,15 @@ var Mailbox = {
 			}
 			
 			if (coord.inside(folderItem.nwOffset, folderItem.seOffset)) {
-				folderItem.style.backgroundColor = Mailbox.highlightColor;
-				foundInside = true;
+				if (folderItem.folder.id != Mailbox.currentFolder.id) {
+					folderItem.style.backgroundColor = Mailbox.highlightColor;
+					foundInside = true;
+				}
 			}
 			else {
 				folderItem.style.backgroundColor = "transparent";
 			}
 		}
-		
 		
 		if (Mailbox.dragIndicator != null) {
 			var indicator = Mailbox.dragIndicator.getElementsByTagName("span")[0];
@@ -238,10 +240,17 @@ var Mailbox = {
 				folderItem.folder = folders[i];
 				folderItem.onclick = Mailbox.onFolderSelect;
 				folderList.appendChild(folderItem);
+				
+				if (folders[i].id == Mailbox.currentFolderId) {
+					Mailbox.setCurrentFolder(folders[i]);
+				}
 			}
 			
 			folderPane.appendChild(folderList);
-			Mailbox.setCurrentFolder(folders[0]);
+			
+			if (Mailbox.currentFolder == null) {
+				Mailbox.setCurrentFolder(folders[0]);
+			}
 		}
 		
 		Mailbox.getPreview();
@@ -386,6 +395,7 @@ var Mailbox = {
 	
 	moveToFolder : function(folderId, folderName) {
 		var moveList = Mailbox.getSelectedMessages();
+		alert(moveList);
 		
 		if (moveList.length > 0) {
 			confirmMsg = "Move " + moveList.length + " message" +
@@ -597,6 +607,7 @@ var Mailbox = {
 	
 	setCurrentFolder : function(folder) {
 		Mailbox.currentFolder = folder;
+		Mailbox.currentFolderId = folder.id;
 		Mailbox.getFolderMessage();
 		Mailbox.createFolderSelect();
 		
