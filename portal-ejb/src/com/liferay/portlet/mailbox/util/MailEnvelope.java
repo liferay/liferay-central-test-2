@@ -35,16 +35,16 @@ import com.liferay.util.StringPool;
 public class MailEnvelope {
 
 	public MailEnvelope() {
-		_email = StringPool.BLANK;
+		_recipient = StringPool.BLANK;
 		_subject = StringPool.BLANK;
 	}
 
-	public String getEmail() {
-		return _email;
+	public String getRecipient() {
+		return _recipient;
 	}
 	
-	public void setEmail(String email) {
-		_email = email;
+	public void setRecipient(String recipient) {
+		_recipient = recipient;
 	}
 
 	public String getSubject() {
@@ -95,7 +95,7 @@ public class MailEnvelope {
 		_answered = answered;
 	}
 	
-	private String _email;
+	private String _recipient;
 
 	private String _subject;
 

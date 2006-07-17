@@ -22,7 +22,9 @@
 
 package com.liferay.portlet.mailbox.action;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.SortedSet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,6 +41,7 @@ import com.liferay.portlet.mailbox.util.MailEnvelope;
 import com.liferay.portlet.mailbox.util.MailFolder;
 import com.liferay.portlet.mailbox.util.MailMessage;
 import com.liferay.portlet.mailbox.util.MailUtil;
+import com.liferay.portlet.mailbox.util.comparator.DateComparator;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 
@@ -163,16 +166,17 @@ public class MailboxAction extends JSONAction {
 
 			MailUtil.setCurrentFolder(userId, password, folderId);
 
-			List list = MailUtil.getEnvelopes(userId);
+			SortedSet set = 
+				MailUtil.getEnvelopes(userId, new DateComparator(false));
 			
 			JSONArray meArray = new JSONArray();
 			
-			for (int i = 0; i < list.size(); i++) {
-				MailEnvelope me = (MailEnvelope)list.get(i);
+			for (Iterator itr = set.iterator(); itr.hasNext(); ) {
+				MailEnvelope me = (MailEnvelope)itr.next();
 				JSONObject jMe = new JSONObject();
 				
 				jMe.put("id", me.getMsgUID());
-				jMe.put("email", me.getEmail());
+				jMe.put("email", me.getRecipient());
 				jMe.put("subject", me.getSubject());
 				jMe.put("date", me.getDate().toString());
 				meArray.put(jMe);

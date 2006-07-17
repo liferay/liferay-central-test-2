@@ -26,10 +26,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.activation.DataSource;
 import javax.mail.Address;
@@ -154,10 +157,10 @@ public class MailUtil {
 		return list;
 	}
 
-	public static List getEnvelopes(String userId) 
+	public static SortedSet getEnvelopes(String userId, Comparator comp) 
 		throws Exception {
 
-		List envelopes = new ArrayList();
+		SortedSet envelopes = new TreeSet(comp);
 
         Message [] msgs = _getCurrentFolder(userId).getMessages();
 
@@ -191,13 +194,13 @@ public class MailUtil {
 	        		}
 	        	}
 
-	        	me.setEmail(email.toString());
+	        	me.setRecipient(email.toString());
         	}
         	else {
         		Address [] from = msgs[ii].getFrom();
         		if (from.length > 0) {
         			InternetAddress ia = (InternetAddress)from[0];
-        			me.setEmail(
+        			me.setRecipient(
         				GetterUtil.get(ia.getPersonal(), ia.getAddress()));
         		}
         	}
