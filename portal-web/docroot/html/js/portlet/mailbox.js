@@ -108,6 +108,7 @@ var Mailbox = {
 		msgsSender.innerHTML = "";
 		msgsSubject.innerHTML = "";
 		msgsDate.innerHTML = "";
+		Mailbox.currentMessageId = null;
 	},
 	
 	createFolderSelect : function() {
@@ -249,7 +250,7 @@ var Mailbox = {
 	getMessageDetails : function(messageId) {
 		if (messageId != Mailbox.currentMessageId) {
 			loadPage("/c/mailbox/action",
-				"cmd=getMessage&messageId=" + messageId + "?folderId=" + Mailbox.currentFolder.id,
+				"cmd=getMessage&messageId=" + messageId + "&folderId=" + Mailbox.currentFolder.id,
 				Mailbox.getMessageDetailsReturn, messageId);
 				
 			Mailbox.currentMessageId = messageId;
