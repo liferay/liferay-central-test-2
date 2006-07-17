@@ -39,6 +39,8 @@ import java.util.SortedSet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
@@ -61,67 +63,64 @@ public class MailboxAction extends JSONAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 		String rtString = "";
 
-		if ("getFolders".equals(cmd)) {
-			rtString = _getFolders(req);
+		try {
+			if ("getFolders".equals(cmd)) {
+				rtString = _getFolders(req);
+			}
+			else if ("getPreview".equals(cmd)) {
+				rtString = _getPreviewHeaders(req);
+			}
+			else if ("getMessage".equals(cmd)) {
+				rtString = _getMessage(req);
+			}
+			else if ("moveMessages".equals(cmd)) {
+				_moveMessages(req);
+			}
+			else if ("deleteMessages".equals(cmd)) {
+				_deleteMessages(req);
+			}
 		}
-		else if ("getPreview".equals(cmd)) {
-			rtString = _getPreviewHeaders(req);
+		catch (Exception e) {
+			_log.error(e);
 		}
-		else if ("getMessage".equals(cmd)) {
-			rtString = _getMessage(req);
-		}
-		else if ("moveMessages".equals(cmd)) {
-			_moveMessages(req);
-		}
-		else if ("deleteMessages".equals(cmd)) {
-			_deleteMessages(req);
-		}
-
+			
 		return rtString;
 	}
 
-	private String _deleteMessages(HttpServletRequest req) {
-		try {
-			String messages = ParamUtil.getString(req, "messages");
-			long msgList[] = StringUtil.split(messages, ",", -1L);
+	private String _deleteMessages(HttpServletRequest req) throws Exception {
+		String messages = ParamUtil.getString(req, "messages");
+		long msgList[] = StringUtil.split(messages, ",", -1L);
 
-			MailUtil.deleteMessages(req.getSession(), msgList);
-		}
-		catch (Exception e) {
-		}
+		MailUtil.deleteMessages(req.getSession(), msgList);
 
 		return null;
 	}
 
-	private String _getFolders(HttpServletRequest req) {
+	private String _getFolders(HttpServletRequest req) throws Exception {
 		JSONObject jsonObj = new JSONObject();
 		JSONArray jFolders = new JSONArray();
 
-		try {
-			int count = 1;
+		int count = 1;
 
-			List folders = MailUtil.getAllFolders(req.getSession());
+		List folders = MailUtil.getAllFolders(req.getSession());
 
-			for (int i = 0; i < folders.size(); i++) {
-				MailFolder folderObj = (MailFolder)folders.get(i);
-				JSONObject jFolderObj = new JSONObject();;
+		for (int i = 0; i < folders.size(); i++) {
+			MailFolder folderObj = (MailFolder)folders.get(i);
+			JSONObject jFolderObj = new JSONObject();;
 
-				String folderName = folderObj.getName();
+			String folderName = folderObj.getName();
 
-				jFolderObj.put("name", folderName);
-				jFolderObj.put("id", folderName);
-				jFolderObj.put("newCount", folderObj.getNewMessageCount());
-				jFolderObj.put("totalCount", folderObj.getMessageCount());
+			jFolderObj.put("name", folderName);
+			jFolderObj.put("id", folderName);
+			jFolderObj.put("newCount", folderObj.getNewMessageCount());
+			jFolderObj.put("totalCount", folderObj.getMessageCount());
 
-				if (MailUtil.MAIL_INBOX_NAME.equals(folderName)) {
-					jFolders.put(0, jFolderObj);
-				}
-				else {
-					jFolders.put(count++, jFolderObj);
-				}
+			if (MailUtil.MAIL_INBOX_NAME.equals(folderName)) {
+				jFolders.put(0, jFolderObj);
 			}
-		}
-		catch (Exception e) {
+			else {
+				jFolders.put(count++, jFolderObj);
+			}
 		}
 
 		jsonObj.put("folders", jFolders);
@@ -129,69 +128,59 @@ public class MailboxAction extends JSONAction {
 		return jsonObj.toString();
 	}
 
-	private String _getMessage(HttpServletRequest req) {
+	private String _getMessage(HttpServletRequest req) throws Exception {
 		JSONObject jsonObj = new JSONObject();
 
-		try {
-			String folderId = ParamUtil.getString(req, "folderId");
-			int messageId = ParamUtil.getInteger(req, "messageId");
+		String folderId = ParamUtil.getString(req, "folderId");
+		int messageId = ParamUtil.getInteger(req, "messageId");
 
-			MailUtil.setCurrentFolder(req.getSession(), folderId);
+		MailUtil.setCurrentFolder(req.getSession(), folderId);
 
-			MailMessage mm = MailUtil.getMessage(req.getSession(), messageId);
-			jsonObj.put("body", mm.getHtmlBody());
-			jsonObj.put("id", messageId);
-		}
-		catch (Exception e) {
-		}
+		MailMessage mm = MailUtil.getMessage(req.getSession(), messageId);
+		jsonObj.put("body", mm.getHtmlBody());
+		jsonObj.put("id", messageId);
 
 		return jsonObj.toString();
 	}
 
-	private String _getPreviewHeaders(HttpServletRequest req) {
+	private String _getPreviewHeaders(HttpServletRequest req) throws Exception {
 		JSONObject jsonObj = new JSONObject();
 
-		try {
-			String folderId = ParamUtil.getString(req, "folderId");
+		String folderId = ParamUtil.getString(req, "folderId");
 
-			MailUtil.setCurrentFolder(req.getSession(), folderId);
+		MailUtil.setCurrentFolder(req.getSession(), folderId);
 
-			SortedSet set = MailUtil.getEnvelopes(req.getSession(),
-				new DateComparator(false));
+		SortedSet set = MailUtil.getEnvelopes(req.getSession(),
+			new DateComparator(false));
 
-			JSONArray meArray = new JSONArray();
+		JSONArray meArray = new JSONArray();
 
-			for (Iterator itr = set.iterator(); itr.hasNext(); ) {
-				MailEnvelope me = (MailEnvelope)itr.next();
-				JSONObject jMe = new JSONObject();
+		for (Iterator itr = set.iterator(); itr.hasNext(); ) {
+			MailEnvelope me = (MailEnvelope)itr.next();
+			JSONObject jMe = new JSONObject();
 
-				jMe.put("id", me.getMsgUID());
-				jMe.put("email", me.getRecipient());
-				jMe.put("subject", me.getSubject());
-				jMe.put("date", me.getDate().toString());
-				meArray.put(jMe);
-			}
-
-			jsonObj.put("headers", meArray);
+			jMe.put("id", me.getMsgUID());
+			jMe.put("email", me.getRecipient());
+			jMe.put("subject", me.getSubject());
+			jMe.put("date", me.getDate().toString());
+			meArray.put(jMe);
 		}
-		catch (Exception e) {
-		}
+
+		jsonObj.put("headers", meArray);
 
 		return jsonObj.toString();
 	}
 
-	private String _moveMessages(HttpServletRequest req) {
-		try {
-			String messages = ParamUtil.getString(req, "messages");
-			String toFolder = ParamUtil.getString(req, "folderId");
-			long msgList[] = StringUtil.split(messages, ",", -1L);
+	private String _moveMessages(HttpServletRequest req) throws Exception {
+		String messages = ParamUtil.getString(req, "messages");
+		String toFolder = ParamUtil.getString(req, "folderId");
+		long msgList[] = StringUtil.split(messages, ",", -1L);
 
-			MailUtil.moveMessages(req.getSession(), msgList, toFolder);
-		}
-		catch (Exception e) {
-		}
+		MailUtil.moveMessages(req.getSession(), msgList, toFolder);
 
 		return null;
 	}
+
+	private static Log _log = LogFactory.getLog(MailboxAction.class);
 
 }
