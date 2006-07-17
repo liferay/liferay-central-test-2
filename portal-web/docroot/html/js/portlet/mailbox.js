@@ -594,14 +594,17 @@ var Mailbox = {
 			}
 		}
 		
+		
+		document.onmousemove = null;
+		document.onmouseup = null;
+		
+		Mailbox.checkFolderLocation(new Coordinate());
+		
 		if (Mailbox.dragging) {
 			Mailbox.dragToFolder(mousePos);
 		}
 		
-		document.onmousemove = null;
-		document.onmouseup = null;
 		Mailbox.dragging = false;
-		Mailbox.checkFolderLocation(new Coordinate());
 	},
 	
 	setCurrentFolder : function(folder) {
