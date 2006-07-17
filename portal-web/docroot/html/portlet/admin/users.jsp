@@ -23,7 +23,7 @@
 %>
 
 <liferay-ui:tabs
-	names="live-sessions,authentication,default-groups-and-roles,reserved-users,mail-host-names,emails"
+	names="live-sessions,authentication,default-communities-and-roles,reserved-users,mail-host-names,emails"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
 />
@@ -182,8 +182,8 @@
 			</c:otherwise>
 		</c:choose>
 	</c:when>
-	<c:when test='<%= tabs2.equals("default-groups-and-roles") %>'>
-		<%= LanguageUtil.get(pageContext, "enter-the-default-group-names-per-line-that-are-associated-with-newly-created-users") %>
+	<c:when test='<%= tabs2.equals("default-communities-and-roles") %>'>
+		<%= LanguageUtil.get(pageContext, "enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users") %>
 
 		<br><br>
 

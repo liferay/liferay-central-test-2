@@ -145,6 +145,19 @@ public class FileUtil {
 		}
 	}
 
+	public static boolean delete(String file) {
+		return delete(new File(file));
+	}
+
+	public static boolean delete(File file) {
+		if (file.exists()) {
+			return file.delete();
+		}
+		else {
+			return false;
+		}
+	}
+
 	public static void deltree(String directory) {
 		deltree(new File(directory));
 	}
