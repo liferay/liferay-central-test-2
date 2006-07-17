@@ -273,6 +273,18 @@ function checkTab(box) {
 	}
 }
 
+function createElement(tag, name) {
+	if (is_ie) {
+		var entry = document.createElement("<" + tag + " name='" + name + "'></" + tag + ">");
+	}
+	else {
+		var entry = document.createElement(tag);
+		entry.name = name;
+	}
+	
+	return entry;
+}
+
 function count(s, text) {
 	if ((s == null) || (text == null)) {
 		return 0;

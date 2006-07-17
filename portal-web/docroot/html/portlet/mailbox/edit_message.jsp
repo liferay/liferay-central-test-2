@@ -41,6 +41,36 @@ String content = "test";
 		document.<portlet:namespace />fm.<portlet:namespace />body.value = parent.<portlet:namespace />editor.getHTML();
 		submitForm(document.<portlet:namespace />fm);
 	}
+
+	var <portlet:namespace />file_index = 0;
+
+	function <portlet:namespace />addAttachment() {
+		var table = document.getElementById("<portlet:namespace />attachments");
+		var newrow = table.insertRow(table.rows.length - 1);
+		newrow.id = "<portlet:namespace />file" + <portlet:namespace />file_index;
+
+		var browser = createElement("input", "<portlet:namespace />attachment" + <portlet:namespace />file_index);
+		browser.type = "file";
+		browser.size = "40";
+
+		var spacer = document.createElement("span");
+		spacer.innerHTML = "&nbsp; &nbsp;";
+
+		var del = document.createElement("a");
+		del.href = "javascript:<portlet:namespace />removeAttachment('" + newrow.id + "')";
+		del.innerHTML = "[<%= LanguageUtil.get(pageContext, "remove") %>]";
+
+		newrow.insertCell(0).appendChild(browser);
+		newrow.insertCell(1).appendChild(spacer);
+		newrow.insertCell(2).appendChild(del);
+
+		<portlet:namespace />file_index++;
+	}
+
+	function <portlet:namespace />removeAttachment(id) {
+		var delrow = document.getElementById(id);
+		document.getElementById("<portlet:namespace />attachments").deleteRow(delrow.rowIndex);
+	}
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/edit_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveArticle(); return false;">
@@ -50,28 +80,43 @@ String content = "test";
 	<table cellpadding="0" cellspacing="2" border="0">
 	<tr>
 		<td><b><%= LanguageUtil.get(pageContext, "to") %>:</b></td>
-		<td><input class="portlet-form-input-field" name="<portlet:namespace />tos" /></td>
+		<td><input class="portlet-form-input-field" name="<portlet:namespace />tos" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" /></td>
 	</tr>
 	<tr>	
 		<td><b><%= LanguageUtil.get(pageContext, "cc") %>:</b></td>
-		<td><input class="portlet-form-input-field" name="<portlet:namespace />ccs" /></td>
+		<td><input class="portlet-form-input-field" name="<portlet:namespace />ccs" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" /></td>
 	</tr>
 	<tr>
 		<td><b><%= LanguageUtil.get(pageContext, "bcc") %>:</b></td>
-		<td><input class="portlet-form-input-field" name="<portlet:namespace />bccs" /></td>
+		<td><input class="portlet-form-input-field" name="<portlet:namespace />bccs" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" /></td>
 	</tr>
 	<tr>
 		<td><b><%= LanguageUtil.get(pageContext, "subject") %>:</b></td>
-		<td><input class="portlet-form-input-field" name="<portlet:namespace />subject" /></td>
+		<td><input class="portlet-form-input-field" name="<portlet:namespace />subject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" /></td>
 	</tr>
 	<tr>
-		<td><b><%= LanguageUtil.get(pageContext, "attachments") %>:</b></td>
-		<td><input class="portlet-form-input-field" type="file" name="<portlet:namespace />attachment_0" /></td>
+		<td valign="top"><b><%= LanguageUtil.get(pageContext, "attachments") %>:</b></td>
+		<td>
+			<table cellpadding="0" cellspacing="0" border="0" id="<portlet:namespace />attachments">
+				<tr>
+					<td colspan="3">
+						<input type="button" class="portlet-form-button" value="<%= LanguageUtil.get(pageContext, "add-attachment") %>" onclick="<portlet:namespace />addAttachment()" />
+					</td>
+				</tr>
+			</table>
+		</td>
 	</tr>
 	</table>
 
-	<input type="button" class="portlet-form-button" value="<%= LanguageUtil.get(pageContext, "send") %>" onclick="<portlet:namespace />sendMessage()" /><br />
+	<br />
+
+	<div>
+		<input type="button" class="portlet-form-button" value="<%= LanguageUtil.get(pageContext, "send") %>" onclick="<portlet:namespace />sendMessage()" />
+		<input type="button" class="portlet-form-button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onclick='self.location="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/view" /></portlet:renderURL>"' />
+	</div>
+
+	<br />
 
 	<iframe frameborder="0" height="250" id="<portlet:namespace />editor" name="<portlet:namespace />editor" scrolling="no" src="<%= editorUrl %>" width="100%"></iframe>
-</form>
-	
+
+</form>	

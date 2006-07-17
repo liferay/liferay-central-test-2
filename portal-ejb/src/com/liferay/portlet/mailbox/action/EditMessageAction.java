@@ -36,13 +36,10 @@ import javax.mail.internet.InternetAddress;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.liferay.portal.model.User;
@@ -113,9 +110,14 @@ public class EditMessageAction extends PortletAction {
 				
 				MailUtil.sendMessage(
 					user.getUserId(), PortalUtil.getUserPassword(req), mm);
-			}
 
-			if (Validator.isNotNull(cmd)) {
+				setForward(req, "portlet.mailbox.view");
+			}
+			else {
+				if (Validator.isNotNull(cmd)) {
+				}				
+
+				setForward(req, "portlet.mailbox.edit_message");
 			}
 		}
 		catch (Exception e) {
@@ -224,20 +226,6 @@ public class EditMessageAction extends PortletAction {
 		}
 
 		return attachments;
-	}
-
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
-		throws Exception {
-
-		try {
-		}
-		catch (Exception e) {
-		}
-
-		return mapping.findForward(
-			getForward(req, "portlet.mailbox.edit_message"));
 	}
 
 	private static Log _log = LogFactory.getLog(EditMessageAction.class);
