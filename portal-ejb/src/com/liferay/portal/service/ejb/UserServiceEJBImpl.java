@@ -115,6 +115,14 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 		return getService().getUserByEmailAddress(companyId, emailAddress);
 	}
 
+	public com.liferay.portal.model.User getUserById(java.lang.String userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().getUserById(userId);
+	}
+
 	public boolean hasGroupUser(java.lang.String groupId,
 		java.lang.String userId)
 		throws com.liferay.portal.PortalException, 

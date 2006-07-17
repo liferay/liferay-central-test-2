@@ -494,6 +494,53 @@ public class UserServiceHttp {
 		}
 	}
 
+	public static com.liferay.portal.model.User getUserById(
+		HttpPrincipal httpPrincipal, java.lang.String userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = userId;
+
+			if (userId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"getUserById", new Object[] { paramObj0 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw e;
+			}
+
+			return (com.liferay.portal.model.User)returnObj;
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			_log.error(StackTraceUtil.getStackTrace(pe));
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(StackTraceUtil.getStackTrace(se));
+			throw se;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new com.liferay.portal.SystemException(stackTrace);
+		}
+	}
+
 	public static boolean hasGroupUser(HttpPrincipal httpPrincipal,
 		java.lang.String groupId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
