@@ -30,10 +30,10 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.mailbox.util.MailAttachment;
 import com.liferay.portlet.mailbox.util.MailMessage;
 import com.liferay.portlet.mailbox.util.MailUtil;
+import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
-import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.UploadPortletRequest;
 
@@ -110,7 +110,7 @@ public class EditMessageAction extends PortletAction {
 
 					MailAttachment ma = new MailAttachment();
 					ma.setFilename(filename);
-					ma.setContentType(_getContentType(filename));
+					ma.setContentType(ContentTypeUtil.getContentType(filename));
 					ma.setContent(attachment);
 
 					mm.appendAttachment(ma);
@@ -130,27 +130,6 @@ public class EditMessageAction extends PortletAction {
 			_log.error("Unable to send message");
 			//setForward(req, "portlet.mailbox.error");
 		}
-	}
-
-	private String _getContentType(String filename) {
-		String [] fa = StringUtil.split(filename, StringPool.PERIOD);
-
-		String ext = fa[fa.length-1];
-
-		if (ext.equals("doc")) {
-			return "application/msword";
-		}
-		else if (ext.equals("pdf")) {
-			return "application/pdf";
-		}
-		else if (ext.equals("txt")) {
-			return Constants.TEXT_PLAIN;
-		}
-		else if (ext.equals("html") || ext.equals("htm")) {
-			return Constants.TEXT_HTML;
-		}
-
-		return "application/octet-stream";
 	}
 
 	private Address [] _getAddresses(String mailingList) throws Exception {
