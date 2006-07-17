@@ -34,6 +34,7 @@ var Mailbox = {
 	checkFolderLocation : function(coord, update) {
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
 		var folderList = folderPane.getElementsByTagName("li");
+		var foundInside = false;
 		
 		for (var i = 0; i < folderList.length; i++) {
 			var folderItem = folderList[i];
@@ -45,9 +46,23 @@ var Mailbox = {
 			
 			if (coord.inside(folderItem.nwOffset, folderItem.seOffset)) {
 				folderItem.style.backgroundColor = Mailbox.highlightColor;
+				foundInside = true;
 			}
 			else {
 				folderItem.style.backgroundColor = "transparent";
+			}
+		}
+		
+		
+		if (Mailbox.dragIndicator != null) {
+			var indicator = Mailbox.dragIndicator.getElementsByTagName("span")[0];
+			if (foundInside) {
+				indicator.innerHTML = "&laquo;";
+				indicator.style.color = "#55FF55";
+			}
+			else {
+				indicator.innerHTML = "X";
+				indicator.style.color = "#FF5555";
 			}
 		}
 	},
@@ -498,7 +513,9 @@ var Mailbox = {
 	onSummaryMouseMove : function(event) {
 		mousePos.update(event);
 		
-		if (mousePos.distance(Mailbox.dragStart) > 20) {
+		var numOfSelected = Mailbox.getSelectedMessages().length;
+		
+		if ((numOfSelected > 0 && mousePos.distance(Mailbox.dragStart) > 20) || Mailbox.dragging) {
 			Mailbox.dragging = true;
 			Mailbox.lastSelected.pendingHighlight = false;
 			
@@ -510,12 +527,10 @@ var Mailbox = {
 				dragIndicator.id = "portlet-mail-drag-indicator";
 				dragIndicator.onselectstart = function() {return false;};
 				dragIndicator.onmousedown = function() {return false;};
-				changeOpacity(dragIndicator, 85);
 				Mailbox.dragIndicator = dragIndicator;
 			}
 			
-			var numOfSelected = Mailbox.getSelectedMessages().length;
-			dragIndicator.innerHTML = numOfSelected + " message" +
+			dragIndicator.innerHTML = "<span>&nbsp;</span>&nbsp;" + numOfSelected + " message" +
 				(numOfSelected != 1 ? "s" : "");
 			dragIndicator.style.display = "block";
 			dragIndicator.style.top = (mousePos.y - 15) + "px";
@@ -569,11 +584,14 @@ var Mailbox = {
 			}
 		}
 		
+		if (Mailbox.dragging) {
+			Mailbox.dragToFolder(mousePos);
+		}
+		
 		document.onmousemove = null;
 		document.onmouseup = null;
 		Mailbox.dragging = false;
 		Mailbox.checkFolderLocation(new Coordinate());
-		Mailbox.dragToFolder(mousePos);
 	},
 	
 	setCurrentFolder : function(folder) {

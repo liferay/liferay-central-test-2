@@ -34,6 +34,7 @@ String mailLineColor = "#b3b6b0";
 %>
 #p_p_body_<%= PortletKeys.MAIL %> { background-color: <%= mailBgColor %>; }
 #portlet-mail-drag-indicator {
+	color: #FFFFFF;
 	font-weight: bold;
 	padding: 2px 5px 2px 15px;
 	position: absolute;
