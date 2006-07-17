@@ -63,12 +63,12 @@ public class MailEnvelope {
 		_date = date;
 	}
 	
-	public long getMsgNum() {
-		return _msgNum;
+	public long getMsgUID() {
+		return _msgUID;
 	}
 	
-	public void setMsgNum(long msgNum) {
-		_msgNum = msgNum;
+	public void setMsgUID(long msgUID) {
+		_msgUID = msgUID;
 	}
 
 	public boolean isRecent() {
@@ -101,7 +101,7 @@ public class MailEnvelope {
 
 	private Date _date;
 	
-	private long _msgNum;
+	private long _msgUID;
 
 	private boolean _recent;
 

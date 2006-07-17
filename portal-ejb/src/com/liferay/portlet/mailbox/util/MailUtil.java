@@ -62,6 +62,7 @@ import com.liferay.util.JNDIUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.mail.MailEngine;
+import com.sun.mail.imap.IMAPFolder;
 
 /**
  * <a href="MailUtil.java.html"><b><i>View Source</i></b></a>
@@ -103,19 +104,20 @@ public class MailUtil {
 	}
 
 	public static void deleteMessages(
-			String userId, String password, int [] messageUIDs) 
+			String userId, String password, long [] messageUIDs) 
 		throws Exception {
 
-		Folder folder = _getCurrentFolder(userId); 
+		IMAPFolder folder = _getCurrentFolder(userId); 
 		if (!folder.getName().equals(MAIL_TRASH_NAME)) {
 			moveMessages(userId, password, messageUIDs, MAIL_TRASH_NAME);
 		}
 		else {
 			Message [] msgs = 
-				_getCurrentFolder(userId).getMessages(messageUIDs);
+				_getCurrentFolder(userId).getMessagesByUID(messageUIDs);
 
 			_getCurrentFolder(userId).setFlags(
 				msgs, new Flags(Flags.Flag.DELETED), true);
+			_getCurrentFolder(userId).expunge();
 		}
 	}
 
@@ -124,13 +126,14 @@ public class MailUtil {
 		
 		List list = new ArrayList();
 
-		Folder root = _getStore(userId, password).getDefaultFolder();
+		IMAPFolder root = 
+			(IMAPFolder)_getStore(userId, password).getDefaultFolder();
 
 		try {
 			Folder [] folders = root.list();
 
 			for (int i = 0; i < folders.length; i++) {
-				if ((folders[i].getType() & Folder.HOLDS_MESSAGES) != 0) {
+				if ((folders[i].getType() & IMAPFolder.HOLDS_MESSAGES) != 0) {
 					MailFolder mf = new MailFolder(
 						folders[i].getNewMessageCount(), folders[i].getName(),
 						folders[i].getMessageCount());
@@ -201,7 +204,7 @@ public class MailUtil {
 
         	me.setDate(msgs[ii].getSentDate());
         	me.setSubject(msgs[ii].getSubject());
-        	me.setMsgNum(msgs[ii].getMessageNumber());
+        	me.setMsgUID(_getCurrentFolder(userId).getUID(msgs[ii]));
         	me.setRecent(msgs[ii].isSet(Flag.RECENT));
         	me.setFlagged(msgs[ii].isSet(Flag.FLAGGED));
         	me.setAnswered(msgs[ii].isSet(Flag.ANSWERED));
@@ -218,7 +221,8 @@ public class MailUtil {
 		MailMessage mm = null;
 
 		try {
-			Message message = _getCurrentFolder(userId).getMessage(messageUID);
+			Message message =
+				_getCurrentFolder(userId).getMessageByUID(messageUID);
 
 			mm = new MailMessage();
 			mm.setSubject(message.getSubject());
@@ -237,23 +241,26 @@ public class MailUtil {
 	}
 
 	public static void moveMessages(String userId, String password, 
-			int [] messageUIDs, String toFolderName)
+			long [] messageUIDs, String toFolderName)
 		throws Exception {
 		
 		if (_getCurrentFolder(userId).getName().equals(toFolderName)) {
 			return;
 		}
 
-		Folder toFolder = null;
+		IMAPFolder toFolder = null;
 		try {
-			toFolder = _getStore(userId, password).getFolder(toFolderName);
-			toFolder.open(Folder.READ_WRITE);
+			toFolder = 
+				(IMAPFolder)_getStore(userId, password).getFolder(toFolderName);
+			toFolder.open(IMAPFolder.READ_WRITE);
 			
-			Message [] msgs = _getCurrentFolder(userId).getMessages(messageUIDs);
+			Message [] msgs = 
+				_getCurrentFolder(userId).getMessagesByUID(messageUIDs);
 	
 			_getCurrentFolder(userId).copyMessages(msgs, toFolder);
 			_getCurrentFolder(userId).setFlags(
 				msgs, new Flags(Flags.Flag.DELETED), true);
+			_getCurrentFolder(userId).expunge();
 		}
 		catch(Exception e) {
 			_log.error(e);
@@ -334,7 +341,7 @@ public class MailUtil {
 	}
 	
 	private static void _closeFolder(String userId) {
-		Folder folder = (Folder)_folder.get(userId);
+		IMAPFolder folder = (IMAPFolder)_folder.get(userId);
 
 		if (folder != null && folder.isOpen()) {
 			try {
@@ -422,10 +429,10 @@ public class MailUtil {
         return mm;
 	}
 
-	private static Folder _getCurrentFolder(String userId)
+	private static IMAPFolder _getCurrentFolder(String userId)
 		throws Exception {
 		
-		Folder folder = (Folder)_folder.get(userId);
+		IMAPFolder folder = (IMAPFolder)_folder.get(userId);
 		if (folder != null) {
 			return folder;
 		}
@@ -433,7 +440,7 @@ public class MailUtil {
 		throw new Exception("A folder must first be selected");
 	}
 
-	private static Folder _getFolder(
+	private static IMAPFolder _getFolder(
 			String userId, String password, String folderName) 
 		throws Exception {
 
@@ -441,7 +448,7 @@ public class MailUtil {
 			folderName = MAIL_INBOX_NAME;
 		}
 		
-		Folder folder = (Folder)_folder.get(userId);
+		IMAPFolder folder = (IMAPFolder)_folder.get(userId);
 		if (folder != null) {
 			if (!folder.getName().equals(folderName)) {
 				_closeFolder(userId);
@@ -453,8 +460,9 @@ public class MailUtil {
 		}
 		
 		if (folder == null) {
-			folder = _getStore(userId, password).getFolder(folderName);
-			folder.open(Folder.READ_WRITE);
+			folder = 
+				(IMAPFolder)_getStore(userId, password).getFolder(folderName);
+			folder.open(IMAPFolder.READ_WRITE);
 			
 			_folder.put(userId, folder);
 		}

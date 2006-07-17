@@ -80,7 +80,7 @@ public class MailboxAction extends JSONAction {
 	private String _deleteMessages(HttpServletRequest req) {
 		try {
 			String messages = ParamUtil.getString(req, "messages");
-			int msgList[] = StringUtil.split(messages, ",", -1);
+			long msgList[] = StringUtil.split(messages, ",", -1L);
 			
 			String userId = PortalUtil.getUserId(req);
 			String password = PortalUtil.getUserPassword(req);
@@ -171,7 +171,7 @@ public class MailboxAction extends JSONAction {
 				MailEnvelope me = (MailEnvelope)list.get(i);
 				JSONObject jMe = new JSONObject();
 				
-				jMe.put("id", me.getMsgNum());
+				jMe.put("id", me.getMsgUID());
 				jMe.put("email", me.getEmail());
 				jMe.put("subject", me.getSubject());
 				jMe.put("date", me.getDate().toString());
@@ -192,7 +192,7 @@ public class MailboxAction extends JSONAction {
 			String password = PortalUtil.getUserPassword(req);
 			String messages = ParamUtil.getString(req, "messages");
 			String toFolder = ParamUtil.getString(req, "folderId");
-			int msgList[] = StringUtil.split(messages, ",", -1);
+			long msgList[] = StringUtil.split(messages, ",", -1L);
 			
 			MailUtil.moveMessages(userId, password, msgList, toFolder);
 		}
