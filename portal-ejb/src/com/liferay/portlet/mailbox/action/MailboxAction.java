@@ -171,7 +171,7 @@ public class MailboxAction extends JSONAction {
 				MailEnvelope me = (MailEnvelope)list.get(i);
 				JSONObject jMe = new JSONObject();
 				
-				jMe.put("id", me.getUID());
+				jMe.put("id", me.getMsgNum());
 				jMe.put("email", me.getEmail());
 				jMe.put("subject", me.getSubject());
 				jMe.put("date", me.getDate().toString());
