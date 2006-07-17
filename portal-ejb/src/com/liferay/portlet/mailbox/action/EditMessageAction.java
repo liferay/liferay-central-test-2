@@ -110,17 +110,13 @@ public class EditMessageAction extends PortletAction {
 					
 					mm.appendAttachment(ma);
 				}
-				
+
 				MailUtil.sendMessage(
 					user.getUserId(), PortalUtil.getUserPassword(req), mm);
-
-				setForward(req, "portlet.mailbox.view");
 			}
 			else {
 				if (Validator.isNotNull(cmd)) {
 				}				
-
-				setForward(req, "portlet.mailbox.edit_message");
 			}
 		}
 		catch (Exception e) {
@@ -246,7 +242,7 @@ public class EditMessageAction extends PortletAction {
 		else if ("forward".equals(composeAction)) {
 			// Forward message
 		}
-		
+
 		return mapping.findForward(
 			getForward(req, "portlet.mailbox.edit_message"));
 	}

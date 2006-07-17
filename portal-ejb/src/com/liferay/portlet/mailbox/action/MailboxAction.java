@@ -24,7 +24,6 @@ package com.liferay.portlet.mailbox.action;
 
 import java.util.List;
 
-import javax.mail.Folder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -35,7 +34,9 @@ import org.json.JSONObject;
 
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.mailbox.util.MailEnvelope;
+import com.liferay.portlet.mailbox.util.MailFolder;
 import com.liferay.portlet.mailbox.util.MailMessage;
 import com.liferay.portlet.mailbox.util.MailUtil;
 import com.liferay.util.ParamUtil;
@@ -53,9 +54,7 @@ public class MailboxAction extends JSONAction {
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
 		throws Exception {
-		
-		System.out.println("Mailbox 2");
-		
+
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 		String rtString = "";
 		
@@ -74,8 +73,6 @@ public class MailboxAction extends JSONAction {
 		else if ("deleteMessages".equals(cmd)) {
 			_deleteMessages(req);
 		}
-			
-		MailUtil.closeStore(req);
 		
 		return rtString;
 	}
@@ -85,8 +82,10 @@ public class MailboxAction extends JSONAction {
 			String messages = ParamUtil.getString(req, "messages");
 			int msgList[] = StringUtil.split(messages, ",", -1);
 			
-			MailUtil.deleteMessages(MailUtil.getStore(req),
-					MailUtil.getCurrentFolder(req), msgList);
+			String userId = PortalUtil.getUserId(req);
+			String password = PortalUtil.getUserPassword(req);
+			
+			MailUtil.deleteMessages(userId, password, msgList);
 		}
 		catch (Exception e) {
 		}
@@ -100,10 +99,14 @@ public class MailboxAction extends JSONAction {
 		
 		try {
 			int count = 1;
-			List folders = MailUtil.getAllFolders(MailUtil.getStore(req));
+
+			String userId = PortalUtil.getUserId(req);
+			String password = PortalUtil.getUserPassword(req);
+
+			List folders = MailUtil.getAllFolders(userId, password);
 			
 			for (int i = 0; i < folders.size(); i++) {
-				Folder folderObj = (Folder)folders.get(i);
+				MailFolder folderObj = (MailFolder)folders.get(i);
 				JSONObject jFolderObj = new JSONObject();;
 				
 				String folderName = folderObj.getName();
@@ -113,7 +116,7 @@ public class MailboxAction extends JSONAction {
 				jFolderObj.put("newCount", folderObj.getNewMessageCount());
 				jFolderObj.put("totalCount", folderObj.getMessageCount());
 				
-				if ("INBOX".equals(folderName)) {
+				if (MailUtil.MAIL_INBOX_NAME.equals(folderName)) {
 					jFolders.put(0, jFolderObj);
 				}
 				else {
@@ -133,11 +136,14 @@ public class MailboxAction extends JSONAction {
 		JSONObject jsonObj = new JSONObject();
 		
 		try {
-			String folderId = ParamUtil.getString(req, "folderId");
-			Folder folder = MailUtil.getFolder(req, folderId);
+			String userId = PortalUtil.getUserId(req);
+			String password = PortalUtil.getUserPassword(req);
+			String folderId = ParamUtil.getString(req, "folderId");			
 			int messageId = ParamUtil.getInteger(req, "messageId");
+
+			MailUtil.setCurrentFolder(userId, password, folderId);
 			
-			MailMessage mm = MailUtil.getMessage(folder, messageId);
+			MailMessage mm = MailUtil.getMessage(userId, messageId);
 			jsonObj.put("body", mm.getHtmlBody());
 			jsonObj.put("id", messageId);
 		}
@@ -151,9 +157,13 @@ public class MailboxAction extends JSONAction {
 		JSONObject jsonObj = new JSONObject();
 			
 		try {
-			String folderId = ParamUtil.getString(req, "folderId");
-			Folder folder = MailUtil.getFolder(req, folderId);
-			List list = MailUtil.getEnvelopes(folder);
+			String userId = PortalUtil.getUserId(req);
+			String password = PortalUtil.getUserPassword(req);
+			String folderId = ParamUtil.getString(req, "folderId");			
+
+			MailUtil.setCurrentFolder(userId, password, folderId);
+
+			List list = MailUtil.getEnvelopes(userId);
 			
 			JSONArray meArray = new JSONArray();
 			
@@ -178,12 +188,13 @@ public class MailboxAction extends JSONAction {
 	
 	private String _moveMessages(HttpServletRequest req) {
 		try {
+			String userId = PortalUtil.getUserId(req);
+			String password = PortalUtil.getUserPassword(req);
 			String messages = ParamUtil.getString(req, "messages");
 			String toFolder = ParamUtil.getString(req, "folderId");
 			int msgList[] = StringUtil.split(messages, ",", -1);
 			
-			MailUtil.moveMessages(MailUtil.getStore(req), MailUtil.getCurrentFolder(req),
-					msgList, toFolder);
+			MailUtil.moveMessages(userId, password, msgList, toFolder);
 		}
 		catch (Exception e) {
 		}
