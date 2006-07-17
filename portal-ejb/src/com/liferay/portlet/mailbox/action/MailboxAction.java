@@ -132,7 +132,7 @@ public class MailboxAction extends JSONAction {
 		JSONObject jsonObj = new JSONObject();
 
 		String folderId = ParamUtil.getString(req, "folderId");
-		int messageId = ParamUtil.getInteger(req, "messageId");
+		long messageId = ParamUtil.getLong(req, "messageId");
 
 		MailUtil.setCurrentFolder(req.getSession(), folderId);
 
