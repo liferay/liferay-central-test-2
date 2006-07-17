@@ -115,8 +115,8 @@
 	<classpathentry kind="lib" path="lib/portal/struts-el.jar"/>
 	<classpathentry kind="lib" path="lib/portal/textmining.jar"/>
 	<classpathentry kind="lib" path="lib/portal/trove.jar"/>
+	<classpathentry kind="lib" path="lib/portal/util-bridges.jar"/>
 	<classpathentry kind="lib" path="lib/portal/util-java.jar"/>
-	<classpathentry kind="lib" path="lib/portal/util-jsf.jar"/>
 	<classpathentry kind="lib" path="lib/portal/util-wsrp.jar"/>
 	<classpathentry kind="lib" path="lib/portal/velocity.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wbmp.jar"/>

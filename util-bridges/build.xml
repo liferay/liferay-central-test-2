@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="util-jsf" basedir="." default="compile">
+<project name="util-bridges" basedir="." default="compile">
 	<import file="../build-common-java.xml" />
 
 	<property name="deploy.dir" value="${app.server.lib.portal.dir}" />

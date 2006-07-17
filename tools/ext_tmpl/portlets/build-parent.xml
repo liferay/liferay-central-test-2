@@ -11,7 +11,7 @@
 		<delete dir="${module.name}.war/WEB-INF/classes/com" failonerror="false" />
 
 		<delete failonerror="false">
-			<fileset dir="${module.name}.war/WEB-INF/lib" includes="util-java.jar,util-jsf.jar,util-taglib.jar" />
+			<fileset dir="${module.name}.war/WEB-INF/lib" includes="util-bridges.jar,util-java.jar,util-taglib.jar" />
 			<fileset dir="${module.name}.war/WEB-INF/tld" includes="liferay-portlet.tld" />
 		</delete>
 	</target>
@@ -68,8 +68,8 @@
 
 				<!-- Dependent Libraries -->
 
+				<arg value="${project.dir}/lib/util-bridges.jar" />
 				<arg value="${project.dir}/lib/util-java.jar" />
-				<arg value="${project.dir}/lib/util-jsf.jar" />
 				<arg value="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/lib/util-taglib.jar" />
 		</java>
 	</target>

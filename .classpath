@@ -14,8 +14,8 @@
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="mail-ejb/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-ejb/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-shared/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="util-bridges/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="util-java/src"/>
-	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="util-jsf/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="util-taglib/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="util-wsrp/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>

@@ -43,8 +43,8 @@
 			<fileset dir="${project.dir}/filters/compression" includes="compression-filter.jar" />
 			<fileset dir="${project.dir}/filters/secure" includes="secure-filter.jar" />
 			<fileset dir="${project.dir}/filters/strip" includes="strip-filter.jar" />
+			<fileset dir="${project.dir}/util-bridges" includes="util-bridges.jar" />
 			<fileset dir="${project.dir}/util-java" includes="util-java.jar" />
-			<fileset dir="${project.dir}/util-jsf" includes="util-java.jar" />
 			<fileset dir="${project.dir}/util-wsrp" includes="util-wsrp.jar" />
 			<fileset dir="${project.dir}/lib/portal" />
 		</copy>

@@ -23,8 +23,8 @@
 			</fileset>
 		</copy>
 
+		<ant dir="../util-bridges" target="jar" inheritAll="false" />
 		<ant dir="../util-java" target="jar" inheritAll="false" />
-		<ant dir="../util-jsf" target="jar" inheritAll="false" />
 		<ant dir="../util-taglib" target="deploy" inheritAll="false" />
 	</target>
 

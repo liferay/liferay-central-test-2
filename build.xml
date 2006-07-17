@@ -26,8 +26,8 @@
 
 		<ant dir="portal-shared" target="clean" inheritAll="false" />
 
+		<ant dir="util-bridges" target="clean" inheritAll="false" />
 		<ant dir="util-java" target="clean" inheritAll="false" />
-		<ant dir="util-jsf" target="clean" inheritAll="false" />
 		<ant dir="util-taglib" target="clean" inheritAll="false" />
 		<ant dir="util-wsrp" target="clean" inheritAll="false" />
 
@@ -125,8 +125,8 @@
 	<target name="compile">
 		<ant dir="portal-shared" target="compile" inheritAll="false" />
 
+		<ant dir="util-bridges" target="compile" inheritAll="false" />
 		<ant dir="util-java" target="compile" inheritAll="false" />
-		<ant dir="util-jsf" target="compile" inheritAll="false" />
 		<ant dir="util-wsrp" target="compile" inheritAll="false" />
 
 		<ant dir="portal-ejb" target="compile-common" inheritAll="false" />
@@ -146,8 +146,8 @@
 	<target name="jar">
 		<ant dir="portal-shared" target="jar" inheritAll="false" />
 
+		<ant dir="util-bridges" target="jar" inheritAll="false" />
 		<ant dir="util-java" target="jar" inheritAll="false" />
-		<ant dir="util-jsf" target="jar" inheritAll="false" />
 		<ant dir="util-taglib" target="deploy" inheritAll="false" />
 		<ant dir="util-wsrp" target="jar" inheritAll="false" />
 
@@ -174,8 +174,8 @@
 
 		<ant dir="portal-shared" target="java2html" inheritAll="false" />
 
+		<ant dir="util-bridges" target="java2html" inheritAll="false" />
 		<ant dir="util-java" target="java2html" inheritAll="false" />
-		<ant dir="util-jsf" target="java2html" inheritAll="false" />
 		<ant dir="util-taglib" target="java2html" inheritAll="false" />
 		<ant dir="util-wsrp" target="java2html" inheritAll="false" />
 
@@ -192,8 +192,8 @@
 	<target name="javadoc">
 		<ant dir="portal-shared" target="javadoc" inheritAll="false" />
 
+		<ant dir="util-bridges" target="javadoc" inheritAll="false" />
 		<ant dir="util-java" target="javadoc" inheritAll="false" />
-		<ant dir="util-jsf" target="javadoc" inheritAll="false" />
 		<ant dir="util-taglib" target="javadoc" inheritAll="false" />
 		<ant dir="util-wsrp" target="javadoc" inheritAll="false" />
 
@@ -210,8 +210,8 @@
 	<target name="deploy">
 		<ant dir="portal-shared" target="deploy" inheritAll="false" />
 
+		<ant dir="util-bridges" target="deploy" inheritAll="false" />
 		<ant dir="util-java" target="deploy" inheritAll="false" />
-		<ant dir="util-jsf" target="deploy" inheritAll="false" />
 		<ant dir="util-taglib" target="deploy" inheritAll="false" />
 		<ant dir="util-wsrp" target="deploy" inheritAll="false" />
 
@@ -501,6 +501,8 @@
 			<fileset dir="lib" />
 		</copy>
 
+		<delete file="${lp.ext.dir}/lib/portal/util-jsf.jar" failonerror="false" />
+
 		<copy
 			file="${project.dir}/portal-shared/portal-shared.jar"
 			todir="${lp.ext.dir}/lib/global"
@@ -511,8 +513,8 @@
 			<fileset dir="${project.dir}/filters/compression" includes="compression-filter.jar" />
 			<fileset dir="${project.dir}/filters/secure" includes="secure-filter.jar" />
 			<fileset dir="${project.dir}/filters/strip" includes="strip-filter.jar" />
+			<fileset dir="${project.dir}/util-bridges" includes="util-bridges.jar" />
 			<fileset dir="${project.dir}/util-java" includes="util-java.jar" />
-			<fileset dir="${project.dir}/util-jsf" includes="util-jsf.jar" />
 			<fileset dir="${project.dir}/util-wsrp" includes="util-wsrp.jar" />
 		</copy>
 

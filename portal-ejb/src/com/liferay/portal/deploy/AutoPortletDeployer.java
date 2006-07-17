@@ -59,8 +59,8 @@ public class AutoPortletDeployer
 
 			List jars = new ArrayList();
 
+			jars.add(DeployUtil.getResourcePath("util-bridges.jar"));
 			jars.add(DeployUtil.getResourcePath("util-java.jar"));
-			jars.add(DeployUtil.getResourcePath("util-jsf.jar"));
 			jars.add(DeployUtil.getResourcePath("util-taglib.jar"));
 
 			this.jars = jars;
