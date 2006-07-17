@@ -139,6 +139,7 @@ public class MailboxAction extends JSONAction {
 			
 			MailMessage mm = MailUtil.getMessage(folder, messageId);
 			jsonObj.put("body", mm.getHtmlBody());
+			jsonObj.put("id", messageId);
 		}
 		catch (Exception e) {
 		}

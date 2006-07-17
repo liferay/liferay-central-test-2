@@ -186,6 +186,19 @@ var Mailbox = {
 		msObj = null;
 	},
 	
+	submitCompose : function(action) {
+		if (Mailbox.currentMessageId == null) {
+			alert("Please select a message");
+		}
+		else {
+			document.getElementById("portlet-mail-compose-action").value = action;
+			document.getElementById("portlet-mail-message-id").value = Mailbox.currentMessageId;
+			document.getElementById("portlet-mail-folder-id").value = Mailbox.currentFolder.id;
+
+			submitForm(document.fm);
+		}
+	},
+	
 	getFolderMessage : function() {
 		var mailDetails = document.getElementById("portlet-mail-msg-body");
 		mailDetails.innerHTML = Mailbox.currentFolder.name + " ID: " + Mailbox.currentFolder.id;
@@ -219,18 +232,20 @@ var Mailbox = {
 	},
 	
 	getMessageDetails : function(messageId) {
-		loadPage("/c/mailbox/action",
-			"cmd=getMessage&messageId=" + messageId + "?folderId=" + Mailbox.currentFolder.id,
-			Mailbox.getMessageDetailsReturn, messageId);
+		if (messageId != Mailbox.currentMessageId) {
+			loadPage("/c/mailbox/action",
+				"cmd=getMessage&messageId=" + messageId + "?folderId=" + Mailbox.currentFolder.id,
+				Mailbox.getMessageDetailsReturn, messageId);
+				
+			Mailbox.currentMessageId = messageId;
+		}
 	},
 	
 	getMessageDetailsReturn : function(xmlHttpReq, messageId) {
 		var messageObj = eval("(" + xmlHttpReq.responseText + ")");
 		var mailDetails = document.getElementById("portlet-mail-msg-body");
 		
-		if (messageId != Mailbox.currentMessageId) {
-			mailDetails.innerHTML = messageObj.body;
-		}
+		mailDetails.innerHTML = messageObj.body;
 	},
 	
 	getPreview : function () {

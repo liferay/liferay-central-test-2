@@ -114,16 +114,27 @@ String mailLineColor = "#b3b6b0";
 </style>
 
 <div style="padding: 5px">
-	<a href="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/edit_message" /></portlet:actionURL>"
-	>Compose</a> |
-	Reply |
-	Forward |
+	<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/edit_message" /></portlet:renderURL>">
+		Compose
+	</a> |
+	<a href="javascript: Mailbox.submitCompose('reply')">
+		Reply
+	</a> |
+	<a href="javascript: Mailbox.submitCompose('forward')">
+		Forward
+	</a> |
 	Print |
 	<a href="javascript:Mail.deleteSelectedMessages()">Delete</a> |
 	Move to
 	<select id="portlet-mail-folder-select">
 	</select>
 </div>
+
+<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/edit_message" /></portlet:renderURL>" method="post" name="fm">
+	<input type="hidden" id="portlet-mail-compose-action" name="composeAction" />
+	<input type="hidden" id="portlet-mail-message-id" name="messageId" />
+	<input type="hidden" id="portlet-mail-folder-id" name="folderId" />
+</form>
 
 <table cellspacing="0" cellpadding="0" border="0" style="background-color: <%= colorScheme.getPortletBg() %>">
 <tr>
