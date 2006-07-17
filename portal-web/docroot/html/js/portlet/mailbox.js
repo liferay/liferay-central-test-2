@@ -395,7 +395,6 @@ var Mailbox = {
 	
 	moveToFolder : function(folderId, folderName) {
 		var moveList = Mailbox.getSelectedMessages();
-		alert(moveList);
 		
 		if (moveList.length > 0) {
 			confirmMsg = "Move " + moveList.length + " message" +
