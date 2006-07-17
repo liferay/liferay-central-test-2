@@ -36,7 +36,7 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 
 <script type="text/javascript">
 	function <portlet:namespace />removeCategory() {
-		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = "";
+		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = "<%= MBCategory.DEFAULT_PARENT_CATEGORY_ID %>";
 
 		var nameEl = document.getElementById("<portlet:namespace />parentCategoryName");
 
