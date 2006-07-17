@@ -27,10 +27,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -51,6 +49,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.util.ByteArrayDataSource;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -60,6 +59,7 @@ import org.apache.commons.mail.SimpleEmail;
 
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.JNDIUtil;
 import com.liferay.util.StringUtil;
@@ -95,42 +95,40 @@ public class MailUtil {
 		MAIL_TRASH_NAME
 	};
 
-	public static void cleanup(String userId) throws Exception {
-		_closeFolder(userId);
+	public static void cleanup(HttpSession ses) throws Exception {
+		_closeFolder(ses);
 
-		Store store = (Store)_store.get(userId);
+		Store store = (Store)ses.getAttribute(WebKeys.MAIL_STORE);
 		if (store != null) {
 			store.close();
 
-			_store.remove(userId);
+			ses.removeAttribute(WebKeys.MAIL_STORE);
 		}
 	}
 
-	public static void deleteMessages(
-			String userId, String password, long [] messageUIDs) 
+	public static void deleteMessages(HttpSession ses, long [] messageUIDs) 
 		throws Exception {
 
-		IMAPFolder folder = _getCurrentFolder(userId); 
+		IMAPFolder folder = _getCurrentFolder(ses); 
 		if (!folder.getName().equals(MAIL_TRASH_NAME)) {
-			moveMessages(userId, password, messageUIDs, MAIL_TRASH_NAME);
+			moveMessages(ses, messageUIDs, MAIL_TRASH_NAME);
 		}
 		else {
 			Message [] msgs = 
-				_getCurrentFolder(userId).getMessagesByUID(messageUIDs);
+				_getCurrentFolder(ses).getMessagesByUID(messageUIDs);
 
-			_getCurrentFolder(userId).setFlags(
+			_getCurrentFolder(ses).setFlags(
 				msgs, new Flags(Flags.Flag.DELETED), true);
-			_getCurrentFolder(userId).expunge();
+			_getCurrentFolder(ses).expunge();
 		}
 	}
 
-	public static List getAllFolders(String userId, String password) 
+	public static List getAllFolders(HttpSession ses) 
 		throws Exception {
 		
 		List list = new ArrayList();
 
-		IMAPFolder root = 
-			(IMAPFolder)_getStore(userId, password).getDefaultFolder();
+		IMAPFolder root = (IMAPFolder)_getStore(ses).getDefaultFolder();
 
 		try {
 			Folder [] folders = root.list();
@@ -157,18 +155,18 @@ public class MailUtil {
 		return list;
 	}
 
-	public static SortedSet getEnvelopes(String userId, Comparator comp) 
+	public static SortedSet getEnvelopes(HttpSession ses, Comparator comp) 
 		throws Exception {
 
 		SortedSet envelopes = new TreeSet(comp);
 
-        Message [] msgs = _getCurrentFolder(userId).getMessages();
+        Message [] msgs = _getCurrentFolder(ses).getMessages();
 
         FetchProfile fp = new FetchProfile();
         fp.add(FetchProfile.Item.ENVELOPE);
         fp.add(FetchProfile.Item.FLAGS);
 
-        _getCurrentFolder(userId).fetch(msgs, fp);
+        _getCurrentFolder(ses).fetch(msgs, fp);
 
         for (int ii = msgs.length - 1; ii >= 0; ii--) {
 			if (msgs[ii].isExpunged()) {
@@ -177,8 +175,8 @@ public class MailUtil {
 
         	MailEnvelope me = new MailEnvelope();
 
-        	if (MAIL_SENT_NAME.equals(_getCurrentFolder(userId).getName()) ||
-        		MAIL_DRAFTS_NAME.equals(_getCurrentFolder(userId).getName())) {
+        	if (MAIL_SENT_NAME.equals(_getCurrentFolder(ses).getName()) ||
+        		MAIL_DRAFTS_NAME.equals(_getCurrentFolder(ses).getName())) {
         		
 	        	Address [] recipients = msgs[ii].getAllRecipients();
 
@@ -207,7 +205,7 @@ public class MailUtil {
 
         	me.setDate(msgs[ii].getSentDate());
         	me.setSubject(msgs[ii].getSubject());
-        	me.setMsgUID(_getCurrentFolder(userId).getUID(msgs[ii]));
+        	me.setMsgUID(_getCurrentFolder(ses).getUID(msgs[ii]));
         	me.setRecent(msgs[ii].isSet(Flag.RECENT));
         	me.setFlagged(msgs[ii].isSet(Flag.FLAGGED));
         	me.setAnswered(msgs[ii].isSet(Flag.ANSWERED));
@@ -218,14 +216,14 @@ public class MailUtil {
         return envelopes;
 	}
 
-	public static MailMessage getMessage(String userId, int messageUID)
+	public static MailMessage getMessage(HttpSession ses, int messageUID)
 		throws Exception {
 
 		MailMessage mm = null;
 
 		try {
 			Message message =
-				_getCurrentFolder(userId).getMessageByUID(messageUID);
+				_getCurrentFolder(ses).getMessageByUID(messageUID);
 
 			mm = new MailMessage();
 			mm.setSubject(message.getSubject());
@@ -243,27 +241,26 @@ public class MailUtil {
 		return mm;
 	}
 
-	public static void moveMessages(String userId, String password, 
-			long [] messageUIDs, String toFolderName)
+	public static void moveMessages(
+			HttpSession ses, long [] messageUIDs, String toFolderName)
 		throws Exception {
 		
-		if (_getCurrentFolder(userId).getName().equals(toFolderName)) {
+		if (_getCurrentFolder(ses).getName().equals(toFolderName)) {
 			return;
 		}
 
 		IMAPFolder toFolder = null;
 		try {
-			toFolder = 
-				(IMAPFolder)_getStore(userId, password).getFolder(toFolderName);
+			toFolder = (IMAPFolder)_getStore(ses).getFolder(toFolderName);
 			toFolder.open(IMAPFolder.READ_WRITE);
 			
 			Message [] msgs = 
-				_getCurrentFolder(userId).getMessagesByUID(messageUIDs);
+				_getCurrentFolder(ses).getMessagesByUID(messageUIDs);
 	
-			_getCurrentFolder(userId).copyMessages(msgs, toFolder);
-			_getCurrentFolder(userId).setFlags(
+			_getCurrentFolder(ses).copyMessages(msgs, toFolder);
+			_getCurrentFolder(ses).setFlags(
 				msgs, new Flags(Flags.Flag.DELETED), true);
-			_getCurrentFolder(userId).expunge();
+			_getCurrentFolder(ses).expunge();
 		}
 		catch(Exception e) {
 			_log.error(e);
@@ -276,9 +273,11 @@ public class MailUtil {
 		}
 	}
 	
-	public static void sendMessage(
-			String userId, String password, MailMessage mm) 
+	public static void sendMessage(HttpSession ses, MailMessage mm) 
 		throws Exception {
+
+		String userId = (String)ses.getAttribute(WebKeys.USER_ID);
+		String password = (String)ses.getAttribute(WebKeys.USER_PASSWORD);
 
 		Email email = null;
 		if (mm.isSimple()) {
@@ -336,15 +335,14 @@ public class MailUtil {
 		email.send();
 	}
 
-	public static void setCurrentFolder(
-			String userId, String password, String folderName) 
+	public static void setCurrentFolder(HttpSession ses, String folderName) 
 		throws Exception {
 		
-		_getFolder(userId, password, folderName);
+		_getFolder(ses, folderName);
 	}
 	
-	private static void _closeFolder(String userId) {
-		IMAPFolder folder = (IMAPFolder)_folder.get(userId);
+	private static void _closeFolder(HttpSession ses) {
+		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER);
 
 		if (folder != null && folder.isOpen()) {
 			try {
@@ -354,7 +352,7 @@ public class MailUtil {
 				_log.error("Unknown error while closing current folder");
 			}
 
-			_folder.remove(userId);
+			ses.removeAttribute(WebKeys.MAIL_FOLDER);
 		}
 	}
 
@@ -432,10 +430,10 @@ public class MailUtil {
         return mm;
 	}
 
-	private static IMAPFolder _getCurrentFolder(String userId)
+	private static IMAPFolder _getCurrentFolder(HttpSession ses)
 		throws Exception {
 		
-		IMAPFolder folder = (IMAPFolder)_folder.get(userId);
+		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER);
 		if (folder != null) {
 			return folder;
 		}
@@ -443,48 +441,48 @@ public class MailUtil {
 		throw new Exception("A folder must first be selected");
 	}
 
-	private static IMAPFolder _getFolder(
-			String userId, String password, String folderName) 
+	private static IMAPFolder _getFolder(HttpSession ses, String folderName) 
 		throws Exception {
 
 		if (Validator.isNull(folderName)) {
 			folderName = MAIL_INBOX_NAME;
 		}
+
+		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER);
 		
-		IMAPFolder folder = (IMAPFolder)_folder.get(userId);
 		if (folder != null) {
 			if (!folder.getName().equals(folderName)) {
-				_closeFolder(userId);
-				
-				_folder.remove(userId);
+				_closeFolder(ses);
 				
 				folder = null;
 			}
 		}
 		
 		if (folder == null) {
-			folder = 
-				(IMAPFolder)_getStore(userId, password).getFolder(folderName);
+			folder = (IMAPFolder)_getStore(ses).getFolder(folderName);
 			folder.open(IMAPFolder.READ_WRITE);
 			
-			_folder.put(userId, folder);
+			ses.setAttribute(WebKeys.MAIL_FOLDER, folder);
 		}
-		
+
 		return folder;
 	}
 	
-	private static Store _getStore(String userId, String password)
+	private static Store _getStore(HttpSession ses)
 		throws Exception {		
 
-		Store store = (Store) _store.get(userId);
+		Store store = (Store)ses.getAttribute(WebKeys.MAIL_STORE);
+		String userId = (String)ses.getAttribute(WebKeys.USER_ID);
+		String password = (String)ses.getAttribute(WebKeys.USER_PASSWORD);
+
 		if (store == null) {
 			store = _getSession().getStore("imap");
 			store.connect(_getIMAPHost(), _getLogin(userId), password);
 
-			_store.put(userId, store);
-			
-			if (_folder == null) {
-				setCurrentFolder(userId, password, MAIL_INBOX_NAME);
+			ses.setAttribute(WebKeys.MAIL_STORE, store);
+
+			if (ses.getAttribute(WebKeys.MAIL_FOLDER) == null) {
+				setCurrentFolder(ses, MAIL_INBOX_NAME);
 			}
 		}
 
@@ -523,10 +521,6 @@ public class MailUtil {
 		return _getSession().getProperty("mail.imap.host");
 	}
 
-	private static Map _store = new HashMap();
-	
-	private static Map _folder = new HashMap();
-	
 	private static Log _log = LogFactory.getLog(MailUtil.class);
 
 }

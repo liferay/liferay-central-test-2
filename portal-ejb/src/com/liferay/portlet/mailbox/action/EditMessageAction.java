@@ -38,6 +38,7 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -49,6 +50,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.mailbox.util.MailAttachment;
 import com.liferay.portlet.mailbox.util.MailMessage;
 import com.liferay.portlet.mailbox.util.MailUtil;
@@ -111,8 +113,10 @@ public class EditMessageAction extends PortletAction {
 					mm.appendAttachment(ma);
 				}
 
-				MailUtil.sendMessage(
-					user.getUserId(), PortalUtil.getUserPassword(req), mm);
+				HttpSession ses = 
+					((ActionRequestImpl)req).getHttpServletRequest().
+						getSession();
+				MailUtil.sendMessage(ses, mm);
 			}
 			else {
 				if (Validator.isNotNull(cmd)) {

@@ -180,6 +180,8 @@ public class WebKeys {
 	public static final String MAIL_MESSAGE_MODEL = "MAIL_MESSAGE_MODEL";
 
 	public static final String MAIL_SEARCH_RESULTS = "MAIL_SEARCH_RESULTS";
+	
+	public static final String MAIL_STORE = "MAIL_STORE";
 
 	public static final String MAIL_UNREAD_MESSAGE_COUNT = "MAIL_UNREAD_MESSAGE_COUNT";
 

@@ -93,7 +93,7 @@ public class PortalSessionListener implements HttpSessionListener {
 
 			// Close mail connections
 
-			MailUtil.cleanup(userId);
+			MailUtil.cleanup(ses);
 
 			// User tracker
 
