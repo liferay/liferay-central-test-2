@@ -152,7 +152,7 @@ var Mailbox = {
 					Coordinates.southeastOffset(folderItem, true));
 					
 			if (foundFolder) {
-				Mailbox.moveToFolder(folderItem, folderItem.innerHTML);
+				Mailbox.moveToFolder(folderItem.folder.id, folderItem.innerHTML);
 			}
 		}
 	},
