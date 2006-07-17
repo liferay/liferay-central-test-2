@@ -46,6 +46,7 @@ String mailLineColor = "#b3b6b0";
 	overflow: hidden;
 	width: 80px;
 }
+#portlet-mail-folder-pane ul li { margin: 1px 0 1px 0; }
 .portlet-mail-folder-selected {
 	background: url(<%= themeDisplay.getPathThemeImage() %>/arrows/01_right.gif) scroll no-repeat 3px left;
 }

@@ -35,11 +35,11 @@ import org.json.JSONObject;
 
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mailbox.util.MailEnvelope;
 import com.liferay.portlet.mailbox.util.MailMessage;
 import com.liferay.portlet.mailbox.util.MailUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringUtil;
 
 /**
  * <a href="MailboxAction.java.html"><b><i>View Source</i></b></a>
@@ -54,53 +54,71 @@ public class MailboxAction extends JSONAction {
 			HttpServletResponse res)
 		throws Exception {
 		
+		System.out.println("Mailbox 2");
+		
 		String cmd = ParamUtil.getString(req, Constants.CMD);
-		String userId = ParamUtil.getString(req, "userId");
 		String rtString = "";
 		
-		req.getSession().setAttribute(WebKeys.USER_ID, userId);
-		req.getSession().setAttribute(WebKeys.USER_PASSWORD, "liferaymailx");
-
 		if ("getFolders".equals(cmd)) {
-			List folders = MailUtil.getAllFolders(MailUtil.getStore(req));
-			
-			rtString = _getFolders(folders);
+			rtString = _getFolders(req);
 		}
 		else if ("getPreview".equals(cmd)) {
-			String folderId = ParamUtil.getString(req, "folderId");
-			Folder folder = MailUtil.getFolder(req, folderId);
-			
-			rtString = _getPreviewHeaders(userId, folder);
+			rtString = _getPreviewHeaders(req);
 		}
 		else if ("getMessage".equals(cmd)) {
-			Folder folder = MailUtil.getFolder(req, "Inbox");
-			int messageId = ParamUtil.getInteger(req, "messageId");
-			
-			rtString = _getMessage(folder, messageId);
+			rtString = _getMessage(req);
+		}
+		else if ("moveMessages".equals(cmd)) {
+			_moveMessages(req);
+		}
+		else if ("deleteMessages".equals(cmd)) {
+			_deleteMessages(req);
 		}
 			
 		MailUtil.closeStore(req);
 		
-		System.out.println("super");
-		
 		return rtString;
 	}
 	
-	private String _getFolders(List folders) {
+	private String _deleteMessages(HttpServletRequest req) {
+		try {
+			String messages = ParamUtil.getString(req, "messages");
+			int msgList[] = StringUtil.split(messages, ",", -1);
+			
+			MailUtil.deleteMessages(MailUtil.getStore(req),
+					MailUtil.getCurrentFolder(req), msgList);
+		}
+		catch (Exception e) {
+		}
+		
+		return null;
+	}
+	
+	private String _getFolders(HttpServletRequest req) {
 		JSONObject jsonObj = new JSONObject();
 		JSONArray jFolders = new JSONArray();
 		
 		try {
+			int count = 1;
+			List folders = MailUtil.getAllFolders(MailUtil.getStore(req));
+			
 			for (int i = 0; i < folders.size(); i++) {
 				Folder folderObj = (Folder)folders.get(i);
 				JSONObject jFolderObj = new JSONObject();;
 				
-				jFolderObj.put("name", folderObj.getName());
-				jFolderObj.put("id", folderObj.getName());
+				String folderName = folderObj.getName();
+				
+				jFolderObj.put("name", folderName);
+				jFolderObj.put("id", folderName);
 				jFolderObj.put("newCount", folderObj.getNewMessageCount());
 				jFolderObj.put("totalCount", folderObj.getMessageCount());
 				
-				jFolders.put(jFolderObj);
+				if ("INBOX".equals(folderName)) {
+					jFolders.put(0, jFolderObj);
+				}
+				else {
+					jFolders.put(count++, jFolderObj);
+				}
 			}
 		}
 		catch (Exception e) {
@@ -111,10 +129,14 @@ public class MailboxAction extends JSONAction {
 		return jsonObj.toString();
 	}
 	
-	private String _getMessage(Folder folder, int messageId) {
+	private String _getMessage(HttpServletRequest req) {
 		JSONObject jsonObj = new JSONObject();
 		
 		try {
+			String folderId = ParamUtil.getString(req, "folderId");
+			Folder folder = MailUtil.getFolder(req, folderId);
+			int messageId = ParamUtil.getInteger(req, "messageId");
+			
 			MailMessage mm = MailUtil.getMessage(folder, messageId);
 			jsonObj.put("body", mm.getHtmlBody());
 		}
@@ -124,11 +146,15 @@ public class MailboxAction extends JSONAction {
 		return jsonObj.toString();
 	}
 	
-	private String _getPreviewHeaders(String userId, Folder folder) {
+	private String _getPreviewHeaders(HttpServletRequest req) {
 		JSONObject jsonObj = new JSONObject();
-		JSONArray meArray = new JSONArray();
+			
 		try {
+			String folderId = ParamUtil.getString(req, "folderId");
+			Folder folder = MailUtil.getFolder(req, folderId);
 			List list = MailUtil.getEnvelopes(folder);
+			
+			JSONArray meArray = new JSONArray();
 			
 			for (int i = 0; i < list.size(); i++) {
 				MailEnvelope me = (MailEnvelope)list.get(i);
@@ -147,6 +173,21 @@ public class MailboxAction extends JSONAction {
 		}
 		
 		return jsonObj.toString();
+	}
+	
+	private String _moveMessages(HttpServletRequest req) {
+		try {
+			String messages = ParamUtil.getString(req, "messages");
+			String toFolder = ParamUtil.getString(req, "folderId");
+			int msgList[] = StringUtil.split(messages, ",", -1);
+			
+			MailUtil.moveMessages(MailUtil.getStore(req), MailUtil.getCurrentFolder(req),
+					msgList, toFolder);
+		}
+		catch (Exception e) {
+		}
+		
+		return null;
 	}
 
 }

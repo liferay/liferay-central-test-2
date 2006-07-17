@@ -156,6 +156,16 @@ public class MailUtil {
 			folder.expunge();
 		}
 	}
+	
+	public static Folder getCurrentFolder(HttpServletRequest req)
+		throws Exception {
+
+		HttpSession ses = req.getSession();
+
+		Folder folder = (Folder)ses.getAttribute(SESSION_FOLDER);
+		
+		return folder;
+	}
 
 	public static void moveMessages(
 			Store store, Folder folder, int [] messageUIDs, String toFolderName)
@@ -348,9 +358,7 @@ public class MailUtil {
 			folderName = MAIL_INBOX_NAME;
 		}
 
-		HttpSession ses = req.getSession();
-
-		Folder folder = (Folder)ses.getAttribute(SESSION_FOLDER);
+		Folder folder = getCurrentFolder(req);
 		
 		if (folder != null) {
 			if (!folder.getName().equals(folderName)) {

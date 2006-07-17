@@ -121,6 +121,7 @@ var Mailbox = {
 			(deleteList.length > 1 ? "s" : "") + " from " + Mailbox.currentFolder.name + "?";
 		
 		if (deleteList.length > 0 && confirm(confirmMsg)) {
+			loadPage("/c/mailbox/action", "cmd=deleteMessages&folderId=" + Mailbox.currentFolder.id);
 			Mailbox.removeSelectedMessages();
 		}
 	},	
@@ -191,9 +192,7 @@ var Mailbox = {
 	},
 	
 	getFolders : function() {
-		loadPage("/c/mailbox/action",
-			"cmd=getFolders&userId=" + Mailbox.userId,
-			Mailbox.getFoldersReturn);
+		loadPage("/c/mailbox/action", "cmd=getFolders", Mailbox.getFoldersReturn);
 	},
 	
 	getFoldersReturn : function(xmlHttpReq) {
@@ -221,7 +220,7 @@ var Mailbox = {
 	
 	getMessageDetails : function(messageId) {
 		loadPage("/c/mailbox/action",
-			"cmd=getMessage&userId=" + Mailbox.userId + "&messageId=" + messageId,
+			"cmd=getMessage&messageId=" + messageId + "?folderId=" + Mailbox.currentFolder.id,
 			Mailbox.getMessageDetailsReturn, messageId);
 	},
 	
@@ -236,7 +235,7 @@ var Mailbox = {
 	
 	getPreview : function () {
 		loadPage("/c/mailbox/action",
-			"cmd=getPreview&userId=" + Mailbox.userId + "&folderId=" + Mailbox.currentFolder.id,
+			"cmd=getPreview&folderId=" + Mailbox.currentFolder.id,
 			Mailbox.getPreviewReturn);
 			
 	},
@@ -363,7 +362,7 @@ var Mailbox = {
 			
 			if (confirm(confirmMsg)) {
 				Mailbox.removeSelectedMessages();
-				/* loadPage */
+				loadPage("/c/mailbox/action", "cmd=moveMessages&folderId=" + folderId + "&messages=" + moveList);
 			}
 		}
 		else {
