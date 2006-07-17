@@ -51,7 +51,7 @@ String content = "test";
 
 		var browser = createElement("input", "<portlet:namespace />attachment" + <portlet:namespace />file_index);
 		browser.type = "file";
-		browser.size = "40";
+		browser.size = "30";
 
 		var spacer = document.createElement("span");
 		spacer.innerHTML = "&nbsp; &nbsp;";
@@ -97,7 +97,7 @@ String content = "test";
 	<tr>
 		<td valign="top"><b><%= LanguageUtil.get(pageContext, "attachments") %>:</b></td>
 		<td>
-			<table cellpadding="0" cellspacing="0" border="0" id="<portlet:namespace />attachments">
+			<table cellpadding="0" cellspacing="2" border="0" id="<portlet:namespace />attachments" style="margin-left: -2px; margin-top: -2px;">
 				<tr>
 					<td colspan="3">
 						<input type="button" class="portlet-form-button" value="<%= LanguageUtil.get(pageContext, "add-attachment") %>" onclick="<portlet:namespace />addAttachment()" />
