@@ -799,7 +799,9 @@
 
 		<!-- Mailbox -->
 
-		<action path="/mailbox/view" forward="portlet.mailbox.view" />
+		<action path="/mailbox/view" type="com.liferay.portlet.mailbox.action.ViewMailboxAction">
+			<forward name="portlet.mailbox.view" path="portlet.mailbox.view" />
+		</action>
 
 		<action path="/mailbox/action" type="com.liferay.portlet.mailbox.action.MailboxAction" />
 

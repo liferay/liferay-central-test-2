@@ -34,11 +34,11 @@ String mailLineColor = "#b3b6b0";
 %>
 #p_p_body_<%= PortletKeys.MAIL %> { background-color: <%= mailBgColor %>; }
 #portlet-mail-drag-indicator {
-	color: #FFFFFF;
+	color: <%= colorScheme.getLayoutBg() %>;
 	font-weight: bold;
 	padding: 2px 5px 2px 15px;
 	position: absolute;
-	background-color: <%= colorScheme.getPortletTitleBg() %>;
+	background-color: <%= colorScheme.getLayoutTabSelectedText() %>;
 	cursor: pointer;
 }
 #portlet-mail-folder-pane ul {
@@ -49,7 +49,7 @@ String mailLineColor = "#b3b6b0";
 }
 #portlet-mail-folder-pane ul li { margin: 1px 0 1px 0; }
 .portlet-mail-folder-selected {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/arrows/01_right.gif) scroll no-repeat left 3px;
+	background-color: <%= colorScheme.getLayoutTabBg() %>;
 }
 #portlet-mail-folder-pane ul li { padding: 2px 2px 2px 15px; }
 #portlet-mail-folder-pane-td { border: 1px solid <%= mailLineColor %>; }
@@ -96,7 +96,7 @@ String mailLineColor = "#b3b6b0";
 #portlet-mail-msgs-title-received { overflow: hidden; width: 200px; }
 #portlet-mail-msgs-title-received div { padding: 2px 0 2px 5px; }
 .portlet-mail-msgs-title {
-	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_menu_bg_gradient.gif) repeat-x;
+	background-color: <%= colorScheme.getLayoutTabBg() %>;
 }
 
 #portlet-mail-msgs-from-handle { }
@@ -141,6 +141,9 @@ String mailLineColor = "#b3b6b0";
 <tr>
 	<td id="portlet-mail-folder-pane-td" valign="top">
 		<div id="portlet-mail-folder-pane">
+			<div style="text-align: center; padding-top: 50px">
+				<img src="<%= themeDisplay.getPathThemeImage() %>/progress_bar/loading_animation.gif" />
+			</div>
 		</div>
 	</td>
 	<td id="portlet-mail-handle" style="cursor: e-resize">
@@ -153,9 +156,6 @@ String mailLineColor = "#b3b6b0";
 			<tr>
 				<td class="portlet-mail-msgs-pane-td" width="100%">
 					<div id="portlet-mail-msgs-preview-pane">
-						<%--
-						<%@ include file="/html/portlet/mini_gallery/preview_pane.jsp" %>
-						--%>
 						<table cellspacing="0" cellpadding="0" border="0">
 						<tr>
 							<td class="portlet-mail-msgs-title">
@@ -227,8 +227,20 @@ String mailLineColor = "#b3b6b0";
 </tr>
 </table>
 
+<%
+	String folderId = (String)request.getAttribute("folderId");
+	Long messageId = (Long)request.getAttribute("messageId");
+%>
+
 <script type="text/javascript">
+	<c:if test="<%= folderId != null %>">
+		Mailbox.currentFolderId = "<%= folderId %>";
+	</c:if>
+	<c:if test="<%= messageId != null %>">
+		Mailbox.currentMessageId = <%= messageId.toString() %>;
+	</c:if>
+
 	Mailbox.highlightColor = "<%= colorScheme.getPortletMenuBg() %>";
-	Mailbox.userId = "<%= request.getRemoteUser() %>";
+	Mailbox.colorSelected = "<%= colorScheme.getLayoutTabBg() %>";
 	Mailbox.init();
 </script>

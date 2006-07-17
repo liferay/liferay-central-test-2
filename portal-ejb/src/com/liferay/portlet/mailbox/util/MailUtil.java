@@ -22,21 +22,9 @@
 
 package com.liferay.portlet.mailbox.util;
 
-import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.JNDIUtil;
-import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
-import com.liferay.util.mail.MailEngine;
-
-import com.sun.mail.imap.IMAPFolder;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -45,25 +33,23 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import javax.activation.DataSource;
-
 import javax.mail.Address;
 import javax.mail.FetchProfile;
-import javax.mail.Flags.Flag;
 import javax.mail.Flags;
 import javax.mail.Folder;
-import javax.mail.Message.RecipientType;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
+import javax.mail.Flags.Flag;
+import javax.mail.Message.RecipientType;
 import javax.mail.internet.InternetAddress;
 import javax.mail.util.ByteArrayDataSource;
-
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-
+import javax.portlet.PortletSession;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
@@ -71,6 +57,16 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.SimpleEmail;
+
+import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.JNDIUtil;
+import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
+import com.liferay.util.mail.MailEngine;
+import com.sun.mail.imap.IMAPFolder;
 
 /**
  * <a href="MailUtil.java.html"><b><i>View Source</i></b></a>
@@ -126,6 +122,21 @@ public class MailUtil {
 				msgs, new Flags(Flags.Flag.DELETED), true);
 			_getCurrentFolder(ses).expunge();
 		}
+	}
+	
+	public static String getCurrentFolderName(PortletSession ses) {
+		
+		try {
+			Folder folder = _getCurrentFolder(ses);
+			return(folder.getName());
+		}
+		catch (Exception e) {
+			return null;
+		}
+	}
+
+	public static Long getCurrentMessageId(PortletSession ses) {
+		return (Long)ses.getAttribute(WebKeys.MAIL_MESSAGE, PortletSession.APPLICATION_SCOPE);
 	}
 
 	public static List getAllFolders(HttpSession ses)
@@ -435,15 +446,31 @@ public class MailUtil {
         return mm;
 	}
 
-	private static IMAPFolder _getCurrentFolder(HttpSession ses)
+	private static IMAPFolder _getCurrentFolder(IMAPFolder folder)
 		throws Exception {
-
-		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER);
+		
 		if (folder != null) {
 			return folder;
 		}
+		else {
+			throw new Exception("A folder must first be selected");
+		}
+	}
 
-		throw new Exception("A folder must first be selected");
+	private static IMAPFolder _getCurrentFolder(HttpSession ses)
+		throws Exception {
+		
+		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER);
+		
+		return _getCurrentFolder(folder);
+	}
+	
+	private static IMAPFolder _getCurrentFolder(PortletSession ses)
+		throws Exception {
+		
+		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER, PortletSession.APPLICATION_SCOPE);
+		
+		return _getCurrentFolder(folder);
 	}
 
 	private static IMAPFolder _getFolder(HttpSession ses, String folderName)
