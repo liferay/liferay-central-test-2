@@ -21,10 +21,10 @@
  */
 package com.liferay.portlet.mailbox.util.comparator;
 
-import java.util.Comparator;
-
 import com.liferay.portlet.mailbox.util.MailEnvelope;
 import com.liferay.util.DateUtil;
+
+import java.util.Comparator;
 
 /**
  * <a href="DateComparator.java.html"><b><i>View Source</i></b></a>
@@ -37,19 +37,19 @@ public class DateComparator implements Comparator {
 	public DateComparator(boolean asc) {
 		_asc = asc;
 	}
-	
+
 	public int compare(Object arg0, Object arg1) {
 		MailEnvelope me0 = (MailEnvelope)arg0;
 		MailEnvelope me1 = (MailEnvelope)arg1;
-		
+
 		if (_asc) {
-			return DateUtil.compareTo(me0.getDate(), me1.getDate());			
+			return DateUtil.compareTo(me0.getDate(), me1.getDate());
 		}
 		else {
-			return DateUtil.compareTo(me1.getDate(), me0.getDate());			
+			return DateUtil.compareTo(me1.getDate(), me0.getDate());
 		}
 	}
-	
+
 	private boolean _asc;
 
 }

@@ -38,13 +38,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  */
 public interface ServletContextProvider {
+
 	public static final String STRUTS_BRIDGES_CONTEXT_PROVIDER =
 		"STRUTS_BRIDGES_CONTEXT_PROVIDER";
-	
+
 	public ServletContext getServletContext(GenericPortlet portlet);
 
 	public ServletContext getServletContext(ServletContext ctx);
-	
+
 	public HttpServletRequest getHttpServletRequest(
 		GenericPortlet portlet, PortletRequest req);
 

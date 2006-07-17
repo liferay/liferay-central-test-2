@@ -42,7 +42,7 @@ public class MailFolder {
 	public String getName() {
 		return _name;
 	}
-	
+
 	public long getNewMessageCount() {
 		return _newMessageCount;
 	}
@@ -50,7 +50,7 @@ public class MailFolder {
 	private long _messageCount;
 
 	private String _name;
-	
+
 	private long _newMessageCount;
-	
+
 }

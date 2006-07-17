@@ -22,41 +22,6 @@
 
 package com.liferay.portlet.mailbox.util;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
-import javax.activation.DataSource;
-import javax.mail.Address;
-import javax.mail.FetchProfile;
-import javax.mail.Flags;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Part;
-import javax.mail.Session;
-import javax.mail.Store;
-import javax.mail.Flags.Flag;
-import javax.mail.Message.RecipientType;
-import javax.mail.internet.InternetAddress;
-import javax.mail.util.ByteArrayDataSource;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.mail.Email;
-import org.apache.commons.mail.HtmlEmail;
-import org.apache.commons.mail.SimpleEmail;
-
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
@@ -65,7 +30,47 @@ import com.liferay.util.JNDIUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.mail.MailEngine;
+
 import com.sun.mail.imap.IMAPFolder;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+import javax.activation.DataSource;
+
+import javax.mail.Address;
+import javax.mail.FetchProfile;
+import javax.mail.Flags.Flag;
+import javax.mail.Flags;
+import javax.mail.Folder;
+import javax.mail.Message.RecipientType;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Part;
+import javax.mail.Session;
+import javax.mail.Store;
+import javax.mail.internet.InternetAddress;
+import javax.mail.util.ByteArrayDataSource;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail.SimpleEmail;
 
 /**
  * <a href="MailUtil.java.html"><b><i>View Source</i></b></a>
@@ -106,15 +111,15 @@ public class MailUtil {
 		}
 	}
 
-	public static void deleteMessages(HttpSession ses, long [] messageUIDs) 
+	public static void deleteMessages(HttpSession ses, long [] messageUIDs)
 		throws Exception {
 
-		IMAPFolder folder = _getCurrentFolder(ses); 
+		IMAPFolder folder = _getCurrentFolder(ses);
 		if (!folder.getName().equals(MAIL_TRASH_NAME)) {
 			moveMessages(ses, messageUIDs, MAIL_TRASH_NAME);
 		}
 		else {
-			Message [] msgs = 
+			Message [] msgs =
 				_getCurrentFolder(ses).getMessagesByUID(messageUIDs);
 
 			_getCurrentFolder(ses).setFlags(
@@ -123,9 +128,9 @@ public class MailUtil {
 		}
 	}
 
-	public static List getAllFolders(HttpSession ses) 
+	public static List getAllFolders(HttpSession ses)
 		throws Exception {
-		
+
 		List list = new ArrayList();
 
 		IMAPFolder root = (IMAPFolder)_getStore(ses).getDefaultFolder();
@@ -155,7 +160,7 @@ public class MailUtil {
 		return list;
 	}
 
-	public static SortedSet getEnvelopes(HttpSession ses, Comparator comp) 
+	public static SortedSet getEnvelopes(HttpSession ses, Comparator comp)
 		throws Exception {
 
 		SortedSet envelopes = new TreeSet(comp);
@@ -177,7 +182,7 @@ public class MailUtil {
 
         	if (MAIL_SENT_NAME.equals(_getCurrentFolder(ses).getName()) ||
         		MAIL_DRAFTS_NAME.equals(_getCurrentFolder(ses).getName())) {
-        		
+
 	        	Address [] recipients = msgs[ii].getAllRecipients();
 
 	        	StringBuffer email = new StringBuffer();
@@ -237,14 +242,14 @@ public class MailUtil {
 			_log.error(me);
 			throw me;
 		}
-			
+
 		return mm;
 	}
 
 	public static void moveMessages(
 			HttpSession ses, long [] messageUIDs, String toFolderName)
 		throws Exception {
-		
+
 		if (_getCurrentFolder(ses).getName().equals(toFolderName)) {
 			return;
 		}
@@ -253,10 +258,10 @@ public class MailUtil {
 		try {
 			toFolder = (IMAPFolder)_getStore(ses).getFolder(toFolderName);
 			toFolder.open(IMAPFolder.READ_WRITE);
-			
-			Message [] msgs = 
+
+			Message [] msgs =
 				_getCurrentFolder(ses).getMessagesByUID(messageUIDs);
-	
+
 			_getCurrentFolder(ses).copyMessages(msgs, toFolder);
 			_getCurrentFolder(ses).setFlags(
 				msgs, new Flags(Flags.Flag.DELETED), true);
@@ -272,8 +277,8 @@ public class MailUtil {
 			}
 		}
 	}
-	
-	public static void sendMessage(HttpSession ses, MailMessage mm) 
+
+	public static void sendMessage(HttpSession ses, MailMessage mm)
 		throws Exception {
 
 		String userId = (String)ses.getAttribute(WebKeys.USER_ID);
@@ -299,7 +304,7 @@ public class MailUtil {
 					ma.getContent(), ma.getContentType());
 				he.attach(ds, ma.getFilename(), ma.getFilename());
 			}
-			
+
 			email = he;
 		}
 
@@ -335,12 +340,12 @@ public class MailUtil {
 		email.send();
 	}
 
-	public static void setCurrentFolder(HttpSession ses, String folderName) 
+	public static void setCurrentFolder(HttpSession ses, String folderName)
 		throws Exception {
-		
+
 		_getFolder(ses, folderName);
 	}
-	
+
 	private static void _closeFolder(HttpSession ses) {
 		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER);
 
@@ -356,9 +361,9 @@ public class MailUtil {
 		}
 	}
 
-	private static MailAttachment _getAttachment(Part part) 
+	private static MailAttachment _getAttachment(Part part)
 		throws IOException, MessagingException {
-		
+
 		MailAttachment ma = new MailAttachment();
 		ma.setContentType(part.getContentType());
 		ma.setFilename(part.getFileName());
@@ -385,7 +390,7 @@ public class MailUtil {
 
 		return ma;
 	}
-	
+
 	private static MailMessage _getContent(Part part, MailMessage mm)
 		throws IOException, MessagingException {
 
@@ -395,7 +400,7 @@ public class MailUtil {
             if (part.isMimeType(Constants.MULTIPART_ALTERNATE)) {
 	            for (int i = 0; i < mp.getCount(); i++) {
 	            	Part mpbp = mp.getBodyPart(i);
-	            	
+
 	                if (part.isMimeType(Constants.TEXT_PLAIN)) {
 	                	mm.setPlainBody((String)mpbp.getContent());
 	                }
@@ -432,7 +437,7 @@ public class MailUtil {
 
 	private static IMAPFolder _getCurrentFolder(HttpSession ses)
 		throws Exception {
-		
+
 		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER);
 		if (folder != null) {
 			return folder;
@@ -441,7 +446,7 @@ public class MailUtil {
 		throw new Exception("A folder must first be selected");
 	}
 
-	private static IMAPFolder _getFolder(HttpSession ses, String folderName) 
+	private static IMAPFolder _getFolder(HttpSession ses, String folderName)
 		throws Exception {
 
 		if (Validator.isNull(folderName)) {
@@ -449,27 +454,27 @@ public class MailUtil {
 		}
 
 		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER);
-		
+
 		if (folder != null) {
 			if (!folder.getName().equals(folderName)) {
 				_closeFolder(ses);
-				
+
 				folder = null;
 			}
 		}
-		
+
 		if (folder == null) {
 			folder = (IMAPFolder)_getStore(ses).getFolder(folderName);
 			folder.open(IMAPFolder.READ_WRITE);
-			
+
 			ses.setAttribute(WebKeys.MAIL_FOLDER, folder);
 		}
 
 		return folder;
 	}
-	
+
 	private static Store _getStore(HttpSession ses)
-		throws Exception {		
+		throws Exception {
 
 		Store store = (Store)ses.getAttribute(WebKeys.MAIL_STORE);
 		String userId = (String)ses.getAttribute(WebKeys.USER_ID);

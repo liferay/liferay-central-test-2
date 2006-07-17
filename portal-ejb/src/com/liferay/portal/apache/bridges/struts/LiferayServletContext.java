@@ -23,8 +23,10 @@
 package com.liferay.portal.apache.bridges.struts;
 
 import java.io.InputStream;
+
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import java.util.Enumeration;
 import java.util.Set;
 
@@ -35,17 +37,15 @@ import javax.servlet.ServletException;
 
 /**
  * <a href="LiferayServletContext.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * @author Michael Young
  * @version $Revision: $
- * 
+ *
  */
 public class LiferayServletContext implements ServletContext {
 
-	private ServletContext _ctx;
-
-	public LiferayServletContext(ServletContext context) {
-		this._ctx = context;
+	public LiferayServletContext(ServletContext ctx) {
+		_ctx = ctx;
 	}
 
 	public Object getAttribute(String name) {
@@ -58,10 +58,13 @@ public class LiferayServletContext implements ServletContext {
 
 	public ServletContext getContext(String uriPath) {
 		ServletContext refContext = _ctx.getContext(uriPath);
-		if (refContext == _ctx)
+
+		if (refContext == _ctx) {
 			return this;
-		else
+		}
+		else {
 			return refContext;
+		}
 	}
 
 	public String getInitParameter(String name) {
@@ -90,7 +93,7 @@ public class LiferayServletContext implements ServletContext {
 		if (dispatcher != null) {
 			dispatcher = new LiferayRequestDispatcher(dispatcher, name);
 		}
-		
+
 		return dispatcher;
 	}
 
@@ -104,7 +107,7 @@ public class LiferayServletContext implements ServletContext {
 		if (dispatcher != null) {
 			dispatcher = new LiferayRequestDispatcher(dispatcher, path);
 		}
-	
+
 		return dispatcher;
 	}
 
@@ -163,5 +166,7 @@ public class LiferayServletContext implements ServletContext {
 	public String toString() {
 		return _ctx.toString();
 	}
+
+	private ServletContext _ctx;
 
 }

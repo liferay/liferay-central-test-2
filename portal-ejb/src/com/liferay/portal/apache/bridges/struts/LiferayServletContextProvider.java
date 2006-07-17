@@ -55,9 +55,9 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 	}
 
 	public ServletContext getServletContext(ServletContext ctx) {
-		return new LiferayServletContext(ctx);		
+		return new LiferayServletContext(ctx);
 	}
-	
+
 	public HttpServletRequest getHttpServletRequest(
 		GenericPortlet portlet, PortletRequest req) {
 

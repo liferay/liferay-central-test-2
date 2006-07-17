@@ -45,7 +45,7 @@ String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METH
 		/* preload config file to prevent race condition */
 		var fckConfigFile = new Image();
 		fckConfigFile.src = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>";
-		
+
 		function getHTML() {
 			return FCKeditorAPI.GetInstance("FCKeditor1").GetXHTML();
 		}
@@ -53,29 +53,29 @@ String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METH
 		function getText() {
 			return FCKeditorAPI.GetInstance("FCKeditor1").GetXHTML();
 		}
-		
+
 		function initFckArea() {
 			var textArea = document.getElementById("FCKeditor1");
 			textArea.value = parent.<%= initMethod %>();
-			
+
 			var fckEditor = new FCKeditor("FCKeditor1");
 			fckEditor.Config["CustomConfigurationsPath"] = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>";
-		
+
 			fckEditor.BasePath = "fckeditor/";
 			fckEditor.Width = "100%";
 			fckEditor.Height = "100%";
 			fckEditor.ToolbarSet = "Liferay";
-		
+
 			fckEditor.ReplaceTextarea();
 		}
-		
+
 		window.onload = function() {
 			if (document.all) {
 				/* stagger loading for IE */
 				if (parent.fckEditorCount == null) {
 					parent.fckEditorCount = 0;
 				}
-				
+
 				setTimeout("initFckArea()", 200 * parent.fckEditorCount);
 				parent.fckEditorCount++;
 			}
@@ -89,7 +89,7 @@ String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METH
 <body leftmargin="0" marginheight="0" marginwidth="0" rightmargin="0" topmargin="0">
 
 	<textarea id="FCKeditor1" name="FCKeditor1" style="display: none"></textarea>
-	
+
 </body>
 <script>
 </script>

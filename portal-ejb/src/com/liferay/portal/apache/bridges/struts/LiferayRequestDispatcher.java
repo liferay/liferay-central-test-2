@@ -22,7 +22,6 @@
 
 package com.liferay.portal.apache.bridges.struts;
 
-import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletServletRequest;
 import com.liferay.portlet.PortletServletResponse;
@@ -30,6 +29,7 @@ import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.util.StringPool;
 
 import java.io.IOException;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -44,20 +44,20 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * <a href="LiferayRequestDispatcher.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * @author Michael Young
  * @version $Revision: $
- * 
+ *
  */
 public class LiferayRequestDispatcher implements RequestDispatcher {
-	public LiferayRequestDispatcher(RequestDispatcher rd, String path) {
 
+	public LiferayRequestDispatcher(RequestDispatcher rd, String path) {
 		_rd = rd;
 		_path = path;
 	}
 
 	public void forward(ServletRequest req, ServletResponse res)
-		throws ServletException, IOException {
+		throws IOException, ServletException {
 
 		if (req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST) != null) {
 			invoke(req, res, false);
@@ -65,11 +65,10 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 		else {
 			_rd.forward(req, res);
 		}
-		
 	}
 
 	public void include(ServletRequest req, ServletResponse res)
-		throws ServletException, IOException {
+		throws IOException, ServletException {
 
 		if (req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST) != null) {
 			invoke(req, res, true);
@@ -77,25 +76,23 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 		else {
 			_rd.include(req, res);
 		}
-
 	}
 
 	public void invoke(ServletRequest req, ServletResponse res, boolean include)
-		throws ServletException, IOException {
+		throws IOException, ServletException {
 
 		String pathInfo = null;
 		String queryString = null;
 		String requestURI = null;
 		String servletPath = null;
 
-		RenderRequestImpl portletReq = (RenderRequestImpl) 
-			req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
+		RenderRequestImpl portletReq = (RenderRequestImpl)req.getAttribute(
+			WebKeys.JAVAX_PORTLET_REQUEST);
 
-		PortletResponse portletRes = (PortletResponse) 
-			req.getAttribute(WebKeys.JAVAX_PORTLET_RESPONSE);
+		PortletResponse portletRes = (PortletResponse)req.getAttribute(
+			WebKeys.JAVAX_PORTLET_RESPONSE);
 
 		if (_path != null) {
-
 			String pathNoQueryString = _path;
 
 			int pos = _path.indexOf(StringPool.QUESTION);
@@ -105,57 +102,53 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 				queryString = _path.substring(pos + 1, _path.length());
 			}
 
-			List servletURLPatterns = 
+			List servletURLPatterns =
 				portletReq.getPortlet().getServletURLPatterns();
-			
+
 			Iterator itr = servletURLPatterns.iterator();
 
 			while (itr.hasNext()) {
 				String urlPattern = (String)itr.next();
-				
+
 				if (urlPattern.endsWith("/*")) {
 					pos = urlPattern.indexOf("/*");
+
 					urlPattern = urlPattern.substring(0, pos);
-					
+
 					if (pathNoQueryString.startsWith(urlPattern)) {
-						pathInfo = pathNoQueryString.substring(urlPattern.length());
+						pathInfo = pathNoQueryString.substring(
+							urlPattern.length());
 						servletPath = urlPattern;
+
 						break;
 					}
 				}
 			}
 
-			if (pathInfo == null && servletPath == null) {
+			if ((pathInfo == null) && (servletPath == null)) {
 				pathInfo = StringPool.BLANK;
 				servletPath = pathNoQueryString;
 			}
-			
+
 			requestURI = portletReq.getContextPath() + pathNoQueryString;
 		}
 
 		PortletServletRequest portletServletReq = new PortletServletRequest(
-			(HttpServletRequest)req, portletReq, pathInfo, queryString, requestURI,
-			servletPath, portletReq.getSharedSessionAttributes());
+			(HttpServletRequest)req, portletReq, pathInfo, queryString,
+			requestURI, servletPath, portletReq.getSharedSessionAttributes());
 
 		PortletServletResponse portletServletRes =
-			new PortletServletResponse(
-				(HttpServletResponse)res, portletRes);
-
-		if (ServerDetector.isJetty()) {
-			portletServletReq.setAttribute(
-				"org.mortbay.jetty.servlet.Dispatcher.shared_session",
-				Boolean.TRUE);
-		}
+			new PortletServletResponse((HttpServletResponse)res, portletRes);
 
 		if (include) {
 			_rd.include(portletServletReq, portletServletRes);
 		}
 		else {
-			_rd.forward(portletServletReq, portletServletRes);			
+			_rd.forward(portletServletReq, portletServletRes);
 		}
 	}
 
 	private RequestDispatcher _rd;
 	private String _path;
-	
+
 }

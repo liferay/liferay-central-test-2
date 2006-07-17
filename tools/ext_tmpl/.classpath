@@ -33,8 +33,6 @@
 	<classpathentry kind="lib" path="lib/development/saxpath.jar"/>
 	<classpathentry kind="lib" path="lib/development/servlet.jar"/>
 	<classpathentry kind="lib" path="lib/development/smtp.jar"/>
-	<classpathentry kind="lib" path="lib/development/xalan.jar"/>
-	<classpathentry kind="lib" path="lib/development/xml-apis.jar"/>
 	<classpathentry kind="lib" path="lib/global/portlet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/activemq.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ant.jar"/>

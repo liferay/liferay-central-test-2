@@ -35,7 +35,7 @@ String content = "test";
 	function initEditor() {
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}
-	
+
 	function <portlet:namespace />sendMessage() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.SEND %>";
 		document.<portlet:namespace />fm.<portlet:namespace />body.value = parent.<portlet:namespace />editor.getHTML();
@@ -82,7 +82,7 @@ String content = "test";
 		<td><b><%= LanguageUtil.get(pageContext, "to") %>:</b></td>
 		<td><input class="portlet-form-input-field" name="<portlet:namespace />tos" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" /></td>
 	</tr>
-	<tr>	
+	<tr>
 		<td><b><%= LanguageUtil.get(pageContext, "cc") %>:</b></td>
 		<td><input class="portlet-form-input-field" name="<portlet:namespace />ccs" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" /></td>
 	</tr>
@@ -100,7 +100,7 @@ String content = "test";
 			<table cellpadding="0" cellspacing="2" border="0" id="<portlet:namespace />attachments" style="margin-left: -2px; margin-top: -2px;">
 				<tr>
 					<td colspan="3">
-						<input type="button" class="portlet-form-button" value="<%= LanguageUtil.get(pageContext, "add-attachment") %>" onclick="<portlet:namespace />addAttachment()" />
+						<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "add-attachment") %>' onclick="<portlet:namespace />addAttachment()" />
 					</td>
 				</tr>
 			</table>
@@ -111,12 +111,12 @@ String content = "test";
 	<br />
 
 	<div>
-		<input type="button" class="portlet-form-button" value="<%= LanguageUtil.get(pageContext, "send") %>" onclick="<portlet:namespace />sendMessage()" />
-		<input type="button" class="portlet-form-button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onclick='self.location="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/view" /></portlet:renderURL>"' />
+		<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "send") %>' onclick="<portlet:namespace />sendMessage()" />
+		<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onclick='self.location="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/view" /></portlet:renderURL>"' />
 	</div>
 
 	<br />
 
 	<iframe frameborder="0" height="250" id="<portlet:namespace />editor" name="<portlet:namespace />editor" scrolling="no" src="<%= editorUrl %>" width="100%"></iframe>
 
-</form>	
+</form>

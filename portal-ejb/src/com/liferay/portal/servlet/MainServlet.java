@@ -198,7 +198,7 @@ public class MainServlet extends ActionServlet {
 						"/WEB-INF/liferay-portlet.xml")),
 					Http.URLtoString(ctx.getResource(
 						"/WEB-INF/liferay-portlet-ext.xml")),
-					Http.URLtoString(ctx.getResource("/WEB-INF/web.xml"))						
+					Http.URLtoString(ctx.getResource("/WEB-INF/web.xml"))
 				};
 
 				PortletLocalServiceUtil.initEAR(xmls);

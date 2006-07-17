@@ -39,15 +39,15 @@ public class LiferayPortletServlet extends PortletServlet {
 
 	public ServletContext getServletContext() {
 		ServletContext ctx = super.getServletContext();
-		
-		ServletContextProvider scp = (ServletContextProvider) ctx.getAttribute(
-			ServletContextProvider.
-			STRUTS_BRIDGES_CONTEXT_PROVIDER);
-		
+
+		ServletContextProvider scp =
+			(ServletContextProvider)ctx.getAttribute(
+				ServletContextProvider.STRUTS_BRIDGES_CONTEXT_PROVIDER);
+
 		if (scp != null) {
-			ctx = scp.getServletContext(ctx); 
+			ctx = scp.getServletContext(ctx);
 		}
-		
+
 		return ctx;
 	}
 

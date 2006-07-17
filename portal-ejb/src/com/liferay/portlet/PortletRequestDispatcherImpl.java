@@ -23,7 +23,6 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.servlet.NamespaceServletRequest;
-import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.struts.StrutsURLEncoder;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -185,31 +184,34 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 					httpReq = dynamicReq;
 				}
 
-				List servletURLPatterns = 
+				List servletURLPatterns =
 					reqImpl.getPortlet().getServletURLPatterns();
-				
+
 				Iterator itr = servletURLPatterns.iterator();
 
 				while (itr.hasNext()) {
 					String urlPattern = (String)itr.next();
-					
+
 					if (urlPattern.endsWith("/*")) {
 						pos = urlPattern.indexOf("/*");
+
 						urlPattern = urlPattern.substring(0, pos);
-						
+
 						if (pathNoQueryString.startsWith(urlPattern)) {
-							pathInfo = pathNoQueryString.substring(urlPattern.length());
+							pathInfo = pathNoQueryString.substring(
+								urlPattern.length());
 							servletPath = urlPattern;
+
 							break;
 						}
 					}
 				}
 
-				if (pathInfo == null && servletPath == null) {
+				if ((pathInfo == null) && (servletPath == null)) {
 					pathInfo = StringPool.BLANK;
 					servletPath = pathNoQueryString;
 				}
-				
+
 				requestURI = req.getContextPath() + pathNoQueryString;
 			}
 
@@ -230,12 +232,6 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 					themeDisplay.getPathMain(),
 					(String)_portletCtx.getAttribute(Globals.SERVLET_KEY),
 					(com.liferay.portlet.PortletURLImpl)res.createRenderURL()));
-			}
-
-			if (ServerDetector.isJetty()) {
-				portletServletReq.setAttribute(
-					"org.mortbay.jetty.servlet.Dispatcher.shared_session",
-					Boolean.TRUE);
 			}
 
 			_rd.include(portletServletReq, portletServletRes);

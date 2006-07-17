@@ -47,7 +47,6 @@ import com.liferay.util.ObjectValuePair;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.apache.bridges.struts.LiferayServletContextProviderWrapper;
 import com.liferay.util.lucene.Indexer;
 
 import java.util.HashSet;
@@ -119,14 +118,13 @@ public class HotDeployPortletListener implements HotDeployListener {
 			List portlets = PortletLocalServiceUtil.initWAR(
 				servletContextName, xmls);
 
-System.out.println("1");	
 			// Class loader
 
 			ClassLoader portletClassLoader = event.getContextClassLoader();
 
 			ctx.setAttribute(
 				PortletServlet.PORTLET_CLASS_LOADER, portletClassLoader);
-System.out.println("1");	
+
 			// Portlet context wrapper
 
 			boolean strutsBridges = false;
@@ -142,7 +140,6 @@ System.out.println("1");
 				javax.portlet.Portlet portletInstance =
 					(javax.portlet.Portlet)portletClass.newInstance();
 
-				System.out.println("1.2");	
 				if (ClassUtil.isSubclass(portletClass,
 					StrutsPortlet.class.getName())) {
 
@@ -156,7 +153,6 @@ System.out.println("1");
 						portlet.getIndexerClass()).newInstance();
 				}
 
-				System.out.println("1.3");	
 				Scheduler schedulerInstance = null;
 
 				if (Validator.isNotNull(portlet.getSchedulerClass())) {
@@ -165,7 +161,6 @@ System.out.println("1");
 				}
 
 				PreferencesValidator prefsValidator = null;
-				System.out.println("1.4");	
 
 				if (Validator.isNotNull(portlet.getPreferencesValidator())) {
 					prefsValidator =
@@ -187,7 +182,6 @@ System.out.println("1");
 								" does not have valid default preferences");
 					}
 				}
-				System.out.println("1.5");	
 
 				Map resourceBundles = null;
 
@@ -215,7 +209,6 @@ System.out.println("1");
 						}
 					}
 				}
-				System.out.println("1.6");	
 
 				Map customUserAttributes = CollectionFactory.getHashMap();
 
@@ -232,7 +225,6 @@ System.out.println("1");
 						portletClassLoader.loadClass(
 							attrCustomClass).newInstance());
 				}
-				System.out.println("1.7");	
 
 				PortletContextWrapper pcw = new PortletContextWrapper(
 					portlet.getPortletId(), ctx, portletInstance,
@@ -241,17 +233,14 @@ System.out.println("1");
 
 				PortletContextPool.put(portlet.getPortletId(), pcw);
 			}
-			System.out.println("2");	
 
 			// Struts bridges
 
 			if (strutsBridges) {
 				ctx.setAttribute(
-					ServletContextProvider.
-						STRUTS_BRIDGES_CONTEXT_PROVIDER,
+					ServletContextProvider.STRUTS_BRIDGES_CONTEXT_PROVIDER,
 					new LiferayServletContextProvider());
 			}
-			System.out.println("3");	
 
 			// Portlet display
 
@@ -272,7 +261,6 @@ System.out.println("1");
 			}
 
 			// Variables
-			System.out.println("4");	
 
 			_vars.put(
 				servletContextName, new ObjectValuePair(companyIds, portlets));

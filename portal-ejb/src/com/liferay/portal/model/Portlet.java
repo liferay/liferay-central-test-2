@@ -157,7 +157,7 @@ public class Portlet extends PortletModel {
 				   Map initParams, Integer expCache, Map portletModes,
 				   Set supportedLocales, String resourceBundle,
 				   PortletInfo portletInfo, Set userAttributes,
-				   Map customUserAttributes, boolean warFile, 
+				   Map customUserAttributes, boolean warFile,
 				   List servletURLPatterns) {
 
 		setPortletId(portletId);
@@ -200,7 +200,7 @@ public class Portlet extends PortletModel {
 		_customUserAttributes = customUserAttributes;
 		_warFile = warFile;
 		_servletURLPatterns = servletURLPatterns;
-		
+
 		if (_instanceable) {
 			_clonedInstances = new Hashtable();
 		}
@@ -1357,8 +1357,8 @@ public class Portlet extends PortletModel {
 	 */
 	public void setServletURLPatterns(List servletURLPatterns) {
 		_servletURLPatterns = servletURLPatterns;
-	}	
-	
+	}
+
 	/**
 	 * Initialize the portlet instance.
 	 */

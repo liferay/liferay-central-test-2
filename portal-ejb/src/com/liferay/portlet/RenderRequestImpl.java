@@ -423,6 +423,10 @@ public class RenderRequestImpl implements RenderRequest {
 		return _portletName;
 	}
 
+	public Portlet getPortlet() {
+		return _portlet;
+	}
+
 	public boolean isPrivateRequestAttributes() {
 		return _portlet.isPrivateRequestAttributes();
 	}
@@ -447,14 +451,6 @@ public class RenderRequestImpl implements RenderRequest {
 
 	public boolean isAction() {
 		return false;
-	}
-
-	public Portlet getPortlet() {
-		return _portlet;
-	}
-
-	public void setPortlet(Portlet portlet) {
-		_portlet = portlet;
 	}
 
 	protected RenderRequestImpl() {

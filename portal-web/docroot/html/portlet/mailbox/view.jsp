@@ -148,7 +148,7 @@ String mailLineColor = "#b3b6b0";
 	</td>
 	<td valign="top" width="100%">
 		<div id="portlet-mail-msgs-pane">
-		
+
 			<table cellspacing="0" cellpadding="0" border="0" width="100%">
 			<tr>
 				<td class="portlet-mail-msgs-pane-td" width="100%">
@@ -181,7 +181,7 @@ String mailLineColor = "#b3b6b0";
 							</td>
 						</tr>
 						</table>
-						
+
 						<table cellspacing="0" cellpadding="0" border="0">
 						<tr>
 							<td>

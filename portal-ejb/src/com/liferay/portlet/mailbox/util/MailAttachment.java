@@ -28,7 +28,7 @@ package com.liferay.portlet.mailbox.util;
  *
  */
 public class MailAttachment {
-        
+
     public String getContentType() {
         return _contentType;
     }

@@ -27,6 +27,7 @@ import java.util.Locale;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletResponse;
 import javax.portlet.RenderResponse;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
@@ -44,7 +45,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		super(res);
 
 		_portletResponse = portletResponse;
-		
+
 		if (_portletResponse instanceof ActionResponse) {
 			_isAction = true;
 		}
@@ -68,7 +69,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	public String encodeURL(String path) {
 		if (_isAction == false) {
 			RenderResponse res = (RenderResponse)_portletResponse;
-			
+
 			return res.encodeURL(path);
 		}
 		else {
@@ -79,7 +80,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	public Locale getLocale() {
 		if (_isAction == false) {
 			RenderResponse res = (RenderResponse)_portletResponse;
-			
+
 			return res.getLocale();
 		}
 		else {
@@ -89,7 +90,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	public int getBufferSize() {
 		if (_isAction == false) {
 			RenderResponse res = (RenderResponse)_portletResponse;
-			
+
 			return res.getBufferSize();
 		}
 		else {
@@ -100,7 +101,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	public boolean isCommitted() {
 		if (_isAction == false) {
 			RenderResponse res = (RenderResponse)_portletResponse;
-			
+
 			return res.isCommitted();
 		}
 		else {

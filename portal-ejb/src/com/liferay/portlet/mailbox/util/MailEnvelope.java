@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.mailbox.util;
 
-import java.util.Date;
-
 import com.liferay.util.StringPool;
+
+import java.util.Date;
 
 /**
  * <a href="Envelope.java.html"><b><i>View Source</i></b></a>
@@ -42,7 +42,7 @@ public class MailEnvelope {
 	public String getRecipient() {
 		return _recipient;
 	}
-	
+
 	public void setRecipient(String recipient) {
 		_recipient = recipient;
 	}
@@ -62,11 +62,11 @@ public class MailEnvelope {
 	public void setDate(Date date) {
 		_date = date;
 	}
-	
+
 	public long getMsgUID() {
 		return _msgUID;
 	}
-	
+
 	public void setMsgUID(long msgUID) {
 		_msgUID = msgUID;
 	}
@@ -74,7 +74,7 @@ public class MailEnvelope {
 	public boolean isRecent() {
 		return _recent;
 	}
-	
+
 	public void setRecent(boolean recent) {
 		_recent = recent;
 	}
@@ -82,7 +82,7 @@ public class MailEnvelope {
 	public boolean isFlagged() {
 		return _flagged;
 	}
-	
+
 	public void setFlagged(boolean flagged) {
 		_flagged = flagged;
 	}
@@ -90,23 +90,23 @@ public class MailEnvelope {
 	public boolean isAnswered() {
 		return _answered;
 	}
-	
+
 	public void setAnswered(boolean answered) {
 		_answered = answered;
 	}
-	
+
 	private String _recipient;
 
 	private String _subject;
 
 	private Date _date;
-	
+
 	private long _msgUID;
 
 	private boolean _recent;
 
 	private boolean _flagged;
-	
+
 	private boolean _answered;
-	
+
 }

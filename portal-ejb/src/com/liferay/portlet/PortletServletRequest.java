@@ -28,15 +28,14 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.SharedSessionWrapper;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.PortletRequest;
-import javax.servlet.ServletInputStream;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
@@ -71,11 +70,11 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 
 	public Object getAttribute(String name) {
 		Object retVal = super.getAttribute(name);
-		
+
 		if (name == null) {
 			return retVal;
 		}
-		
+
 		RenderRequestImpl reqImpl = (RenderRequestImpl)_portletRequest;
 
 		if (ServerDetector.isWebSphere() && reqImpl.getPortlet().isWARFile()) {
@@ -95,8 +94,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 				retVal = _servletPath;
 			}
 		}
-		
-		
+
 		return retVal;
 	}
 

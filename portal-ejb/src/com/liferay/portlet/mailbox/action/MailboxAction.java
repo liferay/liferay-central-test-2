@@ -22,18 +22,6 @@
 
 package com.liferay.portlet.mailbox.action;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.SortedSet;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.mailbox.util.MailEnvelope;
@@ -43,6 +31,19 @@ import com.liferay.portlet.mailbox.util.MailUtil;
 import com.liferay.portlet.mailbox.util.comparator.DateComparator;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.SortedSet;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * <a href="MailboxAction.java.html"><b><i>View Source</i></b></a>
@@ -59,7 +60,7 @@ public class MailboxAction extends JSONAction {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 		String rtString = "";
-		
+
 		if ("getFolders".equals(cmd)) {
 			rtString = _getFolders(req);
 		}
@@ -75,43 +76,43 @@ public class MailboxAction extends JSONAction {
 		else if ("deleteMessages".equals(cmd)) {
 			_deleteMessages(req);
 		}
-		
+
 		return rtString;
 	}
-	
+
 	private String _deleteMessages(HttpServletRequest req) {
 		try {
 			String messages = ParamUtil.getString(req, "messages");
 			long msgList[] = StringUtil.split(messages, ",", -1L);
-			
+
 			MailUtil.deleteMessages(req.getSession(), msgList);
 		}
 		catch (Exception e) {
 		}
-		
+
 		return null;
 	}
-	
+
 	private String _getFolders(HttpServletRequest req) {
 		JSONObject jsonObj = new JSONObject();
 		JSONArray jFolders = new JSONArray();
-		
+
 		try {
 			int count = 1;
 
 			List folders = MailUtil.getAllFolders(req.getSession());
-			
+
 			for (int i = 0; i < folders.size(); i++) {
 				MailFolder folderObj = (MailFolder)folders.get(i);
 				JSONObject jFolderObj = new JSONObject();;
-				
+
 				String folderName = folderObj.getName();
-				
+
 				jFolderObj.put("name", folderName);
 				jFolderObj.put("id", folderName);
 				jFolderObj.put("newCount", folderObj.getNewMessageCount());
 				jFolderObj.put("totalCount", folderObj.getMessageCount());
-				
+
 				if (MailUtil.MAIL_INBOX_NAME.equals(folderName)) {
 					jFolders.put(0, jFolderObj);
 				}
@@ -122,74 +123,74 @@ public class MailboxAction extends JSONAction {
 		}
 		catch (Exception e) {
 		}
-		
+
 		jsonObj.put("folders", jFolders);
-		
+
 		return jsonObj.toString();
 	}
-	
+
 	private String _getMessage(HttpServletRequest req) {
 		JSONObject jsonObj = new JSONObject();
-		
+
 		try {
-			String folderId = ParamUtil.getString(req, "folderId");			
+			String folderId = ParamUtil.getString(req, "folderId");
 			int messageId = ParamUtil.getInteger(req, "messageId");
 
 			MailUtil.setCurrentFolder(req.getSession(), folderId);
-			
+
 			MailMessage mm = MailUtil.getMessage(req.getSession(), messageId);
 			jsonObj.put("body", mm.getHtmlBody());
 			jsonObj.put("id", messageId);
 		}
 		catch (Exception e) {
 		}
-		
+
 		return jsonObj.toString();
 	}
-	
+
 	private String _getPreviewHeaders(HttpServletRequest req) {
 		JSONObject jsonObj = new JSONObject();
-			
+
 		try {
-			String folderId = ParamUtil.getString(req, "folderId");			
+			String folderId = ParamUtil.getString(req, "folderId");
 
 			MailUtil.setCurrentFolder(req.getSession(), folderId);
 
 			SortedSet set = MailUtil.getEnvelopes(req.getSession(),
 				new DateComparator(false));
-			
+
 			JSONArray meArray = new JSONArray();
-			
+
 			for (Iterator itr = set.iterator(); itr.hasNext(); ) {
 				MailEnvelope me = (MailEnvelope)itr.next();
 				JSONObject jMe = new JSONObject();
-				
+
 				jMe.put("id", me.getMsgUID());
 				jMe.put("email", me.getRecipient());
 				jMe.put("subject", me.getSubject());
 				jMe.put("date", me.getDate().toString());
 				meArray.put(jMe);
 			}
-			
+
 			jsonObj.put("headers", meArray);
 		}
 		catch (Exception e) {
 		}
-		
+
 		return jsonObj.toString();
 	}
-	
+
 	private String _moveMessages(HttpServletRequest req) {
 		try {
 			String messages = ParamUtil.getString(req, "messages");
 			String toFolder = ParamUtil.getString(req, "folderId");
 			long msgList[] = StringUtil.split(messages, ",", -1L);
-			
+
 			MailUtil.moveMessages(req.getSession(), msgList, toFolder);
 		}
 		catch (Exception e) {
 		}
-		
+
 		return null;
 	}
 

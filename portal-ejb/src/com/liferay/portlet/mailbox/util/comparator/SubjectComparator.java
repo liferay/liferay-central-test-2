@@ -21,9 +21,9 @@
  */
 package com.liferay.portlet.mailbox.util.comparator;
 
-import java.util.Comparator;
-
 import com.liferay.portlet.mailbox.util.MailEnvelope;
+
+import java.util.Comparator;
 
 /**
  * <a href="SubjectComparator.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +32,7 @@ import com.liferay.portlet.mailbox.util.MailEnvelope;
  *
  */
 public class SubjectComparator implements Comparator {
-	
+
 	public SubjectComparator(boolean asc) {
 		_asc = asc;
 	}
@@ -40,12 +40,12 @@ public class SubjectComparator implements Comparator {
 	public int compare(Object arg0, Object arg1) {
 		MailEnvelope me0 = (MailEnvelope)arg0;
 		MailEnvelope me1 = (MailEnvelope)arg1;
-		
+
 		if (_asc) {
-			return me0.getSubject().compareTo(me1.getSubject());			
+			return me0.getSubject().compareTo(me1.getSubject());
 		}
 		else {
-			return me1.getSubject().compareTo(me0.getSubject());			
+			return me1.getSubject().compareTo(me0.getSubject());
 		}
 	}
 

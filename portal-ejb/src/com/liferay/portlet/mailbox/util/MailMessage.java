@@ -21,15 +21,15 @@
  */
 package com.liferay.portlet.mailbox.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.mail.Address;
-
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.mail.Address;
 
 /**
  * <a href="MailMessage.java.html"><b><i>View Source</i></b></a>
@@ -38,27 +38,27 @@ import com.liferay.util.Validator;
  *
  */
 public class MailMessage {
-	
+
 	public Address getFrom() {
 		return _from;
 	}
-	
+
 	public void setFrom(Address from) {
 		_from = from;
 	}
-	
+
 	public Address [] getTo() {
 		return _to;
 	}
-	
+
 	public void setTo(Address [] to) {
 		_to = to;
 	}
-	
+
 	public Address [] getCc() {
 		return _cc;
 	}
-	
+
 	public void setCc(Address [] cc) {
 		_cc = cc;
 	}
@@ -66,7 +66,7 @@ public class MailMessage {
 	public Address [] getBcc() {
 		return _bcc;
 	}
-	
+
 	public void setBcc(Address [] bcc) {
 		_bcc = bcc;
 	}
@@ -74,7 +74,7 @@ public class MailMessage {
     public String getSubject() {
     	return _subject;
     }
-    
+
     public void setSubject(String subject) {
     	_subject = subject;
     }
@@ -96,12 +96,12 @@ public class MailMessage {
     		_plainBody += StringPool.NEW_LINE + StringPool.NEW_LINE + plainBody;
     	}
     }
-    
+
     public void setPlainBody(String plainBody) {
     	_plainBody = plainBody;
     }
 
-    public String getHtmlBody() { 
+    public String getHtmlBody() {
     	if (Validator.isNotNull(_htmlBody)) {
         	return _htmlBody;
     	}
@@ -130,28 +130,28 @@ public class MailMessage {
 	public void appendAttachment(MailAttachment ma) {
 		_attachments.add(ma);
 	}
-	
+
 	public boolean isSimple() {
 		if (Validator.isNotNull(_htmlBody) || !_attachments.isEmpty()) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	private Address _from;
 
 	private Address [] _to;
-	
+
 	private Address [] _cc;
-	
+
 	private Address [] _bcc;
-	
+
 	private String _subject;
-	
+
 	private String _plainBody;
-	
+
 	private String _htmlBody;
-	
+
 	private List _attachments = new ArrayList();
 
 }

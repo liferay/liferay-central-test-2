@@ -97,7 +97,7 @@ public interface Constants {
 	// Content types
 
 	public static final String MESSAGE_RFC822 = "message/rfc822";
-	
+
 	public static final String MULTIPART_ALTERNATE = "multipart/alternate";
 
 	public static final String MULTIPART_MIXED = "multipart/mixed";
