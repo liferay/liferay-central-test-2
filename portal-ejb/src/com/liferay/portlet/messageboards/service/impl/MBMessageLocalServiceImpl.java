@@ -757,13 +757,14 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		// Message
 
-		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
+		MBMessage message = MBMessageUtil.findByPrimaryKey(
+			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
+
+		MBCategory category = getCategory(message, categoryId);
+		String oldCategoryId = message.getCategoryId();
 		Date now = new Date();
 
 		validate(subject, body);
-
-		MBMessage message = MBMessageUtil.findByPrimaryKey(
-			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
 
 		// File attachments
 
@@ -817,6 +818,34 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		category.setLastPostDate(now);
 
 		MBCategoryUtil.update(category);
+
+		if (!oldCategoryId.equals(category.getCategoryId())) {
+
+			// Messages
+
+			Iterator itr = MBMessageUtil.findByCategoryId(
+				oldCategoryId).iterator();
+
+			while (itr.hasNext()) {
+				MBMessage curMessage = (MBMessage)itr.next();
+
+				curMessage.setCategoryId(category.getCategoryId());
+
+				MBMessageUtil.update(curMessage);
+			}
+
+			// Threads
+
+			itr = MBThreadUtil.findByCategoryId(oldCategoryId).iterator();
+
+			while (itr.hasNext()) {
+				MBThread thread = (MBThread)itr.next();
+
+				thread.setCategoryId(category.getCategoryId());
+
+				MBThreadUtil.update(thread);
+			}
+		}
 
 		// Lucene
 
@@ -901,6 +930,26 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		}
 
 		return RSSUtil.export(channel, version);
+	}
+
+	protected MBCategory getCategory(MBMessage message, String categoryId)
+		throws PortalException, SystemException {
+
+		if (!message.getCategoryId().equals(categoryId)) {
+			MBCategory oldCategory = MBCategoryUtil.findByPrimaryKey(
+				message.getCategoryId());
+
+			MBCategory newCategory = MBCategoryUtil.fetchByPrimaryKey(
+				categoryId);
+
+			if ((newCategory == null) ||
+				(!oldCategory.getGroupId().equals(newCategory.getGroupId()))) {
+
+				categoryId = message.getCategoryId();
+			}
+		}
+
+		return MBCategoryUtil.findByPrimaryKey(categoryId);
 	}
 
 	protected long logAddMessage(String messageId, long start, int block) {

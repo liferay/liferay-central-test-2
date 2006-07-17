@@ -46,6 +46,7 @@ import com.liferay.util.lucene.Hits;
 
 import java.io.IOException;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -77,8 +78,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 		User user = UserUtil.findByPrimaryKey(userId);
 		String groupId = PortalUtil.getPortletGroupId(plid);
-		parentCategoryId = getParentCategoryId(
-			user.getCompanyId(), parentCategoryId);
+		parentCategoryId = getParentCategoryId(groupId, parentCategoryId);
 		Date now = new Date();
 
 		validate(name);
@@ -356,11 +356,11 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 			String name, String description)
 		throws PortalException, SystemException {
 
-		parentCategoryId = getParentCategoryId(companyId, parentCategoryId);
+		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
+
+		parentCategoryId = getParentCategoryId(category, parentCategoryId);
 
 		validate(name);
-
-		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
 
 		category.setModifiedDate(new Date());
 		category.setParentCategoryId(parentCategoryId);
@@ -373,24 +373,56 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 	}
 
 	protected String getParentCategoryId(
-			String companyId, String parentCategoryId)
+			String groupId, String parentCategoryId)
 		throws SystemException {
 
 		if (!parentCategoryId.equals(MBCategory.DEFAULT_PARENT_CATEGORY_ID)) {
-
-			// Ensure parent category exists and belongs to the proper company
-
 			MBCategory parentCategory =
 				MBCategoryUtil.fetchByPrimaryKey(parentCategoryId);
 
 			if ((parentCategory == null) ||
-				(!companyId.equals(parentCategory.getCompanyId()))) {
+				(!groupId.equals(parentCategory.getGroupId()))) {
 
 				parentCategoryId = MBCategory.DEFAULT_PARENT_CATEGORY_ID;
 			}
 		}
 
 		return parentCategoryId;
+	}
+
+	protected String getParentCategoryId(
+			MBCategory category, String parentCategoryId)
+		throws SystemException {
+
+		if (parentCategoryId.equals(MBCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+			return parentCategoryId;
+		}
+
+		if (category.getCategoryId().equals(parentCategoryId)) {
+			return category.getParentCategoryId();
+		}
+		else {
+			MBCategory parentCategory =
+				MBCategoryUtil.fetchByPrimaryKey(parentCategoryId);
+
+			if ((parentCategory == null) ||
+				(!category.getGroupId().equals(parentCategory.getGroupId()))) {
+
+				return category.getParentCategoryId();
+			}
+
+			List subcategoryIds = new ArrayList();
+
+			getSubcategoryIds(
+				subcategoryIds, category.getGroupId(),
+				category.getCategoryId());
+
+			if (subcategoryIds.contains(parentCategoryId)) {
+				return category.getParentCategoryId();
+			}
+
+			return parentCategoryId;
+		}
 	}
 
 	protected void validate(String name) throws PortalException {
