@@ -47,11 +47,8 @@ String mailLineColor = "#b3b6b0";
 	overflow: hidden;
 	width: 80px;
 }
-#portlet-mail-folder-pane ul li { margin: 1px 0 1px 0; }
-.portlet-mail-folder-selected {
-	background-color: <%= colorScheme.getLayoutTabBg() %>;
-}
-#portlet-mail-folder-pane ul li { padding: 2px 2px 2px 15px; }
+.portlet-mail-folder-selected { background-color: <%= colorScheme.getLayoutTabBg() %>; }
+#portlet-mail-folder-pane ul li { padding: 2px 2px 2px 10px; margin: 1px 0 1px 0}
 #portlet-mail-folder-pane-td { border: 1px solid <%= mailLineColor %>; }
 #portlet-mail-folder-pane { overflow: hidden; width: 100px; }
 #portlet-mail-msgs-pane { width: 100%; }
@@ -69,9 +66,7 @@ String mailLineColor = "#b3b6b0";
 	</c:if>
 	width: 100%;
 }
-#portlet-mail-msgs-preview-pane table {
-	cursor: pointer;
-}
+#portlet-mail-msgs-preview-pane table { cursor: pointer; }
 #portlet-mail-msgs-handle {
 	background-color: <%= mailBgColor %>;
 	font-size: 0;
@@ -95,9 +90,7 @@ String mailLineColor = "#b3b6b0";
 #portlet-mail-msgs-title-subject div { padding: 2px 0 2px 5px; }
 #portlet-mail-msgs-title-received { overflow: hidden; width: 200px; }
 #portlet-mail-msgs-title-received div { padding: 2px 0 2px 5px; }
-.portlet-mail-msgs-title {
-	background-color: <%= colorScheme.getLayoutTabBg() %>;
-}
+.portlet-mail-msgs-title { background-color: <%= colorScheme.getLayoutTabBg() %>; }
 
 #portlet-mail-msgs-from-handle { }
 #portlet-mail-msgs-subject-handle { }

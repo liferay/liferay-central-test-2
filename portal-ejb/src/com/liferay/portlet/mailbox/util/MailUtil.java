@@ -232,7 +232,7 @@ public class MailUtil {
         return envelopes;
 	}
 
-	public static MailMessage getMessage(HttpSession ses, int messageUID)
+	public static MailMessage getMessage(HttpSession ses, long messageUID)
 		throws Exception {
 
 		MailMessage mm = null;
@@ -248,6 +248,8 @@ public class MailUtil {
 			mm.setCc(message.getRecipients(RecipientType.CC));
 			mm.setBcc(message.getRecipients(RecipientType.BCC));
 			mm = _getContent(message, mm);
+
+			MailUtil._setCurrentMessage(ses, messageUID);
 		}
 		catch (MessagingException me) {
 			_log.error(me);
@@ -355,6 +357,10 @@ public class MailUtil {
 		throws Exception {
 
 		_getFolder(ses, folderName);
+	}
+
+	private static void _setCurrentMessage(HttpSession ses, long messageId) {
+		ses.setAttribute(WebKeys.MAIL_MESSAGE, new Long(messageId));
 	}
 
 	private static void _closeFolder(HttpSession ses) {
