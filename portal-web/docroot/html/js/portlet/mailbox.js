@@ -20,17 +20,17 @@ function MailSummaryObject(sender, subject, date, id) {
 var Mailbox = {
 	currentFolder : null,
 	currentFolderId : "",
+	currentMessage : null,
 	currentMessageId : null,
 	dragging : false,
 	dragIndicator : null,
 	dragStart : null,
 	foldersList : null,
 	groupStart : null,
-	highlightColor : "#c3d4ee",
+	colorHighlight : "#c3d4ee",
 	lastSelected : null,
 	messageTimer : null,
 	summaryList : { head : null, tail : null },
-	userId : "",
 		
 	checkFolderLocation : function(coord, update) {
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
@@ -45,14 +45,14 @@ var Mailbox = {
 				folderItem.seOffset = Coordinates.southeastOffset(folderItem, true);
 			}
 			
-			if (coord.inside(folderItem.nwOffset, folderItem.seOffset)) {
-				if (folderItem.folder.id != Mailbox.currentFolder.id) {
-					folderItem.style.backgroundColor = Mailbox.highlightColor;
-					foundInside = true;
+			if (folderItem.folder.id != Mailbox.currentFolder.id) {
+				if (coord.inside(folderItem.nwOffset, folderItem.seOffset)) {
+						folderItem.style.backgroundColor = Mailbox.colorHighlight;
+						foundInside = true;
 				}
-			}
-			else {
-				folderItem.style.backgroundColor = "transparent";
+				else {
+					folderItem.style.backgroundColor = "transparent";
+				}
 			}
 		}
 		
@@ -139,7 +139,7 @@ var Mailbox = {
 			(deleteList.length > 1 ? "s" : "") + " from " + Mailbox.currentFolder.name + "?";
 		
 		if (deleteList.length > 0 && confirm(confirmMsg)) {
-			loadPage("/c/mailbox/action", "cmd=deleteMessages&folderId=" + Mailbox.currentFolder.id);
+			loadPage("/c/mailbox/action", "cmd=deleteMessages&folderId=" + Mailbox.currentFolder.id + "&messages=" + deleteList);
 			Mailbox.removeSelectedMessages();
 		}
 	},	
@@ -231,9 +231,15 @@ var Mailbox = {
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
 		var folderList = document.createElement("ul");
 		var folders = foldersObject.folders;
+		var selectedFolder = null;
 		Mailbox.foldersList = folders;
 		
+		var animation = folderPane.getElementsByTagName("div")[0];
+		animation.parentNode.removeChild(animation);
+		
 		if (folders.length > 0) {
+			selectedFolder = folders[0];
+			
 			for (var i = 0; i < folders.length; i++) {
 				var folderItem = document.createElement("li");
 				folderItem.innerHTML = folders[i].name;
@@ -242,27 +248,24 @@ var Mailbox = {
 				folderList.appendChild(folderItem);
 				
 				if (folders[i].id == Mailbox.currentFolderId) {
-					Mailbox.setCurrentFolder(folders[i]);
+					selectedFolder = folders[i];
 				}
 			}
 			
 			folderPane.appendChild(folderList);
 			
-			if (Mailbox.currentFolder == null) {
-				Mailbox.setCurrentFolder(folders[0]);
-			}
+			Mailbox.setCurrentFolder(selectedFolder);
 		}
 		
 		Mailbox.getPreview();
 	},
 	
 	getMessageDetails : function(messageId) {
-		if (messageId != Mailbox.currentMessageId) {
+		if (!Mailbox.currentMessage || messageId != Mailbox.currentMessage.id) {
 			loadPage("/c/mailbox/action",
 				"cmd=getMessage&messageId=" + messageId + "&folderId=" + Mailbox.currentFolder.id,
 				Mailbox.getMessageDetailsReturn, messageId);
 				
-			Mailbox.currentMessageId = messageId;
 		}
 	},
 	
@@ -270,7 +273,17 @@ var Mailbox = {
 		var messageObj = eval("(" + xmlHttpReq.responseText + ")");
 		var mailDetails = document.getElementById("portlet-mail-msg-body");
 		
+		Mailbox.currentMessage = messageObj;
+		Mailbox.currentMessage.id = messageId;
+		Mailbox.currentMessageId = messageId;
+		
 		mailDetails.innerHTML = messageObj.body;
+		
+		var styles = mailDetails.getElementsByTagName("style");
+		
+		for (var i = 0; i < styles.length; i++) {
+			styles[i].parentNode.removeChild(styles[i]);
+		}
 	},
 	
 	getPreview : function () {
@@ -315,6 +328,14 @@ var Mailbox = {
 			msgsSender.appendChild(sender);
 			msgsSubject.appendChild(subject);
 			msgsDate.appendChild(date);
+			
+			if (Mailbox.currentMessageId == msObj.id) {
+				Mailbox.summaryHighlight(msObj);
+			}
+		}
+		
+		if (Mailbox.currentMessage == null && Mailbox.currentMessageId != null) {
+			Mailbox.getMessageDetails(Mailbox.currentMessageId);
 		}
 	},
 	
@@ -618,11 +639,12 @@ var Mailbox = {
 		
 		for (var i = 0; i < folderList.length; i++) {
 			var folderItem = folderList[i];
+			
 			if (Mailbox.currentFolder.id == folderItem.folder.id) {
-				folderItem.className = "portlet-mail-folder-selected";
+				folderItem.style.backgroundColor = Mailbox.colorSelected;
 			}
 			else {
-				folderItem.className = "";
+				folderItem.style.backgroundColor = "transparent";
 			}
 		}
 	},
@@ -642,14 +664,13 @@ var Mailbox = {
 		}
 		else {
 			msObj.selected = true;
-			setColor = Mailbox.highlightColor;
+			setColor = Mailbox.colorHighlight;
+			Mailbox.lastSelected = msObj;
 			
 			/* Don't display details if modifier key was pressed */
 			if (!modifierOn) {
 				Mailbox.messageTimer = setTimeout("Mailbox.getMessageDetails("+msObj.id+")", 500);
 			}
-			
-			Mailbox.lastSelected = msObj;
 		}
 		
 		while (summaryField) {
