@@ -23,6 +23,7 @@
 package com.liferay.portlet.mailbox.action;
 
 import com.liferay.portal.model.User;
+import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
@@ -127,7 +128,7 @@ public class EditMessageAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			_log.error("Unable to send message");
+			_log.error(StackTraceUtil.getStackTrace(e));
 			//setForward(req, "portlet.mailbox.error");
 		}
 	}

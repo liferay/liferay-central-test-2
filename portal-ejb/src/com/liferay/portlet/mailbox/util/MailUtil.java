@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.SortedSet;
@@ -474,8 +475,13 @@ public class MailUtil {
 			String bccName = ((InternetAddress)bccs[i]).getPersonal();
 			email.addBcc(bccAddy, bccName);
 		}
-
+		
+		email.setSentDate(new Date());
 		email.send();
+
+		Message [] sent = { email.getMimeMessage() };
+		setCurrentFolder(ses, MAIL_SENT_NAME);
+		_getCurrentFolder(ses).appendMessages(sent);
 	}
 
 	public static void setCurrentFolder(HttpSession ses, String folderName)
@@ -598,10 +604,10 @@ public class MailUtil {
 
 	private static IMAPFolder _getCurrentFolder(PortletSession ses)
 		throws Exception {
-		
+
 		IMAPFolder folder = (IMAPFolder)ses.getAttribute(
 			WebKeys.MAIL_FOLDER, PortletSession.APPLICATION_SCOPE);
-		
+
 		return _getCurrentFolder(folder);
 	}
 
