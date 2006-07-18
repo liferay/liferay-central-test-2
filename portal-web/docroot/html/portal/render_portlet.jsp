@@ -61,6 +61,11 @@ catch (NoSuchResourceException nsre) {
 			Group group = layout.getGroup();
 
 			if (group.isCommunity()) {
+				if (GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS) ||
+					LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE)) {
+
+					addDefaultResource = true;
+				}
 			}
 			else if (group.isUser()) {
 				if (group.getClassPK().equals(user.getUserId())) {
