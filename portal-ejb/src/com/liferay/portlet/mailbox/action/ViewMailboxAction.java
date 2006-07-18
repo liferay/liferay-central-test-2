@@ -60,8 +60,6 @@ public class ViewMailboxAction extends PortletAction {
 			req.setAttribute("messageId", messageId);
 		}
 		
-		System.out.println("ViewMailboxAction 3");
-
 		return mapping.findForward("portlet.mailbox.view");
 	}
 
