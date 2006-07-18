@@ -178,15 +178,14 @@ public class MailUtil {
 		
 		email.setSentDate(new Date());
 
-		long completedMessageUID;
+		long completedMessageUID = -1L;
+
 		if (send) {
 			email.send();
 
 			Message [] sent = { email.getMimeMessage() };
 			setCurrentFolder(ses, MAIL_SENT_NAME);
 			_getCurrentFolder(ses).appendMessages(sent);
-			
-			completedMessageUID = _getCurrentFolder(ses).getUID(sent[0]);
 		}
 		else {
 			Message [] draft = { email.getMimeMessage() };
