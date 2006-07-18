@@ -57,7 +57,7 @@ Long messageId = (Long)request.getAttribute("messageId");
 				queryString += "&" + inputName + "=" + input.value;
 			}
 		}
-		alert(queryString);
+
 		loadPage("<%= themeDisplay.getPathMain() %>/mailbox/action", queryString, <portlet:namespace />saveDraftReturn);
 	}
 	
