@@ -51,6 +51,8 @@ import com.liferay.portlet.mailbox.util.MailFolder;
 import com.liferay.portlet.mailbox.util.MailMessage;
 import com.liferay.portlet.mailbox.util.MailUtil;
 import com.liferay.portlet.mailbox.util.comparator.DateComparator;
+import com.liferay.portlet.mailbox.util.comparator.RecipientComparator;
+import com.liferay.portlet.mailbox.util.comparator.SubjectComparator;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 
@@ -157,11 +159,24 @@ public class MailboxAction extends JSONAction {
 		JSONObject jsonObj = new JSONObject();
 
 		String folderId = ParamUtil.getString(req, "folderId");
+		String sortBy = ParamUtil.getString(req, "sortBy");
+		boolean asc = ParamUtil.getBoolean(req, "asc");
+		SortedSet set;
 
 		MailUtil.setCurrentFolder(req.getSession(), folderId);
 
-		SortedSet set = MailUtil.getEnvelopes(req.getSession(),
-			new DateComparator(false));
+		if ("name".equals(sortBy)) {
+			set = MailUtil.getEnvelopes(req.getSession(),
+				new RecipientComparator(asc));
+		}
+		else if ("subject".equals(sortBy)) {
+			set = MailUtil.getEnvelopes(req.getSession(),
+				new SubjectComparator(asc));
+		}
+		else {
+			set = MailUtil.getEnvelopes(req.getSession(),
+				new DateComparator(asc));
+		}
 
 		JSONArray meArray = new JSONArray();
 

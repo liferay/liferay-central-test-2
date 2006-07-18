@@ -30,6 +30,7 @@ var Mailbox = {
 	groupStart : null,
 	lastSelected : null,
 	messageTimer : null,
+	sortBy : null,
 	summaryList : { head : null, tail : null },
 		
 	checkFolderLocation : function(coord, update) {
@@ -290,7 +291,9 @@ var Mailbox = {
 	
 	getPreview : function () {
 		loadPage(themeDisplay.getPathMain() + "/mailbox/action",
-			"cmd=getPreview&folderId=" + Mailbox.currentFolder.id,
+			"cmd=getPreview&folderId=" + Mailbox.currentFolder.id +
+			"&sortBy=" + Mailbox.sortBy.value +
+			"&asc=" + Mailbox.sortBy.asc,
 			Mailbox.getPreviewReturn);
 			
 	},
@@ -400,6 +403,15 @@ var Mailbox = {
 		subjectGroup.addRule(new ResizeRule(msgsSubject, Resize.HORIZONTAL, Resize.ADD));
 		subjectGroup.addRule(new ResizeRule(msgsTitleReceived, Resize.HORIZONTAL, Resize.SUBTRACT));
 		subjectGroup.addRule(new ResizeRule(msgsReceived, Resize.HORIZONTAL, Resize.SUBTRACT));
+		
+		msgsTitleFrom.asc = true;
+		msgsTitleFrom.value = "name";
+		msgsTitleSubject.asc = true;
+		msgsTitleSubject.value = "subject";
+		msgsTitleReceived.asc = false;
+		msgsTitleReceived.value = "date";
+		msgsTitleFrom.onclick = msgsTitleSubject.onclick = msgsTitleReceived.onclick = Mailbox.onSortClick;
+		Mailbox.sortBy = msgsReceived;
 		
 		if (is_ie) {
 			previewPane.onkeydown = Mailbox.onMailKeyPress;
@@ -526,6 +538,17 @@ var Mailbox = {
 		this.selectedIndex = 0;
 	},
 	
+	onSortClick : function() {
+		if (Mailbox.sortBy == this) {
+			this.asc = this.asc ? false : true;
+		}
+	
+		Mailbox.sortBy = this;
+		Mailbox.clearPreview();
+		Mailbox.getPreview();
+		Mailbox.updateSortArrow();
+	},
+	
 	onSummaryMouseDown : function(event) {
 		event = mousePos.update(event);
 		var obj = this;
@@ -650,14 +673,14 @@ var Mailbox = {
 		}
 
 		var fromTitleText = document.getElementById("portlet-mail-msgs-title-from");
-		var fromTitle = fromTitleText.getElementsByTagName("div");;
+		var fromTitle = fromTitleText.getElementsByTagName("span");;
 		
 		if (Mailbox.currentFolder.id == "Sent") {
 			fromTitle[0].style.display = "none";
-			fromTitle[1].style.display = "block";
+			fromTitle[1].style.display = "";
 		}
 		else {
-			fromTitle[0].style.display = "block";
+			fromTitle[0].style.display = "";
 			fromTitle[1].style.display = "none";
 		}
 	},
@@ -712,6 +735,38 @@ var Mailbox = {
 	
 	summaryUnhighlightAll : function() {
 		this.summaryHighlightAll(true);
+	},
+	
+	updateSortArrow : function() {
+		var sortTitles = new Array();
+		sortTitles[0] = document.getElementById("portlet-mail-msgs-title-from");
+		sortTitles[1] = document.getElementById("portlet-mail-msgs-title-subject");
+		sortTitles[2] = document.getElementById("portlet-mail-msgs-title-received");
+		
+		for (var i = 0; i < sortTitles.length; i++) {
+			var title = sortTitles[i];
+			var titleDiv = title.getElementsByTagName("div")[0];
+			var imageList = titleDiv.getElementsByTagName("img");
+			var image;
+			
+			if (imageList.length > 0) {
+				image = imageList[0];
+				titleDiv.removeChild(image);
+			}
+			
+			if (Mailbox.sortBy == title) {
+				image = document.createElement("img");
+				
+				if (title.asc) {
+					image.src = themeDisplay.getPathThemeImage() + "/arrows/01_down.gif";
+				}
+				else {
+					image.src = themeDisplay.getPathThemeImage() + "/arrows/01_up.gif";
+				}
+				
+				titleDiv.appendChild(image);
+			}
+		}
 	}
 }
 

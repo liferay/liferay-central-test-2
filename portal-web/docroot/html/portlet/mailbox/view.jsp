@@ -84,6 +84,7 @@ String mailLineColor = "#b3b6b0";
 	</c:if>
 }
 
+.portlet-mail-title-text span { padding-right: 5px; }
 #portlet-mail-msgs-title-from { overflow: hidden; width: 150px; }
 #portlet-mail-msgs-title-from div { padding: 2px 0 2px 5px; }
 #portlet-mail-msgs-title-subject { overflow: hidden; width: 250px; }
@@ -153,8 +154,9 @@ String mailLineColor = "#b3b6b0";
 						<tr>
 							<td class="portlet-mail-msgs-title">
 								<div id="portlet-mail-msgs-title-from">
-									<div><%= LanguageUtil.get(pageContext, "from") %></div>
-									<div style="display:none"><%= LanguageUtil.get(pageContext, "to") %></div>
+									<div class="portlet-mail-title-text">
+										<span><%= LanguageUtil.get(pageContext, "from") %></span><span style="display:none"><%= LanguageUtil.get(pageContext, "to") %></span>
+									</div>
 								</div>
 							</td>
 							<td id="portlet-mail-msgs-from-handle" style="cursor: e-resize">
@@ -162,7 +164,9 @@ String mailLineColor = "#b3b6b0";
 							</td>
 							<td class="portlet-mail-msgs-title">
 								<div id="portlet-mail-msgs-title-subject">
-									<div><%= LanguageUtil.get(pageContext, "subject") %></div>
+									<div class="portlet-mail-title-text">
+										<span><%= LanguageUtil.get(pageContext, "subject") %></span>
+									</div>
 								</div>
 							</td>
 							<td id="portlet-mail-msgs-subject-handle" style="cursor: e-resize">
@@ -170,7 +174,9 @@ String mailLineColor = "#b3b6b0";
 							</td>
 							<td class="portlet-mail-msgs-title">
 								<div id="portlet-mail-msgs-title-received">
-									<div><%= LanguageUtil.get(pageContext, "date") %><img src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_down.gif"</div>
+									<div class="portlet-mail-title-text">
+										<span><%= LanguageUtil.get(pageContext, "date") %></span><img src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_up.gif" />
+									</div>
 								</div>
 							</td>
 						</tr>
