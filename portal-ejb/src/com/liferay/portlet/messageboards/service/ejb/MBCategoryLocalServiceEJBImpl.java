@@ -120,13 +120,6 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 		return getService().getCategory(categoryId);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory getCategory2(
-		java.lang.String categoryId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		return getService().getCategory2(categoryId);
-	}
-
 	public void getSubcategoryIds(java.util.List categoryIds,
 		java.lang.String groupId, java.lang.String categoryId)
 		throws com.liferay.portal.SystemException {

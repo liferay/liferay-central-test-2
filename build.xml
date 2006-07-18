@@ -365,7 +365,7 @@
 			<elseif>
 				<equals arg1="${app.server.type}" arg2="tomcat" />
 				<then>
-					<copy todir="${app.server.lib.portal.dir}">
+					<copy todir="${app.server.lib.global.dir}">
 						<fileset
 							dir="lib/development"
 							includes="activation.jar,jms.jar,jta.jar,mail.jar"

@@ -110,7 +110,7 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 				</td>
 			</c:if>
 
-			<c:if test="<%= isFirstMessage && MBMessagePermission.contains(permissionChecker, message, ActionKeys.SUBSCRIBE) %>">
+			<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.SUBSCRIBE) %>">
 				<td style="padding-left: 15px;"></td>
 				<td>
 					<c:choose>
