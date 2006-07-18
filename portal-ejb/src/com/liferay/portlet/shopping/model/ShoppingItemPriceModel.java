@@ -72,7 +72,6 @@ public class ShoppingItemPriceModel extends BaseModel {
 			}
 
 			_itemPriceId = itemPriceId;
-			setModified(true);
 		}
 	}
 
@@ -90,7 +89,6 @@ public class ShoppingItemPriceModel extends BaseModel {
 			}
 
 			_itemId = itemId;
-			setModified(true);
 		}
 	}
 
@@ -101,7 +99,6 @@ public class ShoppingItemPriceModel extends BaseModel {
 	public void setMinQuantity(int minQuantity) {
 		if (minQuantity != _minQuantity) {
 			_minQuantity = minQuantity;
-			setModified(true);
 		}
 	}
 
@@ -112,7 +109,6 @@ public class ShoppingItemPriceModel extends BaseModel {
 	public void setMaxQuantity(int maxQuantity) {
 		if (maxQuantity != _maxQuantity) {
 			_maxQuantity = maxQuantity;
-			setModified(true);
 		}
 	}
 
@@ -123,7 +119,6 @@ public class ShoppingItemPriceModel extends BaseModel {
 	public void setPrice(double price) {
 		if (price != _price) {
 			_price = price;
-			setModified(true);
 		}
 	}
 
@@ -134,7 +129,6 @@ public class ShoppingItemPriceModel extends BaseModel {
 	public void setDiscount(double discount) {
 		if (discount != _discount) {
 			_discount = discount;
-			setModified(true);
 		}
 	}
 
@@ -149,7 +143,6 @@ public class ShoppingItemPriceModel extends BaseModel {
 	public void setTaxable(boolean taxable) {
 		if (taxable != _taxable) {
 			_taxable = taxable;
-			setModified(true);
 		}
 	}
 
@@ -160,7 +153,6 @@ public class ShoppingItemPriceModel extends BaseModel {
 	public void setShipping(double shipping) {
 		if (shipping != _shipping) {
 			_shipping = shipping;
-			setModified(true);
 		}
 	}
 
@@ -175,7 +167,6 @@ public class ShoppingItemPriceModel extends BaseModel {
 	public void setUseShippingFormula(boolean useShippingFormula) {
 		if (useShippingFormula != _useShippingFormula) {
 			_useShippingFormula = useShippingFormula;
-			setModified(true);
 		}
 	}
 
@@ -186,7 +177,6 @@ public class ShoppingItemPriceModel extends BaseModel {
 	public void setStatus(int status) {
 		if (status != _status) {
 			_status = status;
-			setModified(true);
 		}
 	}
 

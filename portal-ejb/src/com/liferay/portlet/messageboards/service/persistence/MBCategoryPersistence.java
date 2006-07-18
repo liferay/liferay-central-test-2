@@ -97,63 +97,10 @@ public class MBCategoryPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (mbCategory.isNew() || mbCategory.isModified()) {
-				session = openSession();
-
-				if (mbCategory.isNew()) {
-					MBCategory mbCategoryModel = new MBCategory();
-					mbCategoryModel.setCategoryId(mbCategory.getCategoryId());
-					mbCategoryModel.setGroupId(mbCategory.getGroupId());
-					mbCategoryModel.setCompanyId(mbCategory.getCompanyId());
-					mbCategoryModel.setUserId(mbCategory.getUserId());
-					mbCategoryModel.setUserName(mbCategory.getUserName());
-					mbCategoryModel.setCreateDate(mbCategory.getCreateDate());
-					mbCategoryModel.setModifiedDate(mbCategory.getModifiedDate());
-					mbCategoryModel.setParentCategoryId(mbCategory.getParentCategoryId());
-					mbCategoryModel.setName(mbCategory.getName());
-					mbCategoryModel.setDescription(mbCategory.getDescription());
-					mbCategoryModel.setLastPostDate(mbCategory.getLastPostDate());
-					session.save(mbCategoryModel);
-					session.flush();
-				}
-				else {
-					MBCategory mbCategoryModel = (MBCategory)session.get(MBCategory.class,
-							mbCategory.getPrimaryKey());
-
-					if (mbCategoryModel != null) {
-						mbCategoryModel.setGroupId(mbCategory.getGroupId());
-						mbCategoryModel.setCompanyId(mbCategory.getCompanyId());
-						mbCategoryModel.setUserId(mbCategory.getUserId());
-						mbCategoryModel.setUserName(mbCategory.getUserName());
-						mbCategoryModel.setCreateDate(mbCategory.getCreateDate());
-						mbCategoryModel.setModifiedDate(mbCategory.getModifiedDate());
-						mbCategoryModel.setParentCategoryId(mbCategory.getParentCategoryId());
-						mbCategoryModel.setName(mbCategory.getName());
-						mbCategoryModel.setDescription(mbCategory.getDescription());
-						mbCategoryModel.setLastPostDate(mbCategory.getLastPostDate());
-						session.flush();
-					}
-					else {
-						mbCategoryModel = new MBCategory();
-						mbCategoryModel.setCategoryId(mbCategory.getCategoryId());
-						mbCategoryModel.setGroupId(mbCategory.getGroupId());
-						mbCategoryModel.setCompanyId(mbCategory.getCompanyId());
-						mbCategoryModel.setUserId(mbCategory.getUserId());
-						mbCategoryModel.setUserName(mbCategory.getUserName());
-						mbCategoryModel.setCreateDate(mbCategory.getCreateDate());
-						mbCategoryModel.setModifiedDate(mbCategory.getModifiedDate());
-						mbCategoryModel.setParentCategoryId(mbCategory.getParentCategoryId());
-						mbCategoryModel.setName(mbCategory.getName());
-						mbCategoryModel.setDescription(mbCategory.getDescription());
-						mbCategoryModel.setLastPostDate(mbCategory.getLastPostDate());
-						session.save(mbCategoryModel);
-						session.flush();
-					}
-				}
-
-				mbCategory.setNew(false);
-				mbCategory.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(mbCategory);
+			session.flush();
+			mbCategory.setNew(false);
 
 			return mbCategory;
 		}

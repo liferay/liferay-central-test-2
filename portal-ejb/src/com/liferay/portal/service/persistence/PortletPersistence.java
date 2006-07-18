@@ -94,44 +94,10 @@ public class PortletPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (portlet.isNew() || portlet.isModified()) {
-				session = openSession();
-
-				if (portlet.isNew()) {
-					Portlet portletModel = new Portlet();
-					portletModel.setPortletId(portlet.getPortletId());
-					portletModel.setCompanyId(portlet.getCompanyId());
-					portletModel.setNarrow(portlet.getNarrow());
-					portletModel.setRoles(portlet.getRoles());
-					portletModel.setActive(portlet.getActive());
-					session.save(portletModel);
-					session.flush();
-				}
-				else {
-					Portlet portletModel = (Portlet)session.get(Portlet.class,
-							portlet.getPrimaryKey());
-
-					if (portletModel != null) {
-						portletModel.setNarrow(portlet.getNarrow());
-						portletModel.setRoles(portlet.getRoles());
-						portletModel.setActive(portlet.getActive());
-						session.flush();
-					}
-					else {
-						portletModel = new Portlet();
-						portletModel.setPortletId(portlet.getPortletId());
-						portletModel.setCompanyId(portlet.getCompanyId());
-						portletModel.setNarrow(portlet.getNarrow());
-						portletModel.setRoles(portlet.getRoles());
-						portletModel.setActive(portlet.getActive());
-						session.save(portletModel);
-						session.flush();
-					}
-				}
-
-				portlet.setNew(false);
-				portlet.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(portlet);
+			session.flush();
+			portlet.setNew(false);
 
 			return portlet;
 		}

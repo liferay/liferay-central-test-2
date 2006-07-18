@@ -88,7 +88,6 @@ public class WikiNodeModel extends BaseModel {
 			}
 
 			_nodeId = nodeId;
-			setModified(true);
 		}
 	}
 
@@ -106,7 +105,6 @@ public class WikiNodeModel extends BaseModel {
 			}
 
 			_groupId = groupId;
-			setModified(true);
 		}
 	}
 
@@ -124,7 +122,6 @@ public class WikiNodeModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -142,7 +139,6 @@ public class WikiNodeModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -160,7 +156,6 @@ public class WikiNodeModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -174,7 +169,6 @@ public class WikiNodeModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -188,7 +182,6 @@ public class WikiNodeModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -205,7 +198,6 @@ public class WikiNodeModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -223,7 +215,6 @@ public class WikiNodeModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 
@@ -237,7 +228,6 @@ public class WikiNodeModel extends BaseModel {
 				((lastPostDate != null) && (_lastPostDate != null) &&
 				!lastPostDate.equals(_lastPostDate))) {
 			_lastPostDate = lastPostDate;
-			setModified(true);
 		}
 	}
 

@@ -96,59 +96,10 @@ public class IGImagePersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (igImage.isNew() || igImage.isModified()) {
-				session = openSession();
-
-				if (igImage.isNew()) {
-					IGImage igImageModel = new IGImage();
-					igImageModel.setCompanyId(igImage.getCompanyId());
-					igImageModel.setImageId(igImage.getImageId());
-					igImageModel.setUserId(igImage.getUserId());
-					igImageModel.setCreateDate(igImage.getCreateDate());
-					igImageModel.setModifiedDate(igImage.getModifiedDate());
-					igImageModel.setFolderId(igImage.getFolderId());
-					igImageModel.setDescription(igImage.getDescription());
-					igImageModel.setHeight(igImage.getHeight());
-					igImageModel.setWidth(igImage.getWidth());
-					igImageModel.setSize(igImage.getSize());
-					session.save(igImageModel);
-					session.flush();
-				}
-				else {
-					IGImage igImageModel = (IGImage)session.get(IGImage.class,
-							igImage.getPrimaryKey());
-
-					if (igImageModel != null) {
-						igImageModel.setUserId(igImage.getUserId());
-						igImageModel.setCreateDate(igImage.getCreateDate());
-						igImageModel.setModifiedDate(igImage.getModifiedDate());
-						igImageModel.setFolderId(igImage.getFolderId());
-						igImageModel.setDescription(igImage.getDescription());
-						igImageModel.setHeight(igImage.getHeight());
-						igImageModel.setWidth(igImage.getWidth());
-						igImageModel.setSize(igImage.getSize());
-						session.flush();
-					}
-					else {
-						igImageModel = new IGImage();
-						igImageModel.setCompanyId(igImage.getCompanyId());
-						igImageModel.setImageId(igImage.getImageId());
-						igImageModel.setUserId(igImage.getUserId());
-						igImageModel.setCreateDate(igImage.getCreateDate());
-						igImageModel.setModifiedDate(igImage.getModifiedDate());
-						igImageModel.setFolderId(igImage.getFolderId());
-						igImageModel.setDescription(igImage.getDescription());
-						igImageModel.setHeight(igImage.getHeight());
-						igImageModel.setWidth(igImage.getWidth());
-						igImageModel.setSize(igImage.getSize());
-						session.save(igImageModel);
-						session.flush();
-					}
-				}
-
-				igImage.setNew(false);
-				igImage.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(igImage);
+			session.flush();
+			igImage.setNew(false);
 
 			return igImage;
 		}

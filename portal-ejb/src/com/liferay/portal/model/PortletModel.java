@@ -76,7 +76,6 @@ public class PortletModel extends BaseModel {
 			}
 
 			_portletId = portletId;
-			setModified(true);
 		}
 	}
 
@@ -94,7 +93,6 @@ public class PortletModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -109,7 +107,6 @@ public class PortletModel extends BaseModel {
 	public void setNarrow(boolean narrow) {
 		if (narrow != _narrow) {
 			_narrow = narrow;
-			setModified(true);
 		}
 	}
 
@@ -126,7 +123,6 @@ public class PortletModel extends BaseModel {
 			}
 
 			_roles = roles;
-			setModified(true);
 		}
 	}
 
@@ -141,7 +137,6 @@ public class PortletModel extends BaseModel {
 	public void setActive(boolean active) {
 		if (active != _active) {
 			_active = active;
-			setModified(true);
 		}
 	}
 

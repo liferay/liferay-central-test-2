@@ -74,7 +74,6 @@ public class ListTypeModel extends BaseModel {
 			}
 
 			_listTypeId = listTypeId;
-			setModified(true);
 		}
 	}
 
@@ -91,7 +90,6 @@ public class ListTypeModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -108,7 +106,6 @@ public class ListTypeModel extends BaseModel {
 			}
 
 			_type = type;
-			setModified(true);
 		}
 	}
 

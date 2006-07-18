@@ -85,7 +85,6 @@ public class UserTrackerModel extends BaseModel {
 			}
 
 			_userTrackerId = userTrackerId;
-			setModified(true);
 		}
 	}
 
@@ -103,7 +102,6 @@ public class UserTrackerModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -121,7 +119,6 @@ public class UserTrackerModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -135,7 +132,6 @@ public class UserTrackerModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -153,7 +149,6 @@ public class UserTrackerModel extends BaseModel {
 			}
 
 			_remoteAddr = remoteAddr;
-			setModified(true);
 		}
 	}
 
@@ -171,7 +166,6 @@ public class UserTrackerModel extends BaseModel {
 			}
 
 			_remoteHost = remoteHost;
-			setModified(true);
 		}
 	}
 
@@ -189,7 +183,6 @@ public class UserTrackerModel extends BaseModel {
 			}
 
 			_userAgent = userAgent;
-			setModified(true);
 		}
 	}
 

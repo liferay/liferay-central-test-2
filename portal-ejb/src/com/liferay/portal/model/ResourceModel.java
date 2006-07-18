@@ -83,7 +83,6 @@ public class ResourceModel extends BaseModel {
 			}
 
 			_resourceId = resourceId;
-			setModified(true);
 		}
 	}
 
@@ -101,7 +100,6 @@ public class ResourceModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -118,7 +116,6 @@ public class ResourceModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -136,7 +133,6 @@ public class ResourceModel extends BaseModel {
 			}
 
 			_typeId = typeId;
-			setModified(true);
 		}
 	}
 
@@ -153,7 +149,6 @@ public class ResourceModel extends BaseModel {
 			}
 
 			_scope = scope;
-			setModified(true);
 		}
 	}
 
@@ -171,7 +166,6 @@ public class ResourceModel extends BaseModel {
 			}
 
 			_primKey = primKey;
-			setModified(true);
 		}
 	}
 

@@ -92,7 +92,6 @@ public class WebsiteModel extends BaseModel {
 			}
 
 			_websiteId = websiteId;
-			setModified(true);
 		}
 	}
 
@@ -110,7 +109,6 @@ public class WebsiteModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -128,7 +126,6 @@ public class WebsiteModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -146,7 +143,6 @@ public class WebsiteModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -160,7 +156,6 @@ public class WebsiteModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -174,7 +169,6 @@ public class WebsiteModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -192,7 +186,6 @@ public class WebsiteModel extends BaseModel {
 			}
 
 			_className = className;
-			setModified(true);
 		}
 	}
 
@@ -210,7 +203,6 @@ public class WebsiteModel extends BaseModel {
 			}
 
 			_classPK = classPK;
-			setModified(true);
 		}
 	}
 
@@ -227,7 +219,6 @@ public class WebsiteModel extends BaseModel {
 			}
 
 			_url = url;
-			setModified(true);
 		}
 	}
 
@@ -245,7 +236,6 @@ public class WebsiteModel extends BaseModel {
 			}
 
 			_typeId = typeId;
-			setModified(true);
 		}
 	}
 
@@ -260,7 +250,6 @@ public class WebsiteModel extends BaseModel {
 	public void setPrimary(boolean primary) {
 		if (primary != _primary) {
 			_primary = primary;
-			setModified(true);
 		}
 	}
 

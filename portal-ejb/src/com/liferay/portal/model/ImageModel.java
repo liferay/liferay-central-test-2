@@ -73,7 +73,6 @@ public class ImageModel extends BaseModel {
 			}
 
 			_imageId = imageId;
-			setModified(true);
 		}
 	}
 
@@ -87,7 +86,6 @@ public class ImageModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -104,7 +102,6 @@ public class ImageModel extends BaseModel {
 			}
 
 			_text = text;
-			setModified(true);
 		}
 	}
 

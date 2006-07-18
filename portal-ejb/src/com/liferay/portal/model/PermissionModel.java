@@ -77,7 +77,6 @@ public class PermissionModel extends BaseModel {
 			}
 
 			_permissionId = permissionId;
-			setModified(true);
 		}
 	}
 
@@ -95,7 +94,6 @@ public class PermissionModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -113,7 +111,6 @@ public class PermissionModel extends BaseModel {
 			}
 
 			_actionId = actionId;
-			setModified(true);
 		}
 	}
 
@@ -131,7 +128,6 @@ public class PermissionModel extends BaseModel {
 			}
 
 			_resourceId = resourceId;
-			setModified(true);
 		}
 	}
 

@@ -96,63 +96,10 @@ public class EmailAddressPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (emailAddress.isNew() || emailAddress.isModified()) {
-				session = openSession();
-
-				if (emailAddress.isNew()) {
-					EmailAddress emailAddressModel = new EmailAddress();
-					emailAddressModel.setEmailAddressId(emailAddress.getEmailAddressId());
-					emailAddressModel.setCompanyId(emailAddress.getCompanyId());
-					emailAddressModel.setUserId(emailAddress.getUserId());
-					emailAddressModel.setUserName(emailAddress.getUserName());
-					emailAddressModel.setCreateDate(emailAddress.getCreateDate());
-					emailAddressModel.setModifiedDate(emailAddress.getModifiedDate());
-					emailAddressModel.setClassName(emailAddress.getClassName());
-					emailAddressModel.setClassPK(emailAddress.getClassPK());
-					emailAddressModel.setAddress(emailAddress.getAddress());
-					emailAddressModel.setTypeId(emailAddress.getTypeId());
-					emailAddressModel.setPrimary(emailAddress.getPrimary());
-					session.save(emailAddressModel);
-					session.flush();
-				}
-				else {
-					EmailAddress emailAddressModel = (EmailAddress)session.get(EmailAddress.class,
-							emailAddress.getPrimaryKey());
-
-					if (emailAddressModel != null) {
-						emailAddressModel.setCompanyId(emailAddress.getCompanyId());
-						emailAddressModel.setUserId(emailAddress.getUserId());
-						emailAddressModel.setUserName(emailAddress.getUserName());
-						emailAddressModel.setCreateDate(emailAddress.getCreateDate());
-						emailAddressModel.setModifiedDate(emailAddress.getModifiedDate());
-						emailAddressModel.setClassName(emailAddress.getClassName());
-						emailAddressModel.setClassPK(emailAddress.getClassPK());
-						emailAddressModel.setAddress(emailAddress.getAddress());
-						emailAddressModel.setTypeId(emailAddress.getTypeId());
-						emailAddressModel.setPrimary(emailAddress.getPrimary());
-						session.flush();
-					}
-					else {
-						emailAddressModel = new EmailAddress();
-						emailAddressModel.setEmailAddressId(emailAddress.getEmailAddressId());
-						emailAddressModel.setCompanyId(emailAddress.getCompanyId());
-						emailAddressModel.setUserId(emailAddress.getUserId());
-						emailAddressModel.setUserName(emailAddress.getUserName());
-						emailAddressModel.setCreateDate(emailAddress.getCreateDate());
-						emailAddressModel.setModifiedDate(emailAddress.getModifiedDate());
-						emailAddressModel.setClassName(emailAddress.getClassName());
-						emailAddressModel.setClassPK(emailAddress.getClassPK());
-						emailAddressModel.setAddress(emailAddress.getAddress());
-						emailAddressModel.setTypeId(emailAddress.getTypeId());
-						emailAddressModel.setPrimary(emailAddress.getPrimary());
-						session.save(emailAddressModel);
-						session.flush();
-					}
-				}
-
-				emailAddress.setNew(false);
-				emailAddress.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(emailAddress);
+			session.flush();
+			emailAddress.setNew(false);
 
 			return emailAddress;
 		}

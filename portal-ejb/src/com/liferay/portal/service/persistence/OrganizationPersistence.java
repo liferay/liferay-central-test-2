@@ -113,57 +113,10 @@ public class OrganizationPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (organization.isNew() || organization.isModified()) {
-				session = openSession();
-
-				if (organization.isNew()) {
-					Organization organizationModel = new Organization();
-					organizationModel.setOrganizationId(organization.getOrganizationId());
-					organizationModel.setCompanyId(organization.getCompanyId());
-					organizationModel.setParentOrganizationId(organization.getParentOrganizationId());
-					organizationModel.setName(organization.getName());
-					organizationModel.setRecursable(organization.getRecursable());
-					organizationModel.setRegionId(organization.getRegionId());
-					organizationModel.setCountryId(organization.getCountryId());
-					organizationModel.setStatusId(organization.getStatusId());
-					organizationModel.setComments(organization.getComments());
-					session.save(organizationModel);
-					session.flush();
-				}
-				else {
-					Organization organizationModel = (Organization)session.get(Organization.class,
-							organization.getPrimaryKey());
-
-					if (organizationModel != null) {
-						organizationModel.setCompanyId(organization.getCompanyId());
-						organizationModel.setParentOrganizationId(organization.getParentOrganizationId());
-						organizationModel.setName(organization.getName());
-						organizationModel.setRecursable(organization.getRecursable());
-						organizationModel.setRegionId(organization.getRegionId());
-						organizationModel.setCountryId(organization.getCountryId());
-						organizationModel.setStatusId(organization.getStatusId());
-						organizationModel.setComments(organization.getComments());
-						session.flush();
-					}
-					else {
-						organizationModel = new Organization();
-						organizationModel.setOrganizationId(organization.getOrganizationId());
-						organizationModel.setCompanyId(organization.getCompanyId());
-						organizationModel.setParentOrganizationId(organization.getParentOrganizationId());
-						organizationModel.setName(organization.getName());
-						organizationModel.setRecursable(organization.getRecursable());
-						organizationModel.setRegionId(organization.getRegionId());
-						organizationModel.setCountryId(organization.getCountryId());
-						organizationModel.setStatusId(organization.getStatusId());
-						organizationModel.setComments(organization.getComments());
-						session.save(organizationModel);
-						session.flush();
-					}
-				}
-
-				organization.setNew(false);
-				organization.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(organization);
+			session.flush();
+			organization.setNew(false);
 
 			return organization;
 		}

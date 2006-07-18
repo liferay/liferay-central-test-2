@@ -78,7 +78,6 @@ public class PollsChoiceModel extends BaseModel {
 			}
 
 			_questionId = questionId;
-			setModified(true);
 		}
 	}
 
@@ -96,7 +95,6 @@ public class PollsChoiceModel extends BaseModel {
 			}
 
 			_choiceId = choiceId;
-			setModified(true);
 		}
 	}
 
@@ -114,7 +112,6 @@ public class PollsChoiceModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 

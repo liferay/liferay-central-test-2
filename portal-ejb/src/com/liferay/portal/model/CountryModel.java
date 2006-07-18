@@ -74,7 +74,6 @@ public class CountryModel extends BaseModel {
 			}
 
 			_countryId = countryId;
-			setModified(true);
 		}
 	}
 
@@ -92,7 +91,6 @@ public class CountryModel extends BaseModel {
 			}
 
 			_countryCode = countryCode;
-			setModified(true);
 		}
 	}
 
@@ -109,7 +107,6 @@ public class CountryModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -124,7 +121,6 @@ public class CountryModel extends BaseModel {
 	public void setActive(boolean active) {
 		if (active != _active) {
 			_active = active;
-			setModified(true);
 		}
 	}
 

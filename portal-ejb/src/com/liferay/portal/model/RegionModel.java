@@ -77,7 +77,6 @@ public class RegionModel extends BaseModel {
 			}
 
 			_regionId = regionId;
-			setModified(true);
 		}
 	}
 
@@ -95,7 +94,6 @@ public class RegionModel extends BaseModel {
 			}
 
 			_countryId = countryId;
-			setModified(true);
 		}
 	}
 
@@ -113,7 +111,6 @@ public class RegionModel extends BaseModel {
 			}
 
 			_regionCode = regionCode;
-			setModified(true);
 		}
 	}
 
@@ -130,7 +127,6 @@ public class RegionModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -145,7 +141,6 @@ public class RegionModel extends BaseModel {
 	public void setActive(boolean active) {
 		if (active != _active) {
 			_active = active;
-			setModified(true);
 		}
 	}
 

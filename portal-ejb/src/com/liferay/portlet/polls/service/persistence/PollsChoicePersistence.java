@@ -97,38 +97,10 @@ public class PollsChoicePersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (pollsChoice.isNew() || pollsChoice.isModified()) {
-				session = openSession();
-
-				if (pollsChoice.isNew()) {
-					PollsChoice pollsChoiceModel = new PollsChoice();
-					pollsChoiceModel.setQuestionId(pollsChoice.getQuestionId());
-					pollsChoiceModel.setChoiceId(pollsChoice.getChoiceId());
-					pollsChoiceModel.setDescription(pollsChoice.getDescription());
-					session.save(pollsChoiceModel);
-					session.flush();
-				}
-				else {
-					PollsChoice pollsChoiceModel = (PollsChoice)session.get(PollsChoice.class,
-							pollsChoice.getPrimaryKey());
-
-					if (pollsChoiceModel != null) {
-						pollsChoiceModel.setDescription(pollsChoice.getDescription());
-						session.flush();
-					}
-					else {
-						pollsChoiceModel = new PollsChoice();
-						pollsChoiceModel.setQuestionId(pollsChoice.getQuestionId());
-						pollsChoiceModel.setChoiceId(pollsChoice.getChoiceId());
-						pollsChoiceModel.setDescription(pollsChoice.getDescription());
-						session.save(pollsChoiceModel);
-						session.flush();
-					}
-				}
-
-				pollsChoice.setNew(false);
-				pollsChoice.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(pollsChoice);
+			session.flush();
+			pollsChoice.setNew(false);
 
 			return pollsChoice;
 		}

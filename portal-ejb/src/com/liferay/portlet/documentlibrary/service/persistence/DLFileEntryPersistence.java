@@ -97,71 +97,10 @@ public class DLFileEntryPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (dlFileEntry.isNew() || dlFileEntry.isModified()) {
-				session = openSession();
-
-				if (dlFileEntry.isNew()) {
-					DLFileEntry dlFileEntryModel = new DLFileEntry();
-					dlFileEntryModel.setFolderId(dlFileEntry.getFolderId());
-					dlFileEntryModel.setName(dlFileEntry.getName());
-					dlFileEntryModel.setCompanyId(dlFileEntry.getCompanyId());
-					dlFileEntryModel.setUserId(dlFileEntry.getUserId());
-					dlFileEntryModel.setUserName(dlFileEntry.getUserName());
-					dlFileEntryModel.setVersionUserId(dlFileEntry.getVersionUserId());
-					dlFileEntryModel.setVersionUserName(dlFileEntry.getVersionUserName());
-					dlFileEntryModel.setCreateDate(dlFileEntry.getCreateDate());
-					dlFileEntryModel.setModifiedDate(dlFileEntry.getModifiedDate());
-					dlFileEntryModel.setTitle(dlFileEntry.getTitle());
-					dlFileEntryModel.setDescription(dlFileEntry.getDescription());
-					dlFileEntryModel.setVersion(dlFileEntry.getVersion());
-					dlFileEntryModel.setSize(dlFileEntry.getSize());
-					dlFileEntryModel.setReadCount(dlFileEntry.getReadCount());
-					session.save(dlFileEntryModel);
-					session.flush();
-				}
-				else {
-					DLFileEntry dlFileEntryModel = (DLFileEntry)session.get(DLFileEntry.class,
-							dlFileEntry.getPrimaryKey());
-
-					if (dlFileEntryModel != null) {
-						dlFileEntryModel.setCompanyId(dlFileEntry.getCompanyId());
-						dlFileEntryModel.setUserId(dlFileEntry.getUserId());
-						dlFileEntryModel.setUserName(dlFileEntry.getUserName());
-						dlFileEntryModel.setVersionUserId(dlFileEntry.getVersionUserId());
-						dlFileEntryModel.setVersionUserName(dlFileEntry.getVersionUserName());
-						dlFileEntryModel.setCreateDate(dlFileEntry.getCreateDate());
-						dlFileEntryModel.setModifiedDate(dlFileEntry.getModifiedDate());
-						dlFileEntryModel.setTitle(dlFileEntry.getTitle());
-						dlFileEntryModel.setDescription(dlFileEntry.getDescription());
-						dlFileEntryModel.setVersion(dlFileEntry.getVersion());
-						dlFileEntryModel.setSize(dlFileEntry.getSize());
-						dlFileEntryModel.setReadCount(dlFileEntry.getReadCount());
-						session.flush();
-					}
-					else {
-						dlFileEntryModel = new DLFileEntry();
-						dlFileEntryModel.setFolderId(dlFileEntry.getFolderId());
-						dlFileEntryModel.setName(dlFileEntry.getName());
-						dlFileEntryModel.setCompanyId(dlFileEntry.getCompanyId());
-						dlFileEntryModel.setUserId(dlFileEntry.getUserId());
-						dlFileEntryModel.setUserName(dlFileEntry.getUserName());
-						dlFileEntryModel.setVersionUserId(dlFileEntry.getVersionUserId());
-						dlFileEntryModel.setVersionUserName(dlFileEntry.getVersionUserName());
-						dlFileEntryModel.setCreateDate(dlFileEntry.getCreateDate());
-						dlFileEntryModel.setModifiedDate(dlFileEntry.getModifiedDate());
-						dlFileEntryModel.setTitle(dlFileEntry.getTitle());
-						dlFileEntryModel.setDescription(dlFileEntry.getDescription());
-						dlFileEntryModel.setVersion(dlFileEntry.getVersion());
-						dlFileEntryModel.setSize(dlFileEntry.getSize());
-						dlFileEntryModel.setReadCount(dlFileEntry.getReadCount());
-						session.save(dlFileEntryModel);
-						session.flush();
-					}
-				}
-
-				dlFileEntry.setNew(false);
-				dlFileEntry.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(dlFileEntry);
+			session.flush();
+			dlFileEntry.setNew(false);
 
 			return dlFileEntry;
 		}

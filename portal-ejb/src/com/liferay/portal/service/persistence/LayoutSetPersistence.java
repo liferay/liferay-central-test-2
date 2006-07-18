@@ -90,54 +90,10 @@ public class LayoutSetPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (layoutSet.isNew() || layoutSet.isModified()) {
-				session = openSession();
-
-				if (layoutSet.isNew()) {
-					LayoutSet layoutSetModel = new LayoutSet();
-					layoutSetModel.setOwnerId(layoutSet.getOwnerId());
-					layoutSetModel.setCompanyId(layoutSet.getCompanyId());
-					layoutSetModel.setGroupId(layoutSet.getGroupId());
-					layoutSetModel.setUserId(layoutSet.getUserId());
-					layoutSetModel.setPrivateLayout(layoutSet.getPrivateLayout());
-					layoutSetModel.setThemeId(layoutSet.getThemeId());
-					layoutSetModel.setColorSchemeId(layoutSet.getColorSchemeId());
-					layoutSetModel.setPageCount(layoutSet.getPageCount());
-					session.save(layoutSetModel);
-					session.flush();
-				}
-				else {
-					LayoutSet layoutSetModel = (LayoutSet)session.get(LayoutSet.class,
-							layoutSet.getPrimaryKey());
-
-					if (layoutSetModel != null) {
-						layoutSetModel.setCompanyId(layoutSet.getCompanyId());
-						layoutSetModel.setGroupId(layoutSet.getGroupId());
-						layoutSetModel.setUserId(layoutSet.getUserId());
-						layoutSetModel.setPrivateLayout(layoutSet.getPrivateLayout());
-						layoutSetModel.setThemeId(layoutSet.getThemeId());
-						layoutSetModel.setColorSchemeId(layoutSet.getColorSchemeId());
-						layoutSetModel.setPageCount(layoutSet.getPageCount());
-						session.flush();
-					}
-					else {
-						layoutSetModel = new LayoutSet();
-						layoutSetModel.setOwnerId(layoutSet.getOwnerId());
-						layoutSetModel.setCompanyId(layoutSet.getCompanyId());
-						layoutSetModel.setGroupId(layoutSet.getGroupId());
-						layoutSetModel.setUserId(layoutSet.getUserId());
-						layoutSetModel.setPrivateLayout(layoutSet.getPrivateLayout());
-						layoutSetModel.setThemeId(layoutSet.getThemeId());
-						layoutSetModel.setColorSchemeId(layoutSet.getColorSchemeId());
-						layoutSetModel.setPageCount(layoutSet.getPageCount());
-						session.save(layoutSetModel);
-						session.flush();
-					}
-				}
-
-				layoutSet.setNew(false);
-				layoutSet.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(layoutSet);
+			session.flush();
+			layoutSet.setNew(false);
 
 			return layoutSet;
 		}

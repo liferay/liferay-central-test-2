@@ -97,37 +97,10 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (orgGroupPermission.isNew() || orgGroupPermission.isModified()) {
-				session = openSession();
-
-				if (orgGroupPermission.isNew()) {
-					OrgGroupPermission orgGroupPermissionModel = new OrgGroupPermission();
-					orgGroupPermissionModel.setOrganizationId(orgGroupPermission.getOrganizationId());
-					orgGroupPermissionModel.setGroupId(orgGroupPermission.getGroupId());
-					orgGroupPermissionModel.setPermissionId(orgGroupPermission.getPermissionId());
-					session.save(orgGroupPermissionModel);
-					session.flush();
-				}
-				else {
-					OrgGroupPermission orgGroupPermissionModel = (OrgGroupPermission)session.get(OrgGroupPermission.class,
-							orgGroupPermission.getPrimaryKey());
-
-					if (orgGroupPermissionModel != null) {
-						session.flush();
-					}
-					else {
-						orgGroupPermissionModel = new OrgGroupPermission();
-						orgGroupPermissionModel.setOrganizationId(orgGroupPermission.getOrganizationId());
-						orgGroupPermissionModel.setGroupId(orgGroupPermission.getGroupId());
-						orgGroupPermissionModel.setPermissionId(orgGroupPermission.getPermissionId());
-						session.save(orgGroupPermissionModel);
-						session.flush();
-					}
-				}
-
-				orgGroupPermission.setNew(false);
-				orgGroupPermission.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(orgGroupPermission);
+			session.flush();
+			orgGroupPermission.setNew(false);
 
 			return orgGroupPermission;
 		}

@@ -114,57 +114,10 @@ public class GroupPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (group.isNew() || group.isModified()) {
-				session = openSession();
-
-				if (group.isNew()) {
-					Group groupModel = new Group();
-					groupModel.setGroupId(group.getGroupId());
-					groupModel.setCompanyId(group.getCompanyId());
-					groupModel.setClassName(group.getClassName());
-					groupModel.setClassPK(group.getClassPK());
-					groupModel.setParentGroupId(group.getParentGroupId());
-					groupModel.setName(group.getName());
-					groupModel.setDescription(group.getDescription());
-					groupModel.setType(group.getType());
-					groupModel.setFriendlyURL(group.getFriendlyURL());
-					session.save(groupModel);
-					session.flush();
-				}
-				else {
-					Group groupModel = (Group)session.get(Group.class,
-							group.getPrimaryKey());
-
-					if (groupModel != null) {
-						groupModel.setCompanyId(group.getCompanyId());
-						groupModel.setClassName(group.getClassName());
-						groupModel.setClassPK(group.getClassPK());
-						groupModel.setParentGroupId(group.getParentGroupId());
-						groupModel.setName(group.getName());
-						groupModel.setDescription(group.getDescription());
-						groupModel.setType(group.getType());
-						groupModel.setFriendlyURL(group.getFriendlyURL());
-						session.flush();
-					}
-					else {
-						groupModel = new Group();
-						groupModel.setGroupId(group.getGroupId());
-						groupModel.setCompanyId(group.getCompanyId());
-						groupModel.setClassName(group.getClassName());
-						groupModel.setClassPK(group.getClassPK());
-						groupModel.setParentGroupId(group.getParentGroupId());
-						groupModel.setName(group.getName());
-						groupModel.setDescription(group.getDescription());
-						groupModel.setType(group.getType());
-						groupModel.setFriendlyURL(group.getFriendlyURL());
-						session.save(groupModel);
-						session.flush();
-					}
-				}
-
-				group.setNew(false);
-				group.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(group);
+			session.flush();
+			group.setNew(false);
 
 			return group;
 		}

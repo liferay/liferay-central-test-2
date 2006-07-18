@@ -95,48 +95,10 @@ public class ResourcePersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (resource.isNew() || resource.isModified()) {
-				session = openSession();
-
-				if (resource.isNew()) {
-					Resource resourceModel = new Resource();
-					resourceModel.setResourceId(resource.getResourceId());
-					resourceModel.setCompanyId(resource.getCompanyId());
-					resourceModel.setName(resource.getName());
-					resourceModel.setTypeId(resource.getTypeId());
-					resourceModel.setScope(resource.getScope());
-					resourceModel.setPrimKey(resource.getPrimKey());
-					session.save(resourceModel);
-					session.flush();
-				}
-				else {
-					Resource resourceModel = (Resource)session.get(Resource.class,
-							resource.getPrimaryKey());
-
-					if (resourceModel != null) {
-						resourceModel.setCompanyId(resource.getCompanyId());
-						resourceModel.setName(resource.getName());
-						resourceModel.setTypeId(resource.getTypeId());
-						resourceModel.setScope(resource.getScope());
-						resourceModel.setPrimKey(resource.getPrimKey());
-						session.flush();
-					}
-					else {
-						resourceModel = new Resource();
-						resourceModel.setResourceId(resource.getResourceId());
-						resourceModel.setCompanyId(resource.getCompanyId());
-						resourceModel.setName(resource.getName());
-						resourceModel.setTypeId(resource.getTypeId());
-						resourceModel.setScope(resource.getScope());
-						resourceModel.setPrimKey(resource.getPrimKey());
-						session.save(resourceModel);
-						session.flush();
-					}
-				}
-
-				resource.setNew(false);
-				resource.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(resource);
+			session.flush();
+			resource.setNew(false);
 
 			return resource;
 		}

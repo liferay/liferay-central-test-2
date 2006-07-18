@@ -80,7 +80,6 @@ public class PollsVoteModel extends BaseModel {
 			}
 
 			_questionId = questionId;
-			setModified(true);
 		}
 	}
 
@@ -98,7 +97,6 @@ public class PollsVoteModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -116,7 +114,6 @@ public class PollsVoteModel extends BaseModel {
 			}
 
 			_choiceId = choiceId;
-			setModified(true);
 		}
 	}
 
@@ -130,7 +127,6 @@ public class PollsVoteModel extends BaseModel {
 				((voteDate != null) && (_voteDate != null) &&
 				!voteDate.equals(_voteDate))) {
 			_voteDate = voteDate;
-			setModified(true);
 		}
 	}
 

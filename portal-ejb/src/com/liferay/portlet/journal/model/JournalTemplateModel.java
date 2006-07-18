@@ -104,7 +104,6 @@ public class JournalTemplateModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -122,7 +121,6 @@ public class JournalTemplateModel extends BaseModel {
 			}
 
 			_templateId = templateId;
-			setModified(true);
 		}
 	}
 
@@ -140,7 +138,6 @@ public class JournalTemplateModel extends BaseModel {
 			}
 
 			_groupId = groupId;
-			setModified(true);
 		}
 	}
 
@@ -158,7 +155,6 @@ public class JournalTemplateModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -176,7 +172,6 @@ public class JournalTemplateModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -190,7 +185,6 @@ public class JournalTemplateModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -204,7 +198,6 @@ public class JournalTemplateModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -222,7 +215,6 @@ public class JournalTemplateModel extends BaseModel {
 			}
 
 			_structureId = structureId;
-			setModified(true);
 		}
 	}
 
@@ -239,7 +231,6 @@ public class JournalTemplateModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -257,7 +248,6 @@ public class JournalTemplateModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 
@@ -274,7 +264,6 @@ public class JournalTemplateModel extends BaseModel {
 			}
 
 			_xsl = xsl;
-			setModified(true);
 		}
 	}
 
@@ -292,7 +281,6 @@ public class JournalTemplateModel extends BaseModel {
 			}
 
 			_langType = langType;
-			setModified(true);
 		}
 	}
 
@@ -307,7 +295,6 @@ public class JournalTemplateModel extends BaseModel {
 	public void setSmallImage(boolean smallImage) {
 		if (smallImage != _smallImage) {
 			_smallImage = smallImage;
-			setModified(true);
 		}
 	}
 
@@ -325,7 +312,6 @@ public class JournalTemplateModel extends BaseModel {
 			}
 
 			_smallImageURL = smallImageURL;
-			setModified(true);
 		}
 	}
 

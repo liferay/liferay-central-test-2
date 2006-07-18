@@ -97,40 +97,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (mbMessageFlag.isNew() || mbMessageFlag.isModified()) {
-				session = openSession();
-
-				if (mbMessageFlag.isNew()) {
-					MBMessageFlag mbMessageFlagModel = new MBMessageFlag();
-					mbMessageFlagModel.setTopicId(mbMessageFlag.getTopicId());
-					mbMessageFlagModel.setMessageId(mbMessageFlag.getMessageId());
-					mbMessageFlagModel.setUserId(mbMessageFlag.getUserId());
-					mbMessageFlagModel.setFlag(mbMessageFlag.getFlag());
-					session.save(mbMessageFlagModel);
-					session.flush();
-				}
-				else {
-					MBMessageFlag mbMessageFlagModel = (MBMessageFlag)session.get(MBMessageFlag.class,
-							mbMessageFlag.getPrimaryKey());
-
-					if (mbMessageFlagModel != null) {
-						mbMessageFlagModel.setFlag(mbMessageFlag.getFlag());
-						session.flush();
-					}
-					else {
-						mbMessageFlagModel = new MBMessageFlag();
-						mbMessageFlagModel.setTopicId(mbMessageFlag.getTopicId());
-						mbMessageFlagModel.setMessageId(mbMessageFlag.getMessageId());
-						mbMessageFlagModel.setUserId(mbMessageFlag.getUserId());
-						mbMessageFlagModel.setFlag(mbMessageFlag.getFlag());
-						session.save(mbMessageFlagModel);
-						session.flush();
-					}
-				}
-
-				mbMessageFlag.setNew(false);
-				mbMessageFlag.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(mbMessageFlag);
+			session.flush();
+			mbMessageFlag.setNew(false);
 
 			return mbMessageFlag;
 		}

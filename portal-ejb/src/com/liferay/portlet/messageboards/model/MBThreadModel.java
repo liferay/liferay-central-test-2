@@ -81,7 +81,6 @@ public class MBThreadModel extends BaseModel {
 			}
 
 			_threadId = threadId;
-			setModified(true);
 		}
 	}
 
@@ -99,7 +98,6 @@ public class MBThreadModel extends BaseModel {
 			}
 
 			_categoryId = categoryId;
-			setModified(true);
 		}
 	}
 
@@ -117,7 +115,6 @@ public class MBThreadModel extends BaseModel {
 			}
 
 			_topicId = topicId;
-			setModified(true);
 		}
 	}
 
@@ -135,7 +132,6 @@ public class MBThreadModel extends BaseModel {
 			}
 
 			_rootMessageId = rootMessageId;
-			setModified(true);
 		}
 	}
 
@@ -146,7 +142,6 @@ public class MBThreadModel extends BaseModel {
 	public void setMessageCount(int messageCount) {
 		if (messageCount != _messageCount) {
 			_messageCount = messageCount;
-			setModified(true);
 		}
 	}
 
@@ -157,7 +152,6 @@ public class MBThreadModel extends BaseModel {
 	public void setViewCount(int viewCount) {
 		if (viewCount != _viewCount) {
 			_viewCount = viewCount;
-			setModified(true);
 		}
 	}
 
@@ -171,7 +165,6 @@ public class MBThreadModel extends BaseModel {
 				((lastPostDate != null) && (_lastPostDate != null) &&
 				!lastPostDate.equals(_lastPostDate))) {
 			_lastPostDate = lastPostDate;
-			setModified(true);
 		}
 	}
 

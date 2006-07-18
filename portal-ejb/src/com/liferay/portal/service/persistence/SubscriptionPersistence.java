@@ -97,57 +97,10 @@ public class SubscriptionPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (subscription.isNew() || subscription.isModified()) {
-				session = openSession();
-
-				if (subscription.isNew()) {
-					Subscription subscriptionModel = new Subscription();
-					subscriptionModel.setSubscriptionId(subscription.getSubscriptionId());
-					subscriptionModel.setCompanyId(subscription.getCompanyId());
-					subscriptionModel.setUserId(subscription.getUserId());
-					subscriptionModel.setUserName(subscription.getUserName());
-					subscriptionModel.setCreateDate(subscription.getCreateDate());
-					subscriptionModel.setModifiedDate(subscription.getModifiedDate());
-					subscriptionModel.setClassName(subscription.getClassName());
-					subscriptionModel.setClassPK(subscription.getClassPK());
-					subscriptionModel.setFrequency(subscription.getFrequency());
-					session.save(subscriptionModel);
-					session.flush();
-				}
-				else {
-					Subscription subscriptionModel = (Subscription)session.get(Subscription.class,
-							subscription.getPrimaryKey());
-
-					if (subscriptionModel != null) {
-						subscriptionModel.setCompanyId(subscription.getCompanyId());
-						subscriptionModel.setUserId(subscription.getUserId());
-						subscriptionModel.setUserName(subscription.getUserName());
-						subscriptionModel.setCreateDate(subscription.getCreateDate());
-						subscriptionModel.setModifiedDate(subscription.getModifiedDate());
-						subscriptionModel.setClassName(subscription.getClassName());
-						subscriptionModel.setClassPK(subscription.getClassPK());
-						subscriptionModel.setFrequency(subscription.getFrequency());
-						session.flush();
-					}
-					else {
-						subscriptionModel = new Subscription();
-						subscriptionModel.setSubscriptionId(subscription.getSubscriptionId());
-						subscriptionModel.setCompanyId(subscription.getCompanyId());
-						subscriptionModel.setUserId(subscription.getUserId());
-						subscriptionModel.setUserName(subscription.getUserName());
-						subscriptionModel.setCreateDate(subscription.getCreateDate());
-						subscriptionModel.setModifiedDate(subscription.getModifiedDate());
-						subscriptionModel.setClassName(subscription.getClassName());
-						subscriptionModel.setClassPK(subscription.getClassPK());
-						subscriptionModel.setFrequency(subscription.getFrequency());
-						session.save(subscriptionModel);
-						session.flush();
-					}
-				}
-
-				subscription.setNew(false);
-				subscription.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(subscription);
+			session.flush();
+			subscription.setNew(false);
 
 			return subscription;
 		}

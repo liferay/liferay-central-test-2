@@ -97,40 +97,10 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (portletPreferences.isNew() || portletPreferences.isModified()) {
-				session = openSession();
-
-				if (portletPreferences.isNew()) {
-					PortletPreferences portletPreferencesModel = new PortletPreferences();
-					portletPreferencesModel.setPortletId(portletPreferences.getPortletId());
-					portletPreferencesModel.setLayoutId(portletPreferences.getLayoutId());
-					portletPreferencesModel.setOwnerId(portletPreferences.getOwnerId());
-					portletPreferencesModel.setPreferences(portletPreferences.getPreferences());
-					session.save(portletPreferencesModel);
-					session.flush();
-				}
-				else {
-					PortletPreferences portletPreferencesModel = (PortletPreferences)session.get(PortletPreferences.class,
-							portletPreferences.getPrimaryKey());
-
-					if (portletPreferencesModel != null) {
-						portletPreferencesModel.setPreferences(portletPreferences.getPreferences());
-						session.flush();
-					}
-					else {
-						portletPreferencesModel = new PortletPreferences();
-						portletPreferencesModel.setPortletId(portletPreferences.getPortletId());
-						portletPreferencesModel.setLayoutId(portletPreferences.getLayoutId());
-						portletPreferencesModel.setOwnerId(portletPreferences.getOwnerId());
-						portletPreferencesModel.setPreferences(portletPreferences.getPreferences());
-						session.save(portletPreferencesModel);
-						session.flush();
-					}
-				}
-
-				portletPreferences.setNew(false);
-				portletPreferences.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(portletPreferences);
+			session.flush();
+			portletPreferences.setNew(false);
 
 			return portletPreferences;
 		}

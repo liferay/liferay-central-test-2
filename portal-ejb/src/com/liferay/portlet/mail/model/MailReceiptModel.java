@@ -87,7 +87,6 @@ public class MailReceiptModel extends BaseModel {
 			}
 
 			_receiptId = receiptId;
-			setModified(true);
 		}
 	}
 
@@ -105,7 +104,6 @@ public class MailReceiptModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -123,7 +121,6 @@ public class MailReceiptModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -137,7 +134,6 @@ public class MailReceiptModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -151,7 +147,6 @@ public class MailReceiptModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -169,7 +164,6 @@ public class MailReceiptModel extends BaseModel {
 			}
 
 			_recipientName = recipientName;
-			setModified(true);
 		}
 	}
 
@@ -187,7 +181,6 @@ public class MailReceiptModel extends BaseModel {
 			}
 
 			_recipientAddress = recipientAddress;
-			setModified(true);
 		}
 	}
 
@@ -205,7 +198,6 @@ public class MailReceiptModel extends BaseModel {
 			}
 
 			_subject = subject;
-			setModified(true);
 		}
 	}
 
@@ -219,7 +211,6 @@ public class MailReceiptModel extends BaseModel {
 				((sentDate != null) && (_sentDate != null) &&
 				!sentDate.equals(_sentDate))) {
 			_sentDate = sentDate;
-			setModified(true);
 		}
 	}
 
@@ -230,7 +221,6 @@ public class MailReceiptModel extends BaseModel {
 	public void setReadCount(int readCount) {
 		if (readCount != _readCount) {
 			_readCount = readCount;
-			setModified(true);
 		}
 	}
 
@@ -244,7 +234,6 @@ public class MailReceiptModel extends BaseModel {
 				((firstReadDate != null) && (_firstReadDate != null) &&
 				!firstReadDate.equals(_firstReadDate))) {
 			_firstReadDate = firstReadDate;
-			setModified(true);
 		}
 	}
 
@@ -258,7 +247,6 @@ public class MailReceiptModel extends BaseModel {
 				((lastReadDate != null) && (_lastReadDate != null) &&
 				!lastReadDate.equals(_lastReadDate))) {
 			_lastReadDate = lastReadDate;
-			setModified(true);
 		}
 	}
 

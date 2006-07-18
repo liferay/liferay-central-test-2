@@ -95,7 +95,6 @@ public class JournalStructureModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -113,7 +112,6 @@ public class JournalStructureModel extends BaseModel {
 			}
 
 			_structureId = structureId;
-			setModified(true);
 		}
 	}
 
@@ -131,7 +129,6 @@ public class JournalStructureModel extends BaseModel {
 			}
 
 			_groupId = groupId;
-			setModified(true);
 		}
 	}
 
@@ -149,7 +146,6 @@ public class JournalStructureModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -167,7 +163,6 @@ public class JournalStructureModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -181,7 +176,6 @@ public class JournalStructureModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -195,7 +189,6 @@ public class JournalStructureModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -212,7 +205,6 @@ public class JournalStructureModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -230,7 +222,6 @@ public class JournalStructureModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 
@@ -247,7 +238,6 @@ public class JournalStructureModel extends BaseModel {
 			}
 
 			_xsd = xsd;
-			setModified(true);
 		}
 	}
 

@@ -96,42 +96,10 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (userTrackerPath.isNew() || userTrackerPath.isModified()) {
-				session = openSession();
-
-				if (userTrackerPath.isNew()) {
-					UserTrackerPath userTrackerPathModel = new UserTrackerPath();
-					userTrackerPathModel.setUserTrackerPathId(userTrackerPath.getUserTrackerPathId());
-					userTrackerPathModel.setUserTrackerId(userTrackerPath.getUserTrackerId());
-					userTrackerPathModel.setPath(userTrackerPath.getPath());
-					userTrackerPathModel.setPathDate(userTrackerPath.getPathDate());
-					session.save(userTrackerPathModel);
-					session.flush();
-				}
-				else {
-					UserTrackerPath userTrackerPathModel = (UserTrackerPath)session.get(UserTrackerPath.class,
-							userTrackerPath.getPrimaryKey());
-
-					if (userTrackerPathModel != null) {
-						userTrackerPathModel.setUserTrackerId(userTrackerPath.getUserTrackerId());
-						userTrackerPathModel.setPath(userTrackerPath.getPath());
-						userTrackerPathModel.setPathDate(userTrackerPath.getPathDate());
-						session.flush();
-					}
-					else {
-						userTrackerPathModel = new UserTrackerPath();
-						userTrackerPathModel.setUserTrackerPathId(userTrackerPath.getUserTrackerPathId());
-						userTrackerPathModel.setUserTrackerId(userTrackerPath.getUserTrackerId());
-						userTrackerPathModel.setPath(userTrackerPath.getPath());
-						userTrackerPathModel.setPathDate(userTrackerPath.getPathDate());
-						session.save(userTrackerPathModel);
-						session.flush();
-					}
-				}
-
-				userTrackerPath.setNew(false);
-				userTrackerPath.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(userTrackerPath);
+			session.flush();
+			userTrackerPath.setNew(false);
 
 			return userTrackerPath;
 		}

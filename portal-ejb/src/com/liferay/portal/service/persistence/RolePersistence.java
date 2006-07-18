@@ -111,48 +111,10 @@ public class RolePersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (role.isNew() || role.isModified()) {
-				session = openSession();
-
-				if (role.isNew()) {
-					Role roleModel = new Role();
-					roleModel.setRoleId(role.getRoleId());
-					roleModel.setCompanyId(role.getCompanyId());
-					roleModel.setClassName(role.getClassName());
-					roleModel.setClassPK(role.getClassPK());
-					roleModel.setName(role.getName());
-					roleModel.setDescription(role.getDescription());
-					session.save(roleModel);
-					session.flush();
-				}
-				else {
-					Role roleModel = (Role)session.get(Role.class,
-							role.getPrimaryKey());
-
-					if (roleModel != null) {
-						roleModel.setCompanyId(role.getCompanyId());
-						roleModel.setClassName(role.getClassName());
-						roleModel.setClassPK(role.getClassPK());
-						roleModel.setName(role.getName());
-						roleModel.setDescription(role.getDescription());
-						session.flush();
-					}
-					else {
-						roleModel = new Role();
-						roleModel.setRoleId(role.getRoleId());
-						roleModel.setCompanyId(role.getCompanyId());
-						roleModel.setClassName(role.getClassName());
-						roleModel.setClassPK(role.getClassPK());
-						roleModel.setName(role.getName());
-						roleModel.setDescription(role.getDescription());
-						session.save(roleModel);
-						session.flush();
-					}
-				}
-
-				role.setNew(false);
-				role.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(role);
+			session.flush();
+			role.setNew(false);
 
 			return role;
 		}

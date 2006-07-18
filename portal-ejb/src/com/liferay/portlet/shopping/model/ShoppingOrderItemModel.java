@@ -89,7 +89,6 @@ public class ShoppingOrderItemModel extends BaseModel {
 			}
 
 			_orderId = orderId;
-			setModified(true);
 		}
 	}
 
@@ -107,7 +106,6 @@ public class ShoppingOrderItemModel extends BaseModel {
 			}
 
 			_itemId = itemId;
-			setModified(true);
 		}
 	}
 
@@ -124,7 +122,6 @@ public class ShoppingOrderItemModel extends BaseModel {
 			}
 
 			_sku = sku;
-			setModified(true);
 		}
 	}
 
@@ -141,7 +138,6 @@ public class ShoppingOrderItemModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -159,7 +155,6 @@ public class ShoppingOrderItemModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 
@@ -177,7 +172,6 @@ public class ShoppingOrderItemModel extends BaseModel {
 			}
 
 			_properties = properties;
-			setModified(true);
 		}
 	}
 
@@ -188,7 +182,6 @@ public class ShoppingOrderItemModel extends BaseModel {
 	public void setPrice(double price) {
 		if (price != _price) {
 			_price = price;
-			setModified(true);
 		}
 	}
 
@@ -199,7 +192,6 @@ public class ShoppingOrderItemModel extends BaseModel {
 	public void setQuantity(int quantity) {
 		if (quantity != _quantity) {
 			_quantity = quantity;
-			setModified(true);
 		}
 	}
 
@@ -213,7 +205,6 @@ public class ShoppingOrderItemModel extends BaseModel {
 				((shippedDate != null) && (_shippedDate != null) &&
 				!shippedDate.equals(_shippedDate))) {
 			_shippedDate = shippedDate;
-			setModified(true);
 		}
 	}
 

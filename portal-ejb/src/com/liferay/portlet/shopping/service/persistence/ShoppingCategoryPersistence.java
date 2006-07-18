@@ -98,60 +98,10 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (shoppingCategory.isNew() || shoppingCategory.isModified()) {
-				session = openSession();
-
-				if (shoppingCategory.isNew()) {
-					ShoppingCategory shoppingCategoryModel = new ShoppingCategory();
-					shoppingCategoryModel.setCategoryId(shoppingCategory.getCategoryId());
-					shoppingCategoryModel.setGroupId(shoppingCategory.getGroupId());
-					shoppingCategoryModel.setCompanyId(shoppingCategory.getCompanyId());
-					shoppingCategoryModel.setUserId(shoppingCategory.getUserId());
-					shoppingCategoryModel.setUserName(shoppingCategory.getUserName());
-					shoppingCategoryModel.setCreateDate(shoppingCategory.getCreateDate());
-					shoppingCategoryModel.setModifiedDate(shoppingCategory.getModifiedDate());
-					shoppingCategoryModel.setParentCategoryId(shoppingCategory.getParentCategoryId());
-					shoppingCategoryModel.setName(shoppingCategory.getName());
-					shoppingCategoryModel.setDescription(shoppingCategory.getDescription());
-					session.save(shoppingCategoryModel);
-					session.flush();
-				}
-				else {
-					ShoppingCategory shoppingCategoryModel = (ShoppingCategory)session.get(ShoppingCategory.class,
-							shoppingCategory.getPrimaryKey());
-
-					if (shoppingCategoryModel != null) {
-						shoppingCategoryModel.setGroupId(shoppingCategory.getGroupId());
-						shoppingCategoryModel.setCompanyId(shoppingCategory.getCompanyId());
-						shoppingCategoryModel.setUserId(shoppingCategory.getUserId());
-						shoppingCategoryModel.setUserName(shoppingCategory.getUserName());
-						shoppingCategoryModel.setCreateDate(shoppingCategory.getCreateDate());
-						shoppingCategoryModel.setModifiedDate(shoppingCategory.getModifiedDate());
-						shoppingCategoryModel.setParentCategoryId(shoppingCategory.getParentCategoryId());
-						shoppingCategoryModel.setName(shoppingCategory.getName());
-						shoppingCategoryModel.setDescription(shoppingCategory.getDescription());
-						session.flush();
-					}
-					else {
-						shoppingCategoryModel = new ShoppingCategory();
-						shoppingCategoryModel.setCategoryId(shoppingCategory.getCategoryId());
-						shoppingCategoryModel.setGroupId(shoppingCategory.getGroupId());
-						shoppingCategoryModel.setCompanyId(shoppingCategory.getCompanyId());
-						shoppingCategoryModel.setUserId(shoppingCategory.getUserId());
-						shoppingCategoryModel.setUserName(shoppingCategory.getUserName());
-						shoppingCategoryModel.setCreateDate(shoppingCategory.getCreateDate());
-						shoppingCategoryModel.setModifiedDate(shoppingCategory.getModifiedDate());
-						shoppingCategoryModel.setParentCategoryId(shoppingCategory.getParentCategoryId());
-						shoppingCategoryModel.setName(shoppingCategory.getName());
-						shoppingCategoryModel.setDescription(shoppingCategory.getDescription());
-						session.save(shoppingCategoryModel);
-						session.flush();
-					}
-				}
-
-				shoppingCategory.setNew(false);
-				shoppingCategory.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(shoppingCategory);
+			session.flush();
+			shoppingCategory.setNew(false);
 
 			return shoppingCategory;
 		}

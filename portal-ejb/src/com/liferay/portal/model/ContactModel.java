@@ -139,7 +139,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_contactId = contactId;
-			setModified(true);
 		}
 	}
 
@@ -157,7 +156,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -175,7 +173,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -193,7 +190,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -207,7 +203,6 @@ public class ContactModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -221,7 +216,6 @@ public class ContactModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -239,7 +233,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_accountId = accountId;
-			setModified(true);
 		}
 	}
 
@@ -257,7 +250,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_parentContactId = parentContactId;
-			setModified(true);
 		}
 	}
 
@@ -275,7 +267,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_firstName = firstName;
-			setModified(true);
 		}
 	}
 
@@ -293,7 +284,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_middleName = middleName;
-			setModified(true);
 		}
 	}
 
@@ -311,7 +301,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_lastName = lastName;
-			setModified(true);
 		}
 	}
 
@@ -329,7 +318,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_nickName = nickName;
-			setModified(true);
 		}
 	}
 
@@ -347,7 +335,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_prefixId = prefixId;
-			setModified(true);
 		}
 	}
 
@@ -365,7 +352,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_suffixId = suffixId;
-			setModified(true);
 		}
 	}
 
@@ -380,7 +366,6 @@ public class ContactModel extends BaseModel {
 	public void setMale(boolean male) {
 		if (male != _male) {
 			_male = male;
-			setModified(true);
 		}
 	}
 
@@ -394,7 +379,6 @@ public class ContactModel extends BaseModel {
 				((birthday != null) && (_birthday != null) &&
 				!birthday.equals(_birthday))) {
 			_birthday = birthday;
-			setModified(true);
 		}
 	}
 
@@ -411,7 +395,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_smsSn = smsSn;
-			setModified(true);
 		}
 	}
 
@@ -428,7 +411,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_aimSn = aimSn;
-			setModified(true);
 		}
 	}
 
@@ -445,7 +427,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_icqSn = icqSn;
-			setModified(true);
 		}
 	}
 
@@ -463,7 +444,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_jabberSn = jabberSn;
-			setModified(true);
 		}
 	}
 
@@ -480,7 +460,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_msnSn = msnSn;
-			setModified(true);
 		}
 	}
 
@@ -498,7 +477,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_skypeSn = skypeSn;
-			setModified(true);
 		}
 	}
 
@@ -515,7 +493,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_ymSn = ymSn;
-			setModified(true);
 		}
 	}
 
@@ -533,7 +510,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_employeeStatusId = employeeStatusId;
-			setModified(true);
 		}
 	}
 
@@ -551,7 +527,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_employeeNumber = employeeNumber;
-			setModified(true);
 		}
 	}
 
@@ -569,7 +544,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_jobTitle = jobTitle;
-			setModified(true);
 		}
 	}
 
@@ -587,7 +561,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_jobClass = jobClass;
-			setModified(true);
 		}
 	}
 
@@ -605,7 +578,6 @@ public class ContactModel extends BaseModel {
 			}
 
 			_hoursOfOperation = hoursOfOperation;
-			setModified(true);
 		}
 	}
 

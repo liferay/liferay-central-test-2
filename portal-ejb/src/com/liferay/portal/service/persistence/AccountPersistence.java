@@ -89,78 +89,10 @@ public class AccountPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (account.isNew() || account.isModified()) {
-				session = openSession();
-
-				if (account.isNew()) {
-					Account accountModel = new Account();
-					accountModel.setAccountId(account.getAccountId());
-					accountModel.setCompanyId(account.getCompanyId());
-					accountModel.setUserId(account.getUserId());
-					accountModel.setUserName(account.getUserName());
-					accountModel.setCreateDate(account.getCreateDate());
-					accountModel.setModifiedDate(account.getModifiedDate());
-					accountModel.setParentAccountId(account.getParentAccountId());
-					accountModel.setName(account.getName());
-					accountModel.setLegalName(account.getLegalName());
-					accountModel.setLegalId(account.getLegalId());
-					accountModel.setLegalType(account.getLegalType());
-					accountModel.setSicCode(account.getSicCode());
-					accountModel.setTickerSymbol(account.getTickerSymbol());
-					accountModel.setIndustry(account.getIndustry());
-					accountModel.setType(account.getType());
-					accountModel.setSize(account.getSize());
-					session.save(accountModel);
-					session.flush();
-				}
-				else {
-					Account accountModel = (Account)session.get(Account.class,
-							account.getPrimaryKey());
-
-					if (accountModel != null) {
-						accountModel.setCompanyId(account.getCompanyId());
-						accountModel.setUserId(account.getUserId());
-						accountModel.setUserName(account.getUserName());
-						accountModel.setCreateDate(account.getCreateDate());
-						accountModel.setModifiedDate(account.getModifiedDate());
-						accountModel.setParentAccountId(account.getParentAccountId());
-						accountModel.setName(account.getName());
-						accountModel.setLegalName(account.getLegalName());
-						accountModel.setLegalId(account.getLegalId());
-						accountModel.setLegalType(account.getLegalType());
-						accountModel.setSicCode(account.getSicCode());
-						accountModel.setTickerSymbol(account.getTickerSymbol());
-						accountModel.setIndustry(account.getIndustry());
-						accountModel.setType(account.getType());
-						accountModel.setSize(account.getSize());
-						session.flush();
-					}
-					else {
-						accountModel = new Account();
-						accountModel.setAccountId(account.getAccountId());
-						accountModel.setCompanyId(account.getCompanyId());
-						accountModel.setUserId(account.getUserId());
-						accountModel.setUserName(account.getUserName());
-						accountModel.setCreateDate(account.getCreateDate());
-						accountModel.setModifiedDate(account.getModifiedDate());
-						accountModel.setParentAccountId(account.getParentAccountId());
-						accountModel.setName(account.getName());
-						accountModel.setLegalName(account.getLegalName());
-						accountModel.setLegalId(account.getLegalId());
-						accountModel.setLegalType(account.getLegalType());
-						accountModel.setSicCode(account.getSicCode());
-						accountModel.setTickerSymbol(account.getTickerSymbol());
-						accountModel.setIndustry(account.getIndustry());
-						accountModel.setType(account.getType());
-						accountModel.setSize(account.getSize());
-						session.save(accountModel);
-						session.flush();
-					}
-				}
-
-				account.setNew(false);
-				account.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(account);
+			session.flush();
+			account.setNew(false);
 
 			return account;
 		}

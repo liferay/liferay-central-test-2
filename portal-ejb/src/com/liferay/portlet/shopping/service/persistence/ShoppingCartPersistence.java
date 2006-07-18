@@ -97,63 +97,10 @@ public class ShoppingCartPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (shoppingCart.isNew() || shoppingCart.isModified()) {
-				session = openSession();
-
-				if (shoppingCart.isNew()) {
-					ShoppingCart shoppingCartModel = new ShoppingCart();
-					shoppingCartModel.setCartId(shoppingCart.getCartId());
-					shoppingCartModel.setGroupId(shoppingCart.getGroupId());
-					shoppingCartModel.setCompanyId(shoppingCart.getCompanyId());
-					shoppingCartModel.setUserId(shoppingCart.getUserId());
-					shoppingCartModel.setUserName(shoppingCart.getUserName());
-					shoppingCartModel.setCreateDate(shoppingCart.getCreateDate());
-					shoppingCartModel.setModifiedDate(shoppingCart.getModifiedDate());
-					shoppingCartModel.setItemIds(shoppingCart.getItemIds());
-					shoppingCartModel.setCouponIds(shoppingCart.getCouponIds());
-					shoppingCartModel.setAltShipping(shoppingCart.getAltShipping());
-					shoppingCartModel.setInsure(shoppingCart.getInsure());
-					session.save(shoppingCartModel);
-					session.flush();
-				}
-				else {
-					ShoppingCart shoppingCartModel = (ShoppingCart)session.get(ShoppingCart.class,
-							shoppingCart.getPrimaryKey());
-
-					if (shoppingCartModel != null) {
-						shoppingCartModel.setGroupId(shoppingCart.getGroupId());
-						shoppingCartModel.setCompanyId(shoppingCart.getCompanyId());
-						shoppingCartModel.setUserId(shoppingCart.getUserId());
-						shoppingCartModel.setUserName(shoppingCart.getUserName());
-						shoppingCartModel.setCreateDate(shoppingCart.getCreateDate());
-						shoppingCartModel.setModifiedDate(shoppingCart.getModifiedDate());
-						shoppingCartModel.setItemIds(shoppingCart.getItemIds());
-						shoppingCartModel.setCouponIds(shoppingCart.getCouponIds());
-						shoppingCartModel.setAltShipping(shoppingCart.getAltShipping());
-						shoppingCartModel.setInsure(shoppingCart.getInsure());
-						session.flush();
-					}
-					else {
-						shoppingCartModel = new ShoppingCart();
-						shoppingCartModel.setCartId(shoppingCart.getCartId());
-						shoppingCartModel.setGroupId(shoppingCart.getGroupId());
-						shoppingCartModel.setCompanyId(shoppingCart.getCompanyId());
-						shoppingCartModel.setUserId(shoppingCart.getUserId());
-						shoppingCartModel.setUserName(shoppingCart.getUserName());
-						shoppingCartModel.setCreateDate(shoppingCart.getCreateDate());
-						shoppingCartModel.setModifiedDate(shoppingCart.getModifiedDate());
-						shoppingCartModel.setItemIds(shoppingCart.getItemIds());
-						shoppingCartModel.setCouponIds(shoppingCart.getCouponIds());
-						shoppingCartModel.setAltShipping(shoppingCart.getAltShipping());
-						shoppingCartModel.setInsure(shoppingCart.getInsure());
-						session.save(shoppingCartModel);
-						session.flush();
-					}
-				}
-
-				shoppingCart.setNew(false);
-				shoppingCart.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(shoppingCart);
+			session.flush();
+			shoppingCart.setNew(false);
 
 			return shoppingCart;
 		}

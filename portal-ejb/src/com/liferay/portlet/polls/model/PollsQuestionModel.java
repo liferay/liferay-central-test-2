@@ -90,7 +90,6 @@ public class PollsQuestionModel extends BaseModel {
 			}
 
 			_questionId = questionId;
-			setModified(true);
 		}
 	}
 
@@ -108,7 +107,6 @@ public class PollsQuestionModel extends BaseModel {
 			}
 
 			_groupId = groupId;
-			setModified(true);
 		}
 	}
 
@@ -126,7 +124,6 @@ public class PollsQuestionModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -144,7 +141,6 @@ public class PollsQuestionModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -162,7 +158,6 @@ public class PollsQuestionModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -176,7 +171,6 @@ public class PollsQuestionModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -190,7 +184,6 @@ public class PollsQuestionModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -207,7 +200,6 @@ public class PollsQuestionModel extends BaseModel {
 			}
 
 			_title = title;
-			setModified(true);
 		}
 	}
 
@@ -225,7 +217,6 @@ public class PollsQuestionModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 
@@ -239,7 +230,6 @@ public class PollsQuestionModel extends BaseModel {
 				((expirationDate != null) && (_expirationDate != null) &&
 				!expirationDate.equals(_expirationDate))) {
 			_expirationDate = expirationDate;
-			setModified(true);
 		}
 	}
 
@@ -253,7 +243,6 @@ public class PollsQuestionModel extends BaseModel {
 				((lastVoteDate != null) && (_lastVoteDate != null) &&
 				!lastVoteDate.equals(_lastVoteDate))) {
 			_lastVoteDate = lastVoteDate;
-			setModified(true);
 		}
 	}
 

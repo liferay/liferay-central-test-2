@@ -70,7 +70,6 @@ public class ReleaseModel extends BaseModel {
 			}
 
 			_releaseId = releaseId;
-			setModified(true);
 		}
 	}
 
@@ -84,7 +83,6 @@ public class ReleaseModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -98,7 +96,6 @@ public class ReleaseModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -109,7 +106,6 @@ public class ReleaseModel extends BaseModel {
 	public void setBuildNumber(int buildNumber) {
 		if (buildNumber != _buildNumber) {
 			_buildNumber = buildNumber;
-			setModified(true);
 		}
 	}
 
@@ -123,7 +119,6 @@ public class ReleaseModel extends BaseModel {
 				((buildDate != null) && (_buildDate != null) &&
 				!buildDate.equals(_buildDate))) {
 			_buildDate = buildDate;
-			setModified(true);
 		}
 	}
 

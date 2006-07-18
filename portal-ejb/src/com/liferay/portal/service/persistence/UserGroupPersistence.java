@@ -109,45 +109,10 @@ public class UserGroupPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (userGroup.isNew() || userGroup.isModified()) {
-				session = openSession();
-
-				if (userGroup.isNew()) {
-					UserGroup userGroupModel = new UserGroup();
-					userGroupModel.setUserGroupId(userGroup.getUserGroupId());
-					userGroupModel.setCompanyId(userGroup.getCompanyId());
-					userGroupModel.setParentUserGroupId(userGroup.getParentUserGroupId());
-					userGroupModel.setName(userGroup.getName());
-					userGroupModel.setDescription(userGroup.getDescription());
-					session.save(userGroupModel);
-					session.flush();
-				}
-				else {
-					UserGroup userGroupModel = (UserGroup)session.get(UserGroup.class,
-							userGroup.getPrimaryKey());
-
-					if (userGroupModel != null) {
-						userGroupModel.setCompanyId(userGroup.getCompanyId());
-						userGroupModel.setParentUserGroupId(userGroup.getParentUserGroupId());
-						userGroupModel.setName(userGroup.getName());
-						userGroupModel.setDescription(userGroup.getDescription());
-						session.flush();
-					}
-					else {
-						userGroupModel = new UserGroup();
-						userGroupModel.setUserGroupId(userGroup.getUserGroupId());
-						userGroupModel.setCompanyId(userGroup.getCompanyId());
-						userGroupModel.setParentUserGroupId(userGroup.getParentUserGroupId());
-						userGroupModel.setName(userGroup.getName());
-						userGroupModel.setDescription(userGroup.getDescription());
-						session.save(userGroupModel);
-						session.flush();
-					}
-				}
-
-				userGroup.setNew(false);
-				userGroup.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(userGroup);
+			session.flush();
+			userGroup.setNew(false);
 
 			return userGroup;
 		}

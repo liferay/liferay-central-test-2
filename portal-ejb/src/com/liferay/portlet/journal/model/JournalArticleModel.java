@@ -108,7 +108,6 @@ public class JournalArticleModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -126,7 +125,6 @@ public class JournalArticleModel extends BaseModel {
 			}
 
 			_articleId = articleId;
-			setModified(true);
 		}
 	}
 
@@ -137,7 +135,6 @@ public class JournalArticleModel extends BaseModel {
 	public void setVersion(double version) {
 		if (version != _version) {
 			_version = version;
-			setModified(true);
 		}
 	}
 
@@ -155,7 +152,6 @@ public class JournalArticleModel extends BaseModel {
 			}
 
 			_groupId = groupId;
-			setModified(true);
 		}
 	}
 
@@ -173,7 +169,6 @@ public class JournalArticleModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -191,7 +186,6 @@ public class JournalArticleModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -205,7 +199,6 @@ public class JournalArticleModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -219,7 +212,6 @@ public class JournalArticleModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -236,7 +228,6 @@ public class JournalArticleModel extends BaseModel {
 			}
 
 			_title = title;
-			setModified(true);
 		}
 	}
 
@@ -254,7 +245,6 @@ public class JournalArticleModel extends BaseModel {
 			}
 
 			_content = content;
-			setModified(true);
 		}
 	}
 
@@ -271,7 +261,6 @@ public class JournalArticleModel extends BaseModel {
 			}
 
 			_type = type;
-			setModified(true);
 		}
 	}
 
@@ -289,7 +278,6 @@ public class JournalArticleModel extends BaseModel {
 			}
 
 			_structureId = structureId;
-			setModified(true);
 		}
 	}
 
@@ -307,7 +295,6 @@ public class JournalArticleModel extends BaseModel {
 			}
 
 			_templateId = templateId;
-			setModified(true);
 		}
 	}
 
@@ -321,7 +308,6 @@ public class JournalArticleModel extends BaseModel {
 				((displayDate != null) && (_displayDate != null) &&
 				!displayDate.equals(_displayDate))) {
 			_displayDate = displayDate;
-			setModified(true);
 		}
 	}
 
@@ -336,7 +322,6 @@ public class JournalArticleModel extends BaseModel {
 	public void setApproved(boolean approved) {
 		if (approved != _approved) {
 			_approved = approved;
-			setModified(true);
 		}
 	}
 
@@ -354,7 +339,6 @@ public class JournalArticleModel extends BaseModel {
 			}
 
 			_approvedByUserId = approvedByUserId;
-			setModified(true);
 		}
 	}
 
@@ -372,7 +356,6 @@ public class JournalArticleModel extends BaseModel {
 			}
 
 			_approvedByUserName = approvedByUserName;
-			setModified(true);
 		}
 	}
 
@@ -386,7 +369,6 @@ public class JournalArticleModel extends BaseModel {
 				((approvedDate != null) && (_approvedDate != null) &&
 				!approvedDate.equals(_approvedDate))) {
 			_approvedDate = approvedDate;
-			setModified(true);
 		}
 	}
 
@@ -401,7 +383,6 @@ public class JournalArticleModel extends BaseModel {
 	public void setExpired(boolean expired) {
 		if (expired != _expired) {
 			_expired = expired;
-			setModified(true);
 		}
 	}
 
@@ -415,7 +396,6 @@ public class JournalArticleModel extends BaseModel {
 				((expirationDate != null) && (_expirationDate != null) &&
 				!expirationDate.equals(_expirationDate))) {
 			_expirationDate = expirationDate;
-			setModified(true);
 		}
 	}
 
@@ -429,7 +409,6 @@ public class JournalArticleModel extends BaseModel {
 				((reviewDate != null) && (_reviewDate != null) &&
 				!reviewDate.equals(_reviewDate))) {
 			_reviewDate = reviewDate;
-			setModified(true);
 		}
 	}
 

@@ -74,7 +74,6 @@ public class OrgLaborModel extends BaseModel {
 			}
 
 			_orgLaborId = orgLaborId;
-			setModified(true);
 		}
 	}
 
@@ -92,7 +91,6 @@ public class OrgLaborModel extends BaseModel {
 			}
 
 			_organizationId = organizationId;
-			setModified(true);
 		}
 	}
 
@@ -110,7 +108,6 @@ public class OrgLaborModel extends BaseModel {
 			}
 
 			_typeId = typeId;
-			setModified(true);
 		}
 	}
 
@@ -121,7 +118,6 @@ public class OrgLaborModel extends BaseModel {
 	public void setSunOpen(int sunOpen) {
 		if (sunOpen != _sunOpen) {
 			_sunOpen = sunOpen;
-			setModified(true);
 		}
 	}
 
@@ -132,7 +128,6 @@ public class OrgLaborModel extends BaseModel {
 	public void setSunClose(int sunClose) {
 		if (sunClose != _sunClose) {
 			_sunClose = sunClose;
-			setModified(true);
 		}
 	}
 
@@ -143,7 +138,6 @@ public class OrgLaborModel extends BaseModel {
 	public void setMonOpen(int monOpen) {
 		if (monOpen != _monOpen) {
 			_monOpen = monOpen;
-			setModified(true);
 		}
 	}
 
@@ -154,7 +148,6 @@ public class OrgLaborModel extends BaseModel {
 	public void setMonClose(int monClose) {
 		if (monClose != _monClose) {
 			_monClose = monClose;
-			setModified(true);
 		}
 	}
 
@@ -165,7 +158,6 @@ public class OrgLaborModel extends BaseModel {
 	public void setTueOpen(int tueOpen) {
 		if (tueOpen != _tueOpen) {
 			_tueOpen = tueOpen;
-			setModified(true);
 		}
 	}
 
@@ -176,7 +168,6 @@ public class OrgLaborModel extends BaseModel {
 	public void setTueClose(int tueClose) {
 		if (tueClose != _tueClose) {
 			_tueClose = tueClose;
-			setModified(true);
 		}
 	}
 
@@ -187,7 +178,6 @@ public class OrgLaborModel extends BaseModel {
 	public void setWedOpen(int wedOpen) {
 		if (wedOpen != _wedOpen) {
 			_wedOpen = wedOpen;
-			setModified(true);
 		}
 	}
 
@@ -198,7 +188,6 @@ public class OrgLaborModel extends BaseModel {
 	public void setWedClose(int wedClose) {
 		if (wedClose != _wedClose) {
 			_wedClose = wedClose;
-			setModified(true);
 		}
 	}
 
@@ -209,7 +198,6 @@ public class OrgLaborModel extends BaseModel {
 	public void setThuOpen(int thuOpen) {
 		if (thuOpen != _thuOpen) {
 			_thuOpen = thuOpen;
-			setModified(true);
 		}
 	}
 
@@ -220,7 +208,6 @@ public class OrgLaborModel extends BaseModel {
 	public void setThuClose(int thuClose) {
 		if (thuClose != _thuClose) {
 			_thuClose = thuClose;
-			setModified(true);
 		}
 	}
 
@@ -231,7 +218,6 @@ public class OrgLaborModel extends BaseModel {
 	public void setFriOpen(int friOpen) {
 		if (friOpen != _friOpen) {
 			_friOpen = friOpen;
-			setModified(true);
 		}
 	}
 
@@ -242,7 +228,6 @@ public class OrgLaborModel extends BaseModel {
 	public void setFriClose(int friClose) {
 		if (friClose != _friClose) {
 			_friClose = friClose;
-			setModified(true);
 		}
 	}
 
@@ -253,7 +238,6 @@ public class OrgLaborModel extends BaseModel {
 	public void setSatOpen(int satOpen) {
 		if (satOpen != _satOpen) {
 			_satOpen = satOpen;
-			setModified(true);
 		}
 	}
 
@@ -264,7 +248,6 @@ public class OrgLaborModel extends BaseModel {
 	public void setSatClose(int satClose) {
 		if (satClose != _satClose) {
 			_satClose = satClose;
-			setModified(true);
 		}
 	}
 

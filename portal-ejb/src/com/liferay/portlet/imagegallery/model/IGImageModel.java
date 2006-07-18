@@ -86,7 +86,6 @@ public class IGImageModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -104,7 +103,6 @@ public class IGImageModel extends BaseModel {
 			}
 
 			_imageId = imageId;
-			setModified(true);
 		}
 	}
 
@@ -122,7 +120,6 @@ public class IGImageModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -136,7 +133,6 @@ public class IGImageModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -150,7 +146,6 @@ public class IGImageModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -168,7 +163,6 @@ public class IGImageModel extends BaseModel {
 			}
 
 			_folderId = folderId;
-			setModified(true);
 		}
 	}
 
@@ -186,7 +180,6 @@ public class IGImageModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 
@@ -197,7 +190,6 @@ public class IGImageModel extends BaseModel {
 	public void setHeight(int height) {
 		if (height != _height) {
 			_height = height;
-			setModified(true);
 		}
 	}
 
@@ -208,7 +200,6 @@ public class IGImageModel extends BaseModel {
 	public void setWidth(int width) {
 		if (width != _width) {
 			_width = width;
-			setModified(true);
 		}
 	}
 
@@ -219,7 +210,6 @@ public class IGImageModel extends BaseModel {
 	public void setSize(int size) {
 		if (size != _size) {
 			_size = size;
-			setModified(true);
 		}
 	}
 

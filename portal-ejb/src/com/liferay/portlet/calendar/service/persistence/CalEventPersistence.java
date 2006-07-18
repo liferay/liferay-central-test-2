@@ -96,93 +96,10 @@ public class CalEventPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (calEvent.isNew() || calEvent.isModified()) {
-				session = openSession();
-
-				if (calEvent.isNew()) {
-					CalEvent calEventModel = new CalEvent();
-					calEventModel.setEventId(calEvent.getEventId());
-					calEventModel.setGroupId(calEvent.getGroupId());
-					calEventModel.setCompanyId(calEvent.getCompanyId());
-					calEventModel.setUserId(calEvent.getUserId());
-					calEventModel.setUserName(calEvent.getUserName());
-					calEventModel.setCreateDate(calEvent.getCreateDate());
-					calEventModel.setModifiedDate(calEvent.getModifiedDate());
-					calEventModel.setTitle(calEvent.getTitle());
-					calEventModel.setDescription(calEvent.getDescription());
-					calEventModel.setStartDate(calEvent.getStartDate());
-					calEventModel.setEndDate(calEvent.getEndDate());
-					calEventModel.setDurationHour(calEvent.getDurationHour());
-					calEventModel.setDurationMinute(calEvent.getDurationMinute());
-					calEventModel.setAllDay(calEvent.getAllDay());
-					calEventModel.setTimeZoneSensitive(calEvent.getTimeZoneSensitive());
-					calEventModel.setType(calEvent.getType());
-					calEventModel.setRepeating(calEvent.getRepeating());
-					calEventModel.setRecurrence(calEvent.getRecurrence());
-					calEventModel.setRemindBy(calEvent.getRemindBy());
-					calEventModel.setFirstReminder(calEvent.getFirstReminder());
-					calEventModel.setSecondReminder(calEvent.getSecondReminder());
-					session.save(calEventModel);
-					session.flush();
-				}
-				else {
-					CalEvent calEventModel = (CalEvent)session.get(CalEvent.class,
-							calEvent.getPrimaryKey());
-
-					if (calEventModel != null) {
-						calEventModel.setGroupId(calEvent.getGroupId());
-						calEventModel.setCompanyId(calEvent.getCompanyId());
-						calEventModel.setUserId(calEvent.getUserId());
-						calEventModel.setUserName(calEvent.getUserName());
-						calEventModel.setCreateDate(calEvent.getCreateDate());
-						calEventModel.setModifiedDate(calEvent.getModifiedDate());
-						calEventModel.setTitle(calEvent.getTitle());
-						calEventModel.setDescription(calEvent.getDescription());
-						calEventModel.setStartDate(calEvent.getStartDate());
-						calEventModel.setEndDate(calEvent.getEndDate());
-						calEventModel.setDurationHour(calEvent.getDurationHour());
-						calEventModel.setDurationMinute(calEvent.getDurationMinute());
-						calEventModel.setAllDay(calEvent.getAllDay());
-						calEventModel.setTimeZoneSensitive(calEvent.getTimeZoneSensitive());
-						calEventModel.setType(calEvent.getType());
-						calEventModel.setRepeating(calEvent.getRepeating());
-						calEventModel.setRecurrence(calEvent.getRecurrence());
-						calEventModel.setRemindBy(calEvent.getRemindBy());
-						calEventModel.setFirstReminder(calEvent.getFirstReminder());
-						calEventModel.setSecondReminder(calEvent.getSecondReminder());
-						session.flush();
-					}
-					else {
-						calEventModel = new CalEvent();
-						calEventModel.setEventId(calEvent.getEventId());
-						calEventModel.setGroupId(calEvent.getGroupId());
-						calEventModel.setCompanyId(calEvent.getCompanyId());
-						calEventModel.setUserId(calEvent.getUserId());
-						calEventModel.setUserName(calEvent.getUserName());
-						calEventModel.setCreateDate(calEvent.getCreateDate());
-						calEventModel.setModifiedDate(calEvent.getModifiedDate());
-						calEventModel.setTitle(calEvent.getTitle());
-						calEventModel.setDescription(calEvent.getDescription());
-						calEventModel.setStartDate(calEvent.getStartDate());
-						calEventModel.setEndDate(calEvent.getEndDate());
-						calEventModel.setDurationHour(calEvent.getDurationHour());
-						calEventModel.setDurationMinute(calEvent.getDurationMinute());
-						calEventModel.setAllDay(calEvent.getAllDay());
-						calEventModel.setTimeZoneSensitive(calEvent.getTimeZoneSensitive());
-						calEventModel.setType(calEvent.getType());
-						calEventModel.setRepeating(calEvent.getRepeating());
-						calEventModel.setRecurrence(calEvent.getRecurrence());
-						calEventModel.setRemindBy(calEvent.getRemindBy());
-						calEventModel.setFirstReminder(calEvent.getFirstReminder());
-						calEventModel.setSecondReminder(calEvent.getSecondReminder());
-						session.save(calEventModel);
-						session.flush();
-					}
-				}
-
-				calEvent.setNew(false);
-				calEvent.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(calEvent);
+			session.flush();
+			calEvent.setNew(false);
 
 			return calEvent;
 		}

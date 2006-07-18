@@ -97,52 +97,10 @@ public class DLFileVersionPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (dlFileVersion.isNew() || dlFileVersion.isModified()) {
-				session = openSession();
-
-				if (dlFileVersion.isNew()) {
-					DLFileVersion dlFileVersionModel = new DLFileVersion();
-					dlFileVersionModel.setFolderId(dlFileVersion.getFolderId());
-					dlFileVersionModel.setName(dlFileVersion.getName());
-					dlFileVersionModel.setVersion(dlFileVersion.getVersion());
-					dlFileVersionModel.setCompanyId(dlFileVersion.getCompanyId());
-					dlFileVersionModel.setUserId(dlFileVersion.getUserId());
-					dlFileVersionModel.setUserName(dlFileVersion.getUserName());
-					dlFileVersionModel.setCreateDate(dlFileVersion.getCreateDate());
-					dlFileVersionModel.setSize(dlFileVersion.getSize());
-					session.save(dlFileVersionModel);
-					session.flush();
-				}
-				else {
-					DLFileVersion dlFileVersionModel = (DLFileVersion)session.get(DLFileVersion.class,
-							dlFileVersion.getPrimaryKey());
-
-					if (dlFileVersionModel != null) {
-						dlFileVersionModel.setCompanyId(dlFileVersion.getCompanyId());
-						dlFileVersionModel.setUserId(dlFileVersion.getUserId());
-						dlFileVersionModel.setUserName(dlFileVersion.getUserName());
-						dlFileVersionModel.setCreateDate(dlFileVersion.getCreateDate());
-						dlFileVersionModel.setSize(dlFileVersion.getSize());
-						session.flush();
-					}
-					else {
-						dlFileVersionModel = new DLFileVersion();
-						dlFileVersionModel.setFolderId(dlFileVersion.getFolderId());
-						dlFileVersionModel.setName(dlFileVersion.getName());
-						dlFileVersionModel.setVersion(dlFileVersion.getVersion());
-						dlFileVersionModel.setCompanyId(dlFileVersion.getCompanyId());
-						dlFileVersionModel.setUserId(dlFileVersion.getUserId());
-						dlFileVersionModel.setUserName(dlFileVersion.getUserName());
-						dlFileVersionModel.setCreateDate(dlFileVersion.getCreateDate());
-						dlFileVersionModel.setSize(dlFileVersion.getSize());
-						session.save(dlFileVersionModel);
-						session.flush();
-					}
-				}
-
-				dlFileVersion.setNew(false);
-				dlFileVersion.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(dlFileVersion);
+			session.flush();
+			dlFileVersion.setNew(false);
 
 			return dlFileVersion;
 		}

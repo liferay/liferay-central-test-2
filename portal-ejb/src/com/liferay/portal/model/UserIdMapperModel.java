@@ -79,7 +79,6 @@ public class UserIdMapperModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -96,7 +95,6 @@ public class UserIdMapperModel extends BaseModel {
 			}
 
 			_type = type;
-			setModified(true);
 		}
 	}
 
@@ -114,7 +112,6 @@ public class UserIdMapperModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 
@@ -132,7 +129,6 @@ public class UserIdMapperModel extends BaseModel {
 			}
 
 			_externalUserId = externalUserId;
-			setModified(true);
 		}
 	}
 

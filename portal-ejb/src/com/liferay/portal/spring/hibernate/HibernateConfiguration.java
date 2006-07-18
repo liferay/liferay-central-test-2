@@ -27,10 +27,11 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.StringUtil;
 
 import java.io.InputStream;
+import java.io.IOException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
+import org.hibernate.HibernateException;
 import org.hibernate.cfg.Configuration;
 
 import org.springframework.orm.hibernate3.LocalSessionFactoryBean;

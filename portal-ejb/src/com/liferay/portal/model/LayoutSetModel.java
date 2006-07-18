@@ -83,7 +83,6 @@ public class LayoutSetModel extends BaseModel {
 			}
 
 			_ownerId = ownerId;
-			setModified(true);
 		}
 	}
 
@@ -101,7 +100,6 @@ public class LayoutSetModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -119,7 +117,6 @@ public class LayoutSetModel extends BaseModel {
 			}
 
 			_groupId = groupId;
-			setModified(true);
 		}
 	}
 
@@ -137,7 +134,6 @@ public class LayoutSetModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -152,7 +148,6 @@ public class LayoutSetModel extends BaseModel {
 	public void setPrivateLayout(boolean privateLayout) {
 		if (privateLayout != _privateLayout) {
 			_privateLayout = privateLayout;
-			setModified(true);
 		}
 	}
 
@@ -170,7 +165,6 @@ public class LayoutSetModel extends BaseModel {
 			}
 
 			_themeId = themeId;
-			setModified(true);
 		}
 	}
 
@@ -188,7 +182,6 @@ public class LayoutSetModel extends BaseModel {
 			}
 
 			_colorSchemeId = colorSchemeId;
-			setModified(true);
 		}
 	}
 
@@ -199,7 +192,6 @@ public class LayoutSetModel extends BaseModel {
 	public void setPageCount(int pageCount) {
 		if (pageCount != _pageCount) {
 			_pageCount = pageCount;
-			setModified(true);
 		}
 	}
 

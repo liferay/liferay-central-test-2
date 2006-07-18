@@ -77,7 +77,6 @@ public class MBStatsUserModel extends BaseModel {
 			}
 
 			_groupId = groupId;
-			setModified(true);
 		}
 	}
 
@@ -95,7 +94,6 @@ public class MBStatsUserModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -106,7 +104,6 @@ public class MBStatsUserModel extends BaseModel {
 	public void setMessageCount(int messageCount) {
 		if (messageCount != _messageCount) {
 			_messageCount = messageCount;
-			setModified(true);
 		}
 	}
 
@@ -120,7 +117,6 @@ public class MBStatsUserModel extends BaseModel {
 				((lastPostDate != null) && (_lastPostDate != null) &&
 				!lastPostDate.equals(_lastPostDate))) {
 			_lastPostDate = lastPostDate;
-			setModified(true);
 		}
 	}
 

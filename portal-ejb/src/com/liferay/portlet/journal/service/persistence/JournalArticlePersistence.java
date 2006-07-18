@@ -97,91 +97,10 @@ public class JournalArticlePersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (journalArticle.isNew() || journalArticle.isModified()) {
-				session = openSession();
-
-				if (journalArticle.isNew()) {
-					JournalArticle journalArticleModel = new JournalArticle();
-					journalArticleModel.setCompanyId(journalArticle.getCompanyId());
-					journalArticleModel.setArticleId(journalArticle.getArticleId());
-					journalArticleModel.setVersion(journalArticle.getVersion());
-					journalArticleModel.setGroupId(journalArticle.getGroupId());
-					journalArticleModel.setUserId(journalArticle.getUserId());
-					journalArticleModel.setUserName(journalArticle.getUserName());
-					journalArticleModel.setCreateDate(journalArticle.getCreateDate());
-					journalArticleModel.setModifiedDate(journalArticle.getModifiedDate());
-					journalArticleModel.setTitle(journalArticle.getTitle());
-					journalArticleModel.setContent(journalArticle.getContent());
-					journalArticleModel.setType(journalArticle.getType());
-					journalArticleModel.setStructureId(journalArticle.getStructureId());
-					journalArticleModel.setTemplateId(journalArticle.getTemplateId());
-					journalArticleModel.setDisplayDate(journalArticle.getDisplayDate());
-					journalArticleModel.setApproved(journalArticle.getApproved());
-					journalArticleModel.setApprovedByUserId(journalArticle.getApprovedByUserId());
-					journalArticleModel.setApprovedByUserName(journalArticle.getApprovedByUserName());
-					journalArticleModel.setApprovedDate(journalArticle.getApprovedDate());
-					journalArticleModel.setExpired(journalArticle.getExpired());
-					journalArticleModel.setExpirationDate(journalArticle.getExpirationDate());
-					journalArticleModel.setReviewDate(journalArticle.getReviewDate());
-					session.save(journalArticleModel);
-					session.flush();
-				}
-				else {
-					JournalArticle journalArticleModel = (JournalArticle)session.get(JournalArticle.class,
-							journalArticle.getPrimaryKey());
-
-					if (journalArticleModel != null) {
-						journalArticleModel.setGroupId(journalArticle.getGroupId());
-						journalArticleModel.setUserId(journalArticle.getUserId());
-						journalArticleModel.setUserName(journalArticle.getUserName());
-						journalArticleModel.setCreateDate(journalArticle.getCreateDate());
-						journalArticleModel.setModifiedDate(journalArticle.getModifiedDate());
-						journalArticleModel.setTitle(journalArticle.getTitle());
-						journalArticleModel.setContent(journalArticle.getContent());
-						journalArticleModel.setType(journalArticle.getType());
-						journalArticleModel.setStructureId(journalArticle.getStructureId());
-						journalArticleModel.setTemplateId(journalArticle.getTemplateId());
-						journalArticleModel.setDisplayDate(journalArticle.getDisplayDate());
-						journalArticleModel.setApproved(journalArticle.getApproved());
-						journalArticleModel.setApprovedByUserId(journalArticle.getApprovedByUserId());
-						journalArticleModel.setApprovedByUserName(journalArticle.getApprovedByUserName());
-						journalArticleModel.setApprovedDate(journalArticle.getApprovedDate());
-						journalArticleModel.setExpired(journalArticle.getExpired());
-						journalArticleModel.setExpirationDate(journalArticle.getExpirationDate());
-						journalArticleModel.setReviewDate(journalArticle.getReviewDate());
-						session.flush();
-					}
-					else {
-						journalArticleModel = new JournalArticle();
-						journalArticleModel.setCompanyId(journalArticle.getCompanyId());
-						journalArticleModel.setArticleId(journalArticle.getArticleId());
-						journalArticleModel.setVersion(journalArticle.getVersion());
-						journalArticleModel.setGroupId(journalArticle.getGroupId());
-						journalArticleModel.setUserId(journalArticle.getUserId());
-						journalArticleModel.setUserName(journalArticle.getUserName());
-						journalArticleModel.setCreateDate(journalArticle.getCreateDate());
-						journalArticleModel.setModifiedDate(journalArticle.getModifiedDate());
-						journalArticleModel.setTitle(journalArticle.getTitle());
-						journalArticleModel.setContent(journalArticle.getContent());
-						journalArticleModel.setType(journalArticle.getType());
-						journalArticleModel.setStructureId(journalArticle.getStructureId());
-						journalArticleModel.setTemplateId(journalArticle.getTemplateId());
-						journalArticleModel.setDisplayDate(journalArticle.getDisplayDate());
-						journalArticleModel.setApproved(journalArticle.getApproved());
-						journalArticleModel.setApprovedByUserId(journalArticle.getApprovedByUserId());
-						journalArticleModel.setApprovedByUserName(journalArticle.getApprovedByUserName());
-						journalArticleModel.setApprovedDate(journalArticle.getApprovedDate());
-						journalArticleModel.setExpired(journalArticle.getExpired());
-						journalArticleModel.setExpirationDate(journalArticle.getExpirationDate());
-						journalArticleModel.setReviewDate(journalArticle.getReviewDate());
-						session.save(journalArticleModel);
-						session.flush();
-					}
-				}
-
-				journalArticle.setNew(false);
-				journalArticle.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(journalArticle);
+			session.flush();
+			journalArticle.setNew(false);
 
 			return journalArticle;
 		}

@@ -80,7 +80,6 @@ public class UserGroupModel extends BaseModel {
 			}
 
 			_userGroupId = userGroupId;
-			setModified(true);
 		}
 	}
 
@@ -98,7 +97,6 @@ public class UserGroupModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -116,7 +114,6 @@ public class UserGroupModel extends BaseModel {
 			}
 
 			_parentUserGroupId = parentUserGroupId;
-			setModified(true);
 		}
 	}
 
@@ -133,7 +130,6 @@ public class UserGroupModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -151,7 +147,6 @@ public class UserGroupModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 

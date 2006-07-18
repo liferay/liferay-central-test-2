@@ -96,37 +96,10 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (orgGroupRole.isNew() || orgGroupRole.isModified()) {
-				session = openSession();
-
-				if (orgGroupRole.isNew()) {
-					OrgGroupRole orgGroupRoleModel = new OrgGroupRole();
-					orgGroupRoleModel.setOrganizationId(orgGroupRole.getOrganizationId());
-					orgGroupRoleModel.setGroupId(orgGroupRole.getGroupId());
-					orgGroupRoleModel.setRoleId(orgGroupRole.getRoleId());
-					session.save(orgGroupRoleModel);
-					session.flush();
-				}
-				else {
-					OrgGroupRole orgGroupRoleModel = (OrgGroupRole)session.get(OrgGroupRole.class,
-							orgGroupRole.getPrimaryKey());
-
-					if (orgGroupRoleModel != null) {
-						session.flush();
-					}
-					else {
-						orgGroupRoleModel = new OrgGroupRole();
-						orgGroupRoleModel.setOrganizationId(orgGroupRole.getOrganizationId());
-						orgGroupRoleModel.setGroupId(orgGroupRole.getGroupId());
-						orgGroupRoleModel.setRoleId(orgGroupRole.getRoleId());
-						session.save(orgGroupRoleModel);
-						session.flush();
-					}
-				}
-
-				orgGroupRole.setNew(false);
-				orgGroupRole.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(orgGroupRole);
+			session.flush();
+			orgGroupRole.setNew(false);
 
 			return orgGroupRole;
 		}

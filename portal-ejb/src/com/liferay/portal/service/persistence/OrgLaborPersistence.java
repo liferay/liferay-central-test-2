@@ -94,81 +94,10 @@ public class OrgLaborPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (orgLabor.isNew() || orgLabor.isModified()) {
-				session = openSession();
-
-				if (orgLabor.isNew()) {
-					OrgLabor orgLaborModel = new OrgLabor();
-					orgLaborModel.setOrgLaborId(orgLabor.getOrgLaborId());
-					orgLaborModel.setOrganizationId(orgLabor.getOrganizationId());
-					orgLaborModel.setTypeId(orgLabor.getTypeId());
-					orgLaborModel.setSunOpen(orgLabor.getSunOpen());
-					orgLaborModel.setSunClose(orgLabor.getSunClose());
-					orgLaborModel.setMonOpen(orgLabor.getMonOpen());
-					orgLaborModel.setMonClose(orgLabor.getMonClose());
-					orgLaborModel.setTueOpen(orgLabor.getTueOpen());
-					orgLaborModel.setTueClose(orgLabor.getTueClose());
-					orgLaborModel.setWedOpen(orgLabor.getWedOpen());
-					orgLaborModel.setWedClose(orgLabor.getWedClose());
-					orgLaborModel.setThuOpen(orgLabor.getThuOpen());
-					orgLaborModel.setThuClose(orgLabor.getThuClose());
-					orgLaborModel.setFriOpen(orgLabor.getFriOpen());
-					orgLaborModel.setFriClose(orgLabor.getFriClose());
-					orgLaborModel.setSatOpen(orgLabor.getSatOpen());
-					orgLaborModel.setSatClose(orgLabor.getSatClose());
-					session.save(orgLaborModel);
-					session.flush();
-				}
-				else {
-					OrgLabor orgLaborModel = (OrgLabor)session.get(OrgLabor.class,
-							orgLabor.getPrimaryKey());
-
-					if (orgLaborModel != null) {
-						orgLaborModel.setOrganizationId(orgLabor.getOrganizationId());
-						orgLaborModel.setTypeId(orgLabor.getTypeId());
-						orgLaborModel.setSunOpen(orgLabor.getSunOpen());
-						orgLaborModel.setSunClose(orgLabor.getSunClose());
-						orgLaborModel.setMonOpen(orgLabor.getMonOpen());
-						orgLaborModel.setMonClose(orgLabor.getMonClose());
-						orgLaborModel.setTueOpen(orgLabor.getTueOpen());
-						orgLaborModel.setTueClose(orgLabor.getTueClose());
-						orgLaborModel.setWedOpen(orgLabor.getWedOpen());
-						orgLaborModel.setWedClose(orgLabor.getWedClose());
-						orgLaborModel.setThuOpen(orgLabor.getThuOpen());
-						orgLaborModel.setThuClose(orgLabor.getThuClose());
-						orgLaborModel.setFriOpen(orgLabor.getFriOpen());
-						orgLaborModel.setFriClose(orgLabor.getFriClose());
-						orgLaborModel.setSatOpen(orgLabor.getSatOpen());
-						orgLaborModel.setSatClose(orgLabor.getSatClose());
-						session.flush();
-					}
-					else {
-						orgLaborModel = new OrgLabor();
-						orgLaborModel.setOrgLaborId(orgLabor.getOrgLaborId());
-						orgLaborModel.setOrganizationId(orgLabor.getOrganizationId());
-						orgLaborModel.setTypeId(orgLabor.getTypeId());
-						orgLaborModel.setSunOpen(orgLabor.getSunOpen());
-						orgLaborModel.setSunClose(orgLabor.getSunClose());
-						orgLaborModel.setMonOpen(orgLabor.getMonOpen());
-						orgLaborModel.setMonClose(orgLabor.getMonClose());
-						orgLaborModel.setTueOpen(orgLabor.getTueOpen());
-						orgLaborModel.setTueClose(orgLabor.getTueClose());
-						orgLaborModel.setWedOpen(orgLabor.getWedOpen());
-						orgLaborModel.setWedClose(orgLabor.getWedClose());
-						orgLaborModel.setThuOpen(orgLabor.getThuOpen());
-						orgLaborModel.setThuClose(orgLabor.getThuClose());
-						orgLaborModel.setFriOpen(orgLabor.getFriOpen());
-						orgLaborModel.setFriClose(orgLabor.getFriClose());
-						orgLaborModel.setSatOpen(orgLabor.getSatOpen());
-						orgLaborModel.setSatClose(orgLabor.getSatClose());
-						session.save(orgLaborModel);
-						session.flush();
-					}
-				}
-
-				orgLabor.setNew(false);
-				orgLabor.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(orgLabor);
+			session.flush();
+			orgLabor.setNew(false);
 
 			return orgLabor;
 		}

@@ -85,7 +85,6 @@ public class JournalContentSearchModel extends BaseModel {
 			}
 
 			_portletId = portletId;
-			setModified(true);
 		}
 	}
 
@@ -103,7 +102,6 @@ public class JournalContentSearchModel extends BaseModel {
 			}
 
 			_layoutId = layoutId;
-			setModified(true);
 		}
 	}
 
@@ -121,7 +119,6 @@ public class JournalContentSearchModel extends BaseModel {
 			}
 
 			_ownerId = ownerId;
-			setModified(true);
 		}
 	}
 
@@ -139,7 +136,6 @@ public class JournalContentSearchModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -157,7 +153,6 @@ public class JournalContentSearchModel extends BaseModel {
 			}
 
 			_articleId = articleId;
-			setModified(true);
 		}
 	}
 

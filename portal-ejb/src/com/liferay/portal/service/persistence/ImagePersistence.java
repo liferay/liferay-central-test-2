@@ -89,39 +89,10 @@ public class ImagePersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (image.isNew() || image.isModified()) {
-				session = openSession();
-
-				if (image.isNew()) {
-					Image imageModel = new Image();
-					imageModel.setImageId(image.getImageId());
-					imageModel.setModifiedDate(image.getModifiedDate());
-					imageModel.setText(image.getText());
-					session.save(imageModel);
-					session.flush();
-				}
-				else {
-					Image imageModel = (Image)session.get(Image.class,
-							image.getPrimaryKey());
-
-					if (imageModel != null) {
-						imageModel.setModifiedDate(image.getModifiedDate());
-						imageModel.setText(image.getText());
-						session.flush();
-					}
-					else {
-						imageModel = new Image();
-						imageModel.setImageId(image.getImageId());
-						imageModel.setModifiedDate(image.getModifiedDate());
-						imageModel.setText(image.getText());
-						session.save(imageModel);
-						session.flush();
-					}
-				}
-
-				image.setNew(false);
-				image.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(image);
+			session.flush();
+			image.setNew(false);
 
 			return image;
 		}

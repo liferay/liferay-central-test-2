@@ -86,7 +86,6 @@ public class DLFileRankModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -104,7 +103,6 @@ public class DLFileRankModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -122,7 +120,6 @@ public class DLFileRankModel extends BaseModel {
 			}
 
 			_folderId = folderId;
-			setModified(true);
 		}
 	}
 
@@ -139,7 +136,6 @@ public class DLFileRankModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -153,7 +149,6 @@ public class DLFileRankModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 

@@ -97,63 +97,10 @@ public class BlogsEntryPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (blogsEntry.isNew() || blogsEntry.isModified()) {
-				session = openSession();
-
-				if (blogsEntry.isNew()) {
-					BlogsEntry blogsEntryModel = new BlogsEntry();
-					blogsEntryModel.setEntryId(blogsEntry.getEntryId());
-					blogsEntryModel.setGroupId(blogsEntry.getGroupId());
-					blogsEntryModel.setCompanyId(blogsEntry.getCompanyId());
-					blogsEntryModel.setUserId(blogsEntry.getUserId());
-					blogsEntryModel.setUserName(blogsEntry.getUserName());
-					blogsEntryModel.setCreateDate(blogsEntry.getCreateDate());
-					blogsEntryModel.setModifiedDate(blogsEntry.getModifiedDate());
-					blogsEntryModel.setCategoryId(blogsEntry.getCategoryId());
-					blogsEntryModel.setTitle(blogsEntry.getTitle());
-					blogsEntryModel.setContent(blogsEntry.getContent());
-					blogsEntryModel.setDisplayDate(blogsEntry.getDisplayDate());
-					session.save(blogsEntryModel);
-					session.flush();
-				}
-				else {
-					BlogsEntry blogsEntryModel = (BlogsEntry)session.get(BlogsEntry.class,
-							blogsEntry.getPrimaryKey());
-
-					if (blogsEntryModel != null) {
-						blogsEntryModel.setGroupId(blogsEntry.getGroupId());
-						blogsEntryModel.setCompanyId(blogsEntry.getCompanyId());
-						blogsEntryModel.setUserId(blogsEntry.getUserId());
-						blogsEntryModel.setUserName(blogsEntry.getUserName());
-						blogsEntryModel.setCreateDate(blogsEntry.getCreateDate());
-						blogsEntryModel.setModifiedDate(blogsEntry.getModifiedDate());
-						blogsEntryModel.setCategoryId(blogsEntry.getCategoryId());
-						blogsEntryModel.setTitle(blogsEntry.getTitle());
-						blogsEntryModel.setContent(blogsEntry.getContent());
-						blogsEntryModel.setDisplayDate(blogsEntry.getDisplayDate());
-						session.flush();
-					}
-					else {
-						blogsEntryModel = new BlogsEntry();
-						blogsEntryModel.setEntryId(blogsEntry.getEntryId());
-						blogsEntryModel.setGroupId(blogsEntry.getGroupId());
-						blogsEntryModel.setCompanyId(blogsEntry.getCompanyId());
-						blogsEntryModel.setUserId(blogsEntry.getUserId());
-						blogsEntryModel.setUserName(blogsEntry.getUserName());
-						blogsEntryModel.setCreateDate(blogsEntry.getCreateDate());
-						blogsEntryModel.setModifiedDate(blogsEntry.getModifiedDate());
-						blogsEntryModel.setCategoryId(blogsEntry.getCategoryId());
-						blogsEntryModel.setTitle(blogsEntry.getTitle());
-						blogsEntryModel.setContent(blogsEntry.getContent());
-						blogsEntryModel.setDisplayDate(blogsEntry.getDisplayDate());
-						session.save(blogsEntryModel);
-						session.flush();
-					}
-				}
-
-				blogsEntry.setNew(false);
-				blogsEntry.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(blogsEntry);
+			session.flush();
+			blogsEntry.setNew(false);
 
 			return blogsEntry;
 		}

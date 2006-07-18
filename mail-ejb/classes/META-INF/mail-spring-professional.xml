@@ -2,12 +2,6 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
-	<bean id="liferaySessionFactory" class="com.liferay.portal.spring.hibernate.HibernateConfiguration" lazy-init="true" />
-	<bean id="liferayTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" lazy-init="true">
-		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
 	<bean id="com.liferay.mail.service.spring.MailService.professional" class="com.liferay.mail.service.impl.MailServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.mail.service.persistence.CyrusUserPersistence" class="com.liferay.mail.service.persistence.CyrusUserPersistence" lazy-init="true">
 		<property name="sessionFactory">

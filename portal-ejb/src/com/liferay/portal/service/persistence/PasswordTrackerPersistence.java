@@ -96,42 +96,10 @@ public class PasswordTrackerPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (passwordTracker.isNew() || passwordTracker.isModified()) {
-				session = openSession();
-
-				if (passwordTracker.isNew()) {
-					PasswordTracker passwordTrackerModel = new PasswordTracker();
-					passwordTrackerModel.setPasswordTrackerId(passwordTracker.getPasswordTrackerId());
-					passwordTrackerModel.setUserId(passwordTracker.getUserId());
-					passwordTrackerModel.setCreateDate(passwordTracker.getCreateDate());
-					passwordTrackerModel.setPassword(passwordTracker.getPassword());
-					session.save(passwordTrackerModel);
-					session.flush();
-				}
-				else {
-					PasswordTracker passwordTrackerModel = (PasswordTracker)session.get(PasswordTracker.class,
-							passwordTracker.getPrimaryKey());
-
-					if (passwordTrackerModel != null) {
-						passwordTrackerModel.setUserId(passwordTracker.getUserId());
-						passwordTrackerModel.setCreateDate(passwordTracker.getCreateDate());
-						passwordTrackerModel.setPassword(passwordTracker.getPassword());
-						session.flush();
-					}
-					else {
-						passwordTrackerModel = new PasswordTracker();
-						passwordTrackerModel.setPasswordTrackerId(passwordTracker.getPasswordTrackerId());
-						passwordTrackerModel.setUserId(passwordTracker.getUserId());
-						passwordTrackerModel.setCreateDate(passwordTracker.getCreateDate());
-						passwordTrackerModel.setPassword(passwordTracker.getPassword());
-						session.save(passwordTrackerModel);
-						session.flush();
-					}
-				}
-
-				passwordTracker.setNew(false);
-				passwordTracker.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(passwordTracker);
+			session.flush();
+			passwordTracker.setNew(false);
 
 			return passwordTracker;
 		}

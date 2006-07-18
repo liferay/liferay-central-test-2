@@ -114,42 +114,10 @@ public class PermissionPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (permission.isNew() || permission.isModified()) {
-				session = openSession();
-
-				if (permission.isNew()) {
-					Permission permissionModel = new Permission();
-					permissionModel.setPermissionId(permission.getPermissionId());
-					permissionModel.setCompanyId(permission.getCompanyId());
-					permissionModel.setActionId(permission.getActionId());
-					permissionModel.setResourceId(permission.getResourceId());
-					session.save(permissionModel);
-					session.flush();
-				}
-				else {
-					Permission permissionModel = (Permission)session.get(Permission.class,
-							permission.getPrimaryKey());
-
-					if (permissionModel != null) {
-						permissionModel.setCompanyId(permission.getCompanyId());
-						permissionModel.setActionId(permission.getActionId());
-						permissionModel.setResourceId(permission.getResourceId());
-						session.flush();
-					}
-					else {
-						permissionModel = new Permission();
-						permissionModel.setPermissionId(permission.getPermissionId());
-						permissionModel.setCompanyId(permission.getCompanyId());
-						permissionModel.setActionId(permission.getActionId());
-						permissionModel.setResourceId(permission.getResourceId());
-						session.save(permissionModel);
-						session.flush();
-					}
-				}
-
-				permission.setNew(false);
-				permission.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(permission);
+			session.flush();
+			permission.setNew(false);
 
 			return permission;
 		}

@@ -94,42 +94,10 @@ public class CountryPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (country.isNew() || country.isModified()) {
-				session = openSession();
-
-				if (country.isNew()) {
-					Country countryModel = new Country();
-					countryModel.setCountryId(country.getCountryId());
-					countryModel.setCountryCode(country.getCountryCode());
-					countryModel.setName(country.getName());
-					countryModel.setActive(country.getActive());
-					session.save(countryModel);
-					session.flush();
-				}
-				else {
-					Country countryModel = (Country)session.get(Country.class,
-							country.getPrimaryKey());
-
-					if (countryModel != null) {
-						countryModel.setCountryCode(country.getCountryCode());
-						countryModel.setName(country.getName());
-						countryModel.setActive(country.getActive());
-						session.flush();
-					}
-					else {
-						countryModel = new Country();
-						countryModel.setCountryId(country.getCountryId());
-						countryModel.setCountryCode(country.getCountryCode());
-						countryModel.setName(country.getName());
-						countryModel.setActive(country.getActive());
-						session.save(countryModel);
-						session.flush();
-					}
-				}
-
-				country.setNew(false);
-				country.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(country);
+			session.flush();
+			country.setNew(false);
 
 			return country;
 		}

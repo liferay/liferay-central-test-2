@@ -96,51 +96,10 @@ public class MBThreadPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (mbThread.isNew() || mbThread.isModified()) {
-				session = openSession();
-
-				if (mbThread.isNew()) {
-					MBThread mbThreadModel = new MBThread();
-					mbThreadModel.setThreadId(mbThread.getThreadId());
-					mbThreadModel.setCategoryId(mbThread.getCategoryId());
-					mbThreadModel.setTopicId(mbThread.getTopicId());
-					mbThreadModel.setRootMessageId(mbThread.getRootMessageId());
-					mbThreadModel.setMessageCount(mbThread.getMessageCount());
-					mbThreadModel.setViewCount(mbThread.getViewCount());
-					mbThreadModel.setLastPostDate(mbThread.getLastPostDate());
-					session.save(mbThreadModel);
-					session.flush();
-				}
-				else {
-					MBThread mbThreadModel = (MBThread)session.get(MBThread.class,
-							mbThread.getPrimaryKey());
-
-					if (mbThreadModel != null) {
-						mbThreadModel.setCategoryId(mbThread.getCategoryId());
-						mbThreadModel.setTopicId(mbThread.getTopicId());
-						mbThreadModel.setRootMessageId(mbThread.getRootMessageId());
-						mbThreadModel.setMessageCount(mbThread.getMessageCount());
-						mbThreadModel.setViewCount(mbThread.getViewCount());
-						mbThreadModel.setLastPostDate(mbThread.getLastPostDate());
-						session.flush();
-					}
-					else {
-						mbThreadModel = new MBThread();
-						mbThreadModel.setThreadId(mbThread.getThreadId());
-						mbThreadModel.setCategoryId(mbThread.getCategoryId());
-						mbThreadModel.setTopicId(mbThread.getTopicId());
-						mbThreadModel.setRootMessageId(mbThread.getRootMessageId());
-						mbThreadModel.setMessageCount(mbThread.getMessageCount());
-						mbThreadModel.setViewCount(mbThread.getViewCount());
-						mbThreadModel.setLastPostDate(mbThread.getLastPostDate());
-						session.save(mbThreadModel);
-						session.flush();
-					}
-				}
-
-				mbThread.setNew(false);
-				mbThread.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(mbThread);
+			session.flush();
+			mbThread.setNew(false);
 
 			return mbThread;
 		}

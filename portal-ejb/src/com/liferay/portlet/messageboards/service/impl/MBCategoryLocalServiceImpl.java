@@ -217,6 +217,13 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 		return MBCategoryUtil.findByPrimaryKey(categoryId);
 	}
 
+	public MBCategory getCategory2(String categoryId)
+		throws PortalException, SystemException {
+
+		MBCategoryUtil.findByPrimaryKey(categoryId);
+		return MBCategoryUtil.findByPrimaryKey(categoryId);
+	}
+
 	public void getSubcategoryIds(
 			List categoryIds, String groupId, String categoryId)
 		throws SystemException {

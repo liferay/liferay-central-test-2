@@ -89,45 +89,10 @@ public class CompanyPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (company.isNew() || company.isModified()) {
-				session = openSession();
-
-				if (company.isNew()) {
-					Company companyModel = new Company();
-					companyModel.setCompanyId(company.getCompanyId());
-					companyModel.setKey(company.getKey());
-					companyModel.setPortalURL(company.getPortalURL());
-					companyModel.setHomeURL(company.getHomeURL());
-					companyModel.setMx(company.getMx());
-					session.save(companyModel);
-					session.flush();
-				}
-				else {
-					Company companyModel = (Company)session.get(Company.class,
-							company.getPrimaryKey());
-
-					if (companyModel != null) {
-						companyModel.setKey(company.getKey());
-						companyModel.setPortalURL(company.getPortalURL());
-						companyModel.setHomeURL(company.getHomeURL());
-						companyModel.setMx(company.getMx());
-						session.flush();
-					}
-					else {
-						companyModel = new Company();
-						companyModel.setCompanyId(company.getCompanyId());
-						companyModel.setKey(company.getKey());
-						companyModel.setPortalURL(company.getPortalURL());
-						companyModel.setHomeURL(company.getHomeURL());
-						companyModel.setMx(company.getMx());
-						session.save(companyModel);
-						session.flush();
-					}
-				}
-
-				company.setNew(false);
-				company.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(company);
+			session.flush();
+			company.setNew(false);
 
 			return company;
 		}

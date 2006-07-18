@@ -109,7 +109,6 @@ public class AccountModel extends BaseModel {
 			}
 
 			_accountId = accountId;
-			setModified(true);
 		}
 	}
 
@@ -127,7 +126,6 @@ public class AccountModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -145,7 +143,6 @@ public class AccountModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -163,7 +160,6 @@ public class AccountModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -177,7 +173,6 @@ public class AccountModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -191,7 +186,6 @@ public class AccountModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -209,7 +203,6 @@ public class AccountModel extends BaseModel {
 			}
 
 			_parentAccountId = parentAccountId;
-			setModified(true);
 		}
 	}
 
@@ -226,7 +219,6 @@ public class AccountModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -244,7 +236,6 @@ public class AccountModel extends BaseModel {
 			}
 
 			_legalName = legalName;
-			setModified(true);
 		}
 	}
 
@@ -262,7 +253,6 @@ public class AccountModel extends BaseModel {
 			}
 
 			_legalId = legalId;
-			setModified(true);
 		}
 	}
 
@@ -280,7 +270,6 @@ public class AccountModel extends BaseModel {
 			}
 
 			_legalType = legalType;
-			setModified(true);
 		}
 	}
 
@@ -298,7 +287,6 @@ public class AccountModel extends BaseModel {
 			}
 
 			_sicCode = sicCode;
-			setModified(true);
 		}
 	}
 
@@ -316,7 +304,6 @@ public class AccountModel extends BaseModel {
 			}
 
 			_tickerSymbol = tickerSymbol;
-			setModified(true);
 		}
 	}
 
@@ -334,7 +321,6 @@ public class AccountModel extends BaseModel {
 			}
 
 			_industry = industry;
-			setModified(true);
 		}
 	}
 
@@ -351,7 +337,6 @@ public class AccountModel extends BaseModel {
 			}
 
 			_type = type;
-			setModified(true);
 		}
 	}
 
@@ -368,7 +353,6 @@ public class AccountModel extends BaseModel {
 			}
 
 			_size = size;
-			setModified(true);
 		}
 	}
 

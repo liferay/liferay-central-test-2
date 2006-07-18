@@ -77,7 +77,6 @@ public class OrgGroupRoleModel extends BaseModel {
 			}
 
 			_organizationId = organizationId;
-			setModified(true);
 		}
 	}
 
@@ -95,7 +94,6 @@ public class OrgGroupRoleModel extends BaseModel {
 			}
 
 			_groupId = groupId;
-			setModified(true);
 		}
 	}
 
@@ -113,7 +111,6 @@ public class OrgGroupRoleModel extends BaseModel {
 			}
 
 			_roleId = roleId;
-			setModified(true);
 		}
 	}
 

@@ -100,44 +100,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (journalContentSearch.isNew() ||
-					journalContentSearch.isModified()) {
-				session = openSession();
-
-				if (journalContentSearch.isNew()) {
-					JournalContentSearch journalContentSearchModel = new JournalContentSearch();
-					journalContentSearchModel.setPortletId(journalContentSearch.getPortletId());
-					journalContentSearchModel.setLayoutId(journalContentSearch.getLayoutId());
-					journalContentSearchModel.setOwnerId(journalContentSearch.getOwnerId());
-					journalContentSearchModel.setCompanyId(journalContentSearch.getCompanyId());
-					journalContentSearchModel.setArticleId(journalContentSearch.getArticleId());
-					session.save(journalContentSearchModel);
-					session.flush();
-				}
-				else {
-					JournalContentSearch journalContentSearchModel = (JournalContentSearch)session.get(JournalContentSearch.class,
-							journalContentSearch.getPrimaryKey());
-
-					if (journalContentSearchModel != null) {
-						journalContentSearchModel.setCompanyId(journalContentSearch.getCompanyId());
-						journalContentSearchModel.setArticleId(journalContentSearch.getArticleId());
-						session.flush();
-					}
-					else {
-						journalContentSearchModel = new JournalContentSearch();
-						journalContentSearchModel.setPortletId(journalContentSearch.getPortletId());
-						journalContentSearchModel.setLayoutId(journalContentSearch.getLayoutId());
-						journalContentSearchModel.setOwnerId(journalContentSearch.getOwnerId());
-						journalContentSearchModel.setCompanyId(journalContentSearch.getCompanyId());
-						journalContentSearchModel.setArticleId(journalContentSearch.getArticleId());
-						session.save(journalContentSearchModel);
-						session.flush();
-					}
-				}
-
-				journalContentSearch.setNew(false);
-				journalContentSearch.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(journalContentSearch);
+			session.flush();
+			journalContentSearch.setNew(false);
 
 			return journalContentSearch;
 		}

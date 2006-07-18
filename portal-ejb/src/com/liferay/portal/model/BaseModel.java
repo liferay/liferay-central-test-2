@@ -49,15 +49,6 @@ public abstract class BaseModel implements Cloneable, Comparable, Serializable {
 		return _new = n;
 	}
 
-	public boolean isModified() {
-		return _modified;
-	}
-
-	public void setModified(boolean modified) {
-		_modified = modified;
-	}
-
 	private boolean _new;
-	private boolean _modified;
 
 }

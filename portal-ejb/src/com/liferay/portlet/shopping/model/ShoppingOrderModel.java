@@ -177,7 +177,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_orderId = orderId;
-			setModified(true);
 		}
 	}
 
@@ -195,7 +194,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_groupId = groupId;
-			setModified(true);
 		}
 	}
 
@@ -213,7 +211,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -231,7 +228,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -249,7 +245,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -263,7 +258,6 @@ public class ShoppingOrderModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -277,7 +271,6 @@ public class ShoppingOrderModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -288,7 +281,6 @@ public class ShoppingOrderModel extends BaseModel {
 	public void setTax(double tax) {
 		if (tax != _tax) {
 			_tax = tax;
-			setModified(true);
 		}
 	}
 
@@ -299,7 +291,6 @@ public class ShoppingOrderModel extends BaseModel {
 	public void setShipping(double shipping) {
 		if (shipping != _shipping) {
 			_shipping = shipping;
-			setModified(true);
 		}
 	}
 
@@ -317,7 +308,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_altShipping = altShipping;
-			setModified(true);
 		}
 	}
 
@@ -332,7 +322,6 @@ public class ShoppingOrderModel extends BaseModel {
 	public void setRequiresShipping(boolean requiresShipping) {
 		if (requiresShipping != _requiresShipping) {
 			_requiresShipping = requiresShipping;
-			setModified(true);
 		}
 	}
 
@@ -347,7 +336,6 @@ public class ShoppingOrderModel extends BaseModel {
 	public void setInsure(boolean insure) {
 		if (insure != _insure) {
 			_insure = insure;
-			setModified(true);
 		}
 	}
 
@@ -358,7 +346,6 @@ public class ShoppingOrderModel extends BaseModel {
 	public void setInsurance(double insurance) {
 		if (insurance != _insurance) {
 			_insurance = insurance;
-			setModified(true);
 		}
 	}
 
@@ -376,7 +363,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_couponIds = couponIds;
-			setModified(true);
 		}
 	}
 
@@ -387,7 +373,6 @@ public class ShoppingOrderModel extends BaseModel {
 	public void setCouponDiscount(double couponDiscount) {
 		if (couponDiscount != _couponDiscount) {
 			_couponDiscount = couponDiscount;
-			setModified(true);
 		}
 	}
 
@@ -405,7 +390,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_billingFirstName = billingFirstName;
-			setModified(true);
 		}
 	}
 
@@ -423,7 +407,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_billingLastName = billingLastName;
-			setModified(true);
 		}
 	}
 
@@ -443,7 +426,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_billingEmailAddress = billingEmailAddress;
-			setModified(true);
 		}
 	}
 
@@ -461,7 +443,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_billingCompany = billingCompany;
-			setModified(true);
 		}
 	}
 
@@ -479,7 +460,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_billingStreet = billingStreet;
-			setModified(true);
 		}
 	}
 
@@ -497,7 +477,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_billingCity = billingCity;
-			setModified(true);
 		}
 	}
 
@@ -515,7 +494,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_billingState = billingState;
-			setModified(true);
 		}
 	}
 
@@ -533,7 +511,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_billingZip = billingZip;
-			setModified(true);
 		}
 	}
 
@@ -551,7 +528,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_billingCountry = billingCountry;
-			setModified(true);
 		}
 	}
 
@@ -569,7 +545,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_billingPhone = billingPhone;
-			setModified(true);
 		}
 	}
 
@@ -584,7 +559,6 @@ public class ShoppingOrderModel extends BaseModel {
 	public void setShipToBilling(boolean shipToBilling) {
 		if (shipToBilling != _shipToBilling) {
 			_shipToBilling = shipToBilling;
-			setModified(true);
 		}
 	}
 
@@ -602,7 +576,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_shippingFirstName = shippingFirstName;
-			setModified(true);
 		}
 	}
 
@@ -620,7 +593,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_shippingLastName = shippingLastName;
-			setModified(true);
 		}
 	}
 
@@ -640,7 +612,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_shippingEmailAddress = shippingEmailAddress;
-			setModified(true);
 		}
 	}
 
@@ -658,7 +629,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_shippingCompany = shippingCompany;
-			setModified(true);
 		}
 	}
 
@@ -676,7 +646,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_shippingStreet = shippingStreet;
-			setModified(true);
 		}
 	}
 
@@ -694,7 +663,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_shippingCity = shippingCity;
-			setModified(true);
 		}
 	}
 
@@ -712,7 +680,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_shippingState = shippingState;
-			setModified(true);
 		}
 	}
 
@@ -730,7 +697,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_shippingZip = shippingZip;
-			setModified(true);
 		}
 	}
 
@@ -748,7 +714,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_shippingCountry = shippingCountry;
-			setModified(true);
 		}
 	}
 
@@ -766,7 +731,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_shippingPhone = shippingPhone;
-			setModified(true);
 		}
 	}
 
@@ -784,7 +748,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_ccName = ccName;
-			setModified(true);
 		}
 	}
 
@@ -802,7 +765,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_ccType = ccType;
-			setModified(true);
 		}
 	}
 
@@ -820,7 +782,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_ccNumber = ccNumber;
-			setModified(true);
 		}
 	}
 
@@ -831,7 +792,6 @@ public class ShoppingOrderModel extends BaseModel {
 	public void setCcExpMonth(int ccExpMonth) {
 		if (ccExpMonth != _ccExpMonth) {
 			_ccExpMonth = ccExpMonth;
-			setModified(true);
 		}
 	}
 
@@ -842,7 +802,6 @@ public class ShoppingOrderModel extends BaseModel {
 	public void setCcExpYear(int ccExpYear) {
 		if (ccExpYear != _ccExpYear) {
 			_ccExpYear = ccExpYear;
-			setModified(true);
 		}
 	}
 
@@ -860,7 +819,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_ccVerNumber = ccVerNumber;
-			setModified(true);
 		}
 	}
 
@@ -878,7 +836,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_comments = comments;
-			setModified(true);
 		}
 	}
 
@@ -896,7 +853,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_ppTxnId = ppTxnId;
-			setModified(true);
 		}
 	}
 
@@ -914,7 +870,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_ppPaymentStatus = ppPaymentStatus;
-			setModified(true);
 		}
 	}
 
@@ -925,7 +880,6 @@ public class ShoppingOrderModel extends BaseModel {
 	public void setPpPaymentGross(double ppPaymentGross) {
 		if (ppPaymentGross != _ppPaymentGross) {
 			_ppPaymentGross = ppPaymentGross;
-			setModified(true);
 		}
 	}
 
@@ -943,7 +897,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_ppReceiverEmail = ppReceiverEmail;
-			setModified(true);
 		}
 	}
 
@@ -961,7 +914,6 @@ public class ShoppingOrderModel extends BaseModel {
 			}
 
 			_ppPayerEmail = ppPayerEmail;
-			setModified(true);
 		}
 	}
 
@@ -976,7 +928,6 @@ public class ShoppingOrderModel extends BaseModel {
 	public void setSendOrderEmail(boolean sendOrderEmail) {
 		if (sendOrderEmail != _sendOrderEmail) {
 			_sendOrderEmail = sendOrderEmail;
-			setModified(true);
 		}
 	}
 
@@ -991,7 +942,6 @@ public class ShoppingOrderModel extends BaseModel {
 	public void setSendShippingEmail(boolean sendShippingEmail) {
 		if (sendShippingEmail != _sendShippingEmail) {
 			_sendShippingEmail = sendShippingEmail;
-			setModified(true);
 		}
 	}
 

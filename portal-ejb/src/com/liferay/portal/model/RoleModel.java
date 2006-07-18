@@ -83,7 +83,6 @@ public class RoleModel extends BaseModel {
 			}
 
 			_roleId = roleId;
-			setModified(true);
 		}
 	}
 
@@ -101,7 +100,6 @@ public class RoleModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -119,7 +117,6 @@ public class RoleModel extends BaseModel {
 			}
 
 			_className = className;
-			setModified(true);
 		}
 	}
 
@@ -137,7 +134,6 @@ public class RoleModel extends BaseModel {
 			}
 
 			_classPK = classPK;
-			setModified(true);
 		}
 	}
 
@@ -154,7 +150,6 @@ public class RoleModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -172,7 +167,6 @@ public class RoleModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 

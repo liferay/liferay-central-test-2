@@ -97,60 +97,10 @@ public class BookmarksEntryPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (bookmarksEntry.isNew() || bookmarksEntry.isModified()) {
-				session = openSession();
-
-				if (bookmarksEntry.isNew()) {
-					BookmarksEntry bookmarksEntryModel = new BookmarksEntry();
-					bookmarksEntryModel.setEntryId(bookmarksEntry.getEntryId());
-					bookmarksEntryModel.setCompanyId(bookmarksEntry.getCompanyId());
-					bookmarksEntryModel.setUserId(bookmarksEntry.getUserId());
-					bookmarksEntryModel.setCreateDate(bookmarksEntry.getCreateDate());
-					bookmarksEntryModel.setModifiedDate(bookmarksEntry.getModifiedDate());
-					bookmarksEntryModel.setFolderId(bookmarksEntry.getFolderId());
-					bookmarksEntryModel.setName(bookmarksEntry.getName());
-					bookmarksEntryModel.setUrl(bookmarksEntry.getUrl());
-					bookmarksEntryModel.setComments(bookmarksEntry.getComments());
-					bookmarksEntryModel.setVisits(bookmarksEntry.getVisits());
-					session.save(bookmarksEntryModel);
-					session.flush();
-				}
-				else {
-					BookmarksEntry bookmarksEntryModel = (BookmarksEntry)session.get(BookmarksEntry.class,
-							bookmarksEntry.getPrimaryKey());
-
-					if (bookmarksEntryModel != null) {
-						bookmarksEntryModel.setCompanyId(bookmarksEntry.getCompanyId());
-						bookmarksEntryModel.setUserId(bookmarksEntry.getUserId());
-						bookmarksEntryModel.setCreateDate(bookmarksEntry.getCreateDate());
-						bookmarksEntryModel.setModifiedDate(bookmarksEntry.getModifiedDate());
-						bookmarksEntryModel.setFolderId(bookmarksEntry.getFolderId());
-						bookmarksEntryModel.setName(bookmarksEntry.getName());
-						bookmarksEntryModel.setUrl(bookmarksEntry.getUrl());
-						bookmarksEntryModel.setComments(bookmarksEntry.getComments());
-						bookmarksEntryModel.setVisits(bookmarksEntry.getVisits());
-						session.flush();
-					}
-					else {
-						bookmarksEntryModel = new BookmarksEntry();
-						bookmarksEntryModel.setEntryId(bookmarksEntry.getEntryId());
-						bookmarksEntryModel.setCompanyId(bookmarksEntry.getCompanyId());
-						bookmarksEntryModel.setUserId(bookmarksEntry.getUserId());
-						bookmarksEntryModel.setCreateDate(bookmarksEntry.getCreateDate());
-						bookmarksEntryModel.setModifiedDate(bookmarksEntry.getModifiedDate());
-						bookmarksEntryModel.setFolderId(bookmarksEntry.getFolderId());
-						bookmarksEntryModel.setName(bookmarksEntry.getName());
-						bookmarksEntryModel.setUrl(bookmarksEntry.getUrl());
-						bookmarksEntryModel.setComments(bookmarksEntry.getComments());
-						bookmarksEntryModel.setVisits(bookmarksEntry.getVisits());
-						session.save(bookmarksEntryModel);
-						session.flush();
-					}
-				}
-
-				bookmarksEntry.setNew(false);
-				bookmarksEntry.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(bookmarksEntry);
+			session.flush();
+			bookmarksEntry.setNew(false);
 
 			return bookmarksEntry;
 		}

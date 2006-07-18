@@ -78,7 +78,6 @@ public class MBDiscussionModel extends BaseModel {
 			}
 
 			_discussionId = discussionId;
-			setModified(true);
 		}
 	}
 
@@ -96,7 +95,6 @@ public class MBDiscussionModel extends BaseModel {
 			}
 
 			_className = className;
-			setModified(true);
 		}
 	}
 
@@ -114,7 +112,6 @@ public class MBDiscussionModel extends BaseModel {
 			}
 
 			_classPK = classPK;
-			setModified(true);
 		}
 	}
 
@@ -132,7 +129,6 @@ public class MBDiscussionModel extends BaseModel {
 			}
 
 			_threadId = threadId;
-			setModified(true);
 		}
 	}
 

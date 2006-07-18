@@ -97,42 +97,10 @@ public class DLFileRankPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (dlFileRank.isNew() || dlFileRank.isModified()) {
-				session = openSession();
-
-				if (dlFileRank.isNew()) {
-					DLFileRank dlFileRankModel = new DLFileRank();
-					dlFileRankModel.setCompanyId(dlFileRank.getCompanyId());
-					dlFileRankModel.setUserId(dlFileRank.getUserId());
-					dlFileRankModel.setFolderId(dlFileRank.getFolderId());
-					dlFileRankModel.setName(dlFileRank.getName());
-					dlFileRankModel.setCreateDate(dlFileRank.getCreateDate());
-					session.save(dlFileRankModel);
-					session.flush();
-				}
-				else {
-					DLFileRank dlFileRankModel = (DLFileRank)session.get(DLFileRank.class,
-							dlFileRank.getPrimaryKey());
-
-					if (dlFileRankModel != null) {
-						dlFileRankModel.setCreateDate(dlFileRank.getCreateDate());
-						session.flush();
-					}
-					else {
-						dlFileRankModel = new DLFileRank();
-						dlFileRankModel.setCompanyId(dlFileRank.getCompanyId());
-						dlFileRankModel.setUserId(dlFileRank.getUserId());
-						dlFileRankModel.setFolderId(dlFileRank.getFolderId());
-						dlFileRankModel.setName(dlFileRank.getName());
-						dlFileRankModel.setCreateDate(dlFileRank.getCreateDate());
-						session.save(dlFileRankModel);
-						session.flush();
-					}
-				}
-
-				dlFileRank.setNew(false);
-				dlFileRank.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(dlFileRank);
+			session.flush();
+			dlFileRank.setNew(false);
 
 			return dlFileRank;
 		}

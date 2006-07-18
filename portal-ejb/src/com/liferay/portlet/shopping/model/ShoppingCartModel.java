@@ -89,7 +89,6 @@ public class ShoppingCartModel extends BaseModel {
 			}
 
 			_cartId = cartId;
-			setModified(true);
 		}
 	}
 
@@ -107,7 +106,6 @@ public class ShoppingCartModel extends BaseModel {
 			}
 
 			_groupId = groupId;
-			setModified(true);
 		}
 	}
 
@@ -125,7 +123,6 @@ public class ShoppingCartModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -143,7 +140,6 @@ public class ShoppingCartModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -161,7 +157,6 @@ public class ShoppingCartModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -175,7 +170,6 @@ public class ShoppingCartModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -189,7 +183,6 @@ public class ShoppingCartModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -207,7 +200,6 @@ public class ShoppingCartModel extends BaseModel {
 			}
 
 			_itemIds = itemIds;
-			setModified(true);
 		}
 	}
 
@@ -225,7 +217,6 @@ public class ShoppingCartModel extends BaseModel {
 			}
 
 			_couponIds = couponIds;
-			setModified(true);
 		}
 	}
 
@@ -236,7 +227,6 @@ public class ShoppingCartModel extends BaseModel {
 	public void setAltShipping(int altShipping) {
 		if (altShipping != _altShipping) {
 			_altShipping = altShipping;
-			setModified(true);
 		}
 	}
 
@@ -251,7 +241,6 @@ public class ShoppingCartModel extends BaseModel {
 	public void setInsure(boolean insure) {
 		if (insure != _insure) {
 			_insure = insure;
-			setModified(true);
 		}
 	}
 

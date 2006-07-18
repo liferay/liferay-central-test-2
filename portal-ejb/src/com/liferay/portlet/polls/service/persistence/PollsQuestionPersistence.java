@@ -97,63 +97,10 @@ public class PollsQuestionPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (pollsQuestion.isNew() || pollsQuestion.isModified()) {
-				session = openSession();
-
-				if (pollsQuestion.isNew()) {
-					PollsQuestion pollsQuestionModel = new PollsQuestion();
-					pollsQuestionModel.setQuestionId(pollsQuestion.getQuestionId());
-					pollsQuestionModel.setGroupId(pollsQuestion.getGroupId());
-					pollsQuestionModel.setCompanyId(pollsQuestion.getCompanyId());
-					pollsQuestionModel.setUserId(pollsQuestion.getUserId());
-					pollsQuestionModel.setUserName(pollsQuestion.getUserName());
-					pollsQuestionModel.setCreateDate(pollsQuestion.getCreateDate());
-					pollsQuestionModel.setModifiedDate(pollsQuestion.getModifiedDate());
-					pollsQuestionModel.setTitle(pollsQuestion.getTitle());
-					pollsQuestionModel.setDescription(pollsQuestion.getDescription());
-					pollsQuestionModel.setExpirationDate(pollsQuestion.getExpirationDate());
-					pollsQuestionModel.setLastVoteDate(pollsQuestion.getLastVoteDate());
-					session.save(pollsQuestionModel);
-					session.flush();
-				}
-				else {
-					PollsQuestion pollsQuestionModel = (PollsQuestion)session.get(PollsQuestion.class,
-							pollsQuestion.getPrimaryKey());
-
-					if (pollsQuestionModel != null) {
-						pollsQuestionModel.setGroupId(pollsQuestion.getGroupId());
-						pollsQuestionModel.setCompanyId(pollsQuestion.getCompanyId());
-						pollsQuestionModel.setUserId(pollsQuestion.getUserId());
-						pollsQuestionModel.setUserName(pollsQuestion.getUserName());
-						pollsQuestionModel.setCreateDate(pollsQuestion.getCreateDate());
-						pollsQuestionModel.setModifiedDate(pollsQuestion.getModifiedDate());
-						pollsQuestionModel.setTitle(pollsQuestion.getTitle());
-						pollsQuestionModel.setDescription(pollsQuestion.getDescription());
-						pollsQuestionModel.setExpirationDate(pollsQuestion.getExpirationDate());
-						pollsQuestionModel.setLastVoteDate(pollsQuestion.getLastVoteDate());
-						session.flush();
-					}
-					else {
-						pollsQuestionModel = new PollsQuestion();
-						pollsQuestionModel.setQuestionId(pollsQuestion.getQuestionId());
-						pollsQuestionModel.setGroupId(pollsQuestion.getGroupId());
-						pollsQuestionModel.setCompanyId(pollsQuestion.getCompanyId());
-						pollsQuestionModel.setUserId(pollsQuestion.getUserId());
-						pollsQuestionModel.setUserName(pollsQuestion.getUserName());
-						pollsQuestionModel.setCreateDate(pollsQuestion.getCreateDate());
-						pollsQuestionModel.setModifiedDate(pollsQuestion.getModifiedDate());
-						pollsQuestionModel.setTitle(pollsQuestion.getTitle());
-						pollsQuestionModel.setDescription(pollsQuestion.getDescription());
-						pollsQuestionModel.setExpirationDate(pollsQuestion.getExpirationDate());
-						pollsQuestionModel.setLastVoteDate(pollsQuestion.getLastVoteDate());
-						session.save(pollsQuestionModel);
-						session.flush();
-					}
-				}
-
-				pollsQuestion.setNew(false);
-				pollsQuestion.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(pollsQuestion);
+			session.flush();
+			pollsQuestion.setNew(false);
 
 			return pollsQuestion;
 		}

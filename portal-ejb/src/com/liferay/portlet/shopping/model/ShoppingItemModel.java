@@ -107,7 +107,6 @@ public class ShoppingItemModel extends BaseModel {
 			}
 
 			_itemId = itemId;
-			setModified(true);
 		}
 	}
 
@@ -125,7 +124,6 @@ public class ShoppingItemModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -143,7 +141,6 @@ public class ShoppingItemModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -161,7 +158,6 @@ public class ShoppingItemModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -175,7 +171,6 @@ public class ShoppingItemModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -189,7 +184,6 @@ public class ShoppingItemModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -207,7 +201,6 @@ public class ShoppingItemModel extends BaseModel {
 			}
 
 			_categoryId = categoryId;
-			setModified(true);
 		}
 	}
 
@@ -224,7 +217,6 @@ public class ShoppingItemModel extends BaseModel {
 			}
 
 			_sku = sku;
-			setModified(true);
 		}
 	}
 
@@ -241,7 +233,6 @@ public class ShoppingItemModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -259,7 +250,6 @@ public class ShoppingItemModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 
@@ -277,7 +267,6 @@ public class ShoppingItemModel extends BaseModel {
 			}
 
 			_properties = properties;
-			setModified(true);
 		}
 	}
 
@@ -292,7 +281,6 @@ public class ShoppingItemModel extends BaseModel {
 	public void setFields(boolean fields) {
 		if (fields != _fields) {
 			_fields = fields;
-			setModified(true);
 		}
 	}
 
@@ -310,7 +298,6 @@ public class ShoppingItemModel extends BaseModel {
 			}
 
 			_fieldsQuantities = fieldsQuantities;
-			setModified(true);
 		}
 	}
 
@@ -321,7 +308,6 @@ public class ShoppingItemModel extends BaseModel {
 	public void setMinQuantity(int minQuantity) {
 		if (minQuantity != _minQuantity) {
 			_minQuantity = minQuantity;
-			setModified(true);
 		}
 	}
 
@@ -332,7 +318,6 @@ public class ShoppingItemModel extends BaseModel {
 	public void setMaxQuantity(int maxQuantity) {
 		if (maxQuantity != _maxQuantity) {
 			_maxQuantity = maxQuantity;
-			setModified(true);
 		}
 	}
 
@@ -343,7 +328,6 @@ public class ShoppingItemModel extends BaseModel {
 	public void setPrice(double price) {
 		if (price != _price) {
 			_price = price;
-			setModified(true);
 		}
 	}
 
@@ -354,7 +338,6 @@ public class ShoppingItemModel extends BaseModel {
 	public void setDiscount(double discount) {
 		if (discount != _discount) {
 			_discount = discount;
-			setModified(true);
 		}
 	}
 
@@ -369,7 +352,6 @@ public class ShoppingItemModel extends BaseModel {
 	public void setTaxable(boolean taxable) {
 		if (taxable != _taxable) {
 			_taxable = taxable;
-			setModified(true);
 		}
 	}
 
@@ -380,7 +362,6 @@ public class ShoppingItemModel extends BaseModel {
 	public void setShipping(double shipping) {
 		if (shipping != _shipping) {
 			_shipping = shipping;
-			setModified(true);
 		}
 	}
 
@@ -395,7 +376,6 @@ public class ShoppingItemModel extends BaseModel {
 	public void setUseShippingFormula(boolean useShippingFormula) {
 		if (useShippingFormula != _useShippingFormula) {
 			_useShippingFormula = useShippingFormula;
-			setModified(true);
 		}
 	}
 
@@ -410,7 +390,6 @@ public class ShoppingItemModel extends BaseModel {
 	public void setRequiresShipping(boolean requiresShipping) {
 		if (requiresShipping != _requiresShipping) {
 			_requiresShipping = requiresShipping;
-			setModified(true);
 		}
 	}
 
@@ -421,7 +400,6 @@ public class ShoppingItemModel extends BaseModel {
 	public void setStockQuantity(int stockQuantity) {
 		if (stockQuantity != _stockQuantity) {
 			_stockQuantity = stockQuantity;
-			setModified(true);
 		}
 	}
 
@@ -436,7 +414,6 @@ public class ShoppingItemModel extends BaseModel {
 	public void setFeatured(boolean featured) {
 		if (featured != _featured) {
 			_featured = featured;
-			setModified(true);
 		}
 	}
 
@@ -451,7 +428,6 @@ public class ShoppingItemModel extends BaseModel {
 	public void setSale(boolean sale) {
 		if (sale != _sale) {
 			_sale = sale;
-			setModified(true);
 		}
 	}
 
@@ -466,7 +442,6 @@ public class ShoppingItemModel extends BaseModel {
 	public void setSmallImage(boolean smallImage) {
 		if (smallImage != _smallImage) {
 			_smallImage = smallImage;
-			setModified(true);
 		}
 	}
 
@@ -484,7 +459,6 @@ public class ShoppingItemModel extends BaseModel {
 			}
 
 			_smallImageURL = smallImageURL;
-			setModified(true);
 		}
 	}
 
@@ -499,7 +473,6 @@ public class ShoppingItemModel extends BaseModel {
 	public void setMediumImage(boolean mediumImage) {
 		if (mediumImage != _mediumImage) {
 			_mediumImage = mediumImage;
-			setModified(true);
 		}
 	}
 
@@ -517,7 +490,6 @@ public class ShoppingItemModel extends BaseModel {
 			}
 
 			_mediumImageURL = mediumImageURL;
-			setModified(true);
 		}
 	}
 
@@ -532,7 +504,6 @@ public class ShoppingItemModel extends BaseModel {
 	public void setLargeImage(boolean largeImage) {
 		if (largeImage != _largeImage) {
 			_largeImage = largeImage;
-			setModified(true);
 		}
 	}
 
@@ -550,7 +521,6 @@ public class ShoppingItemModel extends BaseModel {
 			}
 
 			_largeImageURL = largeImageURL;
-			setModified(true);
 		}
 	}
 

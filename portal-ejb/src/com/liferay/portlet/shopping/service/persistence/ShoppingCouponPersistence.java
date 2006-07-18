@@ -97,81 +97,10 @@ public class ShoppingCouponPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (shoppingCoupon.isNew() || shoppingCoupon.isModified()) {
-				session = openSession();
-
-				if (shoppingCoupon.isNew()) {
-					ShoppingCoupon shoppingCouponModel = new ShoppingCoupon();
-					shoppingCouponModel.setCouponId(shoppingCoupon.getCouponId());
-					shoppingCouponModel.setGroupId(shoppingCoupon.getGroupId());
-					shoppingCouponModel.setCompanyId(shoppingCoupon.getCompanyId());
-					shoppingCouponModel.setUserId(shoppingCoupon.getUserId());
-					shoppingCouponModel.setUserName(shoppingCoupon.getUserName());
-					shoppingCouponModel.setCreateDate(shoppingCoupon.getCreateDate());
-					shoppingCouponModel.setModifiedDate(shoppingCoupon.getModifiedDate());
-					shoppingCouponModel.setName(shoppingCoupon.getName());
-					shoppingCouponModel.setDescription(shoppingCoupon.getDescription());
-					shoppingCouponModel.setStartDate(shoppingCoupon.getStartDate());
-					shoppingCouponModel.setEndDate(shoppingCoupon.getEndDate());
-					shoppingCouponModel.setActive(shoppingCoupon.getActive());
-					shoppingCouponModel.setLimitCategories(shoppingCoupon.getLimitCategories());
-					shoppingCouponModel.setLimitSkus(shoppingCoupon.getLimitSkus());
-					shoppingCouponModel.setMinOrder(shoppingCoupon.getMinOrder());
-					shoppingCouponModel.setDiscount(shoppingCoupon.getDiscount());
-					shoppingCouponModel.setDiscountType(shoppingCoupon.getDiscountType());
-					session.save(shoppingCouponModel);
-					session.flush();
-				}
-				else {
-					ShoppingCoupon shoppingCouponModel = (ShoppingCoupon)session.get(ShoppingCoupon.class,
-							shoppingCoupon.getPrimaryKey());
-
-					if (shoppingCouponModel != null) {
-						shoppingCouponModel.setGroupId(shoppingCoupon.getGroupId());
-						shoppingCouponModel.setCompanyId(shoppingCoupon.getCompanyId());
-						shoppingCouponModel.setUserId(shoppingCoupon.getUserId());
-						shoppingCouponModel.setUserName(shoppingCoupon.getUserName());
-						shoppingCouponModel.setCreateDate(shoppingCoupon.getCreateDate());
-						shoppingCouponModel.setModifiedDate(shoppingCoupon.getModifiedDate());
-						shoppingCouponModel.setName(shoppingCoupon.getName());
-						shoppingCouponModel.setDescription(shoppingCoupon.getDescription());
-						shoppingCouponModel.setStartDate(shoppingCoupon.getStartDate());
-						shoppingCouponModel.setEndDate(shoppingCoupon.getEndDate());
-						shoppingCouponModel.setActive(shoppingCoupon.getActive());
-						shoppingCouponModel.setLimitCategories(shoppingCoupon.getLimitCategories());
-						shoppingCouponModel.setLimitSkus(shoppingCoupon.getLimitSkus());
-						shoppingCouponModel.setMinOrder(shoppingCoupon.getMinOrder());
-						shoppingCouponModel.setDiscount(shoppingCoupon.getDiscount());
-						shoppingCouponModel.setDiscountType(shoppingCoupon.getDiscountType());
-						session.flush();
-					}
-					else {
-						shoppingCouponModel = new ShoppingCoupon();
-						shoppingCouponModel.setCouponId(shoppingCoupon.getCouponId());
-						shoppingCouponModel.setGroupId(shoppingCoupon.getGroupId());
-						shoppingCouponModel.setCompanyId(shoppingCoupon.getCompanyId());
-						shoppingCouponModel.setUserId(shoppingCoupon.getUserId());
-						shoppingCouponModel.setUserName(shoppingCoupon.getUserName());
-						shoppingCouponModel.setCreateDate(shoppingCoupon.getCreateDate());
-						shoppingCouponModel.setModifiedDate(shoppingCoupon.getModifiedDate());
-						shoppingCouponModel.setName(shoppingCoupon.getName());
-						shoppingCouponModel.setDescription(shoppingCoupon.getDescription());
-						shoppingCouponModel.setStartDate(shoppingCoupon.getStartDate());
-						shoppingCouponModel.setEndDate(shoppingCoupon.getEndDate());
-						shoppingCouponModel.setActive(shoppingCoupon.getActive());
-						shoppingCouponModel.setLimitCategories(shoppingCoupon.getLimitCategories());
-						shoppingCouponModel.setLimitSkus(shoppingCoupon.getLimitSkus());
-						shoppingCouponModel.setMinOrder(shoppingCoupon.getMinOrder());
-						shoppingCouponModel.setDiscount(shoppingCoupon.getDiscount());
-						shoppingCouponModel.setDiscountType(shoppingCoupon.getDiscountType());
-						session.save(shoppingCouponModel);
-						session.flush();
-					}
-				}
-
-				shoppingCoupon.setNew(false);
-				shoppingCoupon.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(shoppingCoupon);
+			session.flush();
+			shoppingCoupon.setNew(false);
 
 			return shoppingCoupon;
 		}

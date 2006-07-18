@@ -99,7 +99,6 @@ public class CalEventModel extends BaseModel {
 			}
 
 			_eventId = eventId;
-			setModified(true);
 		}
 	}
 
@@ -117,7 +116,6 @@ public class CalEventModel extends BaseModel {
 			}
 
 			_groupId = groupId;
-			setModified(true);
 		}
 	}
 
@@ -135,7 +133,6 @@ public class CalEventModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -153,7 +150,6 @@ public class CalEventModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -171,7 +167,6 @@ public class CalEventModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -185,7 +180,6 @@ public class CalEventModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -199,7 +193,6 @@ public class CalEventModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -216,7 +209,6 @@ public class CalEventModel extends BaseModel {
 			}
 
 			_title = title;
-			setModified(true);
 		}
 	}
 
@@ -234,7 +226,6 @@ public class CalEventModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 
@@ -248,7 +239,6 @@ public class CalEventModel extends BaseModel {
 				((startDate != null) && (_startDate != null) &&
 				!startDate.equals(_startDate))) {
 			_startDate = startDate;
-			setModified(true);
 		}
 	}
 
@@ -262,7 +252,6 @@ public class CalEventModel extends BaseModel {
 				((endDate != null) && (_endDate != null) &&
 				!endDate.equals(_endDate))) {
 			_endDate = endDate;
-			setModified(true);
 		}
 	}
 
@@ -273,7 +262,6 @@ public class CalEventModel extends BaseModel {
 	public void setDurationHour(int durationHour) {
 		if (durationHour != _durationHour) {
 			_durationHour = durationHour;
-			setModified(true);
 		}
 	}
 
@@ -284,7 +272,6 @@ public class CalEventModel extends BaseModel {
 	public void setDurationMinute(int durationMinute) {
 		if (durationMinute != _durationMinute) {
 			_durationMinute = durationMinute;
-			setModified(true);
 		}
 	}
 
@@ -299,7 +286,6 @@ public class CalEventModel extends BaseModel {
 	public void setAllDay(boolean allDay) {
 		if (allDay != _allDay) {
 			_allDay = allDay;
-			setModified(true);
 		}
 	}
 
@@ -314,7 +300,6 @@ public class CalEventModel extends BaseModel {
 	public void setTimeZoneSensitive(boolean timeZoneSensitive) {
 		if (timeZoneSensitive != _timeZoneSensitive) {
 			_timeZoneSensitive = timeZoneSensitive;
-			setModified(true);
 		}
 	}
 
@@ -331,7 +316,6 @@ public class CalEventModel extends BaseModel {
 			}
 
 			_type = type;
-			setModified(true);
 		}
 	}
 
@@ -346,7 +330,6 @@ public class CalEventModel extends BaseModel {
 	public void setRepeating(boolean repeating) {
 		if (repeating != _repeating) {
 			_repeating = repeating;
-			setModified(true);
 		}
 	}
 
@@ -364,7 +347,6 @@ public class CalEventModel extends BaseModel {
 			}
 
 			_recurrence = recurrence;
-			setModified(true);
 		}
 	}
 
@@ -382,7 +364,6 @@ public class CalEventModel extends BaseModel {
 			}
 
 			_remindBy = remindBy;
-			setModified(true);
 		}
 	}
 
@@ -393,7 +374,6 @@ public class CalEventModel extends BaseModel {
 	public void setFirstReminder(int firstReminder) {
 		if (firstReminder != _firstReminder) {
 			_firstReminder = firstReminder;
-			setModified(true);
 		}
 	}
 
@@ -404,7 +384,6 @@ public class CalEventModel extends BaseModel {
 	public void setSecondReminder(int secondReminder) {
 		if (secondReminder != _secondReminder) {
 			_secondReminder = secondReminder;
-			setModified(true);
 		}
 	}
 

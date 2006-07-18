@@ -97,66 +97,10 @@ public class MailReceiptPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (mailReceipt.isNew() || mailReceipt.isModified()) {
-				session = openSession();
-
-				if (mailReceipt.isNew()) {
-					MailReceipt mailReceiptModel = new MailReceipt();
-					mailReceiptModel.setReceiptId(mailReceipt.getReceiptId());
-					mailReceiptModel.setCompanyId(mailReceipt.getCompanyId());
-					mailReceiptModel.setUserId(mailReceipt.getUserId());
-					mailReceiptModel.setCreateDate(mailReceipt.getCreateDate());
-					mailReceiptModel.setModifiedDate(mailReceipt.getModifiedDate());
-					mailReceiptModel.setRecipientName(mailReceipt.getRecipientName());
-					mailReceiptModel.setRecipientAddress(mailReceipt.getRecipientAddress());
-					mailReceiptModel.setSubject(mailReceipt.getSubject());
-					mailReceiptModel.setSentDate(mailReceipt.getSentDate());
-					mailReceiptModel.setReadCount(mailReceipt.getReadCount());
-					mailReceiptModel.setFirstReadDate(mailReceipt.getFirstReadDate());
-					mailReceiptModel.setLastReadDate(mailReceipt.getLastReadDate());
-					session.save(mailReceiptModel);
-					session.flush();
-				}
-				else {
-					MailReceipt mailReceiptModel = (MailReceipt)session.get(MailReceipt.class,
-							mailReceipt.getPrimaryKey());
-
-					if (mailReceiptModel != null) {
-						mailReceiptModel.setCompanyId(mailReceipt.getCompanyId());
-						mailReceiptModel.setUserId(mailReceipt.getUserId());
-						mailReceiptModel.setCreateDate(mailReceipt.getCreateDate());
-						mailReceiptModel.setModifiedDate(mailReceipt.getModifiedDate());
-						mailReceiptModel.setRecipientName(mailReceipt.getRecipientName());
-						mailReceiptModel.setRecipientAddress(mailReceipt.getRecipientAddress());
-						mailReceiptModel.setSubject(mailReceipt.getSubject());
-						mailReceiptModel.setSentDate(mailReceipt.getSentDate());
-						mailReceiptModel.setReadCount(mailReceipt.getReadCount());
-						mailReceiptModel.setFirstReadDate(mailReceipt.getFirstReadDate());
-						mailReceiptModel.setLastReadDate(mailReceipt.getLastReadDate());
-						session.flush();
-					}
-					else {
-						mailReceiptModel = new MailReceipt();
-						mailReceiptModel.setReceiptId(mailReceipt.getReceiptId());
-						mailReceiptModel.setCompanyId(mailReceipt.getCompanyId());
-						mailReceiptModel.setUserId(mailReceipt.getUserId());
-						mailReceiptModel.setCreateDate(mailReceipt.getCreateDate());
-						mailReceiptModel.setModifiedDate(mailReceipt.getModifiedDate());
-						mailReceiptModel.setRecipientName(mailReceipt.getRecipientName());
-						mailReceiptModel.setRecipientAddress(mailReceipt.getRecipientAddress());
-						mailReceiptModel.setSubject(mailReceipt.getSubject());
-						mailReceiptModel.setSentDate(mailReceipt.getSentDate());
-						mailReceiptModel.setReadCount(mailReceipt.getReadCount());
-						mailReceiptModel.setFirstReadDate(mailReceipt.getFirstReadDate());
-						mailReceiptModel.setLastReadDate(mailReceipt.getLastReadDate());
-						session.save(mailReceiptModel);
-						session.flush();
-					}
-				}
-
-				mailReceipt.setNew(false);
-				mailReceipt.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(mailReceipt);
+			session.flush();
+			mailReceipt.setNew(false);
 
 			return mailReceipt;
 		}

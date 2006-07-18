@@ -98,45 +98,10 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (shoppingItemField.isNew() || shoppingItemField.isModified()) {
-				session = openSession();
-
-				if (shoppingItemField.isNew()) {
-					ShoppingItemField shoppingItemFieldModel = new ShoppingItemField();
-					shoppingItemFieldModel.setItemFieldId(shoppingItemField.getItemFieldId());
-					shoppingItemFieldModel.setItemId(shoppingItemField.getItemId());
-					shoppingItemFieldModel.setName(shoppingItemField.getName());
-					shoppingItemFieldModel.setValues(shoppingItemField.getValues());
-					shoppingItemFieldModel.setDescription(shoppingItemField.getDescription());
-					session.save(shoppingItemFieldModel);
-					session.flush();
-				}
-				else {
-					ShoppingItemField shoppingItemFieldModel = (ShoppingItemField)session.get(ShoppingItemField.class,
-							shoppingItemField.getPrimaryKey());
-
-					if (shoppingItemFieldModel != null) {
-						shoppingItemFieldModel.setItemId(shoppingItemField.getItemId());
-						shoppingItemFieldModel.setName(shoppingItemField.getName());
-						shoppingItemFieldModel.setValues(shoppingItemField.getValues());
-						shoppingItemFieldModel.setDescription(shoppingItemField.getDescription());
-						session.flush();
-					}
-					else {
-						shoppingItemFieldModel = new ShoppingItemField();
-						shoppingItemFieldModel.setItemFieldId(shoppingItemField.getItemFieldId());
-						shoppingItemFieldModel.setItemId(shoppingItemField.getItemId());
-						shoppingItemFieldModel.setName(shoppingItemField.getName());
-						shoppingItemFieldModel.setValues(shoppingItemField.getValues());
-						shoppingItemFieldModel.setDescription(shoppingItemField.getDescription());
-						session.save(shoppingItemFieldModel);
-						session.flush();
-					}
-				}
-
-				shoppingItemField.setNew(false);
-				shoppingItemField.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(shoppingItemField);
+			session.flush();
+			shoppingItemField.setNew(false);
 
 			return shoppingItemField;
 		}

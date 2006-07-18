@@ -94,63 +94,10 @@ public class WebsitePersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (website.isNew() || website.isModified()) {
-				session = openSession();
-
-				if (website.isNew()) {
-					Website websiteModel = new Website();
-					websiteModel.setWebsiteId(website.getWebsiteId());
-					websiteModel.setCompanyId(website.getCompanyId());
-					websiteModel.setUserId(website.getUserId());
-					websiteModel.setUserName(website.getUserName());
-					websiteModel.setCreateDate(website.getCreateDate());
-					websiteModel.setModifiedDate(website.getModifiedDate());
-					websiteModel.setClassName(website.getClassName());
-					websiteModel.setClassPK(website.getClassPK());
-					websiteModel.setUrl(website.getUrl());
-					websiteModel.setTypeId(website.getTypeId());
-					websiteModel.setPrimary(website.getPrimary());
-					session.save(websiteModel);
-					session.flush();
-				}
-				else {
-					Website websiteModel = (Website)session.get(Website.class,
-							website.getPrimaryKey());
-
-					if (websiteModel != null) {
-						websiteModel.setCompanyId(website.getCompanyId());
-						websiteModel.setUserId(website.getUserId());
-						websiteModel.setUserName(website.getUserName());
-						websiteModel.setCreateDate(website.getCreateDate());
-						websiteModel.setModifiedDate(website.getModifiedDate());
-						websiteModel.setClassName(website.getClassName());
-						websiteModel.setClassPK(website.getClassPK());
-						websiteModel.setUrl(website.getUrl());
-						websiteModel.setTypeId(website.getTypeId());
-						websiteModel.setPrimary(website.getPrimary());
-						session.flush();
-					}
-					else {
-						websiteModel = new Website();
-						websiteModel.setWebsiteId(website.getWebsiteId());
-						websiteModel.setCompanyId(website.getCompanyId());
-						websiteModel.setUserId(website.getUserId());
-						websiteModel.setUserName(website.getUserName());
-						websiteModel.setCreateDate(website.getCreateDate());
-						websiteModel.setModifiedDate(website.getModifiedDate());
-						websiteModel.setClassName(website.getClassName());
-						websiteModel.setClassPK(website.getClassPK());
-						websiteModel.setUrl(website.getUrl());
-						websiteModel.setTypeId(website.getTypeId());
-						websiteModel.setPrimary(website.getPrimary());
-						session.save(websiteModel);
-						session.flush();
-					}
-				}
-
-				website.setNew(false);
-				website.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(website);
+			session.flush();
+			website.setNew(false);
 
 			return website;
 		}

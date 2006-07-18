@@ -103,7 +103,6 @@ public class UserModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -121,7 +120,6 @@ public class UserModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -135,7 +133,6 @@ public class UserModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -149,7 +146,6 @@ public class UserModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -167,7 +163,6 @@ public class UserModel extends BaseModel {
 			}
 
 			_contactId = contactId;
-			setModified(true);
 		}
 	}
 
@@ -185,7 +180,6 @@ public class UserModel extends BaseModel {
 			}
 
 			_password = password;
-			setModified(true);
 		}
 	}
 
@@ -200,7 +194,6 @@ public class UserModel extends BaseModel {
 	public void setPasswordEncrypted(boolean passwordEncrypted) {
 		if (passwordEncrypted != _passwordEncrypted) {
 			_passwordEncrypted = passwordEncrypted;
-			setModified(true);
 		}
 	}
 
@@ -217,7 +210,6 @@ public class UserModel extends BaseModel {
 				(_passwordExpirationDate != null) &&
 				!passwordExpirationDate.equals(_passwordExpirationDate))) {
 			_passwordExpirationDate = passwordExpirationDate;
-			setModified(true);
 		}
 	}
 
@@ -232,7 +224,6 @@ public class UserModel extends BaseModel {
 	public void setPasswordReset(boolean passwordReset) {
 		if (passwordReset != _passwordReset) {
 			_passwordReset = passwordReset;
-			setModified(true);
 		}
 	}
 
@@ -250,7 +241,6 @@ public class UserModel extends BaseModel {
 			}
 
 			_emailAddress = emailAddress;
-			setModified(true);
 		}
 	}
 
@@ -268,7 +258,6 @@ public class UserModel extends BaseModel {
 			}
 
 			_languageId = languageId;
-			setModified(true);
 		}
 	}
 
@@ -286,7 +275,6 @@ public class UserModel extends BaseModel {
 			}
 
 			_timeZoneId = timeZoneId;
-			setModified(true);
 		}
 	}
 
@@ -304,7 +292,6 @@ public class UserModel extends BaseModel {
 			}
 
 			_greeting = greeting;
-			setModified(true);
 		}
 	}
 
@@ -322,7 +309,6 @@ public class UserModel extends BaseModel {
 			}
 
 			_resolution = resolution;
-			setModified(true);
 		}
 	}
 
@@ -340,7 +326,6 @@ public class UserModel extends BaseModel {
 			}
 
 			_comments = comments;
-			setModified(true);
 		}
 	}
 
@@ -354,7 +339,6 @@ public class UserModel extends BaseModel {
 				((loginDate != null) && (_loginDate != null) &&
 				!loginDate.equals(_loginDate))) {
 			_loginDate = loginDate;
-			setModified(true);
 		}
 	}
 
@@ -372,7 +356,6 @@ public class UserModel extends BaseModel {
 			}
 
 			_loginIP = loginIP;
-			setModified(true);
 		}
 	}
 
@@ -386,7 +369,6 @@ public class UserModel extends BaseModel {
 				((lastLoginDate != null) && (_lastLoginDate != null) &&
 				!lastLoginDate.equals(_lastLoginDate))) {
 			_lastLoginDate = lastLoginDate;
-			setModified(true);
 		}
 	}
 
@@ -404,7 +386,6 @@ public class UserModel extends BaseModel {
 			}
 
 			_lastLoginIP = lastLoginIP;
-			setModified(true);
 		}
 	}
 
@@ -415,7 +396,6 @@ public class UserModel extends BaseModel {
 	public void setFailedLoginAttempts(int failedLoginAttempts) {
 		if (failedLoginAttempts != _failedLoginAttempts) {
 			_failedLoginAttempts = failedLoginAttempts;
-			setModified(true);
 		}
 	}
 
@@ -430,7 +410,6 @@ public class UserModel extends BaseModel {
 	public void setAgreedToTermsOfUse(boolean agreedToTermsOfUse) {
 		if (agreedToTermsOfUse != _agreedToTermsOfUse) {
 			_agreedToTermsOfUse = agreedToTermsOfUse;
-			setModified(true);
 		}
 	}
 
@@ -445,7 +424,6 @@ public class UserModel extends BaseModel {
 	public void setActive(boolean active) {
 		if (active != _active) {
 			_active = active;
-			setModified(true);
 		}
 	}
 

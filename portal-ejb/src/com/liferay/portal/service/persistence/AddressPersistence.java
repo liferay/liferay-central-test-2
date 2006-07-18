@@ -94,84 +94,10 @@ public class AddressPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (address.isNew() || address.isModified()) {
-				session = openSession();
-
-				if (address.isNew()) {
-					Address addressModel = new Address();
-					addressModel.setAddressId(address.getAddressId());
-					addressModel.setCompanyId(address.getCompanyId());
-					addressModel.setUserId(address.getUserId());
-					addressModel.setUserName(address.getUserName());
-					addressModel.setCreateDate(address.getCreateDate());
-					addressModel.setModifiedDate(address.getModifiedDate());
-					addressModel.setClassName(address.getClassName());
-					addressModel.setClassPK(address.getClassPK());
-					addressModel.setStreet1(address.getStreet1());
-					addressModel.setStreet2(address.getStreet2());
-					addressModel.setStreet3(address.getStreet3());
-					addressModel.setCity(address.getCity());
-					addressModel.setZip(address.getZip());
-					addressModel.setRegionId(address.getRegionId());
-					addressModel.setCountryId(address.getCountryId());
-					addressModel.setTypeId(address.getTypeId());
-					addressModel.setMailing(address.getMailing());
-					addressModel.setPrimary(address.getPrimary());
-					session.save(addressModel);
-					session.flush();
-				}
-				else {
-					Address addressModel = (Address)session.get(Address.class,
-							address.getPrimaryKey());
-
-					if (addressModel != null) {
-						addressModel.setCompanyId(address.getCompanyId());
-						addressModel.setUserId(address.getUserId());
-						addressModel.setUserName(address.getUserName());
-						addressModel.setCreateDate(address.getCreateDate());
-						addressModel.setModifiedDate(address.getModifiedDate());
-						addressModel.setClassName(address.getClassName());
-						addressModel.setClassPK(address.getClassPK());
-						addressModel.setStreet1(address.getStreet1());
-						addressModel.setStreet2(address.getStreet2());
-						addressModel.setStreet3(address.getStreet3());
-						addressModel.setCity(address.getCity());
-						addressModel.setZip(address.getZip());
-						addressModel.setRegionId(address.getRegionId());
-						addressModel.setCountryId(address.getCountryId());
-						addressModel.setTypeId(address.getTypeId());
-						addressModel.setMailing(address.getMailing());
-						addressModel.setPrimary(address.getPrimary());
-						session.flush();
-					}
-					else {
-						addressModel = new Address();
-						addressModel.setAddressId(address.getAddressId());
-						addressModel.setCompanyId(address.getCompanyId());
-						addressModel.setUserId(address.getUserId());
-						addressModel.setUserName(address.getUserName());
-						addressModel.setCreateDate(address.getCreateDate());
-						addressModel.setModifiedDate(address.getModifiedDate());
-						addressModel.setClassName(address.getClassName());
-						addressModel.setClassPK(address.getClassPK());
-						addressModel.setStreet1(address.getStreet1());
-						addressModel.setStreet2(address.getStreet2());
-						addressModel.setStreet3(address.getStreet3());
-						addressModel.setCity(address.getCity());
-						addressModel.setZip(address.getZip());
-						addressModel.setRegionId(address.getRegionId());
-						addressModel.setCountryId(address.getCountryId());
-						addressModel.setTypeId(address.getTypeId());
-						addressModel.setMailing(address.getMailing());
-						addressModel.setPrimary(address.getPrimary());
-						session.save(addressModel);
-						session.flush();
-					}
-				}
-
-				address.setNew(false);
-				address.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(address);
+			session.flush();
+			address.setNew(false);
 
 			return address;
 		}

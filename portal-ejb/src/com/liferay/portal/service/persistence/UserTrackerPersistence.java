@@ -96,51 +96,10 @@ public class UserTrackerPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (userTracker.isNew() || userTracker.isModified()) {
-				session = openSession();
-
-				if (userTracker.isNew()) {
-					UserTracker userTrackerModel = new UserTracker();
-					userTrackerModel.setUserTrackerId(userTracker.getUserTrackerId());
-					userTrackerModel.setCompanyId(userTracker.getCompanyId());
-					userTrackerModel.setUserId(userTracker.getUserId());
-					userTrackerModel.setModifiedDate(userTracker.getModifiedDate());
-					userTrackerModel.setRemoteAddr(userTracker.getRemoteAddr());
-					userTrackerModel.setRemoteHost(userTracker.getRemoteHost());
-					userTrackerModel.setUserAgent(userTracker.getUserAgent());
-					session.save(userTrackerModel);
-					session.flush();
-				}
-				else {
-					UserTracker userTrackerModel = (UserTracker)session.get(UserTracker.class,
-							userTracker.getPrimaryKey());
-
-					if (userTrackerModel != null) {
-						userTrackerModel.setCompanyId(userTracker.getCompanyId());
-						userTrackerModel.setUserId(userTracker.getUserId());
-						userTrackerModel.setModifiedDate(userTracker.getModifiedDate());
-						userTrackerModel.setRemoteAddr(userTracker.getRemoteAddr());
-						userTrackerModel.setRemoteHost(userTracker.getRemoteHost());
-						userTrackerModel.setUserAgent(userTracker.getUserAgent());
-						session.flush();
-					}
-					else {
-						userTrackerModel = new UserTracker();
-						userTrackerModel.setUserTrackerId(userTracker.getUserTrackerId());
-						userTrackerModel.setCompanyId(userTracker.getCompanyId());
-						userTrackerModel.setUserId(userTracker.getUserId());
-						userTrackerModel.setModifiedDate(userTracker.getModifiedDate());
-						userTrackerModel.setRemoteAddr(userTracker.getRemoteAddr());
-						userTrackerModel.setRemoteHost(userTracker.getRemoteHost());
-						userTrackerModel.setUserAgent(userTracker.getUserAgent());
-						session.save(userTrackerModel);
-						session.flush();
-					}
-				}
-
-				userTracker.setNew(false);
-				userTracker.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(userTracker);
+			session.flush();
+			userTracker.setNew(false);
 
 			return userTracker;
 		}

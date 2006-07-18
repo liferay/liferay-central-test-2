@@ -82,7 +82,6 @@ public class MBMessageFlagModel extends BaseModel {
 			}
 
 			_topicId = topicId;
-			setModified(true);
 		}
 	}
 
@@ -100,7 +99,6 @@ public class MBMessageFlagModel extends BaseModel {
 			}
 
 			_messageId = messageId;
-			setModified(true);
 		}
 	}
 
@@ -118,7 +116,6 @@ public class MBMessageFlagModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -135,7 +132,6 @@ public class MBMessageFlagModel extends BaseModel {
 			}
 
 			_flag = flag;
-			setModified(true);
 		}
 	}
 

@@ -89,45 +89,10 @@ public class ReleasePersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (release.isNew() || release.isModified()) {
-				session = openSession();
-
-				if (release.isNew()) {
-					Release releaseModel = new Release();
-					releaseModel.setReleaseId(release.getReleaseId());
-					releaseModel.setCreateDate(release.getCreateDate());
-					releaseModel.setModifiedDate(release.getModifiedDate());
-					releaseModel.setBuildNumber(release.getBuildNumber());
-					releaseModel.setBuildDate(release.getBuildDate());
-					session.save(releaseModel);
-					session.flush();
-				}
-				else {
-					Release releaseModel = (Release)session.get(Release.class,
-							release.getPrimaryKey());
-
-					if (releaseModel != null) {
-						releaseModel.setCreateDate(release.getCreateDate());
-						releaseModel.setModifiedDate(release.getModifiedDate());
-						releaseModel.setBuildNumber(release.getBuildNumber());
-						releaseModel.setBuildDate(release.getBuildDate());
-						session.flush();
-					}
-					else {
-						releaseModel = new Release();
-						releaseModel.setReleaseId(release.getReleaseId());
-						releaseModel.setCreateDate(release.getCreateDate());
-						releaseModel.setModifiedDate(release.getModifiedDate());
-						releaseModel.setBuildNumber(release.getBuildNumber());
-						releaseModel.setBuildDate(release.getBuildDate());
-						session.save(releaseModel);
-						session.flush();
-					}
-				}
-
-				release.setNew(false);
-				release.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(release);
+			session.flush();
+			release.setNew(false);
 
 			return release;
 		}

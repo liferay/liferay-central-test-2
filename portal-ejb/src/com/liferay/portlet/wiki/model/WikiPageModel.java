@@ -92,7 +92,6 @@ public class WikiPageModel extends BaseModel {
 			}
 
 			_nodeId = nodeId;
-			setModified(true);
 		}
 	}
 
@@ -109,7 +108,6 @@ public class WikiPageModel extends BaseModel {
 			}
 
 			_title = title;
-			setModified(true);
 		}
 	}
 
@@ -120,7 +118,6 @@ public class WikiPageModel extends BaseModel {
 	public void setVersion(double version) {
 		if (version != _version) {
 			_version = version;
-			setModified(true);
 		}
 	}
 
@@ -138,7 +135,6 @@ public class WikiPageModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -156,7 +152,6 @@ public class WikiPageModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -174,7 +169,6 @@ public class WikiPageModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -188,7 +182,6 @@ public class WikiPageModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -206,7 +199,6 @@ public class WikiPageModel extends BaseModel {
 			}
 
 			_content = content;
-			setModified(true);
 		}
 	}
 
@@ -224,7 +216,6 @@ public class WikiPageModel extends BaseModel {
 			}
 
 			_format = format;
-			setModified(true);
 		}
 	}
 
@@ -239,7 +230,6 @@ public class WikiPageModel extends BaseModel {
 	public void setHead(boolean head) {
 		if (head != _head) {
 			_head = head;
-			setModified(true);
 		}
 	}
 

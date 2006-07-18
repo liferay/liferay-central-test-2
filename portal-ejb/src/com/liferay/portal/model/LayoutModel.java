@@ -97,7 +97,6 @@ public class LayoutModel extends BaseModel {
 			}
 
 			_layoutId = layoutId;
-			setModified(true);
 		}
 	}
 
@@ -115,7 +114,6 @@ public class LayoutModel extends BaseModel {
 			}
 
 			_ownerId = ownerId;
-			setModified(true);
 		}
 	}
 
@@ -133,7 +131,6 @@ public class LayoutModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -151,7 +148,6 @@ public class LayoutModel extends BaseModel {
 			}
 
 			_parentLayoutId = parentLayoutId;
-			setModified(true);
 		}
 	}
 
@@ -168,7 +164,6 @@ public class LayoutModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -185,7 +180,6 @@ public class LayoutModel extends BaseModel {
 			}
 
 			_type = type;
-			setModified(true);
 		}
 	}
 
@@ -203,7 +197,6 @@ public class LayoutModel extends BaseModel {
 			}
 
 			_typeSettings = typeSettings;
-			setModified(true);
 		}
 	}
 
@@ -218,7 +211,6 @@ public class LayoutModel extends BaseModel {
 	public void setHidden(boolean hidden) {
 		if (hidden != _hidden) {
 			_hidden = hidden;
-			setModified(true);
 		}
 	}
 
@@ -236,7 +228,6 @@ public class LayoutModel extends BaseModel {
 			}
 
 			_friendlyURL = friendlyURL;
-			setModified(true);
 		}
 	}
 
@@ -254,7 +245,6 @@ public class LayoutModel extends BaseModel {
 			}
 
 			_themeId = themeId;
-			setModified(true);
 		}
 	}
 
@@ -272,7 +262,6 @@ public class LayoutModel extends BaseModel {
 			}
 
 			_colorSchemeId = colorSchemeId;
-			setModified(true);
 		}
 	}
 
@@ -283,7 +272,6 @@ public class LayoutModel extends BaseModel {
 	public void setPriority(int priority) {
 		if (priority != _priority) {
 			_priority = priority;
-			setModified(true);
 		}
 	}
 

@@ -97,71 +97,10 @@ public class MBMessagePersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (mbMessage.isNew() || mbMessage.isModified()) {
-				session = openSession();
-
-				if (mbMessage.isNew()) {
-					MBMessage mbMessageModel = new MBMessage();
-					mbMessageModel.setTopicId(mbMessage.getTopicId());
-					mbMessageModel.setMessageId(mbMessage.getMessageId());
-					mbMessageModel.setCompanyId(mbMessage.getCompanyId());
-					mbMessageModel.setUserId(mbMessage.getUserId());
-					mbMessageModel.setUserName(mbMessage.getUserName());
-					mbMessageModel.setCreateDate(mbMessage.getCreateDate());
-					mbMessageModel.setModifiedDate(mbMessage.getModifiedDate());
-					mbMessageModel.setCategoryId(mbMessage.getCategoryId());
-					mbMessageModel.setThreadId(mbMessage.getThreadId());
-					mbMessageModel.setParentMessageId(mbMessage.getParentMessageId());
-					mbMessageModel.setSubject(mbMessage.getSubject());
-					mbMessageModel.setBody(mbMessage.getBody());
-					mbMessageModel.setAttachments(mbMessage.getAttachments());
-					mbMessageModel.setAnonymous(mbMessage.getAnonymous());
-					session.save(mbMessageModel);
-					session.flush();
-				}
-				else {
-					MBMessage mbMessageModel = (MBMessage)session.get(MBMessage.class,
-							mbMessage.getPrimaryKey());
-
-					if (mbMessageModel != null) {
-						mbMessageModel.setCompanyId(mbMessage.getCompanyId());
-						mbMessageModel.setUserId(mbMessage.getUserId());
-						mbMessageModel.setUserName(mbMessage.getUserName());
-						mbMessageModel.setCreateDate(mbMessage.getCreateDate());
-						mbMessageModel.setModifiedDate(mbMessage.getModifiedDate());
-						mbMessageModel.setCategoryId(mbMessage.getCategoryId());
-						mbMessageModel.setThreadId(mbMessage.getThreadId());
-						mbMessageModel.setParentMessageId(mbMessage.getParentMessageId());
-						mbMessageModel.setSubject(mbMessage.getSubject());
-						mbMessageModel.setBody(mbMessage.getBody());
-						mbMessageModel.setAttachments(mbMessage.getAttachments());
-						mbMessageModel.setAnonymous(mbMessage.getAnonymous());
-						session.flush();
-					}
-					else {
-						mbMessageModel = new MBMessage();
-						mbMessageModel.setTopicId(mbMessage.getTopicId());
-						mbMessageModel.setMessageId(mbMessage.getMessageId());
-						mbMessageModel.setCompanyId(mbMessage.getCompanyId());
-						mbMessageModel.setUserId(mbMessage.getUserId());
-						mbMessageModel.setUserName(mbMessage.getUserName());
-						mbMessageModel.setCreateDate(mbMessage.getCreateDate());
-						mbMessageModel.setModifiedDate(mbMessage.getModifiedDate());
-						mbMessageModel.setCategoryId(mbMessage.getCategoryId());
-						mbMessageModel.setThreadId(mbMessage.getThreadId());
-						mbMessageModel.setParentMessageId(mbMessage.getParentMessageId());
-						mbMessageModel.setSubject(mbMessage.getSubject());
-						mbMessageModel.setBody(mbMessage.getBody());
-						mbMessageModel.setAttachments(mbMessage.getAttachments());
-						mbMessageModel.setAnonymous(mbMessage.getAnonymous());
-						session.save(mbMessageModel);
-						session.flush();
-					}
-				}
-
-				mbMessage.setNew(false);
-				mbMessage.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(mbMessage);
+			session.flush();
+			mbMessage.setNew(false);
 
 			return mbMessage;
 		}

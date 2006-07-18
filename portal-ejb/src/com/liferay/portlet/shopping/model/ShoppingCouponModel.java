@@ -99,7 +99,6 @@ public class ShoppingCouponModel extends BaseModel {
 			}
 
 			_couponId = couponId;
-			setModified(true);
 		}
 	}
 
@@ -117,7 +116,6 @@ public class ShoppingCouponModel extends BaseModel {
 			}
 
 			_groupId = groupId;
-			setModified(true);
 		}
 	}
 
@@ -135,7 +133,6 @@ public class ShoppingCouponModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -153,7 +150,6 @@ public class ShoppingCouponModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -171,7 +167,6 @@ public class ShoppingCouponModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -185,7 +180,6 @@ public class ShoppingCouponModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -199,7 +193,6 @@ public class ShoppingCouponModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -216,7 +209,6 @@ public class ShoppingCouponModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -234,7 +226,6 @@ public class ShoppingCouponModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 
@@ -248,7 +239,6 @@ public class ShoppingCouponModel extends BaseModel {
 				((startDate != null) && (_startDate != null) &&
 				!startDate.equals(_startDate))) {
 			_startDate = startDate;
-			setModified(true);
 		}
 	}
 
@@ -262,7 +252,6 @@ public class ShoppingCouponModel extends BaseModel {
 				((endDate != null) && (_endDate != null) &&
 				!endDate.equals(_endDate))) {
 			_endDate = endDate;
-			setModified(true);
 		}
 	}
 
@@ -277,7 +266,6 @@ public class ShoppingCouponModel extends BaseModel {
 	public void setActive(boolean active) {
 		if (active != _active) {
 			_active = active;
-			setModified(true);
 		}
 	}
 
@@ -295,7 +283,6 @@ public class ShoppingCouponModel extends BaseModel {
 			}
 
 			_limitCategories = limitCategories;
-			setModified(true);
 		}
 	}
 
@@ -313,7 +300,6 @@ public class ShoppingCouponModel extends BaseModel {
 			}
 
 			_limitSkus = limitSkus;
-			setModified(true);
 		}
 	}
 
@@ -324,7 +310,6 @@ public class ShoppingCouponModel extends BaseModel {
 	public void setMinOrder(double minOrder) {
 		if (minOrder != _minOrder) {
 			_minOrder = minOrder;
-			setModified(true);
 		}
 	}
 
@@ -335,7 +320,6 @@ public class ShoppingCouponModel extends BaseModel {
 	public void setDiscount(double discount) {
 		if (discount != _discount) {
 			_discount = discount;
-			setModified(true);
 		}
 	}
 
@@ -353,7 +337,6 @@ public class ShoppingCouponModel extends BaseModel {
 			}
 
 			_discountType = discountType;
-			setModified(true);
 		}
 	}
 

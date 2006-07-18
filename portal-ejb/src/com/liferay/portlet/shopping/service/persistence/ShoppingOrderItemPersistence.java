@@ -98,56 +98,10 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (shoppingOrderItem.isNew() || shoppingOrderItem.isModified()) {
-				session = openSession();
-
-				if (shoppingOrderItem.isNew()) {
-					ShoppingOrderItem shoppingOrderItemModel = new ShoppingOrderItem();
-					shoppingOrderItemModel.setOrderId(shoppingOrderItem.getOrderId());
-					shoppingOrderItemModel.setItemId(shoppingOrderItem.getItemId());
-					shoppingOrderItemModel.setSku(shoppingOrderItem.getSku());
-					shoppingOrderItemModel.setName(shoppingOrderItem.getName());
-					shoppingOrderItemModel.setDescription(shoppingOrderItem.getDescription());
-					shoppingOrderItemModel.setProperties(shoppingOrderItem.getProperties());
-					shoppingOrderItemModel.setPrice(shoppingOrderItem.getPrice());
-					shoppingOrderItemModel.setQuantity(shoppingOrderItem.getQuantity());
-					shoppingOrderItemModel.setShippedDate(shoppingOrderItem.getShippedDate());
-					session.save(shoppingOrderItemModel);
-					session.flush();
-				}
-				else {
-					ShoppingOrderItem shoppingOrderItemModel = (ShoppingOrderItem)session.get(ShoppingOrderItem.class,
-							shoppingOrderItem.getPrimaryKey());
-
-					if (shoppingOrderItemModel != null) {
-						shoppingOrderItemModel.setSku(shoppingOrderItem.getSku());
-						shoppingOrderItemModel.setName(shoppingOrderItem.getName());
-						shoppingOrderItemModel.setDescription(shoppingOrderItem.getDescription());
-						shoppingOrderItemModel.setProperties(shoppingOrderItem.getProperties());
-						shoppingOrderItemModel.setPrice(shoppingOrderItem.getPrice());
-						shoppingOrderItemModel.setQuantity(shoppingOrderItem.getQuantity());
-						shoppingOrderItemModel.setShippedDate(shoppingOrderItem.getShippedDate());
-						session.flush();
-					}
-					else {
-						shoppingOrderItemModel = new ShoppingOrderItem();
-						shoppingOrderItemModel.setOrderId(shoppingOrderItem.getOrderId());
-						shoppingOrderItemModel.setItemId(shoppingOrderItem.getItemId());
-						shoppingOrderItemModel.setSku(shoppingOrderItem.getSku());
-						shoppingOrderItemModel.setName(shoppingOrderItem.getName());
-						shoppingOrderItemModel.setDescription(shoppingOrderItem.getDescription());
-						shoppingOrderItemModel.setProperties(shoppingOrderItem.getProperties());
-						shoppingOrderItemModel.setPrice(shoppingOrderItem.getPrice());
-						shoppingOrderItemModel.setQuantity(shoppingOrderItem.getQuantity());
-						shoppingOrderItemModel.setShippedDate(shoppingOrderItem.getShippedDate());
-						session.save(shoppingOrderItemModel);
-						session.flush();
-					}
-				}
-
-				shoppingOrderItem.setNew(false);
-				shoppingOrderItem.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(shoppingOrderItem);
+			session.flush();
+			shoppingOrderItem.setNew(false);
 
 			return shoppingOrderItem;
 		}

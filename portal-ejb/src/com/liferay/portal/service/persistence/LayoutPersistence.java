@@ -95,65 +95,10 @@ public class LayoutPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (layout.isNew() || layout.isModified()) {
-				session = openSession();
-
-				if (layout.isNew()) {
-					Layout layoutModel = new Layout();
-					layoutModel.setLayoutId(layout.getLayoutId());
-					layoutModel.setOwnerId(layout.getOwnerId());
-					layoutModel.setCompanyId(layout.getCompanyId());
-					layoutModel.setParentLayoutId(layout.getParentLayoutId());
-					layoutModel.setName(layout.getName());
-					layoutModel.setType(layout.getType());
-					layoutModel.setTypeSettings(layout.getTypeSettings());
-					layoutModel.setHidden(layout.getHidden());
-					layoutModel.setFriendlyURL(layout.getFriendlyURL());
-					layoutModel.setThemeId(layout.getThemeId());
-					layoutModel.setColorSchemeId(layout.getColorSchemeId());
-					layoutModel.setPriority(layout.getPriority());
-					session.save(layoutModel);
-					session.flush();
-				}
-				else {
-					Layout layoutModel = (Layout)session.get(Layout.class,
-							layout.getPrimaryKey());
-
-					if (layoutModel != null) {
-						layoutModel.setCompanyId(layout.getCompanyId());
-						layoutModel.setParentLayoutId(layout.getParentLayoutId());
-						layoutModel.setName(layout.getName());
-						layoutModel.setType(layout.getType());
-						layoutModel.setTypeSettings(layout.getTypeSettings());
-						layoutModel.setHidden(layout.getHidden());
-						layoutModel.setFriendlyURL(layout.getFriendlyURL());
-						layoutModel.setThemeId(layout.getThemeId());
-						layoutModel.setColorSchemeId(layout.getColorSchemeId());
-						layoutModel.setPriority(layout.getPriority());
-						session.flush();
-					}
-					else {
-						layoutModel = new Layout();
-						layoutModel.setLayoutId(layout.getLayoutId());
-						layoutModel.setOwnerId(layout.getOwnerId());
-						layoutModel.setCompanyId(layout.getCompanyId());
-						layoutModel.setParentLayoutId(layout.getParentLayoutId());
-						layoutModel.setName(layout.getName());
-						layoutModel.setType(layout.getType());
-						layoutModel.setTypeSettings(layout.getTypeSettings());
-						layoutModel.setHidden(layout.getHidden());
-						layoutModel.setFriendlyURL(layout.getFriendlyURL());
-						layoutModel.setThemeId(layout.getThemeId());
-						layoutModel.setColorSchemeId(layout.getColorSchemeId());
-						layoutModel.setPriority(layout.getPriority());
-						session.save(layoutModel);
-						session.flush();
-					}
-				}
-
-				layout.setNew(false);
-				layout.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(layout);
+			session.flush();
+			layout.setNew(false);
 
 			return layout;
 		}

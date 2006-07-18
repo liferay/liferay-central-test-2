@@ -97,41 +97,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (mbStatsUser.isNew() || mbStatsUser.isModified()) {
-				session = openSession();
-
-				if (mbStatsUser.isNew()) {
-					MBStatsUser mbStatsUserModel = new MBStatsUser();
-					mbStatsUserModel.setGroupId(mbStatsUser.getGroupId());
-					mbStatsUserModel.setUserId(mbStatsUser.getUserId());
-					mbStatsUserModel.setMessageCount(mbStatsUser.getMessageCount());
-					mbStatsUserModel.setLastPostDate(mbStatsUser.getLastPostDate());
-					session.save(mbStatsUserModel);
-					session.flush();
-				}
-				else {
-					MBStatsUser mbStatsUserModel = (MBStatsUser)session.get(MBStatsUser.class,
-							mbStatsUser.getPrimaryKey());
-
-					if (mbStatsUserModel != null) {
-						mbStatsUserModel.setMessageCount(mbStatsUser.getMessageCount());
-						mbStatsUserModel.setLastPostDate(mbStatsUser.getLastPostDate());
-						session.flush();
-					}
-					else {
-						mbStatsUserModel = new MBStatsUser();
-						mbStatsUserModel.setGroupId(mbStatsUser.getGroupId());
-						mbStatsUserModel.setUserId(mbStatsUser.getUserId());
-						mbStatsUserModel.setMessageCount(mbStatsUser.getMessageCount());
-						mbStatsUserModel.setLastPostDate(mbStatsUser.getLastPostDate());
-						session.save(mbStatsUserModel);
-						session.flush();
-					}
-				}
-
-				mbStatsUser.setNew(false);
-				mbStatsUser.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(mbStatsUser);
+			session.flush();
+			mbStatsUser.setNew(false);
 
 			return mbStatsUser;
 		}

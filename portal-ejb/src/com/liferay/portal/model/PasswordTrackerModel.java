@@ -77,7 +77,6 @@ public class PasswordTrackerModel extends BaseModel {
 			}
 
 			_passwordTrackerId = passwordTrackerId;
-			setModified(true);
 		}
 	}
 
@@ -95,7 +94,6 @@ public class PasswordTrackerModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -109,7 +107,6 @@ public class PasswordTrackerModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -127,7 +124,6 @@ public class PasswordTrackerModel extends BaseModel {
 			}
 
 			_password = password;
-			setModified(true);
 		}
 	}
 

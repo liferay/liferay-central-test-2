@@ -96,41 +96,10 @@ public class UserIdMapperPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (userIdMapper.isNew() || userIdMapper.isModified()) {
-				session = openSession();
-
-				if (userIdMapper.isNew()) {
-					UserIdMapper userIdMapperModel = new UserIdMapper();
-					userIdMapperModel.setUserId(userIdMapper.getUserId());
-					userIdMapperModel.setType(userIdMapper.getType());
-					userIdMapperModel.setDescription(userIdMapper.getDescription());
-					userIdMapperModel.setExternalUserId(userIdMapper.getExternalUserId());
-					session.save(userIdMapperModel);
-					session.flush();
-				}
-				else {
-					UserIdMapper userIdMapperModel = (UserIdMapper)session.get(UserIdMapper.class,
-							userIdMapper.getPrimaryKey());
-
-					if (userIdMapperModel != null) {
-						userIdMapperModel.setDescription(userIdMapper.getDescription());
-						userIdMapperModel.setExternalUserId(userIdMapper.getExternalUserId());
-						session.flush();
-					}
-					else {
-						userIdMapperModel = new UserIdMapper();
-						userIdMapperModel.setUserId(userIdMapper.getUserId());
-						userIdMapperModel.setType(userIdMapper.getType());
-						userIdMapperModel.setDescription(userIdMapper.getDescription());
-						userIdMapperModel.setExternalUserId(userIdMapper.getExternalUserId());
-						session.save(userIdMapperModel);
-						session.flush();
-					}
-				}
-
-				userIdMapper.setNew(false);
-				userIdMapper.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(userIdMapper);
+			session.flush();
+			userIdMapper.setNew(false);
 
 			return userIdMapper;
 		}

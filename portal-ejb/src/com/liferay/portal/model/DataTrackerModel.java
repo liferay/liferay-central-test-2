@@ -88,7 +88,6 @@ public class DataTrackerModel extends BaseModel {
 			}
 
 			_dataTrackerId = dataTrackerId;
-			setModified(true);
 		}
 	}
 
@@ -106,7 +105,6 @@ public class DataTrackerModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -120,7 +118,6 @@ public class DataTrackerModel extends BaseModel {
 				((createdOn != null) && (_createdOn != null) &&
 				!createdOn.equals(_createdOn))) {
 			_createdOn = createdOn;
-			setModified(true);
 		}
 	}
 
@@ -138,7 +135,6 @@ public class DataTrackerModel extends BaseModel {
 			}
 
 			_createdByUserId = createdByUserId;
-			setModified(true);
 		}
 	}
 
@@ -156,7 +152,6 @@ public class DataTrackerModel extends BaseModel {
 			}
 
 			_createdByUserName = createdByUserName;
-			setModified(true);
 		}
 	}
 
@@ -170,7 +165,6 @@ public class DataTrackerModel extends BaseModel {
 				((updatedOn != null) && (_updatedOn != null) &&
 				!updatedOn.equals(_updatedOn))) {
 			_updatedOn = updatedOn;
-			setModified(true);
 		}
 	}
 
@@ -188,7 +182,6 @@ public class DataTrackerModel extends BaseModel {
 			}
 
 			_updatedBy = updatedBy;
-			setModified(true);
 		}
 	}
 
@@ -206,7 +199,6 @@ public class DataTrackerModel extends BaseModel {
 			}
 
 			_className = className;
-			setModified(true);
 		}
 	}
 
@@ -224,7 +216,6 @@ public class DataTrackerModel extends BaseModel {
 			}
 
 			_classPK = classPK;
-			setModified(true);
 		}
 	}
 
@@ -239,7 +230,6 @@ public class DataTrackerModel extends BaseModel {
 	public void setActive(boolean active) {
 		if (active != _active) {
 			_active = active;
-			setModified(true);
 		}
 	}
 

@@ -81,7 +81,6 @@ public class PortletPreferencesModel extends BaseModel {
 			}
 
 			_portletId = portletId;
-			setModified(true);
 		}
 	}
 
@@ -99,7 +98,6 @@ public class PortletPreferencesModel extends BaseModel {
 			}
 
 			_layoutId = layoutId;
-			setModified(true);
 		}
 	}
 
@@ -117,7 +115,6 @@ public class PortletPreferencesModel extends BaseModel {
 			}
 
 			_ownerId = ownerId;
-			setModified(true);
 		}
 	}
 
@@ -135,7 +132,6 @@ public class PortletPreferencesModel extends BaseModel {
 			}
 
 			_preferences = preferences;
-			setModified(true);
 		}
 	}
 

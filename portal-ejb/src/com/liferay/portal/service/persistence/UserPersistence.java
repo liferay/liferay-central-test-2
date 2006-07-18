@@ -113,96 +113,10 @@ public class UserPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (user.isNew() || user.isModified()) {
-				session = openSession();
-
-				if (user.isNew()) {
-					User userModel = new User();
-					userModel.setUserId(user.getUserId());
-					userModel.setCompanyId(user.getCompanyId());
-					userModel.setCreateDate(user.getCreateDate());
-					userModel.setModifiedDate(user.getModifiedDate());
-					userModel.setContactId(user.getContactId());
-					userModel.setPassword(user.getPassword());
-					userModel.setPasswordEncrypted(user.getPasswordEncrypted());
-					userModel.setPasswordExpirationDate(user.getPasswordExpirationDate());
-					userModel.setPasswordReset(user.getPasswordReset());
-					userModel.setEmailAddress(user.getEmailAddress());
-					userModel.setLanguageId(user.getLanguageId());
-					userModel.setTimeZoneId(user.getTimeZoneId());
-					userModel.setGreeting(user.getGreeting());
-					userModel.setResolution(user.getResolution());
-					userModel.setComments(user.getComments());
-					userModel.setLoginDate(user.getLoginDate());
-					userModel.setLoginIP(user.getLoginIP());
-					userModel.setLastLoginDate(user.getLastLoginDate());
-					userModel.setLastLoginIP(user.getLastLoginIP());
-					userModel.setFailedLoginAttempts(user.getFailedLoginAttempts());
-					userModel.setAgreedToTermsOfUse(user.getAgreedToTermsOfUse());
-					userModel.setActive(user.getActive());
-					session.save(userModel);
-					session.flush();
-				}
-				else {
-					User userModel = (User)session.get(User.class,
-							user.getPrimaryKey());
-
-					if (userModel != null) {
-						userModel.setCompanyId(user.getCompanyId());
-						userModel.setCreateDate(user.getCreateDate());
-						userModel.setModifiedDate(user.getModifiedDate());
-						userModel.setContactId(user.getContactId());
-						userModel.setPassword(user.getPassword());
-						userModel.setPasswordEncrypted(user.getPasswordEncrypted());
-						userModel.setPasswordExpirationDate(user.getPasswordExpirationDate());
-						userModel.setPasswordReset(user.getPasswordReset());
-						userModel.setEmailAddress(user.getEmailAddress());
-						userModel.setLanguageId(user.getLanguageId());
-						userModel.setTimeZoneId(user.getTimeZoneId());
-						userModel.setGreeting(user.getGreeting());
-						userModel.setResolution(user.getResolution());
-						userModel.setComments(user.getComments());
-						userModel.setLoginDate(user.getLoginDate());
-						userModel.setLoginIP(user.getLoginIP());
-						userModel.setLastLoginDate(user.getLastLoginDate());
-						userModel.setLastLoginIP(user.getLastLoginIP());
-						userModel.setFailedLoginAttempts(user.getFailedLoginAttempts());
-						userModel.setAgreedToTermsOfUse(user.getAgreedToTermsOfUse());
-						userModel.setActive(user.getActive());
-						session.flush();
-					}
-					else {
-						userModel = new User();
-						userModel.setUserId(user.getUserId());
-						userModel.setCompanyId(user.getCompanyId());
-						userModel.setCreateDate(user.getCreateDate());
-						userModel.setModifiedDate(user.getModifiedDate());
-						userModel.setContactId(user.getContactId());
-						userModel.setPassword(user.getPassword());
-						userModel.setPasswordEncrypted(user.getPasswordEncrypted());
-						userModel.setPasswordExpirationDate(user.getPasswordExpirationDate());
-						userModel.setPasswordReset(user.getPasswordReset());
-						userModel.setEmailAddress(user.getEmailAddress());
-						userModel.setLanguageId(user.getLanguageId());
-						userModel.setTimeZoneId(user.getTimeZoneId());
-						userModel.setGreeting(user.getGreeting());
-						userModel.setResolution(user.getResolution());
-						userModel.setComments(user.getComments());
-						userModel.setLoginDate(user.getLoginDate());
-						userModel.setLoginIP(user.getLoginIP());
-						userModel.setLastLoginDate(user.getLastLoginDate());
-						userModel.setLastLoginIP(user.getLastLoginIP());
-						userModel.setFailedLoginAttempts(user.getFailedLoginAttempts());
-						userModel.setAgreedToTermsOfUse(user.getAgreedToTermsOfUse());
-						userModel.setActive(user.getActive());
-						session.save(userModel);
-						session.flush();
-					}
-				}
-
-				user.setNew(false);
-				user.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(user);
+			session.flush();
+			user.setNew(false);
 
 			return user;
 		}

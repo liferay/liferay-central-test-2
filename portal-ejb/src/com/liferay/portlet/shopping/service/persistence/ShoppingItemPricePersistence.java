@@ -98,60 +98,10 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (shoppingItemPrice.isNew() || shoppingItemPrice.isModified()) {
-				session = openSession();
-
-				if (shoppingItemPrice.isNew()) {
-					ShoppingItemPrice shoppingItemPriceModel = new ShoppingItemPrice();
-					shoppingItemPriceModel.setItemPriceId(shoppingItemPrice.getItemPriceId());
-					shoppingItemPriceModel.setItemId(shoppingItemPrice.getItemId());
-					shoppingItemPriceModel.setMinQuantity(shoppingItemPrice.getMinQuantity());
-					shoppingItemPriceModel.setMaxQuantity(shoppingItemPrice.getMaxQuantity());
-					shoppingItemPriceModel.setPrice(shoppingItemPrice.getPrice());
-					shoppingItemPriceModel.setDiscount(shoppingItemPrice.getDiscount());
-					shoppingItemPriceModel.setTaxable(shoppingItemPrice.getTaxable());
-					shoppingItemPriceModel.setShipping(shoppingItemPrice.getShipping());
-					shoppingItemPriceModel.setUseShippingFormula(shoppingItemPrice.getUseShippingFormula());
-					shoppingItemPriceModel.setStatus(shoppingItemPrice.getStatus());
-					session.save(shoppingItemPriceModel);
-					session.flush();
-				}
-				else {
-					ShoppingItemPrice shoppingItemPriceModel = (ShoppingItemPrice)session.get(ShoppingItemPrice.class,
-							shoppingItemPrice.getPrimaryKey());
-
-					if (shoppingItemPriceModel != null) {
-						shoppingItemPriceModel.setItemId(shoppingItemPrice.getItemId());
-						shoppingItemPriceModel.setMinQuantity(shoppingItemPrice.getMinQuantity());
-						shoppingItemPriceModel.setMaxQuantity(shoppingItemPrice.getMaxQuantity());
-						shoppingItemPriceModel.setPrice(shoppingItemPrice.getPrice());
-						shoppingItemPriceModel.setDiscount(shoppingItemPrice.getDiscount());
-						shoppingItemPriceModel.setTaxable(shoppingItemPrice.getTaxable());
-						shoppingItemPriceModel.setShipping(shoppingItemPrice.getShipping());
-						shoppingItemPriceModel.setUseShippingFormula(shoppingItemPrice.getUseShippingFormula());
-						shoppingItemPriceModel.setStatus(shoppingItemPrice.getStatus());
-						session.flush();
-					}
-					else {
-						shoppingItemPriceModel = new ShoppingItemPrice();
-						shoppingItemPriceModel.setItemPriceId(shoppingItemPrice.getItemPriceId());
-						shoppingItemPriceModel.setItemId(shoppingItemPrice.getItemId());
-						shoppingItemPriceModel.setMinQuantity(shoppingItemPrice.getMinQuantity());
-						shoppingItemPriceModel.setMaxQuantity(shoppingItemPrice.getMaxQuantity());
-						shoppingItemPriceModel.setPrice(shoppingItemPrice.getPrice());
-						shoppingItemPriceModel.setDiscount(shoppingItemPrice.getDiscount());
-						shoppingItemPriceModel.setTaxable(shoppingItemPrice.getTaxable());
-						shoppingItemPriceModel.setShipping(shoppingItemPrice.getShipping());
-						shoppingItemPriceModel.setUseShippingFormula(shoppingItemPrice.getUseShippingFormula());
-						shoppingItemPriceModel.setStatus(shoppingItemPrice.getStatus());
-						session.save(shoppingItemPriceModel);
-						session.flush();
-					}
-				}
-
-				shoppingItemPrice.setNew(false);
-				shoppingItemPrice.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(shoppingItemPrice);
+			session.flush();
+			shoppingItemPrice.setNew(false);
 
 			return shoppingItemPrice;
 		}

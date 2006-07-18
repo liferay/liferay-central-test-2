@@ -97,63 +97,10 @@ public class DLFolderPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (dlFolder.isNew() || dlFolder.isModified()) {
-				session = openSession();
-
-				if (dlFolder.isNew()) {
-					DLFolder dlFolderModel = new DLFolder();
-					dlFolderModel.setFolderId(dlFolder.getFolderId());
-					dlFolderModel.setGroupId(dlFolder.getGroupId());
-					dlFolderModel.setCompanyId(dlFolder.getCompanyId());
-					dlFolderModel.setUserId(dlFolder.getUserId());
-					dlFolderModel.setUserName(dlFolder.getUserName());
-					dlFolderModel.setCreateDate(dlFolder.getCreateDate());
-					dlFolderModel.setModifiedDate(dlFolder.getModifiedDate());
-					dlFolderModel.setParentFolderId(dlFolder.getParentFolderId());
-					dlFolderModel.setName(dlFolder.getName());
-					dlFolderModel.setDescription(dlFolder.getDescription());
-					dlFolderModel.setLastPostDate(dlFolder.getLastPostDate());
-					session.save(dlFolderModel);
-					session.flush();
-				}
-				else {
-					DLFolder dlFolderModel = (DLFolder)session.get(DLFolder.class,
-							dlFolder.getPrimaryKey());
-
-					if (dlFolderModel != null) {
-						dlFolderModel.setGroupId(dlFolder.getGroupId());
-						dlFolderModel.setCompanyId(dlFolder.getCompanyId());
-						dlFolderModel.setUserId(dlFolder.getUserId());
-						dlFolderModel.setUserName(dlFolder.getUserName());
-						dlFolderModel.setCreateDate(dlFolder.getCreateDate());
-						dlFolderModel.setModifiedDate(dlFolder.getModifiedDate());
-						dlFolderModel.setParentFolderId(dlFolder.getParentFolderId());
-						dlFolderModel.setName(dlFolder.getName());
-						dlFolderModel.setDescription(dlFolder.getDescription());
-						dlFolderModel.setLastPostDate(dlFolder.getLastPostDate());
-						session.flush();
-					}
-					else {
-						dlFolderModel = new DLFolder();
-						dlFolderModel.setFolderId(dlFolder.getFolderId());
-						dlFolderModel.setGroupId(dlFolder.getGroupId());
-						dlFolderModel.setCompanyId(dlFolder.getCompanyId());
-						dlFolderModel.setUserId(dlFolder.getUserId());
-						dlFolderModel.setUserName(dlFolder.getUserName());
-						dlFolderModel.setCreateDate(dlFolder.getCreateDate());
-						dlFolderModel.setModifiedDate(dlFolder.getModifiedDate());
-						dlFolderModel.setParentFolderId(dlFolder.getParentFolderId());
-						dlFolderModel.setName(dlFolder.getName());
-						dlFolderModel.setDescription(dlFolder.getDescription());
-						dlFolderModel.setLastPostDate(dlFolder.getLastPostDate());
-						session.save(dlFolderModel);
-						session.flush();
-					}
-				}
-
-				dlFolder.setNew(false);
-				dlFolder.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(dlFolder);
+			session.flush();
+			dlFolder.setNew(false);
 
 			return dlFolder;
 		}

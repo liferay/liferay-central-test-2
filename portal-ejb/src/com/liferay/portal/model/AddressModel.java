@@ -110,7 +110,6 @@ public class AddressModel extends BaseModel {
 			}
 
 			_addressId = addressId;
-			setModified(true);
 		}
 	}
 
@@ -128,7 +127,6 @@ public class AddressModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -146,7 +144,6 @@ public class AddressModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -164,7 +161,6 @@ public class AddressModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -178,7 +174,6 @@ public class AddressModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -192,7 +187,6 @@ public class AddressModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -210,7 +204,6 @@ public class AddressModel extends BaseModel {
 			}
 
 			_className = className;
-			setModified(true);
 		}
 	}
 
@@ -228,7 +221,6 @@ public class AddressModel extends BaseModel {
 			}
 
 			_classPK = classPK;
-			setModified(true);
 		}
 	}
 
@@ -246,7 +238,6 @@ public class AddressModel extends BaseModel {
 			}
 
 			_street1 = street1;
-			setModified(true);
 		}
 	}
 
@@ -264,7 +255,6 @@ public class AddressModel extends BaseModel {
 			}
 
 			_street2 = street2;
-			setModified(true);
 		}
 	}
 
@@ -282,7 +272,6 @@ public class AddressModel extends BaseModel {
 			}
 
 			_street3 = street3;
-			setModified(true);
 		}
 	}
 
@@ -299,7 +288,6 @@ public class AddressModel extends BaseModel {
 			}
 
 			_city = city;
-			setModified(true);
 		}
 	}
 
@@ -316,7 +304,6 @@ public class AddressModel extends BaseModel {
 			}
 
 			_zip = zip;
-			setModified(true);
 		}
 	}
 
@@ -334,7 +321,6 @@ public class AddressModel extends BaseModel {
 			}
 
 			_regionId = regionId;
-			setModified(true);
 		}
 	}
 
@@ -352,7 +338,6 @@ public class AddressModel extends BaseModel {
 			}
 
 			_countryId = countryId;
-			setModified(true);
 		}
 	}
 
@@ -370,7 +355,6 @@ public class AddressModel extends BaseModel {
 			}
 
 			_typeId = typeId;
-			setModified(true);
 		}
 	}
 
@@ -385,7 +369,6 @@ public class AddressModel extends BaseModel {
 	public void setMailing(boolean mailing) {
 		if (mailing != _mailing) {
 			_mailing = mailing;
-			setModified(true);
 		}
 	}
 
@@ -400,7 +383,6 @@ public class AddressModel extends BaseModel {
 	public void setPrimary(boolean primary) {
 		if (primary != _primary) {
 			_primary = primary;
-			setModified(true);
 		}
 	}
 

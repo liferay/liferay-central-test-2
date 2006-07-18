@@ -76,7 +76,6 @@ public class UserTrackerPathModel extends BaseModel {
 			}
 
 			_userTrackerPathId = userTrackerPathId;
-			setModified(true);
 		}
 	}
 
@@ -94,7 +93,6 @@ public class UserTrackerPathModel extends BaseModel {
 			}
 
 			_userTrackerId = userTrackerId;
-			setModified(true);
 		}
 	}
 
@@ -111,7 +109,6 @@ public class UserTrackerPathModel extends BaseModel {
 			}
 
 			_path = path;
-			setModified(true);
 		}
 	}
 
@@ -125,7 +122,6 @@ public class UserTrackerPathModel extends BaseModel {
 				((pathDate != null) && (_pathDate != null) &&
 				!pathDate.equals(_pathDate))) {
 			_pathDate = pathDate;
-			setModified(true);
 		}
 	}
 

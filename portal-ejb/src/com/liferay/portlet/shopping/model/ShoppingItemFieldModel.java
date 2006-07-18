@@ -81,7 +81,6 @@ public class ShoppingItemFieldModel extends BaseModel {
 			}
 
 			_itemFieldId = itemFieldId;
-			setModified(true);
 		}
 	}
 
@@ -99,7 +98,6 @@ public class ShoppingItemFieldModel extends BaseModel {
 			}
 
 			_itemId = itemId;
-			setModified(true);
 		}
 	}
 
@@ -116,7 +114,6 @@ public class ShoppingItemFieldModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -134,7 +131,6 @@ public class ShoppingItemFieldModel extends BaseModel {
 			}
 
 			_values = values;
-			setModified(true);
 		}
 	}
 
@@ -152,7 +148,6 @@ public class ShoppingItemFieldModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 

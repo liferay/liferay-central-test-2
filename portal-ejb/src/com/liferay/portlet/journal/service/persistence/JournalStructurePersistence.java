@@ -98,59 +98,10 @@ public class JournalStructurePersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (journalStructure.isNew() || journalStructure.isModified()) {
-				session = openSession();
-
-				if (journalStructure.isNew()) {
-					JournalStructure journalStructureModel = new JournalStructure();
-					journalStructureModel.setCompanyId(journalStructure.getCompanyId());
-					journalStructureModel.setStructureId(journalStructure.getStructureId());
-					journalStructureModel.setGroupId(journalStructure.getGroupId());
-					journalStructureModel.setUserId(journalStructure.getUserId());
-					journalStructureModel.setUserName(journalStructure.getUserName());
-					journalStructureModel.setCreateDate(journalStructure.getCreateDate());
-					journalStructureModel.setModifiedDate(journalStructure.getModifiedDate());
-					journalStructureModel.setName(journalStructure.getName());
-					journalStructureModel.setDescription(journalStructure.getDescription());
-					journalStructureModel.setXsd(journalStructure.getXsd());
-					session.save(journalStructureModel);
-					session.flush();
-				}
-				else {
-					JournalStructure journalStructureModel = (JournalStructure)session.get(JournalStructure.class,
-							journalStructure.getPrimaryKey());
-
-					if (journalStructureModel != null) {
-						journalStructureModel.setGroupId(journalStructure.getGroupId());
-						journalStructureModel.setUserId(journalStructure.getUserId());
-						journalStructureModel.setUserName(journalStructure.getUserName());
-						journalStructureModel.setCreateDate(journalStructure.getCreateDate());
-						journalStructureModel.setModifiedDate(journalStructure.getModifiedDate());
-						journalStructureModel.setName(journalStructure.getName());
-						journalStructureModel.setDescription(journalStructure.getDescription());
-						journalStructureModel.setXsd(journalStructure.getXsd());
-						session.flush();
-					}
-					else {
-						journalStructureModel = new JournalStructure();
-						journalStructureModel.setCompanyId(journalStructure.getCompanyId());
-						journalStructureModel.setStructureId(journalStructure.getStructureId());
-						journalStructureModel.setGroupId(journalStructure.getGroupId());
-						journalStructureModel.setUserId(journalStructure.getUserId());
-						journalStructureModel.setUserName(journalStructure.getUserName());
-						journalStructureModel.setCreateDate(journalStructure.getCreateDate());
-						journalStructureModel.setModifiedDate(journalStructure.getModifiedDate());
-						journalStructureModel.setName(journalStructure.getName());
-						journalStructureModel.setDescription(journalStructure.getDescription());
-						journalStructureModel.setXsd(journalStructure.getXsd());
-						session.save(journalStructureModel);
-						session.flush();
-					}
-				}
-
-				journalStructure.setNew(false);
-				journalStructure.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(journalStructure);
+			session.flush();
+			journalStructure.setNew(false);
 
 			return journalStructure;
 		}

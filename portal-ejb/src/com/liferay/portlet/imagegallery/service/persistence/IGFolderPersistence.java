@@ -96,57 +96,10 @@ public class IGFolderPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (igFolder.isNew() || igFolder.isModified()) {
-				session = openSession();
-
-				if (igFolder.isNew()) {
-					IGFolder igFolderModel = new IGFolder();
-					igFolderModel.setFolderId(igFolder.getFolderId());
-					igFolderModel.setGroupId(igFolder.getGroupId());
-					igFolderModel.setCompanyId(igFolder.getCompanyId());
-					igFolderModel.setUserId(igFolder.getUserId());
-					igFolderModel.setCreateDate(igFolder.getCreateDate());
-					igFolderModel.setModifiedDate(igFolder.getModifiedDate());
-					igFolderModel.setParentFolderId(igFolder.getParentFolderId());
-					igFolderModel.setName(igFolder.getName());
-					igFolderModel.setDescription(igFolder.getDescription());
-					session.save(igFolderModel);
-					session.flush();
-				}
-				else {
-					IGFolder igFolderModel = (IGFolder)session.get(IGFolder.class,
-							igFolder.getPrimaryKey());
-
-					if (igFolderModel != null) {
-						igFolderModel.setGroupId(igFolder.getGroupId());
-						igFolderModel.setCompanyId(igFolder.getCompanyId());
-						igFolderModel.setUserId(igFolder.getUserId());
-						igFolderModel.setCreateDate(igFolder.getCreateDate());
-						igFolderModel.setModifiedDate(igFolder.getModifiedDate());
-						igFolderModel.setParentFolderId(igFolder.getParentFolderId());
-						igFolderModel.setName(igFolder.getName());
-						igFolderModel.setDescription(igFolder.getDescription());
-						session.flush();
-					}
-					else {
-						igFolderModel = new IGFolder();
-						igFolderModel.setFolderId(igFolder.getFolderId());
-						igFolderModel.setGroupId(igFolder.getGroupId());
-						igFolderModel.setCompanyId(igFolder.getCompanyId());
-						igFolderModel.setUserId(igFolder.getUserId());
-						igFolderModel.setCreateDate(igFolder.getCreateDate());
-						igFolderModel.setModifiedDate(igFolder.getModifiedDate());
-						igFolderModel.setParentFolderId(igFolder.getParentFolderId());
-						igFolderModel.setName(igFolder.getName());
-						igFolderModel.setDescription(igFolder.getDescription());
-						session.save(igFolderModel);
-						session.flush();
-					}
-				}
-
-				igFolder.setNew(false);
-				igFolder.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(igFolder);
+			session.flush();
+			igFolder.setNew(false);
 
 			return igFolder;
 		}

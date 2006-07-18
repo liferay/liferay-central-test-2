@@ -96,58 +96,10 @@ public class WikiPagePersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (wikiPage.isNew() || wikiPage.isModified()) {
-				session = openSession();
-
-				if (wikiPage.isNew()) {
-					WikiPage wikiPageModel = new WikiPage();
-					wikiPageModel.setNodeId(wikiPage.getNodeId());
-					wikiPageModel.setTitle(wikiPage.getTitle());
-					wikiPageModel.setVersion(wikiPage.getVersion());
-					wikiPageModel.setCompanyId(wikiPage.getCompanyId());
-					wikiPageModel.setUserId(wikiPage.getUserId());
-					wikiPageModel.setUserName(wikiPage.getUserName());
-					wikiPageModel.setCreateDate(wikiPage.getCreateDate());
-					wikiPageModel.setContent(wikiPage.getContent());
-					wikiPageModel.setFormat(wikiPage.getFormat());
-					wikiPageModel.setHead(wikiPage.getHead());
-					session.save(wikiPageModel);
-					session.flush();
-				}
-				else {
-					WikiPage wikiPageModel = (WikiPage)session.get(WikiPage.class,
-							wikiPage.getPrimaryKey());
-
-					if (wikiPageModel != null) {
-						wikiPageModel.setCompanyId(wikiPage.getCompanyId());
-						wikiPageModel.setUserId(wikiPage.getUserId());
-						wikiPageModel.setUserName(wikiPage.getUserName());
-						wikiPageModel.setCreateDate(wikiPage.getCreateDate());
-						wikiPageModel.setContent(wikiPage.getContent());
-						wikiPageModel.setFormat(wikiPage.getFormat());
-						wikiPageModel.setHead(wikiPage.getHead());
-						session.flush();
-					}
-					else {
-						wikiPageModel = new WikiPage();
-						wikiPageModel.setNodeId(wikiPage.getNodeId());
-						wikiPageModel.setTitle(wikiPage.getTitle());
-						wikiPageModel.setVersion(wikiPage.getVersion());
-						wikiPageModel.setCompanyId(wikiPage.getCompanyId());
-						wikiPageModel.setUserId(wikiPage.getUserId());
-						wikiPageModel.setUserName(wikiPage.getUserName());
-						wikiPageModel.setCreateDate(wikiPage.getCreateDate());
-						wikiPageModel.setContent(wikiPage.getContent());
-						wikiPageModel.setFormat(wikiPage.getFormat());
-						wikiPageModel.setHead(wikiPage.getHead());
-						session.save(wikiPageModel);
-						session.flush();
-					}
-				}
-
-				wikiPage.setNew(false);
-				wikiPage.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(wikiPage);
+			session.flush();
+			wikiPage.setNew(false);
 
 			return wikiPage;
 		}

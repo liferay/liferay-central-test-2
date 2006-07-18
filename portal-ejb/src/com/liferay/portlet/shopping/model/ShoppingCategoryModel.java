@@ -92,7 +92,6 @@ public class ShoppingCategoryModel extends BaseModel {
 			}
 
 			_categoryId = categoryId;
-			setModified(true);
 		}
 	}
 
@@ -110,7 +109,6 @@ public class ShoppingCategoryModel extends BaseModel {
 			}
 
 			_groupId = groupId;
-			setModified(true);
 		}
 	}
 
@@ -128,7 +126,6 @@ public class ShoppingCategoryModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -146,7 +143,6 @@ public class ShoppingCategoryModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -164,7 +160,6 @@ public class ShoppingCategoryModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -178,7 +173,6 @@ public class ShoppingCategoryModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -192,7 +186,6 @@ public class ShoppingCategoryModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -210,7 +203,6 @@ public class ShoppingCategoryModel extends BaseModel {
 			}
 
 			_parentCategoryId = parentCategoryId;
-			setModified(true);
 		}
 	}
 
@@ -227,7 +219,6 @@ public class ShoppingCategoryModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -245,7 +236,6 @@ public class ShoppingCategoryModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 

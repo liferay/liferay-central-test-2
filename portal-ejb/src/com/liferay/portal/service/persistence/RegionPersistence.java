@@ -94,45 +94,10 @@ public class RegionPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (region.isNew() || region.isModified()) {
-				session = openSession();
-
-				if (region.isNew()) {
-					Region regionModel = new Region();
-					regionModel.setRegionId(region.getRegionId());
-					regionModel.setCountryId(region.getCountryId());
-					regionModel.setRegionCode(region.getRegionCode());
-					regionModel.setName(region.getName());
-					regionModel.setActive(region.getActive());
-					session.save(regionModel);
-					session.flush();
-				}
-				else {
-					Region regionModel = (Region)session.get(Region.class,
-							region.getPrimaryKey());
-
-					if (regionModel != null) {
-						regionModel.setCountryId(region.getCountryId());
-						regionModel.setRegionCode(region.getRegionCode());
-						regionModel.setName(region.getName());
-						regionModel.setActive(region.getActive());
-						session.flush();
-					}
-					else {
-						regionModel = new Region();
-						regionModel.setRegionId(region.getRegionId());
-						regionModel.setCountryId(region.getCountryId());
-						regionModel.setRegionCode(region.getRegionCode());
-						regionModel.setName(region.getName());
-						regionModel.setActive(region.getActive());
-						session.save(regionModel);
-						session.flush();
-					}
-				}
-
-				region.setNew(false);
-				region.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(region);
+			session.flush();
+			region.setNew(false);
 
 			return region;
 		}

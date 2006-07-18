@@ -1495,8 +1495,6 @@ public class ServiceBuilder {
 				}
 
 				sb.append("_" + col.getName() + " = " + col.getName() + ";");
-
-				sb.append("setModified(true);");
 				sb.append("}");
 				sb.append("}");
 			}
@@ -1866,54 +1864,10 @@ public class ServiceBuilder {
 		sb.append("public " + _packagePath + ".model." + entity.getName() + " update(" + _packagePath + ".model." + entity.getName() + " " + entity.getVarName() + ") throws SystemException {");
 		sb.append("Session session = null;");
 		sb.append("try {");
-		sb.append("if (" + entity.getVarName() + ".isNew() || " + entity.getVarName() + ".isModified()) {");
 		sb.append("session = openSession();");
-		sb.append("if (" + entity.getVarName() + ".isNew()) {");
-		sb.append(entity.getName() + " " + entity.getVarName() + "Model = new " + entity.getName() + "();");
-
-		for (int i = 0; i < columnList.size(); i++) {
-			EntityColumn col = (EntityColumn)columnList.get(i);
-
-			if (!col.isCollection() && (col.getEJBName() == null)) {
-				sb.append(entity.getVarName() + "Model.set" + col.getMethodName() + "(" + entity.getVarName() + ".get" + col.getMethodName() + "());");
-			}
-		}
-
-		sb.append("session.save(" + entity.getVarName() + "Model);");
+		sb.append("session.saveOrUpdate(" + entity.getVarName() + ");");
 		sb.append("session.flush();");
-		sb.append("}");
-		sb.append("else {");
-		sb.append(entity.getName() + " " + entity.getVarName() + "Model = (" + entity.getName() + ")session.get(" + entity.getName() + ".class, " + entity.getVarName() + ".getPrimaryKey());");
-		sb.append("if (" + entity.getVarName() + "Model != null) {");
-
-		for (int i = 0; i < columnList.size(); i++) {
-			EntityColumn col = (EntityColumn)columnList.get(i);
-
-			if (!col.isPrimary() && !col.isCollection() && col.getEJBName() == null) {
-				sb.append(entity.getVarName() + "Model.set" + col.getMethodName() + "(" + entity.getVarName() + ".get" + col.getMethodName() + "());");
-			}
-		}
-
-		sb.append("session.flush();");
-		sb.append("}");
-		sb.append("else {");
-		sb.append(entity.getVarName() + "Model = new " + entity.getName() + "();");
-
-		for (int i = 0; i < columnList.size(); i++) {
-			EntityColumn col = (EntityColumn)columnList.get(i);
-
-			if (!col.isCollection() && (col.getEJBName() == null)) {
-				sb.append(entity.getVarName() + "Model.set" + col.getMethodName() + "(" + entity.getVarName() + ".get" + col.getMethodName() + "());");
-			}
-		}
-
-		sb.append("session.save(" + entity.getVarName() + "Model);");
-		sb.append("session.flush();");
-		sb.append("}");
-		sb.append("}");
 		sb.append(entity.getVarName() + ".setNew(false);");
-		sb.append(entity.getVarName() + ".setModified(false);");
-		sb.append("}");
 		sb.append("return " + entity.getVarName() + ";");
 		sb.append("}");
 		sb.append("catch (HibernateException he) {");

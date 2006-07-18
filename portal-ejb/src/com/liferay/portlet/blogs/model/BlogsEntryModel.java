@@ -93,7 +93,6 @@ public class BlogsEntryModel extends BaseModel {
 			}
 
 			_entryId = entryId;
-			setModified(true);
 		}
 	}
 
@@ -111,7 +110,6 @@ public class BlogsEntryModel extends BaseModel {
 			}
 
 			_groupId = groupId;
-			setModified(true);
 		}
 	}
 
@@ -129,7 +127,6 @@ public class BlogsEntryModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -147,7 +144,6 @@ public class BlogsEntryModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -165,7 +161,6 @@ public class BlogsEntryModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -179,7 +174,6 @@ public class BlogsEntryModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -193,7 +187,6 @@ public class BlogsEntryModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -211,7 +204,6 @@ public class BlogsEntryModel extends BaseModel {
 			}
 
 			_categoryId = categoryId;
-			setModified(true);
 		}
 	}
 
@@ -228,7 +220,6 @@ public class BlogsEntryModel extends BaseModel {
 			}
 
 			_title = title;
-			setModified(true);
 		}
 	}
 
@@ -246,7 +237,6 @@ public class BlogsEntryModel extends BaseModel {
 			}
 
 			_content = content;
-			setModified(true);
 		}
 	}
 
@@ -260,7 +250,6 @@ public class BlogsEntryModel extends BaseModel {
 				((displayDate != null) && (_displayDate != null) &&
 				!displayDate.equals(_displayDate))) {
 			_displayDate = displayDate;
-			setModified(true);
 		}
 	}
 

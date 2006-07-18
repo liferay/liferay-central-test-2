@@ -89,7 +89,6 @@ public class BookmarksFolderModel extends BaseModel {
 			}
 
 			_folderId = folderId;
-			setModified(true);
 		}
 	}
 
@@ -107,7 +106,6 @@ public class BookmarksFolderModel extends BaseModel {
 			}
 
 			_groupId = groupId;
-			setModified(true);
 		}
 	}
 
@@ -125,7 +123,6 @@ public class BookmarksFolderModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -143,7 +140,6 @@ public class BookmarksFolderModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -157,7 +153,6 @@ public class BookmarksFolderModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -171,7 +166,6 @@ public class BookmarksFolderModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -189,7 +183,6 @@ public class BookmarksFolderModel extends BaseModel {
 			}
 
 			_parentFolderId = parentFolderId;
-			setModified(true);
 		}
 	}
 
@@ -206,7 +199,6 @@ public class BookmarksFolderModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -224,7 +216,6 @@ public class BookmarksFolderModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 

@@ -89,7 +89,6 @@ public class OrganizationModel extends BaseModel {
 			}
 
 			_organizationId = organizationId;
-			setModified(true);
 		}
 	}
 
@@ -107,7 +106,6 @@ public class OrganizationModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -127,7 +125,6 @@ public class OrganizationModel extends BaseModel {
 			}
 
 			_parentOrganizationId = parentOrganizationId;
-			setModified(true);
 		}
 	}
 
@@ -144,7 +141,6 @@ public class OrganizationModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -159,7 +155,6 @@ public class OrganizationModel extends BaseModel {
 	public void setRecursable(boolean recursable) {
 		if (recursable != _recursable) {
 			_recursable = recursable;
-			setModified(true);
 		}
 	}
 
@@ -177,7 +172,6 @@ public class OrganizationModel extends BaseModel {
 			}
 
 			_regionId = regionId;
-			setModified(true);
 		}
 	}
 
@@ -195,7 +189,6 @@ public class OrganizationModel extends BaseModel {
 			}
 
 			_countryId = countryId;
-			setModified(true);
 		}
 	}
 
@@ -213,7 +206,6 @@ public class OrganizationModel extends BaseModel {
 			}
 
 			_statusId = statusId;
-			setModified(true);
 		}
 	}
 
@@ -231,7 +223,6 @@ public class OrganizationModel extends BaseModel {
 			}
 
 			_comments = comments;
-			setModified(true);
 		}
 	}
 

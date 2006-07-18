@@ -92,7 +92,6 @@ public class GroupModel extends BaseModel {
 			}
 
 			_groupId = groupId;
-			setModified(true);
 		}
 	}
 
@@ -110,7 +109,6 @@ public class GroupModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -128,7 +126,6 @@ public class GroupModel extends BaseModel {
 			}
 
 			_className = className;
-			setModified(true);
 		}
 	}
 
@@ -146,7 +143,6 @@ public class GroupModel extends BaseModel {
 			}
 
 			_classPK = classPK;
-			setModified(true);
 		}
 	}
 
@@ -164,7 +160,6 @@ public class GroupModel extends BaseModel {
 			}
 
 			_parentGroupId = parentGroupId;
-			setModified(true);
 		}
 	}
 
@@ -181,7 +176,6 @@ public class GroupModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -199,7 +193,6 @@ public class GroupModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 
@@ -216,7 +209,6 @@ public class GroupModel extends BaseModel {
 			}
 
 			_type = type;
-			setModified(true);
 		}
 	}
 
@@ -234,7 +226,6 @@ public class GroupModel extends BaseModel {
 			}
 
 			_friendlyURL = friendlyURL;
-			setModified(true);
 		}
 	}
 

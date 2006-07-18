@@ -98,7 +98,6 @@ public class DLFileEntryModel extends BaseModel {
 			}
 
 			_folderId = folderId;
-			setModified(true);
 		}
 	}
 
@@ -115,7 +114,6 @@ public class DLFileEntryModel extends BaseModel {
 			}
 
 			_name = name;
-			setModified(true);
 		}
 	}
 
@@ -133,7 +131,6 @@ public class DLFileEntryModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -151,7 +148,6 @@ public class DLFileEntryModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -169,7 +165,6 @@ public class DLFileEntryModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -187,7 +182,6 @@ public class DLFileEntryModel extends BaseModel {
 			}
 
 			_versionUserId = versionUserId;
-			setModified(true);
 		}
 	}
 
@@ -205,7 +199,6 @@ public class DLFileEntryModel extends BaseModel {
 			}
 
 			_versionUserName = versionUserName;
-			setModified(true);
 		}
 	}
 
@@ -219,7 +212,6 @@ public class DLFileEntryModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -233,7 +225,6 @@ public class DLFileEntryModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -250,7 +241,6 @@ public class DLFileEntryModel extends BaseModel {
 			}
 
 			_title = title;
-			setModified(true);
 		}
 	}
 
@@ -268,7 +258,6 @@ public class DLFileEntryModel extends BaseModel {
 			}
 
 			_description = description;
-			setModified(true);
 		}
 	}
 
@@ -279,7 +268,6 @@ public class DLFileEntryModel extends BaseModel {
 	public void setVersion(double version) {
 		if (version != _version) {
 			_version = version;
-			setModified(true);
 		}
 	}
 
@@ -290,7 +278,6 @@ public class DLFileEntryModel extends BaseModel {
 	public void setSize(int size) {
 		if (size != _size) {
 			_size = size;
-			setModified(true);
 		}
 	}
 
@@ -301,7 +288,6 @@ public class DLFileEntryModel extends BaseModel {
 	public void setReadCount(int readCount) {
 		if (readCount != _readCount) {
 			_readCount = readCount;
-			setModified(true);
 		}
 	}
 

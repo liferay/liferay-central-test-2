@@ -94,39 +94,10 @@ public class ListTypePersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (listType.isNew() || listType.isModified()) {
-				session = openSession();
-
-				if (listType.isNew()) {
-					ListType listTypeModel = new ListType();
-					listTypeModel.setListTypeId(listType.getListTypeId());
-					listTypeModel.setName(listType.getName());
-					listTypeModel.setType(listType.getType());
-					session.save(listTypeModel);
-					session.flush();
-				}
-				else {
-					ListType listTypeModel = (ListType)session.get(ListType.class,
-							listType.getPrimaryKey());
-
-					if (listTypeModel != null) {
-						listTypeModel.setName(listType.getName());
-						listTypeModel.setType(listType.getType());
-						session.flush();
-					}
-					else {
-						listTypeModel = new ListType();
-						listTypeModel.setListTypeId(listType.getListTypeId());
-						listTypeModel.setName(listType.getName());
-						listTypeModel.setType(listType.getType());
-						session.save(listTypeModel);
-						session.flush();
-					}
-				}
-
-				listType.setNew(false);
-				listType.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(listType);
+			session.flush();
+			listType.setNew(false);
 
 			return listType;
 		}

@@ -80,7 +80,6 @@ public class CompanyModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -97,7 +96,6 @@ public class CompanyModel extends BaseModel {
 			}
 
 			_key = key;
-			setModified(true);
 		}
 	}
 
@@ -115,7 +113,6 @@ public class CompanyModel extends BaseModel {
 			}
 
 			_portalURL = portalURL;
-			setModified(true);
 		}
 	}
 
@@ -133,7 +130,6 @@ public class CompanyModel extends BaseModel {
 			}
 
 			_homeURL = homeURL;
-			setModified(true);
 		}
 	}
 
@@ -149,7 +145,6 @@ public class CompanyModel extends BaseModel {
 			}
 
 			_mx = mx;
-			setModified(true);
 		}
 	}
 

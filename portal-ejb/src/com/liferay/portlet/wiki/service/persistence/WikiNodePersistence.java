@@ -96,60 +96,10 @@ public class WikiNodePersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (wikiNode.isNew() || wikiNode.isModified()) {
-				session = openSession();
-
-				if (wikiNode.isNew()) {
-					WikiNode wikiNodeModel = new WikiNode();
-					wikiNodeModel.setNodeId(wikiNode.getNodeId());
-					wikiNodeModel.setGroupId(wikiNode.getGroupId());
-					wikiNodeModel.setCompanyId(wikiNode.getCompanyId());
-					wikiNodeModel.setUserId(wikiNode.getUserId());
-					wikiNodeModel.setUserName(wikiNode.getUserName());
-					wikiNodeModel.setCreateDate(wikiNode.getCreateDate());
-					wikiNodeModel.setModifiedDate(wikiNode.getModifiedDate());
-					wikiNodeModel.setName(wikiNode.getName());
-					wikiNodeModel.setDescription(wikiNode.getDescription());
-					wikiNodeModel.setLastPostDate(wikiNode.getLastPostDate());
-					session.save(wikiNodeModel);
-					session.flush();
-				}
-				else {
-					WikiNode wikiNodeModel = (WikiNode)session.get(WikiNode.class,
-							wikiNode.getPrimaryKey());
-
-					if (wikiNodeModel != null) {
-						wikiNodeModel.setGroupId(wikiNode.getGroupId());
-						wikiNodeModel.setCompanyId(wikiNode.getCompanyId());
-						wikiNodeModel.setUserId(wikiNode.getUserId());
-						wikiNodeModel.setUserName(wikiNode.getUserName());
-						wikiNodeModel.setCreateDate(wikiNode.getCreateDate());
-						wikiNodeModel.setModifiedDate(wikiNode.getModifiedDate());
-						wikiNodeModel.setName(wikiNode.getName());
-						wikiNodeModel.setDescription(wikiNode.getDescription());
-						wikiNodeModel.setLastPostDate(wikiNode.getLastPostDate());
-						session.flush();
-					}
-					else {
-						wikiNodeModel = new WikiNode();
-						wikiNodeModel.setNodeId(wikiNode.getNodeId());
-						wikiNodeModel.setGroupId(wikiNode.getGroupId());
-						wikiNodeModel.setCompanyId(wikiNode.getCompanyId());
-						wikiNodeModel.setUserId(wikiNode.getUserId());
-						wikiNodeModel.setUserName(wikiNode.getUserName());
-						wikiNodeModel.setCreateDate(wikiNode.getCreateDate());
-						wikiNodeModel.setModifiedDate(wikiNode.getModifiedDate());
-						wikiNodeModel.setName(wikiNode.getName());
-						wikiNodeModel.setDescription(wikiNode.getDescription());
-						wikiNodeModel.setLastPostDate(wikiNode.getLastPostDate());
-						session.save(wikiNodeModel);
-						session.flush();
-					}
-				}
-
-				wikiNode.setNew(false);
-				wikiNode.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(wikiNode);
+			session.flush();
+			wikiNode.setNew(false);
 
 			return wikiNode;
 		}

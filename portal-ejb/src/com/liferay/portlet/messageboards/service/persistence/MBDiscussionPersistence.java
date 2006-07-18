@@ -96,42 +96,10 @@ public class MBDiscussionPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (mbDiscussion.isNew() || mbDiscussion.isModified()) {
-				session = openSession();
-
-				if (mbDiscussion.isNew()) {
-					MBDiscussion mbDiscussionModel = new MBDiscussion();
-					mbDiscussionModel.setDiscussionId(mbDiscussion.getDiscussionId());
-					mbDiscussionModel.setClassName(mbDiscussion.getClassName());
-					mbDiscussionModel.setClassPK(mbDiscussion.getClassPK());
-					mbDiscussionModel.setThreadId(mbDiscussion.getThreadId());
-					session.save(mbDiscussionModel);
-					session.flush();
-				}
-				else {
-					MBDiscussion mbDiscussionModel = (MBDiscussion)session.get(MBDiscussion.class,
-							mbDiscussion.getPrimaryKey());
-
-					if (mbDiscussionModel != null) {
-						mbDiscussionModel.setClassName(mbDiscussion.getClassName());
-						mbDiscussionModel.setClassPK(mbDiscussion.getClassPK());
-						mbDiscussionModel.setThreadId(mbDiscussion.getThreadId());
-						session.flush();
-					}
-					else {
-						mbDiscussionModel = new MBDiscussion();
-						mbDiscussionModel.setDiscussionId(mbDiscussion.getDiscussionId());
-						mbDiscussionModel.setClassName(mbDiscussion.getClassName());
-						mbDiscussionModel.setClassPK(mbDiscussion.getClassPK());
-						mbDiscussionModel.setThreadId(mbDiscussion.getThreadId());
-						session.save(mbDiscussionModel);
-						session.flush();
-					}
-				}
-
-				mbDiscussion.setNew(false);
-				mbDiscussion.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(mbDiscussion);
+			session.flush();
+			mbDiscussion.setNew(false);
 
 			return mbDiscussion;
 		}

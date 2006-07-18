@@ -102,7 +102,6 @@ public class MBMessageModel extends BaseModel {
 			}
 
 			_topicId = topicId;
-			setModified(true);
 		}
 	}
 
@@ -120,7 +119,6 @@ public class MBMessageModel extends BaseModel {
 			}
 
 			_messageId = messageId;
-			setModified(true);
 		}
 	}
 
@@ -138,7 +136,6 @@ public class MBMessageModel extends BaseModel {
 			}
 
 			_companyId = companyId;
-			setModified(true);
 		}
 	}
 
@@ -156,7 +153,6 @@ public class MBMessageModel extends BaseModel {
 			}
 
 			_userId = userId;
-			setModified(true);
 		}
 	}
 
@@ -174,7 +170,6 @@ public class MBMessageModel extends BaseModel {
 			}
 
 			_userName = userName;
-			setModified(true);
 		}
 	}
 
@@ -188,7 +183,6 @@ public class MBMessageModel extends BaseModel {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
-			setModified(true);
 		}
 	}
 
@@ -202,7 +196,6 @@ public class MBMessageModel extends BaseModel {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
-			setModified(true);
 		}
 	}
 
@@ -220,7 +213,6 @@ public class MBMessageModel extends BaseModel {
 			}
 
 			_categoryId = categoryId;
-			setModified(true);
 		}
 	}
 
@@ -238,7 +230,6 @@ public class MBMessageModel extends BaseModel {
 			}
 
 			_threadId = threadId;
-			setModified(true);
 		}
 	}
 
@@ -256,7 +247,6 @@ public class MBMessageModel extends BaseModel {
 			}
 
 			_parentMessageId = parentMessageId;
-			setModified(true);
 		}
 	}
 
@@ -274,7 +264,6 @@ public class MBMessageModel extends BaseModel {
 			}
 
 			_subject = subject;
-			setModified(true);
 		}
 	}
 
@@ -291,7 +280,6 @@ public class MBMessageModel extends BaseModel {
 			}
 
 			_body = body;
-			setModified(true);
 		}
 	}
 
@@ -306,7 +294,6 @@ public class MBMessageModel extends BaseModel {
 	public void setAttachments(boolean attachments) {
 		if (attachments != _attachments) {
 			_attachments = attachments;
-			setModified(true);
 		}
 	}
 
@@ -321,7 +308,6 @@ public class MBMessageModel extends BaseModel {
 	public void setAnonymous(boolean anonymous) {
 		if (anonymous != _anonymous) {
 			_anonymous = anonymous;
-			setModified(true);
 		}
 	}
 

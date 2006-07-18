@@ -94,66 +94,10 @@ public class PhonePersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (phone.isNew() || phone.isModified()) {
-				session = openSession();
-
-				if (phone.isNew()) {
-					Phone phoneModel = new Phone();
-					phoneModel.setPhoneId(phone.getPhoneId());
-					phoneModel.setCompanyId(phone.getCompanyId());
-					phoneModel.setUserId(phone.getUserId());
-					phoneModel.setUserName(phone.getUserName());
-					phoneModel.setCreateDate(phone.getCreateDate());
-					phoneModel.setModifiedDate(phone.getModifiedDate());
-					phoneModel.setClassName(phone.getClassName());
-					phoneModel.setClassPK(phone.getClassPK());
-					phoneModel.setNumber(phone.getNumber());
-					phoneModel.setExtension(phone.getExtension());
-					phoneModel.setTypeId(phone.getTypeId());
-					phoneModel.setPrimary(phone.getPrimary());
-					session.save(phoneModel);
-					session.flush();
-				}
-				else {
-					Phone phoneModel = (Phone)session.get(Phone.class,
-							phone.getPrimaryKey());
-
-					if (phoneModel != null) {
-						phoneModel.setCompanyId(phone.getCompanyId());
-						phoneModel.setUserId(phone.getUserId());
-						phoneModel.setUserName(phone.getUserName());
-						phoneModel.setCreateDate(phone.getCreateDate());
-						phoneModel.setModifiedDate(phone.getModifiedDate());
-						phoneModel.setClassName(phone.getClassName());
-						phoneModel.setClassPK(phone.getClassPK());
-						phoneModel.setNumber(phone.getNumber());
-						phoneModel.setExtension(phone.getExtension());
-						phoneModel.setTypeId(phone.getTypeId());
-						phoneModel.setPrimary(phone.getPrimary());
-						session.flush();
-					}
-					else {
-						phoneModel = new Phone();
-						phoneModel.setPhoneId(phone.getPhoneId());
-						phoneModel.setCompanyId(phone.getCompanyId());
-						phoneModel.setUserId(phone.getUserId());
-						phoneModel.setUserName(phone.getUserName());
-						phoneModel.setCreateDate(phone.getCreateDate());
-						phoneModel.setModifiedDate(phone.getModifiedDate());
-						phoneModel.setClassName(phone.getClassName());
-						phoneModel.setClassPK(phone.getClassPK());
-						phoneModel.setNumber(phone.getNumber());
-						phoneModel.setExtension(phone.getExtension());
-						phoneModel.setTypeId(phone.getTypeId());
-						phoneModel.setPrimary(phone.getPrimary());
-						session.save(phoneModel);
-						session.flush();
-					}
-				}
-
-				phone.setNew(false);
-				phone.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(phone);
+			session.flush();
+			phone.setNew(false);
 
 			return phone;
 		}

@@ -97,41 +97,10 @@ public class PollsVotePersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (pollsVote.isNew() || pollsVote.isModified()) {
-				session = openSession();
-
-				if (pollsVote.isNew()) {
-					PollsVote pollsVoteModel = new PollsVote();
-					pollsVoteModel.setQuestionId(pollsVote.getQuestionId());
-					pollsVoteModel.setUserId(pollsVote.getUserId());
-					pollsVoteModel.setChoiceId(pollsVote.getChoiceId());
-					pollsVoteModel.setVoteDate(pollsVote.getVoteDate());
-					session.save(pollsVoteModel);
-					session.flush();
-				}
-				else {
-					PollsVote pollsVoteModel = (PollsVote)session.get(PollsVote.class,
-							pollsVote.getPrimaryKey());
-
-					if (pollsVoteModel != null) {
-						pollsVoteModel.setChoiceId(pollsVote.getChoiceId());
-						pollsVoteModel.setVoteDate(pollsVote.getVoteDate());
-						session.flush();
-					}
-					else {
-						pollsVoteModel = new PollsVote();
-						pollsVoteModel.setQuestionId(pollsVote.getQuestionId());
-						pollsVoteModel.setUserId(pollsVote.getUserId());
-						pollsVoteModel.setChoiceId(pollsVote.getChoiceId());
-						pollsVoteModel.setVoteDate(pollsVote.getVoteDate());
-						session.save(pollsVoteModel);
-						session.flush();
-					}
-				}
-
-				pollsVote.setNew(false);
-				pollsVote.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(pollsVote);
+			session.flush();
+			pollsVote.setNew(false);
 
 			return pollsVote;
 		}

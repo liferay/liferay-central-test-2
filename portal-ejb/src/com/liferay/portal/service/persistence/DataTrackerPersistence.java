@@ -91,60 +91,10 @@ public class DataTrackerPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			if (dataTracker.isNew() || dataTracker.isModified()) {
-				session = openSession();
-
-				if (dataTracker.isNew()) {
-					DataTracker dataTrackerModel = new DataTracker();
-					dataTrackerModel.setDataTrackerId(dataTracker.getDataTrackerId());
-					dataTrackerModel.setCompanyId(dataTracker.getCompanyId());
-					dataTrackerModel.setCreatedOn(dataTracker.getCreatedOn());
-					dataTrackerModel.setCreatedByUserId(dataTracker.getCreatedByUserId());
-					dataTrackerModel.setCreatedByUserName(dataTracker.getCreatedByUserName());
-					dataTrackerModel.setUpdatedOn(dataTracker.getUpdatedOn());
-					dataTrackerModel.setUpdatedBy(dataTracker.getUpdatedBy());
-					dataTrackerModel.setClassName(dataTracker.getClassName());
-					dataTrackerModel.setClassPK(dataTracker.getClassPK());
-					dataTrackerModel.setActive(dataTracker.getActive());
-					session.save(dataTrackerModel);
-					session.flush();
-				}
-				else {
-					DataTracker dataTrackerModel = (DataTracker)session.get(DataTracker.class,
-							dataTracker.getPrimaryKey());
-
-					if (dataTrackerModel != null) {
-						dataTrackerModel.setCompanyId(dataTracker.getCompanyId());
-						dataTrackerModel.setCreatedOn(dataTracker.getCreatedOn());
-						dataTrackerModel.setCreatedByUserId(dataTracker.getCreatedByUserId());
-						dataTrackerModel.setCreatedByUserName(dataTracker.getCreatedByUserName());
-						dataTrackerModel.setUpdatedOn(dataTracker.getUpdatedOn());
-						dataTrackerModel.setUpdatedBy(dataTracker.getUpdatedBy());
-						dataTrackerModel.setClassName(dataTracker.getClassName());
-						dataTrackerModel.setClassPK(dataTracker.getClassPK());
-						dataTrackerModel.setActive(dataTracker.getActive());
-						session.flush();
-					}
-					else {
-						dataTrackerModel = new DataTracker();
-						dataTrackerModel.setDataTrackerId(dataTracker.getDataTrackerId());
-						dataTrackerModel.setCompanyId(dataTracker.getCompanyId());
-						dataTrackerModel.setCreatedOn(dataTracker.getCreatedOn());
-						dataTrackerModel.setCreatedByUserId(dataTracker.getCreatedByUserId());
-						dataTrackerModel.setCreatedByUserName(dataTracker.getCreatedByUserName());
-						dataTrackerModel.setUpdatedOn(dataTracker.getUpdatedOn());
-						dataTrackerModel.setUpdatedBy(dataTracker.getUpdatedBy());
-						dataTrackerModel.setClassName(dataTracker.getClassName());
-						dataTrackerModel.setClassPK(dataTracker.getClassPK());
-						dataTrackerModel.setActive(dataTracker.getActive());
-						session.save(dataTrackerModel);
-						session.flush();
-					}
-				}
-
-				dataTracker.setNew(false);
-				dataTracker.setModified(false);
-			}
+			session = openSession();
+			session.saveOrUpdate(dataTracker);
+			session.flush();
+			dataTracker.setNew(false);
 
 			return dataTracker;
 		}
