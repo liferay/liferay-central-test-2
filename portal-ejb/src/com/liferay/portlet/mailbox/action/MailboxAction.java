@@ -209,7 +209,7 @@ public class MailboxAction extends JSONAction {
 			((ActionRequestImpl)req).getHttpServletRequest().getSession();
 		long newMessageId = 
 			ActionUtil.completeMessage(from, tos, ccs, bccs, subject, body,
-				attachments, ses, true, messageId);
+				attachments, ses, false, messageId);
 
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("id", newMessageId);

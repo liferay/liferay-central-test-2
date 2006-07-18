@@ -197,8 +197,9 @@ public class MailUtil {
 		}
 		
 		// delete the draft if it existed
-		if (mm.getMessageUID() != 0L) {
-			Message msg = _getCurrentFolder(ses).getMessageByUID(mm.getMessageUID());
+		if (mm.getMessageUID() < 0L) {
+			Message msg = 
+				_getCurrentFolder(ses).getMessageByUID(mm.getMessageUID());
 			_getCurrentFolder(ses).setFlags(
 				new Message [] { msg }, new Flags(Flags.Flag.DELETED), true);
 			_getCurrentFolder(ses).expunge();
