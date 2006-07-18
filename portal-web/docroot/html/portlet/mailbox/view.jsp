@@ -153,7 +153,8 @@ String mailLineColor = "#b3b6b0";
 						<tr>
 							<td class="portlet-mail-msgs-title">
 								<div id="portlet-mail-msgs-title-from">
-									<div>From</div>
+									<div><%= LanguageUtil.get(pageContext, "from") %></div>
+									<div style="display:none"><%= LanguageUtil.get(pageContext, "to") %></div>
 								</div>
 							</td>
 							<td id="portlet-mail-msgs-from-handle" style="cursor: e-resize">
@@ -161,7 +162,7 @@ String mailLineColor = "#b3b6b0";
 							</td>
 							<td class="portlet-mail-msgs-title">
 								<div id="portlet-mail-msgs-title-subject">
-									<div>Subject</div>
+									<div><%= LanguageUtil.get(pageContext, "subject") %></div>
 								</div>
 							</td>
 							<td id="portlet-mail-msgs-subject-handle" style="cursor: e-resize">
@@ -169,7 +170,7 @@ String mailLineColor = "#b3b6b0";
 							</td>
 							<td class="portlet-mail-msgs-title">
 								<div id="portlet-mail-msgs-title-received">
-									<div>Received</div>
+									<div><%= LanguageUtil.get(pageContext, "date") %></div>
 								</div>
 							</td>
 						</tr>

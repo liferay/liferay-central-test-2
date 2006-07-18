@@ -170,7 +170,7 @@ var Mailbox = {
 		Mailbox.getSelectedMessages(Mailbox.removeSummary);
 		mailDetails.innerHTML = "";
 		Mailbox.resetLastSelected();
-		Mailbox.getFolderMessage();
+		Mailbox.getFolderDetails();
 	},
 	
 	removeSummary : function(msObj) {
@@ -205,19 +205,21 @@ var Mailbox = {
 	},
 	
 	submitCompose : function(action, form) {
-		if (Mailbox.currentMessageId == null) {
-			alert("Please select a message");
-		}
-		else {
+		var selList = Mailbox.getSelectedMessages();
+		
+		if (selList > 0) {
 			document.getElementById("portlet-mail-compose-action").value = action;
 			document.getElementById("portlet-mail-message-id").value = Mailbox.currentMessageId;
 			document.getElementById("portlet-mail-folder-id").value = Mailbox.currentFolder.id;
 
 			submitForm(form);
 		}
+		else {
+			alert("Please select a message");
+		}
 	},
 	
-	getFolderMessage : function() {
+	getFolderDetails : function() {
 		var mailDetails = document.getElementById("portlet-mail-msg-body");
 		mailDetails.innerHTML = Mailbox.currentFolder.name + " ID: " + Mailbox.currentFolder.id;
 	},
@@ -295,7 +297,6 @@ var Mailbox = {
 	
 	getPreviewReturn : function(xmlHttpReq) {
 		var mailObject = eval("(" + xmlHttpReq.responseText + ")");
-		
 		var msgsSender = document.getElementById("portlet-mail-msgs-from");
 		var msgsSubject = document.getElementById("portlet-mail-msgs-subject");
 		var msgsDate = document.getElementById("portlet-mail-msgs-received");
@@ -503,7 +504,7 @@ var Mailbox = {
 		}
 		else if (keycode == Key.ESC) {
 			Mailbox.summaryUnhighlightAll();
-			Mailbox.getFolderMessage();
+			Mailbox.getFolderDetails();
 		}
 		else if (event.ctrlKey) {
 			if (keycode == Key.A) {
@@ -631,7 +632,7 @@ var Mailbox = {
 	setCurrentFolder : function(folder) {
 		Mailbox.currentFolder = folder;
 		Mailbox.currentFolderId = folder.id;
-		Mailbox.getFolderMessage();
+		Mailbox.getFolderDetails();
 		Mailbox.createFolderSelect();
 		
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
@@ -646,6 +647,18 @@ var Mailbox = {
 			else {
 				folderItem.style.backgroundColor = "transparent";
 			}
+		}
+
+		var fromTitleText = document.getElementById("portlet-mail-msgs-title-from");
+		var fromTitle = fromTitleText.getElementsByTagName("div");;
+		
+		if (Mailbox.currentFolder.id == "Sent") {
+			fromTitle[0].style.display = "none";
+			fromTitle[1].style.display = "block";
+		}
+		else {
+			fromTitle[0].style.display = "block";
+			fromTitle[1].style.display = "none";
 		}
 	},
 	
