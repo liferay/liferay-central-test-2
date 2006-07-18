@@ -185,11 +185,13 @@
 		</if>
 
 		<copy todir="${app.server.lib.global.dir}">
+			<fileset dir="ext-lib/global" />
 			<fileset dir="lib/development" includes="hsql.jar" />
 			<fileset dir="lib/global" />
 		</copy>
 
 		<copy todir="${app.server.lib.portal.dir}">
+			<fileset dir="ext-lib/portal" />
 			<fileset dir="lib/portal" />
 		</copy>
 
