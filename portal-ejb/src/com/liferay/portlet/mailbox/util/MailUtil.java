@@ -109,6 +109,10 @@ public class MailUtil {
 
 			ses.removeAttribute(WebKeys.MAIL_STORE);
 		}
+		
+		if (ses.getAttribute(WebKeys.MAIL_MESSAGE) != null) {
+			ses.removeAttribute(WebKeys.MAIL_MESSAGE);
+		}
 	}
 	
 	public static void createFolder(HttpSession ses, String folderName) 

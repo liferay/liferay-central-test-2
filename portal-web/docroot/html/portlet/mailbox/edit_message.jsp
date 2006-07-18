@@ -36,6 +36,26 @@ String content = "test";
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}
 
+	function <portlet:namespace />saveDraft() {
+		inputs = document.<portlet:namespace />fm.getElementsByTagName("input");
+		var body = document.<portlet:namespace />editor.getHTML();
+		var queryString = "cmd=saveDraft&body=" + body;
+		
+		for (var i = 0; i < inputs.length; i++) {
+			var input = inputs[i];
+			var inputName
+	
+			if (input.name && input.name.length > 0 &&
+				input.value && input.value.length > 0) {
+				inputName = input.name.replace(/^<portlet:namespace />/,"");
+				
+				queryString += "&" + inputName + "=" + input.value;
+			}
+		}
+		alert(queryString);
+		loadPage("<%= themeDisplay.getPathMain() %>/mailbox/action", queryString);
+	}
+	
 	function <portlet:namespace />sendMessage() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.SEND %>";
 		document.<portlet:namespace />fm.<portlet:namespace />body.value = parent.<portlet:namespace />editor.getHTML();
@@ -113,6 +133,7 @@ String content = "test";
 	<div>
 		<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "send") %>' onclick="<portlet:namespace />sendMessage()" />
 		<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onclick='self.location="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/view" /></portlet:renderURL>"' />
+		<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "save") %>' onclick="<portlet:namespace />saveDraft()" />
 	</div>
 
 	<br />

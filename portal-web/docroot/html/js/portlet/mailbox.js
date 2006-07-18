@@ -18,6 +18,7 @@ function MailSummaryObject(sender, subject, date, id) {
 
 
 var Mailbox = {
+	colorHighlight : "#c3d4ee",
 	currentFolder : null,
 	currentFolderId : "",
 	currentMessage : null,
@@ -27,7 +28,6 @@ var Mailbox = {
 	dragStart : null,
 	foldersList : null,
 	groupStart : null,
-	colorHighlight : "#c3d4ee",
 	lastSelected : null,
 	messageTimer : null,
 	summaryList : { head : null, tail : null },
@@ -139,7 +139,7 @@ var Mailbox = {
 			(deleteList.length > 1 ? "s" : "") + " from " + Mailbox.currentFolder.name + "?";
 		
 		if (deleteList.length > 0 && confirm(confirmMsg)) {
-			loadPage("/c/mailbox/action", "cmd=deleteMessages&folderId=" + Mailbox.currentFolder.id + "&messages=" + deleteList);
+			loadPage(themeDisplay.getPathMain() + "/mailbox/action", "cmd=deleteMessages&folderId=" + Mailbox.currentFolder.id + "&messages=" + deleteList);
 			Mailbox.removeSelectedMessages();
 		}
 	},	
@@ -204,7 +204,7 @@ var Mailbox = {
 		msObj = null;
 	},
 	
-	submitCompose : function(action) {
+	submitCompose : function(action, form) {
 		if (Mailbox.currentMessageId == null) {
 			alert("Please select a message");
 		}
@@ -213,7 +213,7 @@ var Mailbox = {
 			document.getElementById("portlet-mail-message-id").value = Mailbox.currentMessageId;
 			document.getElementById("portlet-mail-folder-id").value = Mailbox.currentFolder.id;
 
-			submitForm(document.fm);
+			submitForm(form);
 		}
 	},
 	
@@ -223,7 +223,7 @@ var Mailbox = {
 	},
 	
 	getFolders : function() {
-		loadPage("/c/mailbox/action", "cmd=getFolders", Mailbox.getFoldersReturn);
+		loadPage(themeDisplay.getPathMain() + "/mailbox/action", "cmd=getFolders", Mailbox.getFoldersReturn);
 	},
 	
 	getFoldersReturn : function(xmlHttpReq) {
@@ -262,7 +262,7 @@ var Mailbox = {
 	
 	getMessageDetails : function(messageId) {
 		if (!Mailbox.currentMessage || messageId != Mailbox.currentMessage.id) {
-			loadPage("/c/mailbox/action",
+			loadPage(themeDisplay.getPathMain() + "/mailbox/action",
 				"cmd=getMessage&messageId=" + messageId + "&folderId=" + Mailbox.currentFolder.id,
 				Mailbox.getMessageDetailsReturn, messageId);
 				
@@ -287,7 +287,7 @@ var Mailbox = {
 	},
 	
 	getPreview : function () {
-		loadPage("/c/mailbox/action",
+		loadPage(themeDisplay.getPathMain() + "/mailbox/action",
 			"cmd=getPreview&folderId=" + Mailbox.currentFolder.id,
 			Mailbox.getPreviewReturn);
 			
@@ -423,7 +423,7 @@ var Mailbox = {
 			
 			if (confirm(confirmMsg)) {
 				Mailbox.removeSelectedMessages();
-				loadPage("/c/mailbox/action", "cmd=moveMessages&folderId=" + folderId + "&messages=" + moveList);
+				loadPage(themeDisplay.getPathMain() + "/mailbox/action", "cmd=moveMessages&folderId=" + folderId + "&messages=" + moveList);
 			}
 		}
 		else {

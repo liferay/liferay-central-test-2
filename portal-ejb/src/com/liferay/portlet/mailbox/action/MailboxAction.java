@@ -65,20 +65,23 @@ public class MailboxAction extends JSONAction {
 		String rtString = "";
 
 		try {
-			if ("getFolders".equals(cmd)) {
-				rtString = _getFolders(req);
+			if ("deleteMessages".equals(cmd)) {
+				_deleteMessages(req);
 			}
-			else if ("getPreview".equals(cmd)) {
-				rtString = _getPreviewHeaders(req);
+			else if ("getFolders".equals(cmd)) {
+				rtString = _getFolders(req);
 			}
 			else if ("getMessage".equals(cmd)) {
 				rtString = _getMessage(req);
 			}
+			else if ("getPreview".equals(cmd)) {
+				rtString = _getPreviewHeaders(req);
+			}
 			else if ("moveMessages".equals(cmd)) {
 				_moveMessages(req);
 			}
-			else if ("deleteMessages".equals(cmd)) {
-				_deleteMessages(req);
+			else if ("saveDraft".equals(cmd)) {
+				_saveDraft(req);
 			}
 		}
 		catch (Exception e) {
@@ -179,6 +182,16 @@ public class MailboxAction extends JSONAction {
 
 		MailUtil.moveMessages(req.getSession(), msgList, toFolder);
 
+		return null;
+	}
+	
+	private String _saveDraft(HttpServletRequest req) throws Exception {
+		String tos = ParamUtil.getString(req, "tos");
+		String ccs = ParamUtil.getString(req, "ccs");
+		String bccs = ParamUtil.getString(req, "bccs");
+		String subject = ParamUtil.getString(req, "subject");
+		String body = ParamUtil.getString(req, "body");
+		
 		return null;
 	}
 
