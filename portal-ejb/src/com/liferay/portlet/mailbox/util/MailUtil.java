@@ -116,7 +116,7 @@ public class MailUtil {
 		}
 	}
 
-	public static long completeMessage(
+	public static void completeMessage(
 			HttpSession ses, MailMessage mm, boolean send)
 		throws Exception {
 
@@ -177,34 +177,28 @@ public class MailUtil {
 		}
 		
 		email.setSentDate(new Date());
-
-		long completedMessageUID = -1L;
-
+		email.buildMimeMessage();
+		
 		if (send) {
 			email.send();
-
-			Message [] sent = { email.getMimeMessage() };
 			setCurrentFolder(ses, MAIL_SENT_NAME);
-			_getCurrentFolder(ses).appendMessages(sent);
 		}
 		else {
-			Message [] draft = { email.getMimeMessage() };
 			setCurrentFolder(ses, MAIL_DRAFTS_NAME);
-			_getCurrentFolder(ses).appendMessages(draft);
-			
-			completedMessageUID = _getCurrentFolder(ses).getUID(draft[0]);
 		}
 		
-		// delete the draft if it existed
-		if (mm.getMessageUID() < 0L) {
+		Message [] mimeMsg = { email.getMimeMessage() };
+		_getCurrentFolder(ses).appendMessages(mimeMsg);
+
+		if (send && mm.getMessageUID() > 0L) {
+			setCurrentFolder(ses, MAIL_DRAFTS_NAME);
+
 			Message msg = 
 				_getCurrentFolder(ses).getMessageByUID(mm.getMessageUID());
 			_getCurrentFolder(ses).setFlags(
 				new Message [] { msg }, new Flags(Flags.Flag.DELETED), true);
 			_getCurrentFolder(ses).expunge();
 		}
-		
-		return completedMessageUID;
 	}
 
 	public static void createFolder(HttpSession ses, String folderName) 
@@ -409,6 +403,12 @@ public class MailUtil {
 
 		if (_getCurrentFolder(ses).getName().equals(toFolderName)) {
 			return;
+		}
+
+		if (_getCurrentFolder(ses).getName().equals(MAIL_DRAFTS_NAME) ||
+			toFolderName.equals(MAIL_DRAFTS_NAME)) {
+			throw new Exception(
+				"Cannot move message to or from the 'Drafts' folder");
 		}
 
 		IMAPFolder toFolder = null;

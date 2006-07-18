@@ -51,7 +51,7 @@ import com.liferay.util.servlet.UploadPortletRequest;
  */
 public class ActionUtil {
 
-	public static long completeMessage(
+	public static void completeMessage(
 			Address from, String tos, String ccs, String bccs, 
 			String subject, String body, Map attachments, HttpSession ses, 
 			boolean send, long draftMessageUID) 
@@ -79,7 +79,7 @@ public class ActionUtil {
 			mm.appendAttachment(ma);
 		}
 
-		return MailUtil.completeMessage(ses, mm, send);
+		MailUtil.completeMessage(ses, mm, send);
 	}
 	
 	public static InternetAddress [] getAddresses(String mailingList)

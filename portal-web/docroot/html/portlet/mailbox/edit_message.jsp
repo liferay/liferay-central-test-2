@@ -36,7 +36,8 @@ Long messageId = (Long)request.getAttribute("messageId");
 	function initEditor() {
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}
-
+	
+	/*
 	function <portlet:namespace />saveDraft() {
 		inputs = document.<portlet:namespace />fm.getElementsByTagName("input");
 		var body = parent.<portlet:namespace />editor.getHTML();
@@ -65,9 +66,10 @@ Long messageId = (Long)request.getAttribute("messageId");
 		var message = eval("(" + xmlHttpReq.responseText + ")");
 		<portlet:namespace />messageId = message.id;
 	}
+	*/
 	
-	function <portlet:namespace />sendMessage() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.SEND %>";
+	function <portlet:namespace />completeMessage(send) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = send ? "<%= Constants.SEND %>" : "<%= Constants.SAVE %>";
 		document.<portlet:namespace />fm.<portlet:namespace />body.value = parent.<portlet:namespace />editor.getHTML();
 		submitForm(document.<portlet:namespace />fm);
 	}
@@ -109,7 +111,7 @@ Long messageId = (Long)request.getAttribute("messageId");
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/send_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveArticle(); return false;">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/complete_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveArticle(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />body" type="hidden" value="" />
 <input name="<portlet:namespace />messageId" type="hidden" value="<%= messageId %>" />
@@ -148,9 +150,9 @@ Long messageId = (Long)request.getAttribute("messageId");
 	<br />
 
 	<div>
-		<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "send") %>' onclick="<portlet:namespace />sendMessage()" />
+		<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "send") %>' onclick="<portlet:namespace />completeMessage(true)" />
 		<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onclick='self.location="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/view" /></portlet:renderURL>"' />
-		<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "save") %>' onclick="<portlet:namespace />saveDraft()" />
+		<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "save") %>' onclick="<portlet:namespace />completeMessage(false)" />
 	</div>
 
 	<br />

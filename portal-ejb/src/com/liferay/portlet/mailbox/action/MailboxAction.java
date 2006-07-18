@@ -24,14 +24,10 @@ package com.liferay.portlet.mailbox.action;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.SortedSet;
 
-import javax.mail.Address;
-import javax.mail.internet.InternetAddress;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,12 +36,9 @@ import org.apache.struts.action.ActionMapping;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.liferay.portal.model.User;
 import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.mailbox.util.MailEnvelope;
 import com.liferay.portlet.mailbox.util.MailFolder;
 import com.liferay.portlet.mailbox.util.MailMessage;
@@ -88,9 +81,11 @@ public class MailboxAction extends JSONAction {
 			else if ("moveMessages".equals(cmd)) {
 				_moveMessages(req);
 			}
+/*
 			else if ("saveDraft".equals(cmd)) {
 				_saveDraft(req);
 			}
+*/
 		}
 		catch (Exception e) {
 			_log.error(StackTraceUtil.getStackTrace(e));
@@ -205,7 +200,8 @@ public class MailboxAction extends JSONAction {
 
 		return null;
 	}
-	
+
+/*
 	private String _saveDraft(HttpServletRequest req) throws Exception {
 		User user = PortalUtil.getUser(req);
 		Address from = new InternetAddress(
@@ -218,7 +214,7 @@ public class MailboxAction extends JSONAction {
 		String body = ParamUtil.getString(req, "body");
 		long messageId = ParamUtil.getLong(req, "messageId", -1L);
 		Map attachments = ActionUtil.getAttachments(
-				PortalUtil.getUploadPortletRequest((ActionRequestImpl)req));
+				PortalUtil.getUploadPortletRequest(req));
 
 		HttpSession ses =
 			((ActionRequestImpl)req).getHttpServletRequest().getSession();
@@ -231,7 +227,7 @@ public class MailboxAction extends JSONAction {
 		
 		return jsonObj.toString();
 	}
-
+*/
 	private static Log _log = LogFactory.getLog(MailboxAction.class);
 
 }

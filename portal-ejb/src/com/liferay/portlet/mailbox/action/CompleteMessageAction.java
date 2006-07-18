@@ -45,13 +45,13 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
 /**
- * <a href="SendMessageAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="CompleteMessageAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Ming-Gih Lam
  * @author  Alexander Chow
  *
  */
-public class SendMessageAction extends PortletAction {
+public class CompleteMessageAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -61,7 +61,7 @@ public class SendMessageAction extends PortletAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		try {
-			if (cmd.equals(Constants.SEND)) {
+			if (cmd.equals(Constants.SEND) || cmd.equals(Constants.SAVE)) {
 				User user = PortalUtil.getUser(req);
 				Address from = new InternetAddress(
 					user.getEmailAddress(), user.getFullName());
@@ -71,6 +71,7 @@ public class SendMessageAction extends PortletAction {
 				String bccs = ParamUtil.getString(req, "bccs");
 				String subject = ParamUtil.getString(req, "subject");
 				String body = ParamUtil.getString(req, "body");
+				long messageId = ParamUtil.getLong(req, "messageId");
 				Map attachments = ActionUtil.getAttachments(
 					PortalUtil.getUploadPortletRequest(req));
 
@@ -79,7 +80,7 @@ public class SendMessageAction extends PortletAction {
 						getSession();
 
 				ActionUtil.completeMessage(from, tos, ccs, bccs, subject, body,
-					attachments, ses, true, 0L);
+					attachments, ses, cmd.equals(Constants.SEND), messageId);
 
 				setForward(req, "portlet.mailbox.view");
 			}
@@ -93,5 +94,5 @@ public class SendMessageAction extends PortletAction {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(SendMessageAction.class);
+	private static Log _log = LogFactory.getLog(CompleteMessageAction.class);
 }
