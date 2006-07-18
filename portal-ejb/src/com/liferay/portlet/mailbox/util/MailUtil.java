@@ -115,7 +115,98 @@ public class MailUtil {
 			ses.removeAttribute(WebKeys.MAIL_MESSAGE);
 		}
 	}
-	
+
+	public static long completeMessage(
+			HttpSession ses, MailMessage mm, boolean send)
+		throws Exception {
+
+		String userId = (String)ses.getAttribute(WebKeys.USER_ID);
+		String password = (String)ses.getAttribute(WebKeys.USER_PASSWORD);
+
+		Email email = null;
+		if (mm.isSimple()) {
+			SimpleEmail se = new SimpleEmail();
+			se.setMsg(mm.getPlainBody());
+
+			email = se;
+		}
+		else {
+			HtmlEmail he = new HtmlEmail();
+			he.setMsg(mm.getPlainBody());
+			he.setHtmlMsg(mm.getHtmlBody());
+
+			List attachments = mm.getAttachments();
+			for (Iterator itr = attachments.iterator(); itr.hasNext(); ) {
+				MailAttachment ma = (MailAttachment)itr.next();
+
+				DataSource ds = new ByteArrayDataSource(
+					ma.getContent(), ma.getContentType());
+				he.attach(ds, ma.getFilename(), ma.getFilename());
+			}
+
+			email = he;
+		}
+
+		String fromAddy = ((InternetAddress)mm.getFrom()).getAddress();
+		String fromName = ((InternetAddress)mm.getFrom()).getPersonal();
+
+		email.setSubject(mm.getSubject());
+		email.setHostName(_getSMTPHost());
+		email.setAuthentication(_getLogin(userId), password);
+		email.setFrom(fromAddy, fromName);
+
+		Address [] tos = mm.getTo();
+		for (int i = 0; i < tos.length; i++) {
+			String toAddy = ((InternetAddress)tos[i]).getAddress();
+			String toName = ((InternetAddress)tos[i]).getPersonal();
+			email.addTo(toAddy, toName);
+		}
+
+		Address [] ccs = mm.getCc();
+		for (int i = 0; i < ccs.length; i++) {
+			String ccAddy = ((InternetAddress)ccs[i]).getAddress();
+			String ccName = ((InternetAddress)ccs[i]).getPersonal();
+			email.addCc(ccAddy, ccName);
+		}
+
+		Address [] bccs = mm.getBcc();
+		for (int i = 0; i < bccs.length; i++) {
+			String bccAddy = ((InternetAddress)bccs[i]).getAddress();
+			String bccName = ((InternetAddress)bccs[i]).getPersonal();
+			email.addBcc(bccAddy, bccName);
+		}
+		
+		email.setSentDate(new Date());
+
+		long completedMessageUID;
+		if (send) {
+			email.send();
+
+			Message [] sent = { email.getMimeMessage() };
+			setCurrentFolder(ses, MAIL_SENT_NAME);
+			_getCurrentFolder(ses).appendMessages(sent);
+			
+			completedMessageUID = _getCurrentFolder(ses).getUID(sent[0]);
+		}
+		else {
+			Message [] draft = { email.getMimeMessage() };
+			setCurrentFolder(ses, MAIL_DRAFTS_NAME);
+			_getCurrentFolder(ses).appendMessages(draft);
+			
+			completedMessageUID = _getCurrentFolder(ses).getUID(draft[0]);
+		}
+		
+		// delete the draft if it existed
+		if (mm.getMessageUID() != 0L) {
+			Message msg = _getCurrentFolder(ses).getMessageByUID(mm.getMessageUID());
+			_getCurrentFolder(ses).setFlags(
+				new Message [] { msg }, new Flags(Flags.Flag.DELETED), true);
+			_getCurrentFolder(ses).expunge();
+		}
+		
+		return completedMessageUID;
+	}
+
 	public static void createFolder(HttpSession ses, String folderName) 
 		throws Exception {
 
@@ -415,73 +506,6 @@ public class MailUtil {
 		if (_getCurrentFolder(ses).getName().equals(oldFolderName)) {
 			setCurrentFolder(ses, newFolderName);
 		}
-	}
-
-	public static void sendMessage(HttpSession ses, MailMessage mm)
-		throws Exception {
-
-		String userId = (String)ses.getAttribute(WebKeys.USER_ID);
-		String password = (String)ses.getAttribute(WebKeys.USER_PASSWORD);
-
-		Email email = null;
-		if (mm.isSimple()) {
-			SimpleEmail se = new SimpleEmail();
-			se.setMsg(mm.getPlainBody());
-
-			email = se;
-		}
-		else {
-			HtmlEmail he = new HtmlEmail();
-			he.setMsg(mm.getPlainBody());
-			he.setHtmlMsg(mm.getHtmlBody());
-
-			List attachments = mm.getAttachments();
-			for (Iterator itr = attachments.iterator(); itr.hasNext(); ) {
-				MailAttachment ma = (MailAttachment)itr.next();
-
-				DataSource ds = new ByteArrayDataSource(
-					ma.getContent(), ma.getContentType());
-				he.attach(ds, ma.getFilename(), ma.getFilename());
-			}
-
-			email = he;
-		}
-
-		String fromAddy = ((InternetAddress)mm.getFrom()).getAddress();
-		String fromName = ((InternetAddress)mm.getFrom()).getPersonal();
-
-		email.setSubject(mm.getSubject());
-		email.setHostName(_getSMTPHost());
-		email.setAuthentication(_getLogin(userId), password);
-		email.setFrom(fromAddy, fromName);
-
-		Address [] tos = mm.getTo();
-		for (int i = 0; i < tos.length; i++) {
-			String toAddy = ((InternetAddress)tos[i]).getAddress();
-			String toName = ((InternetAddress)tos[i]).getPersonal();
-			email.addTo(toAddy, toName);
-		}
-
-		Address [] ccs = mm.getCc();
-		for (int i = 0; i < ccs.length; i++) {
-			String ccAddy = ((InternetAddress)ccs[i]).getAddress();
-			String ccName = ((InternetAddress)ccs[i]).getPersonal();
-			email.addCc(ccAddy, ccName);
-		}
-
-		Address [] bccs = mm.getBcc();
-		for (int i = 0; i < bccs.length; i++) {
-			String bccAddy = ((InternetAddress)bccs[i]).getAddress();
-			String bccName = ((InternetAddress)bccs[i]).getPersonal();
-			email.addBcc(bccAddy, bccName);
-		}
-		
-		email.setSentDate(new Date());
-		email.send();
-
-		Message [] sent = { email.getMimeMessage() };
-		setCurrentFolder(ses, MAIL_SENT_NAME);
-		_getCurrentFolder(ses).appendMessages(sent);
 	}
 
 	public static void setCurrentFolder(HttpSession ses, String folderName)

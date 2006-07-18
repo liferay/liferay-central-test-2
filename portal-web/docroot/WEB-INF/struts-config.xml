@@ -809,6 +809,10 @@
 			<forward name="portlet.mailbox.edit_message" path="portlet.mailbox.edit_message" />
 		</action>
 
+		<action path="/mailbox/send_message" type="com.liferay.portlet.mailbox.action.SendMessageAction">
+			<forward name="portlet.mailbox.view" path="portlet.mailbox.view" />
+		</action>
+
 		<!-- Maps -->
 
 		<action path="/maps/view" forward="portlet.maps.view" name="mapsMapsForm" scope="request" />

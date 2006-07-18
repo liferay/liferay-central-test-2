@@ -24,10 +24,14 @@ package com.liferay.portlet.mailbox.action;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.SortedSet;
 
+import javax.mail.Address;
+import javax.mail.internet.InternetAddress;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -36,9 +40,12 @@ import org.apache.struts.action.ActionMapping;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.liferay.portal.model.User;
 import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.mailbox.util.MailEnvelope;
 import com.liferay.portlet.mailbox.util.MailFolder;
 import com.liferay.portlet.mailbox.util.MailMessage;
@@ -46,7 +53,6 @@ import com.liferay.portlet.mailbox.util.MailUtil;
 import com.liferay.portlet.mailbox.util.comparator.DateComparator;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 
 /**
  * <a href="MailboxAction.java.html"><b><i>View Source</i></b></a>
@@ -186,23 +192,27 @@ public class MailboxAction extends JSONAction {
 	}
 	
 	private String _saveDraft(HttpServletRequest req) throws Exception {
+		User user = PortalUtil.getUser(req);
+		Address from = new InternetAddress(
+			user.getEmailAddress(), user.getFullName());
+
 		String tos = ParamUtil.getString(req, "tos");
 		String ccs = ParamUtil.getString(req, "ccs");
 		String bccs = ParamUtil.getString(req, "bccs");
 		String subject = ParamUtil.getString(req, "subject");
 		String body = ParamUtil.getString(req, "body");
 		long messageId = ParamUtil.getLong(req, "messageId", -1L);
-		
+		Map attachments = ActionUtil.getAttachments(
+				PortalUtil.getUploadPortletRequest((ActionRequestImpl)req));
+
+		HttpSession ses =
+			((ActionRequestImpl)req).getHttpServletRequest().getSession();
+		long newMessageId = 
+			ActionUtil.completeMessage(from, tos, ccs, bccs, subject, body,
+				attachments, ses, true, messageId);
+
 		JSONObject jsonObj = new JSONObject();
-		
-		if (messageId > 0) {
-			// MailUtil.updateDraft(messageId);
-		}
-		else {
-			// messageId = MailUtil.saveNewDraft();
-		}
-		
-		jsonObj.put("id", messageId);
+		jsonObj.put("id", newMessageId);
 		
 		return jsonObj.toString();
 	}

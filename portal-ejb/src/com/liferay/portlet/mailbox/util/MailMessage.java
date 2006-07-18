@@ -122,6 +122,14 @@ public class MailMessage {
     public void setHtmlBody(String htmlBody) {
     	_htmlBody = htmlBody;
     }
+    
+    public long getMessageUID() {
+    	return _messageUID;
+    }
+    
+    public void setMessageUID(long messageUID) {
+    	_messageUID = messageUID;
+    }
 
 	public List getAttachments() {
 		return _attachments;
@@ -151,6 +159,8 @@ public class MailMessage {
 	private String _plainBody;
 
 	private String _htmlBody;
+	
+	private long _messageUID;
 
 	private List _attachments = new ArrayList();
 
