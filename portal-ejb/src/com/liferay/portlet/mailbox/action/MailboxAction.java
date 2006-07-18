@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.mailbox.action;
 
+import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.mailbox.util.MailEnvelope;
@@ -81,7 +82,7 @@ public class MailboxAction extends JSONAction {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 			
 		return rtString;

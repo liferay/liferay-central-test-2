@@ -65,7 +65,6 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.JNDIUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.mail.MailEngine;
 import com.sun.mail.imap.IMAPFolder;
 
 /**
@@ -76,25 +75,30 @@ import com.sun.mail.imap.IMAPFolder;
  */
 public class MailUtil {
 
+	public static final String MAIL_BOX_STYLE =
+		PropsUtil.get(PropsUtil.MAIL_BOX_STYLE);
+
 	public static final String MAIL_INBOX_NAME =
 		PropsUtil.get(PropsUtil.MAIL_INBOX_NAME);
 
-	public static final String MAIL_JUNK_NAME =
+	public static final String MAIL_JUNK_NAME = MAIL_BOX_STYLE + 
 		PropsUtil.get(PropsUtil.MAIL_JUNK_NAME);
 
-	public static final String MAIL_SENT_NAME =
+	public static final String MAIL_SENT_NAME = MAIL_BOX_STYLE +
 		PropsUtil.get(PropsUtil.MAIL_SENT_NAME);
 
-	public static final String MAIL_DRAFTS_NAME =
+	public static final String MAIL_DRAFTS_NAME = MAIL_BOX_STYLE +
 		PropsUtil.get(PropsUtil.MAIL_DRAFTS_NAME);
 
-	public static final String MAIL_TRASH_NAME =
+	public static final String MAIL_TRASH_NAME = MAIL_BOX_STYLE +
 		PropsUtil.get(PropsUtil.MAIL_TRASH_NAME);
 
 	public static final String [] DEFAULT_FOLDERS = {
 		MAIL_INBOX_NAME, MAIL_JUNK_NAME, MAIL_SENT_NAME, MAIL_DRAFTS_NAME,
 		MAIL_TRASH_NAME
 	};
+
+	public static final String MAIL_SESSION = "java:comp/env/mail/MailSession";
 
 	public static void cleanup(HttpSession ses) throws Exception {
 		_closeFolder(ses);
@@ -104,6 +108,36 @@ public class MailUtil {
 			store.close();
 
 			ses.removeAttribute(WebKeys.MAIL_STORE);
+		}
+	}
+	
+	public static void createFolder(HttpSession ses, String folderName) 
+		throws Exception {
+
+		for (Iterator itr = getAllFolders(ses).iterator(); itr.hasNext(); ) {
+			MailFolder mf = (MailFolder)itr.next();
+
+			if (mf.getName().equals(folderName)) {
+				throw new Exception("Folder " + folderName + " already exists");
+			}
+		}
+
+		Store store = _getStore(ses);
+
+		Folder folder = null;
+		try {
+			if (!folderName.equals(MAIL_INBOX_NAME) && 
+				!folderName.startsWith(MAIL_BOX_STYLE)) {
+				folderName = MAIL_BOX_STYLE + folderName;
+			}
+
+			folder = store.getFolder(folderName);
+			folder.create(Folder.HOLDS_MESSAGES);
+		}
+		finally {
+			if (folder != null && folder.isOpen()) {
+				folder.close(false);
+			}
 		}
 	}
 
@@ -125,7 +159,6 @@ public class MailUtil {
 	}
 	
 	public static String getCurrentFolderName(PortletSession ses) {
-		
 		try {
 			Folder folder = _getCurrentFolder(ses);
 			return(folder.getName());
@@ -136,7 +169,8 @@ public class MailUtil {
 	}
 
 	public static Long getCurrentMessageId(PortletSession ses) {
-		return (Long)ses.getAttribute(WebKeys.MAIL_MESSAGE, PortletSession.APPLICATION_SCOPE);
+		return (Long)ses.getAttribute(
+			WebKeys.MAIL_MESSAGE, PortletSession.APPLICATION_SCOPE);
 	}
 
 	public static List getAllFolders(HttpSession ses)
@@ -149,18 +183,7 @@ public class MailUtil {
 		try {
 			Folder [] folders = root.list();
 
-			for (int i = 0; i < folders.length; i++) {
-				if ((folders[i].getType() & IMAPFolder.HOLDS_MESSAGES) != 0) {
-					MailFolder mf = new MailFolder(
-						folders[i].getNewMessageCount(), folders[i].getName(),
-						folders[i].getMessageCount());
-
-					list.add(mf);
-				}
-				else {
-					// TODO: add ability to have a hierarchy of folders
-				}
-			}
+			_getFolders(list, folders);
 		}
 		finally {
 			if (root != null && root.isOpen()) {
@@ -169,6 +192,26 @@ public class MailUtil {
 		}
 
 		return list;
+	}
+
+	private static void _getFolders(List list, Folder[] folders)
+		throws MessagingException {
+		
+		for (int i = 0; i < folders.length; i++) {
+			if ((folders[i].getType() & IMAPFolder.HOLDS_MESSAGES) != 0) {
+				MailFolder mf = new MailFolder(
+					folders[i].getNewMessageCount(), folders[i].getName(),
+					folders[i].getMessageCount());
+
+				list.add(mf);
+			}
+			
+			if ((folders[i].getType() & IMAPFolder.HOLDS_FOLDERS) != 0) {
+				Folder [] subfolders = folders[i].list();
+
+				_getFolders(list, subfolders);
+			}
+		}
 	}
 
 	public static SortedSet getEnvelopes(HttpSession ses, Comparator comp)
@@ -263,6 +306,11 @@ public class MailUtil {
 			HttpSession ses, long [] messageUIDs, String toFolderName)
 		throws Exception {
 
+		if (!toFolderName.equals(MAIL_INBOX_NAME) && 
+			!toFolderName.startsWith(MAIL_BOX_STYLE)) {
+			toFolderName = MAIL_BOX_STYLE + toFolderName;
+		}
+
 		if (_getCurrentFolder(ses).getName().equals(toFolderName)) {
 			return;
 		}
@@ -288,6 +336,79 @@ public class MailUtil {
 			if (toFolder != null && toFolder.isOpen()) {
 				toFolder.close(true);
 			}
+		}
+	}
+
+	public static void removeFolder(HttpSession ses, String folderName) 
+		throws Exception {
+
+		if (!folderName.equals(MAIL_INBOX_NAME) && 
+			!folderName.startsWith(MAIL_BOX_STYLE)) {
+			folderName = MAIL_BOX_STYLE + folderName;
+		}
+
+		for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
+			if (DEFAULT_FOLDERS[i].equals(folderName)) {
+				throw new Exception("The folder " + folderName + 
+					" is a system-defined folder and cannot be changed");
+			}
+		}
+
+		Store store = _getStore(ses);
+		Folder folder = store.getFolder(folderName);
+		if (!folder.exists()) {
+			throw new Exception("The folder " + folderName + 
+				" does not currently exist in the system");
+		}
+
+		folder.delete(true);
+	}
+
+	public static void renameFolder(
+			HttpSession ses, String oldFolderName, String newFolderName)
+		throws Exception {
+
+		if (!oldFolderName.equals(MAIL_INBOX_NAME) && 
+			!oldFolderName.startsWith(MAIL_BOX_STYLE)) {
+			oldFolderName = MAIL_BOX_STYLE + oldFolderName;
+		}
+
+		if (!newFolderName.equals(MAIL_INBOX_NAME) && 
+			!newFolderName.startsWith(MAIL_BOX_STYLE)) {
+			newFolderName = MAIL_BOX_STYLE + newFolderName;
+		}
+
+		for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
+			if (DEFAULT_FOLDERS[i].equals(oldFolderName)) {
+				throw new Exception("The folder " + oldFolderName + 
+					" is a system-defined folder and cannot be changed");
+			}
+			else if (DEFAULT_FOLDERS[i].equals(newFolderName)) {
+				throw new Exception("The folder " + newFolderName + 
+				" is a system-defined folder and cannot be changed");
+			}
+		}
+		
+		Store store = _getStore(ses);
+		Folder oldFolder = store.getFolder(oldFolderName);
+		Folder newFolder = store.getFolder(newFolderName);
+		if (!oldFolder.exists()) {
+			throw new Exception("The folder " + oldFolderName + 
+				" does not exist in the system");
+		}
+		else if (newFolder.exists()) {
+			throw new Exception("The folder " + newFolderName + 
+				" already exists in the system");
+		}
+
+		if (!oldFolder.isOpen()) {
+			oldFolder.open(Folder.READ_WRITE);
+		}
+
+		oldFolder.renameTo(newFolder);
+		
+		if (_getCurrentFolder(ses).getName().equals(oldFolderName)) {
+			setCurrentFolder(ses, newFolderName);
 		}
 	}
 
@@ -470,11 +591,12 @@ public class MailUtil {
 		
 		return _getCurrentFolder(folder);
 	}
-	
+
 	private static IMAPFolder _getCurrentFolder(PortletSession ses)
 		throws Exception {
 		
-		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER, PortletSession.APPLICATION_SCOPE);
+		IMAPFolder folder = (IMAPFolder)ses.getAttribute(
+			WebKeys.MAIL_FOLDER, PortletSession.APPLICATION_SCOPE);
 		
 		return _getCurrentFolder(folder);
 	}
@@ -484,6 +606,11 @@ public class MailUtil {
 
 		if (Validator.isNull(folderName)) {
 			folderName = MAIL_INBOX_NAME;
+		}
+		else if (!folderName.equals(MAIL_INBOX_NAME) &&
+			!folderName.startsWith(MAIL_BOX_STYLE)) {
+
+			folderName = MAIL_BOX_STYLE + folderName;
 		}
 
 		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER);
@@ -519,6 +646,24 @@ public class MailUtil {
 
 			ses.setAttribute(WebKeys.MAIL_STORE, store);
 
+			List list = getAllFolders(ses);
+			for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
+				boolean exists = false;
+
+				for (Iterator itr = list.iterator(); itr.hasNext(); ) {
+					MailFolder mf = (MailFolder)itr.next();
+
+					if (DEFAULT_FOLDERS[i].equals(mf.getName())) {
+						exists = true;
+						break;
+					}
+				}
+
+				if (!exists) {
+					createFolder(ses, DEFAULT_FOLDERS[i]);
+				}
+			}
+
 			if (ses.getAttribute(WebKeys.MAIL_FOLDER) == null) {
 				setCurrentFolder(ses, MAIL_INBOX_NAME);
 			}
@@ -539,7 +684,7 @@ public class MailUtil {
 
 	private static Session _getSession() throws NamingException {
 		Session session = (Session)JNDIUtil.lookup(
-			new InitialContext(), MailEngine.MAIL_SESSION);
+			new InitialContext(), MAIL_SESSION);
 
 		session.setDebug(GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.MAIL_SMTP_DEBUG)));
