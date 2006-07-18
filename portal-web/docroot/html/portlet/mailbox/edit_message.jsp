@@ -39,7 +39,7 @@ Long messageId = (Long)request.getAttribute("messageId");
 
 	function <portlet:namespace />saveDraft() {
 		inputs = document.<portlet:namespace />fm.getElementsByTagName("input");
-		var body = document.<portlet:namespace />editor.getHTML();
+		var body = parent.<portlet:namespace />editor.getHTML();
 		var queryString = "cmd=saveDraft&body=" + body;
 		
 		if (<portlet:namespace />messageId > 0) {
