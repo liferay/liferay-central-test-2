@@ -22,17 +22,6 @@
 
 package com.liferay.portlet.mailbox.action;
 
-import com.liferay.portal.shared.util.StackTraceUtil;
-import com.liferay.portal.struts.JSONAction;
-import com.liferay.portal.util.Constants;
-import com.liferay.portlet.mailbox.util.MailEnvelope;
-import com.liferay.portlet.mailbox.util.MailFolder;
-import com.liferay.portlet.mailbox.util.MailMessage;
-import com.liferay.portlet.mailbox.util.MailUtil;
-import com.liferay.portlet.mailbox.util.comparator.DateComparator;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringUtil;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.SortedSet;
@@ -44,9 +33,20 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.liferay.portal.shared.util.StackTraceUtil;
+import com.liferay.portal.struts.JSONAction;
+import com.liferay.portal.util.Constants;
+import com.liferay.portlet.mailbox.util.MailEnvelope;
+import com.liferay.portlet.mailbox.util.MailFolder;
+import com.liferay.portlet.mailbox.util.MailMessage;
+import com.liferay.portlet.mailbox.util.MailUtil;
+import com.liferay.portlet.mailbox.util.comparator.DateComparator;
+import com.liferay.util.ParamUtil;
+import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 
 /**
  * <a href="MailboxAction.java.html"><b><i>View Source</i></b></a>
@@ -191,8 +191,20 @@ public class MailboxAction extends JSONAction {
 		String bccs = ParamUtil.getString(req, "bccs");
 		String subject = ParamUtil.getString(req, "subject");
 		String body = ParamUtil.getString(req, "body");
+		long messageId = ParamUtil.getLong(req, "messageId", -1L);
 		
-		return null;
+		JSONObject jsonObj = new JSONObject();
+		
+		if (messageId > 0) {
+			// MailUtil.updateDraft(messageId);
+		}
+		else {
+			// messageId = MailUtil.saveNewDraft();
+		}
+		
+		jsonObj.put("id", messageId);
+		
+		return jsonObj.toString();
 	}
 
 	private static Log _log = LogFactory.getLog(MailboxAction.class);

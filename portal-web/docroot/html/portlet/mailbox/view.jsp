@@ -114,7 +114,7 @@ String mailLineColor = "#b3b6b0";
 	<a href="javascript: Mailbox.submitCompose('reply', document.<portlet:namespace />fm)">
 		Reply
 	</a> |
-	<a href="javascript: Mailbox.submitCompose('forward'), document.<portlet:namespace />fm">
+	<a href="javascript: Mailbox.submitCompose('forward', document.<portlet:namespace />fm)">
 		Forward
 	</a> |
 	Print |
@@ -170,7 +170,7 @@ String mailLineColor = "#b3b6b0";
 							</td>
 							<td class="portlet-mail-msgs-title">
 								<div id="portlet-mail-msgs-title-received">
-									<div><%= LanguageUtil.get(pageContext, "date") %></div>
+									<div><%= LanguageUtil.get(pageContext, "date") %><img src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_down.gif"</div>
 								</div>
 							</td>
 						</tr>

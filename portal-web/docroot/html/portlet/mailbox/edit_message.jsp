@@ -29,6 +29,7 @@ public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.
 <%
 String editorUrl = themeDisplay.getPathJavaScript() + "/editor/editor.jsp?p_l_id=" + plid + "&editorImpl=" + PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) + "&initMethod=initEditor";
 String content = "test";
+Long messageId = (Long)request.getAttribute("messageId");
 %>
 
 <script type="text/javascript">
@@ -40,6 +41,10 @@ String content = "test";
 		inputs = document.<portlet:namespace />fm.getElementsByTagName("input");
 		var body = document.<portlet:namespace />editor.getHTML();
 		var queryString = "cmd=saveDraft&body=" + body;
+		
+		if (<portlet:namespace />messageId > 0) {
+			queryString = "&messageId=" + <portlet:namespace />messageId;
+		}
 		
 		for (var i = 0; i < inputs.length; i++) {
 			var input = inputs[i];
@@ -53,7 +58,12 @@ String content = "test";
 			}
 		}
 		alert(queryString);
-		loadPage("<%= themeDisplay.getPathMain() %>/mailbox/action", queryString);
+		loadPage("<%= themeDisplay.getPathMain() %>/mailbox/action", queryString, <portlet:namespace />saveDraftReturn);
+	}
+	
+	function <portlet:namespace />saveDraftReturn(xmlHttpReq) {
+		var message = eval("(" + xmlHttpReq.responseText + ")");
+		<portlet:namespace />messageId = message.id;
 	}
 	
 	function <portlet:namespace />sendMessage() {
@@ -63,6 +73,12 @@ String content = "test";
 	}
 
 	var <portlet:namespace />file_index = 0;
+	<c:if test="<%= messageId != null %>">
+		var <portlet:namespace />messageId = <%= messageId.toString() %>;
+	</c:if>
+	<c:if test="<%= messageId == null %>">
+		var <portlet:namespace />messageId = -1;
+	</c:if>
 
 	function <portlet:namespace />addAttachment() {
 		var table = document.getElementById("<portlet:namespace />attachments");
@@ -96,6 +112,7 @@ String content = "test";
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/edit_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveArticle(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />body" type="hidden" value="" />
+<input name="<portlet:namespace />messageId" type="hidden" value="<%= messageId %>" />
 
 	<table cellpadding="0" cellspacing="2" border="0">
 	<tr>

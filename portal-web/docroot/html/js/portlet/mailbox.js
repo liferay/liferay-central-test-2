@@ -229,7 +229,7 @@ var Mailbox = {
 	},
 	
 	getFoldersReturn : function(xmlHttpReq) {
-		foldersObject = eval("(" + xmlHttpReq.responseText + ")");
+		var foldersObject = eval("(" + xmlHttpReq.responseText + ")");
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
 		var folderList = document.createElement("ul");
 		var folders = foldersObject.folders;
