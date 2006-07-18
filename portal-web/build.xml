@@ -3,30 +3,7 @@
 <project name="portal-web" basedir="." default="war">
 	<import file="../build-common-web.xml" />
 
-	<if>
-		<or>
-			<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-			<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-			<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-			<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-			<equals arg1="${app.server.type}" arg2="orion" />
-		</or>
-		<then>
-			<property name="war.file" value="portal-web" />
-		</then>
-		<elseif>
-			<or>
-				<equals arg1="${app.server.type}" arg2="resin" />
-				<equals arg1="${app.server.type}" arg2="tomcat" />
-			</or>
-			<then>
-				<property name="war.file" value="ROOT" />
-			</then>
-		</elseif>
-		<else>
-			<property name="war.file" value="liferay-portal" />
-		</else>
-	</if>
+	<property name="war.file" value="${ant.project.name}" />
 
 	<target name="clean" depends="build-common-web.clean">
 		<delete dir="docroot/html/skin/color" />
