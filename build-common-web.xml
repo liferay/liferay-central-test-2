@@ -62,6 +62,15 @@
 			</then>
 			<else>
 				<unwar src="${war.file}.war" dest="${war.file.dest}" />
+
+				<if>
+					<equals arg1="${war.file}" arg2="portal-web" />
+					<then>
+						<copy todir="${war.file.dest}" overwrite="yes">
+							<fileset dir="${project.dir}/web-sites/liferay.com-web/docroot" />
+						</copy>
+					</then>
+				</if>
 			</else>
 		</if>
 

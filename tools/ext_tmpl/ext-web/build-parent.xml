@@ -230,80 +230,6 @@
 		</antcall>
 	</target>
 
-	<target name="build-color-scheme">
-		<java
-			classname="com.liferay.portal.tools.ColorSchemeBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="false"
-		>
-			<jvmarg value="-Dcolor.scheme.builder.overwrite=true" />
-			<jvmarg value="-Djava.awt.headless=true" />
-		</java>
-	</target>
-
-	<target name="build-webxml">
-		<java
-			classname="com.liferay.portal.tools.WebXMLBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		/>
-	</target>
-
-	<target name="merge">
-		<if>
-			<not>
-				<uptodate
-					srcfile="${project.dir}/ext-ear/modules/portal-web.war"
-					targetfile="tmp"
-				/>
-			</not>
-			<then>
-				<delete dir="tmp" />
-				<mkdir dir="tmp" />
-
-				<unjar
-					dest="tmp"
-					src="${project.dir}/ext-ear/modules/portal-web.war"
-				/>
-
-				<copy todir="tmp" overwrite="true">
-					<fileset
-						dir="docroot"
-						excludes="**/struts-config.xml,**/tiles-defs.xml,**/web.xml"
-					/>
-				</copy>
-			</then>
-		</if>
-
-		<copy todir="tmp" overwrite="false">
-			<fileset
-				dir="docroot"
-				excludes="**/struts-config.xml,**/tiles-defs.xml,**/web.xml"
-			/>
-		</copy>
-
-		<copy
-			file="docroot/WEB-INF/struts-config.xml"
-			tofile="tmp/WEB-INF/struts-config-ext.xml"
-		/>
-
-		<copy
-			file="docroot/WEB-INF/tiles-defs.xml"
-			tofile="tmp/WEB-INF/tiles-defs-ext.xml"
-		/>
-
-		<copy
-			file="docroot/WEB-INF/web.xml"
-			tofile="tmp/WEB-INF/web.xml"
-			overwrite="true"
-		/>
-
-		<antcall target="build-color-scheme" />
-		<antcall target="build-webxml" />
-	</target>
-
 	<target name="war" depends="merge">
 		<war
 			basedir="tmp"
@@ -467,5 +393,79 @@
 				</if>
 			</then>
 		</if>
+	</target>
+
+	<target name="build-color-scheme">
+		<java
+			classname="com.liferay.portal.tools.ColorSchemeBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="false"
+		>
+			<jvmarg value="-Dcolor.scheme.builder.overwrite=true" />
+			<jvmarg value="-Djava.awt.headless=true" />
+		</java>
+	</target>
+
+	<target name="build-webxml">
+		<java
+			classname="com.liferay.portal.tools.WebXMLBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		/>
+	</target>
+
+	<target name="merge">
+		<if>
+			<not>
+				<uptodate
+					srcfile="${project.dir}/ext-ear/modules/portal-web.war"
+					targetfile="tmp"
+				/>
+			</not>
+			<then>
+				<delete dir="tmp" />
+				<mkdir dir="tmp" />
+
+				<unjar
+					dest="tmp"
+					src="${project.dir}/ext-ear/modules/portal-web.war"
+				/>
+
+				<copy todir="tmp" overwrite="true">
+					<fileset
+						dir="docroot"
+						excludes="**/struts-config.xml,**/tiles-defs.xml,**/web.xml"
+					/>
+				</copy>
+			</then>
+		</if>
+
+		<copy todir="tmp" overwrite="false">
+			<fileset
+				dir="docroot"
+				excludes="**/struts-config.xml,**/tiles-defs.xml,**/web.xml"
+			/>
+		</copy>
+
+		<copy
+			file="docroot/WEB-INF/struts-config.xml"
+			tofile="tmp/WEB-INF/struts-config-ext.xml"
+		/>
+
+		<copy
+			file="docroot/WEB-INF/tiles-defs.xml"
+			tofile="tmp/WEB-INF/tiles-defs-ext.xml"
+		/>
+
+		<copy
+			file="docroot/WEB-INF/web.xml"
+			tofile="tmp/WEB-INF/web.xml"
+			overwrite="true"
+		/>
+
+		<antcall target="build-color-scheme" />
+		<antcall target="build-webxml" />
 	</target>
 </project>

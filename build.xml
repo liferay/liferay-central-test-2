@@ -229,7 +229,6 @@
 		<ant dir="laszlo-web" target="deploy" inheritAll="false" />
 		<ant dir="portal-web" target="deploy" inheritAll="false" />
 		<ant dir="tunnel-web" target="deploy" inheritAll="false" />
-		<ant dir="web-sites" target="deploy" inheritAll="false" />
 
 		<ant dir="layouttpl" target="deploy" inheritAll="false" />
 		<ant dir="portlets" target="deploy" inheritAll="false" />

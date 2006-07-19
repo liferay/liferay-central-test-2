@@ -6,6 +6,7 @@
 	<property name="war.file" value="${ant.project.name}" />
 
 	<target name="clean" depends="build-common-web.clean">
+		<delete dir="classes" />
 		<delete dir="docroot/html/skin/color" />
 		<delete dir="docroot/html/themes/classic/color_schemes" />
 
@@ -33,6 +34,300 @@
 				excludes="**/thumbnail.gif,**/custom/**,**/flash/**"
 			/>
 		</delete>
+	</target>
+
+	<target name="compile-common-lib">
+		<delete dir="${classpath.jsp}" />
+
+		<unjar src="${project.dir}/counter-ejb/counter-ejb.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/documentlibrary-ejb/documentlibrary-ejb.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lock-ejb/lock-ejb.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/mail-ejb/mail-ejb.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/portal-ejb/portal-ejb.jar" dest="${classpath.jsp}" />
+
+		<unjar src="${project.dir}/portal-shared/portal-shared.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/util-java/util-java.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/util-wsrp/util-wsrp.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/util-taglib/util-taglib.jar" dest="${classpath.jsp}" />
+
+		<unjar src="${project.dir}/lib/development/activation.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/development/ejb.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/development/mail.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/global/portlet.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/ant.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/commons-fileupload.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/commons-lang.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/commons-logging.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/displaytag.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/dom4j.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/easyconf.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/friki.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/google.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/httpbridge.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/informa.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/jdom.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/jstl.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/jstl-impl.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/log4j.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/lucene.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/nfc-server.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/quartz.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/struts.jar" dest="${classpath.jsp}" />
+	</target>
+
+	<target name="compile-common-jsp">
+		<move file="docroot/WEB-INF/web.xml" tofile="docroot/WEB-INF/web.xml.bak" />
+
+		<copy file="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml" tofile="docroot/WEB-INF/web.xml" />
+
+		<java
+			classname="org.apache.jasper.JspC"
+			classpath="${jspc.classpath}"
+			fork="true"
+			newenvironment="true"
+		>
+			<arg line="${arg.line}" />
+		</java>
+
+		<move file="docroot/WEB-INF/web.xml.bak" tofile="docroot/WEB-INF/web.xml" />
+
+		<java
+			classname="com.liferay.portal.tools.JSPCompiler"
+			classpath="${jspc.classpath}"
+			fork="true"
+			newenvironment="true"
+		>
+			<arg value="${app.server.type}" />
+			<arg value="${javac.compiler}" />
+			<arg value="${jspc.classpath}" />
+			<arg value="${jspc.classes.dir}" />
+		</java>
+	</target>
+
+	<target name="compile-jboss-jetty">
+		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
+		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.deploy.dir}/jbossweb-jetty.sar/jasper-compiler.jar;${app.server.deploy.dir}/jbossweb-jetty.sar/jasper-runtime.jar" />
+
+		<antcall target="compile-common-lib" />
+
+		<unjar src="${app.server.server.dir}/lib/javax.servlet.jar" dest="${classpath.jsp}" />
+		<unjar src="${app.server.server.dir}/lib/javax.servlet.jsp.jar" dest="${classpath.jsp}" />
+		<unjar src="${app.server.deploy.dir}/jbossweb-jetty.sar/commons-el.jar" dest="${classpath.jsp}" />
+
+		<antcall target="compile-common-jsp">
+			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp docroot" />
+		</antcall>
+	</target>
+
+	<target name="compile-jboss-tomcat">
+		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
+		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.deploy.dir}/jbossweb-tomcat55.sar/jasper-compiler.jar;${app.server.deploy.dir}/jbossweb-tomcat55.sar/jasper-runtime.jar" />
+
+		<antcall target="compile-common-lib" />
+
+		<unjar src="${app.server.server.dir}/lib/javax.servlet.jar" dest="${classpath.jsp}" />
+		<unjar src="${app.server.server.dir}/lib/javax.servlet.jsp.jar" dest="${classpath.jsp}" />
+		<unjar src="${app.server.deploy.dir}/jbossweb-tomcat55.sar/commons-el.jar" dest="${classpath.jsp}" />
+
+		<antcall target="compile-common-jsp">
+			<param name="arg.line" value="-classpath ${jspc.classpath} -d ${jspc.classes.dir} -webapp docroot" />
+		</antcall>
+	</target>
+
+	<target name="compile-jetty">
+		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
+		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/ext/commons-el.jar;${app.server.dir}/ext/jasper-compiler.jar;${app.server.dir}/ext/jasper-runtime.jar" />
+
+		<antcall target="compile-common-lib" />
+
+		<unjar src="${app.server.dir}/lib/javax.servlet.jar" dest="${classpath.jsp}" />
+
+		<antcall target="compile-common-jsp">
+			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp docroot" />
+		</antcall>
+	</target>
+
+	<target name="compile-jonas-jetty">
+		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
+		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/jetty/ext/commons-el.jar;${app.server.dir}/lib/jetty/ext/jasper-compiler.jar;${app.server.dir}/lib/jetty/ext/jasper-runtime.jar" />
+
+		<antcall target="compile-common-lib" />
+
+		<unjar src="${app.server.dir}/lib/commons/j2ee/jsp-2_0.jar" dest="${classpath.jsp}" />
+		<unjar src="${app.server.dir}/lib/commons/j2ee/servlet-2_4.jar" dest="${classpath.jsp}" />
+
+		<antcall target="compile-common-jsp">
+			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp docroot" />
+		</antcall>
+	</target>
+
+	<target name="compile-jonas-tomcat">
+		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
+		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/catalina/common/lib/commons-el.jar;${app.server.dir}/lib/catalina/common/lib/jasper-compiler.jar;${app.server.dir}/lib/catalina/common/lib/jasper-runtime.jar" />
+
+		<antcall target="compile-common-lib" />
+
+		<unjar src="${app.server.dir}/lib/commons/j2ee/jsp-2_0.jar" dest="${classpath.jsp}" />
+		<unjar src="${app.server.dir}/lib/commons/j2ee/servlet-2_4.jar" dest="${classpath.jsp}" />
+
+		<antcall target="compile-common-jsp">
+			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp docroot" />
+		</antcall>
+	</target>
+
+	<target name="compile-resin">
+		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
+		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${env.JAVA_HOME}/lib/tools.jar;${classpath.jsp};${app.server.dir}/lib/jms-11.jar;${app.server.dir}/lib/jmx-12.jar;${app.server.dir}/lib/jsdk-24.jar;${app.server.dir}/lib/jstl-11.jar;${app.server.dir}/lib/jta-101.jar;${app.server.dir}/lib/resin.jar" />
+
+		<antcall target="compile-common-lib" />
+
+		<unjar src="${project.dir}/lib/axis.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/commons-beanutils.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/commons-digester.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/compression-filter.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/jcaptcha.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/saaj.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/saxpath.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/secure-filter.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/spring.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/strip-filter.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/struts-el.jar" dest="${classpath.jsp}" />
+
+		<move file="docroot/WEB-INF/web.xml" tofile="docroot/WEB-INF/web.xml.bak" />
+
+		<copy file="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml" tofile="docroot/WEB-INF/web.xml" />
+
+		<replace file="docroot/WEB-INF/web.xml">
+			<replacefilter token="&lt;resource-ref&gt;" value="" />
+			<replacefilter token="&lt;/resource-ref&gt;" value="" />
+		</replace>
+
+		<java
+			classname="com.liferay.util.resin.BatchJspCompiler"
+			classpath="${jspc.classpath};${project.dir}/lib/concurrent.jar;${project.dir}/lib/trove.jar"
+			fork="true"
+			maxmemory="512m"
+			newenvironment="true"
+		>
+			<arg line="docroot ${jspc.classes.dir}" />
+		</java>
+
+		<move file="docroot/WEB-INF/web.xml.bak" tofile="docroot/WEB-INF/web.xml" />
+	</target>
+
+	<target name="compile-tomcat">
+		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
+		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/common/lib/commons-el.jar;${app.server.dir}/common/lib/jasper-compiler.jar;${app.server.dir}/common/lib/jasper-runtime.jar" />
+
+		<antcall target="compile-common-lib" />
+
+		<unjar src="${app.server.dir}/common/lib/jsp-api.jar" dest="${classpath.jsp}" />
+		<unjar src="${app.server.dir}/common/lib/servlet-api.jar" dest="${classpath.jsp}" />
+
+		<antcall target="compile-common-jsp">
+			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp docroot" />
+		</antcall>
+	</target>
+
+	<target name="deploy">
+		<antcall target="build-common-web.deploy" />
+
+		<if>
+			<equals arg1="${jsp.precompile}" arg2="on" />
+			<then>
+				<if>
+					<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+					<then>
+						<antcall target="compile-jboss-jetty" />
+
+						<copy todir="${app.server.server.dir}/work">
+							<fileset dir="classes/${app.server.type}">
+								<exclude name="**/*.jspc_error" />
+								<exclude name="**/*.java" />
+							</fileset>
+						</copy>
+					</then>
+					<elseif>
+						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+						<then>
+							<antcall target="compile-jboss-tomcat" />
+
+							<copy todir="${app.server.server.dir}/work/jboss.web/localhost/_">
+								<fileset dir="classes/${app.server.type}">
+									<exclude name="**/*.jspc_error" />
+									<exclude name="**/*.java" />
+								</fileset>
+							</copy>
+						</then>
+					</elseif>
+					<elseif>
+						<equals arg1="${app.server.type}" arg2="jetty" />
+						<then>
+							<antcall target="compile-jetty" />
+
+							<copy todir="${app.server.dir}/work/Jetty__8080__">
+								<fileset dir="classes/${app.server.type}">
+									<exclude name="**/*.jspc_error" />
+									<exclude name="**/*.java" />
+								</fileset>
+							</copy>
+						</then>
+					</elseif>
+					<elseif>
+						<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+						<then>
+							<antcall target="compile-jonas-jetty" />
+
+							<copy todir="${app.server.dir}/work">
+								<fileset dir="classes/${app.server.type}">
+									<exclude name="**/*.jspc_error" />
+									<exclude name="**/*.java" />
+								</fileset>
+							</copy>
+						</then>
+					</elseif>
+					<elseif>
+						<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+						<then>
+							<antcall target="compile-jonas-tomcat" />
+
+							<copy todir="${app.server.dir}/work/jonas/localhost/_">
+								<fileset dir="classes/${app.server.type}">
+									<exclude name="**/*.jspc_error" />
+									<exclude name="**/*.java" />
+								</fileset>
+							</copy>
+						</then>
+					</elseif>
+					<elseif>
+						<equals arg1="${app.server.type}" arg2="resin" />
+						<then>
+							<antcall target="compile-resin" />
+
+							<copy todir="${app.server.deploy.dir}/WEB-INF/work">
+								<fileset dir="classes/${app.server.type}">
+									<exclude name="**/*.jspc_error" />
+									<exclude name="**/*.java" />
+								</fileset>
+							</copy>
+						</then>
+					</elseif>
+					<elseif>
+						<equals arg1="${app.server.type}" arg2="tomcat" />
+						<then>
+							<antcall target="compile-tomcat" />
+
+							<copy todir="${app.server.dir}/work/Catalina/localhost/_">
+								<fileset dir="classes/${app.server.type}">
+									<exclude name="**/*.jspc_error" />
+									<exclude name="**/*.java" />
+								</fileset>
+							</copy>
+						</then>
+					</elseif>
+				</if>
+			</then>
+		</if>
 	</target>
 
 	<target name="build-color-scheme">
