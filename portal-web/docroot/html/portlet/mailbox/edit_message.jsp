@@ -23,6 +23,7 @@
 %>
 
 <%@ include file="/html/portlet/init.jsp" %>
+<%@ page import="com.liferay.portlet.mailbox.util.RemoteMailAttachment" %>
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.journal.edit_article_content_xsd_el.jsp";
 %>
@@ -39,6 +40,7 @@ if (recipients != null && recipients.length == 2) {
 }
 String subject = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_SUBJECT));
 String content = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_MESSAGE));
+List remoteAttachments = (List)request.getAttribute(WebKeys.MAIL_ATTACHMENTS);
 %>
 
 <script type="text/javascript">
@@ -91,32 +93,48 @@ String content = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_
 		var <portlet:namespace />messageId = -1;
 	</c:if>
 
-	function <portlet:namespace />addAttachment() {
-		var table = document.getElementById("<portlet:namespace />attachments");
+	function <portlet:namespace />addAttachment(remoteFile, contentPath) {
+		var table = document.getElementById("<portlet:namespace />files");
 		var newrow = table.insertRow(table.rows.length - 1);
 		newrow.id = "<portlet:namespace />file" + <portlet:namespace />file_index;
 
-		var browser = createElement("input", "<portlet:namespace />attachment" + <portlet:namespace />file_index);
-		browser.type = "file";
-		browser.size = "30";
+		if (remoteFile == null) {
+			var browser = createElement("input", "<portlet:namespace />attachment" + <portlet:namespace />file_index);
+			browser.type = "file";
+			browser.size = "30";
 
-		var spacer = document.createElement("span");
-		spacer.innerHTML = "&nbsp; &nbsp;";
+			var spacer = document.createElement("span");
+			spacer.innerHTML = "&nbsp; &nbsp;";
 
-		var del = document.createElement("a");
-		del.href = "javascript:<portlet:namespace />removeAttachment('" + newrow.id + "')";
-		del.innerHTML = "[<%= LanguageUtil.get(pageContext, "remove") %>]";
+			var del = document.createElement("a");
+			del.href = "javascript:<portlet:namespace />removeAttachment('" + newrow.id + "')";
+			del.innerHTML = "[<%= LanguageUtil.get(pageContext, "remove") %>]";
+	
+			newrow.insertCell(0).appendChild(browser);
+			newrow.insertCell(1).appendChild(spacer);
+			newrow.insertCell(2).appendChild(del);
+		}
+		else {
+			var checkbox = createElement("input", "<portlet:namespace />remoteAttachment" + remoteFile);
+			checkbox.type = "checkbox";
+			checkbox.checked = true;
+			checkbox.value = contentPath;
 
-		newrow.insertCell(0).appendChild(browser);
-		newrow.insertCell(1).appendChild(spacer);
-		newrow.insertCell(2).appendChild(del);
+			var filename = document.createElement("span");
+			filename.innerHTML = "<i>" + remoteFile + "</i>";
+			
+			newrow.insertCell(0);
+			newrow.cells[0].appendChild(checkbox);
+			newrow.cells[0].appendChild(filename);
+			newrow.cells[0].colSpan = 3;
+		}
 
 		<portlet:namespace />file_index++;
 	}
 
 	function <portlet:namespace />removeAttachment(id) {
 		var delrow = document.getElementById(id);
-		document.getElementById("<portlet:namespace />attachments").deleteRow(delrow.rowIndex);
+		document.getElementById("<portlet:namespace />files").deleteRow(delrow.rowIndex);
 	}
 </script>
 
@@ -145,7 +163,7 @@ String content = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_
 	<tr>
 		<td valign="top"><b><%= LanguageUtil.get(pageContext, "attachments") %>:</b></td>
 		<td>
-			<table cellpadding="0" cellspacing="2" border="0" id="<portlet:namespace />attachments" style="margin-left: -2px; margin-top: -2px;">
+			<table cellpadding="0" cellspacing="2" border="0" id="<portlet:namespace />files" style="margin-left: -2px; margin-top: -2px;">
 				<tr>
 					<td colspan="3">
 						<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "add-attachment") %>' onclick="<portlet:namespace />addAttachment()" />
@@ -169,3 +187,16 @@ String content = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_
 	<iframe frameborder="0" height="250" id="<portlet:namespace />editor" name="<portlet:namespace />editor" scrolling="no" src="<%= editorUrl %>" width="100%"></iframe>
 
 </form>
+
+<c:if test="<%= remoteAttachments != null %>">
+	<script type="text/javascript">
+	<%
+	for (Iterator itr = remoteAttachments.iterator(); itr.hasNext(); ) {
+		RemoteMailAttachment rma = (RemoteMailAttachment)itr.next();
+	%>
+		<portlet:namespace />addAttachment("<%= rma.getFilename() %>", "<%= rma.getContentPath() %>");
+	<%
+	}
+	%>
+	</script>
+</c:if>

@@ -22,6 +22,9 @@
 
 package com.liferay.util;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  * <a href="ArrayUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -43,6 +46,18 @@ public class ArrayUtil {
 
 			return false;
 		}
+	}
+	
+	public static Collection getCollection(Object[] array) {
+		Collection coll = new ArrayList();
+		
+		if (array != null) {
+			for (int i = 0; i < array.length; i++) {
+				coll.add(array[i]);
+			}
+		}
+
+		return coll;
 	}
 
 	public static int getLength(Object[] array) {

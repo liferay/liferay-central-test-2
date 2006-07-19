@@ -70,6 +70,7 @@ public class InternetAddressUtil {
 	}
 
 	public static InternetAddress getAddress(String entry) throws Exception {
+		
 		InternetAddress ia = new InternetAddress();
 
 		String [] parts = entry.split(StringPool.LESS_THAN);

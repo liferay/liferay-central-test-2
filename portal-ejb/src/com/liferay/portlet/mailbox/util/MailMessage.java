@@ -166,9 +166,24 @@ public class MailMessage {
 	public void appendAttachment(MailAttachment ma) {
 		_attachments.add(ma);
 	}
+	
+	public List getRemoteAttachments() {
+		return _remoteAttachments;
+	}
+
+	public void setRemoteAttachments(List remoteAttachments) {
+		_remoteAttachments = remoteAttachments;
+	}	
+	
+	public void appendRemoteAttachment(RemoteMailAttachment rma) {
+		_remoteAttachments.add(rma);
+	}
 
 	public boolean isSimple() {
-		if (Validator.isNotNull(_htmlBody) || !_attachments.isEmpty()) {
+		if (Validator.isNotNull(_htmlBody) || 
+			!_attachments.isEmpty() || 
+			!_remoteAttachments.isEmpty()) {
+
 			return false;
 		}
 		
@@ -200,5 +215,7 @@ public class MailMessage {
 	private Date _sentDate;
 
 	private List _attachments = new ArrayList();
+
+	private List _remoteAttachments = new ArrayList();
 
 }

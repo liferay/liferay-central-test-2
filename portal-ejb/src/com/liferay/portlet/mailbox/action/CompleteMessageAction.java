@@ -22,9 +22,11 @@
 package com.liferay.portlet.mailbox.action;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -50,6 +52,7 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.mailbox.util.MailAttachment;
 import com.liferay.portlet.mailbox.util.MailMessage;
 import com.liferay.portlet.mailbox.util.MailUtil;
+import com.liferay.portlet.mailbox.util.RemoteMailAttachment;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
@@ -73,6 +76,10 @@ public class CompleteMessageAction extends PortletAction {
 
 		try {
 			if (cmd.equals(Constants.SEND) || cmd.equals(Constants.SAVE)) {
+				HttpSession ses =
+					((ActionRequestImpl)req).getHttpServletRequest().
+						getSession();
+
 				User user = PortalUtil.getUser(req);
 				Address from = new InternetAddress(
 					user.getEmailAddress(), user.getFullName());
@@ -88,12 +95,9 @@ public class CompleteMessageAction extends PortletAction {
 
 				Map attachments = _getAttachments(
 					PortalUtil.getUploadPortletRequest(req));
-
-				HttpSession ses =
-					((ActionRequestImpl)req).getHttpServletRequest().
-						getSession();
-
+				
 				Set filenames = attachments.keySet();
+
 				for (Iterator itr = filenames.iterator(); itr.hasNext(); ) {
 					String filename = (String)itr.next();
 					byte [] attachment = (byte [])attachments.get(filename);
@@ -106,6 +110,8 @@ public class CompleteMessageAction extends PortletAction {
 					mm.appendAttachment(ma);
 				}
 
+				mm.setRemoteAttachments(_getRemoteAttachments(req));
+				
 				MailUtil.completeMessage(ses, mm, cmd.equals(Constants.SEND));
 
 				setForward(req, "portlet.mailbox.view");
@@ -125,14 +131,12 @@ public class CompleteMessageAction extends PortletAction {
 		
 		Map attachments = new HashMap();
 
-		String prefix = "attachment";
-
 		Enumeration enu = uploadReq.getParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String name = (String)enu.nextElement();
 
-			if (name.startsWith(prefix)) {
+			if (name.startsWith("attachment")) {
 				File file = uploadReq.getFile(name);
 				byte[] bytes = FileUtil.getBytes(file);
 
@@ -143,6 +147,31 @@ public class CompleteMessageAction extends PortletAction {
 		}
 
 		return attachments;
+	}
+
+	private static List _getRemoteAttachments(ActionRequest req)
+		throws Exception {
+
+		List list = new ArrayList();
+
+		Enumeration enu = req.getParameterNames();
+
+		String prefix = "remoteAttachment";
+
+		while (enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+
+			if (name.startsWith(prefix)) {
+				RemoteMailAttachment rma = new RemoteMailAttachment();
+
+				rma.setContentPath(ParamUtil.getString(req, name));
+				rma.setFilename(name.substring(prefix.length()));
+
+				list.add(rma);
+			}
+		}
+
+		return list;
 	}
 
 	private static Log _log = LogFactory.getLog(CompleteMessageAction.class);

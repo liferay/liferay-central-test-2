@@ -26,6 +26,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
@@ -62,8 +63,10 @@ import org.apache.commons.mail.SimpleEmail;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.ArrayUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.JNDIUtil;
+import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.sun.mail.imap.IMAPFolder;
@@ -143,6 +146,14 @@ public class MailUtil {
 					ma.getContent(), ma.getContentType());
 				he.attach(ds, ma.getFilename(), ma.getFilename());
 			}
+			
+			List remoteAttachments = mm.getRemoteAttachments();
+			for (Iterator itr = remoteAttachments.iterator(); itr.hasNext(); ) {
+				RemoteMailAttachment rma = (RemoteMailAttachment)itr.next();
+				
+				DataSource ds = getAttachment(ses, rma.getContentPath());
+				he.attach(ds, rma.getFilename(), rma.getFilename());
+			}
 
 			email = he;
 		}
@@ -150,32 +161,24 @@ public class MailUtil {
 		String fromAddy = ((InternetAddress)mm.getFrom()).getAddress();
 		String fromName = ((InternetAddress)mm.getFrom()).getPersonal();
 
+		email.setFrom(fromAddy, fromName);		
+		
+		Collection tos = ArrayUtil.getCollection(mm.getTo());
+		Collection ccs = ArrayUtil.getCollection(mm.getCc());
+		Collection bccs = ArrayUtil.getCollection(mm.getBcc());
+		if (!tos.isEmpty()) {
+			email.setTo(tos);
+		}
+		if (!ccs.isEmpty()) {
+			email.setCc(ccs);
+		}
+		if (!bccs.isEmpty()) {
+			email.setBcc(bccs);
+		}
+
 		email.setSubject(mm.getSubject());
 		email.setHostName(_getSMTPHost());
 		email.setAuthentication(_getLogin(userId), password);
-		email.setFrom(fromAddy, fromName);
-
-		Address [] tos = mm.getTo();
-		for (int i = 0; i < tos.length; i++) {
-			String toAddy = ((InternetAddress)tos[i]).getAddress();
-			String toName = ((InternetAddress)tos[i]).getPersonal();
-			email.addTo(toAddy, toName);
-		}
-
-		Address [] ccs = mm.getCc();
-		for (int i = 0; i < ccs.length; i++) {
-			String ccAddy = ((InternetAddress)ccs[i]).getAddress();
-			String ccName = ((InternetAddress)ccs[i]).getPersonal();
-			email.addCc(ccAddy, ccName);
-		}
-
-		Address [] bccs = mm.getBcc();
-		for (int i = 0; i < bccs.length; i++) {
-			String bccAddy = ((InternetAddress)bccs[i]).getAddress();
-			String bccName = ((InternetAddress)bccs[i]).getPersonal();
-			email.addBcc(bccAddy, bccName);
-		}
-		
 		email.setSentDate(new Date());
 		email.buildMimeMessage();
 		
@@ -247,7 +250,68 @@ public class MailUtil {
 			_getCurrentFolder(ses).expunge();
 		}
 	}
+
+	public static DataSource getAttachment(HttpSession ses, String contentPath)
+		throws Exception {
+
+		String [] path = RemoteMailAttachment.parsePath(contentPath);
+
+		String folderName = path[0];
+		long messageUID = GetterUtil.getLong(path[1]);
+		String mimePath = path[2];
+
+		setCurrentFolder(ses, folderName);
+		Message message = _getCurrentFolder(ses).getMessageByUID(messageUID);
+
+		Object [] parts = _getAttachmentFromPath(message, mimePath);
+
+		return new ByteArrayDataSource((byte [])parts[0], (String)parts[1]);
+	}
 	
+	private static Object [] _getAttachmentFromPath(
+			Part part, String mimePath) throws Exception {
+
+		int index = GetterUtil.getInteger(
+			StringUtil.split(mimePath.substring(1), StringPool.PERIOD)[0]);
+
+		if (part.getContent() instanceof Multipart) {
+    		String prefix = Integer.toString(index) + StringPool.PERIOD;
+
+            Multipart mp = (Multipart)part.getContent();
+
+            for (int i = 0; i < mp.getCount(); i++) {
+        		if (index == i) {
+        			return _getAttachmentFromPath(mp.getBodyPart(i),
+        				mimePath.substring(prefix.length()));
+        		}
+        	}
+        	
+        	throw new Exception("Error in content path");
+        }
+		else if (index != -1) {
+        	throw new Exception("Error in content path");
+		}
+
+		InputStream in = part.getInputStream();
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		byte[] buffer = new byte[8192];
+		int count = 0;
+
+		while ((count = in.read(buffer)) >= 0) {
+			baos.write(buffer,0,count);
+		}
+		in.close();
+
+		Object [] parts = new Object[] {
+				baos.toByteArray(), part.getContentType()
+		};
+		
+		return parts;
+
+	}
+
 	public static String getCurrentFolderName(PortletSession ses) {
 		try {
 			Folder folder = _getCurrentFolder(ses);
@@ -379,6 +443,9 @@ public class MailUtil {
 		MailMessage mm = null;
 
 		try {
+			String contentPath = RemoteMailAttachment.buildContentPath(
+				_getCurrentFolder(ses).getName(), messageUID);
+
 			Message message =
 				_getCurrentFolder(ses).getMessageByUID(messageUID);
 
@@ -390,7 +457,7 @@ public class MailUtil {
 			mm.setBcc(message.getRecipients(RecipientType.BCC));
 			mm.setSentDate(message.getSentDate());
 			mm.setReplyTo(message.getReplyTo());
-			mm = _getContent(message, mm);
+			mm = _getContent(message, mm, contentPath);
 
 			_setCurrentMessage(ses, messageUID);
 		}
@@ -543,37 +610,19 @@ public class MailUtil {
 		}
 	}
 
-	private static MailAttachment _getAttachment(Part part)
+	private static RemoteMailAttachment _getRemoteAttachment(
+			Part part, String contentPath)
 		throws IOException, MessagingException {
 
-		MailAttachment ma = new MailAttachment();
-		ma.setContentType(part.getContentType());
-		ma.setFilename(part.getFileName());
+		RemoteMailAttachment rma = new RemoteMailAttachment();
+		rma.setFilename(part.getFileName());
+		rma.setContentPath(contentPath);
 
-		String [] headers = part.getHeader("Content-id");
-		if (headers != null && headers.length > 0) {
-		    ma.setContentID(headers[0]);
-		}
-
-		InputStream in = part.getInputStream();
-
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-		byte[] buffer = new byte[8192];
-		int count = 0;
-
-		while ((count = in.read(buffer)) >= 0) {
-			baos.write(buffer,0,count);
-		}
-
-		in.close();
-
-		ma.setContent(baos.toByteArray());
-
-		return ma;
+		return rma;
 	}
 
-	private static MailMessage _getContent(Part part, MailMessage mm)
+	private static MailMessage _getContent(
+			Part part, MailMessage mm, String contentPath)
 		throws IOException, MessagingException {
 
         String contentType = part.getContentType().toLowerCase();
@@ -591,14 +640,16 @@ public class MailUtil {
 	                	mm.setHtmlBody((String)mpbp.getContent());
 	                }
 	                else {
-	                	mm = _getContent(mpbp, mm);
+	                	mm = _getContent(
+	                		mpbp, mm, contentPath + StringPool.PERIOD + i);
 	                }
 	            }
             }
             else {
             	for (int i = 0; i < mp.getCount(); i++) {
 	            	Part mpbp = mp.getBodyPart(i);
-                	mm = _getContent(mpbp, mm);
+                	mm = _getContent(
+                		mpbp, mm, contentPath + StringPool.PERIOD + i);
             	}
             }
         }
@@ -612,7 +663,8 @@ public class MailUtil {
         	// TODO: nested
         }
         else {
-            mm.appendAttachment(_getAttachment(part));
+            mm.appendRemoteAttachment(_getRemoteAttachment(
+            	part, contentPath + StringPool.PERIOD + -1));
         }
 
         return mm;
@@ -751,5 +803,5 @@ public class MailUtil {
 	}
 
 	private static Log _log = LogFactory.getLog(MailUtil.class);
-
+	
 }

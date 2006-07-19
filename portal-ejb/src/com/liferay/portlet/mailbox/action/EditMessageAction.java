@@ -62,49 +62,56 @@ public class EditMessageAction extends PortletAction {
 		throws Exception {
 
 		String composeAction = ParamUtil.getString(req, "composeAction");
-		long messageId = ParamUtil.getLong(req, "messageId");
-		String folderId = ParamUtil.getString(req, "folderId");
-
-		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-		HttpServletRequest svltReq = reqImpl.getHttpServletRequest();
-
-		MailMessage mm = 
-			MailUtil.getMessage(svltReq.getSession(), folderId, messageId);
-
-		User user = PortalUtil.getUser(req);
-		DateFormat dateFormatter = 
-			DateFormats.getDateTime(user.getLocale(), user.getTimeZone());
-		req.setAttribute(WebKeys.MAIL_MESSAGE, _buildBody(mm, dateFormatter));
-
-		if ("reply".equals(composeAction)) {
-			String userEmail = PortalUtil.getUser(req).getEmailAddress();
-
-			InternetAddress [] tos = (InternetAddress [])mm.getTo();
-			InternetAddress [] ccs = (InternetAddress [])mm.getCc();
-			InternetAddress [] rtos = (InternetAddress [])mm.getReplyTo();
-
-			tos = InternetAddressUtil.removeEntries(tos, userEmail);
-			ccs = InternetAddressUtil.removeEntries(ccs, userEmail);
-			
-			String tosStr = InternetAddressUtil.toString(tos);
-			String rtosStr = InternetAddressUtil.toString(rtos);
-			String ccsStr = InternetAddressUtil.toString(ccs);
-			
-			if (Validator.isNotNull(rtosStr)) {
-				tosStr = rtosStr + StringPool.COMMA + StringPool.SPACE + tosStr;
-			}
-
-			String [] recipients = { tosStr, ccsStr };
-
-			req.setAttribute(WebKeys.MAIL_RECIPIENTS, recipients);
-			req.setAttribute(WebKeys.MAIL_SUBJECT, 
-				"Re: " + _removeSubjectPrefix(mm.getSubject()));
-		}
-		else if ("forward".equals(composeAction)) {
-			req.setAttribute(WebKeys.MAIL_SUBJECT,
-				"Fw: " + _removeSubjectPrefix(mm.getSubject()));
-		}
 		
+		if ("forward".equals(composeAction) || "reply".equals(composeAction)) {
+			long messageId = ParamUtil.getLong(req, "messageId");
+			String folderId = ParamUtil.getString(req, "folderId");
+	
+			RenderRequestImpl reqImpl = (RenderRequestImpl)req;
+			HttpServletRequest svltReq = reqImpl.getHttpServletRequest();
+	
+			MailMessage mm = 
+				MailUtil.getMessage(svltReq.getSession(), folderId, messageId);
+	
+			User user = PortalUtil.getUser(req);
+			DateFormat dateFormatter = 
+				DateFormats.getDateTime(user.getLocale(), user.getTimeZone());
+			req.setAttribute(
+				WebKeys.MAIL_MESSAGE, _buildBody(mm, dateFormatter));
+	
+			if ("reply".equals(composeAction)) {
+				String userEmail = PortalUtil.getUser(req).getEmailAddress();
+	
+				InternetAddress [] tos = (InternetAddress [])mm.getTo();
+				InternetAddress [] ccs = (InternetAddress [])mm.getCc();
+				InternetAddress [] rtos = (InternetAddress [])mm.getReplyTo();
+	
+				tos = InternetAddressUtil.removeEntries(tos, userEmail);
+				ccs = InternetAddressUtil.removeEntries(ccs, userEmail);
+				
+				String tosStr = InternetAddressUtil.toString(tos);
+				String rtosStr = InternetAddressUtil.toString(rtos);
+				String ccsStr = InternetAddressUtil.toString(ccs);
+				
+				if (Validator.isNotNull(rtosStr)) {
+					tosStr = 
+						rtosStr + StringPool.COMMA + StringPool.SPACE + tosStr;
+				}
+	
+				String [] recipients = { tosStr, ccsStr };
+
+				req.setAttribute(WebKeys.MAIL_RECIPIENTS, recipients);
+				req.setAttribute(WebKeys.MAIL_SUBJECT, 
+					"Re: " + _removeSubjectPrefix(mm.getSubject()));
+			}
+			else {
+				req.setAttribute(WebKeys.MAIL_SUBJECT,
+					"Fw: " + _removeSubjectPrefix(mm.getSubject()));
+				req.setAttribute(WebKeys.MAIL_ATTACHMENTS, 
+					mm.getRemoteAttachments());
+			}		
+		}
+
 		return mapping.findForward(
 			getForward(req, "portlet.mailbox.edit_message"));
 	}
@@ -115,7 +122,7 @@ public class EditMessageAction extends PortletAction {
 		StringBuffer body = new StringBuffer();
 		body.append("<br /><br />On " + dateFormatter.format(mm.getSentDate()));
 		body.append(StringPool.COMMA + StringPool.NBSP + from.getPersonal());
-		body.append("&lt;<a href=\"" + from.getAddress() + "\">");
+		body.append("&lt;<a href=\"mailto:" + from.getAddress() + "\">");
 		body.append(from.getAddress() + "</a>&gt; wrote:<br />");
 		body.append("<div style=\"");
 		body.append("border-left: 1px solid rgb(204, 204, 204); ");

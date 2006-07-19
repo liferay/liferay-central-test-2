@@ -45,11 +45,11 @@ public class MailAttachment {
         _filename = filename;
     }
 
-    public byte[] getContent() {
+    public byte [] getContent() {
         return _content;
     }
 
-    public void setContent(byte[] content) {
+    public void setContent(byte [] content) {
         _content = content;
     }
 
@@ -65,4 +65,5 @@ public class MailAttachment {
     private String _filename;
     private byte [] _content;
     private String _contentID;
+    
 }
