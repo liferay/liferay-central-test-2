@@ -63,6 +63,10 @@ public class EditMessageAction extends PortletAction {
 
 		String composeAction = ParamUtil.getString(req, "composeAction");
 		
+		if ("replyAll".equals(composeAction)) {
+			// reply-all logic
+		}
+		
 		if ("forward".equals(composeAction) || "reply".equals(composeAction)) {
 			long messageId = ParamUtil.getLong(req, "messageId");
 			String folderId = ParamUtil.getString(req, "folderId");
