@@ -104,7 +104,9 @@ String mailLineColor = "#b3b6b0";
 #portlet-mail-msgs-received { overflow: hidden; width: 200px; }
 #portlet-mail-msgs-received div { padding-left: 5px; width: 800px; position: relative; }
 
+<%--
 #portlet-mail-msg-header { background-color: <%= colorScheme.getLayoutTabBg() %>; }
+--%>
 #portlet-mail-msg-body { margin: 5px 5px 5px 10px; }
 
 </style>

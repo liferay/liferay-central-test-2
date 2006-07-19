@@ -24,6 +24,7 @@
 include file="/html/portlet/init.jsp" %><%@
 page import="com.liferay.portlet.mailbox.util.MailMessage,
 			 com.liferay.util.Html,
+			 java.lang.Object.StringBuffer,
 			 javax.mail.Address"
 %><%
 
@@ -33,22 +34,50 @@ List attachments = mm.getAttachments();
 Address from = mm.getFrom();
 Address cc[] = mm.getCc();
 Address bcc[] = mm.getBcc();
-Address to[] = mm.getTo();
-System.out.println(to != null);
+Address []to = mm.getTo();
 
 %>
-<div>
-	<%= mm.getSubject() %><br />
-	From: <%= Html.escape(from.toString(), false) %><br />
-	<%--
-	<c:if test="<%= (to != null) %>">
-		To: <%= Html.escape(Address.toString(to), false) %><br />
-	</c:if>
-	<c:if test="<%= (cc != null) %>">
-		CC: <%= Html.escape(Address.toString(cc), false) %><br />
-	</c:if>
-	<c:if test="<%= (bcc != null) %>">
-		BCC: <%= Html.escape(Address.toString(bcc), false) %><br />
-	</c:if>
-	--%>
+<div style="padding: 5px; background-color: <%= colorScheme.getLayoutTabBg() %>;">
+	<div style="font-weight: bold"><%= mm.getSubject() %></div>
+	<table cellpadding="0" cellspacing="0" border="0" class="font-small">
+	<tr>
+		<td style="padding-right: 5px"><%= LanguageUtil.get(pageContext, "from") %>: </td>
+		<td><%= Html.escape(from.toString(), false) %></td>
+	</tr>
+	<%
+	if (to != null && to.length > 1) {
+		StringBuffer sb = new StringBuffer();
+		
+		_createAddresses(sb, to);
+		%>
+		<tr>
+			<td style="padding-right: 5px"><%= LanguageUtil.get(pageContext, "to") %>: </td>
+			<td><%= sb.toString() %></td>
+		</tr>
+		<%
+	}
+	if (cc != null) {
+		StringBuffer sb = new StringBuffer();
+		
+		_createAddresses(sb, cc);
+		%>
+		<tr>
+			<td style="padding-right: 5px"><%= LanguageUtil.get(pageContext, "cc") %>: </td>
+			<td><%= sb.toString() %></td>
+		</tr>
+		<%
+	}
+	%>
+	</table>
 </div>
+
+<%!
+private void _createAddresses(StringBuffer sb, Address[] addresses) {
+	for (int i = 0; i < addresses.length; i++) {
+		sb.append(Html.escape(addresses[i].toString(), false));
+		if (i != (addresses.length - 1)) {
+			sb.append(", ");
+		}
+	}
+}
+%>
