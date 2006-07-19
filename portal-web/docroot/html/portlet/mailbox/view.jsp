@@ -41,8 +41,8 @@ String mailLineColor = "#b3b6b0";
 	background-color: <%= colorScheme.getLayoutTabSelectedText() %>;
 	cursor: pointer;
 }
-#portlet-mail-main-toolbar { margin-bottom: 5px; }
-#portlet-mail-main-toolbar td {
+.portlet-mail-toolbar { margin-bottom: 5px; }
+.portlet-mail-toolbar td {
 	background-color: <%= colorScheme.getPortletBg() %>;
 	border: 1px solid <%= mailLineColor %>;
 	cursor: pointer;
@@ -115,7 +115,7 @@ String mailLineColor = "#b3b6b0";
 
 </style>
 
-<table id="portlet-mail-main-toolbar" cellspacing="2" cellpadding="3" border="0">
+<table id="portlet-mail-main-toolbar" class="portlet-mail-toolbar" cellspacing="2" cellpadding="3" border="0">
 <tr valign="middle">
 	<td onclick="location.href='<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/edit_message" /></portlet:renderURL>'">
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/compose.gif" align="absmiddle" />
@@ -144,13 +144,19 @@ String mailLineColor = "#b3b6b0";
 	</td>
 </tr>
 </table>
-<div id="portlet-mail-drafts-toolbar" style="padding: 5px; display: none;">
-	<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/edit_message" /></portlet:renderURL>">
-		New
-	</a> |
-	<a href="javascript: Mailbox.submitCompose('edit', document.<portlet:namespace />fm)">
-		Edit
-	</a>
+
+<table id="portlet-mail-drafts-toolbar" class="portlet-mail-toolbar" cellspacing="2" cellpadding="3" border="0">
+<tr valign="middle">
+	<td onclick="location.href='<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/edit_message" /></portlet:renderURL>'">
+		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/compose.gif" align="absmiddle" />
+		<%= LanguageUtil.get(pageContext, "new") %>
+	</td>
+	<td onclick="Mailbox.submitCompose('Edit', document.<portlet:namespace />fm)">
+		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/reply.gif" align="absmiddle" />
+		<%= LanguageUtil.get(pageContext, "edit") %>
+	</td>
+</tr>
+</table>
 </div>
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/edit_message" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm">
