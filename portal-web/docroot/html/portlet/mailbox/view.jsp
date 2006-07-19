@@ -119,7 +119,6 @@ String mailLineColor = "#b3b6b0";
 #portlet-mail-msgs-subject div { padding-left: 5px; width: 800px; position: relative; }
 #portlet-mail-msgs-received { overflow: hidden; width: 200px; }
 #portlet-mail-msgs-received div { padding-left: 5px; width: 800px; position: relative; }
-#portlet-mail-msg-body { margin: 5px 5px 5px 10px; }
 
 </style>
 
@@ -272,9 +271,6 @@ String mailLineColor = "#b3b6b0";
 	</td>
 </tr>
 </table>
-						<div id="portlet-mail-msg-body">
-						</div>
-
 <%
 	String folderId = (String)request.getAttribute("folderId");
 	Long messageId = (Long)request.getAttribute("messageId");

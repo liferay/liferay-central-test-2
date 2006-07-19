@@ -190,9 +190,10 @@ var Mailbox = {
 	},
 	
 	removeSelectedMessages : function() {
-		var mailDetails = document.getElementById("portlet-mail-msg-body");
+		var detailsFrame = document.getElementById("portlet-mail-msg-detailed-frame");
+		detailsFrame.src = "";
+		
 		Mailbox.getSelectedMessages(Mailbox.removeSummary);
-		mailDetails.innerHTML = "";
 		Mailbox.resetLastSelected();
 		Mailbox.getFolderDetails();
 	},
@@ -244,7 +245,7 @@ var Mailbox = {
 	},
 	
 	getFolderDetails : function() {
-		var mailDetails = document.getElementById("portlet-mail-msg-body");
+		var detailsFrame = document.getElementById("portlet-mail-msg-detailed-frame");
 		var mailHeader = document.getElementById("portlet-mail-msg-header");
 		var folderDiv = document.createElement("div");
 		var totalDiv = document.createElement("div");
@@ -258,7 +259,7 @@ var Mailbox = {
 		}
 		totalDiv.innerHTML = Mailbox.currentFolder.totalCount + "&nbsp;Total";
 
-		mailDetails.src = "";
+		detailsFrame.src = "";
 		mailHeader.innerHTML = "";
 		mailHeader.appendChild(folderDiv);
 		mailHeader.appendChild(unreadDiv);
@@ -325,28 +326,17 @@ var Mailbox = {
 	getMessageDetailsReturn : function(xmlHttpReq, messageId) {
 		
 		var messageObj = eval("(" + xmlHttpReq.responseText + ")");
-		var mailDetails = document.getElementById("portlet-mail-msg-body");
 		var mailHeader = document.getElementById("portlet-mail-msg-header");
 		var tempBody = document.createElement("div");
-		var msgBody = document.createElement("div");
 		var msgHeader = document.createElement("div");
 		
 		Mailbox.currentMessage = messageObj;
 		Mailbox.currentMessageId = messageId;
 		
-		msgBody.innerHTML = messageObj.body;
 		msgHeader.innerHTML = messageObj.header;
-		
-		var styles = msgBody.getElementsByTagName("style");
-		
-		for (var i = 0; i < styles.length; i++) {
-			styles[i].parentNode.removeChild(styles[i]);
-		}
 		
 		mailHeader.innerHTML = "";
 		mailHeader.appendChild(msgHeader);
-		mailDetails.innerHTML = "";
-		mailDetails.appendChild(msgBody);
 		
 		if (Mailbox.lastSelected.recent) {
 			Mailbox.decrementCount();
@@ -364,8 +354,7 @@ var Mailbox = {
 		var iframe = document.getElementById("portlet-mail-msg-detailed-frame");
 
 		iframe.src = "";
-		iframe.src = "/c/mailbox/view_message?noCache=" + (new Date()).getTime();
-		//window.frames["portlet-mail-msg-detailed-pane"].location = "/c/mailbox/view_message?noCache=" + (new Date()).getTime();
+		iframe.src = themeDisplay.getPathMain() + "/mailbox/view_message?noCache=" + (new Date()).getTime();
 		return;
 	},
 	
