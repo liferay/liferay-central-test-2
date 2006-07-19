@@ -41,13 +41,27 @@ public class DateComparator implements Comparator {
 	public int compare(Object arg0, Object arg1) {
 		MailEnvelope me0 = (MailEnvelope)arg0;
 		MailEnvelope me1 = (MailEnvelope)arg1;
+		Long uid0 = new Long(me0.getMsgUID());
+		Long uid1 = new Long(me1.getMsgUID());
+
+		int comparison = 0;
 
 		if (_asc) {
-			return DateUtil.compareTo(me0.getDate(), me1.getDate());
+			comparison = DateUtil.compareTo(me0.getDate(), me1.getDate());
+			
+			if (comparison == 0) {
+				comparison = uid0.compareTo(uid1);
+			}
 		}
 		else {
-			return DateUtil.compareTo(me1.getDate(), me0.getDate());
+			comparison = DateUtil.compareTo(me1.getDate(), me0.getDate());
+			
+			if (comparison == 0) {
+				comparison = uid1.compareTo(uid0);
+			}
 		}
+		
+		return comparison;
 	}
 
 	private boolean _asc;

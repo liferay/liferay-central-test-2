@@ -22,6 +22,7 @@
 package com.liferay.portlet.mailbox.util.comparator;
 
 import com.liferay.portlet.mailbox.util.MailEnvelope;
+import com.liferay.util.DateUtil;
 
 import java.util.Comparator;
 
@@ -40,13 +41,33 @@ public class RecipientComparator implements Comparator {
 	public int compare(Object arg0, Object arg1) {
 		MailEnvelope me0 = (MailEnvelope)arg0;
 		MailEnvelope me1 = (MailEnvelope)arg1;
+		Long uid0 = new Long(me0.getMsgUID());
+		Long uid1 = new Long(me1.getMsgUID());
+
+		int comparison = 0;
 
 		if (_asc) {
-			return me0.getRecipient().compareTo(me1.getRecipient());
+			comparison = me0.getRecipient().compareTo(me1.getRecipient());
+			if (comparison == 0) {
+				comparison = DateUtil.compareTo(me0.getDate(), me1.getDate());
+				
+				if (comparison == 0) {
+					comparison = uid0.compareTo(uid1);
+				}
+			}
 		}
 		else {
-			return me1.getRecipient().compareTo(me0.getRecipient());
+			comparison = me1.getRecipient().compareTo(me0.getRecipient());
+			if (comparison == 0) {
+				comparison = DateUtil.compareTo(me1.getDate(), me0.getDate());
+				
+				if (comparison == 0) {
+					comparison = uid1.compareTo(uid0);
+				}
+			}
 		}
+		
+		return comparison;
 	}
 
 	private boolean _asc;
