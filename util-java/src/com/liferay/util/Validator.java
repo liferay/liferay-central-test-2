@@ -50,7 +50,7 @@ public class Validator {
 			return false;
 		}
 
-		String [] tokens = address.split(StringPool.AT);
+		String[] tokens = address.split(StringPool.AT);
 
 		if (tokens.length != 2) {
 			return false;

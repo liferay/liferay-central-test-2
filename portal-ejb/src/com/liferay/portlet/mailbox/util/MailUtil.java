@@ -63,8 +63,8 @@ import org.apache.commons.mail.SimpleEmail;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.ArrayUtil;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.ListUtil;
 import com.liferay.util.JNDIUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
@@ -163,9 +163,9 @@ public class MailUtil {
 
 		email.setFrom(fromAddy, fromName);		
 		
-		Collection tos = ArrayUtil.getCollection(mm.getTo());
-		Collection ccs = ArrayUtil.getCollection(mm.getCc());
-		Collection bccs = ArrayUtil.getCollection(mm.getBcc());
+		Collection tos = ListUtil.fromArray(mm.getTo());
+		Collection ccs = ListUtil.fromArray(mm.getCc());
+		Collection bccs = ListUtil.fromArray(mm.getBcc());
 		if (!tos.isEmpty()) {
 			email.setTo(tos);
 		}
