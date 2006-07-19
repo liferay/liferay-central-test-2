@@ -219,6 +219,8 @@
 		<ant dir="applets" target="deploy" inheritAll="false" />
 		<ant dir="filters" target="deploy" inheritAll="false" />
 
+		<ant dir="portal-ear" target="deploy" inheritAll="false" />
+
 		<ant dir="counter-ejb" target="deploy" inheritAll="false" />
 		<ant dir="documentlibrary-ejb" target="deploy" inheritAll="false" />
 		<ant dir="lock-ejb" target="deploy" inheritAll="false" />
@@ -229,7 +231,6 @@
 		<ant dir="laszlo-web" target="deploy" inheritAll="false" />
 		<ant dir="portal-web" target="deploy" inheritAll="false" />
 		<ant dir="tunnel-web" target="deploy" inheritAll="false" />
-		<ant dir="web-sites" target="deploy" inheritAll="false" />
 
 		<ant dir="layouttpl" target="deploy" inheritAll="false" />
 		<ant dir="portlets" target="deploy" inheritAll="false" />

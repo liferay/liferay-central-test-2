@@ -142,4 +142,23 @@
 			/>
 		</jar>
 	</target>
+
+	<target name="deploy">
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+			</or>
+			<then>
+				<copy todir="${app.server.portal.dir}">
+					<fileset
+						dir="modules"
+						includes="*.xml"
+					/>
+				</copy>
+			</then>
+		</if>
+	</target>
 </project>
