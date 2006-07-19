@@ -150,12 +150,10 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		List permissions = new ArrayList();
 
 		for (int i = 0; i < actionIds.length; i++) {
-			Permission permission = null;
-
-			try {
-				permission = PermissionUtil.findByA_R(actionIds[i], resourceId);
-			}
-			catch (NoSuchPermissionException nspe) {
+			Permission permission = PermissionUtil.fetchByA_R(
+				actionIds[i], resourceId);
+			
+			if (permission == null) {
 				permission = addPermission(companyId, actionIds[i], resourceId);
 			}
 
