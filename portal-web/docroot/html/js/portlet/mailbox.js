@@ -132,14 +132,19 @@ var Mailbox = {
 		}
 	},
 
-	decrementCount : function () {
+	decrementCount : function (reverse) {
 		var spanList = Mailbox.currentFolder.li.getElementsByTagName("span");
 		if (spanList.length == 2) {
 			var countSpan = spanList[0];
 			var countNum = parseInt(spanList[1].innerHTML);
 			
 			if (countNum > 1) {
-				countNum--;
+				if (reverse) {
+					countNum++;
+				}
+				else {
+					countNum--;
+				}
 				spanList[1].innerHTML = countNum;
 			}
 			else {
@@ -147,14 +152,7 @@ var Mailbox = {
 			}
 		}
 
-		var summaryField = Mailbox.lastSelected.head;
 
-		while (summaryField) {
-			summaryField.style.fontWeight = "normal";
-			summaryField = summaryField.next;
-		}
-		
-		Mailbox.lastSelected.recent = false;
 	},
 	
 	deleteSelectedMessages : function() {
@@ -181,7 +179,7 @@ var Mailbox = {
 					Coordinates.southeastOffset(folderItem, true));
 					
 			if (foundFolder) {
-				Mailbox.moveToFolder(folderItem.folder.id, folderItem.innerHTML);
+				Mailbox.moveToFolder(folderItem.folder.id, folderItem.folder.id);
 			}
 		}
 	},
@@ -351,6 +349,15 @@ var Mailbox = {
 		
 		if (Mailbox.lastSelected.recent) {
 			Mailbox.decrementCount();
+			
+			var summaryField = Mailbox.lastSelected.head;
+
+			while (summaryField) {
+				summaryField.style.fontWeight = "normal";
+				summaryField = summaryField.next;
+			}
+		
+			Mailbox.lastSelected.recent = false;
 		}
 	},
 	
@@ -748,15 +755,26 @@ var Mailbox = {
 		}
 
 		var fromTitleText = document.getElementById("portlet-mail-msgs-title-from");
-		var fromTitle = fromTitleText.getElementsByTagName("span");;
+		var fromTitle = fromTitleText.getElementsByTagName("span");
+		var mainToolbar = document.getElementById("portlet-mail-main-toolbar");
+		var draftsToolbar = document.getElementById("portlet-mail-drafts-toolbar");
 		
-		if (Mailbox.currentFolder.id == "Sent") {
+		if (Mailbox.currentFolder.id == "Sent" || Mailbox.currentFolder.id == "Drafts") {
 			fromTitle[0].style.display = "none";
 			fromTitle[1].style.display = "";
 		}
 		else {
 			fromTitle[0].style.display = "";
 			fromTitle[1].style.display = "none";
+		}
+		
+		if (Mailbox.currentFolder.id == "Drafts") {
+			mainToolbar.style.display = "none";
+			draftsToolbar.style.display = "block";
+		}
+		else {
+			mainToolbar.style.display = "block";
+			draftsToolbar.style.display = "none";
 		}
 	},
 	

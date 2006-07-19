@@ -41,6 +41,14 @@ String mailLineColor = "#b3b6b0";
 	background-color: <%= colorScheme.getLayoutTabSelectedText() %>;
 	cursor: pointer;
 }
+#portlet-mail-main-toolbar { margin-bottom: 5px; }
+#portlet-mail-main-toolbar td {
+	background-color: <%= colorScheme.getPortletBg() %>;
+	border: 1px solid <%= mailLineColor %>;
+	cursor: pointer;
+	padding-left: 10px;
+	padding-right: 10px;
+}
 #portlet-mail-folder-pane ul {
 	cursor: pointer;
 	margin: 8px;
@@ -103,29 +111,46 @@ String mailLineColor = "#b3b6b0";
 #portlet-mail-msgs-subject div { padding-left: 5px; width: 800px; position: relative; }
 #portlet-mail-msgs-received { overflow: hidden; width: 200px; }
 #portlet-mail-msgs-received div { padding-left: 5px; width: 800px; position: relative; }
-
-<%--
-#portlet-mail-msg-header { background-color: <%= colorScheme.getLayoutTabBg() %>; }
---%>
 #portlet-mail-msg-body { margin: 5px 5px 5px 10px; }
 
 </style>
 
-<div style="padding: 5px">
+<table id="portlet-mail-main-toolbar" cellspacing="2" cellpadding="3" border="0">
+<tr valign="middle">
+	<td onclick="location.href='<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/edit_message" /></portlet:renderURL>'">
+		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/compose.gif" align="absmiddle" />
+		<%= LanguageUtil.get(pageContext, "new") %>
+	</td>
+	<td onclick="Mailbox.submitCompose('reply', document.<portlet:namespace />fm)">
+		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/reply.gif" align="absmiddle" />
+		<%= LanguageUtil.get(pageContext, "reply") %>
+	</td>
+	<td onclick="Mailbox.submitCompose('replyAll', document.<portlet:namespace />fm)">
+		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/reply.gif" align="absmiddle" />
+		<%= LanguageUtil.get(pageContext, "reply-all") %>
+	</td>
+	<td onclick="Mailbox.submitCompose('forward', document.<portlet:namespace />fm)">
+		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/forward.gif" align="absmiddle" />
+		<%= LanguageUtil.get(pageContext, "forward") %>
+	</td>
+	<td onclick="Mailbox.deleteSelectedMessages()">
+		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/delete.gif" align="absmiddle" />
+		<%= LanguageUtil.get(pageContext, "delete") %>
+	</td>
+	<td>
+		<span onclick="toggleById('portlet-mail-folder-select', false, '');">
+		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/reply.gif" align="absmiddle" />
+		<%= LanguageUtil.get(pageContext, "move-to") %></span><select id="portlet-mail-folder-select" class="font-x-small" style="display: none; margin-left: 5px;"></select>
+	</td>
+</tr>
+</table>
+<div id="portlet-mail-drafts-toolbar" style="padding: 5px; display: none;">
 	<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/edit_message" /></portlet:renderURL>">
-		Compose
+		New
 	</a> |
-	<a href="javascript: Mailbox.submitCompose('reply', document.<portlet:namespace />fm)">
-		Reply
-	</a> |
-	<a href="javascript: Mailbox.submitCompose('forward', document.<portlet:namespace />fm)">
-		Forward
-	</a> |
-	Print |
-	<a href="javascript:Mail.deleteSelectedMessages()">Delete</a> |
-	Move to
-	<select id="portlet-mail-folder-select">
-	</select>
+	<a href="javascript: Mailbox.submitCompose('edit', document.<portlet:namespace />fm)">
+		Edit
+	</a>
 </div>
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/edit_message" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm">
