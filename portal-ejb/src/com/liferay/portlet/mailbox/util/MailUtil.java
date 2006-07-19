@@ -354,8 +354,8 @@ public class MailUtil {
 		for (int i = 0; i < folders.length; i++) {
 			if ((folders[i].getType() & IMAPFolder.HOLDS_MESSAGES) != 0) {
 				MailFolder mf = new MailFolder(
-					folders[i].getNewMessageCount(), folders[i].getName(),
-					folders[i].getMessageCount());
+					folders[i].getMessageCount(), folders[i].getName(),
+					folders[i].getNewMessageCount());
 
 				list.add(mf);
 			}
