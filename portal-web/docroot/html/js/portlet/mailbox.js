@@ -246,7 +246,7 @@ var Mailbox = {
 	
 	getFolderDetails : function() {
 		var detailsFrame = document.getElementById("portlet-mail-msg-detailed-frame");
-		var mailHeader = document.getElementById("portlet-mail-msg-header");
+		var mailHeader = document.getElementById("portlet-mail-msg-header-div");
 		var folderDiv = document.createElement("div");
 		var totalDiv = document.createElement("div");
 		var unreadDiv = document.createElement("div");
@@ -326,7 +326,7 @@ var Mailbox = {
 	getMessageDetailsReturn : function(xmlHttpReq, messageId) {
 		
 		var messageObj = eval("(" + xmlHttpReq.responseText + ")");
-		var mailHeader = document.getElementById("portlet-mail-msg-header");
+		var mailHeader = document.getElementById("portlet-mail-msg-header-div");
 		var tempBody = document.createElement("div");
 		var msgHeader = document.createElement("div");
 		

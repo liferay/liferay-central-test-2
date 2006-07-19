@@ -82,6 +82,7 @@ String mailLineColor = "#b3b6b0";
 }
 
 #portlet-mail-msg-header { background-color: <%= colorScheme.getLayoutTabBg() %>; overflow: hidden; }
+#portlet-mail-msg-header-div { padding: 5px; }
 #portlet-mail-msg-detailed-pane {
 	overflow: hidden;
 	<%--
