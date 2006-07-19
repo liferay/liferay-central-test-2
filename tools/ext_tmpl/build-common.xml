@@ -171,7 +171,7 @@
 			<equals arg1="${app.server.type}" arg2="jonas-jetty" />
 			<then>
 				<copy
-					file="${war.file.dest}/WEB-INF/web-jetty.xml.JOnAS_Jetty"
+					file="${war.file.dest}/WEB-INF/web-jetty.xml.jonas-jetty"
 					tofile="${war.file.dest}/WEB-INF/web-jetty.xml"
 					overwrite="yes"
 				/>
