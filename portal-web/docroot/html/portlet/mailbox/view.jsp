@@ -104,6 +104,7 @@ String mailLineColor = "#b3b6b0";
 #portlet-mail-msgs-received { overflow: hidden; width: 200px; }
 #portlet-mail-msgs-received div { padding-left: 5px; width: 800px; position: relative; }
 
+#portlet-mail-msg-header { background-color: <%= colorScheme.getLayoutTabBg() %>; }
 #portlet-mail-msg-body { margin: 5px 5px 5px 10px; }
 
 </style>
@@ -175,7 +176,7 @@ String mailLineColor = "#b3b6b0";
 							<td class="portlet-mail-msgs-title">
 								<div id="portlet-mail-msgs-title-received">
 									<div class="portlet-mail-title-text">
-										<span><%= LanguageUtil.get(pageContext, "date") %></span><img src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_up.gif" />
+										<span><%= LanguageUtil.get(pageContext, "date") %></span>
 									</div>
 								</div>
 							</td>
@@ -215,6 +216,7 @@ String mailLineColor = "#b3b6b0";
 			</tr>
 			<tr>
 				<td class="portlet-mail-msgs-pane-td" width="100%">
+					<div id="portlet-mail-msg-header"></div>
 					<div id="portlet-mail-msgs-detailed-pane">
 						<div id="portlet-mail-msg-body">
 						</div>

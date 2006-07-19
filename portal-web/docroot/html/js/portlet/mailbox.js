@@ -222,7 +222,13 @@ var Mailbox = {
 	
 	getFolderDetails : function() {
 		var mailDetails = document.getElementById("portlet-mail-msg-body");
-		mailDetails.innerHTML = Mailbox.currentFolder.name + " ID: " + Mailbox.currentFolder.id;
+		var mailHeader = document.getElementById("portlet-mail-msg-header");
+		var folderDiv = document.createElement("div");
+		
+		folderDiv.innerHTML = Mailbox.currentFolder.name + " ID: " + Mailbox.currentFolder.id;
+		mailHeader.style.display = "none";
+		mailDetails.innerHTML = "";
+		mailDetails.appendChild(folderDiv);
 	},
 	
 	getFolders : function() {
@@ -264,7 +270,8 @@ var Mailbox = {
 	},
 	
 	getMessageDetails : function(messageId) {
-		if (!Mailbox.currentMessage || messageId != Mailbox.currentMessage.id) {
+	alert();
+		if (!Mailbox.currentMessage || messageId != Mailbox.currentMessageId) {
 			loadPage(themeDisplay.getPathMain() + "/mailbox/action",
 				"cmd=getMessage&messageId=" + messageId + "&folderId=" + Mailbox.currentFolder.id,
 				Mailbox.getMessageDetailsReturn, messageId);
@@ -275,18 +282,30 @@ var Mailbox = {
 	getMessageDetailsReturn : function(xmlHttpReq, messageId) {
 		var messageObj = eval("(" + xmlHttpReq.responseText + ")");
 		var mailDetails = document.getElementById("portlet-mail-msg-body");
+		var mailHeader = document.getElementById("portlet-mail-msg-header");
+		var tempBody = document.createElement("div");
+		var msgBody = document.createElement("div");
+		var msgHeader = document.createElement("div");
 		
 		Mailbox.currentMessage = messageObj;
-		Mailbox.currentMessage.id = messageId;
 		Mailbox.currentMessageId = messageId;
 		
-		mailDetails.innerHTML = messageObj.body;
+		msgBody.innerHTML = messageObj.body;
+		msgHeader.innerHTML = messageObj.header;
 		
-		var styles = mailDetails.getElementsByTagName("style");
+		var styles = msgBody.getElementsByTagName("style");
 		
 		for (var i = 0; i < styles.length; i++) {
 			styles[i].parentNode.removeChild(styles[i]);
 		}
+		
+		mailHeader.innerHTML = "";
+		mailHeader.style.display = "block";
+		mailHeader.appendChild(msgHeader);
+		mailDetails.innerHTML = "";
+		mailDetails.appendChild(msgBody);
+		
+		return;
 	},
 	
 	getPreview : function () {
@@ -339,7 +358,7 @@ var Mailbox = {
 		}
 		
 		if (Mailbox.currentMessage == null && Mailbox.currentMessageId != null) {
-			Mailbox.getMessageDetails(Mailbox.currentMessageId);
+			//Mailbox.getMessageDetails(Mailbox.currentMessageId);
 		}
 	},
 	
@@ -411,7 +430,8 @@ var Mailbox = {
 		msgsTitleReceived.asc = false;
 		msgsTitleReceived.value = "date";
 		msgsTitleFrom.onclick = msgsTitleSubject.onclick = msgsTitleReceived.onclick = Mailbox.onSortClick;
-		Mailbox.sortBy = msgsReceived;
+		Mailbox.sortBy = msgsTitleReceived;
+		Mailbox.updateSortArrow();
 		
 		if (is_ie) {
 			previewPane.onkeydown = Mailbox.onMailKeyPress;
@@ -769,24 +789,3 @@ var Mailbox = {
 		}
 	}
 }
-
-/*
-var mailObject = {"preview": [
-        {"sender": "Ming-Gih Lam", "subject": "How are you", "date": "July 4, 2006", "id" : "1"},
-        {"sender": "Brian Chan", "subject": "New mail up", "date": "July 5, 2006", "id" : "2"},
-        {"sender": "Wilson Man", "subject": "In Peru", "date": "Today", "id" : "3"},
-        {"sender": "Bryan Cheung", "subject": "Hola", "date": "Today", "id" : "4"},
-        {"sender": "Ed Chung", "subject": "News from EDIC", "date": "Today", "id" : "5"}
-    ]
-};
-
-var foldersObject = {"folders": [
-        {"name": "Inbox", "id" : "1"},
-        {"name": "Drafts", "id" : "2"},
-        {"name": "Junk", "id" : "3"},
-        {"name": "Sent", "id" : "4"},
-        {"name": "Staff", "id" : "5"},
-        {"name": "Support", "id" : "6"}
-    ]
-};
-*/
