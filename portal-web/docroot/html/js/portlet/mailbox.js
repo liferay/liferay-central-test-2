@@ -249,11 +249,22 @@ var Mailbox = {
 		var mailDetails = document.getElementById("portlet-mail-msg-body");
 		var mailHeader = document.getElementById("portlet-mail-msg-header");
 		var folderDiv = document.createElement("div");
+		var totalDiv = document.createElement("div");
+		var unreadDiv = document.createElement("div");
 		
-		folderDiv.innerHTML = Mailbox.currentFolder.name + " ID: " + Mailbox.currentFolder.id;
+		folderDiv.innerHTML = Mailbox.currentFolder.name + "<br /><br />";
+		folderDiv.style.fontWeight = "bold";
+		folderDiv.className = "font-xx-large";
+		if (Mailbox.currentFolder.newCount > 0) {
+			unreadDiv.innerHTML = Mailbox.currentFolder.newCount + "&nbsp;Unread";
+		}
+		totalDiv.innerHTML = Mailbox.currentFolder.totalCount + "&nbsp;Total";
+
 		mailHeader.style.display = "none";
 		mailDetails.innerHTML = "";
 		mailDetails.appendChild(folderDiv);
+		mailDetails.appendChild(unreadDiv);
+		mailDetails.appendChild(totalDiv);
 	},
 	
 	getFolders : function() {
