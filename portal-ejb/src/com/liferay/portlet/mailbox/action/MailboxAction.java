@@ -26,6 +26,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.SortedSet;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -39,6 +40,8 @@ import org.json.JSONObject;
 import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mailbox.util.MailEnvelope;
 import com.liferay.portlet.mailbox.util.MailFolder;
 import com.liferay.portlet.mailbox.util.MailMessage;
@@ -73,7 +76,7 @@ public class MailboxAction extends JSONAction {
 				rtString = _getFolders(req);
 			}
 			else if ("getMessage".equals(cmd)) {
-				rtString = _getMessage(req);
+				rtString = _getMessage(req, res);
 			}
 			else if ("getPreview".equals(cmd)) {
 				rtString = _getPreviewHeaders(req);
@@ -113,7 +116,7 @@ public class MailboxAction extends JSONAction {
 
 		for (int i = 0; i < folders.size(); i++) {
 			MailFolder folderObj = (MailFolder)folders.get(i);
-			JSONObject jFolderObj = new JSONObject();;
+			JSONObject jFolderObj = new JSONObject();
 
 			String folderName = folderObj.getName();
 
@@ -135,18 +138,25 @@ public class MailboxAction extends JSONAction {
 		return jsonObj.toString();
 	}
 
-	private String _getMessage(HttpServletRequest req) throws Exception {
+	private String _getMessage(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		JSONObject jsonObj = new JSONObject();
 
-		String folderId = ParamUtil.getString(req, "folderId");
 		long messageId = ParamUtil.getLong(req, "messageId");
+		String folderId = ParamUtil.getString(req, "folderId");
+		StringBuffer header = new StringBuffer();
+		ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
 
 		MailUtil.setCurrentFolder(req.getSession(), folderId);
 
 		MailMessage mm = MailUtil.getMessage(req.getSession(), messageId);
+		
+		req.setAttribute("mailMessage", mm);
+		
+		PortalUtil.renderPage(header, ctx, req, res, "/html/portlet/mailbox/message_details.jsp");
+		
 		jsonObj.put("body", mm.getHtmlBody());
-		jsonObj.put("id", messageId);
-
+		jsonObj.put("header", header.toString());
+		
 		return jsonObj.toString();
 	}
 

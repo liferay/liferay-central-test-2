@@ -111,9 +111,7 @@ public class MailUtil {
 			ses.removeAttribute(WebKeys.MAIL_STORE);
 		}
 		
-		if (ses.getAttribute(WebKeys.MAIL_MESSAGE) != null) {
-			ses.removeAttribute(WebKeys.MAIL_MESSAGE);
-		}
+		ses.removeAttribute(WebKeys.MAIL_MESSAGE);
 	}
 
 	public static void completeMessage(
@@ -662,6 +660,7 @@ public class MailUtil {
 			folder.open(IMAPFolder.READ_WRITE);
 
 			ses.setAttribute(WebKeys.MAIL_FOLDER, folder);
+			ses.removeAttribute(WebKeys.MAIL_MESSAGE);
 		}
 
 		return folder;
