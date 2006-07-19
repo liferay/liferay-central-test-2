@@ -339,6 +339,13 @@
 						includes="jms.jar,jta.jar"
 					/>
 				</copy>
+
+				<delete>
+					<fileset
+						dir="${app.server.lib.portal.dir}"
+						includes="xercesImpl.jar,xml-apis.jar"
+					/>
+				</delete>
 			</then>
 			<elseif>
 				<equals arg1="${app.server.type}" arg2="orion" />

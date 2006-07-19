@@ -105,13 +105,19 @@
 					<equals arg1="${war.file}" arg2="ext-web" />
 					<then>
 						<if>
-							<or>
-								<equals arg1="${app.server.type}" arg2="resin" />
-								<equals arg1="${app.server.type}" arg2="tomcat" />
-							</or>
+							<equals arg1="${app.server.type}" arg2="jetty" />
 							<then>
-								<property name="war.file.dest" value="${app.server.deploy.dir}/ROOT" />
+								<property name="war.file.dest" value="${app.server.deploy.dir}/root" />
 							</then>
+							<elseif>
+								<or>
+									<equals arg1="${app.server.type}" arg2="resin" />
+									<equals arg1="${app.server.type}" arg2="tomcat" />
+								</or>
+								<then>
+									<property name="war.file.dest" value="${app.server.deploy.dir}/ROOT" />
+								</then>
+							</elseif>
 							<else>
 								<property name="war.file.dest" value="${app.server.portal.dir}" />
 							</else>
@@ -164,9 +170,10 @@
 		<if>
 			<equals arg1="${app.server.type}" arg2="jonas-jetty" />
 			<then>
-				<move
+				<copy
 					file="${war.file.dest}/WEB-INF/web-jetty.xml.JOnAS_Jetty"
 					tofile="${war.file.dest}/WEB-INF/web-jetty.xml"
+					overwrite="yes"
 				/>
 			</then>
 			<elseif>
