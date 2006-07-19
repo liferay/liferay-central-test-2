@@ -270,7 +270,6 @@ var Mailbox = {
 	},
 	
 	getMessageDetails : function(messageId) {
-	alert();
 		if (!Mailbox.currentMessage || messageId != Mailbox.currentMessageId) {
 			loadPage(themeDisplay.getPathMain() + "/mailbox/action",
 				"cmd=getMessage&messageId=" + messageId + "&folderId=" + Mailbox.currentFolder.id,
