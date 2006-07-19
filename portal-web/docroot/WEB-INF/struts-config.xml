@@ -812,7 +812,11 @@
 		<action path="/mailbox/complete_message" type="com.liferay.portlet.mailbox.action.CompleteMessageAction">
 			<forward name="portlet.mailbox.view" path="portlet.mailbox.view" />
 		</action>
-
+		
+		<action path="/mailbox/view_message" type="com.liferay.portlet.mailbox.action.ViewMessageAction">
+			<forward name="portlet.mailbox.view_message" path="/portlet/mailbox/view_message.jsp" />
+		</action>
+		
 		<!-- Maps -->
 
 		<action path="/maps/view" forward="portlet.maps.view" name="mapsMapsForm" scope="request" />
