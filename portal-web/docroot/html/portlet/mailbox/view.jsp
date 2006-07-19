@@ -134,7 +134,7 @@ String mailLineColor = "#b3b6b0";
 		<%= LanguageUtil.get(pageContext, "reply") %>
 	</td>
 	<td onclick="Mailbox.submitCompose('replyAll', document.<portlet:namespace />fm)">
-		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/reply.gif" align="absmiddle" />
+		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/reply_all.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "reply-all") %>
 	</td>
 	<td onclick="Mailbox.submitCompose('forward', document.<portlet:namespace />fm)">
@@ -145,10 +145,9 @@ String mailLineColor = "#b3b6b0";
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/delete.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "delete") %>
 	</td>
-	<td>
-		<span onclick="toggleById('portlet-mail-folder-select', false, '');">
-		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/reply.gif" align="absmiddle" />
-		<%= LanguageUtil.get(pageContext, "move-to") %></span><select id="portlet-mail-folder-select" class="font-x-small" style="display: none; margin-left: 5px;"></select>
+	<td onmouseover="document.getElementById('portlet-mail-folder-select').style.display='';">
+		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/move.gif" align="absmiddle" />
+		<%= LanguageUtil.get(pageContext, "move-to") %><select id="portlet-mail-folder-select" class="font-x-small" style="display: none; margin-left: 5px;"></select>
 	</td>
 </tr>
 </table>
@@ -160,7 +159,7 @@ String mailLineColor = "#b3b6b0";
 		<%= LanguageUtil.get(pageContext, "new") %>
 	</td>
 	<td onclick="Mailbox.submitCompose('Edit', document.<portlet:namespace />fm)">
-		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/reply.gif" align="absmiddle" />
+		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/edit_draft.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "edit") %>
 	</td>
 </tr>
