@@ -108,6 +108,18 @@
 	</target>
 
 	<target name="war-module">
+		<copy todir="${module.name}.war/WEB-INF/lib">
+			<fileset
+				dir="${project.dir}/lib/portal"
+				includes="commons-logging.jar,log4j.jar"
+			/>
+		</copy>
+
+		<copy
+			file="${project.dir}/portal-ejb/classes/META-INF/portal-log4j.xml"
+			tofile="${module.name}.war/WEB-INF/classes/log4j.xml"
+		/>
+
 		<war
 			basedir="${module.name}.war"
 			destfile="../${module.name}-${lp.version.file.name}.war"
