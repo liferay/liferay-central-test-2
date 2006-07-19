@@ -81,15 +81,23 @@ String mailLineColor = "#b3b6b0";
 	height: 5px;
 }
 
-#portlet-mail-msgs-detailed-pane {
-	height: 200px;
+#portlet-mail-msg-header { background-color: <%= colorScheme.getLayoutTabBg() %>; overflow: hidden; }
+#portlet-mail-msg-detailed-pane {
 	overflow: hidden;
+	<%--
 	<c:if test="<%= BrowserSniffer.is_ie(request) %>">
 		overflow-y: auto;
 	</c:if>
 	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
 		overflow: -moz-scrollbars-vertical;
 	</c:if>
+	--%>
+}
+#portlet-mail-msg-frame-div {
+	margin-left: 20px;
+}
+#portlet-mail-msg-detailed-frame {
+	height: 200px;
 }
 
 .portlet-mail-title-text span { padding-right: 5px; }
@@ -145,7 +153,7 @@ String mailLineColor = "#b3b6b0";
 </tr>
 </table>
 
-<table id="portlet-mail-drafts-toolbar" class="portlet-mail-toolbar" cellspacing="2" cellpadding="3" border="0">
+<table id="portlet-mail-drafts-toolbar" class="portlet-mail-toolbar" cellspacing="2" cellpadding="3" border="0" style="display: none">
 <tr valign="middle">
 	<td onclick="location.href='<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/edit_message" /></portlet:renderURL>'">
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/compose.gif" align="absmiddle" />
@@ -249,11 +257,14 @@ String mailLineColor = "#b3b6b0";
 			</tr>
 			<tr>
 				<td class="portlet-mail-msgs-pane-td" width="100%">
-					<div id="portlet-mail-msg-header"></div>
-					<div id="portlet-mail-msgs-detailed-pane">
-						<div id="portlet-mail-msg-body">
+						<div id="portlet-mail-msg-header">
+							<div id="portlet-mail-msg-header-div"></div>
 						</div>
-					</div>
+						<div id="portlet-mail-msg-detailed-pane">
+							<div id="portlet-mail-msg-frame-div">
+								<iframe id="portlet-mail-msg-detailed-frame" frameborder="0" scrolling="no" src="" width="100%"></iframe>
+							</div>
+						</div>
 				</td>
 			</tr>
 			</table>
@@ -261,6 +272,8 @@ String mailLineColor = "#b3b6b0";
 	</td>
 </tr>
 </table>
+						<div id="portlet-mail-msg-body">
+						</div>
 
 <%
 	String folderId = (String)request.getAttribute("folderId");

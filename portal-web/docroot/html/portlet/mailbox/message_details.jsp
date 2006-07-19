@@ -37,7 +37,7 @@ Address bcc[] = mm.getBcc();
 Address []to = mm.getTo();
 
 %>
-<div style="padding: 5px; background-color: <%= colorScheme.getLayoutTabBg() %>;">
+<div>
 	<div style="font-weight: bold"><%= mm.getSubject() %></div>
 	<table cellpadding="0" cellspacing="0" border="0" class="font-small">
 	<tr>

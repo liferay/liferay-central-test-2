@@ -250,7 +250,7 @@ var Mailbox = {
 		var totalDiv = document.createElement("div");
 		var unreadDiv = document.createElement("div");
 		
-		folderDiv.innerHTML = Mailbox.currentFolder.name + "<br /><br />";
+		folderDiv.innerHTML = Mailbox.currentFolder.name;
 		folderDiv.style.fontWeight = "bold";
 		folderDiv.className = "font-xx-large";
 		if (Mailbox.currentFolder.newCount > 0) {
@@ -258,11 +258,11 @@ var Mailbox = {
 		}
 		totalDiv.innerHTML = Mailbox.currentFolder.totalCount + "&nbsp;Total";
 
-		mailHeader.style.display = "none";
-		mailDetails.innerHTML = "";
-		mailDetails.appendChild(folderDiv);
-		mailDetails.appendChild(unreadDiv);
-		mailDetails.appendChild(totalDiv);
+		mailDetails.src = "";
+		mailHeader.innerHTML = "";
+		mailHeader.appendChild(folderDiv);
+		mailHeader.appendChild(unreadDiv);
+		mailHeader.appendChild(totalDiv);
 	},
 	
 	getFolders : function() {
@@ -313,6 +313,7 @@ var Mailbox = {
 	},
 	
 	getMessageDetails : function(messageId) {
+		
 		if (!Mailbox.currentMessage || messageId != Mailbox.currentMessageId) {
 			loadPage(themeDisplay.getPathMain() + "/mailbox/action",
 				"cmd=getMessage&messageId=" + messageId + "&folderId=" + Mailbox.currentFolder.id,
@@ -322,6 +323,7 @@ var Mailbox = {
 	},
 	
 	getMessageDetailsReturn : function(xmlHttpReq, messageId) {
+		
 		var messageObj = eval("(" + xmlHttpReq.responseText + ")");
 		var mailDetails = document.getElementById("portlet-mail-msg-body");
 		var mailHeader = document.getElementById("portlet-mail-msg-header");
@@ -342,7 +344,6 @@ var Mailbox = {
 		}
 		
 		mailHeader.innerHTML = "";
-		mailHeader.style.display = "block";
 		mailHeader.appendChild(msgHeader);
 		mailDetails.innerHTML = "";
 		mailDetails.appendChild(msgBody);
@@ -359,6 +360,13 @@ var Mailbox = {
 		
 			Mailbox.lastSelected.recent = false;
 		}
+
+		var iframe = document.getElementById("portlet-mail-msg-detailed-frame");
+
+		iframe.src = "";
+		iframe.src = "/c/mailbox/view_message?noCache=" + (new Date()).getTime();
+		//window.frames["portlet-mail-msg-detailed-pane"].location = "/c/mailbox/view_message?noCache=" + (new Date()).getTime();
+		return;
 	},
 	
 	getPreview : function () {
@@ -452,7 +460,9 @@ var Mailbox = {
 		
 		var previewPane = document.getElementById("portlet-mail-msgs-preview-pane");
 		var previewHandle = document.getElementById("portlet-mail-msgs-handle");
-		var detailedPane = document.getElementById("portlet-mail-msgs-detailed-pane");
+		var detailedPane = document.getElementById("portlet-mail-msg-detailed-pane");
+		var detailedFrame = document.getElementById("portlet-mail-msg-detailed-frame");
+		var msgHeader = document.getElementById("portlet-mail-msg-header");
 		
 		var msgsTitleFrom = document.getElementById("portlet-mail-msgs-title-from");
 		var msgsTitleFromHandle = document.getElementById("portlet-mail-msgs-from-handle");
@@ -468,10 +478,11 @@ var Mailbox = {
 		mainMailGroup.addRule(new ResizeRule(folderPane, Resize.HORIZONTAL, Resize.ADD));
 		mainMailGroup.addRule(new ResizeRule(previewPane, Resize.HORIZONTAL, Resize.SUBTRACT));
 		mainMailGroup.addRule(new ResizeRule(detailedPane, Resize.HORIZONTAL, Resize.SUBTRACT));
+		mainMailGroup.addRule(new ResizeRule(msgHeader, Resize.HORIZONTAL, Resize.SUBTRACT));
 		
 		var msgsGroup = Resize.createHandle(previewHandle);
 		msgsGroup.addRule(new ResizeRule(previewPane, Resize.VERTICAL, Resize.ADD));
-		msgsGroup.addRule(new ResizeRule(detailedPane, Resize.VERTICAL, Resize.SUBTRACT));
+		msgsGroup.addRule(new ResizeRule(detailedFrame, Resize.VERTICAL, Resize.SUBTRACT));
 		
 		var fromGroup = Resize.createHandle(msgsTitleFromHandle);
 		fromGroup.addRule(new ResizeRule(msgsTitleFrom, Resize.HORIZONTAL, Resize.ADD));

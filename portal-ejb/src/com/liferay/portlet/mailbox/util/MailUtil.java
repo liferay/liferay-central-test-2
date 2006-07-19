@@ -323,6 +323,10 @@ public class MailUtil {
 		}
 	}
 
+	public static Long getCurrentMessageId(HttpSession ses) {
+		return (Long)ses.getAttribute(WebKeys.MAIL_MESSAGE);
+	}
+	
 	public static Long getCurrentMessageId(PortletSession ses) {
 		return (Long)ses.getAttribute(
 			WebKeys.MAIL_MESSAGE, PortletSession.APPLICATION_SCOPE);
