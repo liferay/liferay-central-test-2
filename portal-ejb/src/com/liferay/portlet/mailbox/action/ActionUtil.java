@@ -22,25 +22,21 @@
 package com.liferay.portlet.mailbox.action;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.mail.Address;
-import javax.mail.internet.InternetAddress;
 import javax.servlet.http.HttpSession;
 
 import com.liferay.portal.util.ContentTypeUtil;
+import com.liferay.portal.util.InternetAddressUtil;
 import com.liferay.portlet.mailbox.util.MailAttachment;
 import com.liferay.portlet.mailbox.util.MailMessage;
 import com.liferay.portlet.mailbox.util.MailUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.StringPool;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.UploadPortletRequest;
 
 /**
@@ -59,9 +55,9 @@ public class ActionUtil {
 
 		MailMessage mm = new MailMessage();
 		mm.setFrom(from);
-		mm.setTo(getAddresses(tos));
-		mm.setCc(getAddresses(ccs));
-		mm.setBcc(getAddresses(bccs));
+		mm.setTo(InternetAddressUtil.getAddresses(tos));
+		mm.setCc(InternetAddressUtil.getAddresses(ccs));
+		mm.setBcc(InternetAddressUtil.getAddresses(bccs));
 		mm.setSubject(subject);
 		mm.setHtmlBody(body);
 		mm.setMessageUID(draftMessageUID);
@@ -80,66 +76,6 @@ public class ActionUtil {
 		}
 
 		MailUtil.completeMessage(ses, mm, send);
-	}
-	
-	public static InternetAddress [] getAddresses(String mailingList)
-		throws Exception {
-		
-		String [] entries = mailingList.split(",|;");
-
-		List addresses = new ArrayList();
-		for (int i = 0; i < entries.length; i++) {
-			String entry = entries[i].trim();
-			if (Validator.isNotNull(entry)) {
-				addresses.add(getAddress(entry));
-			}
-		}
-
-		return (InternetAddress [])addresses.toArray(new InternetAddress [] {});
-	}
-
-	public static InternetAddress getAddress(String entry) throws Exception {
-		InternetAddress ia = new InternetAddress();
-
-		String [] parts = entry.split(StringPool.LESS_THAN);
-
-		if (parts.length == 2) {
-			String name = parts[0].trim();
-
-			if (name.endsWith(StringPool.QUOTE) ||
-				name.endsWith(StringPool.APOSTROPHE)) {
-				name = name.substring(0, name.length() - 1);
-			}
-
-			if (name.startsWith(StringPool.QUOTE) ||
-				name.startsWith(StringPool.APOSTROPHE)) {
-				name = name.substring(1);
-			}
-
-			String address = parts[1].trim();
-
-			if (address.endsWith(StringPool.GREATER_THAN)) {
-				address = address.substring(0, address.length() - 1);
-			}
-
-			if (!Validator.isAddress(address)) {
-				// throw exception
-			}
-
-			ia.setAddress(address.trim());
-			ia.setPersonal(name.trim());
-		}
-		else if (parts.length == 1) {
-			if (!Validator.isAddress(parts[0])) {
-				// throw exception
-			}
-			ia.setAddress(parts[0].trim());
-		}
-		else {
-			// throw exception
-		}
-
-		return ia;
 	}
 
 	public static Map getAttachments(UploadPortletRequest uploadReq) 

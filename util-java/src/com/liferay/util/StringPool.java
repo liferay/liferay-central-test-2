@@ -62,6 +62,8 @@ public class StringPool {
 
 	public static final String LESS_THAN = "<";
 
+	public static final String NBSP = "&nbsp;";
+
 	public static final String NEW_LINE = "\n";
 
 	public static final String NOT_EQUAL = "!=";

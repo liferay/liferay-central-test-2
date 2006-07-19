@@ -50,14 +50,19 @@ public class Validator {
 			return false;
 		}
 
-		char[] c = address.toCharArray();
+		String [] tokens = address.split(StringPool.AT);
 
-		for (int i = 0; i < c.length; i++) {
-			if ((!isChar(c[i])) &&
-				(!isDigit(c[i])) &&
-				(!Character.isWhitespace(c[i]))) {
+		if (tokens.length != 2) {
+			return false;
+		}
 
-				return false;
+		for (int i = 0; i < tokens.length; i++) {
+			char[] c = tokens[i].toCharArray();
+
+			for (int j = 0; j < c.length; j++) {
+				if (Character.isWhitespace(c[j])) {
+					return false;
+				}
 			}
 		}
 

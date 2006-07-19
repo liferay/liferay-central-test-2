@@ -22,15 +22,27 @@
 
 package com.liferay.portlet.mailbox.action;
 
-import com.liferay.portal.struts.PortletAction;
-import com.liferay.util.ParamUtil;
+import java.text.DateFormat;
 
+import com.liferay.portal.model.User;
+import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.DateFormats;
+import com.liferay.portal.util.InternetAddressUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.RenderRequestImpl;
+import com.liferay.portlet.mailbox.util.MailMessage;
+import com.liferay.portlet.mailbox.util.MailUtil;
+import com.liferay.util.ParamUtil;
+import com.liferay.util.StringPool;
+import com.liferay.util.Validator;
+
+import javax.mail.internet.InternetAddress;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -50,20 +62,84 @@ public class EditMessageAction extends PortletAction {
 		throws Exception {
 
 		String composeAction = ParamUtil.getString(req, "composeAction");
-		String messageId = ParamUtil.getString(req, "messageId");
+		long messageId = ParamUtil.getLong(req, "messageId");
 		String folderId = ParamUtil.getString(req, "folderId");
 
+		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
+		HttpServletRequest svltReq = reqImpl.getHttpServletRequest();
+
+		MailMessage mm = 
+			MailUtil.getMessage(svltReq.getSession(), folderId, messageId);
+
+		User user = PortalUtil.getUser(req);
+		DateFormat dateFormatter = 
+			DateFormats.getDateTime(user.getLocale(), user.getTimeZone());
+		req.setAttribute(WebKeys.MAIL_MESSAGE, _buildBody(mm, dateFormatter));
+
 		if ("reply".equals(composeAction)) {
-			// Reply to message
+			String userEmail = PortalUtil.getUser(req).getEmailAddress();
+
+			InternetAddress [] tos = (InternetAddress [])mm.getTo();
+			InternetAddress [] ccs = (InternetAddress [])mm.getCc();
+			InternetAddress [] rtos = (InternetAddress [])mm.getReplyTo();
+
+			tos = InternetAddressUtil.removeEntries(tos, userEmail);
+			ccs = InternetAddressUtil.removeEntries(ccs, userEmail);
+			
+			String tosStr = InternetAddressUtil.toString(tos);
+			String rtosStr = InternetAddressUtil.toString(rtos);
+			String ccsStr = InternetAddressUtil.toString(ccs);
+			
+			if (Validator.isNotNull(rtosStr)) {
+				tosStr = rtosStr + StringPool.COMMA + StringPool.SPACE + tosStr;
+			}
+
+			String [] recipients = { tosStr, ccsStr };
+
+			req.setAttribute(WebKeys.MAIL_RECIPIENTS, recipients);
+			req.setAttribute(WebKeys.MAIL_SUBJECT, 
+				"Re: " + _removeSubjectPrefix(mm.getSubject()));
 		}
 		else if ("forward".equals(composeAction)) {
-			// Forward message
+			req.setAttribute(WebKeys.MAIL_SUBJECT,
+				"Fw: " + _removeSubjectPrefix(mm.getSubject()));
 		}
-
+		
 		return mapping.findForward(
 			getForward(req, "portlet.mailbox.edit_message"));
 	}
 
-	private static Log _log = LogFactory.getLog(EditMessageAction.class);
+	private String _buildBody(MailMessage mm, DateFormat dateFormatter) {
+		InternetAddress from = ((InternetAddress)mm.getFrom());
+
+		StringBuffer body = new StringBuffer();
+		body.append("<br /><br />On " + dateFormatter.format(mm.getSentDate()));
+		body.append(StringPool.COMMA + StringPool.NBSP + from.getPersonal());
+		body.append("&lt;<a href=\"" + from.getAddress() + "\">");
+		body.append(from.getAddress() + "</a>&gt; wrote:<br />");
+		body.append("<div style=\"");
+		body.append("border-left: 1px solid rgb(204, 204, 204); ");
+		body.append("margin: 0pt 0pt 0pt 1ex; ");
+		body.append("padding-left: 1ex; \">");
+		body.append(mm.getHtmlBody() + "</div>");;
+
+		return body.toString();
+	}
+
+	private String _removeSubjectPrefix(String subject) {
+		if (Validator.isNotNull(subject)) {
+			String subjectLowerCase = subject.toLowerCase(); 
+			while (subjectLowerCase.startsWith("re:") || 
+				subjectLowerCase.startsWith("re>") || 
+				subjectLowerCase.startsWith("fw:") || 
+				subjectLowerCase.startsWith("fw>"))	{
+	
+				subject = subject.substring(3).trim();
+				subjectLowerCase = subject.toLowerCase();
+			}
+		}
+		
+		return subject;
+	}
 
 }

@@ -27,6 +27,7 @@ import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.mail.Address;
@@ -53,6 +54,14 @@ public class MailMessage {
 
 	public void setTo(Address [] to) {
 		_to = to;
+	}
+
+	public Address [] getReplyTo() {
+		return _replyTo;
+	}
+
+	public void setReplyTo(Address [] replyTo) {
+		_replyTo = replyTo;
 	}
 
 	public Address [] getCc() {
@@ -131,6 +140,14 @@ public class MailMessage {
     	_messageUID = messageUID;
     }
 
+    public Date getSentDate() {
+    	return _sentDate;
+    }
+    
+    public void setSentDate(Date sentDate) {
+    	_sentDate = sentDate;
+    }
+    
 	public List getAttachments() {
 		return _attachments;
 	}
@@ -154,6 +171,8 @@ public class MailMessage {
 
 	private Address [] _bcc;
 
+	private Address [] _replyTo;
+
 	private String _subject;
 
 	private String _plainBody;
@@ -161,6 +180,8 @@ public class MailMessage {
 	private String _htmlBody;
 	
 	private long _messageUID;
+	
+	private Date _sentDate;
 
 	private List _attachments = new ArrayList();
 

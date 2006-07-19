@@ -363,6 +363,14 @@ public class MailUtil {
         return envelopes;
 	}
 
+	public static MailMessage getMessage(
+			HttpSession ses, String folderName, long messageUID)
+		throws Exception {
+
+		setCurrentFolder(ses, folderName);
+		return getMessage(ses, messageUID);
+	}
+	
 	public static MailMessage getMessage(HttpSession ses, long messageUID)
 		throws Exception {
 
@@ -378,6 +386,8 @@ public class MailUtil {
 			mm.setTo(message.getRecipients(RecipientType.TO));
 			mm.setCc(message.getRecipients(RecipientType.CC));
 			mm.setBcc(message.getRecipients(RecipientType.BCC));
+			mm.setSentDate(message.getSentDate());
+			mm.setReplyTo(message.getReplyTo());
 			mm = _getContent(message, mm);
 
 			MailUtil._setCurrentMessage(ses, messageUID);

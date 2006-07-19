@@ -28,8 +28,17 @@ public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.
 %>
 <%
 String editorUrl = themeDisplay.getPathJavaScript() + "/editor/editor.jsp?p_l_id=" + plid + "&editorImpl=" + PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) + "&initMethod=initEditor";
-String content = "test";
 Long messageId = (Long)request.getAttribute("messageId");
+
+String [] recipients = (String [])request.getAttribute(WebKeys.MAIL_RECIPIENTS);
+String tos = "";
+String ccs = "";
+if (recipients != null && recipients.length == 2) {
+	tos = recipients[0];
+	ccs = recipients[1];
+}
+String subject = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_SUBJECT));
+String content = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_MESSAGE));
 %>
 
 <script type="text/javascript">
@@ -119,11 +128,11 @@ Long messageId = (Long)request.getAttribute("messageId");
 	<table cellpadding="0" cellspacing="2" border="0">
 	<tr>
 		<td><b><%= LanguageUtil.get(pageContext, "to") %>:</b></td>
-		<td><input class="portlet-form-input-field" name="<portlet:namespace />tos" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" /></td>
+		<td><input class="portlet-form-input-field" name="<portlet:namespace />tos" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= tos %>" /></td>
 	</tr>
 	<tr>
 		<td><b><%= LanguageUtil.get(pageContext, "cc") %>:</b></td>
-		<td><input class="portlet-form-input-field" name="<portlet:namespace />ccs" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" /></td>
+		<td><input class="portlet-form-input-field" name="<portlet:namespace />ccs" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= ccs %>" /></td>
 	</tr>
 	<tr>
 		<td><b><%= LanguageUtil.get(pageContext, "bcc") %>:</b></td>
@@ -131,7 +140,7 @@ Long messageId = (Long)request.getAttribute("messageId");
 	</tr>
 	<tr>
 		<td><b><%= LanguageUtil.get(pageContext, "subject") %>:</b></td>
-		<td><input class="portlet-form-input-field" name="<portlet:namespace />subject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" /></td>
+		<td><input class="portlet-form-input-field" name="<portlet:namespace />subject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= subject %>" /></td>
 	</tr>
 	<tr>
 		<td valign="top"><b><%= LanguageUtil.get(pageContext, "attachments") %>:</b></td>
