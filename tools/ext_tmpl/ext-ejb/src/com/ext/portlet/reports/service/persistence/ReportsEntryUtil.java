@@ -96,6 +96,11 @@ public class ReportsEntryUtil {
         return getPersistence().findByPrimaryKey(entryId);
     }
 
+    public static com.ext.portlet.reports.model.ReportsEntry fetchByPrimaryKey(
+        java.lang.String entryId) throws com.liferay.portal.SystemException {
+        return getPersistence().fetchByPrimaryKey(entryId);
+    }
+
     public static java.util.List findByCompanyId(java.lang.String companyId)
         throws com.liferay.portal.SystemException {
         return getPersistence().findByCompanyId(companyId);

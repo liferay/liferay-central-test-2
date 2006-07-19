@@ -63,7 +63,6 @@ public class ReportsEntryModel extends BaseModel {
             }
 
             _entryId = entryId;
-            setModified(true);
         }
     }
 
@@ -81,7 +80,6 @@ public class ReportsEntryModel extends BaseModel {
             }
 
             _companyId = companyId;
-            setModified(true);
         }
     }
 
@@ -99,7 +97,6 @@ public class ReportsEntryModel extends BaseModel {
             }
 
             _userId = userId;
-            setModified(true);
         }
     }
 
@@ -117,7 +114,6 @@ public class ReportsEntryModel extends BaseModel {
             }
 
             _userName = userName;
-            setModified(true);
         }
     }
 
@@ -131,7 +127,6 @@ public class ReportsEntryModel extends BaseModel {
                 ((createDate != null) && (_createDate != null) &&
                 !createDate.equals(_createDate))) {
             _createDate = createDate;
-            setModified(true);
         }
     }
 
@@ -145,7 +140,6 @@ public class ReportsEntryModel extends BaseModel {
                 ((modifiedDate != null) && (_modifiedDate != null) &&
                 !modifiedDate.equals(_modifiedDate))) {
             _modifiedDate = modifiedDate;
-            setModified(true);
         }
     }
 
@@ -162,7 +156,6 @@ public class ReportsEntryModel extends BaseModel {
             }
 
             _name = name;
-            setModified(true);
         }
     }
 

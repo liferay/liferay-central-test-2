@@ -151,40 +151,9 @@
 	</target>
 
 	<target name="deploy" depends="jar">
-		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-			</or>
-			<then>
-				<unjar src="${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
-			</then>
-			<elseif>
-				<or>
-					<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-					<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-				</or>
-				<then>
-					<copy file="${jar.file}.jar" todir="${app.server.portal.dir}" />
-
-					<jar
-						basedir="."
-						destfile="${app.server.portal.dir}/${jar.file}.jar"
-						manifest="classes/META-INF/MANIFEST.MF.JOnAS"
-						update="yes"
-					/>
-				</then>
-			</elseif>
-			<elseif>
-				<equals arg1="${app.server.type}" arg2="orion" />
-				<then>
-					<copy file="${jar.file}.jar" todir="${app.server.deploy.dir}" />
-				</then>
-			</elseif>
-			<else>
-				<copy file="${jar.file}.jar" todir="${app.server.lib.portal.dir}" />
-			</else>
-		</if>
+		<antcall target="deploy-ejb-jar">
+			<param name="modules.dir" value="" />
+		</antcall>
 	</target>
 
 	<target name="build-ejbxml">

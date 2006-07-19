@@ -17,7 +17,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -44,8 +43,11 @@ public class ReportsEntryPersistence extends BasePersistence {
                     entryId);
 
             if (reportsEntry == null) {
-                _log.warn("No ReportsEntry exists with the primary key " +
-                    entryId.toString());
+                if (_log.isWarnEnabled()) {
+                    _log.warn("No ReportsEntry exists with the primary key " +
+                        entryId.toString());
+                }
+
                 throw new NoSuchEntryException(
                     "No ReportsEntry exists with the primary key " +
                     entryId.toString());
@@ -68,49 +70,10 @@ public class ReportsEntryPersistence extends BasePersistence {
         Session session = null;
 
         try {
-            if (reportsEntry.isNew() || reportsEntry.isModified()) {
-                session = openSession();
-
-                if (reportsEntry.isNew()) {
-                    ReportsEntry reportsEntryModel = new ReportsEntry();
-                    reportsEntryModel.setEntryId(reportsEntry.getEntryId());
-                    reportsEntryModel.setCompanyId(reportsEntry.getCompanyId());
-                    reportsEntryModel.setUserId(reportsEntry.getUserId());
-                    reportsEntryModel.setUserName(reportsEntry.getUserName());
-                    reportsEntryModel.setCreateDate(reportsEntry.getCreateDate());
-                    reportsEntryModel.setModifiedDate(reportsEntry.getModifiedDate());
-                    reportsEntryModel.setName(reportsEntry.getName());
-                    session.save(reportsEntryModel);
-                    session.flush();
-                } else {
-                    ReportsEntry reportsEntryModel = (ReportsEntry) session.get(ReportsEntry.class,
-                            reportsEntry.getPrimaryKey());
-
-                    if (reportsEntryModel != null) {
-                        reportsEntryModel.setCompanyId(reportsEntry.getCompanyId());
-                        reportsEntryModel.setUserId(reportsEntry.getUserId());
-                        reportsEntryModel.setUserName(reportsEntry.getUserName());
-                        reportsEntryModel.setCreateDate(reportsEntry.getCreateDate());
-                        reportsEntryModel.setModifiedDate(reportsEntry.getModifiedDate());
-                        reportsEntryModel.setName(reportsEntry.getName());
-                        session.flush();
-                    } else {
-                        reportsEntryModel = new ReportsEntry();
-                        reportsEntryModel.setEntryId(reportsEntry.getEntryId());
-                        reportsEntryModel.setCompanyId(reportsEntry.getCompanyId());
-                        reportsEntryModel.setUserId(reportsEntry.getUserId());
-                        reportsEntryModel.setUserName(reportsEntry.getUserName());
-                        reportsEntryModel.setCreateDate(reportsEntry.getCreateDate());
-                        reportsEntryModel.setModifiedDate(reportsEntry.getModifiedDate());
-                        reportsEntryModel.setName(reportsEntry.getName());
-                        session.save(reportsEntryModel);
-                        session.flush();
-                    }
-                }
-
-                reportsEntry.setNew(false);
-                reportsEntry.setModified(false);
-            }
+            session = openSession();
+            session.saveOrUpdate(reportsEntry);
+            session.flush();
+            reportsEntry.setNew(false);
 
             return reportsEntry;
         } catch (HibernateException he) {
@@ -131,14 +94,32 @@ public class ReportsEntryPersistence extends BasePersistence {
                     entryId);
 
             if (reportsEntry == null) {
-                _log.warn("No ReportsEntry exists with the primary key " +
-                    entryId.toString());
+                if (_log.isWarnEnabled()) {
+                    _log.warn("No ReportsEntry exists with the primary key " +
+                        entryId.toString());
+                }
+
                 throw new NoSuchEntryException(
                     "No ReportsEntry exists with the primary key " +
                     entryId.toString());
             }
 
             return reportsEntry;
+        } catch (HibernateException he) {
+            throw new SystemException(he);
+        } finally {
+            closeSession(session);
+        }
+    }
+
+    public ReportsEntry fetchByPrimaryKey(String entryId)
+        throws SystemException {
+        Session session = null;
+
+        try {
+            session = openSession();
+
+            return (ReportsEntry) session.get(ReportsEntry.class, entryId);
         } catch (HibernateException he) {
             throw new SystemException(he);
         } finally {
@@ -173,9 +154,7 @@ public class ReportsEntryPersistence extends BasePersistence {
                 q.setString(queryPos++, companyId);
             }
 
-            List list = q.list();
-
-            return list;
+            return q.list();
         } catch (HibernateException he) {
             throw new SystemException(he);
         } finally {
@@ -340,9 +319,7 @@ public class ReportsEntryPersistence extends BasePersistence {
                 q.setString(queryPos++, userId);
             }
 
-            List list = q.list();
-
-            return list;
+            return q.list();
         } catch (HibernateException he) {
             throw new SystemException(he);
         } finally {

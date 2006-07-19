@@ -44,82 +44,14 @@
 	</target>
 
 	<target name="deploy-ejb-jar">
-		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-			</or>
-			<then>
-				<unjar src="modules/${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
-			</then>
-			<elseif>
-				<or>
-					<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-					<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-				</or>
-				<then>
-					<copy file="modules/${jar.file}.jar" todir="${app.server.portal.dir}" />
-
-					<jar
-						basedir="."
-						destfile="${app.server.portal.dir}/${jar.file}.jar"
-						manifest="classes/META-INF/MANIFEST.MF.JOnAS"
-						update="yes"
-					/>
-				</then>
-			</elseif>
-			<elseif>
-				<equals arg1="${app.server.type}" arg2="orion" />
-				<then>
-					<copy file="modules/${jar.file}.jar" todir="${app.server.deploy.dir}" />
-				</then>
-			</elseif>
-			<else>
-				<copy file="modules/${jar.file}.jar" todir="${app.server.lib.portal.dir}" />
-			</else>
-		</if>		
+		<antcall target="ext-common.deploy-ejb-jar">
+			<param name="modules.dir" value="modules/" />
+		</antcall>
 	</target>
 
 	<target name="deploy-war">
-		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-			</or>
-			<then>
-				<property name="war.file.dest" value="${app.server.portal.dir}/${war.file}.war" />
-			</then>
-			<else>
-				<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}" />
-			</else>
-		</if>
-
-		<if>
-			<equals arg1="${app.server.type}" arg2="orion" />
-			<then>
-				<copy file="modules/${war.file}.war" todir="${app.server.deploy.dir}" />
-			</then>
-			<else>
-				<unwar src="modules/${war.file}.war" dest="${war.file.dest}" />
-			</else>
-		</if>
-
-		<if>
-			<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-			<then>
-				<move
-					file="${war.file.dest}/WEB-INF/web-jetty.xml.JOnAS_Jetty"
-					tofile="${war.file.dest}/WEB-INF/web-jetty.xml"
-				/>
-			</then>
-			<elseif>
-				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-				<then>
-					<delete file="${war.file.dest}/META-INF/context.xml" />
-				</then>
-			</elseif>
-		</if>
+		<antcall target="ext-common.deploy-war">
+			<param name="modules.dir" value="modules/" />
+		</antcall>
 	</target>
 </project>
