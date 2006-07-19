@@ -11,6 +11,7 @@
 		<antcall target="compile" />
 
 		<ant dir="sql" target="build-db" inheritAll="false" />
+		<ant dir="sql" target="load-db" inheritAll="false" />
 		
 		<ant dir="portal-ejb" target="build-newscategories" inheritAll="false" />
 		<ant dir="portal-ejb" target="build-reverendfun" inheritAll="false" />
@@ -400,7 +401,7 @@
 
 				<copy todir="${app.server.dir}/server/default/lib">
 					<fileset
-						dir="lib"
+						dir="lib/portal"
 						includes="commons-collections.jar"
 					/>
 				</copy>
@@ -421,7 +422,13 @@
 					Logging and Hypersonic.
 					-->
 
-					<delete file="${app.server.dir}/ext/commons-logging.jar" />
+					<copy todir="${app.server.dir}/ext" overwrite="yes">
+						<fileset
+							dir="lib/portal"
+							includes="commons-logging.jar"
+						/>
+					</copy>
+
 					<delete file="${app.server.dir}/extra/ext/hsqldb.jar" />
 				</then>
 			</elseif>

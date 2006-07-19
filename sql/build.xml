@@ -33,9 +33,9 @@
 			classname="com.liferay.portal.tools.DBLoader"
 			classpathref="project.classpath"
 			fork="true"
+			maxmemory="256m"
 			newenvironment="true"
 		>
-			<jvmarg value="-Xmx128m" />
 			<jvmarg value="-Dfile.encoding=UTF-8" />
 		</java>
 	</target>
