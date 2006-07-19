@@ -28,6 +28,7 @@ import com.liferay.util.dao.DataAccess;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -42,6 +43,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.LockMode;
 import org.hibernate.MappingException;
 import org.hibernate.dialect.Dialect;
+import org.hibernate.dialect.DialectFactory;
 import org.hibernate.exception.SQLExceptionConverter;
 import org.hibernate.exception.ViolatedConstraintNameExtracter;
 import org.hibernate.sql.CaseFragment;
@@ -59,36 +61,23 @@ public class DynamicDialect extends Dialect {
 
 		// Instantiate the proper dialect
 
+		Connection con = null;
+
 		try {
-			Connection con = DataAccess.getConnection(Constants.DATA_SOURCE);
+			con = DataAccess.getConnection(Constants.DATA_SOURCE);
 
-			String url = con.getMetaData().getURL();
+			DatabaseMetaData metaData = con.getMetaData();
 
-			int x = url.indexOf(":");
-			int y = url.indexOf(":", x + 1);
+			String dbName = metaData.getDatabaseProductName(); 
+			int dbMajorVersion = metaData.getDatabaseMajorVersion();
 
-			String urlPrefix = url.substring(x + 1, y);
-
-			String dialectClass =
-				PropsUtil.get(PropsUtil.HIBERNATE_DIALECT + urlPrefix);
-
-			if (_log.isDebugEnabled()) {
-				if (dialectClass != null) {
-					_log.debug("Class implementation " + dialectClass);
-				}
-				else {
-					_log.debug("Class implementation is null");
-				}
-			}
-
-			if (dialectClass != null) {
-				_dialect = (Dialect)Class.forName(dialectClass).newInstance();
-			}
-
-			DataAccess.cleanUp(con);
+			_dialect = DialectFactory.determineDialect(dbName, dbMajorVersion);
 		}
 		catch (Exception e) {
 			_log.error(e);
+		}
+		finally {
+			DataAccess.cleanUp(con);
 		}
 
 		if (_dialect == null) {
