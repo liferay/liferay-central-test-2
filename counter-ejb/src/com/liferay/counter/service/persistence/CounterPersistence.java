@@ -92,12 +92,9 @@ public class CounterPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			Counter counter = null;
+			Counter counter = (Counter)session.get(Counter.class, name);
 
-			try {
-				counter = (Counter)session.load(Counter.class, name);
-			}
-			catch (ObjectNotFoundException onfe) {
+			if (counter == null) {
 				counter = new Counter();
 
 				counter.setName(name);
@@ -117,8 +114,6 @@ public class CounterPersistence extends BasePersistence {
 			return currentId;
 		}
 		catch (HibernateException he) {
-			he.printStackTrace();
-
 			throw new SystemException(he);
 		}
 		finally {
