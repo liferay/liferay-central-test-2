@@ -1,9 +1,10 @@
-function MailSummaryObject(sender, subject, date, id) {
+function MailSummaryObject(sender, subject, date, id, recent) {
 	this.next = null;
 	this.prev = null;
 	this.selected = false;
 	this.id = id;
 	this.index = 0;
+	this.recent = recent;
 	this.head = sender;
 	this.pendingHighlight = false;
 	sender.next = subject;
@@ -131,6 +132,30 @@ var Mailbox = {
 		}
 	},
 
+	decrementCount : function () {
+		var spanList = Mailbox.currentFolder.li.getElementsByTagName("span");
+		if (spanList.length == 2) {
+			var countSpan = spanList[0];
+			var countNum = parseInt(spanList[1].innerHTML);
+			
+			if (countNum > 1) {
+				countNum--;
+				spanList[1].innerHTML = countNum;
+			}
+			else {
+				countSpan.parentNode.removeChild(countSpan);
+			}
+		}
+
+		var summaryField = Mailbox.lastSelected.head;
+
+		while (summaryField) {
+			summaryField.style.fontWeight = "normal";
+			summaryField = summaryField.next;
+		}
+		
+		Mailbox.lastSelected.recent = false;
+	},
 	
 	deleteSelectedMessages : function() {
 		clearTimeout(Mailbox.messageTimer);
@@ -250,14 +275,23 @@ var Mailbox = {
 			selectedFolder = folders[0];
 			
 			for (var i = 0; i < folders.length; i++) {
+				var folder = folders[i];
 				var folderItem = document.createElement("li");
-				folderItem.innerHTML = folders[i].name;
-				folderItem.folder = folders[i];
+				var newCount = document.createElement("span");
+				
+				if (folder.newCount > 0) {
+					newCount.innerHTML = "&nbsp;(<span>" + folder.newCount + "</span>)";
+				}
+				newCount.className = "font-small"
+				folderItem.innerHTML = folder.name;
+				folderItem.folder = folder;
 				folderItem.onclick = Mailbox.onFolderSelect;
+				folderItem.appendChild(newCount);
 				folderList.appendChild(folderItem);
 				
-				if (folders[i].id == Mailbox.currentFolderId) {
-					selectedFolder = folders[i];
+				if (folder.id == Mailbox.currentFolderId) {
+					/* Previous folder ID was set */
+					selectedFolder = folder;
 				}
 			}
 			
@@ -304,7 +338,9 @@ var Mailbox = {
 		mailDetails.innerHTML = "";
 		mailDetails.appendChild(msgBody);
 		
-		return;
+		if (Mailbox.lastSelected.recent) {
+			Mailbox.decrementCount();
+		}
 	},
 	
 	getPreview : function () {
@@ -323,16 +359,23 @@ var Mailbox = {
 		var msgsDate = document.getElementById("portlet-mail-msgs-received");
 		
 		for (var i = 0; i < mailObject.headers.length; i++) {
+			var header = mailObject.headers[i];
 			var sender = document.createElement("div");
 			var subject = document.createElement("div");
 			var date = document.createElement("div");
 			
-			sender.innerHTML = mailObject.headers[i].email;
-			subject.innerHTML = mailObject.headers[i].subject;
-			date.innerHTML = mailObject.headers[i].date;
-			
-			var msObj = new MailSummaryObject(sender, subject, date, mailObject.headers[i].id);
+			sender.innerHTML = header.email;
+			subject.innerHTML = header.subject;
+			date.innerHTML = header.date;
+			var msObj = new MailSummaryObject(sender, subject, date, header.id, header.recent);
 			var summaryList = Mailbox.summaryList;
+			
+			if (header.recent) {
+				/* Bold recent messages */
+				sender.style.fontWeight = "bold";
+				subject.style.fontWeight = "bold";
+				date.style.fontWeight = "bold";
+			}
 			
 			msObj.index = i;
 			
@@ -352,7 +395,9 @@ var Mailbox = {
 			msgsDate.appendChild(date);
 			
 			if (Mailbox.currentMessageId == msObj.id) {
+				/* Previous highlight state was set */
 				Mailbox.summaryHighlight(msObj);
+				Mailbox.lastSelected = msObj;
 			}
 		}
 		
@@ -658,7 +703,6 @@ var Mailbox = {
 			}
 		}
 		
-		
 		document.onmousemove = null;
 		document.onmouseup = null;
 		
@@ -685,6 +729,7 @@ var Mailbox = {
 			
 			if (Mailbox.currentFolder.id == folderItem.folder.id) {
 				folderItem.style.backgroundColor = Mailbox.colorSelected;
+				Mailbox.currentFolder.li = folderItem;
 			}
 			else {
 				folderItem.style.backgroundColor = "transparent";
