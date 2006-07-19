@@ -189,10 +189,11 @@ public class MailboxAction extends JSONAction {
 			MailEnvelope me = (MailEnvelope)itr.next();
 			JSONObject jMe = new JSONObject();
 
+			jMe.put("date", me.getDate().toString());
 			jMe.put("id", me.getMsgUID());
 			jMe.put("email", me.getRecipient());
 			jMe.put("subject", me.getSubject());
-			jMe.put("date", me.getDate().toString());
+			jMe.put("recent", me.isRecent());
 			meArray.put(jMe);
 		}
 
