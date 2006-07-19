@@ -147,9 +147,6 @@ public class MailUtil {
 			else {
 				HtmlEmail he = new HtmlEmail();
 				he.setHtmlMsg(mm.getHtmlBody());
-				if (Validator.isNotNull(mm.getPlainBody())) {
-					he.setMsg(mm.getPlainBody());
-				}
 
 				List attachments = mm.getAttachments();
 				for (Iterator itr = attachments.iterator(); itr.hasNext(); ) {
@@ -745,14 +742,15 @@ public class MailUtil {
 			if (part.getContent() instanceof Multipart) {
 			    Multipart mp = (Multipart)part.getContent();
 
-			    if (contentType.startsWith(Constants.MULTIPART_ALTERNATE)) {
+			    if (contentType.startsWith(Constants.MULTIPART_ALTERNATIVE)) {
 			        for (int i = 0; i < mp.getCount(); i++) {
 			        	Part mpbp = mp.getBodyPart(i);
 
-			            if (part.isMimeType(Constants.TEXT_PLAIN)) {
+			        	String subcontent = mpbp.getContentType().toLowerCase();
+			            if (subcontent.startsWith(Constants.TEXT_PLAIN)) {
 			            	mm.setPlainBody((String)mpbp.getContent());
 			            }
-			            else if (part.isMimeType(Constants.TEXT_HTML)) {
+			            else if (subcontent.startsWith(Constants.TEXT_HTML)) {
 			            	mm.setHtmlBody((String)mpbp.getContent());
 			            }
 			            else {

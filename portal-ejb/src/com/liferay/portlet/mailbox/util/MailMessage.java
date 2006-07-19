@@ -97,7 +97,7 @@ public class MailMessage {
 	}
 
 	public String getSubject() {
-    	return _subject;
+    	return GetterUtil.getString(_subject);
     }
 
     public void setSubject(String subject) {
@@ -105,7 +105,7 @@ public class MailMessage {
     }
 
     public String getPlainBody() {
-    	return _plainBody;
+    	return GetterUtil.getString(_plainBody);
     }
 
     public void appendPlainBody(String plainBody) {

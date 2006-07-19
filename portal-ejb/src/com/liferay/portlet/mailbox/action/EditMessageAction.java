@@ -123,7 +123,7 @@ public class EditMessageAction extends PortletAction {
 				String [] recipients = { 
 					Html.escape(tosStr, true),
 					Html.escape(ccsStr, true),
-					null
+					StringPool.BLANK
 				};
 
 				req.setAttribute(WebKeys.MAIL_RECIPIENTS, recipients);
