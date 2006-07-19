@@ -27,6 +27,8 @@ import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -48,19 +50,27 @@ public class ViewMailboxAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 		
-		PortletSession ses = req.getPortletSession();
-		String folderId = MailUtil.getCurrentFolderName(ses);
-		Long messageId = MailUtil.getCurrentMessageId(ses);
-		
-		if (folderId != null) {
-			req.setAttribute("folderId", folderId);
+		try {
+			PortletSession ses = req.getPortletSession();
+			String folderId = MailUtil.getCurrentFolderName(ses);
+			Long messageId = MailUtil.getCurrentMessageId(ses);
+			
+			if (folderId != null) {
+				req.setAttribute("folderId", folderId);
+			}
+			
+			if (messageId != null) {
+				req.setAttribute("messageId", messageId);
+			}
 		}
-		
-		if (messageId != null) {
-			req.setAttribute("messageId", messageId);
+		catch (Exception ex) {
+			_log.warn("Exception caught while attempting to get " +
+				"current folder and message UID");
 		}
 		
 		return mapping.findForward("portlet.mailbox.view");
 	}
+
+	private static Log _log = LogFactory.getLog(ViewMailboxAction.class);
 
 }

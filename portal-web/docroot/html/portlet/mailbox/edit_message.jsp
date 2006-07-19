@@ -29,18 +29,20 @@ public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.
 %>
 <%
 String editorUrl = themeDisplay.getPathJavaScript() + "/editor/editor.jsp?p_l_id=" + plid + "&editorImpl=" + PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) + "&initMethod=initEditor";
-Long messageId = (Long)request.getAttribute("messageId");
 
 String [] recipients = (String [])request.getAttribute(WebKeys.MAIL_RECIPIENTS);
 String tos = "";
 String ccs = "";
-if (recipients != null && recipients.length == 2) {
+String bccs = "";
+if (recipients != null && recipients.length == 3) {
 	tos = recipients[0];
 	ccs = recipients[1];
+	bccs = recipients[2];
 }
 String subject = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_SUBJECT));
 String content = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_MESSAGE));
 List remoteAttachments = (List)request.getAttribute(WebKeys.MAIL_ATTACHMENTS);
+Long draftId = (Long)request.getAttribute(WebKeys.MAIL_DRAFT_ID);
 %>
 
 <script type="text/javascript">
@@ -86,12 +88,6 @@ List remoteAttachments = (List)request.getAttribute(WebKeys.MAIL_ATTACHMENTS);
 	}
 
 	var <portlet:namespace />file_index = 0;
-	<c:if test="<%= messageId != null %>">
-		var <portlet:namespace />messageId = <%= messageId.toString() %>;
-	</c:if>
-	<c:if test="<%= messageId == null %>">
-		var <portlet:namespace />messageId = -1;
-	</c:if>
 
 	function <portlet:namespace />addAttachment(remoteFile, contentPath) {
 		var table = document.getElementById("<portlet:namespace />files");
@@ -143,7 +139,7 @@ List remoteAttachments = (List)request.getAttribute(WebKeys.MAIL_ATTACHMENTS);
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/complete_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveArticle(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />body" type="hidden" value="" />
-<input name="<portlet:namespace />messageId" type="hidden" value="<%= messageId %>" />
+<input name="<portlet:namespace />draftId" type="hidden" value="<%= draftId != null ? draftId : new Long(-1L) %>" />
 
 	<table cellpadding="0" cellspacing="2" border="0">
 	<tr>
@@ -156,7 +152,7 @@ List remoteAttachments = (List)request.getAttribute(WebKeys.MAIL_ATTACHMENTS);
 	</tr>
 	<tr>
 		<td><b><%= LanguageUtil.get(pageContext, "bcc") %>:</b></td>
-		<td><input class="portlet-form-input-field" name="<portlet:namespace />bccs" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" /></td>
+		<td><input class="portlet-form-input-field" name="<portlet:namespace />bccs" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= bccs %>"/></td>
 	</tr>
 	<tr>
 		<td><b><%= LanguageUtil.get(pageContext, "subject") %>:</b></td>

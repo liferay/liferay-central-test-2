@@ -63,15 +63,14 @@ public class EditMessageAction extends PortletAction {
 		throws Exception {
 
 		String composeAction = ParamUtil.getString(req, "composeAction");
+		long messageId = ParamUtil.getLong(req, "messageId");
+		String folderId = ParamUtil.getString(req, "folderId");
 		
+		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
+		HttpServletRequest svltReq = reqImpl.getHttpServletRequest();
+
 		if (composeAction.equals("forward") || 
 			composeAction.startsWith("reply")) {
-
-			long messageId = ParamUtil.getLong(req, "messageId");
-			String folderId = ParamUtil.getString(req, "folderId");
-	
-			RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-			HttpServletRequest svltReq = reqImpl.getHttpServletRequest();
 	
 			MailMessage mm = 
 				MailUtil.getMessage(svltReq.getSession(), folderId, messageId);
@@ -123,13 +122,31 @@ public class EditMessageAction extends PortletAction {
 
 				String [] recipients = { 
 					Html.escape(tosStr, true),
-					Html.escape(ccsStr, true)
+					Html.escape(ccsStr, true),
+					null
 				};
 
 				req.setAttribute(WebKeys.MAIL_RECIPIENTS, recipients);
 				req.setAttribute(WebKeys.MAIL_SUBJECT, 
 					"Re: " + _removeSubjectPrefix(mm.getSubject(), "re"));
 			}
+		}
+		else if (composeAction.equals("edit")) {
+			MailMessage mm = 
+				MailUtil.getMessage(svltReq.getSession(), folderId, messageId);
+
+			String [] recipients = { 
+				Html.escape(InternetAddressUtil.toString(mm.getTo()), true),
+				Html.escape(InternetAddressUtil.toString(mm.getCc()), true),
+				Html.escape(InternetAddressUtil.toString(mm.getBcc()), true)
+			};
+
+			req.setAttribute(WebKeys.MAIL_RECIPIENTS, recipients);
+			req.setAttribute(WebKeys.MAIL_SUBJECT, mm.getSubject());
+			req.setAttribute(WebKeys.MAIL_ATTACHMENTS, 
+				mm.getRemoteAttachments());
+			req.setAttribute(WebKeys.MAIL_MESSAGE, mm.getHtmlBody());
+			req.setAttribute(WebKeys.MAIL_DRAFT_ID, new Long(messageId));
 		}
 
 		return mapping.findForward(

@@ -169,6 +169,8 @@ public class WebKeys {
 
 	public static final String MAIL_CURRENT_ACCOUNT = "MAIL_CURRENT_ACCOUNT";
 
+	public static final String MAIL_DRAFT_ID = "MAIL_DRAFT_ID";
+
 	public static final String MAIL_FOLDER = "MAIL_FOLDER";
 
 	public static final String MAIL_GOT_MAIL = "MAIL_GOT_MAIL";

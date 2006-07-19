@@ -55,7 +55,6 @@ import com.liferay.portlet.mailbox.util.MailUtil;
 import com.liferay.portlet.mailbox.util.RemoteMailAttachment;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.UploadPortletRequest;
 
 /**
@@ -76,6 +75,8 @@ public class CompleteMessageAction extends PortletAction {
 
 		try {
 			if (cmd.equals(Constants.SEND) || cmd.equals(Constants.SAVE)) {
+				long draftId = ParamUtil.getLong(req, "draftId");
+
 				HttpSession ses =
 					((ActionRequestImpl)req).getHttpServletRequest().
 						getSession();
@@ -91,7 +92,6 @@ public class CompleteMessageAction extends PortletAction {
 				mm.setBcc(ParamUtil.getString(req, "bccs"));
 				mm.setSubject(ParamUtil.getString(req, "subject"));
 				mm.setHtmlBody(ParamUtil.getString(req, "body"));
-				mm.setMessageUID(ParamUtil.getLong(req, "messageId"));
 
 				Map attachments = _getAttachments(
 					PortalUtil.getUploadPortletRequest(req));
@@ -112,7 +112,8 @@ public class CompleteMessageAction extends PortletAction {
 
 				mm.setRemoteAttachments(_getRemoteAttachments(req));
 				
-				MailUtil.completeMessage(ses, mm, cmd.equals(Constants.SEND));
+				MailUtil.completeMessage(
+					ses, mm, cmd.equals(Constants.SEND), draftId);
 
 				setForward(req, "portlet.mailbox.view");
 			}

@@ -158,7 +158,7 @@ String mailLineColor = "#b3b6b0";
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/compose.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "new") %>
 	</td>
-	<td onclick="Mailbox.submitCompose('Edit', document.<portlet:namespace />fm)">
+	<td onclick="Mailbox.submitCompose('edit', document.<portlet:namespace />fm)">
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/edit_draft.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "edit") %>
 	</td>

@@ -42,7 +42,6 @@ import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
-import javax.mail.NoSuchProviderException;
 import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
@@ -62,7 +61,6 @@ import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.SimpleEmail;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
@@ -70,7 +68,6 @@ import com.liferay.portlet.mailbox.ContentException;
 import com.liferay.portlet.mailbox.ContentPathException;
 import com.liferay.portlet.mailbox.FolderException;
 import com.liferay.portlet.mailbox.StoreException;
-import com.liferay.util.ArrayUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.JNDIUtil;
@@ -132,7 +129,7 @@ public class MailUtil {
 	}
 
 	public static void completeMessage(
-			HttpSession ses, MailMessage mm, boolean send)
+			HttpSession ses, MailMessage mm, boolean send, long draftId)
 		throws ContentException, ContentPathException, FolderException, 
 			StoreException {
 
@@ -208,15 +205,14 @@ public class MailUtil {
 			else {
 				setCurrentFolder(ses, MAIL_DRAFTS_NAME);
 			}
-			
+
 			Message [] mimeMsg = { email.getMimeMessage() };
 			_getCurrentFolder(ses).appendMessages(mimeMsg);
 
-			if (send && mm.getMessageUID() > 0L) {
+			if (draftId > 0L) {
 				setCurrentFolder(ses, MAIL_DRAFTS_NAME);
+				Message msg = _getCurrentFolder(ses).getMessageByUID(draftId);
 
-				Message msg = 
-					_getCurrentFolder(ses).getMessageByUID(mm.getMessageUID());
 				_getCurrentFolder(ses).setFlags(
 					new Message [] { msg }, new Flags(Flags.Flag.DELETED), true);
 				_getCurrentFolder(ses).expunge();
@@ -569,8 +565,9 @@ public class MailUtil {
 				return;
 			}
 
-			if (_getCurrentFolder(ses).getName().equals(MAIL_DRAFTS_NAME) ||
-				toFolderName.equals(MAIL_DRAFTS_NAME)) {
+			if ((_getCurrentFolder(ses).getName().equals(MAIL_DRAFTS_NAME) ||
+				toFolderName.equals(MAIL_DRAFTS_NAME)) && 
+					!toFolderName.equals(MAIL_TRASH_NAME)) {
 
 				_log.error("Cannot move message to/from the '" + 
 					MAIL_DRAFTS_NAME + "' folder");
