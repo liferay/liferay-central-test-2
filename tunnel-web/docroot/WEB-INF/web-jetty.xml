@@ -2,9 +2,10 @@
 <!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure 1.1//EN" "http://jetty.mortbay.org/configure_1_1.dtd">
 
 <Configure class="org.mortbay.jetty.servlet.WebApplicationContext">
-	<Call name="setRealm">
-		<Arg>
-			<New class="org.objectweb.jonas.security.realm.web.jetty50.JAAS" />
-		</Arg>
-	</Call>
+	<Set name="Realm">
+		<New class="org.mortbay.jaas.JAASUserRealm">
+			<Set name="Name">PortalRealm</Set>
+			<Set name="LoginModuleName">PortalRealm</Set>
+		</New>
+	</Set>
 </Configure>
