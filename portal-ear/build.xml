@@ -155,7 +155,7 @@
 				<copy todir="${app.server.portal.dir}">
 					<fileset
 						dir="modules"
-						includes="*.xml"
+						includes="*.xml,*/**.xml"
 					/>
 				</copy>
 			</then>
