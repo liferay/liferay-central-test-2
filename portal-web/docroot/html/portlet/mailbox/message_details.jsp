@@ -23,14 +23,15 @@
 %><%@
 include file="/html/portlet/init.jsp" %><%@
 page import="com.liferay.portlet.mailbox.util.MailMessage,
-			 com.liferay.util.Html,
-			 java.lang.Object.StringBuffer,
-			 javax.mail.Address"
+			com.liferay.portlet.mailbox.util.RemoteMailAttachment,
+			com.liferay.util.Html,
+			java.lang.Object.StringBuffer,
+			javax.mail.Address"
 %><%
 
 MailMessage mm = (MailMessage)request.getAttribute("mailMessage");
 
-List attachments = mm.getAttachments();
+List attachments = mm.getRemoteAttachments();
 Address from = mm.getFrom();
 Address cc[] = mm.getCc();
 Address bcc[] = mm.getBcc();
@@ -41,7 +42,8 @@ Address []to = mm.getTo();
 	<div style="font-weight: bold"><%= mm.getSubject() %></div>
 	<table cellpadding="0" cellspacing="0" border="0" class="font-small">
 	<tr>
-		<td style="padding-right: 5px"><%= LanguageUtil.get(pageContext, "from") %>: </td>
+		<td style="padding-right: 5px" align="right" valign="top">
+			<%= LanguageUtil.get(pageContext, "from") %>:&nbsp;</td>
 		<td><%= Html.escape(from.toString(), false) %></td>
 	</tr>
 	<%
@@ -51,7 +53,8 @@ Address []to = mm.getTo();
 		_createAddresses(sb, to);
 		%>
 		<tr>
-			<td style="padding-right: 5px"><%= LanguageUtil.get(pageContext, "to") %>: </td>
+			<td style="padding-right: 5px" align="right" valign="top">
+				<%= LanguageUtil.get(pageContext, "to") %>:&nbsp;</td>
 			<td><%= sb.toString() %></td>
 		</tr>
 		<%
@@ -62,8 +65,41 @@ Address []to = mm.getTo();
 		_createAddresses(sb, cc);
 		%>
 		<tr>
-			<td style="padding-right: 5px"><%= LanguageUtil.get(pageContext, "cc") %>: </td>
+			<td style="padding-right: 5px" align="right" valign="top">
+				<%= LanguageUtil.get(pageContext, "cc") %>:&nbsp;</td>
 			<td><%= sb.toString() %></td>
+		</tr>
+		<%
+	}
+	if (attachments != null && attachments.size() > 0) {
+		%>
+		<tr>
+			<td style="padding-right: 5px" align="right" valign="top">
+				<img src="<%= themeDisplay.getPathThemeImage() %>/mail/clip.gif" />&nbsp;</td>
+			<td>
+				<%
+				String comma;
+				for (int i = 0; i < attachments.size(); i++) {
+					if (i < (attachments.size() - 1)) {
+						comma = ",&nbsp;";
+					}
+					else {
+						comma = "";
+					}
+					
+					RemoteMailAttachment rma = (RemoteMailAttachment)attachments.get(i);
+					%>
+					<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="fileUrl">
+						<portlet:param name="struts_action" value="/mailbox/get_attachment" />
+						<portlet:param name="fileName" value="<%= rma.getFilename() %>" />
+						<portlet:param name="contentPath" value="<%= rma.getContentPath() %>" />
+					</portlet:actionURL>
+					
+					<a href="<%= fileUrl %>"><%= rma.getFilename() %></a><%= comma %>
+					<%
+				}
+				%>
+			</td>
 		</tr>
 		<%
 	}
