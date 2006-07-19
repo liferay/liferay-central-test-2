@@ -130,8 +130,10 @@ public class MailUtil {
 		}
 		else {
 			HtmlEmail he = new HtmlEmail();
-			he.setMsg(mm.getPlainBody());
 			he.setHtmlMsg(mm.getHtmlBody());
+			if (Validator.isNotNull(mm.getPlainBody())) {
+				he.setMsg(mm.getPlainBody());
+			}
 
 			List attachments = mm.getAttachments();
 			for (Iterator itr = attachments.iterator(); itr.hasNext(); ) {
@@ -390,7 +392,7 @@ public class MailUtil {
 			mm.setReplyTo(message.getReplyTo());
 			mm = _getContent(message, mm);
 
-			MailUtil._setCurrentMessage(ses, messageUID);
+			_setCurrentMessage(ses, messageUID);
 		}
 		catch (MessagingException me) {
 			_log.error(me);
@@ -574,10 +576,11 @@ public class MailUtil {
 	private static MailMessage _getContent(Part part, MailMessage mm)
 		throws IOException, MessagingException {
 
+        String contentType = part.getContentType().toLowerCase();
 		if (part.getContent() instanceof Multipart) {
             Multipart mp = (Multipart)part.getContent();
 
-            if (part.isMimeType(Constants.MULTIPART_ALTERNATE)) {
+            if (contentType.startsWith(Constants.MULTIPART_ALTERNATE)) {
 	            for (int i = 0; i < mp.getCount(); i++) {
 	            	Part mpbp = mp.getBodyPart(i);
 
@@ -599,13 +602,13 @@ public class MailUtil {
             	}
             }
         }
-        else if (part.isMimeType(Constants.TEXT_PLAIN)) {
+        else if (contentType.startsWith(Constants.TEXT_PLAIN)) {
         	mm.appendPlainBody((String)part.getContent());
         }
-        else if (part.isMimeType(Constants.TEXT_HTML)) {
+        else if (contentType.startsWith(Constants.TEXT_HTML)) {
         	mm.appendHtmlBody((String)part.getContent());
         }
-        else if (part.isMimeType(Constants.MESSAGE_RFC822)) {
+        else if (contentType.startsWith(Constants.MESSAGE_RFC822)) {
         	// TODO: nested
         }
         else {

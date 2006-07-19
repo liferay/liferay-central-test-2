@@ -21,8 +21,8 @@
  */
 package com.liferay.portlet.mailbox.util;
 
+import com.liferay.portal.util.InternetAddressUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.Html;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
@@ -52,6 +52,10 @@ public class MailMessage {
 		return _to;
 	}
 
+	public void setTo(String to) throws Exception {
+		_to = InternetAddressUtil.getAddresses(to);
+	}
+	
 	public void setTo(Address [] to) {
 		_to = to;
 	}
@@ -60,6 +64,10 @@ public class MailMessage {
 		return _replyTo;
 	}
 
+	public void setReplyTo(String replyTos) throws Exception {
+		_replyTo = InternetAddressUtil.getAddresses(replyTos);
+	}
+	
 	public void setReplyTo(Address [] replyTo) {
 		_replyTo = replyTo;
 	}
@@ -72,6 +80,10 @@ public class MailMessage {
 		_cc = cc;
 	}
 
+	public void setCc(String ccs) throws Exception {
+		_cc = InternetAddressUtil.getAddresses(ccs);
+	}
+	
 	public Address [] getBcc() {
 		return _bcc;
 	}
@@ -80,7 +92,11 @@ public class MailMessage {
 		_bcc = bcc;
 	}
 
-    public String getSubject() {
+	public void setBcc(String bccs) throws Exception {
+		_bcc = InternetAddressUtil.getAddresses(bccs);
+	}
+
+	public String getSubject() {
     	return _subject;
     }
 
@@ -89,12 +105,7 @@ public class MailMessage {
     }
 
     public String getPlainBody() {
-    	if (Validator.isNotNull(_plainBody)) {
-        	return _plainBody;
-    	}
-    	else {
-    		return Html.stripHtml(_htmlBody);
-    	}
+    	return _plainBody;
     }
 
     public void appendPlainBody(String plainBody) {
@@ -160,6 +171,11 @@ public class MailMessage {
 		if (Validator.isNotNull(_htmlBody) || !_attachments.isEmpty()) {
 			return false;
 		}
+		
+		if (Validator.isNull(_plainBody)) {
+			_plainBody = StringPool.BLANK;
+		}
+
 		return true;
 	}
 

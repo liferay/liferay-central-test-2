@@ -21,7 +21,12 @@
  */
 package com.liferay.portlet.mailbox.action;
 
+import java.io.File;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import javax.mail.Address;
 import javax.mail.internet.InternetAddress;
@@ -39,10 +44,16 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.mailbox.util.MailAttachment;
+import com.liferay.portlet.mailbox.util.MailMessage;
+import com.liferay.portlet.mailbox.util.MailUtil;
+import com.liferay.util.FileUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.servlet.UploadPortletRequest;
 
 /**
  * <a href="CompleteMessageAction.java.html"><b><i>View Source</i></b></a>
@@ -66,21 +77,36 @@ public class CompleteMessageAction extends PortletAction {
 				Address from = new InternetAddress(
 					user.getEmailAddress(), user.getFullName());
 
-				String tos = ParamUtil.getString(req, "tos");
-				String ccs = ParamUtil.getString(req, "ccs");
-				String bccs = ParamUtil.getString(req, "bccs");
-				String subject = ParamUtil.getString(req, "subject");
-				String body = ParamUtil.getString(req, "body");
-				long messageId = ParamUtil.getLong(req, "messageId");
-				Map attachments = ActionUtil.getAttachments(
+				MailMessage mm = new MailMessage();
+				mm.setFrom(from);
+				mm.setTo(ParamUtil.getString(req, "tos"));
+				mm.setCc(ParamUtil.getString(req, "ccs"));
+				mm.setBcc(ParamUtil.getString(req, "bccs"));
+				mm.setSubject(ParamUtil.getString(req, "subject"));
+				mm.setHtmlBody(ParamUtil.getString(req, "body"));
+				mm.setMessageUID(ParamUtil.getLong(req, "messageId"));
+
+				Map attachments = _getAttachments(
 					PortalUtil.getUploadPortletRequest(req));
 
 				HttpSession ses =
 					((ActionRequestImpl)req).getHttpServletRequest().
 						getSession();
 
-				ActionUtil.completeMessage(from, tos, ccs, bccs, subject, body,
-					attachments, ses, cmd.equals(Constants.SEND), messageId);
+				Set filenames = attachments.keySet();
+				for (Iterator itr = filenames.iterator(); itr.hasNext(); ) {
+					String filename = (String)itr.next();
+					byte [] attachment = (byte [])attachments.get(filename);
+
+					MailAttachment ma = new MailAttachment();
+					ma.setFilename(filename);
+					ma.setContentType(ContentTypeUtil.getContentType(filename));
+					ma.setContent(attachment);
+
+					mm.appendAttachment(ma);
+				}
+
+				MailUtil.completeMessage(ses, mm, cmd.equals(Constants.SEND));
 
 				setForward(req, "portlet.mailbox.view");
 			}
@@ -93,6 +119,32 @@ public class CompleteMessageAction extends PortletAction {
 			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
+	
+	private static Map _getAttachments(UploadPortletRequest uploadReq) 
+		throws Exception {
+		
+		Map attachments = new HashMap();
+
+		String prefix = "attachment";
+
+		Enumeration enu = uploadReq.getParameterNames();
+
+		while (enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+
+			if (name.startsWith(prefix)) {
+				File file = uploadReq.getFile(name);
+				byte[] bytes = FileUtil.getBytes(file);
+
+				if (bytes != null && bytes.length > 0) {
+					attachments.put(uploadReq.getFileName(name), bytes);
+				}
+			}
+		}
+
+		return attachments;
+	}
 
 	private static Log _log = LogFactory.getLog(CompleteMessageAction.class);
+
 }
