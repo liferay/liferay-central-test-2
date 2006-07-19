@@ -116,10 +116,6 @@ public class CompleteMessageAction extends PortletAction {
 
 				setForward(req, "portlet.mailbox.view");
 			}
-			else {
-				if (Validator.isNotNull(cmd)) {
-				}
-			}
 		}
 		catch (Exception e) {
 			_log.error(StackTraceUtil.getStackTrace(e));

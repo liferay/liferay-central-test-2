@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
+import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
@@ -44,7 +45,8 @@ public class GetAttachmentAction extends PortletAction {
 				httpRes, fileName, content, contentType);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error("Error in retrieving an attachment.  " + 
+				StackTraceUtil.getStackTrace(e));
 		}
 	}
 
