@@ -150,8 +150,11 @@ public class MailUtil {
 			List remoteAttachments = mm.getRemoteAttachments();
 			for (Iterator itr = remoteAttachments.iterator(); itr.hasNext(); ) {
 				RemoteMailAttachment rma = (RemoteMailAttachment)itr.next();
-				
-				DataSource ds = getAttachment(ses, rma.getContentPath());
+
+				Object [] parts = getAttachment(ses, rma.getContentPath());
+				DataSource ds = new ByteArrayDataSource(
+					(byte [])parts[0], (String)parts[1]);
+
 				he.attach(ds, rma.getFilename(), rma.getFilename());
 			}
 
@@ -251,7 +254,7 @@ public class MailUtil {
 		}
 	}
 
-	public static DataSource getAttachment(HttpSession ses, String contentPath)
+	public static Object [] getAttachment(HttpSession ses, String contentPath)
 		throws Exception {
 
 		String [] path = RemoteMailAttachment.parsePath(contentPath);
@@ -263,9 +266,7 @@ public class MailUtil {
 		setCurrentFolder(ses, folderName);
 		Message message = _getCurrentFolder(ses).getMessageByUID(messageUID);
 
-		Object [] parts = _getAttachmentFromPath(message, mimePath);
-
-		return new ByteArrayDataSource((byte [])parts[0], (String)parts[1]);
+		return _getAttachmentFromPath(message, mimePath);
 	}
 	
 	private static Object [] _getAttachmentFromPath(
@@ -305,7 +306,7 @@ public class MailUtil {
 		in.close();
 
 		Object [] parts = new Object[] {
-				baos.toByteArray(), part.getContentType()
+			baos.toByteArray(), part.getContentType()
 		};
 		
 		return parts;
