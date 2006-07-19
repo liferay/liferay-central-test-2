@@ -881,6 +881,21 @@ public class PortalUtil {
 		return _instance._isSystemRole(roleName);
 	}
 
+	public static void renderPage(
+			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
+			HttpServletResponse res, String path)
+		throws IOException, ServletException {
+
+		RequestDispatcher rd = ctx.getRequestDispatcher(path);
+
+		StringServletResponse stringServletRes =
+			new StringServletResponse(res);
+
+		rd.include(req, stringServletRes);
+
+		sb.append(stringServletRes.getString());
+	}
+
 	public static void renderPortlet(
 			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, Portlet portlet)
