@@ -4,4 +4,20 @@
 	<import file="../build-common-web.xml" />
 
 	<property name="war.file" value="${ant.project.name}" />
+
+	<target name="war">
+		<copy todir="docroot/WEB-INF/lib">
+			<fileset
+				dir="${project.dir}/lib/portal"
+				includes="commons-logging.jar,log4j.jar"
+			/>
+		</copy>
+
+		<copy
+			file="${project.dir}/portal-ejb/classes/META-INF/portal-log4j.xml"
+			tofile="docroot/WEB-INF/classes/log4j.xml"
+		/>
+
+		<antcall target="build-common-web.war" />
+	</target>
 </project>
