@@ -24,6 +24,7 @@ package com.liferay.portal.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.mail.Address;
 import javax.mail.internet.InternetAddress;
 
 import org.apache.commons.logging.Log;
@@ -120,8 +121,10 @@ public class InternetAddressUtil {
 		return ia;
 	}
 
-	public static InternetAddress [] removeEntries(
-		InternetAddress [] ias, String emailAddress) {
+	public static InternetAddress [] removeEntry(
+		Address [] as, String emailAddress) {
+
+		InternetAddress [] ias = (InternetAddress [])as;
 
 		List list = new ArrayList();
 
@@ -138,7 +141,9 @@ public class InternetAddressUtil {
 		return (InternetAddress [])list.toArray(new InternetAddress [] {});
 	}
 
-	public static String toString(InternetAddress [] ias) {
+	public static String toString(Address [] as) {
+		InternetAddress [] ias = (InternetAddress [])as;
+
 		StringBuffer sb = new StringBuffer();
 		
 		if (ias != null) {

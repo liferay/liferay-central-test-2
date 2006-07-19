@@ -33,6 +33,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.mailbox.util.MailMessage;
 import com.liferay.portlet.mailbox.util.MailUtil;
+import com.liferay.util.Html;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
@@ -63,11 +64,9 @@ public class EditMessageAction extends PortletAction {
 
 		String composeAction = ParamUtil.getString(req, "composeAction");
 		
-		if ("replyAll".equals(composeAction)) {
-			// reply-all logic
-		}
-		
-		if ("forward".equals(composeAction) || "reply".equals(composeAction)) {
+		if (composeAction.equals("forward") || 
+			composeAction.startsWith("reply")) {
+
 			long messageId = ParamUtil.getLong(req, "messageId");
 			String folderId = ParamUtil.getString(req, "folderId");
 	
@@ -83,37 +82,54 @@ public class EditMessageAction extends PortletAction {
 			req.setAttribute(
 				WebKeys.MAIL_MESSAGE, _buildBody(mm, dateFormatter));
 	
-			if ("reply".equals(composeAction)) {
-				String userEmail = PortalUtil.getUser(req).getEmailAddress();
-	
-				InternetAddress [] tos = (InternetAddress [])mm.getTo();
-				InternetAddress [] ccs = (InternetAddress [])mm.getCc();
-				InternetAddress [] rtos = (InternetAddress [])mm.getReplyTo();
-	
-				tos = InternetAddressUtil.removeEntries(tos, userEmail);
-				ccs = InternetAddressUtil.removeEntries(ccs, userEmail);
+			if (composeAction.equals("forward")) {
+				req.setAttribute(WebKeys.MAIL_SUBJECT,
+					"Fw: " + _removeSubjectPrefix(mm.getSubject(), "fw"));
+				req.setAttribute(WebKeys.MAIL_ATTACHMENTS, 
+					mm.getRemoteAttachments());
+			}
+			else {
+				String tosStr = StringPool.BLANK;
+				String ccsStr = StringPool.BLANK;
 				
-				String tosStr = InternetAddressUtil.toString(tos);
-				String rtosStr = InternetAddressUtil.toString(rtos);
-				String ccsStr = InternetAddressUtil.toString(ccs);
-				
-				if (Validator.isNotNull(rtosStr)) {
+				if (composeAction.equals("replyAll")) {
+					String userEmail =
+						PortalUtil.getUser(req).getEmailAddress();
+
+					tosStr = InternetAddressUtil.toString(
+						InternetAddressUtil.removeEntry(mm.getTo(), userEmail));
+					ccsStr = InternetAddressUtil.toString(
+						InternetAddressUtil.removeEntry(mm.getCc(), userEmail));
+
+					String rtosStr = 
+						InternetAddressUtil.toString(mm.getReplyTo());
+
+					if (Validator.isNull(rtosStr)) {
+						rtosStr = 
+							((InternetAddress)mm.getFrom()).toUnicodeString();
+					}
+
 					tosStr = 
 						rtosStr + StringPool.COMMA + StringPool.SPACE + tosStr;
 				}
-	
-				String [] recipients = { tosStr, ccsStr };
+				else {
+					tosStr = InternetAddressUtil.toString(mm.getReplyTo());
+
+					if (Validator.isNull(tosStr)) {
+						tosStr = 
+							((InternetAddress)mm.getFrom()).toUnicodeString();
+					}
+				}
+
+				String [] recipients = { 
+					Html.escape(tosStr, true),
+					Html.escape(ccsStr, true)
+				};
 
 				req.setAttribute(WebKeys.MAIL_RECIPIENTS, recipients);
 				req.setAttribute(WebKeys.MAIL_SUBJECT, 
-					"Re: " + _removeSubjectPrefix(mm.getSubject()));
+					"Re: " + _removeSubjectPrefix(mm.getSubject(), "re"));
 			}
-			else {
-				req.setAttribute(WebKeys.MAIL_SUBJECT,
-					"Fw: " + _removeSubjectPrefix(mm.getSubject()));
-				req.setAttribute(WebKeys.MAIL_ATTACHMENTS, 
-					mm.getRemoteAttachments());
-			}		
 		}
 
 		return mapping.findForward(
@@ -137,13 +153,12 @@ public class EditMessageAction extends PortletAction {
 		return body.toString();
 	}
 
-	private String _removeSubjectPrefix(String subject) {
+	private String _removeSubjectPrefix(String subject, String prefix) {
 		if (Validator.isNotNull(subject)) {
 			String subjectLowerCase = subject.toLowerCase(); 
-			while (subjectLowerCase.startsWith("re:") || 
-				subjectLowerCase.startsWith("re>") || 
-				subjectLowerCase.startsWith("fw:") || 
-				subjectLowerCase.startsWith("fw>"))	{
+
+			while (subjectLowerCase.startsWith(prefix + ":") || 
+				subjectLowerCase.startsWith(prefix + ">"))	{
 	
 				subject = subject.substring(3).trim();
 				subjectLowerCase = subject.toLowerCase();
