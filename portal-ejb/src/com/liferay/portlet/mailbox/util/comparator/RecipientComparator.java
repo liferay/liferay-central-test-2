@@ -47,7 +47,8 @@ public class RecipientComparator implements Comparator {
 		int comparison = 0;
 
 		if (_asc) {
-			comparison = me0.getRecipient().compareTo(me1.getRecipient());
+			comparison = 
+				me0.getRecipient().trim().compareTo(me1.getRecipient().trim());
 			if (comparison == 0) {
 				comparison = DateUtil.compareTo(me0.getDate(), me1.getDate());
 				
@@ -57,7 +58,8 @@ public class RecipientComparator implements Comparator {
 			}
 		}
 		else {
-			comparison = me1.getRecipient().compareTo(me0.getRecipient());
+			comparison = 
+				me1.getRecipient().trim().compareTo(me0.getRecipient().trim());
 			if (comparison == 0) {
 				comparison = DateUtil.compareTo(me1.getDate(), me0.getDate());
 				
@@ -66,7 +68,7 @@ public class RecipientComparator implements Comparator {
 				}
 			}
 		}
-		
+
 		return comparison;
 	}
 
