@@ -33,7 +33,9 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.spring.GroupServiceUtil;
 import com.liferay.portal.service.spring.OrganizationServiceUtil;
+import com.liferay.portal.service.spring.PermissionLocalServiceUtil;
 import com.liferay.portal.service.spring.PermissionServiceUtil;
+import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceServiceUtil;
 import com.liferay.portal.service.spring.RoleServiceUtil;
 import com.liferay.portal.service.spring.UserGroupServiceUtil;
@@ -316,16 +318,18 @@ public class PermissionChecker {
 		}
 
 		try {
-			Role communityAdminRole = RoleServiceUtil.getGroupRole(
-				companyId, groupId);
+			Resource resource = ResourceLocalServiceUtil.getResource(
+				companyId, Group.class.getName(), Resource.TYPE_CLASS,
+				Resource.SCOPE_INDIVIDUAL, groupId);
 
-			if (UserServiceUtil.hasRoleUser(
-					communityAdminRole.getRoleId(), user.getUserId())) {
+			if (PermissionLocalServiceUtil.hasUserPermission(
+					user.getUserId(), ActionKeys.ADMINISTRATE,
+					resource.getResourceId())) {
 
 				return true;
 			}
 		}
-		catch (NoSuchRoleException nsre) {
+		catch (NoSuchResourceException nsre) {
 		}
 
 		try {

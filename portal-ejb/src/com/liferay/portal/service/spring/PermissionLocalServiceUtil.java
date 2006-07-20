@@ -73,6 +73,26 @@ public class PermissionLocalServiceUtil {
 		}
 	}
 
+	public static void addUserPermissions(java.lang.String userId,
+		java.lang.String[] actionIds, java.lang.String resourceId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+			permissionLocalService.addUserPermissions(userId, actionIds,
+				resourceId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static java.util.List getActions(java.util.List permissions)
 		throws com.liferay.portal.SystemException {
 		try {

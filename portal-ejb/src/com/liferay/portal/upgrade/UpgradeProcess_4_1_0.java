@@ -27,6 +27,9 @@ import com.liferay.portal.upgrade.v4_1_0.UpgradeMessageBoards;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.liferay.portal.upgrade.v4_1_0.UpgradeGroup;
+import com.liferay.portal.upgrade.v4_1_0.UpgradeMessageBoards;
+
 /**
  * <a href="UpgradeProcess_4_1_0.java.html"><b><i>View Source</i></b></a>
  *
@@ -45,6 +48,7 @@ public class UpgradeProcess_4_1_0 extends UpgradeProcess {
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
+		upgrade(new UpgradeGroup());
 		upgrade(new UpgradeMessageBoards());
 	}
 

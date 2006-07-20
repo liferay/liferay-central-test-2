@@ -176,6 +176,7 @@ action.ADD_TOPIC=Adicione O Tópico
 action.ADD_USER=Adicione O Usuário
 action.ADD_USER_GROUP=Adicione O Grupo De Usuário
 action.ADD_VOTE=Adicione O Voto
+action.ADMINISTRATE=Administrate
 action.APPROVE_ARTICLE=Aprove O Artigo
 action.ASSIGN_USERS=Atribua Usuários
 action.CONFIGURATION=Configuração

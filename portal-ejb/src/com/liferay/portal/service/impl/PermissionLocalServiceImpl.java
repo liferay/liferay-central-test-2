@@ -115,6 +115,20 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		return permissions;
 	}
 
+	public void addUserPermissions(
+			String userId, String[] actionIds, String resourceId)
+		throws PortalException, SystemException {
+
+		User user = UserUtil.findByPrimaryKey(userId);
+
+		List permissions = PermissionFinder.findByU_R(userId, resourceId);
+
+		permissions = getPermissions(
+			user.getCompanyId(), actionIds, resourceId);
+
+		UserUtil.addPermissions(userId, permissions);
+	}
+
 	public List getActions(List permissions) throws SystemException {
 		List actions = new ArrayList();
 

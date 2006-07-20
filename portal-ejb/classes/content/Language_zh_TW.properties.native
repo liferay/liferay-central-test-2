@@ -176,6 +176,7 @@ action.ADD_TOPIC=增加題目
 action.ADD_USER=增加用戶
 action.ADD_USER_GROUP=增加用戶群
 action.ADD_VOTE=增加表決
+action.ADMINISTRATE=管理
 action.APPROVE_ARTICLE=批准文章
 action.ASSIGN_USERS=分配用戶
 action.CONFIGURATION=配置

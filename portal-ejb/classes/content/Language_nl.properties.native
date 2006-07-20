@@ -176,6 +176,7 @@ action.ADD_TOPIC=Voeg Onderwerp toe
 action.ADD_USER=Voeg Gebruiker toe
 action.ADD_USER_GROUP=Voeg Gebruikersgroep toe
 action.ADD_VOTE=Voeg Stem toe
+action.ADMINISTRATE=Beheer
 action.APPROVE_ARTICLE=Keur Artikel goed
 action.ASSIGN_USERS=Wijs Gebruikers toe
 action.CONFIGURATION=Configuratie

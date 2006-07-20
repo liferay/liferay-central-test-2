@@ -176,6 +176,7 @@ action.ADD_TOPIC=Ajoutez La Matière
 action.ADD_USER=Ajoutez L'Utilisateur
 action.ADD_USER_GROUP=Ajoutez Le Groupe D'Utilisateur
 action.ADD_VOTE=Ajoutez La Voix
+action.ADMINISTRATE=Administez
 action.APPROVE_ARTICLE=Approuvez L'Article
 action.ASSIGN_USERS=Affectez Les Utilisateurs
 action.CONFIGURATION=Configuration

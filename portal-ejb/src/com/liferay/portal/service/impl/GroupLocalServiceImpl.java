@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import com.liferay.counter.service.spring.CounterServiceUtil;
 import com.liferay.portal.DuplicateGroupException;
 import com.liferay.portal.GroupFriendlyURLException;
@@ -40,6 +45,7 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.ResourceUtil;
@@ -48,6 +54,7 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.GroupLocalService;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.spring.PermissionServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.service.spring.RoleLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
@@ -131,16 +138,6 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 			ResourceLocalServiceUtil.addResources(
 				group.getCompanyId(), null, userId, Group.class.getName(),
 				group.getPrimaryKey().toString(), false, false, false);
-
-			// Role
-
-			Role role = RoleLocalServiceUtil.addRole(
-				null, group.getCompanyId(),
-				"GROUP_" + groupId + "_ADMINISTRATOR", Group.class.getName(),
-				groupId);
-
-			UserLocalServiceUtil.addRoleUsers(
-				role.getRoleId(), new String[] {userId});
 
 			// User
 

@@ -65,6 +65,13 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 			portletActions);
 	}
 
+	public void addUserPermissions(java.lang.String userId,
+		java.lang.String[] actionIds, java.lang.String resourceId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().addUserPermissions(userId, actionIds, resourceId);
+	}
+
 	public java.util.List getActions(java.util.List permissions)
 		throws com.liferay.portal.SystemException {
 		return getService().getActions(permissions);

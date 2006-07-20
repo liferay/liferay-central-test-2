@@ -83,6 +83,8 @@ public class ActionKeys {
 
 	public static final String ADD_VOTE = "ADD_VOTE";
 
+	public static final String ADMINISTRATE = "ADMINISTRATE";
+
 	public static final String APPROVE_ARTICLE = "APPROVE_ARTICLE";
 
 	public static final String ASSIGN_USERS = "ASSIGN_USERS";

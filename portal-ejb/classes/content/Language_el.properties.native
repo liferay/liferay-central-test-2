@@ -176,6 +176,7 @@ action.ADD_TOPIC=Προσθέστε το θέμα
 action.ADD_USER=Προσθέστε το χρήστη
 action.ADD_USER_GROUP=Προσθέστε την ομάδα χρηστών
 action.ADD_VOTE=Προσθέστε την ψηφοφορία
+action.ADMINISTRATE=Διαχειριστείτε
 action.APPROVE_ARTICLE=Εγκρίνετε το άρθρο
 action.ASSIGN_USERS=Διορίστε τους χρήστες
 action.CONFIGURATION=Διαμόρφωση

@@ -176,6 +176,7 @@ action.ADD_TOPIC=화제를 추가하십시요
 action.ADD_USER=사용자를 추가하십시요
 action.ADD_USER_GROUP=사용자 그룹을 추가하십시요
 action.ADD_VOTE=투표를 추가하십시요
+action.ADMINISTRATE=관리하십시요
 action.APPROVE_ARTICLE=기사를 찬성하십시요
 action.ASSIGN_USERS=사용자를 지정하십시요
 action.CONFIGURATION=윤곽

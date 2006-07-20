@@ -176,6 +176,7 @@ action.ADD_TOPIC=トピックを加えなさい
 action.ADD_USER=ユーザーを加えなさい
 action.ADD_USER_GROUP=ユーザ・グループを加えなさい
 action.ADD_VOTE=投票を加えなさい
+action.ADMINISTRATE=管理しなさい
 action.APPROVE_ARTICLE=記事を承認しなさい
 action.ASSIGN_USERS=ユーザーを割り当てなさい
 action.CONFIGURATION=構成
