@@ -13,6 +13,7 @@ var DragDrop = {
 	parent_group : null,
 	plid : "",
 	portletBoundName : "portlet-boundary",
+	origPortletBoundName : "",
 	start_next : null,
 
 	findHandle : function(curItem) {
@@ -67,7 +68,7 @@ var DragDrop = {
 		for (var i = 0; i < items.length; i++) {
 			curItem = items[i];
 
-			if (curItem.className == DragDrop.portletBoundName) {
+			if (curItem.className.match(DragDrop.portletBoundName)) {
 				if (!curItem.isStatic && enableDragDrop) {
 					foundHandle = this.findHandle(curItem);
 
@@ -149,6 +150,7 @@ var DragDrop = {
 		var inserted = false;
 		
 		if (portletBound.className.search("portlet-dragging-placeholder") < 0) {
+			DragDrop.origPortletBoundName = portletBound.className;
 			portletBound.className += " portlet-dragging-placeholder";
 		}
 		
@@ -222,7 +224,7 @@ var DragDrop = {
 		
 		// Remove dragging style
 		portletCont.id = "dragging_" + portletBound.portletId;
-		portletBound.className = DragDrop.portletBoundName;
+		portletBound.className = DragDrop.origPortletBoundName;
 			
 		if (placeHolder) {
 			var container = placeHolder.parentNode;
@@ -263,7 +265,7 @@ var DragDrop = {
 			portletCont.style.width = targetWidth + "px";
 			
 			for (var i=0; i<items.length; i++) {
-				if (items[i].className == DragDrop.portletBoundName) {
+				if (items[i].className.match(DragDrop.portletBoundName)) {
 					if (items[i].portletId == portletBound.portletId) {
 						break;
 					}
