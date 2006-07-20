@@ -84,11 +84,15 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<html:checkbox styleId='<%= propertyPrefix + "TextStyle" %>' property='<%= propertyPrefix + "TextStyle" %>' onclick='<%= "preview." + previewObject + ".fontStyle = this.checked ? 'italic' : 'normal';" %>' /> <%= LanguageUtil.get(pageContext, "italic") %>
+					<%
+					String textStyleOnClick = "preview." + previewObject + ".fontStyle = this.checked ? 'italic' : 'normal';";
+					String textBoldOnClick = "preview." + previewObject + ".fontWeight = this.checked ? 'bold' : 'normal';";
+					%>
+					<html:checkbox styleId='<%= propertyPrefix + "TextStyle" %>' property='<%= propertyPrefix + "TextStyle" %>' onclick='<%= textStyleOnClick %>' /> <%= LanguageUtil.get(pageContext, "italic") %>
 
 					&nbsp;
 
-					<html:checkbox styleId='<%= propertyPrefix + "TextBold" %>' property='<%= propertyPrefix + "TextBold" %>' onclick='<%= "preview." + previewObject + ".fontWeight = this.checked ? 'bold' : 'normal';" %>' /> <%= LanguageUtil.get(pageContext, "bold") %>
+					<html:checkbox styleId='<%= propertyPrefix + "TextBold" %>' property='<%= propertyPrefix + "TextBold" %>' onclick='<%= textBoldOnClick %>' /> <%= LanguageUtil.get(pageContext, "bold") %>
 				</td>
 			</tr>
 			</table>
