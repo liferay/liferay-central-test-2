@@ -21,16 +21,17 @@
  */
 package com.liferay.util;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.Address;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.liferay.portal.EmailAddressException;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
@@ -42,7 +43,9 @@ import com.liferay.util.Validator;
  */
 public class InternetAddressUtil {
 
-	public static boolean contains(InternetAddress [] ias, String emailAddress) {
+	public static boolean contains(
+			InternetAddress [] ias, String emailAddress) {
+
 		if (Validator.isNotNull(emailAddress) && ias != null) {
 			for (int i = 0; i < ias.length; i++) {
 				if (emailAddress.equals(ias[i].getAddress())) {
@@ -70,8 +73,9 @@ public class InternetAddressUtil {
 		return (InternetAddress [])addresses.toArray(new InternetAddress [] {});
 	}
 
-	public static InternetAddress getAddress(String entry) throws Exception {
-		
+	public static InternetAddress getAddress(String entry)
+		throws AddressException, UnsupportedEncodingException {
+
 		InternetAddress ia = new InternetAddress();
 
 		String [] parts = entry.split(StringPool.LESS_THAN);
@@ -98,7 +102,7 @@ public class InternetAddressUtil {
 			if (!Validator.isAddress(address)) {
 				_log.error("Invalid email address " + address);
 
-				throw new EmailAddressException();
+				throw new AddressException();
 			}
 
 			ia.setAddress(address.trim());
@@ -108,14 +112,14 @@ public class InternetAddressUtil {
 			if (!Validator.isAddress(parts[0])) {
 				_log.error("Invalid email address " + parts[0]);
 
-				throw new EmailAddressException();
+				throw new AddressException();
 			}
 			ia.setAddress(parts[0].trim());
 		}
 		else {
 			_log.error("Invalid email address " + entry);
 
-			throw new EmailAddressException();
+			throw new AddressException();
 		}
 
 		return ia;
