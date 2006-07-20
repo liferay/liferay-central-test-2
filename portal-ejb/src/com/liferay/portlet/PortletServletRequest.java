@@ -107,9 +107,6 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 			}
 		}
 
-
-		System.out.println(name + ": " + retVal);
-
 		return retVal;
 	}
 
