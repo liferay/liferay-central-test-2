@@ -325,7 +325,7 @@ boolean showPortletInactive = portlet.isShowPortletInactive();
 
 <%@ include file="/html/portal/render_portlet-ext.jsp" %>
 
-<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary">
+<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %>">
 	<a name="p_<%= portletId %>"></a>
 	<script type="text/javascript">
 		var portletEl = document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>");
