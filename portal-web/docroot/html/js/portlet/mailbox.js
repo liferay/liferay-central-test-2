@@ -85,24 +85,8 @@ var Mailbox = {
 		msgsSender.innerHTML = "";
 		msgsSubject.innerHTML = "";
 		msgsDate.innerHTML = "";
+		Mailbox.currentMessage = null;
 		Mailbox.currentMessageId = null;
-	},
-	
-	createFolderSelect : function() {
-		var folderSelect = document.getElementById("portlet-mail-folder-select");
-		var selectCount = 1;
-		var folders = Mailbox.foldersList;
-		
-		folderSelect.onchange = Mailbox.onMoveFolderChange;
-		folderSelect.options.length = 0;
-		folderSelect.options[0] = new Option("", "");
-		
-		for (var i = 0; i < folders.length; i++) {
-			if (Mailbox.currentFolder.id != folders[i].id) {
-				folderSelect.options[selectCount] = new Option(folders[i].name, folders[i].id);
-				selectCount++
-			}
-		}
 	},
 
 	decrementCount : function (reverse) {
@@ -722,11 +706,24 @@ var Mailbox = {
 		Mailbox.dragging = false;
 	},
 	
+	print : function() {
+		if (Mailbox.currentMessage) {
+			var frameSrc = themeDisplay.getPathMain() + "/mailbox/view_message?header=true";
+			var printWindow = window.open(frameSrc, "Print", "menubar=yes,width=640,height=480,toolbar=no,resizable=yes");
+				
+			if (printWindow != null && printWindow.print) {
+				printWindow.print();
+			}
+		}
+		else {
+			alert("Please select a message");
+		}
+	},
+	
 	setCurrentFolder : function(folder) {
 		Mailbox.currentFolder = folder;
 		Mailbox.currentFolderId = folder.id;
 		Mailbox.getFolderDetails();
-		Mailbox.createFolderSelect();
 		
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
 		var folderList = folderPane.getElementsByTagName("li");

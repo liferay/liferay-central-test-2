@@ -27,6 +27,13 @@ page import="com.liferay.portlet.mailbox.util.MailMessage"
 <%
 
 MailMessage mm = (MailMessage)request.getAttribute("mailMessage");
+boolean header = ParamUtil.getBoolean(request, "header");
 
 %>
+
+<c:if test="<%= header == true %>">
+	<liferay-util:include page="/html/portlet/mailbox/message_details.jsp" />
+	<hr /><br />
+</c:if>
+
 <%= mm.getHtmlBody() %>
