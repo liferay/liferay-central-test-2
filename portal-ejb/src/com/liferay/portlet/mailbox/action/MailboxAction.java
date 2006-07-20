@@ -156,6 +156,7 @@ public class MailboxAction extends JSONAction {
 		
 		jsonObj.put("body", mm.getHtmlBody());
 		jsonObj.put("header", header.toString());
+		jsonObj.put("id", messageId);
 		
 		return jsonObj.toString();
 	}

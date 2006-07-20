@@ -14,6 +14,7 @@ function MailSummaryObject(sender, subject, date, id, recent) {
 	date.parent = this;
 	
 	sender.onmousedown = subject.onmousedown = date.onmousedown = Mailbox.onSummaryMouseDown;
+	sender.ondblclick = subject.ondblclick = date.ondblclick = Mailbox.onSummaryDblclick;
 }
 
 
@@ -85,8 +86,6 @@ var Mailbox = {
 		msgsSender.innerHTML = "";
 		msgsSubject.innerHTML = "";
 		msgsDate.innerHTML = "";
-		Mailbox.currentMessage = null;
-		Mailbox.currentMessageId = null;
 	},
 
 	decrementCount : function (reverse) {
@@ -503,6 +502,9 @@ var Mailbox = {
 	
 	onFolderSelect : function() {
 		if (Mailbox.currentFolder.id != this.folder.id) {
+			Mailbox.currentMessage = null;
+			Mailbox.currentMessageId = null;
+			
 			Mailbox.setCurrentFolder(this.folder);
 			Mailbox.clearPreview();
 			Mailbox.getPreview();
@@ -602,6 +604,13 @@ var Mailbox = {
 		Mailbox.clearPreview();
 		Mailbox.getPreview();
 		Mailbox.updateSortArrow();
+	},
+	
+	onSummaryDblclick : function() {
+		msObj = this.parent;
+		if (Mailbox.currentMessage && (Mailbox.currentMessage.id == msObj.id )){
+			Mailbox.previewPopup();
+		}
 	},
 	
 	onSummaryMouseDown : function(event) {
@@ -707,17 +716,25 @@ var Mailbox = {
 	},
 	
 	print : function() {
-		if (Mailbox.currentMessage) {
-			var frameSrc = themeDisplay.getPathMain() + "/mailbox/view_message?header=true";
-			var printWindow = window.open(frameSrc, "Print", "menubar=yes,width=640,height=480,toolbar=no,resizable=yes");
-				
-			if (printWindow != null && printWindow.print) {
-				printWindow.print();
-			}
+		var printWindow = Mailbox.previewPopup();
+			
+		if (printWindow != null && printWindow.print) {
+			printWindow.print();
 		}
 		else {
 			alert("Please select a message");
 		}
+	},
+	
+	previewPopup : function() {
+		var popup = null;
+		
+		if (Mailbox.currentMessage) {
+			var frameSrc = themeDisplay.getPathMain() + "/mailbox/view_message?header=true";
+			popup = window.open(frameSrc, "Print", "menubar=yes,width=640,height=480,toolbar=no,resizable=yes");
+		}
+		
+		return popup;
 	},
 	
 	setCurrentFolder : function(folder) {

@@ -129,6 +129,10 @@ String mailLineColor = "#b3b6b0";
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/compose.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "new") %>
 	</td>
+	<td onclick="Mailbox.clearPreview(); Mailbox.getPreview()">
+		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/compose.gif" align="absmiddle" />
+		<%= LanguageUtil.get(pageContext, "check-mail") %>
+	</td>
 	<td onclick="Mailbox.submitCompose('reply', document.<portlet:namespace />fm)">
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/reply.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "reply") %>
