@@ -25,8 +25,8 @@ package com.liferay.portlet.mailbox.util;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
@@ -34,8 +34,10 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.mail.Address;
+import javax.mail.BodyPart;
 import javax.mail.FetchProfile;
 import javax.mail.Flags;
 import javax.mail.Folder;
@@ -45,9 +47,13 @@ import javax.mail.Multipart;
 import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
+import javax.mail.Transport;
 import javax.mail.Flags.Flag;
 import javax.mail.Message.RecipientType;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -56,10 +62,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.mail.Email;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.HtmlEmail;
-import org.apache.commons.mail.SimpleEmail;
 
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PropsUtil;
@@ -69,7 +71,6 @@ import com.liferay.portlet.mailbox.ContentPathException;
 import com.liferay.portlet.mailbox.FolderException;
 import com.liferay.portlet.mailbox.StoreException;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.ListUtil;
 import com.liferay.util.JNDIUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
@@ -134,77 +135,68 @@ public class MailUtil {
 			StoreException {
 
 		try {
-			String userId = (String)ses.getAttribute(WebKeys.USER_ID);
-			String password = (String)ses.getAttribute(WebKeys.USER_PASSWORD);
-
-			Email email = null;
-			if (mm.isSimple()) {
-				SimpleEmail se = new SimpleEmail();
-				se.setMsg(mm.getPlainBody());
-
-				email = se;
-			}
-			else {
-				HtmlEmail he = new HtmlEmail();
-				he.setHtmlMsg(mm.getHtmlBody());
-
-				List attachments = mm.getAttachments();
-				for (Iterator itr = attachments.iterator(); itr.hasNext(); ) {
-					MailAttachment ma = (MailAttachment)itr.next();
-
-					DataSource ds = new ByteArrayDataSource(
-						ma.getContent(), ma.getContentType());
-					he.attach(ds, ma.getFilename(), ma.getFilename());
-				}
-				
-				List remoteAttachments = mm.getRemoteAttachments();
-				for (Iterator itr = remoteAttachments.iterator(); itr.hasNext(); ) {
-					RemoteMailAttachment rma = (RemoteMailAttachment)itr.next();
-
-					Object [] parts = getAttachment(ses, rma.getContentPath());
-					DataSource ds = new ByteArrayDataSource(
-						(byte [])parts[0], (String)parts[1]);
-
-					he.attach(ds, rma.getFilename(), rma.getFilename());
-				}
-
-				email = he;
-			}
-
 			String fromAddy = ((InternetAddress)mm.getFrom()).getAddress();
 			String fromName = ((InternetAddress)mm.getFrom()).getPersonal();
 
-			email.setFrom(fromAddy, fromName);		
-			
-			Collection tos = ListUtil.fromArray(mm.getTo());
-			Collection ccs = ListUtil.fromArray(mm.getCc());
-			Collection bccs = ListUtil.fromArray(mm.getBcc());
-			if (!tos.isEmpty()) {
-				email.setTo(tos);
+			Message message = new MimeMessage(_getSession());
+
+			message.setSubject(mm.getSubject());
+			message.setFrom(new InternetAddress(fromAddy, fromName));
+			if (!Validator.isNull(mm.getTo())) {
+				message.setRecipients(Message.RecipientType.TO, mm.getTo());
 			}
-			if (!ccs.isEmpty()) {
-				email.setCc(ccs);
+			if (!Validator.isNull(mm.getCc())) {
+				message.setRecipients(Message.RecipientType.CC, mm.getCc());
 			}
-			if (!bccs.isEmpty()) {
-				email.setBcc(bccs);
+			if (!Validator.isNull(mm.getBcc())) {
+				message.setRecipients(Message.RecipientType.BCC, mm.getBcc());
 			}
 
-			email.setSubject(mm.getSubject());
-			email.setHostName(_getSMTPHost());
-			email.setAuthentication(_getLogin(userId), password);
-			email.setSentDate(new Date());
-			email.buildMimeMessage();
+			Multipart multipart = new MimeMultipart();
 			
+			BodyPart bodypart = new MimeBodyPart();
+			bodypart.setContent(mm.getHtmlBody(), Constants.TEXT_HTML);
+			multipart.addBodyPart(bodypart);
+
+			List attachments = mm.getAttachments();
+			for (Iterator itr = attachments.iterator(); itr.hasNext(); ) {
+				MailAttachment ma = (MailAttachment)itr.next();
+				
+				DataSource ds = new ByteArrayDataSource(
+					ma.getContent(), ma.getContentType());
+				
+				BodyPart attachment = new MimeBodyPart();
+				attachment.setDataHandler(new DataHandler(ds));
+				attachment.setFileName(ma.getFilename());
+				multipart.addBodyPart(attachment);
+			}
+			
+			List remoteAttachments = mm.getRemoteAttachments();
+			for (Iterator itr = remoteAttachments.iterator(); itr.hasNext(); ) {
+				RemoteMailAttachment rma = (RemoteMailAttachment)itr.next();
+
+				Object [] parts = getAttachment(ses, rma.getContentPath());
+				DataSource ds = new ByteArrayDataSource(
+					(byte [])parts[0], (String)parts[1]);
+
+				BodyPart attachment = new MimeBodyPart();
+				attachment.setDataHandler(new DataHandler(ds));
+				attachment.setFileName(rma.getFilename());
+				multipart.addBodyPart(attachment);
+			}
+			
+			message.setContent(multipart);
+			message.setSentDate(new Date());
+
 			if (send) {
-				email.send();
+				Transport.send(message);
 				setCurrentFolder(ses, MAIL_SENT_NAME);
 			}
 			else {
 				setCurrentFolder(ses, MAIL_DRAFTS_NAME);
 			}
 
-			Message [] mimeMsg = { email.getMimeMessage() };
-			_getCurrentFolder(ses).appendMessages(mimeMsg);
+			_getCurrentFolder(ses).appendMessages(new Message [] { message });
 
 			if (draftId > 0L) {
 				setCurrentFolder(ses, MAIL_DRAFTS_NAME);
@@ -214,16 +206,13 @@ public class MailUtil {
 					new Message [] { msg }, new Flags(Flags.Flag.DELETED), true);
 				_getCurrentFolder(ses).expunge();
 			}
-		} 
-		catch (EmailException e) {
+		} catch (UnsupportedEncodingException e) {
 			_log.error("Error in building and sending email object");
 			throw new ContentException(e);
-		}
-		catch (NamingException e) {
+		} catch (NamingException e) {
 			_log.error("Error in building and sending email object");
 			throw new ContentException(e);
-		} 
-		catch (MessagingException e) {
+		} catch (MessagingException e) {
 			_log.error("Error in building and sending email object");
 			throw new ContentException(e);
 		}
@@ -742,30 +731,11 @@ public class MailUtil {
 			if (part.getContent() instanceof Multipart) {
 			    Multipart mp = (Multipart)part.getContent();
 
-			    if (contentType.startsWith(Constants.MULTIPART_ALTERNATIVE)) {
-			        for (int i = 0; i < mp.getCount(); i++) {
-			        	Part mpbp = mp.getBodyPart(i);
-
-			        	String subcontent = mpbp.getContentType().toLowerCase();
-			            if (subcontent.startsWith(Constants.TEXT_PLAIN)) {
-			            	mm.setPlainBody((String)mpbp.getContent());
-			            }
-			            else if (subcontent.startsWith(Constants.TEXT_HTML)) {
-			            	mm.setHtmlBody((String)mpbp.getContent());
-			            }
-			            else {
-			            	mm = _getContent(
-			            		mpbp, mm, contentPath + StringPool.PERIOD + i);
-			            }
-			        }
-			    }
-			    else {
-			    	for (int i = 0; i < mp.getCount(); i++) {
-			        	Part mpbp = mp.getBodyPart(i);
-			        	mm = _getContent(
-			        		mpbp, mm, contentPath + StringPool.PERIOD + i);
-			    	}
-			    }
+		    	for (int i = 0; i < mp.getCount(); i++) {
+		        	Part mpbp = mp.getBodyPart(i);
+		        	mm = _getContent(
+		        		mpbp, mm, contentPath + StringPool.PERIOD + i);
+		    	}
 			}
 			else if (contentType.startsWith(Constants.TEXT_PLAIN)) {
 				mm.appendPlainBody((String)part.getContent());

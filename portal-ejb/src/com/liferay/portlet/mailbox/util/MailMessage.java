@@ -21,7 +21,7 @@
  */
 package com.liferay.portlet.mailbox.util;
 
-import com.liferay.portal.util.InternetAddressUtil;
+import com.liferay.util.InternetAddressUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;

@@ -344,6 +344,15 @@ public class Validator {
 		return true;
 	}
 
+	public static boolean isNull(Object [] o) {
+		if (o == null || o.length == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public static boolean isNull(String s) {
 		if (s == null) {
 			return true;

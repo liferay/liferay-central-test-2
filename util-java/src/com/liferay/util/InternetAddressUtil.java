@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.liferay.portal.util;
+package com.liferay.util;
 
 import java.util.ArrayList;
 import java.util.List;

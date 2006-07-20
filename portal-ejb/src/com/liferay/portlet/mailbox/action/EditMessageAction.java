@@ -27,7 +27,7 @@ import java.text.DateFormat;
 import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.DateFormats;
-import com.liferay.portal.util.InternetAddressUtil;
+import com.liferay.util.InternetAddressUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.RenderRequestImpl;
