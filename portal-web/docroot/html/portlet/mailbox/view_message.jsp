@@ -29,21 +29,4 @@ page import="com.liferay.portlet.mailbox.util.MailMessage"
 MailMessage mm = (MailMessage)request.getAttribute("mailMessage");
 
 %>
-<html>
-<head>
-	<script type="text/javascript">
-		document.onmousemove = function() {
-			if (parent.document.onmousemove != null) {
-				//parent.document.onmousemove(event);
-			}
-		};
-	</script>
-</head>
-<body>
-
-	<div style="overflow: auto; width: 100%; height: 100%">
-		<%= mm.getHtmlBody() %>
-	</div>
-	
-</body>
-</html>
+<%= mm.getHtmlBody() %>

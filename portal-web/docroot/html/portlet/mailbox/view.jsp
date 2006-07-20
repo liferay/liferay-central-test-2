@@ -145,6 +145,10 @@ String mailLineColor = "#b3b6b0";
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/delete.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "delete") %>
 	</td>
+	<td onclick="if (Mailbox.currentMessageId) { window.open('<%= themeDisplay.getPathMain() %>/mailbox/view_message','Print','menubar=yes,width=640,height=480,toolbar=no'); }">
+		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/print.gif" align="absmiddle" />
+		<%= LanguageUtil.get(pageContext, "print") %>
+	</td>
 	<td onmouseover="document.getElementById('portlet-mail-folder-select').style.display='';">
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/move.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "move-to") %><select id="portlet-mail-folder-select" class="font-x-small" style="display: none; margin-left: 5px;"></select>
@@ -265,7 +269,7 @@ String mailLineColor = "#b3b6b0";
 					</div>
 					<div id="portlet-mail-msg-detailed-pane">
 						<div id="portlet-mail-msg-frame-div">
-							<iframe id="portlet-mail-msg-detailed-frame" frameborder="0" scrolling="no" src="" width="100%"></iframe>
+							<iframe id="portlet-mail-msg-detailed-frame" frameborder="0" src="" width="100%"></iframe>
 						</div>
 					</div>
 				</td>
