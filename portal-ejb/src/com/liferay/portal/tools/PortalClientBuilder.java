@@ -41,15 +41,17 @@ import org.dom4j.io.SAXReader;
 public class PortalClientBuilder {
 
 	public static void main(String[] args) {
-		if (args.length == 3) {
-			new PortalClientBuilder(args[0], args[1], args[2]);
+		if (args.length == 4) {
+			new PortalClientBuilder(args[0], args[1], args[2], args[3]);
 		}
 		else {
 			throw new IllegalArgumentException();
 		}
 	}
 
-	public PortalClientBuilder(String fileName, String outputDir, String url) {
+	public PortalClientBuilder(
+		String fileName, String outputDir, String mappingFile, String url) {
+
 		try {
 			SAXReader reader = new SAXReader();
 
@@ -66,12 +68,20 @@ public class PortalClientBuilder {
 
 				if (name.startsWith("Portal_") || name.startsWith("Portlet_")) {
 					Wsdl2JavaTask.generateJava(
-						url + "/" +  name + "?wsdl", outputDir);
+						url + "/" +  name + "?wsdl", outputDir, mappingFile);
 				}
 			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+		}
+
+		File testNamespace = new File(outputDir + "/com/liferay/portal");
+		
+		if (testNamespace.exists()) {
+			throw new RuntimeException(
+				"Please update " + mappingFile + " to namespace " +
+					"com.liferay.portal to com.liferay.client.portal");
 		}
 	}
 

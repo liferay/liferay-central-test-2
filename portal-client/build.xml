@@ -32,11 +32,13 @@
 		<java
 			classname="com.liferay.portal.tools.PortalClientBuilder"
 			classpathref="project.classpath"
+			failonerror="true"
 			fork="true"
 			newenvironment="true"
 		>
 			<arg value="${project.dir}/tunnel-web/docroot/WEB-INF/server-config.wsdd" />
 			<arg value="src" />
+			<arg value="namespaceMapping.properties" />
 			<arg value="${client.url}" />
 		</java>
 

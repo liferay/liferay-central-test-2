@@ -20,16 +20,16 @@
  * SOFTWARE.
  */
 
-import com.liferay.portal.model.LayoutModel;
-import com.liferay.portal.model.LayoutReference;
-import com.liferay.portal.service.http.LayoutServiceSoap;
-import com.liferay.portal.service.http.LayoutServiceSoapServiceLocator;
-import com.liferay.portlet.messageboards.model.MBCategoryModel;
-import com.liferay.portlet.messageboards.model.MBMessageModel;
-import com.liferay.portlet.messageboards.service.http.MBCategoryServiceSoap;
-import com.liferay.portlet.messageboards.service.http.MBCategoryServiceSoapServiceLocator;
-import com.liferay.portlet.messageboards.service.http.MBMessageServiceSoap;
-import com.liferay.portlet.messageboards.service.http.MBMessageServiceSoapServiceLocator;
+import com.liferay.client.portal.model.LayoutModel;
+import com.liferay.client.portal.model.LayoutReference;
+import com.liferay.client.portal.service.http.LayoutServiceSoap;
+import com.liferay.client.portal.service.http.LayoutServiceSoapServiceLocator;
+import com.liferay.client.portlet.messageboards.model.MBCategoryModel;
+import com.liferay.client.portlet.messageboards.model.MBMessageModel;
+import com.liferay.client.portlet.messageboards.service.http.MBCategoryServiceSoap;
+import com.liferay.client.portlet.messageboards.service.http.MBCategoryServiceSoapServiceLocator;
+import com.liferay.client.portlet.messageboards.service.http.MBMessageServiceSoap;
+import com.liferay.client.portlet.messageboards.service.http.MBMessageServiceSoapServiceLocator;
 
 import java.net.URL;
 
