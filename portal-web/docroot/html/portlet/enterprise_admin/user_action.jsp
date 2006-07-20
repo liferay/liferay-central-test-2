@@ -39,13 +39,17 @@
 
 	String organizationId = user2.getOrganization().getOrganizationId();
 	String locationId = user2.getLocation().getOrganizationId();
+
+	String portletURL = null;
 	%>
 
 	<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="updateURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 			<portlet:param name="p_u_e_a" value="<%= user2.getEmailAddress() %>" />
 		</portlet:renderURL>
+
+		<% portletURL = (String)pageContext.getAttribute(updateURL); %>
 
 		<liferay-ui:icon image="edit" url="<%= portletURL %>" />
 	</c:if>
@@ -55,8 +59,10 @@
 			modelResource="<%= User.class.getName() %>"
 			modelResourceDescription="<%= user2.getFullName() %>"
 			resourcePrimKey="<%= user2.getPrimaryKey().toString() %>"
-			var="portletURL"
+			var="permissionsURL"
 		/>
+
+		<% portletURL = (String)pageContext.getAttribute(permissionsURL); %>
 
 		<liferay-ui:icon image="permissions" url="<%= portletURL %>" />
 	</c:if>
@@ -69,22 +75,26 @@
 
 			<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.DELETE) %>">
 				<c:if test="<%= !searchTerms.isActive() %>">
-					<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+					<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="activateURL">
 						<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
 						<portlet:param name="deleteUserIds" value="<%= userId %>" />
 					</portlet:actionURL>
 
+					<% portletURL = (String)pageContext.getAttribute(activateURL); %>
+
 					<liferay-ui:icon image="activate" url="<%= portletURL %>" />
 				</c:if>
 
-				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deactivateURL">
 					<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="deleteUserIds" value="<%= userId %>" />
 				</portlet:actionURL>
+
+				<% portletURL = (String)pageContext.getAttribute(deactivateURL); %>
 
 				<c:choose>
 					<c:when test="<%= searchTerms.isActive() %>">

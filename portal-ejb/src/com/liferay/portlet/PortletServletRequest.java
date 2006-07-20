@@ -26,6 +26,7 @@ import com.liferay.portal.service.spring.RoleLocalServiceUtil;
 import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.StringPool;
 import com.liferay.util.servlet.SharedSessionWrapper;
 
 import java.io.UnsupportedEncodingException;
@@ -61,10 +62,10 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 
 		_req = req;
 		_portletRequest = portletRequest;
-		_pathInfo = pathInfo;
-		_queryString = queryString;
-		_requestURI = requestURI;
-		_servletPath = servletPath;
+		_pathInfo = pathInfo != null ? pathInfo : StringPool.BLANK;
+		_queryString = queryString != null ? queryString : StringPool.BLANK;
+		_requestURI = requestURI != null ? requestURI : StringPool.BLANK;
+		_servletPath = servletPath != null ? servletPath : StringPool.BLANK;
 		_sharedHttpSessionAttributes = sharedHttpSessionAttributes;
 	}
 
@@ -77,23 +78,37 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 
 		RenderRequestImpl reqImpl = (RenderRequestImpl)_portletRequest;
 
-		if (ServerDetector.isWebSphere() && reqImpl.getPortlet().isWARFile()) {
-			if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_CONTEXT_PATH)) {
-				retVal = _portletRequest.getContextPath();
+		System.out.println(name + ": " + retVal);
+
+		if (ServerDetector.isWebSphere()) {
+			if (reqImpl.getPortlet().isWARFile()) {
+				if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_CONTEXT_PATH)) {
+					retVal = _portletRequest.getContextPath();
+				}
+				else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_PATH_INFO)) {
+					retVal = _pathInfo;
+				}
+				else if (name
+					.equals(WebKeys.JAVAX_SERVLET_INCLUDE_QUERY_STRING)) {
+					retVal = _queryString;
+				}
+				else if (name.equals(
+					WebKeys.JAVAX_SERVLET_INCLUDE_REQUEST_URI)) {
+					retVal = _requestURI;
+				}
+				else if (name.equals(
+					WebKeys.JAVAX_SERVLET_INCLUDE_SERVLET_PATH)) {
+					retVal = _servletPath;
+				}
 			}
-			else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_PATH_INFO)) {
-				retVal = _pathInfo;
-			}
-			else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_QUERY_STRING)) {
-				retVal =  _queryString;
-			}
-			else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_REQUEST_URI)) {
-				retVal = _requestURI;
-			}
-			else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_SERVLET_PATH)) {
-				retVal = _servletPath;
+			
+			if (name.startsWith("javax.servlet.include.") && retVal == null) {
+				retVal = StringPool.BLANK;
 			}
 		}
+
+
+		System.out.println(name + ": " + retVal);
 
 		return retVal;
 	}
