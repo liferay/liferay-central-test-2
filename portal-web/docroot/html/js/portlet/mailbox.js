@@ -47,7 +47,7 @@ var Mailbox = {
 				folderItem.seOffset = Coordinates.southeastOffset(folderItem, true);
 			}
 			
-			if (folderItem.folder.id != Mailbox.currentFolder.id) {
+			if (Mailbox.isMoveAllowed(folderItem.folder.id)) {
 				if (coord.inside(folderItem.nwOffset, folderItem.seOffset)) {
 						folderItem.style.backgroundColor = Mailbox.colorHighlight;
 						foundInside = true;
@@ -75,33 +75,6 @@ var Mailbox = {
 		if (!Mailbox.summaryList) {
 			return;
 		}
-		/*
-		
-		var msObj = Mailbox.summaryList.head;
-		var nextMsObj;
-		var field;
-		var nextField;
-		
-		while (msObj) {
-			nextMsObj = msObj.next
-			field = msObj.head;
-			
-			while (field) {
-				nextField = field.next;
-				field.parentNode.removeChild(field);
-				field.onmousedown = null;
-				field.next = null;
-				field = null;
-				field = nextField;
-			}
-			msObj.prev = null;
-			msObj.next = null;
-			msObj.head = null;
-			msObj = null;
-			
-			msObj = nextMsObj;
-		}
-		*/
 		
 		var msgsSender = document.getElementById("portlet-mail-msgs-from");
 		var msgsSubject = document.getElementById("portlet-mail-msgs-subject");
@@ -151,8 +124,6 @@ var Mailbox = {
 				countSpan.parentNode.removeChild(countSpan);
 			}
 		}
-
-
 	},
 	
 	deleteSelectedMessages : function() {
@@ -415,10 +386,6 @@ var Mailbox = {
 				Mailbox.lastSelected = msObj;
 			}
 		}
-		
-		if (Mailbox.currentMessage == null && Mailbox.currentMessageId != null) {
-			//Mailbox.getMessageDetails(Mailbox.currentMessageId);
-		}
 	},
 	
 	getSelectedMessages : function(processFunction) {
@@ -509,10 +476,34 @@ var Mailbox = {
 		Mailbox.getFolders();
 	},
 	
+	isMoveAllowed : function (toFolderId) {
+		/* Mail cannot be moved to the same folder
+		 * Mail cannot be moved to Drafts
+		 * Drafts can only be move to Trash
+		 * NOTE: checkFolderLocation need same exceptions.
+		 */
+		 
+		if (Mailbox.currentFolderId == toFolderId ||
+			toFolderId == "Drafts" ||
+			(Mailbox.currentFolderId == "Drafts" && toFolderId != "Trash")) {
+			
+			return false;
+		}
+		else {
+			return true;
+		}
+	},
+	
 	moveToFolder : function(folderId, folderName) {
 		var moveList = Mailbox.getSelectedMessages();
 		
-		if (moveList.length > 0) {
+		if (moveList.length <- 0) {
+			alert("Please select messages to move");
+		}
+		else if (!Mailbox.isMoveAllowed(folderId)) {
+			alert("You cannot move to " + folderName);
+		}
+		else {
 			confirmMsg = "Move " + moveList.length + " message" +
 				(moveList.length > 1 ? "s" : "") + " to " + folderName + "?";
 			
@@ -520,12 +511,10 @@ var Mailbox = {
 				Mailbox.removeSelectedMessages();
 				loadPage(themeDisplay.getPathMain() + "/mailbox/action", "cmd=moveMessages&folderId=" + folderId + "&messages=" + moveList);
 			}
-		}
-		else {
-			alert("Please select messages to move");
+			
+			Mailbox.resetLastSelected();
 		}
 		
-		Mailbox.resetLastSelected();
 	},
 	
 	onFolderSelect : function() {

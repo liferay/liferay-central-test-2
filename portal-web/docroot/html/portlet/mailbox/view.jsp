@@ -162,6 +162,10 @@ String mailLineColor = "#b3b6b0";
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/edit_draft.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "edit") %>
 	</td>
+	<td onclick="Mailbox.deleteSelectedMessages()">
+		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/delete.gif" align="absmiddle" />
+		<%= LanguageUtil.get(pageContext, "delete") %>
+	</td>
 </tr>
 </table>
 </div>
@@ -256,14 +260,14 @@ String mailLineColor = "#b3b6b0";
 			</tr>
 			<tr>
 				<td class="portlet-mail-msgs-pane-td" width="100%">
-						<div id="portlet-mail-msg-header">
-							<div id="portlet-mail-msg-header-div"></div>
+					<div id="portlet-mail-msg-header">
+						<div id="portlet-mail-msg-header-div"></div>
+					</div>
+					<div id="portlet-mail-msg-detailed-pane">
+						<div id="portlet-mail-msg-frame-div">
+							<iframe id="portlet-mail-msg-detailed-frame" frameborder="0" scrolling="no" src="" width="100%"></iframe>
 						</div>
-						<div id="portlet-mail-msg-detailed-pane">
-							<div id="portlet-mail-msg-frame-div">
-								<iframe id="portlet-mail-msg-detailed-frame" frameborder="0" scrolling="no" src="" width="100%"></iframe>
-							</div>
-						</div>
+					</div>
 				</td>
 			</tr>
 			</table>
