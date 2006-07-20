@@ -78,8 +78,6 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 
 		RenderRequestImpl reqImpl = (RenderRequestImpl)_portletRequest;
 
-		System.out.println(name + ": " + retVal);
-
 		if (ServerDetector.isWebSphere()) {
 			if (reqImpl.getPortlet().isWARFile()) {
 				if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_CONTEXT_PATH)) {
