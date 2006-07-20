@@ -151,8 +151,7 @@ public class StrutsURLEncoder implements URLEncoder {
 
 			// Workaround for bug in Struts where it adds the servlet mapping
 			// path to the action path
-
-			if ((_servletMapping != null) && (_servletMapping.length() > 0) &&
+			if (Validator.isNotNull(_servletMapping) &&
 				(strutsAction.startsWith(_servletMapping))) {
 
 				strutsAction = strutsAction.substring(
@@ -186,7 +185,7 @@ public class StrutsURLEncoder implements URLEncoder {
 				int pos = 0;
 
 				if (servletMapping.startsWith(_mainPath)) {
-					pos = _mainPath.length() - 1;
+					pos = _mainPath.length() - 2;
 				}
 
 				_servletMapping = servletMapping.substring(
