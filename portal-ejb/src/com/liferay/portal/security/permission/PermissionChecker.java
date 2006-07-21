@@ -122,7 +122,8 @@ public class PermissionChecker {
 					GroupServiceUtil.getUserGroupsGroups(userUserGroups);
 
 				permissionCheckerBag = new PermissionCheckerBag(
-					userOrgs, userOrgGroups, userUserGroupGroups);
+					user.getUserId(), userOrgs, userOrgGroups,
+					userUserGroupGroups);
 			}
 			catch (Exception e) {
 				_log.error(StackTraceUtil.getStackTrace(e));
@@ -144,8 +145,7 @@ public class PermissionChecker {
 				// improve performance
 
 				if (signedIn) {
-					permissionCheckerBag.hasUserGroup(
-						user.getUserId(), groupId);
+					permissionCheckerBag.hasGroup(groupId);
 				}
 			}
 			catch (Exception e) {
@@ -235,6 +235,9 @@ public class PermissionChecker {
 			return true;
 		}
 
+		start = logHasUserPermission(
+			groupId, name, primKey, actionId, start, 1);
+
 		// Individual
 
 		String[] resourceIds = new String[3];
@@ -254,6 +257,9 @@ public class PermissionChecker {
 							" " + primKey + " does not exist");
 			}
 		}
+
+		start = logHasUserPermission(
+			groupId, name, primKey, actionId, start, 2);
 
 		// Group
 
@@ -275,6 +281,9 @@ public class PermissionChecker {
 			}
 		}
 
+		start = logHasUserPermission(
+			groupId, name, primKey, actionId, start, 3);
+
 		// Company
 
 		try {
@@ -293,16 +302,8 @@ public class PermissionChecker {
 			}
 		}
 
-		if (_log.isDebugEnabled()) {
-			long end = System.currentTimeMillis();
-
-			_log.debug(
-				"Getting user resources for " + groupId + " " + name + " " +
-					primKey + " " + actionId + " takes " + (end - start) +
-						" ms");
-
-			start = end;
-		}
+		start = logHasUserPermission(
+			groupId, name, primKey, actionId, start, 4);
 
 		// Check if user has access to perform the action on the given
 		// resource scopes. The resources are scoped to check first for an
@@ -313,14 +314,8 @@ public class PermissionChecker {
 			user.getUserId(), groupId, actionId, resourceIds,
 			permissionCheckerBag);
 
-		if (_log.isDebugEnabled()) {
-			long end = System.currentTimeMillis();
-
-			_log.debug(
-				"Checking user permission for " + groupId + " " + name + " " +
-					primKey + " " + actionId + " takes " + (end - start) +
-						" ms");
-		}
+		start = logHasUserPermission(
+			groupId, name, primKey, actionId, start, 5);
 
 		return value;
 	}
@@ -328,11 +323,11 @@ public class PermissionChecker {
 	protected boolean isAdmin(String companyId, String groupId, String name)
 		throws PortalException, SystemException {
 
-		if (isCompanyAdmin(companyId, groupId, name)) {
+		if (permissionCheckerBag.isCompanyAdmin(companyId)) {
 			return true;
 		}
 
-		if (isCommunityAdmin(companyId, groupId, name)) {
+		if (permissionCheckerBag.isCommunityAdmin(companyId, groupId, name)) {
 			return true;
 		}
 
@@ -343,52 +338,22 @@ public class PermissionChecker {
 		return false;
 	}
 
-	protected boolean isCommunityAdmin(
-			String companyId, String groupId, String name)
-		throws PortalException, SystemException {
+	protected long logHasUserPermission(
+		String groupId, String name, String primKey, String actionId,
+		long start, int block) {
 
-		if (groupId == null) {
-			return false;
+		if (!_log.isDebugEnabled()) {
+			return 0;
 		}
 
-		try {
-			Resource resource = ResourceLocalServiceUtil.getResource(
-				companyId, Group.class.getName(), Resource.TYPE_CLASS,
-				Resource.SCOPE_INDIVIDUAL, groupId);
+		long end = System.currentTimeMillis();
 
-			if (PermissionLocalServiceUtil.hasUserPermission(
-					user.getUserId(), ActionKeys.ADMINISTRATE,
-					resource.getResourceId())) {
+		_log.debug(
+			"Checking user permission block " + block + " for " + groupId +
+				" " + name + " " + primKey + " " + actionId + " takes " +
+					(end - start) + " ms");
 
-				return true;
-			}
-		}
-		catch (NoSuchResourceException nsre) {
-		}
-
-		try {
-			Group group = GroupServiceUtil.getGroup(groupId);
-
-			if (group.getClassName().equals(User.class.getName()) &&
-				group.getClassPK().equals(user.getUserId())) {
-
-				return true;
-			}
-		}
-		catch (NoSuchGroupException nsge) {
-		}
-
-		return false;
-	}
-
-	protected boolean isCompanyAdmin(
-			String companyId, String groupId, String name)
-		throws PortalException, SystemException {
-
-		Role adminRole = RoleServiceUtil.getRole(companyId, Role.ADMINISTRATOR);
-
-		return UserServiceUtil.hasRoleUser(
-			adminRole.getRoleId(), user.getUserId());
+		return end;
 	}
 
 	protected static final String RESULTS_SEPARATOR = "_RESULTS_SEPARATOR_";

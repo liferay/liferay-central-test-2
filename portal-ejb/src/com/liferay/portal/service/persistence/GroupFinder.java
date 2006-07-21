@@ -177,6 +177,23 @@ public class GroupFinder {
 	public static Group findByC_N(String companyId, String name)
 		throws NoSuchGroupException, SystemException {
 
+		String groupId = GroupPool.getByC_N(companyId, name);
+
+		if (groupId == null) {
+			Group group = GroupUtil.fetchByC_N(companyId, name);
+
+			if (group != null) {
+				return group;
+			}
+		}
+		else {
+			Group group = GroupUtil.fetchByPrimaryKey(groupId);
+
+			if (group != null) {
+				return group;
+			}
+		}
+
 		name = StringUtil.lowerCase(name);
 
 		Session session = null;

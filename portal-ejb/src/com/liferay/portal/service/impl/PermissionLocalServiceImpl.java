@@ -328,7 +328,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		//List userGroups = UserUtil.getGroups(userId);
 
 		if (Validator.isNotNull(groupId)) {
-			if (permissionCheckerBag.hasUserGroup(userId, groupId)) {
+			if (permissionCheckerBag.hasGroup(groupId)) {
 				userGroups.add(GroupUtil.findByPrimaryKey(groupId));
 			}
 		}
@@ -667,7 +667,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		long end = System.currentTimeMillis();
 
 		_log.debug(
-			"Checking user permission block " + block + " for " + userId + " " +
+			"Checking user permissions block " + block + " for " + userId + " " +
 				actionId + " " + resourceId + " takes " + (end - start) +
 					" ms");
 

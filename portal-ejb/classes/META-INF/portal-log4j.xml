@@ -116,6 +116,14 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.service.persistence.PermissionPool">
+		<priority value="INFO" />
+	</category>
+
+	<category name="com.liferay.portal.service.persistence.ResourcePool">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.servlet">
 		<priority value="ERROR" />
 	</category>
