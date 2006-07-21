@@ -78,6 +78,22 @@ public class ShoppingOrderPersistence extends BasePersistence {
 					orderId.toString());
 			}
 
+			return remove(shoppingOrder);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ShoppingOrder remove(ShoppingOrder shoppingOrder)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(shoppingOrder);
 			session.flush();
 
@@ -114,33 +130,20 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 	public ShoppingOrder findByPrimaryKey(String orderId)
 		throws NoSuchOrderException, SystemException {
-		Session session = null;
+		ShoppingOrder shoppingOrder = fetchByPrimaryKey(orderId);
 
-		try {
-			session = openSession();
-
-			ShoppingOrder shoppingOrder = (ShoppingOrder)session.get(ShoppingOrder.class,
-					orderId);
-
-			if (shoppingOrder == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No ShoppingOrder exists with the primary key " +
-						orderId.toString());
-				}
-
-				throw new NoSuchOrderException(
-					"No ShoppingOrder exists with the primary key " +
+		if (shoppingOrder == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No ShoppingOrder exists with the primary key " +
 					orderId.toString());
 			}
 
-			return shoppingOrder;
+			throw new NoSuchOrderException(
+				"No ShoppingOrder exists with the primary key " +
+				orderId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return shoppingOrder;
 	}
 
 	public ShoppingOrder fetchByPrimaryKey(String orderId)
@@ -459,73 +462,12 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 	public void removeByG_U_PPPS(String groupId, String userId,
 		String ppPaymentStatus) throws SystemException {
-		Session session = null;
+		Iterator itr = findByG_U_PPPS(groupId, userId, ppPaymentStatus)
+						   .iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (ppPaymentStatus == null) {
-				query.append("ppPaymentStatus IS NULL");
-			}
-			else {
-				query.append("ppPaymentStatus = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate DESC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			if (ppPaymentStatus != null) {
-				q.setString(queryPos++, ppPaymentStatus);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				ShoppingOrder shoppingOrder = (ShoppingOrder)itr.next();
-				session.delete(shoppingOrder);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			ShoppingOrder shoppingOrder = (ShoppingOrder)itr.next();
+			remove(shoppingOrder);
 		}
 	}
 

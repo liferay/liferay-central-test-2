@@ -71,6 +71,21 @@ public class ReleasePersistence extends BasePersistence {
 					releaseId.toString());
 			}
 
+			return remove(release);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Release remove(Release release) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(release);
 			session.flush();
 
@@ -106,32 +121,20 @@ public class ReleasePersistence extends BasePersistence {
 
 	public Release findByPrimaryKey(String releaseId)
 		throws NoSuchReleaseException, SystemException {
-		Session session = null;
+		Release release = fetchByPrimaryKey(releaseId);
 
-		try {
-			session = openSession();
-
-			Release release = (Release)session.get(Release.class, releaseId);
-
-			if (release == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Release exists with the primary key " +
-						releaseId.toString());
-				}
-
-				throw new NoSuchReleaseException(
-					"No Release exists with the primary key " +
+		if (release == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No Release exists with the primary key " +
 					releaseId.toString());
 			}
 
-			return release;
+			throw new NoSuchReleaseException(
+				"No Release exists with the primary key " +
+				releaseId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return release;
 	}
 
 	public Release fetchByPrimaryKey(String releaseId)

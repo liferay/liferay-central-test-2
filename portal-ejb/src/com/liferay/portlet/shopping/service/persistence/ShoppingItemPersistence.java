@@ -39,7 +39,6 @@ import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
-import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -92,8 +91,26 @@ public class ShoppingItemPersistence extends BasePersistence {
 					itemId.toString());
 			}
 
+			return remove(shoppingItem);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ShoppingItem remove(ShoppingItem shoppingItem)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(shoppingItem);
 			session.flush();
+			ShoppingItemPool.removeByC_S(shoppingItem.getCompanyId(),
+				shoppingItem.getSku());
 
 			return shoppingItem;
 		}
@@ -128,33 +145,20 @@ public class ShoppingItemPersistence extends BasePersistence {
 
 	public ShoppingItem findByPrimaryKey(String itemId)
 		throws NoSuchItemException, SystemException {
-		Session session = null;
+		ShoppingItem shoppingItem = fetchByPrimaryKey(itemId);
 
-		try {
-			session = openSession();
-
-			ShoppingItem shoppingItem = (ShoppingItem)session.get(ShoppingItem.class,
-					itemId);
-
-			if (shoppingItem == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No ShoppingItem exists with the primary key " +
-						itemId.toString());
-				}
-
-				throw new NoSuchItemException(
-					"No ShoppingItem exists with the primary key " +
+		if (shoppingItem == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No ShoppingItem exists with the primary key " +
 					itemId.toString());
 			}
 
-			return shoppingItem;
+			throw new NoSuchItemException(
+				"No ShoppingItem exists with the primary key " +
+				itemId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return shoppingItem;
 	}
 
 	public ShoppingItem fetchByPrimaryKey(String itemId)
@@ -354,74 +358,40 @@ public class ShoppingItemPersistence extends BasePersistence {
 
 	public ShoppingItem findByC_S(String companyId, String sku)
 		throws NoSuchItemException, SystemException {
-		Session session = null;
+		ShoppingItem shoppingItem = fetchByC_S(companyId, sku);
 
-		try {
-			session = openSession();
+		if (shoppingItem == null) {
+			String msg = "No ShoppingItem exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "sku=";
+			msg += sku;
+			msg += StringPool.CLOSE_CURLY_BRACE;
 
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (sku == null) {
-				query.append("sku IS NULL");
-			}
-			else {
-				query.append("sku = ?");
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg);
 			}
 
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("itemId ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (sku != null) {
-				q.setString(queryPos++, sku);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				String msg = "No ShoppingItem exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "sku=";
-				msg += sku;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchItemException(msg);
-			}
-
-			ShoppingItem shoppingItem = (ShoppingItem)list.get(0);
-
-			return shoppingItem;
+			throw new NoSuchItemException(msg);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return shoppingItem;
 	}
 
 	public ShoppingItem fetchByC_S(String companyId, String sku)
 		throws SystemException {
+		String pk = ShoppingItemPool.getByC_S(companyId, sku);
+
+		if (pk != null) {
+			ShoppingItem shoppingItem = fetchByPrimaryKey(pk);
+
+			if (shoppingItem != null) {
+				return shoppingItem;
+			}
+		}
+
 		Session session = null;
 
 		try {
@@ -469,6 +439,8 @@ public class ShoppingItemPersistence extends BasePersistence {
 			}
 
 			ShoppingItem shoppingItem = (ShoppingItem)list.get(0);
+			ShoppingItemPool.putByC_S(companyId, sku,
+				shoppingItem.getPrimaryKey());
 
 			return shoppingItem;
 		}
@@ -505,120 +477,18 @@ public class ShoppingItemPersistence extends BasePersistence {
 	}
 
 	public void removeByCategoryId(String categoryId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCategoryId(categoryId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("itemId ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				ShoppingItem shoppingItem = (ShoppingItem)itr.next();
-				session.delete(shoppingItem);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			ShoppingItem shoppingItem = (ShoppingItem)itr.next();
+			remove(shoppingItem);
 		}
 	}
 
 	public void removeByC_S(String companyId, String sku)
 		throws NoSuchItemException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (sku == null) {
-				query.append("sku IS NULL");
-			}
-			else {
-				query.append("sku = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("itemId ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (sku != null) {
-				q.setString(queryPos++, sku);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				ShoppingItem shoppingItem = (ShoppingItem)itr.next();
-				session.delete(shoppingItem);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				String msg = "No ShoppingItem exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "sku=";
-				msg += sku;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchItemException(msg);
-			}
-			else {
-				throw new SystemException(he);
-			}
-		}
-		finally {
-			closeSession(session);
-		}
+		ShoppingItem shoppingItem = findByC_S(companyId, sku);
+		remove(shoppingItem);
 	}
 
 	public int countByCategoryId(String categoryId) throws SystemException {

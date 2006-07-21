@@ -76,6 +76,21 @@ public class ListTypePersistence extends BasePersistence {
 					listTypeId.toString());
 			}
 
+			return remove(listType);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ListType remove(ListType listType) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(listType);
 			session.flush();
 
@@ -111,32 +126,20 @@ public class ListTypePersistence extends BasePersistence {
 
 	public ListType findByPrimaryKey(String listTypeId)
 		throws NoSuchListTypeException, SystemException {
-		Session session = null;
+		ListType listType = fetchByPrimaryKey(listTypeId);
 
-		try {
-			session = openSession();
-
-			ListType listType = (ListType)session.get(ListType.class, listTypeId);
-
-			if (listType == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No ListType exists with the primary key " +
-						listTypeId.toString());
-				}
-
-				throw new NoSuchListTypeException(
-					"No ListType exists with the primary key " +
+		if (listType == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No ListType exists with the primary key " +
 					listTypeId.toString());
 			}
 
-			return listType;
+			throw new NoSuchListTypeException(
+				"No ListType exists with the primary key " +
+				listTypeId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return listType;
 	}
 
 	public ListType fetchByPrimaryKey(String listTypeId)
@@ -353,46 +356,11 @@ public class ListTypePersistence extends BasePersistence {
 	}
 
 	public void removeByType(String type) throws SystemException {
-		Session session = null;
+		Iterator itr = findByType(type).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.ListType WHERE ");
-
-			if (type == null) {
-				query.append("type_ IS NULL");
-			}
-			else {
-				query.append("type_ = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (type != null) {
-				q.setString(queryPos++, type);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				ListType listType = (ListType)itr.next();
-				session.delete(listType);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			ListType listType = (ListType)itr.next();
+			remove(listType);
 		}
 	}
 

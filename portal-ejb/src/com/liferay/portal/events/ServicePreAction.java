@@ -101,6 +101,12 @@ public class ServicePreAction extends Action {
 	public void run(HttpServletRequest req, HttpServletResponse res)
 		throws ActionException {
 
+		long start = 0;
+
+		if (_log.isDebugEnabled()) {
+			start = System.currentTimeMillis();
+		}
+
 		try {
 			HttpSession ses = req.getSession();
 
@@ -457,6 +463,12 @@ public class ServicePreAction extends Action {
 			_log.error(StackTraceUtil.getStackTrace(e));
 
 			throw new ActionException(e);
+		}
+
+		if (_log.isDebugEnabled()) {
+			long end = System.currentTimeMillis();
+
+			_log.debug("Running takes " + (end - start) + " ms");
 		}
 	}
 

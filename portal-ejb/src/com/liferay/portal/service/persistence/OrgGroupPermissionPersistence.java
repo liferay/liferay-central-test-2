@@ -78,6 +78,22 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 					orgGroupPermissionPK.toString());
 			}
 
+			return remove(orgGroupPermission);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public OrgGroupPermission remove(OrgGroupPermission orgGroupPermission)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(orgGroupPermission);
 			session.flush();
 
@@ -115,34 +131,20 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 	public OrgGroupPermission findByPrimaryKey(
 		OrgGroupPermissionPK orgGroupPermissionPK)
 		throws NoSuchOrgGroupPermissionException, SystemException {
-		Session session = null;
+		OrgGroupPermission orgGroupPermission = fetchByPrimaryKey(orgGroupPermissionPK);
 
-		try {
-			session = openSession();
-
-			OrgGroupPermission orgGroupPermission = (OrgGroupPermission)session.get(OrgGroupPermission.class,
-					orgGroupPermissionPK);
-
-			if (orgGroupPermission == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No OrgGroupPermission exists with the primary key " +
-						orgGroupPermissionPK.toString());
-				}
-
-				throw new NoSuchOrgGroupPermissionException(
-					"No OrgGroupPermission exists with the primary key " +
+		if (orgGroupPermission == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No OrgGroupPermission exists with the primary key " +
 					orgGroupPermissionPK.toString());
 			}
 
-			return orgGroupPermission;
+			throw new NoSuchOrgGroupPermissionException(
+				"No OrgGroupPermission exists with the primary key " +
+				orgGroupPermissionPK.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return orgGroupPermission;
 	}
 
 	public OrgGroupPermission fetchByPrimaryKey(
@@ -358,45 +360,11 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 
 	public void removeByPermissionId(String permissionId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByPermissionId(permissionId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
-
-			if (permissionId == null) {
-				query.append("permissionId IS NULL");
-			}
-			else {
-				query.append("permissionId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (permissionId != null) {
-				q.setString(queryPos++, permissionId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				OrgGroupPermission orgGroupPermission = (OrgGroupPermission)itr.next();
-				session.delete(orgGroupPermission);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			OrgGroupPermission orgGroupPermission = (OrgGroupPermission)itr.next();
+			remove(orgGroupPermission);
 		}
 	}
 

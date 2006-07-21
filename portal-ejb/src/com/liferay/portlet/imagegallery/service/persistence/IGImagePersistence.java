@@ -77,6 +77,21 @@ public class IGImagePersistence extends BasePersistence {
 					igImagePK.toString());
 			}
 
+			return remove(igImage);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public IGImage remove(IGImage igImage) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(igImage);
 			session.flush();
 
@@ -113,32 +128,20 @@ public class IGImagePersistence extends BasePersistence {
 
 	public IGImage findByPrimaryKey(IGImagePK igImagePK)
 		throws NoSuchImageException, SystemException {
-		Session session = null;
+		IGImage igImage = fetchByPrimaryKey(igImagePK);
 
-		try {
-			session = openSession();
-
-			IGImage igImage = (IGImage)session.get(IGImage.class, igImagePK);
-
-			if (igImage == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No IGImage exists with the primary key " +
-						igImagePK.toString());
-				}
-
-				throw new NoSuchImageException(
-					"No IGImage exists with the primary key " +
+		if (igImage == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No IGImage exists with the primary key " +
 					igImagePK.toString());
 			}
 
-			return igImage;
+			throw new NoSuchImageException(
+				"No IGImage exists with the primary key " +
+				igImagePK.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return igImage;
 	}
 
 	public IGImage fetchByPrimaryKey(IGImagePK igImagePK)
@@ -359,47 +362,11 @@ public class IGImagePersistence extends BasePersistence {
 	}
 
 	public void removeByFolderId(String folderId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByFolderId(folderId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("imageId ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				IGImage igImage = (IGImage)itr.next();
-				session.delete(igImage);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			IGImage igImage = (IGImage)itr.next();
+			remove(igImage);
 		}
 	}
 

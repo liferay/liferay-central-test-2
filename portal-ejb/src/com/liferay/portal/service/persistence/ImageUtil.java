@@ -78,6 +78,33 @@ public class ImageUtil {
 		return image;
 	}
 
+	public static com.liferay.portal.model.Image remove(
+		com.liferay.portal.model.Image image)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(image);
+		}
+
+		image = getPersistence().remove(image);
+
+		if (listener != null) {
+			listener.onAfterRemove(image);
+		}
+
+		return image;
+	}
+
 	public static com.liferay.portal.model.Image update(
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException {

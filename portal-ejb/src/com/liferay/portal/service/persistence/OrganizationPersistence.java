@@ -38,7 +38,6 @@ import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
-import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -92,10 +91,28 @@ public class OrganizationPersistence extends BasePersistence {
 					organizationId.toString());
 			}
 
+			return remove(organization);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Organization remove(Organization organization)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(organization);
 			session.flush();
-			clearGroups.clear(organizationId);
-			clearUsers.clear(organizationId);
+			clearGroups.clear(organization.getPrimaryKey());
+			clearUsers.clear(organization.getPrimaryKey());
+			OrganizationPool.removeByC_N(organization.getCompanyId(),
+				organization.getName());
 
 			return organization;
 		}
@@ -130,33 +147,20 @@ public class OrganizationPersistence extends BasePersistence {
 
 	public Organization findByPrimaryKey(String organizationId)
 		throws NoSuchOrganizationException, SystemException {
-		Session session = null;
+		Organization organization = fetchByPrimaryKey(organizationId);
 
-		try {
-			session = openSession();
-
-			Organization organization = (Organization)session.get(Organization.class,
-					organizationId);
-
-			if (organization == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Organization exists with the primary key " +
-						organizationId.toString());
-				}
-
-				throw new NoSuchOrganizationException(
-					"No Organization exists with the primary key " +
+		if (organization == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No Organization exists with the primary key " +
 					organizationId.toString());
 			}
 
-			return organization;
+			throw new NoSuchOrganizationException(
+				"No Organization exists with the primary key " +
+				organizationId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return organization;
 	}
 
 	public Organization fetchByPrimaryKey(String organizationId)
@@ -756,73 +760,40 @@ public class OrganizationPersistence extends BasePersistence {
 
 	public Organization findByC_N(String companyId, String name)
 		throws NoSuchOrganizationException, SystemException {
-		Session session = null;
+		Organization organization = fetchByC_N(companyId, name);
 
-		try {
-			session = openSession();
+		if (organization == null) {
+			String msg = "No Organization exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "name=";
+			msg += name;
+			msg += StringPool.CLOSE_CURLY_BRACE;
 
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg);
 			}
 
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				String msg = "No Organization exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "name=";
-				msg += name;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchOrganizationException(msg);
-			}
-
-			Organization organization = (Organization)list.get(0);
-
-			return organization;
+			throw new NoSuchOrganizationException(msg);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return organization;
 	}
 
 	public Organization fetchByC_N(String companyId, String name)
 		throws SystemException {
+		String pk = OrganizationPool.getByC_N(companyId, name);
+
+		if (pk != null) {
+			Organization organization = fetchByPrimaryKey(pk);
+
+			if (organization != null) {
+				return organization;
+			}
+		}
+
 		Session session = null;
 
 		try {
@@ -869,6 +840,8 @@ public class OrganizationPersistence extends BasePersistence {
 			}
 
 			Organization organization = (Organization)list.get(0);
+			OrganizationPool.putByC_N(companyId, name,
+				organization.getPrimaryKey());
 
 			return organization;
 		}
@@ -904,220 +877,37 @@ public class OrganizationPersistence extends BasePersistence {
 	}
 
 	public void removeByCompanyId(String companyId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCompanyId(companyId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Organization organization = (Organization)itr.next();
-				session.delete(organization);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Organization organization = (Organization)itr.next();
+			remove(organization);
 		}
 	}
 
 	public void removeByLocations(String companyId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByLocations(companyId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND parentOrganizationId != '-1' ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Organization organization = (Organization)itr.next();
-				session.delete(organization);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Organization organization = (Organization)itr.next();
+			remove(organization);
 		}
 	}
 
 	public void removeByC_P(String companyId, String parentOrganizationId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_P(companyId, parentOrganizationId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (parentOrganizationId == null) {
-				query.append("parentOrganizationId IS NULL");
-			}
-			else {
-				query.append("parentOrganizationId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (parentOrganizationId != null) {
-				q.setString(queryPos++, parentOrganizationId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Organization organization = (Organization)itr.next();
-				session.delete(organization);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Organization organization = (Organization)itr.next();
+			remove(organization);
 		}
 	}
 
 	public void removeByC_N(String companyId, String name)
 		throws NoSuchOrganizationException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Organization WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Organization organization = (Organization)itr.next();
-				session.delete(organization);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				String msg = "No Organization exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "name=";
-				msg += name;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchOrganizationException(msg);
-			}
-			else {
-				throw new SystemException(he);
-			}
-		}
-		finally {
-			closeSession(session);
-		}
+		Organization organization = findByC_N(companyId, name);
+		remove(organization);
 	}
 
 	public int countByCompanyId(String companyId) throws SystemException {

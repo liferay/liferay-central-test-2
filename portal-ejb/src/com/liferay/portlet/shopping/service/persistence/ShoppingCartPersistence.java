@@ -78,6 +78,22 @@ public class ShoppingCartPersistence extends BasePersistence {
 					cartId.toString());
 			}
 
+			return remove(shoppingCart);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ShoppingCart remove(ShoppingCart shoppingCart)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(shoppingCart);
 			session.flush();
 
@@ -114,33 +130,20 @@ public class ShoppingCartPersistence extends BasePersistence {
 
 	public ShoppingCart findByPrimaryKey(String cartId)
 		throws NoSuchCartException, SystemException {
-		Session session = null;
+		ShoppingCart shoppingCart = fetchByPrimaryKey(cartId);
 
-		try {
-			session = openSession();
-
-			ShoppingCart shoppingCart = (ShoppingCart)session.get(ShoppingCart.class,
-					cartId);
-
-			if (shoppingCart == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No ShoppingCart exists with the primary key " +
-						cartId.toString());
-				}
-
-				throw new NoSuchCartException(
-					"No ShoppingCart exists with the primary key " +
+		if (shoppingCart == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No ShoppingCart exists with the primary key " +
 					cartId.toString());
 			}
 
-			return shoppingCart;
+			throw new NoSuchCartException(
+				"No ShoppingCart exists with the primary key " +
+				cartId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return shoppingCart;
 	}
 
 	public ShoppingCart fetchByPrimaryKey(String cartId)
@@ -519,88 +522,20 @@ public class ShoppingCartPersistence extends BasePersistence {
 	}
 
 	public void removeByGroupId(String groupId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByGroupId(groupId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingCart WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				ShoppingCart shoppingCart = (ShoppingCart)itr.next();
-				session.delete(shoppingCart);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			ShoppingCart shoppingCart = (ShoppingCart)itr.next();
+			remove(shoppingCart);
 		}
 	}
 
 	public void removeByUserId(String userId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByUserId(userId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingCart WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				ShoppingCart shoppingCart = (ShoppingCart)itr.next();
-				session.delete(shoppingCart);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			ShoppingCart shoppingCart = (ShoppingCart)itr.next();
+			remove(shoppingCart);
 		}
 	}
 

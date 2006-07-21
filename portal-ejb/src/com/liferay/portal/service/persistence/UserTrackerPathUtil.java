@@ -79,6 +79,33 @@ public class UserTrackerPathUtil {
 		return userTrackerPath;
 	}
 
+	public static com.liferay.portal.model.UserTrackerPath remove(
+		com.liferay.portal.model.UserTrackerPath userTrackerPath)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(userTrackerPath);
+		}
+
+		userTrackerPath = getPersistence().remove(userTrackerPath);
+
+		if (listener != null) {
+			listener.onAfterRemove(userTrackerPath);
+		}
+
+		return userTrackerPath;
+	}
+
 	public static com.liferay.portal.model.UserTrackerPath update(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException {

@@ -77,6 +77,22 @@ public class UserIdMapperPersistence extends BasePersistence {
 					userIdMapperPK.toString());
 			}
 
+			return remove(userIdMapper);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public UserIdMapper remove(UserIdMapper userIdMapper)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(userIdMapper);
 			session.flush();
 
@@ -113,33 +129,20 @@ public class UserIdMapperPersistence extends BasePersistence {
 
 	public UserIdMapper findByPrimaryKey(UserIdMapperPK userIdMapperPK)
 		throws NoSuchUserIdMapperException, SystemException {
-		Session session = null;
+		UserIdMapper userIdMapper = fetchByPrimaryKey(userIdMapperPK);
 
-		try {
-			session = openSession();
-
-			UserIdMapper userIdMapper = (UserIdMapper)session.get(UserIdMapper.class,
-					userIdMapperPK);
-
-			if (userIdMapper == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No UserIdMapper exists with the primary key " +
-						userIdMapperPK.toString());
-				}
-
-				throw new NoSuchUserIdMapperException(
-					"No UserIdMapper exists with the primary key " +
+		if (userIdMapper == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No UserIdMapper exists with the primary key " +
 					userIdMapperPK.toString());
 			}
 
-			return userIdMapper;
+			throw new NoSuchUserIdMapperException(
+				"No UserIdMapper exists with the primary key " +
+				userIdMapperPK.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return userIdMapper;
 	}
 
 	public UserIdMapper fetchByPrimaryKey(UserIdMapperPK userIdMapperPK)
@@ -346,44 +349,11 @@ public class UserIdMapperPersistence extends BasePersistence {
 	}
 
 	public void removeByUserId(String userId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByUserId(userId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.UserIdMapper WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				UserIdMapper userIdMapper = (UserIdMapper)itr.next();
-				session.delete(userIdMapper);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			UserIdMapper userIdMapper = (UserIdMapper)itr.next();
+			remove(userIdMapper);
 		}
 	}
 

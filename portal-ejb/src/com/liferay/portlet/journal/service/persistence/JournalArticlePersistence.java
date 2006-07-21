@@ -78,6 +78,22 @@ public class JournalArticlePersistence extends BasePersistence {
 					journalArticlePK.toString());
 			}
 
+			return remove(journalArticle);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public JournalArticle remove(JournalArticle journalArticle)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(journalArticle);
 			session.flush();
 
@@ -114,33 +130,20 @@ public class JournalArticlePersistence extends BasePersistence {
 
 	public JournalArticle findByPrimaryKey(JournalArticlePK journalArticlePK)
 		throws NoSuchArticleException, SystemException {
-		Session session = null;
+		JournalArticle journalArticle = fetchByPrimaryKey(journalArticlePK);
 
-		try {
-			session = openSession();
-
-			JournalArticle journalArticle = (JournalArticle)session.get(JournalArticle.class,
-					journalArticlePK);
-
-			if (journalArticle == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No JournalArticle exists with the primary key " +
-						journalArticlePK.toString());
-				}
-
-				throw new NoSuchArticleException(
-					"No JournalArticle exists with the primary key " +
+		if (journalArticle == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No JournalArticle exists with the primary key " +
 					journalArticlePK.toString());
 			}
 
-			return journalArticle;
+			throw new NoSuchArticleException(
+				"No JournalArticle exists with the primary key " +
+				journalArticlePK.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return journalArticle;
 	}
 
 	public JournalArticle fetchByPrimaryKey(JournalArticlePK journalArticlePK)
@@ -1481,338 +1484,60 @@ public class JournalArticlePersistence extends BasePersistence {
 	}
 
 	public void removeByCompanyId(String companyId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCompanyId(companyId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("articleId ASC").append(", ");
-			query.append("version DESC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				JournalArticle journalArticle = (JournalArticle)itr.next();
-				session.delete(journalArticle);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			JournalArticle journalArticle = (JournalArticle)itr.next();
+			remove(journalArticle);
 		}
 	}
 
 	public void removeByGroupId(String groupId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByGroupId(groupId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("articleId ASC").append(", ");
-			query.append("version DESC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				JournalArticle journalArticle = (JournalArticle)itr.next();
-				session.delete(journalArticle);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			JournalArticle journalArticle = (JournalArticle)itr.next();
+			remove(journalArticle);
 		}
 	}
 
 	public void removeByC_A(String companyId, String articleId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_A(companyId, articleId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (articleId == null) {
-				query.append("articleId IS NULL");
-			}
-			else {
-				query.append("articleId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("articleId ASC").append(", ");
-			query.append("version DESC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (articleId != null) {
-				q.setString(queryPos++, articleId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				JournalArticle journalArticle = (JournalArticle)itr.next();
-				session.delete(journalArticle);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			JournalArticle journalArticle = (JournalArticle)itr.next();
+			remove(journalArticle);
 		}
 	}
 
 	public void removeByC_S(String companyId, String structureId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_S(companyId, structureId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (structureId == null) {
-				query.append("structureId IS NULL");
-			}
-			else {
-				query.append("structureId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("articleId ASC").append(", ");
-			query.append("version DESC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (structureId != null) {
-				q.setString(queryPos++, structureId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				JournalArticle journalArticle = (JournalArticle)itr.next();
-				session.delete(journalArticle);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			JournalArticle journalArticle = (JournalArticle)itr.next();
+			remove(journalArticle);
 		}
 	}
 
 	public void removeByC_T(String companyId, String templateId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_T(companyId, templateId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (templateId == null) {
-				query.append("templateId IS NULL");
-			}
-			else {
-				query.append("templateId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("articleId ASC").append(", ");
-			query.append("version DESC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (templateId != null) {
-				q.setString(queryPos++, templateId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				JournalArticle journalArticle = (JournalArticle)itr.next();
-				session.delete(journalArticle);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			JournalArticle journalArticle = (JournalArticle)itr.next();
+			remove(journalArticle);
 		}
 	}
 
 	public void removeByC_A_A(String companyId, String articleId,
 		boolean approved) throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_A_A(companyId, articleId, approved).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (articleId == null) {
-				query.append("articleId IS NULL");
-			}
-			else {
-				query.append("articleId = ?");
-			}
-
-			query.append(" AND ");
-			query.append("approved = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("articleId ASC").append(", ");
-			query.append("version DESC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (articleId != null) {
-				q.setString(queryPos++, articleId);
-			}
-
-			q.setBoolean(queryPos++, approved);
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				JournalArticle journalArticle = (JournalArticle)itr.next();
-				session.delete(journalArticle);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			JournalArticle journalArticle = (JournalArticle)itr.next();
+			remove(journalArticle);
 		}
 	}
 

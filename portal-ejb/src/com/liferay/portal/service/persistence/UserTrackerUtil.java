@@ -79,6 +79,33 @@ public class UserTrackerUtil {
 		return userTracker;
 	}
 
+	public static com.liferay.portal.model.UserTracker remove(
+		com.liferay.portal.model.UserTracker userTracker)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(userTracker);
+		}
+
+		userTracker = getPersistence().remove(userTracker);
+
+		if (listener != null) {
+			listener.onAfterRemove(userTracker);
+		}
+
+		return userTracker;
+	}
+
 	public static com.liferay.portal.model.UserTracker update(
 		com.liferay.portal.model.UserTracker userTracker)
 		throws com.liferay.portal.SystemException {

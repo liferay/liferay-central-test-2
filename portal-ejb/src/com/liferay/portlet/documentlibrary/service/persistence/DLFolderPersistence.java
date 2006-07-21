@@ -36,7 +36,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.HibernateException;
-import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -78,8 +77,25 @@ public class DLFolderPersistence extends BasePersistence {
 					folderId.toString());
 			}
 
+			return remove(dlFolder);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public DLFolder remove(DLFolder dlFolder) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(dlFolder);
 			session.flush();
+			DLFolderPool.removeByP_N(dlFolder.getParentFolderId(),
+				dlFolder.getName());
 
 			return dlFolder;
 		}
@@ -114,32 +130,20 @@ public class DLFolderPersistence extends BasePersistence {
 
 	public DLFolder findByPrimaryKey(String folderId)
 		throws NoSuchFolderException, SystemException {
-		Session session = null;
+		DLFolder dlFolder = fetchByPrimaryKey(folderId);
 
-		try {
-			session = openSession();
-
-			DLFolder dlFolder = (DLFolder)session.get(DLFolder.class, folderId);
-
-			if (dlFolder == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No DLFolder exists with the primary key " +
-						folderId.toString());
-				}
-
-				throw new NoSuchFolderException(
-					"No DLFolder exists with the primary key " +
+		if (dlFolder == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No DLFolder exists with the primary key " +
 					folderId.toString());
 			}
 
-			return dlFolder;
+			throw new NoSuchFolderException(
+				"No DLFolder exists with the primary key " +
+				folderId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return dlFolder;
 	}
 
 	public DLFolder fetchByPrimaryKey(String folderId)
@@ -708,72 +712,40 @@ public class DLFolderPersistence extends BasePersistence {
 
 	public DLFolder findByP_N(String parentFolderId, String name)
 		throws NoSuchFolderException, SystemException {
-		Session session = null;
+		DLFolder dlFolder = fetchByP_N(parentFolderId, name);
 
-		try {
-			session = openSession();
+		if (dlFolder == null) {
+			String msg = "No DLFolder exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "parentFolderId=";
+			msg += parentFolderId;
+			msg += ", ";
+			msg += "name=";
+			msg += name;
+			msg += StringPool.CLOSE_CURLY_BRACE;
 
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg);
 			}
 
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				String msg = "No DLFolder exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "parentFolderId=";
-				msg += parentFolderId;
-				msg += ", ";
-				msg += "name=";
-				msg += name;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchFolderException(msg);
-			}
-
-			DLFolder dlFolder = (DLFolder)list.get(0);
-
-			return dlFolder;
+			throw new NoSuchFolderException(msg);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return dlFolder;
 	}
 
 	public DLFolder fetchByP_N(String parentFolderId, String name)
 		throws SystemException {
+		String pk = DLFolderPool.getByP_N(parentFolderId, name);
+
+		if (pk != null) {
+			DLFolder dlFolder = fetchByPrimaryKey(pk);
+
+			if (dlFolder != null) {
+				return dlFolder;
+			}
+		}
+
 		Session session = null;
 
 		try {
@@ -819,6 +791,7 @@ public class DLFolderPersistence extends BasePersistence {
 			}
 
 			DLFolder dlFolder = (DLFolder)list.get(0);
+			DLFolderPool.putByP_N(parentFolderId, name, dlFolder.getPrimaryKey());
 
 			return dlFolder;
 		}
@@ -853,216 +826,37 @@ public class DLFolderPersistence extends BasePersistence {
 	}
 
 	public void removeByGroupId(String groupId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByGroupId(groupId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				DLFolder dlFolder = (DLFolder)itr.next();
-				session.delete(dlFolder);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			DLFolder dlFolder = (DLFolder)itr.next();
+			remove(dlFolder);
 		}
 	}
 
 	public void removeByCompanyId(String companyId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCompanyId(companyId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				DLFolder dlFolder = (DLFolder)itr.next();
-				session.delete(dlFolder);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			DLFolder dlFolder = (DLFolder)itr.next();
+			remove(dlFolder);
 		}
 	}
 
 	public void removeByG_P(String groupId, String parentFolderId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByG_P(groupId, parentFolderId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				DLFolder dlFolder = (DLFolder)itr.next();
-				session.delete(dlFolder);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			DLFolder dlFolder = (DLFolder)itr.next();
+			remove(dlFolder);
 		}
 	}
 
 	public void removeByP_N(String parentFolderId, String name)
 		throws NoSuchFolderException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				DLFolder dlFolder = (DLFolder)itr.next();
-				session.delete(dlFolder);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				String msg = "No DLFolder exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "parentFolderId=";
-				msg += parentFolderId;
-				msg += ", ";
-				msg += "name=";
-				msg += name;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchFolderException(msg);
-			}
-			else {
-				throw new SystemException(he);
-			}
-		}
-		finally {
-			closeSession(session);
-		}
+		DLFolder dlFolder = findByP_N(parentFolderId, name);
+		remove(dlFolder);
 	}
 
 	public int countByGroupId(String groupId) throws SystemException {

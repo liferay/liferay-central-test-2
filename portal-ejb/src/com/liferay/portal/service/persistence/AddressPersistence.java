@@ -76,6 +76,21 @@ public class AddressPersistence extends BasePersistence {
 					addressId.toString());
 			}
 
+			return remove(address);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Address remove(Address address) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(address);
 			session.flush();
 
@@ -111,32 +126,20 @@ public class AddressPersistence extends BasePersistence {
 
 	public Address findByPrimaryKey(String addressId)
 		throws NoSuchAddressException, SystemException {
-		Session session = null;
+		Address address = fetchByPrimaryKey(addressId);
 
-		try {
-			session = openSession();
-
-			Address address = (Address)session.get(Address.class, addressId);
-
-			if (address == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Address exists with the primary key " +
-						addressId.toString());
-				}
-
-				throw new NoSuchAddressException(
-					"No Address exists with the primary key " +
+		if (address == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No Address exists with the primary key " +
 					addressId.toString());
 			}
 
-			return address;
+			throw new NoSuchAddressException(
+				"No Address exists with the primary key " +
+				addressId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return address;
 	}
 
 	public Address fetchByPrimaryKey(String addressId)
@@ -1595,369 +1598,62 @@ public class AddressPersistence extends BasePersistence {
 	}
 
 	public void removeByCompanyId(String companyId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCompanyId(companyId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Address WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Address address = (Address)itr.next();
-				session.delete(address);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Address address = (Address)itr.next();
+			remove(address);
 		}
 	}
 
 	public void removeByUserId(String userId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByUserId(userId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Address WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Address address = (Address)itr.next();
-				session.delete(address);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Address address = (Address)itr.next();
+			remove(address);
 		}
 	}
 
 	public void removeByC_C(String companyId, String className)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_C(companyId, className).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Address WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Address address = (Address)itr.next();
-				session.delete(address);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Address address = (Address)itr.next();
+			remove(address);
 		}
 	}
 
 	public void removeByC_C_C(String companyId, String className, String classPK)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_C_C(companyId, className, classPK).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Address WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Address address = (Address)itr.next();
-				session.delete(address);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Address address = (Address)itr.next();
+			remove(address);
 		}
 	}
 
 	public void removeByC_C_C_M(String companyId, String className,
 		String classPK, boolean mailing) throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_C_C_M(companyId, className, classPK, mailing)
+						   .iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Address WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" AND ");
-			query.append("mailing = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			q.setBoolean(queryPos++, mailing);
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Address address = (Address)itr.next();
-				session.delete(address);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Address address = (Address)itr.next();
+			remove(address);
 		}
 	}
 
 	public void removeByC_C_C_P(String companyId, String className,
 		String classPK, boolean primary) throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_C_C_P(companyId, className, classPK, primary)
+						   .iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Address WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" AND ");
-			query.append("primary_ = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			q.setBoolean(queryPos++, primary);
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Address address = (Address)itr.next();
-				session.delete(address);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Address address = (Address)itr.next();
+			remove(address);
 		}
 	}
 

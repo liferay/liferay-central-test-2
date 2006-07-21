@@ -76,6 +76,33 @@ public class UserUtil {
 		return user;
 	}
 
+	public static com.liferay.portal.model.User remove(
+		com.liferay.portal.model.User user)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(user);
+		}
+
+		user = getPersistence().remove(user);
+
+		if (listener != null) {
+			listener.onAfterRemove(user);
+		}
+
+		return user;
+	}
+
 	public static com.liferay.portal.model.User update(
 		com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException {

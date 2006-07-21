@@ -76,6 +76,33 @@ public class RoleUtil {
 		return role;
 	}
 
+	public static com.liferay.portal.model.Role remove(
+		com.liferay.portal.model.Role role)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(role);
+		}
+
+		role = getPersistence().remove(role);
+
+		if (listener != null) {
+			listener.onAfterRemove(role);
+		}
+
+		return role;
+	}
+
 	public static com.liferay.portal.model.Role update(
 		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException {

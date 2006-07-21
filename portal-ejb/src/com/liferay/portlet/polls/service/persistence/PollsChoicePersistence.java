@@ -78,6 +78,22 @@ public class PollsChoicePersistence extends BasePersistence {
 					pollsChoicePK.toString());
 			}
 
+			return remove(pollsChoice);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public PollsChoice remove(PollsChoice pollsChoice)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(pollsChoice);
 			session.flush();
 
@@ -114,33 +130,20 @@ public class PollsChoicePersistence extends BasePersistence {
 
 	public PollsChoice findByPrimaryKey(PollsChoicePK pollsChoicePK)
 		throws NoSuchChoiceException, SystemException {
-		Session session = null;
+		PollsChoice pollsChoice = fetchByPrimaryKey(pollsChoicePK);
 
-		try {
-			session = openSession();
-
-			PollsChoice pollsChoice = (PollsChoice)session.get(PollsChoice.class,
-					pollsChoicePK);
-
-			if (pollsChoice == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No PollsChoice exists with the primary key " +
-						pollsChoicePK.toString());
-				}
-
-				throw new NoSuchChoiceException(
-					"No PollsChoice exists with the primary key " +
+		if (pollsChoice == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No PollsChoice exists with the primary key " +
 					pollsChoicePK.toString());
 			}
 
-			return pollsChoice;
+			throw new NoSuchChoiceException(
+				"No PollsChoice exists with the primary key " +
+				pollsChoicePK.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return pollsChoice;
 	}
 
 	public PollsChoice fetchByPrimaryKey(PollsChoicePK pollsChoicePK)
@@ -362,47 +365,11 @@ public class PollsChoicePersistence extends BasePersistence {
 	}
 
 	public void removeByQuestionId(String questionId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByQuestionId(questionId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
-
-			if (questionId == null) {
-				query.append("questionId IS NULL");
-			}
-			else {
-				query.append("questionId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("choiceId ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (questionId != null) {
-				q.setString(queryPos++, questionId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				PollsChoice pollsChoice = (PollsChoice)itr.next();
-				session.delete(pollsChoice);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			PollsChoice pollsChoice = (PollsChoice)itr.next();
+			remove(pollsChoice);
 		}
 	}
 

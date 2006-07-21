@@ -79,6 +79,33 @@ public class WikiNodeUtil {
 		return wikiNode;
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiNode remove(
+		com.liferay.portlet.wiki.model.WikiNode wikiNode)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(wikiNode);
+		}
+
+		wikiNode = getPersistence().remove(wikiNode);
+
+		if (listener != null) {
+			listener.onAfterRemove(wikiNode);
+		}
+
+		return wikiNode;
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiNode update(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException {

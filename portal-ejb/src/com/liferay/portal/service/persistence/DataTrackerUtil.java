@@ -79,6 +79,33 @@ public class DataTrackerUtil {
 		return dataTracker;
 	}
 
+	public static com.liferay.portal.model.DataTracker remove(
+		com.liferay.portal.model.DataTracker dataTracker)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(dataTracker);
+		}
+
+		dataTracker = getPersistence().remove(dataTracker);
+
+		if (listener != null) {
+			listener.onAfterRemove(dataTracker);
+		}
+
+		return dataTracker;
+	}
+
 	public static com.liferay.portal.model.DataTracker update(
 		com.liferay.portal.model.DataTracker dataTracker)
 		throws com.liferay.portal.SystemException {

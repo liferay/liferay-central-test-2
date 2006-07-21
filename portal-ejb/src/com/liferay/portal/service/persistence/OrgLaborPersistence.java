@@ -76,6 +76,21 @@ public class OrgLaborPersistence extends BasePersistence {
 					orgLaborId.toString());
 			}
 
+			return remove(orgLabor);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public OrgLabor remove(OrgLabor orgLabor) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(orgLabor);
 			session.flush();
 
@@ -111,32 +126,20 @@ public class OrgLaborPersistence extends BasePersistence {
 
 	public OrgLabor findByPrimaryKey(String orgLaborId)
 		throws NoSuchOrgLaborException, SystemException {
-		Session session = null;
+		OrgLabor orgLabor = fetchByPrimaryKey(orgLaborId);
 
-		try {
-			session = openSession();
-
-			OrgLabor orgLabor = (OrgLabor)session.get(OrgLabor.class, orgLaborId);
-
-			if (orgLabor == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No OrgLabor exists with the primary key " +
-						orgLaborId.toString());
-				}
-
-				throw new NoSuchOrgLaborException(
-					"No OrgLabor exists with the primary key " +
+		if (orgLabor == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No OrgLabor exists with the primary key " +
 					orgLaborId.toString());
 			}
 
-			return orgLabor;
+			throw new NoSuchOrgLaborException(
+				"No OrgLabor exists with the primary key " +
+				orgLaborId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return orgLabor;
 	}
 
 	public OrgLabor fetchByPrimaryKey(String orgLaborId)
@@ -360,47 +363,11 @@ public class OrgLaborPersistence extends BasePersistence {
 
 	public void removeByOrganizationId(String organizationId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByOrganizationId(organizationId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
-
-			if (organizationId == null) {
-				query.append("organizationId IS NULL");
-			}
-			else {
-				query.append("organizationId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("organizationId ASC").append(", ");
-			query.append("typeId ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (organizationId != null) {
-				q.setString(queryPos++, organizationId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				OrgLabor orgLabor = (OrgLabor)itr.next();
-				session.delete(orgLabor);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			OrgLabor orgLabor = (OrgLabor)itr.next();
+			remove(orgLabor);
 		}
 	}
 

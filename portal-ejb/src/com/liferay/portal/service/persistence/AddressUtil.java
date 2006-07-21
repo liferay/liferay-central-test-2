@@ -78,6 +78,33 @@ public class AddressUtil {
 		return address;
 	}
 
+	public static com.liferay.portal.model.Address remove(
+		com.liferay.portal.model.Address address)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(address);
+		}
+
+		address = getPersistence().remove(address);
+
+		if (listener != null) {
+			listener.onAfterRemove(address);
+		}
+
+		return address;
+	}
+
 	public static com.liferay.portal.model.Address update(
 		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException {

@@ -90,9 +90,24 @@ public class UserGroupPersistence extends BasePersistence {
 					userGroupId.toString());
 			}
 
+			return remove(userGroup);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public UserGroup remove(UserGroup userGroup) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(userGroup);
 			session.flush();
-			clearUsers.clear(userGroupId);
+			clearUsers.clear(userGroup.getPrimaryKey());
 
 			return userGroup;
 		}
@@ -126,33 +141,20 @@ public class UserGroupPersistence extends BasePersistence {
 
 	public UserGroup findByPrimaryKey(String userGroupId)
 		throws NoSuchUserGroupException, SystemException {
-		Session session = null;
+		UserGroup userGroup = fetchByPrimaryKey(userGroupId);
 
-		try {
-			session = openSession();
-
-			UserGroup userGroup = (UserGroup)session.get(UserGroup.class,
-					userGroupId);
-
-			if (userGroup == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No UserGroup exists with the primary key " +
-						userGroupId.toString());
-				}
-
-				throw new NoSuchUserGroupException(
-					"No UserGroup exists with the primary key " +
+		if (userGroup == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No UserGroup exists with the primary key " +
 					userGroupId.toString());
 			}
 
-			return userGroup;
+			throw new NoSuchUserGroupException(
+				"No UserGroup exists with the primary key " +
+				userGroupId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return userGroup;
 	}
 
 	public UserGroup fetchByPrimaryKey(String userGroupId)

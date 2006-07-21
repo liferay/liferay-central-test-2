@@ -79,6 +79,33 @@ public class MBCategoryUtil {
 		return mbCategory;
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBCategory remove(
+		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(mbCategory);
+		}
+
+		mbCategory = getPersistence().remove(mbCategory);
+
+		if (listener != null) {
+			listener.onAfterRemove(mbCategory);
+		}
+
+		return mbCategory;
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBCategory update(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
 		throws com.liferay.portal.SystemException {

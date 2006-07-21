@@ -38,7 +38,6 @@ import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
-import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -90,11 +89,29 @@ public class RolePersistence extends BasePersistence {
 					"No Role exists with the primary key " + roleId.toString());
 			}
 
+			return remove(role);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Role remove(Role role) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(role);
 			session.flush();
-			clearGroups.clear(roleId);
-			clearPermissions.clear(roleId);
-			clearUsers.clear(roleId);
+			clearGroups.clear(role.getPrimaryKey());
+			clearPermissions.clear(role.getPrimaryKey());
+			clearUsers.clear(role.getPrimaryKey());
+			RolePool.removeByC_N(role.getCompanyId(), role.getName());
+			RolePool.removeByC_C_C(role.getCompanyId(), role.getClassName(),
+				role.getClassPK());
 
 			return role;
 		}
@@ -128,31 +145,19 @@ public class RolePersistence extends BasePersistence {
 
 	public Role findByPrimaryKey(String roleId)
 		throws NoSuchRoleException, SystemException {
-		Session session = null;
+		Role role = fetchByPrimaryKey(roleId);
 
-		try {
-			session = openSession();
-
-			Role role = (Role)session.get(Role.class, roleId);
-
-			if (role == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Role exists with the primary key " +
-						roleId.toString());
-				}
-
-				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + roleId.toString());
+		if (role == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No Role exists with the primary key " +
+					roleId.toString());
 			}
 
-			return role;
+			throw new NoSuchRoleException(
+				"No Role exists with the primary key " + roleId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return role;
 	}
 
 	public Role fetchByPrimaryKey(String roleId) throws SystemException {
@@ -346,73 +351,40 @@ public class RolePersistence extends BasePersistence {
 
 	public Role findByC_N(String companyId, String name)
 		throws NoSuchRoleException, SystemException {
-		Session session = null;
+		Role role = fetchByC_N(companyId, name);
 
-		try {
-			session = openSession();
+		if (role == null) {
+			String msg = "No Role exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "name=";
+			msg += name;
+			msg += StringPool.CLOSE_CURLY_BRACE;
 
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Role WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg);
 			}
 
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				String msg = "No Role exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "name=";
-				msg += name;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchRoleException(msg);
-			}
-
-			Role role = (Role)list.get(0);
-
-			return role;
+			throw new NoSuchRoleException(msg);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return role;
 	}
 
 	public Role fetchByC_N(String companyId, String name)
 		throws SystemException {
+		String pk = RolePool.getByC_N(companyId, name);
+
+		if (pk != null) {
+			Role role = fetchByPrimaryKey(pk);
+
+			if (role != null) {
+				return role;
+			}
+		}
+
 		Session session = null;
 
 		try {
@@ -459,6 +431,7 @@ public class RolePersistence extends BasePersistence {
 			}
 
 			Role role = (Role)list.get(0);
+			RolePool.putByC_N(companyId, name, role.getPrimaryKey());
 
 			return role;
 		}
@@ -472,89 +445,43 @@ public class RolePersistence extends BasePersistence {
 
 	public Role findByC_C_C(String companyId, String className, String classPK)
 		throws NoSuchRoleException, SystemException {
-		Session session = null;
+		Role role = fetchByC_C_C(companyId, className, classPK);
 
-		try {
-			session = openSession();
+		if (role == null) {
+			String msg = "No Role exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "className=";
+			msg += className;
+			msg += ", ";
+			msg += "classPK=";
+			msg += classPK;
+			msg += StringPool.CLOSE_CURLY_BRACE;
 
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Role WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg);
 			}
 
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				String msg = "No Role exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "className=";
-				msg += className;
-				msg += ", ";
-				msg += "classPK=";
-				msg += classPK;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchRoleException(msg);
-			}
-
-			Role role = (Role)list.get(0);
-
-			return role;
+			throw new NoSuchRoleException(msg);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return role;
 	}
 
 	public Role fetchByC_C_C(String companyId, String className, String classPK)
 		throws SystemException {
+		String pk = RolePool.getByC_C_C(companyId, className, classPK);
+
+		if (pk != null) {
+			Role role = fetchByPrimaryKey(pk);
+
+			if (role != null) {
+				return role;
+			}
+		}
+
 		Session session = null;
 
 		try {
@@ -614,6 +541,8 @@ public class RolePersistence extends BasePersistence {
 			}
 
 			Role role = (Role)list.get(0);
+			RolePool.putByC_C_C(companyId, className, classPK,
+				role.getPrimaryKey());
 
 			return role;
 		}
@@ -649,205 +578,24 @@ public class RolePersistence extends BasePersistence {
 	}
 
 	public void removeByCompanyId(String companyId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCompanyId(companyId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Role WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Role role = (Role)itr.next();
-				session.delete(role);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Role role = (Role)itr.next();
+			remove(role);
 		}
 	}
 
 	public void removeByC_N(String companyId, String name)
 		throws NoSuchRoleException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Role WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Role role = (Role)itr.next();
-				session.delete(role);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				String msg = "No Role exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "name=";
-				msg += name;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchRoleException(msg);
-			}
-			else {
-				throw new SystemException(he);
-			}
-		}
-		finally {
-			closeSession(session);
-		}
+		Role role = findByC_N(companyId, name);
+		remove(role);
 	}
 
 	public void removeByC_C_C(String companyId, String className, String classPK)
 		throws NoSuchRoleException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Role WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Role role = (Role)itr.next();
-				session.delete(role);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				String msg = "No Role exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "className=";
-				msg += className;
-				msg += ", ";
-				msg += "classPK=";
-				msg += classPK;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchRoleException(msg);
-			}
-			else {
-				throw new SystemException(he);
-			}
-		}
-		finally {
-			closeSession(session);
-		}
+		Role role = findByC_C_C(companyId, className, classPK);
+		remove(role);
 	}
 
 	public int countByCompanyId(String companyId) throws SystemException {

@@ -436,6 +436,10 @@ public class PropsUtil {
 
 	public static final String LUCENE_ANALYZER = "lucene.analyzer";
 
+	// Value Object
+
+	public static final String VALUE_OBJECT_CACHEABLE = "value.object.cacheable";
+
 	// Last Modified
 
 	public static final String LAST_MODIFIED_CHECK = "last.modified.check";

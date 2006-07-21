@@ -76,6 +76,21 @@ public class PortletPersistence extends BasePersistence {
 					portletPK.toString());
 			}
 
+			return remove(portlet);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Portlet remove(Portlet portlet) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(portlet);
 			session.flush();
 
@@ -111,32 +126,20 @@ public class PortletPersistence extends BasePersistence {
 
 	public Portlet findByPrimaryKey(PortletPK portletPK)
 		throws NoSuchPortletException, SystemException {
-		Session session = null;
+		Portlet portlet = fetchByPrimaryKey(portletPK);
 
-		try {
-			session = openSession();
-
-			Portlet portlet = (Portlet)session.get(Portlet.class, portletPK);
-
-			if (portlet == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Portlet exists with the primary key " +
-						portletPK.toString());
-				}
-
-				throw new NoSuchPortletException(
-					"No Portlet exists with the primary key " +
+		if (portlet == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No Portlet exists with the primary key " +
 					portletPK.toString());
 			}
 
-			return portlet;
+			throw new NoSuchPortletException(
+				"No Portlet exists with the primary key " +
+				portletPK.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return portlet;
 	}
 
 	public Portlet fetchByPrimaryKey(PortletPK portletPK)
@@ -342,44 +345,11 @@ public class PortletPersistence extends BasePersistence {
 	}
 
 	public void removeByCompanyId(String companyId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCompanyId(companyId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Portlet WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = (Portlet)itr.next();
-				session.delete(portlet);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Portlet portlet = (Portlet)itr.next();
+			remove(portlet);
 		}
 	}
 

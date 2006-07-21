@@ -79,6 +79,22 @@ public class JournalStructurePersistence extends BasePersistence {
 					journalStructurePK.toString());
 			}
 
+			return remove(journalStructure);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public JournalStructure remove(JournalStructure journalStructure)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(journalStructure);
 			session.flush();
 
@@ -116,34 +132,20 @@ public class JournalStructurePersistence extends BasePersistence {
 	public JournalStructure findByPrimaryKey(
 		JournalStructurePK journalStructurePK)
 		throws NoSuchStructureException, SystemException {
-		Session session = null;
+		JournalStructure journalStructure = fetchByPrimaryKey(journalStructurePK);
 
-		try {
-			session = openSession();
-
-			JournalStructure journalStructure = (JournalStructure)session.get(JournalStructure.class,
-					journalStructurePK);
-
-			if (journalStructure == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No JournalStructure exists with the primary key " +
-						journalStructurePK.toString());
-				}
-
-				throw new NoSuchStructureException(
-					"No JournalStructure exists with the primary key " +
+		if (journalStructure == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No JournalStructure exists with the primary key " +
 					journalStructurePK.toString());
 			}
 
-			return journalStructure;
+			throw new NoSuchStructureException(
+				"No JournalStructure exists with the primary key " +
+				journalStructurePK.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return journalStructure;
 	}
 
 	public JournalStructure fetchByPrimaryKey(
@@ -367,47 +369,11 @@ public class JournalStructurePersistence extends BasePersistence {
 	}
 
 	public void removeByGroupId(String groupId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByGroupId(groupId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("structureId ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				JournalStructure journalStructure = (JournalStructure)itr.next();
-				session.delete(journalStructure);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			JournalStructure journalStructure = (JournalStructure)itr.next();
+			remove(journalStructure);
 		}
 	}
 

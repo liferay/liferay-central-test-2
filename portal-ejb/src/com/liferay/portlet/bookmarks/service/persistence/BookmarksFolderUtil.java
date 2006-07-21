@@ -79,6 +79,33 @@ public class BookmarksFolderUtil {
 		return bookmarksFolder;
 	}
 
+	public static com.liferay.portlet.bookmarks.model.BookmarksFolder remove(
+		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(bookmarksFolder);
+		}
+
+		bookmarksFolder = getPersistence().remove(bookmarksFolder);
+
+		if (listener != null) {
+			listener.onAfterRemove(bookmarksFolder);
+		}
+
+		return bookmarksFolder;
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder update(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
 		throws com.liferay.portal.SystemException {

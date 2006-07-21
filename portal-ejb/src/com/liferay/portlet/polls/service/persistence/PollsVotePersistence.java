@@ -78,6 +78,21 @@ public class PollsVotePersistence extends BasePersistence {
 					pollsVotePK.toString());
 			}
 
+			return remove(pollsVote);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public PollsVote remove(PollsVote pollsVote) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(pollsVote);
 			session.flush();
 
@@ -114,33 +129,20 @@ public class PollsVotePersistence extends BasePersistence {
 
 	public PollsVote findByPrimaryKey(PollsVotePK pollsVotePK)
 		throws NoSuchVoteException, SystemException {
-		Session session = null;
+		PollsVote pollsVote = fetchByPrimaryKey(pollsVotePK);
 
-		try {
-			session = openSession();
-
-			PollsVote pollsVote = (PollsVote)session.get(PollsVote.class,
-					pollsVotePK);
-
-			if (pollsVote == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No PollsVote exists with the primary key " +
-						pollsVotePK.toString());
-				}
-
-				throw new NoSuchVoteException(
-					"No PollsVote exists with the primary key " +
+		if (pollsVote == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No PollsVote exists with the primary key " +
 					pollsVotePK.toString());
 			}
 
-			return pollsVote;
+			throw new NoSuchVoteException(
+				"No PollsVote exists with the primary key " +
+				pollsVotePK.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return pollsVote;
 	}
 
 	public PollsVote fetchByPrimaryKey(PollsVotePK pollsVotePK)
@@ -564,102 +566,21 @@ public class PollsVotePersistence extends BasePersistence {
 	}
 
 	public void removeByQuestionId(String questionId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByQuestionId(questionId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
-
-			if (questionId == null) {
-				query.append("questionId IS NULL");
-			}
-			else {
-				query.append("questionId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (questionId != null) {
-				q.setString(queryPos++, questionId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				PollsVote pollsVote = (PollsVote)itr.next();
-				session.delete(pollsVote);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			PollsVote pollsVote = (PollsVote)itr.next();
+			remove(pollsVote);
 		}
 	}
 
 	public void removeByQ_C(String questionId, String choiceId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByQ_C(questionId, choiceId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
-
-			if (questionId == null) {
-				query.append("questionId IS NULL");
-			}
-			else {
-				query.append("questionId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (choiceId == null) {
-				query.append("choiceId IS NULL");
-			}
-			else {
-				query.append("choiceId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (questionId != null) {
-				q.setString(queryPos++, questionId);
-			}
-
-			if (choiceId != null) {
-				q.setString(queryPos++, choiceId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				PollsVote pollsVote = (PollsVote)itr.next();
-				session.delete(pollsVote);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			PollsVote pollsVote = (PollsVote)itr.next();
+			remove(pollsVote);
 		}
 	}
 

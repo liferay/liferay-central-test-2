@@ -326,7 +326,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		//List userGroups = UserUtil.getGroups(userId);
 
 		if (Validator.isNotNull(groupId)) {
-			if (GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
+			if (permissionCheckerBag.hasUserGroup(userId, groupId)) {
 				userGroups.add(GroupUtil.findByPrimaryKey(groupId));
 			}
 		}
@@ -358,10 +358,6 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 		// Is the user associated with groups or organizations that are directly
 		// connected to one of the permissions?
-
-		if (_log.isDebugEnabled()) {
-			start = System.currentTimeMillis();
-		}
 
 		if (groups.size() > 0) {
 			if (PermissionFinder.countByGroupsPermissions(

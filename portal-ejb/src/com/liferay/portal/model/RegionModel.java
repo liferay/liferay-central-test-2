@@ -35,6 +35,9 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class RegionModel extends BaseModel {
+	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
+				"value.object.cacheable.com.liferay.portal.model.Region"),
+			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Region"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_REGIONID = GetterUtil.getBoolean(PropsUtil.get(

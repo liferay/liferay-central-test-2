@@ -78,6 +78,33 @@ public class ContactUtil {
 		return contact;
 	}
 
+	public static com.liferay.portal.model.Contact remove(
+		com.liferay.portal.model.Contact contact)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(contact);
+		}
+
+		contact = getPersistence().remove(contact);
+
+		if (listener != null) {
+			listener.onAfterRemove(contact);
+		}
+
+		return contact;
+	}
+
 	public static com.liferay.portal.model.Contact update(
 		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException {

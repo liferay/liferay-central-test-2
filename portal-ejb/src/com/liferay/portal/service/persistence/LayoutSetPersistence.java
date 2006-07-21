@@ -72,6 +72,21 @@ public class LayoutSetPersistence extends BasePersistence {
 					ownerId.toString());
 			}
 
+			return remove(layoutSet);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public LayoutSet remove(LayoutSet layoutSet) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(layoutSet);
 			session.flush();
 
@@ -107,33 +122,20 @@ public class LayoutSetPersistence extends BasePersistence {
 
 	public LayoutSet findByPrimaryKey(String ownerId)
 		throws NoSuchLayoutSetException, SystemException {
-		Session session = null;
+		LayoutSet layoutSet = fetchByPrimaryKey(ownerId);
 
-		try {
-			session = openSession();
-
-			LayoutSet layoutSet = (LayoutSet)session.get(LayoutSet.class,
-					ownerId);
-
-			if (layoutSet == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No LayoutSet exists with the primary key " +
-						ownerId.toString());
-				}
-
-				throw new NoSuchLayoutSetException(
-					"No LayoutSet exists with the primary key " +
+		if (layoutSet == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No LayoutSet exists with the primary key " +
 					ownerId.toString());
 			}
 
-			return layoutSet;
+			throw new NoSuchLayoutSetException(
+				"No LayoutSet exists with the primary key " +
+				ownerId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return layoutSet;
 	}
 
 	public LayoutSet fetchByPrimaryKey(String ownerId)

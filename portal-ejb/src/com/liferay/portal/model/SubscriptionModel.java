@@ -37,6 +37,9 @@ import java.util.Date;
  *
  */
 public class SubscriptionModel extends BaseModel {
+	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
+				"value.object.cacheable.com.liferay.portal.model.Subscription"),
+			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Subscription"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_SUBSCRIPTIONID = GetterUtil.getBoolean(PropsUtil.get(

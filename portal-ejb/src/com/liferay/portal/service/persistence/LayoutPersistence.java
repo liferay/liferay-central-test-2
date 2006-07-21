@@ -35,7 +35,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.HibernateException;
-import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -77,8 +76,24 @@ public class LayoutPersistence extends BasePersistence {
 					layoutPK.toString());
 			}
 
+			return remove(layout);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Layout remove(Layout layout) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(layout);
 			session.flush();
+			LayoutPool.removeByO_F(layout.getOwnerId(), layout.getFriendlyURL());
 
 			return layout;
 		}
@@ -112,32 +127,19 @@ public class LayoutPersistence extends BasePersistence {
 
 	public Layout findByPrimaryKey(LayoutPK layoutPK)
 		throws NoSuchLayoutException, SystemException {
-		Session session = null;
+		Layout layout = fetchByPrimaryKey(layoutPK);
 
-		try {
-			session = openSession();
-
-			Layout layout = (Layout)session.get(Layout.class, layoutPK);
-
-			if (layout == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Layout exists with the primary key " +
-						layoutPK.toString());
-				}
-
-				throw new NoSuchLayoutException(
-					"No Layout exists with the primary key " +
+		if (layout == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No Layout exists with the primary key " +
 					layoutPK.toString());
 			}
 
-			return layout;
+			throw new NoSuchLayoutException(
+				"No Layout exists with the primary key " + layoutPK.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return layout;
 	}
 
 	public Layout fetchByPrimaryKey(LayoutPK layoutPK)
@@ -559,74 +561,40 @@ public class LayoutPersistence extends BasePersistence {
 
 	public Layout findByO_F(String ownerId, String friendlyURL)
 		throws NoSuchLayoutException, SystemException {
-		Session session = null;
+		Layout layout = fetchByO_F(ownerId, friendlyURL);
 
-		try {
-			session = openSession();
+		if (layout == null) {
+			String msg = "No Layout exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "ownerId=";
+			msg += ownerId;
+			msg += ", ";
+			msg += "friendlyURL=";
+			msg += friendlyURL;
+			msg += StringPool.CLOSE_CURLY_BRACE;
 
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Layout WHERE ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (friendlyURL == null) {
-				query.append("friendlyURL IS NULL");
-			}
-			else {
-				query.append("friendlyURL = ?");
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg);
 			}
 
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("parentLayoutId ASC").append(", ");
-			query.append("priority ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			if (friendlyURL != null) {
-				q.setString(queryPos++, friendlyURL);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				String msg = "No Layout exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "ownerId=";
-				msg += ownerId;
-				msg += ", ";
-				msg += "friendlyURL=";
-				msg += friendlyURL;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchLayoutException(msg);
-			}
-
-			Layout layout = (Layout)list.get(0);
-
-			return layout;
+			throw new NoSuchLayoutException(msg);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return layout;
 	}
 
 	public Layout fetchByO_F(String ownerId, String friendlyURL)
 		throws SystemException {
+		LayoutPK pk = LayoutPool.getByO_F(ownerId, friendlyURL);
+
+		if (pk != null) {
+			Layout layout = fetchByPrimaryKey(pk);
+
+			if (layout != null) {
+				return layout;
+			}
+		}
+
 		Session session = null;
 
 		try {
@@ -674,6 +642,7 @@ public class LayoutPersistence extends BasePersistence {
 			}
 
 			Layout layout = (Layout)list.get(0);
+			LayoutPool.putByO_F(ownerId, friendlyURL, layout.getPrimaryKey());
 
 			return layout;
 		}
@@ -710,179 +679,28 @@ public class LayoutPersistence extends BasePersistence {
 	}
 
 	public void removeByOwnerId(String ownerId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByOwnerId(ownerId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Layout WHERE ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("parentLayoutId ASC").append(", ");
-			query.append("priority ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Layout layout = (Layout)itr.next();
-				session.delete(layout);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Layout layout = (Layout)itr.next();
+			remove(layout);
 		}
 	}
 
 	public void removeByO_P(String ownerId, String parentLayoutId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByO_P(ownerId, parentLayoutId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Layout WHERE ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (parentLayoutId == null) {
-				query.append("parentLayoutId IS NULL");
-			}
-			else {
-				query.append("parentLayoutId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("parentLayoutId ASC").append(", ");
-			query.append("priority ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			if (parentLayoutId != null) {
-				q.setString(queryPos++, parentLayoutId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Layout layout = (Layout)itr.next();
-				session.delete(layout);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Layout layout = (Layout)itr.next();
+			remove(layout);
 		}
 	}
 
 	public void removeByO_F(String ownerId, String friendlyURL)
 		throws NoSuchLayoutException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Layout WHERE ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (friendlyURL == null) {
-				query.append("friendlyURL IS NULL");
-			}
-			else {
-				query.append("friendlyURL = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("parentLayoutId ASC").append(", ");
-			query.append("priority ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			if (friendlyURL != null) {
-				q.setString(queryPos++, friendlyURL);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Layout layout = (Layout)itr.next();
-				session.delete(layout);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				String msg = "No Layout exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "ownerId=";
-				msg += ownerId;
-				msg += ", ";
-				msg += "friendlyURL=";
-				msg += friendlyURL;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchLayoutException(msg);
-			}
-			else {
-				throw new SystemException(he);
-			}
-		}
-		finally {
-			closeSession(session);
-		}
+		Layout layout = findByO_F(ownerId, friendlyURL);
+		remove(layout);
 	}
 
 	public int countByOwnerId(String ownerId) throws SystemException {

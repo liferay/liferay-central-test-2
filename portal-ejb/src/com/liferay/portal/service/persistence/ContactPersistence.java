@@ -76,6 +76,21 @@ public class ContactPersistence extends BasePersistence {
 					contactId.toString());
 			}
 
+			return remove(contact);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Contact remove(Contact contact) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(contact);
 			session.flush();
 
@@ -111,32 +126,20 @@ public class ContactPersistence extends BasePersistence {
 
 	public Contact findByPrimaryKey(String contactId)
 		throws NoSuchContactException, SystemException {
-		Session session = null;
+		Contact contact = fetchByPrimaryKey(contactId);
 
-		try {
-			session = openSession();
-
-			Contact contact = (Contact)session.get(Contact.class, contactId);
-
-			if (contact == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Contact exists with the primary key " +
-						contactId.toString());
-				}
-
-				throw new NoSuchContactException(
-					"No Contact exists with the primary key " +
+		if (contact == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No Contact exists with the primary key " +
 					contactId.toString());
 			}
 
-			return contact;
+			throw new NoSuchContactException(
+				"No Contact exists with the primary key " +
+				contactId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return contact;
 	}
 
 	public Contact fetchByPrimaryKey(String contactId)
@@ -342,44 +345,11 @@ public class ContactPersistence extends BasePersistence {
 	}
 
 	public void removeByCompanyId(String companyId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCompanyId(companyId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Contact WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Contact contact = (Contact)itr.next();
-				session.delete(contact);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Contact contact = (Contact)itr.next();
+			remove(contact);
 		}
 	}
 

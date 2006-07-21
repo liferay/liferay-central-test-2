@@ -78,6 +78,33 @@ public class OrgLaborUtil {
 		return orgLabor;
 	}
 
+	public static com.liferay.portal.model.OrgLabor remove(
+		com.liferay.portal.model.OrgLabor orgLabor)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(orgLabor);
+		}
+
+		orgLabor = getPersistence().remove(orgLabor);
+
+		if (listener != null) {
+			listener.onAfterRemove(orgLabor);
+		}
+
+		return orgLabor;
+	}
+
 	public static com.liferay.portal.model.OrgLabor update(
 		com.liferay.portal.model.OrgLabor orgLabor)
 		throws com.liferay.portal.SystemException {

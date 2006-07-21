@@ -38,6 +38,9 @@ import java.util.Date;
  *
  */
 public class EmailAddressModel extends BaseModel {
+	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
+				"value.object.cacheable.com.liferay.portal.model.EmailAddress"),
+			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.EmailAddress"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_EMAILADDRESSID = GetterUtil.getBoolean(PropsUtil.get(

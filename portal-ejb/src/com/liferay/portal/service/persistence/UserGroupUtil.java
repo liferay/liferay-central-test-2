@@ -78,6 +78,33 @@ public class UserGroupUtil {
 		return userGroup;
 	}
 
+	public static com.liferay.portal.model.UserGroup remove(
+		com.liferay.portal.model.UserGroup userGroup)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(userGroup);
+		}
+
+		userGroup = getPersistence().remove(userGroup);
+
+		if (listener != null) {
+			listener.onAfterRemove(userGroup);
+		}
+
+		return userGroup;
+	}
+
 	public static com.liferay.portal.model.UserGroup update(
 		com.liferay.portal.model.UserGroup userGroup)
 		throws com.liferay.portal.SystemException {

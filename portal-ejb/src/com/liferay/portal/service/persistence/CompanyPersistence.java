@@ -71,6 +71,21 @@ public class CompanyPersistence extends BasePersistence {
 					companyId.toString());
 			}
 
+			return remove(company);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Company remove(Company company) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(company);
 			session.flush();
 
@@ -106,32 +121,20 @@ public class CompanyPersistence extends BasePersistence {
 
 	public Company findByPrimaryKey(String companyId)
 		throws NoSuchCompanyException, SystemException {
-		Session session = null;
+		Company company = fetchByPrimaryKey(companyId);
 
-		try {
-			session = openSession();
-
-			Company company = (Company)session.get(Company.class, companyId);
-
-			if (company == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Company exists with the primary key " +
-						companyId.toString());
-				}
-
-				throw new NoSuchCompanyException(
-					"No Company exists with the primary key " +
+		if (company == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No Company exists with the primary key " +
 					companyId.toString());
 			}
 
-			return company;
+			throw new NoSuchCompanyException(
+				"No Company exists with the primary key " +
+				companyId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return company;
 	}
 
 	public Company fetchByPrimaryKey(String companyId)

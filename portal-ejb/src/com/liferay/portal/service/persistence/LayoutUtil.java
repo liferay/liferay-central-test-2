@@ -78,6 +78,33 @@ public class LayoutUtil {
 		return layout;
 	}
 
+	public static com.liferay.portal.model.Layout remove(
+		com.liferay.portal.model.Layout layout)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(layout);
+		}
+
+		layout = getPersistence().remove(layout);
+
+		if (listener != null) {
+			listener.onAfterRemove(layout);
+		}
+
+		return layout;
+	}
+
 	public static com.liferay.portal.model.Layout update(
 		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.SystemException {

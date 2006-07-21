@@ -78,6 +78,22 @@ public class ShoppingCouponPersistence extends BasePersistence {
 					couponId.toString());
 			}
 
+			return remove(shoppingCoupon);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ShoppingCoupon remove(ShoppingCoupon shoppingCoupon)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(shoppingCoupon);
 			session.flush();
 
@@ -114,33 +130,20 @@ public class ShoppingCouponPersistence extends BasePersistence {
 
 	public ShoppingCoupon findByPrimaryKey(String couponId)
 		throws NoSuchCouponException, SystemException {
-		Session session = null;
+		ShoppingCoupon shoppingCoupon = fetchByPrimaryKey(couponId);
 
-		try {
-			session = openSession();
-
-			ShoppingCoupon shoppingCoupon = (ShoppingCoupon)session.get(ShoppingCoupon.class,
-					couponId);
-
-			if (shoppingCoupon == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No ShoppingCoupon exists with the primary key " +
-						couponId.toString());
-				}
-
-				throw new NoSuchCouponException(
-					"No ShoppingCoupon exists with the primary key " +
+		if (shoppingCoupon == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No ShoppingCoupon exists with the primary key " +
 					couponId.toString());
 			}
 
-			return shoppingCoupon;
+			throw new NoSuchCouponException(
+				"No ShoppingCoupon exists with the primary key " +
+				couponId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return shoppingCoupon;
 	}
 
 	public ShoppingCoupon fetchByPrimaryKey(String couponId)
@@ -363,47 +366,11 @@ public class ShoppingCouponPersistence extends BasePersistence {
 	}
 
 	public void removeByGroupId(String groupId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByGroupId(groupId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				ShoppingCoupon shoppingCoupon = (ShoppingCoupon)itr.next();
-				session.delete(shoppingCoupon);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			ShoppingCoupon shoppingCoupon = (ShoppingCoupon)itr.next();
+			remove(shoppingCoupon);
 		}
 	}
 

@@ -38,7 +38,6 @@ import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
-import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -90,13 +89,30 @@ public class UserPersistence extends BasePersistence {
 					"No User exists with the primary key " + userId.toString());
 			}
 
+			return remove(user);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public User remove(User user) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(user);
 			session.flush();
-			clearGroups.clear(userId);
-			clearOrganizations.clear(userId);
-			clearPermissions.clear(userId);
-			clearRoles.clear(userId);
-			clearUserGroups.clear(userId);
+			clearGroups.clear(user.getPrimaryKey());
+			clearOrganizations.clear(user.getPrimaryKey());
+			clearPermissions.clear(user.getPrimaryKey());
+			clearRoles.clear(user.getPrimaryKey());
+			clearUserGroups.clear(user.getPrimaryKey());
+			UserPool.removeByC_U(user.getCompanyId(), user.getUserId());
+			UserPool.removeByC_EA(user.getCompanyId(), user.getEmailAddress());
 
 			return user;
 		}
@@ -130,31 +146,19 @@ public class UserPersistence extends BasePersistence {
 
 	public User findByPrimaryKey(String userId)
 		throws NoSuchUserException, SystemException {
-		Session session = null;
+		User user = fetchByPrimaryKey(userId);
 
-		try {
-			session = openSession();
-
-			User user = (User)session.get(User.class, userId);
-
-			if (user == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No User exists with the primary key " +
-						userId.toString());
-				}
-
-				throw new NoSuchUserException(
-					"No User exists with the primary key " + userId.toString());
+		if (user == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No User exists with the primary key " +
+					userId.toString());
 			}
 
-			return user;
+			throw new NoSuchUserException(
+				"No User exists with the primary key " + userId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return user;
 	}
 
 	public User fetchByPrimaryKey(String userId) throws SystemException {
@@ -338,71 +342,40 @@ public class UserPersistence extends BasePersistence {
 
 	public User findByC_U(String companyId, String userId)
 		throws NoSuchUserException, SystemException {
-		Session session = null;
+		User user = fetchByC_U(companyId, userId);
 
-		try {
-			session = openSession();
+		if (user == null) {
+			String msg = "No User exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "userId=";
+			msg += userId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
 
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg);
 			}
 
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				String msg = "No User exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "userId=";
-				msg += userId;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchUserException(msg);
-			}
-
-			User user = (User)list.get(0);
-
-			return user;
+			throw new NoSuchUserException(msg);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return user;
 	}
 
 	public User fetchByC_U(String companyId, String userId)
 		throws SystemException {
+		String pk = UserPool.getByC_U(companyId, userId);
+
+		if (pk != null) {
+			User user = fetchByPrimaryKey(pk);
+
+			if (user != null) {
+				return user;
+			}
+		}
+
 		Session session = null;
 
 		try {
@@ -447,6 +420,7 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			User user = (User)list.get(0);
+			UserPool.putByC_U(companyId, userId, user.getPrimaryKey());
 
 			return user;
 		}
@@ -670,71 +644,40 @@ public class UserPersistence extends BasePersistence {
 
 	public User findByC_EA(String companyId, String emailAddress)
 		throws NoSuchUserException, SystemException {
-		Session session = null;
+		User user = fetchByC_EA(companyId, emailAddress);
 
-		try {
-			session = openSession();
+		if (user == null) {
+			String msg = "No User exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "emailAddress=";
+			msg += emailAddress;
+			msg += StringPool.CLOSE_CURLY_BRACE;
 
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (emailAddress == null) {
-				query.append("emailAddress IS NULL");
-			}
-			else {
-				query.append("emailAddress = ?");
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg);
 			}
 
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (emailAddress != null) {
-				q.setString(queryPos++, emailAddress);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				String msg = "No User exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "emailAddress=";
-				msg += emailAddress;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchUserException(msg);
-			}
-
-			User user = (User)list.get(0);
-
-			return user;
+			throw new NoSuchUserException(msg);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return user;
 	}
 
 	public User fetchByC_EA(String companyId, String emailAddress)
 		throws SystemException {
+		String pk = UserPool.getByC_EA(companyId, emailAddress);
+
+		if (pk != null) {
+			User user = fetchByPrimaryKey(pk);
+
+			if (user != null) {
+				return user;
+			}
+		}
+
 		Session session = null;
 
 		try {
@@ -779,6 +722,7 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			User user = (User)list.get(0);
+			UserPool.putByC_EA(companyId, emailAddress, user.getPrimaryKey());
 
 			return user;
 		}
@@ -812,239 +756,34 @@ public class UserPersistence extends BasePersistence {
 	}
 
 	public void removeByCompanyId(String companyId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCompanyId(companyId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				User user = (User)itr.next();
-				session.delete(user);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			User user = (User)itr.next();
+			remove(user);
 		}
 	}
 
 	public void removeByC_U(String companyId, String userId)
 		throws NoSuchUserException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				User user = (User)itr.next();
-				session.delete(user);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				String msg = "No User exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "userId=";
-				msg += userId;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchUserException(msg);
-			}
-			else {
-				throw new SystemException(he);
-			}
-		}
-		finally {
-			closeSession(session);
-		}
+		User user = findByC_U(companyId, userId);
+		remove(user);
 	}
 
 	public void removeByC_P(String companyId, String password)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_P(companyId, password).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (password == null) {
-				query.append("password_ IS NULL");
-			}
-			else {
-				query.append("password_ = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (password != null) {
-				q.setString(queryPos++, password);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				User user = (User)itr.next();
-				session.delete(user);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			User user = (User)itr.next();
+			remove(user);
 		}
 	}
 
 	public void removeByC_EA(String companyId, String emailAddress)
 		throws NoSuchUserException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.User WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (emailAddress == null) {
-				query.append("emailAddress IS NULL");
-			}
-			else {
-				query.append("emailAddress = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (emailAddress != null) {
-				q.setString(queryPos++, emailAddress);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				User user = (User)itr.next();
-				session.delete(user);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				String msg = "No User exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "emailAddress=";
-				msg += emailAddress;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchUserException(msg);
-			}
-			else {
-				throw new SystemException(he);
-			}
-		}
-		finally {
-			closeSession(session);
-		}
+		User user = findByC_EA(companyId, emailAddress);
+		remove(user);
 	}
 
 	public int countByCompanyId(String companyId) throws SystemException {

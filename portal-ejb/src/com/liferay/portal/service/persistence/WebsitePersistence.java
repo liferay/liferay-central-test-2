@@ -76,6 +76,21 @@ public class WebsitePersistence extends BasePersistence {
 					websiteId.toString());
 			}
 
+			return remove(website);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Website remove(Website website) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(website);
 			session.flush();
 
@@ -111,32 +126,20 @@ public class WebsitePersistence extends BasePersistence {
 
 	public Website findByPrimaryKey(String websiteId)
 		throws NoSuchWebsiteException, SystemException {
-		Session session = null;
+		Website website = fetchByPrimaryKey(websiteId);
 
-		try {
-			session = openSession();
-
-			Website website = (Website)session.get(Website.class, websiteId);
-
-			if (website == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Website exists with the primary key " +
-						websiteId.toString());
-				}
-
-				throw new NoSuchWebsiteException(
-					"No Website exists with the primary key " +
+		if (website == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No Website exists with the primary key " +
 					websiteId.toString());
 			}
 
-			return website;
+			throw new NoSuchWebsiteException(
+				"No Website exists with the primary key " +
+				websiteId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return website;
 	}
 
 	public Website fetchByPrimaryKey(String websiteId)
@@ -1305,294 +1308,51 @@ public class WebsitePersistence extends BasePersistence {
 	}
 
 	public void removeByCompanyId(String companyId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCompanyId(companyId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Website WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Website website = (Website)itr.next();
-				session.delete(website);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Website website = (Website)itr.next();
+			remove(website);
 		}
 	}
 
 	public void removeByUserId(String userId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByUserId(userId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Website WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Website website = (Website)itr.next();
-				session.delete(website);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Website website = (Website)itr.next();
+			remove(website);
 		}
 	}
 
 	public void removeByC_C(String companyId, String className)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_C(companyId, className).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Website WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Website website = (Website)itr.next();
-				session.delete(website);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Website website = (Website)itr.next();
+			remove(website);
 		}
 	}
 
 	public void removeByC_C_C(String companyId, String className, String classPK)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_C_C(companyId, className, classPK).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Website WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Website website = (Website)itr.next();
-				session.delete(website);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Website website = (Website)itr.next();
+			remove(website);
 		}
 	}
 
 	public void removeByC_C_C_P(String companyId, String className,
 		String classPK, boolean primary) throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_C_C_P(companyId, className, classPK, primary)
+						   .iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Website WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" AND ");
-			query.append("primary_ = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			q.setBoolean(queryPos++, primary);
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Website website = (Website)itr.next();
-				session.delete(website);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Website website = (Website)itr.next();
+			remove(website);
 		}
 	}
 

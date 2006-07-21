@@ -78,6 +78,22 @@ public class MBMessageFlagPersistence extends BasePersistence {
 					mbMessageFlagPK.toString());
 			}
 
+			return remove(mbMessageFlag);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public MBMessageFlag remove(MBMessageFlag mbMessageFlag)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(mbMessageFlag);
 			session.flush();
 
@@ -114,33 +130,20 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 	public MBMessageFlag findByPrimaryKey(MBMessageFlagPK mbMessageFlagPK)
 		throws NoSuchMessageFlagException, SystemException {
-		Session session = null;
+		MBMessageFlag mbMessageFlag = fetchByPrimaryKey(mbMessageFlagPK);
 
-		try {
-			session = openSession();
-
-			MBMessageFlag mbMessageFlag = (MBMessageFlag)session.get(MBMessageFlag.class,
-					mbMessageFlagPK);
-
-			if (mbMessageFlag == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No MBMessageFlag exists with the primary key " +
-						mbMessageFlagPK.toString());
-				}
-
-				throw new NoSuchMessageFlagException(
-					"No MBMessageFlag exists with the primary key " +
+		if (mbMessageFlag == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No MBMessageFlag exists with the primary key " +
 					mbMessageFlagPK.toString());
 			}
 
-			return mbMessageFlag;
+			throw new NoSuchMessageFlagException(
+				"No MBMessageFlag exists with the primary key " +
+				mbMessageFlagPK.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return mbMessageFlag;
 	}
 
 	public MBMessageFlag fetchByPrimaryKey(MBMessageFlagPK mbMessageFlagPK)
@@ -956,202 +959,40 @@ public class MBMessageFlagPersistence extends BasePersistence {
 	}
 
 	public void removeByTopicId(String topicId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByTopicId(topicId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (topicId == null) {
-				query.append("topicId IS NULL");
-			}
-			else {
-				query.append("topicId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
-				session.delete(mbMessageFlag);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
+			remove(mbMessageFlag);
 		}
 	}
 
 	public void removeByUserId(String userId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByUserId(userId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
-				session.delete(mbMessageFlag);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
+			remove(mbMessageFlag);
 		}
 	}
 
 	public void removeByT_M(String topicId, String messageId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByT_M(topicId, messageId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (topicId == null) {
-				query.append("topicId IS NULL");
-			}
-			else {
-				query.append("topicId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (messageId == null) {
-				query.append("messageId IS NULL");
-			}
-			else {
-				query.append("messageId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
-			}
-
-			if (messageId != null) {
-				q.setString(queryPos++, messageId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
-				session.delete(mbMessageFlag);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
+			remove(mbMessageFlag);
 		}
 	}
 
 	public void removeByT_U(String topicId, String userId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByT_U(topicId, userId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (topicId == null) {
-				query.append("topicId IS NULL");
-			}
-			else {
-				query.append("topicId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
-			}
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
-				session.delete(mbMessageFlag);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
+			remove(mbMessageFlag);
 		}
 	}
 

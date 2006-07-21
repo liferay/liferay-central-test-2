@@ -78,6 +78,21 @@ public class DLFileRankPersistence extends BasePersistence {
 					dlFileRankPK.toString());
 			}
 
+			return remove(dlFileRank);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public DLFileRank remove(DLFileRank dlFileRank) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(dlFileRank);
 			session.flush();
 
@@ -114,33 +129,20 @@ public class DLFileRankPersistence extends BasePersistence {
 
 	public DLFileRank findByPrimaryKey(DLFileRankPK dlFileRankPK)
 		throws NoSuchFileRankException, SystemException {
-		Session session = null;
+		DLFileRank dlFileRank = fetchByPrimaryKey(dlFileRankPK);
 
-		try {
-			session = openSession();
-
-			DLFileRank dlFileRank = (DLFileRank)session.get(DLFileRank.class,
-					dlFileRankPK);
-
-			if (dlFileRank == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No DLFileRank exists with the primary key " +
-						dlFileRankPK.toString());
-				}
-
-				throw new NoSuchFileRankException(
-					"No DLFileRank exists with the primary key " +
+		if (dlFileRank == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No DLFileRank exists with the primary key " +
 					dlFileRankPK.toString());
 			}
 
-			return dlFileRank;
+			throw new NoSuchFileRankException(
+				"No DLFileRank exists with the primary key " +
+				dlFileRankPK.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return dlFileRank;
 	}
 
 	public DLFileRank fetchByPrimaryKey(DLFileRankPK dlFileRankPK)
@@ -587,106 +589,21 @@ public class DLFileRankPersistence extends BasePersistence {
 	}
 
 	public void removeByUserId(String userId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByUserId(userId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate DESC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				DLFileRank dlFileRank = (DLFileRank)itr.next();
-				session.delete(dlFileRank);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			DLFileRank dlFileRank = (DLFileRank)itr.next();
+			remove(dlFileRank);
 		}
 	}
 
 	public void removeByF_N(String folderId, String name)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByF_N(folderId, name).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate DESC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				DLFileRank dlFileRank = (DLFileRank)itr.next();
-				session.delete(dlFileRank);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			DLFileRank dlFileRank = (DLFileRank)itr.next();
+			remove(dlFileRank);
 		}
 	}
 

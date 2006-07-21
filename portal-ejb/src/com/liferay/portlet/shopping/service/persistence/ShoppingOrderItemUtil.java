@@ -79,6 +79,33 @@ public class ShoppingOrderItemUtil {
 		return shoppingOrderItem;
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingOrderItem remove(
+		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(shoppingOrderItem);
+		}
+
+		shoppingOrderItem = getPersistence().remove(shoppingOrderItem);
+
+		if (listener != null) {
+			listener.onAfterRemove(shoppingOrderItem);
+		}
+
+		return shoppingOrderItem;
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem update(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem)
 		throws com.liferay.portal.SystemException {

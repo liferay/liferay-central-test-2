@@ -100,6 +100,12 @@ public class PermissionChecker {
 	public boolean hasPermission(
 		String groupId, String name, String primKey, String actionId) {
 
+		long start = 0;
+
+		if (_log.isDebugEnabled()) {
+			start = System.currentTimeMillis();
+		}
+
 		if (signedIn && (permissionCheckerBag == null)) {
 			try {
 				List userOrgs =
@@ -123,12 +129,6 @@ public class PermissionChecker {
 			}
 		}
 
-		long start = 0;
-
-		if (_log.isDebugEnabled()) {
-			start = System.currentTimeMillis();
-		}
-
 		if (user == null) {
 			return false;
 		}
@@ -138,6 +138,20 @@ public class PermissionChecker {
 		Boolean resultsValue = (Boolean)results.get(resultsKey);
 
 		if (resultsValue == null) {
+			try {
+				
+				// Cache the check to see if a user belongs to a group to
+				// improve performance
+
+				if (signedIn) {
+					permissionCheckerBag.hasUserGroup(
+						user.getUserId(), groupId);
+				}
+			}
+			catch (Exception e) {
+				_log.error(StackTraceUtil.getStackTrace(e));
+			}
+			
 			resultsValue = new Boolean(
 				hasPermissionImpl(groupId, name, primKey, actionId));
 
@@ -233,6 +247,12 @@ public class PermissionChecker {
 			resourceIds[0] = resource.getResourceId();
 		}
 		catch (NoSuchResourceException nsre) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Resource " + companyId + " " + name + " " +
+						Resource.TYPE_CLASS  + " " + Resource.SCOPE_INDIVIDUAL +
+							" " + primKey + " does not exist");
+			}
 		}
 
 		// Group
@@ -247,6 +267,12 @@ public class PermissionChecker {
 			}
 		}
 		catch (NoSuchResourceException nsre) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Resource " + companyId + " " + name + " " +
+						Resource.TYPE_CLASS  + " " + Resource.SCOPE_GROUP +
+							" " + groupId + " does not exist");
+			}
 		}
 
 		// Company
@@ -259,6 +285,12 @@ public class PermissionChecker {
 			resourceIds[2] = resource.getResourceId();
 		}
 		catch (NoSuchResourceException nsre) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Resource " + companyId + " " + name + " " +
+						Resource.TYPE_CLASS  + " " + Resource.SCOPE_COMPANY +
+							" " + companyId + " does not exist");
+			}
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -268,6 +300,8 @@ public class PermissionChecker {
 				"Getting user resources for " + groupId + " " + name + " " +
 					primKey + " " + actionId + " takes " + (end - start) +
 						" ms");
+
+			start = end;
 		}
 
 		// Check if user has access to perform the action on the given

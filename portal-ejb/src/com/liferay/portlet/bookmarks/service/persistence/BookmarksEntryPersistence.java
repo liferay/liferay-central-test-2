@@ -78,6 +78,22 @@ public class BookmarksEntryPersistence extends BasePersistence {
 					entryId.toString());
 			}
 
+			return remove(bookmarksEntry);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public BookmarksEntry remove(BookmarksEntry bookmarksEntry)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(bookmarksEntry);
 			session.flush();
 
@@ -114,33 +130,20 @@ public class BookmarksEntryPersistence extends BasePersistence {
 
 	public BookmarksEntry findByPrimaryKey(String entryId)
 		throws NoSuchEntryException, SystemException {
-		Session session = null;
+		BookmarksEntry bookmarksEntry = fetchByPrimaryKey(entryId);
 
-		try {
-			session = openSession();
-
-			BookmarksEntry bookmarksEntry = (BookmarksEntry)session.get(BookmarksEntry.class,
-					entryId);
-
-			if (bookmarksEntry == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No BookmarksEntry exists with the primary key " +
-						entryId.toString());
-				}
-
-				throw new NoSuchEntryException(
-					"No BookmarksEntry exists with the primary key " +
+		if (bookmarksEntry == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No BookmarksEntry exists with the primary key " +
 					entryId.toString());
 			}
 
-			return bookmarksEntry;
+			throw new NoSuchEntryException(
+				"No BookmarksEntry exists with the primary key " +
+				entryId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return bookmarksEntry;
 	}
 
 	public BookmarksEntry fetchByPrimaryKey(String entryId)
@@ -367,48 +370,11 @@ public class BookmarksEntryPersistence extends BasePersistence {
 	}
 
 	public void removeByFolderId(String folderId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByFolderId(folderId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("folderId ASC").append(", ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				BookmarksEntry bookmarksEntry = (BookmarksEntry)itr.next();
-				session.delete(bookmarksEntry);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			BookmarksEntry bookmarksEntry = (BookmarksEntry)itr.next();
+			remove(bookmarksEntry);
 		}
 	}
 

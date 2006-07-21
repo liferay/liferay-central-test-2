@@ -25,6 +25,7 @@ package com.liferay.portlet.weather.util;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.weather.model.Weather;
 import com.liferay.util.ConverterException;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
 import com.liferay.util.StringPool;
@@ -56,83 +57,25 @@ public class WeatherConverter implements WebCacheable {
 		Weather weather = null;
 
 		try {
-			if (_DEFAULT_TYPE == _TYPE_NWS) {
-				String text = Http.URLtoString(
-					"http://www.srh.noaa.gov/zipcity.php?inputstring=" + _zip);
+			String text = Html.stripComments(Http.URLtoString(
+				"http://weather.yahoo.com/search/weather2?p=" +
+					Http.encodeURL(_zip)));
 
-				int pos = text.indexOf("currentconds.jpg");
+			int x = text.indexOf("forecast-temperature");
+			x = text.indexOf("h3>", x) + 3;
 
-				int x = text.indexOf("&deg;F", pos);
-				int y = text.substring(0, x).lastIndexOf(">") + 1;
+			int y = text.indexOf("&deg;", x);
 
-				weather = new Weather(
-					_zip, Float.parseFloat(text.substring(y, x)));
-			}
-			else  if (_DEFAULT_TYPE == _TYPE_XMETHODS) {
-				URL url = new URL(
-					"http://services.xmethods.com:80/soap/servlet/rpcrouter");
+			float temperature = GetterUtil.getFloat(text.substring(x, y));
 
-				Call call = new Call ();
-				call.setEncodingStyleURI(Constants.NS_URI_SOAP_ENC);
-				call.setTargetObjectURI("urn:xmethods-Temperature");
-				call.setMethodName("getTemp");
+			x = text.indexOf("background:url(", x);
+			x = text.indexOf("http://", x);
 
-				Vector params = new Vector ();
-				params.addElement(
-					new Parameter("zipcode", String.class, _zip, null));
+			y = text.indexOf("d.png", x);
 
-				call.setParams (params);
+			String iconURL = text.substring(x, y) + "s.png";
 
-				Response resp = call.invoke(url, StringPool.BLANK);
-
-				if (resp.generatedFault()) {
-					throw new Exception();
-				}
-				else {
-					Parameter result = resp.getReturnValue ();
-					Float temperature = (Float)result.getValue();
-
-					weather = new Weather(_zip, temperature.floatValue());
-				}
-			}
-			else if (_DEFAULT_TYPE == _TYPE_WEATHER_CHANNEL) {
-				String text = Http.URLtoString(
-					"http://www.weather.com/search/search?where=" +
-						Http.encodeURL(_zip));
-
-				int x = text.indexOf("<!-- insert wx icon -->") + 23;
-
-				String iconURL = text.substring(
-					text.indexOf("http://", x),
-					text.indexOf(".gif", x) + 4);
-				iconURL = StringUtil.replace(iconURL, "/52/", "/31/");
-
-				x = text.indexOf("<!-- insert current temp -->") + 28;
-				int y = text.indexOf("&deg;F", x);
-
-				float temperature = Float.parseFloat(text.substring(x, y));
-
-				weather = new Weather(_zip, iconURL, temperature);
-			}
-			else if (_DEFAULT_TYPE == _TYPE_YAHOO) {
-				String text = Html.stripComments(Http.URLtoString(
-					"http://search.weather.yahoo.com/search/weather2?p=" +
-						Http.encodeURL(_zip)));
-
-				int x = text.indexOf("<b>", text.indexOf("Currently:")) + 3;
-				int y = text.indexOf("&deg;", x);
-
-				float temperature = Float.parseFloat(
-					text.substring(x, y).trim());
-
-				String iconURL = text.substring(
-					text.indexOf("http://", x),
-					text.indexOf(".gif", x) + 4);
-
-				iconURL = StringUtil.replace(iconURL, "/52/", "/31/");
-
-				weather = new Weather(_zip, iconURL, temperature);
-			}
+			weather = new Weather(_zip, iconURL, temperature);
 		}
 		catch (Exception e) {
 			throw new ConverterException(_zip);
@@ -146,16 +89,6 @@ public class WeatherConverter implements WebCacheable {
 	}
 
 	private static final long _REFRESH_TIME = Time.MINUTE * 20;
-
-	public static final int _TYPE_NWS = 1;
-
-	public static final int _TYPE_XMETHODS = 2;
-
-	public static final int _TYPE_WEATHER_CHANNEL = 3;
-
-	public static final int _TYPE_YAHOO = 4;
-
-	public static final int _DEFAULT_TYPE = _TYPE_YAHOO;
 
 	private String _zip;
 

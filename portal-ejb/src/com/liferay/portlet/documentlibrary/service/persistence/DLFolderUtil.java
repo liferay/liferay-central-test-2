@@ -79,6 +79,33 @@ public class DLFolderUtil {
 		return dlFolder;
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFolder remove(
+		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(dlFolder);
+		}
+
+		dlFolder = getPersistence().remove(dlFolder);
+
+		if (listener != null) {
+			listener.onAfterRemove(dlFolder);
+		}
+
+		return dlFolder;
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFolder update(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
 		throws com.liferay.portal.SystemException {

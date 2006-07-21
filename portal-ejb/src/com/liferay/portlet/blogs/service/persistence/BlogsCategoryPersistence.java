@@ -78,6 +78,22 @@ public class BlogsCategoryPersistence extends BasePersistence {
 					categoryId.toString());
 			}
 
+			return remove(blogsCategory);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public BlogsCategory remove(BlogsCategory blogsCategory)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(blogsCategory);
 			session.flush();
 
@@ -114,33 +130,20 @@ public class BlogsCategoryPersistence extends BasePersistence {
 
 	public BlogsCategory findByPrimaryKey(String categoryId)
 		throws NoSuchCategoryException, SystemException {
-		Session session = null;
+		BlogsCategory blogsCategory = fetchByPrimaryKey(categoryId);
 
-		try {
-			session = openSession();
-
-			BlogsCategory blogsCategory = (BlogsCategory)session.get(BlogsCategory.class,
-					categoryId);
-
-			if (blogsCategory == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No BlogsCategory exists with the primary key " +
-						categoryId.toString());
-				}
-
-				throw new NoSuchCategoryException(
-					"No BlogsCategory exists with the primary key " +
+		if (blogsCategory == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No BlogsCategory exists with the primary key " +
 					categoryId.toString());
 			}
 
-			return blogsCategory;
+			throw new NoSuchCategoryException(
+				"No BlogsCategory exists with the primary key " +
+				categoryId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return blogsCategory;
 	}
 
 	public BlogsCategory fetchByPrimaryKey(String categoryId)
@@ -365,47 +368,11 @@ public class BlogsCategoryPersistence extends BasePersistence {
 
 	public void removeByParentCategoryId(String parentCategoryId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByParentCategoryId(parentCategoryId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.blogs.model.BlogsCategory WHERE ");
-
-			if (parentCategoryId == null) {
-				query.append("parentCategoryId IS NULL");
-			}
-			else {
-				query.append("parentCategoryId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (parentCategoryId != null) {
-				q.setString(queryPos++, parentCategoryId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				BlogsCategory blogsCategory = (BlogsCategory)itr.next();
-				session.delete(blogsCategory);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			BlogsCategory blogsCategory = (BlogsCategory)itr.next();
+			remove(blogsCategory);
 		}
 	}
 

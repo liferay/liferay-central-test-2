@@ -78,6 +78,22 @@ public class DLFileEntryPersistence extends BasePersistence {
 					dlFileEntryPK.toString());
 			}
 
+			return remove(dlFileEntry);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public DLFileEntry remove(DLFileEntry dlFileEntry)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(dlFileEntry);
 			session.flush();
 
@@ -114,33 +130,20 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 	public DLFileEntry findByPrimaryKey(DLFileEntryPK dlFileEntryPK)
 		throws NoSuchFileEntryException, SystemException {
-		Session session = null;
+		DLFileEntry dlFileEntry = fetchByPrimaryKey(dlFileEntryPK);
 
-		try {
-			session = openSession();
-
-			DLFileEntry dlFileEntry = (DLFileEntry)session.get(DLFileEntry.class,
-					dlFileEntryPK);
-
-			if (dlFileEntry == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No DLFileEntry exists with the primary key " +
-						dlFileEntryPK.toString());
-				}
-
-				throw new NoSuchFileEntryException(
-					"No DLFileEntry exists with the primary key " +
+		if (dlFileEntry == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No DLFileEntry exists with the primary key " +
 					dlFileEntryPK.toString());
 			}
 
-			return dlFileEntry;
+			throw new NoSuchFileEntryException(
+				"No DLFileEntry exists with the primary key " +
+				dlFileEntryPK.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return dlFileEntry;
 	}
 
 	public DLFileEntry fetchByPrimaryKey(DLFileEntryPK dlFileEntryPK)
@@ -351,45 +354,11 @@ public class DLFileEntryPersistence extends BasePersistence {
 	}
 
 	public void removeByFolderId(String folderId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByFolderId(folderId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				DLFileEntry dlFileEntry = (DLFileEntry)itr.next();
-				session.delete(dlFileEntry);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			DLFileEntry dlFileEntry = (DLFileEntry)itr.next();
+			remove(dlFileEntry);
 		}
 	}
 

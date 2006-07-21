@@ -38,7 +38,6 @@ import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
-import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -92,11 +91,28 @@ public class PermissionPersistence extends BasePersistence {
 					permissionId.toString());
 			}
 
+			return remove(permission);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Permission remove(Permission permission) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(permission);
 			session.flush();
-			clearGroups.clear(permissionId);
-			clearRoles.clear(permissionId);
-			clearUsers.clear(permissionId);
+			clearGroups.clear(permission.getPrimaryKey());
+			clearRoles.clear(permission.getPrimaryKey());
+			clearUsers.clear(permission.getPrimaryKey());
+			PermissionPool.removeByA_R(permission.getActionId(),
+				permission.getResourceId());
 
 			return permission;
 		}
@@ -131,33 +147,20 @@ public class PermissionPersistence extends BasePersistence {
 
 	public Permission findByPrimaryKey(String permissionId)
 		throws NoSuchPermissionException, SystemException {
-		Session session = null;
+		Permission permission = fetchByPrimaryKey(permissionId);
 
-		try {
-			session = openSession();
-
-			Permission permission = (Permission)session.get(Permission.class,
-					permissionId);
-
-			if (permission == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Permission exists with the primary key " +
-						permissionId.toString());
-				}
-
-				throw new NoSuchPermissionException(
-					"No Permission exists with the primary key " +
+		if (permission == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No Permission exists with the primary key " +
 					permissionId.toString());
 			}
 
-			return permission;
+			throw new NoSuchPermissionException(
+				"No Permission exists with the primary key " +
+				permissionId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return permission;
 	}
 
 	public Permission fetchByPrimaryKey(String permissionId)
@@ -346,71 +349,40 @@ public class PermissionPersistence extends BasePersistence {
 
 	public Permission findByA_R(String actionId, String resourceId)
 		throws NoSuchPermissionException, SystemException {
-		Session session = null;
+		Permission permission = fetchByA_R(actionId, resourceId);
 
-		try {
-			session = openSession();
+		if (permission == null) {
+			String msg = "No Permission exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "actionId=";
+			msg += actionId;
+			msg += ", ";
+			msg += "resourceId=";
+			msg += resourceId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
 
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Permission WHERE ");
-
-			if (actionId == null) {
-				query.append("actionId IS NULL");
-			}
-			else {
-				query.append("actionId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (resourceId == null) {
-				query.append("resourceId IS NULL");
-			}
-			else {
-				query.append("resourceId = ?");
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg);
 			}
 
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (actionId != null) {
-				q.setString(queryPos++, actionId);
-			}
-
-			if (resourceId != null) {
-				q.setString(queryPos++, resourceId);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				String msg = "No Permission exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "actionId=";
-				msg += actionId;
-				msg += ", ";
-				msg += "resourceId=";
-				msg += resourceId;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchPermissionException(msg);
-			}
-
-			Permission permission = (Permission)list.get(0);
-
-			return permission;
+			throw new NoSuchPermissionException(msg);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return permission;
 	}
 
 	public Permission fetchByA_R(String actionId, String resourceId)
 		throws SystemException {
+		String pk = PermissionPool.getByA_R(actionId, resourceId);
+
+		if (pk != null) {
+			Permission permission = fetchByPrimaryKey(pk);
+
+			if (permission != null) {
+				return permission;
+			}
+		}
+
 		Session session = null;
 
 		try {
@@ -455,6 +427,8 @@ public class PermissionPersistence extends BasePersistence {
 			}
 
 			Permission permission = (Permission)list.get(0);
+			PermissionPool.putByA_R(actionId, resourceId,
+				permission.getPrimaryKey());
 
 			return permission;
 		}
@@ -488,114 +462,18 @@ public class PermissionPersistence extends BasePersistence {
 	}
 
 	public void removeByResourceId(String resourceId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByResourceId(resourceId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Permission WHERE ");
-
-			if (resourceId == null) {
-				query.append("resourceId IS NULL");
-			}
-			else {
-				query.append("resourceId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (resourceId != null) {
-				q.setString(queryPos++, resourceId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Permission permission = (Permission)itr.next();
-				session.delete(permission);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Permission permission = (Permission)itr.next();
+			remove(permission);
 		}
 	}
 
 	public void removeByA_R(String actionId, String resourceId)
 		throws NoSuchPermissionException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Permission WHERE ");
-
-			if (actionId == null) {
-				query.append("actionId IS NULL");
-			}
-			else {
-				query.append("actionId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (resourceId == null) {
-				query.append("resourceId IS NULL");
-			}
-			else {
-				query.append("resourceId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (actionId != null) {
-				q.setString(queryPos++, actionId);
-			}
-
-			if (resourceId != null) {
-				q.setString(queryPos++, resourceId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Permission permission = (Permission)itr.next();
-				session.delete(permission);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				String msg = "No Permission exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "actionId=";
-				msg += actionId;
-				msg += ", ";
-				msg += "resourceId=";
-				msg += resourceId;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchPermissionException(msg);
-			}
-			else {
-				throw new SystemException(he);
-			}
-		}
-		finally {
-			closeSession(session);
-		}
+		Permission permission = findByA_R(actionId, resourceId);
+		remove(permission);
 	}
 
 	public int countByResourceId(String resourceId) throws SystemException {

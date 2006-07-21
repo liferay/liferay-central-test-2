@@ -72,6 +72,22 @@ public class DataTrackerPersistence extends BasePersistence {
 					dataTrackerId.toString());
 			}
 
+			return remove(dataTracker);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public DataTracker remove(DataTracker dataTracker)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(dataTracker);
 			session.flush();
 
@@ -108,33 +124,20 @@ public class DataTrackerPersistence extends BasePersistence {
 
 	public DataTracker findByPrimaryKey(String dataTrackerId)
 		throws NoSuchDataTrackerException, SystemException {
-		Session session = null;
+		DataTracker dataTracker = fetchByPrimaryKey(dataTrackerId);
 
-		try {
-			session = openSession();
-
-			DataTracker dataTracker = (DataTracker)session.get(DataTracker.class,
-					dataTrackerId);
-
-			if (dataTracker == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No DataTracker exists with the primary key " +
-						dataTrackerId.toString());
-				}
-
-				throw new NoSuchDataTrackerException(
-					"No DataTracker exists with the primary key " +
+		if (dataTracker == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No DataTracker exists with the primary key " +
 					dataTrackerId.toString());
 			}
 
-			return dataTracker;
+			throw new NoSuchDataTrackerException(
+				"No DataTracker exists with the primary key " +
+				dataTrackerId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return dataTracker;
 	}
 
 	public DataTracker fetchByPrimaryKey(String dataTrackerId)

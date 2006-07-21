@@ -78,6 +78,22 @@ public class BookmarksFolderPersistence extends BasePersistence {
 					folderId.toString());
 			}
 
+			return remove(bookmarksFolder);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public BookmarksFolder remove(BookmarksFolder bookmarksFolder)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(bookmarksFolder);
 			session.flush();
 
@@ -114,33 +130,20 @@ public class BookmarksFolderPersistence extends BasePersistence {
 
 	public BookmarksFolder findByPrimaryKey(String folderId)
 		throws NoSuchFolderException, SystemException {
-		Session session = null;
+		BookmarksFolder bookmarksFolder = fetchByPrimaryKey(folderId);
 
-		try {
-			session = openSession();
-
-			BookmarksFolder bookmarksFolder = (BookmarksFolder)session.get(BookmarksFolder.class,
-					folderId);
-
-			if (bookmarksFolder == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No BookmarksFolder exists with the primary key " +
-						folderId.toString());
-				}
-
-				throw new NoSuchFolderException(
-					"No BookmarksFolder exists with the primary key " +
+		if (bookmarksFolder == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No BookmarksFolder exists with the primary key " +
 					folderId.toString());
 			}
 
-			return bookmarksFolder;
+			throw new NoSuchFolderException(
+				"No BookmarksFolder exists with the primary key " +
+				folderId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return bookmarksFolder;
 	}
 
 	public BookmarksFolder fetchByPrimaryKey(String folderId)
@@ -596,108 +599,21 @@ public class BookmarksFolderPersistence extends BasePersistence {
 	}
 
 	public void removeByGroupId(String groupId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByGroupId(groupId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("parentFolderId ASC").append(", ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				BookmarksFolder bookmarksFolder = (BookmarksFolder)itr.next();
-				session.delete(bookmarksFolder);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			BookmarksFolder bookmarksFolder = (BookmarksFolder)itr.next();
+			remove(bookmarksFolder);
 		}
 	}
 
 	public void removeByG_P(String groupId, String parentFolderId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByG_P(groupId, parentFolderId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("parentFolderId ASC").append(", ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				BookmarksFolder bookmarksFolder = (BookmarksFolder)itr.next();
-				session.delete(bookmarksFolder);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			BookmarksFolder bookmarksFolder = (BookmarksFolder)itr.next();
+			remove(bookmarksFolder);
 		}
 	}
 

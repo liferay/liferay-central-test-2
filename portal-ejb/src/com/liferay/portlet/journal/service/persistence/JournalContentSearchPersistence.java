@@ -81,6 +81,22 @@ public class JournalContentSearchPersistence extends BasePersistence {
 					journalContentSearchPK.toString());
 			}
 
+			return remove(journalContentSearch);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public JournalContentSearch remove(
+		JournalContentSearch journalContentSearch) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(journalContentSearch);
 			session.flush();
 
@@ -118,34 +134,21 @@ public class JournalContentSearchPersistence extends BasePersistence {
 	public JournalContentSearch findByPrimaryKey(
 		JournalContentSearchPK journalContentSearchPK)
 		throws NoSuchContentSearchException, SystemException {
-		Session session = null;
+		JournalContentSearch journalContentSearch = fetchByPrimaryKey(journalContentSearchPK);
 
-		try {
-			session = openSession();
-
-			JournalContentSearch journalContentSearch = (JournalContentSearch)session.get(JournalContentSearch.class,
-					journalContentSearchPK);
-
-			if (journalContentSearch == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No JournalContentSearch exists with the primary key " +
-						journalContentSearchPK.toString());
-				}
-
-				throw new NoSuchContentSearchException(
+		if (journalContentSearch == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
 					"No JournalContentSearch exists with the primary key " +
 					journalContentSearchPK.toString());
 			}
 
-			return journalContentSearch;
+			throw new NoSuchContentSearchException(
+				"No JournalContentSearch exists with the primary key " +
+				journalContentSearchPK.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return journalContentSearch;
 	}
 
 	public JournalContentSearch fetchByPrimaryKey(
@@ -1012,216 +1015,41 @@ public class JournalContentSearchPersistence extends BasePersistence {
 	}
 
 	public void removeByOwnerId(String ownerId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByOwnerId(ownerId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
-				session.delete(journalContentSearch);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
+			remove(journalContentSearch);
 		}
 	}
 
 	public void removeByL_O(String layoutId, String ownerId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByL_O(layoutId, ownerId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (layoutId == null) {
-				query.append("layoutId IS NULL");
-			}
-			else {
-				query.append("layoutId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (layoutId != null) {
-				q.setString(queryPos++, layoutId);
-			}
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
-				session.delete(journalContentSearch);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
+			remove(journalContentSearch);
 		}
 	}
 
 	public void removeByO_A(String ownerId, String articleId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByO_A(ownerId, articleId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (articleId == null) {
-				query.append("articleId IS NULL");
-			}
-			else {
-				query.append("articleId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			if (articleId != null) {
-				q.setString(queryPos++, articleId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
-				session.delete(journalContentSearch);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
+			remove(journalContentSearch);
 		}
 	}
 
 	public void removeByC_A(String companyId, String articleId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_A(companyId, articleId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (articleId == null) {
-				query.append("articleId IS NULL");
-			}
-			else {
-				query.append("articleId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (articleId != null) {
-				q.setString(queryPos++, articleId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
-				session.delete(journalContentSearch);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
+			remove(journalContentSearch);
 		}
 	}
 

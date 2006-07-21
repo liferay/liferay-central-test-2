@@ -79,6 +79,33 @@ public class DLFileVersionUtil {
 		return dlFileVersion;
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion remove(
+		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(dlFileVersion);
+		}
+
+		dlFileVersion = getPersistence().remove(dlFileVersion);
+
+		if (listener != null) {
+			listener.onAfterRemove(dlFileVersion);
+		}
+
+		return dlFileVersion;
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion update(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
 		throws com.liferay.portal.SystemException {

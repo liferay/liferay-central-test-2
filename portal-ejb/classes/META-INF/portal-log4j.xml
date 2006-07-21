@@ -56,6 +56,10 @@
 		<priority value="DEBUG" />
 	</category>
 
+	<category name="com.liferay.portal.events.ServicePreAction">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.events.ShutdownHook">
 		<priority value="ERROR" />
 	</category>

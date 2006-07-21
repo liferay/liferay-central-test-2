@@ -79,6 +79,33 @@ public class IGFolderUtil {
 		return igFolder;
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGFolder remove(
+		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(igFolder);
+		}
+
+		igFolder = getPersistence().remove(igFolder);
+
+		if (listener != null) {
+			listener.onAfterRemove(igFolder);
+		}
+
+		return igFolder;
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGFolder update(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.SystemException {

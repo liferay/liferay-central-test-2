@@ -79,6 +79,33 @@ public class DLFileEntryUtil {
 		return dlFileEntry;
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry remove(
+		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(dlFileEntry);
+		}
+
+		dlFileEntry = getPersistence().remove(dlFileEntry);
+
+		if (listener != null) {
+			listener.onAfterRemove(dlFileEntry);
+		}
+
+		return dlFileEntry;
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry update(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
 		throws com.liferay.portal.SystemException {

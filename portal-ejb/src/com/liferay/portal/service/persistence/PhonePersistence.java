@@ -76,6 +76,21 @@ public class PhonePersistence extends BasePersistence {
 					phoneId.toString());
 			}
 
+			return remove(phone);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Phone remove(Phone phone) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(phone);
 			session.flush();
 
@@ -111,32 +126,19 @@ public class PhonePersistence extends BasePersistence {
 
 	public Phone findByPrimaryKey(String phoneId)
 		throws NoSuchPhoneException, SystemException {
-		Session session = null;
+		Phone phone = fetchByPrimaryKey(phoneId);
 
-		try {
-			session = openSession();
-
-			Phone phone = (Phone)session.get(Phone.class, phoneId);
-
-			if (phone == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Phone exists with the primary key " +
-						phoneId.toString());
-				}
-
-				throw new NoSuchPhoneException(
-					"No Phone exists with the primary key " +
+		if (phone == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No Phone exists with the primary key " +
 					phoneId.toString());
 			}
 
-			return phone;
+			throw new NoSuchPhoneException(
+				"No Phone exists with the primary key " + phoneId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return phone;
 	}
 
 	public Phone fetchByPrimaryKey(String phoneId) throws SystemException {
@@ -1304,294 +1306,51 @@ public class PhonePersistence extends BasePersistence {
 	}
 
 	public void removeByCompanyId(String companyId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCompanyId(companyId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Phone WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Phone phone = (Phone)itr.next();
-				session.delete(phone);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Phone phone = (Phone)itr.next();
+			remove(phone);
 		}
 	}
 
 	public void removeByUserId(String userId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByUserId(userId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Phone WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Phone phone = (Phone)itr.next();
-				session.delete(phone);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Phone phone = (Phone)itr.next();
+			remove(phone);
 		}
 	}
 
 	public void removeByC_C(String companyId, String className)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_C(companyId, className).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Phone WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Phone phone = (Phone)itr.next();
-				session.delete(phone);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Phone phone = (Phone)itr.next();
+			remove(phone);
 		}
 	}
 
 	public void removeByC_C_C(String companyId, String className, String classPK)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_C_C(companyId, className, classPK).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Phone WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Phone phone = (Phone)itr.next();
-				session.delete(phone);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Phone phone = (Phone)itr.next();
+			remove(phone);
 		}
 	}
 
 	public void removeByC_C_C_P(String companyId, String className,
 		String classPK, boolean primary) throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_C_C_P(companyId, className, classPK, primary)
+						   .iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Phone WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" AND ");
-			query.append("primary_ = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			q.setBoolean(queryPos++, primary);
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Phone phone = (Phone)itr.next();
-				session.delete(phone);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Phone phone = (Phone)itr.next();
+			remove(phone);
 		}
 	}
 

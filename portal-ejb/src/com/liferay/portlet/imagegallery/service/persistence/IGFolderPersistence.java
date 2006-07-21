@@ -77,6 +77,21 @@ public class IGFolderPersistence extends BasePersistence {
 					folderId.toString());
 			}
 
+			return remove(igFolder);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public IGFolder remove(IGFolder igFolder) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(igFolder);
 			session.flush();
 
@@ -113,32 +128,20 @@ public class IGFolderPersistence extends BasePersistence {
 
 	public IGFolder findByPrimaryKey(String folderId)
 		throws NoSuchFolderException, SystemException {
-		Session session = null;
+		IGFolder igFolder = fetchByPrimaryKey(folderId);
 
-		try {
-			session = openSession();
-
-			IGFolder igFolder = (IGFolder)session.get(IGFolder.class, folderId);
-
-			if (igFolder == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No IGFolder exists with the primary key " +
-						folderId.toString());
-				}
-
-				throw new NoSuchFolderException(
-					"No IGFolder exists with the primary key " +
+		if (igFolder == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No IGFolder exists with the primary key " +
 					folderId.toString());
 			}
 
-			return igFolder;
+			throw new NoSuchFolderException(
+				"No IGFolder exists with the primary key " +
+				folderId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return igFolder;
 	}
 
 	public IGFolder fetchByPrimaryKey(String folderId)
@@ -583,106 +586,21 @@ public class IGFolderPersistence extends BasePersistence {
 	}
 
 	public void removeByGroupId(String groupId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByGroupId(groupId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				IGFolder igFolder = (IGFolder)itr.next();
-				session.delete(igFolder);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			IGFolder igFolder = (IGFolder)itr.next();
+			remove(igFolder);
 		}
 	}
 
 	public void removeByG_P(String groupId, String parentFolderId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByG_P(groupId, parentFolderId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				IGFolder igFolder = (IGFolder)itr.next();
-				session.delete(igFolder);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			IGFolder igFolder = (IGFolder)itr.next();
+			remove(igFolder);
 		}
 	}
 

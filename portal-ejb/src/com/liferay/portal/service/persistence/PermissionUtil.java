@@ -79,6 +79,33 @@ public class PermissionUtil {
 		return permission;
 	}
 
+	public static com.liferay.portal.model.Permission remove(
+		com.liferay.portal.model.Permission permission)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(permission);
+		}
+
+		permission = getPersistence().remove(permission);
+
+		if (listener != null) {
+			listener.onAfterRemove(permission);
+		}
+
+		return permission;
+	}
+
 	public static com.liferay.portal.model.Permission update(
 		com.liferay.portal.model.Permission permission)
 		throws com.liferay.portal.SystemException {

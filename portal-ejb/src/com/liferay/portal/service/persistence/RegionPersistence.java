@@ -76,6 +76,21 @@ public class RegionPersistence extends BasePersistence {
 					regionId.toString());
 			}
 
+			return remove(region);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Region remove(Region region) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(region);
 			session.flush();
 
@@ -111,32 +126,19 @@ public class RegionPersistence extends BasePersistence {
 
 	public Region findByPrimaryKey(String regionId)
 		throws NoSuchRegionException, SystemException {
-		Session session = null;
+		Region region = fetchByPrimaryKey(regionId);
 
-		try {
-			session = openSession();
-
-			Region region = (Region)session.get(Region.class, regionId);
-
-			if (region == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Region exists with the primary key " +
-						regionId.toString());
-				}
-
-				throw new NoSuchRegionException(
-					"No Region exists with the primary key " +
+		if (region == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No Region exists with the primary key " +
 					regionId.toString());
 			}
 
-			return region;
+			throw new NoSuchRegionException(
+				"No Region exists with the primary key " + regionId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return region;
 	}
 
 	public Region fetchByPrimaryKey(String regionId) throws SystemException {
@@ -689,129 +691,30 @@ public class RegionPersistence extends BasePersistence {
 	}
 
 	public void removeByCountryId(String countryId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCountryId(countryId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Region WHERE ");
-
-			if (countryId == null) {
-				query.append("countryId IS NULL");
-			}
-			else {
-				query.append("countryId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (countryId != null) {
-				q.setString(queryPos++, countryId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Region region = (Region)itr.next();
-				session.delete(region);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Region region = (Region)itr.next();
+			remove(region);
 		}
 	}
 
 	public void removeByActive(boolean active) throws SystemException {
-		Session session = null;
+		Iterator itr = findByActive(active).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Region WHERE ");
-			query.append("active_ = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setBoolean(queryPos++, active);
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Region region = (Region)itr.next();
-				session.delete(region);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Region region = (Region)itr.next();
+			remove(region);
 		}
 	}
 
 	public void removeByC_A(String countryId, boolean active)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_A(countryId, active).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Region WHERE ");
-
-			if (countryId == null) {
-				query.append("countryId IS NULL");
-			}
-			else {
-				query.append("countryId = ?");
-			}
-
-			query.append(" AND ");
-			query.append("active_ = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (countryId != null) {
-				q.setString(queryPos++, countryId);
-			}
-
-			q.setBoolean(queryPos++, active);
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Region region = (Region)itr.next();
-				session.delete(region);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Region region = (Region)itr.next();
+			remove(region);
 		}
 	}
 

@@ -79,6 +79,22 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 					categoryId.toString());
 			}
 
+			return remove(shoppingCategory);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ShoppingCategory remove(ShoppingCategory shoppingCategory)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(shoppingCategory);
 			session.flush();
 
@@ -115,34 +131,20 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 
 	public ShoppingCategory findByPrimaryKey(String categoryId)
 		throws NoSuchCategoryException, SystemException {
-		Session session = null;
+		ShoppingCategory shoppingCategory = fetchByPrimaryKey(categoryId);
 
-		try {
-			session = openSession();
-
-			ShoppingCategory shoppingCategory = (ShoppingCategory)session.get(ShoppingCategory.class,
-					categoryId);
-
-			if (shoppingCategory == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No ShoppingCategory exists with the primary key " +
-						categoryId.toString());
-				}
-
-				throw new NoSuchCategoryException(
-					"No ShoppingCategory exists with the primary key " +
+		if (shoppingCategory == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No ShoppingCategory exists with the primary key " +
 					categoryId.toString());
 			}
 
-			return shoppingCategory;
+			throw new NoSuchCategoryException(
+				"No ShoppingCategory exists with the primary key " +
+				categoryId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return shoppingCategory;
 	}
 
 	public ShoppingCategory fetchByPrimaryKey(String categoryId)
@@ -599,108 +601,21 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 	}
 
 	public void removeByGroupId(String groupId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByGroupId(groupId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("parentCategoryId ASC").append(", ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				ShoppingCategory shoppingCategory = (ShoppingCategory)itr.next();
-				session.delete(shoppingCategory);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			ShoppingCategory shoppingCategory = (ShoppingCategory)itr.next();
+			remove(shoppingCategory);
 		}
 	}
 
 	public void removeByG_P(String groupId, String parentCategoryId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByG_P(groupId, parentCategoryId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (parentCategoryId == null) {
-				query.append("parentCategoryId IS NULL");
-			}
-			else {
-				query.append("parentCategoryId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("parentCategoryId ASC").append(", ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			if (parentCategoryId != null) {
-				q.setString(queryPos++, parentCategoryId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				ShoppingCategory shoppingCategory = (ShoppingCategory)itr.next();
-				session.delete(shoppingCategory);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			ShoppingCategory shoppingCategory = (ShoppingCategory)itr.next();
+			remove(shoppingCategory);
 		}
 	}
 

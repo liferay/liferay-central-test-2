@@ -34,7 +34,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.HibernateException;
-import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -77,8 +76,26 @@ public class MBDiscussionPersistence extends BasePersistence {
 					discussionId.toString());
 			}
 
+			return remove(mbDiscussion);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public MBDiscussion remove(MBDiscussion mbDiscussion)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(mbDiscussion);
 			session.flush();
+			MBDiscussionPool.removeByC_C(mbDiscussion.getClassName(),
+				mbDiscussion.getClassPK());
 
 			return mbDiscussion;
 		}
@@ -113,33 +130,20 @@ public class MBDiscussionPersistence extends BasePersistence {
 
 	public MBDiscussion findByPrimaryKey(String discussionId)
 		throws NoSuchDiscussionException, SystemException {
-		Session session = null;
+		MBDiscussion mbDiscussion = fetchByPrimaryKey(discussionId);
 
-		try {
-			session = openSession();
-
-			MBDiscussion mbDiscussion = (MBDiscussion)session.get(MBDiscussion.class,
-					discussionId);
-
-			if (mbDiscussion == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No MBDiscussion exists with the primary key " +
-						discussionId.toString());
-				}
-
-				throw new NoSuchDiscussionException(
-					"No MBDiscussion exists with the primary key " +
+		if (mbDiscussion == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No MBDiscussion exists with the primary key " +
 					discussionId.toString());
 			}
 
-			return mbDiscussion;
+			throw new NoSuchDiscussionException(
+				"No MBDiscussion exists with the primary key " +
+				discussionId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return mbDiscussion;
 	}
 
 	public MBDiscussion fetchByPrimaryKey(String discussionId)
@@ -161,72 +165,40 @@ public class MBDiscussionPersistence extends BasePersistence {
 
 	public MBDiscussion findByC_C(String className, String classPK)
 		throws NoSuchDiscussionException, SystemException {
-		Session session = null;
+		MBDiscussion mbDiscussion = fetchByC_C(className, classPK);
 
-		try {
-			session = openSession();
+		if (mbDiscussion == null) {
+			String msg = "No MBDiscussion exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "className=";
+			msg += className;
+			msg += ", ";
+			msg += "classPK=";
+			msg += classPK;
+			msg += StringPool.CLOSE_CURLY_BRACE;
 
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg);
 			}
 
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				String msg = "No MBDiscussion exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "className=";
-				msg += className;
-				msg += ", ";
-				msg += "classPK=";
-				msg += classPK;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchDiscussionException(msg);
-			}
-
-			MBDiscussion mbDiscussion = (MBDiscussion)list.get(0);
-
-			return mbDiscussion;
+			throw new NoSuchDiscussionException(msg);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return mbDiscussion;
 	}
 
 	public MBDiscussion fetchByC_C(String className, String classPK)
 		throws SystemException {
+		String pk = MBDiscussionPool.getByC_C(className, classPK);
+
+		if (pk != null) {
+			MBDiscussion mbDiscussion = fetchByPrimaryKey(pk);
+
+			if (mbDiscussion != null) {
+				return mbDiscussion;
+			}
+		}
+
 		Session session = null;
 
 		try {
@@ -272,6 +244,8 @@ public class MBDiscussionPersistence extends BasePersistence {
 			}
 
 			MBDiscussion mbDiscussion = (MBDiscussion)list.get(0);
+			MBDiscussionPool.putByC_C(className, classPK,
+				mbDiscussion.getPrimaryKey());
 
 			return mbDiscussion;
 		}
@@ -307,72 +281,8 @@ public class MBDiscussionPersistence extends BasePersistence {
 
 	public void removeByC_C(String className, String classPK)
 		throws NoSuchDiscussionException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				MBDiscussion mbDiscussion = (MBDiscussion)itr.next();
-				session.delete(mbDiscussion);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				String msg = "No MBDiscussion exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "className=";
-				msg += className;
-				msg += ", ";
-				msg += "classPK=";
-				msg += classPK;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchDiscussionException(msg);
-			}
-			else {
-				throw new SystemException(he);
-			}
-		}
-		finally {
-			closeSession(session);
-		}
+		MBDiscussion mbDiscussion = findByC_C(className, classPK);
+		remove(mbDiscussion);
 	}
 
 	public int countByC_C(String className, String classPK)

@@ -79,6 +79,33 @@ public class MBMessageFlagUtil {
 		return mbMessageFlag;
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag remove(
+		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(mbMessageFlag);
+		}
+
+		mbMessageFlag = getPersistence().remove(mbMessageFlag);
+
+		if (listener != null) {
+			listener.onAfterRemove(mbMessageFlag);
+		}
+
+		return mbMessageFlag;
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag update(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException {

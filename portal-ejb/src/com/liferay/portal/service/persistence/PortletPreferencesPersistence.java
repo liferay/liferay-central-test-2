@@ -78,6 +78,22 @@ public class PortletPreferencesPersistence extends BasePersistence {
 					portletPreferencesPK.toString());
 			}
 
+			return remove(portletPreferences);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public PortletPreferences remove(PortletPreferences portletPreferences)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(portletPreferences);
 			session.flush();
 
@@ -115,34 +131,20 @@ public class PortletPreferencesPersistence extends BasePersistence {
 	public PortletPreferences findByPrimaryKey(
 		PortletPreferencesPK portletPreferencesPK)
 		throws NoSuchPortletPreferencesException, SystemException {
-		Session session = null;
+		PortletPreferences portletPreferences = fetchByPrimaryKey(portletPreferencesPK);
 
-		try {
-			session = openSession();
-
-			PortletPreferences portletPreferences = (PortletPreferences)session.get(PortletPreferences.class,
-					portletPreferencesPK);
-
-			if (portletPreferences == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No PortletPreferences exists with the primary key " +
-						portletPreferencesPK.toString());
-				}
-
-				throw new NoSuchPortletPreferencesException(
-					"No PortletPreferences exists with the primary key " +
+		if (portletPreferences == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No PortletPreferences exists with the primary key " +
 					portletPreferencesPK.toString());
 			}
 
-			return portletPreferences;
+			throw new NoSuchPortletPreferencesException(
+				"No PortletPreferences exists with the primary key " +
+				portletPreferencesPK.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return portletPreferences;
 	}
 
 	public PortletPreferences fetchByPrimaryKey(
@@ -744,145 +746,30 @@ public class PortletPreferencesPersistence extends BasePersistence {
 	}
 
 	public void removeByLayoutId(String layoutId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByLayoutId(layoutId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
-
-			if (layoutId == null) {
-				query.append("layoutId IS NULL");
-			}
-			else {
-				query.append("layoutId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (layoutId != null) {
-				q.setString(queryPos++, layoutId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				PortletPreferences portletPreferences = (PortletPreferences)itr.next();
-				session.delete(portletPreferences);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			PortletPreferences portletPreferences = (PortletPreferences)itr.next();
+			remove(portletPreferences);
 		}
 	}
 
 	public void removeByOwnerId(String ownerId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByOwnerId(ownerId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				PortletPreferences portletPreferences = (PortletPreferences)itr.next();
-				session.delete(portletPreferences);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			PortletPreferences portletPreferences = (PortletPreferences)itr.next();
+			remove(portletPreferences);
 		}
 	}
 
 	public void removeByL_O(String layoutId, String ownerId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByL_O(layoutId, ownerId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
-
-			if (layoutId == null) {
-				query.append("layoutId IS NULL");
-			}
-			else {
-				query.append("layoutId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (layoutId != null) {
-				q.setString(queryPos++, layoutId);
-			}
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				PortletPreferences portletPreferences = (PortletPreferences)itr.next();
-				session.delete(portletPreferences);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			PortletPreferences portletPreferences = (PortletPreferences)itr.next();
+			remove(portletPreferences);
 		}
 	}
 

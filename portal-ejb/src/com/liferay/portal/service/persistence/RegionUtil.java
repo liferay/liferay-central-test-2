@@ -78,6 +78,33 @@ public class RegionUtil {
 		return region;
 	}
 
+	public static com.liferay.portal.model.Region remove(
+		com.liferay.portal.model.Region region)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(region);
+		}
+
+		region = getPersistence().remove(region);
+
+		if (listener != null) {
+			listener.onAfterRemove(region);
+		}
+
+		return region;
+	}
+
 	public static com.liferay.portal.model.Region update(
 		com.liferay.portal.model.Region region)
 		throws com.liferay.portal.SystemException {

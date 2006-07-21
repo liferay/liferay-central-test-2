@@ -79,6 +79,33 @@ public class CalEventUtil {
 		return calEvent;
 	}
 
+	public static com.liferay.portlet.calendar.model.CalEvent remove(
+		com.liferay.portlet.calendar.model.CalEvent calEvent)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(calEvent);
+		}
+
+		calEvent = getPersistence().remove(calEvent);
+
+		if (listener != null) {
+			listener.onAfterRemove(calEvent);
+		}
+
+		return calEvent;
+	}
+
 	public static com.liferay.portlet.calendar.model.CalEvent update(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException {

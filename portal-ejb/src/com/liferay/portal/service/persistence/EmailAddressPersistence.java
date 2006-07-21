@@ -77,6 +77,22 @@ public class EmailAddressPersistence extends BasePersistence {
 					emailAddressId.toString());
 			}
 
+			return remove(emailAddress);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public EmailAddress remove(EmailAddress emailAddress)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(emailAddress);
 			session.flush();
 
@@ -113,33 +129,20 @@ public class EmailAddressPersistence extends BasePersistence {
 
 	public EmailAddress findByPrimaryKey(String emailAddressId)
 		throws NoSuchEmailAddressException, SystemException {
-		Session session = null;
+		EmailAddress emailAddress = fetchByPrimaryKey(emailAddressId);
 
-		try {
-			session = openSession();
-
-			EmailAddress emailAddress = (EmailAddress)session.get(EmailAddress.class,
-					emailAddressId);
-
-			if (emailAddress == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No EmailAddress exists with the primary key " +
-						emailAddressId.toString());
-				}
-
-				throw new NoSuchEmailAddressException(
-					"No EmailAddress exists with the primary key " +
+		if (emailAddress == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No EmailAddress exists with the primary key " +
 					emailAddressId.toString());
 			}
 
-			return emailAddress;
+			throw new NoSuchEmailAddressException(
+				"No EmailAddress exists with the primary key " +
+				emailAddressId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return emailAddress;
 	}
 
 	public EmailAddress fetchByPrimaryKey(String emailAddressId)
@@ -1320,294 +1323,51 @@ public class EmailAddressPersistence extends BasePersistence {
 	}
 
 	public void removeByCompanyId(String companyId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCompanyId(companyId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				EmailAddress emailAddress = (EmailAddress)itr.next();
-				session.delete(emailAddress);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			EmailAddress emailAddress = (EmailAddress)itr.next();
+			remove(emailAddress);
 		}
 	}
 
 	public void removeByUserId(String userId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByUserId(userId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				EmailAddress emailAddress = (EmailAddress)itr.next();
-				session.delete(emailAddress);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			EmailAddress emailAddress = (EmailAddress)itr.next();
+			remove(emailAddress);
 		}
 	}
 
 	public void removeByC_C(String companyId, String className)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_C(companyId, className).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				EmailAddress emailAddress = (EmailAddress)itr.next();
-				session.delete(emailAddress);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			EmailAddress emailAddress = (EmailAddress)itr.next();
+			remove(emailAddress);
 		}
 	}
 
 	public void removeByC_C_C(String companyId, String className, String classPK)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_C_C(companyId, className, classPK).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				EmailAddress emailAddress = (EmailAddress)itr.next();
-				session.delete(emailAddress);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			EmailAddress emailAddress = (EmailAddress)itr.next();
+			remove(emailAddress);
 		}
 	}
 
 	public void removeByC_C_C_P(String companyId, String className,
 		String classPK, boolean primary) throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_C_C_P(companyId, className, classPK, primary)
+						   .iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.EmailAddress WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" AND ");
-			query.append("primary_ = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			q.setBoolean(queryPos++, primary);
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				EmailAddress emailAddress = (EmailAddress)itr.next();
-				session.delete(emailAddress);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			EmailAddress emailAddress = (EmailAddress)itr.next();
+			remove(emailAddress);
 		}
 	}
 

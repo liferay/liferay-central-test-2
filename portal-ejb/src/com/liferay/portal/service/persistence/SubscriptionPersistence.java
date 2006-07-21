@@ -35,7 +35,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.HibernateException;
-import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -78,8 +77,27 @@ public class SubscriptionPersistence extends BasePersistence {
 					subscriptionId.toString());
 			}
 
+			return remove(subscription);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Subscription remove(Subscription subscription)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(subscription);
 			session.flush();
+			SubscriptionPool.removeByC_U_C_C(subscription.getCompanyId(),
+				subscription.getUserId(), subscription.getClassName(),
+				subscription.getClassPK());
 
 			return subscription;
 		}
@@ -114,33 +132,20 @@ public class SubscriptionPersistence extends BasePersistence {
 
 	public Subscription findByPrimaryKey(String subscriptionId)
 		throws NoSuchSubscriptionException, SystemException {
-		Session session = null;
+		Subscription subscription = fetchByPrimaryKey(subscriptionId);
 
-		try {
-			session = openSession();
-
-			Subscription subscription = (Subscription)session.get(Subscription.class,
-					subscriptionId);
-
-			if (subscription == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Subscription exists with the primary key " +
-						subscriptionId.toString());
-				}
-
-				throw new NoSuchSubscriptionException(
-					"No Subscription exists with the primary key " +
+		if (subscription == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No Subscription exists with the primary key " +
 					subscriptionId.toString());
 			}
 
-			return subscription;
+			throw new NoSuchSubscriptionException(
+				"No Subscription exists with the primary key " +
+				subscriptionId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return subscription;
 	}
 
 	public Subscription fetchByPrimaryKey(String subscriptionId)
@@ -588,103 +593,48 @@ public class SubscriptionPersistence extends BasePersistence {
 	public Subscription findByC_U_C_C(String companyId, String userId,
 		String className, String classPK)
 		throws NoSuchSubscriptionException, SystemException {
-		Session session = null;
+		Subscription subscription = fetchByC_U_C_C(companyId, userId,
+				className, classPK);
 
-		try {
-			session = openSession();
+		if (subscription == null) {
+			String msg = "No Subscription exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "userId=";
+			msg += userId;
+			msg += ", ";
+			msg += "className=";
+			msg += className;
+			msg += ", ";
+			msg += "classPK=";
+			msg += classPK;
+			msg += StringPool.CLOSE_CURLY_BRACE;
 
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg);
 			}
 
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				String msg = "No Subscription exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "userId=";
-				msg += userId;
-				msg += ", ";
-				msg += "className=";
-				msg += className;
-				msg += ", ";
-				msg += "classPK=";
-				msg += classPK;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchSubscriptionException(msg);
-			}
-
-			Subscription subscription = (Subscription)list.get(0);
-
-			return subscription;
+			throw new NoSuchSubscriptionException(msg);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return subscription;
 	}
 
 	public Subscription fetchByC_U_C_C(String companyId, String userId,
 		String className, String classPK) throws SystemException {
+		String pk = SubscriptionPool.getByC_U_C_C(companyId, userId, className,
+				classPK);
+
+		if (pk != null) {
+			Subscription subscription = fetchByPrimaryKey(pk);
+
+			if (subscription != null) {
+				return subscription;
+			}
+		}
+
 		Session session = null;
 
 		try {
@@ -755,6 +705,8 @@ public class SubscriptionPersistence extends BasePersistence {
 			}
 
 			Subscription subscription = (Subscription)list.get(0);
+			SubscriptionPool.putByC_U_C_C(companyId, userId, className,
+				classPK, subscription.getPrimaryKey());
 
 			return subscription;
 		}
@@ -788,216 +740,30 @@ public class SubscriptionPersistence extends BasePersistence {
 	}
 
 	public void removeByUserId(String userId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByUserId(userId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Subscription subscription = (Subscription)itr.next();
-				session.delete(subscription);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Subscription subscription = (Subscription)itr.next();
+			remove(subscription);
 		}
 	}
 
 	public void removeByC_C_C(String companyId, String className, String classPK)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_C_C(companyId, className, classPK).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Subscription subscription = (Subscription)itr.next();
-				session.delete(subscription);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			Subscription subscription = (Subscription)itr.next();
+			remove(subscription);
 		}
 	}
 
 	public void removeByC_U_C_C(String companyId, String userId,
 		String className, String classPK)
 		throws NoSuchSubscriptionException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Subscription subscription = (Subscription)itr.next();
-				session.delete(subscription);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				String msg = "No Subscription exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "userId=";
-				msg += userId;
-				msg += ", ";
-				msg += "className=";
-				msg += className;
-				msg += ", ";
-				msg += "classPK=";
-				msg += classPK;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchSubscriptionException(msg);
-			}
-			else {
-				throw new SystemException(he);
-			}
-		}
-		finally {
-			closeSession(session);
-		}
+		Subscription subscription = findByC_U_C_C(companyId, userId, className,
+				classPK);
+		remove(subscription);
 	}
 
 	public int countByUserId(String userId) throws SystemException {

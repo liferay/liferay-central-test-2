@@ -77,6 +77,22 @@ public class PasswordTrackerPersistence extends BasePersistence {
 					passwordTrackerId.toString());
 			}
 
+			return remove(passwordTracker);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public PasswordTracker remove(PasswordTracker passwordTracker)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(passwordTracker);
 			session.flush();
 
@@ -113,33 +129,20 @@ public class PasswordTrackerPersistence extends BasePersistence {
 
 	public PasswordTracker findByPrimaryKey(String passwordTrackerId)
 		throws NoSuchPasswordTrackerException, SystemException {
-		Session session = null;
+		PasswordTracker passwordTracker = fetchByPrimaryKey(passwordTrackerId);
 
-		try {
-			session = openSession();
-
-			PasswordTracker passwordTracker = (PasswordTracker)session.get(PasswordTracker.class,
-					passwordTrackerId);
-
-			if (passwordTracker == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No PasswordTracker exists with the primary key " +
-						passwordTrackerId.toString());
-				}
-
-				throw new NoSuchPasswordTrackerException(
-					"No PasswordTracker exists with the primary key " +
+		if (passwordTracker == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No PasswordTracker exists with the primary key " +
 					passwordTrackerId.toString());
 			}
 
-			return passwordTracker;
+			throw new NoSuchPasswordTrackerException(
+				"No PasswordTracker exists with the primary key " +
+				passwordTrackerId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return passwordTracker;
 	}
 
 	public PasswordTracker fetchByPrimaryKey(String passwordTrackerId)
@@ -365,47 +368,11 @@ public class PasswordTrackerPersistence extends BasePersistence {
 	}
 
 	public void removeByUserId(String userId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByUserId(userId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.PasswordTracker WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("userId DESC").append(", ");
-			query.append("createDate DESC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				PasswordTracker passwordTracker = (PasswordTracker)itr.next();
-				session.delete(passwordTracker);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			PasswordTracker passwordTracker = (PasswordTracker)itr.next();
+			remove(passwordTracker);
 		}
 	}
 

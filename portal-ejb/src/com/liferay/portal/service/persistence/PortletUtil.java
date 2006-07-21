@@ -78,6 +78,33 @@ public class PortletUtil {
 		return portlet;
 	}
 
+	public static com.liferay.portal.model.Portlet remove(
+		com.liferay.portal.model.Portlet portlet)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(portlet);
+		}
+
+		portlet = getPersistence().remove(portlet);
+
+		if (listener != null) {
+			listener.onAfterRemove(portlet);
+		}
+
+		return portlet;
+	}
+
 	public static com.liferay.portal.model.Portlet update(
 		com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException {

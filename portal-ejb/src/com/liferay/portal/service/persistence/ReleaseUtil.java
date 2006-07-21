@@ -78,6 +78,33 @@ public class ReleaseUtil {
 		return release;
 	}
 
+	public static com.liferay.portal.model.Release remove(
+		com.liferay.portal.model.Release release)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(release);
+		}
+
+		release = getPersistence().remove(release);
+
+		if (listener != null) {
+			listener.onAfterRemove(release);
+		}
+
+		return release;
+	}
+
 	public static com.liferay.portal.model.Release update(
 		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException {

@@ -78,6 +78,8 @@ public class StringPool {
 
 	public static final String PERIOD = ".";
 
+	public static final String PIPE = "|";
+
 	public static final String POUND = "#";
 
 	public static final String QUESTION = "?";

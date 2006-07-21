@@ -78,6 +78,22 @@ public class MBStatsUserPersistence extends BasePersistence {
 					mbStatsUserPK.toString());
 			}
 
+			return remove(mbStatsUser);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public MBStatsUser remove(MBStatsUser mbStatsUser)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(mbStatsUser);
 			session.flush();
 
@@ -114,33 +130,20 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 	public MBStatsUser findByPrimaryKey(MBStatsUserPK mbStatsUserPK)
 		throws NoSuchStatsUserException, SystemException {
-		Session session = null;
+		MBStatsUser mbStatsUser = fetchByPrimaryKey(mbStatsUserPK);
 
-		try {
-			session = openSession();
-
-			MBStatsUser mbStatsUser = (MBStatsUser)session.get(MBStatsUser.class,
-					mbStatsUserPK);
-
-			if (mbStatsUser == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No MBStatsUser exists with the primary key " +
-						mbStatsUserPK.toString());
-				}
-
-				throw new NoSuchStatsUserException(
-					"No MBStatsUser exists with the primary key " +
+		if (mbStatsUser == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No MBStatsUser exists with the primary key " +
 					mbStatsUserPK.toString());
 			}
 
-			return mbStatsUser;
+			throw new NoSuchStatsUserException(
+				"No MBStatsUser exists with the primary key " +
+				mbStatsUserPK.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return mbStatsUser;
 	}
 
 	public MBStatsUser fetchByPrimaryKey(MBStatsUserPK mbStatsUserPK)
@@ -738,142 +741,30 @@ public class MBStatsUserPersistence extends BasePersistence {
 	}
 
 	public void removeByGroupId(String groupId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByGroupId(groupId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("messageCount DESC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				MBStatsUser mbStatsUser = (MBStatsUser)itr.next();
-				session.delete(mbStatsUser);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			MBStatsUser mbStatsUser = (MBStatsUser)itr.next();
+			remove(mbStatsUser);
 		}
 	}
 
 	public void removeByUserId(String userId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByUserId(userId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("messageCount DESC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				MBStatsUser mbStatsUser = (MBStatsUser)itr.next();
-				session.delete(mbStatsUser);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			MBStatsUser mbStatsUser = (MBStatsUser)itr.next();
+			remove(mbStatsUser);
 		}
 	}
 
 	public void removeByG_M(String groupId, int messageCount)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByG_M(groupId, messageCount).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" AND ");
-			query.append("messageCount != ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("messageCount DESC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			q.setInteger(queryPos++, messageCount);
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				MBStatsUser mbStatsUser = (MBStatsUser)itr.next();
-				session.delete(mbStatsUser);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			MBStatsUser mbStatsUser = (MBStatsUser)itr.next();
+			remove(mbStatsUser);
 		}
 	}
 

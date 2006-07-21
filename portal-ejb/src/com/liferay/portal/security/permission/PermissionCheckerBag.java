@@ -22,9 +22,17 @@
 
 package com.liferay.portal.security.permission;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.service.spring.GroupLocalServiceUtil;
+import com.liferay.util.CollectionFactory;
+import com.liferay.util.StringPool;
+
 import java.io.Serializable;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="PermissionCheckerBag.java.html"><b><i>View Source</i></b></a>
@@ -57,8 +65,26 @@ public class PermissionCheckerBag implements Serializable {
 		return _userUserGroupGroups;
 	}
 
+	public boolean hasUserGroup(String userId, String groupId)
+		throws PortalException, SystemException {
+
+		String key = userId + StringPool.PIPE + groupId;
+
+		Boolean value = (Boolean)_hasUserGroup.get(key);
+
+		if (value == null) {
+			value = new Boolean(
+				GroupLocalServiceUtil.hasUserGroup(userId, groupId));
+
+			_hasUserGroup.put(key, value);
+		}
+
+		return value.booleanValue();
+	}
+
 	private List _userOrgs = null;
 	private List _userOrgGroups = null;
 	private List _userUserGroupGroups = null;
+	private Map _hasUserGroup = new HashMap();
 
 }

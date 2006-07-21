@@ -78,6 +78,21 @@ public class MBMessagePersistence extends BasePersistence {
 					mbMessagePK.toString());
 			}
 
+			return remove(mbMessage);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public MBMessage remove(MBMessage mbMessage) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(mbMessage);
 			session.flush();
 
@@ -114,33 +129,20 @@ public class MBMessagePersistence extends BasePersistence {
 
 	public MBMessage findByPrimaryKey(MBMessagePK mbMessagePK)
 		throws NoSuchMessageException, SystemException {
-		Session session = null;
+		MBMessage mbMessage = fetchByPrimaryKey(mbMessagePK);
 
-		try {
-			session = openSession();
-
-			MBMessage mbMessage = (MBMessage)session.get(MBMessage.class,
-					mbMessagePK);
-
-			if (mbMessage == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No MBMessage exists with the primary key " +
-						mbMessagePK.toString());
-				}
-
-				throw new NoSuchMessageException(
-					"No MBMessage exists with the primary key " +
+		if (mbMessage == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No MBMessage exists with the primary key " +
 					mbMessagePK.toString());
 			}
 
-			return mbMessage;
+			throw new NoSuchMessageException(
+				"No MBMessage exists with the primary key " +
+				mbMessagePK.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return mbMessage;
 	}
 
 	public MBMessage fetchByPrimaryKey(MBMessagePK mbMessagePK)
@@ -775,154 +777,30 @@ public class MBMessagePersistence extends BasePersistence {
 	}
 
 	public void removeByCategoryId(String categoryId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCategoryId(categoryId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC").append(", ");
-			query.append("messageId ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				MBMessage mbMessage = (MBMessage)itr.next();
-				session.delete(mbMessage);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			MBMessage mbMessage = (MBMessage)itr.next();
+			remove(mbMessage);
 		}
 	}
 
 	public void removeByThreadId(String threadId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByThreadId(threadId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (threadId == null) {
-				query.append("threadId IS NULL");
-			}
-			else {
-				query.append("threadId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC").append(", ");
-			query.append("messageId ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (threadId != null) {
-				q.setString(queryPos++, threadId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				MBMessage mbMessage = (MBMessage)itr.next();
-				session.delete(mbMessage);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			MBMessage mbMessage = (MBMessage)itr.next();
+			remove(mbMessage);
 		}
 	}
 
 	public void removeByT_P(String threadId, String parentMessageId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByT_P(threadId, parentMessageId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (threadId == null) {
-				query.append("threadId IS NULL");
-			}
-			else {
-				query.append("threadId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (parentMessageId == null) {
-				query.append("parentMessageId IS NULL");
-			}
-			else {
-				query.append("parentMessageId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC").append(", ");
-			query.append("messageId ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (threadId != null) {
-				q.setString(queryPos++, threadId);
-			}
-
-			if (parentMessageId != null) {
-				q.setString(queryPos++, parentMessageId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				MBMessage mbMessage = (MBMessage)itr.next();
-				session.delete(mbMessage);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			MBMessage mbMessage = (MBMessage)itr.next();
+			remove(mbMessage);
 		}
 	}
 

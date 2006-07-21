@@ -77,6 +77,22 @@ public class UserTrackerPathPersistence extends BasePersistence {
 					userTrackerPathId.toString());
 			}
 
+			return remove(userTrackerPath);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public UserTrackerPath remove(UserTrackerPath userTrackerPath)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(userTrackerPath);
 			session.flush();
 
@@ -113,33 +129,20 @@ public class UserTrackerPathPersistence extends BasePersistence {
 
 	public UserTrackerPath findByPrimaryKey(String userTrackerPathId)
 		throws NoSuchUserTrackerPathException, SystemException {
-		Session session = null;
+		UserTrackerPath userTrackerPath = fetchByPrimaryKey(userTrackerPathId);
 
-		try {
-			session = openSession();
-
-			UserTrackerPath userTrackerPath = (UserTrackerPath)session.get(UserTrackerPath.class,
-					userTrackerPathId);
-
-			if (userTrackerPath == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No UserTrackerPath exists with the primary key " +
-						userTrackerPathId.toString());
-				}
-
-				throw new NoSuchUserTrackerPathException(
-					"No UserTrackerPath exists with the primary key " +
+		if (userTrackerPath == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No UserTrackerPath exists with the primary key " +
 					userTrackerPathId.toString());
 			}
 
-			return userTrackerPath;
+			throw new NoSuchUserTrackerPathException(
+				"No UserTrackerPath exists with the primary key " +
+				userTrackerPathId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return userTrackerPath;
 	}
 
 	public UserTrackerPath fetchByPrimaryKey(String userTrackerPathId)
@@ -351,44 +354,11 @@ public class UserTrackerPathPersistence extends BasePersistence {
 
 	public void removeByUserTrackerId(String userTrackerId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByUserTrackerId(userTrackerId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.UserTrackerPath WHERE ");
-
-			if (userTrackerId == null) {
-				query.append("userTrackerId IS NULL");
-			}
-			else {
-				query.append("userTrackerId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (userTrackerId != null) {
-				q.setString(queryPos++, userTrackerId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				UserTrackerPath userTrackerPath = (UserTrackerPath)itr.next();
-				session.delete(userTrackerPath);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			UserTrackerPath userTrackerPath = (UserTrackerPath)itr.next();
+			remove(userTrackerPath);
 		}
 	}
 

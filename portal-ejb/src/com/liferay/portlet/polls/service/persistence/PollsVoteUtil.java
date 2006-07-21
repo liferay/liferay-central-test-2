@@ -79,6 +79,33 @@ public class PollsVoteUtil {
 		return pollsVote;
 	}
 
+	public static com.liferay.portlet.polls.model.PollsVote remove(
+		com.liferay.portlet.polls.model.PollsVote pollsVote)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(pollsVote);
+		}
+
+		pollsVote = getPersistence().remove(pollsVote);
+
+		if (listener != null) {
+			listener.onAfterRemove(pollsVote);
+		}
+
+		return pollsVote;
+	}
+
 	public static com.liferay.portlet.polls.model.PollsVote update(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException {

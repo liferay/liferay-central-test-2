@@ -71,6 +71,21 @@ public class AccountPersistence extends BasePersistence {
 					accountId.toString());
 			}
 
+			return remove(account);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Account remove(Account account) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(account);
 			session.flush();
 
@@ -106,32 +121,20 @@ public class AccountPersistence extends BasePersistence {
 
 	public Account findByPrimaryKey(String accountId)
 		throws NoSuchAccountException, SystemException {
-		Session session = null;
+		Account account = fetchByPrimaryKey(accountId);
 
-		try {
-			session = openSession();
-
-			Account account = (Account)session.get(Account.class, accountId);
-
-			if (account == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Account exists with the primary key " +
-						accountId.toString());
-				}
-
-				throw new NoSuchAccountException(
-					"No Account exists with the primary key " +
+		if (account == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No Account exists with the primary key " +
 					accountId.toString());
 			}
 
-			return account;
+			throw new NoSuchAccountException(
+				"No Account exists with the primary key " +
+				accountId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return account;
 	}
 
 	public Account fetchByPrimaryKey(String accountId)

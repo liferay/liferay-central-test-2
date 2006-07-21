@@ -79,6 +79,33 @@ public class WikiPageUtil {
 		return wikiPage;
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPage remove(
+		com.liferay.portlet.wiki.model.WikiPage wikiPage)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(wikiPage);
+		}
+
+		wikiPage = getPersistence().remove(wikiPage);
+
+		if (listener != null) {
+			listener.onAfterRemove(wikiPage);
+		}
+
+		return wikiPage;
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage update(
 		com.liferay.portlet.wiki.model.WikiPage wikiPage)
 		throws com.liferay.portal.SystemException {

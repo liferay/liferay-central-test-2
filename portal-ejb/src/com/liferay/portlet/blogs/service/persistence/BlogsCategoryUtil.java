@@ -79,6 +79,33 @@ public class BlogsCategoryUtil {
 		return blogsCategory;
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsCategory remove(
+		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(blogsCategory);
+		}
+
+		blogsCategory = getPersistence().remove(blogsCategory);
+
+		if (listener != null) {
+			listener.onAfterRemove(blogsCategory);
+		}
+
+		return blogsCategory;
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsCategory update(
 		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory)
 		throws com.liferay.portal.SystemException {

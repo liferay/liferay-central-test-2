@@ -78,6 +78,33 @@ public class ListTypeUtil {
 		return listType;
 	}
 
+	public static com.liferay.portal.model.ListType remove(
+		com.liferay.portal.model.ListType listType)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(listType);
+		}
+
+		listType = getPersistence().remove(listType);
+
+		if (listener != null) {
+			listener.onAfterRemove(listType);
+		}
+
+		return listType;
+	}
+
 	public static com.liferay.portal.model.ListType update(
 		com.liferay.portal.model.ListType listType)
 		throws com.liferay.portal.SystemException {

@@ -78,6 +78,21 @@ public class BlogsEntryPersistence extends BasePersistence {
 					entryId.toString());
 			}
 
+			return remove(blogsEntry);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public BlogsEntry remove(BlogsEntry blogsEntry) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(blogsEntry);
 			session.flush();
 
@@ -114,33 +129,20 @@ public class BlogsEntryPersistence extends BasePersistence {
 
 	public BlogsEntry findByPrimaryKey(String entryId)
 		throws NoSuchEntryException, SystemException {
-		Session session = null;
+		BlogsEntry blogsEntry = fetchByPrimaryKey(entryId);
 
-		try {
-			session = openSession();
-
-			BlogsEntry blogsEntry = (BlogsEntry)session.get(BlogsEntry.class,
-					entryId);
-
-			if (blogsEntry == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No BlogsEntry exists with the primary key " +
-						entryId.toString());
-				}
-
-				throw new NoSuchEntryException(
-					"No BlogsEntry exists with the primary key " +
+		if (blogsEntry == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No BlogsEntry exists with the primary key " +
 					entryId.toString());
 			}
 
-			return blogsEntry;
+			throw new NoSuchEntryException(
+				"No BlogsEntry exists with the primary key " +
+				entryId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return blogsEntry;
 	}
 
 	public BlogsEntry fetchByPrimaryKey(String entryId)
@@ -718,137 +720,29 @@ public class BlogsEntryPersistence extends BasePersistence {
 	}
 
 	public void removeByGroupId(String groupId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByGroupId(groupId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("displayDate DESC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				BlogsEntry blogsEntry = (BlogsEntry)itr.next();
-				session.delete(blogsEntry);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			BlogsEntry blogsEntry = (BlogsEntry)itr.next();
+			remove(blogsEntry);
 		}
 	}
 
 	public void removeByCompanyId(String companyId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCompanyId(companyId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("displayDate DESC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				BlogsEntry blogsEntry = (BlogsEntry)itr.next();
-				session.delete(blogsEntry);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			BlogsEntry blogsEntry = (BlogsEntry)itr.next();
+			remove(blogsEntry);
 		}
 	}
 
 	public void removeByCategoryId(String categoryId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCategoryId(categoryId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("displayDate DESC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				BlogsEntry blogsEntry = (BlogsEntry)itr.next();
-				session.delete(blogsEntry);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			BlogsEntry blogsEntry = (BlogsEntry)itr.next();
+			remove(blogsEntry);
 		}
 	}
 

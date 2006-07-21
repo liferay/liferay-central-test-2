@@ -77,6 +77,21 @@ public class CalEventPersistence extends BasePersistence {
 					eventId.toString());
 			}
 
+			return remove(calEvent);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public CalEvent remove(CalEvent calEvent) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(calEvent);
 			session.flush();
 
@@ -113,32 +128,20 @@ public class CalEventPersistence extends BasePersistence {
 
 	public CalEvent findByPrimaryKey(String eventId)
 		throws NoSuchEventException, SystemException {
-		Session session = null;
+		CalEvent calEvent = fetchByPrimaryKey(eventId);
 
-		try {
-			session = openSession();
-
-			CalEvent calEvent = (CalEvent)session.get(CalEvent.class, eventId);
-
-			if (calEvent == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No CalEvent exists with the primary key " +
-						eventId.toString());
-				}
-
-				throw new NoSuchEventException(
-					"No CalEvent exists with the primary key " +
+		if (calEvent == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No CalEvent exists with the primary key " +
 					eventId.toString());
 			}
 
-			return calEvent;
+			throw new NoSuchEventException(
+				"No CalEvent exists with the primary key " +
+				eventId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return calEvent;
 	}
 
 	public CalEvent fetchByPrimaryKey(String eventId) throws SystemException {
@@ -786,159 +789,31 @@ public class CalEventPersistence extends BasePersistence {
 	}
 
 	public void removeByGroupId(String groupId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByGroupId(groupId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("startDate ASC").append(", ");
-			query.append("title ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				CalEvent calEvent = (CalEvent)itr.next();
-				session.delete(calEvent);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			CalEvent calEvent = (CalEvent)itr.next();
+			remove(calEvent);
 		}
 	}
 
 	public void removeByG_T(String groupId, String type)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByG_T(groupId, type).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (type == null) {
-				query.append("type_ IS NULL");
-			}
-			else {
-				query.append("type_ = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("startDate ASC").append(", ");
-			query.append("title ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			if (type != null) {
-				q.setString(queryPos++, type);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				CalEvent calEvent = (CalEvent)itr.next();
-				session.delete(calEvent);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			CalEvent calEvent = (CalEvent)itr.next();
+			remove(calEvent);
 		}
 	}
 
 	public void removeByG_R(String groupId, boolean repeating)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByG_R(groupId, repeating).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" AND ");
-			query.append("repeating = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("startDate ASC").append(", ");
-			query.append("title ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			q.setBoolean(queryPos++, repeating);
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				CalEvent calEvent = (CalEvent)itr.next();
-				session.delete(calEvent);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			CalEvent calEvent = (CalEvent)itr.next();
+			remove(calEvent);
 		}
 	}
 

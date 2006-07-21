@@ -71,6 +71,21 @@ public class ImagePersistence extends BasePersistence {
 					imageId.toString());
 			}
 
+			return remove(image);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Image remove(Image image) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(image);
 			session.flush();
 
@@ -106,32 +121,19 @@ public class ImagePersistence extends BasePersistence {
 
 	public Image findByPrimaryKey(String imageId)
 		throws NoSuchImageException, SystemException {
-		Session session = null;
+		Image image = fetchByPrimaryKey(imageId);
 
-		try {
-			session = openSession();
-
-			Image image = (Image)session.get(Image.class, imageId);
-
-			if (image == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Image exists with the primary key " +
-						imageId.toString());
-				}
-
-				throw new NoSuchImageException(
-					"No Image exists with the primary key " +
+		if (image == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No Image exists with the primary key " +
 					imageId.toString());
 			}
 
-			return image;
+			throw new NoSuchImageException(
+				"No Image exists with the primary key " + imageId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return image;
 	}
 
 	public Image fetchByPrimaryKey(String imageId) throws SystemException {

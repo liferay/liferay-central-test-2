@@ -78,6 +78,22 @@ public class JournalTemplatePersistence extends BasePersistence {
 					journalTemplatePK.toString());
 			}
 
+			return remove(journalTemplate);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public JournalTemplate remove(JournalTemplate journalTemplate)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(journalTemplate);
 			session.flush();
 
@@ -114,33 +130,20 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 	public JournalTemplate findByPrimaryKey(JournalTemplatePK journalTemplatePK)
 		throws NoSuchTemplateException, SystemException {
-		Session session = null;
+		JournalTemplate journalTemplate = fetchByPrimaryKey(journalTemplatePK);
 
-		try {
-			session = openSession();
-
-			JournalTemplate journalTemplate = (JournalTemplate)session.get(JournalTemplate.class,
-					journalTemplatePK);
-
-			if (journalTemplate == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No JournalTemplate exists with the primary key " +
-						journalTemplatePK.toString());
-				}
-
-				throw new NoSuchTemplateException(
-					"No JournalTemplate exists with the primary key " +
+		if (journalTemplate == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No JournalTemplate exists with the primary key " +
 					journalTemplatePK.toString());
 			}
 
-			return journalTemplate;
+			throw new NoSuchTemplateException(
+				"No JournalTemplate exists with the primary key " +
+				journalTemplatePK.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return journalTemplate;
 	}
 
 	public JournalTemplate fetchByPrimaryKey(
@@ -590,106 +593,21 @@ public class JournalTemplatePersistence extends BasePersistence {
 	}
 
 	public void removeByGroupId(String groupId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByGroupId(groupId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("templateId ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				JournalTemplate journalTemplate = (JournalTemplate)itr.next();
-				session.delete(journalTemplate);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			JournalTemplate journalTemplate = (JournalTemplate)itr.next();
+			remove(journalTemplate);
 		}
 	}
 
 	public void removeByC_S(String companyId, String structureId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByC_S(companyId, structureId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (structureId == null) {
-				query.append("structureId IS NULL");
-			}
-			else {
-				query.append("structureId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("templateId ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (structureId != null) {
-				q.setString(queryPos++, structureId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				JournalTemplate journalTemplate = (JournalTemplate)itr.next();
-				session.delete(journalTemplate);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			JournalTemplate journalTemplate = (JournalTemplate)itr.next();
+			remove(journalTemplate);
 		}
 	}
 

@@ -79,6 +79,33 @@ public class IGImageUtil {
 		return igImage;
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImage remove(
+		com.liferay.portlet.imagegallery.model.IGImage igImage)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(igImage);
+		}
+
+		igImage = getPersistence().remove(igImage);
+
+		if (listener != null) {
+			listener.onAfterRemove(igImage);
+		}
+
+		return igImage;
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage update(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.SystemException {

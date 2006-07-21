@@ -79,6 +79,22 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 					itemPriceId.toString());
 			}
 
+			return remove(shoppingItemPrice);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ShoppingItemPrice remove(ShoppingItemPrice shoppingItemPrice)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(shoppingItemPrice);
 			session.flush();
 
@@ -115,34 +131,20 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 
 	public ShoppingItemPrice findByPrimaryKey(String itemPriceId)
 		throws NoSuchItemPriceException, SystemException {
-		Session session = null;
+		ShoppingItemPrice shoppingItemPrice = fetchByPrimaryKey(itemPriceId);
 
-		try {
-			session = openSession();
-
-			ShoppingItemPrice shoppingItemPrice = (ShoppingItemPrice)session.get(ShoppingItemPrice.class,
-					itemPriceId);
-
-			if (shoppingItemPrice == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No ShoppingItemPrice exists with the primary key " +
-						itemPriceId.toString());
-				}
-
-				throw new NoSuchItemPriceException(
-					"No ShoppingItemPrice exists with the primary key " +
+		if (shoppingItemPrice == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No ShoppingItemPrice exists with the primary key " +
 					itemPriceId.toString());
 			}
 
-			return shoppingItemPrice;
+			throw new NoSuchItemPriceException(
+				"No ShoppingItemPrice exists with the primary key " +
+				itemPriceId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return shoppingItemPrice;
 	}
 
 	public ShoppingItemPrice fetchByPrimaryKey(String itemPriceId)
@@ -370,48 +372,11 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 	}
 
 	public void removeByItemId(String itemId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByItemId(itemId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingItemPrice WHERE ");
-
-			if (itemId == null) {
-				query.append("itemId IS NULL");
-			}
-			else {
-				query.append("itemId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("itemId ASC").append(", ");
-			query.append("itemPriceId ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (itemId != null) {
-				q.setString(queryPos++, itemId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				ShoppingItemPrice shoppingItemPrice = (ShoppingItemPrice)itr.next();
-				session.delete(shoppingItemPrice);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			ShoppingItemPrice shoppingItemPrice = (ShoppingItemPrice)itr.next();
+			remove(shoppingItemPrice);
 		}
 	}
 

@@ -77,6 +77,21 @@ public class MBThreadPersistence extends BasePersistence {
 					threadId.toString());
 			}
 
+			return remove(mbThread);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public MBThread remove(MBThread mbThread) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(mbThread);
 			session.flush();
 
@@ -113,32 +128,20 @@ public class MBThreadPersistence extends BasePersistence {
 
 	public MBThread findByPrimaryKey(String threadId)
 		throws NoSuchThreadException, SystemException {
-		Session session = null;
+		MBThread mbThread = fetchByPrimaryKey(threadId);
 
-		try {
-			session = openSession();
-
-			MBThread mbThread = (MBThread)session.get(MBThread.class, threadId);
-
-			if (mbThread == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No MBThread exists with the primary key " +
-						threadId.toString());
-				}
-
-				throw new NoSuchThreadException(
-					"No MBThread exists with the primary key " +
+		if (mbThread == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No MBThread exists with the primary key " +
 					threadId.toString());
 			}
 
-			return mbThread;
+			throw new NoSuchThreadException(
+				"No MBThread exists with the primary key " +
+				threadId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return mbThread;
 	}
 
 	public MBThread fetchByPrimaryKey(String threadId)
@@ -360,47 +363,11 @@ public class MBThreadPersistence extends BasePersistence {
 	}
 
 	public void removeByCategoryId(String categoryId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCategoryId(categoryId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("lastPostDate DESC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				MBThread mbThread = (MBThread)itr.next();
-				session.delete(mbThread);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			MBThread mbThread = (MBThread)itr.next();
+			remove(mbThread);
 		}
 	}
 

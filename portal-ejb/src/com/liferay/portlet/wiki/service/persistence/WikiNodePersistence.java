@@ -77,6 +77,21 @@ public class WikiNodePersistence extends BasePersistence {
 					nodeId.toString());
 			}
 
+			return remove(wikiNode);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public WikiNode remove(WikiNode wikiNode) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(wikiNode);
 			session.flush();
 
@@ -113,32 +128,19 @@ public class WikiNodePersistence extends BasePersistence {
 
 	public WikiNode findByPrimaryKey(String nodeId)
 		throws NoSuchNodeException, SystemException {
-		Session session = null;
+		WikiNode wikiNode = fetchByPrimaryKey(nodeId);
 
-		try {
-			session = openSession();
-
-			WikiNode wikiNode = (WikiNode)session.get(WikiNode.class, nodeId);
-
-			if (wikiNode == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No WikiNode exists with the primary key " +
-						nodeId.toString());
-				}
-
-				throw new NoSuchNodeException(
-					"No WikiNode exists with the primary key " +
+		if (wikiNode == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No WikiNode exists with the primary key " +
 					nodeId.toString());
 			}
 
-			return wikiNode;
+			throw new NoSuchNodeException(
+				"No WikiNode exists with the primary key " + nodeId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return wikiNode;
 	}
 
 	public WikiNode fetchByPrimaryKey(String nodeId) throws SystemException {
@@ -528,90 +530,20 @@ public class WikiNodePersistence extends BasePersistence {
 	}
 
 	public void removeByGroupId(String groupId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByGroupId(groupId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				WikiNode wikiNode = (WikiNode)itr.next();
-				session.delete(wikiNode);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			WikiNode wikiNode = (WikiNode)itr.next();
+			remove(wikiNode);
 		}
 	}
 
 	public void removeByCompanyId(String companyId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCompanyId(companyId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				WikiNode wikiNode = (WikiNode)itr.next();
-				session.delete(wikiNode);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			WikiNode wikiNode = (WikiNode)itr.next();
+			remove(wikiNode);
 		}
 	}
 

@@ -79,6 +79,33 @@ public class ShoppingItemPriceUtil {
 		return shoppingItemPrice;
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingItemPrice remove(
+		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (listener != null) {
+			listener.onBeforeRemove(shoppingItemPrice);
+		}
+
+		shoppingItemPrice = getPersistence().remove(shoppingItemPrice);
+
+		if (listener != null) {
+			listener.onAfterRemove(shoppingItemPrice);
+		}
+
+		return shoppingItemPrice;
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice update(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
 		throws com.liferay.portal.SystemException {

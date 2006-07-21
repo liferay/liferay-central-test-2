@@ -78,6 +78,21 @@ public class MBCategoryPersistence extends BasePersistence {
 					categoryId.toString());
 			}
 
+			return remove(mbCategory);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public MBCategory remove(MBCategory mbCategory) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(mbCategory);
 			session.flush();
 
@@ -114,33 +129,20 @@ public class MBCategoryPersistence extends BasePersistence {
 
 	public MBCategory findByPrimaryKey(String categoryId)
 		throws NoSuchCategoryException, SystemException {
-		Session session = null;
+		MBCategory mbCategory = fetchByPrimaryKey(categoryId);
 
-		try {
-			session = openSession();
-
-			MBCategory mbCategory = (MBCategory)session.get(MBCategory.class,
-					categoryId);
-
-			if (mbCategory == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No MBCategory exists with the primary key " +
-						categoryId.toString());
-				}
-
-				throw new NoSuchCategoryException(
-					"No MBCategory exists with the primary key " +
+		if (mbCategory == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No MBCategory exists with the primary key " +
 					categoryId.toString());
 			}
 
-			return mbCategory;
+			throw new NoSuchCategoryException(
+				"No MBCategory exists with the primary key " +
+				categoryId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return mbCategory;
 	}
 
 	public MBCategory fetchByPrimaryKey(String categoryId)
@@ -775,154 +777,30 @@ public class MBCategoryPersistence extends BasePersistence {
 	}
 
 	public void removeByGroupId(String groupId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByGroupId(groupId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("parentCategoryId ASC").append(", ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				MBCategory mbCategory = (MBCategory)itr.next();
-				session.delete(mbCategory);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			MBCategory mbCategory = (MBCategory)itr.next();
+			remove(mbCategory);
 		}
 	}
 
 	public void removeByCompanyId(String companyId) throws SystemException {
-		Session session = null;
+		Iterator itr = findByCompanyId(companyId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("parentCategoryId ASC").append(", ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				MBCategory mbCategory = (MBCategory)itr.next();
-				session.delete(mbCategory);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			MBCategory mbCategory = (MBCategory)itr.next();
+			remove(mbCategory);
 		}
 	}
 
 	public void removeByG_P(String groupId, String parentCategoryId)
 		throws SystemException {
-		Session session = null;
+		Iterator itr = findByG_P(groupId, parentCategoryId).iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (parentCategoryId == null) {
-				query.append("parentCategoryId IS NULL");
-			}
-			else {
-				query.append("parentCategoryId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("parentCategoryId ASC").append(", ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
-			if (parentCategoryId != null) {
-				q.setString(queryPos++, parentCategoryId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				MBCategory mbCategory = (MBCategory)itr.next();
-				session.delete(mbCategory);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			MBCategory mbCategory = (MBCategory)itr.next();
+			remove(mbCategory);
 		}
 	}
 

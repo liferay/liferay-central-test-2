@@ -38,7 +38,6 @@ import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
-import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -91,13 +90,32 @@ public class GroupPersistence extends BasePersistence {
 					groupId.toString());
 			}
 
+			return remove(group);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Group remove(Group group) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
 			session.delete(group);
 			session.flush();
-			clearOrganizations.clear(groupId);
-			clearPermissions.clear(groupId);
-			clearRoles.clear(groupId);
-			clearUserGroups.clear(groupId);
-			clearUsers.clear(groupId);
+			clearOrganizations.clear(group.getPrimaryKey());
+			clearPermissions.clear(group.getPrimaryKey());
+			clearRoles.clear(group.getPrimaryKey());
+			clearUserGroups.clear(group.getPrimaryKey());
+			clearUsers.clear(group.getPrimaryKey());
+			GroupPool.removeByC_N(group.getCompanyId(), group.getName());
+			GroupPool.removeByC_F(group.getCompanyId(), group.getFriendlyURL());
+			GroupPool.removeByC_C_C(group.getCompanyId(), group.getClassName(),
+				group.getClassPK());
 
 			return group;
 		}
@@ -131,32 +149,19 @@ public class GroupPersistence extends BasePersistence {
 
 	public Group findByPrimaryKey(String groupId)
 		throws NoSuchGroupException, SystemException {
-		Session session = null;
+		Group group = fetchByPrimaryKey(groupId);
 
-		try {
-			session = openSession();
-
-			Group group = (Group)session.get(Group.class, groupId);
-
-			if (group == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Group exists with the primary key " +
-						groupId.toString());
-				}
-
-				throw new NoSuchGroupException(
-					"No Group exists with the primary key " +
+		if (group == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No Group exists with the primary key " +
 					groupId.toString());
 			}
 
-			return group;
+			throw new NoSuchGroupException(
+				"No Group exists with the primary key " + groupId.toString());
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return group;
 	}
 
 	public Group fetchByPrimaryKey(String groupId) throws SystemException {
@@ -177,73 +182,40 @@ public class GroupPersistence extends BasePersistence {
 
 	public Group findByC_N(String companyId, String name)
 		throws NoSuchGroupException, SystemException {
-		Session session = null;
+		Group group = fetchByC_N(companyId, name);
 
-		try {
-			session = openSession();
+		if (group == null) {
+			String msg = "No Group exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "name=";
+			msg += name;
+			msg += StringPool.CLOSE_CURLY_BRACE;
 
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Group WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg);
 			}
 
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				String msg = "No Group exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "name=";
-				msg += name;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchGroupException(msg);
-			}
-
-			Group group = (Group)list.get(0);
-
-			return group;
+			throw new NoSuchGroupException(msg);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return group;
 	}
 
 	public Group fetchByC_N(String companyId, String name)
 		throws SystemException {
+		String pk = GroupPool.getByC_N(companyId, name);
+
+		if (pk != null) {
+			Group group = fetchByPrimaryKey(pk);
+
+			if (group != null) {
+				return group;
+			}
+		}
+
 		Session session = null;
 
 		try {
@@ -290,6 +262,7 @@ public class GroupPersistence extends BasePersistence {
 			}
 
 			Group group = (Group)list.get(0);
+			GroupPool.putByC_N(companyId, name, group.getPrimaryKey());
 
 			return group;
 		}
@@ -303,73 +276,40 @@ public class GroupPersistence extends BasePersistence {
 
 	public Group findByC_F(String companyId, String friendlyURL)
 		throws NoSuchGroupException, SystemException {
-		Session session = null;
+		Group group = fetchByC_F(companyId, friendlyURL);
 
-		try {
-			session = openSession();
+		if (group == null) {
+			String msg = "No Group exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "friendlyURL=";
+			msg += friendlyURL;
+			msg += StringPool.CLOSE_CURLY_BRACE;
 
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Group WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (friendlyURL == null) {
-				query.append("friendlyURL IS NULL");
-			}
-			else {
-				query.append("friendlyURL = ?");
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg);
 			}
 
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (friendlyURL != null) {
-				q.setString(queryPos++, friendlyURL);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				String msg = "No Group exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "friendlyURL=";
-				msg += friendlyURL;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchGroupException(msg);
-			}
-
-			Group group = (Group)list.get(0);
-
-			return group;
+			throw new NoSuchGroupException(msg);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return group;
 	}
 
 	public Group fetchByC_F(String companyId, String friendlyURL)
 		throws SystemException {
+		String pk = GroupPool.getByC_F(companyId, friendlyURL);
+
+		if (pk != null) {
+			Group group = fetchByPrimaryKey(pk);
+
+			if (group != null) {
+				return group;
+			}
+		}
+
 		Session session = null;
 
 		try {
@@ -416,6 +356,7 @@ public class GroupPersistence extends BasePersistence {
 			}
 
 			Group group = (Group)list.get(0);
+			GroupPool.putByC_F(companyId, friendlyURL, group.getPrimaryKey());
 
 			return group;
 		}
@@ -429,89 +370,43 @@ public class GroupPersistence extends BasePersistence {
 
 	public Group findByC_C_C(String companyId, String className, String classPK)
 		throws NoSuchGroupException, SystemException {
-		Session session = null;
+		Group group = fetchByC_C_C(companyId, className, classPK);
 
-		try {
-			session = openSession();
+		if (group == null) {
+			String msg = "No Group exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "className=";
+			msg += className;
+			msg += ", ";
+			msg += "classPK=";
+			msg += classPK;
+			msg += StringPool.CLOSE_CURLY_BRACE;
 
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Group WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg);
 			}
 
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				String msg = "No Group exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "className=";
-				msg += className;
-				msg += ", ";
-				msg += "classPK=";
-				msg += classPK;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchGroupException(msg);
-			}
-
-			Group group = (Group)list.get(0);
-
-			return group;
+			throw new NoSuchGroupException(msg);
 		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return group;
 	}
 
 	public Group fetchByC_C_C(String companyId, String className, String classPK)
 		throws SystemException {
+		String pk = GroupPool.getByC_C_C(companyId, className, classPK);
+
+		if (pk != null) {
+			Group group = fetchByPrimaryKey(pk);
+
+			if (group != null) {
+				return group;
+			}
+		}
+
 		Session session = null;
 
 		try {
@@ -571,6 +466,8 @@ public class GroupPersistence extends BasePersistence {
 			}
 
 			Group group = (Group)list.get(0);
+			GroupPool.putByC_C_C(companyId, className, classPK,
+				group.getPrimaryKey());
 
 			return group;
 		}
@@ -607,231 +504,20 @@ public class GroupPersistence extends BasePersistence {
 
 	public void removeByC_N(String companyId, String name)
 		throws NoSuchGroupException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Group WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Group group = (Group)itr.next();
-				session.delete(group);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				String msg = "No Group exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "name=";
-				msg += name;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchGroupException(msg);
-			}
-			else {
-				throw new SystemException(he);
-			}
-		}
-		finally {
-			closeSession(session);
-		}
+		Group group = findByC_N(companyId, name);
+		remove(group);
 	}
 
 	public void removeByC_F(String companyId, String friendlyURL)
 		throws NoSuchGroupException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Group WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (friendlyURL == null) {
-				query.append("friendlyURL IS NULL");
-			}
-			else {
-				query.append("friendlyURL = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (friendlyURL != null) {
-				q.setString(queryPos++, friendlyURL);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Group group = (Group)itr.next();
-				session.delete(group);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				String msg = "No Group exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "friendlyURL=";
-				msg += friendlyURL;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchGroupException(msg);
-			}
-			else {
-				throw new SystemException(he);
-			}
-		}
-		finally {
-			closeSession(session);
-		}
+		Group group = findByC_F(companyId, friendlyURL);
+		remove(group);
 	}
 
 	public void removeByC_C_C(String companyId, String className, String classPK)
 		throws NoSuchGroupException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.Group WHERE ");
-
-			if (companyId == null) {
-				query.append("companyId IS NULL");
-			}
-			else {
-				query.append("companyId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-
-			if (companyId != null) {
-				q.setString(queryPos++, companyId);
-			}
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Group group = (Group)itr.next();
-				session.delete(group);
-			}
-
-			session.flush();
-		}
-		catch (HibernateException he) {
-			if (he instanceof ObjectNotFoundException) {
-				String msg = "No Group exists with the key ";
-				msg += StringPool.OPEN_CURLY_BRACE;
-				msg += "companyId=";
-				msg += companyId;
-				msg += ", ";
-				msg += "className=";
-				msg += className;
-				msg += ", ";
-				msg += "classPK=";
-				msg += classPK;
-				msg += StringPool.CLOSE_CURLY_BRACE;
-				throw new NoSuchGroupException(msg);
-			}
-			else {
-				throw new SystemException(he);
-			}
-		}
-		finally {
-			closeSession(session);
-		}
+		Group group = findByC_C_C(companyId, className, classPK);
+		remove(group);
 	}
 
 	public int countByC_N(String companyId, String name)
