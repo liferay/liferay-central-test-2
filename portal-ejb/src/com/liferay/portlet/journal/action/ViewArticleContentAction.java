@@ -208,7 +208,7 @@ public class ViewArticleContentAction extends Action {
 					"structure_image_" + elName + elLanguage);
 				byte[] bytes = FileUtil.getBytes(file);
 
-				if (bytes != null && bytes.length > 0) {
+				if ((bytes != null) && (bytes.length > 0)) {
 					String imageId =
 						previewArticleId + "." + elName + elLanguage;
 

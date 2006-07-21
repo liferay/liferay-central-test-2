@@ -46,6 +46,10 @@ portletURL.setParameter("tabs3", tabs3);
 	}
 
 	function <portlet:namespace />saveServer(cmd) {
+		if (cmd == "hotDeploy") {
+			document.<portlet:namespace />fm.encoding = "multipart/form-data";
+		}
+
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_server" /></portlet:actionURL>");
 	}

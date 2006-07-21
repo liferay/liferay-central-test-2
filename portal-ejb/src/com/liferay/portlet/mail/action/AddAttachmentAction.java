@@ -125,7 +125,7 @@ public class AddAttachmentAction extends PortletAction {
 				File file = uploadReq.getFile(fileParamName);
 				byte[] bytes = FileUtil.getBytes(file);
 
-				if (bytes != null && bytes.length > 0) {
+				if ((bytes != null) && (bytes.length > 0)) {
 					String contentType = uploadReq.getContentType(
 						fileParamName);
 					String fileName = uploadReq.getFileName(fileParamName);

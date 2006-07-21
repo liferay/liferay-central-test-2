@@ -45,11 +45,42 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringPool;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.NullServletResponse;
 import com.liferay.util.servlet.SessionErrors;
+import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.UserPortraitException;
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.spring.UserServiceUtil;
+import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.util.FileUtil;
+import com.liferay.util.servlet.SessionErrors;
+import com.liferay.util.servlet.UploadException;
+import com.liferay.util.servlet.UploadPortletRequest;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+
+import java.util.List;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+
+import org.apache.commons.fileupload.disk.DiskFileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.portlet.PortletFileUpload;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 import java.io.File;
 
 import java.util.ArrayList;
@@ -117,6 +148,9 @@ public class EditServerAction extends PortletAction {
 		}
 		else if (cmd.equals("gc")) {
 			gc();
+		}
+		else if (cmd.equals("hotDeploy")) {
+			hotDeploy(req);
 		}
 		else if (cmd.equals("precompile")) {
 			precompile(req, res);
@@ -192,6 +226,27 @@ public class EditServerAction extends PortletAction {
 
 	protected void gc() throws Exception {
 		Runtime.getRuntime().gc();
+	}
+
+	protected void hotDeploy(ActionRequest req) throws Exception {
+		UploadPortletRequest uploadReq =
+			PortalUtil.getUploadPortletRequest(req);
+
+		File file = uploadReq.getFile("file");
+		String fileName = uploadReq.getFileName("file");
+		byte[] bytes = FileUtil.getBytes(file);
+
+		if ((bytes != null) && (bytes.length > 0)) {
+			String source = file.toString();
+			String destination =
+				PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR) +
+					StringPool.SLASH + fileName;
+
+			FileUtil.copyFile(source, destination);
+		}
+		else {
+			SessionErrors.add(req, UploadException.class.getName());
+		}
 	}
 
 	protected void precompile(ActionRequest req, ActionResponse res)

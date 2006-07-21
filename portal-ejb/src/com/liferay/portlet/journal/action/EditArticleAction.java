@@ -236,7 +236,7 @@ public class EditArticleAction extends PortletAction {
 				File file = uploadReq.getFile(name);
 				byte[] bytes = FileUtil.getBytes(file);
 
-				if (bytes != null && bytes.length > 0) {
+				if ((bytes != null) && (bytes.length > 0)) {
 					name = name.substring(imagePrefix.length(), name.length());
 
 					images.put(name, bytes);

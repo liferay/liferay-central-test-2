@@ -188,7 +188,7 @@ public class EditMessageAction extends PortletAction {
 				String fileName = uploadReq.getFileName("msgFile" + i);
 				byte[] bytes = FileUtil.getBytes(file);
 
-				if (bytes != null && bytes.length > 0) {
+				if ((bytes != null) && (bytes.length > 0)) {
 					ObjectValuePair ovp = new ObjectValuePair(fileName, bytes);
 
 					files.add(ovp);

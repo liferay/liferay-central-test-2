@@ -101,3 +101,22 @@
 <br>
 
 <input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveServer('autoDeploy');">
+
+<br><br>
+
+<liferay-ui:tabs
+	names="hot-deploy"
+	param="tabs2"
+/>
+
+<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
+
+<%= LanguageUtil.get(pageContext, "upload-a-war-file-to-hot-deploy-a-layout-template,-portlet,-or-theme") %>
+
+<br><br>
+
+<input class="form-text" name="<portlet:namespace />file" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+
+<br><br>
+
+<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "deploy") %>' onClick="<portlet:namespace />saveServer('hotDeploy');">
