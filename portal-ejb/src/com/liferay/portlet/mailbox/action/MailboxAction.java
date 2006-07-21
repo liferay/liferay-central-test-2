@@ -22,13 +22,20 @@
 
 package com.liferay.portlet.mailbox.action;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.SortedSet;
+import java.util.TimeZone;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,10 +44,13 @@ import org.apache.struts.action.ActionMapping;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.model.User;
 import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.DateFormats;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mailbox.util.MailEnvelope;
@@ -51,6 +61,7 @@ import com.liferay.portlet.mailbox.util.comparator.DateComparator;
 import com.liferay.portlet.mailbox.util.comparator.RecipientComparator;
 import com.liferay.portlet.mailbox.util.comparator.SubjectComparator;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 
 /**
@@ -192,14 +203,48 @@ public class MailboxAction extends JSONAction {
 			set = MailUtil.getEnvelopes(req.getSession(),
 				new DateComparator(asc));
 		}
+		
+		User user = PortalUtil.getUser(req);
+		Locale locale = user.getLocale();
+		TimeZone tz = user.getTimeZone();
 
+		DateFormat dtf = DateFormats.getDateTime(locale, tz);
+		DateFormat tf = DateFormats.getTime(locale, tz);
+		DateFormat df = DateFormats.getDate(locale, tz);
+
+		Date today = new Date();
+		Calendar cal = Calendar.getInstance(tz, locale);
+		cal.setTime(today);
+		cal.roll(Calendar.DAY_OF_MONTH, false);
+		Date yesterday = cal.getTime();
+		
+		String td = df.format(today);
+		String yd = df.format(yesterday);
+		
 		JSONArray meArray = new JSONArray();
 
 		for (Iterator itr = set.iterator(); itr.hasNext(); ) {
 			MailEnvelope me = (MailEnvelope)itr.next();
 			JSONObject jMe = new JSONObject();
+			
+			String formattedDate = null;
 
-			jMe.put("date", me.getDate().toString());
+			String day = df.format(me.getDate());
+			if (td.equals(day)) {
+				formattedDate = LanguageUtil.get(user, "today") + 
+					StringPool.COMMA + StringPool.SPACE + 
+					tf.format(me.getDate());
+			}
+			else if (yd.equals(day)) {
+				formattedDate = LanguageUtil.get(user, "yesterday") + 
+					StringPool.COMMA + StringPool.SPACE + 
+					tf.format(me.getDate());
+			}
+			else {
+				formattedDate = dtf.format(me.getDate());
+			}
+
+			jMe.put("date", formattedDate);
 			jMe.put("id", me.getMsgUID());
 			jMe.put("email", me.getRecipient());
 			jMe.put("subject", me.getSubject());
