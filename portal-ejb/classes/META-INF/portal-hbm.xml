@@ -676,23 +676,6 @@
 		<property name="smallImage" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="smallImageURL" />
 	</class>
-	<class name="com.liferay.portlet.mail.model.MailReceipt" table="MailReceipt">
-		<cache usage="read-write" />
-		<id name="receiptId" type="java.lang.String">
-			<generator class="assigned" />
-		</id>
-		<property name="companyId" />
-		<property name="userId" />
-		<property name="createDate" />
-		<property name="modifiedDate" />
-		<property name="recipientName" />
-		<property name="recipientAddress" />
-		<property name="subject" />
-		<property name="sentDate" />
-		<property name="readCount" type="com.liferay.util.dao.hibernate.IntegerType" />
-		<property name="firstReadDate" />
-		<property name="lastReadDate" />
-	</class>
 	<class name="com.liferay.portlet.messageboards.model.MBCategory" table="MBCategory">
 		<cache usage="read-write" />
 		<id name="categoryId" type="java.lang.String">

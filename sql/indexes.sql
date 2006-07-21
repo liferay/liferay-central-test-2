@@ -95,9 +95,6 @@ create index MBStatsUser_ix_UserId on MBStatsUser (userId);
 
 create index MBThread_ix_CategoryId on MBThread (categoryId);
 
-create index MailReceipt_ix_CompanyId on MailReceipt (companyId);
-create index MailReceipt_ix_UserId on MailReceipt (userId);
-
 create index OrgGroupPermission_ix_Permissi on OrgGroupPermission (permissionId);
 
 create index OrgGroupRole_ix_RoleId on OrgGroupRole (roleId);

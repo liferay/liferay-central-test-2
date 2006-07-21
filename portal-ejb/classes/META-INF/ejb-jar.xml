@@ -10691,22 +10691,6 @@
 			</ejb-local-ref>
 		</session>
 		<session>
-			<display-name>MailReceiptLocalServiceEJB</display-name>
-			<ejb-name>com_liferay_portlet_mail_service_ejb_MailReceiptLocalServiceEJB</ejb-name>
-			<local-home>com.liferay.portlet.mail.service.ejb.MailReceiptLocalServiceHome</local-home>
-			<local>com.liferay.portlet.mail.service.ejb.MailReceiptLocalServiceEJB</local>
-			<ejb-class>com.liferay.portlet.mail.service.ejb.MailReceiptLocalServiceEJBImpl</ejb-class>
-			<session-type>Stateless</session-type>
-			<transaction-type>Bean</transaction-type>
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.portal.service.ejb.UserLocalServiceHome</local-home>
-				<local>com.liferay.portal.service.ejb.UserLocalServiceEJB</local>
-				<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-		</session>
-		<session>
 			<display-name>MBCategoryLocalServiceEJB</display-name>
 			<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-name>
 			<local-home>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceHome</local-home>
@@ -12342,10 +12326,6 @@
 			</method>
 			<method>
 				<ejb-name>com_liferay_portlet_journal_service_ejb_JournalTemplateServiceEJB</ejb-name>
-				<method-name>*</method-name>
-			</method>
-			<method>
-				<ejb-name>com_liferay_portlet_mail_service_ejb_MailReceiptLocalServiceEJB</ejb-name>
 				<method-name>*</method-name>
 			</method>
 			<method>

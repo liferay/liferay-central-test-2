@@ -657,20 +657,6 @@
 		<field name="smallImage" type="boolean" />
 		<field name="smallImageURL" type="String" />
 	</model>
-	<model name="com.liferay.portlet.mail.model.MailReceipt">
-		<field name="receiptId" type="String" />
-		<field name="companyId" type="String" />
-		<field name="userId" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="recipientName" type="String" />
-		<field name="recipientAddress" type="String" />
-		<field name="subject" type="String" />
-		<field name="sentDate" type="Date" />
-		<field name="readCount" type="int" />
-		<field name="firstReadDate" type="Date" />
-		<field name="lastReadDate" type="Date" />
-	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBCategory">
 		<field name="categoryId" type="String" />
 		<field name="groupId" type="String" />

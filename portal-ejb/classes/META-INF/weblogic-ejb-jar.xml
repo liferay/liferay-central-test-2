@@ -307,10 +307,6 @@
 		<jndi-name>com_liferay_portlet_journal_service_ejb_JournalTemplateServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
-		<ejb-name>com_liferay_portlet_mail_service_ejb_MailReceiptLocalServiceEJB</ejb-name>
-		<local-jndi-name>ejb/liferay/MailReceiptLocalServiceHome</local-jndi-name>
-	</weblogic-enterprise-bean>
-	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-name>
 		<local-jndi-name>ejb/liferay/MBCategoryLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>

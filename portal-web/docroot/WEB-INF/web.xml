@@ -561,13 +561,6 @@
 		<ejb-link>com_liferay_portlet_journal_service_ejb_JournalTemplateLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
-		<ejb-ref-name>ejb/liferay/MailReceiptLocalServiceHome</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<local-home>com.liferay.portlet.mail.service.ejb.MailReceiptLocalServiceHome</local-home>
-		<local>com.liferay.portlet.mail.service.ejb.MailReceiptLocalServiceEJB</local>
-		<ejb-link>com_liferay_portlet_mail_service_ejb_MailReceiptLocalServiceEJB</ejb-link>
-	</ejb-local-ref>
-	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
 		<local-home>com.liferay.portlet.messageboards.service.ejb.MBCategoryLocalServiceHome</local-home>

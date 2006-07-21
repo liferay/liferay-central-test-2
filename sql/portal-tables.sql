@@ -429,21 +429,6 @@ create table MBStatsUser (
 	primary key (groupId, userId)
 );
 
-create table MailReceipt (
-	receiptId VARCHAR(75) not null primary key,
-	companyId VARCHAR(75) not null,
-	userId VARCHAR(75) not null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	recipientName VARCHAR(75) null,
-	recipientAddress VARCHAR(75) null,
-	subject VARCHAR(75) null,
-	sentDate DATE null,
-	readCount INTEGER,
-	firstReadDate DATE null,
-	lastReadDate DATE null
-);
-
 create table MBCategory (
 	categoryId VARCHAR(75) not null primary key,
 	groupId VARCHAR(75) not null,
