@@ -40,18 +40,20 @@
 	String organizationId = user2.getOrganization().getOrganizationId();
 	String locationId = user2.getLocation().getOrganizationId();
 
-	String portletURL = null;
+	String userURL = null;
 	%>
 
 	<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="updateURL">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="updateUserURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 			<portlet:param name="p_u_e_a" value="<%= user2.getEmailAddress() %>" />
 		</portlet:renderURL>
 
-		<% portletURL = (String)pageContext.getAttribute(updateURL); %>
+		<%
+		userURL = (String)pageContext.getAttribute(updateUserURL);
+		%>
 
-		<liferay-ui:icon image="edit" url="<%= portletURL %>" />
+		<liferay-ui:icon image="edit" url="<%= userURL %>" />
 	</c:if>
 
 	<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.PERMISSIONS) %>">
@@ -59,12 +61,14 @@
 			modelResource="<%= User.class.getName() %>"
 			modelResourceDescription="<%= user2.getFullName() %>"
 			resourcePrimKey="<%= user2.getPrimaryKey().toString() %>"
-			var="permissionsURL"
+			var="permissionsUserURL"
 		/>
 
-		<% portletURL = (String)pageContext.getAttribute(permissionsURL); %>
+		<%
+		userURL = (String)pageContext.getAttribute(permissionsUserURL);
+		%>
 
-		<liferay-ui:icon image="permissions" url="<%= portletURL %>" />
+		<liferay-ui:icon image="permissions" url="<%= userURL %>" />
 	</c:if>
 
 	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
@@ -75,33 +79,37 @@
 
 			<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.DELETE) %>">
 				<c:if test="<%= !searchTerms.isActive() %>">
-					<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="activateURL">
+					<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="activateUserURL">
 						<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
 						<portlet:param name="deleteUserIds" value="<%= userId %>" />
 					</portlet:actionURL>
 
-					<% portletURL = (String)pageContext.getAttribute(activateURL); %>
+					<%
+					userURL = (String)pageContext.getAttribute(activateUserURL);
+					%>
 
-					<liferay-ui:icon image="activate" url="<%= portletURL %>" />
+					<liferay-ui:icon image="activate" url="<%= userURL %>" />
 				</c:if>
 
-				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deactivateURL">
+				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deactivateUserURL">
 					<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="deleteUserIds" value="<%= userId %>" />
 				</portlet:actionURL>
 
-				<% portletURL = (String)pageContext.getAttribute(deactivateURL); %>
+				<%
+				userURL = (String)pageContext.getAttribute(deactivateUserURL);
+				%>
 
 				<c:choose>
 					<c:when test="<%= searchTerms.isActive() %>">
-						<liferay-ui:icon-deactivate url="<%= portletURL %>" />
+						<liferay-ui:icon-deactivate url="<%= userURL %>" />
 					</c:when>
 					<c:otherwise>
-						<liferay-ui:icon-delete url="<%= portletURL %>" />
+						<liferay-ui:icon-delete url="<%= userURL %>" />
 					</c:otherwise>
 				</c:choose>
 			</c:if>

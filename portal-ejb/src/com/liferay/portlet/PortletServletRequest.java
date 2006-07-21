@@ -62,10 +62,10 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 
 		_req = req;
 		_portletRequest = portletRequest;
-		_pathInfo = pathInfo != null ? pathInfo : StringPool.BLANK;
-		_queryString = queryString != null ? queryString : StringPool.BLANK;
-		_requestURI = requestURI != null ? requestURI : StringPool.BLANK;
-		_servletPath = servletPath != null ? servletPath : StringPool.BLANK;
+		_pathInfo = GetterUtil.getString(pathInfo);
+		_queryString = GetterUtil.getString(queryString);
+		_requestURI = GetterUtil.getString(requestURI);
+		_servletPath = GetterUtil.getString(servletPath);
 		_sharedHttpSessionAttributes = sharedHttpSessionAttributes;
 	}
 
