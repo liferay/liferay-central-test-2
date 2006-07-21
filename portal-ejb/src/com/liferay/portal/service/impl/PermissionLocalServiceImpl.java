@@ -311,11 +311,13 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 		// Is the user directly connected to one of the permissions?
 
+		/*
 		if (PermissionFinder.countByUsersPermissions(permissions, userId) > 0) {
+
 			return true;
 		}
 
-		start = logHasUserPermissions(userId, actionId, resourceId, start, 2);
+		start = logHasUserPermissions(userId, actionId, resourceId, start, 2);*/
 
 		// If we are checking permissions an object that belongs to a community,
 		// then it's only necessary to check the group that represents the
@@ -346,6 +348,15 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 		start = logHasUserPermissions(userId, actionId, resourceId, start, 3);
 
+		// Call countByUsersPermissions, countByUsersRoles,
+		// countByGroupsPermissions, and countByGroupsRoles in one method
+
+		if (PermissionFinder.containsPermissions(permissions, userId, groups)) {
+			return true;
+		}
+
+		start = logHasUserPermissions(userId, actionId, resourceId, start, 4);
+
 		// Check the organization and community intersection table. Break out of
 		// this method if the user has one of the permissions set at the
 		// intersection because that takes priority.
@@ -354,12 +365,12 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			return true;
 		}
 
-		start = logHasUserPermissions(userId, actionId, resourceId, start, 4);
+		start = logHasUserPermissions(userId, actionId, resourceId, start, 5);
 
 		// Is the user associated with groups or organizations that are directly
 		// connected to one of the permissions?
 
-		if (groups.size() > 0) {
+		/*if (groups.size() > 0) {
 			if (PermissionFinder.countByGroupsPermissions(
 					permissions, groups) > 0) {
 
@@ -367,12 +378,12 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			}
 		}
 
-		start = logHasUserPermissions(userId, actionId, resourceId, start, 5);
+		start = logHasUserPermissions(userId, actionId, resourceId, start, 6);*/
 
 		// Is the user connected to one of the permissions via user, group, or
 		// organization roles?
 
-		if (PermissionFinder.countByUsersRoles(permissions, userId) > 0) {
+		/*if (PermissionFinder.countByUsersRoles(permissions, userId) > 0) {
 			return true;
 		}
 
@@ -382,7 +393,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			}
 		}
 
-		start = logHasUserPermissions(userId, actionId, resourceId, start, 6);
+		start = logHasUserPermissions(userId, actionId, resourceId, start, 7);*/
 
 		return false;
 	}
