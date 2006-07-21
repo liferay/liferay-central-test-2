@@ -497,14 +497,7 @@ public class MailUtil {
 	}
 
 	public static MailMessage getMessage(
-			HttpSession ses, String folderName, long messageUID)
-		throws FolderException, StoreException, ContentException {
-
-		setCurrentFolder(ses, folderName);
-		return getMessage(ses, messageUID);
-	}
-	
-	public static MailMessage getMessage(HttpSession ses, long messageUID)
+			HttpSession ses, long messageUID, String url)
 		throws FolderException, StoreException, ContentException {
 
 		MailMessage mm = null;
@@ -525,6 +518,10 @@ public class MailUtil {
 			mm.setSentDate(message.getSentDate());
 			mm.setReplyTo(message.getReplyTo());
 			mm = _getContent(message, mm, contentPath);
+
+			if (Validator.isNotNull(url)) {
+				_replaceContentIds(mm, url);
+			}
 
 			_setCurrentMessage(ses, messageUID);
 		}
@@ -685,6 +682,44 @@ public class MailUtil {
 		_getFolder(ses, folderName);
 	}
 
+	private static void _replaceContentIds(MailMessage mm, String url) {
+		List list = mm.getRemoteAttachments();
+		
+		String body = mm.getHtmlBody();
+		
+		if (_log.isDebugEnabled()) {
+			_log.debug("Body before CIDs have been replaced:\n" + body);
+		}
+			
+		for (Iterator itr = list.iterator(); itr.hasNext(); ) {
+			RemoteMailAttachment rma = (RemoteMailAttachment)itr.next();
+			
+			if (Validator.isNotNull(rma.getContentID())) {
+				String cid = rma.getContentID();
+				
+				if (cid.startsWith(StringPool.LESS_THAN) &&
+					cid.endsWith(StringPool.GREATER_THAN)) {
+
+					cid = "cid:" + cid.substring(1, cid.length() - 1);
+				}
+
+				String remotePath = url + "fileName=" + rma.getFilename() + 
+					"&contentPath=" + rma.getContentPath();
+
+				_log.info(
+					"Replacing all CIDs '" + cid + "' with: " + remotePath);
+
+				body = StringUtil.replace(body, cid, remotePath);
+			}
+		}
+		
+		if (_log.isDebugEnabled()) {
+			_log.debug("Body after CIDs have been replaced:\n" + body);
+		}
+		
+		mm.setHtmlBody(body);
+	}
+
 	private static void _setCurrentMessage(HttpSession ses, long messageId) {
 		ses.setAttribute(WebKeys.MAIL_MESSAGE, new Long(messageId));
 	}
@@ -713,6 +748,10 @@ public class MailUtil {
 		try {
 			rma.setFilename(part.getFileName());
 			rma.setContentPath(contentPath);
+			String [] contentId = part.getHeader("Content-ID");
+			if (contentId != null && contentId.length == 1) {
+				rma.setContentID(contentId[0]);
+			}
 		}
 		catch (MessagingException ex) {
 			_log.error("Unable to properly get file name of MIME attachment");

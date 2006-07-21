@@ -39,6 +39,7 @@ import org.json.JSONObject;
 
 import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.struts.JSONAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -138,7 +139,9 @@ public class MailboxAction extends JSONAction {
 		return jsonObj.toString();
 	}
 
-	private String _getMessage(HttpServletRequest req, HttpServletResponse res) throws Exception {
+	private String _getMessage(HttpServletRequest req, HttpServletResponse res)
+		throws Exception {
+		
 		JSONObject jsonObj = new JSONObject();
 
 		long messageId = ParamUtil.getLong(req, "messageId");
@@ -148,11 +151,17 @@ public class MailboxAction extends JSONAction {
 
 		MailUtil.setCurrentFolder(req.getSession(), folderId);
 
-		MailMessage mm = MailUtil.getMessage(req.getSession(), messageId);
-		
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		String url = themeDisplay.getPathMain() + "/mailbox/get_attachment?";
+
+		MailMessage mm = MailUtil.getMessage(req.getSession(), messageId, url);
+
 		req.setAttribute("mailMessage", mm);
 		
-		PortalUtil.renderPage(header, ctx, req, res, "/html/portlet/mailbox/message_details.jsp");
+		PortalUtil.renderPage(header, ctx, req, res,
+			"/html/portlet/mailbox/message_details.jsp");
 		
 		jsonObj.put("body", mm.getHtmlBody());
 		jsonObj.put("header", header.toString());
@@ -160,7 +169,7 @@ public class MailboxAction extends JSONAction {
 		
 		return jsonObj.toString();
 	}
-
+	
 	private String _getPreviewHeaders(HttpServletRequest req) throws Exception {
 		JSONObject jsonObj = new JSONObject();
 

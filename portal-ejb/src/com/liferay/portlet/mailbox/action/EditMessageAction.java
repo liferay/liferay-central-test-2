@@ -26,6 +26,7 @@ import java.text.DateFormat;
 
 import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.DateFormats;
 import com.liferay.util.InternetAddressUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -69,11 +70,18 @@ public class EditMessageAction extends PortletAction {
 		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
 		HttpServletRequest svltReq = reqImpl.getHttpServletRequest();
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		String attachmentUrl = 
+			themeDisplay.getPathMain() + "/mailbox/get_attachment?";
+
 		if (composeAction.equals("forward") || 
 			composeAction.startsWith("reply")) {
-	
-			MailMessage mm = 
-				MailUtil.getMessage(svltReq.getSession(), folderId, messageId);
+
+			MailUtil.setCurrentFolder(svltReq.getSession(), folderId);
+			MailMessage mm = MailUtil.getMessage(
+				svltReq.getSession(), messageId, attachmentUrl);
 	
 			User user = PortalUtil.getUser(req);
 			DateFormat dateFormatter = 
@@ -132,9 +140,10 @@ public class EditMessageAction extends PortletAction {
 			}
 		}
 		else if (composeAction.equals("edit")) {
-			MailMessage mm = 
-				MailUtil.getMessage(svltReq.getSession(), folderId, messageId);
-
+			MailUtil.setCurrentFolder(svltReq.getSession(), folderId);
+			MailMessage mm = MailUtil.getMessage(
+				svltReq.getSession(), messageId, attachmentUrl);
+	
 			String [] recipients = { 
 				Html.escape(InternetAddressUtil.toString(mm.getTo()), true),
 				Html.escape(InternetAddressUtil.toString(mm.getCc()), true),

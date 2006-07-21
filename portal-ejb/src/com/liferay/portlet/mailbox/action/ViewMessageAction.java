@@ -30,6 +30,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mailbox.util.MailMessage;
 import com.liferay.portlet.mailbox.util.MailUtil;
 
@@ -48,7 +50,13 @@ public class ViewMessageAction extends Action {
 
 		Long messageId = MailUtil.getCurrentMessageId(req.getSession());
 
-		MailMessage mm = MailUtil.getMessage(req.getSession(), messageId.longValue());
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		String url = themeDisplay.getPathMain() + "/mailbox/get_attachment?";
+
+		MailMessage mm = 
+			MailUtil.getMessage(req.getSession(), messageId.longValue(), url);
 		
 		req.setAttribute("mailMessage", mm);
 		

@@ -86,16 +86,11 @@ Address []to = mm.getTo();
 					else {
 						comma = "";
 					}
-					
+
 					RemoteMailAttachment rma = (RemoteMailAttachment)attachments.get(i);
+					String url = themeDisplay.getPathMain() + "/mailbox/get_attachment?fileName=" + rma.getFilename() + "&contentPath=" + rma.getContentPath();
 					%>
-					<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="fileUrl">
-						<portlet:param name="struts_action" value="/mailbox/get_attachment" />
-						<portlet:param name="fileName" value="<%= rma.getFilename() %>" />
-						<portlet:param name="contentPath" value="<%= rma.getContentPath() %>" />
-					</portlet:actionURL>
-					
-					<a href="<%= fileUrl %>"><%= rma.getFilename() %></a><%= comma %>
+						<a href="<%= url %>"><%= rma.getFilename() %></a><%= comma %>
 					<%
 				}
 				%>

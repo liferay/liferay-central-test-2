@@ -117,9 +117,8 @@ Long draftId = (Long)request.getAttribute(WebKeys.MAIL_DRAFT_ID);
 			checkbox.value = contentPath;
 
 			var filename = document.createElement("span");
-			var href = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/mailbox/get_attachment" /></portlet:actionURL>';
-			href += "&fileName=" + remoteFile + "&contentPath=" + contentPath;			
-			filename.innerHTML = "<a href=\"" + href + "\"><i>" + remoteFile + "</i></a>";
+			var href = "<%= themeDisplay.getPathMain() %>/mailbox/get_attachment?fileName=" + remoteFile + "&contentPath=" + contentPath;			
+			filename.innerHTML = '<span class="font-small"><a href="' + href + '">' + remoteFile + '</a></span>';
 			
 			newrow.insertCell(0);
 			newrow.cells[0].appendChild(checkbox);

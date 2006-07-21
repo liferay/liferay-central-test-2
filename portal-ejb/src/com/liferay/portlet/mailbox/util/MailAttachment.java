@@ -62,8 +62,11 @@ public class MailAttachment {
     }
 
     private String _contentType;
+
     private String _filename;
-    private byte [] _content;
-    private String _contentID;
     
+    private byte [] _content;
+    
+    private String _contentID;
+
 }

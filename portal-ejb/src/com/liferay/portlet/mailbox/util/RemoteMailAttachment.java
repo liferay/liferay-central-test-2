@@ -68,8 +68,18 @@ public class RemoteMailAttachment {
         _contentPath = contentPath;
     }
     
+    public String getContentID() {
+        return _contentID;
+    }
+
+    public void setContentID(String contentID) {
+    	_contentID = contentID;
+    }
+    
     private String _contentPath;
     
+    private String _contentID;
+
     private String _filename;
     
 }
