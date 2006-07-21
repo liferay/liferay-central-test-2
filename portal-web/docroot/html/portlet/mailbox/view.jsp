@@ -286,18 +286,3 @@ String mailLineColor = "#b3b6b0";
 	Mailbox.colorSelected = "<%= colorScheme.getLayoutTabBg() %>";
 	Mailbox.init();
 </script>
-
-<%!
-private String _buttonText(PageContext pageContext, String key) {
-	String text = key;
-	
-	try {
-		text = LanguageUtil.get(pageContext, key);
-		text = StringUtil.replace(text, " ", "<span class=\"portlet-mail-toolbar-underscore\">&nbsp;</span>");
-	}
-	catch (Exception e) {
-	}
-	
-	return text;
-}
-%>
