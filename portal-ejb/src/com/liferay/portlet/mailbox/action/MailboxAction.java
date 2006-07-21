@@ -215,7 +215,7 @@ public class MailboxAction extends JSONAction {
 		Date today = new Date();
 		Calendar cal = Calendar.getInstance(tz, locale);
 		cal.setTime(today);
-		cal.roll(Calendar.DAY_OF_MONTH, false);
+		cal.add(Calendar.DATE, -1);
 		Date yesterday = cal.getTime();
 		
 		String td = df.format(today);
