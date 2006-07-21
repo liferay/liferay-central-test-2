@@ -1,7 +1,7 @@
-alter table DLFileProfile add versionUserId VARCHAR(100) not null;
+alter table DLFileProfile add versionUserId VARCHAR(100) not null default '';
 alter table DLFileProfile add versionUserName VARCHAR(100) null;
 
-alter table DLFileVersion add userId VARCHAR(100) not null;
+alter table DLFileVersion add userId VARCHAR(100) not null default '';
 alter table DLFileVersion add userName VARCHAR(100) null;
 
 alter table JournalArticle add internal_ BOOLEAN;

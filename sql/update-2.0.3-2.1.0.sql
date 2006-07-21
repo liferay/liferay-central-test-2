@@ -1,4 +1,4 @@
-alter table CalEvent add groupId VARCHAR(100) not null;
+alter table CalEvent add groupId VARCHAR(100) not null default '';
 update CalEvent set groupId = '-1';
 
 create table DLFileRank (
@@ -10,19 +10,19 @@ create table DLFileRank (
 	primary key (companyId, userId, repositoryId, fileName)
 );
 
-alter table DLRepository add groupId VARCHAR(100) not null;
+alter table DLRepository add groupId VARCHAR(100) not null default '';
 update DLRepository set groupId = '-1';
 
-alter table IGFolder add groupId VARCHAR(100) not null;
+alter table IGFolder add groupId VARCHAR(100) not null default '';
 update IGFolder set groupId = '-1';
 
-alter table MBTopic add portletId VARCHAR(100) not null;
-alter table MBTopic add groupId VARCHAR(100) not null;
+alter table MBTopic add portletId VARCHAR(100) not null default '';
+alter table MBTopic add groupId VARCHAR(100) not null default '';
 update MBTopic set portletId = '19';
 update MBTopic set groupId = '-1';
 
-alter table JournalArticle add portletId VARCHAR(100) not null;
-alter table JournalArticle add groupId VARCHAR(100) not null;
+alter table JournalArticle add portletId VARCHAR(100) not null default '';
+alter table JournalArticle add groupId VARCHAR(100) not null default '';
 update JournalArticle set portletId = '15';
 update JournalArticle set groupId = '-1';
 
@@ -49,8 +49,8 @@ create table PollsDisplay (
 	primary key (layoutId, userId, portletId)
 );
 
-alter table PollsQuestion add portletId VARCHAR(100) not null;
-alter table PollsQuestion add groupId VARCHAR(100) not null;
+alter table PollsQuestion add portletId VARCHAR(100) not null default '';
+alter table PollsQuestion add groupId VARCHAR(100) not null default '';
 alter table PollsQuestion add expirationDate DATE null;
 update PollsQuestion set portletId = '25';
 update PollsQuestion set groupId = '-1';

@@ -1,4 +1,4 @@
-alter table Address add companyId VARCHAR(100) not null;
+alter table Address add companyId VARCHAR(100) not null default '';
 alter table Address add userName VARCHAR(100) null;
 alter table Address add createDate DATE null;
 alter table Address add modifiedDate DATE null;

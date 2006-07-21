@@ -32,13 +32,13 @@ create table BlogsReferer (
 	quantity INTEGER
 );
 
-alter table BookmarksEntry add groupId VARCHAR(100) not null;
-alter table BookmarksEntry add companyId VARCHAR(100) not null;
+alter table BookmarksEntry add groupId VARCHAR(100) not null default '';
+alter table BookmarksEntry add companyId VARCHAR(100) not null default '';
 update BookmarksEntry set groupId = '-1';
 update BookmarksEntry set companyId = 'liferay.com';
 
-alter table BookmarksFolder add groupId VARCHAR(100) not null;
-alter table BookmarksFolder add companyId VARCHAR(100) not null;
+alter table BookmarksFolder add groupId VARCHAR(100) not null default '';
+alter table BookmarksFolder add companyId VARCHAR(100) not null default '';
 update BookmarksFolder set groupId = '-1';
 update BookmarksFolder set companyId = 'liferay.com';
 

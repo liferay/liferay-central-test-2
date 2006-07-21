@@ -27,7 +27,7 @@ create table BlogsUser (
 	lastPostDate DATE null
 );
 
-alter table JournalArticle add version DOUBLE not null;
+alter table JournalArticle add version DOUBLE not null default '';
 alter table JournalArticle add type_ VARCHAR(100) null;
 alter table JournalArticle add structureId VARCHAR(100) null;
 alter table JournalArticle add templateId VARCHAR(100) null;

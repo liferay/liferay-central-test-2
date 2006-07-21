@@ -31,7 +31,7 @@ alter table BlogsCategory add description STRING null;
 
 drop table BlogsComments;
 
-alter table BlogsEntry add groupId VARCHAR(75) not null;
+alter table BlogsEntry add groupId VARCHAR(75) not null default '';
 alter table BlogsEntry add userName VARCHAR(75) null;
 
 drop table BlogsLink;
@@ -183,14 +183,14 @@ update JournalArticle set approvedDate = modifiedDate where approved = 'TRUE';
 update JournalArticle set expired = 'FALSE' where approved = 'TRUE';
 update JournalArticle set expired = 'TRUE' where approved = 'FALSE';
 
-alter_column_name JournalContentSearch userId ownerId VARCHAR(75) not null;
-alter table JournalContentSearch add companyId VARCHAR(100) not null;
+alter_column_name JournalContentSearch userId ownerId VARCHAR(75) not null default '';
+alter table JournalContentSearch add companyId VARCHAR(100) not null default '';
 update JournalContentSearch set companyId = 'liferay.com';
 
 alter table JournalTemplate add langType VARCHAR(75) null;
 update JournalTemplate set langType = 'xsl';
 
-alter_column_name Layout userId ownerId VARCHAR(75) not null;
+alter_column_name Layout userId ownerId VARCHAR(75) not null default '';
 alter_column_type Layout name STRING null;
 alter table Layout add hidden_ BOOLEAN;
 alter table Layout add themeId VARCHAR(75) null;
@@ -305,7 +305,7 @@ create table Phone (
 	primary_ BOOLEAN
 );
 
-alter_column_name PortletPreferences userId ownerId VARCHAR(75) not null;
+alter_column_name PortletPreferences userId ownerId VARCHAR(75) not null default '';
 
 create table Region (
 	regionId VARCHAR(75) not null primary key,
@@ -347,16 +347,16 @@ create table ShoppingCart (
 	insure BOOLEAN
 );
 
-alter table ShoppingCategory add groupId VARCHAR(75) not null;
-alter table ShoppingCategory add userId VARCHAR(75) not null;
+alter table ShoppingCategory add groupId VARCHAR(75) not null default '';
+alter table ShoppingCategory add userId VARCHAR(75) not null default '';
 alter table ShoppingCategory add userName VARCHAR(75) null;
 alter table ShoppingCategory add description STRING null;
 
-alter table ShoppingCoupon add groupId VARCHAR(75) not null;
-alter table ShoppingCoupon add userId VARCHAR(75) not null;
+alter table ShoppingCoupon add groupId VARCHAR(75) not null default '';
+alter table ShoppingCoupon add userId VARCHAR(75) not null default '';
 alter table ShoppingCoupon add userName VARCHAR(75) null;
 
-alter table ShoppingItem add userId VARCHAR(75) not null;
+alter table ShoppingItem add userId VARCHAR(75) not null default '';
 alter table ShoppingItem add userName VARCHAR(75) null;
 
 drop table ShoppingOrder;
@@ -452,6 +452,6 @@ create table Website (
 	primary_ BOOLEAN
 );
 
-alter table WikiNode add groupId VARCHAR(75) not null;
+alter table WikiNode add groupId VARCHAR(75) not null default '';
 
 @include portal-data-common.sql
