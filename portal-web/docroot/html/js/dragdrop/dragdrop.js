@@ -68,7 +68,7 @@ var DragDrop = {
 		for (var i = 0; i < items.length; i++) {
 			curItem = items[i];
 
-			if (curItem.className.match(DragDrop.portletBoundName)) {
+			if (curItem.className && curItem.className.match(DragDrop.portletBoundName)) {
 				if (!curItem.isStatic && enableDragDrop) {
 					foundHandle = this.findHandle(curItem);
 
