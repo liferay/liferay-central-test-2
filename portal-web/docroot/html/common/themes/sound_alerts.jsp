@@ -24,6 +24,7 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
+<%--
 <%
 Boolean gotMail = (Boolean)request.getAttribute(WebKeys.MAIL_GOT_MAIL);
 
@@ -36,3 +37,4 @@ if ((gotMail != null) && (gotMail.booleanValue() == true)) {
 <%
 }
 %>
+--%>
