@@ -45,9 +45,11 @@ import org.apache.struts.action.ActionMapping;
 import com.liferay.portal.model.User;
 import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.mailbox.util.MailAttachment;
 import com.liferay.portlet.mailbox.util.MailMessage;
@@ -112,8 +114,14 @@ public class CompleteMessageAction extends PortletAction {
 
 				mm.setRemoteAttachments(_getRemoteAttachments(req));
 				
+				ThemeDisplay themeDisplay =
+					(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+				String url = 
+					themeDisplay.getPathMain() + "/mailbox/get_attachment?";
+
 				MailUtil.completeMessage(
-					ses, mm, cmd.equals(Constants.SEND), draftId);
+					ses, mm, cmd.equals(Constants.SEND), draftId, url);
 
 				setForward(req, "portlet.mailbox.view");
 			}

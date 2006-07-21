@@ -96,6 +96,8 @@ public interface Constants {
 
 	// Content types
 
+	public static final String CONTENT_ID = "Content-ID";
+	
 	public static final String MESSAGE_RFC822 = "message/rfc822";
 
 	public static final String MULTIPART_ALTERNATIVE = "multipart/alternative";

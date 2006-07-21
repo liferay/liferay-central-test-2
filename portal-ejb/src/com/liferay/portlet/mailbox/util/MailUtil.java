@@ -71,6 +71,7 @@ import com.liferay.portlet.mailbox.ContentPathException;
 import com.liferay.portlet.mailbox.FolderException;
 import com.liferay.portlet.mailbox.StoreException;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.Http;
 import com.liferay.util.JNDIUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
@@ -129,8 +130,8 @@ public class MailUtil {
 		}
 	}
 
-	public static void completeMessage(
-			HttpSession ses, MailMessage mm, boolean send, long draftId)
+	public static void completeMessage(HttpSession ses, MailMessage mm, 
+			boolean send, long draftId, String url)
 		throws ContentException, ContentPathException, FolderException, 
 			StoreException {
 
@@ -152,6 +153,8 @@ public class MailUtil {
 				message.setRecipients(Message.RecipientType.BCC, mm.getBcc());
 			}
 
+			_replaceEmbeddedImages(ses, mm, url);
+			
 			Multipart multipart = new MimeMultipart();
 			
 			BodyPart bodypart = new MimeBodyPart();
@@ -168,6 +171,10 @@ public class MailUtil {
 				BodyPart attachment = new MimeBodyPart();
 				attachment.setDataHandler(new DataHandler(ds));
 				attachment.setFileName(ma.getFilename());
+				if (Validator.isNotNull(ma.getContentID())) {
+					attachment.addHeader(
+						Constants.CONTENT_ID, ma.getContentID());
+				}
 				multipart.addBodyPart(attachment);
 			}
 			
@@ -691,8 +698,8 @@ public class MailUtil {
 			_log.debug("Body before CIDs have been replaced:\n" + body);
 		}
 			
-		for (Iterator itr = list.iterator(); itr.hasNext(); ) {
-			RemoteMailAttachment rma = (RemoteMailAttachment)itr.next();
+		for (int i = 0; i < list.size(); i++) {
+			RemoteMailAttachment rma = (RemoteMailAttachment)list.get(i);
 			
 			if (Validator.isNotNull(rma.getContentID())) {
 				String cid = rma.getContentID();
@@ -710,6 +717,9 @@ public class MailUtil {
 					"Replacing all CIDs '" + cid + "' with: " + remotePath);
 
 				body = StringUtil.replace(body, cid, remotePath);
+				
+				list.remove(i);
+				i--;
 			}
 		}
 		
@@ -720,6 +730,71 @@ public class MailUtil {
 		mm.setHtmlBody(body);
 	}
 
+	private static void _replaceEmbeddedImages(
+			HttpSession ses, MailMessage mm, String actionurl) 
+		throws ContentException, ContentPathException, FolderException, 
+			StoreException {
+		
+		String cidPrefix = ses.getId() + (new Date()).getTime();
+
+		int cidCount = 0;
+		
+		String html = mm.getHtmlBody();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Body before content paths have been replaced:\n" + html);
+		}
+
+		int beg = html.indexOf(actionurl);
+		while (beg >= 0) {
+			int end = html.indexOf("-1", beg);
+
+			if (end > 0) {
+				end += 2;
+				
+				String attachmentPath = html.substring(beg, end);
+
+				String fileName = 
+					Http.getParameter(attachmentPath, "fileName", true);
+				String contentPath = 
+					Http.getParameter(attachmentPath, "contentPath", true);
+
+				String cid = cidPrefix + cidCount;
+
+				_log.info("Replacing all attachment paths '" + attachmentPath + 
+						"' with: " + cid);
+
+				Object [] parts = getAttachment(ses, contentPath);
+
+				MailAttachment ma = new MailAttachment();
+				ma.setContent((byte [])parts[0]);
+				ma.setContentType((String)parts[1]);
+				ma.setContentID(
+					StringPool.LESS_THAN + cid + StringPool.GREATER_THAN);
+				ma.setFilename(fileName);
+				mm.appendAttachment(ma);
+
+				html = StringUtil.replace(html, attachmentPath, "cid:" + cid);
+
+				cidCount++;
+
+				beg = html.indexOf(actionurl);
+			}
+			else {
+				beg = html.indexOf(actionurl, beg + 1);				
+			}
+		}
+		
+		if (cidCount > 0) {
+			mm.setHtmlBody(html);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Body after content paths have been replaced:\n" + html);
+		}
+	}
+	
 	private static void _setCurrentMessage(HttpSession ses, long messageId) {
 		ses.setAttribute(WebKeys.MAIL_MESSAGE, new Long(messageId));
 	}
@@ -748,7 +823,7 @@ public class MailUtil {
 		try {
 			rma.setFilename(part.getFileName());
 			rma.setContentPath(contentPath);
-			String [] contentId = part.getHeader("Content-ID");
+			String [] contentId = part.getHeader(Constants.CONTENT_ID);
 			if (contentId != null && contentId.length == 1) {
 				rma.setContentID(contentId[0]);
 			}
