@@ -58,7 +58,7 @@ public class InternetAddressUtil {
 	}
 	
 	public static InternetAddress [] getAddresses(String mailingList)
-		throws Exception {
+		throws AddressException, UnsupportedEncodingException {
 		
 		String [] entries = mailingList.split(",|;");
 
@@ -126,7 +126,7 @@ public class InternetAddressUtil {
 	}
 
 	public static InternetAddress [] removeEntry(
-		Address [] as, String emailAddress) {
+			Address [] as, String emailAddress) {
 
 		InternetAddress [] ias = (InternetAddress [])as;
 
