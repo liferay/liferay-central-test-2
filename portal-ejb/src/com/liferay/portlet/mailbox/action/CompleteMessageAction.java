@@ -51,12 +51,14 @@ import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.mailbox.RecipientException;
 import com.liferay.portlet.mailbox.util.MailAttachment;
 import com.liferay.portlet.mailbox.util.MailMessage;
 import com.liferay.portlet.mailbox.util.MailUtil;
 import com.liferay.portlet.mailbox.util.RemoteMailAttachment;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
 
 /**
@@ -127,6 +129,12 @@ public class CompleteMessageAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
+			if (e instanceof RecipientException) {
+				SessionErrors.add(req, e.getClass().getName());
+
+				setForward(req, "portlet.mailbox.edit_message");
+			}
+
 			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}

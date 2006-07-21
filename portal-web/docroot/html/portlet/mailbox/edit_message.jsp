@@ -23,6 +23,8 @@
 %>
 
 <%@ include file="/html/portlet/init.jsp" %>
+<%@ page import="com.liferay.portlet.mailbox.ContentException" %>
+<%@ page import="com.liferay.portlet.mailbox.RecipientException" %>
 <%@ page import="com.liferay.portlet.mailbox.util.RemoteMailAttachment" %>
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.journal.edit_article_content_xsd_el.jsp";
@@ -134,6 +136,9 @@ Long draftId = (Long)request.getAttribute(WebKeys.MAIL_DRAFT_ID);
 		document.getElementById("<portlet:namespace />files").deleteRow(delrow.rowIndex);
 	}
 </script>
+
+<liferay-ui:error exception="<%= ContentException.class %>" message="please-enter-valid-content" />
+<liferay-ui:error exception="<%= RecipientException.class %>" message="please-enter-a-valid-email-address" />
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/complete_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveArticle(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />

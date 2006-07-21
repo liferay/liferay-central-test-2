@@ -811,6 +811,7 @@
 
 		<action path="/mailbox/complete_message" type="com.liferay.portlet.mailbox.action.CompleteMessageAction">
 			<forward name="portlet.mailbox.view" path="portlet.mailbox.view" />
+			<forward name="portlet.mailbox.edit_message" path="portlet.mailbox.edit_message" />
 		</action>
 		
 		<action path="/mailbox/get_attachment" type="com.liferay.portlet.mailbox.action.GetAttachmentAction" />

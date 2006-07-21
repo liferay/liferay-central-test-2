@@ -69,6 +69,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mailbox.ContentException;
 import com.liferay.portlet.mailbox.ContentPathException;
 import com.liferay.portlet.mailbox.FolderException;
+import com.liferay.portlet.mailbox.RecipientException;
 import com.liferay.portlet.mailbox.StoreException;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
@@ -133,9 +134,16 @@ public class MailUtil {
 	public static void completeMessage(HttpSession ses, MailMessage mm, 
 			boolean send, long draftId, String url)
 		throws ContentException, ContentPathException, FolderException, 
-			StoreException {
+			RecipientException, StoreException {
 
 		try {
+			if (send && Validator.isNull(mm.getTo()) && 
+				Validator.isNull(mm.getCc()) && Validator.isNull(mm.getBcc())) {
+
+				_log.error("A message with no recipients cannot be sent");
+				throw new RecipientException();
+			}
+
 			String fromAddy = ((InternetAddress)mm.getFrom()).getAddress();
 			String fromName = ((InternetAddress)mm.getFrom()).getPersonal();
 
@@ -154,7 +162,7 @@ public class MailUtil {
 			}
 
 			_replaceEmbeddedImages(ses, mm, url);
-			
+
 			Multipart multipart = new MimeMultipart();
 			
 			BodyPart bodypart = new MimeBodyPart();
@@ -464,14 +472,16 @@ public class MailUtil {
 
 			    	StringBuffer email = new StringBuffer();
 
-			    	for (int j = 0; j < recipients.length; j++) {
-			    		InternetAddress ia = (InternetAddress)recipients[j];
-			    		email.append(
-			    			GetterUtil.get(ia.getPersonal(), ia.getAddress()));
-
-			    		if (j < recipients.length - 1) {
-			    			email.append(", ");
-			    		}
+			    	if (!Validator.isNull(recipients)) {
+				    	for (int j = 0; j < recipients.length; j++) {
+				    		InternetAddress ia = (InternetAddress)recipients[j];
+				    		email.append(
+				    			GetterUtil.get(ia.getPersonal(), ia.getAddress()));
+	
+				    		if (j < recipients.length - 1) {
+				    			email.append(", ");
+				    		}
+				    	}
 			    	}
 
 			    	me.setRecipient(email.toString());
@@ -884,7 +894,7 @@ public class MailUtil {
 			return folder;
 		}
 		else {
-			_log.error("A folder must first be selected");
+			_log.warn("A folder must first be selected");
 			throw new FolderException();
 		}
 	}
