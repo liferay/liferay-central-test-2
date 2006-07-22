@@ -23,6 +23,7 @@ package com.liferay.portlet.mail.util.comparator;
 
 import com.liferay.portlet.mail.util.MailEnvelope;
 import com.liferay.util.DateUtil;
+import com.liferay.util.GetterUtil;
 
 import java.util.Comparator;
 
@@ -47,8 +48,9 @@ public class RecipientComparator implements Comparator {
 		int comparison = 0;
 
 		if (_asc) {
-			comparison = 
-				me0.getRecipient().trim().compareTo(me1.getRecipient().trim());
+			comparison = GetterUtil.getString(me0.getRecipient()).trim().
+				compareTo(GetterUtil.getString(me1.getRecipient()).trim());
+
 			if (comparison == 0) {
 				comparison = DateUtil.compareTo(me0.getDate(), me1.getDate());
 				
@@ -58,8 +60,9 @@ public class RecipientComparator implements Comparator {
 			}
 		}
 		else {
-			comparison = 
-				me1.getRecipient().trim().compareTo(me0.getRecipient().trim());
+			comparison = GetterUtil.getString(me1.getRecipient()).trim().
+				compareTo(GetterUtil.getString(me0.getRecipient()).trim());
+
 			if (comparison == 0) {
 				comparison = DateUtil.compareTo(me1.getDate(), me0.getDate());
 				

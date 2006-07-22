@@ -23,6 +23,7 @@ package com.liferay.portlet.mail.util.comparator;
 
 import com.liferay.portlet.mail.util.MailEnvelope;
 import com.liferay.util.DateUtil;
+import com.liferay.util.GetterUtil;
 
 import java.util.Comparator;
 
@@ -43,8 +44,10 @@ public class SubjectComparator implements Comparator {
 		MailEnvelope me1 = (MailEnvelope)arg1;
 		Long uid0 = new Long(me0.getMsgUID());
 		Long uid1 = new Long(me1.getMsgUID());
-		String subj0 = _stripPrefixes(me0.getSubject().trim().toLowerCase());
-		String subj1 = _stripPrefixes(me1.getSubject().trim().toLowerCase());
+		String subj0 = _stripPrefixes(
+			GetterUtil.getString(me0.getSubject()).trim().toLowerCase());
+		String subj1 = _stripPrefixes(
+			GetterUtil.getString(me1.getSubject()).trim().toLowerCase());
 
 		int comparison = 0;
 

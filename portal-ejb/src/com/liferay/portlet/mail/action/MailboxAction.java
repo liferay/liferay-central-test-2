@@ -233,13 +233,11 @@ public class MailboxAction extends JSONAction {
 			String day = df.format(me.getDate());
 			if (td.equals(day)) {
 				formattedDate = LanguageUtil.get(user, "today") + 
-					StringPool.COMMA + StringPool.SPACE + 
-					tf.format(me.getDate());
+					StringPool.SPACE + tf.format(me.getDate());
 			}
 			else if (yd.equals(day)) {
 				formattedDate = LanguageUtil.get(user, "yesterday") + 
-					StringPool.COMMA + StringPool.SPACE + 
-					tf.format(me.getDate());
+					StringPool.SPACE + tf.format(me.getDate());
 			}
 			else {
 				formattedDate = dtf.format(me.getDate());

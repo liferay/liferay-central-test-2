@@ -484,7 +484,9 @@ public class MailUtil {
 				    	}
 			    	}
 
-			    	me.setRecipient(email.toString());
+			    	if (email.length() > 0) {
+			    		me.setRecipient(email.toString());
+			    	}
 				}
 				else {
 					Address [] from = msgs[ii].getFrom();

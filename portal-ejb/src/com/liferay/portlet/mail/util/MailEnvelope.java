@@ -34,11 +34,6 @@ import java.util.Date;
  */
 public class MailEnvelope {
 
-	public MailEnvelope() {
-		_recipient = StringPool.BLANK;
-		_subject = StringPool.BLANK;
-	}
-
 	public String getRecipient() {
 		return _recipient;
 	}
