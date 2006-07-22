@@ -23,6 +23,7 @@
 package com.liferay.portlet.mail.action;
 
 import java.text.DateFormat;
+import java.util.Date;
 
 import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
@@ -165,8 +166,13 @@ public class EditMessageAction extends PortletAction {
 	private String _buildBody(MailMessage mm, DateFormat dateFormatter) {
 		InternetAddress from = ((InternetAddress)mm.getFrom());
 
+		Date today = new Date();
+		
 		StringBuffer body = new StringBuffer();
-		body.append("<br /><br />On " + dateFormatter.format(mm.getSentDate()));
+		body.append("<br /><br />");
+		body.append(
+			"<!-- LIFERAY-GENERATED-QUOTE-BEGIN-" + today.getTime() + " -->");
+		body.append("On " + dateFormatter.format(mm.getSentDate()));
 		body.append(StringPool.COMMA + StringPool.NBSP + from.getPersonal());
 		body.append("&lt;<a href=\"mailto:" + from.getAddress() + "\">");
 		body.append(from.getAddress() + "</a>&gt; wrote:<br />");
@@ -175,6 +181,8 @@ public class EditMessageAction extends PortletAction {
 		body.append("margin: 0pt 0pt 0pt 1ex; ");
 		body.append("padding-left: 1ex; \">");
 		body.append(mm.getHtmlBody() + "</div>");;
+		body.append(
+			"<!-- LIFERAY-GENERATED-QUOTE-END-" + today.getTime() + " -->");
 
 		return body.toString();
 	}
