@@ -23,9 +23,9 @@
 %>
 
 <%@ include file="/html/portlet/init.jsp" %>
-<%@ page import="com.liferay.portlet.mailbox.ContentException" %>
-<%@ page import="com.liferay.portlet.mailbox.RecipientException" %>
-<%@ page import="com.liferay.portlet.mailbox.util.RemoteMailAttachment" %>
+<%@ page import="com.liferay.portlet.mail.ContentException" %>
+<%@ page import="com.liferay.portlet.mail.RecipientException" %>
+<%@ page import="com.liferay.portlet.mail.util.RemoteMailAttachment" %>
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.journal.edit_article_content_xsd_el.jsp";
 %>
@@ -74,7 +74,7 @@ Long draftId = (Long)request.getAttribute(WebKeys.MAIL_DRAFT_ID);
 			}
 		}
 
-		loadPage("<%= themeDisplay.getPathMain() %>/mailbox/action", queryString, <portlet:namespace />saveDraftReturn);
+		loadPage("<%= themeDisplay.getPathMain() %>/mail/action", queryString, <portlet:namespace />saveDraftReturn);
 	}
 	
 	function <portlet:namespace />saveDraftReturn(xmlHttpReq) {
@@ -119,7 +119,7 @@ Long draftId = (Long)request.getAttribute(WebKeys.MAIL_DRAFT_ID);
 			checkbox.value = contentPath;
 
 			var filename = document.createElement("span");
-			var href = "<%= themeDisplay.getPathMain() %>/mailbox/get_attachment?fileName=" + remoteFile + "&contentPath=" + contentPath;			
+			var href = "<%= themeDisplay.getPathMain() %>/mail/get_attachment?fileName=" + remoteFile + "&contentPath=" + contentPath;			
 			filename.innerHTML = '<span class="font-small"><a href="' + href + '">' + remoteFile + '</a></span>';
 			
 			newrow.insertCell(0);
@@ -140,7 +140,7 @@ Long draftId = (Long)request.getAttribute(WebKeys.MAIL_DRAFT_ID);
 <liferay-ui:error exception="<%= ContentException.class %>" message="please-enter-valid-content" />
 <liferay-ui:error exception="<%= RecipientException.class %>" message="please-enter-a-valid-email-address" />
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/complete_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveArticle(); return false;">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/complete_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveArticle(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />body" type="hidden" value="" />
 <input name="<portlet:namespace />draftId" type="hidden" value="<%= draftId != null ? draftId : new Long(-1L) %>" />
@@ -180,7 +180,7 @@ Long draftId = (Long)request.getAttribute(WebKeys.MAIL_DRAFT_ID);
 
 	<div>
 		<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "send") %>' onclick="<portlet:namespace />completeMessage(true)" />
-		<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onclick='self.location="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/view" /></portlet:renderURL>"' />
+		<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onclick='self.location="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/view" /></portlet:renderURL>"' />
 		<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "save") %>' onclick="<portlet:namespace />completeMessage(false)" />
 	</div>
 

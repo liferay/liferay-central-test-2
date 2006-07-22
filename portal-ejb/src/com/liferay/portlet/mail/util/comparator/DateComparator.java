@@ -19,22 +19,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.liferay.portlet.mailbox.util.comparator;
+package com.liferay.portlet.mail.util.comparator;
 
-import com.liferay.portlet.mailbox.util.MailEnvelope;
+import com.liferay.portlet.mail.util.MailEnvelope;
 import com.liferay.util.DateUtil;
 
 import java.util.Comparator;
 
 /**
- * <a href="SubjectComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="DateComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
  *
  */
-public class SubjectComparator implements Comparator {
+public class DateComparator implements Comparator {
 
-	public SubjectComparator(boolean asc) {
+	public DateComparator(boolean asc) {
 		_asc = asc;
 	}
 
@@ -43,43 +43,25 @@ public class SubjectComparator implements Comparator {
 		MailEnvelope me1 = (MailEnvelope)arg1;
 		Long uid0 = new Long(me0.getMsgUID());
 		Long uid1 = new Long(me1.getMsgUID());
-		String subj0 = _stripPrefixes(me0.getSubject().trim().toLowerCase());
-		String subj1 = _stripPrefixes(me1.getSubject().trim().toLowerCase());
 
 		int comparison = 0;
 
 		if (_asc) {
-			comparison = subj0.compareTo(subj1);
+			comparison = DateUtil.compareTo(me0.getDate(), me1.getDate());
+			
 			if (comparison == 0) {
-				comparison = DateUtil.compareTo(me0.getDate(), me1.getDate());
-				
-				if (comparison == 0) {
-					comparison = uid0.compareTo(uid1);
-				}
+				comparison = uid0.compareTo(uid1);
 			}
 		}
 		else {
-			comparison = subj1.compareTo(subj0);
+			comparison = DateUtil.compareTo(me1.getDate(), me0.getDate());
+			
 			if (comparison == 0) {
-				comparison = DateUtil.compareTo(me1.getDate(), me0.getDate());
-				
-				if (comparison == 0) {
-					comparison = uid1.compareTo(uid0);
-				}
+				comparison = uid1.compareTo(uid0);
 			}
 		}
 		
 		return comparison;
-	}
-	
-	private String _stripPrefixes(String subject) {
-		while (subject.startsWith("re:") || subject.startsWith("re>") ||
-			subject.startsWith("fw:") || subject.startsWith("fw>")) {
-			
-			subject = subject.substring(3).trim();
-		}
-
-		return subject;
 	}
 
 	private boolean _asc;

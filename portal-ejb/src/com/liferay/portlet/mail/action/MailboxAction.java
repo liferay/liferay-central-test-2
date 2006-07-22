@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.mailbox.action;
+package com.liferay.portlet.mail.action;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -53,13 +53,14 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.DateFormats;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.mailbox.util.MailEnvelope;
-import com.liferay.portlet.mailbox.util.MailFolder;
-import com.liferay.portlet.mailbox.util.MailMessage;
-import com.liferay.portlet.mailbox.util.MailUtil;
-import com.liferay.portlet.mailbox.util.comparator.DateComparator;
-import com.liferay.portlet.mailbox.util.comparator.RecipientComparator;
-import com.liferay.portlet.mailbox.util.comparator.SubjectComparator;
+import com.liferay.portlet.mail.util.MailEnvelope;
+import com.liferay.portlet.mail.util.MailFolder;
+import com.liferay.portlet.mail.util.MailMessage;
+import com.liferay.portlet.mail.util.MailUtil;
+import com.liferay.portlet.mail.util.comparator.DateComparator;
+import com.liferay.portlet.mail.util.comparator.RecipientComparator;
+import com.liferay.portlet.mail.util.comparator.SubjectComparator;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
@@ -165,14 +166,14 @@ public class MailboxAction extends JSONAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String url = themeDisplay.getPathMain() + "/mailbox/get_attachment?";
+		String url = themeDisplay.getPathMain() + "/mail/get_attachment?";
 
 		MailMessage mm = MailUtil.getMessage(req.getSession(), messageId, url);
 
 		req.setAttribute("mailMessage", mm);
 		
 		PortalUtil.renderPage(header, ctx, req, res,
-			"/html/portlet/mailbox/message_details.jsp");
+			"/html/portlet/mail/message_details.jsp");
 		
 		jsonObj.put("body", mm.getHtmlBody());
 		jsonObj.put("header", header.toString());
@@ -246,8 +247,10 @@ public class MailboxAction extends JSONAction {
 
 			jMe.put("date", formattedDate);
 			jMe.put("id", me.getMsgUID());
-			jMe.put("email", me.getRecipient());
-			jMe.put("subject", me.getSubject());
+			jMe.put("email", 
+				GetterUtil.getString(me.getRecipient(), StringPool.NBSP));
+			jMe.put("subject", 
+				GetterUtil.getString(me.getSubject(), StringPool.NBSP));
 			jMe.put("recent", me.isRecent());
 			meArray.put(jMe);
 		}

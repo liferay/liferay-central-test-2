@@ -797,27 +797,27 @@
 			<forward name="portlet.login.view" path="portlet.login.view" />
 		</action>
 
-		<!-- Mailbox -->
+		<!-- Mail -->
 
-		<action path="/mailbox/view" type="com.liferay.portlet.mailbox.action.ViewMailboxAction">
-			<forward name="portlet.mailbox.view" path="portlet.mailbox.view" />
+		<action path="/mail/view" type="com.liferay.portlet.mail.action.ViewMailboxAction">
+			<forward name="portlet.mail.view" path="portlet.mail.view" />
 		</action>
 
-		<action path="/mailbox/action" type="com.liferay.portlet.mailbox.action.MailboxAction" />
+		<action path="/mail/action" type="com.liferay.portlet.mail.action.MailboxAction" />
 
-		<action path="/mailbox/edit_message" type="com.liferay.portlet.mailbox.action.EditMessageAction">
-			<forward name="portlet.mailbox.edit_message" path="portlet.mailbox.edit_message" />
+		<action path="/mail/edit_message" type="com.liferay.portlet.mail.action.EditMessageAction">
+			<forward name="portlet.mail.edit_message" path="portlet.mail.edit_message" />
 		</action>
 
-		<action path="/mailbox/complete_message" type="com.liferay.portlet.mailbox.action.CompleteMessageAction">
-			<forward name="portlet.mailbox.view" path="portlet.mailbox.view" />
-			<forward name="portlet.mailbox.edit_message" path="portlet.mailbox.edit_message" />
+		<action path="/mail/complete_message" type="com.liferay.portlet.mail.action.CompleteMessageAction">
+			<forward name="portlet.mail.view" path="portlet.mail.view" />
+			<forward name="portlet.mail.edit_message" path="portlet.mail.edit_message" />
 		</action>
 		
-		<action path="/mailbox/get_attachment" type="com.liferay.portlet.mailbox.action.GetAttachmentAction" />
+		<action path="/mail/get_attachment" type="com.liferay.portlet.mail.action.GetAttachmentAction" />
 		
-		<action path="/mailbox/view_message" type="com.liferay.portlet.mailbox.action.ViewMessageAction">
-			<forward name="portlet.mailbox.view_message" path="/portlet/mailbox/view_message.jsp" />
+		<action path="/mail/view_message" type="com.liferay.portlet.mail.action.ViewMessageAction">
+			<forward name="portlet.mail.view_message" path="/portlet/mail/view_message.jsp" />
 		</action>
 		
 		<!-- Maps -->

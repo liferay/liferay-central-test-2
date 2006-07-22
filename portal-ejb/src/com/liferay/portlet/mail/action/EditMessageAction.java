@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.mailbox.action;
+package com.liferay.portlet.mail.action;
 
 import java.text.DateFormat;
 
@@ -32,8 +32,8 @@ import com.liferay.util.InternetAddressUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.RenderRequestImpl;
-import com.liferay.portlet.mailbox.util.MailMessage;
-import com.liferay.portlet.mailbox.util.MailUtil;
+import com.liferay.portlet.mail.util.MailMessage;
+import com.liferay.portlet.mail.util.MailUtil;
 import com.liferay.util.Html;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
@@ -74,7 +74,7 @@ public class EditMessageAction extends PortletAction {
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 		String attachmentUrl = 
-			themeDisplay.getPathMain() + "/mailbox/get_attachment?";
+			themeDisplay.getPathMain() + "/mail/get_attachment?";
 
 		if (composeAction.equals("forward") || 
 			composeAction.startsWith("reply")) {
@@ -159,7 +159,7 @@ public class EditMessageAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.mailbox.edit_message"));
+			getForward(req, "portlet.mail.edit_message"));
 	}
 
 	private String _buildBody(MailMessage mm, DateFormat dateFormatter) {

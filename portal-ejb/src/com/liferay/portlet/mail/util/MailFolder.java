@@ -19,54 +19,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.liferay.portlet.mailbox.util;
+package com.liferay.portlet.mail.util;
 
 /**
- * <a href="MailAttachment.java.html"><b><i>View Source</i></b></a>
+ * <a href="MailFolder.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
  *
  */
-public class MailAttachment {
+public class MailFolder {
 
-    public String getContentType() {
-        return _contentType;
-    }
+	public MailFolder(long messageCount, String name, long newMessageCount) {
+		_messageCount = messageCount;
+		_name = name;
+		_newMessageCount = newMessageCount;
+	}
 
-    public void setContentType(String contentType) {
-        _contentType = contentType;
-    }
+	public long getMessageCount() {
+		return _messageCount;
+	}
 
-    public String getFilename() {
-        return _filename;
-    }
+	public String getName() {
+		return _name;
+	}
 
-    public void setFilename(String filename) {
-        _filename = filename;
-    }
+	public long getNewMessageCount() {
+		return _newMessageCount;
+	}
 
-    public byte [] getContent() {
-        return _content;
-    }
+	private long _messageCount;
 
-    public void setContent(byte [] content) {
-        _content = content;
-    }
+	private String _name;
 
-    public String getContentID() {
-        return _contentID;
-    }
-
-    public void setContentID(String contentID) {
-    	_contentID = contentID;
-    }
-
-    private String _contentType;
-
-    private String _filename;
-    
-    private byte [] _content;
-    
-    private String _contentID;
+	private long _newMessageCount;
 
 }

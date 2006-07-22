@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -20,20 +19,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%@
-include file="/html/portlet/init.jsp" %><%@
-page import="com.liferay.portlet.mailbox.util.MailMessage"
-%>
-<%
+package com.liferay.portlet.mail;
 
-MailMessage mm = (MailMessage)request.getAttribute("mailMessage");
-boolean header = ParamUtil.getBoolean(request, "header");
+import com.liferay.portal.PortalException;
 
-%>
+/**
+ * <a href="ContentPathException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Alexander Chow
+ *
+ */
+public class ContentPathException extends PortalException {
 
-<c:if test="<%= header == true %>">
-	<liferay-util:include page="/html/portlet/mailbox/message_details.jsp" />
-	<hr /><br />
-</c:if>
+	public ContentPathException() {
+		super();
+	}
 
-<%= mm.getHtmlBody() %>
+	public ContentPathException(String msg) {
+		super(msg);
+	}
+
+	public ContentPathException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public ContentPathException(Throwable cause) {
+		super(cause);
+	}
+	
+}

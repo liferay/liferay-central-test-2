@@ -22,8 +22,8 @@
  */
 %><%@
 include file="/html/portlet/init.jsp" %><%@
-page import="com.liferay.portlet.mailbox.util.MailMessage,
-			com.liferay.portlet.mailbox.util.RemoteMailAttachment,
+page import="com.liferay.portlet.mail.util.MailMessage,
+			com.liferay.portlet.mail.util.RemoteMailAttachment,
 			com.liferay.util.Html,
 			java.lang.Object.StringBuffer,
 			javax.mail.Address"
@@ -88,7 +88,7 @@ Address []to = mm.getTo();
 					}
 
 					RemoteMailAttachment rma = (RemoteMailAttachment)attachments.get(i);
-					String url = themeDisplay.getPathMain() + "/mailbox/get_attachment?fileName=" + rma.getFilename() + "&contentPath=" + rma.getContentPath();
+					String url = themeDisplay.getPathMain() + "/mail/get_attachment?fileName=" + rma.getFilename() + "&contentPath=" + rma.getContentPath();
 					%>
 						<a href="<%= url %>"><%= rma.getFilename() %></a><%= comma %>
 					<%

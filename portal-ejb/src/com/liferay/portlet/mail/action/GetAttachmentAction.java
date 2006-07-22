@@ -1,4 +1,4 @@
-package com.liferay.portlet.mailbox.action;
+package com.liferay.portlet.mail.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +12,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.liferay.portal.shared.util.StackTraceUtil;
-import com.liferay.portlet.mailbox.util.MailUtil;
+import com.liferay.portlet.mail.util.MailUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 

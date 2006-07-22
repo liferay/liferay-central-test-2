@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.mailbox.util;
+package com.liferay.portlet.mail.util;
 
 import com.liferay.util.StringPool;
 

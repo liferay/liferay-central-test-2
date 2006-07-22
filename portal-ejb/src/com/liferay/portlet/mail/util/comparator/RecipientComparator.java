@@ -19,38 +19,59 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.liferay.portlet.mailbox.util;
+package com.liferay.portlet.mail.util.comparator;
+
+import com.liferay.portlet.mail.util.MailEnvelope;
+import com.liferay.util.DateUtil;
+
+import java.util.Comparator;
 
 /**
- * <a href="MailFolder.java.html"><b><i>View Source</i></b></a>
+ * <a href="RecipientComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
  *
  */
-public class MailFolder {
+public class RecipientComparator implements Comparator {
 
-	public MailFolder(long messageCount, String name, long newMessageCount) {
-		_messageCount = messageCount;
-		_name = name;
-		_newMessageCount = newMessageCount;
+	public RecipientComparator(boolean asc) {
+		_asc = asc;
 	}
 
-	public long getMessageCount() {
-		return _messageCount;
+	public int compare(Object arg0, Object arg1) {
+		MailEnvelope me0 = (MailEnvelope)arg0;
+		MailEnvelope me1 = (MailEnvelope)arg1;
+		Long uid0 = new Long(me0.getMsgUID());
+		Long uid1 = new Long(me1.getMsgUID());
+
+		int comparison = 0;
+
+		if (_asc) {
+			comparison = 
+				me0.getRecipient().trim().compareTo(me1.getRecipient().trim());
+			if (comparison == 0) {
+				comparison = DateUtil.compareTo(me0.getDate(), me1.getDate());
+				
+				if (comparison == 0) {
+					comparison = uid0.compareTo(uid1);
+				}
+			}
+		}
+		else {
+			comparison = 
+				me1.getRecipient().trim().compareTo(me0.getRecipient().trim());
+			if (comparison == 0) {
+				comparison = DateUtil.compareTo(me1.getDate(), me0.getDate());
+				
+				if (comparison == 0) {
+					comparison = uid1.compareTo(uid0);
+				}
+			}
+		}
+
+		return comparison;
 	}
 
-	public String getName() {
-		return _name;
-	}
-
-	public long getNewMessageCount() {
-		return _newMessageCount;
-	}
-
-	private long _messageCount;
-
-	private String _name;
-
-	private long _newMessageCount;
+	private boolean _asc;
 
 }

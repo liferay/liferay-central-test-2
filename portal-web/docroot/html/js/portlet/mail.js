@@ -13,13 +13,13 @@ function MailSummaryObject(sender, subject, date, id, recent) {
 	subject.parent = this;
 	date.parent = this;
 	
-	sender.onmousedown = subject.onmousedown = date.onmousedown = Mailbox.onSummaryMouseDown;
-	sender.ondblclick = subject.ondblclick = date.ondblclick = Mailbox.onSummaryDblclick;
+	sender.onmousedown = subject.onmousedown = date.onmousedown = Mail.onSummaryMouseDown;
+	sender.ondblclick = subject.ondblclick = date.ondblclick = Mail.onSummaryDblclick;
 }
 
 
 
-var Mailbox = {
+var Mail = {
 	colorHighlight : "#c3d4ee",
 	currentFolder : null,
 	currentFolderId : "",
@@ -48,9 +48,9 @@ var Mailbox = {
 				folderItem.seOffset = Coordinates.southeastOffset(folderItem, true);
 			}
 			
-			if (Mailbox.isMoveAllowed(folderItem.folder.id)) {
+			if (Mail.isMoveAllowed(folderItem.folder.id)) {
 				if (coord.inside(folderItem.nwOffset, folderItem.seOffset)) {
-						folderItem.style.backgroundColor = Mailbox.colorHighlight;
+						folderItem.style.backgroundColor = Mail.colorHighlight;
 						foundInside = true;
 				}
 				else {
@@ -59,8 +59,8 @@ var Mailbox = {
 			}
 		}
 		
-		if (Mailbox.dragIndicator != null) {
-			var indicator = Mailbox.dragIndicator.getElementsByTagName("span")[0];
+		if (Mail.dragIndicator != null) {
+			var indicator = Mail.dragIndicator.getElementsByTagName("span")[0];
 			if (foundInside) {
 				indicator.innerHTML = "&laquo;";
 				indicator.style.color = "#55FF55";
@@ -73,7 +73,7 @@ var Mailbox = {
 	},
 	
 	clearPreview : function() {
-		if (!Mailbox.summaryList) {
+		if (!Mail.summaryList) {
 			return;
 		}
 		
@@ -81,15 +81,15 @@ var Mailbox = {
 		var msgsSubject = document.getElementById("portlet-mail-msgs-subject");
 		var msgsDate = document.getElementById("portlet-mail-msgs-received");
 		
-		Mailbox.summaryList.head = null;
-		Mailbox.summaryList.tail = null;
+		Mail.summaryList.head = null;
+		Mail.summaryList.tail = null;
 		msgsSender.innerHTML = "";
 		msgsSubject.innerHTML = "";
 		msgsDate.innerHTML = "";
 	},
 
 	decrementCount : function (reverse) {
-		var spanList = Mailbox.currentFolder.li.getElementsByTagName("span");
+		var spanList = Mail.currentFolder.li.getElementsByTagName("span");
 		if (spanList.length == 2) {
 			var countSpan = spanList[0];
 			var countNum = parseInt(spanList[1].innerHTML);
@@ -110,15 +110,15 @@ var Mailbox = {
 	},
 	
 	deleteSelectedMessages : function() {
-		clearTimeout(Mailbox.messageTimer);
+		clearTimeout(Mail.messageTimer);
 		
-		var deleteList = Mailbox.getSelectedMessages();
+		var deleteList = Mail.getSelectedMessages();
 		var confirmMsg = "Delete " + deleteList.length + " message" +
-			(deleteList.length > 1 ? "s" : "") + " from " + Mailbox.currentFolder.name + "?";
+			(deleteList.length > 1 ? "s" : "") + " from " + Mail.currentFolder.name + "?";
 		
 		if (deleteList.length > 0 && confirm(confirmMsg)) {
-			loadPage(themeDisplay.getPathMain() + "/mailbox/action", "cmd=deleteMessages&folderId=" + Mailbox.currentFolder.id + "&messages=" + deleteList);
-			Mailbox.removeSelectedMessages();
+			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=deleteMessages&folderId=" + Mail.currentFolder.id + "&messages=" + deleteList);
+			Mail.removeSelectedMessages();
 		}
 	},	
 	
@@ -133,23 +133,23 @@ var Mailbox = {
 					Coordinates.southeastOffset(folderItem, true));
 					
 			if (foundFolder) {
-				Mailbox.moveToFolder(folderItem.folder.id, folderItem.folder.id);
+				Mail.moveToFolder(folderItem.folder.id, folderItem.folder.id);
 			}
 		}
 	},
 
 	resetLastSelected : function() {
-		Mailbox.lastSelected = null;
-		Mailbox.groupStart = null;
+		Mail.lastSelected = null;
+		Mail.groupStart = null;
 	},
 	
 	removeSelectedMessages : function() {
 		var detailsFrame = document.getElementById("portlet-mail-msg-detailed-frame");
 		detailsFrame.src = "";
 		
-		Mailbox.getSelectedMessages(Mailbox.removeSummary);
-		Mailbox.resetLastSelected();
-		Mailbox.getFolderDetails();
+		Mail.getSelectedMessages(Mail.removeSummary);
+		Mail.resetLastSelected();
+		Mail.getFolderDetails();
 	},
 	
 	removeSummary : function(msObj) {
@@ -173,23 +173,23 @@ var Mailbox = {
 			prevMs.next = nextMs;
 		}
 		
-		if (Mailbox.summaryList.tail == msObj) {
-			Mailbox.summaryList.tail = prevMs;
+		if (Mail.summaryList.tail == msObj) {
+			Mail.summaryList.tail = prevMs;
 		}
-		if (Mailbox.summaryList.head == msObj) {
-			Mailbox.summaryList.head = nextMs;
+		if (Mail.summaryList.head == msObj) {
+			Mail.summaryList.head = nextMs;
 		}
 		
 		msObj = null;
 	},
 	
 	submitCompose : function(action, form) {
-		var selList = Mailbox.getSelectedMessages();
+		var selList = Mail.getSelectedMessages();
 		
 		if (selList > 0) {
 			document.getElementById("portlet-mail-compose-action").value = action;
-			document.getElementById("portlet-mail-message-id").value = Mailbox.currentMessageId;
-			document.getElementById("portlet-mail-folder-id").value = Mailbox.currentFolder.id;
+			document.getElementById("portlet-mail-message-id").value = Mail.currentMessageId;
+			document.getElementById("portlet-mail-folder-id").value = Mail.currentFolder.id;
 
 			submitForm(form);
 		}
@@ -205,13 +205,13 @@ var Mailbox = {
 		var totalDiv = document.createElement("div");
 		var unreadDiv = document.createElement("div");
 		
-		folderDiv.innerHTML = Mailbox.currentFolder.name;
+		folderDiv.innerHTML = Mail.currentFolder.name;
 		folderDiv.style.fontWeight = "bold";
 		folderDiv.className = "font-xx-large";
-		if (Mailbox.currentFolder.newCount > 0) {
-			unreadDiv.innerHTML = Mailbox.currentFolder.newCount + "&nbsp;Unread";
+		if (Mail.currentFolder.newCount > 0) {
+			unreadDiv.innerHTML = Mail.currentFolder.newCount + "&nbsp;Unread";
 		}
-		totalDiv.innerHTML = Mailbox.currentFolder.totalCount + "&nbsp;Total";
+		totalDiv.innerHTML = Mail.currentFolder.totalCount + "&nbsp;Total";
 
 		detailsFrame.src = "";
 		mailHeader.innerHTML = "";
@@ -221,7 +221,7 @@ var Mailbox = {
 	},
 	
 	getFolders : function() {
-		loadPage(themeDisplay.getPathMain() + "/mailbox/action", "cmd=getFolders", Mailbox.getFoldersReturn);
+		loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=getFolders", Mail.getFoldersReturn);
 	},
 	
 	getFoldersReturn : function(xmlHttpReq) {
@@ -230,7 +230,7 @@ var Mailbox = {
 		var folderList = document.createElement("ul");
 		var folders = foldersObject.folders;
 		var selectedFolder = null;
-		Mailbox.foldersList = folders;
+		Mail.foldersList = folders;
 		
 		var animation = folderPane.getElementsByTagName("div")[0];
 		animation.parentNode.removeChild(animation);
@@ -249,11 +249,11 @@ var Mailbox = {
 				newCount.className = "font-small"
 				folderItem.innerHTML = folder.name;
 				folderItem.folder = folder;
-				folderItem.onclick = Mailbox.onFolderSelect;
+				folderItem.onclick = Mail.onFolderSelect;
 				folderItem.appendChild(newCount);
 				folderList.appendChild(folderItem);
 				
-				if (folder.id == Mailbox.currentFolderId) {
+				if (folder.id == Mail.currentFolderId) {
 					/* Previous folder ID was set */
 					selectedFolder = folder;
 				}
@@ -261,18 +261,18 @@ var Mailbox = {
 			
 			folderPane.appendChild(folderList);
 			
-			Mailbox.setCurrentFolder(selectedFolder);
+			Mail.setCurrentFolder(selectedFolder);
 		}
 		
-		Mailbox.getPreview();
+		Mail.getPreview();
 	},
 	
 	getMessageDetails : function(messageId) {
 		
-		if (!Mailbox.currentMessage || messageId != Mailbox.currentMessageId) {
-			loadPage(themeDisplay.getPathMain() + "/mailbox/action",
-				"cmd=getMessage&messageId=" + messageId + "&folderId=" + Mailbox.currentFolder.id,
-				Mailbox.getMessageDetailsReturn, messageId);
+		if (!Mail.currentMessage || messageId != Mail.currentMessageId) {
+			loadPage(themeDisplay.getPathMain() + "/mail/action",
+				"cmd=getMessage&messageId=" + messageId + "&folderId=" + Mail.currentFolder.id,
+				Mail.getMessageDetailsReturn, messageId);
 				
 		}
 	},
@@ -284,40 +284,40 @@ var Mailbox = {
 		var tempBody = document.createElement("div");
 		var msgHeader = document.createElement("div");
 		
-		Mailbox.currentMessage = messageObj;
-		Mailbox.currentMessageId = messageId;
+		Mail.currentMessage = messageObj;
+		Mail.currentMessageId = messageId;
 		
 		msgHeader.innerHTML = messageObj.header;
 		
 		mailHeader.innerHTML = "";
 		mailHeader.appendChild(msgHeader);
 		
-		if (Mailbox.lastSelected.recent) {
-			Mailbox.decrementCount();
+		if (Mail.lastSelected.recent) {
+			Mail.decrementCount();
 			
-			var summaryField = Mailbox.lastSelected.head;
+			var summaryField = Mail.lastSelected.head;
 
 			while (summaryField) {
 				summaryField.style.fontWeight = "normal";
 				summaryField = summaryField.next;
 			}
 		
-			Mailbox.lastSelected.recent = false;
+			Mail.lastSelected.recent = false;
 		}
 
 		var iframe = document.getElementById("portlet-mail-msg-detailed-frame");
 
 		iframe.src = "";
-		iframe.src = themeDisplay.getPathMain() + "/mailbox/view_message?noCache=" + (new Date()).getTime();
+		iframe.src = themeDisplay.getPathMain() + "/mail/view_message?noCache=" + (new Date()).getTime();
 		return;
 	},
 	
 	getPreview : function () {
-		loadPage(themeDisplay.getPathMain() + "/mailbox/action",
-			"cmd=getPreview&folderId=" + Mailbox.currentFolder.id +
-			"&sortBy=" + Mailbox.sortBy.value +
-			"&asc=" + Mailbox.sortBy.asc,
-			Mailbox.getPreviewReturn);
+		loadPage(themeDisplay.getPathMain() + "/mail/action",
+			"cmd=getPreview&folderId=" + Mail.currentFolder.id +
+			"&sortBy=" + Mail.sortBy.value +
+			"&asc=" + Mail.sortBy.asc,
+			Mail.getPreviewReturn);
 			
 	},
 	
@@ -337,7 +337,7 @@ var Mailbox = {
 			subject.innerHTML = header.subject;
 			date.innerHTML = header.date;
 			var msObj = new MailSummaryObject(sender, subject, date, header.id, header.recent);
-			var summaryList = Mailbox.summaryList;
+			var summaryList = Mail.summaryList;
 			
 			if (header.recent) {
 				/* Bold recent messages */
@@ -363,10 +363,10 @@ var Mailbox = {
 			msgsSubject.appendChild(subject);
 			msgsDate.appendChild(date);
 			
-			if (Mailbox.currentMessageId == msObj.id) {
+			if (Mail.currentMessageId == msObj.id) {
 				/* Previous highlight state was set */
-				Mailbox.summaryHighlight(msObj);
-				Mailbox.lastSelected = msObj;
+				Mail.summaryHighlight(msObj);
+				Mail.lastSelected = msObj;
 			}
 		}
 	},
@@ -441,22 +441,22 @@ var Mailbox = {
 		msgsTitleSubject.value = "subject";
 		msgsTitleReceived.asc = false;
 		msgsTitleReceived.value = "date";
-		msgsTitleFrom.onclick = msgsTitleSubject.onclick = msgsTitleReceived.onclick = Mailbox.onSortClick;
-		Mailbox.sortBy = msgsTitleReceived;
-		Mailbox.updateSortArrow();
+		msgsTitleFrom.onclick = msgsTitleSubject.onclick = msgsTitleReceived.onclick = Mail.onSortClick;
+		Mail.sortBy = msgsTitleReceived;
+		Mail.updateSortArrow();
 		
 		if (is_ie) {
-			previewPane.onkeydown = Mailbox.onMailKeyPress;
+			previewPane.onkeydown = Mail.onMailKeyPress;
 		}
 		else {
-			document.onkeydown = Mailbox.onMailKeyPress;
+			document.onkeydown = Mail.onMailKeyPress;
 		}
 		previewPane.onselectstart = function() {return false;} // ie
 		previewPane.onmousedown = function() {return false;} // mozilla
 
-		window.unload = function() { Mailbox.clearPreview; }
+		window.unload = function() { Mail.clearPreview; }
 		
-		Mailbox.getFolders();
+		Mail.getFolders();
 	},
 	
 	isMoveAllowed : function (toFolderId) {
@@ -466,9 +466,9 @@ var Mailbox = {
 		 * NOTE: checkFolderLocation need same exceptions.
 		 */
 		 
-		if (Mailbox.currentFolderId == toFolderId ||
+		if (Mail.currentFolderId == toFolderId ||
 			toFolderId == "Drafts" ||
-			(Mailbox.currentFolderId == "Drafts" && toFolderId != "Trash")) {
+			(Mail.currentFolderId == "Drafts" && toFolderId != "Trash")) {
 			
 			return false;
 		}
@@ -478,12 +478,12 @@ var Mailbox = {
 	},
 	
 	moveToFolder : function(folderId, folderName) {
-		var moveList = Mailbox.getSelectedMessages();
+		var moveList = Mail.getSelectedMessages();
 		
 		if (moveList.length <- 0) {
 			alert("Please select messages to move");
 		}
-		else if (!Mailbox.isMoveAllowed(folderId)) {
+		else if (!Mail.isMoveAllowed(folderId)) {
 			alert("You cannot move to " + folderName);
 		}
 		else {
@@ -491,23 +491,23 @@ var Mailbox = {
 				(moveList.length > 1 ? "s" : "") + " to " + folderName + "?";
 			
 			if (confirm(confirmMsg)) {
-				Mailbox.removeSelectedMessages();
-				loadPage(themeDisplay.getPathMain() + "/mailbox/action", "cmd=moveMessages&folderId=" + folderId + "&messages=" + moveList);
+				Mail.removeSelectedMessages();
+				loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=moveMessages&folderId=" + folderId + "&messages=" + moveList);
 			}
 			
-			Mailbox.resetLastSelected();
+			Mail.resetLastSelected();
 		}
 		
 	},
 	
 	onFolderSelect : function() {
-		if (Mailbox.currentFolder.id != this.folder.id) {
-			Mailbox.currentMessage = null;
-			Mailbox.currentMessageId = null;
+		if (Mail.currentFolder.id != this.folder.id) {
+			Mail.currentMessage = null;
+			Mail.currentMessageId = null;
 			
-			Mailbox.setCurrentFolder(this.folder);
-			Mailbox.clearPreview();
-			Mailbox.getPreview();
+			Mail.setCurrentFolder(this.folder);
+			Mail.clearPreview();
+			Mail.getPreview();
 		}
 	},
 	
@@ -533,15 +533,15 @@ var Mailbox = {
 		var keycode = event.keyCode
 		
 		if ((keycode == Key.UP || keycode == Key.DOWN) &&
-			 Mailbox.summaryList.head != null) {
+			 Mail.summaryList.head != null) {
 			 
 			
-			var lastObj = Mailbox.lastSelected;
+			var lastObj = Mail.lastSelected;
 			var nextObj;
 			
-			if (Mailbox.lastSelected == null) {
-				Mailbox.lastSelected = Mailbox.summaryList.head;
-				nextObj = Mailbox.lastSelected;
+			if (Mail.lastSelected == null) {
+				Mail.lastSelected = Mail.summaryList.head;
+				nextObj = Mail.lastSelected;
 			}
 			else if (keycode == Key.DOWN) {
 				nextObj = lastObj.next;
@@ -552,32 +552,32 @@ var Mailbox = {
 			
 			if (nextObj) {
 				if (!event.shiftKey) {
-					Mailbox.summaryUnhighlightAll();
-					Mailbox.summaryHighlight(nextObj, event.shiftKey);
+					Mail.summaryUnhighlightAll();
+					Mail.summaryHighlight(nextObj, event.shiftKey);
 				}
 				else {
-					if (nextObj.index <= Mailbox.groupStart.index && keycode == Key.DOWN) {
-						Mailbox.summaryUnhighlight(Mailbox.lastSelected, true);
+					if (nextObj.index <= Mail.groupStart.index && keycode == Key.DOWN) {
+						Mail.summaryUnhighlight(Mail.lastSelected, true);
 					}
-					if (nextObj.index >= Mailbox.groupStart.index && keycode == Key.UP) {
-						Mailbox.summaryUnhighlight(Mailbox.lastSelected, true);
+					if (nextObj.index >= Mail.groupStart.index && keycode == Key.UP) {
+						Mail.summaryUnhighlight(Mail.lastSelected, true);
 					}
 					
-					Mailbox.summaryHighlight(nextObj, event.shiftKey);
+					Mail.summaryHighlight(nextObj, event.shiftKey);
 				}
-				Mailbox.groupStart = Mailbox.lastSelected;
+				Mail.groupStart = Mail.lastSelected;
 			}
 		}
 		else if (keycode == Key.DELETE) {
-			Mailbox.deleteSelectedMessages();
+			Mail.deleteSelectedMessages();
 		}
 		else if (keycode == Key.ESC) {
-			Mailbox.summaryUnhighlightAll();
-			Mailbox.getFolderDetails();
+			Mail.summaryUnhighlightAll();
+			Mail.getFolderDetails();
 		}
 		else if (event.ctrlKey) {
 			if (keycode == Key.A) {
-				Mailbox.summaryHighlightAll();
+				Mail.summaryHighlightAll();
 				return false;
 			}
 		}
@@ -589,27 +589,27 @@ var Mailbox = {
 	
 	onMoveFolderChange : function() {
 		if (this.selectedIndex != 0) {
-			Mailbox.moveToFolder(this.value, this.options[this.selectedIndex].innerHTML);
+			Mail.moveToFolder(this.value, this.options[this.selectedIndex].innerHTML);
 		}
 		
 		this.selectedIndex = 0;
 	},
 	
 	onSortClick : function() {
-		if (Mailbox.sortBy == this) {
+		if (Mail.sortBy == this) {
 			this.asc = this.asc ? false : true;
 		}
 	
-		Mailbox.sortBy = this;
-		Mailbox.clearPreview();
-		Mailbox.getPreview();
-		Mailbox.updateSortArrow();
+		Mail.sortBy = this;
+		Mail.clearPreview();
+		Mail.getPreview();
+		Mail.updateSortArrow();
 	},
 	
 	onSummaryDblclick : function() {
 		msObj = this.parent;
-		if (Mailbox.currentMessage && (Mailbox.currentMessage.id == msObj.id )){
-			Mailbox.previewPopup();
+		if (Mail.currentMessage && (Mail.currentMessage.id == msObj.id )){
+			Mail.previewPopup();
 		}
 	},
 	
@@ -619,26 +619,26 @@ var Mailbox = {
 		var msObj = obj.parent;
 		
 		msObj.pendingHighlight = true;
-		Mailbox.lastSelected = msObj;
+		Mail.lastSelected = msObj;
 		
-		document.onmousemove = Mailbox.onSummaryMouseMove;
-		document.onmouseup = Mailbox.onSummaryMouseUp;
+		document.onmousemove = Mail.onSummaryMouseMove;
+		document.onmouseup = Mail.onSummaryMouseUp;
 		
-		Mailbox.dragStart = new Coordinate(mousePos.x, mousePos.y);
-		Mailbox.checkFolderLocation(mousePos, true);
+		Mail.dragStart = new Coordinate(mousePos.x, mousePos.y);
+		Mail.checkFolderLocation(mousePos, true);
 		return false;
 	},
 	
 	onSummaryMouseMove : function(event) {
 		mousePos.update(event);
 		
-		var numOfSelected = Mailbox.getSelectedMessages().length;
+		var numOfSelected = Mail.getSelectedMessages().length;
 		
-		if ((numOfSelected > 0 && mousePos.distance(Mailbox.dragStart) > 20) || Mailbox.dragging) {
-			Mailbox.dragging = true;
-			Mailbox.lastSelected.pendingHighlight = false;
+		if ((numOfSelected > 0 && mousePos.distance(Mail.dragStart) > 20) || Mail.dragging) {
+			Mail.dragging = true;
+			Mail.lastSelected.pendingHighlight = false;
 			
-			var dragIndicator = Mailbox.dragIndicator;
+			var dragIndicator = Mail.dragIndicator;
 			
 			if (dragIndicator == null) {
 				dragIndicator = document.createElement("div");
@@ -646,7 +646,7 @@ var Mailbox = {
 				dragIndicator.id = "portlet-mail-drag-indicator";
 				dragIndicator.onselectstart = function() {return false;};
 				dragIndicator.onmousedown = function() {return false;};
-				Mailbox.dragIndicator = dragIndicator;
+				Mail.dragIndicator = dragIndicator;
 			}
 			
 			dragIndicator.innerHTML = "<span>&nbsp;</span>&nbsp;" + numOfSelected + " message" +
@@ -655,68 +655,68 @@ var Mailbox = {
 			dragIndicator.style.top = (mousePos.y - 15) + "px";
 			dragIndicator.style.left = (mousePos.x - 5) + "px";
 			
-			Mailbox.checkFolderLocation(mousePos);
+			Mail.checkFolderLocation(mousePos);
 		}
 	},
 	
 	onSummaryMouseUp : function(event) {
 		event = mousePos.update(event);
 		
-		var dragIndicator = Mailbox.dragIndicator;
+		var dragIndicator = Mail.dragIndicator;
 		if (dragIndicator != null) {
 			dragIndicator.style.display = "none";
 		}
 		
-		if (Mailbox.lastSelected.pendingHighlight) {
+		if (Mail.lastSelected.pendingHighlight) {
 			if (!event.ctrlKey && !event.shiftKey) {
-				Mailbox.summaryUnhighlightAll();
+				Mail.summaryUnhighlightAll();
 			}
 			
-			if (event.ctrlKey && Mailbox.lastSelected.selected) {
-				Mailbox.summaryUnhighlight(Mailbox.lastSelected, event.ctrlKey);
-				Mailbox.resetLastSelected();
+			if (event.ctrlKey && Mail.lastSelected.selected) {
+				Mail.summaryUnhighlight(Mail.lastSelected, event.ctrlKey);
+				Mail.resetLastSelected();
 			}
 			else {
-				Mailbox.summaryHighlight(Mailbox.lastSelected, event.ctrlKey);
+				Mail.summaryHighlight(Mail.lastSelected, event.ctrlKey);
 				if (!event.shiftKey) {
-					Mailbox.groupStart = Mailbox.lastSelected;
+					Mail.groupStart = Mail.lastSelected;
 				}
 			}
 			
-			if (event.shiftKey && Mailbox.groupStart != null) {
+			if (event.shiftKey && Mail.groupStart != null) {
 				var nextObj;
 				var searchDown = true;
-				var lastSelected = Mailbox.lastSelected;
+				var lastSelected = Mail.lastSelected;
 				
-				if (Mailbox.lastSelected.index > Mailbox.groupStart.index) {
+				if (Mail.lastSelected.index > Mail.groupStart.index) {
 					searchDown = false;
 				}
 				
-				nextObj = searchDown ? Mailbox.lastSelected.next : Mailbox.lastSelected.prev;
+				nextObj = searchDown ? Mail.lastSelected.next : Mail.lastSelected.prev;
 				
-				while (nextObj != Mailbox.groupStart) {
-					Mailbox.summaryHighlight(nextObj, event.shiftKey);
+				while (nextObj != Mail.groupStart) {
+					Mail.summaryHighlight(nextObj, event.shiftKey);
 					nextObj = searchDown ? nextObj.next : nextObj.prev;
 				}
 				
-				Mailbox.lastSelected = lastSelected;
+				Mail.lastSelected = lastSelected;
 			}
 		}
 		
 		document.onmousemove = null;
 		document.onmouseup = null;
 		
-		Mailbox.checkFolderLocation(new Coordinate());
+		Mail.checkFolderLocation(new Coordinate());
 		
-		if (Mailbox.dragging) {
-			Mailbox.dragToFolder(mousePos);
+		if (Mail.dragging) {
+			Mail.dragToFolder(mousePos);
 		}
 		
-		Mailbox.dragging = false;
+		Mail.dragging = false;
 	},
 	
 	print : function() {
-		var printWindow = Mailbox.previewPopup();
+		var printWindow = Mail.previewPopup();
 			
 		if (printWindow != null && printWindow.print) {
 			printWindow.print();
@@ -729,8 +729,8 @@ var Mailbox = {
 	previewPopup : function() {
 		var popup = null;
 		
-		if (Mailbox.currentMessage) {
-			var frameSrc = themeDisplay.getPathMain() + "/mailbox/view_message?header=true";
+		if (Mail.currentMessage) {
+			var frameSrc = themeDisplay.getPathMain() + "/mail/view_message?header=true";
 			popup = window.open(frameSrc, "Print", "menubar=yes,width=640,height=480,toolbar=no,resizable=yes");
 		}
 		
@@ -738,9 +738,9 @@ var Mailbox = {
 	},
 	
 	setCurrentFolder : function(folder) {
-		Mailbox.currentFolder = folder;
-		Mailbox.currentFolderId = folder.id;
-		Mailbox.getFolderDetails();
+		Mail.currentFolder = folder;
+		Mail.currentFolderId = folder.id;
+		Mail.getFolderDetails();
 		
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
 		var folderList = folderPane.getElementsByTagName("li");
@@ -748,9 +748,9 @@ var Mailbox = {
 		for (var i = 0; i < folderList.length; i++) {
 			var folderItem = folderList[i];
 			
-			if (Mailbox.currentFolder.id == folderItem.folder.id) {
-				folderItem.style.backgroundColor = Mailbox.colorSelected;
-				Mailbox.currentFolder.li = folderItem;
+			if (Mail.currentFolder.id == folderItem.folder.id) {
+				folderItem.style.backgroundColor = Mail.colorSelected;
+				Mail.currentFolder.li = folderItem;
 			}
 			else {
 				folderItem.style.backgroundColor = "transparent";
@@ -762,7 +762,7 @@ var Mailbox = {
 		var mainToolbar = document.getElementById("portlet-mail-main-toolbar");
 		var draftsToolbar = document.getElementById("portlet-mail-drafts-toolbar");
 		
-		if (Mailbox.currentFolder.id == "Sent" || Mailbox.currentFolder.id == "Drafts") {
+		if (Mail.currentFolder.id == "Sent" || Mail.currentFolder.id == "Drafts") {
 			fromTitle[0].style.display = "none";
 			fromTitle[1].style.display = "";
 		}
@@ -771,7 +771,7 @@ var Mailbox = {
 			fromTitle[1].style.display = "none";
 		}
 		
-		if (Mailbox.currentFolder.id == "Drafts") {
+		if (Mail.currentFolder.id == "Drafts") {
 			mainToolbar.style.display = "none";
 			draftsToolbar.style.display = "block";
 		}
@@ -787,8 +787,8 @@ var Mailbox = {
 		
 		msObj.pendingHighlight = false;
 		
-		if (Mailbox.messageTimer) {
-			clearTimeout(Mailbox.messageTimer);
+		if (Mail.messageTimer) {
+			clearTimeout(Mail.messageTimer);
 		}
 		
 		if (setOff == true) {
@@ -796,12 +796,12 @@ var Mailbox = {
 		}
 		else {
 			msObj.selected = true;
-			setColor = Mailbox.colorHighlight;
-			Mailbox.lastSelected = msObj;
+			setColor = Mail.colorHighlight;
+			Mail.lastSelected = msObj;
 			
 			/* Don't display details if modifier key was pressed */
 			if (!modifierOn) {
-				Mailbox.messageTimer = setTimeout("Mailbox.getMessageDetails("+msObj.id+")", 500);
+				Mail.messageTimer = setTimeout("Mail.getMessageDetails("+msObj.id+")", 500);
 			}
 		}
 		
@@ -812,21 +812,21 @@ var Mailbox = {
 	},
 	
 	summaryHighlightAll : function(setOff) {
-		var msObj = Mailbox.summaryList.head;
+		var msObj = Mail.summaryList.head;
 		
 		while (msObj) {
 			if (setOff) {
-				Mailbox.summaryUnhighlight(msObj);
+				Mail.summaryUnhighlight(msObj);
 			}
 			else {
-				Mailbox.summaryHighlight(msObj, true);
+				Mail.summaryHighlight(msObj, true);
 			}
 			msObj = msObj.next;
 		}
 	},
 	
 	summaryUnhighlight : function(msObj, modifierOn) {
-		Mailbox.summaryHighlight(msObj, modifierOn, true);
+		Mail.summaryHighlight(msObj, modifierOn, true);
 	},
 	
 	summaryUnhighlightAll : function() {
@@ -850,7 +850,7 @@ var Mailbox = {
 				titleDiv.removeChild(image);
 			}
 			
-			if (Mailbox.sortBy == title) {
+			if (Mail.sortBy == title) {
 				image = document.createElement("img");
 				
 				if (title.asc) {

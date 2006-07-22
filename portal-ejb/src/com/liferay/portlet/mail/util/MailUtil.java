@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.mailbox.util;
+package com.liferay.portlet.mail.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -66,11 +66,11 @@ import org.apache.commons.logging.LogFactory;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.mailbox.ContentException;
-import com.liferay.portlet.mailbox.ContentPathException;
-import com.liferay.portlet.mailbox.FolderException;
-import com.liferay.portlet.mailbox.RecipientException;
-import com.liferay.portlet.mailbox.StoreException;
+import com.liferay.portlet.mail.ContentException;
+import com.liferay.portlet.mail.ContentPathException;
+import com.liferay.portlet.mail.FolderException;
+import com.liferay.portlet.mail.RecipientException;
+import com.liferay.portlet.mail.StoreException;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.JNDIUtil;

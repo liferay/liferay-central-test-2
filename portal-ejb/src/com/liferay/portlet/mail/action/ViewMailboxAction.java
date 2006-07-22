@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.mailbox.action;
+package com.liferay.portlet.mail.action;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletSession;
@@ -34,7 +34,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.mailbox.util.MailUtil;
+import com.liferay.portlet.mail.util.MailUtil;
 
 /**
  * <a href="EditMessageAction.java.html"><b><i>View Source</i></b></a>
@@ -68,7 +68,7 @@ public class ViewMailboxAction extends PortletAction {
 				"current folder and message UID");
 		}
 		
-		return mapping.findForward("portlet.mailbox.view");
+		return mapping.findForward("portlet.mail.view");
 	}
 
 	private static Log _log = LogFactory.getLog(ViewMailboxAction.class);

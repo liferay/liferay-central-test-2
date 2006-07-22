@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.liferay.portlet.mailbox.action;
+package com.liferay.portlet.mail.action;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -51,11 +51,11 @@ import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.mailbox.RecipientException;
-import com.liferay.portlet.mailbox.util.MailAttachment;
-import com.liferay.portlet.mailbox.util.MailMessage;
-import com.liferay.portlet.mailbox.util.MailUtil;
-import com.liferay.portlet.mailbox.util.RemoteMailAttachment;
+import com.liferay.portlet.mail.RecipientException;
+import com.liferay.portlet.mail.util.MailAttachment;
+import com.liferay.portlet.mail.util.MailMessage;
+import com.liferay.portlet.mail.util.MailUtil;
+import com.liferay.portlet.mail.util.RemoteMailAttachment;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -120,19 +120,19 @@ public class CompleteMessageAction extends PortletAction {
 					(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 				String url = 
-					themeDisplay.getPathMain() + "/mailbox/get_attachment?";
+					themeDisplay.getPathMain() + "/mail/get_attachment?";
 
 				MailUtil.completeMessage(
 					ses, mm, cmd.equals(Constants.SEND), draftId, url);
 
-				setForward(req, "portlet.mailbox.view");
+				setForward(req, "portlet.mail.view");
 			}
 		}
 		catch (Exception e) {
 			if (e instanceof RecipientException) {
 				SessionErrors.add(req, e.getClass().getName());
 
-				setForward(req, "portlet.mailbox.edit_message");
+				setForward(req, "portlet.mail.edit_message");
 			}
 
 			_log.error(StackTraceUtil.getStackTrace(e));

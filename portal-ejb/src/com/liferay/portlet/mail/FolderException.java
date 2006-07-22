@@ -19,32 +19,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.liferay.portlet.mailbox;
+package com.liferay.portlet.mail;
 
 import com.liferay.portal.PortalException;
 
 /**
- * <a href="ContentException.java.html"><b><i>View Source</i></b></a>
+ * <a href="FolderException.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
  *
  */
-public class ContentException extends PortalException {
+public class FolderException extends PortalException {
 
-	public ContentException() {
+	public FolderException() {
 		super();
 	}
 
-	public ContentException(String msg) {
+	public FolderException(String msg) {
 		super(msg);
 	}
 
-	public ContentException(String msg, Throwable cause) {
+	public FolderException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public ContentException(Throwable cause) {
+	public FolderException(Throwable cause) {
 		super(cause);
 	}
-	
 }

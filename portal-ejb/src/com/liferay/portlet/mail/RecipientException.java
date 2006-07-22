@@ -19,31 +19,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.liferay.portlet.mailbox;
+package com.liferay.portlet.mail;
 
 import com.liferay.portal.PortalException;
 
 /**
- * <a href="StoreException.java.html"><b><i>View Source</i></b></a>
+ * <a href="RecipientException.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
  *
  */
-public class StoreException extends PortalException {
+public class RecipientException extends PortalException {
 
-	public StoreException() {
+	public RecipientException() {
 		super();
 	}
 
-	public StoreException(String msg) {
+	public RecipientException(String msg) {
 		super(msg);
 	}
 
-	public StoreException(String msg, Throwable cause) {
+	public RecipientException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public StoreException(Throwable cause) {
+	public RecipientException(Throwable cause) {
 		super(cause);
 	}
 	

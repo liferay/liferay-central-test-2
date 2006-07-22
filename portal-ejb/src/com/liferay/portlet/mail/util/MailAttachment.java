@@ -19,51 +19,54 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.liferay.portlet.mailbox.util.comparator;
-
-import com.liferay.portlet.mailbox.util.MailEnvelope;
-import com.liferay.util.DateUtil;
-
-import java.util.Comparator;
+package com.liferay.portlet.mail.util;
 
 /**
- * <a href="DateComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="MailAttachment.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
  *
  */
-public class DateComparator implements Comparator {
+public class MailAttachment {
 
-	public DateComparator(boolean asc) {
-		_asc = asc;
-	}
+    public String getContentType() {
+        return _contentType;
+    }
 
-	public int compare(Object arg0, Object arg1) {
-		MailEnvelope me0 = (MailEnvelope)arg0;
-		MailEnvelope me1 = (MailEnvelope)arg1;
-		Long uid0 = new Long(me0.getMsgUID());
-		Long uid1 = new Long(me1.getMsgUID());
+    public void setContentType(String contentType) {
+        _contentType = contentType;
+    }
 
-		int comparison = 0;
+    public String getFilename() {
+        return _filename;
+    }
 
-		if (_asc) {
-			comparison = DateUtil.compareTo(me0.getDate(), me1.getDate());
-			
-			if (comparison == 0) {
-				comparison = uid0.compareTo(uid1);
-			}
-		}
-		else {
-			comparison = DateUtil.compareTo(me1.getDate(), me0.getDate());
-			
-			if (comparison == 0) {
-				comparison = uid1.compareTo(uid0);
-			}
-		}
-		
-		return comparison;
-	}
+    public void setFilename(String filename) {
+        _filename = filename;
+    }
 
-	private boolean _asc;
+    public byte [] getContent() {
+        return _content;
+    }
+
+    public void setContent(byte [] content) {
+        _content = content;
+    }
+
+    public String getContentID() {
+        return _contentID;
+    }
+
+    public void setContentID(String contentID) {
+    	_contentID = contentID;
+    }
+
+    private String _contentType;
+
+    private String _filename;
+    
+    private byte [] _content;
+    
+    private String _contentID;
 
 }

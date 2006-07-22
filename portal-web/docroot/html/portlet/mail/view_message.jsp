@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -19,31 +20,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.liferay.portlet.mailbox;
+%><%@
+include file="/html/portlet/init.jsp" %><%@
+page import="com.liferay.portlet.mail.util.MailMessage"
+%>
+<%
 
-import com.liferay.portal.PortalException;
+MailMessage mm = (MailMessage)request.getAttribute("mailMessage");
+boolean header = ParamUtil.getBoolean(request, "header");
 
-/**
- * <a href="FolderException.java.html"><b><i>View Source</i></b></a>
- *
- * @author  Alexander Chow
- *
- */
-public class FolderException extends PortalException {
+%>
 
-	public FolderException() {
-		super();
-	}
+<c:if test="<%= header == true %>">
+	<liferay-util:include page="/html/portlet/mail/message_details.jsp" />
+	<hr /><br />
+</c:if>
 
-	public FolderException(String msg) {
-		super(msg);
-	}
-
-	public FolderException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public FolderException(Throwable cause) {
-		super(cause);
-	}
-}
+<%= mm.getHtmlBody() %>

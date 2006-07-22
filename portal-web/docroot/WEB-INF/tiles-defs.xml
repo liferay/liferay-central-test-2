@@ -624,14 +624,14 @@
 
 	<!-- Mailbox -->
 
-	<definition name="portlet.mailbox" extends="portlet" />
+	<definition name="portlet.mail" extends="portlet" />
 
-	<definition name="portlet.mailbox.view" extends="portlet.mailbox">
-		<put name="portlet_content" value="/portlet/mailbox/view.jsp" />
+	<definition name="portlet.mail.view" extends="portlet.mail">
+		<put name="portlet_content" value="/portlet/mail/view.jsp" />
 	</definition>
 
-	<definition name="portlet.mailbox.edit_message" extends="portlet.mailbox">
-		<put name="portlet_content" value="/portlet/mailbox/edit_message.jsp" />
+	<definition name="portlet.mail.edit_message" extends="portlet.mail">
+		<put name="portlet_content" value="/portlet/mail/edit_message.jsp" />
 	</definition>
 
 	<!-- Maps -->

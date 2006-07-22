@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.mailbox.action;
+package com.liferay.portlet.mail.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,8 +32,8 @@ import org.apache.struts.action.ActionMapping;
 
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.mailbox.util.MailMessage;
-import com.liferay.portlet.mailbox.util.MailUtil;
+import com.liferay.portlet.mail.util.MailMessage;
+import com.liferay.portlet.mail.util.MailUtil;
 
 /**
  * <a href="MailboxAction.java.html"><b><i>View Source</i></b></a>
@@ -53,13 +53,13 @@ public class ViewMessageAction extends Action {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String url = themeDisplay.getPathMain() + "/mailbox/get_attachment?";
+		String url = themeDisplay.getPathMain() + "/mail/get_attachment?";
 
 		MailMessage mm = 
 			MailUtil.getMessage(req.getSession(), messageId.longValue(), url);
 		
 		req.setAttribute("mailMessage", mm);
 		
-		return mapping.findForward("portlet.mailbox.view_message");
+		return mapping.findForward("portlet.mail.view_message");
 	}
 }

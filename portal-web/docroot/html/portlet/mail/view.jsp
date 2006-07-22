@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 
-<script src="<%= themeDisplay.getPathJavaScript() %>/portlet/mailbox.js" type="text/javascript"></script>
+<script src="<%= themeDisplay.getPathJavaScript() %>/portlet/mail.js" type="text/javascript"></script>
 
 <style type="text/css">
 <%
@@ -115,31 +115,31 @@ String mailLineColor = "#b3b6b0";
 
 <table id="portlet-mail-main-toolbar" class="portlet-mail-toolbar font-small" cellspacing="2" cellpadding="2" border="0">
 <tr valign="middle">
-	<td nowrap="nowrap" onclick="location.href='<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/edit_message" /></portlet:renderURL>'">
+	<td nowrap="nowrap" onclick="location.href='<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>'">
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/compose.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "new") %>
 	</td>
-	<td nowrap="nowrap" onclick="Mailbox.clearPreview(); Mailbox.getPreview()">
+	<td nowrap="nowrap" onclick="Mail.clearPreview(); Mail.getPreview()">
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/check_mail.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "check-mail") %>
 	</td>
-	<td nowrap="nowrap" onclick="Mailbox.submitCompose('reply', document.<portlet:namespace />fm)">
+	<td nowrap="nowrap" onclick="Mail.submitCompose('reply', document.<portlet:namespace />fm)">
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/reply.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "reply") %>
 	</td>
-	<td nowrap="nowrap" onclick="Mailbox.submitCompose('replyAll', document.<portlet:namespace />fm)">
+	<td nowrap="nowrap" onclick="Mail.submitCompose('replyAll', document.<portlet:namespace />fm)">
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/reply_all.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "reply-all") %>
 	</td>
-	<td nowrap="nowrap" onclick="Mailbox.submitCompose('forward', document.<portlet:namespace />fm)">
+	<td nowrap="nowrap" onclick="Mail.submitCompose('forward', document.<portlet:namespace />fm)">
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/forward.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "forward") %>
 	</td>
-	<td nowrap="nowrap" onclick="Mailbox.deleteSelectedMessages()">
+	<td nowrap="nowrap" onclick="Mail.deleteSelectedMessages()">
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/delete.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "delete") %>
 	</td>
-	<td nowrap="nowrap" onclick="Mailbox.print()">
+	<td nowrap="nowrap" onclick="Mail.print()">
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/print.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "print") %>
 	</td>
@@ -148,15 +148,15 @@ String mailLineColor = "#b3b6b0";
 
 <table id="portlet-mail-drafts-toolbar" class="portlet-mail-toolbar font-small" cellspacing="2" cellpadding="3" border="0" style="display: none">
 <tr valign="middle">
-	<td nowrap="nowrap" onclick="location.href='<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/edit_message" /></portlet:renderURL>'">
+	<td nowrap="nowrap" onclick="location.href='<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>'">
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/compose.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "new") %>
 	</td>
-	<td nowrap="nowrap" onclick="Mailbox.submitCompose('edit', document.<portlet:namespace />fm)">
+	<td nowrap="nowrap" onclick="Mail.submitCompose('edit', document.<portlet:namespace />fm)">
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/edit_draft.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "edit") %>
 	</td>
-	<td nowrap="nowrap" onclick="Mailbox.deleteSelectedMessages()">
+	<td nowrap="nowrap" onclick="Mail.deleteSelectedMessages()">
 		<img src="<%= themeDisplay.getPathThemeImage() %>/mail/delete.gif" align="absmiddle" />
 		<%= LanguageUtil.get(pageContext, "delete") %>
 	</td>
@@ -164,7 +164,7 @@ String mailLineColor = "#b3b6b0";
 </table>
 </div>
 
-<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mailbox/edit_message" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm">
+<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm">
 	<input type="hidden" id="portlet-mail-compose-action" name="<portlet:namespace />composeAction" />
 	<input type="hidden" id="portlet-mail-message-id" name="<portlet:namespace />messageId" />
 	<input type="hidden" id="portlet-mail-folder-id" name="<portlet:namespace />folderId" />
@@ -276,13 +276,13 @@ String mailLineColor = "#b3b6b0";
 
 <script type="text/javascript">
 	<c:if test="<%= folderId != null %>">
-		Mailbox.currentFolderId = "<%= folderId %>";
+		Mail.currentFolderId = "<%= folderId %>";
 	</c:if>
 	<c:if test="<%= messageId != null %>">
-		Mailbox.currentMessageId = <%= messageId.toString() %>;
+		Mail.currentMessageId = <%= messageId.toString() %>;
 	</c:if>
 
-	Mailbox.highlightColor = "<%= colorScheme.getPortletMenuBg() %>";
-	Mailbox.colorSelected = "<%= colorScheme.getLayoutTabBg() %>";
-	Mailbox.init();
+	Mail.highlightColor = "<%= colorScheme.getPortletMenuBg() %>";
+	Mail.colorSelected = "<%= colorScheme.getLayoutTabBg() %>";
+	Mail.init();
 </script>
