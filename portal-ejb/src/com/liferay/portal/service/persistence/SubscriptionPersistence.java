@@ -116,7 +116,11 @@ public class SubscriptionPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(subscription);
+
+			if (subscription.isNew()) {
+				session.save(subscription);
+			}
+
 			session.flush();
 			subscription.setNew(false);
 

@@ -131,7 +131,11 @@ public class PermissionPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(permission);
+
+			if (permission.isNew()) {
+				session.save(permission);
+			}
+
 			session.flush();
 			permission.setNew(false);
 

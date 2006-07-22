@@ -114,7 +114,11 @@ public class BlogsCategoryPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(blogsCategory);
+
+			if (blogsCategory.isNew()) {
+				session.save(blogsCategory);
+			}
+
 			session.flush();
 			blogsCategory.setNew(false);
 

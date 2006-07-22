@@ -117,7 +117,11 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(journalContentSearch);
+
+			if (journalContentSearch.isNew()) {
+				session.save(journalContentSearch);
+			}
+
 			session.flush();
 			journalContentSearch.setNew(false);
 

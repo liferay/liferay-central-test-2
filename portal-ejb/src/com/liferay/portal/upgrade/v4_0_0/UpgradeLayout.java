@@ -332,6 +332,8 @@ public class UpgradeLayout extends UpgradeProcess {
 							lookAndFeel[1]);
 					}
 
+					groupIds.add(groupId);
+
 					Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 					if (group.getName().equals("Guest")) {
@@ -343,8 +345,6 @@ public class UpgradeLayout extends UpgradeProcess {
 					else {
 						newOwnerId = Layout.PRIVATE + groupId;
 					}
-
-					groupIds.add(groupId);
 				}
 				else {
 					String userId = oldOwnerId;

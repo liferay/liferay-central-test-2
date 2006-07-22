@@ -113,7 +113,11 @@ public class ResourcePersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(resource);
+
+			if (resource.isNew()) {
+				session.save(resource);
+			}
+
 			session.flush();
 			resource.setNew(false);
 

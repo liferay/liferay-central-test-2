@@ -114,7 +114,11 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(shoppingOrder);
+
+			if (shoppingOrder.isNew()) {
+				session.save(shoppingOrder);
+			}
+
 			session.flush();
 			shoppingOrder.setNew(false);
 

@@ -131,7 +131,11 @@ public class OrganizationPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(organization);
+
+			if (organization.isNew()) {
+				session.save(organization);
+			}
+
 			session.flush();
 			organization.setNew(false);
 

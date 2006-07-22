@@ -113,7 +113,11 @@ public class UserTrackerPathPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(userTrackerPath);
+
+			if (userTrackerPath.isNew()) {
+				session.save(userTrackerPath);
+			}
+
 			session.flush();
 			userTrackerPath.setNew(false);
 

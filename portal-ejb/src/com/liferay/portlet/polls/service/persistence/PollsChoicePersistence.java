@@ -114,7 +114,11 @@ public class PollsChoicePersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(pollsChoice);
+
+			if (pollsChoice.isNew()) {
+				session.save(pollsChoice);
+			}
+
 			session.flush();
 			pollsChoice.setNew(false);
 

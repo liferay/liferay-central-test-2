@@ -112,7 +112,11 @@ public class WikiPagePersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(wikiPage);
+
+			if (wikiPage.isNew()) {
+				session.save(wikiPage);
+			}
+
 			session.flush();
 			wikiPage.setNew(false);
 

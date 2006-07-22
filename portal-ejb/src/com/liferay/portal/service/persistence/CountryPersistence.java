@@ -110,7 +110,11 @@ public class CountryPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(country);
+
+			if (country.isNew()) {
+				session.save(country);
+			}
+
 			session.flush();
 			country.setNew(false);
 

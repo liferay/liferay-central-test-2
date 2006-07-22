@@ -113,7 +113,11 @@ public class BlogsEntryPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(blogsEntry);
+
+			if (blogsEntry.isNew()) {
+				session.save(blogsEntry);
+			}
+
 			session.flush();
 			blogsEntry.setNew(false);
 

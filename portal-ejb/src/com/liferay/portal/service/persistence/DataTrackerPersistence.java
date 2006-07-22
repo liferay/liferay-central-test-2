@@ -108,7 +108,11 @@ public class DataTrackerPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(dataTracker);
+
+			if (dataTracker.isNew()) {
+				session.save(dataTracker);
+			}
+
 			session.flush();
 			dataTracker.setNew(false);
 

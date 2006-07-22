@@ -114,7 +114,11 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(orgGroupPermission);
+
+			if (orgGroupPermission.isNew()) {
+				session.save(orgGroupPermission);
+			}
+
 			session.flush();
 			orgGroupPermission.setNew(false);
 

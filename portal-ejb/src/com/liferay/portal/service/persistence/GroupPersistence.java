@@ -133,7 +133,11 @@ public class GroupPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(group);
+
+			if (group.isNew()) {
+				session.save(group);
+			}
+
 			session.flush();
 			group.setNew(false);
 

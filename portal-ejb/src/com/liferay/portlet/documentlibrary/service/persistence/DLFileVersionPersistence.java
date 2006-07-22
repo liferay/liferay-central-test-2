@@ -114,7 +114,11 @@ public class DLFileVersionPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(dlFileVersion);
+
+			if (dlFileVersion.isNew()) {
+				session.save(dlFileVersion);
+			}
+
 			session.flush();
 			dlFileVersion.setNew(false);
 

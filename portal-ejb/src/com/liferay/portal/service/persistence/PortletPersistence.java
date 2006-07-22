@@ -110,7 +110,11 @@ public class PortletPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(portlet);
+
+			if (portlet.isNew()) {
+				session.save(portlet);
+			}
+
 			session.flush();
 			portlet.setNew(false);
 

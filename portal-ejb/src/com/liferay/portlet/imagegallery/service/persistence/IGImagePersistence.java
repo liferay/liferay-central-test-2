@@ -112,7 +112,11 @@ public class IGImagePersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(igImage);
+
+			if (igImage.isNew()) {
+				session.save(igImage);
+			}
+
 			session.flush();
 			igImage.setNew(false);
 

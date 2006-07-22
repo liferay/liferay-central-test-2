@@ -130,7 +130,11 @@ public class UserPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(user);
+
+			if (user.isNew()) {
+				session.save(user);
+			}
+
 			session.flush();
 			user.setNew(false);
 

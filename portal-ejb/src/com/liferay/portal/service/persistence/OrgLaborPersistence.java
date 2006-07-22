@@ -110,7 +110,11 @@ public class OrgLaborPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(orgLabor);
+
+			if (orgLabor.isNew()) {
+				session.save(orgLabor);
+			}
+
 			session.flush();
 			orgLabor.setNew(false);
 

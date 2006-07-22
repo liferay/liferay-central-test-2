@@ -115,7 +115,11 @@ public class JournalStructurePersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(journalStructure);
+
+			if (journalStructure.isNew()) {
+				session.save(journalStructure);
+			}
+
 			session.flush();
 			journalStructure.setNew(false);
 

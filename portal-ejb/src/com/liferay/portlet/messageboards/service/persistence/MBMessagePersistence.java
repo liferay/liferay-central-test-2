@@ -113,7 +113,11 @@ public class MBMessagePersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(mbMessage);
+
+			if (mbMessage.isNew()) {
+				session.save(mbMessage);
+			}
+
 			session.flush();
 			mbMessage.setNew(false);
 

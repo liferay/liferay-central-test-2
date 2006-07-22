@@ -114,7 +114,11 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(mbStatsUser);
+
+			if (mbStatsUser.isNew()) {
+				session.save(mbStatsUser);
+			}
+
 			session.flush();
 			mbStatsUser.setNew(false);
 

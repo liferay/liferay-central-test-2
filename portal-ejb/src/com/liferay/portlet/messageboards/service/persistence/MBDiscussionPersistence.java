@@ -114,7 +114,11 @@ public class MBDiscussionPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(mbDiscussion);
+
+			if (mbDiscussion.isNew()) {
+				session.save(mbDiscussion);
+			}
+
 			session.flush();
 			mbDiscussion.setNew(false);
 

@@ -110,7 +110,11 @@ public class AddressPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(address);
+
+			if (address.isNew()) {
+				session.save(address);
+			}
+
 			session.flush();
 			address.setNew(false);
 

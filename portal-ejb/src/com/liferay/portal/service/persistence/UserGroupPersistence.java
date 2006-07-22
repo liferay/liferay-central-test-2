@@ -125,7 +125,11 @@ public class UserGroupPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(userGroup);
+
+			if (userGroup.isNew()) {
+				session.save(userGroup);
+			}
+
 			session.flush();
 			userGroup.setNew(false);
 

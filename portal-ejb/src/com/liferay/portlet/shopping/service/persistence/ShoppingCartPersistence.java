@@ -114,7 +114,11 @@ public class ShoppingCartPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(shoppingCart);
+
+			if (shoppingCart.isNew()) {
+				session.save(shoppingCart);
+			}
+
 			session.flush();
 			shoppingCart.setNew(false);
 

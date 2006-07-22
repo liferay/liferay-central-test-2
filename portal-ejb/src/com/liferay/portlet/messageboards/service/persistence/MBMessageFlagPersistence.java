@@ -114,7 +114,11 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(mbMessageFlag);
+
+			if (mbMessageFlag.isNew()) {
+				session.save(mbMessageFlag);
+			}
+
 			session.flush();
 			mbMessageFlag.setNew(false);
 

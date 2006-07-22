@@ -114,7 +114,11 @@ public class BookmarksFolderPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(bookmarksFolder);
+
+			if (bookmarksFolder.isNew()) {
+				session.save(bookmarksFolder);
+			}
+
 			session.flush();
 			bookmarksFolder.setNew(false);
 

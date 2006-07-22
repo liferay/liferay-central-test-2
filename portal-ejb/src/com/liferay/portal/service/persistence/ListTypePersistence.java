@@ -110,7 +110,11 @@ public class ListTypePersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(listType);
+
+			if (listType.isNew()) {
+				session.save(listType);
+			}
+
 			session.flush();
 			listType.setNew(false);
 

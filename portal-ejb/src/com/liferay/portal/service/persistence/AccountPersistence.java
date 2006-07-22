@@ -105,7 +105,11 @@ public class AccountPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(account);
+
+			if (account.isNew()) {
+				session.save(account);
+			}
+
 			session.flush();
 			account.setNew(false);
 

@@ -113,7 +113,11 @@ public class PasswordTrackerPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(passwordTracker);
+
+			if (passwordTracker.isNew()) {
+				session.save(passwordTracker);
+			}
+
 			session.flush();
 			passwordTracker.setNew(false);
 

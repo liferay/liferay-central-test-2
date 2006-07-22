@@ -105,7 +105,11 @@ public class ReleasePersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(release);
+
+			if (release.isNew()) {
+				session.save(release);
+			}
+
 			session.flush();
 			release.setNew(false);
 

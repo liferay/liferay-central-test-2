@@ -112,7 +112,11 @@ public class CalEventPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(calEvent);
+
+			if (calEvent.isNew()) {
+				session.save(calEvent);
+			}
+
 			session.flush();
 			calEvent.setNew(false);
 

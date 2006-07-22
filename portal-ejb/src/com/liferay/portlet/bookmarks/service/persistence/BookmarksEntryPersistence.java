@@ -114,7 +114,11 @@ public class BookmarksEntryPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(bookmarksEntry);
+
+			if (bookmarksEntry.isNew()) {
+				session.save(bookmarksEntry);
+			}
+
 			session.flush();
 			bookmarksEntry.setNew(false);
 

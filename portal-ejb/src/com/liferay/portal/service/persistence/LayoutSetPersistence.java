@@ -106,7 +106,11 @@ public class LayoutSetPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(layoutSet);
+
+			if (layoutSet.isNew()) {
+				session.save(layoutSet);
+			}
+
 			session.flush();
 			layoutSet.setNew(false);
 

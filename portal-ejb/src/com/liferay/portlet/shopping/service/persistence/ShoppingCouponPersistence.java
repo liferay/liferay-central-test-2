@@ -114,7 +114,11 @@ public class ShoppingCouponPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(shoppingCoupon);
+
+			if (shoppingCoupon.isNew()) {
+				session.save(shoppingCoupon);
+			}
+
 			session.flush();
 			shoppingCoupon.setNew(false);
 

@@ -112,7 +112,11 @@ public class IGFolderPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(igFolder);
+
+			if (igFolder.isNew()) {
+				session.save(igFolder);
+			}
+
 			session.flush();
 			igFolder.setNew(false);
 

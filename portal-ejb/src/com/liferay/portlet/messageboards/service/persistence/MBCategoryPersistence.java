@@ -113,7 +113,11 @@ public class MBCategoryPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(mbCategory);
+
+			if (mbCategory.isNew()) {
+				session.save(mbCategory);
+			}
+
 			session.flush();
 			mbCategory.setNew(false);
 

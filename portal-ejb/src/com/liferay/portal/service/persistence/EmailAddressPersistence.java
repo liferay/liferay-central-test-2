@@ -113,7 +113,11 @@ public class EmailAddressPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(emailAddress);
+
+			if (emailAddress.isNew()) {
+				session.save(emailAddress);
+			}
+
 			session.flush();
 			emailAddress.setNew(false);
 

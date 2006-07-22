@@ -110,7 +110,11 @@ public class ContactPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(contact);
+
+			if (contact.isNew()) {
+				session.save(contact);
+			}
+
 			session.flush();
 			contact.setNew(false);
 

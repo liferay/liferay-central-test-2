@@ -113,7 +113,11 @@ public class UserIdMapperPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(userIdMapper);
+
+			if (userIdMapper.isNew()) {
+				session.save(userIdMapper);
+			}
+
 			session.flush();
 			userIdMapper.setNew(false);
 

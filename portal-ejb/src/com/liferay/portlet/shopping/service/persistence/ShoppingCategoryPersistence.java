@@ -115,7 +115,11 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(shoppingCategory);
+
+			if (shoppingCategory.isNew()) {
+				session.save(shoppingCategory);
+			}
+
 			session.flush();
 			shoppingCategory.setNew(false);
 

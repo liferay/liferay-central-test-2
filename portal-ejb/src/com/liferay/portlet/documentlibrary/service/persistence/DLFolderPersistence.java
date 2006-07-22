@@ -114,7 +114,11 @@ public class DLFolderPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(dlFolder);
+
+			if (dlFolder.isNew()) {
+				session.save(dlFolder);
+			}
+
 			session.flush();
 			dlFolder.setNew(false);
 

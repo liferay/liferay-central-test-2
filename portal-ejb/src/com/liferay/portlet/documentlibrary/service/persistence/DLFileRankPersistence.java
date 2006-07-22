@@ -113,7 +113,11 @@ public class DLFileRankPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(dlFileRank);
+
+			if (dlFileRank.isNew()) {
+				session.save(dlFileRank);
+			}
+
 			session.flush();
 			dlFileRank.setNew(false);
 

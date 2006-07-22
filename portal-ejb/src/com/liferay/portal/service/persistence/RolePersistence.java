@@ -129,7 +129,11 @@ public class RolePersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(role);
+
+			if (role.isNew()) {
+				session.save(role);
+			}
+
 			session.flush();
 			role.setNew(false);
 

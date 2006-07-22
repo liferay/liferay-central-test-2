@@ -110,7 +110,11 @@ public class WebsitePersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(website);
+
+			if (website.isNew()) {
+				session.save(website);
+			}
+
 			session.flush();
 			website.setNew(false);
 

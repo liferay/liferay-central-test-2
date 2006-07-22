@@ -105,7 +105,11 @@ public class ImagePersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(image);
+
+			if (image.isNew()) {
+				session.save(image);
+			}
+
 			session.flush();
 			image.setNew(false);
 

@@ -113,7 +113,11 @@ public class OrgGroupRolePersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(orgGroupRole);
+
+			if (orgGroupRole.isNew()) {
+				session.save(orgGroupRole);
+			}
+
 			session.flush();
 			orgGroupRole.setNew(false);
 

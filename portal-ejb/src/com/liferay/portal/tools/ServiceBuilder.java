@@ -1909,7 +1909,9 @@ public class ServiceBuilder {
 		sb.append("Session session = null;");
 		sb.append("try {");
 		sb.append("session = openSession();");
-		sb.append("session.saveOrUpdate(" + entity.getVarName() + ");");
+		sb.append("if (" + entity.getVarName() + ".isNew()) {");
+		sb.append("session.save(" + entity.getVarName() + ");");
+		sb.append("}");
 		sb.append("session.flush();");
 		sb.append(entity.getVarName() + ".setNew(false);");
 		sb.append("return " + entity.getVarName() + ";");

@@ -110,7 +110,11 @@ public class RegionPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(region);
+
+			if (region.isNew()) {
+				session.save(region);
+			}
+
 			session.flush();
 			region.setNew(false);
 

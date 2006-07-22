@@ -115,7 +115,11 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(shoppingItemField);
+
+			if (shoppingItemField.isNew()) {
+				session.save(shoppingItemField);
+			}
+
 			session.flush();
 			shoppingItemField.setNew(false);
 

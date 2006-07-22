@@ -114,7 +114,11 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(portletPreferences);
+
+			if (portletPreferences.isNew()) {
+				session.save(portletPreferences);
+			}
+
 			session.flush();
 			portletPreferences.setNew(false);
 

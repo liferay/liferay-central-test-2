@@ -114,7 +114,11 @@ public class JournalArticlePersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(journalArticle);
+
+			if (journalArticle.isNew()) {
+				session.save(journalArticle);
+			}
+
 			session.flush();
 			journalArticle.setNew(false);
 

@@ -110,7 +110,11 @@ public class PhonePersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(phone);
+
+			if (phone.isNew()) {
+				session.save(phone);
+			}
+
 			session.flush();
 			phone.setNew(false);
 

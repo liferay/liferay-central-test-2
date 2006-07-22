@@ -112,7 +112,11 @@ public class WikiNodePersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(wikiNode);
+
+			if (wikiNode.isNew()) {
+				session.save(wikiNode);
+			}
+
 			session.flush();
 			wikiNode.setNew(false);
 

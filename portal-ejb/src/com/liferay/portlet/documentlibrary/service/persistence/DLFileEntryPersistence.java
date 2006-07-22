@@ -114,7 +114,11 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(dlFileEntry);
+
+			if (dlFileEntry.isNew()) {
+				session.save(dlFileEntry);
+			}
+
 			session.flush();
 			dlFileEntry.setNew(false);
 

@@ -113,7 +113,11 @@ public class UserTrackerPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(userTracker);
+
+			if (userTracker.isNew()) {
+				session.save(userTracker);
+			}
+
 			session.flush();
 			userTracker.setNew(false);
 

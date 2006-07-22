@@ -105,7 +105,11 @@ public class CompanyPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(company);
+
+			if (company.isNew()) {
+				session.save(company);
+			}
+
 			session.flush();
 			company.setNew(false);
 

@@ -112,7 +112,11 @@ public class MBThreadPersistence extends BasePersistence {
 
 		try {
 			session = openSession();
-			session.saveOrUpdate(mbThread);
+
+			if (mbThread.isNew()) {
+				session.save(mbThread);
+			}
+
 			session.flush();
 			mbThread.setNew(false);
 
