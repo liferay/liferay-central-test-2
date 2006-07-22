@@ -33,7 +33,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.engine.SessionFactoryImplementor;
-import org.hibernate.FlushMode;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.LocalSessionFactoryBean;

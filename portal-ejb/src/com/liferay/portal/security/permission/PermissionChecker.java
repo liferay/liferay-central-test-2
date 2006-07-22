@@ -22,24 +22,17 @@
 
 package com.liferay.portal.security.permission;
 
-import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchResourceException;
-import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Resource;
-import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.spring.GroupServiceUtil;
 import com.liferay.portal.service.spring.OrganizationServiceUtil;
-import com.liferay.portal.service.spring.PermissionLocalServiceUtil;
 import com.liferay.portal.service.spring.PermissionServiceUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceServiceUtil;
-import com.liferay.portal.service.spring.RoleServiceUtil;
 import com.liferay.portal.service.spring.UserGroupServiceUtil;
-import com.liferay.portal.service.spring.UserServiceUtil;
 import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.util.CollectionFactory;
 
@@ -140,7 +133,7 @@ public class PermissionChecker {
 
 		if (resultsValue == null) {
 			try {
-				
+
 				// Cache the check to see if a user belongs to a group to
 				// improve performance
 
@@ -151,7 +144,7 @@ public class PermissionChecker {
 			catch (Exception e) {
 				_log.error(StackTraceUtil.getStackTrace(e));
 			}
-			
+
 			resultsValue = new Boolean(
 				hasPermissionImpl(groupId, name, primKey, actionId));
 

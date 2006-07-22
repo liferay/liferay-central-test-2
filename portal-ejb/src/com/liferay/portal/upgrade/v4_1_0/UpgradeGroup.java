@@ -22,14 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_1_0;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
@@ -42,6 +34,15 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.dao.DataAccess;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeGroup.java.html"><b><i>View Source</i></b></a>
@@ -80,7 +81,7 @@ public class UpgradeGroup extends UpgradeProcess {
 				String groupId = rs.getString("classPK");
 
 				List users = UserLocalServiceUtil.getRoleUsers(roleId);
-				
+
 				for (int i = 0; i < users.size(); i++) {
 					User user = (User)users.get(i);
 
@@ -104,7 +105,7 @@ public class UpgradeGroup extends UpgradeProcess {
 
 	public static final String _UPGRADE_GROUP =
 		"SELECT * FROM Role_ where name LIKE 'GROUP_%_ADMINISTRATOR'";
-	
+
 	private static Log _log = LogFactory.getLog(UpgradeGroup.class);
 
 }

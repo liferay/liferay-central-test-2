@@ -56,9 +56,9 @@ public class Wsdl2JavaTask {
 
 		if (mapping != null) {
 			NamespaceMapping namespaceMapping = new NamespaceMapping();
-			
+
 			namespaceMapping.setFile(new File(mapping));
-			
+
 			wsdl2Java.addMapping(namespaceMapping);
 		}
 

@@ -42,7 +42,7 @@ String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METH
 	<title>Editor</title>
 	<script src="fckeditor/fckeditor.js" type="text/javascript"></script>
 	<script type="text/javascript">
-		
+
 		// Preload config file to prevent race condition
 
 		var fckConfigFile = new Image();
@@ -76,7 +76,7 @@ String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METH
 
 		window.onload = function() {
 			if (document.all) {
-				
+
 				// Stagger loading for IE
 
 				if (parent.fckEditorCount == null) {

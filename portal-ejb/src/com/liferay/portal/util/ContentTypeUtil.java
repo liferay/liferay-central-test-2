@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.util;
 
 import com.liferay.util.ExtPropertiesLoader;
@@ -36,12 +37,12 @@ public class ContentTypeUtil {
 
 	public static String CONTENT_TYPES = "content-types";
 
-	public static String getContentType(String filename) {
-		String [] fa = StringUtil.split(filename, StringPool.PERIOD);
+	public static String getContentType(String fileName) {
+		String[] array = StringUtil.split(fileName, StringPool.PERIOD);
 
-		String ext = fa[fa.length-1];
+		String ext = array[array.length-1];
 
-		String type = _getInstance().get(ext); 
+		String type = _getInstance().get(ext);
 
 		if (Validator.isNull(type)) {
 			type = "application/octet-stream";

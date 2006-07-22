@@ -49,7 +49,7 @@ Address []to = mm.getTo();
 	<%
 	if (to != null) {
 		StringBuffer sb = new StringBuffer();
-		
+
 		_createAddresses(sb, to);
 		%>
 		<tr>
@@ -61,7 +61,7 @@ Address []to = mm.getTo();
 	}
 	if (cc != null) {
 		StringBuffer sb = new StringBuffer();
-		
+
 		_createAddresses(sb, cc);
 		%>
 		<tr>

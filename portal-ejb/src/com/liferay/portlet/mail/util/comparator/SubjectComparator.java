@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portlet.mail.util.comparator;
 
 import com.liferay.portlet.mail.util.MailEnvelope;
@@ -42,20 +43,21 @@ public class SubjectComparator implements Comparator {
 	public int compare(Object arg0, Object arg1) {
 		MailEnvelope me0 = (MailEnvelope)arg0;
 		MailEnvelope me1 = (MailEnvelope)arg1;
+
 		Long uid0 = new Long(me0.getMsgUID());
 		Long uid1 = new Long(me1.getMsgUID());
-		String subj0 = _stripPrefixes(
-			GetterUtil.getString(me0.getSubject()).trim().toLowerCase());
-		String subj1 = _stripPrefixes(
-			GetterUtil.getString(me1.getSubject()).trim().toLowerCase());
+
+		String subj0 = _stripPrefixes(me0.getSubject());
+		String subj1 = _stripPrefixes(me1.getSubject());
 
 		int comparison = 0;
 
 		if (_asc) {
 			comparison = subj0.compareTo(subj1);
+
 			if (comparison == 0) {
 				comparison = DateUtil.compareTo(me0.getDate(), me1.getDate());
-				
+
 				if (comparison == 0) {
 					comparison = uid0.compareTo(uid1);
 				}
@@ -63,22 +65,25 @@ public class SubjectComparator implements Comparator {
 		}
 		else {
 			comparison = subj1.compareTo(subj0);
+
 			if (comparison == 0) {
 				comparison = DateUtil.compareTo(me1.getDate(), me0.getDate());
-				
+
 				if (comparison == 0) {
 					comparison = uid1.compareTo(uid0);
 				}
 			}
 		}
-		
+
 		return comparison;
 	}
-	
+
 	private String _stripPrefixes(String subject) {
+		subject = GetterUtil.getString(subject).toLowerCase();
+
 		while (subject.startsWith("re:") || subject.startsWith("re>") ||
 			subject.startsWith("fw:") || subject.startsWith("fw>")) {
-			
+
 			subject = subject.substring(3).trim();
 		}
 

@@ -22,7 +22,7 @@
  */
 %>
 
-<% 
+<%
 String entryURL = null;
 %>
 
@@ -82,7 +82,7 @@ String entryURL = null;
 				resourcePrimKey="<%= entry.getPrimaryKey().toString() %>"
 				var="permissionsEntryURL"
 			/>
-			
+
 			<%
 			entryURL = (String)pageContext.getAttribute("permissionsEntryURL");
 			%>

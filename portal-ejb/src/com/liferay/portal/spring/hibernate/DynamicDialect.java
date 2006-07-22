@@ -23,7 +23,6 @@
 package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.CallableStatement;
@@ -68,7 +67,7 @@ public class DynamicDialect extends Dialect {
 
 			DatabaseMetaData metaData = con.getMetaData();
 
-			String dbName = metaData.getDatabaseProductName(); 
+			String dbName = metaData.getDatabaseProductName();
 			int dbMajorVersion = metaData.getDatabaseMajorVersion();
 
 			_dialect = DialectFactory.determineDialect(dbName, dbMajorVersion);

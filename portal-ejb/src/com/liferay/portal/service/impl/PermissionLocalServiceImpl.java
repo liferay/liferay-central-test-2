@@ -47,7 +47,6 @@ import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.PermissionLocalService;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.util.Validator;
@@ -166,7 +165,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		for (int i = 0; i < actionIds.length; i++) {
 			Permission permission = PermissionUtil.fetchByA_R(
 				actionIds[i], resourceId);
-			
+
 			if (permission == null) {
 				permission = addPermission(companyId, actionIds[i], resourceId);
 			}
@@ -667,8 +666,8 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		long end = System.currentTimeMillis();
 
 		_log.debug(
-			"Checking user permissions block " + block + " for " + userId + " " +
-				actionId + " " + resourceId + " takes " + (end - start) +
+			"Checking user permissions block " + block + " for " + userId +
+				" " + actionId + " " + resourceId + " takes " + (end - start) +
 					" ms");
 
 		return end;

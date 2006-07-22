@@ -722,7 +722,7 @@ public class PortalUtil {
 		return new UploadPortletRequest(
 			uploadReq, getPortletNamespace(actionReq.getPortletName()));
 	}
-	
+
 	public static UploadServletRequest getUploadServletRequest(
 		HttpServletRequestWrapper reqWrapper) {
 

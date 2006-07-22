@@ -22,42 +22,25 @@
 
 package com.liferay.portal.security.permission;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.util.CollectionFactory;
-import com.liferay.util.StringPool;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchResourceException;
-import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupServiceUtil;
-import com.liferay.portal.service.spring.OrganizationServiceUtil;
 import com.liferay.portal.service.spring.PermissionLocalServiceUtil;
-import com.liferay.portal.service.spring.PermissionServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
-import com.liferay.portal.service.spring.ResourceServiceUtil;
 import com.liferay.portal.service.spring.RoleServiceUtil;
-import com.liferay.portal.service.spring.UserGroupServiceUtil;
 import com.liferay.portal.service.spring.UserServiceUtil;
-import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.StringPool;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.portlet.PortletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import java.io.Serializable;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

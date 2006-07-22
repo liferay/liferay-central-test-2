@@ -22,12 +22,10 @@
 
 package com.liferay.portlet.mail.util;
 
-import com.liferay.util.StringPool;
-
 import java.util.Date;
 
 /**
- * <a href="Envelope.java.html"><b><i>View Source</i></b></a>
+ * <a href="MailEnvelope.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
  *

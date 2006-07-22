@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portlet.mail.util.comparator;
 
 import com.liferay.portlet.mail.util.MailEnvelope;
@@ -41,6 +42,7 @@ public class DateComparator implements Comparator {
 	public int compare(Object arg0, Object arg1) {
 		MailEnvelope me0 = (MailEnvelope)arg0;
 		MailEnvelope me1 = (MailEnvelope)arg1;
+
 		Long uid0 = new Long(me0.getMsgUID());
 		Long uid1 = new Long(me1.getMsgUID());
 
@@ -48,19 +50,19 @@ public class DateComparator implements Comparator {
 
 		if (_asc) {
 			comparison = DateUtil.compareTo(me0.getDate(), me1.getDate());
-			
+
 			if (comparison == 0) {
 				comparison = uid0.compareTo(uid1);
 			}
 		}
 		else {
 			comparison = DateUtil.compareTo(me1.getDate(), me0.getDate());
-			
+
 			if (comparison == 0) {
 				comparison = uid1.compareTo(uid0);
 			}
 		}
-		
+
 		return comparison;
 	}
 

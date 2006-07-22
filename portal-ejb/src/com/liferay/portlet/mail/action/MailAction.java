@@ -22,26 +22,6 @@
 
 package com.liferay.portlet.mail.action;
 
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.SortedSet;
-import java.util.TimeZone;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.shared.util.StackTraceUtil;
@@ -62,6 +42,28 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
+
+import java.text.DateFormat;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.SortedSet;
+import java.util.TimeZone;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * <a href="MailAction.java.html"><b><i>View Source</i></b></a>
@@ -104,7 +106,7 @@ public class MailAction extends JSONAction {
 		catch (Exception e) {
 			_log.error(StackTraceUtil.getStackTrace(e));
 		}
-			
+
 		return rtString;
 	}
 
@@ -151,7 +153,7 @@ public class MailAction extends JSONAction {
 
 	private String _getMessage(HttpServletRequest req, HttpServletResponse res)
 		throws Exception {
-		
+
 		JSONObject jsonObj = new JSONObject();
 
 		long messageId = ParamUtil.getLong(req, "messageId");
@@ -169,17 +171,17 @@ public class MailAction extends JSONAction {
 		MailMessage mm = MailUtil.getMessage(req.getSession(), messageId, url);
 
 		req.setAttribute("mailMessage", mm);
-		
+
 		PortalUtil.renderPage(header, ctx, req, res,
 			"/html/portlet/mail/message_details.jsp");
-		
+
 		jsonObj.put("body", mm.getHtmlBody());
 		jsonObj.put("header", header.toString());
 		jsonObj.put("id", messageId);
-		
+
 		return jsonObj.toString();
 	}
-	
+
 	private String _getPreviewHeaders(HttpServletRequest req) throws Exception {
 		JSONObject jsonObj = new JSONObject();
 
@@ -202,7 +204,7 @@ public class MailAction extends JSONAction {
 			set = MailUtil.getEnvelopes(req.getSession(),
 				new DateComparator(asc));
 		}
-		
+
 		User user = PortalUtil.getUser(req);
 		Locale locale = user.getLocale();
 		TimeZone tz = user.getTimeZone();
@@ -216,25 +218,25 @@ public class MailAction extends JSONAction {
 		cal.setTime(today);
 		cal.add(Calendar.DATE, -1);
 		Date yesterday = cal.getTime();
-		
+
 		String td = df.format(today);
 		String yd = df.format(yesterday);
-		
+
 		JSONArray meArray = new JSONArray();
 
 		for (Iterator itr = set.iterator(); itr.hasNext(); ) {
 			MailEnvelope me = (MailEnvelope)itr.next();
 			JSONObject jMe = new JSONObject();
-			
+
 			String formattedDate = null;
 
 			String day = df.format(me.getDate());
 			if (td.equals(day)) {
-				formattedDate = LanguageUtil.get(user, "today") + 
+				formattedDate = LanguageUtil.get(user, "today") +
 					StringPool.SPACE + tf.format(me.getDate());
 			}
 			else if (yd.equals(day)) {
-				formattedDate = LanguageUtil.get(user, "yesterday") + 
+				formattedDate = LanguageUtil.get(user, "yesterday") +
 					StringPool.SPACE + tf.format(me.getDate());
 			}
 			else {
@@ -243,9 +245,9 @@ public class MailAction extends JSONAction {
 
 			jMe.put("date", formattedDate);
 			jMe.put("id", me.getMsgUID());
-			jMe.put("email", 
+			jMe.put("email",
 				GetterUtil.getString(me.getRecipient(), StringPool.NBSP));
-			jMe.put("subject", 
+			jMe.put("subject",
 				GetterUtil.getString(me.getSubject(), StringPool.NBSP));
 			jMe.put("recent", me.isRecent());
 			meArray.put(jMe);
@@ -283,13 +285,13 @@ public class MailAction extends JSONAction {
 
 		HttpSession ses =
 			((ActionRequestImpl)req).getHttpServletRequest().getSession();
-		long newMessageId = 
+		long newMessageId =
 			ActionUtil.completeMessage(from, tos, ccs, bccs, subject, body,
 				attachments, ses, false, messageId);
 
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("id", newMessageId);
-		
+
 		return jsonObj.toString();
 	}
 */

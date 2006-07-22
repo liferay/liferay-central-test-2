@@ -77,7 +77,7 @@ public class PortalClientBuilder {
 		}
 
 		File testNamespace = new File(outputDir + "/com/liferay/portal");
-		
+
 		if (testNamespace.exists()) {
 			throw new RuntimeException(
 				"Please update " + mappingFile + " to namespace " +

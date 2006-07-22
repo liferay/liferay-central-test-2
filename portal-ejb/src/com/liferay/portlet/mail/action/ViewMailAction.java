@@ -22,6 +22,9 @@
 
 package com.liferay.portlet.mail.action;
 
+import com.liferay.portal.struts.PortletAction;
+import com.liferay.portlet.mail.util.MailUtil;
+
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
@@ -32,9 +35,6 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
-import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.mail.util.MailUtil;
 
 /**
  * <a href="ViewMailAction.java.html"><b><i>View Source</i></b></a>
@@ -49,16 +49,16 @@ public class ViewMailAction extends PortletAction {
 			ActionMapping mapping, ActionForm form, PortletConfig config,
 			RenderRequest req, RenderResponse res)
 		throws Exception {
-		
+
 		try {
 			PortletSession ses = req.getPortletSession();
 			String folderId = MailUtil.getCurrentFolderName(ses);
 			Long messageId = MailUtil.getCurrentMessageId(ses);
-			
+
 			if (folderId != null) {
 				req.setAttribute("folderId", folderId);
 			}
-			
+
 			if (messageId != null) {
 				req.setAttribute("messageId", messageId);
 			}
@@ -67,7 +67,7 @@ public class ViewMailAction extends PortletAction {
 			_log.warn("Exception caught while attempting to get " +
 				"current folder and message UID");
 		}
-		
+
 		return mapping.findForward("portlet.mail.view");
 	}
 

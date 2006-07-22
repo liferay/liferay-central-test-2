@@ -124,11 +124,12 @@ public class SourceFormatter {
 					"**\\classes\\*", "**\\jsp\\*", "**\\EARXMLBuilder.java",
 					"**\\EJBXMLBuilder.java", "**\\JSMin.java",
 					"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
-					"**\\PropsUtil.java", "**\\UserAttributes.java",
-					"**\\WebKeys.java", "**\\portal\\service\\**",
-					"**\\portal-client\\**", "**\\portlet\\**\\service\\**",
-					"**\\model\\*Model.java", "**\\tools\\ext_tmpl\\**",
-					"**\\util-wsrp\\**", "**\\WEB-INF\\jcvs\\work\\**"
+					"**\\XHTMLComplianceFormatter.java", "**\\PropsUtil.java",
+					"**\\UserAttributes.java", "**\\WebKeys.java",
+					"**\\portal\\service\\**", "**\\portal-client\\**",
+					"**\\portlet\\**\\service\\**", "**\\model\\*Model.java",
+					"**\\tools\\ext_tmpl\\**", "**\\util-wsrp\\**",
+					"**\\WEB-INF\\jcvs\\work\\**"
 				});
 			ds.setBasedir(basedir);
 			ds.scan();

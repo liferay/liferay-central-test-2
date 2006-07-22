@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.mail.action;
 
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.mail.util.MailMessage;
+import com.liferay.portlet.mail.util.MailUtil;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,19 +35,14 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.mail.util.MailMessage;
-import com.liferay.portlet.mail.util.MailUtil;
-
 /**
- * <a href="MailboxAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewMessageAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Ming-Gih Lam
  *
  */
 public class ViewMessageAction extends Action {
-	
+
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
@@ -55,11 +55,12 @@ public class ViewMessageAction extends Action {
 
 		String url = themeDisplay.getPathMain() + "/mail/get_attachment?";
 
-		MailMessage mm = 
+		MailMessage mm =
 			MailUtil.getMessage(req.getSession(), messageId.longValue(), url);
-		
+
 		req.setAttribute("mailMessage", mm);
-		
+
 		return mapping.findForward("portlet.mail.view_message");
 	}
+
 }

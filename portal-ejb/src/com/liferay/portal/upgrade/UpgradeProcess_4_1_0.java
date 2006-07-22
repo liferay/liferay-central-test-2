@@ -22,13 +22,11 @@
 
 package com.liferay.portal.upgrade;
 
+import com.liferay.portal.upgrade.v4_1_0.UpgradeGroup;
 import com.liferay.portal.upgrade.v4_1_0.UpgradeMessageBoards;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.liferay.portal.upgrade.v4_1_0.UpgradeGroup;
-import com.liferay.portal.upgrade.v4_1_0.UpgradeMessageBoards;
 
 /**
  * <a href="UpgradeProcess_4_1_0.java.html"><b><i>View Source</i></b></a>

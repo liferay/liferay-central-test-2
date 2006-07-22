@@ -142,7 +142,7 @@ public class Http {
 		if (Validator.isNull(url) || Validator.isNull(paramName)) {
 			return StringPool.BLANK;
 		}
-		
+
 		String [] parts = StringUtil.split(url, StringPool.QUESTION);
 
 		if (parts.length == 2) {
@@ -154,7 +154,7 @@ public class Http {
 			else {
 				params = StringUtil.split(parts[1], StringPool.AMPERSAND);
 			}
-			
+
 			for (int i = 0; i < params.length; i++) {
 				String [] kvp = StringUtil.split(params[i], StringPool.EQUAL);
 
@@ -164,7 +164,7 @@ public class Http {
 			}
 		}
 
-		return StringPool.BLANK;		
+		return StringPool.BLANK;
 	}
 
 	public static String getProtocol(boolean secure) {

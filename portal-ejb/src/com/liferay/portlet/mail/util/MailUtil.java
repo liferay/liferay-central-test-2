@@ -22,47 +22,6 @@
 
 package com.liferay.portlet.mail.util;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.mail.Address;
-import javax.mail.BodyPart;
-import javax.mail.FetchProfile;
-import javax.mail.Flags;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Part;
-import javax.mail.Session;
-import javax.mail.Store;
-import javax.mail.Transport;
-import javax.mail.Flags.Flag;
-import javax.mail.Message.RecipientType;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.util.ByteArrayDataSource;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.portlet.PortletSession;
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
@@ -77,7 +36,54 @@ import com.liferay.util.JNDIUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
+
 import com.sun.mail.imap.IMAPFolder;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+
+import javax.mail.Address;
+import javax.mail.BodyPart;
+import javax.mail.FetchProfile;
+import javax.mail.Flags.Flag;
+import javax.mail.Flags;
+import javax.mail.Folder;
+import javax.mail.Message.RecipientType;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Part;
+import javax.mail.Session;
+import javax.mail.Store;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.mail.util.ByteArrayDataSource;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import javax.portlet.PortletSession;
+
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MailUtil.java.html"><b><i>View Source</i></b></a>
@@ -93,7 +99,7 @@ public class MailUtil {
 	public static final String MAIL_INBOX_NAME =
 		PropsUtil.get(PropsUtil.MAIL_INBOX_NAME);
 
-	public static final String MAIL_JUNK_NAME = MAIL_BOX_STYLE + 
+	public static final String MAIL_JUNK_NAME = MAIL_BOX_STYLE +
 		PropsUtil.get(PropsUtil.MAIL_JUNK_NAME);
 
 	public static final String MAIL_SENT_NAME = MAIL_BOX_STYLE +
@@ -122,7 +128,7 @@ public class MailUtil {
 
 				ses.removeAttribute(WebKeys.MAIL_STORE);
 			}
-			
+
 			ses.removeAttribute(WebKeys.MAIL_MESSAGE);
 		}
 		catch (MessagingException e) {
@@ -131,13 +137,13 @@ public class MailUtil {
 		}
 	}
 
-	public static void completeMessage(HttpSession ses, MailMessage mm, 
+	public static void completeMessage(HttpSession ses, MailMessage mm,
 			boolean send, long draftId, String url)
-		throws ContentException, ContentPathException, FolderException, 
+		throws ContentException, ContentPathException, FolderException,
 			RecipientException, StoreException {
 
 		try {
-			if (send && Validator.isNull(mm.getTo()) && 
+			if (send && Validator.isNull(mm.getTo()) &&
 				Validator.isNull(mm.getCc()) && Validator.isNull(mm.getBcc())) {
 
 				_log.error("A message with no recipients cannot be sent");
@@ -164,7 +170,7 @@ public class MailUtil {
 			_replaceEmbeddedImages(ses, mm, url);
 
 			Multipart multipart = new MimeMultipart();
-			
+
 			BodyPart bodypart = new MimeBodyPart();
 			bodypart.setContent(mm.getHtmlBody(), Constants.TEXT_HTML);
 			multipart.addBodyPart(bodypart);
@@ -172,10 +178,10 @@ public class MailUtil {
 			List attachments = mm.getAttachments();
 			for (Iterator itr = attachments.iterator(); itr.hasNext(); ) {
 				MailAttachment ma = (MailAttachment)itr.next();
-				
+
 				DataSource ds = new ByteArrayDataSource(
 					ma.getContent(), ma.getContentType());
-				
+
 				BodyPart attachment = new MimeBodyPart();
 				attachment.setDataHandler(new DataHandler(ds));
 				attachment.setFileName(ma.getFilename());
@@ -185,7 +191,7 @@ public class MailUtil {
 				}
 				multipart.addBodyPart(attachment);
 			}
-			
+
 			List remoteAttachments = mm.getRemoteAttachments();
 			for (Iterator itr = remoteAttachments.iterator(); itr.hasNext(); ) {
 				RemoteMailAttachment rma = (RemoteMailAttachment)itr.next();
@@ -199,7 +205,7 @@ public class MailUtil {
 				attachment.setFileName(rma.getFilename());
 				multipart.addBodyPart(attachment);
 			}
-			
+
 			message.setContent(multipart);
 			message.setSentDate(new Date());
 
@@ -233,7 +239,7 @@ public class MailUtil {
 		}
 	}
 
-	public static void createFolder(HttpSession ses, String folderName) 
+	public static void createFolder(HttpSession ses, String folderName)
 		throws FolderException, StoreException {
 
 		Folder folder = null;
@@ -249,7 +255,7 @@ public class MailUtil {
 
 			Store store = _getStore(ses);
 
-			if (!folderName.equals(MAIL_INBOX_NAME) && 
+			if (!folderName.equals(MAIL_INBOX_NAME) &&
 				!folderName.startsWith(MAIL_BOX_STYLE)) {
 				folderName = MAIL_BOX_STYLE + folderName;
 			}
@@ -287,7 +293,7 @@ public class MailUtil {
 					msgs, new Flags(Flags.Flag.DELETED), true);
 				_getCurrentFolder(ses).expunge();
 			}
-		} 
+		}
 		catch (MessagingException ex) {
 			_log.error("Unable to delete messages");
 			throw new FolderException(ex);
@@ -295,11 +301,11 @@ public class MailUtil {
 	}
 
 	public static Object [] getAttachment(HttpSession ses, String contentPath)
-		throws ContentException, ContentPathException, FolderException, 
+		throws ContentException, ContentPathException, FolderException,
 			StoreException {
 
 		Object [] parts = null;
-		
+
 		try {
 			String [] path = RemoteMailAttachment.parsePath(contentPath);
 
@@ -308,7 +314,7 @@ public class MailUtil {
 			String mimePath = path[2];
 
 			setCurrentFolder(ses, folderName);
-			Message message = 
+			Message message =
 				_getCurrentFolder(ses).getMessageByUID(messageUID);
 
 			parts = _getAttachmentFromPath(message, mimePath);
@@ -326,7 +332,7 @@ public class MailUtil {
 			_log.error("Invalid content path: " + contentPath);
 			throw ex;
 		}
-		
+
 		return parts;
 	}
 
@@ -348,7 +354,7 @@ public class MailUtil {
         				mimePath.substring(prefix.length()));
         		}
         	}
-        	
+
         	throw new ContentPathException();
         }
 		else if (index != -1) {
@@ -370,7 +376,7 @@ public class MailUtil {
 		Object [] parts = new Object[] {
 			baos.toByteArray(), part.getContentType()
 		};
-		
+
 		return parts;
 	}
 
@@ -426,7 +432,7 @@ public class MailUtil {
 
 	private static void _getFolders(List list, Folder[] folders)
 		throws MessagingException {
-		
+
 		for (int i = 0; i < folders.length; i++) {
 			if ((folders[i].getType() & IMAPFolder.HOLDS_MESSAGES) != 0) {
 				MailFolder mf = new MailFolder(
@@ -435,7 +441,7 @@ public class MailUtil {
 
 				list.add(mf);
 			}
-			
+
 			if ((folders[i].getType() & IMAPFolder.HOLDS_FOLDERS) != 0) {
 				Folder [] subfolders = folders[i].list();
 
@@ -477,7 +483,7 @@ public class MailUtil {
 				    		InternetAddress ia = (InternetAddress)recipients[j];
 				    		email.append(
 				    			GetterUtil.get(ia.getPersonal(), ia.getAddress()));
-	
+
 				    		if (j < recipients.length - 1) {
 				    			email.append(", ");
 				    		}
@@ -506,7 +512,7 @@ public class MailUtil {
 
 				envelopes.add(me);
 			}
-		} 
+		}
         catch (MessagingException ex) {
         	_log.error("Error getting envelops of current folder");
         	throw new FolderException(ex);
@@ -558,7 +564,7 @@ public class MailUtil {
 
 		IMAPFolder toFolder = null;
 		try {
-			if (!toFolderName.equals(MAIL_INBOX_NAME) && 
+			if (!toFolderName.equals(MAIL_INBOX_NAME) &&
 				!toFolderName.startsWith(MAIL_BOX_STYLE)) {
 				toFolderName = MAIL_BOX_STYLE + toFolderName;
 			}
@@ -568,14 +574,14 @@ public class MailUtil {
 			}
 
 			if ((_getCurrentFolder(ses).getName().equals(MAIL_DRAFTS_NAME) ||
-				toFolderName.equals(MAIL_DRAFTS_NAME)) && 
+				toFolderName.equals(MAIL_DRAFTS_NAME)) &&
 					!toFolderName.equals(MAIL_TRASH_NAME)) {
 
-				_log.error("Cannot move message to/from the '" + 
+				_log.error("Cannot move message to/from the '" +
 					MAIL_DRAFTS_NAME + "' folder");
 				throw new FolderException();
 			}
-			
+
 			toFolder = (IMAPFolder)_getStore(ses).getFolder(toFolderName);
 			toFolder.open(IMAPFolder.READ_WRITE);
 
@@ -603,18 +609,18 @@ public class MailUtil {
 		}
 	}
 
-	public static void removeFolder(HttpSession ses, String folderName) 
+	public static void removeFolder(HttpSession ses, String folderName)
 		throws FolderException, StoreException {
 
 		try {
-			if (!folderName.equals(MAIL_INBOX_NAME) && 
+			if (!folderName.equals(MAIL_INBOX_NAME) &&
 				!folderName.startsWith(MAIL_BOX_STYLE)) {
 				folderName = MAIL_BOX_STYLE + folderName;
 			}
 
 			for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
 				if (DEFAULT_FOLDERS[i].equals(folderName)) {
-					_log.error("The folder " + folderName + 
+					_log.error("The folder " + folderName +
 						" is a system-defined folder and cannot be changed");
 					throw new FolderException();
 				}
@@ -623,7 +629,7 @@ public class MailUtil {
 			Store store = _getStore(ses);
 			Folder folder = store.getFolder(folderName);
 			if (!folder.exists()) {
-				_log.error("The folder " + folderName + 
+				_log.error("The folder " + folderName +
 					" does not currently exist in the system");
 				throw new FolderException();
 			}
@@ -641,39 +647,39 @@ public class MailUtil {
 		throws FolderException, StoreException {
 
 		try {
-			if (!oldFolderName.equals(MAIL_INBOX_NAME) && 
+			if (!oldFolderName.equals(MAIL_INBOX_NAME) &&
 				!oldFolderName.startsWith(MAIL_BOX_STYLE)) {
 				oldFolderName = MAIL_BOX_STYLE + oldFolderName;
 			}
 
-			if (!newFolderName.equals(MAIL_INBOX_NAME) && 
+			if (!newFolderName.equals(MAIL_INBOX_NAME) &&
 				!newFolderName.startsWith(MAIL_BOX_STYLE)) {
 				newFolderName = MAIL_BOX_STYLE + newFolderName;
 			}
 
 			for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
 				if (DEFAULT_FOLDERS[i].equals(oldFolderName)) {
-					_log.error("The folder " + oldFolderName + 
+					_log.error("The folder " + oldFolderName +
 						" is a system-defined folder and cannot be changed");
 					throw new FolderException();
 				}
 				else if (DEFAULT_FOLDERS[i].equals(newFolderName)) {
-					_log.error("The folder " + newFolderName + 
+					_log.error("The folder " + newFolderName +
 						" is a system-defined folder and cannot be changed");
 					throw new FolderException();
 				}
 			}
-			
+
 			Store store = _getStore(ses);
 			Folder oldFolder = store.getFolder(oldFolderName);
 			Folder newFolder = store.getFolder(newFolderName);
 			if (!oldFolder.exists()) {
-				_log.error("The folder " + oldFolderName + 
+				_log.error("The folder " + oldFolderName +
 					" does not exist in the system");
 				throw new FolderException();
 			}
 			else if (newFolder.exists()) {
-				_log.error("The folder " + newFolderName + 
+				_log.error("The folder " + newFolderName +
 					" already exists in the system");
 				throw new FolderException();
 			}
@@ -683,13 +689,13 @@ public class MailUtil {
 			}
 
 			oldFolder.renameTo(newFolder);
-			
+
 			if (_getCurrentFolder(ses).getName().equals(oldFolderName)) {
 				setCurrentFolder(ses, newFolderName);
 			}
 		}
 		catch (MessagingException ex) {
-			_log.error("Error trying to rename folder from '" + oldFolderName + 
+			_log.error("Error trying to rename folder from '" + oldFolderName +
 				"' to '" + newFolderName + "'");
 			throw new FolderException(ex);
 		}
@@ -703,54 +709,54 @@ public class MailUtil {
 
 	private static void _replaceContentIds(MailMessage mm, String url) {
 		List list = mm.getRemoteAttachments();
-		
+
 		String body = mm.getHtmlBody();
-		
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("Body before CIDs have been replaced:\n" + body);
 		}
-			
+
 		for (int i = 0; i < list.size(); i++) {
 			RemoteMailAttachment rma = (RemoteMailAttachment)list.get(i);
-			
+
 			if (Validator.isNotNull(rma.getContentID())) {
 				String cid = rma.getContentID();
-				
+
 				if (cid.startsWith(StringPool.LESS_THAN) &&
 					cid.endsWith(StringPool.GREATER_THAN)) {
 
 					cid = "cid:" + cid.substring(1, cid.length() - 1);
 				}
 
-				String remotePath = url + "fileName=" + rma.getFilename() + 
+				String remotePath = url + "fileName=" + rma.getFilename() +
 					"&contentPath=" + rma.getContentPath();
 
 				_log.info(
 					"Replacing all CIDs '" + cid + "' with: " + remotePath);
 
 				body = StringUtil.replace(body, cid, remotePath);
-				
+
 				list.remove(i);
 				i--;
 			}
 		}
-		
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("Body after CIDs have been replaced:\n" + body);
 		}
-		
+
 		mm.setHtmlBody(body);
 	}
 
 	private static void _replaceEmbeddedImages(
-			HttpSession ses, MailMessage mm, String actionurl) 
-		throws ContentException, ContentPathException, FolderException, 
+			HttpSession ses, MailMessage mm, String actionurl)
+		throws ContentException, ContentPathException, FolderException,
 			StoreException {
-		
+
 		String cidPrefix = ses.getId() + (new Date()).getTime();
 
 		int cidCount = 0;
-		
+
 		String html = mm.getHtmlBody();
 
 		if (_log.isDebugEnabled()) {
@@ -764,17 +770,17 @@ public class MailUtil {
 
 			if (end > 0) {
 				end += 2;
-				
+
 				String attachmentPath = html.substring(beg, end);
 
-				String fileName = 
+				String fileName =
 					Http.getParameter(attachmentPath, "fileName", true);
-				String contentPath = 
+				String contentPath =
 					Http.getParameter(attachmentPath, "contentPath", true);
 
 				String cid = cidPrefix + cidCount;
 
-				_log.info("Replacing all attachment paths '" + attachmentPath + 
+				_log.info("Replacing all attachment paths '" + attachmentPath +
 						"' with: " + cid);
 
 				Object [] parts = getAttachment(ses, contentPath);
@@ -794,10 +800,10 @@ public class MailUtil {
 				beg = html.indexOf(actionurl);
 			}
 			else {
-				beg = html.indexOf(actionurl, beg + 1);				
+				beg = html.indexOf(actionurl, beg + 1);
 			}
 		}
-		
+
 		if (cidCount > 0) {
 			mm.setHtmlBody(html);
 		}
@@ -806,7 +812,7 @@ public class MailUtil {
 			_log.debug("Body after content paths have been replaced:\n" + html);
 		}
 	}
-	
+
 	private static void _setCurrentMessage(HttpSession ses, long messageId) {
 		ses.setAttribute(WebKeys.MAIL_MESSAGE, new Long(messageId));
 	}
@@ -876,11 +882,11 @@ public class MailUtil {
 			    mm.appendRemoteAttachment(_getRemoteAttachment(
 			    	part, contentPath + StringPool.PERIOD + -1));
 			}
-		} 
+		}
         catch (MessagingException ex) {
 			_log.error("Error extracting MIME content");
 			throw new ContentException(ex);
-		} 
+		}
 		catch (IOException ex) {
 			_log.error("Error extracting MIME content");
 			throw new ContentException(ex);
@@ -891,7 +897,7 @@ public class MailUtil {
 
 	private static IMAPFolder _getCurrentFolder(IMAPFolder folder)
 		throws FolderException {
-		
+
 		if (folder != null) {
 			return folder;
 		}
@@ -903,9 +909,9 @@ public class MailUtil {
 
 	private static IMAPFolder _getCurrentFolder(HttpSession ses)
 		throws FolderException {
-		
+
 		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER);
-		
+
 		return _getCurrentFolder(folder);
 	}
 
@@ -929,24 +935,24 @@ public class MailUtil {
 			}
 			else if (!folderName.equals(MAIL_INBOX_NAME) &&
 				!folderName.startsWith(MAIL_BOX_STYLE)) {
-	
+
 				folderName = MAIL_BOX_STYLE + folderName;
 			}
-	
+
 			folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER);
-	
+
 			if (folder != null) {
 				if (!folder.getName().equals(folderName)) {
 					_closeFolder(ses);
-	
+
 					folder = null;
 				}
 			}
-	
+
 			if (folder == null) {
 				folder = (IMAPFolder)_getStore(ses).getFolder(folderName);
 				folder.open(IMAPFolder.READ_WRITE);
-	
+
 				ses.setAttribute(WebKeys.MAIL_FOLDER, folder);
 				ses.removeAttribute(WebKeys.MAIL_MESSAGE);
 			}
@@ -1041,5 +1047,5 @@ public class MailUtil {
 	}
 
 	private static Log _log = LogFactory.getLog(MailUtil.class);
-	
+
 }

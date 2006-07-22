@@ -19,12 +19,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portlet.mail.util;
 
-import com.liferay.util.InternetAddressUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
+import com.liferay.util.mail.InternetAddressUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -55,7 +56,7 @@ public class MailMessage {
 	public void setTo(String to) throws Exception {
 		_to = InternetAddressUtil.getAddresses(to);
 	}
-	
+
 	public void setTo(Address [] to) {
 		_to = to;
 	}
@@ -67,7 +68,7 @@ public class MailMessage {
 	public void setReplyTo(String replyTos) throws Exception {
 		_replyTo = InternetAddressUtil.getAddresses(replyTos);
 	}
-	
+
 	public void setReplyTo(Address [] replyTo) {
 		_replyTo = replyTo;
 	}
@@ -83,7 +84,7 @@ public class MailMessage {
 	public void setCc(String ccs) throws Exception {
 		_cc = InternetAddressUtil.getAddresses(ccs);
 	}
-	
+
 	public Address [] getBcc() {
 		return _bcc;
 	}
@@ -142,11 +143,11 @@ public class MailMessage {
     public void setHtmlBody(String htmlBody) {
     	_htmlBody = htmlBody;
     }
-    
+
     public long getMessageUID() {
     	return _messageUID;
     }
-    
+
     public void setMessageUID(long messageUID) {
     	_messageUID = messageUID;
     }
@@ -154,11 +155,11 @@ public class MailMessage {
     public Date getSentDate() {
     	return _sentDate;
     }
-    
+
     public void setSentDate(Date sentDate) {
     	_sentDate = sentDate;
     }
-    
+
 	public List getAttachments() {
 		return _attachments;
 	}
@@ -166,27 +167,27 @@ public class MailMessage {
 	public void appendAttachment(MailAttachment ma) {
 		_attachments.add(ma);
 	}
-	
+
 	public List getRemoteAttachments() {
 		return _remoteAttachments;
 	}
 
 	public void setRemoteAttachments(List remoteAttachments) {
 		_remoteAttachments = remoteAttachments;
-	}	
-	
+	}
+
 	public void appendRemoteAttachment(RemoteMailAttachment rma) {
 		_remoteAttachments.add(rma);
 	}
 
 	public boolean isSimple() {
-		if (Validator.isNotNull(_htmlBody) || 
-			!_attachments.isEmpty() || 
+		if (Validator.isNotNull(_htmlBody) ||
+			!_attachments.isEmpty() ||
 			!_remoteAttachments.isEmpty()) {
 
 			return false;
 		}
-		
+
 		if (Validator.isNull(_plainBody)) {
 			_plainBody = StringPool.BLANK;
 		}
@@ -209,9 +210,9 @@ public class MailMessage {
 	private String _plainBody;
 
 	private String _htmlBody;
-	
+
 	private long _messageUID;
-	
+
 	private Date _sentDate;
 
 	private List _attachments = new ArrayList();

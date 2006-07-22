@@ -28,18 +28,7 @@ import com.liferay.util.ConverterException;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
-import com.liferay.util.StringPool;
-import com.liferay.util.StringUtil;
 import com.liferay.util.Time;
-
-import java.net.URL;
-
-import java.util.Vector;
-
-import org.apache.soap.Constants;
-import org.apache.soap.rpc.Call;
-import org.apache.soap.rpc.Parameter;
-import org.apache.soap.rpc.Response;
 
 /**
  * <a href="WeatherConverter.java.html"><b><i>View Source</i></b></a>

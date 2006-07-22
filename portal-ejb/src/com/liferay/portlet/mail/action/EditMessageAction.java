@@ -22,14 +22,10 @@
 
 package com.liferay.portlet.mail.action;
 
-import java.text.DateFormat;
-import java.util.Date;
-
 import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.DateFormats;
-import com.liferay.util.InternetAddressUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.RenderRequestImpl;
@@ -39,11 +35,18 @@ import com.liferay.util.Html;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
+import com.liferay.util.mail.InternetAddressUtil;
+
+import java.text.DateFormat;
+
+import java.util.Date;
 
 import javax.mail.internet.InternetAddress;
+
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionForm;
@@ -67,39 +70,39 @@ public class EditMessageAction extends PortletAction {
 		String composeAction = ParamUtil.getString(req, "composeAction");
 		long messageId = ParamUtil.getLong(req, "messageId");
 		String folderId = ParamUtil.getString(req, "folderId");
-		
+
 		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
 		HttpServletRequest svltReq = reqImpl.getHttpServletRequest();
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String attachmentUrl = 
+		String attachmentUrl =
 			themeDisplay.getPathMain() + "/mail/get_attachment?";
 
-		if (composeAction.equals("forward") || 
+		if (composeAction.equals("forward") ||
 			composeAction.startsWith("reply")) {
 
 			MailUtil.setCurrentFolder(svltReq.getSession(), folderId);
 			MailMessage mm = MailUtil.getMessage(
 				svltReq.getSession(), messageId, attachmentUrl);
-	
+
 			User user = PortalUtil.getUser(req);
-			DateFormat dateFormatter = 
+			DateFormat dateFormatter =
 				DateFormats.getDateTime(user.getLocale(), user.getTimeZone());
 			req.setAttribute(
 				WebKeys.MAIL_MESSAGE, _buildBody(mm, dateFormatter));
-	
+
 			if (composeAction.equals("forward")) {
 				req.setAttribute(WebKeys.MAIL_SUBJECT,
 					"Fw: " + _removeSubjectPrefix(mm.getSubject(), "fw"));
-				req.setAttribute(WebKeys.MAIL_ATTACHMENTS, 
+				req.setAttribute(WebKeys.MAIL_ATTACHMENTS,
 					mm.getRemoteAttachments());
 			}
 			else {
 				String tosStr = StringPool.BLANK;
 				String ccsStr = StringPool.BLANK;
-				
+
 				if (composeAction.equals("replyAll")) {
 					String userEmail =
 						PortalUtil.getUser(req).getEmailAddress();
@@ -109,34 +112,34 @@ public class EditMessageAction extends PortletAction {
 					ccsStr = InternetAddressUtil.toString(
 						InternetAddressUtil.removeEntry(mm.getCc(), userEmail));
 
-					String rtosStr = 
+					String rtosStr =
 						InternetAddressUtil.toString(mm.getReplyTo());
 
 					if (Validator.isNull(rtosStr)) {
-						rtosStr = 
+						rtosStr =
 							((InternetAddress)mm.getFrom()).toUnicodeString();
 					}
 
-					tosStr = 
+					tosStr =
 						rtosStr + StringPool.COMMA + StringPool.SPACE + tosStr;
 				}
 				else {
 					tosStr = InternetAddressUtil.toString(mm.getReplyTo());
 
 					if (Validator.isNull(tosStr)) {
-						tosStr = 
+						tosStr =
 							((InternetAddress)mm.getFrom()).toUnicodeString();
 					}
 				}
 
-				String [] recipients = { 
+				String [] recipients = {
 					Html.escape(tosStr, true),
 					Html.escape(ccsStr, true),
 					StringPool.BLANK
 				};
 
 				req.setAttribute(WebKeys.MAIL_RECIPIENTS, recipients);
-				req.setAttribute(WebKeys.MAIL_SUBJECT, 
+				req.setAttribute(WebKeys.MAIL_SUBJECT,
 					"Re: " + _removeSubjectPrefix(mm.getSubject(), "re"));
 			}
 		}
@@ -144,8 +147,8 @@ public class EditMessageAction extends PortletAction {
 			MailUtil.setCurrentFolder(svltReq.getSession(), folderId);
 			MailMessage mm = MailUtil.getMessage(
 				svltReq.getSession(), messageId, attachmentUrl);
-	
-			String [] recipients = { 
+
+			String [] recipients = {
 				Html.escape(InternetAddressUtil.toString(mm.getTo()), true),
 				Html.escape(InternetAddressUtil.toString(mm.getCc()), true),
 				Html.escape(InternetAddressUtil.toString(mm.getBcc()), true)
@@ -153,7 +156,7 @@ public class EditMessageAction extends PortletAction {
 
 			req.setAttribute(WebKeys.MAIL_RECIPIENTS, recipients);
 			req.setAttribute(WebKeys.MAIL_SUBJECT, mm.getSubject());
-			req.setAttribute(WebKeys.MAIL_ATTACHMENTS, 
+			req.setAttribute(WebKeys.MAIL_ATTACHMENTS,
 				mm.getRemoteAttachments());
 			req.setAttribute(WebKeys.MAIL_MESSAGE, mm.getHtmlBody());
 			req.setAttribute(WebKeys.MAIL_DRAFT_ID, new Long(messageId));
@@ -167,7 +170,7 @@ public class EditMessageAction extends PortletAction {
 		InternetAddress from = ((InternetAddress)mm.getFrom());
 
 		Date today = new Date();
-		
+
 		StringBuffer body = new StringBuffer();
 		body.append("<br /><br />");
 		body.append(
@@ -189,16 +192,16 @@ public class EditMessageAction extends PortletAction {
 
 	private String _removeSubjectPrefix(String subject, String prefix) {
 		if (Validator.isNotNull(subject)) {
-			String subjectLowerCase = subject.toLowerCase(); 
+			String subjectLowerCase = subject.toLowerCase();
 
-			while (subjectLowerCase.startsWith(prefix + ":") || 
+			while (subjectLowerCase.startsWith(prefix + ":") ||
 				subjectLowerCase.startsWith(prefix + ">"))	{
-	
+
 				subject = subject.substring(3).trim();
 				subjectLowerCase = subject.toLowerCase();
 			}
 		}
-		
+
 		return subject;
 	}
 

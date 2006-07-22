@@ -51,38 +51,38 @@ Long draftId = (Long)request.getAttribute(WebKeys.MAIL_DRAFT_ID);
 	function initEditor() {
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}
-	
+
 	/*
 	function <portlet:namespace />saveDraft() {
 		inputs = document.<portlet:namespace />fm.getElementsByTagName("input");
 		var body = parent.<portlet:namespace />editor.getHTML();
 		var queryString = "cmd=saveDraft&body=" + body;
-		
+
 		if (<portlet:namespace />messageId > 0) {
 			queryString = "&messageId=" + <portlet:namespace />messageId;
 		}
-		
+
 		for (var i = 0; i < inputs.length; i++) {
 			var input = inputs[i];
 			var inputName
-	
+
 			if (input.name && input.name.length > 0 &&
 				input.value && input.value.length > 0) {
 				inputName = input.name.replace(/^<portlet:namespace />/,"");
-				
+
 				queryString += "&" + inputName + "=" + input.value;
 			}
 		}
 
 		loadPage("<%= themeDisplay.getPathMain() %>/mail/action", queryString, <portlet:namespace />saveDraftReturn);
 	}
-	
+
 	function <portlet:namespace />saveDraftReturn(xmlHttpReq) {
 		var message = eval("(" + xmlHttpReq.responseText + ")");
 		<portlet:namespace />messageId = message.id;
 	}
 	*/
-	
+
 	function <portlet:namespace />completeMessage(send) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = send ? "<%= Constants.SEND %>" : "<%= Constants.SAVE %>";
 		document.<portlet:namespace />fm.<portlet:namespace />body.value = parent.<portlet:namespace />editor.getHTML();
@@ -107,7 +107,7 @@ Long draftId = (Long)request.getAttribute(WebKeys.MAIL_DRAFT_ID);
 			var del = document.createElement("a");
 			del.href = "javascript:<portlet:namespace />removeAttachment('" + newrow.id + "')";
 			del.innerHTML = "[<%= LanguageUtil.get(pageContext, "remove") %>]";
-	
+
 			newrow.insertCell(0).appendChild(browser);
 			newrow.insertCell(1).appendChild(spacer);
 			newrow.insertCell(2).appendChild(del);
@@ -119,9 +119,9 @@ Long draftId = (Long)request.getAttribute(WebKeys.MAIL_DRAFT_ID);
 			checkbox.value = contentPath;
 
 			var filename = document.createElement("span");
-			var href = "<%= themeDisplay.getPathMain() %>/mail/get_attachment?fileName=" + remoteFile + "&contentPath=" + contentPath;			
+			var href = "<%= themeDisplay.getPathMain() %>/mail/get_attachment?fileName=" + remoteFile + "&contentPath=" + contentPath;
 			filename.innerHTML = '<span class="font-small"><a href="' + href + '">' + remoteFile + '</a></span>';
-			
+
 			newrow.insertCell(0);
 			newrow.cells[0].appendChild(checkbox);
 			newrow.cells[0].appendChild(filename);

@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portlet.mail;
 
 import com.liferay.portal.PortalException;
@@ -46,4 +47,5 @@ public class FolderException extends PortalException {
 	public FolderException(Throwable cause) {
 		super(cause);
 	}
+
 }

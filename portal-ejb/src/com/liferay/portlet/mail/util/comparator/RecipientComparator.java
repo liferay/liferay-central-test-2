@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portlet.mail.util.comparator;
 
 import com.liferay.portlet.mail.util.MailEnvelope;
@@ -42,30 +43,31 @@ public class RecipientComparator implements Comparator {
 	public int compare(Object arg0, Object arg1) {
 		MailEnvelope me0 = (MailEnvelope)arg0;
 		MailEnvelope me1 = (MailEnvelope)arg1;
+
 		Long uid0 = new Long(me0.getMsgUID());
 		Long uid1 = new Long(me1.getMsgUID());
 
 		int comparison = 0;
 
 		if (_asc) {
-			comparison = GetterUtil.getString(me0.getRecipient()).trim().
-				compareTo(GetterUtil.getString(me1.getRecipient()).trim());
+			comparison = GetterUtil.getString(me0.getRecipient()).compareTo(
+				GetterUtil.getString(me1.getRecipient()));
 
 			if (comparison == 0) {
 				comparison = DateUtil.compareTo(me0.getDate(), me1.getDate());
-				
+
 				if (comparison == 0) {
 					comparison = uid0.compareTo(uid1);
 				}
 			}
 		}
 		else {
-			comparison = GetterUtil.getString(me1.getRecipient()).trim().
-				compareTo(GetterUtil.getString(me0.getRecipient()).trim());
+			comparison = GetterUtil.getString(me1.getRecipient()).compareTo(
+				GetterUtil.getString(me0.getRecipient()));
 
 			if (comparison == 0) {
 				comparison = DateUtil.compareTo(me1.getDate(), me0.getDate());
-				
+
 				if (comparison == 0) {
 					comparison = uid1.compareTo(uid0);
 				}

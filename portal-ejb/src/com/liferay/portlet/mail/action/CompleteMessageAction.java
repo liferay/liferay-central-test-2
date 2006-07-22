@@ -19,28 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portlet.mail.action;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.mail.Address;
-import javax.mail.internet.InternetAddress;
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
 
 import com.liferay.portal.model.User;
 import com.liferay.portal.shared.util.StackTraceUtil;
@@ -60,6 +40,30 @@ import com.liferay.util.FileUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
+
+import java.io.File;
+
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.mail.Address;
+import javax.mail.internet.InternetAddress;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
 
 /**
  * <a href="CompleteMessageAction.java.html"><b><i>View Source</i></b></a>
@@ -99,7 +103,7 @@ public class CompleteMessageAction extends PortletAction {
 
 				Map attachments = _getAttachments(
 					PortalUtil.getUploadPortletRequest(req));
-				
+
 				Set filenames = attachments.keySet();
 
 				for (Iterator itr = filenames.iterator(); itr.hasNext(); ) {
@@ -115,11 +119,11 @@ public class CompleteMessageAction extends PortletAction {
 				}
 
 				mm.setRemoteAttachments(_getRemoteAttachments(req));
-				
+
 				ThemeDisplay themeDisplay =
 					(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-				String url = 
+				String url =
 					themeDisplay.getPathMain() + "/mail/get_attachment?";
 
 				MailUtil.completeMessage(
@@ -138,10 +142,10 @@ public class CompleteMessageAction extends PortletAction {
 			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
-	
-	private static Map _getAttachments(UploadPortletRequest uploadReq) 
+
+	private static Map _getAttachments(UploadPortletRequest uploadReq)
 		throws Exception {
-		
+
 		Map attachments = new HashMap();
 
 		Enumeration enu = uploadReq.getParameterNames();

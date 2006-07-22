@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portlet.mail.util;
 
 import com.liferay.util.StringUtil;
@@ -48,7 +49,7 @@ public class RemoteMailAttachment {
 		path[0] = StringUtil.split(contentPath, FOLDER_SEPARATOR)[0];
 		path[1] = msgWrap[0];
 		path[2] = msgWrap[1];
-		
+
 		return path;
 	}
 
@@ -67,7 +68,7 @@ public class RemoteMailAttachment {
     public void setContentPath(String contentPath) {
         _contentPath = contentPath;
     }
-    
+
     public String getContentID() {
         return _contentID;
     }
@@ -75,11 +76,11 @@ public class RemoteMailAttachment {
     public void setContentID(String contentID) {
     	_contentID = contentID;
     }
-    
+
     private String _contentPath;
-    
+
     private String _contentID;
 
     private String _filename;
-    
+
 }

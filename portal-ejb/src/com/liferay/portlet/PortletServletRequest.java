@@ -100,7 +100,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 					retVal = _servletPath;
 				}
 			}
-			
+
 			if (name.startsWith("javax.servlet.include.") && retVal == null) {
 				retVal = StringPool.BLANK;
 			}
