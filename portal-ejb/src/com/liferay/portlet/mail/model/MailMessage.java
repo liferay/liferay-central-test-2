@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.mail.util;
+package com.liferay.portlet.mail.model;
 
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
@@ -49,7 +49,7 @@ public class MailMessage {
 		_from = from;
 	}
 
-	public Address [] getTo() {
+	public Address[] getTo() {
 		return _to;
 	}
 
@@ -57,27 +57,15 @@ public class MailMessage {
 		_to = InternetAddressUtil.getAddresses(to);
 	}
 
-	public void setTo(Address [] to) {
+	public void setTo(Address[] to) {
 		_to = to;
 	}
 
-	public Address [] getReplyTo() {
-		return _replyTo;
-	}
-
-	public void setReplyTo(String replyTos) throws Exception {
-		_replyTo = InternetAddressUtil.getAddresses(replyTos);
-	}
-
-	public void setReplyTo(Address [] replyTo) {
-		_replyTo = replyTo;
-	}
-
-	public Address [] getCc() {
+	public Address[] getCc() {
 		return _cc;
 	}
 
-	public void setCc(Address [] cc) {
+	public void setCc(Address[] cc) {
 		_cc = cc;
 	}
 
@@ -85,16 +73,28 @@ public class MailMessage {
 		_cc = InternetAddressUtil.getAddresses(ccs);
 	}
 
-	public Address [] getBcc() {
+	public Address[] getBcc() {
 		return _bcc;
 	}
 
-	public void setBcc(Address [] bcc) {
+	public void setBcc(Address[] bcc) {
 		_bcc = bcc;
 	}
 
 	public void setBcc(String bccs) throws Exception {
 		_bcc = InternetAddressUtil.getAddresses(bccs);
+	}
+
+	public Address[] getReplyTo() {
+		return _replyTo;
+	}
+
+	public void setReplyTo(String replyTos) throws Exception {
+		_replyTo = InternetAddressUtil.getAddresses(replyTos);
+	}
+
+	public void setReplyTo(Address[] replyTo) {
+		_replyTo = replyTo;
 	}
 
 	public String getSubject() {
@@ -109,6 +109,10 @@ public class MailMessage {
     	return GetterUtil.getString(_plainBody);
     }
 
+    public void setPlainBody(String plainBody) {
+    	_plainBody = plainBody;
+    }
+
     public void appendPlainBody(String plainBody) {
     	if (Validator.isNull(_plainBody)) {
     		_plainBody = plainBody;
@@ -116,10 +120,6 @@ public class MailMessage {
     	else {
     		_plainBody += StringPool.NEW_LINE + StringPool.NEW_LINE + plainBody;
     	}
-    }
-
-    public void setPlainBody(String plainBody) {
-    	_plainBody = plainBody;
     }
 
     public String getHtmlBody() {
@@ -131,6 +131,10 @@ public class MailMessage {
     	}
     }
 
+    public void setHtmlBody(String htmlBody) {
+    	_htmlBody = htmlBody;
+    }
+
     public void appendHtmlBody(String htmlBody) {
     	if (Validator.isNull(_htmlBody)) {
     		_htmlBody = htmlBody;
@@ -138,10 +142,6 @@ public class MailMessage {
     	else {
     		_htmlBody += "<HR/>" + htmlBody;
     	}
-    }
-
-    public void setHtmlBody(String htmlBody) {
-    	_htmlBody = htmlBody;
     }
 
     public long getMessageUID() {
@@ -181,8 +181,7 @@ public class MailMessage {
 	}
 
 	public boolean isSimple() {
-		if (Validator.isNotNull(_htmlBody) ||
-			!_attachments.isEmpty() ||
+		if (Validator.isNotNull(_htmlBody) || !_attachments.isEmpty() ||
 			!_remoteAttachments.isEmpty()) {
 
 			return false;
@@ -196,27 +195,16 @@ public class MailMessage {
 	}
 
 	private Address _from;
-
-	private Address [] _to;
-
-	private Address [] _cc;
-
-	private Address [] _bcc;
-
-	private Address [] _replyTo;
-
+	private Address[] _to;
+	private Address[] _cc;
+	private Address[] _bcc;
+	private Address[] _replyTo;
 	private String _subject;
-
 	private String _plainBody;
-
 	private String _htmlBody;
-
 	private long _messageUID;
-
 	private Date _sentDate;
-
 	private List _attachments = new ArrayList();
-
 	private List _remoteAttachments = new ArrayList();
 
 }

@@ -24,7 +24,7 @@ package com.liferay.portlet.mail.action;
 
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.mail.util.MailMessage;
+import com.liferay.portlet.mail.model.MailMessage;
 import com.liferay.portlet.mail.util.MailUtil;
 
 import javax.servlet.http.HttpServletRequest;

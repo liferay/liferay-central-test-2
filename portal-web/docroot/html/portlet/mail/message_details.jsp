@@ -22,8 +22,8 @@
  */
 %><%@
 include file="/html/portlet/init.jsp" %><%@
-page import="com.liferay.portlet.mail.util.MailMessage,
-			com.liferay.portlet.mail.util.RemoteMailAttachment,
+page import="com.liferay.portlet.mail.model.MailMessage,
+			com.liferay.portlet.mail.model.RemoteMailAttachment,
 			com.liferay.util.Html,
 			java.lang.Object.StringBuffer,
 			javax.mail.Address"

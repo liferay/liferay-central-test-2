@@ -29,7 +29,7 @@ import com.liferay.portal.util.DateFormats;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.RenderRequestImpl;
-import com.liferay.portlet.mail.util.MailMessage;
+import com.liferay.portlet.mail.model.MailMessage;
 import com.liferay.portlet.mail.util.MailUtil;
 import com.liferay.util.Html;
 import com.liferay.util.ParamUtil;

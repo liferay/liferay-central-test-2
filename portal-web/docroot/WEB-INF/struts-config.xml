@@ -799,23 +799,23 @@
 
 		<!-- Mail -->
 
-		<action path="/mail/view" type="com.liferay.portlet.mail.action.ViewMailAction">
+		<action path="/mail/action" type="com.liferay.portlet.mail.action.MailAction" />
+
+		<action path="/mail/complete_message" type="com.liferay.portlet.mail.action.CompleteMessageAction">
+			<forward name="portlet.mail.edit_message" path="portlet.mail.edit_message" />
 			<forward name="portlet.mail.view" path="portlet.mail.view" />
 		</action>
-
-		<action path="/mail/action" type="com.liferay.portlet.mail.action.MailAction" />
 
 		<action path="/mail/edit_message" type="com.liferay.portlet.mail.action.EditMessageAction">
 			<forward name="portlet.mail.edit_message" path="portlet.mail.edit_message" />
 		</action>
 
-		<action path="/mail/complete_message" type="com.liferay.portlet.mail.action.CompleteMessageAction">
-			<forward name="portlet.mail.view" path="portlet.mail.view" />
-			<forward name="portlet.mail.edit_message" path="portlet.mail.edit_message" />
-		</action>
-		
 		<action path="/mail/get_attachment" type="com.liferay.portlet.mail.action.GetAttachmentAction" />
-		
+
+		<action path="/mail/view" type="com.liferay.portlet.mail.action.ViewMailAction">
+			<forward name="portlet.mail.view" path="portlet.mail.view" />
+		</action>
+
 		<action path="/mail/view_message" type="com.liferay.portlet.mail.action.ViewMessageAction">
 			<forward name="portlet.mail.view_message" path="/portlet/mail/view_message.jsp" />
 		</action>

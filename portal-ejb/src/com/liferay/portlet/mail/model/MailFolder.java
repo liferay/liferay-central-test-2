@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.mail.util;
+package com.liferay.portlet.mail.model;
 
 /**
  * <a href="MailFolder.java.html"><b><i>View Source</i></b></a>
@@ -49,9 +49,7 @@ public class MailFolder {
 	}
 
 	private long _messageCount;
-
 	private String _name;
-
 	private long _newMessageCount;
 
 }

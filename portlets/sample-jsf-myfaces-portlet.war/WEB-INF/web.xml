@@ -16,14 +16,14 @@
 		<param-value>/WEB-INF/faces-config.xml</param-value>
 	</context-param>
 	<listener>
-		<listener-class>com.liferay.portal.shared.servlet.PortletContextListener</listener-class>
+		<listener-class>com.liferay.portal.kernel.servlet.PortletContextListener</listener-class>
 	</listener>
 	<listener>
 		<listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
 	</listener>
 	<servlet>
 		<servlet-name>sample_jsf_myfaces_portlet</servlet-name>
-		<servlet-class>com.liferay.portal.shared.servlet.PortletServlet</servlet-class>
+		<servlet-class>com.liferay.portal.kernel.servlet.PortletServlet</servlet-class>
 		<init-param>
 			<param-name>portlet-class</param-name>
 			<param-value>com.sample.jsfmyfaces.portlet.MyFacesGenericPortlet</param-value>

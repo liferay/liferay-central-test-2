@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.mail.util.comparator;
 
-import com.liferay.portlet.mail.util.MailEnvelope;
+import com.liferay.portlet.mail.model.MailEnvelope;
 import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 

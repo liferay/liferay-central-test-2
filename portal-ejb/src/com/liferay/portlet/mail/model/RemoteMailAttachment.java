@@ -20,25 +20,40 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.mail.util;
+package com.liferay.portlet.mail.model;
+
+import com.liferay.util.StringUtil;
 
 /**
- * <a href="MailAttachment.java.html"><b><i>View Source</i></b></a>
+ * <a href="RemoteMailAttachment.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
  *
  */
-public class MailAttachment {
+public class RemoteMailAttachment {
 
-    public String getContentType() {
-        return _contentType;
-    }
+	private static String FOLDER_SEPARATOR = "_MAIL_FOLDER_";
 
-    public void setContentType(String contentType) {
-        _contentType = contentType;
-    }
+	private static String MESSAGE_SEPARATOR = "_MAIL_MESSAGE_";
 
-    public String getFilename() {
+	public static String buildContentPath(String folderName, long messageUID) {
+		return folderName + FOLDER_SEPARATOR + messageUID + MESSAGE_SEPARATOR;
+	}
+
+	public static String[] parsePath(String contentPath) {
+		String[] path = new String[3];
+
+		String postFolder = StringUtil.split(contentPath, FOLDER_SEPARATOR)[1];
+		String[] msgWrap = StringUtil.split(postFolder, MESSAGE_SEPARATOR);
+
+		path[0] = StringUtil.split(contentPath, FOLDER_SEPARATOR)[0];
+		path[1] = msgWrap[0];
+		path[2] = msgWrap[1];
+
+		return path;
+	}
+
+	public String getFilename() {
         return _filename;
     }
 
@@ -46,12 +61,12 @@ public class MailAttachment {
         _filename = filename;
     }
 
-    public byte [] getContent() {
-        return _content;
+    public String getContentPath() {
+        return _contentPath;
     }
 
-    public void setContent(byte [] content) {
-        _content = content;
+    public void setContentPath(String contentPath) {
+        _contentPath = contentPath;
     }
 
     public String getContentID() {
@@ -62,12 +77,8 @@ public class MailAttachment {
     	_contentID = contentID;
     }
 
-    private String _contentType;
-
     private String _filename;
-
-    private byte [] _content;
-
+    private String _contentPath;
     private String _contentID;
 
 }

@@ -22,7 +22,7 @@
  */
 %><%@
 include file="/html/portlet/init.jsp" %><%@
-page import="com.liferay.portlet.mail.util.MailMessage"
+page import="com.liferay.portlet.mail.model.MailMessage"
 %>
 <%
 

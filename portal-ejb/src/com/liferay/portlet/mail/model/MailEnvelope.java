@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.mail.util;
+package com.liferay.portlet.mail.model;
 
 import java.util.Date;
 
@@ -89,17 +89,11 @@ public class MailEnvelope {
 	}
 
 	private String _recipient;
-
 	private String _subject;
-
 	private Date _date;
-
 	private long _msgUID;
-
 	private boolean _recent;
-
 	private boolean _flagged;
-
 	private boolean _answered;
 
 }

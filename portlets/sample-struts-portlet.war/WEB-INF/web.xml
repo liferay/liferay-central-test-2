@@ -8,11 +8,11 @@
 		<param-value>liferay.com</param-value>
 	</context-param>
 	<listener>
-		<listener-class>com.liferay.portal.shared.servlet.PortletContextListener</listener-class>
+		<listener-class>com.liferay.portal.kernel.servlet.PortletContextListener</listener-class>
 	</listener>
 	<servlet>
 		<servlet-name>sample_struts_portlet</servlet-name>
-		<servlet-class>com.liferay.portal.shared.servlet.PortletServlet</servlet-class>
+		<servlet-class>com.liferay.portal.kernel.servlet.PortletServlet</servlet-class>
 		<init-param>
 			<param-name>portlet-class</param-name>
 			<param-value>org.apache.portals.bridges.struts.StrutsPortlet</param-value>

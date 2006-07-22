@@ -4,6 +4,6 @@
 <web-app>
 	<display-name>sample-pack-01-layouttpl</display-name>
 	<listener>
-		<listener-class>com.liferay.portal.shared.servlet.LayoutTemplateContextListener</listener-class>
+		<listener-class>com.liferay.portal.kernel.servlet.LayoutTemplateContextListener</listener-class>
 	</listener>
 </web-app>

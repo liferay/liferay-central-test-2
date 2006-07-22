@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/init.jsp" %>
 <%@ page import="com.liferay.portlet.mail.ContentException" %>
 <%@ page import="com.liferay.portlet.mail.RecipientException" %>
-<%@ page import="com.liferay.portlet.mail.util.RemoteMailAttachment" %>
+<%@ page import="com.liferay.portlet.mail.model.RemoteMailAttachment" %>
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.journal.edit_article_content_xsd_el.jsp";
 %>
