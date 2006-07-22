@@ -66,7 +66,7 @@ public class LayoutTemplateDeployer extends BaseDeployer {
 		extraContent +=
 			"<listener>" +
 			"<listener-class>" +
-			"com.liferay.portal.shared.servlet.LayoutTemplateContextListener" +
+			"com.liferay.portal.kernel.servlet.LayoutTemplateContextListener" +
 			"</listener-class>" +
 			"</listener>";
 

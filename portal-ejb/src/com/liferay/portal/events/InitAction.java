@@ -23,11 +23,11 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.jcr.jackrabbit.JCRFactoryImpl;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.log.CommonsLogFactoryImpl;
 import com.liferay.portal.security.jaas.PortalConfiguration;
-import com.liferay.portal.shared.log.LogFactoryUtil;
-import com.liferay.portal.shared.util.PortalClassLoaderUtil;
-import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
 import com.liferay.portal.util.PropsUtil;

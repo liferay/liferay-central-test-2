@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.shopping.service.http;
 
-import com.liferay.portal.shared.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import com.liferay.portlet.shopping.service.spring.ShoppingCouponServiceUtil;
 

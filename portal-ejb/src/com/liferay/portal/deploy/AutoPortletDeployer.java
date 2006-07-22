@@ -22,8 +22,8 @@
 
 package com.liferay.portal.deploy;
 
-import com.liferay.portal.shared.deploy.AutoDeployException;
-import com.liferay.portal.shared.util.ServerDetector;
+import com.liferay.portal.kernel.deploy.AutoDeployException;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.tools.PortletDeployer;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;

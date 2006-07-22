@@ -22,7 +22,7 @@
 
 package com.liferay.portal.deploy;
 
-import com.liferay.portal.shared.deploy.AutoDeployException;
+import com.liferay.portal.kernel.deploy.AutoDeployException;
 
 /**
  * <a href="AutoDeployer.java.html"><b><i>View Source</i></b></a>

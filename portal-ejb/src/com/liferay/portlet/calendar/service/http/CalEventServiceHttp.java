@@ -22,13 +22,13 @@
 
 package com.liferay.portlet.calendar.service.http;
 
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.servlet.TunnelUtil;
-import com.liferay.portal.shared.util.BooleanWrapper;
-import com.liferay.portal.shared.util.IntegerWrapper;
-import com.liferay.portal.shared.util.MethodWrapper;
-import com.liferay.portal.shared.util.NullWrapper;
-import com.liferay.portal.shared.util.StackTraceUtil;
 
 import com.liferay.portlet.calendar.service.spring.CalEventServiceUtil;
 

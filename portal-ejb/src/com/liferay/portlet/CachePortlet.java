@@ -22,10 +22,10 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.servlet.PortletServlet;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.persistence.LayoutPK;
-import com.liferay.portal.shared.servlet.PortletServlet;
-import com.liferay.portal.shared.util.ClassUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;

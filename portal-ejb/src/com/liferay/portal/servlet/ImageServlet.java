@@ -22,9 +22,9 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.impl.ImageLocalUtil;
-import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;

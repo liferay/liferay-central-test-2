@@ -22,8 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.servlet.PortletSessionPool;
-import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.RenderRequest;

@@ -22,7 +22,7 @@
 
 package com.liferay.util;
 
-import com.liferay.portal.shared.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import java.util.ArrayList;
 import java.util.List;

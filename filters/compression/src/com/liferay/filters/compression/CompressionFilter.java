@@ -22,7 +22,7 @@
 
 package com.liferay.filters.compression;
 
-import com.liferay.portal.shared.util.ServerDetector;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.util.BrowserSniffer;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;

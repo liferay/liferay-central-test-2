@@ -22,9 +22,9 @@
 
 package com.liferay.portal.security.jaas.ext;
 
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.jaas.PortalPrincipal;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
-import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.util.StringPool;
 
 import java.io.IOException;

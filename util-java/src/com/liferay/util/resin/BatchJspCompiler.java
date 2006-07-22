@@ -22,9 +22,9 @@
 
 package com.liferay.util.resin;
 
-import com.liferay.portal.shared.util.MethodInvoker;
-import com.liferay.portal.shared.util.MethodWrapper;
-import com.liferay.portal.shared.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.util.FileUtil;
 
 import java.io.File;

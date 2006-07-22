@@ -68,6 +68,14 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.kernel.deploy">
+		<priority value="INFO" />
+	</category>
+
+	<category name="com.liferay.portal.kernel.util.ServerDetector">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.lucene">
 		<priority value="ERROR" />
 	</category>
@@ -138,14 +146,6 @@
 
 	<category name="com.liferay.portal.servlet.PortalSessionListener">
 		<priority value="ERROR" />
-	</category>
-
-	<category name="com.liferay.portal.shared.deploy">
-		<priority value="INFO" />
-	</category>
-
-	<category name="com.liferay.portal.shared.util.ServerDetector">
-		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.spring">

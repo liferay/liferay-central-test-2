@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.chat.util;
 
-import com.liferay.portal.shared.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 

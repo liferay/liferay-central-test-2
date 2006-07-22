@@ -22,9 +22,9 @@
 
 package com.liferay.portal.lucene;
 
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
-import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.portal.util.comparator.PortletLuceneComparator;
 import com.liferay.util.InstancePool;
 import com.liferay.util.Time;

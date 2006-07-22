@@ -22,9 +22,9 @@
 
 package com.liferay.mail.service.jms;
 
-import com.liferay.portal.shared.util.MethodInvoker;
-import com.liferay.portal.shared.util.MethodWrapper;
-import com.liferay.portal.shared.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.mail.MailEngine;
 import com.liferay.util.mail.MailMessage;

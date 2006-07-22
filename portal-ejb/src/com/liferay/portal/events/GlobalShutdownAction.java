@@ -28,8 +28,8 @@ import com.liferay.portal.im.MSNConnector;
 import com.liferay.portal.im.YMConnector;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.job.JobScheduler;
-import com.liferay.portal.shared.log.Jdk14LogFactoryImpl;
-import com.liferay.portal.shared.log.LogFactoryUtil;
+import com.liferay.portal.kernel.log.Jdk14LogFactoryImpl;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
 

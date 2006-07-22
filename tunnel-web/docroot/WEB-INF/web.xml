@@ -12,7 +12,7 @@
 	</context-param>
 	<filter>
 		<filter-name>Secure AxisServlet Filter</filter-name>
-		<filter-class>com.liferay.portal.shared.servlet.PortalFilterWrapper</filter-class>
+		<filter-class>com.liferay.portal.kernel.servlet.PortalFilterWrapper</filter-class>
 		<init-param>
 			<param-name>filter-class</param-name>
 			<param-value>com.liferay.filters.secure.SecureFilter</param-value>
@@ -24,7 +24,7 @@
 	</filter>
 	<filter>
 		<filter-name>Secure LiferayServlet Filter</filter-name>
-		<filter-class>com.liferay.portal.shared.servlet.PortalFilterWrapper</filter-class>
+		<filter-class>com.liferay.portal.kernel.servlet.PortalFilterWrapper</filter-class>
 		<init-param>
 			<param-name>filter-class</param-name>
 			<param-value>com.liferay.filters.secure.SecureFilter</param-value>
@@ -36,7 +36,7 @@
 	</filter>
 	<filter>
 		<filter-name>Secure SpringServlet Filter</filter-name>
-		<filter-class>com.liferay.portal.shared.servlet.PortalFilterWrapper</filter-class>
+		<filter-class>com.liferay.portal.kernel.servlet.PortalFilterWrapper</filter-class>
 		<init-param>
 			<param-name>filter-class</param-name>
 			<param-value>com.liferay.filters.secure.SecureFilter</param-value>
@@ -59,11 +59,11 @@
 		<url-pattern>/spring/*</url-pattern>
 	</filter-mapping>
 	<listener>
-		<listener-class>com.liferay.portal.shared.servlet.SpringServletContextListener</listener-class>
+		<listener-class>com.liferay.portal.kernel.servlet.SpringServletContextListener</listener-class>
 	</listener>
 	<servlet>
 		<servlet-name>AxisServlet</servlet-name>
-		<servlet-class>com.liferay.portal.shared.servlet.PortalServletWrapper</servlet-class>
+		<servlet-class>com.liferay.portal.kernel.servlet.PortalServletWrapper</servlet-class>
 		<init-param>
 			<param-name>servlet-class</param-name>
 			<param-value>com.liferay.portal.servlet.AxisServlet</param-value>
@@ -73,7 +73,7 @@
 	<servlet>
 		<servlet-name>LiferayServlet</servlet-name>
 		<display-name>LiferayServlet</display-name>
-		<servlet-class>com.liferay.portal.shared.servlet.PortalServletWrapper</servlet-class>
+		<servlet-class>com.liferay.portal.kernel.servlet.PortalServletWrapper</servlet-class>
 		<init-param>
 			<param-name>servlet-class</param-name>
 			<param-value>com.liferay.portal.servlet.TunnelServlet</param-value>
@@ -82,7 +82,7 @@
 	</servlet>
 	<servlet>
 		<servlet-name>SpringServlet</servlet-name>
-		<servlet-class>com.liferay.portal.shared.servlet.PortalServletWrapper</servlet-class>
+		<servlet-class>com.liferay.portal.kernel.servlet.PortalServletWrapper</servlet-class>
 		<init-param>
 			<param-name>servlet-class</param-name>
 			<param-value>com.liferay.portal.spring.servlet.RemotingServlet</param-value>

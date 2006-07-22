@@ -82,7 +82,7 @@ public class ThemeDeployer extends BaseDeployer {
 		extraContent +=
 			"<listener>" +
 			"<listener-class>" +
-			"com.liferay.portal.shared.servlet.ThemeContextListener" +
+			"com.liferay.portal.kernel.servlet.ThemeContextListener" +
 			"</listener-class>" +
 			"</listener>";
 

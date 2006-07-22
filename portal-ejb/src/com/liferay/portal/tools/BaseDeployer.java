@@ -243,7 +243,11 @@ public class BaseDeployer {
 
 		newContent = StringUtil.replace(
 			newContent, "com.liferay.portal.servlet.",
-			"com.liferay.portal.shared.servlet.");
+			"com.liferay.portal.kernel.servlet.");
+
+		newContent = StringUtil.replace(
+			newContent, "com.liferay.portal.shared.",
+			"com.liferay.portal.kernel.");
 
 		newContent = WebXMLBuilder.organizeWebXML(newContent);
 

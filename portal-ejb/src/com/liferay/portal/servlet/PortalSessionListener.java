@@ -23,10 +23,10 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.events.EventsProcessor;
+import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.service.spring.UserTrackerLocalServiceUtil;
-import com.liferay.portal.shared.util.ServerDetector;
-import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebAppPool;

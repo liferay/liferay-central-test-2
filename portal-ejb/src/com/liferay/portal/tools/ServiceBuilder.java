@@ -22,8 +22,8 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.model.ModelHintsUtil;
-import com.liferay.portal.shared.util.ClassUtil;
 import com.liferay.portal.util.EntityResolver;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
@@ -160,20 +160,20 @@ public class ServiceBuilder {
 
 		String[] checkImports = new String[] {
 			"com.liferay.portal.PortalException",
+			"com.liferay.portal.kernel.util.BooleanWrapper",
+			"com.liferay.portal.kernel.util.DoubleWrapper",
+			"com.liferay.portal.kernel.util.FloatWrapper",
+			"com.liferay.portal.kernel.util.IntegerWrapper",
+			"com.liferay.portal.kernel.util.LongWrapper",
+			"com.liferay.portal.kernel.util.MethodWrapper",
+			"com.liferay.portal.kernel.util.NullWrapper",
+			"com.liferay.portal.kernel.util.ShortWrapper",
+			"com.liferay.portal.kernel.util.StackTraceUtil",
 			"com.liferay.portal.security.auth.HttpPrincipal",
 			"com.liferay.portal.service.impl.PrincipalSessionBean",
 			"com.liferay.portal.servlet.TunnelUtil",
 			"com.liferay.portal.spring.hibernate.HibernateUtil",
 			"com.liferay.portal.util.PropsUtil",
-			"com.liferay.portal.shared.util.BooleanWrapper",
-			"com.liferay.portal.shared.util.DoubleWrapper",
-			"com.liferay.portal.shared.util.FloatWrapper",
-			"com.liferay.portal.shared.util.IntegerWrapper",
-			"com.liferay.portal.shared.util.LongWrapper",
-			"com.liferay.portal.shared.util.MethodWrapper",
-			"com.liferay.portal.shared.util.NullWrapper",
-			"com.liferay.portal.shared.util.ShortWrapper",
-			"com.liferay.portal.shared.util.StackTraceUtil",
 			"com.liferay.util.DateUtil",
 			"com.liferay.util.GetterUtil",
 			"com.liferay.util.InstancePool",
@@ -4422,17 +4422,17 @@ public class ServiceBuilder {
 			sb.append("import " + _packagePath + ".service.spring." + entity.getName() + "ServiceUtil;");
 		}
 
+		sb.append("import com.liferay.portal.kernel.util.BooleanWrapper;");
+		sb.append("import com.liferay.portal.kernel.util.DoubleWrapper;");
+		sb.append("import com.liferay.portal.kernel.util.FloatWrapper;");
+		sb.append("import com.liferay.portal.kernel.util.IntegerWrapper;");
+		sb.append("import com.liferay.portal.kernel.util.LongWrapper;");
+		sb.append("import com.liferay.portal.kernel.util.MethodWrapper;");
+		sb.append("import com.liferay.portal.kernel.util.NullWrapper;");
+		sb.append("import com.liferay.portal.kernel.util.ShortWrapper;");
+		sb.append("import com.liferay.portal.kernel.util.StackTraceUtil;");
 		sb.append("import com.liferay.portal.security.auth.HttpPrincipal;");
 		sb.append("import com.liferay.portal.servlet.TunnelUtil;");
-		sb.append("import com.liferay.portal.shared.util.BooleanWrapper;");
-		sb.append("import com.liferay.portal.shared.util.DoubleWrapper;");
-		sb.append("import com.liferay.portal.shared.util.FloatWrapper;");
-		sb.append("import com.liferay.portal.shared.util.IntegerWrapper;");
-		sb.append("import com.liferay.portal.shared.util.LongWrapper;");
-		sb.append("import com.liferay.portal.shared.util.MethodWrapper;");
-		sb.append("import com.liferay.portal.shared.util.NullWrapper;");
-		sb.append("import com.liferay.portal.shared.util.ShortWrapper;");
-		sb.append("import com.liferay.portal.shared.util.StackTraceUtil;");
 		sb.append("import com.liferay.util.ObjectValuePair;");
 		sb.append("import org.apache.commons.logging.Log;");
 		sb.append("import org.apache.commons.logging.LogFactory;");
@@ -4690,7 +4690,7 @@ public class ServiceBuilder {
 			sb.append("import " + _packagePath + ".service.spring." + entity.getName() + "ServiceUtil;");
 		}
 
-		sb.append("import com.liferay.portal.shared.util.StackTraceUtil;");
+		sb.append("import com.liferay.portal.kernel.util.StackTraceUtil;");
 		sb.append("import java.rmi.RemoteException;");
 		sb.append("import org.apache.commons.logging.Log;");
 		sb.append("import org.apache.commons.logging.LogFactory;");

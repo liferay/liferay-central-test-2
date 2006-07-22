@@ -22,7 +22,7 @@
 
 package com.liferay.portal.log;
 
-import com.liferay.portal.shared.log.Log;
+import com.liferay.portal.kernel.log.Log;
 
 /**
  * <a href="CommonsLogImpl.java.html"><b><i>View Source</i></b></a>

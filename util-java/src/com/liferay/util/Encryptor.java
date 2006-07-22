@@ -22,7 +22,7 @@
 
 package com.liferay.util;
 
-import com.liferay.portal.shared.util.ServerDetector;
+import com.liferay.portal.kernel.util.ServerDetector;
 
 import java.io.UnsupportedEncodingException;
 

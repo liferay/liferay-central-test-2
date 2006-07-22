@@ -25,7 +25,7 @@
 	<target name="clean">
 		<ant dir="classes" target="clean" inheritAll="false" />
 
-		<ant dir="portal-shared" target="clean" inheritAll="false" />
+		<ant dir="portal-kernel" target="clean" inheritAll="false" />
 
 		<ant dir="util-bridges" target="clean" inheritAll="false" />
 		<ant dir="util-java" target="clean" inheritAll="false" />
@@ -124,7 +124,7 @@
 	</target>
 
 	<target name="compile">
-		<ant dir="portal-shared" target="compile" inheritAll="false" />
+		<ant dir="portal-kernel" target="compile" inheritAll="false" />
 
 		<ant dir="util-bridges" target="compile" inheritAll="false" />
 		<ant dir="util-java" target="compile" inheritAll="false" />
@@ -145,7 +145,7 @@
 	</target>
 
 	<target name="jar">
-		<ant dir="portal-shared" target="jar" inheritAll="false" />
+		<ant dir="portal-kernel" target="jar" inheritAll="false" />
 
 		<ant dir="util-bridges" target="jar" inheritAll="false" />
 		<ant dir="util-java" target="jar" inheritAll="false" />
@@ -173,7 +173,7 @@
 	<target name="java2html">
 		<delete dir="api" />
 
-		<ant dir="portal-shared" target="java2html" inheritAll="false" />
+		<ant dir="portal-kernel" target="java2html" inheritAll="false" />
 
 		<ant dir="util-bridges" target="java2html" inheritAll="false" />
 		<ant dir="util-java" target="java2html" inheritAll="false" />
@@ -191,7 +191,7 @@
 	</target>
 
 	<target name="javadoc">
-		<ant dir="portal-shared" target="javadoc" inheritAll="false" />
+		<ant dir="portal-kernel" target="javadoc" inheritAll="false" />
 
 		<ant dir="util-bridges" target="javadoc" inheritAll="false" />
 		<ant dir="util-java" target="javadoc" inheritAll="false" />
@@ -209,7 +209,7 @@
 	</target>
 
 	<target name="deploy">
-		<ant dir="portal-shared" target="deploy" inheritAll="false" />
+		<ant dir="portal-kernel" target="deploy" inheritAll="false" />
 
 		<ant dir="util-bridges" target="deploy" inheritAll="false" />
 		<ant dir="util-java" target="deploy" inheritAll="false" />
@@ -519,10 +519,12 @@
 		<delete file="${lp.ext.dir}/lib/portal/util-jsf.jar" failonerror="false" />
 
 		<copy
-			file="${project.dir}/portal-shared/portal-shared.jar"
+			file="${project.dir}/portal-kernel/portal-kernel.jar"
 			todir="${lp.ext.dir}/lib/global"
 			overwrite="yes"
 		/>
+
+		<delete file="${lp.ext.dir}/lib/global/portal-shared.jar" failonerror="false" />
 
 		<copy todir="${lp.ext.dir}/lib/portal" overwrite="yes">
 			<fileset dir="${project.dir}/filters/compression" includes="compression-filter.jar" />

@@ -22,9 +22,9 @@
 
 package com.liferay.taglib.portlet;
 
-import com.liferay.portal.shared.util.MethodInvoker;
-import com.liferay.portal.shared.util.MethodWrapper;
-import com.liferay.portal.shared.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;

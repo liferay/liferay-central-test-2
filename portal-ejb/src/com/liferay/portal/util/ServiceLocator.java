@@ -22,8 +22,8 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.shared.util.MethodInvoker;
-import com.liferay.portal.shared.util.MethodWrapper;
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

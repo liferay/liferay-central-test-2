@@ -22,9 +22,9 @@
 
 package com.liferay.taglib.portletext;
 
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
 

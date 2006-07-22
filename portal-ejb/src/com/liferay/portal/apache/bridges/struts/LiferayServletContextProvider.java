@@ -22,7 +22,7 @@
 
 package com.liferay.portal.apache.bridges.struts;
 
-import com.liferay.portal.shared.servlet.ServletContextProvider;
+import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletContextImpl;

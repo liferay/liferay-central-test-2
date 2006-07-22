@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.journal.util;
 
-import com.liferay.portal.shared.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil;
 import com.liferay.util.GetterUtil;

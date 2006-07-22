@@ -22,7 +22,7 @@
 
 package com.liferay.util.dao.hibernate;
 
-import com.liferay.portal.shared.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.util.ExtPropertiesLoader;
 import com.liferay.util.StringUtil;
 

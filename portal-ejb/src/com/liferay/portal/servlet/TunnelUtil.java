@@ -22,9 +22,9 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.shared.util.MethodWrapper;
 import com.liferay.util.Base64;
 import com.liferay.util.ObjectValuePair;
 

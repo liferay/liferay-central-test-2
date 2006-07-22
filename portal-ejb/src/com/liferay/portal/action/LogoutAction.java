@@ -23,8 +23,8 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.events.EventsProcessor;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.servlet.PortletSessionPool;
-import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PropsUtil;

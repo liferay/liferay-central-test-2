@@ -22,9 +22,9 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.lucene.LuceneIndexer;
 import com.liferay.portal.lucene.LuceneUtil;
-import com.liferay.portal.shared.util.ServerDetector;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 

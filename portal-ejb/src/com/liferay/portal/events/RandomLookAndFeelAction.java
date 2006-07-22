@@ -22,12 +22,12 @@
 
 package com.liferay.portal.events;
 
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.spring.LayoutServiceUtil;
-import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.theme.ThemeDisplay;

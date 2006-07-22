@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.wiki.service.http;
 
-import com.liferay.portal.shared.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import com.liferay.portlet.wiki.service.spring.WikiPageServiceUtil;
 

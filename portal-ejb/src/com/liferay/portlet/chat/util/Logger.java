@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.chat.util;
 
-import com.liferay.portal.shared.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

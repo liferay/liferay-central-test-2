@@ -89,7 +89,7 @@ public class PortletDeployer extends BaseDeployer {
 		extraContent +=
 			"<listener>" +
 			"<listener-class>" +
-			"com.liferay.portal.shared.servlet.PortletContextListener" +
+			"com.liferay.portal.kernel.servlet.PortletContextListener" +
 			"</listener-class>" +
 			"</listener>";
 
@@ -142,7 +142,7 @@ public class PortletDeployer extends BaseDeployer {
 			sb.append(portletName);
 			sb.append("</servlet-name>");
 			sb.append("<servlet-class>");
-			sb.append("com.liferay.portal.shared.servlet.PortletServlet");
+			sb.append("com.liferay.portal.kernel.servlet.PortletServlet");
 			sb.append("</servlet-class>");
 			sb.append("<init-param>");
 			sb.append("<param-name>portlet-class</param-name>");

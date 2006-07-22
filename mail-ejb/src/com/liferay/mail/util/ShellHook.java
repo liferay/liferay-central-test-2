@@ -22,7 +22,7 @@
 
 package com.liferay.mail.util;
 
-import com.liferay.portal.shared.util.ProcessUtil;
+import com.liferay.portal.kernel.util.ProcessUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;

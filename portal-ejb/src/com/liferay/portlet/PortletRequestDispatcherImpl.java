@@ -22,8 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.servlet.NamespaceServletRequest;
-import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.struts.StrutsURLEncoder;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;

@@ -22,13 +22,13 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
-import com.liferay.portal.shared.util.StackTraceUtil;
 
 import java.io.IOException;
 

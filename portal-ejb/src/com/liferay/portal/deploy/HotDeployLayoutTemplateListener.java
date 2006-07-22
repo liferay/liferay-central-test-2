@@ -22,10 +22,10 @@
 
 package com.liferay.portal.deploy;
 
+import com.liferay.portal.kernel.deploy.HotDeployEvent;
+import com.liferay.portal.kernel.deploy.HotDeployException;
+import com.liferay.portal.kernel.deploy.HotDeployListener;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
-import com.liferay.portal.shared.deploy.HotDeployEvent;
-import com.liferay.portal.shared.deploy.HotDeployException;
-import com.liferay.portal.shared.deploy.HotDeployListener;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Http;
 import com.liferay.util.ObjectValuePair;

@@ -23,7 +23,7 @@
 package com.liferay.documentlibrary.util;
 
 import com.liferay.documentlibrary.service.jms.IndexProducer;
-import com.liferay.portal.shared.util.MethodWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.util.lucene.DocumentSummary;
 import com.liferay.util.lucene.IndexerException;
 

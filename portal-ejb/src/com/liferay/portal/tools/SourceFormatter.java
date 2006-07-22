@@ -22,7 +22,7 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.shared.util.ClassUtil;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.StringPool;

@@ -25,6 +25,7 @@ package com.liferay.portal.security.permission;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
@@ -33,7 +34,6 @@ import com.liferay.portal.service.spring.OrganizationServiceUtil;
 import com.liferay.portal.service.spring.PermissionServiceUtil;
 import com.liferay.portal.service.spring.ResourceServiceUtil;
 import com.liferay.portal.service.spring.UserGroupServiceUtil;
-import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.util.CollectionFactory;
 
 import java.util.List;

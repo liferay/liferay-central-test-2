@@ -22,11 +22,11 @@
 
 package com.liferay.taglib.portlet;
 
-import com.liferay.portal.shared.util.BooleanWrapper;
-import com.liferay.portal.shared.util.MethodInvoker;
-import com.liferay.portal.shared.util.MethodWrapper;
-import com.liferay.portal.shared.util.NullWrapper;
-import com.liferay.portal.shared.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.taglib.util.ParamAncestorTagImpl;
 
 import java.util.Map;

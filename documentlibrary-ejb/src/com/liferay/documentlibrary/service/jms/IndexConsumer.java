@@ -22,9 +22,9 @@
 
 package com.liferay.documentlibrary.service.jms;
 
-import com.liferay.portal.shared.util.MethodInvoker;
-import com.liferay.portal.shared.util.MethodWrapper;
-import com.liferay.portal.shared.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import javax.jms.Message;
 import javax.jms.MessageListener;

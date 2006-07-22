@@ -22,8 +22,8 @@
 
 package com.liferay.portal.deploy;
 
-import com.liferay.portal.shared.deploy.AutoDeployException;
-import com.liferay.portal.shared.deploy.AutoDeployListener;
+import com.liferay.portal.kernel.deploy.AutoDeployException;
+import com.liferay.portal.kernel.deploy.AutoDeployListener;
 
 import java.io.File;
 import java.io.IOException;

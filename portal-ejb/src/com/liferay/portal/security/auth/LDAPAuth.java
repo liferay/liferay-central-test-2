@@ -23,9 +23,9 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
-import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;

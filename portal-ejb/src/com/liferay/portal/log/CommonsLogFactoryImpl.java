@@ -22,8 +22,8 @@
 
 package com.liferay.portal.log;
 
-import com.liferay.portal.shared.log.Log;
-import com.liferay.portal.shared.log.LogFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactory;
 
 /**
  * <a href="CommonsLogFactoryImpl.java.html"><b><i>View Source</i></b></a>

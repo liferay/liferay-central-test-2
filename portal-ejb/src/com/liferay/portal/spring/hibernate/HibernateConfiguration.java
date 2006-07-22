@@ -22,7 +22,7 @@
 
 package com.liferay.portal.spring.hibernate;
 
-import com.liferay.portal.shared.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.StringUtil;
 

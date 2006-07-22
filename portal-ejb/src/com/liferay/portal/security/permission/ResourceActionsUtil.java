@@ -23,12 +23,12 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.language.LanguageException;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
-import com.liferay.portal.shared.util.StackTraceUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
