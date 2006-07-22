@@ -37,13 +37,13 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.mail.util.MailUtil;
 
 /**
- * <a href="EditMessageAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewMailAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Ming-Gih Lam
  * @author 	Alexander Chow
  *
  */
-public class ViewMailboxAction extends PortletAction {
+public class ViewMailAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -71,6 +71,6 @@ public class ViewMailboxAction extends PortletAction {
 		return mapping.findForward("portlet.mail.view");
 	}
 
-	private static Log _log = LogFactory.getLog(ViewMailboxAction.class);
+	private static Log _log = LogFactory.getLog(ViewMailAction.class);
 
 }

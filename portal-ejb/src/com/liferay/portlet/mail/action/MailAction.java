@@ -23,7 +23,6 @@
 package com.liferay.portlet.mail.action;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -35,7 +34,6 @@ import java.util.TimeZone;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -66,12 +64,12 @@ import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 
 /**
- * <a href="MailboxAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="MailAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Ming-Gih Lam
  *
  */
-public class MailboxAction extends JSONAction {
+public class MailAction extends JSONAction {
 
 	public String getJSON(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
@@ -295,6 +293,6 @@ public class MailboxAction extends JSONAction {
 		return jsonObj.toString();
 	}
 */
-	private static Log _log = LogFactory.getLog(MailboxAction.class);
+	private static Log _log = LogFactory.getLog(MailAction.class);
 
 }
