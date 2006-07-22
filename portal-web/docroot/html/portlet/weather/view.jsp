@@ -55,7 +55,7 @@ for (int i = 0; i < zips.length; i++) {
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td align="right">
-				<img border="0" height="31" hspace="0" src="<%= PortalUtil.createSecureProxyURL(weather.getIconURL(), request.isSecure()) %>" vspace="0" width="31">
+				<img src="<%= PortalUtil.createSecureProxyURL(weather.getIconURL(), request.isSecure()) %>">
 			</td>
 		</tr>
 
