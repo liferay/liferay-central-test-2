@@ -47,7 +47,7 @@ Address []to = mm.getTo();
 		<td><%= Html.escape(from.toString(), false) %></td>
 	</tr>
 	<%
-	if (to != null && to.length > 1) {
+	if (to != null) {
 		StringBuffer sb = new StringBuffer();
 		
 		_createAddresses(sb, to);
