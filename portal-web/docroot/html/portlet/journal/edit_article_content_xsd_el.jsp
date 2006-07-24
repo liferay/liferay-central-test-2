@@ -70,7 +70,7 @@ for (int i = 0; i < elPathNames.length; i++) {
 			foundEl = true;
 
 			if ((i + 1) == elPathNames.length) {
-				elContent = tempEl.elementText("dynamic-content");
+				elContent = GetterUtil.getString(tempEl.elementText("dynamic-content"));
 
 				if (!elType.equals("text_area")) {
 					elContent = Html.toInputSafe(elContent);

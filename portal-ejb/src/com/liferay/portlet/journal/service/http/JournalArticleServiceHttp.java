@@ -513,92 +513,161 @@ public class JournalArticleServiceHttp {
 		}
 	}
 
-	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
-		HttpPrincipal httpPrincipal, java.lang.String articleId,
-		double version, boolean incrementVersion, java.lang.String title,
-		java.lang.String content, java.lang.String type,
-		java.lang.String structureId, java.lang.String templateId,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
-		int reviewDateDay, int reviewDateYear, int reviewDateHour,
-		int reviewDateMinute, boolean neverReview, java.util.Map images,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
+	public static com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
+		HttpPrincipal httpPrincipal, java.lang.String companyId,
+		java.lang.String articleId, double version, java.lang.String languageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = articleId;
+			Object paramObj0 = companyId;
 
-			if (articleId == null) {
+			if (companyId == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = new DoubleWrapper(version);
-			Object paramObj2 = new BooleanWrapper(incrementVersion);
-			Object paramObj3 = title;
+			Object paramObj1 = articleId;
 
-			if (title == null) {
+			if (articleId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new DoubleWrapper(version);
+			Object paramObj3 = languageId;
+
+			if (languageId == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = content;
+			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
+					"removeArticleLocale",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			Object returnObj = null;
 
-			if (content == null) {
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw e;
+			}
+
+			return (com.liferay.portlet.journal.model.JournalArticle)returnObj;
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			_log.error(StackTraceUtil.getStackTrace(pe));
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(StackTraceUtil.getStackTrace(se));
+			throw se;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new com.liferay.portal.SystemException(stackTrace);
+		}
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
+		HttpPrincipal httpPrincipal, java.lang.String companyId,
+		java.lang.String articleId, double version, boolean incrementVersion,
+		java.lang.String title, java.lang.String content,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
+		int reviewDateHour, int reviewDateMinute, boolean neverReview,
+		java.util.Map images, java.lang.String articleURL,
+		javax.portlet.PortletPreferences prefs)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = companyId;
+
+			if (companyId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = articleId;
+
+			if (articleId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new DoubleWrapper(version);
+			Object paramObj3 = new BooleanWrapper(incrementVersion);
+			Object paramObj4 = title;
+
+			if (title == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = type;
+			Object paramObj5 = content;
 
-			if (type == null) {
+			if (content == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = structureId;
+			Object paramObj6 = type;
 
-			if (structureId == null) {
+			if (type == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = templateId;
+			Object paramObj7 = structureId;
 
-			if (templateId == null) {
+			if (structureId == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = new IntegerWrapper(displayDateMonth);
-			Object paramObj9 = new IntegerWrapper(displayDateDay);
-			Object paramObj10 = new IntegerWrapper(displayDateYear);
-			Object paramObj11 = new IntegerWrapper(displayDateHour);
-			Object paramObj12 = new IntegerWrapper(displayDateMinute);
-			Object paramObj13 = new IntegerWrapper(expirationDateMonth);
-			Object paramObj14 = new IntegerWrapper(expirationDateDay);
-			Object paramObj15 = new IntegerWrapper(expirationDateYear);
-			Object paramObj16 = new IntegerWrapper(expirationDateHour);
-			Object paramObj17 = new IntegerWrapper(expirationDateMinute);
-			Object paramObj18 = new BooleanWrapper(neverExpire);
-			Object paramObj19 = new IntegerWrapper(reviewDateMonth);
-			Object paramObj20 = new IntegerWrapper(reviewDateDay);
-			Object paramObj21 = new IntegerWrapper(reviewDateYear);
-			Object paramObj22 = new IntegerWrapper(reviewDateHour);
-			Object paramObj23 = new IntegerWrapper(reviewDateMinute);
-			Object paramObj24 = new BooleanWrapper(neverReview);
-			Object paramObj25 = images;
+			Object paramObj8 = templateId;
+
+			if (templateId == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = new IntegerWrapper(displayDateMonth);
+			Object paramObj10 = new IntegerWrapper(displayDateDay);
+			Object paramObj11 = new IntegerWrapper(displayDateYear);
+			Object paramObj12 = new IntegerWrapper(displayDateHour);
+			Object paramObj13 = new IntegerWrapper(displayDateMinute);
+			Object paramObj14 = new IntegerWrapper(expirationDateMonth);
+			Object paramObj15 = new IntegerWrapper(expirationDateDay);
+			Object paramObj16 = new IntegerWrapper(expirationDateYear);
+			Object paramObj17 = new IntegerWrapper(expirationDateHour);
+			Object paramObj18 = new IntegerWrapper(expirationDateMinute);
+			Object paramObj19 = new BooleanWrapper(neverExpire);
+			Object paramObj20 = new IntegerWrapper(reviewDateMonth);
+			Object paramObj21 = new IntegerWrapper(reviewDateDay);
+			Object paramObj22 = new IntegerWrapper(reviewDateYear);
+			Object paramObj23 = new IntegerWrapper(reviewDateHour);
+			Object paramObj24 = new IntegerWrapper(reviewDateMinute);
+			Object paramObj25 = new BooleanWrapper(neverReview);
+			Object paramObj26 = images;
 
 			if (images == null) {
-				paramObj25 = new NullWrapper("java.util.Map");
+				paramObj26 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj26 = articleURL;
+			Object paramObj27 = articleURL;
 
 			if (articleURL == null) {
-				paramObj26 = new NullWrapper("java.lang.String");
+				paramObj27 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj27 = prefs;
+			Object paramObj28 = prefs;
 
 			if (prefs == null) {
-				paramObj27 = new NullWrapper("javax.portlet.PortletPreferences");
+				paramObj28 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
@@ -610,7 +679,7 @@ public class JournalArticleServiceHttp {
 						paramObj14, paramObj15, paramObj16, paramObj17,
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
-						paramObj26, paramObj27
+						paramObj26, paramObj27, paramObj28
 					});
 			Object returnObj = null;
 

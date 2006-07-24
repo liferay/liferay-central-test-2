@@ -759,6 +759,24 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
+	public JournalArticle removeArticleLocale(
+			String companyId, String articleId, double version,
+			String languageId)
+		throws PortalException, SystemException {
+
+		JournalArticle article = JournalArticleUtil.findByPrimaryKey(
+			new JournalArticlePK(companyId, articleId, version));
+
+		String content = JournalUtil.removeArticleLocale(
+			article.getContent(), languageId);
+
+		article.setContent(content);
+
+		JournalArticleUtil.update(article);
+
+		return article;
+	}
+
 	public Hits search(
 			String companyId, String groupId, String title, String content,
 			String type)
@@ -1118,6 +1136,7 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			String defaultElLanguage = "";
+
 			if (!Validator.isNotNull(elLanguage)) {
 				defaultElLanguage =
 					"_" + LocaleUtil.toLanguageId(Locale.getDefault());

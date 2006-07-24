@@ -284,6 +284,15 @@ public class JournalArticleLocalServiceEJBImpl
 		getService().reIndex(ids);
 	}
 
+	public com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
+		java.lang.String companyId, java.lang.String articleId, double version,
+		java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().removeArticleLocale(companyId, articleId, version,
+			languageId);
+	}
+
 	public com.liferay.util.lucene.Hits search(java.lang.String companyId,
 		java.lang.String groupId, java.lang.String title,
 		java.lang.String content, java.lang.String type)

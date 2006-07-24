@@ -639,6 +639,28 @@ public class JournalArticleLocalServiceUtil {
 		}
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
+		java.lang.String companyId, java.lang.String articleId, double version,
+		java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+			return journalArticleLocalService.removeArticleLocale(companyId,
+				articleId, version, languageId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static com.liferay.util.lucene.Hits search(
 		java.lang.String companyId, java.lang.String groupId,
 		java.lang.String title, java.lang.String content, java.lang.String type)

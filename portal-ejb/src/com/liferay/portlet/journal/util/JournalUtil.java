@@ -593,6 +593,62 @@ public class JournalUtil {
 		return curContent;
 	}
 
+	public static String removeArticleLocale(
+		String content, String languageId) {
+
+		try {
+			SAXReader reader = new SAXReader();
+
+			Document doc = reader.read(new StringReader(content));
+
+			Element root = doc.getRootElement();
+
+			root.setAttributeValue(
+				"available-locales",
+				StringUtil.remove(
+					root.attributeValue("available-locales"), "de_DE"));
+
+			removeArticleLocale(root, languageId);
+
+			content = formatXML(doc);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return content;
+	}
+
+	public static void removeArticleLocale(Element el, String languageId) {
+		Iterator itr1 = el.elements("dynamic-element").iterator();
+
+		while (itr1.hasNext()) {
+			Element dynamicEl = (Element)itr1.next();
+
+			Iterator itr2 = dynamicEl.elements("dynamic-content").iterator();
+
+			while (itr2.hasNext()) {
+				Element dynamicContentEl = (Element)itr2.next();
+
+				String curLanguageId = GetterUtil.getString(
+					dynamicContentEl.attributeValue("language-id"));
+
+				if (curLanguageId.equals(languageId)) {
+					String id = GetterUtil.getString(
+						dynamicContentEl.attributeValue("id"));
+
+					if (Validator.isNotNull(id)) {
+						ImageLocalUtil.remove(id);
+					}
+
+					dynamicContentEl.detach();
+				}
+			}
+
+			removeArticleLocale(dynamicEl, languageId);
+		}
+	}
+
 	public static void removeRecentArticle(
 		PortletRequest req, String articleId) {
 

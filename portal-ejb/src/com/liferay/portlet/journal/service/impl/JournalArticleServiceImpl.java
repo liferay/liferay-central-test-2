@@ -138,29 +138,39 @@ public class JournalArticleServiceImpl
 			companyId, articleId, version, articleURL, prefs);
 	}
 
-	public JournalArticle updateArticle(
-			String articleId, double version, boolean incrementVersion,
-			String title, String content, String type, String structureId,
-			String templateId, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
-			int reviewDateDay, int reviewDateYear, int reviewDateHour,
-			int reviewDateMinute, boolean neverReview, Map images,
-			String articleURL, PortletPreferences prefs)
+	public JournalArticle removeArticleLocale(
+			String companyId, String articleId, double version,
+			String languageId)
 		throws PortalException, SystemException {
 
-		User user = getUser();
+		JournalArticlePermission.check(
+			getPermissionChecker(), companyId, articleId, ActionKeys.UPDATE);
+
+		return JournalArticleLocalServiceUtil.removeArticleLocale(
+			companyId, articleId, version, languageId);
+	}
+
+	public JournalArticle updateArticle(
+			String companyId, String articleId, double version,
+			boolean incrementVersion, String title, String content, String type,
+			String structureId, String templateId, int displayDateMonth,
+			int displayDateDay, int displayDateYear, int displayDateHour,
+			int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
+			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
+			boolean neverReview, Map images, String articleURL,
+			PortletPreferences prefs)
+		throws PortalException, SystemException {
 
 		JournalArticlePermission.check(
-			getPermissionChecker(), user.getCompanyId(), articleId,
-			ActionKeys.UPDATE);
+			getPermissionChecker(), companyId, articleId, ActionKeys.UPDATE);
 
 		return JournalArticleLocalServiceUtil.updateArticle(
-			user.getUserId(), articleId, version, incrementVersion, title,
-			content, type, structureId, templateId, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			getUserId(), articleId, version, incrementVersion, title, content,
+			type, structureId, templateId, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,

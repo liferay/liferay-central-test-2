@@ -175,25 +175,47 @@ public class JournalArticleServiceUtil {
 		}
 	}
 
-	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
-		java.lang.String articleId, double version, boolean incrementVersion,
-		java.lang.String title, java.lang.String content,
-		java.lang.String type, java.lang.String structureId,
-		java.lang.String templateId, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
-		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
-		int reviewDateHour, int reviewDateMinute, boolean neverReview,
-		java.util.Map images, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs)
+	public static com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
+		java.lang.String companyId, java.lang.String articleId, double version,
+		java.lang.String languageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
 			JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
-			return journalArticleService.updateArticle(articleId, version,
-				incrementVersion, title, content, type, structureId,
+			return journalArticleService.removeArticleLocale(companyId,
+				articleId, version, languageId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
+		java.lang.String companyId, java.lang.String articleId, double version,
+		boolean incrementVersion, java.lang.String title,
+		java.lang.String content, java.lang.String type,
+		java.lang.String structureId, java.lang.String templateId,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
+		int reviewDateDay, int reviewDateYear, int reviewDateHour,
+		int reviewDateMinute, boolean neverReview, java.util.Map images,
+		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
+
+			return journalArticleService.updateArticle(companyId, articleId,
+				version, incrementVersion, title, content, type, structureId,
 				templateId, displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, expirationDateMonth,
 				expirationDateDay, expirationDateYear, expirationDateHour,
