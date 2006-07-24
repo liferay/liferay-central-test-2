@@ -100,11 +100,19 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />pageDelta">
-			<option <%= (pageDelta == 5) ? "selected" : "" %> value="5">5</option>
-			<option <%= (pageDelta == 10) ? "selected" : "" %> value="10">10</option>
-			<option <%= (pageDelta == 25) ? "selected" : "" %> value="25">25</option>
-			<option <%= (pageDelta == 50) ? "selected" : "" %> value="50">50</option>
-			<option <%= (pageDelta == 100) ? "selected" : "" %> value="100">100</option>
+
+			<%
+			String[] pageDeltaValues = PropsUtil.getArray(PropsUtil.JOURNAL_ARTICLES_PAGE_DELTA_VALUES);
+
+			for (int i = 0; i < pageDeltaValues.length; i++) {
+			%>
+
+				<option <%= (pageDelta == GetterUtil.getInteger(pageDeltaValues[i])) ? "selected" : "" %> value="<%= pageDeltaValues[i] %>"><%= pageDeltaValues[i] %></option>
+			
+			<%
+			}
+			%>
+
 		</select>
 	</td>
 </tr>
