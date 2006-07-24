@@ -286,13 +286,17 @@ public class StringUtil {
 
 			if (pos == -1) {
 				if (s.startsWith(remove + delimiter)) {
-					s = s.substring(
-							remove.length() + delimiter.length(), s.length());
+					int x = remove.length() + delimiter.length();
+					int y = s.length();
+
+					s = s.substring(x, y);
 				}
 			}
 			else {
-				s = s.substring(0, pos) + s.substring(pos + remove.length() +
-					delimiter.length(), s.length());
+				int x = pos + remove.length() + delimiter.length();
+				int y = s.length();
+
+				s = s.substring(0, pos) + s.substring(x, y);
 			}
 		}
 
@@ -409,7 +413,7 @@ public class StringUtil {
 					break;
 				}
 			}
-			
+
 			s = s.substring(0, length) + suffix;
 		}
 

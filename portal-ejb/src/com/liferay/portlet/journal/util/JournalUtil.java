@@ -603,10 +603,20 @@ public class JournalUtil {
 
 			Element root = doc.getRootElement();
 
-			root.setAttributeValue(
-				"available-locales",
-				StringUtil.remove(
-					root.attributeValue("available-locales"), "de_DE"));
+			String availableLocales = root.attributeValue("available-locales");
+
+			if (availableLocales == null) {
+				return content;
+			}
+
+			availableLocales = StringUtil.remove(availableLocales, languageId);
+
+			if (availableLocales.endsWith(",")) {
+				availableLocales = availableLocales.substring(
+					0, availableLocales.length() - 1);
+			}
+
+			root.setAttributeValue("available-locales", availableLocales);
 
 			removeArticleLocale(root, languageId);
 

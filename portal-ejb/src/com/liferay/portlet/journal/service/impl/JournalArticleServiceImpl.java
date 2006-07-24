@@ -31,9 +31,11 @@ import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
+import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.spring.JournalArticleService;
 
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
@@ -136,6 +138,20 @@ public class JournalArticleServiceImpl
 
 		JournalArticleLocalServiceUtil.expireArticle(
 			companyId, articleId, version, articleURL, prefs);
+	}
+
+	public void removeArticleLocale(String companyId, String languageId)
+		throws PortalException, SystemException {
+
+		Iterator itr = JournalArticleUtil.findByCompanyId(companyId).iterator();
+
+		while (itr.hasNext()) {
+			JournalArticle article = (JournalArticle)itr.next();
+
+			removeArticleLocale(
+				companyId, article.getArticleId(), article.getVersion(),
+				languageId);
+		}
 	}
 
 	public JournalArticle removeArticleLocale(

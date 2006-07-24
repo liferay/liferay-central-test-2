@@ -128,6 +128,14 @@ public class JournalArticleServiceEJBImpl implements JournalArticleService,
 			prefs);
 	}
 
+	public void removeArticleLocale(java.lang.String companyId,
+		java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		getService().removeArticleLocale(companyId, languageId);
+	}
+
 	public com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
 		java.lang.String companyId, java.lang.String articleId, double version,
 		java.lang.String languageId)

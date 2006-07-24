@@ -175,6 +175,25 @@ public class JournalArticleServiceUtil {
 		}
 	}
 
+	public static void removeArticleLocale(java.lang.String companyId,
+		java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
+			journalArticleService.removeArticleLocale(companyId, languageId);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
 		java.lang.String companyId, java.lang.String articleId, double version,
 		java.lang.String languageId)

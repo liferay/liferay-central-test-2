@@ -108,7 +108,7 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 			%>
 
 				<option <%= (pageDelta == GetterUtil.getInteger(pageDeltaValues[i])) ? "selected" : "" %> value="<%= pageDeltaValues[i] %>"><%= pageDeltaValues[i] %></option>
-			
+
 			<%
 			}
 			%>

@@ -71,6 +71,18 @@ public class JournalArticleServiceSoap {
 		}
 	}
 
+	public static void removeArticleLocale(java.lang.String companyId,
+		java.lang.String languageId) throws RemoteException {
+		try {
+			JournalArticleServiceUtil.removeArticleLocale(companyId, languageId);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticleModel removeArticleLocale(
 		java.lang.String companyId, java.lang.String articleId, double version,
 		java.lang.String languageId) throws RemoteException {

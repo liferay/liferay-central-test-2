@@ -767,12 +767,14 @@ public class JournalArticleLocalServiceImpl
 		JournalArticle article = JournalArticleUtil.findByPrimaryKey(
 			new JournalArticlePK(companyId, articleId, version));
 
-		String content = JournalUtil.removeArticleLocale(
-			article.getContent(), languageId);
+		if (Validator.isNotNull(article.getStructureId())) {
+			String content = JournalUtil.removeArticleLocale(
+				article.getContent(), languageId);
 
-		article.setContent(content);
+			article.setContent(content);
 
-		JournalArticleUtil.update(article);
+			JournalArticleUtil.update(article);
+		}
 
 		return article;
 	}
