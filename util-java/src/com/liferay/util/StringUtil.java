@@ -389,7 +389,7 @@ public class StringUtil {
 	}
 
 	public static String shorten(String s, int length) {
-		return shorten(s, length, "..");
+		return shorten(s, length, "...");
 	}
 
 	public static String shorten(String s, String suffix) {
@@ -402,6 +402,14 @@ public class StringUtil {
 		}
 
 		if (s.length() > length) {
+			for (int j = length; j >= 0; j--) {
+				if (Character.isWhitespace(s.charAt(j))) {
+					length = j;
+
+					break;
+				}
+			}
+			
 			s = s.substring(0, length) + suffix;
 		}
 
