@@ -23,15 +23,20 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.service.spring.GroupLocalServiceUtil;
+import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.Randomizer;
 
-import java.util.Random;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -82,24 +87,22 @@ public class RandomLayoutAction extends Action {
 				return;
 			}
 
-			Random random = new Random();
-
-			/*Group generalGuestGroup = GroupLocalServiceUtil.getGroupByName(
-				PortalUtil.getCompanyId(req), Group.GENERAL_GUEST);
+			Group generalGuestGroup = GroupLocalServiceUtil.getGroup(
+				themeDisplay.getCompanyId(), Group.GUEST);
 
 			List layouts = LayoutLocalServiceUtil.getLayouts(
-				Layout.GROUP + generalGuestGroup.getGroupId());
+				Layout.PUBLIC + generalGuestGroup.getGroupId());
 
 			if (layouts.size() > 0) {
 				Layout randomLayout = (Layout)layouts.get(
-					random.nextInt(layouts.size()));
+					Randomizer.getInstance().nextInt(layouts.size()));
 
 				themeDisplay.setLayout(randomLayout);
 				themeDisplay.setLayoutTypePortlet(
 					(LayoutTypePortlet)randomLayout.getLayoutType());
 
 				req.setAttribute(WebKeys.LAYOUT, randomLayout);
-			}*/ // FIX ME
+			}
 		}
 		catch (Exception e) {
 			_log.error(StackTraceUtil.getStackTrace(e));

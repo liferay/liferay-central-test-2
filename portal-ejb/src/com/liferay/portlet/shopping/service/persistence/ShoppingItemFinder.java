@@ -333,9 +333,7 @@ public class ShoppingItemFinder {
 			ScrollableResults sr = q.scroll();
 
 			if (sr.first()) {
-				Randomizer randomizer = new Randomizer();
-
-				int[] scrollIds = randomizer.nextInt(
+				int[] scrollIds = Randomizer.getInstance().nextInt(
 					countByFeatured, numOfItems);
 
 				for (int i = 0; i < scrollIds.length; i++) {

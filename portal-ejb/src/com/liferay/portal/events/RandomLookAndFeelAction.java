@@ -34,9 +34,9 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.Randomizer;
 
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -88,17 +88,18 @@ public class RandomLookAndFeelAction extends Action {
 				return;
 			}
 
-			Random random = new Random();
+			Randomizer randomizer = Randomizer.getInstance();
 
 			List themes = ThemeLocalUtil.getThemes(themeDisplay.getCompanyId());
 
 			if (themes.size() > 0) {
-				Theme theme = (Theme)themes.get(random.nextInt(themes.size()));
+				Theme theme = (Theme)themes.get(
+					randomizer.nextInt(themes.size()));
 
 				List colorSchemes = theme.getColorSchemes();
 
 				ColorScheme colorScheme = (ColorScheme)colorSchemes.get(
-					random.nextInt(colorSchemes.size()));
+					randomizer.nextInt(colorSchemes.size()));
 
 				LayoutServiceUtil.updateLookAndFeel(
 					layout.getLayoutId(), layout.getOwnerId(),

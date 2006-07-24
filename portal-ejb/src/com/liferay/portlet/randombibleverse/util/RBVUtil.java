@@ -26,6 +26,7 @@ import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.randombibleverse.model.Bible;
 import com.liferay.portlet.randombibleverse.model.Verse;
+import com.liferay.util.Randomizer;
 import com.liferay.util.StringPool;
 
 import java.net.URL;
@@ -37,7 +38,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Random;
 
 import javax.portlet.PortletPreferences;
 
@@ -136,9 +136,7 @@ public class RBVUtil {
 	private Verse _getVerse(PortletPreferences prefs, Locale locale) {
 		Bible bible = _getBible(prefs, locale);
 
-		Random random = new Random();
-
-		int i = random.nextInt(_verses.size());
+		int i = Randomizer.getInstance().nextInt(_verses.size());
 
 		return _getVerse((String)_verses.get(i), bible.getVersionId());
 	}

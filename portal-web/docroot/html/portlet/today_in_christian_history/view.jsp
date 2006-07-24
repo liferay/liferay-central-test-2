@@ -34,7 +34,7 @@ List events = TICHUtil.getEvents();
 			<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
 
 				<%
-				Event event = (Event)events.get(new Random().nextInt(events.size()));
+				Event event = (Event)events.get(Randomizer.getInstance().nextInt(events.size()));
 				%>
 
 				<b><i><%= event.getYear() %></i></b>

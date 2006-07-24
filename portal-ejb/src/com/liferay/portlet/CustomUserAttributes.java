@@ -22,8 +22,9 @@
 
 package com.liferay.portlet;
 
+import com.liferay.util.Randomizer;
+
 import java.util.Map;
-import java.util.Random;
 
 /**
  * <a href="CustomUserAttributes.java.html"><b><i>View Source</i></b></a>
@@ -52,7 +53,7 @@ public class CustomUserAttributes implements Cloneable {
 		if (name.equals("user.name.random")) {
 			String[] names = new String[] {"Aaa", "Bbb", "Ccc"};
 
-			return names[new Random().nextInt(3)];
+			return names[Randomizer.getInstance().nextInt(3)];
 		}
 		else {
 			return null;
