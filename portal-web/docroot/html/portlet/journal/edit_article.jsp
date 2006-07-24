@@ -540,28 +540,19 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<c:choose>
-			<c:when test="<%= article == null %>">
-				<select name="<portlet:namespace />type">
+		<select name="<portlet:namespace />type">
 
-					<%
-					for (int i = 0; i < JournalArticle.TYPES.length; i++) {
-					%>
+			<%
+			for (int i = 0; i < JournalArticle.TYPES.length; i++) {
+			%>
 
-						<option <%= type.equals(JournalArticle.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticle.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticle.TYPES[i]) %></option>
+				<option <%= type.equals(JournalArticle.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticle.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticle.TYPES[i]) %></option>
 
-					<%
-					}
-					%>
+			<%
+			}
+			%>
 
-				</select>
-			</c:when>
-			<c:otherwise>
-				<input name="<portlet:namespace />type" type="hidden" value="<%= type %>">
-
-				<%= LanguageUtil.get(pageContext, type) %>
-			</c:otherwise>
-		</c:choose>
+		</select>
 	</td>
 	</td>
 </tr>
