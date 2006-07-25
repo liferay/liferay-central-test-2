@@ -149,7 +149,7 @@ var DragDrop = {
 		var hotPoint = nwOffset.plus(portletCont.mouseNwOffset);
 		var inserted = false;
 		
-		if (portletBound.className.search("portlet-dragging-placeholder") < 0) {
+		if (!portletBound.className.match("portlet-dragging-placeholder")) {
 			DragDrop.origPortletBoundName = portletBound.className;
 			portletBound.className += " portlet-dragging-placeholder";
 		}
@@ -265,7 +265,7 @@ var DragDrop = {
 			portletCont.style.width = targetWidth + "px";
 			
 			for (var i=0; i<items.length; i++) {
-				if (items[i].className.match(DragDrop.portletBoundName)) {
+				if (items[i].className && items[i].className.match(DragDrop.portletBoundName)) {
 					if (items[i].portletId == portletBound.portletId) {
 						break;
 					}
