@@ -44,9 +44,9 @@ import com.liferay.util.ListUtil;
 import com.liferay.util.SimpleCachePool;
 import com.liferay.util.Validator;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.StringWriter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -642,14 +642,14 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 					portletPreferences.remove(prefsValidatorEl);
 				}
 
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				StringWriter sw = new StringWriter();
 
 				XMLWriter writer = new XMLWriter(
-					baos, OutputFormat.createCompactFormat());
+					sw, OutputFormat.createCompactFormat());
 
 				writer.write(portletPreferences);
 
-				defaultPreferences = baos.toString();
+				defaultPreferences = sw.toString();
 			}
 
 			portletModel.setDefaultPreferences(defaultPreferences);
