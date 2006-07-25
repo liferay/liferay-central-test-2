@@ -53,7 +53,7 @@
 			<fileset dir="." includes="*.ear,*.war,*.zip" />
 		</delete>
 
-		<delete includeEmptyDirs="true">
+		<delete includeEmptyDirs="true" failonerror="false">
 			<fileset dir="${app.server.bin.dir}" includes="*.log*,ActiveMQ/**,alf_data/**" />
 		</delete>
 
