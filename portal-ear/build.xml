@@ -22,7 +22,7 @@
 			<fileset dir="${project.dir}/lock-ejb" includes="lock-ejb.jar" />
 			<fileset dir="${project.dir}/mail-ejb" includes="mail-ejb.jar" />
 			<fileset dir="${project.dir}/portal-ejb" includes="portal-ejb.jar" />
-			<fileset dir="${project.dir}/cms-web" includes="cms-web.jar" />
+			<fileset dir="${project.dir}/cms-web" includes="cms-web.war" />
 			<fileset dir="${project.dir}/laszlo-web" includes="laszlo-web.war" />
 			<fileset dir="${project.dir}/portal-web" includes="portal-web.war" />
 			<fileset dir="${project.dir}/tunnel-web" includes="tunnel-web.war" />
