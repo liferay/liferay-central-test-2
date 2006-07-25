@@ -132,7 +132,6 @@
 		<portlet-name>22</portlet-name>
 		<struts-path>instant_messenger</struts-path>
 		<include>false</include>
-		<include>false</include>
 	</portlet>
 	<portlet>
 		<portlet-name>23</portlet-name>
@@ -228,12 +227,10 @@
 		<portlet-name>42</portlet-name>
 		<struts-path>pipeline</struts-path>
 		<include>false</include>
-		<include>false</include>
 	</portlet>
 	<portlet>
 		<portlet-name>43</portlet-name>
 		<struts-path>top_opportunities</struts-path>
-		<include>false</include>
 		<include>false</include>
 	</portlet>
 	<portlet>
