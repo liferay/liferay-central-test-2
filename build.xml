@@ -274,6 +274,21 @@
 				</copy>
 
 				<if>
+					<not>
+						<available file="${app.server.classes.portal.dir}/portal-ext.properties" />
+					</not>
+					<then>
+						<mkdir dir="${app.server.classes.portal.dir}" />
+
+						<echo file="${app.server.classes.portal.dir}/portal-ext.properties" append="false">portal.release=enterprise
+
+portal.ctx=/
+
+auto.deploy.dest.dir=../webapps</echo>
+					</then>
+				</if>
+
+				<if>
 					<or>
 						<equals arg1="${app.server.type}" arg2="jetty" />
 						<equals arg1="${app.server.type}" arg2="resin" />
