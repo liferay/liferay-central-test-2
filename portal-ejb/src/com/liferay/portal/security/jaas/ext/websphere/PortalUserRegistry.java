@@ -47,6 +47,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.naming.NamingException;
+
 /**
  * <a href="PortalUserRegistry.java.html"><b><i>View Source</i></b></a>
  *
@@ -70,12 +72,7 @@ public class PortalUserRegistry implements UserRegistry {
 		try {
 			con = DataAccess.getConnection(Constants.DATA_SOURCE);
 
-			StringBuffer query = new StringBuffer();
-			query.append("SELECT password_ ");
-			query.append("FROM User_ WHERE ");
-			query.append("userId = ?");
-
-			ps = con.prepareStatement(query.toString());
+			ps = con.prepareStatement(_CHECK_PASSWORD);
 
 			ps.setString(1, userId);
 
@@ -91,6 +88,9 @@ public class PortalUserRegistry implements UserRegistry {
 				throw new PasswordCheckFailedException(
 					"User with the id " + userId + " does not exist");
 			}
+		}
+		catch (NamingException ne) {
+			return userId;
 		}
 		catch (Exception e) {
 			throw new CustomRegistryException(e);
@@ -224,5 +224,8 @@ public class PortalUserRegistry implements UserRegistry {
 
 		throw new NotImplementedException();
 	}
+
+	private static final String _CHECK_PASSWORD =
+		"SELECT password_ FROM User_ WHERE userId = ?";
 
 }
