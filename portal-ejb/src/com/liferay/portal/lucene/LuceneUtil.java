@@ -36,6 +36,9 @@ import java.io.IOException;
 
 import java.sql.Connection;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
@@ -69,18 +72,27 @@ import org.apache.lucene.store.jdbc.dialect.Dialect;
  */
 public class LuceneUtil {
 
+	public static final Pattern TERM_END_PATTERN = Pattern.compile("(\\w)\\b");
+
 	public static void addTerm(
 			BooleanQuery booleanQuery, String field, String text)
 		throws ParseException {
 
 		if (Validator.isNotNull(text)) {
-			QueryParser queryParser = new QueryParser(field, getAnalyzer());
+			Matcher matcher = TERM_END_PATTERN.matcher(text);
 
-			Query query = queryParser.parse(KeywordsUtil.toWildcard(text));
+			// Add wildcard to the end of every word
+			
+			text = matcher.replaceAll("$1*");
 
-			booleanQuery.add(query, BooleanClause.Occur.SHOULD);
+			// Add fuzzy query to the end of every word
 
-			query = queryParser.parse(KeywordsUtil.toFuzzy(text));
+			text = text + " " + matcher.replaceAll("$1~");
+			
+			QueryParser queryParser = new QueryParser(
+				field, LuceneUtil.getAnalyzer());
+
+			Query query = queryParser.parse(text);
 
 			booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 		}
