@@ -29,7 +29,7 @@
 		<%= LanguageUtil.format(pageContext, "your-new-email-address-is-x", "<b>" + user.getEmailAddress() + "</b>", false) %>
 
 		<%= LanguageUtil.get(pageContext, "this-email-address-will-also-serve-as-your-login") %>
-		
+
 		<br><br>
 
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" />

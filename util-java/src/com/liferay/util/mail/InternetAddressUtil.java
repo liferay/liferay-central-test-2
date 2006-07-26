@@ -45,10 +45,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class InternetAddressUtil {
 
-	public static boolean contains(InternetAddress[] ias, String emailAddress) {
-		if (Validator.isNotNull(emailAddress) && (ias != null)) {
-			for (int i = 0; i < ias.length; i++) {
-				if (emailAddress.equals(ias[i].getAddress())) {
+	public static boolean contains(
+		InternetAddress[] internetAddresses, String emailAddress) {
+
+		if ((internetAddresses != null) && Validator.isNotNull(emailAddress)) {
+			for (int i = 0; i < internetAddresses.length; i++) {
+				if (emailAddress.equals(internetAddresses[i].getAddress())) {
 					return true;
 				}
 			}
@@ -57,28 +59,10 @@ public class InternetAddressUtil {
 		return false;
 	}
 
-	public static InternetAddress[] getAddresses(String mailingList)
-		throws AddressException, UnsupportedEncodingException {
-
-		String[] entries = mailingList.split(",|;");
-
-		List addresses = new ArrayList();
-
-		for (int i = 0; i < entries.length; i++) {
-			String entry = entries[i].trim();
-
-			if (Validator.isNotNull(entry)) {
-				addresses.add(getAddress(entry));
-			}
-		}
-
-		return (InternetAddress[])addresses.toArray(new InternetAddress[0]);
-	}
-
 	public static InternetAddress getAddress(String entry)
 		throws AddressException, UnsupportedEncodingException {
 
-		InternetAddress ia = new InternetAddress();
+		InternetAddress internetAddress = new InternetAddress();
 
 		String[] parts = entry.split(StringPool.LESS_THAN);
 
@@ -87,11 +71,13 @@ public class InternetAddressUtil {
 
 			if (name.endsWith(StringPool.QUOTE) ||
 				name.endsWith(StringPool.APOSTROPHE)) {
+
 				name = name.substring(0, name.length() - 1);
 			}
 
 			if (name.startsWith(StringPool.QUOTE) ||
 				name.startsWith(StringPool.APOSTROPHE)) {
+
 				name = name.substring(1);
 			}
 
@@ -102,61 +88,86 @@ public class InternetAddressUtil {
 			}
 
 			if (!Validator.isAddress(address)) {
-				_log.error("Invalid email address " + address);
+				if (_log.isErrorEnabled()) {
+					_log.error("Invalid email address " + address);
+				}
 
 				throw new AddressException();
 			}
 
-			ia.setAddress(address.trim());
-			ia.setPersonal(name.trim());
+			internetAddress.setAddress(address.trim());
+			internetAddress.setPersonal(name.trim());
 		}
 		else if (parts.length == 1) {
 			if (!Validator.isAddress(parts[0])) {
-				_log.error("Invalid email address " + parts[0]);
+				if (_log.isErrorEnabled()) {
+					_log.error("Invalid email address " + parts[0]);
+				}
 
 				throw new AddressException();
 			}
-			ia.setAddress(parts[0].trim());
+
+			internetAddress.setAddress(parts[0].trim());
 		}
 		else {
-			_log.error("Invalid email address " + entry);
+			if (_log.isErrorEnabled()) {
+				_log.error("Invalid email address " + entry);
+			}
 
 			throw new AddressException();
 		}
 
-		return ia;
+		return internetAddress;
 	}
 
-	public static InternetAddress[] removeEntry(
-		Address[] as, String emailAddress) {
-
-		InternetAddress[] ias = (InternetAddress[])as;
+	public static InternetAddress[] getAddresses(String s)
+		throws AddressException, UnsupportedEncodingException {
 
 		List list = new ArrayList();
 
-		if (Validator.isNull(emailAddress) || (ias == null)) {
-			return ias;
-		}
+		String[] entries = s.split(",|;");
 
-		for (int i = 0; i < ias.length; i++) {
-			if (!emailAddress.equals(ias[i].getAddress())) {
-				list.add(ias[i]);
+		for (int i = 0; i < entries.length; i++) {
+			String entry = entries[i].trim();
+
+			if (Validator.isNotNull(entry)) {
+				list.add(getAddress(entry));
 			}
 		}
 
 		return (InternetAddress[])list.toArray(new InternetAddress[0]);
 	}
 
-	public static String toString(Address[] as) {
-		InternetAddress[] ias = (InternetAddress[])as;
+	public static InternetAddress[] removeEntry(
+		Address[] addresses, String emailAddress) {
+
+		InternetAddress[] internetAddresses = (InternetAddress[])addresses;
+
+		List list = new ArrayList();
+
+		if ((internetAddresses == null) || Validator.isNull(emailAddress)) {
+			return internetAddresses;
+		}
+
+		for (int i = 0; i < internetAddresses.length; i++) {
+			if (!emailAddress.equals(internetAddresses[i].getAddress())) {
+				list.add(internetAddresses[i]);
+			}
+		}
+
+		return (InternetAddress[])list.toArray(new InternetAddress[0]);
+	}
+
+	public static String toString(Address[] addresses) {
+		InternetAddress[] internetAddresses = (InternetAddress[])addresses;
 
 		StringBuffer sb = new StringBuffer();
 
-		if (ias != null) {
-			for (int i = 0; i < ias.length; i++) {
-				sb.append(ias[i].toUnicodeString());
+		if (internetAddresses != null) {
+			for (int i = 0; i < internetAddresses.length; i++) {
+				sb.append(internetAddresses[i].toUnicodeString());
 
-				if (i < ias.length - 1) {
+				if (i < internetAddresses.length - 1) {
 					sb.append(StringPool.COMMA + StringPool.BLANK);
 				}
 			}

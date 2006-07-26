@@ -20,21 +20,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%@
-include file="/html/portlet/init.jsp" %><%@
-page import="com.liferay.portlet.mail.model.MailMessage"
 %>
+
+<%@ include file="/html/portlet/mail/init.jsp" %>
+
 <%
+Long messageId = (Long)session.getAttribute(WebKeys.MAIL_MESSAGE_ID);
 
-MailMessage mm = (MailMessage)request.getAttribute("mailMessage");
+String url = themeDisplay.getPathMain() + "/mail/get_attachment?";
+
+MailMessage mailMessage = MailUtil.getMessage(session, messageId.longValue(), url);
+
 boolean header = ParamUtil.getBoolean(request, "header");
-
-System.out.println("mm 0 " + mm):
 %>
 
-<c:if test="<%= header == true %>">
+<c:if test="<%= header %>">
 	<liferay-util:include page="/html/portlet/mail/message_details.jsp" />
 	<hr /><br />
 </c:if>
 
-<%= mm.getHtmlBody() %>
+<%= mailMessage.getHtmlBody() %>

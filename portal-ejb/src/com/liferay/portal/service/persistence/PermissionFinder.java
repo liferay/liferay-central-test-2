@@ -28,10 +28,8 @@ import com.liferay.portal.model.Permission;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.dao.hibernate.QueryPos;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 

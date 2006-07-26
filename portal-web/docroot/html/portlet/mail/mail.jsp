@@ -79,11 +79,11 @@
 				overflow: hidden;
 				width: 80px;
 			}
-			
+
 			.portlet-mail-folder-selected {
 				background-color: <%= colorScheme.getLayoutTabBg() %>;
 			}
-			
+
 			#portlet-mail-folder-pane ul li {
 				padding: 2px 2px 2px 10px;
 				margin: 1px 0 1px 0;
@@ -92,30 +92,30 @@
 			#portlet-mail-folder-pane-td {
 				border: 1px solid <%= mailLineColor %>;
 			}
-			
+
 			#portlet-mail-folder-pane {
 				overflow: hidden;
 				width: 100px;
 			}
-			
+
 			#portlet-mail-msgs-pane {
 				width: 100%;
 			}
-			
+
 			.portlet-mail-msgs-pane-td {
 				border: 1px solid <%= mailLineColor %>;
 			}
-			
+
 			#portlet-mail-handle {
 				background-color: <%= mailBgColor %>;
 			}
-			
+
 			#portlet-mail-handle div {
 				width: 5px;
 				height: 1px;
 				font-size: 0;
 			}
-			
+
 			#portlet-mail-msgs-preview-pane {
 				height: 200px;
 				overflow: hidden;
@@ -142,19 +142,19 @@
 				background-color: <%= colorScheme.getLayoutTabBg() %>;
 				overflow: hidden;
 			}
-			
+
 			#portlet-mail-msg-header-div {
 				padding: 5px;
 			}
-			
+
 			#portlet-mail-msg-detailed-pane {
 				overflow: hidden;
 			}
-			
+
 			#portlet-mail-msg-frame-div {
 				margin-left: 20px;
 			}
-			
+
 			#portlet-mail-msg-detailed-frame {
 				height: 200px;
 			}
@@ -162,41 +162,41 @@
 			.portlet-mail-title-text span {
 				padding-right: 5px;
 			}
-			
+
 			#portlet-mail-msgs-title-from {
 				overflow: hidden;
 				width: 150px;
 			}
-			
+
 			#portlet-mail-msgs-title-from div {
 				padding: 2px 0 2px 5px;
 			}
-			
+
 			#portlet-mail-msgs-title-subject {
 				overflow: hidden;
 				width: 250px;
 			}
-			
+
 			#portlet-mail-msgs-title-subject div {
 				padding: 2px 0 2px 5px;
 			}
-			
+
 			#portlet-mail-msgs-title-received {
 				overflow: hidden;
 				width: 200px;
 			}
-			
+
 			#portlet-mail-msgs-title-received div {
 				padding: 2px 0 2px 5px;
 			}
-			
+
 			.portlet-mail-msgs-title {
 				background-color: <%= colorScheme.getLayoutTabBg() %>;
 			}
 
 			#portlet-mail-msgs-from-handle {
 			}
-			
+
 			#portlet-mail-msgs-subject-handle {
 			}
 
@@ -210,29 +210,29 @@
 				overflow: hidden;
 				width: 150px;
 			}
-			
+
 			#portlet-mail-msgs-from div {
 				padding-left: 5px;
 				width: 800px;
 				position: relative;
 			}
-			
+
 			#portlet-mail-msgs-subject {
 				overflow: hidden;
 				width: 250px;
 			}
-			
+
 			#portlet-mail-msgs-subject div {
 				padding-left: 5px;
 				width: 800px;
 				position: relative;
 			}
-			
+
 			#portlet-mail-msgs-received {
 				overflow: hidden;
 				width: 200px;
 			}
-			
+
 			#portlet-mail-msgs-received div {
 				padding-left: 5px;
 				width: 800px;

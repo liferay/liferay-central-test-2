@@ -157,6 +157,7 @@
 --%><%@ page import="com.liferay.util.format.PhoneNumberUtil" %><%--
 --%><%@ page import="com.liferay.util.log4j.Levels" %><%--
 --%><%@ page import="com.liferay.util.lucene.Hits" %><%--
+--%><%@ page import="com.liferay.util.mail.InternetAddressUtil" %><%--
 --%><%@ page import="com.liferay.util.portlet.DynamicRenderRequest" %><%--
 --%><%@ page import="com.liferay.util.servlet.DynamicServletRequest" %><%--
 --%><%@ page import="com.liferay.util.servlet.SessionErrors" %><%--

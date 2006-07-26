@@ -30,7 +30,6 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
-import com.liferay.util.servlet.SessionMessages;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

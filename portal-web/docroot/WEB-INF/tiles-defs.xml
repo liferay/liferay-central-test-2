@@ -638,10 +638,6 @@
 		<put name="portlet_content" value="/portlet/mail/view.jsp" />
 	</definition>
 
-	<definition name="portlet.mail.view_message" extends="portlet.mail">
-		<put name="portlet_content" value="/portlet/mail/view_message.jsp" />
-	</definition>
-
 	<!-- Maps -->
 
 	<definition name="portlet.maps" extends="portlet" />

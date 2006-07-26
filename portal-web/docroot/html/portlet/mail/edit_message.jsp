@@ -22,6 +22,9 @@
  */
 %>
 
+TEST
+
+<%--
 <%@ include file="/html/portlet/init.jsp" %>
 <%@ page import="com.liferay.portlet.mail.ContentException" %>
 <%@ page import="com.liferay.portlet.mail.RecipientException" %>
@@ -201,4 +204,4 @@ Long draftId = (Long)request.getAttribute(WebKeys.MAIL_DRAFT_ID);
 	}
 	%>
 	</script>
-</c:if>
+</c:if>--%>

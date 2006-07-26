@@ -52,7 +52,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.SortedSet;
+import java.util.Set;
 import java.util.TreeSet;
 
 import javax.activation.DataHandler;
@@ -357,11 +357,11 @@ public class MailUtil {
 		return parts;
 	}
 
-	public static SortedSet getEnvelopes(HttpSession ses, Comparator comparator)
+	public static Set getEnvelopes(HttpSession ses, Comparator comparator)
 		throws FolderException {
 
         try {
-			SortedSet envelopes = new TreeSet(comparator);
+			Set envelopes = new TreeSet(comparator);
 
 			IMAPFolder folder = getFolder(ses);
 

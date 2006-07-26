@@ -49,7 +49,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Locale;
-import java.util.SortedSet;
+import java.util.Set;
 import java.util.TimeZone;
 
 import javax.servlet.ServletContext;
@@ -82,19 +82,19 @@ public class MailAction extends JSONAction {
 
 		try {
 			if (cmd.equals("deleteMessages")) {
-				_deleteMessages(req);
+				deleteMessages(req);
 			}
 			else if (cmd.equals("getFolders")) {
-				return _getFolders(req);
+				return getFolders(req);
 			}
 			else if (cmd.equals("getMessage")) {
-				return _getMessage(req, res);
+				return getMessage(req, res);
 			}
 			else if (cmd.equals("getPreview")) {
-				return _getPreview(req);
+				return getPreview(req);
 			}
 			else if (cmd.equals("moveMessages")) {
-				_moveMessages(req);
+				moveMessages(req);
 			}
 		}
 		catch (Exception e) {
@@ -104,7 +104,7 @@ public class MailAction extends JSONAction {
 		return StringPool.BLANK;
 	}
 
-	private void _deleteMessages(HttpServletRequest req) throws Exception {
+	protected void deleteMessages(HttpServletRequest req) throws Exception {
 		HttpSession ses = req.getSession();
 
 		long[] messages = StringUtil.split(
@@ -113,7 +113,32 @@ public class MailAction extends JSONAction {
 		MailUtil.deleteMessages(ses, messages);
 	}
 
-	private String _getFolders(HttpServletRequest req) throws Exception {
+	protected Set getEnvelopes(HttpServletRequest req) throws Exception {
+		HttpSession ses = req.getSession();
+
+		String folderId = ParamUtil.getString(req, "folderId");
+		String sortBy = ParamUtil.getString(req, "sortBy");
+		boolean asc = ParamUtil.getBoolean(req, "asc");
+
+		MailUtil.getFolder(ses, folderId);
+
+		Set envelopes = null;
+
+		if (sortBy.equals("name")) {
+			envelopes = MailUtil.getEnvelopes(
+				ses, new RecipientComparator(asc));
+		}
+		else if (sortBy.equals("subject")) {
+			envelopes = MailUtil.getEnvelopes(ses, new SubjectComparator(asc));
+		}
+		else {
+			envelopes = MailUtil.getEnvelopes(ses, new DateComparator(asc));
+		}
+
+		return envelopes;
+	}
+
+	protected String getFolders(HttpServletRequest req) throws Exception {
 		HttpSession ses = req.getSession();
 
 		JSONObject jsonObj = new JSONObject();
@@ -149,15 +174,13 @@ public class MailAction extends JSONAction {
 		return jsonObj.toString();
 	}
 
-	private String _getMessage(HttpServletRequest req, HttpServletResponse res)
+	protected String getMessage(HttpServletRequest req, HttpServletResponse res)
 		throws Exception {
 
 		JSONObject jsonObj = new JSONObject();
 
-		long messageId = ParamUtil.getLong(req, "messageId");
 		String folderId = ParamUtil.getString(req, "folderId");
-		StringBuffer header = new StringBuffer();
-		ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
+		long messageId = ParamUtil.getLong(req, "messageId");
 
 		MailUtil.getFolder(req.getSession(), folderId);
 
@@ -166,91 +189,90 @@ public class MailAction extends JSONAction {
 
 		String url = themeDisplay.getPathMain() + "/mail/get_attachment?";
 
-		MailMessage mm = MailUtil.getMessage(req.getSession(), messageId, url);
+		MailMessage mailMessage = MailUtil.getMessage(
+			req.getSession(), messageId, url);
 
-		req.setAttribute("mailMessage", mm);
+		req.setAttribute("mailMessage", mailMessage);
+
+		StringBuffer sb = new StringBuffer();
+
+		ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
 
 		PortalUtil.renderPage(
-			header, ctx, req, res, "/html/portlet/mail/message_details.jsp");
+			sb, ctx, req, res, "/html/portlet/mail/message_details.jsp");
 
-		jsonObj.put("body", mm.getHtmlBody());
-		jsonObj.put("header", header.toString());
 		jsonObj.put("id", messageId);
+		jsonObj.put("body", mailMessage.getHtmlBody());
+		jsonObj.put("header", sb.toString());
 
 		return jsonObj.toString();
 	}
 
-	private String _getPreview(HttpServletRequest req) throws Exception {
+	protected String getPreview(HttpServletRequest req) throws Exception {
 		JSONObject jsonObj = new JSONObject();
 
-		HttpSession ses = req.getSession();
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		String folderId = ParamUtil.getString(req, "folderId");
-		String sortBy = ParamUtil.getString(req, "sortBy");
-		boolean asc = ParamUtil.getBoolean(req, "asc");
-
-		MailUtil.getFolder(ses, folderId);
-
-		SortedSet set = null;
-
-		if (sortBy.equals("name")) {
-			set = MailUtil.getEnvelopes(ses, new RecipientComparator(asc));
-		}
-		else if (sortBy.equals("subject")) {
-			set = MailUtil.getEnvelopes(ses, new SubjectComparator(asc));
-		}
-		else {
-			set = MailUtil.getEnvelopes(ses, new DateComparator(asc));
-		}
-
-		User user = PortalUtil.getUser(req);
-		Locale locale = user.getLocale();
-		TimeZone tz = user.getTimeZone();
-
-		DateFormat dtf = DateFormats.getDateTime(locale, tz);
-		DateFormat tf = DateFormats.getTime(locale, tz);
-		DateFormat df = DateFormats.getDate(locale, tz);
+		User user = themeDisplay.getUser();
+		Locale locale = themeDisplay.getLocale();
+		TimeZone timeZone = themeDisplay.getTimeZone();
 
 		Date today = new Date();
-		Calendar cal = Calendar.getInstance(tz, locale);
+
+		Calendar cal = Calendar.getInstance(timeZone, locale);
+
 		cal.setTime(today);
 		cal.add(Calendar.DATE, -1);
+
 		Date yesterday = cal.getTime();
 
-		String td = df.format(today);
-		String yd = df.format(yesterday);
+		DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
+		DateFormat dateFormatDateTime = DateFormats.getDateTime(
+			locale, timeZone);
+		DateFormat dateFormatTime = DateFormats.getTime(locale, timeZone);
+
+		String todayString = dateFormatDate.format(today);
+		String yesterdayString = dateFormatDate.format(yesterday);
 
 		JSONArray jsonEnvelopes = new JSONArray();
 
-		Iterator itr = set.iterator();
+		Iterator itr = getEnvelopes(req).iterator();
 
 		while (itr.hasNext()) {
-			MailEnvelope me = (MailEnvelope)itr.next();
-			JSONObject jEnvelope = new JSONObject();
+			MailEnvelope mailEnvelope = (MailEnvelope)itr.next();
 
-			String formattedDate = null;
+			JSONObject jsonEnvelope = new JSONObject();
 
-			String day = df.format(me.getDate());
+			String recipient = GetterUtil.getString(
+				mailEnvelope.getRecipient(), StringPool.NBSP);
 
-			if (td.equals(day)) {
-				formattedDate =
-					LanguageUtil.get(user, "today") + StringPool.SPACE + tf.format(me.getDate());
+			String subject = GetterUtil.getString(
+				mailEnvelope.getSubject(), StringPool.NBSP);
+
+			String dateString = dateFormatDate.format(mailEnvelope.getDate());
+
+			if (dateString.equals(todayString)) {
+				dateString =
+					LanguageUtil.get(user, "today") + StringPool.SPACE +
+						dateFormatTime.format(mailEnvelope.getDate());
 			}
-			else if (yd.equals(day)) {
-				formattedDate =
-					LanguageUtil.get(user, "yesterday") + StringPool.SPACE + tf.format(me.getDate());
+			else if (dateString.equals(yesterdayString)) {
+				dateString =
+					LanguageUtil.get(user, "yesterday") + StringPool.SPACE +
+						dateFormatTime.format(mailEnvelope.getDate());
 			}
 			else {
-				formattedDate = dtf.format(me.getDate());
+				dateString = dateFormatDateTime.format(mailEnvelope.getDate());
 			}
 
-			jEnvelope.put("date", formattedDate);
-			jEnvelope.put("id", me.getMessageId());
-			jEnvelope.put("email", GetterUtil.getString(me.getRecipient(), StringPool.NBSP));
-			jEnvelope.put("subject", GetterUtil.getString(me.getSubject(), StringPool.NBSP));
-			jEnvelope.put("recent", me.isRecent());
+			jsonEnvelope.put("id", mailEnvelope.getMessageId());
+			jsonEnvelope.put("date", dateString);
+			jsonEnvelope.put("email", recipient);
+			jsonEnvelope.put("subject", subject);
+			jsonEnvelope.put("recent", mailEnvelope.isRecent());
 
-			jsonEnvelopes.put(jEnvelope);
+			jsonEnvelopes.put(jsonEnvelope);
 		}
 
 		jsonObj.put("headers", jsonEnvelopes);
@@ -258,7 +280,7 @@ public class MailAction extends JSONAction {
 		return jsonObj.toString();
 	}
 
-	private void _moveMessages(HttpServletRequest req) throws Exception {
+	protected void moveMessages(HttpServletRequest req) throws Exception {
 		HttpSession ses = req.getSession();
 
 		long[] messages = StringUtil.split(

@@ -818,7 +818,7 @@
 
 		<action path="/mail/view" forward="portlet.mail.view" />
 
-		<action path="/mail/view_message" forward="portlet.mail.view_message" />
+		<action path="/mail/view_message" forward="/portlet/mail/view_message.jsp" />
 		
 		<!-- Maps -->
 

@@ -20,95 +20,80 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%@
-include file="/html/portlet/init.jsp" %><%@
-page import="com.liferay.portlet.mail.model.MailMessage,
-			com.liferay.portlet.mail.model.RemoteMailAttachment,
-			com.liferay.util.Html,
-			java.lang.Object.StringBuffer,
-			javax.mail.Address"
-%><%
-
-MailMessage mm = (MailMessage)request.getAttribute("mailMessage");
-System.out.println("mm 1 " + mm):
-Address from = mm.getFrom();
-Address[] to = mm.getTo();
-Address[] cc = mm.getCc();
-Address[] bcc = mm.getBcc();
-
-List attachments = mm.getRemoteAttachments();
 %>
+
+<%@ include file="/html/portlet/mail/init.jsp" %>
+
+<%
+MailMessage mailMessage = (MailMessage)request.getAttribute("mailMessage");
+
+Address from = mailMessage.getFrom();
+Address[] to = mailMessage.getTo();
+Address[] cc = mailMessage.getCc();
+
+List attachments = mailMessage.getRemoteAttachments();
+%>
+
 <div>
-	<div style="font-weight: bold"><%= mm.getSubject() %></div>
-	<table cellpadding="0" cellspacing="0" border="0" class="font-small">
+	<div style="font-weight: bold;">
+		<%= mailMessage.getSubject() %>
+	</div>
+
+	<table cellpadding="0" cellspacing="0" border="0" class="font-small;">
 	<tr>
-		<td style="padding-right: 5px" align="right" valign="top">
-			<%= LanguageUtil.get(pageContext, "from") %>:&nbsp;</td>
-		<td><%= Html.escape(from.toString(), false) %></td>
+		<td align="right" style="padding-right: 5px;" valign="top">
+			<%= LanguageUtil.get(pageContext, "from") %>:&nbsp;
+		</td>
+		<td>
+			<%= Html.escape(from.toString(), false) %>
+		</td>
 	</tr>
-	<%
-	if (to != null) {
-		StringBuffer sb = new StringBuffer();
 
-		_createAddresses(sb, to);
-		%>
+	<c:if test="<%= to != null %>">
 		<tr>
-			<td style="padding-right: 5px" align="right" valign="top">
-				<%= LanguageUtil.get(pageContext, "to") %>:&nbsp;</td>
-			<td><%= sb.toString() %></td>
-		</tr>
-		<%
-	}
-	if (cc != null) {
-		StringBuffer sb = new StringBuffer();
-
-		_createAddresses(sb, cc);
-		%>
-		<tr>
-			<td style="padding-right: 5px" align="right" valign="top">
-				<%= LanguageUtil.get(pageContext, "cc") %>:&nbsp;</td>
-			<td><%= sb.toString() %></td>
-		</tr>
-		<%
-	}
-	if (attachments != null && attachments.size() > 0) {
-		%>
-		<tr>
-			<td style="padding-right: 5px" align="right" valign="top">
-				<img src="<%= themeDisplay.getPathThemeImage() %>/mail/clip.gif" />&nbsp;</td>
+			<td align="right" style="padding-right: 5px;" valign="top">
+				<%= LanguageUtil.get(pageContext, "to") %>:&nbsp;
+			</td>
 			<td>
-				<%
-				String comma;
-				for (int i = 0; i < attachments.size(); i++) {
-					if (i < (attachments.size() - 1)) {
-						comma = ",&nbsp;";
-					}
-					else {
-						comma = "";
-					}
-
-					RemoteMailAttachment rma = (RemoteMailAttachment)attachments.get(i);
-					String url = themeDisplay.getPathMain() + "/mail/get_attachment?fileName=" + rma.getFilename() + "&contentPath=" + rma.getContentPath();
-					%>
-						<a href="<%= url %>"><%= rma.getFilename() %></a><%= comma %>
-					<%
-				}
-				%>
+				<%= InternetAddressUtil.toString(to) %>
 			</td>
 		</tr>
-		<%
-	}
-	%>
+	</c:if>
+
+	<c:if test="<%= cc != null %>">
+		<tr>
+			<td align="right" style="padding-right: 5px;" valign="top">
+				<%= LanguageUtil.get(pageContext, "cc") %>:&nbsp;
+			</td>
+			<td>
+				<%= InternetAddressUtil.toString(cc) %>
+			</td>
+		</tr>
+	</c:if>
+
+	<c:if test="<%= attachments.size() > 0 %>">
+		<tr>
+			<td align="right" style="padding-right: 5px;" valign="top">
+				<img src="<%= themeDisplay.getPathThemeImage() %>/mail/clip.gif" />&nbsp;
+			</td>
+			<td>
+
+				<%
+				for (int i = 0; i < attachments.size(); i++) {
+					RemoteMailAttachment remoteMailAttachment = (RemoteMailAttachment)attachments.get(i);
+
+					String url = themeDisplay.getPathMain() + "/mail/get_attachment?fileName=" + remoteMailAttachment.getFilename() + "&contentPath=" + remoteMailAttachment.getContentPath();
+				%>
+
+					<a href="<%= url %>"><%= remoteMailAttachment.getFilename() %></a><%= (i + 1 < attachments.size()) ? ", " : "" %>
+
+				<%
+				}
+				%>
+
+			</td>
+		</tr>
+	</c:if>
+
 	</table>
 </div>
-
-<%!
-private void _createAddresses(StringBuffer sb, Address[] addresses) {
-	for (int i = 0; i < addresses.length; i++) {
-		sb.append(Html.escape(addresses[i].toString(), false));
-		if (i != (addresses.length - 1)) {
-			sb.append(", ");
-		}
-	}
-}
-%>

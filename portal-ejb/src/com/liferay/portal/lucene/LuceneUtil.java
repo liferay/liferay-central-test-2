@@ -82,13 +82,13 @@ public class LuceneUtil {
 			Matcher matcher = TERM_END_PATTERN.matcher(text);
 
 			// Add wildcard to the end of every word
-			
+
 			text = matcher.replaceAll("$1*");
 
 			// Add fuzzy query to the end of every word
 
 			text = text + " " + matcher.replaceAll("$1~");
-			
+
 			QueryParser queryParser = new QueryParser(
 				field, LuceneUtil.getAnalyzer());
 
