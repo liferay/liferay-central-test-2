@@ -266,6 +266,13 @@
 	<security-role>
 		<role-name>users</role-name>
 	</security-role>
+	<ejb-ref>
+		<ejb-ref-name>com_liferay_lock_service_ejb_LockServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.lock.service.ejb.LockServiceHome</home>
+		<remote>com.liferay.lock.service.ejb.LockServiceEJB</remote>
+		<ejb-link>com_liferay_lock_service_ejb_LockServiceEJB</ejb-link>
+	</ejb-ref>
 	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/AccountLocalServiceHome</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>

@@ -53,6 +53,20 @@ public class ReportsEntryPersistence extends BasePersistence {
                     entryId.toString());
             }
 
+            return remove(reportsEntry);
+        } catch (HibernateException he) {
+            throw new SystemException(he);
+        } finally {
+            closeSession(session);
+        }
+    }
+
+    public ReportsEntry remove(ReportsEntry reportsEntry)
+        throws SystemException {
+        Session session = null;
+
+        try {
+            session = openSession();
             session.delete(reportsEntry);
             session.flush();
 
@@ -71,7 +85,11 @@ public class ReportsEntryPersistence extends BasePersistence {
 
         try {
             session = openSession();
-            session.saveOrUpdate(reportsEntry);
+
+            if (reportsEntry.isNew()) {
+                session.save(reportsEntry);
+            }
+
             session.flush();
             reportsEntry.setNew(false);
 
@@ -85,31 +103,20 @@ public class ReportsEntryPersistence extends BasePersistence {
 
     public ReportsEntry findByPrimaryKey(String entryId)
         throws NoSuchEntryException, SystemException {
-        Session session = null;
+        ReportsEntry reportsEntry = fetchByPrimaryKey(entryId);
 
-        try {
-            session = openSession();
-
-            ReportsEntry reportsEntry = (ReportsEntry) session.get(ReportsEntry.class,
-                    entryId);
-
-            if (reportsEntry == null) {
-                if (_log.isWarnEnabled()) {
-                    _log.warn("No ReportsEntry exists with the primary key " +
-                        entryId.toString());
-                }
-
-                throw new NoSuchEntryException(
-                    "No ReportsEntry exists with the primary key " +
+        if (reportsEntry == null) {
+            if (_log.isWarnEnabled()) {
+                _log.warn("No ReportsEntry exists with the primary key " +
                     entryId.toString());
             }
 
-            return reportsEntry;
-        } catch (HibernateException he) {
-            throw new SystemException(he);
-        } finally {
-            closeSession(session);
+            throw new NoSuchEntryException(
+                "No ReportsEntry exists with the primary key " +
+                entryId.toString());
         }
+
+        return reportsEntry;
     }
 
     public ReportsEntry fetchByPrimaryKey(String entryId)
@@ -148,6 +155,8 @@ public class ReportsEntryPersistence extends BasePersistence {
             query.append("name ASC");
 
             Query q = session.createQuery(query.toString());
+            q.setCacheable(true);
+
             int queryPos = 0;
 
             if (companyId != null) {
@@ -194,6 +203,8 @@ public class ReportsEntryPersistence extends BasePersistence {
             }
 
             Query q = session.createQuery(query.toString());
+            q.setCacheable(true);
+
             int queryPos = 0;
 
             if (companyId != null) {
@@ -271,6 +282,8 @@ public class ReportsEntryPersistence extends BasePersistence {
             }
 
             Query q = session.createQuery(query.toString());
+            q.setCacheable(true);
+
             int queryPos = 0;
 
             if (companyId != null) {
@@ -313,6 +326,8 @@ public class ReportsEntryPersistence extends BasePersistence {
             query.append("name ASC");
 
             Query q = session.createQuery(query.toString());
+            q.setCacheable(true);
+
             int queryPos = 0;
 
             if (userId != null) {
@@ -359,6 +374,8 @@ public class ReportsEntryPersistence extends BasePersistence {
             }
 
             Query q = session.createQuery(query.toString());
+            q.setCacheable(true);
+
             int queryPos = 0;
 
             if (userId != null) {
@@ -436,6 +453,8 @@ public class ReportsEntryPersistence extends BasePersistence {
             }
 
             Query q = session.createQuery(query.toString());
+            q.setCacheable(true);
+
             int queryPos = 0;
 
             if (userId != null) {
@@ -469,6 +488,7 @@ public class ReportsEntryPersistence extends BasePersistence {
             query.append("name ASC");
 
             Query q = session.createQuery(query.toString());
+            q.setCacheable(true);
 
             return q.list();
         } catch (HibernateException he) {
@@ -479,86 +499,20 @@ public class ReportsEntryPersistence extends BasePersistence {
     }
 
     public void removeByCompanyId(String companyId) throws SystemException {
-        Session session = null;
+        Iterator itr = findByCompanyId(companyId).iterator();
 
-        try {
-            session = openSession();
-
-            StringBuffer query = new StringBuffer();
-            query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
-
-            if (companyId == null) {
-                query.append("companyId IS NULL");
-            } else {
-                query.append("companyId = ?");
-            }
-
-            query.append(" ");
-            query.append("ORDER BY ");
-            query.append("name ASC");
-
-            Query q = session.createQuery(query.toString());
-            int queryPos = 0;
-
-            if (companyId != null) {
-                q.setString(queryPos++, companyId);
-            }
-
-            Iterator itr = q.list().iterator();
-
-            while (itr.hasNext()) {
-                ReportsEntry reportsEntry = (ReportsEntry) itr.next();
-                session.delete(reportsEntry);
-            }
-
-            session.flush();
-        } catch (HibernateException he) {
-            throw new SystemException(he);
-        } finally {
-            closeSession(session);
+        while (itr.hasNext()) {
+            ReportsEntry reportsEntry = (ReportsEntry) itr.next();
+            remove(reportsEntry);
         }
     }
 
     public void removeByUserId(String userId) throws SystemException {
-        Session session = null;
+        Iterator itr = findByUserId(userId).iterator();
 
-        try {
-            session = openSession();
-
-            StringBuffer query = new StringBuffer();
-            query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
-
-            if (userId == null) {
-                query.append("userId IS NULL");
-            } else {
-                query.append("userId = ?");
-            }
-
-            query.append(" ");
-            query.append("ORDER BY ");
-            query.append("name ASC");
-
-            Query q = session.createQuery(query.toString());
-            int queryPos = 0;
-
-            if (userId != null) {
-                q.setString(queryPos++, userId);
-            }
-
-            Iterator itr = q.list().iterator();
-
-            while (itr.hasNext()) {
-                ReportsEntry reportsEntry = (ReportsEntry) itr.next();
-                session.delete(reportsEntry);
-            }
-
-            session.flush();
-        } catch (HibernateException he) {
-            throw new SystemException(he);
-        } finally {
-            closeSession(session);
+        while (itr.hasNext()) {
+            ReportsEntry reportsEntry = (ReportsEntry) itr.next();
+            remove(reportsEntry);
         }
     }
 
@@ -582,6 +536,8 @@ public class ReportsEntryPersistence extends BasePersistence {
             query.append(" ");
 
             Query q = session.createQuery(query.toString());
+            q.setCacheable(true);
+
             int queryPos = 0;
 
             if (companyId != null) {
@@ -626,6 +582,8 @@ public class ReportsEntryPersistence extends BasePersistence {
             query.append(" ");
 
             Query q = session.createQuery(query.toString());
+            q.setCacheable(true);
+
             int queryPos = 0;
 
             if (userId != null) {

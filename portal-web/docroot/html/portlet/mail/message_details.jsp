@@ -30,13 +30,13 @@ page import="com.liferay.portlet.mail.model.MailMessage,
 %><%
 
 MailMessage mm = (MailMessage)request.getAttribute("mailMessage");
+System.out.println("mm 1 " + mm):
+Address from = mm.getFrom();
+Address[] to = mm.getTo();
+Address[] cc = mm.getCc();
+Address[] bcc = mm.getBcc();
 
 List attachments = mm.getRemoteAttachments();
-Address from = mm.getFrom();
-Address cc[] = mm.getCc();
-Address bcc[] = mm.getBcc();
-Address []to = mm.getTo();
-
 %>
 <div>
 	<div style="font-weight: bold"><%= mm.getSubject() %></div>

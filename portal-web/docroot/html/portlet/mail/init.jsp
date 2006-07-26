@@ -20,22 +20,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%><%--
+
+--%><%@ include file="/html/portlet/init.jsp" %><%--
+
+--%><%@ page import="com.liferay.portal.DuplicateUserEmailAddressException" %><%--
+--%><%@ page import="com.liferay.portal.UserEmailAddressException" %><%--
+--%><%@ page import="com.liferay.portlet.mail.model.MailMessage" %><%--
+-
+--%><%
+PortletPreferences prefs = renderRequest.getPreferences();
+
+String forwardAddress = prefs.getValue("forward-address", StringPool.BLANK);
 %>
-
-<%@ include file="/html/portlet/mail/init.jsp" %>
-
-<c:choose>
-	<c:when test="<%= Validator.isNotNull(forwardAddress) %>">
-		<%= LanguageUtil.format(pageContext, "all-email-from-x-is-being-forwarded-to-x", new Object[] {"<b>" + user.getEmailAddress() + "</b>", "<b>" + StringUtil.replace(forwardAddress, StringPool.SPACE, ", ") + "</b>"}, false) %>
-	</c:when>
-	<c:otherwise>
-		<c:choose>
-			<c:when test="<%= user.hasCompanyMx() %>">
-				<liferay-util:include page="/html/portlet/mail/mail.jsp" />
-			</c:when>
-			<c:otherwise>
-				<liferay-util:include page="/html/portlet/mail/register.jsp" />
-			</c:otherwise>
-		</c:choose>
-	</c:otherwise>
-</c:choose>

@@ -136,17 +136,21 @@ public class Http {
 		return completeURL.toString();
 	}
 
-	public static String getParameter(
-		String url, String paramName, boolean escaped) {
+	public static String getParameter(String url, String name) {
+		return getParameter(url, name, true);
+	}
 
-		if (Validator.isNull(url) || Validator.isNull(paramName)) {
+	public static String getParameter(
+		String url, String name, boolean escaped) {
+
+		if (Validator.isNull(url) || Validator.isNull(name)) {
 			return StringPool.BLANK;
 		}
 
-		String [] parts = StringUtil.split(url, StringPool.QUESTION);
+		String[] parts = StringUtil.split(url, StringPool.QUESTION);
 
 		if (parts.length == 2) {
-			String [] params = null;
+			String[] params = null;
 
 			if (escaped) {
 				params = StringUtil.split(parts[1], "&amp;");
@@ -156,9 +160,9 @@ public class Http {
 			}
 
 			for (int i = 0; i < params.length; i++) {
-				String [] kvp = StringUtil.split(params[i], StringPool.EQUAL);
+				String[] kvp = StringUtil.split(params[i], StringPool.EQUAL);
 
-				if (kvp.length == 2 && kvp[0].equals(paramName)) {
+				if ((kvp.length == 2) && kvp[0].equals(name)) {
 					return kvp[1];
 				}
 			}

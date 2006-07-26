@@ -812,13 +812,13 @@
 
 		<action path="/mail/get_attachment" type="com.liferay.portlet.mail.action.GetAttachmentAction" />
 
-		<action path="/mail/view" type="com.liferay.portlet.mail.action.ViewMailAction">
-			<forward name="portlet.mail.view" path="portlet.mail.view" />
+		<action path="/mail/register" type="com.liferay.portlet.mail.action.RegisterAction">
+			<forward name="portlet.mail.register" path="portlet.mail.register" />
 		</action>
 
-		<action path="/mail/view_message" type="com.liferay.portlet.mail.action.ViewMessageAction">
-			<forward name="portlet.mail.view_message" path="/portlet/mail/view_message.jsp" />
-		</action>
+		<action path="/mail/view" forward="portlet.mail.view" />
+
+		<action path="/mail/view_message" forward="portlet.mail.view_message" />
 		
 		<!-- Maps -->
 

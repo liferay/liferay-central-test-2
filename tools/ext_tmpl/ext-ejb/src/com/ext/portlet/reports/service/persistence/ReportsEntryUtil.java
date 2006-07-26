@@ -53,6 +53,32 @@ public class ReportsEntryUtil {
         return reportsEntry;
     }
 
+    public static com.ext.portlet.reports.model.ReportsEntry remove(
+        com.ext.portlet.reports.model.ReportsEntry reportsEntry)
+        throws com.liferay.portal.SystemException {
+        ModelListener listener = null;
+
+        if (Validator.isNotNull(LISTENER)) {
+            try {
+                listener = (ModelListener) Class.forName(LISTENER).newInstance();
+            } catch (Exception e) {
+                _log.error(e);
+            }
+        }
+
+        if (listener != null) {
+            listener.onBeforeRemove(reportsEntry);
+        }
+
+        reportsEntry = getPersistence().remove(reportsEntry);
+
+        if (listener != null) {
+            listener.onAfterRemove(reportsEntry);
+        }
+
+        return reportsEntry;
+    }
+
     public static com.ext.portlet.reports.model.ReportsEntry update(
         com.ext.portlet.reports.model.ReportsEntry reportsEntry)
         throws com.liferay.portal.SystemException {

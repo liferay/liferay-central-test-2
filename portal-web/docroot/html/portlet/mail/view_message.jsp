@@ -29,6 +29,7 @@ page import="com.liferay.portlet.mail.model.MailMessage"
 MailMessage mm = (MailMessage)request.getAttribute("mailMessage");
 boolean header = ParamUtil.getBoolean(request, "header");
 
+System.out.println("mm 0 " + mm):
 %>
 
 <c:if test="<%= header == true %>">
