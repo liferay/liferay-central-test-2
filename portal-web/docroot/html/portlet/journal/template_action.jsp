@@ -31,13 +31,13 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 %>
 
 <c:if test="<%= JournalTemplatePermission.contains(permissionChecker, template, ActionKeys.UPDATE) %>">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="updateTemplateURL">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 		<portlet:param name="struts_action" value="/journal/edit_template" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="templateId" value="<%= template.getTemplateId() %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="edit" url="<%= updateTemplateURL %>" />
+	<liferay-ui:icon image="edit" url="<%= portletURL %>" />
 </c:if>
 
 <c:if test="<%= JournalTemplatePermission.contains(permissionChecker, template, ActionKeys.PERMISSIONS) %>">
@@ -45,48 +45,48 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 		modelResource="<%= JournalTemplate.class.getName() %>"
 		modelResourceDescription="<%= template.getName() %>"
 		resourcePrimKey="<%= template.getPrimaryKey().toString() %>"
-		var="permissionsTemplateURL"
+		var="portletURL"
 	/>
 
-	<liferay-ui:icon image="permissions" url="<%= permissionsTemplateURL %>" />
+	<liferay-ui:icon image="permissions" url="<%= portletURL %>" />
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(template.getStructureId()) %>">
 	<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addArticleURL">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 			<portlet:param name="struts_action" value="/journal/edit_article" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="structureId" value="<%= template.getStructureId() %>" />
 			<portlet:param name="templateId" value="<%= template.getTemplateId() %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="add_article" message="add-article" url="<%= addArticleURL %>" />
+		<liferay-ui:icon image="add_article" message="add-article" url="<%= portletURL %>" />
 	</c:if>
 
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewArticlesURL">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 		<portlet:param name="struts_action" value="/journal/view" />
 		<portlet:param name="tabs1" value="articles" />
 		<portlet:param name="templateId" value="<%= template.getTemplateId() %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="view_articles" message="view-articles" url="<%= viewArticlesURL %>" />
+	<liferay-ui:icon image="view_articles" message="view-articles" url="<%= portletURL %>" />
 
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewStructuresURL">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 		<portlet:param name="struts_action" value="/journal/edit_structure" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="structureId" value="<%= template.getStructureId() %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="view_structures" message="edit-structure" url="<%= viewStructuresURL %>" />
+	<liferay-ui:icon image="view_structures" message="edit-structure" url="<%= portletURL %>" />
 </c:if>
 
 <c:if test="<%= JournalTemplatePermission.contains(permissionChecker, template, ActionKeys.DELETE) %>">
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteStructureURL">
+	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 		<portlet:param name="struts_action" value="/journal/edit_template" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="deleteTemplateIds" value="<%= template.getTemplateId() %>" />
 	</portlet:actionURL>
 
-	<liferay-ui:icon-delete url="<%= deleteStructureURL %>" />
+	<liferay-ui:icon-delete url="<%= portletURL %>" />
 </c:if>
