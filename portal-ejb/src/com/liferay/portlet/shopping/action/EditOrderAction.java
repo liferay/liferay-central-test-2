@@ -69,8 +69,7 @@ public class EditOrderAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchOrderException ||
+			if (e instanceof NoSuchOrderException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
@@ -92,8 +91,7 @@ public class EditOrderAction extends PortletAction {
 			ActionUtil.getOrder(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchOrderException ||
+			if (e instanceof NoSuchOrderException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

@@ -75,8 +75,7 @@ public class EditEntryAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchCategoryException ||
+			if (e instanceof NoSuchCategoryException ||
 				e instanceof NoSuchEntryException ||
 				e instanceof PrincipalException) {
 
@@ -84,8 +83,7 @@ public class EditEntryAction extends PortletAction {
 
 				setForward(req, "portlet.blogs.error");
 			}
-			else if (e != null &&
-					 e instanceof EntryContentException ||
+			else if (e instanceof EntryContentException ||
 					 e instanceof EntryDisplayDateException ||
 					 e instanceof EntryTitleException) {
 
@@ -106,8 +104,7 @@ public class EditEntryAction extends PortletAction {
 			ActionUtil.getEntry(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchEntryException ||
+			if (e instanceof NoSuchEntryException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

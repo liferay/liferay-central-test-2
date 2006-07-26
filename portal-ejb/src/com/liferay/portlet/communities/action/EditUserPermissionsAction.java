@@ -66,9 +66,7 @@ public class EditUserPermissionsAction extends PortletAction {
 			sendRedirect(req, res, redirect);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof PrincipalException) {
-
+			if (e instanceof PrincipalException) {
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.communities.error");
@@ -88,8 +86,7 @@ public class EditUserPermissionsAction extends PortletAction {
 			ActionUtil.getGroup(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchGroupException ||
+			if (e instanceof NoSuchGroupException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

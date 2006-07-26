@@ -85,16 +85,14 @@ public class EditEventAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchEventException ||
+			if (e instanceof NoSuchEventException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.calendar.error");
 			}
-			else if (e != null &&
-					 e instanceof EventDurationException ||
+			else if (e instanceof EventDurationException ||
 					 e instanceof EventEndDateException ||
 					 e instanceof EventStartDateException ||
 					 e instanceof EventTitleException) {
@@ -116,8 +114,7 @@ public class EditEventAction extends PortletAction {
 			ActionUtil.getEvent(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchEventException ||
+			if (e instanceof NoSuchEventException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

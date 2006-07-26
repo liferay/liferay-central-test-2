@@ -69,8 +69,7 @@ public class EditEntryAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchEntryException ||
+			if (e instanceof NoSuchEntryException ||
 				e instanceof NoSuchFolderException ||
 				e instanceof PrincipalException) {
 
@@ -78,9 +77,7 @@ public class EditEntryAction extends PortletAction {
 
 				setForward(req, "portlet.bookmarks.error");
 			}
-			else if (e != null &&
-					 e instanceof EntryURLException) {
-
+			else if (e instanceof EntryURLException) {
 				SessionErrors.add(req, e.getClass().getName());
 			}
 			else {
@@ -98,8 +95,7 @@ public class EditEntryAction extends PortletAction {
 			ActionUtil.getEntry(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchEntryException ||
+			if (e instanceof NoSuchEntryException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

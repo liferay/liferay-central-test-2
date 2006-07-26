@@ -122,16 +122,14 @@ public class EditPagesAction extends PortletAction {
 			sendRedirect(req, res, redirect);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchLayoutException ||
+			if (e instanceof NoSuchLayoutException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.communities.error");
 			}
-			else if (e != null &&
-					 e instanceof LayoutFriendlyURLException ||
+			else if (e instanceof LayoutFriendlyURLException ||
 					 e instanceof LayoutHiddenException ||
 					 e instanceof LayoutNameException ||
 					 e instanceof LayoutParentLayoutIdException ||
@@ -170,8 +168,7 @@ public class EditPagesAction extends PortletAction {
 			ActionUtil.getGroup(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchGroupException ||
+			if (e instanceof NoSuchGroupException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

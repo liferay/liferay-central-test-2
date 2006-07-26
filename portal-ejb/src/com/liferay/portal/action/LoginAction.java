@@ -260,8 +260,7 @@ public class LoginAction extends Action {
 				return mapping.findForward("/portal/touch_protected.jsp");
 			}
 			catch (Exception e) {
-				if (e != null &&
-					e instanceof AuthException ||
+				if (e instanceof AuthException ||
 					e instanceof CookieNotSupportedException ||
 					e instanceof NoSuchUserException ||
 					e instanceof UserEmailAddressException ||
@@ -286,8 +285,7 @@ public class LoginAction extends Action {
 				return mapping.findForward("portal.login");
 			}
 			catch (Exception e) {
-				if (e != null &&
-					e instanceof NoSuchUserException ||
+				if (e instanceof NoSuchUserException ||
 					e instanceof SendPasswordException ||
 					e instanceof UserEmailAddressException) {
 

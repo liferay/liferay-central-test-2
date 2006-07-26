@@ -107,8 +107,7 @@ public class EditArticleAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchArticleException ||
+			if (e instanceof NoSuchArticleException ||
 				e instanceof NoSuchStructureException ||
 				e instanceof NoSuchTemplateException ||
 				e instanceof PrincipalException) {
@@ -117,8 +116,7 @@ public class EditArticleAction extends PortletAction {
 
 				setForward(req, "portlet.journal.error");
 			}
-			else if (e != null &&
-					 e instanceof ArticleContentException ||
+			else if (e instanceof ArticleContentException ||
 					 e instanceof ArticleDisplayDateException ||
 					 e instanceof ArticleExpirationDateException ||
 					 e instanceof ArticleIdException ||
@@ -152,8 +150,7 @@ public class EditArticleAction extends PortletAction {
 
 		}
 		catch (Exception e) {
-			if (e != null &&
-				//e instanceof NoSuchArticleException ||
+			if (//e instanceof NoSuchArticleException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

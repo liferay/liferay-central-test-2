@@ -73,16 +73,14 @@ public class EditUserPortraitAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchUserException ||
+			if (e instanceof NoSuchUserException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.enterprise_admin.error");
 			}
-			else if (e != null &&
-					 e instanceof UploadException ||
+			else if (e instanceof UploadException ||
 					 e instanceof UserPortraitException) {
 
 				SessionErrors.add(req, e.getClass().getName());

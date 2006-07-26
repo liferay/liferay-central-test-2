@@ -70,17 +70,14 @@ public class EditFolderAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchFolderException ||
+			if (e instanceof NoSuchFolderException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.image_gallery.error");
 			}
-			else if (e != null &&
-					 e instanceof FolderNameException) {
-
+			else if (e instanceof FolderNameException) {
 				SessionErrors.add(req, e.getClass().getName());
 			}
 			else {
@@ -98,8 +95,7 @@ public class EditFolderAction extends PortletAction {
 			ActionUtil.getFolder(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchFolderException ||
+			if (e instanceof NoSuchFolderException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

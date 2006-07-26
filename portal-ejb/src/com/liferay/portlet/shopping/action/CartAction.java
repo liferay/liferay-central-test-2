@@ -74,16 +74,14 @@ public void processAction(
 			}
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchItemException ||
+			if (e instanceof NoSuchItemException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.shopping.error");
 			}
-			else if (e != null &&
-					 e instanceof CartMinQuantityException ||
+			else if (e instanceof CartMinQuantityException ||
 					 e instanceof CouponActiveException ||
 					 e instanceof CouponEndDateException ||
 					 e instanceof CouponStartDateException ||

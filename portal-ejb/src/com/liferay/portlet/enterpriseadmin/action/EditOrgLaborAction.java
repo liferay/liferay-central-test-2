@@ -68,17 +68,14 @@ public class EditOrgLaborAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchOrgLaborException ||
+			if (e instanceof NoSuchOrgLaborException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.enterprise_admin.error");
 			}
-			else if (e != null &&
-					 e instanceof NoSuchListTypeException) {
-
+			else if (e instanceof NoSuchListTypeException) {
 				SessionErrors.add(req, e.getClass().getName());
 			}
 			else {
@@ -96,8 +93,7 @@ public class EditOrgLaborAction extends PortletAction {
 			ActionUtil.getOrgLabor(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchOrgLaborException ||
+			if (e instanceof NoSuchOrgLaborException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

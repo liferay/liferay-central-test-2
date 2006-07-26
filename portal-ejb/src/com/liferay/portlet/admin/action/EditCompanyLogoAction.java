@@ -62,16 +62,12 @@ public class EditCompanyLogoAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof PrincipalException) {
-
+			if (e instanceof PrincipalException) {
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.admin.error");
 			}
-			else if (e != null &&
-					 e instanceof UploadException) {
-
+			else if (e instanceof UploadException) {
 				SessionErrors.add(req, e.getClass().getName());
 			}
 			else {

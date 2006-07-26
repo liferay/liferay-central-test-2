@@ -76,8 +76,7 @@ public class EditRolePermissionsAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchRoleException ||
+			if (e instanceof NoSuchRoleException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
@@ -99,8 +98,7 @@ public class EditRolePermissionsAction extends PortletAction {
 			ActionUtil.getRole(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchRoleException ||
+			if (e instanceof NoSuchRoleException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

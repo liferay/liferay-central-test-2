@@ -64,8 +64,7 @@ public class ViewMessageAction extends PortletAction {
 			return mapping.findForward("portlet.message_boards.view_message");
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchMessageException ||
+			if (e instanceof NoSuchMessageException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

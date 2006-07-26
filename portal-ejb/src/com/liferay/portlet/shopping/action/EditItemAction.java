@@ -88,8 +88,7 @@ public class EditItemAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchCategoryException ||
+			if (e instanceof NoSuchCategoryException ||
 				e instanceof NoSuchItemException ||
 				e instanceof PrincipalException) {
 
@@ -97,8 +96,7 @@ public class EditItemAction extends PortletAction {
 
 				setForward(req, "portlet.shopping.error");
 			}
-			else if (e != null &&
-					 e instanceof DuplicateItemSKUException ||
+			else if (e instanceof DuplicateItemSKUException ||
 					 e instanceof ItemLargeImageNameException ||
 					 e instanceof ItemLargeImageSizeException ||
 					 e instanceof ItemMediumImageNameException ||
@@ -125,8 +123,7 @@ public class EditItemAction extends PortletAction {
 			ActionUtil.getItem(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchItemException ||
+			if (e instanceof NoSuchItemException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

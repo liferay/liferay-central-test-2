@@ -69,16 +69,14 @@ public class EditEmailAddressAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchEmailAddressException ||
+			if (e instanceof NoSuchEmailAddressException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.enterprise_admin.error");
 			}
-			else if (e != null &&
-					 e instanceof EmailAddressException ||
+			else if (e instanceof EmailAddressException ||
 					 e instanceof NoSuchListTypeException) {
 
 				SessionErrors.add(req, e.getClass().getName());
@@ -98,8 +96,7 @@ public class EditEmailAddressAction extends PortletAction {
 			ActionUtil.getEmailAddress(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchEmailAddressException ||
+			if (e instanceof NoSuchEmailAddressException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

@@ -79,8 +79,7 @@ public class ViewAction extends PortletAction {
 				_login(themeDisplay, req, res);
 			}
 			catch (Exception e) {
-				if (e != null &&
-					e instanceof AuthException ||
+				if (e instanceof AuthException ||
 					e instanceof CookieNotSupportedException ||
 					e instanceof NoSuchUserException ||
 					e instanceof UserEmailAddressException ||

@@ -75,8 +75,7 @@ public class EditPageAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchNodeException ||
+			if (e instanceof NoSuchNodeException ||
 				e instanceof NoSuchPageException ||
 				e instanceof PrincipalException) {
 
@@ -84,8 +83,7 @@ public class EditPageAction extends PortletAction {
 
 				setForward(req, "portlet.wiki.error");
 			}
-			else if (e != null &&
-					 e instanceof PageContentException ||
+			else if (e instanceof PageContentException ||
 					 e instanceof PageTitleException) {
 
 				SessionErrors.add(req, e.getClass().getName());
@@ -106,8 +104,7 @@ public class EditPageAction extends PortletAction {
 			ActionUtil.getPage(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchNodeException ||
+			if (e instanceof NoSuchNodeException ||
 				e instanceof NoSuchPageException ||
 				e instanceof PrincipalException) {
 

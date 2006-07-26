@@ -80,16 +80,14 @@ public class EditCouponAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchCouponException ||
+			if (e instanceof NoSuchCouponException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.shopping.error");
 			}
-			else if (e != null &&
-					 e instanceof CouponDateException ||
+			else if (e instanceof CouponDateException ||
 					 e instanceof CouponDescriptionException ||
 					 e instanceof CouponEndDateException ||
 					 e instanceof CouponIdException ||
@@ -132,8 +130,7 @@ public class EditCouponAction extends PortletAction {
 			ActionUtil.getCoupon(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchCouponException ||
+			if (e instanceof NoSuchCouponException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

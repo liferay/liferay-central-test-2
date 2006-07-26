@@ -99,8 +99,7 @@ public class CheckoutAction extends CartAction {
 				setForward(req, "portlet.shopping.checkout_second");
 			}
 			catch (Exception e) {
-				if (e != null &&
-					e instanceof BillingCityException ||
+				if (e instanceof BillingCityException ||
 					e instanceof BillingCountryException ||
 					e instanceof BillingEmailAddressException ||
 					e instanceof BillingFirstNameException ||
@@ -127,9 +126,7 @@ public class CheckoutAction extends CartAction {
 
 					setForward(req, "portlet.shopping.checkout_first");
 				}
-				else if (e != null &&
-						 e instanceof PrincipalException) {
-
+				else if (e instanceof PrincipalException) {
 					setForward(req, "portlet.shopping.error");
 				}
 				else {

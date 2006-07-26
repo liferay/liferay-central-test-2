@@ -81,16 +81,14 @@ public class EditStructureAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchStructureException ||
+			if (e instanceof NoSuchStructureException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.journal.error");
 			}
-			else if (e != null &&
-					 e instanceof DuplicateStructureIdException ||
+			else if (e instanceof DuplicateStructureIdException ||
 					 e instanceof RequiredStructureException ||
 					 e instanceof StructureDescriptionException ||
 					 e instanceof StructureIdException ||
@@ -128,8 +126,7 @@ public class EditStructureAction extends PortletAction {
 
 		}
 		catch (Exception e) {
-			if (e != null &&
-				//e instanceof NoSuchStructureException ||
+			if (//e instanceof NoSuchStructureException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

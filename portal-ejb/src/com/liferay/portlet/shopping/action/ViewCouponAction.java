@@ -61,8 +61,7 @@ public class ViewCouponAction extends PortletAction {
 			req.setAttribute(WebKeys.SHOPPING_COUPON, coupon);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchCouponException ||
+			if (e instanceof NoSuchCouponException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

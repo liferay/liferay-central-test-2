@@ -121,16 +121,14 @@ public class EditUserAction extends PortletAction {
 			sendRedirect(req, res, redirect);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchUserException ||
+			if (e instanceof NoSuchUserException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.enterprise_admin.error");
 			}
-			else if (e != null &&
-					 e instanceof ContactFirstNameException ||
+			else if (e instanceof ContactFirstNameException ||
 					 e instanceof ContactLastNameException ||
 					 e instanceof DuplicateUserEmailAddressException ||
 					 e instanceof NoSuchOrganizationException ||
@@ -162,9 +160,7 @@ public class EditUserAction extends PortletAction {
 			PortalUtil.getSelectedUser(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof PrincipalException) {
-
+			if (e instanceof PrincipalException) {
 				SessionErrors.add(req, e.getClass().getName());
 
 				return mapping.findForward("portlet.enterprise_admin.error");

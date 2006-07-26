@@ -63,17 +63,14 @@ public class ChangePasswordAction extends Action {
 				return mapping.findForward(Constants.COMMON_REFERER);
 			}
 			catch (Exception e) {
-				if (e != null &&
-					e instanceof UserPasswordException) {
-
+				if (e instanceof UserPasswordException) {
 					UserPasswordException upe = (UserPasswordException)e;
 
 					SessionErrors.add(req, e.getClass().getName(), upe);
 
 					return mapping.findForward("portal.change_password");
 				}
-				else if (e != null &&
-						 e instanceof NoSuchUserException ||
+				else if (e instanceof NoSuchUserException ||
 						 e instanceof PrincipalException) {
 
 					SessionErrors.add(req, e.getClass().getName());

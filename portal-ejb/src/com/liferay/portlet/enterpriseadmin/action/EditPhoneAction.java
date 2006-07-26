@@ -69,16 +69,14 @@ public class EditPhoneAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchPhoneException ||
+			if (e instanceof NoSuchPhoneException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.enterprise_admin.error");
 			}
-			else if (e != null &&
-					 e instanceof NoSuchListTypeException ||
+			else if (e instanceof NoSuchListTypeException ||
 					 e instanceof PhoneNumberException) {
 
 				SessionErrors.add(req, e.getClass().getName());
@@ -98,8 +96,7 @@ public class EditPhoneAction extends PortletAction {
 			ActionUtil.getPhone(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchPhoneException ||
+			if (e instanceof NoSuchPhoneException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

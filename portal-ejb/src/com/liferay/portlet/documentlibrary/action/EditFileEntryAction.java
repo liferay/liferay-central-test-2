@@ -82,8 +82,7 @@ public class EditFileEntryAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof DuplicateLockException ||
+			if (e instanceof DuplicateLockException ||
 				e instanceof NoSuchFileEntryException ||
 				e instanceof NoSuchFolderException ||
 				e instanceof PrincipalException) {
@@ -100,8 +99,7 @@ public class EditFileEntryAction extends PortletAction {
 
 				setForward(req, "portlet.document_library.error");
 			}
-			else if (e != null &&
-					 e instanceof DuplicateFileException ||
+			else if (e instanceof DuplicateFileException ||
 					 e instanceof FileNameException ||
 					 e instanceof FileSizeException ||
 					 e instanceof SourceFileNameException) {
@@ -123,8 +121,7 @@ public class EditFileEntryAction extends PortletAction {
 			ActionUtil.getFileEntry(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchFileEntryException ||
+			if (e instanceof NoSuchFileEntryException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

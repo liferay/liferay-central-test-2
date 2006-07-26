@@ -68,17 +68,14 @@ public class EditCategoryAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchCategoryException ||
+			if (e instanceof NoSuchCategoryException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.blogs.error");
 			}
-			else if (e != null &&
-					 e instanceof CategoryNameException) {
-
+			else if (e instanceof CategoryNameException) {
 				SessionErrors.add(req, e.getClass().getName());
 			}
 			else {
@@ -96,8 +93,7 @@ public class EditCategoryAction extends PortletAction {
 			ActionUtil.getCategory(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchCategoryException ||
+			if (e instanceof NoSuchCategoryException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

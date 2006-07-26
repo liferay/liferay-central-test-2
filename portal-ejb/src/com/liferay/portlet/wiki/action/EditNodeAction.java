@@ -70,17 +70,14 @@ public class EditNodeAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchNodeException ||
+			if (e instanceof NoSuchNodeException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.wiki.error");
 			}
-			else if (e != null &&
-					 e instanceof NodeNameException) {
-
+			else if (e instanceof NodeNameException) {
 				SessionErrors.add(req, e.getClass().getName());
 			}
 			else {
@@ -98,8 +95,7 @@ public class EditNodeAction extends PortletAction {
 			ActionUtil.getNode(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchNodeException ||
+			if (e instanceof NoSuchNodeException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

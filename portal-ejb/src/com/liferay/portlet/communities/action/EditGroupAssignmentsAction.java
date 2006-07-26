@@ -72,8 +72,7 @@ public class EditGroupAssignmentsAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchGroupException ||
+			if (e instanceof NoSuchGroupException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
@@ -95,8 +94,7 @@ public class EditGroupAssignmentsAction extends PortletAction {
 			ActionUtil.getGroup(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchGroupException ||
+			if (e instanceof NoSuchGroupException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

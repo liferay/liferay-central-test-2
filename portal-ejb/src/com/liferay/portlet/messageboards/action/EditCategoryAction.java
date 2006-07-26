@@ -72,16 +72,14 @@ public class EditCategoryAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchCategoryException ||
+			if (e instanceof NoSuchCategoryException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.message_boards.error");
 			}
-			else if (e != null &&
-					 e instanceof CaptchaTextException ||
+			else if (e instanceof CaptchaTextException ||
 					 e instanceof CategoryNameException) {
 
 				SessionErrors.add(req, e.getClass().getName());
@@ -101,8 +99,7 @@ public class EditCategoryAction extends PortletAction {
 			ActionUtil.getCategory(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchCategoryException ||
+			if (e instanceof NoSuchCategoryException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

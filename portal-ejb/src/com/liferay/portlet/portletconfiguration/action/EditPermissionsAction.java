@@ -88,9 +88,7 @@ public class EditPermissionsAction extends PortletAction {
 			sendRedirect(req, res, redirect);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof PrincipalException) {
-
+			if (e instanceof PrincipalException) {
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.portlet_configuration.error");

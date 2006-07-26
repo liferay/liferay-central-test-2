@@ -52,8 +52,7 @@ public class ViewAction extends PortletAction {
 			ActionUtil.getFolder(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchFolderException ||
+			if (e instanceof NoSuchFolderException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

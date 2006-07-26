@@ -60,8 +60,7 @@ public class RegisterAction extends PortletAction {
 			register(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof DuplicateUserEmailAddressException ||
+			if (e instanceof DuplicateUserEmailAddressException ||
 				e instanceof UserEmailAddressException) {
 
 				SessionErrors.add(req, e.getClass().getName());

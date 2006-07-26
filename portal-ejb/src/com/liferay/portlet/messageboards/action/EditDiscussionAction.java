@@ -73,8 +73,7 @@ public class EditDiscussionAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchMessageException ||
+			if (e instanceof NoSuchMessageException ||
 				e instanceof PrincipalException ||
 				e instanceof RequiredMessageException) {
 
@@ -82,8 +81,7 @@ public class EditDiscussionAction extends PortletAction {
 
 				setForward(req, "portlet.message_boards.error");
 			}
-			else if (e != null &&
-					 e instanceof FileNameException ||
+			else if (e instanceof FileNameException ||
 					 e instanceof FileSizeException ||
 					 e instanceof MessageBodyException ||
 					 e instanceof MessageSubjectException) {

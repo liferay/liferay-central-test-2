@@ -57,12 +57,15 @@ import javax.mail.internet.InternetAddress;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
@@ -79,71 +82,82 @@ public class CompleteMessageAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
-
 		try {
-			if (cmd.equals(Constants.SEND) || cmd.equals(Constants.SAVE)) {
-				long draftId = ParamUtil.getLong(req, "draftId");
+			completeMessage(req);
 
-				HttpSession ses =
-					((ActionRequestImpl)req).getHttpServletRequest().
-						getSession();
-
-				User user = PortalUtil.getUser(req);
-				Address from = new InternetAddress(
-					user.getEmailAddress(), user.getFullName());
-
-				MailMessage mm = new MailMessage();
-				mm.setFrom(from);
-				mm.setTo(ParamUtil.getString(req, "tos"));
-				mm.setCc(ParamUtil.getString(req, "ccs"));
-				mm.setBcc(ParamUtil.getString(req, "bccs"));
-				mm.setSubject(ParamUtil.getString(req, "subject"));
-				mm.setHtmlBody(ParamUtil.getString(req, "body"));
-
-				Map attachments = _getAttachments(
-					PortalUtil.getUploadPortletRequest(req));
-
-				Set filenames = attachments.keySet();
-
-				for (Iterator itr = filenames.iterator(); itr.hasNext(); ) {
-					String filename = (String)itr.next();
-					byte [] attachment = (byte [])attachments.get(filename);
-
-					MailAttachment ma = new MailAttachment();
-					ma.setFilename(filename);
-					ma.setContentType(ContentTypeUtil.getContentType(filename));
-					ma.setContent(attachment);
-
-					mm.appendAttachment(ma);
-				}
-
-				mm.setRemoteAttachments(_getRemoteAttachments(req));
-
-				ThemeDisplay themeDisplay =
-					(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-				String url =
-					themeDisplay.getPathMain() + "/mail/get_attachment?";
-
-				MailUtil.completeMessage(
-					ses, mm, cmd.equals(Constants.SEND), draftId, url);
-
-				setForward(req, "portlet.mail.view");
-			}
+			sendRedirect(req, res);
 		}
 		catch (Exception e) {
 			if (e instanceof RecipientException) {
 				SessionErrors.add(req, e.getClass().getName());
-
-				setForward(req, "portlet.mail.edit_message");
 			}
-
-			_log.error(StackTraceUtil.getStackTrace(e));
+			else {
+				throw e;
+			}
 		}
 	}
 
-	private static Map _getAttachments(UploadPortletRequest uploadReq)
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			RenderRequest req, RenderResponse res)
+		throws Exception {
+
+		return mapping.findForward("portlet.mail.edit_message");
+	}
+
+	protected void completeMessage(ActionRequest req)
+		throws Exception {
+
+		String cmd = ParamUtil.getString(req, Constants.CMD);
+
+		long draftId = ParamUtil.getLong(req, "draftId");
+
+		HttpSession ses =
+			((ActionRequestImpl)req).getHttpServletRequest().
+				getSession();
+
+		User user = PortalUtil.getUser(req);
+		Address from = new InternetAddress(
+			user.getEmailAddress(), user.getFullName());
+
+		MailMessage mm = new MailMessage();
+		mm.setFrom(from);
+		mm.setTo(ParamUtil.getString(req, "tos"));
+		mm.setCc(ParamUtil.getString(req, "ccs"));
+		mm.setBcc(ParamUtil.getString(req, "bccs"));
+		mm.setSubject(ParamUtil.getString(req, "subject"));
+		mm.setHtmlBody(ParamUtil.getString(req, "body"));
+
+		Map attachments = getAttachments(
+			PortalUtil.getUploadPortletRequest(req));
+
+		Set filenames = attachments.keySet();
+
+		for (Iterator itr = filenames.iterator(); itr.hasNext(); ) {
+			String filename = (String)itr.next();
+			byte [] attachment = (byte [])attachments.get(filename);
+
+			MailAttachment ma = new MailAttachment();
+			ma.setFilename(filename);
+			ma.setContentType(ContentTypeUtil.getContentType(filename));
+			ma.setContent(attachment);
+
+			mm.appendAttachment(ma);
+		}
+
+		mm.setRemoteAttachments(getRemoteAttachments(req));
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		String url =
+			themeDisplay.getPathMain() + "/mail/get_attachment?";
+
+		MailUtil.completeMessage(
+			ses, mm, cmd.equals(Constants.SEND), draftId, url);
+	}
+
+	protected Map getAttachments(UploadPortletRequest uploadReq)
 		throws Exception {
 
 		Map attachments = new HashMap();
@@ -166,7 +180,7 @@ public class CompleteMessageAction extends PortletAction {
 		return attachments;
 	}
 
-	private static List _getRemoteAttachments(ActionRequest req)
+	protected List getRemoteAttachments(ActionRequest req)
 		throws Exception {
 
 		List list = new ArrayList();

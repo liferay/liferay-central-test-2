@@ -66,8 +66,7 @@ public class EditUserGroupAssignmentsAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchUserGroupException ||
+			if (e instanceof NoSuchUserGroupException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
@@ -89,8 +88,7 @@ public class EditUserGroupAssignmentsAction extends PortletAction {
 			ActionUtil.getUserGroup(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchUserGroupException ||
+			if (e instanceof NoSuchUserGroupException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

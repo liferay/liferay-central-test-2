@@ -54,8 +54,7 @@ public class ViewPageAction extends PortletAction {
 			ActionUtil.getPage(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchNodeException ||
+			if (e instanceof NoSuchNodeException ||
 				e instanceof NoSuchPageException ||
 				e instanceof PrincipalException) {
 

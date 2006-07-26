@@ -88,16 +88,14 @@ public class EditOrganizationAction extends PortletAction {
 			sendRedirect(req, res, redirect);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchOrganizationException ||
+			if (e instanceof NoSuchOrganizationException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.enterprise_admin.error");
 			}
-			else if (e != null &&
-					 e instanceof DuplicateOrganizationException ||
+			else if (e instanceof DuplicateOrganizationException ||
 					 e instanceof NoSuchCountryException ||
 					 e instanceof NoSuchListTypeException ||
 					 e instanceof OrganizationNameException ||
@@ -125,8 +123,7 @@ public class EditOrganizationAction extends PortletAction {
 			ActionUtil.getOrganization(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchOrganizationException ||
+			if (e instanceof NoSuchOrganizationException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

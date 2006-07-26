@@ -97,8 +97,7 @@ public class EditMessageAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchMessageException ||
+			if (e instanceof NoSuchMessageException ||
 				e instanceof PrincipalException ||
 				e instanceof RequiredMessageException) {
 
@@ -106,8 +105,7 @@ public class EditMessageAction extends PortletAction {
 
 				setForward(req, "portlet.message_boards.error");
 			}
-			else if (e != null &&
-					 e instanceof CaptchaTextException ||
+			else if (e instanceof CaptchaTextException ||
 					 e instanceof FileNameException ||
 					 e instanceof FileSizeException ||
 					 e instanceof MessageBodyException ||
@@ -130,8 +128,7 @@ public class EditMessageAction extends PortletAction {
 			ActionUtil.getMessage(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchMessageException ||
+			if (e instanceof NoSuchMessageException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

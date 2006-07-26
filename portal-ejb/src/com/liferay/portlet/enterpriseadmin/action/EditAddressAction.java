@@ -73,16 +73,14 @@ public class EditAddressAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchAddressException ||
+			if (e instanceof NoSuchAddressException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.enterprise_admin.error");
 			}
-			else if (e != null &&
-					 e instanceof AddressCityException  ||
+			else if (e instanceof AddressCityException  ||
 					 e instanceof AddressStreetException  ||
 					 e instanceof AddressZipException ||
 					 e instanceof NoSuchCountryException  ||
@@ -106,8 +104,7 @@ public class EditAddressAction extends PortletAction {
 			ActionUtil.getAddress(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchAddressException ||
+			if (e instanceof NoSuchAddressException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

@@ -52,8 +52,7 @@ public class ViewAction extends PortletAction {
 			ActionUtil.getCategory(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchCategoryException ||
+			if (e instanceof NoSuchCategoryException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

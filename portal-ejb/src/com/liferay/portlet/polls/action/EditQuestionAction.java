@@ -87,16 +87,14 @@ public class EditQuestionAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchQuestionException ||
+			if (e instanceof NoSuchQuestionException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.polls.error");
 			}
-			else if (e != null &&
-					 e instanceof DuplicateVoteException ||
+			else if (e instanceof DuplicateVoteException ||
 					 e instanceof NoSuchChoiceException ||
 					 e instanceof QuestionChoiceException ||
 					 e instanceof QuestionDescriptionException ||
@@ -120,8 +118,7 @@ public class EditQuestionAction extends PortletAction {
 			ActionUtil.getQuestion(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchQuestionException ||
+			if (e instanceof NoSuchQuestionException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

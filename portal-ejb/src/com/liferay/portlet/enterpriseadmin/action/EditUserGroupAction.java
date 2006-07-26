@@ -70,15 +70,12 @@ public class EditUserGroupAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof PrincipalException) {
-
+			if (e instanceof PrincipalException) {
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.enterprise_admin.error");
 			}
-			else if (e != null &&
-					 e instanceof DuplicateUserGroupException ||
+			else if (e instanceof DuplicateUserGroupException ||
 					 e instanceof NoSuchUserGroupException ||
 					 e instanceof RequiredUserGroupException ||
 					 e instanceof UserGroupNameException) {
@@ -104,8 +101,7 @@ public class EditUserGroupAction extends PortletAction {
 			ActionUtil.getUserGroup(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchUserGroupException ||
+			if (e instanceof NoSuchUserGroupException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

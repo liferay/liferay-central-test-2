@@ -69,16 +69,14 @@ public class EditWebsiteAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchWebsiteException ||
+			if (e instanceof NoSuchWebsiteException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.enterprise_admin.error");
 			}
-			else if (e != null &&
-					 e instanceof NoSuchListTypeException ||
+			else if (e instanceof NoSuchListTypeException ||
 					 e instanceof WebsiteURLException) {
 
 				SessionErrors.add(req, e.getClass().getName());
@@ -98,8 +96,7 @@ public class EditWebsiteAction extends PortletAction {
 			ActionUtil.getWebsite(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchWebsiteException ||
+			if (e instanceof NoSuchWebsiteException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

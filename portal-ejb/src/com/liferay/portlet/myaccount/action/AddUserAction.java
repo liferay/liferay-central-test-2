@@ -79,8 +79,7 @@ public class AddUserAction extends PortletAction {
 			addUser(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof CaptchaTextException ||
+			if (e instanceof CaptchaTextException ||
 				e instanceof ContactFirstNameException ||
 				e instanceof ContactLastNameException ||
 				e instanceof DuplicateUserEmailAddressException ||

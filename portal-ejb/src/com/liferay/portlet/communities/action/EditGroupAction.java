@@ -71,16 +71,14 @@ public class EditGroupAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchGroupException ||
+			if (e instanceof NoSuchGroupException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.communities.error");
 			}
-			else if (e != null &&
-					 e instanceof DuplicateGroupException ||
+			else if (e instanceof DuplicateGroupException ||
 					 e instanceof GroupFriendlyURLException ||
 					 e instanceof GroupNameException ||
 					 e instanceof RequiredGroupException) {
@@ -106,8 +104,7 @@ public class EditGroupAction extends PortletAction {
 			ActionUtil.getGroup(req);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchGroupException ||
+			if (e instanceof NoSuchGroupException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

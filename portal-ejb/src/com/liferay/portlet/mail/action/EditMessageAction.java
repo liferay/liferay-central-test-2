@@ -23,6 +23,51 @@
 package com.liferay.portlet.mail.action;
 
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.model.User;
+import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.ContentTypeUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.mail.RecipientException;
+import com.liferay.portlet.mail.model.MailAttachment;
+import com.liferay.portlet.mail.model.MailMessage;
+import com.liferay.portlet.mail.model.RemoteMailAttachment;
+import com.liferay.portlet.mail.util.MailUtil;
+import com.liferay.util.FileUtil;
+import com.liferay.util.ParamUtil;
+import com.liferay.util.servlet.SessionErrors;
+import com.liferay.util.servlet.UploadPortletRequest;
+
+import java.io.File;
+
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.mail.Address;
+import javax.mail.internet.InternetAddress;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 /**
  * <a href="EditMessageAction.java.html"><b><i>View Source</i></b></a>
@@ -33,12 +78,12 @@ import com.liferay.portal.struts.PortletAction;
  */
 public class EditMessageAction extends PortletAction {
 
-	/*public ActionForward render(
+	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		String composeAction = ParamUtil.getString(req, "composeAction");
+		/*String composeAction = ParamUtil.getString(req, "composeAction");
 		long messageId = ParamUtil.getLong(req, "messageId");
 		String folderId = ParamUtil.getString(req, "folderId");
 
@@ -131,13 +176,12 @@ public class EditMessageAction extends PortletAction {
 				mm.getRemoteAttachments());
 			req.setAttribute(WebKeys.MAIL_MESSAGE, mm.getHtmlBody());
 			req.setAttribute(WebKeys.MAIL_DRAFT_ID, new Long(messageId));
-		}
+		}*/
 
-		return mapping.findForward(
-			getForward(req, "portlet.mail.edit_message"));
+		return mapping.findForward("portlet.mail.edit_message");
 	}
 
-	private String _buildBody(MailMessage mm, DateFormat dateFormatter) {
+	/*private String _buildBody(MailMessage mm, DateFormat dateFormatter) {
 		InternetAddress from = ((InternetAddress)mm.getFrom());
 
 		Date today = new Date();

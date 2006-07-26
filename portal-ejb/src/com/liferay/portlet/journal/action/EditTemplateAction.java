@@ -85,16 +85,14 @@ public class EditTemplateAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e != null &&
-				e instanceof NoSuchTemplateException ||
+			if (e instanceof NoSuchTemplateException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.journal.error");
 			}
-			else if (e != null &&
-					 e instanceof DuplicateTemplateIdException ||
+			else if (e instanceof DuplicateTemplateIdException ||
 					 e instanceof RequiredTemplateException ||
 					 e instanceof TemplateDescriptionException ||
 					 e instanceof TemplateIdException ||
@@ -134,8 +132,7 @@ public class EditTemplateAction extends PortletAction {
 
 		}
 		catch (Exception e) {
-			if (e != null &&
-				//e instanceof NoSuchTemplateException ||
+			if (//e instanceof NoSuchTemplateException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
