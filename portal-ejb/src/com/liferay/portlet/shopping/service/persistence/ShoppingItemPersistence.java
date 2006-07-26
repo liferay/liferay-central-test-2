@@ -109,8 +109,6 @@ public class ShoppingItemPersistence extends BasePersistence {
 			session = openSession();
 			session.delete(shoppingItem);
 			session.flush();
-			ShoppingItemPool.removeByC_S(shoppingItem.getCompanyId(),
-				shoppingItem.getSku());
 
 			return shoppingItem;
 		}
@@ -204,6 +202,8 @@ public class ShoppingItemPersistence extends BasePersistence {
 			query.append("itemId ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (categoryId != null) {
@@ -254,6 +254,8 @@ public class ShoppingItemPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (categoryId != null) {
@@ -337,6 +339,8 @@ public class ShoppingItemPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (categoryId != null) {
@@ -386,16 +390,6 @@ public class ShoppingItemPersistence extends BasePersistence {
 
 	public ShoppingItem fetchByC_S(String companyId, String sku)
 		throws SystemException {
-		String pk = ShoppingItemPool.getByC_S(companyId, sku);
-
-		if (pk != null) {
-			ShoppingItem shoppingItem = fetchByPrimaryKey(pk);
-
-			if (shoppingItem != null) {
-				return shoppingItem;
-			}
-		}
-
 		Session session = null;
 
 		try {
@@ -426,6 +420,8 @@ public class ShoppingItemPersistence extends BasePersistence {
 			query.append("itemId ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -443,8 +439,6 @@ public class ShoppingItemPersistence extends BasePersistence {
 			}
 
 			ShoppingItem shoppingItem = (ShoppingItem)list.get(0);
-			ShoppingItemPool.putByC_S(companyId, sku,
-				shoppingItem.getPrimaryKey());
 
 			return shoppingItem;
 		}
@@ -469,6 +463,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 			query.append("itemId ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -516,6 +511,8 @@ public class ShoppingItemPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (categoryId != null) {
@@ -573,6 +570,8 @@ public class ShoppingItemPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -633,6 +632,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
+			q.setCacheable(true);
 			q.addEntity("ShoppingItemPrice",
 				com.liferay.portlet.shopping.model.ShoppingItemPrice.class);
 
@@ -656,6 +656,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETSHOPPINGITEMPRICESSIZE);
+			q.setCacheable(true);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);

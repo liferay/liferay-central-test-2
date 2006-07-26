@@ -22,36 +22,7 @@
 
 package com.liferay.portlet.mail.action;
 
-import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.DateFormats;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.RenderRequestImpl;
-import com.liferay.portlet.mail.model.MailMessage;
-import com.liferay.portlet.mail.util.MailUtil;
-import com.liferay.util.Html;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
-import com.liferay.util.Validator;
-import com.liferay.util.mail.InternetAddressUtil;
-
-import java.text.DateFormat;
-
-import java.util.Date;
-
-import javax.mail.internet.InternetAddress;
-
-import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
 
 /**
  * <a href="EditMessageAction.java.html"><b><i>View Source</i></b></a>
@@ -62,7 +33,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class EditMessageAction extends PortletAction {
 
-	public ActionForward render(
+	/*public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
 			RenderRequest req, RenderResponse res)
 		throws Exception {
@@ -203,6 +174,6 @@ public class EditMessageAction extends PortletAction {
 		}
 
 		return subject;
-	}
+	}*/
 
 }

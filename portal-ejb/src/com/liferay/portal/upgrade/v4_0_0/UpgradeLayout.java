@@ -456,10 +456,10 @@ public class UpgradeLayout extends UpgradeProcess {
 		}
 	}
 
-	public static final String _GET_LOOK_AND_FEEL_BY_GROUP_ID =
+	private static final String _GET_LOOK_AND_FEEL_BY_GROUP_ID =
 		"SELECT themeId, colorSchemeId FROM Group_ WHERE groupId = ?";
 
-	public static final String _GET_LOOK_AND_FEEL_BY_USER_ID =
+	private static final String _GET_LOOK_AND_FEEL_BY_USER_ID =
 		"SELECT themeId, colorSchemeId FROM User_ WHERE userId = ?";
 
 	public static final String[][] _PORTLET_IDS = new String[][] {
@@ -473,23 +473,23 @@ public class UpgradeLayout extends UpgradeProcess {
 		{"show-portlet-borders", "portlet-setup-show-borders"}
 	};
 
-	public static final String _UPGRADE_JOURNAL_CONTENT_SEARCH_1 =
+	private static final String _UPGRADE_JOURNAL_CONTENT_SEARCH_1 =
 		"SELECT * FROM JournalContentSearch WHERE layoutId = ? AND ownerId = ?";
 
-	public static final String _UPGRADE_JOURNAL_CONTENT_SEARCH_2 =
+	private static final String _UPGRADE_JOURNAL_CONTENT_SEARCH_2 =
 		"UPDATE JournalContentSearch SET portletId = ?, layoutId = ? , " +
 			"ownerId = ? WHERE portletId = ? AND layoutId = ? AND ownerId = ?";
 
-	public static final String _UPGRADE_LAYOUT_1 = "SELECT * FROM Layout";
+	private static final String _UPGRADE_LAYOUT_1 = "SELECT * FROM Layout";
 
-	public static final String _UPGRADE_LAYOUT_2 =
+	private static final String _UPGRADE_LAYOUT_2 =
 		"UPDATE Layout SET layoutId = ?, ownerId = ?, parentLayoutId = ?, " +
 			"name = ?, typeSettings = ? WHERE layoutId = ? AND ownerId = ?";
 
-	public static final String _UPGRADE_PORTLET_PREFERENCES_1 =
+	private static final String _UPGRADE_PORTLET_PREFERENCES_1 =
 		"SELECT * FROM PortletPreferences WHERE layoutId = ? AND ownerId = ?";
 
-	public static final String _UPGRADE_PORTLET_PREFERENCES_2 =
+	private static final String _UPGRADE_PORTLET_PREFERENCES_2 =
 		"UPDATE PortletPreferences SET portletId = ?, layoutId = ? , " +
 			"ownerId = ?, preferences = ? WHERE portletId = ? AND " +
 				"layoutId = ? AND ownerId = ?";

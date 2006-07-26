@@ -111,8 +111,6 @@ public class OrganizationPersistence extends BasePersistence {
 			session.flush();
 			clearGroups.clear(organization.getPrimaryKey());
 			clearUsers.clear(organization.getPrimaryKey());
-			OrganizationPool.removeByC_N(organization.getCompanyId(),
-				organization.getName());
 
 			return organization;
 		}
@@ -205,6 +203,8 @@ public class OrganizationPersistence extends BasePersistence {
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -254,6 +254,8 @@ public class OrganizationPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -338,6 +340,8 @@ public class OrganizationPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -382,6 +386,8 @@ public class OrganizationPersistence extends BasePersistence {
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -431,6 +437,8 @@ public class OrganizationPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -515,6 +523,8 @@ public class OrganizationPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -569,6 +579,8 @@ public class OrganizationPersistence extends BasePersistence {
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -631,6 +643,8 @@ public class OrganizationPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -735,6 +749,8 @@ public class OrganizationPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -788,16 +804,6 @@ public class OrganizationPersistence extends BasePersistence {
 
 	public Organization fetchByC_N(String companyId, String name)
 		throws SystemException {
-		String pk = OrganizationPool.getByC_N(companyId, name);
-
-		if (pk != null) {
-			Organization organization = fetchByPrimaryKey(pk);
-
-			if (organization != null) {
-				return organization;
-			}
-		}
-
 		Session session = null;
 
 		try {
@@ -827,6 +833,8 @@ public class OrganizationPersistence extends BasePersistence {
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -844,8 +852,6 @@ public class OrganizationPersistence extends BasePersistence {
 			}
 
 			Organization organization = (Organization)list.get(0);
-			OrganizationPool.putByC_N(companyId, name,
-				organization.getPrimaryKey());
 
 			return organization;
 		}
@@ -869,6 +875,7 @@ public class OrganizationPersistence extends BasePersistence {
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -934,6 +941,8 @@ public class OrganizationPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -980,6 +989,8 @@ public class OrganizationPersistence extends BasePersistence {
 			query.append(" AND parentOrganizationId != '-1' ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -1036,6 +1047,8 @@ public class OrganizationPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -1096,6 +1109,8 @@ public class OrganizationPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -1154,6 +1169,7 @@ public class OrganizationPersistence extends BasePersistence {
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
+			q.setCacheable(true);
 			q.addEntity("Group_", com.liferay.portal.model.Group.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1176,6 +1192,7 @@ public class OrganizationPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETGROUPSSIZE);
+			q.setCacheable(true);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1383,6 +1400,7 @@ public class OrganizationPersistence extends BasePersistence {
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
+			q.setCacheable(true);
 			q.addEntity("User_", com.liferay.portal.model.User.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1405,6 +1423,7 @@ public class OrganizationPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETUSERSSIZE);
+			q.setCacheable(true);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);

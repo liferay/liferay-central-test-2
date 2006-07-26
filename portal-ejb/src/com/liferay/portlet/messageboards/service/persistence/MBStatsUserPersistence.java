@@ -189,6 +189,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			query.append("messageCount DESC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -239,6 +241,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -322,6 +326,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -367,6 +373,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			query.append("messageCount DESC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userId != null) {
@@ -417,6 +425,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userId != null) {
@@ -500,6 +510,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userId != null) {
@@ -548,6 +560,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			query.append("messageCount DESC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -602,6 +616,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -695,6 +711,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -733,6 +751,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 			query.append("messageCount DESC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -793,6 +812,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -840,6 +861,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userId != null) {
@@ -890,6 +913,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {

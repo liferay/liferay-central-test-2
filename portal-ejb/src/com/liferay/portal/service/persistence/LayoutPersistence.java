@@ -93,7 +93,6 @@ public class LayoutPersistence extends BasePersistence {
 			session = openSession();
 			session.delete(layout);
 			session.flush();
-			LayoutPool.removeByO_F(layout.getOwnerId(), layout.getFriendlyURL());
 
 			return layout;
 		}
@@ -185,6 +184,8 @@ public class LayoutPersistence extends BasePersistence {
 			query.append("priority ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -235,6 +236,8 @@ public class LayoutPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -318,6 +321,8 @@ public class LayoutPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -372,6 +377,8 @@ public class LayoutPersistence extends BasePersistence {
 			query.append("priority ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -435,6 +442,8 @@ public class LayoutPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -537,6 +546,8 @@ public class LayoutPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -589,16 +600,6 @@ public class LayoutPersistence extends BasePersistence {
 
 	public Layout fetchByO_F(String ownerId, String friendlyURL)
 		throws SystemException {
-		LayoutPK pk = LayoutPool.getByO_F(ownerId, friendlyURL);
-
-		if (pk != null) {
-			Layout layout = fetchByPrimaryKey(pk);
-
-			if (layout != null) {
-				return layout;
-			}
-		}
-
 		Session session = null;
 
 		try {
@@ -629,6 +630,8 @@ public class LayoutPersistence extends BasePersistence {
 			query.append("priority ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -646,7 +649,6 @@ public class LayoutPersistence extends BasePersistence {
 			}
 
 			Layout layout = (Layout)list.get(0);
-			LayoutPool.putByO_F(ownerId, friendlyURL, layout.getPrimaryKey());
 
 			return layout;
 		}
@@ -671,6 +673,7 @@ public class LayoutPersistence extends BasePersistence {
 			query.append("priority ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -727,6 +730,8 @@ public class LayoutPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -783,6 +788,8 @@ public class LayoutPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -843,6 +850,8 @@ public class LayoutPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {

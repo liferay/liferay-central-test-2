@@ -187,6 +187,8 @@ public class CalEventPersistence extends BasePersistence {
 			query.append("title ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -238,6 +240,8 @@ public class CalEventPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -321,6 +325,8 @@ public class CalEventPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -376,6 +382,8 @@ public class CalEventPersistence extends BasePersistence {
 			query.append("title ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -440,6 +448,8 @@ public class CalEventPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -543,6 +553,8 @@ public class CalEventPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -595,6 +607,8 @@ public class CalEventPersistence extends BasePersistence {
 			query.append("title ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -650,6 +664,8 @@ public class CalEventPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -744,6 +760,8 @@ public class CalEventPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -781,6 +799,7 @@ public class CalEventPersistence extends BasePersistence {
 			query.append("title ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -842,6 +861,8 @@ public class CalEventPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -899,6 +920,8 @@ public class CalEventPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -953,6 +976,8 @@ public class CalEventPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {

@@ -187,6 +187,8 @@ public class UserTrackerPathPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userTrackerId != null) {
@@ -232,6 +234,8 @@ public class UserTrackerPathPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userTrackerId != null) {
@@ -312,6 +316,8 @@ public class UserTrackerPathPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userTrackerId != null) {
@@ -345,6 +351,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.UserTrackerPath ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -387,6 +394,8 @@ public class UserTrackerPathPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userTrackerId != null) {

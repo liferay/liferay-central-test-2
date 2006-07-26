@@ -275,15 +275,15 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 	}
 
-	public static final String _UPGRADE_FILE_ENTRY =
+	private static final String _UPGRADE_FILE_ENTRY =
 		"SELECT * FROM DLFileProfile where repositoryId = ?";
 
-	public static final String _UPGRADE_FOLDER_1 =
+	private static final String _UPGRADE_FOLDER_1 =
 		"SELECT * FROM DLRepository where groupId != ?";
 		//"SELECT * FROM DLRepository where repositoryId = '24'";
 		//"SELECT * FROM DLRepository where repositoryId = '122'";
 
-	public static final String _UPGRADE_FOLDER_2 =
+	private static final String _UPGRADE_FOLDER_2 =
 		"DELETE FROM DLFileProfile where repositoryId = ?";
 
 	private static Log _log = LogFactory.getLog(UpgradeDocumentLibrary.class);

@@ -206,15 +206,15 @@ public class UpgradeLayout extends UpgradeProcess {
 		ClusterPool.clear();
 	}
 
-	public static final String _GET_COMPANY_ID_BY_GROUP_ID =
+	private static final String _GET_COMPANY_ID_BY_GROUP_ID =
 		"SELECT companyId FROM Group_ WHERE groupId = ?";
 
-	public static final String _GET_COMPANY_ID_BY_USER_ID =
+	private static final String _GET_COMPANY_ID_BY_USER_ID =
 		"SELECT companyId FROM User_ WHERE userId = ?";
 
-	public static final String _UPGRADE_LAYOUT_1 = "SELECT * FROM Layout";
+	private static final String _UPGRADE_LAYOUT_1 = "SELECT * FROM Layout";
 
-	public static final String _UPGRADE_LAYOUT_2 =
+	private static final String _UPGRADE_LAYOUT_2 =
 		"UPDATE Layout SET companyId = ?, parentLayoutId = ?, type_ = ?, " +
 			"typeSettings = ?, priority = ? WHERE layoutId = ? AND userId = ?";
 

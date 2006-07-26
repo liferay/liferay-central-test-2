@@ -189,6 +189,8 @@ public class PollsQuestionPersistence extends BasePersistence {
 			query.append("createDate DESC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -239,6 +241,8 @@ public class PollsQuestionPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -322,6 +326,8 @@ public class PollsQuestionPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -357,6 +363,7 @@ public class PollsQuestionPersistence extends BasePersistence {
 			query.append("createDate DESC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -398,6 +405,8 @@ public class PollsQuestionPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {

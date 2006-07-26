@@ -398,36 +398,36 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		}
 	}
 
-	public static final String _UPGRADE_CATEGORY_1 = "SELECT * FROM MBTopic";
+	private static final String _UPGRADE_CATEGORY_1 = "SELECT * FROM MBTopic";
 
-	public static final String _UPGRADE_CATEGORY_2 =
+	private static final String _UPGRADE_CATEGORY_2 =
 		"UPDATE MBCategory SET createDate = ?, modifiedDate = ?, " +
 			"lastPostDate = ? WHERE categoryId = ?";
 
-	public static final String _UPGRADE_MESSAGE_1 =
+	private static final String _UPGRADE_MESSAGE_1 =
 		"SELECT * FROM MBMessage WHERE topicId = ? ORDER by createDate ASC, " +
 			"messageId ASC";
 
-	public static final String _UPGRADE_MESSAGE_2 =
+	private static final String _UPGRADE_MESSAGE_2 =
 		"UPDATE MBMessage SET parentMessageId = ? WHERE topicId = ? AND " +
 			"parentMessageId = ?";
 
-	public static final String _UPGRADE_MESSAGE_3 =
+	private static final String _UPGRADE_MESSAGE_3 =
 		"UPDATE MBMessage SET categoryId = ?, topicId = ?, messageId = ? " +
 			"WHERE topicId = ? AND messageId = ?";
 
-	public static final String _UPGRADE_MESSAGE_4 =
+	private static final String _UPGRADE_MESSAGE_4 =
 		"UPDATE MBMessageFlag SET topicId = ?, messageId = ? WHERE " +
 			"topicId = ? AND messageId = ?";
 
-	public static final String _UPGRADE_MESSAGE_5 =
+	private static final String _UPGRADE_MESSAGE_5 =
 		"UPDATE MBThread SET categoryId = ?, topicId = ?, rootMessageId = ? " +
 			"WHERE topicId = ? AND rootMessageId = ?";
 
-	public static final String _UPGRADE_MESSAGE_6 =
+	private static final String _UPGRADE_MESSAGE_6 =
 		"UPDATE Permission_ SET actionId = ? WHERE actionId = ?";
 
-	public static final String _UPGRADE_MESSAGE_7 =
+	private static final String _UPGRADE_MESSAGE_7 =
 		"UPDATE Resource_ SET primKey = ? WHERE name = ? AND primKey = ?";
 
 	private static Log _log = LogFactory.getLog(UpgradeMessageBoards.class);

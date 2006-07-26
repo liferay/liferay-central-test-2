@@ -92,7 +92,7 @@ public class UpgradeCalendar extends UpgradeProcess {
 		}
 	}
 
-	public static final String _UPGRADE_EVENT =
+	private static final String _UPGRADE_EVENT =
 		"SELECT * FROM CalEvent WHERE groupId != ?";
 
 	private static Log _log = LogFactory.getLog(UpgradeCalendar.class);

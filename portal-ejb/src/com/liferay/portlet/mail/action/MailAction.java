@@ -48,7 +48,6 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 import java.util.SortedSet;
 import java.util.TimeZone;
@@ -56,6 +55,7 @@ import java.util.TimeZone;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -79,74 +79,72 @@ public class MailAction extends JSONAction {
 		throws Exception {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
-		String rtString = "";
 
 		try {
-			if ("deleteMessages".equals(cmd)) {
+			if (cmd.equals("deleteMessages")) {
 				_deleteMessages(req);
 			}
-			else if ("getFolders".equals(cmd)) {
-				rtString = _getFolders(req);
+			else if (cmd.equals("getFolders")) {
+				return _getFolders(req);
 			}
-			else if ("getMessage".equals(cmd)) {
-				rtString = _getMessage(req, res);
+			else if (cmd.equals("getMessage")) {
+				return _getMessage(req, res);
 			}
-			else if ("getPreview".equals(cmd)) {
-				rtString = _getPreviewHeaders(req);
+			else if (cmd.equals("getPreview")) {
+				return _getPreview(req);
 			}
-			else if ("moveMessages".equals(cmd)) {
+			else if (cmd.equals("moveMessages")) {
 				_moveMessages(req);
 			}
-/*
-			else if ("saveDraft".equals(cmd)) {
-				_saveDraft(req);
-			}
-*/
 		}
 		catch (Exception e) {
 			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 
-		return rtString;
+		return StringPool.BLANK;
 	}
 
-	private String _deleteMessages(HttpServletRequest req) throws Exception {
-		String messages = ParamUtil.getString(req, "messages");
-		long msgList[] = StringUtil.split(messages, ",", -1L);
+	private void _deleteMessages(HttpServletRequest req) throws Exception {
+		HttpSession ses = req.getSession();
 
-		MailUtil.deleteMessages(req.getSession(), msgList);
+		long[] messages = StringUtil.split(
+			ParamUtil.getString(req, "messages"), ",", -1L);
 
-		return null;
+		MailUtil.deleteMessages(ses, messages);
 	}
 
 	private String _getFolders(HttpServletRequest req) throws Exception {
+		HttpSession ses = req.getSession();
+
 		JSONObject jsonObj = new JSONObject();
-		JSONArray jFolders = new JSONArray();
+
+		JSONArray jsonFolders = new JSONArray();
 
 		int count = 1;
 
-		List folders = MailUtil.getAllFolders(req.getSession());
+		Iterator itr = MailUtil.getFolders(ses).iterator();
 
-		for (int i = 0; i < folders.size(); i++) {
-			MailFolder folderObj = (MailFolder)folders.get(i);
-			JSONObject jFolderObj = new JSONObject();
+		while (itr.hasNext()) {
+			MailFolder folder = (MailFolder)itr.next();
 
-			String folderName = folderObj.getName();
+			JSONObject jsonFolder = new JSONObject();
 
-			jFolderObj.put("name", folderName);
-			jFolderObj.put("id", folderName);
-			jFolderObj.put("newCount", folderObj.getNewMessageCount());
-			jFolderObj.put("totalCount", folderObj.getMessageCount());
+			String name = folder.getName();
 
-			if (MailUtil.MAIL_INBOX_NAME.equals(folderName)) {
-				jFolders.put(0, jFolderObj);
+			jsonFolder.put("name", name);
+			jsonFolder.put("id", name);
+			jsonFolder.put("newCount", folder.getNewMessageCount());
+			jsonFolder.put("totalCount", folder.getMessageCount());
+
+			if (name.equals(MailUtil.MAIL_INBOX_NAME)) {
+				jsonFolders.put(0, jsonFolder);
 			}
 			else {
-				jFolders.put(count++, jFolderObj);
+				jsonFolders.put(count++, jsonFolder);
 			}
 		}
 
-		jsonObj.put("folders", jFolders);
+		jsonObj.put("folders", jsonFolders);
 
 		return jsonObj.toString();
 	}
@@ -161,7 +159,7 @@ public class MailAction extends JSONAction {
 		StringBuffer header = new StringBuffer();
 		ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
 
-		MailUtil.setCurrentFolder(req.getSession(), folderId);
+		MailUtil.getFolder(req.getSession(), folderId);
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
@@ -172,8 +170,8 @@ public class MailAction extends JSONAction {
 
 		req.setAttribute("mailMessage", mm);
 
-		PortalUtil.renderPage(header, ctx, req, res,
-			"/html/portlet/mail/message_details.jsp");
+		PortalUtil.renderPage(
+			header, ctx, req, res, "/html/portlet/mail/message_details.jsp");
 
 		jsonObj.put("body", mm.getHtmlBody());
 		jsonObj.put("header", header.toString());
@@ -182,27 +180,27 @@ public class MailAction extends JSONAction {
 		return jsonObj.toString();
 	}
 
-	private String _getPreviewHeaders(HttpServletRequest req) throws Exception {
+	private String _getPreview(HttpServletRequest req) throws Exception {
 		JSONObject jsonObj = new JSONObject();
+
+		HttpSession ses = req.getSession();
 
 		String folderId = ParamUtil.getString(req, "folderId");
 		String sortBy = ParamUtil.getString(req, "sortBy");
 		boolean asc = ParamUtil.getBoolean(req, "asc");
-		SortedSet set;
 
-		MailUtil.setCurrentFolder(req.getSession(), folderId);
+		MailUtil.getFolder(ses, folderId);
 
-		if ("name".equals(sortBy)) {
-			set = MailUtil.getEnvelopes(req.getSession(),
-				new RecipientComparator(asc));
+		SortedSet set = null;
+
+		if (sortBy.equals("name")) {
+			set = MailUtil.getEnvelopes(ses, new RecipientComparator(asc));
 		}
-		else if ("subject".equals(sortBy)) {
-			set = MailUtil.getEnvelopes(req.getSession(),
-				new SubjectComparator(asc));
+		else if (sortBy.equals("subject")) {
+			set = MailUtil.getEnvelopes(ses, new SubjectComparator(asc));
 		}
 		else {
-			set = MailUtil.getEnvelopes(req.getSession(),
-				new DateComparator(asc));
+			set = MailUtil.getEnvelopes(ses, new DateComparator(asc));
 		}
 
 		User user = PortalUtil.getUser(req);
@@ -222,79 +220,54 @@ public class MailAction extends JSONAction {
 		String td = df.format(today);
 		String yd = df.format(yesterday);
 
-		JSONArray meArray = new JSONArray();
+		JSONArray jsonEnvelopes = new JSONArray();
 
-		for (Iterator itr = set.iterator(); itr.hasNext(); ) {
+		Iterator itr = set.iterator();
+
+		while (itr.hasNext()) {
 			MailEnvelope me = (MailEnvelope)itr.next();
-			JSONObject jMe = new JSONObject();
+			JSONObject jEnvelope = new JSONObject();
 
 			String formattedDate = null;
 
 			String day = df.format(me.getDate());
+
 			if (td.equals(day)) {
-				formattedDate = LanguageUtil.get(user, "today") +
-					StringPool.SPACE + tf.format(me.getDate());
+				formattedDate =
+					LanguageUtil.get(user, "today") + StringPool.SPACE + tf.format(me.getDate());
 			}
 			else if (yd.equals(day)) {
-				formattedDate = LanguageUtil.get(user, "yesterday") +
-					StringPool.SPACE + tf.format(me.getDate());
+				formattedDate =
+					LanguageUtil.get(user, "yesterday") + StringPool.SPACE + tf.format(me.getDate());
 			}
 			else {
 				formattedDate = dtf.format(me.getDate());
 			}
 
-			jMe.put("date", formattedDate);
-			jMe.put("id", me.getMsgUID());
-			jMe.put("email",
-				GetterUtil.getString(me.getRecipient(), StringPool.NBSP));
-			jMe.put("subject",
-				GetterUtil.getString(me.getSubject(), StringPool.NBSP));
-			jMe.put("recent", me.isRecent());
-			meArray.put(jMe);
+			jEnvelope.put("date", formattedDate);
+			jEnvelope.put("id", me.getMessageId());
+			jEnvelope.put("email", GetterUtil.getString(me.getRecipient(), StringPool.NBSP));
+			jEnvelope.put("subject", GetterUtil.getString(me.getSubject(), StringPool.NBSP));
+			jEnvelope.put("recent", me.isRecent());
+
+			jsonEnvelopes.put(jEnvelope);
 		}
 
-		jsonObj.put("headers", meArray);
+		jsonObj.put("headers", jsonEnvelopes);
 
 		return jsonObj.toString();
 	}
 
-	private String _moveMessages(HttpServletRequest req) throws Exception {
-		String messages = ParamUtil.getString(req, "messages");
-		String toFolder = ParamUtil.getString(req, "folderId");
-		long msgList[] = StringUtil.split(messages, ",", -1L);
+	private void _moveMessages(HttpServletRequest req) throws Exception {
+		HttpSession ses = req.getSession();
 
-		MailUtil.moveMessages(req.getSession(), msgList, toFolder);
+		long[] messages = StringUtil.split(
+			ParamUtil.getString(req, "messages"), ",", -1L);
+		String folderName = ParamUtil.getString(req, "folderName");
 
-		return null;
+		MailUtil.moveMessages(req.getSession(), messages, folderName);
 	}
 
-/*
-	private String _saveDraft(HttpServletRequest req) throws Exception {
-		User user = PortalUtil.getUser(req);
-		Address from = new InternetAddress(
-			user.getEmailAddress(), user.getFullName());
-
-		String tos = ParamUtil.getString(req, "tos");
-		String ccs = ParamUtil.getString(req, "ccs");
-		String bccs = ParamUtil.getString(req, "bccs");
-		String subject = ParamUtil.getString(req, "subject");
-		String body = ParamUtil.getString(req, "body");
-		long messageId = ParamUtil.getLong(req, "messageId", -1L);
-		Map attachments = ActionUtil.getAttachments(
-				PortalUtil.getUploadPortletRequest(req));
-
-		HttpSession ses =
-			((ActionRequestImpl)req).getHttpServletRequest().getSession();
-		long newMessageId =
-			ActionUtil.completeMessage(from, tos, ccs, bccs, subject, body,
-				attachments, ses, false, messageId);
-
-		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("id", newMessageId);
-
-		return jsonObj.toString();
-	}
-*/
 	private static Log _log = LogFactory.getLog(MailAction.class);
 
 }

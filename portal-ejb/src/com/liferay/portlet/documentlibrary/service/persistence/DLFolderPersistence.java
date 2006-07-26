@@ -94,8 +94,6 @@ public class DLFolderPersistence extends BasePersistence {
 			session = openSession();
 			session.delete(dlFolder);
 			session.flush();
-			DLFolderPool.removeByP_N(dlFolder.getParentFolderId(),
-				dlFolder.getName());
 
 			return dlFolder;
 		}
@@ -187,6 +185,8 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -233,6 +233,8 @@ public class DLFolderPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -312,6 +314,8 @@ public class DLFolderPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -354,6 +358,8 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -400,6 +406,8 @@ public class DLFolderPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -479,6 +487,8 @@ public class DLFolderPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -531,6 +541,8 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -590,6 +602,8 @@ public class DLFolderPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -688,6 +702,8 @@ public class DLFolderPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -740,16 +756,6 @@ public class DLFolderPersistence extends BasePersistence {
 
 	public DLFolder fetchByP_N(String parentFolderId, String name)
 		throws SystemException {
-		String pk = DLFolderPool.getByP_N(parentFolderId, name);
-
-		if (pk != null) {
-			DLFolder dlFolder = fetchByPrimaryKey(pk);
-
-			if (dlFolder != null) {
-				return dlFolder;
-			}
-		}
-
 		Session session = null;
 
 		try {
@@ -778,6 +784,8 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (parentFolderId != null) {
@@ -795,7 +803,6 @@ public class DLFolderPersistence extends BasePersistence {
 			}
 
 			DLFolder dlFolder = (DLFolder)list.get(0);
-			DLFolderPool.putByP_N(parentFolderId, name, dlFolder.getPrimaryKey());
 
 			return dlFolder;
 		}
@@ -818,6 +825,7 @@ public class DLFolderPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -884,6 +892,8 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -931,6 +941,8 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -988,6 +1000,8 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -1049,6 +1063,8 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (parentFolderId != null) {

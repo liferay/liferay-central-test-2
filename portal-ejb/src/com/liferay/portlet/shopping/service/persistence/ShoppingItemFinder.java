@@ -66,6 +66,8 @@ public class ShoppingItemFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
+			q.setCacheable(false);
+
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -126,6 +128,8 @@ public class ShoppingItemFinder {
 			query.append("shoppingItem.smallImage = ?");
 
 			Query q = session.createQuery(query.toString());
+
+			q.setCacheable(false);
 
 			for (int i = 0; i < categoryIds.length; i++) {
 				q.setString(i, categoryIds[i]);
@@ -194,6 +198,8 @@ public class ShoppingItemFinder {
 
 			Query q = session.createQuery(query.toString());
 
+			q.setCacheable(false);
+
 			for (int i = 0; i < categoryIds.length; i++) {
 				q.setString(i, categoryIds[i]);
 			}
@@ -253,6 +259,8 @@ public class ShoppingItemFinder {
 			query.append("shoppingItem.smallImage = ?");
 
 			Query q = session.createQuery(query.toString());
+
+			q.setCacheable(false);
 
 			for (int i = 0; i < categoryIds.length; i++) {
 				q.setString(i, categoryIds[i]);
@@ -321,6 +329,8 @@ public class ShoppingItemFinder {
 			query.append("shoppingItem.smallImage = ?");
 
 			Query q = session.createQuery(query.toString());
+
+			q.setCacheable(false);
 
 			for (int i = 0; i < categoryIds.length; i++) {
 				q.setString(i, categoryIds[i]);
@@ -397,6 +407,8 @@ public class ShoppingItemFinder {
 
 			Query q = session.createQuery(query.toString());
 
+			q.setCacheable(false);
+
 			for (int i = 0; i < categoryIds.length; i++) {
 				q.setString(i, categoryIds[i]);
 			}
@@ -471,6 +483,8 @@ public class ShoppingItemFinder {
 			query.append("shoppingItem.smallImage = ?");
 
 			Query q = session.createQuery(query.toString());
+
+			q.setCacheable(false);
 
 			for (int i = 0; i < categoryIds.length; i++) {
 				q.setString(i, categoryIds[i]);

@@ -92,7 +92,7 @@ public class UpgradePolls extends UpgradeProcess {
 		}
 	}
 
-	public static final String _UPGRADE_QUESTION =
+	private static final String _UPGRADE_QUESTION =
 		"SELECT * FROM PollsQuestion WHERE groupId != ?";
 
 	private static Log _log = LogFactory.getLog(UpgradePolls.class);

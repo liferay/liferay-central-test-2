@@ -168,6 +168,7 @@ public class AccountPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Account ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}

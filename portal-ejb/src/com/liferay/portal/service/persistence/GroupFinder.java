@@ -177,23 +177,6 @@ public class GroupFinder {
 	public static Group findByC_N(String companyId, String name)
 		throws NoSuchGroupException, SystemException {
 
-		String groupId = GroupPool.getByC_N(companyId, name);
-
-		if (groupId == null) {
-			Group group = GroupUtil.fetchByC_N(companyId, name);
-
-			if (group != null) {
-				return group;
-			}
-		}
-		else {
-			Group group = GroupUtil.fetchByPrimaryKey(groupId);
-
-			if (group != null) {
-				return group;
-			}
-		}
-
 		name = StringUtil.lowerCase(name);
 
 		Session session = null;
@@ -204,6 +187,8 @@ public class GroupFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
 			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(true);
 
 			q.addEntity("Group_", Group.class);
 
@@ -296,6 +281,8 @@ public class GroupFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
+			q.setCacheable(false);
+
 			q.addScalar("groupId", Hibernate.STRING);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -356,6 +343,8 @@ public class GroupFinder {
 
 		SQLQuery q = session.createSQLQuery(sql);
 
+		q.setCacheable(false);
+
 		q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 		QueryPos qPos = QueryPos.getInstance(q);
@@ -386,6 +375,8 @@ public class GroupFinder {
 		sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
 
 		SQLQuery q = session.createSQLQuery(sql);
+
+		q.setCacheable(false);
 
 		q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 

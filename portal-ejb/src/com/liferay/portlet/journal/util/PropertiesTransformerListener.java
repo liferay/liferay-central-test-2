@@ -167,7 +167,7 @@ public class PropertiesTransformerListener extends TransformerListener {
 		return  s;
 	}
 
-	public static final String _GLOBAL_PROPERTIES = "GLOBAL-PROPERTIES";
+	private static final String _GLOBAL_PROPERTIES = "GLOBAL-PROPERTIES";
 
 	private static Log _log =
 		LogFactory.getLog(PropertiesTransformerListener.class);

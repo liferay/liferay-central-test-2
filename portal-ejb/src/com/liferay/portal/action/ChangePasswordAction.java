@@ -107,10 +107,6 @@ public class ChangePasswordAction extends Action {
 			req.getRemoteUser(), password1, password2, passwordReset);
 
 		ses.setAttribute(WebKeys.USER_PASSWORD, password1);
-
-		// Session messages
-
-		SessionMessages.add(req, "password_updated");
 	}
 
 }

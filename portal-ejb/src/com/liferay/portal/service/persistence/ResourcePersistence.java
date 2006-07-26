@@ -93,9 +93,6 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 			session.delete(resource);
 			session.flush();
-			ResourcePool.removeByC_N_T_S_P(resource.getCompanyId(),
-				resource.getName(), resource.getTypeId(), resource.getScope(),
-				resource.getPrimKey());
 
 			return resource;
 		}
@@ -185,6 +182,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -230,6 +229,8 @@ public class ResourcePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -308,6 +309,8 @@ public class ResourcePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -349,6 +352,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (name != null) {
@@ -394,6 +399,8 @@ public class ResourcePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (name != null) {
@@ -471,6 +478,8 @@ public class ResourcePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (name != null) {
@@ -540,6 +549,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -625,6 +636,8 @@ public class ResourcePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -763,6 +776,8 @@ public class ResourcePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -844,6 +859,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -929,6 +946,8 @@ public class ResourcePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -1067,6 +1086,8 @@ public class ResourcePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -1138,17 +1159,6 @@ public class ResourcePersistence extends BasePersistence {
 
 	public Resource fetchByC_N_T_S_P(String companyId, String name,
 		String typeId, String scope, String primKey) throws SystemException {
-		String pk = ResourcePool.getByC_N_T_S_P(companyId, name, typeId, scope,
-				primKey);
-
-		if (pk != null) {
-			Resource resource = fetchByPrimaryKey(pk);
-
-			if (resource != null) {
-				return resource;
-			}
-		}
-
 		Session session = null;
 
 		try {
@@ -1203,6 +1213,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -1232,8 +1244,6 @@ public class ResourcePersistence extends BasePersistence {
 			}
 
 			Resource resource = (Resource)list.get(0);
-			ResourcePool.putByC_N_T_S_P(companyId, name, typeId, scope,
-				primKey, resource.getPrimaryKey());
 
 			return resource;
 		}
@@ -1255,6 +1265,7 @@ public class ResourcePersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Resource ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -1333,6 +1344,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -1379,6 +1392,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (name != null) {
@@ -1453,6 +1468,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -1539,6 +1556,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -1634,6 +1653,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {

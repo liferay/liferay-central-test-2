@@ -192,6 +192,8 @@ public class JournalStructurePersistence extends BasePersistence {
 			query.append("structureId ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -242,6 +244,8 @@ public class JournalStructurePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -325,6 +329,8 @@ public class JournalStructurePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {
@@ -361,6 +367,7 @@ public class JournalStructurePersistence extends BasePersistence {
 			query.append("structureId ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -402,6 +409,8 @@ public class JournalStructurePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (groupId != null) {

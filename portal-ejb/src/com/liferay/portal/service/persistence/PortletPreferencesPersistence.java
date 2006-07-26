@@ -189,6 +189,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (layoutId != null) {
@@ -235,6 +237,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (layoutId != null) {
@@ -317,6 +321,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (layoutId != null) {
@@ -360,6 +366,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -406,6 +414,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -488,6 +498,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -541,6 +553,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (layoutId != null) {
@@ -600,6 +614,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (layoutId != null) {
@@ -701,6 +717,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (layoutId != null) {
@@ -738,6 +756,7 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.PortletPreferences ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -798,6 +817,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (layoutId != null) {
@@ -845,6 +866,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -902,6 +925,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (layoutId != null) {

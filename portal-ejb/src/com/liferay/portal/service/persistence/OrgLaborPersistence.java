@@ -186,6 +186,8 @@ public class OrgLaborPersistence extends BasePersistence {
 			query.append("typeId ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (organizationId != null) {
@@ -236,6 +238,8 @@ public class OrgLaborPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (organizationId != null) {
@@ -319,6 +323,8 @@ public class OrgLaborPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (organizationId != null) {
@@ -354,6 +360,7 @@ public class OrgLaborPersistence extends BasePersistence {
 			query.append("typeId ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -396,6 +403,8 @@ public class OrgLaborPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (organizationId != null) {

@@ -161,37 +161,11 @@ public class WebKeys {
 
 	public static final String LAST_PATH = "LAST_PATH";
 
-	public static final String MAIL_ATTACHMENT_OVER_LIMIT = "MAIL_ATTACHMENT_OVER_LIMIT";
-
-	public static final String MAIL_ATTACHMENT_TOTAL_SIZE = "MAIL_ATTACHMENT_TOTAL_SIZE";
-
-	public static final String MAIL_ATTACHMENTS = "MAIL_ATTACHMENTS";
-
-	public static final String MAIL_CURRENT_ACCOUNT = "MAIL_CURRENT_ACCOUNT";
-
-	public static final String MAIL_DRAFT_ID = "MAIL_DRAFT_ID";
-
 	public static final String MAIL_FOLDER = "MAIL_FOLDER";
 
-	public static final String MAIL_GOT_MAIL = "MAIL_GOT_MAIL";
+	public static final String MAIL_MESSAGE_ID = "MAIL_MESSAGE_ID";
 
-	public static final String MAIL_MESSAGE = "MAIL_MESSAGE";
-
-	public static final String MAIL_MESSAGE_DIV = "MAIL_MESSAGE_DIV";
-
-	public static final String MAIL_MESSAGE_MODEL = "MAIL_MESSAGE_MODEL";
-
-	public static final String MAIL_RECIPIENTS = "MAIL_RECIPIENTS";
-
-	public static final String MAIL_SEARCH_RESULTS = "MAIL_SEARCH_RESULTS";
-	
 	public static final String MAIL_STORE = "MAIL_STORE";
-	
-	public static final String MAIL_SUBJECT = "MAIL_SUBJECT";
-
-	public static final String MAIL_UNREAD_MESSAGE_COUNT = "MAIL_UNREAD_MESSAGE_COUNT";
-
-	public static final String MAPS_DIRECTIONS = "MAPS_DIRECTIONS";
 
 	public static final String MESSAGE_BOARDS_CATEGORY = "MESSAGE_BOARDS_CATEGORY";
 

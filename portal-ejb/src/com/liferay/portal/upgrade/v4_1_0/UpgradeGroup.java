@@ -103,7 +103,7 @@ public class UpgradeGroup extends UpgradeProcess {
 		}
 	}
 
-	public static final String _UPGRADE_GROUP =
+	private static final String _UPGRADE_GROUP =
 		"SELECT * FROM Role_ where name LIKE 'GROUP_%_ADMINISTRATOR'";
 
 	private static Log _log = LogFactory.getLog(UpgradeGroup.class);

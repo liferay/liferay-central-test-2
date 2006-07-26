@@ -111,8 +111,6 @@ public class UserPersistence extends BasePersistence {
 			clearPermissions.clear(user.getPrimaryKey());
 			clearRoles.clear(user.getPrimaryKey());
 			clearUserGroups.clear(user.getPrimaryKey());
-			UserPool.removeByC_U(user.getCompanyId(), user.getUserId());
-			UserPool.removeByC_EA(user.getCompanyId(), user.getEmailAddress());
 
 			return user;
 		}
@@ -200,6 +198,8 @@ public class UserPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -245,6 +245,8 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -322,6 +324,8 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -370,16 +374,6 @@ public class UserPersistence extends BasePersistence {
 
 	public User fetchByC_U(String companyId, String userId)
 		throws SystemException {
-		String pk = UserPool.getByC_U(companyId, userId);
-
-		if (pk != null) {
-			User user = fetchByPrimaryKey(pk);
-
-			if (user != null) {
-				return user;
-			}
-		}
-
 		Session session = null;
 
 		try {
@@ -407,6 +401,8 @@ public class UserPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -424,7 +420,6 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			User user = (User)list.get(0);
-			UserPool.putByC_U(companyId, userId, user.getPrimaryKey());
 
 			return user;
 		}
@@ -465,6 +460,8 @@ public class UserPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -523,6 +520,8 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -620,6 +619,8 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -672,16 +673,6 @@ public class UserPersistence extends BasePersistence {
 
 	public User fetchByC_EA(String companyId, String emailAddress)
 		throws SystemException {
-		String pk = UserPool.getByC_EA(companyId, emailAddress);
-
-		if (pk != null) {
-			User user = fetchByPrimaryKey(pk);
-
-			if (user != null) {
-				return user;
-			}
-		}
-
 		Session session = null;
 
 		try {
@@ -709,6 +700,8 @@ public class UserPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -726,7 +719,6 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			User user = (User)list.get(0);
-			UserPool.putByC_EA(companyId, emailAddress, user.getPrimaryKey());
 
 			return user;
 		}
@@ -748,6 +740,7 @@ public class UserPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.User ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -810,6 +803,8 @@ public class UserPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -866,6 +861,8 @@ public class UserPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -926,6 +923,8 @@ public class UserPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -986,6 +985,8 @@ public class UserPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -1044,6 +1045,7 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
+			q.setCacheable(true);
 			q.addEntity("Group_", com.liferay.portal.model.Group.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1066,6 +1068,7 @@ public class UserPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETGROUPSSIZE);
+			q.setCacheable(true);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1277,6 +1280,7 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
+			q.setCacheable(true);
 			q.addEntity("Organization_",
 				com.liferay.portal.model.Organization.class);
 
@@ -1300,6 +1304,7 @@ public class UserPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETORGANIZATIONSSIZE);
+			q.setCacheable(true);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1509,6 +1514,7 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
+			q.setCacheable(true);
 			q.addEntity("Permission_", com.liferay.portal.model.Permission.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1531,6 +1537,7 @@ public class UserPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETPERMISSIONSSIZE);
+			q.setCacheable(true);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1743,6 +1750,7 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
+			q.setCacheable(true);
 			q.addEntity("Role_", com.liferay.portal.model.Role.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1765,6 +1773,7 @@ public class UserPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETROLESSIZE);
+			q.setCacheable(true);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1976,6 +1985,7 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
+			q.setCacheable(true);
 			q.addEntity("UserGroup", com.liferay.portal.model.UserGroup.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1998,6 +2008,7 @@ public class UserPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETUSERGROUPSSIZE);
+			q.setCacheable(true);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);

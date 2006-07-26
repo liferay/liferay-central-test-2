@@ -168,6 +168,7 @@ public class CompanyPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Company ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}

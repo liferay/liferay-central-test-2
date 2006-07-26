@@ -169,6 +169,7 @@ public class LayoutSetPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.LayoutSet ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}

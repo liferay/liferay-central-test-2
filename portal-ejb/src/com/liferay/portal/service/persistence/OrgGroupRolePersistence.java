@@ -185,6 +185,8 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (roleId != null) {
@@ -230,6 +232,8 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (roleId != null) {
@@ -308,6 +312,8 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (roleId != null) {
@@ -341,6 +347,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.OrgGroupRole ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -381,6 +388,8 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (roleId != null) {

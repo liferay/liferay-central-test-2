@@ -68,6 +68,8 @@ public class CalEventFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
+			q.setCacheable(false);
+
 			q.addEntity("CalEvent", CalEvent.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -97,6 +99,8 @@ public class CalEventFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_REMINDBY);
 
 			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
 
 			q.addEntity("CalEvent", CalEvent.class);
 

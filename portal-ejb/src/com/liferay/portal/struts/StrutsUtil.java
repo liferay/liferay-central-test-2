@@ -67,7 +67,7 @@ public class StrutsUtil {
 		throws ServletException {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Forward " + uri);
+			_log.debug("Forward URI " + uri);
 		}
 
 		if (uri.equals(Constants.COMMON_NULL)) {
@@ -79,6 +79,10 @@ public class StrutsUtil {
 
 			if (BrowserSniffer.is_wml(req)) {
 				path = Constants.TEXT_WML_DIR + uri;
+			}
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Forward path " + path);
 			}
 
 			ServletContext portalCtx = _getPortalCtx(ctx, req);
@@ -96,6 +100,7 @@ public class StrutsUtil {
 
 				String errorPath =
 					Constants.TEXT_HTML_DIR + Constants.COMMON_ERROR;
+
 				if (BrowserSniffer.is_wml(req)) {
 					path = Constants.TEXT_WML_DIR + Constants.COMMON_ERROR;
 				}
@@ -124,13 +129,17 @@ public class StrutsUtil {
 		throws ServletException {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Include " + uri);
+			_log.debug("Include URI " + uri);
 		}
 
 		String path = Constants.TEXT_HTML_DIR + uri;
 
 		if (BrowserSniffer.is_wml(req)) {
 			path = Constants.TEXT_WML_DIR + uri;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Include path " + path);
 		}
 
 		ServletContext portalCtx = _getPortalCtx(ctx, req);

@@ -38,14 +38,6 @@ public class MailAttachment {
         _filename = filename;
     }
 
-    public String getContentType() {
-        return _contentType;
-    }
-
-    public void setContentType(String contentType) {
-        _contentType = contentType;
-    }
-
     public byte[] getContent() {
         return _content;
     }
@@ -54,17 +46,25 @@ public class MailAttachment {
         _content = content;
     }
 
-    public String getContentID() {
-        return _contentID;
+    public String getContentType() {
+        return _contentType;
     }
 
-    public void setContentID(String contentID) {
-    	_contentID = contentID;
+    public void setContentType(String contentType) {
+        _contentType = contentType;
+    }
+
+    public String getContentId() {
+        return _contentId;
+    }
+
+    public void setContentId(String contentId) {
+    	_contentId = contentId;
     }
 
     private String _filename;
-    private String _contentType;
     private byte[] _content;
-    private String _contentID;
+    private String _contentType;
+    private String _contentId;
 
 }

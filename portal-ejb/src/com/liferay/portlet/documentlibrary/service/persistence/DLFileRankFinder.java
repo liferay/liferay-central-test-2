@@ -61,6 +61,8 @@ public class DLFileRankFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
+			q.setCacheable(false);
+
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -99,6 +101,8 @@ public class DLFileRankFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_G_U);
 
 			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
 
 			q.addEntity("DLFileRank", DLFileRank.class);
 

@@ -41,6 +41,14 @@ import javax.mail.Address;
  */
 public class MailMessage {
 
+    public long getMessageId() {
+    	return _messageId;
+    }
+
+    public void setMessageId(long messageId) {
+    	_messageId = messageId;
+    }
+
 	public Address getFrom() {
 		return _from;
 	}
@@ -144,14 +152,6 @@ public class MailMessage {
     	}
     }
 
-    public long getMessageUID() {
-    	return _messageUID;
-    }
-
-    public void setMessageUID(long messageUID) {
-    	_messageUID = messageUID;
-    }
-
     public Date getSentDate() {
     	return _sentDate;
     }
@@ -194,6 +194,7 @@ public class MailMessage {
 		return true;
 	}
 
+	private long _messageId;
 	private Address _from;
 	private Address[] _to;
 	private Address[] _cc;
@@ -202,7 +203,6 @@ public class MailMessage {
 	private String _subject;
 	private String _plainBody;
 	private String _htmlBody;
-	private long _messageUID;
 	private Date _sentDate;
 	private List _attachments = new ArrayList();
 	private List _remoteAttachments = new ArrayList();

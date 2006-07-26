@@ -171,6 +171,7 @@ public class DataTrackerPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.DataTracker ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}

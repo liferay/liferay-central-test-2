@@ -71,6 +71,8 @@ public class RoleFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
+			q.setCacheable(false);
+
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -104,23 +106,6 @@ public class RoleFinder {
 	public static Role findByC_N(String companyId, String name)
 		throws NoSuchRoleException, SystemException {
 
-		String roleId = RolePool.getByC_N(companyId, name);
-
-		if (roleId == null) {
-			Role role = RoleUtil.fetchByC_N(companyId, name);
-
-			if (role != null) {
-				return role;
-			}
-		}
-		else {
-			Role role = RoleUtil.fetchByPrimaryKey(roleId);
-
-			if (role != null) {
-				return role;
-			}
-		}
-
 		name = StringUtil.lowerCase(name);
 
 		Session session = null;
@@ -131,6 +116,8 @@ public class RoleFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
 			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(true);
 
 			q.addEntity("Role_", Role.class);
 
@@ -173,6 +160,8 @@ public class RoleFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_C_N_D);
 
 			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
 
 			q.addEntity("Role_", Role.class);
 

@@ -188,6 +188,8 @@ public class DLFileRankPersistence extends BasePersistence {
 			query.append("createDate DESC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userId != null) {
@@ -238,6 +240,8 @@ public class DLFileRankPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userId != null) {
@@ -321,6 +325,8 @@ public class DLFileRankPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userId != null) {
@@ -376,6 +382,8 @@ public class DLFileRankPersistence extends BasePersistence {
 			query.append("createDate DESC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (folderId != null) {
@@ -439,6 +447,8 @@ public class DLFileRankPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (folderId != null) {
@@ -541,6 +551,8 @@ public class DLFileRankPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (folderId != null) {
@@ -581,6 +593,7 @@ public class DLFileRankPersistence extends BasePersistence {
 			query.append("createDate DESC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -632,6 +645,8 @@ public class DLFileRankPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userId != null) {
@@ -689,6 +704,8 @@ public class DLFileRankPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (folderId != null) {

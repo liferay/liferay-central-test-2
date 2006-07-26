@@ -85,6 +85,8 @@ public class WikiPageFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
+			q.setCacheable(false);
+
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -143,6 +145,8 @@ public class WikiPageFinder {
 				sql, "[$CREATE_DATE_COMPARATOR$]", createDateComparator);
 
 			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
 
 			q.addEntity("WikiPage", WikiPage.class);
 

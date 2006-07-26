@@ -168,6 +168,7 @@ public class ImagePersistence extends BasePersistence {
 			query.append("imageId ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}

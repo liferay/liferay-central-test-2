@@ -187,6 +187,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (folderId != null) {
@@ -233,6 +235,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (folderId != null) {
@@ -312,6 +316,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (folderId != null) {
@@ -346,6 +352,7 @@ public class DLFileEntryPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -387,6 +394,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (folderId != null) {

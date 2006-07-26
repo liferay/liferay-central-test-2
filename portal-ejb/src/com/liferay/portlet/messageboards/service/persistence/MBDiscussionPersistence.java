@@ -94,8 +94,6 @@ public class MBDiscussionPersistence extends BasePersistence {
 			session = openSession();
 			session.delete(mbDiscussion);
 			session.flush();
-			MBDiscussionPool.removeByC_C(mbDiscussion.getClassName(),
-				mbDiscussion.getClassPK());
 
 			return mbDiscussion;
 		}
@@ -193,16 +191,6 @@ public class MBDiscussionPersistence extends BasePersistence {
 
 	public MBDiscussion fetchByC_C(String className, String classPK)
 		throws SystemException {
-		String pk = MBDiscussionPool.getByC_C(className, classPK);
-
-		if (pk != null) {
-			MBDiscussion mbDiscussion = fetchByPrimaryKey(pk);
-
-			if (mbDiscussion != null) {
-				return mbDiscussion;
-			}
-		}
-
 		Session session = null;
 
 		try {
@@ -231,6 +219,8 @@ public class MBDiscussionPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (className != null) {
@@ -248,8 +238,6 @@ public class MBDiscussionPersistence extends BasePersistence {
 			}
 
 			MBDiscussion mbDiscussion = (MBDiscussion)list.get(0);
-			MBDiscussionPool.putByC_C(className, classPK,
-				mbDiscussion.getPrimaryKey());
 
 			return mbDiscussion;
 		}
@@ -272,6 +260,7 @@ public class MBDiscussionPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.messageboards.model.MBDiscussion ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -320,6 +309,8 @@ public class MBDiscussionPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (className != null) {

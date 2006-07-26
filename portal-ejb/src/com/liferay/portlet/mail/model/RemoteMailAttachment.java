@@ -36,8 +36,8 @@ public class RemoteMailAttachment {
 
 	private static String MESSAGE_SEPARATOR = "_MAIL_MESSAGE_";
 
-	public static String buildContentPath(String folderName, long messageUID) {
-		return folderName + FOLDER_SEPARATOR + messageUID + MESSAGE_SEPARATOR;
+	public static String buildContentPath(String folderName, long messageId) {
+		return folderName + FOLDER_SEPARATOR + messageId + MESSAGE_SEPARATOR;
 	}
 
 	public static String[] parsePath(String contentPath) {
@@ -69,16 +69,16 @@ public class RemoteMailAttachment {
         _contentPath = contentPath;
     }
 
-    public String getContentID() {
-        return _contentID;
+    public String getContentId() {
+        return _contentId;
     }
 
-    public void setContentID(String contentID) {
-    	_contentID = contentID;
+    public void setContentId(String contentId) {
+    	_contentId = contentId;
     }
 
     private String _filename;
     private String _contentPath;
-    private String _contentID;
+    private String _contentId;
 
 }

@@ -111,8 +111,6 @@ public class PermissionPersistence extends BasePersistence {
 			clearGroups.clear(permission.getPrimaryKey());
 			clearRoles.clear(permission.getPrimaryKey());
 			clearUsers.clear(permission.getPrimaryKey());
-			PermissionPool.removeByA_R(permission.getActionId(),
-				permission.getResourceId());
 
 			return permission;
 		}
@@ -203,6 +201,8 @@ public class PermissionPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (resourceId != null) {
@@ -248,6 +248,8 @@ public class PermissionPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (resourceId != null) {
@@ -328,6 +330,8 @@ public class PermissionPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (resourceId != null) {
@@ -377,16 +381,6 @@ public class PermissionPersistence extends BasePersistence {
 
 	public Permission fetchByA_R(String actionId, String resourceId)
 		throws SystemException {
-		String pk = PermissionPool.getByA_R(actionId, resourceId);
-
-		if (pk != null) {
-			Permission permission = fetchByPrimaryKey(pk);
-
-			if (permission != null) {
-				return permission;
-			}
-		}
-
 		Session session = null;
 
 		try {
@@ -414,6 +408,8 @@ public class PermissionPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (actionId != null) {
@@ -431,8 +427,6 @@ public class PermissionPersistence extends BasePersistence {
 			}
 
 			Permission permission = (Permission)list.get(0);
-			PermissionPool.putByA_R(actionId, resourceId,
-				permission.getPrimaryKey());
 
 			return permission;
 		}
@@ -454,6 +448,7 @@ public class PermissionPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Permission ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -500,6 +495,8 @@ public class PermissionPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (resourceId != null) {
@@ -556,6 +553,8 @@ public class PermissionPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (actionId != null) {
@@ -614,6 +613,7 @@ public class PermissionPersistence extends BasePersistence {
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
+			q.setCacheable(true);
 			q.addEntity("Group_", com.liferay.portal.model.Group.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -636,6 +636,7 @@ public class PermissionPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETGROUPSSIZE);
+			q.setCacheable(true);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -847,6 +848,7 @@ public class PermissionPersistence extends BasePersistence {
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
+			q.setCacheable(true);
 			q.addEntity("Role_", com.liferay.portal.model.Role.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -869,6 +871,7 @@ public class PermissionPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETROLESSIZE);
+			q.setCacheable(true);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1076,6 +1079,7 @@ public class PermissionPersistence extends BasePersistence {
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
+			q.setCacheable(true);
 			q.addEntity("User_", com.liferay.portal.model.User.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1098,6 +1102,7 @@ public class PermissionPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETUSERSSIZE);
+			q.setCacheable(true);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);

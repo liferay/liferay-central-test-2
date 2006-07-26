@@ -188,6 +188,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (topicId != null) {
@@ -234,6 +236,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (topicId != null) {
@@ -315,6 +319,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (topicId != null) {
@@ -358,6 +364,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userId != null) {
@@ -404,6 +412,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userId != null) {
@@ -483,6 +493,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userId != null) {
@@ -536,6 +548,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (topicId != null) {
@@ -595,6 +609,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (topicId != null) {
@@ -696,6 +712,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (topicId != null) {
@@ -753,6 +771,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (topicId != null) {
@@ -812,6 +832,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (topicId != null) {
@@ -913,6 +935,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (topicId != null) {
@@ -951,6 +975,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -1021,6 +1046,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (topicId != null) {
@@ -1068,6 +1095,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userId != null) {
@@ -1125,6 +1154,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (topicId != null) {
@@ -1186,6 +1217,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (topicId != null) {

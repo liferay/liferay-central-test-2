@@ -127,10 +127,10 @@ public class UpgradeBookmarks extends UpgradeProcess {
 		}
 	}
 
-	public static final String _UPGRADE_ENTRY =
+	private static final String _UPGRADE_ENTRY =
 		"SELECT * FROM BookmarksEntry WHERE folderId = ?";
 
-	public static final String _UPGRADE_FOLDER =
+	private static final String _UPGRADE_FOLDER =
 		"SELECT * FROM BookmarksFolder WHERE groupId != ?";
 
 	private static Log _log = LogFactory.getLog(UpgradeBookmarks.class);

@@ -73,6 +73,6 @@ public class MBFriendlyURLPortletPlugin implements FriendlyURLPortletPlugin {
 		return new String[] {friendlyURL, queryString};
 	}
 
-	public static final String _MAPPING = "message_boards";
+	private static final String _MAPPING = "message_boards";
 
 }

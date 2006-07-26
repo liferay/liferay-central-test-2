@@ -95,9 +95,6 @@ public class SubscriptionPersistence extends BasePersistence {
 			session = openSession();
 			session.delete(subscription);
 			session.flush();
-			SubscriptionPool.removeByC_U_C_C(subscription.getCompanyId(),
-				subscription.getUserId(), subscription.getClassName(),
-				subscription.getClassPK());
 
 			return subscription;
 		}
@@ -188,6 +185,8 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userId != null) {
@@ -233,6 +232,8 @@ public class SubscriptionPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userId != null) {
@@ -311,6 +312,8 @@ public class SubscriptionPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userId != null) {
@@ -372,6 +375,8 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -443,6 +448,8 @@ public class SubscriptionPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -563,6 +570,8 @@ public class SubscriptionPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -628,17 +637,6 @@ public class SubscriptionPersistence extends BasePersistence {
 
 	public Subscription fetchByC_U_C_C(String companyId, String userId,
 		String className, String classPK) throws SystemException {
-		String pk = SubscriptionPool.getByC_U_C_C(companyId, userId, className,
-				classPK);
-
-		if (pk != null) {
-			Subscription subscription = fetchByPrimaryKey(pk);
-
-			if (subscription != null) {
-				return subscription;
-			}
-		}
-
 		Session session = null;
 
 		try {
@@ -684,6 +682,8 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -709,8 +709,6 @@ public class SubscriptionPersistence extends BasePersistence {
 			}
 
 			Subscription subscription = (Subscription)list.get(0);
-			SubscriptionPool.putByC_U_C_C(companyId, userId, className,
-				classPK, subscription.getPrimaryKey());
 
 			return subscription;
 		}
@@ -732,6 +730,7 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Subscription ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -790,6 +789,8 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (userId != null) {
@@ -855,6 +856,8 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -937,6 +940,8 @@ public class SubscriptionPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {

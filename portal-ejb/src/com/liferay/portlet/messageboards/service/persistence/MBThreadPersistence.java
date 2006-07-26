@@ -187,6 +187,8 @@ public class MBThreadPersistence extends BasePersistence {
 			query.append("lastPostDate DESC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (categoryId != null) {
@@ -237,6 +239,8 @@ public class MBThreadPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (categoryId != null) {
@@ -320,6 +324,8 @@ public class MBThreadPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (categoryId != null) {
@@ -355,6 +361,7 @@ public class MBThreadPersistence extends BasePersistence {
 			query.append("lastPostDate DESC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -396,6 +403,8 @@ public class MBThreadPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (categoryId != null) {

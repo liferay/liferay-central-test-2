@@ -194,6 +194,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -240,6 +242,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -322,6 +326,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -375,6 +381,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (layoutId != null) {
@@ -434,6 +442,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (layoutId != null) {
@@ -535,6 +545,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (layoutId != null) {
@@ -592,6 +604,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -651,6 +665,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -752,6 +768,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -809,6 +827,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -868,6 +888,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -969,6 +991,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {
@@ -1007,6 +1031,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.journal.model.JournalContentSearch ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -1078,6 +1103,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -1135,6 +1162,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (layoutId != null) {
@@ -1196,6 +1225,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (ownerId != null) {
@@ -1257,6 +1288,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (companyId != null) {

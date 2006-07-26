@@ -189,6 +189,8 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append("messageId ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (categoryId != null) {
@@ -240,6 +242,8 @@ public class MBMessagePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (categoryId != null) {
@@ -324,6 +328,8 @@ public class MBMessagePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (categoryId != null) {
@@ -370,6 +376,8 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append("messageId ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (threadId != null) {
@@ -421,6 +429,8 @@ public class MBMessagePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (threadId != null) {
@@ -505,6 +515,8 @@ public class MBMessagePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (threadId != null) {
@@ -561,6 +573,8 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append("messageId ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (threadId != null) {
@@ -625,6 +639,8 @@ public class MBMessagePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (threadId != null) {
@@ -728,6 +744,8 @@ public class MBMessagePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (threadId != null) {
@@ -769,6 +787,7 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append("messageId ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -829,6 +848,8 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (categoryId != null) {
@@ -876,6 +897,8 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (threadId != null) {
@@ -933,6 +956,8 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (threadId != null) {

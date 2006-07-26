@@ -628,7 +628,7 @@ public class PropsUtil {
 
 	public static final String MAIL_INBOX_NAME = "mail.inbox.name";
 
-	public static final String MAIL_JUNK_NAME = "mail.junk.name";
+	public static final String MAIL_SPAM_NAME = "mail.spam.name";
 
 	public static final String MAIL_SENT_NAME = "mail.sent.name";
 

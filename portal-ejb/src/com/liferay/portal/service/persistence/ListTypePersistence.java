@@ -184,6 +184,8 @@ public class ListTypePersistence extends BasePersistence {
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (type != null) {
@@ -233,6 +235,8 @@ public class ListTypePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (type != null) {
@@ -314,6 +318,8 @@ public class ListTypePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (type != null) {
@@ -348,6 +354,7 @@ public class ListTypePersistence extends BasePersistence {
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -388,6 +395,8 @@ public class ListTypePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (type != null) {

@@ -131,10 +131,10 @@ public class UpgradeWiki extends UpgradeProcess {
 		}
 	}
 
-	public static final String _UPGRADE_NODE =
+	private static final String _UPGRADE_NODE =
 		"SELECT * FROM WikiNode WHERE groupId != ?";
 
-	public static final String _UPGRADE_PAGE =
+	private static final String _UPGRADE_PAGE =
 		"SELECT * FROM WikiPage WHERE nodeId = ? AND head = ?";
 
 	private static Log _log = LogFactory.getLog(UpgradeWiki.class);

@@ -130,10 +130,10 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		}
 	}
 
-	public static final String _UPGRADE_FOLDER =
+	private static final String _UPGRADE_FOLDER =
 		"SELECT * FROM IGFolder WHERE groupId != ?";
 
-	public static final String _UPGRADE_IMAGE =
+	private static final String _UPGRADE_IMAGE =
 		"SELECT * FROM IGImage WHERE folderId = ?";
 
 	private static Log _log = LogFactory.getLog(UpgradeImageGallery.class);

@@ -132,6 +132,8 @@ public class PermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
+			q.setCacheable(false);
+
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -187,6 +189,8 @@ public class PermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
+			q.setCacheable(false);
+
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -232,6 +236,8 @@ public class PermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
+			q.setCacheable(false);
+
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -274,6 +280,8 @@ public class PermissionFinder {
 				_getPermissionIds(permissions, "Users_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
 
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
@@ -318,6 +326,8 @@ public class PermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
+			q.setCacheable(false);
+
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -348,22 +358,7 @@ public class PermissionFinder {
 	public static List findByA_R(String actionId, String[] resourceIds)
 		throws SystemException {
 
-		List permissions = new ArrayList();
-
-		for (int i = 0; i < resourceIds.length; i++) {
-			if (Validator.isNotNull(resourceIds[i])) {
-				Permission permission =
-					PermissionUtil.fetchByA_R(actionId, resourceIds[i]);
-
-				if (permission != null) {
-					permissions.add(permission);
-				}
-			}
-		}
-
-		return permissions;
-
-		/*Session session = null;
+		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
@@ -374,6 +369,8 @@ public class PermissionFinder {
 				sql, "[$RESOURCE_IDS$]", _getResourceIds(resourceIds));
 
 			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(true);
 
 			q.addEntity("Permission_", Permission.class);
 
@@ -389,7 +386,7 @@ public class PermissionFinder {
 		}
 		finally {
 			HibernateUtil.closeSession(session);
-		}*/
+		}
 	}
 
 	public static List findByG_R(String groupId, String resourceId)
@@ -403,6 +400,8 @@ public class PermissionFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_G_R);
 
 			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
 
 			q.addEntity("Permission_", Permission.class);
 
@@ -433,6 +432,8 @@ public class PermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
+			q.setCacheable(false);
+
 			q.addEntity("Permission_", Permission.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -462,6 +463,8 @@ public class PermissionFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_O_G_R);
 
 			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
 
 			q.addEntity("Permission_", Permission.class);
 
@@ -496,6 +499,8 @@ public class PermissionFinder {
 				sql, "[$ACTION_IDS$]", _getActionIds(actionIds));
 
 			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
 
 			q.addEntity("Permission_", Permission.class);
 

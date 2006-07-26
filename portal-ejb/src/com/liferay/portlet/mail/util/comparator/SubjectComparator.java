@@ -40,49 +40,40 @@ public class SubjectComparator implements Comparator {
 		_asc = asc;
 	}
 
-	public int compare(Object arg0, Object arg1) {
-		MailEnvelope me0 = (MailEnvelope)arg0;
-		MailEnvelope me1 = (MailEnvelope)arg1;
+	public int compare(Object obj1, Object obj2) {
+		MailEnvelope mailEvenlope1 = (MailEnvelope)obj1;
+		MailEnvelope mailEvenlope2 = (MailEnvelope)obj2;
 
-		Long uid0 = new Long(me0.getMsgUID());
-		Long uid1 = new Long(me1.getMsgUID());
+		String subject1 = _getSubject(mailEvenlope1.getSubject());
+		String subject2 = _getSubject(mailEvenlope2.getSubject());
 
-		String subj0 = _stripPrefixes(me0.getSubject());
-		String subj1 = _stripPrefixes(me1.getSubject());
+		int value = subject1.compareTo(subject2);
 
-		int comparison = 0;
+		if (value == 0) {
+			value = DateUtil.compareTo(
+				mailEvenlope1.getDate(), mailEvenlope2.getDate());
+		}
+
+		if (value == 0) {
+			Long messageId1 = new Long(mailEvenlope1.getMessageId());
+			Long messageId2 = new Long(mailEvenlope2.getMessageId());
+
+			value = messageId1.compareTo(messageId2);
+		}
 
 		if (_asc) {
-			comparison = subj0.compareTo(subj1);
-
-			if (comparison == 0) {
-				comparison = DateUtil.compareTo(me0.getDate(), me1.getDate());
-
-				if (comparison == 0) {
-					comparison = uid0.compareTo(uid1);
-				}
-			}
+			return value;
 		}
 		else {
-			comparison = subj1.compareTo(subj0);
-
-			if (comparison == 0) {
-				comparison = DateUtil.compareTo(me1.getDate(), me0.getDate());
-
-				if (comparison == 0) {
-					comparison = uid1.compareTo(uid0);
-				}
-			}
+			return -value;
 		}
-
-		return comparison;
 	}
 
-	private String _stripPrefixes(String subject) {
+	private String _getSubject(String subject) {
 		subject = GetterUtil.getString(subject).toLowerCase();
 
 		while (subject.startsWith("re:") || subject.startsWith("re>") ||
-			subject.startsWith("fw:") || subject.startsWith("fw>")) {
+			   subject.startsWith("fw:") || subject.startsWith("fw>")) {
 
 			subject = subject.substring(3).trim();
 		}

@@ -193,6 +193,8 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 			query.append("description ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (orderId != null) {
@@ -244,6 +246,8 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (orderId != null) {
@@ -328,6 +332,8 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (orderId != null) {
@@ -365,6 +371,7 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 			query.append("description ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -406,6 +413,8 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (orderId != null) {

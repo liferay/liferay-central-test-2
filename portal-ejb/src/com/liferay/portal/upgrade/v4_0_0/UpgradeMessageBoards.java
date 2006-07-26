@@ -186,16 +186,16 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		}
 	}
 
-	public static final String _UPGRADE_CATEGORY_1 =
+	private static final String _UPGRADE_CATEGORY_1 =
 		"SELECT DISTINCT groupId, userId FROM MBTopic WHERE groupId != ?";
 
-	public static final String _UPGRADE_CATEGORY_2 =
+	private static final String _UPGRADE_CATEGORY_2 =
 		"SELECT * FROM MBTopic WHERE groupId = ?";
 
-	public static final String _UPGRADE_MESSAGE_1 =
+	private static final String _UPGRADE_MESSAGE_1 =
 		"SELECT * FROM MBMessage WHERE topicId = ?";
 
-	public static final String _UPGRADE_MESSAGE_2 =
+	private static final String _UPGRADE_MESSAGE_2 =
 		"UPDATE MBMessage SET categoryId = ? WHERE topicId = ?";
 
 	private static Log _log = LogFactory.getLog(UpgradeMessageBoards.class);

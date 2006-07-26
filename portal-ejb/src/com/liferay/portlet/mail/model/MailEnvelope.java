@@ -32,6 +32,14 @@ import java.util.Date;
  */
 public class MailEnvelope {
 
+	public long getMessageId() {
+		return _messageId;
+	}
+
+	public void setMessageId(long messageId) {
+		_messageId = messageId;
+	}
+
 	public String getRecipient() {
 		return _recipient;
 	}
@@ -54,14 +62,6 @@ public class MailEnvelope {
 
 	public void setDate(Date date) {
 		_date = date;
-	}
-
-	public long getMsgUID() {
-		return _msgUID;
-	}
-
-	public void setMsgUID(long msgUID) {
-		_msgUID = msgUID;
 	}
 
 	public boolean isRecent() {
@@ -88,10 +88,10 @@ public class MailEnvelope {
 		_answered = answered;
 	}
 
+	private long _messageId;
 	private String _recipient;
 	private String _subject;
 	private Date _date;
-	private long _msgUID;
 	private boolean _recent;
 	private boolean _flagged;
 	private boolean _answered;

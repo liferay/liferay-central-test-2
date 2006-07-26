@@ -182,6 +182,8 @@ public class RegionPersistence extends BasePersistence {
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (countryId != null) {
@@ -231,6 +233,8 @@ public class RegionPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (countryId != null) {
@@ -313,6 +317,8 @@ public class RegionPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (countryId != null) {
@@ -349,6 +355,8 @@ public class RegionPersistence extends BasePersistence {
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
@@ -388,6 +396,8 @@ public class RegionPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
@@ -459,6 +469,8 @@ public class RegionPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
@@ -502,6 +514,8 @@ public class RegionPersistence extends BasePersistence {
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (countryId != null) {
@@ -555,6 +569,8 @@ public class RegionPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (countryId != null) {
@@ -647,6 +663,8 @@ public class RegionPersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (countryId != null) {
@@ -683,6 +701,7 @@ public class RegionPersistence extends BasePersistence {
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -742,6 +761,8 @@ public class RegionPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (countryId != null) {
@@ -781,6 +802,8 @@ public class RegionPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
@@ -827,6 +850,8 @@ public class RegionPersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (countryId != null) {

@@ -83,7 +83,7 @@ public class UpgradeCompany extends UpgradeProcess {
 		}
 	}
 
-	public static final String _UPGRADE_COMPANY = "SELECT * FROM Company";
+	private static final String _UPGRADE_COMPANY = "SELECT * FROM Company";
 
 	private static Log _log = LogFactory.getLog(UpgradeCompany.class);
 

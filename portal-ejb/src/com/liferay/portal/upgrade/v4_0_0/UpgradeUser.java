@@ -165,7 +165,7 @@ public class UpgradeUser extends UpgradeProcess {
 		}
 	}
 
-	public static final String _UPGRADE_USER = "SELECT * FROM User_";
+	private static final String _UPGRADE_USER = "SELECT * FROM User_";
 
 	private static Log _log = LogFactory.getLog(UpgradeUser.class);
 

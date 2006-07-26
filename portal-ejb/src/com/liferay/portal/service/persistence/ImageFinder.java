@@ -56,6 +56,8 @@ public class ImageFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
+			q.setCacheable(false);
+
 			q.addEntity("Image", Image.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);

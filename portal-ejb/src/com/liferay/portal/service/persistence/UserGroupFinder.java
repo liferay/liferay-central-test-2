@@ -85,6 +85,8 @@ public class UserGroupFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
+			q.setCacheable(false);
+
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -130,6 +132,8 @@ public class UserGroupFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
+			q.setCacheable(false);
+
 			q.addEntity("UserGroup", UserGroup.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -173,6 +177,8 @@ public class UserGroupFinder {
 			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
 
 			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
 
 			q.addEntity("UserGroup", UserGroup.class);
 

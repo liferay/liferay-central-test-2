@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.mail.action;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.util.Constants;
 import com.liferay.portlet.mail.util.MailUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -30,9 +30,8 @@ import com.liferay.util.servlet.ServletResponseUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.PageContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -52,25 +51,25 @@ public class GetAttachmentAction extends Action {
 		throws Exception {
 
 		try {
+			HttpSession ses = req.getSession();
+
 			String fileName = ParamUtil.getString(req, "fileName");
 			String contentPath = ParamUtil.getString(req, "contentPath");
 
-			HttpSession ses = req.getSession();
+			Object[] parts = MailUtil.getAttachment(ses, contentPath);
 
-			Object [] parts = MailUtil.getAttachment(ses, contentPath);
-			byte [] content = (byte [])parts[0];
+			byte[] content = (byte[])parts[0];
 			String contentType = (String)parts[1];
 
 			ServletResponseUtil.sendFile(res, fileName, content, contentType);
+
+			return null;
 		}
 		catch (Exception e) {
-			_log.error("Error in retrieving an attachment.  " +
-				StackTraceUtil.getStackTrace(e));
+			req.setAttribute(PageContext.EXCEPTION, e);
+
+			return mapping.findForward(Constants.COMMON_ERROR);
 		}
-
-		return null;
 	}
-
-	private static Log _log = LogFactory.getLog(GetAttachmentAction.class);
 
 }

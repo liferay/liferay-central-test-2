@@ -56,6 +56,8 @@ public class ResourceFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
+			q.setCacheable(false);
+
 			q.addEntity("Resource_", Resource.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);

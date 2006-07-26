@@ -168,6 +168,7 @@ public class ReleasePersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Release ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}

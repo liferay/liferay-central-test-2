@@ -85,10 +85,10 @@ public class UpgradeGroup extends UpgradeProcess {
 		}
 	}
 
-	public static final String _UPGRADE_GROUP_1 =
+	private static final String _UPGRADE_GROUP_1 =
 		"SELECT * FROM Group_ where name = ?";
 
-	public static final String _UPGRADE_GROUP_2 =
+	private static final String _UPGRADE_GROUP_2 =
 		"UPDATE Group_ SET name = ? where groupId = ?";
 
 	private static Log _log = LogFactory.getLog(UpgradeGroup.class);

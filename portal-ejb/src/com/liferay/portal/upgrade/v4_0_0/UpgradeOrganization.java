@@ -97,7 +97,7 @@ public class UpgradeOrganization extends UpgradeProcess {
 		}
 	}
 
-	public static final String _UPGRADE_ORGANIZATION =
+	private static final String _UPGRADE_ORGANIZATION =
 		"SELECT * FROM Organization_";
 
 	private static Log _log = LogFactory.getLog(UpgradeOrganization.class);

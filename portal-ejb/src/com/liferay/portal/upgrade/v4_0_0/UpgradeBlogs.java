@@ -97,9 +97,9 @@ public class UpgradeBlogs extends UpgradeProcess {
 		}
 	}
 
-	public static final String _UPGRADE_ENTRY_1 = "SELECT * FROM BlogsEntry";
+	private static final String _UPGRADE_ENTRY_1 = "SELECT * FROM BlogsEntry";
 
-	public static final String _UPGRADE_ENTRY_2 =
+	private static final String _UPGRADE_ENTRY_2 =
 		"UPDATE BlogsEntry SET groupId = ? WHERE entryId = ?";
 
 	private static Log _log = LogFactory.getLog(UpgradeBlogs.class);

@@ -186,6 +186,8 @@ public class PollsVotePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (questionId != null) {
@@ -232,6 +234,8 @@ public class PollsVotePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (questionId != null) {
@@ -311,6 +315,8 @@ public class PollsVotePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (questionId != null) {
@@ -364,6 +370,8 @@ public class PollsVotePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (questionId != null) {
@@ -423,6 +431,8 @@ public class PollsVotePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (questionId != null) {
@@ -521,6 +531,8 @@ public class PollsVotePersistence extends BasePersistence {
 			}
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (questionId != null) {
@@ -558,6 +570,7 @@ public class PollsVotePersistence extends BasePersistence {
 			query.append("FROM com.liferay.portlet.polls.model.PollsVote ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			return q.list();
 		}
@@ -609,6 +622,8 @@ public class PollsVotePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (questionId != null) {
@@ -666,6 +681,8 @@ public class PollsVotePersistence extends BasePersistence {
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
 			int queryPos = 0;
 
 			if (questionId != null) {
