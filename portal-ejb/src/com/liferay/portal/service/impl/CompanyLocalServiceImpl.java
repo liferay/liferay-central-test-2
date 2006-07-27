@@ -73,6 +73,7 @@ import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
 
 import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Searcher;
 
@@ -305,10 +306,11 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 	public Hits search(String companyId, String keywords)
 		throws SystemException {
 
-		return search(companyId, null, keywords);
+		return search(companyId, null, null, keywords);
 	}
 
-	public Hits search(String companyId, String groupId, String keywords)
+	public Hits search(
+			String companyId, String portletId, String groupId, String keywords)
 		throws SystemException {
 
 		try {
@@ -318,19 +320,34 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 				return hits;
 			}
 
-			BooleanQuery booleanQuery = new BooleanQuery();
+			BooleanQuery contextQuery = new BooleanQuery();
+
+			LuceneUtil.addRequiredTerm(
+				contextQuery, LuceneFields.COMPANY_ID, companyId);
+
+			if (Validator.isNotNull(portletId)) {
+				LuceneUtil.addRequiredTerm(
+					contextQuery, LuceneFields.PORTLET_ID, portletId);
+			}
 
 			if (Validator.isNotNull(groupId)) {
 				LuceneUtil.addRequiredTerm(
-					booleanQuery, LuceneFields.GROUP_ID, groupId);
+					contextQuery, LuceneFields.GROUP_ID, groupId);
 			}
 
-			LuceneUtil.addTerm(booleanQuery, LuceneFields.TITLE, keywords);
-			LuceneUtil.addTerm(booleanQuery, LuceneFields.CONTENT, keywords);
+			BooleanQuery searchQuery = new BooleanQuery();
+
+			LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
+			LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
+
+			BooleanQuery fullQuery = new BooleanQuery();
+
+			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
+			fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 
 			Searcher searcher = LuceneUtil.getSearcher(companyId);
 
-			hits.recordHits(searcher.search(booleanQuery));
+			hits.recordHits(searcher.search(fullQuery));
 
 			return hits;
 		}

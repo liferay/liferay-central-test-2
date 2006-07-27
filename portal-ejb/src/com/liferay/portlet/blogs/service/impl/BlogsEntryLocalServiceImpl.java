@@ -334,19 +334,19 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 				return hits;
 			}
 
-			BooleanQuery booleanQuery = new BooleanQuery();
+			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
-				booleanQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
+				contextQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
 
 			if (Validator.isNotNull(groupId)) {
 				LuceneUtil.addRequiredTerm(
-					booleanQuery, LuceneFields.GROUP_ID, groupId);
+					contextQuery, LuceneFields.GROUP_ID, groupId);
 			}
 
 			if (Validator.isNotNull(userId)) {
 				LuceneUtil.addRequiredTerm(
-					booleanQuery, LuceneFields.USER_ID, userId);
+					contextQuery, LuceneFields.USER_ID, userId);
 			}
 
 			if ((categoryIds != null) && (categoryIds.length > 0)) {
@@ -359,14 +359,21 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 					categoryIdsQuery.add(termQuery, BooleanClause.Occur.SHOULD);
 				}
 
-				booleanQuery.add(categoryIdsQuery, BooleanClause.Occur.MUST);
+				contextQuery.add(categoryIdsQuery, BooleanClause.Occur.MUST);
 			}
 
-			LuceneUtil.addTerm(booleanQuery, LuceneFields.CONTENT, keywords);
+			BooleanQuery searchQuery = new BooleanQuery();
+
+			LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
+
+			BooleanQuery fullQuery = new BooleanQuery();
+
+			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
+			fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 
 			Searcher searcher = LuceneUtil.getSearcher(companyId);
 
-			hits.recordHits(searcher.search(booleanQuery));
+			hits.recordHits(searcher.search(fullQuery));
 
 			return hits;
 		}

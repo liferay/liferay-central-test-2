@@ -310,12 +310,12 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 				return hits;
 			}
 
-			BooleanQuery booleanQuery = new BooleanQuery();
+			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
-				booleanQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
+				contextQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
 			LuceneUtil.addRequiredTerm(
-				booleanQuery, LuceneFields.GROUP_ID, groupId);
+				contextQuery, LuceneFields.GROUP_ID, groupId);
 
 			if ((categoryIds != null) && (categoryIds.length > 0)) {
 				BooleanQuery categoryIdsQuery = new BooleanQuery();
@@ -327,19 +327,26 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 					categoryIdsQuery.add(termQuery, BooleanClause.Occur.SHOULD);
 				}
 
-				booleanQuery.add(categoryIdsQuery, BooleanClause.Occur.MUST);
+				contextQuery.add(categoryIdsQuery, BooleanClause.Occur.MUST);
 			}
 
 			if (Validator.isNotNull(threadId)) {
-				LuceneUtil.addTerm(booleanQuery, "threadId", threadId);
+				LuceneUtil.addTerm(contextQuery, "threadId", threadId);
 			}
 
-			LuceneUtil.addTerm(booleanQuery, LuceneFields.TITLE, keywords);
-			LuceneUtil.addTerm(booleanQuery, LuceneFields.CONTENT, keywords);
+			BooleanQuery searchQuery = new BooleanQuery();
+
+			LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
+			LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
+
+			BooleanQuery fullQuery = new BooleanQuery();
+
+			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
+			fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 
 			Searcher searcher = LuceneUtil.getSearcher(companyId);
 
-			hits.recordHits(searcher.search(booleanQuery));
+			hits.recordHits(searcher.search(fullQuery));
 
 			return hits;
 		}

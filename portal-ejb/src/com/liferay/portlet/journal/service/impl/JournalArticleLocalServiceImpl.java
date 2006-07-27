@@ -93,6 +93,7 @@ import javax.portlet.PortletPreferences;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.Sort;
@@ -803,23 +804,30 @@ public class JournalArticleLocalServiceImpl
 				return hits;
 			}
 
-			BooleanQuery booleanQuery = new BooleanQuery();
+			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
-				booleanQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
+				contextQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
 			LuceneUtil.addRequiredTerm(
-				booleanQuery, LuceneFields.GROUP_ID, groupId);
+				contextQuery, LuceneFields.GROUP_ID, groupId);
 
-			LuceneUtil.addTerm(booleanQuery, LuceneFields.TITLE, title);
-			LuceneUtil.addTerm(booleanQuery, LuceneFields.CONTENT, content);
+			BooleanQuery searchQuery = new BooleanQuery();
+
+			LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, title);
+			LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, content);
 
 			if (Validator.isNotNull(type)) {
-				LuceneUtil.addRequiredTerm(booleanQuery, "type", type);
+				LuceneUtil.addRequiredTerm(searchQuery, "type", type);
 			}
+
+			BooleanQuery fullQuery = new BooleanQuery();
+
+			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
+			fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 
 			Searcher searcher = LuceneUtil.getSearcher(companyId);
 
-			hits.recordHits(searcher.search(booleanQuery, sort));
+			hits.recordHits(searcher.search(fullQuery, sort));
 
 			return hits;
 		}

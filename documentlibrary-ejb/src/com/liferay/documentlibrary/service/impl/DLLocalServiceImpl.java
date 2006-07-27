@@ -145,12 +145,12 @@ public class DLLocalServiceImpl implements DLLocalService {
 				return hits;
 			}
 
-			BooleanQuery booleanQuery = new BooleanQuery();
+			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
-				booleanQuery, LuceneFields.PORTLET_ID, portletId);
+				contextQuery, LuceneFields.PORTLET_ID, portletId);
 			LuceneUtil.addRequiredTerm(
-				booleanQuery, LuceneFields.GROUP_ID, groupId);
+				contextQuery, LuceneFields.GROUP_ID, groupId);
 
 			if ((repositoryIds != null) && (repositoryIds.length > 0)) {
 				BooleanQuery repositoryIdsQuery = new BooleanQuery();
@@ -163,14 +163,21 @@ public class DLLocalServiceImpl implements DLLocalService {
 						termQuery, BooleanClause.Occur.SHOULD);
 				}
 
-				booleanQuery.add(repositoryIdsQuery, BooleanClause.Occur.MUST);
+				contextQuery.add(repositoryIdsQuery, BooleanClause.Occur.MUST);
 			}
 
-			LuceneUtil.addTerm(booleanQuery, LuceneFields.CONTENT, keywords);
+			BooleanQuery searchQuery = new BooleanQuery();
+
+			LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
+
+			BooleanQuery fullQuery = new BooleanQuery();
+
+			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
+			fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 
 			Searcher searcher = LuceneUtil.getSearcher(companyId);
 
-			hits.recordHits(searcher.search(booleanQuery));
+			hits.recordHits(searcher.search(fullQuery));
 
 			return hits;
 		}

@@ -246,12 +246,12 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 				return hits;
 			}
 
-			BooleanQuery booleanQuery = new BooleanQuery();
+			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
-				booleanQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
+				contextQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
 			LuceneUtil.addRequiredTerm(
-				booleanQuery, LuceneFields.GROUP_ID, groupId);
+				contextQuery, LuceneFields.GROUP_ID, groupId);
 
 			if ((nodeIds != null) && (nodeIds.length > 0)) {
 				BooleanQuery nodeIdsQuery = new BooleanQuery();
@@ -263,14 +263,21 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 					nodeIdsQuery.add(termQuery, BooleanClause.Occur.SHOULD);
 				}
 
-				booleanQuery.add(nodeIdsQuery, BooleanClause.Occur.MUST);
+				contextQuery.add(nodeIdsQuery, BooleanClause.Occur.MUST);
 			}
 
-			LuceneUtil.addTerm(booleanQuery, LuceneFields.CONTENT, keywords);
+			BooleanQuery searchQuery = new BooleanQuery();
+
+			LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
+
+			BooleanQuery fullQuery = new BooleanQuery();
+
+			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
+			fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 
 			Searcher searcher = LuceneUtil.getSearcher(companyId);
 
-			hits.recordHits(searcher.search(booleanQuery));
+			hits.recordHits(searcher.search(fullQuery));
 
 			return hits;
 		}
