@@ -451,6 +451,14 @@ public class MailUtil {
 		}
 	}
 
+	public static String getFolderName(HttpSession ses) 
+		throws FolderException, StoreException {
+
+		IMAPFolder folder = _getFolder(ses);
+
+		return folder.getName();
+	}
+
 	public static List getFolders(HttpSession ses)
 		throws FolderException, StoreException {
 
@@ -488,9 +496,7 @@ public class MailUtil {
 
 		HttpSession ses = req.getSession();
 
-		Long messageId = (Long)ses.getAttribute(WebKeys.MAIL_MESSAGE_ID);
-
-		return getMessage(req, messageId.longValue());
+		return getMessage(req, getMessageId(ses));
 	}
 
 	public static MailMessage getMessage(HttpServletRequest req, long messageId)
@@ -528,6 +534,14 @@ public class MailUtil {
 		catch (MessagingException me) {
 			throw new FolderException(me);
 		}
+	}
+
+	public static long getMessageId(HttpSession ses)
+		throws ContentException, FolderException, StoreException {
+	
+		Long messageId = (Long)ses.getAttribute(WebKeys.MAIL_MESSAGE_ID);
+	
+		return messageId.longValue();
 	}
 
 	public static void moveMessages(
