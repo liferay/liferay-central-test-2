@@ -59,6 +59,7 @@ public class LangBuilder {
 				new File(_LANG_DIR + "Language.properties"));
 
 			_createProps(content, "ar"); // Arabic
+			_createProps(content, "ca"); // Catalan
 			_createProps(content, "zh_CN"); // Chinese (China)
 			_createProps(content, "zh_TW"); // Chinese (Taiwan)
 			_createProps(content, "cs"); // Czech
@@ -229,14 +230,15 @@ public class LangBuilder {
 
 	private String _translate(String translationId, String fromText) {
 		if (translationId.equals("en_ar") ||
+			translationId.equals("en_ca") ||
 			translationId.equals("en_cs") ||
 			translationId.equals("en_hu") ||
 			translationId.equals("en_ru") ||
 			translationId.equals("en_tr") ||
 			translationId.equals("en_vi")) {
 
-			// Automatic translator does not support Arabic, Czech, Hungarian,
-			// Russian, Turkish, or Vietnamese
+			// Automatic translator does not support Arabic, Catalan, Czech,
+			// Hungarian, Russian, Turkish, or Vietnamese
 
 			return null;
 		}
