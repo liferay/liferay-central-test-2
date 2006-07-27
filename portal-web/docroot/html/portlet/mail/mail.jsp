@@ -152,7 +152,7 @@
 			}
 
 			#portlet-mail-msg-frame-div {
-				margin-left: 20px;
+				margin-left: 0px;
 			}
 
 			#portlet-mail-msg-detailed-frame {
