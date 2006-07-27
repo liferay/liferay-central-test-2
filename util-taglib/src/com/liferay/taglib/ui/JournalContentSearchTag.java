@@ -22,6 +22,14 @@
 
 package com.liferay.taglib.ui;
 
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * <a href="JournalContentSearchTag.java.html"><b><i>View Source</i></b></a>
  *
@@ -29,6 +37,19 @@ package com.liferay.taglib.ui;
  *
  */
 public class JournalContentSearchTag extends BoxTag {
+
+	public static void doTag(
+			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+		throws IOException, ServletException {
+
+		RequestDispatcher rd = ctx.getRequestDispatcher(_TOP);
+
+		rd.include(req, res);
+
+		rd = ctx.getRequestDispatcher(_BOTTOM);
+
+		rd.include(req, res);
+	}
 
 	public String getTop() {
 		return _TOP;
