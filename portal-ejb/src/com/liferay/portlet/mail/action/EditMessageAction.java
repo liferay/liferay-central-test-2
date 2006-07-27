@@ -118,7 +118,7 @@ public class EditMessageAction extends PortletAction {
 		long messageId = ParamUtil.getLong(req, "messageId");
 
 		if (cmd.equals("forward") || cmd.startsWith("reply")) {
-			MailUtil.getFolder(httpSes, folderId);
+			MailUtil.setFolder(httpSes, folderId);
 
 			MailMessage mailMessage = MailUtil.getMessage(httpReq, messageId);
 
@@ -187,7 +187,7 @@ public class EditMessageAction extends PortletAction {
 				WebKeys.MAIL_MESSAGE_BODY, getBody(req, mailMessage));
 		}
 		else if (cmd.equals(Constants.EDIT)) {
-			MailUtil.getFolder(httpSes, folderId);
+			MailUtil.setFolder(httpSes, folderId);
 
 			MailMessage mailMessage = MailUtil.getMessage(httpReq, messageId);
 

@@ -120,7 +120,7 @@ public class MailAction extends JSONAction {
 		String sortBy = ParamUtil.getString(req, "sortBy");
 		boolean asc = ParamUtil.getBoolean(req, "asc");
 
-		MailUtil.getFolder(ses, folderId);
+		MailUtil.setFolder(ses, folderId);
 
 		Set envelopes = null;
 
@@ -182,7 +182,7 @@ public class MailAction extends JSONAction {
 		String folderId = ParamUtil.getString(req, "folderId");
 		long messageId = ParamUtil.getLong(req, "messageId");
 
-		MailUtil.getFolder(req.getSession(), folderId);
+		MailUtil.setFolder(req.getSession(), folderId);
 
 		MailMessage mailMessage = MailUtil.getMessage(req, messageId);
 

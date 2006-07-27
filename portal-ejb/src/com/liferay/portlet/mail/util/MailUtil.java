@@ -246,16 +246,16 @@ public class MailUtil {
 			if (send) {
 				Transport.send(message);
 
-				folder = getFolder(ses, MAIL_SENT_NAME);
+				folder = _getFolder(ses, MAIL_SENT_NAME);
 			}
 			else {
-				folder = getFolder(ses, MAIL_DRAFTS_NAME);
+				folder = _getFolder(ses, MAIL_DRAFTS_NAME);
 			}
 
 			folder.appendMessages(new Message[] {message});
 
 			if (draftId > 0) {
-				folder = getFolder(ses, MAIL_DRAFTS_NAME);
+				folder = _getFolder(ses, MAIL_DRAFTS_NAME);
 
 				Message msg = folder.getMessageByUID(draftId);
 
@@ -317,7 +317,7 @@ public class MailUtil {
 		throws FolderException, StoreException {
 
 		try {
-			IMAPFolder folder = getFolder(ses);
+			IMAPFolder folder = _getFolder(ses);
 
 			if (!folder.getName().equals(MAIL_TRASH_NAME)) {
 				moveMessages(ses, messageIds, MAIL_TRASH_NAME);
@@ -348,7 +348,7 @@ public class MailUtil {
 			long messageId = GetterUtil.getLong(path[1]);
 			String mimePath = path[2];
 
-			IMAPFolder folder = getFolder(ses, folderName);
+			IMAPFolder folder = _getFolder(ses, folderName);
 
 			Message message = folder.getMessageByUID(messageId);
 
@@ -373,7 +373,7 @@ public class MailUtil {
         try {
 			Set envelopes = new TreeSet(comparator);
 
-			IMAPFolder folder = getFolder(ses);
+			IMAPFolder folder = _getFolder(ses);
 
 			Message[] messages = folder.getMessages();
 
@@ -451,62 +451,6 @@ public class MailUtil {
 		}
 	}
 
-	public static IMAPFolder getFolder(HttpSession ses)
-		throws FolderException {
-
-		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER);
-
-		if (folder != null) {
-			return folder;
-		}
-		else {
-			throw new FolderException();
-		}
-	}
-
-	public static IMAPFolder getFolder(HttpSession ses, String folderName)
-		throws FolderException, StoreException {
-
-		try {
-			if (Validator.isNull(folderName)) {
-				folderName = MAIL_INBOX_NAME;
-			}
-			else if (!folderName.equals(MAIL_INBOX_NAME) &&
-					 !folderName.startsWith(MAIL_BOX_STYLE)) {
-
-				folderName = MAIL_BOX_STYLE + folderName;
-			}
-
-			IMAPFolder folder = (IMAPFolder)ses.getAttribute(
-				WebKeys.MAIL_FOLDER);
-
-			if (folder != null) {
-				if (!folder.getName().equals(folderName)) {
-					_closeFolder(ses);
-
-					folder = null;
-				}
-			}
-
-			if (folder == null) {
-				Store store = _getStore(ses);
-
-				folder = (IMAPFolder)store.getFolder(folderName);
-
-				folder.open(IMAPFolder.READ_WRITE);
-
-				ses.setAttribute(WebKeys.MAIL_FOLDER, folder);
-
-				ses.removeAttribute(WebKeys.MAIL_MESSAGE_ID);
-			}
-
-			return folder;
-		}
-		catch (MessagingException me) {
-			throw new FolderException(me);
-		}
-	}
-
 	public static List getFolders(HttpSession ses)
 		throws FolderException, StoreException {
 
@@ -557,7 +501,7 @@ public class MailUtil {
 
 			MailMessage mailMessage = new MailMessage();
 
-			IMAPFolder folder = getFolder(ses);
+			IMAPFolder folder = _getFolder(ses);
 
 			Message message = folder.getMessageByUID(messageId);
 
@@ -599,7 +543,7 @@ public class MailUtil {
 				toFolderName = MAIL_BOX_STYLE + toFolderName;
 			}
 
-			IMAPFolder folder = getFolder(ses);
+			IMAPFolder folder = _getFolder(ses);
 
 			if (folder.getName().equals(toFolderName)) {
 				return;
@@ -733,15 +677,21 @@ public class MailUtil {
 
 			oldFolder.renameTo(newFolder);
 
-			Folder curFolder = getFolder(ses);
+			Folder curFolder = _getFolder(ses);
 
 			if (curFolder.getName().equals(oldFolderName)) {
-				getFolder(ses, newFolderName);
+				setFolder(ses, newFolderName);
 			}
 		}
 		catch (MessagingException me) {
 			throw new FolderException(me);
 		}
+	}
+
+	public static void setFolder(HttpSession ses, String folderName)
+		throws FolderException, StoreException {
+
+		_getFolder(ses, folderName);
 	}
 
 	private static void _closeFolder(HttpSession ses) {
@@ -804,7 +754,7 @@ public class MailUtil {
 		return parts;
 	}
 
-	public static String _getAttachmentURL(HttpServletRequest req) {
+	private static String _getAttachmentURL(HttpServletRequest req) {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
@@ -854,6 +804,62 @@ public class MailUtil {
 		}
 
         return mailMessage;
+	}
+
+	private static IMAPFolder _getFolder(HttpSession ses)
+		throws FolderException {
+	
+		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER);
+	
+		if (folder != null) {
+			return folder;
+		}
+		else {
+			throw new FolderException();
+		}
+	}
+
+	private static IMAPFolder _getFolder(HttpSession ses, String folderName)
+		throws FolderException, StoreException {
+	
+		try {
+			if (Validator.isNull(folderName)) {
+				folderName = MAIL_INBOX_NAME;
+			}
+			else if (!folderName.equals(MAIL_INBOX_NAME) &&
+					 !folderName.startsWith(MAIL_BOX_STYLE)) {
+	
+				folderName = MAIL_BOX_STYLE + folderName;
+			}
+
+			IMAPFolder folder = (IMAPFolder)ses.getAttribute(
+				WebKeys.MAIL_FOLDER);
+
+			if (folder != null) {
+				if (!folder.getName().equals(folderName)) {
+					_closeFolder(ses);
+	
+					folder = null;
+				}
+			}
+
+			if (folder == null) {
+				Store store = _getStore(ses);
+	
+				folder = (IMAPFolder)store.getFolder(folderName);
+	
+				folder.open(IMAPFolder.READ_WRITE);
+	
+				ses.setAttribute(WebKeys.MAIL_FOLDER, folder);
+	
+				ses.removeAttribute(WebKeys.MAIL_MESSAGE_ID);
+			}
+
+			return folder;
+		}
+		catch (MessagingException me) {
+			throw new FolderException(me);
+		}
 	}
 
 	private static void _getFolders(List list, Folder[] folders)
@@ -954,7 +960,7 @@ public class MailUtil {
 				}
 
 				if (ses.getAttribute(WebKeys.MAIL_FOLDER) == null) {
-					getFolder(ses, MAIL_INBOX_NAME);
+					setFolder(ses, MAIL_INBOX_NAME);
 				}
 			}
 
