@@ -282,7 +282,7 @@
 		</div>
 
 		<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm">
-			<input name="<portlet:namespace />composeAction" id="portlet-mail-compose-action" type="hidden" />
+			<input name="<portlet:namespace /><%= Constants.CMD %>" id="portlet-mail-compose-action" type="hidden" />
 			<input name="<portlet:namespace />messageId" id="portlet-mail-message-id" type="hidden" />
 			<input name="<portlet:namespace />folderId" id="portlet-mail-folder-id" type="hidden" />
 		</form>

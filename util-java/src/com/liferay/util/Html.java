@@ -34,6 +34,10 @@ public class Html {
 
 	public static final String AMPERSAND = "&amp;";
 
+	public static String escape(String text) {
+		return escape(text, true);
+	}
+
 	public static String escape(String text, boolean stripBlankSpaces) {
 		if (text == null) {
 			return null;
@@ -46,10 +50,9 @@ public class Html {
 		}
 
 		StringBuffer sb = new StringBuffer(text.length());
-		char c;
 
 		for (int i = 0; i < text.length(); i++) {
-			c = text.charAt(i);
+			char c = text.charAt(i);
 
 			switch (c) {
 				case '<':

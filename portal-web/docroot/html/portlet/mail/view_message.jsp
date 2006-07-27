@@ -25,11 +25,7 @@
 <%@ include file="/html/portlet/mail/init.jsp" %>
 
 <%
-Long messageId = (Long)session.getAttribute(WebKeys.MAIL_MESSAGE_ID);
-
-String url = themeDisplay.getPathMain() + "/mail/get_attachment?";
-
-MailMessage mailMessage = MailUtil.getMessage(session, messageId.longValue(), url);
+MailMessage mailMessage = MailUtil.getMessage(request);
 
 boolean header = ParamUtil.getBoolean(request, "header");
 %>

@@ -22,27 +22,33 @@
 
 package com.liferay.portlet.mail.action;
 
-import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.ContentTypeUtil;
+import com.liferay.portal.util.DateFormats;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.mail.RecipientException;
 import com.liferay.portlet.mail.model.MailAttachment;
 import com.liferay.portlet.mail.model.MailMessage;
 import com.liferay.portlet.mail.model.RemoteMailAttachment;
 import com.liferay.portlet.mail.util.MailUtil;
 import com.liferay.util.FileUtil;
+import com.liferay.util.Html;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringPool;
+import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
+import com.liferay.util.mail.InternetAddressUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
+
+import java.text.DateFormat;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -50,21 +56,19 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.mail.Address;
 import javax.mail.internet.InternetAddress;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -78,146 +82,285 @@ import org.apache.struts.action.ActionMapping;
  */
 public class EditMessageAction extends PortletAction {
 
+	public void processAction(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionRequest req, ActionResponse res)
+		throws Exception {
+
+		try {
+			completeMessage(req);
+
+			sendRedirect(req, res);
+		}
+		catch (Exception e) {
+			if (e instanceof RecipientException) {
+				SessionErrors.add(req, e.getClass().getName());
+			}
+			else {
+				throw e;
+			}
+		}
+	}
+
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		/*String composeAction = ParamUtil.getString(req, "composeAction");
-		long messageId = ParamUtil.getLong(req, "messageId");
-		String folderId = ParamUtil.getString(req, "folderId");
-
 		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-		HttpServletRequest svltReq = reqImpl.getHttpServletRequest();
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		HttpServletRequest httpReq = reqImpl.getHttpServletRequest();
+		HttpSession httpSes = httpReq.getSession();
 
-		String attachmentUrl =
-			themeDisplay.getPathMain() + "/mail/get_attachment?";
+		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-		if (composeAction.equals("forward") ||
-			composeAction.startsWith("reply")) {
+		String folderId = ParamUtil.getString(req, "folderId");
+		long messageId = ParamUtil.getLong(req, "messageId");
 
-			MailUtil.setCurrentFolder(svltReq.getSession(), folderId);
-			MailMessage mm = MailUtil.getMessage(
-				svltReq.getSession(), messageId, attachmentUrl);
+		if (cmd.equals("forward") || cmd.startsWith("reply")) {
+			MailUtil.getFolder(httpSes, folderId);
 
-			User user = PortalUtil.getUser(req);
-			DateFormat dateFormatter =
-				DateFormats.getDateTime(user.getLocale(), user.getTimeZone());
-			req.setAttribute(
-				WebKeys.MAIL_MESSAGE, _buildBody(mm, dateFormatter));
+			MailMessage mailMessage = MailUtil.getMessage(httpReq, messageId);
 
-			if (composeAction.equals("forward")) {
-				req.setAttribute(WebKeys.MAIL_SUBJECT,
-					"Fw: " + _removeSubjectPrefix(mm.getSubject(), "fw"));
-				req.setAttribute(WebKeys.MAIL_ATTACHMENTS,
-					mm.getRemoteAttachments());
+			if (cmd.equals("forward")) {
+				req.setAttribute(
+					WebKeys.MAIL_MESSAGE_SUBJECT,
+					"Fw: " + getSubject(mailMessage.getSubject(), "fw"));
+				req.setAttribute(
+					WebKeys.MAIL_MESSAGE_ATTACHMENTS,
+					mailMessage.getRemoteAttachments());
 			}
 			else {
-				String tosStr = StringPool.BLANK;
-				String ccsStr = StringPool.BLANK;
+				String to = StringPool.BLANK;
+				String cc = StringPool.BLANK;
 
-				if (composeAction.equals("replyAll")) {
-					String userEmail =
-						PortalUtil.getUser(req).getEmailAddress();
+				if (cmd.equals("replyAll")) {
+					User user = PortalUtil.getUser(req);
 
-					tosStr = InternetAddressUtil.toString(
-						InternetAddressUtil.removeEntry(mm.getTo(), userEmail));
-					ccsStr = InternetAddressUtil.toString(
-						InternetAddressUtil.removeEntry(mm.getCc(), userEmail));
+					String emailAddress = user.getEmailAddress();
 
-					String rtosStr =
-						InternetAddressUtil.toString(mm.getReplyTo());
+					to = InternetAddressUtil.toString(
+						InternetAddressUtil.removeEntry(
+							mailMessage.getTo(), emailAddress));
 
-					if (Validator.isNull(rtosStr)) {
-						rtosStr =
-							((InternetAddress)mm.getFrom()).toUnicodeString();
+					cc = InternetAddressUtil.toString(
+						InternetAddressUtil.removeEntry(
+							mailMessage.getCc(), emailAddress));
+
+					String replyTo = InternetAddressUtil.toString(
+						mailMessage.getReplyTo());
+
+					if (Validator.isNull(replyTo)) {
+						InternetAddress from =
+							(InternetAddress)mailMessage.getFrom();
+
+						replyTo = from.toUnicodeString();
 					}
 
-					tosStr =
-						rtosStr + StringPool.COMMA + StringPool.SPACE + tosStr;
+					to = replyTo + StringPool.COMMA + StringPool.SPACE + to;
 				}
 				else {
-					tosStr = InternetAddressUtil.toString(mm.getReplyTo());
+					to = InternetAddressUtil.toString(
+						mailMessage.getReplyTo());
 
-					if (Validator.isNull(tosStr)) {
-						tosStr =
-							((InternetAddress)mm.getFrom()).toUnicodeString();
+					if (Validator.isNull(to)) {
+						InternetAddress from =
+							(InternetAddress)mailMessage.getFrom();
+
+						to = from.toUnicodeString();
 					}
 				}
 
-				String [] recipients = {
-					Html.escape(tosStr, true),
-					Html.escape(ccsStr, true),
+				String[] recipients = new String[] {
+					Html.escape(to, true),
+					Html.escape(cc, true),
 					StringPool.BLANK
 				};
 
-				req.setAttribute(WebKeys.MAIL_RECIPIENTS, recipients);
-				req.setAttribute(WebKeys.MAIL_SUBJECT,
-					"Re: " + _removeSubjectPrefix(mm.getSubject(), "re"));
+				req.setAttribute(WebKeys.MAIL_MESSAGE_RECIPIENTS, recipients);
+				req.setAttribute(
+					WebKeys.MAIL_MESSAGE_SUBJECT,
+					"Re: " + getSubject(mailMessage.getSubject(), "re"));
 			}
+
+			req.setAttribute(
+				WebKeys.MAIL_MESSAGE_BODY, getBody(req, mailMessage));
 		}
-		else if (composeAction.equals("edit")) {
-			MailUtil.setCurrentFolder(svltReq.getSession(), folderId);
-			MailMessage mm = MailUtil.getMessage(
-				svltReq.getSession(), messageId, attachmentUrl);
+		else if (cmd.equals(Constants.EDIT)) {
+			MailUtil.getFolder(httpSes, folderId);
 
-			String [] recipients = {
-				Html.escape(InternetAddressUtil.toString(mm.getTo()), true),
-				Html.escape(InternetAddressUtil.toString(mm.getCc()), true),
-				Html.escape(InternetAddressUtil.toString(mm.getBcc()), true)
-			};
+			MailMessage mailMessage = MailUtil.getMessage(httpReq, messageId);
 
-			req.setAttribute(WebKeys.MAIL_RECIPIENTS, recipients);
-			req.setAttribute(WebKeys.MAIL_SUBJECT, mm.getSubject());
-			req.setAttribute(WebKeys.MAIL_ATTACHMENTS,
-				mm.getRemoteAttachments());
-			req.setAttribute(WebKeys.MAIL_MESSAGE, mm.getHtmlBody());
-			req.setAttribute(WebKeys.MAIL_DRAFT_ID, new Long(messageId));
-		}*/
+			String to = Html.escape(
+				InternetAddressUtil.toString(mailMessage.getTo()));
+			String cc = Html.escape(
+				InternetAddressUtil.toString(mailMessage.getCc()));
+			String bcc = Html.escape(
+				InternetAddressUtil.toString(mailMessage.getBcc()));
+
+			String[] recipients = new String[] {to, cc, bcc};
+
+			req.setAttribute(
+				WebKeys.MAIL_MESSAGE_DRAFT_ID, new Long(messageId));
+			req.setAttribute(WebKeys.MAIL_MESSAGE_RECIPIENTS, recipients);
+			req.setAttribute(
+				WebKeys.MAIL_MESSAGE_SUBJECT, mailMessage.getSubject());
+			req.setAttribute(
+				WebKeys.MAIL_MESSAGE_BODY, mailMessage.getHtmlBody());
+			req.setAttribute(
+				WebKeys.MAIL_MESSAGE_ATTACHMENTS,
+				mailMessage.getRemoteAttachments());
+		}
 
 		return mapping.findForward("portlet.mail.edit_message");
 	}
 
-	/*private String _buildBody(MailMessage mm, DateFormat dateFormatter) {
-		InternetAddress from = ((InternetAddress)mm.getFrom());
+	protected void completeMessage(ActionRequest req)
+		throws Exception {
 
-		Date today = new Date();
+		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-		StringBuffer body = new StringBuffer();
-		body.append("<br /><br />");
-		body.append(
-			"<!-- LIFERAY-GENERATED-QUOTE-BEGIN-" + today.getTime() + " -->");
-		body.append("On " + dateFormatter.format(mm.getSentDate()));
-		body.append(StringPool.COMMA + StringPool.NBSP + from.getPersonal());
-		body.append("&lt;<a href=\"mailto:" + from.getAddress() + "\">");
-		body.append(from.getAddress() + "</a>&gt; wrote:<br />");
-		body.append("<div style=\"");
-		body.append("border-left: 1px solid rgb(204, 204, 204); ");
-		body.append("margin: 0pt 0pt 0pt 1ex; ");
-		body.append("padding-left: 1ex; \">");
-		body.append(mm.getHtmlBody() + "</div>");;
-		body.append(
-			"<!-- LIFERAY-GENERATED-QUOTE-END-" + today.getTime() + " -->");
+		User user = PortalUtil.getUser(req);
 
-		return body.toString();
+		Address from = new InternetAddress(
+			user.getEmailAddress(), user.getFullName());
+
+		String to = ParamUtil.getString(req, "to");
+		String cc = ParamUtil.getString(req, "cc");
+		String bcc = ParamUtil.getString(req, "bcc");
+		String subject = ParamUtil.getString(req, "subject");
+		String body = ParamUtil.getString(req, "body");
+
+		MailMessage mailMessage = new MailMessage();
+
+		mailMessage.setFrom(from);
+		mailMessage.setTo(to);
+		mailMessage.setCc(cc);
+		mailMessage.setBcc(bcc);
+		mailMessage.setSubject(subject);
+		mailMessage.setHtmlBody(body);
+
+		Iterator itr = getAttachments(req).entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String fileName = (String)entry.getKey();
+			byte[] attachment = (byte[])entry.getValue();
+
+			MailAttachment mailAttachment = new MailAttachment();
+
+			mailAttachment.setFilename(fileName);
+			mailAttachment.setContent(attachment);
+			mailAttachment.setContentType(
+				ContentTypeUtil.getContentType(fileName));
+
+			mailMessage.appendAttachment(mailAttachment);
+		}
+
+		mailMessage.setRemoteAttachments(getRemoteAttachments(req));
+
+		boolean send = cmd.equals(Constants.SEND);
+
+		long draftId = ParamUtil.getLong(req, "draftId");
+
+		MailUtil.completeMessage(req, mailMessage, send, draftId);
 	}
 
-	private String _removeSubjectPrefix(String subject, String prefix) {
-		if (Validator.isNotNull(subject)) {
-			String subjectLowerCase = subject.toLowerCase();
+	protected Map getAttachments(ActionRequest req) throws Exception {
+		UploadPortletRequest uploadReq =
+			PortalUtil.getUploadPortletRequest(req);
 
-			while (subjectLowerCase.startsWith(prefix + ":") ||
-				subjectLowerCase.startsWith(prefix + ">"))	{
+		Map attachments = new HashMap();
+
+		Enumeration enu = uploadReq.getParameterNames();
+
+		while (enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+
+			if (name.startsWith("attachment")) {
+				File file = uploadReq.getFile(name);
+				String fileName = uploadReq.getFileName(name);
+				byte[] bytes = FileUtil.getBytes(file);
+
+				if ((bytes != null) && (bytes.length > 0)) {
+					attachments.put(fileName, bytes);
+				}
+			}
+		}
+
+		return attachments;
+	}
+
+	protected String getBody(RenderRequest req, MailMessage mailMessage)
+		throws Exception {
+
+		StringBuffer sb = new StringBuffer();
+
+		InternetAddress from = (InternetAddress)mailMessage.getFrom();
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		DateFormat dateFormatDateTime = DateFormats.getDateTime(
+			themeDisplay.getLocale(), themeDisplay.getTimeZone());
+
+		sb.append("<br /><br />");
+		sb.append("On " + dateFormatDateTime.format(mailMessage.getSentDate()));
+		sb.append(StringPool.COMMA + StringPool.NBSP + from.getPersonal());
+		sb.append("&lt;<a href=\"mailto: " + from.getAddress() + "\">");
+		sb.append(from.getAddress() + "</a>&gt; wrote:<br />");
+		sb.append("<div style=\"");
+		sb.append("border-left: 1px solid rgb(204, 204, 204); ");
+		sb.append("margin: 0pt 0pt 0pt 1ex; ");
+		sb.append("padding-left: 1ex; \">");
+		sb.append(mailMessage.getHtmlBody());
+		sb.append("</div>");
+
+		return sb.toString();
+	}
+
+	protected List getRemoteAttachments(ActionRequest req)
+		throws Exception {
+
+		List list = new ArrayList();
+
+		String prefix = "remoteAttachment";
+
+		Enumeration enu = req.getParameterNames();
+
+		while (enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+
+			if (name.startsWith(prefix)) {
+				String fileName = name.substring(prefix.length());
+				String contentPath = ParamUtil.getString(req, name);
+
+				RemoteMailAttachment remoteMailAttachment =
+					new RemoteMailAttachment();
+
+				remoteMailAttachment.setFilename(fileName);
+				remoteMailAttachment.setContentPath(contentPath);
+
+				list.add(remoteMailAttachment);
+			}
+		}
+
+		return list;
+	}
+
+	protected String getSubject(String subject, String prefix)
+		throws Exception {
+
+		if (Validator.isNotNull(subject)) {
+			while (StringUtil.startsWith(subject, prefix + ":") ||
+				   StringUtil.startsWith(subject, prefix + ">"))	{
 
 				subject = subject.substring(3).trim();
-				subjectLowerCase = subject.toLowerCase();
 			}
 		}
 
 		return subject;
-	}*/
+	}
 
 }

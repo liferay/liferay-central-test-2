@@ -22,9 +22,11 @@
 
 package com.liferay.portlet.mail.util;
 
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.mail.ContentException;
 import com.liferay.portlet.mail.ContentPathException;
 import com.liferay.portlet.mail.FolderException;
@@ -80,6 +82,9 @@ import javax.mail.util.ByteArrayDataSource;
 
 import javax.naming.NamingException;
 
+import javax.portlet.ActionRequest;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
@@ -136,12 +141,17 @@ public class MailUtil {
 	}
 
 	public static void completeMessage(
-			HttpSession ses, MailMessage mailMessage, boolean send,
-			long draftId, String url)
+			ActionRequest actionReq, MailMessage mailMessage, boolean send,
+			long draftId)
 		throws ContentException, ContentPathException, FolderException,
 			   RecipientException, StoreException {
 
 		try {
+			ActionRequestImpl actionReqImpl = (ActionRequestImpl)actionReq;
+
+			HttpServletRequest req = actionReqImpl.getHttpServletRequest();
+			HttpSession ses = req.getSession();
+
 			if (send && Validator.isNull(mailMessage.getTo()) &&
 				Validator.isNull(mailMessage.getCc()) &&
 				Validator.isNull(mailMessage.getBcc())) {
@@ -172,7 +182,7 @@ public class MailUtil {
 
 			message.setSubject(mailMessage.getSubject());
 
-			_replaceEmbeddedImages(ses, mailMessage, url);
+			_replaceEmbeddedImages(ses, mailMessage, _getAttachmentURL(req));
 
 			Multipart multipart = new MimeMultipart();
 
@@ -529,11 +539,22 @@ public class MailUtil {
 		return list;
 	}
 
-	public static MailMessage getMessage(
-			HttpSession ses, long messageId, String url)
+	public static MailMessage getMessage(HttpServletRequest req)
+		throws ContentException, FolderException, StoreException {
+
+		HttpSession ses = req.getSession();
+
+		Long messageId = (Long)ses.getAttribute(WebKeys.MAIL_MESSAGE_ID);
+
+		return getMessage(req, messageId.longValue());
+	}
+
+	public static MailMessage getMessage(HttpServletRequest req, long messageId)
 		throws ContentException, FolderException, StoreException {
 
 		try {
+			HttpSession ses = req.getSession();
+
 			MailMessage mailMessage = new MailMessage();
 
 			IMAPFolder folder = getFolder(ses);
@@ -554,9 +575,7 @@ public class MailUtil {
 
 			mailMessage = _getContent(message, mailMessage, contentPath);
 
-			if (Validator.isNotNull(url)) {
-				_replaceContentIds(mailMessage, url);
-			}
+			_replaceContentIds(mailMessage, _getAttachmentURL(req));
 
 			ses.setAttribute(WebKeys.MAIL_MESSAGE_ID, new Long(messageId));
 
@@ -783,6 +802,13 @@ public class MailUtil {
 		};
 
 		return parts;
+	}
+
+	public static String _getAttachmentURL(HttpServletRequest req) {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		return themeDisplay.getPathMain() + "/mail/get_attachment?";
 	}
 
 	private static MailMessage _getContent(

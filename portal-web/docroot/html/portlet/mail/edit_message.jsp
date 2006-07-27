@@ -25,11 +25,28 @@
 <%@ include file="/html/portlet/mail/init.jsp" %>
 
 <%
-String to = "";
-String cc = "";
-String bcc = "";
-String subject = "";
-String body = "";
+Long draftId = (Long)request.getAttribute(WebKeys.MAIL_MESSAGE_DRAFT_ID);
+
+if (draftId == null) {
+	draftId = new Long(0);
+}
+
+String to = StringPool.BLANK;
+String cc = StringPool.BLANK;
+String bcc = StringPool.BLANK;
+
+String[] recipients = (String[])request.getAttribute(WebKeys.MAIL_MESSAGE_RECIPIENTS);
+
+if (recipients != null) {
+	to = recipients[0];
+	cc = recipients[1];
+	bcc = recipients[2];
+}
+
+String subject = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_MESSAGE_SUBJECT));
+String body = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_MESSAGE_BODY));
+
+List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 %>
 
 <script type="text/javascript">
@@ -71,7 +88,7 @@ String body = "";
 			var filename = document.createElement("span");
 
 			var href = "<%= themeDisplay.getPathMain() %>/mail/get_attachment?fileName=" + remoteFile + "&contentPath=" + contentPath;
-			
+
 			filename.innerHTML = '<span class="font-small"><a href="' + href + '">' + remoteFile + '</a></span>';
 
 			newRow.insertCell(0);
@@ -84,12 +101,6 @@ String body = "";
 		<portlet:namespace />fileIndex++;
 	}
 
-	function <portlet:namespace />completeMessage(send) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = send ? "<%= Constants.SEND %>" : "<%= Constants.SAVE %>";
-		document.<portlet:namespace />fm.<portlet:namespace />body.value = parent.<portlet:namespace />editor.getHTML();
-		submitForm(document.<portlet:namespace />fm);
-	}
-
 	function initEditor() {
 		return "<%= UnicodeFormatter.toString(body) %>";
 	}
@@ -99,10 +110,24 @@ String body = "";
 
 		document.getElementById("<portlet:namespace />files").deleteRow(delRow.rowIndex);
 	}
+
+	function <portlet:namespace />saveMessage() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.SAVE %>";
+		document.<portlet:namespace />fm.<portlet:namespace />body.value = parent.<portlet:namespace />editor.getHTML();
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />sendMessage() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.SEND %>";
+		document.<portlet:namespace />fm.<portlet:namespace />body.value = parent.<portlet:namespace />editor.getHTML();
+		submitForm(document.<portlet:namespace />fm);
+	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/complete_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_render" value="/mail/view" /></portlet:renderURL>">
+<input name="<portlet:namespace />draftId" type="hidden" value="<%= draftId %>" />
 <input name="<portlet:namespace />body" type="hidden" value="" />
 
 <liferay-ui:error exception="<%= ContentException.class %>" message="please-enter-valid-content" />
@@ -173,46 +198,33 @@ String body = "";
 
 <br>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "send") %>' onClick="<portlet:namespace />completeMessage(true);">
+<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "send") %>' onClick="<portlet:namespace />sendMessage();">
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onclick="<portlet:namespace />completeMessage(false);">
+<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onclick="<portlet:namespace />saveMessage();">
 
 <input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/view" /></portlet:renderURL>';">
 
 </form>
 
+<script type="text/javascript">
+	document.<portlet:namespace />fm.<portlet:namespace />to.focus();
+
+	<c:if test="<%= attachments != null %>">
+
+		<%
+		for (int i = 0; i < attachments.size(); i++) {
+			RemoteMailAttachment attachment = (RemoteMailAttachment)attachments.get(i);
+		%>
+
+			<portlet:namespace />addAttachment("<%= attachment.getFilename() %>", "<%= attachment.getContentPath() %>");
+
+		<%
+		}
+		%>
+
+	</c:if>
+</script>
+
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.mail.edit_message.jsp";
 %>
-
-<%--
-<%
-String editorUrl = themeDisplay.getPathJavaScript() + "/editor/editor.jsp?p_l_id=" + plid + "&editorImpl=" + PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) + "&initMethod=initEditor";
-
-String [] recipients = (String [])request.getAttribute(WebKeys.MAIL_RECIPIENTS);
-String tos = "";
-String ccs = "";
-String bccs = "";
-if (recipients != null && recipients.length == 3) {
-	tos = recipients[0];
-	ccs = recipients[1];
-	bccs = recipients[2];
-}
-String subject = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_SUBJECT));
-String content = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_MESSAGE));
-List remoteAttachments = (List)request.getAttribute(WebKeys.MAIL_ATTACHMENTS);
-Long draftId = (Long)request.getAttribute(WebKeys.MAIL_DRAFT_ID);
-
-<input name="<portlet:namespace />draftId" type="hidden" value="<%= draftId != null ? draftId : new Long(-1L) %>" />
-<c:if test="<%= remoteAttachments != null %>">
-	<script type="text/javascript">
-	<%
-	for (Iterator itr = remoteAttachments.iterator(); itr.hasNext(); ) {
-		RemoteMailAttachment rma = (RemoteMailAttachment)itr.next();
-	%>
-		<portlet:namespace />addAttachment("<%= rma.getFilename() %>", "<%= rma.getContentPath() %>");
-	<%
-	}
-	%>
-	</script>
-</c:if>--%>

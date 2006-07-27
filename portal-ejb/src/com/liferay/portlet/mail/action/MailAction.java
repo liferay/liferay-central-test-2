@@ -184,13 +184,7 @@ public class MailAction extends JSONAction {
 
 		MailUtil.getFolder(req.getSession(), folderId);
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		String url = themeDisplay.getPathMain() + "/mail/get_attachment?";
-
-		MailMessage mailMessage = MailUtil.getMessage(
-			req.getSession(), messageId, url);
+		MailMessage mailMessage = MailUtil.getMessage(req, messageId);
 
 		req.setAttribute("mailMessage", mailMessage);
 

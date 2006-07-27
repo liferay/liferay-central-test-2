@@ -163,7 +163,17 @@ public class WebKeys {
 
 	public static final String MAIL_FOLDER = "MAIL_FOLDER";
 
+	public static final String MAIL_MESSAGE_ATTACHMENTS = "MAIL_MESSAGE_ATTACHMENTS";
+
+	public static final String MAIL_MESSAGE_BODY = "MAIL_MESSAGE_BODY";
+
+	public static final String MAIL_MESSAGE_DRAFT_ID = "MAIL_MESSAGE_DRAFT_ID";
+
 	public static final String MAIL_MESSAGE_ID = "MAIL_MESSAGE_ID";
+
+	public static final String MAIL_MESSAGE_RECIPIENTS = "MAIL_MESSAGE_RECIPIENTS";
+
+	public static final String MAIL_MESSAGE_SUBJECT = "MAIL_MESSAGE_SUBJECT";
 
 	public static final String MAIL_STORE = "MAIL_STORE";
 
