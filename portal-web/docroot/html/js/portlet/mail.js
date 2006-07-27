@@ -90,21 +90,24 @@ var Mail = {
 
 	decrementCount : function (reverse) {
 		var spanList = Mail.currentFolder.li.getElementsByTagName("span");
-		if (spanList.length == 2) {
-			var countSpan = spanList[0];
-			var countNum = parseInt(spanList[1].innerHTML);
+		
+		if (spanList.length > 0) {
+			spanList[0].parentNode.removeChild(spanList[0]);
 			
-			if (countNum > 1) {
-				if (reverse) {
-					countNum++;
-				}
-				else {
-					countNum--;
-				}
-				spanList[1].innerHTML = countNum;
+			if (reverse) {
+				Mail.currentFolder.li.newCount++;
 			}
 			else {
-				countSpan.parentNode.removeChild(countSpan);
+				Mail.currentFolder.li.newCount--;
+			}
+			
+			var countNum = Mail.currentFolder.li.newCount;
+			
+			if (countNum > 0) {
+				var element = document.createElement("span");
+				element.innerHTML = "&nbsp;(" + countNum + ")";
+				element.className = "font-small";
+				Mail.currentFolder.li.appendChild(element);
 			}
 		}
 	},
@@ -244,12 +247,13 @@ var Mail = {
 				var newCount = document.createElement("span");
 				
 				if (folder.newCount > 0) {
-					newCount.innerHTML = "&nbsp;(<span>" + folder.newCount + "</span>)";
+					newCount.innerHTML = "&nbsp;(" + folder.newCount + ")";
 				}
 				newCount.className = "font-small"
 				folderItem.innerHTML = folder.name;
 				folderItem.folder = folder;
 				folderItem.onclick = Mail.onFolderSelect;
+				folderItem.newCount = folder.newCount;
 				folderItem.appendChild(newCount);
 				folderList.appendChild(folderItem);
 				
@@ -730,7 +734,7 @@ var Mail = {
 		var popup = null;
 		
 		if (Mail.currentMessage) {
-			var frameSrc = themeDisplay.getPathMain() + "/mail/view_message?header=true";
+			var frameSrc = themeDisplay.getPathMain() + "/mail/view_message?header=true&messageId=" + Mail.currentMessageId;
 			popup = window.open(frameSrc, "Print", "menubar=yes,width=640,height=480,toolbar=no,resizable=yes");
 		}
 		

@@ -304,39 +304,40 @@
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
 						<td class="portlet-mail-msgs-pane-td" width="100%">
-							<div id="portlet-mail-msgs-preview-pane">
-								<table border="0" cellpadding="0" cellspacing="0">
-								<tr>
-									<td class="portlet-mail-msgs-title">
-										<div id="portlet-mail-msgs-title-from">
-											<div class="portlet-mail-title-text">
-												<span><%= LanguageUtil.get(pageContext, "from") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "to") %></span>
-											</div>
+						
+							<table border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td class="portlet-mail-msgs-title">
+									<div id="portlet-mail-msgs-title-from">
+										<div class="portlet-mail-title-text">
+											<span><%= LanguageUtil.get(pageContext, "from") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "to") %></span>
 										</div>
-									</td>
-									<td id="portlet-mail-msgs-from-handle" style="cursor: e-resize;">
-										<div class="portlet-mail-msgs-title-handle"></div>
-									</td>
-									<td class="portlet-mail-msgs-title">
-										<div id="portlet-mail-msgs-title-subject">
-											<div class="portlet-mail-title-text">
-												<span><%= LanguageUtil.get(pageContext, "subject") %></span>
-											</div>
+									</div>
+								</td>
+								<td id="portlet-mail-msgs-from-handle" style="cursor: e-resize;">
+									<div class="portlet-mail-msgs-title-handle"></div>
+								</td>
+								<td class="portlet-mail-msgs-title">
+									<div id="portlet-mail-msgs-title-subject">
+										<div class="portlet-mail-title-text">
+											<span><%= LanguageUtil.get(pageContext, "subject") %></span>
 										</div>
-									</td>
-									<td id="portlet-mail-msgs-subject-handle" style="cursor: e-resize;">
-										<div class="portlet-mail-msgs-title-handle"></div>
-									</td>
-									<td class="portlet-mail-msgs-title">
-										<div id="portlet-mail-msgs-title-received">
-											<div class="portlet-mail-title-text">
-												<span><%= LanguageUtil.get(pageContext, "date") %></span>
-											</div>
+									</div>
+								</td>
+								<td id="portlet-mail-msgs-subject-handle" style="cursor: e-resize;">
+									<div class="portlet-mail-msgs-title-handle"></div>
+								</td>
+								<td class="portlet-mail-msgs-title">
+									<div id="portlet-mail-msgs-title-received">
+										<div class="portlet-mail-title-text">
+											<span><%= LanguageUtil.get(pageContext, "date") %></span>
 										</div>
-									</td>
-								</tr>
-								</table>
+									</div>
+								</td>
+							</tr>
+							</table>
 
+							<div id="portlet-mail-msgs-preview-pane">
 								<table border="0" cellpadding="0" cellspacing="0">
 								<tr>
 									<td>
@@ -386,19 +387,21 @@
 		</tr>
 		</table>
 
-		<%
-		String folderId = (String)request.getAttribute("folderId");
-		Long messageId = (Long)request.getAttribute("messageId");
-		%>
 
 		<script type="text/javascript">
-			<c:if test="<%= folderId != null %>">
+			<%
+			try {
+				String folderId = MailUtil.getFolderName(request.getSession());
+				long messageId = MailUtil.getMessageId(request.getSession());
+			
+				%>
 				Mail.currentFolderId = "<%= folderId %>";
-			</c:if>
-
-			<c:if test="<%= messageId != null %>">
-				Mail.currentMessageId = <%= messageId.toString() %>;
-			</c:if>
+				Mail.currentMessageId = <%= messageId %>;
+				<%
+			}
+			catch (Exception e) {
+			}
+			%>
 
 			Mail.highlightColor = "<%= colorScheme.getPortletMenuBg() %>";
 			Mail.colorSelected = "<%= colorScheme.getLayoutTabBg() %>";

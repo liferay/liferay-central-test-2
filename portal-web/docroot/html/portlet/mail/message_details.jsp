@@ -25,7 +25,13 @@
 <%@ include file="/html/portlet/mail/init.jsp" %>
 
 <%
+
 MailMessage mailMessage = (MailMessage)request.getAttribute("mailMessage");
+
+if (mailMessage == null) {
+	long messageId = ParamUtil.getLong(request, "messageId");
+	mailMessage = MailUtil.getMessage(request, messageId);
+}
 
 Address from = mailMessage.getFrom();
 Address[] to = mailMessage.getTo();
