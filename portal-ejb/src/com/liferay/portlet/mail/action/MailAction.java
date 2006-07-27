@@ -275,13 +275,11 @@ public class MailAction extends JSONAction {
 	}
 
 	protected void moveMessages(HttpServletRequest req) throws Exception {
-		HttpSession ses = req.getSession();
-
 		long[] messages = StringUtil.split(
 			ParamUtil.getString(req, "messages"), ",", -1L);
-		String folderName = ParamUtil.getString(req, "folderName");
+		String folderId = ParamUtil.getString(req, "folderId");
 
-		MailUtil.moveMessages(req.getSession(), messages, folderName);
+		MailUtil.moveMessages(req.getSession(), messages, folderId);
 	}
 
 	private static Log _log = LogFactory.getLog(MailAction.class);

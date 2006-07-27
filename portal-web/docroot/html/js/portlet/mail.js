@@ -133,7 +133,7 @@ var Mail = {
 					Coordinates.southeastOffset(folderItem, true));
 					
 			if (foundFolder) {
-				Mail.moveToFolder(folderItem.folder.id, folderItem.folder.id);
+				Mail.moveToFolder(folderItem.folder.id);
 			}
 		}
 	},
@@ -476,20 +476,20 @@ var Mail = {
 			return true;
 		}
 	},
-	
-	moveToFolder : function(folderId, folderName) {
+
+	moveToFolder : function(folderId) {
 		var moveList = Mail.getSelectedMessages();
 		
 		if (moveList.length <- 0) {
 			alert("Please select messages to move");
 		}
 		else if (!Mail.isMoveAllowed(folderId)) {
-			alert("You cannot move to " + folderName);
+			alert("You cannot move to " + folderId);
 		}
 		else {
 			confirmMsg = "Move " + moveList.length + " message" +
-				(moveList.length > 1 ? "s" : "") + " to " + folderName + "?";
-			
+				(moveList.length > 1 ? "s" : "") + " to " + folderId + "?";
+
 			if (confirm(confirmMsg)) {
 				Mail.removeSelectedMessages();
 				loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=moveMessages&folderId=" + folderId + "&messages=" + moveList);
@@ -589,7 +589,7 @@ var Mail = {
 	
 	onMoveFolderChange : function() {
 		if (this.selectedIndex != 0) {
-			Mail.moveToFolder(this.value, this.options[this.selectedIndex].innerHTML);
+			Mail.moveToFolder(this.options[this.selectedIndex].innerHTML);
 		}
 		
 		this.selectedIndex = 0;

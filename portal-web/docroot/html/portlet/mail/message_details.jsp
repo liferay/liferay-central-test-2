@@ -55,7 +55,7 @@ List attachments = mailMessage.getRemoteAttachments();
 				<%= LanguageUtil.get(pageContext, "to") %>:&nbsp;
 			</td>
 			<td>
-				<%= InternetAddressUtil.toString(to) %>
+				<%= Html.escape(InternetAddressUtil.toString(to), false) %>
 			</td>
 		</tr>
 	</c:if>
@@ -66,7 +66,7 @@ List attachments = mailMessage.getRemoteAttachments();
 				<%= LanguageUtil.get(pageContext, "cc") %>:&nbsp;
 			</td>
 			<td>
-				<%= InternetAddressUtil.toString(cc) %>
+				<%= Html.escape(InternetAddressUtil.toString(cc), false) %>
 			</td>
 		</tr>
 	</c:if>
