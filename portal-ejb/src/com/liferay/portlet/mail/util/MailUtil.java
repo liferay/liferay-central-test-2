@@ -248,7 +248,7 @@ public class MailUtil {
 					folder.expunge();
 				}
 
-				// make sure to explicitly close and open the correct folder
+				// Make sure to explicitly close and open the correct folder
 
 				_closeFolder(ses);
 
@@ -258,11 +258,11 @@ public class MailUtil {
 				MailSessionLock.getInstance().unlock(ses.getId());
 			}
 		}
-		catch (MessagingException ex) {
-			throw new ContentException(ex);
+		catch (MessagingException me) {
+			throw new ContentException(me);
 		}
-		catch (NamingException ex) {
-			throw new ContentException(ex);
+		catch (NamingException ne) {
+			throw new ContentException(ne);
 		}
 	}
 

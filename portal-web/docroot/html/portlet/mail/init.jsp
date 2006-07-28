@@ -38,4 +38,6 @@
 PortletPreferences prefs = renderRequest.getPreferences();
 
 String forwardAddress = prefs.getValue("forward-address", StringPool.BLANK);
+
+DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

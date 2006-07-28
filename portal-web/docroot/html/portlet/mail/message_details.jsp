@@ -25,11 +25,11 @@
 <%@ include file="/html/portlet/mail/init.jsp" %>
 
 <%
-
 MailMessage mailMessage = (MailMessage)request.getAttribute("mailMessage");
 
 if (mailMessage == null) {
 	long messageId = ParamUtil.getLong(request, "messageId");
+
 	mailMessage = MailUtil.getMessage(request, messageId);
 }
 
@@ -38,8 +38,7 @@ Address[] to = mailMessage.getTo();
 Address[] cc = mailMessage.getCc();
 Address[] bcc = mailMessage.getBcc();
 
-Date date = mailMessage.getSentDate();
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+Date sentDate = mailMessage.getSentDate();
 
 List attachments = mailMessage.getRemoteAttachments();
 %>
@@ -92,13 +91,13 @@ List attachments = mailMessage.getRemoteAttachments();
 		</tr>
 	</c:if>
 
-	<c:if test="<%= date != null %>">
+	<c:if test="<%= sentDate != null %>">
 		<tr>
 			<td align="right" style="padding-right: 5px;" valign="top">
 				<%= LanguageUtil.get(pageContext, "date") %>:&nbsp;
 			</td>
 			<td>
-				<%= dateFormatDateTime.format(date) %>
+				<%= dateFormatDateTime.format(sentDate) %>
 			</td>
 		</tr>
 	</c:if>

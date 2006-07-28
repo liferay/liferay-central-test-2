@@ -387,8 +387,8 @@
 		</tr>
 		</table>
 
-
 		<script type="text/javascript">
+
 			<%
 			try {
 				String folderId = MailUtil.getFolderName(request.getSession());
