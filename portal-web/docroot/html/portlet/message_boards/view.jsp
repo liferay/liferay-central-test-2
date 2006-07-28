@@ -48,6 +48,11 @@ portletURL.setParameter("categoryId", categoryId);
 
 <liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
 
+<style type="text/css">
+	span.lastPostInfo {font-size: xx-small}
+	span.lastPostInfo A {font-size: xx-small}
+</style>
+
 <c:choose>
 	<c:when test='<%= tabs1.equals("categories") %>'>
 		<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
@@ -244,26 +249,26 @@ portletURL.setParameter("categoryId", categoryId);
 
 				// Last post info
 
+				StringBuffer sb = new StringBuffer();
+				sb.append("<span class=\"lastPostInfo\">");
 				if ((thread.getLastPostDate() == null) && (Validator.isNull(thread.getLastPostBy()))) {
-					row.addText(LanguageUtil.get(pageContext, "none"), rowURL);
+					sb.append(LanguageUtil.get(pageContext, "none"));
 				}
-				else {					
-					StringBuffer sb = new StringBuffer();
-					sb.append("<span style=\"font-size: xx-small;\">");
+				else {
 					if (thread.getLastPostDate() != null) {
 						sb.append(LanguageUtil.get(pageContext, "last-post-date") + ": " + dateFormatDateTime.format(thread.getLastPostDate()) + "<br />");
 					}
 
 					sb.append(LanguageUtil.get(pageContext, "last-post-by") + ": ");
 					if (Validator.isNotNull(thread.getLastPostBy())) {
-						sb.append(thread.getLastPostBy());
+						sb.append(PortalUtil.getUserName(thread.getLastPostBy(), LanguageUtil.get(pageContext, "anonymous"), request));
 					}
 					else {
 						sb.append(LanguageUtil.get(pageContext, "anonymous"));
 					}
-					sb.append("</span>");
-					row.addText(sb.toString(), rowURL);
 				}
+				row.addText(sb.toString());
+				sb.append("</span>");
 
 				// Action
 
@@ -380,26 +385,26 @@ portletURL.setParameter("categoryId", categoryId);
 
 			// Last post info
 
+			StringBuffer sb = new StringBuffer();
+			sb.append("<span class=\"lastPostInfo\">");
 			if ((thread.getLastPostDate() == null) && (Validator.isNull(thread.getLastPostBy()))) {
-				row.addText(LanguageUtil.get(pageContext, "none"), rowURL);
+				sb.append(LanguageUtil.get(pageContext, "none"));
 			}
-			else {					
-				StringBuffer sb = new StringBuffer();
-				sb.append("<span style=\"font-size: xx-small;\">");
+			else {
 				if (thread.getLastPostDate() != null) {
 					sb.append(LanguageUtil.get(pageContext, "last-post-date") + ": " + dateFormatDateTime.format(thread.getLastPostDate()) + "<br />");
 				}
 
 				sb.append(LanguageUtil.get(pageContext, "last-post-by") + ": ");
 				if (Validator.isNotNull(thread.getLastPostBy())) {
-					sb.append(thread.getLastPostBy());
+					sb.append(PortalUtil.getUserName(thread.getLastPostBy(), LanguageUtil.get(pageContext, "anonymous"), request));
 				}
 				else {
 					sb.append(LanguageUtil.get(pageContext, "anonymous"));
 				}
-				sb.append("</span>");
-				row.addText(sb.toString(), rowURL);
 			}
+			row.addText(sb.toString());
+			sb.append("</span>");
 
 			// Action
 
