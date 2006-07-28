@@ -24,25 +24,81 @@
 
 <%@ include file="/html/portlet/mail/init.jsp" %>
 
+<%
+String mailBgColor = "#F4F5EB";
+String mailLineColor = "#B3B6B0";
+%>
+
+<style>
+	.portlet-mail-toolbar {
+		margin-bottom: 5px;
+	}
+
+	.portlet-mail-toolbar td {
+		background-color: <%= colorScheme.getPortletBg() %>;
+		border: 1px solid <%= mailLineColor %>;
+		cursor: pointer;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+</style>
+
 <c:choose>
 	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
-		<%= LanguageUtil.get(pageContext, "unread-messages") %>: 0
+		<%
+		MailUtil.setFolder(request.getSession(), MailUtil.MAIL_INBOX_NAME);
+		Folder folder = MailUtil.getFolder(request.getSession());
+		%>
+		
+		<%= LanguageUtil.get(pageContext, "unread-messages") %>: <%= folder.getNewMessageCount() %>
+		
+		<div style="padding: 10px;">
+		
+		<%
+		int count = 0;
+		Set envelopes = MailUtil.getEnvelopes(request.getSession(), new DateComparator(false));
+		Iterator itr = envelopes.iterator();
+		
+		while (itr.hasNext() && count < 10) {
+			MailEnvelope mailEnvelope = (MailEnvelope)itr.next();
+			
+			String recipient = GetterUtil.getString(
+				mailEnvelope.getRecipient(), StringPool.NBSP);
 
-		<br><br>
+			String subject = GetterUtil.getString(
+				mailEnvelope.getSubject(), StringPool.NBSP);
+				
+			if (mailEnvelope.isRecent()) {
+				%>
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>">
+							<portlet:param name="messageId" value="<%= mailEnvelope.getMessageId() %>" />
+							<portlet:param name="folderId" value="<%= MailUtil.MAIL_INBOX_NAME %>" />
+						</portlet:renderURL>">
+					<span style="font-weight: bold"><%= recipient %></span> - <%= subject %><br />
+				</a>
+				<%
+			}
+			count++;
+		}
+		%>
+		</div>
 
-		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />">
-		<%= LanguageUtil.get(pageContext, "more") %> &raquo;
-		</a>
+		<table border="0" cellpadding="2" cellspacing="2" class="portlet-mail-toolbar font-small" id="portlet-mail-main-toolbar">
+		<tr>
+			<td nowrap="nowrap" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />';">
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/check_mail.gif" /> <%= LanguageUtil.get(pageContext, "check-mail") %>
+			</td>
+			<td nowrap="nowrap" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>';">
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/compose.gif" /> <%= LanguageUtil.get(pageContext, "new") %>
+			</td>
+		</tr>
+		</table>
+			
 	</c:when>
 	<c:otherwise>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/portlet/mail.js" type="text/javascript"></script>
 
 		<style type="text/css">
-
-			<%
-			String mailBgColor = "#F4F5EB";
-			String mailLineColor = "#B3B6B0";
-			%>
 
 			#p_p_body_<%= PortletKeys.MAIL %> {
 				background-color: <%= mailBgColor %>;
@@ -55,22 +111,6 @@
 				position: absolute;
 				background-color: <%= colorScheme.getLayoutTabSelectedText() %>;
 				cursor: pointer;
-			}
-
-			.portlet-mail-toolbar {
-				margin-bottom: 5px;
-			}
-
-			.portlet-mail-toolbar td {
-				background-color: <%= colorScheme.getPortletBg() %>;
-				border: 1px solid <%= mailLineColor %>;
-				cursor: pointer;
-				padding-left: 10px;
-				padding-right: 10px;
-			}
-
-			.portlet-mail-toolbar-underscore {
-				color: <%= colorScheme.getPortletBg() %>;
 			}
 
 			#portlet-mail-folder-pane ul {
@@ -390,13 +430,15 @@
 		<script type="text/javascript">
 
 			<%
+			String messageIdParam = ParamUtil.getString(request, "messageId", null);
+			
 			try {
 				String folderId = MailUtil.getFolderName(request.getSession());
 				long messageId = MailUtil.getMessageId(request.getSession());
 
 				%>
 				Mail.currentFolderId = "<%= folderId %>";
-				Mail.currentMessageId = <%= messageId %>;
+				Mail.currentMessageId = <%= (messageIdParam != null) ? messageIdParam : (messageId + "") %>;
 				<%
 			}
 			catch (Exception e) {
