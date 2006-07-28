@@ -36,6 +36,10 @@ if (mailMessage == null) {
 Address from = mailMessage.getFrom();
 Address[] to = mailMessage.getTo();
 Address[] cc = mailMessage.getCc();
+Address[] bcc = mailMessage.getBcc();
+
+Date date = mailMessage.getSentDate();
+DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 
 List attachments = mailMessage.getRemoteAttachments();
 %>
@@ -73,6 +77,28 @@ List attachments = mailMessage.getRemoteAttachments();
 			</td>
 			<td>
 				<%= Html.escape(InternetAddressUtil.toString(cc), false) %>
+			</td>
+		</tr>
+	</c:if>
+	
+	<c:if test="<%= bcc != null %>">
+		<tr>
+			<td align="right" style="padding-right: 5px;" valign="top">
+				<%= LanguageUtil.get(pageContext, "bcc") %>:&nbsp;
+			</td>
+			<td>
+				<%= Html.escape(InternetAddressUtil.toString(bcc), false) %>
+			</td>
+		</tr>
+	</c:if>
+	
+	<c:if test="<%= date != null %>">
+		<tr>
+			<td align="right" style="padding-right: 5px;" valign="top">
+				<%= LanguageUtil.get(pageContext, "date") %>:&nbsp;
+			</td>
+			<td>
+				<%= dateFormatDateTime.format(date) %>
 			</td>
 		</tr>
 	</c:if>
