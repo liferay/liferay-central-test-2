@@ -22,7 +22,10 @@
 
 package com.liferay.portlet.journal.action;
 
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -31,6 +34,7 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleModifiedDateComparator;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringPool;
 import com.liferay.util.Time;
 import com.liferay.util.dao.DAOParamUtil;
 import com.liferay.util.dao.hibernate.OrderByComparator;
@@ -159,9 +163,23 @@ public class GetArticlesAction extends Action {
 			infoEl.addElement("author-id").addText(
 				String.valueOf(article.getUserId()));
 
-			infoEl.addElement("author-name").addText(
-				PortalUtil.getUserName(
-					article.getUserId(), article.getUserName()));
+			String userName = StringPool.BLANK;
+			String userEmailAddress = StringPool.BLANK;
+
+			User user = null;
+
+			try {
+				user = UserLocalServiceUtil.getUserById(article.getUserId());
+
+				userName = user.getFullName();
+				userEmailAddress = user.getEmailAddress();
+			}
+			catch (NoSuchUserException nsue) {
+			}
+
+			infoEl.addElement("author-name").addText(userName);
+
+			infoEl.addElement("author-email-address").addText(userEmailAddress);
 
 			Document articleDoc = reader.read(
 				new StringReader(article.getContentByLocale(languageId)));
