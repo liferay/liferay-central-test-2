@@ -224,6 +224,8 @@ public class MailUtil {
 			try {
 				MailSessionLock.getInstance().lock(ses.getId());
 
+				String lastFolderName = getFolderName(ses);
+
 				IMAPFolder folder = null;
 
 				if (send) {
@@ -245,6 +247,12 @@ public class MailUtil {
 
 					folder.expunge();
 				}
+
+				// make sure to explicitly close and open the correct folder
+
+				_closeFolder(ses);
+
+				setFolder(ses, lastFolderName);
 			}
 			finally {
 				MailSessionLock.getInstance().unlock(ses.getId());
@@ -384,7 +392,7 @@ public class MailUtil {
 
 			folder.fetch(messages, fetchProfile);
 
-			for (int i = messages.length - 1; i >= 0; i--) {
+			for (int i = 0; i < messages.length; i++) {
 				Message message = messages[i];
 
 				if (message.isExpunged()) {
