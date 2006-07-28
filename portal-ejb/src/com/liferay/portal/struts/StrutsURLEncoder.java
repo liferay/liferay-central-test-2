@@ -138,6 +138,7 @@ public class StrutsURLEncoder implements URLEncoder {
 			String queryString = StringPool.BLANK;
 
 			int pos = strutsAction.indexOf("?");
+
 			if (pos != -1) {
 				strutsAction = path.substring(0, pos);
 				queryString = path.substring(pos + 1, path.length());
@@ -154,9 +155,9 @@ public class StrutsURLEncoder implements URLEncoder {
 				strutsAction = strutsAction.substring(1);
 			}
 			else if (strutsAction.startsWith("/c/")) {
-				strutsAction = strutsAction.substring(2);				
+				strutsAction = strutsAction.substring(2);
 			}
-			
+
 			_portletURL.setParameter("struts_action", strutsAction);
 
 			// Set the query string
