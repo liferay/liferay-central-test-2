@@ -64,6 +64,7 @@ import javax.mail.internet.InternetAddress;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -96,10 +97,6 @@ public class EditMessageAction extends PortletAction {
 		catch (Exception e) {
 			if (e instanceof RecipientException) {
 				SessionErrors.add(req, e.getClass().getName());
-
-				req.setAttribute(
-					WebKeys.MAIL_MESSAGE_ATTACHMENTS, 
-					getRemoteAttachments(req));
 			}
 			else {
 				throw e;
@@ -217,19 +214,24 @@ public class EditMessageAction extends PortletAction {
 				mailMessage.getRemoteAttachments());
 		}
 		else if (cmd.equals(Constants.SEND)) {
+			long draftId = ParamUtil.getLong(req, "draftId");
+
 			String to = ParamUtil.getString(req, "to");
 			String cc = ParamUtil.getString(req, "cc");
 			String bcc = ParamUtil.getString(req, "bcc");
+
+			String[] recipients = new String[] {to, cc, bcc};
+
 			String subject = ParamUtil.getString(req, "subject");
 			String body = ParamUtil.getString(req, "body");
-			long draftId = ParamUtil.getLong(req, "draftId");
-			String[] recipients = new String[] {to, cc, bcc};
 
 			req.setAttribute(
 				WebKeys.MAIL_MESSAGE_DRAFT_ID, new Long(draftId));
 			req.setAttribute(WebKeys.MAIL_MESSAGE_RECIPIENTS, recipients);
 			req.setAttribute(WebKeys.MAIL_MESSAGE_SUBJECT, subject);
 			req.setAttribute(WebKeys.MAIL_MESSAGE_BODY, body);
+			req.setAttribute(
+				WebKeys.MAIL_MESSAGE_ATTACHMENTS, getRemoteAttachments(req));
 		}
 
 		return mapping.findForward("portlet.mail.edit_message");
@@ -242,8 +244,7 @@ public class EditMessageAction extends PortletAction {
 
 		User user = PortalUtil.getUser(req);
 
-		Address from = new InternetAddress(
-			user.getEmailAddress(), user.getFullName());
+		long draftId = ParamUtil.getLong(req, "draftId");
 
 		String to = ParamUtil.getString(req, "to");
 		String cc = ParamUtil.getString(req, "cc");
@@ -253,10 +254,17 @@ public class EditMessageAction extends PortletAction {
 
 		MailMessage mailMessage = new MailMessage();
 
-		mailMessage.setFrom(from);
-		mailMessage.setTo(to);
-		mailMessage.setCc(cc);
-		mailMessage.setBcc(bcc);
+		try {
+			mailMessage.setFrom(new InternetAddress(
+				user.getEmailAddress(), user.getFullName()));
+			mailMessage.setTo(to);
+			mailMessage.setCc(cc);
+			mailMessage.setBcc(bcc);
+		}
+		catch (Exception ex) {
+			throw new RecipientException(ex);
+		}
+		
 		mailMessage.setSubject(subject);
 		mailMessage.setHtmlBody(body);
 
@@ -281,8 +289,6 @@ public class EditMessageAction extends PortletAction {
 		mailMessage.setRemoteAttachments(getRemoteAttachments(req));
 
 		boolean send = cmd.equals(Constants.SEND);
-
-		long draftId = ParamUtil.getLong(req, "draftId");
 
 		ActionRequestImpl actionReqImpl = (ActionRequestImpl)req;
 
@@ -343,7 +349,7 @@ public class EditMessageAction extends PortletAction {
 		return sb.toString();
 	}
 
-	protected List getRemoteAttachments(ActionRequest req)
+	protected List getRemoteAttachments(PortletRequest req)
 		throws Exception {
 
 		List list = new ArrayList();
@@ -377,7 +383,7 @@ public class EditMessageAction extends PortletAction {
 
 		if (Validator.isNotNull(subject)) {
 			while (StringUtil.startsWith(subject, prefix + ":") ||
-				   StringUtil.startsWith(subject, prefix + ">"))	{
+				   StringUtil.startsWith(subject, prefix + ">")) {
 
 				subject = subject.substring(3).trim();
 			}

@@ -27,11 +27,13 @@ import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.mail.InternetAddressUtil;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.mail.Address;
+import javax.mail.internet.AddressException;
 
 /**
  * <a href="MailMessage.java.html"><b><i>View Source</i></b></a>
@@ -61,7 +63,9 @@ public class MailMessage {
 		return _to;
 	}
 
-	public void setTo(String to) throws Exception {
+	public void setTo(String to) 
+		throws AddressException, UnsupportedEncodingException {
+
 		_to = InternetAddressUtil.getAddresses(to);
 	}
 
@@ -77,7 +81,9 @@ public class MailMessage {
 		_cc = cc;
 	}
 
-	public void setCc(String ccs) throws Exception {
+	public void setCc(String ccs)
+		throws AddressException, UnsupportedEncodingException {
+
 		_cc = InternetAddressUtil.getAddresses(ccs);
 	}
 
@@ -89,7 +95,9 @@ public class MailMessage {
 		_bcc = bcc;
 	}
 
-	public void setBcc(String bccs) throws Exception {
+	public void setBcc(String bccs)
+		throws AddressException, UnsupportedEncodingException {
+
 		_bcc = InternetAddressUtil.getAddresses(bccs);
 	}
 
@@ -97,7 +105,9 @@ public class MailMessage {
 		return _replyTo;
 	}
 
-	public void setReplyTo(String replyTos) throws Exception {
+	public void setReplyTo(String replyTos)
+		throws AddressException, UnsupportedEncodingException {
+
 		_replyTo = InternetAddressUtil.getAddresses(replyTos);
 	}
 
