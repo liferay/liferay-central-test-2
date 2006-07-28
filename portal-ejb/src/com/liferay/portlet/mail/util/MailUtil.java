@@ -47,7 +47,8 @@ import com.liferay.util.mail.MailEngine;
 import com.sun.mail.imap.IMAPFolder;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;import java.io.InputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -121,37 +122,15 @@ public class MailUtil {
 		MAIL_TRASH_NAME
 	};
 
-	public static void cleanUp(HttpSession ses) throws StoreException {
-		try {
-			_closeFolder(ses);
-
-			Store store = (Store)ses.getAttribute(WebKeys.MAIL_STORE);
-
-			if (store != null) {
-				store.close();
-
-				ses.removeAttribute(WebKeys.MAIL_STORE);
-			}
-
-			ses.removeAttribute(WebKeys.MAIL_MESSAGE_ID);
-		}
-		catch (MessagingException me) {
-			throw new StoreException(me);
-		}
-	}
-
 	public static void completeMessage(
-			ActionRequest actionReq, MailMessage mailMessage, boolean send,
+			HttpServletRequest req, MailMessage mailMessage, boolean send,
 			long draftId)
 		throws ContentException, ContentPathException, FolderException,
 			   RecipientException, StoreException {
 
+		HttpSession ses = req.getSession();
+
 		try {
-			ActionRequestImpl actionReqImpl = (ActionRequestImpl)actionReq;
-
-			HttpServletRequest req = actionReqImpl.getHttpServletRequest();
-			HttpSession ses = req.getSession();
-
 			if (send && Validator.isNull(mailMessage.getTo()) &&
 				Validator.isNull(mailMessage.getCc()) &&
 				Validator.isNull(mailMessage.getBcc())) {
@@ -241,28 +220,37 @@ public class MailUtil {
 			message.setContent(multipart);
 			message.setSentDate(new Date());
 
-			IMAPFolder folder = null;
-
 			if (send) {
 				Transport.send(message);
-
-				folder = _getFolder(ses, MAIL_SENT_NAME);
-			}
-			else {
-				folder = _getFolder(ses, MAIL_DRAFTS_NAME);
 			}
 
-			folder.appendMessages(new Message[] {message});
+			try {
+				MailSessionLock.getInstance().lock(ses.getId());
 
-			if (draftId > 0) {
-				folder = _getFolder(ses, MAIL_DRAFTS_NAME);
+				IMAPFolder folder = null;
 
-				Message msg = folder.getMessageByUID(draftId);
+				if (send) {
+					folder = _getFolder(ses, MAIL_SENT_NAME);
+				}
+				else {
+					folder = _getFolder(ses, MAIL_DRAFTS_NAME);
+				}
 
-				folder.setFlags(
-					new Message[] {msg}, new Flags(Flags.Flag.DELETED), true);
+				folder.appendMessages(new Message[] {message});
 
-				folder.expunge();
+				if (draftId > 0) {
+					folder = _getFolder(ses, MAIL_DRAFTS_NAME);
+
+					Message msg = folder.getMessageByUID(draftId);
+
+					folder.setFlags(new Message[] {msg},
+						new Flags(Flags.Flag.DELETED), true);
+
+					folder.expunge();
+				}
+			}
+			finally {
+				MailSessionLock.getInstance().unlock(ses.getId());
 			}
 		}
 		catch (Exception e) {
@@ -317,6 +305,8 @@ public class MailUtil {
 		throws FolderException, StoreException {
 
 		try {
+			MailSessionLock.getInstance().lock(ses.getId());
+
 			IMAPFolder folder = _getFolder(ses);
 
 			if (!folder.getName().equals(MAIL_TRASH_NAME)) {
@@ -333,6 +323,9 @@ public class MailUtil {
 		catch (MessagingException me) {
 			throw new FolderException(me);
 		}
+		finally {
+			MailSessionLock.getInstance().unlock(ses.getId());
+		}
 	}
 
 	public static Object[] getAttachment(HttpSession ses, String contentPath)
@@ -342,6 +335,8 @@ public class MailUtil {
 		Object[] parts = null;
 
 		try {
+			MailSessionLock.getInstance().lock(ses.getId());
+
 			String[] path = RemoteMailAttachment.parsePath(contentPath);
 
 			String folderName = path[0];
@@ -363,6 +358,9 @@ public class MailUtil {
 		catch (MessagingException me) {
 			throw new ContentException(me);
 		}
+		finally {
+			MailSessionLock.getInstance().unlock(ses.getId());
+		}
 
 		return parts;
 	}
@@ -370,8 +368,10 @@ public class MailUtil {
 	public static Set getEnvelopes(HttpSession ses, Comparator comparator)
 		throws FolderException {
 
-        try {
-			Set envelopes = new TreeSet(comparator);
+		Set envelopes = new TreeSet(comparator);
+
+		try {
+			MailSessionLock.getInstance().lock(ses.getId());
 
 			IMAPFolder folder = _getFolder(ses);
 
@@ -449,14 +449,24 @@ public class MailUtil {
         catch (MessagingException me) {
         	throw new FolderException(me);
 		}
+        finally {
+			MailSessionLock.getInstance().unlock(ses.getId());
+        }
 	}
 
 	public static String getFolderName(HttpSession ses) 
 		throws FolderException, StoreException {
 
-		IMAPFolder folder = _getFolder(ses);
+		try {
+			MailSessionLock.getInstance().lock(ses.getId());
 
-		return folder.getName();
+			IMAPFolder folder = _getFolder(ses);
+	
+			return folder.getName();
+		}
+		finally {
+			MailSessionLock.getInstance().unlock(ses.getId());
+		}
 	}
 
 	public static List getFolders(HttpSession ses)
@@ -496,16 +506,31 @@ public class MailUtil {
 
 		HttpSession ses = req.getSession();
 
-		return getMessage(req, getMessageId(ses));
+		try {
+			MailSessionLock.getInstance().lock(ses.getId());
+
+			long messageId = getMessageId(ses);
+			if (messageId != -1L) {
+				return getMessage(req, messageId);
+			}
+			else {
+				return null;
+			}
+		}
+		finally {
+			MailSessionLock.getInstance().unlock(ses.getId());
+		}
 	}
 
 	public static MailMessage getMessage(HttpServletRequest req, long messageId)
 		throws ContentException, FolderException, StoreException {
 
-		try {
-			HttpSession ses = req.getSession();
+		HttpSession ses = req.getSession();
 
-			MailMessage mailMessage = new MailMessage();
+		MailMessage mailMessage = new MailMessage();
+
+		try {
+			MailSessionLock.getInstance().lock(ses.getId());
 
 			IMAPFolder folder = _getFolder(ses);
 
@@ -534,14 +559,29 @@ public class MailUtil {
 		catch (MessagingException me) {
 			throw new FolderException(me);
 		}
+		finally {
+			MailSessionLock.getInstance().unlock(ses.getId());
+		}
 	}
 
 	public static long getMessageId(HttpSession ses)
 		throws ContentException, FolderException, StoreException {
 	
-		Long messageId = (Long)ses.getAttribute(WebKeys.MAIL_MESSAGE_ID);
-	
-		return messageId.longValue();
+		try {
+			MailSessionLock.getInstance().lock(ses.getId());
+
+			Long messageId = (Long)ses.getAttribute(WebKeys.MAIL_MESSAGE_ID);
+
+			if (messageId != null) {
+				return messageId.longValue();
+			}
+			else {
+				return -1L;
+			}
+		}
+		finally {
+			MailSessionLock.getInstance().unlock(ses.getId());
+		}
 	}
 
 	public static void moveMessages(
@@ -550,12 +590,14 @@ public class MailUtil {
 
 		IMAPFolder toFolder = null;
 
-		try {
-			if (!toFolderName.equals(MAIL_INBOX_NAME) &&
-				!toFolderName.startsWith(MAIL_BOX_STYLE)) {
+		if (!toFolderName.equals(MAIL_INBOX_NAME) &&
+			!toFolderName.startsWith(MAIL_BOX_STYLE)) {
 
-				toFolderName = MAIL_BOX_STYLE + toFolderName;
-			}
+			toFolderName = MAIL_BOX_STYLE + toFolderName;
+		}
+
+		try {
+			MailSessionLock.getInstance().lock(ses.getId());
 
 			IMAPFolder folder = _getFolder(ses);
 
@@ -595,6 +637,8 @@ public class MailUtil {
 			}
 			catch (Exception e) {
 			}
+
+			MailSessionLock.getInstance().unlock(ses.getId());
 		}
 	}
 
@@ -691,10 +735,17 @@ public class MailUtil {
 
 			oldFolder.renameTo(newFolder);
 
-			Folder curFolder = _getFolder(ses);
+			try {
+				MailSessionLock.getInstance().lock(ses.getId());
 
-			if (curFolder.getName().equals(oldFolderName)) {
-				setFolder(ses, newFolderName);
+				Folder curFolder = _getFolder(ses);
+
+				if (curFolder.getName().equals(oldFolderName)) {
+					setFolder(ses, newFolderName);
+				}
+			}
+			finally {
+				MailSessionLock.getInstance().unlock(ses.getId());
 			}
 		}
 		catch (MessagingException me) {
@@ -705,7 +756,33 @@ public class MailUtil {
 	public static void setFolder(HttpSession ses, String folderName)
 		throws FolderException, StoreException {
 
-		_getFolder(ses, folderName);
+		try {
+			MailSessionLock.getInstance().lock(ses.getId());
+
+			_getFolder(ses, folderName);
+		}
+		finally {
+			MailSessionLock.getInstance().unlock(ses.getId());
+		}
+	}
+
+	protected static void cleanUp(HttpSession ses) throws StoreException {
+		try {
+			_closeFolder(ses);
+
+			Store store = (Store)ses.getAttribute(WebKeys.MAIL_STORE);
+
+			if (store != null) {
+				store.close();
+
+				ses.removeAttribute(WebKeys.MAIL_STORE);
+			}
+
+			ses.removeAttribute(WebKeys.MAIL_MESSAGE_ID);
+		}
+		catch (MessagingException me) {
+			throw new StoreException(me);
+		}
 	}
 
 	private static void _closeFolder(HttpSession ses) {

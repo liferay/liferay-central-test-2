@@ -31,7 +31,7 @@ import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.mail.util.MailUtil;
+import com.liferay.portlet.mail.util.MailSessionLock;
 
 import java.util.Map;
 
@@ -93,7 +93,7 @@ public class PortalSessionListener implements HttpSessionListener {
 
 			// Close mail connections
 
-			MailUtil.cleanUp(ses);
+			MailSessionLock.getInstance().cleanUp(ses);
 
 			// User tracker
 

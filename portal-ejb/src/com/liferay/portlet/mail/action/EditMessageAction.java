@@ -30,6 +30,7 @@ import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.util.DateFormats;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.mail.RecipientException;
 import com.liferay.portlet.mail.model.MailAttachment;
@@ -264,7 +265,10 @@ public class EditMessageAction extends PortletAction {
 
 		long draftId = ParamUtil.getLong(req, "draftId");
 
-		MailUtil.completeMessage(req, mailMessage, send, draftId);
+		ActionRequestImpl actionReqImpl = (ActionRequestImpl)req;
+
+		MailUtil.completeMessage(
+			actionReqImpl.getHttpServletRequest(), mailMessage, send, draftId);
 	}
 
 	protected Map getAttachments(ActionRequest req) throws Exception {

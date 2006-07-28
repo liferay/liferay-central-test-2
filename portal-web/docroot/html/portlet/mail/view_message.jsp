@@ -35,4 +35,6 @@ boolean header = ParamUtil.getBoolean(request, "header");
 	<hr /><br />
 </c:if>
 
-<%= mailMessage.getHtmlBody() %>
+<c:if test="<%= mailMessage != null %>">
+	<%= mailMessage.getHtmlBody() %>
+</c:if>
