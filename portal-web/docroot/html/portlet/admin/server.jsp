@@ -97,7 +97,7 @@
 		<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
 			<br>
 
-			<a href="<%= portletURL.toString() %>"><%= LanguageUtil.get(pageContext, "more-options") %></a> &raquo;
+			<html:link page="/admin/view?windowState=maximized&portletMode=view&actionURL=0"><bean:message key="more-options" /></html:link> &raquo;
 		</c:when>
 		<c:otherwise>
 			<br><div class="beta-separator"></div><br>
