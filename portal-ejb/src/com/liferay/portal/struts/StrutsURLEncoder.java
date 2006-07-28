@@ -149,16 +149,13 @@ public class StrutsURLEncoder implements URLEncoder {
 					_contextPath.length(), strutsAction.length());
 			}
 
-			// Workaround for bug in Struts where it adds the servlet mapping
-			// path to the action path
-
-			if (Validator.isNotNull(_servletMapping) &&
-				strutsAction.startsWith(_servletMapping)) {
-
-				strutsAction = strutsAction.substring(
-					_servletMapping.length() - 1, strutsAction.length());
+			if (strutsAction.startsWith("c/")) {
+				strutsAction = strutsAction.substring(1);
 			}
-
+			else if (strutsAction.startsWith("/c/")) {
+				strutsAction = strutsAction.substring(2);				
+			}
+			
 			_portletURL.setParameter("struts_action", strutsAction);
 
 			// Set the query string
