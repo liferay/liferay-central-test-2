@@ -107,6 +107,7 @@ public class StrutsURLEncoder implements URLEncoder {
 		String encodedURL = path;
 
 		if (path.startsWith("//") ||
+			path.startsWith(_servletMapping) ||
 			path.startsWith(_contextPath + _servletMapping)) {
 
 			// Struts uses &amp; instead of & to delimit parameter key value
