@@ -51,6 +51,7 @@ public class WeatherConverter implements WebCacheable {
 					Http.encodeURL(_zip)));
 
 			int x = text.indexOf("forecast-temperature");
+
 			x = text.indexOf("h3>", x) + 3;
 
 			int y = text.indexOf("&deg;", x);
@@ -60,7 +61,7 @@ public class WeatherConverter implements WebCacheable {
 			x = text.indexOf("background:url(", x);
 			x = text.indexOf("http://", x);
 
-			y = text.indexOf("d.png", x);
+			y = text.indexOf(".png", x) - 1;
 
 			String iconURL = text.substring(x, y) + "s.png";
 

@@ -55,7 +55,7 @@ for (int i = 0; i < zips.length; i++) {
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td align="right">
-				<img src="<%= PortalUtil.createSecureProxyURL(weather.getIconURL(), request.isSecure()) %>">
+				<liferay-ui:png-image image="<%= PortalUtil.createSecureProxyURL(weather.getIconURL(), request.isSecure()) %>" height="34px" width="61px" />
 			</td>
 		</tr>
 

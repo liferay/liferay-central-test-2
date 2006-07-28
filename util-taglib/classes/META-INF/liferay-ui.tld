@@ -253,6 +253,31 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>png-image</name>
+		<tagclass>com.liferay.taglib.ui.PngImageTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>image</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>height</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>input-checkbox</name>
 		<tagclass>com.liferay.taglib.ui.InputCheckBoxTag</tagclass>
 		<bodycontent>JSP</bodycontent>

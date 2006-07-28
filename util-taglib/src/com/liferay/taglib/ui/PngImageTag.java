@@ -20,71 +20,50 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.taglib.ui;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.taglib.util.IncludeTag;
 
-import java.text.DateFormat;
-
-import java.util.Date;
+import javax.servlet.ServletRequest;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="PngImageTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class PngImageTag extends IncludeTag {
 
-	static String name = "Liferay Portal";
+	public int doStartTag() {
+		ServletRequest req = pageContext.getRequest();
 
-	static {
-		if (PropsUtil.get(PropsUtil.PORTAL_RELEASE).equals("enterprise")) {
-			name += " Enterprise";
-		}
-		else {
-			name += " Professional";
-		}
+		req.setAttribute("liferay-ui:png_image:image", _image);
+		req.setAttribute("liferay-ui:png_image:height", _height);
+		req.setAttribute("liferay-ui:png_image:width", _width);
+
+		return EVAL_BODY_BUFFERED;
 	}
 
-	static String version = "4.0.0";
-
-	static String codeName = "Cowper";
-
-	static String build = "3083";
-
-	static String date = "July 28, 2006";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+	public void setImage(String image) {
+		_image = image;
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public void setHeight(String height) {
+		_height = height;
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
+	public void setWidth(String width) {
+		_width = width;
 	}
 
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
+	protected String getDefaultPage() {
+		return _PAGE;
 	}
 
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
+	private static final String _PAGE = "/html/taglib/ui/png_image/page.jsp";
 
-	public static final String getServerInfo() {
-		return serverInfo;
-	}
+	private String _image;
+	private String _height;
+	private String _width;
 
 }
