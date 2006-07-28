@@ -250,8 +250,11 @@ public class MailUtil {
 				MailSessionLock.getInstance().unlock(ses.getId());
 			}
 		}
-		catch (Exception e) {
-			throw new ContentException(e);
+		catch (MessagingException ex) {
+			throw new ContentException(ex);
+		}
+		catch (NamingException ex) {
+			throw new ContentException(ex);
 		}
 	}
 

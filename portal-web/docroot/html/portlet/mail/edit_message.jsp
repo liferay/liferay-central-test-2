@@ -180,7 +180,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
-	<td>
+	<td valign="top">
 		<%= LanguageUtil.get(pageContext, "attachments") %>
 	</td>
 	<td style="padding-left: 10px;"></td>

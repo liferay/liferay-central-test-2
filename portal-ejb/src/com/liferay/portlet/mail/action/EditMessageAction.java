@@ -96,6 +96,10 @@ public class EditMessageAction extends PortletAction {
 		catch (Exception e) {
 			if (e instanceof RecipientException) {
 				SessionErrors.add(req, e.getClass().getName());
+
+				req.setAttribute(
+					WebKeys.MAIL_MESSAGE_ATTACHMENTS, 
+					getRemoteAttachments(req));
 			}
 			else {
 				throw e;
@@ -211,6 +215,21 @@ public class EditMessageAction extends PortletAction {
 			req.setAttribute(
 				WebKeys.MAIL_MESSAGE_ATTACHMENTS,
 				mailMessage.getRemoteAttachments());
+		}
+		else if (cmd.equals(Constants.SEND)) {
+			String to = ParamUtil.getString(req, "to");
+			String cc = ParamUtil.getString(req, "cc");
+			String bcc = ParamUtil.getString(req, "bcc");
+			String subject = ParamUtil.getString(req, "subject");
+			String body = ParamUtil.getString(req, "body");
+			long draftId = ParamUtil.getLong(req, "draftId");
+			String[] recipients = new String[] {to, cc, bcc};
+
+			req.setAttribute(
+				WebKeys.MAIL_MESSAGE_DRAFT_ID, new Long(draftId));
+			req.setAttribute(WebKeys.MAIL_MESSAGE_RECIPIENTS, recipients);
+			req.setAttribute(WebKeys.MAIL_MESSAGE_SUBJECT, subject);
+			req.setAttribute(WebKeys.MAIL_MESSAGE_BODY, body);
 		}
 
 		return mapping.findForward("portlet.mail.edit_message");
