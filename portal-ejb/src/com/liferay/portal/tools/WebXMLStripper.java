@@ -52,8 +52,8 @@ public class WebXMLStripper {
 		try {
 			String content = FileUtil.read(fileName);
 
-			int x = content.indexOf("<ejb-local");
-			int y = content.lastIndexOf("</ejb-local");
+			int x = content.indexOf("<ejb-ref");
+			int y = content.lastIndexOf("</ejb-local-ref");
 
 			if ((x != -1) && (y != -1)) {
 				y = content.indexOf(">", y) + 1;
