@@ -58,6 +58,9 @@ public class JournalStructure extends JournalStructureModel {
 	public static final String RESERVED_ARTICLE_AUTHOR_NAME =
 		"reserved-article-author-name";
 
+	public static final String RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS =
+		"reserved-article-author-email_address";
+
 	public JournalStructure() {
 	}
 

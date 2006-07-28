@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
@@ -95,6 +96,8 @@ public class ViewArticleContentAction extends Action {
 				Date modifiedDate = now;
 				Date displayDate = now;
 
+				User user = PortalUtil.getUser(req);
+
 				String xml = ParamUtil.getString(req, "xml");
 
 				SAXReader reader = new SAXReader();
@@ -139,14 +142,18 @@ public class ViewArticleContentAction extends Action {
 					JournalStructure.RESERVED_ARTICLE_DISPLAY_DATE,
 					displayDate.toString());
 
-				/*JournalUtil.addReservedEl(
+				JournalUtil.addReservedEl(
 					root, tokens, JournalStructure.RESERVED_ARTICLE_AUTHOR_ID,
-					article.getUserId());
+					user.getUserId());
 
 				JournalUtil.addReservedEl(
 					root, tokens, JournalStructure.RESERVED_ARTICLE_AUTHOR_NAME,
-					PortalUtil.getUserName(
-						article.getUserId(), article.getUserName()));*/
+					user.getFullName());
+
+				JournalUtil.addReservedEl(
+					root, tokens,
+					JournalStructure.RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS,
+					user.getEmailAddress());
 
 				xml = JournalUtil.formatXML(doc);
 

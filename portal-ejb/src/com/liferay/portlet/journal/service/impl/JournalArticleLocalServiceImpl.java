@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.counter.service.spring.CounterServiceUtil;
 import com.liferay.mail.service.spring.MailServiceUtil;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.lucene.LuceneFields;
@@ -39,6 +40,7 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.ImageLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
+import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.ArticleContentException;
@@ -542,10 +544,28 @@ public class JournalArticleLocalServiceImpl
 				root, tokens, JournalStructure.RESERVED_ARTICLE_AUTHOR_ID,
 				article.getUserId());
 
+			String userName = StringPool.BLANK;
+			String userEmailAddress = StringPool.BLANK;
+
+			User user = null;
+
+			try {
+				user = UserLocalServiceUtil.getUserById(article.getUserId());
+
+				userName = user.getFullName();
+				userEmailAddress = user.getEmailAddress();
+			}
+			catch (NoSuchUserException nsue) {
+			}
+
 			JournalUtil.addReservedEl(
 				root, tokens, JournalStructure.RESERVED_ARTICLE_AUTHOR_NAME,
-				PortalUtil.getUserName(
-					article.getUserId(), article.getUserName()));
+				userName);
+
+			JournalUtil.addReservedEl(
+				root, tokens,
+				JournalStructure.RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS,
+				userEmailAddress);
 
 			if (article.isTemplateDriven()) {
 				xml = JournalUtil.formatXML(doc);
