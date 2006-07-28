@@ -197,6 +197,7 @@
 		<column name="messageCount" type="int" />
 		<column name="viewCount" type="int" />
 		<column name="lastPostDate" type="Date" />
+		<column name="lastPostBy" type="String" />
 
 		<!-- Order -->
 

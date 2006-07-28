@@ -28,6 +28,7 @@ alter table MBMessage add categoryId VARCHAR(75) null;
 
 alter table MBThread add categoryId VARCHAR(75) null;
 alter table MBThread add viewCount INTEGER;
+alter table MBThread add lastPostBy VARCHAR(75) null;
 
 drop table Properties;
 

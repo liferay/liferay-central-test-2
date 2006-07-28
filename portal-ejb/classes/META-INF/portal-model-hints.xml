@@ -716,6 +716,7 @@
 		<field name="messageCount" type="int" />
 		<field name="viewCount" type="int" />
 		<field name="lastPostDate" type="Date" />
+		<field name="lastPostBy" type="String" />
 	</model>
 	<model name="com.liferay.portlet.polls.model.PollsChoice">
 		<field name="questionId" type="String" />

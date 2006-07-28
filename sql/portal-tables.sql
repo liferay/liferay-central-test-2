@@ -483,7 +483,8 @@ create table MBThread (
 	rootMessageId VARCHAR(75) null,
 	messageCount INTEGER,
 	viewCount INTEGER,
-	lastPostDate DATE null
+	lastPostDate DATE null,
+	lastPostBy VARCHAR(75) null
 );
 
 create table MBTopic (

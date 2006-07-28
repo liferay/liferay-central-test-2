@@ -191,7 +191,7 @@ portletURL.setParameter("categoryId", categoryId);
 			headerNames.add("started-by");
 			headerNames.add("num-of-posts");
 			headerNames.add("num-of-views");
-			headerNames.add("last-post-date");
+			headerNames.add("last-post-info");
 			headerNames.add(StringPool.BLANK);
 
 			searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
@@ -242,13 +242,27 @@ portletURL.setParameter("categoryId", categoryId);
 
 				row.addText(Integer.toString(thread.getViewCount()), rowURL);
 
-				// Last post date
+				// Last post info
 
-				if (thread.getLastPostDate() == null) {
-					row.addText(LanguageUtil.get(pageContext, "never"), rowURL);
+				if ((thread.getLastPostDate() == null) && (Validator.isNull(thread.getLastPostBy()))) {
+					row.addText(LanguageUtil.get(pageContext, "none"), rowURL);
 				}
-				else {
-					row.addText(dateFormatDateTime.format(thread.getLastPostDate()), rowURL);
+				else {					
+					StringBuffer sb = new StringBuffer();
+					sb.append("<span style=\"font-size: xx-small;\">");
+					if (thread.getLastPostDate() != null) {
+						sb.append(LanguageUtil.get(pageContext, "last-post-date") + ": " + dateFormatDateTime.format(thread.getLastPostDate()) + "<br />");
+					}
+
+					sb.append(LanguageUtil.get(pageContext, "last-post-by") + ": ");
+					if (Validator.isNotNull(thread.getLastPostBy())) {
+						sb.append(thread.getLastPostBy());
+					}
+					else {
+						sb.append(LanguageUtil.get(pageContext, "anonymous"));
+					}
+					sb.append("</span>");
+					row.addText(sb.toString(), rowURL);
 				}
 
 				// Action
@@ -313,7 +327,7 @@ portletURL.setParameter("categoryId", categoryId);
 		headerNames.add("started-by");
 		headerNames.add("num-of-posts");
 		headerNames.add("num-of-views");
-		headerNames.add("last-post-date");
+		headerNames.add("last-post-info");
 		headerNames.add(StringPool.BLANK);
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
@@ -364,13 +378,27 @@ portletURL.setParameter("categoryId", categoryId);
 
 			row.addText(Integer.toString(thread.getViewCount()), rowURL);
 
-			// Last post date
+			// Last post info
 
-			if (thread.getLastPostDate() == null) {
-				row.addText(LanguageUtil.get(pageContext, "never"), rowURL);
+			if ((thread.getLastPostDate() == null) && (Validator.isNull(thread.getLastPostBy()))) {
+				row.addText(LanguageUtil.get(pageContext, "none"), rowURL);
 			}
-			else {
-				row.addText(dateFormatDateTime.format(thread.getLastPostDate()), rowURL);
+			else {					
+				StringBuffer sb = new StringBuffer();
+				sb.append("<span style=\"font-size: xx-small;\">");
+				if (thread.getLastPostDate() != null) {
+					sb.append(LanguageUtil.get(pageContext, "last-post-date") + ": " + dateFormatDateTime.format(thread.getLastPostDate()) + "<br />");
+				}
+
+				sb.append(LanguageUtil.get(pageContext, "last-post-by") + ": ");
+				if (Validator.isNotNull(thread.getLastPostBy())) {
+					sb.append(thread.getLastPostBy());
+				}
+				else {
+					sb.append(LanguageUtil.get(pageContext, "anonymous"));
+				}
+				sb.append("</span>");
+				row.addText(sb.toString(), rowURL);
 			}
 
 			// Action
