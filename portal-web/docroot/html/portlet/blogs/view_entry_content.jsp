@@ -36,13 +36,13 @@
 
 <tr>
 	<td>
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="entryURL">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewEntryURL">
 			<portlet:param name="struts_action" value="/blogs/view_entry" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="entryId" value="<%= entry.getEntryId() %>" />
 		</portlet:renderURL>
 
-		<span style="font-size: small;"><b><a href="<%= entryURL %>"><%= entry.getTitle() %></a></b></span><br>
+		<span style="font-size: small;"><b><a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a></b></span><br>
 		<span style="font-size: x-small;"><%= LanguageUtil.get(pageContext, "by") %> <%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %>, <%= LanguageUtil.get(pageContext, "on") %> <%= dateFormatDateTime.format(entry.getDisplayDate()) %></span>
 	</td>
 </tr>
@@ -54,13 +54,13 @@
 <tr>
 	<td>
 		<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
-			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="entryURL">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editEntryURL">
 				<portlet:param name="struts_action" value="/blogs/edit_entry" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="entryId" value="<%= entry.getEntryId() %>" />
 			</portlet:renderURL>
 
-			<liferay-ui:icon image="edit" url="<%= entryURL %>" />
+			<liferay-ui:icon image="edit" url="<%= editEntryURL %>" />
 		</c:if>
 
 		<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.PERMISSIONS) %>">
@@ -68,21 +68,21 @@
 				modelResource="<%= BlogsEntry.class.getName() %>"
 				modelResourceDescription="<%= entry.getTitle() %>"
 				resourcePrimKey="<%= entry.getPrimaryKey().toString() %>"
-				var="entryURL"
+				var="permissionsEntryURL"
 			/>
 
-			<liferay-ui:icon image="permissions" url="<%= entryURL %>" />
+			<liferay-ui:icon image="permissions" url="<%= permissionsEntryURL %>" />
 		</c:if>
 
 		<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
-			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="entryURL">
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteEntryURL">
 				<portlet:param name="struts_action" value="/blogs/edit_entry" />
 				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="entryId" value="<%= entry.getEntryId() %>" />
 			</portlet:actionURL>
 
-			<liferay-ui:icon-delete url="<%= entryURL %>" />
+			<liferay-ui:icon-delete url="<%= deleteEntryURL %>" />
 		</c:if>
 	</td>
 </tr>
