@@ -56,8 +56,8 @@ public class MBThreadModel extends BaseModel {
 	public static boolean XSS_ALLOW_ROOTMESSAGEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBThread.rootMessageId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LASTPOSTBY = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBThread.lastPostBy"),
+	public static boolean XSS_ALLOW_LASTPOSTBYUSERID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.messageboards.model.MBThread.lastPostByUserId"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBThreadModel"));
@@ -161,6 +161,23 @@ public class MBThreadModel extends BaseModel {
 		}
 	}
 
+	public String getLastPostByUserId() {
+		return GetterUtil.getString(_lastPostByUserId);
+	}
+
+	public void setLastPostByUserId(String lastPostByUserId) {
+		if (((lastPostByUserId == null) && (_lastPostByUserId != null)) ||
+				((lastPostByUserId != null) && (_lastPostByUserId == null)) ||
+				((lastPostByUserId != null) && (_lastPostByUserId != null) &&
+				!lastPostByUserId.equals(_lastPostByUserId))) {
+			if (!XSS_ALLOW_LASTPOSTBYUSERID) {
+				lastPostByUserId = XSSUtil.strip(lastPostByUserId);
+			}
+
+			_lastPostByUserId = lastPostByUserId;
+		}
+	}
+
 	public Date getLastPostDate() {
 		return _lastPostDate;
 	}
@@ -174,23 +191,6 @@ public class MBThreadModel extends BaseModel {
 		}
 	}
 
-	public String getLastPostBy() {
-		return GetterUtil.getString(_lastPostBy);
-	}
-
-	public void setLastPostBy(String lastPostBy) {
-		if (((lastPostBy == null) && (_lastPostBy != null)) ||
-				((lastPostBy != null) && (_lastPostBy == null)) ||
-				((lastPostBy != null) && (_lastPostBy != null) &&
-				!lastPostBy.equals(_lastPostBy))) {
-			if (!XSS_ALLOW_LASTPOSTBY) {
-				lastPostBy = XSSUtil.strip(lastPostBy);
-			}
-
-			_lastPostBy = lastPostBy;
-		}
-	}
-
 	public Object clone() {
 		MBThread clone = new MBThread();
 		clone.setThreadId(getThreadId());
@@ -199,8 +199,8 @@ public class MBThreadModel extends BaseModel {
 		clone.setRootMessageId(getRootMessageId());
 		clone.setMessageCount(getMessageCount());
 		clone.setViewCount(getViewCount());
+		clone.setLastPostByUserId(getLastPostByUserId());
 		clone.setLastPostDate(getLastPostDate());
-		clone.setLastPostBy(getLastPostBy());
 
 		return clone;
 	}
@@ -256,6 +256,6 @@ public class MBThreadModel extends BaseModel {
 	private String _rootMessageId;
 	private int _messageCount;
 	private int _viewCount;
+	private String _lastPostByUserId;
 	private Date _lastPostDate;
-	private String _lastPostBy;
 }

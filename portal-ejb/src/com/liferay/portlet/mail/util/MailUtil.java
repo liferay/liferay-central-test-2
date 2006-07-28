@@ -462,14 +462,14 @@ public class MailUtil {
         }
 	}
 
-	public static String getFolderName(HttpSession ses) 
+	public static String getFolderName(HttpSession ses)
 		throws FolderException, StoreException {
 
 		try {
 			MailSessionLock.getInstance().lock(ses.getId());
 
 			IMAPFolder folder = _getFolder(ses);
-	
+
 			return folder.getName();
 		}
 		finally {
@@ -574,7 +574,7 @@ public class MailUtil {
 
 	public static long getMessageId(HttpSession ses)
 		throws ContentException, FolderException, StoreException {
-	
+
 		try {
 			MailSessionLock.getInstance().lock(ses.getId());
 
@@ -907,9 +907,9 @@ public class MailUtil {
 
 	private static IMAPFolder _getFolder(HttpSession ses)
 		throws FolderException {
-	
+
 		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER);
-	
+
 		if (folder != null) {
 			return folder;
 		}
@@ -920,14 +920,14 @@ public class MailUtil {
 
 	private static IMAPFolder _getFolder(HttpSession ses, String folderName)
 		throws FolderException, StoreException {
-	
+
 		try {
 			if (Validator.isNull(folderName)) {
 				folderName = MAIL_INBOX_NAME;
 			}
 			else if (!folderName.equals(MAIL_INBOX_NAME) &&
 					 !folderName.startsWith(MAIL_BOX_STYLE)) {
-	
+
 				folderName = MAIL_BOX_STYLE + folderName;
 			}
 
@@ -937,20 +937,20 @@ public class MailUtil {
 			if (folder != null) {
 				if (!folder.getName().equals(folderName)) {
 					_closeFolder(ses);
-	
+
 					folder = null;
 				}
 			}
 
 			if (folder == null) {
 				Store store = _getStore(ses);
-	
+
 				folder = (IMAPFolder)store.getFolder(folderName);
-	
+
 				folder.open(IMAPFolder.READ_WRITE);
-	
+
 				ses.setAttribute(WebKeys.MAIL_FOLDER, folder);
-	
+
 				ses.removeAttribute(WebKeys.MAIL_MESSAGE_ID);
 			}
 

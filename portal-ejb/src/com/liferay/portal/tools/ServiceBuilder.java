@@ -1050,7 +1050,7 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _createEJBXMLSession(Entity entity, List referenceList, StringBuffer sb, int sessionType) {
+	private void _createEJBXMLSession(Entity entity, List referenceList, StringBuffer sb, int sessionType) throws IOException {
 		sb.append("\t\t<session>\n");
 		sb.append("\t\t\t<display-name>" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB</display-name>\n");
 		sb.append("\t\t\t<ejb-name>" + StringUtil.replace(_packagePath + ".service.ejb.", ".", "_") + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB</ejb-name>\n");
@@ -1059,6 +1059,26 @@ public class ServiceBuilder {
 		sb.append("\t\t\t<ejb-class>" + _packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJBImpl</ejb-class>\n");
 		sb.append("\t\t\t<session-type>Stateless</session-type>\n");
 		sb.append("\t\t\t<transaction-type>Bean</transaction-type>\n");
+
+		File manualFile = new File("../portal-ejb/classes/META-INF/ejb-jar-ref.xml");
+
+		if (!manualFile.exists()) {
+			manualFile = new File("../ext-ejb/classes/META-INF/ejb-jar-ref.xml");
+		}
+
+		if (manualFile.exists()) {
+			String content = FileUtil.read(manualFile);
+
+			int x = content.indexOf("<ejb-ref>");
+			int y = content.lastIndexOf("</ejb-ref>") + 11;
+
+			if (x != -1) {
+				content = content.substring(x - 1, y);
+				content = StringUtil.replace(content, "\t<", "\t\t\t<");
+
+				sb.append(content);
+			}
+		}
 
 		for (int j = 0; j < referenceList.size(); j++) {
 			Object reference = referenceList.get(j);
@@ -1095,6 +1115,17 @@ public class ServiceBuilder {
 			}
 		}
 
+		sb.append("\t\t\t<resource-ref>\n");
+		sb.append("\t\t\t\t<res-ref-name>jdbc/LiferayPool</res-ref-name>\n");
+		sb.append("\t\t\t\t<res-type>javax.sql.DataSource</res-type>\n");
+		sb.append("\t\t\t\t<res-auth>Container</res-auth>\n");
+		sb.append("\t\t\t\t<res-sharing-scope>Shareable</res-sharing-scope>\n");
+		sb.append("\t\t\t</resource-ref>\n");
+		sb.append("\t\t\t<resource-ref>\n");
+		sb.append("\t\t\t\t<res-ref-name>mail/MailSession</res-ref-name>\n");
+		sb.append("\t\t\t\t<res-type>javax.mail.Session</res-type>\n");
+		sb.append("\t\t\t\t<res-auth>Container</res-auth>\n");
+		sb.append("\t\t\t</resource-ref>\n");
 		sb.append("\t\t</session>\n");
 	}
 

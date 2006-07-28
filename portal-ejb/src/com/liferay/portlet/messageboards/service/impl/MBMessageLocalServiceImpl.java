@@ -210,13 +210,15 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		}
 
 		thread.setMessageCount(thread.getMessageCount() + 1);
-		thread.setLastPostDate(now);
+
 		if (anonymous) {
-			thread.setLastPostBy(null);
+			thread.setLastPostByUserId(null);
 		}
 		else {
-			thread.setLastPostBy(userId);
+			thread.setLastPostByUserId(userId);
 		}
+
+		thread.setLastPostDate(now);
 
 		start = logAddMessage(messageId, start, 2);
 
@@ -888,13 +890,14 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		MBThread thread = MBThreadUtil.findByPrimaryKey(message.getThreadId());
 
-		thread.setLastPostDate(modifiedDate);
 		if (message.isAnonymous()) {
-			thread.setLastPostBy(null);			
+			thread.setLastPostByUserId(null);
 		}
 		else {
-			thread.setLastPostBy(message.getUserId());
+			thread.setLastPostByUserId(message.getUserId());
 		}
+
+		thread.setLastPostDate(modifiedDate);
 
 		MBThreadUtil.update(thread);
 

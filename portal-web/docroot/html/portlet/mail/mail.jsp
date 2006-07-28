@@ -304,7 +304,7 @@
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
 						<td class="portlet-mail-msgs-pane-td" width="100%">
-						
+
 							<table border="0" cellpadding="0" cellspacing="0" width="100%">
 							<tr>
 								<td class="portlet-mail-msgs-title">
@@ -393,7 +393,7 @@
 			try {
 				String folderId = MailUtil.getFolderName(request.getSession());
 				long messageId = MailUtil.getMessageId(request.getSession());
-			
+
 				%>
 				Mail.currentFolderId = "<%= folderId %>";
 				Mail.currentMessageId = <%= messageId %>;

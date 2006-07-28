@@ -58,7 +58,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.mail.Address;
 import javax.mail.internet.InternetAddress;
 
 import javax.portlet.ActionRequest;
@@ -264,7 +263,7 @@ public class EditMessageAction extends PortletAction {
 		catch (Exception ex) {
 			throw new RecipientException(ex);
 		}
-		
+
 		mailMessage.setSubject(subject);
 		mailMessage.setHtmlBody(body);
 

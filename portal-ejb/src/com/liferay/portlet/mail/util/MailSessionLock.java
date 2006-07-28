@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portlet.mail.util;
 
 import java.util.HashMap;
@@ -34,6 +35,10 @@ import javax.servlet.http.HttpSession;
  */
 public class MailSessionLock {
 
+	public static MailSessionLock getInstance() {
+		return _lock;
+	}
+
 	public void lock(String sessionId) {
 		ThreadLocal tl = null;
 
@@ -43,50 +48,50 @@ public class MailSessionLock {
 
 				if (tl == null) {
 					// Initialize reentrant counter.
-	
+
 					tl = new ThreadLocal();
-	
+
 					tl.set(new Long(0));
-	
+
 					_sessionMap.put(sessionId, tl);
-	
+
 					break;
 				}
 				else if (tl.get() != null) {
 					// This thread instantiated the thread local.  Increment the
 					// reentrant counter.
-	
+
 					Long count = (Long)tl.get();
-	
+
 					tl.set(new Long(count.longValue() + 1L));
-	
-					break;	
+
+					break;
 				}
 			}
 
 			// Another thread instantiated the thread local.  Wait until that
 			// thread is done.
 
-			try {	
+			try {
 				wait(100);
 			}
 			catch (Exception ex) {
 			}
 		}
 	}
-	
+
 	public void unlock(String sessionId) {
 		ThreadLocal tl = null;
 
 		synchronized (_sessionMap) {
 			tl = (ThreadLocal)_sessionMap.get(sessionId);
-		
-			// The variable can be null at this time if (1) a method called 
+
+			// The variable can be null at this time if (1) a method called
 			// unlock() twice or (2) cleanUp() was called.
 
 			if (tl != null) {
 				Long count = (Long)tl.get();
-				
+
 				if (count.longValue() == 0L) {
 					// All reentrant calls have completed
 
@@ -94,15 +99,15 @@ public class MailSessionLock {
 				}
 				else {
 					// Finished one of the reentrant calls
-					
+
 					count = new Long(count.longValue() - 1L);
-		
+
 					tl.set(count);
 				}
 			}
 		}
 	}
-	
+
 	public void cleanUp(HttpSession ses) {
 		try {
 			MailUtil.cleanUp(ses);
@@ -114,16 +119,12 @@ public class MailSessionLock {
 			_sessionMap.remove(ses.getId());
 		}
 	}
-	
+
 	private MailSessionLock() {
 	}
 
-	public static MailSessionLock getInstance() {
-		return _lock;
-	}
+	private static MailSessionLock _lock = new MailSessionLock();
 
 	private Map _sessionMap = new HashMap();
-
-	private static MailSessionLock _lock = new MailSessionLock();
 
 }

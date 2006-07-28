@@ -544,7 +544,49 @@ public class EJBXMLBuilder {
 
 		Document doc = reader.read(new File("classes/META-INF/ejb-jar.xml"));
 
+		// ejb-ref
+
 		Iterator itr = doc.getRootElement().element("enterprise-beans").elements("session").iterator();
+
+		while (itr.hasNext()) {
+			Element entity = (Element)itr.next();
+
+			String displayName = entity.elementText("display-name");
+
+			if (!displayName.endsWith("LocalServiceEJB")) {
+				sb.append("\t<ejb-ref>\n");
+				sb.append("\t\t<ejb-ref-name>").append(entity.elementText("ejb-name")).append("</ejb-ref-name>\n");
+				sb.append("\t\t<ejb-ref-type>Session</ejb-ref-type>\n");
+				sb.append("\t\t<home>").append(entity.elementText("home")).append("</home>\n");
+				sb.append("\t\t<remote>").append(entity.elementText("remote")).append("</remote>\n");
+				sb.append("\t\t<ejb-link>").append(entity.elementText("ejb-name")).append("</ejb-link>\n");
+				sb.append("\t</ejb-ref>\n");
+			}
+		}
+
+		// web-ejb-ref.xml
+
+		File manualFile = new File(
+			"../portal-web/docroot/WEB-INF/web-ejb-ref.xml");
+
+		if (!manualFile.exists()) {
+			manualFile = new File("../ext-web/docroot/WEB-INF/web-ejb-ref.xml");
+		}
+
+		if (manualFile.exists()) {
+			String content = FileUtil.read(manualFile);
+
+			int x = content.indexOf("<ejb-ref>");
+			int y = content.lastIndexOf("</ejb-ref>") + 11;
+
+			if (x != -1) {
+				sb.append(content.substring(x - 1, y));
+			}
+		}
+
+		// ejb-local-ref
+
+		itr = doc.getRootElement().element("enterprise-beans").elements("session").iterator();
 
 		while (itr.hasNext()) {
 			Element entity = (Element)itr.next();
@@ -564,8 +606,9 @@ public class EJBXMLBuilder {
 
 		// web-ejb-local-ref.xml
 
-		File manualFile = new File(
+		manualFile = new File(
 			"../portal-web/docroot/WEB-INF/web-ejb-local-ref.xml");
+
 		if (!manualFile.exists()) {
 			manualFile = new File(
 				"../ext-web/docroot/WEB-INF/web-ejb-local-ref.xml");
@@ -585,6 +628,7 @@ public class EJBXMLBuilder {
 		// web.xml
 
 		File outputFile = new File("../portal-web/docroot/WEB-INF/web.xml");
+
 		if (!outputFile.exists()) {
 			outputFile = new File("../ext-web/docroot/WEB-INF/web.xml");
 		}
@@ -592,7 +636,7 @@ public class EJBXMLBuilder {
 		String content = FileUtil.read(outputFile);
 		String newContent = content;
 
-		int x = content.indexOf("<ejb-local-ref>");
+		int x = content.indexOf("<ejb-ref>");
 		int y = content.lastIndexOf("</ejb-local-ref>") + 17;
 
 		if (x != -1) {

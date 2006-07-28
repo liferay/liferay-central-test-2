@@ -28,6 +28,7 @@ import com.liferay.util.Validator;
 import com.liferay.util.mail.InternetAddressUtil;
 
 import java.io.UnsupportedEncodingException;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -63,7 +64,7 @@ public class MailMessage {
 		return _to;
 	}
 
-	public void setTo(String to) 
+	public void setTo(String to)
 		throws AddressException, UnsupportedEncodingException {
 
 		_to = InternetAddressUtil.getAddresses(to);

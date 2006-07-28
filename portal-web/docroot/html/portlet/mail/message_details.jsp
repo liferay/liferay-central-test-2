@@ -80,7 +80,7 @@ List attachments = mailMessage.getRemoteAttachments();
 			</td>
 		</tr>
 	</c:if>
-	
+
 	<c:if test="<%= bcc != null %>">
 		<tr>
 			<td align="right" style="padding-right: 5px;" valign="top">
@@ -91,7 +91,7 @@ List attachments = mailMessage.getRemoteAttachments();
 			</td>
 		</tr>
 	</c:if>
-	
+
 	<c:if test="<%= date != null %>">
 		<tr>
 			<td align="right" style="padding-right: 5px;" valign="top">

@@ -15,7 +15,7 @@
 			webxml="docroot/WEB-INF/web.xml"
 		>
 			<manifest>
-				<attribute name="Class-Path" value="${classpath.manifest}" />
+				<attribute name="Class-Path" value="counter-ejb.jar documentlibrary-ejb.jar lock-ejb.jar mail-ejb.jar portal-ejb.jar ${classpath.manifest}" />
 			</manifest>
 		</war>
 	</target>

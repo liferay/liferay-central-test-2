@@ -58,10 +58,72 @@ public class EARXMLBuilder {
 
 	public EARXMLBuilder() {
 		try {
+			_buildGeronimoXML();
 			_buildPramatiXML();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	private void _buildGeronimoXML() throws Exception {
+		StringBuffer sb = new StringBuffer();
+
+		SAXReader reader = new SAXReader();
+
+		reader.setEntityResolver(new EntityResolver());
+
+		Document doc = reader.read(new File("classes/META-INF/ejb-jar.xml"));
+
+		Iterator itr = doc.getRootElement().element("enterprise-beans").elements("session").iterator();
+
+		while (itr.hasNext()) {
+			Element entity = (Element)itr.next();
+
+			String displayName = entity.elementText("display-name");
+
+			sb.append("\t\t\t\t<session>\n");
+			sb.append("\t\t\t\t\t<ejb-name>").append(entity.elementText("ejb-name")).append("</ejb-name>\n");
+
+			if (displayName.endsWith("LocalServiceEJB")) {
+				sb.append("\t\t\t\t\t<jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</jndi-name>\n");
+			}
+			else {
+				sb.append("\t\t\t\t\t<jndi-name>").append(entity.elementText("ejb-name")).append("</jndi-name>\n");
+			}
+
+			sb.append("\t\t\t\t\t<resource-ref>\n");
+			sb.append("\t\t\t\t\t\t<ref-name>jdbc/LiferayPool</ref-name>\n");
+			sb.append("\t\t\t\t\t\t<resource-link>LiferayPool</resource-link>\n");
+			sb.append("\t\t\t\t\t</resource-ref>\n");
+			sb.append("\t\t\t\t\t<resource-ref>\n");
+			sb.append("\t\t\t\t\t\t<ref-name>mail/MailSession</ref-name>\n");
+			sb.append("\t\t\t\t\t\t<resource-link>LiferayMailSession</resource-link>\n");
+			sb.append("\t\t\t\t\t</resource-ref>\n");
+			sb.append("\t\t\t\t</session>\n");
+		}
+
+		// geronimo-application.xml
+
+		File outputFile = new File("../portal-ear/modules/META-INF/geronimo-application.xml");
+
+		String content = FileUtil.read(outputFile);
+		String newContent = content;
+
+		int x = content.indexOf("portal-ejb.jar");
+
+		x = content.indexOf("<enterprise-beans>", x) + 20;
+
+		int y = content.indexOf("</enterprise-beans>", x) - 3;
+
+		newContent =
+			content.substring(0, x - 1) + sb.toString() +
+				content.substring(y, content.length());
+
+		if (!content.equals(newContent)) {
+			FileUtil.write(outputFile, newContent);
+
+			System.out.println(outputFile.toString());
 		}
 	}
 

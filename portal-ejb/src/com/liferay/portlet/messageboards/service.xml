@@ -196,8 +196,8 @@
 		<column name="rootMessageId" type="String" />
 		<column name="messageCount" type="int" />
 		<column name="viewCount" type="int" />
+		<column name="lastPostByUserId" type="String" />
 		<column name="lastPostDate" type="Date" />
-		<column name="lastPostBy" type="String" />
 
 		<!-- Order -->
 
