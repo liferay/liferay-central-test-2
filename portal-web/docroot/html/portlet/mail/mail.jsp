@@ -183,7 +183,7 @@
 
 			#portlet-mail-msgs-title-received {
 				overflow: hidden;
-				width: 200px;
+				width: 100%;
 			}
 
 			#portlet-mail-msgs-title-received div {
@@ -230,7 +230,7 @@
 
 			#portlet-mail-msgs-received {
 				overflow: hidden;
-				width: 200px;
+				width: 100%;
 			}
 
 			#portlet-mail-msgs-received div {
@@ -305,7 +305,7 @@
 					<tr>
 						<td class="portlet-mail-msgs-pane-td" width="100%">
 						
-							<table border="0" cellpadding="0" cellspacing="0">
+							<table border="0" cellpadding="0" cellspacing="0" width="100%">
 							<tr>
 								<td class="portlet-mail-msgs-title">
 									<div id="portlet-mail-msgs-title-from">
@@ -327,7 +327,7 @@
 								<td id="portlet-mail-msgs-subject-handle" style="cursor: e-resize;">
 									<div class="portlet-mail-msgs-title-handle"></div>
 								</td>
-								<td class="portlet-mail-msgs-title">
+								<td class="portlet-mail-msgs-title" width="90%">
 									<div id="portlet-mail-msgs-title-received">
 										<div class="portlet-mail-title-text">
 											<span><%= LanguageUtil.get(pageContext, "date") %></span>
@@ -338,7 +338,7 @@
 							</table>
 
 							<div id="portlet-mail-msgs-preview-pane">
-								<table border="0" cellpadding="0" cellspacing="0">
+								<table border="0" cellpadding="0" cellspacing="0" width="100%">
 								<tr>
 									<td>
 										<div id="portlet-mail-msgs-from">
@@ -354,7 +354,7 @@
 									<td>
 										<div class="portlet-mail-msgs-title-handle"></div>
 									</td>
-									<td>
+									<td width="90%">
 										<div id="portlet-mail-msgs-received">
 										</div>
 									</td>
