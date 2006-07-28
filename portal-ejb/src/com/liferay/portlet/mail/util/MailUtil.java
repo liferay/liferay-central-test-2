@@ -26,7 +26,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.mail.ContentException;
 import com.liferay.portlet.mail.ContentPathException;
 import com.liferay.portlet.mail.FolderException;
@@ -82,8 +81,6 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
 import javax.naming.NamingException;
-
-import javax.portlet.ActionRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
