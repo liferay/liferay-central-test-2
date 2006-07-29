@@ -252,9 +252,11 @@ String mailLineColor = "#B3B6B0";
 			}
 
 			#portlet-mail-msgs-from div {
+				height: 16px;
+				overflow: hidden;
 				padding-left: 5px;
-				width: 800px;
 				position: relative;
+				width: 800px;
 			}
 
 			#portlet-mail-msgs-subject {
@@ -263,9 +265,11 @@ String mailLineColor = "#B3B6B0";
 			}
 
 			#portlet-mail-msgs-subject div {
+				height: 16px;
+				overflow: hidden;
 				padding-left: 5px;
-				width: 800px;
 				position: relative;
+				width: 800px;
 			}
 
 			#portlet-mail-msgs-received {
@@ -274,9 +278,11 @@ String mailLineColor = "#B3B6B0";
 			}
 
 			#portlet-mail-msgs-received div {
+				height: 16px;
+				overflow: hidden;
 				padding-left: 5px;
-				width: 800px;
 				position: relative;
+				width: 800px;
 			}
 		</style>
 
