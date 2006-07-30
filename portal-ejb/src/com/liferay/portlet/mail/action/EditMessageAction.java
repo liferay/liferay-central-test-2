@@ -63,6 +63,7 @@ import javax.mail.internet.InternetAddress;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -117,6 +118,12 @@ public class EditMessageAction extends PortletAction {
 
 		String folderId = ParamUtil.getString(req, "folderId");
 		long messageId = ParamUtil.getLong(req, "messageId");
+
+		String signature =
+			req.getPreferences().getValue("signature", StringPool.BLANK);
+		if (Validator.isNotNull(signature)) {
+			signature = "<br />--<br />" + signature;
+		}
 
 		if (cmd.equals("forward") || cmd.startsWith("reply")) {
 			MailUtil.setFolder(httpSes, folderId);
@@ -185,7 +192,8 @@ public class EditMessageAction extends PortletAction {
 			}
 
 			req.setAttribute(
-				WebKeys.MAIL_MESSAGE_BODY, getBody(req, mailMessage));
+				WebKeys.MAIL_MESSAGE_BODY,
+				getBody(req, mailMessage) + signature);
 		}
 		else if (cmd.equals(Constants.EDIT)) {
 			MailUtil.setFolder(httpSes, folderId);
@@ -231,6 +239,9 @@ public class EditMessageAction extends PortletAction {
 			req.setAttribute(WebKeys.MAIL_MESSAGE_BODY, body);
 			req.setAttribute(
 				WebKeys.MAIL_MESSAGE_ATTACHMENTS, getRemoteAttachments(req));
+		}
+		else {
+			req.setAttribute(WebKeys.MAIL_MESSAGE_BODY, signature);
 		}
 
 		return mapping.findForward("portlet.mail.edit_message");
