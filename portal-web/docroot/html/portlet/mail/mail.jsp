@@ -83,7 +83,7 @@ String mailLineColor = "#B3B6B0";
 			if (mailEnvelope.isRecent()) {
 		%>
 
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="messageId" value="<%= mailEnvelope.getMessageId() %>" /><portlet:param name="folderId" value="<%= MailUtil.MAIL_INBOX_NAME %>" /></portlet:renderURL>">
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="messageId" value="<%= String.valueOf(mailEnvelope.getMessageId()) %>" /><portlet:param name="folderId" value="<%= MailUtil.MAIL_INBOX_NAME %>" /></portlet:renderURL>">
 				<span style="font-weight: bold"><%= recipient %></span> - <%= subject %><br />
 				</a>
 
