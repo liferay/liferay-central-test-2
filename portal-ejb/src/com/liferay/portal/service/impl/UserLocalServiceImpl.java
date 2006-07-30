@@ -713,7 +713,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 			String subject = PrefsPropsUtil.getString(
 				companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT);
-			String body = PrefsPropsUtil.getString(
+			String body = PrefsPropsUtil.getContent(
 				companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_BODY);
 
 			subject = StringUtil.replace(
@@ -1206,7 +1206,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 			String subject = PrefsPropsUtil.getString(
 				companyId, PropsUtil.ADMIN_EMAIL_USER_ADDED_SUBJECT);
-			String body = PrefsPropsUtil.getString(
+			String body = PrefsPropsUtil.getContent(
 				companyId, PropsUtil.ADMIN_EMAIL_USER_ADDED_BODY);
 
 			subject = StringUtil.replace(
