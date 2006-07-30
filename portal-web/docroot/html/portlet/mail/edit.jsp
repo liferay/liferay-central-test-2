@@ -90,7 +90,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<textarea class="form-text" name="<portlet:namespace />vacationMessage" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= vacationMessage %></textarea>
 	</c:when>
-<c:choose>
+</c:choose>
 
 <br><br>
 
