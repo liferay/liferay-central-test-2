@@ -62,7 +62,7 @@ String mailLineColor = "#B3B6B0";
 		MailFolder folder = MailUtil.getFolder(request.getSession());
 		%>
 
-		<%= LanguageUtil.get(pageContext, "unread-messages") %>: <%= folder.getNewMessageCount() %>
+		<%= LanguageUtil.get(pageContext, "unread-messages") %>: <%= folder.getUnreadMessageCount() %>
 
 		<br><br>
 
@@ -82,7 +82,7 @@ String mailLineColor = "#B3B6B0";
 			String subject = GetterUtil.getString(
 				mailEnvelope.getSubject(), StringPool.NBSP);
 
-			if (mailEnvelope.isRecent()) {
+			if (!mailEnvelope.isRead()) {
 		%>
 
 				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="messageId" value="<%= String.valueOf(mailEnvelope.getMessageId()) %>" /><portlet:param name="folderId" value="<%= MailUtil.MAIL_INBOX_NAME %>" /></portlet:renderURL>">
@@ -90,9 +90,8 @@ String mailLineColor = "#B3B6B0";
 				</a>
 
 		<%
+				count++;
 			}
-
-			count++;
 		}
 		%>
 

@@ -64,12 +64,12 @@ public class MailEnvelope {
 		_date = date;
 	}
 
-	public boolean isRecent() {
-		return _recent;
+	public boolean isRead() {
+		return _read;
 	}
 
-	public void setRecent(boolean recent) {
-		_recent = recent;
+	public void setRead(boolean read) {
+		_read = read;
 	}
 
 	public boolean isFlagged() {
@@ -92,7 +92,7 @@ public class MailEnvelope {
 	private String _recipient;
 	private String _subject;
 	private Date _date;
-	private boolean _recent;
+	private boolean _read;
 	private boolean _flagged;
 	private boolean _answered;
 

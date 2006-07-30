@@ -230,6 +230,8 @@ public class MailUtil {
 
 				if (send) {
 					folder = _getFolder(ses, MAIL_SENT_NAME);
+
+					message.setFlag(Flag.SEEN, true);
 				}
 				else {
 					folder = _getFolder(ses, MAIL_DRAFTS_NAME);
@@ -445,7 +447,7 @@ public class MailUtil {
 
 				mailEnvelope.setSubject(message.getSubject());
 				mailEnvelope.setDate(message.getSentDate());
-				mailEnvelope.setRecent(message.isSet(Flag.RECENT));
+				mailEnvelope.setRead(message.isSet(Flag.SEEN));
 				mailEnvelope.setFlagged(message.isSet(Flag.FLAGGED));
 				mailEnvelope.setAnswered(message.isSet(Flag.ANSWERED));
 
@@ -991,7 +993,7 @@ public class MailUtil {
 			if ((folderType & IMAPFolder.HOLDS_MESSAGES) != 0) {
 				MailFolder mailFolder = new MailFolder(
 					folder.getName(), folder.getMessageCount(),
-					folder.getNewMessageCount());
+					folder.getUnreadMessageCount());
 
 				list.add(mailFolder);
 			}

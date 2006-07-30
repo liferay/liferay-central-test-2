@@ -1,10 +1,10 @@
-function MailSummaryObject(sender, subject, date, id, recent) {
+function MailSummaryObject(sender, subject, date, id, read) {
 	this.next = null;
 	this.prev = null;
 	this.selected = false;
 	this.id = id;
 	this.index = 0;
-	this.recent = recent;
+	this.read = read;
 	this.head = sender;
 	this.pendingHighlight = false;
 	sender.next = subject;
@@ -296,7 +296,7 @@ var Mail = {
 		mailHeader.innerHTML = "";
 		mailHeader.appendChild(msgHeader);
 		
-		if (Mail.lastSelected.recent) {
+		if (!Mail.lastSelected.read) {
 			Mail.decrementCount();
 			
 			var summaryField = Mail.lastSelected.head;
@@ -306,7 +306,7 @@ var Mail = {
 				summaryField = summaryField.next;
 			}
 		
-			Mail.lastSelected.recent = false;
+			Mail.lastSelected.read = true;
 		}
 
 		var iframe = document.getElementById("portlet-mail-msg-detailed-frame");
@@ -340,11 +340,11 @@ var Mail = {
 			sender.innerHTML = header.email;
 			subject.innerHTML = header.subject;
 			date.innerHTML = header.date;
-			var msObj = new MailSummaryObject(sender, subject, date, header.id, header.recent);
+			var msObj = new MailSummaryObject(sender, subject, date, header.id, header.read);
 			var summaryList = Mail.summaryList;
 			
-			if (header.recent) {
-				/* Bold recent messages */
+			if (!header.read) {
+				/* Bold unread messages */
 				sender.style.fontWeight = "bold";
 				subject.style.fontWeight = "bold";
 				date.style.fontWeight = "bold";

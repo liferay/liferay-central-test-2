@@ -158,7 +158,7 @@ public class MailAction extends JSONAction {
 
 			jsonFolder.put("name", name);
 			jsonFolder.put("id", name);
-			jsonFolder.put("newCount", folder.getNewMessageCount());
+			jsonFolder.put("newCount", folder.getUnreadMessageCount());
 			jsonFolder.put("totalCount", folder.getMessageCount());
 
 			if (name.equals(MailUtil.MAIL_INBOX_NAME)) {
@@ -264,7 +264,7 @@ public class MailAction extends JSONAction {
 			jsonEnvelope.put("date", dateString);
 			jsonEnvelope.put("email", recipient);
 			jsonEnvelope.put("subject", subject);
-			jsonEnvelope.put("recent", mailEnvelope.isRecent());
+			jsonEnvelope.put("read", mailEnvelope.isRead());
 
 			jsonEnvelopes.put(jsonEnvelope);
 		}

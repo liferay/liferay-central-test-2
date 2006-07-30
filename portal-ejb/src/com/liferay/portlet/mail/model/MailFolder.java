@@ -30,10 +30,10 @@ package com.liferay.portlet.mail.model;
  */
 public class MailFolder {
 
-	public MailFolder(String name, long messageCount, long newMessageCount) {
+	public MailFolder(String name, long messageCount, long unreadMessageCount) {
 		_name = name;
 		_messageCount = messageCount;
-		_newMessageCount = newMessageCount;
+		_unreadMessageCount = unreadMessageCount;
 	}
 
 	public String getName() {
@@ -44,12 +44,12 @@ public class MailFolder {
 		return _messageCount;
 	}
 
-	public long getNewMessageCount() {
-		return _newMessageCount;
+	public long getUnreadMessageCount() {
+		return _unreadMessageCount;
 	}
 
 	private String _name;
 	private long _messageCount;
-	private long _newMessageCount;
+	private long _unreadMessageCount;
 
 }
