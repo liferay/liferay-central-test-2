@@ -32,6 +32,9 @@ import java.io.Serializable;
  */
 public class CyrusVirtual implements Serializable {
 
+	public CyrusVirtual() {
+	}
+
 	public CyrusVirtual(String emailAddress, String userId) {
 		_emailAddress = emailAddress;
 		_userId = userId;

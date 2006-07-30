@@ -32,6 +32,9 @@ import java.io.Serializable;
  */
 public class CyrusUser implements Serializable {
 
+	public CyrusUser() {
+	}
+
 	public CyrusUser(String userId, String password) {
 		_userId = userId;
 		_password = password;
