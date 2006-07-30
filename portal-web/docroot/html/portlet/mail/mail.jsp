@@ -59,7 +59,7 @@ String mailLineColor = "#B3B6B0";
 		<%
 		MailUtil.setFolder(request.getSession(), MailUtil.MAIL_INBOX_NAME);
 
-		Folder folder = MailUtil.getFolder(request.getSession());
+		MailFolder folder = MailUtil.getFolder(request.getSession());
 		%>
 
 		<%= LanguageUtil.get(pageContext, "unread-messages") %>: <%= folder.getNewMessageCount() %>

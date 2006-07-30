@@ -462,13 +462,18 @@ public class MailUtil {
         }
 	}
 
-	public static IMAPFolder getFolder(HttpSession ses)
-		throws FolderException, StoreException {
+	public static MailFolder getFolder(HttpSession ses)
+		throws FolderException, MessagingException, StoreException {
 
 		try {
 			MailSessionLock.lock(ses.getId());
 
-			return _getFolder(ses);
+			IMAPFolder folder = _getFolder(ses);
+
+			List list = new ArrayList();
+			_getFolders(list, new IMAPFolder[] { folder } );
+
+			return (MailFolder)list.get(0);
 		}
 		finally {
 			MailSessionLock.unlock(ses.getId());

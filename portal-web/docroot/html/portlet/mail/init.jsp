@@ -29,13 +29,13 @@
 --%><%@ page import="com.liferay.portlet.mail.ContentException" %><%--
 --%><%@ page import="com.liferay.portlet.mail.RecipientException" %><%--
 --%><%@ page import="com.liferay.portlet.mail.model.MailEnvelope" %><%--
+--%><%@ page import="com.liferay.portlet.mail.model.MailFolder" %><%--
 --%><%@ page import="com.liferay.portlet.mail.model.MailMessage" %><%--
 --%><%@ page import="com.liferay.portlet.mail.model.RemoteMailAttachment" %><%--
 --%><%@ page import="com.liferay.portlet.mail.util.MailUtil" %><%--
 --%><%@ page import="com.liferay.portlet.mail.util.comparator.DateComparator" %><%--
 
 --%><%@ page import="javax.mail.Address" %><%--
---%><%@ page import="javax.mail.Folder" %><%--
 
 --%><%
 PortletPreferences prefs = renderRequest.getPreferences();
