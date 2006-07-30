@@ -64,6 +64,8 @@ String mailLineColor = "#B3B6B0";
 
 		<%= LanguageUtil.get(pageContext, "unread-messages") %>: <%= folder.getNewMessageCount() %>
 
+		<br><br>
+
 		<%
 		int count = 0;
 

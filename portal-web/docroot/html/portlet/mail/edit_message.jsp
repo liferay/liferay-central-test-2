@@ -45,6 +45,9 @@ if (recipients != null) {
 
 String subject = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_MESSAGE_SUBJECT));
 String body = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_MESSAGE_BODY));
+if (Validator.isNotNull(signature)) {
+	body += "<br /><br />--<br />" + signature;
+}
 
 List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 %>
