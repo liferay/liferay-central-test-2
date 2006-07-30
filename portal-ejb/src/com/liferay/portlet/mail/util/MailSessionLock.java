@@ -22,7 +22,8 @@
 
 package com.liferay.portlet.mail.util;
 
-import java.util.HashMap;
+import com.liferay.util.CollectionFactory;
+
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -35,80 +36,22 @@ import javax.servlet.http.HttpSession;
  */
 public class MailSessionLock {
 
-	public static MailSessionLock getInstance() {
-		return _lock;
+	public static void cleanUp(HttpSession ses) {
+		_instance._cleanUp(ses);
 	}
 
-	public void lock(String sessionId) {
-		ThreadLocal tl = null;
-
-		for (;;) {
-			synchronized (_sessionMap) {
-				tl = (ThreadLocal)_sessionMap.get(sessionId);
-
-				if (tl == null) {
-					// Initialize reentrant counter.
-
-					tl = new ThreadLocal();
-
-					tl.set(new Long(0));
-
-					_sessionMap.put(sessionId, tl);
-
-					break;
-				}
-				else if (tl.get() != null) {
-					// This thread instantiated the thread local.  Increment the
-					// reentrant counter.
-
-					Long count = (Long)tl.get();
-
-					tl.set(new Long(count.longValue() + 1L));
-
-					break;
-				}
-			}
-
-			// Another thread instantiated the thread local.  Wait until that
-			// thread is done.
-
-			try {
-				wait(100);
-			}
-			catch (Exception ex) {
-			}
-		}
+	public static void lock(String sessionId) {
+		_instance._lock(sessionId);
 	}
 
-	public void unlock(String sessionId) {
-		ThreadLocal tl = null;
-
-		synchronized (_sessionMap) {
-			tl = (ThreadLocal)_sessionMap.get(sessionId);
-
-			// The variable can be null at this time if (1) a method called
-			// unlock() twice or (2) cleanUp() was called.
-
-			if (tl != null) {
-				Long count = (Long)tl.get();
-
-				if (count.longValue() == 0L) {
-					// All reentrant calls have completed
-
-					_sessionMap.remove(sessionId);
-				}
-				else {
-					// Finished one of the reentrant calls
-
-					count = new Long(count.longValue() - 1L);
-
-					tl.set(count);
-				}
-			}
-		}
+	public static void unlock(String sessionId) {
+		_instance._unlock(sessionId);
 	}
 
-	public void cleanUp(HttpSession ses) {
+	private MailSessionLock() {
+	}
+
+	private void _cleanUp(HttpSession ses) {
 		try {
 			MailUtil.cleanUp(ses);
 		}
@@ -120,11 +63,81 @@ public class MailSessionLock {
 		}
 	}
 
-	private MailSessionLock() {
+	private void _lock(String sessionId) {
+		ThreadLocal threadLocal = null;
+
+		for (;;) {
+			synchronized (_sessionMap) {
+				threadLocal = (ThreadLocal)_sessionMap.get(sessionId);
+
+				if (threadLocal == null) {
+
+					// Initialize reentrant counter.
+
+					threadLocal = new ThreadLocal();
+
+					threadLocal.set(new Long(0));
+
+					_sessionMap.put(sessionId, threadLocal);
+
+					break;
+				}
+				else if (threadLocal.get() != null) {
+
+					// This thread instantiated the thread local. Increment the
+					// reentrant counter.
+
+					Long count = (Long)threadLocal.get();
+
+					threadLocal.set(new Long(count.longValue() + 1L));
+
+					break;
+				}
+			}
+
+			// Another thread instantiated the thread local. Wait until that
+			// thread is done.
+
+			try {
+				wait(100);
+			}
+			catch (Exception ex) {
+			}
+		}
 	}
 
-	private static MailSessionLock _lock = new MailSessionLock();
+	private void _unlock(String sessionId) {
+		ThreadLocal threadLocal = null;
 
-	private Map _sessionMap = new HashMap();
+		synchronized (_sessionMap) {
+			threadLocal = (ThreadLocal)_sessionMap.get(sessionId);
+
+			// The variable can be null at this time if a method called unlock()
+			// twice or cleanUp() was called.
+
+			if (threadLocal != null) {
+				Long count = (Long)threadLocal.get();
+
+				if (count.longValue() == 0L) {
+
+					// All reentrant calls have completed
+
+					_sessionMap.remove(sessionId);
+				}
+				else {
+
+					// Finished one of the reentrant calls
+
+					count = new Long(count.longValue() - 1L);
+
+					threadLocal.set(count);
+				}
+			}
+		}
+	}
+
+	private static MailSessionLock _instance = new MailSessionLock();
+
+	private Map _sessionMap = CollectionFactory.getHashMap();
 
 }

@@ -31,8 +31,8 @@
 --%><%@ page import="com.liferay.portlet.mail.model.MailEnvelope" %><%--
 --%><%@ page import="com.liferay.portlet.mail.model.MailMessage" %><%--
 --%><%@ page import="com.liferay.portlet.mail.model.RemoteMailAttachment" %><%--
---%><%@ page import="com.liferay.portlet.mail.util.comparator.DateComparator" %><%--
 --%><%@ page import="com.liferay.portlet.mail.util.MailUtil" %><%--
+--%><%@ page import="com.liferay.portlet.mail.util.comparator.DateComparator" %><%--
 
 --%><%@ page import="javax.mail.Address" %><%--
 --%><%@ page import="javax.mail.Folder" %><%--
@@ -41,6 +41,8 @@
 PortletPreferences prefs = renderRequest.getPreferences();
 
 String forwardAddress = prefs.getValue("forward-address", StringPool.BLANK);
+String signature = prefs.getValue("signature", StringPool.BLANK);
+String vacationMessage = prefs.getValue("vacation-message", StringPool.BLANK);
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

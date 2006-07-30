@@ -170,31 +170,6 @@
 
 		<action path="/portal/upload_progress_poller" forward="portal.upload_progress_poller" />
 
-		<!-- Address Book -->
-
-		<action path="/address_book/compose_message_to" type="com.liferay.portlet.addressbook.action.ComposeMessageToAction" />
-
-		<action path="/address_book/delete" type="com.liferay.portlet.addressbook.action.DeleteAction" />
-
-		<action path="/address_book/edit_contact" type="com.liferay.portlet.addressbook.action.EditContactAction">
-			<forward name="portlet.address_book.edit_contact" path="portlet.address_book.edit_contact" />
-		</action>
-
-		<action path="/address_book/edit_list" type="com.liferay.portlet.addressbook.action.EditListAction">
-			<forward name="portlet.address_book.edit_list" path="portlet.address_book.edit_list" />
-		</action>
-
-		<action path="/address_book/export" type="com.liferay.portlet.addressbook.action.ExportAction" />
-
-		<action path="/address_book/import" type="com.liferay.portlet.addressbook.action.ImportAction">
-			<forward name="portlet.address_book.import_export" path="portlet.address_book.import_export" />
-		</action>
-
-		<action path="/address_book/view_all" type="com.liferay.portlet.addressbook.action.ViewAllAction">
-			<forward name="portlet.address_book.view" path="portlet.address_book.view" />
-			<forward name="portlet.address_book.view_all" path="portlet.address_book.view_all" />
-		</action>
-
 		<!-- Admin -->
 
 		<action path="/admin/edit_address" type="com.liferay.portlet.enterpriseadmin.action.EditAddressAction">
@@ -800,6 +775,10 @@
 		<!-- Mail -->
 
 		<action path="/mail/action" type="com.liferay.portlet.mail.action.MailAction" />
+
+		<action path="/mail/edit" type="com.liferay.portlet.mail.action.EditPreferencesAction">
+			<forward name="portlet.mail.edit" path="portlet.mail.edit" />
+		</action>
 
 		<action path="/mail/edit_message" type="com.liferay.portlet.mail.action.EditMessageAction">
 			<forward name="portlet.mail.edit_message" path="portlet.mail.edit_message" />

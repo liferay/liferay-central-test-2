@@ -222,7 +222,7 @@ public class MailUtil {
 			}
 
 			try {
-				MailSessionLock.getInstance().lock(ses.getId());
+				MailSessionLock.lock(ses.getId());
 
 				String lastFolderName = getFolderName(ses);
 
@@ -255,7 +255,7 @@ public class MailUtil {
 				setFolder(ses, lastFolderName);
 			}
 			finally {
-				MailSessionLock.getInstance().unlock(ses.getId());
+				MailSessionLock.unlock(ses.getId());
 			}
 		}
 		catch (MessagingException me) {
@@ -313,7 +313,7 @@ public class MailUtil {
 		throws FolderException, StoreException {
 
 		try {
-			MailSessionLock.getInstance().lock(ses.getId());
+			MailSessionLock.lock(ses.getId());
 
 			IMAPFolder folder = _getFolder(ses);
 
@@ -332,7 +332,7 @@ public class MailUtil {
 			throw new FolderException(me);
 		}
 		finally {
-			MailSessionLock.getInstance().unlock(ses.getId());
+			MailSessionLock.unlock(ses.getId());
 		}
 	}
 
@@ -343,7 +343,7 @@ public class MailUtil {
 		Object[] parts = null;
 
 		try {
-			MailSessionLock.getInstance().lock(ses.getId());
+			MailSessionLock.lock(ses.getId());
 
 			String[] path = RemoteMailAttachment.parsePath(contentPath);
 
@@ -367,7 +367,7 @@ public class MailUtil {
 			throw new ContentException(me);
 		}
 		finally {
-			MailSessionLock.getInstance().unlock(ses.getId());
+			MailSessionLock.unlock(ses.getId());
 		}
 
 		return parts;
@@ -379,7 +379,7 @@ public class MailUtil {
 		Set envelopes = new TreeSet(comparator);
 
 		try {
-			MailSessionLock.getInstance().lock(ses.getId());
+			MailSessionLock.lock(ses.getId());
 
 			IMAPFolder folder = _getFolder(ses);
 
@@ -458,7 +458,7 @@ public class MailUtil {
         	throw new FolderException(me);
 		}
         finally {
-			MailSessionLock.getInstance().unlock(ses.getId());
+			MailSessionLock.unlock(ses.getId());
         }
 	}
 
@@ -466,13 +466,12 @@ public class MailUtil {
 		throws FolderException, StoreException {
 
 		try {
-			MailSessionLock.getInstance().lock(ses.getId());
+			MailSessionLock.lock(ses.getId());
 
 			return _getFolder(ses);
-
 		}
 		finally {
-			MailSessionLock.getInstance().unlock(ses.getId());
+			MailSessionLock.unlock(ses.getId());
 		}
 	}
 
@@ -480,14 +479,14 @@ public class MailUtil {
 		throws FolderException, StoreException {
 
 		try {
-			MailSessionLock.getInstance().lock(ses.getId());
+			MailSessionLock.lock(ses.getId());
 
 			IMAPFolder folder = _getFolder(ses);
 
 			return folder.getName();
 		}
 		finally {
-			MailSessionLock.getInstance().unlock(ses.getId());
+			MailSessionLock.unlock(ses.getId());
 		}
 	}
 
@@ -529,7 +528,7 @@ public class MailUtil {
 		HttpSession ses = req.getSession();
 
 		try {
-			MailSessionLock.getInstance().lock(ses.getId());
+			MailSessionLock.lock(ses.getId());
 
 			long messageId = getMessageId(ses);
 			if (messageId != -1L) {
@@ -540,7 +539,7 @@ public class MailUtil {
 			}
 		}
 		finally {
-			MailSessionLock.getInstance().unlock(ses.getId());
+			MailSessionLock.unlock(ses.getId());
 		}
 	}
 
@@ -552,7 +551,7 @@ public class MailUtil {
 		MailMessage mailMessage = new MailMessage();
 
 		try {
-			MailSessionLock.getInstance().lock(ses.getId());
+			MailSessionLock.lock(ses.getId());
 
 			IMAPFolder folder = _getFolder(ses);
 
@@ -582,7 +581,7 @@ public class MailUtil {
 			throw new FolderException(me);
 		}
 		finally {
-			MailSessionLock.getInstance().unlock(ses.getId());
+			MailSessionLock.unlock(ses.getId());
 		}
 	}
 
@@ -590,7 +589,7 @@ public class MailUtil {
 		throws ContentException, FolderException, StoreException {
 
 		try {
-			MailSessionLock.getInstance().lock(ses.getId());
+			MailSessionLock.lock(ses.getId());
 
 			Long messageId = (Long)ses.getAttribute(WebKeys.MAIL_MESSAGE_ID);
 
@@ -602,7 +601,7 @@ public class MailUtil {
 			}
 		}
 		finally {
-			MailSessionLock.getInstance().unlock(ses.getId());
+			MailSessionLock.unlock(ses.getId());
 		}
 	}
 
@@ -619,7 +618,7 @@ public class MailUtil {
 		}
 
 		try {
-			MailSessionLock.getInstance().lock(ses.getId());
+			MailSessionLock.lock(ses.getId());
 
 			IMAPFolder folder = _getFolder(ses);
 
@@ -660,7 +659,7 @@ public class MailUtil {
 			catch (Exception e) {
 			}
 
-			MailSessionLock.getInstance().unlock(ses.getId());
+			MailSessionLock.unlock(ses.getId());
 		}
 	}
 
@@ -758,7 +757,7 @@ public class MailUtil {
 			oldFolder.renameTo(newFolder);
 
 			try {
-				MailSessionLock.getInstance().lock(ses.getId());
+				MailSessionLock.lock(ses.getId());
 
 				Folder curFolder = _getFolder(ses);
 
@@ -767,7 +766,7 @@ public class MailUtil {
 				}
 			}
 			finally {
-				MailSessionLock.getInstance().unlock(ses.getId());
+				MailSessionLock.unlock(ses.getId());
 			}
 		}
 		catch (MessagingException me) {
@@ -779,12 +778,12 @@ public class MailUtil {
 		throws FolderException, StoreException {
 
 		try {
-			MailSessionLock.getInstance().lock(ses.getId());
+			MailSessionLock.lock(ses.getId());
 
 			_getFolder(ses, folderName);
 		}
 		finally {
-			MailSessionLock.getInstance().unlock(ses.getId());
+			MailSessionLock.unlock(ses.getId());
 		}
 	}
 

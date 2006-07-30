@@ -6,12 +6,17 @@
 		<display-name>Mail</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
+			<name>edit-action</name>
+			<value>/mail/edit</value>
+		</init-param>
+		<init-param>
 			<name>view-action</name>
 			<value>/mail/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
+			<portlet-mode>edit</portlet-mode>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>

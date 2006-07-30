@@ -626,6 +626,10 @@
 
 	<definition name="portlet.mail" extends="portlet" />
 
+	<definition name="portlet.mail.edit" extends="portlet.mail">
+		<put name="portlet_content" value="/portlet/mail/edit.jsp" />
+	</definition>
+
 	<definition name="portlet.mail.edit_message" extends="portlet.mail">
 		<put name="portlet_content" value="/portlet/mail/edit_message.jsp" />
 	</definition>

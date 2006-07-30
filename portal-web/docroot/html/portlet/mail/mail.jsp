@@ -45,44 +45,6 @@ String mailLineColor = "#B3B6B0";
 
 <c:choose>
 	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
-		<%
-		MailUtil.setFolder(request.getSession(), MailUtil.MAIL_INBOX_NAME);
-		Folder folder = MailUtil.getFolder(request.getSession());
-		%>
-		
-		<%= LanguageUtil.get(pageContext, "unread-messages") %>: <%= folder.getNewMessageCount() %>
-		
-		<div style="padding: 10px;">
-		
-		<%
-		int count = 0;
-		Set envelopes = MailUtil.getEnvelopes(request.getSession(), new DateComparator(false));
-		Iterator itr = envelopes.iterator();
-		
-		while (itr.hasNext() && count < 10) {
-			MailEnvelope mailEnvelope = (MailEnvelope)itr.next();
-			
-			String recipient = GetterUtil.getString(
-				mailEnvelope.getRecipient(), StringPool.NBSP);
-
-			String subject = GetterUtil.getString(
-				mailEnvelope.getSubject(), StringPool.NBSP);
-				
-			if (mailEnvelope.isRecent()) {
-				%>
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>">
-							<portlet:param name="messageId" value="<%= mailEnvelope.getMessageId() %>" />
-							<portlet:param name="folderId" value="<%= MailUtil.MAIL_INBOX_NAME %>" />
-						</portlet:renderURL>">
-					<span style="font-weight: bold"><%= recipient %></span> - <%= subject %><br />
-				</a>
-				<%
-			}
-			count++;
-		}
-		%>
-		</div>
-
 		<table border="0" cellpadding="2" cellspacing="2" class="portlet-mail-toolbar font-small" id="portlet-mail-main-toolbar">
 		<tr>
 			<td nowrap="nowrap" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />';">
@@ -93,7 +55,45 @@ String mailLineColor = "#B3B6B0";
 			</td>
 		</tr>
 		</table>
-			
+
+		<%
+		MailUtil.setFolder(request.getSession(), MailUtil.MAIL_INBOX_NAME);
+
+		Folder folder = MailUtil.getFolder(request.getSession());
+		%>
+
+		<%= LanguageUtil.get(pageContext, "unread-messages") %>: <%= folder.getNewMessageCount() %>
+
+		<%
+		int count = 0;
+
+		Set envelopes = MailUtil.getEnvelopes(request.getSession(), new DateComparator(false));
+
+		Iterator itr = envelopes.iterator();
+
+		while (itr.hasNext() && (count < 10)) {
+			MailEnvelope mailEnvelope = (MailEnvelope)itr.next();
+
+			String recipient = GetterUtil.getString(
+				mailEnvelope.getRecipient(), StringPool.NBSP);
+
+			String subject = GetterUtil.getString(
+				mailEnvelope.getSubject(), StringPool.NBSP);
+
+			if (mailEnvelope.isRecent()) {
+		%>
+
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="messageId" value="<%= mailEnvelope.getMessageId() %>" /><portlet:param name="folderId" value="<%= MailUtil.MAIL_INBOX_NAME %>" /></portlet:renderURL>">
+				<span style="font-weight: bold"><%= recipient %></span> - <%= subject %><br />
+				</a>
+
+		<%
+			}
+
+			count++;
+		}
+		%>
+
 	</c:when>
 	<c:otherwise>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/portlet/mail.js" type="text/javascript"></script>
@@ -350,7 +350,6 @@ String mailLineColor = "#B3B6B0";
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
 						<td class="portlet-mail-msgs-pane-td" width="100%">
-
 							<table border="0" cellpadding="0" cellspacing="0" width="100%">
 							<tr>
 								<td class="portlet-mail-msgs-title">
@@ -437,15 +436,16 @@ String mailLineColor = "#B3B6B0";
 
 			<%
 			String messageIdParam = ParamUtil.getString(request, "messageId", null);
-			
+
 			try {
 				String folderId = MailUtil.getFolderName(request.getSession());
 				long messageId = MailUtil.getMessageId(request.getSession());
+			%>
 
-				%>
 				Mail.currentFolderId = "<%= folderId %>";
 				Mail.currentMessageId = <%= (messageIdParam != null) ? messageIdParam : (messageId + "") %>;
-				<%
+
+			<%
 			}
 			catch (Exception e) {
 			}
