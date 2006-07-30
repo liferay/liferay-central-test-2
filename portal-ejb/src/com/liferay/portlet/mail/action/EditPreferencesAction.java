@@ -73,8 +73,10 @@ public class EditPreferencesAction extends PortletAction {
 		String tabs1 = ParamUtil.getString(req, "tabs1");
 
 		if (tabs1.equals("forward-address")) {
+			String forwardAddress = ParamUtil.getString(req, "forwardAddress");
+
 			String[] forwardAddressArray = StringUtil.split(
-				ParamUtil.getString(req, "forwardAddress"), "\n");
+				forwardAddress, "\n");
 
 			List forwardAddressList = new ArrayList();
 
@@ -85,13 +87,19 @@ public class EditPreferencesAction extends PortletAction {
 			}
 
 			if (forwardAddressList.size() > 0) {
-				prefs.setValue(
-					"forward-address",
-					StringUtil.merge(forwardAddressArray, StringPool.SPACE));
+				forwardAddressArray =
+					(String[])forwardAddressList.toArray(new String[0]);
+
+				forwardAddress = StringUtil.merge(
+					forwardAddressArray, StringPool.SPACE);
 			}
 			else {
-				prefs.setValue("forward-address", StringPool.BLANK);
+				forwardAddress = StringPool.BLANK;
 			}
+
+			prefs.setValue("forward-address", forwardAddress);
+
+			res.setRenderParameter("forwardAddress", forwardAddress);
 
 			try {
 				MailServiceUtil.addForward(

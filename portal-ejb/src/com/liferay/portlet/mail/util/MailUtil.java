@@ -471,7 +471,8 @@ public class MailUtil {
 			IMAPFolder folder = _getFolder(ses);
 
 			List list = new ArrayList();
-			_getFolders(list, new IMAPFolder[] { folder } );
+
+			_getFolders(list, new IMAPFolder[] {folder});
 
 			return (MailFolder)list.get(0);
 		}

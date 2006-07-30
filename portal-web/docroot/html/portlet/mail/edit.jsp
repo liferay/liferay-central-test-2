@@ -48,7 +48,16 @@ portletURL.setParameter("tabs1", tabs1);
 	<c:when test='<%= tabs1.equals("forward-address") %>'>
 
 		<%
+		/*String symbolsString = StringUtil.merge(symbols, StringPool.SPACE);
+
+		symbols = StringUtil.split(ParamUtil.getString(request, "symbols", symbolsString), StringPool.SPACE);
+
+		symbolsString = StringUtil.merge(symbols, StringPool.SPACE);*/
+
+		//forwardAddress = ParamUtil.getString(request, "forwardAddress", forwardAddress);
+
 		forwardAddress = ParamUtil.getString(request, "forwardAddress", forwardAddress);
+		forwardAddress = StringUtil.replace(forwardAddress, " ", "\n");
 		%>
 
 		<%= LanguageUtil.get(pageContext, "all-email-will-be-forwarded-to-the-email-addresses-below") %> <%= LanguageUtil.get(pageContext, "enter-one-email-address-per-line") %> <%= LanguageUtil.get(pageContext, "remove-all-entries-to-disable-email-forwarding") %>
