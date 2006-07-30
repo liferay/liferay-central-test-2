@@ -64,9 +64,9 @@ portletURL.setParameter("categoryId", categoryId);
 		List headerNames = new ArrayList();
 
 		headerNames.add("category");
-		headerNames.add("num-of-categories");
-		headerNames.add("num-of-threads");
-		headerNames.add("num-of-posts");
+		headerNames.add("categories");
+		headerNames.add("threads");
+		headerNames.add("posts");
 		headerNames.add(StringPool.BLANK);
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
@@ -189,8 +189,8 @@ portletURL.setParameter("categoryId", categoryId);
 
 			headerNames.add("thread");
 			headerNames.add("started-by");
-			headerNames.add("num-of-posts");
-			headerNames.add("num-of-views");
+			headerNames.add("posts");
+			headerNames.add("views");
 			headerNames.add("last-post");
 			headerNames.add(StringPool.BLANK);
 
@@ -250,7 +250,7 @@ portletURL.setParameter("categoryId", categoryId);
 				else {
 					StringBuffer sb = new StringBuffer();
 
-					sb.append("<span style=\"font-size: xx-small;\">");
+					sb.append("<span style=\"font-size: xx-small; white-space: nowrap;\">");
 
 					sb.append(LanguageUtil.get(pageContext, "date"));
 					sb.append(": ");
@@ -332,8 +332,8 @@ portletURL.setParameter("categoryId", categoryId);
 
 		headerNames.add("thread");
 		headerNames.add("started-by");
-		headerNames.add("num-of-posts");
-		headerNames.add("num-of-views");
+		headerNames.add("posts");
+		headerNames.add("views");
 		headerNames.add("last-post");
 		headerNames.add(StringPool.BLANK);
 
@@ -393,7 +393,7 @@ portletURL.setParameter("categoryId", categoryId);
 			else {
 				StringBuffer sb = new StringBuffer();
 
-				sb.append("<span style=\"font-size: xx-small;\">");
+				sb.append("<span style=\"font-size: xx-small; white-space: nowrap;\">");
 
 				sb.append(LanguageUtil.get(pageContext, "date"));
 				sb.append(": ");
@@ -448,7 +448,7 @@ portletURL.setParameter("categoryId", categoryId);
 				List headerNames = new ArrayList();
 
 				headerNames.add("name");
-				headerNames.add("num-of-posts");
+				headerNames.add("posts");
 				headerNames.add("join-date");
 				headerNames.add("last-post-date");
 

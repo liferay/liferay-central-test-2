@@ -30,6 +30,8 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 MBMessage message = (MBMessage)row.getObject();
 %>
 
+<span style="white-space: nowrap;">
+
 <c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 		<portlet:param name="struts_action" value="/message_boards/edit_message" />
@@ -86,3 +88,5 @@ MBMessage message = (MBMessage)row.getObject();
 
 	<liferay-ui:icon-delete url="<%= portletURL %>" />
 </c:if>
+
+</span>
