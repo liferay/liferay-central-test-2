@@ -32,11 +32,11 @@ package com.liferay.portlet.chat.util;
  */
 public class ChatServerUtil {
 
-	public int getRoomCount(ChatServer server) {
+	public static int getRoomCount(ChatServer server) {
 		return server.getRoomCount();
 	}
 
-	public int getUserCount(ChatServer server) {
+	public static int getUserCount(ChatServer server) {
 		return server.getUserCount();
 	}
 
