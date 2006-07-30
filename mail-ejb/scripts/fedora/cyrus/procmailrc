@@ -2,7 +2,7 @@ DELIVER="/usr/lib/cyrus-imapd/deliver"
 LOGFILE="/home/cyrus/$USER.log"
 
 INBOX="$DELIVER -e -a $USER -m user.$USER"
-SPAM="$DELIVER -e -a $USER -m user.$USER.junk-mail"
+SPAM="$DELIVER -e -a $USER -m user.$USER.Spam"
 
 PROCMAIL_BLOCKED="/home/cyrus/$USER.procmail.blocked"
 PROCMAIL_FORWARD="/home/cyrus/$USER.procmail.forward"
