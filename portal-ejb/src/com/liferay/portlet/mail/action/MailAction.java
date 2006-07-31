@@ -244,20 +244,25 @@ public class MailAction extends JSONAction {
 			String subject = GetterUtil.getString(
 				mailEnvelope.getSubject(), StringPool.NBSP);
 
-			String dateString = dateFormatDate.format(mailEnvelope.getDate());
+			String dateString = StringPool.NBSP;
+			
+			if (mailEnvelope.getDate() != null) {
+				dateString = dateFormatDate.format(mailEnvelope.getDate());
 
-			if (dateString.equals(todayString)) {
-				dateString =
-					LanguageUtil.get(user, "today") + StringPool.SPACE +
-						dateFormatTime.format(mailEnvelope.getDate());
-			}
-			else if (dateString.equals(yesterdayString)) {
-				dateString =
-					LanguageUtil.get(user, "yesterday") + StringPool.SPACE +
-						dateFormatTime.format(mailEnvelope.getDate());
-			}
-			else {
-				dateString = dateFormatDateTime.format(mailEnvelope.getDate());
+				if (dateString.equals(todayString)) {
+					dateString =
+						LanguageUtil.get(user, "today") + StringPool.SPACE +
+							dateFormatTime.format(mailEnvelope.getDate());
+				}
+				else if (dateString.equals(yesterdayString)) {
+					dateString =
+						LanguageUtil.get(user, "yesterday") + StringPool.SPACE +
+							dateFormatTime.format(mailEnvelope.getDate());
+				}
+				else {
+					dateString =
+						dateFormatDateTime.format(mailEnvelope.getDate());
+				}
 			}
 
 			jsonEnvelope.put("id", mailEnvelope.getMessageId());
