@@ -159,6 +159,14 @@ public class EJBXMLBuilder {
 				sb.append("\t\t<jndi-name>").append(entity.elementText("ejb-name")).append("</jndi-name>\n");
 			}
 
+			sb.append("\t\t<jonas-resource>\n");
+			sb.append("\t\t\t<res-ref-name>jdbc/LiferayPool</res-ref-name>\n");
+			sb.append("\t\t\t<jndi-name>jdbc/LiferayPool</jndi-name>\n");
+			sb.append("\t\t</jonas-resource>\n");
+			sb.append("\t\t<jonas-resource>\n");
+			sb.append("\t\t\t<res-ref-name>mail/MailSession</res-ref-name>\n");
+			sb.append("\t\t\t<jndi-name>mail/MailSession</jndi-name>\n");
+			sb.append("\t\t</jonas-resource>\n");
 			sb.append("\t</jonas-session>\n");
 		}
 

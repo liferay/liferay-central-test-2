@@ -5,5 +5,13 @@
 	<jonas-session>
 		<ejb-name>com_liferay_mail_service_ejb_MailServiceEJB</ejb-name>
 		<jndi-name>com_liferay_mail_service_ejb_MailServiceEJB</jndi-name>
+		<jonas-resource>
+			<res-ref-name>jdbc/LiferayPool</res-ref-name>
+			<jndi-name>jdbc/LiferayPool</jndi-name>
+		</jonas-resource>
+		<jonas-resource>
+			<res-ref-name>mail/MailSession</res-ref-name>
+			<jndi-name>mail/MailSession</jndi-name>
+		</jonas-resource>
 	</jonas-session>
 </jonas-ejb-jar>

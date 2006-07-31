@@ -18,6 +18,17 @@
 				<local>com.liferay.portal.service.ejb.UserLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<resource-ref>
+				<res-ref-name>jdbc/LiferayPool</res-ref-name>
+				<res-type>javax.sql.DataSource</res-type>
+				<res-auth>Container</res-auth>
+				<res-sharing-scope>Shareable</res-sharing-scope>
+			</resource-ref>
+			<resource-ref>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<res-type>javax.mail.Session</res-type>
+				<res-auth>Container</res-auth>
+			</resource-ref>
 		</session>
 	</enterprise-beans>
 	<assembly-descriptor>
