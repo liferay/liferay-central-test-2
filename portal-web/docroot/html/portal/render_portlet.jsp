@@ -50,6 +50,9 @@ catch (NoSuchResourceException nsre) {
 	else if (layoutTypePortlet.hasPortletId(portletId)) {
 		addDefaultResource = true;
 	}
+	else if (portletId.equals(PortletKeys.JOURNAL)) {
+		addDefaultResource = true;
+	}
 	else if (portletId.equals(PortletKeys.JOURNAL_CONTENT_SEARCH)) {
 		addDefaultResource = true;
 	}
