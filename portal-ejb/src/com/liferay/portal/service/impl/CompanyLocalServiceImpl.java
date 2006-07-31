@@ -72,6 +72,8 @@ import javax.imageio.ImageIO;
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
@@ -351,6 +353,13 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 
 			return hits;
 		}
+		catch (BooleanQuery.TooManyClauses tmc) {
+			if (_log.isErrorEnabled()) {
+				_log.error("Keywords " + keywords);
+			}
+
+			throw new SystemException(tmc);
+		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
@@ -502,5 +511,7 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 			throw new AccountNameException();
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(CompanyLocalServiceImpl.class);
 
 }
