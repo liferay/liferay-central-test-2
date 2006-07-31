@@ -88,8 +88,8 @@
 
 		<antcall target="compile-common-lib" />
 
-		<unjar src="${app.server.server.dir}/lib/javax.servlet.jar" dest="${classpath.jsp}" />
-		<unjar src="${app.server.server.dir}/lib/javax.servlet.jsp.jar" dest="${classpath.jsp}" />
+		<unjar src="${app.server.dir}/server/default/lib/javax.servlet.jar" dest="${classpath.jsp}" />
+		<unjar src="${app.server.dir}/server/default/lib/javax.servlet.jsp.jar" dest="${classpath.jsp}" />
 		<unjar src="${app.server.deploy.dir}/jbossweb-jetty.sar/commons-el.jar" dest="${classpath.jsp}" />
 
 		<antcall target="compile-common-jsp">
@@ -103,8 +103,8 @@
 
 		<antcall target="compile-common-lib" />
 
-		<unjar src="${app.server.server.dir}/lib/javax.servlet.jar" dest="${classpath.jsp}" />
-		<unjar src="${app.server.server.dir}/lib/javax.servlet.jsp.jar" dest="${classpath.jsp}" />
+		<unjar src="${app.server.dir}/server/default/lib/javax.servlet.jar" dest="${classpath.jsp}" />
+		<unjar src="${app.server.dir}/server/default/lib/javax.servlet.jsp.jar" dest="${classpath.jsp}" />
 		<unjar src="${app.server.deploy.dir}/jbossweb-tomcat55.sar/commons-el.jar" dest="${classpath.jsp}" />
 
 		<antcall target="compile-common-jsp">
@@ -159,17 +159,18 @@
 
 		<antcall target="compile-common-lib" />
 
-		<unjar src="${project.dir}/lib/axis.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/commons-beanutils.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/commons-digester.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/compression-filter.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/jcaptcha.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/saaj.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/saxpath.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/secure-filter.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/spring.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/strip-filter.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/struts-el.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/compression-filter.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/secure-filter.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/strip-filter.jar" dest="${classpath.jsp}" />
+
+		<unjar src="${project.dir}/lib/development/saxpath.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/axis.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/commons-beanutils.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/commons-digester.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/saaj.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/simplecaptcha.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/spring.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/struts-el.jar" dest="${classpath.jsp}" />
 
 		<move file="tmp/WEB-INF/web.xml" tofile="tmp/WEB-INF/web.xml.bak" />
 
@@ -237,7 +238,7 @@
 					<then>
 						<antcall target="compile-jboss-jetty" />
 
-						<copy todir="${app.server.server.dir}/work">
+						<copy todir="${app.server.dir}/server/default/work">
 							<fileset dir="classes/${app.server.type}">
 								<exclude name="**/*.jspc_error" />
 								<exclude name="**/*.java" />
@@ -249,7 +250,7 @@
 						<then>
 							<antcall target="compile-jboss-tomcat" />
 
-							<copy todir="${app.server.server.dir}/work/jboss.web/localhost/_">
+							<copy todir="${app.server.dir}/server/default/work/jboss.web/localhost/_">
 								<fileset dir="classes/${app.server.type}">
 									<exclude name="**/*.jspc_error" />
 									<exclude name="**/*.java" />
