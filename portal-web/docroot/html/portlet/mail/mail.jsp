@@ -202,7 +202,7 @@ String mailLineColor = "#B3B6B0";
 			}
 
 			#portlet-mail-msg-detailed-frame {
-				height: 200px;
+				height: auto;
 			}
 
 			.portlet-mail-title-text span {
