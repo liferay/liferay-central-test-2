@@ -590,6 +590,12 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		return getMessageDisplay(message, userId);
 	}
 
+	public List getGroupMessages(String groupId, int begin, int end)
+		throws SystemException {
+
+		return MBMessageFinder.findByGroupId(groupId, begin, end);
+	}
+
 	public int getGroupMessagesCount(String groupId) throws SystemException {
 		return MBMessageFinder.countByGroupId(groupId);
 	}
@@ -909,6 +915,19 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		category.setLastPostDate(modifiedDate);
 
 		MBCategoryUtil.update(category);
+
+		return message;
+	}
+
+	public MBMessage updateMessage(String messageId, String body)
+		throws PortalException, SystemException {
+
+		MBMessage message = MBMessageUtil.findByPrimaryKey(
+			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
+
+		message.setBody(body);
+
+		MBMessageUtil.update(message);
 
 		return message;
 	}

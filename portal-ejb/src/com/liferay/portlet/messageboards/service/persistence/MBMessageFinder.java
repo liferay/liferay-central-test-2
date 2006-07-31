@@ -27,6 +27,20 @@ import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.spring.hibernate.CustomSQLUtil;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.util.StringUtil;
+import com.liferay.util.dao.hibernate.QueryPos;
+import com.liferay.util.dao.hibernate.QueryUtil;
+
+import java.util.Iterator;
+import java.util.List;
+
+import org.hibernate.Hibernate;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 
 import java.util.Iterator;
 import java.util.List;
@@ -48,6 +62,9 @@ public class MBMessageFinder {
 
 	public static String COUNT_BY_GROUP_ID =
 		MBMessageFinder.class.getName() + ".countByGroupId";
+
+	public static String FIND_BY_GROUP_ID =
+		MBMessageFinder.class.getName() + ".findByGroupId";
 
 	public static int countByCategoryIds(List categoryIds)
 		throws SystemException {
@@ -129,6 +146,38 @@ public class MBMessageFinder {
 			}
 
 			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static List findByGroupId(String groupId, int begin, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_GROUP_ID);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.setCacheable(false);
+
+			q.addEntity("MBMessage", MBMessage.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

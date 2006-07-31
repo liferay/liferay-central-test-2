@@ -332,6 +332,21 @@ public class MBMessageLocalServiceUtil {
 		}
 	}
 
+	public static java.util.List getGroupMessages(java.lang.String groupId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		try {
+			MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+			return mbMessageLocalService.getGroupMessages(groupId, begin, end);
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static int getGroupMessagesCount(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		try {
@@ -548,6 +563,26 @@ public class MBMessageLocalServiceUtil {
 
 			return mbMessageLocalService.updateMessage(messageId, createDate,
 				modifiedDate);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
+		java.lang.String messageId, java.lang.String body)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+			return mbMessageLocalService.updateMessage(messageId, body);
 		}
 		catch (com.liferay.portal.PortalException pe) {
 			throw pe;

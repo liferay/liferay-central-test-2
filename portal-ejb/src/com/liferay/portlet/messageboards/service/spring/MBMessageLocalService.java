@@ -110,6 +110,9 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public java.util.List getGroupMessages(java.lang.String groupId, int begin,
+		int end) throws com.liferay.portal.SystemException;
+
 	public int getGroupMessagesCount(java.lang.String groupId)
 		throws com.liferay.portal.SystemException;
 
@@ -165,6 +168,11 @@ public interface MBMessageLocalService {
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		java.lang.String messageId, java.util.Date createDate,
 		java.util.Date modifiedDate)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
+		java.lang.String messageId, java.lang.String body)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 }

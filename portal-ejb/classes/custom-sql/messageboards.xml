@@ -37,6 +37,18 @@
 					(MBMessageFlag.userId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByGroupId">
+		<![CDATA[
+			SELECT
+				{MBMessage.*}
+			FROM
+				MBMessage
+			INNER JOIN
+				MBCategory ON
+					(MBCategory.categoryId = MBMessage.categoryId) AND
+					(MBCategory.groupId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByCategoryIds">
 		<![CDATA[
 			SELECT

@@ -169,6 +169,11 @@ public class MBMessageLocalServiceEJBImpl implements MBMessageLocalService,
 			classPK);
 	}
 
+	public java.util.List getGroupMessages(java.lang.String groupId, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getService().getGroupMessages(groupId, begin, end);
+	}
+
 	public int getGroupMessagesCount(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		return getService().getGroupMessagesCount(groupId);
@@ -250,6 +255,13 @@ public class MBMessageLocalServiceEJBImpl implements MBMessageLocalService,
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return getService().updateMessage(messageId, createDate, modifiedDate);
+	}
+
+	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
+		java.lang.String messageId, java.lang.String body)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().updateMessage(messageId, body);
 	}
 
 	public void ejbCreate() throws CreateException {

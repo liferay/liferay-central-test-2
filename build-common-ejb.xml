@@ -99,13 +99,12 @@
 					<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 				</or>
 				<then>
-					<copy file="${jar.file}.jar" todir="${app.server.portal.dir}" />
+					<unjar src="${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
 
-					<jar
-						basedir="."
-						destfile="${app.server.portal.dir}/${jar.file}.jar"
-						manifest="classes/META-INF/MANIFEST.MF.JOnAS"
-						update="yes"
+					<copy
+						file="classes/META-INF/MANIFEST.MF.JOnAS"
+						tofile="${app.server.portal.dir}/${jar.file}.jar/META-INF/MANIFEST.MF"
+						overwrite="yes"
 					/>
 				</then>
 			</elseif>
