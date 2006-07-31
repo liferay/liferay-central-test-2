@@ -287,11 +287,7 @@ public class MailUtil {
 
 			Store store = _getStore(ses);
 
-			if (!folderName.equals(MAIL_INBOX_NAME) &&
-				!folderName.startsWith(MAIL_BOX_STYLE)) {
-
-				folderName = MAIL_BOX_STYLE + folderName;
-			}
+			folderName = _getResolvedFolderName(folderName);
 
 			folder = store.getFolder(folderName);
 
@@ -319,7 +315,9 @@ public class MailUtil {
 
 			IMAPFolder folder = _getFolder(ses);
 
-			if (!folder.getName().equals(MAIL_TRASH_NAME)) {
+			String folderName = _getResolvedFolderName(folder.getName());
+
+			if (!folderName.equals(MAIL_TRASH_NAME)) {
 				moveMessages(ses, messageIds, MAIL_TRASH_NAME);
 			}
 			else {
@@ -385,6 +383,8 @@ public class MailUtil {
 
 			IMAPFolder folder = _getFolder(ses);
 
+			String folderName = _getResolvedFolderName(folder.getName());
+
 			Message[] messages = folder.getMessages();
 
 			FetchProfile fetchProfile = new FetchProfile();
@@ -405,8 +405,8 @@ public class MailUtil {
 
 				mailEnvelope.setMessageId(folder.getUID(message));
 
-				if (MAIL_SENT_NAME.equals(folder.getName()) ||
-					MAIL_DRAFTS_NAME.equals(folder.getName())) {
+				if (MAIL_SENT_NAME.equals(folderName) ||
+					MAIL_DRAFTS_NAME.equals(folderName)) {
 
 			    	Address[] recipients = message.getAllRecipients();
 
@@ -619,22 +619,20 @@ public class MailUtil {
 
 		IMAPFolder toFolder = null;
 
-		if (!toFolderName.equals(MAIL_INBOX_NAME) &&
-			!toFolderName.startsWith(MAIL_BOX_STYLE)) {
-
-			toFolderName = MAIL_BOX_STYLE + toFolderName;
-		}
+		toFolderName = _getResolvedFolderName(toFolderName);
 
 		try {
 			MailSessionLock.lock(ses.getId());
 
 			IMAPFolder folder = _getFolder(ses);
 
-			if (folder.getName().equals(toFolderName)) {
+			String folderName = _getResolvedFolderName(folder.getName());
+
+			if (folderName.equals(toFolderName)) {
 				return;
 			}
 
-			if ((folder.getName().equals(MAIL_DRAFTS_NAME) ||
+			if ((folderName.equals(MAIL_DRAFTS_NAME) ||
 					toFolderName.equals(MAIL_DRAFTS_NAME)) &&
 				(!toFolderName.equals(MAIL_TRASH_NAME))) {
 
@@ -675,11 +673,7 @@ public class MailUtil {
 		throws FolderException, StoreException {
 
 		try {
-			if (!folderName.equals(MAIL_INBOX_NAME) &&
-				!folderName.startsWith(MAIL_BOX_STYLE)) {
-
-				folderName = MAIL_BOX_STYLE + folderName;
-			}
+			folderName = _getResolvedFolderName(folderName);
 
 			for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
 				if (DEFAULT_FOLDERS[i].equals(folderName)) {
@@ -713,17 +707,8 @@ public class MailUtil {
 		throws FolderException, StoreException {
 
 		try {
-			if (!oldFolderName.equals(MAIL_INBOX_NAME) &&
-				!oldFolderName.startsWith(MAIL_BOX_STYLE)) {
-
-				oldFolderName = MAIL_BOX_STYLE + oldFolderName;
-			}
-
-			if (!newFolderName.equals(MAIL_INBOX_NAME) &&
-				!newFolderName.startsWith(MAIL_BOX_STYLE)) {
-
-				newFolderName = MAIL_BOX_STYLE + newFolderName;
-			}
+			oldFolderName = _getResolvedFolderName(oldFolderName);
+			newFolderName = _getResolvedFolderName(newFolderName);
 
 			for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
 				if (DEFAULT_FOLDERS[i].equals(oldFolderName)) {
@@ -769,7 +754,9 @@ public class MailUtil {
 
 				Folder curFolder = _getFolder(ses);
 
-				if (curFolder.getName().equals(oldFolderName)) {
+				String folderName = _getResolvedFolderName(curFolder.getName());
+
+				if (folderName.equals(oldFolderName)) {
 					setFolder(ses, newFolderName);
 				}
 			}
@@ -943,20 +930,16 @@ public class MailUtil {
 		throws FolderException, StoreException {
 
 		try {
-			if (Validator.isNull(folderName)) {
-				folderName = MAIL_INBOX_NAME;
-			}
-			else if (!folderName.equals(MAIL_INBOX_NAME) &&
-					 !folderName.startsWith(MAIL_BOX_STYLE)) {
-
-				folderName = MAIL_BOX_STYLE + folderName;
-			}
+			folderName = _getResolvedFolderName(folderName);
 
 			IMAPFolder folder = (IMAPFolder)ses.getAttribute(
 				WebKeys.MAIL_FOLDER);
 
 			if (folder != null) {
-				if (!folder.getName().equals(folderName)) {
+				String currFolderName =
+					_getResolvedFolderName(folder.getName());
+
+				if (!currFolderName.equals(folderName)) {
 					_closeFolder(ses);
 
 					folder = null;
@@ -1027,6 +1010,21 @@ public class MailUtil {
 		}
 
 		return remoteMailAttachment;
+	}
+
+	private static String _getResolvedFolderName(String folderName) {
+		String resolvedName = folderName;
+		
+		if (Validator.isNull(folderName)) {
+			resolvedName = MAIL_INBOX_NAME;
+		}
+		else if (!folderName.equals(MAIL_INBOX_NAME) &&
+				 !folderName.startsWith(MAIL_BOX_STYLE)) {
+
+			resolvedName = MAIL_BOX_STYLE + folderName;
+		}
+
+		return resolvedName;
 	}
 
 	private static Store _getStore(HttpSession ses)
