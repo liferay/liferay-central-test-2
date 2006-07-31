@@ -441,7 +441,7 @@ String mailLineColor = "#B3B6B0";
 							</div>
 							<div id="portlet-mail-msg-detailed-pane">
 								<div id="portlet-mail-msg-frame-div">
-									<iframe frameborder="0" height="250" id="portlet-mail-msg-detailed-frame" src="" width="100%"></iframe>
+									<iframe frameborder="0" id="portlet-mail-msg-detailed-frame" src="" width="100%"></iframe>
 								</div>
 							</div>
 						</td>
