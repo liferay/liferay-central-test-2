@@ -63,7 +63,6 @@ import javax.mail.internet.InternetAddress;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -116,11 +115,13 @@ public class EditMessageAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
+		PortletPreferences prefs = req.getPreferences();
+
 		String folderId = ParamUtil.getString(req, "folderId");
 		long messageId = ParamUtil.getLong(req, "messageId");
 
-		String signature =
-			req.getPreferences().getValue("signature", StringPool.BLANK);
+		String signature = prefs.getValue("signature", StringPool.BLANK);
+
 		if (Validator.isNotNull(signature)) {
 			signature = "<br />--<br />" + signature;
 		}

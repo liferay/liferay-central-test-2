@@ -140,7 +140,7 @@
 				<div style="clear: both;"></div>
 			</div>
 			<div class="message-board-thread-body" style="padding: 15px;">
-				
+
 				<%
 				String msgBody = message.getBody(false);
 
@@ -216,7 +216,7 @@
 					int lessThanPos = msgBody.indexOf("<", x);
 
 					int y = -1;
-					
+
 					if (spacePos != -1) {
 						y = spacePos;
 					}
@@ -258,7 +258,7 @@
 							break;
 						}
 					}
-					
+
 					msgBody = msgBody.substring(0, x) + url + msgBody.substring(y, msgBody.length());
 				}
 
@@ -274,7 +274,7 @@
 
 					String emotionImage = msgBody.substring(x + emotionsPath.length() + 1, y) + ".gif";
 
-					x = msgBody.indexOf(emotionsPath, x + 1); 
+					x = msgBody.indexOf(emotionsPath, x + 1);
 				}
 
 				msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emotions", themeDisplay.getPathThemeImage() + "/emotions");*/
