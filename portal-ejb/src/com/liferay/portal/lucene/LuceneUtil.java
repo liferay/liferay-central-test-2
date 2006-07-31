@@ -139,7 +139,7 @@ public class LuceneUtil {
 	}
 
 	public static void write(IndexWriter writer) throws IOException {
-		//writer.optimize();
+		writer.optimize();
 		writer.close();
 	}
 
