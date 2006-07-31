@@ -70,7 +70,7 @@
 					<unjar src="${modules.dir}${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
 
 					<copy
-						file="classes/META-INF/MANIFEST.MF.JOnAS"
+						file="${app.server.portal.dir}/${jar.file}.jar/META-INF/MANIFEST.MF.JOnAS"
 						tofile="${app.server.portal.dir}/${jar.file}.jar/META-INF/MANIFEST.MF"
 						overwrite="yes"
 					/>
@@ -97,7 +97,15 @@
 				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 			</or>
 			<then>
-				<property name="war.file.dest" value="${app.server.portal.dir}/${war.file}.war" />
+				<if>
+					<equals arg1="${war.file}" arg2="ext-web" />
+					<then>
+						<property name="war.file.dest" value="${app.server.portal.dir}/portal-web.war" />
+					</then>
+					<else>
+						<property name="war.file.dest" value="${app.server.portal.dir}/${war.file}.war" />
+					</else>
+				</if>
 			</then>
 			<else>
 				<if>

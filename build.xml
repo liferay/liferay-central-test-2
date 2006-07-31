@@ -742,13 +742,13 @@ app.server.jonas-jetty.ejbgen.compile=on</echo>
 		<delete file="liferay-portal-jboss-jetty-${lp.version.file.name}.zip" failonerror="false" />
 		
 		<zip zipfile="liferay-portal-jboss-jetty-${lp.version.file.name}.zip"
-			basedir="${lp.ext.dir}/servers/jboss-jetty"
+			basedir="${app.server.jboss-jetty.dir}"
 		/>
 
 		<delete file="liferay-portal-jboss-tomcat-${lp.version.file.name}.zip" failonerror="false" />
 		
 		<zip zipfile="liferay-portal-jboss-tomcat-${lp.version.file.name}.zip"
-			basedir="${lp.ext.dir}/servers/jboss-tomcat"
+			basedir="${app.server.jboss-tomcat.dir}"
 		/>
 	</target>
 
@@ -756,7 +756,7 @@ app.server.jonas-jetty.ejbgen.compile=on</echo>
 		<delete file="liferay-portal-jetty-${lp.version.file.name}.zip" failonerror="false" />
 		
 		<zip zipfile="liferay-portal-jetty-${lp.version.file.name}.zip"
-			basedir="${lp.ext.dir}/servers/jetty"
+			basedir="${app.server.jetty.dir}"
 		/>
 	</target>
 
@@ -764,13 +764,13 @@ app.server.jonas-jetty.ejbgen.compile=on</echo>
 		<delete file="liferay-portal-jonas-jetty-${lp.version.file.name}.zip" failonerror="false" />
 		
 		<zip zipfile="liferay-portal-jonas-jetty-${lp.version.file.name}.zip"
-			basedir="${lp.ext.dir}/servers/jonas-jetty"
+			basedir="${app.server.jonas-jetty.dir}"
 		/>
 
 		<delete file="liferay-portal-jonas-tomcat-${lp.version.file.name}.zip" failonerror="false" />
 		
 		<zip zipfile="liferay-portal-jonas-tomcat-${lp.version.file.name}.zip"
-			basedir="${lp.ext.dir}/servers/jonas-tomcat"
+			basedir="${app.server.jonas-tomcat.dir}"
 		/>
 	</target>
 
@@ -787,7 +787,7 @@ app.server.jonas-jetty.ejbgen.compile=on</echo>
 		<delete file="liferay-portal-resin-${lp.version.file.name}.zip" failonerror="false" />
 		
 		<zip zipfile="liferay-portal-resin-${lp.version.file.name}.zip"
-			basedir="${lp.ext.dir}/servers/resin"
+			basedir="${app.server.resin.dir}"
 		/>
 	</target>
 
@@ -813,13 +813,13 @@ app.server.jonas-jetty.ejbgen.compile=on</echo>
 		<delete file="liferay-portal-tomcat-${lp.version.file.name}.zip" failonerror="false" />
 		
 		<zip zipfile="liferay-portal-tomcat-${lp.version.file.name}.zip"
-			basedir="${lp.ext.dir}/servers/tomcat"
+			basedir="${app.server.tomcat.dir}"
 		/>
 
 		<delete file="liferay-portal-tomcat-jdk5-${lp.version.file.name}.zip" failonerror="false" />
 		
 		<zip zipfile="liferay-portal-tomcat-jdk5-${lp.version.file.name}.zip"
-			basedir="${lp.ext.dir}/servers/tomcat"
+			basedir="${app.server.tomcat.dir}"
 			excludes="bin/jmx.jar,common/endorsed/xercesImpl.jar,common/endorsed/xml-apis.jar"
 		/>
 	</target>
@@ -848,13 +848,12 @@ app.server.jonas-jetty.ejbgen.compile=on</echo>
 		<copy file="portal-ear/liferay-portal-jaas.jar" tofile="liferay-portal-jaas-${lp.version.file.name}.jar" />
 		<copy file="portal-ear/liferay-portal.war" tofile="liferay-portal-${lp.version.file.name}.war" />
 
-		<ant dir="layouttpl" target="deploy" />
-		<ant dir="portlets" target="deploy" />
-		<ant dir="themes" target="deploy" />
+		<ant dir="layouttpl" target="deploy" inheritAll="false" />
+		<ant dir="portlets" target="deploy" inheritAll="false" />
+		<ant dir="themes" target="deploy" inheritAll="false" />
 
-		<ant dir="layouttpl" target="war" />
-		<ant dir="portlets" target="war" />
-		<ant dir="themes" target="war" />
+		<ant dir="layouttpl" target="war" inheritAll="false" />
+		<ant dir="portlets" target="war" inheritAll="false" />
 	</target>
 
 	<target name="test-release">

@@ -106,7 +106,7 @@
 					<unjar src="${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
 
 					<copy
-						file="classes/META-INF/MANIFEST.MF.JOnAS"
+						file="${app.server.portal.dir}/${jar.file}.jar/META-INF/MANIFEST.MF.JOnAS"
 						tofile="${app.server.portal.dir}/${jar.file}.jar/META-INF/MANIFEST.MF"
 						overwrite="yes"
 					/>
