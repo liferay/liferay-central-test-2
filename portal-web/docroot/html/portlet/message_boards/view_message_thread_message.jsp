@@ -275,9 +275,9 @@
 					String emotionImage = msgBody.substring(x + emotionsPath.length() + 1, y) + ".gif";
 
 					x = msgBody.indexOf(emotionsPath, x + 1);
-				}
+				}*/
 
-				msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emotions", themeDisplay.getPathThemeImage() + "/emotions");*/
+				msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emotions", themeDisplay.getPathThemeImage() + "/emotions");
 
 				msgBody = com.liferay.portlet.messageboards.util.BBCodeUtil.getHTML(msgBody);
 				%>

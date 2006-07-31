@@ -1014,7 +1014,7 @@ public class MailUtil {
 
 	private static String _getResolvedFolderName(String folderName) {
 		String resolvedName = folderName;
-		
+
 		if (Validator.isNull(folderName)) {
 			resolvedName = MAIL_INBOX_NAME;
 		}

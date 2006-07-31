@@ -35,6 +35,7 @@ import com.liferay.portal.service.spring.PermissionServiceUtil;
 import com.liferay.portal.service.spring.ResourceServiceUtil;
 import com.liferay.portal.service.spring.UserGroupServiceUtil;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.StringPool;
 
 import java.util.List;
 import java.util.Map;
@@ -192,6 +193,29 @@ public class PermissionChecker {
 	protected boolean hasGuestPermission(
 			String name, String primKey, String actionId)
 		throws PortalException, SystemException {
+
+		if (name.indexOf(StringPool.PERIOD) != -1) {
+
+			// Check unsupported model actions
+
+			List actions = ResourceActionsUtil.
+				getModelResourceGuestUnsupportedActions(name);
+
+			if (actions.contains(actionId)) {
+				return false;
+			}
+		}
+		else {
+
+			// Check unsupported portlet actions
+
+			List actions = ResourceActionsUtil.
+				getPortletResourceGuestUnsupportedActions(name);
+
+			if (actions.contains(actionId)) {
+				return false;
+			}
+		}
 
 		String companyId = user.getActualCompanyId();
 

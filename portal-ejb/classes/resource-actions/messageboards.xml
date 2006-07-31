@@ -61,7 +61,6 @@
 			<action-key>VIEW</action-key>
 		</community-defaults>
 		<guest-defaults>
-			<action-key>SUBSCRIBE</action-key>
 			<action-key>VIEW</action-key>
 		</guest-defaults>
 		<guest-unsupported>
