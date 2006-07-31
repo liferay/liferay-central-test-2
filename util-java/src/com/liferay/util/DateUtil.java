@@ -38,6 +38,16 @@ public class DateUtil {
 		// http://bugs.sun.com/bugdatabase/view_bug.do;:YfiG?bug_id=6207898 for
 		// more information.
 
+		if ((date1 != null) && (date2 == null)) {
+			return -1;
+		}
+		else if ((date1 == null) && (date2 != null)) {
+			return 1;
+		}
+		else if ((date1 == null) && (date2 == null)) {
+			return 0;
+		}
+
 		long time1 = date1.getTime();
 		long time2 = date2.getTime();
 
