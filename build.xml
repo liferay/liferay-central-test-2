@@ -188,6 +188,8 @@
 		<ant dir="lock-ejb" target="java2html" inheritAll="false" />
 		<ant dir="mail-ejb" target="java2html" inheritAll="false" />
 		<ant dir="portal-ejb" target="java2html" inheritAll="false" />
+
+		<ant dir="portal-client" target="java2html" inheritAll="false" />
 	</target>
 
 	<target name="javadoc">
@@ -621,50 +623,54 @@ auto.deploy.dest.dir=../webapps</echo>
 	<target name="build-ext-jboss-jetty">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jboss-jetty</echo>
 
-		<ant dir="${lp.ext.dir}" target="clean" />
-		<ant dir="${lp.ext.dir}" target="deploy" />
+		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
+		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
 	</target>
 
 	<target name="build-ext-jboss-tomcat">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jboss-tomcat</echo>
 
-		<ant dir="${lp.ext.dir}" target="clean" />
-		<ant dir="${lp.ext.dir}" target="deploy" />
+		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
+		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
 	</target>
 
 	<target name="build-ext-jetty">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jetty</echo>
 		
-		<ant dir="${lp.ext.dir}" target="clean" />
-		<ant dir="${lp.ext.dir}" target="deploy" />
+		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
+		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
 	</target>
 
 	<target name="build-ext-jonas-jetty">
-		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-jetty</echo>
-		
-		<ant dir="${lp.ext.dir}" target="clean" />
-		<ant dir="${lp.ext.dir}" target="deploy" />
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-jetty
+
+app.server.jonas-jetty.ejbgen.compile=on</echo>
+
+		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
+		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
 	</target>
 
 	<target name="build-ext-jonas-tomcat">
-		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-tomcat</echo>
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-tomcat
+
+app.server.jonas-jetty.ejbgen.compile=on</echo>
 		
-		<ant dir="${lp.ext.dir}" target="clean" />
-		<ant dir="${lp.ext.dir}" target="deploy" />
+		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
+		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
 	</target>
 
 	<target name="build-ext-resin">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=resin</echo>
 		
-		<ant dir="${lp.ext.dir}" target="clean" />
-		<ant dir="${lp.ext.dir}" target="deploy" />
+		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
+		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
 	</target>
 
 	<target name="build-ext-tomcat">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=tomcat</echo>
 		
-		<ant dir="${lp.ext.dir}" target="clean" />
-		<ant dir="${lp.ext.dir}" target="deploy" />
+		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
+		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
 	</target>
 
 	<target name="clean-ext">

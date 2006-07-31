@@ -15,6 +15,24 @@
 		</jar>
 	</target>
 
+	<target name="java2html">
+		<delete dir="src" />
+		<mkdir dir="src" />
+
+		<unjar src="${jar.file}.jar" dest="src" />
+
+		<antcall target="build-common-java.java2html" />
+	</target>
+
+	<target name="javadoc">
+		<delete dir="src" />
+		<mkdir dir="src" />
+
+		<unjar src="${jar.file}.jar" dest="src" />
+
+		<antcall target="build-common-java.javadoc" />
+	</target>
+
 	<target name="build-client" depends="clean">
 		<echo message="Make sure the server is listening on ${client.url}." />
 		<echo message="" />
