@@ -945,7 +945,10 @@ public class MailUtil {
 					folder = null;
 				}
 				else if (!folder.isOpen()) {
-					_log.info("The folder is closed and needs to be reopened");
+					if (_log.isInfoEnabled()) {
+						_log.info(
+							"The folder is closed and needs to be reopened");
+					}
 
 					_closeFolder(ses);
 
@@ -956,9 +959,9 @@ public class MailUtil {
 			if (folder == null) {
 				String userId = (String)ses.getAttribute(WebKeys.USER_ID);
 
-				String serviceName = userId + StringPool.COLON + 
+				String serviceName = userId + StringPool.COLON +
 					WebKeys.MAIL_FOLDER + StringPool.PERIOD + folderName;
-				
+
 				Store store = _getStore(ses);
 
 				folder = (IMAPFolder)store.getFolder(folderName);
@@ -1047,9 +1050,11 @@ public class MailUtil {
 
 		try {
 			Store store = (Store)ses.getAttribute(WebKeys.MAIL_STORE);
-			
+
 			if (store != null && !store.isConnected()) {
-				_log.info("The store needs to be reconnected");
+				if (_log.isInfoEnabled()) {
+					_log.info("The store needs to be reconnected");
+				}
 
 				cleanUp(ses);
 

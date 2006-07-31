@@ -245,7 +245,7 @@ public class MailAction extends JSONAction {
 				mailEnvelope.getSubject(), StringPool.NBSP);
 
 			String dateString = StringPool.NBSP;
-			
+
 			if (mailEnvelope.getDate() != null) {
 				dateString = dateFormatDate.format(mailEnvelope.getDate());
 

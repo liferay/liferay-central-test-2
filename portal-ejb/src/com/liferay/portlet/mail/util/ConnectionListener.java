@@ -19,9 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.liferay.portlet.mail.util;
 
-import java.util.Date;
+package com.liferay.portlet.mail.util;
 
 import javax.mail.event.ConnectionEvent;
 
@@ -38,32 +37,41 @@ public class ConnectionListener implements javax.mail.event.ConnectionListener {
 
 	public ConnectionListener(String service) {
 		super();
-		
+
 		_service = service;
 	}
 
-	public void closed(ConnectionEvent arg0) {
-		long uptime = (System.currentTimeMillis() - _startTime) / 1000;
+	public void closed(ConnectionEvent event) {
+		if (_log.isInfoEnabled()) {
+			long uptime = (System.currentTimeMillis() - _startTime) / 1000;
 
-		_log.info("The " + _service + " service has been closed after " +
-			uptime + "secs of uptime.");
+			_log.info(
+				"The " + _service + " service has been closed after " +
+					uptime + "secs of uptime.");
+		}
 	}
 
-	public void disconnected(ConnectionEvent arg0) {
-		long uptime = (System.currentTimeMillis() - _startTime) / 1000;
+	public void disconnected(ConnectionEvent event) {
+		if (_log.isInfoEnabled()) {
+			long uptime = (System.currentTimeMillis() - _startTime) / 1000;
 
-		_log.info("The " + _service + " service has been disconnected after " +
-			uptime + "secs of uptime.");
+			_log.info(
+				"The " + _service + " service has been disconnected after " +
+					uptime + "secs of uptime.");
+		}
 	}
 
-	public void opened(ConnectionEvent arg0) {
+	public void opened(ConnectionEvent event) {
 		_startTime = System.currentTimeMillis();
-		
-		_log.info("The " + _service + " service has been opened");
+
+		if (_log.isInfoEnabled()) {
+			_log.info("The " + _service + " service has been opened");
+		}
 	}
+
+	private static Log _log = LogFactory.getLog(ConnectionListener.class);
 
 	private String _service;
 	private long _startTime;
-	private static Log _log = LogFactory.getLog(ConnectionListener.class);
 
 }
