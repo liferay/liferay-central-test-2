@@ -159,14 +159,19 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-msgs-preview-pane {
 				height: 200px;
-				overflow: hidden;
-				<c:if test="<%= BrowserSniffer.is_ie(request) %>">
-					overflow-y: auto;
-				</c:if>
-				<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
-					overflow: -moz-scrollbars-vertical;
-				</c:if>
 				width: 100%;
+				<c:choose>
+					<c:when test="<%= BrowserSniffer.is_ie(request) %>">
+						overflow: hidden;
+						overflow-y: auto;
+					</c:when>
+					<c:when test="<%= BrowserSniffer.is_safari(request) %>">
+						overflow: auto;
+					</c:when>
+					<c:otherwise>
+						overflow: -moz-scrollbars-vertical;
+					</c:otherwise>
+				</c:choose>
 			}
 
 			#portlet-mail-msgs-preview-pane table {
@@ -215,7 +220,7 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-msgs-title-subject {
 				overflow: hidden;
-				width: 250px;
+				width: 300px;
 			}
 
 			#portlet-mail-msgs-title-subject div {
@@ -224,7 +229,14 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-msgs-title-received {
 				overflow: hidden;
-				width: 100%;
+				<c:choose>
+					<c:when test="<%= BrowserSniffer.is_safari(request) %>">
+						width: 150px;
+					</c:when>
+					<c:otherwise>
+						width: 100%;
+					</c:otherwise>
+				</c:choose>
 			}
 
 			#portlet-mail-msgs-title-received div {
@@ -262,7 +274,7 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-msgs-subject {
 				overflow: hidden;
-				width: 250px;
+				width: 300px;
 			}
 
 			#portlet-mail-msgs-subject div {
@@ -275,7 +287,14 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-msgs-received {
 				overflow: hidden;
-				width: 100%;
+				<c:choose>
+					<c:when test="<%= BrowserSniffer.is_safari(request) %>">
+						width: 150px;
+					</c:when>
+					<c:otherwise>
+						width: 100%;
+					</c:otherwise>
+				</c:choose>
 			}
 
 			#portlet-mail-msgs-received div {
@@ -351,7 +370,7 @@ String mailLineColor = "#B3B6B0";
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
 						<td class="portlet-mail-msgs-pane-td" width="100%">
-							<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							<table border="0" cellpadding="0" cellspacing="0" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"100%\"" %>>
 							<tr>
 								<td class="portlet-mail-msgs-title">
 									<div id="portlet-mail-msgs-title-from">
@@ -373,7 +392,7 @@ String mailLineColor = "#B3B6B0";
 								<td id="portlet-mail-msgs-subject-handle" style="cursor: e-resize;">
 									<div class="portlet-mail-msgs-title-handle"></div>
 								</td>
-								<td class="portlet-mail-msgs-title" width="90%">
+								<td class="portlet-mail-msgs-title" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"90%\"" %>>
 									<div id="portlet-mail-msgs-title-received">
 										<div class="portlet-mail-title-text">
 											<span><%= LanguageUtil.get(pageContext, "date") %></span>
@@ -384,7 +403,7 @@ String mailLineColor = "#B3B6B0";
 							</table>
 
 							<div id="portlet-mail-msgs-preview-pane">
-								<table border="0" cellpadding="0" cellspacing="0" width="100%">
+								<table border="0" cellpadding="0" cellspacing="0" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"100%\"" %>>
 								<tr>
 									<td>
 										<div id="portlet-mail-msgs-from">
@@ -400,7 +419,7 @@ String mailLineColor = "#B3B6B0";
 									<td>
 										<div class="portlet-mail-msgs-title-handle"></div>
 									</td>
-									<td width="90%">
+									<td <%= BrowserSniffer.is_safari(request) ? "" : "width=\"90%\"" %>>
 										<div id="portlet-mail-msgs-received">
 										</div>
 									</td>
