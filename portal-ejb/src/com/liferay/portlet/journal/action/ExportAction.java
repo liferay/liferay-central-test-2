@@ -250,7 +250,11 @@ public class ExportAction extends Action {
 		while (itr.hasNext()) {
 			JournalArticle article = (JournalArticle)itr.next();
 
-			if (article.isApproved()) {
+			if (article.isApproved() &&
+				JournalArticleLocalServiceUtil.isLatestVersion(
+					article.getCompanyId(), article.getArticleId(),
+					article.getVersion())) {
+
 				sb.append("insert into JournalArticle (");
 				sb.append("companyId, articleId, version, groupId, userId, ");
 				sb.append("userName, createDate, modifiedDate, title, ");
@@ -262,8 +266,10 @@ public class ExportAction extends Action {
 				addColumn(sb, article.getArticleId());
 				addColumn(sb, JournalArticle.DEFAULT_VERSION);
 				addColumn(sb, article.getGroupId());
-				addColumn(sb, article.getUserId());
-				addColumn(sb, article.getUserName());
+				//addColumn(sb, article.getUserId());
+				//addColumn(sb, article.getUserName());
+				addColumn(sb, "liferay.com.1");
+				addColumn(sb, "Joe Bloggs");
 				addColumn(sb, article.getCreateDate());
 				addColumn(sb, article.getModifiedDate());
 				addColumn(sb, article.getTitle());
@@ -273,8 +279,10 @@ public class ExportAction extends Action {
 				addColumn(sb, article.getTemplateId());
 				addColumn(sb, article.getDisplayDate(), false);
 				addColumn(sb, article.getApproved());
-				addColumn(sb, article.getApprovedByUserId());
-				addColumn(sb, article.getApprovedByUserName());
+				//addColumn(sb, article.getApprovedByUserId());
+				//addColumn(sb, article.getApprovedByUserName());
+				addColumn(sb, "liferay.com.1");
+				addColumn(sb, "Joe Bloggs");
 				addColumn(sb, article.getExpired());
 				//addColumn(sb, article.getExpirationDate());
 				//addColumn(sb, article.getReviewDate());
@@ -497,6 +505,18 @@ public class ExportAction extends Action {
 			String imageId = image.getImageId();
 
 			boolean insert = true;
+
+			if (imageId.startsWith("liferay.com.")) {
+				String suffix = StringUtil.replace(imageId, "liferay.com.", "");
+
+				if (Validator.isNumber(suffix)) {
+					insert = false;
+				}
+			}
+
+			if (imageId.indexOf(".image_gallery.") != -1) {
+				insert = false;
+			}
 
 			if ((imageId.indexOf(".shopping.item.") != -1) /*&&
 					imageId.endsWith(".large")*/) {
