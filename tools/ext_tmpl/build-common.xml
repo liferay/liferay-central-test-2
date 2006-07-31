@@ -173,6 +173,7 @@
 					file="${war.file.dest}/WEB-INF/web-jetty.xml.jonas-jetty"
 					tofile="${war.file.dest}/WEB-INF/web-jetty.xml"
 					overwrite="yes"
+					failonerror="false"
 				/>
 			</then>
 			<elseif>
