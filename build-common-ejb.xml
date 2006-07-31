@@ -80,6 +80,10 @@
 				</jar>
 
 				<delete dir="${tstamp.dir}" />
+
+				<delete>
+					<fileset dir="." includes="jonas*.log*" />
+				</delete>
 			</then>
 		</if>
 	</target>
