@@ -632,7 +632,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
-			q.setCacheable(true);
+			q.setCacheable(false);
 			q.addEntity("ShoppingItemPrice",
 				com.liferay.portlet.shopping.model.ShoppingItemPrice.class);
 
@@ -656,7 +656,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETSHOPPINGITEMPRICESSIZE);
-			q.setCacheable(true);
+			q.setCacheable(false);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);

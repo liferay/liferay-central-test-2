@@ -226,7 +226,7 @@ public class UserGroupPersistence extends BasePersistence {
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
-			q.setCacheable(true);
+			q.setCacheable(false);
 			q.addEntity("User_", com.liferay.portal.model.User.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -249,7 +249,7 @@ public class UserGroupPersistence extends BasePersistence {
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETUSERSSIZE);
-			q.setCacheable(true);
+			q.setCacheable(false);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);

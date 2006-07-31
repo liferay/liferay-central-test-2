@@ -3027,7 +3027,7 @@ public class ServiceBuilder {
 				}
 
 				sb.append("SQLQuery q = session.createSQLQuery(sql);");
-				sb.append("q.setCacheable(true);");
+				sb.append("q.setCacheable(false);");
 				sb.append("q.addEntity(\"" + tempEntity.getTable() + "\", " + tempEntity.getPackagePath() + ".model." + tempEntity.getName() + ".class);");
 				sb.append("QueryPos qPos = QueryPos.getInstance(q);");
 				sb.append("qPos.add(pk);");
@@ -3048,7 +3048,7 @@ public class ServiceBuilder {
 				sb.append("try {");
 				sb.append("session = openSession();");
 				sb.append("SQLQuery q = session.createSQLQuery(_SQL_GET" + tempEntity.getName().toUpperCase() + "SSIZE);");
-				sb.append("q.setCacheable(true);");
+				sb.append("q.setCacheable(false);");
 				sb.append("q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);");
 				sb.append("QueryPos qPos = QueryPos.getInstance(q);");
 				sb.append("qPos.add(pk);");

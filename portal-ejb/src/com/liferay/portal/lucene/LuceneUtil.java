@@ -72,7 +72,8 @@ import org.apache.lucene.store.jdbc.dialect.Dialect;
  */
 public class LuceneUtil {
 
-	public static final Pattern TERM_END_PATTERN = Pattern.compile("(\\w)\\b");
+	public static final Pattern TERM_END_PATTERN =
+		Pattern.compile("(\\w{4,}?)\\b");
 
 	public static void addTerm(
 			BooleanQuery booleanQuery, String field, String text)
@@ -81,13 +82,20 @@ public class LuceneUtil {
 		if (Validator.isNotNull(text)) {
 			Matcher matcher = TERM_END_PATTERN.matcher(text);
 
-			// Add wildcard to the end of every word
+			// Add wildcard to the end of every word 4 chars or longer
 
 			text = matcher.replaceAll("$1*");
 
-			// Add fuzzy query to the end of every word
+			// Add fuzzy query to the end of every word 4 chars or longer
 
 			text = text + " " + matcher.replaceAll("$1~");
+
+			// Remove invalid hints
+
+			text = StringUtil.replace(text, "**", "*");
+			text = StringUtil.replace(text, "*~", "*");
+			text = StringUtil.replace(text, "~~", "~");
+			text = StringUtil.replace(text, "~*", "~");
 
 			QueryParser queryParser = new QueryParser(
 				field, LuceneUtil.getAnalyzer());
