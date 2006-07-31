@@ -944,12 +944,27 @@ public class MailUtil {
 
 					folder = null;
 				}
+				else if (!folder.isOpen()) {
+					_log.info("The folder is closed and needs to be reopened");
+
+					_closeFolder(ses);
+
+					folder = null;
+				}
 			}
 
 			if (folder == null) {
+				String userId = (String)ses.getAttribute(WebKeys.USER_ID);
+
+				String serviceName = userId + StringPool.COLON + 
+					WebKeys.MAIL_FOLDER + StringPool.PERIOD + folderName;
+				
 				Store store = _getStore(ses);
 
 				folder = (IMAPFolder)store.getFolder(folderName);
+
+				folder.addConnectionListener(
+					new ConnectionListener(serviceName));
 
 				folder.open(IMAPFolder.READ_WRITE);
 
@@ -1032,6 +1047,14 @@ public class MailUtil {
 
 		try {
 			Store store = (Store)ses.getAttribute(WebKeys.MAIL_STORE);
+			
+			if (store != null && !store.isConnected()) {
+				_log.info("The store needs to be reconnected");
+
+				cleanUp(ses);
+
+				store = null;
+			}
 
 			if (store == null) {
 				Session session = MailEngine.getSession();
@@ -1039,6 +1062,9 @@ public class MailUtil {
 				String imapHost = session.getProperty("mail.imap.host");
 
 				String userId = (String)ses.getAttribute(WebKeys.USER_ID);
+
+				String serviceName =
+					userId + StringPool.COLON + WebKeys.MAIL_STORE;
 
 				if (GetterUtil.getBoolean(
 						PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
@@ -1050,6 +1076,9 @@ public class MailUtil {
 					WebKeys.USER_PASSWORD);
 
 				store = session.getStore("imap");
+
+				store.addConnectionListener(
+					new ConnectionListener(serviceName));
 
 				store.connect(imapHost, userId, password);
 
