@@ -39,6 +39,7 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessagePK;
 import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.SystemProperties;
+import com.liferay.util.Validator;
 import com.liferay.util.dao.DataAccess;
 
 import java.io.File;
@@ -69,7 +70,6 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			_upgradeCategory();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
 			throw new UpgradeException(e);
 		}
 	}
@@ -353,6 +353,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 			while (rs.next()) {
 				String topicId = rs.getString("topicId");
+				String groupId = rs.getString("groupId");
 				String userId = rs.getString("userId");
 				Timestamp createDate = rs.getTimestamp("createDate");
 				Timestamp modifiedDate = rs.getTimestamp("modifiedDate");
@@ -369,12 +370,12 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 					category = MBCategoryLocalServiceUtil.getSystemCategory();
 				}
 				else {
-					MBCategory parentCategory =
-						MBCategoryLocalServiceUtil.getCategory(
-							parentCategoryId);
+					if (Validator.isNull(parentCategoryId)) {
+						parentCategoryId =
+							MBCategory.DEFAULT_PARENT_CATEGORY_ID;
+					}
 
-					String plid =
-						Layout.PUBLIC + parentCategory.getGroupId() + ".1";
+					String plid = Layout.PUBLIC + groupId + ".1";
 					boolean addCommunityPermissions = true;
 					boolean addGuestPermissions = true;
 

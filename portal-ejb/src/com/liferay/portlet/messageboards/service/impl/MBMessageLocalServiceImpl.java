@@ -338,9 +338,24 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		addMessageResources(
+			categoryId, null, messageId, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public void addMessageResources(
+			String categoryId, String topicId, String messageId,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
 		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
+
+		if (topicId == null) {
+			topicId = MBMessage.DEPRECATED_TOPIC_ID;
+		}
+
 		MBMessage message = MBMessageUtil.findByPrimaryKey(
-			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
+			new MBMessagePK(topicId, messageId));
 
 		addMessageResources(
 			category, message, addCommunityPermissions, addGuestPermissions);

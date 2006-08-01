@@ -64,6 +64,12 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public void addMessageResources(java.lang.String categoryId,
+		java.lang.String topicId, java.lang.String messageId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public void addMessageResources(
 		com.liferay.portlet.messageboards.model.MBCategory category,
 		com.liferay.portlet.messageboards.model.MBMessage message,

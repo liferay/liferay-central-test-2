@@ -22,21 +22,36 @@
 
 package com.liferay.portal.upgrade.v4_0_0;
 
+import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.documentlibrary.NoSuchDirectoryException;
+import com.liferay.documentlibrary.NoSuchFileException;
+import com.liferay.documentlibrary.service.spring.DLServiceUtil;
 import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePK;
 import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
+import com.liferay.util.FileUtil;
+import com.liferay.util.StringPool;
 import com.liferay.util.dao.DataAccess;
+
+import java.io.File;
+import java.io.IOException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -58,6 +73,57 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
+	}
+
+	private byte[] _dlGetFile(
+			String companyId, String repositoryId, String fileName)
+		throws PortalException {
+
+		String coRepoId = companyId + StringPool.PERIOD + repositoryId;
+
+		File file = new File(
+			PropsUtil.get(PropsUtil.DL_ROOT_DIR) + coRepoId + fileName);
+
+		byte[] bytes = null;
+
+		try {
+			bytes = FileUtil.getBytes(file);
+
+			if (bytes == null || bytes.length == 0) {
+				throw new IOException();
+			}
+		}
+		catch (IOException ioe) {
+			throw new NoSuchFileException(fileName);
+		}
+
+		return bytes;
+	}
+
+	private String[] _dlGetFileNames(
+			String companyId, String repositoryId, String dirName)
+		throws PortalException {
+
+		String coRepoId = companyId + StringPool.PERIOD + repositoryId;
+
+		File directory = new File(
+			PropsUtil.get(PropsUtil.DL_ROOT_DIR) + coRepoId + dirName);
+
+		if (!directory.exists()) {
+			throw new NoSuchDirectoryException(dirName);
+		}
+
+		List fileNames = new ArrayList();
+
+		File[] array = directory.listFiles();
+
+		for (int i = 0; i < array.length; i++) {
+			if (array[i].isFile()) {
+				fileNames.add(dirName + "/" + array[i].getName());
+			}
+		}
+
+		return (String[])fileNames.toArray(new String[0]);
 	}
 
 	private void _upgradeCategory() throws Exception {
@@ -162,6 +228,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 			while (rs.next()) {
 				String messageId = rs.getString("messageId");
+				String companyId = rs.getString("companyId");
+				boolean attachments = rs.getBoolean("attachments");
 
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;
@@ -170,8 +238,16 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 					"Upgrading message " + new MBMessagePK(topicId, messageId));
 
 				MBMessageLocalServiceUtil.addMessageResources(
-					categoryId, messageId, addCommunityPermissions,
+					categoryId, topicId, messageId, addCommunityPermissions,
 					addGuestPermissions);
+
+				if (attachments) {
+					_log.debug(
+						"Message " + new MBMessagePK(topicId, messageId) +
+							" has attachments");
+
+					_upgradeMessageAttachments(companyId, topicId, messageId);
+				}
 			}
 
 			ps = con.prepareStatement(_UPGRADE_MESSAGE_2);
@@ -183,6 +259,56 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	private void _upgradeMessageAttachments(
+			String companyId, String topicId, String messageId)
+		throws Exception {
+
+		String portletId = Company.SYSTEM;
+		String groupId = Group.DEFAULT_PARENT_GROUP_ID;
+		String repositoryId = Company.SYSTEM;
+		String dirName = "/messageboards/" + topicId + "/" + messageId;
+
+		String[] fileNames = null;
+
+		try {
+			fileNames = _dlGetFileNames(companyId, repositoryId, dirName);
+		}
+		catch (NoSuchDirectoryException nsde) {
+		}
+
+		if (fileNames == null) {
+			return;
+		}
+
+		dirName = dirName.substring(1, dirName.length());
+
+		try {
+			DLServiceUtil.deleteDirectory(
+				companyId, portletId, repositoryId, dirName);
+		}
+		catch (NoSuchDirectoryException nsde) {
+		}
+
+		DLServiceUtil.addDirectory(companyId, repositoryId, dirName);
+
+		for (int i = 0; i < fileNames.length; i++) {
+			String fileName = FileUtil.getShortFileName(fileNames[i]);
+			byte[] byteArray = _dlGetFile(
+				companyId, repositoryId, fileNames[i]);
+
+			_log.debug(
+				"Migrating message board attachment " + fileNames[i]);
+
+			try {
+				DLServiceUtil.addFile(
+					companyId, portletId, groupId, repositoryId,
+					dirName + "/" + fileName, byteArray);
+			}
+			catch (DuplicateFileException dfe) {
+			}
 		}
 	}
 

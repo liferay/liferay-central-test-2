@@ -145,6 +145,27 @@ public class MBMessageLocalServiceUtil {
 		}
 	}
 
+	public static void addMessageResources(java.lang.String categoryId,
+		java.lang.String topicId, java.lang.String messageId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+			mbMessageLocalService.addMessageResources(categoryId, topicId,
+				messageId, addCommunityPermissions, addGuestPermissions);
+		}
+		catch (com.liferay.portal.PortalException pe) {
+			throw pe;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new com.liferay.portal.SystemException(e);
+		}
+	}
+
 	public static void addMessageResources(
 		com.liferay.portlet.messageboards.model.MBCategory category,
 		com.liferay.portlet.messageboards.model.MBMessage message,
