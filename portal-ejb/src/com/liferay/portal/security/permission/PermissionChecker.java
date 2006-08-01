@@ -87,8 +87,16 @@ public class PermissionChecker {
 		return user;
 	}
 
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public boolean isSignedIn() {
 		return signedIn;
+	}
+
+	public void setSignedIn(boolean signedIn) {
+		this.signedIn = signedIn;
 	}
 
 	public boolean hasPermission(
