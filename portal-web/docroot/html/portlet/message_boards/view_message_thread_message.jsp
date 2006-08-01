@@ -279,7 +279,12 @@
 
 				msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emotions", themeDisplay.getPathThemeImage() + "/emotions");
 
-				msgBody = com.liferay.portlet.messageboards.util.BBCodeUtil.getHTML(msgBody);
+				try {
+					msgBody = com.liferay.portlet.messageboards.util.BBCodeUtil.getHTML(msgBody);
+				}
+				catch (Exception e) {
+					_log.error("Could not parse message " + message.getMessageId());
+				}
 				%>
 
 				<%= msgBody %>
@@ -375,3 +380,7 @@
 
 	</table>
 </div>
+
+<%!
+private static Log _log = LogFactory.getLog("portal-web.docroot.html.portlet.message_boards.view_message_thread_message.jsp");
+%>
