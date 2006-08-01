@@ -325,3 +325,7 @@ if (message != null) {
 <script type="text/javascript">
 	document.<portlet:namespace />fm.<portlet:namespace />subject.focus();
 </script>
+
+<%!
+private static Log _log = LogFactory.getLog("portal-web.docroot.html.portlet.message_boards.edit_message.jsp");
+%>

@@ -380,7 +380,3 @@
 
 	</table>
 </div>
-
-<%!
-private static Log _log = LogFactory.getLog("portal-web.docroot.html.portlet.message_boards.view_message_thread_message.jsp");
-%>
