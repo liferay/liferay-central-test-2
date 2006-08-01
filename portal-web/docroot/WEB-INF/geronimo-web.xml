@@ -2,9 +2,9 @@
 
 <web-app xmlns="http://geronimo.apache.org/xml/ns/j2ee/web-1.1">
 	<environment>
-		<configId>
+		<moduleId>
 			<artifactId>liferay-portal</artifactId>
-		</configId>
+		</moduleId>
 		<dependencies>
 			<dependency>
 				<groupId>geronimo</groupId>
@@ -53,7 +53,6 @@
 		<non-overridable-classes/>
 	</environment>
 	<context-root>/</context-root>
-	<context-priority-classloader>false</context-priority-classloader>
 	<security-realm-name>PortalRealm</security-realm-name>
 	<security>
 		<default-principal>
