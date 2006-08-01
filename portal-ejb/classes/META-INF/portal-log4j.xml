@@ -213,7 +213,7 @@
 	</category>
 
 	<category name="com.liferay.portlet.mail.util.MailUtil">
-		<priority value="INFO" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portlet.messageboards.service.impl.MBMessageLocalServiceImpl">
