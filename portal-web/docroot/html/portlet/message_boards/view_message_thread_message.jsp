@@ -283,7 +283,7 @@
 					msgBody = com.liferay.portlet.messageboards.util.BBCodeUtil.getHTML(msgBody);
 				}
 				catch (Exception e) {
-					_log.error("Could not parse message " + message.getMessageId());
+					_log.error("Could not parse message " + message.getMessageId() + " " + e.getMessage());
 				}
 				%>
 
