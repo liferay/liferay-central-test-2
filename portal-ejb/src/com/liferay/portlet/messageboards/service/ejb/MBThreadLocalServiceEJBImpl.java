@@ -78,9 +78,20 @@ public class MBThreadLocalServiceEJBImpl implements MBThreadLocalService,
 		return getService().getGroupThreads(groupId, begin, end);
 	}
 
+	public java.util.List getGroupThreads(java.lang.String groupId,
+		java.lang.String userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getGroupThreads(groupId, userId, begin, end);
+	}
+
 	public int getGroupThreadsCount(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		return getService().getGroupThreadsCount(groupId);
+	}
+
+	public int getGroupThreadsCount(java.lang.String groupId,
+		java.lang.String userId) throws com.liferay.portal.SystemException {
+		return getService().getGroupThreadsCount(groupId, userId);
 	}
 
 	public java.util.List getThreads(java.lang.String categoryId, int begin,

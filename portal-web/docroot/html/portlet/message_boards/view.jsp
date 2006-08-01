@@ -325,9 +325,15 @@ portletURL.setParameter("categoryId", categoryId);
 			</script>
 		</c:if>
 	</c:when>
-	<c:when test='<%= tabs1.equals("recent-posts") %>'>
+	<c:when test='<%= tabs1.equals("my-posts") || tabs1.equals("recent-posts") %>'>
 
 		<%
+		String groupThreadsUserId = null;
+
+		if (tabs1.equals("my-posts") && themeDisplay.isSignedIn()) {
+			groupThreadsUserId = user.getUserId();
+		}
+
 		List headerNames = new ArrayList();
 
 		headerNames.add("thread");
@@ -339,11 +345,11 @@ portletURL.setParameter("categoryId", categoryId);
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		int total = MBThreadLocalServiceUtil.getGroupThreadsCount(portletGroupId);
+		int total = MBThreadLocalServiceUtil.getGroupThreadsCount(portletGroupId, groupThreadsUserId);
 
 		searchContainer.setTotal(total);
 
-		List results = MBThreadLocalServiceUtil.getGroupThreads(portletGroupId, searchContainer.getStart(), searchContainer.getEnd());
+		List results = MBThreadLocalServiceUtil.getGroupThreads(portletGroupId, groupThreadsUserId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 

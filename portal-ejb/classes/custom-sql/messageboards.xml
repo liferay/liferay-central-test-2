@@ -74,6 +74,22 @@
 					(MBCategory.groupId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByG_U">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT MBThread.threadId) AS COUNT_VALUE
+			FROM
+				MBThread
+			INNER JOIN
+				MBMessage ON
+					(MBMessage.threadId = MBThread.threadId) AND
+					(MBMessage.userId = ?)
+			INNER JOIN
+				MBCategory ON
+					(MBCategory.categoryId = MBMessage.categoryId) AND
+					(MBCategory.groupId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByGroupId">
 		<![CDATA[
 			SELECT
@@ -83,6 +99,24 @@
 			INNER JOIN
 				MBMessage ON
 					(MBMessage.threadId = MBThread.threadId)
+			INNER JOIN
+				MBCategory ON
+					(MBCategory.categoryId = MBMessage.categoryId) AND
+					(MBCategory.groupId = ?)
+			ORDER BY
+				MBThread.lastPostDate DESC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByG_U">
+		<![CDATA[
+			SELECT
+				DISTINCT {MBThread.*}
+			FROM
+				MBThread
+			INNER JOIN
+				MBMessage ON
+					(MBMessage.threadId = MBThread.threadId) AND
+					(MBMessage.userId = ?)
 			INNER JOIN
 				MBCategory ON
 					(MBCategory.categoryId = MBMessage.categoryId) AND

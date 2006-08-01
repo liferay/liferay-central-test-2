@@ -29,6 +29,12 @@ PortletURL tabs1URL = renderResponse.createRenderURL();
 
 tabs1URL.setParameter("struts_action", "/message_boards/view");
 
+String tabs1Names = "categories,recent-posts,statistics";
+
+if (themeDisplay.isSignedIn()) {
+	tabs1Names = "categories,my-posts,recent-posts,statistics";
+}
+
 String url0HREF = tabs1URL.toString();
 
 if (Validator.isNotNull(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay))) {
@@ -39,7 +45,7 @@ else {
 %>
 
 <liferay-ui:tabs
-	names="categories,recent-posts,statistics"
+	names="<%= tabs1Names %>"
 	url="<%= tabs1URL.toString() %>"
 	url0="<%= url0HREF %>"
 />

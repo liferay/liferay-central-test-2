@@ -36,6 +36,8 @@ import com.liferay.portlet.messageboards.service.spring.MBThreadLocalService;
 import java.util.Iterator;
 import java.util.List;
 
+import com.liferay.util.Validator;
+
 /**
  * <a href="MBThreadLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -89,8 +91,31 @@ public class MBThreadLocalServiceImpl implements MBThreadLocalService {
 		return MBThreadFinder.findByGroupId(groupId, begin, end);
 	}
 
+	public List getGroupThreads(
+			String groupId, String userId, int begin, int end)
+		throws SystemException {
+
+		if (Validator.isNull(userId)) {
+			return MBThreadFinder.findByGroupId(groupId, begin, end);
+		}
+		else {
+			return MBThreadFinder.findByG_U(groupId, userId, begin, end);
+		}
+	}
+
 	public int getGroupThreadsCount(String groupId) throws SystemException {
 		return MBThreadFinder.countByGroupId(groupId);
+	}
+
+	public int getGroupThreadsCount(String groupId, String userId)
+		throws SystemException {
+
+		if (Validator.isNull(userId)) {
+			return MBThreadFinder.countByGroupId(groupId);
+		}
+		else {
+			return MBThreadFinder.countByG_U(groupId, userId);
+		}
 	}
 
 	public List getThreads(String categoryId, int begin, int end)

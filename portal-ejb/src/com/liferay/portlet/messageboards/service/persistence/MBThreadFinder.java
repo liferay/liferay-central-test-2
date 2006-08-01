@@ -51,8 +51,14 @@ public class MBThreadFinder {
 	public static String COUNT_BY_GROUP_ID =
 		MBThreadFinder.class.getName() + ".countByGroupId";
 
+	public static String COUNT_BY_G_U =
+		MBThreadFinder.class.getName() + ".countByG_U";
+
 	public static String FIND_BY_GROUP_ID =
 		MBThreadFinder.class.getName() + ".findByGroupId";
+
+	public static String FIND_BY_G_U =
+		MBThreadFinder.class.getName() + ".findByG_U";
 
 	public static int countByCategoryIds(List categoryIds)
 		throws SystemException {
@@ -143,6 +149,49 @@ public class MBThreadFinder {
 		}
 	}
 
+	public static int countByG_U(String groupId, String userId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_G_U);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.setCacheable(false);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(userId);
+			qPos.add(groupId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
 	public static List findByGroupId(String groupId, int begin, int end)
 		throws SystemException {
 
@@ -163,6 +212,40 @@ public class MBThreadFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			qPos.add(groupId);
+
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static List findByG_U(
+			String groupId, String userId, int begin, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_U);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.setCacheable(false);
+
+			q.addEntity("MBThread", MBThread.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(userId);
 			qPos.add(groupId);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);

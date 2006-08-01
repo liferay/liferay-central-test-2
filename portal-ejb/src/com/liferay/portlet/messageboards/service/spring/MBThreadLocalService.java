@@ -48,8 +48,15 @@ public interface MBThreadLocalService {
 	public java.util.List getGroupThreads(java.lang.String groupId, int begin,
 		int end) throws com.liferay.portal.SystemException;
 
+	public java.util.List getGroupThreads(java.lang.String groupId,
+		java.lang.String userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
 	public int getGroupThreadsCount(java.lang.String groupId)
 		throws com.liferay.portal.SystemException;
+
+	public int getGroupThreadsCount(java.lang.String groupId,
+		java.lang.String userId) throws com.liferay.portal.SystemException;
 
 	public java.util.List getThreads(java.lang.String categoryId, int begin,
 		int end) throws com.liferay.portal.SystemException;
