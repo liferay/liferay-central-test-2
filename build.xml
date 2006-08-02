@@ -854,6 +854,13 @@ app.server.jonas-jetty.ejbgen.compile=on</echo>
 
 		<ant dir="layouttpl" target="war" inheritAll="false" />
 		<ant dir="portlets" target="war" inheritAll="false" />
+
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset
+				dir="${app.server.deploy.dir}"
+				includes="sample*/**"
+			/>
+		</delete>
 	</target>
 
 	<target name="test-release">
