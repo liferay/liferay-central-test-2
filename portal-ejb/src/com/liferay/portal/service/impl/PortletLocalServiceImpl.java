@@ -976,7 +976,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			return servletURLPatterns;
 		}
 
-		SAXReader reader = new SAXReader(true);
+		SAXReader reader = new SAXReader();
 
 		reader.setEntityResolver(new EntityResolver());
 
