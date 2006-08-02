@@ -32,7 +32,9 @@ import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.spring.MBThreadLocalService;
+import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -57,11 +59,13 @@ public class MBThreadLocalServiceImpl implements MBThreadLocalService {
 	public void deleteThread(MBThread thread)
 		throws PortalException, SystemException {
 
-		Iterator itr = MBMessageUtil.findByThreadId(
-			thread.getThreadId()).iterator();
+		List messages = MBMessageUtil.findByThreadId(
+			thread.getThreadId());
 
-		while (itr.hasNext()) {
-			MBMessage message = (MBMessage)itr.next();
+		Collections.sort(messages, new MessageThreadComparator());
+
+		for (int i = messages.size() - 1; i >= 0; i--) {
+			MBMessage message = (MBMessage)messages.get(i);
 
 			MBMessageLocalServiceUtil.deleteMessage(message);
 		}
