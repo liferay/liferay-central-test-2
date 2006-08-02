@@ -97,7 +97,11 @@ portletURL.setParameter("categoryId", categoryId);
 
 			StringBuffer sb = new StringBuffer();
 
+			sb.append("<a href=\"");
+			sb.append(rowURL);
+			sb.append("\"><b>");
 			sb.append(curCategory.getName());
+			sb.append("</b>");
 
 			if (Validator.isNotNull(curCategory.getDescription())) {
 				sb.append("<br>");
@@ -106,7 +110,38 @@ portletURL.setParameter("categoryId", categoryId);
 				sb.append("</span>");
 			}
 
-			row.addText(sb.toString(), rowURL);
+			sb.append("</a>");
+
+			List subcategories = MBCategoryLocalServiceUtil.getCategories(portletGroupId, curCategory.getCategoryId(), 0, 5);
+
+			if (subcategories.size() > 0) {
+				sb.append("<br>");
+				sb.append("<span style=\"font-size: xx-small; font-weight: bold;\"><u>");
+				sb.append(LanguageUtil.get(pageContext, "subcategories"));
+				sb.append("</u>: ");
+
+				for (int j = 0; j < subcategories.size(); j++) {
+					MBCategory subcategory = (MBCategory)subcategories.get(j);
+
+					rowURL.setParameter("categoryId", subcategory.getCategoryId());
+
+					sb.append("<a href=\"");
+					sb.append(rowURL);
+					sb.append("\">");
+					sb.append(subcategory.getName());
+					sb.append("</a>");
+
+					if ((j + 1) < subcategories.size()) {
+						sb.append(", ");
+					}
+				}
+
+				rowURL.setParameter("categoryId", curCategory.getCategoryId());
+
+				sb.append("</span>");
+			}
+
+			row.addText(sb.toString());
 
 			// Statistics
 
