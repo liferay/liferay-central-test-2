@@ -88,6 +88,23 @@ public class DBBuilder {
 
 		FileUtil.write(file, sb.toString());
 
+		// Derby
+
+		file = new File("../sql/create/create-derby.sql");
+
+		sb = new StringBuffer();
+
+		sb.append("drop database lportal;\n");
+		sb.append("create database lportal;\n");
+		sb.append("connect to lportal;\n");
+		sb.append(FileUtil.read("../sql/portal/portal-derby.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/indexes/indexes-derby.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/sequences/sequences-derby.sql"));
+
+		FileUtil.write(file, sb.toString());
+
 		// Firebird
 
 		file = new File("../sql/create/create-firebird.sql");
@@ -241,6 +258,18 @@ public class DBBuilder {
 		db2 = StringUtil.replace(db2, "\\'", "''");
 
 		FileUtil.write("../sql/" + fileName + "/" + fileName + "-db2.sql", db2);
+
+		// Derby
+
+		String derby = _buildTemplate(fileName, _DERBY, "derby");
+
+		derby = _rewordDb2(derby);
+		//derby = _removeLongInserts(derby);
+		derby = _removeNull(derby);
+		derby = StringUtil.replace(derby, "\\'", "''");
+
+		FileUtil.write(
+			"../sql/" + fileName + "/" + fileName + "-derby.sql", derby);
 
 		// Firebird
 
@@ -697,6 +726,29 @@ public class DBBuilder {
 		return sb.toString();
 	}
 
+	private String _rewordDerby(String data) throws IOException {
+		BufferedReader br = new BufferedReader(new StringReader(data));
+
+		StringBuffer sb = new StringBuffer();
+
+		String line = null;
+
+		while ((line = br.readLine()) != null) {
+			if (line.startsWith(_ALTER_COLUMN_TYPE) ||
+				line.startsWith(_ALTER_COLUMN_NAME)) {
+
+				line = "-- " + line;
+			}
+
+			sb.append(line);
+			sb.append("\n");
+		}
+
+		br.close();
+
+		return sb.toString();
+	}
+
 	private String _rewordFirebird(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
@@ -941,6 +993,13 @@ public class DBBuilder {
 	};
 
 	private static String[] _DB2 = {
+		"--", "1", "0",
+		"'1970-01-01-00.00.00.000000'", "current timestamp",
+		" smallint", " timestamp", " double", " integer", " long varchar",
+		" long varchar", " varchar", " generated always as identity", "commit"
+	};
+
+	private static String[] _DERBY = {
 		"--", "1", "0",
 		"'1970-01-01-00.00.00.000000'", "current timestamp",
 		" smallint", " timestamp", " double", " integer", " long varchar",
