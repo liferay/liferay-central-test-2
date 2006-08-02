@@ -57,8 +57,12 @@ public class MailEngine {
 	public static final String MAIL_SESSION = "java:comp/env/mail/MailSession";
 
 	public static Session getSession() throws NamingException {
+		return getSession(false);
+	}
+
+	public static Session getSession(boolean cache) throws NamingException {
 		Session session = (Session)JNDIUtil.lookup(
-			new InitialContext(), MAIL_SESSION, true);
+			new InitialContext(), MAIL_SESSION, cache);
 
 		session.setDebug(_log.isDebugEnabled());
 
