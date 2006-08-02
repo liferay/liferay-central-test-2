@@ -1,3 +1,96 @@
+function AjaxRequest(returnFunction, returnArgs, ajaxId) {
+	
+	var xmlHttpReq;
+	
+	if (returnFunction == null) {
+		returnFunction = function () {};
+	}
+	
+	try {
+		xmlHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
+	}
+	catch (e) {
+		try {
+			xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		catch (e) {
+			try {
+				xmlHttpReq = new XMLHttpRequest();
+			}
+			catch (e) {
+			}
+		}
+	}
+	
+	xmlHttpReq.onreadystatechange = function() {
+		if (xmlHttpReq.readyState == 4) {
+			if (xmlHttpReq.status == 200) {
+				returnFunction(xmlHttpReq, returnArgs);
+				
+				var ajaxId = xmlHttpReq.getResponseHeader("Ajax-ID");
+				AjaxTracker.remove(ajaxId);
+			}
+		}
+	};
+	
+	this.getRequest = function() {
+		return xmlHttpReq;
+	};
+	
+	this.cleanUp = function() {
+		xmlHttpReq.onreadystatechange = function() {};
+		returnFunction = null;
+		returnArgs = null;
+		xmlHttpReq = null;
+	};
+}
+
+var AjaxTracker = {
+	add : function(path, queryString, returnFunction, returnArgs) {
+		var ajaxId = (new Date()).getTime();
+		var noReturn = (returnFunction == null);
+		
+		AjaxTracker["" + ajaxId] = new AjaxRequest(returnFunction, returnArgs, ajaxId);
+		
+		var xmlHttpReq = AjaxTracker["" + ajaxId].getRequest();
+		
+		if (queryString == null) {
+			queryString = "";
+		}
+	
+		if (!endsWith(queryString, "&")) {
+			queryString += "&";
+		}
+	
+		queryString += "no_cache=" + random() + "&ajax_id=" + ajaxId;
+	
+		try {
+			if (false) {
+				xmlHttpReq.open("GET", path + "?" + queryString, true);
+			}
+			else {
+				xmlHttpReq.open("POST", path, true);
+				xmlHttpReq.setRequestHeader("Method", "POST " + path + " HTTP/1.1");
+				xmlHttpReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				xmlHttpReq.send(queryString);
+			}
+		}
+		catch (e) {
+		}
+		
+		if (noReturn) {
+			this.remove(ajaxId);
+		}
+	},
+	
+	remove : function(id) {
+		if (id && AjaxTracker["" + id]) {
+			AjaxTracker["" + id].cleanUp();
+			AjaxTracker["" + id] = null;
+		}
+	}
+}
+
 function loadForm(form, action, elId) {
 	if (is_ie_5_up) {
 		var pos = action.indexOf("?");
@@ -51,60 +144,7 @@ function loadForm(form, action, elId) {
 }
 
 function loadPage(path, queryString, returnFunction, returnArgs) {
-	if (queryString == null) {
-		queryString = "";
-	}
-
-	if (!endsWith(queryString, "&")) {
-		queryString += "&";
-	}
-
-	queryString += "r=" + random();
-
-	if (returnFunction == null) {
-		returnFunction = function () {};
-	}
-
-	var xmlHttpReq;
-
-	try {
-		xmlHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
-	}
-	catch (e) {
-		try {
-			xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		catch (e) {
-			try {
-				xmlHttpReq = new XMLHttpRequest();
-			}
-			catch (e) {
-			}
-		}
-	}
-
-	try {
-		if (false) {
-			xmlHttpReq.open("GET", path + "?" + queryString, true);
-		}
-		else {
-			xmlHttpReq.open("POST", path, true);
-			xmlHttpReq.setRequestHeader("Method", "POST " + path + " HTTP/1.1");
-			xmlHttpReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			xmlHttpReq.send(queryString);
-		}
-
-		xmlHttpReq.onreadystatechange =
-			function() {
-				if (xmlHttpReq.readyState == 4) {
-					if (xmlHttpReq.status == 200) {
-						returnFunction(xmlHttpReq, returnArgs);
-					}
-				}
-			};
-	}
-	catch (e) {
-	}
+	AjaxTracker.add(path, queryString, returnFunction, returnArgs);
 }
 
 function printJSON(data) {
