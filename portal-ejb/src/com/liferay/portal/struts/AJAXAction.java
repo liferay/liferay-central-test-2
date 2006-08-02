@@ -22,9 +22,6 @@
 
 package com.liferay.portal.struts;
 
-import com.liferay.portal.util.Constants;
-import com.liferay.util.HttpHeaders;
-
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +31,10 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
+import com.liferay.portal.util.Constants;
+import com.liferay.util.HttpHeaders;
+import com.liferay.util.ParamUtil;
 
 /**
  * <a href="AJAXAction.java.html"><b><i>View Source</i></b></a>
@@ -48,6 +49,7 @@ public abstract class AJAXAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
+		String ajaxId = ParamUtil.getString(req, "ajax_id", null);
 	    String xml = null;
 
 		try {
@@ -62,6 +64,9 @@ public abstract class AJAXAction extends Action {
 
 		res.setContentType(Constants.TEXT_XML);
 		res.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
+		if (ajaxId != null) {
+			res.setHeader("Ajax-ID", ajaxId);
+		}
 
 		PrintWriter pw = res.getWriter();
 

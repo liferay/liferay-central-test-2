@@ -72,18 +72,20 @@ public abstract class JSONAction extends Action {
 			return null;
 		}
 
-		res.setContentType(Constants.TEXT_JAVASCRIPT);
-		res.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
-
-		if (ajaxId != null) {
-			res.setHeader("Ajax-ID", ajaxId);
+		if (Validator.isNotNull(json)) {
+			res.setContentType(Constants.TEXT_JAVASCRIPT);
+			res.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
+	
+			if (ajaxId != null) {
+				res.setHeader("Ajax-ID", ajaxId);
+			}
+	
+			PrintWriter pw = res.getWriter();
+	
+			pw.write(json);
+	
+			pw.close();
 		}
-
-		PrintWriter pw = res.getWriter();
-
-		pw.write(json);
-
-		pw.close();
 
 		return null;
 	}
