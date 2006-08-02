@@ -711,7 +711,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 			String toName = user.getFullName();
 			String toAddress = user.getEmailAddress();
 
-			String subject = PrefsPropsUtil.getString(
+			String subject = PrefsPropsUtil.getContent(
 				companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT);
 			String body = PrefsPropsUtil.getContent(
 				companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_BODY);
@@ -1204,7 +1204,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 			String toName = user.getFullName();
 			String toAddress = user.getEmailAddress();
 
-			String subject = PrefsPropsUtil.getString(
+			String subject = PrefsPropsUtil.getContent(
 				companyId, PropsUtil.ADMIN_EMAIL_USER_ADDED_SUBJECT);
 			String body = PrefsPropsUtil.getContent(
 				companyId, PropsUtil.ADMIN_EMAIL_USER_ADDED_BODY);
