@@ -5,7 +5,7 @@
         <![CDATA[
             SELECT
 				COUNT(*) AS COUNT_VALUE
-            FROM 
+            FROM
                 Group_
             [$JOIN$]
             WHERE
@@ -16,7 +16,7 @@
         <![CDATA[
             SELECT
                 COUNT(*) AS COUNT_VALUE
-            FROM 
+            FROM
                 Group_
             [$JOIN$]
             WHERE
@@ -31,7 +31,7 @@
         <![CDATA[
             SELECT
                 {Group_.*}
-            FROM 
+            FROM
                 Group_
             WHERE
                 (Group_.companyId = ?) AND
@@ -42,7 +42,7 @@
         <![CDATA[
             SELECT
 				Group_.groupId AS groupId, Group_.name AS groupName
-            FROM 
+            FROM
                 Group_
             [$JOIN$]
             WHERE
@@ -261,8 +261,8 @@
 		<![CDATA[
 			SELECT
 				{OrgGroupPermission.*}
-			FROM 
-			    OrgGroupPermission
+			FROM
+				OrgGroupPermission
 			INNER JOIN
 			    Permission_ ON
 			        (Permission_.permissionId = OrgGroupPermission.permissionId) AND
@@ -274,64 +274,72 @@
 	</sql>
     <sql id="com.liferay.portal.service.persistence.PermissionFinder.countByGroupsPermissions">
         <![CDATA[
-            SELECT
-                COUNT(*) AS COUNT_VALUE
-            FROM 
-                Permission_
-			INNER JOIN
-				Groups_Permissions ON
-					([$PERMISSION_IDS$]) AND
-					([$GROUP_IDS$])
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				Permission_
+					INNER JOIN
+						Groups_Permissions ON
+							Groups_Permissions.permissionId = Permission_.permissionId
+			WHERE
+				([$PERMISSION_IDS$]) AND
+				([$GROUP_IDS$])
         ]]>
     </sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionFinder.countByGroupsRoles">
         <![CDATA[
-            SELECT
-                COUNT(*) AS COUNT_VALUE
-            FROM 
-                Permission_
-			INNER JOIN
-				Roles_Permissions ON
-					[$PERMISSION_IDS$]
-			INNER JOIN
-				Groups_Roles ON
-					(Groups_Roles.roleId = Roles_Permissions.roleId) AND
-					([$GROUP_IDS$])
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				Groups_Roles
+					INNER JOIN
+						Roles_Permissions ON
+							Roles_Permissions.roleId = Groups_Roles.roleId
+					INNER JOIN
+						Permission_ ON
+							Permission_.permissionId = Roles_Permissions.permissionId
+			WHERE
+				([$PERMISSION_IDS$]) AND
+				([$GROUP_IDS$])
         ]]>
     </sql>
     <sql id="com.liferay.portal.service.persistence.PermissionFinder.countByUsersPermissions">
         <![CDATA[
-            SELECT
-                COUNT(*) AS COUNT_VALUE
-            FROM 
-                Permission_
-			INNER JOIN
-				Users_Permissions ON
-					([$PERMISSION_IDS$]) AND
-					(Users_Permissions.userId = ?)
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				Permission_
+					INNER JOIN
+						Users_Permissions ON
+							Users_Permissions.permissionId = Permission_.permissionId
+			WHERE
+				([$PERMISSION_IDS$]) AND
+				(Users_Permissions.userId = ?)
         ]]>
     </sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionFinder.countByUsersRoles">
         <![CDATA[
-            SELECT
-                COUNT(*) AS COUNT_VALUE
-            FROM 
-                Permission_
-			INNER JOIN
-				Roles_Permissions ON
-					[$PERMISSION_IDS$]
-			INNER JOIN
-				Users_Roles ON
-					(Users_Roles.roleId = Roles_Permissions.roleId) AND
-					(Users_Roles.userId = ?)
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				Users_Roles
+					INNER JOIN
+						Roles_Permissions ON
+							Roles_Permissions.roleId = Users_Roles.roleId
+					INNER JOIN
+						Permission_ ON
+							Permission_.permissionId = Roles_Permissions.permissionId
+			WHERE
+				([$PERMISSION_IDS$]) AND
+				(Users_Roles.userId = ?)
         ]]>
     </sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionFinder.findByA_R">
 		<![CDATA[
 			SELECT
 				{Permission_.*}
-			FROM 
-			    Permission_
+			FROM
+				Permission_
 			WHERE
 				(actionId = ?) AND
 				([$RESOURCE_IDS$])
@@ -341,7 +349,7 @@
 		<![CDATA[
 			SELECT
 				{Permission_.*}
-			FROM 
+			FROM
 			    Permission_
 			INNER JOIN
 			    Groups_Permissions ON
@@ -355,7 +363,7 @@
 		<![CDATA[
 			SELECT
 				{Permission_.*}
-			FROM 
+			FROM
 			    Permission_
 			INNER JOIN
 			    Users_Permissions ON
@@ -369,7 +377,7 @@
 		<![CDATA[
 			SELECT
 				{Permission_.*}
-			FROM 
+			FROM
 			    Permission_
 			INNER JOIN
 				OrgGroupPermission ON
@@ -384,7 +392,7 @@
 		<![CDATA[
 			SELECT
 				{Permission_.*}
-			FROM 
+			FROM
 			    Permission_
 			INNER JOIN
 			    Users_Permissions ON
@@ -424,7 +432,7 @@
         <![CDATA[
             SELECT
                 {Role_.*}
-            FROM 
+            FROM
                 Role_
             WHERE
                 (Role_.companyId = ?) AND
@@ -551,7 +559,7 @@
         <![CDATA[
             SELECT
                 {UserGroup.*}
-            FROM 
+            FROM
                 UserGroup
             WHERE
                 (UserGroup.companyId = ?) AND
