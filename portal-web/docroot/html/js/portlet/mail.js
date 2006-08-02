@@ -858,10 +858,10 @@ var Mail = {
 				image = document.createElement("img");
 				
 				if (title.asc) {
-					image.src = themeDisplay.getPathThemeImage() + "/arrows/01_down.gif";
+					image.src = themeDisplay.getPathThemeImage() + "/arrows/01_up.gif";
 				}
 				else {
-					image.src = themeDisplay.getPathThemeImage() + "/arrows/01_up.gif";
+					image.src = themeDisplay.getPathThemeImage() + "/arrows/01_down.gif";
 				}
 				
 				titleDiv.appendChild(image);
