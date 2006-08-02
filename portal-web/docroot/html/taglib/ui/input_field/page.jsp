@@ -141,7 +141,16 @@ Map hints = ModelHintsUtil.getHints(model, field);
 
 			if (fieldParam == null) {
 				fieldParam = namespace + field;
-				value = BeanParamUtil.getString(bean, request, field, defaultString);
+
+				if (type.equals("double")) {
+					value = String.valueOf(BeanParamUtil.getDouble(bean, request, field, GetterUtil.DEFAULT_DOUBLE));
+				}
+				else if (type.equals("int")) {
+					value = String.valueOf(BeanParamUtil.getInteger(bean, request, field, GetterUtil.DEFAULT_INTEGER));
+				}
+				else {
+					value = BeanParamUtil.getString(bean, request, field, defaultString);
+				}
 			}
 			else {
 				fieldParam = namespace + fieldParam;
