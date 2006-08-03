@@ -42,8 +42,8 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 	public InputSource resolveEntity(String publicId, String systemId) {
 		ClassLoader classLoader = getClass().getClassLoader();
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Resolving entity " + publicId + " " + systemId);
+		if (_log.isInfoEnabled()) {
+			_log.info("Resolving entity " + publicId + " " + systemId);
 		}
 
 		if (publicId != null) {
@@ -52,8 +52,8 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 					InputStream is = classLoader.getResourceAsStream(
 						_DEFINITIONS_PATH + _PUBLIC_IDS[i].getValue());
 
-					if (_log.isDebugEnabled()) {
-						_log.debug("Entity found for public id " + systemId);
+					if (_log.isInfoEnabled()) {
+						_log.info("Entity found for public id " + systemId);
 					}
 
 					return new InputSource(is);
@@ -66,8 +66,8 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 					InputStream is = classLoader.getResourceAsStream(
 						_DEFINITIONS_PATH + _SYSTEM_IDS[i].getValue());
 
-					if (_log.isDebugEnabled()) {
-						_log.debug("Entity found for system id " + systemId);
+					if (_log.isInfoEnabled()) {
+						_log.info("Entity found for system id " + systemId);
 					}
 
 					return new InputSource(is);
@@ -75,8 +75,8 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 			}
 		}
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("No entity found for " + publicId + " " + systemId);
+		if (_log.isInfoEnabled()) {
+			_log.info("No entity found for " + publicId + " " + systemId);
 		}
 
 		return null;

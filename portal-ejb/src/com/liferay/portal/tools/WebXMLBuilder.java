@@ -57,7 +57,7 @@ public class WebXMLBuilder {
 
 		webXML = Html.stripComments(webXML);
 
-		SAXReader reader = SAXReaderFactory.getInstance();
+		SAXReader reader = SAXReaderFactory.getInstance(false);
 
 		Document doc = reader.read(new StringReader(webXML));
 

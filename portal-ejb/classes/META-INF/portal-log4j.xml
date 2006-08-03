@@ -177,7 +177,7 @@
 	</category>
 
 	<category name="com.liferay.portal.util.EntityResolver">
-		<priority value="DEBUG" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.util.SAXReaderFactory">

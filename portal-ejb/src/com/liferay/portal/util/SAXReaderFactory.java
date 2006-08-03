@@ -54,10 +54,11 @@ public class SAXReaderFactory {
 
 			reader.setEntityResolver(new EntityResolver());
 
-			reader.setFeature(_FEATURES_VALIDATION, true);
-			reader.setFeature(_FEATURES_VALIDATION_SCHEMA, true);
-			reader.setFeature(_FEATURES_VALIDATION_SCHEMA_FULL_CHECKING, true);
-			reader.setFeature(_FEATURES_DYNAMIC, true);
+			reader.setFeature(_FEATURES_VALIDATION, validate);
+			reader.setFeature(_FEATURES_VALIDATION_SCHEMA, validate);
+			reader.setFeature(
+				_FEATURES_VALIDATION_SCHEMA_FULL_CHECKING, validate);
+			reader.setFeature(_FEATURES_DYNAMIC, validate);
 		}
 		catch (Exception e) {
 			_log.warn("XSD validation is diasabled because " + e.getMessage());
