@@ -72,7 +72,6 @@ import javax.mail.Message.RecipientType;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
-import javax.mail.NoSuchProviderException;
 import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
@@ -1106,7 +1105,14 @@ public class MailUtil {
 			}
 
 			if (store == null) {
+				Session session = MailEngine.getSession();
+
+				String imapHost = session.getProperty("mail.imap.host");
+
 				String userId = (String)ses.getAttribute(WebKeys.USER_ID);
+
+				String serviceName =
+					userId + StringPool.COLON + WebKeys.MAIL_STORE;
 
 				if (GetterUtil.getBoolean(
 						PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
@@ -1114,15 +1120,8 @@ public class MailUtil {
 					userId = StringUtil.replace(userId, ".", "_");
 				}
 
-				String serviceName =
-					userId + StringPool.COLON + WebKeys.MAIL_STORE;
-
-				Session session = MailEngine.getSession();
-
 				String password = (String)ses.getAttribute(
 					WebKeys.USER_PASSWORD);
-
-				String imapHost = session.getProperty("mail.imap.host");
 
 				store = session.getStore("imap");
 
@@ -1135,32 +1134,15 @@ public class MailUtil {
 
 				List list = getFolders(ses);
 
-				if (_log.isInfoEnabled()) {
-					_log.info("Store has " + list.size() + " folders");
-				}
-
 				for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
-					Folder folder = store.getFolder(DEFAULT_FOLDERS[i]);
-
-					if (!folder.exists()) {
-						folder.create(Folder.HOLDS_MESSAGES);
-
-						if (_log.isInfoEnabled()) {
-							_log.info(
-								"Created default folder " + DEFAULT_FOLDERS[i]);
-						}
-					}
-					
-					/*
 					boolean exists = false;
 
-					for (int j = 0; j < list.size(); j++) {
-						MailFolder mailFolder = (MailFolder)list.get(j);
+					Iterator itr = list.iterator();
 
-						String folderName =
-							_getResolvedFolderName(mailFolder.getName());
+					while (itr.hasNext()) {
+						MailFolder mailFolder = (MailFolder)itr.next();
 
-						if (DEFAULT_FOLDERS[i].equals(folderName)) {
+						if (DEFAULT_FOLDERS[i].equals(mailFolder.getName())) {
 							exists = true;
 
 							break;
@@ -1169,13 +1151,7 @@ public class MailUtil {
 
 					if (!exists) {
 						createFolder(ses, DEFAULT_FOLDERS[i]);
-
-						if (_log.isInfoEnabled()) {
-							_log.info(
-								"Created default folder " + DEFAULT_FOLDERS[i]);
-						}
 					}
-					*/
 				}
 
 				if (ses.getAttribute(WebKeys.MAIL_FOLDER) == null) {
@@ -1185,14 +1161,11 @@ public class MailUtil {
 
 			return store;
 		}
-		catch (NoSuchProviderException pe) {
-			throw new StoreException(pe);
+		catch (MessagingException me) {
+			throw new StoreException(me);
 		}
 		catch (NamingException ne) {
 			throw new StoreException(ne);
-		}
-		catch (MessagingException me) {
-			throw new StoreException(me);
 		}
 	}
 
