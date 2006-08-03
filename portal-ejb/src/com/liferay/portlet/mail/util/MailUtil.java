@@ -1134,15 +1134,20 @@ public class MailUtil {
 
 				List list = getFolders(ses);
 
+				if (_log.isInfoEnabled()) {
+					_log.info(serviceName + " has " + list.size() + " folders");
+				}
+
 				for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
 					boolean exists = false;
 
-					Iterator itr = list.iterator();
+					for (int j = 0; j < list.size(); j++) {
+						MailFolder mailFolder = (MailFolder)list.get(j);
 
-					while (itr.hasNext()) {
-						MailFolder mailFolder = (MailFolder)itr.next();
+						String folderName =
+							_getResolvedFolderName(mailFolder.getName());
 
-						if (DEFAULT_FOLDERS[i].equals(mailFolder.getName())) {
+						if (DEFAULT_FOLDERS[i].equals(folderName)) {
 							exists = true;
 
 							break;
@@ -1151,6 +1156,11 @@ public class MailUtil {
 
 					if (!exists) {
 						createFolder(ses, DEFAULT_FOLDERS[i]);
+
+						if (_log.isInfoEnabled()) {
+							_log.info(
+								"Created default folder " + DEFAULT_FOLDERS[i]);
+						}
 					}
 				}
 
