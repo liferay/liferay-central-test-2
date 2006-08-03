@@ -1,4 +1,5 @@
 var Messaging = {
+	checkRoster : false,
 	initialized : false,
 	inputCount : 1,
 	mainDiv : null,
@@ -68,12 +69,18 @@ var Messaging = {
 	},
 	
 	getChats : function() {
-		loadPage(themeDisplay.getPathMain() + "/messaging/action", "cmd=getChats", Messaging.getChatsReturn);
+		var cmd = "getChats";
+		
+		if (Messaging.checkRoster) {
+			cmd = "getRosterChats";
+		}
+		
+		loadPage(themeDisplay.getPathMain() + "/messaging/action", "cmd=" + cmd, Messaging.getChatsReturn, cmd);
 	},
 	
-	getChatsReturn : function(httpReq) {
+	getChatsReturn : function(xmlHttpReq, cmd) {
 		try {
-			var msg = eval("(" + httpReq.responseText + ")");
+			var msg = eval("(" + xmlHttpReq.responseText + ")");
 		}
 		catch (err) {
 			if (Messaging.pollTimer) {
@@ -88,6 +95,10 @@ var Messaging = {
 				Messaging.chat(chatMsg[i].fromId, chatMsg[i].fromName,
 					chatMsg[i].toId, chatMsg[i].toName, chatMsg[i].body);
 			}
+		}
+		
+		if (cmd == "getRosterChats") {
+			MessagingRoster.updateEntries(msg.roster);
 		}
 	},
 	
@@ -177,7 +188,6 @@ var Messaging = {
 		typeArea.className = "msg-type-area form-text";
 		typeArea.tabIndex = this.inputCount++;
 		typeArea.style.width = "100%";
-		//typeArea.value = "hello there";
 		typeArea.onkeypress = function(event) {Messaging.sendChat(this, event); };;
 		typeArea.setAttribute("onKeyPress", "Messaging.sendChat(this, event)");
 		
@@ -204,7 +214,7 @@ var Messaging = {
 	error : function() {
 		alert("User does not exist");
 	},
-	
+
 	init : function(userId) {
 		var body = document.getElementsByTagName("body")[0];
 		var mainDiv = document.getElementById("messaging-main-div");
@@ -253,7 +263,7 @@ var Messaging = {
 		
 		this.mainDiv = mainDiv;
 		this.initialized = true;
-		//this.pollTimer = setInterval("Messaging.getChats()", 3000);
+		this.pollTimer = setInterval("Messaging.getChats()", 3000);
 	},
 	
 	removeChat : function(obj) {
@@ -328,9 +338,9 @@ var Messaging = {
 		}
 	},
 	
-	sendChatReturn : function(httpReq) {
+	sendChatReturn : function(xmlHttpReq) {
 		try {
-			var msg = eval("(" + httpReq.responseText + ")");
+			var msg = eval("(" + xmlHttpReq.responseText + ")");
 		}
 		catch (err) {
 			if (Messaging.pollTimer) {
@@ -350,18 +360,59 @@ var Messaging = {
 }
 
 var MessagingRoster = {
-	add : function() {
-		var email = document.getElementById("roster_email").value;
-		loadPage(themeDisplay.getPathMain() + "/messaging/action", "cmd=addRoster&email=" + email, MessagingRoster.returnCall, "add");
+	highlightColor : "",
+	lastSelected : null,
+	
+	addEntry : function() {
+		var email = document.getElementById("portlet-chat-roster-email").value;
+		loadPage(themeDisplay.getPathMain() + "/messaging/roster", "cmd=addEntry&email=" + email, MessagingRoster.addEntryReturn);
 	},
 	
-	check : function() {
-		loadPage(themeDisplay.getPathMain() + "/messaging/action", "cmd=getRoster", MessagingRoster.checkReturn);
-	},
-	
-	checkReturn : function(httpReq) {
+	addEntryReturn : function(xmlHttpReq) {
 		try {
-			var msg = eval("(" + httpReq.responseText + ")");
+			var msg = eval("(" + xmlHttpReq.responseText + ")");
+			
+			if (msg.status == "failure") {
+				alert("No such user exists");
+			}
+			else {
+				MessagingRoster.toggleEmail();
+				MessagingRoster.updateEntries(msg.roster);
+			}
+		}
+		catch (err) {
+		}
+	},
+	
+	deleteEntries : function () {
+		if (MessagingRoster.lastSelected) {
+			var userId = MessagingRoster.lastSelected.userId;
+			var lastSelected = MessagingRoster.lastSelected;
+			
+			lastSelected.parentNode.removeChild(lastSelected);
+			MessagingRoster.lastSelected = null;
+			
+			loadPage(themeDisplay.getPathMain() + "/messaging/roster", "cmd=deleteEntries&entries=" + userId, MessagingRoster.deleteEntriesReturn);
+		}
+	},
+	
+	deleteEntriesReturn : function (xmlHttpReq) {
+		try {
+			var msg = eval("(" + xmlHttpReq.responseText + ")");
+		}
+		catch (err) {
+		}
+	},
+	
+	getEntries : function() {
+		loadPage(themeDisplay.getPathMain() + "/messaging/roster", "cmd=getEntries", MessagingRoster.getEntriesReturn);
+	},
+	
+	getEntriesReturn : function(xmlHttpReq) {
+		try {
+			var msg = eval("(" + xmlHttpReq.responseText + ")");
+			
+			MessagingRoster.updateEntries(msg.roster);
 		}
 		catch (err) {
 			if (Messaging.pollTimer) {
@@ -369,13 +420,20 @@ var MessagingRoster = {
 			}
 			return;
 		}
-		
+	},
+
+	updateEntries : function(roster) {
 		var rosterDiv = document.getElementById("portlet-chat-roster-list");
 		
-		for (var i = 0; i < msg.roster.length; i++) {
-			var entry = msg.roster[i];
+		if (rosterDiv != null) {
+			rosterDiv.innerHTML = "";
+		}
+		
+		for (var i = 0; i < roster.length; i++) {
+			var entry = roster[i];
 			var tempDiv = document.createElement("div");
 			var tempImg = document.createElement("img");
+			var tempLink = document.createElement("a");
 			tempImg.align = "absmiddle";
 			tempImg.style.marginRight = "5px";
 			
@@ -386,16 +444,59 @@ var MessagingRoster = {
 				tempImg.src = themeDisplay.getPathThemeImage() + "/common/deactivate.gif";
 			}
 			
+			tempLink.innerHTML = entry.name;
+			tempLink.href = "javascript: void(0)";
+			tempLink.onclick = MessagingRoster.onEntryLinkClick;
+			
 			tempDiv.appendChild(tempImg);
-			tempDiv.appendChild(document.createTextNode(entry.name + " " + status));
+			tempDiv.appendChild(tempLink);
+			tempDiv.onclick = MessagingRoster.onEntryClick;
+			tempDiv.userId = entry.user;
+			tempDiv.userName = entry.name;
+			tempDiv.style.cursor = "pointer";
 			rosterDiv.appendChild(tempDiv);
 		}
+	},
+	
+	onEmailKeypress : function (obj, event) {
+		var keyCode;
 		
-		/*
-		if (cmd == "check") {
+		if (window.event) keyCode = window.event.keyCode;
+		else if (event) keyCode = event.which;
+		else return;
+		
+		if (keyCode == 13) {
+			MessagingRoster.addEntry();
 		}
-		else if (cmd == "add") {
+	},
+	
+	onEntryClick : function () {
+		if (MessagingRoster.lastSelected != null) {
+			MessagingRoster.lastSelected.style.backgroundColor = "transparent";
 		}
-		*/
+		
+		this.style.backgroundColor = MessagingRoster.highlightColor;
+		
+		MessagingRoster.lastSelected = this;
+	},
+	
+	onEntryLinkClick : function () {
+		var parent = this.parentNode;
+		Messaging.createChat(null, null, parent.userId, parent.userName);
+	},
+	
+	toggleEmail : function() {
+		emailDiv = document.getElementById("portlet-chat-roster-email-div");
+		
+		if (emailDiv.style.display == "none") {
+			emailDiv.style.display = "block";
+			
+			emailInput = document.getElementById("portlet-chat-roster-email");
+			emailInput.value = "";
+			emailInput.focus();
+		}
+		else {
+			emailDiv.style.display = "none";
+		}
 	}
 }
