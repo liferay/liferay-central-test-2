@@ -52,8 +52,9 @@ public abstract class JSONAction extends Action {
 
 		String callback = ParamUtil.getString(req, "callback");
 		String instance = ParamUtil.getString(req, "inst");
-		String ajaxId = ParamUtil.getString(req, "ajax_id", null);
-	    String json = null;
+		String ajaxId = req.getParameter("ajax_id");
+
+		String json = null;
 
 		try {
 			json = getJSON(mapping, form, req, res);
@@ -75,15 +76,15 @@ public abstract class JSONAction extends Action {
 		if (Validator.isNotNull(json)) {
 			res.setContentType(Constants.TEXT_JAVASCRIPT);
 			res.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
-	
+
 			if (ajaxId != null) {
 				res.setHeader("Ajax-ID", ajaxId);
 			}
-	
+
 			PrintWriter pw = res.getWriter();
-	
+
 			pw.write(json);
-	
+
 			pw.close();
 		}
 

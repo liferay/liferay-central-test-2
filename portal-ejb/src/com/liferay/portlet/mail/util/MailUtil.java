@@ -803,47 +803,6 @@ public class MailUtil {
 		}
 	}
 
-	private static String _customizeHtml(String html) {
-		final String[] startTags = {
-			"<html", "<head", "<body", "<meta", "<o:SmartTagType" };
-		final String[] endTags = { "</html>", "</head>", "</body>" };
-
-		for (int i = 0; i < startTags.length; i++) {
-			Pattern pattern = Pattern.compile(
-				startTags[i], Pattern.CASE_INSENSITIVE);
-
-			Matcher matcher = pattern.matcher(html);
-
-			while (matcher.find()) {
-				int start = matcher.start();
-				int end = html.indexOf(">", start);
-
-				if (end == -1) {
-					html = StringUtil.replace(
-						html, html.substring(start), StringPool.BLANK);
-				}
-				else {
-					html = StringUtil.replace(
-						html, html.substring(start, end + 1), StringPool.BLANK);
-				}
-
-				if (i < endTags.length) {
-					html = Pattern.compile(
-						endTags[i], Pattern.CASE_INSENSITIVE).
-							matcher(html).replaceFirst(StringPool.BLANK);
-				}
-				else {
-					matcher.reset(html);
-				}
-			}
-		}
-
-		// TODO: create new window on hyperlink clicks and replace mailto with
-		// action to compose new message
-
-		return html.trim();
-	}
-
 	private static void _closeFolder(HttpSession ses) {
 		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER);
 
@@ -857,6 +816,46 @@ public class MailUtil {
 
 			ses.removeAttribute(WebKeys.MAIL_FOLDER);
 		}
+	}
+
+	private static String _customizeHtml(String html) {
+		for (int i = 0; i < _HTML_START_TAGS.length; i++) {
+			Pattern startPattern = Pattern.compile(
+				_HTML_START_TAGS[i], Pattern.CASE_INSENSITIVE);
+
+			Matcher startMatcher = startPattern.matcher(html);
+
+			while (startMatcher.find()) {
+				int start = startMatcher.start();
+				int end = html.indexOf(">", start);
+
+				if (end == -1) {
+					html = StringUtil.replace(
+						html, html.substring(start), StringPool.BLANK);
+				}
+				else {
+					html = StringUtil.replace(
+						html, html.substring(start, end + 1), StringPool.BLANK);
+				}
+
+				if (i < _HTML_END_TAGS.length) {
+					Pattern endPattern = Pattern.compile(
+						_HTML_END_TAGS[i], Pattern.CASE_INSENSITIVE);
+
+					Matcher endMatcher = endPattern.matcher(html);
+
+					html = endMatcher.replaceFirst(StringPool.BLANK);
+				}
+				else {
+					startMatcher.reset(html);
+				}
+			}
+		}
+
+		// TODO: create new window on hyperlink clicks and replace mailto with
+		// action to compose new message
+
+		return html.trim();
 	}
 
 	private static Object[] _getAttachmentFromPath(Part part, String mimePath)
@@ -1277,6 +1276,14 @@ public class MailUtil {
 			_log.debug("Body after replacing embedded images\n" + body);
 		}
 	}
+
+	private static final String[] _HTML_START_TAGS = new String[] {
+		"<html", "<head", "<body", "<meta", "<o:SmartTagType"
+	};
+
+	private static final String[] _HTML_END_TAGS = new String[] {
+		"</html>", "</head>", "</body>"
+	};
 
 	private static Log _log = LogFactory.getLog(MailUtil.class);
 

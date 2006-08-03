@@ -33,12 +33,11 @@ import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.spring.MBThreadLocalService;
 import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
+import com.liferay.util.Validator;
 
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
-import com.liferay.util.Validator;
 
 /**
  * <a href="MBThreadLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
