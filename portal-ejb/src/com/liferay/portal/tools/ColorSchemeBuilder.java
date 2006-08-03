@@ -358,6 +358,7 @@ public class ColorSchemeBuilder {
 
 		File lookAndFeelFile = new File(
 			rootDir + portalWebDir + lookAndFeelFileName);
+
 		if (!lookAndFeelFile.exists()) {
 			return;
 		}
