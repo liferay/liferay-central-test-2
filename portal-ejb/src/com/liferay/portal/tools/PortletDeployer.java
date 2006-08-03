@@ -163,6 +163,8 @@ public class PortletDeployer extends BaseDeployer {
 
 		// Make sure there is a company id specified
 
+		reader = SAXReaderFactory.getInstance(false);
+
 		doc = reader.read(webXML);
 
 		root = doc.getRootElement();

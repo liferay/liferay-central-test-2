@@ -887,7 +887,7 @@ public class MainServlet extends ActionServlet {
 	}
 
 	private void _checkWebSettings(String xml) throws DocumentException {
-		SAXReader reader = SAXReaderFactory.getInstance();
+		SAXReader reader = SAXReaderFactory.getInstance(false);
 
 		Document doc = reader.read(new StringReader(xml));
 

@@ -950,7 +950,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			return servletURLPatterns;
 		}
 
-		SAXReader reader = SAXReaderFactory.getInstance();
+		SAXReader reader = SAXReaderFactory.getInstance(false);
 
 		Document doc = reader.read(new StringReader(xml));
 

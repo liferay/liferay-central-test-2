@@ -48,9 +48,11 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 
 		if (publicId != null) {
 			for (int i = 0; i < _PUBLIC_IDS.length; i++) {
-				if (publicId.equals(_PUBLIC_IDS[i].getKey())) {
+				KeyValuePair kvp = _PUBLIC_IDS[i];
+
+				if (publicId.equals(kvp.getKey())) {
 					InputStream is = classLoader.getResourceAsStream(
-						_DEFINITIONS_PATH + _PUBLIC_IDS[i].getValue());
+						_DEFINITIONS_PATH + kvp.getValue());
 
 					if (_log.isInfoEnabled()) {
 						_log.info("Entity found for public id " + systemId);
@@ -62,9 +64,11 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		}
 		else if (systemId != null) {
 			for (int i = 0; i < _SYSTEM_IDS.length; i++) {
-				if (systemId.equals(_SYSTEM_IDS[i].getKey())) {
+				KeyValuePair kvp = _SYSTEM_IDS[i];
+
+				if (systemId.equals(kvp.getKey())) {
 					InputStream is = classLoader.getResourceAsStream(
-						_DEFINITIONS_PATH + _SYSTEM_IDS[i].getValue());
+						_DEFINITIONS_PATH + kvp.getValue());
 
 					if (_log.isInfoEnabled()) {
 						_log.info("Entity found for system id " + systemId);
