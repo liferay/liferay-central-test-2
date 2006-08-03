@@ -58,13 +58,52 @@ public class BBCodeUtil {
 		listStyles.put("A", "<ol style='list-style-type: upper-alpha';>");
 	}
 
+	public static final String[][] EMOTICONS = {
+		{"@theme_images_path@/emoticons/angry.gif", ">["},
+		{"@theme_images_path@/emoticons/bashful.gif", ":bashful:"},
+		{"@theme_images_path@/emoticons/big_grin.gif", ":grin:"},
+		{"@theme_images_path@/emoticons/blink.gif", ":blink:"},
+		{"@theme_images_path@/emoticons/blush.gif", ":*)"},
+		{"@theme_images_path@/emoticons/bored.gif", ":bored:"},
+		{"@theme_images_path@/emoticons/closed_eyes.gif", "-_-"},
+		{"@theme_images_path@/emoticons/cold.gif", ":cold:"},
+		{"@theme_images_path@/emoticons/cool.gif", "B)"},
+		{"@theme_images_path@/emoticons/darth_vader.gif", ":vader:"},
+		{"@theme_images_path@/emoticons/dry.gif", "<_<"},
+		{"@theme_images_path@/emoticons/exclamation.gif", ":what:"},
+		{"@theme_images_path@/emoticons/girl.gif", ":girl:"},
+		{"@theme_images_path@/emoticons/glare.gif", ">_>"},
+		{"@theme_images_path@/emoticons/happy.gif", ":)"},
+		{"@theme_images_path@/emoticons/huh.gif", ":huh:"},
+		{"@theme_images_path@/emoticons/in_love.gif", "<3"},
+		{"@theme_images_path@/emoticons/karate_kid.gif", ":kid:"},
+		{"@theme_images_path@/emoticons/kiss.gif", ":#"},
+		{"@theme_images_path@/emoticons/laugh.gif", ":lol:"},
+		{"@theme_images_path@/emoticons/mad.gif", ">("},
+		{"@theme_images_path@/emoticons/mellow.gif", ":mellow:"},
+		{"@theme_images_path@/emoticons/ninja.gif", ":ph34r:"},
+		{"@theme_images_path@/emoticons/oh_my.gif", ":O"},
+		{"@theme_images_path@/emoticons/pac_man.gif", ":V"},
+		{"@theme_images_path@/emoticons/roll_eyes.gif", ":rolleyes:"},
+		{"@theme_images_path@/emoticons/sad.gif", ":("},
+		{"@theme_images_path@/emoticons/sleep.gif", ":sleep:"},
+		{"@theme_images_path@/emoticons/smile.gif", ":D"},
+		{"@theme_images_path@/emoticons/smug.gif", ":smug:"},
+		{"@theme_images_path@/emoticons/suspicious.gif", "8o"},
+		{"@theme_images_path@/emoticons/tongue.gif", ":P"},
+		{"@theme_images_path@/emoticons/unsure.gif", ":unsure:"},
+		{"@theme_images_path@/emoticons/wacko.gif", ":wacko:"},
+		{"@theme_images_path@/emoticons/wink.gif", ":wink:"},
+		{"@theme_images_path@/emoticons/wub.gif", ":wub:"}
+	};
+
 	public static String getHTML(String bbcode) {
 		String html = StringUtil.replace(bbcode, _BBCODE_TAGS, _HTML_TAGS);
 
-		for (int i = 0; i < _EMOTICONS.length; i++) {
-			String imgTag = "<img src='" + _EMOTICONS[i][0] + "' />";
+		for (int i = 0; i < EMOTICONS.length; i++) {
+			String imgTag = "<img src='" + EMOTICONS[i][0] + "' />";
 
-			html = StringUtil.replace(html, _EMOTICONS[i][1], imgTag);
+			html = StringUtil.replace(html, EMOTICONS[i][1], imgTag);
 		}
 
 		BBCodeTag tag = null;
@@ -342,45 +381,6 @@ public class BBCodeUtil {
 		"[img]", "[/img]",
 		"[left]", "[center]", "[right]", "[indent]",
 		"[/left]", "[/center]", "[/right]", "[/indent]"
-	};
-
-	private static final String[][] _EMOTICONS = {
-		{"@theme_images_path@/emoticons/angry.gif", ">["},
-		{"@theme_images_path@/emoticons/bashful.gif", ":bashful:"},
-		{"@theme_images_path@/emoticons/big_grin.gif", ":grin:"},
-		{"@theme_images_path@/emoticons/blink.gif", ":blink:"},
-		{"@theme_images_path@/emoticons/blush.gif", ":*)"},
-		{"@theme_images_path@/emoticons/bored.gif", ":bored:"},
-		{"@theme_images_path@/emoticons/closed_eyes.gif", "-_-"},
-		{"@theme_images_path@/emoticons/cold.gif", ":cold:"},
-		{"@theme_images_path@/emoticons/cool.gif", "B)"},
-		{"@theme_images_path@/emoticons/darth_vader.gif", ":vader:"},
-		{"@theme_images_path@/emoticons/dry.gif", "<_<"},
-		{"@theme_images_path@/emoticons/exclamation.gif", ":what:"},
-		{"@theme_images_path@/emoticons/girl.gif", ":girl:"},
-		{"@theme_images_path@/emoticons/glare.gif", ">_>"},
-		{"@theme_images_path@/emoticons/happy.gif", ":)"},
-		{"@theme_images_path@/emoticons/huh.gif", ":huh:"},
-		{"@theme_images_path@/emoticons/in_love.gif", "<3"},
-		{"@theme_images_path@/emoticons/karate_kid.gif", ":kid:"},
-		{"@theme_images_path@/emoticons/kiss.gif", ":#"},
-		{"@theme_images_path@/emoticons/laugh.gif", ":lol:"},
-		{"@theme_images_path@/emoticons/mad.gif", ">("},
-		{"@theme_images_path@/emoticons/mellow.gif", ":mellow:"},
-		{"@theme_images_path@/emoticons/ninja.gif", ":ph34r:"},
-		{"@theme_images_path@/emoticons/oh_my.gif", ":O"},
-		{"@theme_images_path@/emoticons/pac_man.gif", ":V"},
-		{"@theme_images_path@/emoticons/roll_eyes.gif", ":rolleyes:"},
-		{"@theme_images_path@/emoticons/sad.gif", ":("},
-		{"@theme_images_path@/emoticons/sleep.gif", ":sleep:"},
-		{"@theme_images_path@/emoticons/smile.gif", ":D"},
-		{"@theme_images_path@/emoticons/smug.gif", ":smug:"},
-		{"@theme_images_path@/emoticons/suspicious.gif", "8o"},
-		{"@theme_images_path@/emoticons/tongue.gif", ":P"},
-		{"@theme_images_path@/emoticons/unsure.gif", ":unsure:"},
-		{"@theme_images_path@/emoticons/wacko.gif", ":wacko:"},
-		{"@theme_images_path@/emoticons/wink.gif", ":wink:"},
-		{"@theme_images_path@/emoticons/wub.gif", ":wub:"}
 	};
 
 	private static final String[] _HTML_TAGS = {

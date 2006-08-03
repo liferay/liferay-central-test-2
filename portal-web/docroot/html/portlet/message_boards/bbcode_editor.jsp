@@ -315,19 +315,21 @@
 			</tr>
 
 			<%
-			String path = themeDisplay.getPathThemeImage() + "/emotions/";
+			String path = themeDisplay.getPathThemeImage() + "/emoticons/";
 
-			for (int i = 0; i < BBCodeUtil.EMOTICON_MAPPING.length; i++) {
+			for (int i = 0; i < BBCodeUtil.EMOTICONS.length; i++) {
 			%>
+
 				<c:if test="<%= (i % 4) == 0 %>">
 					<tr>
 				</c:if>
 
-				<td align="center"><img src='<%= StringUtil.replace(BBCodeUtil.EMOTICON_MAPPING[i][0], "@theme_images_path@", themeDisplay.getPathThemeImage()) %>' onclick="<portlet:namespace />insertEmoticon(' <%= BBCodeUtil.EMOTICON_MAPPING[i][1] %> ')"></td>
+				<td align="center"><img src='<%= StringUtil.replace(BBCodeUtil.EMOTICONS[i][0], "@theme_images_path@", themeDisplay.getPathThemeImage()) %>' onClick="<portlet:namespace />insertEmoticon('<%= BBCodeUtil.EMOTICONS[i][1] %>')"></td>
 
 				<c:if test="<%= (i % 4) == 3 %>">
 					</tr>
 				</c:if>
+
 			<%
 			}
 			%>
