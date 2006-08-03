@@ -56,6 +56,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -408,13 +410,13 @@ public class MailUtil {
 				if (MAIL_SENT_NAME.equals(folderName) ||
 					MAIL_DRAFTS_NAME.equals(folderName)) {
 
-			    	Address[] recipients = message.getAllRecipients();
+					Address[] recipients = message.getAllRecipients();
 
-			    	StringBuffer sb = new StringBuffer();
+					StringBuffer sb = new StringBuffer();
 
-			    	if (!Validator.isNull(recipients)) {
-				    	for (int j = 0; j < recipients.length; j++) {
-				    		InternetAddress address =
+					if (!Validator.isNull(recipients)) {
+						for (int j = 0; j < recipients.length; j++) {
+							InternetAddress address =
 								(InternetAddress)recipients[j];
 
 							String recipient = GetterUtil.getString(
@@ -422,15 +424,15 @@ public class MailUtil {
 
 							sb.append(recipient);
 
-				    		if (j < (recipients.length - 1)) {
-				    			sb.append(", ");
-				    		}
-				    	}
-			    	}
+							if (j < (recipients.length - 1)) {
+								sb.append(", ");
+							}
+						}
+					}
 
-			    	if (sb.length() > 0) {
-			    		mailEnvelope.setRecipient(sb.toString());
-			    	}
+					if (sb.length() > 0) {
+						mailEnvelope.setRecipient(sb.toString());
+					}
 				}
 				else {
 					Address[] from = message.getFrom();
@@ -456,12 +458,12 @@ public class MailUtil {
 
 			return envelopes;
 		}
-        catch (MessagingException me) {
-        	throw new FolderException(me);
+		catch (MessagingException me) {
+			throw new FolderException(me);
 		}
-        finally {
+		finally {
 			MailSessionLock.unlock(ses.getId());
-        }
+		}
 	}
 
 	public static MailFolder getFolder(HttpSession ses)
@@ -801,6 +803,47 @@ public class MailUtil {
 		}
 	}
 
+	private static String _customizeHtml(String html) {
+		final String[] startTags = {
+			"<html", "<head", "<body", "<meta", "<o:SmartTagType" };
+		final String[] endTags = { "</html>", "</head>", "</body>" };
+
+		for (int i = 0; i < startTags.length; i++) {
+			Pattern pattern = Pattern.compile(
+				startTags[i], Pattern.CASE_INSENSITIVE);
+
+			Matcher matcher = pattern.matcher(html);
+
+			while (matcher.find()) {
+				int start = matcher.start();
+				int end = html.indexOf(">", start);
+
+				if (end == -1) {
+					html = StringUtil.replace(
+						html, html.substring(start), StringPool.BLANK);
+				}
+				else {
+					html = StringUtil.replace(
+						html, html.substring(start, end + 1), StringPool.BLANK);
+				}
+
+				if (i < endTags.length) {
+					html = Pattern.compile(
+						endTags[i], Pattern.CASE_INSENSITIVE).
+							matcher(html).replaceFirst(StringPool.BLANK);
+				}
+				else {
+					matcher.reset(html);
+				}
+			}
+		}
+
+		// TODO: create new window on hyperlink clicks and replace mailto with
+		// action to compose new message
+
+		return html.trim();
+	}
+
 	private static void _closeFolder(HttpSession ses) {
 		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER);
 
@@ -823,22 +866,22 @@ public class MailUtil {
 			StringUtil.split(mimePath.substring(1), StringPool.PERIOD)[0]);
 
 		if (part.getContent() instanceof Multipart) {
-    		String prefix = String.valueOf(index) + StringPool.PERIOD;
+			String prefix = String.valueOf(index) + StringPool.PERIOD;
 
-            Multipart multipart = (Multipart)part.getContent();
+			Multipart multipart = (Multipart)part.getContent();
 
-            for (int i = 0; i < multipart.getCount(); i++) {
-        		if (index == i) {
-        			return _getAttachmentFromPath(
+			for (int i = 0; i < multipart.getCount(); i++) {
+				if (index == i) {
+					return _getAttachmentFromPath(
 						multipart.getBodyPart(i),
 						mimePath.substring(prefix.length()));
-        		}
-        	}
+				}
+			}
 
-        	throw new ContentPathException();
-        }
+			throw new ContentPathException();
+		}
 		else if (index != -1) {
-        	throw new ContentPathException();
+			throw new ContentPathException();
 		}
 
 		InputStream is = part.getInputStream();
@@ -872,25 +915,26 @@ public class MailUtil {
 			Part part, MailMessage mailMessage, String contentPath)
 		throws ContentException {
 
-        try {
+		try {
 			String contentType = part.getContentType().toLowerCase();
 
 			if (part.getContent() instanceof Multipart) {
-			    Multipart multipart = (Multipart)part.getContent();
+				Multipart multipart = (Multipart)part.getContent();
 
-		    	for (int i = 0; i < multipart.getCount(); i++) {
-		        	Part curPart = multipart.getBodyPart(i);
+				for (int i = 0; i < multipart.getCount(); i++) {
+					Part curPart = multipart.getBodyPart(i);
 
 					mailMessage = _getContent(
-		        		curPart, mailMessage,
+						curPart, mailMessage,
 						contentPath + StringPool.PERIOD + i);
-		    	}
+				}
 			}
 			else if (contentType.startsWith(Constants.TEXT_PLAIN)) {
 				mailMessage.appendPlainBody((String)part.getContent());
 			}
 			else if (contentType.startsWith(Constants.TEXT_HTML)) {
-				mailMessage.appendHtmlBody((String)part.getContent());
+				mailMessage.appendHtmlBody(
+					_customizeHtml((String)part.getContent()));
 			}
 			else if (contentType.startsWith(Constants.MESSAGE_RFC822)) {
 
@@ -898,7 +942,7 @@ public class MailUtil {
 
 			}
 			else {
-			    mailMessage.appendRemoteAttachment(
+				mailMessage.appendRemoteAttachment(
 					_getRemoteAttachment(
 						part, contentPath + StringPool.PERIOD + -1));
 			}
@@ -906,11 +950,11 @@ public class MailUtil {
 		catch (IOException ioe) {
 			throw new ContentException(ioe);
 		}
-        catch (MessagingException me) {
+		catch (MessagingException me) {
 			throw new ContentException(me);
 		}
 
-        return mailMessage;
+		return mailMessage;
 	}
 
 	private static IMAPFolder _getFolder(HttpSession ses)
