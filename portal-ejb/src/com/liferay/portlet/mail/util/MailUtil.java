@@ -1138,6 +1138,8 @@ public class MailUtil {
 					_log.info(serviceName + " has " + list.size() + " folders");
 				}
 
+				boolean newFolders = false;
+
 				for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
 					boolean exists = false;
 
@@ -1161,7 +1163,22 @@ public class MailUtil {
 							_log.info(
 								"Created default folder " + DEFAULT_FOLDERS[i]);
 						}
+
+						newFolders = true;
 					}
+				}
+
+				if (newFolders) {
+					cleanUp(ses);
+
+					store = session.getStore("imap");
+
+					store.addConnectionListener(
+						new ConnectionListener(serviceName));
+
+					store.connect(imapHost, userId, password);
+
+					ses.setAttribute(WebKeys.MAIL_STORE, store);
 				}
 
 				if (ses.getAttribute(WebKeys.MAIL_FOLDER) == null) {
