@@ -110,7 +110,6 @@ public class WSDDMerger {
 		while (itr.hasNext()) {
 			Map.Entry entry = (Map.Entry)itr.next();
 
-			String name = (String)entry.getKey();
 			Element service = (Element)entry.getValue();
 
 			root.add(service);

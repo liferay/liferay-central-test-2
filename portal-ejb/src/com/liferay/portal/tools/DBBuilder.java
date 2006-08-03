@@ -263,7 +263,7 @@ public class DBBuilder {
 
 		String derby = _buildTemplate(fileName, _DERBY, "derby");
 
-		derby = _rewordDb2(derby);
+		derby = _rewordDerby(derby);
 		//derby = _removeLongInserts(derby);
 		derby = _removeNull(derby);
 		derby = StringUtil.replace(derby, "\\'", "''");

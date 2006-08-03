@@ -29,10 +29,10 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.ThemeCompanyId;
 import com.liferay.portal.model.ThemeCompanyLimit;
-import com.liferay.portal.util.EntityResolver;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
+import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ListUtil;
@@ -348,9 +348,7 @@ public class ThemeLocalUtil {
 			return themeIds;
 		}
 
-		SAXReader reader = new SAXReader(true);
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new StringReader(xml));
 

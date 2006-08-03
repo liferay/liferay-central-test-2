@@ -22,15 +22,13 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.util.EntityResolver;
+import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
 
 import java.io.File;
 
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -83,9 +81,7 @@ public class EJBXMLBuilder {
 		sb.append("\n<ejb-jar>\n");
 		sb.append("\t<enterprise-beans>\n");
 
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new File("classes/META-INF/ejb-jar.xml"));
 
@@ -136,9 +132,7 @@ public class EJBXMLBuilder {
 
 		sb.append("\n<jonas-ejb-jar>\n");
 
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new File("classes/META-INF/ejb-jar.xml"));
 
@@ -192,9 +186,7 @@ public class EJBXMLBuilder {
 		sb.append("\n<jrun-ejb-jar>\n");
 		sb.append("\t<enterprise-beans>\n");
 
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new File("classes/META-INF/ejb-jar.xml"));
 
@@ -236,8 +228,6 @@ public class EJBXMLBuilder {
 	}
 
 	private void _buildPramatiXML() throws Exception {
-		Map tableNames = new HashMap();
-
 		StringBuffer sb = new StringBuffer();
 
 		sb.append("<?xml version=\"1.0\"?>\n");
@@ -250,9 +240,7 @@ public class EJBXMLBuilder {
 		sb.append("\t<ejb-module>\n");
 		sb.append("\t\t<name>").append(_jarFileName).append("</name>\n");
 
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new File("classes/META-INF/ejb-jar.xml"));
 
@@ -327,9 +315,7 @@ public class EJBXMLBuilder {
 		sb.append("\n<rexip-ejb-jar>\n");
 		sb.append("\t<enterprise-beans>\n");
 
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new File("classes/META-INF/ejb-jar.xml"));
 
@@ -379,9 +365,7 @@ public class EJBXMLBuilder {
 		sb.append("\n<sun-ejb-jar>\n");
 		sb.append("\t<enterprise-beans>\n");
 
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new File("classes/META-INF/ejb-jar.xml"));
 
@@ -433,9 +417,7 @@ public class EJBXMLBuilder {
 
 		sb.append("\n<weblogic-ejb-jar>\n");
 
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new File("classes/META-INF/ejb-jar.xml"));
 
@@ -472,18 +454,12 @@ public class EJBXMLBuilder {
 		}
 	}
 
-	private void _buildWebSphereXML() throws Exception {
-
-	}
-
 	private void _updateEJBXML() throws Exception {
 		File xmlFile = new File("classes/META-INF/ejb-jar.xml");
 
 		StringBuffer methodsSB = new StringBuffer();
 
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(xmlFile);
 
@@ -546,9 +522,7 @@ public class EJBXMLBuilder {
 	private void _updateWebXML() throws Exception {
 		StringBuffer sb = new StringBuffer();
 
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new File("classes/META-INF/ejb-jar.xml"));
 
@@ -670,9 +644,7 @@ public class EJBXMLBuilder {
 	private void _updateRemotingXML() throws Exception {
 		StringBuffer sb = new StringBuffer();
 
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new File("classes/META-INF/ejb-jar.xml"));
 

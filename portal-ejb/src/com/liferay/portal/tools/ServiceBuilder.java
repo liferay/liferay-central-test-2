@@ -24,7 +24,7 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.model.ModelHintsUtil;
-import com.liferay.portal.util.EntityResolver;
+import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.SimpleCachePool;
@@ -341,9 +341,7 @@ public class ServiceBuilder {
 			_springProFileName = springProFileName;
 			_springUtilClassName = sprintUtilClassName;
 
-			SAXReader reader = new SAXReader(true);
-
-			reader.setEntityResolver(new EntityResolver());
+			SAXReader reader = SAXReaderFactory.getInstance();
 
 			Document doc = reader.read(new File(fileName));
 

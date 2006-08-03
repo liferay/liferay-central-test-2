@@ -33,10 +33,10 @@ import com.liferay.portal.service.persistence.PortletPK;
 import com.liferay.portal.service.persistence.PortletUtil;
 import com.liferay.portal.service.spring.PortletLocalService;
 import com.liferay.portal.util.ContentUtil;
-import com.liferay.portal.util.EntityResolver;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
@@ -475,29 +475,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			return portletIds;
 		}
 
-		// Crimson cannot do XSD validation. See the following links:
-		//
-		// http://www.geocities.com/herong_yang/jdk/xsd_validation.html
-		// http://www.burnthacker.com/archives/000086.html
-		// http://www.theserverside.com/news/thread.tss?thread_id=22525
-
-		SAXReader reader = null;
-
-		try {
-			reader = new SAXReader(_SAX_PARSER_IMPL);
-
-			reader.setEntityResolver(new EntityResolver());
-
-			reader.setFeature(_FEATURES_VALIDATION, true);
-			reader.setFeature(_FEATURES_VALIDATION_SCHEMA, true);
-			reader.setFeature(_FEATURES_VALIDATION_SCHEMA_FULL_CHECKING, true);
-			reader.setFeature(_FEATURES_DYNAMIC, true);
-		}
-		catch (Exception e) {
-			_log.warn("XSD validation is diasabled");
-
-			reader = new SAXReader();
-		}
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new StringReader(xml));
 
@@ -745,9 +723,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				"com/liferay/portal/deploy/dependencies/liferay-display.xml");
 		}
 
-		SAXReader reader = new SAXReader(true);
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new StringReader(xml));
 
@@ -813,9 +789,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			return liferayPortletIds;
 		}
 
-		SAXReader reader = new SAXReader(true);
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new StringReader(xml));
 
@@ -976,9 +950,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			return servletURLPatterns;
 		}
 
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new StringReader(xml));
 
@@ -997,22 +969,8 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 		return servletURLPatterns;
 
 	}
+
 	private static final String _SHARED_KEY = "SHARED_KEY";
-
-	private static final String _SAX_PARSER_IMPL =
-		"org.apache.xerces.parsers.SAXParser";
-
-	private static final String _FEATURES_VALIDATION =
-		"http://xml.org/sax/features/validation";
-
-	private static final String _FEATURES_VALIDATION_SCHEMA =
-		"http://apache.org/xml/features/validation/schema";
-
-	private static final String _FEATURES_VALIDATION_SCHEMA_FULL_CHECKING =
-		"http://apache.org/xml/features/validation/schema-full-checking";
-
-	private static final String _FEATURES_DYNAMIC =
-		"http://apache.org/xml/features/validation/dynamic";
 
 	private static Log _log = LogFactory.getLog(PortletLocalServiceImpl.class);
 

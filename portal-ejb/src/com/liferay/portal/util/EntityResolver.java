@@ -26,6 +26,9 @@ import com.liferay.util.KeyValuePair;
 
 import java.io.InputStream;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.xml.sax.InputSource;
 
 /**
@@ -39,16 +42,41 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 	public InputSource resolveEntity(String publicId, String systemId) {
 		ClassLoader classLoader = getClass().getClassLoader();
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Resolving entity " + publicId + " " + systemId);
+		}
+
 		if (publicId != null) {
 			for (int i = 0; i < _PUBLIC_IDS.length; i++) {
 				if (publicId.equals(_PUBLIC_IDS[i].getKey())) {
 					InputStream is = classLoader.getResourceAsStream(
 						_DEFINITIONS_PATH + _PUBLIC_IDS[i].getValue());
 
-					return new InputSource(is);
+					if (_log.isDebugEnabled()) {
+						_log.debug("Entity found for public id " + systemId);
+					}
 
+					return new InputSource(is);
 				}
 			}
+		}
+		else if (systemId != null) {
+			for (int i = 0; i < _SYSTEM_IDS.length; i++) {
+				if (systemId.equals(_SYSTEM_IDS[i].getKey())) {
+					InputStream is = classLoader.getResourceAsStream(
+						_DEFINITIONS_PATH + _SYSTEM_IDS[i].getValue());
+
+					if (_log.isDebugEnabled()) {
+						_log.debug("Entity found for system id " + systemId);
+					}
+
+					return new InputSource(is);
+				}
+			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("No entity found for " + publicId + " " + systemId);
 		}
 
 		return null;
@@ -154,7 +182,7 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		)
 	};
 
-	/*private static KeyValuePair[] _SYSTEM_IDS = {
+	private static KeyValuePair[] _SYSTEM_IDS = {
 		new KeyValuePair(
 			"http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd",
 			"portlet-app_1_0.xsd"
@@ -164,6 +192,8 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 			"http://www.w3.org/2001/xml.xsd",
 			"xml.xsd"
 		)
-	};*/
+	};
+
+	private static Log _log = LogFactory.getLog(EntityResolver.class);
 
 }

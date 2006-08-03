@@ -35,10 +35,10 @@ import com.liferay.portal.spring.hibernate.CacheRegistry;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.EntityResolver;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebKeys;
@@ -232,9 +232,7 @@ public class EditServerAction extends PortletAction {
 
 		// Struts
 
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(ctx.getResource(
 			"/WEB-INF/struts-config.xml"));
@@ -287,9 +285,7 @@ public class EditServerAction extends PortletAction {
 
 		// Tiles
 
-		reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		reader = SAXReaderFactory.getInstance();
 
 		doc = reader.read(ctx.getResource("/WEB-INF/tiles-defs.xml"));
 

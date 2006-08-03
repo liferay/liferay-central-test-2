@@ -120,12 +120,12 @@ public class PermissionCheckerBag implements Serializable {
 		String key =
 			companyId + StringPool.PIPE + groupId + StringPool.PIPE + name;
 
-		Boolean value = (Boolean)_isCompanyAdmin.get(key);
+		Boolean value = (Boolean)_isCommunityAdmin.get(key);
 
 		if (value == null) {
 			value = new Boolean(isCommunityAdminImpl(companyId, groupId, name));
 
-			_isCompanyAdmin.put(key, value);
+			_isCommunityAdmin.put(key, value);
 		}
 
 		return value.booleanValue();

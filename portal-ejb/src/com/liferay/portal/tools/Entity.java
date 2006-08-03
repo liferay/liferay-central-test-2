@@ -190,20 +190,6 @@ public class Entity {
 		return _finderList;
 	}
 
-	public boolean hasUniqueFinders() {
-		for (int i = 0; i < _finderList.size(); i++) {
-			EntityFinder finder = (EntityFinder)_finderList.get(i);
-
-			List finderColsList = finder.getColumns();
-
-			if (!finder.isCollection()) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	public List getReferenceList() {
 		return _referenceList;
 	}

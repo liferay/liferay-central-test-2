@@ -23,7 +23,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.EntityResolver;
+import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.xml.XMLFormatter;
@@ -119,9 +119,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		StringBuffer sb = new StringBuffer();
 
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		// Add wrappers for portlets
 
@@ -350,9 +348,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		// portlet.xml
 
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(portletXML);
 
@@ -381,9 +377,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		// faces-config.xml
 
-		reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		reader = SAXReaderFactory.getInstance();
 
 		doc = reader.read(facesXML);
 

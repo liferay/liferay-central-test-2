@@ -44,13 +44,13 @@ import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.ContentUtil;
-import com.liferay.portal.util.EntityResolver;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
+import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
@@ -887,9 +887,7 @@ public class MainServlet extends ActionServlet {
 	}
 
 	private void _checkWebSettings(String xml) throws DocumentException {
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new StringReader(xml));
 

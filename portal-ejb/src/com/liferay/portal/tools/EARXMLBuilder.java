@@ -22,7 +22,7 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.util.EntityResolver;
+import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 
 import java.io.File;
@@ -69,9 +69,7 @@ public class EARXMLBuilder {
 	private void _buildGeronimoXML() throws Exception {
 		StringBuffer sb = new StringBuffer();
 
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new File("classes/META-INF/ejb-jar.xml"));
 
@@ -170,31 +168,6 @@ public class EARXMLBuilder {
 		}
 	}
 
-	private String _buildPramatiXMLEJBJar(String path)
-		throws IOException {
-
-		File file = new File(path + "/classes/pramati-or-map.xml");
-
-		if (file.exists()) {
-			String content = FileUtil.read(file);
-
-			int x = content.indexOf("<ejb-jar>");
-			int y = content.indexOf("</ejb-jar>");
-
-			if (x != -1 && y != -1) {
-				return content.substring(x - 1, y + 11);
-			}
-		}
-
-		StringBuffer sb = new StringBuffer();
-
-		sb.append("\t<ejb-jar>\n");
-		sb.append("\t\t<jar-name>").append(path.substring(3, path.length())).append(".jar</jar-name>\n");
-		sb.append("\t</ejb-jar>\n");
-
-		return sb.toString();
-	}
-
 	private String _buildPramatiXMLEJBModule(String path)
 		throws IOException {
 
@@ -250,9 +223,7 @@ public class EARXMLBuilder {
 
 		sb.append(path.substring(3, path.length())).append(".war</module-name>\n");
 
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new File(filePath));
 

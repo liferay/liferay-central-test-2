@@ -22,7 +22,7 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.util.EntityResolver;
+import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Html;
 import com.liferay.util.ant.CopyTask;
@@ -57,9 +57,7 @@ public class WebXMLBuilder {
 
 		webXML = Html.stripComments(webXML);
 
-		SAXReader reader = new SAXReader();
-
-		reader.setEntityResolver(new EntityResolver());
+		SAXReader reader = SAXReaderFactory.getInstance();
 
 		Document doc = reader.read(new StringReader(webXML));
 
