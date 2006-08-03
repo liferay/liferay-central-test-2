@@ -29,7 +29,6 @@
 	<classpathentry kind="lib" path="lib/development/netscape.jar"/>
 	<classpathentry kind="lib" path="lib/development/nfc-client.jar"/>
 	<classpathentry kind="lib" path="lib/development/ow_jonas_bootstrap.jar"/>
-	<classpathentry kind="lib" path="lib/development/pop3.jar"/>
 	<classpathentry kind="lib" path="lib/development/saxpath.jar"/>
 	<classpathentry kind="lib" path="lib/development/servlet.jar"/>
 	<classpathentry kind="lib" path="lib/development/smtp.jar"/>
