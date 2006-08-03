@@ -820,7 +820,7 @@ app.server.jonas-jetty.ejbgen.compile=on</echo>
 		
 		<zip zipfile="liferay-portal-tomcat-jdk5-${lp.version.file.name}.zip"
 			basedir="${app.server.tomcat.dir}"
-			excludes="bin/jmx.jar,common/endorsed/xercesImpl.jar,common/endorsed/xml-apis.jar"
+			excludes="bin/jmx.jar,common/endorsed/xml-apis.jar"
 		/>
 	</target>
 
