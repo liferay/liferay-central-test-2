@@ -28,6 +28,7 @@ import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.service.spring.DLServiceUtil;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -71,6 +72,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			_upgradeCategory();
 		}
 		catch (Exception e) {
+			_log.error(StackTraceUtil.getStackTrace(e));
+
 			throw new UpgradeException(e);
 		}
 	}

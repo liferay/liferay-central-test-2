@@ -74,16 +74,24 @@ public class UpgradeWiki extends UpgradeProcess {
 
 			while (rs.next()) {
 				String nodeId = rs.getString("nodeId");
+				String groupId = rs.getString("groupId");
 
-				boolean addCommunityPermissions = true;
-				boolean addGuestPermissions = true;
+				if (groupId.equals(Group.DEFAULT_PARENT_GROUP_ID)) {
+					_log.warn(
+						"Skip node " + nodeId + " because it belongs to a " +
+							"personal page.");
+				}
+				else {
+					boolean addCommunityPermissions = true;
+					boolean addGuestPermissions = true;
 
-				_log.debug("Upgrading node " + nodeId);
+					_log.debug("Upgrading node " + nodeId);
 
-				WikiNodeLocalServiceUtil.addNodeResources(
-					nodeId, addCommunityPermissions, addGuestPermissions);
+					WikiNodeLocalServiceUtil.addNodeResources(
+						nodeId, addCommunityPermissions, addGuestPermissions);
 
-				_upgradePage(nodeId);
+					_upgradePage(nodeId);
+				}
 			}
 		}
 		catch (NoSuchGroupException nsge) {

@@ -26,6 +26,8 @@ import com.liferay.counter.service.spring.CounterServiceUtil;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.service.spring.DLServiceUtil;
+import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -70,6 +72,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			_upgradeCategory();
 		}
 		catch (Exception e) {
+			_log.error(StackTraceUtil.getStackTrace(e));
+
 			throw new UpgradeException(e);
 		}
 	}
@@ -349,6 +353,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 			ps = con.prepareStatement(_UPGRADE_CATEGORY_1);
 
+			ps.setString(1, Group.DEFAULT_PARENT_GROUP_ID);
+
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -394,12 +400,18 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			ResourceLocalServiceUtil.deleteResources(
 				"com.liferay.portlet.messageboards.model.MBTopic");
 		}
+		catch (NoSuchGroupException nsge) {
+			_log.error(
+				"Upgrade failed because data does not have a valid group id. " +
+					"Manually assign a group id in the database.");
+		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
-	private static final String _UPGRADE_CATEGORY_1 = "SELECT * FROM MBTopic";
+	private static final String _UPGRADE_CATEGORY_1 =
+		"SELECT * FROM MBTopic WHERE groupId != ?";
 
 	private static final String _UPGRADE_CATEGORY_2 =
 		"UPDATE MBCategory SET createDate = ?, modifiedDate = ?, " +
