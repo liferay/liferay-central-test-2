@@ -262,19 +262,19 @@
 					msgBody = msgBody.substring(0, x) + url + msgBody.substring(y, msgBody.length());
 				}
 
-				msgBody = StringUtil.replace(msgBody, "style_emoticons/<#EMO_DIR#>", "@theme_images_path@/emotions");
+				msgBody = StringUtil.replace(msgBody, "style_emoticons/<#EMO_DIR#>", "@theme_images_path@/emoticons");
 
-				String emotionsPath = "@theme_images_path@/emotions";
+				String emoticonsPath = "@theme_images_path@/emoticons";
 
 				int x = 0;
-				x = msgBody.indexOf(emotionsPath, x);
+				x = msgBody.indexOf(emoticonsPath, x);
 
 				while (x != -1) {
 					int y = msgBody.indexOf(".gif", x);
 
-					String emotionImage = msgBody.substring(x + emotionsPath.length() + 1, y) + ".gif";
+					String emotionImage = msgBody.substring(x + emoticonsPath.length() + 1, y) + ".gif";
 
-					x = msgBody.indexOf(emotionsPath, x + 1);
+					x = msgBody.indexOf(emoticonsPath, x + 1);
 				}*/
 
 				try {
@@ -284,7 +284,7 @@
 					_log.error("Could not parse message " + message.getMessageId() + " " + e.getMessage());
 				}
 
-				msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emotions", themeDisplay.getPathThemeImage() + "/emotions");
+				msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImage() + "/emoticons");
 				%>
 
 				<%= msgBody %>
