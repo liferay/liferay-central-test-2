@@ -62,34 +62,3 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 
 NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 %>
-
-<style type="text/css">
-	.message-board-code {
-		background: white;
-		border: 1px solid <%= colorScheme.getPortletFontDim() %>;
-		font-family: monospace;
-	}
-
-	.message-board-code-lines {
-		border-right: 1px solid <%= colorScheme.getPortletFontDim() %>;
-		color: <%= colorScheme.getPortletFontDim() %>;
-		margin-right: 5px;
-		padding: 0px 5px 0px 5px;
-	}
-
-	.message-board-quote {
-		background: white url(<%= themeDisplay.getPathThemeImage() %>/message_boards/quoteleft.gif) left top no-repeat;
-		border: 1px solid <%= colorScheme.getPortletFontDim() %>;
-		padding: 5px 0px 0px 5px;
-	}
-
-	.message-board-quote-content {
-		background: transparent url(<%= themeDisplay.getPathThemeImage() %>/message_boards/quoteright.gif) right bottom no-repeat;
-		padding: 5px 30px 10px 30px;
-	}
-
-	.message-board-quote-title {
-		font-weight: bold;
-		padding: 5px 0px 5px 0px;
-	}
-</style>

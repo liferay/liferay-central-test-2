@@ -102,6 +102,7 @@
 			var name = prompt("Enter a name associated with the email:", "");
 
 			<portlet:namespace />resetSelection();
+
 			if (name != null && name != "") {
 				<portlet:namespace />insertTag("email", addy, name);
 			}
@@ -110,7 +111,7 @@
 			}
 		}
 	}
-	
+
 	function <portlet:namespace />insertEmoticon(emoticon) {
 		var field = document.getElementById("textArea");
 
@@ -118,6 +119,7 @@
 			field.focus();
 
 			var sel = document.selection.createRange();
+
 			sel.text = emoticon;
 		}
 		else if (field.selectionStart || field.selectionStart == "0") {
@@ -305,22 +307,23 @@
 	</td>
 	<td>
 		<div style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; margin-left: 10px;">
-		<table border="0" cellpadding="2" cellspacing="0" width="100%">
+			<table border="0" cellpadding="2" cellspacing="0" width="100%">
 			<tr>
 				<td bgcolor="#E5E4E8" colspan="4" style="white-space: nowrap;">
-					<%= LanguageUtil.get(pageContext, "clickable-emoticons") %>
+					<%= LanguageUtil.get(pageContext, "emoticons") %>
 				</td>
 			</tr>
+
 			<%
 			String path = themeDisplay.getPathThemeImage() + "/emotions/";
-			
+
 			for (int i = 0; i < BBCodeUtil.EMOTICON_MAPPING.length; i++) {
 			%>
 				<c:if test="<%= (i % 4) == 0 %>">
 					<tr>
 				</c:if>
 
-				<td align="center"><img src="<%= StringUtil.replace(BBCodeUtil.EMOTICON_MAPPING[i][0], "@theme_images_path@", themeDisplay.getPathThemeImage()) %>" onclick="<portlet:namespace />insertEmoticon(' <%= BBCodeUtil.EMOTICON_MAPPING[i][1] %> ')"></td>
+				<td align="center"><img src='<%= StringUtil.replace(BBCodeUtil.EMOTICON_MAPPING[i][0], "@theme_images_path@", themeDisplay.getPathThemeImage()) %>' onclick="<portlet:namespace />insertEmoticon(' <%= BBCodeUtil.EMOTICON_MAPPING[i][1] %> ')"></td>
 
 				<c:if test="<%= (i % 4) == 3 %>">
 					</tr>
@@ -328,7 +331,8 @@
 			<%
 			}
 			%>
-		</table>
+
+			</table>
 		</div>
 	</td>
 </tr>

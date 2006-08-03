@@ -24,6 +24,8 @@
 
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
+<%@ include file="/html/portlet/message_boards/css.jsp" %>
+
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
