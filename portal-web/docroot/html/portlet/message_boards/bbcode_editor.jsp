@@ -110,6 +110,29 @@
 			}
 		}
 	}
+	
+	function <portlet:namespace />insertEmoticon(emoticon) {
+		var field = document.getElementById("textArea");
+
+		if (is_ie) {
+			field.focus();
+
+			var sel = document.selection.createRange();
+			sel.text = emoticon;
+		}
+		else if (field.selectionStart || field.selectionStart == "0") {
+			var startPos = field.selectionStart;
+			var endPos = field.selectionEnd;
+
+			var preSel = field.value.substring(0, startPos);
+			var postSel = field.value.substring(endPos, field.value.length);
+
+			field.value = preSel + emoticon + postSel;
+		}
+		else {
+			field.value += emoticon;
+		}
+	}
 
 	function <portlet:namespace />insertImage() {
 		var url = prompt("Enter a address for a picture:", "http://");
@@ -219,10 +242,10 @@
 	var colorPicker = new ColorPicker("<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorscale.png", <portlet:namespace />insertColor);
 </script>
 
-<table bgcolor="#E5E4E8" cellpadding="0" cellspacing="0" height="400px" width="100%">
+<table cellpadding="0" cellspacing="0" height="400px" width="100%">
 <tr>
 	<td>
-		<table cellpadding="1" cellspacing="0">
+		<table bgcolor="#E5E4E8" cellpadding="1" cellspacing="0">
 		<tr>
 			<td>
 			<select onChange="<portlet:namespace />insertTag('font', this[this.selectedIndex].value); this.selectedIndex = 0;">
@@ -272,10 +295,41 @@
 		</tr>
 		</table>
 	</td>
+	<td>
+		<br>
+	</td>
 </tr>
 <tr>
 	<td bgcolor="#FFFFFF" height="100%">
 		<textarea style="font-family: monospace; height: 100%; width: 100%;" id="textArea" name="textArea"></textarea>
+	</td>
+	<td>
+		<div style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; margin-left: 10px;">
+		<table border="0" cellpadding="2" cellspacing="0" width="100%">
+			<tr>
+				<td bgcolor="#E5E4E8" colspan="4" style="white-space: nowrap;">
+					<%= LanguageUtil.get(pageContext, "clickable-emoticons") %>
+				</td>
+			</tr>
+			<%
+			String path = themeDisplay.getPathThemeImage() + "/emotions/";
+			
+			for (int i = 0; i < BBCodeUtil.EMOTICON_MAPPING.length; i++) {
+			%>
+				<c:if test="<%= (i % 4) == 0 %>">
+					<tr>
+				</c:if>
+
+				<td align="center"><img src="<%= StringUtil.replace(BBCodeUtil.EMOTICON_MAPPING[i][0], "@theme_images_path@", themeDisplay.getPathThemeImage()) %>" onclick="<portlet:namespace />insertEmoticon(' <%= BBCodeUtil.EMOTICON_MAPPING[i][1] %> ')"></td>
+
+				<c:if test="<%= (i % 4) == 3 %>">
+					</tr>
+				</c:if>
+			<%
+			}
+			%>
+		</table>
+		</div>
 	</td>
 </tr>
 </table>

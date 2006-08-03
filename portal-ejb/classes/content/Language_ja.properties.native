@@ -555,6 +555,7 @@ clear-all=すべてを取り除きなさい
 clear-content-cached-across-the-cluster=集りを渡って貯蔵される明確な内容。
 clear-content-cached-by-this-vm=このVM によって貯蔵される明確な内容。
 clear-the-database-cache=データベース隠し場所を取り除きなさい。
+clickable-emoticons=Clickable のEmoticons
 close=終わり
 club-event=クラブでき事
 code=コード

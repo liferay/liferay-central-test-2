@@ -48,6 +48,7 @@
 --%><%@ page import="com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.service.spring.MBThreadLocalServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.messageboards.util.BBCodeUtil" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.util.MBUtil" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.util.TreeWalker" %><%--
 

@@ -556,6 +556,7 @@ clear-all=Alle Entfernen
 clear-content-cached-across-the-cluster=Lösche Inhalt im Cluster.
 clear-content-cached-by-this-vm=Lösche Inhalt in dieser VM.
 clear-the-database-cache=Lösche den Datenbank Cache.
+clickable-emoticons=Clickable Emoticons
 close=Schließen
 club-event=Club Veranstaltung
 code=Code

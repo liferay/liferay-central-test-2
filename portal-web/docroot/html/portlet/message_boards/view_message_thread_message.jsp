@@ -277,14 +277,14 @@
 					x = msgBody.indexOf(emotionsPath, x + 1);
 				}*/
 
-				msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emotions", themeDisplay.getPathThemeImage() + "/emotions");
-
 				try {
 					msgBody = com.liferay.portlet.messageboards.util.BBCodeUtil.getHTML(msgBody);
 				}
 				catch (Exception e) {
 					_log.error("Could not parse message " + message.getMessageId() + " " + e.getMessage());
 				}
+
+				msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emotions", themeDisplay.getPathThemeImage() + "/emotions");
 				%>
 
 				<%= msgBody %>

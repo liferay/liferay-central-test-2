@@ -38,7 +38,47 @@ import java.util.Map;
  */
 public class BBCodeUtil {
 
+	static public String[][] EMOTICON_MAPPING = {
+		{ "@theme_images_path@/emotions/angry.gif", ">[" },
+		{ "@theme_images_path@/emotions/bashful.gif", ":bashful:" },
+		{ "@theme_images_path@/emotions/big_grin.gif", ":grin:" },
+		{ "@theme_images_path@/emotions/blink.gif", ":blink:" },
+		{ "@theme_images_path@/emotions/blush.gif", ":*)" },
+		{ "@theme_images_path@/emotions/bored.gif", ":bored:" },
+		{ "@theme_images_path@/emotions/closed_eyes.gif", "-_-" },
+		{ "@theme_images_path@/emotions/cold.gif", ":cold:" },
+		{ "@theme_images_path@/emotions/cool.gif", "B)" },
+		{ "@theme_images_path@/emotions/darth_vader.gif", ":vader:" },
+		{ "@theme_images_path@/emotions/dry.gif", "<_<" },
+		{ "@theme_images_path@/emotions/exclamation.gif", ":what:" },
+		{ "@theme_images_path@/emotions/girl.gif", ":girl:" },
+		{ "@theme_images_path@/emotions/glare.gif", ">_>" },
+		{ "@theme_images_path@/emotions/happy.gif", ":)" },
+		{ "@theme_images_path@/emotions/huh.gif", ":huh:" },
+		{ "@theme_images_path@/emotions/in_love.gif", "<3" },
+		{ "@theme_images_path@/emotions/karate_kid.gif", ":kid:" },
+		{ "@theme_images_path@/emotions/kiss.gif", ":#" },
+		{ "@theme_images_path@/emotions/laugh.gif", ":lol:" },
+		{ "@theme_images_path@/emotions/mad.gif", ">(" },
+		{ "@theme_images_path@/emotions/mellow.gif", ":mellow:" },
+		{ "@theme_images_path@/emotions/ninja.gif", ":ph34r:" },
+		{ "@theme_images_path@/emotions/oh_my.gif", ":O" },
+		{ "@theme_images_path@/emotions/pac_man.gif", ":V" },
+		{ "@theme_images_path@/emotions/roll_eyes.gif", ":rolleyes:" },
+		{ "@theme_images_path@/emotions/sad.gif", ":(" },
+		{ "@theme_images_path@/emotions/sleep.gif", ":sleep:" },
+		{ "@theme_images_path@/emotions/smile.gif", ":D" },
+		{ "@theme_images_path@/emotions/smug.gif", ":smug:" },
+		{ "@theme_images_path@/emotions/suspicious.gif", "8o" },
+		{ "@theme_images_path@/emotions/tongue.gif", ":P" },
+		{ "@theme_images_path@/emotions/unsure.gif", ":unsure:" },
+		{ "@theme_images_path@/emotions/wacko.gif", ":wacko:" },
+		{ "@theme_images_path@/emotions/wink.gif", ":wink:" },
+		{ "@theme_images_path@/emotions/wub.gif", ":wub:" }
+	};
+
 	static Map fontSizes = new HashMap();
+
 	static Map listStyles = new HashMap();
 
 	static {
@@ -59,6 +99,12 @@ public class BBCodeUtil {
 
 	public static String getHTML(String bbcode) {
 		String html = StringUtil.replace(bbcode, _BBCODE_TAGS, _HTML_TAGS);
+
+		for (int i = 0; i < EMOTICON_MAPPING.length; i++) {
+			String imgTag = "<img src='" + EMOTICON_MAPPING[i][0] + "' />";
+
+			html = StringUtil.replace(html, EMOTICON_MAPPING[i][1], imgTag);			
+		}
 
 		BBCodeTag tag = null;
 
