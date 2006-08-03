@@ -257,7 +257,14 @@ public class HotDeployPortletListener implements HotDeployListener {
 					(PortletCategory)WebAppPool.get(
 						companyId, WebKeys.PORTLET_CATEGORY);
 
-				portletCategory.merge(newPortletCategory);
+				if (portletCategory != null) {
+					portletCategory.merge(newPortletCategory);
+				}
+				else {
+					_log.error(
+						"Unable to register portlet for company " + companyId +
+							" because it does not exist");
+				}
 			}
 
 			// Variables
