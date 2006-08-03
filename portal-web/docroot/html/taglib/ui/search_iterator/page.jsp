@@ -38,7 +38,7 @@ if (rowChecker != null) {
 %>
 
 <c:if test="<%= (resultRows.size() > 0) || ((resultRows.size() == 0) && (searchContainer.getEmptyResultsMessage() != null)) %>">
-	<table border="0" cellpadding="4" cellspacing="0" width="100%">
+	<table cellpadding="4" cellspacing="0" style="border:1px solid <%= colorScheme.getPortletFontDim() %>;" width="100%">
 	<tr class="portlet-section-header" style="font-weight: bold;">
 
 	<%
@@ -71,7 +71,7 @@ if (rowChecker != null) {
 		}
 	%>
 
-		<td
+		<td style="border-bottom:1px solid <%= colorScheme.getPortletFontDim() %>"
 
 			<%--
 
@@ -92,7 +92,18 @@ if (rowChecker != null) {
 				<i>
 			</c:if>
 
-			<%= LanguageUtil.get(pageContext, headerName) %>
+			<%
+			String headerNameValue = LanguageUtil.get(pageContext, headerName);
+			%>
+
+			<c:choose>
+				<c:when test="<%= headerNameValue.equals(StringPool.BLANK) %>">
+					<%= StringPool.NBSP %>
+				</c:when>
+				<c:otherwise>
+					<%= headerNameValue %>
+				</c:otherwise>
+			</c:choose>
 
 			<c:if test="<%= orderCurrentHeader %>">
 				</i>
@@ -123,12 +134,12 @@ if (rowChecker != null) {
 	for (int i = 0; i < resultRows.size(); i++) {
 		ResultRow row = (ResultRow)resultRows.get(i);
 
-		String className = "portlet-section-body";
-		String classHoverName = "portlet-section-body-hover";
+		String className = "portlet-section-alternate";
+		String classHoverName = "portlet-section-alternate-hover";
 
 		if (MathUtil.isEven(i)) {
-			className = "portlet-section-alternate";
-			classHoverName = "portlet-section-alternate-hover";
+			className = "portlet-section-body";
+			classHoverName = "portlet-section-body-hover";
 		}
 
 		request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW, row);
