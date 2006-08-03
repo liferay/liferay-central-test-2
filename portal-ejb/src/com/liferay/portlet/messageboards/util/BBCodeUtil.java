@@ -24,6 +24,7 @@ package com.liferay.portlet.messageboards.util;
 
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
+import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 
 import java.util.HashMap;
@@ -85,8 +86,13 @@ public class BBCodeUtil {
 					sb.append("&nbsp;");
 				}
 
+				lines[i] = StringUtil.replace(lines[i], "   ",
+					StringPool.NBSP + StringPool.SPACE + StringPool.NBSP);
+				lines[i] = StringUtil.replace(lines[i], "  ",
+					StringPool.NBSP + StringPool.SPACE);
+
 				sb.append(index + "</span>");
-				sb.append(StringUtil.replace(lines[i], " ", "&nbsp;"));
+				sb.append(lines[i]);
 
 				if (index.length() < lines.length) {
 					sb.append("<br />");
