@@ -36,6 +36,7 @@ import com.liferay.portal.service.spring.ResourceServiceUtil;
 import com.liferay.portal.service.spring.UserGroupServiceUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.StringPool;
+import com.liferay.util.Validator;
 
 import java.util.List;
 import java.util.Map;
@@ -147,7 +148,9 @@ public class PermissionChecker {
 				// improve performance
 
 				if (signedIn) {
-					permissionCheckerBag.hasGroup(groupId);
+					if (Validator.isNotNull(groupId)) {
+						permissionCheckerBag.hasGroup(groupId);
+					}
 				}
 			}
 			catch (Exception e) {
