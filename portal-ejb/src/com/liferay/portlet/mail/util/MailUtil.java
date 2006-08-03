@@ -1091,109 +1091,76 @@ public class MailUtil {
 	private static Store _getStore(HttpSession ses)
 		throws FolderException, StoreException {
 
-		try {
-			Store store = (Store)ses.getAttribute(WebKeys.MAIL_STORE);
+		Store store = (Store)ses.getAttribute(WebKeys.MAIL_STORE);
 
-			if (store != null && !store.isConnected()) {
-				if (_log.isInfoEnabled()) {
-					_log.info("The store needs to be reconnected");
-				}
-
-				cleanUp(ses);
-
-				store = null;
+		if (store != null && !store.isConnected()) {
+			if (_log.isInfoEnabled()) {
+				_log.info("The store needs to be reconnected");
 			}
 
-			if (store == null) {
-				Session session = MailEngine.getSession();
+			store = null;
+		}
 
-				String imapHost = session.getProperty("mail.imap.host");
+		if (store == null) {
+			String userId = (String)ses.getAttribute(WebKeys.USER_ID);
 
-				String userId = (String)ses.getAttribute(WebKeys.USER_ID);
+			if (GetterUtil.getBoolean(
+					PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
 
-				String serviceName =
-					userId + StringPool.COLON + WebKeys.MAIL_STORE;
+				userId = StringUtil.replace(userId, ".", "_");
+			}
 
-				if (GetterUtil.getBoolean(
-						PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
+			String password = (String)ses.getAttribute(
+				WebKeys.USER_PASSWORD);
 
-					userId = StringUtil.replace(userId, ".", "_");
-				}
+			store = _resetStore(ses, userId, password);
 
-				String password = (String)ses.getAttribute(
-					WebKeys.USER_PASSWORD);
+			List list = getFolders(ses);
 
-				store = session.getStore("imap");
+			if (_log.isInfoEnabled()) {
+				_log.info("Store has " + list.size() + " folders");
+			}
 
-				store.addConnectionListener(
-					new ConnectionListener(serviceName));
+			boolean newFolders = false;
 
-				store.connect(imapHost, userId, password);
+			for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
+				boolean exists = false;
 
-				ses.setAttribute(WebKeys.MAIL_STORE, store);
+				for (int j = 0; j < list.size(); j++) {
+					MailFolder mailFolder = (MailFolder)list.get(j);
 
-				List list = getFolders(ses);
+					String folderName =
+						_getResolvedFolderName(mailFolder.getName());
 
-				if (_log.isInfoEnabled()) {
-					_log.info(serviceName + " has " + list.size() + " folders");
-				}
+					if (DEFAULT_FOLDERS[i].equals(folderName)) {
+						exists = true;
 
-				boolean newFolders = false;
-
-				for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
-					boolean exists = false;
-
-					for (int j = 0; j < list.size(); j++) {
-						MailFolder mailFolder = (MailFolder)list.get(j);
-
-						String folderName =
-							_getResolvedFolderName(mailFolder.getName());
-
-						if (DEFAULT_FOLDERS[i].equals(folderName)) {
-							exists = true;
-
-							break;
-						}
-					}
-
-					if (!exists) {
-						createFolder(ses, DEFAULT_FOLDERS[i]);
-
-						if (_log.isInfoEnabled()) {
-							_log.info(
-								"Created default folder " + DEFAULT_FOLDERS[i]);
-						}
-
-						newFolders = true;
+						break;
 					}
 				}
 
-				if (newFolders) {
-					cleanUp(ses);
+				if (!exists) {
+					createFolder(ses, DEFAULT_FOLDERS[i]);
 
-					store = session.getStore("imap");
+					if (_log.isInfoEnabled()) {
+						_log.info(
+							"Created default folder " + DEFAULT_FOLDERS[i]);
+					}
 
-					store.addConnectionListener(
-						new ConnectionListener(serviceName));
-
-					store.connect(imapHost, userId, password);
-
-					ses.setAttribute(WebKeys.MAIL_STORE, store);
-				}
-
-				if (ses.getAttribute(WebKeys.MAIL_FOLDER) == null) {
-					setFolder(ses, MAIL_INBOX_NAME);
+					newFolders = true;
 				}
 			}
 
-			return store;
+			if (newFolders) {
+				_resetStore(ses, userId, password);
+			}
+
+			if (ses.getAttribute(WebKeys.MAIL_FOLDER) == null) {
+				setFolder(ses, MAIL_INBOX_NAME);
+			}
 		}
-		catch (MessagingException me) {
-			throw new StoreException(me);
-		}
-		catch (NamingException ne) {
-			throw new StoreException(ne);
-		}
+
+		return store;
 	}
 
 	private static void _replaceContentIds(
@@ -1301,6 +1268,40 @@ public class MailUtil {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Body after replacing embedded images\n" + body);
+		}
+	}
+
+	private static Store _resetStore(
+			HttpSession ses, String userId, String password)
+		throws StoreException {
+
+		try {
+			String serviceName =
+				userId + StringPool.COLON + WebKeys.MAIL_STORE;
+
+			if (_log.isInfoEnabled()) {
+				_log.info("Reseting service " + serviceName);
+			}
+
+			cleanUp(ses);
+
+			Session session = MailEngine.getSession();
+
+			String imapHost = session.getProperty("mail.imap.host");
+
+			Store store = session.getStore("imap");
+
+			store.addConnectionListener(
+				new ConnectionListener(serviceName));
+
+			store.connect(imapHost, userId, password);
+
+			ses.setAttribute(WebKeys.MAIL_STORE, store);
+			
+			return store;
+		}
+		catch (Exception e) {
+			throw new StoreException(e);
 		}
 	}
 
