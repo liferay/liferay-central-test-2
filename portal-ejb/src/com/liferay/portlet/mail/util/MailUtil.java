@@ -943,7 +943,7 @@ public class MailUtil {
 				attachment = false;
 
 				if (contentType.startsWith(Constants.TEXT_PLAIN)) {
-					mailMessage.appendPlainBody((String)part.getContent());					
+					mailMessage.appendPlainBody((String)part.getContent());
 				}
 				else if (contentType.startsWith(Constants.TEXT_HTML)) {
 					mailMessage.appendHtmlBody(
@@ -1294,7 +1294,7 @@ public class MailUtil {
 	}
 
 	private static Address[] _resolveAddresses(
-			HttpServletRequest req, Address addresses[])
+			HttpServletRequest req, Address[] addresses)
 		throws RecipientException {
 
 		Company company = null;
@@ -1309,7 +1309,7 @@ public class MailUtil {
 		for (int i = 0; i < addresses.length; i++) {
 			InternetAddress address = (InternetAddress)addresses[i];
 
-			if (address.getPersonal() == null &&
+			if ((address.getPersonal() == null) &&
 				!Validator.isEmailAddress(address.getAddress())) {
 
 				try {
@@ -1323,7 +1323,7 @@ public class MailUtil {
 				catch (Exception e) {
 					_log.error(
 						"Problems found trying to resolve email address " +
-						address);
+							address);
 
 					throw new RecipientException(e);
 				}

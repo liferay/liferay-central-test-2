@@ -62,9 +62,7 @@ public class MailMessage {
 		return _to;
 	}
 
-	public void setTo(String to)
-		throws AddressException {
-
+	public void setTo(String to) throws AddressException {
 		_to = InternetAddress.parse(to);
 	}
 
@@ -80,9 +78,7 @@ public class MailMessage {
 		_cc = cc;
 	}
 
-	public void setCc(String ccs)
-		throws AddressException {
-
+	public void setCc(String ccs) throws AddressException {
 		_cc = InternetAddress.parse(ccs);
 	}
 
@@ -94,9 +90,7 @@ public class MailMessage {
 		_bcc = bcc;
 	}
 
-	public void setBcc(String bccs)
-		throws AddressException {
-
+	public void setBcc(String bccs) throws AddressException {
 		_bcc = InternetAddress.parse(bccs);
 	}
 
@@ -104,9 +98,7 @@ public class MailMessage {
 		return _replyTo;
 	}
 
-	public void setReplyTo(String replyTos)
-		throws AddressException {
-
+	public void setReplyTo(String replyTos) throws AddressException {
 		_replyTo = InternetAddress.parse(replyTos);
 	}
 
