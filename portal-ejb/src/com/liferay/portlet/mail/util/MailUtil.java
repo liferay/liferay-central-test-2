@@ -22,8 +22,12 @@
 
 package com.liferay.portlet.mail.util;
 
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mail.ContentException;
@@ -145,17 +149,20 @@ public class MailUtil {
 
 			if (!Validator.isNull(mailMessage.getTo())) {
 				message.setRecipients(
-					Message.RecipientType.TO, mailMessage.getTo());
+					Message.RecipientType.TO,
+					_resolveAddresses(req, mailMessage.getTo()));
 			}
 
 			if (!Validator.isNull(mailMessage.getCc())) {
 				message.setRecipients(
-					Message.RecipientType.CC, mailMessage.getCc());
+					Message.RecipientType.CC,
+					_resolveAddresses(req, mailMessage.getCc()));
 			}
 
 			if (!Validator.isNull(mailMessage.getBcc())) {
 				message.setRecipients(
-					Message.RecipientType.BCC, mailMessage.getBcc());
+					Message.RecipientType.BCC,
+					_resolveAddresses(req, mailMessage.getBcc()));
 			}
 
 			message.setSubject(mailMessage.getSubject());
@@ -1284,6 +1291,40 @@ public class MailUtil {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Body after replacing embedded images\n" + body);
 		}
+	}
+
+	private static Address[] _resolveAddresses(
+			HttpServletRequest req, Address addresses[]) {
+
+		Company company = null;
+
+		try {
+			company = PortalUtil.getCompany(req);
+		}
+		catch (Exception e) {
+			return addresses;
+		}
+
+		for (int i = 0; i < addresses.length; i++) {
+			InternetAddress address = (InternetAddress)addresses[i];
+
+			if (address.getPersonal() == null &&
+				!Validator.isEmailAddress(address.getAddress())) {
+
+				try {
+					User user = UserLocalServiceUtil.getUserByEmailAddress(
+						company.getCompanyId(), address.getAddress().trim() +
+							StringPool.AT + company.getMx());
+
+					addresses[i] = new InternetAddress(
+						user.getEmailAddress(), user.getFullName());
+				}
+				catch (Exception e) {
+				}
+			}
+		}
+
+		return addresses;
 	}
 
 	private static final String[] _HTML_START_TAGS = new String[] {
