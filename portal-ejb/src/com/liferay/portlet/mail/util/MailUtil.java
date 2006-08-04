@@ -917,7 +917,11 @@ public class MailUtil {
 		try {
 			String contentType = part.getContentType().toLowerCase();
 
+			boolean attachment = true;
+
 			if (part.getContent() instanceof Multipart) {
+				attachment = false;
+
 				Multipart multipart = (Multipart)part.getContent();
 
 				for (int i = 0; i < multipart.getCount(); i++) {
@@ -928,19 +932,24 @@ public class MailUtil {
 						contentPath + StringPool.PERIOD + i);
 				}
 			}
-			else if (contentType.startsWith(Constants.TEXT_PLAIN)) {
-				mailMessage.appendPlainBody((String)part.getContent());
-			}
-			else if (contentType.startsWith(Constants.TEXT_HTML)) {
-				mailMessage.appendHtmlBody(
-					_customizeHtml((String)part.getContent()));
-			}
-			else if (contentType.startsWith(Constants.MESSAGE_RFC822)) {
+			else if (Validator.isNull(part.getFileName())) {
+				attachment = false;
 
-				// FIX ME
+				if (contentType.startsWith(Constants.TEXT_PLAIN)) {
+					mailMessage.appendPlainBody((String)part.getContent());					
+				}
+				else if (contentType.startsWith(Constants.TEXT_HTML)) {
+					mailMessage.appendHtmlBody(
+						_customizeHtml((String)part.getContent()));
+				}
+				else if (contentType.startsWith(Constants.MESSAGE_RFC822)) {
 
+					// FIX ME
+
+				}
 			}
-			else {
+
+			if (attachment) {
 				mailMessage.appendRemoteAttachment(
 					_getRemoteAttachment(
 						part, contentPath + StringPool.PERIOD + -1));
