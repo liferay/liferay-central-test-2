@@ -246,8 +246,6 @@ public class PropsUtil {
 
 	public static final String AUTO_LOGIN_HOOKS = "auto.login.hooks";
 
-	public static final String AUTO_LOGIN_DISABLED_PATH = "auto.login.disabled.path.";
-
 	// Passwords
 
 	public static final String PASSWORDS_ENCRYPTED = "passwords.encrypted";

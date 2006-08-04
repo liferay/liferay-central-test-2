@@ -138,7 +138,6 @@
 
 		<action path="/portal/login" type="com.liferay.portal.action.LoginAction">
 			<forward name="portal.login" path="portal.login" />
-			<forward name="/portal/j_login.jsp" path="/portal/j_login.jsp" />
 			<forward name="/portal/touch_protected.jsp" path="/portal/touch_protected.jsp" />
 		</action>
 
@@ -163,6 +162,8 @@
 		<action path="/portal/test_redirect" type="com.liferay.portal.action.TestRedirectAction">
 			<forward name="portal.test_redirect" path="/c/portal/test" redirect="true" />
 		</action>
+
+		<action path="/portal/touch_protected" forward="/portal/touch_protected.jsp" />
 
 		<action path="/portal/update_layout" type="com.liferay.portal.action.UpdateLayoutAction" />
 

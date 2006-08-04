@@ -3,6 +3,10 @@
 
 <web-app>
 	<filter>
+		<filter-name>Auto Login Filter</filter-name>
+		<filter-class>com.liferay.portal.servlet.filters.autologin.AutoLoginFilter</filter-class>
+	</filter>
+	<filter>
 		<filter-name>Compression Filter</filter-name>
 		<filter-class>com.liferay.filters.compression.CompressionFilter</filter-class>
 	</filter>
@@ -50,6 +54,18 @@
 		<filter-name>Strip Filter</filter-name>
 		<filter-class>com.liferay.filters.strip.StripFilter</filter-class>
 	</filter>
+	<filter-mapping>
+		<filter-name>Auto Login Filter</filter-name>
+		<url-pattern>/group/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Auto Login Filter</filter-name>
+		<url-pattern>/web/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Auto Login Filter</filter-name>
+		<url-pattern>/c/portal/layout</url-pattern>
+	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Layout Cache Filter - Friendly</filter-name>
 		<url-pattern>/group/*</url-pattern>

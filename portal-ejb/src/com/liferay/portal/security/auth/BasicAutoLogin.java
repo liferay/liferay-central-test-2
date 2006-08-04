@@ -22,6 +22,7 @@
 
 package com.liferay.portal.security.auth;
 
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.CookieKeys;
@@ -34,6 +35,9 @@ import com.liferay.util.Validator;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="BasicAutoLogin.java.html"><b><i>View Source</i></b></a>
@@ -75,13 +79,17 @@ public class BasicAutoLogin implements AutoLogin {
 			return credentials;
 		}
 		catch (Exception e) {
+			_log.warn(StackTraceUtil.getStackTrace(e));
+
 			Cookie cookie = new Cookie(CookieKeys.ID, StringPool.BLANK);
+
 			cookie.setMaxAge(0);
 			cookie.setPath("/");
 
 			CookieKeys.addCookie(res, cookie);
 
 			cookie = new Cookie(CookieKeys.PASSWORD, StringPool.BLANK);
+
 			cookie.setMaxAge(0);
 			cookie.setPath("/");
 
@@ -90,5 +98,7 @@ public class BasicAutoLogin implements AutoLogin {
 			throw new AutoLoginException(e);
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(BasicAutoLogin.class);
 
 }

@@ -162,6 +162,7 @@ public class MainServlet extends ActionServlet {
 
 			String rootPath = GetterUtil.getString(
 				ctx.getInitParameter("root_path"), StringPool.SLASH);
+
 			if (rootPath.equals(StringPool.SLASH)) {
 				rootPath = StringPool.BLANK;
 			}

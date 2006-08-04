@@ -32,12 +32,9 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.model.UserTrackerPath;
-import com.liferay.portal.security.auth.AutoLogin;
-import com.liferay.portal.security.auth.AutoLoginException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
@@ -60,7 +57,6 @@ import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
-import com.liferay.util.InstancePool;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
@@ -145,22 +141,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			}
 			else {
 				_publicPaths.add(publicPath);
-			}
-		}
-
-		// auto.login.disabled.path.
-
-		_autoLoginDisabledPaths = CollectionFactory.getHashSet();
-
-		for (int i = 0;; i++) {
-			String autoLoginDisabledPath = PropsUtil.get(
-				PropsUtil.AUTO_LOGIN_DISABLED_PATH + i);
-
-			if (autoLoginDisabledPath == null) {
-				break;
-			}
-			else {
-				_autoLoginDisabledPaths.add(autoLoginDisabledPath);
 			}
 		}
 	}
@@ -344,59 +324,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				}
 
 				ses.setAttribute(WebKeys.LAST_PATH, lastPath);
-			}
-		}
-
-		// Auto login
-
-		if ((userId == null) && (ses.getAttribute("j_username") == null) &&
-			(!isAutoLoginDisabledPaths(path))) {
-
-			try {
-				String[] autoLogins = PropsUtil.getArray(
-					PropsUtil.AUTO_LOGIN_HOOKS);
-
-				for (int i = 0; i < autoLogins.length; i++) {
-					AutoLogin autoLogin =
-						(AutoLogin)InstancePool.get(autoLogins[i]);
-
-					String[] credentials = autoLogin.login(req, res);
-
-					if ((credentials != null) && (credentials.length == 3)) {
-						String jUsername = credentials[0];
-						String jPassword = credentials[1];
-						boolean encPwd = GetterUtil.getBoolean(credentials[2]);
-
-						if (Validator.isNotNull(jUsername) &&
-							Validator.isNotNull(jPassword)) {
-
-							ses.setAttribute("j_username", jUsername);
-
-							// Not having access to the unencrypted password
-							// will not allow you to connect to external
-							// resources that require it (mail server)
-
-							if (encPwd) {
-								ses.setAttribute("j_password", jPassword);
-							}
-							else {
-								ses.setAttribute("j_password",
-									PwdEncryptor.encrypt(jPassword));
-
-								ses.setAttribute(
-									WebKeys.USER_PASSWORD, jPassword);
-							}
-
-							ses.setAttribute("j_remoteuser", jUsername);
-
-							return _PATH_PORTAL_LOGIN;
-						}
-					}
-				}
-
-			}
-			catch (AutoLoginException ale) {
-				_log.error(ale.getMessage());
 			}
 		}
 
@@ -738,17 +665,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		return lastPathSB.toString();
 	}
 
-	protected boolean isAutoLoginDisabledPaths(String path) {
-		if ((path != null) &&
-			(_autoLoginDisabledPaths.contains(path))) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
 	protected boolean isPortletPath(String path) {
 		if ((path != null) &&
 			(!path.equals(_PATH_C)) &&
@@ -887,6 +803,5 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 	private Set _lastPaths;
 	private Set _publicPaths;
-	private Set _autoLoginDisabledPaths;
 
 }
