@@ -113,6 +113,12 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		addFileEntryResources(
 			folder, fileEntry, addCommunityPermissions, addGuestPermissions);
 
+		// Folder
+
+		folder.setLastPostDate(fileEntry.getModifiedDate());
+
+		DLFolderUtil.update(folder);
+
 		return fileEntry;
 	}
 
