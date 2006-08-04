@@ -22,10 +22,8 @@
 
 package com.liferay.portal.upgrade;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.spring.CounterServiceUtil;
 import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
@@ -72,16 +70,13 @@ public class UpgradeProcess_Legacy extends UpgradeProcess {
 
 			_updateImage();
 		}
-		catch (PortalException pe) {
-			throw new UpgradeException(pe.getCause());
-		}
-		catch (SystemException se) {
-			throw new UpgradeException(se.getCause());
+		catch (Exception e) {
+			throw new UpgradeException(e.getCause());
 		}
 	}
 
-	private void _updateCounter() throws SystemException {
-		Iterator itr = CounterLocalServiceUtil.getNames().iterator();
+	private void _updateCounter() throws Exception {
+		Iterator itr = CounterServiceUtil.getNames().iterator();
 
 		while (itr.hasNext()) {
 			String name = (String)itr.next();
@@ -89,14 +84,13 @@ public class UpgradeProcess_Legacy extends UpgradeProcess {
 			int pos = name.indexOf(".ejb.");
 
 			if (name.startsWith("com.liferay.") && pos != -1) {
-				CounterLocalServiceUtil.rename(
-					name,
-					StringUtil.replace(name, ".ejb.", ".model."));
+				CounterServiceUtil.rename(
+					name, StringUtil.replace(name, ".ejb.", ".model."));
 			}
 		}
 	}
 
-	private void _updateDefaultUser() throws PortalException, SystemException {
+	private void _updateDefaultUser() throws Exception {
 		Iterator itr = CompanyLocalServiceUtil.getCompanies().iterator();
 
 		while (itr.hasNext()) {
@@ -113,7 +107,7 @@ public class UpgradeProcess_Legacy extends UpgradeProcess {
 		}
 	}
 
-	private void _updateImage() throws PortalException, SystemException {
+	private void _updateImage() throws Exception {
 
 		// Image gallery
 

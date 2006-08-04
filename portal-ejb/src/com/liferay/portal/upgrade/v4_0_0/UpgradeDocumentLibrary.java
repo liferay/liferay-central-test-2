@@ -22,7 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_0_0;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.spring.CounterServiceUtil;
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -68,6 +68,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			_upgradeFolder();
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			throw new UpgradeException(e);
 		}
 	}
@@ -216,14 +217,14 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	}
 
 	private void _upgradeFolder() throws Exception {
-		CounterLocalServiceUtil.rename(
+		CounterServiceUtil.rename(
 			"com.liferay.portlet.documentlibrary.model.DLRepository",
 			DLFolder.class.getName());
 
-		long folderIdCount = CounterLocalServiceUtil.increment(
+		long folderIdCount = CounterServiceUtil.increment(
 			DLFolder.class.getName());
 
-		CounterLocalServiceUtil.increment(
+		CounterServiceUtil.increment(
 			DLFolder.class.getName(), (int)folderIdCount * 2);
 
 		Connection con = null;
