@@ -300,7 +300,7 @@ public class PropsUtil {
 
 	public static final String LOGOUT_EVENTS_POST = "logout.events.post";
 
-	// Default Guest Layout
+	// Default Guest
 
 	public static final String DEFAULT_GUEST_LAYOUT_NAME = "default.guest.layout.name";
 
@@ -310,7 +310,7 @@ public class PropsUtil {
 
 	public static final String DEFAULT_GUEST_LAYOUT_RESOLUTION = "default.guest.layout.resolution";
 
-	// Default User Layout
+	// Default User
 
 	public static final String DEFAULT_USER_LAYOUT_NAME = "default.user.layout.name";
 
@@ -319,6 +319,18 @@ public class PropsUtil {
 	public static final String DEFAULT_USER_LAYOUT_COLUMN = "default.user.layout.column-";
 
 	public static final String DEFAULT_USER_LAYOUT_RESOLUTION = "default.user.layout.resolution";
+
+	// Default Admin
+
+	public static final String DEFAULT_ADMIN_PASSWORD = "default.admin.password";
+
+    public static final String DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX = "default.admin.email.address.prefix";
+
+    public static final String DEFAULT_ADMIN_FIRST_NAME = "default.admin.first.name";
+
+    public static final String DEFAULT_ADMIN_MIDDLE_NAME = "default.admin.middle.name";
+
+    public static final String DEFAULT_ADMIN_LAST_NAME = "default.admin.last.name";
 
 	// Layouts
 

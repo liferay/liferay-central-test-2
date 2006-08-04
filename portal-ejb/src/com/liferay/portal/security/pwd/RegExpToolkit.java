@@ -25,6 +25,9 @@ package com.liferay.portal.security.pwd;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.PwdGenerator;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="RegExpToolkit.java.html"><b><i>View Source</i></b></a>
  *
@@ -42,8 +45,18 @@ public class RegExpToolkit extends BasicToolkit {
 	}
 
 	public boolean validate(String password) {
-		return password.matches(_pattern);
+		boolean value = password.matches(_pattern);
+
+		if (!value) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Password " + password + " is not valid");
+			}
+		}
+
+		return value;
 	}
+
+	private static Log _log = LogFactory.getLog(RegExpToolkit.class);
 
 	private String _pattern;
 

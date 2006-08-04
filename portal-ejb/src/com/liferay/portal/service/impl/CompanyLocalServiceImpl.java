@@ -233,14 +233,19 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 			boolean autoUserId = true;
 			String userId = StringPool.BLANK;
 			boolean autoPassword = false;
-			String password1 = "test";
-			String password2 = "test";
+			String password1 = PropsUtil.get(PropsUtil.DEFAULT_ADMIN_PASSWORD);
+			String password2 = password1;
 			boolean passwordReset = false;
-			String emailAddress = "test@" + companyMx;
+			String emailAddress =
+				PropsUtil.get(
+					PropsUtil.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX) +
+				"@" + companyMx;
 			Locale locale = defaultUser.getLocale();
-			String firstName = "Test";
-			String middleName = StringPool.BLANK;
-			String lastName = "Test";
+			String firstName = PropsUtil.get(
+				PropsUtil.DEFAULT_ADMIN_FIRST_NAME);
+			String middleName = PropsUtil.get(
+				PropsUtil.DEFAULT_ADMIN_MIDDLE_NAME);
+			String lastName = PropsUtil.get(PropsUtil.DEFAULT_ADMIN_LAST_NAME);
 			String nickName = StringPool.BLANK;
 			String prefixId = StringPool.BLANK;
 			String suffixId = StringPool.BLANK;
@@ -251,11 +256,6 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 			String jobTitle = StringPool.BLANK;
 			String organizationId = null;
 			String locationId = null;
-
-			if (companyId.equals("liferay.net")) {
-				firstName = "Liferay";
-				lastName = "Demo";
-			}
 
 			User user = UserLocalServiceUtil.addUser(
 				creatorUserId, companyId, autoUserId, userId, autoPassword,
