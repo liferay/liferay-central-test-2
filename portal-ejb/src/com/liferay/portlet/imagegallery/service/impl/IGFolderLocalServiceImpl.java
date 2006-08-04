@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.imagegallery.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Resource;
@@ -65,7 +65,7 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 
 		validate(name);
 
-		String folderId = Long.toString(CounterServiceUtil.increment(
+		String folderId = Long.toString(CounterLocalServiceUtil.increment(
 			IGFolder.class.getName()));
 
 		IGFolder folder = IGFolderUtil.create(folderId);

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.UserTracker;
@@ -56,8 +56,8 @@ public class UserTrackerLocalServiceImpl implements UserTrackerLocalService {
 		if (GetterUtil.getBoolean(PropsUtil.get(
 				PropsUtil.SESSION_TRACKER_PERSISTENCE_ENABLED))) {
 
-			String userTrackerId = Long.toString(CounterServiceUtil.increment(
-				UserTracker.class.getName()));
+			String userTrackerId = Long.toString(
+				CounterLocalServiceUtil.increment(UserTracker.class.getName()));
 
 			UserTracker userTracker = UserTrackerUtil.create(userTrackerId);
 
@@ -75,7 +75,7 @@ public class UserTrackerLocalServiceImpl implements UserTrackerLocalService {
 			while (itr.hasNext()) {
 				UserTrackerPath userTrackerPath = (UserTrackerPath)itr.next();
 
-				String pathId = Long.toString(CounterServiceUtil.increment(
+				String pathId = Long.toString(CounterLocalServiceUtil.increment(
 					UserTrackerPath.class.getName()));
 
 				userTrackerPath.setUserTrackerPathId(pathId);

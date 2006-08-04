@@ -49,6 +49,8 @@ import com.liferay.util.Validator;
 
 import java.io.InputStream;
 
+import java.rmi.RemoteException;
+
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -78,9 +80,14 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 			title = name;
 		}
 
-		DLServiceUtil.addFile(
-			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-			folder.getGroupId(), folderId, name, byteArray);
+		try {
+			DLServiceUtil.addFile(
+				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+				folder.getGroupId(), folderId, name, byteArray);
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
+		}
 
 		DLFileEntryPK pk = new DLFileEntryPK(folderId, name);
 
@@ -159,9 +166,14 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 			new DLFileEntryPK(folderId, name));
 
 		if (version > 0) {
-			DLServiceUtil.deleteFile(
-				fileEntry.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				fileEntry.getFolderId(), fileEntry.getName(), version);
+			try {
+				DLServiceUtil.deleteFile(
+					fileEntry.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+					fileEntry.getFolderId(), fileEntry.getName(), version);
+			}
+			catch (RemoteException re) {
+				throw new SystemException(re);
+			}
 
 			DLFileVersionUtil.remove(
 				new DLFileVersionPK(folderId, name, version));
@@ -176,9 +188,14 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 
 		// File
 
-		DLServiceUtil.deleteFile(
-			fileEntry.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-			fileEntry.getFolderId(), fileEntry.getName());
+		try {
+			DLServiceUtil.deleteFile(
+				fileEntry.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+				fileEntry.getFolderId(), fileEntry.getName());
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
+		}
 
 		// File ranks
 
@@ -314,10 +331,15 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 
 		// File
 
-		DLServiceUtil.updateFile(
-			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-			folder.getGroupId(), folderId, name, newVersion, sourceFileName,
-			byteArray);
+		try {
+			DLServiceUtil.updateFile(
+				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+				folder.getGroupId(), folderId, name, newVersion, sourceFileName,
+				byteArray);
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
+		}
 
 		// File version
 

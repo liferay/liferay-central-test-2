@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.shopping.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Resource;
@@ -257,7 +257,7 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 			mediumFile, mediumBytes, largeImage, largeImageURL, largeFile,
 			largeBytes);
 
-		String itemId = Long.toString(CounterServiceUtil.increment(
+		String itemId = Long.toString(CounterLocalServiceUtil.increment(
 			ShoppingItem.class.getName()));
 
 		ShoppingItem item = ShoppingItemUtil.create(itemId);
@@ -318,8 +318,9 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 		for (int i = 0; i < itemFields.size(); i++) {
 			ShoppingItemField itemField = (ShoppingItemField)itemFields.get(i);
 
-			String itemFieldId = Long.toString(CounterServiceUtil.increment(
-				ShoppingItemField.class.getName()));
+			String itemFieldId = Long.toString(
+				CounterLocalServiceUtil.increment(
+					ShoppingItemField.class.getName()));
 
 			itemField.setItemFieldId(itemFieldId);
 			itemField.setItemId(itemId);
@@ -336,8 +337,9 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 
 			ShoppingItemPrice itemPrice = (ShoppingItemPrice)itemPrices.get(i);
 
-			String itemPriceId = Long.toString(CounterServiceUtil.increment(
-				ShoppingItemPrice.class.getName()));
+			String itemPriceId = Long.toString(
+				CounterLocalServiceUtil.increment(
+					ShoppingItemPrice.class.getName()));
 
 			itemPrice.setItemPriceId(itemPriceId);
 			itemPrice.setItemId(itemId);
@@ -640,8 +642,9 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 		for (int i = 0; i < itemFields.size() && itemFields.size() > 0; i++) {
 			ShoppingItemField itemField = (ShoppingItemField)itemFields.get(i);
 
-			String itemFieldId = Long.toString(CounterServiceUtil.increment(
-				ShoppingItemField.class.getName()));
+			String itemFieldId = Long.toString(
+				CounterLocalServiceUtil.increment(
+					ShoppingItemField.class.getName()));
 
 			itemField.setItemFieldId(itemFieldId);
 			itemField.setItemId(itemId);
@@ -658,8 +661,9 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 		for (int i = 0; i < itemPrices.size() && itemPrices.size() > 1; i++) {
 			ShoppingItemPrice itemPrice = (ShoppingItemPrice)itemPrices.get(i);
 
-			String itemPriceId = Long.toString(CounterServiceUtil.increment(
-				ShoppingItemPrice.class.getName()));
+			String itemPriceId = Long.toString(
+				CounterLocalServiceUtil.increment(
+					ShoppingItemPrice.class.getName()));
 
 			itemPrice.setItemPriceId(itemPriceId);
 			itemPrice.setItemId(itemId);

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.DuplicateUserGroupException;
 import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.PortalException;
@@ -68,7 +68,7 @@ public class UserGroupLocalServiceImpl implements UserGroupLocalService {
 
 		validate(null, companyId, name);
 
-		String userGroupId = Long.toString(CounterServiceUtil.increment(
+		String userGroupId = Long.toString(CounterLocalServiceUtil.increment(
 			UserGroup.class.getName()));
 
 		UserGroup userGroup = UserGroupUtil.create(userGroupId);

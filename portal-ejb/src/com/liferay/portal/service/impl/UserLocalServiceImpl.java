@@ -100,6 +100,8 @@ import com.liferay.util.mail.MailMessage;
 
 import java.io.IOException;
 
+import java.rmi.RemoteException;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -258,9 +260,14 @@ public class UserLocalServiceImpl implements UserLocalService {
 		// Mail
 
 		if (user.hasCompanyMx()) {
-			MailServiceUtil.addUser(
-				userId, password1, firstName, middleName, lastName,
-				emailAddress);
+			try {
+				MailServiceUtil.addUser(
+					userId, password1, firstName, middleName, lastName,
+					emailAddress);
+			}
+			catch (RemoteException re) {
+				throw new SystemException(re);
+			}
 		}
 
 		// Contact
@@ -491,7 +498,12 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		// Mail
 
-		MailServiceUtil.deleteUser(userId);
+		try {
+			MailServiceUtil.deleteUser(userId);
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
+		}
 
 		// Contact
 
@@ -893,7 +905,12 @@ public class UserLocalServiceImpl implements UserLocalService {
 		}
 
 		if (user.hasCompanyMx()) {
-			MailServiceUtil.updatePassword(userId, password1);
+			try {
+				MailServiceUtil.updatePassword(userId, password1);
+			}
+			catch (RemoteException re) {
+				throw new SystemException(re);
+			}
 		}
 
 		user.setPassword(newEncPwd);
@@ -956,22 +973,31 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 			// test@test.com -> test@liferay.com
 
-			if (!user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
-				MailServiceUtil.addUser(
-					userId, password, firstName, middleName, lastName,
-					emailAddress);
+			try {
+				if (!user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
+					MailServiceUtil.addUser(
+						userId, password, firstName, middleName, lastName,
+						emailAddress);
+				}
+
+				// test@liferay.com -> bob@liferay.com
+
+				else if (user.hasCompanyMx() &&
+						 user.hasCompanyMx(emailAddress)) {
+
+					MailServiceUtil.updateEmailAddress(userId, emailAddress);
+				}
+
+				// test@liferay.com -> test@test.com
+
+				else if (user.hasCompanyMx() &&
+						 !user.hasCompanyMx(emailAddress)) {
+
+					MailServiceUtil.deleteEmailAddress(userId);
+				}
 			}
-
-			// test@liferay.com -> bob@liferay.com
-
-			else if (user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
-				MailServiceUtil.updateEmailAddress(userId, emailAddress);
-			}
-
-			// test@liferay.com -> test@test.com
-
-			else if (user.hasCompanyMx() && !user.hasCompanyMx(emailAddress)) {
-				MailServiceUtil.deleteEmailAddress(userId);
+			catch (RemoteException re) {
+				throw new SystemException(re);
 			}
 
 			user.setEmailAddress(emailAddress);

@@ -28,6 +28,8 @@ import com.liferay.portal.SystemException;
 
 import java.lang.Comparable;
 
+import java.rmi.RemoteException;
+
 import java.util.Set;
 
 /**
@@ -38,114 +40,69 @@ import java.util.Set;
  */
 public class LockServiceUtil {
 
-	public static void clear() throws SystemException {
-		try {
-			LockService lockService = LockServiceFactory.getService();
+	public static void clear() throws RemoteException, SystemException {
+		LockService lockService = LockServiceFactory.getService();
 
-			lockService.clear();
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		lockService.clear();
 	}
 
 	public static Lock getLock(String className, Comparable pk)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
-		try {
-			LockService lockService = LockServiceFactory.getService();
+		LockService lockService = LockServiceFactory.getService();
 
-			return lockService.getLock(className, pk);
-		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		return lockService.getLock(className, pk);
 	}
 
 	public static Set getLocksByCompanyId(String companyId)
-		throws SystemException {
+		throws RemoteException, SystemException {
 
-		try {
-			LockService lockService = LockServiceFactory.getService();
+		LockService lockService = LockServiceFactory.getService();
 
-			return lockService.getLocksByCompanyId(companyId);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		return lockService.getLocksByCompanyId(companyId);
 	}
 
-	public static Set getLocksByUserId(String userId) throws SystemException {
-		try {
-			LockService lockService = LockServiceFactory.getService();
+	public static Set getLocksByUserId(String userId)
+		throws RemoteException, SystemException {
 
-			return lockService.getLocksByUserId(userId);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		LockService lockService = LockServiceFactory.getService();
+
+		return lockService.getLocksByUserId(userId);
 	}
 
 	public static boolean hasLock(
 			String className, Comparable pk, String userId)
-		throws SystemException {
+		throws RemoteException, SystemException {
 
-		try {
-			LockService lockService = LockServiceFactory.getService();
+		LockService lockService = LockServiceFactory.getService();
 
-			return lockService.hasLock(className, pk, userId);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		return lockService.hasLock(className, pk, userId);
 	}
 
 	public static boolean isLocked(String className, Comparable pk)
-		throws SystemException {
+		throws RemoteException, SystemException {
 
-		try {
-			LockService lockService = LockServiceFactory.getService();
+		LockService lockService = LockServiceFactory.getService();
 
-			return lockService.isLocked(className, pk);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		return lockService.isLocked(className, pk);
 	}
 
 	public static void lock(
 			String className, Comparable pk, String companyId, String userId,
 			long expirationTime)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
-		try {
-			LockService lockService = LockServiceFactory.getService();
+		LockService lockService = LockServiceFactory.getService();
 
-			lockService.lock(
-				className, pk, companyId, userId, expirationTime);
-		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		lockService.lock(className, pk, companyId, userId, expirationTime);
 	}
 
 	public static void unlock(String className, Comparable pk)
-		throws SystemException {
+		throws RemoteException, SystemException {
 
-		try {
-			LockService lockService = LockServiceFactory.getService();
+		LockService lockService = LockServiceFactory.getService();
 
-			lockService.unlock(className, pk);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		lockService.unlock(className, pk);
 	}
 
 }

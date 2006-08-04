@@ -24,54 +24,24 @@ package com.liferay.counter.service.spring;
 
 import com.liferay.portal.SystemException;
 
-import java.rmi.RemoteException;
-
 import java.util.List;
 
 /**
- * <a href="CounterServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="CounterLocalService.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class CounterServiceUtil {
+public interface CounterLocalService {
 
-	public static List getNames() throws RemoteException, SystemException {
-		CounterService counterService = CounterServiceFactory.getService();
+	public List getNames() throws SystemException;
 
-		return counterService.getNames();
-	}
+	public long increment(String name) throws SystemException;
 
-	public static long increment(String name)
-		throws RemoteException, SystemException {
+	public long increment(String name, int size) throws SystemException;
 
-		CounterService counterService = CounterServiceFactory.getService();
+	public void rename(String oldName, String newName) throws SystemException;
 
-		return counterService.increment(name);
-	}
-
-	public static long increment(String name, int size)
-		throws RemoteException, SystemException {
-
-		CounterService counterService = CounterServiceFactory.getService();
-
-		return counterService.increment(name, size);
-	}
-
-	public static void rename(String oldName, String newName)
-		throws RemoteException, SystemException {
-
-		CounterService counterService = CounterServiceFactory.getService();
-
-		counterService.rename(oldName, newName);
-	}
-
-	public static void reset(String name)
-		throws RemoteException, SystemException {
-
-		CounterService counterService = CounterServiceFactory.getService();
-
-		counterService.reset(name);
-	}
+	public void reset(String name) throws SystemException;
 
 }

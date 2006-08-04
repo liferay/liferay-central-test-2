@@ -22,7 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_1_0;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.service.spring.DLServiceUtil;
@@ -225,7 +225,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 				boolean attachments = rs.getBoolean("attachments");
 
 				String newMessageId = Long.toString(
-					CounterServiceUtil.increment(MBMessage.class.getName()));
+					CounterLocalServiceUtil.increment(
+						MBMessage.class.getName()));
 
 				List files = _getFiles(
 					companyId, topicId, oldMessageId, attachments);

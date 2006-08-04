@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.bookmarks.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Resource;
@@ -75,7 +75,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		validate(url);
 
-		String entryId = Long.toString(CounterServiceUtil.increment(
+		String entryId = Long.toString(CounterLocalServiceUtil.increment(
 			BookmarksEntry.class.getName()));
 
 		BookmarksEntry entry = BookmarksEntryUtil.create(entryId);

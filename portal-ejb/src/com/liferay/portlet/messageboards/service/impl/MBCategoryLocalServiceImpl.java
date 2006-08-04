@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.lucene.LuceneFields;
@@ -83,7 +83,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 		validate(name);
 
-		String categoryId = Long.toString(CounterServiceUtil.increment(
+		String categoryId = Long.toString(CounterLocalServiceUtil.increment(
 			MBCategory.class.getName()));
 
 		MBCategory category = MBCategoryUtil.create(categoryId);

@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.documentlibrary.service.spring.DLLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -68,7 +68,7 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 
 		validate(name);
 
-		String folderId = Long.toString(CounterServiceUtil.increment(
+		String folderId = Long.toString(CounterLocalServiceUtil.increment(
 			DLFolder.class.getName()));
 
 		DLFolder folder = DLFolderUtil.create(folderId);

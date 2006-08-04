@@ -43,21 +43,10 @@ public class DLLocalServiceUtil {
 			String companyId, String repositoryId, String fileName)
 		throws PortalException, SystemException {
 
-		try {
-			DLLocalService dlLocalService = DLLocalServiceFactory.getService();
+		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
 
-			return dlLocalService.getFileAsStream(
-				companyId, repositoryId, fileName);
-		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		return dlLocalService.getFileAsStream(
+			companyId, repositoryId, fileName);
 	}
 
 	public static InputStream getFileAsStream(
@@ -65,21 +54,10 @@ public class DLLocalServiceUtil {
 			double versionNumber)
 		throws PortalException, SystemException {
 
-		try {
-			DLLocalService dlLocalService = DLLocalServiceFactory.getService();
+		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
 
-			return dlLocalService.getFileAsStream(
-				companyId, repositoryId, fileName, versionNumber);
-		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		return dlLocalService.getFileAsStream(
+			companyId, repositoryId, fileName, versionNumber);
 	}
 
 	public static Node getFileContentNode(
@@ -87,21 +65,10 @@ public class DLLocalServiceUtil {
 			String fileName, double versionNumber)
 		throws PortalException, SystemException {
 
-		try {
-			DLLocalService dlLocalService = DLLocalServiceFactory.getService();
+		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
 
-			return dlLocalService.getFileContentNode(
-				session, companyId, repositoryId, fileName, versionNumber);
-		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		return dlLocalService.getFileContentNode(
+			session, companyId, repositoryId, fileName, versionNumber);
 	}
 
 	public static Hits search(
@@ -109,18 +76,10 @@ public class DLLocalServiceUtil {
 			String[] repositoryIds, String keywords)
 		throws SystemException {
 
-		try {
-			DLLocalService dlLocalService = DLLocalServiceFactory.getService();
+		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
 
-			return dlLocalService.search(
-				companyId, portletId, groupId, repositoryIds, keywords);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		return dlLocalService.search(
+			companyId, portletId, groupId, repositoryIds, keywords);
 	}
 
 }

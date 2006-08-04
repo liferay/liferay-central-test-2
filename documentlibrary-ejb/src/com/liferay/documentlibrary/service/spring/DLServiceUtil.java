@@ -25,6 +25,8 @@ package com.liferay.documentlibrary.service.spring;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 
+import java.rmi.RemoteException;
+
 /**
  * <a href="DLServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,232 +37,112 @@ public class DLServiceUtil {
 
 	public static void addDirectory(
 			String companyId, String repositoryId, String dirName)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
-		try {
-			DLService dlService = DLServiceFactory.getService();
+		DLService dlService = DLServiceFactory.getService();
 
-			dlService.addDirectory(companyId, repositoryId, dirName);
-		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		dlService.addDirectory(companyId, repositoryId, dirName);
 	}
 
 	public static void addFile(
 			String companyId, String portletId, String groupId,
 			String repositoryId, String fileName, byte[] byteArray)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
-		try {
-			DLService dlService = DLServiceFactory.getService();
+		DLService dlService = DLServiceFactory.getService();
 
-			dlService.addFile(
-				companyId, portletId, groupId, repositoryId, fileName,
-				byteArray);
-		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		dlService.addFile(
+			companyId, portletId, groupId, repositoryId, fileName, byteArray);
 	}
 
 	public static void deleteDirectory(
 			String companyId, String portletId, String repositoryId,
 			String dirName)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
-		try {
-			DLService dlService = DLServiceFactory.getService();
+		DLService dlService = DLServiceFactory.getService();
 
-			dlService.deleteDirectory(
-				companyId, portletId, repositoryId, dirName);
-		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		dlService.deleteDirectory(companyId, portletId, repositoryId, dirName);
 	}
 
 	public static void deleteFile(
 			String companyId, String portletId, String repositoryId,
 			String fileName)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
-		try {
-			DLService dlService = DLServiceFactory.getService();
+		DLService dlService = DLServiceFactory.getService();
 
-			dlService.deleteFile(companyId, portletId, repositoryId, fileName);
-		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		dlService.deleteFile(companyId, portletId, repositoryId, fileName);
 	}
 
 	public static void deleteFile(
 			String companyId, String portletId, String repositoryId,
 			String fileName, double versionNumber)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
-		try {
-			DLService dlService = DLServiceFactory.getService();
+		DLService dlService = DLServiceFactory.getService();
 
-			dlService.deleteFile(
-				companyId, portletId, repositoryId, fileName, versionNumber);
-		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		dlService.deleteFile(
+			companyId, portletId, repositoryId, fileName, versionNumber);
 	}
 
 	public static byte[] getFile(
 			String companyId, String repositoryId, String fileName)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
-		try {
-			DLService dlService = DLServiceFactory.getService();
+		DLService dlService = DLServiceFactory.getService();
 
-			return dlService.getFile(companyId, repositoryId, fileName);
-		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		return dlService.getFile(companyId, repositoryId, fileName);
 	}
 
 	public static byte[] getFile(
 			String companyId, String repositoryId, String fileName,
 			double versionNumber)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
-		try {
-			DLService dlService = DLServiceFactory.getService();
+		DLService dlService = DLServiceFactory.getService();
 
-			return dlService.getFile(
-				companyId, repositoryId, fileName, versionNumber);
-		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		return dlService.getFile(
+			companyId, repositoryId, fileName, versionNumber);
 	}
 
 	public static String[] getFileNames(
 			String companyId, String repositoryId, String dirName)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
-		try {
-			DLService dlService = DLServiceFactory.getService();
+		DLService dlService = DLServiceFactory.getService();
 
-			return dlService.getFileNames(companyId, repositoryId, dirName);
-		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		return dlService.getFileNames(companyId, repositoryId, dirName);
 	}
 
 	public static long getFileSize(
 			String companyId, String repositoryId, String fileName)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
-		try {
-			DLService dlService = DLServiceFactory.getService();
+		DLService dlService = DLServiceFactory.getService();
 
-			return dlService.getFileSize(companyId, repositoryId, fileName);
-		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		return dlService.getFileSize(companyId, repositoryId, fileName);
 	}
 
 	public static void reIndex(String[] ids)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
-		try {
-			DLService dlService = DLServiceFactory.getService();
+		DLService dlService = DLServiceFactory.getService();
 
-			dlService.reIndex(ids);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		dlService.reIndex(ids);
 	}
 
 	public static void updateFile(
 			String companyId, String portletId, String groupId,
 			String repositoryId, String fileName, double versionNumber,
 			String sourceFileName, byte[] byteArray)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
-		try {
-			DLService dlService = DLServiceFactory.getService();
+		DLService dlService = DLServiceFactory.getService();
 
-			dlService.updateFile(
-				companyId, portletId, groupId, repositoryId, fileName,
-				versionNumber, sourceFileName, byteArray);
-		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		dlService.updateFile(
+			companyId, portletId, groupId, repositoryId, fileName,
+			versionNumber, sourceFileName, byteArray);
 	}
 
 }

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.PhoneNumberException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -65,7 +65,7 @@ public class PhoneLocalServiceImpl implements PhoneLocalService {
 			null, user.getCompanyId(), className, classPK, number, typeId,
 			primary);
 
-		String phoneId = Long.toString(CounterServiceUtil.increment(
+		String phoneId = Long.toString(CounterLocalServiceUtil.increment(
 			Phone.class.getName()));
 
 		Phone phone = PhoneUtil.create(phoneId);

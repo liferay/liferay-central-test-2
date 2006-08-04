@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.polls.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Resource;
@@ -81,7 +81,7 @@ public class PollsQuestionLocalServiceImpl
 
 		validate(title, description, choices);
 
-		String questionId = Long.toString(CounterServiceUtil.increment(
+		String questionId = Long.toString(CounterLocalServiceUtil.increment(
 			PollsQuestion.class.getName()));
 
 		PollsQuestion question = PollsQuestionUtil.create(questionId);

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.DuplicateOrganizationException;
 import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.OrganizationNameException;
@@ -88,7 +88,7 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 			user.getCompanyId(), parentOrganizationId, name, countryId,
 			statusId, location);
 
-		String organizationId = Long.toString(CounterServiceUtil.increment(
+		String organizationId = Long.toString(CounterLocalServiceUtil.increment(
 			Organization.class.getName()));
 
 		Organization organization = OrganizationUtil.create(organizationId);

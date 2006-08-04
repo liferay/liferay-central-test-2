@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.wiki.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.lucene.LuceneFields;
@@ -80,7 +80,7 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 
 		validate(name);
 
-		String nodeId = Long.toString(CounterServiceUtil.increment(
+		String nodeId = Long.toString(CounterLocalServiceUtil.increment(
 			WikiNode.class.getName()));
 
 		WikiNode node = WikiNodeUtil.create(nodeId);

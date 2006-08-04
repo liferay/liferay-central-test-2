@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.ListType;
@@ -52,7 +52,7 @@ public class OrgLaborLocalServiceImpl implements OrgLaborLocalService {
 
 		validate(typeId);
 
-		String orgLaborId = Long.toString(CounterServiceUtil.increment(
+		String orgLaborId = Long.toString(CounterLocalServiceUtil.increment(
 			OrgLabor.class.getName()));
 
 		OrgLabor orgLabor = OrgLaborUtil.create(orgLaborId);

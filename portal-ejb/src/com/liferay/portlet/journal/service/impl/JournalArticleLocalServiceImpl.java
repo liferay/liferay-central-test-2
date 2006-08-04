@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.journal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.mail.service.spring.MailServiceUtil;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
@@ -166,7 +166,7 @@ public class JournalArticleLocalServiceImpl
 			structureId, templateId);
 
 		if (autoArticleId) {
-			articleId = Long.toString(CounterServiceUtil.increment(
+			articleId = Long.toString(CounterLocalServiceUtil.increment(
 				JournalArticle.class.getName() + "." + user.getCompanyId()));
 		}
 

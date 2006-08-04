@@ -1113,6 +1113,26 @@ public class ServiceBuilder {
 			}
 		}
 
+		manualFile = new File("../portal-ejb/classes/META-INF/ejb-jar-local-ref.xml");
+
+		if (!manualFile.exists()) {
+			manualFile = new File("../ext-ejb/classes/META-INF/ejb-jar-local-ref.xml");
+		}
+
+		if (manualFile.exists()) {
+			String content = FileUtil.read(manualFile);
+
+			int x = content.indexOf("<ejb-local-ref>");
+			int y = content.lastIndexOf("</ejb-local-ref>") + 17;
+
+			if (x != -1) {
+				content = content.substring(x - 1, y);
+				content = StringUtil.replace(content, "\t<", "\t\t\t<");
+
+				sb.append(content);
+			}
+		}
+
 		sb.append("\t\t\t<resource-ref>\n");
 		sb.append("\t\t\t\t<res-ref-name>jdbc/LiferayPool</res-ref-name>\n");
 		sb.append("\t\t\t\t<res-type>javax.sql.DataSource</res-type>\n");

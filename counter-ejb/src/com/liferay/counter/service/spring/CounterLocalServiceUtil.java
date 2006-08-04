@@ -24,52 +24,49 @@ package com.liferay.counter.service.spring;
 
 import com.liferay.portal.SystemException;
 
-import java.rmi.RemoteException;
-
 import java.util.List;
 
 /**
- * <a href="CounterServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="CounterLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class CounterServiceUtil {
+public class CounterLocalServiceUtil {
 
-	public static List getNames() throws RemoteException, SystemException {
-		CounterService counterService = CounterServiceFactory.getService();
+	public static List getNames() throws SystemException {
+		CounterLocalService counterService =
+			CounterLocalServiceFactory.getService();
 
 		return counterService.getNames();
 	}
 
-	public static long increment(String name)
-		throws RemoteException, SystemException {
-
-		CounterService counterService = CounterServiceFactory.getService();
+	public static long increment(String name) throws SystemException {
+		CounterLocalService counterService =
+			CounterLocalServiceFactory.getService();
 
 		return counterService.increment(name);
 	}
 
-	public static long increment(String name, int size)
-		throws RemoteException, SystemException {
-
-		CounterService counterService = CounterServiceFactory.getService();
+	public static long increment(String name, int size) throws SystemException {
+		CounterLocalService counterService =
+			CounterLocalServiceFactory.getService();
 
 		return counterService.increment(name, size);
 	}
 
 	public static void rename(String oldName, String newName)
-		throws RemoteException, SystemException {
+		throws SystemException {
 
-		CounterService counterService = CounterServiceFactory.getService();
+		CounterLocalService counterService =
+			CounterLocalServiceFactory.getService();
 
 		counterService.rename(oldName, newName);
 	}
 
-	public static void reset(String name)
-		throws RemoteException, SystemException {
-
-		CounterService counterService = CounterServiceFactory.getService();
+	public static void reset(String name) throws SystemException {
+		CounterLocalService counterService =
+			CounterLocalServiceFactory.getService();
 
 		counterService.reset(name);
 	}

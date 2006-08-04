@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchPermissionException;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
@@ -71,7 +71,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			String companyId, String actionId, String resourceId)
 		throws PortalException, SystemException {
 
-		String permissionId = Long.toString(CounterServiceUtil.increment(
+		String permissionId = Long.toString(CounterLocalServiceUtil.increment(
 			Permission.class.getName()));
 
 		Permission permission = PermissionUtil.create(permissionId);
@@ -515,8 +515,8 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 				actionId, resource.getResourceId());
 		}
 		catch (NoSuchPermissionException nspe) {
-			String permissionId = Long.toString(CounterServiceUtil.increment(
-				Permission.class.getName()));
+			String permissionId = Long.toString(
+				CounterLocalServiceUtil.increment(Permission.class.getName()));
 
 			permission = PermissionUtil.create(permissionId);
 

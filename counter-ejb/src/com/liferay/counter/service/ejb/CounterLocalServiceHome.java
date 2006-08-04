@@ -20,35 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.counter.service.persistence;
+package com.liferay.counter.service.ejb;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
-import com.liferay.portal.SystemException;
-
-import java.io.Serializable;
-
-import org.hibernate.engine.SessionImplementor;
-import org.hibernate.id.IdentifierGenerator;
+import javax.ejb.CreateException;
+import javax.ejb.EJBLocalHome;
 
 /**
- * <a href="IDGenerator.java.html"><b><i>View Source</i></b></a>
+ * <a href="CounterLocalServiceHome.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Patrick Brady
+ * @author  Brian Wing Shun Chan
  *
  */
-public class IDGenerator implements IdentifierGenerator {
+public interface CounterLocalServiceHome extends EJBLocalHome {
 
-	public Serializable generate(SessionImplementor session, Object object) {
-		try {
-			String name = object.getClass().getName();
-
-			int currentId = (int)CounterLocalServiceUtil.increment(name);
-
-			return new Integer(currentId);
-		}
-		catch (SystemException se) {
-			throw new RuntimeException(se);
-		}
-	}
+    public CounterLocalServiceEJB create() throws CreateException;
 
 }

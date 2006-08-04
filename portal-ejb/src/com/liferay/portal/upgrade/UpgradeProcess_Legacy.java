@@ -22,7 +22,7 @@
 
 package com.liferay.portal.upgrade;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -81,7 +81,7 @@ public class UpgradeProcess_Legacy extends UpgradeProcess {
 	}
 
 	private void _updateCounter() throws SystemException {
-		Iterator itr = CounterServiceUtil.getNames().iterator();
+		Iterator itr = CounterLocalServiceUtil.getNames().iterator();
 
 		while (itr.hasNext()) {
 			String name = (String)itr.next();
@@ -89,7 +89,7 @@ public class UpgradeProcess_Legacy extends UpgradeProcess {
 			int pos = name.indexOf(".ejb.");
 
 			if (name.startsWith("com.liferay.") && pos != -1) {
-				CounterServiceUtil.rename(
+				CounterLocalServiceUtil.rename(
 					name,
 					StringUtil.replace(name, ".ejb.", ".model."));
 			}

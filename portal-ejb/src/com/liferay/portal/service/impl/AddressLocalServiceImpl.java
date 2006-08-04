@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.AddressCityException;
 import com.liferay.portal.AddressStreetException;
 import com.liferay.portal.AddressZipException;
@@ -67,7 +67,7 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 			null, user.getCompanyId(), className, classPK, street1, city, zip,
 			regionId, countryId, typeId, mailing, primary);
 
-		String addressId = Long.toString(CounterServiceUtil.increment(
+		String addressId = Long.toString(CounterLocalServiceUtil.increment(
 			Address.class.getName()));
 
 		Address address = AddressUtil.create(addressId);

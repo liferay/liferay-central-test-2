@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.blogs.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Resource;
@@ -70,7 +70,7 @@ public class BlogsCategoryLocalServiceImpl
 
 		validate(name);
 
-		String categoryId = Long.toString(CounterServiceUtil.increment(
+		String categoryId = Long.toString(CounterLocalServiceUtil.increment(
 			BlogsCategory.class.getName()));
 
 		BlogsCategory category = BlogsCategoryUtil.create(categoryId);

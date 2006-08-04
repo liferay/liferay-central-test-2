@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.blogs.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.lucene.LuceneFields;
@@ -103,7 +103,7 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 
 		validate(title, content);
 
-		String entryId = Long.toString(CounterServiceUtil.increment(
+		String entryId = Long.toString(CounterLocalServiceUtil.increment(
 			BlogsEntry.class.getName()));
 
 		BlogsEntry entry = BlogsEntryUtil.create(entryId);

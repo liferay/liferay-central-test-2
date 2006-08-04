@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.ResourceActionsException;
@@ -63,7 +63,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 			companyId, name, typeId, scope, primKey);
 
 		if (resource == null) {
-			String resourceId = Long.toString(CounterServiceUtil.increment(
+			String resourceId = Long.toString(CounterLocalServiceUtil.increment(
 				Resource.class.getName()));
 
 			resource = ResourceUtil.create(resourceId);

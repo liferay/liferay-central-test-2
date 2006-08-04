@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchSubscriptionException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -59,7 +59,7 @@ public class SubscriptionLocalServiceImpl implements SubscriptionLocalService {
 		User user = UserUtil.findByPrimaryKey(userId);
 		Date now = new Date();
 
-		String subscriptionId = Long.toString(CounterServiceUtil.increment(
+		String subscriptionId = Long.toString(CounterLocalServiceUtil.increment(
 			Subscription.class.getName()));
 
 		Subscription subscription = SubscriptionUtil.create(subscriptionId);

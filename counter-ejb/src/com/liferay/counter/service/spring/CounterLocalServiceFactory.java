@@ -20,35 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.counter.service.persistence;
+package com.liferay.counter.service.spring;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
-import com.liferay.portal.SystemException;
+import com.liferay.portal.spring.util.SpringUtil;
 
-import java.io.Serializable;
-
-import org.hibernate.engine.SessionImplementor;
-import org.hibernate.id.IdentifierGenerator;
+import org.springframework.context.ApplicationContext;
 
 /**
- * <a href="IDGenerator.java.html"><b><i>View Source</i></b></a>
+ * <a href="CounterLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Patrick Brady
+ * @author Brian Wing Shun Chan
  *
  */
-public class IDGenerator implements IdentifierGenerator {
+public class CounterLocalServiceFactory {
 
-	public Serializable generate(SessionImplementor session, Object object) {
-		try {
-			String name = object.getClass().getName();
+	public static final String NAME =
+		CounterLocalServiceFactory.class.getName();
 
-			int currentId = (int)CounterLocalServiceUtil.increment(name);
+	public static CounterLocalService getService() {
+		ApplicationContext ctx = SpringUtil.getContext();
 
-			return new Integer(currentId);
-		}
-		catch (SystemException se) {
-			throw new RuntimeException(se);
-		}
+		CounterLocalServiceFactory factory =
+			(CounterLocalServiceFactory)ctx.getBean(NAME);
+
+		return factory._service;
 	}
+
+	public void setService(CounterLocalService service) {
+		_service = service;
+	}
+
+	private CounterLocalService _service;
 
 }

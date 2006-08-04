@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.EmailAddressException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -62,7 +62,7 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 			null, user.getCompanyId(), className, classPK, address, typeId,
 			primary);
 
-		String emailAddressId = Long.toString(CounterServiceUtil.increment(
+		String emailAddressId = Long.toString(CounterLocalServiceUtil.increment(
 			EmailAddress.class.getName()));
 
 		EmailAddress emailAddress = EmailAddressUtil.create(emailAddressId);

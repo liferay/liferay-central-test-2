@@ -34,6 +34,8 @@ import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionMessages;
 
+import java.rmi.RemoteException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -125,6 +127,9 @@ public class EditPreferencesAction extends PortletAction {
 
 				MailServiceUtil.addVacationMessage(
 					user.getUserId(), user.getEmailAddress(), vacationMessage);
+			}
+			catch (RemoteException re) {
+				throw new SystemException(re);
 			}
 			catch (SystemException se) {
 				throw new PortletException(se);

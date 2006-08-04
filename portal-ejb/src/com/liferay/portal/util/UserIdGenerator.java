@@ -22,7 +22,7 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.model.User;
 
 /**
@@ -34,8 +34,9 @@ import com.liferay.portal.model.User;
 public class UserIdGenerator {
 
 	public String generate(String companyId) throws Exception {
-		return companyId + "." + Long.toString(CounterServiceUtil.increment(
-			User.class.getName() + "." + companyId));
+		return companyId + "." + Long.toString(
+			CounterLocalServiceUtil.increment(
+				User.class.getName() + "." + companyId));
 	}
 
 }

@@ -4,6 +4,11 @@
 <ejb-jar>
 	<enterprise-beans>
 		<session>
+			<ejb-name>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_counter_service_ejb_CounterLocalServiceEJB</bean-home-name>
+			<bean-local-home-name>ejb/liferay/CounterLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
 			<ejb-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-name>
 			<bean-home-name>com_liferay_counter_service_ejb_CounterServiceEJB</bean-home-name>
 			<bean-local-home-name>DefaultLocalJndiNamecom_liferay_counter_service_ejb_CounterServiceEJB</bean-local-home-name>

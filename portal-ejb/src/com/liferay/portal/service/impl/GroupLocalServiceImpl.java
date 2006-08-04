@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.DuplicateGroupException;
 import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.GroupNameException;
@@ -95,7 +95,7 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 
 		validateFriendlyURL(null, user.getActualCompanyId(), friendlyURL);
 
-		String groupId = Long.toString(CounterServiceUtil.increment(
+		String groupId = Long.toString(CounterLocalServiceUtil.increment(
 			Group.class.getName()));
 
 		if (Validator.isNotNull(className) && Validator.isNotNull(classPK)) {

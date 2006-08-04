@@ -25,6 +25,8 @@ package com.liferay.mail.service.spring;
 import com.liferay.portal.SystemException;
 import com.liferay.util.mail.MailMessage;
 
+import java.rmi.RemoteException;
+
 import java.util.List;
 
 /**
@@ -36,151 +38,79 @@ import java.util.List;
 public class MailServiceUtil {
 
 	public static void addForward(String userId, List emailAddresses)
-		throws SystemException {
+		throws RemoteException, SystemException {
 
-		try {
-			MailService mailService = MailServiceFactory.getService();
+		MailService mailService = MailServiceFactory.getService();
 
-			mailService.addForward(userId, emailAddresses);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		mailService.addForward(userId, emailAddresses);
 	}
 
 	public static void addUser(
 			String userId, String password, String firstName, String middleName,
 			String lastName, String emailAddress)
-		throws SystemException {
+		throws RemoteException, SystemException {
 
-		try {
-			MailService mailService = MailServiceFactory.getService();
+		MailService mailService = MailServiceFactory.getService();
 
-			mailService.addUser(
-				userId, password, firstName, middleName, lastName,
-				emailAddress);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		mailService.addUser(
+			userId, password, firstName, middleName, lastName, emailAddress);
 	}
 
 	public static void addVacationMessage(
 			String userId, String emailAddress, String vacationMessage)
-		throws SystemException {
+		throws RemoteException, SystemException {
 
-		try {
-			MailService mailService = MailServiceFactory.getService();
+		MailService mailService = MailServiceFactory.getService();
 
-			mailService.addVacationMessage(
-				userId, emailAddress, vacationMessage);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		mailService.addVacationMessage(userId, emailAddress, vacationMessage);
 	}
 
 	public static void deleteEmailAddress(String userId)
-		throws SystemException {
+		throws RemoteException, SystemException {
 
-		try {
-			MailService mailService = MailServiceFactory.getService();
+		MailService mailService = MailServiceFactory.getService();
 
-			mailService.deleteEmailAddress(userId);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		mailService.deleteEmailAddress(userId);
 	}
 
-	public static void deleteUser(String userId) throws SystemException {
-		try {
-			MailService mailService = MailServiceFactory.getService();
+	public static void deleteUser(String userId)
+		throws RemoteException, SystemException {
 
-			mailService.deleteUser(userId);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		MailService mailService = MailServiceFactory.getService();
+
+		mailService.deleteUser(userId);
 	}
 
 	public static void sendEmail(MailMessage mailMessage)
-		throws SystemException {
+		throws RemoteException, SystemException {
 
-		try {
-			MailService mailService = MailServiceFactory.getService();
+		MailService mailService = MailServiceFactory.getService();
 
-			mailService.sendEmail(mailMessage);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		mailService.sendEmail(mailMessage);
 	}
 
 	public static void updateBlocked(String userId, List blocked)
-		throws SystemException {
+		throws RemoteException, SystemException {
 
-		try {
-			MailService mailService = MailServiceFactory.getService();
+		MailService mailService = MailServiceFactory.getService();
 
-			mailService.updateBlocked(userId, blocked);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		mailService.updateBlocked(userId, blocked);
 	}
 
 	public static void updateEmailAddress(String userId, String emailAddress)
-		throws SystemException {
+		throws RemoteException, SystemException {
 
-		try {
-			MailService mailService = MailServiceFactory.getService();
+		MailService mailService = MailServiceFactory.getService();
 
-			mailService.updateEmailAddress(userId, emailAddress);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		mailService.updateEmailAddress(userId, emailAddress);
 	}
 
 	public static void updatePassword(String userId, String password)
-		throws SystemException {
+		throws RemoteException, SystemException {
 
-		try {
-			MailService mailService = MailServiceFactory.getService();
+		MailService mailService = MailServiceFactory.getService();
 
-			mailService.updatePassword(userId, password);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		mailService.updatePassword(userId, password);
 	}
 
 }

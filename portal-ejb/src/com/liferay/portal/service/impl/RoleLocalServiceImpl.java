@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.DuplicateRoleException;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.PortalException;
@@ -66,7 +66,7 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 
 		validate(null, companyId, name);
 
-		String roleId = Long.toString(CounterServiceUtil.increment(
+		String roleId = Long.toString(CounterLocalServiceUtil.increment(
 			Role.class.getName()));
 
 		Role role = RoleUtil.create(roleId);

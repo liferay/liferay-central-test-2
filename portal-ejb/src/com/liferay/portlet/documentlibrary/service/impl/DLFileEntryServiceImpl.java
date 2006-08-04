@@ -35,6 +35,8 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryService;
 
+import java.rmi.RemoteException;
+
 /**
  * <a href="DLFileEntryServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -59,7 +61,7 @@ public class DLFileEntryServiceImpl
 	}
 
 	public void deleteFileEntry(String folderId, String name)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		User user = getUser();
 
@@ -91,7 +93,7 @@ public class DLFileEntryServiceImpl
 	}
 
 	public void deleteFileEntry(String folderId, String name, double version)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		User user = getUser();
 
@@ -132,7 +134,7 @@ public class DLFileEntryServiceImpl
 	}
 
 	public void lockFileEntry(String folderId, String name)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		User user = getUser();
 
@@ -144,7 +146,7 @@ public class DLFileEntryServiceImpl
 	}
 
 	public void unlockFileEntry(String folderId, String name)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		DLFileEntryPK pk = new DLFileEntryPK(folderId, name);
 
@@ -153,7 +155,7 @@ public class DLFileEntryServiceImpl
 
 	public DLFileEntry updateFileEntry(
 			String folderId, String name, String title, String description)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		User user = getUser();
 
@@ -190,7 +192,7 @@ public class DLFileEntryServiceImpl
 	public DLFileEntry updateFileEntry(
 			String folderId, String name, String sourceFileName,
 			byte[] byteArray)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		User user = getUser();
 

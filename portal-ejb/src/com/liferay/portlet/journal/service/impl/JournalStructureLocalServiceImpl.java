@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.journal.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Resource;
@@ -102,7 +102,7 @@ public class JournalStructureLocalServiceImpl
 			description, xsd);
 
 		if (autoStructureId) {
-			structureId = Long.toString(CounterServiceUtil.increment(
+			structureId = Long.toString(CounterLocalServiceUtil.increment(
 				JournalStructure.class.getName() + "." + user.getCompanyId()));
 		}
 

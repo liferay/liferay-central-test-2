@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.polls.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -52,7 +52,7 @@ public class PollsVoteServiceImpl extends PrincipalBean
 			userId = getUserId();
 		}
 		catch (PrincipalException pe) {
-			userId = Long.toString(CounterServiceUtil.increment(
+			userId = Long.toString(CounterLocalServiceUtil.increment(
 				PollsQuestion.class.getName() + ".anonymous"));
 		}
 

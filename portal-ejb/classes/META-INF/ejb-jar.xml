@@ -221,6 +221,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -458,6 +465,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -687,6 +701,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -925,6 +946,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -1154,6 +1182,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -1392,6 +1427,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -1621,6 +1663,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -1859,6 +1908,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -2096,6 +2152,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -2326,6 +2389,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -2555,6 +2625,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -2792,6 +2869,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -3099,6 +3183,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -3414,6 +3505,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -3643,6 +3741,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -3880,6 +3985,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -4125,6 +4237,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -4354,6 +4473,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -4592,6 +4718,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -4829,6 +4962,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -5058,6 +5198,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -5296,6 +5443,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -5525,6 +5679,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -5763,6 +5924,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -5993,6 +6161,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -6222,6 +6397,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -6460,6 +6642,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -6689,6 +6878,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -6927,6 +7123,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -7164,6 +7367,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -7393,6 +7603,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -7631,6 +7848,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -7860,6 +8084,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -8098,6 +8329,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -8328,6 +8566,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -8557,6 +8802,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -8795,6 +9047,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -9024,6 +9283,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -9262,6 +9528,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -9491,6 +9764,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -9749,6 +10029,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -10015,6 +10302,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -10244,6 +10538,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -10482,6 +10783,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -10711,6 +11019,13 @@
 				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -10942,6 +11257,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -11172,6 +11494,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -11401,6 +11730,13 @@
 				<local-home>com.liferay.portal.service.ejb.UserTrackerPathLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.UserTrackerPathLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_UserTrackerPathLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -11639,6 +11975,13 @@
 				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -11700,6 +12043,13 @@
 				<local-home>com.liferay.portlet.blogs.service.ejb.BlogsEntryLocalServiceHome</local-home>
 				<local>com.liferay.portlet.blogs.service.ejb.BlogsEntryLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_blogs_service_ejb_BlogsEntryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -11769,6 +12119,13 @@
 				<local-home>com.liferay.portlet.blogs.service.ejb.BlogsEntryLocalServiceHome</local-home>
 				<local>com.liferay.portlet.blogs.service.ejb.BlogsEntryLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_blogs_service_ejb_BlogsEntryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -11845,6 +12202,13 @@
 				<local-home>com.liferay.portlet.blogs.service.ejb.BlogsCategoryLocalServiceHome</local-home>
 				<local>com.liferay.portlet.blogs.service.ejb.BlogsCategoryLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_blogs_service_ejb_BlogsCategoryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -11929,6 +12293,13 @@
 				<local>com.liferay.portlet.blogs.service.ejb.BlogsEntryLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_blogs_service_ejb_BlogsEntryLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -11990,6 +12361,13 @@
 				<local-home>com.liferay.portlet.bookmarks.service.ejb.BookmarksFolderLocalServiceHome</local-home>
 				<local>com.liferay.portlet.bookmarks.service.ejb.BookmarksFolderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_bookmarks_service_ejb_BookmarksFolderLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -12060,6 +12438,13 @@
 				<local>com.liferay.portlet.bookmarks.service.ejb.BookmarksFolderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_bookmarks_service_ejb_BookmarksFolderLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -12121,6 +12506,13 @@
 				<local-home>com.liferay.portlet.bookmarks.service.ejb.BookmarksEntryLocalServiceHome</local-home>
 				<local>com.liferay.portlet.bookmarks.service.ejb.BookmarksEntryLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_bookmarks_service_ejb_BookmarksEntryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -12191,6 +12583,13 @@
 				<local>com.liferay.portlet.bookmarks.service.ejb.BookmarksFolderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_bookmarks_service_ejb_BookmarksFolderLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -12252,6 +12651,13 @@
 				<local-home>com.liferay.portal.service.ejb.ResourceLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.ResourceLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -12321,6 +12727,13 @@
 				<local-home>com.liferay.portlet.calendar.service.ejb.CalEventLocalServiceHome</local-home>
 				<local>com.liferay.portlet.calendar.service.ejb.CalEventLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_calendar_service_ejb_CalEventLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -12411,6 +12824,13 @@
 				<local-home>com.liferay.portlet.documentlibrary.service.ejb.DLFolderLocalServiceHome</local-home>
 				<local>com.liferay.portlet.documentlibrary.service.ejb.DLFolderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFolderLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -12509,6 +12929,13 @@
 				<local>com.liferay.portlet.documentlibrary.service.ejb.DLFolderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFolderLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -12578,6 +13005,13 @@
 				<local>com.liferay.portlet.documentlibrary.service.ejb.DLFolderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFolderLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -12646,6 +13080,13 @@
 				<local-home>com.liferay.portlet.documentlibrary.service.ejb.DLFolderLocalServiceHome</local-home>
 				<local>com.liferay.portlet.documentlibrary.service.ejb.DLFolderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFolderLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -12729,6 +13170,13 @@
 				<local-home>com.liferay.portlet.documentlibrary.service.ejb.DLFileVersionLocalServiceHome</local-home>
 				<local>com.liferay.portlet.documentlibrary.service.ejb.DLFileVersionLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileVersionLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -12820,6 +13268,13 @@
 				<local>com.liferay.portlet.documentlibrary.service.ejb.DLFolderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFolderLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -12881,6 +13336,13 @@
 				<local-home>com.liferay.portlet.imagegallery.service.ejb.IGImageLocalServiceHome</local-home>
 				<local>com.liferay.portlet.imagegallery.service.ejb.IGImageLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_imagegallery_service_ejb_IGImageLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -12951,6 +13413,13 @@
 				<local>com.liferay.portlet.imagegallery.service.ejb.IGImageLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_imagegallery_service_ejb_IGImageLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -13012,6 +13481,13 @@
 				<local-home>com.liferay.portlet.imagegallery.service.ejb.IGFolderLocalServiceHome</local-home>
 				<local>com.liferay.portlet.imagegallery.service.ejb.IGFolderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_imagegallery_service_ejb_IGFolderLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -13081,6 +13557,13 @@
 				<local-home>com.liferay.portlet.imagegallery.service.ejb.IGImageLocalServiceHome</local-home>
 				<local>com.liferay.portlet.imagegallery.service.ejb.IGImageLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_imagegallery_service_ejb_IGImageLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -13164,6 +13647,13 @@
 				<local-home>com.liferay.portlet.journal.service.ejb.JournalTemplateLocalServiceHome</local-home>
 				<local>com.liferay.portlet.journal.service.ejb.JournalTemplateLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_journal_service_ejb_JournalTemplateLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -13255,6 +13745,13 @@
 				<local>com.liferay.portlet.journal.service.ejb.JournalTemplateLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_journal_service_ejb_JournalTemplateLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -13323,6 +13820,13 @@
 				<local-home>com.liferay.portlet.journal.service.ejb.JournalTemplateLocalServiceHome</local-home>
 				<local>com.liferay.portlet.journal.service.ejb.JournalTemplateLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_journal_service_ejb_JournalTemplateLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -13399,6 +13903,13 @@
 				<local-home>com.liferay.portlet.journal.service.ejb.JournalTemplateLocalServiceHome</local-home>
 				<local>com.liferay.portlet.journal.service.ejb.JournalTemplateLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_journal_service_ejb_JournalTemplateLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -13483,6 +13994,13 @@
 				<local>com.liferay.portlet.journal.service.ejb.JournalTemplateLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_journal_service_ejb_JournalTemplateLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -13558,6 +14076,13 @@
 				<local-home>com.liferay.portlet.journal.service.ejb.JournalStructureLocalServiceHome</local-home>
 				<local>com.liferay.portlet.journal.service.ejb.JournalStructureLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_journal_service_ejb_JournalStructureLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -13641,6 +14166,13 @@
 				<local-home>com.liferay.portlet.journal.service.ejb.JournalTemplateLocalServiceHome</local-home>
 				<local>com.liferay.portlet.journal.service.ejb.JournalTemplateLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_journal_service_ejb_JournalTemplateLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -13731,6 +14263,13 @@
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceHome</local-home>
 				<local>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -13829,6 +14368,13 @@
 				<local>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -13925,6 +14471,13 @@
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceHome</local-home>
 				<local>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -14030,6 +14583,13 @@
 				<local>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -14105,6 +14665,13 @@
 				<local-home>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceHome</local-home>
 				<local>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -14182,6 +14749,13 @@
 				<local>com.liferay.portlet.messageboards.service.ejb.MBThreadLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -14258,6 +14832,13 @@
 				<local>com.liferay.portlet.messageboards.service.ejb.MBStatsUserLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -14319,6 +14900,13 @@
 				<local-home>com.liferay.portlet.polls.service.ejb.PollsVoteLocalServiceHome</local-home>
 				<local>com.liferay.portlet.polls.service.ejb.PollsVoteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_polls_service_ejb_PollsVoteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -14388,6 +14976,13 @@
 				<local-home>com.liferay.portlet.polls.service.ejb.PollsVoteLocalServiceHome</local-home>
 				<local>com.liferay.portlet.polls.service.ejb.PollsVoteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_polls_service_ejb_PollsVoteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -14465,6 +15060,13 @@
 				<local>com.liferay.portlet.polls.service.ejb.PollsVoteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_polls_service_ejb_PollsVoteLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -14526,6 +15128,13 @@
 				<local-home>com.liferay.portlet.polls.service.ejb.PollsQuestionLocalServiceHome</local-home>
 				<local>com.liferay.portlet.polls.service.ejb.PollsQuestionLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_polls_service_ejb_PollsQuestionLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -14595,6 +15204,13 @@
 				<local-home>com.liferay.portlet.polls.service.ejb.PollsVoteLocalServiceHome</local-home>
 				<local>com.liferay.portlet.polls.service.ejb.PollsVoteLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_polls_service_ejb_PollsVoteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -14692,6 +15308,13 @@
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -14796,6 +15419,13 @@
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -14908,6 +15538,13 @@
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -15004,6 +15641,13 @@
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -15109,6 +15753,13 @@
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -15212,6 +15863,13 @@
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -15324,6 +15982,13 @@
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -15420,6 +16085,13 @@
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -15518,6 +16190,13 @@
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -15614,6 +16293,13 @@
 				<local-home>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceHome</local-home>
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -15719,6 +16405,13 @@
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderItemLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -15816,6 +16509,13 @@
 				<local>com.liferay.portlet.shopping.service.ejb.ShoppingOrderLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -15877,6 +16577,13 @@
 				<local-home>com.liferay.portlet.wiki.service.ejb.WikiPageLocalServiceHome</local-home>
 				<local>com.liferay.portlet.wiki.service.ejb.WikiPageLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -15947,6 +16654,13 @@
 				<local>com.liferay.portlet.wiki.service.ejb.WikiPageLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
 				<res-type>javax.sql.DataSource</res-type>
@@ -16001,6 +16715,13 @@
 				<local-home>com.liferay.portlet.wiki.service.ejb.WikiNodeLocalServiceHome</local-home>
 				<local>com.liferay.portlet.wiki.service.ejb.WikiNodeLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiNodeLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>
@@ -16063,6 +16784,13 @@
 				<local-home>com.liferay.portlet.wiki.service.ejb.WikiPageLocalServiceHome</local-home>
 				<local>com.liferay.portlet.wiki.service.ejb.WikiPageLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<resource-ref>
 				<res-ref-name>jdbc/LiferayPool</res-ref-name>

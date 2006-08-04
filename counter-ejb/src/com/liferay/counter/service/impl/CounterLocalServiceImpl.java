@@ -20,58 +20,40 @@
  * SOFTWARE.
  */
 
-package com.liferay.counter.service.spring;
+package com.liferay.counter.service.impl;
 
+import com.liferay.counter.service.persistence.CounterUtil;
+import com.liferay.counter.service.spring.CounterLocalService;
 import com.liferay.portal.SystemException;
-
-import java.rmi.RemoteException;
 
 import java.util.List;
 
 /**
- * <a href="CounterServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="CounterLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class CounterServiceUtil {
+public class CounterLocalServiceImpl implements CounterLocalService {
 
-	public static List getNames() throws RemoteException, SystemException {
-		CounterService counterService = CounterServiceFactory.getService();
-
-		return counterService.getNames();
+	public List getNames() throws SystemException {
+		return CounterUtil.getNames();
 	}
 
-	public static long increment(String name)
-		throws RemoteException, SystemException {
-
-		CounterService counterService = CounterServiceFactory.getService();
-
-		return counterService.increment(name);
+	public long increment(String name) throws SystemException {
+		return CounterUtil.increment(name);
 	}
 
-	public static long increment(String name, int size)
-		throws RemoteException, SystemException {
-
-		CounterService counterService = CounterServiceFactory.getService();
-
-		return counterService.increment(name, size);
+	public long increment(String name, int size) throws SystemException {
+		return CounterUtil.increment(name, size);
 	}
 
-	public static void rename(String oldName, String newName)
-		throws RemoteException, SystemException {
-
-		CounterService counterService = CounterServiceFactory.getService();
-
-		counterService.rename(oldName, newName);
+	public void rename(String oldName, String newName) throws SystemException {
+		CounterUtil.rename(oldName, newName);
 	}
 
-	public static void reset(String name)
-		throws RemoteException, SystemException {
-
-		CounterService counterService = CounterServiceFactory.getService();
-
-		counterService.reset(name);
+	public void reset(String name) throws SystemException {
+		CounterUtil.reset(name);
 	}
 
 }

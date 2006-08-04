@@ -10,6 +10,13 @@
 	-->
 
 	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+		<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+		<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/DLLocalServiceHome</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
 		<local-home>com.liferay.documentlibrary.service.ejb.DLLocalServiceHome</local-home>

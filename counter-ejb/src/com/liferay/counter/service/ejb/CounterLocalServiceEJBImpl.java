@@ -20,35 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.counter.service.persistence;
+package com.liferay.counter.service.ejb;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
-import com.liferay.portal.SystemException;
+import com.liferay.counter.service.impl.CounterLocalServiceImpl;
 
-import java.io.Serializable;
-
-import org.hibernate.engine.SessionImplementor;
-import org.hibernate.id.IdentifierGenerator;
+import javax.ejb.CreateException;
+import javax.ejb.SessionBean;
+import javax.ejb.SessionContext;
 
 /**
- * <a href="IDGenerator.java.html"><b><i>View Source</i></b></a>
+ * <a href="CounterLocalServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Patrick Brady
+ * @author  Brian Wing Shun Chan
  *
  */
-public class IDGenerator implements IdentifierGenerator {
+public class CounterLocalServiceEJBImpl
+	extends CounterLocalServiceImpl implements SessionBean {
 
-	public Serializable generate(SessionImplementor session, Object object) {
-		try {
-			String name = object.getClass().getName();
-
-			int currentId = (int)CounterLocalServiceUtil.increment(name);
-
-			return new Integer(currentId);
-		}
-		catch (SystemException se) {
-			throw new RuntimeException(se);
-		}
+	public void ejbCreate() throws CreateException {
 	}
+
+	public void ejbRemove() {
+	}
+
+	public void ejbActivate() {
+	}
+
+	public void ejbPassivate() {
+	}
+
+	public SessionContext getSessionContext() {
+		return _sc;
+	}
+
+	public void setSessionContext(SessionContext sc) {
+		_sc = sc;
+	}
+
+	private SessionContext _sc;
 
 }

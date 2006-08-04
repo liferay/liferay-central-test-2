@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.calendar.service.impl;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.mail.service.spring.MailServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -149,7 +149,7 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 			title, startDateMonth, startDateDay, startDateYear, endDateMonth,
 			endDateDay, endDateYear, durationHour, durationMinute, allDay);
 
-		String eventId = Long.toString(CounterServiceUtil.increment(
+		String eventId = Long.toString(CounterLocalServiceUtil.increment(
 			CalEvent.class.getName()));
 
 		CalEvent event = CalEventUtil.create(eventId);
