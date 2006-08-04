@@ -327,10 +327,15 @@ var Mail = {
 	
 	getPreviewReturn : function(xmlHttpReq) {
 		var mailObject = eval("(" + xmlHttpReq.responseText + ")");
+
+		if (mailObject.folderId != Mail.currentFolderId) {
+			return;
+		}
+
 		var msgsSender = document.getElementById("portlet-mail-msgs-from");
 		var msgsSubject = document.getElementById("portlet-mail-msgs-subject");
 		var msgsDate = document.getElementById("portlet-mail-msgs-received");
-		
+
 		for (var i = 0; i < mailObject.headers.length; i++) {
 			var header = mailObject.headers[i];
 			var sender = document.createElement("div");

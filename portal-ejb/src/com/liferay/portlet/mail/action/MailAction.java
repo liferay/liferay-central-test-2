@@ -274,6 +274,7 @@ public class MailAction extends JSONAction {
 			jsonEnvelopes.put(jsonEnvelope);
 		}
 
+		jsonObj.put("folderId", ParamUtil.getString(req, "folderId"));
 		jsonObj.put("headers", jsonEnvelopes);
 
 		return jsonObj.toString();
