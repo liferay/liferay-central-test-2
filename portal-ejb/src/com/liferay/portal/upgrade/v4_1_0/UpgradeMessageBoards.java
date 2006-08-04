@@ -22,7 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_1_0;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.spring.CounterServiceUtil;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.service.spring.DLServiceUtil;
@@ -49,6 +49,7 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import java.util.ArrayList;
@@ -225,8 +226,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 				boolean attachments = rs.getBoolean("attachments");
 
 				String newMessageId = Long.toString(
-					CounterLocalServiceUtil.increment(
-						MBMessage.class.getName()));
+					CounterServiceUtil.increment(MBMessage.class.getName()));
 
 				List files = _getFiles(
 					companyId, topicId, oldMessageId, attachments);
@@ -354,13 +354,10 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 			ps = con.prepareStatement(_UPGRADE_CATEGORY_1);
 
-			ps.setString(1, Group.DEFAULT_PARENT_GROUP_ID);
-
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				String topicId = rs.getString("topicId");
-				String groupId = rs.getString("groupId");
 				String userId = rs.getString("userId");
 				Timestamp createDate = rs.getTimestamp("createDate");
 				Timestamp modifiedDate = rs.getTimestamp("modifiedDate");
@@ -377,25 +374,46 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 					category = MBCategoryLocalServiceUtil.getSystemCategory();
 				}
 				else {
+					String groupId = null;
+
+					try {
+						groupId = rs.getString("groupId");
+					}
+					catch (SQLException sqle) {
+					}
+
 					if (Validator.isNull(parentCategoryId)) {
 						parentCategoryId =
 							MBCategory.DEFAULT_PARENT_CATEGORY_ID;
 					}
+					else {
+						MBCategory parentCategory =
+							MBCategoryLocalServiceUtil.getCategory(
+								parentCategoryId);
 
-					String plid = Layout.PUBLIC + groupId + ".1";
-					boolean addCommunityPermissions = true;
-					boolean addGuestPermissions = true;
+						groupId = parentCategory.getGroupId();
+					}
 
-					category = MBCategoryLocalServiceUtil.addCategory(
-						userId, plid, parentCategoryId, name, description,
-						addCommunityPermissions, addGuestPermissions);
+					if (Validator.isNotNull(groupId) &&
+						!groupId.equals(Group.DEFAULT_PARENT_GROUP_ID)) {
+
+						String plid = Layout.PUBLIC + groupId + ".1";
+						boolean addCommunityPermissions = true;
+						boolean addGuestPermissions = true;
+
+						category = MBCategoryLocalServiceUtil.addCategory(
+							userId, plid, parentCategoryId, name, description,
+							addCommunityPermissions, addGuestPermissions);
+					}
 				}
 
-				_upgradeMessage(category.getCategoryId(), topicId);
+				if (category != null) {
+					_upgradeMessage(category.getCategoryId(), topicId);
 
-				_upgradeCategory(
-					category.getCategoryId(), createDate, modifiedDate,
-					lastPostDate);
+					_upgradeCategory(
+						category.getCategoryId(), createDate, modifiedDate,
+						lastPostDate);
+				}
 			}
 
 			ResourceLocalServiceUtil.deleteResources(
@@ -411,8 +429,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		}
 	}
 
-	private static final String _UPGRADE_CATEGORY_1 =
-		"SELECT * FROM MBTopic WHERE groupId != ?";
+	private static final String _UPGRADE_CATEGORY_1 = "SELECT * FROM MBTopic";
 
 	private static final String _UPGRADE_CATEGORY_2 =
 		"UPDATE MBCategory SET createDate = ?, modifiedDate = ?, " +
