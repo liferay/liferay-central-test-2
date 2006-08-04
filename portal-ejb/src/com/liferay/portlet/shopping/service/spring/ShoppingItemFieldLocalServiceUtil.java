@@ -31,16 +31,8 @@ package com.liferay.portlet.shopping.service.spring;
 public class ShoppingItemFieldLocalServiceUtil {
 	public static java.util.List getItemFields(java.lang.String itemId)
 		throws com.liferay.portal.SystemException {
-		try {
-			ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
+		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
 
-			return shoppingItemFieldLocalService.getItemFields(itemId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return shoppingItemFieldLocalService.getItemFields(itemId);
 	}
 }

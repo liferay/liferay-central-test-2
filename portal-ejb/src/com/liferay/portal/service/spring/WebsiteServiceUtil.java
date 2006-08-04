@@ -33,100 +33,45 @@ public class WebsiteServiceUtil {
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String url, java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			WebsiteService websiteService = WebsiteServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WebsiteService websiteService = WebsiteServiceFactory.getService();
 
-			return websiteService.addWebsite(className, classPK, url, typeId,
-				primary);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return websiteService.addWebsite(className, classPK, url, typeId,
+			primary);
 	}
 
 	public static void deleteWebsite(java.lang.String websiteId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			WebsiteService websiteService = WebsiteServiceFactory.getService();
-			websiteService.deleteWebsite(websiteId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WebsiteService websiteService = WebsiteServiceFactory.getService();
+		websiteService.deleteWebsite(websiteId);
 	}
 
 	public static com.liferay.portal.model.Website getWebsite(
 		java.lang.String websiteId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			WebsiteService websiteService = WebsiteServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WebsiteService websiteService = WebsiteServiceFactory.getService();
 
-			return websiteService.getWebsite(websiteId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return websiteService.getWebsite(websiteId);
 	}
 
 	public static java.util.List getWebsites(java.lang.String className,
 		java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			WebsiteService websiteService = WebsiteServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WebsiteService websiteService = WebsiteServiceFactory.getService();
 
-			return websiteService.getWebsites(className, classPK);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return websiteService.getWebsites(className, classPK);
 	}
 
 	public static com.liferay.portal.model.Website updateWebsite(
 		java.lang.String websiteId, java.lang.String url,
 		java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			WebsiteService websiteService = WebsiteServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WebsiteService websiteService = WebsiteServiceFactory.getService();
 
-			return websiteService.updateWebsite(websiteId, url, typeId, primary);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return websiteService.updateWebsite(websiteId, url, typeId, primary);
 	}
 }

@@ -41,6 +41,8 @@ import com.liferay.util.StringPool;
 
 import java.io.Serializable;
 
+import java.rmi.RemoteException;
+
 import java.util.List;
 import java.util.Map;
 
@@ -94,7 +96,7 @@ public class PermissionCheckerBag implements Serializable {
 	}
 
 	public boolean isCompanyAdmin(String companyId)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		String key = companyId;
 
@@ -115,7 +117,7 @@ public class PermissionCheckerBag implements Serializable {
 
 	public boolean isCommunityAdmin(
 			String companyId, String groupId, String name)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		String key =
 			companyId + StringPool.PIPE + groupId + StringPool.PIPE + name;
@@ -133,7 +135,7 @@ public class PermissionCheckerBag implements Serializable {
 
 	protected boolean isCommunityAdminImpl(
 			String companyId, String groupId, String name)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		if (groupId == null) {
 			return false;

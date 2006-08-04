@@ -33,55 +33,22 @@ public class ContactLocalServiceUtil {
 		java.lang.String contactId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
 
-			return contactLocalService.getContact(contactId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return contactLocalService.getContact(contactId);
 	}
 
 	public static void deleteContact(java.lang.String contactId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
-			contactLocalService.deleteContact(contactId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+		contactLocalService.deleteContact(contactId);
 	}
 
 	public static void deleteContact(com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
-			contactLocalService.deleteContact(contact);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+		contactLocalService.deleteContact(contact);
 	}
 }

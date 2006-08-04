@@ -32,54 +32,24 @@ public class ListTypeServiceUtil {
 	public static com.liferay.portal.model.ListType getListType(
 		java.lang.String listTypeId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ListTypeService listTypeService = ListTypeServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ListTypeService listTypeService = ListTypeServiceFactory.getService();
 
-			return listTypeService.getListType(listTypeId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return listTypeService.getListType(listTypeId);
 	}
 
 	public static java.util.List getListTypes(java.lang.String type)
-		throws com.liferay.portal.SystemException {
-		try {
-			ListTypeService listTypeService = ListTypeServiceFactory.getService();
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ListTypeService listTypeService = ListTypeServiceFactory.getService();
 
-			return listTypeService.getListTypes(type);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return listTypeService.getListTypes(type);
 	}
 
 	public static void validate(java.lang.String listTypeId,
 		java.lang.String type)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ListTypeService listTypeService = ListTypeServiceFactory.getService();
-			listTypeService.validate(listTypeId, type);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ListTypeService listTypeService = ListTypeServiceFactory.getService();
+		listTypeService.validate(listTypeId, type);
 	}
 }

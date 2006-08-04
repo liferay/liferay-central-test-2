@@ -41,46 +41,23 @@ public class CalEventLocalServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
-			return calEventLocalService.addEvent(userId, plid, title,
-				description, startDateMonth, startDateDay, startDateYear,
-				startDateHour, startDateMinute, endDateMonth, endDateDay,
-				endDateYear, durationHour, durationMinute, allDay,
-				timeZoneSensitive, type, repeating, recurrence, remindBy,
-				firstReminder, secondReminder, addCommunityPermissions,
-				addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return calEventLocalService.addEvent(userId, plid, title, description,
+			startDateMonth, startDateDay, startDateYear, startDateHour,
+			startDateMinute, endDateMonth, endDateDay, endDateYear,
+			durationHour, durationMinute, allDay, timeZoneSensitive, type,
+			repeating, recurrence, remindBy, firstReminder, secondReminder,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void addEventResources(java.lang.String eventId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
-			calEventLocalService.addEventResources(eventId,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		calEventLocalService.addEventResources(eventId,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void addEventResources(
@@ -88,221 +65,99 @@ public class CalEventLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
-			calEventLocalService.addEventResources(event,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		calEventLocalService.addEventResources(event, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static void checkEvents()
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
-			calEventLocalService.checkEvents();
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		calEventLocalService.checkEvents();
 	}
 
 	public static void deleteEvent(java.lang.String eventId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
-			calEventLocalService.deleteEvent(eventId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		calEventLocalService.deleteEvent(eventId);
 	}
 
 	public static void deleteEvent(
 		com.liferay.portlet.calendar.model.CalEvent event)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
-			calEventLocalService.deleteEvent(event);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		calEventLocalService.deleteEvent(event);
 	}
 
 	public static void deleteEvents(java.lang.String groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
-			calEventLocalService.deleteEvents(groupId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		calEventLocalService.deleteEvents(groupId);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent getEvent(
 		java.lang.String eventId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
-			return calEventLocalService.getEvent(eventId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return calEventLocalService.getEvent(eventId);
 	}
 
 	public static java.util.List getEvents(java.lang.String groupId,
 		java.lang.String type, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		try {
-			CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
-			return calEventLocalService.getEvents(groupId, type, begin, end);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return calEventLocalService.getEvents(groupId, type, begin, end);
 	}
 
 	public static java.util.List getEvents(java.lang.String groupId,
 		java.util.Calendar cal) throws com.liferay.portal.SystemException {
-		try {
-			CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
-			return calEventLocalService.getEvents(groupId, cal);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return calEventLocalService.getEvents(groupId, cal);
 	}
 
 	public static java.util.List getEvents(java.lang.String groupId,
 		java.util.Calendar cal, java.lang.String type)
 		throws com.liferay.portal.SystemException {
-		try {
-			CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
-			return calEventLocalService.getEvents(groupId, cal, type);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return calEventLocalService.getEvents(groupId, cal, type);
 	}
 
 	public static int getEventsCount(java.lang.String groupId,
 		java.lang.String type) throws com.liferay.portal.SystemException {
-		try {
-			CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
-			return calEventLocalService.getEventsCount(groupId, type);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return calEventLocalService.getEventsCount(groupId, type);
 	}
 
 	public static java.util.List getRepeatingEvents(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		try {
-			CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
-			return calEventLocalService.getRepeatingEvents(groupId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return calEventLocalService.getRepeatingEvents(groupId);
 	}
 
 	public static boolean hasEvents(java.lang.String groupId,
 		java.util.Calendar cal) throws com.liferay.portal.SystemException {
-		try {
-			CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
-			return calEventLocalService.hasEvents(groupId, cal);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return calEventLocalService.hasEvents(groupId, cal);
 	}
 
 	public static boolean hasEvents(java.lang.String groupId,
 		java.util.Calendar cal, java.lang.String type)
 		throws com.liferay.portal.SystemException {
-		try {
-			CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
-			return calEventLocalService.hasEvents(groupId, cal, type);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return calEventLocalService.hasEvents(groupId, cal, type);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent updateEvent(
@@ -316,24 +171,13 @@ public class CalEventLocalServiceUtil {
 		java.lang.String remindBy, int firstReminder, int secondReminder)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
-			return calEventLocalService.updateEvent(userId, eventId, title,
-				description, startDateMonth, startDateDay, startDateYear,
-				startDateHour, startDateMinute, endDateMonth, endDateDay,
-				endDateYear, durationHour, durationMinute, allDay,
-				timeZoneSensitive, type, repeating, recurrence, remindBy,
-				firstReminder, secondReminder);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return calEventLocalService.updateEvent(userId, eventId, title,
+			description, startDateMonth, startDateDay, startDateYear,
+			startDateHour, startDateMinute, endDateMonth, endDateDay,
+			endDateYear, durationHour, durationMinute, allDay,
+			timeZoneSensitive, type, repeating, recurrence, remindBy,
+			firstReminder, secondReminder);
 	}
 }

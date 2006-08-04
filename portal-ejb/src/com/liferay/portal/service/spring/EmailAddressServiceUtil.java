@@ -33,101 +33,46 @@ public class EmailAddressServiceUtil {
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String address, java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
 
-			return emailAddressService.addEmailAddress(className, classPK,
-				address, typeId, primary);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return emailAddressService.addEmailAddress(className, classPK, address,
+			typeId, primary);
 	}
 
 	public static void deleteEmailAddress(java.lang.String emailAddressId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
-			emailAddressService.deleteEmailAddress(emailAddressId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
+		emailAddressService.deleteEmailAddress(emailAddressId);
 	}
 
 	public static com.liferay.portal.model.EmailAddress getEmailAddress(
 		java.lang.String emailAddressId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
 
-			return emailAddressService.getEmailAddress(emailAddressId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return emailAddressService.getEmailAddress(emailAddressId);
 	}
 
 	public static java.util.List getEmailAddresses(java.lang.String className,
 		java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
 
-			return emailAddressService.getEmailAddresses(className, classPK);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return emailAddressService.getEmailAddresses(className, classPK);
 	}
 
 	public static com.liferay.portal.model.EmailAddress updateEmailAddress(
 		java.lang.String emailAddressId, java.lang.String address,
 		java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
 
-			return emailAddressService.updateEmailAddress(emailAddressId,
-				address, typeId, primary);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return emailAddressService.updateEmailAddress(emailAddressId, address,
+			typeId, primary);
 	}
 }

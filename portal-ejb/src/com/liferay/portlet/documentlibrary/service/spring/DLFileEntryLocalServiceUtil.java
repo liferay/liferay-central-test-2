@@ -36,22 +36,11 @@ public class DLFileEntryLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-			return dlFileEntryLocalService.addFileEntry(userId, folderId, name,
-				title, description, byteArray, addCommunityPermissions,
-				addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFileEntryLocalService.addFileEntry(userId, folderId, name,
+			title, description, byteArray, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static void addFileEntryResources(java.lang.String folderId,
@@ -59,20 +48,9 @@ public class DLFileEntryLocalServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
-			dlFileEntryLocalService.addFileEntryResources(folderId, name,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		dlFileEntryLocalService.addFileEntryResources(folderId, name,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void addFileEntryResources(
@@ -81,95 +59,40 @@ public class DLFileEntryLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
-			dlFileEntryLocalService.addFileEntryResources(folder, fileEntry,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		dlFileEntryLocalService.addFileEntryResources(folder, fileEntry,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteFileEntries(java.lang.String folderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
-			dlFileEntryLocalService.deleteFileEntries(folderId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		dlFileEntryLocalService.deleteFileEntries(folderId);
 	}
 
 	public static void deleteFileEntry(java.lang.String folderId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
-			dlFileEntryLocalService.deleteFileEntry(folderId, name);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		dlFileEntryLocalService.deleteFileEntry(folderId, name);
 	}
 
 	public static void deleteFileEntry(java.lang.String folderId,
 		java.lang.String name, double version)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
-			dlFileEntryLocalService.deleteFileEntry(folderId, name, version);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		dlFileEntryLocalService.deleteFileEntry(folderId, name, version);
 	}
 
 	public static void deleteFileEntry(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
-			dlFileEntryLocalService.deleteFileEntry(fileEntry);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		dlFileEntryLocalService.deleteFileEntry(fileEntry);
 	}
 
 	public static java.io.InputStream getFileAsStream(
@@ -177,21 +100,10 @@ public class DLFileEntryLocalServiceUtil {
 		java.lang.String folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-			return dlFileEntryLocalService.getFileAsStream(companyId, userId,
-				folderId, name);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFileEntryLocalService.getFileAsStream(companyId, userId,
+			folderId, name);
 	}
 
 	public static java.io.InputStream getFileAsStream(
@@ -199,101 +111,47 @@ public class DLFileEntryLocalServiceUtil {
 		java.lang.String folderId, java.lang.String name, double version)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-			return dlFileEntryLocalService.getFileAsStream(companyId, userId,
-				folderId, name, version);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFileEntryLocalService.getFileAsStream(companyId, userId,
+			folderId, name, version);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
 		java.lang.String folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-			return dlFileEntryLocalService.getFileEntry(folderId, name);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFileEntryLocalService.getFileEntry(folderId, name);
 	}
 
 	public static java.util.List getFileEntries(java.lang.String folderId)
 		throws com.liferay.portal.SystemException {
-		try {
-			DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-			return dlFileEntryLocalService.getFileEntries(folderId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFileEntryLocalService.getFileEntries(folderId);
 	}
 
 	public static java.util.List getFileEntries(java.lang.String folderId,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		try {
-			DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-			return dlFileEntryLocalService.getFileEntries(folderId, begin, end);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFileEntryLocalService.getFileEntries(folderId, begin, end);
 	}
 
 	public static int getFileEntriesCount(java.lang.String folderId)
 		throws com.liferay.portal.SystemException {
-		try {
-			DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-			return dlFileEntryLocalService.getFileEntriesCount(folderId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFileEntryLocalService.getFileEntriesCount(folderId);
 	}
 
 	public static int getFoldersFileEntriesCount(java.util.List folderIds)
 		throws com.liferay.portal.SystemException {
-		try {
-			DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-			return dlFileEntryLocalService.getFoldersFileEntriesCount(folderIds);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFileEntryLocalService.getFoldersFileEntriesCount(folderIds);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
@@ -301,21 +159,10 @@ public class DLFileEntryLocalServiceUtil {
 		java.lang.String title, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-			return dlFileEntryLocalService.updateFileEntry(folderId, name,
-				title, description);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFileEntryLocalService.updateFileEntry(folderId, name, title,
+			description);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
@@ -323,20 +170,9 @@ public class DLFileEntryLocalServiceUtil {
 		java.lang.String name, java.lang.String sourceFileName, byte[] byteArray)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-			return dlFileEntryLocalService.updateFileEntry(userId, folderId,
-				name, sourceFileName, byteArray);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFileEntryLocalService.updateFileEntry(userId, folderId, name,
+			sourceFileName, byteArray);
 	}
 }

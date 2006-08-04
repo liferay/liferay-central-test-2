@@ -32,96 +32,44 @@ public class JournalContentSearchLocalServiceUtil {
 	public static void checkContentSearches(java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
-			journalContentSearchLocalService.checkContentSearches(companyId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+		journalContentSearchLocalService.checkContentSearches(companyId);
 	}
 
 	public static void deleteArticleContentSearches(
 		java.lang.String companyId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException {
-		try {
-			JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
-			journalContentSearchLocalService.deleteArticleContentSearches(companyId,
-				articleId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+		journalContentSearchLocalService.deleteArticleContentSearches(companyId,
+			articleId);
 	}
 
 	public static void deleteLayoutContentSearches(java.lang.String layoutId,
 		java.lang.String ownerId) throws com.liferay.portal.SystemException {
-		try {
-			JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
-			journalContentSearchLocalService.deleteLayoutContentSearches(layoutId,
-				ownerId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+		journalContentSearchLocalService.deleteLayoutContentSearches(layoutId,
+			ownerId);
 	}
 
 	public static void deleteOwnerContentSearches(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException {
-		try {
-			JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
-			journalContentSearchLocalService.deleteOwnerContentSearches(ownerId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+		journalContentSearchLocalService.deleteOwnerContentSearches(ownerId);
 	}
 
 	public static java.util.List getLayoutIds(java.lang.String ownerId,
 		java.lang.String articleId) throws com.liferay.portal.SystemException {
-		try {
-			JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
-			return journalContentSearchLocalService.getLayoutIds(ownerId,
-				articleId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalContentSearchLocalService.getLayoutIds(ownerId, articleId);
 	}
 
 	public static int getLayoutIdsCount(java.lang.String ownerId,
 		java.lang.String articleId) throws com.liferay.portal.SystemException {
-		try {
-			JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
-			return journalContentSearchLocalService.getLayoutIdsCount(ownerId,
-				articleId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalContentSearchLocalService.getLayoutIdsCount(ownerId,
+			articleId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalContentSearch updateContentSearch(
@@ -130,20 +78,9 @@ public class JournalContentSearchLocalServiceUtil {
 		java.lang.String articleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
-			return journalContentSearchLocalService.updateContentSearch(portletId,
-				layoutId, ownerId, companyId, articleId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalContentSearchLocalService.updateContentSearch(portletId,
+			layoutId, ownerId, companyId, articleId);
 	}
 }

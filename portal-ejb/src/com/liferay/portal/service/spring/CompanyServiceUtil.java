@@ -37,81 +37,36 @@ public class CompanyServiceUtil {
 		java.lang.String tickerSymbol, java.lang.String industry,
 		java.lang.String type, java.lang.String size)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			CompanyService companyService = CompanyServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		CompanyService companyService = CompanyServiceFactory.getService();
 
-			return companyService.updateCompany(companyId, portalURL, homeURL,
-				mx, name, legalName, legalId, legalType, sicCode, tickerSymbol,
-				industry, type, size);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return companyService.updateCompany(companyId, portalURL, homeURL, mx,
+			name, legalName, legalId, legalType, sicCode, tickerSymbol,
+			industry, type, size);
 	}
 
 	public static void updateDisplay(java.lang.String companyId,
 		java.lang.String languageId, java.lang.String timeZoneId,
 		java.lang.String resolution)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			CompanyService companyService = CompanyServiceFactory.getService();
-			companyService.updateDisplay(companyId, languageId, timeZoneId,
-				resolution);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		CompanyService companyService = CompanyServiceFactory.getService();
+		companyService.updateDisplay(companyId, languageId, timeZoneId,
+			resolution);
 	}
 
 	public static void updateLogo(java.lang.String companyId, java.io.File file)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			CompanyService companyService = CompanyServiceFactory.getService();
-			companyService.updateLogo(companyId, file);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		CompanyService companyService = CompanyServiceFactory.getService();
+		companyService.updateLogo(companyId, file);
 	}
 
 	public static void updateSecurity(java.lang.String companyId,
 		java.lang.String authType, boolean autoLogin, boolean strangers)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			CompanyService companyService = CompanyServiceFactory.getService();
-			companyService.updateSecurity(companyId, authType, autoLogin,
-				strangers);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		CompanyService companyService = CompanyServiceFactory.getService();
+		companyService.updateSecurity(companyId, authType, autoLogin, strangers);
 	}
 }

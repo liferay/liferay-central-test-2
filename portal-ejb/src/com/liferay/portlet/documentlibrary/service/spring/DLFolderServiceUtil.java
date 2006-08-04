@@ -34,81 +34,37 @@ public class DLFolderServiceUtil {
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			DLFolderService dlFolderService = DLFolderServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
 
-			return dlFolderService.addFolder(plid, parentFolderId, name,
-				description, addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFolderService.addFolder(plid, parentFolderId, name,
+			description, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteFolder(java.lang.String folderId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			DLFolderService dlFolderService = DLFolderServiceFactory.getService();
-			dlFolderService.deleteFolder(folderId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
+		dlFolderService.deleteFolder(folderId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		java.lang.String folderId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			DLFolderService dlFolderService = DLFolderServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
 
-			return dlFolderService.getFolder(folderId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFolderService.getFolder(folderId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
 		java.lang.String folderId, java.lang.String parentFolderId,
 		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			DLFolderService dlFolderService = DLFolderServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
 
-			return dlFolderService.updateFolder(folderId, parentFolderId, name,
-				description);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFolderService.updateFolder(folderId, parentFolderId, name,
+			description);
 	}
 }

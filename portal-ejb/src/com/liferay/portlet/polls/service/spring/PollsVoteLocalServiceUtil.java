@@ -34,69 +34,31 @@ public class PollsVoteLocalServiceUtil {
 		java.lang.String choiceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
 
-			return pollsVoteLocalService.addVote(userId, questionId, choiceId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return pollsVoteLocalService.addVote(userId, questionId, choiceId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote getVote(
 		java.lang.String questionId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
 
-			return pollsVoteLocalService.getVote(questionId, userId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return pollsVoteLocalService.getVote(questionId, userId);
 	}
 
 	public static int getVotesCount(java.lang.String questionId)
 		throws com.liferay.portal.SystemException {
-		try {
-			PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
 
-			return pollsVoteLocalService.getVotesCount(questionId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return pollsVoteLocalService.getVotesCount(questionId);
 	}
 
 	public static int getVotesCount(java.lang.String questionId,
 		java.lang.String choiceId) throws com.liferay.portal.SystemException {
-		try {
-			PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
 
-			return pollsVoteLocalService.getVotesCount(questionId, choiceId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return pollsVoteLocalService.getVotesCount(questionId, choiceId);
 	}
 }

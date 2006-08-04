@@ -840,6 +840,12 @@ create table Subscription (
 	frequency VARCHAR(75) null
 );
 
+create table TestFoo (
+	fooId INTEGER not null primary key,
+	field1 VARCHAR(75) null,
+	field2 BOOLEAN
+);
+
 create table UserGroup (
 	userGroupId VARCHAR(75) not null primary key,
 	companyId VARCHAR(75) not null,

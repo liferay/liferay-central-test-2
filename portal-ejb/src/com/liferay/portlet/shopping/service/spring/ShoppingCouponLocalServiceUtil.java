@@ -40,113 +40,55 @@ public class ShoppingCouponLocalServiceUtil {
 		double minOrder, double discount, java.lang.String discountType)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
-			return shoppingCouponLocalService.addCoupon(userId, plid, couponId,
-				autoCouponId, name, description, startDateMonth, startDateDay,
-				startDateYear, startDateHour, startDateMinute, endDateMonth,
-				endDateDay, endDateYear, endDateHour, endDateMinute,
-				neverExpire, active, limitCategories, limitSkus, minOrder,
-				discount, discountType);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return shoppingCouponLocalService.addCoupon(userId, plid, couponId,
+			autoCouponId, name, description, startDateMonth, startDateDay,
+			startDateYear, startDateHour, startDateMinute, endDateMonth,
+			endDateDay, endDateYear, endDateHour, endDateMinute, neverExpire,
+			active, limitCategories, limitSkus, minOrder, discount, discountType);
 	}
 
 	public static void deleteCoupon(java.lang.String couponId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
-			shoppingCouponLocalService.deleteCoupon(couponId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+		shoppingCouponLocalService.deleteCoupon(couponId);
 	}
 
 	public static void deleteCoupons(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		try {
-			ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
-			shoppingCouponLocalService.deleteCoupons(groupId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+		shoppingCouponLocalService.deleteCoupons(groupId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
 		java.lang.String couponId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
-			return shoppingCouponLocalService.getCoupon(couponId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return shoppingCouponLocalService.getCoupon(couponId);
 	}
 
 	public static java.util.List search(java.lang.String couponId,
 		java.lang.String plid, java.lang.String companyId, boolean active,
 		java.lang.String discountType, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		try {
-			ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
-			return shoppingCouponLocalService.search(couponId, plid, companyId,
-				active, discountType, andOperator, begin, end);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return shoppingCouponLocalService.search(couponId, plid, companyId,
+			active, discountType, andOperator, begin, end);
 	}
 
 	public static int searchCount(java.lang.String couponId,
 		java.lang.String groupId, java.lang.String companyId, boolean active,
 		java.lang.String discountType, boolean andOperator)
 		throws com.liferay.portal.SystemException {
-		try {
-			ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
-			return shoppingCouponLocalService.searchCount(couponId, groupId,
-				companyId, active, discountType, andOperator);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return shoppingCouponLocalService.searchCount(couponId, groupId,
+			companyId, active, discountType, andOperator);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon updateCoupon(
@@ -160,23 +102,12 @@ public class ShoppingCouponLocalServiceUtil {
 		java.lang.String discountType)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
-			return shoppingCouponLocalService.updateCoupon(userId, couponId,
-				name, description, startDateMonth, startDateDay, startDateYear,
-				startDateHour, startDateMinute, endDateMonth, endDateDay,
-				endDateYear, endDateHour, endDateMinute, neverExpire, active,
-				limitCategories, limitSkus, minOrder, discount, discountType);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return shoppingCouponLocalService.updateCoupon(userId, couponId, name,
+			description, startDateMonth, startDateDay, startDateYear,
+			startDateHour, startDateMinute, endDateMonth, endDateDay,
+			endDateYear, endDateHour, endDateMinute, neverExpire, active,
+			limitCategories, limitSkus, minOrder, discount, discountType);
 	}
 }

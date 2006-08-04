@@ -35,42 +35,19 @@ public class BlogsCategoryLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
 
-			return blogsCategoryLocalService.addCategory(userId,
-				parentCategoryId, name, description, addCommunityPermissions,
-				addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return blogsCategoryLocalService.addCategory(userId, parentCategoryId,
+			name, description, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void addCategoryResources(java.lang.String categoryId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
-			blogsCategoryLocalService.addCategoryResources(categoryId,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		blogsCategoryLocalService.addCategoryResources(categoryId,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void addCategoryResources(
@@ -78,123 +55,55 @@ public class BlogsCategoryLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
-			blogsCategoryLocalService.addCategoryResources(category,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		blogsCategoryLocalService.addCategoryResources(category,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteCategory(java.lang.String categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
-			blogsCategoryLocalService.deleteCategory(categoryId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		blogsCategoryLocalService.deleteCategory(categoryId);
 	}
 
 	public static void deleteCategory(
 		com.liferay.portlet.blogs.model.BlogsCategory category)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
-			blogsCategoryLocalService.deleteCategory(category);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		blogsCategoryLocalService.deleteCategory(category);
 	}
 
 	public static java.util.List getCategories(
 		java.lang.String parentCategoryId, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		try {
-			BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
 
-			return blogsCategoryLocalService.getCategories(parentCategoryId,
-				begin, end);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return blogsCategoryLocalService.getCategories(parentCategoryId, begin,
+			end);
 	}
 
 	public static int getCategoriesCount(java.lang.String parentCategoryId)
 		throws com.liferay.portal.SystemException {
-		try {
-			BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
 
-			return blogsCategoryLocalService.getCategoriesCount(parentCategoryId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return blogsCategoryLocalService.getCategoriesCount(parentCategoryId);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory getCategory(
 		java.lang.String categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
 
-			return blogsCategoryLocalService.getCategory(categoryId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return blogsCategoryLocalService.getCategory(categoryId);
 	}
 
 	public static void getSubcategoryIds(java.util.List categoryIds,
 		java.lang.String categoryId) throws com.liferay.portal.SystemException {
-		try {
-			BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
-			blogsCategoryLocalService.getSubcategoryIds(categoryIds, categoryId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		blogsCategoryLocalService.getSubcategoryIds(categoryIds, categoryId);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory updateCategory(
@@ -202,20 +111,9 @@ public class BlogsCategoryLocalServiceUtil {
 		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
 
-			return blogsCategoryLocalService.updateCategory(categoryId,
-				parentCategoryId, name, description);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return blogsCategoryLocalService.updateCategory(categoryId,
+			parentCategoryId, name, description);
 	}
 }

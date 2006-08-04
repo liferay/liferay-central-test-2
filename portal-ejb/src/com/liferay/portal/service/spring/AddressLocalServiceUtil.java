@@ -38,92 +38,42 @@ public class AddressLocalServiceUtil {
 		boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
-			return addressLocalService.addAddress(userId, className, classPK,
-				street1, street2, street3, city, zip, regionId, countryId,
-				typeId, mailing, primary);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return addressLocalService.addAddress(userId, className, classPK,
+			street1, street2, street3, city, zip, regionId, countryId, typeId,
+			mailing, primary);
 	}
 
 	public static void deleteAddress(java.lang.String addressId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-			addressLocalService.deleteAddress(addressId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		addressLocalService.deleteAddress(addressId);
 	}
 
 	public static void deleteAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		try {
-			AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-			addressLocalService.deleteAddresses(companyId, className, classPK);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		addressLocalService.deleteAddresses(companyId, className, classPK);
 	}
 
 	public static com.liferay.portal.model.Address getAddress(
 		java.lang.String addressId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
-			return addressLocalService.getAddress(addressId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return addressLocalService.getAddress(addressId);
 	}
 
 	public static java.util.List getAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		try {
-			AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
-			return addressLocalService.getAddresses(companyId, className,
-				classPK);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return addressLocalService.getAddresses(companyId, className, classPK);
 	}
 
 	public static com.liferay.portal.model.Address updateAddress(
@@ -134,21 +84,9 @@ public class AddressLocalServiceUtil {
 		boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
-			return addressLocalService.updateAddress(addressId, street1,
-				street2, street3, city, zip, regionId, countryId, typeId,
-				mailing, primary);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return addressLocalService.updateAddress(addressId, street1, street2,
+			street3, city, zip, regionId, countryId, typeId, mailing, primary);
 	}
 }

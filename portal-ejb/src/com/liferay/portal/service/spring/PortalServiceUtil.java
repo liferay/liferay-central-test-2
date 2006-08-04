@@ -29,13 +29,8 @@ package com.liferay.portal.service.spring;
  *
  */
 public class PortalServiceUtil {
-	public static void test() throws com.liferay.portal.SystemException {
-		try {
-			PortalService portalService = PortalServiceFactory.getService();
-			portalService.test();
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+	public static void test() throws java.rmi.RemoteException {
+		PortalService portalService = PortalServiceFactory.getService();
+		portalService.test();
 	}
 }

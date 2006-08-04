@@ -31,16 +31,8 @@ package com.liferay.portlet.documentlibrary.service.spring;
 public class DLFileVersionLocalServiceUtil {
 	public static java.util.List getFileVersions(java.lang.String folderId,
 		java.lang.String name) throws com.liferay.portal.SystemException {
-		try {
-			DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
 
-			return dlFileVersionLocalService.getFileVersions(folderId, name);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFileVersionLocalService.getFileVersions(folderId, name);
 	}
 }

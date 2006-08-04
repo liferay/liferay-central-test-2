@@ -43,177 +43,87 @@ public class JournalArticleServiceUtil {
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
-			return journalArticleService.addArticle(articleId, autoArticleId,
-				plid, title, content, type, structureId, templateId,
-				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, expirationDateMonth,
-				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, neverExpire, reviewDateMonth,
-				reviewDateDay, reviewDateYear, reviewDateHour,
-				reviewDateMinute, neverReview, images, articleURL, prefs,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalArticleService.addArticle(articleId, autoArticleId, plid,
+			title, content, type, structureId, templateId, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
+			reviewDateHour, reviewDateMinute, neverReview, images, articleURL,
+			prefs, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle approveArticle(
 		java.lang.String articleId, double version, java.lang.String plid,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
-			return journalArticleService.approveArticle(articleId, version,
-				plid, articleURL, prefs);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalArticleService.approveArticle(articleId, version, plid,
+			articleURL, prefs);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle getArticle(
 		java.lang.String companyId, java.lang.String articleId, double version)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
-			return journalArticleService.getArticle(companyId, articleId,
-				version);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalArticleService.getArticle(companyId, articleId, version);
 	}
 
 	public static java.lang.String getArticleContent(
 		java.lang.String companyId, java.lang.String articleId,
 		java.lang.String languageId, java.lang.String rootPath)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
-			return journalArticleService.getArticleContent(companyId,
-				articleId, languageId, rootPath);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalArticleService.getArticleContent(companyId, articleId,
+			languageId, rootPath);
 	}
 
 	public static void deleteArticle(java.lang.String companyId,
 		java.lang.String articleId, double version,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
-			journalArticleService.deleteArticle(companyId, articleId, version,
-				articleURL, prefs);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
+		journalArticleService.deleteArticle(companyId, articleId, version,
+			articleURL, prefs);
 	}
 
 	public static void expireArticle(java.lang.String companyId,
 		java.lang.String articleId, double version,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
-			journalArticleService.expireArticle(companyId, articleId, version,
-				articleURL, prefs);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
+		journalArticleService.expireArticle(companyId, articleId, version,
+			articleURL, prefs);
 	}
 
 	public static void removeArticleLocale(java.lang.String companyId,
 		java.lang.String languageId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
-			journalArticleService.removeArticleLocale(companyId, languageId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
+		journalArticleService.removeArticleLocale(companyId, languageId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
 		java.lang.String companyId, java.lang.String articleId, double version,
 		java.lang.String languageId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
-			return journalArticleService.removeArticleLocale(companyId,
-				articleId, version, languageId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalArticleService.removeArticleLocale(companyId, articleId,
+			version, languageId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
@@ -229,27 +139,16 @@ public class JournalArticleServiceUtil {
 		int reviewDateMinute, boolean neverReview, java.util.Map images,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
-			return journalArticleService.updateArticle(companyId, articleId,
-				version, incrementVersion, title, content, type, structureId,
-				templateId, displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, expirationDateMonth,
-				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, neverExpire, reviewDateMonth,
-				reviewDateDay, reviewDateYear, reviewDateHour,
-				reviewDateMinute, neverReview, images, articleURL, prefs);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalArticleService.updateArticle(companyId, articleId,
+			version, incrementVersion, title, content, type, structureId,
+			templateId, displayDateMonth, displayDateDay, displayDateYear,
+			displayDateHour, displayDateMinute, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, reviewDateMonth, reviewDateDay,
+			reviewDateYear, reviewDateHour, reviewDateMinute, neverReview,
+			images, articleURL, prefs);
 	}
 }

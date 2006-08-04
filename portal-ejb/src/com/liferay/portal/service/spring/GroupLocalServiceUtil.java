@@ -36,363 +36,162 @@ public class GroupLocalServiceUtil {
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.addGroup(userId, className, classPK, name,
-				description, type, friendlyURL);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return groupLocalService.addGroup(userId, className, classPK, name,
+			description, type, friendlyURL);
 	}
 
 	public static void addRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
-			groupLocalService.addRoleGroups(roleId, groupIds);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.addRoleGroups(roleId, groupIds);
 	}
 
 	public static void checkSystemGroups(java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
-			groupLocalService.checkSystemGroups(companyId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.checkSystemGroups(companyId);
 	}
 
 	public static void deleteGroup(java.lang.String groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
-			groupLocalService.deleteGroup(groupId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.deleteGroup(groupId);
 	}
 
 	public static com.liferay.portal.model.Group getFriendlyURLGroup(
 		java.lang.String companyId, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.getFriendlyURLGroup(companyId, friendlyURL);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return groupLocalService.getFriendlyURLGroup(companyId, friendlyURL);
 	}
 
 	public static com.liferay.portal.model.Group getGroup(
 		java.lang.String groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.getGroup(groupId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return groupLocalService.getGroup(groupId);
 	}
 
 	public static com.liferay.portal.model.Group getGroup(
 		java.lang.String companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.getGroup(companyId, name);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return groupLocalService.getGroup(companyId, name);
 	}
 
 	public static com.liferay.portal.model.Group getOrganizationGroup(
 		java.lang.String companyId, java.lang.String organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.getOrganizationGroup(companyId,
-				organizationId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return groupLocalService.getOrganizationGroup(companyId, organizationId);
 	}
 
 	public static java.util.List getOrganizationsGroups(
 		java.util.List organizations)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.getOrganizationsGroups(organizations);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return groupLocalService.getOrganizationsGroups(organizations);
 	}
 
 	public static java.util.List getRoleGroups(java.lang.String roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.getRoleGroups(roleId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return groupLocalService.getRoleGroups(roleId);
 	}
 
 	public static com.liferay.portal.model.Group getUserGroup(
 		java.lang.String companyId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.getUserGroup(companyId, userId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return groupLocalService.getUserGroup(companyId, userId);
 	}
 
 	public static com.liferay.portal.model.Group getUserGroupGroup(
 		java.lang.String companyId, java.lang.String userGroupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.getUserGroupGroup(companyId, userGroupId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return groupLocalService.getUserGroupGroup(companyId, userGroupId);
 	}
 
 	public static java.util.List getUserGroupsGroups(java.util.List userGroups)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.getUserGroupsGroups(userGroups);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return groupLocalService.getUserGroupsGroups(userGroups);
 	}
 
 	public static boolean hasRoleGroup(java.lang.String roleId,
 		java.lang.String groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.hasRoleGroup(roleId, groupId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return groupLocalService.hasRoleGroup(roleId, groupId);
 	}
 
 	public static boolean hasUserGroup(java.lang.String userId,
 		java.lang.String groupId) throws com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.hasUserGroup(userId, groupId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return groupLocalService.hasUserGroup(userId, groupId);
 	}
 
 	public static java.util.List search(java.lang.String companyId,
 		java.lang.String name, java.lang.String description,
 		java.util.Map params, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.search(companyId, name, description,
-				params, begin, end);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return groupLocalService.search(companyId, name, description, params,
+			begin, end);
 	}
 
 	public static int searchCount(java.lang.String companyId,
 		java.lang.String name, java.lang.String description,
 		java.util.Map params) throws com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.searchCount(companyId, name, description,
-				params);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return groupLocalService.searchCount(companyId, name, description,
+			params);
 	}
 
 	public static void setRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
-			groupLocalService.setRoleGroups(roleId, groupIds);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setRoleGroups(roleId, groupIds);
 	}
 
 	public static void unsetRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
-			groupLocalService.unsetRoleGroups(roleId, groupIds);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.unsetRoleGroups(roleId, groupIds);
 	}
 
 	public static com.liferay.portal.model.Group updateGroup(
@@ -401,20 +200,9 @@ public class GroupLocalServiceUtil {
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-			return groupLocalService.updateGroup(groupId, name, description,
-				type, friendlyURL);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return groupLocalService.updateGroup(groupId, name, description, type,
+			friendlyURL);
 	}
 }

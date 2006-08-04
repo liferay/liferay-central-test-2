@@ -31,6 +31,8 @@ import com.liferay.portal.service.persistence.OrgLaborUtil;
 import com.liferay.portal.service.spring.ListTypeServiceUtil;
 import com.liferay.portal.service.spring.OrgLaborLocalService;
 
+import java.rmi.RemoteException;
+
 import java.util.List;
 
 /**
@@ -125,7 +127,12 @@ public class OrgLaborLocalServiceImpl implements OrgLaborLocalService {
 	protected void validate(String typeId)
 		throws PortalException, SystemException {
 
-		ListTypeServiceUtil.validate(typeId, ListType.ORGANIZATION_SERVICE);
+		try {
+			ListTypeServiceUtil.validate(typeId, ListType.ORGANIZATION_SERVICE);
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
+		}
 	}
 
 }

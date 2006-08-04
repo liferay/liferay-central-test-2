@@ -35,90 +35,41 @@ public class PhoneLocalServiceUtil {
 		java.lang.String extension, java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 
-			return phoneLocalService.addPhone(userId, className, classPK,
-				number, extension, typeId, primary);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return phoneLocalService.addPhone(userId, className, classPK, number,
+			extension, typeId, primary);
 	}
 
 	public static void deletePhone(java.lang.String phoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-			phoneLocalService.deletePhone(phoneId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+		phoneLocalService.deletePhone(phoneId);
 	}
 
 	public static void deletePhones(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		try {
-			PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-			phoneLocalService.deletePhones(companyId, className, classPK);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+		phoneLocalService.deletePhones(companyId, className, classPK);
 	}
 
 	public static com.liferay.portal.model.Phone getPhone(
 		java.lang.String phoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 
-			return phoneLocalService.getPhone(phoneId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return phoneLocalService.getPhone(phoneId);
 	}
 
 	public static java.util.List getPhones(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		try {
-			PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 
-			return phoneLocalService.getPhones(companyId, className, classPK);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return phoneLocalService.getPhones(companyId, className, classPK);
 	}
 
 	public static com.liferay.portal.model.Phone updatePhone(
@@ -126,20 +77,9 @@ public class PhoneLocalServiceUtil {
 		java.lang.String extension, java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 
-			return phoneLocalService.updatePhone(phoneId, number, extension,
-				typeId, primary);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return phoneLocalService.updatePhone(phoneId, number, extension,
+			typeId, primary);
 	}
 }

@@ -36,21 +36,10 @@ public class IGImageLocalServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
-			return igImageLocalService.addImage(userId, folderId, description,
-				file, contentType, addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return igImageLocalService.addImage(userId, folderId, description,
+			file, contentType, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void addImageResources(java.lang.String folderId,
@@ -58,20 +47,9 @@ public class IGImageLocalServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
-			igImageLocalService.addImageResources(folderId, imageId,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		igImageLocalService.addImageResources(folderId, imageId,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void addImageResources(
@@ -80,172 +58,77 @@ public class IGImageLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
-			igImageLocalService.addImageResources(folder, image,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		igImageLocalService.addImageResources(folder, image,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteImage(java.lang.String companyId,
 		java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
-			igImageLocalService.deleteImage(companyId, imageId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		igImageLocalService.deleteImage(companyId, imageId);
 	}
 
 	public static void deleteImage(
 		com.liferay.portlet.imagegallery.model.IGImage image)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
-			igImageLocalService.deleteImage(image);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		igImageLocalService.deleteImage(image);
 	}
 
 	public static void deleteImages(java.lang.String folderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
-			igImageLocalService.deleteImages(folderId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		igImageLocalService.deleteImages(folderId);
 	}
 
 	public static int getFoldersImagesCount(java.util.List folderIds)
 		throws com.liferay.portal.SystemException {
-		try {
-			IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
-			return igImageLocalService.getFoldersImagesCount(folderIds);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return igImageLocalService.getFoldersImagesCount(folderIds);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImage(
 		java.lang.String companyId, java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
-			return igImageLocalService.getImage(companyId, imageId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return igImageLocalService.getImage(companyId, imageId);
 	}
 
 	public static java.util.List getImages(java.lang.String folderId)
 		throws com.liferay.portal.SystemException {
-		try {
-			IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
-			return igImageLocalService.getImages(folderId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return igImageLocalService.getImages(folderId);
 	}
 
 	public static java.util.List getImages(java.lang.String folderId,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		try {
-			IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
-			return igImageLocalService.getImages(folderId, begin, end);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return igImageLocalService.getImages(folderId, begin, end);
 	}
 
 	public static java.util.List getImages(java.lang.String folderId,
 		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		try {
-			IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
-			return igImageLocalService.getImages(folderId, begin, end, obc);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return igImageLocalService.getImages(folderId, begin, end, obc);
 	}
 
 	public static int getImagesCount(java.lang.String folderId)
 		throws com.liferay.portal.SystemException {
-		try {
-			IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
-			return igImageLocalService.getImagesCount(folderId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return igImageLocalService.getImagesCount(folderId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
@@ -254,20 +137,9 @@ public class IGImageLocalServiceUtil {
 		java.io.File file, java.lang.String contentType)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
-			return igImageLocalService.updateImage(companyId, imageId,
-				folderId, description, file, contentType);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return igImageLocalService.updateImage(companyId, imageId, folderId,
+			description, file, contentType);
 	}
 }

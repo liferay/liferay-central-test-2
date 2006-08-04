@@ -34,81 +34,37 @@ public class BlogsCategoryServiceUtil {
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			BlogsCategoryService blogsCategoryService = BlogsCategoryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BlogsCategoryService blogsCategoryService = BlogsCategoryServiceFactory.getService();
 
-			return blogsCategoryService.addCategory(parentCategoryId, name,
-				description, addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return blogsCategoryService.addCategory(parentCategoryId, name,
+			description, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteCategory(java.lang.String categoryId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			BlogsCategoryService blogsCategoryService = BlogsCategoryServiceFactory.getService();
-			blogsCategoryService.deleteCategory(categoryId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BlogsCategoryService blogsCategoryService = BlogsCategoryServiceFactory.getService();
+		blogsCategoryService.deleteCategory(categoryId);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory getCategory(
 		java.lang.String categoryId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			BlogsCategoryService blogsCategoryService = BlogsCategoryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BlogsCategoryService blogsCategoryService = BlogsCategoryServiceFactory.getService();
 
-			return blogsCategoryService.getCategory(categoryId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return blogsCategoryService.getCategory(categoryId);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory updateCategory(
 		java.lang.String categoryId, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			BlogsCategoryService blogsCategoryService = BlogsCategoryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BlogsCategoryService blogsCategoryService = BlogsCategoryServiceFactory.getService();
 
-			return blogsCategoryService.updateCategory(categoryId,
-				parentCategoryId, name, description);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return blogsCategoryService.updateCategory(categoryId,
+			parentCategoryId, name, description);
 	}
 }

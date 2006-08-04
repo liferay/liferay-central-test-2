@@ -38,6 +38,8 @@ import com.liferay.util.CollectionFactory;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
+import java.rmi.RemoteException;
+
 import java.util.List;
 import java.util.Map;
 
@@ -203,7 +205,7 @@ public class PermissionChecker {
 
 	protected boolean hasGuestPermission(
 			String name, String primKey, String actionId)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		if (name.indexOf(StringPool.PERIOD) != -1) {
 
@@ -249,7 +251,7 @@ public class PermissionChecker {
 
 	protected boolean hasUserPermission(
 			String groupId, String name, String primKey, String actionId)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		long start = 0;
 
@@ -349,7 +351,7 @@ public class PermissionChecker {
 	}
 
 	protected boolean isAdmin(String companyId, String groupId, String name)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		if (permissionCheckerBag.isCompanyAdmin(companyId)) {
 			return true;

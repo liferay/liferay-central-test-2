@@ -32,20 +32,9 @@ public class PollsVoteServiceUtil {
 	public static com.liferay.portlet.polls.model.PollsVote addVote(
 		java.lang.String questionId, java.lang.String choiceId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			PollsVoteService pollsVoteService = PollsVoteServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PollsVoteService pollsVoteService = PollsVoteServiceFactory.getService();
 
-			return pollsVoteService.addVote(questionId, choiceId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return pollsVoteService.addVote(questionId, choiceId);
 	}
 }

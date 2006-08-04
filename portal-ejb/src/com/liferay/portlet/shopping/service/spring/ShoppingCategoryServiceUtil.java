@@ -34,81 +34,37 @@ public class ShoppingCategoryServiceUtil {
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
 
-			return shoppingCategoryService.addCategory(plid, parentCategoryId,
-				name, description, addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return shoppingCategoryService.addCategory(plid, parentCategoryId,
+			name, description, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteCategory(java.lang.String categoryId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-			shoppingCategoryService.deleteCategory(categoryId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
+		shoppingCategoryService.deleteCategory(categoryId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory getCategory(
 		java.lang.String categoryId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
 
-			return shoppingCategoryService.getCategory(categoryId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return shoppingCategoryService.getCategory(categoryId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
 		java.lang.String categoryId, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
 
-			return shoppingCategoryService.updateCategory(categoryId,
-				parentCategoryId, name, description);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return shoppingCategoryService.updateCategory(categoryId,
+			parentCategoryId, name, description);
 	}
 }

@@ -31,136 +31,59 @@ package com.liferay.portal.service.spring;
 public class RoleServiceUtil {
 	public static com.liferay.portal.model.Role addRole(java.lang.String name)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			RoleService roleService = RoleServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		RoleService roleService = RoleServiceFactory.getService();
 
-			return roleService.addRole(name);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return roleService.addRole(name);
 	}
 
 	public static void deleteRole(java.lang.String roleId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			RoleService roleService = RoleServiceFactory.getService();
-			roleService.deleteRole(roleId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		RoleService roleService = RoleServiceFactory.getService();
+		roleService.deleteRole(roleId);
 	}
 
 	public static com.liferay.portal.model.Role getGroupRole(
 		java.lang.String companyId, java.lang.String groupId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			RoleService roleService = RoleServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		RoleService roleService = RoleServiceFactory.getService();
 
-			return roleService.getGroupRole(companyId, groupId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return roleService.getGroupRole(companyId, groupId);
 	}
 
 	public static com.liferay.portal.model.Role getRole(java.lang.String roleId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			RoleService roleService = RoleServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		RoleService roleService = RoleServiceFactory.getService();
 
-			return roleService.getRole(roleId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return roleService.getRole(roleId);
 	}
 
 	public static com.liferay.portal.model.Role getRole(
 		java.lang.String companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			RoleService roleService = RoleServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		RoleService roleService = RoleServiceFactory.getService();
 
-			return roleService.getRole(companyId, name);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return roleService.getRole(companyId, name);
 	}
 
 	public static java.util.List getUserRoles(java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			RoleService roleService = RoleServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		RoleService roleService = RoleServiceFactory.getService();
 
-			return roleService.getUserRoles(userId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return roleService.getUserRoles(userId);
 	}
 
 	public static com.liferay.portal.model.Role updateRole(
 		java.lang.String roleId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			RoleService roleService = RoleServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		RoleService roleService = RoleServiceFactory.getService();
 
-			return roleService.updateRole(roleId, name);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return roleService.updateRole(roleId, name);
 	}
 }

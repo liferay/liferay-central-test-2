@@ -35,92 +35,43 @@ public class EmailAddressLocalServiceUtil {
 		java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
 
-			return emailAddressLocalService.addEmailAddress(userId, className,
-				classPK, address, typeId, primary);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return emailAddressLocalService.addEmailAddress(userId, className,
+			classPK, address, typeId, primary);
 	}
 
 	public static void deleteEmailAddress(java.lang.String emailAddressId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-			emailAddressLocalService.deleteEmailAddress(emailAddressId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+		emailAddressLocalService.deleteEmailAddress(emailAddressId);
 	}
 
 	public static void deleteEmailAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		try {
-			EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-			emailAddressLocalService.deleteEmailAddresses(companyId, className,
-				classPK);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+		emailAddressLocalService.deleteEmailAddresses(companyId, className,
+			classPK);
 	}
 
 	public static com.liferay.portal.model.EmailAddress getEmailAddress(
 		java.lang.String emailAddressId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
 
-			return emailAddressLocalService.getEmailAddress(emailAddressId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return emailAddressLocalService.getEmailAddress(emailAddressId);
 	}
 
 	public static java.util.List getEmailAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		try {
-			EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
 
-			return emailAddressLocalService.getEmailAddresses(companyId,
-				className, classPK);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return emailAddressLocalService.getEmailAddresses(companyId, className,
+			classPK);
 	}
 
 	public static com.liferay.portal.model.EmailAddress updateEmailAddress(
@@ -128,20 +79,9 @@ public class EmailAddressLocalServiceUtil {
 		java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
 
-			return emailAddressLocalService.updateEmailAddress(emailAddressId,
-				address, typeId, primary);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return emailAddressLocalService.updateEmailAddress(emailAddressId,
+			address, typeId, primary);
 	}
 }

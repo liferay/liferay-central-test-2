@@ -35,41 +35,19 @@ public class ResourceLocalServiceUtil {
 		java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
 
-			return resourceLocalService.addResource(companyId, name, typeId,
-				scope, primKey);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return resourceLocalService.addResource(companyId, name, typeId, scope,
+			primKey);
 	}
 
 	public static void addResources(java.lang.String companyId,
 		java.lang.String groupId, java.lang.String name, boolean portletActions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-			resourceLocalService.addResources(companyId, groupId, name,
-				portletActions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.addResources(companyId, groupId, name,
+			portletActions);
 	}
 
 	public static void addResources(java.lang.String companyId,
@@ -79,58 +57,25 @@ public class ResourceLocalServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-			resourceLocalService.addResources(companyId, groupId, userId, name,
-				primKey, portletActions, addCommunityPermissions,
-				addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.addResources(companyId, groupId, userId, name,
+			primKey, portletActions, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static void deleteResource(java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-			resourceLocalService.deleteResource(resourceId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.deleteResource(resourceId);
 	}
 
 	public static void deleteResource(
 		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-			resourceLocalService.deleteResource(resource);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.deleteResource(resource);
 	}
 
 	public static void deleteResource(java.lang.String companyId,
@@ -138,58 +83,25 @@ public class ResourceLocalServiceUtil {
 		java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-			resourceLocalService.deleteResource(companyId, name, typeId, scope,
-				primKey);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.deleteResource(companyId, name, typeId, scope,
+			primKey);
 	}
 
 	public static void deleteResources(java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-			resourceLocalService.deleteResources(name);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.deleteResources(name);
 	}
 
 	public static com.liferay.portal.model.Resource getResource(
 		java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
 
-			return resourceLocalService.getResource(resourceId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return resourceLocalService.getResource(resourceId);
 	}
 
 	public static com.liferay.portal.model.Resource getResource(
@@ -198,20 +110,9 @@ public class ResourceLocalServiceUtil {
 		java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
 
-			return resourceLocalService.getResource(companyId, name, typeId,
-				scope, primKey);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return resourceLocalService.getResource(companyId, name, typeId, scope,
+			primKey);
 	}
 }

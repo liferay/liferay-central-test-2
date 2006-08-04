@@ -39,23 +39,12 @@ public class JournalTemplateLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 
-			return journalTemplateLocalService.addTemplate(userId, templateId,
-				autoTemplateId, plid, structureId, name, description, xsl,
-				formatXsl, langType, smallImage, smallImageURL, smallFile,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalTemplateLocalService.addTemplate(userId, templateId,
+			autoTemplateId, plid, structureId, name, description, xsl,
+			formatXsl, langType, smallImage, smallImageURL, smallFile,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void addTemplateResources(java.lang.String companyId,
@@ -63,20 +52,9 @@ public class JournalTemplateLocalServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
-			journalTemplateLocalService.addTemplateResources(companyId,
-				templateId, addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		journalTemplateLocalService.addTemplateResources(companyId, templateId,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void addTemplateResources(
@@ -84,192 +62,89 @@ public class JournalTemplateLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
-			journalTemplateLocalService.addTemplateResources(template,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		journalTemplateLocalService.addTemplateResources(template,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void checkNewLine(java.lang.String companyId,
 		java.lang.String templateId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
-			journalTemplateLocalService.checkNewLine(companyId, templateId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		journalTemplateLocalService.checkNewLine(companyId, templateId);
 	}
 
 	public static void deleteTemplate(java.lang.String companyId,
 		java.lang.String templateId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
-			journalTemplateLocalService.deleteTemplate(companyId, templateId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		journalTemplateLocalService.deleteTemplate(companyId, templateId);
 	}
 
 	public static void deleteTemplate(
 		com.liferay.portlet.journal.model.JournalTemplate template)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
-			journalTemplateLocalService.deleteTemplate(template);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		journalTemplateLocalService.deleteTemplate(template);
 	}
 
 	public static java.util.List getStructureTemplates(
 		java.lang.String companyId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException {
-		try {
-			JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 
-			return journalTemplateLocalService.getStructureTemplates(companyId,
-				structureId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalTemplateLocalService.getStructureTemplates(companyId,
+			structureId);
 	}
 
 	public static java.util.List getStructureTemplates(
 		java.lang.String companyId, java.lang.String structureId, int begin,
 		int end) throws com.liferay.portal.SystemException {
-		try {
-			JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 
-			return journalTemplateLocalService.getStructureTemplates(companyId,
-				structureId, begin, end);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalTemplateLocalService.getStructureTemplates(companyId,
+			structureId, begin, end);
 	}
 
 	public static int getStructureTemplatesCount(java.lang.String companyId,
 		java.lang.String structureId) throws com.liferay.portal.SystemException {
-		try {
-			JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 
-			return journalTemplateLocalService.getStructureTemplatesCount(companyId,
-				structureId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalTemplateLocalService.getStructureTemplatesCount(companyId,
+			structureId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate getTemplate(
 		java.lang.String companyId, java.lang.String templateId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 
-			return journalTemplateLocalService.getTemplate(companyId, templateId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalTemplateLocalService.getTemplate(companyId, templateId);
 	}
 
 	public static java.util.List getTemplates(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		try {
-			JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 
-			return journalTemplateLocalService.getTemplates(groupId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalTemplateLocalService.getTemplates(groupId);
 	}
 
 	public static java.util.List getTemplates(java.lang.String groupId,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		try {
-			JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 
-			return journalTemplateLocalService.getTemplates(groupId, begin, end);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalTemplateLocalService.getTemplates(groupId, begin, end);
 	}
 
 	public static int getTemplatesCount(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		try {
-			JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 
-			return journalTemplateLocalService.getTemplatesCount(groupId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalTemplateLocalService.getTemplatesCount(groupId);
 	}
 
 	public static java.util.List search(java.lang.String companyId,
@@ -279,19 +154,11 @@ public class JournalTemplateLocalServiceUtil {
 		boolean andOperator, int begin, int end,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		try {
-			JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 
-			return journalTemplateLocalService.search(companyId, templateId,
-				groupId, structureId, structureIdComparator, name, description,
-				andOperator, begin, end, obc);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalTemplateLocalService.search(companyId, templateId,
+			groupId, structureId, structureIdComparator, name, description,
+			andOperator, begin, end, obc);
 	}
 
 	public static int searchCount(java.lang.String companyId,
@@ -299,19 +166,11 @@ public class JournalTemplateLocalServiceUtil {
 		java.lang.String structureId, java.lang.String structureIdComparator,
 		java.lang.String name, java.lang.String description, boolean andOperator)
 		throws com.liferay.portal.SystemException {
-		try {
-			JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 
-			return journalTemplateLocalService.searchCount(companyId,
-				templateId, groupId, structureId, structureIdComparator, name,
-				description, andOperator);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalTemplateLocalService.searchCount(companyId, templateId,
+			groupId, structureId, structureIdComparator, name, description,
+			andOperator);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate updateTemplate(
@@ -322,21 +181,10 @@ public class JournalTemplateLocalServiceUtil {
 		java.lang.String smallImageURL, java.io.File smallFile)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 
-			return journalTemplateLocalService.updateTemplate(companyId,
-				templateId, structureId, name, description, xsl, formatXsl,
-				langType, smallImage, smallImageURL, smallFile);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalTemplateLocalService.updateTemplate(companyId,
+			templateId, structureId, name, description, xsl, formatXsl,
+			langType, smallImage, smallImageURL, smallFile);
 	}
 }

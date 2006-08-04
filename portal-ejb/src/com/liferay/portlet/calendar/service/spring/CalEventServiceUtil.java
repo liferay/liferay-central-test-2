@@ -40,64 +40,31 @@ public class CalEventServiceUtil {
 		int firstReminder, int secondReminder, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			CalEventService calEventService = CalEventServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		CalEventService calEventService = CalEventServiceFactory.getService();
 
-			return calEventService.addEvent(plid, title, description,
-				startDateMonth, startDateDay, startDateYear, startDateHour,
-				startDateMinute, endDateMonth, endDateDay, endDateYear,
-				durationHour, durationMinute, allDay, timeZoneSensitive, type,
-				repeating, recurrence, remindBy, firstReminder, secondReminder,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return calEventService.addEvent(plid, title, description,
+			startDateMonth, startDateDay, startDateYear, startDateHour,
+			startDateMinute, endDateMonth, endDateDay, endDateYear,
+			durationHour, durationMinute, allDay, timeZoneSensitive, type,
+			repeating, recurrence, remindBy, firstReminder, secondReminder,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteEvent(java.lang.String eventId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			CalEventService calEventService = CalEventServiceFactory.getService();
-			calEventService.deleteEvent(eventId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		CalEventService calEventService = CalEventServiceFactory.getService();
+		calEventService.deleteEvent(eventId);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent getEvent(
 		java.lang.String eventId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			CalEventService calEventService = CalEventServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		CalEventService calEventService = CalEventServiceFactory.getService();
 
-			return calEventService.getEvent(eventId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return calEventService.getEvent(eventId);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent updateEvent(
@@ -110,24 +77,13 @@ public class CalEventServiceUtil {
 		com.liferay.util.cal.Recurrence recurrence, java.lang.String remindBy,
 		int firstReminder, int secondReminder)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			CalEventService calEventService = CalEventServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		CalEventService calEventService = CalEventServiceFactory.getService();
 
-			return calEventService.updateEvent(eventId, title, description,
-				startDateMonth, startDateDay, startDateYear, startDateHour,
-				startDateMinute, endDateMonth, endDateDay, endDateYear,
-				durationHour, durationMinute, allDay, timeZoneSensitive, type,
-				repeating, recurrence, remindBy, firstReminder, secondReminder);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return calEventService.updateEvent(eventId, title, description,
+			startDateMonth, startDateDay, startDateYear, startDateHour,
+			startDateMinute, endDateMonth, endDateDay, endDateYear,
+			durationHour, durationMinute, allDay, timeZoneSensitive, type,
+			repeating, recurrence, remindBy, firstReminder, secondReminder);
 	}
 }

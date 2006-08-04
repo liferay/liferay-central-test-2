@@ -36,62 +36,29 @@ public class PollsQuestionServiceUtil {
 		int expirationDateMinute, boolean neverExpire, java.util.List choices,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();
 
-			return pollsQuestionService.addQuestion(plid, title, description,
-				expirationDateMonth, expirationDateDay, expirationDateYear,
-				expirationDateHour, expirationDateMinute, neverExpire, choices,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return pollsQuestionService.addQuestion(plid, title, description,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire, choices,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteQuestion(java.lang.String questionId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();
-			pollsQuestionService.deleteQuestion(questionId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();
+		pollsQuestionService.deleteQuestion(questionId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion getQuestion(
 		java.lang.String questionId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();
 
-			return pollsQuestionService.getQuestion(questionId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return pollsQuestionService.getQuestion(questionId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
@@ -100,23 +67,12 @@ public class PollsQuestionServiceUtil {
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire, java.util.List choices)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();
 
-			return pollsQuestionService.updateQuestion(questionId, title,
-				description, expirationDateMonth, expirationDateDay,
-				expirationDateYear, expirationDateHour, expirationDateMinute,
-				neverExpire, choices);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return pollsQuestionService.updateQuestion(questionId, title,
+			description, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, choices);
 	}
 }

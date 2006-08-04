@@ -32,20 +32,9 @@ public class ShoppingItemServiceUtil {
 	public static void addBookItems(java.lang.String categoryId,
 		java.lang.String[] isbns)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
-			shoppingItemService.addBookItems(categoryId, isbns);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
+		shoppingItemService.addBookItems(categoryId, isbns);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem addItem(
@@ -61,64 +50,30 @@ public class ShoppingItemServiceUtil {
 		java.util.List itemFields, java.util.List itemPrices,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
 
-			return shoppingItemService.addItem(categoryId, sku, name,
-				description, properties, fieldsQuantities, requiresShipping,
-				stockQuantity, featured, sale, smallImage, smallImageURL,
-				smallFile, mediumImage, mediumImageURL, mediumFile, largeImage,
-				largeImageURL, largeFile, itemFields, itemPrices,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return shoppingItemService.addItem(categoryId, sku, name, description,
+			properties, fieldsQuantities, requiresShipping, stockQuantity,
+			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
+			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
+			itemFields, itemPrices, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteItem(java.lang.String itemId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
-			shoppingItemService.deleteItem(itemId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
+		shoppingItemService.deleteItem(itemId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem getItem(
 		java.lang.String itemId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
 
-			return shoppingItemService.getItem(itemId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return shoppingItemService.getItem(itemId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem updateItem(
@@ -134,25 +89,13 @@ public class ShoppingItemServiceUtil {
 		java.io.File largeFile, java.util.List itemFields,
 		java.util.List itemPrices)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
 
-			return shoppingItemService.updateItem(itemId, categoryId, sku,
-				name, description, properties, fieldsQuantities,
-				requiresShipping, stockQuantity, featured, sale, smallImage,
-				smallImageURL, smallFile, mediumImage, mediumImageURL,
-				mediumFile, largeImage, largeImageURL, largeFile, itemFields,
-				itemPrices);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return shoppingItemService.updateItem(itemId, categoryId, sku, name,
+			description, properties, fieldsQuantities, requiresShipping,
+			stockQuantity, featured, sale, smallImage, smallImageURL,
+			smallFile, mediumImage, mediumImageURL, mediumFile, largeImage,
+			largeImageURL, largeFile, itemFields, itemPrices);
 	}
 }

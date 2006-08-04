@@ -36,6 +36,8 @@ import com.liferay.portal.service.spring.PhoneLocalService;
 import com.liferay.util.Validator;
 import com.liferay.util.format.PhoneNumberUtil;
 
+import java.rmi.RemoteException;
+
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -149,7 +151,12 @@ public class PhoneLocalServiceImpl implements PhoneLocalService {
 			classPK = phone.getClassPK();
 		}
 
-		ListTypeServiceUtil.validate(typeId, className + ListType.PHONE);
+		try {
+			ListTypeServiceUtil.validate(typeId, className + ListType.PHONE);
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
+		}
 
 		validate(phoneId, companyId, className, classPK, primary);
 	}

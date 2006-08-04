@@ -34,80 +34,36 @@ public class WikiNodeServiceUtil {
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
 
-			return wikiNodeService.addNode(plid, name, description,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return wikiNodeService.addNode(plid, name, description,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteNode(java.lang.String nodeId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
-			wikiNodeService.deleteNode(nodeId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
+		wikiNodeService.deleteNode(nodeId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode getNode(
 		java.lang.String nodeId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
 
-			return wikiNodeService.getNode(nodeId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return wikiNodeService.getNode(nodeId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode updateNode(
 		java.lang.String nodeId, java.lang.String name,
 		java.lang.String description)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
 
-			return wikiNodeService.updateNode(nodeId, name, description);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return wikiNodeService.updateNode(nodeId, name, description);
 	}
 }

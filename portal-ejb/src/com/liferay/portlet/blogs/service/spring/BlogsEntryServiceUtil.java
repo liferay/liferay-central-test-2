@@ -36,62 +36,28 @@ public class BlogsEntryServiceUtil {
 		int displayDateMinute, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
 
-			return blogsEntryService.addEntry(plid, categoryId, title, content,
-				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, addCommunityPermissions,
-				addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return blogsEntryService.addEntry(plid, categoryId, title, content,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteEntry(java.lang.String entryId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
-			blogsEntryService.deleteEntry(entryId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
+		blogsEntryService.deleteEntry(entryId);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
 		java.lang.String entryId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
 
-			return blogsEntryService.getEntry(entryId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return blogsEntryService.getEntry(entryId);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
@@ -100,22 +66,11 @@ public class BlogsEntryServiceUtil {
 		int displayDateDay, int displayDateYear, int displayDateHour,
 		int displayDateMinute)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
 
-			return blogsEntryService.updateEntry(entryId, categoryId, title,
-				content, displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return blogsEntryService.updateEntry(entryId, categoryId, title,
+			content, displayDateMonth, displayDateDay, displayDateYear,
+			displayDateHour, displayDateMinute);
 	}
 }

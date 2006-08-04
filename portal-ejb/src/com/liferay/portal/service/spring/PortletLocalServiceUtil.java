@@ -30,128 +30,68 @@ package com.liferay.portal.service.spring;
  */
 public class PortletLocalServiceUtil {
 	public static com.liferay.portal.model.PortletCategory getEARDisplay(
-		java.lang.String xml) throws com.liferay.portal.SystemException {
-		try {
-			PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+		java.lang.String xml)
+		throws org.dom4j.DocumentException, java.io.IOException {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
-			return portletLocalService.getEARDisplay(xml);
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return portletLocalService.getEARDisplay(xml);
 	}
 
 	public static com.liferay.portal.model.PortletCategory getWARDisplay(
 		java.lang.String servletContextName, java.lang.String xml)
-		throws com.liferay.portal.SystemException {
-		try {
-			PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+		throws org.dom4j.DocumentException, java.io.IOException {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
-			return portletLocalService.getWARDisplay(servletContextName, xml);
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return portletLocalService.getWARDisplay(servletContextName, xml);
 	}
 
-	public static java.util.Map getFriendlyURLPlugins()
-		throws com.liferay.portal.SystemException {
-		try {
-			PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+	public static java.util.Map getFriendlyURLPlugins() {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
-			return portletLocalService.getFriendlyURLPlugins();
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return portletLocalService.getFriendlyURLPlugins();
 	}
 
 	public static com.liferay.portal.model.Portlet getPortletById(
 		java.lang.String companyId, java.lang.String portletId)
 		throws com.liferay.portal.SystemException {
-		try {
-			PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
-			return portletLocalService.getPortletById(companyId, portletId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return portletLocalService.getPortletById(companyId, portletId);
 	}
 
 	public static com.liferay.portal.model.Portlet getPortletByStrutsPath(
 		java.lang.String companyId, java.lang.String strutsPath)
 		throws com.liferay.portal.SystemException {
-		try {
-			PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
-			return portletLocalService.getPortletByStrutsPath(companyId,
-				strutsPath);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return portletLocalService.getPortletByStrutsPath(companyId, strutsPath);
 	}
 
 	public static java.util.List getPortlets(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
-		try {
-			PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
-			return portletLocalService.getPortlets(companyId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return portletLocalService.getPortlets(companyId);
 	}
 
 	public static java.util.List getPortlets(java.lang.String companyId,
 		boolean showSystem, boolean showPortal)
 		throws com.liferay.portal.SystemException {
-		try {
-			PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
-			return portletLocalService.getPortlets(companyId, showSystem,
-				showPortal);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return portletLocalService.getPortlets(companyId, showSystem, showPortal);
 	}
 
-	public static void initEAR(java.lang.String[] xmls)
-		throws com.liferay.portal.SystemException {
-		try {
-			PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
-			portletLocalService.initEAR(xmls);
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+	public static void initEAR(java.lang.String[] xmls) {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+		portletLocalService.initEAR(xmls);
 	}
 
 	public static java.util.List initWAR(java.lang.String servletContextName,
-		java.lang.String[] xmls) throws com.liferay.portal.SystemException {
-		try {
-			PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+		java.lang.String[] xmls) {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
-			return portletLocalService.initWAR(servletContextName, xmls);
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return portletLocalService.initWAR(servletContextName, xmls);
 	}
 
 	public static com.liferay.portal.model.Portlet updatePortlet(
@@ -159,20 +99,9 @@ public class PortletLocalServiceUtil {
 		java.lang.String roles, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
-			return portletLocalService.updatePortlet(companyId, portletId,
-				roles, active);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return portletLocalService.updatePortlet(companyId, portletId, roles,
+			active);
 	}
 }

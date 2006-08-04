@@ -34,101 +34,46 @@ public class BookmarksEntryServiceUtil {
 		java.lang.String comments, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
 
-			return bookmarksEntryService.addEntry(folderId, name, url,
-				comments, addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return bookmarksEntryService.addEntry(folderId, name, url, comments,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteEntry(java.lang.String entryId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
-			bookmarksEntryService.deleteEntry(entryId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
+		bookmarksEntryService.deleteEntry(entryId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry getEntry(
 		java.lang.String entryId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
 
-			return bookmarksEntryService.getEntry(entryId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return bookmarksEntryService.getEntry(entryId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry openEntry(
 		java.lang.String entryId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
 
-			return bookmarksEntryService.openEntry(entryId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return bookmarksEntryService.openEntry(entryId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
 		java.lang.String entryId, java.lang.String folderId,
 		java.lang.String name, java.lang.String url, java.lang.String comments)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
 
-			return bookmarksEntryService.updateEntry(entryId, folderId, name,
-				url, comments);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return bookmarksEntryService.updateEntry(entryId, folderId, name, url,
+			comments);
 	}
 }

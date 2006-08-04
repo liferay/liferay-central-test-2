@@ -32,106 +32,49 @@ public class CompanyLocalServiceUtil {
 	public static void checkCompany(java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-			companyLocalService.checkCompany(companyId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+		companyLocalService.checkCompany(companyId);
 	}
 
 	public static void checkCompanyKey(java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-			companyLocalService.checkCompanyKey(companyId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+		companyLocalService.checkCompanyKey(companyId);
 	}
 
 	public static java.util.List getCompanies()
 		throws com.liferay.portal.SystemException {
-		try {
-			CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
 
-			return companyLocalService.getCompanies();
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return companyLocalService.getCompanies();
 	}
 
 	public static com.liferay.portal.model.Company getCompany(
 		java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
 
-			return companyLocalService.getCompany(companyId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return companyLocalService.getCompany(companyId);
 	}
 
 	public static com.liferay.util.lucene.Hits search(
 		java.lang.String companyId, java.lang.String keywords)
 		throws com.liferay.portal.SystemException {
-		try {
-			CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
 
-			return companyLocalService.search(companyId, keywords);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return companyLocalService.search(companyId, keywords);
 	}
 
 	public static com.liferay.util.lucene.Hits search(
 		java.lang.String companyId, java.lang.String portletId,
 		java.lang.String groupId, java.lang.String keywords)
 		throws com.liferay.portal.SystemException {
-		try {
-			CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
 
-			return companyLocalService.search(companyId, portletId, groupId,
-				keywords);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return companyLocalService.search(companyId, portletId, groupId,
+			keywords);
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(
@@ -143,22 +86,11 @@ public class CompanyLocalServiceUtil {
 		java.lang.String type, java.lang.String size)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
 
-			return companyLocalService.updateCompany(companyId, portalURL,
-				homeURL, mx, name, legalName, legalId, legalType, sicCode,
-				tickerSymbol, industry, type, size);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return companyLocalService.updateCompany(companyId, portalURL, homeURL,
+			mx, name, legalName, legalId, legalType, sicCode, tickerSymbol,
+			industry, type, size);
 	}
 
 	public static void updateDisplay(java.lang.String companyId,
@@ -166,57 +98,24 @@ public class CompanyLocalServiceUtil {
 		java.lang.String resolution)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-			companyLocalService.updateDisplay(companyId, languageId,
-				timeZoneId, resolution);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+		companyLocalService.updateDisplay(companyId, languageId, timeZoneId,
+			resolution);
 	}
 
 	public static void updateLogo(java.lang.String companyId, java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-			companyLocalService.updateLogo(companyId, file);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+		companyLocalService.updateLogo(companyId, file);
 	}
 
 	public static void updateSecurity(java.lang.String companyId,
 		java.lang.String authType, boolean autoLogin, boolean strangers)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-			companyLocalService.updateSecurity(companyId, authType, autoLogin,
-				strangers);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+		companyLocalService.updateSecurity(companyId, authType, autoLogin,
+			strangers);
 	}
 }

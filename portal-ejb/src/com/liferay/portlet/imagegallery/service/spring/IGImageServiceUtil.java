@@ -34,61 +34,28 @@ public class IGImageServiceUtil {
 		java.io.File file, java.lang.String contentType,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			IGImageService igImageService = IGImageServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		IGImageService igImageService = IGImageServiceFactory.getService();
 
-			return igImageService.addImage(folderId, description, file,
-				contentType, addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return igImageService.addImage(folderId, description, file,
+			contentType, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteImage(java.lang.String companyId,
 		java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			IGImageService igImageService = IGImageServiceFactory.getService();
-			igImageService.deleteImage(companyId, imageId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		IGImageService igImageService = IGImageServiceFactory.getService();
+		igImageService.deleteImage(companyId, imageId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImage(
 		java.lang.String companyId, java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			IGImageService igImageService = IGImageServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		IGImageService igImageService = IGImageServiceFactory.getService();
 
-			return igImageService.getImage(companyId, imageId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return igImageService.getImage(companyId, imageId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
@@ -96,21 +63,10 @@ public class IGImageServiceUtil {
 		java.lang.String description, java.io.File file,
 		java.lang.String contentType)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			IGImageService igImageService = IGImageServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		IGImageService igImageService = IGImageServiceFactory.getService();
 
-			return igImageService.updateImage(imageId, folderId, description,
-				file, contentType);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return igImageService.updateImage(imageId, folderId, description, file,
+			contentType);
 	}
 }

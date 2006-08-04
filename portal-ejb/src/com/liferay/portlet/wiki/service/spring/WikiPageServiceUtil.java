@@ -32,120 +32,54 @@ public class WikiPageServiceUtil {
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(
 		java.lang.String nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			WikiPageService wikiPageService = WikiPageServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
-			return wikiPageService.addPage(nodeId, title);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return wikiPageService.addPage(nodeId, title);
 	}
 
 	public static void deletePage(java.lang.String nodeId,
 		java.lang.String title)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			WikiPageService wikiPageService = WikiPageServiceFactory.getService();
-			wikiPageService.deletePage(nodeId, title);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
+		wikiPageService.deletePage(nodeId, title);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(
 		java.lang.String nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			WikiPageService wikiPageService = WikiPageServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
-			return wikiPageService.getPage(nodeId, title);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return wikiPageService.getPage(nodeId, title);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(
 		java.lang.String nodeId, java.lang.String title, double version)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			WikiPageService wikiPageService = WikiPageServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
-			return wikiPageService.getPage(nodeId, title, version);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return wikiPageService.getPage(nodeId, title, version);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage revertPage(
 		java.lang.String nodeId, java.lang.String title, double version)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			WikiPageService wikiPageService = WikiPageServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
-			return wikiPageService.revertPage(nodeId, title, version);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return wikiPageService.revertPage(nodeId, title, version);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
 		java.lang.String nodeId, java.lang.String title,
 		java.lang.String content, java.lang.String format)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			WikiPageService wikiPageService = WikiPageServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
-			return wikiPageService.updatePage(nodeId, title, content, format);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return wikiPageService.updatePage(nodeId, title, content, format);
 	}
 }

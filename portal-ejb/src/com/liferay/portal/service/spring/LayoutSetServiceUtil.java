@@ -33,21 +33,10 @@ public class LayoutSetServiceUtil {
 		java.lang.String ownerId, java.lang.String themeId,
 		java.lang.String colorSchemeId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			LayoutSetService layoutSetService = LayoutSetServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutSetService layoutSetService = LayoutSetServiceFactory.getService();
 
-			return layoutSetService.updateLookAndFeel(ownerId, themeId,
-				colorSchemeId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return layoutSetService.updateLookAndFeel(ownerId, themeId,
+			colorSchemeId);
 	}
 }

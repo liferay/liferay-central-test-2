@@ -51,6 +51,8 @@ import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.service.spring.WebsiteLocalServiceUtil;
 import com.liferay.util.Validator;
 
+import java.rmi.RemoteException;
+
 import java.util.List;
 import java.util.Map;
 
@@ -379,9 +381,15 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 			}
 		}
 
-		Country country = CountryServiceUtil.getCountry(countryId);
+		try {
+			Country country = CountryServiceUtil.getCountry(countryId);
 
-		ListTypeServiceUtil.validate(statusId, ListType.ORGANIZATION_STATUS);
+			ListTypeServiceUtil.validate(
+				statusId, ListType.ORGANIZATION_STATUS);
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
+		}
 	}
 
 }

@@ -31,16 +31,8 @@ package com.liferay.portlet.polls.service.spring;
 public class PollsChoiceLocalServiceUtil {
 	public static java.util.List getChoices(java.lang.String questionId)
 		throws com.liferay.portal.SystemException {
-		try {
-			PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
 
-			return pollsChoiceLocalService.getChoices(questionId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return pollsChoiceLocalService.getChoices(questionId);
 	}
 }

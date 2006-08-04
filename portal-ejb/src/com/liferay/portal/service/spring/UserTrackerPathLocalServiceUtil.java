@@ -32,17 +32,9 @@ public class UserTrackerPathLocalServiceUtil {
 	public static java.util.List getUserTrackerPaths(
 		java.lang.String userTrackerId, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		try {
-			UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
 
-			return userTrackerPathLocalService.getUserTrackerPaths(userTrackerId,
-				begin, end);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return userTrackerPathLocalService.getUserTrackerPaths(userTrackerId,
+			begin, end);
 	}
 }

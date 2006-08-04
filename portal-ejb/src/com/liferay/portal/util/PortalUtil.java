@@ -72,6 +72,8 @@ import com.liferay.util.servlet.UploadServletRequest;
 
 import java.io.IOException;
 
+import java.rmi.RemoteException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -666,7 +668,7 @@ public class PortalUtil {
 	}
 
 	public static User getSelectedUser(HttpServletRequest req)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		String emailAddress = ParamUtil.getString(req, "p_u_e_a");
 
@@ -683,7 +685,7 @@ public class PortalUtil {
 	}
 
 	public static User getSelectedUser(ActionRequest req)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
 
@@ -691,7 +693,7 @@ public class PortalUtil {
 	}
 
 	public static User getSelectedUser(RenderRequest req)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
 
@@ -965,7 +967,7 @@ public class PortalUtil {
 
 	public static PortletMode updatePortletMode(
 			String portletId, User user, Layout layout, PortletMode portletMode)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		LayoutTypePortlet layoutType =
 			(LayoutTypePortlet)layout.getLayoutType();
@@ -1081,7 +1083,7 @@ public class PortalUtil {
 	public static WindowState updateWindowState(
 			String portletId, User user, Layout layout, WindowState windowState,
 			HttpServletRequest req)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		LayoutTypePortlet layoutType =
 			(LayoutTypePortlet)layout.getLayoutType();

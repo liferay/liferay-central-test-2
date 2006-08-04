@@ -34,162 +34,73 @@ public class DLFileEntryServiceUtil {
 		java.lang.String title, java.lang.String description, byte[] byteArray,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
-			return dlFileEntryService.addFileEntry(folderId, name, title,
-				description, byteArray, addCommunityPermissions,
-				addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFileEntryService.addFileEntry(folderId, name, title,
+			description, byteArray, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteFileEntry(java.lang.String folderId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
-			dlFileEntryService.deleteFileEntry(folderId, name);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+		dlFileEntryService.deleteFileEntry(folderId, name);
 	}
 
 	public static void deleteFileEntry(java.lang.String folderId,
 		java.lang.String name, double version)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
-			dlFileEntryService.deleteFileEntry(folderId, name, version);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+		dlFileEntryService.deleteFileEntry(folderId, name, version);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
 		java.lang.String folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
-			return dlFileEntryService.getFileEntry(folderId, name);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFileEntryService.getFileEntry(folderId, name);
 	}
 
 	public static void lockFileEntry(java.lang.String folderId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
-			dlFileEntryService.lockFileEntry(folderId, name);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+		dlFileEntryService.lockFileEntry(folderId, name);
 	}
 
 	public static void unlockFileEntry(java.lang.String folderId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
-			dlFileEntryService.unlockFileEntry(folderId, name);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+		dlFileEntryService.unlockFileEntry(folderId, name);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		java.lang.String folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
-			return dlFileEntryService.updateFileEntry(folderId, name, title,
-				description);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFileEntryService.updateFileEntry(folderId, name, title,
+			description);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		java.lang.String folderId, java.lang.String name,
 		java.lang.String sourceFileName, byte[] byteArray)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
-			return dlFileEntryService.updateFileEntry(folderId, name,
-				sourceFileName, byteArray);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFileEntryService.updateFileEntry(folderId, name,
+			sourceFileName, byteArray);
 	}
 }

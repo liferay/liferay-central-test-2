@@ -35,83 +35,39 @@ public class JournalStructureServiceUtil {
 		java.lang.String description, java.lang.String xsd,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
 
-			return journalStructureService.addStructure(structureId,
-				autoStructureId, plid, name, description, xsd,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalStructureService.addStructure(structureId,
+			autoStructureId, plid, name, description, xsd,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteStructure(java.lang.String companyId,
 		java.lang.String structureId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
-			journalStructureService.deleteStructure(companyId, structureId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
+		journalStructureService.deleteStructure(companyId, structureId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure getStructure(
 		java.lang.String companyId, java.lang.String structureId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
 
-			return journalStructureService.getStructure(companyId, structureId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalStructureService.getStructure(companyId, structureId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure updateStructure(
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
 
-			return journalStructureService.updateStructure(structureId, name,
-				description, xsd);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return journalStructureService.updateStructure(structureId, name,
+			description, xsd);
 	}
 }

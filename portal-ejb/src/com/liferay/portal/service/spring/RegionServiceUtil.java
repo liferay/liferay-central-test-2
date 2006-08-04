@@ -30,82 +30,40 @@ package com.liferay.portal.service.spring;
  */
 public class RegionServiceUtil {
 	public static java.util.List getRegions()
-		throws com.liferay.portal.SystemException {
-		try {
-			RegionService regionService = RegionServiceFactory.getService();
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		RegionService regionService = RegionServiceFactory.getService();
 
-			return regionService.getRegions();
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return regionService.getRegions();
 	}
 
 	public static java.util.List getRegions(java.lang.String countryId)
-		throws com.liferay.portal.SystemException {
-		try {
-			RegionService regionService = RegionServiceFactory.getService();
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		RegionService regionService = RegionServiceFactory.getService();
 
-			return regionService.getRegions(countryId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return regionService.getRegions(countryId);
 	}
 
 	public static java.util.List getRegions(boolean active)
-		throws com.liferay.portal.SystemException {
-		try {
-			RegionService regionService = RegionServiceFactory.getService();
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		RegionService regionService = RegionServiceFactory.getService();
 
-			return regionService.getRegions(active);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return regionService.getRegions(active);
 	}
 
 	public static java.util.List getRegions(java.lang.String countryId,
-		boolean active) throws com.liferay.portal.SystemException {
-		try {
-			RegionService regionService = RegionServiceFactory.getService();
+		boolean active)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		RegionService regionService = RegionServiceFactory.getService();
 
-			return regionService.getRegions(countryId, active);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return regionService.getRegions(countryId, active);
 	}
 
 	public static com.liferay.portal.model.Region getRegion(
 		java.lang.String regionId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			RegionService regionService = RegionServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		RegionService regionService = RegionServiceFactory.getService();
 
-			return regionService.getRegion(regionId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return regionService.getRegion(regionId);
 	}
 }

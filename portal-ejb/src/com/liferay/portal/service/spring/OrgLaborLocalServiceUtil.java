@@ -36,76 +36,34 @@ public class OrgLaborLocalServiceUtil {
 		int friClose, int satOpen, int satClose)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
 
-			return orgLaborLocalService.addOrgLabor(organizationId, typeId,
-				sunOpen, sunClose, monOpen, monClose, tueOpen, tueClose,
-				wedOpen, wedClose, thuOpen, thuClose, friOpen, friClose,
-				satOpen, satClose);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return orgLaborLocalService.addOrgLabor(organizationId, typeId,
+			sunOpen, sunClose, monOpen, monClose, tueOpen, tueClose, wedOpen,
+			wedClose, thuOpen, thuClose, friOpen, friClose, satOpen, satClose);
 	}
 
 	public static void deleteOrgLabor(java.lang.String orgLaborId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
-			orgLaborLocalService.deleteOrgLabor(orgLaborId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+		orgLaborLocalService.deleteOrgLabor(orgLaborId);
 	}
 
 	public static com.liferay.portal.model.OrgLabor getOrgLabor(
 		java.lang.String orgLaborId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
 
-			return orgLaborLocalService.getOrgLabor(orgLaborId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return orgLaborLocalService.getOrgLabor(orgLaborId);
 	}
 
 	public static java.util.List getOrgLabors(java.lang.String organizationId)
 		throws com.liferay.portal.SystemException {
-		try {
-			OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
 
-			return orgLaborLocalService.getOrgLabors(organizationId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return orgLaborLocalService.getOrgLabors(organizationId);
 	}
 
 	public static com.liferay.portal.model.OrgLabor updateOrgLabor(
@@ -115,22 +73,10 @@ public class OrgLaborLocalServiceUtil {
 		int satClose)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
 
-			return orgLaborLocalService.updateOrgLabor(orgLaborId, sunOpen,
-				sunClose, monOpen, monClose, tueOpen, tueClose, wedOpen,
-				wedClose, thuOpen, thuClose, friOpen, friClose, satOpen,
-				satClose);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return orgLaborLocalService.updateOrgLabor(orgLaborId, sunOpen,
+			sunClose, monOpen, monClose, tueOpen, tueClose, wedOpen, wedClose,
+			thuOpen, thuClose, friOpen, friClose, satOpen, satClose);
 	}
 }

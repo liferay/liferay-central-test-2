@@ -37,44 +37,21 @@ public class PollsQuestionLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 
-			return pollsQuestionLocalService.addQuestion(userId, plid, title,
-				description, expirationDateMonth, expirationDateDay,
-				expirationDateYear, expirationDateHour, expirationDateMinute,
-				neverExpire, choices, addCommunityPermissions,
-				addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return pollsQuestionLocalService.addQuestion(userId, plid, title,
+			description, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, choices, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void addQuestionResources(java.lang.String questionId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-			pollsQuestionLocalService.addQuestionResources(questionId,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		pollsQuestionLocalService.addQuestionResources(questionId,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void addQuestionResources(
@@ -82,158 +59,68 @@ public class PollsQuestionLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-			pollsQuestionLocalService.addQuestionResources(question,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		pollsQuestionLocalService.addQuestionResources(question,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void checkQuestions()
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-			pollsQuestionLocalService.checkQuestions();
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		pollsQuestionLocalService.checkQuestions();
 	}
 
 	public static void deleteQuestion(java.lang.String questionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-			pollsQuestionLocalService.deleteQuestion(questionId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		pollsQuestionLocalService.deleteQuestion(questionId);
 	}
 
 	public static void deleteQuestion(
 		com.liferay.portlet.polls.model.PollsQuestion question)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-			pollsQuestionLocalService.deleteQuestion(question);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		pollsQuestionLocalService.deleteQuestion(question);
 	}
 
 	public static void deleteQuestions(java.lang.String groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-			pollsQuestionLocalService.deleteQuestions(groupId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		pollsQuestionLocalService.deleteQuestions(groupId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion getQuestion(
 		java.lang.String questionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 
-			return pollsQuestionLocalService.getQuestion(questionId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return pollsQuestionLocalService.getQuestion(questionId);
 	}
 
 	public static java.util.List getQuestions(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		try {
-			PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 
-			return pollsQuestionLocalService.getQuestions(groupId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return pollsQuestionLocalService.getQuestions(groupId);
 	}
 
 	public static java.util.List getQuestions(java.lang.String groupId,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		try {
-			PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 
-			return pollsQuestionLocalService.getQuestions(groupId, begin, end);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return pollsQuestionLocalService.getQuestions(groupId, begin, end);
 	}
 
 	public static int getQuestionsCount(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		try {
-			PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 
-			return pollsQuestionLocalService.getQuestionsCount(groupId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return pollsQuestionLocalService.getQuestionsCount(groupId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
@@ -244,22 +131,11 @@ public class PollsQuestionLocalServiceUtil {
 		java.util.List choices)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 
-			return pollsQuestionLocalService.updateQuestion(userId, questionId,
-				title, description, expirationDateMonth, expirationDateDay,
-				expirationDateYear, expirationDateHour, expirationDateMinute,
-				neverExpire, choices);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return pollsQuestionLocalService.updateQuestion(userId, questionId,
+			title, description, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, choices);
 	}
 }

@@ -33,21 +33,9 @@ public class PortletServiceUtil {
 		java.lang.String companyId, java.lang.String portletId,
 		java.lang.String roles, boolean active)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			PortletService portletService = PortletServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PortletService portletService = PortletServiceFactory.getService();
 
-			return portletService.updatePortlet(companyId, portletId, roles,
-				active);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return portletService.updatePortlet(companyId, portletId, roles, active);
 	}
 }

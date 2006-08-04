@@ -31,16 +31,8 @@ package com.liferay.portlet.shopping.service.spring;
 public class ShoppingOrderItemLocalServiceUtil {
 	public static java.util.List getOrderItems(java.lang.String orderId)
 		throws com.liferay.portal.SystemException {
-		try {
-			ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
 
-			return shoppingOrderItemLocalService.getOrderItems(orderId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return shoppingOrderItemLocalService.getOrderItems(orderId);
 	}
 }

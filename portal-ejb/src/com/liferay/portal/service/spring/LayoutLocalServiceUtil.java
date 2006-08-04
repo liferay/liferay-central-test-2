@@ -36,222 +36,99 @@ public class LayoutLocalServiceUtil {
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
-			return layoutLocalService.addLayout(groupId, userId, privateLayout,
-				parentLayoutId, name, type, hidden, friendlyURL);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return layoutLocalService.addLayout(groupId, userId, privateLayout,
+			parentLayoutId, name, type, hidden, friendlyURL);
 	}
 
 	public static void deleteLayout(java.lang.String layoutId,
 		java.lang.String ownerId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-			layoutLocalService.deleteLayout(layoutId, ownerId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		layoutLocalService.deleteLayout(layoutId, ownerId);
 	}
 
 	public static void deleteLayout(com.liferay.portal.model.Layout layout,
 		boolean updateLayoutSet)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-			layoutLocalService.deleteLayout(layout, updateLayoutSet);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		layoutLocalService.deleteLayout(layout, updateLayoutSet);
 	}
 
 	public static void deleteLayouts(java.lang.String ownerId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-			layoutLocalService.deleteLayouts(ownerId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		layoutLocalService.deleteLayouts(ownerId);
 	}
 
 	public static byte[] exportLayouts(java.lang.String ownerId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
-			return layoutLocalService.exportLayouts(ownerId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return layoutLocalService.exportLayouts(ownerId);
 	}
 
 	public static com.liferay.portal.model.Layout getFriendlyURLLayout(
 		java.lang.String ownerId, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
-			return layoutLocalService.getFriendlyURLLayout(ownerId, friendlyURL);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return layoutLocalService.getFriendlyURLLayout(ownerId, friendlyURL);
 	}
 
 	public static com.liferay.portal.model.Layout getLayout(
 		java.lang.String layoutId, java.lang.String ownerId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
-			return layoutLocalService.getLayout(layoutId, ownerId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return layoutLocalService.getLayout(layoutId, ownerId);
 	}
 
 	public static java.util.List getLayouts(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException {
-		try {
-			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
-			return layoutLocalService.getLayouts(ownerId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return layoutLocalService.getLayouts(ownerId);
 	}
 
 	public static java.util.List getLayouts(java.lang.String ownerId,
 		java.lang.String parentLayoutId)
 		throws com.liferay.portal.SystemException {
-		try {
-			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
-			return layoutLocalService.getLayouts(ownerId, parentLayoutId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return layoutLocalService.getLayouts(ownerId, parentLayoutId);
 	}
 
 	public static java.util.List getLayouts(java.lang.String companyId,
 		java.lang.String portletId, java.lang.String prefsKey,
 		java.lang.String prefsValue) throws com.liferay.portal.SystemException {
-		try {
-			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
-			return layoutLocalService.getLayouts(companyId, portletId,
-				prefsKey, prefsValue);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return layoutLocalService.getLayouts(companyId, portletId, prefsKey,
+			prefsValue);
 	}
 
 	public static void importLayouts(java.lang.String userId,
 		java.lang.String ownerId, java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-			layoutLocalService.importLayouts(userId, ownerId, file);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		layoutLocalService.importLayouts(userId, ownerId, file);
 	}
 
 	public static void setLayouts(java.lang.String ownerId,
 		java.lang.String parentLayoutId, java.lang.String[] layoutIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-			layoutLocalService.setLayouts(ownerId, parentLayoutId, layoutIds);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		layoutLocalService.setLayouts(ownerId, parentLayoutId, layoutIds);
 	}
 
 	public static com.liferay.portal.model.Layout updateLayout(
@@ -261,21 +138,10 @@ public class LayoutLocalServiceUtil {
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
-			return layoutLocalService.updateLayout(layoutId, ownerId,
-				parentLayoutId, name, languageId, type, hidden, friendlyURL);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return layoutLocalService.updateLayout(layoutId, ownerId,
+			parentLayoutId, name, languageId, type, hidden, friendlyURL);
 	}
 
 	public static com.liferay.portal.model.Layout updateLayout(
@@ -283,21 +149,9 @@ public class LayoutLocalServiceUtil {
 		java.lang.String typeSettings)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
-			return layoutLocalService.updateLayout(layoutId, ownerId,
-				typeSettings);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return layoutLocalService.updateLayout(layoutId, ownerId, typeSettings);
 	}
 
 	public static com.liferay.portal.model.Layout updateLookAndFeel(
@@ -305,20 +159,9 @@ public class LayoutLocalServiceUtil {
 		java.lang.String themeId, java.lang.String colorSchemeId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
-			return layoutLocalService.updateLookAndFeel(layoutId, ownerId,
-				themeId, colorSchemeId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return layoutLocalService.updateLookAndFeel(layoutId, ownerId, themeId,
+			colorSchemeId);
 	}
 }

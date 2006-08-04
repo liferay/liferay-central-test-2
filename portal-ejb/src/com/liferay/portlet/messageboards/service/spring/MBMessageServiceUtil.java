@@ -35,22 +35,11 @@ public class MBMessageServiceUtil {
 		java.lang.String parentMessageId, java.lang.String subject,
 		java.lang.String body)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
-			return mbMessageService.addDiscussionMessage(groupId, className,
-				classPK, threadId, parentMessageId, subject, body);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbMessageService.addDiscussionMessage(groupId, className,
+			classPK, threadId, parentMessageId, subject, body);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
@@ -58,22 +47,11 @@ public class MBMessageServiceUtil {
 		java.lang.String body, java.util.List files, boolean anonymous,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
-			return mbMessageService.addMessage(categoryId, subject, body,
-				files, anonymous, addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbMessageService.addMessage(categoryId, subject, body, files,
+			anonymous, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
@@ -82,23 +60,11 @@ public class MBMessageServiceUtil {
 		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
-			return mbMessageService.addMessage(categoryId, subject, body,
-				files, anonymous, prefs, addCommunityPermissions,
-				addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbMessageService.addMessage(categoryId, subject, body, files,
+			anonymous, prefs, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
@@ -107,23 +73,12 @@ public class MBMessageServiceUtil {
 		java.lang.String body, java.util.List files, boolean anonymous,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
-			return mbMessageService.addMessage(categoryId, threadId,
-				parentMessageId, subject, body, files, anonymous,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbMessageService.addMessage(categoryId, threadId,
+			parentMessageId, subject, body, files, anonymous,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
@@ -133,118 +88,52 @@ public class MBMessageServiceUtil {
 		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
-			return mbMessageService.addMessage(categoryId, threadId,
-				parentMessageId, subject, body, files, anonymous, prefs,
-				addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbMessageService.addMessage(categoryId, threadId,
+			parentMessageId, subject, body, files, anonymous, prefs,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteDiscussionMessage(java.lang.String groupId,
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			MBMessageService mbMessageService = MBMessageServiceFactory.getService();
-			mbMessageService.deleteDiscussionMessage(groupId, className,
-				classPK, messageId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+		mbMessageService.deleteDiscussionMessage(groupId, className, classPK,
+			messageId);
 	}
 
 	public static void deleteMessage(java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			MBMessageService mbMessageService = MBMessageServiceFactory.getService();
-			mbMessageService.deleteMessage(messageId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+		mbMessageService.deleteMessage(messageId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage getMessage(
 		java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
-			return mbMessageService.getMessage(messageId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbMessageService.getMessage(messageId);
 	}
 
 	public static void subscribeMessage(java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			MBMessageService mbMessageService = MBMessageServiceFactory.getService();
-			mbMessageService.subscribeMessage(messageId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+		mbMessageService.subscribeMessage(messageId);
 	}
 
 	public static void unsubscribeMessage(java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			MBMessageService mbMessageService = MBMessageServiceFactory.getService();
-			mbMessageService.unsubscribeMessage(messageId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+		mbMessageService.unsubscribeMessage(messageId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
@@ -252,44 +141,22 @@ public class MBMessageServiceUtil {
 		java.lang.String classPK, java.lang.String messageId,
 		java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
-			return mbMessageService.updateDiscussionMessage(groupId, className,
-				classPK, messageId, subject, body);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbMessageService.updateDiscussionMessage(groupId, className,
+			classPK, messageId, subject, body);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		java.lang.String messageId, java.lang.String categoryId,
 		java.lang.String subject, java.lang.String body, java.util.List files)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
-			return mbMessageService.updateMessage(messageId, categoryId,
-				subject, body, files);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbMessageService.updateMessage(messageId, categoryId, subject,
+			body, files);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
@@ -297,21 +164,10 @@ public class MBMessageServiceUtil {
 		java.lang.String subject, java.lang.String body, java.util.List files,
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
-			return mbMessageService.updateMessage(messageId, categoryId,
-				subject, body, files, prefs);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbMessageService.updateMessage(messageId, categoryId, subject,
+			body, files, prefs);
 	}
 }

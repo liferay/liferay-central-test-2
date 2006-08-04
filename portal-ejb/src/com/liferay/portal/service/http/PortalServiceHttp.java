@@ -48,13 +48,17 @@ public class PortalServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				throw e;
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
 			}
 		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
 			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
+			throw se;
 		}
 	}
 

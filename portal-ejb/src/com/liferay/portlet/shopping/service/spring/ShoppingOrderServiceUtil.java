@@ -32,40 +32,18 @@ public class ShoppingOrderServiceUtil {
 	public static void deleteOrder(java.lang.String plid,
 		java.lang.String orderId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
-			shoppingOrderService.deleteOrder(plid, orderId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
+		shoppingOrderService.deleteOrder(plid, orderId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
 		java.lang.String plid, java.lang.String orderId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
 
-			return shoppingOrderService.getOrder(plid, orderId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return shoppingOrderService.getOrder(plid, orderId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
@@ -85,28 +63,17 @@ public class ShoppingOrderServiceUtil {
 		java.lang.String ccType, java.lang.String ccNumber, int ccExpMonth,
 		int ccExpYear, java.lang.String ccVerNumber, java.lang.String comments)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
 
-			return shoppingOrderService.updateOrder(orderId, plid,
-				billingFirstName, billingLastName, billingEmailAddress,
-				billingCompany, billingStreet, billingCity, billingState,
-				billingZip, billingCountry, billingPhone, shipToBilling,
-				shippingFirstName, shippingLastName, shippingEmailAddress,
-				shippingCompany, shippingStreet, shippingCity, shippingState,
-				shippingZip, shippingCountry, shippingPhone, ccName, ccType,
-				ccNumber, ccExpMonth, ccExpYear, ccVerNumber, comments);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return shoppingOrderService.updateOrder(orderId, plid,
+			billingFirstName, billingLastName, billingEmailAddress,
+			billingCompany, billingStreet, billingCity, billingState,
+			billingZip, billingCountry, billingPhone, shipToBilling,
+			shippingFirstName, shippingLastName, shippingEmailAddress,
+			shippingCompany, shippingStreet, shippingCity, shippingState,
+			shippingZip, shippingCountry, shippingPhone, ccName, ccType,
+			ccNumber, ccExpMonth, ccExpYear, ccVerNumber, comments);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
@@ -115,21 +82,10 @@ public class ShoppingOrderServiceUtil {
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
 
-			return shoppingOrderService.updateOrder(orderId, plid, ppTxnId,
-				ppPaymentStatus, ppPaymentGross, ppReceiverEmail, ppPayerEmail);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return shoppingOrderService.updateOrder(orderId, plid, ppTxnId,
+			ppPaymentStatus, ppPaymentGross, ppReceiverEmail, ppPayerEmail);
 	}
 }

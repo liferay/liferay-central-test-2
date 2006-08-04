@@ -31,30 +31,14 @@ package com.liferay.portlet.messageboards.service.spring;
 public class MBMessageFlagLocalServiceUtil {
 	public static void deleteFlags(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
-		try {
-			MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
-			mbMessageFlagLocalService.deleteFlags(userId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+		mbMessageFlagLocalService.deleteFlags(userId);
 	}
 
 	public static boolean hasReadFlag(java.lang.String messageId,
 		java.lang.String userId) throws com.liferay.portal.SystemException {
-		try {
-			MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
 
-			return mbMessageFlagLocalService.hasReadFlag(messageId, userId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbMessageFlagLocalService.hasReadFlag(messageId, userId);
 	}
 }

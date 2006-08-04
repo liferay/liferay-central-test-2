@@ -4065,13 +4065,23 @@ public class ServiceBuilder {
 					newExceptions.add(thrownException.getQualifiedName());
 				}
 
-				sb.append(" throws ");
+				newExceptions.add("com.liferay.portal.SystemException");
 
-				if (newExceptions.contains("com.liferay.portal.PortalException")) {
-					sb.append("com.liferay.portal.PortalException, ");
+				if (newExceptions.size() > 0) {
+					sb.append(" throws ");
+
+					Iterator itr = newExceptions.iterator();
+
+					while (itr.hasNext()) {
+						sb.append(itr.next());
+
+						if (itr.hasNext()) {
+							sb.append(", ");
+						}
+					}
 				}
 
-				sb.append("com.liferay.portal.SystemException {");
+				sb.append("{");
 				sb.append("try {");
 
 				for (int j = 0; j < parameters.size(); j++) {
@@ -4155,7 +4165,7 @@ public class ServiceBuilder {
 					sb.append("}");
 				}
 
-				sb.append("throw e;");
+				sb.append("throw new com.liferay.portal.SystemException(e);");
 				sb.append("}");
 
 				if (!returnTypeName.equals("void")) {
@@ -4183,25 +4193,10 @@ public class ServiceBuilder {
 				}
 
 				sb.append("}");
-
-				if (newExceptions.contains("com.liferay.portal.PortalException")) {
-					sb.append("catch (com.liferay.portal.PortalException pe) {");
-					sb.append("_log.error(StackTraceUtil.getStackTrace(pe));");
-					sb.append("throw pe;");
-					sb.append("}");
-				}
-
-				if (newExceptions.contains("com.liferay.portal.SystemException")) {
-					sb.append("catch (com.liferay.portal.SystemException se) {");
-					sb.append("_log.error(StackTraceUtil.getStackTrace(se));");
-					sb.append("throw se;");
-					sb.append("}");
-				}
-
-				sb.append("catch (Exception e) {");
-				sb.append("String stackTrace = StackTraceUtil.getStackTrace(e);");
+				sb.append("catch (com.liferay.portal.SystemException se) {");
+				sb.append("String stackTrace = StackTraceUtil.getStackTrace(se);");
 				sb.append("_log.error(stackTrace);");
-				sb.append("throw new com.liferay.portal.SystemException(stackTrace);");
+				sb.append("throw se;");
 				sb.append("}");
 				sb.append("}");
 			}
@@ -4402,7 +4397,8 @@ public class ServiceBuilder {
 	}
 
 	private void _createServiceUtil(Entity entity, int sessionType) throws IOException {
-		XClass xClass = _getXClass(_outputPath + "/service/impl/" + entity.getName() + (sessionType != _REMOTE ? "Local" : "") + "ServiceImpl.java");
+		//XClass xClass = _getXClass(_outputPath + "/service/impl/" + entity.getName() + (sessionType != _REMOTE ? "Local" : "") + "ServiceImpl.java");
+		XClass xClass = _getXClass(_outputPath + "/service/spring/" + entity.getName() + (sessionType != _REMOTE ? "Local" : "") + "Service.java");
 
 		List methods = xClass.getMethods();
 
@@ -4464,14 +4460,21 @@ public class ServiceBuilder {
 					newExceptions.add(thrownException.getQualifiedName());
 				}
 
-				sb.append(" throws ");
+				if (newExceptions.size() > 0) {
+					sb.append(" throws ");
 
-				if (newExceptions.contains("com.liferay.portal.PortalException")) {
-					sb.append("com.liferay.portal.PortalException, ");
+					Iterator itr = newExceptions.iterator();
+
+					while (itr.hasNext()) {
+						sb.append(itr.next());
+
+						if (itr.hasNext()) {
+							sb.append(", ");
+						}
+					}
 				}
 
-				sb.append("com.liferay.portal.SystemException {");
-				sb.append("try {");
+				sb.append("{");
 				sb.append(entity.getName() + _getSessionTypeName(sessionType) + "Service " + entity.getVarName() + _getSessionTypeName(sessionType) + "Service = " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.getService();");
 
 				if (!xMethod.getReturnType().getType().getQualifiedName().equals("void")) {
@@ -4491,23 +4494,6 @@ public class ServiceBuilder {
 				}
 
 				sb.append(");");
-				sb.append("}");
-
-				if (newExceptions.contains("com.liferay.portal.PortalException")) {
-					sb.append("catch (com.liferay.portal.PortalException pe) {");
-					sb.append("throw pe;");
-					sb.append("}");
-				}
-
-				if (newExceptions.contains("com.liferay.portal.SystemException")) {
-					sb.append("catch (com.liferay.portal.SystemException se) {");
-					sb.append("throw se;");
-					sb.append("}");
-				}
-
-				sb.append("catch (Exception e) {");
-				sb.append("throw new com.liferay.portal.SystemException(e);");
-				sb.append("}");
 				sb.append("}");
 			}
 		}

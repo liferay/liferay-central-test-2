@@ -35,51 +35,23 @@ public class UserTrackerLocalServiceUtil {
 		java.lang.String remoteHost, java.lang.String userAgent,
 		java.util.List userTrackerPaths)
 		throws com.liferay.portal.SystemException {
-		try {
-			UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
 
-			return userTrackerLocalService.addUserTracker(companyId, userId,
-				modifiedDate, remoteAddr, remoteHost, userAgent,
-				userTrackerPaths);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return userTrackerLocalService.addUserTracker(companyId, userId,
+			modifiedDate, remoteAddr, remoteHost, userAgent, userTrackerPaths);
 	}
 
 	public static void deleteUserTracker(java.lang.String userTrackerId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
-			userTrackerLocalService.deleteUserTracker(userTrackerId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.deleteUserTracker(userTrackerId);
 	}
 
 	public static java.util.List getUserTrackers(java.lang.String companyId,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		try {
-			UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
 
-			return userTrackerLocalService.getUserTrackers(companyId, begin, end);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return userTrackerLocalService.getUserTrackers(companyId, begin, end);
 	}
 }

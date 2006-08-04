@@ -35,6 +35,8 @@ import com.liferay.portal.service.spring.EmailAddressLocalService;
 import com.liferay.portal.service.spring.ListTypeServiceUtil;
 import com.liferay.util.Validator;
 
+import java.rmi.RemoteException;
+
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -145,8 +147,13 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 			classPK = emailAddress.getClassPK();
 		}
 
-		ListTypeServiceUtil.validate(
-			typeId, className + ListType.EMAIL_ADDRESS);
+		try {
+			ListTypeServiceUtil.validate(
+				typeId, className + ListType.EMAIL_ADDRESS);
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
+		}
 
 		validate(emailAddressId, companyId, className, classPK, primary);
 	}

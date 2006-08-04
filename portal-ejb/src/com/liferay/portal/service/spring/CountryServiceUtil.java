@@ -30,52 +30,25 @@ package com.liferay.portal.service.spring;
  */
 public class CountryServiceUtil {
 	public static java.util.List getCountries()
-		throws com.liferay.portal.SystemException {
-		try {
-			CountryService countryService = CountryServiceFactory.getService();
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		CountryService countryService = CountryServiceFactory.getService();
 
-			return countryService.getCountries();
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return countryService.getCountries();
 	}
 
 	public static java.util.List getCountries(boolean active)
-		throws com.liferay.portal.SystemException {
-		try {
-			CountryService countryService = CountryServiceFactory.getService();
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		CountryService countryService = CountryServiceFactory.getService();
 
-			return countryService.getCountries(active);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return countryService.getCountries(active);
 	}
 
 	public static com.liferay.portal.model.Country getCountry(
 		java.lang.String countryId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			CountryService countryService = CountryServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		CountryService countryService = CountryServiceFactory.getService();
 
-			return countryService.getCountry(countryId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return countryService.getCountry(countryId);
 	}
 }

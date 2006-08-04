@@ -32,6 +32,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.util.StringPool;
 
+import java.rmi.RemoteException;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -73,7 +75,7 @@ public class AdminUtil {
 			String resolution, String comments, String smsSn, String aimSn,
 			String icqSn, String jabberSn, String msnSn, String skypeSn,
 			String ymSn)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		String password = getUpdateUserPassword(req, userId);
 
@@ -106,7 +108,7 @@ public class AdminUtil {
 			String resolution, String comments, String smsSn, String aimSn,
 			String icqSn, String jabberSn, String msnSn, String skypeSn,
 			String ymSn)
-		throws PortalException, SystemException {
+		throws PortalException, RemoteException, SystemException {
 
 		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
 

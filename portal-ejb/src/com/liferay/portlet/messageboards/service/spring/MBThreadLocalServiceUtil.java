@@ -32,177 +32,79 @@ public class MBThreadLocalServiceUtil {
 	public static void deleteThread(java.lang.String threadId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
-			mbThreadLocalService.deleteThread(threadId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		mbThreadLocalService.deleteThread(threadId);
 	}
 
 	public static void deleteThread(
 		com.liferay.portlet.messageboards.model.MBThread thread)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
-			mbThreadLocalService.deleteThread(thread);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		mbThreadLocalService.deleteThread(thread);
 	}
 
 	public static void deleteThreads(java.lang.String categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
-			mbThreadLocalService.deleteThreads(categoryId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		mbThreadLocalService.deleteThreads(categoryId);
 	}
 
 	public static int getCategoriesThreadsCount(java.util.List categoryIds)
 		throws com.liferay.portal.SystemException {
-		try {
-			MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
-			return mbThreadLocalService.getCategoriesThreadsCount(categoryIds);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbThreadLocalService.getCategoriesThreadsCount(categoryIds);
 	}
 
 	public static java.util.List getGroupThreads(java.lang.String groupId,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		try {
-			MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
-			return mbThreadLocalService.getGroupThreads(groupId, begin, end);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbThreadLocalService.getGroupThreads(groupId, begin, end);
 	}
 
 	public static java.util.List getGroupThreads(java.lang.String groupId,
 		java.lang.String userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		try {
-			MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
-			return mbThreadLocalService.getGroupThreads(groupId, userId, begin,
-				end);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbThreadLocalService.getGroupThreads(groupId, userId, begin, end);
 	}
 
 	public static int getGroupThreadsCount(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		try {
-			MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
-			return mbThreadLocalService.getGroupThreadsCount(groupId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbThreadLocalService.getGroupThreadsCount(groupId);
 	}
 
 	public static int getGroupThreadsCount(java.lang.String groupId,
 		java.lang.String userId) throws com.liferay.portal.SystemException {
-		try {
-			MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
-			return mbThreadLocalService.getGroupThreadsCount(groupId, userId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbThreadLocalService.getGroupThreadsCount(groupId, userId);
 	}
 
 	public static java.util.List getThreads(java.lang.String categoryId,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		try {
-			MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
-			return mbThreadLocalService.getThreads(categoryId, begin, end);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbThreadLocalService.getThreads(categoryId, begin, end);
 	}
 
 	public static int getThreadsCount(java.lang.String categoryId)
 		throws com.liferay.portal.SystemException {
-		try {
-			MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
-			return mbThreadLocalService.getThreadsCount(categoryId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbThreadLocalService.getThreadsCount(categoryId);
 	}
 
 	public static boolean hasReadThread(java.lang.String userId,
 		java.lang.String threadId) throws com.liferay.portal.SystemException {
-		try {
-			MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
-			return mbThreadLocalService.hasReadThread(userId, threadId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return mbThreadLocalService.hasReadThread(userId, threadId);
 	}
 }

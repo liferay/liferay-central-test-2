@@ -34,21 +34,10 @@ public class SubscriptionLocalServiceUtil {
 		java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
-			return subscriptionLocalService.addSubscription(userId, className,
-				classPK);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return subscriptionLocalService.addSubscription(userId, className,
+			classPK);
 	}
 
 	public static com.liferay.portal.model.Subscription addSubscription(
@@ -56,71 +45,32 @@ public class SubscriptionLocalServiceUtil {
 		java.lang.String classPK, java.lang.String frequency)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
-			return subscriptionLocalService.addSubscription(userId, className,
-				classPK, frequency);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return subscriptionLocalService.addSubscription(userId, className,
+			classPK, frequency);
 	}
 
 	public static void deleteSubscription(java.lang.String userId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-			subscriptionLocalService.deleteSubscription(userId, className,
-				classPK);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		subscriptionLocalService.deleteSubscription(userId, className, classPK);
 	}
 
 	public static void deleteSubscriptions(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
-		try {
-			SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-			subscriptionLocalService.deleteSubscriptions(userId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		subscriptionLocalService.deleteSubscriptions(userId);
 	}
 
 	public static void deleteSubscriptions(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		try {
-			SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-			subscriptionLocalService.deleteSubscriptions(companyId, className,
-				classPK);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		subscriptionLocalService.deleteSubscriptions(companyId, className,
+			classPK);
 	}
 
 	public static com.liferay.portal.model.Subscription getSubscription(
@@ -128,42 +78,20 @@ public class SubscriptionLocalServiceUtil {
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
-			return subscriptionLocalService.getSubscription(companyId, userId,
-				className, classPK);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return subscriptionLocalService.getSubscription(companyId, userId,
+			className, classPK);
 	}
 
 	public static java.util.List getSubscriptions(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
-			return subscriptionLocalService.getSubscriptions(companyId,
-				className, classPK);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return subscriptionLocalService.getSubscriptions(companyId, className,
+			classPK);
 	}
 
 	public static boolean isSubscribed(java.lang.String companyId,
@@ -171,20 +99,9 @@ public class SubscriptionLocalServiceUtil {
 		java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
-			return subscriptionLocalService.isSubscribed(companyId, userId,
-				className, classPK);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return subscriptionLocalService.isSubscribed(companyId, userId,
+			className, classPK);
 	}
 }

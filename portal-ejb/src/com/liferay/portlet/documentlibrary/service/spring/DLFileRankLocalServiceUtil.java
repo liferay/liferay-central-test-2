@@ -31,45 +31,21 @@ package com.liferay.portlet.documentlibrary.service.spring;
 public class DLFileRankLocalServiceUtil {
 	public static void deleteFileRanks(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
-		try {
-			DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
-			dlFileRankLocalService.deleteFileRanks(userId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+		dlFileRankLocalService.deleteFileRanks(userId);
 	}
 
 	public static void deleteFileRanks(java.lang.String folderId,
 		java.lang.String name) throws com.liferay.portal.SystemException {
-		try {
-			DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
-			dlFileRankLocalService.deleteFileRanks(folderId, name);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+		dlFileRankLocalService.deleteFileRanks(folderId, name);
 	}
 
 	public static java.util.List getFileRanks(java.lang.String groupId,
 		java.lang.String userId) throws com.liferay.portal.SystemException {
-		try {
-			DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
 
-			return dlFileRankLocalService.getFileRanks(groupId, userId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFileRankLocalService.getFileRanks(groupId, userId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
@@ -78,20 +54,9 @@ public class DLFileRankLocalServiceUtil {
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
 
-			return dlFileRankLocalService.updateFileRank(groupId, companyId,
-				userId, folderId, name);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return dlFileRankLocalService.updateFileRank(groupId, companyId,
+			userId, folderId, name);
 	}
 }

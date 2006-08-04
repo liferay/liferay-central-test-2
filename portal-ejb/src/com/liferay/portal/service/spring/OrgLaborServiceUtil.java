@@ -35,81 +35,36 @@ public class OrgLaborServiceUtil {
 		int wedOpen, int wedClose, int thuOpen, int thuClose, int friOpen,
 		int friClose, int satOpen, int satClose)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
 
-			return orgLaborService.addOrgLabor(organizationId, typeId, sunOpen,
-				sunClose, monOpen, monClose, tueOpen, tueClose, wedOpen,
-				wedClose, thuOpen, thuClose, friOpen, friClose, satOpen,
-				satClose);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return orgLaborService.addOrgLabor(organizationId, typeId, sunOpen,
+			sunClose, monOpen, monClose, tueOpen, tueClose, wedOpen, wedClose,
+			thuOpen, thuClose, friOpen, friClose, satOpen, satClose);
 	}
 
 	public static void deleteOrgLabor(java.lang.String orgLaborId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
-			orgLaborService.deleteOrgLabor(orgLaborId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
+		orgLaborService.deleteOrgLabor(orgLaborId);
 	}
 
 	public static com.liferay.portal.model.OrgLabor getOrgLabor(
 		java.lang.String orgLaborId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
 
-			return orgLaborService.getOrgLabor(orgLaborId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return orgLaborService.getOrgLabor(orgLaborId);
 	}
 
 	public static java.util.List getOrgLabors(java.lang.String organizationId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
 
-			return orgLaborService.getOrgLabors(organizationId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return orgLaborService.getOrgLabors(organizationId);
 	}
 
 	public static com.liferay.portal.model.OrgLabor updateOrgLabor(
@@ -118,23 +73,11 @@ public class OrgLaborServiceUtil {
 		int thuOpen, int thuClose, int friOpen, int friClose, int satOpen,
 		int satClose)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
 
-			return orgLaborService.updateOrgLabor(orgLaborId, sunOpen,
-				sunClose, monOpen, monClose, tueOpen, tueClose, wedOpen,
-				wedClose, thuOpen, thuClose, friOpen, friClose, satOpen,
-				satClose);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return orgLaborService.updateOrgLabor(orgLaborId, sunOpen, sunClose,
+			monOpen, monClose, tueOpen, tueClose, wedOpen, wedClose, thuOpen,
+			thuClose, friOpen, friClose, satOpen, satClose);
 	}
 }

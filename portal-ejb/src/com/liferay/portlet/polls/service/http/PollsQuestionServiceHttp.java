@@ -105,23 +105,15 @@ public class PollsQuestionServiceHttp {
 					throw (com.liferay.portal.SystemException)e;
 				}
 
-				throw e;
+				throw new com.liferay.portal.SystemException(e);
 			}
 
 			return (com.liferay.portlet.polls.model.PollsQuestion)returnObj;
 		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
 		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
+			String stackTrace = StackTraceUtil.getStackTrace(se);
 			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
+			throw se;
 		}
 	}
 
@@ -151,21 +143,13 @@ public class PollsQuestionServiceHttp {
 					throw (com.liferay.portal.SystemException)e;
 				}
 
-				throw e;
+				throw new com.liferay.portal.SystemException(e);
 			}
 		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
 		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
+			String stackTrace = StackTraceUtil.getStackTrace(se);
 			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
+			throw se;
 		}
 	}
 
@@ -196,23 +180,15 @@ public class PollsQuestionServiceHttp {
 					throw (com.liferay.portal.SystemException)e;
 				}
 
-				throw e;
+				throw new com.liferay.portal.SystemException(e);
 			}
 
 			return (com.liferay.portlet.polls.model.PollsQuestion)returnObj;
 		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
 		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
+			String stackTrace = StackTraceUtil.getStackTrace(se);
 			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
+			throw se;
 		}
 	}
 
@@ -275,23 +251,15 @@ public class PollsQuestionServiceHttp {
 					throw (com.liferay.portal.SystemException)e;
 				}
 
-				throw e;
+				throw new com.liferay.portal.SystemException(e);
 			}
 
 			return (com.liferay.portlet.polls.model.PollsQuestion)returnObj;
 		}
-		catch (com.liferay.portal.PortalException pe) {
-			_log.error(StackTraceUtil.getStackTrace(pe));
-			throw pe;
-		}
 		catch (com.liferay.portal.SystemException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
-			throw se;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
+			String stackTrace = StackTraceUtil.getStackTrace(se);
 			_log.error(stackTrace);
-			throw new com.liferay.portal.SystemException(stackTrace);
+			throw se;
 		}
 	}
 

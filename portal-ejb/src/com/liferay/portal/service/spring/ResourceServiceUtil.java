@@ -34,21 +34,10 @@ public class ResourceServiceUtil {
 		java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			ResourceService resourceService = ResourceServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ResourceService resourceService = ResourceServiceFactory.getService();
 
-			return resourceService.getResource(companyId, name, typeId, scope,
-				primKey);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return resourceService.getResource(companyId, name, typeId, scope,
+			primKey);
 	}
 }

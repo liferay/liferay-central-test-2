@@ -34,81 +34,37 @@ public class BookmarksFolderServiceUtil {
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			BookmarksFolderService bookmarksFolderService = BookmarksFolderServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BookmarksFolderService bookmarksFolderService = BookmarksFolderServiceFactory.getService();
 
-			return bookmarksFolderService.addFolder(plid, parentFolderId, name,
-				description, addCommunityPermissions, addGuestPermissions);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return bookmarksFolderService.addFolder(plid, parentFolderId, name,
+			description, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteFolder(java.lang.String folderId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			BookmarksFolderService bookmarksFolderService = BookmarksFolderServiceFactory.getService();
-			bookmarksFolderService.deleteFolder(folderId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BookmarksFolderService bookmarksFolderService = BookmarksFolderServiceFactory.getService();
+		bookmarksFolderService.deleteFolder(folderId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder getFolder(
 		java.lang.String folderId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			BookmarksFolderService bookmarksFolderService = BookmarksFolderServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BookmarksFolderService bookmarksFolderService = BookmarksFolderServiceFactory.getService();
 
-			return bookmarksFolderService.getFolder(folderId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return bookmarksFolderService.getFolder(folderId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder updateFolder(
 		java.lang.String folderId, java.lang.String parentFolderId,
 		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			BookmarksFolderService bookmarksFolderService = BookmarksFolderServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BookmarksFolderService bookmarksFolderService = BookmarksFolderServiceFactory.getService();
 
-			return bookmarksFolderService.updateFolder(folderId,
-				parentFolderId, name, description);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return bookmarksFolderService.updateFolder(folderId, parentFolderId,
+			name, description);
 	}
 }

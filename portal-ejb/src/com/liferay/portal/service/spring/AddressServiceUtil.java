@@ -36,81 +36,36 @@ public class AddressServiceUtil {
 		java.lang.String regionId, java.lang.String countryId,
 		java.lang.String typeId, boolean mailing, boolean primary)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			AddressService addressService = AddressServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		AddressService addressService = AddressServiceFactory.getService();
 
-			return addressService.addAddress(className, classPK, street1,
-				street2, street3, city, zip, regionId, countryId, typeId,
-				mailing, primary);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return addressService.addAddress(className, classPK, street1, street2,
+			street3, city, zip, regionId, countryId, typeId, mailing, primary);
 	}
 
 	public static void deleteAddress(java.lang.String addressId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			AddressService addressService = AddressServiceFactory.getService();
-			addressService.deleteAddress(addressId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		AddressService addressService = AddressServiceFactory.getService();
+		addressService.deleteAddress(addressId);
 	}
 
 	public static com.liferay.portal.model.Address getAddress(
 		java.lang.String addressId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			AddressService addressService = AddressServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		AddressService addressService = AddressServiceFactory.getService();
 
-			return addressService.getAddress(addressId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return addressService.getAddress(addressId);
 	}
 
 	public static java.util.List getAddresses(java.lang.String className,
 		java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			AddressService addressService = AddressServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		AddressService addressService = AddressServiceFactory.getService();
 
-			return addressService.getAddresses(className, classPK);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return addressService.getAddresses(className, classPK);
 	}
 
 	public static com.liferay.portal.model.Address updateAddress(
@@ -120,22 +75,10 @@ public class AddressServiceUtil {
 		java.lang.String countryId, java.lang.String typeId, boolean mailing,
 		boolean primary)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			AddressService addressService = AddressServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		AddressService addressService = AddressServiceFactory.getService();
 
-			return addressService.updateAddress(addressId, street1, street2,
-				street3, city, zip, regionId, countryId, typeId, mailing,
-				primary);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return addressService.updateAddress(addressId, street1, street2,
+			street3, city, zip, regionId, countryId, typeId, mailing, primary);
 	}
 }

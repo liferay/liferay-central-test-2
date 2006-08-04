@@ -32,20 +32,9 @@ public class OrganizationServiceUtil {
 	public static void addGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			OrganizationService organizationService = OrganizationServiceFactory.getService();
-			organizationService.addGroupOrganizations(groupId, organizationIds);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		OrganizationService organizationService = OrganizationServiceFactory.getService();
+		organizationService.addGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static com.liferay.portal.model.Organization addOrganization(
@@ -53,117 +42,51 @@ public class OrganizationServiceUtil {
 		java.lang.String regionId, java.lang.String countryId,
 		java.lang.String statusId, boolean location)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			OrganizationService organizationService = OrganizationServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
-			return organizationService.addOrganization(parentOrganizationId,
-				name, regionId, countryId, statusId, location);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return organizationService.addOrganization(parentOrganizationId, name,
+			regionId, countryId, statusId, location);
 	}
 
 	public static void deleteOrganization(java.lang.String organizationId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			OrganizationService organizationService = OrganizationServiceFactory.getService();
-			organizationService.deleteOrganization(organizationId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		OrganizationService organizationService = OrganizationServiceFactory.getService();
+		organizationService.deleteOrganization(organizationId);
 	}
 
 	public static com.liferay.portal.model.Organization getOrganization(
 		java.lang.String organizationId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			OrganizationService organizationService = OrganizationServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
-			return organizationService.getOrganization(organizationId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return organizationService.getOrganization(organizationId);
 	}
 
 	public static java.util.List getUserOrganizations(java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			OrganizationService organizationService = OrganizationServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
-			return organizationService.getUserOrganizations(userId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return organizationService.getUserOrganizations(userId);
 	}
 
 	public static void setGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			OrganizationService organizationService = OrganizationServiceFactory.getService();
-			organizationService.setGroupOrganizations(groupId, organizationIds);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		OrganizationService organizationService = OrganizationServiceFactory.getService();
+		organizationService.setGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void unsetGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			OrganizationService organizationService = OrganizationServiceFactory.getService();
-			organizationService.unsetGroupOrganizations(groupId, organizationIds);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		OrganizationService organizationService = OrganizationServiceFactory.getService();
+		organizationService.unsetGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static com.liferay.portal.model.Organization updateOrganization(
@@ -171,43 +94,19 @@ public class OrganizationServiceUtil {
 		java.lang.String name, java.lang.String regionId,
 		java.lang.String countryId, java.lang.String statusId, boolean location)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			OrganizationService organizationService = OrganizationServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
-			return organizationService.updateOrganization(organizationId,
-				parentOrganizationId, name, regionId, countryId, statusId,
-				location);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return organizationService.updateOrganization(organizationId,
+			parentOrganizationId, name, regionId, countryId, statusId, location);
 	}
 
 	public static com.liferay.portal.model.Organization updateOrganization(
 		java.lang.String organizationId, java.lang.String comments)
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			OrganizationService organizationService = OrganizationServiceFactory.getService();
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
-			return organizationService.updateOrganization(organizationId,
-				comments);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return organizationService.updateOrganization(organizationId, comments);
 	}
 }

@@ -33,19 +33,8 @@ public class AccountLocalServiceUtil {
 		java.lang.String accountId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
+		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
 
-			return accountLocalService.getAccount(accountId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return accountLocalService.getAccount(accountId);
 	}
 }

@@ -39,6 +39,8 @@ import com.liferay.portal.service.spring.ListTypeServiceUtil;
 import com.liferay.portal.service.spring.RegionServiceUtil;
 import com.liferay.util.Validator;
 
+import java.rmi.RemoteException;
+
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -164,9 +166,14 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 			throw new AddressZipException();
 		}
 
-		RegionServiceUtil.getRegion(regionId);
+		try {
+			RegionServiceUtil.getRegion(regionId);
 
-		CountryServiceUtil.getCountry(countryId);
+			CountryServiceUtil.getCountry(countryId);
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
+		}
 
 		if (addressId != null) {
 			Address address = AddressUtil.findByPrimaryKey(addressId);
@@ -176,7 +183,12 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 			classPK = address.getClassPK();
 		}
 
-		ListTypeServiceUtil.validate(typeId, className + ListType.ADDRESS);
+		try {
+			ListTypeServiceUtil.validate(typeId, className + ListType.ADDRESS);
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
+		}
 
 		validate(addressId, companyId, className, classPK, mailing, primary);
 	}

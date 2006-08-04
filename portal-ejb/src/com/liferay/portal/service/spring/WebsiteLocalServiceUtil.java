@@ -35,90 +35,41 @@ public class WebsiteLocalServiceUtil {
 		java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
+		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
 
-			return websiteLocalService.addWebsite(userId, className, classPK,
-				url, typeId, primary);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return websiteLocalService.addWebsite(userId, className, classPK, url,
+			typeId, primary);
 	}
 
 	public static void deleteWebsite(java.lang.String websiteId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-			websiteLocalService.deleteWebsite(websiteId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
+		websiteLocalService.deleteWebsite(websiteId);
 	}
 
 	public static void deleteWebsites(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		try {
-			WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-			websiteLocalService.deleteWebsites(companyId, className, classPK);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
+		websiteLocalService.deleteWebsites(companyId, className, classPK);
 	}
 
 	public static com.liferay.portal.model.Website getWebsite(
 		java.lang.String websiteId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
+		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
 
-			return websiteLocalService.getWebsite(websiteId);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return websiteLocalService.getWebsite(websiteId);
 	}
 
 	public static java.util.List getWebsites(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		try {
-			WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
+		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
 
-			return websiteLocalService.getWebsites(companyId, className, classPK);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return websiteLocalService.getWebsites(companyId, className, classPK);
 	}
 
 	public static com.liferay.portal.model.Website updateWebsite(
@@ -126,20 +77,8 @@ public class WebsiteLocalServiceUtil {
 		java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
+		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
 
-			return websiteLocalService.updateWebsite(websiteId, url, typeId,
-				primary);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return websiteLocalService.updateWebsite(websiteId, url, typeId, primary);
 	}
 }

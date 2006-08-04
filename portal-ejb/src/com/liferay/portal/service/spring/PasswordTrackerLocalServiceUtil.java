@@ -31,54 +31,24 @@ package com.liferay.portal.service.spring;
 public class PasswordTrackerLocalServiceUtil {
 	public static void deletePasswordTrackers(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
-		try {
-			PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
-			passwordTrackerLocalService.deletePasswordTrackers(userId);
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
+		passwordTrackerLocalService.deletePasswordTrackers(userId);
 	}
 
 	public static boolean isValidPassword(java.lang.String userId,
 		java.lang.String password)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
+		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
 
-			return passwordTrackerLocalService.isValidPassword(userId, password);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		return passwordTrackerLocalService.isValidPassword(userId, password);
 	}
 
 	public static void trackPassword(java.lang.String userId,
 		java.lang.String encPwd)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		try {
-			PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
-			passwordTrackerLocalService.trackPassword(userId, encPwd);
-		}
-		catch (com.liferay.portal.PortalException pe) {
-			throw pe;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new com.liferay.portal.SystemException(e);
-		}
+		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
+		passwordTrackerLocalService.trackPassword(userId, encPwd);
 	}
 }
