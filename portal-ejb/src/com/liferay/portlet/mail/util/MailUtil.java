@@ -1294,7 +1294,8 @@ public class MailUtil {
 	}
 
 	private static Address[] _resolveAddresses(
-			HttpServletRequest req, Address addresses[]) {
+			HttpServletRequest req, Address addresses[])
+		throws RecipientException {
 
 		Company company = null;
 
@@ -1320,6 +1321,11 @@ public class MailUtil {
 						user.getEmailAddress(), user.getFullName());
 				}
 				catch (Exception e) {
+					_log.error(
+						"Problems found trying to resolve email address " +
+						address);
+
+					throw new RecipientException(e);
 				}
 			}
 		}
