@@ -132,7 +132,7 @@ public class UserGroupFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
+			q.setCacheable(true);
 
 			q.addEntity("UserGroup", UserGroup.class);
 

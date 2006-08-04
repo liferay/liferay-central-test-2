@@ -60,6 +60,7 @@ enter-one-user-id-per-line-to-reserve-the-user-id=Enter one user ID <b>per line<
 enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>.
 enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users=Enter the default community names <b>per line</b> that are associated with newly created users.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Enter the default role names <b>per line</b> that are associated with newly created users.
+enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default user group names <b>per line</b> that are associated with newly created users.
 fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user=Fields are added if you need to distinguish items based on criteria chosen by the user. For example, if you are selling t-shirts, you may want to add a field with the name <i>Size</i> and the values <i>S, M, L, XL</i>. Enter the values as a list of comma delimited options.
 go-to-paypal-and-set-up-ipn-to-post-to-x=Go to PayPal and set up IPN to post to {0}.
 googles-spelling-suggestion-for=Google's spelling suggestion for {0} is {1}.

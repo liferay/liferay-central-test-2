@@ -500,6 +500,8 @@ public class PropsUtil {
 
 	public static final String ADMIN_DEFAULT_ROLE_NAMES = "admin.default.role.names";
 
+    public static final String ADMIN_DEFAULT_USER_GROUP_NAMES = "admin.default.user.group.names";
+
     public static final String ADMIN_MAIL_HOST_NAMES = "admin.mail.host.names";
 
     public static final String ADMIN_RESERVED_EMAIL_ADDRESSES = "admin.reserved.email.addresses";

@@ -122,9 +122,13 @@ public class EditUsersAction extends PortletAction {
 		String defaultGroupNames = ParamUtil.getString(
 			req, "defaultGroupNames");
 		String defaultRoleNames = ParamUtil.getString(req, "defaultRoleNames");
+		String defaultUserGroupNames = ParamUtil.getString(
+			req, "defaultUserGroupNames");
 
 		prefs.setValue(PropsUtil.ADMIN_DEFAULT_GROUP_NAMES, defaultGroupNames);
 		prefs.setValue(PropsUtil.ADMIN_DEFAULT_ROLE_NAMES, defaultRoleNames);
+		prefs.setValue(
+			PropsUtil.ADMIN_DEFAULT_USER_GROUP_NAMES, defaultUserGroupNames);
 	}
 
 	protected void updateEmails(

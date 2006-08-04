@@ -23,7 +23,7 @@
 %>
 
 <liferay-ui:tabs
-	names="live-sessions,authentication,default-communities-and-roles,reserved-users,mail-host-names,emails"
+	names="live-sessions,authentication,default-associations,reserved-users,mail-host-names,emails"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
 />
@@ -182,7 +182,7 @@
 			</c:otherwise>
 		</c:choose>
 	</c:when>
-	<c:when test='<%= tabs2.equals("default-communities-and-roles") %>'>
+	<c:when test='<%= tabs2.equals("default-associations") %>'>
 		<%= LanguageUtil.get(pageContext, "enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users") %>
 
 		<br><br>
@@ -196,6 +196,14 @@
 		<br><br>
 
 		<textarea class="form-text" name="<portlet:namespace />defaultRoleNames" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_ROLE_NAMES) %></textarea>
+
+		<br><br>
+
+		<%= LanguageUtil.get(pageContext, "enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users") %>
+
+		<br><br>
+
+		<textarea class="form-text" name="<portlet:namespace />defaultUserGroupNames" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_USER_GROUP_NAMES) %></textarea>
 
 		<br><br>
 

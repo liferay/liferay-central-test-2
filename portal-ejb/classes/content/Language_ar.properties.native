@@ -805,6 +805,7 @@ enter-one-user-id-per-line-to-reserve-the-user-id=أدخل رمز تعريفي �
 enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>.
 enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users=Enter the default community names <b>per line</b> that are associated with newly created users.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=أدخل أسماء الأدوار الإعتادية التي سيرتبط المستخدمون الجدد بها <b>إسما في السطر الواحد</b>.
+enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default user group names <b>per line</b> that are associated with newly created users.
 enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages=أدخل الرابط التشعبي الودّي والذي سيستخدم من قبل الصفحات العامة والخاصة.
 enterprise-logo=شعار المنظمة العليا
 enterprise=المنظمة العليا

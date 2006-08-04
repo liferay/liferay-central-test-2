@@ -32,6 +32,7 @@ import com.liferay.portal.NoSuchContactException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserException;
@@ -52,6 +53,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -67,6 +69,7 @@ import com.liferay.portal.service.persistence.PermissionUserFinder;
 import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserFinder;
+import com.liferay.portal.service.persistence.UserGroupFinder;
 import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.ContactLocalServiceUtil;
@@ -356,6 +359,26 @@ public class UserLocalServiceImpl implements UserLocalService {
 		}
 
 		UserUtil.setRoles(userId, roles);
+
+		// Default user groups
+
+		List userGroups = new ArrayList();
+
+		String[] defaultUserGroupNames = PrefsPropsUtil.getStringArray(
+			companyId, PropsUtil.ADMIN_DEFAULT_USER_GROUP_NAMES);
+
+		for (int i = 0; i < defaultUserGroupNames.length; i++) {
+			try {
+				UserGroup userGroup = UserGroupFinder.findByC_N(
+					companyId, defaultUserGroupNames[i]);
+
+				userGroups.add(userGroup);
+			}
+			catch (NoSuchUserGroupException nsuge) {
+			}
+		}
+
+		UserUtil.setUserGroups(userId, userGroups);
 
 		// Email
 
