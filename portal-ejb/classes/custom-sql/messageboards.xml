@@ -19,8 +19,9 @@
 				MBMessage
 			INNER JOIN
 				MBCategory ON
-					(MBCategory.categoryId = MBMessage.categoryId) AND
-					(MBCategory.groupId = ?)
+					(MBCategory.categoryId = MBMessage.categoryId)
+			WHERE
+				(MBCategory.groupId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.countByT_U">
@@ -32,9 +33,10 @@
 			INNER JOIN
 				MBMessage ON
 					(MBMessage.topicId = MBMessageFlag.topicId) AND
-					(MBMessage.messageId = MBMessageFlag.messageId) AND
-					(MBMessage.threadId = ?) AND
-					(MBMessageFlag.userId = ?)
+					(MBMessage.messageId = MBMessageFlag.messageId)
+			WHERE
+				(MBMessage.threadId = ?) AND
+				(MBMessageFlag.userId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByGroupId">
@@ -45,8 +47,9 @@
 				MBMessage
 			INNER JOIN
 				MBCategory ON
-					(MBCategory.categoryId = MBMessage.categoryId) AND
-					(MBCategory.groupId = ?)
+					(MBCategory.categoryId = MBMessage.categoryId)
+			WHERE
+				(MBCategory.groupId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByCategoryIds">
@@ -70,8 +73,9 @@
 					(MBMessage.threadId = MBThread.threadId)
 			INNER JOIN
 				MBCategory ON
-					(MBCategory.categoryId = MBMessage.categoryId) AND
-					(MBCategory.groupId = ?)
+					(MBCategory.categoryId = MBMessage.categoryId)
+			WHERE
+				(MBCategory.groupId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByG_U">
@@ -82,12 +86,13 @@
 				MBThread
 			INNER JOIN
 				MBMessage ON
-					(MBMessage.threadId = MBThread.threadId) AND
-					(MBMessage.userId = ?)
+					(MBMessage.threadId = MBThread.threadId)
 			INNER JOIN
 				MBCategory ON
-					(MBCategory.categoryId = MBMessage.categoryId) AND
-					(MBCategory.groupId = ?)
+					(MBCategory.categoryId = MBMessage.categoryId)
+			WHERE
+				(MBMessage.userId = ?) AND
+				(MBCategory.groupId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByGroupId">
@@ -101,8 +106,9 @@
 					(MBMessage.threadId = MBThread.threadId)
 			INNER JOIN
 				MBCategory ON
-					(MBCategory.categoryId = MBMessage.categoryId) AND
-					(MBCategory.groupId = ?)
+					(MBCategory.categoryId = MBMessage.categoryId)
+			WHERE
+				(MBCategory.groupId = ?)
 			ORDER BY
 				MBThread.lastPostDate DESC
 		]]>
@@ -115,12 +121,13 @@
 				MBThread
 			INNER JOIN
 				MBMessage ON
-					(MBMessage.threadId = MBThread.threadId) AND
-					(MBMessage.userId = ?)
+					(MBMessage.threadId = MBThread.threadId)
 			INNER JOIN
 				MBCategory ON
-					(MBCategory.categoryId = MBMessage.categoryId) AND
-					(MBCategory.groupId = ?)
+					(MBCategory.categoryId = MBMessage.categoryId)
+			WHERE
+				(MBMessage.userId = ?) AND
+				(MBCategory.groupId = ?)
 			ORDER BY
 				MBThread.lastPostDate DESC
 		]]>

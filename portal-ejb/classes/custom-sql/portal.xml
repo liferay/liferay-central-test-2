@@ -280,7 +280,7 @@
 				Permission_
 					INNER JOIN
 						Groups_Permissions ON
-							Groups_Permissions.permissionId = Permission_.permissionId
+							(Groups_Permissions.permissionId = Permission_.permissionId)
 			WHERE
 				([$PERMISSION_IDS$]) AND
 				([$GROUP_IDS$])
@@ -294,10 +294,10 @@
 				Groups_Roles
 					INNER JOIN
 						Roles_Permissions ON
-							Roles_Permissions.roleId = Groups_Roles.roleId
+							(Roles_Permissions.roleId = Groups_Roles.roleId)
 					INNER JOIN
 						Permission_ ON
-							Permission_.permissionId = Roles_Permissions.permissionId
+							(Permission_.permissionId = Roles_Permissions.permissionId)
 			WHERE
 				([$PERMISSION_IDS$]) AND
 				([$GROUP_IDS$])
@@ -311,7 +311,7 @@
 				Permission_
 					INNER JOIN
 						Users_Permissions ON
-							Users_Permissions.permissionId = Permission_.permissionId
+							(Users_Permissions.permissionId = Permission_.permissionId)
 			WHERE
 				([$PERMISSION_IDS$]) AND
 				(Users_Permissions.userId = ?)
@@ -325,10 +325,10 @@
 				Users_Roles
 					INNER JOIN
 						Roles_Permissions ON
-							Roles_Permissions.roleId = Users_Roles.roleId
+							(Roles_Permissions.roleId = Users_Roles.roleId)
 					INNER JOIN
 						Permission_ ON
-							Permission_.permissionId = Roles_Permissions.permissionId
+							(Permission_.permissionId = Roles_Permissions.permissionId)
 			WHERE
 				([$PERMISSION_IDS$]) AND
 				(Users_Roles.userId = ?)
