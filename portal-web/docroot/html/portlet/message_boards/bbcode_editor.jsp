@@ -244,73 +244,76 @@
 	var colorPicker = new ColorPicker("<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorscale.png", <portlet:namespace />insertColor);
 </script>
 
-<table cellpadding="0" cellspacing="0" height="400px" width="100%">
+<table border="0" cellpadding="0" cellspacing="0" height="400px" width="100%">
 <tr>
 	<td>
-		<table bgcolor="#E5E4E8" cellpadding="1" cellspacing="0">
+		<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
 		<tr>
 			<td>
-			<select onChange="<portlet:namespace />insertTag('font', this[this.selectedIndex].value); this.selectedIndex = 0;">
-				<option selected value="Font">Font</option>
-				<option value="Arial">Arial</option>
-				<option value="Comic Sans MS">Comic Sans MS</option>
-				<option value="Courier New">Courier New</option>
-				<option value="Tahoma">Tahoma</option>
-				<option value="Times New Roman">Times New Roman</option>
-				<option value="Verdana">Verdana</option>
-				<option value="Wingdings">Wingdings</option>
-			</select>
+				<table bgcolor="#E5E4E8" cellpadding="1" cellspacing="0">
+				<tr>
+					<td>
+					<select onChange="<portlet:namespace />insertTag('font', this[this.selectedIndex].value); this.selectedIndex = 0;">
+						<option selected value="Font">Font</option>
+						<option value="Arial">Arial</option>
+						<option value="Comic Sans MS">Comic Sans MS</option>
+						<option value="Courier New">Courier New</option>
+						<option value="Tahoma">Tahoma</option>
+						<option value="Times New Roman">Times New Roman</option>
+						<option value="Verdana">Verdana</option>
+						<option value="Wingdings">Wingdings</option>
+					</select>
+					</td>
+					<td>
+					<select onChange="<portlet:namespace />insertTag('size', this[this.selectedIndex].value); this.selectedIndex = 0;">
+						<option selected value="Size">Size</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+					</select>
+					</td>
+					<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"><span class="separator"></span><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('b');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Bold" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/bold.gif" title="Bold" vspace="0" width="18"></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('i');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Italics" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/italic.gif" title="Italics" vspace="0" width="18"></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('u');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Underline" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/underline.gif" title="Underline" vspace="0" width="18"></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('s');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Strikethrough" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/strike.gif" title="Strikethrough" vspace="0" width="18"></div></td>
+					<td><div class="button" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><input type="hidden" id="fontColor" name="fontColor" value="" class="form-text" onchange=""><img align="absmiddle" alt="Color" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/color.gif" title="Color" vspace="0" width="18" style="cursor: pointer;" onClick="colorPicker.toggle(this)"></input></div></td>
+					<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"><span class="separator"></span><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"></td>
+					<td><div class="button" onClick="<portlet:namespace />insertUrl();" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Hyperlink" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/hyperlink.gif" title="Hyperlink" vspace="0" width="18"></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertEmail();" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Email" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/email.gif" title="Email" vspace="0" width="18"></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertImage();" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Image" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/image.gif" title="Image" vspace="0" width="18"></div></td>
+					<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"><span class="separator"></span><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"></td>
+					<td><div class="button" onClick="<portlet:namespace />insertList('1');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Ordered List" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/ordered_list.gif" title="Ordered List" vspace="0" width="18"></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertList();" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Unordered List" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/unordered_list.gif" title="Unordered List" vspace="0" width="18"></div></td>
+					<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"><span class="separator"></span><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('left');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Justify Left" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/justify_left.gif" title="Justify Left" vspace="0" width="18"></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('center');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Justify Center" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/justify_center.gif" title="Justify Center" vspace="0" width="18"></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('right');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Justify Right" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/justify_right.gif" title="Justify Right" vspace="0" width="18"></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('indent');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Indent" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/indent.gif" title="Indent" vspace="0" width="18"></div></td>
+					<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"><span class="separator"></span><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('quote');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Quote" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/quote.gif" title="Quote" vspace="0" width="18"></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('code');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Code" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/code.gif" title="Code" vspace="0" width="18"></div></td>
+				</tr>
+				</table>
 			</td>
-			<td>
-			<select onChange="<portlet:namespace />insertTag('size', this[this.selectedIndex].value); this.selectedIndex = 0;">
-				<option selected value="Size">Size</option>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-				<option value="6">6</option>
-				<option value="7">7</option>
-			</select>
+		</tr>
+		<tr>
+			<td bgcolor="#FFFFFF" height="100%">
+				<textarea style="font-family: monospace; height: 100%; width: 100%;" id="textArea" name="textArea"></textarea>
 			</td>
-			<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"><span class="separator"></span><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"></td>
-			<td><div class="button" onClick="<portlet:namespace />insertTag('b');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Bold" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/bold.gif" title="Bold" vspace="0" width="18"></div></td>
-			<td><div class="button" onClick="<portlet:namespace />insertTag('i');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Italics" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/italic.gif" title="Italics" vspace="0" width="18"></div></td>
-			<td><div class="button" onClick="<portlet:namespace />insertTag('u');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Underline" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/underline.gif" title="Underline" vspace="0" width="18"></div></td>
-			<td><div class="button" onClick="<portlet:namespace />insertTag('s');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Strikethrough" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/strike.gif" title="Strikethrough" vspace="0" width="18"></div></td>
-			<td><div class="button" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><input type="hidden" id="fontColor" name="fontColor" value="" class="form-text" onchange=""><img align="absmiddle" alt="Color" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/color.gif" title="Color" vspace="0" width="18" style="cursor: pointer;" onClick="colorPicker.toggle(this)"></input></div></td>
-			<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"><span class="separator"></span><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"></td>
-			<td><div class="button" onClick="<portlet:namespace />insertUrl();" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Hyperlink" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/hyperlink.gif" title="Hyperlink" vspace="0" width="18"></div></td>
-			<td><div class="button" onClick="<portlet:namespace />insertEmail();" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Email" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/email.gif" title="Email" vspace="0" width="18"></div></td>
-			<td><div class="button" onClick="<portlet:namespace />insertImage();" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Image" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/image.gif" title="Image" vspace="0" width="18"></div></td>
-			<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"><span class="separator"></span><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"></td>
-			<td><div class="button" onClick="<portlet:namespace />insertList('1');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Ordered List" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/ordered_list.gif" title="Ordered List" vspace="0" width="18"></div></td>
-			<td><div class="button" onClick="<portlet:namespace />insertList();" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Unordered List" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/unordered_list.gif" title="Unordered List" vspace="0" width="18"></div></td>
-			<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"><span class="separator"></span><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"></td>
-			<td><div class="button" onClick="<portlet:namespace />insertTag('left');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Justify Left" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/justify_left.gif" title="Justify Left" vspace="0" width="18"></div></td>
-			<td><div class="button" onClick="<portlet:namespace />insertTag('center');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Justify Center" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/justify_center.gif" title="Justify Center" vspace="0" width="18"></div></td>
-			<td><div class="button" onClick="<portlet:namespace />insertTag('right');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Justify Right" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/justify_right.gif" title="Justify Right" vspace="0" width="18"></div></td>
-			<td><div class="button" onClick="<portlet:namespace />insertTag('indent');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Indent" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/indent.gif" title="Indent" vspace="0" width="18"></div></td>
-			<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"><span class="separator"></span><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/spacer.gif" vspace="0" width="2"></td>
-			<td><div class="button" onClick="<portlet:namespace />insertTag('quote');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Quote" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/quote.gif" title="Quote" vspace="0" width="18"></div></td>
-			<td><div class="button" onClick="<portlet:namespace />insertTag('code');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Code" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/message_boards/code.gif" title="Code" vspace="0" width="18"></div></td>
 		</tr>
 		</table>
 	</td>
 	<td>
-		<br>
-	</td>
-</tr>
-<tr>
-	<td bgcolor="#FFFFFF" height="100%">
-		<textarea style="font-family: monospace; height: 100%; width: 100%;" id="textArea" name="textArea"></textarea>
-	</td>
-	<td>
 		<div style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; margin-left: 10px;">
-			<table border="0" cellpadding="2" cellspacing="0" width="100%">
+			<table border="0" cellpadding="2" cellspacing="0">
 			<tr>
-				<td bgcolor="#E5E4E8" colspan="4" style="white-space: nowrap;">
-					<%= LanguageUtil.get(pageContext, "emoticons") %>
+				<td align="center" bgcolor="#E5E4E8" colspan="4">
+					<%= LanguageUtil.get(pageContext, "clickable-emoticons") %>
 				</td>
 			</tr>
 
@@ -320,13 +323,13 @@
 			for (int i = 0; i < BBCodeUtil.EMOTICONS.length; i++) {
 			%>
 
-				<c:if test="<%= (i % 4) == 0 %>">
+				<c:if test="<%= (i % 3) == 0 %>">
 					<tr>
 				</c:if>
 
 				<td align="center"><img src='<%= StringUtil.replace(BBCodeUtil.EMOTICONS[i][0], "@theme_images_path@", themeDisplay.getPathThemeImage()) %>' onClick="<portlet:namespace />insertEmoticon('<%= BBCodeUtil.EMOTICONS[i][1] %>')"></td>
 
-				<c:if test="<%= (i % 4) == 3 %>">
+				<c:if test="<%= (i % 3) == 2 %>">
 					</tr>
 				</c:if>
 
