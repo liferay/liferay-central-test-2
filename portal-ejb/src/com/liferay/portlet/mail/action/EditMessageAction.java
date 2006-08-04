@@ -182,8 +182,8 @@ public class EditMessageAction extends PortletAction {
 				}
 
 				String[] recipients = new String[] {
-					Html.escape(to, true),
-					Html.escape(cc, true),
+					Html.escape(to, false),
+					Html.escape(cc, false),
 					StringPool.BLANK
 				};
 
@@ -203,11 +203,11 @@ public class EditMessageAction extends PortletAction {
 			MailMessage mailMessage = MailUtil.getMessage(httpReq, messageId);
 
 			String to = Html.escape(
-				InternetAddressUtil.toString(mailMessage.getTo()));
+				InternetAddressUtil.toString(mailMessage.getTo()), false);
 			String cc = Html.escape(
-				InternetAddressUtil.toString(mailMessage.getCc()));
+				InternetAddressUtil.toString(mailMessage.getCc()), false);
 			String bcc = Html.escape(
-				InternetAddressUtil.toString(mailMessage.getBcc()));
+				InternetAddressUtil.toString(mailMessage.getBcc()), false);
 
 			String[] recipients = new String[] {to, cc, bcc};
 
@@ -349,7 +349,7 @@ public class EditMessageAction extends PortletAction {
 		sb.append("<br /><br />");
 		sb.append("On " + dateFormatDateTime.format(mailMessage.getSentDate()));
 		sb.append(StringPool.COMMA + StringPool.NBSP + from.getPersonal());
-		sb.append("&lt;<a href=\"mailto: " + from.getAddress() + "\">");
+		sb.append(" &lt;<a href=\"mailto: " + from.getAddress() + "\">");
 		sb.append(from.getAddress() + "</a>&gt; wrote:<br />");
 		sb.append("<div style=\"");
 		sb.append("border-left: 1px solid rgb(204, 204, 204); ");

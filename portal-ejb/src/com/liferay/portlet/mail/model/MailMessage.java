@@ -25,9 +25,6 @@ package com.liferay.portlet.mail.model;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
-import com.liferay.util.mail.InternetAddressUtil;
-
-import java.io.UnsupportedEncodingException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,6 +32,7 @@ import java.util.List;
 
 import javax.mail.Address;
 import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 
 /**
  * <a href="MailMessage.java.html"><b><i>View Source</i></b></a>
@@ -65,9 +63,9 @@ public class MailMessage {
 	}
 
 	public void setTo(String to)
-		throws AddressException, UnsupportedEncodingException {
+		throws AddressException {
 
-		_to = InternetAddressUtil.getAddresses(to);
+		_to = InternetAddress.parse(to);
 	}
 
 	public void setTo(Address[] to) {
@@ -83,9 +81,9 @@ public class MailMessage {
 	}
 
 	public void setCc(String ccs)
-		throws AddressException, UnsupportedEncodingException {
+		throws AddressException {
 
-		_cc = InternetAddressUtil.getAddresses(ccs);
+		_cc = InternetAddress.parse(ccs);
 	}
 
 	public Address[] getBcc() {
@@ -97,9 +95,9 @@ public class MailMessage {
 	}
 
 	public void setBcc(String bccs)
-		throws AddressException, UnsupportedEncodingException {
+		throws AddressException {
 
-		_bcc = InternetAddressUtil.getAddresses(bccs);
+		_bcc = InternetAddress.parse(bccs);
 	}
 
 	public Address[] getReplyTo() {
@@ -107,9 +105,9 @@ public class MailMessage {
 	}
 
 	public void setReplyTo(String replyTos)
-		throws AddressException, UnsupportedEncodingException {
+		throws AddressException {
 
-		_replyTo = InternetAddressUtil.getAddresses(replyTos);
+		_replyTo = InternetAddress.parse(replyTos);
 	}
 
 	public void setReplyTo(Address[] replyTo) {
