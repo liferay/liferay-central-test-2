@@ -71,6 +71,10 @@
 				<arg value="${project.dir}/lib/util-bridges.jar" />
 				<arg value="${project.dir}/lib/util-java.jar" />
 				<arg value="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/lib/util-taglib.jar" />
+
+				<!-- Specific WARs -->
+
+				<arg line="${deploy.specific.wars}" />
 		</java>
 	</target>
 </project>

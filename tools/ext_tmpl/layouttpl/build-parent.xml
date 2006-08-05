@@ -16,6 +16,10 @@
 				<jvmarg value="-Ddeployer.dest.dir=${app.server.deploy.dir}" />
 				<jvmarg value="-Ddeployer.app.server.type=${app.server.type}" />
 				<jvmarg value="-Ddeployer.unpack.war=true" />
+
+				<!-- Specific WARs -->
+
+				<arg line="${deploy.specific.wars}" />
 		</java>
 	</target>
 </project>

@@ -152,6 +152,14 @@
 				<arg value="${project.dir}/util-bridges/util-bridges.jar" />
 				<arg value="${project.dir}/util-java/util-java.jar" />
 				<arg value="${project.dir}/util-taglib/util-taglib.jar" />
+
+				<!-- Specific WARs -->
+
+				<!--
+				<arg line="sample-dao-portlet.war sample-jsf-myfaces-portlet.war" />
+				-->
+
+				<arg line="${deploy.specific.wars}" />
 		</java>
 	</target>
 </project>

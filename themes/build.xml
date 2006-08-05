@@ -27,6 +27,10 @@
 
 				<arg value="${project.dir}/util-java/util-java.jar" />
 				<arg value="${project.dir}/util-taglib/util-taglib.jar" />
+
+				<!-- Specific WARs -->
+
+				<arg line="${deploy.specific.wars}" />
 		</java>
 	</target>
 </project>
