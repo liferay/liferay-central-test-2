@@ -96,9 +96,11 @@ var Mail = {
 			
 			if (reverse) {
 				Mail.currentFolder.li.newCount++;
+				Mail.currentFolder.newCount++;
 			}
 			else {
 				Mail.currentFolder.li.newCount--;
+				Mail.currentFolder.newCount--;
 			}
 			
 			var countNum = Mail.currentFolder.li.newCount;
@@ -122,9 +124,10 @@ var Mail = {
 		if (deleteList.length > 0 && confirm(confirmMsg)) {
 			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=deleteMessages&folderId=" + Mail.currentFolder.id + "&messages=" + deleteList);
 			Mail.removeSelectedMessages();
+			Mail.getFolders();
 		}
-	},	
-	
+	},
+
 	dragToFolder : function(coord) {
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
 		var folderList = folderPane.getElementsByTagName("li");
@@ -232,12 +235,21 @@ var Mail = {
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
 		var folderList = document.createElement("ul");
 		var folders = foldersObject.folders;
+		var refresh = false;
 		var selectedFolder = null;
 		Mail.foldersList = folders;
 		
-		var animation = folderPane.getElementsByTagName("div")[0];
-		animation.parentNode.removeChild(animation);
-		
+		var animation = folderPane.getElementsByTagName("div");
+		if (animation != null && animation.length == 1) {
+			folderPane.removeChild(animation[0]);
+		}
+
+		var list = folderPane.getElementsByTagName("ul");
+		if (list != null && list.length == 1) {
+			folderPane.removeChild(list[0]);
+			refresh = true;
+		}
+
 		if (folders.length > 0) {
 			selectedFolder = folders[0];
 			
@@ -268,7 +280,9 @@ var Mail = {
 			Mail.setCurrentFolder(selectedFolder);
 		}
 		
-		Mail.getPreview();
+		if (!refresh) {
+			Mail.getPreview();
+		}
 	},
 	
 	getMessageDetails : function(messageId) {
@@ -505,8 +519,10 @@ var Mail = {
 			}
 			
 			Mail.resetLastSelected();
+
+			Mail.getFolders();
 		}
-		
+
 	},
 	
 	onFolderSelect : function() {
