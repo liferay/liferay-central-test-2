@@ -337,6 +337,7 @@
 			<then>
 				<copy todir="${app.server.deploy.dir}/ROOT">
 					<fileset dir="docroot">
+						<include name="**/*.js" />
 						<include name="**/*.jsp" />
 					</fileset>
 				</copy>
