@@ -354,7 +354,11 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 			throw new SystemException(ioe);
 		}
 		catch (ParseException pe) {
-			throw new SystemException(pe);
+			//throw new SystemException(pe);
+
+			_log.error("Error parsing keywords " + keywords);
+
+			return new Hits();
 		}
 	}
 

@@ -156,8 +156,8 @@ public class Hits implements Serializable {
 	private org.apache.lucene.search.Hits _hits;
 	private long _start;
 	private float _searchTime;
-	private Document[] _docs;
+	private Document[] _docs = new Document[0];
 	private int _length;
-	private float[] _scores;
+	private float[] _scores = new float[0];
 
 }
