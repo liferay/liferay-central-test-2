@@ -83,7 +83,7 @@ String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METH
 					parent.fckEditorCount = 0;
 				}
 
-				setTimeout("initFckArea()", 200 * parent.fckEditorCount);
+				setTimeout("initFckArea()", 500 * parent.fckEditorCount);
 
 				parent.fckEditorCount++;
 			}
