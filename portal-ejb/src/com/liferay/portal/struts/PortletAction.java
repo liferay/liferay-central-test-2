@@ -92,8 +92,24 @@ public class PortletAction extends Action {
 		RenderResponse renderResponse =
 			(RenderResponse)req.getAttribute(WebKeys.JAVAX_PORTLET_RESPONSE);
 
-		return render(
-			mapping, form, portletConfig, renderRequest, renderResponse);
+		Boolean strutsExecute = (Boolean)req.getAttribute(
+			WebKeys.PORTLET_STRUTS_EXECUTE);
+
+		if ((strutsExecute != null) && strutsExecute.booleanValue()) {
+			return strutsExecute(mapping, form, req, res);
+		}
+		else {
+			return render(
+				mapping, form, portletConfig, renderRequest, renderResponse);
+		}
+	}
+
+	public ActionForward strutsExecute(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
+		throws Exception {
+
+		return super.execute(mapping, form, req, res);
 	}
 
 	public void processAction(

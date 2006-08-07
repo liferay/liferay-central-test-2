@@ -145,7 +145,7 @@ String fileMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(PropsU
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<a href="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/document_library/get_file" /><portlet:param name="folderId" value="<%= folderId %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>">
+			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>">
 			<%= name %>
 			</a>
 		</td>
@@ -175,6 +175,22 @@ String fileMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(PropsU
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<%= fileEntry.getReadCount() %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "url") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<a href="<%= Http.getProtocol(request) %>://<%= request.getServerName() %><%= themeDisplay.getPathImage() %>/document_library?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>" target="_blank">
+			<%= Http.getProtocol(request) %>://<%= request.getServerName() %><%= themeDisplay.getPathImage() %>/document_library?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>
+			</a>
 		</td>
 	</tr>
 	<tr>

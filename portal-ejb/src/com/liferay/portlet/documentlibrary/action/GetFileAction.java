@@ -38,11 +38,13 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
@@ -53,44 +55,65 @@ import org.apache.struts.action.ActionMapping;
  */
 public class GetFileAction extends PortletAction {
 
+	public ActionForward strutsExecute(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
+		throws Exception {
+
+		String folderId = ParamUtil.getString(req, "folderId");
+		String name = ParamUtil.getString(req, "name");
+		double version = ParamUtil.getDouble(req, "version");
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		getFile(folderId, name, version, themeDisplay, res);
+
+		return null;
+	}
+
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		try {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		String folderId = ParamUtil.getString(req, "folderId");
+		String name = ParamUtil.getString(req, "name");
+		double version = ParamUtil.getDouble(req, "version");
 
-			String companyId = themeDisplay.getCompanyId();
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			String folderId = ParamUtil.getString(req, "folderId");
-			String name = ParamUtil.getString(req, "name");
-			double version = ParamUtil.getDouble(req, "version");
+		HttpServletResponse httpRes =
+			((ActionResponseImpl)res).getHttpServletResponse();
 
-			DLFileEntryPermission.check(
-				themeDisplay.getPermissionChecker(), folderId, name,
-				ActionKeys.VIEW);
+		getFile(folderId, name, version, themeDisplay, httpRes);
+	}
 
-			InputStream is = null;
+	protected void getFile(
+			String folderId, String name, double version,
+			ThemeDisplay themeDisplay, HttpServletResponse res)
+		throws Exception {
 
-			if (version > 0) {
-				is = DLFileEntryLocalServiceUtil.getFileAsStream(
-					companyId, req.getRemoteUser(), folderId, name, version);
-			}
-			else {
-				is = DLFileEntryLocalServiceUtil.getFileAsStream(
-					companyId, req.getRemoteUser(), folderId, name);
-			}
+		String companyId = themeDisplay.getCompanyId();
+		String userId = themeDisplay.getUserId();
 
-			HttpServletResponse httpRes =
-				((ActionResponseImpl)res).getHttpServletResponse();
+		DLFileEntryPermission.check(
+			themeDisplay.getPermissionChecker(), folderId, name,
+			ActionKeys.VIEW);
 
-			ServletResponseUtil.sendFile(httpRes, name, is);
+		InputStream is = null;
+
+		if (version > 0) {
+			is = DLFileEntryLocalServiceUtil.getFileAsStream(
+				companyId, userId, folderId, name, version);
 		}
-		catch (Exception e) {
-			_log.error(e);
+		else {
+			is = DLFileEntryLocalServiceUtil.getFileAsStream(
+				companyId, userId, folderId, name);
 		}
+
+		ServletResponseUtil.sendFile(res, name, is);
 	}
 
 	private static Log _log = LogFactory.getLog(GetFileAction.class);

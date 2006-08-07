@@ -27,6 +27,7 @@ import com.liferay.portal.PortletActiveException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.UserActiveException;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
@@ -173,9 +174,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			}
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-
-			_log.error(e);
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
 
@@ -723,6 +722,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			renderRequestImpl, res, portletId, portlet.getCompanyId());
 
 		renderRequestImpl.defineObjects(portletConfig, renderResponseImpl);
+
+		req.setAttribute(WebKeys.PORTLET_STRUTS_EXECUTE, Boolean.TRUE);
 	}
 
 	protected void cleanUp(HttpServletRequest req) throws Exception {

@@ -221,6 +221,8 @@ public class WebKeys {
 
 	public static final String PORTLET_STRUTS_EXCEPTION = "PORTLET_STRUTS_EXCEPTION";
 
+	public static final String PORTLET_STRUTS_EXECUTE = "PORTLET_STRUTS_EXECUTE";
+
 	public static final String PORTLET_STRUTS_FORWARD = "PORTLET_STRUTS_FORWARD";
 
 	public static final String PORTLET_STRUTS_PROCESSOR = "PORTLET_STRUTS_PROCESSOR";

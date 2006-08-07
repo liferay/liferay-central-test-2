@@ -24,9 +24,7 @@ package com.liferay.portal.editor.fckeditor.receiver.impl;
 
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
-import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.LiferayWindowState;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceUtil;
@@ -34,6 +32,7 @@ import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryServiceUtil
 import com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.spring.DLFolderServiceUtil;
 import com.liferay.util.FileUtil;
+import com.liferay.util.Http;
 import com.liferay.util.StringPool;
 
 import java.io.File;
@@ -132,18 +131,17 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			fileEl.setAttribute("desc", fileEntry.getName());
 			fileEl.setAttribute("size", getSize(fileEntry.getSize()));
 
-			PortletURLImpl portletURL = new PortletURLImpl(
-				arg.getHttpServletRequest(), PortletKeys.DOCUMENT_LIBRARY,
-				arg.getPlid(), true);
+			StringBuffer url = new StringBuffer();
 
-			portletURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+			ThemeDisplay themeDisplay = arg.getThemeDisplay();
 
-			portletURL.setParameter(
-				"struts_action", "/document_library/get_file");
-			portletURL.setParameter("folderId", fileEntry.getFolderId());
-			portletURL.setParameter("name", fileEntry.getName());
+			url.append(themeDisplay.getPathMain());
+			url.append("/document_library/get_file?folderId=");
+			url.append(fileEntry.getFolderId());
+			url.append("&name=");
+			url.append(Http.encodeURL(fileEntry.getName()));
 
-			fileEl.setAttribute("url", portletURL.toString());
+			fileEl.setAttribute("url", url.toString());
 		}
 	}
 
