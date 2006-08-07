@@ -28,11 +28,11 @@
 	<script type="text/javascript">
 		function <portlet:namespace />goToPlace(ownerId) {
 			document.<portlet:namespace />fm.<portlet:namespace />ownerId.value = ownerId;
-			submitForm(document.<portlet:namespace />fm);
+			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/my_places/view" /></portlet:actionURL>", false);
 		}
 	</script>
 
-	<form action="<portlet:actionURL><portlet:param name="struts_action" value="/my_places/view" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+	<form method="post" name="<portlet:namespace />fm">
 	<input type="hidden" name="<portlet:namespace />ownerId" value="">
 
 	<%
