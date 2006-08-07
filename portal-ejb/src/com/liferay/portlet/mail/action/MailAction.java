@@ -205,6 +205,8 @@ public class MailAction extends JSONAction {
 	protected String getPreview(HttpServletRequest req) throws Exception {
 		JSONObject jsonObj = new JSONObject();
 
+		String folderId = ParamUtil.getString(req, "folderId");
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -274,7 +276,7 @@ public class MailAction extends JSONAction {
 			jsonEnvelopes.put(jsonEnvelope);
 		}
 
-		jsonObj.put("folderId", ParamUtil.getString(req, "folderId"));
+		jsonObj.put("folderId", folderId);
 		jsonObj.put("headers", jsonEnvelopes);
 
 		return jsonObj.toString();
