@@ -219,10 +219,9 @@ public class DescriptionHandlerImpl implements DescriptionHandler {
 
 		// get portlet config so we can get localized title
 		ServletContext ctx = WSRPUtil.getServletContext();
-		ServletContext portalCtx = ctx.getContext(PropsUtil
-				.get(PropsUtil.PORTAL_CTX));
+
 		PortletConfig portletConfig = PortletConfigFactory.create(portlet,
-				portalCtx);
+			ctx);
 
 		// get requested language
 		HttpServletRequest req = WSRPUtil.getHttpServletRequest();

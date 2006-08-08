@@ -10,6 +10,9 @@
 		<param-name>contextClass</param-name>
 		<param-value>com.liferay.portal.spring.context.PortalWebApplicationContext</param-value>
 	</context-param>
+	<listener>
+		<listener-class>com.liferay.portal.kernel.servlet.TunnelContextListener</listener-class>
+	</listener>
 	<filter>
 		<filter-name>Secure AxisServlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalFilterWrapper</filter-class>

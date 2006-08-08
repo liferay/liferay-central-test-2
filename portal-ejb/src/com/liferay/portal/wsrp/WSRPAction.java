@@ -22,6 +22,8 @@
 
 package com.liferay.portal.wsrp;
 
+import com.liferay.portal.kernel.servlet.TunnelContextListener;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -45,15 +47,14 @@ public class WSRPAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
-		ServletContext ctx = req.getSession().getServletContext();
+		ServletContext ctx = TunnelContextListener.getServletContext();
 
 		String pathInfo = req.getPathInfo();
-		pathInfo = pathInfo.replaceAll("wsrp", "services");
+		pathInfo = pathInfo.replaceAll("wsrp", "axis");
 
 		RequestDispatcher rd = ctx.getRequestDispatcher(pathInfo);
 		rd.forward(req, res);
 
 		return null;
 	}
-
 }

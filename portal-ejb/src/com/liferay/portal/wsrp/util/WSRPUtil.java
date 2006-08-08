@@ -23,6 +23,8 @@
 package com.liferay.portal.wsrp.util;
 
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.wsrp.util.comparator.PortletDescriptionComparator;
 
 import java.util.Comparator;
@@ -58,7 +60,7 @@ public class WSRPUtil {
 	}
 
 	public static ServletContext getServletContext() {
-		return ServletAccess.getServletContext();
+		return (ServletContext)getHttpServletRequest().getAttribute(WebKeys.CTX);
 	}
 
 	public static PortletMode fromWsrpMode(String wsrpMode) {

@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
@@ -47,6 +48,7 @@ import com.liferay.util.CollectionFactory;
 
 import java.io.IOException;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -112,15 +114,12 @@ public class PortletInvokerImpl implements PortletInvoker {
 			ServletContext ctx = WSRPUtil.getServletContext();
 			String companyId = WSRPUtil.getCompanyId();
 
-			ServletContext portalCtx = ctx.getContext(PropsUtil
-					.get(PropsUtil.PORTAL_CTX));
-
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(companyId,
 					portletHandle);
 			CachePortlet cachePortlet = PortletInstanceFactory.create(portlet,
-					portalCtx);
+					ctx);
 			PortletConfig portletConfig = PortletConfigFactory.create(portlet,
-					portalCtx);
+					ctx);
 			PortletContext portletCtx = portletConfig.getPortletContext();
 
 			Locale reqLocale = LocaleHelper
@@ -192,15 +191,12 @@ public class PortletInvokerImpl implements PortletInvoker {
 			ServletContext ctx = WSRPUtil.getServletContext();
 			String companyId = WSRPUtil.getCompanyId();
 
-			ServletContext portalCtx = ctx.getContext(PropsUtil
-					.get(PropsUtil.PORTAL_CTX));
-
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(companyId,
 					portletHandle);
 			CachePortlet cachePortlet = PortletInstanceFactory.create(portlet,
-					portalCtx);
+				ctx);
 			PortletConfig portletConfig = PortletConfigFactory.create(portlet,
-					portalCtx);
+				ctx);
 			PortletContext portletCtx = portletConfig.getPortletContext();
 
 			Locale reqLocale = LocaleHelper
@@ -261,20 +257,13 @@ public class PortletInvokerImpl implements PortletInvoker {
 	private Layout _getDefaultUserLayout(String actualCompanyId)
 		throws PortalException, SystemException {
 
-		/*Group generalGuestGroup =
-			GroupLocalServiceUtil.getGroupByName(
-				actualCompanyId, Group.GENERAL_GUEST);
-
-		List layoutsList = GroupLocalServiceUtil.getLayouts(
-			generalGuestGroup.getGroupId(),
-			Layout.DEFAULT_PARENT_LAYOUT_ID);
-
-		return (Layout)layoutsList.get(0);*/
-		return null; // FIX ME
+		Layout layout = LayoutLocalServiceUtil.getLayout("1", "PUB.1");
+		
+		return layout;
 	}
 
 	private static Map _getFormParameters(NamedString[] params) {
-		Map formParameters = CollectionFactory.getSyncHashMap();
+		Map formParameters = new HashMap();
 
 		if (params != null) {
 			for (int i = 0; i < params.length; i++) {
@@ -301,7 +290,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 	}
 
 	private Map _getParameters(String paramString) {
-		Map navParams = CollectionFactory.getSyncHashMap();
+		Map navParams = new HashMap();
 
 		if (paramString != null) {
 			byte[] desMap = Base64.decode(paramString);
@@ -329,7 +318,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 	}
 
 	private Map _getRenderParameters(HttpServletRequest req, ActionResponseImpl res) {
-		Map params = CollectionFactory.getHashMap();
+		Map params = new HashMap();
 		params.putAll(res.getRenderParameters());
 
 		String[] plid = req.getParameterValues("p_l_id");
@@ -342,7 +331,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 		params.put("p_p_action", action);
 
 		String[] windowState = req.getParameterValues("p_p_state");
-		params.put("p_p_state", windowState.toString());
+		params.put("p_p_state", windowState);
 
 		String[] portletMode = req.getParameterValues("p_p_mode");
 		params.put("p_p_mode", portletMode);

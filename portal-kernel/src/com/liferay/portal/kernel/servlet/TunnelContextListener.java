@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
+ * Copyright (c) 2000-2005 Liferay, LLC. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,58 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.util;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
+package com.liferay.portal.kernel.servlet;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 
 /**
- * <a href="PortalInitableUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="TunnelContextListener.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
+ * @author  Michael Young
+ * @version $Revision: $
  *
  */
-public class PortalInitableUtil {
-	public synchronized static void init(PortalInitable initable) {
-		if (_initables == null) {
-			initable.portalInit();
-		}
-		else {
-			_initables.add(initable);
-		}
+public class TunnelContextListener implements ServletContextListener {
+
+	public void contextDestroyed(ServletContextEvent event) {
+		_ctx = null;
 	}
 
-	public synchronized static void flushInitables() {
-		if (_initables != null) {
-			Iterator itr = _initables.iterator();
-
-			while (itr.hasNext()) {
-				PortalInitable initable = (PortalInitable)itr.next();
-
-				initable.portalInit();
-
-				itr.remove();
-			}
-
-			_initables = null;
-		}
+	public void contextInitialized(ServletContextEvent event) {
+		_ctx = event.getServletContext();
 	}
 
-	public static void setServletContext(String name, 
-		ServletContext ctx) {
-		
+	public static ServletContext getServletContext() {
+		return _ctx;
 	}
 	
-	public static void getServletContext(String name) {
-		
-	}
-	private static List _initables = new Vector();
-	
-	private static Map _servletContextRegistry = new HashMap();
-
+	private static ServletContext _ctx;
 }
