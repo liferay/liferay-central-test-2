@@ -3,7 +3,7 @@
 <project name="laszlo-web" basedir="." default="war">
 	<import file="../build-common-web.xml" />
 
-	<property name="lps.file" value="lps-3.3.1.war" />
+	<property name="lps.file" value="lps-3.3.3.war" />
 	<property name="war.file" value="${ant.project.name}" />
 
 	<target name="clean" depends="build-common-web.clean">
