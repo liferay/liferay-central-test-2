@@ -108,6 +108,7 @@
 	<classpathentry kind="lib" path="lib/portal/secure-filter.jar"/>
 	<classpathentry kind="lib" path="lib/portal/simplecaptcha.jar"/>
 	<classpathentry kind="lib" path="lib/portal/slf4j-log4j12.jar"/>
+	<classpathentry kind="lib" path="lib/portal/smack.jar"/>
 	<classpathentry kind="lib" path="lib/portal/soap.jar"/>
 	<classpathentry kind="lib" path="lib/portal/spring.jar"/>
 	<classpathentry kind="lib" path="lib/portal/strip-filter.jar"/>
