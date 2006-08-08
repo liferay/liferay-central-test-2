@@ -19,6 +19,7 @@
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
+		<system>true</system>
 	</portlet>
 	<portlet>
 		<portlet-name>3</portlet-name>

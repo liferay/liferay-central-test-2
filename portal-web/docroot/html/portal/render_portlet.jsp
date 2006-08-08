@@ -56,9 +56,6 @@ catch (NoSuchResourceException nsre) {
 	else if (portletId.equals(PortletKeys.JOURNAL_CONTENT_SEARCH)) {
 		addDefaultResource = true;
 	}
-	else if (portletId.equals(PortletKeys.MY_ACCOUNT)) {
-		addDefaultResource = true;
-	}
 	else if (themeDisplay.isSignedIn()) {
 		if (portletId.equals(PortletKeys.LAYOUT_CONFIGURATION) || portletId.equals(PortletKeys.LAYOUT_MANAGEMENT)) {
 			Group group = layout.getGroup();
@@ -75,6 +72,9 @@ catch (NoSuchResourceException nsre) {
 					addDefaultResource = true;
 				}
 			}
+		}
+		else if (portletId.equals(PortletKeys.MY_ACCOUNT)) {
+			addDefaultResource = true;
 		}
 		else if (portletId.equals(PortletKeys.MY_PLACES)) {
 			addDefaultResource = true;
