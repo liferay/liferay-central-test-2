@@ -243,6 +243,13 @@
 							includes="activation.jar,jms.jar,jta.jar,mail.jar"
 						/>
 					</copy>
+
+					<move todir="${app.server.dir}/common/endorsed">
+						<fileset
+							dir="${app.server.lib.portal.dir}"
+							includes="xercesImpl.jar"
+						/>
+					</move>
 				</then>
 			</elseif>
 		</if>
