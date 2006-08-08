@@ -295,20 +295,23 @@ String fileMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(PropsU
 
 		ResultRow row = new ResultRow(new Object[] {fileEntry, fileVersion, portletURL, isLocked, hasLock}, fileVersion.getPrimaryKey().toString(), i);
 
-		PortletURL rowURL = renderResponse.createActionURL();
+		StringBuffer sb = new StringBuffer();
 
-		rowURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+		sb.append(themeDisplay.getPathMain());
+		sb.append("/document_library/get_file?folderId=");
+		sb.append(folderId);
+		sb.append("&name=");
+		sb.append(Http.encodeURL(name));
+		sb.append("&version=");
+		sb.append(String.valueOf(fileVersion.getVersion()));
 
-		rowURL.setParameter("struts_action", "/document_library/get_file");
-		rowURL.setParameter("folderId", folderId);
-		rowURL.setParameter("name", name);
-		rowURL.setParameter("version", Double.toString(fileVersion.getVersion()));
+		String rowHREF = sb.toString();
 
 		// Statistics
 
-		row.addText(Double.toString(fileVersion.getVersion()), rowURL);
-		row.addText(dateFormatDateTime.format(fileVersion.getCreateDate()), rowURL);
-		row.addText(TextFormatter.formatKB(fileVersion.getSize(), locale) + "k", rowURL);
+		row.addText(Double.toString(fileVersion.getVersion()), rowHREF);
+		row.addText(dateFormatDateTime.format(fileVersion.getCreateDate()), rowHREF);
+		row.addText(TextFormatter.formatKB(fileVersion.getSize(), locale) + "k", rowHREF);
 
 		// Action
 

@@ -196,17 +196,19 @@ boolean showAddFolderButton = DLFolderPermission.contains(permissionChecker, pli
 
 		ResultRow row = new ResultRow(fileEntry, fileEntry.getPrimaryKey().toString(), i);
 
-		PortletURL rowURL = renderResponse.createActionURL();
+		StringBuffer sb = new StringBuffer();
 
-		rowURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+		sb.append(themeDisplay.getPathMain());
+		sb.append("/document_library/get_file?folderId=");
+		sb.append(folder.getFolderId());
+		sb.append("&name=");
+		sb.append(Http.encodeURL(fileEntry.getName()));
 
-		rowURL.setParameter("struts_action", "/document_library/get_file");
-		rowURL.setParameter("folderId", folder.getFolderId());
-		rowURL.setParameter("name", fileEntry.getName());
+		String rowHREF = sb.toString();
 
 		// Title
 
-		StringBuffer sb = new StringBuffer();
+		sb = new StringBuffer();
 
 		sb.append("<img align=\"left\" border=\"0\" src=\"");
 		sb.append(themeDisplay.getPathThemeImage());
@@ -215,18 +217,18 @@ boolean showAddFolderButton = DLFolderPermission.contains(permissionChecker, pli
 		sb.append(".gif\">");
 		sb.append(fileEntry.getTitle());
 
-		row.addText(sb.toString(), rowURL);
+		row.addText(sb.toString(), rowHREF);
 
 		// Statistics
 
-		row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowURL);
-		row.addText(Integer.toString(fileEntry.getReadCount()), rowURL);
+		row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowHREF);
+		row.addText(Integer.toString(fileEntry.getReadCount()), rowHREF);
 
 		// Locked
 
 		boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), fileEntry.getPrimaryKey());
 
-		row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowURL);
+		row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
 
 		// Action
 
