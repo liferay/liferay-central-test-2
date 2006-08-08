@@ -564,6 +564,18 @@ public class PropsUtil {
 
 	public static final String IG_IMAGE_THUMBNAIL_MAX_WIDTH = "ig.image.thumbnail.max.width";
 
+	// Jabber XMPP
+
+	public static final String JABBER_XMPP_SERVER_ADDRESS = "jabber.xmpp.server.address";
+
+	public static final String JABBER_XMPP_SERVER_ENABLED = "jabber.xmpp.server.enabled";
+
+	public static final String JABBER_XMPP_SERVER_NAME = "jabber.xmpp.server.name";
+
+	public static final String JABBER_XMPP_SERVER_PORT = "jabber.xmpp.server.port";
+
+	public static final String JABBER_XMPP_USER_PASSWORD = "jabber.xmpp.user.password";
+
 	// Journal Portlet
 
 	public static final String JOURNAL_ARTICLE_TYPES = "journal.article.types";
