@@ -187,6 +187,8 @@ public class EditMessageAction extends PortletAction {
 					StringPool.BLANK
 				};
 
+				req.setAttribute(WebKeys.MAIL_MESSAGE_ORIGINAL_ID,
+					String.valueOf(mailMessage.getMessageId()));
 				req.setAttribute(WebKeys.MAIL_MESSAGE_RECIPIENTS, recipients);
 				req.setAttribute(
 					WebKeys.MAIL_MESSAGE_SUBJECT,
@@ -212,7 +214,8 @@ public class EditMessageAction extends PortletAction {
 			String[] recipients = new String[] {to, cc, bcc};
 
 			req.setAttribute(
-				WebKeys.MAIL_MESSAGE_DRAFT_ID, new Long(messageId));
+				WebKeys.MAIL_MESSAGE_ORIGINAL_ID,
+				new String(_DRAFT_ID_PREFIX + messageId));
 			req.setAttribute(WebKeys.MAIL_MESSAGE_RECIPIENTS, recipients);
 			req.setAttribute(
 				WebKeys.MAIL_MESSAGE_SUBJECT, mailMessage.getSubject());
@@ -223,7 +226,7 @@ public class EditMessageAction extends PortletAction {
 				mailMessage.getRemoteAttachments());
 		}
 		else if (cmd.equals(Constants.SEND)) {
-			long draftId = ParamUtil.getLong(req, "draftId");
+			String originalId = ParamUtil.getString(req, "originalId");
 
 			String to = ParamUtil.getString(req, "to");
 			String cc = ParamUtil.getString(req, "cc");
@@ -234,8 +237,7 @@ public class EditMessageAction extends PortletAction {
 			String subject = ParamUtil.getString(req, "subject");
 			String body = ParamUtil.getString(req, "body");
 
-			req.setAttribute(
-				WebKeys.MAIL_MESSAGE_DRAFT_ID, new Long(draftId));
+			req.setAttribute(WebKeys.MAIL_MESSAGE_ORIGINAL_ID, originalId);
 			req.setAttribute(WebKeys.MAIL_MESSAGE_RECIPIENTS, recipients);
 			req.setAttribute(WebKeys.MAIL_MESSAGE_SUBJECT, subject);
 			req.setAttribute(WebKeys.MAIL_MESSAGE_BODY, body);
@@ -256,7 +258,15 @@ public class EditMessageAction extends PortletAction {
 
 		User user = PortalUtil.getUser(req);
 
-		long draftId = ParamUtil.getLong(req, "draftId");
+		String originalId = ParamUtil.getString(req, "originalId");
+
+		boolean wasDraft = false;
+
+		if (originalId.startsWith(_DRAFT_ID_PREFIX)) {
+			wasDraft = true;
+			
+			originalId = originalId.substring(_DRAFT_ID_PREFIX.length());
+		}
 
 		String to = ParamUtil.getString(req, "to");
 		String cc = ParamUtil.getString(req, "cc");
@@ -305,7 +315,8 @@ public class EditMessageAction extends PortletAction {
 		ActionRequestImpl actionReqImpl = (ActionRequestImpl)req;
 
 		MailUtil.completeMessage(
-			actionReqImpl.getHttpServletRequest(), mailMessage, send, draftId);
+			actionReqImpl.getHttpServletRequest(), mailMessage, send,
+			originalId, wasDraft);
 	}
 
 	protected Map getAttachments(ActionRequest req) throws Exception {
@@ -403,5 +414,7 @@ public class EditMessageAction extends PortletAction {
 
 		return subject;
 	}
+
+	private String _DRAFT_ID_PREFIX = "draft.";
 
 }

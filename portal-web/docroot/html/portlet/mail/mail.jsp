@@ -209,6 +209,24 @@ String mailLineColor = "#B3B6B0";
 				padding-right: 5px;
 			}
 
+			#portlet-mail-msgs-title-state {
+				overflow: hidden;
+				width: 24px;
+			}
+
+			#portlet-mail-msgs-title-state div {
+				padding: 2px 0 2px 5px;
+			}
+
+			#portlet-mail-msgs-title-from {
+				overflow: hidden;
+				width: 16px;
+			}
+
+			#portlet-mail-msgs-title-from div {
+				padding: 2px 0 2px 5px;
+			}
+
 			#portlet-mail-msgs-title-from {
 				overflow: hidden;
 				width: 150px;
@@ -257,6 +275,19 @@ String mailLineColor = "#B3B6B0";
 				font-size: 0;
 				height: 1px;
 				width: 3px;
+			}
+
+			#portlet-mail-msgs-state {
+				overflow: hidden;
+				width: 24px;
+			}
+
+			#portlet-mail-msgs-state div {
+				height: 16px;
+				overflow: hidden;
+				padding-left: 5px;
+				position: relative;
+				width: 24px;
 			}
 
 			#portlet-mail-msgs-from {
@@ -373,6 +404,16 @@ String mailLineColor = "#B3B6B0";
 							<table border="0" cellpadding="0" cellspacing="0" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"100%\"" %>>
 							<tr>
 								<td class="portlet-mail-msgs-title">
+									<div id="portlet-mail-msgs-title-state">
+										<div class="portlet-mail-title-text">
+											<img src="<%= themeDisplay.getPathThemeImage() %>/mail/read.gif" />
+										</div>
+									</div>
+								</td>
+								<td>
+									<div class="portlet-mail-msgs-title-handle"></div>
+								</td>
+								<td class="portlet-mail-msgs-title">
 									<div id="portlet-mail-msgs-title-from">
 										<div class="portlet-mail-title-text">
 											<span><%= LanguageUtil.get(pageContext, "from") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "to") %></span>
@@ -405,6 +446,13 @@ String mailLineColor = "#B3B6B0";
 							<div id="portlet-mail-msgs-preview-pane">
 								<table border="0" cellpadding="0" cellspacing="0" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"100%\"" %>>
 								<tr>
+									<td>
+										<div id="portlet-mail-msgs-state">
+										</div>
+									</td>
+									<td>
+										<div class="portlet-mail-msgs-title-handle"></div>
+									</td>
 									<td>
 										<div id="portlet-mail-msgs-from">
 										</div>

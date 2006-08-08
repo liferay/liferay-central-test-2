@@ -37,6 +37,7 @@ import com.liferay.portlet.mail.model.MailMessage;
 import com.liferay.portlet.mail.util.MailUtil;
 import com.liferay.portlet.mail.util.comparator.DateComparator;
 import com.liferay.portlet.mail.util.comparator.RecipientComparator;
+import com.liferay.portlet.mail.util.comparator.StateComparator;
 import com.liferay.portlet.mail.util.comparator.SubjectComparator;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
@@ -124,7 +125,10 @@ public class MailAction extends JSONAction {
 
 		Set envelopes = null;
 
-		if (sortBy.equals("name")) {
+		if (sortBy.equals("state")) {
+			envelopes = MailUtil.getEnvelopes(ses, new StateComparator(asc));
+		}
+		else if (sortBy.equals("name")) {
 			envelopes = MailUtil.getEnvelopes(
 				ses, new RecipientComparator(asc));
 		}
@@ -272,6 +276,8 @@ public class MailAction extends JSONAction {
 			jsonEnvelope.put("email", recipient);
 			jsonEnvelope.put("subject", subject);
 			jsonEnvelope.put("read", mailEnvelope.isRead());
+			jsonEnvelope.put("replied", mailEnvelope.isAnswered());
+			jsonEnvelope.put("flagged", mailEnvelope.isFlagged());
 
 			jsonEnvelopes.put(jsonEnvelope);
 		}

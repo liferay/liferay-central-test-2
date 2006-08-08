@@ -173,7 +173,7 @@ public class WebKeys {
 
 	public static final String MAIL_MESSAGE_BODY = "MAIL_MESSAGE_BODY";
 
-	public static final String MAIL_MESSAGE_DRAFT_ID = "MAIL_MESSAGE_DRAFT_ID";
+	public static final String MAIL_MESSAGE_ORIGINAL_ID = "MAIL_MESSAGE_ORIGINAL_ID";
 
 	public static final String MAIL_MESSAGE_ID = "MAIL_MESSAGE_ID";
 

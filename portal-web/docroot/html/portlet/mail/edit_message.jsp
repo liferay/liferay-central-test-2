@@ -25,10 +25,10 @@
 <%@ include file="/html/portlet/mail/init.jsp" %>
 
 <%
-Long draftId = (Long)request.getAttribute(WebKeys.MAIL_MESSAGE_DRAFT_ID);
+String originalId = (String)request.getAttribute(WebKeys.MAIL_MESSAGE_ORIGINAL_ID);
 
-if (draftId == null) {
-	draftId = new Long(0);
+if (originalId == null) {
+	originalId = "0";
 }
 
 String to = StringPool.BLANK;
@@ -127,7 +127,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_render" value="/mail/view" /></portlet:renderURL>">
-<input name="<portlet:namespace />draftId" type="hidden" value="<%= draftId %>" />
+<input name="<portlet:namespace />originalId" type="hidden" value="<%= originalId %>" />
 <input name="<portlet:namespace />body" type="hidden" value="" />
 
 <liferay-ui:error exception="<%= ContentException.class %>" message="please-enter-valid-content" />

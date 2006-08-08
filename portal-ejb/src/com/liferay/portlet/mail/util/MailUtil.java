@@ -127,7 +127,7 @@ public class MailUtil {
 
 	public static void completeMessage(
 			HttpServletRequest req, MailMessage mailMessage, boolean send,
-			long draftId)
+			String originalId, boolean wasDraft)
 		throws ContentException, ContentPathException, FolderException,
 			   RecipientException, StoreException {
 
@@ -248,15 +248,27 @@ public class MailUtil {
 
 				folder.appendMessages(new Message[] {message});
 
-				if (draftId > 0) {
+				long origId = GetterUtil.getLong(originalId);
+
+				if (wasDraft) {
 					folder = _getFolder(ses, MAIL_DRAFTS_NAME);
 
-					Message msg = folder.getMessageByUID(draftId);
+					Message msg =
+						folder.getMessageByUID(origId);
 
 					folder.setFlags(new Message[] {msg},
 						new Flags(Flags.Flag.DELETED), true);
 
 					folder.expunge();
+				}
+				else if (origId > 0L) {
+					folder = _getFolder(ses, lastFolderName);
+
+					Message msg =
+						folder.getMessageByUID(origId);
+
+					folder.setFlags(new Message[] {msg},
+						new Flags(Flags.Flag.ANSWERED), true);
 				}
 
 				// Make sure to explicitly close and open the correct folder
@@ -575,7 +587,9 @@ public class MailUtil {
 			Message message = folder.getMessageByUID(messageId);
 
 			mailMessage.setMessageId(messageId);
-			mailMessage.setFrom(message.getFrom()[0]);
+			if (!Validator.isNull(message.getFrom())) {
+				mailMessage.setFrom(message.getFrom()[0]);
+			}
 			mailMessage.setTo(message.getRecipients(RecipientType.TO));
 			mailMessage.setCc(message.getRecipients(RecipientType.CC));
 			mailMessage.setBcc(message.getRecipients(RecipientType.BCC));

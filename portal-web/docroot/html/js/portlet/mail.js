@@ -1,7 +1,8 @@
-function MailSummaryObject(sender, subject, date, id, read) {
+function MailSummaryObject(state, sender, subject, date, id, read) {
 	this.next = null;
 	this.prev = null;
 	this.selected = false;
+	this.state = state;
 	this.id = id;
 	this.index = 0;
 	this.read = read;
@@ -77,12 +78,15 @@ var Mail = {
 			return;
 		}
 		
+		var msgsState = document.getElementById("portlet-mail-msgs-state");
 		var msgsSender = document.getElementById("portlet-mail-msgs-from");
 		var msgsSubject = document.getElementById("portlet-mail-msgs-subject");
 		var msgsDate = document.getElementById("portlet-mail-msgs-received");
 		
 		Mail.summaryList.head = null;
 		Mail.summaryList.tail = null;
+
+		msgsState.innerHTML = "";
 		msgsSender.innerHTML = "";
 		msgsSubject.innerHTML = "";
 		msgsDate.innerHTML = "";
@@ -312,7 +316,10 @@ var Mail = {
 		
 		if (!Mail.lastSelected.read) {
 			Mail.decrementCount();
-			
+
+			var stateImg = Mail.lastSelected.state.getElementsByTagName("img")[0];
+			stateImg.src = themeDisplay.getPathThemeImage() + "/mail/read.gif";
+
 			var summaryField = Mail.lastSelected.head;
 
 			while (summaryField) {
@@ -346,27 +353,36 @@ var Mail = {
 			return;
 		}
 
+		var msgsState = document.getElementById("portlet-mail-msgs-state");
 		var msgsSender = document.getElementById("portlet-mail-msgs-from");
 		var msgsSubject = document.getElementById("portlet-mail-msgs-subject");
 		var msgsDate = document.getElementById("portlet-mail-msgs-received");
 
 		for (var i = 0; i < mailObject.headers.length; i++) {
 			var header = mailObject.headers[i];
+			var state = document.createElement("div");
+			var stateImg = document.createElement("img");
 			var sender = document.createElement("div");
 			var subject = document.createElement("div");
 			var date = document.createElement("div");
 			
+			stateImg.src = themeDisplay.getPathThemeImage() + "/mail/read.gif";
 			sender.innerHTML = header.email;
 			subject.innerHTML = header.subject;
 			date.innerHTML = header.date;
-			var msObj = new MailSummaryObject(sender, subject, date, header.id, header.read);
+			var msObj = new MailSummaryObject(state, sender, subject, date, header.id, header.read);
 			var summaryList = Mail.summaryList;
 			
 			if (!header.read) {
+				stateImg.src = themeDisplay.getPathThemeImage() + "/mail/unread.gif";
+
 				/* Bold unread messages */
 				sender.style.fontWeight = "bold";
 				subject.style.fontWeight = "bold";
 				date.style.fontWeight = "bold";
+			}
+			else if (header.replied) {
+				stateImg.src = themeDisplay.getPathThemeImage() + "/mail/replied.gif";
 			}
 			
 			msObj.index = i;
@@ -382,6 +398,8 @@ var Mail = {
 				summaryList.tail = msObj;
 			}
 			
+			state.appendChild(stateImg);
+			msgsState.appendChild(state);
 			msgsSender.appendChild(sender);
 			msgsSubject.appendChild(subject);
 			msgsDate.appendChild(date);
@@ -426,6 +444,7 @@ var Mail = {
 		var detailedFrame = document.getElementById("portlet-mail-msg-detailed-frame");
 		var msgHeader = document.getElementById("portlet-mail-msg-header");
 		
+		var msgsTitleState = document.getElementById("portlet-mail-msgs-title-state");
 		var msgsTitleFrom = document.getElementById("portlet-mail-msgs-title-from");
 		var msgsTitleFromHandle = document.getElementById("portlet-mail-msgs-from-handle");
 		var msgsTitleSubject = document.getElementById("portlet-mail-msgs-title-subject");
@@ -458,13 +477,15 @@ var Mail = {
 		subjectGroup.addRule(new ResizeRule(msgsTitleReceived, Resize.HORIZONTAL, Resize.SUBTRACT));
 		subjectGroup.addRule(new ResizeRule(msgsReceived, Resize.HORIZONTAL, Resize.SUBTRACT));
 		
+		msgsTitleState.asc = true;
+		msgsTitleState.value = "state";
 		msgsTitleFrom.asc = true;
 		msgsTitleFrom.value = "name";
 		msgsTitleSubject.asc = true;
 		msgsTitleSubject.value = "subject";
 		msgsTitleReceived.asc = false;
 		msgsTitleReceived.value = "date";
-		msgsTitleFrom.onclick = msgsTitleSubject.onclick = msgsTitleReceived.onclick = Mail.onSortClick;
+		msgsTitleState.onclick = msgsTitleFrom.onclick = msgsTitleSubject.onclick = msgsTitleReceived.onclick = Mail.onSortClick;
 		Mail.sortBy = msgsTitleReceived;
 		Mail.updateSortArrow();
 		
@@ -875,7 +896,7 @@ var Mail = {
 				titleDiv.removeChild(image);
 			}
 			
-			if (Mail.sortBy == title) {
+			if (Mail.sortBy == title && title != "state") {
 				image = document.createElement("img");
 				
 				if (title.asc) {
