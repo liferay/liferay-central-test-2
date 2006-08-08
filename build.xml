@@ -723,6 +723,7 @@ app.server.jonas-jetty.ejbgen.compile=on</echo>
 		<antcall target="zip-jetty" />
 		<antcall target="zip-jonas" />
 		<antcall target="zip-portal-client" />
+		<antcall target="zip-portal-dependencies" />
 		<antcall target="zip-resin" />
 		<antcall target="zip-sql" />
 		<antcall target="zip-src" />
@@ -781,6 +782,15 @@ app.server.jonas-jetty.ejbgen.compile=on</echo>
 			basedir="."
 			includes="lib/development/activation.jar,lib/development/mail.jar,lib/portal/axis.jar,lib/portal/commons-discovery.jar,lib/portal/commons-logging.jar,lib/portal/jaxrpc.jar,lib/portal/saaj.jar,lib/portal/wsdl4j.jar,portal-client/portal-client.jar,portal-client/test/setenv.bat,portal-client/test/Test.java"
 		/>		
+	</target>
+
+	<target name="zip-portal-dependencies">
+		<delete file="liferay-portal-dependencies-${lp.version.file.name}.zip" failonerror="false" />
+
+		<zip zipfile="liferay-portal-dependencies-${lp.version.file.name}.zip">
+			<fileset dir="lib/global" includes="portlet.jar" />
+			<fileset dir="portal-kernel" includes="portal-kernel.jar" />
+		</zip>
 	</target>
 
 	<target name="zip-resin">
