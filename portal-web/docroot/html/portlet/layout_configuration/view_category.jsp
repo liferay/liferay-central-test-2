@@ -115,7 +115,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 											addPortlet('<%= plid %>', '<%= portlet.getPortletId() %>');
 
 											if (<%= !portlet.isInstanceable() %>) {
-												var div = document.getElementById('<%= newCategoryPath %>:<%= PortalUtil.getPortletTitle(portlet, application, locale) %>');
+												var div = document.getElementById('<%= StringUtil.replace(newCategoryPath + ":" + PortalUtil.getPortletTitle(portlet, application, locale), "'", "\\'") %>');
 
 												div.parentNode.removeChild(div);
 											};"
