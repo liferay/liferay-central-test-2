@@ -28,6 +28,7 @@
 String plid = ParamUtil.getString(request, "p_l_id");
 %>
 
+/*
 FCKConfig.ToolbarSets["Liferay"] = [
 	['Source','DocProps','-','NewPage','Preview','-','Templates'],
 	['Cut','Copy','Paste','PasteText','PasteWord','-','Print','SpellCheck'],
@@ -41,6 +42,21 @@ FCKConfig.ToolbarSets["Liferay"] = [
 	'/',
 	['Style','FontFormat','FontName','FontSize'],
 	['TextColor','BGColor']
+] ;
+*/
+FCKConfig.ToolbarSets["Liferay"] = [
+	['FontName','FontSize','-','TextColor','BGColor'],
+	['Bold','Italic','Underline','StrikeThrough'],
+	['Subscript','Superscript'],
+	'/',
+	['Undo','Redo','-','Cut','Copy','Paste','PasteText','PasteWord','-','SelectAll','RemoveFormat'],
+	['Find','Replace','SpellCheck'],
+	['OrderedList','UnorderedList','-','Outdent','Indent'],
+	['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
+	'/',
+	['Source'],
+	['Link','Unlink','Anchor'],
+	['Image','Flash','Table','-','Smiley','SpecialChar','UniversalKey']
 ] ;
 
 FCKConfig.LinkBrowserURL = FCKConfig.BasePath + "filemanager/browser/liferay/browser.html?Connector=/html/js/editor/fckeditor/editor/filemanager/browser/liferay/connectors/jsp/connector?p_l_id=<%= plid %>";
