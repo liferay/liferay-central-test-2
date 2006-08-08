@@ -22,13 +22,9 @@
 
 package com.liferay.portal.kernel.util;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
-
-import javax.servlet.ServletContext;
 
 /**
  * <a href="PortalInitableUtil.java.html"><b><i>View Source</i></b></a>
@@ -61,17 +57,4 @@ public class PortalInitableUtil {
 			_initables = null;
 		}
 	}
-
-	public static void setServletContext(String name, 
-		ServletContext ctx) {
-		
-	}
-	
-	public static void getServletContext(String name) {
-		
-	}
-	private static List _initables = new Vector();
-	
-	private static Map _servletContextRegistry = new HashMap();
-
 }
