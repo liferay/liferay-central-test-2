@@ -25,9 +25,9 @@
 <%@ include file="/html/portlet/hello_laszlo/init.jsp" %>
 
 <div style="text-align: center;">
-	<object height="15" data="/laszlo/portlet/hello_laszlo.lzx?lzt=swf" <c:if test="<%= !(BrowserSniffer.is_linux(request) && BrowserSniffer.is_mozilla(request)) %>">type="application/x-shockwave-flash"</c:if> width="100%">
+	<object height="15" data="/laszlo-web/portlet/hello_laszlo.lzx?lzt=swf" <c:if test="<%= !(BrowserSniffer.is_linux(request) && BrowserSniffer.is_mozilla(request)) %>">type="application/x-shockwave-flash"</c:if> width="100%">
 		<param name="menu" value="false" />
-		<param name="movie" value="/laszlo/portlet/hello_laszlo.lzx?lzt=swf" />
+		<param name="movie" value="/laszlo-web/portlet/hello_laszlo.lzx?lzt=swf" />
 		<param name="quality" value="high" />
 		<param name="salign" value="LT" />
 		<param name="scale" value="noscale" />
