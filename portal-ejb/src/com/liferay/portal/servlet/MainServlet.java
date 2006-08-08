@@ -55,7 +55,6 @@ import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletInstanceFactory;
-import com.liferay.portlet.chat.servlet.ChatServlet;
 import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
@@ -706,12 +705,6 @@ public class MainServlet extends ActionServlet {
 		}
 
 		req.setAttribute(WebKeys.CURRENT_URL, completeURL);
-
-		// Chat server
-
-		Object chatServer = ctx.getAttribute(ChatServlet.CHAT_SERVER);
-
-		req.setAttribute(ChatServlet.CHAT_SERVER, chatServer);
 
 		// Login
 
