@@ -93,7 +93,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 
 <c:choose>
 	<c:when test="<%= format.equals(WikiPage.HTML_FORMAT) %>">
-		<iframe frameborder="0" height="400" id="<portlet:namespace />editor" name="<portlet:namespace />editor" scrolling="no" src="<%= themeDisplay.getPathJavaScript() %>/editor/editor.jsp?p_l_id=<%= plid %>&editorImpl=<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>" width="100%"></iframe>
+		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" />
 
 		<input name="<portlet:namespace />content" type="hidden" value="">
 	</c:when>

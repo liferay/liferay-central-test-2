@@ -121,15 +121,15 @@ public class SourceFormatter {
 				});
 			ds.setExcludes(
 				new String[] {
-					"**\\classes\\*", "**\\jsp\\*", "**\\EARXMLBuilder.java",
-					"**\\EJBXMLBuilder.java", "**\\JSMin.java",
+					"**\\classes\\*", "**\\jsp\\*", "**\\tmp\\**",
+					"**\\EARXMLBuilder.java", "**\\EJBXMLBuilder.java",
+					"**\\JSMin.java", "**\\PropsUtil.java",
 					"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
-					"**\\XHTMLComplianceFormatter.java", "**\\PropsUtil.java",
 					"**\\UserAttributes.java", "**\\WebKeys.java",
-					"**\\portal\\service\\**", "**\\portal-client\\**",
-					"**\\portlet\\**\\service\\**", "**\\model\\*Model.java",
-					"**\\tools\\ext_tmpl\\**", "**\\util-wsrp\\**",
-					"**\\WEB-INF\\jcvs\\work\\**"
+					"**\\XHTMLComplianceFormatter.java",
+					"**\\model\\*Model.java", "**\\portal\\service\\**",
+					"**\\portal-client\\**", "**\\portlet\\**\\service\\**",
+					"**\\tools\\ext_tmpl\\**", "**\\util-wsrp\\**"
 				});
 			ds.setBasedir(basedir);
 			ds.scan();
@@ -139,16 +139,14 @@ public class SourceFormatter {
 			ds = new DirectoryScanner();
 			ds.setIncludes(
 				new String[] {
-					"**\\service\\impl\\*.java",
-					"**\\service\\jms\\*.java",
+					"**\\service\\impl\\*.java", "**\\service\\jms\\*.java",
 					"**\\service\\permission\\*.java",
 					"**\\persistence\\BasePersistence.java",
 					"**\\persistence\\*Finder.java"
 				});
 			ds.setExcludes(
 				new String[] {
-					"**\\tools\\ext_tmpl\\**",
-					"**\\WEB-INF\\jcvs\\work\\**"
+					"**\\tools\\ext_tmpl\\**"
 				});
 			ds.setBasedir(basedir);
 			ds.scan();
@@ -343,7 +341,7 @@ public class SourceFormatter {
 				});
 			ds.setExcludes(
 				new String[] {
-					"**\\null.jsp"
+					"**\\null.jsp", "**\\tmp\\**"
 				});
 			ds.setBasedir(basedir);
 			ds.scan();

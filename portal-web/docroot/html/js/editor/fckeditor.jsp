@@ -26,6 +26,7 @@
 
 <%
 String plid = ParamUtil.getString(request, "p_l_id");
+String mainPath = ParamUtil.getString(request, "p_main_path");
 String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METHOD);
 
 // To upgrade FCKEditor, download the latest version and unzip it to fckeditor.
@@ -47,7 +48,7 @@ String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METH
 
 		var fckConfigFile = new Image();
 
-		fckConfigFile.src = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>";
+		fckConfigFile.src = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= mainPath %>";
 
 		function getHTML() {
 			return FCKeditorAPI.GetInstance("FCKeditor1").GetXHTML();
@@ -64,7 +65,7 @@ String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METH
 
 			var fckEditor = new FCKeditor("FCKeditor1");
 
-			fckEditor.Config["CustomConfigurationsPath"] = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>";
+			fckEditor.Config["CustomConfigurationsPath"] = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= mainPath %>";
 
 			fckEditor.BasePath = "fckeditor/";
 			fckEditor.Width = "100%";

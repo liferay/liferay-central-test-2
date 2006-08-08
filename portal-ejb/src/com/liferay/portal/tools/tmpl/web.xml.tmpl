@@ -68,14 +68,9 @@
 		<load-on-startup>6</load-on-startup>
 	</servlet>
 	<servlet>
-		<servlet-name>FCKeditorServlet</servlet-name>
-		<servlet-class>com.liferay.portal.editor.fckeditor.ConnectorServlet</servlet-class>
-		<load-on-startup>7</load-on-startup>
-	</servlet>
-	<servlet>
 		<servlet-name>ResourceProxyServlet</servlet-name>
 		<servlet-class>com.liferay.portal.wsrp.servlet.ResourceProxyServlet</servlet-class>
-		<load-on-startup>8</load-on-startup>
+		<load-on-startup>7</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>ChatServlet</servlet-name>
@@ -89,17 +84,17 @@
 			<param-name>config</param-name>
 			<param-value>nfc/nfc.conf</param-value>
 		</init-param>
-		<load-on-startup>9</load-on-startup>
+		<load-on-startup>8</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>HttpService</servlet-name>
 		<servlet-class>com.liferay.portlet.httpbridge.servlet.HttpService</servlet-class>
-		<load-on-startup>10</load-on-startup>
+		<load-on-startup>9</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>UserService</servlet-name>
 		<servlet-class>com.liferay.portlet.httpbridge.servlet.UserService</servlet-class>
-		<load-on-startup>11</load-on-startup>
+		<load-on-startup>10</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MainServlet</servlet-name>
@@ -116,10 +111,6 @@
 	<servlet-mapping>
 		<servlet-name>ImageServlet</servlet-name>
 		<url-pattern>/image/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>FCKeditorServlet</servlet-name>
-		<url-pattern>/html/js/editor/fckeditor/editor/filemanager/browser/liferay/connectors/jsp/connector</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ResourceProxyServlet</servlet-name>

@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchPortletException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.PortletInfo;
@@ -238,7 +239,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			}
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 	}
 
@@ -307,7 +308,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			}
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 
 		// Refresh security path to portlet id mapping for all portlets

@@ -118,6 +118,8 @@
 
 		<action path="/portal/extend_session_confirm" forward="portal.extend_session_confirm" />
 
+		<action path="/portal/fckeditor" type="com.liferay.portal.editor.fckeditor.ConnectorAction" />
+
 		<action path="/portal/flash" forward="/portal/flash.jsp" />
 
 		<action path="/portal/group_forward" type="com.liferay.portal.action.GroupForwardAction" />

@@ -26,6 +26,7 @@
 
 <%
 String plid = ParamUtil.getString(request, "p_l_id");
+String mainPath = ParamUtil.getString(request, "p_main_path");
 %>
 
 /*
@@ -59,8 +60,8 @@ FCKConfig.ToolbarSets["Liferay"] = [
 	['Image','Flash','Table','-','Smiley','SpecialChar','UniversalKey']
 ] ;
 
-FCKConfig.LinkBrowserURL = FCKConfig.BasePath + "filemanager/browser/liferay/browser.html?Connector=/html/js/editor/fckeditor/editor/filemanager/browser/liferay/connectors/jsp/connector?p_l_id=<%= plid %>";
-FCKConfig.ImageBrowserURL = FCKConfig.BasePath + "filemanager/browser/liferay/browser.html?Type=Image&Connector=/html/js/editor/fckeditor/editor/filemanager/browser/liferay/connectors/jsp/connector?p_l_id=<%= plid %>";
+FCKConfig.LinkBrowserURL = FCKConfig.BasePath + "filemanager/browser/liferay/browser.html?Connector=<%= mainPath %>/portal/fckeditor?p_l_id=<%= plid %>";
+FCKConfig.ImageBrowserURL = FCKConfig.BasePath + "filemanager/browser/liferay/browser.html?Type=Image&Connector=<%= mainPath %>/portal/fckeditor?p_l_id=<%= plid %>";
 FCKConfig.FlashBrowser = false ;
 FCKConfig.LinkUpload = false ;
 FCKConfig.ImageUpload = false ;

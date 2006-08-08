@@ -403,6 +403,41 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>input-editor</name>
+		<tagclass>com.liferay.taglib.ui.InputEditorTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>editorImpl</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>initMethod</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>height</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>input-field</name>
 		<tagclass>com.liferay.taglib.ui.InputFieldTag</tagclass>
 		<bodycontent>JSP</bodycontent>

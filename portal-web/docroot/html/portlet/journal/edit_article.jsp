@@ -803,7 +803,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 
 <c:choose>
 	<c:when test="<%= structure == null %>">
-		<iframe frameborder="0" height="400" id="<portlet:namespace />editor" name="<portlet:namespace />editor" scrolling="no" src="<%= themeDisplay.getPathJavaScript() %>/editor/editor.jsp?p_l_id=<%= plid %>&editorImpl=<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>" width="100%"></iframe>
+		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" />
 	</c:when>
 	<c:otherwise>
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">

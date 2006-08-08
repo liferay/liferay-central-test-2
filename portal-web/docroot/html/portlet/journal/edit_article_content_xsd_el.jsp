@@ -135,15 +135,13 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 								}
 							</script>
 
-							<%
-							String editorUrl = themeDisplay.getPathJavaScript() + "/editor/editor.jsp?p_l_id=" + plid + "&editorImpl=" + PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) + "&initMethod=initEditor" + count.getValue();
-
-							if (false) {
-								editorUrl += ("&panel=" + EDITOR_PANEL + "&disable_control=1&disable_right_click=1&paste_text=1");
-							}
-							%>
-
-							<iframe frameborder="0" height="250" id="<portlet:namespace />structure_el<%= count.getValue() %>_content" name="<portlet:namespace />structure_el<%= count.getValue() %>_content" scrolling="no" src="<%= editorUrl %>" width="600"></iframe>
+							<liferay-ui:input-editor
+								name='<%= renderResponse.getNamespace() + "structure_el" + count.getValue() + "_content" %>'
+								editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"
+								initMethod='<%= "initEditor" + count.getValue() %>'
+								height="250"
+								width="600"
+							/>
 						</c:if>
 
 						<c:if test='<%= elType.equals("image") %>'>
@@ -277,6 +275,4 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.journal.edit_article_content_xsd_el.jsp";
-
-public static final String EDITOR_PANEL = "cut,copy,paste,separator,fontsize,bold,italic,underline,separator,insertorderedlist,insertunorderedlist,separator,link,charactermap,separator,spellcheck";
 %>
