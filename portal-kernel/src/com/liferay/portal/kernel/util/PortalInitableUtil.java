@@ -57,4 +57,7 @@ public class PortalInitableUtil {
 			_initables = null;
 		}
 	}
+
+	private static List _initables = new Vector();
+
 }
