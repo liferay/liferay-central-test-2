@@ -567,7 +567,7 @@
 	<portlet>
 		<portlet-name>21</portlet-name>
 		<display-name>Random Bible Verse</display-name>
-		com.liferay.portlet.randombibleverse.RBVPortlet</portlet-class>
+		<portlet-class>com.liferay.portlet.randombibleverse.RBVPortlet</portlet-class>
 		<init-param>
 			<name>edit-jsp</name>
 			<value>/portlet/random_bible_verse/edit.jsp</value>
