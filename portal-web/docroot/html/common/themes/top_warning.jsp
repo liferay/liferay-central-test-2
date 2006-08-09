@@ -20,8 +20,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
- 
-/* top_warning has been depricated.  Please use top_messages.jsp instead */
+%>
+
+<%
+
+// This file is deprecated.  Use top_messages.jsp instead.
+
 %>
 
 <%@ include file="/html/common/themes/top_messages.jsp" %>

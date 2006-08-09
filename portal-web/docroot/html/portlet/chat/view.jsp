@@ -26,13 +26,14 @@
 
 <c:if test="<%= MessagingUtil.isJabberEnabled() %>">
 	<div id="portlet-chat-roster-list" style="margin-bottom: 5px;"></div>
-	
-	<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/common/delete.gif" onclick="MessagingRoster.deleteEntries()" />
-	<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/common/add_user.gif" onclick="MessagingRoster.toggleEmail()" />
+
+	<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/common/delete.gif" onClick="MessagingRoster.deleteEntries();" />
+	<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/common/add_user.gif" onClick="MessagingRoster.toggleEmail();" />
+
 	<div id="portlet-chat-roster-email-div" class="font-small" style="display: none; margin-top: 3px">
-		Email: <input class="form-text" id="portlet-chat-roster-email" name="email" onkeypress="MessagingRoster.onEmailKeypress(this, event)" />
+		<%= LanguageUtil.get(pageContext, "email") %> <input class="form-text" id="portlet-chat-roster-email" name="email" onkeypress="MessagingRoster.onEmailKeypress(this, event)" />
 	</div>
-	
+
 	<script type="text/javascript">
 		Messaging.checkRoster = true;
 		MessagingRoster.getEntries();

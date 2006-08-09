@@ -38,6 +38,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
+import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -254,10 +255,9 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			fullPathSB.append(StringPool.QUESTION);
 			fullPathSB.append(req.getQueryString());
 
-			UserTrackerPath userTrackerPath =new UserTrackerPath();
-
-			userTrackerPath.setUserTrackerPathId(
+			UserTrackerPath userTrackerPath = UserTrackerPathUtil.create(
 				userTracker.getUserTrackerId());
+
 			userTrackerPath.setUserTrackerId(userTracker.getUserTrackerId());
 			userTrackerPath.setPath(fullPathSB.toString());
 			userTrackerPath.setPathDate(new Date());

@@ -413,6 +413,11 @@
 		<struts-path>alfresco_content</struts-path>
 		<include>false</include>
 	</portlet>
+	<portlet>
+		<portlet-name>92</portlet-name>
+		<struts-path>messaging</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>
