@@ -22,20 +22,11 @@
 
 package com.liferay.portal.events;
 
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts.Globals;
-
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.UserTracker;
+import com.liferay.portal.service.persistence.UserTrackerUtil;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.Action;
@@ -47,6 +38,16 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messaging.util.MessagingUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.HttpHeaders;
+
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts.Globals;
 
 /**
  * <a href="LoginPostAction.java.html"><b><i>View Source</i></b></a>
@@ -65,10 +66,10 @@ public class LoginPostAction extends Action {
 			String companyId = PortalUtil.getCompanyId(req);
 			String userId = PortalUtil.getUserId(req);
 
+			MessagingUtil.createXMPPConnection(ses, userId);
+
 			Map currentUsers =
 				(Map)WebAppPool.get(companyId, WebKeys.CURRENT_USERS);
-			
-			MessagingUtil.createXMPPConnection(ses, userId);
 
 			boolean simultaenousLogins = GetterUtil.getBoolean(
 				PropsUtil.get(PropsUtil.AUTH_SIMULTANEOUS_LOGINS), true);
@@ -100,9 +101,8 @@ public class LoginPostAction extends Action {
 				(GetterUtil.getBoolean(PropsUtil.get(
 					PropsUtil.SESSION_TRACKER_MEMORY_ENABLED)))) {
 
-				userTracker = new UserTracker();
+				userTracker = UserTrackerUtil.create(ses.getId());
 
-				userTracker.setUserTrackerId(ses.getId());
 				userTracker.setCompanyId(companyId);
 				userTracker.setUserId(req.getRemoteUser());
 				userTracker.setModifiedDate(new Date());
