@@ -22,6 +22,16 @@
 
 package com.liferay.portal.events;
 
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts.Globals;
+
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -34,18 +44,9 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.messaging.util.MessagingUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.HttpHeaders;
-
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts.Globals;
 
 /**
  * <a href="LoginPostAction.java.html"><b><i>View Source</i></b></a>
@@ -66,6 +67,8 @@ public class LoginPostAction extends Action {
 
 			Map currentUsers =
 				(Map)WebAppPool.get(companyId, WebKeys.CURRENT_USERS);
+			
+			MessagingUtil.createXMPPConnection(ses, userId);
 
 			boolean simultaenousLogins = GetterUtil.getBoolean(
 				PropsUtil.get(PropsUtil.AUTH_SIMULTANEOUS_LOGINS), true);

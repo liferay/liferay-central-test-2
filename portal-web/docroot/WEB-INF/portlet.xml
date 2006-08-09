@@ -1243,10 +1243,10 @@
 	<portlet>
 		<portlet-name>52</portlet-name>
 		<display-name>Chat</display-name>
-		<portlet-class>com.liferay.portlet.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
-			<name>view-jsp</name>
-			<value>/portlet/chat/view.jsp</value>
+			<name>view-action</name>
+			<value>/chat/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -1927,6 +1927,16 @@
 		<security-role-ref>
 			<role-name>user</role-name>
 		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>92</portlet-name>
+		<display-name>Messaging</display-name>
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 	</portlet>
 	<custom-window-state>
 		<window-state>exclusive</window-state>

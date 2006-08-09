@@ -53,5 +53,6 @@
 		<script src="<%= themeDisplay.getPathJavaScript() %>/dragdrop/resize.js" type="text/javascript"></script>
 
 		<script src="<%= themeDisplay.getPathJavaScript() %>/portlet/layout_configuration.js" type="text/javascript"></script>
+		<script src="<%= themeDisplay.getPathJavaScript() %>/portlet/messaging.js" type="text/javascript"></script>
 	</c:otherwise>
 </c:choose>

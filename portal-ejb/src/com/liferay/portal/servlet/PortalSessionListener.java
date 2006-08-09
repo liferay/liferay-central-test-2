@@ -22,6 +22,15 @@
 
 package com.liferay.portal.servlet;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StackTraceUtil;
@@ -32,15 +41,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mail.util.MailSessionLock;
-
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.messaging.util.MessagingUtil;
 
 /**
  * <a href="PortalSessionListener.java.html"><b><i>View Source</i></b></a>
@@ -74,6 +75,8 @@ public class PortalSessionListener implements HttpSessionListener {
 		if (ServerDetector.isWebLogic()) {
 			PortletSessionPool.remove(ses.getId());
 		}
+		
+		MessagingUtil.closeXMPPConnection(ses);
 
 		try {
 			String companyId = (String)ses.getAttribute(WebKeys.COMPANY_ID);

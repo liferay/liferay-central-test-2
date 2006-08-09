@@ -20,39 +20,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+ 
+/* top_warning has been depricated.  Please use top_messages.jsp instead */
 %>
 
-<%@ include file="/html/common/init.jsp" %>
-
-<c:if test="<%= ShutdownUtil.isInProcess() %>">
-	<table border="0" cellpadding="1" cellspacing="0" width="100%">
-	<tr>
-		<td bgcolor="<%= colorScheme.getPortletMsgError() %>">
-			<table border="0" cellpadding="8" cellspacing="0" width="100%">
-			<tr>
-				<td bgcolor="<%= colorScheme.getLayoutBg() %>">
-					<font class="bg" size="2"><span class="bg-neg-alert">
-
-					<%= LanguageUtil.get(pageContext, "maintenance-alert") %> &nbsp;&nbsp;&nbsp;<%= DateFormat.getTimeInstance(DateFormat.SHORT, locale).format(Time.getDate(new GregorianCalendar(timeZone))) %> <%= timeZone.getDisplayName(false, TimeZone.SHORT, locale) %><br><br>
-
-					<%= LanguageUtil.format(pageContext, "the-portal-will-shutdown-for-maintenance-in-x-minutes", Long.toString(ShutdownUtil.getInProcess() / Time.MINUTE), false) %>
-
-					</span></font>
-				</td>
-			</tr>
-
-			<c:if test="<%= Validator.isNotNull(ShutdownUtil.getMessage()) %>">
-				<tr>
-					<td bgcolor="<%= colorScheme.getLayoutBg() %>">
-						<font class="bg" size="2">
-						<%= ShutdownUtil.getMessage() %>
-						</font>
-					</td>
-				</tr>
-			</c:if>
-
-			</table>
-		</td>
-	</tr>
-	</table>
-</c:if>
+<%@ include file="/html/common/themes/top_messages.jsp" %>

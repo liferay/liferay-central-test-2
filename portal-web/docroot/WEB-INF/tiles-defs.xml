@@ -254,6 +254,14 @@
 	<definition name="portlet.calendar.view_event" extends="portlet.calendar">
 		<put name="portlet_content" value="/portlet/calendar/view_event.jsp" />
 	</definition>
+	
+	<!-- Chat -->
+	
+	<definition name="portlet.chat" extends="portlet" />
+	
+	<definition name="portlet.chat.view" extends="portlet.chat">
+		<put name="portlet_content" value="/portlet/chat/view.jsp" />
+	</definition>
 
 	<!-- Communities -->
 
