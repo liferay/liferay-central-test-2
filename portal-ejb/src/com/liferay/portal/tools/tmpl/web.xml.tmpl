@@ -73,28 +73,14 @@
 		<load-on-startup>7</load-on-startup>
 	</servlet>
 	<servlet>
-		<servlet-name>ChatServlet</servlet-name>
-		<display-name>ChatServlet</display-name>
-		<servlet-class>com.liferay.portlet.chat.servlet.ChatServlet</servlet-class>
-		<init-param>
-			<param-name>chatServerClass</param-name>
-			<param-value>com.liferay.portlet.chat.util.ChatServer</param-value>
-		</init-param>
-		<init-param>
-			<param-name>config</param-name>
-			<param-value>nfc/nfc.conf</param-value>
-		</init-param>
-		<load-on-startup>8</load-on-startup>
-	</servlet>
-	<servlet>
 		<servlet-name>HttpService</servlet-name>
 		<servlet-class>com.liferay.portlet.httpbridge.servlet.HttpService</servlet-class>
-		<load-on-startup>9</load-on-startup>
+		<load-on-startup>8</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>UserService</servlet-name>
 		<servlet-class>com.liferay.portlet.httpbridge.servlet.UserService</servlet-class>
-		<load-on-startup>10</load-on-startup>
+		<load-on-startup>9</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MainServlet</servlet-name>
@@ -115,10 +101,6 @@
 	<servlet-mapping>
 		<servlet-name>ResourceProxyServlet</servlet-name>
 		<url-pattern>/wsrp/resource_proxy/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>ChatServlet</servlet-name>
-		<url-pattern>/chat/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>HttpService</servlet-name>

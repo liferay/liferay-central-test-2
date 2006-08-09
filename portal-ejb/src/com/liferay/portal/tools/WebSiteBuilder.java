@@ -302,20 +302,6 @@ public class WebSiteBuilder {
 		String sessionTimeout =
 			GetterUtil.getString(props.getProperty("session.timeout"), "30");
 
-		// Default NFC
-
-		String nfcConf = StringUtil.replace(
-			FileUtil.read(
-				"../portal-ejb/src/com/liferay/portal/tools/tmpl/" +
-					"nfc.conf.tmpl"),
-			new String[] {"[$LISTEN_PORT$]"},
-			new String[] {Integer.toString(_nfcListenPort)});
-
-		File nfcConfFile = new File(
-			"../portal-web/docroot/WEB-INF/nfc/nfc.conf");
-
-		FileUtil.write(nfcConfFile, nfcConf);
-
 		// web-sites
 
 		Iterator itr = webSites.iterator();
@@ -429,39 +415,6 @@ public class WebSiteBuilder {
 				"../portal-web/docroot/WEB-INF/tld/liferay-util.tld",
 				"../web-sites/" + id +
 					"-web/docroot/WEB-INF/tld/liferay-util.tld");
-
-			// /docroot/WEB-INF/nfc
-
-			File[] nfcArray = new File(
-				"../portal-web/docroot/WEB-INF/nfc").listFiles();
-
-			for (int i = 0; i < nfcArray.length; i++) {
-				if (nfcArray[i].isFile() &&
-					nfcArray[i].getName().endsWith(".properties")) {
-
-					File webNfc = new File(
-						"../web-sites/" + id + "-web/docroot/WEB-INF/nfc/" +
-							nfcArray[i].getName());
-
-					if (!webNfc.exists()) {
-						FileUtil.copyFile(nfcArray[i], webNfc);
-					}
-				}
-			}
-
-			_nfcListenPort++;
-
-			nfcConf = StringUtil.replace(
-				FileUtil.read(
-					"../portal-ejb/src/com/liferay/portal/tools/tmpl/" +
-						"nfc.conf.tmpl"),
-				new String[] {"[$LISTEN_PORT$]"},
-				new String[] {Integer.toString(_nfcListenPort)});
-
-			nfcConfFile = new File(
-				"../web-sites/" + id + "-web/docroot/WEB-INF/nfc/nfc.conf");
-
-			FileUtil.write(nfcConfFile, nfcConf);
 		}
 	}
 
@@ -470,6 +423,5 @@ public class WebSiteBuilder {
 	private String _portalExtProperties = null;
 	private String _availableWebApps = null;
 	private String _orionConfigDir = null;
-	private int _nfcListenPort = 7777;
 
 }

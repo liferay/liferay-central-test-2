@@ -70,7 +70,6 @@
 		<unjar src="${project.dir}/lib/portal/jstl-impl.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/log4j.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/lucene.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/nfc-server.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/quartz.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/struts.jar" dest="${classpath.jsp}" />
 	</target>

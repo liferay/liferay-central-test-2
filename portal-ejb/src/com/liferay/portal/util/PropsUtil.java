@@ -460,6 +460,18 @@ public class PropsUtil {
 
 	public static final String XSS_ALLOW = "xss.allow";
 
+	// Jabber
+
+	public static final String JABBER_XMPP_SERVER_ENABLED = "jabber.xmpp.server.enabled";
+
+	public static final String JABBER_XMPP_SERVER_ADDRESS = "jabber.xmpp.server.address";
+
+	public static final String JABBER_XMPP_SERVER_NAME = "jabber.xmpp.server.name";
+
+	public static final String JABBER_XMPP_SERVER_PORT = "jabber.xmpp.server.port";
+
+	public static final String JABBER_XMPP_USER_PASSWORD = "jabber.xmpp.user.password";
+
 	// JCR
 
 	public static final String JCR_INITIALIZE_ON_STARTUP = "jcr.initialize.on.startup";
@@ -536,12 +548,6 @@ public class PropsUtil {
 
 	public static final String CALENDAR_EMAIL_EVENT_REMINDER_BODY = "calendar.email.event.reminder.body";
 
-	// Chat Portlet
-
-	public static final String CHAT_AVAILABLE = "chat.available";
-
-	public static final String CHAT_SERVER_DEFAULT_PORT = "chat.server.default.port";
-
 	// Document Library Portlet
 
 	public static final String DL_ROOT_DIR = "dl.root.dir";
@@ -563,18 +569,6 @@ public class PropsUtil {
 	public static final String IG_IMAGE_THUMBNAIL_MAX_HEIGHT = "ig.image.thumbnail.max.height";
 
 	public static final String IG_IMAGE_THUMBNAIL_MAX_WIDTH = "ig.image.thumbnail.max.width";
-
-	// Jabber XMPP
-
-	public static final String JABBER_XMPP_SERVER_ADDRESS = "jabber.xmpp.server.address";
-
-	public static final String JABBER_XMPP_SERVER_ENABLED = "jabber.xmpp.server.enabled";
-
-	public static final String JABBER_XMPP_SERVER_NAME = "jabber.xmpp.server.name";
-
-	public static final String JABBER_XMPP_SERVER_PORT = "jabber.xmpp.server.port";
-
-	public static final String JABBER_XMPP_USER_PASSWORD = "jabber.xmpp.user.password";
 
 	// Journal Portlet
 

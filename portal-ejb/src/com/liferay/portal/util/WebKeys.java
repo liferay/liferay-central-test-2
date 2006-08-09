@@ -111,9 +111,9 @@ public class WebKeys {
 
 	public static final String MAIN_PATH = "MAIN_PATH";
 
-	public static final String JABBER_XMPP_CONNECTION = "JABBER_XMPP_CONNECTION";
-
 	public static final String JABBER_XMPP_COLLECTOR = "JABBER_XMPP_COLLECTOR";
+
+	public static final String JABBER_XMPP_CONNECTION = "JABBER_XMPP_CONNECTION";
 
 	public static final String JABBER_XMPP_ROSTER = "JABBER_XMPP_ROSTER";
 

@@ -22,8 +22,4 @@
  */
 %><%--
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
-
---%><%@ page import="com.liferay.portlet.chat.servlet.ChatServlet" %><%--
---%><%@ page import="com.liferay.portlet.chat.util.ChatServer" %><%--
---%><%@ page import="com.liferay.portlet.chat.util.ChatServerUtil" %>
+--%><%@ include file="/html/portlet/init.jsp" %>
