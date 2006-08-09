@@ -25,11 +25,7 @@
 <%@ include file="/html/portlet/mail/init.jsp" %>
 
 <%
-String originalId = (String)request.getAttribute(WebKeys.MAIL_MESSAGE_ORIGINAL_ID);
-
-if (originalId == null) {
-	originalId = "0";
-}
+String originalId = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_MESSAGE_ORIGINAL_ID), "0");
 
 String to = StringPool.BLANK;
 String cc = StringPool.BLANK;

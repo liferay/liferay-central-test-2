@@ -264,7 +264,7 @@ public class EditMessageAction extends PortletAction {
 
 		if (originalId.startsWith(_DRAFT_ID_PREFIX)) {
 			wasDraft = true;
-			
+
 			originalId = originalId.substring(_DRAFT_ID_PREFIX.length());
 		}
 

@@ -19,12 +19,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.liferay.portlet.mail.util.comparator;
 
-import java.util.Comparator;
+package com.liferay.portlet.mail.util.comparator;
 
 import com.liferay.portlet.mail.model.MailEnvelope;
 import com.liferay.util.DateUtil;
+
+import java.util.Comparator;
 
 /**
  * <a href="StateComparator.java.html"><b><i>View Source</i></b></a>
@@ -44,25 +45,23 @@ public class StateComparator implements Comparator {
 
 		int value = 0;
 
-		// just believe it works
-
 		if (!mailEnvelope1.isRead() && (mailEnvelope2.isRead())) {
 			value = 1;
 		}
 		else if (mailEnvelope1.isRead() && mailEnvelope1.isAnswered() &&
-			mailEnvelope2.isRead() && !mailEnvelope2.isAnswered()) {
+				 mailEnvelope2.isRead() && !mailEnvelope2.isAnswered()) {
 
 			value = -1;
 		}
-			
+
 		if (value == 0) {
 			value = DateUtil.compareTo(
-					mailEnvelope1.getDate(), mailEnvelope2.getDate());
+				mailEnvelope1.getDate(), mailEnvelope2.getDate());
 
 			if (value == 0) {
 				Long messageId1 = new Long(mailEnvelope2.getMessageId());
 				Long messageId2 = new Long(mailEnvelope2.getMessageId());
-	
+
 				value = messageId1.compareTo(messageId2);
 			}
 		}

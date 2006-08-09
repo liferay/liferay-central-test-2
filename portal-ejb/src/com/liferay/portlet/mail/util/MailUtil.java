@@ -253,11 +253,11 @@ public class MailUtil {
 				if (wasDraft) {
 					folder = _getFolder(ses, MAIL_DRAFTS_NAME);
 
-					Message msg =
-						folder.getMessageByUID(origId);
+					Message msg = folder.getMessageByUID(origId);
 
-					folder.setFlags(new Message[] {msg},
-						new Flags(Flags.Flag.DELETED), true);
+					folder.setFlags(
+						new Message[] {msg}, new Flags(Flags.Flag.DELETED),
+						true);
 
 					folder.expunge();
 				}
@@ -267,8 +267,9 @@ public class MailUtil {
 					Message msg =
 						folder.getMessageByUID(origId);
 
-					folder.setFlags(new Message[] {msg},
-						new Flags(Flags.Flag.ANSWERED), true);
+					folder.setFlags(
+						new Message[] {msg}, new Flags(Flags.Flag.ANSWERED),
+						true);
 				}
 
 				// Make sure to explicitly close and open the correct folder
@@ -587,9 +588,11 @@ public class MailUtil {
 			Message message = folder.getMessageByUID(messageId);
 
 			mailMessage.setMessageId(messageId);
+
 			if (!Validator.isNull(message.getFrom())) {
 				mailMessage.setFrom(message.getFrom()[0]);
 			}
+
 			mailMessage.setTo(message.getRecipients(RecipientType.TO));
 			mailMessage.setCc(message.getRecipients(RecipientType.CC));
 			mailMessage.setBcc(message.getRecipients(RecipientType.BCC));
