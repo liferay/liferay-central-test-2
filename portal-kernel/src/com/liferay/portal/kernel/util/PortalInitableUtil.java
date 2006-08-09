@@ -33,6 +33,7 @@ import java.util.Vector;
  *
  */
 public class PortalInitableUtil {
+
 	public synchronized static void init(PortalInitable initable) {
 		if (_initables == null) {
 			initable.portalInit();
