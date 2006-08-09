@@ -442,10 +442,10 @@ var MessagingRoster = {
 			tempImg.style.marginRight = "5px";
 			
 			if (entry.status == "available") {
-				tempImg.src = themeDisplay.getPathThemeImage() + "/common/activate.gif";
+				tempImg.src = themeDisplay.getPathThemeImage() + "/chat/user_online.gif";
 			}
 			else {
-				tempImg.src = themeDisplay.getPathThemeImage() + "/common/deactivate.gif";
+				tempImg.src = themeDisplay.getPathThemeImage() + "/chat/user_offline.gif";
 			}
 			
 			tempLink.innerHTML = entry.name;
