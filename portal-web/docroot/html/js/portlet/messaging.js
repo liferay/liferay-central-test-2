@@ -365,7 +365,7 @@ var MessagingRoster = {
 	
 	addEntry : function() {
 		var email = document.getElementById("portlet-chat-roster-email").value;
-		loadPage(themeDisplay.getPathMain() + "/messaging/roster", "cmd=addEntry&email=" + email, MessagingRoster.addEntryReturn);
+		loadPage(themeDisplay.getPathMain() + "/chat/roster", "cmd=addEntry&email=" + email, MessagingRoster.addEntryReturn);
 	},
 	
 	addEntryReturn : function(xmlHttpReq) {
@@ -392,7 +392,7 @@ var MessagingRoster = {
 			lastSelected.parentNode.removeChild(lastSelected);
 			MessagingRoster.lastSelected = null;
 			
-			loadPage(themeDisplay.getPathMain() + "/messaging/roster", "cmd=deleteEntries&entries=" + userId, MessagingRoster.deleteEntriesReturn);
+			loadPage(themeDisplay.getPathMain() + "/chat/roster", "cmd=deleteEntries&entries=" + userId, MessagingRoster.deleteEntriesReturn);
 		}
 	},
 	
@@ -405,7 +405,7 @@ var MessagingRoster = {
 	},
 	
 	getEntries : function() {
-		loadPage(themeDisplay.getPathMain() + "/messaging/roster", "cmd=getEntries", MessagingRoster.getEntriesReturn);
+		loadPage(themeDisplay.getPathMain() + "/chat/roster", "cmd=getEntries", MessagingRoster.getEntriesReturn);
 	},
 	
 	getEntriesReturn : function(xmlHttpReq) {
@@ -427,6 +427,10 @@ var MessagingRoster = {
 		
 		if (rosterDiv != null) {
 			rosterDiv.innerHTML = "";
+		}
+		else {
+			Messaging.checkRoster = false;
+			return;
 		}
 		
 		for (var i = 0; i < roster.length; i++) {
