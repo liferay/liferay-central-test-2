@@ -22,6 +22,15 @@
 
 package com.liferay.portlet.messaging.action;
 
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.struts.JSONAction;
+import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.messaging.util.MessagingUtil;
+import com.liferay.portlet.messaging.util.comparator.NameComparator;
+import com.liferay.util.ParamUtil;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -32,27 +41,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+
 import org.jivesoftware.smack.PacketCollector;
 import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.packet.Message;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
-import com.liferay.portal.struts.JSONAction;
-import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.messaging.util.MessagingUtil;
-import com.liferay.portlet.messaging.util.comparator.NameComparator;
-import com.liferay.util.ParamUtil;
-
 /**
  * <a href="MessagingAction.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * @author Ming-Gih Lam
- * 
+ *
  */
 public class MessagingAction extends JSONAction {
 
@@ -88,11 +90,11 @@ public class MessagingAction extends JSONAction {
 		while (rosterEntries.hasNext()) {
 			rosterList.add(rosterEntries.next());
 		}
-		
+
 		Collections.sort(rosterList, new NameComparator());
-		
+
 		for (int i = 0; i < rosterList.size(); i++) {
-		
+
 			JSONObject jEntry = new JSONObject();
 			RosterEntry entry = (RosterEntry)rosterList.get(i);
 
@@ -102,7 +104,7 @@ public class MessagingAction extends JSONAction {
 				.getPresence(entry.getUser())));
 			ja.put(jEntry);
 		}
-		
+
 		jo.put("roster", ja);
 
 		return jo;

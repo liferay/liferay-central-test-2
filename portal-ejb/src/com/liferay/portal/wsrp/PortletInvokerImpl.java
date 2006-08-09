@@ -32,7 +32,6 @@ import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.wsrp.util.WSRPUtil;
 import com.liferay.portlet.ActionRequestFactory;
 import com.liferay.portlet.ActionRequestImpl;
@@ -44,7 +43,6 @@ import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.RenderRequestFactory;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseImpl;
-import com.liferay.util.CollectionFactory;
 
 import java.io.IOException;
 
@@ -258,7 +256,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 		throws PortalException, SystemException {
 
 		Layout layout = LayoutLocalServiceUtil.getLayout("1", "PUB.1");
-		
+
 		return layout;
 	}
 

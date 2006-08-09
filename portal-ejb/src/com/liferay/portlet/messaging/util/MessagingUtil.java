@@ -22,6 +22,15 @@
 
 package com.liferay.portlet.messaging.util;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.StringUtil;
+
 import javax.servlet.http.HttpSession;
 
 import org.jivesoftware.smack.AccountManager;
@@ -36,20 +45,11 @@ import org.jivesoftware.smack.filter.PacketTypeFilter;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringUtil;
-
 /**
  * <a href="MessagingUtil.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * @author Ming-Gih Lam
- * 
+ *
  */
 public class MessagingUtil {
 

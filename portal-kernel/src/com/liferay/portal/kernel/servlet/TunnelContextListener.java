@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2005 Liferay, LLC. All rights reserved.
+ * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -46,7 +46,7 @@ public class TunnelContextListener implements ServletContextListener {
 	public static ServletContext getServletContext() {
 		return _ctx;
 	}
-	
+
 	private static ServletContext _ctx;
 
 }

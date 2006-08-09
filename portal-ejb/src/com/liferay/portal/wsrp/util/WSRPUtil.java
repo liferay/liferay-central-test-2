@@ -23,7 +23,6 @@
 package com.liferay.portal.wsrp.util;
 
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.wsrp.util.comparator.PortletDescriptionComparator;
 

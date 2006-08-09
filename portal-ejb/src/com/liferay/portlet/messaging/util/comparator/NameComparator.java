@@ -37,7 +37,7 @@ public class NameComparator implements Comparator {
 	public NameComparator() {
 		_asc = true;
 	}
-	
+
 	public NameComparator(boolean asc) {
 		_asc = asc;
 	}
@@ -45,12 +45,12 @@ public class NameComparator implements Comparator {
 	public int compare(Object obj1, Object obj2) {
 		RosterEntry entry1 = (RosterEntry)obj1;
 		RosterEntry entry2 = (RosterEntry)obj2;
-		
+
 		String name1 = entry1.getName().toLowerCase();
 		String name2 = entry2.getName().toLowerCase();
-		
+
 		int value = name1.compareTo(name2);
-		
+
 		if (_asc) {
 			return value;
 		}

@@ -22,6 +22,14 @@
 
 package com.liferay.portlet.chat.action;
 
+import com.liferay.portal.struts.JSONAction;
+import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.messaging.util.MessagingUtil;
+import com.liferay.portlet.messaging.util.comparator.NameComparator;
+import com.liferay.util.ParamUtil;
+import com.liferay.util.StringUtil;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -32,24 +40,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+
 import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.RosterEntry;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.liferay.portal.struts.JSONAction;
-import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.messaging.util.MessagingUtil;
-import com.liferay.portlet.messaging.util.comparator.NameComparator;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringUtil;
-
 /**
  * <a href="RosterAction.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * @author Ming-Gih Lam
- * 
+ *
  */
 public class RosterAction extends JSONAction {
 
@@ -80,7 +82,7 @@ public class RosterAction extends JSONAction {
 			String companyId = PortalUtil.getCompanyId(req);
 
 			MessagingUtil.addRosterEntry(req.getSession(), companyId, email);
-			
+
 			JSONArray jRoster = getEntries(req).getJSONArray("roster");
 			jo.put("roster", jRoster);
 			jo.put("status", "success");
@@ -120,11 +122,11 @@ public class RosterAction extends JSONAction {
 		while (rosterEntries.hasNext()) {
 			rosterList.add(rosterEntries.next());
 		}
-		
+
 		Collections.sort(rosterList, new NameComparator());
-		
+
 		for (int i = 0; i < rosterList.size(); i++) {
-		
+
 			JSONObject jEntry = new JSONObject();
 			RosterEntry entry = (RosterEntry)rosterList.get(i);
 
@@ -134,7 +136,7 @@ public class RosterAction extends JSONAction {
 				.getPresence(entry.getUser())));
 			ja.put(jEntry);
 		}
-		
+
 		jo.put("roster", ja);
 
 		return jo;

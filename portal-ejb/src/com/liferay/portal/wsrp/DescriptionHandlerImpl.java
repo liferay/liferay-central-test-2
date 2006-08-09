@@ -24,7 +24,6 @@ package com.liferay.portal.wsrp;
 
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.wsrp.util.WSRPUtil;
 import com.liferay.portlet.PortletConfigFactory;
