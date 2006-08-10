@@ -17,6 +17,7 @@ insert into Country (countryId, countryCode, name, active_) values ('16', 'TUR',
 insert into Country (countryId, countryCode, name, active_) values ('17', 'VNM', 'Vietnam', TRUE);
 insert into Country (countryId, countryCode, name, active_) values ('18', 'GBR', 'United Kingdom', TRUE);
 insert into Country (countryId, countryCode, name, active_) values ('19', 'USA', 'United States', TRUE);
+insert into Country (countryId, countryCode, name, active_) values ('20', 'IND', 'India', TRUE);
 
 insert into Region (regionId, countryId, regionCode, name, active_) values ('1', '19', 'AL', 'Alabama', TRUE);
 insert into Region (regionId, countryId, regionCode, name, active_) values ('2', '19', 'AK', 'Alaska', TRUE);
