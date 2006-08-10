@@ -157,6 +157,10 @@ String mailLineColor = "#B3B6B0";
 				font-size: 0;
 			}
 
+			#portlet-mail-msgs-preview{
+				overflow: hidden;
+			}
+			
 			#portlet-mail-msgs-preview-pane {
 				height: 200px;
 				width: 100%;
@@ -401,78 +405,80 @@ String mailLineColor = "#B3B6B0";
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
 						<td class="portlet-mail-msgs-pane-td" width="100%">
-							<table border="0" cellpadding="0" cellspacing="0" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"100%\"" %>>
-							<tr>
-								<td class="portlet-mail-msgs-title">
-									<div id="portlet-mail-msgs-title-state">
-										<div class="portlet-mail-title-text">
-											<img src="<%= themeDisplay.getPathThemeImage() %>/mail/read.gif" />
-										</div>
-									</div>
-								</td>
-								<td>
-									<div class="portlet-mail-msgs-title-handle"></div>
-								</td>
-								<td class="portlet-mail-msgs-title">
-									<div id="portlet-mail-msgs-title-from">
-										<div class="portlet-mail-title-text">
-											<span><%= LanguageUtil.get(pageContext, "from") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "to") %></span>
-										</div>
-									</div>
-								</td>
-								<td id="portlet-mail-msgs-from-handle" style="cursor: e-resize;">
-									<div class="portlet-mail-msgs-title-handle"></div>
-								</td>
-								<td class="portlet-mail-msgs-title">
-									<div id="portlet-mail-msgs-title-subject">
-										<div class="portlet-mail-title-text">
-											<span><%= LanguageUtil.get(pageContext, "subject") %></span>
-										</div>
-									</div>
-								</td>
-								<td id="portlet-mail-msgs-subject-handle" style="cursor: e-resize;">
-									<div class="portlet-mail-msgs-title-handle"></div>
-								</td>
-								<td class="portlet-mail-msgs-title" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"90%\"" %>>
-									<div id="portlet-mail-msgs-title-received">
-										<div class="portlet-mail-title-text">
-											<span><%= LanguageUtil.get(pageContext, "date") %></span>
-										</div>
-									</div>
-								</td>
-							</tr>
-							</table>
-
-							<div id="portlet-mail-msgs-preview-pane">
+							<div id="portlet-mail-msgs-preview">
 								<table border="0" cellpadding="0" cellspacing="0" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"100%\"" %>>
 								<tr>
-									<td>
-										<div id="portlet-mail-msgs-state">
+									<td class="portlet-mail-msgs-title">
+										<div id="portlet-mail-msgs-title-state">
+											<div class="portlet-mail-title-text">
+												<img src="<%= themeDisplay.getPathThemeImage() %>/mail/read.gif" />
+											</div>
 										</div>
 									</td>
 									<td>
 										<div class="portlet-mail-msgs-title-handle"></div>
 									</td>
-									<td>
-										<div id="portlet-mail-msgs-from">
+									<td class="portlet-mail-msgs-title">
+										<div id="portlet-mail-msgs-title-from">
+											<div class="portlet-mail-title-text">
+												<span><%= LanguageUtil.get(pageContext, "from") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "to") %></span>
+											</div>
 										</div>
 									</td>
-									<td>
+									<td id="portlet-mail-msgs-from-handle" style="cursor: e-resize;">
 										<div class="portlet-mail-msgs-title-handle"></div>
 									</td>
-									<td>
-										<div id="portlet-mail-msgs-subject">
+									<td class="portlet-mail-msgs-title">
+										<div id="portlet-mail-msgs-title-subject">
+											<div class="portlet-mail-title-text">
+												<span><%= LanguageUtil.get(pageContext, "subject") %></span>
+											</div>
 										</div>
 									</td>
-									<td>
+									<td id="portlet-mail-msgs-subject-handle" style="cursor: e-resize;">
 										<div class="portlet-mail-msgs-title-handle"></div>
 									</td>
-									<td <%= BrowserSniffer.is_safari(request) ? "" : "width=\"90%\"" %>>
-										<div id="portlet-mail-msgs-received">
+									<td class="portlet-mail-msgs-title" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"90%\"" %>>
+										<div id="portlet-mail-msgs-title-received">
+											<div class="portlet-mail-title-text">
+												<span><%= LanguageUtil.get(pageContext, "date") %></span>
+											</div>
 										</div>
 									</td>
 								</tr>
 								</table>
+
+								<div id="portlet-mail-msgs-preview-pane">
+									<table border="0" cellpadding="0" cellspacing="0" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"100%\"" %>>
+									<tr>
+										<td>
+											<div id="portlet-mail-msgs-state">
+											</div>
+										</td>
+										<td>
+											<div class="portlet-mail-msgs-title-handle"></div>
+										</td>
+										<td>
+											<div id="portlet-mail-msgs-from">
+											</div>
+										</td>
+										<td>
+											<div class="portlet-mail-msgs-title-handle"></div>
+										</td>
+										<td>
+											<div id="portlet-mail-msgs-subject">
+											</div>
+										</td>
+										<td>
+											<div class="portlet-mail-msgs-title-handle"></div>
+										</td>
+										<td <%= BrowserSniffer.is_safari(request) ? "" : "width=\"90%\"" %>>
+											<div id="portlet-mail-msgs-received">
+											</div>
+										</td>
+									</tr>
+									</table>
+								</div>
 							</div>
 						</td>
 					</tr>
