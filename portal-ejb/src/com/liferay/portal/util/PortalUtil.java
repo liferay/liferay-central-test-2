@@ -476,6 +476,13 @@ public class PortalUtil {
 			Filter.by(type), true);
 	}
 
+	public static String getJsSafePortletName(String portletName) {
+		String jsSafePortletName =
+			StringUtil.replace(portletName, StringPool.SPACE, StringPool.BLANK);
+
+		return jsSafePortletName;
+	}
+
 	public static Locale getLocale(HttpServletRequest req) {
 		return (Locale)req.getSession().getAttribute(Globals.LOCALE_KEY);
 	}
@@ -586,10 +593,7 @@ public class PortalUtil {
 	} // FIX ME these methods can be removed
 
 	public static String getPortletNamespace(String portletName) {
-		String jsSafePortletName =
-			StringUtil.replace(portletName, StringPool.SPACE, StringPool.BLANK);
-
-		return StringPool.UNDERLINE + jsSafePortletName + StringPool.UNDERLINE;
+		return StringPool.UNDERLINE + portletName + StringPool.UNDERLINE;
 	}
 
 	public static String getPortletTitle(String portletId, User user)

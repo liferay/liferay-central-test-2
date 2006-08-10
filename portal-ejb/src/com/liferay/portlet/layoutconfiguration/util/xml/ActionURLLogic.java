@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.layoutconfiguration.util.xml;
 
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderResponseImpl;
 
@@ -72,6 +73,8 @@ public class ActionURLLogic extends RuntimeLogic {
 		String portletName = root.attributeValue("portlet-name");
 
 		if (portletName != null) {
+			portletName = PortalUtil.getJsSafePortletName(portletName);
+
 			portletURL.setPortletName(portletName);
 		}
 

@@ -499,7 +499,8 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 		while (itr1.hasNext()) {
 			Element portlet = (Element)itr1.next();
 
-			String portletId = portlet.elementText("portlet-name");
+			String portletId = PortalUtil.getJsSafePortletName(
+				portlet.elementText("portlet-name"));
 
 			if (servletContextName != null) {
 				portletId =
@@ -692,7 +693,9 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			while (itr2.hasNext()) {
 				Element portlet = (Element)itr2.next();
 
-				String portletId = portlet.attributeValue("id");
+				String portletId = PortalUtil.getJsSafePortletName(
+					portlet.attributeValue("id"));
+
 				if (servletContextName != null) {
 					portletId =
 						portletId + Portlet.WAR_SEPARATOR + servletContextName;
@@ -837,7 +840,8 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 		while (itr1.hasNext()) {
 			Element portlet = (Element)itr1.next();
 
-			String portletId = portlet.elementText("portlet-name");
+			String portletId = PortalUtil.getJsSafePortletName(
+				portlet.elementText("portlet-name"));
 
 			if (servletContextName != null) {
 				portletId =
