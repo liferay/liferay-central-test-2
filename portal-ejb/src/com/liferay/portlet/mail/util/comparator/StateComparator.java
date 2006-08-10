@@ -45,13 +45,19 @@ public class StateComparator implements Comparator {
 
 		int value = 0;
 
-		if (!mailEnvelope1.isRead() && (mailEnvelope2.isRead())) {
+		if (!mailEnvelope1.isRead() && mailEnvelope2.isRead()) {
 			value = 1;
 		}
-		else if (mailEnvelope1.isRead() && mailEnvelope1.isAnswered() &&
-				 mailEnvelope2.isRead() && !mailEnvelope2.isAnswered()) {
-
+		else if (mailEnvelope1.isRead() && !mailEnvelope2.isRead()) {
 			value = -1;
+		}
+		else if (mailEnvelope1.isRead() && mailEnvelope2.isRead()) {
+			if (!mailEnvelope1.isAnswered() && mailEnvelope2.isAnswered()) {
+				value = 1;
+			}
+			else {
+				value = -1;
+			}
 		}
 
 		if (value == 0) {
