@@ -85,11 +85,11 @@ public class MBCategoryServiceSoap {
 
 	public static com.liferay.portlet.messageboards.model.MBCategoryModel updateCategory(
 		java.lang.String categoryId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description)
-		throws RemoteException {
+		java.lang.String name, java.lang.String description,
+		boolean mergeWithParentCategory) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.updateCategory(categoryId,
-					parentCategoryId, name, description);
+					parentCategoryId, name, description, mergeWithParentCategory);
 
 			return returnValue;
 		}

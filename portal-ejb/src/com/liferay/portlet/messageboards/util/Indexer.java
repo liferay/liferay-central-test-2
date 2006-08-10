@@ -22,11 +22,9 @@
 
 package com.liferay.portlet.messageboards.util;
 
+import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.lucene.LuceneFields;
-import com.liferay.portal.lucene.LuceneUtil;
-import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
-import com.liferay.util.Html;
+import com.liferay.portlet.messageboards.service.jms.IndexProducer;
 import com.liferay.util.StringUtil;
 import com.liferay.util.lucene.DocumentSummary;
 import com.liferay.util.lucene.IndexerException;
@@ -35,107 +33,80 @@ import java.io.IOException;
 
 import javax.portlet.PortletURL;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Hits;
-import org.apache.lucene.search.Searcher;
 
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
+ * @author Brian Wing Shun Chan
  *
  */
 public class Indexer implements com.liferay.util.lucene.Indexer {
-
-	public static final String PORTLET_ID = PortletKeys.MESSAGE_BOARDS;
 
 	public static void addMessage(
 			String companyId, String groupId, String categoryId,
 			String threadId, String messageId, String title, String content)
 		throws IOException {
 
-		synchronized (IndexWriter.class) {
-			content = Html.stripHtml(content);
+		try {
+			MethodWrapper methodWrapper = new MethodWrapper(
+				IndexerImpl.class.getName(), "addMessage",
+				new Object[] {
+					companyId, groupId, categoryId, threadId, messageId, title,
+					content
+				});
 
-			IndexWriter writer = LuceneUtil.getWriter(companyId);
-
-			Document doc = new Document();
-
-			doc.add(
-				LuceneFields.getKeyword(
-					LuceneFields.UID,
-					LuceneFields.getUID(PORTLET_ID, messageId)));
-
-			doc.add(
-				LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
-			doc.add(
-				LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
-			doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
-
-			doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
-			doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
-
-			doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
-
-			doc.add(LuceneFields.getKeyword("categoryId", categoryId));
-			doc.add(LuceneFields.getKeyword("threadId", threadId));
-			doc.add(LuceneFields.getKeyword("messageId", messageId));
-
-			writer.addDocument(doc);
-
-			LuceneUtil.write(writer);
+			IndexProducer.produce(methodWrapper);
+		}
+		catch (Exception e) {
+			if (e instanceof IOException) {
+				throw (IOException)e;
+			}
+			else {
+				_log.error(e);
+			}
 		}
 	}
 
 	public static void deleteMessage(String companyId, String messageId)
 		throws IOException {
 
-		synchronized (IndexWriter.class) {
-			IndexReader reader = LuceneUtil.getReader(companyId);
+		try {
+			MethodWrapper methodWrapper = new MethodWrapper(
+				IndexerImpl.class.getName(), "deleteMessage",
+				new Object[] {companyId, messageId});
 
-			reader.deleteDocuments(
-				new Term(
-					LuceneFields.UID,
-					LuceneFields.getUID(PORTLET_ID, messageId)));
-
-			reader.close();
+			IndexProducer.produce(methodWrapper);
+		}
+		catch (Exception e) {
+			if (e instanceof IOException) {
+				throw (IOException)e;
+			}
+			else {
+				_log.error(e);
+			}
 		}
 	}
 
 	public static void deleteMessages(String companyId, String threadId)
 		throws IOException, ParseException {
 
-		synchronized (IndexWriter.class) {
-			BooleanQuery booleanQuery = new BooleanQuery();
+		try {
+			MethodWrapper methodWrapper = new MethodWrapper(
+				IndexerImpl.class.getName(), "deleteMessages",
+				new Object[] {companyId, threadId});
 
-			LuceneUtil.addRequiredTerm(
-				booleanQuery, LuceneFields.PORTLET_ID, PORTLET_ID);
-
-			LuceneUtil.addRequiredTerm(booleanQuery, "threadId", threadId);
-
-			Searcher searcher = LuceneUtil.getSearcher(companyId);
-
-			Hits hits = searcher.search(booleanQuery);
-
-			if (hits.length() > 0) {
-				IndexReader reader = LuceneUtil.getReader(companyId);
-
-				for (int i = 0; i < hits.length(); i++) {
-					Document doc = hits.doc(i);
-
-					Field field = doc.getField(LuceneFields.UID);
-
-					reader.deleteDocuments(
-						new Term(LuceneFields.UID, field.stringValue()));
-				}
-
-				reader.close();
+			IndexProducer.produce(methodWrapper);
+		}
+		catch (Exception e) {
+			if (e instanceof IOException) {
+				throw (IOException)e;
+			}
+			else {
+				_log.error(e);
 			}
 		}
 	}
@@ -146,14 +117,23 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 		throws IOException {
 
 		try {
-			deleteMessage(companyId, messageId);
-		}
-		catch (IOException ioe) {
-		}
+			MethodWrapper methodWrapper = new MethodWrapper(
+				IndexerImpl.class.getName(), "updateMessage",
+				new Object[] {
+					companyId, groupId, categoryId, threadId, messageId, title,
+					content
+				});
 
-		addMessage(
-			companyId, groupId, categoryId, threadId, messageId, title,
-			content);
+			IndexProducer.produce(methodWrapper);
+		}
+		catch (Exception e) {
+			if (e instanceof IOException) {
+				throw (IOException)e;
+			}
+			else {
+				_log.error(e);
+			}
+		}
 	}
 
 	public DocumentSummary getDocumentSummary(
@@ -181,11 +161,22 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 
 	public void reIndex(String[] ids) throws IndexerException {
 		try {
-			MBCategoryLocalServiceUtil.reIndex(ids);
+			MethodWrapper methodWrapper = new MethodWrapper(
+				IndexerImpl.class.getName(), "reIndex",
+				new Object[] {ids});
+
+			IndexProducer.produce(methodWrapper);
 		}
 		catch (Exception e) {
-			throw new IndexerException(e);
+			if (e instanceof IndexerException) {
+				throw (IndexerException)e;
+			}
+			else {
+				_log.error(e);
+			}
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(Indexer.class);
 
 }

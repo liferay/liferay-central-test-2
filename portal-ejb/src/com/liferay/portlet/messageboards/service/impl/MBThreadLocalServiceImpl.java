@@ -22,22 +22,35 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
+import com.liferay.documentlibrary.NoSuchDirectoryException;
+import com.liferay.documentlibrary.service.spring.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Resource;
+import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBMessagePK;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
-import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.spring.MBThreadLocalService;
-import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
+import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.util.Validator;
 
-import java.util.Collections;
+import java.io.IOException;
+
+import java.rmi.RemoteException;
+
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.queryParser.ParseException;
 
 /**
  * <a href="MBThreadLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -58,16 +71,70 @@ public class MBThreadLocalServiceImpl implements MBThreadLocalService {
 	public void deleteThread(MBThread thread)
 		throws PortalException, SystemException {
 
-		List messages = MBMessageUtil.findByThreadId(
-			thread.getThreadId());
+		MBMessage rootMessage = MBMessageUtil.findByPrimaryKey(
+			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID,
+			thread.getRootMessageId()));
 
-		Collections.sort(messages, new MessageThreadComparator());
+		// Lucene
 
-		for (int i = messages.size() - 1; i >= 0; i--) {
-			MBMessage message = (MBMessage)messages.get(i);
-
-			MBMessageLocalServiceUtil.deleteMessage(message);
+		try {
+			Indexer.deleteMessages(
+				rootMessage.getCompanyId(), thread.getThreadId());
 		}
+		catch (IOException ioe) {
+			_log.error(ioe.getMessage());
+		}
+		catch (ParseException pe) {
+			_log.error(pe.getMessage());
+		}
+
+		// File attachments
+
+		String companyId = rootMessage.getCompanyId();
+		String portletId = Company.SYSTEM;
+		String repositoryId = Company.SYSTEM;
+		String dirName = thread.getAttachmentsDir();
+
+		try {
+			DLServiceUtil.deleteDirectory(
+				companyId, portletId, repositoryId, dirName);
+		}
+		catch (NoSuchDirectoryException nsde) {
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
+		}
+
+		// Messages
+
+		Iterator itr = MBMessageUtil.findByThreadId(
+			thread.getThreadId()).iterator();
+
+		while (itr.hasNext()) {
+			MBMessage message = (MBMessage)itr.next();
+
+			// Message flags
+
+			MBMessageFlagUtil.removeByT_M(
+				message.getTopicId(), message.getMessageId());
+
+			// Resources
+
+			if (!message.isDiscussion()) {
+				ResourceLocalServiceUtil.deleteResource(
+					message.getCompanyId(), MBMessage.class.getName(),
+					Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+					message.getPrimaryKey().toString());
+			}
+
+			// Message
+
+			MBMessageUtil.remove(message.getPrimaryKey());
+		}
+
+		// Thread
+
+		MBThreadUtil.remove(thread.getThreadId());
 	}
 
 	public void deleteThreads(String categoryId)
@@ -151,5 +218,7 @@ public class MBThreadLocalServiceImpl implements MBThreadLocalService {
 			return true;
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(MBThreadLocalServiceImpl.class);
 
 }

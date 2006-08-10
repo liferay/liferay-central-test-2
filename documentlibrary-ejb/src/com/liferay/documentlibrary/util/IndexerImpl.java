@@ -145,7 +145,7 @@ public class IndexerImpl {
 		}
 	}
 
-	public synchronized static void deleteFile(
+	public static void deleteFile(
 			String companyId, String portletId, String repositoryId,
 			String fileName)
 		throws IOException {
@@ -200,7 +200,7 @@ public class IndexerImpl {
 		}
 	}
 
-	public synchronized static void updateFile(
+	public static void updateFile(
 			String companyId, String portletId, String groupId,
 			String repositoryId, String fileName)
 		throws IOException {

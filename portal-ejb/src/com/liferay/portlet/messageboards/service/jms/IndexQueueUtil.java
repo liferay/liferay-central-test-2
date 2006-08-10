@@ -20,21 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.model;
+package com.liferay.portlet.messageboards.service.jms;
+
+import com.liferay.portal.spring.util.SpringUtil;
+
+import javax.jms.Queue;
+
+import org.springframework.context.ApplicationContext;
 
 /**
- * <a href="MBThread.java.html"><b><i>View Source</i></b></a>
+ * <a href="IndexQueueUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class MBThread extends MBThreadModel {
+public class IndexQueueUtil {
 
-	public MBThread() {
-	}
+	public static String NAME =
+		"com.liferay.portlet.messageboards.service.jms.IndexQueue";
 
-	public String getAttachmentsDir() {
-		return "messageboards/" + getThreadId();
+	public static Queue getQueue() {
+		ApplicationContext ctx = SpringUtil.getContext();
+
+		return (Queue)ctx.getBean(NAME);
 	}
 
 }

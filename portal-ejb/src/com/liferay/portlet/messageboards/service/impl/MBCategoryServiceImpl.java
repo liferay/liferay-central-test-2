@@ -75,15 +75,15 @@ public class MBCategoryServiceImpl
 
 	public MBCategory updateCategory(
 			String categoryId, String parentCategoryId, String name,
-			String description)
+			String description, boolean mergeWithParentCategory)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.UPDATE);
 
 		return MBCategoryLocalServiceUtil.updateCategory(
-			getUser().getCompanyId(), categoryId, parentCategoryId, name,
-			description);
+			categoryId, parentCategoryId, name, description,
+			mergeWithParentCategory);
 	}
 
 }

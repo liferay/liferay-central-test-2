@@ -487,19 +487,6 @@ create table MBThread (
 	lastPostDate DATE null
 );
 
-create table MBTopic (
-	topicId VARCHAR(75) not null primary key,
-	companyId VARCHAR(75) not null,
-	userId VARCHAR(75) not null,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	categoryId VARCHAR(75) null,
-	name VARCHAR(75) null,
-	description STRING null,
-	lastPostDate DATE null
-);
-
 create table Organization_ (
 	organizationId VARCHAR(75) not null primary key,
 	companyId VARCHAR(75) not null,

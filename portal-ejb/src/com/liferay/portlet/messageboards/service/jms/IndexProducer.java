@@ -20,71 +20,61 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portlet.messageboards.service.jms;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.SystemException;
+import com.liferay.util.JMSUtil;
 
-import java.text.DateFormat;
+import java.io.Serializable;
 
-import java.util.Date;
+import javax.jms.JMSException;
+import javax.jms.ObjectMessage;
+import javax.jms.Queue;
+import javax.jms.QueueConnection;
+import javax.jms.QueueConnectionFactory;
+import javax.jms.QueueSender;
+import javax.jms.QueueSession;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="IndexProducer.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
-
-	static String name = "Liferay Portal";
+public class IndexProducer {
 
 	static {
-		if (PropsUtil.get(PropsUtil.PORTAL_RELEASE).equals("enterprise")) {
-			name += " Enterprise";
+		IndexConsumer consumer = new IndexConsumer();
+
+		consumer.consume();
+	}
+
+	public static void produce(Serializable obj) throws SystemException {
+		QueueConnection con = null;
+		QueueSession session = null;
+		QueueSender sender = null;
+
+		try {
+			QueueConnectionFactory qcf = IndexQCFUtil.getQCF();
+			Queue queue = IndexQueueUtil.getQueue();
+
+			con = qcf.createQueueConnection();
+			session = con.createQueueSession(
+				false, QueueSession.AUTO_ACKNOWLEDGE);
+			sender = session.createSender(queue);
+
+			ObjectMessage objMsg = session.createObjectMessage();
+
+			objMsg.setObject(obj);
+
+			sender.send(objMsg);
 		}
-		else {
-			name += " Professional";
+		catch (JMSException jmse) {
+			throw new SystemException(jmse);
 		}
-	}
-
-	static String version = "4.1.0";
-
-	static String codeName = "Cowper";
-
-	static String build = "3123";
-
-	static String date = "August 9, 2006";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
-	}
-
-	public static final String getCodeName() {
-		return codeName;
-	}
-
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
-	}
-
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
+		finally {
+			JMSUtil.cleanUp(con, session, sender);
+		}
 	}
 
 }

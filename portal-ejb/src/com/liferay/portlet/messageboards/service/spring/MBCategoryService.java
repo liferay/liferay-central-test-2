@@ -47,7 +47,8 @@ public interface MBCategoryService {
 
 	public com.liferay.portlet.messageboards.model.MBCategory updateCategory(
 		java.lang.String categoryId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description)
+		java.lang.String name, java.lang.String description,
+		boolean mergeWithParentCategory)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 }

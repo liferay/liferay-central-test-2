@@ -146,13 +146,13 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 	}
 
 	public com.liferay.portlet.messageboards.model.MBCategory updateCategory(
-		java.lang.String companyId, java.lang.String categoryId,
-		java.lang.String parentCategoryId, java.lang.String name,
-		java.lang.String description)
+		java.lang.String categoryId, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		boolean mergeWithParentCategory)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateCategory(companyId, categoryId,
-			parentCategoryId, name, description);
+		return getService().updateCategory(categoryId, parentCategoryId, name,
+			description, mergeWithParentCategory);
 	}
 
 	public void ejbCreate() throws CreateException {

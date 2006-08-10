@@ -85,26 +85,38 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
+			<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
 
-			<%
-			String parentCategoryName = "";
+					<%
+					String parentCategoryName = "";
 
-			try {
-				MBCategory parentCategory = MBCategoryLocalServiceUtil.getCategory(parentCategoryId);
+					try {
+						MBCategory parentCategory = MBCategoryLocalServiceUtil.getCategory(parentCategoryId);
 
-				parentCategoryName = parentCategory.getName();
-			}
-			catch (NoSuchCategoryException nscce) {
-			}
-			%>
+						parentCategoryName = parentCategory.getName();
+					}
+					catch (NoSuchCategoryException nscce) {
+					}
+					%>
 
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /><portlet:param name="categoryId" value="<%= parentCategoryId %>" /></portlet:renderURL>" id="<portlet:namespace />parentCategoryName">
-			<%= parentCategoryName %>
-			</a>
+					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /><portlet:param name="categoryId" value="<%= parentCategoryId %>" /></portlet:renderURL>" id="<portlet:namespace />parentCategoryName">
+					<%= parentCategoryName %>
+					</a>
 
-			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= parentCategoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
+					<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= parentCategoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
 
-			<input class="portlet-form-button" id="<portlet:namespace />removeCategoryButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeCategory();">
+					<input class="portlet-form-button" id="<portlet:namespace />removeCategoryButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeCategory();">
+				</td>
+				<td style="padding-left: 30px;"></td>
+				<td>
+					<liferay-ui:input-checkbox param="mergeWithParentCategory" />
+
+					<%= LanguageUtil.get(pageContext, "merge-with-parent-category") %>
+				</td>
+			</tr>
+			</table>
 		</td>
 	</tr>
 </c:if>

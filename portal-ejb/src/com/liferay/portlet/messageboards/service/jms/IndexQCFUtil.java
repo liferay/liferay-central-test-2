@@ -20,21 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.model;
+package com.liferay.portlet.messageboards.service.jms;
+
+import com.liferay.portal.spring.util.SpringUtil;
+
+import javax.jms.QueueConnectionFactory;
+
+import org.activemq.pool.PooledConnectionFactory;
+
+import org.springframework.context.ApplicationContext;
 
 /**
- * <a href="MBThread.java.html"><b><i>View Source</i></b></a>
+ * <a href="IndexQCFUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class MBThread extends MBThreadModel {
+public class IndexQCFUtil {
 
-	public MBThread() {
-	}
+	public static String NAME =
+		"com.liferay.portlet.messageboards.service.jms.IndexQCF";
 
-	public String getAttachmentsDir() {
-		return "messageboards/" + getThreadId();
+	public static QueueConnectionFactory getQCF() {
+		ApplicationContext ctx = SpringUtil.getContext();
+
+		PooledConnectionFactory pcf =
+			(PooledConnectionFactory)ctx.getBean(NAME);
+
+		return (QueueConnectionFactory)pcf.getConnectionFactory();
 	}
 
 }

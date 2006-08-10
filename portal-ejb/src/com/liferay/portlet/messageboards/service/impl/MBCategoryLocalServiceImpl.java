@@ -36,11 +36,14 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.CategoryNameException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalService;
 import com.liferay.portlet.messageboards.service.spring.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.Indexer;
+import com.liferay.portlet.messageboards.util.IndexerImpl;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.Hits;
 
@@ -313,7 +316,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
-				contextQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
+				contextQuery, LuceneFields.PORTLET_ID, IndexerImpl.PORTLET_ID);
 			LuceneUtil.addRequiredTerm(
 				contextQuery, LuceneFields.GROUP_ID, groupId);
 
@@ -363,11 +366,15 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 	}
 
 	public MBCategory updateCategory(
-			String companyId, String categoryId, String parentCategoryId,
-			String name, String description)
+			String categoryId, String parentCategoryId, String name,
+			String description, boolean mergeWithParentCategory)
 		throws PortalException, SystemException {
 
+		// Category
+
 		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
+
+		String oldCategoryId = category.getParentCategoryId();
 
 		parentCategoryId = getParentCategoryId(category, parentCategoryId);
 
@@ -380,7 +387,73 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 		MBCategoryUtil.update(category);
 
+		// Merge categories
+
+		if (mergeWithParentCategory &&
+			!oldCategoryId.equals(parentCategoryId)) {
+
+			mergeCategories(category, parentCategoryId);
+		}
+
 		return category;
+	}
+
+	protected void mergeCategories(MBCategory fromCategory, String toCategoryId)
+		throws PortalException, SystemException {
+
+		Iterator itr = MBCategoryUtil.findByG_P(
+			fromCategory.getGroupId(), fromCategory.getCategoryId()).iterator();
+
+		while (itr.hasNext()) {
+			MBCategory category = (MBCategory)itr.next();
+
+			mergeCategories(category, toCategoryId);
+		}
+
+		Iterator itr1 = MBThreadUtil.findByCategoryId(
+			fromCategory.getCategoryId()).iterator();
+
+		while (itr1.hasNext()) {
+
+			// Thread
+
+			MBThread thread = (MBThread)itr1.next();
+
+			thread.setCategoryId(toCategoryId);
+
+			MBThreadUtil.update(thread);
+
+			Iterator itr2 = MBMessageUtil.findByThreadId(
+				thread.getThreadId()).iterator();
+
+			while (itr2.hasNext()) {
+
+				// Message
+
+				MBMessage message = (MBMessage)itr2.next();
+
+				message.setCategoryId(toCategoryId);
+
+				MBMessageUtil.update(message);
+
+				// Lucene
+
+				try {
+					if (!fromCategory.isDiscussion()) {
+						Indexer.updateMessage(
+							message.getCompanyId(), fromCategory.getGroupId(),
+							toCategoryId, message.getThreadId(),
+							message.getMessageId(), message.getSubject(),
+							message.getBody());
+					}
+				}
+				catch (IOException ioe) {
+					_log.error(ioe.getMessage());
+				}
+			}
+		}
+
+		MBCategoryUtil.remove(fromCategory.getCategoryId());
 	}
 
 	protected String getParentCategoryId(
