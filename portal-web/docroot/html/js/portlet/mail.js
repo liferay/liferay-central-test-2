@@ -166,6 +166,8 @@ var Mail = {
 		var	field = msObj.head;
 		var nextMs = msObj.next;
 		var prevMs = msObj.prev;
+		
+		msObj.state.parentNode.removeChild(msObj.state);
 			
 		while (field) {
 			var nextField = field.next;
@@ -175,7 +177,7 @@ var Mail = {
 			field = null;
 			field = nextField;
 		}
-		
+
 		if (nextMs != null) {
 			nextMs.prev = prevMs;
 		}
