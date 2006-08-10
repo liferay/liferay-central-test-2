@@ -24,19 +24,24 @@
 
 <%@ include file="/html/portlet/chat/init.jsp" %>
 
-<c:if test="<%= MessagingUtil.isJabberEnabled() %>">
-	<div id="portlet-chat-roster-list" style="margin-bottom: 5px;"></div>
+<c:choose>
+	<c:when test="<%= MessagingUtil.isJabberEnabled() %>">
+		<div id="portlet-chat-roster-list" style="margin-bottom: 5px;"></div>
 
-	<img style="cursor: pointer" align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/chat/delete_user.gif" onclick="MessagingRoster.deleteEntries()" />
-	<img style="cursor: pointer" align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/chat/add_user.gif" onclick="MessagingRoster.toggleEmail()" />
+		<img style="cursor: pointer" align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/chat/delete_user.gif" onclick="MessagingRoster.deleteEntries()" />
+		<img style="cursor: pointer" align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/chat/add_user.gif" onclick="MessagingRoster.toggleEmail()" />
 
-	<div id="portlet-chat-roster-email-div" class="font-small" style="display: none; margin-top: 3px">
-		<%= LanguageUtil.get(pageContext, "email") %> <input class="form-text" id="portlet-chat-roster-email" name="email" onkeypress="MessagingRoster.onEmailKeypress(this, event)" />
-	</div>
+		<div id="portlet-chat-roster-email-div" class="font-small" style="display: none; margin-top: 3px">
+			<%= LanguageUtil.get(pageContext, "email") %> <input class="form-text" id="portlet-chat-roster-email" name="email" onkeypress="MessagingRoster.onEmailKeypress(this, event)" />
+		</div>
 
-	<script type="text/javascript">
-		Messaging.checkRoster = true;
-		MessagingRoster.getEntries();
-		MessagingRoster.highlightColor = "<%= colorScheme.getPortletMenuBg() %>";
-	</script>
-</c:if>
+		<script type="text/javascript">
+			Messaging.checkRoster = true;
+			MessagingRoster.getEntries();
+			MessagingRoster.highlightColor = "<%= colorScheme.getPortletMenuBg() %>";
+		</script>
+	</c:when>
+	<c:otherwise>
+		<liferay-util:include page="/html/portal/portlet_inactive.jsp" />
+	</c:otherwise>
+</c:choose>
