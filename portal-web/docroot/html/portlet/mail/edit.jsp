@@ -33,7 +33,38 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/mail/edit");
 portletURL.setParameter("tabs1", tabs1);
+
+signature = ParamUtil.getString(request, "signature", signature);
 %>
+
+<c:choose>
+	<c:when test='<%= tabs1.equals("signature") %>'>
+
+		<script type="text/javascript">
+			function <portlet:namespace />editPreferences() {
+				document.<portlet:namespace />fm.<portlet:namespace />signature.value = parent.<portlet:namespace />editor.getHTML();
+
+				submitForm(document.<portlet:namespace />fm);
+			}
+		
+			function initEditor() {
+				return "<%= UnicodeFormatter.toString(signature) %>";
+			}
+
+		</script>
+
+	</c:when>
+	<c:otherwise>
+
+		<script type="text/javascript">
+			function <portlet:namespace />editPreferences() {
+				submitForm(document.<portlet:namespace />fm);
+			}
+		</script>
+
+	</c:otherwise>
+</c:choose>
+
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/mail/edit" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
@@ -68,15 +99,13 @@ portletURL.setParameter("tabs1", tabs1);
 	</c:when>
 	<c:when test='<%= tabs1.equals("signature") %>'>
 
-		<%
-		signature = ParamUtil.getString(request, "signature", signature);
-		%>
-
 		<%= LanguageUtil.get(pageContext, "the-signature-below-will-be-added-to-each-outgoing-message") %>
 
 		<br><br>
 
-		<textarea class="form-text" name="<portlet:namespace />signature" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= signature %></textarea>
+		<input type="hidden" name="<portlet:namespace />signature" value="" />
+
+		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"  />
 	</c:when>
 	<c:when test='<%= tabs1.equals("vacation-message") %>'>
 
@@ -94,6 +123,10 @@ portletURL.setParameter("tabs1", tabs1);
 
 <br><br>
 
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />editPreferences();">
 
 </form>
+
+<%!
+public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.mail.edit.jsp";
+%>
