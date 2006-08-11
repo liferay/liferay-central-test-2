@@ -436,6 +436,8 @@ var Mail = {
 		var msgsSubject = document.getElementById("portlet-mail-msgs-subject");
 		var msgsReceived = document.getElementById("portlet-mail-msgs-received");
 		
+		var mailBottomHandle = document.getElementById("portlet-mail-bottom-handle");
+		
 		var mainMailGroup = Resize.createHandle(folderHandle);
 		mainMailGroup.addRule(new ResizeRule(folderPane, Resize.HORIZONTAL, Resize.ADD));
 		mainMailGroup.addRule(new ResizeRule(previewBox, Resize.HORIZONTAL, Resize.SUBTRACT));
@@ -458,6 +460,9 @@ var Mail = {
 		subjectGroup.addRule(new ResizeRule(msgsTitleReceived, Resize.HORIZONTAL, Resize.SUBTRACT));
 		subjectGroup.addRule(new ResizeRule(msgsReceived, Resize.HORIZONTAL, Resize.SUBTRACT));
 		
+		var bottomGroup = Resize.createHandle(mailBottomHandle);
+		bottomGroup.addRule(new ResizeRule(detailedFrame, Resize.VERTICAL, Resize.ADD));
+		
 		msgsTitleState.asc = true;
 		msgsTitleState.value = "state";
 		msgsTitleFrom.asc = true;
@@ -470,12 +475,9 @@ var Mail = {
 		Mail.sortBy = msgsTitleReceived;
 		Mail.updateSortArrow();
 		
-		if (is_ie) {
-			previewPane.onkeydown = Mail.onMailKeyPress;
-		}
-		else {
-			document.onkeydown = Mail.onMailKeyPress;
-		}
+		//previewPane.onkeydown = Mail.onMailKeyPress;
+		document.onkeydown = Mail.onMailKeyPress;
+		
 		previewPane.onselectstart = function() {return false;} // ie
 		previewPane.onmousedown = function() {return false;} // mozilla
 		//previewPane.onscroll = Mail.onPreviewScroll;
@@ -563,7 +565,6 @@ var Mail = {
 		if ((keycode == Key.UP || keycode == Key.DOWN) &&
 			 Mail.summaryList.head != null) {
 			 
-			
 			var lastObj = Mail.lastSelected;
 			var nextObj;
 			
@@ -595,6 +596,9 @@ var Mail = {
 				}
 				Mail.groupStart = Mail.lastSelected;
 			}
+			
+			Mail.scrollToSelected();
+			return false;
 		}
 		else if (keycode == Key.DELETE) {
 			Mail.deleteSelectedMessages();
@@ -609,7 +613,6 @@ var Mail = {
 				return false;
 			}
 		}
-		return false;
 	},
 	
 	onMessageSelect : function() {
@@ -841,14 +844,38 @@ var Mail = {
 			msgsDate.appendChild(date);
 			
 			if (Mail.currentMessageId == msObj.id) {
+				/* Previous message selected */
 				Mail.summaryHighlight(msObj);
 				Mail.lastSelected = msObj;
+				Mail.scrollToSelected();
 			}
 		}
 		
 		if (end < (total - 1)) {
 			setTimeout("Mail.renderPreviewSection(" + (count + 1) + ")", 1);
 		}
+	},
+
+	scrollToSelected : function() {
+		var previewPane = document.getElementById("portlet-mail-msgs-preview-pane");
+		var previewTitle = document.getElementById("portlet-mail-msgs-preview-pane-title");
+		var element = Mail.lastSelected.row[1];
+		
+		var paneTop = Coordinates.southeastOffset(previewTitle, true).y;
+		var paneBottom = paneTop + previewPane.offsetHeight;
+		
+		var elTop = Coordinates.northwestOffset(element, true).y - previewPane.scrollTop;
+		var elBottom = elTop + element.offsetHeight;
+
+		if (elTop < paneTop) {
+			previewPane.scrollTop -= paneTop - elTop;
+		}
+		
+		if (elBottom > paneBottom) {
+			previewPane.scrollTop += (elBottom - paneBottom);
+		}
+		
+		//previewPane.scrollTop = 500;
 	},
 
 	setCurrentFolder : function(folder) {
