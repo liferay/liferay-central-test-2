@@ -143,7 +143,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 					<input <%= (selFeeds != null) && (selFeeds.contains(tableIteratorObj)) ? "checked" : "" %> name="<portlet:namespace />feed" type="checkbox" value="<%= tableIteratorObj.getFeedURL() %>">
 
-					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/news/view_feed" /><portlet:param name="feed_url" value="<%= tableIteratorObj.getFeedURL() %>" /></portlet:renderURL>"><%= tableIteratorObj.getShortName() %></a>
+					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/news/view" /><portlet:param name="url" value="<%= tableIteratorObj.getFeedURL() %>" /></portlet:renderURL>"><%= tableIteratorObj.getShortName() %></a>
 				</liferay-ui:table-iterator>
 
 				<br>
