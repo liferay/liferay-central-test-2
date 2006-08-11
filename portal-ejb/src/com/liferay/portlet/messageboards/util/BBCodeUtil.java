@@ -30,6 +30,9 @@ import com.liferay.util.StringUtil;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="BBCodeUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -59,7 +62,7 @@ public class BBCodeUtil {
 	}
 
 	public static final String[][] EMOTICONS = {
-		{"@theme_images_path@/emoticons/angry.gif", ">["},
+		{"@theme_images_path@/emoticons/angry.gif", ":angry:"},
 		{"@theme_images_path@/emoticons/bashful.gif", ":bashful:"},
 		{"@theme_images_path@/emoticons/big_grin.gif", ":grin:"},
 		{"@theme_images_path@/emoticons/blink.gif", ":blink:"},
@@ -355,7 +358,14 @@ public class BBCodeUtil {
 				tag.setElement(remainder.substring(cb + 1, end));
 			}
 			else if (cb == 0) {
-				tag.setElement(remainder.substring(1, end));
+				try {
+					tag.setElement(remainder.substring(1, end));
+				}
+				catch (StringIndexOutOfBoundsException sioobe) {
+					_log.error(bbcode);
+
+					throw sioobe;
+				}
 			}
 		}
 
@@ -390,5 +400,7 @@ public class BBCodeUtil {
 		"<span style='text-align: right'>", "<span style='text-indent: 10px'>",
 		"</span>", "</span>", "</span>", "</span>"
 	};
+
+	private static Log _log = LogFactory.getLog(BBCodeUtil.class);
 
 }
