@@ -25,6 +25,10 @@
 		</antcall>
 
 		<antcall target="clean-module">
+			<param name="module.name" value="sample-portal-client-portlet" />
+		</antcall>
+
+		<antcall target="clean-module">
 			<param name="module.name" value="sample-struts-portlet" />
 		</antcall>
 	</target>
@@ -58,6 +62,10 @@
 
 		<antcall target="compile-module">
 			<param name="module.name" value="sample-jsp-portlet" />
+		</antcall>
+
+		<antcall target="compile-module">
+			<param name="module.name" value="sample-portal-client-portlet" />
 		</antcall>
 
 		<antcall target="compile-module">
@@ -103,6 +111,10 @@
 		</antcall>
 
 		<antcall target="war-module">
+			<param name="module.name" value="sample-portal-client-portlet" />
+		</antcall>
+
+		<antcall target="war-module">
 			<param name="module.name" value="sample-struts-portlet" />
 		</antcall>
 	</target>
@@ -119,6 +131,26 @@
 			file="${project.dir}/portal-ejb/classes/META-INF/portal-log4j.xml"
 			tofile="${module.name}.war/WEB-INF/classes/log4j.xml"
 		/>
+
+		<if>
+			<equals arg1="${module.name}" arg2="sample-portal-client-portlet" />
+			<then>
+				<copy todir="${module.name}.war/WEB-INF/lib">
+					<fileset
+						dir="${project.dir}/lib/development"
+						includes="activation.jar,mail.jar"
+					/>
+					<fileset
+						dir="${project.dir}/lib/portal"
+						includes="axis.jar,commons-discovery.jar,commons-logging.jar,concurrent.jar,jaxrpc.jar,saaj.jar,trove.jar,wsdl4j.jar"
+					/>
+					<fileset
+						dir="${project.dir}/portal-client"
+						includes="portal-client.jar"
+					/>
+				</copy>
+			</then>
+		</if>
 
 		<war
 			basedir="${module.name}.war"
