@@ -204,6 +204,7 @@ queryString+="no_cache="+random()+"&ajax_id="+ajaxId;try{if(false){xmlHttpReq.op
 else{xmlHttpReq.open("POST",path,true);xmlHttpReq.setRequestHeader("Method","POST "+path+" HTTP/1.1");xmlHttpReq.setRequestHeader("Content-Type","application/x-www-form-urlencoded");xmlHttpReq.send(queryString);}}
 catch(e){}
 if(noReturn){this.remove(ajaxId);}},remove:function(id){if(id&&AjaxTracker[""+id]){AjaxTracker[""+id].cleanUp();AjaxTracker[""+id]=null;}}}
+function createJSONObject(JSONText){return eval("("+JSONText+")");}
 function loadForm(form,action,elId){if(is_ie_5_up){var pos=action.indexOf("?");var path=action;var queryString="";if(pos!=-1){path=action.substring(0,pos);queryString=action.substring(pos+1,action.length);}
 if(!endsWith(queryString,"&")){queryString+="&";}
 for(var i=0;i<form.elements.length;i++){var e=form.elements[i];if((e.name!=null)&&(e.value!=null)){queryString+=e.name+"="+encodeURIComponent(e.value)+"&";}}
@@ -371,8 +372,8 @@ catch(err){}},getEntries:function(){loadPage(themeDisplay.getPathMain()+"/chat/r
 catch(err){if(Messaging.pollTimer){clearInterval(Messaging.pollTimer);}
 return;}},updateEntries:function(roster){var rosterDiv=document.getElementById("portlet-chat-roster-list");if(rosterDiv!=null){rosterDiv.innerHTML="";}
 else{Messaging.checkRoster=false;return;}
-for(var i=0;i<roster.length;i++){var entry=roster[i];var tempDiv=document.createElement("div");var tempImg=document.createElement("img");var tempLink=document.createElement("a");tempImg.align="absmiddle";tempImg.style.marginRight="5px";if(entry.status=="available"){tempImg.src=themeDisplay.getPathThemeImage()+"/common/activate.gif";}
-else{tempImg.src=themeDisplay.getPathThemeImage()+"/common/deactivate.gif";}
+for(var i=0;i<roster.length;i++){var entry=roster[i];var tempDiv=document.createElement("div");var tempImg=document.createElement("img");var tempLink=document.createElement("a");tempImg.align="absmiddle";tempImg.style.marginRight="5px";if(entry.status=="available"){tempImg.src=themeDisplay.getPathThemeImage()+"/chat/user_online.gif";}
+else{tempImg.src=themeDisplay.getPathThemeImage()+"/chat/user_offline.gif";}
 tempLink.innerHTML=entry.name;tempLink.href="javascript: void(0)";tempLink.onclick=MessagingRoster.onEntryLinkClick;tempDiv.appendChild(tempImg);tempDiv.appendChild(tempLink);tempDiv.onclick=MessagingRoster.onEntryClick;tempDiv.userId=entry.user;tempDiv.userName=entry.name;tempDiv.style.cursor="pointer";rosterDiv.appendChild(tempDiv);}},onEmailKeypress:function(obj,event){var keyCode;if(window.event)keyCode=window.event.keyCode;else if(event)keyCode=event.which;else return;if(keyCode==13){MessagingRoster.addEntry();}},onEntryClick:function(){if(MessagingRoster.lastSelected!=null){MessagingRoster.lastSelected.style.backgroundColor="transparent";}
 this.style.backgroundColor=MessagingRoster.highlightColor;MessagingRoster.lastSelected=this;},onEntryLinkClick:function(){var parent=this.parentNode;Messaging.createChat(null,null,parent.userId,parent.userName);},toggleEmail:function(){emailDiv=document.getElementById("portlet-chat-roster-email-div");if(emailDiv.style.display=="none"){emailDiv.style.display="block";emailInput=document.getElementById("portlet-chat-roster-email");emailInput.value="";emailInput.focus();}
 else{emailDiv.style.display="none";}}}
