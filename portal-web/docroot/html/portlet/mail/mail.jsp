@@ -343,7 +343,7 @@ String mailLineColor = "#B3B6B0";
 			#portlet-mail-bottom-handle {
 				border-bottom: 1px solid <%= mailLineColor %>;
 			}
-			
+
 			#portlet-mail-bottom-handle div {
 				cursor: n-resize;
 				font-size: 0;
@@ -515,6 +515,7 @@ String mailLineColor = "#B3B6B0";
 			</td>
 		</tr>
 		</table>
+
 		<div id="portlet-mail-bottom-handle"><div></div></div>
 
 		<script type="text/javascript">
