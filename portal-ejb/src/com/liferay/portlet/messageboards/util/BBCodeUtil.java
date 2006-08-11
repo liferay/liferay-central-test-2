@@ -82,7 +82,7 @@ public class BBCodeUtil {
 		{"@theme_images_path@/emoticons/karate_kid.gif", ":kid:"},
 		{"@theme_images_path@/emoticons/kiss.gif", ":#"},
 		{"@theme_images_path@/emoticons/laugh.gif", ":lol:"},
-		{"@theme_images_path@/emoticons/mad.gif", ">("},
+		{"@theme_images_path@/emoticons/mad.gif", ":mad:"},
 		{"@theme_images_path@/emoticons/mellow.gif", ":mellow:"},
 		{"@theme_images_path@/emoticons/ninja.gif", ":ph34r:"},
 		{"@theme_images_path@/emoticons/oh_my.gif", ":O"},
