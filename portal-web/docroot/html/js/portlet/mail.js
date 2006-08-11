@@ -5,6 +5,7 @@ function MailSummaryObject(state, sender, subject, date, size, id, read, index) 
 	this.state = state;
 	this.id = id;
 	this.index = index;
+	this.selectedIndex = -1;
 	this.read = read;
 	this.head = sender;
 	this.pendingHighlight = false;
@@ -26,7 +27,6 @@ function MailSummaryObject(state, sender, subject, date, size, id, read, index) 
 }
 
 
-
 var Mail = {
 	colorHighlight : "#c3d4ee",
 	currentFolder : null,
@@ -41,6 +41,7 @@ var Mail = {
 	lastSelected : null,
 	mailObject : null,
 	messageTimer : null,
+	selectedArray : null,
 	scrollTimer : null,
 	sortBy : null,
 	summaryList : { head : null, tail : null },
@@ -189,6 +190,11 @@ var Mail = {
 		var nextMs = msObj.next;
 		var prevMs = msObj.prev;
 		var row = msObj.row;
+		
+		var sArray = Mail.selectedArray;
+		if (sArray != null) {
+			sArray[msObj.selectedIndex] = null;
+		}
 			
 		for (var i = 0; i < row.length; i++) {
 			var field = row[i];
@@ -199,6 +205,7 @@ var Mail = {
 			field = null;
 		}
 		
+		/* Reconnect doubly-linked list */
 		if (nextMs != null) {
 			nextMs.prev = prevMs;
 		}
@@ -398,11 +405,26 @@ var Mail = {
 	*/
 	
 	getSelectedMessages : function(processFunction) {
-		var msObj = this.summaryList.head;
+		var msObj;
 		var msgArray = new Array();
-		var count = 0;
 		var nextMs;
+		var sArray = Mail.selectedArray;
+		
+		if (sArray != null) {
+			for (var i = 0; i < sArray.length; i++) {
+				msObj = sArray[i];
+				
+				if (msObj != null && msObj.selected) {
+					msgArray.push(msObj.id);
+					
+					if (processFunction) {
+						processFunction(msObj);
+					}
+				}
+			}
+		}
 	
+	/*
 		while (msObj) {
 			nextMs = msObj.next;
 			if (msObj.selected) {
@@ -415,6 +437,7 @@ var Mail = {
 			}
 			msObj = nextMs;
 		}	
+		*/
 		return(msgArray);
 	},
 	
@@ -539,8 +562,6 @@ var Mail = {
 				loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=moveMessages&folderId=" + folderId + "&messages=" + moveList);
 			}
 			
-			Mail.resetLastSelected();
-
 			Mail.getFolders();
 		}
 
@@ -813,11 +834,11 @@ var Mail = {
 		var summaryList = Mail.summaryList;
 		
 		var SECTION_SIZE = 10;
-		var begin = count * count;
+		var begin = Math.pow(count, 3);
 		if (count == 0) {
-			count = 2;
+			count++;
 		}
-		var end = ((count + 1) * (count + 1)) - 1;
+		var end = Math.pow(count + 1, 3) - 1;
 
 		if (end > (totalMsgs - 1)) {
 			end = totalMsgs - 1;
@@ -952,7 +973,7 @@ var Mail = {
 		}
 	},
 	
-	summaryHighlight : function(msObj, modifierOn, setOff) {
+	summaryHighlight : function(msObj, skipDetails, setOff) {
 		var setColor = "transparent";
 		
 		msObj.pendingHighlight = false;
@@ -962,15 +983,27 @@ var Mail = {
 		}
 		
 		if (setOff == true) {
+			/* Unhighlight & unselect */
 			msObj.selected = false;
+			
+			if (msObj.selectedIndex >= 0) {
+				Mail.selectedArray[msObj.selectedIndex] = null;
+				msObj.selectedIndex = -1;
+			}
 		}
 		else {
+			/* Highlight & select */
 			msObj.selected = true;
 			setColor = Mail.colorHighlight;
 			Mail.lastSelected = msObj;
 			
-			/* Don't display details if modifier key was pressed */
-			if (!modifierOn) {
+			if (Mail.selectedArray == null) {
+				Mail.selectedArray = new Array();
+			}
+
+			msObj.selectedIndex = (Mail.selectedArray.push(msObj)) - 1;
+			
+			if (!skipDetails) {
 				Mail.messageTimer = setTimeout("Mail.getMessageDetails("+msObj.id+")", 500);
 			}
 		}
@@ -981,26 +1014,32 @@ var Mail = {
 		}
 	},
 	
-	summaryHighlightAll : function(setOff) {
+	summaryHighlightAll : function() {
 		var msObj = Mail.summaryList.head;
+		var sArray = Mail.selectedArray;
 		
 		while (msObj) {
-			if (setOff) {
-				Mail.summaryUnhighlight(msObj);
-			}
-			else {
-				Mail.summaryHighlight(msObj, true);
-			}
-			msObj = msObj.next;
+			Mail.summaryHighlight(msObj, true);
 		}
 	},
 	
-	summaryUnhighlight : function(msObj, modifierOn) {
-		Mail.summaryHighlight(msObj, modifierOn, true);
+	summaryUnhighlight : function(msObj) {
+		Mail.summaryHighlight(msObj, null, true);
 	},
 	
 	summaryUnhighlightAll : function() {
-		this.summaryHighlightAll(true);
+		var msObj = Mail.summaryList.head;
+		var sArray = Mail.selectedArray;
+		
+		if (sArray != null) {
+			for (var i = 0; i < sArray.length; i++) {
+				if (sArray[i] != null) {
+					Mail.summaryUnhighlight(sArray[i]);
+				}
+			}
+		}
+		
+		Mail.selectedArray = null;
 	},
 	
 	updateSortArrow : function() {
