@@ -469,6 +469,8 @@ public class MailUtil {
 
 				mailEnvelope.setSubject(message.getSubject());
 				mailEnvelope.setDate(message.getSentDate());
+				mailEnvelope.setSize(
+					(int)(message.getSize() * _ENCODING_FACTOR));
 				mailEnvelope.setRead(message.isSet(Flag.SEEN));
 				mailEnvelope.setFlagged(message.isSet(Flag.FLAGGED));
 				mailEnvelope.setAnswered(message.isSet(Flag.ANSWERED));
@@ -1357,6 +1359,8 @@ public class MailUtil {
 	private static final String[] _HTML_END_TAGS = new String[] {
 		"</html>", "</head>", "</body>"
 	};
+
+	private static final double _ENCODING_FACTOR = 0.65;
 
 	private static Log _log = LogFactory.getLog(MailUtil.class);
 

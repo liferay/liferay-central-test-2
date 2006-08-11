@@ -48,6 +48,14 @@ public class MailEnvelope {
 		_recipient = recipient;
 	}
 
+	public int getSize() {
+		return _size;
+	}
+
+	public void setSize(int size) {
+		_size = size;
+	}
+
 	public String getSubject() {
 		return _subject;
 	}
@@ -93,6 +101,7 @@ public class MailEnvelope {
 	private String _subject;
 	private Date _date;
 	private boolean _read;
+	private int _size;
 	private boolean _flagged;
 	private boolean _answered;
 

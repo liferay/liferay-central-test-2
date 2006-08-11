@@ -233,7 +233,7 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-msgs-title-from {
 				overflow: hidden;
-				width: 150px;
+				width: 125px;
 			}
 
 			#portlet-mail-msgs-title-from div {
@@ -242,7 +242,7 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-msgs-title-subject {
 				overflow: hidden;
-				width: 300px;
+				width: 250px;
 			}
 
 			#portlet-mail-msgs-title-subject div {
@@ -251,9 +251,18 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-msgs-title-received {
 				overflow: hidden;
+				width: 125px;
+			}
+
+			#portlet-mail-msgs-title-received div {
+				padding: 2px 0 2px 5px;
+			}
+
+			#portlet-mail-msgs-title-size {
+				overflow: hidden;
 				<c:choose>
 					<c:when test="<%= BrowserSniffer.is_safari(request) %>">
-						width: 150px;
+						width: 125px;
 					</c:when>
 					<c:otherwise>
 						width: 100%;
@@ -261,7 +270,7 @@ String mailLineColor = "#B3B6B0";
 				</c:choose>
 			}
 
-			#portlet-mail-msgs-title-received div {
+			#portlet-mail-msgs-title-size div {
 				padding: 2px 0 2px 5px;
 			}
 
@@ -273,6 +282,9 @@ String mailLineColor = "#B3B6B0";
 			}
 
 			#portlet-mail-msgs-subject-handle {
+			}
+
+			#portlet-mail-msgs-received-handle {
 			}
 
 			.portlet-mail-msgs-title-handle {
@@ -296,7 +308,7 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-msgs-from {
 				overflow: hidden;
-				width: 150px;
+				width: 125px;
 			}
 
 			#portlet-mail-msgs-from div {
@@ -309,7 +321,7 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-msgs-subject {
 				overflow: hidden;
-				width: 300px;
+				width: 250px;
 			}
 
 			#portlet-mail-msgs-subject div {
@@ -322,9 +334,22 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-msgs-received {
 				overflow: hidden;
+				width: 125px;
+			}
+
+			#portlet-mail-msgs-received div {
+				height: 16px;
+				overflow: hidden;
+				padding-left: 5px;
+				position: relative;
+				width: 800px;
+			}
+
+			#portlet-mail-msgs-size {
+				overflow: hidden;
 				<c:choose>
 					<c:when test="<%= BrowserSniffer.is_safari(request) %>">
-						width: 150px;
+						width: 125px;
 					</c:when>
 					<c:otherwise>
 						width: 100%;
@@ -332,7 +357,7 @@ String mailLineColor = "#B3B6B0";
 				</c:choose>
 			}
 
-			#portlet-mail-msgs-received div {
+			#portlet-mail-msgs-size div {
 				height: 16px;
 				overflow: hidden;
 				padding-left: 5px;
@@ -448,10 +473,20 @@ String mailLineColor = "#B3B6B0";
 									<td id="portlet-mail-msgs-subject-handle" style="cursor: e-resize;">
 										<div class="portlet-mail-msgs-title-handle"></div>
 									</td>
-									<td class="portlet-mail-msgs-title" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"90%\"" %>>
+									<td class="portlet-mail-msgs-title">
 										<div id="portlet-mail-msgs-title-received">
 											<div class="portlet-mail-title-text">
 												<span><%= LanguageUtil.get(pageContext, "date") %></span>
+											</div>
+										</div>
+									</td>
+									<td id="portlet-mail-msgs-received-handle" style="cursor: e-resize;">
+										<div class="portlet-mail-msgs-title-handle"></div>
+									</td>
+									<td class="portlet-mail-msgs-title" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"90%\"" %>>
+										<div id="portlet-mail-msgs-title-size">
+											<div class="portlet-mail-title-text">
+												<span><%= LanguageUtil.get(pageContext, "size") %></span>
 											</div>
 										</div>
 									</td>
@@ -482,8 +517,15 @@ String mailLineColor = "#B3B6B0";
 										<td valign="top">
 											<div class="portlet-mail-msgs-title-handle"></div>
 										</td>
-										<td valign="top" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"90%\"" %>>
+										<td valign="top">
 											<div id="portlet-mail-msgs-received">
+											</div>
+										</td>
+										<td valign="top">
+											<div class="portlet-mail-msgs-title-handle"></div>
+										</td>
+										<td valign="top" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"90%\"" %>>
+											<div id="portlet-mail-msgs-size">
 											</div>
 										</td>
 									</tr>

@@ -37,12 +37,14 @@ import com.liferay.portlet.mail.model.MailMessage;
 import com.liferay.portlet.mail.util.MailUtil;
 import com.liferay.portlet.mail.util.comparator.DateComparator;
 import com.liferay.portlet.mail.util.comparator.RecipientComparator;
+import com.liferay.portlet.mail.util.comparator.SizeComparator;
 import com.liferay.portlet.mail.util.comparator.StateComparator;
 import com.liferay.portlet.mail.util.comparator.SubjectComparator;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
+import com.liferay.util.TextFormatter;
 
 import java.text.DateFormat;
 
@@ -134,6 +136,9 @@ public class MailAction extends JSONAction {
 		}
 		else if (sortBy.equals("subject")) {
 			envelopes = MailUtil.getEnvelopes(ses, new SubjectComparator(asc));
+		}
+		else if (sortBy.equals("size")) {
+			envelopes = MailUtil.getEnvelopes(ses, new SizeComparator(asc));
 		}
 		else {
 			envelopes = MailUtil.getEnvelopes(ses, new DateComparator(asc));
@@ -272,9 +277,11 @@ public class MailAction extends JSONAction {
 			}
 
 			jsonEnvelope.put("id", mailEnvelope.getMessageId());
-			jsonEnvelope.put("date", dateString);
 			jsonEnvelope.put("email", recipient);
 			jsonEnvelope.put("subject", subject);
+			jsonEnvelope.put("date", dateString);
+			jsonEnvelope.put("size",
+				TextFormatter.formatKB(mailEnvelope.getSize(), locale) + "k");
 			jsonEnvelope.put("read", mailEnvelope.isRead());
 			jsonEnvelope.put("replied", mailEnvelope.isAnswered());
 			jsonEnvelope.put("flagged", mailEnvelope.isFlagged());

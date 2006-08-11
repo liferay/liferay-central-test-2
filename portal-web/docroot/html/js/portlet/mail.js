@@ -1,4 +1,4 @@
-function MailSummaryObject(state, sender, subject, date, id, read, index) {
+function MailSummaryObject(state, sender, subject, date, size, id, read, index) {
 	this.next = null;
 	this.prev = null;
 	this.selected = false;
@@ -14,13 +14,15 @@ function MailSummaryObject(state, sender, subject, date, id, read, index) {
 	this.row[1] = sender;
 	this.row[2] = subject;
 	this.row[3] = date;
+	this.row[4] = size;
 	
 	sender.parent = this;
 	subject.parent = this;
 	date.parent = this;
+	size.parent = this;
 	
-	sender.onmousedown = subject.onmousedown = date.onmousedown = Mail.onSummaryMouseDown;
-	sender.ondblclick = subject.ondblclick = date.ondblclick = Mail.onSummaryDblclick;
+	sender.onmousedown = subject.onmousedown = date.onmousedown = size.onmousedown = Mail.onSummaryMouseDown;
+	sender.ondblclick = subject.ondblclick = date.ondblclick = size.ondblclick = Mail.onSummaryDblclick;
 }
 
 
@@ -89,6 +91,7 @@ var Mail = {
 		var msgsSender = document.getElementById("portlet-mail-msgs-from");
 		var msgsSubject = document.getElementById("portlet-mail-msgs-subject");
 		var msgsDate = document.getElementById("portlet-mail-msgs-received");
+		var msgsSize = document.getElementById("portlet-mail-msgs-size");
 		
 		Mail.summaryList.head = null;
 		Mail.summaryList.tail = null;
@@ -97,6 +100,7 @@ var Mail = {
 		msgsSender.innerHTML = "";
 		msgsSubject.innerHTML = "";
 		msgsDate.innerHTML = "";
+		msgsSize.innerHTML = "";
 	},
 
 	decrementCount : function (reverse) {
@@ -333,7 +337,7 @@ var Mail = {
 		mailHeader.innerHTML = "";
 		mailHeader.appendChild(msgHeader);
 		
-		if (!Mail.lastSelected.read) {
+		if (Mail.lastSelected != null && !Mail.lastSelected.read) {
 			Mail.decrementCount();
 
 			var stateImg = Mail.lastSelected.state.getElementsByTagName("img")[0];
@@ -432,10 +436,13 @@ var Mail = {
 		var msgsTitleSubject = document.getElementById("portlet-mail-msgs-title-subject");
 		var msgsTitleSubjectHandle = document.getElementById("portlet-mail-msgs-subject-handle");
 		var msgsTitleReceived = document.getElementById("portlet-mail-msgs-title-received");
+		var msgsTitleReceivedHandle = document.getElementById("portlet-mail-msgs-received-handle");
+		var msgsTitleSize = document.getElementById("portlet-mail-msgs-title-size");
 		
 		var msgsFrom = document.getElementById("portlet-mail-msgs-from");
 		var msgsSubject = document.getElementById("portlet-mail-msgs-subject");
 		var msgsReceived = document.getElementById("portlet-mail-msgs-received");
+		var msgsSize = document.getElementById("portlet-mail-msgs-size");
 		
 		var mailBottomHandle = document.getElementById("portlet-mail-bottom-handle");
 		
@@ -461,6 +468,12 @@ var Mail = {
 		subjectGroup.addRule(new ResizeRule(msgsTitleReceived, Resize.HORIZONTAL, Resize.SUBTRACT));
 		subjectGroup.addRule(new ResizeRule(msgsReceived, Resize.HORIZONTAL, Resize.SUBTRACT));
 		
+		var receivedGroup = Resize.createHandle(msgsTitleReceivedHandle);
+		receivedGroup.addRule(new ResizeRule(msgsTitleReceived, Resize.HORIZONTAL, Resize.ADD));
+		receivedGroup.addRule(new ResizeRule(msgsReceived, Resize.HORIZONTAL, Resize.ADD));
+		receivedGroup.addRule(new ResizeRule(msgsTitleSize, Resize.HORIZONTAL, Resize.SUBTRACT));
+		receivedGroup.addRule(new ResizeRule(msgsSize, Resize.HORIZONTAL, Resize.SUBTRACT));
+		
 		var bottomGroup = Resize.createHandle(mailBottomHandle);
 		bottomGroup.addRule(new ResizeRule(detailedFrame, Resize.VERTICAL, Resize.ADD));
 		
@@ -472,7 +485,9 @@ var Mail = {
 		msgsTitleSubject.value = "subject";
 		msgsTitleReceived.asc = false;
 		msgsTitleReceived.value = "date";
-		msgsTitleState.onclick = msgsTitleFrom.onclick = msgsTitleSubject.onclick = msgsTitleReceived.onclick = Mail.onSortClick;
+		msgsTitleSize.asc = false;
+		msgsTitleSize.value = "size";
+		msgsTitleState.onclick = msgsTitleFrom.onclick = msgsTitleSubject.onclick = msgsTitleReceived.onclick = msgsTitleSize.onclick = Mail.onSortClick;
 		Mail.sortBy = msgsTitleReceived;
 		Mail.updateSortArrow();
 		
@@ -794,6 +809,7 @@ var Mail = {
 		var msgsSender = document.getElementById("portlet-mail-msgs-from");
 		var msgsSubject = document.getElementById("portlet-mail-msgs-subject");
 		var msgsDate = document.getElementById("portlet-mail-msgs-received");
+		var msgsSize = document.getElementById("portlet-mail-msgs-size");
 		var summaryList = Mail.summaryList;
 		
 		var SECTION_SIZE = 10;
@@ -814,12 +830,14 @@ var Mail = {
 			var sender = document.createElement("div");
 			var subject = document.createElement("div");
 			var date = document.createElement("div");
-			var msObj = new MailSummaryObject(state, sender, subject, date, header.id, header.read, i);
+			var size = document.createElement("div");
+			var msObj = new MailSummaryObject(state, sender, subject, date, size, header.id, header.read, i);
 
 			stateImg.src = themeDisplay.getPathThemeImage() + "/mail/read.gif";
 			sender.innerHTML = header.email;
 			subject.innerHTML = header.subject;
 			date.innerHTML = header.date;
+			size.innerHTML = header.size;
 			
 			if (!header.read) {
 				stateImg.src = themeDisplay.getPathThemeImage() + "/mail/unread.gif";
@@ -827,6 +845,7 @@ var Mail = {
 				sender.style.fontWeight = "bold";
 				subject.style.fontWeight = "bold";
 				date.style.fontWeight = "bold";
+				size.style.fontWeight = "bold";
 			}
 			else if (header.replied) {
 				stateImg.src = themeDisplay.getPathThemeImage() + "/mail/replied.gif";
@@ -847,6 +866,7 @@ var Mail = {
 			msgsSender.appendChild(sender);
 			msgsSubject.appendChild(subject);
 			msgsDate.appendChild(date);
+			msgsSize.appendChild(size);
 			
 			if (Mail.currentMessageId == msObj.id) {
 				/* Previous message selected */
@@ -988,6 +1008,7 @@ var Mail = {
 		sortTitles[0] = document.getElementById("portlet-mail-msgs-title-from");
 		sortTitles[1] = document.getElementById("portlet-mail-msgs-title-subject");
 		sortTitles[2] = document.getElementById("portlet-mail-msgs-title-received");
+		sortTitles[3] = document.getElementById("portlet-mail-msgs-title-size");
 		
 		for (var i = 0; i < sortTitles.length; i++) {
 			var title = sortTitles[i];
