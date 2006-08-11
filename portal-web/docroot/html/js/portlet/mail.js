@@ -125,14 +125,14 @@ var Mail = {
 		}
 	},
 	
-	deleteSelectedMessages : function() {
+	deleteSelectedMessages : function(skipConfirm) {
 		clearTimeout(Mail.messageTimer);
 		
 		var deleteList = Mail.getSelectedMessages();
 		var confirmMsg = "Delete " + deleteList.length + " message" +
 			(deleteList.length > 1 ? "s" : "") + " from " + Mail.currentFolder.name + "?";
 		
-		if (deleteList.length > 0 && confirm(confirmMsg)) {
+		if (deleteList.length > 0 && (skipConfirm || confirm(confirmMsg))) {
 			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=deleteMessages&folderId=" + Mail.currentFolder.id + "&messages=" + deleteList);
 			Mail.removeSelectedMessages();
 			Mail.getFolders();
@@ -368,7 +368,8 @@ var Mail = {
 	getPreviewReturn : function(xmlHttpReq) {
 		var mailObject = createJSONObject(xmlHttpReq.responseText);
 
-		if (mailObject.folderId == Mail.currentFolderId) {
+		if (mailObject.folderId == Mail.currentFolderId &&
+			mailObject.headers.length > 0) {
 			Mail.mailObject = mailObject;
 			Mail.renderPreviewSection();
 		}
@@ -548,7 +549,8 @@ var Mail = {
 			UP		: 38,
 			DOWN	: 40,
 			DELETE	: 46,
-			A		: 65
+			A		: 65,
+			D		: 68
 		}
 		
 		if (!event) {
@@ -611,6 +613,9 @@ var Mail = {
 			if (keycode == Key.A) {
 				Mail.summaryHighlightAll();
 				return false;
+			}
+			if (keycode == Key.D) {
+				Mail.deleteSelectedMessages(true);
 			}
 		}
 	},
@@ -778,30 +783,32 @@ var Mail = {
 	},
 	
 	renderPreviewSection : function(count) {
+		var mailObject = Mail.mailObject;
+		var totalMsgs = mailObject.headers.length;
+		
 		if (count == null) {
 			count = 0;
 		}
-		
-		if (Mail.mailObject == null) {
-			return;
-		}
-		
-		var mailObject = Mail.mailObject;
+
 		var msgsState = document.getElementById("portlet-mail-msgs-state");
 		var msgsSender = document.getElementById("portlet-mail-msgs-from");
 		var msgsSubject = document.getElementById("portlet-mail-msgs-subject");
 		var msgsDate = document.getElementById("portlet-mail-msgs-received");
-		var sectionSize = 10;
-		var begin = count * sectionSize;
-		var end = begin + sectionSize - 1;
-		var total = mailObject.headers.length;
+		var summaryList = Mail.summaryList;
 		
-		if (end > (total - 1)) {
-			end = total - 1;
+		var SECTION_SIZE = 10;
+		var begin = count * count;
+		if (count == 0) {
+			count = 2;
+		}
+		count++;
+		var end = (count * count) - 1;
+
+		if (end > (totalMsgs - 1)) {
+			end = totalMsgs - 1;
 		}
 		
-		for (var i = begin; i < end; i++) { 
-	
+		for (var i = begin; i <= end; i++) { 
 			var header = mailObject.headers[i];
 			var state = document.createElement("div");
 			var stateImg = document.createElement("img");
@@ -809,7 +816,6 @@ var Mail = {
 			var subject = document.createElement("div");
 			var date = document.createElement("div");
 			var msObj = new MailSummaryObject(state, sender, subject, date, header.id, header.read, i);
-			var summaryList = Mail.summaryList;
 
 			stateImg.src = themeDisplay.getPathThemeImage() + "/mail/read.gif";
 			sender.innerHTML = header.email;
@@ -851,8 +857,13 @@ var Mail = {
 			}
 		}
 		
-		if (end < (total - 1)) {
+		if (end < (totalMsgs - 1)) {
+			var rowHeight = summaryList.head.head.offsetHeight;
+			msgsSender.style.height = (totalMsgs * rowHeight) + "px";
 			setTimeout("Mail.renderPreviewSection(" + (count + 1) + ")", 1);
+		}
+		else {
+			msgsSender.style.height = "auto";
 		}
 	},
 

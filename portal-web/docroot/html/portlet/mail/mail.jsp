@@ -461,28 +461,28 @@ String mailLineColor = "#B3B6B0";
 								<div id="portlet-mail-msgs-preview-pane">
 									<table border="0" cellpadding="0" cellspacing="0" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"100%\"" %>>
 									<tr>
-										<td>
+										<td valign="top">
 											<div id="portlet-mail-msgs-state">
 											</div>
 										</td>
-										<td>
+										<td valign="top">
 											<div class="portlet-mail-msgs-title-handle"></div>
 										</td>
-										<td>
+										<td valign="top">
 											<div id="portlet-mail-msgs-from">
 											</div>
 										</td>
-										<td>
+										<td valign="top">
 											<div class="portlet-mail-msgs-title-handle"></div>
 										</td>
-										<td>
+										<td valign="top">
 											<div id="portlet-mail-msgs-subject">
 											</div>
 										</td>
-										<td>
+										<td valign="top">
 											<div class="portlet-mail-msgs-title-handle"></div>
 										</td>
-										<td <%= BrowserSniffer.is_safari(request) ? "" : "width=\"90%\"" %>>
+										<td valign="top" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"90%\"" %>>
 											<div id="portlet-mail-msgs-received">
 											</div>
 										</td>
