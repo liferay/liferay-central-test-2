@@ -91,6 +91,10 @@ var AjaxTracker = {
 	}
 }
 
+function createJSONObject(JSONText) {
+	return eval("(" + JSONText + ")");
+}
+
 function loadForm(form, action, elId) {
 	if (is_ie_5_up) {
 		var pos = action.indexOf("?");
