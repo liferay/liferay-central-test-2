@@ -339,6 +339,16 @@ String mailLineColor = "#B3B6B0";
 				position: relative;
 				width: 800px;
 			}
+
+			#portlet-mail-bottom-handle {
+				border-bottom: 1px solid <%= mailLineColor %>;
+			}
+			
+			#portlet-mail-bottom-handle div {
+				cursor: n-resize;
+				font-size: 0;
+				height: 5px;
+			}
 		</style>
 
 		<table border="0" cellpadding="2" cellspacing="2" class="portlet-mail-toolbar font-small" id="portlet-mail-main-toolbar">
@@ -406,7 +416,7 @@ String mailLineColor = "#B3B6B0";
 					<tr>
 						<td class="portlet-mail-msgs-pane-td" width="100%">
 							<div id="portlet-mail-msgs-preview">
-								<table border="0" cellpadding="0" cellspacing="0" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"100%\"" %>>
+								<table id="portlet-mail-msgs-preview-pane-title" border="0" cellpadding="0" cellspacing="0" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"100%\"" %>>
 								<tr>
 									<td class="portlet-mail-msgs-title">
 										<div id="portlet-mail-msgs-title-state">
@@ -505,6 +515,7 @@ String mailLineColor = "#B3B6B0";
 			</td>
 		</tr>
 		</table>
+		<div id="portlet-mail-bottom-handle"><div></div></div>
 
 		<script type="text/javascript">
 
