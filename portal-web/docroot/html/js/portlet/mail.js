@@ -801,8 +801,7 @@ var Mail = {
 		if (count == 0) {
 			count = 2;
 		}
-		count++;
-		var end = (count * count) - 1;
+		var end = ((count + 1) * (count + 1)) - 1;
 
 		if (end > (totalMsgs - 1)) {
 			end = totalMsgs - 1;
