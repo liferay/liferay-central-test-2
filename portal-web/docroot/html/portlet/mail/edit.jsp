@@ -27,44 +27,45 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "forward-address");
 
+signature = ParamUtil.getString(request, "signature", signature);
+vacationMessage = ParamUtil.getString(request, "vacationMessage", vacationMessage);
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/mail/edit");
 portletURL.setParameter("tabs1", tabs1);
-
-signature = ParamUtil.getString(request, "signature", signature);
 %>
 
-<c:choose>
-	<c:when test='<%= tabs1.equals("signature") %>'>
+<script type="text/javascript">
 
-		<script type="text/javascript">
-			function <portlet:namespace />editPreferences() {
-				document.<portlet:namespace />fm.<portlet:namespace />signature.value = parent.<portlet:namespace />editor.getHTML();
+	<%
+	String editorParam = "";
+	String editorContent = "";
 
-				submitForm(document.<portlet:namespace />fm);
-			}
-		
-			function initEditor() {
-				return "<%= UnicodeFormatter.toString(signature) %>";
-			}
+	if (tabs1.equals("signature")) {
+		editorParam = "signature";
+		editorContent = signature;
+	}
+	else if (tabs1.equals("vacation-message")) {
+		editorParam = "vacationMessage";
+		editorContent = vacationMessage;
+	}
+	%>
 
-		</script>
+	function initEditor() {
+		return "<%= UnicodeFormatter.toString(editorContent) %>";
+	}
 
-	</c:when>
-	<c:otherwise>
+	function <portlet:namespace />savePreferences() {
+		<c:if test='<%= tabs1.equals("signature") || tabs1.equals("vacation-message") %>'>
+			document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = parent.<portlet:namespace />editor.getHTML();
+		</c:if>
 
-		<script type="text/javascript">
-			function <portlet:namespace />editPreferences() {
-				submitForm(document.<portlet:namespace />fm);
-			}
-		</script>
-
-	</c:otherwise>
-</c:choose>
-
+		submitForm(document.<portlet:namespace />fm);
+	}
+</script>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/mail/edit" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
@@ -79,14 +80,6 @@ signature = ParamUtil.getString(request, "signature", signature);
 	<c:when test='<%= tabs1.equals("forward-address") %>'>
 
 		<%
-		/*String symbolsString = StringUtil.merge(symbols, StringPool.SPACE);
-
-		symbols = StringUtil.split(ParamUtil.getString(request, "symbols", symbolsString), StringPool.SPACE);
-
-		symbolsString = StringUtil.merge(symbols, StringPool.SPACE);*/
-
-		//forwardAddress = ParamUtil.getString(request, "forwardAddress", forwardAddress);
-
 		forwardAddress = ParamUtil.getString(request, "forwardAddress", forwardAddress);
 		forwardAddress = StringUtil.replace(forwardAddress, " ", "\n");
 		%>
@@ -97,33 +90,27 @@ signature = ParamUtil.getString(request, "signature", signature);
 
 		<textarea class="form-text" name="<portlet:namespace />forwardAddress" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= forwardAddress %></textarea>
 	</c:when>
-	<c:when test='<%= tabs1.equals("signature") %>'>
-
-		<%= LanguageUtil.get(pageContext, "the-signature-below-will-be-added-to-each-outgoing-message") %>
-
-		<br><br>
-
-		<input type="hidden" name="<portlet:namespace />signature" value="" />
-
-		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"  />
-	</c:when>
-	<c:when test='<%= tabs1.equals("vacation-message") %>'>
-
-		<%
-		vacationMessage = ParamUtil.getString(request, "vacationMessage", vacationMessage);
-		%>
-
-		<%= LanguageUtil.get(pageContext, "the-vacation-message-notify-others-of-your-absence") %>
+	<c:when test='<%= tabs1.equals("signature") || tabs1.equals("vacation-message") %>'>
+		<c:choose>
+			<c:when test='<%= tabs1.equals("signature") %>'>
+				<%= LanguageUtil.get(pageContext, "the-signature-below-will-be-added-to-each-outgoing-message") %>
+			</c:when>
+			<c:otherwise>
+				<%= LanguageUtil.get(pageContext, "the-vacation-message-notifies-others-of-your-absence") %>
+			</c:otherwise>
+		</c:choose>
 
 		<br><br>
 
-		<textarea class="form-text" name="<portlet:namespace />vacationMessage" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= vacationMessage %></textarea>
+		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
+
+		<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="">
 	</c:when>
 </c:choose>
 
 <br><br>
 
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />editPreferences();">
+<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />savePreferences();">
 
 </form>
 

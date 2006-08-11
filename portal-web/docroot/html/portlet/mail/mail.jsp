@@ -160,7 +160,7 @@ String mailLineColor = "#B3B6B0";
 			#portlet-mail-msgs-preview{
 				overflow: hidden;
 			}
-			
+
 			#portlet-mail-msgs-preview-pane {
 				height: 200px;
 				width: 100%;
