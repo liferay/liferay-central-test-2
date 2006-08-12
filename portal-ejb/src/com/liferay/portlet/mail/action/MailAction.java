@@ -280,7 +280,8 @@ public class MailAction extends JSONAction {
 			jsonEnvelope.put("email", recipient);
 			jsonEnvelope.put("subject", subject);
 			jsonEnvelope.put("date", dateString);
-			jsonEnvelope.put("size",
+			jsonEnvelope.put(
+				"size",
 				TextFormatter.formatKB(mailEnvelope.getSize(), locale) + "k");
 			jsonEnvelope.put("read", mailEnvelope.isRead());
 			jsonEnvelope.put("replied", mailEnvelope.isAnswered());

@@ -47,6 +47,7 @@ public class SizeComparator implements Comparator {
 		int size2 = mailEnvelope2.getSize();
 
 		int value = 0;
+
 		if (size1 > size2) {
 			value = 1;
 		}
