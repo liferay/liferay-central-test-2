@@ -829,6 +829,19 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		String primKey =
 			layout.getPlid() + Portlet.LAYOUT_SEPARATOR + portletId;
 
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			layout.getCompanyId(), name);
+
+		if (portlet == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Do not import portlet permissions for " + portletId +
+						" because the portlet does not exist");
+			}
+
+			return;
+		}
+
 		Resource resource = null;
 
 		try {
