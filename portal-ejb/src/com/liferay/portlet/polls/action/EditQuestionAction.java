@@ -35,8 +35,11 @@ import com.liferay.portlet.polls.QuestionDescriptionException;
 import com.liferay.portlet.polls.QuestionExpirationDateException;
 import com.liferay.portlet.polls.QuestionTitleException;
 import com.liferay.portlet.polls.model.PollsChoice;
+import com.liferay.portlet.polls.service.persistence.PollsChoicePK;
+import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.portlet.polls.service.spring.PollsQuestionServiceUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -182,10 +185,9 @@ public class EditQuestionAction extends PortletAction {
 						req, CHOICE_ID_PREFIX + id);
 					String choiceDescription = ParamUtil.getString(req, param);
 
-					PollsChoice choice = new PollsChoice();
+					PollsChoice choice = PollsChoiceUtil.create(
+						new PollsChoicePK(StringPool.BLANK, choiceId));
 
-					choice.setQuestionId(null);
-					choice.setChoiceId(choiceId);
 					choice.setDescription(choiceDescription);
 
 					choices.add(choice);
