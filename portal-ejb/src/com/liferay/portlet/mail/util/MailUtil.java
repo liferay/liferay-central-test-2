@@ -138,7 +138,9 @@ public class MailUtil {
 				Validator.isNull(mailMessage.getCc()) &&
 				Validator.isNull(mailMessage.getBcc())) {
 
-				_log.error("A message with no recipients cannot be sent");
+				if (_log.isErrorEnabled()) {
+					_log.error("A message with no recipients cannot be sent");
+				}
 
 				throw new RecipientException();
 			}
@@ -357,36 +359,33 @@ public class MailUtil {
 			MailSessionLock.unlock(ses.getId());
 		}
 	}
-	
+
 	public static void emptyFolder(HttpSession ses, String folderName)
-	throws FolderException, StoreException {
-		
+		throws FolderException, StoreException {
+
 		try {
 			MailSessionLock.lock(ses.getId());
-	
+
 			folderName = _getResolvedFolderName(folderName);
-			
+
 			Store store = _getStore(ses);
 
 			IMAPFolder folder = (IMAPFolder)store.getFolder(folderName);
 
 			folder.open(IMAPFolder.READ_WRITE);
-	
-			String currentFolderName = _getResolvedFolderName(folder.getName());
-			
-			if (folderName.equals(currentFolderName)) {
+
+			String curFolderName = _getResolvedFolderName(folder.getName());
+
+			if (folderName.equals(curFolderName)) {
 				Message[] messages = folder.getMessages();
-				
+
 				long[] messageIds = new long[messages.length];
-	
+
 				for (int i = 0; i < messages.length; i++) {
 					messageIds[i] = folder.getUID(messages[i]);
 				}
-	
+
 				deleteMessages(ses, messageIds);
-			}
-			else {
-				System.out.println("not current folder");
 			}
 		}
 		catch (MessagingException me) {
@@ -744,9 +743,11 @@ public class MailUtil {
 
 			for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
 				if (DEFAULT_FOLDERS[i].equals(folderName)) {
-					_log.error(
-						"Folder " + folderName +
-							" is a system folder and cannot be changed");
+					if (_log.isErrorEnabled()) {
+						_log.error(
+							"Folder " + folderName +
+								" is a system folder and cannot be changed");
+					}
 
 					throw new FolderException();
 				}
@@ -757,7 +758,9 @@ public class MailUtil {
 			Folder folder = store.getFolder(folderName);
 
 			if (!folder.exists()) {
-				_log.error("Folder " + folderName + " does not exist");
+				if (_log.isErrorEnabled()) {
+					_log.error("Folder " + folderName + " does not exist");
+				}
 
 				throw new FolderException();
 			}
@@ -779,16 +782,20 @@ public class MailUtil {
 
 			for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
 				if (DEFAULT_FOLDERS[i].equals(oldFolderName)) {
-					_log.error(
-						"Folder " + oldFolderName +
-							" is a system folder and cannot be changed");
+					if (_log.isErrorEnabled()) {
+						_log.error(
+							"Folder " + oldFolderName +
+								" is a system folder and cannot be changed");
+					}
 
 					throw new FolderException();
 				}
 				else if (DEFAULT_FOLDERS[i].equals(newFolderName)) {
-					_log.error(
-						"Folder " + newFolderName +
-							" is a system folder and cannot be changed");
+					if (_log.isErrorEnabled()) {
+						_log.error(
+							"Folder " + newFolderName +
+								" is a system folder and cannot be changed");
+					}
 
 					throw new FolderException();
 				}
@@ -800,12 +807,16 @@ public class MailUtil {
 			Folder newFolder = store.getFolder(newFolderName);
 
 			if (!oldFolder.exists()) {
-				_log.error("Folder " + oldFolderName + " does not exist");
+				if (_log.isErrorEnabled()) {
+					_log.error("Folder " + oldFolderName + " does not exist");
+				}
 
 				throw new FolderException();
 			}
 			else if (newFolder.exists()) {
-				_log.error("Folder " + newFolderName + " already exists");
+				if (_log.isErrorEnabled()) {
+					_log.error("Folder " + newFolderName + " already exists");
+				}
 
 				throw new FolderException();
 			}
@@ -876,7 +887,9 @@ public class MailUtil {
 				folder.close(false);
 			}
 			catch (MessagingException me) {
-				_log.warn(me);
+				if (_log.isWarnEnabled()) {
+					_log.warn(me);
+				}
 			}
 
 			ses.removeAttribute(WebKeys.MAIL_FOLDER);
@@ -1139,7 +1152,10 @@ public class MailUtil {
 			}
 		}
 		catch (MessagingException me) {
-			_log.error("Unable to properly get file name of MIME attachment");
+			if (_log.isErrorEnabled()) {
+				_log.error(
+					"Unable to properly get file name of MIME attachment");
+			}
 
 			throw new ContentException(me);
 		}
@@ -1379,9 +1395,11 @@ public class MailUtil {
 						user.getEmailAddress(), user.getFullName());
 				}
 				catch (Exception e) {
-					_log.error(
-						"Problems found trying to resolve email address " +
-							address);
+					if (_log.isErrorEnabled()) {
+						_log.error(
+							"Problems found trying to resolve email address " +
+								address);
+					}
 
 					throw new RecipientException(e);
 				}

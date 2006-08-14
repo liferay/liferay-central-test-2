@@ -118,10 +118,10 @@ public class MailAction extends JSONAction {
 
 		MailUtil.deleteMessages(ses, messages);
 	}
-	
+
 	protected void emptyFolder(HttpServletRequest req) throws Exception {
 		String folderId = ParamUtil.getString(req, "folderId");
-		
+
 		MailUtil.emptyFolder(req.getSession(), folderId);
 	}
 
