@@ -87,6 +87,9 @@ public class MailAction extends JSONAction {
 			if (cmd.equals("deleteMessages")) {
 				deleteMessages(req);
 			}
+			else if (cmd.equals("emptyFolder")) {
+				emptyFolder(req);
+			}
 			else if (cmd.equals("getFolders")) {
 				return getFolders(req);
 			}
@@ -114,6 +117,12 @@ public class MailAction extends JSONAction {
 			ParamUtil.getString(req, "messages"), ",", -1L);
 
 		MailUtil.deleteMessages(ses, messages);
+	}
+	
+	protected void emptyFolder(HttpServletRequest req) throws Exception {
+		String folderId = ParamUtil.getString(req, "folderId");
+		
+		MailUtil.emptyFolder(req.getSession(), folderId);
 	}
 
 	protected Set getEnvelopes(HttpServletRequest req) throws Exception {

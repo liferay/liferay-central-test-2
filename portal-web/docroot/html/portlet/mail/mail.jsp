@@ -115,10 +115,8 @@ String mailLineColor = "#B3B6B0";
 			}
 
 			#portlet-mail-folder-pane ul {
-				cursor: pointer;
-				margin: 8px;
+				margin: 5px 0 5px 5px;
 				overflow: hidden;
-				width: 80px;
 			}
 
 			.portlet-mail-folder-selected {
@@ -126,8 +124,9 @@ String mailLineColor = "#B3B6B0";
 			}
 
 			#portlet-mail-folder-pane ul li {
-				padding: 2px 2px 2px 10px;
-				margin: 1px 0 1px 0;
+				padding: 2px 2px 2px 5px;
+				margin: 1px 5px 1px 0;
+				white-space: nowrap;
 			}
 
 			#portlet-mail-folder-pane-td {

@@ -290,17 +290,35 @@ var Mail = {
 			for (var i = 0; i < folders.length; i++) {
 				var folder = folders[i];
 				var folderItem = document.createElement("li");
+				var folderName = document.createElement("a");
 				var newCount = document.createElement("span");
 				
 				if (folder.newCount > 0) {
 					newCount.innerHTML = "&nbsp;(" + folder.newCount + ")";
 				}
 				newCount.className = "font-small"
-				folderItem.innerHTML = folder.name;
+				
+				folderName.innerHTML = folder.name;
+				folderName.appendChild(newCount);
+				folderName.href = "javascript:void(0)"
+				folderName.onclick = Mail.onFolderSelect;
+				
 				folderItem.folder = folder;
-				folderItem.onclick = Mail.onFolderSelect;
 				folderItem.newCount = folder.newCount;
-				folderItem.appendChild(newCount);
+				
+				folderItem.appendChild(folderName);
+
+				if (folder.id == "Trash" || folder.id == "Spam") {
+					var emptyFolder = document.createElement("a");
+					emptyFolder.href = "javascript:void(0)"
+					emptyFolder.className = "font-x-small";
+					emptyFolder.style.marginLeft = "3px";
+					emptyFolder.innerHTML = "Empty";
+					emptyFolder.onclick = Mail.onEmptyClick;
+					
+					folderItem.appendChild(emptyFolder);
+				}
+
 				folderList.appendChild(folderItem);
 				
 				if (folder.id == Mail.currentFolderId) {
@@ -318,7 +336,7 @@ var Mail = {
 			Mail.getPreview();
 		}
 	},
-	
+
 	getMessageDetails : function(messageId) {
 		
 		if (!Mail.currentMessage || messageId != Mail.currentMessageId) {
@@ -328,7 +346,7 @@ var Mail = {
 				
 		}
 	},
-	
+
 	getMessageDetailsReturn : function(xmlHttpReq, messageId) {
 		
 		var messageObj = createJSONObject(xmlHttpReq.responseText);
@@ -567,12 +585,19 @@ var Mail = {
 
 	},
 	
+	onEmptyClick : function() {
+		folder = this.parentNode.folder;
+		loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=emptyFolder&folderId=" + folder.id);
+	},
+	
 	onFolderSelect : function() {
-		if (Mail.currentFolder.id != this.folder.id) {
+		var folder = this.parentNode.folder;
+
+		if (Mail.currentFolder.id != folder.id) {
 			Mail.currentMessage = null;
 			Mail.currentMessageId = null;
 			
-			Mail.setCurrentFolder(this.folder);
+			Mail.setCurrentFolder(folder);
 			Mail.clearPreview();
 			Mail.getPreview();
 		}
@@ -953,6 +978,7 @@ var Mail = {
 		var fromTitle = fromTitleText.getElementsByTagName("span");
 		var mainToolbar = document.getElementById("portlet-mail-main-toolbar");
 		var draftsToolbar = document.getElementById("portlet-mail-drafts-toolbar");
+		var emptyFolder = document.getElementById("portlet-mail-empty-folder");
 		
 		if (Mail.currentFolder.id == "Sent" || Mail.currentFolder.id == "Drafts") {
 			fromTitle[0].style.display = "none";

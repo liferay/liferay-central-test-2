@@ -357,6 +357,45 @@ public class MailUtil {
 			MailSessionLock.unlock(ses.getId());
 		}
 	}
+	
+	public static void emptyFolder(HttpSession ses, String folderName)
+	throws FolderException, StoreException {
+		
+		try {
+			MailSessionLock.lock(ses.getId());
+	
+			folderName = _getResolvedFolderName(folderName);
+			
+			Store store = _getStore(ses);
+
+			IMAPFolder folder = (IMAPFolder)store.getFolder(folderName);
+
+			folder.open(IMAPFolder.READ_WRITE);
+	
+			String currentFolderName = _getResolvedFolderName(folder.getName());
+			
+			if (folderName.equals(currentFolderName)) {
+				Message[] messages = folder.getMessages();
+				
+				long[] messageIds = new long[messages.length];
+	
+				for (int i = 0; i < messages.length; i++) {
+					messageIds[i] = folder.getUID(messages[i]);
+				}
+	
+				deleteMessages(ses, messageIds);
+			}
+			else {
+				System.out.println("not current folder");
+			}
+		}
+		catch (MessagingException me) {
+			throw new FolderException(me);
+		}
+		finally {
+			MailSessionLock.unlock(ses.getId());
+		}
+	}
 
 	public static Object[] getAttachment(HttpSession ses, String contentPath)
 		throws ContentException, ContentPathException, FolderException,
