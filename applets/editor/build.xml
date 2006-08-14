@@ -54,12 +54,18 @@
 	</target>
 
 	<target name="deploy" depends="jar">
-		<copy todir="${deploy.dir}">
-			<fileset
-				dir="."
-				includes="${ant.project.name}*.jar"
-			/>
-		</copy>
+		<copy
+			file="${jar.file}.jar"
+			tofile="${deploy.dir}/${jar.file}.jar"
+			overwrite="true"
+		/>
+
+		<copy
+			file="${jar.file}-signed.jar"
+			tofile="${deploy.dir}/${jar.file}.jar"
+			overwrite="true"
+			failonerror="false"
+		/>
 	</target>
 
 	<target name="run" depends="compile">
