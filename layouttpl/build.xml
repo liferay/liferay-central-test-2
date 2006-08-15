@@ -10,7 +10,7 @@
 
 		<war
 			basedir="sample-pack-01-layouttpl.war"
-			destfile="../sample-pack-01-layouttpl.war"
+			destfile="../sample-pack-01-layouttpl-${lp.version.file.name}.war"
 			excludes="WEB-INF/web.xml"
 			webxml="sample-pack-01-layouttpl.war/WEB-INF/web.xml"
 		/>
