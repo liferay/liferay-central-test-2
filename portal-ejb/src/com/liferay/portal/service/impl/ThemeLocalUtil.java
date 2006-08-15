@@ -38,6 +38,7 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.NullSafeProperties;
 import com.liferay.util.PropertiesUtil;
+import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
