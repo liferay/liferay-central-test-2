@@ -35,6 +35,8 @@
 		<ant dir="applets" target="clean" inheritAll="false" />
 		<ant dir="filters" target="clean" inheritAll="false" />
 
+		<ant dir="portal-ear" target="clean" inheritAll="false" />
+
 		<ant dir="counter-ejb" target="clean" inheritAll="false" />
 		<ant dir="documentlibrary-ejb" target="clean" inheritAll="false" />
 		<ant dir="lock-ejb" target="clean" inheritAll="false" />
@@ -860,6 +862,8 @@ app.server.jonas-jetty.ejbgen.compile=on</echo>
 		<antcall target="build-ext-resin" />
 		<antcall target="build-ext-tomcat" />
 		<antcall target="zip" />
+
+		<ant dir="portal-ear" target="ear" inheritAll="false" />
 
 		<copy file="portal-ear/liferay-portal.ear" tofile="liferay-portal-${lp.version.file.name}.ear" />
 		<copy file="portal-ear/liferay-portal-jaas.jar" tofile="liferay-portal-jaas-${lp.version.file.name}.jar" />
