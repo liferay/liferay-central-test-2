@@ -260,6 +260,17 @@ var Mail = {
 		mailHeader.appendChild(totalDiv);
 	},
 	
+	emptyFolderReturn : function(xmlHttpReq) {
+		var jsonObj = createJSONObject(xmlHttpReq.responseText);
+
+		Mail.getFolders();
+
+		if (jsonObj.folderId == Mail.currentFolderId) {
+			Mail.getFolderDetails();
+			Mail.clearPreview();
+		}
+	},
+
 	getFolders : function() {
 		loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=getFolders", Mail.getFoldersReturn);
 	},
@@ -312,10 +323,10 @@ var Mail = {
 					var emptyFolder = document.createElement("a");
 					emptyFolder.href = "javascript:void(0)"
 					emptyFolder.className = "font-x-small";
-					emptyFolder.style.marginLeft = "3px";
-					emptyFolder.innerHTML = "Empty";
+					emptyFolder.innerHTML = "[Empty]";
 					emptyFolder.onclick = Mail.onEmptyClick;
-					
+
+					folderItem.appendChild(document.createElement("br"));
 					folderItem.appendChild(emptyFolder);
 				}
 
@@ -587,7 +598,13 @@ var Mail = {
 	
 	onEmptyClick : function() {
 		folder = this.parentNode.folder;
-		loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=emptyFolder&folderId=" + folder.id);
+
+		confirmMsg = "Are you sure you want to empty the folder " + folder.id + "?";
+
+		if (confirm(confirmMsg)) {
+			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=emptyFolder&folderId=" + folder.id, Mail.emptyFolderReturn);
+			Mail.getFolders();
+		}
 	},
 	
 	onFolderSelect : function() {

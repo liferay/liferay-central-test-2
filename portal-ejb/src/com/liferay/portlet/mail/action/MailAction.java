@@ -88,7 +88,7 @@ public class MailAction extends JSONAction {
 				deleteMessages(req);
 			}
 			else if (cmd.equals("emptyFolder")) {
-				emptyFolder(req);
+				return emptyFolder(req);
 			}
 			else if (cmd.equals("getFolders")) {
 				return getFolders(req);
@@ -119,10 +119,16 @@ public class MailAction extends JSONAction {
 		MailUtil.deleteMessages(ses, messages);
 	}
 
-	protected void emptyFolder(HttpServletRequest req) throws Exception {
+	protected String emptyFolder(HttpServletRequest req) throws Exception {
+		JSONObject jsonObj = new JSONObject();
+
 		String folderId = ParamUtil.getString(req, "folderId");
 
 		MailUtil.emptyFolder(req.getSession(), folderId);
+
+		jsonObj.put("folderId", folderId);
+
+		return jsonObj.toString();
 	}
 
 	protected Set getEnvelopes(HttpServletRequest req) throws Exception {

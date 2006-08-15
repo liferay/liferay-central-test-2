@@ -334,6 +334,13 @@ public class MailUtil {
 	public static void deleteMessages(HttpSession ses, long[] messageIds)
 		throws FolderException, StoreException {
 
+		deleteMessages(ses, messageIds, false);
+	}
+
+	public static void deleteMessages(
+			HttpSession ses, long[] messageIds, boolean permanently)
+		throws FolderException, StoreException {
+
 		try {
 			MailSessionLock.lock(ses.getId());
 
@@ -341,15 +348,15 @@ public class MailUtil {
 
 			String folderName = _getResolvedFolderName(folder.getName());
 
-			if (!folderName.equals(MAIL_TRASH_NAME)) {
-				moveMessages(ses, messageIds, MAIL_TRASH_NAME);
-			}
-			else {
+			if (permanently || folderName.equals(MAIL_TRASH_NAME)) {
 				Message[] messages = folder.getMessagesByUID(messageIds);
 
 				folder.setFlags(messages, new Flags(Flags.Flag.DELETED), true);
 
 				folder.expunge();
+			}
+			else {
+				moveMessages(ses, messageIds, MAIL_TRASH_NAME);
 			}
 		}
 		catch (MessagingException me) {
@@ -366,30 +373,35 @@ public class MailUtil {
 		try {
 			MailSessionLock.lock(ses.getId());
 
-			folderName = _getResolvedFolderName(folderName);
+			String lastFolderName = getFolderName(ses);
 
-			Store store = _getStore(ses);
+			IMAPFolder folder = _getFolder(ses, folderName);
 
-			IMAPFolder folder = (IMAPFolder)store.getFolder(folderName);
+			long[] ids = new long[0];
 
-			folder.open(IMAPFolder.READ_WRITE);
+			try {
+				Message[] msgs = folder.getMessages();
 
-			String curFolderName = _getResolvedFolderName(folder.getName());
+				FetchProfile fetchProfile = new FetchProfile();
 
-			if (folderName.equals(curFolderName)) {
-				Message[] messages = folder.getMessages();
+				fetchProfile.add(FetchProfile.Item.ENVELOPE);
 
-				long[] messageIds = new long[messages.length];
+				folder.fetch(msgs, fetchProfile);
 
-				for (int i = 0; i < messages.length; i++) {
-					messageIds[i] = folder.getUID(messages[i]);
+				ids = new long[msgs.length];
+
+				for (int i = 0; i < msgs.length; i++) {
+					ids[i] = folder.getUID(msgs[i]);
 				}
 
-				deleteMessages(ses, messageIds);
+				deleteMessages(ses, ids, true);
 			}
-		}
-		catch (MessagingException me) {
-			throw new FolderException(me);
+			catch (MessagingException me) {
+				throw new FolderException(me);
+			}
+			finally {
+				setFolder(ses, lastFolderName);
+			}
 		}
 		finally {
 			MailSessionLock.unlock(ses.getId());
