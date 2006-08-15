@@ -304,6 +304,18 @@ public class ThemeLocalUtil {
 		return themes;
 	}
 
+	private static String _getVersion(String version) {
+		int x = version.indexOf(StringPool.PERIOD);
+		int y = version.indexOf(StringPool.PERIOD, x + 1);
+
+		if ((x == -1) || (y == -1)) {
+			return version;
+		}
+		else {
+			return version.substring(0, y);
+		}
+	}
+
 	private static void _readColorSchemes(Element theme, Map colorSchemes)
 		throws IOException {
 
@@ -366,11 +378,15 @@ public class ThemeLocalUtil {
 
 				String version = versionEl.getTextTrim();
 
+				version = _getVersion(version);
+
 				compatibleVersions.add(version);
 			}
 		}
 
-		if (!compatibleVersions.contains(ReleaseInfo.getVersion())) {
+		if (!compatibleVersions.contains(
+				_getVersion(ReleaseInfo.getVersion()))) {
+
 			_log.error(
 				"Themes in this WAR are not compatible with " +
 					ReleaseInfo.getServerInfo());
