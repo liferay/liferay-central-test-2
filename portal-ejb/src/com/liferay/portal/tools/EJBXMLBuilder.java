@@ -624,10 +624,13 @@ public class EJBXMLBuilder {
 			x = content.indexOf("<ejb-local-ref>");
 		}
 
-		int y = content.lastIndexOf("</ejb-local-ref>") + 17;
+		int y = content.lastIndexOf("</ejb-local-ref>");
 
 		if (y == -1) {
 			y = content.lastIndexOf("</ejb-ref>") + 11;
+		}
+		else {
+			y += 17;
 		}
 
 		if (x != -1) {
