@@ -390,7 +390,8 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 		// Merge categories
 
 		if (mergeWithParentCategory &&
-			!oldCategoryId.equals(parentCategoryId)) {
+			!oldCategoryId.equals(parentCategoryId) &&
+			!parentCategoryId.equals(MBCategory.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			mergeCategories(category, parentCategoryId);
 		}
