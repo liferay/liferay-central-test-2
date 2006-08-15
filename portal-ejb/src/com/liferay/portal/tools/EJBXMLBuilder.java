@@ -619,7 +619,12 @@ public class EJBXMLBuilder {
 		String newContent = content;
 
 		int x = content.indexOf("<ejb-ref>");
+		
 		int y = content.lastIndexOf("</ejb-local-ref>") + 17;
+
+		if (y == -1) {
+			y = content.lastIndexOf("</ejb-ref>") + 11;
+		}
 
 		if (x != -1) {
 			newContent =
