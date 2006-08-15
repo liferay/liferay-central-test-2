@@ -280,7 +280,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 					String content = message.getBody();
 
 					try {
-						Indexer.addMessage(
+						IndexerImpl.addMessage(
 							companyId, groupId, categoryId, threadId, messageId,
 							title, content);
 					}
