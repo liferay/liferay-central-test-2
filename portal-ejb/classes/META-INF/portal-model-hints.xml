@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <model-hints>
-	<hint-collection name="BLOB">
+	<hint-collection name="CLOB">
 		<hint name="max-length">2000000</hint>
 	</hint-collection>
 	<hint-collection name="TEXTAREA">
@@ -59,7 +59,7 @@
 		</default-hints>
 		<field name="companyId" type="String" />
 		<field name="key" type="String">
-			<hint-collection name="BLOB" />
+			<hint-collection name="CLOB" />
 		</field>
 		<field name="portalURL" type="String" />
 		<field name="homeURL" type="String" />
@@ -154,7 +154,7 @@
 		</field>
 		<field name="modifiedDate" type="Date" />
 		<field name="text" type="String">
-			<hint-collection name="BLOB" />
+			<hint-collection name="CLOB" />
 		</field>
 	</model>
 	<model name="com.liferay.portal.model.Layout">
@@ -167,7 +167,7 @@
 		</field>
 		<field name="type" type="String" />
 		<field name="typeSettings" type="String">
-			<hint-collection name="BLOB" />
+			<hint-collection name="CLOB" />
 		</field>
 		<field name="hidden" type="boolean" />
 		<field name="friendlyURL" type="String" />
@@ -276,7 +276,7 @@
 		<field name="layoutId" type="String" />
 		<field name="ownerId" type="String" />
 		<field name="preferences" type="String">
-			<hint-collection name="BLOB" />
+			<hint-collection name="CLOB" />
 		</field>
 	</model>
 	<model name="com.liferay.portal.model.Region">
@@ -436,7 +436,7 @@
 		<field name="categoryId" type="String" />
 		<field name="title" type="String" />
 		<field name="content" type="String">
-			<hint-collection name="BLOB" />
+			<hint-collection name="CLOB" />
 		</field>
 		<field name="displayDate" type="Date" />
 	</model>
@@ -490,7 +490,7 @@
 		<field name="type" type="String" />
 		<field name="repeating" type="boolean" />
 		<field name="recurrence" type="String">
-			<hint-collection name="BLOB" />
+			<hint-collection name="CLOB" />
 		</field>
 		<field name="remindBy" type="String" />
 		<field name="firstReminder" type="int" />
@@ -595,8 +595,11 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="title" type="String" />
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
 		<field name="content" type="String">
-			<hint-collection name="BLOB" />
+			<hint-collection name="CLOB" />
 		</field>
 		<field name="type" type="String" />
 		<field name="structureId" type="String" />
@@ -632,7 +635,7 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="xsd" type="String">
-			<hint-collection name="BLOB" />
+			<hint-collection name="CLOB" />
 		</field>
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalTemplate">
@@ -651,7 +654,7 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="xsl" type="String">
-			<hint-collection name="BLOB" />
+			<hint-collection name="CLOB" />
 		</field>
 		<field name="langType" type="String" />
 		<field name="smallImage" type="boolean" />
@@ -691,7 +694,7 @@
 		<field name="parentMessageId" type="String" />
 		<field name="subject" type="String" />
 		<field name="body" type="String">
-			<hint-collection name="BLOB" />
+			<hint-collection name="CLOB" />
 		</field>
 		<field name="attachments" type="boolean" />
 		<field name="anonymous" type="boolean" />
@@ -975,7 +978,7 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="content" type="String">
-			<hint-collection name="BLOB" />
+			<hint-collection name="CLOB" />
 			<hint name="display-height">375</hint>
 			<hint name="display-width">850</hint>
 			<hint name="check-tab">true</hint>
