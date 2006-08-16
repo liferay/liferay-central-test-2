@@ -332,6 +332,7 @@ create table JournalArticle (
 	createDate DATE null,
 	modifiedDate DATE null,
 	title VARCHAR(75) null,
+	description STRING null,
 	content TEXT null,
 	type_ VARCHAR(75) null,
 	structureId VARCHAR(75) null,

@@ -44,7 +44,7 @@ portletURL.setParameter("keywords", keywords);
 List headerNames = new ArrayList();
 
 headerNames.add("#");
-headerNames.add("title");
+headerNames.add("name");
 headerNames.add("content");
 headerNames.add("score");
 

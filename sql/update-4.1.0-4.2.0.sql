@@ -1,0 +1,1 @@
+alter table JournalArticle add description STRING null;

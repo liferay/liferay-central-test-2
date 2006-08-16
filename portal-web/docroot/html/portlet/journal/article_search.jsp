@@ -41,11 +41,11 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "title") %>
+		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "content") %>
+		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
 </tr>
 <tr>
@@ -62,15 +62,19 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= ArticleDisplayTerms.CONTENT %>" size="20" type="text" value="<%= displayTerms.getContent() %>">
+		<input class="form-text" name="<portlet:namespace /><%= ArticleDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>">
 	</td>
 </tr>
 <tr>
 	<td>
+		<%= LanguageUtil.get(pageContext, "content") %>
+	</td>
+	<td style="padding-left: 5px;"></td>
+	<td>
 		<%= LanguageUtil.get(pageContext, "type") %>
 	</td>
 	<td style="padding-left: 5px;"></td>
-	<td colspan="5">
+	<td colspan="3">
 		<c:choose>
 			<c:when test="<%= portletName.equals(PortletKeys.JOURNAL) %>">
 				<%= LanguageUtil.get(pageContext, "status") %>
@@ -82,6 +86,10 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 	</td>
 </tr>
 <tr>
+	<td>
+		<input class="form-text" name="<portlet:namespace /><%= ArticleDisplayTerms.CONTENT %>" size="20" type="text" value="<%= displayTerms.getContent() %>">
+	</td>
+	<td style="padding-left: 5px;"></td>
 	<td>
 		<select name="<portlet:namespace /><%= ArticleDisplayTerms.TYPE %>">
 			<option value=""></option>
@@ -99,7 +107,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 		</select>
 	</td>
 	<td style="padding-left: 5px;"></td>
-	<td colspan="5">
+	<td colspan="3">
 		<c:choose>
 			<c:when test="<%= portletName.equals(PortletKeys.JOURNAL) %>">
 				<select name="<portlet:namespace /><%= ArticleDisplayTerms.STATUS %>">

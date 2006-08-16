@@ -430,7 +430,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 <liferay-ui:error exception="<%= ArticleDisplayDateException.class %>" message="please-enter-a-valid-display-date" />
 <liferay-ui:error exception="<%= ArticleExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
 <liferay-ui:error exception="<%= ArticleIdException.class %>" message="please-enter-a-valid-id" />
-<liferay-ui:error exception="<%= ArticleTitleException.class %>" message="please-enter-a-valid-title" />
+<liferay-ui:error exception="<%= ArticleTitleException.class %>" message="please-enter-a-valid-name" />
 <liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
 
 <table border="0" cellpadding="0" cellspacing="0">
@@ -527,11 +527,25 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "title") %>
+		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="title" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "description") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="description" />
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<br>
 	</td>
 </tr>
 <tr>
