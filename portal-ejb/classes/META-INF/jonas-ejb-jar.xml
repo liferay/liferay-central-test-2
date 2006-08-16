@@ -1250,4 +1250,28 @@
 			<jndi-name>mail/MailSession</jndi-name>
 		</jonas-resource>
 	</jonas-session>
+	<jonas-session>
+		<ejb-name>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentLocalServiceEJB</ejb-name>
+		<jndi-name>ejb/liferay/AlfrescoContentLocalServiceHome</jndi-name>
+		<jonas-resource>
+			<res-ref-name>jdbc/LiferayPool</res-ref-name>
+			<jndi-name>jdbc/LiferayPool</jndi-name>
+		</jonas-resource>
+		<jonas-resource>
+			<res-ref-name>mail/MailSession</res-ref-name>
+			<jndi-name>mail/MailSession</jndi-name>
+		</jonas-resource>
+	</jonas-session>
+	<jonas-session>
+		<ejb-name>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentServiceEJB</ejb-name>
+		<jndi-name>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentServiceEJB</jndi-name>
+		<jonas-resource>
+			<res-ref-name>jdbc/LiferayPool</res-ref-name>
+			<jndi-name>jdbc/LiferayPool</jndi-name>
+		</jonas-resource>
+		<jonas-resource>
+			<res-ref-name>mail/MailSession</res-ref-name>
+			<jndi-name>mail/MailSession</jndi-name>
+		</jonas-resource>
+	</jonas-session>
 </jonas-ejb-jar>

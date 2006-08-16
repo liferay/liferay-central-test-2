@@ -100,6 +100,96 @@
 
 </form>
 
+<liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
+
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
+<input name="<portlet:namespace />uuid" type="hidden" value="">
+
+<%
+DynamicRenderRequest dynamicRenderReq = new DynamicRenderRequest(renderRequest);
+
+AlfrescoContentSearch searchContainer = new AlfrescoContentSearch(dynamicRenderReq, portletURL);
+%>
+
+<c:if test="<%= null != null %>">
+	<br>
+
+	<%-- = LanguageUtil.get(pageContext, "displaying-article") %>: <%= article.getArticleId() --%><br>
+</c:if>
+
+<%
+ResultSetRow[] resultSetRows = AlfrescoContentLocalServiceUtil.getNodes(null);
+
+int total = resultSetRows.length;
+
+searchContainer.setTotal(total);
+
+List results = Arrays.asList(resultSetRows);
+
+searchContainer.setResults(results);
+%>
+
+<br><div class="beta-separator"></div><br>
+
+<%
+List resultRows = searchContainer.getResultRows();
+
+for (int i = 0; i < results.size(); i++) {
+	ResultSetRow resultSetRow = (ResultSetRow)results.get(i);
+
+	ResultSetRowNode node = resultSetRow.getNode();
+	
+	ResultRow row = new ResultRow(node, node.getId(), i);
+
+	StringBuffer sb = new StringBuffer();
+
+	sb.append("javascript: document.");
+	sb.append(renderResponse.getNamespace());
+	sb.append("fm.");
+	sb.append(renderResponse.getNamespace());
+	sb.append(Constants.CMD);
+	sb.append(".value = '");
+	sb.append(Constants.UPDATE);
+	sb.append("'; document.");
+	sb.append(renderResponse.getNamespace());
+	sb.append("fm.");
+	sb.append(renderResponse.getNamespace());
+	sb.append("uuid.value = '");
+	sb.append(node.getId());
+	sb.append("'; submitForm(document.");
+	sb.append(renderResponse.getNamespace());
+	sb.append("fm);");
+
+	String rowHREF = sb.toString();
+
+	// Content Uuid
+
+	row.addText(node.getId(), rowHREF);
+
+	// Name
+	
+    NamedValue namedValues[] = resultSetRow.getColumns();
+    
+	for (int j = 0; j < namedValues.length; j++) {
+		if (namedValues[j].getName().endsWith(org.alfresco.webservice.util.Constants.PROP_NAME)) {
+			row.addText(namedValues[j].getValue(), rowHREF);
+		}
+	}
+
+	// Add result row
+
+	resultRows.add(row);
+}
+%>
+
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+
+</form>
+
+
 <script type="text/javascript">
 	document.<portlet:namespace />fm.<portlet:namespace />baseURL.focus();
 </script>

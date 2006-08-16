@@ -16804,6 +16804,123 @@
 				<res-auth>Container</res-auth>
 			</resource-ref>
 		</session>
+		<session>
+			<display-name>AlfrescoContentLocalServiceEJB</display-name>
+			<ejb-name>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentLocalServiceEJB</ejb-name>
+			<local-home>com.liferay.portlet.alfresco.service.ejb.AlfrescoContentLocalServiceHome</local-home>
+			<local>com.liferay.portlet.alfresco.service.ejb.AlfrescoContentLocalServiceEJB</local>
+			<ejb-class>com.liferay.portlet.alfresco.service.ejb.AlfrescoContentLocalServiceEJBImpl</ejb-class>
+			<session-type>Stateless</session-type>
+			<transaction-type>Bean</transaction-type>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.counter.service.ejb.CounterServiceHome</home>
+				<remote>com.liferay.counter.service.ejb.CounterServiceEJB</remote>
+				<ejb-link>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.documentlibrary.service.ejb.DLServiceHome</home>
+				<remote>com.liferay.documentlibrary.service.ejb.DLServiceEJB</remote>
+				<ejb-link>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_lock_service_ejb_LockServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.lock.service.ejb.LockServiceHome</home>
+				<remote>com.liferay.lock.service.ejb.LockServiceEJB</remote>
+				<ejb-link>com_liferay_lock_service_ejb_LockServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_mail_service_ejb_MailServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.mail.service.ejb.MailServiceHome</home>
+				<remote>com.liferay.mail.service.ejb.MailServiceEJB</remote>
+				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<resource-ref>
+				<res-ref-name>jdbc/LiferayPool</res-ref-name>
+				<res-type>javax.sql.DataSource</res-type>
+				<res-auth>Container</res-auth>
+				<res-sharing-scope>Shareable</res-sharing-scope>
+			</resource-ref>
+			<resource-ref>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<res-type>javax.mail.Session</res-type>
+				<res-auth>Container</res-auth>
+			</resource-ref>
+		</session>
+		<session>
+			<display-name>AlfrescoContentServiceEJB</display-name>
+			<ejb-name>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentServiceEJB</ejb-name>
+			<home>com.liferay.portlet.alfresco.service.ejb.AlfrescoContentServiceHome</home>
+			<remote>com.liferay.portlet.alfresco.service.ejb.AlfrescoContentServiceEJB</remote>
+			<ejb-class>com.liferay.portlet.alfresco.service.ejb.AlfrescoContentServiceEJBImpl</ejb-class>
+			<session-type>Stateless</session-type>
+			<transaction-type>Bean</transaction-type>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.counter.service.ejb.CounterServiceHome</home>
+				<remote>com.liferay.counter.service.ejb.CounterServiceEJB</remote>
+				<ejb-link>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.documentlibrary.service.ejb.DLServiceHome</home>
+				<remote>com.liferay.documentlibrary.service.ejb.DLServiceEJB</remote>
+				<ejb-link>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_lock_service_ejb_LockServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.lock.service.ejb.LockServiceHome</home>
+				<remote>com.liferay.lock.service.ejb.LockServiceEJB</remote>
+				<ejb-link>com_liferay_lock_service_ejb_LockServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_mail_service_ejb_MailServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.mail.service.ejb.MailServiceHome</home>
+				<remote>com.liferay.mail.service.ejb.MailServiceEJB</remote>
+				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/AlfrescoContentLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.alfresco.service.ejb.AlfrescoContentLocalServiceHome</local-home>
+				<local>com.liferay.portlet.alfresco.service.ejb.AlfrescoContentLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<resource-ref>
+				<res-ref-name>jdbc/LiferayPool</res-ref-name>
+				<res-type>javax.sql.DataSource</res-type>
+				<res-auth>Container</res-auth>
+				<res-sharing-scope>Shareable</res-sharing-scope>
+			</resource-ref>
+			<resource-ref>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<res-type>javax.mail.Session</res-type>
+				<res-auth>Container</res-auth>
+			</resource-ref>
+		</session>
 	</enterprise-beans>
 	<assembly-descriptor>
 		<method-permission>
@@ -17222,6 +17339,14 @@
 			</method>
 			<method>
 				<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<method>
+				<ejb-name>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentLocalServiceEJB</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<method>
+				<ejb-name>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentServiceEJB</ejb-name>
 				<method-name>*</method-name>
 			</method>
 		</method-permission>

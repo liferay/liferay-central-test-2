@@ -35,6 +35,16 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import org.alfresco.webservice.repository.QueryResult;
+import org.alfresco.webservice.repository.RepositoryServiceSoapBindingStub;
+import org.alfresco.webservice.types.NamedValue;
+import org.alfresco.webservice.types.Predicate;
+import org.alfresco.webservice.types.Reference;
+import org.alfresco.webservice.types.ResultSetRow;
+import org.alfresco.webservice.types.Store;
+import org.alfresco.webservice.types.StoreEnum;
+import org.alfresco.webservice.util.AuthenticationUtils;
+import org.alfresco.webservice.util.WebServiceFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -46,6 +56,7 @@ import org.apache.struts.action.ActionMapping;
  *
  */
 public class EditConfigurationAction extends PortletAction {
+    protected static final Store STORE = new Store(StoreEnum.workspace, "SpacesStore");
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -91,6 +102,45 @@ public class EditConfigurationAction extends PortletAction {
 
 		return mapping.findForward(
 			"portlet.alfresco_content.edit_configuration");
+	}
+	
+	public static void main(String args[]) throws Exception {
+		
+        // Start the session
+        AuthenticationUtils.startSession("admin", "admin");
+        try
+        {
+            RepositoryServiceSoapBindingStub repositoryService = WebServiceFactory.getRepositoryService();       
+            
+            // Get a reference to the space we have named
+            Reference reference = new Reference(STORE, null, "/app:company_home");
+            QueryResult result = repositoryService.queryChildren(reference);
+
+            ResultSetRow[] rows = result.getResultSet().getRows();
+            
+            for (int i = 0; i < rows.length; i++) {
+                String nodeId = rows[i].getNode().getId();
+
+                System.out.println("Node ID: " + nodeId);
+                
+                NamedValue namedValues[] = rows[i].getColumns();
+                
+            	for (int j = 0; j < namedValues.length; j++) {
+        			System.out.println(namedValues[j].getName() + ": " + namedValues[j].getValue());
+            	}
+            }
+        }
+        catch(Throwable e)
+        {
+            System.out.println(e.toString());
+        }
+        finally
+        {
+            // End the session
+            AuthenticationUtils.endSession();
+            System.exit(0);
+        }
+
 	}
 
 }

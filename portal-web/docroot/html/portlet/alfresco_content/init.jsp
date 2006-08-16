@@ -24,6 +24,13 @@
 
 --%><%@ include file="/html/portlet/init.jsp" %><%--
 
+--%><%@ page import="com.liferay.portlet.alfrescocontent.search.AlfrescoContentSearch" %><%--
+--%><%@ page import="com.liferay.portlet.alfrescocontent.search.AlfrescoContentSearchTerms" %><%--
+--%><%@ page import="com.liferay.portlet.alfresco.service.spring.AlfrescoContentLocalServiceUtil" %><%--
+--%><%@ page import="org.alfresco.webservice.types.NamedValue" %><%--
+--%><%@ page import="org.alfresco.webservice.types.ResultSetRow" %><%--
+--%><%@ page import="org.alfresco.webservice.types.ResultSetRowNode" %><%--
+
 --%><%
 PortletPreferences prefs = renderRequest.getPreferences();
 

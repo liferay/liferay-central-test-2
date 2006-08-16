@@ -31,6 +31,7 @@
 	<classpathentry kind="lib" path="lib/development/saxpath.jar"/>
 	<classpathentry kind="lib" path="lib/development/servlet.jar"/>
 	<classpathentry kind="lib" path="lib/development/smtp.jar"/>
+	<classpathentry kind="lib" path="lib/development/xalan.jar"/>
 	<classpathentry kind="lib" path="lib/global/portal-kernel.jar"/>
 	<classpathentry kind="lib" path="lib/global/portlet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/activemq.jar"/>
@@ -41,6 +42,7 @@
 	<classpathentry kind="lib" path="lib/portal/asm-attrs.jar"/>
 	<classpathentry kind="lib" path="lib/portal/axis.jar"/>
 	<classpathentry kind="lib" path="lib/portal/axis-ant.jar"/>
+	<classpathentry kind="lib" path="lib/portal/bcprov-jdk15.jar"/>
 	<classpathentry kind="lib" path="lib/portal/burlap.jar"/>
 	<classpathentry kind="lib" path="lib/portal/cglib.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-beanutils.jar"/>
@@ -94,6 +96,7 @@
 	<classpathentry kind="lib" path="lib/portal/msnm.jar"/>
 	<classpathentry kind="lib" path="lib/portal/nekohtml.jar"/>
 	<classpathentry kind="lib" path="lib/portal/odmg.jar"/>
+	<classpathentry kind="lib" path="lib/portal/opensaml.jar"/>
 	<classpathentry kind="lib" path="lib/portal/oro.jar"/>
 	<classpathentry kind="lib" path="lib/portal/oscache.jar"/>
 	<classpathentry kind="lib" path="lib/portal/pdfbox.jar"/>
@@ -120,9 +123,12 @@
 	<classpathentry kind="lib" path="lib/portal/util-wsrp.jar"/>
 	<classpathentry kind="lib" path="lib/portal/velocity.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wbmp.jar"/>
+	<classpathentry kind="lib" path="lib/portal/web-service-client.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wsdl4j.jar"/>
+	<classpathentry kind="lib" path="lib/portal/wss4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xercesImpl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xml-apis.jar"/>
+	<classpathentry kind="lib" path="lib/portal/xmlsec.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ym.jar"/>
 	<classpathentry kind="lib" path="web-sites/liferay.com-web/docroot/WEB-INF/lib/util-taglib.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>

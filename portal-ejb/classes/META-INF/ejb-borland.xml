@@ -419,6 +419,14 @@
 			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</ejb-name>
 			<bean-home-name>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</bean-home-name>
 		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/AlfrescoContentLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentServiceEJB</bean-home-name>
+		</session>
 	</enterprise-beans>
 	<property>
 		<prop-name>ejb.default_transaction_attribute</prop-name>

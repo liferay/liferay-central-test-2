@@ -1,8 +1,10 @@
 ActiveMQ 3.2
+Alfresco Web Service Client 1.3.0
 Ant 1.6.5
 Ant Contrib 0.6
 ANTLR 2.7.6 RC1
 Axis 1.4 (removed log4j.properties)
+Bouncy Castle JDK 1.5 1.29
 Burlap 2.1.12
 c3p0 0.9.0.4
 Commons Beanutils 1.7.0
@@ -58,6 +60,7 @@ MSNM 1.2.2
 MyFaces 1.1.1
 MySQL Connector/J 3.1.13
 NekoHTML 0.9.5
+OpenSAML 1.0.1
 ORO 2.0.8
 OSCache 2.3
 PDFBox 0.7.1
@@ -78,5 +81,7 @@ Trove 1.1b4
 Velocity 1.4
 WSDL4J 1.5.1
 WSRP4J 0.3
+WSS4J 1.0.0
 Xalan 2.6.0
 Xerces 2.7.1
+XML Security 1.2.1

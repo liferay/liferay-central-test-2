@@ -731,5 +731,19 @@
 			<cluster-object>false</cluster-object>
 			<timeout>3000</timeout>
 		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/AlfrescoContentLocalServiceHome</local-jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentServiceEJB</jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
 	</enterprise-beans>
 </jrun-ejb-jar>

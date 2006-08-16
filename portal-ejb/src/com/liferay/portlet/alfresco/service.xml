@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 4.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_4_0_0.dtd">
+
+<service-builder root-dir=".." package-path="com.liferay.portlet">
+	<portlet name="Alfresco" short-name="Alfresco" />
+	<entity name="AlfrescoContent" local-service="true" remote-service="true">
+	</entity>
+</service-builder>
