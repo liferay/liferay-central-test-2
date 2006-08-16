@@ -54,7 +54,7 @@ public class ArticleSearch extends SearchContainer {
 	static {
 		headerNames.add("id");
 		headerNames.add("version");
-		headerNames.add("title");
+		headerNames.add("name");
 		headerNames.add("display-date");
 		headerNames.add("author");
 
@@ -94,6 +94,8 @@ public class ArticleSearch extends SearchContainer {
 			ArticleDisplayTerms.GROUP_ID, displayTerms.getGroupId());
 		iteratorURL.setParameter(
 			ArticleDisplayTerms.TITLE, displayTerms.getTitle());
+		iteratorURL.setParameter(
+			ArticleDisplayTerms.DESCRIPTION, displayTerms.getDescription());
 		iteratorURL.setParameter(
 			ArticleDisplayTerms.CONTENT, displayTerms.getContent());
 		iteratorURL.setParameter(

@@ -97,6 +97,7 @@ public class GetArticlesAction extends Action {
 		Double version = null;
 		String groupId = DAOParamUtil.getString(req, "groupId");
 		String title = null;
+		String description = null;
 		String content = null;
 		String type = DAOParamUtil.getString(req, "type");
 		String structureId = DAOParamUtil.getString(req, "structureId");
@@ -118,8 +119,8 @@ public class GetArticlesAction extends Action {
 		}
 
 		return JournalArticleLocalServiceUtil.search(
-			companyId, articleId, version, groupId, title, content, type,
-			structureId, templateId, gtDate, ltDate, approved, expired,
+			companyId, articleId, version, groupId, title, description, content,
+			type, structureId, templateId, gtDate, ltDate, approved, expired,
 			reviewDate, andOperator, begin, end, obc);
 	}
 
@@ -150,6 +151,8 @@ public class GetArticlesAction extends Action {
 				String.valueOf(article.getVersion()));
 
 			infoEl.addElement("title").addText(article.getTitle());
+
+			infoEl.addElement("description").addText(article.getDescription());
 
 			infoEl.addElement("create-date").addText(
 				Time.getRFC822(article.getCreateDate()));

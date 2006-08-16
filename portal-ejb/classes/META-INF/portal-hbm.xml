@@ -619,6 +619,7 @@
 		<property name="createDate" />
 		<property name="modifiedDate" />
 		<property name="title" />
+		<property name="description" />
 		<property name="content" />
 		<property name="type" column="type_" />
 		<property name="structureId" />

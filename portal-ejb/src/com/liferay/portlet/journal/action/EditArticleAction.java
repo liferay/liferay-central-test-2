@@ -259,6 +259,7 @@ public class EditArticleAction extends PortletAction {
 			req, "incrementVersion");
 
 		String title = ParamUtil.getString(req, "title");
+		String description = ParamUtil.getString(req, "description");
 		String content = ParamUtil.getString(req, "content");
 		String type = ParamUtil.getString(req, "type");
 		String structureId = ParamUtil.getString(req, "structureId");
@@ -322,14 +323,14 @@ public class EditArticleAction extends PortletAction {
 			// Add article
 
 			article = JournalArticleServiceUtil.addArticle(
-				articleId, autoArticleId, layout.getPlid(), title, content,
-				type, structureId, templateId, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute,
-				expirationDateMonth, expirationDateDay, expirationDateYear,
-				expirationDateHour, expirationDateMinute, neverExpire,
-				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-				reviewDateMinute, neverReview, images, articleURL,
-				req.getPreferences(), addCommunityPermissions,
+				articleId, autoArticleId, layout.getPlid(), title, description,
+				content, type, structureId, templateId, displayDateMonth,
+				displayDateDay, displayDateYear, displayDateHour,
+				displayDateMinute, expirationDateMonth, expirationDateDay,
+				expirationDateYear, expirationDateHour, expirationDateMinute,
+				neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
+				reviewDateHour, reviewDateMinute, neverReview, images,
+				articleURL, req.getPreferences(), addCommunityPermissions,
 				addGuestPermissions);
 		}
 		else {
@@ -354,14 +355,14 @@ public class EditArticleAction extends PortletAction {
 			// Update article
 
 			article = JournalArticleServiceUtil.updateArticle(
-				companyId, articleId, version, incrementVersion, title, content,
-				type, structureId, templateId, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute,
-				expirationDateMonth, expirationDateDay, expirationDateYear,
-				expirationDateHour, expirationDateMinute, neverExpire,
-				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-				reviewDateMinute, neverReview, images, articleURL,
-				req.getPreferences());
+				companyId, articleId, version, incrementVersion, title,
+				description, content, type, structureId, templateId,
+				displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute, neverExpire, reviewDateMonth,
+				reviewDateDay, reviewDateYear, reviewDateHour, reviewDateMinute,
+				neverReview, images, articleURL, req.getPreferences());
 		}
 
 		if (approve) {

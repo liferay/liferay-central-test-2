@@ -54,6 +54,8 @@ public class LuceneFields {
 
 	public static final String TITLE = "title";
 
+	public static final String DESCRIPTION = "description";
+
 	public static final String CONTENT = "content";
 
 	public static final String MODIFIED = "modified";

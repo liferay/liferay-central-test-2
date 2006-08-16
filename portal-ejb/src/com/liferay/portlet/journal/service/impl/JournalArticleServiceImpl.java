@@ -51,16 +51,16 @@ public class JournalArticleServiceImpl
 
 	public JournalArticle addArticle(
 			String articleId, boolean autoArticleId, String plid, String title,
-			String content, String type, String structureId, String templateId,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
-			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, Map images, String articleURL,
-			PortletPreferences prefs, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			String description, String content, String type, String structureId,
+			String templateId, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
+			int reviewDateDay, int reviewDateYear, int reviewDateHour,
+			int reviewDateMinute, boolean neverReview, Map images,
+			String articleURL, PortletPreferences prefs,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		PortletPermission.check(
@@ -68,9 +68,9 @@ public class JournalArticleServiceImpl
 			ActionKeys.ADD_ARTICLE);
 
 		return JournalArticleLocalServiceUtil.addArticle(
-			getUserId(), articleId, autoArticleId, plid, title,  content, type,
-			structureId, templateId, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
+			getUserId(), articleId, autoArticleId, plid, title, description,
+			content, type, structureId, templateId, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
@@ -168,10 +168,10 @@ public class JournalArticleServiceImpl
 
 	public JournalArticle updateArticle(
 			String companyId, String articleId, double version,
-			boolean incrementVersion, String title, String content, String type,
-			String structureId, String templateId, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
+			boolean incrementVersion, String title, String description,
+			String content, String type, String structureId, String templateId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
@@ -184,13 +184,14 @@ public class JournalArticleServiceImpl
 			getPermissionChecker(), companyId, articleId, ActionKeys.UPDATE);
 
 		return JournalArticleLocalServiceUtil.updateArticle(
-			getUserId(), articleId, version, incrementVersion, title, content,
-			type, structureId, templateId, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire,
-			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, images, articleURL, prefs);
+			getUserId(), articleId, version, incrementVersion, title,
+			description, content, type, structureId, templateId,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
+			reviewDateHour, reviewDateMinute, neverReview, images, articleURL,
+			prefs);
 	}
 
 }

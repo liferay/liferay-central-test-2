@@ -89,6 +89,7 @@ public class ViewArticleContentAction extends Action {
 
 			if (cmd.equals(Constants.PREVIEW)) {
 				String title = ParamUtil.getString(req, "title");
+				String description = ParamUtil.getString(req, "description");
 
 				Date now = new Date();
 
@@ -127,6 +128,10 @@ public class ViewArticleContentAction extends Action {
 				JournalUtil.addReservedEl(
 					root, tokens, JournalStructure.RESERVED_ARTICLE_TITLE,
 					title);
+
+				JournalUtil.addReservedEl(
+					root, tokens, JournalStructure.RESERVED_ARTICLE_DESCRIPTION,
+					description);
 
 				JournalUtil.addReservedEl(
 					root, tokens, JournalStructure.RESERVED_ARTICLE_CREATE_DATE,

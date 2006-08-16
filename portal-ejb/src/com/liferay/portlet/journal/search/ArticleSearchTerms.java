@@ -44,6 +44,7 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 		version = ParamUtil.getDouble(req, VERSION);
 		groupId = DAOParamUtil.getString(req, GROUP_ID);
 		title = DAOParamUtil.getLike(req, TITLE);
+		description = DAOParamUtil.getLike(req, DESCRIPTION);		
 		content = DAOParamUtil.getLike(req, CONTENT);
 		type = DAOParamUtil.getString(req, TYPE);
 		structureId = DAOParamUtil.getString(req, STRUCTURE_ID);

@@ -50,20 +50,20 @@ import org.hibernate.Session;
  */
 public class JournalArticleFinder {
 
-	public static String COUNT_BY_C_A_V_G_T_C_T_S_T_D_A_E_R =
+	public static String COUNT_BY_C_A_V_G_T_D_C_T_S_T_D_A_E_R =
 		JournalArticleFinder.class.getName() +
-			".countByC_A_V_G_T_C_T_S_T_D_A_E_R";
+			".countByC_A_V_G_T_D_C_T_S_T_D_A_E_R";
 
-	public static String FIND_BY_C_A_V_G_T_C_T_S_T_D_A_E_R =
+	public static String FIND_BY_C_A_V_G_T_D_C_T_S_T_D_A_E_R =
 		JournalArticleFinder.class.getName() +
-			".findByC_A_V_G_T_C_T_S_T_D_A_E_R";
+			".findByC_A_V_G_T_D_C_T_S_T_D_A_E_R";
 
-	public static int countByC_A_V_G_T_C_T_S_T_D_A_E_R(
+	public static int countByC_A_V_G_T_D_C_T_S_T_D_A_E_R(
 			String companyId, String articleId, Double version, String groupId,
-			String title, String content, String type, String structureId,
-			String templateId, Date displayDateGT, Date displayDateLT,
-			Boolean approved, Boolean expired, Date reviewDate,
-			boolean andOperator)
+			String title, String description, String content, String type,
+			String structureId, String templateId, Date displayDateGT,
+			Date displayDateLT, Boolean approved, Boolean expired,
+			Date reviewDate, boolean andOperator)
 		throws SystemException {
 
 		articleId = StringUtil.upperCase(articleId);
@@ -78,7 +78,8 @@ public class JournalArticleFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_A_V_G_T_C_T_S_T_D_A_E_R);
+			String sql = CustomSQLUtil.get(
+				COUNT_BY_C_A_V_G_T_D_C_T_S_T_D_A_E_R);
 
 			if (version == null) {
 				sql = StringUtil.replace(
@@ -115,6 +116,8 @@ public class JournalArticleFinder {
 			qPos.add(groupId);
 			qPos.add(title);
 			qPos.add(title);
+			qPos.add(description);
+			qPos.add(description);
 			qPos.add(content);
 			qPos.add(content);
 			qPos.add(type);
@@ -159,12 +162,13 @@ public class JournalArticleFinder {
 		}
 	}
 
-	public static List findByC_A_V_G_T_C_T_S_T_D_A_E_R(
+	public static List findByC_A_V_G_T_D_C_T_S_T_D_A_E_R(
 			String companyId, String articleId, Double version, String groupId,
-			String title, String content, String type, String structureId,
-			String templateId, Date displayDateGT, Date displayDateLT,
-			Boolean approved, Boolean expired, Date reviewDate,
-			boolean andOperator, int begin, int end, OrderByComparator obc)
+			String title, String description, String content, String type,
+			String structureId, String templateId, Date displayDateGT,
+			Date displayDateLT, Boolean approved, Boolean expired,
+			Date reviewDate, boolean andOperator, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		articleId = StringUtil.upperCase(articleId);
@@ -179,7 +183,7 @@ public class JournalArticleFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_A_V_G_T_C_T_S_T_D_A_E_R);
+			String sql = CustomSQLUtil.get(FIND_BY_C_A_V_G_T_D_C_T_S_T_D_A_E_R);
 
 			if (version == null) {
 				sql = StringUtil.replace(
@@ -217,6 +221,8 @@ public class JournalArticleFinder {
 			qPos.add(groupId);
 			qPos.add(title);
 			qPos.add(title);
+			qPos.add(description);
+			qPos.add(description);
 			qPos.add(content);
 			qPos.add(content);
 			qPos.add(type);

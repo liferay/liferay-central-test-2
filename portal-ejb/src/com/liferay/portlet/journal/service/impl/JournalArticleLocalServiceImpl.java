@@ -118,10 +118,10 @@ public class JournalArticleLocalServiceImpl
 
 	public JournalArticle addArticle(
 			String userId, String articleId, boolean autoArticleId,
-			String plid, String title, String content, String type,
-			String structureId, String templateId, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
+			String plid, String title, String description, String content,
+			String type, String structureId, String templateId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
@@ -186,6 +186,7 @@ public class JournalArticleLocalServiceImpl
 		article.setCreateDate(now);
 		article.setModifiedDate(now);
 		article.setTitle(title);
+		article.setDescription(description);
 		article.setContent(content);
 		article.setType(type);
 		article.setStructureId(structureId);
@@ -265,7 +266,8 @@ public class JournalArticleLocalServiceImpl
 			Indexer.updateArticle(
 				article.getCompanyId(), article.getGroupId(),
 				article.getArticleId(), article.getVersion(),
-				article.getTitle(), article.getContent(), article.getType(),
+				article.getTitle(), article.getDescription(),
+				article.getContent(), article.getType(),
 				article.getDisplayDate());
 		}
 		catch (IOException ioe) {
@@ -526,6 +528,10 @@ public class JournalArticleLocalServiceImpl
 				article.getTitle());
 
 			JournalUtil.addReservedEl(
+				root, tokens, JournalStructure.RESERVED_ARTICLE_DESCRIPTION,
+				article.getDescription());
+
+			JournalUtil.addReservedEl(
 				root, tokens, JournalStructure.RESERVED_ARTICLE_CREATE_DATE,
 				article.getCreateDate().toString());
 
@@ -753,6 +759,7 @@ public class JournalArticleLocalServiceImpl
 				String articleId = article.getArticleId();
 				double version = article.getVersion();
 				String title = article.getTitle();
+				String description = article.getDescription();
 				String content = article.getContent();
 				String type = article.getType();
 				Date displayDate = article.getDisplayDate();
@@ -761,7 +768,7 @@ public class JournalArticleLocalServiceImpl
 					try {
 						Indexer.addArticle(
 							companyId, groupId, articleId, version, title,
-							content, type, displayDate);
+							description, content, type, displayDate);
 					}
 					catch (Exception e1) {
 
@@ -801,18 +808,19 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public Hits search(
-			String companyId, String groupId, String title, String content,
-			String type)
+			String companyId, String groupId, String title, String description,
+			String content, String type)
 		throws SystemException {
 
 		Sort sort = new Sort(new SortField("displayDate", true));
 
-		return search(companyId, groupId, title, content, type, sort);
+		return search(
+			companyId, groupId, title, description, content, type, sort);
 	}
 
 	public Hits search(
-			String companyId, String groupId, String title, String content,
-			String type, Sort sort)
+			String companyId, String groupId, String title, String description,
+			String content, String type, Sort sort)
 		throws SystemException {
 
 		try {
@@ -835,6 +843,8 @@ public class JournalArticleLocalServiceImpl
 
 			LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, title);
 			LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, content);
+			LuceneUtil.addTerm(
+				searchQuery, LuceneFields.DESCRIPTION, description);
 
 			if (Validator.isNotNull(type)) {
 				LuceneUtil.addRequiredTerm(searchQuery, "type", type);
@@ -861,38 +871,39 @@ public class JournalArticleLocalServiceImpl
 
 	public List search(
 			String companyId, String articleId, Double version, String groupId,
-			String title, String content, String type, String structureId,
-			String templateId, Date displayDateGT, Date displayDateLT,
-			Boolean approved, Boolean expired, Date reviewDate,
-			boolean andOperator, int begin, int end, OrderByComparator obc)
+			String title, String description, String content, String type,
+			String structureId, String templateId, Date displayDateGT,
+			Date displayDateLT, Boolean approved, Boolean expired,
+			Date reviewDate, boolean andOperator, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
-		return JournalArticleFinder.findByC_A_V_G_T_C_T_S_T_D_A_E_R(
-			companyId, articleId, version, groupId, title, content, type,
-			structureId, templateId, displayDateGT, displayDateLT, approved,
-			expired, reviewDate, andOperator, begin, end, obc);
+		return JournalArticleFinder.findByC_A_V_G_T_D_C_T_S_T_D_A_E_R(
+			companyId, articleId, version, groupId, title, description, content,
+			type, structureId, templateId, displayDateGT, displayDateLT,
+			approved, expired, reviewDate, andOperator, begin, end, obc);
 	}
 
 	public int searchCount(
 			String companyId, String articleId, Double version, String groupId,
-			String title, String content, String type, String structureId,
-			String templateId, Date displayDateGT, Date displayDateLT,
-			Boolean approved, Boolean expired, Date reviewDate,
-			boolean andOperator)
+			String title, String description, String content, String type,
+			String structureId, String templateId, Date displayDateGT,
+			Date displayDateLT, Boolean approved, Boolean expired,
+			Date reviewDate, boolean andOperator)
 		throws SystemException {
 
-		return JournalArticleFinder.countByC_A_V_G_T_C_T_S_T_D_A_E_R(
-			companyId, articleId, version, groupId, title, content, type,
-			structureId, templateId, displayDateGT, displayDateLT, approved,
-			expired, reviewDate, andOperator);
+		return JournalArticleFinder.countByC_A_V_G_T_D_C_T_S_T_D_A_E_R(
+			companyId, articleId, version, groupId, title, description, content,
+			type, structureId, templateId, displayDateGT, displayDateLT,
+			approved, expired, reviewDate, andOperator);
 	}
 
 	public JournalArticle updateArticle(
 			String userId, String articleId, double version,
-			boolean incrementVersion, String title, String content, String type,
-			String structureId, String templateId, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
+			boolean incrementVersion, String title, String description,
+			String content, String type, String structureId, String templateId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
@@ -978,6 +989,7 @@ public class JournalArticleLocalServiceImpl
 
 		article.setModifiedDate(now);
 		article.setTitle(title);
+		article.setDescription(description);
 		article.setContent(content);
 		article.setType(type);
 		article.setStructureId(structureId);
@@ -1003,7 +1015,8 @@ public class JournalArticleLocalServiceImpl
 				Indexer.updateArticle(
 					article.getCompanyId(), article.getGroupId(),
 					article.getArticleId(), article.getVersion(),
-					article.getTitle(), article.getContent(), article.getType(),
+					article.getTitle(), article.getContent(),
+					article.getContent(), article.getType(),
 					article.getDisplayDate());
 			}
 		}

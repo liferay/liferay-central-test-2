@@ -25,6 +25,7 @@
 		<!-- Other fields -->
 
 		<column name="title" type="String" />
+		<column name="description" type="String" />
 		<column name="content" type="String" />
 		<column name="type" type="String" />
 		<column name="structureId" type="String" />

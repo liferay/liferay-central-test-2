@@ -63,6 +63,9 @@ public class JournalArticleModel extends BaseModel {
 	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.title"),
 			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.description"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_CONTENT = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.content"),
 			XSS_ALLOW_BY_MODEL);
@@ -231,6 +234,23 @@ public class JournalArticleModel extends BaseModel {
 			}
 
 			_title = title;
+		}
+	}
+
+	public String getDescription() {
+		return GetterUtil.getString(_description);
+	}
+
+	public void setDescription(String description) {
+		if (((description == null) && (_description != null)) ||
+				((description != null) && (_description == null)) ||
+				((description != null) && (_description != null) &&
+				!description.equals(_description))) {
+			if (!XSS_ALLOW_DESCRIPTION) {
+				description = XSSUtil.strip(description);
+			}
+
+			_description = description;
 		}
 	}
 
@@ -426,6 +446,7 @@ public class JournalArticleModel extends BaseModel {
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setTitle(getTitle());
+		clone.setDescription(getDescription());
 		clone.setContent(getContent());
 		clone.setType(getType());
 		clone.setStructureId(getStructureId());
@@ -511,6 +532,7 @@ public class JournalArticleModel extends BaseModel {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _title;
+	private String _description;
 	private String _content;
 	private String _type;
 	private String _structureId;

@@ -45,6 +45,8 @@ public class ArticleDisplayTerms extends DisplayTerms {
 
 	public static final String TITLE = "name";
 
+	public static final String DESCRIPTION = "description";
+
 	public static final String CONTENT = "content";
 
 	public static final String TYPE = "type";
@@ -66,6 +68,7 @@ public class ArticleDisplayTerms extends DisplayTerms {
 		version = ParamUtil.getDouble(req, VERSION);
 		groupId = ParamUtil.getString(req, GROUP_ID);
 		title = ParamUtil.getString(req, TITLE);
+		description = ParamUtil.getString(req, DESCRIPTION);
 		content = ParamUtil.getString(req, CONTENT);
 		type = ParamUtil.getString(req, TYPE);
 		structureId = ParamUtil.getString(req, STRUCTURE_ID);
@@ -87,6 +90,10 @@ public class ArticleDisplayTerms extends DisplayTerms {
 
 	public String getTitle() {
 		return title;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public String getContent() {
@@ -125,6 +132,7 @@ public class ArticleDisplayTerms extends DisplayTerms {
 	protected double version;
 	protected String groupId;
 	protected String title;
+	protected String description;
 	protected String content;
 	protected String type;
 	protected String structureId;

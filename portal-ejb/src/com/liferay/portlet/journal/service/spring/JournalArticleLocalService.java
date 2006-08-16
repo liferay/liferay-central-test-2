@@ -32,15 +32,16 @@ public interface JournalArticleLocalService {
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
 		java.lang.String userId, java.lang.String articleId,
 		boolean autoArticleId, java.lang.String plid, java.lang.String title,
-		java.lang.String content, java.lang.String type,
-		java.lang.String structureId, java.lang.String templateId,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
-		int reviewDateDay, int reviewDateYear, int reviewDateHour,
-		int reviewDateMinute, boolean neverReview, java.util.Map images,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
+		int reviewDateHour, int reviewDateMinute, boolean neverReview,
+		java.util.Map images, java.lang.String articleURL,
+		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
@@ -194,48 +195,50 @@ public interface JournalArticleLocalService {
 
 	public com.liferay.util.lucene.Hits search(java.lang.String companyId,
 		java.lang.String groupId, java.lang.String title,
-		java.lang.String content, java.lang.String type)
-		throws com.liferay.portal.SystemException;
+		java.lang.String description, java.lang.String content,
+		java.lang.String type) throws com.liferay.portal.SystemException;
 
 	public com.liferay.util.lucene.Hits search(java.lang.String companyId,
 		java.lang.String groupId, java.lang.String title,
-		java.lang.String content, java.lang.String type,
-		org.apache.lucene.search.Sort sort)
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, org.apache.lucene.search.Sort sort)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List search(java.lang.String companyId,
 		java.lang.String articleId, java.lang.Double version,
 		java.lang.String groupId, java.lang.String title,
-		java.lang.String content, java.lang.String type,
-		java.lang.String structureId, java.lang.String templateId,
-		java.util.Date displayDateGT, java.util.Date displayDateLT,
-		java.lang.Boolean approved, java.lang.Boolean expired,
-		java.util.Date reviewDate, boolean andOperator, int begin, int end,
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, java.util.Date displayDateGT,
+		java.util.Date displayDateLT, java.lang.Boolean approved,
+		java.lang.Boolean expired, java.util.Date reviewDate,
+		boolean andOperator, int begin, int end,
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(java.lang.String companyId,
 		java.lang.String articleId, java.lang.Double version,
 		java.lang.String groupId, java.lang.String title,
-		java.lang.String content, java.lang.String type,
-		java.lang.String structureId, java.lang.String templateId,
-		java.util.Date displayDateGT, java.util.Date displayDateLT,
-		java.lang.Boolean approved, java.lang.Boolean expired,
-		java.util.Date reviewDate, boolean andOperator)
-		throws com.liferay.portal.SystemException;
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, java.util.Date displayDateGT,
+		java.util.Date displayDateLT, java.lang.Boolean approved,
+		java.lang.Boolean expired, java.util.Date reviewDate,
+		boolean andOperator) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
 		java.lang.String userId, java.lang.String articleId, double version,
 		boolean incrementVersion, java.lang.String title,
-		java.lang.String content, java.lang.String type,
-		java.lang.String structureId, java.lang.String templateId,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
-		int reviewDateDay, int reviewDateYear, int reviewDateHour,
-		int reviewDateMinute, boolean neverReview, java.util.Map images,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
+		int reviewDateHour, int reviewDateMinute, boolean neverReview,
+		java.util.Map images, java.lang.String articleURL,
+		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 }

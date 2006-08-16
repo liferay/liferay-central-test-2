@@ -258,9 +258,9 @@ public class ExportAction extends Action {
 				sb.append("insert into JournalArticle (");
 				sb.append("companyId, articleId, version, groupId, userId, ");
 				sb.append("userName, createDate, modifiedDate, title, ");
-				sb.append("content, type_, structureId, templateId, ");
-				sb.append("displayDate, approved, approvedByUserId, ");
-				sb.append("approvedByUserName, expired");
+				sb.append("description, content, type_, structureId, ");
+				sb.append("templateId, displayDate, approved, ");
+				sb.append("approvedByUserId, approvedByUserName, expired");
 				sb.append(") values (");
 				addColumn(sb, article.getCompanyId());
 				addColumn(sb, article.getArticleId());
@@ -273,6 +273,7 @@ public class ExportAction extends Action {
 				addColumn(sb, article.getCreateDate());
 				addColumn(sb, article.getModifiedDate());
 				addColumn(sb, article.getTitle());
+				addColumn(sb, article.getDescription());
 				addColumn(sb, article.getContent());
 				addColumn(sb, article.getType());
 				addColumn(sb, article.getStructureId());

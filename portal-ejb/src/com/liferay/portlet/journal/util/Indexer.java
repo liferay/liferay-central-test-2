@@ -55,7 +55,8 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 
 	public static void addArticle(
 			String companyId, String groupId, String articleId, double version,
-			String title, String content, String type, Date displayDate)
+			String title, String description, String content, String type,
+			Date displayDate)
 		throws IOException {
 
 		synchronized (IndexWriter.class) {
@@ -86,6 +87,8 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 
 			doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
 			doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
+			doc.add(LuceneFields.getText(
+				LuceneFields.DESCRIPTION, description));
 
 			doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
 
@@ -119,7 +122,8 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 
 	public static void updateArticle(
 			String companyId, String groupId, String articleId, double version,
-			String title, String content, String type, Date displayDate)
+			String title, String description, String content, String type,
+			Date displayDate)
 		throws IOException {
 
 		try {
@@ -129,8 +133,8 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 		}
 
 		addArticle(
-			companyId, groupId, articleId, version, title, content, type,
-			displayDate);
+			companyId, groupId, articleId, version, title, description, content,
+			type, displayDate);
 	}
 
 	public DocumentSummary getDocumentSummary(
