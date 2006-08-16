@@ -64,7 +64,8 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 
 				User user = UserLocalServiceUtil.getUserById(remoteUser);
 
-				permissionChecker = PermissionCheckerFactory.create(user, true);
+				permissionChecker = PermissionCheckerFactory.create(
+					user, true, true);
 
 				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 			}

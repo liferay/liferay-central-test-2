@@ -40,7 +40,8 @@ import org.apache.commons.pool.impl.StackObjectPool;
  */
 public class PermissionCheckerFactory {
 
-	public static PermissionChecker create(User user, boolean signedIn)
+	public static PermissionChecker create(
+			User user, boolean signedIn, boolean checkGuest)
 		throws Exception {
 
 		if (_log.isDebugEnabled()) {
@@ -52,7 +53,7 @@ public class PermissionCheckerFactory {
 		PermissionChecker permissionChecker =
 			(PermissionChecker)_instance._pool.borrowObject();
 
-		permissionChecker.init(user, signedIn);
+		permissionChecker.init(user, signedIn, checkGuest);
 
 		return permissionChecker;
 	}

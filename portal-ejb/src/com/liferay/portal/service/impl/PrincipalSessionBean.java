@@ -129,13 +129,14 @@ public class PrincipalSessionBean {
 
 				User user = null;
 				boolean signedIn = false;
+				boolean checkGuest = true;
 
 				if (userId != null) {
 					user = UserUtil.findByPrimaryKey(userId);
 					signedIn = true;
 				}
 
-				permissionChecker.init(user, signedIn);
+				permissionChecker.init(user, signedIn, checkGuest);
 
 				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 			}

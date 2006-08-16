@@ -163,7 +163,7 @@ public class ServicePreAction extends Action {
 			// Permission checker
 
 			PermissionChecker permissionChecker =
-				PermissionCheckerFactory.create(user, signedIn);
+				PermissionCheckerFactory.create(user, signedIn, true);
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
@@ -307,6 +307,10 @@ public class ServicePreAction extends Action {
 				req.setAttribute(WebKeys.LAYOUTS, layouts);
 
 				layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
+
+				if (layout.isPrivateLayout()) {
+					permissionChecker.setCheckGuest(false);
+				}
 			}
 
 			String portletGroupId = PortalUtil.getPortletGroupId(plid);

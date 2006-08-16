@@ -60,14 +60,16 @@ public class PermissionChecker {
 	public PermissionChecker() {
 	}
 
-	public void init(User user, boolean signedIn) {
+	public void init(User user, boolean signedIn, boolean checkGuest) {
 		this.user = user;
 		this.signedIn = signedIn;
+		this.checkGuest = checkGuest;
 	}
 
 	public void recycle() {
 		user = null;
 		signedIn = false;
+		checkGuest = false;
 		permissionCheckerBag = null;
 		results.clear();
 		resetValues();
@@ -100,6 +102,14 @@ public class PermissionChecker {
 
 	public void setSignedIn(boolean signedIn) {
 		this.signedIn = signedIn;
+	}
+
+	public boolean isCheckGuest() {
+		return checkGuest;
+	}
+
+	public void setCheckGuest(boolean checkGuest) {
+		this.checkGuest = checkGuest;
 	}
 
 	public boolean hasPermission(
@@ -193,7 +203,21 @@ public class PermissionChecker {
 				return hasGuestPermission(name, primKey, actionId);
 			}
 			else {
-				return hasUserPermission(groupId, name, primKey, actionId);
+				boolean value = false;
+
+				if (checkGuest) {
+					signedIn = false;
+
+					value = hasGuestPermission(name, primKey, actionId);
+
+					signedIn = true;
+				}
+
+				if (!value) {
+					value = hasUserPermission(groupId, name, primKey, actionId);
+				}
+
+				return value;
 			}
 		}
 		catch (Exception e) {
@@ -390,6 +414,7 @@ public class PermissionChecker {
 
 	protected User user;
 	protected boolean signedIn;
+	protected boolean checkGuest;
 	protected PermissionCheckerBag permissionCheckerBag;
 	protected Map results = CollectionFactory.getHashMap();
 
