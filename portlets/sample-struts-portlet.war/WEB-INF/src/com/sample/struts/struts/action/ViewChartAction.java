@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.struts.struts.action;
+package com.sample.struts.struts.action;
 
 import com.liferay.portlet.LiferaySessionUtil;
 

@@ -33,20 +33,13 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<html:file property="file" />
-	</td>
-</tr>
-<tr>
-	<td colspan="3">
-		<br>
-	</td>
-</tr>
-<tr>
-	<td colspan="2"></td>
-	<td>
-		<html:submit>Upload File</html:submit>
+		<html:file property="file" styleClass="form-text" />
 	</td>
 </tr>
 </table>
+
+<br>
+
+<html:submit styleClass="portlet-form-button">Upload File</html:submit>
 
 </html:form>

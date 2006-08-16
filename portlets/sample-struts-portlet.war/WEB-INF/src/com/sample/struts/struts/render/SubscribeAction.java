@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.struts.struts.render;
+package com.sample.struts.struts.render;
 
-import com.liferay.struts.struts.form.SubscribeForm;
+import com.sample.struts.struts.form.SubscribeForm;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

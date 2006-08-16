@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.struts.struts.action;
+package com.sample.struts.struts.action;
 
-import com.liferay.struts.SampleException;
+import com.sample.struts.SampleException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

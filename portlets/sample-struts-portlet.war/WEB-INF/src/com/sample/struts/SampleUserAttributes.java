@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.struts;
+package com.sample.struts;
 
 import com.liferay.portlet.CustomUserAttributes;
 import com.liferay.portlet.UserAttributes;

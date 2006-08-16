@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.struts.struts.action;
+package com.sample.struts.struts.action;
 
 import java.util.Iterator;
 import java.util.List;

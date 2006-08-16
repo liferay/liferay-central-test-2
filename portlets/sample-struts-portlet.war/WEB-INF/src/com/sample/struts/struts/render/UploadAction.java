@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.struts.struts.render;
+package com.sample.struts.struts.render;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

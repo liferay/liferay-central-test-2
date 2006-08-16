@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.struts.servlet;
+package com.sample.struts.servlet;
 
 import java.io.IOException;
 

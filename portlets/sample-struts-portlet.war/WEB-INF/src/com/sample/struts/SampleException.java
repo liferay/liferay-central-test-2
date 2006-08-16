@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.struts;
+package com.sample.struts;
 
 import org.apache.commons.lang.exception.NestableException;
 

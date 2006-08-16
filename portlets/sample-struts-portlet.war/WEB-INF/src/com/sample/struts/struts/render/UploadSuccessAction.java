@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.struts.struts.render;
+package com.sample.struts.struts.render;
 
 import com.liferay.portal.struts.PortletAction;
 
