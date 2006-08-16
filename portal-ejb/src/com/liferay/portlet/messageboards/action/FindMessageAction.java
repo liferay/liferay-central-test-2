@@ -55,10 +55,11 @@ public class FindMessageAction extends Action {
 		throws Exception {
 
 		try {
+			String plid = ParamUtil.getString(req, "p_l_id");
 			String messageId = ParamUtil.getString(req, "messageId");
 
 			PortletURL portletURL = new PortletURLImpl(
-				req, PortletKeys.MESSAGE_BOARDS, Layout.DEFAULT_PLID, false);
+				req, PortletKeys.MESSAGE_BOARDS, plid, false);
 
 			portletURL.setWindowState(WindowState.MAXIMIZED);
 			portletURL.setPortletMode(PortletMode.VIEW);

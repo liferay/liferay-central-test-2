@@ -72,12 +72,14 @@ public class RSSAction extends Action {
 
 		Company company = themeDisplay.getCompany();
 
+		String plid = ParamUtil.getString(req, "p_l_id");
 		String categoryId = ParamUtil.getString(req, "categoryId");
 		double version = ParamUtil.getDouble(req, "version");
 
 		String url =
 			"http://" + company.getPortalURL() + themeDisplay.getPathMain() +
-				"/message_boards/find_message?categoryId=" + categoryId;
+				"/message_boards/find_message?p_l_id=" + plid + "&categoryId=" +
+					categoryId;
 
 		String rss = MBMessageLocalServiceUtil.getCategoryMessagesCountRSS(
 			categoryId, 0, SearchContainer.DEFAULT_DELTA, version, url);
