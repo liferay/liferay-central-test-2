@@ -95,22 +95,6 @@ public class LayoutPermission {
 				false, true, true);
 		}
 
-		/*if (permissionChecker.isSignedIn() && !layout.isPrivateLayout() &&
-			layout.getGroup().isUser()) {
-
-			permissionChecker.setSignedIn(false);
-
-			boolean hasPermission = permissionChecker.hasPermission(
-				layout.getGroupId(), Layout.class.getName(),
-				layout.getPrimaryKey().toString(), actionId);
-
-			permissionChecker.setSignedIn(true);
-
-			if (hasPermission) {
-				return true;
-			}
-		}*/
-
 		return permissionChecker.hasPermission(
 			layout.getGroupId(), Layout.class.getName(),
 			layout.getPrimaryKey().toString(), actionId);
