@@ -61,7 +61,7 @@ import org.apache.lucene.document.Field;
 public class LuceneFileExtractor {
 
 	public Field getFile(String field, InputStream is, String fileExt) {
-		String text = StringPool.BLANK;
+		String text = null;
 
 		try {
 			fileExt = fileExt.toLowerCase();
@@ -138,6 +138,8 @@ public class LuceneFileExtractor {
 				if (_log.isInfoEnabled()) {
 					_log.info("No filter found for extension " + fileExt);
 				}
+
+				text = StringPool.BLANK;
 			}
 		}
 		catch (Exception e) {
