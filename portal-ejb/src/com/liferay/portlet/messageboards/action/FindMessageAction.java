@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.messageboards.action;
 
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;

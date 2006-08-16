@@ -72,12 +72,13 @@ public class RSSAction extends Action {
 
 		Company company = themeDisplay.getCompany();
 
+		String plid = ParamUtil.getString(req, "p_l_id");
 		String groupId = ParamUtil.getString(req, "groupId");
 		double version = ParamUtil.getDouble(req, "version");
 
 		String url =
 			"http://" + company.getPortalURL() + themeDisplay.getPathMain() +
-				"/blogs/find_entry?";
+				"/blogs/find_entry?p_l_id=" + plid;
 
 		String rss = BlogsEntryLocalServiceUtil.getGroupEntriesRSS(
 			groupId, 0, SearchContainer.DEFAULT_DELTA, version, url);

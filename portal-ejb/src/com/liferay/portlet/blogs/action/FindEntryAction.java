@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.blogs.action;
 
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
@@ -55,10 +54,11 @@ public class FindEntryAction extends Action {
 		throws Exception {
 
 		try {
+			String plid = ParamUtil.getString(req, "p_l_id");
 			String entryId = ParamUtil.getString(req, "entryId");
 
 			PortletURL portletURL = new PortletURLImpl(
-				req, PortletKeys.BLOGS, Layout.DEFAULT_PLID, false);
+				req, PortletKeys.BLOGS, plid, false);
 
 			portletURL.setWindowState(WindowState.MAXIMIZED);
 			portletURL.setPortletMode(PortletMode.VIEW);
