@@ -128,6 +128,8 @@ public class PropsUtil {
 
 	public static final String COMPANY_SECURITY_AUTO_LOGIN = "company.security.auto.login";
 
+	public static final String COMPANY_SECURITY_SEND_PASSWORD = "company.security.send.password";
+
 	public static final String COMPANY_SECURITY_STRANGERS = "company.security.strangers";
 
 	// Users

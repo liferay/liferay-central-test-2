@@ -89,7 +89,7 @@ public class CompanyServiceImpl
 
 	public void updateSecurity(
 			String companyId, String authType, boolean autoLogin,
-			boolean strangers)
+			boolean sendPassword, boolean strangers)
 		throws PortalException, SystemException {
 
 		if (!RoleLocalServiceUtil.hasUserRole(
@@ -99,7 +99,7 @@ public class CompanyServiceImpl
 		}
 
 		CompanyLocalServiceUtil.updateSecurity(
-			companyId, authType, autoLogin, strangers);
+			companyId, authType, autoLogin, sendPassword, strangers);
 	}
 
 }

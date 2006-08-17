@@ -23,6 +23,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
@@ -53,11 +54,18 @@ public class TabsTag extends TagSupport {
 			req.setAttribute("liferay-ui:tabs:param", _param);
 
 			if (_value == null) {
-				_value = ParamUtil.getString(req, _param, _tabsValues[0]);
+				if (_tabsValues.length > 0) {
+					_value = ParamUtil.getString(req, _param, _tabsValues[0]);
+				}
 			}
 
 			if (Validator.isNull(_value)) {
-				_value = _tabsValues[0];
+				if (_tabsValues.length > 0) {
+					_value = _tabsValues[0];
+				}
+				else {
+					_value = StringPool.BLANK;
+				}
 			}
 
 			boolean match = false;
@@ -69,7 +77,12 @@ public class TabsTag extends TagSupport {
 			}
 
 			if (!match) {
-				_value = _tabsValues[0];
+				if (_tabsValues.length > 0) {
+					_value = _tabsValues[0];
+				}
+				else {
+					_value = StringPool.BLANK;
+				}
 			}
 
 			req.setAttribute("liferay-ui:tabs:value", _value);
@@ -234,11 +247,16 @@ public class TabsTag extends TagSupport {
 	}
 
 	public String getSectionName() {
-		return _names[_namesPos];
+		if (_names.length > _namesPos) {
+			return _names[_namesPos];
+		}
+		else {
+			return StringPool.BLANK;
+		}
 	}
 
 	public boolean getSectionSelected() {
-		if (_names[_namesPos].equals(_value)) {
+		if ((_names.length > _namesPos) && (_names[_namesPos].equals(_value))) {
 			return true;
 		}
 		else {

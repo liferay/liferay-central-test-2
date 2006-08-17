@@ -143,7 +143,8 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 
 				CompanyUtil.update(company);
 
-				updateSecurity(companyId, Company.AUTH_TYPE_EA, true, true);
+				updateSecurity(
+					companyId, Company.AUTH_TYPE_EA, true, true, true);
 
 				PortletPreferences prefs =
 					PrefsPropsUtil.getPreferences(companyId);
@@ -474,7 +475,7 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 
 	public void updateSecurity(
 			String companyId, String authType, boolean autoLogin,
-			boolean strangers)
+			boolean sendPassword, boolean strangers)
 		throws PortalException, SystemException {
 
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences(companyId);
@@ -484,6 +485,9 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 			prefs.setValue(
 				PropsUtil.COMPANY_SECURITY_AUTO_LOGIN,
 				Boolean.toString(autoLogin));
+			prefs.setValue(
+				PropsUtil.COMPANY_SECURITY_SEND_PASSWORD,
+				Boolean.toString(sendPassword));
 			prefs.setValue(
 				PropsUtil.COMPANY_SECURITY_STRANGERS,
 				Boolean.toString(strangers));

@@ -325,6 +325,7 @@ all=Όλα
 allow-simple-articles=Επιτρέψτε τα απλά άρθρα
 allow-strangers-to-create-accounts=Επιτρέπεται σε ξένους να δημιουργήσουν λογαριασμούς;
 allow-users-to-automatically-login=Επιτρέπεται σε χρήστες να συνδεθούν στο σύστημα αυτόματα;
+allow-users-to-request-forgotten-passwords=Επιτρέψτε στους χρήστες για να ζητήσετε τους ξεχασμένους κωδικούς πρόσβασης;
 alpha=Άλφα
 already-registered=Ήδη Καταχωρημένος
 alternative-shipping-calculation=Εναλλακτικός υπολογισμός ναυτιλίας

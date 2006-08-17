@@ -73,7 +73,8 @@ public interface CompanyLocalService {
 			com.liferay.portal.SystemException;
 
 	public void updateSecurity(java.lang.String companyId,
-		java.lang.String authType, boolean autoLogin, boolean strangers)
+		java.lang.String authType, boolean autoLogin, boolean sendPassword,
+		boolean strangers)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 }

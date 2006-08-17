@@ -325,6 +325,7 @@ all=모두
 allow-simple-articles=간단한 기사를 허용하십시요
 allow-strangers-to-create-accounts=낯선 사람을 계정을 창조하는 허용하십시요?
 allow-users-to-automatically-login=자동적으로 로그온에게 사용자를 허용하십시요?
+allow-users-to-request-forgotten-passwords=사용자를 잊은 암호를 요구하는 허용하십시요?
 alpha=알파
 already-registered=이미 재석하는
 alternative-shipping-calculation=양자택일 선박 계산

@@ -325,6 +325,7 @@ all=Tous
 allow-simple-articles=Permettez les articles simples
 allow-strangers-to-create-accounts=Permettre aux internautes de créer des comptes ?
 allow-users-to-automatically-login=Permettre aux utilisateurs l'authentification automatique ?
+allow-users-to-request-forgotten-passwords=Permettez aux utilisateurs de demander des mots de passe oubliés ?
 alpha=Alpha
 already-registered=Déjà enregistré
 alternative-shipping-calculation=Calcul d'expédition alternative

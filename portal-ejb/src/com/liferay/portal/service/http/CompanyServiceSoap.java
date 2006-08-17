@@ -73,11 +73,11 @@ public class CompanyServiceSoap {
 	}
 
 	public static void updateSecurity(java.lang.String companyId,
-		java.lang.String authType, boolean autoLogin, boolean strangers)
-		throws RemoteException {
+		java.lang.String authType, boolean autoLogin, boolean sendPassword,
+		boolean strangers) throws RemoteException {
 		try {
 			CompanyServiceUtil.updateSecurity(companyId, authType, autoLogin,
-				strangers);
+				sendPassword, strangers);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);

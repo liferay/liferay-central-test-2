@@ -27,7 +27,15 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "already-registered");
 
-String tabs1Names = "already-registered,forgot-password";
+String tabs1Names = StringPool.BLANK;
+
+if (company.isSendPassword() || company.isStrangers()) {
+	tabs1Names = "already-registered";
+}
+
+if (company.isSendPassword()) {
+	tabs1Names += ",forgot-password";
+}
 
 if (company.isStrangers()) {
 	tabs1Names += ",create-account";

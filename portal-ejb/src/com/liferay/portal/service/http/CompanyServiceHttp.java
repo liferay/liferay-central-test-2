@@ -261,7 +261,7 @@ public class CompanyServiceHttp {
 
 	public static void updateSecurity(HttpPrincipal httpPrincipal,
 		java.lang.String companyId, java.lang.String authType,
-		boolean autoLogin, boolean strangers)
+		boolean autoLogin, boolean sendPassword, boolean strangers)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -278,10 +278,13 @@ public class CompanyServiceHttp {
 			}
 
 			Object paramObj2 = new BooleanWrapper(autoLogin);
-			Object paramObj3 = new BooleanWrapper(strangers);
+			Object paramObj3 = new BooleanWrapper(sendPassword);
+			Object paramObj4 = new BooleanWrapper(strangers);
 			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
 					"updateSecurity",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

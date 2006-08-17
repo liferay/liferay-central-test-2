@@ -709,6 +709,8 @@ public class UserLocalServiceImpl implements UserLocalService {
 		throws PortalException, SystemException {
 
 		if (!PrefsPropsUtil.getBoolean(
+				companyId, PropsUtil.COMPANY_SECURITY_SEND_PASSWORD) ||
+			!PrefsPropsUtil.getBoolean(
 				companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_ENABLED)) {
 
 			return;

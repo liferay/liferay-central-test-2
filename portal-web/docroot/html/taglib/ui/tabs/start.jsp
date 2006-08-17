@@ -76,43 +76,45 @@ String backURL = (String)request.getAttribute("liferay-ui:tabs:backURL");
 boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tabs:refresh"));
 %>
 
-<input name="<%= namespace %><%= param %>TabsScroll" type="hidden">
+<c:if test="<%= names.length > 0 %>">
+	<input name="<%= namespace %><%= param %>TabsScroll" type="hidden">
 
-<ul class="gamma-tab">
+	<ul class="gamma-tab">
 
-	<%
-	for (int i = 0; i < values.length; i++) {
-		String curURL = (String)request.getAttribute("liferay-ui:tabs:url" + i);
+		<%
+		for (int i = 0; i < values.length; i++) {
+			String curURL = (String)request.getAttribute("liferay-ui:tabs:url" + i);
 
-		if (Validator.isNull(curURL)) {
-			if (refresh) {
-				curURL = url + "&" + param + "=" + values[i] + anchor;
+			if (Validator.isNull(curURL)) {
+				if (refresh) {
+					curURL = url + "&" + param + "=" + values[i] + anchor;
+				}
+				else {
+					curURL = "javascript: Tabs.show('" + namespace + param + "', " + namesJS + ", '" + names[i] + "');";
+				}
 			}
-			else {
-				curURL = "javascript: Tabs.show('" + namespace + param + "', " + namesJS + ", '" + names[i] + "');";
-			}
+		%>
+
+			<li <%= (values.length == 1) || value.equals(values[i]) ? "class=\"current\"" : "" %> id="<%= namespace %><%= param %><%= values[i] %>TabsId">
+				<c:if test="<%= values.length > 1 %>">
+					<a href="<%= curURL %>">
+				</c:if>
+
+				<%= LanguageUtil.get(pageContext, names[i]) %>
+
+				<c:if test="<%= values.length > 1 %>">
+					</a>
+				</c:if>
+			</li>
+
+		<%
 		}
-	%>
+		%>
 
-		<li <%= (values.length == 1) || value.equals(values[i]) ? "class=\"current\"" : "" %> id="<%= namespace %><%= param %><%= values[i] %>TabsId">
-			<c:if test="<%= values.length > 1 %>">
-				<a href="<%= curURL %>">
-			</c:if>
-
-			<%= LanguageUtil.get(pageContext, names[i]) %>
-
-			<c:if test="<%= values.length > 1 %>">
-				</a>
-			</c:if>
-		</li>
-
-	<%
-	}
-	%>
-
-	<c:if test="<%= Validator.isNotNull(backURL) %>">
-		<li class="toggle">
-			&laquo; <a href="<%= backURL %>"><%= LanguageUtil.get(pageContext, "back") %></a>
-		</li>
-	</c:if>
-</ul>
+		<c:if test="<%= Validator.isNotNull(backURL) %>">
+			<li class="toggle">
+				&laquo; <a href="<%= backURL %>"><%= LanguageUtil.get(pageContext, "back") %></a>
+			</li>
+		</c:if>
+	</ul>
+</c:if>

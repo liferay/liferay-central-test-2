@@ -93,11 +93,13 @@
 		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "create-account") %>' onClick="self.location = '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.MY_ACCOUNT %>"><liferay-portlet:param name="struts_action" value="/my_account/create_account" /></liferay-portlet:renderURL>';">
 	</c:if>
 
-	<br><br>
+	<c:if test="<%= company.isSendPassword() %>">
+		<br><br>
 
-	<a href="<%= themeDisplay.getPathMain() %>/portal/login?tabs1=forgot-password" style="font-size: xx-small;">
-	<%= LanguageUtil.get(pageContext, "forgot-password") %>?
-	</a>
+		<a href="<%= themeDisplay.getPathMain() %>/portal/login?tabs1=forgot-password" style="font-size: xx-small;">
+		<%= LanguageUtil.get(pageContext, "forgot-password") %>?
+		</a>
+	</c:if>
 
 	</form>
 

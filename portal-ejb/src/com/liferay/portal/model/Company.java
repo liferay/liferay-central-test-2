@@ -152,6 +152,11 @@ public class Company extends CompanyModel {
 			getCompanyId(), PropsUtil.COMPANY_SECURITY_AUTO_LOGIN);
 	}
 
+	public boolean isSendPassword() throws PortalException, SystemException {
+		return PrefsPropsUtil.getBoolean(
+			getCompanyId(), PropsUtil.COMPANY_SECURITY_SEND_PASSWORD);
+	}
+
 	public boolean isStrangers() throws PortalException, SystemException {
 		return PrefsPropsUtil.getBoolean(
 			getCompanyId(), PropsUtil.COMPANY_SECURITY_STRANGERS);

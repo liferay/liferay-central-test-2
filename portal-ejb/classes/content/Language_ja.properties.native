@@ -325,6 +325,7 @@ all=すべて
 allow-simple-articles=簡単な記事を許可しなさい
 allow-strangers-to-create-accounts=他人を記述を作成することを許可しなさいか.
 allow-users-to-automatically-login=自動ログオンへユーザーを許可しなさいか.
+allow-users-to-request-forgotten-passwords=ユーザーを忘れられていたパスワードを要求することを許可しなさいか。
 alpha=アルファ
 already-registered=既に登録される
 alternative-shipping-calculation=代わりとなる船積みの計算

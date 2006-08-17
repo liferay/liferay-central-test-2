@@ -164,6 +164,18 @@
 				</tr>
 				<tr>
 					<td>
+						<%= LanguageUtil.get(pageContext, "allow-users-to-request-forgotten-passwords") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<select name="<portlet:namespace />sendPassword">
+							<option <%= (company.isSendPassword()) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
+							<option <%= (!company.isSendPassword()) ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<%= LanguageUtil.get(pageContext, "allow-strangers-to-create-accounts") %>
 					</td>
 					<td style="padding-left: 10px;"></td>

@@ -293,10 +293,11 @@ public class EditUsersAction extends PortletAction {
 
 		String authType = ParamUtil.getString(req, "authType");
 		boolean autoLogin = ParamUtil.getBoolean(req, "autoLogin");
+		boolean sendPassword = ParamUtil.getBoolean(req, "sendPassword");
 		boolean strangers = ParamUtil.getBoolean(req, "strangers");
 
 		CompanyServiceUtil.updateSecurity(
-			companyId, authType, autoLogin, strangers);
+			companyId, authType, autoLogin, sendPassword, strangers);
 	}
 
 	private static Log _log = LogFactory.getLog(EditUsersAction.class);
