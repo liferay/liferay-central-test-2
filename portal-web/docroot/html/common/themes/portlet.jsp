@@ -75,10 +75,11 @@ if (portletDisplay.isAccess() && portletDisplay.isActive()) {
 		portletTitle = renderResponseImpl.getTitle();
 	}
 }
-else {
-	if (Validator.isNull(portletTitle)) {
-		portletTitle = portletConfig.getResourceBundle(locale).getString(WebKeys.JAVAX_PORTLET_TITLE);
-	}
+
+if (Validator.isNull(portletTitle)) {
+	ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
+
+	portletTitle = resourceBundle.getString(WebKeys.JAVAX_PORTLET_TITLE);
 }
 
 portletDisplay.setTitle(portletTitle);
