@@ -51,8 +51,6 @@
 --%><%@ page import="com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil" %><%--
 --%><%@ page import="com.liferay.util.servlet.fileupload.LiferayFileUpload" %><%--
 
---%><%@ page import="java.util.ResourceBundle" %><%--
-
 --%><%@ page import="org.apache.struts.action.ActionMapping" %><%--
 --%><%@ page import="org.apache.struts.taglib.tiles.ComponentConstants" %><%--
 --%><%@ page import="org.apache.struts.tiles.ComponentDefinition" %><%--
