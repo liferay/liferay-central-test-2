@@ -10,16 +10,16 @@
 			<value>com.liferay.util.apache.bridges.struts.LiferayServletContextProviderWrapper</value>
 		</init-param>
 		<init-param>
-			<name>ViewPage</name>
-			<value>/portlet_action/sample_struts_portlet/view</value>
+			<name>EditPage</name>
+			<value>/portlet_action/sample_struts_portlet/edit</value>
 		</init-param>
 		<init-param>
 			<name>HelpPage</name>
 			<value>/portlet_action/sample_struts_portlet/help</value>
 		</init-param>
 		<init-param>
-			<name>EditPage</name>
-			<value>/portlet_action/sample_struts_portlet/edit</value>
+			<name>ViewPage</name>
+			<value>/portlet_action/sample_struts_portlet/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -32,5 +32,17 @@
 			<short-title>Sample Struts Portlet</short-title>
 			<keywords>Sample Struts Portlet</keywords>
 		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
 	</portlet>
 </portlet-app>

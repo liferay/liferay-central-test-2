@@ -31,6 +31,10 @@
 		<antcall target="clean-module">
 			<param name="module.name" value="sample-struts-portlet" />
 		</antcall>
+
+		<antcall target="clean-module">
+			<param name="module.name" value="sample-tapestry-portlet" />
+		</antcall>
 	</target>
 
 	<target name="clean-module">
@@ -70,6 +74,10 @@
 
 		<antcall target="compile-module">
 			<param name="module.name" value="sample-struts-portlet" />
+		</antcall>
+
+		<antcall target="clean-module">
+			<param name="module.name" value="sample-tapestry-portlet" />
 		</antcall>
 	</target>
 
@@ -116,6 +124,10 @@
 
 		<antcall target="war-module">
 			<param name="module.name" value="sample-struts-portlet" />
+		</antcall>
+
+		<antcall target="clean-module">
+			<param name="module.name" value="sample-tapestry-portlet" />
 		</antcall>
 	</target>
 
