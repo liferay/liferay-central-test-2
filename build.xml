@@ -500,7 +500,7 @@ auto.deploy.dest.dir=../webapps</echo>
 	</target>
 
 	<target name="build-ext">
-		<available file="${lp.ext.dir}" type="dir" property="lp.ext.dir.available" />
+		<available file="${lp.ext.dir}/ext-ear" type="dir" property="lp.ext.dir.available" />
 
 		<antcall target="build-ext-dir-new" />
 		<antcall target="build-ext-dir-update" />
