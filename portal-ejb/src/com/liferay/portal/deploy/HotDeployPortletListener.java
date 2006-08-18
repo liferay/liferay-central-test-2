@@ -35,6 +35,7 @@ import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
@@ -97,6 +98,10 @@ public class HotDeployPortletListener implements HotDeployListener {
 
 			String[] companyIds = StringUtil.split(
 				ctx.getInitParameter("company_id"));
+
+			if ((companyIds.length == 1) && (companyIds[0].equals("*"))) {
+				companyIds = PortalInstances.getCompanyIds();
+			}
 
 			// Initialize portlets
 
