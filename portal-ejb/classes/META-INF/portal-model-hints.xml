@@ -925,7 +925,7 @@
 		<field name="ccExpMonth" type="int" />
 		<field name="ccExpYear" type="int" />
 		<field name="ccVerNumber" type="String">
-			<hint name="display-width">20</hint>
+			<hint name="display-width">30</hint>
 		</field>
 		<field name="comments" type="String">
 			<hint-collection name="TEXTAREA" />
