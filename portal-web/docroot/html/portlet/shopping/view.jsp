@@ -34,7 +34,7 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "categories");
 	<c:when test='<%= tabs1.equals("categories") %>'>
 		<%@ include file="/html/portlet/shopping/categories.jsp" %>
 	</c:when>
-	<c:when test='<%= tabs1.equals("orders") %>'>
+	<c:when test='<%= tabs1.equals("orders") && !user.isDefaultUser() %>'>
 		<%@ include file="/html/portlet/shopping/orders.jsp" %>
 	</c:when>
 	<c:when test='<%= tabs1.equals("coupons") %>'>

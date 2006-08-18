@@ -25,7 +25,11 @@
 <%@ include file="/html/portlet/shopping/init.jsp" %>
 
 <%
-String tabs1Names = "categories,cart,orders";
+String tabs1Names = "categories,cart";
+
+if (!user.isDefaultUser()) {
+	tabs1Names += ",orders";
+}
 
 if (PortletPermission.contains(permissionChecker, plid, PortletKeys.SHOPPING, ActionKeys.MANAGE_COUPONS)) {
 	tabs1Names += ",coupons";
