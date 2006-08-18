@@ -59,10 +59,10 @@
 		<url-pattern>/spring/*</url-pattern>
 	</filter-mapping>
 	<listener>
-		<listener-class>com.liferay.portal.kernel.servlet.TunnelContextListener</listener-class>
+		<listener-class>com.liferay.portal.kernel.servlet.SpringServletContextListener</listener-class>
 	</listener>
 	<listener>
-		<listener-class>com.liferay.portal.kernel.servlet.SpringServletContextListener</listener-class>
+		<listener-class>com.liferay.portal.kernel.servlet.TunnelContextListener</listener-class>
 	</listener>
 	<servlet>
 		<servlet-name>AxisServlet</servlet-name>
