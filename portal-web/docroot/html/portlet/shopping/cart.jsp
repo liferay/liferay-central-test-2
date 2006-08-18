@@ -382,7 +382,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		sb.append("\">");
 	}
 
-	row.addText(sb.toString(), rowURL);
+	row.addText(sb.toString());
 
 	// Price
 
