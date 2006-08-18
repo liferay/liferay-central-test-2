@@ -66,11 +66,11 @@ public class DateUtil {
 		}
 	}
 
-	public static DateFormat getRFCFormat() {
-		return getRFCFormat(StringPool.BLANK);
+	public static DateFormat getISOFormat() {
+		return getISOFormat(StringPool.BLANK);
 	}
 
-	public static DateFormat getRFCFormat(String text) {
+	public static DateFormat getISOFormat(String text) {
 		String pattern = StringPool.BLANK;
 
 		if (text.length() == 8) {

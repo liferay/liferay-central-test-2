@@ -115,7 +115,7 @@ public class GetArticlesAction extends Action {
 		String gtDateParam = ParamUtil.getString(req, "gtDate");
 
 		if (Validator.isNotNull(gtDateParam)) {
-			DateFormat gtDateFormat = DateUtil.getRFCFormat(gtDateParam);
+			DateFormat gtDateFormat = DateUtil.getISOFormat(gtDateParam);
 
 			gtDate = GetterUtil.getDate(gtDateParam, gtDateFormat);
 		}
@@ -129,7 +129,7 @@ public class GetArticlesAction extends Action {
 		String ltDateParam = ParamUtil.getString(req, "ltDate");
 
 		if (Validator.isNotNull(ltDateParam)) {
-			DateFormat ltDateFormat = DateUtil.getRFCFormat(ltDateParam);
+			DateFormat ltDateFormat = DateUtil.getISOFormat(ltDateParam);
 
 			ltDate = GetterUtil.getDate(ltDateParam, ltDateFormat);
 		}
