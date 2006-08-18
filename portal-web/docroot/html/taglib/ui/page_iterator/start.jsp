@@ -58,23 +58,35 @@ int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
-		<span class="font-small">
+		<span class="font-small" style="font-weight: bold;">
 
 		<%= LanguageUtil.get(pageContext, "page") %>
 
-		<input class="form-text" id="<%= namespace %>page-iterator-value" size="1" type="text" value="<%= curValue %>" onKeyPress="if (event.keyCode == 13) { <%= namespace %>submitPageIterator(); return false; }">
+		<input class="form-text" id="<%= namespace %>page-iterator-value" size="1" style="font-weight: italicized;" type="text" value="<%= curValue %>" onKeyPress="if (event.keyCode == 13) { <%= namespace %>submitPageIterator(); return false; }">
 
 		<%= LanguageUtil.get(pageContext, "of") %>
 
 		<%= pages %>
 
-		<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "go") %>" onClick="<%= namespace %>submitPageIterator();">
+		<liferay-ui:icon image="submit" url='<%= "javascript: " + namespace + "submitPageIterator();" %>' />
 
 		</span>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
 		<span class="font-small">
+
+		<c:if test="<%= curValue != 1 %>">
+			<a href="<%= _getHREF(formName, curParam, 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
+		</c:if>
+
+		<%= LanguageUtil.get(pageContext, "first") %>
+
+		<c:if test="<%= curValue != 1 %>">
+			</a>
+		</c:if>
+
+		&nbsp;|&nbsp;
 
 		<c:if test="<%= curValue != 1 %>">
 			<a href="<%= _getHREF(formName, curParam, curValue - 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
@@ -95,18 +107,6 @@ int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-
 		<%= LanguageUtil.get(pageContext, "next") %>
 
 		<c:if test="<%= curValue != pages %>">
-			</a>
-		</c:if>
-
-		&nbsp;|&nbsp;
-
-		<c:if test="<%= curValue != 1 %>">
-			<a href="<%= _getHREF(formName, curParam, 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
-		</c:if>
-
-		<%= LanguageUtil.get(pageContext, "first") %>
-
-		<c:if test="<%= curValue != 1 %>">
 			</a>
 		</c:if>
 
