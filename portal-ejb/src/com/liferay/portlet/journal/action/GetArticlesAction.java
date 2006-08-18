@@ -33,14 +33,19 @@ import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleModifiedDateComparator;
+import com.liferay.util.DateUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Time;
+import com.liferay.util.Validator;
 import com.liferay.util.dao.DAOParamUtil;
 import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.StringReader;
+
+import java.text.DateFormat;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -50,6 +55,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -102,8 +109,35 @@ public class GetArticlesAction extends Action {
 		String type = DAOParamUtil.getString(req, "type");
 		String structureId = DAOParamUtil.getString(req, "structureId");
 		String templateId = DAOParamUtil.getString(req, "templateId");
+
 		Date gtDate = null;
+
+		String gtDateParam = ParamUtil.getString(req, "gtDate");
+
+		if (Validator.isNotNull(gtDateParam)) {
+			DateFormat gtDateFormat = DateUtil.getRFCFormat(gtDateParam);
+
+			gtDate = GetterUtil.getDate(gtDateParam, gtDateFormat);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("gtDate is " + gtDate);
+		}
+
 		Date ltDate = null;
+
+		String ltDateParam = ParamUtil.getString(req, "ltDate");
+
+		if (Validator.isNotNull(ltDateParam)) {
+			DateFormat ltDateFormat = DateUtil.getRFCFormat(ltDateParam);
+
+			ltDate = GetterUtil.getDate(ltDateParam, ltDateFormat);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("ltDate is " + ltDate);
+		}
+
 		Boolean approved = Boolean.TRUE;
 		Boolean expired = Boolean.FALSE;
 		Date reviewDate = null;
@@ -193,5 +227,7 @@ public class GetArticlesAction extends Action {
 
 		return JournalUtil.formatXML(resultsDoc).getBytes();
 	}
+
+	private static Log _log = LogFactory.getLog(GetArticlesAction.class);
 
 }

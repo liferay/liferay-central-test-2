@@ -22,7 +22,11 @@
 
 package com.liferay.util;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * <a href="DateUtil.java.html"><b><i>View Source</i></b></a>
@@ -60,6 +64,71 @@ public class DateUtil {
 		else {
 			return 1;
 		}
+	}
+
+	public static DateFormat getRFCFormat() {
+		return getRFCFormat(StringPool.BLANK);
+	}
+
+	public static DateFormat getRFCFormat(String text) {
+		String pattern = StringPool.BLANK;
+
+		if (text.length() == 8) {
+			pattern = "yyyyMMdd";
+		}
+		else if (text.length() == 12) {
+			pattern = "yyyyMMddHHmm";
+		}
+		else if (text.length() == 13) {
+			pattern = "yyyyMMdd'T'HHmm";
+		}
+		else if (text.length() == 14) {
+			pattern = "yyyyMMddHHmmss";
+		}
+		else if (text.length() == 15) {
+			pattern = "yyyyMMdd'T'HHmmss";
+		}
+		else if ((text.length() > 8) && (text.charAt(8) == 'T')) {
+			pattern = "yyyyMMdd'T'HHmmssz";
+		}
+		else {
+			pattern = "yyyyMMddHHmmssz";
+		}
+
+		return new SimpleDateFormat(pattern);
+	}
+
+	public static DateFormat getUTCFormat() {
+		return getUTCFormat(StringPool.BLANK);
+	}
+
+	public static DateFormat getUTCFormat(String text) {
+		String pattern = StringPool.BLANK;
+
+		if (text.length() == 8) {
+			pattern = "yyyyMMdd";
+		}
+		else if (text.length() == 12) {
+			pattern = "yyyyMMddHHmm";
+		}
+		else if (text.length() == 13) {
+			pattern = "yyyyMMdd'T'HHmm";
+		}
+		else if (text.length() == 14) {
+			pattern = "yyyyMMddHHmmss";
+		}
+		else if (text.length() == 15) {
+			pattern = "yyyyMMdd'T'HHmmss";
+		}
+		else {
+			pattern = "yyyyMMdd'T'HHmmssz";
+		}
+
+		DateFormat dateFormat = new SimpleDateFormat(pattern);
+
+		dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+		return dateFormat;
 	}
 
 }
