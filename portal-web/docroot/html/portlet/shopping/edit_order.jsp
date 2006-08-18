@@ -275,7 +275,7 @@ String orderId = BeanParamUtil.getString(order, request, "orderId");
 <br>
 
 <c:choose>
-	<c:when test="<%= !shoppingPrefs.usePayPal() %>">
+	<c:when test="<%= shoppingPrefs.usePayPal() %>">
 		<b>PayPal</b>
 
 		<br><br>
