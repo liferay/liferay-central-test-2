@@ -866,7 +866,7 @@
 	</model>
 	<model name="com.liferay.portlet.shopping.model.ShoppingItemPrice">
 		<default-hints>
-			<hint name="display-width">25</hint>
+			<hint name="display-width">50</hint>
 		</default-hints>
 		<field name="itemPriceId" type="String" />
 		<field name="itemId" type="String" />
