@@ -38,66 +38,94 @@ String urlAnchor = (String)request.getAttribute("liferay-ui:page-iterator:urlAnc
 int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-iterator:pages"));
 %>
 
-<c:choose>
-	<c:when test="<%= curValue == 1 %>">
-		<span class="portlet-msg-error">&laquo;&laquo;</span>
-	</c:when>
-	<c:otherwise>
-		<a class="portlet-msg-error" href="<%= _getHREF(formName, curParam, curValue - 1, jsCall, url, urlAnchor) %>" target="<%= target %>">&laquo;&laquo;</a>
-	</c:otherwise>
-</c:choose>
+<script type="text/javascript">
+	function <%= namespace %>submitPageIterator() {
+		var curValue = document.getElementById("<%= namespace %>page-iterator-value").value;
 
-<%
-int pageStart = 1;
-int pageEnd = maxPages;
+		if (<%= Validator.isNotNull(url) %>) {
+			var href = "<%= url + curParam %>" + "=" + curValue + "<%= urlAnchor %>";
 
-if (curValue > 1) {
-	pageStart = curValue - maxPages + 1;
-	pageEnd = curValue + maxPages - 1;
-}
+			self.location = href;
+		}
+		else {
+			document.<%= formName %>.<%= curParam %>.value = curValue;
 
-if (pageStart < 1) {
-	pageStart = 1;
-}
-
-int divisions = total / delta;
-
-if (total % delta > 0) {
-	divisions++;
-}
-
-if (pageEnd > divisions) {
-	pageEnd = divisions;
-}
-
-for (int i = pageStart; i <= pageEnd; i++) {
-	out.print("&nbsp;");
-%>
-
-	<c:choose>
-		<c:when test="<%= curValue == i %>">
-			[<%= i %>]
-		</c:when>
-		<c:otherwise>
-			<a href="<%= _getHREF(formName, curParam, i, jsCall, url, urlAnchor) %>" target="<%= target %>"><u><%= i %></u></a>
-		</c:otherwise>
-	</c:choose>
-
-<%
-	if (i == pageEnd) {
-		out.print("&nbsp;");
+			<%= jsCall %>;
+		}
 	}
-}
-%>
+</script>
 
-<c:choose>
-	<c:when test="<%= curValue == pages %>">
-		<span class="portlet-msg-error">&raquo;&raquo;</span>
-	</c:when>
-	<c:otherwise>
-		<a class="portlet-msg-error" href="<%= _getHREF(formName, curParam, curValue + 1, jsCall, url, urlAnchor) %>" target="<%= target %>">&raquo;&raquo;</a>
-	</c:otherwise>
-</c:choose>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>
+		<span class="font-small">
+
+		<%= LanguageUtil.get(pageContext, "page") %>
+
+		<input class="form-text" id="<%= namespace %>page-iterator-value" size="1" type="text" value="<%= curValue %>" onKeyPress="if (event.keyCode == 13) { <%= namespace %>submitPageIterator(); return false; }">
+
+		<%= LanguageUtil.get(pageContext, "of") %>
+
+		<%= pages %>
+
+		<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "go") %>" onClick="<%= namespace %>submitPageIterator();">
+
+		</span>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<span class="font-small">
+
+		<c:if test="<%= curValue != 1 %>">
+			<a href="<%= _getHREF(formName, curParam, curValue - 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
+		</c:if>
+
+		<%= LanguageUtil.get(pageContext, "previous") %>
+
+		<c:if test="<%= curValue != 1 %>">
+			</a>
+		</c:if>
+
+		&nbsp;|&nbsp;
+
+		<c:if test="<%= curValue != pages %>">
+			<a href="<%= _getHREF(formName, curParam, curValue + 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
+		</c:if>
+
+		<%= LanguageUtil.get(pageContext, "next") %>
+
+		<c:if test="<%= curValue != pages %>">
+			</a>
+		</c:if>
+
+		&nbsp;|&nbsp;
+
+		<c:if test="<%= curValue != 1 %>">
+			<a href="<%= _getHREF(formName, curParam, 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
+		</c:if>
+
+		<%= LanguageUtil.get(pageContext, "first") %>
+
+		<c:if test="<%= curValue != 1 %>">
+			</a>
+		</c:if>
+
+		&nbsp;|&nbsp;
+
+		<c:if test="<%= curValue != pages %>">
+			<a href="<%= _getHREF(formName, curParam, pages, jsCall, url, urlAnchor) %>" target="<%= target %>">
+		</c:if>
+
+		<%= LanguageUtil.get(pageContext, "last") %>
+
+		<c:if test="<%= curValue != pages %>">
+			</a>
+		</c:if>
+
+		</span>
+	</td>
+</tr>
+</table>
 
 <%!
 private String _getHREF(String formName, String curParam, int curValue, String jsCall, String url, String urlAnchor) throws Exception {
