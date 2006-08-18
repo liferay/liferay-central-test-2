@@ -1123,8 +1123,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 			MBMessageProducer.produce(
 				new String[] {
-					message.getCompanyId(), message.getThreadId(), fromName,
-					fromAddress, subject, body
+					message.getCompanyId(), message.getUserId(),
+					message.getThreadId(), fromName, fromAddress, subject, body
 				});
 		}
 		catch (IOException ioe) {

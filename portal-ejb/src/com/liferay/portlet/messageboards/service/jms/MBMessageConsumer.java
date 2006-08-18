@@ -91,17 +91,22 @@ public class MBMessageConsumer implements MessageListener {
 
 	private void _onMessage(String[] array) throws Exception {
 		String companyId = array[0];
-		String threadId = array[1];
-		String fromName = array[2];
-		String fromAddress = array[3];
-		String subject = array[4];
-		String body = array[5];
+		String userId = array[1];
+		String threadId = array[2];
+		String fromName = array[3];
+		String fromAddress = array[4];
+		String subject = array[5];
+		String body = array[6];
 
 		List subscriptions = SubscriptionLocalServiceUtil.getSubscriptions(
 			companyId, MBThread.class.getName(), threadId);
 
 		for (int i = 0; i < subscriptions.size(); i++) {
 			Subscription subscription = (Subscription)subscriptions.get(i);
+
+			if (subscription.getUserId().equals(userId)) {
+				return;
+			}
 
 			User user = UserLocalServiceUtil.getUserById(
 				subscription.getUserId());
