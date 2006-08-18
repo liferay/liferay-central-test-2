@@ -538,6 +538,34 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 
 <br>
 
+<%
+String[] ccTypes = shoppingPrefs.getCcTypes();
+
+if (shoppingPrefs.usePayPal()) {
+%>
+
+	<img src="<%= themeDisplay.getPathThemeImage() %>/shopping/cc_paypal.gif">
+
+	<br><br>
+
+<%
+}
+else if (!shoppingPrefs.usePayPal() && (ccTypes.length > 0)) {
+	for (int i = 0; i < ccTypes.length; i++) {
+%>
+
+		<img src="<%= themeDisplay.getPathThemeImage() %>/shopping/cc_<%= ccTypes[i] %>.gif">
+
+<%
+	}
+%>
+
+	<br><br>
+
+<%
+}
+%>
+
 <input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-cart") %>' onClick="<portlet:namespace />updateCart();">
 
 <input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "empty-cart") %>' onClick="<portlet:namespace />emptyCart();">
