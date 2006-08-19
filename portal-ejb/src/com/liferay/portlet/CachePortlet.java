@@ -95,7 +95,7 @@ public class CachePortlet implements Portlet {
 	}
 
 	public static Map getResponses(PortletSession ses) {
-		return getResponses(((PortletSessionImpl)ses).getSession());
+		return getResponses(((PortletSessionImpl)ses).getHttpSession());
 	}
 
 	public CachePortlet(Portlet portlet, PortletContext portletCtx,

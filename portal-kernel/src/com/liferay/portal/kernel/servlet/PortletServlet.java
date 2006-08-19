@@ -24,6 +24,7 @@ package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.LiferayPortletSession;
 
 import java.io.IOException;
 
@@ -68,6 +69,11 @@ public class PortletServlet extends HttpServlet {
 			(PortletResponse)req.getAttribute(JAVAX_PORTLET_RESPONSE);
 
 		Portlet portlet = (Portlet)req.getAttribute(JAVAX_PORTLET_PORTLET);
+
+		LiferayPortletSession portletSes =
+			(LiferayPortletSession)portletReq.getPortletSession();
+
+		portletSes.setHttpSession(req.getSession());
 
 		try {
 			if (portletReq instanceof ActionRequest) {
