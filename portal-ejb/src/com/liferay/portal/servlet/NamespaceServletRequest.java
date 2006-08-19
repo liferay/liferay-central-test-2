@@ -27,6 +27,10 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.servlet.DynamicServletRequest;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -71,18 +75,20 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		return value;
 	}
 
-	public String getParameter(String name) {
-		if (name == null) {
-			throw new IllegalArgumentException();
+	public Enumeration getAttributeNames() {
+		List names = new ArrayList();
+
+		Enumeration enu = super.getAttributeNames();
+
+		while (enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+
+			if (name.startsWith(_namespace)) {
+				names.add(name.substring(_namespace.length(), name.length()));
+			}
 		}
 
-		String value = super.getParameter(name);
-
-		if (value == null) {
-			value = super.getParameter(_namespace + name);
-		}
-
-		return value;
+		return Collections.enumeration(names);
 	}
 
 	public void setAttribute(String name, Object value) {
@@ -103,6 +109,29 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		else {
 			setAttribute(name, value);
 		}
+	}
+
+	public void removeAttribute(String name) {
+		if (reservedParams.contains(name)) {
+			super.removeAttribute(name);
+		}
+		else {
+			super.removeAttribute(_namespace + name);
+		}
+	}
+
+	public String getParameter(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException();
+		}
+
+		String value = super.getParameter(name);
+
+		if (value == null) {
+			value = super.getParameter(_namespace + name);
+		}
+
+		return value;
 	}
 
 	private String _portletName;
