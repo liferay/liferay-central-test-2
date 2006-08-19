@@ -129,6 +129,8 @@
 		</java>
 
 		<antcall target="build-lang-native2ascii-all" />
+
+		<copy file="classes/content/Language.properties" tofile="classes/content/Language_en.properties" />
 	</target>
 
 	<target name="build-lang-native2ascii">
