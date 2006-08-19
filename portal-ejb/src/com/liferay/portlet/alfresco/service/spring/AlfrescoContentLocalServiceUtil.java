@@ -35,4 +35,11 @@ public class AlfrescoContentLocalServiceUtil {
 
 		return alfrescoContentLocalService.getNodes(uuid);
 	}
+
+	public static java.lang.String getContent(java.lang.String uuid)
+		throws com.liferay.portal.PortalException {
+		AlfrescoContentLocalService alfrescoContentLocalService = AlfrescoContentLocalServiceFactory.getService();
+
+		return alfrescoContentLocalService.getContent(uuid);
+	}
 }

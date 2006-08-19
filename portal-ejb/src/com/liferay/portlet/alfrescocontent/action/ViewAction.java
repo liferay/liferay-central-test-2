@@ -24,6 +24,7 @@ package com.liferay.portlet.alfrescocontent.action;
 
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.alfresco.service.spring.AlfrescoContentLocalServiceUtil;
 import com.liferay.portlet.alfrescocontent.util.AlfrescoContentUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
@@ -55,23 +56,25 @@ public class ViewAction extends PortletAction {
 		PortletPreferences prefs = req.getPreferences();
 
 		String baseURL = prefs.getValue("base-url", StringPool.BLANK);
-		String indexURL = prefs.getValue("index-url", StringPool.BLANK);
+		String contentUuid = prefs.getValue("content-uuid", StringPool.BLANK);
 		String userId = prefs.getValue("user-id", StringPool.BLANK);
 		String password = prefs.getValue("password", StringPool.BLANK);
 		boolean maximizeLinks = GetterUtil.getBoolean(
 			prefs.getValue("maximize-links", StringPool.BLANK));
 
-		String url = baseURL + "/" + ParamUtil.getString(req, "url", indexURL);
-
+//		String url = baseURL + "/" + ParamUtil.getString(req, "url", indexURL);
+//
 		String previewURL = ParamUtil.getString(req, "previewURL");
+//
+//		if (Validator.isNotNull(previewURL)) {
+//			url = previewURL;
+//		}
 
-		if (Validator.isNotNull(previewURL)) {
-			url = previewURL;
-		}
+//		String content = AlfrescoContentUtil.getContent(
+//			url, userId, password, maximizeLinks, res);
 
-		String content = AlfrescoContentUtil.getContent(
-			url, userId, password, maximizeLinks, res);
-
+		String content = AlfrescoContentLocalServiceUtil.getContent(contentUuid);
+		
 		req.setAttribute(WebKeys.ALFRESCO_CONTENT, content);
 
 		if (Validator.isNull(previewURL)) {

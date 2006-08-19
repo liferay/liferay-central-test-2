@@ -31,4 +31,7 @@ package com.liferay.portlet.alfresco.service.spring;
 public interface AlfrescoContentLocalService {
 	public org.alfresco.webservice.types.ResultSetRow[] getNodes(
 		java.lang.String uuid) throws com.liferay.portal.PortalException;
+
+	public java.lang.String getContent(java.lang.String uuid)
+		throws com.liferay.portal.PortalException;
 }

@@ -24,8 +24,9 @@ package com.liferay.portlet.alfrescocontent.util;
 
 import com.liferay.util.Validator;
 
+import java.io.InputStream;
 import java.net.URL;
-
+import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,6 +34,9 @@ import javax.portlet.PortletURL;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
+import org.alfresco.webservice.content.Content;
+import org.alfresco.webservice.types.NamedValue;
+import org.alfresco.webservice.util.WebServiceException;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
@@ -43,19 +47,18 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="AlfrescoContentUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author  Brian Wing Shun Chan
- * @author  Raymond Auge
- *
+ * 
+ * @author Brian Wing Shun Chan
+ * @author Raymond Auge
+ * 
  */
 public class AlfrescoContentUtil {
 
-	public static String getContent(
-		String url, String userId, String password, boolean maximizeLinks,
-		RenderResponse res) {
+	public static String getContent(String url, String userId, String password,
+		boolean maximizeLinks, RenderResponse res) {
 
-		if (Validator.isNull(url) || Validator.isNull(userId) ||
-			Validator.isNull(password)) {
+		if (Validator.isNull(url) || Validator.isNull(userId)
+			|| Validator.isNull(password)) {
 
 			return null;
 		}
@@ -70,8 +73,8 @@ public class AlfrescoContentUtil {
 			URL urlObj = new URL(url);
 
 			client.getState().setCredentials(
-				new AuthScope(
-					urlObj.getHost(), urlObj.getPort(), AuthScope.ANY_REALM),
+				new AuthScope(urlObj.getHost(), urlObj.getPort(),
+					AuthScope.ANY_REALM),
 				new UsernamePasswordCredentials(userId, password));
 
 			method.setDoAuthentication(true);
@@ -94,8 +97,8 @@ public class AlfrescoContentUtil {
 		return _formatContent(content, maximizeLinks, res);
 	}
 
-	private static String _formatContent(
-		String content, boolean maximizeLinks, RenderResponse res) {
+	private static String _formatContent(String content, boolean maximizeLinks,
+		RenderResponse res) {
 
 		content = content.replaceAll("%28", "(");
 		content = content.replaceAll("%29", ")");
@@ -128,6 +131,51 @@ public class AlfrescoContentUtil {
 		m.appendTail(sb);
 
 		return sb.toString();
+	}
+
+	public static String getNamedValue(NamedValue[] namedValues, String name) {
+		String value = null;
+
+		for (int j = 0; j < namedValues.length; j++) {
+			if (namedValues[j].getName().endsWith(name)) {
+				value = namedValues[j].getValue();
+			}
+		}
+
+		return value;
+	}
+
+	public static String getContentAsString(Content content) {
+
+		StringBuilder readContent = new StringBuilder();
+		try {
+			AuthenticationUtils.startSession("admin", "admin");
+			
+			String ticket = AuthenticationUtils.getCurrentTicket();
+			String strUrl = content.getUrl() + "?ticket=" + ticket;
+
+			URL url = new URL(strUrl);
+			URLConnection conn = url.openConnection();
+			InputStream is = conn.getInputStream();
+			int read = is.read();
+			while (read != -1) {
+				readContent.append((char) read);
+				read = is.read();
+			}
+		}
+		catch (Exception e) {
+			throw new WebServiceException("Unable to get content as string.",
+				e);
+		}
+		finally {
+			try {
+				AuthenticationUtils.endSession();
+			}
+			catch (Exception e) {
+				throw new WebServiceException("Unable to close session.", e);
+			}
+		}
+		return readContent.toString();
 	}
 
 	private static Log _log = LogFactory.getLog(AlfrescoContentUtil.class);

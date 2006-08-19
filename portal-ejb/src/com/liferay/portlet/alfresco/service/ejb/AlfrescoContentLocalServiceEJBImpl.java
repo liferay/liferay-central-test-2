@@ -54,6 +54,11 @@ public class AlfrescoContentLocalServiceEJBImpl
 		return getService().getNodes(uuid);
 	}
 
+	public java.lang.String getContent(java.lang.String uuid)
+		throws com.liferay.portal.PortalException {
+		return getService().getContent(uuid);
+	}
+
 	public void ejbCreate() throws CreateException {
 	}
 

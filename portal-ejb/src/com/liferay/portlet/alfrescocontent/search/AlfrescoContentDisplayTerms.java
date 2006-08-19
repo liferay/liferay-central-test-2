@@ -35,14 +35,11 @@ import javax.portlet.RenderRequest;
  */
 public class AlfrescoContentDisplayTerms extends DisplayTerms {
 
-	public static String UUID = "uuid";
-	
 	public static String NAME = "name";
 
 	public AlfrescoContentDisplayTerms(RenderRequest req) {
 		super(req);
 		
-		uuid = ParamUtil.getString(req, UUID);
 		name = ParamUtil.getString(req, NAME);
 	}
 
@@ -54,16 +51,6 @@ public class AlfrescoContentDisplayTerms extends DisplayTerms {
 		this.name = name;
 	}
 	
-	public String getUuid() {
-		return uuid;
-	}
-	
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
-
-	protected String uuid;
 	protected String name;
-
 
 }

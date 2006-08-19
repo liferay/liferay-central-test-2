@@ -30,38 +30,6 @@
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "base-url") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<input class="form-text" name="<portlet:namespace />baseURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= baseURL %>">
-	</td>
-</tr>
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "index-url") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<input class="form-text" name="<portlet:namespace />indexURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= indexURL %>">
-	</td>
-</tr>
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "node-id") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<input class="form-text" name="<portlet:namespace />nodeId" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= nodeId %>">
-	</td>
-</tr>
-<tr>
-	<td colspan="3">
-		<br>
-	</td>
-</tr>
-<tr>
-	<td>
 		<%= LanguageUtil.get(pageContext, "user-id") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
@@ -98,13 +66,10 @@
 
 <input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
 
-</form>
-
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />uuid" type="hidden" value="">
+<input name="<portlet:namespace />apaceUuid" type="hidden" value="">
+<input name="<portlet:namespace />contentUuid" type="hidden" value="">
 
 <%
 DynamicRenderRequest dynamicRenderReq = new DynamicRenderRequest(renderRequest);
@@ -119,7 +84,9 @@ AlfrescoContentSearch searchContainer = new AlfrescoContentSearch(dynamicRenderR
 </c:if>
 
 <%
-ResultSetRow[] resultSetRows = AlfrescoContentLocalServiceUtil.getNodes(null);
+String uuid = ParamUtil.getString(renderRequest, "spaceUuid");
+
+ResultSetRow[] resultSetRows = AlfrescoContentLocalServiceUtil.getNodes(uuid);
 
 int total = resultSetRows.length;
 
@@ -142,40 +109,49 @@ for (int i = 0; i < results.size(); i++) {
 	
 	ResultRow row = new ResultRow(node, node.getId(), i);
 
+    NamedValue namedValues[] = resultSetRow.getColumns();
+
 	StringBuffer sb = new StringBuffer();
 
-	sb.append("javascript: document.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("fm.");
-	sb.append(renderResponse.getNamespace());
-	sb.append(Constants.CMD);
-	sb.append(".value = '");
-	sb.append(Constants.UPDATE);
-	sb.append("'; document.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("fm.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("uuid.value = '");
-	sb.append(node.getId());
-	sb.append("'; submitForm(document.");
+	sb.append("javascript: ");
+
+	String propContent = AlfrescoContentUtil.getNamedValue(namedValues, org.alfresco.webservice.util.Constants.PROP_CONTENT);
+	
+	if (propContent != null) {
+		sb.append("document.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("fm.");
+		sb.append(renderResponse.getNamespace());
+		sb.append(Constants.CMD);
+		sb.append(".value = '");
+		sb.append(Constants.UPDATE);
+		sb.append("'; ");
+		sb.append("document.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("fm.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("contentUuid.value = '");
+		sb.append(node.getId());
+		sb.append("'; ");
+	}
+	else {
+		sb.append("document.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("fm.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("spaceUuid.value = '");
+		sb.append(node.getId());
+		sb.append("'; ");
+	}
+	sb.append("submitForm(document.");
 	sb.append(renderResponse.getNamespace());
 	sb.append("fm);");
 
 	String rowHREF = sb.toString();
 
-	// Content Uuid
-
-	row.addText(node.getId(), rowHREF);
-
 	// Name
-	
-    NamedValue namedValues[] = resultSetRow.getColumns();
-    
-	for (int j = 0; j < namedValues.length; j++) {
-		if (namedValues[j].getName().endsWith(org.alfresco.webservice.util.Constants.PROP_NAME)) {
-			row.addText(namedValues[j].getValue(), rowHREF);
-		}
-	}
+	    
+	row.addText(AlfrescoContentUtil.getNamedValue(namedValues, org.alfresco.webservice.util.Constants.PROP_NAME), rowHREF);
 
 	// Add result row
 

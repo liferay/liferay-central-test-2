@@ -60,15 +60,9 @@ public class AlfrescoContentSearch extends SearchContainer {
 			  DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
 			  EMPTY_RESULTS_MESSAGE);
 
-		PortletConfig portletConfig =
-			(PortletConfig)req.getAttribute(WebKeys.JAVAX_PORTLET_CONFIG);
-
 		AlfrescoContentDisplayTerms displayTerms =
 			(AlfrescoContentDisplayTerms)getDisplayTerms();
-		AlfrescoContentSearchTerms searchTerms = (AlfrescoContentSearchTerms)getSearchTerms();
 
-		iteratorURL.setParameter(
-			AlfrescoContentDisplayTerms.UUID, displayTerms.getUuid());
 		iteratorURL.setParameter(
 			AlfrescoContentDisplayTerms.NAME, displayTerms.getName());
 	}

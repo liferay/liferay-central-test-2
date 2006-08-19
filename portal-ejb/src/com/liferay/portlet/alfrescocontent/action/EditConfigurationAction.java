@@ -38,7 +38,6 @@ import javax.portlet.RenderResponse;
 import org.alfresco.webservice.repository.QueryResult;
 import org.alfresco.webservice.repository.RepositoryServiceSoapBindingStub;
 import org.alfresco.webservice.types.NamedValue;
-import org.alfresco.webservice.types.Predicate;
 import org.alfresco.webservice.types.Reference;
 import org.alfresco.webservice.types.ResultSetRow;
 import org.alfresco.webservice.types.Store;
@@ -53,6 +52,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditConfigurationAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
+ * @author  Michael Young
  *
  */
 public class EditConfigurationAction extends PortletAction {
@@ -70,9 +70,8 @@ public class EditConfigurationAction extends PortletAction {
 		}
 
 		String baseURL = ParamUtil.getString(req, "baseURL");
-		String indexURL = ParamUtil.getString(req, "indexURL");
-		String nodeId = ParamUtil.getString(req, "nodeId");
 		String userId = ParamUtil.getString(req, "userId");
+		String contentUuid = ParamUtil.getString(req, "contentUuid");
 		String password = ParamUtil.getString(req, "password");
 		boolean maximizeLinks = ParamUtil.getBoolean(req, "maximizeLinks");
 
@@ -84,9 +83,8 @@ public class EditConfigurationAction extends PortletAction {
 				req, portletResource, true, true);
 
 		prefs.setValue("base-url", baseURL);
-		prefs.setValue("index-url", indexURL);
-		prefs.setValue("node-id", nodeId);
 		prefs.setValue("user-id", userId);
+		prefs.setValue("content-uuid", contentUuid);
 		prefs.setValue("password", password);
 		prefs.setValue("maximize-links", Boolean.toString(maximizeLinks));
 

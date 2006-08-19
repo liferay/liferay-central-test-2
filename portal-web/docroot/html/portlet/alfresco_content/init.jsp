@@ -26,6 +26,7 @@
 
 --%><%@ page import="com.liferay.portlet.alfrescocontent.search.AlfrescoContentSearch" %><%--
 --%><%@ page import="com.liferay.portlet.alfrescocontent.search.AlfrescoContentSearchTerms" %><%--
+--%><%@ page import="com.liferay.portlet.alfrescocontent.util.AlfrescoContentUtil" %><%--
 --%><%@ page import="com.liferay.portlet.alfresco.service.spring.AlfrescoContentLocalServiceUtil" %><%--
 --%><%@ page import="org.alfresco.webservice.types.NamedValue" %><%--
 --%><%@ page import="org.alfresco.webservice.types.ResultSetRow" %><%--
