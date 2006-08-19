@@ -30,6 +30,7 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.servlet.SharedSessionWrapper;
 
+import java.io.BufferedReader;
 import java.io.UnsupportedEncodingException;
 
 import java.util.Enumeration;
@@ -38,6 +39,7 @@ import java.util.Map;
 
 import javax.portlet.PortletRequest;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
@@ -87,21 +89,24 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 				else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_PATH_INFO)) {
 					retVal = _pathInfo;
 				}
-				else if (name
-					.equals(WebKeys.JAVAX_SERVLET_INCLUDE_QUERY_STRING)) {
+				else if (name.equals(
+							WebKeys.JAVAX_SERVLET_INCLUDE_QUERY_STRING)) {
+
 					retVal = _queryString;
 				}
 				else if (name.equals(
-					WebKeys.JAVAX_SERVLET_INCLUDE_REQUEST_URI)) {
+							WebKeys.JAVAX_SERVLET_INCLUDE_REQUEST_URI)) {
+
 					retVal = _requestURI;
 				}
 				else if (name.equals(
-					WebKeys.JAVAX_SERVLET_INCLUDE_SERVLET_PATH)) {
+							WebKeys.JAVAX_SERVLET_INCLUDE_SERVLET_PATH)) {
+
 					retVal = _servletPath;
 				}
 			}
 
-			if (name.startsWith("javax.servlet.include.") && retVal == null) {
+			if (name.startsWith("javax.servlet.include.") && (retVal == null)) {
 				retVal = StringPool.BLANK;
 			}
 		}
@@ -109,12 +114,28 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		return retVal;
 	}
 
-	public void setCharacterEncoding(String env)
+	public String getCharacterEncoding() {
+		return null;
+	}
+
+	public void setCharacterEncoding(String encoding)
 		throws UnsupportedEncodingException {
+	}
+
+	public int getContentLength() {
+		return 0;
+	}
+
+	public String getContentType() {
+		return null;
 	}
 
 	public String getContextPath() {
 		return _portletRequest.getContextPath();
+	}
+
+	public ServletInputStream getInputStream() {
+		return null;
 	}
 
 	public Locale getLocale() {
@@ -129,12 +150,36 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		return _pathInfo;
 	}
 
+	public String getProtocol() {
+		return null;
+	}
+
 	public String getQueryString() {
 		return _queryString;
 	}
 
+	public BufferedReader getReader() {
+		return null;
+	}
+
+	public String getRealPath(String path) {
+		return null;
+	}
+
+	public String getRemoteAddr() {
+		return null;
+	}
+
+	public String getRemoteHost() {
+		return null;
+	}
+
 	public String getRequestURI() {
 		return _requestURI;
+	}
+
+	public StringBuffer getRequestURL() {
+		return null;
 	}
 
 	public String getServletPath() {
