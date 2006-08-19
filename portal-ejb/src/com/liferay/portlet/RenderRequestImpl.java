@@ -133,12 +133,12 @@ public class RenderRequestImpl implements RenderRequest {
 			return _ses;
 		}*/
 
-		if ((_ses == null) && create) {
+		/*if ((_ses == null) && create) {
 			_req.getSession(create);
 
 			_ses = new PortletSessionImpl(
 				_req, _portletName, _portletCtx, _portalSessionId, _plid);
-		}
+		}*/
 
 		return _ses;
 	}

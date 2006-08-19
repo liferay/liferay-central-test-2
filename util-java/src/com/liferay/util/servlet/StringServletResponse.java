@@ -111,6 +111,14 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		return _pw;
 	}
 
+	public int getBufferSize() {
+		return _bufferSize;
+	}
+
+	public void setBufferSize(int size) {
+		_bufferSize = size;
+	}
+
 	public void resetBuffer() {
 		if (_callGetOutputStream) {
 			_baos.reset();
@@ -140,6 +148,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	private int _status = SC_OK;
 	private StringWriter _sw = new StringWriter();
 	private PrintWriter _pw = new PrintWriter(_sw);
+	private int _bufferSize;
 	private boolean _callGetOutputStream;
 	private boolean _callGetWriter;
 
