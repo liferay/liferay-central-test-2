@@ -34,6 +34,7 @@
 	<classpathentry kind="lib" path="lib/global/portal-kernel.jar"/>
 	<classpathentry kind="lib" path="lib/global/portlet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/activemq.jar"/>
+	<classpathentry kind="lib" path="lib/portal/alfresco-client.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ant.jar"/>
 	<classpathentry kind="lib" path="lib/portal/antlr.jar"/>
 	<classpathentry kind="lib" path="lib/portal/aopalliance.jar"/>
@@ -122,7 +123,7 @@
 	<classpathentry kind="lib" path="lib/portal/util-wsrp.jar"/>
 	<classpathentry kind="lib" path="lib/portal/velocity.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wbmp.jar"/>
-	<classpathentry kind="lib" path="lib/portal/web-service-client.jar"/>
+	<classpathentry kind="lib" path="lib/portal/webdav-servlet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wsdl4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wss4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xalan.jar"/>

@@ -83,6 +83,7 @@ Tapestry 4.0.2
 TextMining 0.4
 Trove 1.1b4
 Velocity 1.4
+WebDAV Servlet 1.2
 WSDL4J 1.5.1
 WSRP4J 0.3
 WSS4J 1.0.0
