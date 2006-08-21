@@ -122,6 +122,11 @@
 			<param name="module.name" value="sample-portal-client-portlet" />
 		</antcall>
 
+		<copy
+			file="sample-spring-portlet.war"
+			tofile="../sample-spring-portlet-${lp.version.file.name}.war"
+		/>
+
 		<antcall target="war-module">
 			<param name="module.name" value="sample-struts-portlet" />
 		</antcall>
@@ -169,6 +174,23 @@
 			destfile="../${module.name}-${lp.version.file.name}.war"
 			excludes="WEB-INF/web.xml*"
 			webxml="${module.name}.war/WEB-INF/web.xml"
+		/>
+	</target>
+
+	<target name="war-sample-spring-portlet">
+
+		<!--
+		Download Spring Portlet MVC from
+		http://opensource.atlassian.com/confluence/spring/display/JSR168/Home.
+
+		Add additional Liferay XML to help categorize the sample portlets for
+		better user experience.
+		-->
+
+		<jar
+			basedir="sample-spring-portlet.war.ext"
+			destfile="sample-spring-portlet.war"
+			update="yes"
 		/>
 	</target>
 
