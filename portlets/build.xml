@@ -180,7 +180,7 @@
 	<target name="war-sample-spring-portlet">
 
 		<!--
-		Download Spring Portlet MVC from
+		Download Spring Portlet MVC 2.0 M4 from
 		http://opensource.atlassian.com/confluence/spring/display/JSR168/Home.
 
 		Add additional Liferay XML to help categorize the sample portlets for
