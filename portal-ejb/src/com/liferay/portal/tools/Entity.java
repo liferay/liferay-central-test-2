@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.util.GetterUtil;
 import com.liferay.util.TextFormatter;
 
 import java.util.List;
@@ -46,13 +47,14 @@ public class Entity {
 
 	public Entity(String name) {
 		this(null, null, null, name, null, false, true, null, null, null, null,
-			 null, null, null, null);
+			 null, null, null, null, null, null);
 	}
 
 	public Entity(String packagePath, String portletName,
 				  String portletShortName, String name, String table,
 				  boolean localService, boolean remoteService,
-				  String persistenceClass, List pkList, List regularColList,
+				  String persistenceClass, String dataSource,
+				  String sessionFactory, List pkList, List regularColList,
 				  List collectionList, List columnList, EntityOrder order,
 				  List finderList, List referenceList) {
 
@@ -64,6 +66,9 @@ public class Entity {
 		_localService = localService;
 		_remoteService = remoteService;
 		_persistenceClass = persistenceClass;
+		_dataSource = GetterUtil.getString(dataSource, "liferayDataSource");
+		_sessionFactory = GetterUtil.getString(
+			sessionFactory, "liferaySessionFactory");
 		_pkList = pkList;
 		_regularColList = regularColList;
 		_collectionList = collectionList;
@@ -115,6 +120,14 @@ public class Entity {
 
 	public String getPersistenceClass() {
 		return _persistenceClass;
+	}
+
+	public String getDataSource() {
+		return _dataSource;
+	}
+
+	public String getSessionFactory() {
+		return _sessionFactory;
 	}
 
 	public String getPKClassName() {
@@ -233,6 +246,8 @@ public class Entity {
 	private boolean _localService;
 	private boolean _remoteService;
 	private String _persistenceClass;
+	private String _dataSource;
+	private String _sessionFactory;
 	private List _pkList;
 	private List _regularColList;
 	private List _collectionList;

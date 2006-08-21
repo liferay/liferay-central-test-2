@@ -393,6 +393,9 @@ public class ServiceBuilder {
 					entityEl.attributeValue("persistence-class"),
 					_packagePath + ".service.persistence."+ ejbName +
 						"Persistence");
+				String dataSource = entityEl.attributeValue("data-source");
+				String sessionFactory = entityEl.attributeValue(
+					"session-factory");
 
 				Iterator itr2 = null;
 
@@ -585,8 +588,9 @@ public class ServiceBuilder {
 					new Entity(
 						_packagePath, _portletName, _portletShortName, ejbName,
 						table, localService, remoteService, persistenceClass,
-						pkList, regularColList, collectionList, columnList,
-						order, finderList, referenceList));
+						dataSource, sessionFactory, pkList, regularColList,
+						collectionList, columnList, order, finderList,
+						referenceList));
 			}
 
 			List exceptionList = new ArrayList();
@@ -4661,10 +4665,10 @@ public class ServiceBuilder {
 		if (entity.hasColumns()) {
 			sb.append("\t<bean id=\"" + _packagePath + ".service.persistence." + entity.getName() + "Persistence\" class=\"" + entity.getPersistenceClass() + "\" lazy-init=\"true\">\n");
 			sb.append("\t\t<property name=\"dataSource\">\n");
-			sb.append("\t\t\t<ref bean=\"liferayDataSource\" />\n");
+			sb.append("\t\t\t<ref bean=\"" + entity.getDataSource() + "\" />\n");
 			sb.append("\t\t</property>\n");
 			sb.append("\t\t<property name=\"sessionFactory\">\n");
-			sb.append("\t\t\t<ref bean=\"liferaySessionFactory\" />\n");
+			sb.append("\t\t\t<ref bean=\"" + entity.getSessionFactory() + "\" />\n");
 			sb.append("\t\t</property>\n");
 			sb.append("\t</bean>\n");
 
