@@ -98,7 +98,11 @@ public class RuntimeTag extends TagSupport {
 			pageContext.getOut().print(renderPortletSB.toString());
 		}
 		else {
-			res.getOutputStream().print(renderPortletSB.toString());
+
+			// See LEP-1023
+
+			//res.getOutputStream().print(renderPortletSB.toString());
+			res.getWriter().print(renderPortletSB.toString());
 		}
 	}
 
