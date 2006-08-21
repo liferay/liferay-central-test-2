@@ -39,12 +39,19 @@
 							<%
 							try {
 								User user2 = UserLocalServiceUtil.getUserById(message.getUserId());
+								Organization organization = user2.getOrganization();
 								int posts = MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId, message.getUserId()).getMessageCount();
 								String rank = MBUtil.getRank(portletSetup, posts);
 							%>
 
 								<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= message.getUserId() %>" style="margin:10px 0px; width:75%;"><br>
 
+								<c:if test="<%= Validator.isNotNull(organization.getOrganizationId()) %>">
+									<%= LanguageUtil.get(pageContext, "organization") %>: <%= organization.getName() %>
+									
+									<br><br>
+								</c:if>
+								
 								<%= LanguageUtil.get(pageContext, "rank") %>: <%= rank %><br>
 								<%= LanguageUtil.get(pageContext, "posts") %>: <%= posts %><br>
 								<%= LanguageUtil.get(pageContext, "joined") %>: <%= dateFormatDate.format(user2.getCreateDate()) %>
