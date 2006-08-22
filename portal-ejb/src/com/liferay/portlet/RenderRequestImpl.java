@@ -24,6 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.RoleLocalServiceUtil;
 import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
@@ -185,7 +186,24 @@ public class RenderRequestImpl implements RenderRequest {
 	}
 
 	public boolean isUserInRole(String role) {
-		return _req.isUserInRole(role);
+		String remoteUser = _req.getRemoteUser();
+
+		if (remoteUser == null) {
+			return false;
+		}
+		else {
+			String companyId = PortalUtil.getCompanyId(_req);
+
+			try {
+				return RoleLocalServiceUtil.hasUserRole(
+					remoteUser, companyId, role);
+			}
+			catch (Exception e) {
+				_log.warn(e);
+			}
+
+			return _req.isUserInRole(role);
+		}
 	}
 
 	public Object getAttribute(String name) {
