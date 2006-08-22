@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.alfrescocontent.util;
 
+import com.liferay.util.Validator;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -61,6 +63,10 @@ public class AlfrescoContentUtil {
 				StringBuffer nodePathSB = new StringBuffer("/app:company_home");
 				
 				for (int i = 0; i < rawPath.length; i++) {
+					if (Validator.isNull(rawPath[i])) {
+						continue;
+					}
+					
 					nodePathSB.append("/cm:").append(rawPath[i]);
 				}
 				

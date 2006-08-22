@@ -36,7 +36,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="ContentSearch.java.html"><b><i>View Source</i></b></a>
+ * <a href="AlfrescoContentSearch.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Michael Young
  *

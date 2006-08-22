@@ -42,7 +42,7 @@ if (Validator.isNotNull(portletResource)) {
 }
 
 String alfrescoWebClientURL = prefs.getValue("alfresco-web-client-url", StringPool.BLANK);
-String nodeId = prefs.getValue("node-id", StringPool.BLANK);
+String nodeUuid = prefs.getValue("node-uuid", StringPool.BLANK);
 String userId = prefs.getValue("user-id", StringPool.BLANK);
 String password = prefs.getValue("password", StringPool.BLANK);
 boolean maximizeLinks = GetterUtil.getBoolean(prefs.getValue("maximize-links", StringPool.BLANK));

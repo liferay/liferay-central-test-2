@@ -72,7 +72,7 @@ public class EditConfigurationAction extends PortletAction {
 
 		String alfrescoWebClientURL = ParamUtil.getString(req, "alfrescoWebClientURL");
 		String userId = ParamUtil.getString(req, "userId");
-		String contentUuid = ParamUtil.getString(req, "contentUuid");
+		String nodeUuid = ParamUtil.getString(req, "nodeUuid");
 		String password = ParamUtil.getString(req, "password");
 		boolean maximizeLinks = ParamUtil.getBoolean(req, "maximizeLinks");
 
@@ -83,7 +83,7 @@ public class EditConfigurationAction extends PortletAction {
 
 		prefs.setValue("alfresco-web-client-url", alfrescoWebClientURL);
 		prefs.setValue("user-id", userId);
-		prefs.setValue("content-uuid", contentUuid);
+		prefs.setValue("node-uuid", nodeUuid);
 		prefs.setValue("password", password);
 		prefs.setValue("maximize-links", Boolean.toString(maximizeLinks));
 

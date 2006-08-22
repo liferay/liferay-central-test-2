@@ -42,38 +42,48 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * <a href="ViewAction.java.html"><b><i>View Source</i></b></a>
- *
- * @author  Brian Wing Shun Chan
- *
+ * 
+ * @author Brian Wing Shun Chan
+ * 
  */
 public class ViewAction extends PortletAction {
 
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+	public ActionForward render(ActionMapping mapping, ActionForm form,
+		PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
 		PortletPreferences prefs = req.getPreferences();
 
-		String alfrescoWebClientURL = prefs.getValue("alfresco-web-client-url", StringPool.BLANK);
-		String contentUuid = prefs.getValue("content-uuid", StringPool.BLANK);
+		String alfrescoWebClientURL = prefs.getValue("alfresco-web-client-url",
+			StringPool.BLANK);
+		String nodeUuid = prefs.getValue("node-uuid", StringPool.BLANK);
 		String userId = prefs.getValue("user-id", StringPool.BLANK);
 		String password = prefs.getValue("password", StringPool.BLANK);
-		boolean maximizeLinks = GetterUtil.getBoolean(
-			prefs.getValue("maximize-links", StringPool.BLANK));
+		boolean maximizeLinks = GetterUtil.getBoolean(prefs.getValue(
+			"maximize-links", StringPool.BLANK));
 
-//		String url = baseURL + "/" + ParamUtil.getString(req, "url", indexURL);
-//
 		String previewURL = ParamUtil.getString(req, "previewURL");
-//
-//		if (Validator.isNotNull(previewURL)) {
-//			url = previewURL;
-//		}
+		
+		// if (Validator.isNotNull(previewURL)) {
+		// url = previewURL;
+		// }
 
-		String content = AlfrescoContentLocalServiceUtil.getContent(contentUuid, null, alfrescoWebClientURL, userId, password);
+		String nodePath = ParamUtil.getString(req, "nodePath");
+
+		String content = null;
 		
-		content = AlfrescoContentUtil.formatContent(content, maximizeLinks, res);
-		
+		if (Validator.isNotNull(nodePath)) {
+			content = AlfrescoContentLocalServiceUtil.getContent(null,
+				nodePath, alfrescoWebClientURL, userId, password);
+		}
+		else if (Validator.isNotNull(nodeUuid)) {
+			content = AlfrescoContentLocalServiceUtil.getContent(nodeUuid,
+				null, alfrescoWebClientURL, userId, password);			
+		}
+
+		content = AlfrescoContentUtil
+			.formatContent(content, maximizeLinks, res);
+
 		req.setAttribute(WebKeys.ALFRESCO_CONTENT, content);
 
 		if (Validator.isNull(previewURL)) {

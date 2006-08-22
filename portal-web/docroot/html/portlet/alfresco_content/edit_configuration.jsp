@@ -84,6 +84,7 @@
 
 <input name="<portlet:namespace />apaceUuid" type="hidden" value="">
 <input name="<portlet:namespace />contentUuid" type="hidden" value="">
+<input name="<portlet:namespace />nodeUuid" type="hidden" value="">
 
 <%
 DynamicRenderRequest dynamicRenderReq = new DynamicRenderRequest(renderRequest);
@@ -150,7 +151,7 @@ for (int i = 0; i < results.size(); i++) {
 		sb.append(renderResponse.getNamespace());
 		sb.append("fm.");
 		sb.append(renderResponse.getNamespace());
-		sb.append("contentUuid.value = '");
+		sb.append("nodeUuid.value = '");
 		sb.append(node.getId());
 		sb.append("'; ");
 	}
