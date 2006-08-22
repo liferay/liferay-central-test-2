@@ -90,7 +90,7 @@ public class AuthenticationUtils implements CallbackHandler {
 		if (ticket != null) {
 			try {
 				WebServiceFactory.getAuthenticationService(alfrescoWebClientURL).endSession(ticket);
-				currentTicket.remove();
+				//currentTicket.remove(); FIX ME for JDK 1.4
 			}
 			catch (RemoteException exception) {
 				exception.printStackTrace();

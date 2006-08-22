@@ -42,8 +42,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class AlfrescoContentUtil {
 
-	public static String formatContent(String content, boolean maximizeLinks,
-		RenderResponse res) {
+	public static String formatContent(
+		String content, boolean maximizeLinks, RenderResponse res) {
 
 		content = content.replaceAll("%28", "(");
 		content = content.replaceAll("%29", ")");
@@ -52,36 +52,37 @@ public class AlfrescoContentUtil {
 
 		Matcher m = p.matcher(content);
 
-		StringBuffer portletURLSb = new StringBuffer();
+		StringBuffer portletURLSB = new StringBuffer();
 
 		try {
 			while (m.find()) {
 				String rawPath[] = m.group(1).split("/");
 				
-				StringBuffer nodePathSb = new StringBuffer("/app:company_home");
+				StringBuffer nodePathSB = new StringBuffer("/app:company_home");
 				
 				for (int i = 0; i < rawPath.length; i++) {
-					nodePathSb.append("/cm:").append(rawPath[i]);
+					nodePathSB.append("/cm:").append(rawPath[i]);
 				}
 				
 				PortletURL portletURL = res.createRenderURL();
 
-				portletURL.setParameter("nodePath", nodePathSb.toString());
+				portletURL.setParameter("nodePath", nodePathSB.toString());
 
 				if (maximizeLinks) {
 					portletURL.setWindowState(WindowState.MAXIMIZED);
 				}
 
-				m.appendReplacement(portletURLSb, "\"" + portletURL.toString() + "\"");
+				m.appendReplacement(
+					portletURLSB, "\"" + portletURL.toString() + "\"");
 			}
 		}
 		catch (Exception e) {
 			_log.error(e);
 		}
 
-		m.appendTail(portletURLSb);
+		m.appendTail(portletURLSB);
 
-		return portletURLSb.toString();
+		return portletURLSB.toString();
 	}
 
 	public static String getNamedValue(NamedValue[] namedValues, String name) {

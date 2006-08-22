@@ -54,9 +54,9 @@ public class AlfrescoContentSearch extends SearchContainer {
 		"no-alfresco-content-was-found";
 
 	public AlfrescoContentSearch(RenderRequest req, PortletURL iteratorURL) {
-		super(req, new AlfrescoContentDisplayTerms(req), new AlfrescoContentSearchTerms(req),
-			  DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
-			  EMPTY_RESULTS_MESSAGE);
+		super(req, new AlfrescoContentDisplayTerms(req),
+			  new AlfrescoContentSearchTerms(req), DEFAULT_CUR_PARAM,
+			  DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		AlfrescoContentDisplayTerms displayTerms =
 			(AlfrescoContentDisplayTerms)getDisplayTerms();

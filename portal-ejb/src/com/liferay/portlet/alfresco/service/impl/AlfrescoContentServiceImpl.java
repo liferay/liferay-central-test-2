@@ -32,6 +32,7 @@ import com.liferay.portlet.alfresco.service.spring.AlfrescoContentService;
  * @author  Brian Wing Shun Chan
  *
  */
-public class AlfrescoContentServiceImpl extends PrincipalBean
-	implements AlfrescoContentService {
+public class AlfrescoContentServiceImpl
+	extends PrincipalBean implements AlfrescoContentService {
+
 }

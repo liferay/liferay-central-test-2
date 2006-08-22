@@ -61,73 +61,38 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="AlfrescoContentLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="AlfrescoContentLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  * 
  * @author Michael Young
  * 
  */
-public class AlfrescoContentLocalServiceImpl implements
-	AlfrescoContentLocalService {
+public class AlfrescoContentLocalServiceImpl
+	implements AlfrescoContentLocalService {
 
-	public ResultSetRow[] getNodes(String uuid, String alfrescoWebClientURL,
-		String userId, String password) throws PortalException {
-		ResultSetRow[] rows = null;
-
-		try {
-			AuthenticationUtils.startSession(alfrescoWebClientURL, userId, password);
-
-			RepositoryServiceSoapBindingStub repositoryService = WebServiceFactory
-				.getRepositoryService(alfrescoWebClientURL);
-
-			Reference reference = null;
-
-			if (Validator.isNull(uuid)) {
-				reference = new Reference(_SPACES_STORE, null,
-					_COMPANY_HOME_PATH);
-			}
-			else {
-				reference = new Reference(_SPACES_STORE, uuid, null);
-			}
-
-			QueryResult result = repositoryService.queryChildren(reference);
-
-			rows = result.getResultSet().getRows();
-		}
-		catch (Throwable e) {
-			throw new PortalException(e);
-		}
-		finally {
-			try {
-				AuthenticationUtils.endSession(alfrescoWebClientURL);
-			}
-			catch (Throwable e) {
-				throw new PortalException(e);
-			}
-		}
-
-		return rows;
-	}
-
-	public String getContent(String uuid, String path,
-		String alfrescoWebClientURL, String userId, String password)
+	public String getContent(
+			String uuid, String path, String alfrescoWebClientURL,
+			String userId, String password)
 		throws PortalException {
+
 		String content = null;
 
 		try {
-			AuthenticationUtils.startSession(alfrescoWebClientURL, userId, password);
+			AuthenticationUtils.startSession(
+				alfrescoWebClientURL, userId, password);
 
-			ContentServiceSoapBindingStub contentService = WebServiceFactory
-				.getContentService(alfrescoWebClientURL);
+			ContentServiceSoapBindingStub contentService =
+				WebServiceFactory.getContentService(alfrescoWebClientURL);
 
 			Reference reference = new Reference(_SPACES_STORE, uuid, path);
 
-			Predicate predicate = new Predicate(new Reference[] { reference },
-				_SPACES_STORE, null);
+			Predicate predicate = new Predicate(
+				new Reference[] {reference}, _SPACES_STORE, null);
 
-			Content[] readResult = contentService.read(predicate,
-				Constants.PROP_CONTENT);
+			Content[] readResult = contentService.read(
+				predicate, Constants.PROP_CONTENT);
 
-			content = _getContent(readResult[0]);
+			content = getContent(readResult[0]);
 		}
 		catch (Throwable e) {
 			throw new PortalException(e);
@@ -145,30 +110,77 @@ public class AlfrescoContentLocalServiceImpl implements
 
 	}
 
-	public String _getContent(Content content) throws Exception {
+	public ResultSetRow[] getNodes(
+			String uuid, String alfrescoWebClientURL, String userId,
+			String password)
+		throws PortalException {
 
-		StringBuilder readContent = new StringBuilder();
+		ResultSetRow[] rows = null;
+
+		try {
+			AuthenticationUtils.startSession(
+				alfrescoWebClientURL, userId, password);
+
+			RepositoryServiceSoapBindingStub repositoryService =
+				WebServiceFactory.getRepositoryService(alfrescoWebClientURL);
+
+			Reference reference = null;
+
+			if (Validator.isNull(uuid)) {
+				reference = new Reference(
+					_SPACES_STORE, null, _COMPANY_HOME_PATH);
+			}
+			else {
+				reference = new Reference(_SPACES_STORE, uuid, null);
+			}
+
+			QueryResult result = repositoryService.queryChildren(reference);
+
+			rows = result.getResultSet().getRows();
+		}
+		catch (Exception e) {
+			throw new PortalException(e);
+		}
+		finally {
+			try {
+				AuthenticationUtils.endSession(alfrescoWebClientURL);
+			}
+			catch (Exception e) {
+				throw new PortalException(e);
+			}
+		}
+
+		return rows;
+	}
+
+	protected String getContent(Content content) throws Exception {
+		StringBuffer sb = new StringBuffer();
 
 		String ticket = AuthenticationUtils.getCurrentTicket();
-		String strUrl = content.getUrl() + "?ticket=" + ticket;
 
-		URL url = new URL(strUrl);
+		URL url = new URL(content.getUrl() + "?ticket=" + ticket);
+
 		URLConnection conn = url.openConnection();
+
 		InputStream is = conn.getInputStream();
+
 		int read = is.read();
+
 		while (read != -1) {
-			readContent.append((char) read);
+			sb.append((char)read);
+
 			read = is.read();
 		}
 
-		return readContent.toString();
+		return sb.toString();
 	}
 
-	private static final Store _SPACES_STORE = new Store(StoreEnum.workspace,
-		"SpacesStore");
+	private static final Store _SPACES_STORE =
+		new Store(StoreEnum.workspace, "SpacesStore");
 
 	private static final String _COMPANY_HOME_PATH = "/app:company_home";
 
-	private static Log _log = LogFactory
-		.getLog(AlfrescoContentLocalServiceImpl.class);
+	private static Log _log =
+		LogFactory.getLog(AlfrescoContentLocalServiceImpl.class);
+
 }

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.alfrescocontent.search;
 
+import com.liferay.util.dao.DAOParamUtil;
+
 import javax.portlet.RenderRequest;
 
 /**
@@ -34,6 +36,8 @@ public class AlfrescoContentSearchTerms extends AlfrescoContentDisplayTerms {
 
 	public AlfrescoContentSearchTerms(RenderRequest req) {
 		super(req);
+
+		name = DAOParamUtil.getLike(req, NAME);
 	}
 
 }

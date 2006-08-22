@@ -29,17 +29,13 @@ package com.liferay.portlet.alfresco.service.spring;
  *
  */
 public interface AlfrescoContentLocalService {
-	public org.alfresco.webservice.types.ResultSetRow[] getNodes(
-		java.lang.String uuid, java.lang.String alfrescoWebClientURL,
-		java.lang.String userId, java.lang.String password)
-		throws com.liferay.portal.PortalException;
-
 	public java.lang.String getContent(java.lang.String uuid,
 		java.lang.String path, java.lang.String alfrescoWebClientURL,
 		java.lang.String userId, java.lang.String password)
 		throws com.liferay.portal.PortalException;
 
-	public java.lang.String _getContent(
-		org.alfresco.webservice.content.Content content)
-		throws java.lang.Exception;
+	public org.alfresco.webservice.types.ResultSetRow[] getNodes(
+		java.lang.String uuid, java.lang.String alfrescoWebClientURL,
+		java.lang.String userId, java.lang.String password)
+		throws com.liferay.portal.PortalException;
 }

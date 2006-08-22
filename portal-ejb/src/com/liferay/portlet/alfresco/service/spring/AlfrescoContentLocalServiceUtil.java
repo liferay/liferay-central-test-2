@@ -29,16 +29,6 @@ package com.liferay.portlet.alfresco.service.spring;
  *
  */
 public class AlfrescoContentLocalServiceUtil {
-	public static org.alfresco.webservice.types.ResultSetRow[] getNodes(
-		java.lang.String uuid, java.lang.String alfrescoWebClientURL,
-		java.lang.String userId, java.lang.String password)
-		throws com.liferay.portal.PortalException {
-		AlfrescoContentLocalService alfrescoContentLocalService = AlfrescoContentLocalServiceFactory.getService();
-
-		return alfrescoContentLocalService.getNodes(uuid, alfrescoWebClientURL,
-			userId, password);
-	}
-
 	public static java.lang.String getContent(java.lang.String uuid,
 		java.lang.String path, java.lang.String alfrescoWebClientURL,
 		java.lang.String userId, java.lang.String password)
@@ -49,11 +39,13 @@ public class AlfrescoContentLocalServiceUtil {
 			alfrescoWebClientURL, userId, password);
 	}
 
-	public static java.lang.String _getContent(
-		org.alfresco.webservice.content.Content content)
-		throws java.lang.Exception {
+	public static org.alfresco.webservice.types.ResultSetRow[] getNodes(
+		java.lang.String uuid, java.lang.String alfrescoWebClientURL,
+		java.lang.String userId, java.lang.String password)
+		throws com.liferay.portal.PortalException {
 		AlfrescoContentLocalService alfrescoContentLocalService = AlfrescoContentLocalServiceFactory.getService();
 
-		return alfrescoContentLocalService._getContent(content);
+		return alfrescoContentLocalService.getNodes(uuid, alfrescoWebClientURL,
+			userId, password);
 	}
 }
