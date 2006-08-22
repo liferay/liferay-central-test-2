@@ -128,11 +128,11 @@ public final class WebServiceFactory {
 
 	private static Log logger = LogFactory.getLog(WebServiceFactory.class);
 
-	private static final String _AUTHENTICATION_SERVICE_ADDRESS = "/alfresco/api/AuthenticationService";
+	private static final String _AUTHENTICATION_SERVICE_ADDRESS = "/api/AuthenticationService";
 
-	private static final String _REPOSITORY_SERVICE_ADDRESS = "/alfresco/api/RepositoryService";
+	private static final String _REPOSITORY_SERVICE_ADDRESS = "/api/RepositoryService";
 
-	private static final String _CONTENT_SERVICE_ADDRESS = "/alfresco/api/ContentService";
+	private static final String _CONTENT_SERVICE_ADDRESS = "/api/ContentService";
 
 	private static AuthenticationServiceSoapBindingStub _AUTHENTICATION_SERVICE = null;
 

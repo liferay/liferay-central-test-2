@@ -92,7 +92,7 @@ public class AlfrescoContentLocalServiceImpl
 			Content[] readResult = contentService.read(
 				predicate, Constants.PROP_CONTENT);
 
-			content = getContent(readResult[0]);
+			content = getContent(readResult[0]);	
 		}
 		catch (Throwable e) {
 			throw new PortalException(e);

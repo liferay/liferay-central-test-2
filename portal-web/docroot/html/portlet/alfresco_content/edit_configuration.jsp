@@ -82,9 +82,8 @@
 
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
 
-<input name="<portlet:namespace />apaceUuid" type="hidden" value="">
-<input name="<portlet:namespace />contentUuid" type="hidden" value="">
-<input name="<portlet:namespace />nodeUuid" type="hidden" value="">
+<input name="<portlet:namespace />spaceUuid" type="hidden" value="">
+<input name="<portlet:namespace />nodeUuid" type="hidden" value="<%= nodeUuid %>">
 
 <%
 DynamicRenderRequest dynamicRenderReq = new DynamicRenderRequest(renderRequest);
