@@ -61,6 +61,11 @@ public class AuthenticationUtils implements CallbackHandler {
 	 */
 	public static void startSession(String alfrescoWebClientURL,
 		String username, String password) throws AuthenticationFault {
+		
+		if (currentTicket.get() != null) {
+			return;
+		}
+		
 		try {
 			// Start the session
 			AuthenticationResult result = WebServiceFactory

@@ -70,7 +70,8 @@ public class EditConfigurationAction extends PortletAction {
 			return;
 		}
 
-		String alfrescoWebClientURL = ParamUtil.getString(req, "alfrescoWebClientURL");
+		String alfrescoWebClientURL = ParamUtil.getString(req,
+			"alfrescoWebClientURL");
 		String userId = ParamUtil.getString(req, "userId");
 		String nodeUuid = ParamUtil.getString(req, "nodeUuid");
 		String password = ParamUtil.getString(req, "password");
@@ -129,7 +130,8 @@ public class EditConfigurationAction extends PortletAction {
 			}
 
 			String content = new AlfrescoContentLocalServiceImpl().getContent(
-				null, "/app:company_home/cm:test", "http://localhost", "admin", "admin");
+				null, "/app:company_home/cm:test", "http://localhost", "admin",
+				"admin");
 			System.out.println(content);
 		}
 		catch (Throwable e) {

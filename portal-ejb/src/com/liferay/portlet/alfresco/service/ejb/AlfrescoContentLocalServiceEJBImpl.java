@@ -57,12 +57,18 @@ public class AlfrescoContentLocalServiceEJBImpl
 			userId, password);
 	}
 
-	public org.alfresco.webservice.types.ResultSetRow[] getNodes(
+	public org.alfresco.webservice.types.ResultSetRow[] getChildNodes(
 		java.lang.String uuid, java.lang.String alfrescoWebClientURL,
 		java.lang.String userId, java.lang.String password)
 		throws com.liferay.portal.PortalException {
-		return getService().getNodes(uuid, alfrescoWebClientURL, userId,
+		return getService().getChildNodes(uuid, alfrescoWebClientURL, userId,
 			password);
+	}
+
+	public org.alfresco.webservice.types.Node getNode(java.lang.String uuid,
+		java.lang.String alfrescoWebClientURL, java.lang.String userId,
+		java.lang.String password) throws com.liferay.portal.PortalException {
+		return getService().getNode(uuid, alfrescoWebClientURL, userId, password);
 	}
 
 	public void ejbCreate() throws CreateException {

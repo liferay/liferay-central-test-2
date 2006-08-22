@@ -34,8 +34,12 @@ public interface AlfrescoContentLocalService {
 		java.lang.String userId, java.lang.String password)
 		throws com.liferay.portal.PortalException;
 
-	public org.alfresco.webservice.types.ResultSetRow[] getNodes(
+	public org.alfresco.webservice.types.ResultSetRow[] getChildNodes(
 		java.lang.String uuid, java.lang.String alfrescoWebClientURL,
 		java.lang.String userId, java.lang.String password)
 		throws com.liferay.portal.PortalException;
+
+	public org.alfresco.webservice.types.Node getNode(java.lang.String uuid,
+		java.lang.String alfrescoWebClientURL, java.lang.String userId,
+		java.lang.String password) throws com.liferay.portal.PortalException;
 }

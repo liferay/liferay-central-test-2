@@ -24,8 +24,6 @@ package com.liferay.portlet.alfresco.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portlet.alfresco.service.spring.AlfrescoContentLocalService;
-import com.liferay.portlet.alfrescocontent.search.AlfrescoContentSearch;
-import com.liferay.portlet.alfrescocontent.util.AlfrescoContentUtil;
 import com.liferay.portlet.alfrescocontent.util.AuthenticationUtils;
 import com.liferay.portlet.alfrescocontent.util.WebServiceFactory;
 import com.liferay.util.Validator;
@@ -33,30 +31,18 @@ import com.liferay.util.Validator;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.portlet.PortletURL;
-import javax.portlet.RenderResponse;
-import javax.portlet.WindowState;
 
 import org.alfresco.webservice.content.Content;
 import org.alfresco.webservice.content.ContentServiceSoapBindingStub;
 import org.alfresco.webservice.repository.QueryResult;
 import org.alfresco.webservice.repository.RepositoryServiceSoapBindingStub;
-import org.alfresco.webservice.types.NamedValue;
+import org.alfresco.webservice.types.Node;
 import org.alfresco.webservice.types.Predicate;
 import org.alfresco.webservice.types.Reference;
 import org.alfresco.webservice.types.ResultSetRow;
 import org.alfresco.webservice.types.Store;
 import org.alfresco.webservice.types.StoreEnum;
 import org.alfresco.webservice.util.Constants;
-import org.alfresco.webservice.util.WebServiceException;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.UsernamePasswordCredentials;
-import org.apache.commons.httpclient.auth.AuthScope;
-import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -67,32 +53,31 @@ import org.apache.commons.logging.LogFactory;
  * @author Michael Young
  * 
  */
-public class AlfrescoContentLocalServiceImpl
-	implements AlfrescoContentLocalService {
+public class AlfrescoContentLocalServiceImpl implements
+	AlfrescoContentLocalService {
 
-	public String getContent(
-			String uuid, String path, String alfrescoWebClientURL,
-			String userId, String password)
+	public String getContent(String uuid, String path,
+		String alfrescoWebClientURL, String userId, String password)
 		throws PortalException {
 
 		String content = null;
 
 		try {
-			AuthenticationUtils.startSession(
-				alfrescoWebClientURL, userId, password);
+			AuthenticationUtils.startSession(alfrescoWebClientURL, userId,
+				password);
 
-			ContentServiceSoapBindingStub contentService =
-				WebServiceFactory.getContentService(alfrescoWebClientURL);
+			ContentServiceSoapBindingStub contentService = WebServiceFactory
+				.getContentService(alfrescoWebClientURL);
 
 			Reference reference = new Reference(_SPACES_STORE, uuid, path);
 
-			Predicate predicate = new Predicate(
-				new Reference[] {reference}, _SPACES_STORE, null);
+			Predicate predicate = new Predicate(new Reference[] { reference },
+				_SPACES_STORE, null);
 
-			Content[] readResult = contentService.read(
-				predicate, Constants.PROP_CONTENT);
+			Content[] readResult = contentService.read(predicate,
+				Constants.PROP_CONTENT);
 
-			content = getContent(readResult[0]);	
+			content = getContent(readResult[0]);
 		}
 		catch (Throwable e) {
 			throw new PortalException(e);
@@ -110,25 +95,23 @@ public class AlfrescoContentLocalServiceImpl
 
 	}
 
-	public ResultSetRow[] getNodes(
-			String uuid, String alfrescoWebClientURL, String userId,
-			String password)
-		throws PortalException {
+	public ResultSetRow[] getChildNodes(String uuid, String alfrescoWebClientURL,
+		String userId, String password) throws PortalException {
 
 		ResultSetRow[] rows = null;
 
 		try {
-			AuthenticationUtils.startSession(
-				alfrescoWebClientURL, userId, password);
+			AuthenticationUtils.startSession(alfrescoWebClientURL, userId,
+				password);
 
-			RepositoryServiceSoapBindingStub repositoryService =
-				WebServiceFactory.getRepositoryService(alfrescoWebClientURL);
+			RepositoryServiceSoapBindingStub repositoryService = WebServiceFactory
+				.getRepositoryService(alfrescoWebClientURL);
 
 			Reference reference = null;
 
 			if (Validator.isNull(uuid)) {
-				reference = new Reference(
-					_SPACES_STORE, null, _COMPANY_HOME_PATH);
+				reference = new Reference(_SPACES_STORE, null,
+					_COMPANY_HOME_PATH);
 			}
 			else {
 				reference = new Reference(_SPACES_STORE, uuid, null);
@@ -153,6 +136,41 @@ public class AlfrescoContentLocalServiceImpl
 		return rows;
 	}
 
+	public Node getNode(String uuid, String alfrescoWebClientURL,
+		String userId, String password) throws PortalException {
+
+		Node[] nodes = null;
+
+		try {
+			AuthenticationUtils.startSession(alfrescoWebClientURL, userId,
+				password);
+
+			RepositoryServiceSoapBindingStub repositoryService = WebServiceFactory
+				.getRepositoryService(alfrescoWebClientURL);
+
+			Reference reference = new Reference(_SPACES_STORE, uuid, null);
+
+			Predicate predicate = new Predicate(new Reference[] { reference },
+				_SPACES_STORE, null);
+			
+			nodes = repositoryService.get(predicate);
+
+		}
+		catch (Exception e) {
+			throw new PortalException(e);
+		}
+		finally {
+			try {
+				AuthenticationUtils.endSession(alfrescoWebClientURL);
+			}
+			catch (Exception e) {
+				throw new PortalException(e);
+			}
+		}
+
+		return nodes[0];
+	}
+	
 	protected String getContent(Content content) throws Exception {
 		StringBuffer sb = new StringBuffer();
 
@@ -167,7 +185,7 @@ public class AlfrescoContentLocalServiceImpl
 		int read = is.read();
 
 		while (read != -1) {
-			sb.append((char)read);
+			sb.append((char) read);
 
 			read = is.read();
 		}
@@ -175,12 +193,12 @@ public class AlfrescoContentLocalServiceImpl
 		return sb.toString();
 	}
 
-	private static final Store _SPACES_STORE =
-		new Store(StoreEnum.workspace, "SpacesStore");
+	private static final Store _SPACES_STORE = new Store(StoreEnum.workspace,
+		"SpacesStore");
 
 	private static final String _COMPANY_HOME_PATH = "/app:company_home";
 
-	private static Log _log =
-		LogFactory.getLog(AlfrescoContentLocalServiceImpl.class);
+	private static Log _log = LogFactory
+		.getLog(AlfrescoContentLocalServiceImpl.class);
 
 }

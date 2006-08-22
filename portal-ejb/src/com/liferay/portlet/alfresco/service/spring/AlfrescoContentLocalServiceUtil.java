@@ -39,13 +39,23 @@ public class AlfrescoContentLocalServiceUtil {
 			alfrescoWebClientURL, userId, password);
 	}
 
-	public static org.alfresco.webservice.types.ResultSetRow[] getNodes(
+	public static org.alfresco.webservice.types.ResultSetRow[] getChildNodes(
 		java.lang.String uuid, java.lang.String alfrescoWebClientURL,
 		java.lang.String userId, java.lang.String password)
 		throws com.liferay.portal.PortalException {
 		AlfrescoContentLocalService alfrescoContentLocalService = AlfrescoContentLocalServiceFactory.getService();
 
-		return alfrescoContentLocalService.getNodes(uuid, alfrescoWebClientURL,
+		return alfrescoContentLocalService.getChildNodes(uuid,
+			alfrescoWebClientURL, userId, password);
+	}
+
+	public static org.alfresco.webservice.types.Node getNode(
+		java.lang.String uuid, java.lang.String alfrescoWebClientURL,
+		java.lang.String userId, java.lang.String password)
+		throws com.liferay.portal.PortalException {
+		AlfrescoContentLocalService alfrescoContentLocalService = AlfrescoContentLocalServiceFactory.getService();
+
+		return alfrescoContentLocalService.getNode(uuid, alfrescoWebClientURL,
 			userId, password);
 	}
 }
