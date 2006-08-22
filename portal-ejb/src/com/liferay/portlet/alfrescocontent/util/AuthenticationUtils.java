@@ -59,12 +59,12 @@ public class AuthenticationUtils implements CallbackHandler {
 	 * @param password
 	 * @throws AuthenticationFault
 	 */
-	public static void startSession(String username, String password)
-		throws AuthenticationFault {
+	public static void startSession(String alfrescoWebClientURL,
+		String username, String password) throws AuthenticationFault {
 		try {
 			// Start the session
 			AuthenticationResult result = WebServiceFactory
-				.getAuthenticationService().startSession(username, password);
+				.getAuthenticationService(alfrescoWebClientURL).startSession(username, password);
 
 			// Store the ticket for use later
 			currentTicket.set(result.getTicket());
@@ -85,11 +85,11 @@ public class AuthenticationUtils implements CallbackHandler {
 	/**
 	 * Ends the current session
 	 */
-	public static void endSession() {
-		String ticket = (String)currentTicket.get();
+	public static void endSession(String alfrescoWebClientURL) {
+		String ticket = (String) currentTicket.get();
 		if (ticket != null) {
 			try {
-				WebServiceFactory.getAuthenticationService().endSession(ticket);
+				WebServiceFactory.getAuthenticationService(alfrescoWebClientURL).endSession(ticket);
 				currentTicket.remove();
 			}
 			catch (RemoteException exception) {
@@ -101,7 +101,7 @@ public class AuthenticationUtils implements CallbackHandler {
 	}
 
 	public static String getCurrentTicket() {
-		return (String)currentTicket.get();
+		return (String) currentTicket.get();
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class AuthenticationUtils implements CallbackHandler {
 		for (int i = 0; i < callbacks.length; i++) {
 			if (callbacks[i] instanceof WSPasswordCallback) {
 				WSPasswordCallback pc = (WSPasswordCallback) callbacks[i];
-				pc.setPassword((String)currentTicket.get());
+				pc.setPassword((String) currentTicket.get());
 			}
 			else {
 				throw new UnsupportedCallbackException(callbacks[i],

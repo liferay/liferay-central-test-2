@@ -53,6 +53,20 @@
 </tr>
 <tr>
 	<td>
+		<%= LanguageUtil.get(pageContext, "alfresco-web-client-url") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<input class="form-text" name="<portlet:namespace />alfrescoWebClientURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= alfrescoWebClientURL %>">
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<br>
+	</td>
+</tr>
+<tr>
+	<td>
 		<%= LanguageUtil.get(pageContext, "maximize-links") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
@@ -84,9 +98,15 @@ AlfrescoContentSearch searchContainer = new AlfrescoContentSearch(dynamicRenderR
 </c:if>
 
 <%
-String uuid = ParamUtil.getString(renderRequest, "spaceUuid");
+String spaceUuid = ParamUtil.getString(renderRequest, "spaceUuid");
 
-ResultSetRow[] resultSetRows = AlfrescoContentLocalServiceUtil.getNodes(uuid);
+ResultSetRow[] resultSetRows = {};
+try {
+	resultSetRows = AlfrescoContentLocalServiceUtil.getNodes(spaceUuid, alfrescoWebClientURL, userId, password);
+}
+catch (Exception e) {
+e.printStackTrace();
+}
 
 int total = resultSetRows.length;
 

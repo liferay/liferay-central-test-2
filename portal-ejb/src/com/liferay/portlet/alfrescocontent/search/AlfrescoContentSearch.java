@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.alfrescocontent.search;
 
-import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.dao.search.SearchContainer;
 
@@ -30,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.portlet.PortletConfig;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 

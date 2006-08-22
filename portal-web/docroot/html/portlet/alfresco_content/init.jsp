@@ -41,8 +41,7 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
 }
 
-String baseURL = prefs.getValue("base-url", StringPool.BLANK);
-String indexURL = prefs.getValue("index-url", StringPool.BLANK);
+String alfrescoWebClientURL = prefs.getValue("alfresco-web-client-url", StringPool.BLANK);
 String nodeId = prefs.getValue("node-id", StringPool.BLANK);
 String userId = prefs.getValue("user-id", StringPool.BLANK);
 String password = prefs.getValue("password", StringPool.BLANK);
