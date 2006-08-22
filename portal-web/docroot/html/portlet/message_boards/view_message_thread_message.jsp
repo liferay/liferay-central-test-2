@@ -48,10 +48,10 @@
 
 								<c:if test="<%= Validator.isNotNull(organization.getOrganizationId()) %>">
 									<%= LanguageUtil.get(pageContext, "organization") %>: <%= organization.getName() %>
-									
+
 									<br><br>
 								</c:if>
-								
+
 								<%= LanguageUtil.get(pageContext, "rank") %>: <%= rank %><br>
 								<%= LanguageUtil.get(pageContext, "posts") %>: <%= posts %><br>
 								<%= LanguageUtil.get(pageContext, "joined") %>: <%= dateFormatDate.format(user2.getCreateDate()) %>
