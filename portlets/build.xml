@@ -136,6 +136,23 @@
 		</antcall>
 	</target>
 
+	<target name="war-alfresco-portlet">
+
+		<!--
+		Download Alfresco 1.3.0 from
+		http://www.sourceforge.net/projects/alfresco. Manually remove
+		portlet-api-lib.jar to resolve a class conflict.
+
+		Add the required portlet XML files to make it work.
+		-->
+
+		<jar
+			basedir="alfresco-portlet.war.ext"
+			destfile="alfresco-portlet.war"
+			update="yes"
+		/>
+	</target>
+
 	<target name="war-module">
 		<copy todir="${module.name}.war/WEB-INF/lib">
 			<fileset
