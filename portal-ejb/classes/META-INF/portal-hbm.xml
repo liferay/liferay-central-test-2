@@ -98,7 +98,7 @@
 		<property name="a2" />
 		<property name="a3" />
 		<property name="number" column="number_" />
-		<property name="idd" />
+		<property name="idd" column="idd_" />
 		<property name="active" column="active_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.portal.model.DataTracker" table="DataTracker">

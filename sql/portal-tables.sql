@@ -163,7 +163,7 @@ create table Country (
 	a2 VARCHAR(75) null,
 	a3 VARCHAR(75) null,
 	number_ VARCHAR(75) null,
-	idd VARCHAR(75) null,
+	idd_ VARCHAR(75) null,
 	active_ BOOLEAN
 );
 
