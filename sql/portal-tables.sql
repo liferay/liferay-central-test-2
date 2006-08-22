@@ -159,8 +159,11 @@ create table Counter (
 
 create table Country (
 	countryId VARCHAR(75) not null primary key,
-	countryCode VARCHAR(75) null,
 	name VARCHAR(75) null,
+	a2 VARCHAR(75) null,
+	a3 VARCHAR(75) null,
+	number_ VARCHAR(75) null,
+	idd VARCHAR(75) null,
 	active_ BOOLEAN
 );
 

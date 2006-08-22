@@ -94,8 +94,11 @@
 		<id name="countryId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="countryCode" />
 		<property name="name" />
+		<property name="a2" />
+		<property name="a3" />
+		<property name="number" column="number_" />
+		<property name="idd" />
 		<property name="active" column="active_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.portal.model.DataTracker" table="DataTracker">

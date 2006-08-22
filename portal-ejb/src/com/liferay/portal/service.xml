@@ -161,8 +161,11 @@
 
 		<!-- Other fields -->
 
-		<column name="countryCode" type="String" />
 		<column name="name" type="String" />
+		<column name="a2" type="String" />
+		<column name="a3" type="String" />
+		<column name="number" type="String" />
+		<column name="idd" type="String" />
 		<column name="active" type="boolean" />
 
 		<!-- Order -->

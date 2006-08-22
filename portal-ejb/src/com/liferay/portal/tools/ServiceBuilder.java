@@ -95,6 +95,7 @@ public class ServiceBuilder {
 		badCmpFields.add("alias");
 		badCmpFields.add("date");
 		badCmpFields.add("end");
+		badCmpFields.add("idd");
 		badCmpFields.add("featured");
 		badCmpFields.add("fields");
 		badCmpFields.add("from");

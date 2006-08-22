@@ -43,11 +43,20 @@ public class CountryModel extends BaseModel {
 	public static boolean XSS_ALLOW_COUNTRYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Country.countryId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COUNTRYCODE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Country.countryCode"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Country.name"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_A2 = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Country.a2"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_A3 = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Country.a3"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_NUMBER = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Country.number"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_IDD = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Country.idd"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.CountryModel"));
@@ -80,23 +89,6 @@ public class CountryModel extends BaseModel {
 		}
 	}
 
-	public String getCountryCode() {
-		return GetterUtil.getString(_countryCode);
-	}
-
-	public void setCountryCode(String countryCode) {
-		if (((countryCode == null) && (_countryCode != null)) ||
-				((countryCode != null) && (_countryCode == null)) ||
-				((countryCode != null) && (_countryCode != null) &&
-				!countryCode.equals(_countryCode))) {
-			if (!XSS_ALLOW_COUNTRYCODE) {
-				countryCode = XSSUtil.strip(countryCode);
-			}
-
-			_countryCode = countryCode;
-		}
-	}
-
 	public String getName() {
 		return GetterUtil.getString(_name);
 	}
@@ -110,6 +102,69 @@ public class CountryModel extends BaseModel {
 			}
 
 			_name = name;
+		}
+	}
+
+	public String getA2() {
+		return GetterUtil.getString(_a2);
+	}
+
+	public void setA2(String a2) {
+		if (((a2 == null) && (_a2 != null)) || ((a2 != null) && (_a2 == null)) ||
+				((a2 != null) && (_a2 != null) && !a2.equals(_a2))) {
+			if (!XSS_ALLOW_A2) {
+				a2 = XSSUtil.strip(a2);
+			}
+
+			_a2 = a2;
+		}
+	}
+
+	public String getA3() {
+		return GetterUtil.getString(_a3);
+	}
+
+	public void setA3(String a3) {
+		if (((a3 == null) && (_a3 != null)) || ((a3 != null) && (_a3 == null)) ||
+				((a3 != null) && (_a3 != null) && !a3.equals(_a3))) {
+			if (!XSS_ALLOW_A3) {
+				a3 = XSSUtil.strip(a3);
+			}
+
+			_a3 = a3;
+		}
+	}
+
+	public String getNumber() {
+		return GetterUtil.getString(_number);
+	}
+
+	public void setNumber(String number) {
+		if (((number == null) && (_number != null)) ||
+				((number != null) && (_number == null)) ||
+				((number != null) && (_number != null) &&
+				!number.equals(_number))) {
+			if (!XSS_ALLOW_NUMBER) {
+				number = XSSUtil.strip(number);
+			}
+
+			_number = number;
+		}
+	}
+
+	public String getIdd() {
+		return GetterUtil.getString(_idd);
+	}
+
+	public void setIdd(String idd) {
+		if (((idd == null) && (_idd != null)) ||
+				((idd != null) && (_idd == null)) ||
+				((idd != null) && (_idd != null) && !idd.equals(_idd))) {
+			if (!XSS_ALLOW_IDD) {
+				idd = XSSUtil.strip(idd);
+			}
+
+			_idd = idd;
 		}
 	}
 
@@ -130,8 +185,11 @@ public class CountryModel extends BaseModel {
 	public Object clone() {
 		Country clone = new Country();
 		clone.setCountryId(getCountryId());
-		clone.setCountryCode(getCountryCode());
 		clone.setName(getName());
+		clone.setA2(getA2());
+		clone.setA3(getA3());
+		clone.setNumber(getNumber());
+		clone.setIdd(getIdd());
 		clone.setActive(getActive());
 
 		return clone;
@@ -182,7 +240,10 @@ public class CountryModel extends BaseModel {
 	}
 
 	private String _countryId;
-	private String _countryCode;
 	private String _name;
+	private String _a2;
+	private String _a3;
+	private String _number;
+	private String _idd;
 	private boolean _active;
 }
