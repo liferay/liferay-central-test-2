@@ -24,6 +24,8 @@ package com.liferay.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -118,6 +120,22 @@ public class PropertiesUtil {
 
 			p1.setProperty(key, value);
 		}
+	}
+
+	public static void list(Map map, PrintStream out) {
+		Properties props = new Properties();
+
+		props.putAll(map);
+
+		props.list(out);
+	}
+
+	public static void list(Map map, PrintWriter out) {
+		Properties props = new Properties();
+
+		props.putAll(map);
+
+		props.list(out);
 	}
 
 	public static String toString(Properties p) {

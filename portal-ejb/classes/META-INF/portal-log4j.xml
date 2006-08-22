@@ -188,6 +188,10 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portal.webdav">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.wsrp">
 		<priority value="ERROR" />
 	</category>
@@ -202,14 +206,6 @@
 
 	<category name="com.liferay.portlet.admin.action.EditServerAction">
 		<priority value="INFO" />
-	</category>
-
-	<category name="com.liferay.portlet.chat">
-		<priority value="ERROR" />
-	</category>
-
-	<category name="com.liferay.portlet.jcvs">
-		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portlet.journal">

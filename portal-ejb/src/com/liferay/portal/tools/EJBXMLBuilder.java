@@ -519,6 +519,85 @@ public class EJBXMLBuilder {
 		}
 	}
 
+	private void _updateRemotingXML() throws Exception {
+		StringBuffer sb = new StringBuffer();
+
+		SAXReader reader = SAXReaderFactory.getInstance();
+
+		Document doc = reader.read(new File("classes/META-INF/ejb-jar.xml"));
+
+		Iterator itr = doc.getRootElement().element("enterprise-beans").elements("session").iterator();
+
+		while (itr.hasNext()) {
+			Element entity = (Element)itr.next();
+
+			String displayName = entity.elementText("display-name");
+
+			if (!displayName.endsWith("LocalServiceEJB") &&
+				!displayName.endsWith("RemoteServiceEJB")) {
+
+				String serviceMapping = entity.elementText("ejb-name");
+				serviceMapping = serviceMapping.substring(
+					0, serviceMapping.length() - 3);
+				serviceMapping = StringUtil.replace(
+					serviceMapping, "_service_ejb_", "_service_spring_");
+
+				String serviceName = entity.elementText("ejb-class");
+				serviceName = serviceName.substring(
+					0, serviceName.length() - 7);
+				serviceName = StringUtil.replace(
+					serviceName, ".service.ejb.", ".service.spring.");
+
+				sb.append("\t<bean name=\"/").append(serviceMapping).append("-burlap\" class=\"org.springframework.remoting.caucho.BurlapServiceExporter\">\n");
+				sb.append("\t\t<property name=\"service\" ref=\"").append(serviceName).append(".professional\" />\n");
+				sb.append("\t\t<property name=\"serviceInterface\" value=\"").append(serviceName).append("\" />\n");
+				sb.append("\t</bean>\n");
+
+				sb.append("\t<bean name=\"/").append(serviceMapping).append("-hessian\" class=\"org.springframework.remoting.caucho.HessianServiceExporter\">\n");
+				sb.append("\t\t<property name=\"service\" ref=\"").append(serviceName).append(".professional\" />\n");
+				sb.append("\t\t<property name=\"serviceInterface\" value=\"").append(serviceName).append("\" />\n");
+				sb.append("\t</bean>\n");
+
+				sb.append("\t<bean name=\"/").append(serviceMapping).append("-http\" class=\"org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter\">\n");
+				sb.append("\t\t<property name=\"service\" ref=\"").append(serviceName).append(".professional\" />\n");
+				sb.append("\t\t<property name=\"serviceInterface\" value=\"").append(serviceName).append("\" />\n");
+				sb.append("\t</bean>\n");
+			}
+		}
+
+		File outputFile = new File(
+			"../tunnel-web/docroot/WEB-INF/remoting-servlet.xml");
+		if (!outputFile.exists()) {
+			outputFile = new File(
+				"../ext-web/docroot/WEB-INF/remoting-servlet-ext.xml");
+		}
+
+		String content = FileUtil.read(outputFile);
+		String newContent = content;
+
+		int x = content.indexOf("<bean ");
+		int y = content.lastIndexOf("</bean>") + 8;
+
+		if (x != -1) {
+			newContent =
+				content.substring(0, x - 1) + sb.toString() +
+					content.substring(y, content.length());
+		}
+		else {
+			x = content.indexOf("</beans>");
+
+			newContent =
+				content.substring(0, x) + sb.toString() +
+					content.substring(x, content.length());
+		}
+
+		if (!content.equals(newContent)) {
+			FileUtil.write(outputFile, newContent);
+
+			System.out.println(outputFile.toString());
+		}
+	}
+
 	private void _updateWebXML() throws Exception {
 		StringBuffer sb = new StringBuffer();
 
@@ -609,10 +688,18 @@ public class EJBXMLBuilder {
 
 		// web.xml
 
-		File outputFile = new File("../portal-web/docroot/WEB-INF/web.xml");
+		_updateWebXML("../portal-web/docroot/WEB-INF/web.xml", sb);
+		_updateWebXML("../ext-web/docroot/WEB-INF/web.xml", sb);
+		_updateWebXML("../tunnel-web/docroot/WEB-INF/web.xml", sb);
+	}
+
+	private void _updateWebXML(String fileName, StringBuffer sb)
+		throws Exception {
+
+		File outputFile = new File(fileName);
 
 		if (!outputFile.exists()) {
-			outputFile = new File("../ext-web/docroot/WEB-INF/web.xml");
+			return;
 		}
 
 		String content = FileUtil.read(outputFile);
@@ -640,85 +727,6 @@ public class EJBXMLBuilder {
 		}
 		else {
 			x = content.indexOf("</web-app>");
-
-			newContent =
-				content.substring(0, x) + sb.toString() +
-					content.substring(x, content.length());
-		}
-
-		if (!content.equals(newContent)) {
-			FileUtil.write(outputFile, newContent);
-
-			System.out.println(outputFile.toString());
-		}
-	}
-
-	private void _updateRemotingXML() throws Exception {
-		StringBuffer sb = new StringBuffer();
-
-		SAXReader reader = SAXReaderFactory.getInstance();
-
-		Document doc = reader.read(new File("classes/META-INF/ejb-jar.xml"));
-
-		Iterator itr = doc.getRootElement().element("enterprise-beans").elements("session").iterator();
-
-		while (itr.hasNext()) {
-			Element entity = (Element)itr.next();
-
-			String displayName = entity.elementText("display-name");
-
-			if (!displayName.endsWith("LocalServiceEJB") &&
-				!displayName.endsWith("RemoteServiceEJB")) {
-
-				String serviceMapping = entity.elementText("ejb-name");
-				serviceMapping = serviceMapping.substring(
-					0, serviceMapping.length() - 3);
-				serviceMapping = StringUtil.replace(
-					serviceMapping, "_service_ejb_", "_service_spring_");
-
-				String serviceName = entity.elementText("ejb-class");
-				serviceName = serviceName.substring(
-					0, serviceName.length() - 7);
-				serviceName = StringUtil.replace(
-					serviceName, ".service.ejb.", ".service.spring.");
-
-				sb.append("\t<bean name=\"/").append(serviceMapping).append("-burlap\" class=\"org.springframework.remoting.caucho.BurlapServiceExporter\">\n");
-				sb.append("\t\t<property name=\"service\" ref=\"").append(serviceName).append(".professional\" />\n");
-				sb.append("\t\t<property name=\"serviceInterface\" value=\"").append(serviceName).append("\" />\n");
-				sb.append("\t</bean>\n");
-
-				sb.append("\t<bean name=\"/").append(serviceMapping).append("-hessian\" class=\"org.springframework.remoting.caucho.HessianServiceExporter\">\n");
-				sb.append("\t\t<property name=\"service\" ref=\"").append(serviceName).append(".professional\" />\n");
-				sb.append("\t\t<property name=\"serviceInterface\" value=\"").append(serviceName).append("\" />\n");
-				sb.append("\t</bean>\n");
-
-				sb.append("\t<bean name=\"/").append(serviceMapping).append("-http\" class=\"org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter\">\n");
-				sb.append("\t\t<property name=\"service\" ref=\"").append(serviceName).append(".professional\" />\n");
-				sb.append("\t\t<property name=\"serviceInterface\" value=\"").append(serviceName).append("\" />\n");
-				sb.append("\t</bean>\n");
-			}
-		}
-
-		File outputFile = new File(
-			"../tunnel-web/docroot/WEB-INF/remoting-servlet.xml");
-		if (!outputFile.exists()) {
-			outputFile = new File(
-				"../ext-web/docroot/WEB-INF/remoting-servlet-ext.xml");
-		}
-
-		String content = FileUtil.read(outputFile);
-		String newContent = content;
-
-		int x = content.indexOf("<bean ");
-		int y = content.lastIndexOf("</bean>") + 8;
-
-		if (x != -1) {
-			newContent =
-				content.substring(0, x - 1) + sb.toString() +
-					content.substring(y, content.length());
-		}
-		else {
-			x = content.indexOf("</beans>");
 
 			newContent =
 				content.substring(0, x) + sb.toString() +

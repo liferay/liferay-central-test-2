@@ -641,6 +641,7 @@ public class ShoppingUtil {
 		cart.setCartId(cartId);
 		cart.setGroupId(themeDisplay.getPortletGroupId());
 		cart.setCompanyId(themeDisplay.getCompanyId());
+		cart.setUserId(themeDisplay.getUserId());
 		cart.setItemIds(StringPool.BLANK);
 		cart.setCouponIds(StringPool.BLANK);
 		cart.setAltShipping(0);
