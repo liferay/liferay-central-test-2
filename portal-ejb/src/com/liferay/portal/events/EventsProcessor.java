@@ -36,6 +36,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="EventsProcessor.java.html"><b><i>View Source</i></b></a>
  *
@@ -104,6 +107,10 @@ public class EventsProcessor {
 			String className = classes[i];
 
 			if (Validator.isNotNull(className)) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Process event " + className);
+				}
+
 				if (single) {
 					synchronized (_processPool) {
 						if (_processPool.contains(className)) {
@@ -150,6 +157,8 @@ public class EventsProcessor {
 			}
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(EventsProcessor.class);
 
 	private static EventsProcessor _instance = new EventsProcessor();
 

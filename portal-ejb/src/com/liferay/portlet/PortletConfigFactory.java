@@ -54,6 +54,7 @@ public class PortletConfigFactory {
 
 	private PortletConfig _create(Portlet portlet, ServletContext ctx) {
 		String poolId = PortletConfigFactory.class.getName();
+
 		if (!portlet.isWARFile()) {
 			poolId += "." + portlet.getCompanyId();
 		}
@@ -93,6 +94,7 @@ public class PortletConfigFactory {
 
 	private void _destroy(Portlet portlet) {
 		String poolId = PortletConfigFactory.class.getName();
+
 		if (!portlet.isWARFile()) {
 			poolId += "." + portlet.getCompanyId();
 		}

@@ -40,6 +40,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.events.EventsProcessor">
+		<priority value="DEBUG" />
+	</category>
+
 	<category name="com.liferay.portal.events.GarbageCollectorAction">
 		<priority value="ERROR" />
 	</category>
@@ -145,7 +149,7 @@
 	</category>
 
 	<category name="com.liferay.portal.servlet.MainServlet">
-		<priority value="ERROR" />
+		<priority value="DEBUG" />
 	</category>
 
 	<category name="com.liferay.portal.servlet.PortalSessionListener">
