@@ -896,7 +896,6 @@ var Mail = {
 					var searchDown = true;
 					var lastSelected = Mail.lastSelected;
 					
-					alert(Mail.lastSelected.index + " > " + Mail.groupStart.index);
 					if (Mail.lastSelected.index > Mail.groupStart.index) {
 						searchDown = false;
 					}
