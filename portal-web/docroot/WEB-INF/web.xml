@@ -591,13 +591,6 @@
 		<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</ejb-link>
 	</ejb-ref>
 	<ejb-ref>
-		<ejb-ref-name>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentServiceEJB</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<home>com.liferay.portlet.alfresco.service.ejb.AlfrescoContentServiceHome</home>
-		<remote>com.liferay.portlet.alfresco.service.ejb.AlfrescoContentServiceEJB</remote>
-		<ejb-link>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentServiceEJB</ejb-link>
-	</ejb-ref>
-	<ejb-ref>
 		<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
 		<home>com.liferay.counter.service.ejb.CounterServiceHome</home>
@@ -1044,13 +1037,6 @@
 		<local-home>com.liferay.portlet.wiki.service.ejb.WikiPageLocalServiceHome</local-home>
 		<local>com.liferay.portlet.wiki.service.ejb.WikiPageLocalServiceEJB</local>
 		<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB</ejb-link>
-	</ejb-local-ref>
-	<ejb-local-ref>
-		<ejb-ref-name>ejb/liferay/AlfrescoContentLocalServiceHome</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<local-home>com.liferay.portlet.alfresco.service.ejb.AlfrescoContentLocalServiceHome</local-home>
-		<local>com.liferay.portlet.alfresco.service.ejb.AlfrescoContentLocalServiceEJB</local>
-		<ejb-link>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>

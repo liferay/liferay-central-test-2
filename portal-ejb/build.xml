@@ -278,12 +278,6 @@
 		</antcall>
 	</target>
 
-	<target name="build-service-portlet-alfresco">
-		<antcall target="build-service">
-			<param name="service.file" value="src/com/liferay/portlet/alfresco/service.xml" />
-		</antcall>
-	</target>
-
 	<target name="build-service-portlet-blogs">
 		<antcall target="build-service">
 			<param name="service.file" value="src/com/liferay/portlet/blogs/service.xml" />
@@ -351,7 +345,6 @@
 	</target>
 
 	<target name="build-service-portlets">
-		<antcall target="build-service-portlet-alfresco" />
 		<antcall target="build-service-portlet-blogs" />
 		<antcall target="build-service-portlet-bookmarks" />
 		<antcall target="build-service-portlet-calendar" />

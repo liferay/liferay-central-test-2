@@ -25,7 +25,6 @@ package com.liferay.portlet.alfrescocontent.action;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
-import com.liferay.portlet.alfresco.service.impl.AlfrescoContentLocalServiceImpl;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionMessages;
 
@@ -99,50 +98,6 @@ public class EditConfigurationAction extends PortletAction {
 
 		return mapping
 			.findForward("portlet.alfresco_content.edit_configuration");
-	}
-
-	public static void main(String args[]) throws Exception {
-
-		// Start the session
-		AuthenticationUtils.startSession("admin", "admin");
-		try {
-			RepositoryServiceSoapBindingStub repositoryService = WebServiceFactory
-				.getRepositoryService();
-
-			// Get a reference to the space we have named
-			Reference reference = new Reference(STORE, null,
-				"/app:company_home");
-			QueryResult result = repositoryService.queryChildren(reference);
-
-			ResultSetRow[] rows = result.getResultSet().getRows();
-
-			for (int i = 0; i < rows.length; i++) {
-				String nodeId = rows[i].getNode().getId();
-
-				System.out.println("Node ID: " + nodeId);
-
-				NamedValue namedValues[] = rows[i].getColumns();
-
-				for (int j = 0; j < namedValues.length; j++) {
-					System.out.println(namedValues[j].getName() + ": "
-						+ namedValues[j].getValue());
-				}
-			}
-
-			String content = new AlfrescoContentLocalServiceImpl().getContent(
-				null, "/app:company_home/cm:test", "http://localhost", "admin",
-				"admin");
-			System.out.println(content);
-		}
-		catch (Throwable e) {
-			System.out.println(e.toString());
-		}
-		finally {
-			// End the session
-			AuthenticationUtils.endSession();
-			System.exit(0);
-		}
-
 	}
 
 }

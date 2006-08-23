@@ -24,7 +24,6 @@ package com.liferay.portlet.alfrescocontent.action;
 
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.alfresco.service.spring.AlfrescoContentLocalServiceUtil;
 import com.liferay.portlet.alfrescocontent.util.AlfrescoContentUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
@@ -73,11 +72,11 @@ public class ViewAction extends PortletAction {
 		String content = null;
 		
 		if (Validator.isNotNull(nodePath)) {
-			content = AlfrescoContentLocalServiceUtil.getContent(null,
+			content = AlfrescoContentUtil.getContent(null,
 				nodePath, alfrescoWebClientURL, userId, password);
 		}
 		else if (Validator.isNotNull(nodeUuid)) {
-			content = AlfrescoContentLocalServiceUtil.getContent(nodeUuid,
+			content = AlfrescoContentUtil.getContent(nodeUuid,
 				null, alfrescoWebClientURL, userId, password);			
 		}
 

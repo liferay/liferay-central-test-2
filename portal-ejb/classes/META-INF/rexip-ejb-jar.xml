@@ -730,19 +730,5 @@
 			<pool-size>20</pool-size>
 			<cache-size>20</cache-size>
 		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentLocalServiceEJB</ejb-name>
-			<local-jndi-name>ejb/liferay/AlfrescoContentLocalServiceHome</local-jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_alfresco_service_ejb_AlfrescoContentServiceEJB</jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
 	</enterprise-beans>
 </rexip-ejb-jar>
