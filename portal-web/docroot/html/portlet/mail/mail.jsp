@@ -135,7 +135,7 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-folder-pane {
 				overflow: hidden;
-				width: 100px;
+				width: 115px;
 			}
 
 			#portlet-mail-msgs-pane {

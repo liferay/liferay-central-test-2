@@ -189,14 +189,18 @@ var Mail = {
 		}
 		
 		Mail.getSelectedMessages(Mail.removeSummary);
+		Mail.selectedArray = null;
 		
+		/* Hightlight next message */
 		if (nextObj != null) {
 			Mail.summaryHighlight(nextObj);
+			Mail.groupStart = nextObj;
 		}
 		else {
 			Mail.resetLastSelected();
-			Mail.getFolderDetails();
 		}
+		
+		Mail.getFolderDetails();
 		
 	},
 	
@@ -307,82 +311,81 @@ var Mail = {
 			folderPane.removeChild(list[0]);
 		}
 
-		if (folders.length > 0) {
-			selectedFolder = folders[0];
+		selectedFolder = folders[0];
+		
+		for (var i = 0; i < folders.length; i++) {
+			var folder = folders[i];
+			var folderItem = document.createElement("li");
+			var folderName = document.createElement("a");
+			var newCount = document.createElement("span");
 			
-			for (var i = 0; i < folders.length; i++) {
-				var folder = folders[i];
-				var folderItem = document.createElement("li");
-				var folderName = document.createElement("a");
-				var newCount = document.createElement("span");
-				
-				if (folder.newCount > 0) {
-					newCount.innerHTML = "&nbsp;(" + folder.newCount + ")";
-				}
-				newCount.className = "font-small"
-				
-				folderName.innerHTML = folder.name;
-				folderName.appendChild(newCount);
-				folderName.href = "javascript:void(0)"
-				folderName.onclick = Mail.onFolderSelect;
-				
-				folderItem.folder = folder;
-				folderItem.newCount = folder.newCount;
-				
-				folderItem.appendChild(folderName);
+			if (folder.newCount > 0) {
+				newCount.innerHTML = "&nbsp;(" + folder.newCount + ")";
+			}
+			newCount.className = "font-small"
+			
+			folderName.innerHTML = folder.name;
+			folderName.appendChild(newCount);
+			folderName.href = "javascript:void(0)"
+			folderName.onclick = Mail.onFolderSelect;
+			
+			folderItem.folder = folder;
+			folderItem.newCount = folder.newCount;
+			
+			folderItem.appendChild(folderName);
 
-				if (folder.id == Mail.TRASH_NAME || folder.id == Mail.SPAM_NAME) {
-					var emptyFolder = document.createElement("a");
-					emptyFolder.href = "javascript:void(0)";
-					emptyFolder.className = "font-x-small";
-					emptyFolder.innerHTML = "[Empty]";
-					emptyFolder.onclick = Mail.onEmptyClick;
+			if (folder.id == Mail.TRASH_NAME || folder.id == Mail.SPAM_NAME) {
+				var emptyFolder = document.createElement("a");
+				emptyFolder.href = "javascript:void(0)";
+				emptyFolder.className = "font-x-small";
+				emptyFolder.innerHTML = "[Empty]";
+				emptyFolder.onclick = Mail.onEmptyClick;
 
-					folderItem.appendChild(document.createElement("br"));
-					folderItem.appendChild(emptyFolder);
-				}
+				folderItem.appendChild(document.createTextNode(" "));
+				folderItem.appendChild(emptyFolder);
+			}
 
-				folderList.appendChild(folderItem);
-				
-				if (folder.id == Mail.currentFolderId) {
-					/* Previous folder ID was set */
-					selectedFolder = folder;
-				}
-				
-				if (i == Mail.DEFAULT_FOLDERS.length - 1) {
-					var manageItem = document.createElement("li");
-					manageItem.id = "folder_management";
-					
-					var manageIcon = document.createElement("a");
-					manageIcon.href = "javascript:void(0)";
-					manageIcon.onclick = Mail.onFolderAdd;
-					manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/folder_add.gif" + "\" />";
-					manageItem.appendChild(manageIcon);
-					
-					if (Mail.DEFAULT_FOLDERS.length != folders.length) {
-						manageIcon = document.createElement("a");
-						manageIcon.href = "javascript:void(0)";
-						manageIcon.onclick = Mail.onFolderEdit;
-						manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/folder_edit.gif" + "\" />";
-						manageItem.appendChild(manageIcon);
-	
-						manageIcon = document.createElement("a");
-						manageIcon.href = "javascript:void(0)";
-						manageIcon.onclick = Mail.onFolderDelete;
-						manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/folder_delete.gif" + "\" />";
-						manageItem.appendChild(manageIcon);
-					}
-					
-					folderList.appendChild(manageItem);
-				}
+			folderList.appendChild(folderItem);
+			
+			if (folder.id == Mail.currentFolderId) {
+				/* Previous folder ID was set */
+				selectedFolder = folder;
 			}
 			
-			folderPane.appendChild(folderList);
-			
-			Mail.setCurrentFolder(selectedFolder);
+			if (i == Mail.DEFAULT_FOLDERS.length - 1) {
+				var manageItem = document.createElement("li");
+				manageItem.id = "folder_management";
+				
+				var manageIcon = document.createElement("a");
+				manageIcon.href = "javascript:void(0)";
+				manageIcon.onclick = Mail.onFolderAdd;
+				manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/folder_add.gif" + "\" />";
+				manageItem.appendChild(manageIcon);
+				
+				if (Mail.DEFAULT_FOLDERS.length != folders.length) {
+					manageIcon = document.createElement("a");
+					manageIcon.href = "javascript:void(0)";
+					manageIcon.onclick = Mail.onFolderEdit;
+					manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/folder_edit.gif" + "\" />";
+					manageItem.appendChild(manageIcon);
+
+					manageIcon = document.createElement("a");
+					manageIcon.href = "javascript:void(0)";
+					manageIcon.onclick = Mail.onFolderDelete;
+					manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/folder_delete.gif" + "\" />";
+					manageItem.appendChild(manageIcon);
+				}
+				
+				folderList.appendChild(manageItem);
+			}
 		}
 		
-		Mail.getPreview();
+		folderPane.appendChild(folderList);
+		
+		if (Mail.currentFolder == null || Mail.currentFolder.id != selectedFolder.id) {
+			Mail.setCurrentFolder(selectedFolder);
+			Mail.getPreview();
+		}
 	},
 
 	getMessageDetails : function(messageId) {
