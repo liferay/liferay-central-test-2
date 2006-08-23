@@ -184,7 +184,7 @@ var Mail = {
 		var nextObj;
 		
 		if (Mail.lastSelected == null) {
-			Mail.findLastSelected();
+			Mail.lastSelected = Mail.findLastSelected();
 		}
 		
 		nextObj = Mail.lastSelected.next;
@@ -294,17 +294,19 @@ var Mail = {
 	},
 	
 	findLastSelected : function() {
+		var foundLast = null;
 		if (Mail.selectedArray != null) {
 			var sArray = Mail.selectedArray;
 			for (var i = sArray.length - 1; i >= 0; i--) {
 				var msObj = sArray[i];
 				if (msObj != null && msObj.selected) {
-					Mail.groupStart = msObj;
-					Mail.lastSelected = msObj;
+					foundLast = msObj
 					break;
 				}
 			}
 		}
+		
+		return foundLast;
 	},
 
 	getFolders : function() {
@@ -475,24 +477,6 @@ var Mail = {
 			Mail.renderPreviewSection();
 		}
 	},
-	
-	/*
-	getPreviewSection : function() {
-		var previewPane = document.getElementById("portlet-mail-msgs-preview-pane");
-		var pHeight = previewPane.offsetHeight;
-		var scrollTop = previewPane.scrollTop;
-		var scrollHeight = previewPane.scrollHeight;
-		var total = Mail.summaryArray.length;
-		var eHeight = Math.round(scrollHeight / total);
-		
-		var begin = Math.floor(scrollTop / eHeight);
-		var end = Math.ceil((scrollTop + pHeight) / eHeight);
-		
-		if (end > total) {
-			end = total;
-		}
-	},
-	*/
 	
 	getSelectedMessages : function(processFunction) {
 		var msObj;
@@ -897,16 +881,22 @@ var Mail = {
 			}
 			else if (event.shiftKey) {
 				if (Mail.groupStart == null) {
-					Mail.findLastSelected();
+					/* Try to find group */
+					Mail.groupStart = Mail.findLastSelected();
 				}
 				
 				Mail.summaryHighlight(Mail.lastSelected, true);
-				
-				if (Mail.groupStart != null) {
+
+				if (Mail.groupStart == null) {
+					/* Unable to find group start. Set to current */
+					Mail.groupStart = Mail.lastSelected;
+				}
+				else {
 					var nextObj;
 					var searchDown = true;
 					var lastSelected = Mail.lastSelected;
 					
+					alert(Mail.lastSelected.index + " > " + Mail.groupStart.index);
 					if (Mail.lastSelected.index > Mail.groupStart.index) {
 						searchDown = false;
 					}
@@ -919,9 +909,6 @@ var Mail = {
 					}
 					
 					Mail.lastSelected = lastSelected;
-				}
-				else {
-					Mail.groupStart = Mail.lastSelected;
 				}
 			}
 			else {
