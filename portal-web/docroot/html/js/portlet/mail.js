@@ -190,6 +190,7 @@ var Mail = {
 		
 		Mail.getSelectedMessages(Mail.removeSummary);
 		Mail.selectedArray = null;
+		Mail.resetLastSelected();
 		
 		/* Hightlight next message */
 		if (nextObj != null) {
@@ -197,11 +198,8 @@ var Mail = {
 			Mail.groupStart = nextObj;
 		}
 		else {
-			Mail.resetLastSelected();
+			Mail.getFolderDetails();
 		}
-		
-		Mail.getFolderDetails();
-		
 	},
 	
 	removeSummary : function(msObj) {
@@ -350,6 +348,7 @@ var Mail = {
 			if (folder.id == Mail.currentFolderId) {
 				/* Previous folder ID was set */
 				selectedFolder = folder;
+				folderItem.style.backgroundColor = Mail.colorSelected;
 			}
 			
 			if (i == Mail.DEFAULT_FOLDERS.length - 1) {
@@ -608,7 +607,6 @@ var Mail = {
 		/* Mail cannot be moved to the same folder
 		 * Mail cannot be moved to Drafts
 		 * Drafts can only be move to Trash
-		 * NOTE: checkFolderLocation need same exceptions.
 		 */
 		 
 		if (Mail.currentFolderId == toFolderId ||
@@ -881,51 +879,68 @@ var Mail = {
 		}
 		
 		if (Mail.lastSelected.pendingHighlight) {
-			if (!event.ctrlKey && !event.shiftKey) {
-				Mail.summaryUnhighlightAll();
+			if (event.ctrlKey) {
+				if (Mail.lastSelected.selected) {
+					/* Toggle if selected */
+					Mail.summaryUnhighlight(Mail.lastSelected);
+					Mail.resetLastSelected();
+				}
+				else {
+					Mail.summaryHighlight(Mail.lastSelected, true);
+				}
 			}
-			
-			if (event.ctrlKey && Mail.lastSelected.selected) {
-				Mail.summaryUnhighlight(Mail.lastSelected, event.ctrlKey);
-				Mail.resetLastSelected();
+			else if (event.shiftKey) {
+				if (Mail.groupStart == null) {
+					/* Attempt to find group start */
+					if (Mail.selectedArray != null) {
+						var sArray = Mail.selectedArray;
+						for (var i = sArray.length - 1; i >= 0; i--) {
+							var msObj = sArray[i];
+							if (msObj != null && msObj.selected) {
+								Mail.groupStart = msObj;
+								break;
+							}
+						}
+					}
+				}
+				
+				Mail.summaryHighlight(Mail.lastSelected, true);
+				
+				if (Mail.groupStart != null) {
+					var nextObj;
+					var searchDown = true;
+					var lastSelected = Mail.lastSelected;
+					
+					if (Mail.lastSelected.index > Mail.groupStart.index) {
+						searchDown = false;
+					}
+					
+					nextObj = searchDown ? Mail.lastSelected.next : Mail.lastSelected.prev;
+					
+					while (nextObj != Mail.groupStart) {
+						Mail.summaryHighlight(nextObj, event.shiftKey);
+						nextObj = searchDown ? nextObj.next : nextObj.prev;
+					}
+					
+					Mail.lastSelected = lastSelected;
+				}
 			}
 			else {
-				Mail.summaryHighlight(Mail.lastSelected, event.ctrlKey);
-				if (!event.shiftKey) {
-					Mail.groupStart = Mail.lastSelected;
-				}
-			}
-			
-			if (event.shiftKey && Mail.groupStart != null) {
-				var nextObj;
-				var searchDown = true;
-				var lastSelected = Mail.lastSelected;
-				
-				if (Mail.lastSelected.index > Mail.groupStart.index) {
-					searchDown = false;
-				}
-				
-				nextObj = searchDown ? Mail.lastSelected.next : Mail.lastSelected.prev;
-				
-				while (nextObj != Mail.groupStart) {
-					Mail.summaryHighlight(nextObj, event.shiftKey);
-					nextObj = searchDown ? nextObj.next : nextObj.prev;
-				}
-				
-				Mail.lastSelected = lastSelected;
+				Mail.summaryUnhighlightAll();
+				Mail.groupStart = Mail.lastSelected;
+				Mail.summaryHighlight(Mail.lastSelected);
 			}
 		}
 		
 		document.onmousemove = null;
 		document.onmouseup = null;
 		
-		Mail.checkFolderLocation(new Coordinate());
 		
 		if (Mail.dragging) {
+			//Mail.checkFolderLocation(new Coordinate());
 			Mail.dragToFolder(mousePos);
+			Mail.dragging = false;
 		}
-		
-		Mail.dragging = false;
 	},
 	
 	print : function() {
@@ -1152,7 +1167,6 @@ var Mail = {
 	
 	summaryHighlightAll : function() {
 		var msObj = Mail.summaryList.head;
-		var sArray = Mail.selectedArray;
 		
 		while (msObj) {
 			Mail.summaryHighlight(msObj, true);
