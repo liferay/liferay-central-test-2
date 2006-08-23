@@ -181,7 +181,13 @@ var Mail = {
 	
 	removeSelectedMessages : function() {
 		var detailsFrame = document.getElementById("portlet-mail-msg-detailed-frame");
-		var nextObj = Mail.lastSelected.next;
+		var nextObj;
+		
+		if (Mail.lastSelected == null) {
+			Mail.findLastSelected();
+		}
+		
+		nextObj = Mail.lastSelected.next;
 		detailsFrame.src = "";
 		
 		while (nextObj && nextObj.selected) {
@@ -284,6 +290,20 @@ var Mail = {
 		if (jsonObj.folderId == Mail.currentFolderId) {
 			Mail.getFolderDetails();
 			Mail.clearPreview();
+		}
+	},
+	
+	findLastSelected : function() {
+		if (Mail.selectedArray != null) {
+			var sArray = Mail.selectedArray;
+			for (var i = sArray.length - 1; i >= 0; i--) {
+				var msObj = sArray[i];
+				if (msObj != null && msObj.selected) {
+					Mail.groupStart = msObj;
+					Mail.lastSelected = msObj;
+					break;
+				}
+			}
 		}
 	},
 
@@ -493,21 +513,7 @@ var Mail = {
 				}
 			}
 		}
-	
-	/*
-		while (msObj) {
-			nextMs = msObj.next;
-			if (msObj.selected) {
-				
-				if (processFunction) {
-					processFunction(msObj);
-				}
-				msgArray[count] = msObj.id;
-				count++;
-			}
-			msObj = nextMs;
-		}	
-		*/
+
 		return(msgArray);
 	},
 	
@@ -591,14 +597,13 @@ var Mail = {
 		Mail.sortBy = msgsTitleReceived;
 		Mail.updateSortArrow();
 		
-		//previewPane.onkeydown = Mail.onMailKeyPress;
 		document.onkeydown = Mail.onMailKeyPress;
 		
 		previewPane.onselectstart = function() {return false;} // ie
 		previewPane.onmousedown = function() {return false;} // mozilla
-		//previewPane.onscroll = Mail.onPreviewScroll;
 
-		window.unload = function() { Mail.clearPreview; }
+		/* Memory cleanup */
+		window.onunload = function() { Mail.clearPreview; }
 		
 		Mail.getFolders();
 	},
@@ -887,21 +892,12 @@ var Mail = {
 				}
 				else {
 					Mail.summaryHighlight(Mail.lastSelected, true);
+					Mail.groupStart = Mail.lastSelected;
 				}
 			}
 			else if (event.shiftKey) {
 				if (Mail.groupStart == null) {
-					/* Attempt to find group start */
-					if (Mail.selectedArray != null) {
-						var sArray = Mail.selectedArray;
-						for (var i = sArray.length - 1; i >= 0; i--) {
-							var msObj = sArray[i];
-							if (msObj != null && msObj.selected) {
-								Mail.groupStart = msObj;
-								break;
-							}
-						}
-					}
+					Mail.findLastSelected();
 				}
 				
 				Mail.summaryHighlight(Mail.lastSelected, true);
@@ -923,6 +919,9 @@ var Mail = {
 					}
 					
 					Mail.lastSelected = lastSelected;
+				}
+				else {
+					Mail.groupStart = Mail.lastSelected;
 				}
 			}
 			else {
