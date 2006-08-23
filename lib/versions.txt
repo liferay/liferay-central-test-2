@@ -1,4 +1,4 @@
-ActiveMQ 3.2
+ActiveMQ 4.0.1
 Alfresco Web Service Client 1.3.0 (removed log4j.properties)
 Ant 1.6.5
 Ant Contrib 0.6

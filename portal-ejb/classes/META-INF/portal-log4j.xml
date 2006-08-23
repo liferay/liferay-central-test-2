@@ -273,7 +273,7 @@
 	</category>
 
 	<category name="org.apache.activemq">
-		<priority value="DEBUG" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="org.apache.axis">
