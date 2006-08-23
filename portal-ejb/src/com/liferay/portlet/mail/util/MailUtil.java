@@ -58,6 +58,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
@@ -108,20 +109,20 @@ public class MailUtil {
 	public static final String MAIL_INBOX_NAME =
 		PropsUtil.get(PropsUtil.MAIL_INBOX_NAME);
 
-	public static final String MAIL_SPAM_NAME =
-		MAIL_BOX_STYLE + PropsUtil.get(PropsUtil.MAIL_SPAM_NAME);
+	public static final String MAIL_DRAFTS_NAME =
+		MAIL_BOX_STYLE + PropsUtil.get(PropsUtil.MAIL_DRAFTS_NAME);
 
 	public static final String MAIL_SENT_NAME =
 		MAIL_BOX_STYLE + PropsUtil.get(PropsUtil.MAIL_SENT_NAME);
 
-	public static final String MAIL_DRAFTS_NAME =
-		MAIL_BOX_STYLE + PropsUtil.get(PropsUtil.MAIL_DRAFTS_NAME);
+	public static final String MAIL_SPAM_NAME =
+		MAIL_BOX_STYLE + PropsUtil.get(PropsUtil.MAIL_SPAM_NAME);
 
 	public static final String MAIL_TRASH_NAME =
 		MAIL_BOX_STYLE + PropsUtil.get(PropsUtil.MAIL_TRASH_NAME);
 
 	public static final String[] DEFAULT_FOLDERS = {
-		MAIL_INBOX_NAME, MAIL_SPAM_NAME, MAIL_SENT_NAME, MAIL_DRAFTS_NAME,
+		MAIL_INBOX_NAME, MAIL_DRAFTS_NAME, MAIL_SPAM_NAME, MAIL_SENT_NAME,
 		MAIL_TRASH_NAME
 	};
 
@@ -298,6 +299,8 @@ public class MailUtil {
 		Folder folder = null;
 
 		try {
+			MailSessionLock.lock(ses.getId());
+
 			Iterator itr = getFolders(ses).iterator();
 
 			while (itr.hasNext()) {
@@ -328,6 +331,8 @@ public class MailUtil {
 			}
 			catch (Exception e) {
 			}
+
+			MailSessionLock.unlock(ses.getId());
 		}
 	}
 
@@ -580,13 +585,33 @@ public class MailUtil {
 		IMAPFolder root = null;
 
 		try {
+			List l = new ArrayList();
+
 			Store store = _getStore(ses);
 
 			root = (IMAPFolder)store.getDefaultFolder();
 
 			Folder[] folders = root.list();
 
-			_getFolders(list, folders);
+			_getFolders(l, folders);
+
+			for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
+				for (ListIterator itr = l.listIterator(); itr.hasNext(); ) {
+					MailFolder mf = (MailFolder)itr.next();
+
+					if (DEFAULT_FOLDERS[i].equals(
+						_getResolvedFolderName(mf.getName()))) {
+
+						list.add(mf);
+
+						itr.remove();
+
+						break;
+					}
+				}
+			}
+
+			list.addAll(l);
 		}
 		catch (MessagingException me) {
 			throw new FolderException(me);
@@ -765,19 +790,28 @@ public class MailUtil {
 				}
 			}
 
-			Store store = _getStore(ses);
+			try {
+				MailSessionLock.lock(ses.getId());
 
-			Folder folder = store.getFolder(folderName);
+				setFolder(ses, MAIL_INBOX_NAME);
 
-			if (!folder.exists()) {
-				if (_log.isErrorEnabled()) {
-					_log.error("Folder " + folderName + " does not exist");
+				Store store = _getStore(ses);
+
+				Folder folder = store.getFolder(folderName);
+
+				if (!folder.exists()) {
+					if (_log.isErrorEnabled()) {
+						_log.error("Folder " + folderName + " does not exist");
+					}
+
+					throw new FolderException();
 				}
 
-				throw new FolderException();
+				folder.delete(true);
 			}
-
-			folder.delete(true);
+			finally {
+				MailSessionLock.unlock(ses.getId());
+			}
 		}
 		catch (MessagingException me) {
 			throw new FolderException(me);
@@ -813,42 +847,32 @@ public class MailUtil {
 				}
 			}
 
-			Store store = _getStore(ses);
-
-			Folder oldFolder = store.getFolder(oldFolderName);
-			Folder newFolder = store.getFolder(newFolderName);
-
-			if (!oldFolder.exists()) {
-				if (_log.isErrorEnabled()) {
-					_log.error("Folder " + oldFolderName + " does not exist");
-				}
-
-				throw new FolderException();
-			}
-			else if (newFolder.exists()) {
-				if (_log.isErrorEnabled()) {
-					_log.error("Folder " + newFolderName + " already exists");
-				}
-
-				throw new FolderException();
-			}
-
-			if (!oldFolder.isOpen()) {
-				oldFolder.open(Folder.READ_WRITE);
-			}
-
-			oldFolder.renameTo(newFolder);
-
 			try {
 				MailSessionLock.lock(ses.getId());
 
-				Folder curFolder = _getFolder(ses);
+				setFolder(ses, MAIL_INBOX_NAME);
 
-				String folderName = _getResolvedFolderName(curFolder.getName());
+				Store store = _getStore(ses);
 
-				if (folderName.equals(oldFolderName)) {
-					setFolder(ses, newFolderName);
+				Folder oldFolder = store.getFolder(oldFolderName);
+				Folder newFolder = store.getFolder(newFolderName);
+
+				if (!oldFolder.exists()) {
+					if (_log.isErrorEnabled()) {
+						_log.error("Folder " + oldFolderName + " does not exist");
+					}
+
+					throw new FolderException();
 				}
+				else if (newFolder.exists()) {
+					if (_log.isErrorEnabled()) {
+						_log.error("Folder " + newFolderName + " already exists");
+					}
+
+					throw new FolderException();
+				}
+
+				oldFolder.renameTo(newFolder);
 			}
 			finally {
 				MailSessionLock.unlock(ses.getId());

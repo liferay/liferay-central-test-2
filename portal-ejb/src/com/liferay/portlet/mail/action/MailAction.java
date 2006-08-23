@@ -90,6 +90,15 @@ public class MailAction extends JSONAction {
 			else if (cmd.equals("emptyFolder")) {
 				return emptyFolder(req);
 			}
+			else if (cmd.equals("folderAdd")) {
+				folderAdd(req);
+			}
+			else if (cmd.equals("folderDelete")) {
+				folderDelete(req);
+			}
+			else if (cmd.equals("folderEdit")) {
+				folderEdit(req);
+			}
 			else if (cmd.equals("getFolders")) {
 				return getFolders(req);
 			}
@@ -131,6 +140,31 @@ public class MailAction extends JSONAction {
 		jsonObj.put("folderId", folderId);
 
 		return jsonObj.toString();
+	}
+
+	protected void folderAdd(HttpServletRequest req) throws Exception {
+		HttpSession ses = req.getSession();
+
+		String folderId = ParamUtil.getString(req, "folderId");
+
+		MailUtil.createFolder(ses, folderId);
+	}
+
+	protected void folderDelete(HttpServletRequest req) throws Exception {
+		HttpSession ses = req.getSession();
+
+		String folderId = ParamUtil.getString(req, "folderId");
+
+		MailUtil.removeFolder(ses, folderId);
+	}
+
+	protected void folderEdit(HttpServletRequest req) throws Exception {
+		HttpSession ses = req.getSession();
+
+		String folderId = ParamUtil.getString(req, "folderId");
+		String newFolderId = ParamUtil.getString(req, "newFolderId");
+
+		MailUtil.renameFolder(ses, folderId, newFolderId);
 	}
 
 	protected Set getEnvelopes(HttpServletRequest req) throws Exception {

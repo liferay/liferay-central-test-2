@@ -28,6 +28,12 @@ function MailSummaryObject(state, sender, subject, date, size, id, read, index) 
 
 
 var Mail = {
+	INBOX_NAME : null,
+	DRAFTS_NAME : null,
+	SENT_NAME : null,
+	SPAM_NAME : null,
+	TRASH_NAME : null,
+	DEFAULT_FOLDERS : null,
 	colorHighlight : "#c3d4ee",
 	currentFolder : null,
 	currentFolderId : "",
@@ -53,6 +59,10 @@ var Mail = {
 		
 		for (var i = 0; i < folderList.length; i++) {
 			var folderItem = folderList[i];
+
+			if (folderItem.id == "folder_management") {
+				continue;
+			}
 			
 			if (update == true) {
 				folderItem.nwOffset = Coordinates.northwestOffset(folderItem, true);
@@ -150,6 +160,10 @@ var Mail = {
 		
 		for (var i = 0; i < folderList.length; i++) {
 			var folderItem = folderList[i];
+			if (folderItem.id == "folder_management") {
+				continue;
+			}
+
 			var foundFolder = coord.inside(
 					Coordinates.northwestOffset(folderItem, true),
 					Coordinates.southeastOffset(folderItem, true));
@@ -280,7 +294,6 @@ var Mail = {
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
 		var folderList = document.createElement("ul");
 		var folders = foldersObject.folders;
-		var refresh = false;
 		var selectedFolder = null;
 		Mail.foldersList = folders;
 		
@@ -292,7 +305,6 @@ var Mail = {
 		var list = folderPane.getElementsByTagName("ul");
 		if (list != null && list.length == 1) {
 			folderPane.removeChild(list[0]);
-			refresh = true;
 		}
 
 		if (folders.length > 0) {
@@ -319,9 +331,9 @@ var Mail = {
 				
 				folderItem.appendChild(folderName);
 
-				if (folder.id == "Trash" || folder.id == "Spam") {
+				if (folder.id == Mail.TRASH_NAME || folder.id == Mail.SPAM_NAME) {
 					var emptyFolder = document.createElement("a");
-					emptyFolder.href = "javascript:void(0)"
+					emptyFolder.href = "javascript:void(0)";
 					emptyFolder.className = "font-x-small";
 					emptyFolder.innerHTML = "[Empty]";
 					emptyFolder.onclick = Mail.onEmptyClick;
@@ -336,6 +348,33 @@ var Mail = {
 					/* Previous folder ID was set */
 					selectedFolder = folder;
 				}
+				
+				if (i == Mail.DEFAULT_FOLDERS.length - 1) {
+					var manageItem = document.createElement("li");
+					manageItem.id = "folder_management";
+					
+					var manageIcon = document.createElement("a");
+					manageIcon.href = "javascript:void(0)";
+					manageIcon.onclick = Mail.onFolderAdd;
+					manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/folder_add.gif" + "\" />";
+					manageItem.appendChild(manageIcon);
+					
+					if (Mail.DEFAULT_FOLDERS.length != folders.length) {
+						manageIcon = document.createElement("a");
+						manageIcon.href = "javascript:void(0)";
+						manageIcon.onclick = Mail.onFolderEdit;
+						manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/folder_edit.gif" + "\" />";
+						manageItem.appendChild(manageIcon);
+	
+						manageIcon = document.createElement("a");
+						manageIcon.href = "javascript:void(0)";
+						manageIcon.onclick = Mail.onFolderDelete;
+						manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/folder_delete.gif" + "\" />";
+						manageItem.appendChild(manageIcon);
+					}
+					
+					folderList.appendChild(manageItem);
+				}
 			}
 			
 			folderPane.appendChild(folderList);
@@ -343,9 +382,7 @@ var Mail = {
 			Mail.setCurrentFolder(selectedFolder);
 		}
 		
-		if (!refresh) {
-			Mail.getPreview();
-		}
+		Mail.getPreview();
 	},
 
 	getMessageDetails : function(messageId) {
@@ -397,6 +434,8 @@ var Mail = {
 	},
 	
 	getPreview : function () {
+		Mail.clearPreview();
+		
 		loadPage(themeDisplay.getPathMain() + "/mail/action",
 			"cmd=getPreview&folderId=" + Mail.currentFolder.id +
 			"&sortBy=" + Mail.sortBy.value +
@@ -470,7 +509,14 @@ var Mail = {
 		return(msgArray);
 	},
 	
-	init : function() {
+	init : function(inbox, drafts, sent, spam, trash) {
+		Mail.INBOX_NAME = inbox;
+		Mail.DRAFTS_NAME = drafts;
+		Mail.SENT_NAME = sent;
+		Mail.SPAM_NAME = spam;
+		Mail.TRASH_NAME = trash;
+		Mail.DEFAULT_FOLDERS = new Array(inbox, drafts, sent, spam, trash);
+
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
 		var folderHandle = document.getElementById("portlet-mail-handle");
 		var msgsPane = document.getElementById("portlet-mail-msgs-pane");
@@ -563,8 +609,8 @@ var Mail = {
 		 */
 		 
 		if (Mail.currentFolderId == toFolderId ||
-			toFolderId == "Drafts" ||
-			(Mail.currentFolderId == "Drafts" && toFolderId != "Trash")) {
+			toFolderId == Mail.DRAFTS_NAME ||
+			(Mail.currentFolderId == Mail.DRAFTS_NAME && toFolderId != Mail.TRASH_NAME)) {
 			
 			return false;
 		}
@@ -607,6 +653,49 @@ var Mail = {
 		}
 	},
 	
+	onFolderAdd : function() {
+		var entry = prompt("Please enter the name of a new folder.", "");
+		
+		if (entry != null && entry != "") {
+			for (var i = 0; i < Mail.foldersList.length; i++) {
+				if (entry.toLowerCase() == Mail.foldersList[i].name.toLowerCase()) {
+					alert("The folder '" + Mail.foldersList[i].name + "' already exists.");
+					return;
+				}
+			}
+			
+			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=folderAdd&folderId=" + entry, Mail.getFolders);
+		}
+	},
+	
+	onFolderDelete : function() {
+		for (var i = 0 ; i < Mail.DEFAULT_FOLDERS.length; i++) {
+			if (Mail.DEFAULT_FOLDERS[i] == Mail.currentFolderId) {
+				alert("The folder '" + Mail.currentFolderId + "' cannot be deleted.");
+				return;
+			}
+		}
+		
+		if (confirm("Are you sure you want to delete the folder '" + Mail.currentFolderId + "' and all its messages?")) {
+			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=folderDelete&folderId=" + Mail.currentFolderId, Mail.getFolders);
+		}
+	},
+	
+	onFolderEdit : function() {
+		for (var i = 0 ; i < Mail.DEFAULT_FOLDERS.length; i++) {
+			if (Mail.DEFAULT_FOLDERS[i] == Mail.currentFolderId) {
+				alert("The folder '" + Mail.currentFolderId + "' cannot be edited.");
+				return;
+			}
+		}
+		
+		var entry = prompt("Please enter a new name for the folder '" + Mail.currentFolderId + "'.", "");
+		
+		if (entry != null && entry != "" && entry != Mail.currentFolderId) {
+			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=folderEdit&folderId=" + Mail.currentFolderId + "&newFolderId=" + entry, Mail.getFolders);
+		}
+	},
+	
 	onFolderSelect : function() {
 		var folder = this.parentNode.folder;
 
@@ -615,7 +704,6 @@ var Mail = {
 			Mail.currentMessageId = null;
 			
 			Mail.setCurrentFolder(folder);
-			Mail.clearPreview();
 			Mail.getPreview();
 		}
 	},
@@ -724,7 +812,6 @@ var Mail = {
 		}
 	
 		Mail.sortBy = this;
-		Mail.clearPreview();
 		Mail.getPreview();
 		Mail.updateSortArrow();
 	},
@@ -982,7 +1069,10 @@ var Mail = {
 		for (var i = 0; i < folderList.length; i++) {
 			var folderItem = folderList[i];
 			
-			if (Mail.currentFolder.id == folderItem.folder.id) {
+			if (folderItem.id == "folder_management") {
+				continue;
+			}
+			else if (Mail.currentFolder.id == folderItem.folder.id) {
 				folderItem.style.backgroundColor = Mail.colorSelected;
 				Mail.currentFolder.li = folderItem;
 			}
@@ -997,7 +1087,7 @@ var Mail = {
 		var draftsToolbar = document.getElementById("portlet-mail-drafts-toolbar");
 		var emptyFolder = document.getElementById("portlet-mail-empty-folder");
 		
-		if (Mail.currentFolder.id == "Sent" || Mail.currentFolder.id == "Drafts") {
+		if (Mail.currentFolder.id == Mail.SENT_NAME || Mail.currentFolder.id == Mail.DRAFTS_NAME) {
 			fromTitle[0].style.display = "none";
 			fromTitle[1].style.display = "";
 		}
@@ -1006,7 +1096,7 @@ var Mail = {
 			fromTitle[1].style.display = "none";
 		}
 		
-		if (Mail.currentFolder.id == "Drafts") {
+		if (Mail.currentFolder.id == Mail.DRAFTS_NAME) {
 			mainToolbar.style.display = "none";
 			draftsToolbar.style.display = "block";
 		}

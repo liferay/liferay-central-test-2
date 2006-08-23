@@ -581,7 +581,7 @@ String mailLineColor = "#B3B6B0";
 			Mail.highlightColor = "<%= colorScheme.getPortletMenuBg() %>";
 			Mail.colorSelected = "<%= colorScheme.getLayoutTabBg() %>";
 
-			Mail.init();
+			Mail.init("<%= PropsUtil.get(PropsUtil.MAIL_INBOX_NAME) %>", "<%= PropsUtil.get(PropsUtil.MAIL_DRAFTS_NAME) %>", "<%= PropsUtil.get(PropsUtil.MAIL_SENT_NAME) %>", "<%= PropsUtil.get(PropsUtil.MAIL_SPAM_NAME) %>", "<%= PropsUtil.get(PropsUtil.MAIL_TRASH_NAME) %>");
 		</script>
 	</c:otherwise>
 </c:choose>
