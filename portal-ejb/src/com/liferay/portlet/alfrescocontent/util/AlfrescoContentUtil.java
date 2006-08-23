@@ -104,7 +104,7 @@ public class AlfrescoContentUtil {
 		return content;
 	}
 
-	public ResultSetRow[] getChildNodes(String uuid, String alfrescoWebClientURL,
+	public static ResultSetRow[] getChildNodes(String uuid, String alfrescoWebClientURL,
 		String userId, String password) throws PortalException {
 
 		ResultSetRow[] rows = null;
@@ -145,7 +145,7 @@ public class AlfrescoContentUtil {
 		return rows;
 	}
 
-	public Node getNode(String uuid, String alfrescoWebClientURL,
+	public static Node getNode(String uuid, String alfrescoWebClientURL,
 		String userId, String password) throws PortalException {
 
 		Node[] nodes = null;
