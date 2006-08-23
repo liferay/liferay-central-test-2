@@ -91,11 +91,20 @@ DynamicRenderRequest dynamicRenderReq = new DynamicRenderRequest(renderRequest);
 AlfrescoContentSearch searchContainer = new AlfrescoContentSearch(dynamicRenderReq, portletURL);
 %>
 
-<c:if test="<%= nodeUuid != null %>">
-	<%
-		Node selectedNode = AlfrescoContentUtil.getNode(nodeUuid, alfrescoWebClientURL, userId, password);
-		String nodeName = AlfrescoContentUtil.getNamedValue(selectedNode.getProperties(), org.alfresco.webservice.util.Constants.PROP_NAME);
-	%>
+<%
+Node selectedNode = null;
+String nodeName = null;
+
+try {
+	selectedNode = AlfrescoContentUtil.getNode(nodeUuid, alfrescoWebClientURL, userId, password);
+	nodeName = AlfrescoContentUtil.getNamedValue(selectedNode.getProperties(), org.alfresco.webservice.util.Constants.PROP_NAME);
+}
+catch (Exception e) {
+	e.printStackTrace();
+}
+%>
+
+<c:if test="<%= nodeName != null %>">
 
 	<br>
 	<br>
@@ -111,7 +120,7 @@ try {
 	resultSetRows = AlfrescoContentUtil.getChildNodes(spaceUuid, alfrescoWebClientURL, userId, password);
 }
 catch (Exception e) {
-e.printStackTrace();
+	e.printStackTrace();
 }
 
 int total = resultSetRows.length;
