@@ -96,8 +96,8 @@ public class MailAction extends JSONAction {
 			else if (cmd.equals("folderDelete")) {
 				folderDelete(req);
 			}
-			else if (cmd.equals("folderEdit")) {
-				folderEdit(req);
+			else if (cmd.equals("folderRename")) {
+				folderRename(req);
 			}
 			else if (cmd.equals("getFolders")) {
 				return getFolders(req);
@@ -158,7 +158,7 @@ public class MailAction extends JSONAction {
 		MailUtil.removeFolder(ses, folderId);
 	}
 
-	protected void folderEdit(HttpServletRequest req) throws Exception {
+	protected void folderRename(HttpServletRequest req) throws Exception {
 		HttpSession ses = req.getSession();
 
 		String folderId = ParamUtil.getString(req, "folderId");

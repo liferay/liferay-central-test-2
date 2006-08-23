@@ -364,8 +364,8 @@ var Mail = {
 				if (Mail.DEFAULT_FOLDERS.length != folders.length) {
 					manageIcon = document.createElement("a");
 					manageIcon.href = "javascript:void(0)";
-					manageIcon.onclick = Mail.onFolderEdit;
-					manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/folder_edit.gif" + "\" />";
+					manageIcon.onclick = Mail.onFolderRename;
+					manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/folder_rename.gif" + "\" />";
 					manageItem.appendChild(manageIcon);
 
 					manageIcon = document.createElement("a");
@@ -682,7 +682,7 @@ var Mail = {
 		}
 	},
 	
-	onFolderEdit : function() {
+	onFolderRename : function() {
 		for (var i = 0 ; i < Mail.DEFAULT_FOLDERS.length; i++) {
 			if (Mail.DEFAULT_FOLDERS[i] == Mail.currentFolderId) {
 				alert("The folder '" + Mail.currentFolderId + "' cannot be edited.");
@@ -693,7 +693,7 @@ var Mail = {
 		var entry = prompt("Please enter a new name for the folder '" + Mail.currentFolderId + "'.", "");
 		
 		if (entry != null && entry != "" && entry != Mail.currentFolderId) {
-			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=folderEdit&folderId=" + Mail.currentFolderId + "&newFolderId=" + entry, Mail.getFolders);
+			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=folderRename&folderId=" + Mail.currentFolderId + "&newFolderId=" + entry, Mail.getFolders);
 		}
 	},
 	
