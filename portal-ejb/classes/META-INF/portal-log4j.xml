@@ -272,8 +272,8 @@
 		<priority value="WARN" />
 	</category>
 
-	<category name="org.activemq">
-		<priority value="ERROR" />
+	<category name="org.apache.activemq">
+		<priority value="DEBUG" />
 	</category>
 
 	<category name="org.apache.axis">

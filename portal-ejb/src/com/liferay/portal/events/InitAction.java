@@ -53,10 +53,6 @@ import java.util.TimeZone;
 
 import javax.security.auth.login.Configuration;
 
-import org.activemq.broker.BrokerContainer;
-import org.activemq.broker.BrokerContext;
-import org.activemq.spring.SpringBrokerContainerFactory;
-
 import org.apache.commons.collections.ExtendedProperties;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
@@ -69,8 +65,6 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-
-import org.springframework.core.io.ClassPathResource;
 
 /**
  * <a href="InitAction.java.html"><b><i>View Source</i></b></a>
@@ -171,23 +165,6 @@ public class InitAction extends SimpleAction {
 
 				tempFile.delete();
 			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		// JMS
-
-		SpringBrokerContainerFactory factory =
-			new SpringBrokerContainerFactory();
-
-		factory.setResource(new ClassPathResource("META-INF/activemq.xml"));
-
-		BrokerContainer container = factory.createBrokerContainer(
-			"DefaultBroker", BrokerContext.getInstance());
-
-		try {
-			container.start();
 		}
 		catch (Exception e) {
 			e.printStackTrace();

@@ -2,30 +2,30 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
-	<bean id="com.liferay.portlet.messageboards.service.jms.IndexQCF" class="org.activemq.pool.PooledConnectionFactory">
+	<bean id="com.liferay.portlet.messageboards.service.jms.IndexQCF" class="org.apache.activemq.pool.PooledConnectionFactory">
 		<property name="connectionFactory">
-			<bean class="org.activemq.ActiveMQConnectionFactory">
+			<bean class="org.apache.activemq.ActiveMQConnectionFactory">
 				<property name="brokerURL">
-					<value>vm://localhost</value>
+					<value>vm://localhost?broker.persistent=false</value>
 				</property>
 			</bean>
 		</property>
 	</bean>
-	<bean name="com.liferay.portlet.messageboards.service.jms.IndexQueue" class="org.activemq.message.ActiveMQQueue" autowire="constructor">
+	<bean name="com.liferay.portlet.messageboards.service.jms.IndexQueue" class="org.apache.activemq.command.ActiveMQQueue" autowire="constructor">
 		<constructor-arg>
 			<value>com.liferay.portlet.messageboards.service.jms.IndexQueue</value>
 		</constructor-arg>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.jms.MBMessageQCF" class="org.activemq.pool.PooledConnectionFactory">
+	<bean id="com.liferay.portlet.messageboards.service.jms.MBMessageQCF" class="org.apache.activemq.pool.PooledConnectionFactory">
 		<property name="connectionFactory">
 			<bean class="org.activemq.ActiveMQConnectionFactory">
 				<property name="brokerURL">
-					<value>vm://localhost</value>
+					<value>vm://localhost?broker.persistent=false</value>
 				</property>
 			</bean>
 		</property>
 	</bean>
-	<bean name="com.liferay.portlet.messageboards.service.jms.MBMessageQueue" class="org.activemq.message.ActiveMQQueue" autowire="constructor">
+	<bean name="com.liferay.portlet.messageboards.service.jms.MBMessageQueue" class="org.apache.activemq.command.ActiveMQQueue" autowire="constructor">
 		<constructor-arg>
 			<value>com.liferay.portlet.messageboards.service.jms.MBMessageQueue</value>
 		</constructor-arg>

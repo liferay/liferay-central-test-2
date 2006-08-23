@@ -26,7 +26,7 @@ import com.liferay.portal.spring.util.SpringUtil;
 
 import javax.jms.QueueConnectionFactory;
 
-import org.activemq.pool.PooledConnectionFactory;
+import org.apache.activemq.pool.PooledConnectionFactory;
 
 import org.springframework.context.ApplicationContext;
 
