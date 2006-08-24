@@ -120,17 +120,19 @@ public class CachePortlet implements Portlet {
 
 		_portletId = _portletConfig.getPortletId();
 
-		ClassLoader classLoader = _getPortletClassLoader();
+		ClassLoader portletClassLoader = _getPortletClassLoader();
+		
+		ClassLoader currentClassLoader = 
+			Thread.currentThread().getContextClassLoader();
 
-		if (classLoader != null) {
-			Thread.currentThread().setContextClassLoader(classLoader);
+		if (portletClassLoader != null) {
+			Thread.currentThread().setContextClassLoader(portletClassLoader);
 		}
 
 		_portlet.init(config);
 
-		if (classLoader != null) {
-			Thread.currentThread().setContextClassLoader(
-				classLoader.getParent());
+		if (portletClassLoader != null) {
+			Thread.currentThread().setContextClassLoader(currentClassLoader);
 		}
 
 		_destroyable = true;
