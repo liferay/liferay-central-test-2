@@ -32,6 +32,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/communities/view");
+portletURL.setParameter("tabs1", tabs1);
 %>
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm">
