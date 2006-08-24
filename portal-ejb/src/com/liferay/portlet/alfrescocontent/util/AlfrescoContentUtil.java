@@ -57,6 +57,39 @@ import org.apache.commons.logging.LogFactory;
  */
 public class AlfrescoContentUtil {
 
+	public static ResultSetRow[] getChildNodes(
+			String url, String userId, String password, String uuid)
+		throws Exception {
+
+		ResultSetRow[] rows = null;
+
+		try {
+			AuthenticationUtils.startSession(url, userId, password);
+
+			RepositoryServiceSoapBindingStub repositoryService =
+				WebServiceFactory.getRepositoryService(url);
+
+			Reference reference = null;
+
+			if (Validator.isNull(uuid)) {
+				reference = new Reference(
+					_SPACES_STORE, null, _COMPANY_HOME_PATH);
+			}
+			else {
+				reference = new Reference(_SPACES_STORE, uuid, null);
+			}
+
+			QueryResult result = repositoryService.queryChildren(reference);
+
+			rows = result.getResultSet().getRows();
+		}
+		finally {
+			AuthenticationUtils.endSession(url);
+		}
+
+		return rows;
+	}
+
 	public static String getContent(
 			String url, String userId, String password, String uuid,
 			String path)
@@ -145,7 +178,7 @@ public class AlfrescoContentUtil {
 		return nodes[0];
 	}
 
-	public static ResultSetRow[] getNodes(
+	public static ResultSetRow[] getParentNodes(
 			String url, String userId, String password, String uuid)
 		throws Exception {
 
@@ -167,7 +200,7 @@ public class AlfrescoContentUtil {
 				reference = new Reference(_SPACES_STORE, uuid, null);
 			}
 
-			QueryResult result = repositoryService.queryChildren(reference);
+			QueryResult result = repositoryService.queryParents(reference);
 
 			rows = result.getResultSet().getRows();
 		}
@@ -231,7 +264,8 @@ public class AlfrescoContentUtil {
 	private static final Store _SPACES_STORE =
 		new Store(StoreEnum.workspace, "SpacesStore");
 
-	private static final String _COMPANY_HOME_PATH = "/app:company_home";
+	private static final String _COMPANY_HOME_PATH = null;
+	//private static final String _COMPANY_HOME_PATH = "/app:company_home";
 
 	private static Log _log = LogFactory.getLog(AlfrescoContentUtil.class);
 

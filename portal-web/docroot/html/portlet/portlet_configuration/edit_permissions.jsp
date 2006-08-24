@@ -208,7 +208,8 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 </c:choose>
 
 <%
-String tabs2Names = "users,organizations,locations,user-groups,community,guest,associated";
+//String tabs2Names = "users,organizations,locations,user-groups,community,guest,associated";
+String tabs2Names = "users,organizations,locations,user-groups,community,guest";
 
 if (modelResource.equals(Organization.class.getName()) || modelResource.equals("com.liferay.portal.model.Location")) {
 	tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
@@ -891,7 +892,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 		</tr>
 		</table>
 	</c:when>
-	<c:when test='<%= tabs2.equals("associated") %>'>
+	<c:when test='<%= false && tabs2.equals("associated") %>'>
 
 		<%
 		String selectedActionId = ParamUtil.getString(request, "selectedActionId");

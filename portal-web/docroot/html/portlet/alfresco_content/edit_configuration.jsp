@@ -72,25 +72,105 @@
 <input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);"><br>
 
 <%
-String nodeName = null;
+String cmd = ParamUtil.getString(request, Constants.CMD);
+
+String selUuid = request.getParameter("uuid");
+
+if (Validator.isNotNull(cmd)) {
+	selUuid = null;
+}
 
 try {
 	Node node = AlfrescoContentUtil.getNode(url, userId, password, uuid);
 
-	nodeName = AlfrescoContentUtil.getNamedValue(node.getProperties(), org.alfresco.webservice.util.Constants.PROP_NAME);
+	NamedValue[] nodeNamedValues = node.getProperties();
+
+	String nodeUuid = AlfrescoContentUtil.getNamedValue(nodeNamedValues, "node-uuid");
+	String nodeName = AlfrescoContentUtil.getNamedValue(nodeNamedValues, org.alfresco.webservice.util.Constants.PROP_NAME);
+
+	if (selUuid == null) {
+		ResultSetRow[] parentNodes = AlfrescoContentUtil.getParentNodes(url, userId, password, uuid);
+
+		if (parentNodes != null) {
+			selUuid = parentNodes[0].getNode().getId();
+		}
+	}
+
+	if (!nodeUuid.equals(nodeName)) {
+%>
+
+		<br>
+
+		<%= LanguageUtil.get(pageContext, "displaying-content") %>: <%= nodeName %><br>
+
+<%
+	}
 }
 catch (Exception e) {
 	_log.warn(e.getMessage());
 }
 %>
 
-<c:if test="<%= Validator.isNotNull(nodeName) %>">
-	<br>
-
-	<%= LanguageUtil.get(pageContext, "displaying-content") %>: <%= nodeName %><br>
-</c:if>
-
 <br><div class="beta-separator"></div><br>
+
+<liferay-portlet:actionURL portletConfiguration="true" varImpl="portletURL" />
+
+<%
+String breadcrumbs = StringPool.BLANK;
+
+try {
+	Node curNode = AlfrescoContentUtil.getNode(url, userId, password, selUuid);
+
+	NamedValue[] curNamedValues = curNode.getProperties();
+
+	String curUuid = AlfrescoContentUtil.getNamedValue(curNamedValues, "node-uuid");
+	String curName = AlfrescoContentUtil.getNamedValue(curNamedValues, org.alfresco.webservice.util.Constants.PROP_NAME);
+
+	if (!curUuid.equals(curName)) {
+		portletURL.setParameter("uuid", curUuid);
+
+		breadcrumbs = "<a href='" + portletURL.toString() + "'>" + curName + "</a>";
+	}
+
+	curUuid = selUuid;
+
+	ResultSetRow[] parentNodes = null;
+
+	for (int i = 0;; i++) {
+		parentNodes = AlfrescoContentUtil.getParentNodes(url, userId, password, curUuid);
+
+		if (parentNodes == null) {
+			break;
+		}
+
+		ResultSetRow resultSetRow = parentNodes[0];
+
+		ResultSetRowNode node = resultSetRow.getNode();
+
+		curNamedValues = resultSetRow.getColumns();
+
+		curUuid = AlfrescoContentUtil.getNamedValue(curNamedValues, "node-uuid");
+		curName = AlfrescoContentUtil.getNamedValue(curNamedValues, org.alfresco.webservice.util.Constants.PROP_NAME);
+
+		if (!curUuid.equals(curName)) {
+			portletURL.setParameter("uuid", curUuid);
+
+			breadcrumbs = "<a href='" + portletURL.toString() + "'>" + curName + "</a>" + " &raquo; " + breadcrumbs;
+		}
+	}
+
+	portletURL.setParameter("uuid", "");
+
+	breadcrumbs = "<a href='" + portletURL.toString() + "'>Alfresco</a>" + " &raquo; " + breadcrumbs;
+}
+catch (Exception e) {
+	_log.warn(e.getMessage());
+}
+%>
+
+<%= breadcrumbs %>
+
+<br><br>
 
 <%
 SearchContainer searchContainer = new SearchContainer();
@@ -102,45 +182,39 @@ headerNames.add("name");
 searchContainer.setHeaderNames(headerNames);
 searchContainer.setEmptyResultsMessage("no-alfresco-content-was-found");
 
-ResultSetRow[] results = new ResultSetRow[0];
+ResultSetRow[] childNodes = new ResultSetRow[0];
 
 try {
-	String selUuid = ParamUtil.getString(request, "uuid");
+	childNodes = AlfrescoContentUtil.getChildNodes(url, userId, password, selUuid);
 
-	if (selUuid.equals(uuid)) {
-		selUuid = StringPool.BLANK;
-	}
-
-	results = AlfrescoContentUtil.getNodes(url, userId, password, selUuid);
-
-	if (results == null) {
-		results = new ResultSetRow[0];
+	if (childNodes == null) {
+		childNodes = new ResultSetRow[0];
 	}
 }
 catch (Exception e) {
 	_log.warn(e.getMessage());
 }
 
-int total = results.length;
+int total = childNodes.length;
 
 searchContainer.setTotal(total);
 
 List resultRows = searchContainer.getResultRows();
 
-for (int i = 0; i < results.length; i++) {
-	ResultSetRow resultSetRow = results[i];
+for (int i = 0; i < childNodes.length; i++) {
+	ResultSetRow resultSetRow = childNodes[i];
 
 	ResultSetRowNode node = resultSetRow.getNode();
 
 	ResultRow row = new ResultRow(node, node.getId(), i);
 
-    NamedValue[] namedValues = resultSetRow.getColumns();
+    NamedValue[] nodeNamedValues = resultSetRow.getColumns();
 
 	StringBuffer sb = new StringBuffer();
 
 	sb.append("javascript: ");
 
-	String propContent = AlfrescoContentUtil.getNamedValue(namedValues, org.alfresco.webservice.util.Constants.PROP_CONTENT);
+	String propContent = AlfrescoContentUtil.getNamedValue(nodeNamedValues, org.alfresco.webservice.util.Constants.PROP_CONTENT);
 
 	if (propContent == null) {
 		sb.append("document.");
@@ -171,23 +245,27 @@ for (int i = 0; i < results.length; i++) {
 	sb.append("<img align=\"left\" border=\"0\" src=\"");
 	sb.append(themeDisplay.getPathThemeImage());
 	sb.append("/trees/");
-	
+
 	if (propContent == null) {
 		sb.append("folder");
 	}
 	else {
 		sb.append("page");
 	}
-	
+
 	sb.append(".gif\">");
 
-	sb.append(AlfrescoContentUtil.getNamedValue(namedValues, org.alfresco.webservice.util.Constants.PROP_NAME));
+	String nodeName = AlfrescoContentUtil.getNamedValue(nodeNamedValues, org.alfresco.webservice.util.Constants.PROP_NAME);
+
+	sb.append(nodeName);
 
 	row.addText(sb.toString(), rowHREF);
 
 	// Add result row
 
-	resultRows.add(row);
+	if (!node.getId().equals(nodeName)) {
+		resultRows.add(row);
+	}
 }
 %>
 
