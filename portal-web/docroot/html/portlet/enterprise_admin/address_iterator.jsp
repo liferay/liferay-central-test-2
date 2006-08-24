@@ -34,9 +34,7 @@ String classPK = ParamUtil.getString(request, "classPK");
 
 String organizationId = ParamUtil.getString(request, "organizationId");
 String locationId = ParamUtil.getString(request, "locationId");
-%>
 
-<%
 SearchContainer searchContainer = new SearchContainer();
 
 List headerNames = new ArrayList();

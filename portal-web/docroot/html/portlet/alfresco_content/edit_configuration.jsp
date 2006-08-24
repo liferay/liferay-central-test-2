@@ -97,7 +97,7 @@ SearchContainer searchContainer = new SearchContainer();
 
 List headerNames = new ArrayList();
 
-headerNames.add("content");
+headerNames.add("name");
 
 searchContainer.setHeaderNames(headerNames);
 searchContainer.setEmptyResultsMessage("no-alfresco-content-was-found");
@@ -166,7 +166,24 @@ for (int i = 0; i < results.length; i++) {
 
 	// Name
 
-	row.addText(AlfrescoContentUtil.getNamedValue(namedValues, org.alfresco.webservice.util.Constants.PROP_NAME), rowHREF);
+	sb = new StringBuffer();
+
+	sb.append("<img align=\"left\" border=\"0\" src=\"");
+	sb.append(themeDisplay.getPathThemeImage());
+	sb.append("/trees/");
+	
+	if (propContent == null) {
+		sb.append("folder");
+	}
+	else {
+		sb.append("page");
+	}
+	
+	sb.append(".gif\">");
+
+	sb.append(AlfrescoContentUtil.getNamedValue(namedValues, org.alfresco.webservice.util.Constants.PROP_NAME));
+
+	row.addText(sb.toString(), rowHREF);
 
 	// Add result row
 

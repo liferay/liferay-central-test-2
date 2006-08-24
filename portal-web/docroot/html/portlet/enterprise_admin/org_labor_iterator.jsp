@@ -30,9 +30,7 @@ boolean editable = ParamUtil.getBoolean(request, "editable");
 String redirect = ParamUtil.getString(request, "redirect");
 
 Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
-%>
 
-<%
 SearchContainer searchContainer = new SearchContainer();
 
 List headerNames = new ArrayList();

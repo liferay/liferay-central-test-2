@@ -620,6 +620,7 @@ portletURL.setParameter("groupId", groupId);
 
 				<%
 				List selLayoutChildren = null;
+
 				if (selLayout != null) {
 					selLayoutChildren = selLayout.getChildren();
 				}

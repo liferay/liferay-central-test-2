@@ -31,9 +31,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String className = ParamUtil.getString(request, "className");
 String classPK = ParamUtil.getString(request, "classPK");
-%>
 
-<%
 SearchContainer searchContainer = new SearchContainer();
 
 List headerNames = new ArrayList();
