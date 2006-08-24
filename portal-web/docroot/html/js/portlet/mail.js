@@ -668,6 +668,7 @@ var Mail = {
 		
 		if (confirm("Are you sure you want to delete the folder '" + Mail.currentFolderId + "' and all its messages?")) {
 			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=folderDelete&folderId=" + Mail.currentFolderId, Mail.getFolders);
+			Mail.setCurrentFolder(Mail.foldersList[0]);
 		}
 	},
 	
