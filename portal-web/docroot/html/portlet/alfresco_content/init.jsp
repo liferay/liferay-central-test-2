@@ -24,8 +24,6 @@
 
 --%><%@ include file="/html/portlet/init.jsp" %><%--
 
---%><%@ page import="com.liferay.portlet.alfrescocontent.search.AlfrescoContentSearch" %><%--
---%><%@ page import="com.liferay.portlet.alfrescocontent.search.AlfrescoContentSearchTerms" %><%--
 --%><%@ page import="com.liferay.portlet.alfrescocontent.util.AlfrescoContentUtil" %><%--
 
 --%><%@ page import="org.alfresco.webservice.types.NamedValue" %><%--
@@ -42,9 +40,9 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
 }
 
-String alfrescoWebClientURL = prefs.getValue("alfresco-web-client-url", StringPool.BLANK);
-String nodeUuid = prefs.getValue("node-uuid", StringPool.BLANK);
+String url = prefs.getValue("url", StringPool.BLANK);
 String userId = prefs.getValue("user-id", StringPool.BLANK);
 String password = prefs.getValue("password", StringPool.BLANK);
+String uuid = prefs.getValue("uuid", StringPool.BLANK);
 boolean maximizeLinks = GetterUtil.getBoolean(prefs.getValue("maximize-links", StringPool.BLANK));
 %>

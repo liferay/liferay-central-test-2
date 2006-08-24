@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2005 Alfresco, Inc.
  *
- * Licensed under the Mozilla Public License version 1.1 
+ * Licensed under the Mozilla Public License version 1.1
  * with a permitted attribution clause. You may obtain a
  * copy of the License at
  *
@@ -25,12 +25,13 @@ import org.alfresco.webservice.content.ContentServiceSoapBindingStub;
 import org.alfresco.webservice.repository.RepositoryServiceLocator;
 import org.alfresco.webservice.repository.RepositoryServiceSoapBindingStub;
 import org.alfresco.webservice.util.WebServiceException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * 
- * 
+ *
+ *
  * @author Roy Wetherall
  */
 public final class WebServiceFactory {

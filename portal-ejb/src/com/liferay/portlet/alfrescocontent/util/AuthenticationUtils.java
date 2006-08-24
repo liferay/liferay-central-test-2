@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2005 Alfresco, Inc.
  *
- * Licensed under the Mozilla Public License version 1.1 
+ * Licensed under the Mozilla Public License version 1.1
  * with a permitted attribution clause. You may obtain a
  * copy of the License at
  *
@@ -18,6 +18,7 @@ package com.liferay.portlet.alfrescocontent.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+
 import java.rmi.RemoteException;
 
 import javax.security.auth.callback.Callback;
@@ -27,6 +28,7 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 import org.alfresco.webservice.authentication.AuthenticationFault;
 import org.alfresco.webservice.authentication.AuthenticationResult;
 import org.alfresco.webservice.util.WebServiceException;
+
 import org.apache.axis.EngineConfiguration;
 import org.apache.axis.configuration.FileProvider;
 import org.apache.ws.security.WSPasswordCallback;
@@ -54,18 +56,18 @@ public class AuthenticationUtils implements CallbackHandler {
 
 	/**
 	 * Start a session
-	 * 
+	 *
 	 * @param username
 	 * @param password
 	 * @throws AuthenticationFault
 	 */
 	public static void startSession(String alfrescoWebClientURL,
 		String username, String password) throws AuthenticationFault {
-		
+
 		if (currentTicket.get() != null) {
 			return;
 		}
-		
+
 		try {
 			// Start the session
 			AuthenticationResult result = WebServiceFactory
@@ -111,7 +113,7 @@ public class AuthenticationUtils implements CallbackHandler {
 
 	/**
 	 * The implementation of the passwrod call back used by the WS Security
-	 * 
+	 *
 	 * @see javax.security.auth.callback.CallbackHandler#handle(javax.security.auth.callback.Callback[])
 	 */
 	public void handle(Callback[] callbacks) throws IOException,
@@ -130,7 +132,7 @@ public class AuthenticationUtils implements CallbackHandler {
 
 	/**
 	 * Gets the engine configuration used to create the web service references
-	 * 
+	 *
 	 * @return
 	 */
 	public static EngineConfiguration getEngineConfiguration() {

@@ -26,8 +26,18 @@
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace />uuid" type="hidden" value="">
 
 <table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "url") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<input class="form-text" name="<portlet:namespace />url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= url %>">
+	</td>
+</tr>
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "user-id") %>
@@ -47,25 +57,6 @@
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
-		<br>
-	</td>
-</tr>
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "alfresco-web-client-url") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<input class="form-text" name="<portlet:namespace />alfrescoWebClientURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= alfrescoWebClientURL %>">
-	</td>
-</tr>
-<tr>
-	<td colspan="3">
-		<br>
-	</td>
-</tr>
-<tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "maximize-links") %>
 	</td>
@@ -78,106 +69,95 @@
 
 <br>
 
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
-
-<liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
-
-<input name="<portlet:namespace />spaceUuid" type="hidden" value="">
-<input name="<portlet:namespace />nodeUuid" type="hidden" value="<%= nodeUuid %>">
+<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);"><br>
 
 <%
-DynamicRenderRequest dynamicRenderReq = new DynamicRenderRequest(renderRequest);
-
-AlfrescoContentSearch searchContainer = new AlfrescoContentSearch(dynamicRenderReq, portletURL);
-%>
-
-<%
-Node selectedNode = null;
 String nodeName = null;
 
 try {
-	selectedNode = AlfrescoContentUtil.getNode(nodeUuid, alfrescoWebClientURL, userId, password);
-	nodeName = AlfrescoContentUtil.getNamedValue(selectedNode.getProperties(), org.alfresco.webservice.util.Constants.PROP_NAME);
+	Node node = AlfrescoContentUtil.getNode(url, userId, password, uuid);
+
+	nodeName = AlfrescoContentUtil.getNamedValue(node.getProperties(), org.alfresco.webservice.util.Constants.PROP_NAME);
 }
 catch (Exception e) {
-	e.printStackTrace();
+	_log.warn(e.getMessage());
 }
 %>
 
-<c:if test="<%= nodeName != null %>">
+<c:if test="<%= Validator.isNotNull(nodeName) %>">
+	<br>
 
-	<br>
-	<br>
-	
-	<%= LanguageUtil.get(pageContext, "displaying-article") %>: <%= nodeName %><br>
+	<%= LanguageUtil.get(pageContext, "displaying-content") %>: <%= nodeName %><br>
 </c:if>
-
-<%
-String spaceUuid = ParamUtil.getString(renderRequest, "spaceUuid");
-
-ResultSetRow[] resultSetRows = {};
-try {
-	resultSetRows = AlfrescoContentUtil.getChildNodes(spaceUuid, alfrescoWebClientURL, userId, password);
-}
-catch (Exception e) {
-	e.printStackTrace();
-}
-
-int total = resultSetRows.length;
-
-searchContainer.setTotal(total);
-
-List results = Arrays.asList(resultSetRows);
-
-searchContainer.setResults(results);
-%>
 
 <br><div class="beta-separator"></div><br>
 
 <%
+SearchContainer searchContainer = new SearchContainer();
+
+List headerNames = new ArrayList();
+
+headerNames.add("content");
+
+searchContainer.setHeaderNames(headerNames);
+searchContainer.setEmptyResultsMessage("no-alfresco-content-was-found");
+
+ResultSetRow[] results = new ResultSetRow[0];
+
+try {
+	String selUuid = ParamUtil.getString(request, "uuid");
+
+	if (selUuid.equals(uuid)) {
+		selUuid = StringPool.BLANK;
+	}
+
+	results = AlfrescoContentUtil.getNodes(url, userId, password, selUuid);
+
+	if (results == null) {
+		results = new ResultSetRow[0];
+	}
+}
+catch (Exception e) {
+	_log.warn(e.getMessage());
+}
+
+int total = results.length;
+
+searchContainer.setTotal(total);
+
 List resultRows = searchContainer.getResultRows();
 
-for (int i = 0; i < results.size(); i++) {
-	ResultSetRow resultSetRow = (ResultSetRow)results.get(i);
+for (int i = 0; i < results.length; i++) {
+	ResultSetRow resultSetRow = results[i];
 
 	ResultSetRowNode node = resultSetRow.getNode();
-	
+
 	ResultRow row = new ResultRow(node, node.getId(), i);
 
-    NamedValue namedValues[] = resultSetRow.getColumns();
+    NamedValue[] namedValues = resultSetRow.getColumns();
 
 	StringBuffer sb = new StringBuffer();
 
 	sb.append("javascript: ");
 
 	String propContent = AlfrescoContentUtil.getNamedValue(namedValues, org.alfresco.webservice.util.Constants.PROP_CONTENT);
-	
-	if (propContent != null) {
+
+	if (propContent == null) {
 		sb.append("document.");
 		sb.append(renderResponse.getNamespace());
 		sb.append("fm.");
 		sb.append(renderResponse.getNamespace());
 		sb.append(Constants.CMD);
-		sb.append(".value = '");
-		sb.append(Constants.UPDATE);
-		sb.append("'; ");
-		sb.append("document.");
-		sb.append(renderResponse.getNamespace());
-		sb.append("fm.");
-		sb.append(renderResponse.getNamespace());
-		sb.append("nodeUuid.value = '");
-		sb.append(node.getId());
-		sb.append("'; ");
+		sb.append(".value = ''; ");
 	}
-	else {
-		sb.append("document.");
-		sb.append(renderResponse.getNamespace());
-		sb.append("fm.");
-		sb.append(renderResponse.getNamespace());
-		sb.append("spaceUuid.value = '");
-		sb.append(node.getId());
-		sb.append("'; ");
-	}
+
+	sb.append("document.");
+	sb.append(renderResponse.getNamespace());
+	sb.append("fm.");
+	sb.append(renderResponse.getNamespace());
+	sb.append("uuid.value = '");
+	sb.append(node.getId());
+	sb.append("'; ");
 	sb.append("submitForm(document.");
 	sb.append(renderResponse.getNamespace());
 	sb.append("fm);");
@@ -185,7 +165,7 @@ for (int i = 0; i < results.size(); i++) {
 	String rowHREF = sb.toString();
 
 	// Name
-	    
+
 	row.addText(AlfrescoContentUtil.getNamedValue(namedValues, org.alfresco.webservice.util.Constants.PROP_NAME), rowHREF);
 
 	// Add result row
@@ -196,11 +176,12 @@ for (int i = 0; i < results.size(); i++) {
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
 </form>
 
-
 <script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />baseURL.focus();
+	document.<portlet:namespace />fm.<portlet:namespace />url.focus();
 </script>
+
+<%!
+private static Log _log = LogFactory.getLog("portal-web.docroot.html.portlet.alfresco_content.edit_configuration.jsp");
+%>

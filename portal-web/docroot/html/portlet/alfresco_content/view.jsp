@@ -51,8 +51,8 @@ String content = (String)request.getAttribute(WebKeys.ALFRESCO_CONTENT);
 	</table>
 </c:if>
 
-<c:if test="<%= !preview && Validator.isNotNull(nodeUuid) && themeDisplay.isSignedIn() && PortletPermission.contains(permissionChecker, plid, PortletKeys.ALFRESCO_CONTENT, ActionKeys.CONFIGURATION) %>">
+<%--<c:if test="<%= !preview && Validator.isNotNull(nodeUuid) && themeDisplay.isSignedIn() && PortletPermission.contains(permissionChecker, plid, PortletKeys.ALFRESCO_CONTENT, ActionKeys.CONFIGURATION) %>">
 	<br>
 
 	<liferay-ui:icon image="edit" message="edit-content" url='<%= "javascript: window.open(\'/alfresco/navigate/showDocDetails/workspace/SpacesStore/" + nodeUuid + "\'); void(\'\');" %>' />
-</c:if>
+</c:if>--%>

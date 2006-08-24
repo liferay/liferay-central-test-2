@@ -1918,6 +1918,20 @@
 			<mime-type>text/html</mime-type>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+		<portlet-preferences>
+			<preference>
+				<name>url</name>
+				<value>http://localhost:8080/alfresco-portlet</value>
+			</preference>
+			<preference>
+				<name>user-id</name>
+				<value>admin</value>
+			</preference>
+			<preference>
+				<name>password</name>
+				<value>admin</value>
+			</preference>
+		</portlet-preferences>
 		<security-role-ref>
 			<role-name>guest</role-name>
 		</security-role-ref>

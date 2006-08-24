@@ -28,69 +28,61 @@ import com.liferay.portlet.alfrescocontent.util.AlfrescoContentUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
-import com.liferay.util.Validator;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
  * <a href="ViewAction.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * @author Brian Wing Shun Chan
- * 
+ *
  */
 public class ViewAction extends PortletAction {
 
-	public ActionForward render(ActionMapping mapping, ActionForm form,
-		PortletConfig config, RenderRequest req, RenderResponse res)
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			RenderRequest req, RenderResponse res)
 		throws Exception {
 
 		PortletPreferences prefs = req.getPreferences();
 
-		String alfrescoWebClientURL = prefs.getValue("alfresco-web-client-url",
-			StringPool.BLANK);
-		String nodeUuid = prefs.getValue("node-uuid", StringPool.BLANK);
+		String url = prefs.getValue("url", StringPool.BLANK);
 		String userId = prefs.getValue("user-id", StringPool.BLANK);
 		String password = prefs.getValue("password", StringPool.BLANK);
-		boolean maximizeLinks = GetterUtil.getBoolean(prefs.getValue(
-			"maximize-links", StringPool.BLANK));
-
-		String previewURL = ParamUtil.getString(req, "previewURL");
-		
-		// if (Validator.isNotNull(previewURL)) {
-		// url = previewURL;
-		// }
-
-		String nodePath = ParamUtil.getString(req, "nodePath");
+		String uuid = prefs.getValue("uuid", StringPool.BLANK);
+		String path = ParamUtil.getString(req, "path");
+		boolean maximizeLinks = GetterUtil.getBoolean(
+			prefs.getValue("maximize-links", StringPool.BLANK));
 
 		String content = null;
-		
-		if (Validator.isNotNull(nodePath)) {
-			content = AlfrescoContentUtil.getContent(null,
-				nodePath, alfrescoWebClientURL, userId, password);
-		}
-		else if (Validator.isNotNull(nodeUuid)) {
-			content = AlfrescoContentUtil.getContent(nodeUuid,
-				null, alfrescoWebClientURL, userId, password);			
-		}
 
-		content = AlfrescoContentUtil
-			.formatContent(content, maximizeLinks, res);
+		try {
+			content = AlfrescoContentUtil.getContent(
+				url, userId, password, uuid, path, maximizeLinks, res);
+		}
+		catch (Exception e) {
+			_log.warn(e.getMessage());
+		}
 
 		req.setAttribute(WebKeys.ALFRESCO_CONTENT, content);
 
-		if (Validator.isNull(previewURL)) {
+		//if (Validator.isNull(previewURL)) {
 			return mapping.findForward("portlet.alfresco_content.view_1");
-		}
+		/*}
 		else {
 			return mapping.findForward("portlet.alfresco_content.view_2");
-		}
+		}*/
 	}
+
+	private static Log _log = LogFactory.getLog(ViewAction.class);
 
 }

@@ -212,6 +212,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portlet.alfrescocontent">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.portlet.journal">
 		<priority value="ERROR" />
 	</category>

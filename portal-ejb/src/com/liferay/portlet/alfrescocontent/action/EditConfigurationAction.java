@@ -35,32 +35,22 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.alfresco.webservice.repository.QueryResult;
-import org.alfresco.webservice.repository.RepositoryServiceSoapBindingStub;
-import org.alfresco.webservice.types.NamedValue;
-import org.alfresco.webservice.types.Reference;
-import org.alfresco.webservice.types.ResultSetRow;
-import org.alfresco.webservice.types.Store;
-import org.alfresco.webservice.types.StoreEnum;
-import org.alfresco.webservice.util.AuthenticationUtils;
-import org.alfresco.webservice.util.WebServiceFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
  * <a href="EditConfigurationAction.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * @author Brian Wing Shun Chan
  * @author Michael Young
- * 
+ *
  */
 public class EditConfigurationAction extends PortletAction {
-	protected static final Store STORE = new Store(StoreEnum.workspace,
-		"SpacesStore");
 
-	public void processAction(ActionMapping mapping, ActionForm form,
-		PortletConfig config, ActionRequest req, ActionResponse res)
+	public void processAction(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionRequest req, ActionResponse res)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
@@ -69,22 +59,22 @@ public class EditConfigurationAction extends PortletAction {
 			return;
 		}
 
-		String alfrescoWebClientURL = ParamUtil.getString(req,
-			"alfrescoWebClientURL");
+		String url = ParamUtil.getString(req, "url");
 		String userId = ParamUtil.getString(req, "userId");
-		String nodeUuid = ParamUtil.getString(req, "nodeUuid");
 		String password = ParamUtil.getString(req, "password");
+		String uuid = ParamUtil.getString(req, "uuid");
 		boolean maximizeLinks = ParamUtil.getBoolean(req, "maximizeLinks");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
-		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
-			req, portletResource, true, true);
+		PortletPreferences prefs =
+			PortletPreferencesFactory.getPortletSetup(
+				req, portletResource, true, true);
 
-		prefs.setValue("alfresco-web-client-url", alfrescoWebClientURL);
+		prefs.setValue("url", url);
 		prefs.setValue("user-id", userId);
-		prefs.setValue("node-uuid", nodeUuid);
 		prefs.setValue("password", password);
+		prefs.setValue("uuid", uuid);
 		prefs.setValue("maximize-links", Boolean.toString(maximizeLinks));
 
 		prefs.store();
@@ -92,12 +82,13 @@ public class EditConfigurationAction extends PortletAction {
 		SessionMessages.add(req, config.getPortletName() + ".doConfigure");
 	}
 
-	public ActionForward render(ActionMapping mapping, ActionForm form,
-		PortletConfig config, RenderRequest req, RenderResponse res)
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return mapping
-			.findForward("portlet.alfresco_content.edit_configuration");
+		return mapping.findForward(
+			"portlet.alfresco_content.edit_configuration");
 	}
 
 }
