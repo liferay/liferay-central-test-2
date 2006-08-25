@@ -84,20 +84,17 @@ public class MailAction extends JSONAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		try {
-			if (cmd.equals("deleteMessages")) {
+			if (cmd.equals("addFolder")) {
+				addFolder(req);
+			}
+			else if (cmd.equals("deleteFolder")) {
+				deleteFolder(req);
+			}
+			else if (cmd.equals("deleteMessages")) {
 				deleteMessages(req);
 			}
 			else if (cmd.equals("emptyFolder")) {
 				return emptyFolder(req);
-			}
-			else if (cmd.equals("folderAdd")) {
-				folderAdd(req);
-			}
-			else if (cmd.equals("folderDelete")) {
-				folderDelete(req);
-			}
-			else if (cmd.equals("folderRename")) {
-				folderRename(req);
 			}
 			else if (cmd.equals("getFolders")) {
 				return getFolders(req);
@@ -111,12 +108,31 @@ public class MailAction extends JSONAction {
 			else if (cmd.equals("moveMessages")) {
 				moveMessages(req);
 			}
+			else if (cmd.equals("renameFolder")) {
+				renameFolder(req);
+			}
 		}
 		catch (Exception e) {
 			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 
 		return StringPool.BLANK;
+	}
+
+	protected void addFolder(HttpServletRequest req) throws Exception {
+		HttpSession ses = req.getSession();
+
+		String folderId = ParamUtil.getString(req, "folderId");
+
+		MailUtil.createFolder(ses, folderId);
+	}
+
+	protected void deleteFolder(HttpServletRequest req) throws Exception {
+		HttpSession ses = req.getSession();
+
+		String folderId = ParamUtil.getString(req, "folderId");
+
+		MailUtil.removeFolder(ses, folderId);
 	}
 
 	protected void deleteMessages(HttpServletRequest req) throws Exception {
@@ -140,31 +156,6 @@ public class MailAction extends JSONAction {
 		jsonObj.put("folderId", folderId);
 
 		return jsonObj.toString();
-	}
-
-	protected void folderAdd(HttpServletRequest req) throws Exception {
-		HttpSession ses = req.getSession();
-
-		String folderId = ParamUtil.getString(req, "folderId");
-
-		MailUtil.createFolder(ses, folderId);
-	}
-
-	protected void folderDelete(HttpServletRequest req) throws Exception {
-		HttpSession ses = req.getSession();
-
-		String folderId = ParamUtil.getString(req, "folderId");
-
-		MailUtil.removeFolder(ses, folderId);
-	}
-
-	protected void folderRename(HttpServletRequest req) throws Exception {
-		HttpSession ses = req.getSession();
-
-		String folderId = ParamUtil.getString(req, "folderId");
-		String newFolderId = ParamUtil.getString(req, "newFolderId");
-
-		MailUtil.renameFolder(ses, folderId, newFolderId);
 	}
 
 	protected Set getEnvelopes(HttpServletRequest req) throws Exception {
@@ -357,6 +348,15 @@ public class MailAction extends JSONAction {
 		String folderId = ParamUtil.getString(req, "folderId");
 
 		MailUtil.moveMessages(ses, messages, folderId);
+	}
+
+	protected void renameFolder(HttpServletRequest req) throws Exception {
+		HttpSession ses = req.getSession();
+
+		String folderId = ParamUtil.getString(req, "folderId");
+		String newFolderId = ParamUtil.getString(req, "newFolderId");
+
+		MailUtil.renameFolder(ses, folderId, newFolderId);
 	}
 
 	private static Log _log = LogFactory.getLog(MailAction.class);

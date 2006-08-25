@@ -380,20 +380,20 @@ var Mail = {
 				var manageIcon = document.createElement("a");
 				manageIcon.href = "javascript:void(0)";
 				manageIcon.onclick = Mail.onFolderAdd;
-				manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/folder_add.gif" + "\" />";
+				manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/add_folder.gif" + "\" />";
 				manageItem.appendChild(manageIcon);
 				
 				if (Mail.DEFAULT_FOLDERS.length != folders.length) {
 					manageIcon = document.createElement("a");
 					manageIcon.href = "javascript:void(0)";
 					manageIcon.onclick = Mail.onFolderRename;
-					manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/folder_rename.gif" + "\" />";
+					manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/rename_folder.gif" + "\" />";
 					manageItem.appendChild(manageIcon);
 
 					manageIcon = document.createElement("a");
 					manageIcon.href = "javascript:void(0)";
 					manageIcon.onclick = Mail.onFolderDelete;
-					manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/folder_delete.gif" + "\" />";
+					manageIcon.innerHTML = "<img src=\"" + themeDisplay.getPathThemeImage() + "/mail/delete_folder.gif" + "\" />";
 					manageItem.appendChild(manageIcon);
 				}
 				

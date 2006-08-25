@@ -585,7 +585,7 @@ public class MailUtil {
 		IMAPFolder root = null;
 
 		try {
-			List l = new ArrayList();
+			List tempList = new ArrayList();
 
 			Store store = _getStore(ses);
 
@@ -593,16 +593,18 @@ public class MailUtil {
 
 			Folder[] folders = root.list();
 
-			_getFolders(l, folders);
+			_getFolders(tempList, folders);
 
 			for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
-				for (ListIterator itr = l.listIterator(); itr.hasNext(); ) {
-					MailFolder mf = (MailFolder)itr.next();
+				ListIterator itr = tempList.listIterator();
+
+				while (itr.hasNext()){
+					MailFolder mailFolder = (MailFolder)itr.next();
 
 					if (DEFAULT_FOLDERS[i].equals(
-						_getResolvedFolderName(mf.getName()))) {
+							_getResolvedFolderName(mailFolder.getName()))) {
 
-						list.add(mf);
+						list.add(mailFolder);
 
 						itr.remove();
 
@@ -611,7 +613,7 @@ public class MailUtil {
 				}
 			}
 
-			list.addAll(l);
+			list.addAll(tempList);
 		}
 		catch (MessagingException me) {
 			throw new FolderException(me);
@@ -859,14 +861,16 @@ public class MailUtil {
 
 				if (!oldFolder.exists()) {
 					if (_log.isErrorEnabled()) {
-						_log.error("Folder " + oldFolderName + " does not exist");
+						_log.error(
+							"Folder " + oldFolderName + " does not exist");
 					}
 
 					throw new FolderException();
 				}
 				else if (newFolder.exists()) {
 					if (_log.isErrorEnabled()) {
-						_log.error("Folder " + newFolderName + " already exists");
+						_log.error(
+							"Folder " + newFolderName + " already exists");
 					}
 
 					throw new FolderException();
