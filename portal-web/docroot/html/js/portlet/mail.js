@@ -654,7 +654,7 @@ var Mail = {
 				}
 			}
 			
-			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=folderAdd&folderId=" + entry, Mail.getFolders);
+			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=addFolder&folderId=" + entry, Mail.getFolders);
 		}
 	},
 	
@@ -667,7 +667,7 @@ var Mail = {
 		}
 		
 		if (confirm("Are you sure you want to delete the folder '" + Mail.currentFolderId + "' and all its messages?")) {
-			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=folderDelete&folderId=" + Mail.currentFolderId, Mail.getFolders);
+			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=deleteFolder&folderId=" + Mail.currentFolderId, Mail.getFolders);
 			Mail.setCurrentFolder(Mail.foldersList[0]);
 		}
 	},
@@ -683,7 +683,7 @@ var Mail = {
 		var entry = prompt("Please enter a new name for the folder '" + Mail.currentFolderId + "'.", "");
 		
 		if (entry != null && entry != "" && entry != Mail.currentFolderId) {
-			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=folderRename&folderId=" + Mail.currentFolderId + "&newFolderId=" + entry, Mail.getFolders);
+			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=renameFolder&folderId=" + Mail.currentFolderId + "&newFolderId=" + entry, Mail.getFolders);
 		}
 	},
 	
