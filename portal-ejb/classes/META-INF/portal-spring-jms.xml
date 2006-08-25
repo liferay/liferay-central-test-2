@@ -18,7 +18,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.jms.MBMessageQCF" class="org.apache.activemq.pool.PooledConnectionFactory">
 		<property name="connectionFactory">
-			<bean class="org.activemq.ActiveMQConnectionFactory">
+			<bean class="org.apache.activemq.ActiveMQConnectionFactory">
 				<property name="brokerURL">
 					<value>vm://localhost?broker.persistent=false</value>
 				</property>
