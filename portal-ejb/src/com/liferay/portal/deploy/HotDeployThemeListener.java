@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.deploy.HotDeployListener;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Http;
 import com.liferay.util.StringPool;
@@ -58,9 +59,8 @@ public class HotDeployThemeListener implements HotDeployListener {
 		try {
 			ServletContext ctx = event.getServletContext();
 
-			servletContextName = StringUtil.replace(
-				ctx.getServletContextName(), StringPool.SPACE,
-				StringPool.UNDERLINE);
+			servletContextName = PortalUtil.getJsSafePortletName(
+				ctx.getServletContextName());
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Invoking deploy for " + servletContextName);

@@ -36,6 +36,7 @@ import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.util.PortalInstances;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
@@ -86,9 +87,8 @@ public class HotDeployPortletListener implements HotDeployListener {
 
 			ServletContext ctx = event.getServletContext();
 
-			servletContextName = StringUtil.replace(
-				ctx.getServletContextName(), StringPool.SPACE,
-				StringPool.UNDERLINE);
+			servletContextName = PortalUtil.getJsSafePortletName(
+				ctx.getServletContextName());
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Invoking deploy for " + servletContextName);

@@ -28,6 +28,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
@@ -66,8 +67,8 @@ public class TCKAction extends Action {
 			for (int i = 0; i < portletNames.length; i++) {
 				String[] nameAndWar = StringUtil.split(portletNames[i], "/");
 
-				portletNames[i] =
-					nameAndWar[1] + Portlet.WAR_SEPARATOR + nameAndWar[0];
+				portletNames[i] = PortalUtil.getJsSafePortletName(
+					nameAndWar[1] + Portlet.WAR_SEPARATOR + nameAndWar[0]);
 			}
 
 			Layout layout = LayoutLocalServiceUtil.addLayout(

@@ -478,7 +478,14 @@ public class PortalUtil {
 
 	public static String getJsSafePortletName(String portletName) {
 		String jsSafePortletName =
-			StringUtil.replace(portletName, StringPool.SPACE, StringPool.BLANK);
+			StringUtil.replace(
+				portletName,
+				new String[] {
+					StringPool.SPACE, StringPool.DASH
+				},
+				new String[] {
+					StringPool.BLANK, StringPool.BLANK
+				});
 
 		return jsSafePortletName;
 	}
