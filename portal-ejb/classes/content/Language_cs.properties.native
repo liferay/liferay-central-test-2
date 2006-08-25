@@ -1380,7 +1380,7 @@ this-coupon-only-applies-to-items-with-a-sku-that-corresponds-to-this-comma-deli
 this-email-address-will-also-serve-as-your-login=Tento e-mail slouží zároveň jako Váš login.
 this-feature-requires-internet-explorer-5.5-and-above=Tato funkcionalita potřebuje Internet Explorer 5.5 a vyšší.
 this-folder-is-empty=Složka je prázdná.
-this-form-has-already-been-submitted=Formulář již byl odeslán.
+this-form-has-already-been-submitted=This form has already been submitted. Submit will be enabled in {0} seconds.
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=Tato funkcionalita může být použita pouze pokud Váč e-mail bude odeslán jako formátovaný. Chcetre formátování zapnout?
 this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed=This page displays the last {0} articles, structures, and templates that you accessed.
 this-page-is-part-of-an-inactive-portlet=tato stránka je součástí neaktivního portletu.

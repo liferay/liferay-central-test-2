@@ -108,6 +108,7 @@ the-template-with-the-name-x-was-found-that-matches-the-id=The template with the
 the-total-size-of-all-files-attached-to-a-message-may-not-exceed-x-k=Upload failed. The total size of all files attached to a message may not exceed {0}k.
 there-are-currently-x-users-in-x-rooms=There are currently {0} users in {1} rooms.
 there-are-no-entries-for-this-category-on=There are no entries for this category on {0}.
+this-form-has-already-been-submitted=This form has already been submitted. Submit will be enabled in {0} seconds.
 this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed=This page displays the last {0} articles, structures, and templates that you accessed.
 to-email-joebloggs=* To email joebloggs@{0}, simply enter <i>joebloggs</i>
 upload-a-gif-or-jpeg-that-is-x-pixels-tall-and-x-pixels-wide=Upload a GIF or JPEG that is {0} pixels tall and {1} pixels wide.

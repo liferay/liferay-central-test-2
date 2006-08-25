@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-var submitFormCount = 0;
+var submitCountdown = 0;
 
 function addItem(box, text, value, sort) {
 	box[box.length] = new Option(text, value);
@@ -666,11 +666,15 @@ function redirect(form) {
 }
 
 function reelHome(id, startPosX, startPosY, duration, count, c) {
-    if (isNaN(startPosX) || isNaN(startPosY))
+    if (isNaN(startPosX) || isNaN(startPosY)) {
         return;
+	}
         
 	var obj = document.getElementById(id);
-	if (obj == null) return;
+
+	if (obj == null) {
+		return;
+	}
 	
 	var top = parseInt(obj.style.top);
 	var left = parseInt(obj.style.left);
@@ -684,19 +688,22 @@ function reelHome(id, startPosX, startPosY, duration, count, c) {
 	}
 	
 	if (c == null) {
-	    // calculate this constant once to speed up next iteration
-	    c = Math.PI / (2 * duration);
+
+		// Calculate this constant once to speed up next iteration
+
+		c = Math.PI / (2 * duration);
 		obj.style.zIndex = 10;
     }
 	
 	if (count < duration) {
 	    var ratio = 1 - Math.sin(count * c);
 	    
-	    // shift cos by -PI/2 and up 1.
+	    // Shift cos by -PI/2 and up 1
+
 		obj.style.left = (startPosX * ratio) + "px";
 		obj.style.top = (startPosY * ratio) + "px";
 		
-		setTimeout("reelHome(\""+id+"\","+startPosX+","+startPosY+","+duration+","+(++count)+","+c+")", 16)
+		setTimeout("reelHome(\"" + id + "\"," + startPosX + "," + startPosY + "," + duration + "," + (++count) + "," + c + ")", 16);
 	}
 	else {
 		obj.style.top = "0px";
@@ -771,6 +778,31 @@ function reorder(box, down) {
 	}
 }
 
+function resubmitCountdown(formName) {
+	if (submitCountdown > 0) {
+		submitCountdown--;
+
+		setTimeout("resubmitCountdown('" + formName + "')", 1000);
+	}
+	else {
+		submitCountdown = 0;
+
+		if (!is_ns_4) {
+			document.body.style.cursor = "auto";
+		}
+	
+		var form = document.forms[formName];
+
+		for (var i = 0; i < form.length; i++){
+			var e = form.elements[i];
+
+			if (e.type && (e.type.toLowerCase() == "button" || e.type.toLowerCase() == "reset" || e.type.toLowerCase() == "submit")) {
+				e.disabled = false;
+			}
+		}
+	}
+}
+
 function selectAndCopy(el) {
 	el.focus();
 	el.select();
@@ -807,11 +839,13 @@ function setSelectedValue(col, value) {
 function slideMaximize(id, height, speed) {
 	var obj = document.getElementById(id);
 	var reference = obj.getElementsByTagName("DIV")[0];
-   	height += speed;
+
+	height += speed;
 
 	if (height < (reference.offsetHeight)) {
 		obj.style.height = height + "px";
-		setTimeout("slideMaximize(\""+id+"\","+height+","+speed+")", 10)
+
+		setTimeout("slideMaximize(\"" + id + "\"," + height + "," + speed + ")", 10);
 	}
 	else {
 		obj.style.overflow = "";
@@ -821,11 +855,12 @@ function slideMaximize(id, height, speed) {
 
 function slideMinimize(id, height, speed) {
 	var obj = document.getElementById(id);
+
 	height -= speed;
 
 	if (height > 0) {
 		obj.style.height = height + "px";
-		setTimeout("slideMinimize(\""+id+"\","+height+","+speed+")", 10)
+		setTimeout("slideMinimize(\"" + id + "\"," + height + "," + speed + ")", 10);
 	}
 	else {
 		obj.style.display = "none";
@@ -879,15 +914,19 @@ function stripCarriageReturn(s) {
 }
 
 function submitForm(form, action, singleSubmit) {
-	if (submitFormCount == 0) {
+	if (submitCountdown == 0) {
+		submitCountdown = 10;
+
+		setTimeout("resubmitCountdown('" + form.name + "')", 1000);
+		
 		if (singleSubmit == null || singleSubmit) {
-			submitFormCount++;
+			submitCountdown++;
 
 			for (var i = 0; i < form.length; i++){
 				var e = form.elements[i];
 
 				if (e.type && (e.type.toLowerCase() == "button" || e.type.toLowerCase() == "reset" || e.type.toLowerCase() == "submit")) {
-					e.disabled=true;
+					e.disabled = true;
 				}
 			}
 		}
@@ -904,7 +943,7 @@ function submitForm(form, action, singleSubmit) {
 	}
 	else {
 		if (this.submitFormAlert != null) {
-  			submitFormAlert();
+  			submitFormAlert(submitCountdown);
 		}
 	}
 }

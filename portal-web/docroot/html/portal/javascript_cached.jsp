@@ -30,8 +30,10 @@ response.setContentType(Constants.TEXT_JAVASCRIPT);
 
 var mainPath = "<%= themeDisplay.getPathMain() %>";
 
-function submitFormAlert() {
-	alert("<%= UnicodeLanguageUtil.get(pageContext, "this-form-has-already-been-submitted") %>");
+function submitFormAlert(countdown) {
+	var msg = "<%= UnicodeLanguageUtil.get(pageContext, "this-form-has-already-been-submitted-try-again") %>"; 
+
+	alert(msg.replace("{0}", countdown));
 }
 
 <%
