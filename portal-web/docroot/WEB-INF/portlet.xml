@@ -1920,10 +1920,6 @@
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>
 			<preference>
-				<name>url</name>
-				<value>http://localhost:8080/alfresco-portlet</value>
-			</preference>
-			<preference>
 				<name>user-id</name>
 				<value>admin</value>
 			</preference>

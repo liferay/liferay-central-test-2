@@ -40,7 +40,6 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
 }
 
-String url = prefs.getValue("url", StringPool.BLANK);
 String userId = prefs.getValue("user-id", StringPool.BLANK);
 String password = prefs.getValue("password", StringPool.BLANK);
 String uuid = prefs.getValue("uuid", StringPool.BLANK);

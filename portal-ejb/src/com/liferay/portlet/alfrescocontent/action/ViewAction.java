@@ -55,7 +55,6 @@ public class ViewAction extends PortletAction {
 
 		PortletPreferences prefs = req.getPreferences();
 
-		String url = prefs.getValue("url", StringPool.BLANK);
 		String userId = prefs.getValue("user-id", StringPool.BLANK);
 		String password = prefs.getValue("password", StringPool.BLANK);
 		String uuid = prefs.getValue("uuid", StringPool.BLANK);
@@ -67,10 +66,17 @@ public class ViewAction extends PortletAction {
 
 		try {
 			content = AlfrescoContentUtil.getContent(
-				url, userId, password, uuid, path, maximizeLinks, res);
+				userId, password, uuid, path, maximizeLinks, res);
 		}
 		catch (Exception e) {
-			_log.warn(e.getMessage());
+			Throwable cause = e.getCause();
+
+			if (cause != null) {
+				_log.error(cause.getMessage());
+			}
+			else {
+				_log.error(e.getMessage());
+			}
 		}
 
 		req.setAttribute(WebKeys.ALFRESCO_CONTENT, content);

@@ -43,7 +43,9 @@ import org.alfresco.webservice.types.Reference;
 import org.alfresco.webservice.types.ResultSetRow;
 import org.alfresco.webservice.types.Store;
 import org.alfresco.webservice.types.StoreEnum;
+import org.alfresco.webservice.util.AuthenticationUtils;
 import org.alfresco.webservice.util.Constants;
+import org.alfresco.webservice.util.WebServiceFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -58,22 +60,21 @@ import org.apache.commons.logging.LogFactory;
 public class AlfrescoContentUtil {
 
 	public static ResultSetRow[] getChildNodes(
-			String url, String userId, String password, String uuid)
+			String userId, String password, String uuid)
 		throws Exception {
 
 		ResultSetRow[] rows = null;
 
 		try {
-			AuthenticationUtils.startSession(url, userId, password);
+			AuthenticationUtils.startSession(userId, password);
 
 			RepositoryServiceSoapBindingStub repositoryService =
-				WebServiceFactory.getRepositoryService(url);
+				WebServiceFactory.getRepositoryService();
 
 			Reference reference = null;
 
 			if (Validator.isNull(uuid)) {
-				reference = new Reference(
-					_SPACES_STORE, null, _COMPANY_HOME_PATH);
+				reference = new Reference(_SPACES_STORE, null, null);
 			}
 			else {
 				reference = new Reference(_SPACES_STORE, uuid, null);
@@ -84,22 +85,21 @@ public class AlfrescoContentUtil {
 			rows = result.getResultSet().getRows();
 		}
 		finally {
-			AuthenticationUtils.endSession(url);
+			AuthenticationUtils.endSession();
 		}
 
 		return rows;
 	}
 
 	public static String getContent(
-			String url, String userId, String password, String uuid,
-			String path)
+			String userId, String password, String uuid, String path)
 		throws Exception {
 
 		try {
-			AuthenticationUtils.startSession(url, userId, password);
+			AuthenticationUtils.startSession(userId, password);
 
 			ContentServiceSoapBindingStub contentService =
-				WebServiceFactory.getContentService(url);
+				WebServiceFactory.getContentService();
 
 			if (Validator.isNotNull(path)) {
 				uuid = null;
@@ -124,16 +124,16 @@ public class AlfrescoContentUtil {
 			return Http.URLtoString(contents[0].getUrl() + "?ticket=" + ticket);
 		}
 		finally {
-			AuthenticationUtils.endSession(url);
+			AuthenticationUtils.endSession();
 		}
 	}
 
 	public static String getContent(
-			String url, String userId, String password, String uuid,
-			String path, boolean maximizeLinks, RenderResponse res)
+			String userId, String password, String uuid, String path,
+			boolean maximizeLinks, RenderResponse res)
 		throws Exception {
 
-		String content = getContent(url, userId, password, uuid, path);
+		String content = getContent(userId, password, uuid, path);
 
 		return formatContent(content, maximizeLinks, res);
 	}
@@ -152,17 +152,16 @@ public class AlfrescoContentUtil {
 		return value;
 	}
 
-	public static Node getNode(
-			String url, String userId, String password, String uuid)
+	public static Node getNode(String userId, String password, String uuid)
 		throws Exception {
 
 		Node[] nodes = null;
 
 		try {
-			AuthenticationUtils.startSession(url, userId, password);
+			AuthenticationUtils.startSession(userId, password);
 
 			RepositoryServiceSoapBindingStub repositoryService =
-				WebServiceFactory.getRepositoryService(url);
+				WebServiceFactory.getRepositoryService();
 
 			Reference reference = new Reference(_SPACES_STORE, uuid, null);
 
@@ -172,29 +171,28 @@ public class AlfrescoContentUtil {
 			nodes = repositoryService.get(predicate);
 		}
 		finally {
-			AuthenticationUtils.endSession(url);
+			AuthenticationUtils.endSession();
 		}
 
 		return nodes[0];
 	}
 
 	public static ResultSetRow[] getParentNodes(
-			String url, String userId, String password, String uuid)
+			String userId, String password, String uuid)
 		throws Exception {
 
 		ResultSetRow[] rows = null;
 
 		try {
-			AuthenticationUtils.startSession(url, userId, password);
+			AuthenticationUtils.startSession(userId, password);
 
 			RepositoryServiceSoapBindingStub repositoryService =
-				WebServiceFactory.getRepositoryService(url);
+				WebServiceFactory.getRepositoryService();
 
 			Reference reference = null;
 
 			if (Validator.isNull(uuid)) {
-				reference = new Reference(
-					_SPACES_STORE, null, _COMPANY_HOME_PATH);
+				reference = new Reference(_SPACES_STORE, null, null);
 			}
 			else {
 				reference = new Reference(_SPACES_STORE, uuid, null);
@@ -205,7 +203,7 @@ public class AlfrescoContentUtil {
 			rows = result.getResultSet().getRows();
 		}
 		finally {
-			AuthenticationUtils.endSession(url);
+			AuthenticationUtils.endSession();
 		}
 
 		return rows;
@@ -263,9 +261,6 @@ public class AlfrescoContentUtil {
 
 	private static final Store _SPACES_STORE =
 		new Store(StoreEnum.workspace, "SpacesStore");
-
-	private static final String _COMPANY_HOME_PATH = null;
-	//private static final String _COMPANY_HOME_PATH = "/app:company_home";
 
 	private static Log _log = LogFactory.getLog(AlfrescoContentUtil.class);
 

@@ -31,15 +31,6 @@
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "url") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<input class="form-text" name="<portlet:namespace />url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= url %>">
-	</td>
-</tr>
-<tr>
-	<td>
 		<%= LanguageUtil.get(pageContext, "user-id") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
@@ -81,7 +72,7 @@ if (Validator.isNotNull(cmd)) {
 }
 
 try {
-	Node node = AlfrescoContentUtil.getNode(url, userId, password, uuid);
+	Node node = AlfrescoContentUtil.getNode(userId, password, uuid);
 
 	NamedValue[] nodeNamedValues = node.getProperties();
 
@@ -89,7 +80,7 @@ try {
 	String nodeName = AlfrescoContentUtil.getNamedValue(nodeNamedValues, org.alfresco.webservice.util.Constants.PROP_NAME);
 
 	if (selUuid == null) {
-		ResultSetRow[] parentNodes = AlfrescoContentUtil.getParentNodes(url, userId, password, uuid);
+		ResultSetRow[] parentNodes = AlfrescoContentUtil.getParentNodes(userId, password, uuid);
 
 		if (parentNodes != null) {
 			selUuid = parentNodes[0].getNode().getId();
@@ -107,7 +98,14 @@ try {
 	}
 }
 catch (Exception e) {
-	_log.warn(e.getMessage());
+	Throwable cause = e.getCause();
+
+	if (cause != null) {
+		_log.error(cause.getMessage());
+	}
+	else {
+		_log.error(e.getMessage());
+	}
 }
 %>
 
@@ -119,7 +117,7 @@ catch (Exception e) {
 String breadcrumbs = StringPool.BLANK;
 
 try {
-	Node curNode = AlfrescoContentUtil.getNode(url, userId, password, selUuid);
+	Node curNode = AlfrescoContentUtil.getNode(userId, password, selUuid);
 
 	NamedValue[] curNamedValues = curNode.getProperties();
 
@@ -137,7 +135,7 @@ try {
 	ResultSetRow[] parentNodes = null;
 
 	for (int i = 0;; i++) {
-		parentNodes = AlfrescoContentUtil.getParentNodes(url, userId, password, curUuid);
+		parentNodes = AlfrescoContentUtil.getParentNodes(userId, password, curUuid);
 
 		if (parentNodes == null) {
 			break;
@@ -164,7 +162,14 @@ try {
 	breadcrumbs = "<a href='" + portletURL.toString() + "'>Alfresco</a>" + " &raquo; " + breadcrumbs;
 }
 catch (Exception e) {
-	_log.warn(e.getMessage());
+	Throwable cause = e.getCause();
+
+	if (cause != null) {
+		_log.error(cause.getMessage());
+	}
+	else {
+		_log.error(e.getMessage());
+	}
 }
 %>
 
@@ -185,14 +190,21 @@ searchContainer.setEmptyResultsMessage("no-alfresco-content-was-found");
 ResultSetRow[] childNodes = new ResultSetRow[0];
 
 try {
-	childNodes = AlfrescoContentUtil.getChildNodes(url, userId, password, selUuid);
+	childNodes = AlfrescoContentUtil.getChildNodes(userId, password, selUuid);
 
 	if (childNodes == null) {
 		childNodes = new ResultSetRow[0];
 	}
 }
 catch (Exception e) {
-	_log.warn(e.getMessage());
+	Throwable cause = e.getCause();
+
+	if (cause != null) {
+		_log.error(cause.getMessage());
+	}
+	else {
+		_log.error(e.getMessage());
+	}
 }
 
 int total = childNodes.length;
@@ -274,7 +286,7 @@ for (int i = 0; i < childNodes.length; i++) {
 </form>
 
 <script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />url.focus();
+	document.<portlet:namespace />fm.<portlet:namespace />userId.focus();
 </script>
 
 <%!

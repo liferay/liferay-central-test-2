@@ -59,7 +59,6 @@ public class EditConfigurationAction extends PortletAction {
 			return;
 		}
 
-		String url = ParamUtil.getString(req, "url");
 		String userId = ParamUtil.getString(req, "userId");
 		String password = ParamUtil.getString(req, "password");
 		String uuid = ParamUtil.getString(req, "uuid");
@@ -71,7 +70,6 @@ public class EditConfigurationAction extends PortletAction {
 			PortletPreferencesFactory.getPortletSetup(
 				req, portletResource, true, true);
 
-		prefs.setValue("url", url);
 		prefs.setValue("user-id", userId);
 		prefs.setValue("password", password);
 		prefs.setValue("uuid", uuid);
