@@ -58,6 +58,7 @@ public class PortletConfigImpl implements PortletConfig {
 		_portletName = _rootPortletId;
 
 		int pos = _portletName.indexOf(Portlet.WAR_SEPARATOR);
+
 		if (pos != -1) {
 			_portletName = _portletName.substring(0, pos);
 

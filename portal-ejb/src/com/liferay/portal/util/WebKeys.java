@@ -255,8 +255,6 @@ public class WebKeys {
 
 	public static final String SEL_LAYOUT = "SEL_LAYOUT";
 
-	public static final String SERVLET_CONTEXT_NAME = "SERVLET_CONTEXT_NAME";
-
 	public static final String SESSION_LISTENER = "SESSION_LISTENER";
 
 	public static final String SHOPPING_CATEGORY = "SHOPPING_CATEGORY";

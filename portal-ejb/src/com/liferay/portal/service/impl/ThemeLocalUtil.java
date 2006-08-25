@@ -425,6 +425,7 @@ public class ThemeLocalUtil {
 			Element theme = (Element)itr1.next();
 
 			String themeId = theme.attributeValue("id");
+
 			if (servletContextName != null) {
 				themeId =
 					themeId + Portlet.WAR_SEPARATOR + servletContextName;
