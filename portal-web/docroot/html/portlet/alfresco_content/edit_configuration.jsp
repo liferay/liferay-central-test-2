@@ -60,7 +60,7 @@
 
 <br>
 
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);"><br>
+<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />uuid.value='<%= uuid %>'; submitForm(document.<portlet:namespace />fm);"><br>
 
 <%
 String cmd = ParamUtil.getString(request, Constants.CMD);

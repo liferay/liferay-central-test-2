@@ -95,21 +95,21 @@ public class AlfrescoContentUtil {
 			String userId, String password, String uuid, String path)
 		throws Exception {
 
+		if (Validator.isNotNull(path)) {
+			uuid = null;
+		}
+		else if (Validator.isNotNull(uuid)) {
+			path = null;
+		}
+		else {
+			return null;
+		}
+
 		try {
 			AuthenticationUtils.startSession(userId, password);
 
 			ContentServiceSoapBindingStub contentService =
 				WebServiceFactory.getContentService();
-
-			if (Validator.isNotNull(path)) {
-				uuid = null;
-			}
-			else if (Validator.isNotNull(uuid)) {
-				path = null;
-			}
-			else {
-				return null;
-			}
 
 			Reference reference = new Reference(_SPACES_STORE, uuid, path);
 
@@ -155,11 +155,14 @@ public class AlfrescoContentUtil {
 	public static Node getNode(String userId, String password, String uuid)
 		throws Exception {
 
+		if (Validator.isNull(uuid)) {
+			return null;
+		}
+
 		Node[] nodes = null;
 
 		try {
 			AuthenticationUtils.startSession(userId, password);
-
 			RepositoryServiceSoapBindingStub repositoryService =
 				WebServiceFactory.getRepositoryService();
 
