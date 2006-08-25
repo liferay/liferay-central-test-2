@@ -25,6 +25,7 @@ package com.liferay.counter.service.persistence;
 import com.liferay.counter.model.Counter;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,11 +45,14 @@ import org.hibernate.Session;
  */
 public class CounterPersistence extends BasePersistence {
 
+	public CounterPersistence() {
+	}
+
 	public List getNames() throws SystemException {
 		Session session = null;
 
 		try {
-			session = openSession();
+			session = HibernateUtil.getSessionFactory().openSession();
 
 			List list = new ArrayList();
 
@@ -70,11 +74,11 @@ public class CounterPersistence extends BasePersistence {
 			throw new SystemException(he);
 		}
 		finally {
-			closeSession(session);
+			session.close();
 		}
 	}
 
-	public synchronized long increment(String name)
+	public long increment(String name)
 		throws SystemException {
 
 		return increment(name, _MINIMUM_INCREMENT_SIZE);
@@ -90,7 +94,7 @@ public class CounterPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			session = openSession();
+			session = HibernateUtil.getSessionFactory().openSession();
 
 			Counter counter = (Counter)session.get(Counter.class, name);
 
@@ -107,9 +111,19 @@ public class CounterPersistence extends BasePersistence {
 
 			long currentId = counter.getCurrentId() + size;
 
+			/*System.out.println("Sleep\t" + name);
+
+			try {
+                Thread.sleep(5 * 1000);
+            }
+			catch (Exception e) {
+			}*/
+
 			counter.setCurrentId(currentId);
 
 			session.flush();
+
+			//System.out.println("Return\t" + name + " " + currentId);
 
 			return currentId;
 		}
@@ -117,7 +131,7 @@ public class CounterPersistence extends BasePersistence {
 			throw new SystemException(he);
 		}
 		finally {
-			closeSession(session);
+			session.close();
 		}
 	}
 
@@ -127,7 +141,7 @@ public class CounterPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			session = openSession();
+			session = HibernateUtil.getSessionFactory().openSession();
 
 			Counter counter = (Counter)session.load(Counter.class, oldName);
 
@@ -150,7 +164,7 @@ public class CounterPersistence extends BasePersistence {
 			throw new SystemException(he);
 		}
 		finally {
-			closeSession(session);
+			session.close();
 		}
 	}
 
@@ -158,7 +172,7 @@ public class CounterPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			session = openSession();
+			session = HibernateUtil.getSessionFactory().openSession();
 
 			Counter counter = (Counter)session.load(Counter.class, name);
 
@@ -172,11 +186,12 @@ public class CounterPersistence extends BasePersistence {
 			throw new SystemException(he);
 		}
 		finally {
-			closeSession(session);
+			session.close();
 		}
 	}
 
 	private static final int _DEFAULT_CURRENT_ID = 0;
+
 	private static final int _MINIMUM_INCREMENT_SIZE = 1;
 
 }
