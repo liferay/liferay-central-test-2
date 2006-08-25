@@ -60,18 +60,17 @@ public class HotDeployUtil {
 		_events = new Vector();
 	}
 
-	private void _fireDeployEvent(HotDeployEvent event) {
+	private synchronized void _fireDeployEvent(HotDeployEvent event) {
 
 		// Capture events that are fired before the portal initialized. These
 		// events are later fired by flushEvents.
 
-		synchronized (HotDeployUtil.class) {
-			if (_events != null) {
-				_events.add(event);
+		if (_events != null) {
+			_events.add(event);
 
-				return;
-			}
+			return;
 		}
+
 		// Fire current event
 
 		Iterator itr = _listeners.iterator();
@@ -107,27 +106,25 @@ public class HotDeployUtil {
 		_listeners.add(listener);
 	}
 
-	private void _flushEvents() {
-		synchronized (HotDeployUtil.class) {
-			for (int i = 0; i < _events.size(); i++) {
-				HotDeployEvent event = (HotDeployEvent)_events.get(i);
+	private synchronized void _flushEvents() {
+		for (int i = 0; i < _events.size(); i++) {
+			HotDeployEvent event = (HotDeployEvent)_events.get(i);
 
-				Iterator itr = _listeners.iterator();
+			Iterator itr = _listeners.iterator();
 
-				while (itr.hasNext()) {
-					HotDeployListener listener = (HotDeployListener)itr.next();
+			while (itr.hasNext()) {
+				HotDeployListener listener = (HotDeployListener)itr.next();
 
-					try {
-						listener.invokeDeploy(event);
-					}
-					catch (HotDeployException hde) {
-						_log.error(StackTraceUtil.getStackTrace(hde));
-					}
+				try {
+					listener.invokeDeploy(event);
+				}
+				catch (HotDeployException hde) {
+					_log.error(StackTraceUtil.getStackTrace(hde));
 				}
 			}
-
-			_events = null;
 		}
+
+		_events = null;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(HotDeployUtil.class);
