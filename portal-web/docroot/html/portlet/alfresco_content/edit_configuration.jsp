@@ -26,7 +26,7 @@
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
-<input name="<portlet:namespace />uuid" type="hidden" value="">
+<input name="<portlet:namespace />uuid" type="hidden" value="<%= uuid %>">
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -60,7 +60,7 @@
 
 <br>
 
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />uuid.value='<%= uuid %>'; submitForm(document.<portlet:namespace />fm);"><br>
+<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);"><br>
 
 <%
 String cmd = ParamUtil.getString(request, Constants.CMD);

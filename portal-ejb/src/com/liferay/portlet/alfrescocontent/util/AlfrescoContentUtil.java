@@ -163,6 +163,7 @@ public class AlfrescoContentUtil {
 
 		try {
 			AuthenticationUtils.startSession(userId, password);
+
 			RepositoryServiceSoapBindingStub repositoryService =
 				WebServiceFactory.getRepositoryService();
 

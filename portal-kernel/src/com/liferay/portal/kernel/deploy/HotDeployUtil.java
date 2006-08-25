@@ -68,7 +68,7 @@ public class HotDeployUtil {
 		synchronized (HotDeployUtil.class) {
 			if (_events != null) {
 				_events.add(event);
-	
+
 				return;
 			}
 		}
@@ -111,12 +111,12 @@ public class HotDeployUtil {
 		synchronized (HotDeployUtil.class) {
 			for (int i = 0; i < _events.size(); i++) {
 				HotDeployEvent event = (HotDeployEvent)_events.get(i);
-	
+
 				Iterator itr = _listeners.iterator();
-	
+
 				while (itr.hasNext()) {
 					HotDeployListener listener = (HotDeployListener)itr.next();
-	
+
 					try {
 						listener.invokeDeploy(event);
 					}
@@ -125,7 +125,7 @@ public class HotDeployUtil {
 					}
 				}
 			}
-	
+
 			_events = null;
 		}
 	}
