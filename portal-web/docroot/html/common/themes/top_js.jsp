@@ -31,6 +31,10 @@
 		--%>
 
 		<script src="<%= themeDisplay.getPathJavaScript() %>/everything.js" type="text/javascript"></script>
+
+		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JAVASCRIPT_LOG_ENABLED)) %>">
+			<script src="<%= themeDisplay.getPathJavaScript() %>/log.js" type="text/javascript"></script>
+		</c:if>
 	</c:when>
 	<c:otherwise>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/sniffer.js" type="text/javascript"></script>
@@ -51,6 +55,10 @@
 		<script src="<%= themeDisplay.getPathJavaScript() %>/dragdrop/drag.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/dragdrop/dragdrop.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/dragdrop/resize.js" type="text/javascript"></script>
+
+		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JAVASCRIPT_LOG_ENABLED)) %>">
+			<script src="<%= themeDisplay.getPathJavaScript() %>/log/log4javascript.js" type="text/javascript"></script>
+		</c:if>
 
 		<script src="<%= themeDisplay.getPathJavaScript() %>/portlet/layout_configuration.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/portlet/messaging.js" type="text/javascript"></script>

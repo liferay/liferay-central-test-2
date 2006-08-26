@@ -120,6 +120,8 @@ public class PropsUtil {
 
 	public static final String JAVASCRIPT_FAST_LOAD = "javascript.fast.load";
 
+	public static final String JAVASCRIPT_LOG_ENABLED = "javascript.log.enabled";
+
 	// Company
 
 	public static final String COMPANY_TYPES = "company.types";

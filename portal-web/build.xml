@@ -395,6 +395,19 @@
 		</java>
 
 		<delete file="JavaScriptBuilder.temp" />
+
+		<java
+			classname="com.liferay.portal.tools.JavaScriptBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="false"
+		>
+			<arg value="log/log4javascript.js" />
+			<arg value="docroot/html/js/log.js" />
+			<arg value="true" />
+		</java>
+
+		<delete file="JavaScriptBuilder.temp" />
 	</target>
 
 	<target name="build-website">

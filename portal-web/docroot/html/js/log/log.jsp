@@ -22,27 +22,53 @@
  */
 %>
 
-<%@ include file="/html/common/init.jsp" %>
-
-<%@ include file="/html/common/themes/top_meta.jsp" %>
-<%@ include file="/html/common/themes/top_meta-ext.jsp" %>
-
-<link rel="Shortcut Icon" href="<%= themeDisplay.getPathThemeImage() %>/liferay.ico" />
-
-<link href="<%= themeDisplay.getPathMain() %>/portal/css_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>" type="text/css" rel="stylesheet" />
-<link href="<%= themeDisplay.getPathJavaScript() %>/calendar/skins/aqua/theme.css" rel="stylesheet" type="text/css" />
-
-<style type="text/css">
-	<liferay-theme:include page="css.jsp" />
-</style>
-
-<%@ include file="/html/common/themes/top_js.jsp" %>
-<%@ include file="/html/common/themes/top_js-ext.jsp" %>
-
-<%@ include file="/html/js/log/log.jsp" %>
-
-<script language="JavaScript" src="<%= themeDisplay.getPathMain() %>/portal/javascript_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&languageId=<%= themeDisplay.getLocale().toString() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>"></script>
-
 <script type="text/javascript">
-	<liferay-theme:include page="javascript.jsp" />
+	var LogFactory = {
+		<c:choose>
+			<c:when test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JAVASCRIPT_LOG_ENABLED)) %>">
+				getLog : function(name) {
+					var log;
+	
+					if (name == null || name == "") {
+						name = "[default]";
+					}
+	
+					log = log4javascript.getLogger(name);
+					
+					var appender = new log4javascript.PopUpAppender(new log4javascript.PatternLayout("%d{HH:mm:ss} %-5p [%c] %m%n"));
+					appender.setWidth(800);
+					appender.setHeight(200);
+
+					log.addAppender(appender);
+	
+					return log;
+				},
+			</c:when>
+			<c:otherwise>
+				getLog : function(name) {
+					return new LogFactory.DummyLogger();
+				},
+		
+				DummyLogger : function () {
+					this.trace = function(message, exception) {
+					};
+				
+					this.debug = function(message, exception) {
+					};
+				
+					this.info = function(message, exception) {
+					};
+				
+					this.warn = function(message, exception) {
+					};
+				
+					this.error = function(message, exception) {
+					};
+				
+					this.fatal = function(message, exception) {
+					};
+				}
+			</c:otherwise>
+		</c:choose>	
+	}
 </script>
