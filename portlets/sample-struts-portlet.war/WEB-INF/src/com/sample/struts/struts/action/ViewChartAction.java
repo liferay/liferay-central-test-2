@@ -22,8 +22,6 @@
 
 package com.sample.struts.struts.action;
 
-import com.liferay.portlet.LiferaySessionUtil;
-
 import java.io.OutputStream;
 
 import java.util.Enumeration;
@@ -74,14 +72,12 @@ public class ViewChartAction extends Action {
 
 			// Application scoped session attributes can be fetched from the
 			// servlet directly. Portlet scoped session attributes can be
-			// fetched from the servlet using Liferay's custom utility or Sun's
-			// PortletSessionUtil.
+			// fetched from Sun's PortletSessionUtil.
 
 			HttpSession ses = req.getSession();
 
 			String chartName =
 				(String)ses.getAttribute(attrName);
-				//(String)_getAttribute(req, portletName, layoutId, attrName);
 				//(String)_getAttribute(req, attrName);
 
 			// Chart
@@ -135,20 +131,6 @@ public class ViewChartAction extends Action {
 
 			return mapping.findForward("/common/error.jsp");
 		}
-	}
-
-	private Object _getAttribute(
-		HttpServletRequest req, String portletName, String layoutId,
-		String attrName) {
-
-		// Use Liferay's custom utility to encode the attribute name
-
-		HttpSession ses = req.getSession();
-
-		String encodedAttrName = LiferaySessionUtil.encodeAttributeName(
-			req, portletName, layoutId, attrName);
-
-		return ses.getAttribute(encodedAttrName);
 	}
 
 	private Object _getAttribute(HttpServletRequest req, String attrName) {
