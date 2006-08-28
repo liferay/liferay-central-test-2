@@ -39,8 +39,6 @@
 <%@ include file="/html/common/themes/top_js.jsp" %>
 <%@ include file="/html/common/themes/top_js-ext.jsp" %>
 
-<%@ include file="/html/js/log/log.jsp" %>
-
 <script language="JavaScript" src="<%= themeDisplay.getPathMain() %>/portal/javascript_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&languageId=<%= themeDisplay.getLocale().toString() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>"></script>
 
 <script type="text/javascript">

@@ -56,11 +56,13 @@
 		<script src="<%= themeDisplay.getPathJavaScript() %>/dragdrop/dragdrop.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/dragdrop/resize.js" type="text/javascript"></script>
 
+		<script src="<%= themeDisplay.getPathJavaScript() %>/portlet/layout_configuration.js" type="text/javascript"></script>
+		<script src="<%= themeDisplay.getPathJavaScript() %>/portlet/messaging.js" type="text/javascript"></script>
+
 		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JAVASCRIPT_LOG_ENABLED)) %>">
 			<script src="<%= themeDisplay.getPathJavaScript() %>/log/log4javascript.js" type="text/javascript"></script>
 		</c:if>
-
-		<script src="<%= themeDisplay.getPathJavaScript() %>/portlet/layout_configuration.js" type="text/javascript"></script>
-		<script src="<%= themeDisplay.getPathJavaScript() %>/portlet/messaging.js" type="text/javascript"></script>
 	</c:otherwise>
 </c:choose>
+
+<%@ include file="/html/js/log/log.jsp" %>
