@@ -33,7 +33,6 @@ import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.FolderNameException;
-import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceUtil;
@@ -41,6 +40,7 @@ import com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalService;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.Hits;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -63,7 +63,7 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 
 		User user = UserUtil.findByPrimaryKey(userId);
 		String groupId = PortalUtil.getPortletGroupId(plid);
-		parentFolderId = getParentFolderId(user.getCompanyId(), parentFolderId);
+		parentFolderId = getParentFolderId(groupId, parentFolderId);
 		Date now = new Date();
 
 		validate(name);
@@ -230,11 +230,13 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 			String name, String description)
 		throws PortalException, SystemException {
 
-		parentFolderId = getParentFolderId(companyId, parentFolderId);
+		DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
+
+		String oldFolderId = folder.getParentFolderId();
+
+		parentFolderId = getParentFolderId(folder, parentFolderId);
 
 		validate(name);
-
-		DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
 
 		folder.setModifiedDate(new Date());
 		folder.setParentFolderId(parentFolderId);
@@ -246,27 +248,55 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 		return folder;
 	}
 
-	protected String getParentFolderId(String companyId, String parentFolderId)
-		throws PortalException, SystemException {
+	protected String getParentFolderId(String groupId, String parentFolderId)
+		throws SystemException {
 
 		if (!parentFolderId.equals(DLFolder.DEFAULT_PARENT_FOLDER_ID)) {
+			DLFolder parentFolder =
+				DLFolderUtil.fetchByPrimaryKey(parentFolderId);
 
-			// Ensure parent folder exists and belongs to the proper company
+			if ((parentFolder == null) ||
+				(!groupId.equals(parentFolder.getGroupId()))) {
 
-			try {
-				DLFolder parentFolder =
-					DLFolderUtil.findByPrimaryKey(parentFolderId);
-
-				if (!companyId.equals(parentFolder.getCompanyId())) {
-					parentFolderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
-				}
-			}
-			catch (NoSuchFolderException nsfe) {
 				parentFolderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
 			}
 		}
 
 		return parentFolderId;
+	}
+
+	protected String getParentFolderId(DLFolder folder, String parentFolderId)
+		throws SystemException {
+
+		if (parentFolderId.equals(DLFolder.DEFAULT_PARENT_FOLDER_ID)) {
+			return parentFolderId;
+		}
+
+		if (folder.getFolderId().equals(parentFolderId)) {
+			return folder.getParentFolderId();
+		}
+		else {
+			DLFolder parentFolder =
+				DLFolderUtil.fetchByPrimaryKey(parentFolderId);
+
+			if ((parentFolder == null) ||
+				(!folder.getGroupId().equals(parentFolder.getGroupId()))) {
+
+				return folder.getParentFolderId();
+			}
+
+			List subfolderIds = new ArrayList();
+
+			getSubfolderIds(
+				subfolderIds, folder.getGroupId(),
+				folder.getFolderId());
+
+			if (subfolderIds.contains(parentFolderId)) {
+				return folder.getParentFolderId();
+			}
+
+			return parentFolderId;
+		}
 	}
 
 	protected void validate(String name) throws PortalException {

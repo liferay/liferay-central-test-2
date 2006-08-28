@@ -24,6 +24,7 @@ package com.liferay.portlet.documentlibrary.util;
 
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceUtil;
@@ -50,7 +51,7 @@ public class DLUtil {
 
 	public static String getBreadcrumbs(
 			String folderId, String name, PageContext pageContext,
-			RenderResponse res)
+			RenderResponse res, boolean popUp)
 		throws Exception {
 
 		if (Validator.isNotNull(folderId) && Validator.isNotNull(name)) {
@@ -58,7 +59,7 @@ public class DLUtil {
 				folderId, name);
 
 			return getBreadcrumbs(
-				fileEntry.getFolder(), fileEntry, pageContext, res);
+				fileEntry.getFolder(), fileEntry, pageContext, res, popUp);
 		}
 		else {
 			DLFolder folder = null;
@@ -69,13 +70,13 @@ public class DLUtil {
 			catch (Exception e) {
 			}
 
-			return getBreadcrumbs(folder, null, pageContext, res);
+			return getBreadcrumbs(folder, null, pageContext, res, popUp);
 		}
 	}
 
 	public static String getBreadcrumbs(
 			DLFolder folder, DLFileEntry fileEntry, PageContext pageContext,
-			RenderResponse res)
+			RenderResponse res, boolean popUp)
 		throws Exception {
 
 		if ((fileEntry != null) && (folder == null)) {
@@ -84,9 +85,17 @@ public class DLUtil {
 
 		PortletURL foldersURL = res.createRenderURL();
 
-		foldersURL.setWindowState(WindowState.MAXIMIZED);
+		if (popUp) {
+			foldersURL.setWindowState(LiferayWindowState.POP_UP);
 
-		foldersURL.setParameter("struts_action", "/document_library/view");
+			foldersURL.setParameter(
+				"struts_action", "/document_library/select_folder");
+		}
+		else {
+			foldersURL.setWindowState(WindowState.MAXIMIZED);
+
+			foldersURL.setParameter("struts_action", "/document_library/view");
+		}
 
 		String foldersLink =
 			"<a href=\"" + foldersURL.toString() + "\">" +
@@ -102,11 +111,20 @@ public class DLUtil {
 			for (int i = 0;; i++) {
 				PortletURL portletURL = res.createRenderURL();
 
-				portletURL.setWindowState(WindowState.MAXIMIZED);
+				if (popUp) {
+					portletURL.setWindowState(LiferayWindowState.POP_UP);
 
-				portletURL.setParameter(
-					"struts_action", "/document_library/view");
-				portletURL.setParameter("folderId", folder.getFolderId());
+					portletURL.setParameter(
+						"struts_action", "/document_library/select_folder");
+					portletURL.setParameter("folderId", folder.getFolderId());
+				}
+				else {
+					portletURL.setWindowState(WindowState.MAXIMIZED);
+
+					portletURL.setParameter(
+						"struts_action", "/document_library/view");
+					portletURL.setParameter("folderId", folder.getFolderId());
+				}
 
 				String folderLink =
 					"<a href=\"" + portletURL.toString() + "\">" +

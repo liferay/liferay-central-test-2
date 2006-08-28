@@ -119,6 +119,11 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 			</table>
 		</td>
 	</tr>
+	<tr>
+		<td colspan="3">
+			<br>
+		</td>
+	</tr>
 </c:if>
 
 <tr>

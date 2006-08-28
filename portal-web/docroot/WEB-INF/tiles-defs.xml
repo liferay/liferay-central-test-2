@@ -347,6 +347,10 @@
 		<put name="portlet_content" value="/portlet/document_library/search.jsp" />
 	</definition>
 
+	<definition name="portlet.document_library.select_folder" extends="portlet.document_library">
+		<put name="portlet_content" value="/portlet/document_library/select_folder.jsp" />
+	</definition>
+
 	<definition name="portlet.document_library.view" extends="portlet.document_library">
 		<put name="portlet_content" value="/portlet/document_library/view.jsp" />
 	</definition>

@@ -122,7 +122,7 @@ if (fileEntry != null) {
 
 <liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
-<%= DLUtil.getBreadcrumbs(folderId, null, pageContext, renderResponse) %>
+<%= DLUtil.getBreadcrumbs(folderId, null, pageContext, renderResponse, false) %>
 
 <br><br>
 
