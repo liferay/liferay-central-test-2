@@ -185,7 +185,7 @@ public class ShoppingCategoryServiceHttp {
 	public static com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
 		HttpPrincipal httpPrincipal, java.lang.String categoryId,
 		java.lang.String parentCategoryId, java.lang.String name,
-		java.lang.String description)
+		java.lang.String description, boolean mergeWithParentCategory)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -213,9 +213,12 @@ public class ShoppingCategoryServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj4 = new BooleanWrapper(mergeWithParentCategory);
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
 					"updateCategory",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 			Object returnObj = null;
 
 			try {

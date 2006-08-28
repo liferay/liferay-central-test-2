@@ -29,6 +29,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.shopping.NoSuchCartException;
 import com.liferay.portlet.shopping.model.ShoppingCart;
 import com.liferay.portlet.shopping.model.ShoppingCartItem;
@@ -562,7 +563,8 @@ public class ShoppingUtil {
 	}
 
 	public static String getBreadcrumbs(
-			String categoryId, PageContext pageContext, RenderResponse res)
+			String categoryId, PageContext pageContext, RenderResponse res,
+			boolean popUp)
 		throws Exception {
 
 		ShoppingCategory category = null;
@@ -573,20 +575,28 @@ public class ShoppingUtil {
 		catch (Exception e) {
 		}
 
-		return getBreadcrumbs(category, pageContext, res);
+		return getBreadcrumbs(category, pageContext, res, popUp);
 	}
 
 	public static String getBreadcrumbs(
 			ShoppingCategory category, PageContext pageContext,
-			RenderResponse res)
+			RenderResponse res, boolean popUp)
 		throws Exception {
 
 		PortletURL categoriesURL = res.createRenderURL();
 
-		categoriesURL.setWindowState(WindowState.MAXIMIZED);
+		if (popUp) {
+			categoriesURL.setWindowState(LiferayWindowState.POP_UP);
 
-		categoriesURL.setParameter("struts_action", "/shopping/view");
-		categoriesURL.setParameter("tabs1", "categories");
+			categoriesURL.setParameter(
+				"struts_action", "/shopping/select_category");
+		}
+		else {
+			categoriesURL.setWindowState(WindowState.MAXIMIZED);
+
+			categoriesURL.setParameter("struts_action", "/shopping/view");
+			categoriesURL.setParameter("tabs1", "categories");
+		}
 
 		String categoriesLink =
 			"<a href=\"" + categoriesURL.toString() + "\">" +
@@ -602,11 +612,22 @@ public class ShoppingUtil {
 			for (int i = 0;; i++) {
 				PortletURL portletURL = res.createRenderURL();
 
-				portletURL.setWindowState(WindowState.MAXIMIZED);
+				if (popUp) {
+					portletURL.setWindowState(LiferayWindowState.POP_UP);
 
-				portletURL.setParameter("struts_action", "/shopping/view");
-				portletURL.setParameter("tabs1", "categories");
-				portletURL.setParameter("categoryId", category.getCategoryId());
+					portletURL.setParameter(
+						"struts_action", "/shopping/select_category");
+					portletURL.setParameter(
+						"categoryId", category.getCategoryId());
+				}
+				else {
+					portletURL.setWindowState(WindowState.MAXIMIZED);
+
+					portletURL.setParameter("struts_action", "/shopping/view");
+					portletURL.setParameter("tabs1", "categories");
+					portletURL.setParameter(
+						"categoryId", category.getCategoryId());
+				}
 
 				String categoryLink =
 					"<a href=\"" + portletURL.toString() + "\">" +

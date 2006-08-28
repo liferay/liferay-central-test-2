@@ -31,9 +31,10 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.shopping.CategoryNameException;
-import com.liferay.portlet.shopping.NoSuchCategoryException;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
+import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil;
+import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 import com.liferay.portlet.shopping.service.spring.ShoppingCategoryLocalService;
 import com.liferay.portlet.shopping.service.spring.ShoppingItemLocalServiceUtil;
 import com.liferay.util.Validator;
@@ -64,8 +65,7 @@ public class ShoppingCategoryLocalServiceImpl
 
 		User user = UserUtil.findByPrimaryKey(userId);
 		String groupId = PortalUtil.getPortletGroupId(plid);
-		parentCategoryId = getParentCategoryId(
-			user.getCompanyId(), parentCategoryId);
+		parentCategoryId = getParentCategoryId(groupId, parentCategoryId);
 		Date now = new Date();
 
 		validate(name);
@@ -241,16 +241,19 @@ public class ShoppingCategoryLocalServiceImpl
 	}
 
 	public ShoppingCategory updateCategory(
-			String companyId, String categoryId, String parentCategoryId,
-			String name, String description)
+			String categoryId, String parentCategoryId, String name,
+			String description, boolean mergeWithParentCategory)
 		throws PortalException, SystemException {
 
-		parentCategoryId = getParentCategoryId(companyId, parentCategoryId);
-
-		validate(name);
+		// Category
 
 		ShoppingCategory category =
 			ShoppingCategoryUtil.findByPrimaryKey(categoryId);
+
+		String oldCategoryId = category.getParentCategoryId();
+		parentCategoryId = getParentCategoryId(category, parentCategoryId);
+
+		validate(name);
 
 		category.setModifiedDate(new Date());
 		category.setParentCategoryId(parentCategoryId);
@@ -259,33 +262,104 @@ public class ShoppingCategoryLocalServiceImpl
 
 		ShoppingCategoryUtil.update(category);
 
+		// Merge categories
+
+		if (mergeWithParentCategory &&
+			!oldCategoryId.equals(parentCategoryId) &&
+			!parentCategoryId.equals(
+				ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+
+			mergeCategories(category, parentCategoryId);
+		}
+
 		return category;
 	}
 
 	protected String getParentCategoryId(
-			String companyId, String parentCategoryId)
-		throws PortalException, SystemException {
+			String groupId, String parentCategoryId)
+		throws SystemException {
 
 		if (!parentCategoryId.equals(
 				ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID)) {
 
-			// Ensure parent category exists and belongs to the proper company
+			ShoppingCategory parentCategory =
+				ShoppingCategoryUtil.fetchByPrimaryKey(parentCategoryId);
 
-			try {
-				ShoppingCategory parentCategory =
-					ShoppingCategoryUtil.findByPrimaryKey(parentCategoryId);
+			if ((parentCategory == null) ||
+				(!groupId.equals(parentCategory.getGroupId()))) {
 
-				if (!companyId.equals(parentCategory.getCompanyId())) {
-					parentCategoryId =
-						ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID;
-				}
-			}
-			catch (NoSuchCategoryException nsce) {
 				parentCategoryId = ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID;
 			}
 		}
 
 		return parentCategoryId;
+	}
+
+	protected String getParentCategoryId(
+			ShoppingCategory category, String parentCategoryId)
+		throws SystemException {
+
+		if (parentCategoryId.equals(
+				ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+
+			return parentCategoryId;
+		}
+
+		if (category.getCategoryId().equals(parentCategoryId)) {
+			return category.getParentCategoryId();
+		}
+		else {
+			ShoppingCategory parentCategory =
+				ShoppingCategoryUtil.fetchByPrimaryKey(parentCategoryId);
+
+			if ((parentCategory == null) ||
+				(!category.getGroupId().equals(parentCategory.getGroupId()))) {
+
+				return category.getParentCategoryId();
+			}
+
+			List subcategoryIds = new ArrayList();
+
+			getSubcategoryIds(
+				subcategoryIds, category.getGroupId(),
+				category.getCategoryId());
+
+			if (subcategoryIds.contains(parentCategoryId)) {
+				return category.getParentCategoryId();
+			}
+
+			return parentCategoryId;
+		}
+	}
+
+	protected void mergeCategories(
+			ShoppingCategory fromCategory, String toCategoryId)
+		throws PortalException, SystemException {
+
+		Iterator itr = ShoppingCategoryUtil.findByG_P(
+			fromCategory.getGroupId(), fromCategory.getCategoryId()).iterator();
+
+		while (itr.hasNext()) {
+			ShoppingCategory category = (ShoppingCategory)itr.next();
+
+			mergeCategories(category, toCategoryId);
+		}
+
+		itr = ShoppingItemUtil.findByCategoryId(
+			fromCategory.getCategoryId()).iterator();
+
+		while (itr.hasNext()) {
+
+			// Item
+
+			ShoppingItem item = (ShoppingItem)itr.next();
+
+			item.setCategoryId(toCategoryId);
+
+			ShoppingItemUtil.update(item);
+		}
+
+		ShoppingCategoryUtil.remove(fromCategory.getCategoryId());
 	}
 
 	protected void validate(String name) throws PortalException {

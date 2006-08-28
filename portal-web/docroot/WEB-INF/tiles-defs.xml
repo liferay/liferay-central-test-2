@@ -921,6 +921,10 @@
 		<put name="portlet_content" value="/portlet/shopping/error.jsp" />
 	</definition>
 
+	<definition name="portlet.shopping.select_category" extends="portlet.shopping">
+		<put name="portlet_content" value="/portlet/shopping/select_category.jsp" />
+	</definition>
+
 	<definition name="portlet.shopping.view" extends="portlet.shopping">
 		<put name="portlet_content" value="/portlet/shopping/view.jsp" />
 	</definition>

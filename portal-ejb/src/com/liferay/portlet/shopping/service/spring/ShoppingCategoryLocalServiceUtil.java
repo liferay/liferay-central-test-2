@@ -147,14 +147,14 @@ public class ShoppingCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
-		java.lang.String companyId, java.lang.String categoryId,
-		java.lang.String parentCategoryId, java.lang.String name,
-		java.lang.String description)
+		java.lang.String categoryId, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		boolean mergeWithParentCategory)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
 
-		return shoppingCategoryLocalService.updateCategory(companyId,
-			categoryId, parentCategoryId, name, description);
+		return shoppingCategoryLocalService.updateCategory(categoryId,
+			parentCategoryId, name, description, mergeWithParentCategory);
 	}
 }

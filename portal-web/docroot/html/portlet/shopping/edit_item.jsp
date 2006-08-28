@@ -137,6 +137,15 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= item == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
+
+	function selectCategory(categoryId, categoryName) {
+		document.<portlet:namespace />fm.<portlet:namespace />categoryId.value = categoryId;
+
+		var nameEl = document.getElementById("<portlet:namespace />categoryName");
+
+		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + categoryId;
+		nameEl.innerHTML = categoryName + "&nbsp;";
+	}
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_item" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveItem(); return false;">
@@ -159,11 +168,38 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 <liferay-ui:error exception="<%= ItemNameException.class %>" message="please-enter-a-valid-name" />
 <liferay-ui:error exception="<%= ItemSKUException.class %>" message="please-enter-a-valid-item-sku" />
 
-<%= ShoppingUtil.getBreadcrumbs(categoryId, pageContext, renderResponse) %>
+<%= ShoppingUtil.getBreadcrumbs(categoryId, pageContext, renderResponse, false) %>
 
 <br><br>
 
 <table border="0" cellpadding="0" cellspacing="0">
+
+<c:if test="<%= item != null %>">
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "category") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+
+			<%
+			ShoppingCategory category = ShoppingCategoryLocalServiceUtil.getCategory(categoryId);
+			%>
+
+			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
+			<%= category.getName() %>
+			</a>
+
+			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/select_category" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<br>
+		</td>
+	</tr>
+</c:if>
+
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "sku") %>

@@ -42,7 +42,6 @@ import com.liferay.portlet.shopping.ItemNameException;
 import com.liferay.portlet.shopping.ItemSKUException;
 import com.liferay.portlet.shopping.ItemSmallImageNameException;
 import com.liferay.portlet.shopping.ItemSmallImageSizeException;
-import com.liferay.portlet.shopping.NoSuchCategoryException;
 import com.liferay.portlet.shopping.NoSuchItemException;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
@@ -252,10 +251,9 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 		Date now = new Date();
 
 		validate(
-			user.getCompanyId(), null, categoryId, sku, name, smallImage,
-			smallImageURL, smallFile, smallBytes, mediumImage, mediumImageURL,
-			mediumFile, mediumBytes, largeImage, largeImageURL, largeFile,
-			largeBytes);
+			user.getCompanyId(), null, sku, name, smallImage, smallImageURL,
+			smallFile, smallBytes, mediumImage, mediumImageURL, mediumFile,
+			mediumBytes, largeImage, largeImageURL, largeFile, largeBytes);
 
 		String itemId = Long.toString(CounterLocalServiceUtil.increment(
 			ShoppingItem.class.getName()));
@@ -565,7 +563,10 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 
 		// Item
 
+		ShoppingItem item = ShoppingItemUtil.findByPrimaryKey(itemId);
+
 		User user = UserUtil.findByPrimaryKey(userId);
+		ShoppingCategory category = getCategory(item, categoryId);
 		sku = sku.trim().toUpperCase();
 
 		byte[] smallBytes = null;
@@ -581,15 +582,12 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 		}
 
 		validate(
-			user.getCompanyId(), itemId, categoryId, sku, name, smallImage,
-			smallImageURL, smallFile, smallBytes, mediumImage, mediumImageURL,
-			mediumFile, mediumBytes, largeImage, largeImageURL, largeFile,
-			largeBytes);
-
-		ShoppingItem item = ShoppingItemUtil.findByPrimaryKey(itemId);
+			user.getCompanyId(), itemId, sku, name, smallImage, smallImageURL,
+			smallFile, smallBytes, mediumImage, mediumImageURL, mediumFile,
+			mediumBytes, largeImage, largeImageURL, largeFile, largeBytes);
 
 		item.setModifiedDate(new Date());
-		item.setCategoryId(categoryId);
+		item.setCategoryId(category.getCategoryId());
 		item.setSku(sku);
 		item.setName(name);
 		item.setDescription(description);
@@ -713,6 +711,26 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 		return properties;
 	}
 
+	protected ShoppingCategory getCategory(ShoppingItem item, String categoryId)
+		throws PortalException, SystemException {
+
+		if (!item.getCategoryId().equals(categoryId)) {
+			ShoppingCategory oldCategory =
+				ShoppingCategoryUtil.findByPrimaryKey(item.getCategoryId());
+
+			ShoppingCategory newCategory =
+				ShoppingCategoryUtil.fetchByPrimaryKey(categoryId);
+
+			if ((newCategory == null) ||
+				(!oldCategory.getGroupId().equals(newCategory.getGroupId()))) {
+
+				categoryId = item.getCategoryId();
+			}
+		}
+
+		return ShoppingCategoryUtil.findByPrimaryKey(categoryId);
+	}
+
 	protected void saveImages(
 		boolean smallImage, String smallImageKey, File smallFile,
 		byte[] smallBytes, boolean mediumImage, String mediumImageKey,
@@ -754,12 +772,11 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 	}
 
 	protected void validate(
-			String companyId, String itemId, String categoryId, String sku,
-			String name, boolean smallImage, String smallImageURL,
-			File smallFile, byte[] smallBytes, boolean mediumImage,
-			String mediumImageURL, File mediumFile, byte[] mediumBytes,
-			boolean largeImage, String largeImageURL, File largeFile,
-			byte[] largeBytes)
+			String companyId, String itemId, String sku, String name,
+			boolean smallImage, String smallImageURL, File smallFile,
+			byte[] smallBytes, boolean mediumImage, String mediumImageURL,
+			File mediumFile, byte[] mediumBytes, boolean largeImage,
+			String largeImageURL, File largeFile, byte[] largeBytes)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(sku)) {
@@ -779,13 +796,6 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 			}
 		}
 		catch (NoSuchItemException nsie) {
-		}
-
-		ShoppingCategory category =
-			ShoppingCategoryUtil.findByPrimaryKey(categoryId);
-
-		if (!category.getCompanyId().equals(companyId)) {
-			throw new NoSuchCategoryException();
 		}
 
 		if (Validator.isNull(name)) {

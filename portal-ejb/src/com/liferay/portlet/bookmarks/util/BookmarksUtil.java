@@ -23,13 +23,13 @@
 package com.liferay.portlet.bookmarks.util;
 
 import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.spring.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.spring.BookmarksFolderLocalServiceUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
-import com.liferay.portlet.LiferayWindowState;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderResponse;

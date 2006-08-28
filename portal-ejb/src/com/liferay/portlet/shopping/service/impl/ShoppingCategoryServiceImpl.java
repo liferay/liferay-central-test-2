@@ -75,15 +75,15 @@ public class ShoppingCategoryServiceImpl
 
 	public ShoppingCategory updateCategory(
 			String categoryId, String parentCategoryId, String name,
-			String description)
+			String description, boolean mergeWithParentCategory)
 		throws PortalException, SystemException {
 
 		ShoppingCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.UPDATE);
 
 		return ShoppingCategoryLocalServiceUtil.updateCategory(
-			getUser().getCompanyId(), categoryId, parentCategoryId, name,
-			description);
+			categoryId, parentCategoryId, name, description,
+			mergeWithParentCategory);
 	}
 
 }

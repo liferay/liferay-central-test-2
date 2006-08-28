@@ -1138,6 +1138,11 @@
 			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
 		</action>
 
+		<action path="/shopping/select_category" type="com.liferay.portlet.shopping.action.EditCategoryAction">
+			<forward name="portlet.shopping.edit_category" path="portlet.shopping.select_category" />
+			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
+		</action>
+
 		<action path="/shopping/view" type="com.liferay.portlet.shopping.action.ViewAction">
 			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
 			<forward name="portlet.shopping.view" path="portlet.shopping.view" />

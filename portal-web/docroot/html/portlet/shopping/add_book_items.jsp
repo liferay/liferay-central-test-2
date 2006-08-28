@@ -38,7 +38,7 @@ String categoryId = ParamUtil.get(request, "categoryId", ShoppingCategory.DEFAUL
 	<liferay-util:param name="tabs1" value="categories" />
 </liferay-util:include>
 
-<%= ShoppingUtil.getBreadcrumbs(categoryId, pageContext, renderResponse) %>
+<%= ShoppingUtil.getBreadcrumbs(categoryId, pageContext, renderResponse, false) %>
 
 <br><br>
 

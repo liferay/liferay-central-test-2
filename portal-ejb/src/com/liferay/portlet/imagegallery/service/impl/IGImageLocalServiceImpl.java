@@ -33,7 +33,6 @@ import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.imagegallery.ImageNameException;
 import com.liferay.portlet.imagegallery.ImageSizeException;
-import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
