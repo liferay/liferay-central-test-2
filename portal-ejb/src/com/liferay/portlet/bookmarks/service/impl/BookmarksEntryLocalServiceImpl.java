@@ -37,6 +37,7 @@ import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
 import com.liferay.portlet.bookmarks.service.spring.BookmarksEntryLocalService;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
 import java.net.MalformedURLException;
@@ -65,13 +66,13 @@ public class BookmarksEntryLocalServiceImpl
 		// Entry
 
 		User user = UserUtil.findByPrimaryKey(userId);
-		folderId = getFolderId(user.getCompanyId(), folderId);
 		BookmarksFolder folder = BookmarksFolderUtil.findByPrimaryKey(folderId);
-		Date now = new Date();
 
 		if (Validator.isNull(name)) {
 			name = url;
 		}
+
+		Date now = new Date();
 
 		validate(url);
 
@@ -196,7 +197,9 @@ public class BookmarksEntryLocalServiceImpl
 			String url, String comments)
 		throws PortalException, SystemException {
 
-		folderId = getFolderId(companyId, folderId);
+		BookmarksEntry entry = BookmarksEntryUtil.findByPrimaryKey(entryId);
+
+		BookmarksFolder folder = getFolder(entry, folderId);
 
 		if (Validator.isNull(name)) {
 			name = url;
@@ -204,10 +207,8 @@ public class BookmarksEntryLocalServiceImpl
 
 		validate(url);
 
-		BookmarksEntry entry = BookmarksEntryUtil.findByPrimaryKey(entryId);
-
 		entry.setModifiedDate(new Date());
-		entry.setFolderId(folderId);
+		entry.setFolderId(folder.getFolderId());
 		entry.setName(name);
 		entry.setUrl(url);
 		entry.setComments(comments);
@@ -217,27 +218,24 @@ public class BookmarksEntryLocalServiceImpl
 		return entry;
 	}
 
-	protected String getFolderId(String companyId, String folderId)
+	protected BookmarksFolder getFolder(BookmarksEntry entry, String folderId)
 		throws PortalException, SystemException {
 
-		if (!folderId.equals(BookmarksFolder.DEFAULT_PARENT_FOLDER_ID)) {
+		if (!entry.getFolderId().equals(folderId)) {
+			BookmarksFolder oldFolder = BookmarksFolderUtil.findByPrimaryKey(
+				entry.getFolderId());
 
-			// Ensure folder exists and belongs to the proper company
+			BookmarksFolder newFolder = BookmarksFolderUtil.fetchByPrimaryKey(
+				folderId);
 
-			try {
-				BookmarksFolder folder =
-					BookmarksFolderUtil.findByPrimaryKey(folderId);
+			if ((newFolder == null) ||
+				(!oldFolder.getGroupId().equals(newFolder.getGroupId()))) {
 
-				if (!companyId.equals(folder.getCompanyId())) {
-					folderId = BookmarksFolder.DEFAULT_PARENT_FOLDER_ID;
-				}
-			}
-			catch (NoSuchFolderException nsfe) {
-				folderId = BookmarksFolder.DEFAULT_PARENT_FOLDER_ID;
+				folderId = entry.getFolderId();
 			}
 		}
 
-		return folderId;
+		return BookmarksFolderUtil.findByPrimaryKey(folderId);
 	}
 
 	protected void validate(String url) throws PortalException {

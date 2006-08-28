@@ -85,11 +85,11 @@ public class BookmarksFolderServiceSoap {
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolderModel updateFolder(
 		java.lang.String folderId, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description)
-		throws RemoteException {
+		java.lang.String name, java.lang.String description,
+		boolean mergeWithParentFolder) throws RemoteException {
 		try {
 			com.liferay.portlet.bookmarks.model.BookmarksFolder returnValue = BookmarksFolderServiceUtil.updateFolder(folderId,
-					parentFolderId, name, description);
+					parentFolderId, name, description, mergeWithParentFolder);
 
 			return returnValue;
 		}

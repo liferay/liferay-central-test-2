@@ -218,8 +218,9 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 		IGFolder folder = IGFolderUtil.findByPrimaryKey(folderId);
 
 		String oldFolderId = folder.getParentFolderId();
-
 		parentFolderId = getParentFolderId(folder, parentFolderId);
+
+		validate(name);
 
 		folder.setModifiedDate(new Date());
 		folder.setParentFolderId(parentFolderId);
@@ -279,8 +280,7 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 			List subfolderIds = new ArrayList();
 
 			getSubfolderIds(
-				subfolderIds, folder.getGroupId(),
-				folder.getFolderId());
+				subfolderIds, folder.getGroupId(), folder.getFolderId());
 
 			if (subfolderIds.contains(parentFolderId)) {
 				return folder.getParentFolderId();

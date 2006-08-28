@@ -375,7 +375,6 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
 
 		String oldCategoryId = category.getParentCategoryId();
-
 		parentCategoryId = getParentCategoryId(category, parentCategoryId);
 
 		validate(name);

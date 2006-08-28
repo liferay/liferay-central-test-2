@@ -185,7 +185,7 @@ public class BookmarksFolderServiceHttp {
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder updateFolder(
 		HttpPrincipal httpPrincipal, java.lang.String folderId,
 		java.lang.String parentFolderId, java.lang.String name,
-		java.lang.String description)
+		java.lang.String description, boolean mergeWithParentFolder)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -213,9 +213,12 @@ public class BookmarksFolderServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj4 = new BooleanWrapper(mergeWithParentFolder);
 			MethodWrapper methodWrapper = new MethodWrapper(BookmarksFolderServiceUtil.class.getName(),
 					"updateFolder",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 			Object returnObj = null;
 
 			try {

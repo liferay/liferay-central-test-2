@@ -29,6 +29,7 @@ import com.liferay.portlet.bookmarks.service.spring.BookmarksEntryLocalServiceUt
 import com.liferay.portlet.bookmarks.service.spring.BookmarksFolderLocalServiceUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
+import com.liferay.portlet.LiferayWindowState;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderResponse;
@@ -46,7 +47,7 @@ public class BookmarksUtil {
 
 	public static String getBreadcrumbs(
 			String folderId, String entryId, PageContext pageContext,
-			RenderResponse res)
+			RenderResponse res, boolean popUp)
 		throws Exception {
 
 		if (Validator.isNotNull(entryId)) {
@@ -54,7 +55,7 @@ public class BookmarksUtil {
 				BookmarksEntryLocalServiceUtil.getEntry(entryId);
 
 			return getBreadcrumbs(
-				entry.getFolder(), entry, pageContext, res);
+				entry.getFolder(), entry, pageContext, res, popUp);
 		}
 		else {
 			BookmarksFolder folder = null;
@@ -65,13 +66,13 @@ public class BookmarksUtil {
 			catch (Exception e) {
 			}
 
-			return getBreadcrumbs(folder, null, pageContext, res);
+			return getBreadcrumbs(folder, null, pageContext, res, popUp);
 		}
 	}
 
 	public static String getBreadcrumbs(
 			BookmarksFolder folder, BookmarksEntry entry,
-			PageContext pageContext, RenderResponse res)
+			PageContext pageContext, RenderResponse res, boolean popUp)
 		throws Exception {
 
 		if ((entry != null) && (folder == null)) {
@@ -80,9 +81,16 @@ public class BookmarksUtil {
 
 		PortletURL foldersURL = res.createRenderURL();
 
-		foldersURL.setWindowState(WindowState.MAXIMIZED);
+		if (popUp) {
+			foldersURL.setWindowState(LiferayWindowState.POP_UP);
 
-		foldersURL.setParameter("struts_action", "/bookmarks/view");
+			foldersURL.setParameter("struts_action", "/bookmarks/select_folder");
+		}
+		else {
+			foldersURL.setWindowState(WindowState.MAXIMIZED);
+
+			foldersURL.setParameter("struts_action", "/bookmarks/view");
+		}
 
 		String foldersLink =
 			"<a href=\"" + foldersURL.toString() + "\">" +
@@ -98,10 +106,19 @@ public class BookmarksUtil {
 			for (int i = 0;; i++) {
 				PortletURL portletURL = res.createRenderURL();
 
-				portletURL.setWindowState(WindowState.MAXIMIZED);
+				if (popUp) {
+					portletURL.setWindowState(LiferayWindowState.POP_UP);
 
-				portletURL.setParameter("struts_action", "/bookmarks/view");
-				portletURL.setParameter("folderId", folder.getFolderId());
+					portletURL.setParameter(
+						"struts_action", "/bookmarks/select_folder");
+					portletURL.setParameter("folderId", folder.getFolderId());
+				}
+				else {
+					portletURL.setWindowState(WindowState.MAXIMIZED);
+
+					portletURL.setParameter("struts_action", "/bookmarks/view");
+					portletURL.setParameter("folderId", folder.getFolderId());
+				}
 
 				String folderLink =
 					"<a href=\"" + portletURL.toString() + "\">" +

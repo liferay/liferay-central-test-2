@@ -126,6 +126,9 @@ public class EditFolderAction extends PortletAction {
 		String name = ParamUtil.getString(req, "name");
 		String description = ParamUtil.getString(req, "description");
 
+		boolean mergeWithParentFolder = ParamUtil.getBoolean(
+			req, "mergeWithParentFolder");
+
 		boolean addCommunityPermissions = ParamUtil.getBoolean(
 			req, "addCommunityPermissions");
 		boolean addGuestPermissions = ParamUtil.getBoolean(
@@ -144,7 +147,8 @@ public class EditFolderAction extends PortletAction {
 			// Update folder
 
 			BookmarksFolderServiceUtil.updateFolder(
-				folderId, parentFolderId, name, description);
+				folderId, parentFolderId, name, description,
+				mergeWithParentFolder);
 		}
 	}
 

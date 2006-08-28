@@ -59,12 +59,13 @@ public class BookmarksFolderServiceUtil {
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder updateFolder(
 		java.lang.String folderId, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description)
+		java.lang.String name, java.lang.String description,
+		boolean mergeWithParentFolder)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BookmarksFolderService bookmarksFolderService = BookmarksFolderServiceFactory.getService();
 
 		return bookmarksFolderService.updateFolder(folderId, parentFolderId,
-			name, description);
+			name, description, mergeWithParentFolder);
 	}
 }

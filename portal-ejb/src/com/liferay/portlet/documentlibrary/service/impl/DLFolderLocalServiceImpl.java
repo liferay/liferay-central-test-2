@@ -233,7 +233,6 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 		DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
 
 		String oldFolderId = folder.getParentFolderId();
-
 		parentFolderId = getParentFolderId(folder, parentFolderId);
 
 		validate(name);
@@ -288,8 +287,7 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 			List subfolderIds = new ArrayList();
 
 			getSubfolderIds(
-				subfolderIds, folder.getGroupId(),
-				folder.getFolderId());
+				subfolderIds, folder.getGroupId(), folder.getFolderId());
 
 			if (subfolderIds.contains(parentFolderId)) {
 				return folder.getParentFolderId();

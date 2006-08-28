@@ -74,15 +74,14 @@ public class BookmarksFolderServiceImpl
 
 	public BookmarksFolder updateFolder(
 			String folderId, String parentFolderId, String name,
-			String description)
+			String description, boolean mergeWithParentFolder)
 		throws PortalException, SystemException {
 
 		BookmarksFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.UPDATE);
 
 		return BookmarksFolderLocalServiceUtil.updateFolder(
-			getUser().getCompanyId(), folderId, parentFolderId, name,
-			description);
+			folderId, parentFolderId, name, description, mergeWithParentFolder);
 	}
 
 }
