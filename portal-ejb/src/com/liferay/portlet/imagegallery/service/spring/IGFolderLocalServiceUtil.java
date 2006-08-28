@@ -132,14 +132,14 @@ public class IGFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder updateFolder(
-		java.lang.String companyId, java.lang.String folderId,
-		java.lang.String parentFolderId, java.lang.String name,
-		java.lang.String description)
+		java.lang.String folderId, java.lang.String parentFolderId,
+		java.lang.String name, java.lang.String description,
+		boolean mergeWithParentFolder)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
-		return igFolderLocalService.updateFolder(companyId, folderId,
-			parentFolderId, name, description);
+		return igFolderLocalService.updateFolder(folderId, parentFolderId,
+			name, description, mergeWithParentFolder);
 	}
 }

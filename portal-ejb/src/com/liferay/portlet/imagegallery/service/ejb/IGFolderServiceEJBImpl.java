@@ -79,13 +79,14 @@ public class IGFolderServiceEJBImpl implements IGFolderService, SessionBean {
 
 	public com.liferay.portlet.imagegallery.model.IGFolder updateFolder(
 		java.lang.String folderId, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description)
+		java.lang.String name, java.lang.String description,
+		boolean mergeWithParentFolder)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return getService().updateFolder(folderId, parentFolderId, name,
-			description);
+			description, mergeWithParentFolder);
 	}
 
 	public void ejbCreate() throws CreateException {

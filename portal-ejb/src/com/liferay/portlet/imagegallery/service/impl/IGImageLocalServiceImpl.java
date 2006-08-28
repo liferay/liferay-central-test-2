@@ -79,7 +79,6 @@ public class IGImageLocalServiceImpl implements IGImageLocalService {
 			// Image
 
 			User user = UserUtil.findByPrimaryKey(userId);
-			folderId = getFolderId(user.getCompanyId(), folderId);
 			IGFolder folder = IGFolderUtil.findByPrimaryKey(folderId);
 			BufferedImage bufferedImage = ImageIO.read(file);
 			byte[] bytes = FileUtil.getBytes(file);
@@ -232,18 +231,17 @@ public class IGImageLocalServiceImpl implements IGImageLocalService {
 
 			// Image
 
-			folderId = getFolderId(companyId, folderId);
+			IGImage image = IGImageUtil.findByPrimaryKey(
+				new IGImagePK(companyId, imageId));
+
+			IGFolder folder = getFolder(image, folderId);
 			BufferedImage bufferedImage = ImageIO.read(file);
 			byte[] bytes = FileUtil.getBytes(file);
 
 			validate(file, bytes);
 
-			IGImagePK pk = new IGImagePK(companyId, imageId);
-
-			IGImage image = IGImageUtil.findByPrimaryKey(pk);
-
 			image.setModifiedDate(new Date());
-			image.setFolderId(folderId);
+			image.setFolderId(folder.getFolderId());
 			image.setDescription(description);
 			image.setHeight(bufferedImage.getHeight());
 			image.setWidth(bufferedImage.getWidth());
@@ -264,26 +262,23 @@ public class IGImageLocalServiceImpl implements IGImageLocalService {
 		}
 	}
 
-	protected String getFolderId(String companyId, String folderId)
+	protected IGFolder getFolder(IGImage image, String folderId)
 		throws PortalException, SystemException {
 
-		if (!folderId.equals(IGFolder.DEFAULT_PARENT_FOLDER_ID)) {
+		if (!image.getFolderId().equals(folderId)) {
+			IGFolder oldFolder = IGFolderUtil.findByPrimaryKey(
+				image.getFolderId());
 
-			// Ensure folder exists and belongs to the proper company
+			IGFolder newFolder = IGFolderUtil.fetchByPrimaryKey(folderId);
 
-			try {
-				IGFolder folder = IGFolderUtil.findByPrimaryKey(folderId);
+			if ((newFolder == null) ||
+				(!oldFolder.getGroupId().equals(newFolder.getGroupId()))) {
 
-				if (!companyId.equals(folder.getCompanyId())) {
-					folderId = IGFolder.DEFAULT_PARENT_FOLDER_ID;
-				}
-			}
-			catch (NoSuchFolderException nsfe) {
-				folderId = IGFolder.DEFAULT_PARENT_FOLDER_ID;
+				folderId = image.getFolderId();
 			}
 		}
 
-		return folderId;
+		return IGFolderUtil.findByPrimaryKey(folderId);
 	}
 
 	protected void saveImages(

@@ -399,6 +399,59 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 		return category;
 	}
 
+	protected String getParentCategoryId(
+			String groupId, String parentCategoryId)
+		throws SystemException {
+
+		if (!parentCategoryId.equals(MBCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+			MBCategory parentCategory =
+				MBCategoryUtil.fetchByPrimaryKey(parentCategoryId);
+
+			if ((parentCategory == null) ||
+				(!groupId.equals(parentCategory.getGroupId()))) {
+
+				parentCategoryId = MBCategory.DEFAULT_PARENT_CATEGORY_ID;
+			}
+		}
+
+		return parentCategoryId;
+	}
+
+	protected String getParentCategoryId(
+			MBCategory category, String parentCategoryId)
+		throws SystemException {
+
+		if (parentCategoryId.equals(MBCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+			return parentCategoryId;
+		}
+
+		if (category.getCategoryId().equals(parentCategoryId)) {
+			return category.getParentCategoryId();
+		}
+		else {
+			MBCategory parentCategory =
+				MBCategoryUtil.fetchByPrimaryKey(parentCategoryId);
+
+			if ((parentCategory == null) ||
+				(!category.getGroupId().equals(parentCategory.getGroupId()))) {
+
+				return category.getParentCategoryId();
+			}
+
+			List subcategoryIds = new ArrayList();
+
+			getSubcategoryIds(
+				subcategoryIds, category.getGroupId(),
+				category.getCategoryId());
+
+			if (subcategoryIds.contains(parentCategoryId)) {
+				return category.getParentCategoryId();
+			}
+
+			return parentCategoryId;
+		}
+	}
+
 	protected void mergeCategories(MBCategory fromCategory, String toCategoryId)
 		throws PortalException, SystemException {
 
@@ -455,59 +508,6 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 		}
 
 		MBCategoryUtil.remove(fromCategory.getCategoryId());
-	}
-
-	protected String getParentCategoryId(
-			String groupId, String parentCategoryId)
-		throws SystemException {
-
-		if (!parentCategoryId.equals(MBCategory.DEFAULT_PARENT_CATEGORY_ID)) {
-			MBCategory parentCategory =
-				MBCategoryUtil.fetchByPrimaryKey(parentCategoryId);
-
-			if ((parentCategory == null) ||
-				(!groupId.equals(parentCategory.getGroupId()))) {
-
-				parentCategoryId = MBCategory.DEFAULT_PARENT_CATEGORY_ID;
-			}
-		}
-
-		return parentCategoryId;
-	}
-
-	protected String getParentCategoryId(
-			MBCategory category, String parentCategoryId)
-		throws SystemException {
-
-		if (parentCategoryId.equals(MBCategory.DEFAULT_PARENT_CATEGORY_ID)) {
-			return parentCategoryId;
-		}
-
-		if (category.getCategoryId().equals(parentCategoryId)) {
-			return category.getParentCategoryId();
-		}
-		else {
-			MBCategory parentCategory =
-				MBCategoryUtil.fetchByPrimaryKey(parentCategoryId);
-
-			if ((parentCategory == null) ||
-				(!category.getGroupId().equals(parentCategory.getGroupId()))) {
-
-				return category.getParentCategoryId();
-			}
-
-			List subcategoryIds = new ArrayList();
-
-			getSubcategoryIds(
-				subcategoryIds, category.getGroupId(),
-				category.getCategoryId());
-
-			if (subcategoryIds.contains(parentCategoryId)) {
-				return category.getParentCategoryId();
-			}
-
-			return parentCategoryId;
-		}
 	}
 
 	protected void validate(String name) throws PortalException {

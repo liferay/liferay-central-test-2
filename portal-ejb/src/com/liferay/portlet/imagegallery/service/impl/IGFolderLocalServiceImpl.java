@@ -31,13 +31,15 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.FolderNameException;
-import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
+import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
 import com.liferay.portlet.imagegallery.service.spring.IGFolderLocalService;
 import com.liferay.portlet.imagegallery.service.spring.IGImageLocalServiceUtil;
 import com.liferay.util.Validator;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -60,7 +62,7 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 
 		User user = UserUtil.findByPrimaryKey(userId);
 		String groupId = PortalUtil.getPortletGroupId(plid);
-		parentFolderId = getParentFolderId(user.getCompanyId(), parentFolderId);
+		parentFolderId = getParentFolderId(groupId, parentFolderId);
 		Date now = new Date();
 
 		validate(name);
@@ -207,15 +209,17 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 	}
 
 	public IGFolder updateFolder(
-			String companyId, String folderId, String parentFolderId,
-			String name, String description)
+			String folderId, String parentFolderId, String name,
+			String description, boolean mergeWithParentFolder)
 		throws PortalException, SystemException {
 
-		parentFolderId = getParentFolderId(companyId, parentFolderId);
-
-		validate(name);
+		// Folder
 
 		IGFolder folder = IGFolderUtil.findByPrimaryKey(folderId);
+
+		String oldFolderId = folder.getParentFolderId();
+
+		parentFolderId = getParentFolderId(folder, parentFolderId);
 
 		folder.setModifiedDate(new Date());
 		folder.setParentFolderId(parentFolderId);
@@ -224,30 +228,94 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 
 		IGFolderUtil.update(folder);
 
+		// Merge folders
+
+		if (mergeWithParentFolder && !oldFolderId.equals(parentFolderId) &&
+			!parentFolderId.equals(IGFolder.DEFAULT_PARENT_FOLDER_ID)) {
+
+			mergeFolders(folder, parentFolderId);
+		}
+
 		return folder;
 	}
 
-	protected String getParentFolderId(String companyId, String parentFolderId)
-		throws PortalException, SystemException {
+	protected String getParentFolderId(String groupId, String parentFolderId)
+		throws SystemException {
 
 		if (!parentFolderId.equals(IGFolder.DEFAULT_PARENT_FOLDER_ID)) {
+			IGFolder parentFolder =
+				IGFolderUtil.fetchByPrimaryKey(parentFolderId);
 
-			// Ensure parent folder exists and belongs to the proper company
+			if ((parentFolder == null) ||
+				(!groupId.equals(parentFolder.getGroupId()))) {
 
-			try {
-				IGFolder parentFolder =
-					IGFolderUtil.findByPrimaryKey(parentFolderId);
-
-				if (!companyId.equals(parentFolder.getCompanyId())) {
-					parentFolderId = IGFolder.DEFAULT_PARENT_FOLDER_ID;
-				}
-			}
-			catch (NoSuchFolderException nsfe) {
 				parentFolderId = IGFolder.DEFAULT_PARENT_FOLDER_ID;
 			}
 		}
 
 		return parentFolderId;
+	}
+
+	protected String getParentFolderId(IGFolder folder, String parentFolderId)
+		throws SystemException {
+
+		if (parentFolderId.equals(IGFolder.DEFAULT_PARENT_FOLDER_ID)) {
+			return parentFolderId;
+		}
+
+		if (folder.getFolderId().equals(parentFolderId)) {
+			return folder.getParentFolderId();
+		}
+		else {
+			IGFolder parentFolder =
+				IGFolderUtil.fetchByPrimaryKey(parentFolderId);
+
+			if ((parentFolder == null) ||
+				(!folder.getGroupId().equals(parentFolder.getGroupId()))) {
+
+				return folder.getParentFolderId();
+			}
+
+			List subfolderIds = new ArrayList();
+
+			getSubfolderIds(
+				subfolderIds, folder.getGroupId(),
+				folder.getFolderId());
+
+			if (subfolderIds.contains(parentFolderId)) {
+				return folder.getParentFolderId();
+			}
+
+			return parentFolderId;
+		}
+	}
+
+	protected void mergeFolders(IGFolder fromFolder, String toFolderId)
+		throws PortalException, SystemException {
+
+		Iterator itr = IGFolderUtil.findByG_P(
+			fromFolder.getGroupId(), fromFolder.getFolderId()).iterator();
+
+		while (itr.hasNext()) {
+			IGFolder folder = (IGFolder)itr.next();
+
+			mergeFolders(folder, toFolderId);
+		}
+
+		itr = IGImageUtil.findByFolderId(fromFolder.getFolderId()).iterator();
+
+		while (itr.hasNext()) {
+
+			// Image
+
+			IGImage image = (IGImage)itr.next();
+
+			image.setFolderId(toFolderId);
+
+			IGImageUtil.update(image);
+		}
+
+		IGFolderUtil.remove(fromFolder.getFolderId());
 	}
 
 	protected void validate(String name) throws PortalException {

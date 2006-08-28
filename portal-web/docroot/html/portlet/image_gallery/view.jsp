@@ -42,7 +42,7 @@ portletURL.setParameter("folderId", folderId);
 <liferay-ui:tabs names="folders" />
 
 <c:if test="<%= folder != null %>">
-	<%= IGUtil.getBreadcrumbs(folder, null, pageContext, renderResponse) %>
+	<%= IGUtil.getBreadcrumbs(folder, null, pageContext, renderResponse, false) %>
 
 	<br><br>
 </c:if>

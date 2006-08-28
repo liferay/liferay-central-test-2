@@ -54,7 +54,7 @@ headerNames.add("num-of-folders");
 headerNames.add("num-of-documents");
 headerNames.add(StringPool.BLANK);
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
 int total = DLFolderLocalServiceUtil.getFoldersCount(portletGroupId, folderId);
 

@@ -24,6 +24,7 @@ package com.liferay.portlet.imagegallery.util;
 
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.spring.IGFolderLocalServiceUtil;
@@ -48,7 +49,7 @@ public class IGUtil {
 
 	public static String getBreadcrumbs(
 			String folderId, String imageId, PageContext pageContext,
-			RenderRequest req, RenderResponse res)
+			RenderRequest req, RenderResponse res, boolean popUp)
 		throws Exception {
 
 		if (Validator.isNotNull(imageId)) {
@@ -58,7 +59,7 @@ public class IGUtil {
 				companyId, imageId);
 
 			return getBreadcrumbs(
-				image.getFolder(), image, pageContext, res);
+				image.getFolder(), image, pageContext, res, popUp);
 		}
 		else {
 			IGFolder folder = null;
@@ -69,13 +70,13 @@ public class IGUtil {
 			catch (Exception e) {
 			}
 
-			return getBreadcrumbs(folder, null, pageContext, res);
+			return getBreadcrumbs(folder, null, pageContext, res, popUp);
 		}
 	}
 
 	public static String getBreadcrumbs(
 			IGFolder folder, IGImage image, PageContext pageContext,
-			RenderResponse res)
+			RenderResponse res, boolean popUp)
 		throws Exception {
 
 		if ((image != null) && (folder == null)) {
@@ -84,9 +85,17 @@ public class IGUtil {
 
 		PortletURL foldersURL = res.createRenderURL();
 
-		foldersURL.setWindowState(WindowState.MAXIMIZED);
+		if (popUp) {
+			foldersURL.setWindowState(LiferayWindowState.POP_UP);
 
-		foldersURL.setParameter("struts_action", "/image_gallery/view");
+			foldersURL.setParameter(
+				"struts_action", "/image_gallery/select_folder");
+		}
+		else {
+			foldersURL.setWindowState(WindowState.MAXIMIZED);
+
+			foldersURL.setParameter("struts_action", "/image_gallery/view");
+		}
 
 		String foldersLink =
 			"<a href=\"" + foldersURL.toString() + "\">" +
@@ -102,10 +111,20 @@ public class IGUtil {
 			for (int i = 0;; i++) {
 				PortletURL portletURL = res.createRenderURL();
 
-				portletURL.setWindowState(WindowState.MAXIMIZED);
+				if (popUp) {
+					portletURL.setWindowState(LiferayWindowState.POP_UP);
 
-				portletURL.setParameter("struts_action", "/image_gallery/view");
-				portletURL.setParameter("folderId", folder.getFolderId());
+					portletURL.setParameter(
+						"struts_action", "/image_gallery/select_folder");
+					portletURL.setParameter("folderId", folder.getFolderId());
+				}
+				else {
+					portletURL.setWindowState(WindowState.MAXIMIZED);
+
+					portletURL.setParameter(
+						"struts_action", "/image_gallery/view");
+					portletURL.setParameter("folderId", folder.getFolderId());
+				}
 
 				String folderLink =
 					"<a href=\"" + portletURL.toString() + "\">" +

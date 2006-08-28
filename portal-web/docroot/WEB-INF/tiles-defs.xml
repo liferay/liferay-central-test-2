@@ -512,6 +512,10 @@
 		<put name="portlet_content" value="/portlet/image_gallery/error.jsp" />
 	</definition>
 
+	<definition name="portlet.image_gallery.select_folder" extends="portlet.image_gallery">
+		<put name="portlet_content" value="/portlet/image_gallery/select_folder.jsp" />
+	</definition>
+
 	<definition name="portlet.image_gallery.view" extends="portlet.image_gallery">
 		<put name="portlet_content" value="/portlet/image_gallery/view.jsp" />
 	</definition>

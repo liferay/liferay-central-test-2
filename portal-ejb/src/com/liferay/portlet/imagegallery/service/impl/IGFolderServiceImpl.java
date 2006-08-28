@@ -74,15 +74,14 @@ public class IGFolderServiceImpl
 
 	public IGFolder updateFolder(
 			String folderId, String parentFolderId, String name,
-			String description)
+			String description, boolean mergeWithParentFolder)
 		throws PortalException, SystemException {
 
 		IGFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.UPDATE);
 
 		return IGFolderLocalServiceUtil.updateFolder(
-			getUser().getCompanyId(), folderId, parentFolderId, name,
-			description);
+			folderId, parentFolderId, name, description, mergeWithParentFolder);
 	}
 
 }

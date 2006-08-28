@@ -35,9 +35,27 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />removeFolder() {
+		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = "<%= IGFolder.DEFAULT_PARENT_FOLDER_ID %>";
+
+		var nameEl = document.getElementById("<portlet:namespace />parentFolderName");
+
+		nameEl.href = "";
+		nameEl.innerHTML = "";
+	}
+
 	function <portlet:namespace />saveFolder() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= folder == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function selectFolder(parentFolderId, parentFolderName) {
+		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = parentFolderId;
+
+		var nameEl = document.getElementById("<portlet:namespace />parentFolderName");
+
+		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + parentFolderId;
+		nameEl.innerHTML = parentFolderName + "&nbsp;";
 	}
 </script>
 
@@ -52,12 +70,61 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 <liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />
 
 <c:if test="<%= !parentFolderId.equals(IGFolder.DEFAULT_PARENT_FOLDER_ID) %>">
-	<%= IGUtil.getBreadcrumbs(parentFolderId, null, pageContext, renderRequest, renderResponse) %>
+	<%= IGUtil.getBreadcrumbs(parentFolderId, null, pageContext, renderRequest, renderResponse, false) %>
 
 	<br><br>
 </c:if>
 
 <table border="0" cellpadding="0" cellspacing="0">
+
+<c:if test="<%= folder != null %>">
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "parent-folder") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+
+					<%
+					String parentFolderName = "";
+
+					try {
+						IGFolder parentFolder = IGFolderLocalServiceUtil.getFolder(parentFolderId);
+
+						parentFolderName = parentFolder.getName();
+					}
+					catch (NoSuchFolderException nscce) {
+					}
+					%>
+
+					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /><portlet:param name="folderId" value="<%= parentFolderId %>" /></portlet:renderURL>" id="<portlet:namespace />parentFolderName">
+					<%= parentFolderName %>
+					</a>
+
+					<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/select_folder" /><portlet:param name="folderId" value="<%= parentFolderId %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
+
+					<input class="portlet-form-button" id="<portlet:namespace />removeFolderButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeFolder();">
+				</td>
+				<td style="padding-left: 30px;"></td>
+				<td>
+					<liferay-ui:input-checkbox param="mergeWithParentFolder" />
+
+					<%= LanguageUtil.get(pageContext, "merge-with-parent-folder") %>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<br>
+		</td>
+	</tr>
+</c:if>
+
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
