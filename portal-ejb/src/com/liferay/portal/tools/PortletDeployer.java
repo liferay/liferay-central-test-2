@@ -23,6 +23,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Validator;
@@ -132,7 +133,8 @@ public class PortletDeployer extends BaseDeployer {
 		while (itr1.hasNext()) {
 			Element portlet = (Element)itr1.next();
 
-			String portletName = portlet.elementText("portlet-name");
+			String portletName = PortalUtil.getJsSafePortletName(
+				portlet.elementText("portlet-name"));
 			String portletClass = portlet.elementText("portlet-class");
 
 			sb.append("<servlet>");
