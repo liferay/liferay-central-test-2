@@ -24,6 +24,8 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
+<%@ page import="com.liferay.portlet.messaging.util.MessagingUtil" %>
+
 <tiles:useAttribute id="tilesPopUp" name="pop_up" classname="java.lang.String" ignore="true" />
 
 <%
@@ -46,6 +48,12 @@ String scroll = ParamUtil.getString(request, "scroll");
 <c:if test="<%= Validator.isNotNull(scroll) %>">
 	<script language="JavaScript" event="onLoad()" for="window">
 		document.getElementById("<%= scroll %>").scrollIntoView();
+	</script>
+</c:if>
+
+<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
+	<script language="JavaScript">
+		Messaging.init("<%= request.getRemoteUser() %>");
 	</script>
 </c:if>
 
