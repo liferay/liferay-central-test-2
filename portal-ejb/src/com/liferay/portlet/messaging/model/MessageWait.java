@@ -38,7 +38,7 @@ public class MessageWait {
 		throws InterruptedException {
 		
 		int heartbeatCycle = GetterUtil.getInteger(PropsUtil
-			.get(PropsUtil.JABBER_XMPP_HEARTBEAT_MILLISEC), 12000);
+			.get(PropsUtil.JABBER_XMPP_HEARTBEAT_MILLISEC), 120000);
 		
 		wait(heartbeatCycle);
 	}

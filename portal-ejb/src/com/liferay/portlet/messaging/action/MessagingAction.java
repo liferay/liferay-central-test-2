@@ -74,6 +74,7 @@ public class MessagingAction extends JSONAction {
 
 			JSONArray jRoster = getRosterEntries(req).getJSONArray("roster");
 			jo.put("roster", jRoster);
+			jo.put("status", "success");
 		}
 		else if ("sendChat".equals(cmd)) {
 			jo = sendMessage(req);
@@ -162,7 +163,10 @@ public class MessagingAction extends JSONAction {
 			
 			msgWait = jabberSes.getMessageWait();
 			
-			if (msgWait != null) {
+			if (msgWait == null) {
+				jo.put("status", "failure");
+			}
+			else {
 				waitCmd = msgWait.getCmd();
 			
 				if ("getRoster".equals(waitCmd)) {
@@ -171,6 +175,7 @@ public class MessagingAction extends JSONAction {
 				else {
 					jo = getChatMessages(req);
 				}
+				jo.put("status", "success");
 			}
 		}
 		catch (Exception e) {

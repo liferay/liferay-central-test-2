@@ -33,8 +33,6 @@
 		if (chatHTML != null)  {
 			document.write(decodeURIComponent(chatHTML));
 		}
-
-		Messaging.init("<%= request.getRemoteUser() %>");
 	</script>
 </c:if>
 

@@ -83,22 +83,28 @@ var Messaging = {
 			return;
 		}
 		
-		var chatMsg = msg.chat;
-		if (chatMsg && chatMsg.length > 0) {
-			for (var i = 0; i < chatMsg.length; i++) {
-				Messaging.chat(chatMsg[i].fromId, chatMsg[i].fromName,
-					chatMsg[i].toId, chatMsg[i].toName, chatMsg[i].body);
+		if (msg.status && msg.status == "success") {
+			var chatMsg = msg.chat;
+			if (chatMsg && chatMsg.length > 0) {
+				for (var i = 0; i < chatMsg.length; i++) {
+					Messaging.chat(chatMsg[i].fromId, chatMsg[i].fromName,
+						chatMsg[i].toId, chatMsg[i].toName, chatMsg[i].body);
+				}
 			}
+			
+			if (msg.roster != null) {
+				MessagingRoster.updateEntries(msg.roster);
+			}
+			
+			/* Send next request and wait for response */
+			Messaging.getChats();
 		}
-		
-		if (msg.roster != null) {
-			MessagingRoster.updateEntries(msg.roster);
-		}
-		
-		/* Send next request and wait for response */
-		Messaging.getChats();
 	},
-	
+
+	getRosterChats : function() {
+		loadPage(themeDisplay.getPathMain() + "/messaging/action", "cmd=getRosterChats", Messaging.getChatsReturn);
+	},
+
 	createChat : function(fromId, fromName, toId, toName) {
 		if (!this.initialized) {
 			this.init();
@@ -245,7 +251,7 @@ var Messaging = {
 		window.onunload = Messaging.onPageUnload;
 		this.mainDiv = mainDiv;
 		this.initialized = true;
-		Messaging.getChats();
+		Messaging.getRosterChats();
 		
 	},
 	
@@ -411,7 +417,7 @@ var MessagingRoster = {
 
 	updateEntries : function(roster) {
 		var rosterDiv = document.getElementById("portlet-chat-roster-list");
-		
+
 		if (rosterDiv != null) {
 			rosterDiv.innerHTML = "";
 		}
