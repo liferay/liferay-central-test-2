@@ -41,3 +41,5 @@ String cacheControl = request.getParameter("cache_control");
 	<meta content="no-cache" http-equiv="Pragma">
 	<meta content="0" http-equiv="Expires">
 </c:if>
+
+<liferay-theme:meta-tags />
