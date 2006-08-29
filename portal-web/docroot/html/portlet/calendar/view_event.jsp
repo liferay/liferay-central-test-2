@@ -414,7 +414,7 @@ private boolean _getWeeklyDayPos(HttpServletRequest req, int day, CalEvent event
 
 	String weeklyPosParam = ParamUtil.getString(req, "weeklyDayPos" + day);
 
-	if (Validator.isNotNull(weeklyPosParam) && (event != null)) {
+	if (Validator.isNull(weeklyPosParam) && (event != null)) {
 		if ((event.getRepeating()) && (recurrence != null)) {
 			DayAndPosition[] dayPositions = recurrence.getByDay();
 
