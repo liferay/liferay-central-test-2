@@ -28,6 +28,7 @@
 
 <head>
 	<title><%= company.getName() + " - " + title %></title>
+	<liferay-theme:meta-tags />
 	<liferay-util:include page='<%= Constants.TEXT_HTML_DIR + "/common/themes/top_head.jsp" %>' />
 </head>
 

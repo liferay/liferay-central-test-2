@@ -32,6 +32,7 @@ import com.liferay.taglib.portletext.IconMaximizeTag;
 import com.liferay.taglib.portletext.IconMinimizeTag;
 import com.liferay.taglib.portletext.IconPrintTag;
 import com.liferay.taglib.portletext.RuntimeTag;
+import com.liferay.taglib.theme.MetaTagsTag;
 import com.liferay.taglib.ui.JournalContentSearchTag;
 import com.liferay.taglib.ui.PngImageTag;
 import com.liferay.taglib.ui.SearchTag;
@@ -145,6 +146,14 @@ public class VelocityTaglib {
 		_res.recycle();
 
 		JournalContentSearchTag.doTag(_ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String metaTags() throws Exception {
+		_res.recycle();
+
+		MetaTagsTag.doTag(_ctx, _req, _res);
 
 		return _res.getString();
 	}

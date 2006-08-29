@@ -22,20 +22,31 @@
  */
 %>
 
-<%@ include file="portal_init.jsp" %>
+<%@ include file="/html/taglib/init.jsp" %>
 
-<html dir="<bean:message key="lang.dir" />">
+<c:if test="<%= layout != null %>">
 
-<head>
-	<title><%= company.getName() + " - " + title %></title>
-	<liferay-theme:meta-tags />
-	<liferay-util:include page='<%= Constants.TEXT_HTML_DIR + "/common/themes/top_head.jsp" %>' />
-</head>
+	<%
+	String metaRobots = layout.getTypeSettingsProperties().getProperty("meta-robots");
+	%>
 
-<body>
+	<c:if test="<%= Validator.isNotNull(metaRobots) %>">
+		<meta name="keywords" content="<%= metaRobots %>">
+	</c:if>
 
-<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesContent %>" />
+	<%
+	String metaDescription = layout.getTypeSettingsProperties().getProperty("meta-description");
+	%>
 
-</body>
+	<c:if test="<%= Validator.isNotNull(metaDescription) %>">
+		<meta name="keywords" content="<%= metaDescription %>">
+	</c:if>
 
-</html>
+	<%
+	String metaKeywords = layout.getTypeSettingsProperties().getProperty("meta-keywords");
+	%>
+
+	<c:if test="<%= Validator.isNotNull(metaKeywords) %>">
+		<meta name="keywords" content="<%= metaKeywords %>">
+	</c:if>
+</c:if>

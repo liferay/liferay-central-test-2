@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -20,22 +19,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="portal_init.jsp" %>
+package com.liferay.taglib.theme;
 
-<html dir="<bean:message key="lang.dir" />">
+import java.io.IOException;
 
-<head>
-	<title><%= company.getName() + " - " + title %></title>
-	<liferay-theme:meta-tags />
-	<liferay-util:include page='<%= Constants.TEXT_HTML_DIR + "/common/themes/top_head.jsp" %>' />
-</head>
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-<body>
+/**
+ * <a href="MetaTagsTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class MetaTagsTag extends com.liferay.taglib.util.IncludeTag {
 
-<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesContent %>" />
+	public static void doTag(
+			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+		throws IOException, ServletException {
 
-</body>
+		RequestDispatcher rd = ctx.getRequestDispatcher(_PAGE);
 
-</html>
+		rd.include(req, res);
+	}
+
+	public String getDefaultPage() {
+		return _PAGE;
+	}
+
+	private static final String _PAGE = "/html/taglib/theme/meta_tags/page.jsp";
+
+}

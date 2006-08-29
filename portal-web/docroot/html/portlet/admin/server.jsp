@@ -306,7 +306,7 @@
 						</td>
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
-							[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />system_properties'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
+							[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />systemProperties'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
 							</span>
 						</td>
 					</tr>
@@ -315,7 +315,7 @@
 			</tr>
 			<tr>
 				<td>
-					<div id="<portlet:namespace />system_properties" style="display: none;">
+					<div id="<portlet:namespace />systemProperties" style="display: none;">
 						<table border="0" cellpadding="4" cellspacing="0" width="100%">
 
 						<%
@@ -369,7 +369,7 @@
 						</td>
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
-							[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />portal_properties'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
+							[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />portalProperties'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
 							</span>
 						</td>
 					</tr>
@@ -378,7 +378,7 @@
 			</tr>
 			<tr>
 				<td>
-					<div id="<portlet:namespace />portal_properties" style="display: none;">
+					<div id="<portlet:namespace />portalProperties" style="display: none;">
 						<table border="0" cellpadding="4" cellspacing="0" width="100%">
 
 						<%

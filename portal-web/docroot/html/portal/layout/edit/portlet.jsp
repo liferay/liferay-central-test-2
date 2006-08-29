@@ -23,10 +23,9 @@
 %>
 
 <%@ include file="/html/portal/init.jsp" %>
-
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
-	<td>
+	<td nowrap>
 		<%= LanguageUtil.get(pageContext, "copy-page") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
@@ -80,18 +79,86 @@
 	</td>
 </tr>
 </table>
-<%--You can quickly copy the content and template for this page if you specify the page ID to copy from. These changes will take precedence over any other content and layout changes that you may have already specified.
 
-<br><br>
+<br>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "copy-page") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<input class="form-text" name="TypeSettingsProperties(article-id)" size="30" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(article-id)" />">
+		<table border="0" cellpadding="4" cellspacing="0" width="100%">
+		<tr>
+			<td class="beta-gradient">
+				<b><%= LanguageUtil.get(pageContext, "meta-tags") %>:</b>
+			</td>
+			<td align="right" class="beta-gradient">
+				<span style="font-size: xx-small;">
+				[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />metaTags'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
+				</span>
+			</td>
+		</tr>
+		</table>
 	</td>
 </tr>
-</table>--%>
+<tr>
+	<td>
+		<div id="<portlet:namespace />metaTags" style="display: none;">
+			<br>
+
+			<%= LanguageUtil.get(pageContext, "meta-robots") %><br>
+
+			<textarea class="form-text" name="TypeSettingsProperties(meta-robots)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-robots)" /></textarea>
+
+			<br><br>
+
+			<%= LanguageUtil.get(pageContext, "meta-description") %><br>
+
+			<textarea class="form-text" name="TypeSettingsProperties(meta-description)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-description)" /></textarea>
+
+			<br><br>
+
+			<%= LanguageUtil.get(pageContext, "meta-keywords") %><br>
+
+			<textarea class="form-text" name="TypeSettingsProperties(meta-keywords)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-keywords)" /></textarea>
+		</div>
+	</td>
+</tr>
+<tr>
+	<td>
+		<table border="0" cellpadding="4" cellspacing="0" width="100%">
+		<tr>
+			<td class="beta-gradient">
+				<b><%= LanguageUtil.get(pageContext, "javascript") %>:</b>
+			</td>
+			<td align="right" class="beta-gradient">
+				<span style="font-size: xx-small;">
+				[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />javascript'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
+				</span>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr>
+	<td>
+		<div id="<portlet:namespace />javaScript" style="display: none;">
+			<br>
+
+			<%= LanguageUtil.get(pageContext, "javascript-1") %><br>
+
+			<textarea class="form-text" name="TypeSettingsProperties(javascript-1)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-1)" /></textarea>
+
+			<br><br>
+
+			<%= LanguageUtil.get(pageContext, "javascript-2") %><br>
+
+			<textarea class="form-text" name="TypeSettingsProperties(javascript-2)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-2)" /></textarea>
+
+			<br><br>
+
+			<%= LanguageUtil.get(pageContext, "javascript-3") %><br>
+
+			<textarea class="form-text" name="TypeSettingsProperties(javascript-3)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-3)" /></textarea>
+		</div>
+	</td>
+</tr>
+</table>

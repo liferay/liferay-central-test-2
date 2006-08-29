@@ -62,6 +62,7 @@ import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.util.List;
+import java.util.Properties;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -347,29 +348,61 @@ public class EditPagesAction extends PortletAction {
 				layoutId, ownerId, parentLayoutId, name, languageId, type,
 				hidden, friendlyURL);
 
-			if (!type.equals(Layout.TYPE_PORTLET)) {
+			if (type.equals(Layout.TYPE_PORTLET)) {
+				if ((Validator.isNotNull(copyLayoutId)) &&
+					(!copyLayoutId.equals(layout.getLayoutId()))) {
+
+					try {
+						Layout copyLayout = LayoutLocalServiceUtil.getLayout(
+							copyLayoutId, ownerId);
+
+						if (copyLayout.getType().equals(Layout.TYPE_PORTLET)) {
+							LayoutServiceUtil.updateLayout(
+								layoutId, ownerId, copyLayout.getTypeSettings());
+
+							copyPreferences(req, layout, copyLayout);
+						}
+					}
+					catch (NoSuchLayoutException nsle) {
+					}
+				}
+				else {
+					Properties formProperties =
+						pageForm.getTypeSettingsProperties();
+
+					Properties layoutProperties =
+						layout.getTypeSettingsProperties();
+
+					layoutProperties.setProperty(
+						"meta-robots",
+						formProperties.getProperty("meta-robots"));
+					layoutProperties.setProperty(
+						"meta-description",
+						formProperties.getProperty("meta-description"));
+					layoutProperties.setProperty(
+						"meta-keywords",
+						formProperties.getProperty("meta-keywords"));
+
+					layoutProperties.setProperty(
+						"javascript-1",
+						formProperties.getProperty("javascript-1"));
+					layoutProperties.setProperty(
+						"javascript-2",
+						formProperties.getProperty("javascript-2"));
+					layoutProperties.setProperty(
+						"javascript-3",
+						formProperties.getProperty("javascript-3"));
+
+					LayoutServiceUtil.updateLayout(
+						layoutId, ownerId, layout.getTypeSettings());
+				}
+			}
+			else {
 				layout.setTypeSettingsProperties(
 					pageForm.getTypeSettingsProperties());
 
 				LayoutServiceUtil.updateLayout(
 					layoutId, ownerId, layout.getTypeSettings());
-			}
-			else if ((Validator.isNotNull(copyLayoutId)) &&
-					 (!copyLayoutId.equals(layout.getLayoutId()))) {
-
-				try {
-					Layout copyLayout = LayoutLocalServiceUtil.getLayout(
-						copyLayoutId, ownerId);
-
-					if (copyLayout.getType().equals(Layout.TYPE_PORTLET)) {
-						LayoutServiceUtil.updateLayout(
-							layoutId, ownerId, copyLayout.getTypeSettings());
-
-						copyPreferences(req, layout, copyLayout);
-					}
-				}
-				catch (NoSuchLayoutException nsle) {
-				}
 			}
 		}
 	}

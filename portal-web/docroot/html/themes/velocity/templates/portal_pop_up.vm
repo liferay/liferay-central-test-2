@@ -27,7 +27,8 @@
 <html dir="$languageUtil.get($pageContext, "lang.dir")">
 
 <head>
-	<title>$tilesTitle</title>
+	<title>$company.getName() - $tilesTitle</title>
+	$taglibLiferay.metaTags()
 	$taglibLiferay.include("/html/common/themes/top_head.jsp")
 </head>
 

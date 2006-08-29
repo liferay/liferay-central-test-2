@@ -38,6 +38,16 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>meta-tags</name>
+		<tagclass>com.liferay.taglib.theme.MetaTagsTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>param</name>
 		<tagclass>com.liferay.taglib.util.ParamTag</tagclass>
 		<bodycontent>JSP</bodycontent>
