@@ -70,13 +70,13 @@ public class PortalSessionListener implements HttpSessionListener {
 	public void sessionDestroyed(HttpSessionEvent event) {
 		HttpSession ses = event.getSession();
 
+		MessagingUtil.closeXMPPConnection(ses);
+
 		PortalSessionContext.remove(ses.getId());
 
 		if (ServerDetector.isWebLogic()) {
 			PortletSessionPool.remove(ses.getId());
 		}
-
-		MessagingUtil.closeXMPPConnection(ses);
 
 		try {
 			String companyId = (String)ses.getAttribute(WebKeys.COMPANY_ID);

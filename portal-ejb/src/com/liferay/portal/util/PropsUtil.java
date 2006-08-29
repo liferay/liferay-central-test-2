@@ -476,6 +476,8 @@ public class PropsUtil {
 
 	public static final String JABBER_XMPP_USER_PASSWORD = "jabber.xmpp.user.password";
 
+	public static final String JABBER_XMPP_HEARTBEAT_MILLISEC = "jabber.xmpp.heartbeat.millisec";
+
 	// JCR
 
 	public static final String JCR_INITIALIZE_ON_STARTUP = "jcr.initialize.on.startup";

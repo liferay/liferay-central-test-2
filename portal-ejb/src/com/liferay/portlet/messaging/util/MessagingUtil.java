@@ -22,15 +22,6 @@
 
 package com.liferay.portlet.messaging.util;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringUtil;
-
 import javax.servlet.http.HttpSession;
 
 import org.jivesoftware.smack.AccountManager;
@@ -44,6 +35,19 @@ import org.jivesoftware.smack.filter.PacketFilter;
 import org.jivesoftware.smack.filter.PacketTypeFilter;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
+
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.chat.model.RosterUpdateListener;
+import com.liferay.portlet.messaging.model.JabberSession;
+import com.liferay.portlet.messaging.model.MessageListener;
+import com.liferay.portlet.messaging.model.MessageWait;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.StringUtil;
 
 /**
  * <a href="MessagingUtil.java.html"><b><i>View Source</i></b></a>
@@ -67,15 +71,25 @@ public class MessagingUtil {
 
 	public static void closeXMPPConnection(HttpSession ses) {
 		if (isJabberEnabled()) {
-			XMPPConnection connection = getConnection(ses);
-
-			if (connection != null) {
+			JabberSession jabberSes = (JabberSession) ses.getAttribute(WebKeys.JABBER_XMPP_SESSION);
+			
+			if (jabberSes != null) {
+				XMPPConnection connection = jabberSes.getConnection();
+				Roster roster = jabberSes.getRoster();
+	
+				roster.removeRosterListener(jabberSes.getRosterListener());
+	
+				connection.removePacketListener(jabberSes.getMessageListener());
 				connection.close();
+				
+				MessageWait msgWait = jabberSes.getMessageWait();
+				
+				if (msgWait != null) {
+					msgWait.notifyWait();
+				}
+	
+				ses.removeAttribute(WebKeys.JABBER_XMPP_SESSION);
 			}
-
-			ses.removeAttribute(WebKeys.JABBER_XMPP_CONNECTION);
-			ses.removeAttribute(WebKeys.JABBER_XMPP_COLLECTOR);
-			ses.removeAttribute(WebKeys.JABBER_XMPP_ROSTER);
 		}
 	}
 
@@ -84,6 +98,7 @@ public class MessagingUtil {
 
 		if (isJabberEnabled()) {
 			XMPPConnection connection;
+			Roster roster;
 
 			String serverIp = GetterUtil.getString(PropsUtil
 				.get(PropsUtil.JABBER_XMPP_SERVER_ADDRESS), "localhost");
@@ -116,12 +131,23 @@ public class MessagingUtil {
 			PacketFilter filter = new PacketTypeFilter(Message.class);
 			PacketCollector collector = connection
 				.createPacketCollector(filter);
+			
+			MessageListener msgListener = new MessageListener(ses);
+			connection.addPacketListener(msgListener, filter);
+			
+			roster = connection.getRoster();
+			RosterUpdateListener rosterListener = new RosterUpdateListener(ses);
+			roster.addRosterListener(rosterListener);
+			
+			JabberSession jabberSes = new JabberSession();
+			
+			jabberSes.setConnection(connection);
+			jabberSes.setCollector(collector);
+			jabberSes.setRoster(roster);
+			jabberSes.setMessageListener(msgListener);
+			jabberSes.setRosterListener(rosterListener);
 
-			ses.setAttribute(WebKeys.JABBER_XMPP_CONNECTION, connection);
-			ses.setAttribute(WebKeys.JABBER_XMPP_COLLECTOR, collector);
-			ses
-				.setAttribute(WebKeys.JABBER_XMPP_ROSTER, connection
-					.getRoster());
+			ses.setAttribute(WebKeys.JABBER_XMPP_SESSION, jabberSes);
 		}
 	}
 
@@ -137,15 +163,15 @@ public class MessagingUtil {
 	}
 
 	public static PacketCollector getCollector(HttpSession ses) {
-		PacketCollector collector = (PacketCollector) ses
-			.getAttribute(WebKeys.JABBER_XMPP_COLLECTOR);
+		JabberSession jabberSes = (JabberSession) ses.getAttribute(WebKeys.JABBER_XMPP_SESSION);
 
-		return collector;
+		return jabberSes.getCollector();
 	}
 
 	public static XMPPConnection getConnection(HttpSession ses) {
-		return ((XMPPConnection) ses
-			.getAttribute(WebKeys.JABBER_XMPP_CONNECTION));
+		JabberSession jabberSes = (JabberSession) ses.getAttribute(WebKeys.JABBER_XMPP_SESSION);
+
+		return jabberSes.getConnection();
 	}
 
 	public static Message getNextMessage(PacketCollector collector) {
@@ -164,9 +190,9 @@ public class MessagingUtil {
 	}
 
 	public static Roster getRoster(HttpSession ses) {
-		Roster roster = (Roster) ses.getAttribute(WebKeys.JABBER_XMPP_ROSTER);
+		JabberSession jabberSes = (JabberSession) ses.getAttribute(WebKeys.JABBER_XMPP_SESSION);
 
-		return roster;
+		return jabberSes.getRoster();
 	}
 
 	public static String getUserId(RosterEntry entry) {

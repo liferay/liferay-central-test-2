@@ -69,16 +69,10 @@ var Messaging = {
 	},
 	
 	getChats : function() {
-		var cmd = "getChats";
-		
-		if (Messaging.checkRoster) {
-			cmd = "getRosterChats";
-		}
-		
-		loadPage(themeDisplay.getPathMain() + "/messaging/action", "cmd=" + cmd, Messaging.getChatsReturn, cmd);
+		loadPage(themeDisplay.getPathMain() + "/messaging/action", "cmd=getChats", Messaging.getChatsReturn);
 	},
 	
-	getChatsReturn : function(xmlHttpReq, cmd) {
+	getChatsReturn : function(xmlHttpReq) {
 		try {
 			var msg = eval("(" + xmlHttpReq.responseText + ")");
 		}
@@ -90,16 +84,19 @@ var Messaging = {
 		}
 		
 		var chatMsg = msg.chat;
-		if (chatMsg.length > 0) {
+		if (chatMsg && chatMsg.length > 0) {
 			for (var i = 0; i < chatMsg.length; i++) {
 				Messaging.chat(chatMsg[i].fromId, chatMsg[i].fromName,
 					chatMsg[i].toId, chatMsg[i].toName, chatMsg[i].body);
 			}
 		}
 		
-		if (cmd == "getRosterChats") {
+		if (msg.roster != null) {
 			MessagingRoster.updateEntries(msg.roster);
 		}
+		
+		/* Send next request and wait for response */
+		Messaging.getChats();
 	},
 	
 	createChat : function(fromId, fromName, toId, toName) {
@@ -118,12 +115,7 @@ var Messaging = {
 		chatBox.style.top = (this.windowCount * 15) + "px";
 		chatBox.style.left = (this.windowCount * 15) + "px";
 		chatBox.style.zIndex = this.zIndex;
-		/*
-		chatBox.style.border = "1px solid #000000";
-		chatBox.style.textAlign = "left";
-		chatBox.style.backgroundColor = "#FFFFFF";
-		chatBox.style.padding = "10px";
-		*/
+
 		this.windowCount++;
 		chatBox.onclick = function() { this.style.zIndex = Messaging.zIndex++; };
 		chatBox.setAttribute("onClick", "this.style.zIndex = Messaging.zIndex++");
@@ -169,13 +161,7 @@ var Messaging = {
 		
 		var chatArea = document.createElement("div");
 		chatArea.className = "msg-chat-area";
-		/*
-		chatArea.style.height = "100px";
-		chatArea.style.border = "1px solid gray";
-		chatArea.style.padding = "5px";
-		chatArea.style.marginTop = "5px";
-		chatArea.style.marginBottom = "5px";
-		*/
+
 		if (is_ie) {
 			chatArea.style.overflowY = "scroll";
 		}
@@ -223,17 +209,12 @@ var Messaging = {
 		if (mainDiv == null) {
 			mainDiv = document.createElement("div");
 			mainDiv.id = "messaging-main-div";
-			/*
-			mainDiv.style.position = "relative";
-			mainDiv.style.zIndex = 10;
-			mainDiv.style.textAlign = "left";
-			*/
 			
 			body.insertBefore(mainDiv, body.childNodes[0]);
 		}
 		
 		var chatList = mainDiv.childNodes;
-		
+
 		for (var i = 0; i < chatList.length; i++) {
 			var chatBox = chatList[i];
 			if (chatBox.nodeName
@@ -260,12 +241,18 @@ var Messaging = {
 				chatBox.onDragEnd = function() { Messaging.saveCookie(); };
 			}
 		}
-		
+
+		window.onunload = Messaging.onPageUnload;
 		this.mainDiv = mainDiv;
 		this.initialized = true;
-		this.pollTimer = setInterval("Messaging.getChats()", 3000);
+		Messaging.getChats();
+		
 	},
 	
+	onPageUnload : function() {
+		loadPage(themeDisplay.getPathMain() + "/messaging/action", "cmd=unload");
+	},
+
 	removeChat : function(obj) {
 		function findChatBox(obj) {
 			if (!obj) return null;
