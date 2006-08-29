@@ -85,7 +85,7 @@ public class UpgradeGroup extends UpgradeProcess {
 				for (int i = 0; i < users.size(); i++) {
 					User user = (User)users.get(i);
 
-					Resource resource = ResourceLocalServiceUtil.getResource(
+					Resource resource = ResourceLocalServiceUtil.addResource(
 						companyId, Group.class.getName(), Resource.TYPE_CLASS,
 						Resource.SCOPE_INDIVIDUAL, groupId);
 
