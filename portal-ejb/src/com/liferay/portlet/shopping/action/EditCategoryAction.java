@@ -126,6 +126,9 @@ public class EditCategoryAction extends PortletAction {
 		String name = ParamUtil.getString(req, "name");
 		String description = ParamUtil.getString(req, "description");
 
+		boolean mergeWithParentCategory = ParamUtil.getBoolean(
+			req, "mergeWithParentCategory");
+
 		boolean addCommunityPermissions = ParamUtil.getBoolean(
 			req, "addCommunityPermissions");
 		boolean addGuestPermissions = ParamUtil.getBoolean(
@@ -144,7 +147,8 @@ public class EditCategoryAction extends PortletAction {
 			// Update category
 
 			ShoppingCategoryServiceUtil.updateCategory(
-				categoryId, parentCategoryId, name, description);
+				categoryId, parentCategoryId, name, description,
+				mergeWithParentCategory);
 		}
 	}
 
