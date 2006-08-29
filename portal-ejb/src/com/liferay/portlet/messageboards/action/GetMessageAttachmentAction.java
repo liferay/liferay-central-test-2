@@ -37,11 +37,13 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
@@ -52,29 +54,44 @@ import org.apache.struts.action.ActionMapping;
  */
 public class GetMessageAttachmentAction extends PortletAction {
 
+	public ActionForward strutsExecute(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
+		throws Exception {
+
+		String messageId = ParamUtil.getString(req, "messageId");
+		String fileName = ParamUtil.getString(req, "attachment");
+
+		getFile(messageId, fileName, res);
+
+		return null;
+	}
+
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		try {
-			String messageId = ParamUtil.getString(req, "messageId");
-			String fileName = ParamUtil.getString(req, "attachment");
+		String messageId = ParamUtil.getString(req, "messageId");
+		String fileName = ParamUtil.getString(req, "attachment");
 
-			MBMessage message = MBMessageServiceUtil.getMessage(messageId);
+		HttpServletResponse httpRes =
+			((ActionResponseImpl)res).getHttpServletResponse();
 
-			InputStream is = DLLocalServiceUtil.getFileAsStream(
-				message.getCompanyId(), Company.SYSTEM,
-				message.getAttachmentsDir() + "/" + fileName);
+		getFile(messageId, fileName, httpRes);
+	}
 
-			HttpServletResponse httpRes =
-				((ActionResponseImpl)res).getHttpServletResponse();
+	protected void getFile(
+			String messageId, String fileName, HttpServletResponse res)
+		throws Exception {
 
-			ServletResponseUtil.sendFile(httpRes, fileName, is);
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
+		MBMessage message = MBMessageServiceUtil.getMessage(messageId);
+
+		InputStream is = DLLocalServiceUtil.getFileAsStream(
+			message.getCompanyId(), Company.SYSTEM,
+			message.getAttachmentsDir() + "/" + fileName);
+
+		ServletResponseUtil.sendFile(res, fileName, is);
 	}
 
 	private static Log _log =

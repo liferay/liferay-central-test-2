@@ -299,37 +299,58 @@
 				<c:if test="<%= message.isAttachments() %>">
 					<br><br>
 
-					<table border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td valign="top">
-							<b><%= LanguageUtil.get(pageContext, "attachments") %>:</b>
-						</td>
-						<td style="padding-left: 10px;"></td>
-						<td>
+					<%
+					String[] fileNames = null;
 
-							<%
-							String[] fileNames = null;
+					try {
+						fileNames = DLServiceUtil.getFileNames(company.getCompanyId(), Company.SYSTEM, message.getAttachmentsDir());
+					}
+					catch (NoSuchDirectoryException nsde) {
+					}
+					%>
 
-							try {
-								fileNames = DLServiceUtil.getFileNames(company.getCompanyId(), Company.SYSTEM, message.getAttachmentsDir());
+					<c:if test="<%= fileNames != null %>">
+
+						<%
+						for (int i = 0; i < fileNames.length; i++) {
+							String fileName = FileUtil.getShortFileName(fileNames[i]);
+
+							if (StringUtil.endsWith(fileName, ".gif") || StringUtil.endsWith(fileName, ".jpg") || StringUtil.endsWith(fileName, ".png")) {
+						%>
+
+								<img src="<%= themeDisplay.getPathMain() %>/message_boards/get_message_attachment?messageId=<%= message.getMessageId() %>&attachment=<%= Http.encodeURL(fileName) %>">
+
+								<br><br>
+
+						<%
 							}
-							catch (NoSuchDirectoryException nsde) {
-							}
+						}
+						%>
 
-							for (int i = 0; (fileNames != null) && (i < fileNames.length); i++) {
-								String fileName = FileUtil.getShortFileName(fileNames[i]);
-								long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), Company.SYSTEM, fileNames[i]);
-							%>
+						<table border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td valign="top">
+								<b><%= LanguageUtil.get(pageContext, "attachments") %>:</b>
+							</td>
+							<td style="padding-left: 10px;"></td>
+							<td>
 
-								<a href="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/message_boards/get_message_attachment" /><portlet:param name="messageId" value="<%= message.getMessageId() %>" /><portlet:param name="attachment" value="<%= fileName %>" /></portlet:actionURL>"><%= fileName %></a> (<%= TextFormatter.formatKB(fileSize, locale) %>k)&nbsp;&nbsp;&nbsp;
+								<%
+								for (int i = 0; i < fileNames.length; i++) {
+									String fileName = FileUtil.getShortFileName(fileNames[i]);
+									long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), Company.SYSTEM, fileNames[i]);
+								%>
 
-							<%
-							}
-							%>
+									<a href="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/message_boards/get_message_attachment" /><portlet:param name="messageId" value="<%= message.getMessageId() %>" /><portlet:param name="attachment" value="<%= fileName %>" /></portlet:actionURL>"><%= fileName %></a> (<%= TextFormatter.formatKB(fileSize, locale) %>k)&nbsp;&nbsp;&nbsp;
 
-						</td>
-					</tr>
-					</table>
+								<%
+								}
+								%>
+
+							</td>
+						</tr>
+						</table>
+					</c:if>
 				</c:if>
 			</div>
 		</td>
