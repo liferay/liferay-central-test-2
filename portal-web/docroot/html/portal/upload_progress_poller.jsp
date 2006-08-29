@@ -25,6 +25,8 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <%
+String uploadProgressId = ParamUtil.getString(request, "uploadProgressId");
+
 String fileName = GetterUtil.getString((String)session.getAttribute(LiferayFileUpload.FILE_NAME));
 
 Float percent = (Float)session.getAttribute(LiferayFileUpload.PERCENT);
@@ -44,7 +46,7 @@ if (percent.floatValue() >= 1) {
 <body>
 
 <script type="text/javascript">
-	parent.igImageUploadProgress.updateBar(<%= (int)(percent.floatValue() * 100) %>, "<%= fileName %>");
+	parent.<%= uploadProgressId %>.updateBar(<%= (int)(percent.floatValue() * 100) %>, "<%= fileName %>");
 
 	<c:if test="<%= percent.floatValue() < 1 %>">
 		setTimeout("window.location.reload();", 1000);
