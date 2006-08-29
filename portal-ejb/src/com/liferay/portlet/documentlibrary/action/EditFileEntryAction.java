@@ -31,11 +31,11 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryServiceUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
@@ -71,6 +71,8 @@ public class EditFileEntryAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteFileEntry(req);
+
+				sendRedirect(req, res);
 			}
 			else if (cmd.equals(Constants.LOCK)) {
 				lockFileEntry(req);
@@ -78,8 +80,6 @@ public class EditFileEntryAction extends PortletAction {
 			else if (cmd.equals(Constants.UNLOCK)) {
 				unlockFileEntry(req);
 			}
-
-			sendRedirect(req, res);
 		}
 		catch (Exception e) {
 			if (e instanceof DuplicateLockException ||
@@ -133,8 +133,13 @@ public class EditFileEntryAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(
-			getForward(req, "portlet.document_library.edit_file_entry"));
+		String forward = "portlet.document_library.edit_file_entry";
+
+		if (req.getWindowState().equals(LiferayWindowState.POP_UP)) {
+			forward = "portlet.document_library.edit_file_entry_form";
+		}
+
+		return mapping.findForward(getForward(req, forward));
 	}
 
 	protected void deleteFileEntry(ActionRequest req) throws Exception {
@@ -174,7 +179,7 @@ public class EditFileEntryAction extends PortletAction {
 
 		byte[] byteArray = FileUtil.getBytes(uploadReq.getFile("file"));
 
-		String redirect = ParamUtil.getString(uploadReq, "fileEntryRedirect");
+		//String redirect = ParamUtil.getString(uploadReq, "fileEntryRedirect");
 
 		if (cmd.equals(Constants.ADD)) {
 
@@ -195,7 +200,7 @@ public class EditFileEntryAction extends PortletAction {
 				folderId, fileName, title, description, byteArray,
 				addCommunityPermissions, addGuestPermissions);
 
-			redirect += Http.encodeURL(fileName);
+			//redirect += Http.encodeURL(fileName);
 		}
 		else {
 			String name = ParamUtil.getString(uploadReq, "name");
@@ -218,7 +223,7 @@ public class EditFileEntryAction extends PortletAction {
 			}
 		}
 
-		res.sendRedirect(redirect);
+		//res.sendRedirect(redirect);
 	}
 
 }

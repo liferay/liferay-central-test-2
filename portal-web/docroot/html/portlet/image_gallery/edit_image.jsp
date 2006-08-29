@@ -40,9 +40,8 @@ String folderId = BeanParamUtil.getString(image, request, "folderId");
 
 <br><br>
 
-<table border="0" cellpadding="0" cellspacing="0">
-
 <c:if test="<%= image != null %>">
+	<table border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "thumbnail") %>
@@ -102,20 +101,16 @@ String folderId = BeanParamUtil.getString(image, request, "folderId");
 			</a>
 		</td>
 	</tr>
-	<tr>
-		<td colspan="3">
-			<br>
-		</td>
-	</tr>
-</c:if>
+	</table>
 
-</table>
+	<br>
+</c:if>
 
 <%
 String uploadProgressId = "igImageUploadProgress";
 %>
 
-<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="portletURL">
+<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="uploadProgressURL">
 	<portlet:param name="struts_action" value="/image_gallery/edit_image" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
 	<portlet:param name="uploadProgressId" value="<%= uploadProgressId %>" />
@@ -125,6 +120,6 @@ String uploadProgressId = "igImageUploadProgress";
 
 <liferay-ui:upload-progress
 	id="<%= uploadProgressId %>"
-	iframeSrc="<%= portletURL %>"
+	iframeSrc="<%= uploadProgressURL %>"
 	redirect="<%= redirect %>"
 />

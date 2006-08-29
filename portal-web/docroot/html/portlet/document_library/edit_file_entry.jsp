@@ -32,31 +32,6 @@ DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRA
 String folderId = BeanParamUtil.getString(fileEntry, request, "folderId");
 String name = BeanParamUtil.getString(fileEntry, request, "name");
 
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
-portletURL.setParameter("struts_action", "/document_library/edit_file_entry");
-portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("folderId", folderId);
-portletURL.setParameter("name", name);
-%>
-
-<script type="text/javascript">
-	function <portlet:namespace />saveFileEntry() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= fileEntry == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-</script>
-
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFileEntry(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />fileEntryRedirect" type="hidden" value="<%= portletURL.toString() %>">
-<input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>">
-<input name="<portlet:namespace />name" type="hidden" value="<%= name %>">
-
-<%
 Lock lock = null;
 Boolean isLocked = Boolean.FALSE;
 Boolean hasLock = Boolean.FALSE;
@@ -74,6 +49,15 @@ if (fileEntry != null) {
 	catch (Exception e) {
 	}
 }
+
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setWindowState(WindowState.MAXIMIZED);
+
+portletURL.setParameter("struts_action", "/document_library/edit_file_entry");
+portletURL.setParameter("redirect", redirect);
+portletURL.setParameter("folderId", folderId);
+portletURL.setParameter("name", name);
 %>
 
 <c:if test="<%= isLocked.booleanValue() %>">
@@ -100,28 +84,6 @@ if (fileEntry != null) {
 
 <liferay-ui:tabs names="document" />
 
-<liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-document-name" />
-
-<liferay-ui:error exception="<%= FileNameException.class %>">
-
-	<%
-	String[] fileExtensions = PropsUtil.getArray(PropsUtil.DL_FILE_EXTENSIONS);
-	%>
-
-	<%= LanguageUtil.get(pageContext, "document-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(fileExtensions, ", ") %>.
-</liferay-ui:error>
-
-<liferay-ui:error exception="<%= SourceFileNameException.class %>">
-
-	<%
-	String[] fileExtensions = PropsUtil.getArray(PropsUtil.DL_FILE_EXTENSIONS);
-	%>
-
-	<%= LanguageUtil.get(pageContext, "document-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(fileExtensions, ", ") %>.
-</liferay-ui:error>
-
-<liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
-
 <%= DLUtil.getBreadcrumbs(folderId, null, pageContext, renderResponse, false) %>
 
 <br><br>
@@ -136,9 +98,8 @@ String fileMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(PropsU
 	<br><br>
 </c:if>
 
-<table border="0" cellpadding="0" cellspacing="0">
-
 <c:if test="<%= fileEntry != null %>">
+	<table border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "name") %>
@@ -188,90 +149,36 @@ String fileMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(PropsU
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<a href="<%= Http.getProtocol(request) %>://<%= request.getServerName() %><%= themeDisplay.getPathImage() %>/document_library?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>" target="_blank">
-			<%= Http.getProtocol(request) %>://<%= request.getServerName() %><%= themeDisplay.getPathImage() %>/document_library?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>
+			<a href="<%= Http.getProtocol(request) %>://<%= request.getServerName() %><%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>" target="_blank">
+			<%= Http.getProtocol(request) %>://<%= request.getServerName() %><%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>
 			</a>
 		</td>
 	</tr>
-	<tr>
-		<td colspan="3">
-			<br>
-		</td>
-	</tr>
+	</table>
+
+	<br>
 </c:if>
 
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "file") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<input class="form-text" name="<portlet:namespace />file" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
-	</td>
-</tr>
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "title") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<liferay-ui:input-field model="<%= DLFileEntry.class %>" bean="<%= fileEntry %>" field="title" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "description") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<liferay-ui:input-field model="<%= DLFileEntry.class %>" bean="<%= fileEntry %>" field="description" />
-	</td>
-</tr>
+<%
+String uploadProgressId = "dlFileEntryUploadProgress";
+%>
 
-<c:if test="<%= fileEntry == null %>">
-	<tr>
-		<td colspan="3">
-			<br>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<%= LanguageUtil.get(pageContext, "permissions") %>
-		</td>
-		<td style="padding-left: 10px;"></td>
-		<td>
-			<liferay-ui:input-permissions />
-		</td>
-	</tr>
-</c:if>
+<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="uploadProgressURL">
+	<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
+	<portlet:param name="redirect" value="<%= redirect %>" />
+	<portlet:param name="uploadProgressId" value="<%= uploadProgressId %>" />
+	<portlet:param name="folderId" value="<%= folderId %>" />
+	<portlet:param name="name" value="<%= name %>" />
+</portlet:renderURL>
 
-</table>
-
-<br>
-
-<input class="portlet-form-button" <%= isLocked.booleanValue() && !hasLock.booleanValue() ? "disabled" : "" %> type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
-
-<c:if test="<%= (fileEntry != null) && (isLocked.booleanValue() && hasLock.booleanValue()) || !isLocked.booleanValue() %>">
-	<c:choose>
-		<c:when test="<%= !hasLock.booleanValue() %>">
-			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "lock") %>' onClick="self.location = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= portletURL.toString() %>" /><portlet:param name="folderId" value="<%= folderId %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>';">
-		</c:when>
-		<c:otherwise>
-			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "unlock") %>' onClick="self.location = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= portletURL.toString() %>" /><portlet:param name="folderId" value="<%= folderId %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>';">
-		</c:otherwise>
-	</c:choose>
-</c:if>
-
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
-
-</form>
-
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />file.focus();
-</script>
+<liferay-ui:upload-progress
+	id="<%= uploadProgressId %>"
+	iframeSrc="<%= uploadProgressURL %>"
+	redirect="<%= redirect %>"
+/>
 
 <c:if test="<%= fileEntry != null %>">
-	<br>
+	<br><br>
 
 	<liferay-ui:tabs names="version-history" />
 

@@ -424,11 +424,7 @@
 
 		<action path="/document_library/edit_file_entry" type="com.liferay.portlet.documentlibrary.action.EditFileEntryAction">
 			<forward name="portlet.document_library.edit_file_entry" path="portlet.document_library.edit_file_entry" />
-			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
-		</action>
-
-		<action path="/document_library/edit_file_version" type="com.liferay.portlet.documentlibrary.action.EditFileVersionAction">
-			<forward name="portlet.document_library.edit_file_version" path="portlet.document_library.edit_file_version" />
+			<forward name="portlet.document_library.edit_file_entry_form" path="portlet.document_library.edit_file_entry_form" />
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
 
