@@ -12,6 +12,13 @@
 			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.SubscriptionLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_SubscriptionLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLFileEntryLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.documentlibrary.service.ejb.DLFileEntryLocalServiceHome</local-home>
