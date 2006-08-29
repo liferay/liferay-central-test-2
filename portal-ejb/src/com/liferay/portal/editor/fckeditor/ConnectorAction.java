@@ -59,6 +59,13 @@ public class ConnectorAction extends Action {
 			String currentFolder = req.getParameter("CurrentFolder");
 			String newFolder = ParamUtil.getString(req, "NewFolderName");
 
+			if (_log.isDebugEnabled()) {
+				_log.debug("Command " + command);
+				_log.debug("Type " + type);
+				_log.debug("Current folder " + currentFolder);
+				_log.debug("New folder " + newFolder);
+			}
+
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
