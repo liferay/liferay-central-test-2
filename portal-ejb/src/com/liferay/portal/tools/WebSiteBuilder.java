@@ -342,10 +342,7 @@ public class WebSiteBuilder {
 					"\"-//Evermind//DTD Orion Web Application 2.3//EN\" " +
 					"\"http://www.orionserver.com/dtds/orion-web.dtd\">\n" +
 				"\n" +
-				"<orion-web-app " +
-					"development=\"" + _orionWebXmlDevelopment + "\" " +
-					"file-modification-check-interval=\"" +
-						_orionWebXmlJspCheck + "\">\n" +
+				"<orion-web-app>\n" +
 				"</orion-web-app>";
 
 			File orionWebXMLFile = new File(
