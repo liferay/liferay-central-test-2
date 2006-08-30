@@ -163,10 +163,16 @@ public class MessagingAction extends JSONAction {
 
 			msgWait.waitForMessages();
 
+			/* re-grab the session object in case connection was closed */
+			
+			jabberSes = (JabberSession) ses.getAttribute(WebKeys.JABBER_XMPP_SESSION);
 			msgWait = jabberSes.getMessageWait();
 
 			if (msgWait == null) {
 				jo.put("status", "failure");
+			}
+			else if (msgWait.isTimedOut()) {
+				jo.put("status", "timedOut");
 			}
 			else {
 				waitCmd = msgWait.getCmd();

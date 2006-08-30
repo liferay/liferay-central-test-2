@@ -52,6 +52,16 @@ public class MessageWait {
 		wait(heartbeatCycle);
 	}
 
+	public boolean isTimedOut() {
+		return _timedOut;
+	}
+
+	public void setTimedOut(boolean timedOut) {
+		this._timedOut = timedOut;
+	}
+
 	private String _cmd;
+
+	private boolean _timedOut;
 
 }

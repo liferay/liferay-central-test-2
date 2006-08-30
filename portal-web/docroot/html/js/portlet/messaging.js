@@ -83,7 +83,12 @@ var Messaging = {
 			return;
 		}
 		
-		if (msg.status && msg.status == "success") {
+		var status = "failure";
+		if (msg.status) {
+			status = msg.status;
+		}
+		
+		if (status == "success") {
 			var chatMsg = msg.chat;
 			if (chatMsg && chatMsg.length > 0) {
 				for (var i = 0; i < chatMsg.length; i++) {
@@ -97,6 +102,9 @@ var Messaging = {
 			}
 			
 			/* Send next request and wait for response */
+			Messaging.getChats();
+		}
+		else if (status == "timedOut") {
 			Messaging.getChats();
 		}
 	},
