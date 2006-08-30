@@ -27,6 +27,26 @@
 		<c:choose>
 			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JAVASCRIPT_LOG_ENABLED)) %>">
 				getLog : function(name) {
+					var log;
+
+					if (name == null || name == "") {
+						name = "[default]";
+					}
+
+					log = log4javascript.getLogger(name);
+
+					var appender = new log4javascript.PopUpAppender(new log4javascript.PatternLayout("%d{HH:mm:ss} %-5p [%c] %m%n"));
+
+					appender.setWidth(800);
+					appender.setHeight(200);
+
+					log.addAppender(appender);
+
+					return log;
+				}
+			</c:when>
+			<c:otherwise>
+				getLog : function(name) {
 					return new LogFactory.DummyLogger();
 				},
 
@@ -48,26 +68,6 @@
 
 					this.fatal = function(message, exception) {
 					};
-				}
-			</c:when>
-			<c:otherwise>
-				getLog : function(name) {
-					var log;
-
-					if (name == null || name == "") {
-						name = "[default]";
-					}
-
-					log = log4javascript.getLogger(name);
-
-					var appender = new log4javascript.PopUpAppender(new log4javascript.PatternLayout("%d{HH:mm:ss} %-5p [%c] %m%n"));
-
-					appender.setWidth(800);
-					appender.setHeight(200);
-
-					log.addAppender(appender);
-
-					return log;
 				}
 			</c:otherwise>
 		</c:choose>
