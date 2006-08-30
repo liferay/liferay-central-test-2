@@ -26,6 +26,8 @@
 	var LogFactory = {
 		<c:choose>
 			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JAVASCRIPT_LOG_ENABLED)) %>">
+				appender : null,
+
 				getLog : function(name) {
 					var log;
 
@@ -35,12 +37,14 @@
 
 					log = log4javascript.getLogger(name);
 
-					var appender = new log4javascript.PopUpAppender(new log4javascript.PatternLayout("%d{HH:mm:ss} %-5p [%c] %m%n"));
+					if (LogFactory.appender == null) {
+						LogFactory.appender = new log4javascript.PopUpAppender(new log4javascript.PatternLayout("%d{HH:mm:ss} %-5p [%c] %m%n"));
+	
+						LogFactory.appender.setWidth(800);
+						LogFactory.appender.setHeight(200);
+					}
 
-					appender.setWidth(800);
-					appender.setHeight(200);
-
-					log.addAppender(appender);
+					log.addAppender(LogFactory.appender);
 
 					return log;
 				}
