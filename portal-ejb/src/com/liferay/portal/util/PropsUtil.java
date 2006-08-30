@@ -188,6 +188,8 @@ public class PropsUtil {
 
 	public static final String SESSION_TIMEOUT_WARNING = "session.timeout.warning";
 
+	public static final String SESSION_SHARED = "session.shared";
+
 	public static final String SESSION_ENABLE_PERSISTENT_COOKIES = "session.enable.persistent.cookies";
 
 	public static final String SERVLET_SESSION_CREATE_EVENTS = "servlet.session.create.events";

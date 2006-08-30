@@ -46,6 +46,7 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="LiferayRequestDispatcher.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
+ * @author Brian Myunghun Kim
  * @version $Revision: $
  *
  */
@@ -135,7 +136,7 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 
 		PortletServletRequest portletServletReq = new PortletServletRequest(
 			(HttpServletRequest)req, portletReq, pathInfo, queryString,
-			requestURI, servletPath, portletReq.getSharedSessionAttributes());
+			requestURI, servletPath);
 
 		PortletServletResponse portletServletRes =
 			new PortletServletResponse((HttpServletResponse)res, portletRes);

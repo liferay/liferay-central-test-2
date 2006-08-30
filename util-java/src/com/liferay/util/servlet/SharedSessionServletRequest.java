@@ -32,28 +32,46 @@ import javax.servlet.http.HttpSession;
  * <a href="SharedSessionServletRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
+ * @author  Brian Myunghun Kim
  *
  */
 public class SharedSessionServletRequest extends HttpServletRequestWrapper {
 
-	public SharedSessionServletRequest(HttpServletRequest req,
-									   Map sharedSessionAttributes) {
-
+	public SharedSessionServletRequest(
+		HttpServletRequest req, Map sharedSessionAttributes, boolean shared) {
+		
 		super(req);
-
+		
 		_sharedSessionAttributes = sharedSessionAttributes;
+		
+		_ses = new SharedSessionWrapper(req.getSession(), 
+			_sharedSessionAttributes);
+		
+		_shared = shared;
 	}
-
+	
 	public HttpSession getSession() {
-		return new SharedSessionWrapper(
-			super.getSession(), _sharedSessionAttributes);
+		if (_shared) {
+			return _ses;
+		}
+		else {
+			return new SharedSessionWrapper(
+				super.getSession(), _sharedSessionAttributes);
+		}
 	}
 
 	public HttpSession getSession(boolean create) {
-		return new SharedSessionWrapper(
-			super.getSession(create), _sharedSessionAttributes);
+		if (_shared) {
+			return _ses;
+		}
+		else {
+			return new SharedSessionWrapper(
+				super.getSession(create), _sharedSessionAttributes);
+		}
 	}
 
+	private HttpSession _ses;
+	private boolean _shared;
 	private Map _sharedSessionAttributes;
 
 }

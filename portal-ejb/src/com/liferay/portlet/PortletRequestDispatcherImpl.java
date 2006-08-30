@@ -57,6 +57,7 @@ import org.apache.struts.Globals;
  * </a>
  *
  * @author  Brian Wing Shun Chan
+ * @author  Brian Myunghun Kim
  *
  */
 public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
@@ -216,8 +217,8 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 			}
 
 			PortletServletRequest portletServletReq = new PortletServletRequest(
-				httpReq, reqImpl, pathInfo, queryString, requestURI,
-				servletPath, reqImpl.getSharedSessionAttributes());
+				httpReq, reqImpl, pathInfo, queryString, requestURI, 
+				servletPath);
 
 			PortletServletResponse portletServletRes =
 				new PortletServletResponse(

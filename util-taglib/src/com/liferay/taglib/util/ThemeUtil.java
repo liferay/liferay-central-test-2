@@ -24,7 +24,6 @@ package com.liferay.taglib.util;
 
 import com.liferay.portal.language.LanguageUtil_IW;
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.servlet.SharedSessionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil_IW;
 import com.liferay.portal.util.PropsUtil_IW;
@@ -40,14 +39,11 @@ import com.liferay.util.GetterUtil_IW;
 import com.liferay.util.StaticFieldGetter;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil_IW;
-import com.liferay.util.servlet.SharedSessionServletRequest;
 import com.liferay.util.servlet.StringServletResponse;
 import com.liferay.util.velocity.VelocityContextPool;
 import com.liferay.util.velocity.VelocityResourceListener;
 
 import java.io.StringWriter;
-
-import java.util.Map;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -72,6 +68,7 @@ import org.apache.velocity.app.Velocity;
  * <a href="ThemeUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
+ * @author  Brian Myunghun Kim
  *
  */
 public class ThemeUtil {
@@ -117,14 +114,7 @@ public class ThemeUtil {
 							path);
 				}
 				else {
-					Map sharedSessionAttributes =
-						SharedSessionUtil.getSharedSessionAttributes(req);
-
-					SharedSessionServletRequest sharedSessionServletReq =
-						new SharedSessionServletRequest(
-							req, sharedSessionAttributes);
-
-					rd.include(sharedSessionServletReq, res);
+					rd.include(req, res);
 				}
 			}
 		}

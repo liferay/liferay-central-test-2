@@ -31,12 +31,15 @@ import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.servlet.SharedSessionUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.DynamicServletRequest;
+import com.liferay.util.servlet.SharedSessionServletRequest;
 
 import java.security.Principal;
 
@@ -453,14 +456,6 @@ public class RenderRequestImpl implements RenderRequest {
 		return RenderParametersPool.get(_req, _plid, _portletName);
 	}
 
-	public Map getSharedSessionAttributes() {
-		return _sharedSessionAttributes;
-	}
-
-	public void setSharedSessionAttributes(Map sharedSessionAttributes) {
-		_sharedSessionAttributes = sharedSessionAttributes;
-	}
-
 	public void defineObjects(PortletConfig portletConfig, RenderResponse res) {
 		setAttribute(WebKeys.JAVAX_PORTLET_CONFIG, portletConfig);
 		setAttribute(WebKeys.JAVAX_PORTLET_REQUEST, this);
@@ -486,6 +481,15 @@ public class RenderRequestImpl implements RenderRequest {
 
 		String prefix = PortalUtil.getPortletNamespace(_portletName);
 
+		boolean shared = GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.SESSION_SHARED));
+		
+		Map sharedSessionAttributes = 
+			SharedSessionUtil.getSharedSessionAttributes(req);
+
+		req = new SharedSessionServletRequest(
+			req, sharedSessionAttributes, shared);
+				
 		DynamicServletRequest dynamicReq = null;
 
 		if (portlet.isPrivateRequestAttributes()) {
@@ -589,7 +593,7 @@ public class RenderRequestImpl implements RenderRequest {
 				}
 			}
 		}
-
+		
 		_req = dynamicReq;
 		_portlet = portlet;
 		_portalCtx = new PortalContextImpl();
@@ -600,8 +604,6 @@ public class RenderRequestImpl implements RenderRequest {
 		_portalSessionId = _req.getRequestedSessionId();
 		_ses = new PortletSessionImpl(
 			_req, _portletName, _portletCtx, _portalSessionId, plid);
-		_sharedSessionAttributes =
-			SharedSessionUtil.getSharedSessionAttributes(_req);
 		_locale = (Locale)_req.getSession().getAttribute(Globals.LOCALE_KEY);
 		_plid = plid;
 	}
@@ -625,7 +627,6 @@ public class RenderRequestImpl implements RenderRequest {
 		_prefs = null;
 		_ses = null;
 		_portalSessionId = null;
-		_sharedSessionAttributes = null;
 		_locale = null;
 		_plid = null;
 	}
@@ -663,7 +664,6 @@ public class RenderRequestImpl implements RenderRequest {
 	private PortletPreferences _prefs;
 	private PortletSessionImpl _ses;
 	private String _portalSessionId;
-	private Map _sharedSessionAttributes = null;
 	private Locale _locale;
 	private String _plid;
 

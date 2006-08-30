@@ -28,21 +28,18 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
-import com.liferay.util.servlet.SharedSessionWrapper;
 
 import java.io.BufferedReader;
 import java.io.UnsupportedEncodingException;
 
 import java.util.Enumeration;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.portlet.PortletRequest;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -51,6 +48,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="PortletServletRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
+ * @author  Brian Myunghun Kim
  *
  */
 public class PortletServletRequest extends HttpServletRequestWrapper {
@@ -58,8 +56,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	public PortletServletRequest(HttpServletRequest req,
 								 PortletRequest portletRequest, String pathInfo,
 								 String queryString, String requestURI,
-								 String servletPath,
-								 Map sharedHttpSessionAttributes) {
+								 String servletPath) {
 
 		super(req);
 
@@ -69,7 +66,6 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		_queryString = GetterUtil.getString(queryString);
 		_requestURI = GetterUtil.getString(requestURI);
 		_servletPath = GetterUtil.getString(servletPath);
-		_sharedHttpSessionAttributes = sharedHttpSessionAttributes;
 	}
 
 	public Object getAttribute(String name) {
@@ -186,11 +182,6 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		return _servletPath;
 	}
 
-	public HttpSession getSession() {
-		return new SharedSessionWrapper(
-			_req.getSession(), _sharedHttpSessionAttributes);
-	}
-
 	public boolean isUserInRole(String role) {
 		String remoteUser = getRemoteUser();
 
@@ -220,6 +211,5 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	private String _queryString;
 	private String _requestURI;
 	private String _servletPath;
-	private Map _sharedHttpSessionAttributes;
 
 }
