@@ -79,6 +79,9 @@ import org.apache.struts.Globals;
  */
 public class RenderRequestImpl implements RenderRequest {
 
+	public static final boolean SESSION_SHARED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.SESSION_SHARED));
+
 	public WindowState getWindowState() {
 		return _windowState;
 	}
@@ -481,15 +484,12 @@ public class RenderRequestImpl implements RenderRequest {
 
 		String prefix = PortalUtil.getPortletNamespace(_portletName);
 
-		boolean shared = GetterUtil.getBoolean(
-			PropsUtil.get(PropsUtil.SESSION_SHARED));
-		
-		Map sharedSessionAttributes = 
+		Map sharedSessionAttributes =
 			SharedSessionUtil.getSharedSessionAttributes(req);
 
 		req = new SharedSessionServletRequest(
-			req, sharedSessionAttributes, shared);
-				
+			req, sharedSessionAttributes, SESSION_SHARED);
+
 		DynamicServletRequest dynamicReq = null;
 
 		if (portlet.isPrivateRequestAttributes()) {
@@ -593,7 +593,7 @@ public class RenderRequestImpl implements RenderRequest {
 				}
 			}
 		}
-		
+
 		_req = dynamicReq;
 		_portlet = portlet;
 		_portalCtx = new PortalContextImpl();

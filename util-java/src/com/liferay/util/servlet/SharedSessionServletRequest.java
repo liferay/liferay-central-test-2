@@ -39,17 +39,16 @@ public class SharedSessionServletRequest extends HttpServletRequestWrapper {
 
 	public SharedSessionServletRequest(
 		HttpServletRequest req, Map sharedSessionAttributes, boolean shared) {
-		
+
 		super(req);
-		
+
 		_sharedSessionAttributes = sharedSessionAttributes;
-		
-		_ses = new SharedSessionWrapper(req.getSession(), 
-			_sharedSessionAttributes);
-		
+
+		_ses = new SharedSessionWrapper(
+			req.getSession(), _sharedSessionAttributes);
 		_shared = shared;
 	}
-	
+
 	public HttpSession getSession() {
 		if (_shared) {
 			return _ses;
@@ -71,7 +70,7 @@ public class SharedSessionServletRequest extends HttpServletRequestWrapper {
 	}
 
 	private HttpSession _ses;
-	private boolean _shared;
 	private Map _sharedSessionAttributes;
+	private boolean _shared;
 
 }

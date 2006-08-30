@@ -217,7 +217,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 			}
 
 			PortletServletRequest portletServletReq = new PortletServletRequest(
-				httpReq, reqImpl, pathInfo, queryString, requestURI, 
+				httpReq, reqImpl, pathInfo, queryString, requestURI,
 				servletPath);
 
 			PortletServletResponse portletServletRes =
