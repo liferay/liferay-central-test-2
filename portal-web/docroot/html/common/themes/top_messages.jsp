@@ -24,8 +24,6 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.messaging.util.MessagingUtil" %>
-
 <c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
 	<script type="text/javascript">
 		var chatHTML = Cookie.read("<%= request.getRemoteUser() %>_chats");

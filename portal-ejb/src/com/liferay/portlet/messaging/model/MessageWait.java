@@ -25,7 +25,6 @@ package com.liferay.portlet.messaging.model;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 
-
 /**
  * <a href="MessageWait.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,28 +32,26 @@ import com.liferay.util.GetterUtil;
  *
  */
 public class MessageWait {
-	
-	public synchronized void waitForMessages()
-		throws InterruptedException {
-		
-		int heartbeatCycle = GetterUtil.getInteger(PropsUtil
-			.get(PropsUtil.JABBER_XMPP_HEARTBEAT_MILLISEC), 120000);
-		
-		wait(heartbeatCycle);
-	}
-	
-	public synchronized void notifyWait() {
-		notify();
-	}
 
 	public String getCmd() {
 		return _cmd;
 	}
 
 	public void setCmd(String cmd) {
-		this._cmd = cmd;
+		_cmd = cmd;
 	}
-	
+
+	public synchronized void notifyWait() {
+		notify();
+	}
+
+	public synchronized void waitForMessages() throws InterruptedException {
+		int heartbeatCycle = GetterUtil.getInteger(PropsUtil.get(
+			PropsUtil.JABBER_XMPP_HEARTBEAT));
+
+		wait(heartbeatCycle);
+	}
+
 	private String _cmd;
 
 }

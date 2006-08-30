@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.messaging.model;
 
+import com.liferay.portlet.chat.model.RosterUpdateListener;
+
 import org.jivesoftware.smack.PacketCollector;
 import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.XMPPConnection;
-
-import com.liferay.portlet.chat.model.RosterUpdateListener;
-
 
 /**
  * <a href="JabberSession.java.html"><b><i>View Source</i></b></a>
@@ -37,32 +36,20 @@ import com.liferay.portlet.chat.model.RosterUpdateListener;
  */
 public class JabberSession {
 
-	private XMPPConnection _connection;
+	public XMPPConnection getConnection() {
+		return _connection;
+	}
 
-	private MessageListener _messageListener;
-
-	private PacketCollector _collector;
-
-	private RosterUpdateListener _rosterListener;
-
-	private Roster _roster;
-
-	private MessageWait _messageWait;
+	public void setConnection(XMPPConnection connection) {
+		_connection = connection;
+	}
 
 	public PacketCollector getCollector() {
 		return _collector;
 	}
 
 	public void setCollector(PacketCollector collector) {
-		this._collector = collector;
-	}
-
-	public XMPPConnection getConnection() {
-		return _connection;
-	}
-
-	public void setConnection(XMPPConnection connection) {
-		this._connection = connection;
+		_collector = collector;
 	}
 
 	public MessageListener getMessageListener() {
@@ -70,23 +57,7 @@ public class JabberSession {
 	}
 
 	public void setMessageListener(MessageListener messageListener) {
-		this._messageListener = messageListener;
-	}
-
-	public Roster getRoster() {
-		return _roster;
-	}
-
-	public void setRoster(Roster roster) {
-		this._roster = roster;
-	}
-
-	public RosterUpdateListener getRosterListener() {
-		return _rosterListener;
-	}
-
-	public void setRosterListener(RosterUpdateListener rosterListener) {
-		this._rosterListener = rosterListener;
+		_messageListener = messageListener;
 	}
 
 	public MessageWait getMessageWait() {
@@ -94,7 +65,30 @@ public class JabberSession {
 	}
 
 	public void setMessageWait(MessageWait messageWait) {
-		this._messageWait = messageWait;
+		_messageWait = messageWait;
 	}
+
+	public Roster getRoster() {
+		return _roster;
+	}
+
+	public void setRoster(Roster roster) {
+		_roster = roster;
+	}
+
+	public RosterUpdateListener getRosterListener() {
+		return _rosterListener;
+	}
+
+	public void setRosterListener(RosterUpdateListener rosterListener) {
+		_rosterListener = rosterListener;
+	}
+
+	private XMPPConnection _connection;
+	private PacketCollector _collector;
+	private MessageListener _messageListener;
+	private MessageWait _messageWait;
+	private Roster _roster;
+	private RosterUpdateListener _rosterListener;
 
 }
