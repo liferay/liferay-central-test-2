@@ -119,6 +119,8 @@
 			<%= LanguageUtil.get(pageContext, "meta-keywords") %><br>
 
 			<textarea class="form-text" name="TypeSettingsProperties(meta-keywords)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-keywords)" /></textarea>
+
+			<br><br>
 		</div>
 	</td>
 </tr>
