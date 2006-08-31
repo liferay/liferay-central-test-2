@@ -50,6 +50,8 @@ JDOM 1.0
 JFreeChart 1.0.1 (removed META-INF/MANIFEST.MF)
 JGroups 2.2.8
 JMS 1.1
+JMX 1.0.1.04
+JMX Remote 1.2.1
 JSF 1.1.01
 JSTL 1.0.6 (removed META-INF/*.tld)
 JTA 1.0.1b
