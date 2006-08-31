@@ -5,19 +5,28 @@ function AjaxRequest(returnFunction, returnArgs, ajaxId) {
 	if (returnFunction == null) {
 		returnFunction = function () {};
 	}
-	
-	try {
-		xmlHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
+
+	if (window.XMLHttpRequest) {
+		xmlHttpReq = new XMLHttpRequest();
+
+		if (xmlHttpReq.overrideMimeType) {
+			xmlHttpReq.overrideMimeType("text/html");
+		}
 	}
-	catch (e) {
+	else if (window.ActiveXObject) {
 		try {
-			xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+			xmlHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
 		}
 		catch (e) {
 			try {
-				xmlHttpReq = new XMLHttpRequest();
+				xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
 			}
 			catch (e) {
+				try {
+					xmlHttpReq = new XMLHttpRequest();
+				}
+				catch (e) {
+				}
 			}
 		}
 	}
@@ -63,7 +72,7 @@ var AjaxTracker = {
 		}
 	
 		queryString += "no_cache=" + random() + "&ajax_id=" + ajaxId;
-	
+
 		try {
 			if (false) {
 				xmlHttpReq.open("GET", path + "?" + queryString, true);
@@ -95,56 +104,45 @@ function createJSONObject(JSONText) {
 	return eval("(" + JSONText + ")");
 }
 
-function loadForm(form, action, elId) {
-	if (is_ie_5_up) {
-		var pos = action.indexOf("?");
+function loadForm(form, action, elId, returnFunction) {
+	var pos = action.indexOf("?");
 
-		var path = action;
-		var queryString = "";
+	var path = action;
+	var queryString = "";
 
-		if (pos != -1) {
-			path = action.substring(0, pos);
-			queryString = action.substring(pos + 1, action.length);
+	if (pos != -1) {
+		path = action.substring(0, pos);
+		queryString = action.substring(pos + 1, action.length);
+	}
+
+	if (!endsWith(queryString, "&")) {
+		queryString += "&";
+	}
+
+	for (var i = 0; i < form.elements.length; i++) {
+		var e = form.elements[i];
+
+		if ((e.name != null) && (e.value != null)) {
+			queryString += e.name + "=" + encodeURIComponent(e.value) + "&";
 		}
+	}
 
-		if (!endsWith(queryString, "&")) {
-			queryString += "&";
-		}
-
-		for (var i = 0; i < form.elements.length; i++) {
-			var e = form.elements[i];
-
-			if ((e.name != null) && (e.value != null)) {
-				queryString += e.name + "=" + encodeURIComponent(e.value) + "&";
-			}
-		}
-
+	if (elId != null) {
 		document.body.style.cursor = "wait";
 
 		pos = path.indexOf("/portal/layout");
-
+	
 		path = path.substring(0, pos) + "/portal/render_portlet";
 
-		var returnFunction =
+		returnFunction =
 			function (xmlHttpReq) {
-				if (is_ie) {
-					document.getElementById(elId).innerHTML = xmlHttpReq.responseText;
-				}
-				else {
-					//var html = document.createTextNode(xmlHttpReq.responseText);
-
-					//document.getElementById(elId).innerHTML = "";
-					//document.getElementById(elId).appendChild(html);
-				}
+				document.getElementById(elId).innerHTML = xmlHttpReq.responseText;
 
 				document.body.style.cursor = "default";
 			};
+	}
 
-		loadPage(path, queryString, returnFunction);
-	}
-	else {
-		submitForm(form, action);
-	}
+	loadPage(path, queryString, returnFunction);
 }
 
 function loadPage(path, queryString, returnFunction, returnArgs) {
