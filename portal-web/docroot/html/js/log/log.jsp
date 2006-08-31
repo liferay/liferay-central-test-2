@@ -39,7 +39,7 @@
 
 					if (LogFactory.appender == null) {
 						LogFactory.appender = new log4javascript.PopUpAppender(new log4javascript.PatternLayout("%d{HH:mm:ss} %-5p [%c] %m%n"));
-	
+
 						LogFactory.appender.setWidth(800);
 						LogFactory.appender.setHeight(200);
 					}
