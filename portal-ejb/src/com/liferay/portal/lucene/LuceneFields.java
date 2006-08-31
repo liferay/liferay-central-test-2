@@ -58,6 +58,8 @@ public class LuceneFields {
 
 	public static final String CONTENT = "content";
 
+	public static final String PROPERTIES = "properties";
+
 	public static final String MODIFIED = "modified";
 
 	public static final String VERSION_LABEL = "versionLabel";
@@ -147,6 +149,10 @@ public class LuceneFields {
 
 	public static Field getText(String field, String text) {
 		return new Field(field, text, Field.Store.YES, Field.Index.TOKENIZED);
+	}
+
+	public static Field getText(String field, StringBuffer sb) {
+		return getText(field, sb.toString());
 	}
 
 	private static final String _UID_PORTLET = "_PORTLET_";

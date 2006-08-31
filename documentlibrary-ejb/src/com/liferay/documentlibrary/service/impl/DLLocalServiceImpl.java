@@ -99,6 +99,33 @@ public class DLLocalServiceImpl implements DLLocalService {
 	}
 
 	public Node getFileContentNode(
+			String companyId, String repositoryId, String fileName,
+			double versionNumber)
+		throws PortalException, SystemException {
+
+		Node contentNode = null;
+
+		Session session = null;
+
+		try {
+			session = JCRFactoryUtil.createSession();
+
+			contentNode = getFileContentNode(
+				session, companyId, repositoryId, fileName, versionNumber);
+		}
+		catch (RepositoryException re) {
+			throw new SystemException(re);
+		}
+		finally {
+			if (session != null) {
+				session.logout();
+			}
+		}
+
+		return contentNode;
+	}
+
+	public Node getFileContentNode(
 			Session session, String companyId, String repositoryId,
 			String fileName, double versionNumber)
 		throws PortalException, SystemException {
@@ -169,6 +196,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 			BooleanQuery searchQuery = new BooleanQuery();
 
 			LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
+			LuceneUtil.addTerm(searchQuery, LuceneFields.PROPERTIES, keywords);
 
 			BooleanQuery fullQuery = new BooleanQuery();
 

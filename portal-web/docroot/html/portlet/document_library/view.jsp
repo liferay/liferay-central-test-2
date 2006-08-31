@@ -31,6 +31,8 @@ String folderId = BeanParamUtil.getString(folder, request, "folderId", DLFolder.
 
 List folderIds = new ArrayList();
 
+folderIds.add(folderId);
+
 DLFolderLocalServiceUtil.getSubfolderIds(folderIds, portletGroupId, folderId);
 
 PortletURL portletURL = renderResponse.createRenderURL();

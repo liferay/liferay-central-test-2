@@ -61,6 +61,17 @@ public class DLLocalServiceUtil {
 	}
 
 	public static Node getFileContentNode(
+			String companyId, String repositoryId, String fileName,
+			double versionNumber)
+		throws PortalException, SystemException {
+
+		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
+
+		return dlLocalService.getFileContentNode(
+			companyId, repositoryId, fileName, versionNumber);
+	}
+
+	public static Node getFileContentNode(
 			Session session, String companyId, String repositoryId,
 			String fileName, double versionNumber)
 		throws PortalException, SystemException {

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
+import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.service.spring.DLLocalServiceUtil;
 import com.liferay.documentlibrary.service.spring.DLServiceUtil;
 import com.liferay.portal.PortalException;
@@ -81,12 +83,12 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		}
 
 		try {
-			DLServiceUtil.addFile(
-				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				folder.getGroupId(), folderId, name, byteArray);
+			DLLocalServiceUtil.getFileContentNode(
+				user.getCompanyId(), folderId, name, 0);
+
+			throw new DuplicateFileException(name);
 		}
-		catch (RemoteException re) {
-			throw new SystemException(re);
+		catch (NoSuchFileException nsfe) {
 		}
 
 		DLFileEntryPK pk = new DLFileEntryPK(folderId, name);
@@ -107,6 +109,15 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		fileEntry.setReadCount(DLFileEntry.DEFAULT_READ_COUNT);
 
 		DLFileEntryUtil.update(fileEntry);
+
+		try {
+			DLServiceUtil.addFile(
+				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+				folder.getGroupId(), folderId, name, byteArray);
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
+		}
 
 		// Resources
 
@@ -335,18 +346,6 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		double oldVersion = fileEntry.getVersion();
 		double newVersion = MathUtil.format(oldVersion + 0.1, 1, 1);
 
-		// File
-
-		try {
-			DLServiceUtil.updateFile(
-				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				folder.getGroupId(), folderId, name, newVersion, sourceFileName,
-				byteArray);
-		}
-		catch (RemoteException re) {
-			throw new SystemException(re);
-		}
-
 		// File version
 
 		DLFileVersion fileVersion = DLFileVersionUtil.create(
@@ -375,6 +374,18 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		fileEntry.setSize(byteArray.length);
 
 		DLFileEntryUtil.update(fileEntry);
+
+		// File
+
+		try {
+			DLServiceUtil.updateFile(
+				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+				folder.getGroupId(), folderId, name, newVersion, sourceFileName,
+				byteArray);
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
+		}
 
 		// Folder
 

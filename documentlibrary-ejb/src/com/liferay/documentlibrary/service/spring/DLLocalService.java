@@ -49,6 +49,11 @@ public interface DLLocalService {
 		throws PortalException, SystemException;
 
 	public Node getFileContentNode(
+			String companyId, String repositoryId, String fileName,
+			double versionNumber)
+		throws PortalException, SystemException;
+
+	public Node getFileContentNode(
 			Session session, String companyId, String repositoryId,
 			String fileName, double versionNumber)
 		throws PortalException, SystemException;

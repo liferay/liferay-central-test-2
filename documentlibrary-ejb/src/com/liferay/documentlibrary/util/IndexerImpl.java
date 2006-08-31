@@ -24,10 +24,15 @@ package com.liferay.documentlibrary.util;
 
 import com.liferay.documentlibrary.service.impl.DLServiceImpl;
 import com.liferay.documentlibrary.service.spring.DLLocalServiceUtil;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.jcr.JCRConstants;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.lucene.IndexerException;
 
@@ -126,6 +131,28 @@ public class IndexerImpl {
 			doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
 
 			doc.add(LuceneFields.getFile(LuceneFields.CONTENT, is, fileExt));
+
+			if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
+				try {
+					DLFileEntry fileEntry =
+						DLFileEntryLocalServiceUtil.getFileEntry(
+							repositoryId, fileName);
+
+					StringBuffer sb = new StringBuffer();
+
+					sb.append(fileEntry.getTitle());
+					sb.append(StringPool.SPACE);
+					sb.append(fileEntry.getDescription());
+
+					doc.add(LuceneFields.getText(LuceneFields.PROPERTIES, sb));
+				}
+				catch (PortalException pe) {
+					throw new IOException(pe.getMessage());
+				}
+				catch (SystemException se) {
+					throw new IOException(se.getMessage());
+				}
+			}
 
 			doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
 
