@@ -22,4 +22,19 @@
  */
 %><%--
 
---%><%@ include file="/html/portlet/init.jsp" %>
+--%><%@ include file="/html/portlet/init.jsp" %><%--
+
+--%><%@ page import="com.liferay.portal.util.LayoutLister" %><%--
+--%><%@ page import="com.liferay.portal.util.LayoutView" %><%--
+
+--%><%
+PortletPreferences prefs = renderRequest.getPreferences();
+
+String portletResource = ParamUtil.getString(request, "portletResource");
+
+if (Validator.isNotNull(portletResource)) {
+	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
+}
+
+String rootLayoutId = GetterUtil.getString(prefs.getValue("root-layout-id", Layout.DEFAULT_PARENT_LAYOUT_ID));
+%>

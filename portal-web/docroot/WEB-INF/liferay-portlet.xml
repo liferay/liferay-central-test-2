@@ -566,6 +566,7 @@
 	<portlet>
 		<portlet-name>85</portlet-name>
 		<struts-path>site_map</struts-path>
+		<configuration-path>/site_map/edit_configuration</configuration-path>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>

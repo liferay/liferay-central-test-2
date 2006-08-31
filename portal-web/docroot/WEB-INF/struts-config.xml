@@ -1167,6 +1167,10 @@
 
 		<!-- Site Map -->
 
+		<action path="/site_map/edit_configuration" type="com.liferay.portlet.sitemap.action.EditConfigurationAction">
+			<forward name="portlet.site_map.edit_configuration" path="portlet.site_map.edit_configuration" />
+		</action>
+
 		<action path="/site_map/view" forward="portlet.site_map.view" />
 
 		<!-- Stocks -->

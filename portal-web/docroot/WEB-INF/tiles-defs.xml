@@ -870,6 +870,10 @@
 
 	<definition name="portlet.site_map" extends="portlet" />
 
+	<definition name="portlet.site_map.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
+		<put name="portlet_configuration_content" value="/portlet/site_map/edit_configuration.jsp" />
+	</definition>
+
 	<definition name="portlet.site_map.view" extends="portlet.site_map">
 		<put name="portlet_content" value="/portlet/site_map/view.jsp" />
 	</definition>

@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/site_map/init.jsp" %>
 
 <%
-List rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getOwnerId(), Layout.DEFAULT_PARENT_LAYOUT_ID);
+List rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getOwnerId(), rootLayoutId);
 
 StringBuffer sb = new StringBuffer();
 
