@@ -101,3 +101,7 @@ for (int i = 0; i < results.size(); i++) {
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
 </form>
+
+<script type="text/javascript">
+	document.<portlet:namespace />fm.<portlet:namespace />searchTemplateId.focus();
+</script>
