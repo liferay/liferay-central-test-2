@@ -524,6 +524,7 @@ public class JournalUtil {
 
 		tokens.put("company_id", themeDisplay.getCompanyId());
 		tokens.put("cms_url", themeDisplay.getPathRoot() + "/cms/servlet");
+		tokens.put("image_path", themeDisplay.getPathImage());
 		tokens.put(
 			"friendly_url_private", themeDisplay.getPathFriendlyURLPrivate());
 		tokens.put(
@@ -531,6 +532,7 @@ public class JournalUtil {
 		tokens.put("portal_ctx", themeDisplay.getPathContext());
 		tokens.put("portal_url", company.getPortalURL());
 		tokens.put("root_path", themeDisplay.getPathRoot());
+		tokens.put("theme_image_path", themeDisplay.getPathThemeImage());
 
 		// Deprecated tokens
 
