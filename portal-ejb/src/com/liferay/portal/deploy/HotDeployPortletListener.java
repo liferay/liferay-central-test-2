@@ -36,7 +36,6 @@ import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
@@ -46,7 +45,6 @@ import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.ObjectValuePair;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.Indexer;
@@ -87,8 +85,7 @@ public class HotDeployPortletListener implements HotDeployListener {
 
 			ServletContext ctx = event.getServletContext();
 
-			servletContextName = PortalUtil.getJsSafePortletName(
-				ctx.getServletContextName());
+			servletContextName = ctx.getServletContextName();
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Invoking deploy for " + servletContextName);
@@ -295,9 +292,7 @@ public class HotDeployPortletListener implements HotDeployListener {
 		try {
 			ServletContext ctx = event.getServletContext();
 
-			servletContextName = StringUtil.replace(
-				ctx.getServletContextName(), StringPool.SPACE,
-				StringPool.UNDERLINE);
+			servletContextName = ctx.getServletContextName();
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Invoking undeploy for " + servletContextName);

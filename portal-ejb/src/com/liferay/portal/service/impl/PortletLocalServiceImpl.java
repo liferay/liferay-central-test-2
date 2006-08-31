@@ -508,13 +508,14 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 		while (itr1.hasNext()) {
 			Element portlet = (Element)itr1.next();
 
-			String portletId = PortalUtil.getJsSafePortletName(
-				portlet.elementText("portlet-name"));
+			String portletId = portlet.elementText("portlet-name");
 
 			if (servletContextName != null) {
 				portletId =
 					portletId + Portlet.WAR_SEPARATOR + servletContextName;
 			}
+
+			portletId = PortalUtil.getJsSafePortletName(portletId);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Reading portlet " + portletId);
@@ -702,13 +703,14 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			while (itr2.hasNext()) {
 				Element portlet = (Element)itr2.next();
 
-				String portletId = PortalUtil.getJsSafePortletName(
-					portlet.attributeValue("id"));
+				String portletId = portlet.attributeValue("id");
 
 				if (servletContextName != null) {
 					portletId =
 						portletId + Portlet.WAR_SEPARATOR + servletContextName;
 				}
+
+				portletId = PortalUtil.getJsSafePortletName(portletId);
 
 				portletIds.add(portletId);
 				curPortletIds.add(portletId);
@@ -761,7 +763,8 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 
 			if ((servletContextName != null) && (portlet.isWARFile()) &&
 				(portletId.endsWith(
-					Portlet.WAR_SEPARATOR + servletContextName) &&
+					Portlet.WAR_SEPARATOR +
+						PortalUtil.getJsSafePortletName(servletContextName)) &&
 				(!portletIds.contains(portletId)))) {
 
 				undefinedPortletIds.add(portletId);
@@ -849,13 +852,14 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 		while (itr1.hasNext()) {
 			Element portlet = (Element)itr1.next();
 
-			String portletId = PortalUtil.getJsSafePortletName(
-				portlet.elementText("portlet-name"));
+			String portletId = portlet.elementText("portlet-name");
 
 			if (servletContextName != null) {
 				portletId =
 					portletId + Portlet.WAR_SEPARATOR + servletContextName;
 			}
+
+			portletId = PortalUtil.getJsSafePortletName(portletId);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Reading portlet extension " + portletId);

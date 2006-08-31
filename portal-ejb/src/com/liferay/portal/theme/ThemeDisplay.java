@@ -202,6 +202,7 @@ public class ThemeDisplay {
 
 		if ((theme != null) && (colorScheme != null)) {
 			String themeContextPath = contextPath;
+
 			if (theme.isWARFile()) {
 				themeContextPath =
 					StringPool.SLASH + theme.getServletContextName();

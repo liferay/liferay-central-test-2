@@ -26,12 +26,9 @@ import com.liferay.portal.kernel.deploy.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.HotDeployException;
 import com.liferay.portal.kernel.deploy.HotDeployListener;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Http;
 import com.liferay.util.ObjectValuePair;
-import com.liferay.util.StringPool;
-import com.liferay.util.StringUtil;
 
 import java.util.Iterator;
 import java.util.List;
@@ -59,8 +56,7 @@ public class HotDeployLayoutTemplateListener implements HotDeployListener {
 		try {
 			ServletContext ctx = event.getServletContext();
 
-			servletContextName = PortalUtil.getJsSafePortletName(
-				ctx.getServletContextName());
+			servletContextName = ctx.getServletContextName();
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Invoking deploy for " + servletContextName);
@@ -104,9 +100,7 @@ public class HotDeployLayoutTemplateListener implements HotDeployListener {
 		try {
 			ServletContext ctx = event.getServletContext();
 
-			servletContextName = StringUtil.replace(
-				ctx.getServletContextName(), StringPool.SPACE,
-				StringPool.UNDERLINE);
+			servletContextName = ctx.getServletContextName();
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Invoking undeploy for " + servletContextName);
