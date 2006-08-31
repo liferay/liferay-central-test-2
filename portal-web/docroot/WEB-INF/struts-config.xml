@@ -656,6 +656,16 @@
 
 		<action path="/journal/get_template" type="com.liferay.portlet.journal.action.GetTemplateAction" />
 
+		<action path="/journal/select_document_library" type="com.liferay.portlet.documentlibrary.action.ViewAction">
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+			<forward name="portlet.document_library.view" path="portlet.journal.select_document_library" />
+		</action>
+
+		<action path="/journal/select_image_gallery" type="com.liferay.portlet.imagegallery.action.ViewAction">
+			<forward name="portlet.image_gallery.error" path="portlet.image_gallery.error" />
+			<forward name="portlet.image_gallery.view" path="portlet.journal.select_image_gallery" />
+		</action>
+
 		<action path="/journal/select_structure" forward="portlet.journal.select_structure" />
 
 		<action path="/journal/select_template" forward="portlet.journal.select_template" />

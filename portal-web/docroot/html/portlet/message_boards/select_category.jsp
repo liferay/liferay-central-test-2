@@ -114,7 +114,9 @@ for (int i = 0; i < results.size(); i++) {
 
 	sb = new StringBuffer();
 
-	sb.append("opener.selectCategory('");
+	sb.append("opener.");
+	sb.append(renderResponse.getNamespace());
+	sb.append("selectCategory('");
 	sb.append(curCategory.getCategoryId());
 	sb.append("', '");
 	sb.append(UnicodeFormatter.toString(curCategory.getName()));

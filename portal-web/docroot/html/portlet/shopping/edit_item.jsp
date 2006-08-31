@@ -138,7 +138,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function selectCategory(categoryId, categoryName) {
+	function <portlet:namespace />selectCategory(categoryId, categoryName) {
 		document.<portlet:namespace />fm.<portlet:namespace />categoryId.value = categoryId;
 
 		var nameEl = document.getElementById("<portlet:namespace />categoryName");

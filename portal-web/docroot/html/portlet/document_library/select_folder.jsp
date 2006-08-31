@@ -107,7 +107,9 @@ for (int i = 0; i < results.size(); i++) {
 
 	sb = new StringBuffer();
 
-	sb.append("opener.selectFolder('");
+	sb.append("opener.");
+	sb.append(renderResponse.getNamespace());
+	sb.append("selectFolder('");
 	sb.append(curFolder.getFolderId());
 	sb.append("', '");
 	sb.append(UnicodeFormatter.toString(curFolder.getName()));

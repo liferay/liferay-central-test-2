@@ -23,6 +23,7 @@
 package com.liferay.portal.cms.servlet;
 
 import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalInstances;
@@ -106,16 +107,16 @@ public class CMSServlet extends HttpServlet {
 
 		String languageId = LanguageUtil.getLanguageId(req);
 
-		// Root path should point to the portal's root path and should not be
-		// hard coded like this. However, since the CMSServlet is deprecated and
-		// only exists for backwards compatibility, no effort will be made to
-		// fix this unless the issue is brought up by the community. This only
-		// affects users who are not deploying the portal on the root path and
-		// have the CMSServlet deployed on a separate server.
+		// ThemeDisplay should not be hard coded like this. However, since the
+		// CMSServlet is deprecated and only exists for backwards compatibility,
+		// no effort will be made to fix this unless the issue is brought up by
+		// the community. This only affects users who are not deploying the
+		// portal on the root path and have the CMSServlet deployed on a
+		// separate server.
 
-		String rootPath = StringPool.BLANK;
+		ThemeDisplay themeDisplay = null;
 
-		String content = getContent(path, languageId, rootPath);
+		String content = getContent(path, languageId, themeDisplay);
 
 		if (Validator.isNotNull(content)) {
 			if (_log.isDebugEnabled()) {
@@ -150,10 +151,10 @@ public class CMSServlet extends HttpServlet {
 	}
 
 	protected String getContent(
-		String articleId, String languageId, String rootPath) {
+		String articleId, String languageId, ThemeDisplay themeDisplay) {
 
 		return CMSServletUtil.getContent(
-			_companyId, articleId, languageId, rootPath);
+			_companyId, articleId, languageId, themeDisplay);
 	}
 
 	private static Log _log = LogFactory.getLog(CMSServlet.class);

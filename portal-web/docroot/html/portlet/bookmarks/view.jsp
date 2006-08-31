@@ -121,9 +121,7 @@ for (int i = 0; i < results.size(); i++) {
 
 <c:if test="<%= folder != null %>">
 	<br>
-</c:if>
 
-<c:if test="<%= folder != null %>">
 	<liferay-ui:tabs names="entries" />
 
 	<%

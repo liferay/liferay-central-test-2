@@ -26,6 +26,7 @@ import com.liferay.portal.util.ClusterPool;
 import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
+import com.liferay.portal.theme.ThemeDisplay;
 
 import com.opensymphony.oscache.base.NeedsRefreshException;
 import com.opensymphony.oscache.general.GeneralCacheAdministrator;
@@ -54,7 +55,7 @@ public class CMSServletUtil {
 
 	public static String getContent(
 		String companyId, String articleId, String languageId,
-		String rootPath) {
+		ThemeDisplay themeDisplay) {
 
 		String content = null;
 
@@ -72,7 +73,7 @@ public class CMSServletUtil {
 		catch (NeedsRefreshException nre) {
 			try {
 				content = JournalArticleLocalServiceUtil.getArticleContent(
-					companyId, articleId, languageId, rootPath);
+					companyId, articleId, languageId, themeDisplay);
 			}
 			catch (Exception e) {
 				_log.warn(e.getMessage());

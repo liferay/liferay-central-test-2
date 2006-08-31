@@ -171,20 +171,21 @@ public class JournalArticleLocalServiceEJBImpl
 
 	public java.lang.String getArticleContent(java.lang.String companyId,
 		java.lang.String articleId, java.lang.String languageId,
-		java.lang.String rootPath)
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return getService().getArticleContent(companyId, articleId, languageId,
-			rootPath);
+			themeDisplay);
 	}
 
 	public java.lang.String getArticleContent(java.lang.String companyId,
 		java.lang.String articleId, double version,
-		java.lang.String languageId, java.lang.String rootPath)
+		java.lang.String languageId,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return getService().getArticleContent(companyId, articleId, version,
-			languageId, rootPath);
+			languageId, themeDisplay);
 	}
 
 	public java.util.List getArticles(java.lang.String groupId)

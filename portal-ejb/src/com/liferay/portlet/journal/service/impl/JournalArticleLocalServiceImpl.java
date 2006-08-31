@@ -41,6 +41,7 @@ import com.liferay.portal.service.spring.ImageLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.ArticleContentException;
@@ -478,18 +479,19 @@ public class JournalArticleLocalServiceImpl
 
 	public String getArticleContent(
 			String companyId, String articleId, String languageId,
-			String rootPath)
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		JournalArticle article = getDisplayArticle(companyId, articleId);
 
 		return getArticleContent(
-			companyId, articleId, article.getVersion(), languageId, rootPath);
+			companyId, articleId, article.getVersion(), languageId,
+			themeDisplay);
 	}
 
 	public String getArticleContent(
 			String companyId, String articleId, double version,
-			String languageId, String rootPath)
+			String languageId, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		JournalArticle article =
@@ -500,7 +502,7 @@ public class JournalArticleLocalServiceImpl
 			return article.getContent();
 		}*/
 
-		Map tokens = JournalUtil.getTokens(article.getCompanyId(), rootPath);
+		Map tokens = JournalUtil.getTokens(themeDisplay);
 
 		String xml = article.getContent();
 

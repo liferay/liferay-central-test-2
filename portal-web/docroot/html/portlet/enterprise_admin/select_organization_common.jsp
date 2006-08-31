@@ -113,7 +113,9 @@ for (int i = 0; i < results.size(); i++) {
 
 	StringBuffer sb = new StringBuffer();
 
-	sb.append("javascript: opener.select");
+	sb.append("javascript: opener.");
+	sb.append(renderResponse.getNamespace());
+	sb.append("select");
 
 	if (rootOrganization) {
 		sb.append("Organization");

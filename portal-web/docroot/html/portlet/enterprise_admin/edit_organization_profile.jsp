@@ -53,7 +53,7 @@ String statusId = BeanParamUtil.getString(organization, request, "statusId");
 %>
 
 <script type="text/javascript">
-	function selectOrganization(organizationId, name) {
+	function <portlet:namespace />selectOrganization(organizationId, name) {
 		document.<portlet:namespace />fm.<portlet:namespace />parentOrganizationId.value = organizationId;
 
 		var nameEl = document.getElementById("<portlet:namespace />parentOrganizationName");

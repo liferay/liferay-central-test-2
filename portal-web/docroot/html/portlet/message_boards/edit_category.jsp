@@ -49,7 +49,7 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function selectCategory(parentCategoryId, parentCategoryName) {
+	function <portlet:namespace />selectCategory(parentCategoryId, parentCategoryName) {
 		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = parentCategoryId;
 
 		var nameEl = document.getElementById("<portlet:namespace />parentCategoryName");

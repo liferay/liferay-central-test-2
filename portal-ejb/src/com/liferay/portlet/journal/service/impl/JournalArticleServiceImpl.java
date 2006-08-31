@@ -28,6 +28,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
@@ -106,14 +107,14 @@ public class JournalArticleServiceImpl
 
 	public String getArticleContent(
 			String companyId, String articleId, String languageId,
-			String rootPath)
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		JournalArticlePermission.check(
 			getPermissionChecker(), companyId, articleId, ActionKeys.VIEW);
 
 		return JournalArticleLocalServiceUtil.getArticleContent(
-			companyId, articleId, languageId, rootPath);
+			companyId, articleId, languageId, themeDisplay);
 	}
 
 	public void deleteArticle(

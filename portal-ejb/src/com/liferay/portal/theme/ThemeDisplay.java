@@ -241,6 +241,14 @@ public class ThemeDisplay {
 		_pathApplet = pathApplet;
 	}
 
+	public String getPathCms() {
+		return _pathCms;
+	}
+
+	public void setPathCms(String pathCms) {
+		_pathCms = pathCms;
+	}
+
 	public String getPathColorSchemeImage() {
 		return _pathColorSchemeImage;
 	}
@@ -478,6 +486,7 @@ public class ThemeDisplay {
 		_colorScheme = null;
 		_resolution = 0;
 		_pathApplet = null;
+		_pathCms = null;
 		_pathColorSchemeImage = null;
 		_pathContext = null;
 		_pathFlash = null;
@@ -534,6 +543,7 @@ public class ThemeDisplay {
 	private int _resolution;
 	private boolean _statePopUp;
 	private String _pathApplet;
+	private String _pathCms;
 	private String _pathColorSchemeImage;
 	private String _pathContext;
 	private String _pathFlash;

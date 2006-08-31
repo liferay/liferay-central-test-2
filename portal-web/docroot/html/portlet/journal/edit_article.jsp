@@ -145,6 +145,8 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 
 <script type="text/javascript">
 	var count = 0;
+	var documentLibraryInput = null;
+	var imageGalleryInput = null;
 
 	function <portlet:namespace />approveArticle() {
 		<portlet:namespace />saveArticle("<%= Constants.APPROVE %>");
@@ -239,7 +241,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 						var elContentValue = "";
 						var elLanguageValue = elLanguage.value;
 
-						if ((elTypeValue == "text") || (elTypeValue == "text_box")) {
+						if ((elTypeValue == "text") || (elTypeValue == "text_box") || (elTypeValue == "image_gallery") || (elTypeValue == "document_library")) {
 							elContentValue = elContent.value;
 							elContentValue = "<![CDATA[" + elContentValue + "]]>";
 						}
@@ -368,6 +370,14 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 
 		document.<portlet:namespace />fm.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
 		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />selectDocumentLibrary(url) {
+		document.getElementById(documentLibraryInput).value = url;
+	}
+
+	function <portlet:namespace />selectImageGallery(url) {
+		document.getElementById(imageGalleryInput).value = url;
 	}
 
 	function <portlet:namespace />selectStructure(structureId) {

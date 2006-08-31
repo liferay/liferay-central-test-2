@@ -373,6 +373,7 @@ public class ServicePreAction extends Action {
 			themeDisplay.setResolution(resolution);
 			themeDisplay.setStatePopUp(LiferayWindowState.isPopUp(req));
 			themeDisplay.setPathApplet(contextPath + "/applets");
+			themeDisplay.setPathCms(rootPath + "/cms");
 			themeDisplay.setPathContext(contextPath);
 			themeDisplay.setPathFlash(contextPath + "/flash");
 			themeDisplay.setPathFriendlyURLPrivate(friendlyURLPrivatePath);

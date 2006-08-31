@@ -49,7 +49,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function selectFolder(parentFolderId, parentFolderName) {
+	function <portlet:namespace />selectFolder(parentFolderId, parentFolderName) {
 		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = parentFolderId;
 
 		var nameEl = document.getElementById("<portlet:namespace />parentFolderName");

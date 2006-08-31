@@ -26,9 +26,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.impl.ImageLocalUtil;
-import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
-import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.TransformException;
@@ -514,43 +513,29 @@ public class JournalUtil {
 		return script;
 	}
 
-	public static Map getTokens(String companyId, String rootPath)
-		throws PortalException, SystemException {
-
+	public static Map getTokens(ThemeDisplay themeDisplay) {
 		Map tokens = CollectionFactory.getHashMap();
 
-		try {
-			Company company = CompanyLocalServiceUtil.getCompany(companyId);
-
-			String friendlyURLPrivatePath = rootPath + PropsUtil.get(
-				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING);
-
-			String friendlyURLPublicPath = rootPath + PropsUtil.get(
-				PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
-
-			String portalCtx = PrefsPropsUtil.getString(
-				companyId, PropsUtil.PORTAL_CTX);
-
-			if (portalCtx.equals(StringPool.SLASH)) {
-				portalCtx = StringPool.BLANK;
-			}
-
-			tokens.put("company_id", companyId);
-			tokens.put("cms_url", rootPath + "/cms/servlet");
-			tokens.put("friendly_url_private", friendlyURLPrivatePath);
-			tokens.put("friendly_url_public", friendlyURLPublicPath);
-			tokens.put("portal_ctx", portalCtx);
-			tokens.put("portal_url", company.getPortalURL());
-			tokens.put("root_path", rootPath);
-
-			// Deprecated tokens
-
-			tokens.put("friendly_url", friendlyURLPublicPath);
-			tokens.put("page_url", friendlyURLPublicPath);
+		if (themeDisplay == null) {
+			return tokens;
 		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+
+		Company company = themeDisplay.getCompany();
+
+		tokens.put("company_id", themeDisplay.getCompanyId());
+		tokens.put("cms_url", themeDisplay.getPathRoot() + "/cms/servlet");
+		tokens.put(
+			"friendly_url_private", themeDisplay.getPathFriendlyURLPrivate());
+		tokens.put(
+			"friendly_url_public", themeDisplay.getPathFriendlyURLPublic());
+		tokens.put("portal_ctx", themeDisplay.getPathContext());
+		tokens.put("portal_url", company.getPortalURL());
+		tokens.put("root_path", themeDisplay.getPathRoot());
+
+		// Deprecated tokens
+
+		tokens.put("friendly_url", themeDisplay.getPathFriendlyURLPublic());
+		tokens.put("page_url", themeDisplay.getPathFriendlyURLPublic());
 
 		return tokens;
 	}

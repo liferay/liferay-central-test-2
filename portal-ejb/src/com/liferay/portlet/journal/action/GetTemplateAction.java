@@ -26,6 +26,7 @@ import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.spring.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
@@ -62,9 +63,10 @@ public class GetTemplateAction extends Action {
 			String companyId = PortalUtil.getCompanyId(req);
 			String templateId = getTemplateId(req);
 
-			String rootPath = (String)req.getAttribute(WebKeys.ROOT_PATH);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			Map tokens = JournalUtil.getTokens(companyId, rootPath);
+			Map tokens = JournalUtil.getTokens(themeDisplay);
 
 			tokens.put("template_id", templateId);
 

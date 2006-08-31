@@ -67,7 +67,7 @@ if (fileEntry != null) {
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function selectFolder(folderId, folderName) {
+	function <portlet:namespace />selectFolder(folderId, folderName) {
 		document.<portlet:namespace />fm.<portlet:namespace />folderId.value = folderId;
 
 		var nameEl = document.getElementById("<portlet:namespace />folderName");

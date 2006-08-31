@@ -28,33 +28,40 @@
 IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
 
 String folderId = BeanParamUtil.getString(folder, request, "folderId", IGFolder.DEFAULT_PARENT_FOLDER_ID);
+
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setWindowState(LiferayWindowState.POP_UP);
+
+portletURL.setParameter("struts_action", "/journal/select_image_gallery");
+portletURL.setParameter("folderId", folderId);
 %>
 
-<form method="post" name="<portlet:namespace />fm">
+<form method="post" name="<portlet:namespace />">
 
 <liferay-ui:tabs names="folders" />
 
 <c:if test="<%= folder != null %>">
-	<%= IGUtil.getBreadcrumbs(folder, null, pageContext, renderResponse, true) %>
+
+	<%
+	String breadcrumbs = IGUtil.getBreadcrumbs(folder, null, pageContext, renderResponse, true);
+
+	breadcrumbs = StringUtil.replace(breadcrumbs, "image_gallery%2Fselect_folder", "journal%2Fselect_image_gallery");
+	%>
+
+	<%= breadcrumbs %>
 
 	<br><br>
 </c:if>
 
 <%
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setWindowState(LiferayWindowState.POP_UP);
-
-portletURL.setParameter("struts_action", "/image_gallery/select_folder");
-
 List headerNames = new ArrayList();
 
 headerNames.add("folder");
 headerNames.add("num-of-folders");
-headerNames.add("num-of-documents");
-headerNames.add(StringPool.BLANK);
+headerNames.add("num-of-images");
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
 int total = IGFolderLocalServiceUtil.getFoldersCount(portletGroupId, folderId);
 
@@ -75,19 +82,12 @@ for (int i = 0; i < results.size(); i++) {
 
 	rowURL.setWindowState(LiferayWindowState.POP_UP);
 
-	rowURL.setParameter("struts_action", "/image_gallery/select_folder");
+	rowURL.setParameter("struts_action", "/journal/select_image_gallery");
 	rowURL.setParameter("folderId", curFolder.getFolderId());
 
 	// Name
 
-	StringBuffer sb = new StringBuffer();
-
-	sb.append("<img align=\"left\" border=\"0\" src=\"");
-	sb.append(themeDisplay.getPathThemeImage());
-	sb.append("/trees/folder.gif\">");
-	sb.append(curFolder.getName());
-
-	row.addText(sb.toString(), rowURL);
+	row.addText(curFolder.getName(), rowURL);
 
 	// Statistics
 
@@ -103,20 +103,6 @@ for (int i = 0; i < results.size(); i++) {
 	row.addText(Integer.toString(foldersCount), rowURL);
 	row.addText(Integer.toString(imagesCount), rowURL);
 
-	// Action
-
-	sb = new StringBuffer();
-
-	sb.append("opener.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("selectFolder('");
-	sb.append(curFolder.getFolderId());
-	sb.append("', '");
-	sb.append(UnicodeFormatter.toString(curFolder.getName()));
-	sb.append("'); window.close();");
-
-	row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
-
 	// Add result row
 
 	resultRows.add(row);
@@ -126,5 +112,68 @@ for (int i = 0; i < results.size(); i++) {
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+
+<c:if test="<%= folder != null %>">
+	<liferay-ui:tabs names="images" />
+
+	<%
+	headerNames.clear();
+
+	headerNames.add("thumbnail");
+	headerNames.add("height");
+	headerNames.add("width");
+	headerNames.add("size");
+	headerNames.add(StringPool.BLANK);
+
+	searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+
+	total = IGImageLocalServiceUtil.getImagesCount(folder.getFolderId());
+
+	searchContainer.setTotal(total);
+
+	results = IGImageLocalServiceUtil.getImages(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
+
+	searchContainer.setResults(results);
+
+	resultRows = searchContainer.getResultRows();
+
+	for (int i = 0; i < results.size(); i++) {
+		IGImage image = (IGImage)results.get(i);
+
+		ResultRow row = new ResultRow(image, image.getPrimaryKey().toString(), i);
+
+		// Thumbnail
+
+		row.addJSP("/html/portlet/image_gallery/image_thumbnail.jsp");
+
+		// Statistics
+
+		row.addText(Integer.toString(image.getHeight()));
+		row.addText(Integer.toString(image.getWidth()));
+		row.addText(TextFormatter.formatKB(image.getSize(), locale) + "k");
+
+		// Action
+
+		StringBuffer sb = new StringBuffer();
+
+		sb.append("opener.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("selectImageGallery('");
+		sb.append("@image_path@/image_gallery?img_id=");
+		sb.append(image.getImageId());
+		sb.append("'); window.close();");
+
+		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
+
+		// Add result row
+
+		resultRows.add(row);
+	}
+	%>
+
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+</c:if>
 
 </form>

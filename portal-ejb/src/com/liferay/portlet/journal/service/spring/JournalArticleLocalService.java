@@ -113,13 +113,14 @@ public interface JournalArticleLocalService {
 
 	public java.lang.String getArticleContent(java.lang.String companyId,
 		java.lang.String articleId, java.lang.String languageId,
-		java.lang.String rootPath)
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
 	public java.lang.String getArticleContent(java.lang.String companyId,
 		java.lang.String articleId, double version,
-		java.lang.String languageId, java.lang.String rootPath)
+		java.lang.String languageId,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 

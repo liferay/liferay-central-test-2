@@ -170,24 +170,26 @@ public class JournalArticleLocalServiceUtil {
 
 	public static java.lang.String getArticleContent(
 		java.lang.String companyId, java.lang.String articleId,
-		java.lang.String languageId, java.lang.String rootPath)
+		java.lang.String languageId,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
 		return journalArticleLocalService.getArticleContent(companyId,
-			articleId, languageId, rootPath);
+			articleId, languageId, themeDisplay);
 	}
 
 	public static java.lang.String getArticleContent(
 		java.lang.String companyId, java.lang.String articleId, double version,
-		java.lang.String languageId, java.lang.String rootPath)
+		java.lang.String languageId,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
 		return journalArticleLocalService.getArticleContent(companyId,
-			articleId, version, languageId, rootPath);
+			articleId, version, languageId, themeDisplay);
 	}
 
 	public static java.util.List getArticles(java.lang.String groupId)

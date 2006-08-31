@@ -63,13 +63,15 @@ IntegerWrapper tabIndex = (IntegerWrapper)request.getAttribute(WebKeys.TAB_INDEX
 					<c:otherwise>
 						<select id="<portlet:namespace />structure_el<%= count.getValue() %>_type" tabindex="<%= tabIndex.getValue() %>">
 							<option value=""></option>
-							<option <%= elType.equals("text") ? "selected" : "" %> value="text">Text</option>
-							<option <%= elType.equals("text_box") ? "selected" : "" %> value="text_box">Text Box</option>
-							<option <%= elType.equals("text_area") ? "selected" : "" %> value="text_area">Text Area (HTML)</option>
-							<option <%= elType.equals("image") ? "selected" : "" %> value="image">Image</option>
-							<option <%= elType.equals("boolean") ? "selected" : "" %> value="boolean">Boolean Flag</option>
-							<option <%= elType.equals("list") ? "selected" : "" %> value="list">Selection List</option>
-							<option <%= elType.equals("multi-list") ? "selected" : "" %> value="multi-list">Multi-Selection List</option>
+							<option <%= elType.equals("text") ? "selected" : "" %> value="text"><%= LanguageUtil.get(pageContext, "text") %></option>
+							<option <%= elType.equals("text_box") ? "selected" : "" %> value="text_box"><%= LanguageUtil.get(pageContext, "text-box") %></option>
+							<option <%= elType.equals("text_area") ? "selected" : "" %> value="text_area"><%= LanguageUtil.get(pageContext, "text-area") %></option>
+							<option <%= elType.equals("image") ? "selected" : "" %> value="image"><%= LanguageUtil.get(pageContext, "image") %></option>
+							<option <%= elType.equals("image_gallery") ? "selected" : "" %> value="image_gallery"><%= PortalUtil.getPortletTitle(PortletKeys.IMAGE_GALLERY, user) %></option>
+							<option <%= elType.equals("document_library") ? "selected" : "" %> value="document_library"><%= PortalUtil.getPortletTitle(PortletKeys.DOCUMENT_LIBRARY, user) %></option>
+							<option <%= elType.equals("boolean") ? "selected" : "" %> value="boolean"><%= LanguageUtil.get(pageContext, "boolean-flag") %></option>
+							<option <%= elType.equals("list") ? "selected" : "" %> value="list"><%= LanguageUtil.get(pageContext, "selection-list") %></option>
+							<option <%= elType.equals("multi-list") ? "selected" : "" %> value="multi-list"><%= LanguageUtil.get(pageContext, "multi-selection-list") %></option>
 						</select>
 					</c:otherwise>
 				</c:choose>

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journalcontent.util;
 
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil;
 import com.liferay.util.StringPool;
@@ -55,7 +56,7 @@ public class JournalContentUtil {
 
 	public static String getContent(
 		String companyId, String articleId, String languageId,
-		String rootPath) {
+		ThemeDisplay themeDisplay) {
 
 		String content = null;
 
@@ -75,7 +76,7 @@ public class JournalContentUtil {
 		catch (NeedsRefreshException nre) {
 			try {
 				content = JournalArticleLocalServiceUtil.getArticleContent(
-					companyId, articleId, languageId, rootPath);
+					companyId, articleId, languageId, themeDisplay);
 			}
 			catch (Exception e) {
 				_log.warn(e.getMessage());

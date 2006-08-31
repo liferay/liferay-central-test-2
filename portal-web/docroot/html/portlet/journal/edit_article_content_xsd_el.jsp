@@ -154,6 +154,14 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 							</c:if>
 						</c:if>
 
+						<c:if test='<%= elType.equals("image_gallery") %>'>
+							<input class="form-text" id="<portlet:namespace />structure_el<%= count.getValue() %>_content" size="75" type="text" value="<%= elContent %>"> <input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "select") %>" onClick="imageGalleryInput = '<portlet:namespace />structure_el<%= count.getValue() %>_content'; var imageGalleryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_image_gallery" /></portlet:renderURL>', 'imageGallery', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); imageGalleryWindow.focus();">
+						</c:if>
+
+						<c:if test='<%= elType.equals("document_library") %>'>
+							<input class="form-text" id="<portlet:namespace />structure_el<%= count.getValue() %>_content" size="75" type="text" value="<%= elContent %>"> <input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "select") %>" onClick="documentLibraryInput = '<portlet:namespace />structure_el<%= count.getValue() %>_content';  var documentLibraryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_document_library" /></portlet:renderURL>', 'documentLibrary', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); documentLibraryWindow.focus();">
+						</c:if>
+
 						<c:if test='<%= elType.equals("boolean") %>'>
 							<input class="form-text" id="<portlet:namespace />structure_el<%= count.getValue() %>_content" type="checkbox" <%= elContent.equals("true") ? "checked" : "" %>>
 						</c:if>

@@ -71,15 +71,17 @@ public class EditConfigurationAction extends PortletAction {
 				return;
 			}
 
-			String companyId = PortalUtil.getCompanyId(req);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+			String companyId = themeDisplay.getCompanyId();
 
 			String articleId = ParamUtil.getString(
 				req, "articleId").toUpperCase();
 			String languageId = LanguageUtil.getLanguageId(req);
-			String rootPath = (String)req.getAttribute(WebKeys.ROOT_PATH);
 
 			String content = JournalContentUtil.getContent(
-				companyId, articleId, languageId, rootPath);
+				companyId, articleId, languageId, themeDisplay);
 
 			if (Validator.isNull(content)) {
 				throw new NoSuchArticleException();

@@ -298,7 +298,7 @@ public class JournalArticleServiceHttp {
 	public static java.lang.String getArticleContent(
 		HttpPrincipal httpPrincipal, java.lang.String companyId,
 		java.lang.String articleId, java.lang.String languageId,
-		java.lang.String rootPath)
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -320,10 +320,11 @@ public class JournalArticleServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = rootPath;
+			Object paramObj3 = themeDisplay;
 
-			if (rootPath == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
+			if (themeDisplay == null) {
+				paramObj3 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),

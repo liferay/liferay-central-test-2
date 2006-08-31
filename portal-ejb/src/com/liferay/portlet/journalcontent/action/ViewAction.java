@@ -25,6 +25,8 @@ package com.liferay.portlet.journalcontent.action;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.theme.ThemeDisplay;
+
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.ParamUtil;
@@ -55,7 +57,10 @@ public class ViewAction extends PortletAction {
 
 		PortletPreferences prefs = req.getPreferences();
 
-		String companyId = PortalUtil.getCompanyId(req);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		String companyId = themeDisplay.getCompanyId();
 
 		String articleId = ParamUtil.getString(req, "articleId").toUpperCase();
 
@@ -64,10 +69,9 @@ public class ViewAction extends PortletAction {
 		}
 
 		String languageId = LanguageUtil.getLanguageId(req);
-		String rootPath = (String)req.getAttribute(WebKeys.ROOT_PATH);
 
 		String content = JournalContentUtil.getContent(
-			companyId, articleId, languageId, rootPath);
+			companyId, articleId, languageId, themeDisplay);
 
 		req.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT, content);
 

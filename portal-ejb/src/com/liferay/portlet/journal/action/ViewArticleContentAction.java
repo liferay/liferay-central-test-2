@@ -28,6 +28,7 @@ import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
@@ -77,13 +78,15 @@ public class ViewArticleContentAction extends Action {
 		try {
 			String cmd = ParamUtil.getString(req, Constants.CMD);
 
-			String companyId = PortalUtil.getCompanyId(req);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+			String companyId = themeDisplay.getCompanyId();
 			String articleId = ParamUtil.getString(req, "articleId");
 			double version = ParamUtil.getDouble(
 				req, "version", JournalArticle.DEFAULT_VERSION);
 
 			String languageId = LanguageUtil.getLanguageId(req);
-			String rootPath = (String)req.getAttribute(WebKeys.ROOT_PATH);
 
 			String output = null;
 
@@ -115,7 +118,7 @@ public class ViewArticleContentAction extends Action {
 					articleId, version, previewArticleId, companyId, root,
 					(UploadServletRequest)req);
 
-				Map tokens = JournalUtil.getTokens(companyId, rootPath);
+				Map tokens = JournalUtil.getTokens(themeDisplay);
 
 				JournalUtil.addReservedEl(
 					root, tokens, JournalStructure.RESERVED_ARTICLE_ID,
@@ -176,7 +179,7 @@ public class ViewArticleContentAction extends Action {
 			}
 			else {
 				output = JournalArticleLocalServiceUtil.getArticleContent(
-					companyId, articleId, version, languageId, rootPath);
+					companyId, articleId, version, languageId, themeDisplay);
 			}
 
 			req.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT, output);

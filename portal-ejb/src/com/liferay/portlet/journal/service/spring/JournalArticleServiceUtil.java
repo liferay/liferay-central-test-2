@@ -79,13 +79,14 @@ public class JournalArticleServiceUtil {
 
 	public static java.lang.String getArticleContent(
 		java.lang.String companyId, java.lang.String articleId,
-		java.lang.String languageId, java.lang.String rootPath)
+		java.lang.String languageId,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
 		return journalArticleService.getArticleContent(companyId, articleId,
-			languageId, rootPath);
+			languageId, themeDisplay);
 	}
 
 	public static void deleteArticle(java.lang.String companyId,

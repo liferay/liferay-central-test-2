@@ -124,7 +124,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 		document.getElementById("<portlet:namespace />removeOrganizationButton").disabled = true;
 	}
 
-	function selectLocation(locationId, name) {
+	function <portlet:namespace />selectLocation(locationId, name) {
 		document.<portlet:namespace />fm.<portlet:namespace />locationId.value = locationId;
 
 		var nameEl = document.getElementById("<portlet:namespace />locationName");
@@ -133,7 +133,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 		nameEl.innerHTML = name + "&nbsp;";
 	}
 
-	function selectOrganization(organizationId, name) {
+	function <portlet:namespace />selectOrganization(organizationId, name) {
 		document.<portlet:namespace />fm.<portlet:namespace />organizationId.value = organizationId;
 
 		var nameEl = document.getElementById("<portlet:namespace />organizationName");
