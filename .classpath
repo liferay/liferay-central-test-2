@@ -99,6 +99,8 @@
 	<classpathentry kind="lib" path="lib/portal/jdom.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jfreechart.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jgroups.jar"/>
+	<classpathentry kind="lib" path="lib/portal/jmx-remote.jar"/>
+	<classpathentry kind="lib" path="lib/portal/jmx-ri.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jsonrpc.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jstl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jstl-impl.jar"/>
