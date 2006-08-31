@@ -22,7 +22,6 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.events.InitAction;
 
 /**
@@ -35,15 +34,17 @@ public class InitUtil {
 
 	public static void init() {
 		try {
-			EventsProcessor.process(
-				new String[] {
-					InitAction.class.getName()
-				},
-				true);
+			if (_initAction == null) {
+				_initAction = new InitAction();
+
+				_initAction.run(null);
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	private static InitAction _initAction;
 
 }
