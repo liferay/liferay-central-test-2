@@ -11,6 +11,7 @@ fields terminated by "," optionally enclosed by '\''
  createDate date 'YYYYMMDD',
  modifiedDate date 'YYYYMMDD',
  title,
+ description,
  content char(10000000),
  type_,
  structureId,
