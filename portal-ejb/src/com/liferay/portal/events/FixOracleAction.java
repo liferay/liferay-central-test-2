@@ -36,6 +36,9 @@ import com.liferay.portlet.journal.service.spring.JournalTemplateLocalServiceUti
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="FixOracleAction.java.html"><b><i>View Source</i></b></a>
  *
@@ -95,6 +98,10 @@ public class FixOracleAction extends SimpleAction {
 			return;
 		}
 
+		if (_log.isInfoEnabled()) {
+			_log.info("Fix oracle new line");
+		}
+
 		List structures = JournalStructureLocalServiceUtil.getStructures(
 			ExportAction.DEFAULT_CMS_GROUP_ID, 0, 1);
 
@@ -137,5 +144,7 @@ public class FixOracleAction extends SimpleAction {
 			}
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(FixOracleAction.class);
 
 }

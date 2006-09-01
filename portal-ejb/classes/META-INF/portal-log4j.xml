@@ -44,6 +44,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.events.FixOracleAction">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.events.GarbageCollectorAction">
 		<priority value="ERROR" />
 	</category>
