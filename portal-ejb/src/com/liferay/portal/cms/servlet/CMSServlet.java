@@ -23,8 +23,8 @@
 package com.liferay.portal.cms.servlet;
 
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.util.ExtPropertiesLoader;

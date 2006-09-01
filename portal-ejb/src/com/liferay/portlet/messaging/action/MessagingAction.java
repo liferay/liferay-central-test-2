@@ -155,7 +155,7 @@ public class MessagingAction extends JSONAction {
 			msgWait.setSessionId(ses.getId());
 
 			jabberSes.setMessageWait(msgWait);
-			
+
 			msgWait.waitForMessages();
 
 			/* re-grab the session object in case connection was closed */

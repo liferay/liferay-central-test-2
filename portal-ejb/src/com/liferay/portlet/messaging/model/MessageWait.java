@@ -33,16 +33,20 @@ import com.liferay.util.GetterUtil;
  */
 public class MessageWait {
 
-	public synchronized void expire() {
-		notify();
-	}
-
 	public String getCmd() {
 		return _cmd;
 	}
 
 	public void setCmd(String cmd) {
 		_cmd = cmd;
+	}
+
+	public String getSessionId() {
+		return _sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		_sessionId = sessionId;
 	}
 
 	public boolean isTimedOut() {
@@ -53,8 +57,13 @@ public class MessageWait {
 		_timedOut = timedOut;
 	}
 
+	public synchronized void expire() {
+		notify();
+	}
+
 	public synchronized void notifyWait() {
 		_timedOut = false;
+
 		notify();
 	}
 
@@ -63,23 +72,12 @@ public class MessageWait {
 			PropsUtil.JABBER_XMPP_HEARTBEAT));
 
 		_timedOut = true;
+
 		wait(heartbeatCycle);
 	}
 
-	public String getSessionId() {
-		return _sessionId;
-	}
-
-	public void setSessionId(String sessionId) {
-		this._sessionId = sessionId;
-	}
-
 	private String _cmd;
-
 	private String _sessionId;
-
 	private boolean _timedOut;
-
-
 
 }

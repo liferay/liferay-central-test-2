@@ -24,9 +24,7 @@ package com.liferay.portlet.journalcontent.action;
 
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.ParamUtil;

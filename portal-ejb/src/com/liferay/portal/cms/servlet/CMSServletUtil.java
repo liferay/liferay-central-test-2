@@ -22,11 +22,11 @@
 
 package com.liferay.portal.cms.servlet;
 
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
-import com.liferay.portal.theme.ThemeDisplay;
 
 import com.opensymphony.oscache.base.NeedsRefreshException;
 import com.opensymphony.oscache.general.GeneralCacheAdministrator;

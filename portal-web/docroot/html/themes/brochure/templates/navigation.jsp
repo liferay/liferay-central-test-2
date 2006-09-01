@@ -58,7 +58,7 @@
 
 	for (int i = 0; i < layouts.size(); i++) {
 		Layout curLayout = (Layout)layouts.get(i);
-		
+
 		String tabName = curLayout.getName(locale);
 		String tabHREF = PortalUtil.getLayoutURL(curLayout, themeDisplay);
 		boolean isGroupTab = true;// FIX ME curLayout.isGroup();

@@ -23,10 +23,10 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.spring.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
