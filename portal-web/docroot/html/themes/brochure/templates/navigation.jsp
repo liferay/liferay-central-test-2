@@ -58,7 +58,7 @@
 
 	for (int i = 0; i < layouts.size(); i++) {
 		Layout curLayout = (Layout)layouts.get(i);
-
+		
 		String tabName = curLayout.getName(locale);
 		String tabHREF = PortalUtil.getLayoutURL(curLayout, themeDisplay);
 		boolean isGroupTab = true;// FIX ME curLayout.isGroup();
@@ -79,7 +79,10 @@
 
 		String tabText = null;
 
-		if (isSelectedTab) {
+		if (curLayout.isHidden()) {
+			tabText = null;
+		}
+		else if (isSelectedTab) {
 			tabText = "<a href=\"" + tabHREF + "\" " + target + ">" + tabName + "</a>";
 			selectedRow = rowCounter;
 			selectedTab = currentTab;

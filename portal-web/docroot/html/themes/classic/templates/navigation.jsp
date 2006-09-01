@@ -76,13 +76,15 @@
 
 		String tabText = null;
 
-		if (isSelectedTab) {
-			tabText = "<a href=\"" + tabHREF + "\" " + target + ">" + tabName + "</a>";
-			selectedRow = rowCounter;
-			selectedTab = currentTab;
-		}
-		else {
-			tabText = "<a href=\"" + tabHREF + "\" " + target + ">" + tabName + "</a>";
+		if (!curLayout.isHidden()) {
+			if (isSelectedTab) {
+				tabText = "<a href=\"" + tabHREF + "\" " + target + ">" + tabName + "</a>";
+				selectedRow = rowCounter;
+				selectedTab = currentTab;
+			}
+			else {
+				tabText = "<a href=\"" + tabHREF + "\" " + target + ">" + tabName + "</a>";
+			}
 		}
 
 		rows[rowCounter][currentTab] = tabText;

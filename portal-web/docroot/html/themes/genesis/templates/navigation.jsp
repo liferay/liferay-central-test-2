@@ -95,7 +95,9 @@
 
 		String tabText = null;
 
-		tabText = "<a href=\"" + tabHREF + "\" " + target + ">" + tabName + "</a>";
+		if (!curLayout.isHidden()) {
+			tabText = "<a href=\"" + tabHREF + "\" " + target + ">" + tabName + "</a>";
+		}
 		rows[rowCounter][currentTab] = tabText;
 
 		if (currentTab == tabsPerRow - 1) {
