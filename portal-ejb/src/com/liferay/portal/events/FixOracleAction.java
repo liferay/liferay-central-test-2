@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.action.ExportAction;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -33,6 +34,7 @@ import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.spring.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.spring.JournalTemplateLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 
 import java.util.List;
 
@@ -46,6 +48,9 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class FixOracleAction extends SimpleAction {
+
+	public static final int NUM_OF_ARTICLES = GetterUtil.getInteger(
+		PropsUtil.get(FixOracleAction.class.getName()), 5);
 
 	public void run(String[] ids) throws ActionException {
 		try {
@@ -66,8 +71,18 @@ public class FixOracleAction extends SimpleAction {
 
 		boolean checkNewLine = false;
 
-		List articles = JournalArticleLocalServiceUtil.getArticles(
-			ExportAction.DEFAULT_CMS_GROUP_ID, 0, 5);
+		List articles = null;
+
+		if (NUM_OF_ARTICLES <= 0) {
+			checkNewLine = true;
+
+			articles = JournalArticleLocalServiceUtil.getArticles(
+				ExportAction.DEFAULT_CMS_GROUP_ID);
+		}
+		else {
+			articles = JournalArticleLocalServiceUtil.getArticles(
+				ExportAction.DEFAULT_CMS_GROUP_ID, 0, NUM_OF_ARTICLES);
+		}
 
 		for (int i = 0; i < articles.size(); i++) {
 			JournalArticle article = (JournalArticle)articles.get(i);
