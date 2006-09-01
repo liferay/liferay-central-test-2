@@ -101,6 +101,7 @@ public class MessagingUtil {
 				MessageWait msgWait = jabberSes.getMessageWait();
 
 				if (msgWait != null) {
+					jabberSes.setMessageWait(null);
 					msgWait.notifyWait();
 				}
 

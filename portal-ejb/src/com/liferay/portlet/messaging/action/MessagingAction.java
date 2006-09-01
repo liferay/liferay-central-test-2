@@ -151,16 +151,11 @@ public class MessagingAction extends JSONAction {
 		String waitCmd = "";
 
 		try {
-			MessageWait msgWait = jabberSes.getMessageWait();
-
-			if (msgWait != null) {
-				release(req);
-			}
-
-			msgWait = new MessageWait();
+			MessageWait msgWait = new MessageWait();
+			msgWait.setSessionId(ses.getId());
 
 			jabberSes.setMessageWait(msgWait);
-
+			
 			msgWait.waitForMessages();
 
 			/* re-grab the session object in case connection was closed */
@@ -237,10 +232,6 @@ public class MessagingAction extends JSONAction {
 		return jo;
 	}
 
-	public synchronized void notifyGetMessages() {
-		notify();
-	}
-
 	protected void release(HttpServletRequest req) {
 		HttpSession ses = req.getSession();
 		JabberSession jabberSes = (JabberSession) ses.getAttribute(WebKeys.JABBER_XMPP_SESSION);
@@ -248,7 +239,7 @@ public class MessagingAction extends JSONAction {
 
 		if (msgWait != null) {
 			jabberSes.setMessageWait(null);
-			msgWait.notifyWait();
+			msgWait.expire();
 		}
 	}
 

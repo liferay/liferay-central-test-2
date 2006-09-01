@@ -2,10 +2,6 @@ function AjaxRequest(returnFunction, returnArgs, ajaxId) {
 	
 	var xmlHttpReq;
 	
-	if (returnFunction == null) {
-		returnFunction = function () {};
-	}
-
 	if (window.XMLHttpRequest) {
 		xmlHttpReq = new XMLHttpRequest();
 
@@ -34,10 +30,12 @@ function AjaxRequest(returnFunction, returnArgs, ajaxId) {
 	xmlHttpReq.onreadystatechange = function() {
 		if (xmlHttpReq.readyState == 4) {
 			if (xmlHttpReq.status == 200) {
-				returnFunction(xmlHttpReq, returnArgs);
-				
-				var ajaxId = xmlHttpReq.getResponseHeader("Ajax-ID");
-				AjaxTracker.remove(ajaxId);
+				if (returnFunction) {
+					returnFunction(xmlHttpReq, returnArgs);
+
+					var ajaxId = xmlHttpReq.getResponseHeader("Ajax-ID");
+					AjaxTracker.remove(ajaxId);
+				}
 			}
 		}
 	};
@@ -94,7 +92,7 @@ var AjaxTracker = {
 	
 	remove : function(id) {
 		if (id && AjaxTracker["" + id]) {
-			AjaxTracker["" + id].cleanUp();
+			//AjaxTracker["" + id].cleanUp();
 			AjaxTracker["" + id] = null;
 		}
 	}
