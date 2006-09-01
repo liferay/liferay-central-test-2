@@ -90,6 +90,22 @@ public class UserServiceUtil {
 		userService.deleteUser(userId);
 	}
 
+	public static java.util.List getGroupUsers(java.lang.String groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		UserService userService = UserServiceFactory.getService();
+
+		return userService.getGroupUsers(groupId);
+	}
+
+	public static java.util.List getRoleUsers(java.lang.String roleId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		UserService userService = UserServiceFactory.getService();
+
+		return userService.getRoleUsers(roleId);
+	}
+
 	public static com.liferay.portal.model.User getUserByEmailAddress(
 		java.lang.String companyId, java.lang.String emailAddress)
 		throws com.liferay.portal.PortalException, 

@@ -116,7 +116,7 @@ public class DLFileEntryServiceHttp {
 
 	public static void deleteFileEntry(HttpPrincipal httpPrincipal,
 		java.lang.String folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = folderId;
@@ -142,6 +142,10 @@ public class DLFileEntryServiceHttp {
 					throw (com.liferay.portal.PortalException)e;
 				}
 
+				if (e instanceof java.rmi.RemoteException) {
+					throw (java.rmi.RemoteException)e;
+				}
+
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
 				}
@@ -158,7 +162,7 @@ public class DLFileEntryServiceHttp {
 
 	public static void deleteFileEntry(HttpPrincipal httpPrincipal,
 		java.lang.String folderId, java.lang.String name, double version)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = folderId;
@@ -184,6 +188,10 @@ public class DLFileEntryServiceHttp {
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof java.rmi.RemoteException) {
+					throw (java.rmi.RemoteException)e;
 				}
 
 				if (e instanceof com.liferay.portal.SystemException) {
@@ -248,7 +256,7 @@ public class DLFileEntryServiceHttp {
 
 	public static void lockFileEntry(HttpPrincipal httpPrincipal,
 		java.lang.String folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = folderId;
@@ -274,6 +282,10 @@ public class DLFileEntryServiceHttp {
 					throw (com.liferay.portal.PortalException)e;
 				}
 
+				if (e instanceof java.rmi.RemoteException) {
+					throw (java.rmi.RemoteException)e;
+				}
+
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
 				}
@@ -290,7 +302,7 @@ public class DLFileEntryServiceHttp {
 
 	public static void unlockFileEntry(HttpPrincipal httpPrincipal,
 		java.lang.String folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = folderId;
@@ -316,6 +328,10 @@ public class DLFileEntryServiceHttp {
 					throw (com.liferay.portal.PortalException)e;
 				}
 
+				if (e instanceof java.rmi.RemoteException) {
+					throw (java.rmi.RemoteException)e;
+				}
+
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
 				}
@@ -334,7 +350,7 @@ public class DLFileEntryServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String folderId,
 		java.lang.String name, java.lang.String title,
 		java.lang.String description)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = folderId;
@@ -374,6 +390,10 @@ public class DLFileEntryServiceHttp {
 					throw (com.liferay.portal.PortalException)e;
 				}
 
+				if (e instanceof java.rmi.RemoteException) {
+					throw (java.rmi.RemoteException)e;
+				}
+
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
 				}
@@ -393,7 +413,7 @@ public class DLFileEntryServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		HttpPrincipal httpPrincipal, java.lang.String folderId,
 		java.lang.String name, java.lang.String sourceFileName, byte[] byteArray)
-		throws com.liferay.portal.PortalException, 
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = folderId;
@@ -431,6 +451,10 @@ public class DLFileEntryServiceHttp {
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof java.rmi.RemoteException) {
+					throw (java.rmi.RemoteException)e;
 				}
 
 				if (e instanceof com.liferay.portal.SystemException) {

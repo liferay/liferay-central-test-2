@@ -34,6 +34,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="authType" type="tns:string"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="autoLogin" type="tns:boolean"></parameter>  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sendPassword" type="tns:boolean"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="strangers" type="tns:boolean"></parameter> 
 		</operation>  
 		<parameter name="allowedMethods" value="updateCompany updateDisplay updateSecurity"/>  

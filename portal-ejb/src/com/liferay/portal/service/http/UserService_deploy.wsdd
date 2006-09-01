@@ -32,6 +32,12 @@
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteUser" qname="operNS:deleteUser" soapAction="">  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:string"></parameter> 
 		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getGroupUsers" qname="operNS:getGroupUsers" returnQName="getGroupUsersReturn" returnType="rtns:ArrayOf_tns2_UserModel" returnItemType="tns2:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:string"></parameter> 
+		</operation>  
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getRoleUsers" qname="operNS:getRoleUsers" returnQName="getRoleUsersReturn" returnType="rtns:ArrayOf_tns2_UserModel" returnItemType="tns2:UserModel" soapAction="">  
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:string"></parameter> 
+		</operation>  
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getUserByEmailAddress" qname="operNS:getUserByEmailAddress" returnQName="getUserByEmailAddressReturn" returnType="rtns:UserModel" soapAction="">  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="emailAddress" type="tns:string"></parameter> 
@@ -115,9 +121,10 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:string"></parameter>  
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="locationId" type="tns:string"></parameter> 
 		</operation>  
-		<parameter name="allowedMethods" value="updatePortrait hasRoleUser setRoleUsers unsetGroupUsers unsetUserGroupUsers unsetRoleUsers updatePassword addRoleUsers deleteUser getUserByEmailAddress hasGroupUser addGroupUsers updateAgreedToTermsOfUse deleteRoleUser setGroupUsers addUserGroupUsers getUserById updateActive setUserGroupUsers updateUser"/>  
+		<parameter name="allowedMethods" value="updatePortrait hasRoleUser unsetGroupUsers setRoleUsers unsetUserGroupUsers getRoleUsers unsetRoleUsers updatePassword addRoleUsers deleteUser getUserByEmailAddress hasGroupUser addGroupUsers updateAgreedToTermsOfUse getGroupUsers deleteRoleUser setGroupUsers addUserGroupUsers getUserById updateActive setUserGroupUsers updateUser"/>  
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>  
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:BaseModel" type="java:com.liferay.portal.model.BaseModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>  
+		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_UserModel" type="java:com.liferay.portal.model.UserModel[]" innerType="cmp-ns:UserModel" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>  
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:UserModel" type="java:com.liferay.portal.model.UserModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping> 
 	</service> 
 </deployment>

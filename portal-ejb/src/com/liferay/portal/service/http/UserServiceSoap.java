@@ -97,6 +97,34 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.UserModel[] getGroupUsers(
+		java.lang.String groupId) throws RemoteException {
+		try {
+			java.util.List returnValue = UserServiceUtil.getGroupUsers(groupId);
+
+			return (com.liferay.portal.model.User[])returnValue.toArray(new com.liferay.portal.model.User[0]);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static com.liferay.portal.model.UserModel[] getRoleUsers(
+		java.lang.String roleId) throws RemoteException {
+		try {
+			java.util.List returnValue = UserServiceUtil.getRoleUsers(roleId);
+
+			return (com.liferay.portal.model.User[])returnValue.toArray(new com.liferay.portal.model.User[0]);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static com.liferay.portal.model.UserModel getUserByEmailAddress(
 		java.lang.String companyId, java.lang.String emailAddress)
 		throws RemoteException {

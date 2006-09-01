@@ -40,6 +40,7 @@ import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.service.spring.UserService;
 
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -129,6 +130,18 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		checkPermission(userId, ActionKeys.DELETE);
 
 		UserLocalServiceUtil.deleteUser(userId);
+	}
+
+	public List getGroupUsers(String groupId)
+		throws PortalException, SystemException {
+
+		return UserLocalServiceUtil.getGroupUsers(groupId);
+	}
+
+	public List getRoleUsers(String roleId)
+		throws PortalException, SystemException {
+
+		return UserLocalServiceUtil.getRoleUsers(roleId);
 	}
 
 	public User getUserByEmailAddress(String companyId, String emailAddress)

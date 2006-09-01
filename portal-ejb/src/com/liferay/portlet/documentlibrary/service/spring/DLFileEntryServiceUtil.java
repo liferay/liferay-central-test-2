@@ -43,16 +43,16 @@ public class DLFileEntryServiceUtil {
 
 	public static void deleteFileEntry(java.lang.String folderId,
 		java.lang.String name)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
+			com.liferay.portal.SystemException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 		dlFileEntryService.deleteFileEntry(folderId, name);
 	}
 
 	public static void deleteFileEntry(java.lang.String folderId,
 		java.lang.String name, double version)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
+			com.liferay.portal.SystemException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 		dlFileEntryService.deleteFileEntry(folderId, name, version);
 	}
@@ -68,16 +68,16 @@ public class DLFileEntryServiceUtil {
 
 	public static void lockFileEntry(java.lang.String folderId,
 		java.lang.String name)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
+			com.liferay.portal.SystemException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 		dlFileEntryService.lockFileEntry(folderId, name);
 	}
 
 	public static void unlockFileEntry(java.lang.String folderId,
 		java.lang.String name)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
+			com.liferay.portal.SystemException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 		dlFileEntryService.unlockFileEntry(folderId, name);
 	}
@@ -85,8 +85,8 @@ public class DLFileEntryServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		java.lang.String folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
+			com.liferay.portal.SystemException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
 		return dlFileEntryService.updateFileEntry(folderId, name, title,
@@ -96,8 +96,8 @@ public class DLFileEntryServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		java.lang.String folderId, java.lang.String name,
 		java.lang.String sourceFileName, byte[] byteArray)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
+			com.liferay.portal.SystemException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
 		return dlFileEntryService.updateFileEntry(folderId, name,
