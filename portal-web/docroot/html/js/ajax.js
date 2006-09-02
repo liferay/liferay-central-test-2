@@ -99,7 +99,7 @@ var AjaxTracker = {
 	getNextId : function() {
 		var id = AjaxTracker.counter++;
 
-		if (AjaxTracker.counter > 100) {
+		if (AjaxTracker.counter > 20) {
 			/* Reset array in a round-robin fashion */
 			/* Reserve index 0 for reverse ajax requests */
 			AjaxTracker.counter = 1;
