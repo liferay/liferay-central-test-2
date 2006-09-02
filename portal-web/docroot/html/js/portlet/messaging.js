@@ -69,7 +69,8 @@ var Messaging = {
 	},
 	
 	getChats : function() {
-		loadPage(themeDisplay.getPathMain() + "/messaging/action", "cmd=getChats", Messaging.getChatsReturn);
+		AjaxTracker.sendPendRequest(themeDisplay.getPathMain() + "/messaging/action", "cmd=getChats", Messaging.getChatsReturn);
+		//loadPage(themeDisplay.getPathMain() + "/messaging/action", "cmd=getChats", Messaging.getChatsReturn);
 	},
 	
 	getChatsReturn : function(xmlHttpReq) {
@@ -83,11 +84,8 @@ var Messaging = {
 			return;
 		}
 		
-		var status = "failure";
-		if (msg.status) {
-			status = msg.status;
-		}
-		
+		var status = msg.status;
+
 		if (status == "success") {
 			var chatMsg = msg.chat;
 			if (chatMsg && chatMsg.length > 0) {
@@ -259,7 +257,7 @@ var Messaging = {
 		window.onunload = Messaging.onPageUnload;
 		this.mainDiv = mainDiv;
 		this.initialized = true;
-		Messaging.getRosterChats();
+		Messaging.getChats();
 		
 	},
 	

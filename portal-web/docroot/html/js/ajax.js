@@ -1,7 +1,7 @@
 function AjaxRequest(returnFunction, returnArgs, ajaxId) {
 	
 	var xmlHttpReq;
-	
+
 	if (window.XMLHttpRequest) {
 		xmlHttpReq = new XMLHttpRequest();
 
@@ -34,12 +34,16 @@ function AjaxRequest(returnFunction, returnArgs, ajaxId) {
 					returnFunction(xmlHttpReq, returnArgs);
 
 					var ajaxId = xmlHttpReq.getResponseHeader("Ajax-ID");
-					AjaxTracker.remove(ajaxId);
+					AjaxTracker.remove(parseInt(ajaxId));
 				}
 			}
 		}
 	};
 	
+	this.getId = function() {
+		return ajaxId;
+	};
+
 	this.getRequest = function() {
 		return xmlHttpReq;
 	};
@@ -53,13 +57,15 @@ function AjaxRequest(returnFunction, returnArgs, ajaxId) {
 }
 
 var AjaxTracker = {
-	add : function(path, queryString, returnFunction, returnArgs) {
-		var ajaxId = (new Date()).getTime();
-		var noReturn = (returnFunction == null);
+	counter : 1,
+	requests : new Array(),
+	
+	add : function(path, queryString, returnFunction, returnArgs, reverseAjax) {
+		var ajaxId = reverseAjax ? 0 : AjaxTracker.getNextId();
+		var request = new AjaxRequest(returnFunction, returnArgs, ajaxId);
+		var xmlHttpReq = request.getRequest();
 		
-		AjaxTracker["" + ajaxId] = new AjaxRequest(returnFunction, returnArgs, ajaxId);
-		
-		var xmlHttpReq = AjaxTracker["" + ajaxId].getRequest();
+		AjaxTracker.requests[ajaxId] = request;
 		
 		if (queryString == null) {
 			queryString = "";
@@ -85,16 +91,33 @@ var AjaxTracker = {
 		catch (e) {
 		}
 		
-		if (noReturn) {
-			this.remove(ajaxId);
+		if (returnFunction == null) {
+			AjaxTracker.remove(ajaxId);
 		}
 	},
 	
-	remove : function(id) {
-		if (id && AjaxTracker["" + id]) {
-			//AjaxTracker["" + id].cleanUp();
-			AjaxTracker["" + id] = null;
+	getNextId : function() {
+		var id = AjaxTracker.counter++;
+
+		if (AjaxTracker.counter > 100) {
+			/* Reset array in a round-robin fashion */
+			/* Reserve index 0 for reverse ajax requests */
+			AjaxTracker.counter = 1;
 		}
+
+		return id;
+	},
+	
+	remove : function(id) {
+		var request = AjaxTracker.requests[id];
+		if (id && request) {
+			request.cleanUp();
+			request = null;
+		}
+	},
+	
+	sendPendRequest : function(path, queryString, returnFunction, returnArgs) {
+		AjaxTracker.add(path, queryString, returnFunction, returnArgs, true);
 	}
 }
 
