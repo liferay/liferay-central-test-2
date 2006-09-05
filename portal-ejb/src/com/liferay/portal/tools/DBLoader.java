@@ -48,51 +48,12 @@ public class DBLoader {
 	public DBLoader() {
 		try {
 			Class.forName("org.hsqldb.jdbcDriver");
+
 			Connection con = DriverManager.getConnection(
 				"jdbc:hsqldb:test", "sa", "");
 
-			StringBuffer sb = new StringBuffer();
-
-			PreparedStatement ps = null;
-
-			BufferedReader br = new BufferedReader(new StringReader(
-				FileUtil.read("../sql/portal/portal-hypersonic.sql")));
-
-			String line = null;
-
-			while ((line = br.readLine()) != null) {
-				if (!line.startsWith("//")) {
-					sb.append(line);
-
-					if (line.endsWith(";")) {
-						String sql = sb.toString();
-
-						sql =
-							StringUtil.replace(
-								sql,
-								new String[] {
-									"\\\"",
-									"\\\\",
-									"\\n",
-									"\\r"},
-								new String[] {
-									"\"",
-									"\\",
-									"\\u000a",
-									"\\u000a"
-								});
-
-						sb = new StringBuffer();
-
-						ps = con.prepareStatement(sql);
-
-						ps.executeUpdate();
-						ps.close();
-					}
-				}
-			}
-
-			br.close();
+			_loadSQL(con, "../sql/portal/portal-hypersonic.sql");
+			_loadSQL(con, "../sql/indexes.sql");
 
 			// Shutdown Hypersonic
 
@@ -116,6 +77,50 @@ public class DBLoader {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void _loadSQL(Connection con, String fileName) throws Exception {
+		StringBuffer sb = new StringBuffer();
+
+		BufferedReader br = new BufferedReader(
+			new StringReader(FileUtil.read(fileName)));
+
+		String line = null;
+
+		while ((line = br.readLine()) != null) {
+			if (!line.startsWith("//")) {
+				sb.append(line);
+
+				if (line.endsWith(";")) {
+					String sql = sb.toString();
+
+					sql =
+						StringUtil.replace(
+							sql,
+							new String[] {
+								"\\\"",
+								"\\\\",
+								"\\n",
+								"\\r"},
+							new String[] {
+								"\"",
+								"\\",
+								"\\u000a",
+								"\\u000a"
+							});
+
+					sb = new StringBuffer();
+
+					PreparedStatement ps = con.prepareStatement(sql);
+
+					ps.executeUpdate();
+
+					ps.close();
+				}
+			}
+		}
+
+		br.close();
 	}
 
 }
