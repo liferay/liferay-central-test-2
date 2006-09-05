@@ -111,7 +111,7 @@ public class FixOracleAction extends SimpleAction {
 
 		if (!checkNewLine) {
 			if (_log.isInfoEnabled()) {
-				_log.info("Do not fix oracle new line");
+				_log.debug("Do not fix oracle new line");
 			}
 
 			return;
