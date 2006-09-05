@@ -4350,7 +4350,15 @@ public class ServiceBuilder {
 				for (int j = 0; j < parameters.size(); j++) {
 					XParameter xParameter = (XParameter)parameters.get(j);
 
-					sb.append(xParameter.getType().getQualifiedName() + xParameter.getDimensionAsString() + " " + xParameter.getName());
+					String parameterTypeName =
+						xParameter.getType().getQualifiedName() +
+							xParameter.getDimensionAsString();
+
+					if (parameterTypeName.equals("java.util.Locale")) {
+						parameterTypeName = "String";
+					}
+
+					sb.append(parameterTypeName + " " + xParameter.getName());
 
 					if ((j + 1) != parameters.size()) {
 						sb.append(", ");
@@ -4369,7 +4377,19 @@ public class ServiceBuilder {
 				for (int j = 0; j < parameters.size(); j++) {
 					XParameter xParameter = (XParameter)parameters.get(j);
 
+					String parameterTypeName =
+						xParameter.getType().getQualifiedName() +
+							xParameter.getDimensionAsString();
+
+					if (parameterTypeName.equals("java.util.Locale")) {
+						sb.append("new java.util.Locale(");
+					}
+
 					sb.append(xParameter.getName());
+
+					if (parameterTypeName.equals("java.util.Locale")) {
+						sb.append(")");
+					}
 
 					if ((j + 1) != parameters.size()) {
 						sb.append(", ");
@@ -5236,7 +5256,7 @@ public class ServiceBuilder {
 					"com.liferay.portlet.PortletPreferencesImpl")) ||
 				 parameterTypeName.startsWith("java.io") ||
 				 //parameterTypeName.startsWith("java.util.List") ||
-				 parameterTypeName.startsWith("java.util.Locale") ||
+				 //parameterTypeName.startsWith("java.util.Locale") ||
 				 parameterTypeName.startsWith("java.util.Properties") ||
 				 parameterTypeName.startsWith("javax")) {
 

@@ -73,6 +73,34 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.UserModel addUser(
+		java.lang.String companyId, boolean autoUserId,
+		java.lang.String userId, boolean autoPassword,
+		java.lang.String password1, java.lang.String password2,
+		boolean passwordReset, java.lang.String emailAddress, String locale,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String nickName,
+		java.lang.String prefixId, java.lang.String suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, java.lang.String organizationId,
+		java.lang.String locationId) throws RemoteException {
+		try {
+			com.liferay.portal.model.User returnValue = UserServiceUtil.addUser(companyId,
+					autoUserId, userId, autoPassword, password1, password2,
+					passwordReset, emailAddress, new java.util.Locale(locale),
+					firstName, middleName, lastName, nickName, prefixId,
+					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+					jobTitle, organizationId, locationId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static void deleteRoleUser(java.lang.String roleId,
 		java.lang.String userId) throws RemoteException {
 		try {
