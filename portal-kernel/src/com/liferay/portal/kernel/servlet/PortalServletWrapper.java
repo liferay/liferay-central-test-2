@@ -46,18 +46,25 @@ public class PortalServletWrapper
 	extends HttpServlet implements PortalInitable {
 
 	public void portalInit() {
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
+
 		try {
-			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+			Thread.currentThread().setContextClassLoader(
+				PortalClassLoaderUtil.getClassLoader());
 
 			String servletClass = _config.getInitParameter("servlet-class");
 
-			_servlet = (HttpServlet)classLoader.loadClass(
+			_servlet = (HttpServlet)contextClassLoader.loadClass(
 				servletClass).newInstance();
 
 			_servlet.init(_config);
 		}
 		catch (Exception e) {
 			_log.error(e);
+		}
+		finally {
+			Thread.currentThread().setContextClassLoader(contextClassLoader);
 		}
 	}
 
