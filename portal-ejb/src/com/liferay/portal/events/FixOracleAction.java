@@ -110,11 +110,16 @@ public class FixOracleAction extends SimpleAction {
 		// Only process this once
 
 		if (!checkNewLine) {
+			if (_log.isInfoEnabled()) {
+				_log.info("Do not fix oracle new line");
+			}
+
 			return;
 		}
-
-		if (_log.isInfoEnabled()) {
-			_log.info("Fix oracle new line");
+		else {
+			if (_log.isInfoEnabled()) {
+				_log.info("Fix oracle new line");
+			}
 		}
 
 		List structures = JournalStructureLocalServiceUtil.getStructures(

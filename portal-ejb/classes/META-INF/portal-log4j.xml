@@ -45,7 +45,7 @@
 	</category>
 
 	<category name="com.liferay.portal.events.FixOracleAction">
-		<priority value="ERROR" />
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.events.GarbageCollectorAction">
@@ -153,7 +153,7 @@
 	</category>
 
 	<category name="com.liferay.portal.servlet.MainServlet">
-		<priority value="ERROR" />
+		<priority value="DEBUG" />
 	</category>
 
 	<category name="com.liferay.portal.servlet.PortalSessionListener">
@@ -166,6 +166,10 @@
 
 	<category name="com.liferay.portal.spring.hibernate.CustomSQLUtil">
 		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.spring.hibernate.DynamicDialect">
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.struts">

@@ -70,7 +70,16 @@ public class DynamicDialect extends Dialect {
 			String dbName = metaData.getDatabaseProductName();
 			int dbMajorVersion = metaData.getDatabaseMajorVersion();
 
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Determining dialect for " + dbName + " " + dbMajorVersion);
+			}
+
 			_dialect = DialectFactory.determineDialect(dbName, dbMajorVersion);
+
+			if (_log.isInfoEnabled()) {
+				_log.info("Using dialect " + _dialect.getClass().getName());
+			}
 		}
 		catch (Exception e) {
 			_log.error(e);

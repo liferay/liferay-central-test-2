@@ -147,6 +147,7 @@ public class DBBuilder {
 		sb.append("create user &1 identified by &2;\n");
 		sb.append("grant connect,resource to &1;\n");
 		sb.append("connect &1/&2;\n");
+		sb.append("set define off;\n");
 		sb.append("\n");
 		sb.append(FileUtil.read("../sql/portal/portal-oracle.sql"));
 		sb.append("\n\n");
