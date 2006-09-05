@@ -309,11 +309,11 @@ var Mail = {
 		return foundLast;
 	},
 
-	getFolders : function() {
-		loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=getFolders", Mail.getFoldersReturn);
+	getFolders : function(checkMail) {
+		loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=getFolders", Mail.getFoldersReturn, checkMail);
 	},
 	
-	getFoldersReturn : function(xmlHttpReq) {
+	getFoldersReturn : function(xmlHttpReq, checkMail) {
 		var foldersObject = createJSONObject(xmlHttpReq.responseText);
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
 		var folderList = document.createElement("ul");
@@ -403,7 +403,9 @@ var Mail = {
 		
 		folderPane.appendChild(folderList);
 		
-		if (Mail.currentFolder == null || Mail.currentFolder.id != selectedFolder.id) {
+		if (Mail.currentFolder == null ||
+			Mail.currentFolder.id != selectedFolder.id ||
+			checkMail) {
 			Mail.setCurrentFolder(selectedFolder);
 			Mail.getPreview();
 		}
