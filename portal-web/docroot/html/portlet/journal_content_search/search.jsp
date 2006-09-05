@@ -24,99 +24,107 @@
 
 <%@ include file="/html/portlet/journal_content_search/init.jsp" %>
 
-<%
-String defaultKeywords = LanguageUtil.get(pageContext, "search") + "...";
-String unicodeDefaultKeywords = UnicodeFormatter.toString(defaultKeywords);
+<c:choose>
+	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 
-String keywords = ParamUtil.getString(request, "keywords", defaultKeywords);
-%>
+		<%
+		String defaultKeywords = LanguageUtil.get(pageContext, "search") + "...";
+		String unicodeDefaultKeywords = UnicodeFormatter.toString(defaultKeywords);
 
-<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal_content_search/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+		String keywords = ParamUtil.getString(request, "keywords", defaultKeywords);
+		%>
 
-<%
-PortletURL portletURL = renderResponse.createRenderURL();
+		<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal_content_search/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
+		<%
+		PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/journal_content_search/search");
-portletURL.setParameter("keywords", keywords);
+		portletURL.setWindowState(WindowState.MAXIMIZED);
 
-List headerNames = new ArrayList();
+		portletURL.setParameter("struts_action", "/journal_content_search/search");
+		portletURL.setParameter("keywords", keywords);
 
-headerNames.add("#");
-headerNames.add("name");
-headerNames.add("content");
-headerNames.add("score");
+		List headerNames = new ArrayList();
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-pages-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
+		headerNames.add("#");
+		headerNames.add("name");
+		headerNames.add("content");
+		headerNames.add("score");
 
-Hits hits = CompanyLocalServiceUtil.search(company.getCompanyId(), PortletKeys.JOURNAL, null, keywords);
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-pages-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
 
-ContentHits contentHits = new ContentHits();
+		Hits hits = CompanyLocalServiceUtil.search(company.getCompanyId(), PortletKeys.JOURNAL, null, keywords);
 
-contentHits.recordHits(hits, layout.getOwnerId());
+		ContentHits contentHits = new ContentHits();
 
-hits = contentHits;
+		contentHits.recordHits(hits, layout.getOwnerId());
 
-Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
-int total = hits.getLength();
+		hits = contentHits;
 
-searchContainer.setTotal(total);
+		Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
+		int total = hits.getLength();
 
-List resultRows = searchContainer.getResultRows();
+		searchContainer.setTotal(total);
 
-for (int i = 0; i < results.getLength(); i++) {
-	Document doc = results.doc(i);
+		List resultRows = searchContainer.getResultRows();
 
-	ResultRow row = new ResultRow(doc, String.valueOf(i), i);
+		for (int i = 0; i < results.getLength(); i++) {
+			Document doc = results.doc(i);
 
-	// Position
+			ResultRow row = new ResultRow(doc, String.valueOf(i), i);
 
-	row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
+			// Position
 
-	// Title
+			row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
 
-	String title = (String)doc.get(LuceneFields.TITLE);
+			// Title
 
-	row.addText(title);
+			String title = (String)doc.get(LuceneFields.TITLE);
 
-	// Content
+			row.addText(title);
 
-	row.addJSP("/html/portlet/journal_content_search/article_content.jsp");
+			// Content
 
-	// Score
+			row.addJSP("/html/portlet/journal_content_search/article_content.jsp");
 
-	row.addText(String.valueOf(hits.score(i)));
+			// Score
 
-	// Add result row
+			row.addText(String.valueOf(hits.score(i)));
 
-	resultRows.add(row);
-}
-%>
+			// Add result row
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tr>
-	<td>
-		<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }">
+			resultRows.add(row);
+		}
+		%>
 
-		<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/search.gif" title="<%= LanguageUtil.get(pageContext, "search") %>" type="image">
-	</td>
-	<td align="right">
-		<liferay-ui:search-speed searchContainer="<%= searchContainer %>" hits="<%= hits %>" />
-	</td>
-</tr>
-</table>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+			<td>
+				<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }">
 
-<br>
+				<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/search.gif" title="<%= LanguageUtil.get(pageContext, "search") %>" type="image">
+			</td>
+			<td align="right">
+				<liferay-ui:search-speed searchContainer="<%= searchContainer %>" hits="<%= hits %>" />
+			</td>
+		</tr>
+		</table>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+		<br>
 
-<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-</form>
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
-<script type="text/javascript">
-	if (document.<portlet:namespace />fm.<portlet:namespace />keywords) {
-		document.<portlet:namespace />fm.<portlet:namespace />keywords.focus();
-	}
-</script>
+		</form>
+
+		<script type="text/javascript">
+			if (document.<portlet:namespace />fm.<portlet:namespace />keywords) {
+				document.<portlet:namespace />fm.<portlet:namespace />keywords.focus();
+			}
+		</script>
+	</c:when>
+	<c:otherwise>
+		<liferay-ui:journal-content-search />
+	</c:otherwise>
+</c:choose>
