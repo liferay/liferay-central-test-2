@@ -78,9 +78,18 @@ portletURL.setParameter("groupId", group.getGroupId());
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= group.getGroupId() %>">
 
-<%= LanguageUtil.get(pageContext, "edit-assignments-for-community") %>: <%= group.getName() %>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "edit-assignments-for-community") %>: <%= group.getName() %>
+	</td>
+	<td align="right">
+		&laquo; <a href="<%= redirect %>"><%= LanguageUtil.get(pageContext, "back") %></a>
+	</td>
+</tr>
+</table>
 
-<br><br>
+<br>
 
 <liferay-ui:tabs
 	names="users,organizations,locations,user-groups"

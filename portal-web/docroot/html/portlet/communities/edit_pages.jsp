@@ -156,9 +156,18 @@ portletURL.setParameter("groupId", groupId);
 
 <c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) %>">
-		<%= LanguageUtil.get(pageContext, "edit-pages-for-community") %>: <%= group.getName() %>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+			<td>
+				<%= LanguageUtil.get(pageContext, "edit-pages-for-community") %>: <%= group.getName() %>
+			</td>
+			<td align="right">
+				&laquo; <a href="<%= redirect %>"><%= LanguageUtil.get(pageContext, "back") %></a>
+			</td>
+		</tr>
+		</table>
 
-		<br><br>
+		<br>
 	</c:if>
 
 	<liferay-util:include page="/html/portlet/my_account/tabs1.jsp">
@@ -169,7 +178,6 @@ portletURL.setParameter("groupId", groupId);
 		names="public,private"
 		param="tabs2"
 		url="<%= portletURL.toString() %>"
-		backURL="<%= redirect %>"
 	/>
 </c:if>
 
