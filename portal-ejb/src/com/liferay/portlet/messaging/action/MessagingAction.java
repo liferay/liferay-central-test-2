@@ -68,14 +68,16 @@ public class MessagingAction extends JSONAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 		JSONObject jo = new JSONObject();
 
-		if ("getChats".equals(cmd)) {
+		if ("getUpdates".equals(cmd)) {
 			jo = getUpdates(req);
 		}
-		else if ("getRosterChats".equals(cmd)) {
+		else if ("getChats".equals(cmd)) {
 			jo = getChatMessages(req);
 
+			/*
 			JSONArray jRoster = getRosterEntries(req).getJSONArray("roster");
 			jo.put("roster", jRoster);
+			*/
 			jo.put("status", "success");
 		}
 		else if ("sendChat".equals(cmd)) {
