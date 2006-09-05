@@ -34,7 +34,9 @@ function AjaxRequest(returnFunction, returnArgs, ajaxId) {
 					returnFunction(xmlHttpReq, returnArgs);
 
 					var ajaxId = xmlHttpReq.getResponseHeader("Ajax-ID");
-					AjaxTracker.remove(parseInt(ajaxId));
+					if (ajaxId && ajaxId != "") {
+						AjaxTracker.remove(parseInt(ajaxId));
+					}
 				}
 			}
 		}
