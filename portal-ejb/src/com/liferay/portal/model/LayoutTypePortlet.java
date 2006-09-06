@@ -187,7 +187,7 @@ public class LayoutTypePortlet extends LayoutType {
 			PropsUtil.LAYOUT_STATIC_PORTLETS_START + columnId);
 
 		List endPortlets = _getStaticPortlets(
-			PropsUtil.LAYOUT_STATIC_PORTLETS_START + columnId);
+			PropsUtil.LAYOUT_STATIC_PORTLETS_END + columnId);
 
 		return addStaticPortlets(portlets, startPortlets, endPortlets);
 	}
