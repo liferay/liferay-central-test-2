@@ -29,6 +29,13 @@
 		<path refid="lib.classpath" />
 	</path>
 
+	<path id="web.classpath">
+		<pathelement location="${project.dir}/portal-kernel/classes" />
+		<fileset dir="${project.dir}/lib/development" includes="servlet.jar" />
+		<fileset dir="docroot/WEB-INF/lib" includes="*.jar" />
+		<path refid="web-lib.classpath" />
+	</path>
+
 	<taskdef classpathref="lib.classpath" resource="net/sf/antcontrib/antcontrib.properties" />
 	<taskdef classpathref="lib.classpath" resource="axis-tasks.properties" />
 

@@ -5,9 +5,34 @@
 
 	<target name="clean">
 		<delete file="${war.file}.war" failonerror="false" />
+
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="docroot/WEB-INF/classes" excludes="${classes.dir.excludes}" />
+		</delete>
 	</target>
 
-	<target name="war">
+	<target name="compile">
+		<if>
+			<available file="docroot/WEB-INF/src" />
+			<then>
+				<mkdir dir="docroot/WEB-INF/classes" />
+
+				<javac
+					classpathref="web.classpath"
+					compiler="${javac.compiler}"
+					debug="${javac.debug}"
+					deprecation="${javac.deprecation}"
+					destdir="docroot/WEB-INF/classes"
+					fork="${javac.fork}"
+					memoryMaximumSize="${javac.memoryMaximumSize}"
+					nowarn="on"
+					srcdir="docroot/WEB-INF/src"
+				/>
+			</then>
+		</if>
+	</target>
+
+	<target name="war" depends="compile">
 		<war
 			basedir="docroot"
 			destfile="${war.file}.war"

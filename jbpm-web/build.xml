@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<project name="jbpm-web" basedir="." default="war">
+	<path id="web-lib.classpath">
+	</path>
+
+	<import file="../build-common-web.xml" />
+
+	<property name="war.file" value="${ant.project.name}" />
+</project>
