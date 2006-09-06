@@ -49,13 +49,14 @@ public class PortalServletWrapper
 		ClassLoader contextClassLoader =
 			Thread.currentThread().getContextClassLoader();
 
+		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+
 		try {
-			Thread.currentThread().setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
+			Thread.currentThread().setContextClassLoader(portalClassLoader);
 
 			String servletClass = _config.getInitParameter("servlet-class");
 
-			_servlet = (HttpServlet)contextClassLoader.loadClass(
+			_servlet = (HttpServlet)portalClassLoader.loadClass(
 				servletClass).newInstance();
 
 			_servlet.init(_config);
