@@ -789,7 +789,7 @@ app.server.jonas-jetty.ejbgen.compile=on</echo>
 
 		<zip zipfile="liferay-portal-client-${lp.version.file.name}.zip"
 			basedir="."
-			includes="lib/development/activation.jar,lib/development/mail.jar,lib/portal/axis.jar,lib/portal/commons-discovery.jar,lib/portal/commons-logging.jar,lib/portal/concurrent.jar,lib/portal/jaxrpc.jar,lib/portal/saaj.jar,lib/portal/trove.jar,lib/portal/wsdl4j.jar,portal-client/portal-client.jar,portal-client/test/setenv.bat,portal-client/test/Test.java"
+			includes="lib/development/activation.jar,lib/development/mail.jar,lib/portal/axis.jar,lib/portal/commons-discovery.jar,lib/portal/commons-logging.jar,lib/portal/concurrent.jar,lib/portal/jaxrpc.jar,lib/portal/saaj.jar,lib/portal/trove.jar,lib/portal/wsdl4j.jar,portal-client/portal-client.jar"
 		/>		
 	</target>
 

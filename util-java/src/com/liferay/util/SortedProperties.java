@@ -22,6 +22,9 @@
 
 package com.liferay.util;
 
+import java.io.PrintStream;
+import java.io.PrintWriter;
+
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -40,6 +43,30 @@ public class SortedProperties extends Properties {
 		super();
 
 		_names = new TreeSet();
+	}
+
+	public void list(PrintStream out) {
+		System.out.println("-- listing properties --");
+
+		Enumeration enu = propertyNames();
+
+		while (enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+
+			out.println(name + StringPool.EQUAL + getProperty(name));
+		}
+	}
+
+	public void list(PrintWriter out) {
+		System.out.println("-- listing properties --");
+
+		Enumeration enu = propertyNames();
+
+		while (enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+
+			out.println(name + StringPool.EQUAL + getProperty(name));
+		}
 	}
 
 	public Enumeration propertyNames() {

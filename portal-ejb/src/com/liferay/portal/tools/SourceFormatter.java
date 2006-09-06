@@ -139,10 +139,12 @@ public class SourceFormatter {
 			ds = new DirectoryScanner();
 			ds.setIncludes(
 				new String[] {
+					"**\\service\\http\\*HttpTest.java",
+					"**\\service\\http\\*SoapTest.java",
 					"**\\service\\impl\\*.java", "**\\service\\jms\\*.java",
 					"**\\service\\permission\\*.java",
-					"**\\persistence\\BasePersistence.java",
-					"**\\persistence\\*Finder.java"
+					"**\\service\\persistence\\BasePersistence.java",
+					"**\\service\\persistence\\*Finder.java"
 				});
 			ds.setExcludes(
 				new String[] {

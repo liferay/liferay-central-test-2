@@ -56,6 +56,7 @@ JSF 1.1.01
 JSTL 1.0.6 (removed META-INF/*.tld)
 JTA 1.0.1b
 jTDS 1.2
+JUnit 3.8.2
 jYMSG 0.6
 Laszlo 3.3.3
 Log4j 1.2.13
