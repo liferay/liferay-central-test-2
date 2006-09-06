@@ -34,7 +34,7 @@ import java.util.Properties;
  */
 public class TestProps {
 
-	public static final String COMPANY_ID = "liferay.com";//get("company.id");
+	public static final String COMPANY_ID = "liferay.com";
 
 	public static String get(String key) {
 		return _instance._get(key);
