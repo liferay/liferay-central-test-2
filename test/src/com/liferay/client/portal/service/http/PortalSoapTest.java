@@ -23,7 +23,7 @@
 package com.liferay.client.portal.service.http;
 
 import com.liferay.client.portal.model.UserModel;
-import com.liferay.test.TestProps;
+import com.liferay.test.TestConstants;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -61,7 +61,7 @@ public class PortalSoapTest extends BaseSoapTest {
 			String locationId = null;
 
 			UserModel user = getUserService().addUser(
-				TestProps.COMPANY_ID, autoUserId, userId, autoPassword,
+				TestConstants.COMPANY_ID, autoUserId, userId, autoPassword,
 				password1, password2, passwordReset, emailAddress,
 				locale, firstName, middleName, lastName, nickName, prefixId,
 				suffixId, male, birthdayMonth, birthdayDay, birthdayYear,

@@ -23,7 +23,7 @@
 package com.liferay.portal.service.http;
 
 import com.liferay.portal.model.User;
-import com.liferay.test.TestProps;
+import com.liferay.test.TestConstants;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -61,11 +61,11 @@ public class PortalHttpTest extends BaseHttpTest {
 			String locationId = null;
 
 			User user = UserServiceHttp.addUser(
-				getHttpPrincipal(), TestProps.COMPANY_ID, autoUserId, userId,
-				autoPassword, password1, password2, passwordReset, emailAddress,
-				locale, firstName, middleName, lastName, nickName, prefixId,
-				suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-				jobTitle, organizationId, locationId);
+				getHttpPrincipal(), TestConstants.COMPANY_ID, autoUserId,
+				userId, autoPassword, password1, password2, passwordReset,
+				emailAddress, locale, firstName, middleName, lastName, nickName,
+				prefixId, suffixId, male, birthdayMonth, birthdayDay,
+				birthdayYear, jobTitle, organizationId, locationId);
 
 			UserServiceHttp.deleteUser(getHttpPrincipal(), user.getUserId());
 		}

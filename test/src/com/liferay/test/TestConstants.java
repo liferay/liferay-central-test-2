@@ -22,57 +22,14 @@
 
 package com.liferay.test;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Properties;
-
 /**
- * <a href="TestProps.java.html"><b><i>View Source</i></b></a>
+ * <a href="TestConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class TestProps {
+public class TestConstants {
 
-	public static String get(String key) {
-		return _instance._get(key);
-	}
-
-	public static Properties getProperties() {
-		return _instance._props;
-	}
-
-	private TestProps() {
-		try {
-			ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-
-			_props.load(classLoader.getResourceAsStream("test.properties"));
-
-			List keys = Collections.list(_props.propertyNames());
-
-			Collections.sort(keys);
-
-			System.out.println("-- listing properties --");
-
-			for (int i = 0; i < keys.size(); i++) {
-				String key = (String)keys.get(i);
-
-				System.out.println(key + "=" + _props.getProperty(key));
-			}
-
-			System.out.println("");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	private String _get(String key) {
-		return _props.getProperty(key);
-	}
-
-	private static TestProps _instance = new TestProps();
-
-	private Properties _props = new Properties();
+	public static final String COMPANY_ID = "liferay.com";
 
 }
