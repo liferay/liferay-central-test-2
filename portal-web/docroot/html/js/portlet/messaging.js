@@ -69,11 +69,14 @@ var Messaging = {
 	},
 	
 	getChats : function() {
-		AjaxTracker.sendPendRequest(themeDisplay.getPathMain() + "/messaging/action", "cmd=getChats", Messaging.getChatsReturn);
-		//loadPage(themeDisplay.getPathMain() + "/messaging/action", "cmd=getChats", Messaging.getChatsReturn);
+		loadPage(themeDisplay.getPathMain() + "/messaging/action", "cmd=getChats", Messaging.getUpdatesReturn);
+	},
+
+	getUpdates : function() {
+		AjaxTracker.sendPendRequest(themeDisplay.getPathMain() + "/messaging/action", "cmd=getUpdates", Messaging.getUpdatesReturn);
 	},
 	
-	getChatsReturn : function(xmlHttpReq) {
+	getUpdatesReturn : function(xmlHttpReq) {
 		try {
 			var msg = eval("(" + xmlHttpReq.responseText + ")");
 		}
@@ -100,15 +103,11 @@ var Messaging = {
 			}
 			
 			/* Send next request and wait for response */
-			Messaging.getChats();
+			Messaging.getUpdates();
 		}
 		else if (status == "timedOut") {
-			Messaging.getChats();
+			Messaging.getUpdates();
 		}
-	},
-
-	getRosterChats : function() {
-		loadPage(themeDisplay.getPathMain() + "/messaging/action", "cmd=getRosterChats", Messaging.getChatsReturn);
 	},
 
 	createChat : function(fromId, fromName, toId, toName) {
@@ -254,7 +253,8 @@ var Messaging = {
 			}
 		}
 
-		window.onunload = Messaging.onPageUnload;
+		addUnloadEvent(Messaging.onPageUnload);
+
 		this.mainDiv = mainDiv;
 		this.initialized = true;
 		Messaging.getChats();
