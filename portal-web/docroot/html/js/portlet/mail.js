@@ -586,7 +586,7 @@ var Mail = {
 		document.onkeydown = Mail.onMailKeyPress;
 		
 		previewPane.onselectstart = function() {return false;} // ie
-		previewPane.onmousedown = function() {return false;} // mozilla
+		previewPane.onmousedown = function() {this.focus(); return false;} // mozilla
 
 		/* Memory cleanup */
 		addUnloadEvent(Mail.clearPreview);
