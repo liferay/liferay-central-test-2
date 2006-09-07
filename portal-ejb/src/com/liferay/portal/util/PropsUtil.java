@@ -354,12 +354,6 @@ public class PropsUtil {
 
 	public static final String LAYOUT_STATIC_PORTLETS_END = "layout.static.portlets.end.";
 
-	public static final String LAYOUT_ALLOW_ONE_COLUMN = "layout.allow.one.column";
-
-	public static final String LAYOUT_ALLOW_TWO_COLUMN = "layout.allow.two.column";
-
-	public static final String LAYOUT_ALLOW_THREE_COLUMN = "layout.allow.three.column";
-
 	public static final String LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING = "layout.friendly.url.private.servlet.mapping";
 
 	public static final String LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING = "layout.friendly.url.public.servlet.mapping";
