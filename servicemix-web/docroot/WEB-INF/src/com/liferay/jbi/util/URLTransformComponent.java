@@ -29,9 +29,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import javax.jbi.messaging.MessageExchange;
 import javax.jbi.messaging.MessagingException;
@@ -56,7 +54,7 @@ public class URLTransformComponent extends TransformComponentSupport {
 		_url = url;
 	}
 
-	public String getUrlResult(Map parameterMap) throws MessagingException {
+	public String getUrlResult(NormalizedMessage in) throws MessagingException {
 		StringBuffer url = new StringBuffer();
 
 		url.append(_url);
@@ -65,13 +63,12 @@ public class URLTransformComponent extends TransformComponentSupport {
 			url.append("?");
 		}
 
-		Iterator itr = parameterMap.entrySet().iterator();
+		Iterator itr = in.getPropertyNames().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			String key = (String)itr.next();
 
-			String key = (String)entry.getKey();
-			String value = (String)entry.getValue();
+			String value = (String)in.getProperty(key);
 
 			url.append("&");
 			url.append(key);
@@ -109,19 +106,7 @@ public class URLTransformComponent extends TransformComponentSupport {
 			NormalizedMessage out)
 		throws MessagingException {
 
-    	Map parameterMap = new HashMap();
-
-		Iterator itr = in.getPropertyNames().iterator();
-
-		while (itr.hasNext()) {
-			String key = (String)itr.next();
-
-			String value = (String)in.getProperty(key);
-
-			parameterMap.put(key, value);
-		}
-
-		out.setContent(new StringSource(getUrlResult(parameterMap)));
+		out.setContent(new StringSource(getUrlResult(in)));
 
 		return true;
 	}
