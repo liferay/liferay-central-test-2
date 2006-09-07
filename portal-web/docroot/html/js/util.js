@@ -68,6 +68,21 @@ function addLoadEvent(func) {
     }
 }
 
+function addUnloadEvent(func) {
+    var oldonunload = window.onunload;
+
+	if (typeof window.onunload != "function") {
+        window.onunload = func;
+    }
+	else {
+        window.onunload = function() {
+            oldonunload();
+
+			func();
+        }
+    }
+}
+
 function autoComplete(box, text) {
 	var prevStartPos;
 	var prevMidPos;
