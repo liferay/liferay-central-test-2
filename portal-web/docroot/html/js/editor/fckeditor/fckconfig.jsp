@@ -45,6 +45,7 @@ FCKConfig.ToolbarSets["Liferay"] = [
 	['TextColor','BGColor']
 ] ;
 */
+
 FCKConfig.ToolbarSets["Liferay"] = [
 	['FontName','FontSize','-','TextColor','BGColor'],
 	['Bold','Italic','Underline','StrikeThrough'],
