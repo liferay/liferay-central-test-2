@@ -62,9 +62,8 @@
 										
 					#if ($themeDisplay.isSignedIn())
 						<div id="layout_nav_menu_list">
-							<img src="$themeDisplay.getPathThemeImage()/custom/bullet.gif">
 							#if ($layout && $themeDisplay.isShowAddContentIcon())
-								<a href="javascript: void(0);" onClick="$themeDisplay.getURLAddContent()">$languageUtil.get($pageContext, "add-content")</a>
+								<img src="$themeDisplay.getPathThemeImage()/custom/bullet.gif"><a href="javascript: void(0);" onClick="$themeDisplay.getURLAddContent()">$languageUtil.get($pageContext, "add-content")</a>
 							#end
 							#if ($themeDisplay.isShowPageSettingsIcon())
 								&nbsp;<img src="$themeDisplay.getPathThemeImage()/custom/bullet.gif"> <a href="$themeDisplay.getURLPageSettings().toString()">$languageUtil.get($pageContext, "page-settings")</a>
