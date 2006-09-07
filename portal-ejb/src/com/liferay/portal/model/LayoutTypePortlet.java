@@ -749,12 +749,22 @@ public class LayoutTypePortlet extends LayoutType {
 	private String[] _getStaticPortletIds(String position) {
 		Layout layout = getLayout();
 
-		String selector1 = "desktop";
-		/*if (layout.isGroup()) {
-			selector1 = "group";
-		}*/ // FIX ME
+		String selector1 = StringPool.BLANK;
+
+		Group group = layout.getGroup();
+
+		if (group.isUser()) {
+			selector1 = "desktop";
+		}
+		else if (group.isCommunity()) {
+			selector1 = "community";
+		}
+		else if (group.isOrganization()) {
+			selector1 = "organization";
+		}
 
 		String selector2 = StringPool.BLANK;
+
 		if ((layout.getPriority() == 0) &&
 			(layout.getParentLayoutId().equals(
 				Layout.DEFAULT_PARENT_LAYOUT_ID))) {
