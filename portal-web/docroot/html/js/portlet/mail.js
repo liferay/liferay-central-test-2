@@ -589,7 +589,7 @@ var Mail = {
 		previewPane.onmousedown = function() {return false;} // mozilla
 
 		/* Memory cleanup */
-		window.onunload = function() { Mail.clearPreview; }
+		addUnloadEvent(Mail.clearPreview);
 		
 		Mail.getFolders();
 	},
@@ -741,18 +741,27 @@ var Mail = {
 			}
 			
 			if (nextObj) {
-				if (!event.shiftKey) {
-					Mail.summaryUnhighlightAll();
-					Mail.summaryHighlight(nextObj, event.shiftKey);
-				}
-				else {
-					if (nextObj.index <= Mail.groupStart.index && keycode == Key.DOWN) {
-						Mail.summaryUnhighlight(Mail.lastSelected, true);
+				if (event.shiftKey) {
+					if (nextObj.index <= Mail.groupStart.index) {
+						if (keycode == Key.DOWN) {
+							Mail.summaryUnhighlight(Mail.lastSelected, true);
+						}
+						else {
+							Mail.summaryHighlight(nextObj, true);
+						}
 					}
-					if (nextObj.index >= Mail.groupStart.index && keycode == Key.UP) {
-						Mail.summaryUnhighlight(Mail.lastSelected, true);
+					if (nextObj.index >= Mail.groupStart.index) {
+						if (keycode == Key.UP) {
+							Mail.summaryUnhighlight(Mail.lastSelected, true);
+						}
+						else {
+							Mail.summaryHighlight(nextObj, true);
+						}
 					}
 					
+				}
+				else {
+					Mail.summaryUnhighlightAll();
 					Mail.summaryHighlight(nextObj, event.shiftKey);
 				}
 				Mail.groupStart = Mail.lastSelected;

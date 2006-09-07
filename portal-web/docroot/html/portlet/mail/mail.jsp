@@ -380,7 +380,7 @@ String mailLineColor = "#B3B6B0";
 			<td nowrap onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>';">
 				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/compose.gif" /> <%= LanguageUtil.get(pageContext, "new") %>
 			</td>
-			<td nowrap onClick="Mail.getFolders();">
+			<td nowrap onClick="Mail.getFolders(true);">
 				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/mail/check_mail.gif" /> <%= LanguageUtil.get(pageContext, "check-mail") %>
 			</td>
 			<td nowrap onClick="Mail.submitCompose('reply', document.<portlet:namespace />fm);">
