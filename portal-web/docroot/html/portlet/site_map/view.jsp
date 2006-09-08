@@ -29,32 +29,36 @@ List rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getOwnerId(), rootLa
 
 StringBuffer sb = new StringBuffer();
 
-_buildSiteMap(rootLayouts, themeDisplay, sb);
+_buildSiteMap(rootLayouts, displayDepth, 1, themeDisplay, sb);
 %>
 
 <%= sb.toString() %>
 
 <%!
-private void _buildSiteMap(List layouts, ThemeDisplay themeDisplay, StringBuffer sb) throws Exception {
+private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDisplay themeDisplay, StringBuffer sb) throws Exception {
 	sb.append("<ul style=\"padding-left: 25px\">");
 
 	for (int i = 0; i < layouts.size(); i++) {
 		Layout layout = (Layout)layouts.get(i);
 
-		String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
-		String target = PortalUtil.getLayoutTarget(layout);
+		if (!layout.isHidden()) {
+			String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
+			String target = PortalUtil.getLayoutTarget(layout);
 
-		sb.append("<li>");
-		sb.append("<a href=\"");
-		sb.append(layoutURL);
-		sb.append("\" ");
-		sb.append(target);
-		sb.append("> ");
-		sb.append(layout.getName(themeDisplay.getLocale()));
-		sb.append("</a>");
-		sb.append("</li>");
+			sb.append("<li>");
+			sb.append("<a href=\"");
+			sb.append(layoutURL);
+			sb.append("\" ");
+			sb.append(target);
+			sb.append("> ");
+			sb.append(layout.getName(themeDisplay.getLocale()));
+			sb.append("</a>");
+			sb.append("</li>");
 
-		_buildSiteMap(layout.getChildren(), themeDisplay, sb);
+			if ((displayDepth == 0) || (displayDepth > curDepth)) {
+				_buildSiteMap(layout.getChildren(), displayDepth, curDepth + 1, themeDisplay, sb);
+			}
+		}
 	}
 
 	sb.append("</ul>");

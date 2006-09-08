@@ -5253,6 +5253,8 @@ public class ServiceBuilder {
 			if ((parameterTypeName.indexOf(
 					"com.liferay.portal.model.") != -1) ||
 				(parameterTypeName.equals(
+					"com.liferay.portal.theme.ThemeDisplay")) ||
+				(parameterTypeName.equals(
 					"com.liferay.portlet.PortletPreferencesImpl")) ||
 				 parameterTypeName.startsWith("java.io") ||
 				 //parameterTypeName.startsWith("java.util.List") ||

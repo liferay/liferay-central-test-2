@@ -109,6 +109,18 @@ public class JournalArticleServiceEJBImpl implements JournalArticleService,
 			themeDisplay);
 	}
 
+	public java.lang.String getArticleContent(java.lang.String companyId,
+		java.lang.String articleId, double version,
+		java.lang.String languageId,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().getArticleContent(companyId, articleId, version,
+			languageId, themeDisplay);
+	}
+
 	public void deleteArticle(java.lang.String companyId,
 		java.lang.String articleId, double version,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)

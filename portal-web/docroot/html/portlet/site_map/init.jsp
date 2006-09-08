@@ -37,4 +37,5 @@ if (Validator.isNotNull(portletResource)) {
 }
 
 String rootLayoutId = GetterUtil.getString(prefs.getValue("root-layout-id", Layout.DEFAULT_PARENT_LAYOUT_ID));
+int displayDepth = GetterUtil.getInteger(prefs.getValue("display-depth", StringPool.BLANK));
 %>

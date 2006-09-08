@@ -54,24 +54,6 @@ public class JournalArticleServiceSoap {
 		}
 	}
 
-	public static java.lang.String getArticleContent(
-		java.lang.String companyId, java.lang.String articleId,
-		java.lang.String languageId,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws RemoteException {
-		try {
-			java.lang.String returnValue = JournalArticleServiceUtil.getArticleContent(companyId,
-					articleId, languageId, themeDisplay);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
 	public static void removeArticleLocale(java.lang.String companyId,
 		java.lang.String languageId) throws RemoteException {
 		try {

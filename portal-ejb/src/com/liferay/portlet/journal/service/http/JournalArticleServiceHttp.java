@@ -356,6 +356,71 @@ public class JournalArticleServiceHttp {
 		}
 	}
 
+	public static java.lang.String getArticleContent(
+		HttpPrincipal httpPrincipal, java.lang.String companyId,
+		java.lang.String articleId, double version,
+		java.lang.String languageId,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = companyId;
+
+			if (companyId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = articleId;
+
+			if (articleId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new DoubleWrapper(version);
+			Object paramObj3 = languageId;
+
+			if (languageId == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj4 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
+					"getArticleContent",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.lang.String)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
 	public static void deleteArticle(HttpPrincipal httpPrincipal,
 		java.lang.String companyId, java.lang.String articleId, double version,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)

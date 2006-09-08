@@ -89,6 +89,18 @@ public class JournalArticleServiceUtil {
 			languageId, themeDisplay);
 	}
 
+	public static java.lang.String getArticleContent(
+		java.lang.String companyId, java.lang.String articleId, double version,
+		java.lang.String languageId,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
+
+		return journalArticleService.getArticleContent(companyId, articleId,
+			version, languageId, themeDisplay);
+	}
+
 	public static void deleteArticle(java.lang.String companyId,
 		java.lang.String articleId, double version,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)

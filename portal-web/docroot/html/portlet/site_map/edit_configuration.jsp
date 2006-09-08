@@ -77,6 +77,28 @@ List layoutList = layoutView.getList();
 		</select>
 	</td>
 </tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "display-depth") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<select name="<portlet:namespace />displayDepth">
+			<option value="0"><%= LanguageUtil.get(pageContext, "unlimited") %></option>
+
+			<%
+			for (int i = 1; i <= 20; i++) {
+			%>
+
+				<option <%= (displayDepth == i) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
+
+			<%
+			}
+			%>
+
+		</select>
+	</td>
+</tr>
 </table>
 
 <br>

@@ -56,7 +56,18 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_STACK_TRACE_PRINT))) {
 <tr>
 	<td>
 		<font color="#FF0000" face="Verdana, Tahoma, Arial" size="2">
-		<%= LanguageUtil.get(pageContext, "an-unexpected-system-error-occurred") %><br>
+		
+		<c:choose>
+			<c:when test="<%= exception instanceof PrincipalException %>">
+				<%= LanguageUtil.get(pageContext, "you-do-not-have-permission-to-view-this-page") %>
+			</c:when>
+			<c:otherwise>
+				<%= LanguageUtil.get(pageContext, "an-unexpected-system-error-occurred") %>
+			</c:otherwise>
+		</c:choose>
+
+		<br>
+
 		</font>
 
 		<%
@@ -65,9 +76,11 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_STACK_TRACE_PRINT))) {
 
 			<br>
 
-			<font face="Verdana, Tahoma, Arial" size="2">
-			<%= message %><br>
-			</font>
+			<c:if test="<%= message != null %>">
+				<font face="Verdana, Tahoma, Arial" size="2">
+				<%= message %><br>
+				</font>
+			</c:if>
 
 		<%
 		}

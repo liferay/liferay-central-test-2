@@ -61,6 +61,7 @@ public class EditConfigurationAction extends PortletAction {
 		}
 
 		String rootLayoutId = ParamUtil.getString(req, "rootLayoutId");
+		String displayDepth = ParamUtil.getString(req, "displayDepth");
 
 		if (Validator.isNull(rootLayoutId)) {
 			rootLayoutId = Layout.DEFAULT_PARENT_LAYOUT_ID;
@@ -73,6 +74,7 @@ public class EditConfigurationAction extends PortletAction {
 				req, portletResource, true, true);
 
 		prefs.setValue("root-layout-id", rootLayoutId);
+		prefs.setValue("display-depth", displayDepth);
 
 		prefs.store();
 

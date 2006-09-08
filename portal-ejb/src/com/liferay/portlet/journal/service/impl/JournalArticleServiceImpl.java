@@ -117,6 +117,18 @@ public class JournalArticleServiceImpl
 			companyId, articleId, languageId, themeDisplay);
 	}
 
+	public String getArticleContent(
+			String companyId, String articleId, double version,
+			String languageId, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		JournalArticlePermission.check(
+			getPermissionChecker(), companyId, articleId, ActionKeys.VIEW);
+
+		return JournalArticleLocalServiceUtil.getArticleContent(
+			companyId, articleId, version, languageId, themeDisplay);
+	}
+
 	public void deleteArticle(
 			String companyId, String articleId, double version,
 			String articleURL, PortletPreferences prefs)
