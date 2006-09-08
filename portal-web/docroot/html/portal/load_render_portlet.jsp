@@ -45,8 +45,10 @@ String namespace = PortalUtil.getPortletNamespace(portlet.getPortletId());
 		<script type="text/javascript">
 			function <%= namespace %>returnPortlet(xmlHttpReq) {
 				var portletDiv = document.getElementById("p_load<%= namespace %>");
-			
+
 				addPortletHTML(xmlHttpReq.responseText, portletDiv.parentNode, portletDiv);
+
+				portletDiv.parentNode.removeChild(portletDiv);
 			};
 
 			function <%= namespace %>loadPortlet() {
