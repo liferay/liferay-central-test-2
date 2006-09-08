@@ -43,26 +43,11 @@ String namespace = PortalUtil.getPortletNamespace(portlet.getPortletId());
 		</div>
 
 		<script type="text/javascript">
-			var <%= namespace %>returnPortlet =
-				function (xmlHttpReq) {
-					var addDiv = document.createElement("div");
-
-					addDiv.innerHTML = xmlHttpReq.responseText;
-
-					var portletDiv = document.getElementById("p_load<%= namespace %>");
-
-					portletDiv.insertBefore(addDiv, null);
-
-					var portletBound = getElementByClassName(addDiv, "portlet-boundary");
-
-					portletBound.portletId = "<%= portlet.getPortletId() %>";
-
-					var handle = DragDrop.findHandle(portletBound);
-
-					DragDrop.makeItemDragable(portletBound, handle);
-
-					executeLoadedScript(portletBound);
-				};
+			function <%= namespace %>returnPortlet(xmlHttpReq) {
+				var portletDiv = document.getElementById("p_load<%= namespace %>");
+			
+				addPortletHTML(xmlHttpReq.responseText, portletDiv.parentNode, portletDiv);
+			};
 
 			function <%= namespace %>loadPortlet() {
 				var path = "/c/portal/render_portlet";

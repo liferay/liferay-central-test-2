@@ -62,18 +62,28 @@ function addPortlet(plid, portletId) {
 }
 
 function addPortletReturn(xmlHttpReq) {
+	var container = document.getElementById("layout-column_column-1");
+
+	var portletId = addPortletHTML(xmlHttpReq.responseText, container, container.endPlaceholder);
+
+	if (window.location.hash) {
+		window.location.hash = "p_" + portletId;
+	}
+
+}
+
+function addPortletHTML (html, container, placeHolder) {
+	if (container == null) {
+		return;
+	}
+
 	var addDiv = document.createElement("div");
 	var loadingDiv = document.getElementById("portlet-loading-placeholder");
 
 	addDiv.style.display = "none";
-	addDiv.innerHTML = xmlHttpReq.responseText;
+	addDiv.innerHTML = html;
 
 	var portletBound = getElementByClassName(addDiv, "portlet-boundary");
-	var container = document.getElementById("layout-column_column-1");
-
-	if (container == null) {
-		return;
-	}
 
 	portletBound.parentNode.removeChild(portletBound);
 
@@ -84,18 +94,18 @@ function addPortletReturn(xmlHttpReq) {
 
 	portletBound.portletId = portletId;
 
-	container.removeChild(loadingDiv);
-	container.insertBefore(portletBound, container.endPlaceholder);
+	if (loadingDiv) {
+		container.removeChild(loadingDiv);
+	}
+	container.insertBefore(portletBound, placeHolder);
 
 	var handle = DragDrop.findHandle(portletBound);
 
 	DragDrop.makeItemDragable(portletBound, handle);
 
-	if (window.location.hash) {
-		window.location.hash = "p_" + portletId;
-	}
-
 	executeLoadedScript(portletBound);
+	
+	return portletId;
 }
 
 function closePortlet(plid, portletId) {
