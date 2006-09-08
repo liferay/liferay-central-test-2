@@ -121,7 +121,8 @@ public class RuntimePortletUtil {
 
 		try {
 			PortalUtil.renderPortlet(
-				sb, ctx, req, res, portlet, columnId, columnPos, columnCount);
+				sb, ctx, req, res, portlet, columnId, columnPos, columnCount,
+				"/html/portal/load_render_portlet.jsp");
 		}
 		finally {
 			portletDisplay.copyFrom(portletDisplayClone);
@@ -162,9 +163,16 @@ public class RuntimePortletUtil {
 
 		context.put("processor", processor);
 
-		Velocity.evaluate(
-			context, pageContext.getOut(), RuntimePortletUtil.class.getName(),
-			content);
+		try {
+			Velocity.evaluate(
+				context, pageContext.getOut(),
+				RuntimePortletUtil.class.getName(), content);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+
+			throw e;
+		}
 	}
 
 	public static String processXML(

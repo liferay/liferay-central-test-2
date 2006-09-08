@@ -663,7 +663,6 @@
 
 		<!-- Other fields -->
 
-		<column name="narrow" type="boolean" />
 		<column name="roles" type="String" />
 		<column name="active" type="boolean" />
 

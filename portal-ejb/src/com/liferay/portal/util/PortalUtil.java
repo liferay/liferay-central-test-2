@@ -923,6 +923,16 @@ public class PortalUtil {
 			Integer columnPos, Integer columnCount)
 		throws IOException, ServletException {
 
+		renderPortlet(
+			sb, ctx, req, res, portlet, columnId, columnPos, columnCount, null);
+	}
+
+	public static void renderPortlet(
+			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
+			HttpServletResponse res, Portlet portlet, String columnId,
+			Integer columnPos, Integer columnCount, String path)
+		throws IOException, ServletException {
+
 		columnId = GetterUtil.getString(columnId);
 
 		if (columnPos == null) {
@@ -938,8 +948,11 @@ public class PortalUtil {
 		req.setAttribute(WebKeys.RENDER_PORTLET_COLUMN_POS, columnPos);
 		req.setAttribute(WebKeys.RENDER_PORTLET_COLUMN_COUNT, columnCount);
 
-		RequestDispatcher rd = ctx.getRequestDispatcher(
-			"/html/portal/render_portlet.jsp");
+		if (path == null) {
+			path = "/html/portal/render_portlet.jsp";
+		}
+
+		RequestDispatcher rd = ctx.getRequestDispatcher(path);
 
 		if (sb != null) {
 			StringServletResponse stringServletRes =

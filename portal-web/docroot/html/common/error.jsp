@@ -56,7 +56,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_STACK_TRACE_PRINT))) {
 <tr>
 	<td>
 		<font color="#FF0000" face="Verdana, Tahoma, Arial" size="2">
-		
+
 		<c:choose>
 			<c:when test="<%= exception instanceof PrincipalException %>">
 				<%= LanguageUtil.get(pageContext, "you-do-not-have-permission-to-view-this-page") %>

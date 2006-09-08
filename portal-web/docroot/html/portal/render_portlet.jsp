@@ -423,6 +423,7 @@ boolean showPortletInactive = portlet.isShowPortletInactive();
 				renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringServletRes.getString());
 
 				String portletContent = StringPool.BLANK;
+
 				if (portletException) {
 					portletContent = "/portal/portlet_error.jsp";
 				}

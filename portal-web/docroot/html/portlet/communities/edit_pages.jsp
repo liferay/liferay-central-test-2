@@ -107,7 +107,7 @@ portletURL.setParameter("groupId", groupId);
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "look_and_feel";
 
 		var themeRadio = document.<portlet:namespace />fm.<portlet:namespace />themeId;
-		
+
 		if (themeRadio.length) {
 			themeRadio[getSelectedIndex(themeRadio)].value = themeId;
 		}

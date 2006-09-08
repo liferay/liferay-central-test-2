@@ -455,7 +455,6 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				// portlet WAR is not yet loaded
 
 				if (portletModel != null) {
-					portletModel.setNarrow(portlet.getNarrow());
 					portletModel.setRoles(portlet.getRoles());
 					portletModel.setActive(portlet.getActive());
 				}
@@ -940,6 +939,9 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				portletModel.setPrivateRequestAttributes(GetterUtil.getBoolean(
 					portlet.elementText("private-request-attributes"),
 					portletModel.isPrivateRequestAttributes()));
+				portletModel.setRenderWeight(GetterUtil.getInteger(
+					portlet.elementText("render-weight"),
+					portletModel.getRenderWeight()));
 				portletModel.setSystem(GetterUtil.getBoolean(
 					portlet.elementText("system"),
 					portletModel.isSystem()));

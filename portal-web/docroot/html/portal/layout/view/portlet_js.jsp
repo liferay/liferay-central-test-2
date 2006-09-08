@@ -88,45 +88,14 @@ function addPortletReturn(xmlHttpReq) {
 	container.insertBefore(portletBound, container.endPlaceholder);
 
 	var handle = DragDrop.findHandle(portletBound);
+
 	DragDrop.makeItemDragable(portletBound, handle);
 
 	if (window.location.hash) {
 		window.location.hash = "p_" + portletId;
 	}
 
-	var scripts = portletBound.getElementsByTagName("script");
-
-	for (var i = 0; i < scripts.length; i++) {
-		if (scripts[i].src) {
-			var head = document.getElementsByTagName("head")[0];
-			var scriptObj = document.createElement("script");
-
-			scriptObj.setAttribute("type", "text/javascript");
-			scriptObj.setAttribute("src", scripts[i].src);
-
-			head.appendChild(scriptObj);
-		}
-		else {
-			try {
-
-				<c:choose>
-					<c:when test="<%= BrowserSniffer.is_safari(request) %>">
-						eval(scripts[i].innerHTML);
-					</c:when>
-					<c:when test="<%= BrowserSniffer.is_mozilla(request) %>">
-						eval(scripts[i].textContent);
-					</c:when>
-					<c:otherwise>
-						eval(scripts[i].text);
-					</c:otherwise>
-				</c:choose>
-
-			}
-			catch (e) {
-				//alert(e);
-			}
-		}
-	}
+	executeLoadedScript(portletBound);
 }
 
 function closePortlet(plid, portletId) {

@@ -598,7 +598,6 @@ create table PollsVote (
 create table Portlet (
 	portletId VARCHAR(75) not null,
 	companyId VARCHAR(75) not null,
-	narrow BOOLEAN,
 	roles VARCHAR(75) null,
 	active_ BOOLEAN,
 	primary key (portletId, companyId)

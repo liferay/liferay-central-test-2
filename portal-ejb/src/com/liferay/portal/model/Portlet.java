@@ -151,7 +151,7 @@ public class Portlet extends PortletModel {
 				   boolean restoreCurrentView, boolean maximizeEdit,
 				   boolean maximizeHelp, boolean maximizePrint,
 				   boolean layoutCacheable, boolean instanceable,
-				   boolean privateRequestAttributes, boolean narrow,
+				   boolean privateRequestAttributes, int renderWeight,
 				   String roles, Set unlinkedRoles, Map roleMappers,
 				   boolean system, boolean active, boolean include,
 				   Map initParams, Integer expCache, Map portletModes,
@@ -184,6 +184,7 @@ public class Portlet extends PortletModel {
 		_layoutCacheable = layoutCacheable;
 		_instanceable = instanceable;
 		_privateRequestAttributes = privateRequestAttributes;
+		_renderWeight = renderWeight;
 		setRoles(roles);
 		_unlinkedRoles = unlinkedRoles;
 		_roleMappers = roleMappers;
@@ -809,6 +810,24 @@ public class Portlet extends PortletModel {
 	}
 
 	/**
+	 * Returns the render weight of the portlet.
+	 *
+	 * @return		the render weight of the portlet
+	 */
+	public int getRenderWeight() {
+		return _renderWeight;
+	}
+
+	/**
+	 * Sets the render weight of the portlet.
+	 *
+	 * @param		renderWeight int value for the render weight of the portlet
+	 */
+	public void setRenderWeight(int renderWeight) {
+		_renderWeight = renderWeight;
+	}
+
+	/**
 	 * Sets a string of ordered comma delimited portlet ids.
 	 *
 	 * @param		roles a string of ordered comma delimited portlet ids
@@ -1248,9 +1267,9 @@ public class Portlet extends PortletModel {
 			// Disable caching of cloned instances until we can figure out how
 			// to elegantly refresh the cache when the portlet is dynamically
 			// updated by the user. For example, the user might change the
-			// portlet from narrow to wide. Cloned instances that are cached
-			// would not see the new change. We can then also cache static
-			// portlet instances.
+			// portlet from one column to the next. Cloned instances that are
+			// cached would not see the new change. We can then also cache
+			// static portlet instances.
 
 			//_clonedInstances.put(portletId, clonedInstance);
 		}
@@ -1418,7 +1437,7 @@ public class Portlet extends PortletModel {
 			isUseDefaultTemplate(), isShowPortletAccessDenied(),
 			isShowPortletInactive(), isRestoreCurrentView(), isMaximizeEdit(),
 			isMaximizeHelp(), isMaximizePrint(), isLayoutCacheable(),
-			isInstanceable(), isPrivateRequestAttributes(), isNarrow(),
+			isInstanceable(), isPrivateRequestAttributes(), getRenderWeight(),
 			getRoles(), getUnlinkedRoles(), getRoleMappers(), isSystem(),
 			isActive(), isInclude(), getInitParams(), getExpCache(),
 			getPortletModes(), getSupportedLocales(), getResourceBundle(),
@@ -1563,6 +1582,11 @@ public class Portlet extends PortletModel {
 	 * portlet.
      */
 	private boolean _privateRequestAttributes = true;
+
+	/**
+	 * Render weight of the portlet.
+	 */
+	private int _renderWeight = 1;
 
 	/**
 	 * An array of required roles of the portlet.

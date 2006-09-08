@@ -127,6 +127,38 @@ function createJSONObject(JSONText) {
 	return eval("(" + JSONText + ")");
 }
 
+function executeLoadedScript(el) {
+	var scripts = el.getElementsByTagName("script");
+
+	for (var i = 0; i < scripts.length; i++) {
+		if (scripts[i].src) {
+			var head = document.getElementsByTagName("head")[0];
+			var scriptObj = document.createElement("script");
+
+			scriptObj.setAttribute("type", "text/javascript");
+			scriptObj.setAttribute("src", scripts[i].src);
+
+			head.appendChild(scriptObj);
+		}
+		else {
+			try {
+				if (is_safari) {
+					eval(scripts[i].innerHTML);
+				}
+				else if (is_mozilla) {
+					eval(scripts[i].textContent);
+				}
+				else {
+					eval(scripts[i].text);
+				}
+			}
+			catch (e) {
+				//alert(e);
+			}
+		}
+	}
+}
+
 function loadForm(form, action, elId, returnFunction) {
 	var pos = action.indexOf("?");
 
