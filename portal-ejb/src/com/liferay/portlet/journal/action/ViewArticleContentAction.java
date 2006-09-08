@@ -32,7 +32,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.journal.service.spring.JournalArticleServiceUtil;
 import com.liferay.portlet.journal.service.spring.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.FileUtil;
@@ -178,7 +178,7 @@ public class ViewArticleContentAction extends Action {
 					tokens, languageId, xml, script, langType);
 			}
 			else {
-				output = JournalArticleLocalServiceUtil.getArticleContent(
+				output = JournalArticleServiceUtil.getArticleContent(
 					companyId, articleId, version, languageId, themeDisplay);
 			}
 
