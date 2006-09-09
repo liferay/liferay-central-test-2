@@ -285,7 +285,6 @@
 			<key-property name="portletId" />
 			<key-property name="companyId" />
 		</composite-id>
-		<property name="narrow" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="roles" />
 		<property name="active" column="active_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
