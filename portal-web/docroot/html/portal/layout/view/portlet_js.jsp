@@ -97,6 +97,7 @@ function addPortletHTML (html, container, placeHolder) {
 	if (loadingDiv) {
 		container.removeChild(loadingDiv);
 	}
+
 	container.insertBefore(portletBound, placeHolder);
 
 	var handle = DragDrop.findHandle(portletBound);
@@ -104,7 +105,7 @@ function addPortletHTML (html, container, placeHolder) {
 	DragDrop.makeItemDragable(portletBound, handle);
 
 	executeLoadedScript(portletBound);
-	
+
 	return portletId;
 }
 
