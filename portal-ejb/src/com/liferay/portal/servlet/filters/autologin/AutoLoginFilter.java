@@ -32,6 +32,7 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.InstancePool;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
+import com.liferay.util.servlet.ProtectedServletRequest;
 
 import java.io.IOException;
 
@@ -79,8 +80,9 @@ public class AutoLoginFilter implements Filter {
 		HttpSession ses = httpReq.getSession();
 
 		String userId = httpReq.getRemoteUser();
+		String jUserName = (String)ses.getAttribute("j_username");
 
-		if ((userId == null) && (ses.getAttribute("j_username") == null)) {
+		if ((userId == null) && (jUserName == null)) {
 			req.setAttribute(WebKeys.COMPANY_ID, _companyId);
 
 			String[] autoLogins = PropsUtil.getArray(
@@ -91,8 +93,17 @@ public class AutoLoginFilter implements Filter {
 					(AutoLogin)InstancePool.get(autoLogins[i]);
 
 				try {
-					if (login(httpReq, httpRes, ses, autoLogin)) {
-						return;
+					String loginUserId =
+						login(httpReq, httpRes, ses, autoLogin);
+
+					if (loginUserId != null) {
+						req = new ProtectedServletRequest(httpReq, loginUserId);
+
+						if (GetterUtil.getBoolean(
+								PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE))) {
+
+							return;
+						}
 					}
 				}
 				catch (AutoLoginException ale) {
@@ -109,7 +120,7 @@ public class AutoLoginFilter implements Filter {
 	public void destroy() {
 	}
 
-	protected boolean login(
+	protected String login(
 			HttpServletRequest req, HttpServletResponse res, HttpSession ses,
 			AutoLogin autoLogin)
 		throws AutoLoginException, IOException {
@@ -140,13 +151,17 @@ public class AutoLoginFilter implements Filter {
 					ses.setAttribute(WebKeys.USER_PASSWORD, jPassword);
 				}
 
-				res.sendRedirect(_rootPath + "/c/portal/touch_protected");
+				if (GetterUtil.getBoolean(
+						PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE))) {
 
-				return true;
+					res.sendRedirect(_rootPath + "/c/portal/touch_protected");
+				}
+
+				return jUsername;
 			}
 		}
 
-		return false;
+		return null;
 	}
 
 	private static Log _log = LogFactory.getLog(AutoLoginFilter.class);

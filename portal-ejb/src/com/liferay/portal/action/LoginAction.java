@@ -37,6 +37,7 @@ import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.PrincipalFinder;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.struts.LastPath;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
@@ -245,10 +246,22 @@ public class LoginAction extends Action {
 
 		HttpSession ses = req.getSession();
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
 		if (ses.getAttribute("j_username") != null &&
 			ses.getAttribute("j_password") != null) {
 
-			return mapping.findForward("/portal/touch_protected.jsp");
+			if (GetterUtil.getBoolean(
+					PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE))) {
+
+				return mapping.findForward("/portal/touch_protected.jsp");
+			}
+			else {
+				res.sendRedirect(themeDisplay.getPathMain());
+
+				return null;
+			}
 		}
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
@@ -257,7 +270,16 @@ public class LoginAction extends Action {
 			try {
 				_login(req, res);
 
-				return mapping.findForward("/portal/touch_protected.jsp");
+				if (GetterUtil.getBoolean(
+						PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE))) {
+
+					return mapping.findForward("/portal/touch_protected.jsp");
+				}
+				else {
+					res.sendRedirect(themeDisplay.getPathMain());
+
+					return null;
+				}
 			}
 			catch (Exception e) {
 				if (e instanceof AuthException ||

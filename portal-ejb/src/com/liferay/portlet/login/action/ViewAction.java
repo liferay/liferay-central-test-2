@@ -32,9 +32,11 @@ import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
@@ -121,7 +123,14 @@ public class ViewAction extends PortletAction {
 
 		LoginAction.login(httpReq, httpRes, login, password, rememberMe);
 
-		res.sendRedirect(themeDisplay.getPathMain() + "/portal/protected");
+		if (GetterUtil.getBoolean(
+				PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE))) {
+
+			res.sendRedirect(themeDisplay.getPathMain() + "/portal/protected");
+		}
+		else {
+			res.sendRedirect(themeDisplay.getPathMain());
+		}
 	}
 
 }
