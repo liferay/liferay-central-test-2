@@ -39,6 +39,10 @@ import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
+import java.util.Enumeration;
+import java.util.Map;
+import java.util.TreeMap;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
@@ -75,16 +79,32 @@ public class EditConfigurationAction extends PortletAction {
 
 			String companyId = themeDisplay.getCompanyId();
 
-			String articleId = ParamUtil.getString(
-				req, "articleId").toUpperCase();
 			String languageId = LanguageUtil.getLanguageId(req);
 
-			String content = JournalContentUtil.getContent(
-				companyId, articleId, languageId, themeDisplay);
+			Map articleIdMap = new TreeMap();
 
-			if (Validator.isNull(content)) {
-				throw new NoSuchArticleException();
+			Enumeration enu = req.getParameterNames();
+
+			while (enu.hasMoreElements()) {
+				String name = (String)enu.nextElement();
+
+				if (name.startsWith("article")) {
+					String articleId = ParamUtil.getString(
+						req, name).toUpperCase();
+
+					String content = JournalContentUtil.getContent(
+						companyId, articleId, languageId, themeDisplay);
+
+					if (Validator.isNull(content)) {
+						throw new NoSuchArticleException();
+					}
+
+					articleIdMap.put(name, articleId);
+				}
 			}
+
+			String[] articleIds =
+				(String[])articleIdMap.values().toArray(new String[0]);
 
 			String portletResource = ParamUtil.getString(
 				req, "portletResource");
@@ -93,11 +113,11 @@ public class EditConfigurationAction extends PortletAction {
 				PortletPreferencesFactory.getPortletSetup(
 					req, portletResource, true, true);
 
-			prefs.setValue("article-id", articleId);
+			prefs.setValues("article-id", articleIds);
 
 			prefs.store();
 
-			updateContentSearch(req, portletResource, articleId);
+			updateContentSearch(req, portletResource, articleIds);
 
 			SessionMessages.add(req, config.getPortletName() + ".doConfigure");
 
@@ -118,7 +138,7 @@ public class EditConfigurationAction extends PortletAction {
 	}
 
 	protected void updateContentSearch(
-			ActionRequest req, String portletResource, String articleId)
+			ActionRequest req, String portletResource, String[] articleIds)
 		throws Exception {
 
 		ThemeDisplay themeDisplay =
@@ -131,7 +151,7 @@ public class EditConfigurationAction extends PortletAction {
 
 		JournalContentSearchLocalServiceUtil.updateContentSearch(
 			portletResource, layout.getLayoutId(), layout.getOwnerId(),
-			layout.getCompanyId(), articleId);
+			layout.getCompanyId(), articleIds);
 	}
 
 }

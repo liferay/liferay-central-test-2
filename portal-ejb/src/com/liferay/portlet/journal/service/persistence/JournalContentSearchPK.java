@@ -36,15 +36,17 @@ public class JournalContentSearchPK implements Comparable, Serializable {
 	public String portletId;
 	public String layoutId;
 	public String ownerId;
+	public String articleId;
 
 	public JournalContentSearchPK() {
 	}
 
 	public JournalContentSearchPK(String portletId, String layoutId,
-		String ownerId) {
+		String ownerId, String articleId) {
 		this.portletId = portletId;
 		this.layoutId = layoutId;
 		this.ownerId = ownerId;
+		this.articleId = articleId;
 	}
 
 	public String getPortletId() {
@@ -69,6 +71,14 @@ public class JournalContentSearchPK implements Comparable, Serializable {
 
 	public void setOwnerId(String ownerId) {
 		this.ownerId = ownerId;
+	}
+
+	public String getArticleId() {
+		return articleId;
+	}
+
+	public void setArticleId(String articleId) {
+		this.articleId = articleId;
 	}
 
 	public int compareTo(Object obj) {
@@ -96,6 +106,12 @@ public class JournalContentSearchPK implements Comparable, Serializable {
 			return value;
 		}
 
+		value = articleId.compareTo(pk.articleId);
+
+		if (value != 0) {
+			return value;
+		}
+
 		return 0;
 	}
 
@@ -114,7 +130,8 @@ public class JournalContentSearchPK implements Comparable, Serializable {
 		}
 
 		if ((portletId.equals(pk.portletId)) && (layoutId.equals(pk.layoutId)) &&
-				(ownerId.equals(pk.ownerId))) {
+				(ownerId.equals(pk.ownerId)) &&
+				(articleId.equals(pk.articleId))) {
 			return true;
 		}
 		else {
@@ -123,7 +140,7 @@ public class JournalContentSearchPK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (portletId + layoutId + ownerId).hashCode();
+		return (portletId + layoutId + ownerId + articleId).hashCode();
 	}
 
 	public String toString() {
@@ -142,6 +159,11 @@ public class JournalContentSearchPK implements Comparable, Serializable {
 		sb.append("ownerId");
 		sb.append(StringPool.EQUAL);
 		sb.append(ownerId);
+		sb.append(StringPool.COMMA);
+		sb.append(StringPool.SPACE);
+		sb.append("articleId");
+		sb.append(StringPool.EQUAL);
+		sb.append(articleId);
 		sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 		return sb.toString();

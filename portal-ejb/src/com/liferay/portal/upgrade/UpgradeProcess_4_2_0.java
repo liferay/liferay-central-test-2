@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -20,21 +19,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portal/init.jsp" %>
+package com.liferay.portal.upgrade;
 
-<%
-String articleId = layout.getTypeSettingsProperties().getProperty("article-id");
-String languageId = LanguageUtil.getLanguageId(request);
+import com.liferay.portal.upgrade.v4_2_0.UpgradeJournal;
 
-String content = JournalContentUtil.getContent(company.getCompanyId(), articleId, languageId, themeDisplay);
-%>
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tr>
-	<td>
-		<%= content %>
-	</td>
-</tr>
-</table>
+/**
+ * <a href="UpgradeProcess_4_2_0.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Alexander Chow
+ *
+ */
+public class UpgradeProcess_4_2_0 extends UpgradeProcess {
+
+	public int getThreshold() {
+
+		// Version 4.1.2 has build number 3101
+
+		return 3101;
+	}
+
+	public void upgrade() throws UpgradeException {
+		_log.info("Upgrading");
+
+		upgrade(new UpgradeJournal());
+	}
+
+	private static Log _log = LogFactory.getLog(UpgradeProcess_4_2_0.class);
+
+}

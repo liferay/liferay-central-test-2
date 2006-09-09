@@ -24,6 +24,49 @@
 
 <%@ include file="/html/portlet/journal_content/init.jsp" %>
 
+<script type="text/javascript">
+	var <portlet:namespace />articleIndex = 0;
+
+	function <portlet:namespace />addArticle(articleId) {
+		var table = document.getElementById("<portlet:namespace />articles");
+
+		var newRow = table.insertRow(table.rows.length);
+
+		newRow.id = "<portlet:namespace />row" + <portlet:namespace />articleIndex;
+
+		var input = createElement("input", "<portlet:namespace />article" + <portlet:namespace />articleIndex);
+		input.type = "hidden";
+		input.value = articleId;
+
+		var text = document.createElement("span");
+		text.innerHTML = articleId;
+
+		var del = document.createElement("a");
+		del.href = "javascript: <portlet:namespace />removeArticle('" + newRow.id + "');";
+		del.innerHTML = "[<%= LanguageUtil.get(pageContext, "remove") %>]";
+
+		newRow.insertCell(0).appendChild(input);
+		newRow.insertCell(1).appendChild(text);
+		newRow.insertCell(2).appendChild(del);
+
+		newRow.cells[1].style.paddingLeft = "20px";
+		newRow.cells[1].style.paddingRight = "20px";
+
+		<portlet:namespace />articleIndex++;
+	}
+
+	function <portlet:namespace />removeArticle(id) {
+		var delRow = document.getElementById(id);
+
+		document.getElementById("<portlet:namespace />articles").deleteRow(delRow.rowIndex);
+	}
+
+	function <portlet:namespace />saveArticles() {
+		document.<portlet:namespace />pages.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />pages);
+	}
+</script>
+
 <%
 String cur = ParamUtil.getString(request, "cur");
 
@@ -39,10 +82,8 @@ if (communities.size() > 0) {
 
 String type = JournalArticle.TYPES[0];
 
-JournalArticle article = null;
-
 try {
-	article = JournalArticleLocalServiceUtil.getLatestArticle(company.getCompanyId(), articleId);
+	JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(company.getCompanyId(), articleIds[0]);
 
 	groupId = article.getGroupId();
 	type = article.getType();
@@ -56,10 +97,35 @@ type = ParamUtil.getString(request, "type", type);
 
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
 
+
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />pages">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>">
+
+<table cellpadding="0" cellspacing="0" border="0" id="<portlet:namespace />articles">
+	<tr>
+		<td colspan="3">
+			<%= LanguageUtil.get(pageContext, "displaying-article-pages") %>:
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<br>
+		</td>
+	</tr>
+</table>
+
+<br>
+
+<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveArticles()">
+
+</form>
+
+<br><div class="beta-separator"></div><br>
+
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>">
-<input name="<portlet:namespace />articleId" type="hidden" value="">
 
 <liferay-ui:error exception="<%= NoSuchArticleException.class %>" message="the-article-could-not-be-found" />
 
@@ -79,11 +145,7 @@ ArticleSearch searchContainer = new ArticleSearch(dynamicRenderReq, portletURL);
 	<liferay-ui:param name="type" value="<%= type %>" />
 </liferay-ui:search-form>
 
-<c:if test="<%= article != null %>">
-	<br>
-
-	<%= LanguageUtil.get(pageContext, "displaying-article") %>: <%= article.getArticleId() %><br>
-</c:if>
+<br><div class="beta-separator"></div><br>
 
 <%
 OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(searchContainer.getOrderByCol(), searchContainer.getOrderByType());
@@ -97,36 +159,21 @@ searchContainer.setTotal(total);
 List results = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getArticleId(), searchTerms.getVersionObj(), searchTerms.getGroupId(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), searchTerms.getApprovedObj(), searchTerms.getExpiredObj(), searchTerms.getReviewDate(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
 
 searchContainer.setResults(results);
-%>
 
-<br><div class="beta-separator"></div><br>
-
-<%
 List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
 	JournalArticle curArticle = (JournalArticle)results.get(i);
 
-	ResultRow row = new ResultRow(article, curArticle.getArticleId() + EditArticleAction.VERSION_SEPARATOR + curArticle.getVersion(), i);
+	ResultRow row = new ResultRow(null, curArticle.getArticleId() + EditArticleAction.VERSION_SEPARATOR + curArticle.getVersion(), i);
 
 	StringBuffer sb = new StringBuffer();
 
-	sb.append("javascript: document.");
+	sb.append("javascript: ");
 	sb.append(renderResponse.getNamespace());
-	sb.append("fm.");
-	sb.append(renderResponse.getNamespace());
-	sb.append(Constants.CMD);
-	sb.append(".value = '");
-	sb.append(Constants.UPDATE);
-	sb.append("'; document.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("fm.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("articleId.value = '");
+	sb.append("addArticle('");
 	sb.append(curArticle.getArticleId());
-	sb.append("'; submitForm(document.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("fm);");
+	sb.append("');");
 
 	String rowHREF = sb.toString();
 
@@ -164,4 +211,17 @@ for (int i = 0; i < results.size(); i++) {
 
 <script type="text/javascript">
 	document.<portlet:namespace />fm.<portlet:namespace />searchArticleId.focus();
+
+	<%
+	for (int i = 0; i < articleIds.length; i++) {
+		try {
+			JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(company.getCompanyId(), articleIds[i]);
+	%>
+			<portlet:namespace />addArticle("<%= article.getArticleId() %>");
+	<%
+		}
+		catch (NoSuchArticleException nsae) {
+		}
+	}
+	%>
 </script>

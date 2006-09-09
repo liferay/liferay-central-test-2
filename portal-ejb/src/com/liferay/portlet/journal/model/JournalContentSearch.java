@@ -29,8 +29,6 @@ package com.liferay.portlet.journal.model;
  *
  */
 public class JournalContentSearch extends JournalContentSearchModel {
-
 	public JournalContentSearch() {
 	}
-
 }

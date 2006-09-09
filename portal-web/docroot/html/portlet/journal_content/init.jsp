@@ -47,7 +47,7 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
 }
 
-String articleId = prefs.getValue("article-id", StringPool.BLANK);
+String[] articleIds = prefs.getValues("article-id", new String[0]);
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

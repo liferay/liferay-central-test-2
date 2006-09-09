@@ -355,9 +355,9 @@ create table JournalContentSearch (
 	portletId VARCHAR(75) not null,
 	layoutId VARCHAR(75) not null,
 	ownerId VARCHAR(75) not null,
+	articleId VARCHAR(75) not null,
 	companyId VARCHAR(75) not null,
-	articleId VARCHAR(75) null,
-	primary key (portletId, layoutId, ownerId)
+	primary key (portletId, layoutId, ownerId, articleId)
 );
 
 create table JournalStructure (

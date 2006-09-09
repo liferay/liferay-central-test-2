@@ -52,11 +52,11 @@ public class JournalContentSearchModel extends BaseModel {
 	public static boolean XSS_ALLOW_OWNERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalContentSearch.ownerId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalContentSearch.companyId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_ARTICLEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalContentSearch.articleId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.journal.model.JournalContentSearch.companyId"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalContentSearchModel"));
@@ -65,13 +65,15 @@ public class JournalContentSearchModel extends BaseModel {
 	}
 
 	public JournalContentSearchPK getPrimaryKey() {
-		return new JournalContentSearchPK(_portletId, _layoutId, _ownerId);
+		return new JournalContentSearchPK(_portletId, _layoutId, _ownerId,
+			_articleId);
 	}
 
 	public void setPrimaryKey(JournalContentSearchPK pk) {
 		setPortletId(pk.portletId);
 		setLayoutId(pk.layoutId);
 		setOwnerId(pk.ownerId);
+		setArticleId(pk.articleId);
 	}
 
 	public String getPortletId() {
@@ -125,23 +127,6 @@ public class JournalContentSearchModel extends BaseModel {
 		}
 	}
 
-	public String getCompanyId() {
-		return GetterUtil.getString(_companyId);
-	}
-
-	public void setCompanyId(String companyId) {
-		if (((companyId == null) && (_companyId != null)) ||
-				((companyId != null) && (_companyId == null)) ||
-				((companyId != null) && (_companyId != null) &&
-				!companyId.equals(_companyId))) {
-			if (!XSS_ALLOW_COMPANYID) {
-				companyId = XSSUtil.strip(companyId);
-			}
-
-			_companyId = companyId;
-		}
-	}
-
 	public String getArticleId() {
 		return GetterUtil.getString(_articleId);
 	}
@@ -159,13 +144,30 @@ public class JournalContentSearchModel extends BaseModel {
 		}
 	}
 
+	public String getCompanyId() {
+		return GetterUtil.getString(_companyId);
+	}
+
+	public void setCompanyId(String companyId) {
+		if (((companyId == null) && (_companyId != null)) ||
+				((companyId != null) && (_companyId == null)) ||
+				((companyId != null) && (_companyId != null) &&
+				!companyId.equals(_companyId))) {
+			if (!XSS_ALLOW_COMPANYID) {
+				companyId = XSSUtil.strip(companyId);
+			}
+
+			_companyId = companyId;
+		}
+	}
+
 	public Object clone() {
 		JournalContentSearch clone = new JournalContentSearch();
 		clone.setPortletId(getPortletId());
 		clone.setLayoutId(getLayoutId());
 		clone.setOwnerId(getOwnerId());
-		clone.setCompanyId(getCompanyId());
 		clone.setArticleId(getArticleId());
+		clone.setCompanyId(getCompanyId());
 
 		return clone;
 	}
@@ -212,6 +214,6 @@ public class JournalContentSearchModel extends BaseModel {
 	private String _portletId;
 	private String _layoutId;
 	private String _ownerId;
-	private String _companyId;
 	private String _articleId;
+	private String _companyId;
 }

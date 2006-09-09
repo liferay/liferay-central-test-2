@@ -641,9 +641,9 @@
 			<key-property name="portletId" />
 			<key-property name="layoutId" />
 			<key-property name="ownerId" />
+			<key-property name="articleId" />
 		</composite-id>
 		<property name="companyId" />
-		<property name="articleId" />
 	</class>
 	<class name="com.liferay.portlet.journal.model.JournalStructure" table="JournalStructure">
 		<cache usage="read-write" />

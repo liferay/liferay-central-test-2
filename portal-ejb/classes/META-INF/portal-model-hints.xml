@@ -620,8 +620,8 @@
 		<field name="portletId" type="String" />
 		<field name="layoutId" type="String" />
 		<field name="ownerId" type="String" />
-		<field name="companyId" type="String" />
 		<field name="articleId" type="String" />
+		<field name="companyId" type="String" />
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalStructure">
 		<field name="companyId" type="String" />

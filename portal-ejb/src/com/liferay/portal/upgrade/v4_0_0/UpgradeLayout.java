@@ -256,7 +256,7 @@ public class UpgradeLayout extends UpgradeProcess {
 				_log.debug(
 					"Upgrading journal content search " +
 						new JournalContentSearchPK(
-							oldPortletId, oldLayoutId, oldOwnerId));
+							oldPortletId, oldLayoutId, oldOwnerId, null));
 
 				String newPortletId = _getNewPortletId(oldPortletId);
 				String newLayoutId = _getNewLayoutId(oldLayoutId);

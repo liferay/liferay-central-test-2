@@ -84,14 +84,13 @@
 		<column name="portletId" type="String" primary="true" />
 		<column name="layoutId" type="String" primary="true" />
 		<column name="ownerId" type="String" primary="true" />
+		<column name="articleId" type="String" primary="true" />
 
 		<!-- Audit fields -->
 
 		<column name="companyId" type="String" />
 
 		<!-- Other fields -->
-
-		<column name="articleId" type="String" />
 
 		<!-- Finder methods -->
 

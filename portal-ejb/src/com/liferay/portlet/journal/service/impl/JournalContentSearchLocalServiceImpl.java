@@ -175,7 +175,7 @@ public class JournalContentSearchLocalServiceImpl
 		throws PortalException, SystemException {
 
 		JournalContentSearchPK pk = new JournalContentSearchPK(
-			portletId, layoutId, ownerId);
+			portletId, layoutId, ownerId, articleId);
 
 		JournalContentSearch contentSearch = null;
 
@@ -187,11 +187,27 @@ public class JournalContentSearchLocalServiceImpl
 		}
 
 		contentSearch.setCompanyId(companyId);
-		contentSearch.setArticleId(articleId);
 
 		JournalContentSearchUtil.update(contentSearch);
 
 		return contentSearch;
+	}
+
+	public List updateContentSearch(
+			String portletId, String layoutId, String ownerId, String companyId,
+			String[] articleIds)
+		throws PortalException, SystemException {
+
+		List contentSearches = new ArrayList();
+
+		for (int i = 0; i < articleIds.length; i++) {
+			JournalContentSearch contentSearch = updateContentSearch(
+				portletId, layoutId, ownerId, companyId, articleIds[i]);
+
+			contentSearches.add(contentSearch);
+		}
+
+		return contentSearches;
 	}
 
 }

@@ -234,3 +234,14 @@ insert into Country (countryId, name, a2, a3, number_, idd_, active_) values ('2
 insert into Country (countryId, name, a2, a3, number_, idd_, active_) values ('228', 'Zimbabwe', 'ZW', 'ZWE', '716', '263', true);
 
 alter table JournalArticle add description STRING null;
+
+drop table JournalContentSearch;
+
+create table JournalContentSearch (
+	portletId VARCHAR(75) not null,
+	layoutId VARCHAR(75) not null,
+	ownerId VARCHAR(75) not null,
+	companyId VARCHAR(75) not null,
+	articleId VARCHAR(75) not null,
+	primary key (portletId, layoutId, ownerId, articleId)
+);

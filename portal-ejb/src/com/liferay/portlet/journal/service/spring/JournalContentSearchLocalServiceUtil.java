@@ -83,4 +83,16 @@ public class JournalContentSearchLocalServiceUtil {
 		return journalContentSearchLocalService.updateContentSearch(portletId,
 			layoutId, ownerId, companyId, articleId);
 	}
+
+	public static java.util.List updateContentSearch(
+		java.lang.String portletId, java.lang.String layoutId,
+		java.lang.String ownerId, java.lang.String companyId,
+		java.lang.String[] articleIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+
+		return journalContentSearchLocalService.updateContentSearch(portletId,
+			layoutId, ownerId, companyId, articleIds);
+	}
 }

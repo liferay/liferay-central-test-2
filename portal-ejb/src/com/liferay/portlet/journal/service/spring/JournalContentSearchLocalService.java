@@ -54,4 +54,10 @@ public interface JournalContentSearchLocalService {
 		java.lang.String articleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
+
+	public java.util.List updateContentSearch(java.lang.String portletId,
+		java.lang.String layoutId, java.lang.String ownerId,
+		java.lang.String companyId, java.lang.String[] articleIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
 }

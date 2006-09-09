@@ -27,9 +27,6 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
-import com.liferay.util.Validator;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
@@ -60,16 +57,16 @@ public class ViewAction extends PortletAction {
 
 		String companyId = themeDisplay.getCompanyId();
 
-		String articleId = ParamUtil.getString(req, "articleId").toUpperCase();
-
-		if (Validator.isNull(articleId)) {
-			articleId = prefs.getValue("article-id", StringPool.BLANK);
-		}
+		String[] articleIds = prefs.getValues("article-id", new String[0]);
 
 		String languageId = LanguageUtil.getLanguageId(req);
 
-		String content = JournalContentUtil.getContent(
-			companyId, articleId, languageId, themeDisplay);
+		String[] content = new String[articleIds.length];
+
+		for (int i = 0; i < articleIds.length; i++) {
+			content[i] = JournalContentUtil.getContent(
+				companyId, articleIds[i], languageId, themeDisplay);
+		}
 
 		req.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT, content);
 
