@@ -35,7 +35,7 @@ String namespace = PortalUtil.getPortletNamespace(portlet.getPortletId());
 %>
 
 <c:choose>
-	<c:when test="<%= portlet.getRenderWeight() >= 1 %>">
+	<c:when test="<%= (portlet.getRenderWeight() >= 1) || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax() %>">
 		<liferay-util:include page="/html/portal/render_portlet.jsp" />
 	</c:when>
 	<c:otherwise>
@@ -54,6 +54,30 @@ String namespace = PortalUtil.getPortletNamespace(portlet.getPortletId());
 			function <%= namespace %>loadPortlet() {
 				var path = "/c/portal/render_portlet";
 				var queryString = "p_l_id=<%= plid %>&p_p_id=<%= portlet.getPortletId() %>&p_p_action=0&p_p_state=normal&p_p_mode=view&p_p_col_id=<%= columnId %>&p_p_col_pos=<%= columnPos %>&p_p_col_count=<%= columnCount %>";
+
+				<%
+				String ppid = ParamUtil.getString(request, "p_p_id");
+
+				if (ppid.equals(portlet.getPortletId())) {
+					Enumeration enu = request.getParameterNames();
+
+					while (enu.hasMoreElements()) {
+						String name = (String)enu.nextElement();
+
+						if (!PortalUtil.isReservedParameter(name)) {
+							String[] values = request.getParameterValues(name);
+
+							for (int i = 0; i < values.length; i++) {
+				%>
+
+								queryString += "&<%= name %>=<%= values[i] %>";
+
+				<%
+							}
+						}
+					}
+				}
+				%>
 
 				loadPage(path, queryString, <%= namespace %>returnPortlet);
 			}

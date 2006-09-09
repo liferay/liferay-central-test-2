@@ -52,6 +52,8 @@ public class RenderPortletAction extends Action {
 
 		ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
 
+		String ajaxId = req.getParameter("ajax_id");
+
 		String companyId = PortalUtil.getCompanyId(req);
 		String portletId = ParamUtil.getString(req, "p_p_id");
 
@@ -61,6 +63,10 @@ public class RenderPortletAction extends Action {
 		String columnId = ParamUtil.getString(req, "p_p_col_id");
 		int columnPos = ParamUtil.getInteger(req, "p_p_col_pos");
 		int columnCount = ParamUtil.getInteger(req, "p_p_col_count");
+
+		if (ajaxId != null) {
+			res.setHeader("Ajax-ID", ajaxId);
+		}
 
 		PortalUtil.renderPortlet(
 			null, ctx, req, res, portlet, columnId, new Integer(columnPos),

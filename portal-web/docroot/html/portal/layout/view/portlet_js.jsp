@@ -72,7 +72,7 @@ function addPortletReturn(xmlHttpReq) {
 
 }
 
-function addPortletHTML (html, container, placeHolder) {
+function addPortletHTML(html, container, placeHolder) {
 	if (container == null) {
 		return;
 	}

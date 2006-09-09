@@ -50,9 +50,10 @@ public abstract class JSONAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
+		String ajaxId = req.getParameter("ajax_id");
+
 		String callback = ParamUtil.getString(req, "callback");
 		String instance = ParamUtil.getString(req, "inst");
-		String ajaxId = req.getParameter("ajax_id");
 
 		String json = null;
 
