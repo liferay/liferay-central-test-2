@@ -460,6 +460,12 @@ public class ServicePreAction extends Action {
 
 			req.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
 
+			// Parallel render
+
+			req.setAttribute(
+				WebKeys.PORTLET_PARALLEL_RENDER,
+				new Boolean(ParamUtil.getBoolean(req, "p_p_parallel", true)));
+
 			// Fix state
 
 			fixState(req, themeDisplay);
