@@ -59,6 +59,8 @@ double version = ParamUtil.getDouble(request, "version");
 		headerNames.add("display-date");
 		headerNames.add("author");
 
+		searchContainer.setOrderableHeaders(null);
+
 		ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
 
 		int total = JournalArticleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getArticleId(), searchTerms.getVersionObj(), groupId, searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), type, searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), approved, expired, reviewDate, searchTerms.isAndOperator());

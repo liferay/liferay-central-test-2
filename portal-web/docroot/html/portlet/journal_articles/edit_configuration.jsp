@@ -123,9 +123,9 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />orderByCol">
-			<option <%= orderByCol.equals("displayDate") ? "selected" : "" %> value="displayDate"><%= LanguageUtil.get(pageContext, "display-date") %></option>
-			<option <%= orderByCol.equals("createDate") ? "selected" : "" %> value="createDate"><%= LanguageUtil.get(pageContext, "create-date") %></option>
-			<option <%= orderByCol.equals("modifiedDate") ? "selected" : "" %> value="modifiedDate"><%= LanguageUtil.get(pageContext, "modified-date") %></option>
+			<option <%= orderByCol.equals("display-date") ? "selected" : "" %> value="display-date"><%= LanguageUtil.get(pageContext, "display-date") %></option>
+			<option <%= orderByCol.equals("create-date") ? "selected" : "" %> value="create-date"><%= LanguageUtil.get(pageContext, "create-date") %></option>
+			<option <%= orderByCol.equals("modified-date") ? "selected" : "" %> value="modified-date"><%= LanguageUtil.get(pageContext, "modified-date") %></option>
 			<option <%= orderByCol.equals("title") ? "selected" : "" %> value="title"><%= LanguageUtil.get(pageContext, "article-title") %></option>
 			<option <%= orderByCol.equals("articleId") ? "selected" : "" %> value="articleId"><%= LanguageUtil.get(pageContext, "article-id") %></option>
 		</select>
