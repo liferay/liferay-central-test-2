@@ -39,6 +39,7 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.DynamicServletRequest;
+import com.liferay.util.servlet.ProtectedPrincipal;
 import com.liferay.util.servlet.SharedSessionServletRequest;
 
 import java.security.Principal;
@@ -184,15 +185,15 @@ public class RenderRequestImpl implements RenderRequest {
 	}
 
 	public String getRemoteUser() {
-		return _req.getRemoteUser();
+		return _remoteUser;
 	}
 
 	public Principal getUserPrincipal() {
-		return _req.getUserPrincipal();
+		return _userPrincipal;
 	}
 
 	public boolean isUserInRole(String role) {
-		String remoteUser = _req.getRemoteUser();
+		String remoteUser = getRemoteUser();
 
 		if (remoteUser == null) {
 			return false;
@@ -218,7 +219,7 @@ public class RenderRequestImpl implements RenderRequest {
 		}
 
 		if (name.equals(RenderRequest.USER_INFO)) {
-			if (_req.getRemoteUser() != null) {
+			if (getRemoteUser() != null) {
 				LinkedHashMap userInfo = new LinkedHashMap();
 
 				// Liferay user attributes
@@ -604,6 +605,19 @@ public class RenderRequestImpl implements RenderRequest {
 		_portalSessionId = _req.getRequestedSessionId();
 		_ses = new PortletSessionImpl(
 			_req, _portletName, _portletCtx, _portalSessionId, plid);
+
+		String userId = PortalUtil.getUserId(req);
+		String remoteUser = req.getRemoteUser();
+
+		if ((userId != null) && (remoteUser == null)) {
+			_remoteUser = userId;
+			_userPrincipal = new ProtectedPrincipal(userId);
+		}
+		else {
+			_remoteUser = remoteUser;
+			_userPrincipal = req.getUserPrincipal();
+		}
+
 		_locale = (Locale)_req.getSession().getAttribute(Globals.LOCALE_KEY);
 		_plid = plid;
 	}
@@ -627,6 +641,8 @@ public class RenderRequestImpl implements RenderRequest {
 		_prefs = null;
 		_ses = null;
 		_portalSessionId = null;
+		_remoteUser = null;
+		_userPrincipal = null;
 		_locale = null;
 		_plid = null;
 	}
@@ -664,6 +680,8 @@ public class RenderRequestImpl implements RenderRequest {
 	private PortletPreferences _prefs;
 	private PortletSessionImpl _ses;
 	private String _portalSessionId;
+	private String _remoteUser;
+	private Principal _userPrincipal;
 	private Locale _locale;
 	private String _plid;
 

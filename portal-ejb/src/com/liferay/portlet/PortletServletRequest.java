@@ -28,9 +28,12 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
+import com.liferay.util.servlet.ProtectedPrincipal;
 
 import java.io.BufferedReader;
 import java.io.UnsupportedEncodingException;
+
+import java.security.Principal;
 
 import java.util.Enumeration;
 import java.util.Locale;
@@ -66,6 +69,18 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		_queryString = GetterUtil.getString(queryString);
 		_requestURI = GetterUtil.getString(requestURI);
 		_servletPath = GetterUtil.getString(servletPath);
+
+		String userId = PortalUtil.getUserId(req);
+		String remoteUser = req.getRemoteUser();
+
+		if ((userId != null) && (remoteUser == null)) {
+			_remoteUser = userId;
+			_userPrincipal = new ProtectedPrincipal(userId);
+		}
+		else {
+			_remoteUser = remoteUser;
+			_userPrincipal = req.getUserPrincipal();
+		}
 	}
 
 	public Object getAttribute(String name) {
@@ -182,6 +197,14 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		return _servletPath;
 	}
 
+	public String getRemoteUser() {
+		return _remoteUser;
+	}
+
+	public Principal getUserPrincipal() {
+		return _userPrincipal;
+	}
+
 	public boolean isUserInRole(String role) {
 		String remoteUser = getRemoteUser();
 
@@ -211,5 +234,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	private String _queryString;
 	private String _requestURI;
 	private String _servletPath;
+	private String _remoteUser;
+	private Principal _userPrincipal;
 
 }

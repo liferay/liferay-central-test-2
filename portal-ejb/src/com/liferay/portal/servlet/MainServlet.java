@@ -748,6 +748,7 @@ public class MainServlet extends ActionServlet {
 			// Set the principal associated with this thread
 
 			String name = userId;
+
 			if (remoteUser != null) {
 				name = remoteUser;
 			}
