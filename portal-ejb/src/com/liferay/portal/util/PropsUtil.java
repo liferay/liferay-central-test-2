@@ -382,6 +382,8 @@ public class PropsUtil {
 
 	public static final String LAYOUT_DEFAULT_TEMPLATE_ID = "layout.default.template.id";
 
+	public static final String LAYOUT_PARALLEL_RENDER_ENABLE = "layout.parallel.render.enable";
+
 	// Preferences
 
 	public static final String PREFERENCE_VALIDATE_ON_STARTUP = "preference.validate.on.startup";
