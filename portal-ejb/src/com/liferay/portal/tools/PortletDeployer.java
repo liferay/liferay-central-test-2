@@ -120,7 +120,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		StringBuffer sb = new StringBuffer();
 
-		SAXReader reader = SAXReaderFactory.getInstance();
+		SAXReader reader = SAXReaderFactory.getInstance(false);
 
 		// Add wrappers for portlets
 

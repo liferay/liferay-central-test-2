@@ -484,7 +484,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			return portletIds;
 		}
 
-		SAXReader reader = SAXReaderFactory.getInstance();
+		SAXReader reader = SAXReaderFactory.getInstance(false);
 
 		Document doc = reader.read(new StringReader(xml));
 
