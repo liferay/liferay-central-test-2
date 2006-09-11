@@ -148,6 +148,7 @@ public class MessagingUtil {
 			con.addPacketListener(msgListener, filter);
 
 			Roster roster = con.getRoster();
+			roster.setSubscriptionMode(Roster.SUBSCRIPTION_ACCEPT_ALL);
 
 			RosterUpdateListener rosterListener = new RosterUpdateListener(ses);
 
@@ -168,7 +169,7 @@ public class MessagingUtil {
 	public static void deleteRosterEntries(HttpSession ses, String[] userId)
 		throws XMPPException {
 
-		Roster roster = MessagingUtil.getRoster(ses);
+		Roster roster = getRoster(ses);
 
 		for (int i = 0; i < userId.length; i++) {
 			RosterEntry entry = roster.getEntry(getXmppId(userId[i]));

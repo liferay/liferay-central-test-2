@@ -40,10 +40,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-
 import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.RosterEntry;
-
+import org.jivesoftware.smack.packet.RosterPacket;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -83,8 +82,6 @@ public class RosterAction extends JSONAction {
 
 			MessagingUtil.addRosterEntry(req.getSession(), companyId, email);
 
-			JSONArray jRoster = getEntries(req).getJSONArray("roster");
-			jo.put("roster", jRoster);
 			jo.put("status", "success");
 		}
 		catch (Exception e) {
@@ -120,21 +117,27 @@ public class RosterAction extends JSONAction {
 		JSONArray ja = new JSONArray();
 
 		while (rosterEntries.hasNext()) {
-			rosterList.add(rosterEntries.next());
+			RosterEntry entry = (RosterEntry)rosterEntries.next();
+			
+			if (entry.getType() != RosterPacket.ItemType.FROM) {
+				rosterList.add(entry);
+			}
 		}
 
-		Collections.sort(rosterList, new NameComparator());
-
-		for (int i = 0; i < rosterList.size(); i++) {
-
-			JSONObject jEntry = new JSONObject();
-			RosterEntry entry = (RosterEntry)rosterList.get(i);
-
-			jEntry.put("user", MessagingUtil.getUserId(entry));
-			jEntry.put("name", entry.getName());
-			jEntry.put("status", MessagingUtil.getPresence(roster
-				.getPresence(entry.getUser())));
-			ja.put(jEntry);
+		if (rosterList.size() > 0) {
+			Collections.sort(rosterList, new NameComparator());
+	
+			for (int i = 0; i < rosterList.size(); i++) {
+	
+				JSONObject jEntry = new JSONObject();
+				RosterEntry entry = (RosterEntry)rosterList.get(i);
+	
+				jEntry.put("user", MessagingUtil.getUserId(entry));
+				jEntry.put("name", entry.getName());
+				jEntry.put("status", MessagingUtil.getPresence(roster
+					.getPresence(entry.getUser())));
+				ja.put(jEntry);
+			}
 		}
 
 		jo.put("roster", ja);

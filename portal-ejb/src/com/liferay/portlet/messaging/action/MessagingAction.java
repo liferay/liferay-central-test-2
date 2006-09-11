@@ -153,7 +153,14 @@ public class MessagingAction extends JSONAction {
 		String waitCmd = "";
 
 		try {
-			MessageWait msgWait = new MessageWait();
+			MessageWait msgWait = jabberSes.getMessageWait();
+
+			if (msgWait != null) {
+				jabberSes.setMessageWait(null);
+				msgWait.notify();
+			}
+			
+			msgWait = new MessageWait();
 			msgWait.setSessionId(ses.getId());
 
 			jabberSes.setMessageWait(msgWait);
