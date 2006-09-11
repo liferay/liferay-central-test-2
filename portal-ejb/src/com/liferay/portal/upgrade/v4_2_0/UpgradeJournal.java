@@ -29,7 +29,6 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceUtil;
 
 import java.util.Iterator;
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -54,9 +53,9 @@ public class UpgradeJournal extends UpgradeProcess {
 	}
 
 	private void _upgradeJournalContentSearch() throws Exception {
-		List list = CompanyLocalServiceUtil.getCompanies();
+		Iterator itr = CompanyLocalServiceUtil.getCompanies().iterator();
 
-		for (Iterator itr = list.iterator(); itr.hasNext(); ) {
+		while (itr.hasNext()) {
 			Company company = (Company)itr.next();
 
 			JournalContentSearchLocalServiceUtil.checkContentSearches(

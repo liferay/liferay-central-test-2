@@ -344,15 +344,6 @@ public class Validator {
 		return true;
 	}
 
-	public static boolean isNull(Object [] o) {
-		if (o == null || o.length == 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
 	public static boolean isNull(String s) {
 		if (s == null) {
 			return true;
@@ -367,8 +358,21 @@ public class Validator {
 		return false;
 	}
 
+	public static boolean isNull(Object[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public static boolean isNotNull(String s) {
 		return !isNull(s);
+	}
+
+	public static boolean isNotNull(Object[] array) {
+		return !isNull(array);
 	}
 
 	public static boolean isPassword(String password) {

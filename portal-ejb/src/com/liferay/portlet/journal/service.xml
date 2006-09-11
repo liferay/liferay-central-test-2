@@ -90,8 +90,6 @@
 
 		<column name="companyId" type="String" />
 
-		<!-- Other fields -->
-
 		<!-- Finder methods -->
 
 		<finder name="OwnerId" return-type="Collection">

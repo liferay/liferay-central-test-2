@@ -34,7 +34,6 @@ import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.Constants;
-import com.liferay.portlet.journal.service.persistence.JournalContentSearchPK;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringPool;
@@ -232,52 +231,6 @@ public class UpgradeLayout extends UpgradeProcess {
 		return xml;
 	}
 
-	private void _upgradeJournalContentSearch(
-			String oldLayoutId, String oldOwnerId, String newOwnerId)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection(Constants.DATA_SOURCE);
-
-			ps = con.prepareStatement(_UPGRADE_JOURNAL_CONTENT_SEARCH_1);
-
-			ps.setString(1, oldLayoutId);
-			ps.setString(2, oldOwnerId);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				String oldPortletId = rs.getString("portletId");
-
-				_log.debug(
-					"Upgrading journal content search " +
-						new JournalContentSearchPK(
-							oldPortletId, oldLayoutId, oldOwnerId, null));
-
-				String newPortletId = _getNewPortletId(oldPortletId);
-				String newLayoutId = _getNewLayoutId(oldLayoutId);
-
-				ps = con.prepareStatement(_UPGRADE_JOURNAL_CONTENT_SEARCH_2);
-
-				ps.setString(1, newPortletId);
-				ps.setString(2, newLayoutId);
-				ps.setString(3, newOwnerId);
-				ps.setString(4, oldPortletId);
-				ps.setString(5, oldLayoutId);
-				ps.setString(6, oldOwnerId);
-
-				ps.executeUpdate();
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
 	private void _upgradeLayout() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -393,9 +346,6 @@ public class UpgradeLayout extends UpgradeProcess {
 
 				ps.executeUpdate();
 
-				_upgradeJournalContentSearch(
-					oldLayoutId, oldOwnerId, newOwnerId);
-
 				_upgradePortletPreferences(oldLayoutId, oldOwnerId, newOwnerId);
 
 				LayoutSetLocalServiceUtil.updatePageCount(newOwnerId);
@@ -472,13 +422,6 @@ public class UpgradeLayout extends UpgradeProcess {
 		{"portlet-title", "portlet-setup-title"},
 		{"show-portlet-borders", "portlet-setup-show-borders"}
 	};
-
-	private static final String _UPGRADE_JOURNAL_CONTENT_SEARCH_1 =
-		"SELECT * FROM JournalContentSearch WHERE layoutId = ? AND ownerId = ?";
-
-	private static final String _UPGRADE_JOURNAL_CONTENT_SEARCH_2 =
-		"UPDATE JournalContentSearch SET portletId = ?, layoutId = ? , " +
-			"ownerId = ? WHERE portletId = ? AND layoutId = ? AND ownerId = ?";
 
 	private static final String _UPGRADE_LAYOUT_1 = "SELECT * FROM Layout";
 

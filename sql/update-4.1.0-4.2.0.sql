@@ -236,7 +236,6 @@ insert into Country (countryId, name, a2, a3, number_, idd_, active_) values ('2
 alter table JournalArticle add description STRING null;
 
 drop table JournalContentSearch;
-
 create table JournalContentSearch (
 	portletId VARCHAR(75) not null,
 	layoutId VARCHAR(75) not null,

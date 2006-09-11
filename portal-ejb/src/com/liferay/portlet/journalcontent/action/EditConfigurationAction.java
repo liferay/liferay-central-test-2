@@ -39,9 +39,9 @@ import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -81,7 +81,7 @@ public class EditConfigurationAction extends PortletAction {
 
 			String languageId = LanguageUtil.getLanguageId(req);
 
-			Map articleIdMap = new TreeMap();
+			List articleIdsList = new ArrayList();
 
 			Enumeration enu = req.getParameterNames();
 
@@ -99,12 +99,12 @@ public class EditConfigurationAction extends PortletAction {
 						throw new NoSuchArticleException();
 					}
 
-					articleIdMap.put(name, articleId);
+					articleIdsList.add(articleId);
 				}
 			}
 
 			String[] articleIds =
-				(String[])articleIdMap.values().toArray(new String[0]);
+				(String[])articleIdsList.toArray(new String[0]);
 
 			String portletResource = ParamUtil.getString(
 				req, "portletResource");

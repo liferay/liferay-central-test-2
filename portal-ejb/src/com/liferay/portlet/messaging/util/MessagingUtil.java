@@ -148,6 +148,7 @@ public class MessagingUtil {
 			con.addPacketListener(msgListener, filter);
 
 			Roster roster = con.getRoster();
+
 			roster.setSubscriptionMode(Roster.SUBSCRIPTION_ACCEPT_ALL);
 
 			RosterUpdateListener rosterListener = new RosterUpdateListener(ses);

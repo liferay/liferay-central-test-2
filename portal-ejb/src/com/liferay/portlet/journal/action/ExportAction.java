@@ -301,13 +301,13 @@ public class ExportAction extends Action {
 				(JournalContentSearch)itr.next();
 
 			sb.append("insert into JournalContentSearch (");
-			sb.append("portletId, layoutId, ownerId, companyId, articleId");
+			sb.append("portletId, layoutId, ownerId, articleId, companyId");
 			sb.append(") values (");
 			addColumn(sb, contentSearch.getPortletId());
 			addColumn(sb, contentSearch.getLayoutId());
 			addColumn(sb, contentSearch.getOwnerId());
-			addColumn(sb, contentSearch.getCompanyId());
 			addColumn(sb, contentSearch.getArticleId());
+			addColumn(sb, contentSearch.getCompanyId());
 			removeTrailingComma(sb);
 			sb.append(");\n");
 		}
@@ -375,7 +375,8 @@ public class ExportAction extends Action {
 	}
 
 	protected void insertDataCMSLayout(
-			String siteGroupId, ZipWriter zipWriter, List journalContentSearches)
+			String siteGroupId, ZipWriter zipWriter,
+			List journalContentSearches)
 		throws Exception {
 
 		StringBuffer sb = new StringBuffer();
@@ -464,8 +465,8 @@ public class ExportAction extends Action {
 						journalContentSearch.setPortletId(portletId);
 						journalContentSearch.setLayoutId(layout.getLayoutId());
 						journalContentSearch.setOwnerId(layout.getOwnerId());
-						journalContentSearch.setCompanyId(layout.getCompanyId());
 						journalContentSearch.setArticleId(articleId);
+						journalContentSearch.setCompanyId(layout.getCompanyId());
 
 						journalContentSearches.add(journalContentSearch);
 					}

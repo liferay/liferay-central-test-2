@@ -24,49 +24,6 @@
 
 <%@ include file="/html/portlet/journal_content/init.jsp" %>
 
-<script type="text/javascript">
-	var <portlet:namespace />articleIndex = 0;
-
-	function <portlet:namespace />addArticle(articleId) {
-		var table = document.getElementById("<portlet:namespace />articles");
-
-		var newRow = table.insertRow(table.rows.length);
-
-		newRow.id = "<portlet:namespace />row" + <portlet:namespace />articleIndex;
-
-		var input = createElement("input", "<portlet:namespace />article" + <portlet:namespace />articleIndex);
-		input.type = "hidden";
-		input.value = articleId;
-
-		var text = document.createElement("span");
-		text.innerHTML = articleId;
-
-		var del = document.createElement("a");
-		del.href = "javascript: <portlet:namespace />removeArticle('" + newRow.id + "');";
-		del.innerHTML = "[<%= LanguageUtil.get(pageContext, "remove") %>]";
-
-		newRow.insertCell(0).appendChild(input);
-		newRow.insertCell(1).appendChild(text);
-		newRow.insertCell(2).appendChild(del);
-
-		newRow.cells[1].style.paddingLeft = "20px";
-		newRow.cells[1].style.paddingRight = "20px";
-
-		<portlet:namespace />articleIndex++;
-	}
-
-	function <portlet:namespace />removeArticle(id) {
-		var delRow = document.getElementById(id);
-
-		document.getElementById("<portlet:namespace />articles").deleteRow(delRow.rowIndex);
-	}
-
-	function <portlet:namespace />saveArticles() {
-		document.<portlet:namespace />pages.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />pages);
-	}
-</script>
-
 <%
 String cur = ParamUtil.getString(request, "cur");
 
@@ -83,10 +40,12 @@ if (communities.size() > 0) {
 String type = JournalArticle.TYPES[0];
 
 try {
-	JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(company.getCompanyId(), articleIds[0]);
+	if (articleIds.length > 0) {
+		JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(company.getCompanyId(), articleIds[0]);
 
-	groupId = article.getGroupId();
-	type = article.getType();
+		groupId = article.getGroupId();
+		type = article.getType();
+	}
 }
 catch (NoSuchArticleException nsae) {
 }
@@ -97,27 +56,72 @@ type = ParamUtil.getString(request, "type", type);
 
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
 
+<script type="text/javascript">
+	var <portlet:namespace />articleIndex = 0;
+
+	function <portlet:namespace />addArticle(articleId) {
+		var table = document.getElementById("<portlet:namespace />articles");
+
+		var newRow = table.insertRow(table.rows.length);
+
+		newRow.id = "<portlet:namespace />row" + <portlet:namespace />articleIndex;
+
+		var input = createElement("input", "<portlet:namespace />article" + <portlet:namespace />articleIndex);
+
+		input.type = "hidden";
+		input.value = articleId;
+
+		var text = document.createElement("span");
+
+		text.innerHTML = articleId;
+
+		var del = document.createElement("a");
+
+		del.href = "javascript: <portlet:namespace />removeArticle('" + newRow.id + "');";
+		del.innerHTML = "[<%= LanguageUtil.get(pageContext, "remove") %>]";
+
+		newRow.insertCell(0).appendChild(input);
+		newRow.insertCell(1).appendChild(text);
+		newRow.insertCell(2).appendChild(del);
+
+		newRow.cells[1].style.paddingLeft = "0px";
+		newRow.cells[1].style.paddingRight = "10px";
+
+		<portlet:namespace />articleIndex++;
+	}
+
+	function <portlet:namespace />removeArticle(id) {
+		var delRow = document.getElementById(id);
+
+		document.getElementById("<portlet:namespace />articles").deleteRow(delRow.rowIndex);
+	}
+
+	function <portlet:namespace />saveArticles() {
+		document.<portlet:namespace />pages.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />pages);
+	}
+</script>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />pages">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>">
 
 <table cellpadding="0" cellspacing="0" border="0" id="<portlet:namespace />articles">
-	<tr>
-		<td colspan="3">
-			<%= LanguageUtil.get(pageContext, "displaying-article-pages") %>:
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<br>
-		</td>
-	</tr>
+<tr>
+	<td colspan="3">
+		<%= LanguageUtil.get(pageContext, "displaying-article-pages") %>:
+	</td>
+</tr>
+<tr>
+	<td>
+		<br>
+	</td>
+</tr>
 </table>
 
 <br>
 
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveArticles()">
+<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveArticles();">
 
 </form>
 
@@ -217,11 +221,14 @@ for (int i = 0; i < results.size(); i++) {
 		try {
 			JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(company.getCompanyId(), articleIds[i]);
 	%>
+
 			<portlet:namespace />addArticle("<%= article.getArticleId() %>");
+
 	<%
 		}
 		catch (NoSuchArticleException nsae) {
 		}
 	}
 	%>
+
 </script>
