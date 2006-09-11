@@ -376,7 +376,6 @@ var MessagingRoster = {
 			}
 			else {
 				MessagingRoster.toggleEmail();
-				MessagingRoster.updateEntries(msg.roster);
 			}
 		}
 		catch (err) {
