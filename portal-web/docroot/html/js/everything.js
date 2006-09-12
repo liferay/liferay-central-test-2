@@ -377,7 +377,7 @@ return;}
 if(msg.status=="success"){Messaging.chat(msg.toId,msg.toName,msg.fromId,msg.fromName,msg.body,msg.tempId);}
 else{Messaging.error();}}}
 var MessagingRoster={highlightColor:"",lastSelected:null,addEntry:function(){var email=document.getElementById("portlet-chat-roster-email").value;loadPage(themeDisplay.getPathMain()+"/chat/roster","cmd=addEntry&email="+email,MessagingRoster.addEntryReturn);},addEntryReturn:function(xmlHttpReq){try{var msg=eval("("+xmlHttpReq.responseText+")");if(msg.status=="failure"){alert("No such user exists");}
-else{MessagingRoster.toggleEmail();MessagingRoster.updateEntries(msg.roster);}}
+else{MessagingRoster.toggleEmail();}}
 catch(err){}},deleteEntries:function(){if(MessagingRoster.lastSelected){var userId=MessagingRoster.lastSelected.userId;var lastSelected=MessagingRoster.lastSelected;lastSelected.parentNode.removeChild(lastSelected);MessagingRoster.lastSelected=null;loadPage(themeDisplay.getPathMain()+"/chat/roster","cmd=deleteEntries&entries="+userId,MessagingRoster.deleteEntriesReturn);}},deleteEntriesReturn:function(xmlHttpReq){try{var msg=eval("("+xmlHttpReq.responseText+")");}
 catch(err){}},getEntries:function(){loadPage(themeDisplay.getPathMain()+"/chat/roster","cmd=getEntries",MessagingRoster.getEntriesReturn);},getEntriesReturn:function(xmlHttpReq){try{var msg=eval("("+xmlHttpReq.responseText+")");MessagingRoster.updateEntries(msg.roster);}
 catch(err){if(Messaging.pollTimer){clearInterval(Messaging.pollTimer);}
