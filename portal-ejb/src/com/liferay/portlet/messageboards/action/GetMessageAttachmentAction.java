@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.action;
 import com.liferay.documentlibrary.service.spring.DLLocalServiceUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.Constants;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.spring.MBMessageServiceUtil;
@@ -39,6 +40,7 @@ import javax.portlet.PortletConfig;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -59,12 +61,19 @@ public class GetMessageAttachmentAction extends PortletAction {
 			HttpServletResponse res)
 		throws Exception {
 
-		String messageId = ParamUtil.getString(req, "messageId");
-		String fileName = ParamUtil.getString(req, "attachment");
+		try {
+			String messageId = ParamUtil.getString(req, "messageId");
+			String fileName = ParamUtil.getString(req, "attachment");
 
-		getFile(messageId, fileName, res);
+			getFile(messageId, fileName, res);
 
-		return null;
+			return null;
+		}
+		catch (Exception e) {
+			req.setAttribute(PageContext.EXCEPTION, e);
+
+			return mapping.findForward(Constants.COMMON_ERROR);
+		}
 	}
 
 	public void processAction(

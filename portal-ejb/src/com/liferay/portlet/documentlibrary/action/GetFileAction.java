@@ -25,6 +25,7 @@ package com.liferay.portlet.documentlibrary.action;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
@@ -40,6 +41,7 @@ import javax.portlet.PortletConfig;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -60,16 +62,23 @@ public class GetFileAction extends PortletAction {
 			HttpServletResponse res)
 		throws Exception {
 
-		String folderId = ParamUtil.getString(req, "folderId");
-		String name = ParamUtil.getString(req, "name");
-		double version = ParamUtil.getDouble(req, "version");
+		try {
+			String folderId = ParamUtil.getString(req, "folderId");
+			String name = ParamUtil.getString(req, "name");
+			double version = ParamUtil.getDouble(req, "version");
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		getFile(folderId, name, version, themeDisplay, res);
+			getFile(folderId, name, version, themeDisplay, res);
 
-		return null;
+			return null;
+		}
+		catch (Exception e) {
+			req.setAttribute(PageContext.EXCEPTION, e);
+
+			return mapping.findForward(Constants.COMMON_ERROR);
+		}
 	}
 
 	public void processAction(
