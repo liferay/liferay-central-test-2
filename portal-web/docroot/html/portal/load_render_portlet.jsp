@@ -39,7 +39,7 @@ String namespace = PortalUtil.getPortletNamespace(portlet.getPortletId());
 		[$TEMPLATE_PORTLET_<%= portlet.getPortletId() %>$]
 	</c:when>
 	<c:otherwise>
-		<div id="p_load<%= namespace %>">
+		<div id="p_load<%= namespace %>" style="text-align: center;">
 			<img src="<%= themeDisplay.getPathThemeImage() %>/progress_bar/loading_animation.gif" />
 		</div>
 
