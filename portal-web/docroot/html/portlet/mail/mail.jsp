@@ -426,7 +426,7 @@ String mailLineColor = "#B3B6B0";
 		<tr>
 			<td id="portlet-mail-folder-pane-td" valign="top">
 				<div id="portlet-mail-folder-pane">
-					<div style="padding-top: 50px; text-align: center;">
+					<div style="text-align: left;">
 						<img src="<%= themeDisplay.getPathThemeImage() %>/progress_bar/loading_animation.gif" />
 					</div>
 				</div>

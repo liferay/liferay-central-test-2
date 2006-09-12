@@ -496,7 +496,7 @@ FONT.bg {
 	background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/loading_animation.gif) no-repeat top center;
 	margin-top: 10px;
 	padding-top: 40px;
-	text-align: center;
+	text-align: left;
 }
 
 .portlet-container {
