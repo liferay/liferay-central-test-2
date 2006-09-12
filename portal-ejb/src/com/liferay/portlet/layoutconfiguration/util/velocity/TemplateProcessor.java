@@ -22,7 +22,11 @@
 
 package com.liferay.portlet.layoutconfiguration.util.velocity;
 
+import com.liferay.portal.util.comparator.PortletRenderWeightComparator;
+
 import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -44,20 +48,28 @@ public class TemplateProcessor {
 		_req = req;
 		_res = res;
 		_portletId = portletId;
+		_columnsMap = new HashMap();
+		_portletsMap = new TreeMap(new PortletRenderWeightComparator());
 	}
 
 	public String processColumn(String columnId) throws Exception {
-		HashMap attributes = new HashMap();
+		Map attributes = new HashMap();
 
 		attributes.put("id", columnId);
 
-		RuntimeLogic logic = new PortletColumnLogic(_ctx, _req, _res);
+		PortletColumnLogic logic = new PortletColumnLogic(_ctx, _req, _res);
 
 		StringBuffer sb = new StringBuffer();
 
 		logic.processContent(sb, attributes);
 
-		return sb.toString();
+		_portletsMap.putAll(logic.getPortletsMap());
+
+		String columnIdPlaceHolder = "[$TEMPLATE_COLUMN_" + columnId + "$]";
+
+		_columnsMap.put(columnIdPlaceHolder, sb.toString());
+
+		return columnIdPlaceHolder;
 	}
 
 	public String processMax() throws Exception {
@@ -70,9 +82,19 @@ public class TemplateProcessor {
 		return sb.toString();
 	}
 
+	public Map getColumnsMap() {
+		return _columnsMap;
+	}
+
+	public Map getPortletsMap() {
+		return _portletsMap;
+	}
+
 	private ServletContext _ctx;
 	private HttpServletRequest _req;
 	private HttpServletResponse _res;
 	private String _portletId;
+	private Map _columnsMap;
+	private Map _portletsMap;
 
 }

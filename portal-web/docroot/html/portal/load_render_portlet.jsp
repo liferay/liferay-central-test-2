@@ -32,21 +32,11 @@ Integer columnPos = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_
 Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_COUNT);
 
 String namespace = PortalUtil.getPortletNamespace(portlet.getPortletId());
-
-boolean parallelRenderEnable = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.LAYOUT_PARALLEL_RENDER_ENABLE));
-
-if (parallelRenderEnable) {
-	Boolean portletParallelRender = (Boolean)request.getAttribute(WebKeys.PORTLET_PARALLEL_RENDER);
-
-	if ((portletParallelRender != null) && (portletParallelRender.booleanValue() == false)) {
-		parallelRenderEnable = false;
-	}
-}
 %>
 
 <c:choose>
-	<c:when test="<%= !parallelRenderEnable || (portlet.getRenderWeight() >= 1) || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax() %>">
-		<liferay-util:include page="/html/portal/render_portlet.jsp" />
+	<c:when test="<%= portlet.getRenderWeight() >= 1 %>">
+		[$TEMPLATE_PORTLET_<%= portlet.getPortletId() %>$]
 	</c:when>
 	<c:otherwise>
 		<div id="p_load<%= namespace %>">

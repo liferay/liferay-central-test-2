@@ -25,9 +25,12 @@ package com.liferay.portlet.layoutconfiguration.util.velocity;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
+import com.liferay.util.GetterUtil;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,6 +54,21 @@ public class PortletColumnLogic extends RuntimeLogic {
 		_req = req;
 		_res = res;
 		_themeDisplay = (ThemeDisplay)_req.getAttribute(WebKeys.THEME_DISPLAY);
+		_portletsMap = new HashMap();
+
+		_parallelRenderEnable = GetterUtil.getBoolean(PropsUtil.get(
+			PropsUtil.LAYOUT_PARALLEL_RENDER_ENABLE));
+
+		if (_parallelRenderEnable) {
+			Boolean portletParallelRender =
+				(Boolean)req.getAttribute(WebKeys.PORTLET_PARALLEL_RENDER);
+
+			if ((portletParallelRender != null) &&
+				(portletParallelRender.booleanValue() == false)) {
+
+				_parallelRenderEnable = false;
+			}
+		}
 	}
 
 	public void processContent(StringBuffer sb, Map attributes)
@@ -72,19 +90,41 @@ public class PortletColumnLogic extends RuntimeLogic {
 
 			String rootPortletId = portlet.getRootPortletId();
 			String instanceId = portlet.getInstanceId();
+			Integer columnPos = new Integer(i);
+			Integer columnCount = new Integer(portlets.size());
+			String path = null;
+
+			if (_parallelRenderEnable) {
+				path = "/html/portal/load_render_portlet.jsp";
+
+				if (portlet.getRenderWeight() >= 1) {
+					_portletsMap.put(
+						portlet,
+						new Object[] {
+							rootPortletId, instanceId, columnId, columnPos,
+							columnCount
+						});
+				}
+			}
 
 			RuntimePortletUtil.processPortlet(
 				sb, _ctx, _req, _res, null, null, rootPortletId, instanceId,
-				columnId, new Integer(i), new Integer(portlets.size()));
+				columnId, columnPos, columnCount, path);
 		}
 
 		sb.append("<div class=\"layout-blank-portlet\"></div>");
 		sb.append("</div>");
 	}
 
+	public Map getPortletsMap() {
+		return _portletsMap;
+	}
+
 	private ServletContext _ctx;
 	private HttpServletRequest _req;
 	private HttpServletResponse _res;
 	private ThemeDisplay _themeDisplay;
+	private Map _portletsMap;
+	private boolean _parallelRenderEnable;
 
 }

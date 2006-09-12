@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.layoutconfiguration.util;
 
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.theme.PortletDisplay;
@@ -32,7 +33,13 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.layoutconfiguration.util.velocity.TemplateProcessor;
 import com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic;
 import com.liferay.util.StringPool;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
+
+import java.io.StringWriter;
+
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
@@ -73,6 +80,19 @@ public class RuntimePortletUtil {
 			HttpServletResponse res, RenderRequest renderRequest,
 			RenderResponse renderResponse, String portletId, String instanceId,
 			String columnId, Integer columnPos, Integer columnCount)
+		throws Exception {
+
+		processPortlet(
+			sb, ctx, req, res, renderRequest, renderResponse, portletId,
+			instanceId, columnId, columnPos, columnCount, null);
+	}
+
+	public static void processPortlet(
+			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
+			HttpServletResponse res, RenderRequest renderRequest,
+			RenderResponse renderResponse, String portletId, String instanceId,
+			String columnId, Integer columnPos, Integer columnCount,
+			String path)
 		throws Exception {
 
 		ThemeDisplay themeDisplay =
@@ -122,7 +142,7 @@ public class RuntimePortletUtil {
 		try {
 			PortalUtil.renderPortlet(
 				sb, ctx, req, res, portlet, columnId, columnPos, columnCount,
-				"/html/portal/load_render_portlet.jsp");
+				path);
 		}
 		finally {
 			portletDisplay.copyFrom(portletDisplayClone);
@@ -163,16 +183,61 @@ public class RuntimePortletUtil {
 
 		context.put("processor", processor);
 
+		StringWriter sw = new StringWriter();
+
 		try {
 			Velocity.evaluate(
-				context, pageContext.getOut(),
-				RuntimePortletUtil.class.getName(), content);
+				context, sw, RuntimePortletUtil.class.getName(), content);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(StackTraceUtil.getStackTrace(e));
 
 			throw e;
 		}
+
+		String output = sw.toString();
+
+		Map columnsMap = processor.getColumnsMap();
+
+		Iterator itr = columnsMap.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String key = (String)entry.getKey();
+			String value = (String)entry.getValue();
+
+			output = StringUtil.replace(output, key, value);
+		}
+
+		Map portletsMap = processor.getPortletsMap();
+
+		itr = portletsMap.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			Portlet portlet = (Portlet)entry.getKey();
+			Object[] value = (Object[])entry.getValue();
+
+			String rootPortletId = (String)value[0];
+			String instanceId = (String)value[1];
+			String columnId = (String)value[2];
+			Integer columnPos = (Integer)value[3];
+			Integer columnCount = (Integer)value[4];
+
+			StringBuffer sb = new StringBuffer();
+
+			RuntimePortletUtil.processPortlet(
+				sb, ctx, req, res, null, null, rootPortletId, instanceId,
+				columnId, columnPos, columnCount);
+
+			output = StringUtil.replace(
+				output, "[$TEMPLATE_PORTLET_" + portlet.getPortletId() + "$]",
+				sb.toString());
+		}
+
+		pageContext.getOut().print(output);
 	}
 
 	public static String processXML(
