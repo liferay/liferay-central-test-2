@@ -11,6 +11,64 @@
 				[$FOLDER_ID$]
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByGroupId">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT DLFileEntry.folderId, DLFileEntry.name) AS COUNT_VALUE
+			FROM
+				DLFileEntry
+			INNER JOIN
+				DLFolder ON
+					(DLFolder.folderId = DLFileEntry.folderId)
+			WHERE
+				(DLFolder.groupId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByG_U">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT DLFileEntry.folderId, DLFileEntry.name) AS COUNT_VALUE
+			FROM
+				DLFileEntry
+			INNER JOIN
+				DLFolder ON
+					(DLFolder.folderId = DLFileEntry.folderId)
+			WHERE
+				(DLFolder.groupId = ?) AND
+				(DLFileEntry.userId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByGroupId">
+		<![CDATA[
+			SELECT
+				DISTINCT {DLFileEntry.*}
+			FROM
+				DLFileEntry
+			INNER JOIN
+				DLFolder ON
+					(DLFolder.folderId = DLFileEntry.folderId)
+			WHERE
+				(DLFolder.groupId = ?)
+			ORDER BY
+				DLFileEntry.modifiedDate DESC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByG_U">
+		<![CDATA[
+			SELECT
+				DISTINCT {DLFileEntry.*}
+			FROM
+				DLFileEntry
+			INNER JOIN
+				DLFolder ON
+					(DLFolder.folderId = DLFileEntry.folderId)
+			WHERE
+				(DLFolder.groupId = ?) AND
+				(DLFileEntry.userId = ?)
+			ORDER BY
+				DLFileEntry.modifiedDate DESC
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder.countByG_U">
 		<![CDATA[
 			SELECT

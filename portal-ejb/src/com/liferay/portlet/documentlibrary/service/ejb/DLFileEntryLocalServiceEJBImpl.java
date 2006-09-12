@@ -149,6 +149,27 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 		return getService().getFoldersFileEntriesCount(folderIds);
 	}
 
+	public java.util.List getGroupFileEntries(java.lang.String groupId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return getService().getGroupFileEntries(groupId, begin, end);
+	}
+
+	public java.util.List getGroupFileEntries(java.lang.String groupId,
+		java.lang.String userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getGroupFileEntries(groupId, userId, begin, end);
+	}
+
+	public int getGroupFileEntriesCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException {
+		return getService().getGroupFileEntriesCount(groupId);
+	}
+
+	public int getGroupFileEntriesCount(java.lang.String groupId,
+		java.lang.String userId) throws com.liferay.portal.SystemException {
+		return getService().getGroupFileEntriesCount(groupId, userId);
+	}
+
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		java.lang.String folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description)

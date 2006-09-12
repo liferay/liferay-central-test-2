@@ -103,6 +103,27 @@ public class IGImageLocalServiceEJBImpl implements IGImageLocalService,
 		return getService().getFoldersImagesCount(folderIds);
 	}
 
+	public java.util.List getGroupImages(java.lang.String groupId, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getService().getGroupImages(groupId, begin, end);
+	}
+
+	public java.util.List getGroupImages(java.lang.String groupId,
+		java.lang.String userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getGroupImages(groupId, userId, begin, end);
+	}
+
+	public int getGroupImagesCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException {
+		return getService().getGroupImagesCount(groupId);
+	}
+
+	public int getGroupImagesCount(java.lang.String groupId,
+		java.lang.String userId) throws com.liferay.portal.SystemException {
+		return getService().getGroupImagesCount(groupId, userId);
+	}
+
 	public com.liferay.portlet.imagegallery.model.IGImage getImage(
 		java.lang.String companyId, java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 

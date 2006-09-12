@@ -25,8 +25,10 @@ package com.liferay.portlet.imagegallery.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
+import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.Iterator;
 import java.util.List;
@@ -45,6 +47,18 @@ public class IGImageFinder {
 
 	public static String COUNT_BY_FOLDER_IDS =
 		IGImageFinder.class.getName() + ".countByFolderIds";
+
+	public static String COUNT_BY_GROUP_ID =
+		IGImageFinder.class.getName() + ".countByGroupId";
+
+	public static String COUNT_BY_G_U =
+		IGImageFinder.class.getName() + ".countByG_U";
+
+	public static String FIND_BY_GROUP_ID =
+		IGImageFinder.class.getName() + ".findByGroupId";
+
+	public static String FIND_BY_G_U =
+		IGImageFinder.class.getName() + ".findByG_U";
 
 	public static int countByFolderIds(List folderIds)
 		throws SystemException {
@@ -84,6 +98,147 @@ public class IGImageFinder {
 			}
 
 			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static int countByGroupId(String groupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static int countByG_U(String groupId, String userId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_G_U);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static List findByGroupId(String groupId, int begin, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_GROUP_ID);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addEntity("IGImage", IGImage.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static List findByG_U(
+			String groupId, String userId, int begin, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_U);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addEntity("IGImage", IGImage.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

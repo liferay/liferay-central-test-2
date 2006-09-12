@@ -178,6 +178,39 @@ public class BookmarksEntryLocalServiceImpl
 		return BookmarksEntryFinder.countByFolderIds(folderIds);
 	}
 
+	public List getGroupEntries(String groupId, int begin, int end)
+		throws SystemException {
+
+		return BookmarksEntryFinder.findByGroupId(groupId, begin, end);
+	}
+
+	public List getGroupEntries(
+			String groupId, String userId, int begin, int end)
+		throws SystemException {
+
+		if (Validator.isNull(userId)) {
+			return BookmarksEntryFinder.findByGroupId(groupId, begin, end);
+		}
+		else {
+			return BookmarksEntryFinder.findByG_U(groupId, userId, begin, end);
+		}
+	}
+
+	public int getGroupEntriesCount(String groupId) throws SystemException {
+		return BookmarksEntryFinder.countByGroupId(groupId);
+	}
+
+	public int getGroupEntriesCount(String groupId, String userId)
+		throws SystemException {
+
+		if (Validator.isNull(userId)) {
+			return BookmarksEntryFinder.countByGroupId(groupId);
+		}
+		else {
+			return BookmarksEntryFinder.countByG_U(groupId, userId);
+		}
+	}
+
 	public BookmarksEntry openEntry(String entryId)
 		throws PortalException, SystemException {
 

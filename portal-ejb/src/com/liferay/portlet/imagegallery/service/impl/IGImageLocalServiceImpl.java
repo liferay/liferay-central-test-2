@@ -45,6 +45,7 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.ImageUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 import com.liferay.util.dao.hibernate.OrderByComparator;
 
 import java.awt.image.BufferedImage;
@@ -191,6 +192,39 @@ public class IGImageLocalServiceImpl implements IGImageLocalService {
 		throws SystemException {
 
 		return IGImageFinder.countByFolderIds(folderIds);
+	}
+
+	public List getGroupImages(String groupId, int begin, int end)
+		throws SystemException {
+
+		return IGImageFinder.findByGroupId(groupId, begin, end);
+	}
+
+	public List getGroupImages(
+			String groupId, String userId, int begin, int end)
+		throws SystemException {
+
+		if (Validator.isNull(userId)) {
+			return IGImageFinder.findByGroupId(groupId, begin, end);
+		}
+		else {
+			return IGImageFinder.findByG_U(groupId, userId, begin, end);
+		}
+	}
+
+	public int getGroupImagesCount(String groupId) throws SystemException {
+		return IGImageFinder.countByGroupId(groupId);
+	}
+
+	public int getGroupImagesCount(String groupId, String userId)
+		throws SystemException {
+
+		if (Validator.isNull(userId)) {
+			return IGImageFinder.countByGroupId(groupId);
+		}
+		else {
+			return IGImageFinder.countByG_U(groupId, userId);
+		}
 	}
 
 	public IGImage getImage(String companyId, String imageId)

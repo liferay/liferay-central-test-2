@@ -71,8 +71,6 @@ public class MBMessageFinder {
 
 			q.setCacheable(false);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -115,8 +113,6 @@ public class MBMessageFinder {
 
 			q.setCacheable(false);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -154,8 +150,6 @@ public class MBMessageFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_GROUP_ID);
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.setCacheable(false);
 

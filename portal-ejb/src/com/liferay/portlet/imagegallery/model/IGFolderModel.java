@@ -244,6 +244,12 @@ public class IGFolderModel extends BaseModel {
 
 		IGFolder igFolder = (IGFolder)obj;
 		int value = 0;
+		value = getFolderId().compareTo(igFolder.getFolderId());
+
+		if (value != 0) {
+			return value;
+		}
+
 		value = getName().toLowerCase().compareTo(igFolder.getName()
 														  .toLowerCase());
 

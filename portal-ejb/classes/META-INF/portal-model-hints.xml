@@ -270,7 +270,6 @@
 	<model name="com.liferay.portal.model.Portlet">
 		<field name="portletId" type="String" />
 		<field name="companyId" type="String" />
-		<field name="narrow" type="boolean" />
 		<field name="roles" type="String" />
 		<field name="active" type="boolean" />
 	</model>

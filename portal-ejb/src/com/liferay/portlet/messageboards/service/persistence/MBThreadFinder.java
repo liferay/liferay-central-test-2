@@ -77,8 +77,6 @@ public class MBThreadFinder {
 
 			q.setCacheable(false);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -118,8 +116,6 @@ public class MBThreadFinder {
 			String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.setCacheable(false);
 
@@ -163,14 +159,12 @@ public class MBThreadFinder {
 
 			q.setCacheable(false);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(userId);
 			qPos.add(groupId);
+			qPos.add(userId);
 
 			Iterator itr = q.list().iterator();
 
@@ -206,8 +200,6 @@ public class MBThreadFinder {
 
 			q.setCacheable(false);
 
-			q.setCacheable(false);
-
 			q.addEntity("MBThread", MBThread.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -239,14 +231,12 @@ public class MBThreadFinder {
 
 			q.setCacheable(false);
 
-			q.setCacheable(false);
-
 			q.addEntity("MBThread", MBThread.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(userId);
 			qPos.add(groupId);
+			qPos.add(userId);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}

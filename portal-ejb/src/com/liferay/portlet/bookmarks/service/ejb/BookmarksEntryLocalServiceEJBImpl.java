@@ -119,6 +119,27 @@ public class BookmarksEntryLocalServiceEJBImpl
 		return getService().getFoldersEntriesCount(folderIds);
 	}
 
+	public java.util.List getGroupEntries(java.lang.String groupId, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getService().getGroupEntries(groupId, begin, end);
+	}
+
+	public java.util.List getGroupEntries(java.lang.String groupId,
+		java.lang.String userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getGroupEntries(groupId, userId, begin, end);
+	}
+
+	public int getGroupEntriesCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException {
+		return getService().getGroupEntriesCount(groupId);
+	}
+
+	public int getGroupEntriesCount(java.lang.String groupId,
+		java.lang.String userId) throws com.liferay.portal.SystemException {
+		return getService().getGroupEntriesCount(groupId, userId);
+	}
+
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry openEntry(
 		java.lang.String entryId)
 		throws com.liferay.portal.PortalException, 

@@ -28,6 +28,13 @@
 		<column name="size" type="int" />
 		<column name="readCount" type="int" />
 
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="folderId" />
+			<order-column name="name" />
+		</order>
+
 		<!-- Finder methods -->
 
 		<finder name="FolderId" return-type="Collection">

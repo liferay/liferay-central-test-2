@@ -40,6 +40,8 @@ MBCategoryLocalServiceUtil.getSubcategoryIds(categoryIds, portletGroupId, catego
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
+portletURL.setWindowState(WindowState.MAXIMIZED);
+
 portletURL.setParameter("struts_action", "/message_boards/view");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);

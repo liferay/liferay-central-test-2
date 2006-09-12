@@ -184,6 +184,7 @@ public class IGFolderPersistence extends BasePersistence {
 
 			query.append(" ");
 			query.append("ORDER BY ");
+			query.append("folderId ASC").append(", ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
@@ -235,6 +236,7 @@ public class IGFolderPersistence extends BasePersistence {
 			}
 			else {
 				query.append("ORDER BY ");
+				query.append("folderId ASC").append(", ");
 				query.append("name ASC");
 			}
 
@@ -320,6 +322,7 @@ public class IGFolderPersistence extends BasePersistence {
 			}
 			else {
 				query.append("ORDER BY ");
+				query.append("folderId ASC").append(", ");
 				query.append("name ASC");
 			}
 
@@ -377,6 +380,7 @@ public class IGFolderPersistence extends BasePersistence {
 
 			query.append(" ");
 			query.append("ORDER BY ");
+			query.append("folderId ASC").append(", ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
@@ -441,6 +445,7 @@ public class IGFolderPersistence extends BasePersistence {
 			}
 			else {
 				query.append("ORDER BY ");
+				query.append("folderId ASC").append(", ");
 				query.append("name ASC");
 			}
 
@@ -545,6 +550,7 @@ public class IGFolderPersistence extends BasePersistence {
 			}
 			else {
 				query.append("ORDER BY ");
+				query.append("folderId ASC").append(", ");
 				query.append("name ASC");
 			}
 
@@ -587,6 +593,7 @@ public class IGFolderPersistence extends BasePersistence {
 			query.append(
 				"FROM com.liferay.portlet.imagegallery.model.IGFolder ");
 			query.append("ORDER BY ");
+			query.append("folderId ASC").append(", ");
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());

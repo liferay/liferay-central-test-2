@@ -29,6 +29,7 @@
 		<!-- Order -->
 
 		<order by="asc">
+			<order-column name="folderId" />
 			<order-column name="name" case-sensitive="false" />
 		</order>
 

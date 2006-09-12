@@ -99,20 +99,6 @@ public class PortletModel extends BaseModel {
 		}
 	}
 
-	public boolean getNarrow() {
-		return _narrow;
-	}
-
-	public boolean isNarrow() {
-		return _narrow;
-	}
-
-	public void setNarrow(boolean narrow) {
-		if (narrow != _narrow) {
-			_narrow = narrow;
-		}
-	}
-
 	public String getRoles() {
 		return GetterUtil.getString(_roles);
 	}
@@ -147,7 +133,6 @@ public class PortletModel extends BaseModel {
 		Portlet clone = new Portlet();
 		clone.setPortletId(getPortletId());
 		clone.setCompanyId(getCompanyId());
-		clone.setNarrow(getNarrow());
 		clone.setRoles(getRoles());
 		clone.setActive(getActive());
 
@@ -195,7 +180,6 @@ public class PortletModel extends BaseModel {
 
 	private String _portletId;
 	private String _companyId;
-	private boolean _narrow;
 	private String _roles;
 	private boolean _active;
 }

@@ -154,6 +154,36 @@ public class DLFileEntryLocalServiceUtil {
 		return dlFileEntryLocalService.getFoldersFileEntriesCount(folderIds);
 	}
 
+	public static java.util.List getGroupFileEntries(java.lang.String groupId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getGroupFileEntries(groupId, begin, end);
+	}
+
+	public static java.util.List getGroupFileEntries(java.lang.String groupId,
+		java.lang.String userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getGroupFileEntries(groupId, userId,
+			begin, end);
+	}
+
+	public static int getGroupFileEntriesCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getGroupFileEntriesCount(groupId);
+	}
+
+	public static int getGroupFileEntriesCount(java.lang.String groupId,
+		java.lang.String userId) throws com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getGroupFileEntriesCount(groupId, userId);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		java.lang.String folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description)

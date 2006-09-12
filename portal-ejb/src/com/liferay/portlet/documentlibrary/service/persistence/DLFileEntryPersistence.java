@@ -185,6 +185,9 @@ public class DLFileEntryPersistence extends BasePersistence {
 			}
 
 			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("folderId DESC").append(", ");
+			query.append("name DESC");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
@@ -232,6 +235,11 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			if (obc != null) {
 				query.append("ORDER BY " + obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("folderId DESC").append(", ");
+				query.append("name DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -314,6 +322,11 @@ public class DLFileEntryPersistence extends BasePersistence {
 			if (obc != null) {
 				query.append("ORDER BY " + obc.getOrderBy());
 			}
+			else {
+				query.append("ORDER BY ");
+				query.append("folderId DESC").append(", ");
+				query.append("name DESC");
+			}
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
@@ -350,6 +363,9 @@ public class DLFileEntryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry ");
+			query.append("ORDER BY ");
+			query.append("folderId DESC").append(", ");
+			query.append("name DESC");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);

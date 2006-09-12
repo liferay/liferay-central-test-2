@@ -11,4 +11,62 @@
 				[$FOLDER_ID$]
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.imagegallery.service.persistence.IGImageFinder.countByGroupId">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT IGImage.imageId) AS COUNT_VALUE
+			FROM
+				IGImage
+			INNER JOIN
+				IGFolder ON
+					(IGFolder.folderId = IGImage.folderId)
+			WHERE
+				(IGFolder.groupId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.imagegallery.service.persistence.IGImageFinder.countByG_U">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT IGImage.imageId) AS COUNT_VALUE
+			FROM
+				IGImage
+			INNER JOIN
+				IGFolder ON
+					(IGFolder.folderId = IGImage.folderId)
+			WHERE
+				(IGFolder.groupId = ?) AND
+				(IGImage.userId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.imagegallery.service.persistence.IGImageFinder.findByGroupId">
+		<![CDATA[
+			SELECT
+				DISTINCT {IGImage.*}
+			FROM
+				IGImage
+			INNER JOIN
+				IGFolder ON
+					(IGFolder.folderId = IGImage.folderId)
+			WHERE
+				(IGFolder.groupId = ?)
+			ORDER BY
+				IGImage.modifiedDate DESC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.imagegallery.service.persistence.IGImageFinder.findByG_U">
+		<![CDATA[
+			SELECT
+				DISTINCT {IGImage.*}
+			FROM
+				IGImage
+			INNER JOIN
+				IGFolder ON
+					(IGFolder.folderId = IGImage.folderId)
+			WHERE
+				(IGFolder.groupId = ?) AND
+				(IGImage.userId = ?)
+			ORDER BY
+				IGImage.modifiedDate DESC
+		]]>
+	</sql>
 </custom-sql>

@@ -309,6 +309,39 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		return DLFileEntryFinder.countByFolderIds(folderIds);
 	}
 
+	public List getGroupFileEntries(String groupId, int begin, int end)
+		throws SystemException {
+
+		return DLFileEntryFinder.findByGroupId(groupId, begin, end);
+	}
+
+	public List getGroupFileEntries(
+			String groupId, String userId, int begin, int end)
+		throws SystemException {
+
+		if (Validator.isNull(userId)) {
+			return DLFileEntryFinder.findByGroupId(groupId, begin, end);
+		}
+		else {
+			return DLFileEntryFinder.findByG_U(groupId, userId, begin, end);
+		}
+	}
+
+	public int getGroupFileEntriesCount(String groupId) throws SystemException {
+		return DLFileEntryFinder.countByGroupId(groupId);
+	}
+
+	public int getGroupFileEntriesCount(String groupId, String userId)
+		throws SystemException {
+
+		if (Validator.isNull(userId)) {
+			return DLFileEntryFinder.countByGroupId(groupId);
+		}
+		else {
+			return DLFileEntryFinder.countByG_U(groupId, userId);
+		}
+	}
+
 	public DLFileEntry updateFileEntry(
 			String folderId, String name, String title, String description)
 		throws PortalException, SystemException {

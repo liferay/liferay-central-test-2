@@ -66,6 +66,19 @@ public interface IGImageLocalService {
 	public int getFoldersImagesCount(java.util.List folderIds)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getGroupImages(java.lang.String groupId, int begin,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List getGroupImages(java.lang.String groupId,
+		java.lang.String userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public int getGroupImagesCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException;
+
+	public int getGroupImagesCount(java.lang.String groupId,
+		java.lang.String userId) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.imagegallery.model.IGImage getImage(
 		java.lang.String companyId, java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 

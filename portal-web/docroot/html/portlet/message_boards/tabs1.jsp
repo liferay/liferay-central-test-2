@@ -27,6 +27,8 @@
 <%
 PortletURL tabs1URL = renderResponse.createRenderURL();
 
+tabs1URL.setWindowState(WindowState.MAXIMIZED);
+
 tabs1URL.setParameter("struts_action", "/message_boards/view");
 
 String tabs1Names = "categories,recent-posts,statistics";

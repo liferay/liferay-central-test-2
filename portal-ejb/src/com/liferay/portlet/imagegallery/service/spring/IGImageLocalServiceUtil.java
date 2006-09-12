@@ -93,6 +93,35 @@ public class IGImageLocalServiceUtil {
 		return igImageLocalService.getFoldersImagesCount(folderIds);
 	}
 
+	public static java.util.List getGroupImages(java.lang.String groupId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.getGroupImages(groupId, begin, end);
+	}
+
+	public static java.util.List getGroupImages(java.lang.String groupId,
+		java.lang.String userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.getGroupImages(groupId, userId, begin, end);
+	}
+
+	public static int getGroupImagesCount(java.lang.String groupId)
+		throws com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.getGroupImagesCount(groupId);
+	}
+
+	public static int getGroupImagesCount(java.lang.String groupId,
+		java.lang.String userId) throws com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.getGroupImagesCount(groupId, userId);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage getImage(
 		java.lang.String companyId, java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
