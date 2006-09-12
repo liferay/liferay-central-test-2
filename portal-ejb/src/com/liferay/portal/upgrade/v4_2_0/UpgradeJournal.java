@@ -22,13 +22,9 @@
 
 package com.liferay.portal.upgrade.v4_2_0;
 
-import com.liferay.portal.model.Company;
-import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceUtil;
-
-import java.util.Iterator;
+import com.liferay.portal.util.PropsUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -53,14 +49,7 @@ public class UpgradeJournal extends UpgradeProcess {
 	}
 
 	private void _upgradeJournalContentSearch() throws Exception {
-		Iterator itr = CompanyLocalServiceUtil.getCompanies().iterator();
-
-		while (itr.hasNext()) {
-			Company company = (Company)itr.next();
-
-			JournalContentSearchLocalServiceUtil.checkContentSearches(
-				company.getCompanyId());
-		}
+		PropsUtil.set(PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP, "true");
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeJournal.class);
