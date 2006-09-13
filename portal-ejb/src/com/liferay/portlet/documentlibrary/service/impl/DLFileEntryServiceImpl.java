@@ -154,43 +154,8 @@ public class DLFileEntryServiceImpl
 	}
 
 	public DLFileEntry updateFileEntry(
-			String folderId, String name, String title, String description)
-		throws PortalException, RemoteException, SystemException {
-
-		User user = getUser();
-
-		DLFileEntryPermission.check(
-			getPermissionChecker(), folderId, name, ActionKeys.UPDATE);
-
-		DLFileEntryPK pk = new DLFileEntryPK(folderId, name);
-
-		boolean alreadyHasLock = LockServiceUtil.hasLock(
-			DLFileEntry.class.getName(), pk, user.getUserId());
-
-		if (!alreadyHasLock) {
-
-			// Lock
-
-			LockServiceUtil.lock(
-				DLFileEntry.class.getName(), pk, user.getCompanyId(),
-				user.getUserId(), DLFileEntry.LOCK_EXPIRATION_TIME);
-		}
-
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.updateFileEntry(
-			folderId, name, title, description);
-
-		if (!alreadyHasLock) {
-
-			// Unlock
-
-			LockServiceUtil.unlock(DLFileEntry.class.getName(), pk);
-		}
-
-		return fileEntry;
-	}
-
-	public DLFileEntry updateFileEntry(
-			String folderId, String name, String sourceFileName,
+			String folderId, String newFolderId, String name,
+			String sourceFileName, String title, String description,
 			byte[] byteArray)
 		throws PortalException, RemoteException, SystemException {
 
@@ -214,7 +179,8 @@ public class DLFileEntryServiceImpl
 		}
 
 		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.updateFileEntry(
-			getUserId(), folderId, name, sourceFileName, byteArray);
+			getUserId(), folderId, newFolderId, name, sourceFileName, title,
+			description, byteArray);
 
 		if (!alreadyHasLock) {
 

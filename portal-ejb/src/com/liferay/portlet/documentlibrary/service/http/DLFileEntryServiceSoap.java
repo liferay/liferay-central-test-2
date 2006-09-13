@@ -122,29 +122,14 @@ public class DLFileEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntryModel updateFileEntry(
-		java.lang.String folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description)
+		java.lang.String folderId, java.lang.String newFolderId,
+		java.lang.String name, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description, byte[] byteArray)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.updateFileEntry(folderId,
-					name, title, description);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntryModel updateFileEntry(
-		java.lang.String folderId, java.lang.String name,
-		java.lang.String sourceFileName, byte[] byteArray)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.updateFileEntry(folderId,
-					name, sourceFileName, byteArray);
+					newFolderId, name, sourceFileName, title, description,
+					byteArray);
 
 			return returnValue;
 		}

@@ -145,4 +145,16 @@ public class DLServiceUtil {
 			versionNumber, sourceFileName, byteArray);
 	}
 
+	public static void updateFile(
+			String companyId, String portletId, String groupId,
+			String repositoryId, String newRepositoryId, String fileName)
+		throws PortalException, RemoteException, SystemException {
+
+		DLService dlService = DLServiceFactory.getService();
+
+		dlService.updateFile(
+			companyId, portletId, groupId, repositoryId, newRepositoryId,
+			fileName);
+	}
+
 }

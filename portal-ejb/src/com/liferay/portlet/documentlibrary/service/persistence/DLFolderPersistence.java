@@ -183,6 +183,9 @@ public class DLFolderPersistence extends BasePersistence {
 			}
 
 			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("parentFolderId ASC").append(", ");
+			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
@@ -230,6 +233,11 @@ public class DLFolderPersistence extends BasePersistence {
 
 			if (obc != null) {
 				query.append("ORDER BY " + obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("parentFolderId ASC").append(", ");
+				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -312,6 +320,11 @@ public class DLFolderPersistence extends BasePersistence {
 			if (obc != null) {
 				query.append("ORDER BY " + obc.getOrderBy());
 			}
+			else {
+				query.append("ORDER BY ");
+				query.append("parentFolderId ASC").append(", ");
+				query.append("name ASC");
+			}
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
@@ -356,6 +369,9 @@ public class DLFolderPersistence extends BasePersistence {
 			}
 
 			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("parentFolderId ASC").append(", ");
+			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
@@ -403,6 +419,11 @@ public class DLFolderPersistence extends BasePersistence {
 
 			if (obc != null) {
 				query.append("ORDER BY " + obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("parentFolderId ASC").append(", ");
+				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -485,6 +506,11 @@ public class DLFolderPersistence extends BasePersistence {
 			if (obc != null) {
 				query.append("ORDER BY " + obc.getOrderBy());
 			}
+			else {
+				query.append("ORDER BY ");
+				query.append("parentFolderId ASC").append(", ");
+				query.append("name ASC");
+			}
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
@@ -539,6 +565,9 @@ public class DLFolderPersistence extends BasePersistence {
 			}
 
 			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("parentFolderId ASC").append(", ");
+			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
@@ -599,6 +628,11 @@ public class DLFolderPersistence extends BasePersistence {
 
 			if (obc != null) {
 				query.append("ORDER BY " + obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("parentFolderId ASC").append(", ");
+				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -700,6 +734,11 @@ public class DLFolderPersistence extends BasePersistence {
 			if (obc != null) {
 				query.append("ORDER BY " + obc.getOrderBy());
 			}
+			else {
+				query.append("ORDER BY ");
+				query.append("parentFolderId ASC").append(", ");
+				query.append("name ASC");
+			}
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
@@ -782,6 +821,9 @@ public class DLFolderPersistence extends BasePersistence {
 			}
 
 			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("parentFolderId ASC").append(", ");
+			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
@@ -823,6 +865,9 @@ public class DLFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder ");
+			query.append("ORDER BY ");
+			query.append("parentFolderId ASC").append(", ");
+			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);

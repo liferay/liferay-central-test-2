@@ -701,6 +701,7 @@ displaying-content=내용을 보임
 dns-lookup=DNS 검사
 do-not-repeat-this-event=이 사건을 반복하지 말라.
 do-not-send-a-reminder=신호를 보내지 말라
+document-extensions-does-not-match=문서 연장은 어울리지 않는다.
 document-name=문서 이름
 document-names-must-end-with-one-of-the-following-extensions=문서 이름은 뒤에 오는 연장의 하나개에 끝내야 한다:
 document-path=문서 경로

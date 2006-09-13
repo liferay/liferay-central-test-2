@@ -701,6 +701,7 @@ displaying-content=Anzeigen Des Inhalts
 dns-lookup=DNS Suche
 do-not-repeat-this-event=Dieses Ereignis nicht wiederholen
 do-not-send-a-reminder=Keine Erninnerung verschicken
+document-extensions-does-not-match=Dokumentverlängerungen paßt nicht zusammen.
 document-name=Dokument Name
 document-names-must-end-with-one-of-the-following-extensions=Dokumentnamen müssen mit einer der folgenden Erweiterungen enden:
 document-path=Dokument Pfad

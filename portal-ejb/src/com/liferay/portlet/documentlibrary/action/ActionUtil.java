@@ -25,6 +25,7 @@ package com.liferay.portlet.documentlibrary.action;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.RenderRequestImpl;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryServiceUtil;
@@ -61,12 +62,23 @@ public class ActionUtil {
 
 	public static void getFileEntry(HttpServletRequest req) throws Exception {
 		String folderId = ParamUtil.getString(req, "folderId");
+		String newFolderId = ParamUtil.getString(req, "newFolderId");
 		String name = ParamUtil.getString(req, "name");
 
 		DLFileEntry fileEntry = null;
 
 		if (Validator.isNotNull(folderId) && Validator.isNotNull(name)) {
-			fileEntry = DLFileEntryServiceUtil.getFileEntry(folderId, name);
+			try {
+				fileEntry = DLFileEntryServiceUtil.getFileEntry(folderId, name);
+			}
+			catch (NoSuchFileEntryException nsfe) {
+
+				// This only happens when you're moving a file to a different
+				// folder
+
+				fileEntry = DLFileEntryServiceUtil.getFileEntry(
+					newFolderId, name);
+			}
 		}
 
 		req.setAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, fileEntry);

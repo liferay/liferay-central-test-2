@@ -59,14 +59,9 @@ public interface DLFileEntryService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		java.lang.String folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		java.lang.String folderId, java.lang.String name,
-		java.lang.String sourceFileName, byte[] byteArray)
+		java.lang.String folderId, java.lang.String newFolderId,
+		java.lang.String name, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description, byte[] byteArray)
 		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
 			com.liferay.portal.SystemException;
 }

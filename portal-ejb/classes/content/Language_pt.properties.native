@@ -701,6 +701,7 @@ displaying-content=Indicando O Índice
 dns-lookup=Lookup do Dns
 do-not-repeat-this-event=Não repita este evento.
 do-not-send-a-reminder=Não emita um lembrete
+document-extensions-does-not-match=As extensões do original não combinam.
 document-name=Nome do original
 document-names-must-end-with-one-of-the-following-extensions=Os nomes do original devem terminar com uma das seguintes extensões:
 document-path=Trajeto De Original

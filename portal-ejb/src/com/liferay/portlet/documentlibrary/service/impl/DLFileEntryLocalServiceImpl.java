@@ -23,6 +23,7 @@
 package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.service.spring.DLLocalServiceUtil;
 import com.liferay.documentlibrary.service.spring.DLServiceUtil;
@@ -82,6 +83,10 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 			title = name;
 		}
 
+		if ((byteArray == null) || (byteArray.length == 0)) {
+			throw new FileSizeException();
+		}
+
 		try {
 			DLLocalServiceUtil.getFileContentNode(
 				user.getCompanyId(), folderId, name, 0);
@@ -91,9 +96,8 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		catch (NoSuchFileException nsfe) {
 		}
 
-		DLFileEntryPK pk = new DLFileEntryPK(folderId, name);
-
-		DLFileEntry fileEntry = DLFileEntryUtil.create(pk);
+		DLFileEntry fileEntry = DLFileEntryUtil.create(
+			new DLFileEntryPK(folderId, name));
 
 		fileEntry.setCompanyId(user.getCompanyId());
 		fileEntry.setUserId(user.getUserId());
@@ -261,9 +265,8 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 				folder.getGroupId(), companyId, userId, folderId, name);
 		}
 
-		DLFileEntryPK pk = new DLFileEntryPK(folderId, name);
-
-		DLFileEntry fileEntry = DLFileEntryUtil.findByPrimaryKey(pk);
+		DLFileEntry fileEntry = DLFileEntryUtil.findByPrimaryKey(
+			new DLFileEntryPK(folderId, name));
 
 		fileEntry.setReadCount(fileEntry.getReadCount() + 1);
 
@@ -282,11 +285,8 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 	public DLFileEntry getFileEntry(String folderId, String name)
 		throws PortalException, SystemException {
 
-		DLFileEntryPK pk = new DLFileEntryPK(folderId, name);
-
-		DLFileEntry fileEntry = DLFileEntryUtil.findByPrimaryKey(pk);
-
-		return fileEntry;
+		return DLFileEntryUtil.findByPrimaryKey(
+			new DLFileEntryPK(folderId, name));
 	}
 
 	public List getFileEntries(String folderId) throws SystemException {
@@ -343,27 +343,8 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 	}
 
 	public DLFileEntry updateFileEntry(
-			String folderId, String name, String title, String description)
-		throws PortalException, SystemException {
-
-		if (Validator.isNull(title)) {
-			title = name;
-		}
-
-		DLFileEntryPK pk = new DLFileEntryPK(folderId, name);
-
-		DLFileEntry fileEntry = DLFileEntryUtil.findByPrimaryKey(pk);
-
-		fileEntry.setTitle(title);
-		fileEntry.setDescription(description);
-
-		DLFileEntryUtil.update(fileEntry);
-
-		return fileEntry;
-	}
-
-	public DLFileEntry updateFileEntry(
-			String userId, String folderId, String name, String sourceFileName,
+			String userId, String folderId, String newFolderId, String name,
+			String sourceFileName, String title, String description,
 			byte[] byteArray)
 		throws PortalException, SystemException {
 
@@ -372,14 +353,100 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		User user = UserUtil.findByPrimaryKey(userId);
 		DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
 
-		DLFileEntryPK pk = new DLFileEntryPK(folderId, name);
+		if (Validator.isNull(title)) {
+			title = name;
+		}
 
-		DLFileEntry fileEntry = DLFileEntryUtil.findByPrimaryKey(pk);
+		DLFileEntry fileEntry = DLFileEntryUtil.findByPrimaryKey(
+			new DLFileEntryPK(folderId, name));
+
+		fileEntry.setTitle(title);
+		fileEntry.setDescription(description);
+
+		DLFileEntryUtil.update(fileEntry);
+
+		// Move file entry
+
+		if (Validator.isNotNull(newFolderId) && !folderId.equals(newFolderId)) {
+			DLFolder newFolder = DLFolderUtil.findByPrimaryKey(newFolderId);
+
+			if (!folder.getGroupId().equals(newFolder.getGroupId())) {
+				throw new NoSuchFolderException();
+			}
+
+			try {
+				DLLocalServiceUtil.getFileContentNode(
+					user.getCompanyId(), newFolderId, name, 0);
+
+				throw new DuplicateFileException(name);
+			}
+			catch (NoSuchFileException nsfe) {
+			}
+
+			DLFileEntry newFileEntry = DLFileEntryUtil.create(
+				new DLFileEntryPK(newFolderId, name));
+
+			newFileEntry.setCompanyId(fileEntry.getCompanyId());
+			newFileEntry.setUserId(fileEntry.getUserId());
+			newFileEntry.setUserName(fileEntry.getUserName());
+			newFileEntry.setVersionUserId(fileEntry.getVersionUserId());
+			newFileEntry.setVersionUserName(fileEntry.getVersionUserName());
+			newFileEntry.setCreateDate(fileEntry.getCreateDate());
+			newFileEntry.setModifiedDate(fileEntry.getModifiedDate());
+			newFileEntry.setTitle(fileEntry.getTitle());
+			newFileEntry.setDescription(fileEntry.getDescription());
+			newFileEntry.setVersion(fileEntry.getVersion());
+			newFileEntry.setSize(fileEntry.getSize());
+			newFileEntry.setReadCount(fileEntry.getReadCount());
+
+			DLFileEntryUtil.update(newFileEntry);
+
+			DLFileEntryUtil.remove(fileEntry);
+
+			fileEntry = newFileEntry;
+
+			Iterator itr = DLFileVersionUtil.findByF_N(
+				folderId, name).iterator();
+
+			while (itr.hasNext()) {
+				DLFileVersion fileVersion = (DLFileVersion)itr.next();
+
+				DLFileVersion newFileVersion = DLFileVersionUtil.create(
+					new DLFileVersionPK(
+						newFolderId, name, fileVersion.getVersion()));
+
+				newFileVersion.setCompanyId(fileVersion.getCompanyId());
+				newFileVersion.setUserId(fileVersion.getUserId());
+				newFileVersion.setUserName(fileVersion.getUserName());
+				newFileVersion.setCreateDate(fileVersion.getCreateDate());
+				newFileVersion.setSize(fileVersion.getSize());
+
+				DLFileVersionUtil.update(newFileVersion);
+
+				DLFileVersionUtil.remove(fileVersion);
+			}
+
+			try {
+				DLServiceUtil.updateFile(
+					user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+					folder.getGroupId(), folderId, newFolderId, name);
+			}
+			catch (RemoteException re) {
+				throw new SystemException(re);
+			}
+
+			folderId = newFolderId;
+			folder = newFolder;
+		}
+
+		// File version
+
+		if ((byteArray == null) || (byteArray.length == 0)) {
+			return fileEntry;
+		}
 
 		double oldVersion = fileEntry.getVersion();
 		double newVersion = MathUtil.format(oldVersion + 0.1, 1, 1);
-
-		// File version
 
 		DLFileVersion fileVersion = DLFileVersionUtil.create(
 			new DLFileVersionPK(folderId, name, oldVersion));

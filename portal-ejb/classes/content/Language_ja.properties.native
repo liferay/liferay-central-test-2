@@ -700,6 +700,7 @@ displaying-content=内容の表示
 dns-lookup=Dns 調べ
 do-not-repeat-this-event=このでき事を繰り返してはいけない。
 do-not-send-a-reminder=メモを送ってはいけない
+document-extensions-does-not-match=文書延長は一致しない。
 document-name=文書の名前
 document-names-must-end-with-one-of-the-following-extensions=文書の名前は次の延長の1 つと終わらなければならない:
 document-path=文書道

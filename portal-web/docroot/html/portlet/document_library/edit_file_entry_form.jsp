@@ -68,11 +68,11 @@ if (fileEntry != null) {
 	}
 
 	function <portlet:namespace />selectFolder(folderId, folderName) {
-		document.<portlet:namespace />fm.<portlet:namespace />folderId.value = folderId;
+		document.<portlet:namespace />fm.<portlet:namespace />newFolderId.value = folderId;
 
 		var nameEl = document.getElementById("<portlet:namespace />folderName");
 
-		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId;
+		nameEl.href = "javascript: parent.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId + "'; void('');";
 		nameEl.innerHTML = folderName + "&nbsp;";
 	}
 </script>
@@ -80,9 +80,9 @@ if (fileEntry != null) {
 <form action="<portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFileEntry(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<%--<input name="<portlet:namespace />fileEntryRedirect" type="hidden" value="<%= portletURL.toString() %>">--%>
 <input name="<portlet:namespace />uploadProgressId" type="hidden" value="<%= uploadProgressId %>">
 <input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>">
+<input name="<portlet:namespace />newFolderId" type="hidden" value="">
 <input name="<portlet:namespace />name" type="hidden" value="<%= name %>">
 
 <liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-document-name" />
@@ -97,12 +97,7 @@ if (fileEntry != null) {
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= SourceFileNameException.class %>">
-
-	<%
-	String[] fileExtensions = PropsUtil.getArray(PropsUtil.DL_FILE_EXTENSIONS);
-	%>
-
-	<%= LanguageUtil.get(pageContext, "document-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(fileExtensions, ", ") %>.
+	<%= LanguageUtil.get(pageContext, "document-extensions-does-not-match") %>
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
@@ -119,7 +114,7 @@ String fileMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(PropsU
 
 <table border="0" cellpadding="0" cellspacing="0">
 
-<%--<c:if test="<%= fileEntry != null %>">
+<c:if test="<%= fileEntry != null %>">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "folder") %>
@@ -131,11 +126,11 @@ String fileMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(PropsU
 			DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
 			%>
 
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>" id="<portlet:namespace />folderName">
+			<a href="javascript: parent.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/view" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>'; void('');" id="<portlet:namespace />folderName">
 			<%= folder.getName() %>
 			</a>
 
-			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/select_folder" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
+			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_folder" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
 		</td>
 	</tr>
 	<tr>
@@ -143,7 +138,7 @@ String fileMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(PropsU
 			<br>
 		</td>
 	</tr>
-</c:if>--%>
+</c:if>
 
 <tr>
 	<td>

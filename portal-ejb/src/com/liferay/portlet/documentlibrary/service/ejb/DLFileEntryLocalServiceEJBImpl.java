@@ -171,20 +171,14 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		java.lang.String folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		return getService().updateFileEntry(folderId, name, title, description);
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		java.lang.String userId, java.lang.String folderId,
-		java.lang.String name, java.lang.String sourceFileName, byte[] byteArray)
+		java.lang.String newFolderId, java.lang.String name,
+		java.lang.String sourceFileName, java.lang.String title,
+		java.lang.String description, byte[] byteArray)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateFileEntry(userId, folderId, name,
-			sourceFileName, byteArray);
+		return getService().updateFileEntry(userId, folderId, newFolderId,
+			name, sourceFileName, title, description, byteArray);
 	}
 
 	public void ejbCreate() throws CreateException {

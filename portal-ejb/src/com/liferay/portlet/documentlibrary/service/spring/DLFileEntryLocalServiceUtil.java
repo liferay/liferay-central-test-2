@@ -185,24 +185,15 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		java.lang.String folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
-
-		return dlFileEntryLocalService.updateFileEntry(folderId, name, title,
-			description);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		java.lang.String userId, java.lang.String folderId,
-		java.lang.String name, java.lang.String sourceFileName, byte[] byteArray)
+		java.lang.String newFolderId, java.lang.String name,
+		java.lang.String sourceFileName, java.lang.String title,
+		java.lang.String description, byte[] byteArray)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-		return dlFileEntryLocalService.updateFileEntry(userId, folderId, name,
-			sourceFileName, byteArray);
+		return dlFileEntryLocalService.updateFileEntry(userId, folderId,
+			newFolderId, name, sourceFileName, title, description, byteArray);
 	}
 }

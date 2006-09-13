@@ -101,24 +101,15 @@ public class DLFileEntryServiceEJBImpl implements DLFileEntryService,
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		java.lang.String folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description)
+		java.lang.String folderId, java.lang.String newFolderId,
+		java.lang.String name, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description, byte[] byteArray)
 		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
 			com.liferay.portal.SystemException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateFileEntry(folderId, name, title, description);
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		java.lang.String folderId, java.lang.String name,
-		java.lang.String sourceFileName, byte[] byteArray)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
-			com.liferay.portal.SystemException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().updateFileEntry(folderId, name, sourceFileName,
-			byteArray);
+		return getService().updateFileEntry(folderId, newFolderId, name,
+			sourceFileName, title, description, byteArray);
 	}
 
 	public void ejbCreate() throws CreateException {

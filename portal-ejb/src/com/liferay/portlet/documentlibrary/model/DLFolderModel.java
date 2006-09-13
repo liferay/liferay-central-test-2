@@ -278,9 +278,21 @@ public class DLFolderModel extends BaseModel {
 		}
 
 		DLFolder dlFolder = (DLFolder)obj;
-		String pk = dlFolder.getPrimaryKey();
+		int value = 0;
+		value = getParentFolderId().compareTo(dlFolder.getParentFolderId());
 
-		return getPrimaryKey().compareTo(pk);
+		if (value != 0) {
+			return value;
+		}
+
+		value = getName().toLowerCase().compareTo(dlFolder.getName()
+														  .toLowerCase());
+
+		if (value != 0) {
+			return value;
+		}
+
+		return 0;
 	}
 
 	public boolean equals(Object obj) {

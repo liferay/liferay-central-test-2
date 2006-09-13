@@ -84,4 +84,9 @@ public interface DLService {
 			String sourceFileName, byte[] byteArray)
 		throws PortalException, RemoteException, SystemException;
 
+	public void updateFile(
+			String companyId, String portletId, String groupId,
+			String repositoryId, String newRepositoryId, String fileName)
+		throws PortalException, RemoteException, SystemException;
+
 }

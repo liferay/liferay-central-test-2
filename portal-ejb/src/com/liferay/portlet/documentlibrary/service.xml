@@ -145,6 +145,13 @@
 		<column name="description" type="String" />
 		<column name="lastPostDate" type="Date" />
 
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="parentFolderId" />
+			<order-column name="name" case-sensitive="false" />
+		</order>
+
 		<!-- Finder methods -->
 
 		<finder name="GroupId" return-type="Collection">

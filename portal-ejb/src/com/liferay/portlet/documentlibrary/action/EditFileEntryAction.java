@@ -173,57 +173,36 @@ public class EditFileEntryAction extends PortletAction {
 		String cmd = ParamUtil.getString(uploadReq, Constants.CMD);
 
 		String folderId = ParamUtil.getString(uploadReq, "folderId");
+		String newFolderId = ParamUtil.getString(uploadReq, "newFolderId");
+		String name = ParamUtil.getString(uploadReq, "name");
+		String sourceFileName = uploadReq.getFileName("file");
 
 		String title = ParamUtil.getString(uploadReq, "title");
 		String description = ParamUtil.getString(uploadReq, "description");
 
 		byte[] byteArray = FileUtil.getBytes(uploadReq.getFile("file"));
 
-		//String redirect = ParamUtil.getString(uploadReq, "fileEntryRedirect");
+		boolean addCommunityPermissions = ParamUtil.getBoolean(
+			uploadReq, "addCommunityPermissions");
+		boolean addGuestPermissions = ParamUtil.getBoolean(
+			uploadReq, "addGuestPermissions");
 
 		if (cmd.equals(Constants.ADD)) {
 
 			// Add file entry
 
-			String fileName = uploadReq.getFileName("file");
-
-			if (byteArray == null || byteArray.length == 0) {
-				throw new FileSizeException();
-			}
-
-			boolean addCommunityPermissions = ParamUtil.getBoolean(
-				uploadReq, "addCommunityPermissions");
-			boolean addGuestPermissions = ParamUtil.getBoolean(
-				uploadReq, "addGuestPermissions");
-
 			DLFileEntryServiceUtil.addFileEntry(
-				folderId, fileName, title, description, byteArray,
+				folderId, sourceFileName, title, description, byteArray,
 				addCommunityPermissions, addGuestPermissions);
-
-			//redirect += Http.encodeURL(fileName);
 		}
 		else {
-			String name = ParamUtil.getString(uploadReq, "name");
 
-			if (byteArray == null || byteArray.length == 0) {
+			// Update file entry
 
-				// Update file entry
-
-				DLFileEntryServiceUtil.updateFileEntry(
-					folderId, name, title, description);
-			}
-			else {
-
-				// Update file version
-
-				String sourceFileName = uploadReq.getFileName("file");
-
-				DLFileEntryServiceUtil.updateFileEntry(
-					folderId, name, sourceFileName, byteArray);
-			}
+			DLFileEntryServiceUtil.updateFileEntry(
+				folderId, newFolderId, name, sourceFileName, title, description,
+				byteArray);
 		}
-
-		//res.sendRedirect(redirect);
 	}
 
 }

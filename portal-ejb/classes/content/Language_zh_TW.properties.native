@@ -701,6 +701,7 @@ displaying-content=顯示內容
 dns-lookup=DNS 查詢
 do-not-repeat-this-event=不要重覆這次事項。
 do-not-send-a-reminder=不要送一個提示
+document-extensions-does-not-match=文件引伸不匹配。
 document-name=文件名字
 document-names-must-end-with-one-of-the-following-extensions=文件名稱必須以以下引伸的當中一個結束:
 document-path=文件路徑
