@@ -74,10 +74,6 @@ public class MessagingAction extends JSONAction {
 		else if ("getChats".equals(cmd)) {
 			jo = getChatMessages(req);
 
-			/*
-			JSONArray jRoster = getRosterEntries(req).getJSONArray("roster");
-			jo.put("roster", jRoster);
-			*/
 			jo.put("status", "success");
 		}
 		else if ("sendChat".equals(cmd)) {
