@@ -347,20 +347,20 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 		start = logHasUserPermissions(userId, actionId, resourceId, start, 3);
 
-		// Call countByUsersPermissions, countByUsersRoles,
-		// countByGroupsPermissions, and countByGroupsRoles in one method
-
-		if (PermissionFinder.containsPermissions(permissions, userId, groups)) {
-			return true;
-		}
-
-		start = logHasUserPermissions(userId, actionId, resourceId, start, 4);
-
 		// Check the organization and community intersection table. Break out of
 		// this method if the user has one of the permissions set at the
 		// intersection because that takes priority.
 
 		if (checkOrgGroupPermission(userOrgs, userGroups, permissions)) {
+			return true;
+		}
+
+		start = logHasUserPermissions(userId, actionId, resourceId, start, 4);
+
+		// Call countByUsersPermissions, countByUsersRoles,
+		// countByGroupsPermissions, and countByGroupsRoles in one method
+
+		if (PermissionFinder.containsPermissions(permissions, userId, groups)) {
 			return true;
 		}
 
