@@ -528,6 +528,11 @@
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>
 			<preference>
+				<name>priorities</name>
+				<value>Announcement=1.0</value>
+				<value>Sticky=2.0</value>
+			</preference>
+			<preference>
 				<name>ranks</name>
 				<value>Youngling=0</value>
 				<value>Padawan=25</value>

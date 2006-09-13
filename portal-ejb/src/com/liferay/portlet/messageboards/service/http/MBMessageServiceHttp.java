@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.service.http;
 
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.DoubleWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
@@ -126,7 +127,7 @@ public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		HttpPrincipal httpPrincipal, java.lang.String categoryId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, boolean addCommunityPermissions,
+		boolean anonymous, double priority, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -156,79 +157,7 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj4 = new BooleanWrapper(anonymous);
-			Object paramObj5 = new BooleanWrapper(addCommunityPermissions);
-			Object paramObj6 = new BooleanWrapper(addGuestPermissions);
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"addMessage",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
-					});
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.messageboards.model.MBMessage)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		HttpPrincipal httpPrincipal, java.lang.String categoryId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, javax.portlet.PortletPreferences prefs,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = categoryId;
-
-			if (categoryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = subject;
-
-			if (subject == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = body;
-
-			if (body == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = files;
-
-			if (files == null) {
-				paramObj3 = new NullWrapper("java.util.List");
-			}
-
-			Object paramObj4 = new BooleanWrapper(anonymous);
-			Object paramObj5 = prefs;
-
-			if (prefs == null) {
-				paramObj5 = new NullWrapper("javax.portlet.PortletPreferences");
-			}
-
+			Object paramObj5 = new DoubleWrapper(priority);
 			Object paramObj6 = new BooleanWrapper(addCommunityPermissions);
 			Object paramObj7 = new BooleanWrapper(addGuestPermissions);
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
@@ -265,10 +194,10 @@ public class MBMessageServiceHttp {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		HttpPrincipal httpPrincipal, java.lang.String categoryId,
-		java.lang.String threadId, java.lang.String parentMessageId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		boolean anonymous, double priority,
+		javax.portlet.PortletPreferences prefs,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -278,37 +207,32 @@ public class MBMessageServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = threadId;
+			Object paramObj1 = subject;
 
-			if (threadId == null) {
+			if (subject == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = parentMessageId;
+			Object paramObj2 = body;
 
-			if (parentMessageId == null) {
+			if (body == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = subject;
-
-			if (subject == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = body;
-
-			if (body == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = files;
+			Object paramObj3 = files;
 
 			if (files == null) {
-				paramObj5 = new NullWrapper("java.util.List");
+				paramObj3 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj6 = new BooleanWrapper(anonymous);
+			Object paramObj4 = new BooleanWrapper(anonymous);
+			Object paramObj5 = new DoubleWrapper(priority);
+			Object paramObj6 = prefs;
+
+			if (prefs == null) {
+				paramObj6 = new NullWrapper("javax.portlet.PortletPreferences");
+			}
+
 			Object paramObj7 = new BooleanWrapper(addCommunityPermissions);
 			Object paramObj8 = new BooleanWrapper(addGuestPermissions);
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
@@ -347,7 +271,89 @@ public class MBMessageServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String categoryId,
 		java.lang.String threadId, java.lang.String parentMessageId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
-		boolean anonymous, javax.portlet.PortletPreferences prefs,
+		boolean anonymous, double priority, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = categoryId;
+
+			if (categoryId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = threadId;
+
+			if (threadId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = parentMessageId;
+
+			if (parentMessageId == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = subject;
+
+			if (subject == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = body;
+
+			if (body == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = files;
+
+			if (files == null) {
+				paramObj5 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj6 = new BooleanWrapper(anonymous);
+			Object paramObj7 = new DoubleWrapper(priority);
+			Object paramObj8 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj9 = new BooleanWrapper(addGuestPermissions);
+			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
+					"addMessage",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.messageboards.model.MBMessage)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		HttpPrincipal httpPrincipal, java.lang.String categoryId,
+		java.lang.String threadId, java.lang.String parentMessageId,
+		java.lang.String subject, java.lang.String body, java.util.List files,
+		boolean anonymous, double priority,
+		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -389,19 +395,21 @@ public class MBMessageServiceHttp {
 			}
 
 			Object paramObj6 = new BooleanWrapper(anonymous);
-			Object paramObj7 = prefs;
+			Object paramObj7 = new DoubleWrapper(priority);
+			Object paramObj8 = prefs;
 
 			if (prefs == null) {
-				paramObj7 = new NullWrapper("javax.portlet.PortletPreferences");
+				paramObj8 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
-			Object paramObj8 = new BooleanWrapper(addCommunityPermissions);
-			Object paramObj9 = new BooleanWrapper(addGuestPermissions);
+			Object paramObj9 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj10 = new BooleanWrapper(addGuestPermissions);
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"addMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10
 					});
 			Object returnObj = null;
 
@@ -711,7 +719,7 @@ public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		HttpPrincipal httpPrincipal, java.lang.String messageId,
 		java.lang.String categoryId, java.lang.String subject,
-		java.lang.String body, java.util.List files)
+		java.lang.String body, java.util.List files, double priority)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -745,10 +753,12 @@ public class MBMessageServiceHttp {
 				paramObj4 = new NullWrapper("java.util.List");
 			}
 
+			Object paramObj5 = new DoubleWrapper(priority);
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"updateMessage",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
 					});
 			Object returnObj = null;
 
@@ -779,7 +789,7 @@ public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		HttpPrincipal httpPrincipal, java.lang.String messageId,
 		java.lang.String categoryId, java.lang.String subject,
-		java.lang.String body, java.util.List files,
+		java.lang.String body, java.util.List files, double priority,
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -814,17 +824,18 @@ public class MBMessageServiceHttp {
 				paramObj4 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj5 = prefs;
+			Object paramObj5 = new DoubleWrapper(priority);
+			Object paramObj6 = prefs;
 
 			if (prefs == null) {
-				paramObj5 = new NullWrapper("javax.portlet.PortletPreferences");
+				paramObj6 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"updateMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj5, paramObj6
 					});
 			Object returnObj = null;
 

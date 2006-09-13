@@ -110,6 +110,7 @@
 			WHERE
 				(MBCategory.groupId = ?)
 			ORDER BY
+				MBThread.priority DESC,
 				MBThread.lastPostDate DESC
 		]]>
 	</sql>
@@ -129,6 +130,7 @@
 				(MBCategory.groupId = ?) AND
 				(MBMessage.userId = ?)
 			ORDER BY
+				MBThread.priority DESC,
 				MBThread.lastPostDate DESC
 		]]>
 	</sql>

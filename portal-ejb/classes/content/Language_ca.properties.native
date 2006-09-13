@@ -796,7 +796,8 @@ enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-t
 enter-one-url-per-line=Introdueixi una URL <b>per línia</b>.
 enter-one-user-email-address-per-line-to-reserve-the-user-email-address=Introdueixi una adre柠de correu d'usuari <b>per línia</b> per a reservar aquesta adreça
 enter-one-user-id-per-line-to-reserve-the-user-id=Introdueixi un ID d'usuari <b>per línia</b> per a reservar aquest ID.
-enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>.
+enter-priority-and-level-pairs-per-line=Enter priority and level pairs <b>per line</b>. Threads will be sorted based on the priority level in descending order.
+enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>. Users will be displayed with a rank based on their number of posts.
 enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users=Introdueixi els noms dels grups (un <b>per línia</b>) que seran assignats per defecte als nous usuaris. 
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Introdueixi lels noms dels rols (un <b>per línia</b>) que seran assignats per defecte als nous usuaris. 
 enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users=Introdueixi lels noms dels grups d'usuaris (un <b>per línia</b>) que seran assignats per defecte als nous usuaris.

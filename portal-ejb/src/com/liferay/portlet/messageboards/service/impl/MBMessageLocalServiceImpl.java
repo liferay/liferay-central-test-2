@@ -123,6 +123,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		String categoryId = Company.SYSTEM;
 		List files = new ArrayList();
 		boolean anonymous = false;
+		double priority = 0.0;
 		PortletPreferences prefs = null;
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
@@ -131,13 +132,15 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		return addMessage(
 			userId, categoryId, threadId, parentMessageId, subject, body, files,
-			anonymous, prefs, addCommunityPermissions, addGuestPermissions);
+			anonymous, priority, prefs, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public MBMessage addMessage(
 			String userId, String categoryId, String subject, String body,
-			List files, boolean anonymous, PortletPreferences prefs,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			List files, boolean anonymous, double priority,
+			PortletPreferences prefs, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		String threadId = null;
@@ -145,13 +148,14 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		return addMessage(
 			userId, categoryId, threadId, parentMessageId, subject, body, files,
-			anonymous, prefs, addCommunityPermissions, addGuestPermissions);
+			anonymous, priority, prefs, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public MBMessage addMessage(
 			String userId, String categoryId, String threadId,
 			String parentMessageId, String subject, String body, List files,
-			boolean anonymous, PortletPreferences prefs,
+			boolean anonymous, double priority, PortletPreferences prefs,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -221,6 +225,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		}
 
 		thread.setLastPostDate(now);
+		thread.setPriority(priority);
 
 		start = logAddMessage(messageId, start, 2);
 
@@ -787,15 +792,16 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		String categoryId = Company.SYSTEM;
 		List files = new ArrayList();
+		double priority = 0.0;
 		PortletPreferences prefs = null;
 
 		return updateMessage(
-			messageId, categoryId, subject, body, files, prefs);
+			messageId, categoryId, subject, body, files, priority, prefs);
 	}
 
 	public MBMessage updateMessage(
 			String messageId, String categoryId, String subject, String body,
-			List files, PortletPreferences prefs)
+			List files, double priority, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
 		// Message
@@ -861,6 +867,14 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		notifySubscribers(message, prefs, true);
 
+		// Thread
+
+		MBThread thread = MBThreadUtil.findByPrimaryKey(message.getThreadId());
+
+		thread.setPriority(priority);
+
+		MBThreadUtil.update(thread);
+
 		// Category
 
 		category.setLastPostDate(now);
@@ -887,11 +901,11 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			itr = MBThreadUtil.findByCategoryId(oldCategoryId).iterator();
 
 			while (itr.hasNext()) {
-				MBThread thread = (MBThread)itr.next();
+				MBThread curThread = (MBThread)itr.next();
 
-				thread.setCategoryId(category.getCategoryId());
+				curThread.setCategoryId(category.getCategoryId());
 
-				MBThreadUtil.update(thread);
+				MBThreadUtil.update(curThread);
 			}
 		}
 

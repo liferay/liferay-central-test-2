@@ -260,7 +260,19 @@ portletURL.setParameter("categoryId", categoryId);
 
 				// Thread
 
-				row.addText(message.getSubject(), rowURL);
+				StringBuffer sb = new StringBuffer();
+
+				String threadPriority = MBUtil.getThreadPriority(portletSetup, thread.getPriority());
+
+				if (Validator.isNotNull(threadPriority)) {
+					sb.append("<b>");
+					sb.append(threadPriority);
+					sb.append(": </b>");
+				}
+
+				sb.append(message.getSubject());
+
+				row.addText(sb.toString(), rowURL);
 
 				// Started by
 
@@ -285,7 +297,7 @@ portletURL.setParameter("categoryId", categoryId);
 					row.addText(LanguageUtil.get(pageContext, "none"), rowURL);
 				}
 				else {
-					StringBuffer sb = new StringBuffer();
+					sb = new StringBuffer();
 
 					sb.append("<span style=\"font-size: xx-small; white-space: nowrap;\">");
 
@@ -409,7 +421,19 @@ portletURL.setParameter("categoryId", categoryId);
 
 			// Thread
 
-			row.addText(message.getSubject(), rowURL);
+			StringBuffer sb = new StringBuffer();
+
+			String threadPriority = MBUtil.getThreadPriority(portletSetup, thread.getPriority());
+
+			if (Validator.isNotNull(threadPriority)) {
+				sb.append("<b>");
+				sb.append(threadPriority);
+				sb.append(": </b>");
+			}
+
+			sb.append(message.getSubject());
+
+			row.addText(sb.toString(), rowURL);
 
 			// Started by
 
@@ -434,7 +458,7 @@ portletURL.setParameter("categoryId", categoryId);
 				row.addText(LanguageUtil.get(pageContext, "none"), rowURL);
 			}
 			else {
-				StringBuffer sb = new StringBuffer();
+				sb = new StringBuffer();
 
 				sb.append("<span style=\"font-size: xx-small; white-space: nowrap;\">");
 

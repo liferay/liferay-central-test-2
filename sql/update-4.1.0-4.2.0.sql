@@ -244,3 +244,5 @@ create table JournalContentSearch (
 	articleId VARCHAR(75) not null,
 	primary key (portletId, layoutId, ownerId, articleId)
 );
+
+alter table MBThread add priority DOUBLE;

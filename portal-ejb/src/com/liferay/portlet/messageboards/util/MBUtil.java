@@ -276,7 +276,32 @@ public class MBUtil {
 		}
 	}
 
-	public static String getRank(PortletPreferences prefs, int posts)
+	public static String getThreadPriority(
+			PortletPreferences prefs, double level)
+		throws Exception {
+
+		String priority = StringPool.BLANK;
+
+		String[] priorities = prefs.getValues("priorities", new String[0]);
+
+		for (int i = 0; i < priorities.length; i++) {
+			String[] kvp = StringUtil.split(priorities[i], StringPool.EQUAL);
+
+			String kvpName = kvp[0];
+			double kvpLevel = GetterUtil.getDouble(kvp[1]);
+
+			if (level >= kvpLevel) {
+				priority = kvpName;
+			}
+			else {
+				break;
+			}
+		}
+
+		return priority;
+	}
+
+	public static String getUserRank(PortletPreferences prefs, int posts)
 		throws Exception {
 
 		String rank = StringPool.BLANK;

@@ -266,6 +266,40 @@ if (message != null) {
 			<liferay-ui:input-checkbox param="anonymous" />
 		</td>
 	</tr>
+</c:if>
+
+<c:if test="<%= (priorities.length > 0) && MBCategoryPermission.contains(permissionChecker, categoryId, ActionKeys.UPDATE_THREAD_PRIORITY) %>">
+	<tr>
+		<td colspan="3">
+			<br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "priority") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<select name="<portlet:namespace />priority">
+				<option value=""></option>
+
+				<%
+				for (int i = 0; i < priorities.length; i++) {
+					String[] kvp = StringUtil.split(priorities[i], StringPool.EQUAL);
+				%>
+
+					<option value="<%= kvp[1] %>"><%= kvp[0] %></option>
+
+				<%
+				}
+				%>
+
+			</select>
+		</td>
+	</tr>
+</c:if>
+
+<c:if test="<%= message == null %>">
 	<tr>
 		<td colspan="3">
 			<br>

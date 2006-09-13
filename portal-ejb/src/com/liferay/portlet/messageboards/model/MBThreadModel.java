@@ -191,6 +191,16 @@ public class MBThreadModel extends BaseModel {
 		}
 	}
 
+	public double getPriority() {
+		return _priority;
+	}
+
+	public void setPriority(double priority) {
+		if (priority != _priority) {
+			_priority = priority;
+		}
+	}
+
 	public Object clone() {
 		MBThread clone = new MBThread();
 		clone.setThreadId(getThreadId());
@@ -201,6 +211,7 @@ public class MBThreadModel extends BaseModel {
 		clone.setViewCount(getViewCount());
 		clone.setLastPostByUserId(getLastPostByUserId());
 		clone.setLastPostDate(getLastPostDate());
+		clone.setPriority(getPriority());
 
 		return clone;
 	}
@@ -212,6 +223,23 @@ public class MBThreadModel extends BaseModel {
 
 		MBThread mbThread = (MBThread)obj;
 		int value = 0;
+
+		if (getPriority() < mbThread.getPriority()) {
+			value = -1;
+		}
+		else if (getPriority() > mbThread.getPriority()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
+
+		value = value * -1;
+
+		if (value != 0) {
+			return value;
+		}
+
 		value = DateUtil.compareTo(getLastPostDate(), mbThread.getLastPostDate());
 		value = value * -1;
 
@@ -258,4 +286,5 @@ public class MBThreadModel extends BaseModel {
 	private int _viewCount;
 	private String _lastPostByUserId;
 	private Date _lastPostDate;
+	private double _priority;
 }

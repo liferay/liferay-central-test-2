@@ -116,7 +116,7 @@ public class ViewArticleContentAction extends Action {
 
 				format(
 					articleId, version, previewArticleId, companyId, root,
-					(UploadServletRequest)req);
+					PortalUtil.getUploadServletRequest(req));
 
 				Map tokens = JournalUtil.getTokens(themeDisplay);
 

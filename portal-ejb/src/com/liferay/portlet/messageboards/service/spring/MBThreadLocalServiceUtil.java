@@ -87,6 +87,15 @@ public class MBThreadLocalServiceUtil {
 		return mbThreadLocalService.getGroupThreadsCount(groupId, userId);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBThread getThread(
+		java.lang.String threadId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.getThread(threadId);
+	}
+
 	public static java.util.List getThreads(java.lang.String categoryId,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();

@@ -59,12 +59,12 @@ public class MBMessageServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBMessageModel addMessage(
 		java.lang.String categoryId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws RemoteException {
+		double priority, boolean addCommunityPermissions,
+		boolean addGuestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
-					subject, body, files, anonymous, addCommunityPermissions,
-					addGuestPermissions);
+					subject, body, files, anonymous, priority,
+					addCommunityPermissions, addGuestPermissions);
 
 			return returnValue;
 		}
@@ -79,12 +79,12 @@ public class MBMessageServiceSoap {
 		java.lang.String categoryId, java.lang.String threadId,
 		java.lang.String parentMessageId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws RemoteException {
+		double priority, boolean addCommunityPermissions,
+		boolean addGuestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
 					threadId, parentMessageId, subject, body, files, anonymous,
-					addCommunityPermissions, addGuestPermissions);
+					priority, addCommunityPermissions, addGuestPermissions);
 
 			return returnValue;
 		}
@@ -179,11 +179,11 @@ public class MBMessageServiceSoap {
 
 	public static com.liferay.portlet.messageboards.model.MBMessageModel updateMessage(
 		java.lang.String messageId, java.lang.String categoryId,
-		java.lang.String subject, java.lang.String body, java.util.List files)
-		throws RemoteException {
+		java.lang.String subject, java.lang.String body, java.util.List files,
+		double priority) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateMessage(messageId,
-					categoryId, subject, body, files);
+					categoryId, subject, body, files, priority);
 
 			return returnValue;
 		}

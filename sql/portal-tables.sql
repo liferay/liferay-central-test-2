@@ -488,7 +488,8 @@ create table MBThread (
 	messageCount INTEGER,
 	viewCount INTEGER,
 	lastPostByUserId VARCHAR(75) null,
-	lastPostDate DATE null
+	lastPostDate DATE null,
+	priority DOUBLE
 );
 
 create table Organization_ (

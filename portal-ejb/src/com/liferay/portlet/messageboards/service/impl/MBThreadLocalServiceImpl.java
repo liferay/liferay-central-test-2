@@ -188,6 +188,12 @@ public class MBThreadLocalServiceImpl implements MBThreadLocalService {
 		}
 	}
 
+	public MBThread getThread(String threadId)
+		throws PortalException, SystemException {
+
+		return MBThreadUtil.findByPrimaryKey(threadId);
+	}
+
 	public List getThreads(String categoryId, int begin, int end)
 		throws SystemException {
 

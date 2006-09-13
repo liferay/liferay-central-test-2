@@ -52,9 +52,10 @@ public class MessageBoardsSoapTest extends BaseSoapTest {
 			String body = "This is a test body.";
 			Object[] files = new Object[0];
 			boolean anonymous = false;
+			double priority = 0.0;
 
 			MBMessageModel message = getMBMessageService().addMessage(
-				categoryId, subject, body, files, anonymous,
+				categoryId, subject, body, files, anonymous, priority,
 				addCommunityPermissions, addGuestPermissions);
 
 			getMBMessageService().deleteMessage(message.getMessageId());

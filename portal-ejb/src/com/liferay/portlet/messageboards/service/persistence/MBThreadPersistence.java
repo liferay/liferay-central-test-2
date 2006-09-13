@@ -184,6 +184,7 @@ public class MBThreadPersistence extends BasePersistence {
 
 			query.append(" ");
 			query.append("ORDER BY ");
+			query.append("priority DESC").append(", ");
 			query.append("lastPostDate DESC");
 
 			Query q = session.createQuery(query.toString());
@@ -235,6 +236,7 @@ public class MBThreadPersistence extends BasePersistence {
 			}
 			else {
 				query.append("ORDER BY ");
+				query.append("priority DESC").append(", ");
 				query.append("lastPostDate DESC");
 			}
 
@@ -320,6 +322,7 @@ public class MBThreadPersistence extends BasePersistence {
 			}
 			else {
 				query.append("ORDER BY ");
+				query.append("priority DESC").append(", ");
 				query.append("lastPostDate DESC");
 			}
 
@@ -358,6 +361,7 @@ public class MBThreadPersistence extends BasePersistence {
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBThread ");
 			query.append("ORDER BY ");
+			query.append("priority DESC").append(", ");
 			query.append("lastPostDate DESC");
 
 			Query q = session.createQuery(query.toString());

@@ -198,10 +198,12 @@
 		<column name="viewCount" type="int" />
 		<column name="lastPostByUserId" type="String" />
 		<column name="lastPostDate" type="Date" />
+		<column name="priority" type="double" />
 
 		<!-- Order -->
 
 		<order by="desc">
+			<order-column name="priority" />
 			<order-column name="lastPostDate" />
 		</order>
 

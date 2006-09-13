@@ -85,8 +85,11 @@ public class EditConfigurationAction extends PortletAction {
 		else if (tabs2.equals("message-updated-email")) {
 			updateEmailMessageUpdated(req, prefs);
 		}
-		else if (tabs2.equals("rank")) {
-			updateRank(req, prefs);
+		else if (tabs2.equals("thread-priorities")) {
+			updateThreadPriorities(req, prefs);
+		}
+		else if (tabs2.equals("user-ranks")) {
+			updateUserRanks(req, prefs);
 		}
 
 		if (SessionErrors.isEmpty(req)) {
@@ -175,7 +178,47 @@ public class EditConfigurationAction extends PortletAction {
 		}
 	}
 
-	protected void updateRank(ActionRequest req, PortletPreferences prefs)
+	protected void updateThreadPriorities(ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		// Sort priorities by level
+
+		String[] priorities = StringUtil.split(
+			ParamUtil.getString(req, "priorities"), StringPool.NEW_LINE);
+
+		Map map = new TreeMap();
+
+		for (int i = 0; i < priorities.length; i++) {
+			String[] kvp = StringUtil.split(priorities[i], StringPool.EQUAL);
+
+			String kvpName = kvp[0];
+			Double kvpLevel = new Double(GetterUtil.getDouble(kvp[1]));
+
+			map.put(kvpLevel, kvpName);
+		}
+
+		priorities = new String[map.size()];
+
+		int count = 0;
+
+		Iterator itr = map.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			Double kvpLevel = (Double)entry.getKey();
+			String kvpName = (String)entry.getValue();
+
+			priorities[count++] =
+				kvpName + StringPool.EQUAL + kvpLevel.toString();
+		}
+
+		// Set priorities
+
+		prefs.setValues("priorities", priorities);
+	}
+
+	protected void updateUserRanks(ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
 		// Sort ranks by posts

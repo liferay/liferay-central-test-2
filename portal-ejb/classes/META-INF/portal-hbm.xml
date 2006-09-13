@@ -753,6 +753,7 @@
 		<property name="viewCount" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="lastPostByUserId" />
 		<property name="lastPostDate" />
+		<property name="priority" type="com.liferay.util.dao.hibernate.DoubleType" />
 	</class>
 	<class name="com.liferay.portlet.polls.model.PollsChoice" table="PollsChoice">
 		<cache usage="read-write" />

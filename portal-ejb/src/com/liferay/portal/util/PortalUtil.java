@@ -737,7 +737,13 @@ public class PortalUtil {
 	}
 
 	public static UploadServletRequest getUploadServletRequest(
-		HttpServletRequestWrapper reqWrapper) {
+		HttpServletRequest httpReq) {
+
+		HttpServletRequestWrapper httpReqWrapper = null;
+
+		if (httpReq instanceof HttpServletRequestWrapper) {
+			httpReqWrapper = (HttpServletRequestWrapper)httpReq;
+		}
 
 		UploadServletRequest uploadReq = null;
 
@@ -746,17 +752,19 @@ public class PortalUtil {
 			// Find the underlying UploadServletRequest wrapper. For example,
 			// WebSphere wraps all requests with ProtectedServletRequest.
 
-			if (reqWrapper instanceof UploadServletRequest) {
-				uploadReq = (UploadServletRequest)reqWrapper;
+			if (httpReqWrapper instanceof UploadServletRequest) {
+				uploadReq = (UploadServletRequest)httpReqWrapper;
 			}
 			else {
-				ServletRequest req = reqWrapper.getRequest();
+				ServletRequest req = httpReqWrapper.getRequest();
 
 				if (!(req instanceof HttpServletRequestWrapper)) {
 					break;
 				}
-
-				reqWrapper = (HttpServletRequestWrapper)reqWrapper.getRequest();
+				else {
+					httpReqWrapper =
+						(HttpServletRequestWrapper)httpReqWrapper.getRequest();
+				}
 			}
 		}
 

@@ -51,8 +51,8 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 	public LiferayStrutsRequestImpl(ActionRequestImpl req) {
 		this(req.getHttpServletRequest());
 
-		HttpServletRequestWrapper httpReq =
-			(HttpServletRequestWrapper)req.getHttpServletRequest();
+		HttpServletRequest httpReq =
+			(HttpServletRequest)req.getHttpServletRequest();
 
 		UploadServletRequest uploadReq =
 			PortalUtil.getUploadServletRequest(httpReq);
