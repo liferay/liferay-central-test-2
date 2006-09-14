@@ -39,4 +39,13 @@ public class LayoutSetServiceUtil {
 		return layoutSetService.updateLookAndFeel(ownerId, themeId,
 			colorSchemeId);
 	}
+
+	public static com.liferay.portal.model.LayoutSet updateVirtualHost(
+		java.lang.String ownerId, java.lang.String virtualHost)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutSetService layoutSetService = LayoutSetServiceFactory.getService();
+
+		return layoutSetService.updateVirtualHost(ownerId, virtualHost);
+	}
 }

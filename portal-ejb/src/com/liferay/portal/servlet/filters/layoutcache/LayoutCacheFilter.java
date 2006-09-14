@@ -109,24 +109,24 @@ public class LayoutCacheFilter implements Filter {
 			}
 		}
 
-		HttpServletRequest request = (HttpServletRequest)req;
-		HttpServletResponse response = (HttpServletResponse)res;
+		HttpServletRequest httpReq = (HttpServletRequest)req;
+		HttpServletResponse httpRes = (HttpServletResponse)res;
 
-		request.setCharacterEncoding(ENCODING);
+		httpReq.setCharacterEncoding(ENCODING);
 
-		if (USE_LAYOUT_CACHE_FILTER && !_isPortletRequest(request) &&
-			_isLayout(request) && !_isSignedIn(request) &&
-			!_isInclude(request) && !_isAlreadyFiltered(request)) {
+		if (USE_LAYOUT_CACHE_FILTER && !_isPortletRequest(httpReq) &&
+			_isLayout(httpReq) && !_isSignedIn(httpReq) &&
+			!_isInclude(httpReq) && !_isAlreadyFiltered(httpReq)) {
 
-			request.setAttribute(_ALREADY_FILTERED, Boolean.TRUE);
+			httpReq.setAttribute(_ALREADY_FILTERED, Boolean.TRUE);
 
-			String key = getCacheKey(request);
+			String key = getCacheKey(httpReq);
 
 			LayoutCacheResponseData data =
 				LayoutCacheUtil.getLayoutCacheResponseData(_companyId, key);
 
 			if (data == null) {
-				if (!_isCacheable(request)) {
+				if (!_isCacheable(httpReq)) {
 					if (_log.isDebugEnabled()) {
 						_log.debug("Layout is not cacheable " + key);
 					}
@@ -141,7 +141,7 @@ public class LayoutCacheFilter implements Filter {
 				}
 
 				LayoutCacheResponse layoutCacheResponse =
-					new LayoutCacheResponse(response);
+					new LayoutCacheResponse(httpRes);
 
 				chain.doFilter(req, layoutCacheResponse);
 
@@ -171,26 +171,23 @@ public class LayoutCacheFilter implements Filter {
 					int type = header.getType();
 
 					if (type == Header.DATE_TYPE) {
-						response.addDateHeader(
-							headerKey, header.getDateValue());
+						httpRes.addDateHeader(headerKey, header.getDateValue());
 					}
 					else if (type == Header.INTEGER_TYPE) {
-						response.addIntHeader(
-							headerKey, header.getIntValue());
+						httpRes.addIntHeader(headerKey, header.getIntValue());
 					}
 					else if (type == Header.STRING_TYPE) {
-						response.addHeader(
-							headerKey, header.getStringValue());
+						httpRes.addHeader(headerKey, header.getStringValue());
 					}
 				}
 			}
 
 			byte[] byteArray = data.getData();
 
-			response.setContentLength(byteArray.length);
-			response.setContentType(data.getContentType());
+			httpRes.setContentLength(byteArray.length);
+			httpRes.setContentType(data.getContentType());
 
-			ServletOutputStream out = response.getOutputStream();
+			ServletOutputStream out = httpRes.getOutputStream();
 
 			out.write(byteArray, 0, byteArray.length);
 
@@ -459,6 +456,7 @@ public class LayoutCacheFilter implements Filter {
 	private static final int _PATTERN_RESOURCE = 2;
 
 	private static Log _log = LogFactory.getLog(LayoutCacheFilter.class);
+
 	private String _companyId;
 	private int _pattern;
 

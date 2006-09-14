@@ -92,25 +92,25 @@ public class CompressionFilter implements Filter {
 			}
 		}
 
-		HttpServletRequest request = (HttpServletRequest)req;
-		HttpServletResponse response = (HttpServletResponse)res;
+		HttpServletRequest httpReq = (HttpServletRequest)req;
+		HttpServletResponse httpRes = (HttpServletResponse)res;
 
-		request.setCharacterEncoding(ENCODING);
+		httpReq.setCharacterEncoding(ENCODING);
 
-		String completeURL = Http.getCompleteURL(request);
+		String completeURL = Http.getCompleteURL(httpReq);
 
-    	if (useCompressionFilter && _isCompress(request) &&
-			!_isInclude(request) && BrowserSniffer.acceptsGzip(request) &&
-			!_isAlreadyFiltered(request)) {
+    	if (useCompressionFilter && _isCompress(httpReq) &&
+			!_isInclude(httpReq) && BrowserSniffer.acceptsGzip(httpReq) &&
+			!_isAlreadyFiltered(httpReq)) {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Compressing " + completeURL);
 			}
 
-			request.setAttribute(_ALREADY_FILTERED, Boolean.TRUE);
+			httpReq.setAttribute(_ALREADY_FILTERED, Boolean.TRUE);
 
 			CompressionResponse compressionResponse =
-				new CompressionResponse(response);
+				new CompressionResponse(httpRes);
 
 			chain.doFilter(req, compressionResponse);
 

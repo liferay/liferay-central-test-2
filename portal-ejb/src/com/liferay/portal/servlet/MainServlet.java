@@ -139,7 +139,7 @@ public class MainServlet extends ActionServlet {
 					true);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(StackTraceUtil.getStackTrace(e));
 			}
 
 			// Company id
@@ -205,7 +205,7 @@ public class MainServlet extends ActionServlet {
 				PortletLocalServiceUtil.initEAR(xmls);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(StackTraceUtil.getStackTrace(e));
 			}
 
 			// Initialize display
@@ -235,7 +235,7 @@ public class MainServlet extends ActionServlet {
 					_companyId, WebKeys.PORTLET_CATEGORY, portletCategory);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(StackTraceUtil.getStackTrace(e));
 			}
 
 			// Initialize layout templates
@@ -255,7 +255,7 @@ public class MainServlet extends ActionServlet {
 				LayoutTemplateLocalUtil.init(ctx, xmls);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(StackTraceUtil.getStackTrace(e));
 			}
 
 			// Initialize look and feel
@@ -275,7 +275,7 @@ public class MainServlet extends ActionServlet {
 				ThemeLocalUtil.init(ctx, xmls);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(StackTraceUtil.getStackTrace(e));
 			}
 
 			// Check company
@@ -288,7 +288,7 @@ public class MainServlet extends ActionServlet {
 				CompanyLocalServiceUtil.checkCompany(_companyId);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(StackTraceUtil.getStackTrace(e));
 			}
 
 			// Check journal content search
@@ -305,7 +305,7 @@ public class MainServlet extends ActionServlet {
 						_companyId);
 				}
 				catch (Exception e) {
-					_log.error(e);
+					_log.error(StackTraceUtil.getStackTrace(e));
 				}
 			}
 
@@ -322,7 +322,7 @@ public class MainServlet extends ActionServlet {
 				_checkWebSettings(xml);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(StackTraceUtil.getStackTrace(e));
 			}
 
 			// Scheduler
@@ -351,7 +351,7 @@ public class MainServlet extends ActionServlet {
 			catch (ObjectAlreadyExistsException oaee) {
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(StackTraceUtil.getStackTrace(e));
 			}
 
 			// Message resources
@@ -488,7 +488,7 @@ public class MainServlet extends ActionServlet {
 				PrefsPropsUtil.getString(_companyId, PropsUtil.PORTAL_CTX));
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 
 		if (portalCtx == null) {
@@ -799,7 +799,7 @@ public class MainServlet extends ActionServlet {
 					PropsUtil.LOGIN_EVENTS_POST), req, res);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(StackTraceUtil.getStackTrace(e));
 			}
 		}
 
@@ -810,7 +810,7 @@ public class MainServlet extends ActionServlet {
 				PropsUtil.SERVLET_SERVICE_EVENTS_PRE), req, res);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(StackTraceUtil.getStackTrace(e));
 
 			req.setAttribute(PageContext.EXCEPTION, e);
 
@@ -835,7 +835,7 @@ public class MainServlet extends ActionServlet {
 					PropsUtil.SERVLET_SERVICE_EVENTS_POST), req, res);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(StackTraceUtil.getStackTrace(e));
 			}
 
 			res.addHeader(
@@ -862,7 +862,7 @@ public class MainServlet extends ActionServlet {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 
 		// Process shutdown events
@@ -880,7 +880,7 @@ public class MainServlet extends ActionServlet {
 				new String[] {_companyId});
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 
 		// Parent

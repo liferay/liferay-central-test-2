@@ -27,6 +27,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.util.StringPool;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -34,6 +36,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -159,6 +162,89 @@ public class LayoutSetPersistence extends BasePersistence {
 		}
 	}
 
+	public LayoutSet findByC_V(String companyId, String virtualHost)
+		throws NoSuchLayoutSetException, SystemException {
+		LayoutSet layoutSet = fetchByC_V(companyId, virtualHost);
+
+		if (layoutSet == null) {
+			String msg = "No LayoutSet exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "virtualHost=";
+			msg += virtualHost;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg);
+			}
+
+			throw new NoSuchLayoutSetException(msg);
+		}
+
+		return layoutSet;
+	}
+
+	public LayoutSet fetchByC_V(String companyId, String virtualHost)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (virtualHost == null) {
+				query.append("virtualHost IS NULL");
+			}
+			else {
+				query.append("virtualHost = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (virtualHost != null) {
+				q.setString(queryPos++, virtualHost);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			LayoutSet layoutSet = (LayoutSet)list.get(0);
+
+			return layoutSet;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List findAll() throws SystemException {
 		Session session = null;
 
@@ -172,6 +258,74 @@ public class LayoutSetPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			return q.list();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public void removeByC_V(String companyId, String virtualHost)
+		throws NoSuchLayoutSetException, SystemException {
+		LayoutSet layoutSet = findByC_V(companyId, virtualHost);
+		remove(layoutSet);
+	}
+
+	public int countByC_V(String companyId, String virtualHost)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (virtualHost == null) {
+				query.append("virtualHost IS NULL");
+			}
+			else {
+				query.append("virtualHost = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (virtualHost != null) {
+				q.setString(queryPos++, virtualHost);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

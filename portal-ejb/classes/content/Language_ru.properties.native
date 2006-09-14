@@ -837,6 +837,7 @@ folders=Папки
 font=Шрифт
 foot=Футы
 footnotes=Сноски
+for-example,-if-the-public-virtual-host-is-www.helloworld.com-and-the-friendly-url-is-/helloworld=For example, if the public virtual host is <b>www.helloworld.com</b> and the friendly URL is <b>/helloworld</b>, then <b>{0}://www.helloworld.com</b> is mapped to <b>{1}/helloworld</b>.
 forgot-password=Забыли пароль
 form-method=Метод формы
 form=Форма
@@ -1778,6 +1779,7 @@ the-following-zip-code-was-found-associated-with-the-given-street-city-and-state
 the-following-zip-codes-were-found-associated-with-the-given-city-and-state=Найдены следующие почтовые индексы по казанным городу и штату.
 the-following-zip-codes-were-found-associated-with-the-given-street-city-and-state=Найдены следующие почтовые индексы по указанным улице, городу и штату.
 the-format-of-this-email-is-incomplete-and-cannot-be-displayed-properly=Формат этого email сообщения неверен и не может быть корректно показан.
+the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=The friendly URL is appended to <b>{0}</b> for public pages and <b>{1}</b> for private pages.
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=Группа не может быть удалена, так как она является необходимой системной группой.
 the-group-could-not-be-found=Группа не найдена.
 the-item-could-not-be-found=Товар не найден.

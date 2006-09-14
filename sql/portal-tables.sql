@@ -416,7 +416,8 @@ create table LayoutSet (
 	privateLayout BOOLEAN,
 	themeId VARCHAR(75) null,
 	colorSchemeId VARCHAR(75) null,
-	pageCount INTEGER
+	pageCount INTEGER,
+	virtualHost VARCHAR(75) null
 );
 
 create table ListType (

@@ -68,6 +68,8 @@ create index JournalStructure_ix_GroupId on JournalStructure (groupId);
 create index JournalTemplate_ix_C_S on JournalTemplate (companyId, structureId);
 create index JournalTemplate_ix_GroupId on JournalTemplate (groupId);
 
+create index LayoutSet_ix_C_V on LayoutSet (companyId, virtualHost);
+
 create index Layout_ix_O_F on Layout (ownerId, friendlyURL);
 create index Layout_ix_O_P on Layout (ownerId, parentLayoutId);
 create index Layout_ix_OwnerId on Layout (ownerId);

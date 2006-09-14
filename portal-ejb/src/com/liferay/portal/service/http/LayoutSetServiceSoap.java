@@ -53,5 +53,21 @@ public class LayoutSetServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.LayoutSetModel updateVirtualHost(
+		java.lang.String ownerId, java.lang.String virtualHost)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.LayoutSet returnValue = LayoutSetServiceUtil.updateVirtualHost(ownerId,
+					virtualHost);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	private static Log _log = LogFactory.getLog(LayoutSetServiceSoap.class);
 }

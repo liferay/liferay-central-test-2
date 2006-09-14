@@ -58,6 +58,15 @@ public class LayoutSetServiceEJBImpl implements LayoutSetService, SessionBean {
 		return getService().updateLookAndFeel(ownerId, themeId, colorSchemeId);
 	}
 
+	public com.liferay.portal.model.LayoutSet updateVirtualHost(
+		java.lang.String ownerId, java.lang.String virtualHost)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().updateVirtualHost(ownerId, virtualHost);
+	}
+
 	public void ejbCreate() throws CreateException {
 	}
 

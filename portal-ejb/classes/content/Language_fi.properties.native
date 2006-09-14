@@ -891,6 +891,7 @@ folders=Folders
 font=Font
 foot=Foot
 footnotes=Footnotes
+for-example,-if-the-public-virtual-host-is-www.helloworld.com-and-the-friendly-url-is-/helloworld=For example, if the public virtual host is <b>www.helloworld.com</b> and the friendly URL is <b>/helloworld</b>, then <b>{0}://www.helloworld.com</b> is mapped to <b>{1}/helloworld</b>.
 forgot-password=Unohtuiko salasana?
 form-method=Form Method
 form=Form
@@ -1866,6 +1867,7 @@ the-following-zip-code-was-found-associated-with-the-given-street-city-and-state
 the-following-zip-codes-were-found-associated-with-the-given-city-and-state=The following zip codes were found associated with the given city and state.
 the-following-zip-codes-were-found-associated-with-the-given-street-city-and-state=The following zip codes were found associated with the given street, city, and state.
 the-format-of-this-email-is-incomplete-and-cannot-be-displayed-properly=The format of this email is incomplete and cannot be displayed properly.
+the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=The friendly URL is appended to <b>{0}</b> for public pages and <b>{1}</b> for private pages.
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=The group cannot be deleted because it is a required system group.
 the-group-could-not-be-found=The group could not be found.
 the-item-could-not-be-found=The item could not be found.

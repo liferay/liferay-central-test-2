@@ -183,6 +183,7 @@
 		<property name="themeId" />
 		<property name="colorSchemeId" />
 		<property name="pageCount" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="virtualHost" />
 	</class>
 	<class name="com.liferay.portal.model.ListType" table="ListType">
 		<cache usage="read-write" />

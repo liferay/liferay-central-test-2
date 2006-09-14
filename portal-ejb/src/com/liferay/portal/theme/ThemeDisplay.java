@@ -217,6 +217,22 @@ public class ThemeDisplay {
 		}
 	}
 
+	public int getServerPort() {
+		return _serverPort;
+	}
+
+	public void setServerPort(int serverPort) {
+		_serverPort = serverPort;
+	}
+
+	public boolean isSecure() {
+		return _secure;
+	}
+
+	public void setSecure(boolean secure) {
+		_secure = secure;
+	}
+
 	public int getResolution() {
 		return _resolution;
 	}
@@ -484,6 +500,8 @@ public class ThemeDisplay {
 		_timeZone = null;
 		_theme = null;
 		_colorScheme = null;
+		_serverPort = 0;
+		_secure = false;
 		_resolution = 0;
 		_pathApplet = null;
 		_pathCms = null;
@@ -540,6 +558,8 @@ public class ThemeDisplay {
 	private TimeZone _timeZone;
 	private Theme _theme;
 	private ColorScheme _colorScheme;
+	private int _serverPort;
+	private boolean _secure;
 	private int _resolution;
 	private boolean _statePopUp;
 	private String _pathApplet;

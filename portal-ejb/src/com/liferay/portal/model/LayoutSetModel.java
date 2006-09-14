@@ -58,6 +58,9 @@ public class LayoutSetModel extends BaseModel {
 	public static boolean XSS_ALLOW_COLORSCHEMEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.LayoutSet.colorSchemeId"),
 			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_VIRTUALHOST = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.LayoutSet.virtualHost"),
+			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.LayoutSetModel"));
 
@@ -198,6 +201,23 @@ public class LayoutSetModel extends BaseModel {
 		}
 	}
 
+	public String getVirtualHost() {
+		return GetterUtil.getString(_virtualHost);
+	}
+
+	public void setVirtualHost(String virtualHost) {
+		if (((virtualHost == null) && (_virtualHost != null)) ||
+				((virtualHost != null) && (_virtualHost == null)) ||
+				((virtualHost != null) && (_virtualHost != null) &&
+				!virtualHost.equals(_virtualHost))) {
+			if (!XSS_ALLOW_VIRTUALHOST) {
+				virtualHost = XSSUtil.strip(virtualHost);
+			}
+
+			_virtualHost = virtualHost;
+		}
+	}
+
 	public Object clone() {
 		LayoutSet clone = new LayoutSet();
 		clone.setOwnerId(getOwnerId());
@@ -208,6 +228,7 @@ public class LayoutSetModel extends BaseModel {
 		clone.setThemeId(getThemeId());
 		clone.setColorSchemeId(getColorSchemeId());
 		clone.setPageCount(getPageCount());
+		clone.setVirtualHost(getVirtualHost());
 
 		return clone;
 	}
@@ -259,4 +280,5 @@ public class LayoutSetModel extends BaseModel {
 	private String _themeId;
 	private String _colorSchemeId;
 	private int _pageCount;
+	private String _virtualHost;
 }

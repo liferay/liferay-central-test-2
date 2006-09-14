@@ -900,6 +900,8 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
+		friendlyURL = friendlyURL.toLowerCase();
+
 		boolean firstLayout = false;
 
 		if (parentLayoutId.equals(Layout.DEFAULT_PARENT_LAYOUT_ID)) {

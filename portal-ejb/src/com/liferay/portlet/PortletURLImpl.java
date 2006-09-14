@@ -377,15 +377,25 @@ public class PortletURLImpl implements PortletURL {
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		sb.append(PortalUtil.getPortalURL(_req, _secure));
+		String portalURL = PortalUtil.getPortalURL(_req, _secure);
+
+		sb.append(portalURL);
 
 		try {
 			if (_layoutFriendlyURL == null) {
 				Layout layout = getLayout();
 
 				if (layout != null) {
-					_layoutFriendlyURL = PortalUtil.getLayoutFriendlyURL(
-						layout, themeDisplay);
+					_layoutFriendlyURL = GetterUtil.getString(
+						PortalUtil.getLayoutFriendlyURL(layout, themeDisplay));
+
+					// A virtual host URL will contain the complete path. Since
+					// that's not needed, strip the redundant portal URL.
+
+					if (_layoutFriendlyURL.startsWith(portalURL)) {
+						_layoutFriendlyURL = _layoutFriendlyURL.substring(
+							portalURL.length(), _layoutFriendlyURL.length());
+					}
 				}
 			}
 		}

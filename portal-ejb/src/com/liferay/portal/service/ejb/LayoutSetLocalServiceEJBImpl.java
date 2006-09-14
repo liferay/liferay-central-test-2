@@ -68,6 +68,13 @@ public class LayoutSetLocalServiceEJBImpl implements LayoutSetLocalService,
 		return getService().getLayoutSet(ownerId);
 	}
 
+	public com.liferay.portal.model.LayoutSet getLayoutSet(
+		java.lang.String companyId, java.lang.String virtualHost)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().getLayoutSet(companyId, virtualHost);
+	}
+
 	public com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		java.lang.String ownerId, java.lang.String themeId,
 		java.lang.String colorSchemeId)
@@ -81,6 +88,13 @@ public class LayoutSetLocalServiceEJBImpl implements LayoutSetLocalService,
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return getService().updatePageCount(ownerId);
+	}
+
+	public com.liferay.portal.model.LayoutSet updateVirtualHost(
+		java.lang.String ownerId, java.lang.String virtualHost)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().updateVirtualHost(ownerId, virtualHost);
 	}
 
 	public void ejbCreate() throws CreateException {

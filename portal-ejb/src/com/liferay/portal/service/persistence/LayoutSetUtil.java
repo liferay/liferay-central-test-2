@@ -156,9 +156,34 @@ public class LayoutSetUtil {
 		return getPersistence().fetchByPrimaryKey(ownerId);
 	}
 
+	public static com.liferay.portal.model.LayoutSet findByC_V(
+		java.lang.String companyId, java.lang.String virtualHost)
+		throws com.liferay.portal.NoSuchLayoutSetException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_V(companyId, virtualHost);
+	}
+
+	public static com.liferay.portal.model.LayoutSet fetchByC_V(
+		java.lang.String companyId, java.lang.String virtualHost)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_V(companyId, virtualHost);
+	}
+
 	public static java.util.List findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
+	}
+
+	public static void removeByC_V(java.lang.String companyId,
+		java.lang.String virtualHost)
+		throws com.liferay.portal.NoSuchLayoutSetException, 
+			com.liferay.portal.SystemException {
+		getPersistence().removeByC_V(companyId, virtualHost);
+	}
+
+	public static int countByC_V(java.lang.String companyId,
+		java.lang.String virtualHost) throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_V(companyId, virtualHost);
 	}
 
 	public static void initDao() {

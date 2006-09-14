@@ -26,6 +26,7 @@ import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.LayoutHiddenException;
 import com.liferay.portal.LayoutNameException;
 import com.liferay.portal.LayoutParentLayoutIdException;
+import com.liferay.portal.LayoutSetVirtualHostException;
 import com.liferay.portal.LayoutTypeException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutException;
@@ -111,11 +112,11 @@ public class EditPagesAction extends PortletAction {
 			else if (cmd.equals("display_order")) {
 				updateDisplayOrder(req);
 			}
-			else if (cmd.equals("friendly_url")) {
-				updateFriendlyURL(req);
-			}
 			else if (cmd.equals("look_and_feel")) {
 				updateLookAndFeel(req);
+			}
+			else if (cmd.equals("virtual_host")) {
+				updateVirtualHost(req);
 			}
 
 			String redirect = ParamUtil.getString(req, "pagesRedirect");
@@ -134,6 +135,7 @@ public class EditPagesAction extends PortletAction {
 					 e instanceof LayoutHiddenException ||
 					 e instanceof LayoutNameException ||
 					 e instanceof LayoutParentLayoutIdException ||
+					 e instanceof LayoutSetVirtualHostException ||
 					 e instanceof LayoutTypeException ||
 					 e instanceof RequiredLayoutException) {
 
@@ -288,18 +290,6 @@ public class EditPagesAction extends PortletAction {
 		LayoutServiceUtil.setLayouts(ownerId, parentLayoutId, layoutIds);
 	}
 
-	protected void updateFriendlyURL(ActionRequest req) throws Exception {
-		String groupId = ParamUtil.getString(req, "groupId");
-
-		String friendlyURL = ParamUtil.getString(req, "friendlyURL");
-
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-		GroupServiceUtil.updateGroup(
-			groupId, group.getName(), group.getDescription(), group.getType(),
-			friendlyURL);
-	}
-
 	protected void updateLayout(PageForm pageForm, ActionRequest req)
 		throws Exception {
 
@@ -437,6 +427,41 @@ public class EditPagesAction extends PortletAction {
 			LayoutServiceUtil.updateLookAndFeel(
 				layoutId, ownerId, themeId, colorSchemeId);
 		}
+	}
+
+	protected void updateVirtualHost(ActionRequest req) throws Exception {
+
+		// Public virtual host
+
+		String groupId = ParamUtil.getString(req, "groupId");
+
+		String publicOwnerId = Layout.PUBLIC + groupId;
+
+		String publicVirtualHost = ParamUtil.getString(
+			req, "publicVirtualHost");
+
+		LayoutSetServiceUtil.updateVirtualHost(
+			publicOwnerId, publicVirtualHost);
+
+		// Private virtual host
+
+		String privateOwnerId = Layout.PRIVATE + groupId;
+
+		String privateVirtualHost = ParamUtil.getString(
+			req, "privateVirtualHost");
+
+		LayoutSetServiceUtil.updateVirtualHost(
+			privateOwnerId, privateVirtualHost);
+
+		// Friendly URL
+
+		String friendlyURL = ParamUtil.getString(req, "friendlyURL");
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		GroupServiceUtil.updateGroup(
+			groupId, group.getName(), group.getDescription(), group.getType(),
+			friendlyURL);
 	}
 
 }

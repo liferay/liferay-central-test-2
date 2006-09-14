@@ -106,12 +106,12 @@ public class SecureFilter implements Filter {
 			}
 		}
 
-		HttpServletRequest request = (HttpServletRequest)req;
-		HttpServletResponse response = (HttpServletResponse)res;
+		HttpServletRequest httpReq = (HttpServletRequest)req;
+		HttpServletResponse httpRes = (HttpServletResponse)res;
 
-		String completeURL = Http.getCompleteURL(request);
+		String completeURL = Http.getCompleteURL(httpReq);
 
-		if (_httpsRequired && !request.isSecure()) {
+		if (_httpsRequired && !httpReq.isSecure()) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Securing " + completeURL);
 			}
@@ -119,21 +119,21 @@ public class SecureFilter implements Filter {
 			StringBuffer redirectURL = new StringBuffer();
 
 			redirectURL.append(Http.HTTPS_WITH_SLASH);
-			redirectURL.append(request.getServerName());
-			redirectURL.append(request.getServletPath());
+			redirectURL.append(httpReq.getServerName());
+			redirectURL.append(httpReq.getServletPath());
 
-			String queryString = request.getQueryString();
+			String queryString = httpReq.getQueryString();
 
 			if (Validator.isNotNull(queryString)) {
 				redirectURL.append(StringPool.QUESTION);
-				redirectURL.append(request.getQueryString());
+				redirectURL.append(httpReq.getQueryString());
 			}
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Redirect to " + redirectURL);
 			}
 
-			response.sendRedirect(redirectURL.toString());
+			httpRes.sendRedirect(redirectURL.toString());
 		}
 		else {
 			if (_log.isDebugEnabled()) {

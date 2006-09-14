@@ -54,6 +54,15 @@ public class LayoutSetLocalServiceUtil {
 		return layoutSetLocalService.getLayoutSet(ownerId);
 	}
 
+	public static com.liferay.portal.model.LayoutSet getLayoutSet(
+		java.lang.String companyId, java.lang.String virtualHost)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
+
+		return layoutSetLocalService.getLayoutSet(companyId, virtualHost);
+	}
+
 	public static com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		java.lang.String ownerId, java.lang.String themeId,
 		java.lang.String colorSchemeId)
@@ -72,5 +81,14 @@ public class LayoutSetLocalServiceUtil {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
 
 		return layoutSetLocalService.updatePageCount(ownerId);
+	}
+
+	public static com.liferay.portal.model.LayoutSet updateVirtualHost(
+		java.lang.String ownerId, java.lang.String virtualHost)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
+
+		return layoutSetLocalService.updateVirtualHost(ownerId, virtualHost);
 	}
 }

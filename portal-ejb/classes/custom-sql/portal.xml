@@ -146,6 +146,17 @@
 					(PortletPreferences.preferences LIKE ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.LayoutSetFinder.findByC_V">
+        <![CDATA[
+            SELECT
+                {LayoutSet.*}
+            FROM
+                LayoutSet
+            WHERE
+                (LayoutSet.companyId = ?) AND
+                (lower(LayoutSet.virtualHost) = ?)
+        ]]>
+    </sql>
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.countByC_PO_N_S_C_Z_R_C">
 		<![CDATA[
 			SELECT

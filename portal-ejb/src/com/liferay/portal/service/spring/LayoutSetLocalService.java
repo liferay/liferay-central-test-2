@@ -43,6 +43,11 @@ public interface LayoutSetLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.LayoutSet getLayoutSet(
+		java.lang.String companyId, java.lang.String virtualHost)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		java.lang.String ownerId, java.lang.String themeId,
 		java.lang.String colorSchemeId)
@@ -51,6 +56,11 @@ public interface LayoutSetLocalService {
 
 	public com.liferay.portal.model.LayoutSet updatePageCount(
 		java.lang.String ownerId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.LayoutSet updateVirtualHost(
+		java.lang.String ownerId, java.lang.String virtualHost)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 }

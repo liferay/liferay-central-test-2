@@ -22,17 +22,21 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.LayoutSetVirtualHostException;
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.service.persistence.LayoutSetFinder;
 import com.liferay.portal.service.persistence.LayoutSetUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutSetLocalService;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.Validator;
 
 import java.util.Iterator;
 
@@ -97,6 +101,12 @@ public class LayoutSetLocalServiceImpl implements LayoutSetLocalService {
 		return LayoutSetUtil.findByPrimaryKey(ownerId);
 	}
 
+    public LayoutSet getLayoutSet(String companyId, String virtualHost)
+        throws PortalException, SystemException {
+
+		return LayoutSetFinder.findByC_V(companyId, virtualHost);
+    }
+
 	public LayoutSet updateLookAndFeel(
 			String ownerId, String themeId, String colorSchemeId)
 		throws PortalException, SystemException {
@@ -124,5 +134,30 @@ public class LayoutSetLocalServiceImpl implements LayoutSetLocalService {
 
 		return layoutSet;
 	}
+
+    public LayoutSet updateVirtualHost(String ownerId, String virtualHost)
+        throws PortalException, SystemException {
+
+        LayoutSet layoutSet = LayoutSetUtil.findByPrimaryKey(ownerId);
+
+        if (Validator.isNotNull(virtualHost)) {
+			try {
+				LayoutSet virtualHostLayoutSet = getLayoutSet(
+					layoutSet.getCompanyId(), virtualHost);
+
+				if (!layoutSet.equals(virtualHostLayoutSet)) {
+					throw new LayoutSetVirtualHostException();
+				}
+			}
+			catch (NoSuchLayoutSetException nslse) {
+			}
+        }
+
+        layoutSet.setVirtualHost(virtualHost);
+
+        LayoutSetUtil.update(layoutSet);
+
+        return layoutSet;
+    }
 
 }

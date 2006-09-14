@@ -57,8 +57,19 @@ try {
 catch (NoSuchLayoutException nsle) {
 }
 
-if ((selLayout != null) && !PortalUtil.isLayoutParentable(selLayout) && tabs3.equals("children")) {
-	tabs3 = "page";
+if (selLayout != null) {
+	if (!PortalUtil.isLayoutParentable(selLayout) && tabs3.equals("children")) {
+		tabs3 = "page";
+	}
+	else if (tabs3.equals("import-export") || (tabs3.equals("virtual-host"))) {
+		tabs3 = "page";
+	}
+}
+
+if (selLayout == null) {
+	if (tabs3.equals("page")) {
+		tabs3 = "children";
+	}
 }
 
 String parentLayoutId = BeanParamUtil.getString(selLayout, request,  "parentLayoutId", Layout.DEFAULT_PARENT_LAYOUT_ID);
@@ -129,8 +140,8 @@ portletURL.setParameter("groupId", groupId);
 
 	function <portlet:namespace />savePage() {
 		<c:choose>
-			<c:when test='<%= (selLayout == null) && tabs3.equals("page") %>'>
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "friendly_url";
+			<c:when test='<%= tabs3.equals("virtual-host") %>'>
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "virtual_host";
 			</c:when>
 			<c:otherwise>
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= tabs3.equals("children") ? Constants.ADD : Constants.UPDATE %>';
@@ -213,10 +224,18 @@ portletURL.setParameter("groupId", groupId);
 		<br><br>
 
 		<%
-		String tabs3Names = "page,children,look-and-feel,import-export";
+		String tabs3Names = "page,children,look-and-feel";
 
 		if ((selLayout != null) && !PortalUtil.isLayoutParentable(selLayout)) {
 			tabs3Names = StringUtil.replace(tabs3Names, "children,", StringPool.BLANK);
+		}
+
+		if (selLayout == null) {
+			tabs3Names = StringUtil.replace(tabs3Names, "page,", StringPool.BLANK);
+
+			if (GroupPermission.contains(permissionChecker, groupId, ActionKeys.UPDATE)) {
+				tabs3Names += ",import-export,virtual-host";
+			}
 		}
 		%>
 
@@ -287,6 +306,8 @@ portletURL.setParameter("groupId", groupId);
 			</c:if>
 		</liferay-ui:error>
 
+		<liferay-ui:error exception="<%= LayoutSetVirtualHostException.class %>" message="please-enter-a-unique-virtual-host" />
+
 		<liferay-ui:error exception="<%= LayoutTypeException.class %>">
 
 			<%
@@ -303,33 +324,7 @@ portletURL.setParameter("groupId", groupId);
 		</liferay-ui:error>
 
 		<c:choose>
-			<c:when test='<%= tabs3.equals("page") && (selLayout == null) %>'>
-				<%= LanguageUtil.get(pageContext, "enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages") %>
-
-				<br><br>
-
-				<table border="0" cellpadding="0" cellspacing="0">
-				<tr>
-					<td>
-						<%= LanguageUtil.get(pageContext, "friendly-url") %>
-					</td>
-					<td style="padding-left: 10px;"></td>
-					<td nowrap>
-
-						<%
-						String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
-						%>
-
-						<input class="form-text" name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>">
-					</td>
-				</tr>
-				</table>
-
-				<br>
-
-				<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
-			</c:when>
-			<c:when test='<%= tabs3.equals("page") && (selLayout != null) %>'>
+			<c:when test='<%= tabs3.equals("page") %>'>
 
 				<%
 				String name = request.getParameter("name");
@@ -474,7 +469,7 @@ portletURL.setParameter("groupId", groupId);
 											<a href="<%= portletURL.toString() %>"><%= LanguageUtil.get(pageContext, "you-must-first-enter-a-frienly-url-for-the-" + (portletName.equals(PortletKeys.COMMUNITIES) ? "community" : "user")) %></a>
 										</c:when>
 										<c:otherwise>
-											<%= privateLayout ? themeDisplay.getPathFriendlyURLPrivate() : themeDisplay.getPathFriendlyURLPublic() %><%= parentFriendlyURL %>
+											<%= Http.getProtocol(request) %>://<%= company.getPortalURL() %><%= privateLayout ? themeDisplay.getPathFriendlyURLPrivate() : themeDisplay.getPathFriendlyURLPublic() %><%= parentFriendlyURL %>
 
 											<input class="form-text" name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>">
 										</c:otherwise>
@@ -822,7 +817,7 @@ portletURL.setParameter("groupId", groupId);
 				</tr>
 				</table>
 			</c:when>
-			<c:otherwise>
+			<c:when test='<%= tabs3.equals("import-export") %>'>
 				<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
 
 				<c:if test="<%= !layout.getOwnerId().equals(ownerId) %>">
@@ -844,7 +839,82 @@ portletURL.setParameter("groupId", groupId);
 				<input class="form-text" name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= Time.getShortTimestamp() %>.lar">
 
 				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "export") %>' onClick="self.location = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>&<portlet:namespace />exportFileName=' + document.<portlet:namespace />fm.<portlet:namespace />exportFileName.value;">
-			</c:otherwise>
+			</c:when>
+			<c:when test='<%= tabs3.equals("virtual-host") %>'>
+				<%= LanguageUtil.get(pageContext, "enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url") %>
+
+				<%= LanguageUtil.format(pageContext, "for-example,-if-the-public-virtual-host-is-www.helloworld.com-and-the-friendly-url-is-/helloworld", new Object[] {Http.getProtocol(request), Http.getProtocol(request) + "://" + company.getPortalURL() + themeDisplay.getPathFriendlyURLPublic()}) %>
+
+				<br><br>
+
+				<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "public-virtual-host") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td nowrap>
+
+						<%
+						String publicOwnerId = Layout.PUBLIC + Layout.getGroupId(ownerId);
+
+						LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(publicOwnerId);
+
+						String publicVirtualHost = ParamUtil.getString(request, "publicVirtualHost", BeanParamUtil.getString(publicLayoutSet, request, "virtualHost"));
+						%>
+
+						<input class="form-text" name="<portlet:namespace />publicVirtualHost" size="50" type="text" value="<%= publicVirtualHost %>">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "private-virtual-host") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td nowrap>
+
+						<%
+						String privateOwnerId = Layout.PRIVATE + Layout.getGroupId(ownerId);
+
+						LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(privateOwnerId);
+
+						String privateVirtualHost = ParamUtil.getString(request, "privateVirtualHost", BeanParamUtil.getString(privateLayoutSet, request, "virtualHost"));
+						%>
+
+						<input class="form-text" name="<portlet:namespace />privateVirtualHost" size="50" type="text" value="<%= privateVirtualHost %>">
+					</td>
+				</tr>
+				</table>
+
+				<br>
+
+				<%= LanguageUtil.get(pageContext, "enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages") %>
+
+				<%= LanguageUtil.format(pageContext, "the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages", new Object[] {Http.getProtocol(request) + "://" + company.getPortalURL() + themeDisplay.getPathFriendlyURLPublic(), Http.getProtocol(request) + "://" + company.getPortalURL() + themeDisplay.getPathFriendlyURLPrivate()}) %>
+
+				<br><br>
+
+				<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "friendly-url") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td nowrap>
+
+						<%
+						String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
+						%>
+
+						<input class="form-text" name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>">
+					</td>
+				</tr>
+				</table>
+
+				<br>
+
+				<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+			</c:when>
 		</c:choose>
 	</td>
 </tr>

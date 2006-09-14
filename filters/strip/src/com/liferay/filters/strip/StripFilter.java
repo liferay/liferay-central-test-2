@@ -73,23 +73,23 @@ public class StripFilter implements Filter {
 			}
 		}
 
-		HttpServletRequest request = (HttpServletRequest)req;
-		HttpServletResponse response = (HttpServletResponse)res;
+		HttpServletRequest httpReq = (HttpServletRequest)req;
+		HttpServletResponse httpRes = (HttpServletResponse)res;
 
-		request.setCharacterEncoding(ENCODING);
+		httpReq.setCharacterEncoding(ENCODING);
 
-		String completeURL = Http.getCompleteURL(request);
+		String completeURL = Http.getCompleteURL(httpReq);
 
-    	if (USE_STRIP_FILTER && _isStrip(request) && !_isInclude(request) &&
-			!_isAlreadyFiltered(request)) {
+    	if (USE_STRIP_FILTER && _isStrip(httpReq) && !_isInclude(httpReq) &&
+			!_isAlreadyFiltered(httpReq)) {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Stripping " + completeURL);
 			}
 
-			request.setAttribute(_ALREADY_FILTERED, Boolean.TRUE);
+			httpReq.setAttribute(_ALREADY_FILTERED, Boolean.TRUE);
 
-			StripResponse stripResponse = new StripResponse(response);
+			StripResponse stripResponse = new StripResponse(httpRes);
 
 			chain.doFilter(req, stripResponse);
 
@@ -252,7 +252,7 @@ public class StripFilter implements Filter {
 
 				res.setContentLength(newByteArrayPos);
 
-				ServletOutputStream out = response.getOutputStream();
+				ServletOutputStream out = httpRes.getOutputStream();
 
 				out.write(newByteArray, 0, newByteArrayPos);
 

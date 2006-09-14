@@ -20,23 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.spring;
+package com.liferay.portal;
 
 /**
- * <a href="LayoutSetService.java.html"><b><i>View Source</i></b></a>
+ * <a href="LayoutSetVirtualHostException.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public interface LayoutSetService {
-	public com.liferay.portal.model.LayoutSet updateLookAndFeel(
-		java.lang.String ownerId, java.lang.String themeId,
-		java.lang.String colorSchemeId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
+public class LayoutSetVirtualHostException extends PortalException {
 
-	public com.liferay.portal.model.LayoutSet updateVirtualHost(
-		java.lang.String ownerId, java.lang.String virtualHost)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException;
+	public LayoutSetVirtualHostException() {
+		super();
+	}
+
+	public LayoutSetVirtualHostException(String msg) {
+		super(msg);
+	}
+
+	public LayoutSetVirtualHostException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public LayoutSetVirtualHostException(Throwable cause) {
+		super(cause);
+	}
+
 }

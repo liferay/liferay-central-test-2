@@ -417,6 +417,7 @@ folder-path=Klasör Yerleşimi
 folder=Klasör
 folders=Klasörler
 footnotes=Dipnot
+for-example,-if-the-public-virtual-host-is-www.helloworld.com-and-the-friendly-url-is-/helloworld=For example, if the public virtual host is <b>www.helloworld.com</b> and the friendly URL is <b>/helloworld</b>, then <b>{0}://www.helloworld.com</b> is mapped to <b>{1}/helloworld</b>.
 forgot-password=Şifremi Unuttum
 format=Biçim
 forward-address=Yönlendirme Adresi
@@ -865,6 +866,7 @@ the-following-is-an-invalid-address=Bu geçersiz bir adresdir:
 the-following-orphan-pages-are-found-in=Bunlar bulunan sayfalardaki yetim sayfalardır:
 the-following-pages-are-found-in=Bunlar bulunan sayfalardaki:
 the-following-pages-have-at-least-one-link-to=Bunlar bulunan sayfalardaki enaz bir link olanlardır:
+the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=The friendly URL is appended to <b>{0}</b> for public pages and <b>{1}</b> for private pages.
 the-group-could-not-be-found=Bu grup bulunamadı.
 the-item-could-not-be-found=Bu madde bulunamadı.
 the-ldap-url-format-is=The LDAP URL format is <i>ldap://host:port/searchdn</i>, where <i>searchdn</i> specifies the initial search context for users and is optional. For example: ldap://localhost:389/ou=Users,o=Example

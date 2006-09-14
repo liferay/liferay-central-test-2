@@ -27,23 +27,16 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.InstancePool;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -142,44 +135,6 @@ public class FriendlyURLServlet extends HttpServlet {
 		return _companyId;
 	}
 
-	protected Object[] getPortletRedirect(String ownerId, String url)
-		throws Exception {
-
-		String friendlyURL = url;
-		String queryString = StringPool.BLANK;
-
-		Map portletPlugins = PortletLocalServiceUtil.getFriendlyURLPlugins();
-
-		Iterator itr = portletPlugins.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			String className = (String)entry.getValue();
-
-			FriendlyURLPortletPlugin portletPlugin =
-				(FriendlyURLPortletPlugin)InstancePool.get(className);
-
-			int pos = url.indexOf(
-				StringPool.SLASH + portletPlugin.getMapping() +
-					StringPool.SLASH);
-
-			if (pos != -1) {
-				String[] values = portletPlugin.getValues(url, pos);
-
-				friendlyURL = values[0];
-				queryString = values[1];
-
-				break;
-			}
-		}
-
-		Layout layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
-			ownerId, friendlyURL);
-
-		return new Object[] {layout, queryString};
-	}
-
 	protected String getRedirect(String path, String mainPath)
 		throws Exception {
 
@@ -235,38 +190,7 @@ public class FriendlyURLServlet extends HttpServlet {
 			friendlyURL = path.substring(pos, path.length());
 		}
 
-		// If there is no layout path take the first from the group or user
-
-		Layout layout = null;
-		String queryString = StringPool.BLANK;
-
-		if (Validator.isNull(friendlyURL)) {
-			List layouts = LayoutLocalServiceUtil.getLayouts(
-				ownerId, Layout.DEFAULT_PARENT_LAYOUT_ID);
-
-			if (layouts.size() > 0) {
-				layout = (Layout)layouts.get(0);
-			}
-			else {
-				throw new NoSuchLayoutException(
-					ownerId + " does not have any layouts");
-			}
-		}
-		else {
-			Object[] portletRedirect = getPortletRedirect(ownerId, friendlyURL);
-
-			layout = (Layout)portletRedirect[0];
-			queryString = (String)portletRedirect[1];
-		}
-
-		String layoutActualURL =
-			PortalUtil.getLayoutActualURL(layout, mainPath);
-
-		if (Validator.isNotNull(queryString)) {
-			layoutActualURL = layoutActualURL + queryString;
-		}
-
-		return layoutActualURL;
+		return PortalUtil.getLayoutActualURL(ownerId, mainPath, friendlyURL);
 	}
 
 	private static Log _log = LogFactory.getLog(FriendlyURLServlet.class);

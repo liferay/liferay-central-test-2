@@ -245,4 +245,6 @@ create table JournalContentSearch (
 	primary key (portletId, layoutId, ownerId, articleId)
 );
 
+alter table LayoutSet add virtualHost VARCHAR(75) null;
+
 alter table MBThread add priority DOUBLE;

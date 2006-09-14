@@ -403,6 +403,14 @@
 		<column name="themeId" type="String" />
 		<column name="colorSchemeId" type="String" />
 		<column name="pageCount" type="int" />
+		<column name="virtualHost" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="C_V" return-type="LayoutSet">
+			<finder-column name="companyId" />
+			<finder-column name="virtualHost" />
+		</finder>
 	</entity>
 	<entity name="ListType" local-service="false" remote-service="true">
 
@@ -1117,6 +1125,7 @@
 		<exception>LayoutName</exception>
 		<exception>LayoutParentLayoutId</exception>
 		<exception>LayoutPermission</exception>		
+		<exception>LayoutSetVirtualHost</exception>
 		<exception>LayoutType</exception>
 		<exception>NoteContent</exception>
 		<exception>OrganizationId</exception>

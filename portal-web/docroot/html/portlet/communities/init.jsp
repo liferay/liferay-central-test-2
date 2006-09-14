@@ -31,6 +31,7 @@
 --%><%@ page import="com.liferay.portal.LayoutImportException" %><%--
 --%><%@ page import="com.liferay.portal.LayoutNameException" %><%--
 --%><%@ page import="com.liferay.portal.LayoutParentLayoutIdException" %><%--
+--%><%@ page import="com.liferay.portal.LayoutSetVirtualHostException" %><%--
 --%><%@ page import="com.liferay.portal.LayoutTypeException" %><%--
 --%><%@ page import="com.liferay.portal.NoSuchGroupException" %><%--
 --%><%@ page import="com.liferay.portal.NoSuchLayoutException" %><%--
