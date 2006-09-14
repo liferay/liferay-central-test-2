@@ -158,7 +158,10 @@ public class RenderResponseImpl implements RenderResponse {
 
 	public String encodeURL(String path) {
 		if ((path == null) ||
-			(!path.startsWith("/") && (path.indexOf("://") == -1))) {
+			(!path.startsWith("#") && !path.startsWith("/") &&
+				(path.indexOf("://") == -1))) {
+
+			// Allow '#' as well to workaround a bug in Oracle ADF 10.1.3
 
 			throw new IllegalArgumentException(
 				"URL path must start with a '/' or include '://'");
