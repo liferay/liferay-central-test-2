@@ -22,6 +22,7 @@
 
 package com.liferay.portal;
 
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
@@ -75,6 +76,30 @@ public class LayoutFriendlyURLException extends PortalException {
 		}
 
 		return -1;
+	}
+
+	public static void validateKeyword(String friendlyURL)
+		throws LayoutFriendlyURLException {
+
+		String[] keywords = PropsUtil.getArray(
+			PropsUtil.LAYOUT_FRIENDLY_URL_KEYWORDS);
+
+		for (int i = 0; i < keywords.length; i++) {
+			String keyword = keywords[i];
+
+			if ((friendlyURL.indexOf(
+					StringPool.SLASH + keyword + StringPool.SLASH) != -1) ||
+				(friendlyURL.endsWith(StringPool.SLASH + keyword))) {
+
+				LayoutFriendlyURLException lfurle =
+					new LayoutFriendlyURLException(
+						LayoutFriendlyURLException.KEYWORD_CONFLICT);
+
+				lfurle.setKeywordConflict(keyword);
+
+				throw lfurle;
+			}
+		}
 	}
 
 	public LayoutFriendlyURLException(int type) {

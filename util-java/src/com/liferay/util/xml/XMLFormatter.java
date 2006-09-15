@@ -98,6 +98,7 @@ public class XMLFormatter {
 			"<?xml version=\"1.0\"?>");
 
 		int x = content.indexOf("<!DOCTYPE");
+
 		if (x != -1) {
 			x = content.indexOf(">", x) + 1;
 			content = content.substring(0, x) + "\n" +
@@ -112,6 +113,10 @@ public class XMLFormatter {
 
 		if (content.endsWith("\n")) {
 			content = content.substring(0, content.length() - 1);
+		}
+
+		while (content.indexOf(" \n") != -1) {
+			content = StringUtil.replace(content, " \n", "\n");
 		}
 
 		return content;

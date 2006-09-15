@@ -25,10 +25,14 @@ package com.liferay.portal.servlet.filters.virtualhost;
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchLayoutSetException;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.SystemProperties;
@@ -94,19 +98,10 @@ public class VirtualHostFilter implements Filter {
 
 		if (USE_VIRTUAL_HOST_FILTER && _isValidFriendlyURL(friendlyURL)) {
 			String host = PortalUtil.getHost(httpReq);
-			String servletPath = httpReq.getServletPath();
 			String mainPath = (String)_ctx.getAttribute(WebKeys.MAIN_PATH);
-			String friendlyURLPublicPath = (String)_ctx.getAttribute(
-				WebKeys.FRIENDLY_URL_PUBLIC_PATH);
-			String friendlyURLPrivatePath = (String)_ctx.getAttribute(
-				WebKeys.FRIENDLY_URL_PRIVATE_PATH);
 
-			if (Validator.isNotNull(host) && Validator.isNotNull(servletPath) &&
-				!servletPath.startsWith(mainPath) &&
-				!servletPath.startsWith(friendlyURLPublicPath) &&
-				!servletPath.startsWith(friendlyURLPrivatePath)) {
-
-			   try {
+			try {
+				if (_isValidHost(host)) {
 					LayoutSet layoutSet =
 						LayoutSetLocalServiceUtil.getLayoutSet(
 							_companyId, host);
@@ -116,15 +111,15 @@ public class VirtualHostFilter implements Filter {
 					redirect = PortalUtil.getLayoutActualURL(
 						ownerId, mainPath, friendlyURL);
 				}
-				catch (NoSuchLayoutException nsle) {
-					_log.warn(nsle);
-				}
-				catch (NoSuchLayoutSetException nslse) {
-					_log.warn(nslse);
-				}
-				catch (Exception e) {
-					_log.error("Could not look up virtual host " + host, e);
-				}
+			}
+			catch (NoSuchLayoutException nsle) {
+				_log.warn(nsle);
+			}
+			catch (NoSuchLayoutSetException nslse) {
+				_log.warn(nslse);
+			}
+			catch (Exception e) {
+				_log.error(StackTraceUtil.getStackTrace(e));
 			}
 		}
 
@@ -146,18 +141,32 @@ public class VirtualHostFilter implements Filter {
 	}
 
 	private boolean _isValidFriendlyURL(String friendlyURL) {
-		String[] keywords = PropsUtil.getArray(
-			PropsUtil.LAYOUT_FRIENDLY_URL_KEYWORDS);
+		if (LayoutFriendlyURLException.validate(friendlyURL) > -1) {
+			return false;
+		}
 
-		for (int i = 0; i < keywords.length; i++) {
-			if ((LayoutFriendlyURLException.validate(friendlyURL) > -1) ||
-				(friendlyURL.indexOf(keywords[i]) != -1)) {
-
-				return false;
-			}
+		try {
+			LayoutFriendlyURLException.validateKeyword(friendlyURL);
+		}
+		catch (LayoutFriendlyURLException lfurle) {
+			return false;
 		}
 
 		return true;
+	}
+
+	private boolean _isValidHost(String host)
+		throws PortalException, SystemException {
+
+		if (Validator.isNotNull(host)) {
+			Company company = CompanyLocalServiceUtil.getCompany(_companyId);
+
+			if (company.getPortalURL().indexOf(host) == -1) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private static Log _log = LogFactory.getLog(VirtualHostFilter.class);

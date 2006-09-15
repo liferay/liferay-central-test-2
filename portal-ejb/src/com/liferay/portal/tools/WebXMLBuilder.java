@@ -92,10 +92,13 @@ public class WebXMLBuilder {
 			String webXML = FileUtil.read(
 				rootDir + portalWebDir + "WEB-INF/web.xml");
 
-			int x = webXML.indexOf("<web-app>");
+			int x = webXML.indexOf("<web-app");
+
+			x = webXML.indexOf(">", x) + 1;
+
 			int y = webXML.indexOf("</web-app>");
 
-			webXML = webXML.substring(x + 9, y);
+			webXML = webXML.substring(x, y);
 
 			File webSite = new File(rootDir + "web-sites");
 
@@ -112,7 +115,9 @@ public class WebXMLBuilder {
 
 					String content = FileUtil.read(webSiteXML);
 
-					int z = content.indexOf("<web-app>") + 9;
+					int z = content.indexOf("<web-app");
+
+					z = content.indexOf(">", z) + 1;
 
 					String newContent =
 						content.substring(0, z) +

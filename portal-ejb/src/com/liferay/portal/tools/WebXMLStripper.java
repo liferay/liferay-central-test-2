@@ -62,7 +62,7 @@ public class WebXMLStripper {
 					content.substring(0, x) +
 						content.substring(y, content.length());
 
-				SAXReader reader = SAXReaderFactory.getInstance();
+				SAXReader reader = SAXReaderFactory.getInstance(false);
 
 				Document doc = reader.read(new StringReader(content));
 
